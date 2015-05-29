@@ -6,6 +6,8 @@ system supporting ITK.")
 itk_module(ITKTestKernel
   DEPENDS
     ITKIOImageBase
+  COMPILE_DEPENDS
+    ITKIOBioRad
     ITKIOBMP
     ITKIOGDCM
     ITKIOGIPL

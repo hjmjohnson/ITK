@@ -317,6 +317,18 @@ macro(itk_module_link_dependencies)
   endforeach()
 endmacro()
 
+macro(itk_module_link_dependencies)
+  # link to public dependencies
+  foreach(dep IN LISTS ITK_MODULE_${itk-module}_LINK_DEPENDS)
+    target_link_libraries(${itk-module} ${${dep}_LIBRARIES})
+  endforeach()
+
+  # link to public dependencies
+  foreach(dep IN LISTS ITK_MODULE_${itk-module}_PRIVATE_DEPENDS)
+    target_link_libraries(${itk-module} LINK_PRIVATE ${${dep}_LIBRARIES})
+  endforeach()
+endmacro()
+
 macro(itk_module_test)
   include(../itk-module.cmake) # Load module meta-data
   set(${itk-module-test}_LIBRARIES "")
