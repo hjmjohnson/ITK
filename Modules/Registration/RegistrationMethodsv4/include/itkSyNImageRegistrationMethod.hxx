@@ -30,6 +30,10 @@
 #include "itkVectorNeighborhoodOperatorImageFilter.h"
 #include "itkWindowConvergenceMonitoringFunction.h"
 
+#include "itkDisplacementFieldTransformParametersAdaptor.h"
+
+#include <iomanip>
+
 namespace itk
 {
 /**
@@ -135,6 +139,8 @@ SyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, TVirtual
     this->m_TransformParametersAdaptorsPerLevel[level]->AdaptTransformParameters();
     this->m_TransformParametersAdaptorsPerLevel[level]->SetTransform( this->m_FixedToMiddleTransform );
     this->m_TransformParametersAdaptorsPerLevel[level]->AdaptTransformParameters();
+    //TODO: These dimensions are not matching with below!  These dimensions were created with ShrinkImageFilter for
+    //resampling were made with shrink image filter
     }
 }
 
@@ -212,6 +218,8 @@ SyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, TVirtual
     fixedComposer->SetDisplacementField( fixedToMiddleSmoothUpdateField );
     fixedComposer->SetWarpingField( this->m_FixedToMiddleTransform->GetDisplacementField() );
     fixedComposer->Update();
+    //TODO:  fixedToMiddleSmoothUpdateField  does not match this->m_FixedToMiddleTransform->GetDisplacementField()
+    //TODO:  Figure out where dimension for m_FixedToMiddleTransform are created.
 
     DisplacementFieldPointer fixedToMiddleSmoothTotalFieldTmp = this->GaussianSmoothDisplacementField(
       fixedComposer->GetOutput(), this->m_GaussianSmoothingVarianceForTheTotalField );
@@ -259,13 +267,64 @@ SyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, TVirtual
   const TransformBaseType * fixedTransform, const MovingImagesContainerType movingImages, const PointSetsContainerType movingPointSets,
   const TransformBaseType * movingTransform, const FixedImageMaskType * mask, MeasureType & value )
 {
+
+  for(size_t level = 0; level < this->m_TransformParametersAdaptorsPerLevel.size(); ++level)
+    {
+    typedef itk::DisplacementFieldTransformParametersAdaptor<DisplacementFieldTransformType> DisplacementFieldTransformAdaptorType;
+    DisplacementFieldTransformAdaptorType * fieldTransformAdaptor =
+    dynamic_cast<DisplacementFieldTransformAdaptorType *>(
+                                                          this->m_TransformParametersAdaptorsPerLevel[level].GetPointer());
+    if( fieldTransformAdaptor )
+      {
+      std::cout << std::fixed << std::setprecision(13) <<  "\nLEVEL_INITIALIALIZATION:   " << level << std::endl;
+      std::cout << __FILE__ << " " << __LINE__ << "   FTA " << fieldTransformAdaptor->GetRequiredOrigin()
+      << " " << fieldTransformAdaptor->GetRequiredSize()
+      << " " << fieldTransformAdaptor->GetRequiredSpacing()<< std::endl;
+      }
+    else
+      {
+      std::cout << std::fixed << std::setprecision(13) <<  __FILE__ << " XXXXXXX " << __LINE__ << " Dynamic cast failed" << std::endl;
+      }
+    }
   DisplacementFieldPointer metricGradientField = this->ComputeMetricGradientField(
       fixedImages, fixedPointSets, fixedTransform, movingImages, movingPointSets, movingTransform, mask, value );
+  std::cout << std::fixed << std::setprecision(13) << "ComputeUpdateField:" << std::endl;
+  std::cout << __FILE__ << " " << __LINE__ << " m_VDI " << this->m_VirtualDomainImage->GetOrigin()
+  << " " << this->m_VirtualDomainImage->GetLargestPossibleRegion().GetSize()
+  << " " << this->m_VirtualDomainImage->GetSpacing()
+  << std::endl;
+  std::cout << __FILE__ << " " << __LINE__ << "  FI   " << fixedImages[0]->GetOrigin()
+  << " " << fixedImages[0]->GetLargestPossibleRegion().GetSize()
+  << " " << fixedImages[0]->GetSpacing()
+  << std::endl;
+
+  std::cout << __FILE__ << " " << __LINE__ << " mGF   " << metricGradientField->GetOrigin()
+  << " " << metricGradientField->GetLargestPossibleRegion().GetSize()
+  << " " << metricGradientField->GetSpacing()
+  << std::endl;
 
   DisplacementFieldPointer updateField = this->GaussianSmoothDisplacementField( metricGradientField,
     this->m_GaussianSmoothingVarianceForTheUpdateField );
 
   DisplacementFieldPointer scaledUpdateField = this->ScaleUpdateField( updateField );
+  std::cout << __FILE__ << " " << __LINE__ << " sUF   " << scaledUpdateField->GetOrigin()
+  << " " << scaledUpdateField->GetLargestPossibleRegion().GetSize()
+  << " " << scaledUpdateField->GetSpacing()
+  << std::endl;
+  std::cout << __FILE__ << " " << __LINE__ << "  UF   " << updateField->GetOrigin()
+  << " " << updateField->GetLargestPossibleRegion().GetSize()
+  << " " << updateField->GetSpacing()
+  << std::endl;
+
+  std::cout << __FILE__ << " " << __LINE__ << " F2M   " << this->m_FixedToMiddleTransform->GetDisplacementField()->GetOrigin()
+  << " " << this->m_FixedToMiddleTransform->GetDisplacementField()->GetLargestPossibleRegion().GetSize()
+  << " " << this->m_FixedToMiddleTransform->GetDisplacementField()->GetSpacing()
+  << std::endl;
+  std::cout << __FILE__ << " " << __LINE__ << " M2M   " << this->m_MovingToMiddleTransform->GetDisplacementField()->GetOrigin()
+  << " " << this->m_MovingToMiddleTransform->GetDisplacementField()->GetLargestPossibleRegion().GetSize()
+  << " " << this->m_MovingToMiddleTransform->GetDisplacementField()->GetSpacing()
+  << std::endl;
+
 
   return scaledUpdateField;
 }
@@ -280,6 +339,12 @@ SyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, TVirtual
   typename MultiMetricType::Pointer multiMetric = dynamic_cast<MultiMetricType *>( this->m_Metric.GetPointer() );
 
   VirtualImageBaseConstPointer virtualDomainImage = this->GetCurrentLevelVirtualDomainImage();
+
+  std::cout << std::fixed << std::setprecision(13) << __FILE__ << " " << __LINE__ << " RESPL " << virtualDomainImage->GetOrigin()
+  << " " << virtualDomainImage->GetLargestPossibleRegion().GetSize()
+  << " " << virtualDomainImage->GetSpacing()
+  << std::endl;
+
 
   if( multiMetric )
     {
