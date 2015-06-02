@@ -49,11 +49,12 @@ DisplacementFieldTransformParametersAdaptor<TTransform>
   bool isModified = false;
   for( SizeValueType d = 0; d < SpaceDimension; d++ )
     {
-    if( this->m_RequiredFixedParameters[d] != size[d] )
+    const FixedParametersValueType test_value=static_cast<FixedParametersValueType>(size[d]);
+    if( this->m_RequiredFixedParameters[d] != test_value )
       {
       isModified = true;
+      this->m_RequiredFixedParameters[d] = test_value;
       }
-    this->m_RequiredFixedParameters[d] = size[d];
     }
 
   if( isModified )
@@ -84,11 +85,12 @@ DisplacementFieldTransformParametersAdaptor<TTransform>
   bool isModified = false;
   for( SizeValueType d = 0; d < SpaceDimension; d++ )
     {
-    if( this->m_RequiredFixedParameters[SpaceDimension + d] != origin[d] )
+    const FixedParametersValueType test_value=static_cast<FixedParametersValueType>(origin[d]);
+    if( this->m_RequiredFixedParameters[SpaceDimension + d] != test_value )
       {
       isModified = true;
+      this->m_RequiredFixedParameters[SpaceDimension + d] = test_value;
       }
-    this->m_RequiredFixedParameters[SpaceDimension + d] = origin[d];
     }
 
   if( isModified )
@@ -106,7 +108,8 @@ DisplacementFieldTransformParametersAdaptor<TTransform>
   PointType origin;
   for( SizeValueType d = 0; d < SpaceDimension; d++ )
     {
-    origin[d] = this->m_RequiredFixedParameters[SpaceDimension + d];
+    origin[d] = static_cast<typename PointType::ValueType>(
+                             this->m_RequiredFixedParameters[SpaceDimension + d]);
     }
   return origin;
 }
@@ -119,11 +122,12 @@ DisplacementFieldTransformParametersAdaptor<TTransform>
   bool isModified = false;
   for( SizeValueType d = 0; d < SpaceDimension; d++ )
     {
-    if( this->m_RequiredFixedParameters[2*SpaceDimension + d] != spacing[d] )
+    const FixedParametersValueType test_value=static_cast<FixedParametersValueType>(spacing[d]);
+    if( this->m_RequiredFixedParameters[2*SpaceDimension + d] != test_value )
       {
       isModified = true;
+      this->m_RequiredFixedParameters[2*SpaceDimension + d] = test_value;
       }
-    this->m_RequiredFixedParameters[2*SpaceDimension + d] = spacing[d];
     }
 
   if( isModified )
@@ -141,7 +145,8 @@ DisplacementFieldTransformParametersAdaptor<TTransform>
   SpacingType spacing;
   for( SizeValueType d = 0; d < SpaceDimension; d++ )
     {
-    spacing[d] = this->m_RequiredFixedParameters[2*SpaceDimension + d];
+    spacing[d] = static_cast<typename SpacingType::ValueType>(
+                    this->m_RequiredFixedParameters[2*SpaceDimension + d]);
     }
   return spacing;
 }
@@ -156,11 +161,12 @@ DisplacementFieldTransformParametersAdaptor<TTransform>
     {
     for( SizeValueType dj = 0; dj < SpaceDimension; dj++ )
       {
-      if( this->m_RequiredFixedParameters[3 * SpaceDimension + ( di * SpaceDimension + dj )] != direction[di][dj] )
+      const FixedParametersValueType test_value=static_cast<FixedParametersValueType>(direction[di][dj]);
+      if( this->m_RequiredFixedParameters[3 * SpaceDimension + ( di * SpaceDimension + dj )] != test_value )
         {
         isModified = true;
+        this->m_RequiredFixedParameters[3 * SpaceDimension + ( di * SpaceDimension + dj )] = test_value;
         }
-      this->m_RequiredFixedParameters[3 * SpaceDimension + ( di * SpaceDimension + dj )] = direction[di][dj];
       }
     }
 
@@ -181,7 +187,8 @@ DisplacementFieldTransformParametersAdaptor<TTransform>
     {
     for( SizeValueType dj = 0; dj < SpaceDimension; dj++ )
       {
-      direction[di][dj] = this->m_RequiredFixedParameters[3 * SpaceDimension + ( di * SpaceDimension + dj )];
+      direction[di][dj] = static_cast<typename DirectionType::ValueType>(
+                      this->m_RequiredFixedParameters[3 * SpaceDimension + ( di * SpaceDimension + dj )]);
       }
     }
   return direction;

@@ -67,10 +67,12 @@ public:
   itkTypeMacro( TransformParametersAdaptorBase, Object );
 
   /** Typedefs associated with the transform */
-  typedef TTransform                                     TransformBaseType;
-  typedef typename TransformBaseType::Pointer            TransformBasePointer;
-  typedef typename TransformBaseType::ParametersType     ParametersType;
-  typedef typename ParametersType::ValueType             ParametersValueType;
+  typedef TTransform                                      TransformBaseType;
+  typedef typename TransformBaseType::Pointer             TransformBasePointer;
+  typedef typename TransformBaseType::FixedParametersType FixedParametersType;
+  typedef typename FixedParametersType::ValueType         FixedParametersValueType;
+  typedef typename TransformBaseType::ParametersType      ParametersType;
+  typedef typename ParametersType::ValueType              ParametersValueType;
 
   // note: the void pointer is use to ensure this method has lower
   // overloaded priority and avoid an ambiguous overloaded method
@@ -95,7 +97,7 @@ protected:
     os << "Fixed parameters" << this->m_RequiredFixedParameters << std::endl;
   }
 
-  ParametersType                             m_RequiredFixedParameters;
+  FixedParametersType m_RequiredFixedParameters;
 
 private:
   TransformParametersAdaptorBase( const Self & ); //purposely not implemented

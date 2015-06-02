@@ -60,7 +60,7 @@ namespace itk
  *   virtual OutputVnlVectorType       TransformVector(const InputVnlVectorType &) const<br>
  *   virtual OutputCovariantVectorType TransformCovariantVector(const InputCovariantVectorType &) const<br>
  *   virtual void                      SetParameters(const ParametersType &)<br>
- *   virtual void                      SetFixedParameters(const ParametersType &)<br>
+ *   virtual void                      SetFixedParameters(const FixedParametersType &)<br>
  *   virtual void                      ComputeJacobianWithRespectToParameters(
  *                                                             const InputPointType &,
  *                                                             JacobianType &) const<br>
@@ -78,8 +78,9 @@ namespace itk
  */
 template <typename TScalar,
           unsigned int NInputDimensions = 3,
-          unsigned int NOutputDimensions = 3>
-class Transform : public TransformBaseTemplate< TScalar >
+          unsigned int NOutputDimensions = 3,
+          typename TFixedParameterScalar=TScalar>
+class Transform : public TransformBaseTemplate< TScalar, TFixedParameterScalar >
 {
 public:
   /** Standard class typedefs. */
@@ -114,6 +115,8 @@ public:
   typedef  TScalar ScalarType;
 
   /** Type of the input parameters. */
+  typedef  typename Superclass::FixedParametersType      FixedParametersType;
+  typedef  typename Superclass::FixedParametersValueType FixedParametersValueType;
   typedef  typename Superclass::ParametersType      ParametersType;
   typedef  typename Superclass::ParametersValueType ParametersValueType;
   typedef  Array<ParametersValueType>               DerivativeType;
@@ -363,10 +366,10 @@ public:
   }
 
   /** Set the fixed parameters and update internal transformation. */
-  virtual void SetFixedParameters(const ParametersType &) ITK_OVERRIDE = 0;
+  virtual void SetFixedParameters(const FixedParametersType &) ITK_OVERRIDE = 0;
 
   /** Get the Fixed Parameters. */
-  virtual const ParametersType & GetFixedParameters(void) const ITK_OVERRIDE
+  virtual const FixedParametersType & GetFixedParameters(void) const ITK_OVERRIDE
   {
     return m_FixedParameters;
   }
@@ -545,8 +548,8 @@ protected:
   {
   }
 
-  mutable ParametersType m_Parameters;
-  mutable ParametersType m_FixedParameters;
+  mutable ParametersType      m_Parameters;
+  mutable FixedParametersType m_FixedParameters;
 
   OutputDiffusionTensor3DType PreservationOfPrincipalDirectionDiffusionTensor3DReorientation(
     const InputDiffusionTensor3DType, const JacobianType ) const;

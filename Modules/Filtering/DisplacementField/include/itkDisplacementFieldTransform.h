@@ -83,9 +83,9 @@ namespace itk
  * \ingroup ITKDisplacementField
  */
 template
-<class TScalar, unsigned int NDimensions>
+<typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar=TScalar>
 class DisplacementFieldTransform :
-  public Transform<TScalar, NDimensions, NDimensions>
+  public Transform<TScalar, NDimensions, NDimensions, TFixedParameterScalar>
 {
 public:
   /** Standard class typedefs. */

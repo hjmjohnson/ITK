@@ -39,7 +39,7 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar >
+template< typename TScalar, typename TFixedParameterScalar=TScalar >
 class TransformBaseTemplate:public Object
 {
 public:
@@ -52,6 +52,9 @@ public:
   /** Type of the input parameters. */
   typedef  TScalar                                    ParametersValueType;
   typedef  OptimizerParameters< ParametersValueType > ParametersType;
+
+  typedef  TFixedParameterScalar                      FixedParametersValueType;
+  typedef  OptimizerParameters< ParametersValueType > FixedParametersType;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro(TransformBaseTemplate, Object);
@@ -82,13 +85,13 @@ public:
    * by keeping a reference to the parameters.
    * \sa SetParameters
    */
-  virtual void SetParametersByValue(const ParametersType & p) = 0;
+  virtual void SetParametersByValue(const FixedParametersType & p) = 0;
 
   /** Set the fixed parameters. */
-  virtual void SetFixedParameters(const ParametersType &) = 0;
+  virtual void SetFixedParameters(const FixedParametersType &) = 0;
 
   /** Get the fixed parameters. */
-  virtual const ParametersType & GetFixedParameters() const = 0;
+  virtual const FixedParametersType & GetFixedParameters() const = 0;
 
   /** Generate a platform independent name */
   virtual std::string GetTransformTypeAsString() const = 0;
@@ -115,7 +118,7 @@ private:
 };
 
 /** This helps to meet backward compatibility */
-typedef TransformBaseTemplate< double > TransformBase;
+typedef TransformBaseTemplate< double, double > TransformBase;
 
 } // end namespace itk
 

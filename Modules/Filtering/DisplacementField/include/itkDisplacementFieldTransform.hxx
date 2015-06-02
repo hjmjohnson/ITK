@@ -32,8 +32,8 @@ namespace itk
 /**
  * Constructor
  */
-template <typename TScalar, unsigned int NDimensions>
-DisplacementFieldTransform<TScalar, NDimensions>::DisplacementFieldTransform()
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>::DisplacementFieldTransform()
 : Superclass( 0 ),
   m_CoordinateTolerance(ImageToImageFilterCommon::GetGlobalDefaultCoordinateTolerance()),
   m_DirectionTolerance(ImageToImageFilterCommon::GetGlobalDefaultDirectionTolerance())
@@ -73,8 +73,8 @@ DisplacementFieldTransform<TScalar, NDimensions>::DisplacementFieldTransform()
 /**
  * Destructor
  */
-template <typename TScalar, unsigned int NDimensions>
-DisplacementFieldTransform<TScalar, NDimensions>::
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>::
 ~DisplacementFieldTransform()
 {
 }
@@ -82,9 +82,9 @@ DisplacementFieldTransform<TScalar, NDimensions>::
 /**
  * Transform point
  */
-template <typename TScalar, unsigned int NDimensions>
-typename DisplacementFieldTransform<TScalar, NDimensions>::OutputPointType
-DisplacementFieldTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
+typename DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>::OutputPointType
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::TransformPoint( const InputPointType& inputPoint ) const
 {
   if( !this->m_DisplacementField )
@@ -121,8 +121,8 @@ DisplacementFieldTransform<TScalar, NDimensions>
 /**
  * return an inverse transformation
  */
-template <typename TScalar, unsigned int NDimensions>
-bool DisplacementFieldTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
+bool DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::GetInverse( Self *inverse ) const
 {
   if( !inverse || !this->m_InverseDisplacementField )
@@ -142,9 +142,9 @@ bool DisplacementFieldTransform<TScalar, NDimensions>
 }
 
 // Return an inverse of this transform
-template <typename TScalar, unsigned int NDimensions>
-typename DisplacementFieldTransform<TScalar, NDimensions>::InverseTransformBasePointer
-DisplacementFieldTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
+typename DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>::InverseTransformBasePointer
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::GetInverseTransform() const
 {
   Pointer inverseTransform = New();
@@ -159,9 +159,9 @@ DisplacementFieldTransform<TScalar, NDimensions>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::SetIdentity(void)
 {
   if (!this->m_DisplacementField.IsNull())
@@ -179,9 +179,9 @@ DisplacementFieldTransform<TScalar, NDimensions>
  * ComputeJacobianWithRespectToParameters methods
  */
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::ComputeJacobianWithRespectToPosition( const InputPointType & point,
                                         JacobianType & jacobian )
 const
@@ -192,9 +192,9 @@ const
   this->ComputeJacobianWithRespectToPosition( idx, jacobian );
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::ComputeJacobianWithRespectToPosition( const IndexType & index,
                                         JacobianType & jacobian )
 const
@@ -202,9 +202,9 @@ const
   this->ComputeJacobianWithRespectToPositionInternal( index, jacobian, false );
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::ComputeInverseJacobianWithRespectToPosition( const InputPointType & point,
                                         JacobianType & jacobian )
 const
@@ -214,9 +214,9 @@ const
   this->ComputeJacobianWithRespectToPositionInternal( idx, jacobian, true );
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::GetInverseJacobianOfForwardFieldWithRespectToPosition(
   const InputPointType & point,
   JacobianType & jacobian,
@@ -230,9 +230,9 @@ const
                                                                useSVD );
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::GetInverseJacobianOfForwardFieldWithRespectToPosition(
   const IndexType & index,
   JacobianType & jacobian,
@@ -260,9 +260,9 @@ const
 /*
  * ComputeJacobianWithRespectToPositionInternal. Worker method.
  */
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::ComputeJacobianWithRespectToPositionInternal( const IndexType & index,
                                                 JacobianType & jacobian,
                                                 bool doInverseJacobian )
@@ -376,9 +376,9 @@ const
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::UpdateTransformParameters( const DerivativeType & update, ScalarType factor)
 {
   // This simply adds the values.
@@ -386,8 +386,8 @@ DisplacementFieldTransform<TScalar, NDimensions>
   Superclass::UpdateTransformParameters( update, factor );
 }
 
-template <typename TScalar, unsigned int NDimensions>
-void DisplacementFieldTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
+void DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::SetDisplacementField( DisplacementFieldType* field )
 {
   itkDebugMacro("setting DisplacementField to " << field);
@@ -414,8 +414,8 @@ void DisplacementFieldTransform<TScalar, NDimensions>
   this->SetFixedParametersFromDisplacementField();
 }
 
-template <typename TScalar, unsigned int NDimensions>
-void DisplacementFieldTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
+void DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::SetInverseDisplacementField( DisplacementFieldType* inverseField )
 {
   itkDebugMacro( "setting InverseDisplacementField to " << inverseField );
@@ -434,9 +434,9 @@ void DisplacementFieldTransform<TScalar, NDimensions>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::VerifyFixedParametersInformation()
 {
   if( !this->m_DisplacementField.IsNull() && !this->m_InverseDisplacementField.IsNull() )
@@ -505,9 +505,9 @@ DisplacementFieldTransform<TScalar, NDimensions>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::SetInterpolator( InterpolatorType* interpolator )
 {
   itkDebugMacro("setting Interpolator to " << interpolator);
@@ -522,9 +522,9 @@ DisplacementFieldTransform<TScalar, NDimensions>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::SetInverseInterpolator( InterpolatorType* interpolator )
 {
   itkDebugMacro("setting InverseInterpolator to " << interpolator);
@@ -539,9 +539,9 @@ DisplacementFieldTransform<TScalar, NDimensions>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::SetFixedParameters( const ParametersType & fixedParameters )
 {
   if( fixedParameters.Size() != NDimensions * ( NDimensions + 3 ) )
@@ -615,9 +615,9 @@ DisplacementFieldTransform<TScalar, NDimensions>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::SetFixedParametersFromDisplacementField() const
   {
   this->m_FixedParameters.SetSize( NDimensions * ( NDimensions + 3 ) );
@@ -664,9 +664,9 @@ DisplacementFieldTransform<TScalar, NDimensions>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
-DisplacementFieldTransform<TScalar, NDimensions>
+DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 ::PrintSelf( std::ostream& os, Indent indent ) const
 {
   Superclass::PrintSelf( os, indent );
