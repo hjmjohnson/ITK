@@ -52,19 +52,19 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar = double >
+template<typename TScalar=double,typename TFixedParametersValueType=TScalar>
 // Data type for scalars (float or double)
 class Rigid2DTransform :
-  public MatrixOffsetTransformBase< TScalar, 2, 2 >        // Dimensions of
-                                                             // input and output
-                                                             // spaces
+  public MatrixOffsetTransformBase<TScalar,
+                                   2, 2, // Dimensions of input and output spaces
+                                   TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef Rigid2DTransform                           Self;
-  typedef MatrixOffsetTransformBase< TScalar, 2, 2 > Superclass;
-  typedef SmartPointer< Self >                       Pointer;
-  typedef SmartPointer< const Self >                 ConstPointer;
+  typedef Rigid2DTransform                                                    Self;
+  typedef MatrixOffsetTransformBase<TScalar, 2, 2, TFixedParametersValueType> Superclass;
+  typedef SmartPointer< Self >                                                Pointer;
+  typedef SmartPointer< const Self >                                          ConstPointer;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro(Rigid2DTransform, MatrixOffsetTransformBase);
@@ -81,8 +81,10 @@ public:
   typedef typename Superclass::ScalarType ScalarType;
 
   /** Parameters type. */
-  typedef typename Superclass::ParametersType      ParametersType;
-  typedef typename Superclass::ParametersValueType ParametersValueType;
+  typedef typename Superclass::ParametersType           ParametersType;
+  typedef typename Superclass::ParametersValueType      ParametersValueType;
+  typedef typename Superclass::FixedParametersType      FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType FixedParametersValueType;
 
   /** Jacobian type. */
   typedef typename Superclass::JacobianType JacobianType;

@@ -39,7 +39,7 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar, typename TFixedParameterScalar=double >
+template< typename TScalar, typename TFixedParametersValueType=double >
 class TransformBaseTemplate:public Object
 {
 public:
@@ -50,7 +50,7 @@ public:
   typedef SmartPointer< const Self > ConstPointer;
 
   /** Type of the input parameters. */
-  typedef  TFixedParameterScalar                           FixedParametersValueType;
+  typedef  TFixedParametersValueType                       FixedParametersValueType;
   typedef  OptimizerParameters< FixedParametersValueType > FixedParametersType;
   typedef  TScalar                                         ParametersValueType;
   typedef  OptimizerParameters< ParametersValueType >      ParametersType;

@@ -51,16 +51,16 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar = double >
+template< typename TScalar = double, typename TFixedParametersValueType>
 class CenteredSimilarity2DTransform :
-  public Similarity2DTransform<TScalar>
+  public Similarity2DTransform<TScalar,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef CenteredSimilarity2DTransform    Self;
-  typedef Similarity2DTransform< TScalar > Superclass;
-  typedef SmartPointer< Self >             Pointer;
-  typedef SmartPointer< const Self >       ConstPointer;
+  typedef CenteredSimilarity2DTransform                             Self;
+  typedef Similarity2DTransform<TScalar, TFixedParametersValueType> Superclass;
+  typedef SmartPointer<Self>                                        Pointer;
+  typedef SmartPointer<const Self>                                  ConstPointer;
 
   /** New macro for creation of through a Smart Pointer. */
   itkNewMacro(Self);

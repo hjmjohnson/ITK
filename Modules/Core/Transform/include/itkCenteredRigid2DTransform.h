@@ -48,16 +48,16 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar = double >
+template< typename TScalar = double, typename TFixedParametersValueType>
 class CenteredRigid2DTransform :
-  public Rigid2DTransform< TScalar >
+  public Rigid2DTransform<TScalar, TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef CenteredRigid2DTransform    Self;
-  typedef Rigid2DTransform< TScalar > Superclass;
-  typedef SmartPointer< Self >        Pointer;
-  typedef SmartPointer< const Self >  ConstPointer;
+  typedef CenteredRigid2DTransform                             Self;
+  typedef Rigid2DTransform<TScalar, TFixedParametersValueType> Superclass;
+  typedef SmartPointer<Self>                                   Pointer;
+  typedef SmartPointer<const Self>                             ConstPointer;
 
   /** New macro for creation of through a Smart Pointer. */
   itkNewMacro(Self);

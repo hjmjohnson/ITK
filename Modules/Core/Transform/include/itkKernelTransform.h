@@ -57,17 +57,18 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar, // probably only float and double make sense here
-          unsigned int NDimensions >
+template<typename TScalar, // probably only float and double make sense here
+         unsigned int NDimensions,
+         typename TFixedParametersValueType=TScalar>
 class KernelTransform :
-  public Transform< TScalar, NDimensions, NDimensions >
+  public Transform<TScalar, NDimensions, NDimensions, TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef KernelTransform                                Self;
-  typedef Transform< TScalar, NDimensions, NDimensions > Superclass;
-  typedef SmartPointer< Self >                           Pointer;
-  typedef SmartPointer< const Self >                     ConstPointer;
+  typedef KernelTransform                                                        Self;
+  typedef Transform<TScalar, NDimensions, NDimensions,TFixedParametersValueType> Superclass;
+  typedef SmartPointer< Self >                                                   Pointer;
+  typedef SmartPointer< const Self >                                             ConstPointer;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro(KernelTransform, Transform);

@@ -60,14 +60,16 @@ namespace itk
  * \ingroup ITKTransform
  */
 template
-<class TScalar = double, unsigned int NDimensions = 3, unsigned int NSubDimensions = NDimensions>
+<typename TScalar=double, unsigned int NDimensions=3, unsigned int NSubDimensions=NDimensions,
+ typename TFixedParametersValueType=TScalar>
 class MultiTransform :
-  public Transform<TScalar, NDimensions, NDimensions>
+  public Transform<TScalar, NDimensions, NDimensions, TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
   typedef MultiTransform                               Self;
-  typedef Transform<TScalar, NDimensions, NDimensions> Superclass;
+  typedef Transform<TScalar, NDimensions, NDimensions,
+                            TFixedParametersValueType> Superclass;
   typedef SmartPointer<Self>                           Pointer;
   typedef SmartPointer<const Self>                     ConstPointer;
 
@@ -75,7 +77,8 @@ public:
   itkTypeMacro( MultiTransform, Transform );
 
   /** Sub transform type **/
-  typedef Transform<TScalar, NSubDimensions, NSubDimensions > TransformType;
+  typedef Transform<TScalar, NSubDimensions, NSubDimensions,
+                                  TFixedParametersValueType > TransformType;
   typedef typename TransformType::Pointer                     TransformTypePointer;
 
   /* Types common to both container and sub transforms */

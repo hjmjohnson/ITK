@@ -45,9 +45,9 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar = double >
+template<typename TScalar=double,typename TFixedParametersValueType=TScalar>
 // Data type for scalars:float or double
-class ScaleVersor3DTransform : public VersorRigid3DTransform<TScalar>
+class ScaleVersor3DTransform : public VersorRigid3DTransform<TScalar,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
@@ -69,6 +69,7 @@ public:
 
   /** Parameters Type   */
   typedef typename Superclass::ParametersType            ParametersType;
+  typedef typename Superclass::FixedParametersType       FixedParametersType;
   typedef typename Superclass::JacobianType              JacobianType;
   typedef typename Superclass::ScalarType                ScalarType;
   typedef typename Superclass::InputPointType            InputPointType;

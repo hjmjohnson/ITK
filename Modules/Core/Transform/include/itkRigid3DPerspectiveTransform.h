@@ -34,10 +34,10 @@ namespace itk
  * \ingroup ITKTransform
  */
 
-template< typename TScalar = double >
+template<typename TScalar=double, typename TFixedParametersValueType=TScalar>
 // Data type for scalars (float or double)
 class Rigid3DPerspectiveTransform :
-  public Transform< TScalar, 3, 2 >
+  public Transform<TScalar, 3, 2, TFixedParametersValueType>
 {
 public:
   /** Dimension of the domain space. */
@@ -52,7 +52,8 @@ public:
   typedef Rigid3DPerspectiveTransform Self;
   typedef Transform<TScalar,
                     itkGetStaticConstMacro(InputSpaceDimension),
-                    itkGetStaticConstMacro(OutputSpaceDimension)> Superclass;
+                    itkGetStaticConstMacro(OutputSpaceDimension),
+                    TFixedParametersValueType> Superclass;
 
   typedef SmartPointer<Self>       Pointer;
   typedef SmartPointer<const Self> ConstPointer;

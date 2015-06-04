@@ -30,17 +30,19 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template <typename TScalar = double, unsigned int NDimensions = 3,
-          unsigned int VSplineOrder = 3>
+template <typename TScalar = double,
+          unsigned int NDimensions = 3,
+          unsigned int VSplineOrder = 3,
+          typename TFixedParametersValueType=TScalar>
 class BSplineBaseTransform :
-  public Transform<TScalar, NDimensions, NDimensions>
+  public Transform<TScalar, NDimensions, NDimensions, TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef BSplineBaseTransform                         Self;
-  typedef Transform<TScalar, NDimensions, NDimensions> Superclass;
-  typedef SmartPointer<Self>                           Pointer;
-  typedef SmartPointer<const Self>                     ConstPointer;
+  typedef BSplineBaseTransform                                                    Self;
+  typedef Transform<TScalar, NDimensions, NDimensions, TFixedParametersValueType> Superclass;
+  typedef SmartPointer<Self>                                                      Pointer;
+  typedef SmartPointer<const Self>                                                ConstPointer;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro( BSplineBaseTransform, Transform );

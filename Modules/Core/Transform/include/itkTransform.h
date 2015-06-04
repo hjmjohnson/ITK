@@ -79,13 +79,13 @@ namespace itk
 template <typename TScalar,
           unsigned int NInputDimensions = 3,
           unsigned int NOutputDimensions = 3,
-          typename TFixedParameterScalar=double> //TODO: Should be =TScalar
-class Transform : public TransformBaseTemplate< TScalar, TFixedParameterScalar >
+          typename TFixedParametersValueType=double> //TODO: Should be =TScalar
+class Transform : public TransformBaseTemplate< TScalar, TFixedParametersValueType >
 {
 public:
   /** Standard class typedefs. */
   typedef Transform                                               Self;
-  typedef TransformBaseTemplate< TScalar, TFixedParameterScalar > Superclass;
+  typedef TransformBaseTemplate< TScalar, TFixedParametersValueType > Superclass;
   typedef SmartPointer< Self >                                    Pointer;
   typedef SmartPointer< const Self >                              ConstPointer;
 
@@ -161,7 +161,7 @@ public:
    * concrete inverse transform type or inheritance would be lost. */
   typedef Transform<
     TScalar, NOutputDimensions, NInputDimensions,
-    TFixedParameterScalar> InverseTransformBaseType;
+    TFixedParametersValueType> InverseTransformBaseType;
 
   typedef typename InverseTransformBaseType::Pointer
   InverseTransformBasePointer;

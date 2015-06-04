@@ -28,8 +28,8 @@ namespace itk
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::Transform() :
   m_Parameters(1),
   m_FixedParameters()
@@ -45,8 +45,8 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::Transform(NumberOfParametersType numberOfParameters) :
   m_Parameters(numberOfParameters),
   m_FixedParameters()
@@ -60,8 +60,8 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-std::string Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+std::string Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::GetTransformTypeAsString() const
 {
   std::ostringstream n;
@@ -77,9 +77,9 @@ std::string Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParame
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
+          typename TFixedParametersValueType>
 typename LightObject::Pointer
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::InternalClone() const
 {
   // Default implementation just copies the parameters from
@@ -103,9 +103,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
+          typename TFixedParametersValueType>
 void
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::UpdateTransformParameters( const DerivativeType & update, ParametersValueType factor )
 {
   NumberOfParametersType numberOfParameters = this->GetNumberOfParameters();
@@ -160,9 +160,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputVectorType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputVectorType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVectorType& vector, const InputPointType & point ) const
 {
   JacobianType jacobian;
@@ -184,9 +184,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputVnlVectorType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputVnlVectorType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVnlVectorType& vector, const InputPointType & point ) const
 {
   JacobianType jacobian;
@@ -208,9 +208,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputVectorPixelType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputVectorPixelType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVectorPixelType& vector, const InputPointType & point ) const
 {
 
@@ -241,9 +241,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputCovariantVectorType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputCovariantVectorType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformCovariantVector( const InputCovariantVectorType& vector, const InputPointType & point ) const
 {
   JacobianType jacobian;
@@ -265,9 +265,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputVectorPixelType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputVectorPixelType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformCovariantVector( const InputVectorPixelType& vector, const InputPointType & point ) const
 {
 
@@ -296,9 +296,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 
 
 template <typename TScalar, unsigned int NInputDimensions, unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputDiffusionTensor3DType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputDiffusionTensor3DType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformDiffusionTensor3D( const InputDiffusionTensor3DType& inputTensor, const InputPointType & point ) const
 {
   JacobianType invJacobian;
@@ -312,9 +312,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 
 
 template <typename TScalar, unsigned int NInputDimensions, unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputVectorPixelType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputVectorPixelType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformDiffusionTensor3D( const InputVectorPixelType & inputTensor, const InputPointType & point ) const
 {
   if (inputTensor.GetSize() != 6 )
@@ -343,9 +343,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 
 
 template <typename TScalar, unsigned int NInputDimensions, unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputDiffusionTensor3DType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputDiffusionTensor3DType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::PreservationOfPrincipalDirectionDiffusionTensor3DReorientation( const InputDiffusionTensor3DType inputTensor,
                                                                   const JacobianType jacobian ) const
 {
@@ -428,9 +428,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 
 
 template <typename TScalar, unsigned int NInputDimensions, unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputSymmetricSecondRankTensorType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputSymmetricSecondRankTensorType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformSymmetricSecondRankTensor( const InputSymmetricSecondRankTensorType& inputTensor, const InputPointType & point ) const
 {
   JacobianType jacobian;
@@ -464,9 +464,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 
 
 template <typename TScalar, unsigned int NInputDimensions, unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
-typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>::OutputVectorPixelType
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+          typename TFixedParametersValueType>
+typename Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>::OutputVectorPixelType
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::TransformSymmetricSecondRankTensor( const InputVectorPixelType& inputTensor, const InputPointType & point ) const
 {
 
@@ -510,9 +510,9 @@ Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
 template <typename TScalar,
           unsigned int NInputDimensions,
           unsigned int NOutputDimensions,
-          typename TFixedParameterScalar>
+          typename TFixedParametersValueType>
 void
-Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
+Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 ::ComputeInverseJacobianWithRespectToPosition( const InputPointType & pnt, JacobianType & jacobian ) const
 {
   JacobianType forward_jacobian;

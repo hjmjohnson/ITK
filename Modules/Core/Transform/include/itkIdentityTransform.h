@@ -47,15 +47,15 @@ namespace itk
  * \ingroup ITKTransform
  */
 template< typename TScalar,
-          unsigned int NDimensions = 3 >
-class IdentityTransform : public Transform< TScalar, NDimensions, NDimensions >
+          unsigned int NDimensions = 3, typename TFixedParametersValueType=TScalar >
+class IdentityTransform : public Transform< TScalar, NDimensions, NDimensions, TFixedParametersValueType >
 {
 public:
   /** Standard class typedefs. */
-  typedef IdentityTransform                              Self;
-  typedef Transform< TScalar, NDimensions, NDimensions > Superclass;
-  typedef SmartPointer< Self >                           Pointer;
-  typedef SmartPointer< const Self >                     ConstPointer;
+  typedef IdentityTransform                                                        Self;
+  typedef Transform< TScalar, NDimensions, NDimensions,TFixedParametersValueType > Superclass;
+  typedef SmartPointer< Self >                                                     Pointer;
+  typedef SmartPointer< const Self >                                               ConstPointer;
 
   /** New method for creating an object using a factory. */
   itkNewMacro(Self);
@@ -68,11 +68,14 @@ public:
   itkStaticConstMacro(OutputSpaceDimension, unsigned int, NDimensions);
 
   /** Type of the input parameters. */
-  typedef  TScalar ScalarType;
+  typedef typename Superclass::FixedParametersType      FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType FixedParametersValueType;
+  typedef typename Superclass::ParametersType           ParametersType;
+  typedef typename Superclass::ParametersValueType      ParametersValueType;
 
   /** Type of the input parameters. */
-  typedef typename Superclass::FixedParametersType FixedParametersType;
-  typedef typename Superclass::ParametersType ParametersType;
+  typedef  ParametersType ScalarType;
+
 
   /** Type of the Jacobian matrix. */
   typedef typename Superclass::JacobianType JacobianType;

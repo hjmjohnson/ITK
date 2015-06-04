@@ -37,19 +37,20 @@ namespace itk
  * \wikiexample{ImageProcessing/ScaleTransform,Scale an image}
  * \endwiki
  */
-template < typename TScalar = float, // Type for cordinate representation type (float or
-                             // double)
-           unsigned int NDimensions = 3>
-class ScaleTransform : public MatrixOffsetTransformBase< TScalar,
-                                                         NDimensions,
-                                                         NDimensions >
+template <typename TScalar=float,
+          unsigned int NDimensions=3,
+          typename TFixedParametersValueType=TScalar>
+class ScaleTransform : public MatrixOffsetTransformBase<TScalar,
+                                                        NDimensions,
+                                                        NDimensions,
+                                                        TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs.   */
-  typedef ScaleTransform                                                 Self;
-  typedef MatrixOffsetTransformBase< TScalar, NDimensions, NDimensions > Superclass;
-  typedef SmartPointer< Self >                                           Pointer;
-  typedef SmartPointer< const Self >                                     ConstPointer;
+  typedef ScaleTransform                                                                          Self;
+  typedef MatrixOffsetTransformBase<TScalar, NDimensions, NDimensions, TFixedParametersValueType> Superclass;
+  typedef SmartPointer< Self >                                                                    Pointer;
+  typedef SmartPointer< const Self >                                                              ConstPointer;
 
   /** New macro for creation of through a smart pointer. */
   itkNewMacro(Self);

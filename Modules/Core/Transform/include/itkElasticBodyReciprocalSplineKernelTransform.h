@@ -34,18 +34,19 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar = double,   // Data type for scalars (float or
-                                        // double)
-          unsigned int NDimensions = 3 >
+template<typename TScalar=double,   // Data type for scalars (float or double)
+         unsigned int NDimensions=3,
+         typename TFixedParametersValueType=TScalar>
 // Number of dimensions
 class ElasticBodyReciprocalSplineKernelTransform:
-  public KernelTransform<  TScalar, NDimensions >
+  public KernelTransform<TScalar,NDimensions,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
   typedef ElasticBodyReciprocalSplineKernelTransform Self;
-  typedef KernelTransform<  TScalar,
-                            NDimensions > Superclass;
+  typedef KernelTransform<TScalar,
+                          NDimensions,
+                          TFixedParametersValueType> Superclass;
 
   typedef SmartPointer< Self >       Pointer;
   typedef SmartPointer< const Self > ConstPointer;
@@ -60,7 +61,8 @@ public:
   typedef typename Superclass::ScalarType ScalarType;
 
   /** Parameters type. */
-  typedef typename Superclass::ParametersType ParametersType;
+  typedef typename Superclass::ParametersType      ParametersType;
+  typedef typename Superclass::FixedParametersType FixedParametersType;
 
   /** Jacobian type. */
   typedef typename Superclass::JacobianType JacobianType;

@@ -37,17 +37,17 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar = double >
+template<typename TScalar=double,typename TFixedParametersValueType=TScalar>
 // Data type for scalars
 class Euler2DTransform:
-  public Rigid2DTransform< TScalar >
+  public Rigid2DTransform<TScalar,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef Euler2DTransform            Self;
-  typedef Rigid2DTransform< TScalar > Superclass;
-  typedef SmartPointer< Self >        Pointer;
-  typedef SmartPointer< const Self >  ConstPointer;
+  typedef Euler2DTransform                                     Self;
+  typedef Rigid2DTransform<TScalar, TFixedParametersValueType> Superclass;
+  typedef SmartPointer<Self>                                   Pointer;
+  typedef SmartPointer<const Self>                             ConstPointer;
 
   /** New macro for creation of through a Smart Pointer. */
   itkNewMacro(Self);
@@ -63,7 +63,8 @@ public:
   typedef typename Superclass::ScalarType ScalarType;
 
   /** Parameters type. */
-  typedef typename Superclass::ParametersType ParametersType;
+  typedef typename Superclass::ParametersType      ParametersType;
+  typedef typename Superclass::FixedParametersType FixedParametersType;
 
   /** Jacobian type. */
   typedef typename Superclass::JacobianType JacobianType;

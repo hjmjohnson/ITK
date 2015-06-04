@@ -110,17 +110,19 @@ namespace itk
  * \wikiexample{Registration/ImageRegistrationMethodBSpline,A global registration of two images}
  * \endwiki
  */
-template <typename TScalar = double, unsigned int NDimensions = 3,
-          unsigned int VSplineOrder = 3>
+template <typename TScalar = double,
+          unsigned int NDimensions = 3,
+          unsigned int VSplineOrder = 3,
+          typename TFixedParametersValueType=TScalar>
 class BSplineDeformableTransform :
-  public BSplineBaseTransform<TScalar,NDimensions,VSplineOrder>
+  public BSplineBaseTransform<TScalar,NDimensions,VSplineOrder,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef BSplineDeformableTransform                             Self;
-  typedef BSplineBaseTransform<TScalar,NDimensions,VSplineOrder> Superclass;
-  typedef SmartPointer<Self>                                     Pointer;
-  typedef SmartPointer<const Self>                               ConstPointer;
+  typedef BSplineDeformableTransform                                                       Self;
+  typedef BSplineBaseTransform<TScalar,NDimensions,VSplineOrder,TFixedParametersValueType> Superclass;
+  typedef SmartPointer<Self>                                                               Pointer;
+  typedef SmartPointer<const Self>                                                         ConstPointer;
 
   /** New macro for creation of through the object factory. */
   // Explicit New() method, used here because we need to split the itkNewMacro()

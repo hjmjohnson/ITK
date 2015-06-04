@@ -83,17 +83,17 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template
-<class TScalar = double, unsigned int NDimensions = 3>
+template<typename TScalar=double, unsigned int NDimensions = 3,
+         typename TFixedParametersValueType>
 class CompositeTransform :
-  public MultiTransform<TScalar, NDimensions>
+  public MultiTransform<TScalar, NDimensions, TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef CompositeTransform                                  Self;
-  typedef MultiTransform<TScalar, NDimensions, NDimensions>   Superclass;
-  typedef SmartPointer<Self>                                  Pointer;
-  typedef SmartPointer<const Self>                            ConstPointer;
+  typedef CompositeTransform                                                            Self;
+  typedef MultiTransform<TScalar, NDimensions, NDimensions,TFixedParametersValueType>   Superclass;
+  typedef SmartPointer<Self>                                                            Pointer;
+  typedef SmartPointer<const Self>                                                      ConstPointer;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro( CompositeTransform, Transform );

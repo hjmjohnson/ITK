@@ -98,17 +98,18 @@ namespace itk
 template<
   typename TScalar = double,      // Data type for scalars
                                    //    (e.g. float or double)
-  unsigned int NDimensions = 3 >
+  unsigned int NDimensions = 3, TFixedParametersValueType=TScalar >
 // Number of dimensions in the input space
 class AffineTransform:
-  public MatrixOffsetTransformBase< TScalar, NDimensions, NDimensions >
+  public MatrixOffsetTransformBase< TScalar, NDimensions, NDimensions, TFixedParametersValueType >
 {
 public:
   /** Standard typedefs   */
   typedef AffineTransform Self;
   typedef MatrixOffsetTransformBase< TScalar,
                                      NDimensions,
-                                     NDimensions >  Superclass;
+                                     NDimensions,
+                                     TFixedParametersValueType >  Superclass;
 
   typedef SmartPointer< Self >       Pointer;
   typedef SmartPointer< const Self > ConstPointer;
@@ -128,6 +129,7 @@ public:
 
   /** Parameters Type   */
   typedef typename Superclass::ParametersType            ParametersType;
+  typedef typename Superclass::FixedParametersType       FixedParametersType;
   typedef typename Superclass::JacobianType              JacobianType;
   typedef typename Superclass::ScalarType                ScalarType;
   typedef typename Superclass::InputPointType            InputPointType;

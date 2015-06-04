@@ -44,17 +44,16 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar = double >
-// Data type for scalars (float or double)
+template<typename TScalar=double, typename TFixedParametersValueType=TScalar> // Data type for scalars (float or double)
 class QuaternionRigidTransform :
-  public Rigid3DTransform< TScalar >
+  public Rigid3DTransform<TScalar,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs.   */
-  typedef QuaternionRigidTransform    Self;
-  typedef Rigid3DTransform< TScalar > Superclass;
-  typedef SmartPointer< Self >        Pointer;
-  typedef SmartPointer< const Self >  ConstPointer;
+  typedef QuaternionRigidTransform                            Self;
+  typedef Rigid3DTransform<TScalar,TFixedParametersValueType> Superclass;
+  typedef SmartPointer< Self >                                Pointer;
+  typedef SmartPointer< const Self >                          ConstPointer;
 
   /** New macro for creation of through a Smart Pointer   */
   itkNewMacro(Self);
@@ -71,6 +70,8 @@ public:
   /** Parameters Type   */
   typedef typename Superclass::ParametersType            ParametersType;
   typedef typename Superclass::ParametersValueType       ParametersValueType;
+  typedef typename Superclass::FixedParametersType       FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType  FixedParametersValueType;
   typedef typename Superclass::JacobianType              JacobianType;
   typedef typename Superclass::ScalarType                ScalarType;
   typedef typename Superclass::InputPointType            InputPointType;

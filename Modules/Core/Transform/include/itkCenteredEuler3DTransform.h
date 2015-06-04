@@ -33,17 +33,17 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template <typename TScalar = double>
+template <typename TScalar = double,typename TFixedParametersValueType=TScalar>
 // Data type for scalars
 class CenteredEuler3DTransform :
-  public Euler3DTransform<TScalar>
+  public Euler3DTransform<TScalar,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs. */
-  typedef CenteredEuler3DTransform    Self;
-  typedef Euler3DTransform< TScalar > Superclass;
-  typedef SmartPointer< Self >        Pointer;
-  typedef SmartPointer< const Self >  ConstPointer;
+  typedef CenteredEuler3DTransform                            Self;
+  typedef Euler3DTransform<TScalar,TFixedParametersValueType> Superclass;
+  typedef SmartPointer<Self>                                  Pointer;
+  typedef SmartPointer<const Self>                            ConstPointer;
 
   /** New macro for creation of through a Smart Pointer */
   itkNewMacro(Self);
@@ -57,16 +57,16 @@ public:
   itkStaticConstMacro(OutputSpaceDimension, unsigned int, 3);
   itkStaticConstMacro(ParametersDimension, unsigned int, 9);
 
-  typedef typename Superclass::ParametersType      ParametersType;
-  typedef typename Superclass::ParametersValueType ParametersValueType;
-  typedef typename Superclass::JacobianType        JacobianType;
-  typedef typename Superclass::ScalarType          ScalarType;
-  typedef typename Superclass::InputVectorType     InputVectorType;
-  typedef typename Superclass::OutputVectorType    OutputVectorType;
-  typedef typename Superclass::InputCovariantVectorType
-  InputCovariantVectorType;
-  typedef typename Superclass::OutputCovariantVectorType
-  OutputCovariantVectorType;
+  typedef typename Superclass::ParametersType            ParametersType;
+  typedef typename Superclass::ParametersValueType       ParametersValueType;
+  typedef typename Superclass::FixedParametersType       FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType  FixedParametersValueType;
+  typedef typename Superclass::JacobianType              JacobianType;
+  typedef typename Superclass::ScalarType                ScalarType;
+  typedef typename Superclass::InputVectorType           InputVectorType;
+  typedef typename Superclass::OutputVectorType          OutputVectorType;
+  typedef typename Superclass::InputCovariantVectorType  InputCovariantVectorType;
+  typedef typename Superclass::OutputCovariantVectorType OutputCovariantVectorType;
 
   typedef typename Superclass::InputVnlVectorType   InputVnlVectorType;
   typedef typename Superclass::OutputVnlVectorType  OutputVnlVectorType;

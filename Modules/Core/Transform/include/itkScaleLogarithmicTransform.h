@@ -31,21 +31,19 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template <
-  typename TScalar = float, // Type for cordinate representation type (float or
-                             // double)
-  unsigned int NDimensions = 3>
+template <typename TScalar=float,
+  unsigned int NDimensions = 3,
+  typename TFixedParametersValueType=TScalar>
 // Number of dimensions
 class ScaleLogarithmicTransform :
-  public ScaleTransform< TScalar,
-                         NDimensions >
+  public ScaleTransform<TScalar,NDimensions,TFixedParametersValueType>
 {
 public:
   /** Standard class typedefs.   */
-  typedef ScaleLogarithmicTransform              Self;
-  typedef ScaleTransform< TScalar, NDimensions > Superclass;
-  typedef SmartPointer< Self >                   Pointer;
-  typedef SmartPointer< const Self >             ConstPointer;
+  typedef ScaleLogarithmicTransform                                     Self;
+  typedef ScaleTransform<TScalar,NDimensions,TFixedParametersValueType> Superclass;
+  typedef SmartPointer<Self>                                            Pointer;
+  typedef SmartPointer<const Self>                                      ConstPointer;
 
   /** New macro for creation of through a smart pointer. */
   itkNewMacro(Self);
@@ -61,8 +59,10 @@ public:
   typedef typename Superclass::ScalarType ScalarType;
 
   /** Parameters type. */
-  typedef typename Superclass::ParametersType ParametersType;
-  typedef typename ParametersType::ValueType  ParametersValueType;
+  typedef typename Superclass::ParametersType      ParametersType;
+  typedef typename ParametersType::ValueType       ParametersValueType;
+  typedef typename Superclass::FixedParametersType FixedParametersType;
+  typedef typename FixedParametersType::ValueType  FixedParametersValueType;
 
   /** Jacobian type. */
   typedef typename Superclass::JacobianType JacobianType;
