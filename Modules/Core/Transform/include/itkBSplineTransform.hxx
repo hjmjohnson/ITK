@@ -28,8 +28,8 @@ namespace itk
 {
 
 // Constructor with default arguments
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::BSplineTransform() : Superclass( )
 {
 
@@ -64,16 +64,16 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Destructor
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::~BSplineTransform()
 {
 }
 
 // Get the number of parameters
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-typename BSplineTransform<TScalar, NDimensions, VSplineOrder>::NumberOfParametersType
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+typename BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>::NumberOfParametersType
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::GetNumberOfParameters() const
 {
   // The number of parameters equal SpaceDimension * number of
@@ -82,9 +82,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Get the number of parameters per dimension
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-typename BSplineTransform<TScalar, NDimensions, VSplineOrder>::NumberOfParametersType
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+typename BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>::NumberOfParametersType
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::GetNumberOfParametersPerDimension() const
 {
   // The number of parameters per dimension equal number of
@@ -99,9 +99,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the transform origin
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetTransformDomainOrigin( const OriginType & origin )
 {
   if( this->m_TransformDomainOrigin != origin )
@@ -115,9 +115,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the transform dimensions
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetTransformDomainPhysicalDimensions( const PhysicalDimensionsType & dims )
 {
   if( this->m_TransformDomainPhysicalDimensions != dims )
@@ -131,9 +131,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the transform
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetTransformDomainDirection( const DirectionType & direction )
 {
   if( this->m_TransformDomainDirection != direction )
@@ -148,9 +148,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the transform domain mesh size
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetTransformDomainMeshSize( const MeshSizeType & meshSize )
 {
   if( this->m_TransformDomainMeshSize != meshSize )
@@ -171,9 +171,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetCoefficientImageInformationFromFixedParameters()
 {
   // Fixed Parameters store the following information:
@@ -230,9 +230,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParametersGridSizeFromTransformDomainInformation() const
 {
   // Set the grid size parameters
@@ -243,9 +243,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParametersGridOriginFromTransformDomainInformation() const
 {
   // Set the origin parameters
@@ -267,9 +267,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParametersGridSpacingFromTransformDomainInformation() const
 {
   // Set the spacing parameters
@@ -283,7 +283,7 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
 BSplineTransform<TScalar, NDimensions, VSplineOrder>
 ::SetFixedParametersGridDirectionFromTransformDomainInformation() const
@@ -301,9 +301,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 
 
 // Set the Fixed Parameters
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParameters( const FixedParametersType & passedParameters )
 {
   // check if the number of passedParameters match the
@@ -369,9 +369,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the B-Spline coefficients using input images
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetCoefficientImages( const CoefficientImageArray & images )
 {
   bool validArrayOfImages = true;
@@ -434,9 +434,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Print self
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::PrintSelf( std::ostream & os, Indent indent ) const
 {
   this->Superclass::PrintSelf(os, indent);
@@ -459,9 +459,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
      << this->m_CoefficientImages[0]->GetDirection() << std::endl;
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 bool
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::InsideValidRegion( ContinuousIndexType & index ) const
 {
   const SizeType gridSize =
@@ -494,9 +494,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
   return inside;
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::TransformPoint( const InputPointType & point, OutputPointType & outputPoint,
   WeightsType & weights, ParameterIndexArrayType & indices, bool & inside ) const
 {
@@ -584,9 +584,9 @@ BSplineTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Compute the Jacobian in one position
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineTransform<TScalar, NDimensions, VSplineOrder>
+BSplineTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::ComputeJacobianWithRespectToParameters( const InputPointType & point,
   JacobianType & jacobian ) const
 {

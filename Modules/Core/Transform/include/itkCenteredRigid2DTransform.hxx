@@ -23,25 +23,25 @@
 namespace itk
 {
 
-template <typename TScalar>
-CenteredRigid2DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::CenteredRigid2DTransform() :
   Superclass(ParametersDimension)
 {
 }
 
 
-template <typename TScalar>
-CenteredRigid2DTransform<TScalar>::CenteredRigid2DTransform(unsigned int spaceDimension,
+template <typename TScalar, typename TFixedParametersValueType>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>::CenteredRigid2DTransform(unsigned int spaceDimension,
                                                                 unsigned int parametersDimension) :
   Superclass(spaceDimension, parametersDimension)
 {
 }
 
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-CenteredRigid2DTransform<TScalar>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::SetParameters(const ParametersType & parameters)
 {
   itkDebugMacro(<< "Setting parameters " << parameters);
@@ -90,9 +90,9 @@ CenteredRigid2DTransform<TScalar>
 }
 
 
-template <typename TScalar>
-const typename CenteredRigid2DTransform<TScalar>::ParametersType
-& CenteredRigid2DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+const typename CenteredRigid2DTransform<TScalar, TFixedParametersValueType>::ParametersType
+& CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::GetParameters() const
 {
   itkDebugMacro(<< "Getting parameters ");
@@ -122,9 +122,9 @@ const typename CenteredRigid2DTransform<TScalar>::ParametersType
 }
 
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-CenteredRigid2DTransform<TScalar>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::ComputeJacobianWithRespectToParameters(const InputPointType & p, JacobianType & jacobian) const
 {
   const double ca = std::cos( this->GetAngle() );
@@ -158,18 +158,18 @@ CenteredRigid2DTransform<TScalar>
 }
 
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-CenteredRigid2DTransform<TScalar>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::SetFixedParameters( const FixedParametersType & itkNotUsed(parameters) )
 {
   // no fixed parameters
 }
 
 
-template <typename TScalar>
-const typename CenteredRigid2DTransform<TScalar>::FixedParametersType &
-CenteredRigid2DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+const typename CenteredRigid2DTransform<TScalar, TFixedParametersValueType>::FixedParametersType &
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::GetFixedParameters() const
 {
   // return dummy parameters
@@ -177,9 +177,9 @@ CenteredRigid2DTransform<TScalar>
 }
 
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-CenteredRigid2DTransform<TScalar>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::CloneInverseTo(Pointer & result) const
 {
   result = New();
@@ -187,9 +187,9 @@ CenteredRigid2DTransform<TScalar>
 }
 
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 bool
-CenteredRigid2DTransform<TScalar>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::GetInverse(Self *inverse) const
 {
   if( !inverse )
@@ -206,9 +206,9 @@ CenteredRigid2DTransform<TScalar>
 }
 
 
-template <typename TScalar>
-typename CenteredRigid2DTransform<TScalar>::InverseTransformBasePointer
-CenteredRigid2DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+typename CenteredRigid2DTransform<TScalar, TFixedParametersValueType>::InverseTransformBasePointer
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::GetInverseTransform() const
 {
   Pointer inv = New();
@@ -217,9 +217,9 @@ CenteredRigid2DTransform<TScalar>
 }
 
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-CenteredRigid2DTransform<TScalar>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::CloneTo(Pointer & result) const
 {
   result = New();
@@ -229,9 +229,9 @@ CenteredRigid2DTransform<TScalar>
 }
 
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-CenteredRigid2DTransform<TScalar>
+CenteredRigid2DTransform<TScalar, TFixedParametersValueType>
 ::PrintSelf(std::ostream & os, Indent indent) const
 {
   this->Superclass::PrintSelf(os, indent);

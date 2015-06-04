@@ -28,8 +28,8 @@ namespace itk
 {
 
 // Constructor with default arguments
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::BSplineDeformableTransform() : Superclass( ),
   m_GridRegion(this->m_CoefficientImages[0]->GetLargestPossibleRegion() ),
   m_GridOrigin(this->m_CoefficientImages[0]->GetOrigin() ),
@@ -74,16 +74,16 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
   this->SetFixedParametersFromTransformDomainInformation();
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::~BSplineDeformableTransform()
 {
 }
 
 // Get the number of parameters
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-typename BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>::NumberOfParametersType
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+typename BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>::NumberOfParametersType
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::GetNumberOfParameters() const
 {
   // The number of parameters equal SpaceDimension * number of
@@ -92,9 +92,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Get the number of parameters per dimension
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-typename BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>::NumberOfParametersType
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
+typename BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>::NumberOfParametersType
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::GetNumberOfParametersPerDimension() const
 {
   // The number of parameters per dimension equal number of
@@ -103,9 +103,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the grid region
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::UpdateValidGridRegion()
 {
   // Set the valid region
@@ -133,9 +133,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the grid region
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetGridRegion(const RegionType & region)
 {
   if( this->m_GridRegion != region )
@@ -166,9 +166,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the grid spacing
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetGridSpacing(const SpacingType & spacing)
 {
   if( this->m_GridSpacing != spacing )
@@ -185,9 +185,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the grid direction
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetGridDirection(const DirectionType & direction)
 {
   if( this->m_GridDirection != direction )
@@ -204,9 +204,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the grid origin
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetGridOrigin(const OriginType & origin)
 {
   if( this->m_GridOrigin != origin )
@@ -222,9 +222,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetCoefficientImageInformationFromFixedParameters()
 {
 
@@ -280,9 +280,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParametersGridSizeFromTransformDomainInformation() const
 {
   // Set the grid size parameters
@@ -294,9 +294,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParametersGridOriginFromTransformDomainInformation() const
 {
   // Set the origin parameters
@@ -310,9 +310,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParametersGridSpacingFromTransformDomainInformation() const
 {
   // Set the spacing parameters
@@ -324,9 +324,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
     }
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParametersGridDirectionFromTransformDomainInformation() const
 {
   /** Set the direction parameters */
@@ -343,9 +343,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 
 
 // Set the Fixed Parameters
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetFixedParameters( const FixedParametersType & passedParameters )
 {
   // check if the number of passedParameters match the
@@ -380,9 +380,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Set the B-Spline coefficients using input images
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::SetCoefficientImages( const CoefficientImageArray & images )
 {
   bool validArrayOfImages = true;
@@ -432,9 +432,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Print self
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::PrintSelf( std::ostream & os, Indent indent ) const
 {
   this->Superclass::PrintSelf(os, indent);
@@ -461,9 +461,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 bool
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::InsideValidRegion( ContinuousIndexType & index ) const
 {
   bool inside = true;
@@ -488,9 +488,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
   return inside;
 }
 
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::TransformPoint( const InputPointType & inputPoint, OutputPointType & outputPoint,
   WeightsType & weights, ParameterIndexArrayType & indices, bool & inside ) const
 {
@@ -582,9 +582,9 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 }
 
 // Compute the Jacobian in one position
-template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
+template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder, typename TFixedParametersValueType>
 void
-BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
+BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder, TFixedParametersValueType>
 ::ComputeJacobianWithRespectToParameters( const InputPointType & point,
   JacobianType & jacobian ) const
 {

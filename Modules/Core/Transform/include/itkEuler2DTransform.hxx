@@ -23,31 +23,31 @@
 namespace itk
 {
 // Constructor with default arguments
-template< typename TScalar >
-Euler2DTransform< TScalar >
+template< typename TScalar, typename TFixedParametersValueType >
+Euler2DTransform< TScalar, TFixedParametersValueType >
 ::Euler2DTransform():
   Superclass(ParametersDimension)
 {}
 
 // Constructor with arguments
-template< typename TScalar >
-Euler2DTransform< TScalar >::Euler2DTransform(unsigned int parametersDimension):
+template< typename TScalar, typename TFixedParametersValueType >
+Euler2DTransform< TScalar, TFixedParametersValueType >::Euler2DTransform(unsigned int parametersDimension):
   Superclass(parametersDimension)
 {}
 
 // Create and return an inverse transformation
-template< typename TScalar >
+template< typename TScalar, typename TFixedParametersValueType >
 void
-Euler2DTransform< TScalar >::CloneInverseTo(Pointer & result) const
+Euler2DTransform< TScalar, TFixedParametersValueType >::CloneInverseTo(Pointer & result) const
 {
   result = New();
   this->GetInverse( result.GetPointer() );
 }
 
 // return an inverse transformation
-template< typename TScalar >
+template< typename TScalar, typename TFixedParametersValueType >
 bool
-Euler2DTransform< TScalar >::GetInverse(Self *inverse) const
+Euler2DTransform< TScalar, TFixedParametersValueType >::GetInverse(Self *inverse) const
 {
   if ( !inverse )
     {
@@ -63,9 +63,9 @@ Euler2DTransform< TScalar >::GetInverse(Self *inverse) const
 }
 
 // Return an inverse of this transform
-template< typename TScalar >
-typename Euler2DTransform< TScalar >::InverseTransformBasePointer
-Euler2DTransform< TScalar >
+template< typename TScalar, typename TFixedParametersValueType >
+typename Euler2DTransform< TScalar, TFixedParametersValueType >::InverseTransformBasePointer
+Euler2DTransform< TScalar, TFixedParametersValueType >
 ::GetInverseTransform() const
 {
   Pointer inv = New();
@@ -74,9 +74,9 @@ Euler2DTransform< TScalar >
 }
 
 // Create and return an inverse transformation
-template< typename TScalar >
+template< typename TScalar, typename TFixedParametersValueType >
 void
-Euler2DTransform< TScalar >::CloneTo(Pointer & result) const
+Euler2DTransform< TScalar, TFixedParametersValueType >::CloneTo(Pointer & result) const
 {
   result = New();
   result->SetCenter( this->GetCenter() );
@@ -85,9 +85,9 @@ Euler2DTransform< TScalar >::CloneTo(Pointer & result) const
 }
 
 // Print self
-template< typename TScalar >
+template< typename TScalar, typename TFixedParametersValueType >
 void
-Euler2DTransform< TScalar >::PrintSelf(std::ostream & os, Indent indent) const
+Euler2DTransform< TScalar, TFixedParametersValueType >::PrintSelf(std::ostream & os, Indent indent) const
 {
   this->Superclass::PrintSelf(os, indent);
 }

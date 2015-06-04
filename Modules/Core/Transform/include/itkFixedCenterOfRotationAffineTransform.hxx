@@ -26,21 +26,21 @@
 namespace itk
 {
 /** Constructor with default arguments */
-template< typename TScalar, unsigned int NDimensions >
-FixedCenterOfRotationAffineTransform< TScalar, NDimensions >::FixedCenterOfRotationAffineTransform():
+template< typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType >
+FixedCenterOfRotationAffineTransform< TScalar, NDimensions, TFixedParametersValueType >::FixedCenterOfRotationAffineTransform():
   Superclass(ParametersDimension)
 {}
 
-template< typename TScalar, unsigned int NDimensions >
-FixedCenterOfRotationAffineTransform< TScalar, NDimensions >::FixedCenterOfRotationAffineTransform(
+template< typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType >
+FixedCenterOfRotationAffineTransform< TScalar, NDimensions, TFixedParametersValueType >::FixedCenterOfRotationAffineTransform(
   unsigned int outputSpaceDims,
   unsigned int
   paramsDims):
   Superclass(outputSpaceDims, paramsDims)
 {}
 
-template< typename TScalar, unsigned int NDimensions >
-FixedCenterOfRotationAffineTransform< TScalar, NDimensions >::FixedCenterOfRotationAffineTransform(
+template< typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType >
+FixedCenterOfRotationAffineTransform< TScalar, NDimensions, TFixedParametersValueType >::FixedCenterOfRotationAffineTransform(
   const MatrixType & matrix,
   const
   OutputVectorType & offset):
@@ -48,8 +48,8 @@ FixedCenterOfRotationAffineTransform< TScalar, NDimensions >::FixedCenterOfRotat
 {}
 
 /** Destructor */
-template< typename TScalar, unsigned int NDimensions >
-FixedCenterOfRotationAffineTransform< TScalar, NDimensions >::
+template< typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType >
+FixedCenterOfRotationAffineTransform< TScalar, NDimensions, TFixedParametersValueType >::
 ~FixedCenterOfRotationAffineTransform()
 {
 }

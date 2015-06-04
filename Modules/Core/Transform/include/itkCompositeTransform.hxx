@@ -25,8 +25,8 @@ namespace itk
 
 
 template
-<typename TScalar, unsigned int NDimensions>
-CompositeTransform<TScalar, NDimensions>::CompositeTransform()
+<typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::CompositeTransform()
 {
   this->m_TransformsToOptimizeFlags.clear();
   this->m_TransformsToOptimizeQueue.clear();
@@ -35,17 +35,17 @@ CompositeTransform<TScalar, NDimensions>::CompositeTransform()
 
 
 template
-<typename TScalar, unsigned int NDimensions>
-CompositeTransform<TScalar, NDimensions>::
+<typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::
 ~CompositeTransform()
 {
 }
 
 
 template
-<typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>::TransformCategoryType
-CompositeTransform<TScalar, NDimensions>
+<typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::TransformCategoryType
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetTransformCategory() const
 {
   // Check if linear
@@ -79,10 +79,10 @@ CompositeTransform<TScalar, NDimensions>
 
 
 template
-<typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+<typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputPointType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformPoint( const InputPointType& inputPoint ) const
 {
 
@@ -100,10 +100,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVectorType & inputVector ) const
 {
   OutputVectorType outputVector( inputVector );
@@ -123,10 +123,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVectorType & inputVector, const InputPointType & inputPoint ) const
 {
   OutputVectorType outputVector( inputVector );
@@ -148,10 +148,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVnlVectorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVnlVectorType & inputVector, const InputPointType & inputPoint ) const
 {
   OutputVnlVectorType outputVector( inputVector );
@@ -173,10 +173,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVnlVectorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVnlVectorType & inputVector) const
 {
   OutputVnlVectorType outputVector( inputVector );
@@ -196,10 +196,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVectorPixelType & inputVector ) const
 {
   OutputVectorPixelType outputVector( inputVector );
@@ -219,10 +219,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformVector( const InputVectorPixelType & inputVector, const InputPointType & inputPoint ) const
 {
   OutputVectorPixelType outputVector( inputVector );
@@ -244,10 +244,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputCovariantVectorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformCovariantVector( const InputCovariantVectorType & inputVector ) const
 {
   OutputCovariantVectorType outputVector( inputVector );
@@ -267,10 +267,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputCovariantVectorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformCovariantVector( const InputCovariantVectorType & inputVector, const InputPointType & inputPoint ) const
 {
   OutputCovariantVectorType outputVector( inputVector );
@@ -292,10 +292,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformCovariantVector( const InputVectorPixelType & inputVector ) const
 {
   OutputVectorPixelType outputVector( inputVector );
@@ -315,10 +315,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformCovariantVector( const InputVectorPixelType & inputVector, const InputPointType & inputPoint ) const
 {
   OutputVectorPixelType outputVector( inputVector );
@@ -340,10 +340,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputDiffusionTensor3DType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformDiffusionTensor3D( const InputDiffusionTensor3DType & inputTensor, const InputPointType & inputPoint ) const
 {
   OutputDiffusionTensor3DType outputTensor( inputTensor );
@@ -365,10 +365,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformDiffusionTensor3D( const InputVectorPixelType & inputTensor, const InputPointType & inputPoint ) const
 {
   OutputVectorPixelType outputTensor( inputTensor );
@@ -390,10 +390,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputDiffusionTensor3DType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformDiffusionTensor3D( const InputDiffusionTensor3DType & inputTensor ) const
 {
   OutputDiffusionTensor3DType outputTensor( inputTensor );
@@ -413,10 +413,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformDiffusionTensor3D( const InputVectorPixelType & inputTensor ) const
 {
   OutputVectorPixelType outputTensor( inputTensor );
@@ -436,10 +436,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputSymmetricSecondRankTensorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformSymmetricSecondRankTensor( const InputSymmetricSecondRankTensorType & inputTensor, const InputPointType & inputPoint ) const
 {
   OutputSymmetricSecondRankTensorType outputTensor( inputTensor );
@@ -461,10 +461,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformSymmetricSecondRankTensor( const InputVectorPixelType & inputTensor, const InputPointType & inputPoint ) const
 {
   OutputVectorPixelType outputTensor( inputTensor );
@@ -486,10 +486,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputSymmetricSecondRankTensorType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformSymmetricSecondRankTensor( const InputSymmetricSecondRankTensorType & inputTensor ) const
 {
   OutputSymmetricSecondRankTensorType outputTensor( inputTensor );
@@ -509,10 +509,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::OutputVectorPixelType
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::TransformSymmetricSecondRankTensor( const InputVectorPixelType & inputTensor ) const
 {
   OutputVectorPixelType outputTensor( inputTensor );
@@ -532,9 +532,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 bool
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetInverse( Self *inverse ) const
 {
   typename TransformQueueType::const_iterator it;
@@ -569,10 +569,10 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::InverseTransformBasePointer
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetInverseTransform() const
 {
   /* This method can't be defined in Superclass because of the call to New() */
@@ -589,9 +589,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 void
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::ComputeJacobianWithRespectToParameters( const InputPointType & p, JacobianType & outJacobian ) const
 {
   /* Returns a concatenated MxN array, holding the Jacobian of each sub
@@ -604,9 +604,9 @@ CompositeTransform<TScalar, NDimensions>
   this->ComputeJacobianWithRespectToParametersCachedTemporaries( p, outJacobian, jacobianWithRespectToPosition );
 }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 void
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::ComputeJacobianWithRespectToParametersCachedTemporaries( const InputPointType & p, JacobianType & outJacobian, JacobianType & jacobianWithRespectToPosition ) const
 {
   //NOTE: This must have been done outside of outJacobian.SetSize( NDimensions, this->GetNumberOfLocalParameters() );
@@ -714,9 +714,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-const typename CompositeTransform<TScalar, NDimensions>::ParametersType &
-CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+const typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::ParametersType &
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetParameters() const
 {
   const TransformQueueType & transforms = this->GetTransformsToOptimizeQueue();
@@ -754,9 +754,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 void
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::SetParameters(const ParametersType & inputParameters)
 {
   /* We do not copy inputParameters into m_Parameters,
@@ -826,9 +826,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-const typename CompositeTransform<TScalar, NDimensions>::FixedParametersType &
-CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+const typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::FixedParametersType &
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetFixedParameters() const
   {
   TransformQueueType transforms = this->GetTransformsToOptimizeQueue();
@@ -856,9 +856,9 @@ CompositeTransform<TScalar, NDimensions>
   return this->m_FixedParameters;
   }
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 void
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::SetFixedParameters(const FixedParametersType & inputParameters)
 {
   /* Assumes input params are concatenation of the parameters of the
@@ -897,9 +897,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>::NumberOfParametersType
-CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::NumberOfParametersType
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetNumberOfParameters(void) const
 {
   /* Returns to total number of params in all transforms currently
@@ -924,9 +924,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>::NumberOfParametersType
-CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::NumberOfParametersType
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetNumberOfLocalParameters() const
 {
   if ( this->GetMTime() == this->m_LocalParametersUpdateTime )
@@ -955,9 +955,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>::NumberOfParametersType
-CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::NumberOfParametersType
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetNumberOfFixedParameters() const
 {
   /* Returns to total number of params in all transforms currently
@@ -979,9 +979,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 void
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::UpdateTransformParameters( const DerivativeType & update, ScalarType  factor )
 {
   /* Update parameters within the sub-transforms set to be optimized. */
@@ -1031,9 +1031,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
-typename CompositeTransform<TScalar, NDimensions>::TransformQueueType &
-CompositeTransform<TScalar, NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
+typename CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>::TransformQueueType &
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::GetTransformsToOptimizeQueue() const
 {
   /* Update the list of transforms to use for optimization only if
@@ -1055,9 +1055,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 void
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::FlattenTransformQueue()
 {
   TransformQueueType             transformQueue;
@@ -1105,9 +1105,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 void
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::PrintSelf( std::ostream& os, Indent indent ) const
 {
   Superclass::PrintSelf( os, indent );
@@ -1140,9 +1140,9 @@ CompositeTransform<TScalar, NDimensions>
 }
 
 
-template <typename TScalar, unsigned int NDimensions>
+template <typename TScalar, unsigned int NDimensions, typename TFixedParametersValueType>
 typename LightObject::Pointer
-CompositeTransform<TScalar, NDimensions>
+CompositeTransform<TScalar, NDimensions, TFixedParametersValueType>
 ::InternalClone() const
 {
   // This class doesn't use its superclass implemenation

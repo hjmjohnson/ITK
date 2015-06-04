@@ -23,8 +23,8 @@
 namespace itk
 {
 // Constructor with default arguments
-template <typename TScalar>
-Euler3DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::Euler3DTransform() :
   Superclass(ParametersDimension)
 {
@@ -33,8 +33,8 @@ Euler3DTransform<TScalar>
 }
 
 // Constructor with default arguments
-template <typename TScalar>
-Euler3DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::Euler3DTransform(const MatrixType & matrix, const OutputPointType & offset)
 {
   m_ComputeZYX = false;
@@ -48,8 +48,8 @@ Euler3DTransform<TScalar>
 }
 
 // Constructor with arguments
-template <typename TScalar>
-Euler3DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::Euler3DTransform(unsigned int parametersDimension) :
   Superclass(parametersDimension)
 {
@@ -58,9 +58,9 @@ Euler3DTransform<TScalar>
 }
 
 // Set Angles
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::SetVarRotation(ScalarType angleX, ScalarType angleY, ScalarType angleZ)
 {
   this->m_AngleX = angleX;
@@ -69,9 +69,9 @@ Euler3DTransform<TScalar>
 }
 
 // Set Parameters
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::SetParameters(const ParametersType & parameters)
 {
   itkDebugMacro(<< "Setting parameters " << parameters);
@@ -104,9 +104,9 @@ Euler3DTransform<TScalar>
 }
 
 // Get Parameters
-template <typename TScalar>
-const typename Euler3DTransform<TScalar>::ParametersType
-& Euler3DTransform<TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
+const typename Euler3DTransform<TScalar, TFixedParametersValueType>::ParametersType
+& Euler3DTransform<TScalar, TFixedParametersValueType>
 ::GetParameters(void) const
   {
   this->m_Parameters[0] = m_AngleX;
@@ -120,9 +120,9 @@ const typename Euler3DTransform<TScalar>::ParametersType
   }
 
 // Set Rotational Part
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::SetRotation(ScalarType angleX, ScalarType angleY, ScalarType angleZ)
 {
   m_AngleX = angleX;
@@ -133,9 +133,9 @@ Euler3DTransform<TScalar>
 }
 
 // Compose
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::SetIdentity(void)
 {
   Superclass::SetIdentity();
@@ -145,9 +145,9 @@ Euler3DTransform<TScalar>
 }
 
 // Compute angles from the rotation matrix
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::ComputeMatrixParameters(void)
 {
   if( m_ComputeZYX )
@@ -197,9 +197,9 @@ Euler3DTransform<TScalar>
 }
 
 // Compute the matrix
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::ComputeMatrix(void)
 {
   // need to check if angles are in the right order
@@ -239,9 +239,9 @@ Euler3DTransform<TScalar>
     }
 }
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>
+Euler3DTransform<TScalar, TFixedParametersValueType>
 ::ComputeJacobianWithRespectToParameters(const InputPointType & p, JacobianType & jacobian) const
 {
   // need to check if angles are in the right order
@@ -300,9 +300,9 @@ Euler3DTransform<TScalar>
 }
 
 // Print self
-template <typename TScalar>
+template <typename TScalar, typename TFixedParametersValueType>
 void
-Euler3DTransform<TScalar>::PrintSelf(std::ostream & os, Indent indent) const
+Euler3DTransform<TScalar, TFixedParametersValueType>::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 
