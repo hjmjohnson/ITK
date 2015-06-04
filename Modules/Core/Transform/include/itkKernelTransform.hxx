@@ -506,7 +506,7 @@ KernelTransform<TScalar, NDimensions>
 
 
 template <typename TScalar, unsigned int NDimensions>
-const typename KernelTransform<TScalar, NDimensions>::ParametersType &
+const typename KernelTransform<TScalar, NDimensions>::FixedParametersType &
 KernelTransform<TScalar, NDimensions>
 ::GetFixedParameters() const
 {

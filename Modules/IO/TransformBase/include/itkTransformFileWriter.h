@@ -34,7 +34,7 @@ namespace itk
    * \wikiexample{IO/TransformFileWriter,Write a transform to a file}
    * \endwiki
    */
-template<typename ScalarType>
+template<typename ScalarType, typename TFixedParameterValueType=ScalarType>
 class ITKIOTransformBase_EXPORT TransformFileWriterTemplate:public LightProcessObject
 {
 public:
@@ -44,11 +44,14 @@ public:
   typedef LightProcessObject           Superclass;
   typedef SmartPointer< Self >         Pointer;
 
-  typedef TransformBaseTemplate< ScalarType >              TransformType;
-  typedef TransformIOBaseTemplate< ScalarType >            TransformIOType;
-  typedef typename TransformIOType::TransformPointer       TransformPointer;
-  typedef typename TransformIOType::ConstTransformPointer  ConstTransformPointer;
-  typedef typename TransformIOType::ConstTransformListType ConstTransformListType;
+  typedef ScalarType               ParameterValueType;
+  typedef TFixedParameterValueType FixedParameterValueType;
+
+  typedef TransformBaseTemplate< ParameterValueType,   FixedParameterValueType > TransformType;
+  typedef TransformIOBaseTemplate< ParameterValueType, FixedParameterValueType > TransformIOType;
+  typedef typename TransformIOType::TransformPointer                             TransformPointer;
+  typedef typename TransformIOType::ConstTransformPointer                        ConstTransformPointer;
+  typedef typename TransformIOType::ConstTransformListType                       ConstTransformListType;
 
   /** Method for creation through the object factory */
   itkNewMacro(Self);
@@ -106,7 +109,7 @@ private:
 };
 
 /** This helps to meet backward compatibility */
-typedef itk::TransformFileWriterTemplate<double> TransformFileWriter;
+typedef itk::TransformFileWriterTemplate<double,double> TransformFileWriter;
 
 } // namespace itk
 

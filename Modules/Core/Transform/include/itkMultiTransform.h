@@ -83,8 +83,10 @@ public:
   /** Scalar type. */
   typedef typename Superclass::ScalarType          ScalarType;
   /** Parameters type. */
-  typedef typename Superclass::ParametersType      ParametersType;
-  typedef typename Superclass::ParametersValueType ParametersValueType;
+  typedef typename Superclass::FixedParametersType      FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType FixedParametersValueType;
+  typedef typename Superclass::ParametersType           ParametersType;
+  typedef typename Superclass::ParametersValueType      ParametersValueType;
   /** Derivative type */
   typedef typename Superclass::DerivativeType DerivativeType;
   /** Jacobian type. */
@@ -247,11 +249,11 @@ public:
 
   /* GetFixedParameters for all sub-transforms.
    * See GetParameters() for parameter ordering. */
-  virtual const ParametersType & GetFixedParameters() const ITK_OVERRIDE;
+  virtual const FixedParametersType & GetFixedParameters() const ITK_OVERRIDE;
 
   /* SetFixedParameters for all sub-transforms.
    * See GetParameters() for parameter ordering. */
-  virtual void SetFixedParameters(const ParametersType & fixedParameters) ITK_OVERRIDE;
+  virtual void SetFixedParameters(const FixedParametersType & fixedParameters) ITK_OVERRIDE;
 
   /* Get total number of parameters. Sum of all sub-transforms. */
   virtual NumberOfParametersType GetNumberOfParameters() const ITK_OVERRIDE;

@@ -346,7 +346,7 @@ BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
 template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
 void
 BSplineDeformableTransform<TScalar, NDimensions, VSplineOrder>
-::SetFixedParameters( const ParametersType & passedParameters )
+::SetFixedParameters( const FixedParametersType & passedParameters )
 {
   // check if the number of passedParameters match the
   // expected number of this->m_FixedParameters

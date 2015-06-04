@@ -81,12 +81,13 @@ public:
   itkTypeMacro( TimeVaryingBSplineVelocityFieldTransformParametersAdaptor, TransformParametersAdaptor );
 
   /** Typedefs associated with the transform */
-  typedef TTransform                                     TransformType;
-  typedef typename TransformType::Pointer                TransformPointer;
-  typedef typename TransformType::ParametersType         ParametersType;
-  typedef typename TransformType::ParametersValueType    ParametersValueType;
-
-  typedef ParametersValueType                            RealType;
+  typedef TTransform                                       TransformType;
+  typedef typename TransformType::Pointer                  TransformPointer;
+  typedef typename TransformType::FixedParametersType      FixedParametersType;
+  typedef typename TransformType::FixedParametersValueType FixedParametersValueType;
+  typedef typename TransformType::ParametersType           ParametersType;
+  typedef typename TransformType::ParametersValueType      ParametersValueType;
+  typedef ParametersValueType                              RealType;
 
   typedef typename TransformType::TimeVaryingVelocityFieldControlPointLatticeType   TimeVaryingVelocityFieldControlPointLatticeType;
   typedef typename TimeVaryingVelocityFieldControlPointLatticeType::Pointer         TimeVaryingVelocityFieldControlPointLatticePointer;
@@ -183,7 +184,7 @@ public:
   /** Initialize the transform using the specified fixed parameters */
   virtual void AdaptTransformParameters() ITK_OVERRIDE;
 
-  virtual void SetRequiredFixedParameters( const ParametersType ) ITK_OVERRIDE;
+  virtual void SetRequiredFixedParameters( const FixedParametersType ) ITK_OVERRIDE;
 
 protected:
   TimeVaryingBSplineVelocityFieldTransformParametersAdaptor();

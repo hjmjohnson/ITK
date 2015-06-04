@@ -76,22 +76,26 @@ struct ITKIOTransformHDF5_EXPORT HDF5CommonPathNames
  *
  * \ingroup ITKIOTransformHDF5
  */
-template< typename TInternalComputationValueType >
-class ITKIOTransformHDF5_EXPORT HDF5TransformIOTemplate:public TransformIOBaseTemplate< TInternalComputationValueType >,
+template< typename TInternalComputationValueType, typename TFixedParametersValueType=TInternalComputationValueType >
+class ITKIOTransformHDF5_EXPORT HDF5TransformIOTemplate:public TransformIOBaseTemplate< TInternalComputationValueType, TFixedParametersValueType >,
 private HDF5CommonPathNames
 {
 public:
   typedef HDF5TransformIOTemplate                                  Self;
-  typedef TransformIOBaseTemplate< TInternalComputationValueType > Superclass;
+  typedef TransformIOBaseTemplate< TInternalComputationValueType,
+                                       TFixedParametersValueType > Superclass;
   typedef SmartPointer< Self >                                     Pointer;
   typedef typename Superclass::TransformType                       TransformType;
   typedef typename Superclass::TransformPointer                    TransformPointer;
   typedef typename Superclass::TransformListType                   TransformListType;
+  typedef typename TransformType::FixedParametersType              FixedParametersType;
   typedef typename TransformType::ParametersType                   ParametersType;
 
+
   typedef typename TransformIOBaseTemplate
-                      <TInternalComputationValueType>::ConstTransformListType
-                                                                ConstTransformListType;
+                      <TInternalComputationValueType,
+                       TFixedParametersValueType>::ConstTransformListType
+                                                                   ConstTransformListType;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro( HDF5TransformIOTemplate, TransformIOBaseTemplate );
@@ -124,6 +128,8 @@ private:
   /** Write a parameter array to the file location name */
   void WriteParameters(const std::string &name,
                        const ParametersType &parameters);
+  void WriteFixedParameters(const std::string &name,
+                       const FixedParametersType &parameters);
 
   /** write a string variable */
   void WriteString(const std::string &path, const std::string &value);
@@ -136,7 +142,7 @@ private:
 extern const std::string ITKIOTransformHDF5_EXPORT GetTransformName(int);
 
 /** This helps to meet backward compatibility */
-typedef HDF5TransformIOTemplate< double > HDF5TransformIO;
+typedef HDF5TransformIOTemplate< double, double > HDF5TransformIO;
 
 } // end namespace itk
 

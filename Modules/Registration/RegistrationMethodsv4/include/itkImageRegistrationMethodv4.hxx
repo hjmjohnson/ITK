@@ -30,6 +30,9 @@
 #include "itkMersenneTwisterRandomVariateGenerator.h"
 #include "itkRegistrationParameterScalesFromPhysicalShift.h"
 
+#include <iostream>
+#include <iomanip>
+
 namespace itk
 {
 /**
@@ -436,11 +439,31 @@ ImageRegistrationMethodv4<TFixedImage, TMovingImage, TTransform, TVirtualImage, 
   typename VirtualImageType::Pointer currentLevelVirtualDomainImage = ITK_NULLPTR;
   if( this->m_VirtualDomainImage.IsNotNull() )
     {
+#if 1
+    std::cout << std::fixed << std::setprecision(13) << __FILE__ << " " << __LINE__ << "-SNKM" << m_VirtualDomainImage->GetOrigin()
+      << " " << m_VirtualDomainImage->GetLargestPossibleRegion().GetSize()
+      << " " << m_VirtualDomainImage->GetSpacing()
+      << std::endl;
+   for(size_t q=0; q< this->m_ShrinkFactorsPerLevel.size(); ++q)
+    {
+    std::cout << "\nMETRIC SHRINK LEVEL: " << q << " -> " << this->m_ShrinkFactorsPerLevel[q] << std::endl;
+    typename ShrinkFilterType::Pointer shrinkFilter = ShrinkFilterType::New();
+    shrinkFilter->SetShrinkFactors( this->m_ShrinkFactorsPerLevel[q] );
+    shrinkFilter->SetInput( this->m_VirtualDomainImage );
+    currentLevelVirtualDomainImage = shrinkFilter->GetOutput();
+    currentLevelVirtualDomainImage->Update();
+    std::cout << std::fixed << std::setprecision(13) << __FILE__ << " " << __LINE__ << "+SNKM" << currentLevelVirtualDomainImage->GetOrigin()
+      << " " << currentLevelVirtualDomainImage->GetLargestPossibleRegion().GetSize()
+      << " " << currentLevelVirtualDomainImage->GetSpacing()
+      << std::endl;
+    }
+#endif
     typename ShrinkFilterType::Pointer shrinkFilter = ShrinkFilterType::New();
     shrinkFilter->SetShrinkFactors( this->m_ShrinkFactorsPerLevel[level] );
     shrinkFilter->SetInput( this->m_VirtualDomainImage );
 
     currentLevelVirtualDomainImage = shrinkFilter->GetOutput();
+
     currentLevelVirtualDomainImage->Update();
     }
   else

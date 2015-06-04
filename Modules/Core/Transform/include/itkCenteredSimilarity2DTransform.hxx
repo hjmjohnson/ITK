@@ -161,14 +161,14 @@ CenteredSimilarity2DTransform<TScalar>
 template <typename TScalar>
 void
 CenteredSimilarity2DTransform<TScalar>
-::SetFixedParameters( const ParametersType & itkNotUsed(parameters) )
+::SetFixedParameters( const FixedParametersType & itkNotUsed(parameters) )
 {
   // no fixed parameters
 }
 
 
 template <typename TScalar>
-const typename CenteredSimilarity2DTransform<TScalar>::ParametersType &
+const typename CenteredSimilarity2DTransform<TScalar>::FixedParametersType &
 CenteredSimilarity2DTransform<TScalar>
 ::GetFixedParameters() const
 {

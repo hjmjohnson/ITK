@@ -71,10 +71,11 @@ public:
   typedef  TScalar ScalarType;
 
   /** Type of the input parameters. */
-  typedef  typename Superclass::ParametersType ParametersType;
+  typedef typename Superclass::FixedParametersType FixedParametersType;
+  typedef typename Superclass::ParametersType ParametersType;
 
   /** Type of the Jacobian matrix. */
-  typedef  typename Superclass::JacobianType JacobianType;
+  typedef typename Superclass::JacobianType JacobianType;
 
   /** Transform category type. */
   typedef typename Superclass::TransformCategoryType TransformCategoryType;
@@ -216,13 +217,13 @@ public:
   }
 
   /** Get the Fixed Parameters. */
-  virtual const ParametersType & GetFixedParameters() const ITK_OVERRIDE
+  virtual const FixedParametersType & GetFixedParameters() const ITK_OVERRIDE
   {
     return this->m_FixedParameters;
   }
 
   /** Set the fixed parameters and update internal transformation. */
-  virtual void SetFixedParameters(const ParametersType &) ITK_OVERRIDE
+  virtual void SetFixedParameters(const FixedParametersType &) ITK_OVERRIDE
   {
   }
 

@@ -161,14 +161,14 @@ CenteredRigid2DTransform<TScalar>
 template <typename TScalar>
 void
 CenteredRigid2DTransform<TScalar>
-::SetFixedParameters( const ParametersType & itkNotUsed(parameters) )
+::SetFixedParameters( const FixedParametersType & itkNotUsed(parameters) )
 {
   // no fixed parameters
 }
 
 
 template <typename TScalar>
-const typename CenteredRigid2DTransform<TScalar>::ParametersType &
+const typename CenteredRigid2DTransform<TScalar>::FixedParametersType &
 CenteredRigid2DTransform<TScalar>
 ::GetFixedParameters() const
 {

@@ -39,7 +39,7 @@ namespace itk
  *
  * \ingroup ITKTransform
  */
-template< typename TScalar, typename TFixedParameterScalar=TScalar >
+template< typename TScalar, typename TFixedParameterScalar=double >
 class TransformBaseTemplate:public Object
 {
 public:
@@ -50,11 +50,10 @@ public:
   typedef SmartPointer< const Self > ConstPointer;
 
   /** Type of the input parameters. */
-  typedef  TScalar                                    ParametersValueType;
-  typedef  OptimizerParameters< ParametersValueType > ParametersType;
-
-  typedef  TFixedParameterScalar                      FixedParametersValueType;
-  typedef  OptimizerParameters< ParametersValueType > FixedParametersType;
+  typedef  TFixedParameterScalar                           FixedParametersValueType;
+  typedef  OptimizerParameters< FixedParametersValueType > FixedParametersType;
+  typedef  TScalar                                         ParametersValueType;
+  typedef  OptimizerParameters< ParametersValueType >      ParametersType;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro(TransformBaseTemplate, Object);
@@ -85,7 +84,7 @@ public:
    * by keeping a reference to the parameters.
    * \sa SetParameters
    */
-  virtual void SetParametersByValue(const FixedParametersType & p) = 0;
+  virtual void SetParametersByValue(const ParametersType & p) = 0;
 
   /** Set the fixed parameters. */
   virtual void SetFixedParameters(const FixedParametersType &) = 0;

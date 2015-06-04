@@ -42,7 +42,7 @@ namespace itk
  *
  * \ingroup ITKIOTransformBase
  */
-template<typename TScalar>
+template<typename TScalar,typename TFixedParametersValueType=TScalar>
 class TransformIOBaseTemplate:public LightProcessObject
 {
 public:
@@ -56,7 +56,10 @@ public:
 
   /** Transform types */
   typedef TScalar                           ScalarType;
-  typedef TransformBaseTemplate<ScalarType> TransformType;
+  typedef TFixedParametersValueType         FixedParametersValueType;
+
+  typedef TransformBaseTemplate<ScalarType,FixedParametersValueType> TransformType;
+
   /** For writing, a const transform list gets passed in, for
    * reading, a non-const transform list is created from the file.
    */
@@ -134,7 +137,7 @@ protected:
 
 template <>
 inline void
-TransformIOBaseTemplate<float>
+TransformIOBaseTemplate<float,double>
 ::CorrectTransformPrecisionType( std::string & inputTransformName )
 {
   // output precision type is not found in input transform.
@@ -147,7 +150,7 @@ TransformIOBaseTemplate<float>
 
 template <>
 inline void
-TransformIOBaseTemplate<double>
+TransformIOBaseTemplate<double,double>
 ::CorrectTransformPrecisionType( std::string & inputTransformName )
 {
   // output precision type is not found in input transform.
@@ -160,7 +163,7 @@ TransformIOBaseTemplate<double>
 
 template <>
 inline const std::string
-TransformIOBaseTemplate<float>
+TransformIOBaseTemplate<float,double>
 ::GetTypeNameString()
 {
   return std::string("float");
@@ -168,14 +171,14 @@ TransformIOBaseTemplate<float>
 
 template <>
 inline const std::string
-TransformIOBaseTemplate<double>
+TransformIOBaseTemplate<double,double>
 ::GetTypeNameString()
 {
   return std::string("double");
 }
 
 /** This helps to meet backward compatibility */
-typedef itk::TransformIOBaseTemplate<double> TransformIOBase;
+typedef itk::TransformIOBaseTemplate<double,double> TransformIOBase;
 
 } // end namespace itk
 

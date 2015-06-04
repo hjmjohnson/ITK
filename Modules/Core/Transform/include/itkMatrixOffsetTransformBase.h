@@ -71,17 +71,19 @@ namespace itk
 template <
   typename TScalar = double,         // Data type for scalars
   unsigned int NInputDimensions = 3,  // Number of dimensions in the input space
-  unsigned int NOutputDimensions = 3>
+  unsigned int NOutputDimensions = 3,
+  typename TFixedParametersValueType=TScalar>
 // Number of dimensions in the output space
 class MatrixOffsetTransformBase :
-  public Transform<TScalar, NInputDimensions, NOutputDimensions>
+  public Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParametersValueType>
 {
 public:
   /** Standard typedefs   */
   typedef MatrixOffsetTransformBase Self;
   typedef Transform<TScalar,
                     NInputDimensions,
-                    NOutputDimensions>        Superclass;
+                    NOutputDimensions,
+                    TFixedParametersValueType>        Superclass;
 
   typedef SmartPointer<Self>       Pointer;
   typedef SmartPointer<const Self> ConstPointer;
@@ -99,8 +101,10 @@ public:
                        NOutputDimensions * ( NInputDimensions + 1 ) );
 
   /** Parameters Type   */
-  typedef typename Superclass::ParametersType      ParametersType;
-  typedef typename Superclass::ParametersValueType ParametersValueType;
+  typedef typename Superclass::FixedParametersType      FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType FixedParametersValueType;
+  typedef typename Superclass::ParametersType           ParametersType;
+  typedef typename Superclass::ParametersValueType      ParametersValueType;
 
   /** Jacobian Type   */
   typedef typename Superclass::JacobianType JacobianType;
@@ -326,10 +330,10 @@ public:
   const ParametersType & GetParameters() const ITK_OVERRIDE;
 
   /** Set the fixed parameters and update internal transformation. */
-  virtual void SetFixedParameters(const ParametersType &) ITK_OVERRIDE;
+  virtual void SetFixedParameters(const FixedParametersType &) ITK_OVERRIDE;
 
   /** Get the Fixed Parameters. */
-  virtual const ParametersType & GetFixedParameters() const ITK_OVERRIDE;
+  virtual const FixedParametersType & GetFixedParameters() const ITK_OVERRIDE;
 
   /** Compose with another MatrixOffsetTransformBase
    *

@@ -542,7 +542,7 @@ DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
 template <typename TScalar, unsigned int NDimensions, typename TFixedParameterScalar>
 void
 DisplacementFieldTransform<TScalar, NDimensions, TFixedParameterScalar>
-::SetFixedParameters( const ParametersType & fixedParameters )
+::SetFixedParameters( const FixedParametersType & fixedParameters )
 {
   if( fixedParameters.Size() != NDimensions * ( NDimensions + 3 ) )
     {

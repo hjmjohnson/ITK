@@ -827,7 +827,7 @@ CompositeTransform<TScalar, NDimensions>
 
 
 template <typename TScalar, unsigned int NDimensions>
-const typename CompositeTransform<TScalar, NDimensions>::ParametersType &
+const typename CompositeTransform<TScalar, NDimensions>::FixedParametersType &
 CompositeTransform<TScalar, NDimensions>
 ::GetFixedParameters() const
   {
@@ -844,7 +844,7 @@ CompositeTransform<TScalar, NDimensions>
   do
     {
     it--;
-    const ParametersType & subFixedParameters = (*it)->GetFixedParameters();
+    const FixedParametersType & subFixedParameters = (*it)->GetFixedParameters();
     /* use vnl_vector data_block() to get data ptr */
     std::copy(subFixedParameters.data_block(),
               subFixedParameters.data_block()+subFixedParameters.Size(),
@@ -859,7 +859,7 @@ CompositeTransform<TScalar, NDimensions>
 template <typename TScalar, unsigned int NDimensions>
 void
 CompositeTransform<TScalar, NDimensions>
-::SetFixedParameters(const ParametersType & inputParameters)
+::SetFixedParameters(const FixedParametersType & inputParameters)
 {
   /* Assumes input params are concatenation of the parameters of the
    * sub transforms currently selected for optimization. */
@@ -883,8 +883,8 @@ CompositeTransform<TScalar, NDimensions>
   do
     {
     it--;
-    ParametersType & subFixedParameters =
-      const_cast<ParametersType &>( (*it)->GetFixedParameters() );
+    FixedParametersType & subFixedParameters =
+      const_cast<FixedParametersType &>( (*it)->GetFixedParameters() );
     /* Use vnl_vector data_block() to get data ptr */
     std::copy(&(this->m_FixedParameters.data_block() )[offset],
               &(this->m_FixedParameters.data_block() )[offset]+subFixedParameters.Size(),

@@ -42,15 +42,15 @@ namespace itk
  *  of CompositeTransform.
  * \ingroup ITKIOTransformBase
  */
-template <typename TScalar>
+template <typename TScalar, typename TFixedParameterValueType=TScalar>
 class CompositeTransformIOHelperTemplate
 {
 public:
-  typedef typename TransformIOBaseTemplate<TScalar>::TransformType          TransformType;
-  typedef typename TransformIOBaseTemplate<TScalar>::TransformPointer       TransformPointer;
-  typedef typename TransformIOBaseTemplate<TScalar>::TransformListType      TransformListType;
-  typedef typename TransformIOBaseTemplate<TScalar>::ConstTransformPointer  ConstTransformPointer;
-  typedef typename TransformIOBaseTemplate<TScalar>::ConstTransformListType ConstTransformListType;
+  typedef typename TransformIOBaseTemplate<TScalar,TFixedParameterValueType>::TransformType          TransformType;
+  typedef typename TransformIOBaseTemplate<TScalar,TFixedParameterValueType>::TransformPointer       TransformPointer;
+  typedef typename TransformIOBaseTemplate<TScalar,TFixedParameterValueType>::TransformListType      TransformListType;
+  typedef typename TransformIOBaseTemplate<TScalar,TFixedParameterValueType>::ConstTransformPointer  ConstTransformPointer;
+  typedef typename TransformIOBaseTemplate<TScalar,TFixedParameterValueType>::ConstTransformListType ConstTransformListType;
 
   /** from a composite transform, recover a
    * TransformIOBase::ConstTransformList.

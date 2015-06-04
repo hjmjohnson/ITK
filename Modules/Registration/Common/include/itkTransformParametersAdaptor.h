@@ -72,6 +72,8 @@ public:
   typedef TTransform                                     TransformType;
   typedef typename TransformType::Pointer                TransformPointer;
   typedef typename TransformType::ParametersType         ParametersType;
+  typedef typename Superclass::FixedParametersValueType  FixedParametersValueType;
+  typedef typename TransformType::FixedParametersType    FixedParametersType;
   typedef typename Superclass::ParametersValueType       ParametersValueType;
 
   /** Set the transform to be adapted */
@@ -88,7 +90,7 @@ public:
   itkNewMacro( Self );
 
   /** Set the fixed parameters */
-  virtual void SetRequiredFixedParameters( const ParametersType fixedParameters ) ITK_OVERRIDE
+  virtual void SetRequiredFixedParameters( const FixedParametersType fixedParameters ) ITK_OVERRIDE
     {
     itkDebugMacro("setting RequiredFixedParameters to " << fixedParameters );
     if ( this->m_RequiredFixedParameters != fixedParameters )
@@ -99,7 +101,7 @@ public:
     }
 
   /** Get the fixed parameters */
-  virtual const ParametersType & GetRequiredFixedParameters() const ITK_OVERRIDE
+  virtual const FixedParametersType & GetRequiredFixedParameters() const ITK_OVERRIDE
     {
     return this->m_RequiredFixedParameters;
     }

@@ -79,10 +79,10 @@ public:
   virtual void SetTransform( TransformBaseType *_arg, void * priorityLower = ITK_NULLPTR ) = 0;
 
   /** Set the fixed parameters */
-  itkSetMacro( RequiredFixedParameters, ParametersType );
+  itkSetMacro( RequiredFixedParameters, FixedParametersType );
 
   /** Get the fixed parameters */
-  itkGetConstReferenceMacro( RequiredFixedParameters, ParametersType );
+  itkGetConstReferenceMacro( RequiredFixedParameters, FixedParametersType );
 
   /** Initialize the transform using the specified fixed parameters */
   virtual void AdaptTransformParameters() = 0;

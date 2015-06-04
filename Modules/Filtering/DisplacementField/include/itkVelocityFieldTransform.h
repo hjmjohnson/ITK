@@ -57,8 +57,10 @@ public:
   typedef typename Superclass::ScalarType ScalarType;
 
   /** Type of the input parameters. */
-  typedef typename Superclass::ParametersType          ParametersType;
-  typedef typename Superclass::ParametersValueType     ParametersValueType;
+  typedef typename Superclass::FixedParametersType       FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType  FixedParametersValueType;
+  typedef typename Superclass::ParametersType            ParametersType;
+  typedef typename Superclass::ParametersValueType       ParametersValueType;
 
   /** Transform category type. */
   typedef typename Superclass::TransformCategoryType TransformCategoryType;
@@ -117,7 +119,7 @@ public:
   virtual void SetVelocityField( VelocityFieldType * );
   itkGetModifiableObjectMacro(VelocityField, VelocityFieldType );
 
-  virtual void SetFixedParameters( const ParametersType & ) ITK_OVERRIDE;
+  virtual void SetFixedParameters( const FixedParametersType & ) ITK_OVERRIDE;
 
   /** Get/Set the interpolator.
    * Create out own set accessor that assigns the velocity field */

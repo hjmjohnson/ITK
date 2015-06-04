@@ -28,19 +28,19 @@
 #include "itkNumberToString.h"
 namespace itk
 {
-template<typename ParametersValueType>
-TxtTransformIOTemplate<ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::TxtTransformIOTemplate()
 {}
 
-template<typename ParametersValueType>
-TxtTransformIOTemplate<ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::~TxtTransformIOTemplate()
 {}
 
-template<typename ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
 bool
-TxtTransformIOTemplate<ParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::CanReadFile(const char *fileName)
 {
   bool recognizedExtension = false;
@@ -50,9 +50,9 @@ TxtTransformIOTemplate<ParametersValueType>
   return recognizedExtension;
 }
 
-template<typename ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
 bool
-TxtTransformIOTemplate<ParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::CanWriteFile(const char *fileName)
 {
   bool recognizedExtension = false;
@@ -62,9 +62,9 @@ TxtTransformIOTemplate<ParametersValueType>
   return recognizedExtension;
 }
 
-template<typename ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
 std::string
-TxtTransformIOTemplate<ParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::trim(std::string const & source, char const *delims)
 {
   std::string            result(source);
@@ -87,9 +87,9 @@ TxtTransformIOTemplate<ParametersValueType>
   return result;
 }
 
-template<typename ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
 void
-TxtTransformIOTemplate<ParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::ReadComponentFile( std::string Value )
 {
   /* Used for reading component files listed in a composite transform
@@ -118,9 +118,9 @@ TxtTransformIOTemplate<ParametersValueType>
   this->GetReadTransformList().push_back (transform);
 }
 
-template<typename ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
 void
-TxtTransformIOTemplate<ParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::Read()
 {
   TransformPointer transform;
@@ -158,15 +158,7 @@ TxtTransformIOTemplate<ParametersValueType>
   in.close();
 
   // Read line by line
-  typename TransformType::ParametersType   VectorBuffer;
   std::string::size_type position = 0;
-
-  typename TransformType::ParametersType TmpParameterArray;
-  typename TransformType::ParametersType TmpFixedParameterArray;
-  TmpParameterArray.clear();
-  TmpFixedParameterArray.clear();
-  bool haveFixedParameters = false;
-  bool haveParameters = false;
 
   //
   // check for line end convention
@@ -217,7 +209,7 @@ TxtTransformIOTemplate<ParametersValueType>
     itkDebugMacro ("Name: \"" << Name << "\"");
     itkDebugMacro ("Value: \"" << Value << "\"");
     itksys_ios::istringstream parse (Value);
-    VectorBuffer.clear();
+
     if ( Name == "Transform" )
       {
       // Transform name should be modified to have the output precision type.
@@ -231,67 +223,44 @@ TxtTransformIOTemplate<ParametersValueType>
       /* Used by CompositeTransform file */
       ReadComponentFile( Value );
       }
-    else if ( Name == "Parameters" || Name == "FixedParameters" )
+    else if ( Name == "Parameters" )
       {
-      VectorBuffer.clear();
-
+      typename TransformType::ParametersType TmpParameterArray;
+      TmpParameterArray.clear();
       // Read them
-      parse >> VectorBuffer;
-      itkDebugMacro ("Parsed: " << VectorBuffer);
-      if ( Name == "Parameters" )
+      parse >> TmpParameterArray;
+      itkDebugMacro ("Parsed: " << TmpParameterArray);
+
+      itkDebugMacro ("Setting Parameters: " << TmpParameterArray);
+      transform->SetParametersByValue (TmpParameterArray);
+      itkDebugMacro ("Set Transform Parameters");
+      TmpParameterArray.clear();
+      }
+    else if ( Name == "FixedParameters" )
+      {
+      typename TransformType::FixedParametersType TmpFixedParameterArray;
+      TmpFixedParameterArray.clear();
+      // Read them
+      parse >> TmpFixedParameterArray;
+      itkDebugMacro ("Parsed: " << TmpFixedParameterArray);
+      itkDebugMacro ("Setting Fixed Parameters: " << TmpFixedParameterArray);
+      if ( !transform )
         {
-        TmpParameterArray = VectorBuffer;
-        itkDebugMacro ("Setting Parameters: " << TmpParameterArray);
-        if ( haveFixedParameters )
-          {
-          transform->SetFixedParameters (TmpFixedParameterArray);
-          itkDebugMacro ("Set Transform Fixed Parameters");
-          transform->SetParametersByValue (TmpParameterArray);
-          itkDebugMacro ("Set Transform Parameters");
-          TmpParameterArray.clear();
-          TmpFixedParameterArray.clear();
-          haveFixedParameters = false;
-          haveParameters = false;
-          }
-        else
-          {
-          haveParameters = true;
-          }
+        itkExceptionMacro ("Please set the transform before parameters"
+                           "or fixed parameters");
         }
-      else if ( Name == "FixedParameters" )
-        {
-        TmpFixedParameterArray = VectorBuffer;
-        itkDebugMacro ("Setting Fixed Parameters: " << TmpFixedParameterArray);
-        if ( !transform )
-          {
-          itkExceptionMacro ("Please set the transform before parameters"
-                             "or fixed parameters");
-          }
-        if ( haveParameters )
-          {
-          transform->SetFixedParameters (TmpFixedParameterArray);
-          itkDebugMacro ("Set Transform Fixed Parameters");
-          transform->SetParametersByValue (TmpParameterArray);
-          itkDebugMacro ("Set Transform Parameters");
-          TmpParameterArray.clear();
-          TmpFixedParameterArray.clear();
-          haveFixedParameters = false;
-          haveParameters = false;
-          }
-        else
-          {
-          haveFixedParameters = true;
-          }
-        }
+      transform->SetFixedParameters (TmpFixedParameterArray);
+      itkDebugMacro ("Set Transform Fixed Parameters");
+      TmpFixedParameterArray.clear();
       }
     }
 }
 
 namespace {
-template<typename ParametersValueType>
-void print_vector(std::ofstream& s, vnl_vector<ParametersValueType> const &v)
+template<typename PValueType>
+void print_vector(std::ofstream& s, vnl_vector<PValueType> const &v)
 {
-  NumberToString<ParametersValueType> convert;
+  NumberToString<PValueType> convert;
   for (unsigned i = 0; i+1 < v.size(); ++i)
     {
     s << convert(v[i]) << ' ';
@@ -303,9 +272,9 @@ void print_vector(std::ofstream& s, vnl_vector<ParametersValueType> const &v)
 }
 }
 
-template<typename ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
 void
-TxtTransformIOTemplate<ParametersValueType>
+TxtTransformIOTemplate<ParametersValueType, FixedParametersValueType>
 ::Write()
 {
   ConstTransformListType &transformList =
@@ -327,7 +296,7 @@ TxtTransformIOTemplate<ParametersValueType>
     {
     transformList = helper.GetTransformList(transformList.front().GetPointer());
     }
-  vnl_vector< ParametersValueType > TempArray;
+
   int count = 0;
 
   typename ConstTransformListType::const_iterator end = transformList.end();
@@ -351,13 +320,13 @@ TxtTransformIOTemplate<ParametersValueType>
       }
     else
       {
-      TempArray = ( *it )->GetParameters();
+      vnl_vector< ParametersValueType > TempArray = ( *it )->GetParameters();
       out << "Parameters: ";// << TempArray << std::endl;
-      print_vector(out,TempArray);
+      print_vector< ParametersValueType >(out,TempArray);
       out << std::endl;
-      TempArray = ( *it )->GetFixedParameters();
+      vnl_vector< FixedParametersValueType > FixedTempArray = ( *it )->GetFixedParameters();
       out << "FixedParameters: ";// << TempArray << std::endl;
-      print_vector(out,TempArray);
+      print_vector< FixedParametersValueType >(out,FixedTempArray);
       out << std::endl;
       }
     }

@@ -79,15 +79,15 @@ namespace itk
 template <typename TScalar,
           unsigned int NInputDimensions = 3,
           unsigned int NOutputDimensions = 3,
-          typename TFixedParameterScalar=TScalar>
+          typename TFixedParameterScalar=double> //TODO: Should be =TScalar
 class Transform : public TransformBaseTemplate< TScalar, TFixedParameterScalar >
 {
 public:
   /** Standard class typedefs. */
-  typedef Transform                        Self;
-  typedef TransformBaseTemplate< TScalar > Superclass;
-  typedef SmartPointer< Self >             Pointer;
-  typedef SmartPointer< const Self >       ConstPointer;
+  typedef Transform                                               Self;
+  typedef TransformBaseTemplate< TScalar, TFixedParameterScalar > Superclass;
+  typedef SmartPointer< Self >                                    Pointer;
+  typedef SmartPointer< const Self >                              ConstPointer;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro(Transform, TransformBaseTemplate);
@@ -111,15 +111,15 @@ public:
     return NOutputDimensions;
   }
 
-  /** Type of the scalar representing coordinate and vector elements. */
-  typedef  TScalar ScalarType;
-
   /** Type of the input parameters. */
   typedef  typename Superclass::FixedParametersType      FixedParametersType;
   typedef  typename Superclass::FixedParametersValueType FixedParametersValueType;
-  typedef  typename Superclass::ParametersType      ParametersType;
-  typedef  typename Superclass::ParametersValueType ParametersValueType;
-  typedef  Array<ParametersValueType>               DerivativeType;
+  typedef  typename Superclass::ParametersType           ParametersType;
+  typedef  typename Superclass::ParametersValueType      ParametersValueType;
+  typedef  Array<ParametersValueType>                    DerivativeType;
+
+  /** Type of the scalar representing coordinate and vector elements. */
+  typedef  ParametersValueType           ScalarType;
 
   /** Type of the Jacobian matrix. */
   typedef  Array2D<ParametersValueType> JacobianType;
@@ -160,7 +160,8 @@ public:
   /** Base inverse transform type. This type should not be changed to the
    * concrete inverse transform type or inheritance would be lost. */
   typedef Transform<
-    TScalar, NOutputDimensions, NInputDimensions> InverseTransformBaseType;
+    TScalar, NOutputDimensions, NInputDimensions,
+    TFixedParameterScalar> InverseTransformBaseType;
 
   typedef typename InverseTransformBaseType::Pointer
   InverseTransformBasePointer;
@@ -381,7 +382,8 @@ public:
    * SetParameters is called at the end of this method, to allow the transform
    * to perform any required operations on the updated parameters - typically
    * a conversion to member variables for use in TransformPoint. */
-  virtual void UpdateTransformParameters( const DerivativeType & update, TScalar factor = 1.0 );
+  virtual void UpdateTransformParameters( const DerivativeType & update,
+                                          ParametersValueType factor = 1.0 );
 
   /** Return the number of local parameters that completely defines the
    *  Transform at an individual voxel.

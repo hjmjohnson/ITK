@@ -31,20 +31,23 @@ namespace itk
    * \wikiexample{IO/TransformFileReader,Read a transform from a file}
    * \endwiki
    */
-template<typename ScalarType>
+template<typename ScalarType, typename TFixedParameterValueType=ScalarType>
 class TransformFileReaderTemplate: public LightProcessObject
 {
 public:
 
   /** SmartPointer typedef support */
-  typedef TransformFileReaderTemplate         Self;
-  typedef SmartPointer< Self >                Pointer;
-  typedef TransformBaseTemplate< ScalarType > TransformType;
+  typedef TransformFileReaderTemplate                                   Self;
+  typedef SmartPointer< Self >                                          Pointer;
+  typedef TransformBaseTemplate< ScalarType, TFixedParameterValueType > TransformType;
 
-  typedef typename TransformType::ParametersType      ParametersType;
-  typedef TransformIOBaseTemplate< ScalarType >       TransformIOType;
-  typedef typename TransformIOType::TransformPointer  TransformPointer;
-  typedef typename TransformIOType::TransformListType TransformListType;
+  typedef ScalarType               ParameterValueType;
+  typedef TFixedParameterValueType FixedParameterValueType;
+
+  typedef typename TransformType::ParametersType                         ParametersType;
+  typedef TransformIOBaseTemplate< ScalarType, FixedParameterValueType > TransformIOType;
+  typedef typename TransformIOType::TransformPointer                     TransformPointer;
+  typedef typename TransformIOType::TransformListType                    TransformListType;
 
   /** Method for creation through the object factory */
   itkNewMacro(Self);
@@ -93,7 +96,7 @@ private:
 };
 
 /** This helps to meet backward compatibility */
-typedef itk::TransformFileReaderTemplate<double> TransformFileReader;
+typedef itk::TransformFileReaderTemplate<double,double> TransformFileReader;
 
 } // namespace itk
 

@@ -293,6 +293,7 @@ SyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, TVirtual
   << " " << this->m_VirtualDomainImage->GetLargestPossibleRegion().GetSize()
   << " " << this->m_VirtualDomainImage->GetSpacing()
   << std::endl;
+#if 0
   std::cout << __FILE__ << " " << __LINE__ << "  FI   " << fixedImages[0]->GetOrigin()
   << " " << fixedImages[0]->GetLargestPossibleRegion().GetSize()
   << " " << fixedImages[0]->GetSpacing()
@@ -302,15 +303,17 @@ SyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, TVirtual
   << " " << metricGradientField->GetLargestPossibleRegion().GetSize()
   << " " << metricGradientField->GetSpacing()
   << std::endl;
-
+#endif
   DisplacementFieldPointer updateField = this->GaussianSmoothDisplacementField( metricGradientField,
     this->m_GaussianSmoothingVarianceForTheUpdateField );
 
   DisplacementFieldPointer scaledUpdateField = this->ScaleUpdateField( updateField );
+#if 0
   std::cout << __FILE__ << " " << __LINE__ << " sUF   " << scaledUpdateField->GetOrigin()
   << " " << scaledUpdateField->GetLargestPossibleRegion().GetSize()
   << " " << scaledUpdateField->GetSpacing()
   << std::endl;
+#endif
   std::cout << __FILE__ << " " << __LINE__ << "  UF   " << updateField->GetOrigin()
   << " " << updateField->GetLargestPossibleRegion().GetSize()
   << " " << updateField->GetSpacing()
@@ -320,11 +323,12 @@ SyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, TVirtual
   << " " << this->m_FixedToMiddleTransform->GetDisplacementField()->GetLargestPossibleRegion().GetSize()
   << " " << this->m_FixedToMiddleTransform->GetDisplacementField()->GetSpacing()
   << std::endl;
+#if 0
   std::cout << __FILE__ << " " << __LINE__ << " M2M   " << this->m_MovingToMiddleTransform->GetDisplacementField()->GetOrigin()
   << " " << this->m_MovingToMiddleTransform->GetDisplacementField()->GetLargestPossibleRegion().GetSize()
   << " " << this->m_MovingToMiddleTransform->GetDisplacementField()->GetSpacing()
   << std::endl;
-
+#endif
 
   return scaledUpdateField;
 }

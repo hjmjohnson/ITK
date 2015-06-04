@@ -165,7 +165,7 @@ VelocityFieldTransform<TScalar, NDimensions>
 template <typename TScalar, unsigned int NDimensions>
 void
 VelocityFieldTransform<TScalar, NDimensions>
-::SetFixedParameters( const ParametersType & fixedParameters )
+::SetFixedParameters( const FixedParametersType & fixedParameters )
 {
   if( fixedParameters.Size() != VelocityFieldDimension * ( VelocityFieldDimension + 3 ) )
     {

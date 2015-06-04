@@ -167,7 +167,7 @@ ConstantVelocityFieldTransform<TScalar, NDimensions>
 template <typename TScalar, unsigned int NDimensions>
 void
 ConstantVelocityFieldTransform<TScalar, NDimensions>
-::SetFixedParameters( const ParametersType & fixedParameters )
+::SetFixedParameters( const FixedParametersType & fixedParameters )
 {
   if( fixedParameters.Size() != ConstantVelocityFieldDimension * ( ConstantVelocityFieldDimension + 3 ) )
     {

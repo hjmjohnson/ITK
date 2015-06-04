@@ -26,19 +26,20 @@ namespace itk
    * \brief Create instances of TxtTransformIOTemplate objects.
    * \ingroup ITKIOTransformInsightLegacy
    */
-template<typename ParametersValueType>
-class ITKIOTransformInsightLegacy_EXPORT TxtTransformIOTemplate:public TransformIOBaseTemplate<ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType=ParametersValueType>
+class ITKIOTransformInsightLegacy_EXPORT TxtTransformIOTemplate:public TransformIOBaseTemplate<ParametersValueType,FixedParametersValueType>
 {
 public:
-  typedef TxtTransformIOTemplate                        Self;
-  typedef TransformIOBaseTemplate<ParametersValueType>  Superclass;
-  typedef SmartPointer< Self >                          Pointer;
-  typedef typename Superclass::TransformType            TransformType;
-  typedef typename Superclass::TransformPointer         TransformPointer;
-  typedef typename Superclass::TransformListType        TransformListType;
-  typedef typename TransformIOBaseTemplate
-                      <ParametersValueType>::ConstTransformListType
-                                                        ConstTransformListType;
+  typedef TxtTransformIOTemplate                                                Self;
+  typedef TransformIOBaseTemplate<ParametersValueType,FixedParametersValueType> Superclass;
+  typedef SmartPointer< Self >                                                  Pointer;
+  typedef typename Superclass::TransformType                                    TransformType;
+  typedef typename Superclass::TransformPointer                                 TransformPointer;
+  typedef typename Superclass::TransformListType                                TransformListType;
+  typedef typename TransformIOBaseTemplate<
+                      ParametersValueType,
+                      FixedParametersValueType>::ConstTransformListType
+                                                                                ConstTransformListType;
 
   /** Run-time type information (and related methods). */
   itkTypeMacro(TxtTransformIOTemplate, Superclass);

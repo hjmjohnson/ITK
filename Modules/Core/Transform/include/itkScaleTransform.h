@@ -65,7 +65,8 @@ public:
   typedef typename Superclass::ScalarType ScalarType;
 
   /** Parameters type. */
-  typedef typename Superclass::ParametersType ParametersType;
+  typedef typename Superclass::FixedParametersType FixedParametersType;
+  typedef typename Superclass::ParametersType      ParametersType;
 
   /** Jacobian type. */
   typedef typename Superclass::JacobianType JacobianType;
@@ -114,7 +115,7 @@ public:
    * transformation. This transform has the center point as it's fixed
    * parameters.
    */
-  virtual void SetFixedParameters(const ParametersType &params) ITK_OVERRIDE
+  virtual void SetFixedParameters(const FixedParametersType &params) ITK_OVERRIDE
     {
       if (params.GetSize() != NDimensions)
         {

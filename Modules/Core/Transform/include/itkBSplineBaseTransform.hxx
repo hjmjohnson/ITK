@@ -228,7 +228,7 @@ BSplineBaseTransform<TScalar, NDimensions, VSplineOrder>
 
 // Get the parameters
 template <typename TScalar, unsigned int NDimensions, unsigned int VSplineOrder>
-const typename BSplineBaseTransform<TScalar, NDimensions, VSplineOrder>::ParametersType &
+const typename BSplineBaseTransform<TScalar, NDimensions, VSplineOrder>::FixedParametersType &
 BSplineBaseTransform<TScalar, NDimensions, VSplineOrder>
 ::GetFixedParameters() const
 {

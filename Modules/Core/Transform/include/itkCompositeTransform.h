@@ -109,6 +109,8 @@ public:
   /** Scalar type. */
   typedef typename Superclass::ScalarType                 ScalarType;
   /** Parameters type. */
+  typedef typename Superclass::FixedParametersType        FixedParametersType;
+  typedef typename Superclass::FixedParametersValueType   FixedParametersValueType;
   typedef typename Superclass::ParametersType             ParametersType;
   typedef typename Superclass::ParametersValueType        ParametersValueType;
   /** Derivative type */
@@ -327,11 +329,11 @@ public:
 
   /* GetFixedParameters only for transforms that are set to be optimized
    * See GetParameters() for parameter ordering. */
-  virtual const ParametersType & GetFixedParameters() const ITK_OVERRIDE;
+  virtual const FixedParametersType & GetFixedParameters() const ITK_OVERRIDE;
 
   /* SetFixedParameters only for transforms that are set to be optimized.
    * See GetParameters() for parameter ordering. */
-  virtual void  SetFixedParameters(const ParametersType & fixedParameters) ITK_OVERRIDE;
+  virtual void  SetFixedParameters(const FixedParametersType & fixedParameters) ITK_OVERRIDE;
 
   /* Get total number of parameters for transforms that are set to be
    * optimized */

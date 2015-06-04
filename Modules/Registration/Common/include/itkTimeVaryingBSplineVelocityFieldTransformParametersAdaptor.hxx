@@ -191,7 +191,7 @@ TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<TTransform>
 template<typename TTransform>
 void
 TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<TTransform>
-::SetRequiredFixedParameters( const ParametersType fixedParameters )
+::SetRequiredFixedParameters( const FixedParametersType fixedParameters )
 {
   Superclass::SetRequiredFixedParameters( fixedParameters );
 

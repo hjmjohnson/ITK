@@ -84,7 +84,7 @@ namespace itk
  *
  * \ingroup ITKOptimizersv4
  */
-template<unsigned int TFixedDimension, unsigned int TMovingDimension, typename TVirtualImage = Image<double, TFixedDimension>, class TInternalComputationValueType=double>
+template<unsigned int TFixedDimension, unsigned int TMovingDimension, typename TVirtualImage = Image<double, TFixedDimension>, class TInternalComputationValueType=double, typename TFixedParametersValueType=TInternalComputationValueType>
 class ObjectToObjectMetric:
   public ObjectToObjectMetricBaseTemplate< TInternalComputationValueType >
 {
@@ -147,8 +147,14 @@ public:
   typedef typename VirtualPointSetType::Pointer                                 VirtualPointSetPointer;
 
   /**  Type of the Transform Base classes */
-  typedef Transform<TInternalComputationValueType, TVirtualImage::ImageDimension, TMovingDimension> MovingTransformType;
-  typedef Transform<TInternalComputationValueType, TVirtualImage::ImageDimension, TFixedDimension>  FixedTransformType;
+  typedef Transform<TInternalComputationValueType,
+                    TVirtualImage::ImageDimension,
+                    TMovingDimension,
+                    TFixedParametersValueType>         MovingTransformType;
+  typedef Transform<TInternalComputationValueType,
+                    TVirtualImage::ImageDimension,
+                    TFixedDimension,
+                    TFixedParametersValueType>         FixedTransformType;
 
   typedef typename FixedTransformType::Pointer         FixedTransformPointer;
   typedef typename FixedTransformType::InputPointType  FixedInputPointType;

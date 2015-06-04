@@ -27,21 +27,21 @@ namespace itk
 {
 
 
-template< typename TScalar >
-TransformIOBaseTemplate< TScalar >
+template< typename TScalar, typename TFixedParameterValueType >
+TransformIOBaseTemplate< TScalar, TFixedParameterValueType >
 ::TransformIOBaseTemplate() :
   m_AppendMode(false)
 {
 }
 
-template< typename TScalar >
-TransformIOBaseTemplate< TScalar >
+template< typename TScalar, typename TFixedParameterValueType >
+TransformIOBaseTemplate< TScalar, TFixedParameterValueType >
 ::~TransformIOBaseTemplate()
 {
 }
 
-template< typename TScalar >
-void TransformIOBaseTemplate< TScalar >
+template< typename TScalar, typename TFixedParameterValueType >
+void TransformIOBaseTemplate< TScalar, TFixedParameterValueType >
 ::CreateTransform(TransformPointer & ptr, const std::string & ClassName)
 {
   //
@@ -73,8 +73,8 @@ void TransformIOBaseTemplate< TScalar >
   ptr->UnRegister();
   }
 
-template< typename TScalar >
-void TransformIOBaseTemplate< TScalar >
+template< typename TScalar, typename TFixedParameterValueType >
+void TransformIOBaseTemplate< TScalar, TFixedParameterValueType >
 ::OpenStream(std::ofstream & outputStream, bool binary)
 {
   std::ios::openmode mode(std::ios::out);
@@ -97,15 +97,15 @@ void TransformIOBaseTemplate< TScalar >
     }
 }
 
-template< typename TScalar >
-void TransformIOBaseTemplate< TScalar >
+template< typename TScalar, typename TFixedParameterValueType >
+void TransformIOBaseTemplate< TScalar, TFixedParameterValueType >
 ::SetTransformList(ConstTransformListType & transformList)
 {
   this->m_WriteTransformList = transformList;
 }
 
-template< typename TScalar >
-void TransformIOBaseTemplate< TScalar >
+template< typename TScalar, typename TFixedParameterValueType >
+void TransformIOBaseTemplate< TScalar, TFixedParameterValueType >
 ::PrintSelf(std::ostream & os, Indent indent) const
 {
 Superclass::PrintSelf(os, indent);

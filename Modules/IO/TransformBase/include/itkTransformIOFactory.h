@@ -31,7 +31,7 @@ typedef enum { ReadMode, WriteMode } TransformIOFactoryFileModeType;
  * \brief Create instances of TransformIO objects using an object factory.
  * \ingroup ITKIOTransformBase
  */
-template<typename ParametersValueType>
+template<typename ParametersValueType, typename FixedParametersValueType>
 class TransformIOFactoryTemplate:public Object
 {
 public:
@@ -47,7 +47,8 @@ public:
   itkTypeMacro(TransformIOFactoryTemplate, Object);
 
   /** Convenient typedefs. */
-  typedef typename TransformIOBaseTemplate<ParametersValueType>::Pointer TransformIOBasePointer;
+  typedef typename TransformIOBaseTemplate<ParametersValueType,
+                               FixedParametersValueType>::Pointer TransformIOBasePointer;
 
   /** Create the appropriate TransformIO depending on
    *  the particulars of the file.
@@ -68,7 +69,7 @@ private:
 };
 
 /** This helps to meet backward compatibility */
-typedef TransformIOFactoryTemplate<double> TransformIOFactory;
+typedef TransformIOFactoryTemplate<double,double> TransformIOFactory;
 
 } // end namespace itk
 

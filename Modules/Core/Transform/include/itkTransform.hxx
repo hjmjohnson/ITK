@@ -106,7 +106,7 @@ template <typename TScalar,
           typename TFixedParameterScalar>
 void
 Transform<TScalar, NInputDimensions, NOutputDimensions, TFixedParameterScalar>
-::UpdateTransformParameters( const DerivativeType & update, TScalar factor )
+::UpdateTransformParameters( const DerivativeType & update, ParametersValueType factor )
 {
   NumberOfParametersType numberOfParameters = this->GetNumberOfParameters();
 

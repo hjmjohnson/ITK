@@ -67,8 +67,10 @@ public:
   typedef typename Superclass::ScalarType ScalarType;
 
   /** Parameters type. */
-  typedef typename Superclass::ParametersType ParametersType;
-  typedef typename ParametersType::ValueType  ParameterValueType;
+  typedef typename Superclass::FixedParametersType FixedParametersType;
+  typedef typename FixedParametersType::ValueType  FixedParameterValueType;
+  typedef typename Superclass::ParametersType      ParametersType;
+  typedef typename ParametersType::ValueType       ParameterValueType;
 
   /** Jacobian type. */
   typedef typename Superclass::JacobianType JacobianType;
@@ -133,7 +135,7 @@ public:
   /** Set the fixed parameters and update internal
    * transformation. This transform has no fixed paramaters
    */
-  virtual void SetFixedParameters(const ParametersType &) ITK_OVERRIDE
+  virtual void SetFixedParameters(const FixedParametersType &) ITK_OVERRIDE
   {
   }
 

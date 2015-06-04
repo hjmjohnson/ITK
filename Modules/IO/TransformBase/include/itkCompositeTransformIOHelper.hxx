@@ -22,9 +22,9 @@
 
 namespace itk
 {
-template <typename TScalar>
-typename CompositeTransformIOHelperTemplate<TScalar>::ConstTransformListType &
-CompositeTransformIOHelperTemplate<TScalar>
+template <typename TScalar, typename TFixedParameterValueType>
+typename CompositeTransformIOHelperTemplate<TScalar, TFixedParameterValueType>::ConstTransformListType &
+CompositeTransformIOHelperTemplate<TScalar, TFixedParameterValueType>
 ::GetTransformList(const TransformType *transform)
 {
   this->m_TransformList.clear();
@@ -45,9 +45,9 @@ CompositeTransformIOHelperTemplate<TScalar>
   return m_TransformList;
 }
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParameterValueType>
 void
-CompositeTransformIOHelperTemplate<TScalar>
+CompositeTransformIOHelperTemplate<TScalar, TFixedParameterValueType>
 ::SetTransformList(TransformType *transform,TransformListType &transformList)
 {
   // try each CompositeTransform Type, starting with
@@ -66,10 +66,10 @@ CompositeTransformIOHelperTemplate<TScalar>
     }
 }
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParameterValueType>
 template <unsigned TDim>
 int
-CompositeTransformIOHelperTemplate<TScalar>
+CompositeTransformIOHelperTemplate<TScalar, TFixedParameterValueType>
 ::BuildTransformList(const TransformType *transform)
 {
   //
@@ -107,10 +107,10 @@ CompositeTransformIOHelperTemplate<TScalar>
   return 1;
 }
 
-template <typename TScalar>
+template <typename TScalar, typename TFixedParameterValueType>
 template <unsigned TDim>
 int
-CompositeTransformIOHelperTemplate<TScalar>
+CompositeTransformIOHelperTemplate<TScalar, TFixedParameterValueType>
 ::InternalSetTransformList(TransformType *transform,TransformListType &transformList)
 {
   //

@@ -37,23 +37,23 @@
 namespace itk
 {
 
-template< typename TInternalComputationValueType >
-MINCTransformIOTemplate< TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::MINCTransformIOTemplate()
 {
   m_XFM_initialized=false;
 }
 
-template< typename TInternalComputationValueType >
-MINCTransformIOTemplate< TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::~MINCTransformIOTemplate()
 {
   _cleanup();
 }
 
-template< typename TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
 void
-MINCTransformIOTemplate< TInternalComputationValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::_cleanup(void)
 {
   if(m_XFM_initialized)
@@ -61,27 +61,27 @@ MINCTransformIOTemplate< TInternalComputationValueType >
   m_XFM_initialized=false;
 }
 
-template< typename TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
 bool
-MINCTransformIOTemplate< TInternalComputationValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::CanReadFile(const char *fileName)
 {
   std::string ext(itksys::SystemTools::GetFilenameLastExtension(fileName));
   return (ext == ".xfm" || ext==".XFM");
 }
 
-template< typename TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
 bool
-MINCTransformIOTemplate< TInternalComputationValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::CanWriteFile(const char *fileName)
 {
   std::string ext(itksys::SystemTools::GetFilenameLastExtension(fileName));
   return (ext == ".xfm" || ext==".XFM");
 }
 
-template< typename TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
 void
-MINCTransformIOTemplate< TInternalComputationValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::ReadOneTransform(VIO_General_transform *xfm)
 {
   const std::string typeNameString = Superclass::GetTypeNameString();
@@ -141,7 +141,8 @@ MINCTransformIOTemplate< TInternalComputationValueType >
     {
       if(xfm->displacement_volume_file)
         {
-        typedef DisplacementFieldTransform< TInternalComputationValueType, 3 > DisplacementFieldTransformType;
+        typedef DisplacementFieldTransform< TInternalComputationValueType, 3,
+                                            TFixedParametersValueType >        DisplacementFieldTransformType;
         typedef typename DisplacementFieldTransformType::DisplacementFieldType GridImageType;
         typedef ImageFileReader< GridImageType >                               MincReaderType;
 
@@ -183,9 +184,9 @@ MINCTransformIOTemplate< TInternalComputationValueType >
   }
 }
 
-template< typename TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
 void
-MINCTransformIOTemplate< TInternalComputationValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::Read()
 {
   if(input_transform_file((char*)this->GetFileName(), &m_XFM) != VIO_OK)
@@ -199,9 +200,9 @@ MINCTransformIOTemplate< TInternalComputationValueType >
   _cleanup();
 }
 
-template< typename TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
 void
-MINCTransformIOTemplate< TInternalComputationValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::WriteOneTransform(const int transformIndex,
                     const TransformType *curTransform,
                     std::vector<VIO_General_transform> &xfm,
@@ -295,9 +296,9 @@ MINCTransformIOTemplate< TInternalComputationValueType >
   }
 }
 
-template< typename TInternalComputationValueType >
+template< typename TInternalComputationValueType, typename TFixedParametersValueType >
 void
-MINCTransformIOTemplate< TInternalComputationValueType >
+MINCTransformIOTemplate< TInternalComputationValueType, TFixedParametersValueType >
 ::Write()
 {
   std::string xfm_filename = this->GetFileName();
@@ -316,7 +317,7 @@ MINCTransformIOTemplate< TInternalComputationValueType >
 
   std::string compositeTransformType = transformList.front()->GetTransformTypeAsString();
 
-  CompositeTransformIOHelperTemplate< TInternalComputationValueType > helper;
+  CompositeTransformIOHelperTemplate< TInternalComputationValueType, TFixedParametersValueType > helper;
 
   // if the first transform in the list is a
   // composite transform, use its internal list
