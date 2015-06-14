@@ -1,3 +1,9 @@
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  file(GLOB ITK_COMMON_EXPLICIT_SOURCES "*Explicit.cxx")
+else()
+  set(ITK_COMMON_EXPLICIT_SOURCES "")
+endif()
+
 set(ITKCommon_SRCS
 itkMemoryProbesCollectorBase.cxx
 itkCreateObjectFunction.cxx
@@ -89,6 +95,8 @@ itkThreadPool.cxx
 itkRandomVariateGeneratorBase.cxx
 itkAtomicInt.cxx
 itkMath.cxx
+
+${ITK_COMMON_EXPLICIT_SOURCES}
 )
 
 if(WIN32)

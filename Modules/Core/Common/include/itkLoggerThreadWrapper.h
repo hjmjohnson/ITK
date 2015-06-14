@@ -141,4 +141,8 @@ private:
 #include "itkLoggerThreadWrapper.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLoggerThreadWrapperExplicit.h"
+#endif
+
 #endif  // itkLoggerThreadWrapper_h

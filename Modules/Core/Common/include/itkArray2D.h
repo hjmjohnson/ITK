@@ -21,6 +21,7 @@
 #include "itkMacro.h"
 #include "itkIntTypes.h"
 #include "vnl/vnl_matrix.h"
+#include "vnl_Explicit.h"
 
 namespace itk
 {
@@ -114,6 +115,10 @@ template<> ITKCommon_EXPORT std::ostream & operator<<(std::ostream & os, const A
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkArray2D.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkArray2DExplicit.h"
 #endif
 
 #endif

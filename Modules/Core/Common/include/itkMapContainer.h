@@ -353,4 +353,8 @@ private:
 #include "itkMapContainer.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMapContainerExplicit.h"
+#endif
+
 #endif

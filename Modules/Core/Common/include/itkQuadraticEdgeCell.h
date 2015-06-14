@@ -117,4 +117,8 @@ private:
 #include "itkQuadraticEdgeCell.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadraticEdgeCellExplicit.h"
+#endif
+
 #endif

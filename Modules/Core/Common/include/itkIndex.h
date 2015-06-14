@@ -396,4 +396,8 @@ std::ostream & operator<<(std::ostream & os, const Index< VIndexDimension > & in
 }
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkIndexExplicit.h"
+#endif
+
 #endif

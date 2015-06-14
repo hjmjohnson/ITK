@@ -119,4 +119,8 @@ private:
 #include "itkVertexCell.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVertexCellExplicit.h"
+#endif
+
 #endif

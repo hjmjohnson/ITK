@@ -160,4 +160,8 @@ private:
 #include "itkConstantBoundaryCondition.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkConstantBoundaryConditionExplicit.h"
+#endif
+
 #endif

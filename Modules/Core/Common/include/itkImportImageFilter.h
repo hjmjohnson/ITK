@@ -166,4 +166,8 @@ private:
 #include "itkImportImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImportImageFilterExplicit.h"
+#endif
+
 #endif

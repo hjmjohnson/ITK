@@ -152,4 +152,8 @@ inline std::ostream & operator<<(
   return o;
 }
 } // end namespace itk
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkNeighborhoodAllocatorExplicit.h"
+#endif
+
 #endif

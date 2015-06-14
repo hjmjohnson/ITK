@@ -119,4 +119,8 @@ protected: //made protected so other iterators can access
 #include "itkConditionalConstIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkConditionalConstIteratorExplicit.h"
+#endif
+
 #endif

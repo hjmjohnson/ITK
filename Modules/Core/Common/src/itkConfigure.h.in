@@ -60,6 +60,7 @@
 #endif
 #cmakedefine ITK_DYNAMIC_LOADING
 
+#cmakedefine ITK_TEMPLATE_EXPLICIT_INSTANTIATION
 #cmakedefine ITKV3_COMPATIBILITY
 #cmakedefine ITK_LEGACY_REMOVE
 #cmakedefine ITK_LEGACY_SILENT

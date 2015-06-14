@@ -150,4 +150,8 @@ std::ostream & operator<<(std::ostream & os, WeakPointer< T > p)
 }
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkWeakPointerExplicit.h"
+#endif
+
 #endif

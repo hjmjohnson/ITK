@@ -62,4 +62,8 @@ protected:
   virtual ~OrientationAdapterBase() {}
 };
 } // namespace itk
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkOrientationAdapterBaseExplicit.h"
+#endif
+
 #endif // itkOrientationAdapterBase_h

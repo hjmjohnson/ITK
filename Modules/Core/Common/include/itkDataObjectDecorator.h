@@ -142,4 +142,8 @@ private:
 #include "itkDataObjectDecorator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDataObjectDecoratorExplicit.h"
+#endif
+
 #endif

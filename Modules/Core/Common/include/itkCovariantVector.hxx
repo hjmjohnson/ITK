@@ -18,9 +18,17 @@
 #ifndef itkCovariantVector_hxx
 #define itkCovariantVector_hxx
 
-#include "itkCovariantVector.h"
 #include "vnl/vnl_math.h"
 #include "itkNumericTraits.h"
+
+// Numeric traits must be included after (optionally) including the explicit
+// instantiations control of this class, in case the implicit instantiation
+// needs to be disabled.
+//
+// NumericTraits must be included before (optionally) including the .hxx file,
+// in case the .hxx requires to use NumericTraits.
+//
+#include "itkNumericTraitsCovariantVectorPixel.h"
 
 namespace itk
 {

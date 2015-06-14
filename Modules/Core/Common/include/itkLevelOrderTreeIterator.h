@@ -106,4 +106,8 @@ private:
 #include "itkLevelOrderTreeIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLevelOrderTreeIteratorExplicit.h"
+#endif
+
 #endif

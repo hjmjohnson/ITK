@@ -190,4 +190,8 @@ protected: //made protected so other iterators can access
 #include "itkLineConstIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLineConstIteratorExplicit.h"
+#endif
+
 #endif

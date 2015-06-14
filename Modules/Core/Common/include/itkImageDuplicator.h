@@ -102,4 +102,8 @@ private:
 #include "itkImageDuplicator.hxx"
 #endif
 
-#endif /* itkImageDuplicator_h */
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageDuplicatorExplicit.h"
+#endif
+
+#endif //itkImageDuplicator_h

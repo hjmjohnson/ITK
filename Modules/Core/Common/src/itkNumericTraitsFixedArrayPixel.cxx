@@ -15,6 +15,8 @@
  *  limitations under the License.
  *
  *=========================================================================*/
+#include "itkVector.h"
+#include "itkNeighborhood.h"
 #include "itkNumericTraitsFixedArrayPixel.h"
 
 namespace itk

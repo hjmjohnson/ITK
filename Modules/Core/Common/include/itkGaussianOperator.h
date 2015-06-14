@@ -195,4 +195,8 @@ private:
 #include "itkGaussianOperator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGaussianOperatorExplicit.h"
+#endif
+
 #endif

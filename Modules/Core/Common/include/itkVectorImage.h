@@ -354,4 +354,8 @@ private:
 #include "itkVectorImage.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVectorImageExplicit.h"
+#endif
+
 #endif

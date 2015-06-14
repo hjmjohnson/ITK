@@ -114,4 +114,8 @@ public:
 #include "itkFloodFilledImageFunctionConditionalConstIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFloodFilledImageFunctionConditionalConstIteratorExplicit.h"
+#endif
+
 #endif

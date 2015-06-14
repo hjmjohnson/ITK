@@ -215,4 +215,8 @@ protected:
 #include "itkTreeIteratorBase.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTreeIteratorBaseExplicit.h"
+#endif
+
 #endif

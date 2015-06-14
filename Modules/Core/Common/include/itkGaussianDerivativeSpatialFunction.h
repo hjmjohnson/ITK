@@ -118,4 +118,8 @@ private:
 #include "itkGaussianDerivativeSpatialFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGaussianDerivativeSpatialFunctionExplicit.h"
+#endif
+
 #endif

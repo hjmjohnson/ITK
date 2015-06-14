@@ -30,7 +30,7 @@
 namespace itk
 {
 // after use by filter
-bool DataObject:: m_GlobalReleaseDataFlag = false;
+ITKCommon_EXPORT bool DataObject::m_GlobalReleaseDataFlag = false;
 
 DataObjectError
 ::DataObjectError():

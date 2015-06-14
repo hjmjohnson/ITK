@@ -88,4 +88,8 @@ private:
 #include "itkAtanRegularizedHeavisideStepFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkAtanRegularizedHeavisideStepFunctionExplicit.h"
+#endif
+
 #endif

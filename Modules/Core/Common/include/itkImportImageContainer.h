@@ -190,4 +190,8 @@ private:
 #include "itkImportImageContainer.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImportImageContainerExplicit.h"
+#endif
+
 #endif

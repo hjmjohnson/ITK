@@ -138,4 +138,8 @@ public:
 #endif
 */
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkZeroFluxNeumannBoundaryConditionExplicit.h"
+#endif
+
 #endif

@@ -381,10 +381,10 @@ extern "C"
 namespace itk
 {
 
-FloatingPointExceptions::ExceptionAction
+ITKCommon_EXPORT FloatingPointExceptions::ExceptionAction
 FloatingPointExceptions::m_ExceptionAction =
   FloatingPointExceptions::ABORT;
-bool FloatingPointExceptions::m_Enabled(false);
+ITKCommon_EXPORT bool FloatingPointExceptions::m_Enabled(false);
 
 void
 FloatingPointExceptions

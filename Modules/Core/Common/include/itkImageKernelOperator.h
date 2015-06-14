@@ -107,4 +107,8 @@ private:
 #include "itkImageKernelOperator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageKernelOperatorExplicit.h"
+#endif
+
 #endif

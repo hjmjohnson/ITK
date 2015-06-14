@@ -278,4 +278,8 @@ protected: //made protected so other iterators can access
 #include "itkShapedFloodFilledFunctionConditionalConstIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkShapedFloodFilledFunctionConditionalConstIteratorExplicit.h"
+#endif
+
 #endif

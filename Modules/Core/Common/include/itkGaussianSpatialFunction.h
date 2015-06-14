@@ -106,4 +106,8 @@ private:
 #include "itkGaussianSpatialFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGaussianSpatialFunctionExplicit.h"
+#endif
+
 #endif

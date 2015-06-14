@@ -167,4 +167,8 @@ private:
 #include "itkPointSetToImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPointSetToImageFilterExplicit.h"
+#endif
+
 #endif

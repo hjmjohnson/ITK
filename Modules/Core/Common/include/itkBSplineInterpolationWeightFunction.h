@@ -137,4 +137,8 @@ private:
 #include "itkBSplineInterpolationWeightFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineInterpolationWeightFunctionExplicit.h"
+#endif
+
 #endif

@@ -127,4 +127,8 @@ private:
 #include "itkColorTable.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkColorTableExplicit.h"
+#endif
+
 #endif

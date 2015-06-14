@@ -105,7 +105,7 @@ public:
   /** Return a reference to the pixel.
    * This method will provide the fastest access to pixel
    * data, but it will NOT support ImageAdaptors. */
-  PixelType & Value(void)
+  InternalPixelType & Value(void)
   { return *( const_cast< InternalPixelType * >( this->m_Position ) ); }
 
 protected:
@@ -118,6 +118,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkImageRegionExclusionIteratorWithIndex.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageRegionExclusionIteratorWithIndexExplicit.h"
 #endif
 
 #endif

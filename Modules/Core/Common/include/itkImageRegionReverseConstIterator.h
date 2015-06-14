@@ -370,4 +370,8 @@ protected:
 #include "itkImageRegionReverseConstIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageRegionReverseConstIteratorExplicit.h"
+#endif
+
 #endif

@@ -88,4 +88,8 @@ private:
 #include "itkChildTreeIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkChildTreeIteratorExplicit.h"
+#endif
+
 #endif

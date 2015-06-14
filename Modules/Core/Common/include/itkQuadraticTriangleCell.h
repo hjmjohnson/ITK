@@ -128,4 +128,8 @@ private:
 #include "itkQuadraticTriangleCell.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadraticTriangleCellExplicit.h"
+#endif
+
 #endif

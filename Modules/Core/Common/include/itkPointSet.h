@@ -241,4 +241,8 @@ private:
 #endif
 */
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPointSetExplicit.h"
+#endif
+
 #endif

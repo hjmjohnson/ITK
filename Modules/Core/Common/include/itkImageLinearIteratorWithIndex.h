@@ -120,4 +120,8 @@ protected:
 #include "itkImageLinearIteratorWithIndex.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageLinearIteratorWithIndexExplicit.h"
+#endif
+
 #endif

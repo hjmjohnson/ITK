@@ -271,4 +271,8 @@ private:
 #include "itkImageScanlineConstIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageScanlineConstIteratorExplicit.h"
+#endif
+
 #endif
