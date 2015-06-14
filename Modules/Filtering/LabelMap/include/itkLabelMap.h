@@ -21,6 +21,7 @@
 #include "itkImageBase.h"
 #include "itkWeakPointer.h"
 #include <map>
+#include "ITKLabelMapExport.h"
 
 namespace itk
 {
@@ -475,6 +476,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkLabelMap.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLabelMapExplicit.h"
 #endif
 
 #endif

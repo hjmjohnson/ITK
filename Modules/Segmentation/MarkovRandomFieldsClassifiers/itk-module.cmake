@@ -4,6 +4,7 @@ ITKClassifiers, is improved by iteratively accounting for the spatial coherence
 of the labels.")
 
 itk_module(ITKMarkovRandomFieldsClassifiers
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKStatistics
     ITKClassifiers

@@ -4,6 +4,7 @@ images. See also ITKClassifiers, ITKLabelMap, and
 ITKBinaryMathematicalMorphology.")
 
 itk_module(ITKConnectedComponents
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKImageIntensity
     ITKThresholding

@@ -23,6 +23,8 @@
 #include "itkPointBasedSpatialObject.h"
 #include "itkTubeSpatialObjectPoint.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /**
@@ -131,6 +133,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkTubeSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTubeSpatialObjectExplicit.h"
 #endif
 
 #endif // itkTubeSpatialObject_h

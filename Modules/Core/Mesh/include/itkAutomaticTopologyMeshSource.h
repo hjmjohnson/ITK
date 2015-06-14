@@ -404,4 +404,8 @@ private:
 #include "itkAutomaticTopologyMeshSource.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkAutomaticTopologyMeshSourceExplicit.h"
+#endif
+
 #endif // itkAutomaticTopologyMeshSource_h

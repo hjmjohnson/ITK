@@ -166,4 +166,8 @@ protected:
 #include "itkNormalizedCorrelationImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkNormalizedCorrelationImageFilterExplicit.h"
+#endif
+
 #endif

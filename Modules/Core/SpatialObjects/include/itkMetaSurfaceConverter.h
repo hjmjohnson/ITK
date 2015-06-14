@@ -22,6 +22,8 @@
 #include "itkSurfaceSpatialObject.h"
 #include "itkMetaConverterBase.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaSurfaceConverter
@@ -76,7 +78,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaSurfaceConverter.hxx"
+#include "itkMetaSurfaceConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaSurfaceConverterExplicit.h"
 #endif
 
 #endif

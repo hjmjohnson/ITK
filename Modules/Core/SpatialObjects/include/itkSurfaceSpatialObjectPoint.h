@@ -21,6 +21,8 @@
 #include "itkSpatialObjectPoint.h"
 #include "itkCovariantVector.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class SurfaceSpatialObjectPoint
@@ -72,6 +74,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkSurfaceSpatialObjectPoint.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSurfaceSpatialObjectPointExplicit.h"
 #endif
 
 #endif // itkSurfaceSpatialObjectPoint_h

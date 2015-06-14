@@ -24,6 +24,7 @@
 #include "itkSample.h"
 #include "itkDenseFrequencyContainer2.h"
 #include "itkSparseFrequencyContainer2.h"
+#include "ITKStatisticsExport.h"
 
 namespace itk
 {

@@ -265,4 +265,8 @@ private:
 #include "itkLevelSetMotionRegistrationFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLevelSetMotionRegistrationFunctionExplicit.h"
+#endif
+
 #endif

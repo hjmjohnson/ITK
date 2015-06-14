@@ -172,4 +172,8 @@ private:
 };
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineDerivativeKernelFunctionExplicit.h"
+#endif
+
 #endif

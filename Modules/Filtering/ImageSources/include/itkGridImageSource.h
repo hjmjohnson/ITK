@@ -152,4 +152,8 @@ private:
 #include "itkGridImageSource.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGridImageSourceExplicit.h"
+#endif
+
 #endif

@@ -131,4 +131,8 @@ protected:
 #include "itkEuler2DTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkEuler2DTransformExplicit.h"
+#endif
+
 #endif /* itkEuler2DTransform_h */

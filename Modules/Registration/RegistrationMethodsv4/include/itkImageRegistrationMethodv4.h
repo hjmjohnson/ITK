@@ -528,4 +528,8 @@ private:
 #include "itkImageRegistrationMethodv4.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageRegistrationMethodv4Explicit.h"
+#endif
+
 #endif

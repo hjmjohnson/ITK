@@ -179,4 +179,8 @@ protected:
 #include "itkCenteredSimilarity2DTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCenteredSimilarity2DTransformExplicit.h"
+#endif
+
 #endif /* itkCenteredSimilarity2DTransform_h */

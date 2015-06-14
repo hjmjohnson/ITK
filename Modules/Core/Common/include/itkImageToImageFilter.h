@@ -370,4 +370,8 @@ private:
 #include "itkImageToImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageToImageFilterExplicit.h"
+#endif
+
 #endif

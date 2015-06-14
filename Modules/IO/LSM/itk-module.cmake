@@ -4,6 +4,7 @@ Zeiss company. LSM files are essentially extensions of the TIFF multiple image
 stack file format.")
 
 itk_module(ITKIOLSM
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKIOTIFF
   ENABLE_SHARED

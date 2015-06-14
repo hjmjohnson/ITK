@@ -234,4 +234,8 @@ private:
 #include "itkRecursiveSeparableImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkRecursiveSeparableImageFilterExplicit.h"
+#endif
+
 #endif

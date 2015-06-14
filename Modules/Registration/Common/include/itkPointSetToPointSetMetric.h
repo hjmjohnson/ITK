@@ -140,4 +140,8 @@ protected:
 #include "itkPointSetToPointSetMetric.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPointSetToPointSetMetricExplicit.h"
+#endif
+
 #endif

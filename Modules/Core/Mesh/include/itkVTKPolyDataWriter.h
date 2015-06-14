@@ -111,4 +111,8 @@ protected:
 #include "itkVTKPolyDataWriter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVTKPolyDataWriterExplicit.h"
+#endif
+
 #endif

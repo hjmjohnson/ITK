@@ -124,4 +124,8 @@ private:
 #include "itkMinMaxCurvatureFlowFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMinMaxCurvatureFlowFunctionExplicit.h"
+#endif
+
 #endif

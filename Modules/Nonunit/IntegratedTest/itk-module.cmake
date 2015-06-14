@@ -2,6 +2,7 @@ set(DOCUMENTATION "This modules contains tests targeting the behavior of
 multiple modules of the toolkit when they act together.")
 
 itk_module(ITKIntegratedTest
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   TEST_DEPENDS
     ITKAnisotropicSmoothing
     ITKAntiAlias

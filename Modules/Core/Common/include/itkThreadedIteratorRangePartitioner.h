@@ -157,4 +157,8 @@ protected:
 #include "itkThreadedIteratorRangePartitioner.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkThreadedIteratorRangePartitionerExplicit.h"
+#endif
+
 #endif

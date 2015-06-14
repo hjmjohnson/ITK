@@ -331,4 +331,8 @@ std::ostream & operator<<(std::ostream & os, const ImageRegion< VImageDimension 
 #include "itkImageRegion.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageRegionExplicit.h"
+#endif
+
 #endif

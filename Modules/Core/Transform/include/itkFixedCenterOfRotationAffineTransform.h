@@ -120,4 +120,8 @@ private:
 #include "itkFixedCenterOfRotationAffineTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFixedCenterOfRotationAffineTransformExplicit.h"
+#endif
+
 #endif /* itkFixedCenterOfRotationAffineTransform_h */

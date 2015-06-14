@@ -3,6 +3,7 @@ with a kernel. Convolution is a fundamental operation in many image
 analysis algorithms.")
 
 itk_module(ITKConvolution
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKFFT
     ITKImageIntensity

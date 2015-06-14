@@ -22,6 +22,8 @@
 #include "itkCovariantVector.h"
 #include "itkFixedArray.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class LineSpatialObjectPoint
@@ -76,6 +78,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkLineSpatialObjectPoint.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLineSpatialObjectPointExplicit.h"
 #endif
 
 #endif // itkLineSpatialObjectPoint_h

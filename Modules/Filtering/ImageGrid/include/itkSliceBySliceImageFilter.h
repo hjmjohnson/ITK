@@ -184,4 +184,8 @@ private:
 #include "itkSliceBySliceImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSliceBySliceImageFilterExplicit.h"
+#endif
+
 #endif

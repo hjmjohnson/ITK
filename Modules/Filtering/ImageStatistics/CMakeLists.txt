@@ -1,2 +1,5 @@
 project(ITKImageStatistics)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageStatistics_LIBRARIES ITKImageStatistics)
+endif()
 itk_module_impl()

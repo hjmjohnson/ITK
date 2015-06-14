@@ -428,4 +428,8 @@ private:
 #include "itkCompositeTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCompositeTransformExplicit.h"
+#endif
+
 #endif // itkCompositeTransform_h

@@ -5,6 +5,7 @@ projections, principal components analysis (PCA) for shape modeling,
 computation of label statistics and image accumulation.")
 
 itk_module(ITKImageStatistics
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKImageFilterBase
     ITKTransform

@@ -152,4 +152,8 @@ private:
 #include "itkSparseImage.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSparseImageExplicit.h"
+#endif
+
 #endif

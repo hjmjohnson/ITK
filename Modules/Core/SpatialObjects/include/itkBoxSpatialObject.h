@@ -22,6 +22,8 @@
 #include "itkAffineTransform.h"
 #include "itkFixedArray.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class BoxSpatialObject
@@ -99,6 +101,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkBoxSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBoxSpatialObjectExplicit.h"
 #endif
 
 #endif // itkBoxSpatialObject_h

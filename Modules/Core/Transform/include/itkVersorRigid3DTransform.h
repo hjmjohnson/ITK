@@ -138,4 +138,8 @@ protected:
 #include "itkVersorRigid3DTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVersorRigid3DTransformExplicit.h"
+#endif
+
 #endif /* itkVersorRigid3DTransform_h */

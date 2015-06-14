@@ -288,4 +288,8 @@ private:
 #include "itkAffineTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkAffineTransformExplicit.h"
+#endif
+
 #endif /* itkAffineTransform_h */

@@ -24,6 +24,8 @@
 #include "itkListSample.h"
 #include "itkVector.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class SpatialObjectToImageStatisticsCalculator
@@ -130,6 +132,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkSpatialObjectToImageStatisticsCalculator.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSpatialObjectToImageStatisticsCalculatorExplicit.h"
 #endif
 
 #endif /* itkSpatialObjectToImageStatisticsCalculator_h */

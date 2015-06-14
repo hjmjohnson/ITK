@@ -6,6 +6,7 @@ sources, recursive separable filters and the base classes for neighborhood
 filters.")
 
 itk_module(ITKImageFilterBase
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKCommon
   TEST_DEPENDS

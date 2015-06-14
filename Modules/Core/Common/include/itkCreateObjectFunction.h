@@ -75,4 +75,8 @@ protected:
 };
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCreateObjectFunctionExplicit.h"
+#endif
+
 #endif

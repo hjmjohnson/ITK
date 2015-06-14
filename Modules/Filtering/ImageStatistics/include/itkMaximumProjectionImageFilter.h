@@ -111,4 +111,8 @@ protected:
                                               // MaximumProjectionImageFilter
 } //end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMaximumProjectionImageFilterExplicit.h"
+#endif
+
 #endif

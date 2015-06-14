@@ -107,7 +107,13 @@ protected:
   double m_Squareness2;
 };
 } // end namespace itk
+
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkSphereMeshSource.hxx"
 #endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSphereMeshSourceExplicit.h"
+#endif
+
 #endif

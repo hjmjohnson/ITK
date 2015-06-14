@@ -20,6 +20,12 @@
 
 #include "itkDisplacementFieldTransform.h"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+  #include "ITKDisplacementFieldExport.h"
+#else
+  #define ITKDisplacementField_EXPORT
+#endif
+
 namespace itk
 {
 
@@ -227,6 +233,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkVelocityFieldTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVelocityFieldTransformExplicit.h"
 #endif
 
 #endif // itkVelocityFieldTransform_h

@@ -134,4 +134,8 @@ protected:
 #include "itkTetrahedronCell.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTetrahedronCellExplicit.h"
+#endif
+
 #endif

@@ -134,4 +134,8 @@ protected:
 #include "itkImageRegionIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageRegionIteratorExplicit.h"
+#endif
+
 #endif

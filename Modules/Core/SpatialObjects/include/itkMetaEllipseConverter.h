@@ -22,6 +22,8 @@
 #include "itkEllipseSpatialObject.h"
 #include "metaEllipse.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaEllipseConverter
@@ -76,7 +78,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaEllipseConverter.hxx"
+#include "itkMetaEllipseConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaEllipseConverterExplicit.h"
 #endif
 
 #endif

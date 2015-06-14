@@ -7,7 +7,7 @@ are a large family in ITK and form a prolific group of classes in the
 toolkit.")
 
 itk_module(ITKTransform
-  ENABLE_SHARED
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
   COMPILE_DEPENDS
@@ -15,6 +15,11 @@ itk_module(ITKTransform
     ITKImageFilterBase
   TEST_DEPENDS
     ITKTestKernel
+    ITKStatistics
+    ITKImageFilterBase
+    ITKImageFunction
+    ITKImageGrid
+    ITKSpatialObjects
     ITKDisplacementField
   DESCRIPTION
     "${DOCUMENTATION}"

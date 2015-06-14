@@ -130,4 +130,8 @@ private:
 #include "itkLaplacianSharpeningImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLaplacianSharpeningImageFilterExplicit.h"
+#endif
+
 #endif

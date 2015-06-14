@@ -1,2 +1,5 @@
 project(ITKImageCompose)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageCompose_LIBRARIES ITKImageCompose)
+endif()
 itk_module_impl()

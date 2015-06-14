@@ -171,4 +171,8 @@ private:
 #include "itkVectorNeighborhoodOperatorImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVectorNeighborhoodOperatorImageFilterExplicit.h"
+#endif
+
 #endif

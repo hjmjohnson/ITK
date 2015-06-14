@@ -155,4 +155,8 @@ private:
 #include "itkBinaryThresholdImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBinaryThresholdImageFunctionExplicit.h"
+#endif
+
 #endif

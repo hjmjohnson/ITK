@@ -1346,4 +1346,8 @@ void swap(VariableLengthVector<T> &l_, VariableLengthVector<T> &r_) noexcept
 #include "itkVariableLengthVector.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVariableLengthVectorExplicit.h"
+#endif
+
 #endif

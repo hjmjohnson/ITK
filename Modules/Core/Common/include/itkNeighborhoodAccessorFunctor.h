@@ -93,4 +93,8 @@ public:
 //template< typename TImage > const unsigned int
 // itk::NeighborhoodAccessorFunctor<TImage>::ImageDimension;
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkNeighborhoodAccessorFunctorExplicit.h"
+#endif
+
 #endif

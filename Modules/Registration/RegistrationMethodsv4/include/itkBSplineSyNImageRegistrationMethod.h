@@ -149,4 +149,8 @@ protected:
 #include "itkBSplineSyNImageRegistrationMethod.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineSyNImageRegistrationMethodExplicit.h"
+#endif
+
 #endif

@@ -192,4 +192,8 @@ private:
 #include "itkSignedMaurerDistanceMapImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSignedMaurerDistanceMapImageFilterExplicit.h"
+#endif
+
 #endif

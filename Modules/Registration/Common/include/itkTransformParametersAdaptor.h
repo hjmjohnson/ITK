@@ -124,4 +124,8 @@ protected:
 }; //class TransformParametersAdaptor
 }  // namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTransformParametersAdaptorExplicit.h"
+#endif
+
 #endif /* itkTransformParametersAdaptor_h */

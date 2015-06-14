@@ -145,4 +145,8 @@ private:
 #include "itkShiftScaleImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkShiftScaleImageFilterExplicit.h"
+#endif
+
 #endif

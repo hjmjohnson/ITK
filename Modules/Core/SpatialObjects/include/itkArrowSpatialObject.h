@@ -19,6 +19,7 @@
 #define itkArrowSpatialObject_h
 
 #include "itkSpatialObject.h"
+#include "ITKSpatialObjectsExport.h"
 
 namespace itk
 {
@@ -109,6 +110,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkArrowSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkArrowSpatialObjectExplicit.h"
 #endif
 
 #endif // itkArrowSpatialObject_h

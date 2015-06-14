@@ -5,6 +5,7 @@ the GPU.  These classes manage the GPU kernel, transferring the data to and
 from the GPU, and managing the GPU contexts.")
 
 itk_module(ITKGPUCommon
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
   TEST_DEPENDS

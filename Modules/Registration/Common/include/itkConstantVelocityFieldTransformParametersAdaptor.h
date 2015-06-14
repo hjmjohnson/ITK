@@ -131,4 +131,8 @@ protected:
 #include "itkConstantVelocityFieldTransformParametersAdaptor.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkConstantVelocityFieldTransformParametersAdaptorExplicit.h"
+#endif
+
 #endif /* itkConstantVelocityFieldTransformParametersAdaptor_h */

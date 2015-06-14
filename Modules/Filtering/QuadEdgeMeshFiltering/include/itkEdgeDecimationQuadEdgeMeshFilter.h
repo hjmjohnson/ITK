@@ -306,4 +306,9 @@ private:
 }
 
 #include "itkEdgeDecimationQuadEdgeMeshFilter.hxx"
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkEdgeDecimationQuadEdgeMeshFilterExplicit.h"
+#endif
+
 #endif

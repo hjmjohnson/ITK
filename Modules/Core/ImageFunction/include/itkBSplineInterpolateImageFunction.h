@@ -421,4 +421,8 @@ private:
 #include "itkBSplineInterpolateImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineInterpolateImageFunctionExplicit.h"
+#endif
+
 #endif

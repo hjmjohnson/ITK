@@ -1,3 +1,4 @@
+file(GLOB ITK_FEM_EXPLICIT_SOURCES "*Explicit.cxx")
 set(ITKFEM_SRCS
   itkFEMSolution.cxx
   itkFEMElement2DC0LinearLine.cxx
@@ -46,6 +47,7 @@ set(ITKFEM_SRCS
   itkFEMMaterialLinearElasticity.cxx
   itkFEMUtility.cxx
   dsrc2c.c
+  ${ITK_FEM_EXPLICIT_SOURCES}
   )
 
 itk_module_add_library(ITKFEM ${ITKFEM_SRCS})

@@ -3,6 +3,7 @@ evaluate noise. These classes were originally contributed via the
 Insight Journal (https://hdl.handle.net/10380/3158).")
 
 itk_module(ITKImageNoise
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKStatistics
   TEST_DEPENDS

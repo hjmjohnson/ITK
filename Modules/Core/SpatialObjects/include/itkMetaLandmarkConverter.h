@@ -22,6 +22,8 @@
 #include "itkLandmarkSpatialObject.h"
 #include "itkMetaConverterBase.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaLandmarkConverter
@@ -76,7 +78,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaLandmarkConverter.hxx"
+#include "itkMetaLandmarkConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaLandmarkConverterExplicit.h"
 #endif
 
 #endif

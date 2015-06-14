@@ -161,4 +161,8 @@ private:
 #include "itkThresholdImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkThresholdImageFilterExplicit.h"
+#endif
+
 #endif

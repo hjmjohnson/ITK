@@ -18,8 +18,6 @@
 #ifndef itkTransformBase_h
 #define itkTransformBase_h
 
-#include "ITKTransformExport.h"
-
 #include "itkObject.h"
 #include "itkPoint.h"
 #include "itkCovariantVector.h"
@@ -29,6 +27,12 @@
 
 #include "itkObjectFactory.h"
 #include "itkIntTypes.h"
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+  #include "ITKTransformExport.h"
+#else
+  #define ITKTransform_EXPORT
+#endif
 
 namespace itk
 {
@@ -42,7 +46,7 @@ namespace itk
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType>
-class TransformBaseTemplate:public Object
+class ITKTransform_EXPORT TransformBaseTemplate:public Object
 {
 public:
   ITK_DISALLOW_COPY_AND_ASSIGN(TransformBaseTemplate);

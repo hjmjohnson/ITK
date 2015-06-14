@@ -213,4 +213,8 @@ private:
 #include "itkIntensityWindowingImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkIntensityWindowingImageFilterExplicit.h"
+#endif
+
 #endif

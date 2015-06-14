@@ -4,6 +4,7 @@ will find here the thresholding filters based on the Otsu criterion, both for
 single and multiple thresholds.")
 
 itk_module(ITKThresholding
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKImageIntensity
     ITKImageStatistics

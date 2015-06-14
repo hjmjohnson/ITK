@@ -377,4 +377,8 @@ private:
 #include "itkBSplineBaseTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineBaseTransformExplicit.h"
+#endif
+
 #endif /* itkBSplineBaseTransform_h */

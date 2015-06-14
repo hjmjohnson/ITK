@@ -244,4 +244,8 @@ private:
 #include "itkSyNImageRegistrationMethod.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSyNImageRegistrationMethodExplicit.h"
+#endif
+
 #endif

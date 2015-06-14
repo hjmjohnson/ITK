@@ -163,4 +163,8 @@ private:
 #include "itkShrinkImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkShrinkImageFilterExplicit.h"
+#endif
+
 #endif

@@ -177,4 +177,8 @@ private:
 #include "itkMahalanobisDistanceThresholdImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMahalanobisDistanceThresholdImageFunctionExplicit.h"
+#endif
+
 #endif

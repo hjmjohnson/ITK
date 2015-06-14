@@ -22,6 +22,8 @@
 #include "itkGaussianSpatialObject.h"
 #include "metaGaussian.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaGaussianConverter
@@ -75,7 +77,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaGaussianConverter.hxx"
+#include "itkMetaGaussianConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaGaussianConverterExplicit.h"
 #endif
 
 #endif

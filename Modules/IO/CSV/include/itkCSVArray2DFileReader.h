@@ -137,4 +137,8 @@ private:
 #include "itkCSVArray2DFileReader.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCSVArray2DFileReaderExplicit.h"
+#endif
+
 #endif

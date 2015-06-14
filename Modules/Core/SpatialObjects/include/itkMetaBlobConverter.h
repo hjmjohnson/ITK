@@ -22,6 +22,8 @@
 #include "itkBlobSpatialObject.h"
 #include "itkMetaConverterBase.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaBlobConverter
@@ -76,7 +78,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaBlobConverter.hxx"
+#include "itkMetaBlobConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaBlobConverterExplicit.h"
 #endif
 
 #endif

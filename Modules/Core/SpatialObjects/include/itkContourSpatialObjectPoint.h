@@ -21,6 +21,8 @@
 #include "itkSpatialObjectPoint.h"
 #include "itkCovariantVector.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class ContourSpatialObjectPoint
@@ -79,6 +81,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkContourSpatialObjectPoint.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkContourSpatialObjectPointExplicit.h"
 #endif
 
 #endif // itkContourSpatialObjectPoint_h

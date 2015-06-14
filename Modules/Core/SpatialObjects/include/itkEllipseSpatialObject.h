@@ -22,6 +22,8 @@
 #include "itkAffineTransform.h"
 #include "itkFixedArray.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class EllipseSpatialObject
@@ -124,6 +126,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkEllipseSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkEllipseSpatialObjectExplicit.h"
 #endif
 
 #endif // itkEllipseSpatialObject_h

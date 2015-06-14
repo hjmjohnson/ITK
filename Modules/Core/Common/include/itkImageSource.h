@@ -386,4 +386,8 @@ protected:
 #include "itkImageSource.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageSourceExplicit.h"
+#endif
+
 #endif

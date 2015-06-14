@@ -87,4 +87,8 @@ protected:
 };
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkNthElementImageAdaptorExplicit.h"
+#endif
+
 #endif

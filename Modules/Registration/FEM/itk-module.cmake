@@ -4,6 +4,7 @@ deformation model.  Local loads (forces) are determined by the image-to-image
 metric, and the solid body is assumed to have uniform density and elasticity.")
 
 itk_module(ITKFEMRegistration
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKFEM
     ITKImageStatistics

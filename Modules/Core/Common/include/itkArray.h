@@ -217,4 +217,8 @@ inline void swap( Array<T> &a, Array<T> &b )
 #include "itkArray.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkArrayExplicit.h"
+#endif
+
 #endif

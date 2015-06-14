@@ -25,6 +25,8 @@
 #include "itkImageMaskSpatialObject.h"
 #include "itkMetaImageConverter.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 
@@ -34,7 +36,7 @@ namespace itk
  *  \ingroup ITKSpatialObjects
  */
 template< unsigned int NDimensions = 3 >
-class MetaImageMaskConverter :
+class ITKSpatialObjects_EXPORT MetaImageMaskConverter :
     public MetaImageConverter< NDimensions, unsigned char, ImageMaskSpatialObject< NDimensions > >
 {
 public:

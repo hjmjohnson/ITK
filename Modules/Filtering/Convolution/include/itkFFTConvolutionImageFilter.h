@@ -196,4 +196,8 @@ private:
 #include "itkFFTConvolutionImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFFTConvolutionImageFilterExplicit.h"
+#endif
+
 #endif

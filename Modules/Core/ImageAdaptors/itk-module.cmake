@@ -5,6 +5,9 @@ ITK filter may imply. They are also very useful for implementing casting
 operations on the fly.")
 
 itk_module(ITKImageAdaptors
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
+  COMPILE_DEPENDS
+    ITKCommon
   PRIVATE_DEPENDS
     ITKCommon
   TEST_DEPENDS

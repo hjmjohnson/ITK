@@ -105,4 +105,8 @@ protected:
 };
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSqrtImageFilterExplicit.h"
+#endif
+
 #endif

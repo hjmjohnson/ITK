@@ -87,4 +87,8 @@ protected:
 #include "itkLiThresholdCalculator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLiThresholdCalculatorExplicit.h"
+#endif
+
 #endif

@@ -178,4 +178,8 @@ private:
 # include "itkBSplineExponentialDiffeomorphicTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineExponentialDiffeomorphicTransformExplicit.h"
+#endif
+
 #endif // itkBSplineExponentialDiffeomorphicTransform_h

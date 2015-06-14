@@ -171,4 +171,8 @@ private:
 #include "itkReflectiveImageRegionConstIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkReflectiveImageRegionConstIteratorExplicit.h"
+#endif
+
 #endif

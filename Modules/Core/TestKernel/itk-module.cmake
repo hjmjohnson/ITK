@@ -4,6 +4,7 @@ any of these classes. However, they are essential for the quality control
 system supporting ITK.")
 
 itk_module(ITKTestKernel
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
     ITKIOImageBase
@@ -28,6 +29,8 @@ itk_module(ITKTestKernel
     ITKKWSys
     ITKDoubleConversion
   TEST_DEPENDS
+    ITKCommon
+    ITKDoubleConversion
     ITKImageStatistics
     ITKGoogleTest
   DESCRIPTION

@@ -5,6 +5,7 @@ you can also achieve effects similar to anti-aliasing by using a binary
 segmentation as input to a level set filter.")
 
 itk_module(ITKAntiAlias
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKLevelSets
   TEST_DEPENDS

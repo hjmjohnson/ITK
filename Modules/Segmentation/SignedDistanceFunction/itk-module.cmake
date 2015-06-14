@@ -4,6 +4,7 @@ zero on the contour, negative inside the contour, and positive outside the
 contour).")
 
 itk_module(ITKSignedDistanceFunction
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKImageFunction
   TEST_DEPENDS

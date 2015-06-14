@@ -189,4 +189,8 @@ inline bool operator!=(
   return ! (lhs == rhs);
 }
 } // end namespace itk
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkNeighborhoodAllocatorExplicit.h"
+#endif
+
 #endif

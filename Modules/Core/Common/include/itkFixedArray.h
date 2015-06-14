@@ -287,4 +287,8 @@ inline void swap( FixedArray<TValue, VLength> &a, FixedArray<TValue, VLength> &b
 
 #include "itkNumericTraitsFixedArrayPixel.h"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFixedArrayExplicit.h"
+#endif
+
 #endif

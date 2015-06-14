@@ -26,6 +26,8 @@
 #include "itkTimeStamp.h"
 #include "itkObjectFactory.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /**

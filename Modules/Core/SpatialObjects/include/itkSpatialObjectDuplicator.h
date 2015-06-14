@@ -20,6 +20,7 @@
 
 #include "itkObject.h"
 #include "itkSpatialObject.h"
+#include "ITKSpatialObjectsExport.h"
 
 namespace itk
 {

@@ -31,6 +31,12 @@
 #include "itkImageSource.h"
 #include "itkNumericTraits.h"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+ #include "ITKTestKernelExport.h"
+#else
+ #define ITKTestKernel_EXPORT
+#endif
+
 namespace itk
 {
 /** \class RandomImageSource
@@ -156,6 +162,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkRandomImageSource.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkRandomImageSourceExplicit.h"
 #endif
 
 #endif

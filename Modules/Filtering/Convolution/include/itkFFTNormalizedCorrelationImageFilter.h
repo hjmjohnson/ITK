@@ -148,4 +148,8 @@ private:
 #include "itkFFTNormalizedCorrelationImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFFTNormalizedCorrelationImageFilterExplicit.h"
+#endif
+
 #endif

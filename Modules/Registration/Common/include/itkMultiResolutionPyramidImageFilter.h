@@ -238,4 +238,8 @@ protected:
 #include "itkMultiResolutionPyramidImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMultiResolutionPyramidImageFilterExplicit.h"
+#endif
+
 #endif

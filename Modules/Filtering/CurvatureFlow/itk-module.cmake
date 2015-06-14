@@ -5,6 +5,7 @@ classes are typically used as edge-preserving smoothing filters. You may also
 find the ITKSmoothing and the ITKAnisotropicSmoothing useful as well.")
 
 itk_module(ITKCurvatureFlow
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKFiniteDifference
     ITKImageFilterBase

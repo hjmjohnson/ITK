@@ -156,4 +156,8 @@ protected:
 
 #include "itkQuadEdgeMeshEulerOperatorJoinVertexFunction.hxx"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshEulerOperatorJoinVertexFunctionExplicit.h"
+#endif
+
 #endif

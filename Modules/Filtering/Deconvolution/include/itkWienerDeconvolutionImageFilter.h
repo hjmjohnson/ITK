@@ -207,4 +207,8 @@ private:
 #include "itkWienerDeconvolutionImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkWienerDeconvolutionImageFilterExplicit.h"
+#endif
+
 #endif

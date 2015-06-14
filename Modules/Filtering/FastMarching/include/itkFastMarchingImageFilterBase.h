@@ -261,4 +261,8 @@ private:
 #include "itkFastMarchingImageFilterBase.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFastMarchingImageFilterBaseExplicit.h"
+#endif
+
 #endif // itkFastMarchingImageFilterBase_h

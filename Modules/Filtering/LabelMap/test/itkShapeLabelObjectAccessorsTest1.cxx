@@ -18,6 +18,7 @@
 #include "itkImageFileReader.h"
 
 
+#include "itkLabelMap.h"
 #include "itkShapeKeepNObjectsLabelMapFilter.h"
 #include "itkLabelImageToShapeLabelMapFilter.h"
 #include "itkMath.h"

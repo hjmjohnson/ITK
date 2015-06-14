@@ -4,6 +4,7 @@ the PDE, optical flow problem.  This includes Thirion's popular \"demons\"
 algorithm.")
 
 itk_module(ITKGPUPDEDeformableRegistration
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
     ITKGPUCommon

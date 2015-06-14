@@ -493,4 +493,8 @@ public:
 #endif
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCellInterfaceExplicit.h"
+#endif
+
 #endif

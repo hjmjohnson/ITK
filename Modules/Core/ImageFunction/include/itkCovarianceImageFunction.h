@@ -128,4 +128,8 @@ private:
 #include "itkCovarianceImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCovarianceImageFunctionExplicit.h"
+#endif
+
 #endif

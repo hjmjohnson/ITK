@@ -19,8 +19,11 @@
 #define itkShapeLabelObject_h
 
 #include "itkLabelObject.h"
-#include "itkLabelMap.h"
 #include "itkAffineTransform.h"
+
+#define ITKShapeLabelObjectIncludes
+#include "itkLabelMap.h"
+#undef ITKShapeLabelObjectIncludes
 
 namespace itk
 {

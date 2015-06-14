@@ -114,4 +114,8 @@ private:
 #include "itkOptimizerParameters.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkOptimizerParametersExplicit.h"
+#endif
+
 #endif

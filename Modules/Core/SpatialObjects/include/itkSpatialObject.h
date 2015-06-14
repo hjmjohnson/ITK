@@ -31,6 +31,8 @@
 #include "itkVectorContainer.h"
 #include "itkBoundingBox.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /**

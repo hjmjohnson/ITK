@@ -20,6 +20,7 @@
 #include "itkSimpleFilterWatcher.h"
 
 
+#include "itkLabelMap.h"
 #include "itkStatisticsRelabelLabelMapFilter.h"
 #include "itkLabelImageToStatisticsLabelMapFilter.h"
 

@@ -159,4 +159,8 @@ private:
 #include "itkScaleVersor3DTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkScaleVersor3DTransformExplicit.h"
+#endif
+
 #endif /* __ScaleVersor3DTransform_h */

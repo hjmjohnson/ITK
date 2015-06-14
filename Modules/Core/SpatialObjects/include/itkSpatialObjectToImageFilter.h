@@ -21,6 +21,8 @@
 #include "itkImageSource.h"
 #include "itkConceptChecking.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class SpatialObjectToImageFilter
@@ -178,6 +180,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkSpatialObjectToImageFilter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSpatialObjectToImageFilterExplicit.h"
 #endif
 
 #endif

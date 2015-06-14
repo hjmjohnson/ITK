@@ -275,4 +275,8 @@ TranslationTransform<TParametersValueType, NDimensions>::BackTransform(const Out
 #include "itkTranslationTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTranslationTransformExplicit.h"
+#endif
+
 #endif /* itkTranslationTransform_h */

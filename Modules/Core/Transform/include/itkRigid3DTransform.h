@@ -171,4 +171,8 @@ protected:
 #include "itkRigid3DTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkRigid3DTransformExplicit.h"
+#endif
+
 #endif /* itkRigid3DTransform_h */

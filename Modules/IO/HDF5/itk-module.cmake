@@ -8,6 +8,8 @@ itk_module(ITKIOHDF5
     ITKIOImageBase
   PRIVATE_DEPENDS
     ITKHDF5
+  COMPILE_DEPENDS
+    ITKCommon
   TEST_DEPENDS
     ITKTestKernel
     ITKImageSources

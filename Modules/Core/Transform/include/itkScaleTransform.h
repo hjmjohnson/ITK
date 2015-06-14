@@ -206,4 +206,8 @@ private:
 #include "itkScaleTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkScaleTransformExplicit.h"
+#endif
+
 #endif /* itkScaleTransform_h */

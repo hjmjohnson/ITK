@@ -65,6 +65,29 @@ foreach(itk-module ${ITK_MODULES_ALL})
   itk_module_check("${itk-module}" "" "")
 endforeach()
 
+### DEBUG
+
+message(STATUS "--- dependencies ---")
+
+foreach(itk-module ${ITK_MODULES_ALL})
+  set(${itk-module}_needed_by)
+endforeach()
+
+foreach(itk-module ${ITK_MODULES_ALL})
+  foreach(dep IN LISTS ITK_MODULE_${itk-module}_DEPENDS)
+    list(APPEND ${dep}_needed_by ${itk-module})
+  endforeach()
+endforeach()
+
+foreach(itk-module ${ITK_MODULES_ALL})
+  if(${itk-module}_needed_by)
+    list(REMOVE_DUPLICATES ${itk-module}_needed_by)
+    message(STATUS "${itk-module} needed by ${${itk-module}_needed_by}")
+  endif()
+endforeach()
+
+### END DEBUG
+
 #----------------------------------------------------------------------
 # Provide an option to build the default set of ITK modules. Only a small
 # set of modules are excluded and they have the "EXCLUDE_FROM_DEFAULT" tags in

@@ -251,4 +251,8 @@ protected:
 #include "itkImageTransformer.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageTransformerExplicit.h"
+#endif
+
 #endif

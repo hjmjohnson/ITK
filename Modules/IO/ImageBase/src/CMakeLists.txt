@@ -1,3 +1,4 @@
+file(GLOB ITK_IOIMAGEBASE_EXPLICIT_SOURCES "*Explicit.cxx")
 set(ITKIOImageBase_SRCS
   itkImageSeriesWriter.cxx
   itkImageFileReaderException.cxx
@@ -9,6 +10,7 @@ set(ITKIOImageBase_SRCS
   itkImageIOBase.cxx
   itkRegularExpressionSeriesFileNames.cxx
   itkStreamingImageIOBase.cxx
+  ${ITK_IOIMAGEBASE_EXPLICIT_SOURCES}
   )
 
 itk_module_add_library(ITKIOImageBase ${ITKIOImageBase_SRCS})

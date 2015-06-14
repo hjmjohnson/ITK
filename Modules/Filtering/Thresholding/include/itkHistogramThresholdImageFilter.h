@@ -213,4 +213,8 @@ private:
 #include "itkHistogramThresholdImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkHistogramThresholdImageFilterExplicit.h"
+#endif
+
 #endif

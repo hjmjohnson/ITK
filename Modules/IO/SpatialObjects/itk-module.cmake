@@ -6,6 +6,7 @@ format.")
 
 
 itk_module(ITKIOSpatialObjects
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKSpatialObjects
   PRIVATE_DEPENDS

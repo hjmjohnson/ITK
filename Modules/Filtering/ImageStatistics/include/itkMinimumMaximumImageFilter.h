@@ -148,4 +148,8 @@ private:
 #include "itkMinimumMaximumImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMinimumMaximumImageFilterExplicit.h"
+#endif
+
 #endif

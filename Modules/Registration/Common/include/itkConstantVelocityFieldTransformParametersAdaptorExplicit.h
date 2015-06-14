@@ -1,0 +1,8 @@
+#ifndef itkConstantVelocityFieldTransformParametersAdaptorExplicit_h
+#define itkConstantVelocityFieldTransformParametersAdaptorExplicit_h
+
+#include "ITKRegistrationCommonExport.h"
+
+extern template class ITKRegistrationCommon_EXPORT itk::ConstantVelocityFieldTransformParametersAdaptor<itk::GaussianExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 10 times
+extern template class ITKRegistrationCommon_EXPORT itk::ConstantVelocityFieldTransformParametersAdaptor<itk::BSplineExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 10 times
+#endif //itkConstantVelocityFieldTransformParametersAdaptorExplicit_h

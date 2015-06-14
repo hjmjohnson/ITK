@@ -9,6 +9,7 @@ Cerdan, P.H. \"ITK Wavelet Module\".
 ")
 
 itk_module(ITKImageFrequency
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
   TEST_DEPENDS

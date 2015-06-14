@@ -84,4 +84,8 @@ private:
 
 #include "itkQuadEdgeMeshEulerOperatorSplitVertexFunction.hxx"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshEulerOperatorSplitVertexFunctionExplicit.h"
+#endif
+
 #endif

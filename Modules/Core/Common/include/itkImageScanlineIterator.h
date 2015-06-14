@@ -98,4 +98,8 @@ protected:
 #include "itkImageScanlineIterator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageScanlineIteratorExplicit.h"
+#endif
+
 #endif

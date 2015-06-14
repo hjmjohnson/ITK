@@ -22,6 +22,7 @@
 #include "itkConstNeighborhoodIterator.h"
 #include "itkVector.h"
 
+#include "ITKFiniteDifferenceExport.h"
 namespace itk
 {
 /**
@@ -196,4 +197,8 @@ protected:
 #include "itkFiniteDifferenceFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFiniteDifferenceFunctionExplicit.h"
 #endif
+
+#endif //itkFiniteDifferenceFunction_h

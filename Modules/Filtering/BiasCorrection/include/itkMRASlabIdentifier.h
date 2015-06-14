@@ -147,4 +147,8 @@ private:
 #include "itkMRASlabIdentifier.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMRASlabIdentifierExplicit.h"
+#endif
+
 #endif /* itkMRASlabIdentifier_h */

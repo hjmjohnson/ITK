@@ -137,4 +137,8 @@ private:
 #include "itkSumOfSquaresImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSumOfSquaresImageFunctionExplicit.h"
+#endif
+
 #endif

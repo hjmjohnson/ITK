@@ -22,6 +22,8 @@
 #include "itkMeshSpatialObject.h"
 #include "itkMetaConverterBase.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaMeshConverter
@@ -80,7 +82,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaMeshConverter.hxx"
+#include "itkMetaMeshConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaMeshConverterExplicit.h"
 #endif
 
 #endif

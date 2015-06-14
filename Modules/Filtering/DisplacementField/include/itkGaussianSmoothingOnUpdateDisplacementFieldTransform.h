@@ -127,7 +127,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-# include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.hxx"
+#include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGaussianSmoothingOnUpdateDisplacementFieldTransformExplicit.h"
 #endif
 
 #endif // itkGaussianSmoothingOnUpdateDisplacementFieldTransform_h

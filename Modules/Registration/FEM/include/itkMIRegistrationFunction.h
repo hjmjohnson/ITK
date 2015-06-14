@@ -198,4 +198,8 @@ private:
 #include "itkMIRegistrationFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMIRegistrationFunctionExplicit.h"
+#endif
+
 #endif

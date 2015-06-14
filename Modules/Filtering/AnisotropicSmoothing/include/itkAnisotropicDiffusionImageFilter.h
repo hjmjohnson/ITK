@@ -163,4 +163,8 @@ private:
 #include "itkAnisotropicDiffusionImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkAnisotropicDiffusionImageFilterExplicit.h"
+#endif
+
 #endif

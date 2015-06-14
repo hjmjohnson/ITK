@@ -213,4 +213,8 @@ private:
 #include "itkOnePlusOneEvolutionaryOptimizerv4.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkOnePlusOneEvolutionaryOptimizerv4Explicit.h"
+#endif
+
 #endif

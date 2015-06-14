@@ -19,6 +19,7 @@
 #include "itkImageFileWriter.h"
 #include "itkSimpleFilterWatcher.h"
 
+#include "itkLabelMap.h"
 #include "itkBinaryShapeOpeningImageFilter.h"
 
 #include "itkTestingMacros.h"

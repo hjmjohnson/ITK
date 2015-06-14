@@ -134,4 +134,8 @@ private:
 #include "itkBinaryMinMaxCurvatureFlowImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBinaryMinMaxCurvatureFlowImageFilterExplicit.h"
+#endif
+
 #endif

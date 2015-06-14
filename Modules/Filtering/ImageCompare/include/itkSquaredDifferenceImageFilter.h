@@ -128,4 +128,8 @@ protected:
 };
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSquaredDifferenceImageFilterExplicit.h"
+#endif
+
 #endif

@@ -110,4 +110,8 @@ private:
 };
 }
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDefaultPixelAccessorFunctorExplicit.h"
+#endif
+
 #endif

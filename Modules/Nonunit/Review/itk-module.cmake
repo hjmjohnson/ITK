@@ -4,6 +4,7 @@ quality and see high use.  If they are low quality or serve a very specific use
 case, they may be removed or made available as an ExternalModule.")
 
 itk_module(ITKReview
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKAnisotropicSmoothing
     ITKAntiAlias

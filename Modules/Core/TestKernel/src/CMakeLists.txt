@@ -1,4 +1,14 @@
-add_executable(itkTestDriver itkTestDriver.cxx)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  file(GLOB ITK_TESTKERNEL_EXPLICIT_SOURCES "*Explicit.cxx")
+else()
+  set(ITK_TESTKERNEL_EXPLICIT_SOURCES "")
+endif()
+
+set(ITKTestKernel_SRCS
+  ${ITK_TESTKERNEL_EXPLICIT_SOURCES}
+)
+
+add_executable(itkTestDriver itkTestDriver.cxx ${ITKTestKernel_SRCS} )
 target_link_libraries(itkTestDriver
   LINK_PRIVATE ${ITK_MODULE_ITKTestKernel_PRIVATE_DEPENDS}
   LINK_PUBLIC ${ITK_MODULE_ITKTestKernel_PUBLIC_DEPENDS} ${ITKTestKernel_LIBRARIES})

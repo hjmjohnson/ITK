@@ -6,6 +6,7 @@ for support for a specific mesh file format, depend on the specific
 module, instead.")
 
 itk_module(ITKIOMesh
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
     ITKIOMeshBase

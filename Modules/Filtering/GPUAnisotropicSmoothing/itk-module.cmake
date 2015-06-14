@@ -6,6 +6,7 @@ stage of segmentation algorithms. You may find useful as well the filters in the
 ITKGPUSmoothingModule.")
 
 itk_module(ITKGPUAnisotropicSmoothing
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
     ITKGPUCommon

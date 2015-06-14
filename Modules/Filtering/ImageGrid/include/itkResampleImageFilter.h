@@ -363,4 +363,8 @@ private:
 #include "itkResampleImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkResampleImageFilterExplicit.h"
+#endif
+
 #endif

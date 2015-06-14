@@ -113,4 +113,8 @@ protected:
 #include "itkElasticBodyReciprocalSplineKernelTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkElasticBodyReciprocalSplineKernelTransformExplicit.h"
+#endif
+
 #endif // itkElasticBodyReciprocalSplineKernelTransform_h

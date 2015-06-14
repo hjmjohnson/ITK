@@ -5,6 +5,7 @@ base classes of existing image filters). You will find here: box filters,
 recursive separable filters and the base classes for neighborhood filters.")
 
 itk_module(ITKGPUImageFilterBase
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
     ITKGPUCommon

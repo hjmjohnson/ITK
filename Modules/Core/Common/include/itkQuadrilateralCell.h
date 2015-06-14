@@ -138,4 +138,8 @@ protected:
 #include "itkQuadrilateralCell.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadrilateralCellExplicit.h"
+#endif
+
 #endif

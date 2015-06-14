@@ -297,4 +297,8 @@ inline void swap( const Matrix< T, NRows, NColumns > &a, const Matrix< T, NRows,
 #include "itkMatrix.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMatrixExplicit.h"
+#endif
+
 #endif

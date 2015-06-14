@@ -205,4 +205,8 @@ private:
 #include "itkGaussianBlurImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGaussianBlurImageFunctionExplicit.h"
+#endif
+
 #endif

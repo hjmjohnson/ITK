@@ -171,4 +171,8 @@ TreeIteratorBase< TTreeType > *InOrderTreeIterator< TTreeType >::Clone()
 }
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkInOrderTreeIteratorExplicit.h"
+#endif
+
 #endif

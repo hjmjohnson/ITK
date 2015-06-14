@@ -138,6 +138,9 @@ endif()
 option(ITK_TEMPLATE_VISIBILITY_DEFAULT "Set symbol visibility to default for template class declarations. https://itk.org/Wiki/ITK/FAQ" "${_template_visibility_init}")
 mark_as_advanced(ITK_TEMPLATE_VISIBILITY_DEFAULT)
 
+option(ITK_TEMPLATE_EXPLICIT_INSTANTIATION "Explicitly instantiate common template variants to improve default option build size and speed." ON)
+mark_as_advanced(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+
 # Configuration variable is named ITK_USE_TBB instead of simply using the
 # TBB module name (Module_ITKTBB) for code readability.
 set(ITK_USE_TBB ${Module_ITKTBB})

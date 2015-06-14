@@ -325,4 +325,8 @@ protected:
 #include "itkMultiTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMultiTransformExplicit.h"
+#endif
+
 #endif // itkMultiTransform_h

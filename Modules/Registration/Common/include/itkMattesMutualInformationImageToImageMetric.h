@@ -356,4 +356,8 @@ private:
 #include "itkMattesMutualInformationImageToImageMetric.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMattesMutualInformationImageToImageMetricExplicit.h"
+#endif
+
 #endif

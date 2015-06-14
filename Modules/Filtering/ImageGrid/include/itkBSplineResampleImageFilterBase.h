@@ -192,4 +192,8 @@ private:
 #include "itkBSplineResampleImageFilterBase.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineResampleImageFilterBaseExplicit.h"
+#endif
+
 #endif

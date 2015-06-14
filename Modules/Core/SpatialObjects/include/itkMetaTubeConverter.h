@@ -22,6 +22,8 @@
 #include "itkMetaConverterBase.h"
 #include "itkTubeSpatialObject.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaTubeConverter
@@ -76,7 +78,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaTubeConverter.hxx"
+#include "itkMetaTubeConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaTubeConverterExplicit.h"
 #endif
 
 #endif

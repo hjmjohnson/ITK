@@ -49,6 +49,7 @@ configure_file(itkBuildInformation.cxx.in ${ITKCommon_BINARY_DIR}/itkBuildInform
                #[COPYONLY] [ESCAPE_QUOTES] [@ONLY]
                #[NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF] ])
 
+file(GLOB ITK_COMMON_EXPLICIT_SOURCES "*Explicit.cxx")
 set(ITKCommon_SRCS
   ${ITKCommon_BINARY_DIR}/itkBuildInformation.cxx
   itkMemoryProbesCollectorBase.cxx
@@ -136,6 +137,7 @@ set(ITKCommon_SRCS
   itkRandomVariateGeneratorBase.cxx
   itkMath.cxx
   itkProgressTransformer.cxx
+  ${ITK_COMMON_EXPLICIT_SOURCES}
   )
 
 if(WIN32)

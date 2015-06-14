@@ -23,6 +23,8 @@
 #include "itkSpatialObject.h"
 #include "itkMetaConverterBase.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaContourConverter
@@ -77,6 +79,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkMetaContourConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaContourConverterExplicit.h"
 #endif
 
 #endif

@@ -1,2 +1,5 @@
 project(ITKDisplacementField)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKDisplacementField_LIBRARIES ITKDisplacementField)
+endif()
 itk_module_impl()

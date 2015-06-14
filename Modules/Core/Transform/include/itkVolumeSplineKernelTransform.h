@@ -105,4 +105,8 @@ protected:
 #include "itkVolumeSplineKernelTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVolumeSplineKernelTransformExplicit.h"
+#endif
+
 #endif // itkVolumeSplineKernelTransform_h

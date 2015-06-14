@@ -528,4 +528,8 @@ template< unsigned int VDimension >
 constexpr unsigned int Index<VDimension>::Dimension;
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkIndexExplicit.h"
+#endif
+
 #endif

@@ -85,4 +85,8 @@ private:
 #include "itkSphereSpatialFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSphereSpatialFunctionExplicit.h"
+#endif
+
 #endif

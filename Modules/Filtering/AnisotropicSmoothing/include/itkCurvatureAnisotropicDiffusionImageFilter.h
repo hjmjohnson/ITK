@@ -110,4 +110,8 @@ protected:
 };
 } // end namspace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCurvatureAnisotropicDiffusionImageFilterExplicit.h"
+#endif
+
 #endif

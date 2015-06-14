@@ -8,6 +8,7 @@ the segmenting contour.")
 
 if( LevelSetsv4_VIZ )
    itk_module(ITKLevelSetsv4
+    ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
     DEPENDS
       ITKCommon
       ITKLabelMap
@@ -22,6 +23,7 @@ if( LevelSetsv4_VIZ )
   )
 else()
   itk_module(ITKLevelSetsv4
+    ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
     DEPENDS
       ITKCommon
       ITKLabelMap

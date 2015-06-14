@@ -127,4 +127,8 @@ private:
 #include "itkEuclideanDistancePointMetric.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkEuclideanDistancePointMetricExplicit.h"
+#endif
+
 #endif

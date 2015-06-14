@@ -8,6 +8,7 @@ else()
 endif()
 
 itk_module(ITKBridgeNumPy
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKCommon
   TEST_DEPENDS

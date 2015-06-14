@@ -103,4 +103,8 @@ protected:
 #include "itkThinPlateSplineKernelTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkThinPlateSplineKernelTransformExplicit.h"
+#endif
+
 #endif // itkThinPlateSplineKernelTransform_h

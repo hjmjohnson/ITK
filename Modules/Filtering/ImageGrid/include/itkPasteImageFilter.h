@@ -162,4 +162,8 @@ protected:
 #include "itkPasteImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPasteImageFilterExplicit.h"
+#endif
+
 #endif

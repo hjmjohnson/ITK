@@ -290,4 +290,8 @@ private:
 #include "itkBSplineControlPointImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineControlPointImageFilterExplicit.h"
+#endif
+
 #endif

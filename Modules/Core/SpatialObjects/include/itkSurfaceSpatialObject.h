@@ -23,6 +23,8 @@
 #include "itkPointBasedSpatialObject.h"
 #include "itkSurfaceSpatialObjectPoint.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /**
@@ -90,6 +92,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkSurfaceSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSurfaceSpatialObjectExplicit.h"
 #endif
 
 #endif // itkSurfaceSpatialObject_h

@@ -6,6 +6,7 @@ features and characteristics of the level-set function.  The segmentation
 evolves from an initial value for the segmenting contour.")
 
 itk_module(ITKLevelSets
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKImageFeature
     ITKFiniteDifference

@@ -159,4 +159,8 @@ private:
 #include "itkImageGaussianModelEstimator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageGaussianModelEstimatorExplicit.h"
+#endif
+
 #endif

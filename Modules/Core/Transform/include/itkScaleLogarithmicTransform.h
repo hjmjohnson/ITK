@@ -122,4 +122,8 @@ protected:
 #include "itkScaleLogarithmicTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkScaleLogarithmicTransformExplicit.h"
+#endif
+
 #endif /* itkScaleLogarithmicTransform_h */

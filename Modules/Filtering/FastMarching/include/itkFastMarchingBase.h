@@ -304,6 +304,11 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkFastMarchingBase.hxx"
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFastMarchingBaseExplicit.h"
+#endif
+
 #endif
 
 #endif

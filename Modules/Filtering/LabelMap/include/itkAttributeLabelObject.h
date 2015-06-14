@@ -19,11 +19,13 @@
 #define itkAttributeLabelObject_h
 
 #include "itkLabelObject.h"
+
+#define ITKAttributeLabelObjectIncludes
 #include "itkLabelMap.h"
+#undef ITKAttributeLabelObjectIncludes
 
 namespace itk
 {
-
 
 namespace Functor {
 

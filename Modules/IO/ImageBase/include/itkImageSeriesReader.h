@@ -215,4 +215,8 @@ private:
 #include "itkImageSeriesReader.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageSeriesReaderExplicit.h"
+#endif
+
 #endif // itkImageSeriesReader_h

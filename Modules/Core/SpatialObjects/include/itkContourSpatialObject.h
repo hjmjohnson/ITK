@@ -23,6 +23,8 @@
 #include "itkPointBasedSpatialObject.h"
 #include "itkContourSpatialObjectPoint.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /**
@@ -163,6 +165,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkContourSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkContourSpatialObjectExplicit.h"
 #endif
 
 #endif // itkContourSpatialObject_h

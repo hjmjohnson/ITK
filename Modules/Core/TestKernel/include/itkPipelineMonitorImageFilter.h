@@ -20,6 +20,12 @@
 
 #include "itkImageToImageFilter.h"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+ #include "ITKTestKernelExport.h"
+#else
+ #define ITKTestKernel_EXPORT
+#endif
+
 namespace itk
 {
 
@@ -206,6 +212,10 @@ namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkPipelineMonitorImageFilter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPipelineMonitorImageFilterExplicit.h"
 #endif
 
 #endif //itkPipelineMonitorImageFilter_hxx

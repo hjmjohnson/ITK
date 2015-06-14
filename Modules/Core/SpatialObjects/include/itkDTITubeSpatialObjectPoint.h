@@ -22,6 +22,8 @@
 #include "itkDiffusionTensor3D.h"
 #include "vnl/vnl_vector_fixed.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class DTITubeSpatialObjectPoint
@@ -116,6 +118,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkDTITubeSpatialObjectPoint.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDTITubeSpatialObjectPointExplicit.h"
 #endif
 
 #endif // itkDTITubeSpatialObjectPoint_h

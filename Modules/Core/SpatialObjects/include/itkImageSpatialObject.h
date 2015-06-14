@@ -23,6 +23,8 @@
 #include "itkSpatialObject.h"
 #include "itkNearestNeighborInterpolateImageFunction.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class ImageSpatialObject
@@ -157,6 +159,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkImageSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageSpatialObjectExplicit.h"
 #endif
 
 #endif //itkImageSpatialObject_h

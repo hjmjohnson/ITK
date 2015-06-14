@@ -22,6 +22,8 @@
 #include "metaGroup.h"
 #include "itkMetaConverterBase.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaGroupConverter
@@ -75,7 +77,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaGroupConverter.hxx"
+#include "itkMetaGroupConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaGroupConverterExplicit.h"
 #endif
 
 #endif

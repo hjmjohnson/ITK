@@ -71,4 +71,8 @@ protected:
 #include "itkQuadEdgeMeshBoundaryEdgesMeshFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshBoundaryEdgesMeshFunctionExplicit.h"
+#endif
+
 #endif

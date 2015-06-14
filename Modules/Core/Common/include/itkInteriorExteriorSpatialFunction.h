@@ -84,4 +84,8 @@ protected:
 #include "itkInteriorExteriorSpatialFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkInteriorExteriorSpatialFunctionExplicit.h"
+#endif
+
 #endif

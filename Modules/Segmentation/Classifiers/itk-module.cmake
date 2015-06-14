@@ -5,6 +5,7 @@ classification, Gaussian models, and K-means clustering. After tissue labels
 have been assigned, they can be modified and applied with the ITKLabelMap.")
 
 itk_module(ITKClassifiers
+  ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   DEPENDS
     ITKImageGrid
     ITKStatistics

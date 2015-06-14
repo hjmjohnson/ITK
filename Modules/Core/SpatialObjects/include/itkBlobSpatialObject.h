@@ -21,6 +21,7 @@
 #include <list>
 
 #include "itkPointBasedSpatialObject.h"
+#include "ITKSpatialObjectsExport.h"
 
 namespace itk
 {
@@ -89,6 +90,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkBlobSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBlobSpatialObjectExplicit.h"
 #endif
 
 #endif // itkBlobSpatialObject_h

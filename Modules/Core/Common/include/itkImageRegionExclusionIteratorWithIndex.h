@@ -102,11 +102,13 @@ public:
   void Set(const PixelType & value) const
   { this->m_PixelAccessorFunctor.Set(*( const_cast< InternalPixelType * >( this->m_Position ) ), value); }
 
+#ifdef HACK_THIS_IS_ILLEGAL_CODE
   /** Return a reference to the pixel.
    * This method will provide the fastest access to pixel
    * data, but it will NOT support ImageAdaptors. */
   PixelType & Value()
   { return *( const_cast< InternalPixelType * >( this->m_Position ) ); }
+#endif
 
 protected:
   /** The construction from a const iterator is declared protected
@@ -118,6 +120,10 @@ protected:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkImageRegionExclusionIteratorWithIndex.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageRegionExclusionIteratorWithIndexExplicit.h"
 #endif
 
 #endif

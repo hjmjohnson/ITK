@@ -273,4 +273,8 @@ private:
 #include "itkSparseFieldLayer.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSparseFieldLayerExplicit.h"
+#endif
+
 #endif

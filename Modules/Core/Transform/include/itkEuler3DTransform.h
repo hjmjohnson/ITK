@@ -21,6 +21,13 @@
 #include <iostream>
 #include "itkRigid3DTransform.h"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+  #include "ITKTransformExport.h"
+#else
+  #define ITKTransform_EXPORT
+#endif
+
+
 namespace itk
 {
 /** \class Euler3DTransform
@@ -154,6 +161,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkEuler3DTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkEuler3DTransformExplicit.h"
 #endif
 
 #endif /* itkEuler3DTransform_h */

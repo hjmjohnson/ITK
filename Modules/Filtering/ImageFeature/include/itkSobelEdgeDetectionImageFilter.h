@@ -139,4 +139,8 @@ protected:
 #include "itkSobelEdgeDetectionImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSobelEdgeDetectionImageFilterExplicit.h"
+#endif
+
 #endif

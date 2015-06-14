@@ -7,7 +7,6 @@ itk_module(ITKFEM
   DEPENDS
     ITKImageFunction
     ITKRegistrationCommon
-  COMPILE_DEPENDS
     ITKSpatialObjects
     ITKIOSpatialObjects
   TEST_DEPENDS

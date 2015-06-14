@@ -84,4 +84,8 @@ protected:
 
 } //end itk namespace
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMutexLockHolderExplicit.h"
+#endif
+
 #endif

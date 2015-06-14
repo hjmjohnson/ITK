@@ -82,4 +82,8 @@ protected:
 #include "itkSpatialFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSpatialFunctionExplicit.h"
+#endif
+
 #endif

@@ -277,4 +277,8 @@ private:
 #include "itkDiscreteGaussianImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDiscreteGaussianImageFilterExplicit.h"
+#endif
+
 #endif

@@ -93,4 +93,8 @@ protected:
 #include "itkResourceProbesCollectorBase.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkResourceProbesCollectorBaseExplicit.h"
+#endif
+
 #endif //itkResourceProbesCollectorBase_h

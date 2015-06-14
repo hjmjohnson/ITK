@@ -21,6 +21,8 @@
 #include "itkMesh.h"
 #include "itkSpatialObject.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MeshSpatialObject
@@ -121,6 +123,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkMeshSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMeshSpatialObjectExplicit.h"
 #endif
 
 #endif //itkMeshSpatialObject_h

@@ -21,6 +21,12 @@
 #include "itkObject.h"
 #include "itkObjectFactory.h"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+  #include "ITKTransformExport.h"
+#else
+  #define ITKTransform_EXPORT
+#endif
+
 namespace itk
 {
 /** \class BSplineTransformInitializer
@@ -115,6 +121,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkBSplineTransformInitializer.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineTransformInitializerExplicit.h"
 #endif
 
 #endif /* itkBSplineTransformInitializer_h */

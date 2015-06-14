@@ -21,6 +21,12 @@
 #include "itkImageFunction.h"
 #include "itkFixedArray.h"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+  #include "ITKImageFunctionExport.h"
+#else
+  #define ITKImageFunction_EXPORT
+#endif
+
 namespace itk
 {
 

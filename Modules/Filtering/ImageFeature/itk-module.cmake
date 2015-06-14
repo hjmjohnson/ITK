@@ -4,10 +4,10 @@ Hough transform for lines and circles, Hessian filters, Vesselness, and
 Fractional anisotropy for tensor images.")
 
 itk_module(ITKImageFeature
+  ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
   COMPILE_DEPENDS
     ITKImageGradient
     ITKImageSources
-  COMPILE_DEPENDS
     ITKMesh
     ITKImageStatistics
     ITKSmoothing

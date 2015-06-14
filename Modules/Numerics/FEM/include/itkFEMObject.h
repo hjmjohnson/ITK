@@ -19,6 +19,7 @@
 #define itkFEMObject_h
 
 #include "itkDataObject.h"
+#include "ITKFEMExport.h"
 
 #include "itkFEMElementBase.h"
 #include "itkFEMLinearSystemWrapper.h"

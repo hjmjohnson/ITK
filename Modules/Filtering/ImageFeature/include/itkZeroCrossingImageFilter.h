@@ -154,4 +154,8 @@ protected:
 #include "itkZeroCrossingImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkZeroCrossingImageFilterExplicit.h"
+#endif
+
 #endif

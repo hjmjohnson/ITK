@@ -93,4 +93,8 @@ protected:
 };
 } // namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineResampleImageFunctionExplicit.h"
+#endif
+
 #endif

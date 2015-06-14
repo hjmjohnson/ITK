@@ -22,6 +22,8 @@
 #include "itkArrowSpatialObject.h"
 #include "metaArrow.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class MetaArrowConverter
@@ -79,7 +81,11 @@ protected:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaArrowConverter.hxx"
+#include "itkMetaArrowConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaArrowConverterExplicit.h"
 #endif
 
 #endif

@@ -239,4 +239,8 @@ private:
 #include "itkWarpVectorImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkWarpVectorImageFilterExplicit.h"
+#endif
+
 #endif

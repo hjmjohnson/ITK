@@ -179,4 +179,8 @@ private:
 #include "itkBinaryContourImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBinaryContourImageFilterExplicit.h"
+#endif
+
 #endif

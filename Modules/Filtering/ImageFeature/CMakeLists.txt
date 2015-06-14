@@ -1,2 +1,5 @@
 project(ITKImageFeature)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageFeature_LIBRARIES ITKImageFeature)
+endif()
 itk_module_impl()
