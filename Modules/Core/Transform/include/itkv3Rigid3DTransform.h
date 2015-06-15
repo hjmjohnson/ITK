@@ -58,7 +58,7 @@ namespace itkv3
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType=double>
-class Rigid3DTransform:
+class ITKTransform_EXPORT Rigid3DTransform:
     public itk::Rigid3DTransform<TParametersValueType>
 {
 public:

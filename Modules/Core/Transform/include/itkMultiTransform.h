@@ -61,7 +61,7 @@ namespace itk
  */
 template
 <typename TParametersValueType=double, unsigned int NDimensions=3, unsigned int NSubDimensions=NDimensions>
-class MultiTransform :
+class ITKTransform_EXPORT MultiTransform :
   public Transform<TParametersValueType, NDimensions, NSubDimensions>
 {
 public:
@@ -324,6 +324,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkMultiTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMultiTransformExplicit.h"
 #endif
 
 #endif // itkMultiTransform_h

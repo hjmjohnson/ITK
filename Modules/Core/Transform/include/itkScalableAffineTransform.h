@@ -33,7 +33,7 @@ namespace itk
 template<
   typename TParametersValueType=double,
   unsigned int NDimensions = 3>
-class ScalableAffineTransform:
+class ITKTransform_EXPORT ScalableAffineTransform:
   public AffineTransform<TParametersValueType, NDimensions>
 {
 public:
@@ -167,6 +167,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkScalableAffineTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkScalableAffineTransformExplicit.h"
 #endif
 
 #endif /* itkScalableAffineTransform_h */

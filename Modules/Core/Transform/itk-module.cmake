@@ -7,11 +7,16 @@ are a large family in ITK and form a prolific group of classes in the
 toolkit.")
 
 itk_module(ITKTransform
-  COMPILE_DEPENDS
-    ITKStatistics
-    ITKImageFilterBase
+  ENABLE_SHARED
+  DEPENDS
+    ITKCommon
   TEST_DEPENDS
     ITKTestKernel
+    ITKStatistics
+    ITKImageFilterBase
+    ITKImageFunction
+    ITKImageGrid
+    ITKSpatialObjects
     ITKDisplacementField
   DESCRIPTION
     "${DOCUMENTATION}"

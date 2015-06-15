@@ -44,7 +44,7 @@ namespace itk
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType=double>
-class Similarity3DTransform :
+class ITKTransform_EXPORT Similarity3DTransform :
   public VersorRigid3DTransform<TParametersValueType>
 {
 public:
@@ -156,6 +156,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkSimilarity3DTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSimilarity3DTransformExplicit.h"
 #endif
 
 #endif /* itkSimilarity3DTransform_h */

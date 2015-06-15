@@ -108,7 +108,7 @@ namespace itk
 template<typename TParametersValueType=double,
           unsigned int NDimensions = 3,
           unsigned int VSplineOrder = 3>
-class BSplineTransform :
+class ITKTransform_EXPORT BSplineTransform :
   public BSplineBaseTransform<TParametersValueType,NDimensions,VSplineOrder>
 {
 public:
@@ -312,6 +312,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkBSplineTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineTransformExplicit.h"
 #endif
 
 #endif /* itkBSplineTransform_h */

@@ -38,7 +38,7 @@ namespace itk
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType=double>
-class Euler2DTransform:
+class ITKTransform_EXPORT Euler2DTransform:
   public Rigid2DTransform<TParametersValueType>
 {
 public:
@@ -129,6 +129,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkEuler2DTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkEuler2DTransformExplicit.h"
 #endif
 
 #endif /* itkEuler2DTransform_h */

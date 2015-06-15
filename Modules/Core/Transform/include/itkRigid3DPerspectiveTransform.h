@@ -35,7 +35,7 @@ namespace itk
  */
 
 template<typename TParametersValueType=double>
-class Rigid3DPerspectiveTransform :
+class ITKTransform_EXPORT Rigid3DPerspectiveTransform :
   public Transform<TParametersValueType, 3, 2>
 {
 public:
@@ -257,6 +257,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkRigid3DPerspectiveTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkRigid3DPerspectiveTransformExplicit.h"
 #endif
 
 #endif /* itkRigid3DPerspectiveTransform_h */

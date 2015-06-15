@@ -20,6 +20,7 @@
 
 #include <iostream>
 #include "itkRigid3DTransform.h"
+#include "ITKTransformExport.h"
 
 namespace itk
 {
@@ -44,7 +45,7 @@ namespace itk
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType=double >
-class Euler3DTransform :
+class ITKTransform_EXPORT Euler3DTransform :
   public Rigid3DTransform<TParametersValueType>
 {
 public:
@@ -146,6 +147,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkEuler3DTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkEuler3DTransformExplicit.h"
 #endif
 
 #endif /* itkEuler3DTransform_h */

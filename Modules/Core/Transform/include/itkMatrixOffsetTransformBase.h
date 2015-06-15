@@ -96,7 +96,7 @@ public:
 template<typename TParametersValueType=double,
          unsigned int NInputDimensions = 3,
          unsigned int NOutputDimensions = 3>
-class MatrixOffsetTransformBase :
+class ITKTransform_EXPORT MatrixOffsetTransformBase :
   public Transform<TParametersValueType, NInputDimensions, NOutputDimensions>
 {
 public:
@@ -556,6 +556,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkMatrixOffsetTransformBase.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMatrixOffsetTransformBaseExplicit.h"
 #endif
 
 #endif /* itkMatrixOffsetTransformBase_h */

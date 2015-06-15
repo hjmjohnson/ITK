@@ -34,7 +34,7 @@ namespace itk
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType=double>
-class CenteredEuler3DTransform :
+class ITKTransform_EXPORT CenteredEuler3DTransform :
   public Euler3DTransform<TParametersValueType>
 {
 public:
@@ -131,6 +131,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkCenteredEuler3DTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCenteredEuler3DTransformExplicit.h"
 #endif
 
 #endif /* itkCenteredEuler3DTransform_h */

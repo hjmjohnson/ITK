@@ -44,7 +44,7 @@ namespace itk
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType=double>
-class VersorTransform : public Rigid3DTransform<TParametersValueType>
+class ITKTransform_EXPORT VersorTransform : public Rigid3DTransform<TParametersValueType>
 {
 public:
   /** Standard Self Typedef */
@@ -169,6 +169,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkVersorTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVersorTransformExplicit.h"
 #endif
 
 #endif /* itkVersorTransform_h */

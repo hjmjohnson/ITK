@@ -260,4 +260,8 @@ private:
 };
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkIdentityTransformExplicit.h"
+#endif
+
 #endif

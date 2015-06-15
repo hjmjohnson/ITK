@@ -45,7 +45,7 @@ namespace itk
  * \ingroup ITKTransform
  */
 template<typename TParametersValueType=double>
-class QuaternionRigidTransform :
+class ITKTransform_EXPORT QuaternionRigidTransform :
   public Rigid3DTransform<TParametersValueType>
 {
 public:

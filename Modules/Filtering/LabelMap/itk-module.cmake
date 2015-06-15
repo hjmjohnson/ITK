@@ -14,6 +14,7 @@ itk_module(ITKLabelMap
     ITKTransform
   TEST_DEPENDS
     ITKTestKernel
+    ITKTransform
     ITKBinaryMathematicalMorphology
     ITKStatistics
   DESCRIPTION

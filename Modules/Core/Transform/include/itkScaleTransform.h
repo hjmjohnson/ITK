@@ -39,7 +39,7 @@ namespace itk
  */
 template<typename TParametersValueType=float,
           unsigned int NDimensions=3>
-class ScaleTransform : public MatrixOffsetTransformBase<TParametersValueType,
+class ITKTransform_EXPORT ScaleTransform : public MatrixOffsetTransformBase<TParametersValueType,
                                                         NDimensions,
                                                         NDimensions>
 {
@@ -219,6 +219,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkScaleTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkScaleTransformExplicit.h"
 #endif
 
 #endif /* itkScaleTransform_h */

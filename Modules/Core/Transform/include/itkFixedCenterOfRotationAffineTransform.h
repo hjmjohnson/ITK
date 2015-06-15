@@ -34,7 +34,7 @@ template<
   typename TParametersValueType=double,
   unsigned int NDimensions=3>
 // Number of dimensions in the input space
-class FixedCenterOfRotationAffineTransform:
+class ITKTransform_EXPORT FixedCenterOfRotationAffineTransform:
   public ScalableAffineTransform<TParametersValueType, NDimensions>
 {
 public:
@@ -117,6 +117,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkFixedCenterOfRotationAffineTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFixedCenterOfRotationAffineTransformExplicit.h"
 #endif
 
 #endif /* itkFixedCenterOfRotationAffineTransform_h */
