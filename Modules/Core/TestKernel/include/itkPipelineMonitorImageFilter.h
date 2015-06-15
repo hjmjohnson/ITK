@@ -20,6 +20,8 @@
 
 #include "itkImageToImageFilter.h"
 
+#include "ITKTestKernelExport.h"
+
 namespace itk
 {
 
@@ -64,7 +66,7 @@ namespace itk
  * \ingroup ITKTestKernel
  */
  template <typename TImageType>
- class PipelineMonitorImageFilter :
+ class ITKTestKernel_EXPORT PipelineMonitorImageFilter :
   public ImageToImageFilter< TImageType, TImageType>
  {
  public:
@@ -206,6 +208,10 @@ namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkPipelineMonitorImageFilter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPipelineMonitorImageFilterExplicit.h"
 #endif
 
 #endif //itkPipelineMonitorImageFilter_hxx

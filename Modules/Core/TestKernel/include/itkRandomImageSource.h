@@ -31,6 +31,8 @@
 #include "itkImageSource.h"
 #include "itkNumericTraits.h"
 
+#include "ITKTestKernelExport.h"
+
 namespace itk
 {
 /** \class RandomImageSource
@@ -51,7 +53,7 @@ namespace itk
  * \endwiki
  */
 template< typename TOutputImage >
-class RandomImageSource:public ImageSource< TOutputImage >
+class ITKTestKernel_EXPORT RandomImageSource:public ImageSource< TOutputImage >
 {
 public:
   /** Standard class typedefs. */
@@ -156,6 +158,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkRandomImageSource.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkRandomImageSourceExplicit.h"
 #endif
 
 #endif

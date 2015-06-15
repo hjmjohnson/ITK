@@ -1,3 +1,17 @@
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  file(GLOB ITK_COMMON_EXPLICIT_SOURCES "*Explicit.cxx")
+else()
+  set(ITK_COMMON_EXPLICIT_SOURCES "")
+endif()
+
+set(ITKTestKernal_SRCS
+${ITK_COMMON_EXPLICIT_SOURCES}
+)
+
+### generating libraries
+add_library( ITKTestKernel ${ITK_LIBRARY_BUILD_TYPE} ${ITKTestKernal_SRCS})
+itk_module_link_dependencies()
+
 add_executable(itkTestDriver itkTestDriver.cxx)
 #target_link_libraries(itkTestDriver LINK_PUBLIC ${ITKTestKernel_LIBRARIES})
 target_link_libraries(itkTestDriver
