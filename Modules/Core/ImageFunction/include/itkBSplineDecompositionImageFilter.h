@@ -186,4 +186,8 @@ private:
 #include "itkBSplineDecompositionImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineDecompositionImageFilterExplicit.h"
+#endif
+
 #endif

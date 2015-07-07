@@ -246,4 +246,8 @@ private:
 #include "itkTriangleMeshToBinaryImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTriangleMeshToBinaryImageFilterExplicit.h"
+#endif
+
 #endif

@@ -1,2 +1,5 @@
 project(ITKImageFunction)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageFunction_LIBRARIES ITKImageFunction)
+endif()
 itk_module_impl()

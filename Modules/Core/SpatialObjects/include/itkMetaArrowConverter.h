@@ -79,7 +79,11 @@ private:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaArrowConverter.hxx"
+#include "itkMetaArrowConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaArrowConverterExplicit.h"
 #endif
 
 #endif

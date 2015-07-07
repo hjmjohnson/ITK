@@ -85,4 +85,8 @@ private:
 #include "itkDTITubeSpatialObject.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDTITubeSpatialObjectExplicit.h"
+#endif
+
 #endif // itkDTITubeSpatialObject_h

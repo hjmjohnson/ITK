@@ -98,4 +98,8 @@ private:
 #include "itkQuadEdgeMeshTopologyChecker.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshTopologyCheckerExplicit.h"
+#endif
+
 #endif

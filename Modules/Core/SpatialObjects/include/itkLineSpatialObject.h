@@ -127,4 +127,8 @@ protected:
 #include "itkLineSpatialObject.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLineSpatialObjectExplicit.h"
+#endif
+
 #endif // itkLineSpatialObject_h

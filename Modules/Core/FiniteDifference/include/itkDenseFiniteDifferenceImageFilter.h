@@ -21,6 +21,8 @@
 #include "itkFiniteDifferenceImageFilter.h"
 #include "itkMultiThreader.h"
 
+#include "ITKFiniteDifferenceExport.h"
+
 namespace itk
 {
 /**
@@ -192,6 +194,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkDenseFiniteDifferenceImageFilter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDenseFiniteDifferenceImageFilterExplicit.h"
 #endif
 
 #endif

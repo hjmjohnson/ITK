@@ -179,4 +179,8 @@ protected:
 #include "itkContourSpatialObject.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkContourSpatialObjectExplicit.h"
+#endif
+
 #endif // itkContourSpatialObject_h

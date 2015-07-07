@@ -79,7 +79,11 @@ private:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaVesselTubeConverter.hxx"
+#include "itkMetaVesselTubeConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaVesselTubeConverterExplicit.h"
 #endif
 
 #endif

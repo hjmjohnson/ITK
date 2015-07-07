@@ -128,4 +128,8 @@ protected:
 #include "itkMeshSpatialObject.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMeshSpatialObjectExplicit.h"
+#endif
+
 #endif //itkMeshSpatialObject_h

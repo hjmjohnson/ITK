@@ -65,6 +65,10 @@ private:
 
 #include "itkQuadEdgeMeshEulerOperatorJoinFacetFunction.hxx"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshEulerOperatorJoinFacetFunctionExplicit.h"
+#endif
+
 #endif
 
 // eof - itkQuadEdgeMeshEulerOperatorJoinFacetFunction.h

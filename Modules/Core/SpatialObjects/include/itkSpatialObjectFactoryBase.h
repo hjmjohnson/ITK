@@ -31,6 +31,8 @@
 #include "itkObjectFactoryBase.h"
 #include "itkSpatialObjectExport.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class SpatialObjectFactoryBase
@@ -38,7 +40,7 @@ namespace itk
  * \ingroup ITKSpatialObjects
  */
 
-class SpatialObjectFactoryBase:public ObjectFactoryBase
+class ITKSpatialObjects_EXPORT SpatialObjectFactoryBase:public ObjectFactoryBase
 {
 public:
   /** Standard class typedefs. */

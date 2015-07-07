@@ -463,4 +463,8 @@ private:
 #endif
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMeshExplicit.h"
+#endif
+
 #endif

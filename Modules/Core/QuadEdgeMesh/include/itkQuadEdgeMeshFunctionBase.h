@@ -101,6 +101,10 @@ protected:
 };
 } // namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshFunctionBaseExplicit.h"
+#endif
+
 #endif
 
 // eof - itkQuadEdgeMeshFunctionBase.h

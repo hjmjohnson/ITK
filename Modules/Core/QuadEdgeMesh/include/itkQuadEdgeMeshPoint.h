@@ -104,4 +104,8 @@ protected:
 #include "itkQuadEdgeMeshPoint.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshPointExplicit.h"
+#endif
+
 #endif

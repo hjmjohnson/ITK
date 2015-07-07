@@ -202,6 +202,7 @@ template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<signed 
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::Vector<float, 2u>, 3u>, itk::Image<itk::Vector<float, 2u>, 3u> >; //Instantiated 9 times
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::Vector<float, 4u>, 4u>, itk::Image<itk::Vector<float, 4u>, 4u> >; //Instantiated 12 times
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::Vector<float, 2u>, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
+template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::CovariantVector<float, 2u>, 2u>, itk::Image<itk::CovariantVector<float, 2u>, 2u> >;
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::CovariantVector<float, 2u>, 2u>, itk::Image<itk::FixedArray<float, 2u>, 2u> >; //Instantiated 6 times
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<signed char, 3u>, itk::Image<long, 3u> >; //Instantiated 6 times
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<unsigned short, 3u>, itk::Image<double, 3u> >; //Instantiated 12 times
@@ -624,3 +625,6 @@ template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<float, 
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<short, 3u>, itk::Image<float, 3u> >; //Instantiated 99 times
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<float, 3u>, itk::VectorImage<float, 2u> >; //Instantiated 6 times
 template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<unsigned char, 3u>, itk::Image<long, 3u> >; //Instantiated 6 times
+template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::RGBPixel<float>, 2u>, itk::Image<itk::RGBPixel<float>, 2u> >;
+template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::Vector<float, 3u>, 2u>, itk::Image<itk::Vector<float, 3u>, 2u> >;
+template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<char, 3u>, itk::Image<float, 3u> >;

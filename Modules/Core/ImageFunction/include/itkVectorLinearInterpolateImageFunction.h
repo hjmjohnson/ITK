@@ -109,4 +109,8 @@ private:
 #include "itkVectorLinearInterpolateImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVectorLinearInterpolateImageFunctionExplicit.h"
+#endif
+
 #endif

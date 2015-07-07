@@ -111,4 +111,8 @@ protected:
 #include "itkPolygonGroupSpatialObject.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPolygonGroupSpatialObjectExplicit.h"
+#endif
+
 #endif

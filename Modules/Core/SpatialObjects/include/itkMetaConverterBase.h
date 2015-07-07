@@ -85,7 +85,11 @@ private:
 }
 
 #ifndef ITK_MANUAL_INSTATIATION
-  #include "itkMetaConverterBase.hxx"
+#include "itkMetaConverterBase.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaConverterBaseExplicit.h"
 #endif
 
 #endif // itkMetaConverterBase_h

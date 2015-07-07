@@ -233,4 +233,8 @@ protected:
 #include "itkTriangleMeshToSimplexMeshFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTriangleMeshToSimplexMeshFilterExplicit.h"
+#endif
+
 #endif

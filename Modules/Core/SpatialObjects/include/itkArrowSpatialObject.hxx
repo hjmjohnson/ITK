@@ -196,9 +196,6 @@ ArrowSpatialObject< TDimension >
   this->Modified();
 }
 
-template< > void ArrowSpatialObject< 3 > ::UpdateTransform();
-
-
 /** Print the object */
 template< unsigned int TDimension >
 void

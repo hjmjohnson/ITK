@@ -140,10 +140,18 @@ private:
   PointType  m_Position;
   double     m_Length;
 };
+
+//A partial template specialization for 3D UpdateTransform member function
+template<> void ArrowSpatialObject< 3 > ::UpdateTransform();
+
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkArrowSpatialObject.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkArrowSpatialObjectExplicit.h"
 #endif
 
 #endif // itkArrowSpatialObject_h

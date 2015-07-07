@@ -529,4 +529,8 @@ private:
 #include "itkLinearInterpolateImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLinearInterpolateImageFunctionExplicit.h"
+#endif
+
 #endif

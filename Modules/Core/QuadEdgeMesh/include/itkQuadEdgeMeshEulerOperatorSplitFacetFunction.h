@@ -68,6 +68,10 @@ private:
 
 #include "itkQuadEdgeMeshEulerOperatorSplitFacetFunction.hxx"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshEulerOperatorSplitFacetFunctionExplicit.h"
+#endif
+
 #endif
 
 // eof - itkQuadEdgeMeshEulerOperatorSplitFacetFunction.h

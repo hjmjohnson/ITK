@@ -79,7 +79,11 @@ private:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaBlobConverter.hxx"
+#include "itkMetaBlobConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaBlobConverterExplicit.h"
 #endif
 
 #endif

@@ -220,6 +220,7 @@ extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::V
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::Vector<float, 4u>, 4u>, itk::Image<itk::Vector<float, 4u>, 4u> >;
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::Vector<float, 2u>, 2u>, itk::Image<float, 2u> >;
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::CovariantVector<float, 2u>, 2u>, itk::Image<itk::FixedArray<float, 2u>, 2u> >;
+extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::CovariantVector<float, 2u>, 2u>, itk::Image<itk::CovariantVector<float, 2u>, 2u> >;
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<signed char, 3u>, itk::Image<long, 3u> >;
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<unsigned short, 3u>, itk::Image<double, 3u> >;
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<float, 2u>, itk::VectorImage<float, 2u> >;
@@ -641,4 +642,7 @@ extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<short, 3u>, itk::Image<float, 3u> >;
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::VectorImage<float, 3u>, itk::VectorImage<float, 2u> >;
 extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<unsigned char, 3u>, itk::Image<long, 3u> >;
+extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::RGBPixel<float>, 2u>, itk::Image<itk::RGBPixel<float>, 2u> >;
+extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<itk::Vector<float, 3u>, 2u>, itk::Image<itk::Vector<float, 3u>, 2u> >;
+extern template class ITKCommon_EXPORT itk::InPlaceImageFilter<itk::Image<char, 3u>, itk::Image<float, 3u> >;
 #endif //itkInPlaceImageFilterExplicit_h

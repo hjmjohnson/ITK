@@ -79,7 +79,11 @@ private:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-  #include "itkMetaLandmarkConverter.hxx"
+#include "itkMetaLandmarkConverter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaLandmarkConverterExplicit.h"
 #endif
 
 #endif

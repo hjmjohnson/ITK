@@ -182,4 +182,8 @@ private:
 #include "itkSpatialObjectToImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSpatialObjectToImageFilterExplicit.h"
+#endif
+
 #endif

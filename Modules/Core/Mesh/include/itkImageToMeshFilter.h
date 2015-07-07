@@ -96,4 +96,8 @@ private:
 #include "itkImageToMeshFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageToMeshFilterExplicit.h"
+#endif
+
 #endif

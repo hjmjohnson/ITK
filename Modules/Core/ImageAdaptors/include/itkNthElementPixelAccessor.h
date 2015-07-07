@@ -199,4 +199,8 @@ private:
 
 }  // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkNthElementPixelAccessorExplicit.h"
+#endif
+
 #endif

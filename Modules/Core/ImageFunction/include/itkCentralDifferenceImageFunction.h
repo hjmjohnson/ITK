@@ -253,4 +253,8 @@ private:
 #include "itkCentralDifferenceImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCentralDifferenceImageFunctionExplicit.h"
+#endif
+
 #endif

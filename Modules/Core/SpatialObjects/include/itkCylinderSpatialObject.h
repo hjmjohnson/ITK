@@ -22,6 +22,8 @@
 #include "itkAffineTransform.h"
 #include "itkFixedArray.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /** \class CylinderSpatialObject
@@ -29,7 +31,7 @@ namespace itk
  * \brief This class describe a cylinder in 3D only.
  * \ingroup ITKSpatialObjects
  */
-class CylinderSpatialObject:
+class ITKSpatialObjects_EXPORT CylinderSpatialObject:
   public SpatialObject< 3 >
 {
 public:

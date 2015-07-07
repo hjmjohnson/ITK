@@ -70,6 +70,10 @@ private:
 
 #include "itkQuadEdgeMeshZipMeshFunction.hxx"
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkQuadEdgeMeshZipMeshFunctionExplicit.h"
+#endif
+
 #endif
 
 // eof - itkQuadEdgeMeshZipMeshFunction.h
