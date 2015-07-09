@@ -1,2 +1,5 @@
 project(ITKQuadEdgeMeshFiltering)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKQuadEdgeMeshFiltering_LIBRARIES ITKQuadEdgeMeshFiltering)
+endif()
 itk_module_impl()

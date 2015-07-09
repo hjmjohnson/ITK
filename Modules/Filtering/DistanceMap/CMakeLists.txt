@@ -1,2 +1,5 @@
 project(ITKDistanceMap)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKDistanceMap_LIBRARIES ITKDistanceMap)
+endif()
 itk_module_impl()

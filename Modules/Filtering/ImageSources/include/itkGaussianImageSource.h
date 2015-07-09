@@ -146,4 +146,8 @@ private:
 #include "itkGaussianImageSource.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGaussianImageSourceExplicit.h"
+#endif
+
 #endif

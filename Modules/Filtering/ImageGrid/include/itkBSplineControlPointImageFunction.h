@@ -298,4 +298,8 @@ private:
 #include "itkBSplineControlPointImageFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBSplineControlPointImageFunctionExplicit.h"
+#endif
+
 #endif

@@ -2,6 +2,7 @@ set(DOCUMENTATION "This module contains classes made to visually
 enhance the images, mostly by adding them artificial colors")
 
 itk_module(ITKImageFusion
+  ENABLE_SHARED
   COMPILE_DEPENDS
     ITKBinaryMathematicalMorphology
     ITKImageLabel

@@ -152,4 +152,8 @@ private:
 #include "itkBinaryThinningImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBinaryThinningImageFilterExplicit.h"
+#endif
+
 #endif

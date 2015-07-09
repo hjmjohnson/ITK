@@ -173,4 +173,8 @@ private:
 #include "itkChangeLabelImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkChangeLabelImageFilterExplicit.h"
+#endif
+
 #endif

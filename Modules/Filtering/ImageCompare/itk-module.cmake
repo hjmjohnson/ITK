@@ -5,6 +5,7 @@ particular you will find here: checkerboard filter, absolute value differences,
 similarity index and STAPLE.")
 
 itk_module(ITKImageCompare
+  ENABLE_SHARED
   COMPILE_DEPENDS
     ITKImageFilterBase
     ITKImageIntensity

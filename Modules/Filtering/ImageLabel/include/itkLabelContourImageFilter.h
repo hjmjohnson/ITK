@@ -208,4 +208,8 @@ private:
 #include "itkLabelContourImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLabelContourImageFilterExplicit.h"
+#endif
+
 #endif

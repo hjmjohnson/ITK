@@ -1,2 +1,5 @@
 project(ITKImageIntensity)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageIntensity_LIBRARIES ITKImageIntensity)
+endif()
 itk_module_impl()

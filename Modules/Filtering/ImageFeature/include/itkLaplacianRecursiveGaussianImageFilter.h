@@ -166,4 +166,8 @@ private:
 #include "itkLaplacianRecursiveGaussianImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLaplacianRecursiveGaussianImageFilterExplicit.h"
+#endif
+
 #endif

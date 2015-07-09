@@ -154,4 +154,8 @@ private:
 #include "itkApproximateSignedDistanceMapImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkApproximateSignedDistanceMapImageFilterExplicit.h"
+#endif
+
 #endif

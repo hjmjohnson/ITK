@@ -111,4 +111,8 @@ private:
 
 } // end namespace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLiThresholdImageFilterExplicit.h"
+#endif
+
 #endif

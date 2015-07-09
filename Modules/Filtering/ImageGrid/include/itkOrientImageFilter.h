@@ -312,4 +312,8 @@ private:
 #include "itkOrientImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkOrientImageFilterExplicit.h"
+#endif
+
 #endif

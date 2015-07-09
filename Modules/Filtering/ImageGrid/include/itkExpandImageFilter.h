@@ -176,4 +176,8 @@ private:
 #include "itkExpandImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkExpandImageFilterExplicit.h"
+#endif
+
 #endif

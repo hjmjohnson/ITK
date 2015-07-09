@@ -225,4 +225,8 @@ private:
 #include "itkBinaryThresholdImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBinaryThresholdImageFilterExplicit.h"
+#endif
+
 #endif

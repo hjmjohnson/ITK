@@ -229,4 +229,8 @@ private:
 #include "itkConstantVelocityFieldTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkConstantVelocityFieldTransformExplicit.h"
+#endif
+
 #endif // itkConstantVelocityFieldTransform_h

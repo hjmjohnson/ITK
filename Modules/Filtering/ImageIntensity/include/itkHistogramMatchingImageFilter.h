@@ -232,4 +232,8 @@ private:
 #include "itkHistogramMatchingImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkHistogramMatchingImageFilterExplicit.h"
+#endif
+
 #endif

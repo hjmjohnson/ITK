@@ -128,4 +128,8 @@ private:
 #include "itkComposeImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkComposeImageFilterExplicit.h"
+#endif
+
 #endif

@@ -1,2 +1,5 @@
 project(ITKAnisotropicSmoothing)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKAnisotropicSmoothing_LIBRARIES ITKAnisotropicSmoothing)
+endif()
 itk_module_impl()

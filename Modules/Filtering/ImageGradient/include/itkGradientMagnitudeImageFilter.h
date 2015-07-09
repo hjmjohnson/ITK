@@ -142,4 +142,8 @@ private:
 #include "itkGradientMagnitudeImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGradientMagnitudeImageFilterExplicit.h"
+#endif
+
 #endif

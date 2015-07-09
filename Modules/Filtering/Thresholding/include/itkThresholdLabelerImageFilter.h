@@ -216,4 +216,8 @@ private:
 #include "itkThresholdLabelerImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkThresholdLabelerImageFilterExplicit.h"
+#endif
+
 #endif

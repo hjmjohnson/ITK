@@ -239,4 +239,8 @@ private:
 #include "itkBilateralImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBilateralImageFilterExplicit.h"
+#endif
+
 #endif

@@ -150,4 +150,8 @@ private:
 #include "itkCurvatureNDAnisotropicDiffusionFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCurvatureNDAnisotropicDiffusionFunctionExplicit.h"
+#endif
+
 #endif

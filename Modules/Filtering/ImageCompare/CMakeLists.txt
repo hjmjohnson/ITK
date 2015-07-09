@@ -1,2 +1,5 @@
 project(ITKImageCompare)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageCompare_LIBRARIES ITKImageCompare)
+endif()
 itk_module_impl()

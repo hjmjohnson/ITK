@@ -237,4 +237,8 @@ private:
 #include "itkSignedDanielssonDistanceMapImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSignedDanielssonDistanceMapImageFilterExplicit.h"
+#endif
+
 #endif

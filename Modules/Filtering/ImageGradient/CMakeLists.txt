@@ -1,2 +1,5 @@
 project(ITKImageGradient)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageGradient_LIBRARIES ITKImageGradient)
+endif()
 itk_module_impl()

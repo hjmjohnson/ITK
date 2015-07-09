@@ -138,7 +138,11 @@ private:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-# include "itkGaussianExponentialDiffeomorphicTransform.hxx"
+#include "itkGaussianExponentialDiffeomorphicTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGaussianExponentialDiffeomorphicTransformExplicit.h"
 #endif
 
 #endif // itkGaussianExponentialDiffeomorphicTransform_h

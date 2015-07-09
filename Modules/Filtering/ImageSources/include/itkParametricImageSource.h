@@ -99,4 +99,8 @@ private:
 #include "itkParametricImageSource.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkParametricImageSourceExplicit.h"
+#endif
+
 #endif

@@ -88,4 +88,8 @@ private:
 #include "itkOtsuThresholdCalculator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkOtsuThresholdCalculatorExplicit.h"
+#endif
+
 #endif

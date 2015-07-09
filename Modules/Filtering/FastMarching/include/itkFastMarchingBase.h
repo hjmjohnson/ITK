@@ -308,4 +308,9 @@ private:
 }
 
 #include "itkFastMarchingBase.hxx"
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFastMarchingBaseExplicit.h"
+#endif
+
 #endif

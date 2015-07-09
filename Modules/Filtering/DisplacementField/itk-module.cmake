@@ -6,9 +6,11 @@ computing inverse deformation fields, and computing the Jacobian Determinant of
 a deformation field.")
 
 itk_module(ITKDisplacementField
+  ENABLE_SHARED
   COMPILE_DEPENDS
     ITKImageGrid
     ITKImageIntensity
+    ITKImageFunction
   TEST_DEPENDS
     ITKTestKernel
   DESCRIPTION

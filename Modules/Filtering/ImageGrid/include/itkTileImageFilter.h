@@ -162,4 +162,8 @@ private:
 #include "itkTileImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTileImageFilterExplicit.h"
+#endif
+
 #endif

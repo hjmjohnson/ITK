@@ -96,4 +96,8 @@ private:
 #include "itkKittlerIllingworthThresholdCalculator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkKittlerIllingworthThresholdCalculatorExplicit.h"
+#endif
+
 #endif

@@ -135,4 +135,8 @@ private:
 #include "itkGradientNDAnisotropicDiffusionFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGradientNDAnisotropicDiffusionFunctionExplicit.h"
+#endif
+
 #endif

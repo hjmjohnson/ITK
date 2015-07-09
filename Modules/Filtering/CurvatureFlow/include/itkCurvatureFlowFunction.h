@@ -151,4 +151,8 @@ private:
 #include "itkCurvatureFlowFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCurvatureFlowFunctionExplicit.h"
+#endif
+
 #endif

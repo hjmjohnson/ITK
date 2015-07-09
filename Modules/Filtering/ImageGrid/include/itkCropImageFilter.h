@@ -124,4 +124,8 @@ private:
 #include "itkCropImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCropImageFilterExplicit.h"
+#endif
+
 #endif

@@ -17,6 +17,7 @@
  *=========================================================================*/
 #ifndef itkWarpImageFilter_h
 #define itkWarpImageFilter_h
+
 #include "itkImageBase.h"
 #include "itkImageToImageFilter.h"
 #include "itkLinearInterpolateImageFunction.h"
@@ -305,6 +306,10 @@ private:
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkWarpImageFilter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkWarpImageFilterExplicit.h"
 #endif
 
 #endif

@@ -356,4 +356,8 @@ private:
 #include "itkCannyEdgeDetectionImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCannyEdgeDetectionImageFilterExplicit.h"
+#endif
+
 #endif

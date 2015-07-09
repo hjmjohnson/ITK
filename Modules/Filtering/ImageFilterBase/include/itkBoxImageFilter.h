@@ -99,4 +99,8 @@ private:
 #include "itkBoxImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBoxImageFilterExplicit.h"
+#endif
+
 #endif

@@ -91,4 +91,8 @@ private:
 #include "itkIsoDataThresholdCalculator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkIsoDataThresholdCalculatorExplicit.h"
+#endif
+
 #endif

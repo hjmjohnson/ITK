@@ -230,4 +230,8 @@ private:
 #include "itkVelocityFieldTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVelocityFieldTransformExplicit.h"
+#endif
+
 #endif // itkVelocityFieldTransform_h

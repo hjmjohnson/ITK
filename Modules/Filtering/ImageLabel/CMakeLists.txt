@@ -1,2 +1,5 @@
 project(ITKImageLabel)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageLabel_LIBRARIES ITKImageLabel)
+endif()
 itk_module_impl()

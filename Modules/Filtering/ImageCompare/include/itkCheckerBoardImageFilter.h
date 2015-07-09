@@ -110,4 +110,8 @@ private:
 #include "itkCheckerBoardImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCheckerBoardImageFilterExplicit.h"
+#endif
+
 #endif

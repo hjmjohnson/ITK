@@ -143,9 +143,12 @@ private:
 };
 } // end namespace itk
 
-#endif
-
-
 #ifndef ITK_MANUAL_INSTANTIATION
 #include "itkCastImageFilter.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCastImageFilterExplicit.h"
+#endif
+
 #endif

@@ -113,4 +113,8 @@ private:
 #include "itkIntermodesThresholdCalculator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkIntermodesThresholdCalculatorExplicit.h"
+#endif
+
 #endif

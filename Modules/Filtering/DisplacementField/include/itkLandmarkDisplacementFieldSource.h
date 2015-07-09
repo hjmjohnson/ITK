@@ -179,4 +179,8 @@ private:
 #include "itkLandmarkDisplacementFieldSource.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLandmarkDisplacementFieldSourceExplicit.h"
+#endif
+
 #endif

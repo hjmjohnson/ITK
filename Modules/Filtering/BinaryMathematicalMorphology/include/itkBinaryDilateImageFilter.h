@@ -142,4 +142,8 @@ private:
 #include "itkBinaryDilateImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkBinaryDilateImageFilterExplicit.h"
+#endif
+
 #endif

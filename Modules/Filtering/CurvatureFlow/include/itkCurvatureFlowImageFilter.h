@@ -200,4 +200,8 @@ private:
 #include "itkCurvatureFlowImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCurvatureFlowImageFilterExplicit.h"
+#endif
+
 #endif

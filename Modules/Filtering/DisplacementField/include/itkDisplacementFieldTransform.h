@@ -488,4 +488,8 @@ private:
 #include "itkDisplacementFieldTransform.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDisplacementFieldTransformExplicit.h"
+#endif
+
 #endif // itkDisplacementFieldTransform_h

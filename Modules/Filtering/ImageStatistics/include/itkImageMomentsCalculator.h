@@ -226,4 +226,8 @@ private:
 #include "itkImageMomentsCalculator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageMomentsCalculatorExplicit.h"
+#endif
+
 #endif /* itkImageMomentsCalculator_h */

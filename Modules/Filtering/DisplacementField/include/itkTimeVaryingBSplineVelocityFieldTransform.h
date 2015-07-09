@@ -190,7 +190,11 @@ private:
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-# include "itkTimeVaryingBSplineVelocityFieldTransform.hxx"
+#include "itkTimeVaryingBSplineVelocityFieldTransform.hxx"
+#endif
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTimeVaryingBSplineVelocityFieldTransformExplicit.h"
 #endif
 
 #endif // itkTimeVaryingBSplineVelocityFieldTransform_h

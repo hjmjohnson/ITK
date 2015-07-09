@@ -80,4 +80,8 @@ private:
 #include "itkScalarAnisotropicDiffusionFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkScalarAnisotropicDiffusionFunctionExplicit.h"
+#endif
+
 #endif

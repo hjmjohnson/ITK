@@ -196,4 +196,8 @@ private:
 #include "itkIsoContourDistanceImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkIsoContourDistanceImageFilterExplicit.h"
+#endif
+
 #endif

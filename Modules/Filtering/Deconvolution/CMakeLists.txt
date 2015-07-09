@@ -1,3 +1,5 @@
 project(ITK-Deconvolution)
-
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKDeconvolution_LIBRARIES ITKDeconvolution)
+endif()
 itk_module_impl()

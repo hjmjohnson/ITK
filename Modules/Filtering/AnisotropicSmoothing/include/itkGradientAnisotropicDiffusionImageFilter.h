@@ -94,4 +94,8 @@ private:
 };
 } // end namspace itk
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkGradientAnisotropicDiffusionImageFilterExplicit.h"
+#endif
+
 #endif

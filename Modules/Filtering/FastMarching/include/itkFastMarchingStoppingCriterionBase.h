@@ -103,4 +103,9 @@ private:
   void operator = ( const Self& );
 };
 }
+
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFastMarchingStoppingCriterionBaseExplicit.h"
+#endif
+
 #endif

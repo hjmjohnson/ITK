@@ -137,4 +137,8 @@ private:
 #include "itkCoxDeBoorBSplineKernelFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCoxDeBoorBSplineKernelFunctionExplicit.h"
+#endif
+
 #endif

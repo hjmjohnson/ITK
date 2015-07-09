@@ -141,4 +141,8 @@ private:
 #include "itkFlipImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFlipImageFilterExplicit.h"
+#endif
+
 #endif

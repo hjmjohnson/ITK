@@ -1,2 +1,5 @@
 project(ITKImageGrid)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageGrid_LIBRARIES ITKImageGrid)
+endif()
 itk_module_impl()

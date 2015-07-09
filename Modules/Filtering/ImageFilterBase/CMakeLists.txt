@@ -1,2 +1,5 @@
 project(ITKImageFilterBase)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageFilterBase_LIBRARIES ITKImageFilterBase)
+endif()
 itk_module_impl()
