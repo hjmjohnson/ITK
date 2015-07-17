@@ -5,8 +5,6 @@ itk_module(ITKOptimizersv4
   ENABLE_SHARED
   DEPENDS
     ITKOptimizers
-  COMPILE_DEPENDS
-    ITKCommon
     ITKTransform
     ITKImageGrid
     ITKDisplacementField

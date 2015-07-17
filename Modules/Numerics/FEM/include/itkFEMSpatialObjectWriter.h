@@ -69,4 +69,8 @@ FEMSpatialObjectWriter< NDimensions, PixelType, TMeshTraits >
 
 }
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFEMSpatialObjectWriterExplicit.h"
+#endif
+
 #endif // itkFEMSpatialObjectWriter_h

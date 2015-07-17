@@ -1,3 +1,9 @@
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  file(GLOB ITK_FEM_EXPLICIT_SOURCES "*Explicit.cxx")
+else()
+  set(ITK_FEM_EXPLICIT_SOURCES "")
+endif()
+
 set(ITKFEM_SRC
 itkFEMSolution.cxx
 itkFEMElement2DC0LinearLine.cxx
@@ -46,6 +52,8 @@ itkFEMMaterialBase.cxx
 itkFEMMaterialLinearElasticity.cxx
 itkFEMUtility.cxx
 dsrc2c.c
+
+${ITK_FEM_EXPLICIT_SOURCES}
 )
 
 add_library(ITKFEM ${ITKFEM_SRC})

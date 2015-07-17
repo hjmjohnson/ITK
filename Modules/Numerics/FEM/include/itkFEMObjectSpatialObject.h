@@ -93,4 +93,8 @@ protected:
 #include "itkFEMObjectSpatialObject.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFEMObjectSpatialObjectExplicit.h"
+#endif
+
 #endif //itkFEMObjectSpatialObject_h

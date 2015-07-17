@@ -349,4 +349,8 @@ private:
 #include "itkObjectToObjectMetric.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkObjectToObjectMetricExplicit.h"
+#endif
+
 #endif

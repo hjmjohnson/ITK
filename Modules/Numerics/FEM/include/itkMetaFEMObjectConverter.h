@@ -91,5 +91,8 @@ private:
   #include "itkMetaFEMObjectConverter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMetaFEMObjectConverterExplicit.h"
+#endif
 
 #endif

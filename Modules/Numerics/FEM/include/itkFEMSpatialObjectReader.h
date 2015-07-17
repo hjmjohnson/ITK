@@ -69,4 +69,8 @@ FEMSpatialObjectReader< NDimensions, PixelType, TMeshTraits >
 
 }
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkFEMSpatialObjectReaderExplicit.h"
+#endif
+
 #endif // itkFEMSpatialObjectReader_h
