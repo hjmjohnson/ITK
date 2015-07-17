@@ -169,4 +169,8 @@ private:
 #include "itkCSVArray2DDataObject.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCSVArray2DDataObjectExplicit.h"
+#endif
+
 #endif

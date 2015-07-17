@@ -179,4 +179,8 @@ private:
 #include "itkMeshFileReader.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMeshFileReaderExplicit.h"
+#endif
+
 #endif

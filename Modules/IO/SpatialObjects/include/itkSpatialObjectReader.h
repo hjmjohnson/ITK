@@ -106,4 +106,8 @@ private:
 #include "itkSpatialObjectReader.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSpatialObjectReaderExplicit.h"
+#endif
+
 #endif // itkSpatialObjectReader_h

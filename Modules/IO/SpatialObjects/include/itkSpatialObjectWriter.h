@@ -114,4 +114,8 @@ private:
 #include "itkSpatialObjectWriter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkSpatialObjectWriterExplicit.h"
+#endif
+
 #endif // itkSpatialObjectWriter_h

@@ -1,3 +1,9 @@
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  file(GLOB ITK_COMMON_EXPLICIT_SOURCES "*Explicit.cxx")
+else()
+  set(ITK_COMMON_EXPLICIT_SOURCES "")
+endif()
+
 set(ITKIOMesh_SRC
   itkMeshFileReaderException.cxx
   itkBYUMeshIO.cxx
@@ -16,6 +22,8 @@ set(ITKIOMesh_SRC
   itkOFFMeshIOFactory.cxx
   itkVTKPolyDataMeshIO.cxx
   itkVTKPolyDataMeshIOFactory.cxx
+
+  ${ITK_COMMON_EXPLICIT_SOURCES}
 )
 
 add_library(ITKIOMesh ${ITK_LIBRARY_BUILD_TYPE} ${ITKIOMesh_SRC})

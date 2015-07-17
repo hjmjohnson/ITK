@@ -231,4 +231,8 @@ private:
 #include "itkImageIOFactoryRegisterManager.h"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageFileWriterExplicit.h"
+#endif
+
 #endif // itkImageFileWriter_h
