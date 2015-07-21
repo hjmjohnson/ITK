@@ -184,4 +184,8 @@ private:
 #include "itkMatchCardinalityImageToImageMetric.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMatchCardinalityImageToImageMetricExplicit.h"
+#endif
+
 #endif

@@ -326,4 +326,8 @@ private:
 #include "itkPDEDeformableRegistrationFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPDEDeformableRegistrationFilterExplicit.h"
+#endif
+
 #endif

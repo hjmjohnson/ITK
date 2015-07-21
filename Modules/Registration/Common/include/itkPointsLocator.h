@@ -130,4 +130,8 @@ private:
 #include "itkPointsLocator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkPointsLocatorExplicit.h"
+#endif
+
 #endif

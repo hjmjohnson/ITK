@@ -249,4 +249,8 @@ private:
 #include "itkDemonsRegistrationFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDemonsRegistrationFunctionExplicit.h"
+#endif
+
 #endif

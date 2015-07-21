@@ -11,6 +11,7 @@ the moving image to the fixed image with the image metric, an interpolator is
 required-- these can be found in \\\\ref ITKImageFunction.")
 
 itk_module(ITKRegistrationCommon
+  ENABLE_SHARED
   DEPENDS
     ITKOptimizers
     ITKImageIntensity

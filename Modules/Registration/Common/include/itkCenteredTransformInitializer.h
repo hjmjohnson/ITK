@@ -160,4 +160,8 @@ private:
 #include "itkCenteredTransformInitializer.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkCenteredTransformInitializerExplicit.h"
+#endif
+
 #endif /* itkCenteredTransformInitializer_h */

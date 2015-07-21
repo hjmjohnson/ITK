@@ -1,2 +1,5 @@
 project(ITKRegistrationCommon)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKRegistrationCommon_LIBRARIES ITKRegistrationCommon)
+endif()
 itk_module_impl()

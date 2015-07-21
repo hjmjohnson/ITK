@@ -1,2 +1,5 @@
 project(ITKRegistrationMethodsv4)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKRegistrationMethodsv4_LIBRARIES ITKRegistrationMethodsv4)
+endif()
 itk_module_impl()

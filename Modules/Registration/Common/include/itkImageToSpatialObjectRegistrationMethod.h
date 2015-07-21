@@ -230,4 +230,8 @@ private:
 #include "itkImageToSpatialObjectRegistrationMethod.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkImageToSpatialObjectRegistrationMethodExplicit.h"
+#endif
+
 #endif

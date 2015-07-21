@@ -184,4 +184,8 @@ private:
 #include "itkTimeVaryingVelocityFieldImageRegistrationMethodv4.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkTimeVaryingVelocityFieldImageRegistrationMethodv4Explicit.h"
+#endif
+
 #endif

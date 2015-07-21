@@ -190,4 +190,8 @@ private:
 #include "itkNCCRegistrationFunction.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkNCCRegistrationFunctionExplicit.h"
+#endif
+
 #endif

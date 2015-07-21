@@ -157,4 +157,8 @@ private:
 #include "itkDemonsRegistrationFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkDemonsRegistrationFilterExplicit.h"
+#endif
+
 #endif

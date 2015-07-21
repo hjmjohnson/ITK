@@ -139,4 +139,8 @@ private:
 #include "itkMeanSquaresImageToImageMetric.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkMeanSquaresImageToImageMetricExplicit.h"
+#endif
+
 #endif

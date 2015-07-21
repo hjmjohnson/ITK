@@ -1,2 +1,5 @@
 project(ITKFEMRegistration)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKFEMRegistration_LIBRARIES ITKFEMRegistration)
+endif()
 itk_module_impl()
