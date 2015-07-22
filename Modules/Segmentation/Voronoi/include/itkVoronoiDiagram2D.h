@@ -333,4 +333,8 @@ private:
 #include "itkVoronoiDiagram2D.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVoronoiDiagram2DExplicit.h"
+#endif
+
 #endif

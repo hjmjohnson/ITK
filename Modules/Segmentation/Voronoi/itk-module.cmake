@@ -7,6 +7,7 @@ its contents.  The boundary of the internal-external regions are iteratively
 refined by adding seed points to the boundary regions.")
 
 itk_module(ITKVoronoi
+  ENABLE_SHARED
   DEPENDS
     ITKImageFilterBase
     ITKMesh

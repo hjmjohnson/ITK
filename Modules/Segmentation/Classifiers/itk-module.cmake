@@ -6,6 +6,7 @@ have been assigned, they can be modified and applied with the \\\\ref
 ITKLabelMap.")
 
 itk_module(ITKClassifiers
+  ENABLE_SHARED
   DEPENDS
     ITKImageGrid
     ITKStatistics

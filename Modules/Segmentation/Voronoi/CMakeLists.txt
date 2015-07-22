@@ -1,2 +1,5 @@
 project(ITKVoronoi)
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKVoronoi_LIBRARIES ITKVoronoi)
+endif()
 itk_module_impl()

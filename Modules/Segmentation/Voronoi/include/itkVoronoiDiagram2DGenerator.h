@@ -298,4 +298,8 @@ private:
 #include "itkVoronoiDiagram2DGenerator.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVoronoiDiagram2DGeneratorExplicit.h"
+#endif
+
 #endif

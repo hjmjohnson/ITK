@@ -188,4 +188,8 @@ private:
 #include "itkScalarImageKmeansImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkScalarImageKmeansImageFilterExplicit.h"
+#endif
+
 #endif

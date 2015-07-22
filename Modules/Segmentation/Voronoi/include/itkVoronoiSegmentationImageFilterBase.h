@@ -272,4 +272,8 @@ private:
 #include "itkVoronoiSegmentationImageFilterBase.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVoronoiSegmentationImageFilterBaseExplicit.h"
+#endif
+
 #endif

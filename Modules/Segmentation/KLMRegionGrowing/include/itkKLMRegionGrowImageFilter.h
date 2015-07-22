@@ -385,4 +385,8 @@ private:
 #include "itkKLMRegionGrowImageFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkKLMRegionGrowImageFilterExplicit.h"
+#endif
+
 #endif
