@@ -188,4 +188,8 @@ private:
 #include "itkVideoSource.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVideoSourceExplicit.h"
+#endif
+
 #endif

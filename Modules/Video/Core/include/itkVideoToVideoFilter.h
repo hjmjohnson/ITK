@@ -142,4 +142,8 @@ private:
 #include "itkVideoToVideoFilter.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkVideoToVideoFilterExplicit.h"
+#endif
+
 #endif
