@@ -5,8 +5,12 @@ This type of filtering is convenient as a preprocessing stage of segmentation
 algorithms. You may find useful as well the filters in the ITKCurvatureFlow
 module and the ITKSmoothingModule.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKAnisotropicSmoothing_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKAnisotropicSmoothing
-  ENABLE_SHARED
+  ${ITKAnisotropicSmoothing_Shared}
   COMPILE_DEPENDS
     ITKImageGrid
     ITKCurvatureFlow

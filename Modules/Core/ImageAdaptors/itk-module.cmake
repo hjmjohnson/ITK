@@ -4,8 +4,12 @@ pixel-wise operations that do not justify the memory duplication that a normal
 ITK filter may imply. They are also very useful for implementing casting
 operations on the fly.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageAdaptors_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKImageAdaptors
-  ENABLE_SHARED
+  ${ITKImageAdaptors_Shared}
   PRIVATE_DEPENDS
     ITKCommon
   TEST_DEPENDS

@@ -5,8 +5,12 @@ will find filters for: computing a deformation field from a transform,
 computing inverse deformation fields, and computing the Jacobian Determinant of
 a deformation field.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKDisplacementField_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKDisplacementField
-  ENABLE_SHARED
+  ${ITKDisplacementField_Shared}
   COMPILE_DEPENDS
     ITKImageGrid
     ITKImageIntensity

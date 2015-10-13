@@ -3,8 +3,12 @@ particular you will find here: Canny edge detection, Sobel, ZeroCrossings,
 Hough transform for lines and circles, Hessian filters, Vesselness, and
 Fractional anisotropy for tensor images.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageFeature_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKImageFeature
-  ENABLE_SHARED
+  ${ITKImageFeature_Shared}
   COMPILE_DEPENDS
     ITKImageGradient
     ITKImageSources

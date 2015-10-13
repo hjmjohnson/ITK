@@ -6,8 +6,12 @@ filter may apply to every pixel. These classes are rarely used from
 applications. Their main role is to assist in the implementation of ITK
 filters.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageFunction_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKImageFunction
-  ENABLE_SHARED
+  ${ITKImageFunction_Shared}
   COMPILE_DEPENDS
     ITKImageAdaptors
     ITKTransform

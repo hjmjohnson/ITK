@@ -10,8 +10,12 @@ ITKTransform, and optimizers can be found in \\\\ref ITKOptimizers.  To compare
 the moving image to the fixed image with the image metric, an interpolator is
 required-- these can be found in \\\\ref ITKImageFunction.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKRegistrationCommon_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKRegistrationCommon
-  ENABLE_SHARED
+  ${ITKRegistrationCommon_Shared}
   DEPENDS
     ITKOptimizers
     ITKImageIntensity

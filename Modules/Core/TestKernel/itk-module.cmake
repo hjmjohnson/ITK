@@ -3,8 +3,12 @@ infrastructure of ITK. As an application developer you should not normally need
 any of these classes. However, they are essential for the quality control
 system supporting ITK.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKTestKernel_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKTestKernel
-  ENABLE_SHARED
+  ${ITKTestKernel_Shared}
   DEPENDS
     ITKCommon
   COMPILE_DEPENDS

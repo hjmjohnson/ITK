@@ -4,8 +4,12 @@ will find here: how to calculate image moments, minimum maximum values,
 projections, principal components analysis (PCA) for shape modeling,
 computation of label statistics and image accumulation.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageStatistics_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKImageStatistics
-  ENABLE_SHARED
+  ${ITKImageStatistics_Shared}
   COMPILE_DEPENDS
     ITKImageFilterBase
     ITKTransform

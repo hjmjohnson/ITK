@@ -4,8 +4,12 @@ perform regression testing or to compare the outcome of segmentations. In
 particular you will find here: checkerboard filter, absolute value differences,
 similarity index and STAPLE.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageCompare_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKImageCompare
-  ENABLE_SHARED
+  ${ITKImageCompare_Shared}
   COMPILE_DEPENDS
     ITKImageFilterBase
     ITKImageIntensity

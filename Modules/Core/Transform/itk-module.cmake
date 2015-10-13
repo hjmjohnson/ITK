@@ -6,8 +6,12 @@ images, particulaly when mapping them between coordinate systems. Transforms
 are a large family in ITK and form a prolific group of classes in the
 toolkit.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKTransform_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKTransform
-  ENABLE_SHARED
+  ${ITKTransform_Shared}
   DEPENDS
     ITKCommon
   TEST_DEPENDS

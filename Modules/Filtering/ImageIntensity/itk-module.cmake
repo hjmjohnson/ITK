@@ -5,8 +5,12 @@ rescaling, exponentials, conversions between complex and reals, and filters
 that combine multiple images into images of multiple components, as well as
 filters that compute single scalar images from images of multiple components.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageIntensity_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKImageIntensity
-  ENABLE_SHARED
+  ${ITKImageIntensity_Shared}
   COMPILE_DEPENDS
     ITKImageAdaptors
     ITKImageStatistics

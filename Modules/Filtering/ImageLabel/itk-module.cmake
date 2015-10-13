@@ -4,9 +4,14 @@ classification filters, such as watersheds or statistical classifiers. The
 filters in this module compute label statistics and perform operations between
 labels.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKImageLabel_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKImageLabel
-  ENABLE_SHARED
+  ${ITKImageLabel_Shared}
   COMPILE_DEPENDS
+    ITKImageFilterBase
     ITKImageIntensity
   TEST_DEPENDS
     ITKTestKernel

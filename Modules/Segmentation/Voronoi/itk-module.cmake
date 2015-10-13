@@ -6,8 +6,12 @@ structure of interest based on statistical classification criteria applied to
 its contents.  The boundary of the internal-external regions are iteratively
 refined by adding seed points to the boundary regions.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKVoronoi_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKVoronoi
-  ENABLE_SHARED
+  ${ITKVoronoi_Shared}
   DEPENDS
     ITKImageFilterBase
     ITKMesh

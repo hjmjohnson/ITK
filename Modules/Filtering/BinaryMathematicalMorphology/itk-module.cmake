@@ -3,8 +3,12 @@ mathematical morphology techniques for binary images. In addition to the classic
 dilation, opening and closing filters, you will find here geodesic operations,
 maxima and minima filters, and reconstruction filters.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKBinaryMathematicalMorphology_Shared "ENABLE_SHARED")
+endif()
+
 itk_module(ITKBinaryMathematicalMorphology
-  ENABLE_SHARED
+  ${ITKBinaryMathematicalMorphology}
   COMPILE_DEPENDS
     ITKLabelMap
     ITKMathematicalMorphology
