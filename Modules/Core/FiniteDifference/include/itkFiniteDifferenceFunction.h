@@ -22,8 +22,6 @@
 #include "itkConstNeighborhoodIterator.h"
 #include "itkVector.h"
 
-#include "ITKFiniteDifferenceExport.h"
-
 namespace itk
 {
 /**

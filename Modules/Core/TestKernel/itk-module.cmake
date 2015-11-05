@@ -5,13 +5,13 @@ system supporting ITK.")
 
 if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
   set(ITKTestKernel_Shared "ENABLE_SHARED")
+else()
+  set(ITKTestKernel_Shared)
 endif()
 
 itk_module(ITKTestKernel
   ${ITKTestKernel_Shared}
   DEPENDS
-    ITKCommon
-  COMPILE_DEPENDS
     ITKIOBioRad
     ITKIOBMP
     ITKIOGDCM

@@ -5,8 +5,14 @@ commonly used for representing masks in an analytical form, as well as
 approximations of shape by combining them into hierarchical structures similar
 to scene graphs.")
 
+if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
+  set(ITKSpatialObjects_Shared "ENABLE_SHARED")
+else()
+  set(ITKSpatialObjects_Shared "")
+endif()
+
 itk_module(ITKSpatialObjects
-  ENABLE_SHARED
+  ${ITKSpatialObjects_Shared}
   PRIVATE_DEPENDS
     ITKMesh
     ITKCommon

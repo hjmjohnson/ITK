@@ -21,8 +21,6 @@
 #include "itkInPlaceImageFilter.h"
 #include "itkFiniteDifferenceFunction.h"
 
-#include "ITKFiniteDifferenceExport.h"
-
 namespace itk
 {
 /**

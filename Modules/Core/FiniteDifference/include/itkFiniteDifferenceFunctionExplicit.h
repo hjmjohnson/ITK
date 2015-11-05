@@ -1,6 +1,8 @@
 #ifndef itkFiniteDifferenceFunctionExplicit_h
 #define itkFiniteDifferenceFunctionExplicit_h
 
+#include "ITKFiniteDifferenceExport.h"
+
 extern template class ITKFiniteDifference_EXPORT itk::FiniteDifferenceFunction<itk::Image<itk::Vector<float, 2u>, 2u> >; //Instantiated 57 times
 extern template class ITKFiniteDifference_EXPORT itk::FiniteDifferenceFunction<itk::Image<itk::Vector<double, 3u>, 3u> >; //Instantiated 15 times
 extern template class ITKFiniteDifference_EXPORT itk::FiniteDifferenceFunction<itk::Image<itk::RGBPixel<float>, 2u> >; //Instantiated 6 times

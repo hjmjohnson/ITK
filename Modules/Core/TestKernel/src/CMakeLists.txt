@@ -1,16 +1,16 @@
 if(ITK_TEMPLATE_EXPLICIT_INSTANTIATION)
-  file(GLOB ITK_COMMON_EXPLICIT_SOURCES "*Explicit.cxx")
+  file(GLOB ITK_TESTKERNEL_EXPLICIT_SOURCES "*Explicit.cxx")
 else()
-  set(ITK_COMMON_EXPLICIT_SOURCES "")
+  set(ITK_TESTKERNEL_EXPLICIT_SOURCES "")
 endif()
 
-set(ITKTestKernal_SRCS
-${ITK_COMMON_EXPLICIT_SOURCES}
+set(ITKTestKernel_SRCS
+${ITK_TESTKERNEL_EXPLICIT_SOURCES}
 )
 
 ### generating libraries
-if(ITKTestKernal_SRCS)
-  add_library( ITKTestKernel ${ITK_LIBRARY_BUILD_TYPE} ${ITKTestKernal_SRCS})
+if(ITKTestKernel_SRCS)
+  add_library( ITKTestKernel ${ITK_LIBRARY_BUILD_TYPE} ${ITKTestKernel_SRCS})
   itk_module_link_dependencies()
 endif()
 

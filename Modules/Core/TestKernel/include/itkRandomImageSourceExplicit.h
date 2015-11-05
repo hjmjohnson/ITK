@@ -17,6 +17,7 @@
  *=========================================================================*/
 #ifndef itkRandomImageSourceExplicit_h
 #define itkRandomImageSourceExplicit_h
+/*
 extern template class ITKTestKernel_EXPORT itk::RandomImageSource<itk::Image<int, 3u> >;
 extern template class ITKTestKernel_EXPORT itk::RandomImageSource<itk::Image<char, 3u> >;
 extern template class ITKTestKernel_EXPORT itk::RandomImageSource<itk::Image<unsigned short, 2u> >;
@@ -31,4 +32,5 @@ extern template class ITKTestKernel_EXPORT itk::RandomImageSource<itk::Image<sho
 extern template class ITKTestKernel_EXPORT itk::RandomImageSource<itk::Image<unsigned short, 3u> >;
 extern template class ITKTestKernel_EXPORT itk::RandomImageSource<itk::Image<unsigned char, 2u> >;
 extern template class ITKTestKernel_EXPORT itk::RandomImageSource<itk::Image<short, 3u> >;
+*/
 #endif //itkRandomImageSourceExplicit_h

@@ -28,7 +28,11 @@
 #include "itkObjectFactory.h"
 #include "itkIntTypes.h"
 
-#include "ITKTransformExport.h"
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+  #include "ITKTransformExport.h"
+#else
+  #define ITKTransform_EXPORT
+#endif
 
 namespace itk
 {
