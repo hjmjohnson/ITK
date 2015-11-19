@@ -1,5 +1,14 @@
 #include "itkImage.h"
 
+
+
+template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 1u>;
+template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 4u>;
+template class ITKCommon_EXPORT itk::Image<short, 5u>;
+template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 2u>;
+template class ITKCommon_EXPORT itk::Image<itk::Matrix<float, 3u, 3u>, 3u>;
+template class ITKCommon_EXPORT itk::Image<itk::SymmetricSecondRankTensor<double, 2u>, 3u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<int, 3u>, 3u>;
 template class ITKCommon_EXPORT itk::Image<itk::Vector<float, 2u>, 3u>; //Instantiated 30 times
 template class ITKCommon_EXPORT itk::Image<itk::Vector<float, 1u>, 1u>; //Instantiated 8 times
 template class ITKCommon_EXPORT itk::Image<double, 3u>; //Instantiated 1412 times

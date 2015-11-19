@@ -29,6 +29,13 @@
 //exclude watershed
 //exclude TileImageFilter
 //subs std:: std::
+extern template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 1u>;
+extern template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 4u>;
+extern template class ITKCommon_EXPORT itk::Image<short, 5u>;
+extern template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 2u>;
+extern template class ITKCommon_EXPORT itk::Image<itk::Matrix<float, 3u, 3u>, 3u>;
+extern template class ITKCommon_EXPORT itk::Image<itk::SymmetricSecondRankTensor<double, 2u>, 3u>;
+extern template class ITKCommon_EXPORT itk::Image<itk::Vector<int, 3u>, 3u>;
 extern template class ITKCommon_EXPORT itk::Image<itk::Vector<float, 2u>, 3u>;
 extern template class ITKCommon_EXPORT itk::Image<itk::Vector<float, 1u>, 1u>;
 extern template class ITKCommon_EXPORT itk::Image<double, 3u>;

@@ -27,6 +27,7 @@ static unsigned int m_CallNumber;
 
 const unsigned int TEST_VECTOR_PIXEL_DIM = 3;
 
+
 template <typename TPixelType, unsigned int VImageDimension>
 class VTKImageIOTester
 {
