@@ -6,6 +6,8 @@
 #include "itkSymmetricSecondRankTensor.h"
 #include "itkVariableLengthVector.h"
 
+extern template class ITKMesh_EXPORT itk::Mesh<itk::VariableLengthVector<float>, 3u, itk::DefaultStaticMeshTraits<itk::VariableLengthVector<float>, 3u, 3u, float, float, itk::VariableLengthVector<float> > >;
+extern template class ITKMesh_EXPORT itk::Mesh<itk::CovariantVector<float, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::CovariantVector<float, 3u>, 3u, 3u, float, float, itk::CovariantVector<float, 3u> > >;
 extern template class ITKMesh_EXPORT itk::Mesh<double, 2u, itk::DefaultDynamicMeshTraits<double, 2u, 2u, double, float, double> >; //Instantiated 15 times
 extern template class ITKMesh_EXPORT itk::Mesh<float, 2u, itk::DefaultStaticMeshTraits<float, 2u, 2u, float, float, float> >; //Instantiated 6 times
 extern template class ITKMesh_EXPORT itk::Mesh<double, 3u, itk::DefaultStaticMeshTraits<double, 3u, 3u, double, double, double> >; //Instantiated 9 times

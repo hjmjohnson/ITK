@@ -18,6 +18,7 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 
+#include "itkLabelMap.h"
 #include "itkLabelImageToShapeLabelMapFilter.h"
 #include "itkTestingMacros.h"
 

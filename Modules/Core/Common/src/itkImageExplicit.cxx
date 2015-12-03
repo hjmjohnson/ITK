@@ -2,6 +2,22 @@
 
 
 
+template class ITKCommon_EXPORT itk::Image<itk::RGBPixel<char>, 2u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<double, 3u>, 2u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<short, 1u>, 4u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<short, 2u>, 3u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<int, 2u>, 2u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<unsigned char, 3u>, 1u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<double, 2u>, 5u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<float, 9u>, 3u>;
+template class ITKCommon_EXPORT itk::Image<unsigned short, 1u>;
+template class ITKCommon_EXPORT itk::Image<itk::CovariantVector<float, 4u>, 3u>;
+template class ITKCommon_EXPORT itk::Image<itk::Vector<float, 3u>, 1u>;
+template class ITKCommon_EXPORT itk::Image<itk::SymmetricSecondRankTensor<float, 3u>, 1u>;
+template class ITKCommon_EXPORT itk::Image<itk::SymmetricSecondRankTensor<float, 3u>, 4u>;
+template class ITKCommon_EXPORT itk::Image<itk::SymmetricSecondRankTensor<float, 4u>, 3u>;
+template class ITKCommon_EXPORT itk::Image<itk::SymmetricSecondRankTensor<float, 5u>, 3u>;
+template class ITKCommon_EXPORT itk::Image<itk::SymmetricSecondRankTensor<float, 6u>, 3u>;
 template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 1u>;
 template class ITKCommon_EXPORT itk::Image<itk::DiffusionTensor3D<float>, 4u>;
 template class ITKCommon_EXPORT itk::Image<short, 5u>;

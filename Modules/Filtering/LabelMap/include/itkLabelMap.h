@@ -477,4 +477,8 @@ private:
 #include "itkLabelMap.hxx"
 #endif
 
+#ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
+#include "itkLabelMapExplicit.h"
+#endif
+
 #endif
