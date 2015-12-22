@@ -20,6 +20,10 @@
 
 #include "itkLabelObject.h"
 
+#define ITKAttributeLabelObjectIncludes
+#include "itkLabelMap.h"
+#undef ITKAttributeLabelObjectIncludes
+
 namespace itk
 {
 
