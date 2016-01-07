@@ -41,6 +41,8 @@ SpatialObjectDuplicator< TInputSpatialObject >
 ::CopyObject(const InternalSpatialObjectType *source,
              InternalSpatialObjectType *destination)
 {
+  std::cout << "DEBUG: CopyObject" << std::endl;
+
   // Create the new Spatial Object using the SpatialObjectFactory
   LightObject::Pointer i;
   std::string          value = source->GetSpatialObjectTypeAsString();
@@ -52,7 +54,7 @@ SpatialObjectDuplicator< TInputSpatialObject >
   SOType *newSO = dynamic_cast< SOType * >( i.GetPointer() );
   if ( newSO == ITK_NULLPTR )
     {
-    std::cout << "Could not create an instance of " << value << std::endl
+    std::cout << "Could not create an instance of \"" << value << "\""  << std::endl
               << "The usual cause of this error is not registering the "
               << "SpatialObject with SpatialFactory" << std::endl;
     std::cout << "Currently registered Transforms: " << std::endl;

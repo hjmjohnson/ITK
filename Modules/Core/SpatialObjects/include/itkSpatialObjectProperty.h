@@ -24,6 +24,8 @@
 #include "itkLightObject.h"
 #include "itkObjectFactory.h"
 
+#include "ITKSpatialObjectsExport.h"
+
 namespace itk
 {
 /**
@@ -32,7 +34,7 @@ namespace itk
  */
 
 template< typename TComponentType = float >
-class SpatialObjectProperty:
+class ITKSpatialObjects_EXPORT SpatialObjectProperty:
   public LightObject
 {
 public:
