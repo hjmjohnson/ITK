@@ -589,7 +589,7 @@ function(add_jar _TARGET_NAME)
     set(_JAVA_COMPILE_FILES)
     set(_JAVA_COMPILE_FILELISTS)
     set(_JAVA_DEPENDS)
-    set(_JAVA_COMPILE_DEPENDS)
+    set(_JAVA_DEPENDS ## COMPILE_DEPENDS)
     set(_JAVA_RESOURCE_FILES)
     set(_JAVA_RESOURCE_FILES_RELATIVE)
     foreach(_JAVA_SOURCE_FILE ${_JAVA_SOURCE_FILES})
@@ -644,7 +644,7 @@ function(add_jar _TARGET_NAME)
                 string(APPEND CMAKE_JAVA_INCLUDE_PATH_FINAL "${CMAKE_JAVA_INCLUDE_FLAG_SEP}${_JAVA_JAR_PATH}")
                 list(APPEND CMAKE_JAVA_INCLUDE_PATH ${_JAVA_JAR_PATH})
                 list(APPEND _JAVA_DEPENDS ${_JAVA_INCLUDE_JAR})
-                list(APPEND _JAVA_COMPILE_DEPENDS ${_JAVA_INCLUDE_JAR})
+                list(APPEND _JAVA_DEPENDS ## COMPILE_DEPENDS ${_JAVA_INCLUDE_JAR})
             else ()
                 message(SEND_ERROR "add_jar: INCLUDE_JARS target ${_JAVA_INCLUDE_JAR} is not a jar")
             endif ()
@@ -652,7 +652,7 @@ function(add_jar _TARGET_NAME)
             string(APPEND CMAKE_JAVA_INCLUDE_PATH_FINAL "${CMAKE_JAVA_INCLUDE_FLAG_SEP}${_JAVA_INCLUDE_JAR}")
             list(APPEND CMAKE_JAVA_INCLUDE_PATH "${_JAVA_INCLUDE_JAR}")
             list(APPEND _JAVA_DEPENDS "${_JAVA_INCLUDE_JAR}")
-            list(APPEND _JAVA_COMPILE_DEPENDS "${_JAVA_INCLUDE_JAR}")
+            list(APPEND _JAVA_DEPENDS ## COMPILE_DEPENDS "${_JAVA_INCLUDE_JAR}")
         endif ()
     endforeach()
 
@@ -683,7 +683,7 @@ function(add_jar _TARGET_NAME)
                 ${_GENERATE_NATIVE_HEADERS}
                 ${_JAVA_SOURCES_FILELISTS}
             COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_JAVA_CLASS_OUTPUT_PATH}/java_compiled_${_TARGET_NAME}
-            DEPENDS ${_JAVA_COMPILE_FILES} ${_JAVA_COMPILE_FILELISTS} ${_JAVA_COMPILE_DEPENDS}
+            DEPENDS ${_JAVA_COMPILE_FILES} ${_JAVA_COMPILE_FILELISTS} ${_JAVA_DEPENDS ## COMPILE_DEPENDS}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             COMMENT "Building Java objects for ${_TARGET_NAME}.jar"
         )

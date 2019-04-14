@@ -12,7 +12,7 @@ itk_module(ITKSpatialObjects
   PRIVATE_DEPENDS
     ITKMesh
     ITKCommon
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKImageFunction
     ITKMetaIO
   TEST_DEPENDS

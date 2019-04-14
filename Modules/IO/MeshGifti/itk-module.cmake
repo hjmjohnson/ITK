@@ -5,7 +5,7 @@ itk_module(ITKIOMeshGifti
   DEPENDS
     ITKCommon
     ITKIOMeshBase
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKMesh
   PRIVATE_DEPENDS
     ITKGIFTI

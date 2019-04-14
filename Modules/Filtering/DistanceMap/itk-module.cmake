@@ -4,7 +4,7 @@ well as other distance concepts such as Hausdorff and Chamfer distances.")
 
 itk_module(ITKDistanceMap
   ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKBinaryMathematicalMorphology
     ITKImageLabel
     ITKNarrowBand

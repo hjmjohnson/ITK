@@ -5,7 +5,7 @@ maxima and minima filters, and reconstruction filters.")
 
 itk_module(ITKMathematicalMorphology
   ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKImageFilterBase
     ITKImageIntensity
     ITKImageGrid

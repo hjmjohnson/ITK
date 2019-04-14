@@ -15,12 +15,12 @@ itk_module(ITKCommon
   DEPENDS
     ITKEigen3
     ITKKWIML
+    ITKVNLInstantiation
     ${ITKCOMMON_TBB_DEPENDS}
   PRIVATE_DEPENDS
     ITKDoubleConversion
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKKWSys
-    ITKVNLInstantiation
   TEST_DEPENDS
     ITKTestKernel
     ITKMesh

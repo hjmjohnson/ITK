@@ -25,9 +25,6 @@ itk_module(ITKTestKernel
     ITKIOMeshGifti
     ITKIOMeshOBJ
     ITKIOMeshOFF
-  COMPILE_DEPENDS
-    ITKKWSys
-    ITKDoubleConversion
   TEST_DEPENDS
     ITKCommon
     ITKDoubleConversion

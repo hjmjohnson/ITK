@@ -7,7 +7,7 @@ module and the ITKSmoothingModule.")
 
 itk_module(ITKAnisotropicSmoothing
   ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATIONR
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKImageGrid
     ITKCurvatureFlow
   TEST_DEPENDS

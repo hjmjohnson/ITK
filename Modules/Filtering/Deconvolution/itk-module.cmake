@@ -3,7 +3,7 @@ that have been blurred with a shift-invariant kernel.")
 
 itk_module(ITKDeconvolution
   ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKConvolution
     ITKImageSources
     ITKImageAdaptors

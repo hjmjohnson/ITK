@@ -18,7 +18,7 @@ itk_module(ITKLevelSets
     ITKImageCompare
     ITKFastMarching
     ITKNarrowBand
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKIOImageBase
   TEST_DEPENDS
     ITKTestKernel

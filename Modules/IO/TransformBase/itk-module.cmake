@@ -7,7 +7,7 @@ itk_module(ITKIOTransformBase
     ITKCommon
     ITKTransform
     ITKTransformFactory
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKDisplacementField
   TEST_DEPENDS
     ITKTestKernel

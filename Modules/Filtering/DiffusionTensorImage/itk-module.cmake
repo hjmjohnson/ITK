@@ -4,7 +4,7 @@ computes a tensor image from a set of gradient images.")
 
 itk_module(ITKDiffusionTensorImage
   ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKSpatialObjects
   TEST_DEPENDS
     ITKTestKernel

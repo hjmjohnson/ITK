@@ -9,7 +9,7 @@ itk_module(ITKSuperPixel
     ITKCommon
     ITKStatistics
     ITKImageGrid
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKImageSources
   TEST_DEPENDS
     ITKTestKernel

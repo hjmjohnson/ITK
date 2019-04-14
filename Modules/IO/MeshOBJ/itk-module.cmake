@@ -5,7 +5,7 @@ itk_module(ITKIOMeshOBJ
   DEPENDS
     ITKCommon
     ITKIOMeshBase
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKMesh
   TEST_DEPENDS
     ITKTestKernel

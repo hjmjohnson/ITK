@@ -6,7 +6,7 @@ itk_module(ITKVtkGlue
   DEPENDS
     ITKCommon
     ITKVTK
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKImageIntensity
   TEST_DEPENDS
     ITKTestKernel

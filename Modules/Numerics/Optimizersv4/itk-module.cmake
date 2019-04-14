@@ -7,7 +7,7 @@ itk_module(ITKOptimizersv4
     ITKOptimizers
   PRIVATE_DEPENDS
     ITKLIBLBFGS
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKCommon
     ITKTransform
     ITKImageGrid

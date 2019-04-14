@@ -8,7 +8,7 @@ itk_module(ITKBiasCorrection
   ENABLE_SHARED
   PRIVATE_DEPENDS
     ITKCommon
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKOptimizers
     ITKImageGrid
     ITKImageIntensity

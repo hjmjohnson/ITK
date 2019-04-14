@@ -4,7 +4,7 @@ analysis algorithms.")
 
 itk_module(ITKConvolution
   ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKFFT
     ITKImageIntensity
     ITKThresholding

@@ -6,7 +6,7 @@ itk_module(ITKGPUThresholding
   DEPENDS
     ITKCommon
     ITKGPUCommon
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKThresholding
   TEST_DEPENDS
     ITKTestKernel

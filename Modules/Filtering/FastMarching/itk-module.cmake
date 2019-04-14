@@ -4,7 +4,7 @@ Marching in both itk::Images and itk::QuadEdgeMeshes.")
 
 itk_module(ITKFastMarching
   ENABLE_SHARED # ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKMesh
     ITKQuadEdgeMesh
     ITKConnectedComponents

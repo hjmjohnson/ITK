@@ -4,7 +4,7 @@ difference of Gaussians.")
 
 itk_module(ITKImageGradient
   ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKImageAdaptors
     ITKImageIntensity
     ITKSmoothing

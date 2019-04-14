@@ -5,7 +5,7 @@ itk_module(ITKIOMeshVTK
     ITKIOMeshBase
   PRIVATE_DEPENDS
     ITKDoubleConversion
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKMesh
   TEST_DEPENDS
     ITKTestKernel

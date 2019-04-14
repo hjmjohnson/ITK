@@ -5,7 +5,9 @@ shrinking, and changing its origin or spacing or orientation.")
 
 itk_module(ITKImageGrid
   ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS
+    ITKCommon
+  DEPENDS ## COMPILE_DEPENDS
     ITKImageFunction
     ITKImageFilterBase
   TEST_DEPENDS

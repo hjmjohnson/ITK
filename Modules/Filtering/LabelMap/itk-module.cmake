@@ -12,7 +12,7 @@ itk_module(ITKLabelMap
     ITKImageLabel
   PRIVATE_DEPENDS
     ITKStatistics
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKTransform
   TEST_DEPENDS
     ITKTestKernel

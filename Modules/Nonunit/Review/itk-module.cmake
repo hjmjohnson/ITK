@@ -77,7 +77,7 @@ itk_module(ITKReview
     ITKVoronoi
     ITKVTK
     ITKWatersheds
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKIOTransformBase
     ITKOpenJPEG
     ITKLabelMap

@@ -6,7 +6,7 @@ find the ITKSmoothing and the ITKAnisotropicSmoothing useful as well.")
 
 itk_module(ITKCurvatureFlow
   ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS ## COMPILE_DEPENDS
     ITKFiniteDifference
     ITKImageFilterBase
   TEST_DEPENDS

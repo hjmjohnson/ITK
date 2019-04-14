@@ -7,7 +7,7 @@ filters.")
 
 itk_module(ITKImageFilterBase
   ENABLE_SHARED #ENABLE_SHARED_IF_EXPLICIT_INSTANTIATION
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
   TEST_DEPENDS
     ITKTestKernel
