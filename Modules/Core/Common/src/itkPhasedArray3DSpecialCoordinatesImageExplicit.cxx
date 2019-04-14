@@ -17,4 +17,4 @@
  *=========================================================================*/
 #include "itkPhasedArray3DSpecialCoordinatesImage.h"
 
-template class ITKCommon_EXPORT itk::PhasedArray3DSpecialCoordinatesImage<float>;
+template class itk::PhasedArray3DSpecialCoordinatesImage<float>;

@@ -1,4 +1,4 @@
 #include "itkArrowSpatialObject.h"
 
-template class ITKSpatialObjects_EXPORT itk::ArrowSpatialObject<2u>;
-template class ITKSpatialObjects_EXPORT itk::ArrowSpatialObject<3u>;
+template class itk::ArrowSpatialObject<2u>;
+template class itk::ArrowSpatialObject<3u>;

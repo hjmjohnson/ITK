@@ -17,4 +17,4 @@
  *=========================================================================*/
 #include "itkAnnulusOperator.h"
 
-template class ITKCommon_EXPORT itk::AnnulusOperator<float, 2u, itk::NeighborhoodAllocator<float> >; //Instantiated 4 times
+template class itk::AnnulusOperator<float, 2u, itk::NeighborhoodAllocator<float> >; //Instantiated 4 times

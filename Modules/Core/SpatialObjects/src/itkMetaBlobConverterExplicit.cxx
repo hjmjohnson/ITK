@@ -1,4 +1,4 @@
 #include "itkMetaBlobConverter.h"
 
-template class ITKSpatialObjects_EXPORT itk::MetaBlobConverter<2u>;
-template class ITKSpatialObjects_EXPORT itk::MetaBlobConverter<3u>;
+template class itk::MetaBlobConverter<2u>;
+template class itk::MetaBlobConverter<3u>;

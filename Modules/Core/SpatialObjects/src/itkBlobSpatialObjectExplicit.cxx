@@ -1,4 +1,4 @@
 #include "itkBlobSpatialObject.h"
 
-template class ITKSpatialObjects_EXPORT itk::BlobSpatialObject<2u>;
-template class ITKSpatialObjects_EXPORT itk::BlobSpatialObject<3u>;
+template class itk::BlobSpatialObject<2u>;
+template class itk::BlobSpatialObject<3u>;

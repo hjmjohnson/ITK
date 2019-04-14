@@ -17,4 +17,4 @@
  *=========================================================================*/
 #include "itkColorTable.h"
 
-template class ITKCommon_EXPORT itk::ColorTable<float>; //Instantiated 4 times
+template class itk::ColorTable<float>; //Instantiated 4 times

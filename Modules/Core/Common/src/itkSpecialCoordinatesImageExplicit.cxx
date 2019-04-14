@@ -17,4 +17,4 @@
  *=========================================================================*/
 #include "itkSpecialCoordinatesImage.h"
 
-template class ITKCommon_EXPORT itk::SpecialCoordinatesImage<float, 3u>; //Instantiated 4 times
+template class itk::SpecialCoordinatesImage<float, 3u>; //Instantiated 4 times

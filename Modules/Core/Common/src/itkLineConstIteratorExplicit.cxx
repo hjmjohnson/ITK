@@ -17,4 +17,4 @@
  *=========================================================================*/
 #include "itkLineConstIterator.h"
 
-template class ITKCommon_EXPORT itk::LineConstIterator<itk::Image<unsigned char, 2u> >; //Instantiated 4 times
+template class itk::LineConstIterator<itk::Image<unsigned char, 2u> >; //Instantiated 4 times

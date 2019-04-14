@@ -17,4 +17,4 @@
  *=========================================================================*/
 #include "itkSymmetricEllipsoidInteriorExteriorSpatialFunction.h"
 
-template class ITKCommon_EXPORT itk::SymmetricEllipsoidInteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> >;
+template class itk::SymmetricEllipsoidInteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> >;

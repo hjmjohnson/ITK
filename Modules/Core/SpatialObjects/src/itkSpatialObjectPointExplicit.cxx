@@ -1,4 +1,4 @@
 #include "itkSpatialObjectPoint.h"
 
-template class ITKSpatialObjects_EXPORT itk::SpatialObjectPoint<2u>;
-template class ITKSpatialObjects_EXPORT itk::SpatialObjectPoint<3u>;
+template class itk::SpatialObjectPoint<2u>;
+template class itk::SpatialObjectPoint<3u>;
