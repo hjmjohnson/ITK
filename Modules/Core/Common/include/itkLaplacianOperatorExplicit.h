@@ -17,9 +17,9 @@
  *=========================================================================*/
 #ifndef itkLaplacianOperatorExplicit_h
 #define itkLaplacianOperatorExplicit_h
-extern template class ITKCommon_EXPORT itk::LaplacianOperator<float, 2u, itk::NeighborhoodAllocator<float> >;
-extern template class ITKCommon_EXPORT itk::LaplacianOperator<double, 3u, itk::NeighborhoodAllocator<double> >;
-extern template class ITKCommon_EXPORT itk::LaplacianOperator<double, 2u, itk::NeighborhoodAllocator<double> >;
-extern template class ITKCommon_EXPORT itk::LaplacianOperator<double, 4u, itk::NeighborhoodAllocator<double> >;
-extern template class ITKCommon_EXPORT itk::LaplacianOperator<float, 3u, itk::NeighborhoodAllocator<float> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LaplacianOperator<float, 2u, itk::NeighborhoodAllocator<float> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LaplacianOperator<double, 3u, itk::NeighborhoodAllocator<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LaplacianOperator<double, 2u, itk::NeighborhoodAllocator<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LaplacianOperator<double, 4u, itk::NeighborhoodAllocator<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LaplacianOperator<float, 3u, itk::NeighborhoodAllocator<float> >;
 #endif //itkLaplacianOperatorExplicit_h

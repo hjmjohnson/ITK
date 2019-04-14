@@ -17,12 +17,12 @@
  *=========================================================================*/
 #ifndef itkImageRandomConstIteratorWithIndexExplicit_h
 #define itkImageRandomConstIteratorWithIndexExplicit_h
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<unsigned short, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<float, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<double, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<float, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<unsigned char, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<double, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<unsigned char, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageRandomConstIteratorWithIndex<itk::Image<short, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<unsigned short, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<float, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<double, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<float, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<unsigned char, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<double, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<unsigned char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomConstIteratorWithIndex<itk::Image<short, 3u> >;
 #endif //itkImageRandomConstIteratorWithIndexExplicit_h

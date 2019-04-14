@@ -17,10 +17,10 @@
  *=========================================================================*/
 #ifndef itkImageRegionExplicit_h
 #define itkImageRegionExplicit_h
-extern template class ITKCommon_EXPORT itk::ImageRegion<1u>;
-extern template class ITKCommon_EXPORT itk::ImageRegion<2u>;
-extern template class ITKCommon_EXPORT itk::ImageRegion<3u>;
-extern template class ITKCommon_EXPORT itk::ImageRegion<4u>;
-extern template class ITKCommon_EXPORT itk::ImageRegion<5u>;
-extern template class ITKCommon_EXPORT itk::ImageRegion<6u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<1u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<5u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<6u>;
 #endif //itkImageRegionExplicit_h

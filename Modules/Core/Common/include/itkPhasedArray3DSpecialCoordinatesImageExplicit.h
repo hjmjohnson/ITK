@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkPhasedArray3DSpecialCoordinatesImageExplicit_h
 #define itkPhasedArray3DSpecialCoordinatesImageExplicit_h
-extern template class ITKCommon_EXPORT itk::PhasedArray3DSpecialCoordinatesImage<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PhasedArray3DSpecialCoordinatesImage<float>;
 #endif //itkPhasedArray3DSpecialCoordinatesImageExplicit_h

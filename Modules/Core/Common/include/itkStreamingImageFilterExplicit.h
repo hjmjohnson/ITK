@@ -17,25 +17,25 @@
  *=========================================================================*/
 #ifndef itkStreamingImageFilterExplicit_h
 #define itkStreamingImageFilterExplicit_h
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<short, 2u>, itk::Image<short, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<signed char, 3u>, itk::Image<signed char, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned short, 2u>, itk::Image<unsigned short, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned int, 2u>, itk::Image<unsigned int, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<short, 3u>, itk::Image<short, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<int, 2u>, itk::Image<int, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned short, 3u>, itk::Image<unsigned short, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<long, 3u>, itk::Image<long, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned long, 3u>, itk::Image<unsigned long, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<signed char, 2u>, itk::Image<signed char, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned int, 3u>, itk::Image<unsigned int, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<long, 2u>, itk::Image<long, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<float, 4u>, itk::Image<float, 4u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned long, 2u>, itk::Image<unsigned long, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<double, 2u>, itk::Image<double, 2u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<int, 3u>, itk::Image<int, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<double, 3u>, itk::Image<double, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> >;
-extern template class ITKCommon_EXPORT itk::StreamingImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<short, 2u>, itk::Image<short, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<signed char, 3u>, itk::Image<signed char, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned short, 2u>, itk::Image<unsigned short, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned int, 2u>, itk::Image<unsigned int, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<short, 3u>, itk::Image<short, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<int, 2u>, itk::Image<int, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned short, 3u>, itk::Image<unsigned short, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<long, 3u>, itk::Image<long, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned long, 3u>, itk::Image<unsigned long, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<signed char, 2u>, itk::Image<signed char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned int, 3u>, itk::Image<unsigned int, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<long, 2u>, itk::Image<long, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<float, 4u>, itk::Image<float, 4u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned long, 2u>, itk::Image<unsigned long, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<double, 2u>, itk::Image<double, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<int, 3u>, itk::Image<int, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<double, 3u>, itk::Image<double, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::StreamingImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >;
 #endif //itkStreamingImageFilterExplicit_h

@@ -22,21 +22,21 @@
 #include "itkMatrix.h"
 #include <vector>
 //subs std:: std::
-extern template class ITKCommon_EXPORT itk::MetaDataObject<unsigned long>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<float>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<unsigned short>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<itk::Array<double> >;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<char>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > >;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<bool>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<std::basic_string<char, std::char_traits<char>, std::allocator<char> > >;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<short>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<itk::Array<char> >;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<int>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<itk::Array<int> >;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<unsigned int>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<itk::Array<float> >;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<double>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<unsigned char>;
-extern template class ITKCommon_EXPORT itk::MetaDataObject<long>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<unsigned long>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<unsigned short>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<itk::Array<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<char>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<bool>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<std::basic_string<char, std::char_traits<char>, std::allocator<char> > >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<short>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<itk::Array<char> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<int>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<itk::Array<int> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<unsigned int>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<itk::Array<float> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<unsigned char>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject<long>;
 #endif //itkMetaDataObjectExplicit_h

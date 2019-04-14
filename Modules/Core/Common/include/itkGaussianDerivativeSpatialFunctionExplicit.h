@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkGaussianDerivativeSpatialFunctionExplicit_h
 #define itkGaussianDerivativeSpatialFunctionExplicit_h
-extern template class ITKCommon_EXPORT itk::GaussianDerivativeSpatialFunction<double, 1u, itk::Point<double, 1u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianDerivativeSpatialFunction<double, 1u, itk::Point<double, 1u> >;
 #endif //itkGaussianDerivativeSpatialFunctionExplicit_h

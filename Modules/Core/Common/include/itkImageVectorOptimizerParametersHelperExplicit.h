@@ -17,13 +17,13 @@
  *=========================================================================*/
 #ifndef itkImageVectorOptimizerParametersHelperExplicit_h
 #define itkImageVectorOptimizerParametersHelperExplicit_h
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<float, 3u, 4u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<double, 2u, 3u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<double, 3u, 4u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<double, 4u, 4u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<float, 2u, 3u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<float, 3u, 3u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<double, 3u, 3u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<double, 2u, 2u>;
-extern template class ITKCommon_EXPORT itk::ImageVectorOptimizerParametersHelper<float, 2u, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<float, 3u, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<double, 2u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<double, 3u, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<double, 4u, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<float, 2u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<float, 3u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<double, 3u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<double, 2u, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageVectorOptimizerParametersHelper<float, 2u, 2u>;
 #endif //itkImageVectorOptimizerParametersHelperExplicit_h

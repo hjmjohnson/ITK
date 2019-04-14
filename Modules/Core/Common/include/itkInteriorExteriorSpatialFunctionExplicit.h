@@ -17,7 +17,7 @@
  *=========================================================================*/
 #ifndef itkInteriorExteriorSpatialFunctionExplicit_h
 #define itkInteriorExteriorSpatialFunctionExplicit_h
-extern template class ITKCommon_EXPORT itk::InteriorExteriorSpatialFunction<1u, itk::Point<double, 1u> >;
-extern template class ITKCommon_EXPORT itk::InteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> >;
-extern template class ITKCommon_EXPORT itk::InteriorExteriorSpatialFunction<2u, itk::Point<double, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::InteriorExteriorSpatialFunction<1u, itk::Point<double, 1u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::InteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::InteriorExteriorSpatialFunction<2u, itk::Point<double, 2u> >;
 #endif //itkInteriorExteriorSpatialFunctionExplicit_h

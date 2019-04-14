@@ -17,17 +17,17 @@
  *=========================================================================*/
 #ifndef itkImportImageFilterExplicit_h
 #define itkImportImageFilterExplicit_h
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<float, 4u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<double, 3u>, 3u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<double, 2u>, 3u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<unsigned int, 2u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<float, 3u>, 4u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<float, 3u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<double, 3u>, 4u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<double, 2u>, 2u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<float, 2u>, 3u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<float, 2u>, 2u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<itk::Vector<float, 3u>, 3u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<float, 2u>;
-extern template class ITKCommon_EXPORT itk::ImportImageFilter<unsigned int, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<float, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<double, 3u>, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<double, 2u>, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<unsigned int, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<float, 3u>, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<float, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<double, 3u>, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<double, 2u>, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<float, 2u>, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<float, 2u>, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<itk::Vector<float, 3u>, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<float, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImportImageFilter<unsigned int, 3u>;
 #endif //itkImportImageFilterExplicit_h

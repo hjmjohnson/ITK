@@ -18,7 +18,7 @@
 #ifndef itkSymmetricEigenAnalysisExplicit_h
 #define itkSymmetricEigenAnalysisExplicit_h
 #include "itkMatrix.h"
-extern template class ITKCommon_EXPORT itk::SymmetricEigenAnalysis<itk::Matrix<double, 4u, 4u>, vnl_vector<double>, vnl_matrix<double> >;
-extern template class ITKCommon_EXPORT itk::SymmetricEigenAnalysis<itk::Matrix<float, 3u, 3u>, itk::FixedArray<float, 3u>, itk::Matrix<float, 3u, 3u> >;
-extern template class ITKCommon_EXPORT itk::SymmetricEigenAnalysis<itk::Matrix<double, 3u, 3u>, itk::FixedArray<double, 3u>, itk::Matrix<double, 3u, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SymmetricEigenAnalysis<itk::Matrix<double, 4u, 4u>, vnl_vector<double>, vnl_matrix<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SymmetricEigenAnalysis<itk::Matrix<float, 3u, 3u>, itk::FixedArray<float, 3u>, itk::Matrix<float, 3u, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SymmetricEigenAnalysis<itk::Matrix<double, 3u, 3u>, itk::FixedArray<double, 3u>, itk::Matrix<double, 3u, 3u> >;
 #endif //itkSymmetricEigenAnalysisExplicit_h

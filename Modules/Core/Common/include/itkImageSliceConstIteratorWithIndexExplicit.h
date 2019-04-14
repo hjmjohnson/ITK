@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkImageSliceConstIteratorWithIndexExplicit_h
 #define itkImageSliceConstIteratorWithIndexExplicit_h
-extern template class ITKCommon_EXPORT itk::ImageSliceConstIteratorWithIndex<itk::Image<float, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageSliceConstIteratorWithIndex<itk::Image<unsigned char, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageSliceConstIteratorWithIndex<itk::Image<float, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageSliceConstIteratorWithIndex<itk::Image<unsigned char, 3u> >;
 #endif //itkImageSliceConstIteratorWithIndexExplicit_h

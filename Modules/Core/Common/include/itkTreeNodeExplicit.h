@@ -19,5 +19,5 @@
 #define itkTreeNodeExplicit_h
 //exclude SpatialObject
 //exclude TestData
-extern template class ITKCommon_EXPORT itk::TreeNode<int>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TreeNode<int>;
 #endif //itkTreeNodeExplicit_h

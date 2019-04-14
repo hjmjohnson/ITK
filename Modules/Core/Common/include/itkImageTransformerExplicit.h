@@ -17,26 +17,26 @@
  *=========================================================================*/
 #ifndef itkImageTransformerExplicit_h
 #define itkImageTransformerExplicit_h
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<signed char, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned short, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<double, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned long, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned long, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<int, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<int, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<long, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned int, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<itk::Vector<unsigned char, 2u>, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<float, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<signed char, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned char, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<short, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<double, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<float, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<short, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned int, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<long, 2u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned short, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<unsigned char, 3u> >;
-extern template class ITKCommon_EXPORT itk::ImageTransformer<itk::Image<itk::RGBPixel<unsigned char>, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<signed char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned short, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<double, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned long, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned long, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<int, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<int, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<long, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned int, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<itk::Vector<unsigned char, 2u>, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<float, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<signed char, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<short, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<double, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<float, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<short, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned int, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<long, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned short, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<unsigned char, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageTransformer<itk::Image<itk::RGBPixel<unsigned char>, 2u> >;
 #endif //itkImageTransformerExplicit_h

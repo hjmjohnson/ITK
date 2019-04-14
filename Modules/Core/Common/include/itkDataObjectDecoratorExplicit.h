@@ -24,5 +24,5 @@
 //exclude AffineTransform
 //exclude DisplacementFieldTransform
 //exclude FunctionBase
-extern template class ITKCommon_EXPORT itk::DataObjectDecorator<itk::VectorContainer<unsigned char, double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DataObjectDecorator<itk::VectorContainer<unsigned char, double> >;
 #endif //itkDataObjectDecoratorExplicit_h

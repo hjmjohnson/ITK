@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkLineConstIteratorExplicit_h
 #define itkLineConstIteratorExplicit_h
-extern template class ITKCommon_EXPORT itk::LineConstIterator<itk::Image<unsigned char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LineConstIterator<itk::Image<unsigned char, 2u> >;
 #endif //itkLineConstIteratorExplicit_h

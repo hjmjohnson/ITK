@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkSinRegularizedHeavisideStepFunctionExplicit_h
 #define itkSinRegularizedHeavisideStepFunctionExplicit_h
-extern template class ITKCommon_EXPORT itk::SinRegularizedHeavisideStepFunction<double, double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SinRegularizedHeavisideStepFunction<double, double>;
 #endif //itkSinRegularizedHeavisideStepFunctionExplicit_h

@@ -18,5 +18,5 @@
 #ifndef itkResourceProbesCollectorBaseExplicit_h
 #define itkResourceProbesCollectorBaseExplicit_h
 #include "itkMemoryProbe.h"
-extern template class ITKCommon_EXPORT itk::ResourceProbesCollectorBase<itk::MemoryProbe>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ResourceProbesCollectorBase<itk::MemoryProbe>;
 #endif //itkResourceProbesCollectorBaseExplicit_h

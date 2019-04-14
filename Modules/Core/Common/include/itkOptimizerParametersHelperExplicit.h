@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkOptimizerParametersHelperExplicit_h
 #define itkOptimizerParametersHelperExplicit_h
-extern template class ITKCommon_EXPORT itk::OptimizerParametersHelper<float>;
-extern template class ITKCommon_EXPORT itk::OptimizerParametersHelper<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::OptimizerParametersHelper<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::OptimizerParametersHelper<double>;
 #endif //itkOptimizerParametersHelperExplicit_h

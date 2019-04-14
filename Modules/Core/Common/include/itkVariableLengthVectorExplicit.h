@@ -18,14 +18,14 @@
 #ifndef itkVariableLengthVectorExplicit_h
 #define itkVariableLengthVectorExplicit_h
 //exclude Array
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<double>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<unsigned long>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<unsigned char>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<float>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<long>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<short>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<signed char>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<unsigned int>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<unsigned short>;
-extern template class ITKCommon_EXPORT itk::VariableLengthVector<int>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned long>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned char>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<long>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<short>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<signed char>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned int>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned short>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<int>;
 #endif //itkVariableLengthVectorExplicit_h

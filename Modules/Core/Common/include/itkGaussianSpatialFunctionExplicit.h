@@ -17,7 +17,7 @@
  *=========================================================================*/
 #ifndef itkGaussianSpatialFunctionExplicit_h
 #define itkGaussianSpatialFunctionExplicit_h
-extern template class ITKCommon_EXPORT itk::GaussianSpatialFunction<double, 3u, itk::Point<double, 3u> >;
-extern template class ITKCommon_EXPORT itk::GaussianSpatialFunction<double, 2u, itk::Point<double, 2u> >;
-extern template class ITKCommon_EXPORT itk::GaussianSpatialFunction<double, 1u, itk::Point<double, 1u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSpatialFunction<double, 3u, itk::Point<double, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSpatialFunction<double, 2u, itk::Point<double, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSpatialFunction<double, 1u, itk::Point<double, 1u> >;
 #endif //itkGaussianSpatialFunctionExplicit_h

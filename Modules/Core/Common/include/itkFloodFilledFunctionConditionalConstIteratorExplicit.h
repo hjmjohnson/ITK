@@ -24,8 +24,8 @@
 //exclude BinaryThresholdImageFunction
 //exclude EllipseSpatialObject
 //exclude SphereSignedDistanceFunction
-extern template class ITKCommon_EXPORT itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 1u>, itk::EllipsoidInteriorExteriorSpatialFunction<1u, itk::Point<double, 1u> > >;
-extern template class ITKCommon_EXPORT itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 4u>, itk::EllipsoidInteriorExteriorSpatialFunction<4u, itk::Point<double, 4u> > >;
-extern template class ITKCommon_EXPORT itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 3u>, itk::EllipsoidInteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> > >;
-extern template class ITKCommon_EXPORT itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 2u>, itk::EllipsoidInteriorExteriorSpatialFunction<2u, itk::Point<double, 2u> > >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 1u>, itk::EllipsoidInteriorExteriorSpatialFunction<1u, itk::Point<double, 1u> > >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 4u>, itk::EllipsoidInteriorExteriorSpatialFunction<4u, itk::Point<double, 4u> > >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 3u>, itk::EllipsoidInteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> > >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::FloodFilledFunctionConditionalConstIterator<itk::Image<bool, 2u>, itk::EllipsoidInteriorExteriorSpatialFunction<2u, itk::Point<double, 2u> > >;
 #endif //itkFloodFilledFunctionConditionalConstIteratorExplicit_h

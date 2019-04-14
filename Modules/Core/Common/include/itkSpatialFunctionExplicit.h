@@ -17,10 +17,10 @@
  *=========================================================================*/
 #ifndef itkSpatialFunctionExplicit_h
 #define itkSpatialFunctionExplicit_h
-extern template class ITKCommon_EXPORT itk::SpatialFunction<bool, 3u, itk::Point<double, 3u> >;
-extern template class ITKCommon_EXPORT itk::SpatialFunction<double, 2u, itk::Point<double, 2u> >;
-extern template class ITKCommon_EXPORT itk::SpatialFunction<double, 3u, itk::Point<double, 3u> >;
-extern template class ITKCommon_EXPORT itk::SpatialFunction<double, 1u, itk::Point<double, 1u> >;
-extern template class ITKCommon_EXPORT itk::SpatialFunction<bool, 1u, itk::Point<double, 1u> >;
-extern template class ITKCommon_EXPORT itk::SpatialFunction<bool, 2u, itk::Point<double, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialFunction<bool, 3u, itk::Point<double, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialFunction<double, 2u, itk::Point<double, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialFunction<double, 3u, itk::Point<double, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialFunction<double, 1u, itk::Point<double, 1u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialFunction<bool, 1u, itk::Point<double, 1u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialFunction<bool, 2u, itk::Point<double, 2u> >;
 #endif //itkSpatialFunctionExplicit_h

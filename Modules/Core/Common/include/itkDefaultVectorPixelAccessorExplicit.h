@@ -17,14 +17,14 @@
  *=========================================================================*/
 #ifndef itkDefaultVectorPixelAccessorExplicit_h
 #define itkDefaultVectorPixelAccessorExplicit_h
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<int>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<signed char>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<unsigned char>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<unsigned long>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<unsigned short>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<unsigned int>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<short>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<float>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<long>;
-extern template class ITKCommon_EXPORT itk::DefaultVectorPixelAccessor<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<int>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<signed char>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<unsigned char>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<unsigned long>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<unsigned short>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<unsigned int>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<short>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<long>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::DefaultVectorPixelAccessor<double>;
 #endif //itkDefaultVectorPixelAccessorExplicit_h

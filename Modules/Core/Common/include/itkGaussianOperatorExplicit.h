@@ -17,22 +17,22 @@
  *=========================================================================*/
 #ifndef itkGaussianOperatorExplicit_h
 #define itkGaussianOperatorExplicit_h
-extern template class ITKCommon_EXPORT itk::GaussianOperator<int, 3u, itk::NeighborhoodAllocator<int> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<short, 2u, itk::NeighborhoodAllocator<short> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<unsigned short, 3u, itk::NeighborhoodAllocator<unsigned short> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<unsigned int, 3u, itk::NeighborhoodAllocator<unsigned int> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<unsigned int, 2u, itk::NeighborhoodAllocator<unsigned int> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<float, 3u, itk::NeighborhoodAllocator<float> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<float, 2u, itk::NeighborhoodAllocator<float> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<double, 4u, itk::NeighborhoodAllocator<double> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<double, 2u, itk::NeighborhoodAllocator<double> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<unsigned char, 3u, itk::NeighborhoodAllocator<unsigned char> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<double, 3u, itk::NeighborhoodAllocator<double> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<unsigned short, 2u, itk::NeighborhoodAllocator<unsigned short> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<signed char, 2u, itk::NeighborhoodAllocator<signed char> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<float, 4u, itk::NeighborhoodAllocator<float> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<short, 3u, itk::NeighborhoodAllocator<short> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<int, 2u, itk::NeighborhoodAllocator<int> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<unsigned char, 2u, itk::NeighborhoodAllocator<unsigned char> >;
-extern template class ITKCommon_EXPORT itk::GaussianOperator<signed char, 3u, itk::NeighborhoodAllocator<signed char> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<int, 3u, itk::NeighborhoodAllocator<int> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<short, 2u, itk::NeighborhoodAllocator<short> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<unsigned short, 3u, itk::NeighborhoodAllocator<unsigned short> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<unsigned int, 3u, itk::NeighborhoodAllocator<unsigned int> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<unsigned int, 2u, itk::NeighborhoodAllocator<unsigned int> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<float, 3u, itk::NeighborhoodAllocator<float> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<float, 2u, itk::NeighborhoodAllocator<float> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<double, 4u, itk::NeighborhoodAllocator<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<double, 2u, itk::NeighborhoodAllocator<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<unsigned char, 3u, itk::NeighborhoodAllocator<unsigned char> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<double, 3u, itk::NeighborhoodAllocator<double> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<unsigned short, 2u, itk::NeighborhoodAllocator<unsigned short> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<signed char, 2u, itk::NeighborhoodAllocator<signed char> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<float, 4u, itk::NeighborhoodAllocator<float> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<short, 3u, itk::NeighborhoodAllocator<short> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<int, 2u, itk::NeighborhoodAllocator<int> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<unsigned char, 2u, itk::NeighborhoodAllocator<unsigned char> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianOperator<signed char, 3u, itk::NeighborhoodAllocator<signed char> >;
 #endif //itkGaussianOperatorExplicit_h

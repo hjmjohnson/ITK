@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkImageIteratorExplicit_h
 #define itkImageIteratorExplicit_h
-extern template class ITKCommon_EXPORT itk::ImageIterator<itk::Image<itk::Vector<unsigned short, 5u>, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageIterator<itk::Image<itk::Vector<unsigned short, 5u>, 3u> >;
 #endif //itkImageIteratorExplicit_h

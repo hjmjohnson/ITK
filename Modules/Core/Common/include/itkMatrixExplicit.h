@@ -17,13 +17,13 @@
  *=========================================================================*/
 #ifndef itkMatrixExplicit_h
 #define itkMatrixExplicit_h
-extern template class ITKCommon_EXPORT itk::Matrix<double, 1u, 1u>;
-extern template class ITKCommon_EXPORT itk::Matrix<double, 3u, 3u>;
-extern template class ITKCommon_EXPORT itk::Matrix<double, 2u, 2u>;
-extern template class ITKCommon_EXPORT itk::Matrix<double, 6u, 6u>;
-extern template class ITKCommon_EXPORT itk::Matrix<float, 3u, 3u>;
-extern template class ITKCommon_EXPORT itk::Matrix<double, 3u, 4u>;
-extern template class ITKCommon_EXPORT itk::Matrix<double, 4u, 4u>;
-extern template class ITKCommon_EXPORT itk::Matrix<float, 2u, 2u>;
-extern template class ITKCommon_EXPORT itk::Matrix<double, 5u, 5u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<double, 1u, 1u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<double, 3u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<double, 2u, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<double, 6u, 6u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<float, 3u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<double, 3u, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<double, 4u, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<float, 2u, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Matrix<double, 5u, 5u>;
 #endif //itkMatrixExplicit_h

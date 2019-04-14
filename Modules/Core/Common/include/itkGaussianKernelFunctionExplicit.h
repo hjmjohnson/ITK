@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkGaussianKernelFunctionExplicit_h
 #define itkGaussianKernelFunctionExplicit_h
-extern template class ITKCommon_EXPORT itk::GaussianKernelFunction<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianKernelFunction<double>;
 #endif //itkGaussianKernelFunctionExplicit_h
