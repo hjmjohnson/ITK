@@ -1,4 +1,9 @@
-#include "itkCenteredEuler3DTransform.h"
+// copyright from itkCenteredEuler3DTransform.h
 
-template class itk::CenteredEuler3DTransform<double>; //Instantiated 15 times
-template class itk::CenteredEuler3DTransform<float>; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkCenteredEuler3DTransform.h"

@@ -1,6 +1,9 @@
-#include "itkRegularSphereMeshSource.h"
+// copyright from itkRegularSphereMeshSource.h
 
-template class itk::RegularSphereMeshSource<itk::Mesh<float, 3u, itk::DefaultStaticMeshTraits<float, 3u, 3u, float, float, float> > >; //Instantiated 9 times
-template class itk::RegularSphereMeshSource<itk::Mesh<double, 3u, itk::DefaultStaticMeshTraits<double, 3u, 3u, double, double, double> > >; //Instantiated 9 times
-template class itk::RegularSphereMeshSource<itk::Mesh<double, 3u, itk::DefaultDynamicMeshTraits<double, 3u, 3u, float, float, double> > >; //Instantiated 6 times
-template class itk::RegularSphereMeshSource<itk::Mesh<double, 3u, itk::DefaultDynamicMeshTraits<double, 3u, 3u, double, double, double> > >; //Instantiated 18 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkRegularSphereMeshSource.h"

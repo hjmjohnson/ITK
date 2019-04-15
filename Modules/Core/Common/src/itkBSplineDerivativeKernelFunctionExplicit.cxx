@@ -1,4 +1,9 @@
-#include "itkBSplineDerivativeKernelFunction.h"
+// copyright from itkBSplineDerivativeKernelFunction.h
 
-template class itk::BSplineDerivativeKernelFunction<3u, float>; //Instantiated 6 times
-template class itk::BSplineDerivativeKernelFunction<3u, double>; //Instantiated 116 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineDerivativeKernelFunction.h"

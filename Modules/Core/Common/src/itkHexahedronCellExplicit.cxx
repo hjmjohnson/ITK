@@ -1,7 +1,9 @@
-#include "itkHexahedronCell.h"
-#include "itkPoint.h"
-#include "itkVectorContainer.h"
+// copyright from itkHexahedronCell.h
 
-template class itk::HexahedronCell<itk::CellInterface<unsigned char, itk::CellTraitsInfo<2, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 2u>, itk::VectorContainer<unsigned long, itk::Point<float, 2u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > > >; //Instantiated 36 times
-template class itk::HexahedronCell<itk::CellInterface<float, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > > >; //Instantiated 8 times
-template class itk::HexahedronCell<itk::CellInterface<unsigned char, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > > >; //Instantiated 16 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkHexahedronCell.h"

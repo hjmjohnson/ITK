@@ -1,4 +1,9 @@
-#include "itkFEMSpatialObjectWriter.h"
+// copyright from itkFEMSpatialObjectWriter.h
 
-template class itk::FEMSpatialObjectWriter<2u, unsigned char, itk::DefaultStaticMeshTraits<unsigned char, 2u, 2u, float, float, unsigned char> >; //Instantiated 45 times
-template class itk::FEMSpatialObjectWriter<3u, unsigned char, itk::DefaultStaticMeshTraits<unsigned char, 3u, 3u, float, float, unsigned char> >; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkFEMSpatialObjectWriter.h"

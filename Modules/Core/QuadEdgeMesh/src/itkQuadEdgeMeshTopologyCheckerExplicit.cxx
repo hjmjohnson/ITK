@@ -1,3 +1,9 @@
-#include "itkQuadEdgeMeshTopologyChecker.h"
+// copyright from itkQuadEdgeMeshTopologyChecker.h
 
-template class itk::QuadEdgeMeshTopologyChecker<itk::QuadEdgeMesh<double, 3u, itk::QuadEdgeMeshTraits<double, 3u, bool, bool, float, float> > >; //Instantiated 27 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkQuadEdgeMeshTopologyChecker.h"

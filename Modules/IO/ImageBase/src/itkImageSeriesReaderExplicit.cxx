@@ -1,10 +1,9 @@
-#include "itkImageSeriesReader.h"
+// copyright from itkImageSeriesReader.h
 
-template class itk::ImageSeriesReader<itk::VectorImage<unsigned short, 3u> >; //Instantiated 3 times
-template class itk::ImageSeriesReader<itk::Image<itk::RGBPixel<unsigned char>, 3u> >; //Instantiated 3 times
-template class itk::ImageSeriesReader<itk::Image<short, 3u> >; //Instantiated 27 times
-template class itk::ImageSeriesReader<itk::Image<unsigned short, 3u> >; //Instantiated 9 times
-template class itk::ImageSeriesReader<itk::Image<short, 5u> >; //Instantiated 3 times
-template class itk::ImageSeriesReader<itk::Image<unsigned char, 3u> >; //Instantiated 9 times
-template class itk::ImageSeriesReader<itk::Image<short, 2u> >; //Instantiated 3 times
-template class itk::ImageSeriesReader<itk::Image<short, 4u> >; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkImageSeriesReader.h"

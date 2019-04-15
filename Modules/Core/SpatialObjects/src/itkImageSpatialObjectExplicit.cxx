@@ -1,6 +1,9 @@
-#include "itkImageSpatialObject.h"
+// copyright from itkImageSpatialObject.h
 
-template class itk::ImageSpatialObject<2u, unsigned char>;
-template class itk::ImageSpatialObject<3u, unsigned char>;
-template class itk::ImageSpatialObject<3u, unsigned short>;
-template class itk::ImageSpatialObject<3u, float>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkImageSpatialObject.h"

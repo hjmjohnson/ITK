@@ -1,3 +1,9 @@
-#include "itkTimeVaryingVelocityFieldImageRegistrationMethodv4.h"
+// copyright from itkTimeVaryingVelocityFieldImageRegistrationMethodv4.h
 
-template class itk::TimeVaryingVelocityFieldImageRegistrationMethodv4<itk::Image<double, 3u>, itk::Image<double, 3u>, itk::GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform<double, 3u> >; //Instantiated 8 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkTimeVaryingVelocityFieldImageRegistrationMethodv4.h"

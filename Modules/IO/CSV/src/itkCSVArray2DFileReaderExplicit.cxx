@@ -1,3 +1,9 @@
-#include "itkCSVArray2DFileReader.h"
+// copyright from itkCSVArray2DFileReader.h
 
-template class itk::CSVArray2DFileReader<double>; //Instantiated 4 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkCSVArray2DFileReader.h"

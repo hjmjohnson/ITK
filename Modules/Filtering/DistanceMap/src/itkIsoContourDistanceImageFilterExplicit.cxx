@@ -1,16 +1,9 @@
-#include "itkIsoContourDistanceImageFilter.h"
+// copyright from itkIsoContourDistanceImageFilter.h
 
-template class itk::IsoContourDistanceImageFilter<itk::Image<signed char, 3u>, itk::Image<float, 3u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<unsigned int, 3u>, itk::Image<float, 3u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<unsigned char, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<unsigned short, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<short, 3u>, itk::Image<float, 3u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<unsigned int, 2u>, itk::Image<float, 2u> >; //Instantiated 9 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<int, 3u>, itk::Image<float, 3u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<short, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<int, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<signed char, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<unsigned short, 3u>, itk::Image<float, 3u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<unsigned char, 3u>, itk::Image<float, 3u> >; //Instantiated 6 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 9 times
-template class itk::IsoContourDistanceImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkIsoContourDistanceImageFilter.h"

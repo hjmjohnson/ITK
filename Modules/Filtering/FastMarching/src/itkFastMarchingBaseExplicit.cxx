@@ -1,5 +1,9 @@
-#include "itkFastMarchingBase.h"
+// copyright from itkFastMarchingBase.h
 
-template class itk::FastMarchingBase<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 27 times
-template class itk::FastMarchingBase<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 15 times
-template class itk::FastMarchingBase<itk::QuadEdgeMesh<float, 3u, itk::QuadEdgeMeshExtendedTraits<float, 3u, 2u, double, double, float, bool, bool> >, itk::QuadEdgeMesh<float, 3u, itk::QuadEdgeMeshExtendedTraits<float, 3u, 2u, double, double, float, bool, bool> > >; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkFastMarchingBase.h"

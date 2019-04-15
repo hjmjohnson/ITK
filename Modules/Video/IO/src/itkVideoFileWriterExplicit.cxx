@@ -1,4 +1,9 @@
-#include "itkVideoFileWriter.h"
+// copyright from itkVideoFileWriter.h
 
-template class itk::VideoFileWriter<itk::VideoStream<itk::Image<unsigned char, 2u> > >; //Instantiated 9 times
-template class itk::VideoFileWriter<itk::VideoStream<itk::Image<itk::RGBPixel<unsigned char>, 2u> > >; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkVideoFileWriter.h"

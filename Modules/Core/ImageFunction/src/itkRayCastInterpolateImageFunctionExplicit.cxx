@@ -1,4 +1,9 @@
-#include "itkRayCastInterpolateImageFunction.h"
+// copyright from itkRayCastInterpolateImageFunction.h
 
-template class itk::RayCastInterpolateImageFunction<itk::Image<unsigned char, 3u>, double>; //Instantiated 3 times
-template class itk::RayCastInterpolateImageFunction<itk::Image<short, 3u>, double>; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkRayCastInterpolateImageFunction.h"

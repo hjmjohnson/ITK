@@ -1,19 +1,9 @@
-#include "itkIterativeDeconvolutionImageFilter.h"
+// copyright from itkIterativeDeconvolutionImageFilter.h
 
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<short, 3u>, itk::Image<short, 3u>, itk::Image<short, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<signed char, 2u>, itk::Image<signed char, 2u>, itk::Image<signed char, 2u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<double, 3u>, itk::Image<double, 3u>, itk::Image<double, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<unsigned int, 3u>, itk::Image<unsigned int, 3u>, itk::Image<unsigned int, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<double, 2u>, itk::Image<double, 2u>, itk::Image<double, 2u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<unsigned int, 2u>, itk::Image<unsigned int, 2u>, itk::Image<unsigned int, 2u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<float, 2u>, itk::Image<double, 2u>, itk::Image<int, 2u>, float>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<int, 2u>, itk::Image<int, 2u>, itk::Image<int, 2u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u>, itk::Image<float, 2u>, double>; //Instantiated 24 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<unsigned short, 3u>, itk::Image<unsigned short, 3u>, itk::Image<unsigned short, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<int, 3u>, itk::Image<int, 3u>, itk::Image<int, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<signed char, 3u>, itk::Image<signed char, 3u>, itk::Image<signed char, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<short, 2u>, itk::Image<short, 2u>, itk::Image<short, 2u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u>, itk::Image<float, 3u>, double>; //Instantiated 9 times
-template class itk::IterativeDeconvolutionImageFilter<itk::Image<unsigned short, 2u>, itk::Image<unsigned short, 2u>, itk::Image<unsigned short, 2u>, double>; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkIterativeDeconvolutionImageFilter.h"

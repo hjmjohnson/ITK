@@ -1,4 +1,9 @@
-#include "itkPolygonSpatialObject.h"
+// copyright from itkPolygonSpatialObject.h
 
-template class itk::PolygonSpatialObject<2u>;
-template class itk::PolygonSpatialObject<3u>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkPolygonSpatialObject.h"

@@ -1,8 +1,9 @@
-#include "itkThresholdImageFilter.h"
+// copyright from itkThresholdImageFilter.h
 
-template class itk::ThresholdImageFilter<itk::Image<float, 2u> >; //Instantiated 9 times
-template class itk::ThresholdImageFilter<itk::Image<float, 3u> >; //Instantiated 9 times
-template class itk::ThresholdImageFilter<itk::Image<short, 3u> >; //Instantiated 14 times
-template class itk::ThresholdImageFilter<itk::Image<unsigned char, 3u> >; //Instantiated 15 times
-template class itk::ThresholdImageFilter<itk::Image<double, 2u> >; //Instantiated 24 times
-template class itk::ThresholdImageFilter<itk::Image<double, 3u> >; //Instantiated 12 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkThresholdImageFilter.h"

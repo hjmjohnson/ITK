@@ -1,6 +1,9 @@
-#include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"
+// copyright from itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h
 
-template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 2u>; //Instantiated 31 times
-template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<float, 2u>; //Instantiated 10 times
-template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 3u>; //Instantiated 24 times
-template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<float, 3u>; //Instantiated 10 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"

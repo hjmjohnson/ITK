@@ -1,6 +1,9 @@
-#include "itkTimeVaryingVelocityFieldTransform.h"
+// copyright from itkTimeVaryingVelocityFieldTransform.h
 
-template class itk::TimeVaryingVelocityFieldTransform<float, 2u>; //Instantiated 8 times
-template class itk::TimeVaryingVelocityFieldTransform<double, 3u>; //Instantiated 13 times
-template class itk::TimeVaryingVelocityFieldTransform<double, 2u>; //Instantiated 8 times
-template class itk::TimeVaryingVelocityFieldTransform<float, 3u>; //Instantiated 8 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkTimeVaryingVelocityFieldTransform.h"

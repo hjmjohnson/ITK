@@ -1,3 +1,9 @@
-#include "itkVoronoiDiagram2DGenerator.h"
+// copyright from itkVoronoiDiagram2DGenerator.h
 
-template class itk::VoronoiDiagram2DGenerator<double>; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkVoronoiDiagram2DGenerator.h"

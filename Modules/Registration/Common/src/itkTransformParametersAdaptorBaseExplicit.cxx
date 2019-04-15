@@ -1,20 +1,9 @@
-#include "itkTransformParametersAdaptorBase.h"
+// copyright from itkTransformParametersAdaptorBase.h
 
-template class itk::TransformParametersAdaptorBase<itk::DisplacementFieldTransform<double, 3u> >; //Instantiated 9 times
-template class itk::TransformParametersAdaptorBase<itk::DisplacementFieldTransform<double, 2u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::Transform<double, 2u, 2u> >; //Instantiated 24 times
-template class itk::TransformParametersAdaptorBase<itk::BSplineExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::GaussianExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform<double, 3u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::Euler3DTransform<double> >; //Instantiated 9 times
-template class itk::TransformParametersAdaptorBase<itk::Euler2DTransform<double> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 2u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::TranslationTransform<double, 3u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::AffineTransform<double, 2u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::TimeVaryingBSplineVelocityFieldTransform<double, 3u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::Similarity3DTransform<double> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::Transform<double, 3u, 3u> >; //Instantiated 45 times
-template class itk::TransformParametersAdaptorBase<itk::AffineTransform<double, 3u> >; //Instantiated 9 times
-template class itk::TransformParametersAdaptorBase<itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 3u> >; //Instantiated 9 times
-template class itk::TransformParametersAdaptorBase<itk::BSplineTransform<double, 3u, 3u> >; //Instantiated 6 times
-template class itk::TransformParametersAdaptorBase<itk::BSplineSmoothingOnUpdateDisplacementFieldTransform<double, 3u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkTransformParametersAdaptorBase.h"

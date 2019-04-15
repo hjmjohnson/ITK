@@ -1,9 +1,9 @@
-#include "itkVectorResampleImageFilter.h"
+// copyright from itkVectorResampleImageFilter.h
 
-template class itk::VectorResampleImageFilter<itk::Image<itk::Vector<float, 2u>, 2u>, itk::Image<itk::Vector<float, 2u>, 2u>, double>; //Instantiated 15 times
-template class itk::VectorResampleImageFilter<itk::Image<itk::RGBPixel<unsigned char>, 2u>, itk::Image<itk::RGBPixel<unsigned char>, 2u>, double>; //Instantiated 9 times
-template class itk::VectorResampleImageFilter<itk::Image<itk::Vector<double, 2u>, 2u>, itk::Image<itk::Vector<double, 2u>, 2u>, double>; //Instantiated 21 times
-template class itk::VectorResampleImageFilter<itk::Image<itk::Vector<double, 2u>, 3u>, itk::Image<itk::Vector<double, 2u>, 3u>, double>; //Instantiated 6 times
-template class itk::VectorResampleImageFilter<itk::Image<itk::Vector<double, 3u>, 3u>, itk::Image<itk::Vector<double, 3u>, 3u>, double>; //Instantiated 39 times
-template class itk::VectorResampleImageFilter<itk::Image<itk::Vector<double, 3u>, 4u>, itk::Image<itk::Vector<double, 3u>, 4u>, double>; //Instantiated 9 times
-template class itk::VectorResampleImageFilter<itk::Image<itk::Vector<float, 3u>, 3u>, itk::Image<itk::Vector<float, 3u>, 3u>, double>; //Instantiated 48 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkVectorResampleImageFilter.h"

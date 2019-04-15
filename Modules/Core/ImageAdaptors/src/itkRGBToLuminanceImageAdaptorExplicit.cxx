@@ -1,3 +1,9 @@
-#include "itkRGBToLuminanceImageAdaptor.h"
+// copyright from itkRGBToLuminanceImageAdaptor.h
 
-template class itk::RGBToLuminanceImageAdaptor<itk::Image<itk::RGBPixel<float>, 3u>, float>; //Instantiated 4 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkRGBToLuminanceImageAdaptor.h"

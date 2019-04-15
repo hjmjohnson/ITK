@@ -1,4 +1,9 @@
-#include "itkImageSliceConstIteratorWithIndex.h"
+// copyright from itkImageSliceConstIteratorWithIndex.h
 
-template class itk::ImageSliceConstIteratorWithIndex<itk::Image<float, 2u> >; //Instantiated 8 times
-template class itk::ImageSliceConstIteratorWithIndex<itk::Image<unsigned char, 3u> >; //Instantiated 113 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkImageSliceConstIteratorWithIndex.h"

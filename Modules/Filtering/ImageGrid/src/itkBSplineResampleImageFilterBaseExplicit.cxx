@@ -1,3 +1,9 @@
-#include "itkBSplineResampleImageFilterBase.h"
+// copyright from itkBSplineResampleImageFilterBase.h
 
-template class itk::BSplineResampleImageFilterBase<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineResampleImageFilterBase.h"

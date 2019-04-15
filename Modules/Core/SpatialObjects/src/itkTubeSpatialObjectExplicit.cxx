@@ -1,6 +1,9 @@
-#include "itkTubeSpatialObject.h"
+// copyright from itkTubeSpatialObject.h
 
-template class itk::TubeSpatialObject<2u, itk::TubeSpatialObjectPoint<2u> >;
-template class itk::TubeSpatialObject<2u, itk::DTITubeSpatialObjectPoint<2u> >;
-template class itk::TubeSpatialObject<3u, itk::TubeSpatialObjectPoint<3u> >;
-template class itk::TubeSpatialObject<3u, itk::DTITubeSpatialObjectPoint<3u> >;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkTubeSpatialObject.h"

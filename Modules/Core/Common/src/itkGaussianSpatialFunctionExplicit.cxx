@@ -1,5 +1,9 @@
-#include "itkGaussianSpatialFunction.h"
+// copyright from itkGaussianSpatialFunction.h
 
-template class itk::GaussianSpatialFunction<double, 3u, itk::Point<double, 3u> >; //Instantiated 21 times
-template class itk::GaussianSpatialFunction<double, 2u, itk::Point<double, 2u> >; //Instantiated 58 times
-template class itk::GaussianSpatialFunction<double, 1u, itk::Point<double, 1u> >; //Instantiated 21 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkGaussianSpatialFunction.h"

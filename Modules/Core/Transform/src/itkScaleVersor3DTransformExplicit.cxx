@@ -1,4 +1,9 @@
-#include "itkScaleVersor3DTransform.h"
+// copyright from itkScaleVersor3DTransform.h
 
-template class itk::ScaleVersor3DTransform<float>; //Instantiated 9 times
-template class itk::ScaleVersor3DTransform<double>; //Instantiated 21 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkScaleVersor3DTransform.h"

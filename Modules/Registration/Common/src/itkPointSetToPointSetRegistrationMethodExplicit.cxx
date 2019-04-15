@@ -1,3 +1,9 @@
-#include "itkPointSetToPointSetRegistrationMethod.h"
+// copyright from itkPointSetToPointSetRegistrationMethod.h
 
-template class itk::PointSetToPointSetRegistrationMethod<itk::PointSet<float, 2u, itk::DefaultStaticMeshTraits<float, 2u, 2u, float, float, float> >, itk::PointSet<float, 2u, itk::DefaultStaticMeshTraits<float, 2u, 2u, float, float, float> > >; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkPointSetToPointSetRegistrationMethod.h"

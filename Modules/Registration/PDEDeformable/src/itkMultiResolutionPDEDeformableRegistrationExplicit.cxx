@@ -1,4 +1,9 @@
-#include "itkMultiResolutionPDEDeformableRegistration.h"
+// copyright from itkMultiResolutionPDEDeformableRegistration.h
 
-template class itk::MultiResolutionPDEDeformableRegistration<itk::Image<float, 3u>, itk::Image<float, 3u>, itk::Image<itk::Vector<float, 3u>, 3u>, float>; //Instantiated 45 times
-template class itk::MultiResolutionPDEDeformableRegistration<itk::Image<float, 2u>, itk::Image<float, 2u>, itk::Image<itk::Vector<float, 2u>, 2u>, float>; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMultiResolutionPDEDeformableRegistration.h"

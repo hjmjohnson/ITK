@@ -1,4 +1,9 @@
-#include "itkSimilarity2DTransform.h"
+// copyright from itkSimilarity2DTransform.h
 
-template class itk::Similarity2DTransform<float>; //Instantiated 9 times
-template class itk::Similarity2DTransform<double>; //Instantiated 33 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkSimilarity2DTransform.h"

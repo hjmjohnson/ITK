@@ -1,4 +1,9 @@
-#include "itkRoundImageFilter.h"
+// copyright from itkRoundImageFilter.h
 
-template class itk::RoundImageFilter<itk::Image<double, 2u>, itk::Image<double, 2u> >; //Instantiated 10 times
-template class itk::RoundImageFilter<itk::Image<double, 3u>, itk::Image<double, 3u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkRoundImageFilter.h"

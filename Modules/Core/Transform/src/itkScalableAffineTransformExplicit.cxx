@@ -1,6 +1,9 @@
-#include "itkScalableAffineTransform.h"
+// copyright from itkScalableAffineTransform.h
 
-template class itk::ScalableAffineTransform<double, 3u>; //Instantiated 267 times
-template class itk::ScalableAffineTransform<double, 2u>; //Instantiated 135 times
-template class itk::ScalableAffineTransform<double, 4u>; //Instantiated 9 times
-template class itk::ScalableAffineTransform<float, 3u>; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkScalableAffineTransform.h"

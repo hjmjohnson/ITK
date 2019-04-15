@@ -1,3 +1,9 @@
-#include "itkChangeLabelImageFilter.h"
+// copyright from itkChangeLabelImageFilter.h
 
-template class itk::ChangeLabelImageFilter<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> >; //Instantiated 7 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkChangeLabelImageFilter.h"

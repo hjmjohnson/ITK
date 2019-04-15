@@ -1,6 +1,9 @@
-#include "itkGaussianExponentialDiffeomorphicTransform.h"
+// copyright from itkGaussianExponentialDiffeomorphicTransform.h
 
-template class itk::GaussianExponentialDiffeomorphicTransform<float, 3u>; //Instantiated 10 times
-template class itk::GaussianExponentialDiffeomorphicTransform<double, 2u>; //Instantiated 14 times
-template class itk::GaussianExponentialDiffeomorphicTransform<float, 2u>; //Instantiated 10 times
-template class itk::GaussianExponentialDiffeomorphicTransform<double, 3u>; //Instantiated 17 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkGaussianExponentialDiffeomorphicTransform.h"

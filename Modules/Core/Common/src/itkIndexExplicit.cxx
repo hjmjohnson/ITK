@@ -1,6 +1,9 @@
-#include "itkIndex.h"
+// copyright from itkIndex.h
 
-template struct itk::Index<1u>;
-template struct itk::Index<2u>;
-template struct itk::Index<3u>;
-template struct itk::Index<4u>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkIndex.h"

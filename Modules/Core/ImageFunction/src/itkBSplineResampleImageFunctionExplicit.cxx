@@ -1,5 +1,9 @@
-#include "itkBSplineResampleImageFunction.h"
+// copyright from itkBSplineResampleImageFunction.h
 
-template class itk::BSplineResampleImageFunction<itk::Image<double, 2u>, double>; //Instantiated 4 times
-template class itk::BSplineResampleImageFunction<itk::Image<double, 3u>, double>; //Instantiated 8 times
-template class itk::BSplineResampleImageFunction<itk::Image<float, 2u>, double>; //Instantiated 4 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineResampleImageFunction.h"

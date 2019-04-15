@@ -1,4 +1,9 @@
-#include "itkQuaternionRigidTransform.h"
+// copyright from itkQuaternionRigidTransform.h
 
-template class itk::QuaternionRigidTransform<double>; //Instantiated 27 times
-template class itk::QuaternionRigidTransform<float>; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkQuaternionRigidTransform.h"

@@ -1,6 +1,9 @@
-#include "itkCurvatureFlowFunction.h"
+// copyright from itkCurvatureFlowFunction.h
 
-template class itk::CurvatureFlowFunction<itk::Image<double, 3u> >; //Instantiated 14 times
-template class itk::CurvatureFlowFunction<itk::Image<float, 2u> >; //Instantiated 32 times
-template class itk::CurvatureFlowFunction<itk::Image<double, 2u> >; //Instantiated 12 times
-template class itk::CurvatureFlowFunction<itk::Image<float, 3u> >; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkCurvatureFlowFunction.h"

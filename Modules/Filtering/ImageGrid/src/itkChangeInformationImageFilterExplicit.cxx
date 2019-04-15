@@ -1,6 +1,9 @@
-#include "itkChangeInformationImageFilter.h"
+// copyright from itkChangeInformationImageFilter.h
 
-template class itk::ChangeInformationImageFilter<itk::Image<std::complex<double>, 2u> >; //Instantiated 43 times
-template class itk::ChangeInformationImageFilter<itk::Image<std::complex<double>, 3u> >; //Instantiated 21 times
-template class itk::ChangeInformationImageFilter<itk::Image<std::complex<float>, 2u> >; //Instantiated 12 times
-template class itk::ChangeInformationImageFilter<itk::Image<float, 2u> >; //Instantiated 12 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkChangeInformationImageFilter.h"

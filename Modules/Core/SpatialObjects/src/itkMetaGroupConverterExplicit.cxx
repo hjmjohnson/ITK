@@ -1,4 +1,9 @@
-#include "itkMetaGroupConverter.h"
+// copyright from itkMetaGroupConverter.h
 
-template class itk::MetaGroupConverter<2u>;
-template class itk::MetaGroupConverter<3u>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMetaGroupConverter.h"

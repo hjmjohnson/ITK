@@ -1,5 +1,9 @@
-#include "itkCSVNumericObjectFileWriter.h"
+// copyright from itkCSVNumericObjectFileWriter.h
 
-template class itk::CSVNumericObjectFileWriter<double, 3u, 4u>; //Instantiated 3 times
-template class itk::CSVNumericObjectFileWriter<double, 3u, 6u>; //Instantiated 6 times
-template class itk::CSVNumericObjectFileWriter<double, 3u, 3u>; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkCSVNumericObjectFileWriter.h"

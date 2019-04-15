@@ -1,6 +1,9 @@
-#include "itkArray2D.h"
+// copyright from itkArray2D.h
 
-template class itk::Array2D<double>; //Instantiated 216 times
-template class itk::Array2D<unsigned long>; //Instantiated 12 times
-template class itk::Array2D<unsigned int>; //Instantiated 54 times
-template class itk::Array2D<float>; //Instantiated 22 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkArray2D.h"

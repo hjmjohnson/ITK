@@ -1,5 +1,9 @@
-#include "itkFloodFilledSpatialFunctionConditionalConstIterator.h"
+// copyright from itkFloodFilledSpatialFunctionConditionalConstIterator.h
 
-template class itk::FloodFilledSpatialFunctionConditionalConstIterator<itk::Image<bool, 3u>, itk::EllipsoidInteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> > >; //Instantiated 210 times
-template class itk::FloodFilledSpatialFunctionConditionalConstIterator<itk::Image<bool, 1u>, itk::EllipsoidInteriorExteriorSpatialFunction<1u, itk::Point<double, 1u> > >; //Instantiated 6 times
-template class itk::FloodFilledSpatialFunctionConditionalConstIterator<itk::Image<bool, 2u>, itk::EllipsoidInteriorExteriorSpatialFunction<2u, itk::Point<double, 2u> > >; //Instantiated 123 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkFloodFilledSpatialFunctionConditionalConstIterator.h"

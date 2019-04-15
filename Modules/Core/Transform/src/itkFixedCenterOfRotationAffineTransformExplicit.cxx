@@ -1,4 +1,9 @@
-#include "itkFixedCenterOfRotationAffineTransform.h"
+// copyright from itkFixedCenterOfRotationAffineTransform.h
 
-template class itk::FixedCenterOfRotationAffineTransform<float, 3u>; //Instantiated 6 times
-template class itk::FixedCenterOfRotationAffineTransform<double, 3u>; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkFixedCenterOfRotationAffineTransform.h"

@@ -1,7 +1,9 @@
-#include "itkMattesMutualInformationImageToImageMetric.h"
+// copyright from itkMattesMutualInformationImageToImageMetric.h
 
-template class itk::MattesMutualInformationImageToImageMetric<itk::Image<unsigned short, 2u>, itk::Image<unsigned short, 2u> >; //Instantiated 6 times
-template class itk::MattesMutualInformationImageToImageMetric<itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u> >; //Instantiated 12 times
-template class itk::MattesMutualInformationImageToImageMetric<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 12 times
-template class itk::MattesMutualInformationImageToImageMetric<itk::Image<short, 3u>, itk::Image<short, 3u> >; //Instantiated 21 times
-template class itk::MattesMutualInformationImageToImageMetric<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMattesMutualInformationImageToImageMetric.h"

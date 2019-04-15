@@ -1,6 +1,9 @@
-#include "itkFastMarchingStoppingCriterionBase.h"
+// copyright from itkFastMarchingStoppingCriterionBase.h
 
-template class itk::FastMarchingStoppingCriterionBase<itk::QuadEdgeMesh<float, 3u, itk::QuadEdgeMeshTraits<float, 3u, bool, bool, float, float> >, itk::QuadEdgeMesh<float, 3u, itk::QuadEdgeMeshTraits<float, 3u, bool, bool, float, float> > >; //Instantiated 6 times
-template class itk::FastMarchingStoppingCriterionBase<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 24 times
-template class itk::FastMarchingStoppingCriterionBase<itk::QuadEdgeMesh<float, 3u, itk::QuadEdgeMeshExtendedTraits<float, 3u, 2u, double, double, float, bool, bool> >, itk::QuadEdgeMesh<float, 3u, itk::QuadEdgeMeshExtendedTraits<float, 3u, 2u, double, double, float, bool, bool> > >; //Instantiated 10 times
-template class itk::FastMarchingStoppingCriterionBase<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 8 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkFastMarchingStoppingCriterionBase.h"

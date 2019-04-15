@@ -1,6 +1,9 @@
-#include "itkTimeVaryingVelocityFieldIntegrationImageFilter.h"
+// copyright from itkTimeVaryingVelocityFieldIntegrationImageFilter.h
 
-template class itk::TimeVaryingVelocityFieldIntegrationImageFilter<itk::Image<itk::Vector<float, 2u>, 3u>, itk::Image<itk::Vector<float, 2u>, 2u> >; //Instantiated 12 times
-template class itk::TimeVaryingVelocityFieldIntegrationImageFilter<itk::Image<itk::Vector<float, 3u>, 4u>, itk::Image<itk::Vector<float, 3u>, 3u> >; //Instantiated 12 times
-template class itk::TimeVaryingVelocityFieldIntegrationImageFilter<itk::Image<itk::Vector<double, 3u>, 4u>, itk::Image<itk::Vector<double, 3u>, 3u> >; //Instantiated 27 times
-template class itk::TimeVaryingVelocityFieldIntegrationImageFilter<itk::Image<itk::Vector<double, 2u>, 3u>, itk::Image<itk::Vector<double, 2u>, 2u> >; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkTimeVaryingVelocityFieldIntegrationImageFilter.h"

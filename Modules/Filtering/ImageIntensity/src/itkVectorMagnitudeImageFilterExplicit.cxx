@@ -1,4 +1,9 @@
-#include "itkVectorMagnitudeImageFilter.h"
+// copyright from itkVectorMagnitudeImageFilter.h
 
-template class itk::VectorMagnitudeImageFilter<itk::Image<itk::Vector<double, 2u>, 2u>, itk::Image<double, 2u> >; //Instantiated 11 times
-template class itk::VectorMagnitudeImageFilter<itk::Image<itk::Vector<double, 3u>, 3u>, itk::Image<double, 3u> >; //Instantiated 14 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkVectorMagnitudeImageFilter.h"

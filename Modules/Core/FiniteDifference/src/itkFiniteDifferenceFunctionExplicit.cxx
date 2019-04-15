@@ -1,13 +1,9 @@
-#include "itkFiniteDifferenceFunction.h"
+// copyright from itkFiniteDifferenceFunction.h
 
-template class itk::FiniteDifferenceFunction<itk::Image<itk::Vector<float, 2u>, 2u> >; //Instantiated 57 times
-template class itk::FiniteDifferenceFunction<itk::Image<itk::Vector<double, 3u>, 3u> >; //Instantiated 15 times
-template class itk::FiniteDifferenceFunction<itk::Image<itk::RGBPixel<float>, 2u> >; //Instantiated 6 times
-template class itk::FiniteDifferenceFunction<itk::Image<itk::CovariantVector<float, 2u>, 2u> >; //Instantiated 6 times
-template class itk::FiniteDifferenceFunction<itk::Image<itk::Vector<float, 3u>, 3u> >; //Instantiated 66 times
-template class itk::FiniteDifferenceFunction<itk::Image<double, 2u> >; //Instantiated 48 times
-template class itk::FiniteDifferenceFunction<itk::Image<float, 3u> >; //Instantiated 90 times
-template class itk::FiniteDifferenceFunction<itk::Image<itk::Vector<float, 3u>, 2u> >; //Instantiated 6 times
-template class itk::FiniteDifferenceFunction<itk::Image<double, 3u> >; //Instantiated 84 times
-template class itk::FiniteDifferenceFunction<itk::Image<float, 2u> >; //Instantiated 204 times
-template class itk::FiniteDifferenceFunction<itk::Image<itk::Vector<double, 2u>, 2u> >; //Instantiated 18 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkFiniteDifferenceFunction.h"

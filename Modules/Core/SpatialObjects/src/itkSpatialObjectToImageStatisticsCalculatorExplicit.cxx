@@ -1,3 +1,9 @@
-#include "itkSpatialObjectToImageStatisticsCalculator.h"
+// copyright from itkSpatialObjectToImageStatisticsCalculator.h
 
-template class itk::SpatialObjectToImageStatisticsCalculator<itk::Image<unsigned char, 2u>, itk::EllipseSpatialObject<2u>, 1u>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkSpatialObjectToImageStatisticsCalculator.h"

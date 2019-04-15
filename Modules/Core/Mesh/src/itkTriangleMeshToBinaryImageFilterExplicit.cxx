@@ -1,3 +1,9 @@
-#include "itkTriangleMeshToBinaryImageFilter.h"
+// copyright from itkTriangleMeshToBinaryImageFilter.h
 
-template class itk::TriangleMeshToBinaryImageFilter<itk::Mesh<float, 3u, itk::DefaultStaticMeshTraits<float, 3u, 3u, float, float, float> >, itk::Image<unsigned char, 3u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkTriangleMeshToBinaryImageFilter.h"

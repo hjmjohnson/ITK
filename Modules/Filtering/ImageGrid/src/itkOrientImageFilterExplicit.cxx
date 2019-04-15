@@ -1,3 +1,9 @@
-#include "itkOrientImageFilter.h"
+// copyright from itkOrientImageFilter.h
 
-template class itk::OrientImageFilter<itk::Image<short, 3u>, itk::Image<short, 3u> >; //Instantiated 12 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkOrientImageFilter.h"

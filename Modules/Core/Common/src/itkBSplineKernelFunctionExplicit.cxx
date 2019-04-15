@@ -1,7 +1,9 @@
-#include "itkBSplineKernelFunction.h"
+// copyright from itkBSplineKernelFunction.h
 
-template class itk::BSplineKernelFunction<3u, double>; //Instantiated 268 times
-template class itk::BSplineKernelFunction<2u, double>; //Instantiated 179 times
-template class itk::BSplineKernelFunction<3u, float>; //Instantiated 6 times
-template class itk::BSplineKernelFunction<1u, double>; //Instantiated 173 times
-template class itk::BSplineKernelFunction<0u, double>; //Instantiated 171 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineKernelFunction.h"

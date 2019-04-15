@@ -1,6 +1,9 @@
-#include "itkSqrtImageFilter.h"
+// copyright from itkSqrtImageFilter.h
 
-template class itk::SqrtImageFilter<itk::Image<double, 3u>, itk::Image<double, 3u> >; //Instantiated 12 times
-template class itk::SqrtImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 24 times
-template class itk::SqrtImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 46 times
-template class itk::SqrtImageFilter<itk::Image<double, 2u>, itk::Image<double, 2u> >; //Instantiated 16 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkSqrtImageFilter.h"

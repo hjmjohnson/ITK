@@ -1,4 +1,9 @@
-#include "itkRigid3DPerspectiveTransform.h"
+// copyright from itkRigid3DPerspectiveTransform.h
 
-template class itk::Rigid3DPerspectiveTransform<float>; //Instantiated 6 times
-template class itk::Rigid3DPerspectiveTransform<double>; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkRigid3DPerspectiveTransform.h"

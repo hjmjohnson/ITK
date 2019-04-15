@@ -1,5 +1,9 @@
-#include "itkInteriorExteriorSpatialFunction.h"
+// copyright from itkInteriorExteriorSpatialFunction.h
 
-template class itk::InteriorExteriorSpatialFunction<1u, itk::Point<double, 1u> >; //Instantiated 6 times
-template class itk::InteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> >; //Instantiated 210 times
-template class itk::InteriorExteriorSpatialFunction<2u, itk::Point<double, 2u> >; //Instantiated 123 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkInteriorExteriorSpatialFunction.h"

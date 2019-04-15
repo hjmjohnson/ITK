@@ -1,3 +1,9 @@
-#include "itkBSplineSyNImageRegistrationMethod.h"
+// copyright from itkBSplineSyNImageRegistrationMethod.h
 
-template class itk::BSplineSyNImageRegistrationMethod<itk::Image<double, 3u>, itk::Image<double, 3u>, itk::BSplineSmoothingOnUpdateDisplacementFieldTransform<double, 3u> >; //Instantiated 8 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineSyNImageRegistrationMethod.h"

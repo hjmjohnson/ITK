@@ -1,6 +1,9 @@
-#include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"
+// copyright from itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h
 
-template class itk::BSplineSmoothingOnUpdateDisplacementFieldTransform<float, 2u>; //Instantiated 10 times
-template class itk::BSplineSmoothingOnUpdateDisplacementFieldTransform<double, 3u>; //Instantiated 17 times
-template class itk::BSplineSmoothingOnUpdateDisplacementFieldTransform<float, 3u>; //Instantiated 10 times
-template class itk::BSplineSmoothingOnUpdateDisplacementFieldTransform<double, 2u>; //Instantiated 14 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"

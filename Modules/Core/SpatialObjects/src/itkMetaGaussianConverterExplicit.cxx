@@ -1,4 +1,9 @@
-#include "itkMetaGaussianConverter.h"
+// copyright from itkMetaGaussianConverter.h
 
-template class itk::MetaGaussianConverter<2u>;
-template class itk::MetaGaussianConverter<3u>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMetaGaussianConverter.h"

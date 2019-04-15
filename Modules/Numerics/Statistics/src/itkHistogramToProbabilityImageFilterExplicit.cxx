@@ -1,3 +1,9 @@
-#include "itkHistogramToProbabilityImageFilter.h"
+// copyright from itkHistogramToProbabilityImageFilter.h
 
-template class itk::HistogramToProbabilityImageFilter<itk::Statistics::Histogram<double, itk::Statistics::DenseFrequencyContainer2>, itk::Image<float, 3u> >; //Instantiated 4 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkHistogramToProbabilityImageFilter.h"

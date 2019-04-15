@@ -1,4 +1,9 @@
-#include "itkDataObjectDecorator.h"
-#include "itkVectorContainer.h"
+// copyright from itkDataObjectDecorator.h
 
-template class itk::DataObjectDecorator<itk::VectorContainer<unsigned char, double> >; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkDataObjectDecorator.h"

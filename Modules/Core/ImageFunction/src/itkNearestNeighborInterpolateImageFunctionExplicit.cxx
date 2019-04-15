@@ -1,8 +1,9 @@
-#include "itkNearestNeighborInterpolateImageFunction.h"
+// copyright from itkNearestNeighborInterpolateImageFunction.h
 
-template class itk::NearestNeighborInterpolateImageFunction<itk::Image<float, 2u>, double>; //Instantiated 10 times
-template class itk::NearestNeighborInterpolateImageFunction<itk::Image<unsigned char, 2u>, double>; //Instantiated 70 times
-template class itk::NearestNeighborInterpolateImageFunction<itk::Image<unsigned short, 3u>, double>; //Instantiated 12 times
-template class itk::NearestNeighborInterpolateImageFunction<itk::Image<float, 2u>, float>; //Instantiated 4 times
-template class itk::NearestNeighborInterpolateImageFunction<itk::Image<unsigned char, 3u>, double>; //Instantiated 40 times
-template class itk::NearestNeighborInterpolateImageFunction<itk::Image<float, 3u>, double>; //Instantiated 4 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkNearestNeighborInterpolateImageFunction.h"

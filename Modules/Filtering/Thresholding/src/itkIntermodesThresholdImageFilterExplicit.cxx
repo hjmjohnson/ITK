@@ -1,3 +1,9 @@
-#include "itkIntermodesThresholdImageFilter.h"
+// copyright from itkIntermodesThresholdImageFilter.h
 
-template class itk::IntermodesThresholdImageFilter<itk::Image<short, 2u>, itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u> >; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkIntermodesThresholdImageFilter.h"

@@ -1,8 +1,9 @@
-#include "itkScaleTransform.h"
+// copyright from itkScaleTransform.h
 
-template class itk::ScaleTransform<double, 3u>; //Instantiated 21 times
-template class itk::ScaleTransform<float, 4u>; //Instantiated 6 times
-template class itk::ScaleTransform<float, 2u>; //Instantiated 6 times
-template class itk::ScaleTransform<double, 2u>; //Instantiated 12 times
-template class itk::ScaleTransform<float, 3u>; //Instantiated 9 times
-template class itk::ScaleTransform<double, 4u>; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkScaleTransform.h"

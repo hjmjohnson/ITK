@@ -1,3 +1,9 @@
-#include "itkFastMarchingImageFilter.h"
+// copyright from itkFastMarchingImageFilter.h
 
-template class itk::FastMarchingImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 90 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkFastMarchingImageFilter.h"

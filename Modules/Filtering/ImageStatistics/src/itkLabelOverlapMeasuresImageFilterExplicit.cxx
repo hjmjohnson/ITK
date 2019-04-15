@@ -1,4 +1,9 @@
-#include "itkLabelOverlapMeasuresImageFilter.h"
+// copyright from itkLabelOverlapMeasuresImageFilter.h
 
-template class itk::LabelOverlapMeasuresImageFilter<itk::Image<unsigned int, 2u> >; //Instantiated 12 times
-template class itk::LabelOverlapMeasuresImageFilter<itk::Image<unsigned int, 3u> >; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkLabelOverlapMeasuresImageFilter.h"

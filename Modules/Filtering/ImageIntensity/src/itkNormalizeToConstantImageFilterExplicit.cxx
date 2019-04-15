@@ -1,19 +1,9 @@
-#include "itkNormalizeToConstantImageFilter.h"
+// copyright from itkNormalizeToConstantImageFilter.h
 
-template class itk::NormalizeToConstantImageFilter<itk::Image<unsigned int, 2u>, itk::Image<double, 2u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<double, 2u>, itk::Image<double, 2u> >; //Instantiated 29 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<short, 2u>, itk::Image<double, 2u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<unsigned int, 3u>, itk::Image<double, 3u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<signed char, 3u>, itk::Image<double, 3u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<float, 2u>, itk::Image<double, 2u> >; //Instantiated 47 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<unsigned short, 3u>, itk::Image<double, 3u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<int, 2u>, itk::Image<double, 2u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<signed char, 2u>, itk::Image<double, 2u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<unsigned char, 3u>, itk::Image<double, 3u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<float, 3u>, itk::Image<double, 3u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<short, 3u>, itk::Image<double, 3u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<int, 3u>, itk::Image<double, 3u> >; //Instantiated 29 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<double, 3u>, itk::Image<double, 3u> >; //Instantiated 27 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<unsigned char, 2u>, itk::Image<double, 2u> >; //Instantiated 35 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<double, 2u>, itk::Image<float, 2u> >; //Instantiated 12 times
-template class itk::NormalizeToConstantImageFilter<itk::Image<unsigned short, 2u>, itk::Image<double, 2u> >; //Instantiated 27 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkNormalizeToConstantImageFilter.h"

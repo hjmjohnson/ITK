@@ -1,4 +1,9 @@
-#include "itkRigid3DTransform.h"
+// copyright from itkRigid3DTransform.h
 
-template class itk::Rigid3DTransform<float>; //Instantiated 12 times
-template class itk::Rigid3DTransform<double>; //Instantiated 186 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkRigid3DTransform.h"

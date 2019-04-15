@@ -1,5 +1,9 @@
-#include "itkMahalanobisDistanceThresholdImageFunction.h"
+// copyright from itkMahalanobisDistanceThresholdImageFunction.h
 
-template class itk::MahalanobisDistanceThresholdImageFunction<itk::Image<itk::RGBPixel<unsigned char>, 3u>, float>; //Instantiated 3 times
-template class itk::MahalanobisDistanceThresholdImageFunction<itk::Image<itk::RGBPixel<unsigned char>, 2u>, float>; //Instantiated 6 times
-template class itk::MahalanobisDistanceThresholdImageFunction<itk::VectorImage<unsigned char, 2u>, float>; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMahalanobisDistanceThresholdImageFunction.h"

@@ -1,6 +1,9 @@
-#include "itkComposeDisplacementFieldsImageFilter.h"
+// copyright from itkComposeDisplacementFieldsImageFilter.h
 
-template class itk::ComposeDisplacementFieldsImageFilter<itk::Image<itk::Vector<double, 3u>, 3u>, itk::Image<itk::Vector<double, 3u>, 3u> >; //Instantiated 17 times
-template class itk::ComposeDisplacementFieldsImageFilter<itk::Image<itk::Vector<float, 3u>, 3u>, itk::Image<itk::Vector<float, 3u>, 3u> >; //Instantiated 6 times
-template class itk::ComposeDisplacementFieldsImageFilter<itk::Image<itk::Vector<float, 2u>, 2u>, itk::Image<itk::Vector<float, 2u>, 2u> >; //Instantiated 10 times
-template class itk::ComposeDisplacementFieldsImageFilter<itk::Image<itk::Vector<double, 2u>, 2u>, itk::Image<itk::Vector<double, 2u>, 2u> >; //Instantiated 14 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkComposeDisplacementFieldsImageFilter.h"

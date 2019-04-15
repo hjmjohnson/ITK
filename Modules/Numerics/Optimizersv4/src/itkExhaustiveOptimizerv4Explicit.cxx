@@ -1,3 +1,9 @@
-#include "itkExhaustiveOptimizerv4.h"
+// copyright from itkExhaustiveOptimizerv4.h
 
-template class itk::ExhaustiveOptimizerv4<double>; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkExhaustiveOptimizerv4.h"

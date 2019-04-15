@@ -1,4 +1,9 @@
-#include "itkVersorTransform.h"
+// copyright from itkVersorTransform.h
 
-template class itk::VersorTransform<float>; //Instantiated 12 times
-template class itk::VersorTransform<double>; //Instantiated 141 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkVersorTransform.h"

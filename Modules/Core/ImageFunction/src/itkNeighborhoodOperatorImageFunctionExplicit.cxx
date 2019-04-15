@@ -1,7 +1,9 @@
-#include "itkNeighborhoodOperatorImageFunction.h"
+// copyright from itkNeighborhoodOperatorImageFunction.h
 
-template class itk::NeighborhoodOperatorImageFunction<itk::Image<unsigned char, 2u>, double>; //Instantiated 3 times
-template class itk::NeighborhoodOperatorImageFunction<itk::Image<float, 2u>, double>; //Instantiated 9 times
-template class itk::NeighborhoodOperatorImageFunction<itk::Image<double, 2u>, double>; //Instantiated 9 times
-template class itk::NeighborhoodOperatorImageFunction<itk::Image<float, 3u>, float>; //Instantiated 6 times
-template class itk::NeighborhoodOperatorImageFunction<itk::Image<float, 2u>, float>; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkNeighborhoodOperatorImageFunction.h"

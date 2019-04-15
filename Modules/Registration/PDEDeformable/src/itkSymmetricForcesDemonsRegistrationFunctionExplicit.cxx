@@ -1,3 +1,9 @@
-#include "itkSymmetricForcesDemonsRegistrationFunction.h"
+// copyright from itkSymmetricForcesDemonsRegistrationFunction.h
 
-template class itk::SymmetricForcesDemonsRegistrationFunction<itk::Image<float, 2u>, itk::Image<float, 2u>, itk::Image<itk::Vector<float, 2u>, 2u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkSymmetricForcesDemonsRegistrationFunction.h"

@@ -1,3 +1,9 @@
-#include "itkQuadEdgeMeshScalarDataVTKPolyDataWriter.h"
+// copyright from itkQuadEdgeMeshScalarDataVTKPolyDataWriter.h
 
-template class itk::QuadEdgeMeshScalarDataVTKPolyDataWriter<itk::QuadEdgeMesh<float, 3u, itk::QuadEdgeMeshTraits<float, 3u, bool, bool, float, float> > >; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkQuadEdgeMeshScalarDataVTKPolyDataWriter.h"

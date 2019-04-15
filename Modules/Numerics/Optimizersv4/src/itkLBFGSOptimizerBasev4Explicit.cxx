@@ -1,4 +1,9 @@
-#include "itkLBFGSOptimizerBasev4.h"
+// copyright from itkLBFGSOptimizerBasev4.h
 
-template class itk::LBFGSOptimizerBasev4<vnl_lbfgsb>; //Instantiated 3 times
-template class itk::LBFGSOptimizerBasev4<vnl_lbfgs>; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkLBFGSOptimizerBasev4.h"

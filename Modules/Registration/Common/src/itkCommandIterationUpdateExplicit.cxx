@@ -1,4 +1,9 @@
-#include "itkCommandIterationUpdate.h"
+// copyright from itkCommandIterationUpdate.h
 
-template class itk::CommandIterationUpdate<itk::GradientDescentOptimizer>; //Instantiated 12 times
-template class itk::CommandIterationUpdate<itk::RegularStepGradientDescentOptimizer>; //Instantiated 14 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkCommandIterationUpdate.h"

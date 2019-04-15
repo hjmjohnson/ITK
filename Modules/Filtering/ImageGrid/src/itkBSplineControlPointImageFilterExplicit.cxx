@@ -1,9 +1,9 @@
-#include "itkBSplineControlPointImageFilter.h"
+// copyright from itkBSplineControlPointImageFilter.h
 
-template class itk::BSplineControlPointImageFilter<itk::Image<itk::Vector<float, 1u>, 3u>, itk::Image<itk::Vector<float, 1u>, 3u> >; //Instantiated 18 times
-template class itk::BSplineControlPointImageFilter<itk::Image<itk::Vector<float, 2u>, 3u>, itk::Image<itk::Vector<float, 2u>, 3u> >; //Instantiated 9 times
-template class itk::BSplineControlPointImageFilter<itk::Image<itk::Vector<double, 2u>, 3u>, itk::Image<itk::Vector<double, 2u>, 3u> >; //Instantiated 12 times
-template class itk::BSplineControlPointImageFilter<itk::Image<itk::Vector<float, 1u>, 2u>, itk::Image<itk::Vector<float, 1u>, 2u> >; //Instantiated 18 times
-template class itk::BSplineControlPointImageFilter<itk::Image<itk::Vector<float, 1u>, 4u>, itk::Image<itk::Vector<float, 1u>, 4u> >; //Instantiated 6 times
-template class itk::BSplineControlPointImageFilter<itk::Image<itk::Vector<float, 3u>, 4u>, itk::Image<itk::Vector<float, 3u>, 4u> >; //Instantiated 9 times
-template class itk::BSplineControlPointImageFilter<itk::Image<itk::Vector<double, 3u>, 4u>, itk::Image<itk::Vector<double, 3u>, 4u> >; //Instantiated 18 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineControlPointImageFilter.h"

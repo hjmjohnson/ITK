@@ -1,3 +1,9 @@
-#include "itkTimeVaryingVelocityFieldTransformParametersAdaptor.h"
+// copyright from itkTimeVaryingVelocityFieldTransformParametersAdaptor.h
 
-template class itk::TimeVaryingVelocityFieldTransformParametersAdaptor<itk::GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform<double, 3u> >; //Instantiated 8 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkTimeVaryingVelocityFieldTransformParametersAdaptor.h"

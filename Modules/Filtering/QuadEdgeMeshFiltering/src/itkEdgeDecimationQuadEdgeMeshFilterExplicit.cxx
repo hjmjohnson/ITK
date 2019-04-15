@@ -1,3 +1,9 @@
-#include "itkEdgeDecimationQuadEdgeMeshFilter.h"
+// copyright from itkEdgeDecimationQuadEdgeMeshFilter.h
 
-template class itk::EdgeDecimationQuadEdgeMeshFilter<itk::QuadEdgeMesh<double, 3u, itk::QuadEdgeMeshTraits<double, 3u, bool, bool, float, float> >, itk::QuadEdgeMesh<double, 3u, itk::QuadEdgeMeshTraits<double, 3u, bool, bool, float, float> >, itk::NumberOfFacesCriterion<itk::QuadEdgeMesh<double, 3u, itk::QuadEdgeMeshTraits<double, 3u, bool, bool, float, float> >, unsigned long, double, itk::MinPriorityQueueElementWrapper<itk::GeometricalQuadEdge<unsigned long, unsigned long, bool, bool, true>*, std::pair<bool, double>, unsigned long> > >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkEdgeDecimationQuadEdgeMeshFilter.h"

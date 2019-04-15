@@ -1,4 +1,9 @@
-#include "itkOptimizerParameters.h"
+// copyright from itkOptimizerParameters.h
 
-template class itk::OptimizerParameters<float>; //Instantiated 62 times
-template class itk::OptimizerParameters<double>; //Instantiated 1283 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkOptimizerParameters.h"

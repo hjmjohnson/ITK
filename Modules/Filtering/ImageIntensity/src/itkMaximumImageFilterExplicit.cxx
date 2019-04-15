@@ -1,6 +1,9 @@
-#include "itkMaximumImageFilter.h"
+// copyright from itkMaximumImageFilter.h
 
-template class itk::MaximumImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 8 times
-template class itk::MaximumImageFilter<itk::Image<double, 2u>, itk::Image<double, 2u>, itk::Image<double, 2u> >; //Instantiated 6 times
-template class itk::MaximumImageFilter<itk::Image<double, 3u>, itk::Image<double, 3u>, itk::Image<double, 3u> >; //Instantiated 6 times
-template class itk::MaximumImageFilter<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMaximumImageFilter.h"

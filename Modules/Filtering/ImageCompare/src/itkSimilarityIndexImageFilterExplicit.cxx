@@ -1,4 +1,9 @@
-#include "itkSimilarityIndexImageFilter.h"
+// copyright from itkSimilarityIndexImageFilter.h
 
-template class itk::SimilarityIndexImageFilter<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> >; //Instantiated 6 times
-template class itk::SimilarityIndexImageFilter<itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u> >; //Instantiated 30 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkSimilarityIndexImageFilter.h"

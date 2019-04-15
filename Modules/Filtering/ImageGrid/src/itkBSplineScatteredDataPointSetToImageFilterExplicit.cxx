@@ -1,13 +1,9 @@
-#include "itkBSplineScatteredDataPointSetToImageFilter.h"
+// copyright from itkBSplineScatteredDataPointSetToImageFilter.h
 
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<float, 1u>, 4u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 4u, 4u, float, float, itk::Vector<float, 1u> > >, itk::Image<itk::Vector<float, 1u>, 4u> >; //Instantiated 6 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<float, 1u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 2u, 2u, float, float, itk::Vector<float, 1u> > >, itk::Image<itk::Vector<float, 1u>, 2u> >; //Instantiated 18 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<double, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 3u, 3u, float, float, itk::Vector<double, 3u> > >, itk::Image<itk::Vector<double, 3u>, 3u> >; //Instantiated 27 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<double, 3u>, 4u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 4u, 4u, float, float, itk::Vector<double, 3u> > >, itk::Image<itk::Vector<double, 3u>, 4u> >; //Instantiated 9 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<double, 2u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<double, 2u>, 3u, 3u, float, float, itk::Vector<double, 2u> > >, itk::Image<itk::Vector<double, 2u>, 3u> >; //Instantiated 6 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<float, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<float, 3u>, 3u, 3u, float, float, itk::Vector<float, 3u> > >, itk::Image<itk::Vector<float, 3u>, 3u> >; //Instantiated 21 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<double, 1u>, 1u, itk::DefaultStaticMeshTraits<itk::Vector<double, 1u>, 1u, 1u, float, float, itk::Vector<double, 1u> > >, itk::Image<itk::Vector<double, 1u>, 1u> >; //Instantiated 147 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<double, 2u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<double, 2u>, 2u, 2u, float, float, itk::Vector<double, 2u> > >, itk::Image<itk::Vector<double, 2u>, 2u> >; //Instantiated 24 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<double, 3u>, 1u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 1u, 1u, float, float, itk::Vector<double, 3u> > >, itk::Image<itk::Vector<double, 3u>, 1u> >; //Instantiated 6 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<float, 2u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<float, 2u>, 2u, 2u, float, float, itk::Vector<float, 2u> > >, itk::Image<itk::Vector<float, 2u>, 2u> >; //Instantiated 21 times
-template class itk::BSplineScatteredDataPointSetToImageFilter<itk::PointSet<itk::Vector<float, 1u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 3u, 3u, float, float, itk::Vector<float, 1u> > >, itk::Image<itk::Vector<float, 1u>, 3u> >; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineScatteredDataPointSetToImageFilter.h"

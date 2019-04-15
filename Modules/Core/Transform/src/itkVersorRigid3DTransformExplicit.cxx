@@ -1,4 +1,9 @@
-#include "itkVersorRigid3DTransform.h"
+// copyright from itkVersorRigid3DTransform.h
 
-template class itk::VersorRigid3DTransform<float>; //Instantiated 12 times
-template class itk::VersorRigid3DTransform<double>; //Instantiated 135 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkVersorRigid3DTransform.h"

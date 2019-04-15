@@ -1,4 +1,9 @@
-#include "itkConstantVelocityFieldTransformParametersAdaptor.h"
+// copyright from itkConstantVelocityFieldTransformParametersAdaptor.h
 
-template class itk::ConstantVelocityFieldTransformParametersAdaptor<itk::GaussianExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 10 times
-template class itk::ConstantVelocityFieldTransformParametersAdaptor<itk::BSplineExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 10 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkConstantVelocityFieldTransformParametersAdaptor.h"

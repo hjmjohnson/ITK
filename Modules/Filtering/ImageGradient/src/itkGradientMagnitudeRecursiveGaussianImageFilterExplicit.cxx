@@ -1,4 +1,9 @@
-#include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"
+// copyright from itkGradientMagnitudeRecursiveGaussianImageFilter.h
 
-template class itk::GradientMagnitudeRecursiveGaussianImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 54 times
-template class itk::GradientMagnitudeRecursiveGaussianImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 15 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"

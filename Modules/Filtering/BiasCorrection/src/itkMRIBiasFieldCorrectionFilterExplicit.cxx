@@ -1,3 +1,9 @@
-#include "itkMRIBiasFieldCorrectionFilter.h"
+// copyright from itkMRIBiasFieldCorrectionFilter.h
 
-template class itk::MRIBiasFieldCorrectionFilter<itk::Image<float, 3u>, itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 3 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMRIBiasFieldCorrectionFilter.h"

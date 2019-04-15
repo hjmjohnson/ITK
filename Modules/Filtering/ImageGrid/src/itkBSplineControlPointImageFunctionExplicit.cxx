@@ -1,4 +1,9 @@
-#include "itkBSplineControlPointImageFunction.h"
+// copyright from itkBSplineControlPointImageFunction.h
 
-template class itk::BSplineControlPointImageFunction<itk::Image<itk::Vector<double, 1u>, 1u>, double>; //Instantiated 147 times
-template class itk::BSplineControlPointImageFunction<itk::Image<itk::Vector<float, 1u>, 1u>, double>; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBSplineControlPointImageFunction.h"

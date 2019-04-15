@@ -1,3 +1,9 @@
-#include "itkThresholdLabelerImageFilter.h"
+// copyright from itkThresholdLabelerImageFilter.h
 
-template class itk::ThresholdLabelerImageFilter<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> >; //Instantiated 9 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkThresholdLabelerImageFilter.h"

@@ -1,4 +1,9 @@
-#include "itkMetaSurfaceConverter.h"
+// copyright from itkMetaSurfaceConverter.h
 
-template class itk::MetaSurfaceConverter<2u>;
-template class itk::MetaSurfaceConverter<3u>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMetaSurfaceConverter.h"

@@ -1,6 +1,9 @@
-#include "itkBinaryThresholdImageFunction.h"
+// copyright from itkBinaryThresholdImageFunction.h
 
-template class itk::BinaryThresholdImageFunction<itk::Image<float, 2u>, float>; //Instantiated 6 times
-template class itk::BinaryThresholdImageFunction<itk::Image<unsigned char, 2u>, double>; //Instantiated 4 times
-template class itk::BinaryThresholdImageFunction<itk::Image<float, 2u>, double>; //Instantiated 6 times
-template class itk::BinaryThresholdImageFunction<itk::Image<unsigned char, 2u>, float>; //Instantiated 10 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBinaryThresholdImageFunction.h"

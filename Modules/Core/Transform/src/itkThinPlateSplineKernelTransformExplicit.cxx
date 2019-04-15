@@ -1,4 +1,9 @@
-#include "itkThinPlateSplineKernelTransform.h"
+// copyright from itkThinPlateSplineKernelTransform.h
 
-template class itk::ThinPlateSplineKernelTransform<double, 3u>; //Instantiated 21 times
-template class itk::ThinPlateSplineKernelTransform<double, 2u>; //Instantiated 18 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkThinPlateSplineKernelTransform.h"

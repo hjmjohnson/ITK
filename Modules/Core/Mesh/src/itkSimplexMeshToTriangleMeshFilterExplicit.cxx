@@ -1,3 +1,9 @@
-#include "itkSimplexMeshToTriangleMeshFilter.h"
+// copyright from itkSimplexMeshToTriangleMeshFilter.h
 
-template class itk::SimplexMeshToTriangleMeshFilter<itk::SimplexMesh<double, 3u, itk::DefaultStaticMeshTraits<double, 3u, 3u, double, double, double> >, itk::Mesh<double, 3u, itk::DefaultStaticMeshTraits<double, 3u, 3u, double, double, double> > >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkSimplexMeshToTriangleMeshFilter.h"

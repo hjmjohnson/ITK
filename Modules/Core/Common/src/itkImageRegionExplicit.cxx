@@ -1,8 +1,9 @@
-#include "itkImageRegion.h"
+// copyright from itkImageRegion.h
 
-template class itk::ImageRegion<1u>; //Instantiated 444 times
-template class itk::ImageRegion<2u>; //Instantiated 4003 times
-template class itk::ImageRegion<3u>; //Instantiated 3425 times
-template class itk::ImageRegion<4u>; //Instantiated 212 times
-template class itk::ImageRegion<5u>; //Instantiated 14 times
-template class itk::ImageRegion<6u>; //Instantiated 261 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkImageRegion.h"

@@ -1,4 +1,9 @@
-#include "itkImageRegionReverseIterator.h"
+// copyright from itkImageRegionReverseIterator.h
 
-template class itk::ImageRegionReverseIterator<itk::Image<double, 3u> >; //Instantiated 8 times
-template class itk::ImageRegionReverseIterator<itk::Image<double, 2u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkImageRegionReverseIterator.h"

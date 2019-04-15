@@ -1,3 +1,9 @@
-#include "itkVoronoiSegmentationImageFilterBase.h"
+// copyright from itkVoronoiSegmentationImageFilterBase.h
 
-template class itk::VoronoiSegmentationImageFilterBase<itk::Image<float, 2u>, itk::Image<float, 2u>, itk::Image<unsigned char, 2u> >; //Instantiated 6 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkVoronoiSegmentationImageFilterBase.h"

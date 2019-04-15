@@ -1,3 +1,9 @@
-#include "itkBinaryThinningImageFilter.h"
+// copyright from itkBinaryThinningImageFilter.h
 
-template class itk::BinaryThinningImageFilter<itk::Image<short, 2u>, itk::Image<short, 2u> >; //Instantiated 5 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkBinaryThinningImageFilter.h"

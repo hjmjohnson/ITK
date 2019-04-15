@@ -1,4 +1,9 @@
-#include "itkMetaLineConverter.h"
+// copyright from itkMetaLineConverter.h
 
-template class itk::MetaLineConverter<2u>;
-template class itk::MetaLineConverter<3u>;
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMetaLineConverter.h"

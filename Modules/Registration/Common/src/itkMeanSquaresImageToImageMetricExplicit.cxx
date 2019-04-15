@@ -1,10 +1,9 @@
-#include "itkMeanSquaresImageToImageMetric.h"
+// copyright from itkMeanSquaresImageToImageMetric.h
 
-template class itk::MeanSquaresImageToImageMetric<itk::Image<unsigned int, 2u>, itk::Image<unsigned int, 2u> >; //Instantiated 6 times
-template class itk::MeanSquaresImageToImageMetric<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 42 times
-template class itk::MeanSquaresImageToImageMetric<itk::Image<double, 2u>, itk::Image<double, 2u> >; //Instantiated 9 times
-template class itk::MeanSquaresImageToImageMetric<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 15 times
-template class itk::MeanSquaresImageToImageMetric<itk::Image<int, 2u>, itk::Image<int, 2u> >; //Instantiated 6 times
-template class itk::MeanSquaresImageToImageMetric<itk::Image<short, 2u>, itk::Image<short, 2u> >; //Instantiated 6 times
-template class itk::MeanSquaresImageToImageMetric<itk::Image<unsigned short, 2u>, itk::Image<unsigned short, 2u> >; //Instantiated 9 times
-template class itk::MeanSquaresImageToImageMetric<itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u> >; //Instantiated 12 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkMeanSquaresImageToImageMetric.h"

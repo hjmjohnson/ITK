@@ -1,4 +1,9 @@
-#include "itkCheckerBoardImageFilter.h"
+// copyright from itkCheckerBoardImageFilter.h
 
-template class itk::CheckerBoardImageFilter<itk::Image<float, 3u> >; //Instantiated 48 times
-template class itk::CheckerBoardImageFilter<itk::Image<unsigned short, 2u> >; //Instantiated 11 times
+// Unconditionally include .hxx files to include definitions
+#undef ITK_MANUAL_INSTANTIATION
+
+// Define as blank to trigger one explicit instantiation
+// of symbols from this file.
+#define ITK_TEMPLATE_INSTANTIATION_EXTERN
+#include "itkCheckerBoardImageFilter.h"
