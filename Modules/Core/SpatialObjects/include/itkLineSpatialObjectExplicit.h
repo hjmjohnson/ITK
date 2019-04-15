@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::LineSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::LineSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LineSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LineSpatialObject<3u>;
 
 #endif //itkLineSpatialObjectExplicit_h

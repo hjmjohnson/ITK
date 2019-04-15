@@ -3,5 +3,5 @@
 
 #include "ITKIOCSVExport.h"
 
-extern template class ITKIOCSV_EXPORT itk::CSVArray2DFileReader<double>; //Instantiated 4 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CSVArray2DFileReader<double>; //Instantiated 4 times
 #endif //itkCSVArray2DFileReaderExplicit_h

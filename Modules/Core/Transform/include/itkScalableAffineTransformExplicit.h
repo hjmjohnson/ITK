@@ -17,8 +17,8 @@
  *=========================================================================*/
 #ifndef itkScalableAffineTransformExplicit_h
 #define itkScalableAffineTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::ScalableAffineTransform<double, 3u>;
-extern template class ITKTransform_EXPORT itk::ScalableAffineTransform<double, 2u>;
-extern template class ITKTransform_EXPORT itk::ScalableAffineTransform<double, 4u>;
-extern template class ITKTransform_EXPORT itk::ScalableAffineTransform<float, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScalableAffineTransform<double, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScalableAffineTransform<double, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScalableAffineTransform<double, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScalableAffineTransform<float, 3u>;
 #endif //itkScalableAffineTransformExplicit_h

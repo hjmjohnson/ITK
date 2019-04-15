@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::LandmarkSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::LandmarkSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LandmarkSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::LandmarkSpatialObject<3u>;
 
 #endif //itkLandmarkSpatialObjectExplicit_h

@@ -6,7 +6,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::SpatialObjectToImageFilter<itk::GroupSpatialObject<3u>, itk::Image<short, 3u> >;
-extern template class ITKSpatialObjects_EXPORT itk::SpatialObjectToImageFilter<itk::BoxSpatialObject<2u>, itk::Image<unsigned char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialObjectToImageFilter<itk::GroupSpatialObject<3u>, itk::Image<short, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SpatialObjectToImageFilter<itk::BoxSpatialObject<2u>, itk::Image<unsigned char, 2u> >;
 
 #endif //itkSpatialObjectToImageFilterExplicit_h

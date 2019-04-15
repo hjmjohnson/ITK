@@ -3,5 +3,5 @@
 
 #include "ITKImageAdaptorsExport.h"
 
-extern template class ITKImageAdaptors_EXPORT itk::NthElementPixelAccessor<float, itk::VariableLengthVector<float> >; //Instantiated 6 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::NthElementPixelAccessor<float, itk::VariableLengthVector<float> >; //Instantiated 6 times
 #endif //itkNthElementPixelAccessorExplicit_h

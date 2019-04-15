@@ -3,6 +3,6 @@
 
 #include "ITKImageCompareExport.h"
 
-extern template class ITKImageCompare_EXPORT itk::CheckerBoardImageFilter<itk::Image<float, 3u> >; //Instantiated 48 times
-extern template class ITKImageCompare_EXPORT itk::CheckerBoardImageFilter<itk::Image<unsigned short, 2u> >; //Instantiated 11 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CheckerBoardImageFilter<itk::Image<float, 3u> >; //Instantiated 48 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CheckerBoardImageFilter<itk::Image<unsigned short, 2u> >; //Instantiated 11 times
 #endif //itkCheckerBoardImageFilterExplicit_h

@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::SurfaceSpatialObjectPoint<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::SurfaceSpatialObjectPoint<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SurfaceSpatialObjectPoint<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SurfaceSpatialObjectPoint<3u>;
 
 #endif //itkSurfaceSpatialObjectPointExplicit_h

@@ -17,20 +17,20 @@
  *=========================================================================*/
 #ifndef itkMultiTransformExplicit_h
 #define itkMultiTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 9u, 9u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 4u, 4u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 2u, 2u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 5u, 5u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 6u, 6u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 3u, 3u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 7u, 7u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 2u, 2u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 4u, 4u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 8u, 8u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 7u, 7u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 5u, 5u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 8u, 8u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 6u, 6u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<float, 9u, 9u>;
-extern template class ITKTransform_EXPORT itk::MultiTransform<double, 3u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 9u, 9u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 4u, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 2u, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 5u, 5u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 6u, 6u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 3u, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 7u, 7u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 2u, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 4u, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 8u, 8u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 7u, 7u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 5u, 5u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 8u, 8u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 6u, 6u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<float, 9u, 9u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MultiTransform<double, 3u, 3u>;
 #endif //itkMultiTransformExplicit_h

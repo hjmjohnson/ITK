@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkCenteredRigid2DTransformExplicit_h
 #define itkCenteredRigid2DTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::CenteredRigid2DTransform<double>;
-extern template class ITKTransform_EXPORT itk::CenteredRigid2DTransform<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredRigid2DTransform<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredRigid2DTransform<float>;
 #endif //itkCenteredRigid2DTransformExplicit_h

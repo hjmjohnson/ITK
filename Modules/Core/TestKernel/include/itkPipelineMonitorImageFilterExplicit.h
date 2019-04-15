@@ -18,11 +18,11 @@
 #ifndef itkPipelineMonitorImageFilterExplicit_h
 #define itkPipelineMonitorImageFilterExplicit_h
 /*
-extern template class ITKCommon_EXPORT itk::PipelineMonitorImageFilter<itk::Image<float, 2u> >;
-extern template class ITKCommon_EXPORT itk::PipelineMonitorImageFilter<itk::Image<float, 3u> >;
-extern template class ITKCommon_EXPORT itk::PipelineMonitorImageFilter<itk::Image<itk::RGBPixel<unsigned char>, 3u> >;
-extern template class ITKCommon_EXPORT itk::PipelineMonitorImageFilter<itk::Image<unsigned char, 2u> >;
-extern template class ITKCommon_EXPORT itk::PipelineMonitorImageFilter<itk::Image<short, 2u> >;
-extern template class ITKCommon_EXPORT itk::PipelineMonitorImageFilter<itk::Image<unsigned char, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PipelineMonitorImageFilter<itk::Image<float, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PipelineMonitorImageFilter<itk::Image<float, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PipelineMonitorImageFilter<itk::Image<itk::RGBPixel<unsigned char>, 3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PipelineMonitorImageFilter<itk::Image<unsigned char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PipelineMonitorImageFilter<itk::Image<short, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PipelineMonitorImageFilter<itk::Image<unsigned char, 3u> >;
 */
 #endif //itkPipelineMonitorImageFilterExplicit_h

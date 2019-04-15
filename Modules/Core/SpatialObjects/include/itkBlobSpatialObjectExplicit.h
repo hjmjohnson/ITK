@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::BlobSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::BlobSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BlobSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BlobSpatialObject<3u>;
 
 #endif //itkBlobSpatialObjectExplicit_h

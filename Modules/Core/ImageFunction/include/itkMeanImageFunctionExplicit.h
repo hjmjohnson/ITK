@@ -3,5 +3,5 @@
 
 #include "ITKImageFunctionExport.h"
 
-extern template class ITKImageFunction_EXPORT itk::MeanImageFunction<itk::Image<float, 2u>, double>; //Instantiated 4 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MeanImageFunction<itk::Image<float, 2u>, double>; //Instantiated 4 times
 #endif //itkMeanImageFunctionExplicit_h

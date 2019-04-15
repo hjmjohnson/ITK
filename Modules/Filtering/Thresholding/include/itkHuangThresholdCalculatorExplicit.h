@@ -3,5 +3,5 @@
 
 #include "ITKThresholdingExport.h"
 
-extern template class ITKThresholding_EXPORT itk::HuangThresholdCalculator<itk::Statistics::Histogram<double, itk::Statistics::DenseFrequencyContainer2>, short>; //Instantiated 7 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::HuangThresholdCalculator<itk::Statistics::Histogram<double, itk::Statistics::DenseFrequencyContainer2>, short>; //Instantiated 7 times
 #endif //itkHuangThresholdCalculatorExplicit_h

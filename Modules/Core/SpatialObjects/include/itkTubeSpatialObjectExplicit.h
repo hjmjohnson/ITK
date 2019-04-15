@@ -6,9 +6,9 @@
 #include "itkDTITubeSpatialObjectPoint.h"
 
 
-extern template class ITKSpatialObjects_EXPORT itk::TubeSpatialObject<2u, itk::TubeSpatialObjectPoint<2u> >;
-extern template class ITKSpatialObjects_EXPORT itk::TubeSpatialObject<2u, itk::DTITubeSpatialObjectPoint<2u> >;
-extern template class ITKSpatialObjects_EXPORT itk::TubeSpatialObject<3u, itk::TubeSpatialObjectPoint<3u> >;
-extern template class ITKSpatialObjects_EXPORT itk::TubeSpatialObject<3u, itk::DTITubeSpatialObjectPoint<3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TubeSpatialObject<2u, itk::TubeSpatialObjectPoint<2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TubeSpatialObject<2u, itk::DTITubeSpatialObjectPoint<2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TubeSpatialObject<3u, itk::TubeSpatialObjectPoint<3u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TubeSpatialObject<3u, itk::DTITubeSpatialObjectPoint<3u> >;
 
 #endif //itkTubeSpatialObjectExplicit_h

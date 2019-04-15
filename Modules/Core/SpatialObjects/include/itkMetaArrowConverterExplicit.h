@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::MetaArrowConverter<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::MetaArrowConverter<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaArrowConverter<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaArrowConverter<3u>;
 
 #endif //itkMetaArrowConverterExplicit_h

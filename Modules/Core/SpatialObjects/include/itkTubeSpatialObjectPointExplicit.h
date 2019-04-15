@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::TubeSpatialObjectPoint<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::TubeSpatialObjectPoint<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TubeSpatialObjectPoint<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TubeSpatialObjectPoint<3u>;
 
 #endif //itkTubeSpatialObjectPointExplicit_h

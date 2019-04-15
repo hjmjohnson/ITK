@@ -3,5 +3,5 @@
 
 #include "ITKRegistrationCommonExport.h"
 
-extern template class ITKRegistrationCommon_EXPORT itk::BSplineTransformParametersAdaptor<itk::BSplineTransform<double, 3u, 3u> >; //Instantiated 10 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineTransformParametersAdaptor<itk::BSplineTransform<double, 3u, 3u> >; //Instantiated 10 times
 #endif //itkBSplineTransformParametersAdaptorExplicit_h

@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkKernelTransformExplicit_h
 #define itkKernelTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::KernelTransform<double, 3u>;
-extern template class ITKTransform_EXPORT itk::KernelTransform<double, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::KernelTransform<double, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::KernelTransform<double, 2u>;
 #endif //itkKernelTransformExplicit_h

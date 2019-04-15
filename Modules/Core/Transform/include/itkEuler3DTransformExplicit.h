@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkEuler3DTransformExplicit_h
 #define itkEuler3DTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::Euler3DTransform<float>;
-extern template class ITKTransform_EXPORT itk::Euler3DTransform<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Euler3DTransform<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Euler3DTransform<double>;
 #endif //itkEuler3DTransformExplicit_h

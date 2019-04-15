@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkThinPlateR2LogRSplineKernelTransformExplicit_h
 #define itkThinPlateR2LogRSplineKernelTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::ThinPlateR2LogRSplineKernelTransform<double, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ThinPlateR2LogRSplineKernelTransform<double, 3u>;
 #endif //itkThinPlateR2LogRSplineKernelTransformExplicit_h

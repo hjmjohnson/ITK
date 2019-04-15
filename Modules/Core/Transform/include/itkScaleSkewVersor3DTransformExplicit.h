@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkScaleSkewVersor3DTransformExplicit_h
 #define itkScaleSkewVersor3DTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::ScaleSkewVersor3DTransform<double>;
-extern template class ITKTransform_EXPORT itk::ScaleSkewVersor3DTransform<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleSkewVersor3DTransform<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleSkewVersor3DTransform<float>;
 #endif //itkScaleSkewVersor3DTransformExplicit_h

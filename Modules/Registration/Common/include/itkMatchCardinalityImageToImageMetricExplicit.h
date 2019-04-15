@@ -3,5 +3,5 @@
 
 #include "ITKRegistrationCommonExport.h"
 
-extern template class ITKRegistrationCommon_EXPORT itk::MatchCardinalityImageToImageMetric<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MatchCardinalityImageToImageMetric<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 6 times
 #endif //itkMatchCardinalityImageToImageMetricExplicit_h

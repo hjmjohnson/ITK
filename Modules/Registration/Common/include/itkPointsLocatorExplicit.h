@@ -3,6 +3,6 @@
 
 #include "ITKRegistrationCommonExport.h"
 
-extern template class ITKRegistrationCommon_EXPORT itk::PointsLocator<itk::VectorContainer<unsigned long, itk::Point<float, 3u> > >; //Instantiated 15 times
-extern template class ITKRegistrationCommon_EXPORT itk::PointsLocator<itk::VectorContainer<unsigned long, itk::Point<float, 2u> > >; //Instantiated 33 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointsLocator<itk::VectorContainer<unsigned long, itk::Point<float, 3u> > >; //Instantiated 15 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointsLocator<itk::VectorContainer<unsigned long, itk::Point<float, 2u> > >; //Instantiated 33 times
 #endif //itkPointsLocatorExplicit_h

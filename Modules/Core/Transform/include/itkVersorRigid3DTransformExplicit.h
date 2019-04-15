@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkVersorRigid3DTransformExplicit_h
 #define itkVersorRigid3DTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::VersorRigid3DTransform<float>;
-extern template class ITKTransform_EXPORT itk::VersorRigid3DTransform<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VersorRigid3DTransform<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VersorRigid3DTransform<double>;
 #endif //itkVersorRigid3DTransformExplicit_h

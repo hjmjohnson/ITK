@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::PointBasedSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::PointBasedSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointBasedSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointBasedSpatialObject<3u>;
 
 #endif //itkPointBasedSpatialObjectExplicit_h

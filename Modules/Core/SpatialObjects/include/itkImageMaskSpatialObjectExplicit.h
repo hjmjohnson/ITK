@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::ImageMaskSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::ImageMaskSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageMaskSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageMaskSpatialObject<3u>;
 
 #endif //itkImageMaskSpatialObjectExplicit_h

@@ -3,5 +3,5 @@
 
 #include "ITKSmoothingExport.h"
 
-extern template class ITKSmoothing_EXPORT itk::BinomialBlurImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 7 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BinomialBlurImageFilter<itk::Image<float, 2u>, itk::Image<float, 2u> >; //Instantiated 7 times
 #endif //itkBinomialBlurImageFilterExplicit_h

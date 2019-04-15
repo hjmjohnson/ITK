@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::MetaBlobConverter<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::MetaBlobConverter<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaBlobConverter<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaBlobConverter<3u>;
 
 #endif //itkMetaBlobConverterExplicit_h

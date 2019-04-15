@@ -3,5 +3,5 @@
 
 #include "ITKRegistrationCommonExport.h"
 
-extern template class ITKRegistrationCommon_EXPORT itk::RecursiveMultiResolutionPyramidImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 53 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RecursiveMultiResolutionPyramidImageFilter<itk::Image<float, 3u>, itk::Image<float, 3u> >; //Instantiated 53 times
 #endif //itkRecursiveMultiResolutionPyramidImageFilterExplicit_h

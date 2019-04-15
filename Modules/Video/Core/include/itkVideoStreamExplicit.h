@@ -3,5 +3,5 @@
 
 #include "ITKVideoCoreExport.h"
 
-extern template class ITKVideoCore_EXPORT itk::VideoStream<itk::Image<unsigned char, 2u> >; //Instantiated 14 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VideoStream<itk::Image<unsigned char, 2u> >; //Instantiated 14 times
 #endif //itkVideoStreamExplicit_h

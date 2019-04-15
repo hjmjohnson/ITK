@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::MetaGaussianConverter<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::MetaGaussianConverter<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaGaussianConverter<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaGaussianConverter<3u>;
 
 #endif //itkMetaGaussianConverterExplicit_h

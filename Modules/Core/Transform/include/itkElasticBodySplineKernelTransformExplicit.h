@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkElasticBodySplineKernelTransformExplicit_h
 #define itkElasticBodySplineKernelTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::ElasticBodySplineKernelTransform<double, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ElasticBodySplineKernelTransform<double, 3u>;
 #endif //itkElasticBodySplineKernelTransformExplicit_h

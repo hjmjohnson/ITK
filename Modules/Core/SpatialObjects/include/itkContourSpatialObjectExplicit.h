@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::ContourSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::ContourSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ContourSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ContourSpatialObject<3u>;
 
 #endif //itkContourSpatialObjectExplicit_h

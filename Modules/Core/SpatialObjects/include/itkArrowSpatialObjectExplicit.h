@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::ArrowSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::ArrowSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ArrowSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ArrowSpatialObject<3u>;
 
 #endif //itkArrowSpatialObjectExplicit_h

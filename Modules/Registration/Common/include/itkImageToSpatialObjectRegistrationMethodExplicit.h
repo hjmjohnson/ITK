@@ -5,5 +5,5 @@
 
 #include "itkGroupSpatialObject.h"
 
-extern template class ITKRegistrationCommon_EXPORT itk::ImageToSpatialObjectRegistrationMethod<itk::Image<float, 2u>, itk::GroupSpatialObject<2u> >; //Instantiated 6 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageToSpatialObjectRegistrationMethod<itk::Image<float, 2u>, itk::GroupSpatialObject<2u> >; //Instantiated 6 times
 #endif //itkImageToSpatialObjectRegistrationMethodExplicit_h

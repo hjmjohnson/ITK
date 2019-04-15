@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::MetaEllipseConverter<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::MetaEllipseConverter<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaEllipseConverter<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaEllipseConverter<3u>;
 
 #endif //itkMetaEllipseConverterExplicit_h

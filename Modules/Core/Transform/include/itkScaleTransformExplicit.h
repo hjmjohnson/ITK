@@ -17,10 +17,10 @@
  *=========================================================================*/
 #ifndef itkScaleTransformExplicit_h
 #define itkScaleTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::ScaleTransform<double, 3u>;
-extern template class ITKTransform_EXPORT itk::ScaleTransform<float, 4u>;
-extern template class ITKTransform_EXPORT itk::ScaleTransform<float, 2u>;
-extern template class ITKTransform_EXPORT itk::ScaleTransform<double, 2u>;
-extern template class ITKTransform_EXPORT itk::ScaleTransform<float, 3u>;
-extern template class ITKTransform_EXPORT itk::ScaleTransform<double, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleTransform<double, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleTransform<float, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleTransform<float, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleTransform<double, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleTransform<float, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleTransform<double, 4u>;
 #endif //itkScaleTransformExplicit_h

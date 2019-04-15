@@ -18,5 +18,5 @@
 #ifndef itkBSplineTransformInitializerExplicit_h
 #define itkBSplineTransformInitializerExplicit_h
 #include "itkBSplineTransform.h"
-extern template class ITKTransform_EXPORT itk::BSplineTransformInitializer<itk::BSplineTransform<double, 2u, 3u>, itk::Image<unsigned char, 2u> >;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineTransformInitializer<itk::BSplineTransform<double, 2u, 3u>, itk::Image<unsigned char, 2u> >;
 #endif //itkBSplineTransformInitializerExplicit_h

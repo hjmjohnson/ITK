@@ -3,5 +3,5 @@
 
 #include "ITKImageStatisticsExport.h"
 
-extern template class ITKImageStatistics_EXPORT itk::AdaptiveHistogramEqualizationImageFilter<itk::Image<float, 2u> >; //Instantiated 7 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AdaptiveHistogramEqualizationImageFilter<itk::Image<float, 2u> >; //Instantiated 7 times
 #endif //itkAdaptiveHistogramEqualizationImageFilterExplicit_h

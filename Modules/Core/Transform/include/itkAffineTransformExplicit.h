@@ -17,22 +17,22 @@
  *=========================================================================*/
 #ifndef itkAffineTransformExplicit_h
 #define itkAffineTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 8u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 3u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 10u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 6u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 2u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 5u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 4u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 9u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 4u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 3u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 6u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 7u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 8u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 7u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 9u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 10u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<float, 5u>;
-extern template class ITKTransform_EXPORT itk::AffineTransform<double, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 8u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 10u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 6u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 5u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 9u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 6u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 7u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 8u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 7u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 9u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 10u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<float, 5u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AffineTransform<double, 2u>;
 #endif //itkAffineTransformExplicit_h

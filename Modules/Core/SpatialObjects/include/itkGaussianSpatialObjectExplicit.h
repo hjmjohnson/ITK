@@ -3,8 +3,8 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::GaussianSpatialObject<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::GaussianSpatialObject<3u>;
-extern template class ITKSpatialObjects_EXPORT itk::GaussianSpatialObject<4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSpatialObject<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSpatialObject<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSpatialObject<4u>;
 
 #endif //itkGaussianSpatialObjectExplicit_h

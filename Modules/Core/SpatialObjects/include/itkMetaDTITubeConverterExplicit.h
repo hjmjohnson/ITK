@@ -3,7 +3,7 @@
 
 #include "ITKSpatialObjectsExport.h"
 
-extern template class ITKSpatialObjects_EXPORT itk::MetaDTITubeConverter<2u>;
-extern template class ITKSpatialObjects_EXPORT itk::MetaDTITubeConverter<3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDTITubeConverter<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDTITubeConverter<3u>;
 
 #endif //itkMetaDTITubeConverterExplicit_h

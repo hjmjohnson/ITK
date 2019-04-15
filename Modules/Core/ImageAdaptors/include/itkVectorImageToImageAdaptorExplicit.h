@@ -3,5 +3,5 @@
 
 #include "ITKImageAdaptorsExport.h"
 
-extern template class ITKImageAdaptors_EXPORT itk::VectorImageToImageAdaptor<float, 3u>; //Instantiated 4 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorImageToImageAdaptor<float, 3u>; //Instantiated 4 times
 #endif //itkVectorImageToImageAdaptorExplicit_h

@@ -3,5 +3,5 @@
 
 #include "ITKImageGridExport.h"
 
-extern template class ITKImageGrid_EXPORT itk::CoxDeBoorBSplineKernelFunction<3u, double>; //Instantiated 162 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CoxDeBoorBSplineKernelFunction<3u, double>; //Instantiated 162 times
 #endif //itkCoxDeBoorBSplineKernelFunctionExplicit_h

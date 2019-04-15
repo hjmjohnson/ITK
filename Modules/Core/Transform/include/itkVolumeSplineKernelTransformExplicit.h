@@ -17,5 +17,5 @@
  *=========================================================================*/
 #ifndef itkVolumeSplineKernelTransformExplicit_h
 #define itkVolumeSplineKernelTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::VolumeSplineKernelTransform<double, 3u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VolumeSplineKernelTransform<double, 3u>;
 #endif //itkVolumeSplineKernelTransformExplicit_h

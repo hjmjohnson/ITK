@@ -3,6 +3,6 @@
 
 #include "ITKImageFunctionExport.h"
 
-extern template class ITKImageFunction_EXPORT itk::NearestNeighborExtrapolateImageFunction<itk::Image<double, 2u>, double>; //Instantiated 4 times
-extern template class ITKImageFunction_EXPORT itk::NearestNeighborExtrapolateImageFunction<itk::Image<unsigned char, 2u>, double>; //Instantiated 4 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::NearestNeighborExtrapolateImageFunction<itk::Image<double, 2u>, double>; //Instantiated 4 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::NearestNeighborExtrapolateImageFunction<itk::Image<unsigned char, 2u>, double>; //Instantiated 4 times
 #endif //itkNearestNeighborExtrapolateImageFunctionExplicit_h

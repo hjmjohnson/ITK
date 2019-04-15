@@ -3,8 +3,8 @@
 
 #include "ITKDisplacementFieldExport.h"
 
-extern template class ITKDisplacementField_EXPORT itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 2u>; //Instantiated 31 times
-extern template class ITKDisplacementField_EXPORT itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<float, 2u>; //Instantiated 10 times
-extern template class ITKDisplacementField_EXPORT itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 3u>; //Instantiated 24 times
-extern template class ITKDisplacementField_EXPORT itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<float, 3u>; //Instantiated 10 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 2u>; //Instantiated 31 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<float, 2u>; //Instantiated 10 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<double, 3u>; //Instantiated 24 times
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianSmoothingOnUpdateDisplacementFieldTransform<float, 3u>; //Instantiated 10 times
 #endif //itkGaussianSmoothingOnUpdateDisplacementFieldTransformExplicit_h

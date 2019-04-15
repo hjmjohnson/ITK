@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkCenteredSimilarity2DTransformExplicit_h
 #define itkCenteredSimilarity2DTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::CenteredSimilarity2DTransform<float>;
-extern template class ITKTransform_EXPORT itk::CenteredSimilarity2DTransform<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredSimilarity2DTransform<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredSimilarity2DTransform<double>;
 #endif //itkCenteredSimilarity2DTransformExplicit_h

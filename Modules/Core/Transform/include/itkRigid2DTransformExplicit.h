@@ -17,6 +17,6 @@
  *=========================================================================*/
 #ifndef itkRigid2DTransformExplicit_h
 #define itkRigid2DTransformExplicit_h
-extern template class ITKTransform_EXPORT itk::Rigid2DTransform<double>;
-extern template class ITKTransform_EXPORT itk::Rigid2DTransform<float>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Rigid2DTransform<double>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Rigid2DTransform<float>;
 #endif //itkRigid2DTransformExplicit_h
