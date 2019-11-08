@@ -82,7 +82,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaSurfaceConverterExplicit.h"
+//REMOVED #include "itkMetaSurfaceConverterExplicit.h"
 #endif
 
 #endif

@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkBSplineDerivativeKernelFunctionExplicit_h
 #define itkBSplineDerivativeKernelFunctionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineDerivativeKernelFunction<3u, float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineDerivativeKernelFunction<3u, double>;
 #endif //itkBSplineDerivativeKernelFunctionExplicit_h

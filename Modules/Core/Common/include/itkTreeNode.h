@@ -135,7 +135,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTreeNodeExplicit.h"
+//REMOVED #include "itkTreeNodeExplicit.h"
 #endif
 
 #endif

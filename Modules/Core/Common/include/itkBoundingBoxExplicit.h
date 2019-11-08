@@ -19,12 +19,4 @@
 #define itkBoundingBoxExplicit_h
 #include "itkVectorContainer.h"
 //exclude QuadEdgeMeshPoint
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned long, 3, double, itk::VectorContainer<unsigned long, itk::Point<double, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned long, 4, double, itk::VectorContainer<unsigned long, itk::Point<double, 4u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned long, 3, float, itk::VectorContainer<unsigned long, itk::Point<float, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned long, 1, float, itk::VectorContainer<unsigned long, itk::Point<float, 1u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned long, 2, double, itk::VectorContainer<unsigned long, itk::Point<double, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned int, 2, float, itk::VectorContainer<unsigned long, itk::Point<float, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned long, 2, float, itk::VectorContainer<unsigned long, itk::Point<float, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BoundingBox<unsigned long, 4, float, itk::VectorContainer<unsigned long, itk::Point<float, 4u> > >;
 #endif //itkBoundingBoxExplicit_h

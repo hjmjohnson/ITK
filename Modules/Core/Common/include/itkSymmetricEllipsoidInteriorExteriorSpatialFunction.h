@@ -103,7 +103,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSymmetricEllipsoidInteriorExteriorSpatialFunctionExplicit.h"
+//REMOVED #include "itkSymmetricEllipsoidInteriorExteriorSpatialFunctionExplicit.h"
 #endif
 
 #endif

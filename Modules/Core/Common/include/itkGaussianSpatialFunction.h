@@ -109,7 +109,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianSpatialFunctionExplicit.h"
+//REMOVED #include "itkGaussianSpatialFunctionExplicit.h"
 #endif
 
 #endif

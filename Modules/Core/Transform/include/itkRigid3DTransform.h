@@ -172,7 +172,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkRigid3DTransformExplicit.h"
+//REMOVED #include "itkRigid3DTransformExplicit.h"
 #endif
 
 #endif /* itkRigid3DTransform_h */

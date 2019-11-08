@@ -81,7 +81,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaDTITubeConverterExplicit.h"
+//REMOVED #include "itkMetaDTITubeConverterExplicit.h"
 #endif
 
 #endif

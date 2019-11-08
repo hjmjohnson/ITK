@@ -236,7 +236,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVelocityFieldTransformExplicit.h"
+//REMOVED #include "itkVelocityFieldTransformExplicit.h"
 #endif
 
 #endif // itkVelocityFieldTransform_h

@@ -86,7 +86,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkRegularizedHeavisideStepFunctionExplicit.h"
+//REMOVED #include "itkRegularizedHeavisideStepFunctionExplicit.h"
 #endif
 
 #endif

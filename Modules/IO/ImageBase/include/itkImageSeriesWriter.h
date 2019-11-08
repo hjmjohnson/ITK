@@ -248,7 +248,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageSeriesWriterExplicit.h"
+//REMOVED #include "itkImageSeriesWriterExplicit.h"
 #endif
 
 #endif // itkImageSeriesWriter_h

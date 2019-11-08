@@ -17,8 +17,4 @@
  *=========================================================================*/
 #ifndef itkBSplineDeformableTransformExplicit_h
 #define itkBSplineDeformableTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineDeformableTransform<float, 3u, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineDeformableTransform<double, 3u, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineDeformableTransform<double, 2u, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineDeformableTransform<double, 2u, 3u>;
 #endif //itkBSplineDeformableTransformExplicit_h

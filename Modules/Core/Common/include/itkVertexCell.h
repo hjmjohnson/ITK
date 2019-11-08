@@ -118,7 +118,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVertexCellExplicit.h"
+//REMOVED #include "itkVertexCellExplicit.h"
 #endif
 
 #endif

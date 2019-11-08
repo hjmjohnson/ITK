@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkVersorTransformExplicit_h
 #define itkVersorTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VersorTransform<float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VersorTransform<double>;
 #endif //itkVersorTransformExplicit_h

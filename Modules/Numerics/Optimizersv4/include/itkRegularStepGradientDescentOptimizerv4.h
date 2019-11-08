@@ -148,7 +148,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkRegularStepGradientDescentOptimizerv4Explicit.h"
+//REMOVED #include "itkRegularStepGradientDescentOptimizerv4Explicit.h"
 #endif
 
 #endif

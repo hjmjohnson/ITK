@@ -110,7 +110,7 @@ private:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDefaultVectorPixelAccessorExplicit.h"
+//REMOVED #include "itkDefaultVectorPixelAccessorExplicit.h"
 #endif
 
 #endif

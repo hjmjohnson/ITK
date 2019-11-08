@@ -184,7 +184,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkExponentialDisplacementFieldImageFilterExplicit.h"
+//REMOVED #include "itkExponentialDisplacementFieldImageFilterExplicit.h"
 #endif
 
 #endif

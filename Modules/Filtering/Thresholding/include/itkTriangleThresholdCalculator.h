@@ -84,7 +84,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTriangleThresholdCalculatorExplicit.h"
+//REMOVED #include "itkTriangleThresholdCalculatorExplicit.h"
 #endif
 
 #endif

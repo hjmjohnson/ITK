@@ -129,7 +129,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkEllipseSpatialObjectExplicit.h"
+//REMOVED #include "itkEllipseSpatialObjectExplicit.h"
 #endif
 
 #endif // itkEllipseSpatialObject_h

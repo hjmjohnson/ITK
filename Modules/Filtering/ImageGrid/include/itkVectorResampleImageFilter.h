@@ -241,7 +241,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVectorResampleImageFilterExplicit.h"
+//REMOVED #include "itkVectorResampleImageFilterExplicit.h"
 #endif
 
 #endif

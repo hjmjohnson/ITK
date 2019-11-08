@@ -143,7 +143,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFlipImageFilterExplicit.h"
+//REMOVED #include "itkFlipImageFilterExplicit.h"
 #endif
 
 #endif

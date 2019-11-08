@@ -151,7 +151,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCurvatureFlowFunctionExplicit.h"
+//REMOVED #include "itkCurvatureFlowFunctionExplicit.h"
 #endif
 
 #endif

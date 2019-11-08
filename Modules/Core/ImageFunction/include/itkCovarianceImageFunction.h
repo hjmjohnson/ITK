@@ -129,7 +129,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCovarianceImageFunctionExplicit.h"
+//REMOVED #include "itkCovarianceImageFunctionExplicit.h"
 #endif
 
 #endif

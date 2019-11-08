@@ -132,7 +132,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkEuler2DTransformExplicit.h"
+//REMOVED #include "itkEuler2DTransformExplicit.h"
 #endif
 
 #endif /* itkEuler2DTransform_h */

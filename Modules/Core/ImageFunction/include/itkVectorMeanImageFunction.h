@@ -127,7 +127,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVectorMeanImageFunctionExplicit.h"
+//REMOVED #include "itkVectorMeanImageFunctionExplicit.h"
 #endif
 
 #endif

@@ -288,7 +288,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVoronoiDiagram2DGeneratorExplicit.h"
+//REMOVED #include "itkVoronoiDiagram2DGeneratorExplicit.h"
 #endif
 
 #endif

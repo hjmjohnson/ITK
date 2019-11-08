@@ -136,7 +136,7 @@ private:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCommandIterationUpdateExplicit.h"
+//REMOVED #include "itkCommandIterationUpdateExplicit.h"
 #endif
 
 #endif

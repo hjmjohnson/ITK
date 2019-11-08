@@ -133,7 +133,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPointBasedSpatialObjectExplicit.h"
+//REMOVED #include "itkPointBasedSpatialObjectExplicit.h"
 #endif
 
 #endif // itkPointBasedSpatialObject_h

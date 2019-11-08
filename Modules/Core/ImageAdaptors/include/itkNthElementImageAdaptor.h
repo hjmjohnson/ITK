@@ -88,7 +88,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNthElementImageAdaptorExplicit.h"
+//REMOVED #include "itkNthElementImageAdaptorExplicit.h"
 #endif
 
 #endif

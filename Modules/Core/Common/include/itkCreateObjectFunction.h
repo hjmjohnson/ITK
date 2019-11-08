@@ -76,7 +76,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCreateObjectFunctionExplicit.h"
+//REMOVED #include "itkCreateObjectFunctionExplicit.h"
 #endif
 
 #endif

@@ -180,7 +180,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkInPlaceImageFilterExplicit.h"
+//REMOVED #include "itkInPlaceImageFilterExplicit.h"
 #endif
 
 #endif

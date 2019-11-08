@@ -173,7 +173,7 @@ private:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineDerivativeKernelFunctionExplicit.h"
+//REMOVED #include "itkBSplineDerivativeKernelFunctionExplicit.h"
 #endif
 
 #endif

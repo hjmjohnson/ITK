@@ -193,7 +193,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDenseFiniteDifferenceImageFilterExplicit.h"
+//REMOVED #include "itkDenseFiniteDifferenceImageFilterExplicit.h"
 #endif
 
 #endif

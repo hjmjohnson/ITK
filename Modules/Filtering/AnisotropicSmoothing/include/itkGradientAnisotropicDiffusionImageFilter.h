@@ -93,7 +93,7 @@ protected:
 } // end namspace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGradientAnisotropicDiffusionImageFilterExplicit.h"
+//REMOVED #include "itkGradientAnisotropicDiffusionImageFilterExplicit.h"
 #endif
 
 #endif

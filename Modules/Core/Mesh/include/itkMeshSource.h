@@ -166,7 +166,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMeshSourceExplicit.h"
+//REMOVED #include "itkMeshSourceExplicit.h"
 #endif
 
 #endif

@@ -216,7 +216,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageSeriesReaderExplicit.h"
+//REMOVED #include "itkImageSeriesReaderExplicit.h"
 #endif
 
 #endif // itkImageSeriesReader_h

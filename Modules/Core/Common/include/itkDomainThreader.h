@@ -182,7 +182,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDomainThreaderExplicit.h"
+//REMOVED #include "itkDomainThreaderExplicit.h"
 #endif
 
 #endif

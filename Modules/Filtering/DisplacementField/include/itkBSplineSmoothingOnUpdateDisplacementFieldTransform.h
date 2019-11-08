@@ -203,7 +203,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineSmoothingOnUpdateDisplacementFieldTransformExplicit.h"
+//REMOVED #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransformExplicit.h"
 #endif
 
 #endif // itkBSplineSmoothingOnUpdateDisplacementFieldTransform_h

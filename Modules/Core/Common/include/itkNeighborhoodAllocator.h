@@ -190,7 +190,7 @@ inline bool operator!=(
 }
 } // end namespace itk
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNeighborhoodAllocatorExplicit.h"
+//REMOVED #include "itkNeighborhoodAllocatorExplicit.h"
 #endif
 
 #endif

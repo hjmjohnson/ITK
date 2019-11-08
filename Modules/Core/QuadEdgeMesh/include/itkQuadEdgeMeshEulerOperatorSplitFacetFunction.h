@@ -67,7 +67,7 @@ protected:
 #include "itkQuadEdgeMeshEulerOperatorSplitFacetFunction.hxx"
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkQuadEdgeMeshEulerOperatorSplitFacetFunctionExplicit.h"
+//REMOVED #include "itkQuadEdgeMeshEulerOperatorSplitFacetFunctionExplicit.h"
 #endif
 
 #endif

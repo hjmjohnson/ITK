@@ -140,7 +140,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSobelEdgeDetectionImageFilterExplicit.h"
+//REMOVED #include "itkSobelEdgeDetectionImageFilterExplicit.h"
 #endif
 
 #endif

@@ -135,7 +135,7 @@ private:
 */
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNeighborhoodOperatorImageFunctionExplicit.h"
+//REMOVED #include "itkNeighborhoodOperatorImageFunctionExplicit.h"
 #endif
 
 #endif

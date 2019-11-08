@@ -192,7 +192,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNeighborhoodOperatorImageFilterExplicit.h"
+//REMOVED #include "itkNeighborhoodOperatorImageFilterExplicit.h"
 #endif
 
 #endif

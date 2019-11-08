@@ -368,7 +368,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkKernelTransformExplicit.h"
+//REMOVED #include "itkKernelTransformExplicit.h"
 #endif
 
 #endif // itkKernelTransform_h

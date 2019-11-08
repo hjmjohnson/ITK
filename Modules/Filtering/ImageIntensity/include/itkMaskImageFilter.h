@@ -289,7 +289,7 @@ private:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMaskImageFilterExplicit.h"
+//REMOVED #include "itkMaskImageFilterExplicit.h"
 #endif
 
 #endif

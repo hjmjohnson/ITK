@@ -128,7 +128,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkOtsuMultipleThresholdsCalculatorExplicit.h"
+//REMOVED #include "itkOtsuMultipleThresholdsCalculatorExplicit.h"
 #endif
 
 #endif

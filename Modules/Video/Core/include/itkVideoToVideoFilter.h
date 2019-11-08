@@ -137,7 +137,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVideoToVideoFilterExplicit.h"
+//REMOVED #include "itkVideoToVideoFilterExplicit.h"
 #endif
 
 #endif

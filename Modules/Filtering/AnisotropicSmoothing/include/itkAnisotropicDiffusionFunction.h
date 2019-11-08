@@ -251,7 +251,7 @@ private:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkAnisotropicDiffusionFunctionExplicit.h"
+//REMOVED #include "itkAnisotropicDiffusionFunctionExplicit.h"
 #endif
 
 #endif

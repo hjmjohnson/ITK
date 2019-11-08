@@ -231,8 +231,6 @@ namespace itk
 * ITK_TEMPLATE_INSTANTIATION_EXTERN is used explicitly instantiate
 * common template variants to avoid duplicate compilations.
 * From the header myclass.h use:
-*    ITK_TEMPLATE_INSTANTIATION_EXTERN template class myclass<float>;
-*    ITK_TEMPLATE_INSTANTIATION_EXTERN template class myclass<double>;
 * Then from a myclassExplicit.cxx file use:
 *    // define ITK_TEMPLATE_INSTANTIATION_EXTERN  as nothing to avoid extern definition,
 *    // thus triggering explicit instantiation

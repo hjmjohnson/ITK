@@ -134,7 +134,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGradientNDAnisotropicDiffusionFunctionExplicit.h"
+//REMOVED #include "itkGradientNDAnisotropicDiffusionFunctionExplicit.h"
 #endif
 
 #endif

@@ -104,7 +104,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBoxSpatialObjectExplicit.h"
+//REMOVED #include "itkBoxSpatialObjectExplicit.h"
 #endif
 
 #endif // itkBoxSpatialObject_h

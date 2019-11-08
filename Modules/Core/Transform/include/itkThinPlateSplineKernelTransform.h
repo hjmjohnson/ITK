@@ -104,7 +104,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkThinPlateSplineKernelTransformExplicit.h"
+//REMOVED #include "itkThinPlateSplineKernelTransformExplicit.h"
 #endif
 
 #endif // itkThinPlateSplineKernelTransform_h

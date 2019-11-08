@@ -134,7 +134,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDisplacementFieldTransformParametersAdaptorExplicit.h"
+//REMOVED #include "itkDisplacementFieldTransformParametersAdaptorExplicit.h"
 #endif
 
 #endif /* itkDisplacementFieldTransformParametersAdaptor_h */

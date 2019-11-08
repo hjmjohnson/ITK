@@ -149,7 +149,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageIteratorExplicit.h"
+//REMOVED #include "itkImageIteratorExplicit.h"
 #endif
 
 #endif

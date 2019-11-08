@@ -78,7 +78,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkScalarAnisotropicDiffusionFunctionExplicit.h"
+//REMOVED #include "itkScalarAnisotropicDiffusionFunctionExplicit.h"
 #endif
 
 #endif

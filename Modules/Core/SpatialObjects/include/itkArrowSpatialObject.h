@@ -113,7 +113,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkArrowSpatialObjectExplicit.h"
+//REMOVED #include "itkArrowSpatialObjectExplicit.h"
 #endif
 
 #endif // itkArrowSpatialObject_h

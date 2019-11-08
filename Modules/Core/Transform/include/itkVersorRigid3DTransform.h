@@ -139,7 +139,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVersorRigid3DTransformExplicit.h"
+//REMOVED #include "itkVersorRigid3DTransformExplicit.h"
 #endif
 
 #endif /* itkVersorRigid3DTransform_h */

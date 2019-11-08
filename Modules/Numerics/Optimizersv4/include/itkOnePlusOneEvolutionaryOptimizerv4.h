@@ -214,7 +214,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkOnePlusOneEvolutionaryOptimizerv4Explicit.h"
+//REMOVED #include "itkOnePlusOneEvolutionaryOptimizerv4Explicit.h"
 #endif
 
 #endif

@@ -405,7 +405,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkAutomaticTopologyMeshSourceExplicit.h"
+//REMOVED #include "itkAutomaticTopologyMeshSourceExplicit.h"
 #endif
 
 #endif // itkAutomaticTopologyMeshSource_h

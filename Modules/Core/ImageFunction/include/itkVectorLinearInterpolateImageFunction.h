@@ -108,7 +108,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVectorLinearInterpolateImageFunctionExplicit.h"
+//REMOVED #include "itkVectorLinearInterpolateImageFunctionExplicit.h"
 #endif
 
 #endif

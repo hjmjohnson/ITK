@@ -93,7 +93,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBlobSpatialObjectExplicit.h"
+//REMOVED #include "itkBlobSpatialObjectExplicit.h"
 #endif
 
 #endif // itkBlobSpatialObject_h

@@ -190,7 +190,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkAdaptiveHistogramEqualizationImageFilterExplicit.h"
+//REMOVED #include "itkAdaptiveHistogramEqualizationImageFilterExplicit.h"
 #endif
 
 #endif

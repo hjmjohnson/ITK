@@ -215,7 +215,7 @@ namespace itk
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPipelineMonitorImageFilterExplicit.h"
+//REMOVED #include "itkPipelineMonitorImageFilterExplicit.h"
 #endif
 
 #endif //itkPipelineMonitorImageFilter_hxx

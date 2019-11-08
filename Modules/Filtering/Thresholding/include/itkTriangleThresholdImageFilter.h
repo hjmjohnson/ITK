@@ -109,7 +109,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTriangleThresholdImageFilterExplicit.h"
+//REMOVED #include "itkTriangleThresholdImageFilterExplicit.h"
 #endif
 
 #endif

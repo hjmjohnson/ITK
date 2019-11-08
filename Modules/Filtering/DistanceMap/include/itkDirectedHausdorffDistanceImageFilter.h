@@ -191,7 +191,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDirectedHausdorffDistanceImageFilterExplicit.h"
+//REMOVED #include "itkDirectedHausdorffDistanceImageFilterExplicit.h"
 #endif
 
 #endif

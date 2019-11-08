@@ -152,7 +152,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMinMaxCurvatureFlowImageFilterExplicit.h"
+//REMOVED #include "itkMinMaxCurvatureFlowImageFilterExplicit.h"
 #endif
 
 #endif

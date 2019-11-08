@@ -193,7 +193,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineResampleImageFilterBaseExplicit.h"
+//REMOVED #include "itkBSplineResampleImageFilterBaseExplicit.h"
 #endif
 
 #endif

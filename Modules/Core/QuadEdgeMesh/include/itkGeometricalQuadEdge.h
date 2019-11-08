@@ -258,7 +258,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGeometricalQuadEdgeExplicit.h"
+//REMOVED #include "itkGeometricalQuadEdgeExplicit.h"
 #endif
 
 #endif

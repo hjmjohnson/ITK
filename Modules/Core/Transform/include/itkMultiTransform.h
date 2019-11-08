@@ -326,7 +326,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMultiTransformExplicit.h"
+//REMOVED #include "itkMultiTransformExplicit.h"
 #endif
 
 #endif // itkMultiTransform_h

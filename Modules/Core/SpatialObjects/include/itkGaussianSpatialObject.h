@@ -135,7 +135,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianSpatialObjectExplicit.h"
+//REMOVED #include "itkGaussianSpatialObjectExplicit.h"
 #endif
 
 #endif // itkGaussianSpatialObject_h

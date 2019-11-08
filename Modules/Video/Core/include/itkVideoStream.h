@@ -306,7 +306,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVideoStreamExplicit.h"
+//REMOVED #include "itkVideoStreamExplicit.h"
 #endif
 
 #endif

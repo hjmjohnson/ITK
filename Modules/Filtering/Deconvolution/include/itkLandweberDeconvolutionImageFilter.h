@@ -180,7 +180,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLandweberDeconvolutionImageFilterExplicit.h"
+//REMOVED #include "itkLandweberDeconvolutionImageFilterExplicit.h"
 #endif
 
 #endif

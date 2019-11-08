@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkSphereSpatialFunctionExplicit_h
 #define itkSphereSpatialFunctionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SphereSpatialFunction<3u, itk::Point<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SphereSpatialFunction<2u, itk::Point<double, 2u> >;
 #endif //itkSphereSpatialFunctionExplicit_h

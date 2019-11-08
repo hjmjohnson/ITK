@@ -117,7 +117,7 @@ template<> ITKCommon_EXPORT std::ostream & operator<<(std::ostream & os, const A
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkArray2DExplicit.h"
+//REMOVED #include "itkArray2DExplicit.h"
 #endif
 
 #endif

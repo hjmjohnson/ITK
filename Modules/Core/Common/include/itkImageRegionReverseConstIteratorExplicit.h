@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkImageRegionReverseConstIteratorExplicit_h
 #define itkImageRegionReverseConstIteratorExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegionReverseConstIterator<itk::Image<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegionReverseConstIterator<itk::Image<double, 2u> >;
 #endif //itkImageRegionReverseConstIteratorExplicit_h

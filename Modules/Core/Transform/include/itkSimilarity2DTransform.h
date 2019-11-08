@@ -244,7 +244,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSimilarity2DTransformExplicit.h"
+//REMOVED #include "itkSimilarity2DTransformExplicit.h"
 #endif
 
 #endif /* itkSimilarity2DTransform_h */

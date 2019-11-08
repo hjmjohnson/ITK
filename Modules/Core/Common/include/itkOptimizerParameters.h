@@ -115,7 +115,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkOptimizerParametersExplicit.h"
+//REMOVED #include "itkOptimizerParametersExplicit.h"
 #endif
 
 #endif

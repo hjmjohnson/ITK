@@ -213,7 +213,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageToSpatialObjectRegistrationMethodExplicit.h"
+//REMOVED #include "itkImageToSpatialObjectRegistrationMethodExplicit.h"
 #endif
 
 #endif

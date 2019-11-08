@@ -86,7 +86,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSinRegularizedHeavisideStepFunctionExplicit.h"
+//REMOVED #include "itkSinRegularizedHeavisideStepFunctionExplicit.h"
 #endif
 
 #endif

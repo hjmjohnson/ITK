@@ -230,7 +230,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHistogramMatchingImageFilterExplicit.h"
+//REMOVED #include "itkHistogramMatchingImageFilterExplicit.h"
 #endif
 
 #endif

@@ -371,7 +371,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLabelStatisticsImageFilterExplicit.h"
+//REMOVED #include "itkLabelStatisticsImageFilterExplicit.h"
 #endif
 
 #endif

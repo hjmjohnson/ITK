@@ -95,7 +95,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkParametricImageSourceExplicit.h"
+//REMOVED #include "itkParametricImageSourceExplicit.h"
 #endif
 
 #endif

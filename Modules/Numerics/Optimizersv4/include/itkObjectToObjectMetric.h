@@ -347,7 +347,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkObjectToObjectMetricExplicit.h"
+//REMOVED #include "itkObjectToObjectMetricExplicit.h"
 #endif
 
 #endif

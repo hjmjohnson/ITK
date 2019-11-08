@@ -174,7 +174,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCenteredRigid2DTransformExplicit.h"
+//REMOVED #include "itkCenteredRigid2DTransformExplicit.h"
 #endif
 
 #endif /* itkCenteredRigid2DTransform_h */

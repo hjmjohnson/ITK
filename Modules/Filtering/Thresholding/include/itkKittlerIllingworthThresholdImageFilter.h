@@ -109,7 +109,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkKittlerIllingworthThresholdImageFilterExplicit.h"
+//REMOVED #include "itkKittlerIllingworthThresholdImageFilterExplicit.h"
 #endif
 
 #endif

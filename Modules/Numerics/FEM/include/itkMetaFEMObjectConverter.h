@@ -89,7 +89,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaFEMObjectConverterExplicit.h"
+//REMOVED #include "itkMetaFEMObjectConverterExplicit.h"
 #endif
 
 #endif // itkMetaFEMObjectConverter_h

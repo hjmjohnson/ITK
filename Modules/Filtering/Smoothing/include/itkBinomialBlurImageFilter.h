@@ -122,7 +122,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinomialBlurImageFilterExplicit.h"
+//REMOVED #include "itkBinomialBlurImageFilterExplicit.h"
 #endif
 
 #endif

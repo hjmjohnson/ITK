@@ -86,7 +86,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianExponentialDiffeomorphicTransformParametersAdaptorExplicit.h"
+//REMOVED #include "itkGaussianExponentialDiffeomorphicTransformParametersAdaptorExplicit.h"
 #endif
 
 #endif /* itkGaussianExponentialDiffeomorphicTransformParametersAdaptor_h */

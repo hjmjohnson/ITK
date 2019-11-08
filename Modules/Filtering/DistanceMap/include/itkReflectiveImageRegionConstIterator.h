@@ -172,7 +172,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkReflectiveImageRegionConstIteratorExplicit.h"
+//REMOVED #include "itkReflectiveImageRegionConstIteratorExplicit.h"
 #endif
 
 #endif

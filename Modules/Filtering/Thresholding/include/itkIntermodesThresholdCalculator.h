@@ -115,7 +115,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkIntermodesThresholdCalculatorExplicit.h"
+//REMOVED #include "itkIntermodesThresholdCalculatorExplicit.h"
 #endif
 
 #endif

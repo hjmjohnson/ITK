@@ -125,7 +125,7 @@ protected:
 }  // namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTransformParametersAdaptorExplicit.h"
+//REMOVED #include "itkTransformParametersAdaptorExplicit.h"
 #endif
 
 #endif /* itkTransformParametersAdaptor_h */

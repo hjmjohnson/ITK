@@ -18,7 +18,4 @@
 #ifndef itkHexahedronCellExplicit_h
 #define itkHexahedronCellExplicit_h
 //exclude QuadEdgeMeshPoint
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::HexahedronCell<itk::CellInterface<unsigned char, itk::CellTraitsInfo<2, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 2u>, itk::VectorContainer<unsigned long, itk::Point<float, 2u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::HexahedronCell<itk::CellInterface<float, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::HexahedronCell<itk::CellInterface<unsigned char, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > > >;
 #endif //itkHexahedronCellExplicit_h

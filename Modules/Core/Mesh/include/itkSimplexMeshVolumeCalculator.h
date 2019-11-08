@@ -225,7 +225,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSimplexMeshVolumeCalculatorExplicit.h"
+//REMOVED #include "itkSimplexMeshVolumeCalculatorExplicit.h"
 #endif
 
 #endif /* __SimplexMeshVolumeCalculator_h */

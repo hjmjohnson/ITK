@@ -112,7 +112,7 @@ protected:
 } //end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMinimumProjectionImageFilterExplicit.h"
+//REMOVED #include "itkMinimumProjectionImageFilterExplicit.h"
 #endif
 
 #endif

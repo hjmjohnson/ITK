@@ -273,7 +273,7 @@ protected: //made protected so other iterators can access
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageConstIteratorWithOnlyIndexExplicit.h"
+//REMOVED #include "itkImageConstIteratorWithOnlyIndexExplicit.h"
 #endif
 
 #endif

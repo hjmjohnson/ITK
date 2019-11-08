@@ -162,7 +162,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageClassifierBaseExplicit.h"
+//REMOVED #include "itkImageClassifierBaseExplicit.h"
 #endif
 
 #endif

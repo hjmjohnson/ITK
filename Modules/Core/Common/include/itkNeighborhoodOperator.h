@@ -188,7 +188,7 @@ private:
 #endif
 */
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNeighborhoodOperatorExplicit.h"
+//REMOVED #include "itkNeighborhoodOperatorExplicit.h"
 #endif
 
 #endif

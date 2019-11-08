@@ -82,7 +82,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaVesselTubeConverterExplicit.h"
+//REMOVED #include "itkMetaVesselTubeConverterExplicit.h"
 #endif
 
 #endif

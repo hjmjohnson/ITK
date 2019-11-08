@@ -18,13 +18,4 @@
 #ifndef itkPointSetToImageFilterExplicit_h
 #define itkPointSetToImageFilterExplicit_h
 #include "itkPointSet.h"
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<double, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 3u, 3u, float, float, itk::Vector<double, 3u> > >, itk::Image<itk::Vector<double, 3u>, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<float, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<float, 3u>, 3u, 3u, float, float, itk::Vector<float, 3u> > >, itk::Image<itk::Vector<float, 3u>, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<float, 1u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 2u, 2u, float, float, itk::Vector<float, 1u> > >, itk::Image<itk::Vector<float, 1u>, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<float, 1u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 3u, 3u, float, float, itk::Vector<float, 1u> > >, itk::Image<itk::Vector<float, 1u>, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<double, 2u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<double, 2u>, 2u, 2u, float, float, itk::Vector<double, 2u> > >, itk::Image<itk::Vector<double, 2u>, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<float, 2u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<float, 2u>, 2u, 2u, float, float, itk::Vector<float, 2u> > >, itk::Image<itk::Vector<float, 2u>, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<double, 1u>, 1u, itk::DefaultStaticMeshTraits<itk::Vector<double, 1u>, 1u, 1u, float, float, itk::Vector<double, 1u> > >, itk::Image<itk::Vector<double, 1u>, 1u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<float, 1u>, 4u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 4u, 4u, float, float, itk::Vector<float, 1u> > >, itk::Image<itk::Vector<float, 1u>, 4u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSetToImageFilter<itk::PointSet<itk::Vector<double, 3u>, 4u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 4u, 4u, float, float, itk::Vector<double, 3u> > >, itk::Image<itk::Vector<double, 3u>, 4u> >;
 #endif //itkPointSetToImageFilterExplicit_h

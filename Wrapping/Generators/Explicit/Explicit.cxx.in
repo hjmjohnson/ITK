@@ -1,5 +1,5 @@
 #define __@WRAPPER_LIBRARY_NAME@Explicit_@module@
-#include "@WRAPPER_LIBRARY_NAME@Explicit.h"
+//REMOVED #include "@WRAPPER_LIBRARY_NAME@Explicit.h"
 
 @EXPLICIT_INSTANTIATES@
 

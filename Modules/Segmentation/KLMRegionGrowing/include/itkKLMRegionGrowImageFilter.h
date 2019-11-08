@@ -380,7 +380,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkKLMRegionGrowImageFilterExplicit.h"
+//REMOVED #include "itkKLMRegionGrowImageFilterExplicit.h"
 #endif
 
 #endif

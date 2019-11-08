@@ -105,7 +105,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSpatialObjectReaderExplicit.h"
+//REMOVED #include "itkSpatialObjectReaderExplicit.h"
 #endif
 
 #endif // itkSpatialObjectReader_h

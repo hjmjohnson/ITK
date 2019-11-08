@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkBresenhamLineExplicit_h
 #define itkBresenhamLineExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BresenhamLine<2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BresenhamLine<3u>;
 #endif //itkBresenhamLineExplicit_h

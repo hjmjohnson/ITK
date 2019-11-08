@@ -17,5 +17,4 @@
  *=========================================================================*/
 #ifndef itkOrientationAdapterBaseExplicit_h
 #define itkOrientationAdapterBaseExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::OrientationAdapterBase<itk::SpatialOrientation::ValidCoordinateOrientationFlags, 3u>;
 #endif //itkOrientationAdapterBaseExplicit_h

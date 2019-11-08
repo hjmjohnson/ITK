@@ -95,7 +95,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryMinMaxCurvatureFlowFunctionExplicit.h"
+//REMOVED #include "itkBinaryMinMaxCurvatureFlowFunctionExplicit.h"
 #endif
 
 #endif

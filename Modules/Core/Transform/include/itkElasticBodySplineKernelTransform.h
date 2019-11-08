@@ -119,7 +119,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkElasticBodySplineKernelTransformExplicit.h"
+//REMOVED #include "itkElasticBodySplineKernelTransformExplicit.h"
 #endif
 
 #endif // itkElasticBodySplineKernelTransform_h

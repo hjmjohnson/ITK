@@ -96,7 +96,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaConverterBaseExplicit.h"
+//REMOVED #include "itkMetaConverterBaseExplicit.h"
 #endif
 
 #endif // itkMetaConverterBase_h

@@ -150,7 +150,7 @@ public:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHexahedronCellExplicit.h"
+//REMOVED #include "itkHexahedronCellExplicit.h"
 #endif
 
 #endif

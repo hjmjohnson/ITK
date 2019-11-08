@@ -154,7 +154,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkScalableAffineTransformExplicit.h"
+//REMOVED #include "itkScalableAffineTransformExplicit.h"
 #endif
 
 #endif /* itkScalableAffineTransform_h */

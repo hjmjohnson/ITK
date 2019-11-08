@@ -149,7 +149,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryThinningImageFilterExplicit.h"
+//REMOVED #include "itkBinaryThinningImageFilterExplicit.h"
 #endif
 
 #endif

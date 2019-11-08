@@ -111,7 +111,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVectorMagnitudeImageFilterExplicit.h"
+//REMOVED #include "itkVectorMagnitudeImageFilterExplicit.h"
 #endif
 
 #endif

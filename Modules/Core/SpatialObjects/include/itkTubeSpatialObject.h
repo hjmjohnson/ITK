@@ -136,7 +136,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTubeSpatialObjectExplicit.h"
+//REMOVED #include "itkTubeSpatialObjectExplicit.h"
 #endif
 
 #endif // itkTubeSpatialObject_h

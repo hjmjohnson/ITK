@@ -243,7 +243,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryMorphologyImageFilterExplicit.h"
+//REMOVED #include "itkBinaryMorphologyImageFilterExplicit.h"
 #endif
 
 #endif

@@ -602,7 +602,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageToImageMetricExplicit.h"
+//REMOVED #include "itkImageToImageMetricExplicit.h"
 #endif
 
 #endif

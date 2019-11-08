@@ -103,7 +103,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkThinPlateR2LogRSplineKernelTransformExplicit.h"
+//REMOVED #include "itkThinPlateR2LogRSplineKernelTransformExplicit.h"
 #endif
 
 #endif // itkThinPlateR2LogRSplineKernelTransform_h

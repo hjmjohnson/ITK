@@ -171,7 +171,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkExhaustiveOptimizerv4Explicit.h"
+//REMOVED #include "itkExhaustiveOptimizerv4Explicit.h"
 #endif
 
 #endif

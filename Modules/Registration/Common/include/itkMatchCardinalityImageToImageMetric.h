@@ -183,7 +183,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMatchCardinalityImageToImageMetricExplicit.h"
+//REMOVED #include "itkMatchCardinalityImageToImageMetricExplicit.h"
 #endif
 
 #endif

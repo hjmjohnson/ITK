@@ -133,7 +133,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCenteredEuler3DTransformExplicit.h"
+//REMOVED #include "itkCenteredEuler3DTransformExplicit.h"
 #endif
 
 #endif /* itkCenteredEuler3DTransform_h */

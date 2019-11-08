@@ -107,7 +107,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLevelOrderTreeIteratorExplicit.h"
+//REMOVED #include "itkLevelOrderTreeIteratorExplicit.h"
 #endif
 
 #endif

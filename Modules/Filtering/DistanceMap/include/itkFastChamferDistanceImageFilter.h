@@ -176,7 +176,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFastChamferDistanceImageFilterExplicit.h"
+//REMOVED #include "itkFastChamferDistanceImageFilterExplicit.h"
 #endif
 
 #endif

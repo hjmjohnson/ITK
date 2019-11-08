@@ -300,7 +300,7 @@ std::ostream & operator<<(std::ostream & os, const Neighborhood< TPixel, VDimens
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNeighborhoodExplicit.h"
+//REMOVED #include "itkNeighborhoodExplicit.h"
 #endif
 
 #endif

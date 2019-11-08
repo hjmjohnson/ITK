@@ -108,7 +108,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageKernelOperatorExplicit.h"
+//REMOVED #include "itkImageKernelOperatorExplicit.h"
 #endif
 
 #endif

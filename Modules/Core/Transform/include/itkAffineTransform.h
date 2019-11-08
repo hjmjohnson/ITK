@@ -289,7 +289,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkAffineTransformExplicit.h"
+//REMOVED #include "itkAffineTransformExplicit.h"
 #endif
 
 #endif /* itkAffineTransform_h */

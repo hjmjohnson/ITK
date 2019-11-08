@@ -274,7 +274,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMultiResolutionImageRegistrationMethodExplicit.h"
+//REMOVED #include "itkMultiResolutionImageRegistrationMethodExplicit.h"
 #endif
 
 #endif

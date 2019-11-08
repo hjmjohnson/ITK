@@ -20,36 +20,4 @@
 #include "itkDefaultStaticMeshTraits.h"
 #include "itkDefaultDynamicMeshTraits.h"
 //exclude QuadEdgeMesh
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Point<double, 2u>, 2u, itk::DefaultStaticMeshTraits<double, 2u, 2u, double, double, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::CovariantVector<float, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::CovariantVector<float, 3u>, 3u, 3u, float, float, itk::CovariantVector<float, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<float, 1u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 3u, 3u, float, float, itk::Vector<float, 1u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<unsigned char, 3u, itk::DefaultStaticMeshTraits<unsigned char, 3u, 3u, float, float, unsigned char> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<float, 1u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 2u, 2u, float, float, itk::Vector<float, 1u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<double, 3u>, 1u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 1u, 1u, float, float, itk::Vector<double, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Point<float, 2u>, 3u, itk::DefaultStaticMeshTraits<itk::Point<float, 2u>, 3u, 3u, float, float, itk::Point<float, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<double, 3u, itk::DefaultDynamicMeshTraits<double, 3u, 3u, float, float, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<double, 2u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<double, 2u>, 2u, 2u, float, float, itk::Vector<double, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Matrix<double, 3u, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::Matrix<double, 3u, 3u>, 3u, 3u, float, float, itk::Matrix<double, 3u, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<unsigned short, 3u, itk::DefaultStaticMeshTraits<unsigned short, 3u, 3u, float, float, unsigned short> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<float, 2u>, 2u, itk::DefaultStaticMeshTraits<itk::Vector<float, 2u>, 2u, 2u, float, float, itk::Vector<float, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<unsigned int, 2u, itk::DefaultStaticMeshTraits<unsigned int, 2u, 2u, float, float, unsigned int> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<double, 3u>, 4u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 4u, 4u, float, float, itk::Vector<double, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<double, 3u, itk::DefaultDynamicMeshTraits<double, 3u, 3u, double, double, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<float, 3u, itk::DefaultStaticMeshTraits<float, 3u, 3u, float, float, float> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<int, 3u, itk::DefaultStaticMeshTraits<int, 3u, 3u, float, float, int> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<unsigned int, 3u, itk::DefaultStaticMeshTraits<unsigned int, 3u, 3u, float, float, unsigned int> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<float, 1u>, 4u, itk::DefaultStaticMeshTraits<itk::Vector<float, 1u>, 4u, 4u, float, float, itk::Vector<float, 1u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<float, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<float, 3u>, 3u, 3u, float, float, itk::Vector<float, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<double, 3u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<double, 3u>, 3u, 3u, float, float, itk::Vector<double, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<double, 3u, itk::DefaultStaticMeshTraits<double, 3u, 3u, float, float, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<double, 2u, itk::DefaultStaticMeshTraits<double, 2u, 2u, float, float, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<float, 3u, itk::DefaultDynamicMeshTraits<float, 3u, 3u, float, float, float> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<double, 2u, itk::DefaultDynamicMeshTraits<double, 2u, 2u, double, float, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<long, 3u, itk::DefaultStaticMeshTraits<long, 3u, 3u, float, float, long> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Point<double, 3u>, 3u, itk::DefaultStaticMeshTraits<double, 3u, 3u, double, double, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<unsigned char, 2u, itk::DefaultStaticMeshTraits<unsigned char, 2u, 2u, float, float, unsigned char> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<double, 3u, itk::DefaultStaticMeshTraits<double, 3u, 3u, double, double, double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<double, 2u>, 3u, itk::DefaultStaticMeshTraits<itk::Vector<double, 2u>, 3u, 3u, float, float, itk::Vector<double, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<itk::Vector<double, 1u>, 1u, itk::DefaultStaticMeshTraits<itk::Vector<double, 1u>, 1u, 1u, float, float, itk::Vector<double, 1u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::PointSet<float, 2u, itk::DefaultStaticMeshTraits<float, 2u, 2u, float, float, float> >;
 #endif //itkPointSetExplicit_h

@@ -84,7 +84,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMaximumEntropyThresholdCalculatorExplicit.h"
+//REMOVED #include "itkMaximumEntropyThresholdCalculatorExplicit.h"
 #endif
 
 #endif

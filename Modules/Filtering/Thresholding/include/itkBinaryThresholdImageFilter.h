@@ -225,7 +225,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryThresholdImageFilterExplicit.h"
+//REMOVED #include "itkBinaryThresholdImageFilterExplicit.h"
 #endif
 
 #endif

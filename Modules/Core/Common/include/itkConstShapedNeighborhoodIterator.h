@@ -381,7 +381,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkConstShapedNeighborhoodIteratorExplicit.h"
+//REMOVED #include "itkConstShapedNeighborhoodIteratorExplicit.h"
 #endif
 
 #endif

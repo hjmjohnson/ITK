@@ -164,7 +164,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkAnisotropicDiffusionImageFilterExplicit.h"
+//REMOVED #include "itkAnisotropicDiffusionImageFilterExplicit.h"
 #endif
 
 #endif

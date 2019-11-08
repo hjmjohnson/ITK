@@ -164,7 +164,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkEuler3DTransformExplicit.h"
+//REMOVED #include "itkEuler3DTransformExplicit.h"
 #endif
 
 #endif /* itkEuler3DTransform_h */

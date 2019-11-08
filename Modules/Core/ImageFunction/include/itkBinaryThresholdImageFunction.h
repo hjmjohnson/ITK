@@ -156,7 +156,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryThresholdImageFunctionExplicit.h"
+//REMOVED #include "itkBinaryThresholdImageFunctionExplicit.h"
 #endif
 
 #endif

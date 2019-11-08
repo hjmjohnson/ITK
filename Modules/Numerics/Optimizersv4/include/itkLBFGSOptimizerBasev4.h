@@ -165,7 +165,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLBFGSOptimizerBasev4Explicit.h"
+//REMOVED #include "itkLBFGSOptimizerBasev4Explicit.h"
 #endif
 
 #endif

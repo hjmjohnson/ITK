@@ -111,7 +111,7 @@ private:
 }
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDefaultVectorPixelAccessorFunctorExplicit.h"
+//REMOVED #include "itkDefaultVectorPixelAccessorFunctorExplicit.h"
 #endif
 
 #endif

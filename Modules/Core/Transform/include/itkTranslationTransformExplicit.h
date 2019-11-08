@@ -17,20 +17,4 @@
  *=========================================================================*/
 #ifndef itkTranslationTransformExplicit_h
 #define itkTranslationTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 7u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 4u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 9u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 7u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 8u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 5u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 6u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 4u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 9u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 8u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<double, 5u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 6u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TranslationTransform<float, 3u>;
 #endif //itkTranslationTransformExplicit_h

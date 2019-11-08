@@ -181,7 +181,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPointSetToPointSetRegistrationMethodExplicit.h"
+//REMOVED #include "itkPointSetToPointSetRegistrationMethodExplicit.h"
 #endif
 
 #endif

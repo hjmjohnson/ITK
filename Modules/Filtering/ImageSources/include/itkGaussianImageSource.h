@@ -149,7 +149,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianImageSourceExplicit.h"
+//REMOVED #include "itkGaussianImageSourceExplicit.h"
 #endif
 
 #endif

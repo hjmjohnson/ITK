@@ -17,8 +17,4 @@
  *=========================================================================*/
 #ifndef itkEllipsoidInteriorExteriorSpatialFunctionExplicit_h
 #define itkEllipsoidInteriorExteriorSpatialFunctionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::EllipsoidInteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::EllipsoidInteriorExteriorSpatialFunction<1u, itk::Point<double, 1u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::EllipsoidInteriorExteriorSpatialFunction<2u, itk::Point<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::EllipsoidInteriorExteriorSpatialFunction<4u, itk::Point<double, 4u> >;
 #endif //itkEllipsoidInteriorExteriorSpatialFunctionExplicit_h

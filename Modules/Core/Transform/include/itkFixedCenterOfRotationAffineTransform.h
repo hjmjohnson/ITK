@@ -121,7 +121,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFixedCenterOfRotationAffineTransformExplicit.h"
+//REMOVED #include "itkFixedCenterOfRotationAffineTransformExplicit.h"
 #endif
 
 #endif /* itkFixedCenterOfRotationAffineTransform_h */

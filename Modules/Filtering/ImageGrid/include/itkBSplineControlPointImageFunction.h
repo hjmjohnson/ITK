@@ -301,7 +301,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineControlPointImageFunctionExplicit.h"
+//REMOVED #include "itkBSplineControlPointImageFunctionExplicit.h"
 #endif
 
 #endif

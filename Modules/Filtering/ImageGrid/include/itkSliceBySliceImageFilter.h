@@ -185,7 +185,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSliceBySliceImageFilterExplicit.h"
+//REMOVED #include "itkSliceBySliceImageFilterExplicit.h"
 #endif
 
 #endif

@@ -17,7 +17,4 @@
  *=========================================================================*/
 #ifndef itkScaleLogarithmicTransformExplicit_h
 #define itkScaleLogarithmicTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleLogarithmicTransform<float, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleLogarithmicTransform<double, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ScaleLogarithmicTransform<double, 3u>;
 #endif //itkScaleLogarithmicTransformExplicit_h

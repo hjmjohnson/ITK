@@ -18,14 +18,4 @@
 #ifndef itkArrayExplicit_h
 #define itkArrayExplicit_h
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<unsigned char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<unsigned int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<signed char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<unsigned short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<unsigned long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array<int>;
 #endif //itkArrayExplicit_h

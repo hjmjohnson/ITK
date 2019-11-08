@@ -139,7 +139,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkQuadrilateralCellExplicit.h"
+//REMOVED #include "itkQuadrilateralCellExplicit.h"
 #endif
 
 #endif

@@ -3,5 +3,4 @@
 
 #include "ITKRegistrationCommonExport.h"
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::TimeVaryingVelocityFieldTransformParametersAdaptor<itk::GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform<double, 3u> >; //Instantiated 8 times
 #endif //itkTimeVaryingVelocityFieldTransformParametersAdaptorExplicit_h

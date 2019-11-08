@@ -3,5 +3,4 @@
 
 #include "ITKOptimizersv4Export.h"
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RegularStepGradientDescentOptimizerv4<double>; //Instantiated 6 times
 #endif //itkRegularStepGradientDescentOptimizerv4Explicit_h

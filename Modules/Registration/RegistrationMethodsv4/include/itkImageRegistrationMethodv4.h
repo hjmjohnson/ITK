@@ -529,7 +529,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageRegistrationMethodv4Explicit.h"
+//REMOVED #include "itkImageRegistrationMethodv4Explicit.h"
 #endif
 
 #endif

@@ -93,7 +93,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHistogramAlgorithmBaseExplicit.h"
+//REMOVED #include "itkHistogramAlgorithmBaseExplicit.h"
 #endif
 
 #endif

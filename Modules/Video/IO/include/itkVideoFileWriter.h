@@ -148,7 +148,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVideoFileWriterExplicit.h"
+//REMOVED #include "itkVideoFileWriterExplicit.h"
 #endif
 
 #endif

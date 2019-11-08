@@ -5,5 +5,4 @@
 
 #include "itkQuadEdgeMeshDecimationCriteria.h"
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::EdgeDecimationQuadEdgeMeshFilter<itk::QuadEdgeMesh<double, 3u, itk::QuadEdgeMeshTraits<double, 3u, bool, bool, float, float> >, itk::QuadEdgeMesh<double, 3u, itk::QuadEdgeMeshTraits<double, 3u, bool, bool, float, float> >, itk::NumberOfFacesCriterion<itk::QuadEdgeMesh<double, 3u, itk::QuadEdgeMeshTraits<double, 3u, bool, bool, float, float> >, unsigned long, double, itk::MinPriorityQueueElementWrapper<itk::GeometricalQuadEdge<unsigned long, unsigned long, bool, bool, true>*, std::pair<bool, double>, unsigned long> > >; //Instantiated 6 times
 #endif //itkEdgeDecimationQuadEdgeMeshFilterExplicit_h

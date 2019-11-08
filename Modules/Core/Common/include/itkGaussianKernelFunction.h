@@ -71,7 +71,7 @@ private:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianKernelFunctionExplicit.h"
+//REMOVED #include "itkGaussianKernelFunctionExplicit.h"
 #endif
 
 #endif

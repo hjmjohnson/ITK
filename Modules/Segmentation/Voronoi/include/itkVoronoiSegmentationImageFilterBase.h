@@ -270,7 +270,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVoronoiSegmentationImageFilterBaseExplicit.h"
+//REMOVED #include "itkVoronoiSegmentationImageFilterBaseExplicit.h"
 #endif
 
 #endif

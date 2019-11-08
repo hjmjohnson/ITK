@@ -137,7 +137,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineInterpolationWeightFunctionExplicit.h"
+//REMOVED #include "itkBSplineInterpolationWeightFunctionExplicit.h"
 #endif
 
 #endif

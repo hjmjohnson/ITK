@@ -127,7 +127,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkQuadraticTriangleCellExplicit.h"
+//REMOVED #include "itkQuadraticTriangleCellExplicit.h"
 #endif
 
 #endif

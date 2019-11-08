@@ -91,7 +91,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHeavisideStepFunctionExplicit.h"
+//REMOVED #include "itkHeavisideStepFunctionExplicit.h"
 #endif
 
 #endif

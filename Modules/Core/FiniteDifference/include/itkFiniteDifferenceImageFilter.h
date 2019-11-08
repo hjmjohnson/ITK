@@ -357,7 +357,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFiniteDifferenceImageFilterExplicit.h"
+//REMOVED #include "itkFiniteDifferenceImageFilterExplicit.h"
 #endif
 
 #endif

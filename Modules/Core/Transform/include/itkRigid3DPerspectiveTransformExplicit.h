@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkRigid3DPerspectiveTransformExplicit_h
 #define itkRigid3DPerspectiveTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Rigid3DPerspectiveTransform<float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Rigid3DPerspectiveTransform<double>;
 #endif //itkRigid3DPerspectiveTransformExplicit_h

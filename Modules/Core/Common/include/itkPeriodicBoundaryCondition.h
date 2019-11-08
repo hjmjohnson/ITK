@@ -115,7 +115,7 @@ public:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPeriodicBoundaryConditionExplicit.h"
+//REMOVED #include "itkPeriodicBoundaryConditionExplicit.h"
 #endif
 
 #endif

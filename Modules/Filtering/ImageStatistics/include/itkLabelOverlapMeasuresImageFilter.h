@@ -239,7 +239,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLabelOverlapMeasuresImageFilterExplicit.h"
+//REMOVED #include "itkLabelOverlapMeasuresImageFilterExplicit.h"
 #endif
 
 #endif

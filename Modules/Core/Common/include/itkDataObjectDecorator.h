@@ -142,7 +142,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDataObjectDecoratorExplicit.h"
+//REMOVED #include "itkDataObjectDecoratorExplicit.h"
 #endif
 
 #endif

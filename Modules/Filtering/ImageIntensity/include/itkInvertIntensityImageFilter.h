@@ -146,7 +146,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkInvertIntensityImageFilterExplicit.h"
+//REMOVED #include "itkInvertIntensityImageFilterExplicit.h"
 #endif
 
 #endif

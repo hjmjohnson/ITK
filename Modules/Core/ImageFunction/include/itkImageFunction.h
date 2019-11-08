@@ -233,7 +233,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageFunctionExplicit.h"
+//REMOVED #include "itkImageFunctionExplicit.h"
 #endif
 
 #endif

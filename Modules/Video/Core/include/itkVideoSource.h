@@ -187,7 +187,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVideoSourceExplicit.h"
+//REMOVED #include "itkVideoSourceExplicit.h"
 #endif
 
 #endif

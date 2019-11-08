@@ -128,7 +128,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkEuclideanDistancePointMetricExplicit.h"
+//REMOVED #include "itkEuclideanDistancePointMetricExplicit.h"
 #endif
 
 #endif

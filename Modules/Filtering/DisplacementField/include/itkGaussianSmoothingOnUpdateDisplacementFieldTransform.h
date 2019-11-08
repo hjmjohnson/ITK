@@ -131,7 +131,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianSmoothingOnUpdateDisplacementFieldTransformExplicit.h"
+//REMOVED #include "itkGaussianSmoothingOnUpdateDisplacementFieldTransformExplicit.h"
 #endif
 
 #endif // itkGaussianSmoothingOnUpdateDisplacementFieldTransform_h

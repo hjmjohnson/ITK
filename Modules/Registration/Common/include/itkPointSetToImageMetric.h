@@ -190,7 +190,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPointSetToImageMetricExplicit.h"
+//REMOVED #include "itkPointSetToImageMetricExplicit.h"
 #endif
 
 #endif

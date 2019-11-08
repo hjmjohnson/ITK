@@ -90,7 +90,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDTITubeSpatialObjectExplicit.h"
+//REMOVED #include "itkDTITubeSpatialObjectExplicit.h"
 #endif
 
 #endif // itkDTITubeSpatialObject_h

@@ -116,7 +116,7 @@ protected: //made protected so other iterators can access
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkConditionalConstIteratorExplicit.h"
+//REMOVED #include "itkConditionalConstIteratorExplicit.h"
 #endif
 
 #endif

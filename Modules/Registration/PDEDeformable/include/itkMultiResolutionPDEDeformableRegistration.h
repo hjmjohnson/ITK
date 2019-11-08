@@ -273,7 +273,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMultiResolutionPDEDeformableRegistrationExplicit.h"
+//REMOVED #include "itkMultiResolutionPDEDeformableRegistrationExplicit.h"
 #endif
 
 #endif

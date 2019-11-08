@@ -138,7 +138,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNearestNeighborExtrapolateImageFunctionExplicit.h"
+//REMOVED #include "itkNearestNeighborExtrapolateImageFunctionExplicit.h"
 #endif
 
 #endif

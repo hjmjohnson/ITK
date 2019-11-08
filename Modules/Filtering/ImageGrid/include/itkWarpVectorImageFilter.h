@@ -240,7 +240,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkWarpVectorImageFilterExplicit.h"
+//REMOVED #include "itkWarpVectorImageFilterExplicit.h"
 #endif
 
 #endif

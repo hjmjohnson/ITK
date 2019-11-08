@@ -479,7 +479,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLabelMapExplicit.h"
+//REMOVED #include "itkLabelMapExplicit.h"
 #endif
 
 #endif

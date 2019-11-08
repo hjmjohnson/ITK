@@ -84,7 +84,7 @@ protected:
 }
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFastMarchingThresholdStoppingCriterionExplicit.h"
+//REMOVED #include "itkFastMarchingThresholdStoppingCriterionExplicit.h"
 #endif
 
 #endif // itkFastMarchingThresholdStoppingCriterion_h

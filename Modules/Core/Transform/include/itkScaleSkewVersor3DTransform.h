@@ -183,7 +183,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkScaleSkewVersor3DTransformExplicit.h"
+//REMOVED #include "itkScaleSkewVersor3DTransformExplicit.h"
 #endif
 
 #endif /* __ScaleSkewVersor3DTransform_h */

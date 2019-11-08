@@ -527,7 +527,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLinearInterpolateImageFunctionExplicit.h"
+//REMOVED #include "itkLinearInterpolateImageFunctionExplicit.h"
 #endif
 
 #endif

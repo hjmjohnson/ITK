@@ -175,7 +175,7 @@ TreeIteratorBase< TTreeType > *LeafTreeIterator< TTreeType >::Clone()
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLeafTreeIteratorExplicit.h"
+//REMOVED #include "itkLeafTreeIteratorExplicit.h"
 #endif
 
 #endif

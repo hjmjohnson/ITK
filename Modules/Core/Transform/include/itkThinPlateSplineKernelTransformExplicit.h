@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkThinPlateSplineKernelTransformExplicit_h
 #define itkThinPlateSplineKernelTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ThinPlateSplineKernelTransform<double, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ThinPlateSplineKernelTransform<double, 2u>;
 #endif //itkThinPlateSplineKernelTransformExplicit_h

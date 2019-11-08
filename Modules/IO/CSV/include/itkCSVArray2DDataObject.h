@@ -170,7 +170,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCSVArray2DDataObjectExplicit.h"
+//REMOVED #include "itkCSVArray2DDataObjectExplicit.h"
 #endif
 
 #endif

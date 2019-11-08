@@ -246,7 +246,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTriangleMeshToBinaryImageFilterExplicit.h"
+//REMOVED #include "itkTriangleMeshToBinaryImageFilterExplicit.h"
 #endif
 
 #endif

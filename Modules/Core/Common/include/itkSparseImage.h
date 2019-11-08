@@ -153,7 +153,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSparseImageExplicit.h"
+//REMOVED #include "itkSparseImageExplicit.h"
 #endif
 
 #endif

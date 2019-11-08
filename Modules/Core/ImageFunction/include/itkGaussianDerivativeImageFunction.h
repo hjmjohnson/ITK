@@ -188,7 +188,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianDerivativeImageFunctionExplicit.h"
+//REMOVED #include "itkGaussianDerivativeImageFunctionExplicit.h"
 #endif
 
 #endif

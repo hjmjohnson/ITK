@@ -164,7 +164,7 @@ TreeIteratorBase< TTreeType > *PreOrderTreeIterator< TTreeType >::Clone()
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPreOrderTreeIteratorExplicit.h"
+//REMOVED #include "itkPreOrderTreeIteratorExplicit.h"
 #endif
 
 #endif

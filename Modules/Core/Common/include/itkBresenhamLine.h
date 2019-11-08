@@ -57,7 +57,7 @@ public:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBresenhamLineExplicit.h"
+//REMOVED #include "itkBresenhamLineExplicit.h"
 #endif
 
 #endif

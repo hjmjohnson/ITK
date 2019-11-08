@@ -285,7 +285,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSimplexMeshExplicit.h"
+//REMOVED #include "itkSimplexMeshExplicit.h"
 #endif
 
 #endif

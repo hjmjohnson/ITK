@@ -586,7 +586,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTransformExplicit.h"
+//REMOVED #include "itkTransformExplicit.h"
 #endif
 
 #endif

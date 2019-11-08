@@ -107,7 +107,7 @@ public:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFloodFilledImageFunctionConditionalIteratorExplicit.h"
+//REMOVED #include "itkFloodFilledImageFunctionConditionalIteratorExplicit.h"
 #endif
 
 #endif

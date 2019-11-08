@@ -120,7 +120,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTreeContainerExplicit.h"
+//REMOVED #include "itkTreeContainerExplicit.h"
 #endif
 
 #endif

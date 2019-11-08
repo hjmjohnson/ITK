@@ -103,7 +103,7 @@ public:
 }
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFastMarchingStoppingCriterionBaseExplicit.h"
+//REMOVED #include "itkFastMarchingStoppingCriterionBaseExplicit.h"
 #endif
 
 #endif

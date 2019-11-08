@@ -18,19 +18,5 @@
 #ifndef itkRandomImageSourceExplicit_h
 #define itkRandomImageSourceExplicit_h
 /*
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<int, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<char, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<unsigned short, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<unsigned int, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<float, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<unsigned char, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<long, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<float, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<unsigned long, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<short, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<unsigned short, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<unsigned char, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::RandomImageSource<itk::Image<short, 3u> >;
 */
 #endif //itkRandomImageSourceExplicit_h

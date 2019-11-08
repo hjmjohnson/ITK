@@ -298,7 +298,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkWatershedImageFilterExplicit.h"
+//REMOVED #include "itkWatershedImageFilterExplicit.h"
 #endif
 
 #endif

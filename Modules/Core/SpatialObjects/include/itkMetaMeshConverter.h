@@ -86,7 +86,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaMeshConverterExplicit.h"
+//REMOVED #include "itkMetaMeshConverterExplicit.h"
 #endif
 
 #endif

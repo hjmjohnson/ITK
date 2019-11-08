@@ -118,7 +118,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageDuplicatorExplicit.h"
+//REMOVED #include "itkImageDuplicatorExplicit.h"
 #endif
 
 #endif //itkImageDuplicator_h

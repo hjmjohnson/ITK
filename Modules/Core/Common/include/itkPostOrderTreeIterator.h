@@ -225,7 +225,7 @@ TreeIteratorBase< TTreeType > *PostOrderTreeIterator< TTreeType >::Clone()
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPostOrderTreeIteratorExplicit.h"
+//REMOVED #include "itkPostOrderTreeIteratorExplicit.h"
 #endif
 
 #endif

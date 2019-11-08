@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkKernelFunctionBaseExplicit_h
 #define itkKernelFunctionBaseExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::KernelFunctionBase<float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::KernelFunctionBase<double>;
 #endif //itkKernelFunctionBaseExplicit_h

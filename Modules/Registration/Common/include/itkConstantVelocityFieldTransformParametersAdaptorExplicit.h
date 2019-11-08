@@ -3,6 +3,4 @@
 
 #include "ITKRegistrationCommonExport.h"
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ConstantVelocityFieldTransformParametersAdaptor<itk::GaussianExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 10 times
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ConstantVelocityFieldTransformParametersAdaptor<itk::BSplineExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 10 times
 #endif //itkConstantVelocityFieldTransformParametersAdaptorExplicit_h

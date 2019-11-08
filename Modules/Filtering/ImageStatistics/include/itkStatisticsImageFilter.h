@@ -194,7 +194,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkStatisticsImageFilterExplicit.h"
+//REMOVED #include "itkStatisticsImageFilterExplicit.h"
 #endif
 
 #endif

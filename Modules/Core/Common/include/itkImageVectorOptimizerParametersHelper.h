@@ -90,7 +90,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageVectorOptimizerParametersHelperExplicit.h"
+//REMOVED #include "itkImageVectorOptimizerParametersHelperExplicit.h"
 #endif
 
 #endif

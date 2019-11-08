@@ -17,5 +17,4 @@
  *=========================================================================*/
 #ifndef itkAzimuthElevationToCartesianTransformExplicit_h
 #define itkAzimuthElevationToCartesianTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AzimuthElevationToCartesianTransform<double, 3u>;
 #endif //itkAzimuthElevationToCartesianTransformExplicit_h

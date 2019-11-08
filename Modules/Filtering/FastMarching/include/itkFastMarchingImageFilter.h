@@ -412,7 +412,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFastMarchingImageFilterExplicit.h"
+//REMOVED #include "itkFastMarchingImageFilterExplicit.h"
 #endif
 
 #endif

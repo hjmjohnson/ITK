@@ -101,7 +101,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkOtsuThresholdCalculatorExplicit.h"
+//REMOVED #include "itkOtsuThresholdCalculatorExplicit.h"
 #endif
 
 #endif

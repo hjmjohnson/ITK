@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkQuaternionRigidTransformExplicit_h
 #define itkQuaternionRigidTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::QuaternionRigidTransform<double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::QuaternionRigidTransform<float>;
 #endif //itkQuaternionRigidTransformExplicit_h

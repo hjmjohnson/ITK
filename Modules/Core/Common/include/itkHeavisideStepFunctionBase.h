@@ -89,7 +89,7 @@ protected:
 }
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHeavisideStepFunctionBaseExplicit.h"
+//REMOVED #include "itkHeavisideStepFunctionBaseExplicit.h"
 #endif
 
 #endif

@@ -162,7 +162,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTileImageFilterExplicit.h"
+//REMOVED #include "itkTileImageFilterExplicit.h"
 #endif
 
 #endif

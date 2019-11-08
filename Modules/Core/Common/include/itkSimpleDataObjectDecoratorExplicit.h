@@ -26,44 +26,4 @@
 #include <complex>
 //exclude Statistics::
 //subs std:: std::
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<unsigned long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<bool>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<std::vector<unsigned long, std::allocator<unsigned long> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<std::complex<float> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<short> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<unsigned char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<unsigned long> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Point<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<unsigned short> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Array<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::FixedArray<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<float> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Vector<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Vector<float, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::CovariantVector<float, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Vector<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::FixedArray<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<int> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<std::complex<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<signed char> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<unsigned int> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<long> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<unsigned char> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Array<float> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<signed char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Vector<float, 1u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<std::basic_string<char, std::char_traits<char>, std::allocator<char> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableLengthVector<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Array<unsigned long> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::VariableSizeMatrix<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<unsigned int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Vector<float, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<itk::Vector<double, 1u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<unsigned short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SimpleDataObjectDecorator<long>;
 #endif //itkSimpleDataObjectDecoratorExplicit_h

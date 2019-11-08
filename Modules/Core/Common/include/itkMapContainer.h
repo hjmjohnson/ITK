@@ -355,7 +355,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMapContainerExplicit.h"
+//REMOVED #include "itkMapContainerExplicit.h"
 #endif
 
 #endif

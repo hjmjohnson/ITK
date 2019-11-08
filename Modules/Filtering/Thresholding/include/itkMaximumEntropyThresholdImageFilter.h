@@ -109,7 +109,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMaximumEntropyThresholdImageFilterExplicit.h"
+//REMOVED #include "itkMaximumEntropyThresholdImageFilterExplicit.h"
 #endif
 
 #endif

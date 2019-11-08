@@ -142,7 +142,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGradientMagnitudeImageFilterExplicit.h"
+//REMOVED #include "itkGradientMagnitudeImageFilterExplicit.h"
 #endif
 
 #endif

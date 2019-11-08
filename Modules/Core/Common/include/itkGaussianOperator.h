@@ -196,7 +196,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianOperatorExplicit.h"
+//REMOVED #include "itkGaussianOperatorExplicit.h"
 #endif
 
 #endif

@@ -199,7 +199,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMIRegistrationFunctionExplicit.h"
+//REMOVED #include "itkMIRegistrationFunctionExplicit.h"
 #endif
 
 #endif

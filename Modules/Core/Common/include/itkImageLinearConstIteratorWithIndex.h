@@ -303,7 +303,7 @@ ImageLinearConstIteratorWithIndex< TImage >
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageLinearConstIteratorWithIndexExplicit.h"
+//REMOVED #include "itkImageLinearConstIteratorWithIndexExplicit.h"
 #endif
 
 #endif

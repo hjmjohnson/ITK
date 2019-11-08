@@ -112,7 +112,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMeanImageFilterExplicit.h"
+//REMOVED #include "itkMeanImageFilterExplicit.h"
 #endif
 
 #endif

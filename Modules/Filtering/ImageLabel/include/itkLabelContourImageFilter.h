@@ -172,7 +172,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLabelContourImageFilterExplicit.h"
+//REMOVED #include "itkLabelContourImageFilterExplicit.h"
 #endif
 
 #endif

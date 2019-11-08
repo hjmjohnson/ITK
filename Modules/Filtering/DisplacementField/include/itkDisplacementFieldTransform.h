@@ -484,7 +484,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDisplacementFieldTransformExplicit.h"
+//REMOVED #include "itkDisplacementFieldTransformExplicit.h"
 #endif
 
 #endif // itkDisplacementFieldTransform_h

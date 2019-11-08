@@ -182,7 +182,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMeshFileReaderExplicit.h"
+//REMOVED #include "itkMeshFileReaderExplicit.h"
 #endif
 
 #endif

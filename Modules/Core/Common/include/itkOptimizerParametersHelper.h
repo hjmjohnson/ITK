@@ -84,7 +84,7 @@ public:
 }//namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkOptimizerParametersHelperExplicit.h"
+//REMOVED #include "itkOptimizerParametersHelperExplicit.h"
 #endif
 
 #endif

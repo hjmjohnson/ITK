@@ -225,7 +225,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageMomentsCalculatorExplicit.h"
+//REMOVED #include "itkImageMomentsCalculatorExplicit.h"
 #endif
 
 #endif /* itkImageMomentsCalculator_h */

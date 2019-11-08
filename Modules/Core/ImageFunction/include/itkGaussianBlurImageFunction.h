@@ -206,7 +206,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianBlurImageFunctionExplicit.h"
+//REMOVED #include "itkGaussianBlurImageFunctionExplicit.h"
 #endif
 
 #endif

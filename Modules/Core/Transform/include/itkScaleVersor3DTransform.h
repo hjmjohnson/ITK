@@ -160,7 +160,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkScaleVersor3DTransformExplicit.h"
+//REMOVED #include "itkScaleVersor3DTransformExplicit.h"
 #endif
 
 #endif /* __ScaleVersor3DTransform_h */

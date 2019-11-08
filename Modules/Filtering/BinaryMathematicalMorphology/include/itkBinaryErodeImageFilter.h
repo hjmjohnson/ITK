@@ -139,7 +139,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryErodeImageFilterExplicit.h"
+//REMOVED #include "itkBinaryErodeImageFilterExplicit.h"
 #endif
 
 #endif

@@ -137,7 +137,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCoxDeBoorBSplineKernelFunctionExplicit.h"
+//REMOVED #include "itkCoxDeBoorBSplineKernelFunctionExplicit.h"
 #endif
 
 #endif

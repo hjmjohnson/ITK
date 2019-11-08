@@ -245,7 +245,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSyNImageRegistrationMethodExplicit.h"
+//REMOVED #include "itkSyNImageRegistrationMethodExplicit.h"
 #endif
 
 #endif

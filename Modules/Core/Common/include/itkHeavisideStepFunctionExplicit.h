@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkHeavisideStepFunctionExplicit_h
 #define itkHeavisideStepFunctionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::HeavisideStepFunction<double, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::HeavisideStepFunction<float, float>;
 #endif //itkHeavisideStepFunctionExplicit_h

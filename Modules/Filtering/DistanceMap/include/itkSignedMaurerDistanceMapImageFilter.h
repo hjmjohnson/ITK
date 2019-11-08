@@ -193,7 +193,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSignedMaurerDistanceMapImageFilterExplicit.h"
+//REMOVED #include "itkSignedMaurerDistanceMapImageFilterExplicit.h"
 #endif
 
 #endif

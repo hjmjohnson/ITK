@@ -153,7 +153,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGridImageSourceExplicit.h"
+//REMOVED #include "itkGridImageSourceExplicit.h"
 #endif
 
 #endif

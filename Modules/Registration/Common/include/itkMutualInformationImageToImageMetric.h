@@ -246,7 +246,7 @@ public:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMutualInformationImageToImageMetricExplicit.h"
+//REMOVED #include "itkMutualInformationImageToImageMetricExplicit.h"
 #endif
 
 #endif

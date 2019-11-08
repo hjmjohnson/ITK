@@ -235,7 +235,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBilateralImageFilterExplicit.h"
+//REMOVED #include "itkBilateralImageFilterExplicit.h"
 #endif
 
 #endif

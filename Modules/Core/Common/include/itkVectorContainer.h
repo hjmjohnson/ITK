@@ -395,7 +395,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVectorContainerExplicit.h"
+//REMOVED #include "itkVectorContainerExplicit.h"
 #endif
 
 #endif

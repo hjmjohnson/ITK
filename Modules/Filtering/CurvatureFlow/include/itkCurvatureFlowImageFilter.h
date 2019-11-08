@@ -198,7 +198,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCurvatureFlowImageFilterExplicit.h"
+//REMOVED #include "itkCurvatureFlowImageFilterExplicit.h"
 #endif
 
 #endif

@@ -149,7 +149,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFFTNormalizedCorrelationImageFilterExplicit.h"
+//REMOVED #include "itkFFTNormalizedCorrelationImageFilterExplicit.h"
 #endif
 
 #endif

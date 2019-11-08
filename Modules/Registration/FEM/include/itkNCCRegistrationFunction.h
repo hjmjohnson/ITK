@@ -187,7 +187,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNCCRegistrationFunctionExplicit.h"
+//REMOVED #include "itkNCCRegistrationFunctionExplicit.h"
 #endif
 
 #endif

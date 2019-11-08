@@ -312,7 +312,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkOrientImageFilterExplicit.h"
+//REMOVED #include "itkOrientImageFilterExplicit.h"
 #endif
 
 #endif

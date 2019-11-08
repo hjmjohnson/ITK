@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkSimilarity2DTransformExplicit_h
 #define itkSimilarity2DTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Similarity2DTransform<float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Similarity2DTransform<double>;
 #endif //itkSimilarity2DTransformExplicit_h

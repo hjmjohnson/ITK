@@ -86,7 +86,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSphereSpatialFunctionExplicit.h"
+//REMOVED #include "itkSphereSpatialFunctionExplicit.h"
 #endif
 
 #endif

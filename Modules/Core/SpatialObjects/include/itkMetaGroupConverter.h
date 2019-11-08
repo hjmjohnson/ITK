@@ -81,7 +81,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaGroupConverterExplicit.h"
+//REMOVED #include "itkMetaGroupConverterExplicit.h"
 #endif
 
 #endif

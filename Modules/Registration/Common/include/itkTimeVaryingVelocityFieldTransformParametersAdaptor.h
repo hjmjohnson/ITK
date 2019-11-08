@@ -133,7 +133,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTimeVaryingVelocityFieldTransformParametersAdaptorExplicit.h"
+//REMOVED #include "itkTimeVaryingVelocityFieldTransformParametersAdaptorExplicit.h"
 #endif
 
 #endif /* itkTimeVaryingVelocityFieldTransformParametersAdaptor_h */

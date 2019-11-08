@@ -111,7 +111,7 @@ protected:
 } // end namspace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCurvatureAnisotropicDiffusionImageFilterExplicit.h"
+//REMOVED #include "itkCurvatureAnisotropicDiffusionImageFilterExplicit.h"
 #endif
 
 #endif

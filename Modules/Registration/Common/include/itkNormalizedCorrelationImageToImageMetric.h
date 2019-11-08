@@ -112,7 +112,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNormalizedCorrelationImageToImageMetricExplicit.h"
+//REMOVED #include "itkNormalizedCorrelationImageToImageMetricExplicit.h"
 #endif
 
 #endif

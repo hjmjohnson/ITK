@@ -615,7 +615,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMRIBiasFieldCorrectionFilterExplicit.h"
+//REMOVED #include "itkMRIBiasFieldCorrectionFilterExplicit.h"
 #endif
 
 #endif

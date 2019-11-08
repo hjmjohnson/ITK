@@ -103,7 +103,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkThreadedImageRegionPartitionerExplicit.h"
+//REMOVED #include "itkThreadedImageRegionPartitionerExplicit.h"
 #endif
 
 #endif

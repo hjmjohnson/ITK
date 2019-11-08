@@ -187,7 +187,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkScalarImageKmeansImageFilterExplicit.h"
+//REMOVED #include "itkScalarImageKmeansImageFilterExplicit.h"
 #endif
 
 #endif

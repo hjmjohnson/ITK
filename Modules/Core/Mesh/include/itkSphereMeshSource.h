@@ -113,7 +113,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSphereMeshSourceExplicit.h"
+//REMOVED #include "itkSphereMeshSourceExplicit.h"
 #endif
 
 #endif

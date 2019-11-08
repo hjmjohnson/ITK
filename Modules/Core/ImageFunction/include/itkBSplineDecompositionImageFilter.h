@@ -203,7 +203,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineDecompositionImageFilterExplicit.h"
+//REMOVED #include "itkBSplineDecompositionImageFilterExplicit.h"
 #endif
 
 #endif

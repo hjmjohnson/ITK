@@ -92,7 +92,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFEMObjectSpatialObjectExplicit.h"
+//REMOVED #include "itkFEMObjectSpatialObjectExplicit.h"
 #endif
 
 #endif //itkFEMObjectSpatialObject_h

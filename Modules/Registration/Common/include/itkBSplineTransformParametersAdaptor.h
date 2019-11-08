@@ -157,7 +157,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineTransformParametersAdaptorExplicit.h"
+//REMOVED #include "itkBSplineTransformParametersAdaptorExplicit.h"
 #endif
 
 #endif /* itkBSplineTransformParametersAdaptor_h */

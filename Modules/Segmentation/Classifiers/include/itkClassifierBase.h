@@ -174,7 +174,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkClassifierBaseExplicit.h"
+//REMOVED #include "itkClassifierBaseExplicit.h"
 #endif
 
 #endif

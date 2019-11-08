@@ -228,7 +228,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHistogramImageToImageMetricExplicit.h"
+//REMOVED #include "itkHistogramImageToImageMetricExplicit.h"
 #endif
 
 #endif // itkHistogramImageToImageMetric_h

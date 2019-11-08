@@ -167,7 +167,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNormalizedCorrelationImageFilterExplicit.h"
+//REMOVED #include "itkNormalizedCorrelationImageFilterExplicit.h"
 #endif
 
 #endif

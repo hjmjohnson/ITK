@@ -146,7 +146,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkShiftScaleImageFilterExplicit.h"
+//REMOVED #include "itkShiftScaleImageFilterExplicit.h"
 #endif
 
 #endif

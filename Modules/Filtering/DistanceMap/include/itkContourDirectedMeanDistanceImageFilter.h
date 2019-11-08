@@ -174,7 +174,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkContourDirectedMeanDistanceImageFilterExplicit.h"
+//REMOVED #include "itkContourDirectedMeanDistanceImageFilterExplicit.h"
 #endif
 
 #endif

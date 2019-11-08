@@ -162,7 +162,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkThresholdImageFilterExplicit.h"
+//REMOVED #include "itkThresholdImageFilterExplicit.h"
 #endif
 
 #endif

@@ -172,7 +172,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkChangeLabelImageFilterExplicit.h"
+//REMOVED #include "itkChangeLabelImageFilterExplicit.h"
 #endif
 
 #endif

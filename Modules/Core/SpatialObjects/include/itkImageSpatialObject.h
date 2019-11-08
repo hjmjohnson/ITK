@@ -162,7 +162,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageSpatialObjectExplicit.h"
+//REMOVED #include "itkImageSpatialObjectExplicit.h"
 #endif
 
 #endif //itkImageSpatialObject_h

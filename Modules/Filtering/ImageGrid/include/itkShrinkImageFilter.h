@@ -164,7 +164,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkShrinkImageFilterExplicit.h"
+//REMOVED #include "itkShrinkImageFilterExplicit.h"
 #endif
 
 #endif

@@ -71,7 +71,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFunctionBaseExplicit.h"
+//REMOVED #include "itkFunctionBaseExplicit.h"
 #endif
 
 #endif

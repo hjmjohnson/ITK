@@ -215,7 +215,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTreeIteratorBaseExplicit.h"
+//REMOVED #include "itkTreeIteratorBaseExplicit.h"
 #endif
 
 #endif

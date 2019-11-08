@@ -131,7 +131,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLaplacianSharpeningImageFilterExplicit.h"
+//REMOVED #include "itkLaplacianSharpeningImageFilterExplicit.h"
 #endif
 
 #endif

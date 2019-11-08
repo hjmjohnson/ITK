@@ -135,7 +135,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkUnaryFunctorImageFilterExplicit.h"
+//REMOVED #include "itkUnaryFunctorImageFilterExplicit.h"
 #endif
 
 #endif

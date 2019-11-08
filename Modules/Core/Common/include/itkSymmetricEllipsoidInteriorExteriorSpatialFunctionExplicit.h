@@ -17,5 +17,4 @@
  *=========================================================================*/
 #ifndef itkSymmetricEllipsoidInteriorExteriorSpatialFunctionExplicit_h
 #define itkSymmetricEllipsoidInteriorExteriorSpatialFunctionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::SymmetricEllipsoidInteriorExteriorSpatialFunction<3u, itk::Point<double, 3u> >;
 #endif //itkSymmetricEllipsoidInteriorExteriorSpatialFunctionExplicit_h

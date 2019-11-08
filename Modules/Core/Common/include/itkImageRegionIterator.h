@@ -135,7 +135,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageRegionIteratorExplicit.h"
+//REMOVED #include "itkImageRegionIteratorExplicit.h"
 #endif
 
 #endif

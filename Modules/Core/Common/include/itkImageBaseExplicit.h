@@ -17,10 +17,6 @@
  *=========================================================================*/
 #ifndef itkImageBaseExplicit_h
 #define itkImageBaseExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class ITKCommon_EXPORT itk::ImageBase<5u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class ITKCommon_EXPORT itk::ImageBase<3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class ITKCommon_EXPORT itk::ImageBase<2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class ITKCommon_EXPORT itk::ImageBase<1u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class ITKCommon_EXPORT itk::ImageBase<6u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class ITKCommon_EXPORT itk::ImageBase<4u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageBase<2u>;
+ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageBase<3u>;
 #endif //itkImageBaseExplicit_h

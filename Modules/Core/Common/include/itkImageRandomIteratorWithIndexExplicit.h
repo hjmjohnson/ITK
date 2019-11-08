@@ -17,5 +17,4 @@
  *=========================================================================*/
 #ifndef itkImageRandomIteratorWithIndexExplicit_h
 #define itkImageRandomIteratorWithIndexExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRandomIteratorWithIndex<itk::Image<unsigned char, 3u> >;
 #endif //itkImageRandomIteratorWithIndexExplicit_h

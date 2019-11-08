@@ -363,7 +363,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineDeformableTransformExplicit.h"
+//REMOVED #include "itkBSplineDeformableTransformExplicit.h"
 #endif
 
 #endif /* itkBSplineDeformableTransform_h */

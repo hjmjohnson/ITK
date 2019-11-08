@@ -121,7 +121,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageLinearIteratorWithIndexExplicit.h"
+//REMOVED #include "itkImageLinearIteratorWithIndexExplicit.h"
 #endif
 
 #endif

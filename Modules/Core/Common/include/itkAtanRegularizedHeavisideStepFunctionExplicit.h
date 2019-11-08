@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkAtanRegularizedHeavisideStepFunctionExplicit_h
 #define itkAtanRegularizedHeavisideStepFunctionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AtanRegularizedHeavisideStepFunction<double, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::AtanRegularizedHeavisideStepFunction<float, float>;
 #endif //itkAtanRegularizedHeavisideStepFunctionExplicit_h

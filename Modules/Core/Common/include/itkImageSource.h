@@ -387,7 +387,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageSourceExplicit.h"
+//REMOVED #include "itkImageSourceExplicit.h"
 #endif
 
 #endif

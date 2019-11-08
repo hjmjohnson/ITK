@@ -143,7 +143,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCastImageFilterExplicit.h"
+//REMOVED #include "itkCastImageFilterExplicit.h"
 #endif
 
 #endif

@@ -119,7 +119,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMedianImageFilterExplicit.h"
+//REMOVED #include "itkMedianImageFilterExplicit.h"
 #endif
 
 #endif

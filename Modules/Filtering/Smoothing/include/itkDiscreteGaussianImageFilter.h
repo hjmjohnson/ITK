@@ -278,7 +278,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDiscreteGaussianImageFilterExplicit.h"
+//REMOVED #include "itkDiscreteGaussianImageFilterExplicit.h"
 #endif
 
 #endif

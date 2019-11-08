@@ -17,10 +17,4 @@
  *=========================================================================*/
 #ifndef itkImageRegionExplicit_h
 #define itkImageRegionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<1u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<4u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<5u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ImageRegion<6u>;
 #endif //itkImageRegionExplicit_h

@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkFixedCenterOfRotationAffineTransformExplicit_h
 #define itkFixedCenterOfRotationAffineTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::FixedCenterOfRotationAffineTransform<float, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::FixedCenterOfRotationAffineTransform<double, 3u>;
 #endif //itkFixedCenterOfRotationAffineTransformExplicit_h

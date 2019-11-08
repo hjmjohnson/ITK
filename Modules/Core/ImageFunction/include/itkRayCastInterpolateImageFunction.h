@@ -182,7 +182,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkRayCastInterpolateImageFunctionExplicit.h"
+//REMOVED #include "itkRayCastInterpolateImageFunctionExplicit.h"
 #endif
 
 #endif

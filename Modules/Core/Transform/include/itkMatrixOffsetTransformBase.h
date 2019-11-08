@@ -548,7 +548,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMatrixOffsetTransformBaseExplicit.h"
+//REMOVED #include "itkMatrixOffsetTransformBaseExplicit.h"
 #endif
 
 #endif /* itkMatrixOffsetTransformBase_h */

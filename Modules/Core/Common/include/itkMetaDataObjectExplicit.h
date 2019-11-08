@@ -23,33 +23,8 @@
 #include <vector>
 //subs std:: std::
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< itk::Array<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< itk::Array<float> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< itk::Array<char> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< itk::Array<int> >;
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< itk::Matrix<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< itk::Matrix<float> >;
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< std::string >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< std::vector<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< std::vector<float> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< std::vector<std::vector<double> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< std::vector<std::vector<float> > >;
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< bool >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< double >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< float >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< signed char >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< char >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< short >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< int >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< long >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< long long >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< unsigned char >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< unsigned short >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< unsigned int >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< unsigned long >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MetaDataObject< unsigned long long >;
 
 #endif //itkMetaDataObjectExplicit_h

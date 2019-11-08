@@ -140,7 +140,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGaussianExponentialDiffeomorphicTransformExplicit.h"
+//REMOVED #include "itkGaussianExponentialDiffeomorphicTransformExplicit.h"
 #endif
 
 #endif // itkGaussianExponentialDiffeomorphicTransform_h

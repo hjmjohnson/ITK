@@ -95,7 +95,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSurfaceSpatialObjectExplicit.h"
+//REMOVED #include "itkSurfaceSpatialObjectExplicit.h"
 #endif
 
 #endif // itkSurfaceSpatialObject_h

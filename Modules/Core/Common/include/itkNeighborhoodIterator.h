@@ -327,7 +327,7 @@ public:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNeighborhoodIteratorExplicit.h"
+//REMOVED #include "itkNeighborhoodIteratorExplicit.h"
 #endif
 
 #endif

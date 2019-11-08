@@ -29,46 +29,4 @@
 //exclude fem
 //exclude ::Statistics
 //subs std:: std::
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Vector<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Point<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Vector<float, 1u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Point<float, 4u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned char, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, unsigned int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Vector<double, 1u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::CellInterface<float, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned int, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::CellInterface<double, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, vnl_vector<double> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Vector<float, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Point<double, 4u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<long, itk::Array<unsigned long> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned int, float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<long, itk::Array<long> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, unsigned long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Vector<float, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Point<float, 1u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned int, itk::Index<2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned char, short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Point<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Point<float, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::CellInterface<double, itk::CellTraitsInfo<3, double, double, unsigned long, unsigned long, unsigned long, itk::Point<double, 3u>, itk::VectorContainer<unsigned long, itk::Point<double, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, unsigned short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::CellInterface<unsigned char, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Vector<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned int, itk::Index<3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::CellInterface<int, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::VectorContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned int, itk::ContinuousIndex<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned int, itk::Vector<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Point<float, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned char, itk::Offset<2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned int, vnl_vector_fixed<double, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, unsigned char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::Matrix<double, 3u, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VectorContainer<unsigned long, itk::CellInterface<unsigned char, itk::CellTraitsInfo<2, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 2u>, itk::VectorContainer<unsigned long, itk::Point<float, 2u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
 #endif //itkVectorContainerExplicit_h

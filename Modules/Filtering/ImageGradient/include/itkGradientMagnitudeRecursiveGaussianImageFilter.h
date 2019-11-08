@@ -175,7 +175,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGradientMagnitudeRecursiveGaussianImageFilterExplicit.h"
+//REMOVED #include "itkGradientMagnitudeRecursiveGaussianImageFilterExplicit.h"
 #endif
 
 #endif

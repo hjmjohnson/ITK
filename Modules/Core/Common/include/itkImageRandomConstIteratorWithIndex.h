@@ -224,7 +224,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageRandomConstIteratorWithIndexExplicit.h"
+//REMOVED #include "itkImageRandomConstIteratorWithIndexExplicit.h"
 #endif
 
 #endif

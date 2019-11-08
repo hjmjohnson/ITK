@@ -164,7 +164,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPointSetToImageFilterExplicit.h"
+//REMOVED #include "itkPointSetToImageFilterExplicit.h"
 #endif
 
 #endif

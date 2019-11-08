@@ -138,7 +138,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryDilateImageFilterExplicit.h"
+//REMOVED #include "itkBinaryDilateImageFilterExplicit.h"
 #endif
 
 #endif

@@ -260,7 +260,7 @@ inline void swap( SmartPointer<T> &a, SmartPointer<T> &b ) noexcept
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSmartPointerExplicit.h"
+//REMOVED #include "itkSmartPointerExplicit.h"
 #endif
 
 #endif

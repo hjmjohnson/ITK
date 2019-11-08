@@ -163,7 +163,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPasteImageFilterExplicit.h"
+//REMOVED #include "itkPasteImageFilterExplicit.h"
 #endif
 
 #endif

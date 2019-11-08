@@ -140,7 +140,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLaplacianRecursiveGaussianImageFilterExplicit.h"
+//REMOVED #include "itkLaplacianRecursiveGaussianImageFilterExplicit.h"
 #endif
 
 #endif

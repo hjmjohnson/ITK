@@ -123,7 +123,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageRegionReverseIteratorExplicit.h"
+//REMOVED #include "itkImageRegionReverseIteratorExplicit.h"
 #endif
 
 #endif

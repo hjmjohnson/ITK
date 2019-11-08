@@ -160,7 +160,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageGaussianModelEstimatorExplicit.h"
+//REMOVED #include "itkImageGaussianModelEstimatorExplicit.h"
 #endif
 
 #endif

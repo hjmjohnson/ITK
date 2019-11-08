@@ -183,7 +183,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSpatialObjectToImageFilterExplicit.h"
+//REMOVED #include "itkSpatialObjectToImageFilterExplicit.h"
 #endif
 
 #endif

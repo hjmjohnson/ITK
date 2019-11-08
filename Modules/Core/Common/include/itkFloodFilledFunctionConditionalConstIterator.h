@@ -262,7 +262,7 @@ protected: //made protected so other iterators can access
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFloodFilledFunctionConditionalConstIteratorExplicit.h"
+//REMOVED #include "itkFloodFilledFunctionConditionalConstIteratorExplicit.h"
 #endif
 
 #endif

@@ -256,7 +256,7 @@ VariableSizeMatrix< T >
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVariableSizeMatrixExplicit.h"
+//REMOVED #include "itkVariableSizeMatrixExplicit.h"
 #endif
 
 #endif

@@ -18,8 +18,4 @@
 #ifndef itkArray2DExplicit_h
 #define itkArray2DExplicit_h
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array2D<double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array2D<unsigned long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array2D<unsigned int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::Array2D<float>;
 #endif //itkArray2DExplicit_h

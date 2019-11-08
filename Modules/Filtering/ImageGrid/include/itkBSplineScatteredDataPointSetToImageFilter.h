@@ -369,7 +369,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineScatteredDataPointSetToImageFilterExplicit.h"
+//REMOVED #include "itkBSplineScatteredDataPointSetToImageFilterExplicit.h"
 #endif
 
 #endif

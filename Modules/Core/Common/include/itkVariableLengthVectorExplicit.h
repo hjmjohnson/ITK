@@ -18,14 +18,4 @@
 #ifndef itkVariableLengthVectorExplicit_h
 #define itkVariableLengthVectorExplicit_h
 //exclude Array
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<signed char>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<unsigned short>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableLengthVector<int>;
 #endif //itkVariableLengthVectorExplicit_h

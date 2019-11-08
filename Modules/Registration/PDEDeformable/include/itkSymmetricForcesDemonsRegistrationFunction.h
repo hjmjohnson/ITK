@@ -229,7 +229,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSymmetricForcesDemonsRegistrationFunctionExplicit.h"
+//REMOVED #include "itkSymmetricForcesDemonsRegistrationFunctionExplicit.h"
 #endif
 
 #endif

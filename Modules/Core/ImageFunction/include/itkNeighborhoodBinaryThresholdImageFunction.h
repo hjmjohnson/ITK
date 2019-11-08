@@ -129,7 +129,7 @@ private:
 */
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNeighborhoodBinaryThresholdImageFunctionExplicit.h"
+//REMOVED #include "itkNeighborhoodBinaryThresholdImageFunctionExplicit.h"
 #endif
 
 #endif

@@ -120,7 +120,7 @@ public:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLineIteratorExplicit.h"
+//REMOVED #include "itkLineIteratorExplicit.h"
 #endif
 
 #endif

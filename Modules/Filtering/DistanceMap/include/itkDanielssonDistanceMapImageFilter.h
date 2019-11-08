@@ -237,7 +237,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDanielssonDistanceMapImageFilterExplicit.h"
+//REMOVED #include "itkDanielssonDistanceMapImageFilterExplicit.h"
 #endif
 
 #endif

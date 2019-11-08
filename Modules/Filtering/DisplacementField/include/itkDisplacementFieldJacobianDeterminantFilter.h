@@ -258,7 +258,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDisplacementFieldJacobianDeterminantFilterExplicit.h"
+//REMOVED #include "itkDisplacementFieldJacobianDeterminantFilterExplicit.h"
 #endif
 
 #endif

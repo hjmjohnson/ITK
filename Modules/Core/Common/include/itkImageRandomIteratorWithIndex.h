@@ -121,7 +121,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageRandomIteratorWithIndexExplicit.h"
+//REMOVED #include "itkImageRandomIteratorWithIndexExplicit.h"
 #endif
 
 #endif

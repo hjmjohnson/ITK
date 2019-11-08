@@ -17,5 +17,4 @@
  *=========================================================================*/
 #ifndef itkColorTableExplicit_h
 #define itkColorTableExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ColorTable<float>;
 #endif //itkColorTableExplicit_h

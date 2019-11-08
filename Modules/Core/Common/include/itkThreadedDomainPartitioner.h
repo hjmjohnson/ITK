@@ -86,7 +86,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkThreadedDomainPartitionerExplicit.h"
+//REMOVED #include "itkThreadedDomainPartitionerExplicit.h"
 #endif
 
 #endif

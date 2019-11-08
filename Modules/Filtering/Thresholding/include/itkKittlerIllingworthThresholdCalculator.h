@@ -96,7 +96,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkKittlerIllingworthThresholdCalculatorExplicit.h"
+//REMOVED #include "itkKittlerIllingworthThresholdCalculatorExplicit.h"
 #endif
 
 #endif

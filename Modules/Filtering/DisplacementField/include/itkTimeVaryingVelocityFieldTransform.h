@@ -142,7 +142,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTimeVaryingVelocityFieldTransformExplicit.h"
+//REMOVED #include "itkTimeVaryingVelocityFieldTransformExplicit.h"
 #endif
 
 #endif // itkTimeVaryingVelocityFieldTransform_h

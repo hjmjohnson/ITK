@@ -17,11 +17,4 @@
  *=========================================================================*/
 #ifndef itkBSplineBaseTransformExplicit_h
 #define itkBSplineBaseTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineBaseTransform<float, 2u, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineBaseTransform<double, 3u, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineBaseTransform<double, 2u, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineBaseTransform<double, 2u, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineBaseTransform<float, 3u, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineBaseTransform<double, 2u, 1u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineBaseTransform<double, 3u, 2u>;
 #endif //itkBSplineBaseTransformExplicit_h

@@ -119,7 +119,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkRegularSphereMeshSourceExplicit.h"
+//REMOVED #include "itkRegularSphereMeshSourceExplicit.h"
 #endif
 
 #endif //_itkRegularSphereMeshSource_h

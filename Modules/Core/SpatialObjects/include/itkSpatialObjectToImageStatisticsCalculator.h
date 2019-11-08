@@ -135,7 +135,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSpatialObjectToImageStatisticsCalculatorExplicit.h"
+//REMOVED #include "itkSpatialObjectToImageStatisticsCalculatorExplicit.h"
 #endif
 
 #endif /* itkSpatialObjectToImageStatisticsCalculator_h */

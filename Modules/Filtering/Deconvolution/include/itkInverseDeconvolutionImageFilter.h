@@ -168,7 +168,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkInverseDeconvolutionImageFilterExplicit.h"
+//REMOVED #include "itkInverseDeconvolutionImageFilterExplicit.h"
 #endif
 
 #endif

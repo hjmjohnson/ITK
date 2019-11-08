@@ -284,7 +284,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPDEDeformableRegistrationFilterExplicit.h"
+//REMOVED #include "itkPDEDeformableRegistrationFilterExplicit.h"
 #endif
 
 #endif

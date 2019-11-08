@@ -126,7 +126,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMinimumMaximumImageCalculatorExplicit.h"
+//REMOVED #include "itkMinimumMaximumImageCalculatorExplicit.h"
 #endif
 
 #endif /* itkMinimumMaximumImageCalculator_h */

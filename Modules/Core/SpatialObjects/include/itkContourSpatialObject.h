@@ -168,7 +168,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkContourSpatialObjectExplicit.h"
+//REMOVED #include "itkContourSpatialObjectExplicit.h"
 #endif
 
 #endif // itkContourSpatialObject_h

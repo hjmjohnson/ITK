@@ -128,7 +128,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkStreamingImageFilterExplicit.h"
+//REMOVED #include "itkStreamingImageFilterExplicit.h"
 #endif
 
 #endif

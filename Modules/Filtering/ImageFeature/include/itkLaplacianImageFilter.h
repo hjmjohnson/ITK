@@ -150,7 +150,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLaplacianImageFilterExplicit.h"
+//REMOVED #include "itkLaplacianImageFilterExplicit.h"
 #endif
 
 #endif

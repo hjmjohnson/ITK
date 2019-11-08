@@ -113,7 +113,7 @@ public:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkShapedFloodFilledImageFunctionConditionalConstIteratorExplicit.h"
+//REMOVED #include "itkShapedFloodFilledImageFunctionConditionalConstIteratorExplicit.h"
 #endif
 
 #endif

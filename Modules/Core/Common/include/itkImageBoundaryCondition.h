@@ -147,7 +147,7 @@ public:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageBoundaryConditionExplicit.h"
+//REMOVED #include "itkImageBoundaryConditionExplicit.h"
 #endif
 
 #endif

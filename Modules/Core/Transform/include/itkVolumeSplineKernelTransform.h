@@ -106,7 +106,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVolumeSplineKernelTransformExplicit.h"
+//REMOVED #include "itkVolumeSplineKernelTransformExplicit.h"
 #endif
 
 #endif // itkVolumeSplineKernelTransform_h

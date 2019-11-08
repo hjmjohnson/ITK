@@ -135,7 +135,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDerivativeOperatorExplicit.h"
+//REMOVED #include "itkDerivativeOperatorExplicit.h"
 #endif
 
 #endif

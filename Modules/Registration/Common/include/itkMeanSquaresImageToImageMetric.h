@@ -137,7 +137,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMeanSquaresImageToImageMetricExplicit.h"
+//REMOVED #include "itkMeanSquaresImageToImageMetricExplicit.h"
 #endif
 
 #endif

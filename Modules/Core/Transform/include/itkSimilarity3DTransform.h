@@ -158,7 +158,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSimilarity3DTransformExplicit.h"
+//REMOVED #include "itkSimilarity3DTransformExplicit.h"
 #endif
 
 #endif /* itkSimilarity3DTransform_h */

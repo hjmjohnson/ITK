@@ -231,7 +231,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageFileWriterExplicit.h"
+//REMOVED #include "itkImageFileWriterExplicit.h"
 #endif
 
 #endif // itkImageFileWriter_h

@@ -98,7 +98,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkQuadEdgeMeshTopologyCheckerExplicit.h"
+//REMOVED #include "itkQuadEdgeMeshTopologyCheckerExplicit.h"
 #endif
 
 #endif

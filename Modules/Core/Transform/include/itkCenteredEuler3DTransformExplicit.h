@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkCenteredEuler3DTransformExplicit_h
 #define itkCenteredEuler3DTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredEuler3DTransform<double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredEuler3DTransform<float>;
 #endif //itkCenteredEuler3DTransformExplicit_h

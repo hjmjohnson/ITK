@@ -116,7 +116,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSpatialObjectWriterExplicit.h"
+//REMOVED #include "itkSpatialObjectWriterExplicit.h"
 #endif
 
 #endif // itkSpatialObjectWriter_h

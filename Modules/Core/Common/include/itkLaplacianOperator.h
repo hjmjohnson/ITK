@@ -139,7 +139,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLaplacianOperatorExplicit.h"
+//REMOVED #include "itkLaplacianOperatorExplicit.h"
 #endif
 
 #endif

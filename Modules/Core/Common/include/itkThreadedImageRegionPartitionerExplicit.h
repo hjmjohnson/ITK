@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkThreadedImageRegionPartitionerExplicit_h
 #define itkThreadedImageRegionPartitionerExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ThreadedImageRegionPartitioner<2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ThreadedImageRegionPartitioner<3u>;
 #endif //itkThreadedImageRegionPartitionerExplicit_h

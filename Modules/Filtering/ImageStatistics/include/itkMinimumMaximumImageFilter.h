@@ -149,7 +149,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMinimumMaximumImageFilterExplicit.h"
+//REMOVED #include "itkMinimumMaximumImageFilterExplicit.h"
 #endif
 
 #endif

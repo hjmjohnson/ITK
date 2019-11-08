@@ -150,7 +150,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDerivativeImageFilterExplicit.h"
+//REMOVED #include "itkDerivativeImageFilterExplicit.h"
 #endif
 
 #endif

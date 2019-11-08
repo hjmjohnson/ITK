@@ -179,7 +179,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineExponentialDiffeomorphicTransformExplicit.h"
+//REMOVED #include "itkBSplineExponentialDiffeomorphicTransformExplicit.h"
 #endif
 
 #endif // itkBSplineExponentialDiffeomorphicTransform_h

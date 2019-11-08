@@ -179,7 +179,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTikhonovDeconvolutionImageFilterExplicit.h"
+//REMOVED #include "itkTikhonovDeconvolutionImageFilterExplicit.h"
 #endif
 
 #endif

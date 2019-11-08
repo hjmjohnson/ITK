@@ -124,7 +124,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineTransformInitializerExplicit.h"
+//REMOVED #include "itkBSplineTransformInitializerExplicit.h"
 #endif
 
 #endif /* itkBSplineTransformInitializer_h */

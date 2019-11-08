@@ -17,20 +17,4 @@
  *=========================================================================*/
 #ifndef itkCompositeTransformExplicit_h
 #define itkCompositeTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 9u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 6u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 8u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 5u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 7u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 4u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 6u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 8u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<double, 7u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 9u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 4u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CompositeTransform<float, 5u>;
 #endif //itkCompositeTransformExplicit_h

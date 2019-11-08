@@ -252,7 +252,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCentralDifferenceImageFunctionExplicit.h"
+//REMOVED #include "itkCentralDifferenceImageFunctionExplicit.h"
 #endif
 
 #endif

@@ -82,7 +82,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaLineConverterExplicit.h"
+//REMOVED #include "itkMetaLineConverterExplicit.h"
 #endif
 
 #endif

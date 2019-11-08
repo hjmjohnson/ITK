@@ -17,9 +17,4 @@
  *=========================================================================*/
 #ifndef itkBSplineKernelFunctionExplicit_h
 #define itkBSplineKernelFunctionExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineKernelFunction<3u, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineKernelFunction<2u, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineKernelFunction<3u, float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineKernelFunction<1u, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::BSplineKernelFunction<0u, double>;
 #endif //itkBSplineKernelFunctionExplicit_h

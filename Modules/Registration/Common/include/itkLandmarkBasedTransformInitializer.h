@@ -212,7 +212,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLandmarkBasedTransformInitializerExplicit.h"
+//REMOVED #include "itkLandmarkBasedTransformInitializerExplicit.h"
 #endif
 
 #endif /* itkLandmarkBasedTransformInitializer_h */

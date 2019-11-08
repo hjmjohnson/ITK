@@ -178,7 +178,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLandmarkDisplacementFieldSourceExplicit.h"
+//REMOVED #include "itkLandmarkDisplacementFieldSourceExplicit.h"
 #endif
 
 #endif

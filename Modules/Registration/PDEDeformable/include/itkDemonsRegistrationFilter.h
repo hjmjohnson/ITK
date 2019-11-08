@@ -151,7 +151,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDemonsRegistrationFilterExplicit.h"
+//REMOVED #include "itkDemonsRegistrationFilterExplicit.h"
 #endif
 
 #endif

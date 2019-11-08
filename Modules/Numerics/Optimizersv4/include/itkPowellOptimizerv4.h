@@ -243,7 +243,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkPowellOptimizerv4Explicit.h"
+//REMOVED #include "itkPowellOptimizerv4Explicit.h"
 #endif
 
 #endif

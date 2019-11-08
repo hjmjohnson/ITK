@@ -153,7 +153,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkApproximateSignedDistanceMapImageFilterExplicit.h"
+//REMOVED #include "itkApproximateSignedDistanceMapImageFilterExplicit.h"
 #endif
 
 #endif

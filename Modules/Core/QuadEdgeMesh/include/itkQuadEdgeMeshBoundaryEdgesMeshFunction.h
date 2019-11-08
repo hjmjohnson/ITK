@@ -72,7 +72,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkQuadEdgeMeshBoundaryEdgesMeshFunctionExplicit.h"
+//REMOVED #include "itkQuadEdgeMeshBoundaryEdgesMeshFunctionExplicit.h"
 #endif
 
 #endif

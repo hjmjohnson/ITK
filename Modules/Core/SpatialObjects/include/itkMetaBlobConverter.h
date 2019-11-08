@@ -82,7 +82,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaBlobConverterExplicit.h"
+//REMOVED #include "itkMetaBlobConverterExplicit.h"
 #endif
 
 #endif

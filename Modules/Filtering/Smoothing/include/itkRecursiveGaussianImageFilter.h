@@ -203,7 +203,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkRecursiveGaussianImageFilterExplicit.h"
+//REMOVED #include "itkRecursiveGaussianImageFilterExplicit.h"
 #endif
 
 #endif

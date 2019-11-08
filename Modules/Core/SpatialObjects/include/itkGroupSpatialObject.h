@@ -74,7 +74,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkGroupSpatialObjectExplicit.h"
+//REMOVED #include "itkGroupSpatialObjectExplicit.h"
 #endif
 
 #endif // itkGroupSpatialObject_h

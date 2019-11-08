@@ -168,7 +168,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSimilarityIndexImageFilterExplicit.h"
+//REMOVED #include "itkSimilarityIndexImageFilterExplicit.h"
 #endif
 
 #endif

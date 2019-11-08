@@ -121,7 +121,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkDTITubeSpatialObjectPointExplicit.h"
+//REMOVED #include "itkDTITubeSpatialObjectPointExplicit.h"
 #endif
 
 #endif // itkDTITubeSpatialObjectPoint_h

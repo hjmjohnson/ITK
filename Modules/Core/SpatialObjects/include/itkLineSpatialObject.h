@@ -95,7 +95,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLineSpatialObjectExplicit.h"
+//REMOVED #include "itkLineSpatialObjectExplicit.h"
 #endif
 
 #endif // itkLineSpatialObject_h

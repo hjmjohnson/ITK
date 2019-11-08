@@ -81,7 +81,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaGaussianConverterExplicit.h"
+//REMOVED #include "itkMetaGaussianConverterExplicit.h"
 #endif
 
 #endif

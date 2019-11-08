@@ -116,7 +116,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkQuadraticEdgeCellExplicit.h"
+//REMOVED #include "itkQuadraticEdgeCellExplicit.h"
 #endif
 
 #endif

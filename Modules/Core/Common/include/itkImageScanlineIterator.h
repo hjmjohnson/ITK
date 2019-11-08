@@ -99,7 +99,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageScanlineIteratorExplicit.h"
+//REMOVED #include "itkImageScanlineIteratorExplicit.h"
 #endif
 
 #endif

@@ -126,7 +126,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMeshSpatialObjectExplicit.h"
+//REMOVED #include "itkMeshSpatialObjectExplicit.h"
 #endif
 
 #endif //itkMeshSpatialObject_h

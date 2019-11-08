@@ -162,7 +162,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVersorTransformExplicit.h"
+//REMOVED #include "itkVersorTransformExplicit.h"
 #endif
 
 #endif /* itkVersorTransform_h */

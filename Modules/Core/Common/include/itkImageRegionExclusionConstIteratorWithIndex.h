@@ -217,7 +217,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageRegionExclusionConstIteratorWithIndexExplicit.h"
+//REMOVED #include "itkImageRegionExclusionConstIteratorWithIndexExplicit.h"
 #endif
 
 #endif

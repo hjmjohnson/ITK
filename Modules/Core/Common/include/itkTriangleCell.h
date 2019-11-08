@@ -154,7 +154,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTriangleCellExplicit.h"
+//REMOVED #include "itkTriangleCellExplicit.h"
 #endif
 
 #endif

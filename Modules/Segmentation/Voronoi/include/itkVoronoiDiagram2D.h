@@ -302,7 +302,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVoronoiDiagram2DExplicit.h"
+//REMOVED #include "itkVoronoiDiagram2DExplicit.h"
 #endif
 
 #endif

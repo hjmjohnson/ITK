@@ -17,6 +17,4 @@
  *=========================================================================*/
 #ifndef itkVariableSizeMatrixExplicit_h
 #define itkVariableSizeMatrixExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableSizeMatrix<double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::VariableSizeMatrix<float>;
 #endif //itkVariableSizeMatrixExplicit_h

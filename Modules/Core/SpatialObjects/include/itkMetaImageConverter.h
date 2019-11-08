@@ -90,7 +90,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkMetaImageConverterExplicit.h"
+//REMOVED #include "itkMetaImageConverterExplicit.h"
 #endif
 
 #endif

@@ -95,7 +95,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageToMeshFilterExplicit.h"
+//REMOVED #include "itkImageToMeshFilterExplicit.h"
 #endif
 
 #endif

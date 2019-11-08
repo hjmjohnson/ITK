@@ -137,7 +137,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNaryAddImageFilterExplicit.h"
+//REMOVED #include "itkNaryAddImageFilterExplicit.h"
 #endif
 
 #endif

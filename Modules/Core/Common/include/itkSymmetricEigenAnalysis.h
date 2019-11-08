@@ -1010,7 +1010,7 @@ std::ostream & operator<<(std::ostream & os,
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSymmetricEigenAnalysisExplicit.h"
+//REMOVED #include "itkSymmetricEigenAnalysisExplicit.h"
 #endif
 
 #endif

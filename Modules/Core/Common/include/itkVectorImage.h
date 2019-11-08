@@ -358,7 +358,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVectorImageExplicit.h"
+//REMOVED #include "itkVectorImageExplicit.h"
 #endif
 
 #endif

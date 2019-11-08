@@ -172,7 +172,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageFileReaderExplicit.h"
+//REMOVED #include "itkImageFileReaderExplicit.h"
 #endif
 
 #endif // itkImageFileReader_h

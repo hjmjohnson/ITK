@@ -115,7 +115,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkQuadEdgeMeshPointExplicit.h"
+//REMOVED #include "itkQuadEdgeMeshPointExplicit.h"
 #endif
 
 #endif

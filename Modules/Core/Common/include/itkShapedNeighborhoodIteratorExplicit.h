@@ -17,29 +17,4 @@
  *=========================================================================*/
 #ifndef itkShapedNeighborhoodIteratorExplicit_h
 #define itkShapedNeighborhoodIteratorExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<int, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<int, 3u>, itk::Image<int, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<float, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<float, 3u>, itk::Image<float, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<char, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<char, 2u>, itk::Image<char, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned short, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned short, 3u>, itk::Image<unsigned short, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<itk::Vector<double, 2u>, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<itk::Vector<double, 2u>, 2u>, itk::Image<itk::Vector<double, 2u>, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<long, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<long, 2u>, itk::Image<long, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<bool, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<bool, 3u>, itk::Image<bool, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<signed char, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<signed char, 3u>, itk::Image<signed char, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<double, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<double, 2u>, itk::Image<double, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<float, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<float, 2u>, itk::Image<float, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned char, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned char, 2u>, itk::Image<unsigned char, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<itk::Vector<double, 2u>, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<itk::Vector<double, 2u>, 3u>, itk::Image<itk::Vector<double, 2u>, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned int, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned int, 2u>, itk::Image<unsigned int, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<signed char, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<signed char, 2u>, itk::Image<signed char, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned short, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned short, 2u>, itk::Image<unsigned short, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<bool, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<bool, 2u>, itk::Image<bool, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned long, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned long, 2u>, itk::Image<unsigned long, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned long, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned long, 3u>, itk::Image<unsigned long, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<short, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<short, 3u>, itk::Image<short, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<short, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<short, 2u>, itk::Image<short, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned char, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned char, 3u>, itk::Image<unsigned char, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<long, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<long, 3u>, itk::Image<long, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<unsigned int, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<unsigned int, 3u>, itk::Image<unsigned int, 3u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<int, 2u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<int, 2u>, itk::Image<int, 2u> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::ShapedNeighborhoodIterator<itk::Image<double, 3u>, itk::ZeroFluxNeumannBoundaryCondition<itk::Image<double, 3u>, itk::Image<double, 3u> > >;
 #endif //itkShapedNeighborhoodIteratorExplicit_h

@@ -88,7 +88,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkChildTreeIteratorExplicit.h"
+//REMOVED #include "itkChildTreeIteratorExplicit.h"
 #endif
 
 #endif

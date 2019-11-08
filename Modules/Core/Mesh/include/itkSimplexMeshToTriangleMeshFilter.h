@@ -187,7 +187,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSimplexMeshToTriangleMeshFilterExplicit.h"
+//REMOVED #include "itkSimplexMeshToTriangleMeshFilterExplicit.h"
 #endif
 
 #endif //__SimplexMeshToTriangleMeshFilter_h

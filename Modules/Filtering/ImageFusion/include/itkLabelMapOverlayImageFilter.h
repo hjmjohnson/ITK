@@ -186,7 +186,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLabelMapOverlayImageFilterExplicit.h"
+//REMOVED #include "itkLabelMapOverlayImageFilterExplicit.h"
 #endif
 
 #endif

@@ -129,7 +129,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHistogramToEntropyImageFilterExplicit.h"
+//REMOVED #include "itkHistogramToEntropyImageFilterExplicit.h"
 #endif
 
 #endif

@@ -266,7 +266,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLevelSetMotionRegistrationFunctionExplicit.h"
+//REMOVED #include "itkLevelSetMotionRegistrationFunctionExplicit.h"
 #endif
 
 #endif

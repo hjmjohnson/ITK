@@ -178,7 +178,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSmoothingRecursiveGaussianImageFilterExplicit.h"
+//REMOVED #include "itkSmoothingRecursiveGaussianImageFilterExplicit.h"
 #endif
 
 #endif

@@ -193,7 +193,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTimeVaryingBSplineVelocityFieldTransformExplicit.h"
+//REMOVED #include "itkTimeVaryingBSplineVelocityFieldTransformExplicit.h"
 #endif
 
 #endif // itkTimeVaryingBSplineVelocityFieldTransform_h

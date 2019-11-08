@@ -26,16 +26,4 @@
 //exclude Mesh
 //exclude std::pair
 //subs std:: std::
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, float>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, itk::Point<float, 3u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, itk::Point<double, 2u> >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, int>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, itk::CellInterface<double, itk::CellTraitsInfo<2, double, float, unsigned long, unsigned long, unsigned long, itk::Point<double, 2u>, itk::MapContainer<unsigned long, itk::Point<double, 2u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, itk::CellInterface<double, itk::CellTraitsInfo<3, double, double, unsigned long, unsigned long, unsigned long, itk::Point<double, 3u>, itk::MapContainer<unsigned long, itk::Point<double, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, itk::CellInterface<float, itk::CellTraitsInfo<3, float, float, unsigned long, unsigned long, unsigned long, itk::Point<float, 3u>, itk::MapContainer<unsigned long, itk::Point<float, 3u> >, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > > >*>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, bool>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, unsigned long>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > >;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, double>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::MapContainer<unsigned long, itk::Point<double, 3u> >;
 #endif //itkMapContainerExplicit_h

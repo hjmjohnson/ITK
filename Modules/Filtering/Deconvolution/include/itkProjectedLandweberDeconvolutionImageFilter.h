@@ -88,7 +88,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkProjectedLandweberDeconvolutionImageFilterExplicit.h"
+//REMOVED #include "itkProjectedLandweberDeconvolutionImageFilterExplicit.h"
 #endif
 
 #endif

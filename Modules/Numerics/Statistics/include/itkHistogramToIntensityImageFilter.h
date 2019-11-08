@@ -103,7 +103,7 @@ protected:
 } // end namespace itk
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHistogramToIntensityImageFilterExplicit.h"
+//REMOVED #include "itkHistogramToIntensityImageFilterExplicit.h"
 #endif
 
 #endif

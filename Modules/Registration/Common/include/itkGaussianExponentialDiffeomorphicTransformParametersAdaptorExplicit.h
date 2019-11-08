@@ -3,5 +3,4 @@
 
 #include "ITKRegistrationCommonExport.h"
 
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::GaussianExponentialDiffeomorphicTransformParametersAdaptor<itk::GaussianExponentialDiffeomorphicTransform<double, 3u> >; //Instantiated 10 times
 #endif //itkGaussianExponentialDiffeomorphicTransformParametersAdaptorExplicit_h

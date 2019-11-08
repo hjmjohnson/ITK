@@ -160,7 +160,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkConstantBoundaryConditionExplicit.h"
+//REMOVED #include "itkConstantBoundaryConditionExplicit.h"
 #endif
 
 #endif

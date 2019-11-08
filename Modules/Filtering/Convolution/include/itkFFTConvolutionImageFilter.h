@@ -197,7 +197,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkFFTConvolutionImageFilterExplicit.h"
+//REMOVED #include "itkFFTConvolutionImageFilterExplicit.h"
 #endif
 
 #endif

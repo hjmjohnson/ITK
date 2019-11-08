@@ -83,7 +83,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSpatialFunctionExplicit.h"
+//REMOVED #include "itkSpatialFunctionExplicit.h"
 #endif
 
 #endif

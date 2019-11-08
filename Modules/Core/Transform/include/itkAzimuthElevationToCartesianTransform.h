@@ -243,7 +243,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkAzimuthElevationToCartesianTransformExplicit.h"
+//REMOVED #include "itkAzimuthElevationToCartesianTransformExplicit.h"
 #endif
 
 #endif /* itkAzimuthElevationToCartesianTransform_h */

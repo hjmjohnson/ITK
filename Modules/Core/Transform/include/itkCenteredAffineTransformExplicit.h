@@ -17,8 +17,4 @@
  *=========================================================================*/
 #ifndef itkCenteredAffineTransformExplicit_h
 #define itkCenteredAffineTransformExplicit_h
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredAffineTransform<float, 3u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredAffineTransform<double, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredAffineTransform<float, 2u>;
-ITK_TEMPLATE_INSTANTIATION_EXTERN template class itk::CenteredAffineTransform<double, 3u>;
 #endif //itkCenteredAffineTransformExplicit_h

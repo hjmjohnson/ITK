@@ -208,7 +208,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkWienerDeconvolutionImageFilterExplicit.h"
+//REMOVED #include "itkWienerDeconvolutionImageFilterExplicit.h"
 #endif
 
 #endif

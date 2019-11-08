@@ -422,7 +422,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBSplineInterpolateImageFunctionExplicit.h"
+//REMOVED #include "itkBSplineInterpolateImageFunctionExplicit.h"
 #endif
 
 #endif

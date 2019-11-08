@@ -180,7 +180,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBinaryContourImageFilterExplicit.h"
+//REMOVED #include "itkBinaryContourImageFilterExplicit.h"
 #endif
 
 #endif

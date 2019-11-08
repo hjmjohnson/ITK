@@ -214,7 +214,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkIntensityWindowingImageFilterExplicit.h"
+//REMOVED #include "itkIntensityWindowingImageFilterExplicit.h"
 #endif
 
 #endif

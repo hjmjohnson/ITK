@@ -184,7 +184,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkTimeVaryingVelocityFieldImageRegistrationMethodv4Explicit.h"
+//REMOVED #include "itkTimeVaryingVelocityFieldImageRegistrationMethodv4Explicit.h"
 #endif
 
 #endif

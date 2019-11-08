@@ -227,7 +227,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkObjectMorphologyImageFilterExplicit.h"
+//REMOVED #include "itkObjectMorphologyImageFilterExplicit.h"
 #endif
 
 #endif

@@ -192,7 +192,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkBoundingBoxExplicit.h"
+//REMOVED #include "itkBoundingBoxExplicit.h"
 #endif
 
 #endif

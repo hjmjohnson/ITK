@@ -274,7 +274,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkSparseFieldLayerExplicit.h"
+//REMOVED #include "itkSparseFieldLayerExplicit.h"
 #endif
 
 #endif

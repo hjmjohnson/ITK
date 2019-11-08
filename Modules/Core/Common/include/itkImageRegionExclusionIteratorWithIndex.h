@@ -123,7 +123,7 @@ protected:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkImageRegionExclusionIteratorWithIndexExplicit.h"
+//REMOVED #include "itkImageRegionExclusionIteratorWithIndexExplicit.h"
 #endif
 
 #endif

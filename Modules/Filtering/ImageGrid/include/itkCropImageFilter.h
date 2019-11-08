@@ -122,7 +122,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCropImageFilterExplicit.h"
+//REMOVED #include "itkCropImageFilterExplicit.h"
 #endif
 
 #endif

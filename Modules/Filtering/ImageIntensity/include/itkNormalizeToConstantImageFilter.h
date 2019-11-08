@@ -125,7 +125,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkNormalizeToConstantImageFilterExplicit.h"
+//REMOVED #include "itkNormalizeToConstantImageFilterExplicit.h"
 #endif
 
 #endif

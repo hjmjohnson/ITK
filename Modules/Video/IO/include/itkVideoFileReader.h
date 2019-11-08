@@ -145,7 +145,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkVideoFileReaderExplicit.h"
+//REMOVED #include "itkVideoFileReaderExplicit.h"
 #endif
 
 #endif

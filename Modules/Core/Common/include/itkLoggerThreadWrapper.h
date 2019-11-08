@@ -143,7 +143,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkLoggerThreadWrapperExplicit.h"
+//REMOVED #include "itkLoggerThreadWrapperExplicit.h"
 #endif
 
 #endif  // itkLoggerThreadWrapper_h

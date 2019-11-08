@@ -165,7 +165,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkRandomImageSourceExplicit.h"
+//REMOVED #include "itkRandomImageSourceExplicit.h"
 #endif
 
 #endif

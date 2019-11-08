@@ -254,7 +254,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkChangeInformationImageFilterExplicit.h"
+//REMOVED #include "itkChangeInformationImageFilterExplicit.h"
 #endif
 
 #endif

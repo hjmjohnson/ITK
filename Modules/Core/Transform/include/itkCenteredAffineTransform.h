@@ -127,7 +127,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkCenteredAffineTransformExplicit.h"
+//REMOVED #include "itkCenteredAffineTransformExplicit.h"
 #endif
 
 #endif /* itkCenteredAffineTransform_h */

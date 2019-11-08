@@ -214,7 +214,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkHistogramThresholdImageFilterExplicit.h"
+//REMOVED #include "itkHistogramThresholdImageFilterExplicit.h"
 #endif
 
 #endif

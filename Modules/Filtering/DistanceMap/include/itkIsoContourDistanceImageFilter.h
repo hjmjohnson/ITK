@@ -205,7 +205,7 @@ private:
 #endif
 
 #ifdef ITK_TEMPLATE_EXPLICIT_INSTANTIATION
-#include "itkIsoContourDistanceImageFilterExplicit.h"
+//REMOVED #include "itkIsoContourDistanceImageFilterExplicit.h"
 #endif
 
 #endif
