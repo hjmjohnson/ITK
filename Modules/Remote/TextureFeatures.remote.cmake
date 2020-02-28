@@ -12,6 +12,7 @@ For more information, see:
   http://hdl.handle.net/10380/3574
   http://insight-journal.org/browse/publication/985
 "
+  MODULE_COMPLIANCE_LEVEL 1
   GIT_REPOSITORY ${git_protocol}://github.com/InsightSoftwareConsortium/ITKTextureFeatures.git
   GIT_TAG 7643fb34ced0b40ad7eb0f2a28d56a3a2941cc0f
   )

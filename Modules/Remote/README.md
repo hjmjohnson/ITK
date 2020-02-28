@@ -54,12 +54,16 @@ Use the following template to document the compliance level of the modules.
 #--   - [ ] Widespread community dependance
 #--   - [ ] Above 90% code coverage
 #--   - [ ] CI dashboards and testing monitored rigorously
+#--   - [ ] Key API features are exposed in wrapping interface
 #--   - [ ] All requirements of Levels 4,3,2,1
 #--
 #-- ## Compliance Level 4 star (Very high-quality code, perhaps small community dependance)
 #--   - [X] Meets all ITK code style standards
 #--   - [X] No external requirements beyond those needed by ITK proper
 #--   - [X] Builds and passes tests on all supported platforms within 1 month of each core tagged release
+#--            - [ ] Windows Shared Library Build with Visual Studio
+#--            - [X] Mac with clang compiller
+#--            - [X] Linux with gcc compiler
 #--   - [X] Active developer community dedicated to maintaining code-base
 #--   - [X] 75% code coverage demonstrated for testing suite
 #--   - [ ] Continuous integration testing performed
@@ -67,6 +71,7 @@ Use the following template to document the compliance level of the modules.
 #--
 #-- ## Compliance Level 3 star (Quality beta code)
 #--   - [X] API | executable interface is considered mostly stable and feature complete
+#--   - [ ] 10% C0-code coverage demonstrated for testing suite
 #--   - [X] Some tests exist and pass on at least some platform
 #--   - [ ] All requirements of Levels 2,1
 #--
@@ -81,7 +86,7 @@ Use the following template to document the compliance level of the modules.
 #-- ## Compliance Level 0 star ( Code/Feature of known poor-quality or deprecated status )
 #--   - [ ] Code reviewed and explicitly identified as not recommended for use
 #--
-#-- ### Please document how the above criteria were evaluated
+#-- ### Please document here any justification for the criteria above
 #       Code style enforced by clang-format on 2020-02-19, and clang-tidy modernizations completed.
 #       On 2020-02-15 manual evaluation of code coverage for running the supplied test resulted in 77% code coverage
 #       Tests manually confirmed to pass for Windows VS 19, Mac 10.14, and Ubuntu Linux gcc 7 compilers
