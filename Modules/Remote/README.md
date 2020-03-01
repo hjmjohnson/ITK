@@ -48,7 +48,9 @@ core developers in maintaining the core ITK code base.  There are currently (202
 ## Documenting the Compliance Level of a remote module
 Use the following template to document the compliance level of the modules.
 ```
-#-- # Grading Level Criteria
+#-- # Grading Level Criteria Report
+#-- EVALUATION DATE: 2020-03-01
+#-- EVALUATORS: [<<NO EVALUATOR>>,<<NO EVALUATOR>>]
 #--
 #-- ## Compliance level 5 star (AKA ITK main modules, or remote modules that could become core modules)
 #--   - [ ] Widespread community dependance
