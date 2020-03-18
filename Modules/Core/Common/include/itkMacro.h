@@ -120,9 +120,18 @@ namespace itk
 #  define ITK_GCC_PRAGMA_DIAG_PUSH() ITK_GCC_PRAGMA_DIAG(push)
 #  define ITK_GCC_PRAGMA_DIAG_POP() ITK_GCC_PRAGMA_DIAG(pop)
 #else
-#  define ITK_GCC_PRAGMA_DIAG(x)
-#  define ITK_GCC_PRAGMA_DIAG_PUSH()
-#  define ITK_GCC_PRAGMA_DIAG_POP()
+#  define ITK_GCC_PRAGMA_DIAG(x)                                                                                       \
+    do                                                                                                                 \
+    {                                                                                                                  \
+    } while (0)
+#  define ITK_GCC_PRAGMA_DIAG_PUSH()                                                                                   \
+    do                                                                                                                 \
+    {                                                                                                                  \
+    } while (0)
+#  define ITK_GCC_PRAGMA_DIAG_POP()                                                                                    \
+    do                                                                                                                 \
+    {                                                                                                                  \
+    } while (0)
 #endif
 
 /*
@@ -386,12 +395,20 @@ extern ITKCommon_EXPORT void
 OutputWindowDisplayDebugText(const char *);
 } // end namespace itk
 
+// The itkDebugStatement is to be used to protect code that is only used in the itkDebugMacro
 /** This macro is used to print debug (or other information). They are
  * also used to catch errors, etc. Example usage looks like:
  * itkDebugMacro(<< "this is debug info" << this->SomeVariable); */
 #if defined(NDEBUG)
-#  define itkDebugMacro(x)
-#  define itkDebugStatement(x)
+//  The do {} while(0) is a common idiom to enforce consistent ; after macro enforcement
+#  define itkDebugMacro(x)                                                                                             \
+    do                                                                                                                 \
+    {                                                                                                                  \
+    } while (0)
+#  define itkDebugStatement(x)                                                                                         \
+    do                                                                                                                 \
+    {                                                                                                                  \
+    } while (0)
 #else
 #  define itkDebugMacro(x)                                                                                             \
     do                                                                                                                 \
@@ -425,8 +442,6 @@ OutputWindowDisplayDebugText(const char *);
     }                                                                                                                  \
   } while (0)
 
-// The itkDebugStatement is to be used ot protect code that is only
-// used in the itkDebugMacro
 #define itkWarningStatement(x) x
 
 #if defined(ITK_CPP_FUNCTION)
