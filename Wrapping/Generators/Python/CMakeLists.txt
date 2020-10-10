@@ -278,8 +278,12 @@ macro(itk_setup_swig_python type base_name interface_file python_file cpp_file d
 
   add_custom_command(
     OUTPUT ${cpp_file} ${python_file}
-    COMMAND ${swig_command} -c++ -python -O -features autodoc=1
-    -py3
+    COMMAND ${swig_command} -c++
+    -python -py3
+    -O -olddefs
+    -features autodoc=3,docstring
+    -doxygen
+    -nothreads # This is the default behaviro
     -Werror
     -w302 # Identifier 'name' redefined (ignored)
     -w303 # %extend defined for an undeclared class 'name' (to avoid warning about customization in pyBase.i)
