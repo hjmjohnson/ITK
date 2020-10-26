@@ -20,11 +20,11 @@
 
 from itkConfig import ITK_GLOBAL_VERSION_STRING as _LOCAL_ITK_GLOBAL_VERSION_STRING
 
-__version__ = _LOCAL_ITK_GLOBAL_VERSION_STRING
+__version__: str = _LOCAL_ITK_GLOBAL_VERSION_STRING
 del _LOCAL_ITK_GLOBAL_VERSION_STRING
 
 
-def _initialize_module():
+def _initialize_module() -> None:
     """
     A function to explicitly avoid polluting the global namespace
     """

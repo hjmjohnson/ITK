@@ -25,9 +25,17 @@ import numpy
 from itkTemplate import output
 
 from sys import stderr as system_error_stream
+import itkTemplate
+from typing import List, Pattern, Tuple, TypeVar
+
+_snake_underscore_re: Pattern[str]
+_Tpipeline = TypeVar("_Tpipeline", bound=pipeline)
+
+_snake_underscore_re: Pattern[str]
+_Tpipeline = TypeVar("_Tpipeline", bound=pipeline)
 
 
-def set_nthreads(number_of_threads):
+def set_nthreads(number_of_threads) -> None:
     """
     Support convenient set of the number of threads.
     Use example (in python):
@@ -54,7 +62,7 @@ def get_nthreads():
     return threader.GetGlobalDefaultNumberOfThreads()
 
 
-def echo(obj, f=system_error_stream):
+def echo(obj, f=system_error_stream) -> None:
     """Print an object to stream
 
     If the object has a method Print(), this method is used.
@@ -74,7 +82,7 @@ def size(image_or_filter):
     return img.GetLargestPossibleRegion().GetSize()
 
 
-def physical_size(image_or_filter):
+def physical_size(image_or_filter) -> list:
     """Return the physical size of an image, or of the output image of a filter
 
     This method take care of updating the needed information
@@ -487,7 +495,7 @@ def image_from_vtk_image(vtk_image):
 # return an image
 
 
-def template(cl):
+def template(cl) -> Tuple[itkTemplate.itkTemplate, tuple]:
     """Return the template of a class (or of the class of an object) and
     its parameters
 
@@ -590,7 +598,7 @@ def python_type(object_ref):
     return recursive(object_ref, 0)
 
 
-def image_intensity_min_max(image_or_filter):
+def image_intensity_min_max(image_or_filter) -> Tuple[Any, Any]:
     """Return the minimum and maximum of values in a image of in the output image of a filter
 
     The minimum and maximum values are returned in a tuple: (min, max)
@@ -613,11 +621,11 @@ def image_intensity_min_max(image_or_filter):
 # range is a python function, and should not be overridden
 # the current use of the function name "range" is for backward
 # compatibility, but should be considered for removal in the future
-def range(image_or_filter):
+def range(image_or_filter) -> Tuple[Any, Any]:
     return image_intensity_min_max(image_or_filter)
 
 
-def imwrite(image_or_filter, filename, compression=False):
+def imwrite(image_or_filter, filename, compression=False) -> None:
     """Write a image or the output image of a filter to a file.
 
     The writer is instantiated with the image type of the image in
@@ -693,7 +701,7 @@ def imread(filename, pixel_type=None, fallback_only=False):
     return reader.GetOutput()
 
 
-def meshwrite(mesh, filename, compression=False):
+def meshwrite(mesh, filename, compression=False) -> None:
     """Write a mesh to a file.
 
     The writer is instantiated according to the type of the input mesh.
@@ -760,7 +768,7 @@ def meshread(filename, pixel_type=None, fallback_only=False):
     return reader.GetOutput()
 
 
-def search(s, case_sensitive=False):  # , fuzzy=True):
+def search(s, case_sensitive=False) -> List[str]:  # , fuzzy=True):
     """Search for a class name in the itk module.
     """
     s = s.replace(" ", "")
@@ -807,7 +815,7 @@ def _snake_to_camel(keyword):
     return camel + keyword[1:]
 
 
-def set_inputs(new_itk_object, args=None, kargs=None):
+def set_inputs(new_itk_object, args=None, kargs=None) -> None:
     """Set the inputs of the given objects, according to the non named or the
     named parameters in args and kargs
 
@@ -932,7 +940,7 @@ class templated_class:
     class.
     """
 
-    def __init__(self, cls):
+    def __init__(self, cls) -> None:
         """cls is the custom class
         """
         self.__cls__ = cls
@@ -959,7 +967,7 @@ class templated_class:
             self, template_parameters
         )
 
-    def check_template_parameters(self, template_parameters):
+    def check_template_parameters(self, template_parameters) -> None:
         """Check the template parameters passed in parameter.
         """
         # this method is there mainly to make possible to reuse it in the
@@ -978,7 +986,7 @@ class templated_class:
         #
         self.__cls__.check_template_parameters(template_parameters)
 
-    def add_template(self, name, params):
+    def add_template(self, name, params) -> None:
         if not isinstance(params, list) and not isinstance(params, tuple):
             params = (params,)
         params = tuple(params)
@@ -986,7 +994,7 @@ class templated_class:
         self.__templates__[params] = val
         setattr(self, name, val)
 
-    def add_image_templates(self, *args):
+    def add_image_templates(self, *args) -> None:
         import itk
 
         if not args:
@@ -1037,13 +1045,13 @@ class templated_class:
         def __call__(self, *args, **kargs):
             return self.New(*args, **kargs)
 
-    def keys(self):
+    def keys(self) -> dict_keys[tuple]:
         return self.__templates__.keys()
 
-    def values(self):
+    def values(self) -> list:
         return list(self.__templates__.values())
 
-    def items(self):
+    def items(self) -> List[Tuple[tuple, Any]]:
         return list(self.__templates__.items())
 
     # everything after this comment is for dict interface
@@ -1053,7 +1061,7 @@ class templated_class:
         for k in self.keys():
             yield k
 
-    def has_key(self, key):
+    def has_key(self, key) -> bool:
         return key in self.__templates__
 
     def __contains__(self, key):
@@ -1079,13 +1087,13 @@ class pipeline:
     and thus can be simply integrated in another pipeline.
     """
 
-    def __init__(self, *args, **kargs):
+    def __init__(self, *args, **kargs) -> None:
         self.clear()
         self.input = None
         self.filters = []
         set_inputs(self, args, kargs)
 
-    def connect(self, l_filter):
+    def connect(self, l_filter) -> None:
         """Connect a new l_filter to the pipeline
 
         The output of the first l_filter will be used as the input of this
@@ -1095,14 +1103,14 @@ class pipeline:
             set_inputs(l_filter, [self.GetOutput()])
         self.append(l_filter)
 
-    def append(self, l_filter):
+    def append(self, l_filter) -> None:
         """Add a new l_filter to the pipeline
 
         The new l_filter will not be connected. The user must connect it.
         """
         self.filters.append(l_filter)
 
-    def clear(self):
+    def clear(self) -> None:
         """Clear the filter list
         """
         self.filters = []
@@ -1129,7 +1137,7 @@ class pipeline:
                 else:
                     raise ValueError("Index can only be 0 on that object")
 
-    def GetNumberOfOutputs(self):
+    def GetNumberOfOutputs(self) -> int:
         """Return the number of outputs
         """
         if len(self.filters) == 0:
@@ -1137,7 +1145,7 @@ class pipeline:
         else:
             return self.filters[-1].GetNumberOfOutputs()
 
-    def SetInput(self, l_input):
+    def SetInput(self, l_input) -> None:
         """Set the l_input of the pipeline
         """
         if len(self.filters) != 0:
@@ -1149,19 +1157,19 @@ class pipeline:
         """
         return self.input
 
-    def Update(self):
+    def Update(self) -> None:
         """Update the pipeline
         """
         if len(self.filters) > 0:
             return self.filters[-1].Update()
 
-    def UpdateLargestPossibleRegion(self):
+    def UpdateLargestPossibleRegion(self) -> None:
         """Update the pipeline
         """
         if len(self.filters) > 0:
             return self.filters[-1].UpdateLargestPossibleRegion()
 
-    def UpdateOutputInformation(self):
+    def UpdateOutputInformation(self) -> None:
         if "UpdateOutputInformation" in dir(self.filters[-1]):
             self.filters[-1].UpdateOutputInformation()
         else:
@@ -1178,7 +1186,7 @@ class pipeline:
         self.UpdateLargestPossibleRegion()
         return self
 
-    def expose(self, name, new_name=None, position=-1):
+    def expose(self, name, new_name=None, position=-1) -> None:
         """Expose an attribute from a filter of the mini-pipeline.
 
         Once called, the pipeline instance has a new Set/Get set of methods to
@@ -1214,15 +1222,15 @@ class pipeline:
 class auto_pipeline(pipeline):
     current = None
 
-    def __init__(self, *args, **kargs):
+    def __init__(self, *args, **kargs) -> None:
         pipeline.__init__(self, *args, **kargs)
         self.Start()
 
-    def Start(self):
+    def Start(self) -> None:
         auto_pipeline.current = self
 
     @staticmethod
-    def Stop():
+    def Stop() -> None:
         auto_pipeline.current = None
 
 
@@ -1247,7 +1255,7 @@ def down_cast(obj):
         return t.cast(obj)
 
 
-def attribute_list(i, name):
+def attribute_list(i, name) -> list:
     """Returns a list of the specified attributes for the objects in the image.
 
     i: the input LabelImage
@@ -1271,7 +1279,7 @@ def attribute_list(i, name):
     return l_list
 
 
-def attributes_list(i, names):
+def attributes_list(i, names) -> List[tuple]:
     """Returns a list of the specified attributes for the objects in the image.
 
     i: the input LabelImage
@@ -1297,7 +1305,7 @@ def attributes_list(i, names):
     return l_list
 
 
-def attribute_dict(i, name):
+def attribute_dict(i, name) -> Dict[Any, list]:
     """Returns a dict with the attribute values in keys and a list of the
     corresponding objects in value
 
@@ -1337,7 +1345,7 @@ def number_of_objects(i):
     return i.GetNumberOfLabelObjects()
 
 
-def ipython_kw_matches(text):
+def ipython_kw_matches(text) -> List[str]:
     """Match named ITK object's named parameters"""
     import IPython
     import itk
