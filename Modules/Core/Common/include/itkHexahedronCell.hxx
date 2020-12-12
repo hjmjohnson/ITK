@@ -325,10 +325,10 @@ HexahedronCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
   static constexpr double ITK_DIVERGED = 1.e6;
 
   double                  params[Self::CellDimension];
-  double                  fcol[Self::CellDimension];
-  double                  rcol[Self::CellDimension];
-  double                  scol[Self::CellDimension];
-  double                  tcol[Self::CellDimension];
+  double                  fcol[PointType::Dimension];
+  double                  rcol[PointType::Dimension];
+  double                  scol[PointType::Dimension];
+  double                  tcol[PointType::Dimension];
   double                  d;
   PointType               pt;
   CoordRepType            derivs[Self::CellDimension * Self::NumberOfPoints];
@@ -349,7 +349,7 @@ HexahedronCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
     this->InterpolationDerivs(pcoords, derivs);
 
     //  calculate newton functions
-    for (unsigned int i = 0; i < Self::CellDimension; ++i)
+    for (unsigned int i = 0; i < PointType::Dimension; ++i)
     {
       fcol[i] = rcol[i] = scol[i] = tcol[i] = 0.0;
     }
@@ -365,14 +365,14 @@ HexahedronCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
       }
     }
 
-    for (unsigned int i = 0; i < Self::CellDimension; i++)
+    for (unsigned int i = 0; i < PointType::Dimension; i++)
     {
       fcol[i] -= x[i];
     }
 
     //  compute determinants and generate improvements
     vnl_matrix_fixed<CoordRepType, 3, Self::CellDimension> mat;
-    for (unsigned int i = 0; i < Self::CellDimension; ++i)
+    for (unsigned int i = 0; i < PointType::Dimension; ++i)
     {
       mat.put(0, i, rcol[i]);
       mat.put(1, i, scol[i]);
@@ -387,7 +387,7 @@ HexahedronCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
     }
 
     vnl_matrix_fixed<CoordRepType, 3, Self::CellDimension> mat1;
-    for (unsigned int i = 0; i < Self::CellDimension; ++i)
+    for (unsigned int i = 0; i < PointType::Dimension; ++i)
     {
       mat1.put(0, i, fcol[i]);
       mat1.put(1, i, scol[i]);
@@ -395,7 +395,7 @@ HexahedronCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
     }
 
     vnl_matrix_fixed<CoordRepType, 3, Self::CellDimension> mat2;
-    for (unsigned int i = 0; i < Self::CellDimension; ++i)
+    for (unsigned int i = 0; i < PointType::Dimension; ++i)
     {
       mat2.put(0, i, rcol[i]);
       mat2.put(1, i, fcol[i]);
@@ -403,7 +403,7 @@ HexahedronCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
     }
 
     vnl_matrix_fixed<CoordRepType, 3, Self::CellDimension> mat3;
-    for (unsigned int i = 0; i < Self::CellDimension; ++i)
+    for (unsigned int i = 0; i < PointType::Dimension; ++i)
     {
       mat3.put(0, i, rcol[i]);
       mat3.put(1, i, scol[i]);
@@ -498,7 +498,7 @@ HexahedronCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
       this->EvaluateLocation(subId, points, pc, closestPoint, (InterpolationWeightType *)w);
 
       *dist2 = 0;
-      for (unsigned int i = 0; i < Self::CellDimension; ++i)
+      for (unsigned int i = 0; i < PointType::Dimension; ++i)
       {
         *dist2 += (closestPoint[i] - x[i]) * (closestPoint[i] - x[i]);
       }
