@@ -29,9 +29,10 @@
   {                                                                                                                    \
     static auto * staticGlobals = Get##VarName##Pointer();                                                             \
     (void)staticGlobals;                                                                                               \
-  }
+  }                                                                                                                    \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 
-#define itkGetGlobalDeclarationMacro(Type, VarName) static Type * Get##VarName##Pointer();
+#define itkGetGlobalDeclarationMacro(Type, VarName) static Type * Get##VarName##Pointer()
 
 #define itkGetGlobalSimpleMacro(Class, Type, Name) itkGetGlobalInitializeMacro(Class, Type, Name, Class, (void)0)
 
@@ -59,6 +60,7 @@
       }                                                                                                                \
     }                                                                                                                  \
     return m_##VarName;                                                                                                \
-  }
+  }                                                                                                                    \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 
 #endif

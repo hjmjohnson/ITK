@@ -202,7 +202,8 @@ protected:
     ExceptionObject exception(__FILE__, __LINE__);                                                                     \
     exception.SetDescription("File cannot be read");                                                                   \
     throw exception;                                                                                                   \
-  }
+  }                                                                                                                    \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 
 #define IOCHECK()                                                                                                      \
   if (f.fail())                                                                                                        \
@@ -212,6 +213,7 @@ protected:
       f.close();                                                                                                       \
     }                                                                                                                  \
     RAISE_EXCEPTION();                                                                                                 \
-  }
+  }                                                                                                                    \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 
 #endif // itkIPLCommonImageIO_h

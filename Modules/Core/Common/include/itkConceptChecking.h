@@ -60,12 +60,14 @@
     template <void (Constraints::*)()>                                                                                 \
     struct Enforcer                                                                                                    \
     {};                                                                                                                \
-    using EnforcerInstantiation = Enforcer<&Constraints::constraints>;
+    using EnforcerInstantiation = Enforcer<&Constraints::constraints>;                                                 \
+    static_assert(true, "used to gobble up semi-colon warnings.")
 #  define itkConceptMacro(name, concept)                                                                               \
     enum                                                                                                               \
     {                                                                                                                  \
       name = sizeof concept                                                                                            \
-    }
+    };                                                                                                                 \
+    static_assert(true, "used to gobble up semi-colon warnings.")
 
 #elif defined(ITK_CONCEPT_IMPLEMENTATION_VTABLE)
 

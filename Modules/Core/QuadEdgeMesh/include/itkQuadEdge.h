@@ -33,14 +33,16 @@
     itkmsg << "Debug: In " __FILE__ ", line " << __LINE__ << "\n"                                                      \
            << " (" << this << "): " x << "\n\n";                                                                       \
     OutputWindowDisplayDebugText(itkmsg.str().c_str());                                                                \
-  }
+  }                                                                                                                    \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 #define itkQEWarningMacro(x)                                                                                           \
   {                                                                                                                    \
     std::ostringstream itkmsg;                                                                                         \
     itkmsg << "WARNING: In " __FILE__ ", line " << __LINE__ << "\n"                                                    \
            << " (" << this << "): " x << "\n\n";                                                                       \
     OutputWindowDisplayWarningText(itkmsg.str().c_str());                                                              \
-  }
+  }                                                                                                                    \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 
 // -------------------------------------------------------------------------
 /**

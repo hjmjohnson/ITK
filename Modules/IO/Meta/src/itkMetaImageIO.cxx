@@ -159,11 +159,11 @@ MetaImageIO::ReadImageInformation()
       break;
     case MET_INT:
       this->SetPixelType(IOPixelEnum::SCALAR);
-      if (sizeof(int) == MET_ValueTypeSize[MET_INT])
+      if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         this->SetComponentType(IOComponentEnum::INT);
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_INT])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         this->SetComponentType(IOComponentEnum::LONG);
       }
@@ -174,18 +174,18 @@ MetaImageIO::ReadImageInformation()
       {
         this->SetComponentType(IOComponentEnum::INT);
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_INT])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         this->SetComponentType(IOComponentEnum::LONG);
       }
       break;
     case MET_UINT:
       this->SetPixelType(IOPixelEnum::SCALAR);
-      if (sizeof(unsigned int) == MET_ValueTypeSize[MET_UINT])
+      if (sizeof(unsigned int) == static_cast<size_t>(MET_ValueTypeSize[MET_UINT]))
       {
         this->SetComponentType(IOComponentEnum::UINT);
       }
-      else if (sizeof(unsigned long) == MET_ValueTypeSize[MET_UINT])
+      else if (sizeof(unsigned long) == static_cast<size_t>(MET_ValueTypeSize[MET_UINT]))
       {
         this->SetComponentType(IOComponentEnum::ULONG);
       }
@@ -196,25 +196,25 @@ MetaImageIO::ReadImageInformation()
       {
         this->SetComponentType(IOComponentEnum::UINT);
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_INT])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         this->SetComponentType(IOComponentEnum::ULONG);
       }
       break;
     case MET_LONG:
       this->SetPixelType(IOPixelEnum::SCALAR);
-      if (sizeof(long) == MET_ValueTypeSize[MET_LONG])
+      if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG]))
       {
         this->SetComponentType(IOComponentEnum::LONG);
       }
-      else if (sizeof(int) == MET_ValueTypeSize[MET_LONG])
+      else if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG]))
       {
         this->SetComponentType(IOComponentEnum::INT);
       }
       break;
     case MET_LONG_ARRAY:
       this->SetPixelType(IOPixelEnum::VECTOR);
-      if (sizeof(long) == MET_ValueTypeSize[MET_LONG])
+      if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG]))
       {
         this->SetComponentType(IOComponentEnum::LONG);
       }
@@ -225,63 +225,63 @@ MetaImageIO::ReadImageInformation()
       break;
     case MET_ULONG:
       this->SetPixelType(IOPixelEnum::SCALAR);
-      if (sizeof(unsigned long) == MET_ValueTypeSize[MET_ULONG])
+      if (sizeof(unsigned long) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG]))
       {
         this->SetComponentType(IOComponentEnum::ULONG);
       }
-      else if (sizeof(unsigned int) == MET_ValueTypeSize[MET_ULONG])
+      else if (sizeof(unsigned int) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG]))
       {
         this->SetComponentType(IOComponentEnum::UINT);
       }
       break;
     case MET_ULONG_ARRAY:
       this->SetPixelType(IOPixelEnum::VECTOR);
-      if (sizeof(unsigned long) == MET_ValueTypeSize[MET_ULONG])
+      if (sizeof(unsigned long) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG]))
       {
         this->SetComponentType(IOComponentEnum::ULONG);
       }
-      else if (sizeof(unsigned int) == MET_ValueTypeSize[MET_ULONG])
+      else if (sizeof(unsigned int) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG]))
       {
         this->SetComponentType(IOComponentEnum::UINT);
       }
       break;
     case MET_LONG_LONG:
       this->SetPixelType(IOPixelEnum::SCALAR);
-      if (sizeof(long long) == MET_ValueTypeSize[MET_LONG_LONG])
+      if (sizeof(long long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::LONGLONG);
       }
-      else if (sizeof(int) == MET_ValueTypeSize[MET_LONG_LONG])
+      else if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::INT);
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_LONG_LONG])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::LONG);
       }
       break;
     case MET_LONG_LONG_ARRAY:
       this->SetPixelType(IOPixelEnum::VECTOR);
-      if (sizeof(long long) == MET_ValueTypeSize[MET_LONG_LONG])
+      if (sizeof(long long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::LONGLONG);
       }
-      else if (sizeof(int) == MET_ValueTypeSize[MET_LONG_LONG])
+      else if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::INT);
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_LONG_LONG])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::LONG);
       }
       break;
     case MET_ULONG_LONG:
       this->SetPixelType(IOPixelEnum::SCALAR);
-      if (sizeof(unsigned long long) == MET_ValueTypeSize[MET_ULONG_LONG])
+      if (sizeof(unsigned long long) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::ULONGLONG);
       }
-      else if (sizeof(unsigned int) == MET_ValueTypeSize[MET_ULONG_LONG])
+      else if (sizeof(unsigned int) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::UINT);
       }
@@ -292,37 +292,37 @@ MetaImageIO::ReadImageInformation()
       break;
     case MET_ULONG_LONG_ARRAY:
       this->SetPixelType(IOPixelEnum::VECTOR);
-      if (sizeof(unsigned long long) == MET_ValueTypeSize[MET_ULONG_LONG])
+      if (sizeof(unsigned long long) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::ULONGLONG);
       }
-      else if (sizeof(unsigned int) == MET_ValueTypeSize[MET_ULONG_LONG])
+      else if (sizeof(unsigned int) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::UINT);
       }
-      else if (sizeof(unsigned long) == MET_ValueTypeSize[MET_ULONG_LONG])
+      else if (sizeof(unsigned long) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG_LONG]))
       {
         this->SetComponentType(IOComponentEnum::ULONG);
       }
       break;
     case MET_FLOAT:
       this->SetPixelType(IOPixelEnum::SCALAR);
-      if (sizeof(float) == MET_ValueTypeSize[MET_FLOAT])
+      if (sizeof(float) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         this->SetComponentType(IOComponentEnum::FLOAT);
       }
-      else if (sizeof(double) == MET_ValueTypeSize[MET_FLOAT])
+      else if (sizeof(double) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         this->SetComponentType(IOComponentEnum::DOUBLE);
       }
       break;
     case MET_FLOAT_ARRAY:
       this->SetPixelType(IOPixelEnum::VECTOR);
-      if (sizeof(float) == MET_ValueTypeSize[MET_FLOAT])
+      if (sizeof(float) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         this->SetComponentType(IOComponentEnum::FLOAT);
       }
-      else if (sizeof(double) == MET_ValueTypeSize[MET_FLOAT])
+      else if (sizeof(double) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         this->SetComponentType(IOComponentEnum::DOUBLE);
       }
@@ -330,33 +330,33 @@ MetaImageIO::ReadImageInformation()
     case MET_DOUBLE:
       this->SetPixelType(IOPixelEnum::SCALAR);
       this->SetComponentType(IOComponentEnum::DOUBLE);
-      if (sizeof(double) == MET_ValueTypeSize[MET_DOUBLE])
+      if (sizeof(double) == static_cast<size_t>(MET_ValueTypeSize[MET_DOUBLE]))
       {
         this->SetComponentType(IOComponentEnum::DOUBLE);
       }
-      else if (sizeof(float) == MET_ValueTypeSize[MET_DOUBLE])
+      else if (sizeof(float) == static_cast<size_t>(MET_ValueTypeSize[MET_DOUBLE]))
       {
         this->SetComponentType(IOComponentEnum::FLOAT);
       }
       break;
     case MET_DOUBLE_ARRAY:
       this->SetPixelType(IOPixelEnum::VECTOR);
-      if (sizeof(double) == MET_ValueTypeSize[MET_DOUBLE])
+      if (sizeof(double) == static_cast<size_t>(MET_ValueTypeSize[MET_DOUBLE]))
       {
         this->SetComponentType(IOComponentEnum::DOUBLE);
       }
-      else if (sizeof(float) == MET_ValueTypeSize[MET_DOUBLE])
+      else if (sizeof(float) == static_cast<size_t>(MET_ValueTypeSize[MET_DOUBLE]))
       {
         this->SetComponentType(IOComponentEnum::FLOAT);
       }
       break;
     case MET_FLOAT_MATRIX:
       this->SetPixelType(IOPixelEnum::VECTOR);
-      if (sizeof(float) == MET_ValueTypeSize[MET_FLOAT])
+      if (sizeof(float) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         this->SetComponentType(IOComponentEnum::FLOAT);
       }
-      else if (sizeof(double) == MET_ValueTypeSize[MET_FLOAT])
+      else if (sizeof(double) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         this->SetComponentType(IOComponentEnum::DOUBLE);
       }

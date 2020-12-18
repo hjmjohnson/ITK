@@ -25,7 +25,8 @@
     ExceptionObject exception(__FILE__, __LINE__);                                                                     \
     exception.SetDescription(s);                                                                                       \
     throw exception;                                                                                                   \
-  }
+  }                                                                                                                    \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 
 namespace itk
 {
