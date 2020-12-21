@@ -714,83 +714,83 @@ MetaImageIO ::Write(const void * buffer)
       eType = MET_USHORT;
       break;
     case IOComponentEnum::LONG:
-      if (sizeof(long) == MET_ValueTypeSize[MET_LONG])
+      if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG]))
       {
         eType = MET_LONG;
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_INT])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         eType = MET_INT;
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_LONG_LONG])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         eType = MET_LONG_LONG;
       }
       break;
     case IOComponentEnum::ULONG:
-      if (sizeof(long) == MET_ValueTypeSize[MET_LONG])
+      if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG]))
       {
         eType = MET_ULONG;
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_INT])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         eType = MET_UINT;
       }
-      else if (sizeof(long) == MET_ValueTypeSize[MET_LONG_LONG])
+      else if (sizeof(long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         eType = MET_ULONG_LONG;
       }
       break;
     case IOComponentEnum::LONGLONG:
 
-      if (sizeof(long long) == MET_ValueTypeSize[MET_LONG_LONG])
+      if (sizeof(long long) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG_LONG]))
       {
         eType = MET_LONG_LONG;
       }
       break;
     case IOComponentEnum::ULONGLONG:
-      if (sizeof(long long) == MET_ValueTypeSize[MET_ULONG_LONG])
+      if (sizeof(long long) == static_cast<size_t>(MET_ValueTypeSize[MET_ULONG_LONG]))
       {
         eType = MET_ULONG_LONG;
       }
       break;
     case IOComponentEnum::INT:
       eType = MET_INT;
-      if (sizeof(int) == MET_ValueTypeSize[MET_INT])
+      if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         eType = MET_INT;
       }
-      else if (sizeof(int) == MET_ValueTypeSize[MET_LONG])
+      else if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG]))
       {
         eType = MET_LONG;
       }
       break;
     case IOComponentEnum::UINT:
-      if (sizeof(int) == MET_ValueTypeSize[MET_INT])
+      if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_INT]))
       {
         eType = MET_UINT;
       }
-      else if (sizeof(int) == MET_ValueTypeSize[MET_LONG])
+      else if (sizeof(int) == static_cast<size_t>(MET_ValueTypeSize[MET_LONG]))
       {
         eType = MET_ULONG;
       }
       break;
     case IOComponentEnum::FLOAT:
-      if (sizeof(float) == MET_ValueTypeSize[MET_FLOAT])
+      if (sizeof(float) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         eType = MET_FLOAT;
       }
-      else if (sizeof(float) == MET_ValueTypeSize[MET_DOUBLE])
+      else if (sizeof(float) == static_cast<size_t>(MET_ValueTypeSize[MET_DOUBLE]))
       {
         eType = MET_DOUBLE;
       }
       break;
     case IOComponentEnum::DOUBLE:
-      if (sizeof(double) == MET_ValueTypeSize[MET_DOUBLE])
+      if (sizeof(double) == static_cast<size_t>(MET_ValueTypeSize[MET_DOUBLE]))
       {
         eType = MET_DOUBLE;
       }
-      else if (sizeof(double) == MET_ValueTypeSize[MET_FLOAT])
+      else if (sizeof(double) == static_cast<size_t>(MET_ValueTypeSize[MET_FLOAT]))
       {
         eType = MET_FLOAT;
       }
