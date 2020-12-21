@@ -391,7 +391,7 @@ inline NewType cast(const OldType& x)
   struct round_impl {
     static inline Scalar run(const Scalar& x)
     {
-      EIGEN_STATIC_ASSERT((!NumTraits<Scalar>::IsComplex), NUMERIC_TYPE_MUST_BE_REAL)
+      EIGEN_STATIC_ASSERT((!NumTraits<Scalar>::IsComplex), NUMERIC_TYPE_MUST_BE_REAL);
       using std::round;
       return round(x);
     }
@@ -470,7 +470,7 @@ namespace std_fallback {
   // or that there is no suitable std::log1p function available
   template<typename Scalar>
   EIGEN_DEVICE_FUNC inline Scalar log1p(const Scalar& x) {
-    EIGEN_STATIC_ASSERT_NON_INTEGER(Scalar)
+    EIGEN_STATIC_ASSERT_NON_INTEGER(Scalar);
     typedef typename NumTraits<Scalar>::Real RealScalar;
     EIGEN_USING_STD_MATH(log);
     Scalar x1p = RealScalar(1) + x;
@@ -482,7 +482,7 @@ template<typename Scalar>
 struct log1p_impl {
   static inline Scalar run(const Scalar& x)
   {
-    EIGEN_STATIC_ASSERT_NON_INTEGER(Scalar)
+    EIGEN_STATIC_ASSERT_NON_INTEGER(Scalar);
     #if EIGEN_HAS_CXX11_MATH
     using std::log1p;
     #endif

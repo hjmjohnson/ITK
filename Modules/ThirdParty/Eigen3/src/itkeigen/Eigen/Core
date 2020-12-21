@@ -69,9 +69,9 @@
 // global namespace.  In host mode, and when device doee with clang, use the
 // std versions.
 #if defined(__CUDA_ARCH__) && defined(__NVCC__)
-  #define EIGEN_USING_STD_MATH(FUNC) using ::FUNC;
+  #define EIGEN_USING_STD_MATH(FUNC) using ::FUNC
 #else
-  #define EIGEN_USING_STD_MATH(FUNC) using std::FUNC;
+  #define EIGEN_USING_STD_MATH(FUNC) using std::FUNC
 #endif
 
 #if (defined(_CPPUNWIND) || defined(__EXCEPTIONS)) && !defined(__CUDA_ARCH__) && !defined(EIGEN_EXCEPTIONS) && !defined(EIGEN_USE_SYCL)

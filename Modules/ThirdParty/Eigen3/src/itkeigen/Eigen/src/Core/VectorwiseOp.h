@@ -218,9 +218,9 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     extendedTo(const DenseBase<OtherDerived>& other) const
     {
       EIGEN_STATIC_ASSERT(EIGEN_IMPLIES(isVertical, OtherDerived::MaxColsAtCompileTime==1),
-                          YOU_PASSED_A_ROW_VECTOR_BUT_A_COLUMN_VECTOR_WAS_EXPECTED)
+                          YOU_PASSED_A_ROW_VECTOR_BUT_A_COLUMN_VECTOR_WAS_EXPECTED);
       EIGEN_STATIC_ASSERT(EIGEN_IMPLIES(isHorizontal, OtherDerived::MaxRowsAtCompileTime==1),
-                          YOU_PASSED_A_COLUMN_VECTOR_BUT_A_ROW_VECTOR_WAS_EXPECTED)
+                          YOU_PASSED_A_COLUMN_VECTOR_BUT_A_ROW_VECTOR_WAS_EXPECTED);
       return typename ExtendedType<OtherDerived>::Type
                       (other.derived(),
                        isVertical   ? 1 : m_matrix.rows(),
@@ -241,9 +241,9 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     extendedToOpposite(const DenseBase<OtherDerived>& other) const
     {
       EIGEN_STATIC_ASSERT(EIGEN_IMPLIES(isHorizontal, OtherDerived::MaxColsAtCompileTime==1),
-                          YOU_PASSED_A_ROW_VECTOR_BUT_A_COLUMN_VECTOR_WAS_EXPECTED)
+                          YOU_PASSED_A_ROW_VECTOR_BUT_A_COLUMN_VECTOR_WAS_EXPECTED);
       EIGEN_STATIC_ASSERT(EIGEN_IMPLIES(isVertical, OtherDerived::MaxRowsAtCompileTime==1),
-                          YOU_PASSED_A_COLUMN_VECTOR_BUT_A_ROW_VECTOR_WAS_EXPECTED)
+                          YOU_PASSED_A_COLUMN_VECTOR_BUT_A_ROW_VECTOR_WAS_EXPECTED);
       return typename OppositeExtendedType<OtherDerived>::Type
                       (other.derived(),
                        isHorizontal  ? 1 : m_matrix.rows(),
@@ -497,8 +497,8 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     EIGEN_DEVICE_FUNC
     ExpressionType& operator=(const DenseBase<OtherDerived>& other)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       //eigen_assert((m_matrix.isNull()) == (other.isNull())); FIXME
       return const_cast<ExpressionType&>(m_matrix = extendedTo(other.derived()));
     }
@@ -508,8 +508,8 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     EIGEN_DEVICE_FUNC
     ExpressionType& operator+=(const DenseBase<OtherDerived>& other)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       return const_cast<ExpressionType&>(m_matrix += extendedTo(other.derived()));
     }
 
@@ -518,8 +518,8 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     EIGEN_DEVICE_FUNC
     ExpressionType& operator-=(const DenseBase<OtherDerived>& other)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       return const_cast<ExpressionType&>(m_matrix -= extendedTo(other.derived()));
     }
 
@@ -528,9 +528,9 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     EIGEN_DEVICE_FUNC
     ExpressionType& operator*=(const DenseBase<OtherDerived>& other)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       m_matrix *= extendedTo(other.derived());
       return const_cast<ExpressionType&>(m_matrix);
     }
@@ -540,9 +540,9 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     EIGEN_DEVICE_FUNC
     ExpressionType& operator/=(const DenseBase<OtherDerived>& other)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       m_matrix /= extendedTo(other.derived());
       return const_cast<ExpressionType&>(m_matrix);
     }
@@ -554,8 +554,8 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
                   const typename ExtendedType<OtherDerived>::Type>
     operator+(const DenseBase<OtherDerived>& other) const
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       return m_matrix + extendedTo(other.derived());
     }
 
@@ -567,8 +567,8 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
                   const typename ExtendedType<OtherDerived>::Type>
     operator-(const DenseBase<OtherDerived>& other) const
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       return m_matrix - extendedTo(other.derived());
     }
 
@@ -581,9 +581,9 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     EIGEN_DEVICE_FUNC
     operator*(const DenseBase<OtherDerived>& other) const
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       return m_matrix * extendedTo(other.derived());
     }
 
@@ -596,9 +596,9 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
                   const typename ExtendedType<OtherDerived>::Type>
     operator/(const DenseBase<OtherDerived>& other) const
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType)
-      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+      EIGEN_STATIC_ASSERT_ARRAYXPR(ExpressionType);
+      EIGEN_STATIC_ASSERT_SAME_XPR_KIND(ExpressionType, OtherDerived);
       return m_matrix / extendedTo(other.derived());
     }
 

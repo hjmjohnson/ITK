@@ -334,7 +334,7 @@ struct Assignment<DstXprType, Inverse<XprType>, internal::assign_op<typename Dst
 template<typename Derived>
 inline const Inverse<Derived> MatrixBase<Derived>::inverse() const
 {
-  EIGEN_STATIC_ASSERT(!NumTraits<Scalar>::IsInteger,THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES)
+  EIGEN_STATIC_ASSERT(!NumTraits<Scalar>::IsInteger,THIS_FUNCTION_IS_NOT_FOR_INTEGER_NUMERIC_TYPES);
   eigen_assert(rows() == cols());
   return Inverse<Derived>(derived());
 }

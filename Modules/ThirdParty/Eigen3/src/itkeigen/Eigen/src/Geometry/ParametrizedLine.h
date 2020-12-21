@@ -87,7 +87,7 @@ public:
   /** \returns the distance of a point \a p to its projection onto the line \c *this.
     * \sa squaredDistance()
     */
-  EIGEN_DEVICE_FUNC RealScalar distance(const VectorType& p) const { EIGEN_USING_STD_MATH(sqrt) return sqrt(squaredDistance(p)); }
+  EIGEN_DEVICE_FUNC RealScalar distance(const VectorType& p) const { EIGEN_USING_STD_MATH(sqrt); return sqrt(squaredDistance(p)); }
 
   /** \returns the projection of a point \a p onto the line \c *this. */
   EIGEN_DEVICE_FUNC VectorType projection(const VectorType& p) const
@@ -145,7 +145,7 @@ template <typename _Scalar, int _AmbientDim, int _Options>
 template <int OtherOptions>
 EIGEN_DEVICE_FUNC inline ParametrizedLine<_Scalar, _AmbientDim,_Options>::ParametrizedLine(const Hyperplane<_Scalar, _AmbientDim,OtherOptions>& hyperplane)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(VectorType, 2)
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(VectorType, 2);
   direction() = hyperplane.normal().unitOrthogonal();
   origin() = -hyperplane.normal()*hyperplane.offset();
 }

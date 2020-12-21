@@ -887,7 +887,7 @@ inline ConstRowXpr row(Index i) const
 EIGEN_DEVICE_FUNC
 inline SegmentReturnType segment(Index start, Index n)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return SegmentReturnType(derived(), start, n);
 }
 
@@ -896,7 +896,7 @@ inline SegmentReturnType segment(Index start, Index n)
 EIGEN_DEVICE_FUNC
 inline ConstSegmentReturnType segment(Index start, Index n) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return ConstSegmentReturnType(derived(), start, n);
 }
 
@@ -918,7 +918,7 @@ inline ConstSegmentReturnType segment(Index start, Index n) const
 EIGEN_DEVICE_FUNC
 inline SegmentReturnType head(Index n)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return SegmentReturnType(derived(), 0, n);
 }
 
@@ -926,7 +926,7 @@ inline SegmentReturnType head(Index n)
 EIGEN_DEVICE_FUNC
 inline ConstSegmentReturnType head(Index n) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return ConstSegmentReturnType(derived(), 0, n);
 }
 
@@ -948,7 +948,7 @@ inline ConstSegmentReturnType head(Index n) const
 EIGEN_DEVICE_FUNC
 inline SegmentReturnType tail(Index n)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return SegmentReturnType(derived(), this->size() - n, n);
 }
 
@@ -956,7 +956,7 @@ inline SegmentReturnType tail(Index n)
 EIGEN_DEVICE_FUNC
 inline ConstSegmentReturnType tail(Index n) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return ConstSegmentReturnType(derived(), this->size() - n, n);
 }
 
@@ -980,7 +980,7 @@ template<int N>
 EIGEN_DEVICE_FUNC
 inline typename FixedSegmentReturnType<N>::Type segment(Index start, Index n = N)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return typename FixedSegmentReturnType<N>::Type(derived(), start, n);
 }
 
@@ -989,7 +989,7 @@ template<int N>
 EIGEN_DEVICE_FUNC
 inline typename ConstFixedSegmentReturnType<N>::Type segment(Index start, Index n = N) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return typename ConstFixedSegmentReturnType<N>::Type(derived(), start, n);
 }
 
@@ -1012,7 +1012,7 @@ template<int N>
 EIGEN_DEVICE_FUNC
 inline typename FixedSegmentReturnType<N>::Type head(Index n = N)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return typename FixedSegmentReturnType<N>::Type(derived(), 0, n);
 }
 
@@ -1021,7 +1021,7 @@ template<int N>
 EIGEN_DEVICE_FUNC
 inline typename ConstFixedSegmentReturnType<N>::Type head(Index n = N) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return typename ConstFixedSegmentReturnType<N>::Type(derived(), 0, n);
 }
 
@@ -1044,7 +1044,7 @@ template<int N>
 EIGEN_DEVICE_FUNC
 inline typename FixedSegmentReturnType<N>::Type tail(Index n = N)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return typename FixedSegmentReturnType<N>::Type(derived(), size() - n);
 }
 
@@ -1053,6 +1053,6 @@ template<int N>
 EIGEN_DEVICE_FUNC
 inline typename ConstFixedSegmentReturnType<N>::Type tail(Index n = N) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return typename ConstFixedSegmentReturnType<N>::Type(derived(), size() - n);
 }

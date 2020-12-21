@@ -630,7 +630,7 @@ namespace Eigen {
     template<typename T> EIGEN_DEVICE_FUNC void ignore_unused_variable(const T&) {}
   }
 }
-#define EIGEN_UNUSED_VARIABLE(var) Eigen::internal::ignore_unused_variable(var);
+#define EIGEN_UNUSED_VARIABLE(var) Eigen::internal::ignore_unused_variable(var)
 
 #if !defined(EIGEN_ASM_COMMENT)
   #if EIGEN_COMP_GNUC && (EIGEN_ARCH_i386_OR_x86_64 || EIGEN_ARCH_ARM_OR_ARM64)

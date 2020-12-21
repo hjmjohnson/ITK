@@ -34,7 +34,7 @@
 #include <assert.h>
 #ifndef ASSERT
 #define ASSERT(condition)         \
-    assert(condition);
+    assert(condition)
 #endif
 #ifndef UNIMPLEMENTED
 #define UNIMPLEMENTED() (abort())

@@ -566,10 +566,10 @@ template<typename SolverType> struct direct_selfadjoint_eigenvalues<SolverType,3
   EIGEN_DEVICE_FUNC
   static inline void computeRoots(const MatrixType& m, VectorType& roots)
   {
-    EIGEN_USING_STD_MATH(sqrt)
-    EIGEN_USING_STD_MATH(atan2)
-    EIGEN_USING_STD_MATH(cos)
-    EIGEN_USING_STD_MATH(sin)
+    EIGEN_USING_STD_MATH(sqrt);
+    EIGEN_USING_STD_MATH(atan2);
+    EIGEN_USING_STD_MATH(cos);
+    EIGEN_USING_STD_MATH(sin);
     const Scalar s_inv3 = Scalar(1)/Scalar(3);
     const Scalar s_sqrt3 = sqrt(Scalar(3));
 
@@ -605,8 +605,8 @@ template<typename SolverType> struct direct_selfadjoint_eigenvalues<SolverType,3
   EIGEN_DEVICE_FUNC
   static inline bool extract_kernel(MatrixType& mat, Ref<VectorType> res, Ref<VectorType> representative)
   {
-    EIGEN_USING_STD_MATH(sqrt)
-    EIGEN_USING_STD_MATH(abs)
+    EIGEN_USING_STD_MATH(sqrt);
+    EIGEN_USING_STD_MATH(abs);
     Index i0;
     // Find non-zero column i0 (by construction, there must exist a non zero coefficient on the diagonal):
     mat.diagonal().cwiseAbs().maxCoeff(&i0);

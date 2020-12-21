@@ -113,7 +113,7 @@ template<typename MatrixType, int _DiagIndex> class Diagonal
     EIGEN_DEVICE_FUNC
     inline Scalar& coeffRef(Index row, Index)
     {
-      EIGEN_STATIC_ASSERT_LVALUE(MatrixType)
+      EIGEN_STATIC_ASSERT_LVALUE(MatrixType);
       return m_matrix.coeffRef(row+rowOffset(), row+colOffset());
     }
 
@@ -132,7 +132,7 @@ template<typename MatrixType, int _DiagIndex> class Diagonal
     EIGEN_DEVICE_FUNC
     inline Scalar& coeffRef(Index idx)
     {
-      EIGEN_STATIC_ASSERT_LVALUE(MatrixType)
+      EIGEN_STATIC_ASSERT_LVALUE(MatrixType);
       return m_matrix.coeffRef(idx+rowOffset(), idx+colOffset());
     }
 

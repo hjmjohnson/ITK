@@ -206,7 +206,7 @@ class Array
     EIGEN_STRONG_INLINE Array(const Scalar& val0, const Scalar& val1, const Scalar& val2)
     {
       Base::_check_template_params();
-      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Array, 3)
+      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Array, 3);
       m_storage.data()[0] = val0;
       m_storage.data()[1] = val1;
       m_storage.data()[2] = val2;
@@ -216,7 +216,7 @@ class Array
     EIGEN_STRONG_INLINE Array(const Scalar& val0, const Scalar& val1, const Scalar& val2, const Scalar& val3)
     {
       Base::_check_template_params();
-      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Array, 4)
+      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Array, 4);
       m_storage.data()[0] = val0;
       m_storage.data()[1] = val1;
       m_storage.data()[2] = val2;

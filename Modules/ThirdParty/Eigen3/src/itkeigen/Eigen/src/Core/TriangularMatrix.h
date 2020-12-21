@@ -251,7 +251,7 @@ template<typename _MatrixType, unsigned int _Mode> class TriangularView
     EIGEN_DEVICE_FUNC
     inline TransposeReturnType transpose()
     {
-      EIGEN_STATIC_ASSERT_LVALUE(MatrixType)
+      EIGEN_STATIC_ASSERT_LVALUE(MatrixType);
       typename MatrixType::TransposeReturnType tmp(m_matrix);
       return TransposeReturnType(tmp);
     }

@@ -324,12 +324,12 @@ public:
     // prevent conversions as:
     // Affine | AffineCompact | Isometry = Projective
     EIGEN_STATIC_ASSERT(EIGEN_IMPLIES(OtherMode==int(Projective), Mode==int(Projective)),
-                        YOU_PERFORMED_AN_INVALID_TRANSFORMATION_CONVERSION)
+                        YOU_PERFORMED_AN_INVALID_TRANSFORMATION_CONVERSION);
 
     // prevent conversions as:
     // Isometry = Affine | AffineCompact
     EIGEN_STATIC_ASSERT(EIGEN_IMPLIES(OtherMode==int(Affine)||OtherMode==int(AffineCompact), Mode!=int(Isometry)),
-                        YOU_PERFORMED_AN_INVALID_TRANSFORMATION_CONVERSION)
+                        YOU_PERFORMED_AN_INVALID_TRANSFORMATION_CONVERSION);
 
     enum { ModeIsAffineCompact = Mode == int(AffineCompact),
            OtherModeIsAffineCompact = OtherMode == int(AffineCompact)
@@ -689,7 +689,7 @@ protected:
   #ifndef EIGEN_PARSED_BY_DOXYGEN
     EIGEN_DEVICE_FUNC static EIGEN_STRONG_INLINE void check_template_params()
     {
-      EIGEN_STATIC_ASSERT((Options & (DontAlign|RowMajor)) == Options, INVALID_MATRIX_TEMPLATE_PARAMETERS)
+      EIGEN_STATIC_ASSERT((Options & (DontAlign|RowMajor)) == Options, INVALID_MATRIX_TEMPLATE_PARAMETERS);
     }
   #endif
 
@@ -843,8 +843,8 @@ template<typename OtherDerived>
 EIGEN_DEVICE_FUNC Transform<Scalar,Dim,Mode,Options>&
 Transform<Scalar,Dim,Mode,Options>::scale(const MatrixBase<OtherDerived> &other)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim))
-  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS)
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim));
+  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS);
   linearExt().noalias() = (linearExt() * other.asDiagonal());
   return *this;
 }
@@ -856,7 +856,7 @@ Transform<Scalar,Dim,Mode,Options>::scale(const MatrixBase<OtherDerived> &other)
 template<typename Scalar, int Dim, int Mode, int Options>
 EIGEN_DEVICE_FUNC inline Transform<Scalar,Dim,Mode,Options>& Transform<Scalar,Dim,Mode,Options>::scale(const Scalar& s)
 {
-  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS)
+  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS);
   linearExt() *= s;
   return *this;
 }
@@ -870,8 +870,8 @@ template<typename OtherDerived>
 EIGEN_DEVICE_FUNC Transform<Scalar,Dim,Mode,Options>&
 Transform<Scalar,Dim,Mode,Options>::prescale(const MatrixBase<OtherDerived> &other)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim))
-  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS)
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim));
+  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS);
   affine().noalias() = (other.asDiagonal() * affine());
   return *this;
 }
@@ -883,7 +883,7 @@ Transform<Scalar,Dim,Mode,Options>::prescale(const MatrixBase<OtherDerived> &oth
 template<typename Scalar, int Dim, int Mode, int Options>
 EIGEN_DEVICE_FUNC inline Transform<Scalar,Dim,Mode,Options>& Transform<Scalar,Dim,Mode,Options>::prescale(const Scalar& s)
 {
-  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS)
+  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS);
   m_matrix.template topRows<Dim>() *= s;
   return *this;
 }
@@ -897,7 +897,7 @@ template<typename OtherDerived>
 EIGEN_DEVICE_FUNC Transform<Scalar,Dim,Mode,Options>&
 Transform<Scalar,Dim,Mode,Options>::translate(const MatrixBase<OtherDerived> &other)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim))
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim));
   translationExt() += linearExt() * other;
   return *this;
 }
@@ -911,7 +911,7 @@ template<typename OtherDerived>
 EIGEN_DEVICE_FUNC Transform<Scalar,Dim,Mode,Options>&
 Transform<Scalar,Dim,Mode,Options>::pretranslate(const MatrixBase<OtherDerived> &other)
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim))
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,int(Dim));
   if(int(Mode)==int(Projective))
     affine() += other * m_matrix.row(Dim);
   else
@@ -971,8 +971,8 @@ template<typename Scalar, int Dim, int Mode, int Options>
 EIGEN_DEVICE_FUNC Transform<Scalar,Dim,Mode,Options>&
 Transform<Scalar,Dim,Mode,Options>::shear(const Scalar& sx, const Scalar& sy)
 {
-  EIGEN_STATIC_ASSERT(int(Dim)==2, YOU_MADE_A_PROGRAMMING_MISTAKE)
-  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS)
+  EIGEN_STATIC_ASSERT(int(Dim)==2, YOU_MADE_A_PROGRAMMING_MISTAKE);
+  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS);
   VectorType tmp = linear().col(0)*sy + linear().col(1);
   linear() << linear().col(0) + linear().col(1)*sx, tmp;
   return *this;
@@ -987,8 +987,8 @@ template<typename Scalar, int Dim, int Mode, int Options>
 EIGEN_DEVICE_FUNC Transform<Scalar,Dim,Mode,Options>&
 Transform<Scalar,Dim,Mode,Options>::preshear(const Scalar& sx, const Scalar& sy)
 {
-  EIGEN_STATIC_ASSERT(int(Dim)==2, YOU_MADE_A_PROGRAMMING_MISTAKE)
-  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS)
+  EIGEN_STATIC_ASSERT(int(Dim)==2, YOU_MADE_A_PROGRAMMING_MISTAKE);
+  EIGEN_STATIC_ASSERT(Mode!=int(Isometry), THIS_METHOD_IS_ONLY_FOR_SPECIFIC_TRANSFORMATIONS);
   m_matrix.template block<Dim,HDim>(0,0) = LinearMatrixType(1, sx, sy, 1) * m_matrix.template block<Dim,HDim>(0,0);
   return *this;
 }

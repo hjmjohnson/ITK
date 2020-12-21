@@ -479,7 +479,7 @@ template<typename Derived> class DenseBase
     EIGEN_DEVICE_FUNC
     CoeffReturnType value() const
     {
-      EIGEN_STATIC_ASSERT_SIZE_1x1(Derived)
+      EIGEN_STATIC_ASSERT_SIZE_1x1(Derived);
       eigen_assert(this->rows() == 1 && this->cols() == 1);
       return derived().coeff(0,0);
     }

@@ -106,7 +106,7 @@ class H5_DLLCPP DataSet : public H5Object, public AbstractDs {
         virtual hid_t getId() const;
 
         // Destructor: properly terminates access to this dataset.
-        virtual ~DataSet();
+        virtual ~DataSet() override;
 
    protected:
 #ifndef DOXYGEN_SHOULD_SKIP_THIS

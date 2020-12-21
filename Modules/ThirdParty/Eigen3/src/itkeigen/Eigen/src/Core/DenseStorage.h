@@ -76,7 +76,7 @@ struct plain_array
     eigen_assert((internal::UIntPtr(array) & (sizemask)) == 0 \
               && "this assertion is explained here: " \
               "http://eigen.tuxfamily.org/dox-devel/group__TopicUnalignedArrayAssert.html" \
-              " **** READ THIS WEB PAGE !!! ****");
+              " **** READ THIS WEB PAGE !!! ****")
 #endif
 
 template <typename T, int Size, int MatrixOrArrayOptions>

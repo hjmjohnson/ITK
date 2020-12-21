@@ -71,9 +71,9 @@ EIGEN_STRONG_INLINE
 typename ScalarBinaryOpTraits<typename internal::traits<Derived>::Scalar,typename internal::traits<OtherDerived>::Scalar>::ReturnType
 MatrixBase<Derived>::dot(const MatrixBase<OtherDerived>& other) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived)
-  EIGEN_STATIC_ASSERT_SAME_VECTOR_SIZE(Derived,OtherDerived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(OtherDerived);
+  EIGEN_STATIC_ASSERT_SAME_VECTOR_SIZE(Derived,OtherDerived);
 #if !(defined(EIGEN_NO_STATIC_ASSERT) && defined(EIGEN_NO_DEBUG))
   typedef internal::scalar_conj_product_op<Scalar,typename OtherDerived::Scalar> func;
   EIGEN_CHECK_BINARY_COMPATIBILIY(func,Scalar,typename OtherDerived::Scalar);
@@ -207,7 +207,7 @@ struct lpNorm_selector
   EIGEN_DEVICE_FUNC
   static inline RealScalar run(const MatrixBase<Derived>& m)
   {
-    EIGEN_USING_STD_MATH(pow)
+    EIGEN_USING_STD_MATH(pow);
     return pow(m.cwiseAbs().array().pow(p).sum(), RealScalar(1)/p);
   }
 };

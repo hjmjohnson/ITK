@@ -110,7 +110,7 @@ template<typename Derived> class MapBase<Derived, ReadOnlyAccessors>
     EIGEN_DEVICE_FUNC
     inline const Scalar& coeff(Index index) const
     {
-      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived)
+      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived);
       return m_data[index * innerStride()];
     }
 
@@ -125,7 +125,7 @@ template<typename Derived> class MapBase<Derived, ReadOnlyAccessors>
     EIGEN_DEVICE_FUNC
     inline const Scalar& coeffRef(Index index) const
     {
-      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived)
+      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived);
       return this->m_data[index * innerStride()];
     }
 
@@ -141,7 +141,7 @@ template<typename Derived> class MapBase<Derived, ReadOnlyAccessors>
     template<int LoadMode>
     inline PacketScalar packet(Index index) const
     {
-      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived)
+      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived);
       return internal::ploadt<PacketScalar, LoadMode>(m_data + index * innerStride());
     }
 
@@ -149,7 +149,7 @@ template<typename Derived> class MapBase<Derived, ReadOnlyAccessors>
     EIGEN_DEVICE_FUNC
     explicit inline MapBase(PointerType dataPtr) : m_data(dataPtr), m_rows(RowsAtCompileTime), m_cols(ColsAtCompileTime)
     {
-      EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived)
+      EIGEN_STATIC_ASSERT_FIXED_SIZE(Derived);
       checkSanity<Derived>();
     }
 
@@ -160,7 +160,7 @@ template<typename Derived> class MapBase<Derived, ReadOnlyAccessors>
               m_rows(RowsAtCompileTime == Dynamic ? vecSize : Index(RowsAtCompileTime)),
               m_cols(ColsAtCompileTime == Dynamic ? vecSize : Index(ColsAtCompileTime))
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
       eigen_assert(vecSize >= 0);
       eigen_assert(dataPtr == 0 || SizeAtCompileTime == Dynamic || SizeAtCompileTime == vecSize);
       checkSanity<Derived>();
@@ -263,7 +263,7 @@ template<typename Derived> class MapBase<Derived, WriteAccessors>
     EIGEN_DEVICE_FUNC
     inline ScalarWithConstIfNotLvalue& coeffRef(Index index)
     {
-      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived)
+      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived);
       return this->m_data[index * innerStride()];
     }
 
@@ -277,7 +277,7 @@ template<typename Derived> class MapBase<Derived, WriteAccessors>
     template<int StoreMode>
     inline void writePacket(Index index, const PacketScalar& val)
     {
-      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived)
+      EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived);
       internal::pstoret<Scalar, PacketScalar, StoreMode>
                 (this->m_data + index * innerStride(), val);
     }
