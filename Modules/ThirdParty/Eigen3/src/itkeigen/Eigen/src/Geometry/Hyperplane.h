@@ -98,7 +98,7 @@ public:
     */
   EIGEN_DEVICE_FUNC static inline Hyperplane Through(const VectorType& p0, const VectorType& p1, const VectorType& p2)
   {
-    EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(VectorType, 3)
+    EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(VectorType, 3);
     Hyperplane result(p0.size());
     VectorType v0(p2 - p0), v1(p1 - p0);
     result.normal() = v0.cross(v1);
@@ -188,7 +188,7 @@ public:
     */
   EIGEN_DEVICE_FUNC VectorType intersection(const Hyperplane& other) const
   {
-    EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(VectorType, 2)
+    EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(VectorType, 2);
     Scalar det = coeffs().coeff(0) * other.coeffs().coeff(1) - coeffs().coeff(1) * other.coeffs().coeff(0);
     // since the line equations ax+by=c are normalized with a^2+b^2=1, the following tests
     // whether the two lines are approximately parallel.

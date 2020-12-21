@@ -140,7 +140,7 @@ template<typename OtherDerived>
 EIGEN_DEVICE_FUNC Matrix<_Scalar, _Rows, _Cols, _Storage, _MaxRows, _MaxCols>
 ::Matrix(const RotationBase<OtherDerived,ColsAtCompileTime>& r)
 {
-  EIGEN_STATIC_ASSERT_MATRIX_SPECIFIC_SIZE(Matrix,int(OtherDerived::Dim),int(OtherDerived::Dim))
+  EIGEN_STATIC_ASSERT_MATRIX_SPECIFIC_SIZE(Matrix,int(OtherDerived::Dim),int(OtherDerived::Dim));
   *this = r.toRotationMatrix();
 }
 
@@ -154,7 +154,7 @@ EIGEN_DEVICE_FUNC Matrix<_Scalar, _Rows, _Cols, _Storage, _MaxRows, _MaxCols>&
 Matrix<_Scalar, _Rows, _Cols, _Storage, _MaxRows, _MaxCols>
 ::operator=(const RotationBase<OtherDerived,ColsAtCompileTime>& r)
 {
-  EIGEN_STATIC_ASSERT_MATRIX_SPECIFIC_SIZE(Matrix,int(OtherDerived::Dim),int(OtherDerived::Dim))
+  EIGEN_STATIC_ASSERT_MATRIX_SPECIFIC_SIZE(Matrix,int(OtherDerived::Dim),int(OtherDerived::Dim));
   return *this = r.toRotationMatrix();
 }
 
@@ -181,7 +181,7 @@ namespace internal {
 template<typename Scalar, int Dim>
 EIGEN_DEVICE_FUNC static inline Matrix<Scalar,2,2> toRotationMatrix(const Scalar& s)
 {
-  EIGEN_STATIC_ASSERT(Dim==2,YOU_MADE_A_PROGRAMMING_MISTAKE)
+  EIGEN_STATIC_ASSERT(Dim==2,YOU_MADE_A_PROGRAMMING_MISTAKE);
   return Rotation2D<Scalar>(s).toRotationMatrix();
 }
 
@@ -195,7 +195,7 @@ template<typename Scalar, int Dim, typename OtherDerived>
 EIGEN_DEVICE_FUNC static inline const MatrixBase<OtherDerived>& toRotationMatrix(const MatrixBase<OtherDerived>& mat)
 {
   EIGEN_STATIC_ASSERT(OtherDerived::RowsAtCompileTime==Dim && OtherDerived::ColsAtCompileTime==Dim,
-    YOU_MADE_A_PROGRAMMING_MISTAKE)
+    YOU_MADE_A_PROGRAMMING_MISTAKE);
   return mat;
 }
 

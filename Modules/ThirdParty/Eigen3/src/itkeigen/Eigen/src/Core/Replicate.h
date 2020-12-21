@@ -75,7 +75,7 @@ template<typename MatrixType,int RowFactor,int ColFactor> class Replicate
       : m_matrix(matrix), m_rowFactor(RowFactor), m_colFactor(ColFactor)
     {
       EIGEN_STATIC_ASSERT((internal::is_same<typename internal::remove_const<MatrixType>::type,OriginalMatrixType>::value),
-                          THE_MATRIX_OR_EXPRESSION_THAT_YOU_PASSED_DOES_NOT_HAVE_THE_EXPECTED_TYPE)
+                          THE_MATRIX_OR_EXPRESSION_THAT_YOU_PASSED_DOES_NOT_HAVE_THE_EXPECTED_TYPE);
       eigen_assert(RowFactor!=Dynamic && ColFactor!=Dynamic);
     }
 
@@ -85,7 +85,7 @@ template<typename MatrixType,int RowFactor,int ColFactor> class Replicate
       : m_matrix(matrix), m_rowFactor(rowFactor), m_colFactor(colFactor)
     {
       EIGEN_STATIC_ASSERT((internal::is_same<typename internal::remove_const<MatrixType>::type,OriginalMatrixType>::value),
-                          THE_MATRIX_OR_EXPRESSION_THAT_YOU_PASSED_DOES_NOT_HAVE_THE_EXPECTED_TYPE)
+                          THE_MATRIX_OR_EXPRESSION_THAT_YOU_PASSED_DOES_NOT_HAVE_THE_EXPECTED_TYPE);
     }
 
     EIGEN_DEVICE_FUNC

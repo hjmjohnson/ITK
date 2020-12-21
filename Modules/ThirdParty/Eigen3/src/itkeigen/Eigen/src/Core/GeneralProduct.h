@@ -404,10 +404,10 @@ MatrixBase<Derived>::operator*(const MatrixBase<OtherDerived> &other) const
   //    * for a dot product use: v1.dot(v2)
   //    * for a coeff-wise product use: v1.cwiseProduct(v2)
   EIGEN_STATIC_ASSERT(ProductIsValid || !(AreVectors && SameSizes),
-    INVALID_VECTOR_VECTOR_PRODUCT__IF_YOU_WANTED_A_DOT_OR_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTIONS)
+    INVALID_VECTOR_VECTOR_PRODUCT__IF_YOU_WANTED_A_DOT_OR_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTIONS);
   EIGEN_STATIC_ASSERT(ProductIsValid || !(SameSizes && !AreVectors),
-    INVALID_MATRIX_PRODUCT__IF_YOU_WANTED_A_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTION)
-  EIGEN_STATIC_ASSERT(ProductIsValid || SameSizes, INVALID_MATRIX_PRODUCT)
+    INVALID_MATRIX_PRODUCT__IF_YOU_WANTED_A_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTION);
+  EIGEN_STATIC_ASSERT(ProductIsValid || SameSizes, INVALID_MATRIX_PRODUCT);
 #ifdef EIGEN_DEBUG_PRODUCT
   internal::product_type<Derived,OtherDerived>::debug();
 #endif
@@ -442,10 +442,10 @@ MatrixBase<Derived>::lazyProduct(const MatrixBase<OtherDerived> &other) const
   //    * for a dot product use: v1.dot(v2)
   //    * for a coeff-wise product use: v1.cwiseProduct(v2)
   EIGEN_STATIC_ASSERT(ProductIsValid || !(AreVectors && SameSizes),
-    INVALID_VECTOR_VECTOR_PRODUCT__IF_YOU_WANTED_A_DOT_OR_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTIONS)
+    INVALID_VECTOR_VECTOR_PRODUCT__IF_YOU_WANTED_A_DOT_OR_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTIONS);
   EIGEN_STATIC_ASSERT(ProductIsValid || !(SameSizes && !AreVectors),
-    INVALID_MATRIX_PRODUCT__IF_YOU_WANTED_A_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTION)
-  EIGEN_STATIC_ASSERT(ProductIsValid || SameSizes, INVALID_MATRIX_PRODUCT)
+    INVALID_MATRIX_PRODUCT__IF_YOU_WANTED_A_COEFF_WISE_PRODUCT_YOU_MUST_USE_THE_EXPLICIT_FUNCTION);
+  EIGEN_STATIC_ASSERT(ProductIsValid || SameSizes, INVALID_MATRIX_PRODUCT);
 
   return Product<Derived,OtherDerived,LazyProduct>(derived(), other.derived());
 }

@@ -158,7 +158,7 @@ class DenseCoeffsBase<Derived,ReadOnlyAccessors> : public EigenBase<Derived>
     operator[](Index index) const
     {
       EIGEN_STATIC_ASSERT(Derived::IsVectorAtCompileTime,
-                          THE_BRACKET_OPERATOR_IS_ONLY_FOR_VECTORS__USE_THE_PARENTHESIS_OPERATOR_INSTEAD)
+                          THE_BRACKET_OPERATOR_IS_ONLY_FOR_VECTORS__USE_THE_PARENTHESIS_OPERATOR_INSTEAD);
       eigen_assert(index >= 0 && index < size());
       return coeff(index);
     }
@@ -258,7 +258,7 @@ class DenseCoeffsBase<Derived,ReadOnlyAccessors> : public EigenBase<Derived>
     EIGEN_STRONG_INLINE PacketReturnType packet(Index index) const
     {
       EIGEN_STATIC_ASSERT(internal::evaluator<Derived>::Flags & LinearAccessBit,
-                          THIS_COEFFICIENT_ACCESSOR_TAKING_ONE_ACCESS_IS_ONLY_FOR_EXPRESSIONS_ALLOWING_LINEAR_ACCESS)
+                          THIS_COEFFICIENT_ACCESSOR_TAKING_ONE_ACCESS_IS_ONLY_FOR_EXPRESSIONS_ALLOWING_LINEAR_ACCESS);
       typedef typename internal::packet_traits<Scalar>::type DefaultPacketType;
       eigen_internal_assert(index >= 0 && index < size());
       return internal::evaluator<Derived>(derived()).template packet<LoadMode,DefaultPacketType>(index);
@@ -404,7 +404,7 @@ class DenseCoeffsBase<Derived, WriteAccessors> : public DenseCoeffsBase<Derived,
     operator[](Index index)
     {
       EIGEN_STATIC_ASSERT(Derived::IsVectorAtCompileTime,
-                          THE_BRACKET_OPERATOR_IS_ONLY_FOR_VECTORS__USE_THE_PARENTHESIS_OPERATOR_INSTEAD)
+                          THE_BRACKET_OPERATOR_IS_ONLY_FOR_VECTORS__USE_THE_PARENTHESIS_OPERATOR_INSTEAD);
       eigen_assert(index >= 0 && index < size());
       return coeffRef(index);
     }

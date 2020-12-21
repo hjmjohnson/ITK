@@ -308,7 +308,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
     EIGEN_DEVICE_FUNC
     inline void resize(Index size)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_ONLY(PlainObjectBase)
+      EIGEN_STATIC_ASSERT_VECTOR_ONLY(PlainObjectBase);
       eigen_assert(((SizeAtCompileTime == Dynamic && (MaxSizeAtCompileTime==Dynamic || size<=MaxSizeAtCompileTime)) || SizeAtCompileTime == size) && size>=0);
       #ifdef EIGEN_INITIALIZE_COEFFS
         bool size_changed = size != this->size();
@@ -741,7 +741,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
       const bool t1_is_integer_alike = internal::is_valid_index_type<T1>::value;
       EIGEN_STATIC_ASSERT(t0_is_integer_alike &&
                           t1_is_integer_alike,
-                          FLOATING_POINT_ARGUMENT_PASSED__INTEGER_WAS_EXPECTED)
+                          FLOATING_POINT_ARGUMENT_PASSED__INTEGER_WAS_EXPECTED);
       resize(rows,cols);
     }
     
@@ -749,7 +749,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
     EIGEN_DEVICE_FUNC 
     EIGEN_STRONG_INLINE void _init2(const T0& val0, const T1& val1, typename internal::enable_if<Base::SizeAtCompileTime==2,T0>::type* = 0)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 2)
+      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 2);
       m_storage.data()[0] = Scalar(val0);
       m_storage.data()[1] = Scalar(val1);
     }
@@ -762,7 +762,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
                                                                   && (internal::is_same<T1,Index>::value)
                                                                   && Base::SizeAtCompileTime==2,T1>::type* = 0)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 2)
+      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 2);
       m_storage.data()[0] = Scalar(val0);
       m_storage.data()[1] = Scalar(val1);
     }
@@ -778,7 +778,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
       const bool is_integer_alike = internal::is_valid_index_type<T>::value;
       EIGEN_UNUSED_VARIABLE(is_integer_alike);
       EIGEN_STATIC_ASSERT(is_integer_alike,
-                          FLOATING_POINT_ARGUMENT_PASSED__INTEGER_WAS_EXPECTED)
+                          FLOATING_POINT_ARGUMENT_PASSED__INTEGER_WAS_EXPECTED);
       resize(size);
     }
     
@@ -787,7 +787,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
     EIGEN_DEVICE_FUNC
     EIGEN_STRONG_INLINE void _init1(const Scalar& val0, typename internal::enable_if<Base::SizeAtCompileTime==1 && internal::is_convertible<T, Scalar>::value,T>::type* = 0)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 1)
+      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 1);
       m_storage.data()[0] = val0;
     }
     
@@ -800,7 +800,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
                                                                   && Base::SizeAtCompileTime==1
                                                                   && internal::is_convertible<T, Scalar>::value,T*>::type* = 0)
     {
-      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 1)
+      EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 1);
       m_storage.data()[0] = Scalar(val0);
     }
 
@@ -911,7 +911,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
                         && (MaxRowsAtCompileTime == RowsAtCompileTime || RowsAtCompileTime==Dynamic)
                         && (MaxColsAtCompileTime == ColsAtCompileTime || ColsAtCompileTime==Dynamic)
                         && (Options & (DontAlign|RowMajor)) == Options),
-        INVALID_MATRIX_TEMPLATE_PARAMETERS)
+        INVALID_MATRIX_TEMPLATE_PARAMETERS);
     }
 
     enum { IsPlainObjectBase = 1 };
@@ -926,7 +926,7 @@ struct conservative_resize_like_impl
   static void run(DenseBase<Derived>& _this, Index rows, Index cols)
   {
     if (_this.rows() == rows && _this.cols() == cols) return;
-    EIGEN_STATIC_ASSERT_DYNAMIC_SIZE(Derived)
+    EIGEN_STATIC_ASSERT_DYNAMIC_SIZE(Derived);
 
     if ( ( Derived::IsRowMajor && _this.cols() == cols) || // row-major and we change only the number of rows
          (!Derived::IsRowMajor && _this.rows() == rows) )  // column-major and we change only the number of columns
@@ -954,8 +954,8 @@ struct conservative_resize_like_impl
     // dimensions is dynamic, one could use either conservativeResize(Index rows, NoChange_t) or
     // conservativeResize(NoChange_t, Index cols). For these methods new static asserts like
     // EIGEN_STATIC_ASSERT_DYNAMIC_ROWS and EIGEN_STATIC_ASSERT_DYNAMIC_COLS would be good.
-    EIGEN_STATIC_ASSERT_DYNAMIC_SIZE(Derived)
-    EIGEN_STATIC_ASSERT_DYNAMIC_SIZE(OtherDerived)
+    EIGEN_STATIC_ASSERT_DYNAMIC_SIZE(Derived);
+    EIGEN_STATIC_ASSERT_DYNAMIC_SIZE(OtherDerived);
 
     if ( ( Derived::IsRowMajor && _this.cols() == other.cols()) || // row-major and we change only the number of rows
          (!Derived::IsRowMajor && _this.rows() == other.rows()) )  // column-major and we change only the number of columns

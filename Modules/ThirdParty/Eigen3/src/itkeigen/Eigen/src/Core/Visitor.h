@@ -224,7 +224,7 @@ EIGEN_DEVICE_FUNC
 typename internal::traits<Derived>::Scalar
 DenseBase<Derived>::minCoeff(IndexType* index) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   internal::min_coeff_visitor<Derived> minVisitor;
   this->visit(minVisitor);
   *index = IndexType((RowsAtCompileTime==1) ? minVisitor.col : minVisitor.row);
@@ -261,7 +261,7 @@ EIGEN_DEVICE_FUNC
 typename internal::traits<Derived>::Scalar
 DenseBase<Derived>::maxCoeff(IndexType* index) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   internal::max_coeff_visitor<Derived> maxVisitor;
   this->visit(maxVisitor);
   *index = (RowsAtCompileTime==1) ? maxVisitor.col : maxVisitor.row;

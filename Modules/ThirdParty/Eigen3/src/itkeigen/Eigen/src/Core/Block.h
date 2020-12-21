@@ -128,7 +128,7 @@ template<typename XprType, int BlockRows, int BlockCols, bool InnerPanel> class 
     inline Block(XprType& xpr, Index startRow, Index startCol)
       : Impl(xpr, startRow, startCol)
     {
-      EIGEN_STATIC_ASSERT(RowsAtCompileTime!=Dynamic && ColsAtCompileTime!=Dynamic,THIS_METHOD_IS_ONLY_FOR_FIXED_SIZE)
+      EIGEN_STATIC_ASSERT(RowsAtCompileTime!=Dynamic && ColsAtCompileTime!=Dynamic,THIS_METHOD_IS_ONLY_FOR_FIXED_SIZE);
       eigen_assert(startRow >= 0 && BlockRows >= 0 && startRow + BlockRows <= xpr.rows()
              && startCol >= 0 && BlockCols >= 0 && startCol + BlockCols <= xpr.cols());
     }
@@ -221,7 +221,7 @@ template<typename XprType, int BlockRows, int BlockCols, bool InnerPanel, bool H
     EIGEN_DEVICE_FUNC
     inline Scalar& coeffRef(Index rowId, Index colId)
     {
-      EIGEN_STATIC_ASSERT_LVALUE(XprType)
+      EIGEN_STATIC_ASSERT_LVALUE(XprType);
       return m_xpr.coeffRef(rowId + m_startRow.value(), colId + m_startCol.value());
     }
 
@@ -240,7 +240,7 @@ template<typename XprType, int BlockRows, int BlockCols, bool InnerPanel, bool H
     EIGEN_DEVICE_FUNC
     inline Scalar& coeffRef(Index index)
     {
-      EIGEN_STATIC_ASSERT_LVALUE(XprType)
+      EIGEN_STATIC_ASSERT_LVALUE(XprType);
       return m_xpr.coeffRef(m_startRow.value() + (RowsAtCompileTime == 1 ? 0 : index),
                             m_startCol.value() + (RowsAtCompileTime == 1 ? index : 0));
     }

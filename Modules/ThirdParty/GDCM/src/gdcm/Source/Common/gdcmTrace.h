@@ -128,7 +128,8 @@ private:
    std::ostream &_os = gdcm::Trace::GetDebugStream();             \
    _os << osmacro.str() << "\n\n" << std::endl;                   \
    }                                                              \
-}
+}                                                                 \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 #endif //NDEBUG
 
 /**
@@ -149,7 +150,8 @@ private:
    std::ostream &_os = gdcm::Trace::GetWarningStream();           \
    _os << osmacro.str() << std::endl;                             \
    }                                                              \
-}
+}                                                                 \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 #endif //NDEBUG
 
 /**
@@ -171,7 +173,8 @@ private:
    std::ostream &_os = gdcm::Trace::GetErrorStream();             \
    _os << osmacro.str() << std::endl;                             \
    }                                                              \
-}
+}                                                                 \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 #endif //NDEBUG
 
 /**
@@ -195,7 +198,8 @@ private:
    _os << osmacro.str() << std::endl;                             \
    assert ( arg );                                                \
    }                                                              \
-}
+}                                                                 \
+  static_assert(true, "used to gobble up semi-colon warnings.")
 #endif //NDEBUG
 
 /**

@@ -33,8 +33,8 @@ inline typename MatrixBase<Derived>::PlainObject
 #endif
 MatrixBase<Derived>::cross(const MatrixBase<OtherDerived>& other) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived,3)
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,3)
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived,3);
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,3);
 
   // Note that there is no need for an expression here since the compiler
   // optimize such a small temporary very well (even within a complex expression)
@@ -81,8 +81,8 @@ template<typename OtherDerived>
 EIGEN_DEVICE_FUNC inline typename MatrixBase<Derived>::PlainObject
 MatrixBase<Derived>::cross3(const MatrixBase<OtherDerived>& other) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived,4)
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,4)
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived,4);
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,4);
 
   typedef typename internal::nested_eval<Derived,2>::type DerivedNested;
   typedef typename internal::nested_eval<OtherDerived,2>::type OtherDerivedNested;
@@ -109,9 +109,9 @@ EIGEN_DEVICE_FUNC
 const typename VectorwiseOp<ExpressionType,Direction>::CrossReturnType
 VectorwiseOp<ExpressionType,Direction>::cross(const MatrixBase<OtherDerived>& other) const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,3)
+  EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(OtherDerived,3);
   EIGEN_STATIC_ASSERT((internal::is_same<Scalar, typename OtherDerived::Scalar>::value),
-    YOU_MIXED_DIFFERENT_NUMERIC_TYPES__YOU_NEED_TO_USE_THE_CAST_METHOD_OF_MATRIXBASE_TO_CAST_NUMERIC_TYPES_EXPLICITLY)
+    YOU_MIXED_DIFFERENT_NUMERIC_TYPES__YOU_NEED_TO_USE_THE_CAST_METHOD_OF_MATRIXBASE_TO_CAST_NUMERIC_TYPES_EXPLICITLY);
   
   typename internal::nested_eval<ExpressionType,2>::type mat(_expression());
   typename internal::nested_eval<OtherDerived,2>::type vec(other.derived());
@@ -225,7 +225,7 @@ template<typename Derived>
 EIGEN_DEVICE_FUNC typename MatrixBase<Derived>::PlainObject
 MatrixBase<Derived>::unitOrthogonal() const
 {
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);
   return internal::unitOrthogonal_selector<Derived>::run(derived());
 }
 

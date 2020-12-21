@@ -829,8 +829,8 @@ void call_assignment_no_alias(Dst& dst, const Src& src, const Func& func)
   ActualDstType actualDst(dst);
   
   // TODO check whether this is the right place to perform these checks:
-  EIGEN_STATIC_ASSERT_LVALUE(Dst)
-  EIGEN_STATIC_ASSERT_SAME_MATRIX_SIZE(ActualDstTypeCleaned,Src)
+  EIGEN_STATIC_ASSERT_LVALUE(Dst);
+  EIGEN_STATIC_ASSERT_SAME_MATRIX_SIZE(ActualDstTypeCleaned,Src);
   EIGEN_CHECK_BINARY_COMPATIBILIY(Func,typename ActualDstTypeCleaned::Scalar,typename Src::Scalar);
   
   Assignment<ActualDstTypeCleaned,Src,Func>::run(actualDst, src, func);
@@ -847,8 +847,8 @@ EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
 void call_assignment_no_alias_no_transpose(Dst& dst, const Src& src, const Func& func)
 {
   // TODO check whether this is the right place to perform these checks:
-  EIGEN_STATIC_ASSERT_LVALUE(Dst)
-  EIGEN_STATIC_ASSERT_SAME_MATRIX_SIZE(Dst,Src)
+  EIGEN_STATIC_ASSERT_LVALUE(Dst);
+  EIGEN_STATIC_ASSERT_SAME_MATRIX_SIZE(Dst,Src);
   EIGEN_CHECK_BINARY_COMPATIBILIY(Func,typename Dst::Scalar,typename Src::Scalar);
 
   Assignment<Dst,Src,Func>::run(dst, src, func);

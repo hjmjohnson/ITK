@@ -70,7 +70,7 @@ void MatrixBase<Derived>::makeHouseholder(
   using std::sqrt;
   using numext::conj;
   
-  EIGEN_STATIC_ASSERT_VECTOR_ONLY(EssentialPart)
+  EIGEN_STATIC_ASSERT_VECTOR_ONLY(EssentialPart);
   VectorBlock<const Derived, EssentialPart::SizeAtCompileTime> tail(derived(), 1, size()-1);
   
   RealScalar tailSqNorm = size()==1 ? RealScalar(0) : tail.squaredNorm();
