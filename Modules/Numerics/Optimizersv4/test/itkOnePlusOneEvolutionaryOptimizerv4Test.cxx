@@ -112,7 +112,7 @@ public:
   }
 
   void
-  SetParameters(ParametersType & parameters) override
+  SetParameters(const ParametersType & parameters) override
   {
     m_Parameters = parameters;
   }

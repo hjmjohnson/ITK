@@ -199,7 +199,7 @@ public:
 
   /** Set the active transform's parameters by value*/
   virtual void
-  SetParameters(ParametersType & params) = 0;
+  SetParameters(const ParametersType & params) = 0;
 
   /** Get a const reference to the active transform's parameters */
   virtual const ParametersType &

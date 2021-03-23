@@ -138,7 +138,7 @@ public:
   // These Set/Get methods are only needed for this test derivation that
   // isn't using a transform.
   void
-  SetParameters(ParametersType & parameters) override
+  SetParameters(const ParametersType & parameters) override
   {
     m_Parameters = parameters;
   }

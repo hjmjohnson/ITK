@@ -58,7 +58,6 @@ public:
   };
 
   using ParametersType = Superclass::ParametersType;
-  using ParametersPointer = Superclass::ParametersType *;
   using ParametersValueType = Superclass::ParametersValueType;
   using DerivativeType = Superclass::DerivativeType;
   using MeasureType = Superclass::MeasureType;
@@ -83,8 +82,8 @@ public:
       derivative.SetSize(2);
     }
 
-    double x = (*m_Parameters)[0];
-    double y = (*m_Parameters)[1];
+    const double & x{ m_Parameters[0] };
+    const double & y{ m_Parameters[1] };
 
     std::cout << "GetValueAndDerivative( ";
     std::cout << x << ' ';
@@ -107,17 +106,17 @@ public:
   MeasureType
   GetValue() const override
   {
-    double x = (*m_Parameters)[0];
-    double y = (*m_Parameters)[1];
-    double metric = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - 2 * x + 8 * y;
-    std::cout << (*m_Parameters) << " metric " << metric << std::endl;
+    const double & x{ m_Parameters[0] };
+    const double & y{ m_Parameters[1] };
+    double         metric = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - 2 * x + 8 * y;
+    std::cout << m_Parameters << " metric " << metric << std::endl;
     return metric;
   }
 
   void
   UpdateTransformParameters(const DerivativeType & update, ParametersValueType) override
   {
-    (*m_Parameters) += update;
+    m_Parameters += update;
   }
 
   unsigned int
@@ -141,19 +140,19 @@ public:
   /* These Set/Get methods are only needed for this test derivation that
    * isn't using a transform */
   void
-  SetParameters(ParametersType & parameters) override
+  SetParameters(const ParametersType & parameters) override
   {
-    m_Parameters = &parameters;
+    m_Parameters = parameters;
   }
 
   const ParametersType &
   GetParameters() const override
   {
-    return (*m_Parameters);
+    return m_Parameters;
   }
 
 private:
-  ParametersPointer m_Parameters{ nullptr };
+  ParametersType m_Parameters;
 };
 
 /** A second test metric with slightly different optimum */
@@ -198,8 +197,8 @@ public:
       derivative.SetSize(2);
     }
 
-    double x = (*m_Parameters)[0];
-    double y = (*m_Parameters)[1];
+    const double & x{ m_Parameters[0] };
+    const double & y{ m_Parameters[1] };
 
     std::cout << "GetValueAndDerivative( ";
     std::cout << x << ' ';
@@ -222,10 +221,10 @@ public:
   MeasureType
   GetValue() const override
   {
-    double x = (*m_Parameters)[0];
-    double y = (*m_Parameters)[1];
-    double metric = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - x + 4 * y;
-    std::cout << (*m_Parameters) << " metric " << metric << std::endl;
+    const double & x{ m_Parameters[0] };
+    const double & y{ m_Parameters[1] };
+    double         metric = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - x + 4 * y;
+    std::cout << m_Parameters << " metric " << metric << std::endl;
     return metric;
   }
 
@@ -238,7 +237,7 @@ public:
   void
   UpdateTransformParameters(const DerivativeType & update, ParametersValueType) override
   {
-    (*m_Parameters) += update;
+    m_Parameters += update;
   }
 
   unsigned int
@@ -256,19 +255,19 @@ public:
   /* These Set/Get methods are only needed for this test derivation that
    * isn't using a transform */
   void
-  SetParameters(ParametersType & parameters) override
+  SetParameters(const ParametersType & parameters) override
   {
-    m_Parameters = &parameters;
+    m_Parameters = parameters;
   }
 
   const ParametersType &
   GetParameters() const override
   {
-    return (*m_Parameters);
+    return m_Parameters;
   }
 
 private:
-  ParametersPointer m_Parameters{ nullptr };
+  ParametersType m_Parameters;
 };
 
 ///////////////////////////////////////////////////////////

@@ -182,7 +182,7 @@ public:
   NumberOfParametersType
   GetNumberOfLocalParameters() const override;
   void
-  SetParameters(ParametersType & params) override;
+  SetParameters(const ParametersType & params) override;
   const ParametersType &
   GetParameters() const override;
   bool

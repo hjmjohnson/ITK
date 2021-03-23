@@ -149,7 +149,7 @@ template <unsigned int TFixedDimension,
           typename TParametersValueType>
 void
 ObjectToObjectMetric<TFixedDimension, TMovingDimension, TVirtualImage, TParametersValueType>::SetParameters(
-  ParametersType & params)
+  const ParametersType & params)
 {
   this->m_MovingTransform->SetParametersByValue(params);
 }

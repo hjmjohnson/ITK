@@ -84,7 +84,7 @@ public:
   }
 
   void
-  SetParameters(ParametersType &) override
+  SetParameters(const ParametersType &) override
   {}
 
   bool

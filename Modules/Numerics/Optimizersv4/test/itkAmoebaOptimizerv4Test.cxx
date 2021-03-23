@@ -115,7 +115,7 @@ public:
   }
 
   void
-  SetParameters(ParametersType & params) override
+  SetParameters(const ParametersType & params) override
   {
     this->m_Parameters = params;
   }
@@ -229,7 +229,7 @@ public:
   }
 
   void
-  SetParameters(ParametersType & params) override
+  SetParameters(const ParametersType & params) override
   {
     this->m_Parameters = params;
   }
