@@ -270,6 +270,26 @@ set(ITK_WRAP_SWIGINTERFACE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE INTERN
 set(WRAPPER_MASTER_INDEX_OUTPUT_DIR "${ITK_DIR}/Wrapping/Typedefs" CACHE INTERNAL "typedefs dir")
 set(IGENERATOR  "${CMAKE_CURRENT_SOURCE_DIR}/igenerator.py" CACHE INTERNAL "igenerator.py path" FORCE)
 
+# Create/Clear .pyi file
+file(WRITE "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs/__init__.pyi"
+"# Python Header Interface File
+# imports as they appear in __init__.py
+from itkConfig import ITK_GLOBAL_VERSION_STRING as __version__
+from itk.support.extras import *
+from itk.support.init_helpers import *
+from itk.support.types import itkCType, F, D, UC, US, UI, UL, SL, LD, ULL, SC, SS, SI, SLL, B
+\n\
+# additional imports
+from itk.support.template_class import itkTemplate as _itkTemplate
+from itk.BaseClasses import * # Contains pyi files for base classes.
+from typing import Union\n
+
+import itk.methods\n\n")
+
+# Create/Clear .pyi file
+file(WRITE "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs/methods.pyi"
+"# Python Method Interface File\n\n")
+
 macro(itk_wrap_module_swig_interface library_name)
   # store the content of the mdx file
   set(SWIG_INTERFACE_MDX_CONTENT )
@@ -374,6 +394,7 @@ macro(itk_end_wrap_module_swig_interface)
         --interface-output-dir "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}"
         --library-output-dir "${WRAPPER_LIBRARY_OUTPUT_DIR}"
         --submodule-order "${WRAPPER_SUBMODULE_ORDER}"
+        --pyi_dir "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs"
         DEPENDS ${ITK_WRAP_DOC_DOCSTRING_FILES} ${xml_files} ${IGENERATOR} ${typedef_in_files}
         WORKING_DIRECTORY / # Arguments to WORKING_DIRECTORY may use generator expressions
       VERBATIM

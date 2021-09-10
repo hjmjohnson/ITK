@@ -1,13 +1,40 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import copy
 import sys
 import os
 import re
 from argparse import ArgumentParser
 from io import StringIO
 from pathlib import Path
+from keyword import iskeyword
 
+class ITKClass():
+    def __init__(self, class_name):
+        # A dict of sets containing the .pyi python equivalent for all class methods and params
+        self.python_method_headers = {}
+        self.has_new_method = False
+        self.number_of_typedefs = 0
+        self.parent_class = ""
+        self.is_abstract = False
+        self.class_name = class_name
+
+def remove_class_type(itkclass: str):
+    for m in re.finditer("[A-Z_0-9]+$", itkclass):
+        # Symbol IO and v4 are never used as types (there doesn't appear to be a class that ends and v and has type 4)
+        if "IO" in itkclass:
+            return itkclass[:itkclass.find("IO")+2]
+        elif "v4" in itkclass:
+            return itkclass[:itkclass.find("v4")+2]
+        elif itkclass.startswith("Array2D"):
+            return "Array2D"
+        elif itkclass.startswith("DiffusionTensor3D"):
+            return "DiffusionTensor3D"
+        elif itkclass.startswith("Point1D"):
+            return "Point1D"
+        else:
+            return itkclass[:m.start(0)]
+    return itkclass
 
 def getType(v):
     if hasattr(v, "decl_type"):
@@ -85,6 +112,17 @@ class SwigInputGenerator(object):
     forceSnakeCase = ["ImageDuplicator"]
 
     notWrappedRegExp = re.compile("|".join(["^" + s + "$" for s in notWrapped]))
+
+    notWrappedMethods = [
+        "IsNull",
+        "IsNotNull",
+        "GetPointer",
+        "Swap",
+        "Register",
+        "UnRegister",
+        "CreateAnother",
+        "PrintSelf"
+    ]
 
     # stdcomplex code
 
@@ -206,6 +244,7 @@ class SwigInputGenerator(object):
         "long double": "float",
         "char": "int",
         "unsigned char": "int",
+        "signed char": "int",
         "short": "int",
         "unsigned short": "int",
         "int": "int",
@@ -223,7 +262,13 @@ class SwigInputGenerator(object):
         self.options = options
 
         self.outputFile = StringIO()
+        self.outputPYIHeaderFile = StringIO()
+        self.outputPYIMethodFile = StringIO()
         self.applyFileNames = []
+
+        # A dict of sets containing the .pyi python equivalent for all class methods and params
+        self.classes = {}
+        self.current_class = ""
 
         # a dict to let us use the alias name instead of the full c++ name. Without
         # that, in many cases, swig don't know that's the same type
@@ -539,6 +584,8 @@ class SwigInputGenerator(object):
                     and member.name == "New"
                     and not typedef.name == "itkLightObject"
                 ):
+                    if self.current_class is not None:
+                        self.classes[self.current_class].has_new_method = True
                     if typedef.name == "itkPyCommand":
                         self.outputFile.write(
                             self.new_override_pycommand.format(class_name=typedef.name)
@@ -585,7 +632,7 @@ class SwigInputGenerator(object):
                     elif isinstance(member, decls.constructor_t):
                         self.generate_constructor(typedef, member, indent, w)
                     elif isinstance(member, decls.member_operator_t):
-                        self.generate_method(typedef, member, indent, w)
+                        self.generate_method(typedef, member, indent, w, is_operator=True)
                     elif isinstance(member, decls.destructor_t):
                         self.generate_destructor(typedef, member, indent, w)
                     elif isinstance(member, decls.enumeration_t):
@@ -646,6 +693,130 @@ class SwigInputGenerator(object):
             # finally, close the class
             self.outputFile.write("  " * indent)
             self.outputFile.write("};\n\n\n")
+
+    def convert_cpp_to_python_value(self, cpp_value: str):
+        if cpp_value.isnumeric():
+            return cpp_value
+        elif "." in cpp_value and cpp_value.replace(".", "", 1).isnumeric():
+            if "." == cpp_value[-1]:
+                return cpp_value[:-1]
+            else:
+                return cpp_value
+        elif cpp_value == "false" or cpp_value == "true":
+            return cpp_value.capitalize()
+        else:
+            return "..."
+
+    def convert_cpp_to_python_type(self, arg_type):
+        """Convert C++ types into their Python equivalent.
+            None is returned if we do not know the conversion"""
+        decls = pygccxml.declarations
+        arg_type = decls.remove_alias(arg_type)
+        arg_type = decls.remove_reference(arg_type)
+        arg_type = decls.remove_cv(arg_type)
+        arg_type_str = str(arg_type)
+
+        if decls.is_bool(arg_type):
+            return "bool"
+        elif decls.is_integral(arg_type):
+            return "int"
+        elif decls.is_floating_point(arg_type):
+            return "float"
+        elif decls.is_std_string(arg_type):
+            return "str"
+        elif decls.is_array(arg_type):
+            item_type = decls.array_item_type(arg_type)
+            python_type = SwigInputGenerator.cpp_to_python(
+                str(item_type)
+            )
+            if python_type is not None:
+                return f"Sequence[{python_type}]"
+        # TODO: FIX THIS
+        elif arg_type_str.endswith("::Iterator"):
+            return None
+        # We are not dealing with pointers yet, just return
+        elif decls.is_pointer(arg_type):
+            return None
+        elif (
+                arg_type_str.startswith("itk::FixedArray")
+                or arg_type_str.startswith("itk::Vector<")
+                or arg_type_str.startswith("itk::CovariantVector<")
+                or arg_type_str.startswith("itk::Point<")
+                or arg_type_str.startswith("itk::Array<")
+        ):
+            item_type = decls.templates.split(arg_type_str)[1][0]
+            python_type = SwigInputGenerator.cpp_to_python(item_type)
+            if python_type is not None:
+                return f"Sequence[{python_type}]"
+        elif arg_type_str.startswith("itk::VectorContainer<"):
+            item_type = decls.templates.split(arg_type_str)[1][1]
+            python_type = SwigInputGenerator.cpp_to_python(item_type)
+            if python_type is not None:
+                return f"Sequence[{python_type}]"
+            elif item_type.startswith("itk::Offset<"):
+                return f"Sequence[Sequence[int]]"
+        elif arg_type_str.startswith("std::vector<"):
+            item_type = decls.templates.split(arg_type_str)[1][0]
+            python_type = SwigInputGenerator.cpp_to_python(item_type)
+            if python_type is not None:
+                return f"Sequence[{python_type}]"
+        elif (
+                arg_type_str.startswith("itk::Size<")
+                or arg_type_str.startswith("itk::Offset<")
+                or arg_type_str.startswith("itk::Index<")
+        ):
+            return "Sequence[int]"
+        elif arg_type_str.startswith("itk::ImageRegion<"):
+            return "ImageRegion"
+        elif arg_type_str.startswith("itk::InterpolateImageFunction<"):
+            return "InterpolateImageFunction"
+        elif arg_type_str.startswith("itk::ExtrapolateImageFunction<"):
+            return "ExtrapolateImageFunction"
+        elif arg_type_str.startswith("itk::Image<"):
+            return "Image"
+        elif arg_type_str.startswith("itk::VectorImage<"):
+            return "VectorImage"
+        elif arg_type_str.startswith("itk::ImageBase<"):
+            return "ImageBase"
+        elif arg_type_str.startswith("itk::PointSet<"):
+            return "PointSet"
+        elif arg_type_str.startswith("itk::Mesh<"):
+            return "Mesh"
+        elif arg_type_str.startswith("itk::QuadEdgeMesh<"):
+            return "QuadEdgeMesh"
+        elif arg_type_str.startswith("itk::Transform<"):
+            return "Transform"
+        elif arg_type_str.startswith("itk::ImageBoundaryCondition<"):
+            return "ImageBoundaryCondition"
+        elif arg_type_str.startswith("itk::FlatStructuringElement<"):
+            return "FlatStructuringElement"
+        elif arg_type_str.startswith("itk::RGBPixel<"):
+            return "Tuple[int, int, int]"
+        elif arg_type_str.startswith("itk::RGBAPixel<"):
+            return "Tuple[int, int, int, int]"
+        elif arg_type_str == "void":
+            return "None"
+        elif arg_type_str.startswith("vnl_"):
+            # print(arg_type_str.split("<")[0])
+            return arg_type_str.split("<")[0]
+        else:
+            # print(arg_type_str)
+            if arg_type_str.startswith("itk::") and not self.notWrappedRegExp.match(arg_type_str):
+                #  print(arg_type_str)
+                arg_type_str = arg_type_str[5:]
+                if "<" in arg_type_str:
+                    arg_type_str = arg_type_str[:arg_type_str.find("<")]
+                # print(arg_type_str)
+                # return arg_type_str
+                # no good, allows SmartPointer and others which aren't wrapped through
+                # also lets subnamespace params through but that could be fixed by
+                # filtering out params that still have '::' after "::ikt" is removed
+                pass
+            else:
+                pass # print(arg_type_str)
+
+            return None # str(arg_type)
+
 
     def generate_process_object_snake_case_functions(self, typedefs):
         self.info("Generating snake case functions")
@@ -892,7 +1063,7 @@ def {snakeCase}_init_docstring():
             "    enum class %s: uint8_t { %s };\n\n" % (enum.name, ", ".join(content))
         )
 
-    def generate_method(self, typedef, method, indent, w):
+    def generate_method(self, typedef, method, indent, w, is_operator=False):
         self.info(f"Generating interface for method  '{typedef.name}::{method.name}'.")
         # avoid the apply method for the class vnl_c_vector: the signature is
         # quite strange and currently confuse swig :-/
@@ -922,10 +1093,14 @@ def {snakeCase}_init_docstring():
             )
             return
 
+        method_hints = []
+
         # iterate over the arguments
         args = []
-        for arg in method.arguments:
-            s = f"{self.get_alias(self.getDeclarationString(arg), w)} {arg.name}"
+        for argIndex in range(len(method.arguments)):
+            arg = method.arguments[argIndex]
+            arg_type = self.get_alias(self.getDeclarationString(arg), w)
+            s = f"{arg_type} {arg.name}"
             if "unknown" in s:
                 continue
             if "(" in s:
@@ -936,6 +1111,22 @@ def {snakeCase}_init_docstring():
                     w,
                 )
                 return
+
+            if self.current_class is not None and not is_operator and method.name not in self.notWrappedMethods:
+                python_arg_type = self.convert_cpp_to_python_type(method.argument_types[argIndex])
+                name = arg.name
+                if iskeyword(name):
+                    name = "_" + name    # above names can not be used as a variable name in python
+
+                # append the default value if it exists
+                if arg.default_value:
+                    # filter our invalid default values
+                    # eventually it would be best to convert these defaults
+                    # but for now unknown defaults can just be replaced with ...
+                    method_hints.append((name, python_arg_type, self.convert_cpp_to_python_value(arg.default_value)))
+                else:
+                    method_hints.append((name, python_arg_type, None))
+
             # append the default value if it exists
             if arg.default_value:
                 s += f" = {arg.default_value}"
@@ -955,16 +1146,30 @@ def {snakeCase}_init_docstring():
             const += " = 0"
 
         self.outputFile.write("  " * indent)
-        self.outputFile.write(
-            "    %s%s %s(%s)%s;\n"
-            % (
-                static,
-                self.get_alias(self.getDeclarationString(method.return_type), w),
-                method.name,
-                ", ".join(args),
-                const,
-            )
-        )
+
+        method_definition = "    %s%s %s(%s)%s;\n" % (
+                            static,
+                            self.get_alias(self.getDeclarationString(method.return_type), w),
+                            method.name,
+                            ", ".join(args),
+                            const,
+                        )
+        self.outputFile.write(method_definition)
+
+        if self.current_class is not None and not is_operator and method.name not in self.notWrappedMethods:
+            # declare return type and save header changes to the class
+            # can't get the same arg_type object for the return type and thus cannot use the convert method...
+            return_type = self.convert_cpp_to_python_type(method.return_type)
+
+            # last element in methods arg list will be the return type
+            # the third tuple element that is normally reserved for the args default value will contain a boolean
+            # that indicates if the method is static for this special final value.
+            method_hints.append((None, return_type, method.has_static))
+
+            if method.name not in self.classes[self.current_class].python_method_headers:
+                self.classes[self.current_class].python_method_headers[method.name] = [method_hints]
+            elif method_hints not in self.classes[self.current_class].python_method_headers[method.name]:
+                self.classes[self.current_class].python_method_headers[method.name].append(method_hints)
 
         # Check the method arguments for std::string passed by reference.
         # In this case, save the name of the argument in the applyFileNames list
@@ -1187,8 +1392,53 @@ if _version_info < (3, 7, 0):
 
         # now really generate the swig interface
         for typedef in typedefs:
+            # Skip wrapping for the following
+            if (typedef.name.endswith("_Pointer") or
+                    typedef.name.endswith("Factory_Pointer") or
+                    typedef.name.endswith("Factory") or
+                    typedef.name.endswith("Enums") or
+                    typedef.name.endswith("_Superclass")) and typedef.name != self.current_class:
+                self.current_class = None
+
+            else:
+                self.current_class = remove_class_type(typedef.name)
+
+                if self.current_class not in self.classes:
+                    self.classes[self.current_class] = ITKClass(self.current_class)
+
+                self.classes[self.current_class].number_of_typedefs += 1
+
             # begin a new class
             self.generate_class(typedef)
+
+            if self.current_class is not None and self.classes[self.current_class].parent_class == "":
+                for base in getType(typedef).bases:
+                    base = base.related_class.decl_string
+                    if base.startswith("::"):
+                        base = base[2:]
+                    if "itk::" in base:
+                        base = base[base.find("itk::")+len("itk::"):]
+
+                    if "<" in base:
+                        base = base[:base.find("<")]
+
+                    # at this point if a : is in base it is std or some other class we have no refrence to
+                    # just ignore it
+                    if ":" in base:
+                        continue
+
+                    if self.classes[self.current_class].parent_class == "":
+                        self.classes[self.current_class].parent_class = base
+
+                    else:
+                        self.classes[self.current_class].parent_class += ", " + base
+
+            # make Python class abstract if appropriate
+            if self.current_class is not None and getType(typedef).is_abstract and not self.classes[self.current_class].is_abstract:
+                self.classes[self.current_class].is_abstract = True
+
+        for itkclass in self.classes.keys():
+            self.generate_pyi_file(self.classes[itkclass])
 
         self.generate_process_object_snake_case_functions(typedefs)
 
@@ -1237,6 +1487,143 @@ if _version_info < (3, 7, 0):
             self.info(f"Writing {interfaceFile}.")
             with open(interfaceFile, "w") as f:
                 f.write(content)
+
+    # Many of the methods that are produced by this don't actually exist in the Python version of ITK
+    # How do I detect witch methods are a part of Python ITK and which aren't?
+    # While there is some minor cpp to python conversion code, most cpp types fail to convert
+    def generate_pyi_file(self, itkclass: ITKClass):
+
+        class_name = itkclass.class_name
+        if "itk" == class_name[:3]:
+            class_name = class_name[3:]
+
+        if not itkclass.is_abstract:
+            self.outputPYIHeaderFile.write(self.generate_class_pyi_header(class_name,
+                                                                          itkclass.has_new_method,
+                                                                          itkclass.number_of_typedefs))
+        self.outputPYIMethodFile.write(f"class {class_name}({itkclass.parent_class}):\n")
+        if len(itkclass.python_method_headers.keys()) == 0:
+            self.outputPYIMethodFile.write(f"\t...\n\n")
+
+        for method in itkclass.python_method_headers.keys():
+            is_overloaded = len(itkclass.python_method_headers[method]) > 1
+            for method_variation in itkclass.python_method_headers[method]:
+                method_name = method
+                attributes = method_variation
+                params = ""
+                return_type = attributes[len(attributes) - 1][1]
+
+                is_a_static_method: bool = attributes[len(attributes) - 1][2]
+
+                # remove special case containing the return type from the end of the attributes list
+                attributes = attributes[:-1]
+                if len(attributes) > 0:
+                    params += ", "
+
+                for attribute in attributes:
+                    # name of the argument
+                    params += attribute[0]
+
+                    # type of the argument
+                    if attribute[1] is None:
+                        pass  # don't add a typehint in this case
+                    else:
+                        params += f": {attribute[1]}"
+
+                    # default value of the argument (if any)
+                    if attribute[2] is not None:
+                        params += f" = {attribute[2]}, "
+                    else:
+                        params += ", "
+
+                params = params[:-2]  # remove extra comma
+
+                self_str = "self"
+                if is_a_static_method:
+                    self.outputPYIMethodFile.write("\t@staticmethod\n")
+                    self_str = ""
+                    params = params[2:]  # remove comma from beginning
+
+                if is_overloaded:
+                    self.outputPYIMethodFile.write("\t@overload\n")
+
+                self.outputPYIMethodFile.write(f"\tdef {method_name}({self_str}{params})")
+                if return_type is not None:  # If Python return type is unknown, function may or may not return
+                    self.outputPYIMethodFile.write(f" -> {return_type}")
+                self.outputPYIMethodFile.write(f":\n"
+                                               f"\t\t\"\"\"\"\"\"\n"
+                                               f"\t\t...\n\n")
+
+        with open(self.options.pyi_dir+"/__init__.pyi", "a+") as pyiFile:
+            # Append class at the end of file
+            pyiFile.write(self.outputPYIHeaderFile.getvalue())
+        with open(self.options.pyi_dir+"/methods.pyi", "a+") as pyiFile:
+            # Append class at the end of file
+            pyiFile.write(self.outputPYIMethodFile.getvalue())
+
+    def generate_class_pyi_header(self, class_name: str, has_new_method: bool, number_of_typedefs: int):
+        """Return a string containing the definition of a pyi class header. Supports both typed and non-typed classes."""
+        if number_of_typedefs == 1:
+            class_header = (
+                    f"class _{class_name}Template(_itkTemplate):\n"
+                    f'    """Interface for instantiating itk::{class_name}'
+                    + has_new_method
+                    * f"\n        Create a new {class_name} Object:\n"
+                      f"            'itk.{class_name}.New()"
+                    + f"\"\"\"\n\n" + has_new_method *
+                    f"    @staticmethod\n" +
+                    f"    def {'New()' if has_new_method else '__new__()'} -> methods.{class_name}:\n"
+                    f'        """Instantiate itk::{class_name}"""\n'
+                    f"        ...\n"
+                    + (not has_new_method)
+                    * f"    def __call__(self) -> methods.{class_name}:\n"
+                      f'        """Instantiate itk::{class_name}"""\n'
+                      f"        ...\n" +
+                    f"\n"
+                    f"itk.{class_name} = _{class_name}Template"
+                    f"\n"
+                    f"\n"
+            )
+            # return f"class {class_name}({parent}):\n"
+            # not positive that this is the approach for all classes that are not typed...
+            return class_header  # f"from itk.methods import {class_name} as {class_name}\n\n"
+
+        # gather generic type names as stated in Doxygen documentation
+        types = "INSERT_TYPE_NAMES_HERE"
+
+        class_header = (
+                f"class _{class_name}TemplateGetter():\n"
+                f"    def __getitem__(self, parameters) -> _{class_name}Template:\n"
+                f'        """Specify class type with:\n'
+                f"            \t[{types}]\n"
+                f"            :return: {class_name}Template\n"
+                f'            """\n'
+                f"        ...\n"
+                f"\n"
+                f"\n"
+                f"class _{class_name}Template(_itkTemplate, metaclass=_{class_name}TemplateGetter):\n"
+                f'    """Interface for instantiating itk::{class_name}< {types} >\n'
+                + has_new_method
+                * f"        Create a new {class_name} Object (of default type):\n"
+                  f"            'itk.{class_name}.New()\n"
+                + f"        Supports type specification through dictionary access:\n"
+                  f"            'itk.{class_name}[{types}]{'.New()' if has_new_method else '()'}\"\"\"\n"
+                  f"\n" + has_new_method *
+                  f"    @staticmethod\n" +
+                  f"    def {'New()' if has_new_method else '__new__()'} -> methods.{class_name}:\n"
+                  f'        """Instantiate itk::{class_name}< {types} >"""\n'
+                  f"        ...\n"
+                + (not has_new_method)
+                * f"    def __call__(self) -> methods.{class_name}:\n"
+                  f'        """Instantiate itk::{class_name}< INSERT_TYPE_NAMES_HERE >"""\n'
+                  f"        ...\n" +
+                  f"\n"
+                  f"itk.{class_name} = _{class_name}Template"
+                  f"\n"
+                  f"\n"
+                  #f"class {class_name}({parent}):\n"
+        )
+        return class_header
 
 
 if __name__ == "__main__":
@@ -1350,6 +1737,14 @@ if __name__ == "__main__":
         dest="snake_case_file",
         help="The configuration file to be appended to if snake_case_functions are found",
     )
+
+    argParser.add_argument(
+        "--pyi_dir",
+        action="store",
+        dest="pyi_dir",
+        help="The directory for .pyi files to be generated",
+    )
+
     options = argParser.parse_args()
 
     sys.path.insert(1, options.pygccxml_path)
