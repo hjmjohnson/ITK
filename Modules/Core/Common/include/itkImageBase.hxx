@@ -213,9 +213,12 @@ template <unsigned int VImageDimension>
 void
 ImageBase<VImageDimension>::UpdateOutputInformation()
 {
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
   if (this->GetSource())
   {
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
     this->GetSource()->UpdateOutputInformation();
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
   }
   else
   {
@@ -226,20 +229,28 @@ ImageBase<VImageDimension>::UpdateOutputInformation()
     // filters to overwrite their inputs safely (taking ownership of
     // the pixel buffers), yet respond to subsequent requests for
     // information.
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
     if (this->GetBufferedRegion().GetNumberOfPixels() > 0)
     {
+      std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
       this->SetLargestPossibleRegion(this->GetBufferedRegion());
+      std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
     }
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
   }
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
   // Now we should know what our largest possible region is. If our
   // requested region was not set yet, (or has been set to something
   // invalid - with no data in it ) then set it to the largest possible
   // region.
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
   if (this->GetRequestedRegion().GetNumberOfPixels() == 0)
   {
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
     this->SetRequestedRegionToLargestPossibleRegion();
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
   }
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << this->GetDirection() << std::endl;
 }
 
 

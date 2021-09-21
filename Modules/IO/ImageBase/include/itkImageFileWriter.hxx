@@ -79,23 +79,25 @@ template <typename TInputImage>
 void
 ImageFileWriter<TInputImage>::Write()
 {
+  std::cerr << __FILE__ << " " << __LINE__ << " \n"
+            << "Writing an image file" << std::endl;
   const InputImageType * input = this->GetInput();
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   itkDebugMacro(<< "Writing an image file");
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   // Make sure input is available
   if (input == nullptr)
   {
     itkExceptionMacro(<< "No input to writer!");
   }
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   // Make sure that we can write the file given the name
   //
   if (m_FileName.empty())
   {
     itkExceptionMacro(<< "No filename was specified");
   }
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   if (m_ImageIO.IsNull() || (m_FactorySpecifiedImageIO && !m_ImageIO->CanWriteFile(m_FileName.c_str())))
   {
     // try creating via factory
@@ -111,7 +113,7 @@ ImageFileWriter<TInputImage>::Write()
     m_ImageIO = ImageIOFactory::CreateImageIO(m_FileName.c_str(), ImageIOFactory::IOFileModeEnum::WriteMode);
     m_FactorySpecifiedImageIO = true;
   }
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   if (m_ImageIO.IsNull())
   {
     ImageFileWriterException        e(__FILE__, __LINE__);
@@ -141,12 +143,15 @@ ImageFileWriter<TInputImage>::Write()
 
   // NOTE: this const_cast<> is due to the lack of const-correctness
   // of the ProcessObject.
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   auto * nonConstInput = const_cast<InputImageType *>(input);
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   // Update the meta data if needed
   if (!m_UserSpecifiedIORegion)
   {
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
     nonConstInput->UpdateOutputInformation();
+    std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   }
   else
   {
@@ -159,17 +164,20 @@ ImageFileWriter<TInputImage>::Write()
     // match the file.
     if (nonConstInput->GetSource())
     {
+      std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
       nonConstInput->UpdateOutputInformation();
+      std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
     }
   }
 
-
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   // Setup the ImageIO
   //
   m_ImageIO->SetNumberOfDimensions(TInputImage::ImageDimension);
   InputImageRegionType                        largestRegion = input->GetLargestPossibleRegion();
   const typename TInputImage::SpacingType &   spacing = input->GetSpacing();
   const typename TInputImage::DirectionType & direction = input->GetDirection();
+  std::cerr << __FILE__ << " " << __LINE__ << " \n" << input->GetDirection() << std::endl;
   // BUG 8436: Wrong origin when writing a file with non-zero index
   // origin = input->GetOrigin();
   const typename TInputImage::IndexType & startIndex = largestRegion.GetIndex();
@@ -320,6 +328,8 @@ ImageFileWriter<TInputImage>::Write()
 
   // Release upstream data if requested
   this->ReleaseInputs();
+  std::cerr << __FILE__ << " " << __LINE__ << " \n"
+            << "Writing an image file" << std::endl;
 }
 
 //---------------------------------------------------------
