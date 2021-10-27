@@ -71,6 +71,8 @@ set(ITK_USE_FILE "${ITK_CONFIG_CMAKE_DIR}/UseITK.cmake")
 # to remote module examples which are set up as independent projects that can be copied
 # outside of their original project and used without any modification.
 configure_file(CMake/ITKInternalConfig.cmake ${ITK_BINARY_DIR}/CMakeTmp/ITKConfig.cmake COPYONLY)
+# Copy presets to build directory so they can be used more easily for `cmake --build` & `ctest` steps
+configure_file(CMakePresets.json ${ITK_BINARY_DIR}/CMakePresets.json COPYONLY)
 
 
 include(CMakeDependentOption)

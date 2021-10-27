@@ -1,0 +1,165 @@
+{
+  "version": 2,
+  "cmakeMinimumRequired": {
+    "major": 2,
+    "minor": 8,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "common",
+      "displayName": "Common Build",
+      "description": "Base Build for common dashboard requirements. Must be inherited.",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_GENERATOR": {
+          "type": "STRING",
+          "value": "Ninja"
+        },
+        "CTEST_USE_LAUNCHERS": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "DART_TESTING_TIMEOUT": {
+          "type": "STRING",
+          "value": "1500"
+        },
+        "ExternalData_OBJECT_STORES": {
+          "type": "STRING",
+          "value": "$env{ExternalData_OBJECT_STORES}"
+        },
+        "MAXIMUM_NUMBER_OF_HEADERS": {
+          "type": "STRING",
+          "value": "35"
+        },
+        "ITK_USE_EIGEN_MPL2_ONLY": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "MinSizeRel"
+        }
+      }
+    },
+    {
+      "name": "circleci",
+      "displayName": "CircleCI Environment",
+      "description": "This preset exactly mimics the CMake environment used for CircleCI build tests.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}-build-circleci",
+      "inherits": "common",
+      "cacheVariables": {
+        "BUILD_DOCUMENTATION": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "BUILD_EXAMPLES": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "BUILD_TESTING": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "Module_ITKReview": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "ITK_USE_KWSTYLE": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "ITK_BUILD_DEFAULT_MODULES": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "ITK_COMPUTER_MEMORY_SIZE": {
+          "type": "STRING",
+          "value": "3.5"
+        }
+      }
+    },
+
+    {
+      "name": "circleci-distcc",
+      "displayName": "CircleCI Environment",
+      "description": "This preset exactly mimics the CMake environment used for CircleCI build tests with DISTCC.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}-build-circleci",
+      "inherits": "circleci",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER_LAUNCHER": {
+          "type": "STRING",
+          "value": "distcc"
+        },
+        "CMAKE_C_COMPILER_LAUNCHER": {
+          "type": "STRING",
+          "value": "distcc"
+        }
+      }
+    },
+
+    {
+      "name": "azure",
+      "displayName": "Azure Environment",
+      "description": "This preset exactly mimics the CMake environment used for Azure build tests.",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}-build-azure",
+      "inherits": "common",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "BUILD_EXAMPLES": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "ITK_WRAP_PYTHON": {
+          "type": "BOOL",
+          "value": "OFF"
+        }
+      }
+    }
+
+  ],
+  "buildPresets": [
+    {
+      "name": "circleci",
+      "jobs": 3,
+      "configurePreset": "circleci"
+    },
+    {
+      "name": "azure",
+      "jobs": 3,
+      "configurePreset": "azure"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "circleci",
+      "configurePreset": "circleci",
+      "configuration": "MinSizeRel",
+      "output": { "outputOnFailure": true},
+      "execution": {"jobs": 3},
+      "environment": {
+        "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS": "2"
+      }
+    },
+    {
+      "name": "azure",
+      "configurePreset": "azure",
+      "configuration": "MinSizeRel",
+      "output": {
+        "verbosity": "extra"
+      },
+      "execution": {"jobs": 4},
+      "environment": { }
+    }
+  ]
+}
