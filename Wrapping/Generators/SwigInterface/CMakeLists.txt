@@ -277,7 +277,22 @@ file(WRITE "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs/__init__.pyi"
 from itkConfig import ITK_GLOBAL_VERSION_STRING as __version__
 from support.extras import *
 from support.init_helpers import *
-from support.types import itkCType, F, D, UC, US, UI, UL, SL, LD, ULL, SC, SS, SI, SLL, B
+from support.types import (
+    itkCType as itkCType,
+    F as F,
+    D as D,
+    UC as UC,
+    US as US,
+    UI as UI,
+    UL as UL,
+    SL as SL,
+    LD as LD,
+    ULL as ULL,
+    SC as SC,
+    SS as SS,
+    SI as SI,
+    SLL as SLL,
+)
 \n\
 # additional imports
 from support.template_class import itkTemplate as _itkTemplate
