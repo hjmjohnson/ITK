@@ -504,28 +504,6 @@ class SwigInputGenerator(object):
         "InternalClone",
     ]
 
-    hintedClasses = [
-        ".*Image.*",
-        ".*Object.*",
-        "Region",
-        "NeighborhoodOperator",
-        "Neighborhood",
-        "CostFunctionTemplate",
-        "FunctionBase",
-        "PathSource",
-        "MeshSource",
-        "UnaryFrequencyDomainFilter",
-        "VideoSource",
-        "LabelMapFilter",
-        "InPlaceLabelMapFilter",
-        "FastMarchingBase",
-        "MeshToMeshFilter",
-        "SingleValuedCostFunction",
-        "SingleValuedCostFunctionv4Template",
-    ]
-
-    hintedClassesRegExp = re.compile("|".join(["^" + s + "$" for s in hintedClasses]))
-
     # stdcomplex code
 
     stdcomplex_headers = {
@@ -1646,7 +1624,6 @@ if _version_info < (3, 7, 0):
                         "Factory",
                     )
                 )
-                or not self.hintedClassesRegExp.match(self.current_class)
                 or self.current_class in ["stdcomplex", "stdnumeric_limits"]
             ):
                 self.current_class = None
