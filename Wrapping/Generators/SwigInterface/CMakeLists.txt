@@ -278,21 +278,38 @@ from itkConfig import ITK_GLOBAL_VERSION_STRING as __version__
 from support.extras import *
 from support.init_helpers import *
 from support.types import (
-    itkCType as itkCType,
-    F as F,
-    D as D,
-    UC as UC,
-    US as US,
-    UI as UI,
-    UL as UL,
-    SL as SL,
-    LD as LD,
-    ULL as ULL,
-    SC as SC,
-    SS as SS,
-    SI as SI,
-    SLL as SLL,
+    itkCType as _itkCType,
+    F as _F,
+    D as _D,
+    LD as _LD,
+    UC as _UC,
+    SC as _SC,
+    US as _US,
+    SS as _SS,
+    UI as _UI,
+    SI as _SI,
+    UL as _UL,
+    SL as _SL,
+    ULL as _ULL,
+    SLL as _SLL,
 )
+
+# Need to define these explicitly to elevate them as part of the export
+itkCType = _itkCType
+F: _itkCType = _F
+D: _itkCType = _D
+LD: _itkCType = _LD
+UC: _itkCType = _UC
+SC: _itkCType = _SC
+US: _itkCType = _US
+SS: _itkCType = _SS
+UI: _itkCType = _UI
+SI: _itkCType = _SI
+UL: _itkCType = _UL
+SL: _itkCType = _SL
+ULL: _itkCType = _ULL
+SLL: _itkCType = _SLL
+
 \n\
 # additional imports
 from support.template_class import itkTemplate as _itkTemplate
