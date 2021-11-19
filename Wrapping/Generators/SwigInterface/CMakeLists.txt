@@ -339,6 +339,9 @@ macro(itk_end_wrap_module_swig_interface)
   set(mdx_file "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${WRAPPER_LIBRARY_NAME}.mdx")
   set(module_interface_file "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${WRAPPER_LIBRARY_NAME}.i")
   set(module_interface_ext_file "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${WRAPPER_LIBRARY_NAME}_ext.i")
+  set(ITK_STUB_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs")
+
+  set(ITK_STUB_PYI_FILE "${ITK_STUB_DIR}/${WRAPPER_LIBRARY_NAME}.pyi")
 
   foreach(module ${SWIG_INTERFACE_MODULES})
     # create the swig interface
@@ -385,10 +388,9 @@ macro(itk_end_wrap_module_swig_interface)
       else()
         unset(snake_case_config_file)
       endif()
-    set(ITK_STUB_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs")
-    set(ITK_STUB_PYI_FILE "${ITK_STUB_DIR}/__init__.pyi")
+
     add_custom_command(
-      OUTPUT ${i_files} ${typedef_files} ${idx_files} ${snake_case_config_file}
+      OUTPUT ${i_files} ${typedef_files} ${idx_files} ${snake_case_config_file} ${ITK_STUB_PYI_FILE}
       COMMAND ${Python3_EXECUTABLE} ${IGENERATOR}
         ${mdx_opts}
         ${swig_libs}

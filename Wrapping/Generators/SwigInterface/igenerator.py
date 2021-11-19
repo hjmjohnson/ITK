@@ -190,7 +190,7 @@ def generate_class_pyi_def(
 
     if itk_class.is_enum:
         outputPYIHeaderFile.write(
-            f"itk.{class_name} =  methods.{class_name}Proxy\n\n\n"
+            f"itk.{class_name} =  _{class_name}Proxy\n\n\n"
         )
     elif not itk_class.is_abstract:
         outputPYIHeaderFile.write(
@@ -200,7 +200,7 @@ def generate_class_pyi_def(
         )
 
     outputPYIMethodFile.write(
-        f"class {class_name}Proxy({itk_class.parent_class}):\n"  # if
+        f"class _{class_name}Proxy({itk_class.parent_class}):\n"  # if
     )
 
     if itk_class.is_enum and len(itk_class.enums) > 0:
@@ -295,7 +295,7 @@ def generate_class_pyi_header(class_name: str, has_new_method: bool, typed: bool
                 f"            'itk.{class_name}.New()"
                 f'"""\n\n'
                 f"    @staticmethod\n"
-                f"    def New() -> methods.{class_name}Proxy:\n"
+                f"    def New() -> _{class_name}Proxy:\n"
                 f'        """Instantiate itk::{class_name}"""\n'
                 f"        ...\n"
                 f"\n"
@@ -308,10 +308,10 @@ def generate_class_pyi_header(class_name: str, has_new_method: bool, typed: bool
                 f"class _{class_name}Template(_itkTemplate):\n"
                 f'    """Interface for instantiating itk::{class_name}'
                 f'"""\n\n'
-                f"    def __new__(cls, *args: Any) -> methods.{class_name}Proxy:\n"
+                f"    def __new__(cls, *args: Any) -> _{class_name}Proxy:\n"
                 f'        """Instantiate itk::{class_name}"""\n'
                 f"        ...\n\n"
-                f"    def __call__(self, *args: Any) -> methods.{class_name}Proxy:\n"
+                f"    def __call__(self, *args: Any) -> _{class_name}Proxy:\n"
                 f'        """Instantiate itk::{class_name}"""\n'
                 f"        ...\n"
                 f"\n"
@@ -351,7 +351,7 @@ def generate_class_pyi_header(class_name: str, has_new_method: bool, typed: bool
             f'            \'itk.{class_name}[{types}].New()"""\n'
             f"\n"
             f"    @staticmethod\n"
-            f"    def New() -> methods.{class_name}Proxy:\n"
+            f"    def New() -> _{class_name}Proxy:\n"
             f'        """Instantiate itk::{class_name}< {types} >"""\n'
             f"        ...\n"
             f"\n"
@@ -375,10 +375,10 @@ def generate_class_pyi_header(class_name: str, has_new_method: bool, typed: bool
             f"        Supports type specification through dictionary access:\n"
             f'            \'itk.{class_name}[{types}]()"""\n'
             f"\n"
-            f"    def __new__(cls, *args: Any) -> methods.{class_name}Proxy:\n"
+            f"    def __new__(cls, *args: Any) -> _{class_name}Proxy:\n"
             f'        """Instantiate itk::{class_name}< {types} >"""\n'
             f"        ...\n\n"
-            f"    def __call__(self, *args: Any) -> methods.{class_name}Proxy:\n"
+            f"    def __call__(self, *args: Any) -> _{class_name}Proxy:\n"
             f'        """Instantiate itk::{class_name}< {types} >"""\n'
             f"        ...\n"
             f"\n"
@@ -1664,11 +1664,11 @@ if _version_info < (3, 7, 0):
                         continue
 
                     if self.classes[self.current_class].parent_class == "":
-                        self.classes[self.current_class].parent_class = base + "Proxy"
+                        self.classes[self.current_class].parent_class = f"_{base}Proxy"
 
                     else:
                         self.classes[self.current_class].parent_class += (
-                            ", " + base + "Proxy"
+                            f", _{base}Proxy"
                         )
 
             if (
@@ -1944,10 +1944,21 @@ if __name__ == "__main__":
             outputPYIHeaderFile, outputPYIMethodFile, classes[itk_class]
         )
 
-    with open(options.pyi_dir + "/__init__.pyi", "a+") as pyiFile:
+    with open(f"{options.pyi_dir}/{submoduleName}.pyi", "w") as pyiFile:
+        pyiFile.write("""#
+from typing import Union, Any
+# additional imports
+from .support.template_class import itkTemplate as _itkTemplate
+
+\n""")
+        pyiFile.write(f"# Interface for submodule: {submoduleName}\n")
         pyiFile.write(outputPYIHeaderFile.getvalue())
-    with open(options.pyi_dir + "/methods.pyi", "a+") as pyiFile:
+        pyiFile.write(f"# Interface methods for submodule: {submoduleName}\n")
         pyiFile.write(outputPYIMethodFile.getvalue())
+
+    ### HACK:  This is still problematic due to parallel runs overwriting each other
+    with open(f"{options.pyi_dir}/__init__.pyi", "a+") as pyiIndexFile:
+        pyiIndexFile.write(f"from .{submoduleName} import *\n")
 
     snake_case_file = options.snake_case_file
     if len(snake_case_file) > 1:
