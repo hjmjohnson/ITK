@@ -270,52 +270,25 @@ set(ITK_WRAP_SWIGINTERFACE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE INTERN
 set(WRAPPER_MASTER_INDEX_OUTPUT_DIR "${ITK_DIR}/Wrapping/Typedefs" CACHE INTERNAL "typedefs dir")
 set(IGENERATOR  "${CMAKE_CURRENT_SOURCE_DIR}/igenerator.py" CACHE INTERNAL "igenerator.py path" FORCE)
 
-# Create/Clear .pyi file
+# Create/Clear .pyi file and add boilerplate import content
 file(WRITE "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs/__init__.pyi"
 "# Python Header Interface File
 # imports as they appear in __init__.py
+from typing import Union, Any
 from itkConfig import ITK_GLOBAL_VERSION_STRING as __version__
-from support.extras import *
-from support.init_helpers import *
-from support.types import (
-    itkCType as _itkCType,
-    F as _F,
-    D as _D,
-    LD as _LD,
-    UC as _UC,
-    SC as _SC,
-    US as _US,
-    SS as _SS,
-    UI as _UI,
-    SI as _SI,
-    UL as _UL,
-    SL as _SL,
-    ULL as _ULL,
-    SLL as _SLL,
-)
 
-# Need to define these explicitly to elevate them as part of the export
-itkCType = _itkCType
-F: _itkCType = _F
-D: _itkCType = _D
-LD: _itkCType = _LD
-UC: _itkCType = _UC
-SC: _itkCType = _SC
-US: _itkCType = _US
-SS: _itkCType = _SS
-UI: _itkCType = _UI
-SI: _itkCType = _SI
-UL: _itkCType = _UL
-SL: _itkCType = _SL
-ULL: _itkCType = _ULL
-SLL: _itkCType = _SLL
+## Must import using relative paths so that symbols are imported successfully
+from .support.extras import *
+from .support.types import *
 
-\n\
 # additional imports
-from support.template_class import itkTemplate as _itkTemplate
-from typing import Union, Any\n
+from .support.template_class import itkTemplate as _itkTemplate
 
-import itk.methods as methods\n\n")
+import itk.methods as methods
+
+
+#  ----  Items below this line are dynamically added from the igenerator.py processing ----
+")
 
 # Create/Clear .pyi file
 file(WRITE "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs/methods.pyi"
@@ -412,6 +385,8 @@ macro(itk_end_wrap_module_swig_interface)
       else()
         unset(snake_case_config_file)
       endif()
+    set(ITK_STUB_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs")
+    set(ITK_STUB_PYI_FILE "${ITK_STUB_DIR}/__init__.pyi")
     add_custom_command(
       OUTPUT ${i_files} ${typedef_files} ${idx_files} ${snake_case_config_file}
       COMMAND ${Python3_EXECUTABLE} ${IGENERATOR}
@@ -425,7 +400,7 @@ macro(itk_end_wrap_module_swig_interface)
         --interface-output-dir "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}"
         --library-output-dir "${WRAPPER_LIBRARY_OUTPUT_DIR}"
         --submodule-order "${WRAPPER_SUBMODULE_ORDER}"
-        --pyi_dir "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs"
+        --pyi_dir "${ITK_STUB_DIR}"
         DEPENDS ${ITK_WRAP_DOC_DOCSTRING_FILES} ${xml_files} ${IGENERATOR} ${typedef_in_files}
         WORKING_DIRECTORY / # Arguments to WORKING_DIRECTORY may use generator expressions
       VERBATIM
