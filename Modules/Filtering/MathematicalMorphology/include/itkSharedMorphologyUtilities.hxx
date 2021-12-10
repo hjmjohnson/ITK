@@ -108,10 +108,15 @@ ComputeStartEnd(const typename TImage::IndexType  StartIndex,
     }
     if (abs_line_elmt_tmp > tol)
     {
-      int   P1 = ImStart[i] - StartIndex[i];
-      int   P2 = ImStart[i] + ImSize[i] - 1 - StartIndex[i];
-      float T1 = ((float)(P1)) / line[i];
-      float T2 = ((float)(P2)) / line[i];
+      // NOTE: The static casting from itk::OffsetValueType to int is required for tests to pass
+      //       when running this code in debug mode.
+      // Type of P1 & P2 should be itk::OffsetValueType, as they are differences of index types
+      using local_OffsetIndexType = itk::OffsetValueType;
+      // using local_OffsetIndexType = int;
+      const local_OffsetIndexType P1{ static_cast<local_OffsetIndexType>(ImStart[i] - StartIndex[i]) };
+      const local_OffsetIndexType P2{ static_cast<local_OffsetIndexType>(ImStart[i] + ImSize[i] - 1 - StartIndex[i]) };
+      float                       T1{ (static_cast<float>(P1)) / line[i] };
+      float                       T2{ (static_cast<float>(P2)) / line[i] };
 
       if (T1 > T2)
       {
