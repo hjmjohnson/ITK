@@ -1046,7 +1046,9 @@ if (LOCAL_BATCH_TEST)
 endif ()
 
 set (lib_prog_deps)
+#[[ ITK -- start
 if (NOT EXISTS "${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c")
+# ITK -- stop ]]
   add_executable (H5detect ${HDF5_SRC_DIR}/H5detect.c)
   target_include_directories (H5detect PRIVATE "${HDF5_SRC_DIR};${HDF5_SRC_BINARY_DIR};$<$<BOOL:${HDF5_ENABLE_PARALLEL}>:${MPI_C_INCLUDE_DIRS}>")
   target_compile_definitions(H5detect PUBLIC ${HDF_EXTRA_C_FLAGS} ${HDF_EXTRA_FLAGS})
@@ -1059,6 +1061,7 @@ if (NOT EXISTS "${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c")
   )
   set (lib_prog_deps ${lib_prog_deps} H5detect)
 
+#[[ ITK -- start
   if (HDF5_BATCH_H5DETECT)
     configure_file (
         ${HDF5_SOURCE_DIR}/bin/batch/${HDF5_BATCH_H5DETECT_SCRIPT}.in.cmake
@@ -1081,10 +1084,12 @@ if (NOT EXISTS "${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c")
     )
     set_source_files_properties (${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c PROPERTIES GENERATED TRUE)
   else ()
-    add_custom_command (TARGET H5detect POST_BUILD
+# ITK -- stop ]]
+    add_custom_command (
+        OUTPUT     gen_SRCS.stamp1
+        BYPRODUCTS H5Tinit.c
         COMMAND    ${CMAKE_CROSSCOMPILING_EMULATOR} $<TARGET_FILE:H5detect>
         ARGS       H5Tinit.c
-        BYPRODUCTS H5Tinit.c gen_SRCS.stamp1
         COMMAND    ${CMAKE_COMMAND}
         ARGS       -E touch gen_SRCS.stamp1
         DEPENDS H5detect
@@ -1093,19 +1098,23 @@ if (NOT EXISTS "${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c")
     )
     set_source_files_properties (${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c PROPERTIES GENERATED TRUE)
     if (BUILD_SHARED_LIBS)
-      add_custom_command (TARGET H5detect POST_BUILD
+      add_custom_command (
+          OUTPUT     shared/shared_gen_SRCS.stamp1
+          BYPRODUCTS shared/H5Tinit.c
           COMMAND    ${CMAKE_COMMAND}
           ARGS       -E copy_if_different H5Tinit.c shared/H5Tinit.c
-          BYPRODUCTS shared/H5Tinit.c shared/shared_gen_SRCS.stamp1
           COMMAND    ${CMAKE_COMMAND}
           ARGS       -E touch shared/shared_gen_SRCS.stamp1
-          DEPENDS H5detect H5Tinit.c
+          DEPENDS H5detect gen_SRCS.stamp1
           WORKING_DIRECTORY ${HDF5_GENERATED_SOURCE_DIR}
           COMMENT    "Copy H5Tinit.c to shared folder"
       )
       set_source_files_properties (${HDF5_GENERATED_SOURCE_DIR}/shared/H5Tinit.c PROPERTIES GENERATED TRUE)
     endif ()
+#[[ ITK -- start
   endif ()
+# ITK -- stop ]]
+#[[ ITK -- start
 else ()
   add_custom_command (
       OUTPUT     gen_SRCS.stamp1
@@ -1131,6 +1140,7 @@ else ()
     set_source_files_properties (${HDF5_GENERATED_SOURCE_DIR}/shared/H5Tinit.c PROPERTIES GENERATED TRUE)
   endif ()
 endif ()
+# ITK -- stop ]]
 
 #-----------------------------------------------------------------------------
 # Add Target to clang-format
@@ -1158,10 +1168,11 @@ if (HDF5_ENABLE_FORMATTERS)
   clang_format (HDF5_SRC_LIBSETTINGS_FORMAT H5make_libsettings)
 endif ()
 
-add_custom_command (TARGET H5make_libsettings POST_BUILD
+add_custom_command (
+    OUTPUT     gen_SRCS.stamp2
+    BYPRODUCTS H5lib_settings.c
     COMMAND    ${CMAKE_CROSSCOMPILING_EMULATOR} $<TARGET_FILE:H5make_libsettings>
     ARGS       H5lib_settings.c
-    BYPRODUCTS H5lib_settings.c gen_SRCS.stamp2
     COMMAND    ${CMAKE_COMMAND}
     ARGS       -E touch gen_SRCS.stamp2
     DEPENDS H5make_libsettings
@@ -1170,13 +1181,14 @@ add_custom_command (TARGET H5make_libsettings POST_BUILD
 )
 set_source_files_properties (${HDF5_SRC_BINARY_DIR}/H5lib_settings.c PROPERTIES GENERATED TRUE)
 if (BUILD_SHARED_LIBS)
-  add_custom_command (TARGET H5make_libsettings POST_BUILD
+  add_custom_command (
+      OUTPUT     shared/shared_gen_SRCS.stamp2
+      BYPRODUCTS shared/H5lib_settings.c
       COMMAND    ${CMAKE_COMMAND}
       ARGS       -E copy_if_different H5lib_settings.c shared/H5lib_settings.c
-      BYPRODUCTS shared/H5lib_settings.c shared/shared_gen_SRCS.stamp2
       COMMAND    ${CMAKE_COMMAND}
       ARGS       -E touch shared/shared_gen_SRCS.stamp2
-      DEPENDS H5make_libsettings H5lib_settings.c
+      DEPENDS H5make_libsettings gen_SRCS.stamp2
       WORKING_DIRECTORY ${HDF5_SRC_BINARY_DIR}
       COMMENT    "Copy H5lib_settings.c to shared folder"
   )
