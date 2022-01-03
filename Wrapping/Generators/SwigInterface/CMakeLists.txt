@@ -360,10 +360,14 @@ macro(itk_end_wrap_module_swig_interface)
     @ONLY)
 
   set(WRAPPING_CONFIG_WORKING_DIR "${ITK_DIR}/Wrapping/WorkingDirectory")
+  unset(number_interface_files)
   list(LENGTH i_files number_interface_files)
+  if(NOT "${number_interface_files}" GREATER "0")
+    message(STATUS "I_FILES SHOULD NOT BE ZERO:  ${i_files}: '${number_interface_files}'")
+  endif()
 
   unset(GENERATED_WRAPPING_SUPPORT_FILES)
-  if(number_interface_files GREATER 0)
+  if("${number_interface_files}" GREATER "0")
 
       FILE(MAKE_DIRECTORY "${WRAPPING_CONFIG_WORKING_DIR}")
       if(${module_prefix}_WRAP_PYTHON)
@@ -419,7 +423,7 @@ macro(itk_end_wrap_module_swig_interface)
         )
       endif()
   else()
-    message(STATUS "-------------------------------  NUM INTERACE FILES IS 0 for  ${WRAPPER_LIBRARY_NAME} : '${SWIG_INTERFACE_MODULES}'")
+      message(STATUS "-------------------------------  NUM INTERACE FILES IS for  ${WRAPPER_LIBRARY_NAME} : '${SWIG_INTERFACE_MODULES}': '${i_files}': '${number_interface_files}'")
   endif()
 
   # the ${WRAPPER_LIBRARY_NAME}Swig target
