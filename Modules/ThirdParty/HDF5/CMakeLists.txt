@@ -1,3 +1,11 @@
+message(STATUS "START PREPRINT")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+message(STATUS "STOP PREPRINT")
+
 project(ITKHDF5)
 set(ITKHDF5_THIRD_PARTY 1)
 
@@ -94,3 +102,11 @@ install(FILES ${ITKHDF5_BINARY_DIR}/src/itk_hdf5.h
   DESTINATION ${ITKHDF5_INSTALL_INCLUDE_DIR}
   COMPONENT Development
   )
+
+message(STATUS "START POSTPRINT")
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+message(STATUS "STOP POSTPRINT")
