@@ -361,10 +361,13 @@ macro(itk_end_wrap_module_swig_interface)
 
   set(WRAPPING_CONFIG_WORKING_DIR "${ITK_DIR}/Wrapping/WorkingDirectory")
   list(LENGTH i_files number_interface_files)
+
+  unset(GENERATED_WRAPPING_SUPPORT_FILES)
   if(number_interface_files GREATER 0)
 
       FILE(MAKE_DIRECTORY "${WRAPPING_CONFIG_WORKING_DIR}")
       if(${module_prefix}_WRAP_PYTHON)
+        set(GENERATED_WRAPPING_SUPPORT_FILES ${i_files} ${typedef_files} ${idx_files} ${snake_case_config_file} ${ITK_STUB_PYI_FILES})
         set(ITK_STUB_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs")
         set(ITK_STUB_PYI_FILE "${ITK_STUB_DIR}/${WRAPPER_LIBRARY_NAME}.pyi")
         # NOTE:  snake_case_config_file is both an input and an output to this command.
@@ -376,29 +379,30 @@ macro(itk_end_wrap_module_swig_interface)
         set(snake_case_config_file
             "${ITK_WRAP_PYTHON_SNAKE_CONFIG_DIR}/${WRAPPER_LIBRARY_NAME}_snake_case.py")
         add_custom_command(
-        OUTPUT ${i_files} ${typedef_files} ${idx_files} ${snake_case_config_file} ${ITK_STUB_PYI_FILES}
-        COMMAND ${Python3_EXECUTABLE} ${IGENERATOR}
-          ${mdx_opts}
-          ${swig_libs}
-          -w1 -w3 -w51 -w52 -w53 -w54
-          -A protected -A private
-          -p ${PYGCCXML_DIR}
-          -g ${CASTXML_EXECUTABLE}
-          --snake-case-file "${snake_case_config_file}"
-          --interface-output-dir "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}"
-          --library-output-dir "${WRAPPER_LIBRARY_OUTPUT_DIR}"
-          --submodule-order "${WRAPPER_SUBMODULE_ORDER}"
-          --pyi_dir "${ITK_STUB_DIR}"
+          OUTPUT ${GENERATED_WRAPPING_SUPPORT_FILES}
+          COMMAND ${Python3_EXECUTABLE} ${IGENERATOR}
+            ${mdx_opts}
+            ${swig_libs}
+            -w1 -w3 -w51 -w52 -w53 -w54
+            -A protected -A private
+            -p ${PYGCCXML_DIR}
+            -g ${CASTXML_EXECUTABLE}
+            --snake-case-file "${snake_case_config_file}"
+            --interface-output-dir "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}"
+            --library-output-dir "${WRAPPER_LIBRARY_OUTPUT_DIR}"
+            --submodule-order "${WRAPPER_SUBMODULE_ORDER}"
+            --pyi_dir "${ITK_STUB_DIR}"
           DEPENDS ${ITK_WRAP_DOC_DOCSTRING_FILES} ${xml_files} ${IGENERATOR} ${typedef_in_files}
           WORKING_DIRECTORY "${WRAPPING_CONFIG_WORKING_DIR}" # Arguments to WORKING_DIRECTORY may use generator expressions
-        VERBATIM
+          VERBATIM
         )
       else()
+        set(GENERATED_WRAPPING_SUPPORT_FILES ${i_files} ${typedef_files} ${idx_files})
         unset(ITK_STUB_DIR)
         unset(ITK_STUB_PYI_FILE)
         unset(snake_case_config_file)
         add_custom_command(
-          OUTPUT ${i_files} ${typedef_files} ${idx_files}
+          OUTPUT ${GENERATED_WRAPPING_SUPPORT_FILES}
           COMMAND ${Python3_EXECUTABLE} ${IGENERATOR}
             ${mdx_opts}
             ${swig_libs}
@@ -409,17 +413,18 @@ macro(itk_end_wrap_module_swig_interface)
             --interface-output-dir "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}"
             --library-output-dir "${WRAPPER_LIBRARY_OUTPUT_DIR}"
             --submodule-order "${WRAPPER_SUBMODULE_ORDER}"
-            DEPENDS ${ITK_WRAP_DOC_DOCSTRING_FILES} ${xml_files} ${IGENERATOR} ${typedef_in_files}
-            WORKING_DIRECTORY "${WRAPPING_CONFIG_WORKING_DIR}" # Arguments to WORKING_DIRECTORY may use generator expressions
+          DEPENDS ${ITK_WRAP_DOC_DOCSTRING_FILES} ${xml_files} ${IGENERATOR} ${typedef_in_files}
+          WORKING_DIRECTORY "${WRAPPING_CONFIG_WORKING_DIR}" # Arguments to WORKING_DIRECTORY may use generator expressions
           VERBATIM
-          )
+        )
       endif()
-
+  else()
+    message(STATUS "-------------------------------  NUM INTERACE FILES IS 0 for  ${WRAPPER_LIBRARY_NAME} : '${SWIG_INTERFACE_MODULES}'")
   endif()
 
   # the ${WRAPPER_LIBRARY_NAME}Swig target
   if(NOT TARGET ${WRAPPER_LIBRARY_NAME}Swig)
-    add_custom_target(${WRAPPER_LIBRARY_NAME}Swig DEPENDS ${mdx_file} ${i_files} ${typedef_files} ${idx_files})
+    add_custom_target(${WRAPPER_LIBRARY_NAME}Swig DEPENDS ${GENERATED_WRAPPING_SUPPORT_FILES})
     add_dependencies(${WRAPPER_LIBRARY_NAME}Swig ${WRAPPER_LIBRARY_NAME}CastXML)
   endif()
 
