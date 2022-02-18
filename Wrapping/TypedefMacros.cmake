@@ -191,11 +191,18 @@ macro(itk_end_wrap_module)
     set(module_interface_ext_file "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${WRAPPER_LIBRARY_NAME}_ext.i")
 
     if(${module_prefix}_WRAP_PYTHON)
-      set(ITK_STUB_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs")
-      set(ITK_STUB_PYI_FILES)
+      # ITK_STUB_DIR: all stub files are stored in this directory
+      set(ITK_STUB_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs" CACHE INTERNAL "where python interface files are stored.")
+      set(ITK_PKL_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-pkl" CACHE INTERNAL "where temp pkl files are stored")
+
+      # ITK_PYI_INDEX_FILES: A list of the index files generated for a specific submodule
+      #   Used to generate a complete list of index files generated which should be used as a
+      #   dependency in the final pyi_generator step.
+      set(ITK_PYI_INDEX_FILES)
     else()
-      unset(ITK_STUB_DIR)
-      unset(ITK_STUB_PYI_FILES)
+      unset(ITK_STUB_DIR CACHE)
+      unset(ITK_PKL_DIR CACHE)
+      unset(ITK_PYI_INDEX_FILES)
     endif()
 
     foreach(_module ${SWIG_INTERFACE_MODULES})
@@ -206,10 +213,18 @@ macro(itk_end_wrap_module)
       list(APPEND typedef_in_files "${WRAPPER_LIBRARY_OUTPUT_DIR}/${_module}SwigInterface.h.in")
       list(APPEND typedef_files "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${_module}SwigInterface.h")
       if(${module_prefix}_WRAP_PYTHON)
-        list(APPEND ITK_STUB_PYI_FILES "${ITK_STUB_DIR}/${_module}Template.pyi")
-        list(APPEND ITK_STUB_PYI_FILES "${ITK_STUB_DIR}/${_module}Proxy.pyi")
-        set(ENV{ITK_STUB_TEMPLATE_IMPORTS} "$ENV{ITK_STUB_TEMPLATE_IMPORTS}from .${_module}Template import *;")
-        set(ENV{ITK_STUB_PROXY_IMPORTS} "$ENV{ITK_STUB_PROXY_IMPORTS}from .${_module}Proxy import *;")
+        # ITK_PYI_INDEX_FILES: A list of the index files generated for a specific submodule
+        #   Used to generate a complete list of index files generated which should be used as a
+        #   dependency in the final pyi_generator step. (duplicate comment from above)
+        set(THIS_MODULE_PYI_INDEX_FILE "${ITK_PKL_DIR}/${_module}.index.txt")
+        list(APPEND ITK_PYI_INDEX_FILES "${THIS_MODULE_PYI_INDEX_FILE}")
+
+        # ITK_STUB_TEMPLATE_IMPORTS: Contains all of the template import statements needed for __init__.pyi
+        set(ITK_STUB_TEMPLATE_IMPORTS "${ITK_STUB_TEMPLATE_IMPORTS} from .${_module}Template import *;" CACHE INTERNAL "List of all ITK_STUB_TEMPLATE_IMPORTS")
+        # ITK_STUB_PROXY_IMPORTS: Contains all of the proxy import statements needed for _proxies.pyi
+        set(ITK_STUB_PROXY_IMPORTS "${ITK_STUB_PROXY_IMPORTS} from .${_module}Proxy import *;" CACHE INTERNAL "List of all ITK_STUB_PROXY_IMPORTS")
+        # TODO: Remove ITK_STUB_TEMPLATE_IMPORTS & ITK_STUB_PROXY_IMPORTS
+        # TODO: The __init__.pyi _proxies.pyi creation step has been moved to pyi_generator.pyi
       endif()
     endforeach()
 
@@ -239,7 +254,6 @@ macro(itk_end_wrap_module)
 
       FILE(MAKE_DIRECTORY "${WRAPPING_CONFIG_WORKING_DIR}")
       if(${module_prefix}_WRAP_PYTHON)
-        set(ITK_STUB_DIR "${ITK_DIR}/Wrapping/Generators/Python/itk-stubs")
         # NOTE:  snake_case_config_file is both an input and an output to this command.
         #        the ${IGENERATOR} script appends to this file.
         # NOTE: The Configuration files should be placed in the itk package directory.
@@ -249,8 +263,12 @@ macro(itk_end_wrap_module)
         set(snake_case_config_file
                 "${ITK_WRAP_PYTHON_SNAKE_CONFIG_DIR}/${WRAPPER_LIBRARY_NAME}_snake_case.py")
         unset(ITK_WRAP_PYTHON_SNAKE_CONFIG_DIR)
+
+        # Added THIS_MODULE_PYI_INDEX_FILE to the igenerator custom command output to
+        # allow the files to be used  as a dependency
         add_custom_command(
-                OUTPUT ${i_files} ${typedef_files} ${idx_files} ${snake_case_config_file} ${ITK_STUB_PYI_FILES}
+                OUTPUT ${i_files} ${typedef_files} ${idx_files} ${snake_case_config_file}
+                #BYPRODUCTS ${THIS_MODULE_PYI_INDEX_FILE}  # the pyi index files will be created, but may not be updated for each run.
                 COMMAND ${Python3_EXECUTABLE} ${IGENERATOR}
                 ${mdx_opts}
                 ${swig_libs}
@@ -263,12 +281,14 @@ macro(itk_end_wrap_module)
                 --library-output-dir "${WRAPPER_LIBRARY_OUTPUT_DIR}"
                 --submodule-order "${WRAPPER_SUBMODULE_ORDER}"
                 --pyi_dir "${ITK_STUB_DIR}"
+                --pkl_dir "${ITK_PKL_DIR}"
                 DEPENDS ${ITK_WRAP_DOC_DOCSTRING_FILES} ${xml_files} ${IGENERATOR} ${typedef_in_files}
                 WORKING_DIRECTORY "${WRAPPING_CONFIG_WORKING_DIR}" # Arguments to WORKING_DIRECTORY may use generator expressions
                 VERBATIM
         )
       else()
-        unset(ITK_STUB_DIR)
+        unset(ITK_STUB_DIR CACHE)
+        unset(ITK_PKL_DIR CACHE)
         unset(snake_case_config_file)
         add_custom_command(
                 OUTPUT ${i_files} ${typedef_files} ${idx_files}
@@ -305,6 +325,10 @@ macro(itk_end_wrap_module)
 
     set(${WRAPPER_LIBRARY_NAME}IdxFiles ${idx_files} CACHE INTERNAL "Internal ${WRAPPER_LIBRARY_NAME}Idx file list.")
     set(${WRAPPER_LIBRARY_NAME}SwigFiles ${i_files} CACHE INTERNAL "Internal ${WRAPPER_LIBRARY_NAME}Swig file list.")
+    list(APPEND GLOBAL_IdxFilesList ${ITK_PYI_INDEX_FILES})
+    list(REMOVE_DUPLICATES GLOBAL_IdxFilesList)
+    set(GLOBAL_IdxFilesList ${GLOBAL_IdxFilesList} CACHE INTERNAL "Master list of all idx files")
+
   endif()
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
     # Loop over the extra swig input files and add them to the generated files

@@ -144,9 +144,8 @@ itk_end_wrap_modules_all_generators()
 ###############################################################################
 if(ITK_WRAP_PYTHON)
   # Generate __init__.pyi file with wrapped templates/interfaces
-  set(ITK_STUB_TEMPLATE_IMPORTS "$ENV{ITK_STUB_TEMPLATE_IMPORTS}")
   list(SORT ITK_STUB_TEMPLATE_IMPORTS CASE INSENSITIVE)
-  list(JOIN ITK_STUB_TEMPLATE_IMPORTS "\n" ITK_STUB_TEMPLATE_IMPORTS)
+  list(JOIN ITK_STUB_TEMPLATE_IMPORTS "\n" ITK_STUB_TEMPLATE_IMPORTS_STRING_LIST)
   configure_file(Generators/Python/itk/__init__.pyi.in Generators/Python/itk-stubs/__init__.pyi)
 
   # Generate _proxies.pyi file with wrapped proxy classes and methods
@@ -154,4 +153,37 @@ if(ITK_WRAP_PYTHON)
   list(SORT ITK_STUB_PROXY_IMPORTS CASE INSENSITIVE)
   list(JOIN ITK_STUB_PROXY_IMPORTS "\n" ITK_STUB_PROXY_IMPORTS)
   configure_file(Generators/Python/itk/_proxies.pyi.in Generators/Python/itk-stubs/_proxies.pyi)
+
+  # Generate .pyi files for each class
+  # The intent is that the pyi_generator file is run after every occurrence of igenerator has ran.
+  # The call to igenerator is contained within a macro that is called by each of the modules.
+  # According to online documents CMAkE dependencies can only be created between
+  # custom_targets and custom_commands contained within the same CMakeLists file. It is unknown if this
+  # can be done since the macros are called from a variety of locations.
+
+  # PYI_GENERATOR: The file location of the pyi_generator.py script
+  #   This script is responsible for merging all of the pickle files together and
+  #   generating the Template and Proxy files for each class. In addition this file
+  #   now generates the __init__.pyi and _proxies.pyi files instead of CMAKE. This is due to some newly created file
+  #   name format changes that could not easily be determined by CMAKE. The old generation procedure still occurs for
+  #   these two files (for now) in case we decide to revert back to that method. That code will be removed before merge
+  #   and does not present an issue now as the files will simply overwritten when the pyi_generator is ran.
+  set(PYI_GENERATOR  "${CMAKE_CURRENT_SOURCE_DIR}/Generators/Python/itk/pyi_generator.py")
+
+  # Run pyi_generator
+  # TODO: This should happen after all runs of igenerator have finished (it currently runs first)
+  # ${GLOBAL_IdxFilesList}: is described within SwigInterface/CMakeLists.txt
+  #   The env variable's dependency in the custom command does not currently work
+  #   The env variable is also passed to pyi_generator to make sure that the function only uses current index files
+  #     All index files found that are not in the given list are assumed to be outdated and removed.
+  add_custom_target(
+          generate-pyi
+          COMMENT "Generating .pyi files for Python wrapper interface"
+          COMMAND ${Python3_EXECUTABLE} ${PYI_GENERATOR}
+            --pyi_dir "${ITK_STUB_DIR}"
+            --pkl_dir "${ITK_PKL_DIR}"
+            --index_files "${GLOBAL_IdxFilesList}"
+          DEPENDS ${PYI_GENERATOR} ${GLOBAL_IdxFilesList}
+          VERBATIM
+  )
 endif()

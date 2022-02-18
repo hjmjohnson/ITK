@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 
+# -*- coding: utf-8 -*-
+import pickle
 import sys
 import os
 import re
 from argparse import ArgumentParser
+from collections import defaultdict
 from io import StringIO
+from os.path import exists
 from pathlib import Path
 from keyword import iskeyword
 from typing import List
@@ -14,15 +18,30 @@ class ITKClass:
     def __init__(self, class_name):
         self.python_method_headers = {}
         self.has_new_method = False
-        self.number_of_typedefs = 0
         self.typed = False
-        self.parent_class = ""
+        self.parent_class = []
         self.is_abstract = False
         self.class_name = class_name
         self.is_enum = False
         self.has_superclass = False
         self.enums = []
         self.submodule_name = ""
+
+    def __eq__(self, other):
+        if isinstance(other, ITKClass):
+            return (
+                self.python_method_headers == other.python_method_headers
+                and self.has_new_method == other.has_new_method
+                and self.typed == other.typed
+                and self.parent_class == other.parent_class
+                and self.is_abstract == other.is_abstract
+                and self.class_name == other.class_name
+                and self.is_enum == other.is_enum
+                and self.enums == other.enums
+                and self.submodule_name == other.submodule_name
+            )
+
+        return False
 
 
 def remove_class_type(itkclass: str) -> (str, bool):
@@ -182,229 +201,6 @@ def get_arg_type(decls, arg_type, for_snake_case_hints=True):
     elif not for_snake_case_hints and arg_type_str.startswith("vnl_"):
         return arg_type_str.split("<")[0]
     return None
-
-
-def generate_class_pyi_def(
-    outputPYIHeaderFile, outputPYIMethodFile, itk_class: ITKClass
-):
-    class_name = itk_class.class_name
-
-    if itk_class.is_enum:
-        outputPYIHeaderFile.write(f"itk.{class_name} =  _{class_name}Proxy\n\n\n")
-    elif not itk_class.is_abstract:
-        outputPYIHeaderFile.write(
-            generate_class_pyi_header(
-                class_name, itk_class.has_new_method, itk_class.typed
-            )
-        )
-
-    outputPYIMethodFile.write(
-        f"class {class_name}Proxy({itk_class.parent_class}):\n"  # if
-    )
-
-    if itk_class.is_enum and len(itk_class.enums) > 0:
-        for enum in itk_class.enums:
-            outputPYIMethodFile.write(f"\t{enum} = ...\n")
-        outputPYIMethodFile.write(f"\n\n")
-    else:
-        if len(itk_class.python_method_headers.keys()) == 0:
-            outputPYIMethodFile.write(f"\t...\n\n")
-
-        for method in itk_class.python_method_headers.keys():
-            is_overloaded = len(itk_class.python_method_headers[method]) > 1
-            for method_variation in itk_class.python_method_headers[method]:
-                method_name = method
-                attributes = method_variation
-                params = ""
-                return_type = attributes[len(attributes) - 1][1]
-
-                is_a_static_method: bool = attributes[len(attributes) - 1][2]
-
-                # remove special case containing the return type from the end of the attributes list
-                attributes = attributes[:-1]
-                if len(attributes) > 0:
-                    params += ", "
-
-                for attribute in attributes:
-                    # name of the argument
-                    params += attribute[0]
-
-                    # type of the argument
-                    if attribute[1] is None:
-                        pass
-                    else:
-                        params += f": {attribute[1]}"
-
-                    # default value of the argument (if any)
-                    if attribute[2] is not None:
-                        params += f" = {attribute[2]}, "
-                    else:
-                        params += ", "
-
-                params = params[:-2]  # remove extra comma
-
-                self_str = "self"
-                if is_a_static_method:
-                    outputPYIMethodFile.write("\t@staticmethod\n")
-                    self_str = ""
-                    params = params[2:]  # remove comma from beginning
-
-                if is_overloaded:
-                    outputPYIMethodFile.write("\t@overload\n")
-
-                outputPYIMethodFile.write(f"\tdef {method_name}({self_str}{params})")
-                if return_type is not None:
-                    outputPYIMethodFile.write(f" -> {return_type}")
-                outputPYIMethodFile.write(f":\n" f'\t\t""""""\n' f"\t\t...\n\n")
-
-
-not_callable = [
-    "ImageToImageMetricv4",
-    "NarrowBandLevelSetImageFilter",
-    "ShapePriorSegmentationLevelSetImageFilter",
-    "ImageToImageFilter",
-    "ImageSource",
-    "NarrowBandImageFilterBase",
-    "NoiseBaseImageFilter",
-    "ImageToMeshFilter",
-    "ImageToPathFilter",
-    "GenerateImageSource",
-    "DenseFiniteDifferenceImageFilter",
-    "InPlaceImageFilter",
-    "AnisotropicDiffusionImageFilter",  # you must use snake_case method to properly use this class
-    "ConvolutionImageFilterBase",
-    "SparseFieldFourthOrderLevelSetImageFilter",
-    "SegmentationLevelSetImageFilter",
-    "TemporalProcessObject",
-    "ProcessObject",
-    "SegmentationLevelSetFunction",
-    "LBFGSOptimizerBasev4",
-]
-
-
-def generate_class_pyi_header(class_name: str, has_new_method: bool, typed: bool):
-    """Return a string containing the definition of a pyi class header.
-    Supports both typed and non-typed classes."""
-    if not typed:
-        if has_new_method:
-            class_header = (
-                f"class _{class_name}Template(_itkTemplate):\n"
-                f'    """Interface for instantiating itk::{class_name}'
-                f"\n        Create a new {class_name} Object:\n"
-                f"            'itk.{class_name}.New(**kwargs)"
-                f'"""\n\n'
-                f"    @staticmethod\n"
-                f"    def New(**kwargs) -> _{class_name}Proxy:\n"
-                f'        """Instantiate itk::{class_name}"""\n'
-                f"        ...\n"
-                f"\n"
-                f"{class_name} = _{class_name}Template\n"
-                f"\n"
-                f"\n"
-            )
-        elif class_name not in not_callable:
-            class_header = (
-                f"class _{class_name}Template(_itkTemplate):\n"
-                f'    """Interface for instantiating itk::{class_name}'
-                f'"""\n\n'
-                f"    def __new__(cls, *args: Any) -> _{class_name}Proxy:\n"
-                f'        """Instantiate itk::{class_name}"""\n'
-                f"        ...\n\n"
-                f"    def __call__(self, *args: Any) -> _{class_name}Proxy:\n"
-                f'        """Instantiate itk::{class_name}"""\n'
-                f"        ...\n"
-                f"\n"
-                f"{class_name} = _{class_name}Template"
-                f"\n"
-                f"\n"
-            )
-        else:
-            class_header = (
-                f"class _{class_name}Template(_itkTemplate):\n"
-                f'    """Interface for instantiating itk::{class_name}"""\n'
-                f"    ...\n"
-                f"\n"
-                f"{class_name} = _{class_name}Template"
-                f"\n"
-                f"\n"
-            )
-        return class_header
-
-    types = "INSERT_TYPE_NAMES_HERE"
-    if has_new_method:
-        class_header = (
-            f"class _{class_name}TemplateGetter():\n"
-            f"    def __getitem__(self, parameters) -> _{class_name}Template:\n"
-            f'        """Specify class type with:\n'
-            f"            \t[{types}]\n"
-            f"            :return: {class_name}Template\n"
-            f'            """\n'
-            f"        ...\n"
-            f"\n"
-            f"\n"
-            f"class _{class_name}Template(_itkTemplate, metaclass=_{class_name}TemplateGetter):\n"
-            f'    """Interface for instantiating itk::{class_name}< {types} >\n'
-            f"        Create a new {class_name} Object (of default type):\n"
-            f"            'itk.{class_name}.New(**kwargs)\n"
-            f"        Supports type specification through dictionary access:\n"
-            f'            \'itk.{class_name}[{types}].New(**kwargs)"""\n'
-            f"\n"
-            f"    @staticmethod\n"
-            f"    def New(**kwargs) -> _{class_name}Proxy:\n"
-            f'        """Instantiate itk::{class_name}< {types} >"""\n'
-            f"        ...\n"
-            f"\n"
-            f"{class_name} = _{class_name}Template"
-            f"\n"
-            f"\n"
-        )
-    elif class_name not in not_callable:
-        class_header = (
-            f"class _{class_name}TemplateGetter():\n"
-            f"    def __getitem__(self, parameters) -> _{class_name}Template:\n"
-            f'        """Specify class type with:\n'
-            f"            \t[{types}]\n"
-            f"            :return: {class_name}Template\n"
-            f'            """\n'
-            f"        ...\n"
-            f"\n"
-            f"\n"
-            f"class _{class_name}Template(_itkTemplate, metaclass=_{class_name}TemplateGetter):\n"
-            f'    """Interface for instantiating itk::{class_name}< {types} >\n'
-            f"        Supports type specification through dictionary access:\n"
-            f'            \'itk.{class_name}[{types}]()"""\n'
-            f"\n"
-            f"    def __new__(cls, *args: Any) -> _{class_name}Proxy:\n"
-            f'        """Instantiate itk::{class_name}< {types} >"""\n'
-            f"        ...\n\n"
-            f"    def __call__(self, *args: Any) -> _{class_name}Proxy:\n"
-            f'        """Instantiate itk::{class_name}< {types} >"""\n'
-            f"        ...\n"
-            f"\n"
-            f"{class_name} = _{class_name}Template"
-            f"\n"
-            f"\n"
-        )
-    else:
-        class_header = (
-            f"class _{class_name}TemplateGetter():\n"
-            f"    def __getitem__(self, parameters) -> _{class_name}Template:\n"
-            f'        """Specify class type with:\n'
-            f"            \t[{types}]\n"
-            f"            :return: {class_name}Template\n"
-            f'            """\n'
-            f"        ...\n"
-            f"\n"
-            f"\n"
-            f"class _{class_name}Template(_itkTemplate, metaclass=_{class_name}TemplateGetter):\n"
-            f'    """Interface for instantiating itk::{class_name}< {types} >"""\n'
-            f"    ...\n"
-            f"\n"
-            f"{class_name} = _{class_name}Template"
-            f"\n"
-            f"\n"
-        )
-    return class_header
 
 
 def getType(v):
@@ -646,7 +442,6 @@ class SwigInputGenerator:
 
         # A dict of sets containing the .pyi python equivalent for all class methods and params
         self.classes = classes
-        self.python_parent_imports = []
         self.current_class = ""
 
         # a dict to let us use the alias name instead of the full c++ name. Without
@@ -1636,7 +1431,7 @@ if _version_info < (3, 7, 0):
 
             if (
                 self.current_class is not None
-                and self.classes[self.current_class].parent_class == ""
+                and self.classes[self.current_class].parent_class == []
                 and (
                     not self.classes[self.current_class].has_superclass
                     or typedef.name.startswith("itk" + self.current_class)
@@ -1659,16 +1454,15 @@ if _version_info < (3, 7, 0):
                     if ":" in base:
                         continue
 
-                    if base not in self.python_parent_imports:
-                        self.python_parent_imports.append(base)
-
-                    if self.classes[self.current_class].parent_class == "":
-                        self.classes[self.current_class].parent_class = f"_{base}Proxy"
+                    if self.classes[self.current_class].parent_class == []:
+                        self.classes[self.current_class].parent_class.append(
+                            f"_{base}Proxy"
+                        )
 
                     else:
-                        self.classes[
-                            self.current_class
-                        ].parent_class += f", _{base}Proxy"
+                        self.classes[self.current_class].parent_class.append(
+                            f"_{base}Proxy"
+                        )
 
             if (
                 self.current_class is not None
@@ -1726,48 +1520,25 @@ if _version_info < (3, 7, 0):
                 f.write(content)
 
 
-def init_submodule_pyi_template_file(pyiFile: Path, submodule_name: str) -> None:
-    with open(pyiFile, "w") as pyiFile:
-        pyiFile.write(
-            f"""# Interface for submodule: {submodule_name}
-from typing import Union, Any
-# additional imports
-from .support.template_class import itkTemplate as _itkTemplate
+def generate_pyi_index_files(pyi_index_files, pyi_dir: str):
+    # Compare index files with existing
+    # Rewrite if non-existent or different.
+    for submodule, file_contents in pyi_index_files.items():
+        file_name = f"{submodule}.index.txt"
+        file_path: Path = Path(pyi_dir) / file_name
 
-\n"""
-        )
-
-
-def init_submodule_pyi_proxy_file(
-    pyiFile: Path, submodule_name: str, parent_imports
-) -> None:
-    with open(pyiFile, "w") as pyiFile:
-        pyiFile.write(
-            f"""# Interface methods for submodule: {submodule_name}
-from typing import Union, Any
-# additional imports
-from .support.template_class import itkTemplate as _itkTemplate
-{ f"from ._proxies import {', '.join(parent_imports)}" if len(parent_imports) > 0 else ""}
-
-\n"""
-        )
-
-
-def write_class_template_pyi(pyiFile: Path, class_name: str, header_code: str) -> None:
-    # Write interface files to the stub directory to support editor autocompletion
-    with open(pyiFile, "a+") as pyiFile:
-        pyiFile.write(f"# Interface for class: {class_name}\n")
-        pyiFile.write(
-            f"from ._proxies import {class_name}Proxy as _{class_name}Proxy\n"
-        )
-        pyiFile.write(header_code)
-
-
-def write_class_proxy_pyi(pyiFile: Path, class_name: str, interfaces_code: str) -> None:
-    # Write interface files to the stub directory to support editor autocompletion
-    with open(pyiFile, "a+") as pyiFile:
-        pyiFile.write(f"# Interface methods for class: {class_name}\n")
-        pyiFile.write(interfaces_code)
+        # TODO: KIAN THE FOLLOWING IS NOT THREAD SAFE!  TWO igenerator runs may clobber each other
+        if file_path.is_file():
+            index_file = open(file_path, "r")
+            if file_contents.getvalue() != index_file.read():
+                index_file.close()
+                with open(file_path, "w") as f:
+                    f.write(file_contents.getvalue())
+            else:
+                index_file.close()
+        else:
+            with open(file_path, "w") as f:
+                f.write(file_contents.getvalue())
 
 
 if __name__ == "__main__":
@@ -1890,12 +1661,22 @@ if __name__ == "__main__":
         type=str,
         help="The directory for .pyi files to be generated",
     )
+    argParser.add_argument(
+        "--pkl_dir",
+        action="store",
+        dest="pkl_dir",
+        default="",
+        type=str,
+        help="The directory for .pyi files to be generated",
+    )
 
     options = argParser.parse_args()
 
     # Ensure that the requested stub file directory exists
     if options.pyi_dir != "":
         Path(options.pyi_dir).mkdir(exist_ok=True, parents=True)
+    if options.pkl_dir != "":
+        Path(options.pkl_dir).mkdir(exist_ok=True, parents=True)
 
     sys.path.insert(1, options.pygccxml_path)
     import pygccxml
@@ -1976,8 +1757,6 @@ if __name__ == "__main__":
             swig_input_generator.snakeCaseProcessObjectFunctions
         )
 
-        return swig_input_generator.python_parent_imports
-
     classes = {}
 
     ordered_submodule_list: List[str] = []
@@ -1991,38 +1770,32 @@ if __name__ == "__main__":
     del submoduleNames
 
     for submoduleName in ordered_submodule_list:
-        parents = generate_swig_input(submoduleName, classes)
-        parent_imports = [f"{p}Proxy as _{p}Proxy" for p in parents]
-        if options.pyi_dir != "":
-            init_submodule_pyi_template_file(
-                Path(f"{options.pyi_dir}/{submoduleName}Template.pyi"), submoduleName
-            )
-            init_submodule_pyi_proxy_file(
-                Path(f"{options.pyi_dir}/{submoduleName}Proxy.pyi"),
-                submoduleName,
-                parent_imports,
-            )
+        generate_swig_input(submoduleName, classes)
 
-    if options.pyi_dir != "":
+    index_files = defaultdict(StringIO)
+    if options.pyi_dir != "" and options.pkl_dir != "":
         for itk_class in classes.keys():
-            outputPYIHeaderFile = StringIO()
-            outputPYIMethodFile = StringIO()
-            generate_class_pyi_def(
-                outputPYIHeaderFile, outputPYIMethodFile, classes[itk_class]
-            )
+            # Future problem will be that a few files will be empty
+            # Can either somehow detect this or accept it
+            # Pickle class here
+            class_name = classes[itk_class].class_name
+            submodule_name = classes[itk_class].submodule_name
+            pickled_filename: str = f"{options.pkl_dir}/{class_name}.{submodule_name}.pkl"
+            index_files[submodule_name].write(pickled_filename + "\n")
 
-            write_class_template_pyi(
-                Path(
-                    f"{options.pyi_dir}/{classes[itk_class].submodule_name}Template.pyi"
-                ),
-                itk_class,
-                outputPYIHeaderFile.getvalue(),
-            )
-            write_class_proxy_pyi(
-                Path(f"{options.pyi_dir}/{classes[itk_class].submodule_name}Proxy.pyi"),
-                itk_class,
-                outputPYIMethodFile.getvalue(),
-            )
+            # Only write to the pickle file if it does not match what is already saved.
+            overwrite = False
+            pickle_exists = exists(pickled_filename)
+            if pickle_exists:
+                with open(pickled_filename, "rb") as pickled_file:
+                    existing_itk_class = pickle.load(pickled_file)
+                    overwrite = not (existing_itk_class == classes[itk_class])
+
+            if overwrite or not pickle_exists:
+                with open(pickled_filename, "wb") as pickled_file:
+                    pickle.dump(classes[itk_class], pickled_file)
+
+        generate_pyi_index_files(index_files, options.pyi_dir)
 
     snake_case_file = options.snake_case_file
     if len(snake_case_file) > 1:
