@@ -77,15 +77,18 @@ public:
   dicom_stl::vector<doublebyte> Groups;
   dicom_stl::vector<doublebyte> Elements;
   dicom_stl::vector<DICOMParser::VRTypes> Datatypes;
-
+  //
   // Stores a map from pair<group, element> keys to
   // values of pair<vector<DICOMCallback*>, datatype>
+  //
   DICOMParserMap Map;
 
+  //
   // Stores a map from pair<group, element> keys to
   // values of datatype.  We use this to store the
   // datatypes for implicit keys that we are
   // interested in.
+  //
   DICOMImplicitTypeMap TypeMap;
 };
 
@@ -107,7 +110,11 @@ const dicom_stl::string& DICOMParser::GetFileName()
 
 bool DICOMParser::OpenFile(const dicom_stl::string& filename)
 {
-  this->CloseFile();
+  if (this->DataFile)
+  {
+    // Deleting the DataFile closes the file
+    delete this->DataFile;
+  }
   this->DataFile = new DICOMFile();
   bool val = this->DataFile->Open(filename);
 
@@ -134,18 +141,11 @@ bool DICOMParser::OpenFile(const dicom_stl::string& filename)
   return val;
 }
 
-void DICOMParser::CloseFile()
-{
-  if (this->DataFile)
-  {
-    // Deleting the DataFile closes the file
-    delete this->DataFile;
-  }
-}
-
 DICOMParser::~DICOMParser()
 {
+  //
   // Delete the callbacks.
+  //
   this->ClearAllDICOMTagCallbacks();
 
   if (this->DataFile)
@@ -202,8 +202,10 @@ bool DICOMParser::ReadHeader(DICOMSource& source)
   return true;
 }
 
+//
 // read magic number from file
 // return true if this is your image type, false if it is not
+//
 bool DICOMParser::IsDICOMFile(DICOMSource& source)
 {
   char magic_number[4];
@@ -229,7 +231,10 @@ bool DICOMParser::IsDICOMFile(DICOMSource& source)
 #ifndef DICOMPARSER_IGNORE_MAGIC_NUMBER
       return false;
 #else
+      //
       // Try it anyways...
+      //
+
       source.SkipToStart();
 
       doublebyte group = source.ReadDoubleByte();
@@ -299,7 +304,10 @@ bool DICOMParser::IsValidRepresentation(
       return true;
 
     default:
+      //
+      //
       // Need to comment out in new paradigm.
+      //
       source.Skip(-2);
       len = source.ReadQuadByte();
       mytype = DICOMParser::VR_UNKNOWN;
@@ -332,7 +340,9 @@ void DICOMParser::ReadNextRecord(
 
   if (iter != Implementation->Map.end())
   {
+    //
     // Only read the data if there's a registered callback.
+    //
     unsigned char* tempdata = 0;
 
     if (static_cast<unsigned long>(length) != static_cast<unsigned long>(-1))
@@ -381,7 +391,9 @@ void DICOMParser::ReadNextRecord(
 
     if (callbackType != mytype && mytype != VR_UNKNOWN)
     {
+      //
       // mytype is not VR_UNKNOWN if the file is in Explicit format.
+      //
       callbackType = mytype;
     }
 
@@ -453,8 +465,10 @@ void DICOMParser::ReadNextRecord(
   }
   else
   {
+    //
     // Some lengths are negative, but we don't
     // want to back up the file pointer.
+    //
     if (length > 0)
     {
       source.Skip(length);
@@ -771,7 +785,9 @@ void DICOMParser::TransferSyntaxCallback(
     dicom_stream::cout << "EXPLICIT BIG ENDIAN" << dicom_stream::endl;
 #endif
     this->ToggleByteSwapImageData = true;
+    //
     // Data byte order is big endian
+    //
     // We're always reading little endian in the beginning,
     // so now we need to swap.
   }
@@ -840,7 +856,7 @@ void DICOMParser::operator=(const DICOMParser&)
   dicom_stream::cerr << "DICOMParser assignment operator should not be called!"
                      << dicom_stream::endl;
 }
-} // namespace DICOMPARSER_NAMESPACE
+}
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
