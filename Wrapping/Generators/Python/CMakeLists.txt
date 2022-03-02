@@ -295,6 +295,7 @@ endmacro()
 
 macro(itk_end_wrap_submodule_python group_name)
 
+  # base_name may be used in other macros
   set(base_name ${group_name})
 
   if("${group_name}" STREQUAL "ITKQuadEdgeMeshBase")
@@ -314,16 +315,15 @@ macro(itk_end_wrap_submodule_python group_name)
     endforeach()
 
     set(ITK_WRAP_PYTHON_SWIG_EXT "${ITK_WRAP_PYTHON_SWIG_EXT}${text}")
+    unset(text)
   endif()
 
   # is there a docstring file?
+  set(doc_file)
   if(${module_prefix}_WRAP_DOC AND NOT ITK_WRAP_PYTHON_PROCESS_SWIG_INPUTS)
     # yes. Include the docstring file
     set(doc_file "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${WRAPPER_MODULE_NAME}_doc.i")
     set(ITK_WRAP_PYTHON_SWIG_EXT "%include ${WRAPPER_MODULE_NAME}_doc.i\n\n${ITK_WRAP_PYTHON_SWIG_EXT}")
-  else()
-    # no. Clear the doc_file var
-    set(doc_file "")
   endif()
 
   # the default typemaps, exception handler, and includes
@@ -331,17 +331,17 @@ macro(itk_end_wrap_submodule_python group_name)
 
   # create the swig interface for all the groups in the module
   set(interface_file "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${base_name}.i")
-  set(lib ${group_name}Python)
+  set(lib ${base_name}Python)
   set(python_file "${ITK_PYTHON_PACKAGE_DIR}/${lib}.py")
   set(cpp_file "${CMAKE_CURRENT_BINARY_DIR}/${base_name}Python.cpp")
 
   # create the python customization for that wrap_*.cmake file.
   configure_file("${ITK_WRAP_PYTHON_SOURCE_DIR}/module_ext.i.in"
-  "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/python/${group_name}_ext.i"
+  "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/python/${base_name}_ext.i"
   @ONLY)
 
   # prepare dependencies
-  set(DEPS )
+  set(DEPS) # Used in itk_setup_swig_python macro (passed as global variable)
   foreach(dep ${WRAPPER_LIBRARY_DEPENDS})
     list(APPEND DEPS ${${dep}SwigFiles})
   endforeach()
@@ -360,18 +360,23 @@ macro(itk_end_wrap_submodule_python group_name)
 
   # add this wrap_*.cmake stuff to the list of modules to init in the main module.
   # first the extern c declaration and then the call of the extern function
-  set(ITK_WRAP_PYTHON_LIBRARY_DECLS "${ITK_WRAP_PYTHON_LIBRARY_DECLS} extern \"C\" PyMODINIT_FUNC PyInit__${group_name}Python();\n")
+  set(ITK_WRAP_PYTHON_LIBRARY_DECLS "${ITK_WRAP_PYTHON_LIBRARY_DECLS} extern \"C\" PyMODINIT_FUNC PyInit__${base_name}Python();\n")
   set(ITK_WRAP_PYTHON_LIBRARY_CALLS "${ITK_WRAP_PYTHON_LIBRARY_CALLS}
-  PyObject * ${group_name}AlreadyImported = PyDict_GetItemString(sysModules, \"itk._${group_name}Python\");
-  if( ${group_name}AlreadyImported == NULL )
+  PyObject * ${base_name}AlreadyImported = PyDict_GetItemString(sysModules, \"itk._${base_name}Python\");
+  if( ${base_name}AlreadyImported == NULL )
     {
-    PyImport_AddModule( \"itk._${group_name}Python\" );
-    PyObject * ${group_name}Module = PyInit__${group_name}Python();
-    PyDict_SetItemString( sysModules, \"itk._${group_name}Python\", ${group_name}Module );
-    Py_DECREF( ${group_name}Module );
+    PyImport_AddModule( \"itk._${base_name}Python\" );
+    PyObject * ${base_name}Module = PyInit__${base_name}Python();
+    PyDict_SetItemString( sysModules, \"itk._${base_name}Python\", ${base_name}Module );
+    Py_DECREF( ${base_name}Module );
     }
 ")
 
+  unset(lib)
+  unset(interface_file)
+  unset(doc_file)
+  unset(cpp_file)
+  unset(python_file)
 endmacro()
 
 
