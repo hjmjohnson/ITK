@@ -106,6 +106,7 @@ macro(itk_wrap_module library_name)
       set(WRAPPER_LIBRARY_${LANG} ON)
     endforeach()
   endif()
+  unset(LANG)
 
   if("${WRAPPER_LIBRARY_itk_wrap_modules_STATUS}" STREQUAL "NOT_EXECUTED")
     itk_wrap_modules()
