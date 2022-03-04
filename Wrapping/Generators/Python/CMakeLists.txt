@@ -74,6 +74,7 @@ macro(WRAP_ITK_PYTHON_BINDINGS_INSTALL path wrapper_library_name)
     DESTINATION "${PY_SITE_PACKAGES_PATH}/${path}"
     COMPONENT ${_component_module}${WRAP_ITK_INSTALL_COMPONENT_IDENTIFIER}RuntimeLibraries
     )
+  unset(_component_module)
 endmacro()
 
 
@@ -234,6 +235,8 @@ macro(itk_setup_swig_python type base_name interface_file python_file cpp_file d
     "${interface_file}"
     "${_swig_depend}")
 
+  unset(_swig_depend)
+
   if(NOT EXTERNAL_WRAP_ITK_PROJECT)
     configure_file(${WrapITK_SOURCE_DIR}/Generators/Python/PyBase/pyBase.i
       "${WRAP_ITK_TYPEDEFS_DIRECTORY}" COPYONLY)
@@ -290,6 +293,8 @@ macro(itk_setup_swig_python type base_name interface_file python_file cpp_file d
 
   WRAP_ITK_PYTHON_BINDINGS_INSTALL(/itk "${WRAPPER_LIBRARY_NAME}" "${python_file}")
 
+  unset(dependencies)
+  unset(swig_command)
 endmacro()
 
 macro(itk_end_wrap_submodule_python group_name)
