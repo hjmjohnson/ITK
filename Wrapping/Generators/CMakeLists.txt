@@ -132,7 +132,7 @@ foreach(f ${local_files})
   if(IS_DIRECTORY "${f}")
     if("${lang}" MATCHES "^CastXML$|^SwigInterface$|^Doc$")
       # put those generators before the others
-      set(generators ${lang} ${generators})
+      list(PREPEND generators ${lang})
     else()
       list(APPEND generators ${lang})
     endif()
