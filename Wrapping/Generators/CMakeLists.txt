@@ -109,18 +109,7 @@ endif()
 
 ###############################################################################
 # build the generators list
-if(EXTERNAL_WRAP_ITK_PROJECT)
-  # generators there have been turned on while building wrapitk
-else()
-  if(DEFINED ITK_WRAP_GCCXML)
-    # Keep ITK_WRAP_GCCXML for backward compatibility.
-    set(${module_prefix}_WRAP_CASTXML "${ITK_WRAP_GCCXML}" CACHE STRING "Build xml files.")
-  else()
-    set(${module_prefix}_WRAP_CASTXML ON CACHE BOOL "Build xml files.")
-  endif()
-  option(${module_prefix}_WRAP_SWIGINTERFACE "Build swig interfaces." ON)
-  mark_as_advanced(${module_prefix}_WRAP_CASTXML ${module_prefix}_WRAP_SWIGINTERFACE)
-endif()
+
 
 set(WRAP_ITK_GENERATORS CACHE INTERNAL "Internal generators list.")
 set(WRAP_ITK_UNUSED_GENERATORS CACHE INTERNAL "Internal unused generators list.")

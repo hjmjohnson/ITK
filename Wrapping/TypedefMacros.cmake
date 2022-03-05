@@ -412,11 +412,7 @@ ${DO_NOT_WAIT_FOR_THREADS_DECLS}
     set(python_file "${ITK_PYTHON_PACKAGE_DIR}/${lib}.py")
     set(cpp_file "${CMAKE_CURRENT_BINARY_DIR}/${lib}.cpp")
 
-    # if this is for an external library, let the user add extra swig args
-    if(EXTERNAL_WRAP_ITK_PROJECT)
-      set(WRAP_ITK_SWIG_ARGS_PYTHON "" CACHE STRING "Extra user-defined swig arguments to be to the swig executable.")
-      mark_as_advanced(WRAP_ITK_SWIG_ARGS_PYTHON)
-    endif()
+
 
     # Run swig to produce the *Python.cpp and the *Python.py file
     itk_setup_swig_python("Module" ${base_name} ${interface_file} ${python_file} ${cpp_file} "")
