@@ -2,10 +2,9 @@
 # the macros in charge of dispatching to the language specific macros
 
 macro(itk_wrap_module_all_generators library_name)
-  if(ITK_WRAPPING)
-    itk_wrap_module_castxml("${library_name}")
-    itk_wrap_module_swig_interface("${library_name}")
-  endif()
+  itk_wrap_module_castxml("${library_name}")
+  itk_wrap_module_swig_interface("${library_name}")
+
   if(${module_prefix}_WRAP_DOC)
     itk_wrap_module_DOC("${library_name}")
   endif()
@@ -16,10 +15,9 @@ endmacro()
 
 
 macro(itk_wrap_submodule_all_generators module)
-  if(ITK_WRAPPING)
-    itk_wrap_submodule_castxml("${module}")
-    itk_wrap_submodule_swig_interface("${module}")
-  endif()
+  itk_wrap_submodule_castxml("${module}")
+  itk_wrap_submodule_swig_interface("${module}")
+
   if(${module_prefix}_WRAP_DOC)
     itk_wrap_submodule_DOC("${module}")
   endif()
@@ -51,10 +49,8 @@ endmacro()
 
 
 macro(itk_wrap_include_all_generators inc)
-  if(ITK_WRAPPING)
-    itk_wrap_include_castxml("${inc}")
-    itk_wrap_include_swig_interface("${inc}")
-  endif()
+  itk_wrap_include_castxml("${inc}")
+  itk_wrap_include_swig_interface("${inc}")
 endmacro()
 
 macro(itk_wrap_template_all_generators name types)
@@ -79,9 +75,8 @@ endmacro()
 
 
 macro(itk_wrap_simple_type_all_generators wrap_class swig_name)
-  if(ITK_WRAPPING)
-    itk_wrap_simple_type_castxml("${wrap_class}" "${swig_name}")
-  endif()
+  itk_wrap_simple_type_castxml("${wrap_class}" "${swig_name}")
+
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
     itk_wrap_simple_type_python("${wrap_class}" "${swig_name}")
   endif()

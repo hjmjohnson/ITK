@@ -116,11 +116,6 @@ macro(WRAP_ITK_BINDINGS_INSTALL path)
 endmacro()
 
 ###############################################################################
-# Include needed macros -- WRAP_ITK_CMAKE_DIR must be set correctly
-###############################################################################
-include("${WRAP_ITK_CMAKE_DIR}/TypedefMacros.cmake")
-
-###############################################################################
 # Create wrapper names for simple types to ensure consistent naming
 ###############################################################################
 include("${WRAP_ITK_CMAKE_DIR}/WrapBasicTypes.cmake")
