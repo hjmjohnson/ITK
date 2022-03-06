@@ -119,11 +119,6 @@ set(_candidate_generators "SwigInterface" "Doc" "CastXML" "Python")
 
 foreach(lang ${_candidate_generators})
   string(TOUPPER "${lang}" lang_upper)
-
-  # add the language to the options
-  if(NOT DEFINED ${module_prefix}_WRAP_${lang_upper})
-    option(${module_prefix}_WRAP_${lang_upper} "Build swig ${lang} wrapper support." OFF)
-  endif()
   # add the language to the list, if the user have turn it on, and include
   # the subdirectory
   if(${module_prefix}_WRAP_${lang_upper})
@@ -133,7 +128,7 @@ foreach(lang ${_candidate_generators})
     list(APPEND WRAP_ITK_UNUSED_GENERATORS "${lang}")
   endif()
 endforeach()
-mark_as_advanced(${module_prefix}_WRAP_DOC)
+
 set(WRAP_ITK_GENERATORS ${WRAP_ITK_GENERATORS} CACHE INTERNAL "Internal generators list.")
 set(WRAP_ITK_UNUSED_GENERATORS ${WRAP_ITK_UNUSED_GENERATORS} CACHE INTERNAL "Internal unused generators list.")
 

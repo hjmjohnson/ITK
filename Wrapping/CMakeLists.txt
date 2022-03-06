@@ -30,10 +30,11 @@ enable_testing()
 if(EXTERNAL_WRAP_ITK_PROJECT)
   set(module_prefix ${itk-module})
   # if this is for an external library, let the user add extra swig args
-  if(EXTERNAL_WRAP_ITK_PROJECT)
-    set(WRAP_ITK_SWIG_ARGS_PYTHON "" CACHE STRING "Extra user-defined swig arguments to be to the swig executable.")
-    mark_as_advanced(WRAP_ITK_SWIG_ARGS_PYTHON)
-  endif()
+  set(WRAP_ITK_SWIG_ARGS_PYTHON "" CACHE STRING "Extra user-defined swig arguments to be to the swig executable.")
+  mark_as_advanced(WRAP_ITK_SWIG_ARGS_PYTHON)
+
+  option(${module_prefix}_WRAP_CASTXML       "Build xml files." OFF)
+  option(${module_prefix}_WRAP_SWIGINTERFACE "Build swig interfaces." OFF)
 else()
   set(module_prefix ITK)
   if(DEFINED ITK_WRAP_GCCXML)
@@ -42,8 +43,9 @@ else()
 
   option(${module_prefix}_WRAP_CASTXML       "Build xml files." ON)
   option(${module_prefix}_WRAP_SWIGINTERFACE "Build swig interfaces." ON)
-  mark_as_advanced(${module_prefix}_WRAP_CASTXML ${module_prefix}_WRAP_SWIGINTERFACE)
 endif()
+option(${module_prefix}_WRAP_DOC             "Build doc wrapping files" OFF)
+mark_as_advanced(${module_prefix}_WRAP_CASTXML ${module_prefix}_WRAP_SWIGINTERFACE ${module_prefix}_WRAP_DOC )
 
 ###############################################################################
 # Configure installation
