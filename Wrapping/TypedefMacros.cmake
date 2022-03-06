@@ -126,13 +126,13 @@ macro(itk_end_wrap_module)
     itk_end_wrap_modules_all_generators()
   endif()
 
-  if(${module_prefix}_WRAP_CASTXML)
+  if(ITK_WRAPPING)
+    #CASTXML WORK
     if(NOT TARGET ${WRAPPER_LIBRARY_NAME}CastXML)
       add_custom_target(${WRAPPER_LIBRARY_NAME}CastXML DEPENDS ${CastXML_OUTPUT_FILES})
       set(${WRAPPER_LIBRARY_NAME}XmlFiles ${CastXML_OUTPUT_FILES} CACHE INTERNAL "Internal ${WRAPPER_LIBRARY_NAME}Xml file list.")
     endif()
-  endif()
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
+    #SWIGINTERFACE WORK
     # Loop over the extra swig input files and copy them to the Typedefs directory
     foreach(source ${WRAPPER_LIBRARY_SWIG_INPUTS})
       file(COPY "${source}"
@@ -577,7 +577,7 @@ macro(itk_load_submodule module)
     message(SEND_ERROR "Module ${WRAPPER_LIBRARY_SOURCE_DIR}/${module}.wrap not found.")
   endif()
 
-  if(${module_prefix}_WRAP_CASTXML)
+  if(ITK_WRAPPING)
     # write the wrap_*.cxx file
     # Create the cxx file which will be given to castxml.
     set(cxx_file "${WRAPPER_LIBRARY_OUTPUT_DIR}/${module}.cxx")
@@ -682,7 +682,7 @@ macro(itk_load_submodule module)
     list(APPEND CastXML_OUTPUT_FILES ${xml_file})
   endif()
 
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
+  if(ITK_WRAPPING)
     itk_end_wrap_submodule_swig_interface("${module}")
   endif()
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)

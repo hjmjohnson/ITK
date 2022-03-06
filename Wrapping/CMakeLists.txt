@@ -21,6 +21,7 @@ project(WrapITK)
 
 enable_testing()
 
+
 # Set the module prefix once upon loading this files
 # Case 1:  An external module is loading this file from
 #          ${ITK_SOURCE_DIR}/CMake/ITKModuleExternal.cmake
@@ -29,23 +30,19 @@ enable_testing()
 # module_prefix is a global variable
 if(EXTERNAL_WRAP_ITK_PROJECT)
   set(module_prefix ${itk-module})
+
   # if this is for an external library, let the user add extra swig args
   set(WRAP_ITK_SWIG_ARGS_PYTHON "" CACHE STRING "Extra user-defined swig arguments to be to the swig executable.")
   mark_as_advanced(WRAP_ITK_SWIG_ARGS_PYTHON)
 
-  option(${module_prefix}_WRAP_CASTXML       "Build xml files." OFF)
-  option(${module_prefix}_WRAP_SWIGINTERFACE "Build swig interfaces." OFF)
 else()
   set(module_prefix ITK)
   if(DEFINED ITK_WRAP_GCCXML)
     message(FATAL_ERROR "DEPRECATED 'ITK_WRAP_GCCXML' is no longer valid, please remove")
   endif()
-
-  option(${module_prefix}_WRAP_CASTXML       "Build xml files." ON)
-  option(${module_prefix}_WRAP_SWIGINTERFACE "Build swig interfaces." ON)
 endif()
-option(${module_prefix}_WRAP_DOC             "Build doc wrapping files" OFF)
-mark_as_advanced(${module_prefix}_WRAP_CASTXML ${module_prefix}_WRAP_SWIGINTERFACE ${module_prefix}_WRAP_DOC )
+option(${module_prefix}_WRAP_DOC "Build doc wrapping files" OFF)
+mark_as_advanced(${module_prefix}_WRAP_DOC)
 
 ###############################################################################
 # Configure installation
@@ -107,8 +104,8 @@ set(ITK_TEST_DRIVER "itkTestDriver")
 # The real work on wrappers
 ###############################################################################
 
-include(ConfigureWrapping.cmake)
-
+include(${CMAKE_CURRENT_LIST_DIR}/ConfigureWrapping.cmake)
+include("${CMAKE_CURRENT_LIST_DIR}/TypedefMacros.cmake")
 ###############################################################################
 # let the different generators running some code before begining to parse the
 # modules

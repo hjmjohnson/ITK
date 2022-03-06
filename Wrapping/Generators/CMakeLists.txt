@@ -2,10 +2,8 @@
 # the macros in charge of dispatching to the language specific macros
 
 macro(itk_wrap_module_all_generators library_name)
-  if(${module_prefix}_WRAP_CASTXML)
+  if(ITK_WRAPPING)
     itk_wrap_module_castxml("${library_name}")
-  endif()
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
     itk_wrap_module_swig_interface("${library_name}")
   endif()
   if(${module_prefix}_WRAP_DOC)
@@ -18,10 +16,8 @@ endmacro()
 
 
 macro(itk_wrap_submodule_all_generators module)
-  if(${module_prefix}_WRAP_CASTXML)
+  if(ITK_WRAPPING)
     itk_wrap_submodule_castxml("${module}")
-  endif()
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
     itk_wrap_submodule_swig_interface("${module}")
   endif()
   if(${module_prefix}_WRAP_DOC)
@@ -55,10 +51,8 @@ endmacro()
 
 
 macro(itk_wrap_include_all_generators inc)
-  if(${module_prefix}_WRAP_CASTXML)
+  if(ITK_WRAPPING)
     itk_wrap_include_castxml("${inc}")
-  endif()
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
     itk_wrap_include_swig_interface("${inc}")
   endif()
 endmacro()
@@ -71,10 +65,8 @@ endmacro()
 
 
 macro(itk_wrap_one_type_all_generators wrap_method wrap_class swig_name template_params)
-  if(${module_prefix}_WRAP_CASTXML)
+  if(ITK_WRAPPING)
     itk_wrap_one_type_castxml("${wrap_method}" "${wrap_class}" "${swig_name}" "${template_params}")
-  endif()
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
     itk_wrap_one_type_swig_interface("${wrap_method}" "${wrap_class}" "${swig_name}" "${template_params}")
   endif()
   if(${module_prefix}_WRAP_DOC)
@@ -87,7 +79,7 @@ endmacro()
 
 
 macro(itk_wrap_simple_type_all_generators wrap_class swig_name)
-  if(${module_prefix}_WRAP_CASTXML)
+  if(ITK_WRAPPING)
     itk_wrap_simple_type_castxml("${wrap_class}" "${swig_name}")
   endif()
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
@@ -110,34 +102,30 @@ endif()
 ###############################################################################
 # build the generators list
 
-
 set(WRAP_ITK_GENERATORS CACHE INTERNAL "Internal generators list.")
 set(WRAP_ITK_UNUSED_GENERATORS CACHE INTERNAL "Internal unused generators list.")
 
 # The following list of directories int the "ITK/Wrapping/Generators
-set(_candidate_generators "SwigInterface" "Doc" "CastXML" "Python")
+# SwigInterface, CastXML, and Python are unconditional, if ITK_WRAPPING is ON, then these must also be ON
+list(APPEND WRAP_ITK_GENERATORS "SwigInterface")
+add_subdirectory("SwigInterface")
+list(APPEND WRAP_ITK_GENERATORS "CastXML")
+add_subdirectory("CastXML")
+list(APPEND WRAP_ITK_GENERATORS "Python")
+add_subdirectory("Python")
 
-foreach(lang ${_candidate_generators})
-  string(TOUPPER "${lang}" lang_upper)
-  # add the language to the list, if the user have turn it on, and include
-  # the subdirectory
-  if(${module_prefix}_WRAP_${lang_upper})
-    list(APPEND WRAP_ITK_GENERATORS "${lang}")
-    add_subdirectory("${lang}")
-  else()
-    list(APPEND WRAP_ITK_UNUSED_GENERATORS "${lang}")
-  endif()
-endforeach()
+if(${module_prefix}_WRAP_DOC)
+  list(APPEND WRAP_ITK_GENERATORS "Doc")
+  add_subdirectory("Doc")
+else()
+  list(APPEND WRAP_ITK_UNUSED_GENERATORS "Doc")
+endif()
 
 set(WRAP_ITK_GENERATORS ${WRAP_ITK_GENERATORS} CACHE INTERNAL "Internal generators list.")
 set(WRAP_ITK_UNUSED_GENERATORS ${WRAP_ITK_UNUSED_GENERATORS} CACHE INTERNAL "Internal unused generators list.")
 
 # The include_directories are added here to be used by Wrapping/ConfigureWrapping.cmake
-foreach(lang ${_candidate_generators})
-  string(TOUPPER "${lang}" lang_upper)
-  if(${module_prefix}_WRAP_${lang_upper})
-    get_directory_property(inc DIRECTORY "${lang}" INCLUDE_DIRECTORIES)
-    include_directories(${inc})
-  endif()
+foreach(lang ${WRAP_ITK_GENERATORS})
+  get_directory_property(inc DIRECTORY "${lang}" INCLUDE_DIRECTORIES)
+  include_directories(${inc})
 endforeach()
-unset(_candidate_generators)

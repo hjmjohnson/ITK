@@ -195,8 +195,6 @@ if(ITK_WRAPPING)
                        "ITK_WRAP_PYTHON" OFF)
   CMAKE_DEPENDENT_OPTION(${itk-module}_WRAP_DOC "Build Doxygen support." OFF
                        "ITK_WRAP_DOC" OFF)
-  set(${itk-module}_WRAP_CASTXML ${ITK_WRAPPING})
-  set(${itk-module}_WRAP_SWIGINTERFACE ${ITK_WRAPPING})
   if( (${itk-module}_WRAP_PYTHON OR
        ${itk-module}_WRAP_DOC
       )
@@ -204,7 +202,6 @@ if(ITK_WRAPPING)
     )
     set(EXTERNAL_WRAP_ITK_PROJECT ON)
     set(WRAP_ITK_CMAKE_DIR "${ITK_CMAKE_DIR}/../Wrapping")
-    include("${WRAP_ITK_CMAKE_DIR}/TypedefMacros.cmake")
     # Build tree
     if(EXISTS "${ITK_CMAKE_DIR}/../Wrapping/CMakeLists.txt")
       add_subdirectory("${ITK_CMAKE_DIR}/../Wrapping"
