@@ -562,7 +562,18 @@ macro(itk_load_submodule module)
   endif()
 
   # call generators specific macros which set several associated global variables
-  itk_wrap_submodule_all_generators("${module}")
+  if(${module_prefix}_WRAP_CASTXML)
+    itk_wrap_submodule_castxml("${module}")
+  endif()
+  if(${module_prefix}_WRAP_SWIGINTERFACE)
+    itk_wrap_submodule_swig_interface("${module}")
+  endif()
+  if(${module_prefix}_WRAP_DOC)
+    itk_wrap_submodule_DOC("${module}")
+  endif()
+  if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
+    itk_wrap_submodule_python("${module}" "${WRAPPER_LIBRARY_NAME}")
+  endif()
 
   # WRAPPER_INCLUDE_FILES: contains a list of all files to include in the final cxx file
   set(WRAPPER_INCLUDE_FILES )
