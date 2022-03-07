@@ -207,6 +207,7 @@ macro(itk_wrap_module_python library_name)
     # `target_link_directories()` was only added to CMake 3.13.
     # target_link_directories(${lib} PUBLIC ${python_library_directory})
     link_directories(${python_library_directory})
+    unset(python_library_directory)
   endif()
 endmacro()
 
