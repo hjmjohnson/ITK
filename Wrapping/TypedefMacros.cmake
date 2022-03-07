@@ -569,7 +569,10 @@ macro(itk_load_submodule module)
     set(CASTXML_FORCE_INSTANTIATE )
   endif()
   if(${module_prefix}_WRAP_SWIGINTERFACE)
-    itk_wrap_submodule_swig_interface("${module}")
+    # store the content of the SwigInterface.h files - a set of #includes for that module
+    set(SWIG_INTERFACE_INCLUDES )
+    # typedefs for swig
+    set(SWIG_INTERFACE_TYPEDEFS )
   endif()
   if(${module_prefix}_WRAP_DOC)
     itk_wrap_submodule_DOC("${module}")

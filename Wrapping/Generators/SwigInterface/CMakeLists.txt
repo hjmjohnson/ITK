@@ -285,13 +285,6 @@ macro(itk_wrap_include_swig_interface include_file)
 endmacro()
 
 
-macro(itk_wrap_submodule_swig_interface module)
-  # store the content of the SwigInterface.h files - a set of #includes for that module
-  set(SWIG_INTERFACE_INCLUDES )
-  # typedefs for swig
-  set(SWIG_INTERFACE_TYPEDEFS )
-endmacro()
-
 macro(itk_end_wrap_submodule_swig_interface module)
   # Global variables used:
   # WRAPPER_LIBRARY_OUTPUT_DIR
