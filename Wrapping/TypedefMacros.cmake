@@ -119,12 +119,22 @@ macro(itk_wrap_module library_name)
   if(${module_prefix}_WRAP_CASTXML)
     itk_wrap_module_castxml("${library_name}")
   endif()
+
   if(${module_prefix}_WRAP_SWIGINTERFACE)
-    itk_wrap_module_swig_interface("${library_name}")
+    # store the content of the mdx file
+    set(SWIG_INTERFACE_MDX_CONTENT )
+    # store the content of the .i file for the module - a set of import of all the .i files generated for the module
+    set(SWIG_INTERFACE_MODULE_CONTENT )
+    # build a list of modules to create the igenerator custom command
+    set(SWIG_INTERFACE_MODULES )
   endif()
+
   if(${module_prefix}_WRAP_DOC)
-    itk_wrap_module_DOC("${library_name}")
+    set(ITK_WRAP_DOC_DOXYGEN_HEADERS )  # doxygen headers to process in this lib
+    set(ITK_WRAP_DOC_DOXYGEN_XML_FILES )  # xml files produced by doxygen in this lib
+    set(ITK_WRAP_DOC_DOCSTRING_FILES )  # swig docstring files produced by doxygen in this lib
   endif()
+
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
     itk_wrap_module_python("${library_name}")
   endif()

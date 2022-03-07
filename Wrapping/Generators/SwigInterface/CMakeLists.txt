@@ -270,15 +270,6 @@ set(ITK_WRAP_SWIGINTERFACE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE INTERN
 set(WRAPPER_MASTER_INDEX_OUTPUT_DIR "${ITK_DIR}/Wrapping/Typedefs" CACHE INTERNAL "typedefs dir")
 set(IGENERATOR  "${CMAKE_CURRENT_SOURCE_DIR}/igenerator.py" CACHE INTERNAL "igenerator.py path" FORCE)
 
-macro(itk_wrap_module_swig_interface library_name)
-  # store the content of the mdx file
-  set(SWIG_INTERFACE_MDX_CONTENT )
-  # store the content of the .i file for the module - a set of import of all the .i files generated for the module
-  set(SWIG_INTERFACE_MODULE_CONTENT )
-  # build a list of modules to create the igenerator custom command
-  set(SWIG_INTERFACE_MODULES )
-endmacro()
-
 
 macro(itk_end_wrap_submodule_swig_interface module)
   # Global variables used:
