@@ -17,22 +17,6 @@ macro(itk_wrap_module_all_generators library_name)
 endmacro()
 
 
-macro(itk_wrap_submodule_all_generators module)
-  if(${module_prefix}_WRAP_CASTXML)
-    itk_wrap_submodule_castxml("${module}")
-  endif()
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
-    itk_wrap_submodule_swig_interface("${module}")
-  endif()
-  if(${module_prefix}_WRAP_DOC)
-    itk_wrap_submodule_DOC("${module}")
-  endif()
-  if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
-    itk_wrap_submodule_python("${module}" "${WRAPPER_LIBRARY_NAME}")
-  endif()
-endmacro()
-
-
 macro(itk_wrap_named_class_all_generators class swig_name)
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
     itk_wrap_named_class_python("${class}" "${swig_name}")
