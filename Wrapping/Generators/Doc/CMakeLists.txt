@@ -86,9 +86,6 @@ macro(itk_end_wrap_module_DOC)
     )
 endmacro()
 
-macro(itk_wrap_submodule_DOC module)
-  set(ITK_WRAP_DOC_DOXY2SWIG_INPUT )  # the c++ name - swig names definitions
-endmacro()
 
 ###############################################################################
 # This macro is called once per module

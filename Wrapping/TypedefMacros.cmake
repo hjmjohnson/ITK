@@ -575,7 +575,7 @@ macro(itk_load_submodule module)
     set(SWIG_INTERFACE_TYPEDEFS )
   endif()
   if(${module_prefix}_WRAP_DOC)
-    itk_wrap_submodule_DOC("${module}")
+    set(ITK_WRAP_DOC_DOXY2SWIG_INPUT )  # the c++ name - swig names definitions
   endif()
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
     itk_wrap_submodule_python("${module}" "${WRAPPER_LIBRARY_NAME}")
