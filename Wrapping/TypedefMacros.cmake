@@ -563,7 +563,10 @@ macro(itk_load_submodule module)
 
   # call generators specific macros which set several associated global variables
   if(${module_prefix}_WRAP_CASTXML)
-    itk_wrap_submodule_castxml("${module}")
+    # clear the typedefs and the includes
+    set(CASTXML_TYPEDEFS )
+    set(CASTXML_INCLUDES )
+    set(CASTXML_FORCE_INSTANTIATE )
   endif()
   if(${module_prefix}_WRAP_SWIGINTERFACE)
     itk_wrap_submodule_swig_interface("${module}")

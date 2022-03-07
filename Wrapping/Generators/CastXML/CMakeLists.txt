@@ -186,13 +186,6 @@ macro(itk_wrap_simple_type_castxml wrap_class swig_name)
 endmacro()
 
 
-macro(itk_wrap_submodule_castxml module)
-  # clear the typedefs and the includes
-  set(CASTXML_TYPEDEFS )
-  set(CASTXML_INCLUDES )
-  set(CASTXML_FORCE_INSTANTIATE )
-endmacro()
-
 macro(itk_end_wrap_submodule_castxml module)
   # write the wrap_*.cxx file
   #
