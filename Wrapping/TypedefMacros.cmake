@@ -900,6 +900,8 @@ macro(itk_wrap_include include_file)
       list(APPEND SWIG_INTERFACE_INCLUDES ${include_file})
     endif()
   endif()
+
+  unset(already_included)
 endmacro()
 
 
