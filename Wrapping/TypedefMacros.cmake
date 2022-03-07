@@ -888,7 +888,13 @@ macro(itk_wrap_include include_file)
       ${WRAPPER_INCLUDE_FILES}
       ${include_file}
     )
-    itk_wrap_include_all_generators("${include_file}")
+
+    if(${module_prefix}_WRAP_CASTXML)
+      itk_wrap_include_castxml("${include_file}")
+    endif()
+    if(${module_prefix}_WRAP_SWIGINTERFACE)
+      itk_wrap_include_swig_interface("${include_file}")
+    endif()
   endif()
 endmacro()
 

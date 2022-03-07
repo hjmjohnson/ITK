@@ -38,15 +38,6 @@ macro(itk_wrap_named_simple_class_all_generators class)
 endmacro()
 
 
-macro(itk_wrap_include_all_generators inc)
-  if(${module_prefix}_WRAP_CASTXML)
-    itk_wrap_include_castxml("${inc}")
-  endif()
-  if(${module_prefix}_WRAP_SWIGINTERFACE)
-    itk_wrap_include_swig_interface("${inc}")
-  endif()
-endmacro()
-
 macro(itk_wrap_template_all_generators name types)
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
     itk_wrap_template_python("${name}" "${types}")
