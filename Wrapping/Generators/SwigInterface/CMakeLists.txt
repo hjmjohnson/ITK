@@ -280,11 +280,6 @@ macro(itk_wrap_module_swig_interface library_name)
 endmacro()
 
 
-macro(itk_wrap_include_swig_interface include_file)
-  list(APPEND SWIG_INTERFACE_INCLUDES ${include_file})
-endmacro()
-
-
 macro(itk_end_wrap_submodule_swig_interface module)
   # Global variables used:
   # WRAPPER_LIBRARY_OUTPUT_DIR

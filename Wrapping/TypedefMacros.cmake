@@ -890,13 +890,18 @@ macro(itk_wrap_include include_file)
     )
 
     if(${module_prefix}_WRAP_CASTXML)
-      itk_wrap_include_castxml("${include_file}")
+      if("${include_file}" MATCHES "<.*>")
+        set(CASTXML_INCLUDES "${CASTXML_INCLUDES}#include ${include_file}\n")
+      else()
+        set(CASTXML_INCLUDES "${CASTXML_INCLUDES}#include \"${include_file}\"\n")
+      endif()
     endif()
     if(${module_prefix}_WRAP_SWIGINTERFACE)
-      itk_wrap_include_swig_interface("${include_file}")
+      list(APPEND SWIG_INTERFACE_INCLUDES ${include_file})
     endif()
   endif()
 endmacro()
+
 
 macro(itk_end_wrap_class)
   # Parse through the list of WRAPPER_TEMPLATES set up by the macros at the bottom
