@@ -18,17 +18,6 @@ macro(itk_wrap_one_type_all_generators wrap_method wrap_class swig_name template
 endmacro()
 
 
-macro(itk_wrap_simple_type_all_generators wrap_class swig_name)
-  if(${module_prefix}_WRAP_CASTXML)
-    itk_wrap_simple_type_castxml("${wrap_class}" "${swig_name}")
-  endif()
-  if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
-    itk_wrap_simple_type_python("${wrap_class}" "${swig_name}")
-  endif()
-endmacro()
-
-
-
 ###############################################################################
 # ccache management. This option is shared by most of generators, so put it here.
 option(ITK_USE_CCACHE "Use ccache to cache swig/castxml/... output and speedup the rebuild." OFF)

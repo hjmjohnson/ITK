@@ -957,7 +957,12 @@ endmacro()
 
 macro(itk_wrap_simple_type wrap_class swig_name)
   # Add a typedef, without support for any option
-  itk_wrap_simple_type_all_generators("${wrap_class}" "${swig_name}")
+  if(${module_prefix}_WRAP_CASTXML)
+    itk_wrap_simple_type_castxml("${wrap_class}" "${swig_name}")
+  endif()
+  if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
+    itk_wrap_simple_type_python("${wrap_class}" "${swig_name}")
+  endif()
 endmacro()
 
 
