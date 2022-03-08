@@ -428,13 +428,6 @@ macro(itk_wrap_submodule_python submodule module)
 endmacro()
 
 
-macro(itk_wrap_named_class_python class swig_name)
-  # store the current class wrapped, so we can generate the typemaps for itk::ImageSource
-  set(ITK_WRAP_PYTHON_CURRENT_CLASS "${class}")
-  set(ITK_WRAP_PYTHON_CURRENT_SWIG_NAME "${swig_name}")
-endmacro()
-
-
 macro(itk_wrap_template_python name types)
   if("${ITK_WRAP_PYTHON_CURRENT_CLASS}" STREQUAL "itk::ImageSource")
     # generate the typemap which let pass an ImageSource instead of an Image

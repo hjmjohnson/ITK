@@ -854,7 +854,9 @@ macro(itk_wrap_named_class class swig_name)
   set(WRAPPER_TEMPLATES)
 
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
-    itk_wrap_named_class_python("${class}" "${swig_name}")
+    # store the current class wrapped, so we can generate the typemaps for itk::ImageSource
+    set(ITK_WRAP_PYTHON_CURRENT_CLASS "${class}")
+    set(ITK_WRAP_PYTHON_CURRENT_SWIG_NAME "${swig_name}")
   endif()
   if(${module_prefix}_WRAP_DOC)
     itk_wrap_named_class_DOC("${class}" "${swig_name}")
