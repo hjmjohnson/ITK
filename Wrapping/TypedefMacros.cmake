@@ -888,8 +888,6 @@ macro(itk_wrap_named_simple_class class swig_name)
   # to avoid useless warning: no template can be defined in
   set(WRAPPER_WARN_ABOUT_NO_TEMPLATE OFF)
   itk_wrap_one_type("${WRAPPER_WRAP_METHOD}" "${WRAPPER_CLASS}" "${WRAPPER_SWIG_NAME}")
-
-  itk_wrap_named_simple_class_all_generators("${class}" "${swig_name}")
 endmacro()
 
 

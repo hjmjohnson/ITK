@@ -11,10 +11,6 @@ macro(itk_wrap_named_class_all_generators class swig_name)
 endmacro()
 
 
-macro(itk_wrap_named_simple_class_all_generators class)
-endmacro()
-
-
 macro(itk_wrap_template_all_generators name types)
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
     itk_wrap_template_python("${name}" "${types}")
