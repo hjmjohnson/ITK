@@ -171,12 +171,6 @@ mark_as_advanced(CASTXML_EXECUTABLE)
 set(ITK_WRAP_CASTXML_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE INTERNAL "castxml source dir")
 
 
-macro(itk_wrap_simple_type_castxml wrap_class swig_name)
-  set(CASTXML_TYPEDEFS "${CASTXML_TYPEDEFS}    typedef ${wrap_class} ${swig_name};\n")
-  set(CASTXML_FORCE_INSTANTIATE "${CASTXML_FORCE_INSTANTIATE}    (void)sizeof(${swig_name});\n")
-endmacro()
-
-
 macro(itk_end_wrap_submodule_castxml module)
   # write the wrap_*.cxx file
   #
