@@ -10,9 +10,6 @@ macro(itk_wrap_named_class_all_generators class swig_name)
   endif()
 endmacro()
 
-macro(itk_end_wrap_class_all_generators)
-endmacro()
-
 
 macro(itk_wrap_simple_class_all_generators class)
 endmacro()
