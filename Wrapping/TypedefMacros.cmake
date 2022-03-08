@@ -853,7 +853,12 @@ macro(itk_wrap_named_class class swig_name)
   # TODO: It shouldn't be used with the new architecture!!
   set(WRAPPER_TEMPLATES)
 
-  itk_wrap_named_class_all_generators("${class}" "${swig_name}")
+  if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
+    itk_wrap_named_class_python("${class}" "${swig_name}")
+  endif()
+  if(${module_prefix}_WRAP_DOC)
+    itk_wrap_named_class_DOC("${class}" "${swig_name}")
+  endif()
 endmacro()
 
 macro(itk_wrap_simple_class class)

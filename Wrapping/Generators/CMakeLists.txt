@@ -1,15 +1,6 @@
 ###############################################################################
 # the macros in charge of dispatching to the language specific macros
 
-macro(itk_wrap_named_class_all_generators class swig_name)
-  if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
-    itk_wrap_named_class_python("${class}" "${swig_name}")
-  endif()
-  if(${module_prefix}_WRAP_DOC)
-    itk_wrap_named_class_DOC("${class}" "${swig_name}")
-  endif()
-endmacro()
-
 
 macro(itk_wrap_one_type_all_generators wrap_method wrap_class swig_name template_params)
   if(${module_prefix}_WRAP_CASTXML)
