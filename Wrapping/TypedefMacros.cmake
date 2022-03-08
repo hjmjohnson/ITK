@@ -1043,7 +1043,9 @@ macro(itk_wrap_template name types)
 #   list(APPEND WRAPPER_TEMPLATES "${name} # ${types}")
   set(WRAPPER_WARN_ABOUT_NO_TEMPLATE OFF)
   itk_wrap_one_type("${WRAPPER_WRAP_METHOD}" "${WRAPPER_CLASS}" "${WRAPPER_SWIG_NAME}${name}" "${types}")
-  itk_wrap_template_all_generators("${name}" "${types}")
+  if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
+    itk_wrap_template_python("${name}" "${types}")
+  endif()
 endmacro()
 
 ###################################
