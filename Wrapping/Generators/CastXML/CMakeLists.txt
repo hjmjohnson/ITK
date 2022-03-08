@@ -271,13 +271,6 @@ macro(itk_end_wrap_submodule_castxml module)
 endmacro()
 
 
-macro(itk_wrap_one_type_castxml  wrap_method wrap_class swig_name template_params)
-  # insert a blank line to separate the classes
-  set(CASTXML_TYPEDEFS "${CASTXML_TYPEDEFS}\n")
-  # add a piece of code for type instantiation
-  set(CASTXML_FORCE_INSTANTIATE "${CASTXML_FORCE_INSTANTIATE}\n")
-endmacro()
-
 macro(itk_wrap_module_castxml library_name)
   # create the files used to pass the file to include to castxml
   set(castxml_inc_file "${WRAPPER_LIBRARY_OUTPUT_DIR}/${library_name}.castxml.inc")
