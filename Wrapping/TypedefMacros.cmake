@@ -871,8 +871,6 @@ macro(itk_wrap_simple_class class)
   set(WRAPPER_WARN_ABOUT_NO_TEMPLATE OFF)
   itk_wrap_one_type("${WRAPPER_WRAP_METHOD}" "${WRAPPER_CLASS}" "${WRAPPER_SWIG_NAME}")
   itk_end_wrap_class()
-
-  itk_wrap_simple_class_all_generators(${class})
 endmacro()
 
 
