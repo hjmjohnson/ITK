@@ -11,10 +11,6 @@ macro(itk_wrap_named_class_all_generators class swig_name)
 endmacro()
 
 
-macro(itk_wrap_simple_class_all_generators class)
-endmacro()
-
-
 macro(itk_wrap_named_simple_class_all_generators class)
 endmacro()
 
