@@ -312,8 +312,11 @@ macro(itk_end_wrap_module)
     # the .i input file.
     set(ITK_WRAP_PYTHON_PROCESS_SWIG_INPUTS ON)
     foreach(source ${WRAPPER_LIBRARY_SWIG_INPUTS})
+
       get_filename_component(base_name ${source} NAME_WE)
+      message(STATUS "NNNN base_name:${base_name}:    source:${source}:")
       itk_wrap_submodule_python("${base_name}" "${WRAPPER_LIBRARY_NAME}")
+      message(STATUS "NNNN base_name:${base_name}:    source:${source}:")
       itk_end_wrap_submodule_python("${base_name}")
     endforeach()
     set(ITK_WRAP_PYTHON_PROCESS_SWIG_INPUTS OFF)
@@ -492,10 +495,6 @@ ${DO_NOT_WAIT_FOR_THREADS_DECLS}
         set_target_properties(${lib} PROPERTIES VISIBILITY_INLINES_HIDDEN 1)
       endif()
 
-      add_dependencies(${lib} ${WRAPPER_LIBRARY_NAME}Swig)
-      if(${module_prefix}_WRAP_DOC)
-        add_dependencies(${lib} ${WRAPPER_LIBRARY_NAME}Doxygen)
-      endif()
       set(_component_module "")
       if(WRAP_ITK_INSTALL_COMPONENT_PER_MODULE)
         if("${WRAPPER_LIBRARY_NAME}" MATCHES "^ITK(PyUtils|PyBase)$")
@@ -508,20 +507,54 @@ ${DO_NOT_WAIT_FOR_THREADS_DECLS}
         DESTINATION "${PY_SITE_PACKAGES_PATH}/itk"
         COMPONENT ${_component_module}${WRAP_ITK_INSTALL_COMPONENT_IDENTIFIER}RuntimeLibraries
         )
+
+      add_dependencies(${lib} ${WRAPPER_LIBRARY_NAME}Swig)
+
+
+      ##################################################
+      if(${module_prefix}_WRAP_DOC)
+        # create the target doc dir
+        set(library_doc_build_dir "${CMAKE_CURRENT_BINARY_DIR}/Doc") # Library documentation interface files building directory
+        # TODO: direct name of the library dir?
+        file(MAKE_DIRECTORY ${library_doc_build_dir})
+
+        # configure doxygen input file.
+        # be sure to not include a header several times
+        if(NOT "${ITK_WRAP_DOC_DOXYGEN_HEADERS}" STREQUAL "")
+          UNIQUE(headers "${ITK_WRAP_DOC_DOXYGEN_HEADERS}")
+        endif()
+        set(library_doxygen_config_file ${library_doc_build_dir}/doxygen.config)
+        set(ITK_WRAP_DOC_LIBRARY_DIR "${library_doc_build_dir}")
+
+        ## HACK Converted to
+        ## HACK configure_file("${ITK_WRAP_DOC_SOURCE_DIR}/doxygen.config.in"
+        ## HACK       "${library_doxygen_config_file}"
+        ## HACK        @ONLY)
+        include(${WRAP_ITK_CMAKE_DIR}/DoxygenConfig.cmake)
+
+        # which files are produced?
+        set(outputs ${ITK_WRAP_DOC_DOXYGEN_XML_FILES})
+
+        list(LENGTH ITK_WRAP_DOC_DOXYGEN_HEADERS ITK_WRAP_DOC_DOXYGEN_HEADERS_LEN)
+        if(ITK_WRAP_DOC_DOXYGEN_HEADERS_LEN GREATER 0)
+          # run doxygen
+          doxygen_add_docs(${WRAPPER_LIBRARY_NAME}Doxygen
+            ${ITK_WRAP_DOC_DOXYGEN_HEADERS}
+            ALL
+            WORKING_DIRECTORY
+            USE_STAMP_FILE
+            COMMENT "-- Wrapping library ${WRAPPER_LIBRARY_NAME}: Constructing documentation xml structure.")
+          add_dependencies(${lib} ${WRAPPER_LIBRARY_NAME}Doxygen)
+        endif()
+      endif()
       if(NOT EXTERNAL_WRAP_ITK_PROJECT)
         # don't depends on the targets from wrapitk in external projects
         foreach(dep ${WRAPPER_LIBRARY_DEPENDS})
           add_dependencies(${lib} ${dep}Swig)
-          if(${module_prefix}_WRAP_DOC)
-            add_dependencies(${lib} ${dep}Doxygen)
-          endif()
         endforeach()
       endif()
     endif()
 
-  endif()
-  if(${module_prefix}_WRAP_DOC)
-    itk_end_wrap_module_DOC()
   endif()
 
   # Add testing
@@ -738,10 +771,34 @@ macro(itk_load_submodule module)
     itk_end_wrap_submodule_swig_interface("${module}")
   endif()
   if(${module_prefix}_WRAP_PYTHON AND WRAPPER_LIBRARY_PYTHON)
+    if(module STREQUAL "")
+      message(FATAL_ERROR "module:${module}: not set")
+    endif()
     itk_end_wrap_submodule_python("${module}")
   endif()
   if(${module_prefix}_WRAP_DOC)
-    itk_end_wrap_submodule_DOC("${module}")
+    set(doxy2swig_config_file ${CMAKE_CURRENT_BINARY_DIR}/Doc/${module_name}.conf)
+    configure_file("${ITK_WRAP_DOC_SOURCE_DIR}/itk_doxy2swig.conf.in"
+            "${doxy2swig_config_file}"
+            @ONLY)
+    # run itk_doxy2swig
+    set(itk_doxy2swig_py "${ITK_WRAP_DOC_SOURCE_DIR}/itk_doxy2swig.py")
+    if(module_name STREQUAL "")
+      message(FATAL_ERROR "AAAA module_name not set")
+    endif()
+    set(swig_doc_interface_file ${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${module_name}_doc.i)
+    add_custom_command(
+            OUTPUT ${swig_doc_interface_file}
+            COMMAND ${Python3_EXECUTABLE} ${itk_doxy2swig_py} ${doxy2swig_config_file} ${swig_doc_interface_file}
+            #DEPENDS ${ITK_WRAP_DOC_DOXYGEN_XML_FILES} ${doxy2swig_config_file} ${itk_doxy2swig_py}
+            DEPENDS ${WRAPPER_LIBRARY_NAME}Doxygen ${doxy2swig_config_file} ${itk_doxy2swig_py}
+            #    COMMENT "-- Wrapping library ${module_name}: Generating swig interface for inline documentation."
+    )
+    list(APPEND ITK_WRAP_DOC_DOCSTRING_FILES ${swig_doc_interface_file})
+
+    unset(swig_doc_interface_file)
+    unset(itk_doxy2swig_py)
+    unset(doxy2swig_config_file)
   endif()
 
   unset(_hdrs)
@@ -859,7 +916,34 @@ macro(itk_wrap_named_class class swig_name)
     set(ITK_WRAP_PYTHON_CURRENT_SWIG_NAME "${swig_name}")
   endif()
   if(${module_prefix}_WRAP_DOC)
-    itk_wrap_named_class_DOC("${class}" "${swig_name}")
+    if("${WRAPPER_WRAP_METHOD}" STREQUAL "ENUM")
+      # doc is not generated in the same way for enum. Just ignore it
+      set(ITK_WRAP_DOC_GENERATE_DOXY2SWIG_INPUT OFF)
+    else()
+      set(ITK_WRAP_DOC_GENERATE_DOXY2SWIG_INPUT OFF)
+      get_directory_property(dirs INCLUDE_DIRECTORIES)
+      set(paths )
+      foreach(dir ${dirs})
+        list(APPEND paths "${dir}/${swig_name}.h")
+      endforeach()
+      file(GLOB doc_path ${paths})
+      if(doc_path AND "${class}" MATCHES "^itk::")
+        # store the header
+        list(APPEND ITK_WRAP_DOC_DOXYGEN_HEADERS "${doc_path}")
+        # and the produced file
+        string(REPLACE "::" "_" base_name "${class}")
+        # some simple computations to find the xml file produced for this class
+        string(REGEX REPLACE "([A-Z])" "\\1" xmlname ${class})
+        string(REGEX REPLACE ":" "_1" xmlname ${xmlname})
+        # Converts camel case names to snake case.
+        string(REGEX REPLACE "([A-Z])" "_\\1" xmlname ${xmlname})
+        string(TOLOWER  ${xmlname} xmlname)
+        list(APPEND ITK_WRAP_DOC_DOXYGEN_XML_FILES "${CMAKE_CURRENT_BINARY_DIR}/Doc/xml/class${xmlname}.xml")
+        # the doxy2swig input
+        set(ITK_WRAP_DOC_DOXY2SWIG_INPUT "${ITK_WRAP_DOC_DOXY2SWIG_INPUT}\n${CMAKE_CURRENT_BINARY_DIR}/Doc/xml/class${xmlname}.xml\t${class}")
+        set(ITK_WRAP_DOC_GENERATE_DOXY2SWIG_INPUT ON)
+      endif()
+    endif()
   endif()
 endmacro()
 

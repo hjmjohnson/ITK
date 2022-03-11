@@ -299,7 +299,10 @@ macro(itk_setup_swig_python type base_name interface_file python_file cpp_file d
 endmacro()
 
 macro(itk_end_wrap_submodule_python group_name)
-
+  message(STATUS "group_name:${group_name}")
+  if(group_name STREQUAL "")
+    message(FATAL_ERROR "xxAAAA group_name not set")
+  endif()
   # base_name may be used in other macros
   set(base_name ${group_name})
 
@@ -327,6 +330,9 @@ macro(itk_end_wrap_submodule_python group_name)
   set(doc_file)
   if(${module_prefix}_WRAP_DOC AND NOT ITK_WRAP_PYTHON_PROCESS_SWIG_INPUTS)
     # yes. Include the docstring file
+    if(group_name STREQUAL "")
+      message(FATAL_ERROR "AAAA group_name not set")
+    endif()
     set(doc_file "${WRAPPER_MASTER_INDEX_OUTPUT_DIR}/${group_name}_doc.i")
     set(ITK_WRAP_PYTHON_SWIG_EXT "%include ${group_name}_doc.i\n\n${ITK_WRAP_PYTHON_SWIG_EXT}")
   else()
