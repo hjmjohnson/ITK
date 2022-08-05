@@ -18,6 +18,7 @@
 #ifndef itkIOTestHelper_h
 #define itkIOTestHelper_h
 #include "ITKIOImageBaseExport.h"
+#include "itkTestingMacros.h"
 #include <string>
 
 #include "itksys/SystemTools.hxx"
@@ -74,10 +75,10 @@ public:
   }
 
   template <typename ImageType, typename ImageIOType>
-  static void
-  WriteImage(typename ImageType::Pointer   image,
-             const std::string &           filename,
-             typename ImageIOType::Pointer imageio = nullptr)
+  static int
+  WriteImage_CatchReturnStatus(typename ImageType::Pointer   image,
+                               const std::string &           filename,
+                               typename ImageIOType::Pointer imageio = nullptr)
   {
     const bool create_local_io_object{ imageio.IsNull() };
     using WriterType = itk::ImageFileWriter<ImageType>;
@@ -90,15 +91,7 @@ public:
       writer->SetImageIO(imageio);
       writer->SetFileName(filename);
       writer->SetInput(image);
-      try
-      {
-        writer->Update();
-      }
-      catch (const itk::ExceptionObject & err)
-      {
-        std::cerr << "Exception Object caught: " << std::endl << err << std::endl;
-        throw;
-      }
+      ITK_TRY_EXPECT_NO_EXCEPTION(writer->Update());
     }
 
     {                             // Test if writing to an invalid location causes exception to be thrown:
@@ -107,31 +100,26 @@ public:
 
       const std::string bad_root_path{ "/a_blatantly_obvious/bad_file_path/that/should/never/exist/on/the/computer/" };
       const std::string bad_filename{ bad_root_path + filename };
-      bool              exception_correctly_caught = false;
 
       auto writer = WriterType::New();
       writer->SetImageIO(imageio);
       writer->SetFileName(bad_filename);
       writer->SetInput(image);
-      try
-      {
-        writer->Update();
-      }
-      catch (const itk::ExceptionObject & err)
-      {
-        // This is the correct behavior
-        std::cout << "Correctly caught exception for attempting to write to an invalid file." << std::endl;
-        exception_correctly_caught = true;
-      }
-      catch (...)
-      {
-        itkGenericExceptionMacro(<< "IO library exception not converted to an itk::ExceptionObject.");
-      }
-      if (!exception_correctly_caught)
-      {
-        itkGenericExceptionMacro(<< "Invalid file writing path did not throw an exception: " << bad_filename << " with "
-                                 << imageio->GetNameOfClass());
-      }
+      ITK_TRY_EXPECT_EXCEPTION(writer->Update());
+    }
+    return EXIT_SUCCESS;
+  }
+
+  template <typename ImageType, typename ImageIOType>
+  static void
+  WriteImage(typename ImageType::Pointer   image,
+             const std::string &           filename,
+             typename ImageIOType::Pointer imageio = nullptr)
+  {
+    const int return_status = WriteImage_CatchReturnStatus<ImageType, ImageIOType>(image, filename, imageio);
+    if (return_status != EXIT_SUCCESS)
+    {
+      itkGenericExceptionMacro(<< "IO library writer did not evaluate correctly.");
     }
   }
 
