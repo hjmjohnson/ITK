@@ -455,7 +455,7 @@ endif()
 
 #-----------------------------------------------------------------------------
 # Python install
-#find_package(PythonInterp REQUIRED)
+#find_package(Python3 COMPONENTS Interpreter REQUIRED)
 #macro(GET_PYTHON_SITE_PACKAGE dir)
 #  execute_process(
 #  COMMAND ${PYTHON_EXECUTABLE} "-c" "from distutils import sysconfig; print sysconfig.get_python_lib()"
