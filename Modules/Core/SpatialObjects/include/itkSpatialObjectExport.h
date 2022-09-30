@@ -32,4 +32,6 @@
 #  define ITKSpatialObjectExport
 #endif
 
+#include "itkNamespace.h"
+
 #endif
