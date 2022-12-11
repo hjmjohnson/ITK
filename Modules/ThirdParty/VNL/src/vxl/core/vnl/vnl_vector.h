@@ -701,6 +701,7 @@ public:
   void
   set_data(T * datain, size_t sz, bool LetArrayManageMemory)
   {
+    (void) LetArrayManageMemory;
     // Only True is allowed
     assert(LetArrayManageMemory == true);
     this->resize(sz);

@@ -106,13 +106,15 @@ template <typename TValue>
 void
 Array<TValue>::SetDataSameSize(TValue * datain, bool LetArrayManageMemory)
 {
+  // NOTE: Required to have same size vnl_vector< TValue >::num_elmts = sz;
+  m_LetArrayManageMemory = LetArrayManageMemory;
+  const auto temp_size = this->m_NumElements;
   if (m_LetArrayManageMemory)
   {
     Array_free_blah;
   }
+  m_NumElements = temp_size;
   m_Data = datain;
-  // NOTE: Required to have same size vnl_vector< TValue >::num_elmts = sz;
-  m_LetArrayManageMemory = LetArrayManageMemory;
 }
 
 template <typename TValue>

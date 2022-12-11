@@ -59,6 +59,7 @@ KdTreeWeightedCentroidNonterminalNode<TSample>::KdTreeWeightedCentroidNontermina
   this->m_MeasurementVectorSize = NumericTraits<CentroidType>::GetLength(centroid);
 
   const double size_as_double = static_cast<double>(size);
+  this->m_Centroid.SetSize(this->m_WeightedCentroid.Size());
   std::transform(this->m_WeightedCentroid.begin(),
                  this->m_WeightedCentroid.end(),
                  this->m_Centroid.begin(),

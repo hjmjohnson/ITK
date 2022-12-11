@@ -5,7 +5,6 @@ add_executable( vnl_test_all
   test_driver.cxx
 
   # The tests
-        test_decnum.cxx
   test_complex.cxx
   test_complexify.cxx
   test_inverse.cxx
@@ -24,12 +23,12 @@ add_executable( vnl_test_all
   test_numeric_traits.cxx
   test_power.cxx
   test_quaternion.cxx
-        test_polynomial.cxx
+  test_polynomial.cxx
   test_real_polynomial.cxx
   test_real_npolynomial.cxx
   test_resize.cxx
   test_rotation_matrix.cxx
-        test_transpose.cxx
+  test_transpose.cxx
   test_fastops.cxx
   test_vector.cxx
   test_gamma.cxx
