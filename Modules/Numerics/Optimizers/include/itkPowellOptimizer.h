@@ -230,8 +230,8 @@ protected:
   {
     this->m_SpaceDimension = dim;
     this->m_LineDirection.set_size(dim);
-    this->m_LineOrigin.set_size(dim);
-    this->m_CurrentPosition.set_size(dim);
+    this->m_LineOrigin.SetSize(dim);
+    this->m_CurrentPosition.SetSize(dim);
     this->Modified();
   }
 

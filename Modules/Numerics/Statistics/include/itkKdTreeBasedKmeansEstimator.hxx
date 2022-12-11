@@ -261,7 +261,7 @@ KdTreeBasedKmeansEstimator<TKdTree>::CopyParameters(ParametersType & source, Int
   unsigned int i, j;
   int          index = 0;
 
-  for (i = 0; i < static_cast<unsigned int>(source.size() / m_MeasurementVectorSize); ++i)
+  for (i = 0; i < static_cast<unsigned int>(source.Size() / m_MeasurementVectorSize); ++i)
   {
     for (j = 0; j < m_MeasurementVectorSize; ++j)
     {
@@ -322,7 +322,7 @@ KdTreeBasedKmeansEstimator<TKdTree>::StartOptimization()
   InternalParametersType currentPosition;
   // currentPosition.resize(m_Parameters.size() / m_MeasurementVectorSize);
 
-  for (i = 0; i < m_Parameters.size() / m_MeasurementVectorSize; ++i)
+  for (i = 0; i < m_Parameters.Size() / m_MeasurementVectorSize; ++i)
   {
     ParameterType m;
     ParameterType m1;
@@ -336,7 +336,7 @@ KdTreeBasedKmeansEstimator<TKdTree>::StartOptimization()
   m_CurrentIteration = 0;
   std::vector<int> validIndexes;
 
-  for (i = 0; i < static_cast<unsigned int>(m_Parameters.size() / m_MeasurementVectorSize); ++i)
+  for (i = 0; i < static_cast<unsigned int>(m_Parameters.Size() / m_MeasurementVectorSize); ++i)
   {
     validIndexes.push_back(i);
   }

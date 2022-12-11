@@ -417,9 +417,9 @@ PowellOptimizer::StartOptimization()
   m_Stop = false;
 
   m_SpaceDimension = m_CostFunction->GetNumberOfParameters();
-  m_LineOrigin.set_size(m_SpaceDimension);
+  m_LineOrigin.SetSize(m_SpaceDimension);
   m_LineDirection.set_size(m_SpaceDimension);
-  this->m_CurrentPosition.set_size(m_SpaceDimension);
+  this->m_CurrentPosition.SetSize(m_SpaceDimension);
 
   vnl_matrix<double> xi(m_SpaceDimension, m_SpaceDimension);
   vnl_vector<double> xit(m_SpaceDimension);

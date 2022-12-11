@@ -38,9 +38,6 @@
 #include "itkImageHelper.h"
 #include "itkFloatTypes.h"
 
-#include <vxl_version.h>
-#include "vnl/vnl_matrix_fixed.hxx" // Get the templates
-
 namespace itk
 {
 

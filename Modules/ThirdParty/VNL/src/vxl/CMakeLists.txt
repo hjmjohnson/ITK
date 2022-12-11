@@ -253,7 +253,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/config/cmake/config/VXLIntrospectionConfig.cma
 #-------------------------------------------------------------------
 # This block should come after VXLIntrospectionConfig.cmake has been executed.
 if(VCL_HAS_LFS OR WIN32)
-  option( VXL_USE_LFS "Should VXL use Large File Support?" NO)
+  option( VXL_USE_LFS "Should VXL use Large File Support?" OFF)
   mark_as_advanced( VXL_USE_LFS )
 endif()
 
@@ -294,7 +294,7 @@ mark_as_advanced(VXL_BUILD_NONDEPRECATED_ONLY)
 CMAKE_DEPENDENT_OPTION(VXL_BUILD_CORE_PROBABILITY "Build VXL's probability libraries (Experimental)" ON
                        "VXL_BUILD_CORE_NUMERICS;NOT VXL_BUILD_CORE_NUMERICS_ONLY" OFF)
 
-option(VXL_USE_GEOTIFF "Use the GEOTIFF Library if available" True)
+option(VXL_USE_GEOTIFF "Use the GEOTIFF Library if available" OFF)
 mark_as_advanced(VXL_USE_GEOTIFF)
 
 # Build the core vxl + support libraries

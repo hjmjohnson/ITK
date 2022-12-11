@@ -76,11 +76,13 @@ MultipleValuedVnlCostFunctionAdaptor::f(const InternalParametersType & inparamet
     parameters.SetDataSameSize(const_cast<double *>(inparameters.data_block()), false);
   }
 
-  measures = this->m_CostFunction->GetValue(parameters);
+  auto                               temp = this->m_CostFunction->GetValue(parameters);
+  vnl_vector<MeasureType::ValueType> vnl_temp(temp.data_block(), temp.Size());
+  measures = vnl_temp;
 
   // Notify observers. This is used for overcoming the limitation of VNL
   // optimizers of not providing callbacks per iteration.
-  m_CachedValue = measures;
+  m_CachedValue.SetData(measures.data_block(), measures.size());
   m_CachedCurrentParameters = parameters;
   this->ReportIteration(FunctionEvaluationIterationEvent());
 }
@@ -139,8 +141,9 @@ MultipleValuedVnlCostFunctionAdaptor::compute(const InternalParametersType & x,
   {
     parameters.SetDataSameSize(const_cast<double *>(x.data_block()), false);
   }
-
-  *ff = static_cast<InternalMeasureType>(this->m_CostFunction->GetValue(parameters));
+  vnl_vector<ParametersType::ValueType> temp(parameters.data_block(), parameters.Size());
+  auto                                  xx = this->m_CostFunction->GetValue(parameters);
+  *ff = InternalMeasureType(xx.data_block(), xx.Size());
   this->m_CostFunction->GetDerivative(parameters, externalGradient);
 
   this->ConvertExternalToInternalGradient(externalGradient, *g);

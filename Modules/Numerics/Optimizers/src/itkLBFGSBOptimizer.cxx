@@ -53,12 +53,10 @@ private:
  * Constructor
  */
 LBFGSBOptimizer::LBFGSBOptimizer()
-
-{
-  m_LowerBound = InternalBoundValueType(0);
-  m_UpperBound = InternalBoundValueType(0);
-  m_BoundSelection = InternalBoundSelectionType(0);
-}
+  : m_LowerBound()
+  , m_UpperBound()
+  , m_BoundSelection()
+{}
 
 /**
  * Destructor
@@ -138,7 +136,8 @@ LBFGSBOptimizer::SetLowerBound(const BoundValueType & value)
   this->m_LowerBound = value;
   if (m_OptimizerInitialized)
   {
-    m_VnlOptimizer->set_lower_bound(m_LowerBound);
+    vnl_vector<BoundValueType::ValueType> temp(m_LowerBound.data_block(), m_LowerBound.Size());
+    m_VnlOptimizer->set_lower_bound(temp);
   }
   this->Modified();
 }
@@ -152,7 +151,8 @@ LBFGSBOptimizer::SetUpperBound(const BoundValueType & value)
   this->m_UpperBound = value;
   if (m_OptimizerInitialized)
   {
-    m_VnlOptimizer->set_upper_bound(m_UpperBound);
+    vnl_vector<BoundValueType::ValueType> temp_upper(m_UpperBound.data_block(), m_UpperBound.Size());
+    m_VnlOptimizer->set_upper_bound(temp_upper);
   }
   this->Modified();
 }
@@ -175,7 +175,8 @@ LBFGSBOptimizer::SetBoundSelection(const BoundSelectionType & value)
   m_BoundSelection = value;
   if (m_OptimizerInitialized)
   {
-    m_VnlOptimizer->set_bound_selection(m_BoundSelection);
+    vnl_vector<BoundSelectionType::ValueType> temp(m_BoundSelection.data_block(), m_BoundSelection.Size());
+    m_VnlOptimizer->set_bound_selection(temp);
   }
   this->Modified();
 }
@@ -268,9 +269,12 @@ LBFGSBOptimizer::SetCostFunction(SingleValuedCostFunction * costFunction)
   m_VnlOptimizer = std::make_unique<InternalOptimizerType>(*adaptor, this);
 
   // set the optimizer parameters
-  m_VnlOptimizer->set_lower_bound(m_LowerBound);
-  m_VnlOptimizer->set_upper_bound(m_UpperBound);
-  m_VnlOptimizer->set_bound_selection(m_BoundSelection);
+  vnl_vector<BoundValueType::ValueType> temp_lower(m_LowerBound.data_block(), m_LowerBound.Size());
+  m_VnlOptimizer->set_lower_bound(temp_lower);
+  vnl_vector<BoundValueType::ValueType> temp_upper(m_UpperBound.data_block(), m_UpperBound.Size());
+  m_VnlOptimizer->set_upper_bound(temp_upper);
+  vnl_vector<BoundSelectionType::ValueType> temp_bound(m_BoundSelection.data_block(), m_BoundSelection.Size());
+  m_VnlOptimizer->set_bound_selection(temp_bound);
   m_VnlOptimizer->set_cost_function_convergence_factor(m_CostFunctionConvergenceFactor);
   m_VnlOptimizer->set_projected_gradient_tolerance(m_ProjectedGradientTolerance);
   m_VnlOptimizer->set_max_function_evals(m_MaximumNumberOfEvaluations);
@@ -296,17 +300,17 @@ LBFGSBOptimizer::StartOptimization()
     itkExceptionMacro(<< "InitialPosition array does not have sufficient number of elements");
   }
 
-  if (m_LowerBound.size() < numberOfParameters)
+  if (m_LowerBound.Size() < numberOfParameters)
   {
     itkExceptionMacro(<< "LowerBound array does not have sufficient number of elements");
   }
 
-  if (m_UpperBound.size() < numberOfParameters)
+  if (m_UpperBound.Size() < numberOfParameters)
   {
     itkExceptionMacro(<< "UppperBound array does not have sufficient number of elements");
   }
 
-  if (m_BoundSelection.size() < numberOfParameters)
+  if (m_BoundSelection.Size() < numberOfParameters)
   {
     itkExceptionMacro(<< "BoundSelection array does not have sufficient number of elements");
   }
@@ -328,9 +332,11 @@ LBFGSBOptimizer::StartOptimization()
 
   // vnl optimizers return the solution by reference
   // in the variable provided as initial position
-  m_VnlOptimizer->minimize(parameters);
+  vnl_vector<ParametersType::ValueType> temp(parameters.data_block(), parameters.Size());
+  m_VnlOptimizer->minimize(temp);
+  std::copy(temp.cbegin(), temp.cend(), parameters.begin());
 
-  if (parameters.size() != this->GetInitialPosition().Size())
+  if (parameters.Size() != this->GetInitialPosition().Size())
   {
     // set current position to initial position and throw an exception
     this->SetCurrentPosition(this->GetInitialPosition());

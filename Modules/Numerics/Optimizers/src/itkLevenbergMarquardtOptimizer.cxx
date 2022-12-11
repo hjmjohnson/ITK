@@ -87,7 +87,10 @@ LevenbergMarquardtOptimizer::GetValue() const
           parameters[i] *= scales[i];
         }
       }
-      this->GetNonConstCostFunctionAdaptor()->f(parameters, measures);
+      vnl_vector<ParametersType::ValueType> temp_params(parameters.data_block(), parameters.Size());
+      vnl_vector<ParametersType::ValueType> temp_measure(measures.data_block(), measures.Size());
+      this->GetNonConstCostFunctionAdaptor()->f(temp_params, temp_measure);
+      std::copy(temp_measure.cbegin(), temp_measure.cend(), measures.begin());
     }
   }
   return measures;
@@ -121,11 +124,15 @@ LevenbergMarquardtOptimizer::StartOptimization()
 
   if (this->GetCostFunctionAdaptor()->GetUseGradient())
   {
-    m_VnlOptimizer->minimize_using_gradient(parameters);
+    vnl_vector<ParametersType::ValueType> temp(parameters.data_block(), parameters.Size());
+    m_VnlOptimizer->minimize_using_gradient(temp);
+    std::copy(temp.cbegin(), temp.cend(), parameters.begin());
   }
   else
   {
-    m_VnlOptimizer->minimize_without_gradient(parameters);
+    vnl_vector<ParametersType::ValueType> temp(parameters.data_block(), parameters.Size());
+    m_VnlOptimizer->minimize_without_gradient(temp);
+    std::copy(temp.cbegin(), temp.cend(), parameters.begin());
   }
 
   // we scale the parameters down if scales are defined

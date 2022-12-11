@@ -21,6 +21,9 @@
 #include "itkPoint.h"
 #include "itkCovariantVector.h"
 
+#include "itk_eigen.h"
+#include ITK_EIGEN(Core)
+
 #include <vxl_version.h>
 #include "vnl/vnl_matrix_fixed.hxx" // Get the templates
 #include "vnl/vnl_transpose.h"
@@ -65,6 +68,7 @@ public:
 
   /** Internal matrix type */
   using InternalMatrixType = vnl_matrix_fixed<T, VRows, VColumns>;
+  //  using InternalMatrixType = Eigen::Matrix<T,VRows, VColumns>;
 
   /** Compatible square matrix. This is currently used by operator* to help
    * with wrapping.  \todo In the future, the method should be templated to allow
@@ -87,7 +91,7 @@ public:
   Self operator*(const CompatibleSquareMatrixType & matrix) const;
 
   template <unsigned int OuterDim>
-  Matrix<T, VRows, OuterDim> operator*(const vnl_matrix_fixed<T, VRows, OuterDim> & matrix) const
+  Matrix<T, VRows, OuterDim> operator*(const InternalMatrixType & matrix) const
   {
     const Matrix<T, VRows, OuterDim> result(m_Matrix * matrix);
     return result;

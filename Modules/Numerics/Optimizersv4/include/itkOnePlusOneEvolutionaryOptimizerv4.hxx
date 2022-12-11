@@ -96,7 +96,7 @@ OnePlusOneEvolutionaryOptimizerv4<TInternalComputationValueType>::StartOptimizat
 
   unsigned int       spaceDimension = this->m_Metric->GetNumberOfParameters();
   vnl_matrix<double> A(spaceDimension, spaceDimension);
-  vnl_vector<double> parent(this->m_Metric->GetParameters());
+  vnl_vector<double> parent(this->m_Metric->GetParameters().data_block(), this->m_Metric->GetParameters().Size());
   vnl_vector<double> f_norm(spaceDimension);
   vnl_vector<double> child(spaceDimension);
   vnl_vector<double> delta(spaceDimension);

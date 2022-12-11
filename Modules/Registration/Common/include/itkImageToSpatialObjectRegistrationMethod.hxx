@@ -97,13 +97,13 @@ ImageToSpatialObjectRegistrationMethod<TFixedImage, TMovingSpatialObject>::Initi
   {
     itkWarningMacro(<< " WARNING : Size mismatch between initial parameter and transform");
     itkWarningMacro(<< "Resizing m_InitialTransformParameters to  " << m_Transform->GetNumberOfParameters());
-    m_InitialTransformParameters.set_size(m_Transform->GetNumberOfParameters());
+    m_InitialTransformParameters.SetSize(m_Transform->GetNumberOfParameters());
     m_InitialTransformParameters.Fill(0.0f);
   }
 
   if (m_LastTransformParameters.Size() != m_Transform->GetNumberOfParameters())
   {
-    m_LastTransformParameters.set_size(m_Transform->GetNumberOfParameters());
+    m_LastTransformParameters.SetSize(m_Transform->GetNumberOfParameters());
     m_LastTransformParameters.Fill(0.0f);
   }
 

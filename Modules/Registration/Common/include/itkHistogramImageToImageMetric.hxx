@@ -185,9 +185,9 @@ HistogramImageToImageMetric<TFixedImage, TMovingImage>::GetDerivative(const Tran
   const unsigned int ParametersDimension = this->GetNumberOfParameters();
 
   // Make sure the scales have been set
-  if (m_DerivativeStepLengthScales.size() != ParametersDimension)
+  if (m_DerivativeStepLengthScales.Size() != ParametersDimension)
   {
-    itkExceptionMacro(<< "The size of DerivativesStepLengthScales is " << m_DerivativeStepLengthScales.size()
+    itkExceptionMacro(<< "The size of DerivativesStepLengthScales is " << m_DerivativeStepLengthScales.Size()
                       << ", but the Number of Parameters is " << ParametersDimension << '.');
   }
 

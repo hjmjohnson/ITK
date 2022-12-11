@@ -126,16 +126,17 @@ MatlabTransformIOTemplate<ParametersValueType>::Write()
 {
   auto it = this->GetWriteTransformList().begin();
 
-  typename MatlabTransformIOTemplate<ParametersValueType>::TransformType::ParametersType TempArray;
-  std::ofstream                                                                          out;
+  typename MatlabTransformIOTemplate<ParametersValueType>::TransformType::ParametersType      TempArray;
+  typename MatlabTransformIOTemplate<ParametersValueType>::TransformType::FixedParametersType FixedTempArray;
+  std::ofstream                                                                               out;
   this->OpenStream(out, true);
   while (it != this->GetWriteTransformList().end())
   {
     std::string xfrmType((*it)->GetTransformTypeAsString());
     TempArray = (*it)->GetParameters();
     vnl_matlab_write(out, TempArray.begin(), TempArray.size(), xfrmType.c_str());
-    TempArray = (*it)->GetFixedParameters();
-    vnl_matlab_write(out, TempArray.begin(), TempArray.size(), "fixed");
+    FixedTempArray = (*it)->GetFixedParameters();
+    vnl_matlab_write(out, FixedTempArray.begin(), FixedTempArray.size(), "fixed");
     ++it;
   }
   out.close();

@@ -85,7 +85,8 @@ AmoebaOptimizer::GetValue() const
       parameters[i] *= scales[i];
     }
   }
-  return costFunction->f(parameters);
+  vnl_vector<ParametersType::ValueType> temp(parameters.data_block(), parameters.Size());
+  return costFunction->f(temp);
 }
 
 /** Get the Optimizer */
@@ -130,9 +131,9 @@ AmoebaOptimizer::SetCostFunction(SingleValuedCostFunction * costFunction)
 void
 AmoebaOptimizer::StartOptimization()
 {
-  const ScalesType &                                           scales = GetScales();
-  const ParametersType &                                       initialPosition = GetInitialPosition();
-  InternalParametersType                                       delta(m_InitialSimplexDelta);
+  const ScalesType &     scales = GetScales();
+  const ParametersType & initialPosition = GetInitialPosition();
+  InternalParametersType delta(m_InitialSimplexDelta.data_block(), m_InitialSimplexDelta.Size());
   SingleValuedNonLinearVnlOptimizer::CostFunctionAdaptorType * costFunction = this->GetCostFunctionAdaptor();
   auto n = static_cast<unsigned int>(costFunction->get_number_of_unknowns());
 
@@ -202,9 +203,13 @@ AmoebaOptimizer::StartOptimization()
     delta = automaticDelta;
   }
 
-  this->m_VnlOptimizer->minimize(parameters, delta);
+
+  vnl_vector<ParametersType::ValueType> temp_params_init(parameters.data_block(), parameters.Size());
+  this->m_VnlOptimizer->minimize(temp_params_init, delta);
+  std::copy(temp_params_init.begin(), temp_params_init.end(), parameters.begin());
   bestPosition = parameters;
-  double bestValue = adaptor->f(bestPosition);
+
+  double bestValue = adaptor->f(temp_params_init);
   // multiple restart heuristic
   if (this->m_OptimizeWithRestarts)
   {
@@ -217,9 +222,11 @@ AmoebaOptimizer::StartOptimization()
       this->m_VnlOptimizer->set_max_iterations(static_cast<int>(this->m_MaximumNumberOfIterations - totalEvaluations));
       parameters = bestPosition;
       delta = delta * (1.0 / pow(2.0, static_cast<double>(i)) * (rand() > RAND_MAX / 2 ? 1 : -1));
-      m_VnlOptimizer->minimize(parameters, delta);
+      vnl_vector<ParametersType::ValueType> temp_params(parameters.data_block(), parameters.Size());
+      m_VnlOptimizer->minimize(temp_params, delta);
+      std::copy(temp_params.cbegin(), temp_params.cend(), parameters.begin());
       totalEvaluations += static_cast<unsigned int>(m_VnlOptimizer->get_num_evaluations());
-      currentValue = adaptor->f(parameters);
+      currentValue = adaptor->f(temp_params);
       // be consistent with the underlying vnl amoeba implementation
       double maxAbs = 0.0;
       for (unsigned int j = 0; j < n; ++j)

@@ -61,10 +61,12 @@ ConjugateGradientLineSearchOptimizerv4Template<TInternalComputationValueType>::A
   }
 
   TInternalComputationValueType gamma{};
-  TInternalComputationValueType gammaDenom = inner_product(this->m_LastGradient, this->m_LastGradient);
+  TInternalComputationValueType gammaDenom =
+    std::inner_product(this->m_LastGradient.begin(), this->m_LastGradient.end(), this->m_LastGradient.begin(), 0);
   if (gammaDenom > itk::NumericTraits<TInternalComputationValueType>::epsilon())
   {
-    gamma = inner_product(this->m_Gradient - this->m_LastGradient, this->m_Gradient) / gammaDenom;
+    auto temp = this->m_Gradient - this->m_LastGradient;
+    gamma = std::inner_product(temp.begin(), temp.end(), this->m_LastGradient.begin(), 0.0) / gammaDenom;
   }
 
   /** Modified Polak-Ribiere restart conditions */

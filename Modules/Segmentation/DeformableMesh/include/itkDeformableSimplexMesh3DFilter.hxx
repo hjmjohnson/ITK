@@ -254,9 +254,9 @@ DeformableSimplexMesh3DFilter<TInputMesh, TOutputMesh>::ComputeGeometry()
 
     tmp = data->neighbors[0] - data->pos;
 
-    double D = 1.0 / (2 * data->sphereRadius); /* */
+    const double D = 1.0 / (2 * data->sphereRadius); /* */
 
-    double tmpNormalProd = dot_product(tmp.GetVnlVector(), data->normal.GetVnlVector());
+    const double tmpNormalProd = dot_product(tmp.GetVnlVector(), data->normal.GetVnlVector());
 
     double sinphi = 2 * data->circleRadius * D * itk::Math::sgn(tmpNormalProd);
     double phi = std::asin(sinphi);

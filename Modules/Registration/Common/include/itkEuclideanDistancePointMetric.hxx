@@ -65,7 +65,7 @@ EuclideanDistancePointMetric<TFixedPointSet, TMovingPointSet, TDistanceMap>::Get
   MovingPointIterator pointEnd = movingPointSet->GetPoints()->End();
 
   MeasureType measure;
-  measure.set_size(movingPointSet->GetPoints()->Size());
+  measure.SetSize(movingPointSet->GetPoints()->Size());
 
   this->SetTransformParameters(parameters);
 

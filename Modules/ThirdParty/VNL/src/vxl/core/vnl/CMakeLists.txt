@@ -10,72 +10,11 @@ doxygen_add_library(core/vnl
 # Create vnl_config.h
 option(VNL_CONFIG_CHECK_BOUNDS
   "Whether vnl_vector/vnl_matrix accessor methods check index bounds." ON)
-option(VNL_CONFIG_LEGACY_METHODS
-  "Whether backward-compatibility methods are provided by vnl." OFF)
-option(VNL_CONFIG_THREAD_SAFE
-  "Whether thread-safe vnl implementations are used." ON)
-
-
-#if( VXL_HAS_EMMINTRIN_H AND VXL_HAS_SSE2_HARDWARE_SUPPORT )
-#  option(VNL_CONFIG_ENABLE_SSE2
-#    "Enable Streaming SIMD Extensions 2 optimisations (hardware dependant)." ON)
-#else()
-  option(VNL_CONFIG_ENABLE_SSE2
-    "Enable Streaming SIMD Extensions 2 optimisations (hardware dependant). Currently broken. For use by VNL developers only." OFF)
-#endif()
-if(VNL_CONFIG_ENABLE_SSE2)
-  # Tested on ubuntu and Mac.  ctest becomes unstable and failures change between runs.
-  message(FATAL_ERROR  "VNL_CONFIG_ENABLE_SSE2 option currently fails testing on all platforms,  this is not suitable for use at the momemnt.")
-endif()
-
-option(VNL_CONFIG_ENABLE_SSE2_ROUNDING
-  "Enable Streaming SIMD Extensions 2 implementation of rounding (hardware dependant)."
-  ${VXL_HAS_SSE2_HARDWARE_SUPPORT} )
-if( VNL_CONFIG_ENABLE_SSE2_ROUNDING )
-  if( NOT VXL_HAS_SSE2_HARDWARE_SUPPORT )
-    if( VXL_SSE2_HARDWARE_SUPPORT_POSSIBLE )
-      message( ${VXL_SSE2_HARDWARE_SUPPORT_POSSIBLE_HELP} )
-    endif()
-    message( SEND_ERROR "Cannot have VNL_CONFIG_ENABLE_SSE2_ROUNDING because"
-                        " there is no SSE2 hardware support" )
-    set(VNL_CONFIG_ENABLE_SSE2_ROUNDING 0)
-  endif()
-endif()
-
 
 mark_as_advanced(
   VNL_CONFIG_CHECK_BOUNDS
-  VNL_CONFIG_LEGACY_METHODS
-  VNL_CONFIG_THREAD_SAFE
-  VNL_CONFIG_ENABLE_SSE2_ROUNDING
-  VNL_CONFIG_ENABLE_SSE2
   )
-# Need to enforce 1/0 values for configuration.
-if(VNL_CONFIG_CHECK_BOUNDS)
-  set(VNL_CONFIG_CHECK_BOUNDS 1)
-else()
-  set(VNL_CONFIG_CHECK_BOUNDS 0)
-endif()
-if(VNL_CONFIG_LEGACY_METHODS)
-  set(VNL_CONFIG_LEGACY_METHODS 1)
-else()
-  set(VNL_CONFIG_LEGACY_METHODS 0)
-endif()
-if(VNL_CONFIG_THREAD_SAFE)
-  set(VNL_CONFIG_THREAD_SAFE 1)
-else()
-  set(VNL_CONFIG_THREAD_SAFE 0)
-endif()
-if(VNL_CONFIG_ENABLE_SSE2)
-  set(VNL_CONFIG_ENABLE_SSE2 1)
-else()
-  set(VNL_CONFIG_ENABLE_SSE2 0)
-endif()
-if(VNL_CONFIG_ENABLE_SSE2_ROUNDING)
-  set(VNL_CONFIG_ENABLE_SSE2_ROUNDING 1)
-else()
-  set(VNL_CONFIG_ENABLE_SSE2_ROUNDING 0)
-endif()
+
 
 # If VXL_INSTALL_INCLUDE_DIR is the default value
 if("${VXL_INSTALL_INCLUDE_DIR}" STREQUAL "include/vxl")
@@ -108,7 +47,6 @@ set( vnl_sources
   vnl_sparse_matrix.hxx        vnl_sparse_matrix.h
   vnl_matrix_exp.hxx           vnl_matrix_exp.h
   vnl_file_matrix.hxx          vnl_file_matrix.h
-  vnl_sym_matrix.hxx           vnl_sym_matrix.h
 
   # matrix operators
   vnl_fortran_copy.hxx         vnl_fortran_copy.h
@@ -148,12 +86,6 @@ set( vnl_sources
 
   # Quaternions
   vnl_quaternion.hxx           vnl_quaternion.h
-  # Rational number arithmetic; represented by two long integers
-  vnl_rational.cxx             vnl_rational.h
-  # Arbitrary precision integers
-  vnl_bignum.cxx               vnl_bignum.h
-  # Arbitrary precision decimal numbers
-  vnl_decnum.cxx               vnl_decnum.h
   # Finite field and finite ring numbers and arithmetic
   vnl_finite.h
 
@@ -166,9 +98,6 @@ set( vnl_sources
   # traits
   vnl_numeric_traits.cxx       vnl_numeric_traits.h
                                vnl_complex_traits.h
-  vnl_bignum_traits.cxx        vnl_bignum_traits.h
-  vnl_decnum_traits.cxx        vnl_decnum_traits.h
-  vnl_rational_traits.cxx      vnl_rational_traits.h
 
   # matrix and vector specialisations
   vnl_int_matrix.cxx           vnl_int_matrix.h
@@ -252,29 +181,6 @@ set( vnl_sources
 )
 
 aux_source_directory(Templates vnl_sources)
-
-if(CMAKE_COMPILER_IS_GNUCXX)
-  if(VNL_CONFIG_ENABLE_SSE2)
-    if( NOT VXL_HAS_SSE2_HARDWARE_SUPPORT )
-      if( VXL_SSE2_HARDWARE_SUPPORT_POSSIBLE )
-        message( ${VXL_SSE2_HARDWARE_SUPPORT_POSSIBLE_HELP} )
-      endif()
-      message( SEND_ERROR "Cannot have VNL_CONFIG_ENABLE_SSE2 because"
-                          " there is no SSE2 hardware support" )
-      set(VNL_CONFIG_ENABLE_SSE2 FALSE)
-    endif()
-  endif()
-  if(VNL_CONFIG_ENABLE_SSE2_ROUNDING)
-    if( NOT VXL_HAS_SSE2_HARDWARE_SUPPORT )
-      if( VXL_SSE2_HARDWARE_SUPPORT_POSSIBLE )
-        message( ${VXL_SSE2_HARDWARE_SUPPORT_POSSIBLE_HELP} )
-      endif()
-      message( SEND_ERROR "Cannot have VNL_CONFIG_ENABLE_SSE2_ROUNDING because"
-                          " there is no SSE2 hardware support" )
-      set(VNL_CONFIG_ENABLE_SSE2_ROUNDING FALSE)
-    endif()
-  endif()
-endif()
 
 vxl_add_library(LIBRARY_NAME ${VXL_LIB_PREFIX}vnl
   LIBRARY_SOURCES ${vnl_sources}

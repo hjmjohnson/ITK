@@ -124,7 +124,7 @@ AmoebaOptimizerv4::StartOptimization(bool /* doOnlyInitialization */)
   ParametersType parameters = this->m_Metric->GetParameters();
   unsigned int   n = parameters.GetSize();
 
-  InternalParametersType delta(m_InitialSimplexDelta);
+  InternalParametersType delta(m_InitialSimplexDelta.data_block(), m_InitialSimplexDelta.Size());
 
   // start the actual work
   this->InvokeEvent(StartEvent());
@@ -178,9 +178,11 @@ AmoebaOptimizerv4::StartOptimization(bool /* doOnlyInitialization */)
     delta = automaticDelta;
   }
 
-  this->m_VnlOptimizer->minimize(parameters, delta);
+  vnl_vector<ParametersType::ValueType> temp_params_init(parameters.data_block(), parameters.Size());
+  this->m_VnlOptimizer->minimize(temp_params_init, delta);
+  std::copy(temp_params_init.begin(), temp_params_init.end(), parameters.begin());
   bestPosition = parameters;
-  double bestValue = adaptor->f(bestPosition);
+  double bestValue = adaptor->f(temp_params_init);
   // multiple restart heuristic
   if (this->m_OptimizeWithRestarts)
   {
@@ -191,8 +193,10 @@ AmoebaOptimizerv4::StartOptimization(bool /* doOnlyInitialization */)
       this->m_VnlOptimizer->set_max_iterations(static_cast<int>(this->m_NumberOfIterations - this->m_CurrentIteration));
       parameters = bestPosition;
       delta = delta * (1.0 / pow(2.0, static_cast<double>(i)) * (rand() > RAND_MAX / 2 ? 1 : -1));
-      m_VnlOptimizer->minimize(parameters, delta);
-      double currentValue = adaptor->f(parameters);
+      vnl_vector<ParametersType::ValueType> temp_params(parameters.data_block(), parameters.Size());
+      m_VnlOptimizer->minimize(temp_params, delta);
+      std::copy(temp_params.begin(), temp_params.end(), parameters.begin());
+      double currentValue = adaptor->f(temp_params);
       // be consistent with the underlying vnl amoeba implementation
       double maxAbs = 0.0;
       for (unsigned int j = 0; j < n; ++j)

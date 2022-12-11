@@ -186,8 +186,8 @@ ImageToImageFilter<TInputImage, TOutputImage>::VerifyInputInformation() ITKv5_CO
 
       if (!inputPtr1->GetOrigin().GetVnlVector().is_equal(inputPtrN->GetOrigin().GetVnlVector(), coordinateTol) ||
           !inputPtr1->GetSpacing().GetVnlVector().is_equal(inputPtrN->GetSpacing().GetVnlVector(), coordinateTol) ||
-          !inputPtr1->GetDirection().GetVnlMatrix().as_ref().is_equal(inputPtrN->GetDirection().GetVnlMatrix().as_ref(),
-                                                                      this->m_DirectionTolerance))
+          !inputPtr1->GetDirection().GetVnlMatrix().is_equal(inputPtrN->GetDirection().GetVnlMatrix().as_ref(),
+                                                             this->m_DirectionTolerance))
       {
         std::ostringstream originString, spacingString, directionString;
         if (!inputPtr1->GetOrigin().GetVnlVector().is_equal(inputPtrN->GetOrigin().GetVnlVector(), coordinateTol))

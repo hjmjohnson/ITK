@@ -114,7 +114,8 @@ LBFGSBOptimizerv4::SetLowerBound(const BoundValueType & value)
   this->m_LowerBound = value;
   if (m_OptimizerInitialized)
   {
-    m_VnlOptimizer->set_lower_bound(m_LowerBound);
+    vnl_vector<BoundValueType::ValueType> temp(m_LowerBound.data_block(), m_LowerBound.Size());
+    m_VnlOptimizer->set_lower_bound(temp);
   }
   this->Modified();
 }
@@ -125,7 +126,8 @@ LBFGSBOptimizerv4::SetUpperBound(const BoundValueType & value)
   this->m_UpperBound = value;
   if (m_OptimizerInitialized)
   {
-    m_VnlOptimizer->set_upper_bound(m_UpperBound);
+    vnl_vector<BoundValueType::ValueType> temp(m_UpperBound.data_block(), m_UpperBound.Size());
+    m_VnlOptimizer->set_upper_bound(temp);
   }
   this->Modified();
 }
@@ -136,7 +138,8 @@ LBFGSBOptimizerv4::SetBoundSelection(const BoundSelectionType & value)
   m_BoundSelection = value;
   if (m_OptimizerInitialized)
   {
-    m_VnlOptimizer->set_bound_selection(m_BoundSelection);
+    vnl_vector<BoundSelectionType::ValueType> temp(m_BoundSelection.data_block(), m_BoundSelection.Size());
+    m_VnlOptimizer->set_bound_selection(temp);
   }
   this->Modified();
 }
@@ -179,9 +182,12 @@ LBFGSBOptimizerv4::SetMetric(MetricType * metric)
 
   // set the optimizer parameters
   m_VnlOptimizer->set_trace(m_Trace);
-  m_VnlOptimizer->set_lower_bound(m_LowerBound);
-  m_VnlOptimizer->set_upper_bound(m_UpperBound);
-  m_VnlOptimizer->set_bound_selection(m_BoundSelection);
+  vnl_vector<BoundValueType::ValueType> templb(m_LowerBound.data_block(), m_LowerBound.Size());
+  m_VnlOptimizer->set_lower_bound(templb);
+  vnl_vector<BoundValueType::ValueType> tempub(m_UpperBound.data_block(), m_UpperBound.Size());
+  m_VnlOptimizer->set_upper_bound(tempub);
+  vnl_vector<BoundSelectionType::ValueType> tempbs(m_BoundSelection.data_block(), m_BoundSelection.Size());
+  m_VnlOptimizer->set_bound_selection(tempbs);
   m_VnlOptimizer->set_cost_function_convergence_factor(m_CostFunctionConvergenceFactor);
   m_VnlOptimizer->set_projected_gradient_tolerance(m_GradientConvergenceTolerance);
   m_VnlOptimizer->set_max_function_evals(static_cast<int>(m_MaximumNumberOfFunctionEvaluations));
@@ -235,7 +241,9 @@ LBFGSBOptimizerv4::StartOptimization(bool /*doOnlyInitialization*/)
 
   // vnl optimizers return the solution by reference
   // in the variable provided as initial position
-  m_VnlOptimizer->minimize(parameters);
+  vnl_vector<BoundValueType::ValueType> temp(parameters.data_block(), parameters.Size());
+  m_VnlOptimizer->minimize(temp);
+  std::copy(temp.cbegin(), temp.cend(), parameters.begin());
 
   if (parameters.GetSize() != this->GetInitialPosition().Size())
   {

@@ -25,64 +25,80 @@ namespace itk
 
 template <typename TValue>
 Array<TValue>::Array(const Self & rhs)
-  : vnl_vector<TValue>(rhs)
-// The copy constructor creates new memory, no matter
-// the setting of let array manage memory of rhs
-{}
+  // The copy constructor creates new memory, no matter
+  // the setting of let array manage memory of rhs
+  : m_NumElements{ static_cast<Eigen::Index>(rhs.m_NumElements) }
+  , m_LetArrayManageMemory{ true }
+{
+  Array_alloc_blah(this->m_NumElements);
+  std::copy(rhs.begin(), rhs.end(), this->m_Data);
+}
 
 template <typename TValue>
 Array<TValue>::Array(const VnlVectorType & rhs)
-  : vnl_vector<TValue>(rhs)
-// The vnl vector copy constructor creates new memory
-// no matter the setting of let array manage memory of rhs
-{}
+  // The vnl vector copy constructor creates new memory
+  // no matter the setting of let array manage memory of rhs
+  : m_NumElements{ static_cast<Eigen::Index>(rhs.m_NumElements) }
+  , m_LetArrayManageMemory{ true }
+{
+  Array_alloc_blah(this->m_NumElements);
+  std::copy(rhs.begin(), rhs.end(), this->m_Data);
+}
 
 
 template <typename TValue>
 Array<TValue>::Array(SizeValueType dimension)
-  : vnl_vector<TValue>(dimension)
-// The vnl vector copy constructor creates new memory
-// no matter the setting of let array manage memory of rhs
-{}
+  // The vnl vector copy constructor creates new memory
+  // no matter the setting of let array manage memory of rhs
+  : m_NumElements{ static_cast<Eigen::Index>(dimension) }
+  , m_LetArrayManageMemory{ true }
+{
+  Array_alloc_blah(m_NumElements);
+}
 
 template <typename TValue>
 Array<TValue>::Array(const SizeValueType dimension, const TValue & value)
-  : vnl_vector<TValue>(dimension, value)
-{}
-
-template <typename TValue>
-Array<TValue>::Array(ValueType * datain, SizeValueType sz, bool LetArrayManageMemory)
-  : m_LetArrayManageMemory(LetArrayManageMemory)
+  : Array(dimension)
 {
-  vnl_vector<TValue>::data = datain;
-  vnl_vector<TValue>::num_elmts = sz;
+  this->Fill(value);
 }
 
-#if defined(ITK_LEGACY_REMOVE)
+///** Constructor with user specified data */
+template <typename TValue>
+Array<TValue>::Array(ValueType * datain, SizeValueType sz, bool LetArrayManageMemory)
+  : m_NumElements{ static_cast<Eigen::Index>(sz) }
+  , m_LetArrayManageMemory{ LetArrayManageMemory }
+{
+  if (LetArrayManageMemory)
+  {
+    Array_alloc_blah(sz);
+    std::copy(datain, datain + sz, m_Data);
+  }
+  else
+  {
+    m_Data = datain;
+  }
+}
+
+/** Constructor with user specified const data */
 template <typename TValue>
 Array<TValue>::Array(const ValueType * datain, SizeValueType sz)
-  : vnl_vector<TValue>(datain, sz)
-// The vnl vector copy constructor creates new memory
-// no matter the setting of let array manage memory of rhs
-{}
+  // The vnl vector copy constructor creates new memory
+  // no matter the setting of let array manage memory of rhs
+  : m_NumElements{ static_cast<Eigen::Index>(sz) }
+  , m_LetArrayManageMemory{ true }
+{
+  Array_alloc_blah(sz);
+  std::copy(datain, datain + sz, m_Data);
+}
 
-#else // defined ( ITK_LEGACY_REMOVE )
-template <typename TValue>
-Array<TValue>::Array(const ValueType * datain, SizeValueType sz, bool /* LetArrayManageMemory */)
-  : /* NOTE: The 3rd argument "LetArrayManageMemory, was never valid to use, but is
-     * preserved to maintain backwards compatibility*/
-  vnl_vector<TValue>(datain, sz)
-// The vnl vector copy constructor creates new memory
-// no matter the setting of let array manage memory of rhs
-{}
-#endif
-
+/** Destructor */
 template <typename TValue>
 Array<TValue>::~Array()
 {
   if (!m_LetArrayManageMemory)
   {
-    vnl_vector<TValue>::data = nullptr;
+    Array_free_blah;
   }
 }
 
@@ -92,9 +108,9 @@ Array<TValue>::SetDataSameSize(TValue * datain, bool LetArrayManageMemory)
 {
   if (m_LetArrayManageMemory)
   {
-    vnl_vector<TValue>::destroy();
+    Array_free_blah;
   }
-  vnl_vector<TValue>::data = datain;
+  m_Data = datain;
   // NOTE: Required to have same size vnl_vector< TValue >::num_elmts = sz;
   m_LetArrayManageMemory = LetArrayManageMemory;
 }
@@ -105,10 +121,10 @@ Array<TValue>::SetData(TValue * datain, SizeValueType sz, bool LetArrayManageMem
 {
   if (m_LetArrayManageMemory)
   {
-    vnl_vector<TValue>::destroy();
+    Array_free_blah;
   }
-  vnl_vector<TValue>::data = datain;
-  vnl_vector<TValue>::num_elmts = sz;
+  m_Data = datain;
+  m_NumElements = sz;
   m_LetArrayManageMemory = LetArrayManageMemory;
 }
 
@@ -116,21 +132,10 @@ template <typename TValue>
 void
 Array<TValue>::SetSize(SizeValueType sz)
 {
-  if (this->size() != sz)
+  if (this->Size() != sz)
   {
-    // If the array doesn't own the data we do not want to erase it
-    // on a resize
-    if (!m_LetArrayManageMemory)
-    {
-      vnl_vector<TValue>::data = nullptr;
-    }
-
     // Call the superclass's set_size
     this->set_size(sz);
-
-    // Size we have allocated new data we need to take
-    // responsibility for deleting it
-    m_LetArrayManageMemory = true;
   }
 }
 
@@ -140,15 +145,12 @@ Array<TValue>::operator=(const Self & rhs) -> Self &
 {
   if (this != &rhs)
   {
-
     // Set the size the same as rhs.
     // The SetSize method takes care of who is responsible
     // for memory management
     //
     this->SetSize(rhs.GetSize());
-
-    // Call the superclass implementation
-    this->VnlVectorType::operator=(rhs);
+    std::copy(rhs.begin(), rhs.end(), this->m_Data);
   }
   return *this;
 }
@@ -157,18 +159,12 @@ template <typename TValue>
 auto
 Array<TValue>::operator=(const VnlVectorType & rhs) -> Self &
 {
-  if (this != &rhs)
-  {
-
-    // Set the size the same as rhs.
-    // The SetSize method takes care of who is responsible
-    // for memory management
-    //
-    this->SetSize(rhs.size());
-
-    // Call the superclass implementation
-    this->VnlVectorType::operator=(rhs);
-  }
+  // Set the size the same as rhs.
+  // The SetSize method takes care of who is responsible
+  // for memory management
+  //
+  this->SetSize(rhs.size());
+  std::copy(rhs.cbegin(), rhs.cend(), m_Data);
   return *this;
 }
 } // namespace itk

@@ -777,13 +777,10 @@ main(int argc, char * argv[])
 
   // Software Guide : BeginCodeSnippet
   TransformType::ParametersType parametersScale;
-  parametersScale.set_size(3);
+  parametersScale.SetSize(3);
   parametersScale[0] = 1000; // angle scale
-
-  for (unsigned int i = 1; i < 3; ++i)
-  {
-    parametersScale[i] = 2; // offset scale
-  }
+  parametersScale[1] = 2;    // offset x scale
+  parametersScale[2] = 2;    // offset y scale
   optimizer->SetScales(parametersScale);
   // Software Guide : EndCodeSnippet
 

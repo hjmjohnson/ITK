@@ -68,7 +68,8 @@ FRPROptimizer::LineOptimize(ParametersType * p, ParametersType & xi, double * va
 void
 FRPROptimizer::LineOptimize(ParametersType * p, ParametersType & xi, double * val, ParametersType & tempCoord)
 {
-  this->SetLine(*p, xi);
+  vnl_vector<ParametersType::ValueType> temp_xi(xi.data_block(), xi.Size());
+  this->SetLine(*p, temp_xi);
 
   double ax = 0.0;
   double fa = (*val);

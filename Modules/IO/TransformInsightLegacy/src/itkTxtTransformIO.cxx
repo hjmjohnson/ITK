@@ -129,11 +129,11 @@ TxtTransformIOTemplate<TParametersValueType>::Read()
   typename TransformType::ParametersType VectorBuffer;
 
   typename TransformType::ParametersType TmpParameterArray;
-  TmpParameterArray.clear();
+
+  typename TransformType::FixedParametersType VectorFixedBuffer;
   typename TransformType::FixedParametersType TmpFixedParameterArray;
-  TmpFixedParameterArray.clear();
-  bool haveFixedParameters = false;
-  bool haveParameters = false;
+  bool                                        haveFixedParameters = false;
+  bool                                        haveParameters = false;
 
   std::string line;
 
@@ -181,11 +181,14 @@ TxtTransformIOTemplate<TParametersValueType>::Read()
     }
     else if (Name == "Parameters" || Name == "FixedParameters")
     {
-      VectorBuffer.clear();
+      if (Name == "Parameters")
+      {
+        VectorBuffer.clear();
 
-      // Read them
-      parse >> VectorBuffer;
-      itkDebugMacro("Parsed: " << VectorBuffer);
+        // Read them
+        parse >> VectorBuffer;
+        itkDebugMacro("Parsed: " << VectorBuffer);
+      }
       if (Name == "Parameters")
       {
         TmpParameterArray = VectorBuffer;
@@ -208,7 +211,15 @@ TxtTransformIOTemplate<TParametersValueType>::Read()
       }
       else if (Name == "FixedParameters")
       {
-        TmpFixedParameterArray = VectorBuffer;
+        if (Name == "FixedParameters")
+        {
+          VectorFixedBuffer.clear();
+
+          // Read them
+          parse >> VectorFixedBuffer;
+          itkDebugMacro("Parsed: " << VectorFixedBuffer);
+        }
+        TmpFixedParameterArray = VectorFixedBuffer;
         itkDebugMacro("Setting Fixed Parameters: " << TmpFixedParameterArray);
         if (!transform)
         {
@@ -295,13 +306,14 @@ TxtTransformIOTemplate<TParametersValueType>::Write()
     else
     {
       {
-        vnl_vector<ParametersValueType> TempArray = (*it)->GetParameters();
+        vnl_vector<ParametersValueType> TempArray((*it)->GetParameters().data_block(), (*it)->GetParameters().Size());
         out << "Parameters: "; // << TempArray << std::endl;
         itk_impl_details::print_vector(out, TempArray);
         out << std::endl;
       }
       {
-        vnl_vector<FixedParametersValueType> FixedTempArray = (*it)->GetFixedParameters();
+        vnl_vector<FixedParametersValueType> FixedTempArray((*it)->GetFixedParameters().data_block(),
+                                                            (*it)->GetFixedParameters().Size());
         out << "FixedParameters: "; // << FixedTempArray << std::endl;
         itk_impl_details::print_vector(out, FixedTempArray);
         out << std::endl;

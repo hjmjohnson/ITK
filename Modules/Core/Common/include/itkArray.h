@@ -23,6 +23,32 @@
 #include "vxl_version.h"
 #include "vnl/vnl_vector.h"
 
+//--------------------------------------------------------------------------------
+// This macro allocates the dynamic storage used by a vnl_vector.
+#define Array_alloc_blah(size_elements)                                                                              \
+  do                                                                                                                 \
+  {                                       /* Macro needs to be a single statement to allow semicolon at macro end */ \
+    assert(this->m_LetArrayManageMemory); /*Resizing memory requires management rights */                            \
+    this->m_NumElements = (size_elements);                                                                           \
+    this->m_Data = (size_elements > 0) ? new TValue[size_elements] : nullptr;                                        \
+  } while (false)
+
+// This macro deallocates the dynamic storage used by a vnl_vector.
+#define Array_free_blah                                                        \
+  do                                                                           \
+  { /* Macro needs to be a single statement to allow semicolon at macro end */ \
+    if (this->m_LetArrayManageMemory)                                          \
+    {                                                                          \
+      if (this->m_Data)                                                        \
+      {                                                                        \
+        delete[] this->m_Data;                                                 \
+      }                                                                        \
+    }                                                                          \
+    this->m_Data = nullptr;                                                    \
+    this->m_NumElements = 0;                                                   \
+    this->m_LetArrayManageMemory = true;                                       \
+  } while (false)
+
 namespace itk
 {
 /**
@@ -44,7 +70,7 @@ namespace itk
  * \ingroup ITKCommon
  */
 template <typename TValue>
-class ITK_TEMPLATE_EXPORT Array : public vnl_vector<TValue>
+class ITK_TEMPLATE_EXPORT Array
 {
 public:
   /** The element type stored at each location in the Array. */
@@ -81,20 +107,12 @@ public:
    * memory when this object is destroyed. */
   Array(ValueType * datain, SizeValueType sz, bool LetArrayManageMemory = false);
 
-#if defined(ITK_LEGACY_REMOVE)
   /** Constructor that initializes array with contents from a user supplied
    * const buffer. The pointer to the buffer and the length is specified. By default,
    * the array does a deep copy of the const pointer data, so the array class also
    * manages memory. */
   Array(const ValueType * datain, SizeValueType sz);
 
-#else // defined ( ITK_LEGACY_REMOVE )
-  /** Constructor that initializes array with contents from a user supplied
-   * buffer. The pointer to the buffer and the length is specified. The array
-   * does a deep copy of the const pointer data, so the array class also
-   * manages memory. The 3rd argument is only for backward compatibility. */
-  Array(const ValueType * datain, SizeValueType sz, bool LetArrayManageMemory = false);
-#endif
 
   /** Constructor to initialize an array from another of any data type */
   template <typename TArrayValue>
@@ -111,7 +129,7 @@ public:
   void
   Fill(TValue const & v)
   {
-    this->fill(v);
+    std::fill(this->begin(), this->end(), v);
   }
 
   /** Copy operator */
@@ -121,16 +139,45 @@ public:
   Self &
   operator=(const VnlVectorType & rhs);
 
+  bool
+  operator==(const Self & rhs) const
+  {
+    if (this == &rhs) // same object => equal.
+    {
+      return true;
+    }
+    if (this->Size() != rhs.Size()) // Size different ?
+    {
+      return false; // Then not equal.
+    }
+    return std::equal(this->begin(), this->end(), rhs.begin());
+  }
+
+  bool
+  operator!=(const Self & rhs) const
+  {
+    return !operator==(rhs);
+  }
+
   /** Return the number of elements in the Array  */
   SizeValueType
   Size() const
   {
-    return static_cast<SizeValueType>(this->size());
+    return static_cast<SizeValueType>(this->m_NumElements);
   }
+
+  // vnl_exposure funciton #if !defined(ITK_LEGACY_REMOVE)
+  SizeValueType
+  size() const
+  {
+    return this->Size();
+  };
+  // #endif
+
   unsigned int
   GetNumberOfElements() const
   {
-    return static_cast<SizeValueType>(this->size());
+    return static_cast<unsigned int>(this->Size());
   }
 
   /** Get one element */
@@ -154,7 +201,7 @@ public:
   SizeValueType
   GetSize() const
   {
-    return static_cast<SizeValueType>(this->size());
+    return static_cast<SizeValueType>(this->Size());
   }
 
   /** Set the pointer from which the data is imported.
@@ -185,35 +232,333 @@ public:
 #endif
   /** This destructor is not virtual for performance reasons. However, this
    * means that subclasses cannot allocate memory. */
-  ~Array() override;
-
-#if !defined(ITK_LEGACY_REMOVE)
-  void
-  swap(Array & other)
-  {
-    this->Swap(other);
-  }
-#endif
+  virtual ~Array();
 
   void
   Swap(Array & other)
   {
-    using std::swap;
-    this->VnlVectorType::swap(other);
-    swap(this->m_LetArrayManageMemory, other.m_LetArrayManageMemory);
+    std::swap(m_Data, other.m_Data);
+    std::swap(m_NumElements, other.m_NumElements);
+    std::swap(m_LetArrayManageMemory, other.m_LetArrayManageMemory);
+  }
+
+  //: Return reference to the element at specified index. No range checking.
+  TValue & operator[](size_t i) { return m_Data[i]; }
+  //: Return reference to the element at specified index. No range checking.
+  TValue const & operator[](size_t i) const { return m_Data[i]; }
+
+  Self operator*(const TValue v) const
+  {
+    Self result(this->Size());
+    std::transform(this->begin(), this->end(), result.begin(), [v](const TValue d) -> TValue { return d * v; });
+    return result;
+  }
+
+  Self
+  operator+(const TValue v) const
+  {
+    Self result(this->Size());
+    std::transform(this->begin(), this->end(), result.begin(), [v](const TValue d) -> TValue { return d + v; });
+    return result;
+  }
+
+  Self
+  operator-(const TValue v) const
+  {
+    Self result(this->Size());
+    std::transform(this->begin(), this->end(), result.begin(), [v](const TValue d) -> TValue { return d - v; });
+    return result;
+  }
+
+  Self
+  operator/(const TValue v) const
+  {
+    Self result(this->Size());
+    std::transform(this->begin(), this->end(), result.begin(), [v](const TValue d) -> TValue { return d / v; });
+    return result;
+  }
+
+
+  Self &
+  operator*=(const TValue v)
+  {
+    std::transform(this->begin(), this->end(), this->begin(), [v](const TValue d) -> TValue { return d * v; });
+    return *this;
+  }
+
+  Self &
+  operator/=(const TValue v)
+  {
+    std::transform(this->begin(), this->end(), this->begin(), [v](const TValue d) -> TValue { return d / v; });
+    return *this;
+  }
+
+  Self &
+  operator+=(const TValue v)
+  {
+    std::transform(this->begin(), this->end(), this->begin(), [v](const TValue d) -> TValue { return d + v; });
+    return *this;
+  }
+
+  Self &
+  operator-=(const TValue v)
+  {
+    std::transform(this->begin(), this->end(), this->begin(), [v](const TValue d) -> TValue { return d - v; });
+    return *this;
+  }
+
+  Self operator*(const Self & v) const
+  {
+    Self          result(*this);
+    return result.operator*=(v);
+  }
+
+  Self &
+  operator*=(const Self & v)
+  {
+    for (size_t i = 0; i < this->Size(); ++i)
+    {
+      this->operator[](i) *= v.get(i);
+    }
+    return *this;
+  }
+
+  Self
+  operator+(const Self & v) const
+  {
+    Self          result(*this);
+    return result.operator+=(v);
+  }
+
+  Self &
+  operator+=(const Self & v)
+  {
+    for (size_t i = 0; i < this->Size(); ++i)
+    {
+      this->operator[](i) += v.get(i);
+    }
+    return *this;
+  }
+
+  Self
+  operator-(const Self & v) const
+  {
+    Self          result(*this);
+    return result.operator-=(v);
+  }
+
+  Self &
+  operator-=(const Self & v)
+  {
+    for (size_t i = 0; i < this->Size(); ++i)
+    {
+      this->operator[](i) -= v.get(i);
+    }
+    return *this;
+  }
+
+  Self
+  operator/(const Self & v) const
+  {
+    Self          result(*this);
+    return result.operator/=(v);
+  }
+
+  Self &
+  operator/=(const Self & v)
+  {
+    for (size_t i = 0; i < this->Size(); ++i)
+    {
+      this->operator[](i) /= v.get(i);
+    }
+    return *this;
+  }
+
+
+  //: Access the contiguous block storing the elements in the vector. O(1).
+  //  data_block()[0] is the first element of the vector
+  TValue const *
+  data_block() const
+  {
+    return m_Data;
+  }
+
+  //: Access the contiguous block storing the elements in the vector. O(1).
+  //  data_block()[0] is the first element of the vector
+  TValue *
+  data_block()
+  {
+    return m_Data;
+  }
+
+  void
+  put(const size_t i, TValue const & v)
+  {
+    this->m_Data[i] = v;
+  }
+
+  TValue
+  get(const size_t i) const
+  {
+    return this->m_Data[i];
+  }
+
+  void
+  clear()
+  {
+    this->SetSize(0);
+  }
+
+  //: Type defs for iterators
+  using element_type = TValue;
+  using size_type = size_t;
+
+  //: Type defs for iterators
+  using iterator = TValue *;
+  //: Iterator pointing to start of data
+  iterator
+  begin()
+  {
+    return m_Data;
+  }
+
+  //: Iterator pointing to element beyond end of data
+  iterator
+  end()
+  {
+    return m_Data + m_NumElements;
+  }
+
+  //: Const iterator type
+  using const_iterator = TValue const *;
+  //: Iterator pointing to start of data
+  const_iterator
+  begin() const
+  {
+    return m_Data;
+  }
+  //: Iterator pointing to element beyond end of data
+  const_iterator
+  end() const
+  {
+    return m_Data + m_NumElements;
+  }
+
+  //: Analogous to std::vector::front().
+  TValue &
+  front()
+  {
+    return *m_Data;
+  }
+  //: Analogous to std::vector::back().
+  TValue &
+  back()
+  {
+    return m_Data[m_NumElements - 1];
+  }
+
+  //: Analogous to std::vector::front() (const overload).
+  const TValue &
+  front() const
+  {
+    return *m_Data;
+  }
+  //: Analogous to std::vector::back() (const overload).
+  const TValue &
+  back() const
+  {
+    return m_Data[m_NumElements - 1];
+  }
+
+  //: Read an Array<T> from an ascii std::istream.
+  // If the Array<T> has nonzero size on input, read that many values.
+  // Otherwise, read to EOF.
+  bool
+  read_ascii(std::istream & s)
+  {
+    bool size_known = (this->Size() != 0);
+    if (size_known)
+    {
+      for (size_t i = 0; i < this->Size(); ++i)
+      {
+        if (!(s >> (*this)[i]))
+        {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // Just read until EOF
+    std::vector<TValue> allvals;
+    size_t              n = 0;
+    TValue              value;
+    while (s >> value)
+    {
+      allvals.push_back(value);
+      ++n;
+    }
+    this->SetSize(n); //*this = vnl_vector<T>(n);
+    for (size_t i = 0; i < n; ++i)
+    {
+      this->put(i, allvals[i]);
+    }
+    return true;
+  }
+
+  TValue
+  magnitude()
+  {
+    return std::sqrt(std::inner_product(m_Data, m_Data + m_NumElements, m_Data, 0.0));
+  }
+
+  bool
+  is_zero() const
+  {
+    auto is_zero_value = [](const TValue i) { return i == TValue{ 0 }; };
+    return std::find_if_not(this->begin(), this->end(), is_zero_value) == this->end();
   }
 
 private:
+  bool
+  set_size(Eigen::Index n)
+  {
+    if (this->m_Data)
+    {
+      // if no change in size, do not reallocate.
+      if (this->m_NumElements == n)
+        return false;
+
+      Array_free_blah;
+    }
+    Array_alloc_blah(n);
+    return true;
+  }
+
+  TValue *     m_Data{ nullptr };
+  Eigen::Index m_NumElements{ 0 };
+
   /** Indicates whether this array manages the memory of its data. */
   bool m_LetArrayManageMemory{ true };
 };
+
+//: Read a Array<T> from an ascii std::istream.
+// If the Array has nonzero size on input, read that many values.
+// Otherwise, read to EOF.
+template <typename TValue>
+std::istream &
+operator>>(std::istream & s, Array<TValue> & M)
+{
+  M.read_ascii(s);
+  return s;
+}
 
 template <typename TValue>
 std::ostream &
 operator<<(std::ostream & os, const Array<TValue> & arr)
 {
   os << '[';
-  const unsigned int length = arr.size();
+  const unsigned int length = arr.Size();
   if (length >= 1)
   {
     const unsigned int last = length - 1;
@@ -240,6 +585,25 @@ swap(Array<T> & a, Array<T> & b)
 {
   a.Swap(b);
 }
+
+
+//: multiply scalar and vector. O(n).
+// \relatesalso vnl_vector
+template <class T>
+inline Array<T> operator*(T s, Array<T> const & v)
+{
+  return v * s;
+}
+
+
+template <class T>
+inline Array<T>
+operator/(T s, Array<T> const & v)
+{
+  const T inverse = 1.0 / s;
+  return v * inverse;
+}
+
 
 } // namespace itk
 

@@ -162,7 +162,7 @@ CorrelationImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner,
      *  we will want to always add to the values in m_DerivativeResult so they
      *  can be efficiently accumulated between multiple metrics.
      */
-    *(this->m_CorrelationAssociate->m_DerivativeResult) += fc * fm / (f2 * m2) * (fdm - fm / m2 * mdm);
+    *(this->m_CorrelationAssociate->m_DerivativeResult) += fc * fm / (f2 * m2) * (fdm - fm / (mdm * m2));
   }
 }
 

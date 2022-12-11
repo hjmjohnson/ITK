@@ -214,7 +214,7 @@ SPSAOptimizer::AdvanceOneStep()
   m_LearningRate = ak;
 
   // Compute the new parameters
-  newPosition = currentPosition + (direction * ak) * m_Gradient;
+  newPosition = currentPosition + m_Gradient.operator*(direction * ak);
   this->SetCurrentPosition(newPosition);
 
   // Compute the GradientMagnitude (for checking convergence)
@@ -389,8 +389,9 @@ SPSAOptimizer::GuessParameters(SizeValueType numberOfGradientEstimates, double i
   averageAbsoluteGradient /= static_cast<double>(numberOfGradientEstimates);
 
   // Set a in order to make the first steps approximately have an initialStepSize
-  this->SetSa(initialStepSize * std::pow(m_A + 1.0, m_Alpha) / averageAbsoluteGradient.max_value());
-}
+  this->SetSa(initialStepSize * std::pow(m_A + 1.0, m_Alpha) /
+              *std::max_element(averageAbsoluteGradient.begin(), averageAbsoluteGradient.end()));
+} // end GuessParameters
 
 const std::string
 SPSAOptimizer::GetStopConditionDescription() const

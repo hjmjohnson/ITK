@@ -232,7 +232,7 @@ LBFGSOptimizer::StartOptimization()
   // in the variable provided as initial position
   m_VnlOptimizer->minimize(vnlCompatibleParameters);
 
-  if (vnlCompatibleParameters.size() != currentPositionInternalValue.size())
+  if (vnlCompatibleParameters.size() != static_cast<Eigen::Index>(currentPositionInternalValue.size()))
   {
     // set current position to initial position and throw an exception
     this->SetCurrentPosition(currentPositionInternalValue);

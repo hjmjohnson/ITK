@@ -75,7 +75,9 @@ ConjugateGradientOptimizer::GetValue() const
       parameters[i] *= scales[i];
     }
   }
-  return this->GetNonConstCostFunctionAdaptor()->f(parameters);
+  return this->GetNonConstCostFunctionAdaptor()->f(
+    Eigen::Map<Eigen::Matrix<ParametersType::ValueType, Eigen::Dynamic, 1>>(parameters.data_block(),
+                                                                            parameters.Size()));
 }
 
 /**
@@ -112,7 +114,9 @@ ConjugateGradientOptimizer::StartOptimization()
 
   // vnl optimizers return the solution by reference
   // in the variable provided as initial position
-  m_VnlOptimizer->minimize(parameters);
+  vnl_vector<Self::ParametersType::ValueType> p_vnl_vector(parameters.data_block(), parameters.Size());
+  m_VnlOptimizer->minimize(p_vnl_vector);
+  std::copy(p_vnl_vector.begin(), p_vnl_vector.end(), parameters.data_block());
 
   // we scale the parameters down if scales are defined
   if (m_ScalesInitialized)

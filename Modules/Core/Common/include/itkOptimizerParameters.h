@@ -22,6 +22,8 @@
 #include "itkOptimizerParametersHelper.h"
 
 #include <memory> // For unique_ptr.
+#include <Eigen/Core>
+#include <Eigen/Dense>
 
 namespace itk
 {
@@ -58,7 +60,7 @@ public:
    *  no matter the setting of let array manage memory of rhs.
    */
   OptimizerParameters(const OptimizerParameters & rhs)
-    : Array<TParametersValueType>(rhs)
+    : Superclass(rhs)
   {
     // Note: don't copy the OptimizerParametersHelper.
     // The Array copy constructor will allocate new memory
@@ -71,27 +73,28 @@ public:
    * \note This constructor may not initialize its elements.
    */
   explicit OptimizerParameters(SizeValueType dimension)
-    : Array<TParametersValueType>(dimension)
+    : Superclass(dimension)
   {}
 
   /** Constructor with Array assignment */
   OptimizerParameters(const ArrayType & array)
-    : Array<TParametersValueType>(array)
+    : Superclass(array)
   {}
 
   /** Constructor with size and initial value for each element. */
   explicit OptimizerParameters(const SizeValueType dimension, const ValueType & value)
-    : Array<TParametersValueType>(dimension, value)
+    : Superclass(dimension, value)
   {}
 
 
   /** Constructor with input data and size (number of elements). */
   explicit OptimizerParameters(const ValueType * const inputData, const SizeValueType dimension)
-    : Array<TParametersValueType>(inputData, dimension)
+    : Superclass(inputData, dimension)
   {}
 
 
   /** Initialize. Initialization called by constructors. */
+  // TODO:  Deprecate, no longer needed with inline initializations
   void
   Initialize()
   {
