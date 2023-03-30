@@ -487,18 +487,11 @@ public:
   ContinuousIndex<TIndexRep, VImageDimension>
   TransformPhysicalPointToContinuousIndex(const Point<TCoordRep, VImageDimension> & point) const
   {
+    Vector<SpacePrecisionType, VImageDimension> cvector{ m_PhysicalPointToIndex * (point - m_Origin) };
     ContinuousIndex<TIndexRep, VImageDimension> index;
-    Vector<SpacePrecisionType, VImageDimension> cvector;
-
-    for (unsigned int k = 0; k < VImageDimension; ++k)
-    {
-      cvector[k] = point[k] - this->m_Origin[k];
-    }
-    cvector = m_PhysicalPointToIndex * cvector;
-    for (unsigned int i = 0; i < VImageDimension; ++i)
-    {
-      index[i] = static_cast<TIndexRep>(cvector[i]);
-    }
+    std::transform(cvector.cbegin(), cvector.cend(), index.begin(), [](SpacePrecisionType x) -> TIndexRep {
+      return static_cast<TIndexRep>(x);
+    });
     return index;
   }
 
@@ -512,7 +505,6 @@ public:
                                           ContinuousIndex<TIndexRep, VImageDimension> & index) const
   {
     index = TransformPhysicalPointToContinuousIndex<TIndexRep>(point);
-
     // Now, check to see if the index is within allowed bounds
     const bool isInside = this->GetLargestPossibleRegion().IsInside(index);
     return isInside;
