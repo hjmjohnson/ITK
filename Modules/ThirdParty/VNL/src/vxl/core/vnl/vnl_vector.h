@@ -36,8 +36,10 @@
 #include "vnl_sse.h"
 #include "vnl_math.h"
 #include <algorithm>
-#include <Eigen/Core>
 #include <numeric>
+
+#define EIGEN_MATRIXBASE_PLUGIN "vnl_vector_eigen_augment.h"
+#include <Eigen/Core>
 
 template <class T>
 class vnl_vector;
@@ -194,8 +196,6 @@ public:
    * is called and memory is not accidently de-allocated. */
   virtual ~vnl_vector() = default;
 
-  //: Return the length, number of elements, dimension of this vector.
-  Eigen::Index size() const { return static_cast<Eigen::Index>(this->Superclass::size()); }
 
   //: Put value at given position in vector.
   inline void
