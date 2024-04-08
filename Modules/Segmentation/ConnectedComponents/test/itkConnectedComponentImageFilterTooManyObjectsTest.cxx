@@ -20,7 +20,7 @@
 #include "itkSimpleFilterWatcher.h"
 
 int
-itkConnectedComponentImageFilterTooManyObjectsTest(int itkNotUsed(argc), char *[] itkNotUsed(argv))
+itkConnectedComponentImageFilterTooManyObjectsTest([[maybe_unused]] int argc, char *[] itkNotUsed(argv))
 {
 
   using PixelType = unsigned char;

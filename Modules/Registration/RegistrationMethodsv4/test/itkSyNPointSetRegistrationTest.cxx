@@ -23,7 +23,7 @@
 #include "itkTestingMacros.h"
 
 int
-itkSyNPointSetRegistrationTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkSyNPointSetRegistrationTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   constexpr unsigned int Dimension = 2;
 

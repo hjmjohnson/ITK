@@ -54,7 +54,7 @@ template <typename TSample>
 auto
 MeanSampleFilter<TSample>::MakeOutput(DataObjectPointerArraySizeType itkNotUsed(idx)) -> DataObjectPointer
 {
-  MeasurementVectorRealType mean;
+  [[maybe_unused]] MeasurementVectorRealType mean;
   (void)mean; // for complainty pants : valgrind
   NumericTraits<MeasurementVectorRealType>::SetLength(mean, this->GetMeasurementVectorSize());
   // NumericTraits::SetLength also initializes array to zero

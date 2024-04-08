@@ -22,7 +22,7 @@
 #include "itkImageRegionIterator.h"
 
 int
-itkTestingStretchIntensityImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkTestingStretchIntensityImageFilterTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   constexpr unsigned int Dimension = 2;
   using PixelType = short;

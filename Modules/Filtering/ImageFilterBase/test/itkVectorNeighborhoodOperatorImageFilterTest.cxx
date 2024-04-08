@@ -23,7 +23,7 @@
 #include "itkTestingMacros.h"
 
 int
-itkVectorNeighborhoodOperatorImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkVectorNeighborhoodOperatorImageFilterTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   try
   {

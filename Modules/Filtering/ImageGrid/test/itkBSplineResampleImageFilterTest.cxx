@@ -594,7 +594,7 @@ test2D_Centered_L2_NthOrderSpline_filter(unsigned int splineOrder)
 }
 
 int
-itkBSplineResampleImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkBSplineResampleImageFilterTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   int flag = 0;
   int dummyflag = 0;

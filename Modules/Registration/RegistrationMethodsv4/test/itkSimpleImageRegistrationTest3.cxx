@@ -118,7 +118,7 @@ public:
 
 template <unsigned int TDimension>
 int
-PerformCompositeImageRegistration(int itkNotUsed(argc), char * argv[])
+PerformCompositeImageRegistration([[maybe_unused]] int argc, char * argv[])
 {
   const unsigned int ImageDimension = TDimension;
 

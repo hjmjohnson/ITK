@@ -101,7 +101,7 @@ public:
       return 1;                                                 \
     }                                                           \
     static ComponentType                                        \
-    GetNthComponent(int itkNotUsed(c), const type & pixel)      \
+    GetNthComponent([[maybe_unused]] int c, const type & pixel) \
     {                                                           \
       return pixel;                                             \
     }                                                           \

@@ -24,7 +24,7 @@
 #include "itkVector.h"
 
 int
-itkTimeVaryingBSplineVelocityFieldPointSetRegistrationTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkTimeVaryingBSplineVelocityFieldPointSetRegistrationTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   constexpr unsigned int Dimension = 2;
 

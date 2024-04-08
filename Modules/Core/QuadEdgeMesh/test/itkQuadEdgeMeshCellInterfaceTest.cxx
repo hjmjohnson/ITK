@@ -49,11 +49,8 @@ class CustomQELineVisitor
 {
 public:
   void
-  Visit(unsigned long cellId, QELineCellType * t)
-  {
-    (void)cellId;
-    (void)t;
-  }
+  Visit([[maybe_unused]] unsigned long cellId, [[maybe_unused]] QELineCellType * t)
+  {}
   virtual ~CustomQELineVisitor() = default;
 };
 
@@ -61,11 +58,8 @@ class CustomQEPolyVisitor
 {
 public:
   void
-  Visit(unsigned long cellId, QEPolygonCellType * t)
-  {
-    (void)cellId;
-    (void)t;
-  }
+  Visit([[maybe_unused]] unsigned long cellId, [[maybe_unused]] QEPolygonCellType * t)
+  {}
   virtual ~CustomQEPolyVisitor() = default;
 };
 

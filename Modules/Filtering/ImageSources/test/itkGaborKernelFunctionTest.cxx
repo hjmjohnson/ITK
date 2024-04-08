@@ -21,7 +21,7 @@
 #include "itkTestingMacros.h"
 
 int
-itkGaborKernelFunctionTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkGaborKernelFunctionTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   using KernelFunctionType = itk::GaborKernelFunction<double>;
   auto gabor = KernelFunctionType::New();

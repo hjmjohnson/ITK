@@ -215,10 +215,8 @@ public:
    * https://public.kitware.com/pipermail/insight-users/2005-April/012613.html
    */
   void
-  CopyInformation(const DataObject * data) override
-  {
-    (void)data;
-  }
+  CopyInformation([[maybe_unused]] const DataObject * data) override
+  {}
   void
   Graft(const DataObject * data) override;
 
@@ -234,25 +232,20 @@ public:
 #if !defined(ITK_WRAPPING_PARSER)
   /** overloaded method for backward compatibility */
   void
-  SetBoundaryAssignments(int dimension, BoundaryAssignmentsContainer * container)
-  {
-    (void)dimension;
-    (void)container;
-  }
+  SetBoundaryAssignments([[maybe_unused]] int dimension, [[maybe_unused]] BoundaryAssignmentsContainer * container)
+  {}
 
   /** overloaded method for backward compatibility */
   BoundaryAssignmentsContainerPointer
-  GetBoundaryAssignments(int dimension)
+  GetBoundaryAssignments([[maybe_unused]] int dimension)
   {
-    (void)dimension;
     return (nullptr);
   }
 
   /** overloaded method for backward compatibility */
   const BoundaryAssignmentsContainerPointer
-  GetBoundaryAssignments(int dimension) const
+  GetBoundaryAssignments([[maybe_unused]] int dimension) const
   {
-    (void)dimension;
     return (nullptr);
   }
 
@@ -260,87 +253,65 @@ public:
 
   /** overloaded method for backward compatibility */
   void
-  SetBoundaryAssignment(int                   dimension,
-                        CellIdentifier        cellId,
-                        CellFeatureIdentifier featureId,
-                        CellIdentifier        boundaryId)
-  {
-    (void)dimension;
-    (void)cellId;
-    (void)featureId;
-    (void)boundaryId;
-  }
+  SetBoundaryAssignment([[maybe_unused]] int                   dimension,
+                        [[maybe_unused]] CellIdentifier        cellId,
+                        [[maybe_unused]] CellFeatureIdentifier featureId,
+                        [[maybe_unused]] CellIdentifier        boundaryId)
+  {}
 
   /** overloaded method for backward compatibility */
   bool
-  GetBoundaryAssignment(int                   dimension,
-                        CellIdentifier        cellId,
-                        CellFeatureIdentifier featureId,
-                        CellIdentifier *      boundaryId) const
+  GetBoundaryAssignment([[maybe_unused]] int                   dimension,
+                        [[maybe_unused]] CellIdentifier        cellId,
+                        [[maybe_unused]] CellFeatureIdentifier featureId,
+                        [[maybe_unused]] CellIdentifier *      boundaryId) const
   {
-    (void)dimension;
-    (void)cellId;
-    (void)featureId;
-    (void)boundaryId;
     return (false); // ALEX: is it the good way?
   }
 
   /** overloaded method for backward compatibility */
   bool
-  RemoveBoundaryAssignment(int dimension, CellIdentifier cellId, CellFeatureIdentifier featureId)
+  RemoveBoundaryAssignment([[maybe_unused]] int                   dimension,
+                           [[maybe_unused]] CellIdentifier        cellId,
+                           [[maybe_unused]] CellFeatureIdentifier featureId)
   {
-    (void)dimension;
-    (void)cellId;
-    (void)featureId;
     return (false); // ALEX: is it the good way?
   }
 
   /** overloaded method for backward compatibility */
   bool
-  GetCellBoundaryFeature(int                   dimension,
-                         CellIdentifier        cellId,
-                         CellFeatureIdentifier featureId,
-                         CellAutoPointer &     cellAP) const
+  GetCellBoundaryFeature([[maybe_unused]] int                   dimension,
+                         [[maybe_unused]] CellIdentifier        cellId,
+                         [[maybe_unused]] CellFeatureIdentifier featureId,
+                         [[maybe_unused]] CellAutoPointer &     cellAP) const
   {
-    (void)dimension;
-    (void)cellId;
-    (void)featureId;
-    (void)cellAP;
     return (false);
   }
 
   /** overloaded method for backward compatibility */
   CellIdentifier
-  GetCellBoundaryFeatureNeighbors(int                        dimension,
-                                  CellIdentifier             cellId,
-                                  CellFeatureIdentifier      featureId,
-                                  std::set<CellIdentifier> * cellSet)
+  GetCellBoundaryFeatureNeighbors([[maybe_unused]] int                        dimension,
+                                  [[maybe_unused]] CellIdentifier             cellId,
+                                  [[maybe_unused]] CellFeatureIdentifier      featureId,
+                                  [[maybe_unused]] std::set<CellIdentifier> * cellSet)
   {
-    (void)dimension;
-    (void)cellId;
-    (void)featureId;
-    (void)cellSet;
     return CellIdentifier{};
   }
 
   /** NOTE ALEX: this method do not use CellFeature and thus could be recoded */
   CellIdentifier
-  GetCellNeighbors(CellIdentifier itkNotUsed(cellId), std::set<CellIdentifier> * itkNotUsed(cellSet))
+  GetCellNeighbors([[maybe_unused]] CellIdentifier cellId, [[maybe_unused]] std::set<CellIdentifier> * cellSet)
   {
     return CellIdentifier{};
   }
 
   /** overloaded method for backward compatibility */
   bool
-  GetAssignedCellBoundaryIfOneExists(int                   dimension,
-                                     CellIdentifier        cellId,
-                                     CellFeatureIdentifier featureId,
-                                     CellAutoPointer &     cellAP) const
+  GetAssignedCellBoundaryIfOneExists([[maybe_unused]] int                   dimension,
+                                     [[maybe_unused]] CellIdentifier        cellId,
+                                     [[maybe_unused]] CellFeatureIdentifier featureId,
+                                     [[maybe_unused]] CellAutoPointer &     cellAP) const
   {
-    (void)dimension;
-    (void)cellId;
-    (void)featureId;
-    (void)cellAP;
     return (false); // ALEX: is it the good way?
   }
 

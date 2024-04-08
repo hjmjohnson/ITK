@@ -210,7 +210,12 @@ itkQuadEdgeMeshEulerOperatorJoinVertexTest(int argc, char * argv[])
   std::cout << "OK" << std::endl;
 #endif
 
-  (void)joinVertex->GetNameOfClass();
+  [[maybe_unused]] const std::string className = joinVertex->GetNameOfClass();
+  const std::string                  requiredClassName{ "FILLMEIN" };
+  if (className != requiredClassName)
+  {
+    std::cout << className << " != " << requiredClassName << std::endl;
+  }
 
   joinVertex->SetInput(mesh);
 

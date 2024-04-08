@@ -174,7 +174,7 @@ DoRegistration()
   return pass;
 }
 int
-itkImageRegistrationMethodTest_16(int itkNotUsed(argc), char *[] itkNotUsed(argv))
+itkImageRegistrationMethodTest_16([[maybe_unused]] int argc, char *[] itkNotUsed(argv))
 {
   bool result_uc, result_c, result_us, result_s, result_ui, result_i, result_ul, result_l, result_f, result_d;
   result_uc = DoRegistration<unsigned char>();

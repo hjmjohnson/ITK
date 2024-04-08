@@ -22,7 +22,7 @@
 #include "itkTestingMacros.h"
 
 int
-itkGradientAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkGradientAnisotropicDiffusionImageFilterTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   constexpr unsigned int Dimension = 2;
 

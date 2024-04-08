@@ -60,7 +60,7 @@ public:
    * Returns current argument index to set additional arguments in the GPU kernel.
    */
   int
-  SetGPUKernelArguments(GPUKernelManager::Pointer itkNotUsed(kernelManager), int itkNotUsed(kernelHandle))
+  SetGPUKernelArguments(GPUKernelManager::Pointer itkNotUsed(kernelManager), [[maybe_unused]] int kernelHandle)
   {
     return 0;
   }

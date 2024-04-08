@@ -109,7 +109,7 @@ protected:
 
   /** Performs an iteration. */
   virtual void
-  Iteration(ProgressAccumulator * itkNotUsed(progress), float itkNotUsed(iterationProgressWeight)) = 0;
+  Iteration(ProgressAccumulator * itkNotUsed(progress), [[maybe_unused]] float iterationProgressWeight) = 0;
 
   /** Runs after iterating. */
   virtual void

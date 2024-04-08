@@ -103,7 +103,7 @@ public:
   /** Allocate GPU buffers for computing metric statistics
    * */
   virtual void
-  GPUAllocateMetricData(unsigned int itkNotUsed(numPixels))
+  GPUAllocateMetricData([[maybe_unused]] unsigned int numPixels)
   {}
 
   /** Release GPU buffers for computing metric statistics

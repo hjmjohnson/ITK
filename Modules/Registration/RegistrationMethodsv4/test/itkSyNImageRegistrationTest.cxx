@@ -109,7 +109,7 @@ public:
 
 template <unsigned int TDimension>
 int
-PerformDisplacementFieldImageRegistration(int itkNotUsed(argc), char * argv[])
+PerformDisplacementFieldImageRegistration([[maybe_unused]] int argc, char * argv[])
 {
   const unsigned int ImageDimension = TDimension;
 

@@ -75,7 +75,7 @@ public:
 
 template <unsigned int TDimension>
 int
-PerformBSplineSyNImageRegistration(int itkNotUsed(argc), char * argv[])
+PerformBSplineSyNImageRegistration([[maybe_unused]] int argc, char * argv[])
 {
   const unsigned int ImageDimension = TDimension;
 

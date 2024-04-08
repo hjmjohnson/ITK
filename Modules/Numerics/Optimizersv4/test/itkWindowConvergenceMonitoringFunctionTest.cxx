@@ -19,7 +19,7 @@
 #include "itkWindowConvergenceMonitoringFunction.h"
 
 int
-itkWindowConvergenceMonitoringFunctionTest(int itkNotUsed(argc), char *[])
+itkWindowConvergenceMonitoringFunctionTest([[maybe_unused]] int argc, char *[])
 {
   using RealType = float;
 

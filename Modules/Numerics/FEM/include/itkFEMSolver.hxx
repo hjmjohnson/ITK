@@ -109,7 +109,7 @@ Solver<VDimension>::GetTimeStep() const -> Float
 
 template <unsigned int VDimension>
 void
-Solver<VDimension>::SetTimeStep(Float itkNotUsed(dt))
+Solver<VDimension>::SetTimeStep([[maybe_unused]] float dt)
 {}
 
 template <unsigned int VDimension>

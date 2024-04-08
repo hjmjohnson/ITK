@@ -23,7 +23,7 @@
 #include "itkTestingMacros.h"
 
 int
-itkCurvatureAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkCurvatureAnisotropicDiffusionImageFilterTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   constexpr unsigned int Dimension = 2;
 

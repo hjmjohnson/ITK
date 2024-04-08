@@ -22,7 +22,7 @@
 #include "itkEuclideanDistancePointSetToPointSetMetricv4.h"
 
 int
-itkBSplineSyNPointSetRegistrationTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkBSplineSyNPointSetRegistrationTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   constexpr unsigned int Dimension = 2;
 

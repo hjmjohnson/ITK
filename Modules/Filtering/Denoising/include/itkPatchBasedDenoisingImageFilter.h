@@ -246,7 +246,7 @@ protected:
    */
   template <typename T>
   typename DisableIfMultiComponent<T, T>::type
-  GetComponent(const T pix, unsigned int itkNotUsed(idx)) const
+  GetComponent(const T pix, [[maybe_unused]] unsigned int idx) const
   {
     // The enable if idiom is used to overload this method for both
     // scalars and multi-component types. By exploiting that

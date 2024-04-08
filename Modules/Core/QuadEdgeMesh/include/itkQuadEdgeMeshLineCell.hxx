@@ -135,14 +135,11 @@ QuadEdgeMeshLineCell<TCellInterface>::GetNumberOfBoundaryFeatures(int dimension)
 // ---------------------------------------------------------------------
 template <typename TCellInterface>
 bool
-QuadEdgeMeshLineCell<TCellInterface>::GetBoundaryFeature(int                   dimension,
-                                                         CellFeatureIdentifier cellId,
-                                                         CellAutoPointer &     cell)
+QuadEdgeMeshLineCell<TCellInterface>::GetBoundaryFeature([[maybe_unused]] int                   dimension,
+                                                         [[maybe_unused]] CellFeatureIdentifier cellId,
+                                                         [[maybe_unused]] CellAutoPointer &     cell)
 {
   // TODO : FIXME
-  (void)dimension;
-  (void)cellId;
-  (void)cell;
   return (false);
 }
 
@@ -173,9 +170,9 @@ QuadEdgeMeshLineCell<TCellInterface>::InternalSetPointIds(PointIdInternalConstIt
 // ---------------------------------------------------------------------
 template <typename TCellInterface>
 void
-QuadEdgeMeshLineCell<TCellInterface>::SetPointIds(PointIdConstIterator first, PointIdConstIterator last)
+QuadEdgeMeshLineCell<TCellInterface>::SetPointIds(PointIdConstIterator                  first,
+                                                  [[maybe_unused]] PointIdConstIterator last)
 {
-  (void)last;
   this->GetQEGeom()->SetOrigin(*first);
   ++first;
   this->GetQEGeom()->SetDestination(*first);
@@ -184,10 +181,9 @@ QuadEdgeMeshLineCell<TCellInterface>::SetPointIds(PointIdConstIterator first, Po
 // ---------------------------------------------------------------------
 template <typename TCellInterface>
 void
-QuadEdgeMeshLineCell<TCellInterface>::InternalSetPointIds(PointIdInternalConstIterator first,
-                                                          PointIdInternalConstIterator last)
+QuadEdgeMeshLineCell<TCellInterface>::InternalSetPointIds(PointIdInternalConstIterator                  first,
+                                                          [[maybe_unused]] PointIdInternalConstIterator last)
 {
-  (void)last;
   this->GetQEGeom()->SetOrigin(*first);
   ++first;
   this->GetQEGeom()->SetDestination(*first);

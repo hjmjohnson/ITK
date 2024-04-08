@@ -659,7 +659,7 @@ testEvaluateValueAndDerivative()
 }
 
 int
-itkBSplineInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkBSplineInterpolateImageFunctionTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   int flag = 0; /* Did this test program work? */
 

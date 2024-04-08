@@ -26,7 +26,7 @@
 
 
 int
-itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkRayCastInterpolateImageFunctionTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
 
   using PixelType = unsigned char;

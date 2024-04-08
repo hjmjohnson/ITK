@@ -126,7 +126,7 @@ PolyLineCell<TCellInterface>::SetPointIds(PointIdConstIterator first)
  */
 template <typename TCellInterface>
 void
-PolyLineCell<TCellInterface>::SetPointIds(int itkNotUsed(dummy), int num, PointIdConstIterator first)
+PolyLineCell<TCellInterface>::SetPointIds([[maybe_unused]] int dummy, int num, PointIdConstIterator first)
 {
   PointIdConstIterator ii(first);
 

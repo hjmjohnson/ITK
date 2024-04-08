@@ -82,7 +82,7 @@ CreateInputFrame(InputPixelType val)
  * Main test
  */
 int
-itkFrameDifferenceVideoFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkFrameDifferenceVideoFilterTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   // Instantiate the filter
   using FilterType = itk::FrameDifferenceVideoFilter<InputVideoType, OutputVideoType>;

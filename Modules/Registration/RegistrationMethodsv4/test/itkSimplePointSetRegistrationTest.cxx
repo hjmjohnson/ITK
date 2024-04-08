@@ -102,7 +102,7 @@ public:
 };
 
 int
-itkSimplePointSetRegistrationTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkSimplePointSetRegistrationTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   constexpr unsigned int Dimension = 2;
   constexpr unsigned int numberOfIterations = 20;

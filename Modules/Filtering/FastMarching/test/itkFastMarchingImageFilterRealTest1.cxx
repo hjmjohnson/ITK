@@ -42,7 +42,7 @@ public:
 } // namespace
 
 int
-itkFastMarchingImageFilterRealTest1(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkFastMarchingImageFilterRealTest1([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());

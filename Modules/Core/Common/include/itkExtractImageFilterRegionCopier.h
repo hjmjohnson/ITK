@@ -57,9 +57,8 @@ ExtractImageFilterCopyRegion(
   const typename BinaryUnsignedIntDispatch<T1, T2>::FirstLessThanSecondType & firstLessThanSecond,
   ImageRegion<T1> &                                                           destRegion,
   const ImageRegion<T2> &                                                     srcRegion,
-  const ImageRegion<T1> &                                                     totalInputExtractionRegion)
+  [[maybe_unused]] const ImageRegion<T1> &                                    totalInputExtractionRegion)
 {
-  (void)totalInputExtractionRegion;
   ImageToImageFilterDefaultCopyRegion<T1, T2>(firstLessThanSecond, destRegion, srcRegion);
 }
 

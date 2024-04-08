@@ -72,7 +72,7 @@ CovarianceSampleFilter<TSample>::MakeOutput(DataObjectPointerArraySizeType index
 
   if (index == 1)
   {
-    MeasurementVectorRealType mean;
+    [[maybe_unused]] MeasurementVectorRealType mean;
     (void)mean; // for complainty pants : valgrind
     NumericTraits<MeasurementVectorRealType>::SetLength(mean, this->GetMeasurementVectorSize());
     // NumericTraits::SetLength also initializes array to zero

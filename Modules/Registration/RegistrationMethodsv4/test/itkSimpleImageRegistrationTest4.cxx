@@ -77,7 +77,7 @@ public:
 
 template <unsigned int TDimension>
 int
-ImageRegistration(int itkNotUsed(argc), char * argv[])
+ImageRegistration([[maybe_unused]] int argc, char * argv[])
 {
   const unsigned int ImageDimension = TDimension;
 

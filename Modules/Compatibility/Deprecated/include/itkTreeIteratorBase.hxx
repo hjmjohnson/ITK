@@ -124,7 +124,7 @@ TreeIteratorBase<TTreeType>::Add(ValueType element)
 
 template <typename TTreeType>
 bool
-TreeIteratorBase<TTreeType>::Add(int itkNotUsed(childPosition), ValueType element)
+TreeIteratorBase<TTreeType>::Add([[maybe_unused]] int childPosition, ValueType element)
 {
   if (m_Position)
   {

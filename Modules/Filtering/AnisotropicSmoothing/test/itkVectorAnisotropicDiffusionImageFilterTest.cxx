@@ -30,7 +30,7 @@ operator<<(std::ostream & o, const itk::Vector<float, 3> & v)
 }
 
 int
-itkVectorAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+itkVectorAnisotropicDiffusionImageFilterTest([[maybe_unused]] int argc, char * itkNotUsed(argv)[])
 {
   try
   {

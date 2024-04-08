@@ -202,9 +202,8 @@ protected:
    *  to the "topological metric" i.e. all edges have unit length.
    */
   virtual CoordRepType
-  GetCost(QEType * edge)
+  GetCost([[maybe_unused]] QEType * edge)
   {
-    (void)edge;
     return (1);
   }
 
@@ -271,14 +270,10 @@ public:
 
 public:
   /** Object creation methods. */
-  QuadEdgeMeshConstFrontIterator(const MeshType * mesh = (MeshType *)0,
-                                 bool             start = true,
-                                 QEType *         seed = (QEType *)nullptr)
-  {
-    (void)mesh;
-    (void)start;
-    (void)seed;
-  }
+  QuadEdgeMeshConstFrontIterator([[maybe_unused]] const MeshType * mesh = (MeshType *)0,
+                                 [[maybe_unused]] bool             start = true,
+                                 [[maybe_unused]] QEType *         seed = (QEType *)nullptr)
+  {}
 
   /** \todo do we need here a    : Superclass( mesh, start, seed ) { } */
   ~QuadEdgeMeshConstFrontIterator() override = default;

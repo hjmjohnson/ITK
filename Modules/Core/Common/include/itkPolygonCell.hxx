@@ -144,7 +144,7 @@ PolygonCell<TCellInterface>::GetBoundaryFeature(int                   dimension,
  */
 template <typename TCellInterface>
 void
-PolygonCell<TCellInterface>::SetPointIds(int itkNotUsed(dummy), int num, PointIdConstIterator first)
+PolygonCell<TCellInterface>::SetPointIds([[maybe_unused]] int dummy, int num, PointIdConstIterator first)
 {
   PointIdConstIterator ii(first);
 

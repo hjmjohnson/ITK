@@ -22,11 +22,8 @@
 
 
 int
-itkCrossHelperTest(int argc, char * argv[])
+itkCrossHelperTest([[maybe_unused]] int argc, [[maybe_unused]] char * argv[])
 {
-  (void)argc;
-  (void)argv;
-
   constexpr unsigned int Dimension2D = 2;
   constexpr unsigned int Dimension3D = 3;
   constexpr unsigned int Dimension4D = 4;

@@ -132,12 +132,12 @@ public:
   /** Override Accessors to pass default values since OpenCV doesn't handle
    * this type of meta data. */
   virtual double
-  GetSpacing(unsigned int itkNotUsed(i)) const
+  GetSpacing([[maybe_unused]] unsigned int i) const
   {
     return 1.0;
   }
   virtual double
-  GetOrigin(unsigned int itkNotUsed(i)) const
+  GetOrigin([[maybe_unused]] unsigned int i) const
   {
     return 0.0;
   }
