@@ -497,7 +497,8 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
       for (unsigned int i = 0; i < InputImageDimension; ++i)
       {
         inputIndex[i] += alpha * vectorFromStartIndex[i];
-        std::cout << "XXXX " << i << " " << myconverter(inputIndex[i]) << " " << alpha << std::endl;
+        std::cout << "XXXX " << i << " " << myconverter(alpha) << " * " << myconverter(vectorFromStartIndex[i])
+                  << " => " << myconverter(inputIndex[i]) << std::endl;
       }
 
       // Evaluate input at right position and copy to the output
