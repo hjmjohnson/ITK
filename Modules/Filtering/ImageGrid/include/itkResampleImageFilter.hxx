@@ -474,10 +474,7 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
 
     IndexType index = outIt.GetIndex();
     index[0] = firstIndexValueOfLargestPossibleRegion;
-    if (index[0] == 26 and index[1] == 165)
-    {
-      std::cout << "HERE" << std::endl;
-    }
+
     const ContinuousInputIndexType startIndex = transformIndex(index);
     index[0] += firstSizeValueOfLargestPossibleRegion;
     const auto vectorFromStartIndex = transformIndex(index) - startIndex;
@@ -497,8 +494,11 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
       for (unsigned int i = 0; i < InputImageDimension; ++i)
       {
         inputIndex[i] += alpha * vectorFromStartIndex[i];
-        std::cout << "XXXX " << i << " " << myconverter(alpha) << " * " << myconverter(vectorFromStartIndex[i])
-                  << " => " << myconverter(inputIndex[i]) << std::endl;
+        std::cout << "XXXX " << i << " | " << myconverter(index[i]) << " " << myconverter(startIndex[i]) << " "
+                  << myconverter(alpha) << " * " << myconverter(vectorFromStartIndex[i]) << " => "
+                  << myconverter(inputIndex[i]) << " | " << myconverter(index[i]) << " " <<
+
+          std::endl;
       }
 
       // Evaluate input at right position and copy to the output
