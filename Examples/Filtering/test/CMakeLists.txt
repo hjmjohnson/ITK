@@ -566,6 +566,10 @@ itk_add_test(
   COMMAND
   ${ITK_TEST_DRIVER}
   --compare
+  # Coordinate computations for nearest neighbor are computed at the limits of numerical precision for this image
+  # during resampling.  arm64 and x86_64 compute input continuous index coordinates as 105.39999999999999 vs 105.4
+  # which requires a slight tolerance acceptance in the comparisons
+  --compareRadiusTolerance 1
   DATA{${BASELINE}/ResampleImageFilter9TestPixelCentered.png,:}
   ${TEMP}/ResampleImageFilter9TestNearestPixelCentered.png
   $<TARGET_FILE:ResampleImageFilter9>
