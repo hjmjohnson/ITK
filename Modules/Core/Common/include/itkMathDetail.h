@@ -32,6 +32,10 @@
 #include "itkNumericTraits.h"
 
 #include <cfenv>
+#include <cmath>
+#include <iomanip>
+#include <iostream>
+#include <utility>
 
 #if (defined(ITK_COMPILER_SUPPORTS_SSE2_32) || defined(ITK_COMPILER_SUPPORTS_SSE2_64)) && !defined(ITK_WRAPPING_PARSER)
 #  include <emmintrin.h> // SSE2 intrinsics
@@ -110,10 +114,29 @@ template <typename TReturn, typename TInput>
 inline TReturn
 RoundHalfIntegerUp_base(TInput x)
 {
+
+  const auto orig_value = x;
+#if 0
+  const auto currentMode=std::fegetround();
+  std::fesetround(FE_UPWARD);
+  const auto returnVal = static_cast<TReturn>(std::rint(orig_value));
+  std::fesetround(currentMode);
+#else
+  const auto returnVal = std::floor(orig_value + static_cast<TInput>(0.5));
+#endif
+
   x += static_cast<TInput>(0.5);
   const auto r = static_cast<TReturn>(x);
-  return (NumericTraits<TInput>::IsNonnegative(x)) ? r
-                                                   : (x == static_cast<TInput>(r) ? r : r - static_cast<TReturn>(1));
+  const auto test_value =
+    (NumericTraits<TInput>::IsNonnegative(x)) ? r : (x == static_cast<TInput>(r) ? r : r - static_cast<TReturn>(1));
+  if (test_value != returnVal or (orig_value > 0.4999 and orig_value < 0.501))
+  {
+    std::cout << std::setw(20) << std::fixed << " different_values " << orig_value << " : " << test_value
+              << " != " << returnVal << std::endl;
+    std::cout << std::endl;
+  }
+
+  return returnVal;
 }
 
 template <typename TReturn, typename TInput>

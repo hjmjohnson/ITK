@@ -26,9 +26,12 @@
 #include "itkSpecialCoordinatesImage.h"
 #include "itkDefaultConvertPixelTraits.h"
 #include "itkImageAlgorithm.h"
+#include "itkNumberToString.h"
 
 #include <algorithm>   // For max.
 #include <type_traits> // For is_same.
+
+#include <itkNumberToString.h>
 
 namespace itk
 {
@@ -471,7 +474,10 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
 
     IndexType index = outIt.GetIndex();
     index[0] = firstIndexValueOfLargestPossibleRegion;
-
+    if (index[0] == 26 and index[1] == 165)
+    {
+      std::cout << "HERE" << std::endl;
+    }
     const ContinuousInputIndexType startIndex = transformIndex(index);
     index[0] += firstSizeValueOfLargestPossibleRegion;
     const auto vectorFromStartIndex = transformIndex(index) - startIndex;
@@ -479,6 +485,7 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
     IndexValueType scanlineIndex = outIt.GetIndex()[0];
 
 
+    itk::NumberToString<double> myconverter{};
     while (!outIt.IsAtEndOfLine())
     {
 
@@ -490,6 +497,7 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
       for (unsigned int i = 0; i < InputImageDimension; ++i)
       {
         inputIndex[i] += alpha * vectorFromStartIndex[i];
+        std::cout << "XXXX " << i << " " << myconverter(inputIndex[i]) << " " << alpha << std::endl;
       }
 
       // Evaluate input at right position and copy to the output
