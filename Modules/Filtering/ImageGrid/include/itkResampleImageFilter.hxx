@@ -475,14 +475,19 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
     IndexType index = outIt.GetIndex();
     index[0] = firstIndexValueOfLargestPossibleRegion;
 
+    itk::NumberToString<double>    myconverter{};
     const ContinuousInputIndexType startIndex = transformIndex(index);
     index[0] += firstSizeValueOfLargestPossibleRegion;
-    const auto vectorFromStartIndex = transformIndex(index) - startIndex;
-
+    const auto starting_transformed_index = transformIndex(index);
+    const auto vectorFromStartIndex = starting_transformed_index - startIndex;
+    for (unsigned int i = 0; i < InputImageDimension; ++i)
+    {
+      std::cout << "YYYYY [" << i << "] " << myconverter(starting_transformed_index[i]) << " - "
+                << myconverter(startIndex[i]) << " -> " << myconverter(vectorFromStartIndex[i]) << std::endl;
+    }
     IndexValueType scanlineIndex = outIt.GetIndex()[0];
 
 
-    itk::NumberToString<double> myconverter{};
     while (!outIt.IsAtEndOfLine())
     {
 
@@ -494,11 +499,12 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
       for (unsigned int i = 0; i < InputImageDimension; ++i)
       {
         inputIndex[i] += alpha * vectorFromStartIndex[i];
-        std::cout << "XXXX " << i << " | " << myconverter(index[i]) << " " << myconverter(startIndex[i]) << " "
-                  << myconverter(alpha) << " * " << myconverter(vectorFromStartIndex[i]) << " => "
-                  << myconverter(inputIndex[i]) << " | " << myconverter(index[i]) << " " <<
-
-          std::endl;
+        //        std::cout << "XXXX " << i << " | " << myconverter(index[i]) << " " << myconverter(startIndex[i]) << "
+        //        "
+        //                  << myconverter(alpha) << " * " << myconverter(vectorFromStartIndex[i]) << " => "
+        //                  << myconverter(inputIndex[i]) << " | " << myconverter(index[i]) << " " <<
+        //
+        //          std::endl;
       }
 
       // Evaluate input at right position and copy to the output
