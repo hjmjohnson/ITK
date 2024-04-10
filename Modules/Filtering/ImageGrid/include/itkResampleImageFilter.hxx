@@ -463,6 +463,19 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
 
   const auto transformIndex = [outputPtr, transformPtr, inputPtr](const IndexType & index) {
     const auto physPoint = outputPtr->template TransformIndexToPhysicalPoint<double>(index);
+
+    //    Point<double, 2> point;
+    //    outputPtr->GetI
+    //    for (unsigned int i = 0; i < outputPtr->GetDimension(); ++i)
+    //    {
+    //      point[i] = outputPtr->m_Origin[i];
+    //      for (unsigned int j = 0; j < outputPtr->GetDimension(); ++j)
+    //      {
+    //        point[i] += m_IndexToPhysicalPoint[i][j] * index[j];
+    //      }
+    //    }
+
+
     const auto tfmPysPoint = transformPtr->TransformPoint(physPoint);
     const auto returnVal =
       inputPtr->template TransformPhysicalPointToContinuousIndex<TInterpolatorPrecisionType>(tfmPysPoint);
@@ -470,7 +483,7 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
     for (unsigned int i = 0; i < InputImageDimension; ++i)
     {
       std::cout << "ZZZZZ [" << i << "] " << myconverter(index[i]) << " -> " << myconverter(physPoint[i]) << " -> "
-                << myconverter(tfmPysPoint[i]) << myconverter(returnVal[i]) << std::endl;
+                << myconverter(tfmPysPoint[i]) << " " << myconverter(returnVal[i]) << std::endl;
     }
     return returnVal;
   };
@@ -494,6 +507,7 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
     //      std::cout << "YYYYY [" << i << "] " << myconverter(starting_transformed_index[i]) << " - "
     //                << myconverter(startIndex[i]) << " -> " << myconverter(vectorFromStartIndex[i]) << std::endl;
     //    }
+    std::cout << outputPtr << std::endl;
     IndexValueType scanlineIndex = outIt.GetIndex()[0];
 
 

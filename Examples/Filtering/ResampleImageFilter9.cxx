@@ -104,8 +104,8 @@ main(int argc, char * argv[])
 
   // Software Guide : BeginCodeSnippet
   ImageType::SpacingType spacing;
-  spacing[0] = .35; // pixel spacing in millimeters along X
-  spacing[1] = .35; // pixel spacing in millimeters along Y
+  spacing[0] = 0.35; // pixel spacing in millimeters along X
+  spacing[1] = 0.35; // pixel spacing in millimeters along Y
 
   nearestFilter->SetOutputSpacing(spacing);
   linearFilter->SetOutputSpacing(spacing);
