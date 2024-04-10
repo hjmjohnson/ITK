@@ -462,8 +462,17 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
   //
 
   const auto transformIndex = [outputPtr, transformPtr, inputPtr](const IndexType & index) {
-    return inputPtr->template TransformPhysicalPointToContinuousIndex<TInterpolatorPrecisionType>(
-      transformPtr->TransformPoint(outputPtr->template TransformIndexToPhysicalPoint<double>(index)));
+    const auto physPoint = outputPtr->template TransformIndexToPhysicalPoint<double>(index);
+    const auto tfmPysPoint = transformPtr->TransformPoint(physPoint);
+    const auto returnVal =
+      inputPtr->template TransformPhysicalPointToContinuousIndex<TInterpolatorPrecisionType>(tfmPysPoint);
+    itk::NumberToString<double> myconverter{};
+    for (unsigned int i = 0; i < InputImageDimension; ++i)
+    {
+      std::cout << "ZZZZZ [" << i << "] " << myconverter(index[i]) << " -> " << myconverter(physPoint[i]) << " -> "
+                << myconverter(tfmPysPoint[i]) << myconverter(returnVal[i]) << std::endl;
+    }
+    return returnVal;
   };
 
   // Create an iterator that will walk the output region for this thread.
@@ -475,16 +484,16 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
     IndexType index = outIt.GetIndex();
     index[0] = firstIndexValueOfLargestPossibleRegion;
 
-    itk::NumberToString<double>    myconverter{};
+    //    itk::NumberToString<double>    myconverter{};
     const ContinuousInputIndexType startIndex = transformIndex(index);
     index[0] += firstSizeValueOfLargestPossibleRegion;
     const auto starting_transformed_index = transformIndex(index);
     const auto vectorFromStartIndex = starting_transformed_index - startIndex;
-    for (unsigned int i = 0; i < InputImageDimension; ++i)
-    {
-      std::cout << "YYYYY [" << i << "] " << myconverter(starting_transformed_index[i]) << " - "
-                << myconverter(startIndex[i]) << " -> " << myconverter(vectorFromStartIndex[i]) << std::endl;
-    }
+    //    for (unsigned int i = 0; i < InputImageDimension; ++i)
+    //    {
+    //      std::cout << "YYYYY [" << i << "] " << myconverter(starting_transformed_index[i]) << " - "
+    //                << myconverter(startIndex[i]) << " -> " << myconverter(vectorFromStartIndex[i]) << std::endl;
+    //    }
     IndexValueType scanlineIndex = outIt.GetIndex()[0];
 
 
