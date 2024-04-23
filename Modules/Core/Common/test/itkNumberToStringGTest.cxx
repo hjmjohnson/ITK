@@ -18,6 +18,7 @@
 
 // First include the header file to be tested:
 #include "itkNumberToString.h"
+#include <cstdint>
 #include <gtest/gtest.h>
 
 namespace

@@ -20,7 +20,7 @@
 
 #include <iostream>
 #include "ITKMathematicalMorphologyExport.h"
-
+#include <cstdint>
 
 namespace itk
 {
