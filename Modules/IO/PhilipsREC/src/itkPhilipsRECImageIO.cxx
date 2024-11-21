@@ -190,18 +190,16 @@ PhilipsRECImageIOGetImageTypeOffset(int                                         
                                     PhilipsPAR::PARSliceIndexImageTypeVector    sliceImageTypesIndex,
                                     PhilipsPAR::PARSliceIndexScanSequenceVector sliceScanSequenceIndex)
 {
-  int index = volumeIndex * parParam.num_slice_repetitions * numSlices + slice * parParam.num_slice_repetitions;
-  int i;
-
-  for (i = 0; i < parParam.num_slice_repetitions; ++i)
+  const int index = volumeIndex * parParam.num_slice_repetitions * numSlices + slice * parParam.num_slice_repetitions;
+  for (int image_type_offset = 0; image_type_offset < parParam.num_slice_repetitions; ++image_type_offset)
   {
-    if ((sliceImageTypesIndex[index + i].second == imageType) &&
-        (sliceScanSequenceIndex[index + i].second == scanSequence))
+    if ((sliceImageTypesIndex[index + image_type_offset].second == imageType) &&
+        (sliceScanSequenceIndex[index + image_type_offset].second == scanSequence))
     {
-      break;
+      return image_type_offset;
     }
   }
-  return i;
+  return parParam.num_slice_repetitions;
 }
 
 //----------------------------------------------------------------------------
@@ -754,7 +752,7 @@ PhilipsRECImageIO::ReadImageInformation()
       direction[columns][rows] = dir[columns][rows];
     }
   }
-//#define DEBUG_ORIENTATION
+// #define DEBUG_ORIENTATION
 #ifdef DEBUG_ORIENTATION
   std::cout << "Direction cosines = " << direction << std::endl << "Spacing = " << spacing << std::endl;
 #endif
