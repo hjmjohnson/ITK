@@ -1947,9 +1947,9 @@ PhilipsPAR::GetRECRescaleValues(std::string                             parFile,
   // Must match size of image_types
   rescaleValues->resize(PAR_DEFAULT_IMAGE_TYPES_SIZE);
   PhilipsPAR::PARRescaleValues zero(0.0);
-  for (unsigned int zeroIndex = 0; zeroIndex < rescaleValues->size(); ++zeroIndex)
+  for (auto & rescaleValue : *rescaleValues)
   {
-    (*rescaleValues)[zeroIndex] = zero; // Zero out everything
+    rescaleValue = zero; // Zero out everything
   }
 
   // Check version of PAR file.

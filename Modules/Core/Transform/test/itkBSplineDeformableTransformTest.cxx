@@ -111,13 +111,13 @@ itkBSplineDeformableTransformTest1()
   CoefficientImageType::Pointer coeffImage[SpaceDimension];
   unsigned int                  numberOfControlPoints = region.GetNumberOfPixels();
   CoefficientType *             dataPointer = parameters.data_block();
-  for (unsigned int j = 0; j < SpaceDimension; ++j)
+  for (auto & j : coeffImage)
   {
-    coeffImage[j] = CoefficientImageType::New();
-    coeffImage[j]->SetRegions(region);
-    coeffImage[j]->GetPixelContainer()->SetImportPointer(dataPointer, numberOfControlPoints);
+    j = CoefficientImageType::New();
+    j->SetRegions(region);
+    j->GetPixelContainer()->SetImportPointer(dataPointer, numberOfControlPoints);
     dataPointer += numberOfControlPoints;
-    coeffImage[j]->FillBuffer(0.0);
+    j->FillBuffer(0.0);
   }
 
   /**
@@ -623,13 +623,13 @@ itkBSplineDeformableTransformTest3()
   CoefficientImageType::Pointer coeffImage[SpaceDimension];
   unsigned int                  numberOfControlPoints = region.GetNumberOfPixels();
   CoefficientType *             dataPointer = parameters.data_block();
-  for (unsigned int j = 0; j < SpaceDimension; ++j)
+  for (auto & j : coeffImage)
   {
-    coeffImage[j] = CoefficientImageType::New();
-    coeffImage[j]->SetRegions(region);
-    coeffImage[j]->GetPixelContainer()->SetImportPointer(dataPointer, numberOfControlPoints);
+    j = CoefficientImageType::New();
+    j->SetRegions(region);
+    j->GetPixelContainer()->SetImportPointer(dataPointer, numberOfControlPoints);
     dataPointer += numberOfControlPoints;
-    coeffImage[j]->FillBuffer(0.0);
+    j->FillBuffer(0.0);
   }
 
   /**

@@ -206,12 +206,10 @@ itkMeshTest(int, char *[])
     auto          cellVectorContainer = MeshType::CellsVectorContainer::New();
     int           index = 0;
     unsigned long value = 1;
-    for (std::map<itk::CellGeometryEnum, unsigned int>::iterator iter = cellPointMap.begin();
-         iter != cellPointMap.end();
-         ++iter)
+    for (auto & iter : cellPointMap)
     {
-      itk::CellGeometryEnum cellType = iter->first;
-      unsigned int          numOfPoints = iter->second;
+      itk::CellGeometryEnum cellType = iter.first;
+      unsigned int          numOfPoints = iter.second;
 
       // Insert cell type
       cellVectorContainer->InsertElement(index++, static_cast<unsigned long>(cellType));
@@ -231,11 +229,9 @@ itkMeshTest(int, char *[])
 
     // Check if right cells are recovered
     index = 0;
-    for (std::map<itk::CellGeometryEnum, unsigned int>::iterator iter = cellPointMap.begin();
-         iter != cellPointMap.end();
-         ++iter)
+    for (auto & iter : cellPointMap)
     {
-      unsigned int    numOfPoints = iter->second;
+      unsigned int    numOfPoints = iter.second;
       CellAutoPointer temp_cell;
 
       if (mesh0->GetCell(index++, temp_cell))
