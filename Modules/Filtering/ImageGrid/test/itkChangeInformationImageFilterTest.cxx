@@ -192,7 +192,7 @@ itkChangeInformationImageFilterTest(int, char *[])
   std::cout << "filter->GetReferenceImage(): " << referenceImage2 << std::endl;
 
   // Test GetMacros
-  bool useReferenceImage = filter->GetUseReferenceImage();
+  bool const useReferenceImage = filter->GetUseReferenceImage();
   std::cout << "filter->GetUseReferenceImage(): " << useReferenceImage << std::endl;
   const ArrayType outputSpacing = filter->GetOutputSpacing();
   std::cout << "filter->GetOutputSpacing(): " << outputSpacing << std::endl;
@@ -203,19 +203,19 @@ itkChangeInformationImageFilterTest(int, char *[])
   const ImageType::DirectionType outputDirection = filter->GetOutputDirection();
   std::cout << "filter->GetOutputDirection(): " << std::endl << outputDirection << std::endl;
 
-  bool changeSpacing = filter->GetChangeSpacing();
+  bool const changeSpacing = filter->GetChangeSpacing();
   std::cout << "filter->GetChangeSpacing(): " << changeSpacing << std::endl;
 
-  bool changeOrigin = filter->GetChangeOrigin();
+  bool const changeOrigin = filter->GetChangeOrigin();
   std::cout << "filter->GetChangeOrigin(): " << changeOrigin << std::endl;
 
-  bool changeDirection = filter->GetChangeDirection();
+  bool const changeDirection = filter->GetChangeDirection();
   std::cout << "filter->GetChangeDirection(): " << changeDirection << std::endl;
 
-  bool changeRegion = filter->GetChangeRegion();
+  bool const changeRegion = filter->GetChangeRegion();
   std::cout << "filter->GetChangeRegion(): " << changeRegion << std::endl;
 
-  bool centerImage = filter->GetCenterImage();
+  bool const centerImage = filter->GetCenterImage();
   std::cout << "filter->GetCenterImage(): " << centerImage << std::endl;
 
   // Test GetVectorMacro

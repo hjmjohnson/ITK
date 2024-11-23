@@ -25,7 +25,7 @@ int
 itkImageRegionSplitterMultidimensionalTest(int, char *[])
 {
 
-  itk::ImageRegionSplitterMultidimensional::Pointer splitter = itk::ImageRegionSplitterMultidimensional::New();
+  itk::ImageRegionSplitterMultidimensional::Pointer const splitter = itk::ImageRegionSplitterMultidimensional::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(splitter, ImageRegionSplitterMultidimensional, ImageRegionSplitterBase);
 

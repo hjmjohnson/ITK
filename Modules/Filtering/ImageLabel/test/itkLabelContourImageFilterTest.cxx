@@ -64,7 +64,7 @@ itkLabelContourImageFilterTest(int argc, char * argv[])
   ITK_TEST_SET_GET_VALUE(backgroundValue, filter->GetBackgroundValue());
 
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   using WriterType = itk::ImageFileWriter<ImageType>;
   auto writer = WriterType::New();

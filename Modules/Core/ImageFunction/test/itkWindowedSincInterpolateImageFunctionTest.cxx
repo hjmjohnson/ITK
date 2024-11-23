@@ -60,7 +60,7 @@ TestGeometricPoint(const InterpolatorType * interp, const PointType & point, boo
 
   std::cout << " Point: " << point;
 
-  bool bvalue = interp->IsInsideBuffer(point);
+  bool const bvalue = interp->IsInsideBuffer(point);
   std::cout << " Inside: " << bvalue << std::endl;
 
   if (bvalue != isInside)
@@ -71,7 +71,7 @@ TestGeometricPoint(const InterpolatorType * interp, const PointType & point, boo
 
   if (isInside)
   {
-    OutputType value = interp->Evaluate(point);
+    OutputType const value = interp->Evaluate(point);
     std::cout << " Value: " << value << std::endl;
 
     if (itk::Math::abs(value - trueValue) > 1e-9)
@@ -98,7 +98,7 @@ TestContinuousIndex(const InterpolatorType *    interp,
 
   std::cout << " Index: " << index;
 
-  bool bvalue = interp->IsInsideBuffer(index);
+  bool const bvalue = interp->IsInsideBuffer(index);
   std::cout << " Inside: " << bvalue << std::endl;
 
   if (bvalue != isInside)
@@ -109,7 +109,7 @@ TestContinuousIndex(const InterpolatorType *    interp,
 
   if (isInside)
   {
-    OutputType value = interp->EvaluateAtContinuousIndex(index);
+    OutputType const value = interp->EvaluateAtContinuousIndex(index);
     std::cout << " Value: " << value << std::endl;
 
     if (itk::Math::abs(value - trueValue) > 1e-9)
@@ -145,9 +145,9 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
 
   const unsigned int ImageDimension = SincInterpolate::ImageDimension;
 
-  ImageType::SizeType size = { { 20, 40, 80 } };
-  double              origin[3] = { 0.5, 0.5, 0.5 };
-  double              spacing[3] = { 0.1, 0.05, 0.025 };
+  ImageType::SizeType const size = { { 20, 40, 80 } };
+  double                    origin[3] = { 0.5, 0.5, 0.5 };
+  double                    spacing[3] = { 0.1, 0.05, 0.025 };
 
 
   // Create a test image
@@ -246,7 +246,7 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
 
   // position near image border
   {
-    double       epsilon = 1.0e-10;
+    double const epsilon = 1.0e-10;
     CoordRepType darray[3] = { 19 - epsilon, 20, 40 };
     output = OutputType(79);
     cindex = ContinuousIndexType(darray);

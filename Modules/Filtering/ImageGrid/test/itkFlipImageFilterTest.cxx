@@ -41,9 +41,9 @@ itkFlipImageFilterTest(int argc, char * argv[])
   using FlipperType = itk::FlipImageFilter<ImageType>;
 
   // Define a small input image
-  ImageType::IndexType  index = { { 10, 20, 30 } };
-  ImageType::SizeType   size = { { 5, 4, 3 } };
-  ImageType::RegionType region{ index, size };
+  ImageType::IndexType const  index = { { 10, 20, 30 } };
+  ImageType::SizeType const   size = { { 5, 4, 3 } };
+  ImageType::RegionType const region{ index, size };
 
   ImageType::SpacingType spacing;
   spacing[0] = 1.1;
@@ -79,7 +79,7 @@ itkFlipImageFilterTest(int argc, char * argv[])
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(flipper, FlipImageFilter, ImageToImageFilter);
 
-  itk::SimpleFilterWatcher watcher(flipper, "FlipImageFilter");
+  itk::SimpleFilterWatcher const watcher(flipper, "FlipImageFilter");
 
   bool                           bArray[ImageDimension] = { true, false, true };
   FlipperType::FlipAxesArrayType flipAxes(bArray);
@@ -95,7 +95,7 @@ itkFlipImageFilterTest(int argc, char * argv[])
   flipper->Update();
 
   // Check the output
-  ImageType::Pointer outputImage = flipper->GetOutput();
+  ImageType::Pointer const outputImage = flipper->GetOutput();
 
   const ImageType::SpacingType & inputSpacing = inputImage->GetSpacing();
   const ImageType::PointType &   inputOrigin = inputImage->GetOrigin();
@@ -116,12 +116,13 @@ itkFlipImageFilterTest(int argc, char * argv[])
     {
       if (flipAxes[j])
       {
-        int sign = flipAboutOrigin ? -1 : 1;
+        int const sign = flipAboutOrigin ? -1 : 1;
 
-        ImageType::PointType::ValueType temp =
+        ImageType::PointType::ValueType const temp =
           sign * (static_cast<double>(inputIndex[j]) * inputSpacing[j] + inputOrigin[j]);
 
-        ImageType::PointType::ValueType outputPoint = flipAboutOrigin ? temp - outputOrigin[j] : outputOrigin[j] - temp;
+        ImageType::PointType::ValueType const outputPoint =
+          flipAboutOrigin ? temp - outputOrigin[j] : outputOrigin[j] - temp;
 
         outputIndex[j] = itk::Math::Round<IndexValueType>(outputPoint / outputSpacing[j]);
       }

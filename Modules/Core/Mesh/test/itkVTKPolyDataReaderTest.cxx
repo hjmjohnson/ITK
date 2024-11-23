@@ -40,7 +40,7 @@ itkVTKPolyDataReaderTest(int argc, char * argv[])
 
   using PointType = ReaderType::PointType;
 
-  std::string filename = argv[1];
+  std::string const filename = argv[1];
   polyDataReader->SetFileName(filename);
   ITK_TEST_SET_GET_VALUE(filename, polyDataReader->GetFileName());
 
@@ -50,12 +50,12 @@ itkVTKPolyDataReaderTest(int argc, char * argv[])
   std::cout << "Version: " << polyDataReader->GetVersion() << std::endl;
   std::cout << "Header: " << polyDataReader->GetHeader() << std::endl;
 
-  MeshType::Pointer mesh = polyDataReader->GetOutput();
+  MeshType::Pointer const mesh = polyDataReader->GetOutput();
 
   PointType point;
 
-  unsigned int numberOfPoints = mesh->GetNumberOfPoints();
-  unsigned int numberOfCells = mesh->GetNumberOfCells();
+  unsigned int const numberOfPoints = mesh->GetNumberOfPoints();
+  unsigned int const numberOfCells = mesh->GetNumberOfCells();
 
   std::cout << "numberOfPoints= " << numberOfPoints << std::endl;
   std::cout << "numberOfCells= " << numberOfCells << std::endl;

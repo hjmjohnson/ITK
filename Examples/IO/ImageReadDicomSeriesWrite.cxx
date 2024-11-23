@@ -116,7 +116,7 @@ main(int argc, char * argv[])
   seriesWriter->SetImageIO(gdcmIO);
 
 
-  ImageType::RegionType region =
+  ImageType::RegionType const region =
     reader->GetOutput()->GetLargestPossibleRegion();
 
   ImageType::IndexType start = region.GetIndex();

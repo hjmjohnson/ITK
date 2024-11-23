@@ -27,7 +27,7 @@ template <typename TVector>
 MahalanobisDistanceMetric<TVector>::MahalanobisDistanceMetric()
 
 {
-  MeasurementVectorSizeType size = this->GetMeasurementVectorSize();
+  MeasurementVectorSizeType const size = this->GetMeasurementVectorSize();
 
   this->m_Covariance.set_size(size, size);
   this->m_InverseCovariance.set_size(size, size);
@@ -158,7 +158,7 @@ MahalanobisDistanceMetric<TVector>::Evaluate(const MeasurementVectorType & measu
   tempMat = tempVec * m_InverseCovariance;
 
   // Compute |y - mean | * inverse(cov) * |y - mean|^T
-  double temp = std::sqrt(dot_product(tempMat.as_ref(), tempVec.as_ref()));
+  double const temp = std::sqrt(dot_product(tempMat.as_ref(), tempVec.as_ref()));
 
   return temp;
 }
@@ -190,7 +190,7 @@ MahalanobisDistanceMetric<TVector>::Evaluate(const MeasurementVectorType & x1, c
   tempMat = tempVec * m_InverseCovariance;
 
   // Compute |x1 - x2 | * inverse(cov) * |x1 - x2|^T
-  double temp = std::sqrt(dot_product(tempMat.as_ref(), tempVec.as_ref()));
+  double const temp = std::sqrt(dot_product(tempMat.as_ref(), tempVec.as_ref()));
 
   return temp;
 }

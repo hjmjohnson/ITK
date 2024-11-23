@@ -157,7 +157,7 @@ LevelSetFunctionWithRefitTerm<TImageType, TSparseImageType>::PropagationSpeed(co
                                                                               GlobalDataStruct *       globaldata) const
   -> ScalarValueType
 {
-  IndexType       idx = neighborhood.GetIndex();
+  IndexType const idx = neighborhood.GetIndex();
   NodeType *      targetnode = m_SparseTargetImage->GetPixel(idx);
   ScalarValueType refitterm;
   ScalarValueType cv;

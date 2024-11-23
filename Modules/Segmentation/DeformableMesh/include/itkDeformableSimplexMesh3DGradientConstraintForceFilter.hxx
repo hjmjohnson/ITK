@@ -239,9 +239,9 @@ DeformableSimplexMesh3DGradientConstraintForceFilter<TInputMesh, TOutputMesh>::C
   if (ic[0] >= 0 && ic[0] < this->m_ImageWidth && ic[1] >= 0 && ic[1] < this->m_ImageHeight && ic[2] >= 0 &&
       ic[2] < this->m_ImageDepth)
   {
-    bool     stop;
-    SIDEEnum side = SIDEEnum::BOTH; // make sure you can set half segment as well but for now
-                                    // we just set it to full segment
+    bool           stop;
+    SIDEEnum const side = SIDEEnum::BOTH; // make sure you can set half segment as well but for now
+                                          // we just set it to full segment
     int    vpos[3];
     int    ii;
     double dist;
@@ -300,7 +300,7 @@ DeformableSimplexMesh3DGradientConstraintForceFilter<TInputMesh, TOutputMesh>::C
 
       while (!stop)
       {
-        double a = NextVoxel(dp, ic, &x, &y, &z);
+        double const a = NextVoxel(dp, ic, &x, &y, &z);
 
         pos[0] += a * dp[0];
         pos[1] += a * dp[1];
@@ -357,7 +357,7 @@ DeformableSimplexMesh3DGradientConstraintForceFilter<TInputMesh, TOutputMesh>::C
 
       while (!stop)
       {
-        double a = NextVoxel(dp, ic, &x, &y, &z);
+        double const a = NextVoxel(dp, ic, &x, &y, &z);
 
         pos[0] += a * dp[0];
         pos[1] += a * dp[1];

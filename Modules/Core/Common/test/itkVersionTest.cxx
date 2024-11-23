@@ -25,22 +25,22 @@
 int
 itkVersionTest(int, char *[])
 {
-  int testPassStatus = EXIT_SUCCESS;
+  int const testPassStatus = EXIT_SUCCESS;
 
-  itk::Version::Pointer version = itk::Version::New();
+  itk::Version::Pointer const version = itk::Version::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(version, Version, Object);
 
   const char * itkVersion = itk::Version::GetITKVersion();
   std::cout << "itk version: " << itkVersion << std::endl;
 
-  int itkMajorVersion = itk::Version::GetITKMajorVersion();
+  int const itkMajorVersion = itk::Version::GetITKMajorVersion();
   std::cout << "itk Major version: " << itkMajorVersion << std::endl;
 
-  int itkMinorVersion = itk::Version::GetITKMinorVersion();
+  int const itkMinorVersion = itk::Version::GetITKMinorVersion();
   std::cout << "itk Minor version: " << itkMinorVersion << std::endl;
 
-  int itkBuildVersion = itk::Version::GetITKBuildVersion();
+  int const itkBuildVersion = itk::Version::GetITKBuildVersion();
   std::cout << "itk Build version: " << itkBuildVersion << std::endl;
 
   const char * itkSourceVersion = itk::Version::GetITKSourceVersion();

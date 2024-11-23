@@ -47,7 +47,7 @@ public:
   void
   CreateInvalidOutput()
   {
-    unsigned int index = 3;
+    unsigned int const index = 3;
     Superclass::MakeOutput(index);
   }
 };
@@ -159,9 +159,9 @@ itkWeightedCovarianceSampleFilterTest2(int, char *[])
 
   // Check the results
 
-  double epsilon = 1e-2;
+  double const epsilon = 1e-2;
 
-  float value33[3] = { 4.10f, 2.08f, 0.604f };
+  float const value33[3] = { 4.10f, 2.08f, 0.604f };
 
   MeasurementVectorRealType meanExpected33(MeasurementVectorSize2);
   for (unsigned int i = 0; i < MeasurementVectorSize2; ++i)
@@ -227,7 +227,7 @@ itkWeightedCovarianceSampleFilterTest2(int, char *[])
   std::cout << "Mean: " << mean << std::endl;
   std::cout << "Covariance Matrix: " << matrix << std::endl;
 
-  float value3[3] = { 4.10f, 2.08f, 0.604f };
+  float const value3[3] = { 4.10f, 2.08f, 0.604f };
 
   MeasurementVectorRealType meanExpected3(MeasurementVectorSize2);
   for (unsigned int i = 0; i < MeasurementVectorSize2; ++i)
@@ -332,7 +332,7 @@ itkWeightedCovarianceSampleFilterTest2(int, char *[])
     OutputType
     Evaluate(const InputType & itkNotUsed(input)) const override
     {
-      MeasurementVectorType2 measurements;
+      MeasurementVectorType2 const measurements;
       // set the weight factor of the measurement
       // vector with valuev[2, 2] to 0.5.
       return 1.0;

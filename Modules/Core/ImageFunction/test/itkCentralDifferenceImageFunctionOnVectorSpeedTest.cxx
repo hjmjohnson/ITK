@@ -24,11 +24,11 @@ template <unsigned int vecLength>
 int
 itkCentralDifferenceImageFunctionOnVectorSpeedTestRun(char * argv[])
 {
-  int  imageSize = std::stoi(argv[1]);
-  int  reps = std::stoi(argv[2]);
-  bool doEAI = std::stoi(argv[3]);
-  bool doEACI = std::stoi(argv[4]);
-  bool doE = std::stoi(argv[5]);
+  int const  imageSize = std::stoi(argv[1]);
+  int const  reps = std::stoi(argv[2]);
+  bool const doEAI = std::stoi(argv[3]);
+  bool const doEACI = std::stoi(argv[4]);
+  bool const doE = std::stoi(argv[5]);
 
   std::cout << "imageSize: " << imageSize << " reps: " << reps << " doEAI, doEACI, doE: " << doEAI << ", " << doEACI
             << ", " << doE << std::endl;
@@ -38,9 +38,9 @@ itkCentralDifferenceImageFunctionOnVectorSpeedTestRun(char * argv[])
   using PixelType = itk::Vector<float, vecLength>;
   using ImageType = itk::Image<PixelType, ImageDimension>;
 
-  auto                           image = ImageType::New();
-  auto                           size = ImageType::SizeType::Filled(imageSize);
-  typename ImageType::RegionType region(size);
+  auto                                 image = ImageType::New();
+  auto                                 size = ImageType::SizeType::Filled(imageSize);
+  typename ImageType::RegionType const region(size);
 
   image->SetRegions(region);
   image->Allocate();
@@ -99,7 +99,7 @@ itkCentralDifferenceImageFunctionOnVectorSpeedTestRun(char * argv[])
         typename FunctionType::ContinuousIndexType cindex;
         cindex[0] = index[0] + 0.1;
         cindex[1] = index[1] + 0.1;
-        OutputType continuousIndexOutput = function->EvaluateAtContinuousIndex(cindex);
+        OutputType const continuousIndexOutput = function->EvaluateAtContinuousIndex(cindex);
         total += continuousIndexOutput;
       }
 
@@ -107,7 +107,7 @@ itkCentralDifferenceImageFunctionOnVectorSpeedTestRun(char * argv[])
       {
         typename FunctionType::PointType point;
         image->TransformIndexToPhysicalPoint(index, point);
-        OutputType pointOutput = function->Evaluate(point);
+        OutputType const pointOutput = function->Evaluate(point);
         total += pointOutput;
       }
 
@@ -128,7 +128,7 @@ itkCentralDifferenceImageFunctionOnVectorSpeedTest(int argc, char * argv[])
               << std::endl;
     return EXIT_FAILURE;
   }
-  int vecLength = std::stoi(argv[6]);
+  int const vecLength = std::stoi(argv[6]);
 
   switch (vecLength)
   {

@@ -27,7 +27,7 @@ itkThreadedImageRegionPartitionerTest(int, char *[])
   constexpr unsigned int Dimension = 2;
 
   using ThreadedImageRegionPartitionerType = itk::ThreadedImageRegionPartitioner<Dimension>;
-  ThreadedImageRegionPartitionerType::Pointer threadedImageRegionPartitioner =
+  ThreadedImageRegionPartitionerType::Pointer const threadedImageRegionPartitioner =
     ThreadedImageRegionPartitionerType::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(

@@ -73,10 +73,11 @@ MakeNiftiImage(const char * filename)
   typename ImageType::SpacingType    spacing;
   spacing[0] = spacing[1] = spacing[2] = 1.0;
 
-  const typename ImageType::IndexType index = { { 0, 0, 0 } };
-  typename ImageType::RegionType      region(index, size);
+  const typename ImageType::IndexType  index = { { 0, 0, 0 } };
+  typename ImageType::RegionType const region(index, size);
   {
-    typename ImageType::Pointer img = itk::IOTestHelper::AllocateImageFromRegionAndSpacing<ImageType>(region, spacing);
+    typename ImageType::Pointer const img =
+      itk::IOTestHelper::AllocateImageFromRegionAndSpacing<ImageType>(region, spacing);
 
     { // Fill in entire image
       itk::ImageRegionIterator<ImageType> ri(img, region);
@@ -186,7 +187,7 @@ MakeNiftiImage(const char * filename)
   {
     input = itk::IOTestHelper::ReadImage<ImageType>(std::string(filename));
     // Get the sform and qform codes from the image
-    itk::MetaDataDictionary & thisDic = input->GetMetaDataDictionary();
+    itk::MetaDataDictionary const & thisDic = input->GetMetaDataDictionary();
     // std::cout << "DICTIONARY:\n" << std::endl;
     // thisDic.Print( std::cout );
     std::string qform_temp = "";
@@ -295,7 +296,7 @@ TestImageOfSymMats(const std::string & fname)
 
   imageRegion.SetSize(size);
   imageRegion.SetIndex(index);
-  typename DtiImageType::Pointer vi =
+  typename DtiImageType::Pointer const vi =
     itk::IOTestHelper::AllocateImageFromRegionAndSpacing<DtiImageType>(imageRegion, spacing);
   vi->SetOrigin(origin);
   vi->SetDirection(myDirection);
@@ -502,7 +503,7 @@ RGBTest(int argc, char * argv[])
   }
   imageRegion.SetSize(size);
   imageRegion.SetIndex(index);
-  typename RGBImageType::Pointer im =
+  typename RGBImageType::Pointer const im =
     itk::IOTestHelper::AllocateImageFromRegionAndSpacing<RGBImageType>(imageRegion, spacing);
   vnl_random                             randgen(12345678);
   itk::ImageRegionIterator<RGBImageType> it(im, im->GetLargestPossibleRegion());

@@ -41,7 +41,7 @@ itkTIFFImageIOCompressionTestHelper(int, char * argv[], int JPEGQuality)
   auto writer = WriterType::New();
 
 
-  itk::TIFFImageIO::Pointer imageIO = itk::TIFFImageIO::New();
+  itk::TIFFImageIO::Pointer const imageIO = itk::TIFFImageIO::New();
   ITK_TRY_EXPECT_NO_EXCEPTION(imageIO->SetCompressor(""));
   ITK_TEST_EXPECT_EQUAL(imageIO->GetCompressor(), "");
 
@@ -66,13 +66,13 @@ itkTIFFImageIOCompressionTestHelper(int, char * argv[], int JPEGQuality)
   imageIO->SetCompressionLevel(110);
   ITK_TEST_EXPECT_EQUAL(imageIO->GetCompressionLevel(), 100);
 
-  itk::TIFFImageIO::Pointer io = itk::TIFFImageIO::New();
+  itk::TIFFImageIO::Pointer const io = itk::TIFFImageIO::New();
   reader->SetFileName(argv[1]);
   reader->SetImageIO(io);
 
   ITK_TRY_EXPECT_NO_EXCEPTION(reader->Update());
 
-  std::string compression = argv[3];
+  std::string const compression = argv[3];
 
   // Write out a compressed version
   writer->SetInput(reader->GetOutput());
@@ -150,11 +150,11 @@ itkTIFFImageIOCompressionTest(int argc, char * argv[])
     JPEGQuality = std::stoi(argv[4]);
   }
 
-  std::string inputFilename = argv[1];
+  std::string const inputFilename = argv[1];
 
   using ScalarPixelType = itk::IOComponentEnum;
 
-  itk::TIFFImageIO::Pointer imageIO = itk::TIFFImageIO::New();
+  itk::TIFFImageIO::Pointer const imageIO = itk::TIFFImageIO::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(imageIO, TIFFImageIO, ImageIOBase);
 

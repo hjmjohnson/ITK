@@ -39,13 +39,13 @@ itkScalarImageKmeansImageFilter3DTest(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  std::string inputVolume(argv[1]);
-  std::string input3DSkullStripVolume(argv[2]);
-  std::string outputLabelMapVolume(argv[3]);
-  float       numberOfStdDeviations = 10.0;
+  std::string const inputVolume(argv[1]);
+  std::string const input3DSkullStripVolume(argv[2]);
+  std::string const outputLabelMapVolume(argv[3]);
+  float const       numberOfStdDeviations = 10.0;
 
 
-  bool debug = true;
+  bool const debug = true;
   if (debug)
   {
     std::cout << "Input T1 Image: " << inputVolume << std::endl;
@@ -274,7 +274,7 @@ itkScalarImageKmeansImageFilter3DTest(int argc, char * argv[])
     if (statisticsNonBrainFilter->HasLabel(static_cast<unsigned char>(i)))
     {
       currentLabel++;
-      LabelImageType::RegionType labelRegion = statisticsNonBrainFilter->GetRegion(static_cast<unsigned char>(i));
+      LabelImageType::RegionType const labelRegion = statisticsNonBrainFilter->GetRegion(static_cast<unsigned char>(i));
       itk::ImageRegionIterator<LabelImageType> it(kmeansNonBrainFilter->GetOutput(), labelRegion);
 
       it.GoToBegin();
@@ -302,7 +302,7 @@ itkScalarImageKmeansImageFilter3DTest(int argc, char * argv[])
     if (statisticsBrainFilter->HasLabel(static_cast<unsigned char>(i)))
     {
       currentLabel++;
-      LabelImageType::RegionType labelRegion = statisticsBrainFilter->GetRegion(static_cast<unsigned char>(i));
+      LabelImageType::RegionType const labelRegion = statisticsBrainFilter->GetRegion(static_cast<unsigned char>(i));
       itk::ImageRegionIterator<LabelImageType> it(kmeansFilter->GetOutput(), labelRegion);
 
       it.GoToBegin();

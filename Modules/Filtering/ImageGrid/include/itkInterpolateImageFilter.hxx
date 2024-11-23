@@ -85,12 +85,12 @@ InterpolateImageFilter<TInputImage, TOutputImage>::BeforeThreadedGenerateData()
   using IntermediateImageRegionType = typename IntermediateImageType::RegionType;
   using ImageRegionType = typename TOutputImage::RegionType;
 
-  ImageRegionType outputRegion = this->GetOutput()->GetRequestedRegion();
+  ImageRegionType const outputRegion = this->GetOutput()->GetRequestedRegion();
 
   IntermediateImageRegionType intermediateRegion;
 
   using RegionCopierType = ImageToImageFilterDetail::ImageRegionCopier<ImageDimension + 1, ImageDimension>;
-  RegionCopierType regionCopier;
+  RegionCopierType const regionCopier;
   regionCopier(intermediateRegion, outputRegion);
 
   intermediateRegion.SetIndex(ImageDimension, 0);
@@ -146,7 +146,7 @@ void
 InterpolateImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   const OutputImageRegionType & outputRegionForThread)
 {
-  OutputImagePointer outputPtr = this->GetOutput();
+  OutputImagePointer const outputPtr = this->GetOutput();
   using OutputIterator = ImageRegionIteratorWithIndex<TOutputImage>;
 
   using OutputPixelType = typename TOutputImage::PixelType;

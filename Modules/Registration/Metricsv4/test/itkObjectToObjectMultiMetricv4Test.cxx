@@ -223,14 +223,14 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   fixedImageSource->SetNormalized(false);
   fixedImageSource->SetScale(1.0f);
   fixedImageSource->Update(); // Force the filter to run
-  FixedImageType::Pointer fixedImage = fixedImageSource->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageSource->GetOutput();
 
   using ShiftScaleFilterType = itk::ShiftScaleImageFilter<FixedImageType, MovingImageType>;
   auto shiftFilter = ShiftScaleFilterType::New();
   shiftFilter->SetInput(fixedImage);
   shiftFilter->SetShift(2.0);
   shiftFilter->Update();
-  MovingImageType::Pointer movingImage = shiftFilter->GetOutput();
+  MovingImageType::Pointer const movingImage = shiftFilter->GetOutput();
 
   // Set up the metric.
   using MultiMetricType = ObjectToObjectMultiMetricv4TestMultiMetricType;
@@ -269,7 +269,7 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
     using FieldType = DisplacementTransformType::DisplacementFieldType;
     using VectorType = itk::Vector<double, Dimension>;
 
-    VectorType zero{};
+    VectorType const zero{};
 
     auto field = FieldType::New();
     field->SetRegions(fixedImage->GetBufferedRegion());

@@ -295,7 +295,7 @@ public:
   Iterator
   Begin()
   {
-    Iterator iter(this, 0);
+    Iterator const iter(this, 0);
 
     return iter;
   }
@@ -304,7 +304,7 @@ public:
   Iterator
   End()
   {
-    Iterator iter(this, m_Image->GetPixelContainer()->Size());
+    Iterator const iter(this, m_Image->GetPixelContainer()->Size());
 
     return iter;
   }

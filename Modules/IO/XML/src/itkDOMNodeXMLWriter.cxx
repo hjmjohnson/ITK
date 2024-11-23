@@ -52,7 +52,7 @@ DOMNodeXMLWriter::Update(std::ostream & os, std::string indent)
   os << indent << '<' << input->GetName();
 
   // write the "id" attribute if it is present
-  std::string id = input->GetID();
+  std::string const id = input->GetID();
   if (!id.empty())
   {
     os << " id=\"" << id << '"';

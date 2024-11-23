@@ -101,8 +101,8 @@ LevenbergMarquardtOptimizer::StartOptimization()
 {
   this->InvokeEvent(StartEvent());
 
-  ParametersType initialPosition = GetInitialPosition();
-  ParametersType parameters(initialPosition);
+  ParametersType const initialPosition = GetInitialPosition();
+  ParametersType       parameters(initialPosition);
 
   // If the user provides the scales then we set otherwise we don't
   // for computation speed.

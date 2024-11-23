@@ -36,7 +36,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   using MaskType = itk::Image<InputImagePixelType, ImageDimension>;
   using ImageIteratorType = itk::ImageRegionIteratorWithIndex<ImageType>;
 
-  bool                  SaveImages = false;
+  bool const            SaveImages = false;
   ImageType::SizeType   imageSize;
   ImageType::IndexType  imageIndex;
   ImageType::RegionType imageRegion;
@@ -87,7 +87,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   classSigmas[1] = 20.0;
 
   // creates a normal random variate generator
-  itk::Statistics::MersenneTwisterRandomVariateGenerator::Pointer randomGenerator =
+  itk::Statistics::MersenneTwisterRandomVariateGenerator::Pointer const randomGenerator =
     itk::Statistics::MersenneTwisterRandomVariateGenerator::New();
 
   // fills the image with a sphere filled with intensity values from a
@@ -122,7 +122,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   // creates a bias field
   using BiasFieldType = itk::MultivariateLegendrePolynomial;
   BiasFieldType::DomainSizeType biasSize(3);
-  int                           biasDegree = 3;
+  int const                     biasDegree = 3;
   biasSize[0] = imageSize[0];
   biasSize[1] = imageSize[1];
   biasSize[2] = imageSize[2];
@@ -181,26 +181,26 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   }
   std::cout << "Absolute Avg. error before correction = " << sumOfError / (imageSize[0] * imageSize[1] * imageSize[2])
             << std::endl;
-  double origSumError = sumOfError;
+  double const origSumError = sumOfError;
 
   std::cout << "Computing bias correction without mask, 2 classes 10,10 - 200,20" << std::endl;
 
   filter->SetInput(imageWithBias);
 
-  int                 slicingDirection = 2;
-  bool                isBiasFieldMultiplicative = true;
-  bool                usingSlabIdentification = true;
-  bool                usingBiasFieldCorrection = true;
-  bool                generatingOutput = true;
-  unsigned int        slabNumberOfSamples = 10;
-  InputImagePixelType slabBackgroundMinimumThreshold = 0;
-  double              slabTolerance = 0.0;
-  int                 volumeCorrectionMaximumIteration = 200;
-  int                 interSliceCorrectionMaximumIteration = 100;
-  double              optimizerInitialRadius = 0.02;
-  double              optimizerGrowthFactor = 1.01;
-  double              optimizerShrinkFactor = std::pow(optimizerGrowthFactor, -0.25);
-  bool                usingInterSliceIntensityCorrection = true;
+  int const                 slicingDirection = 2;
+  bool const                isBiasFieldMultiplicative = true;
+  bool                      usingSlabIdentification = true;
+  bool const                usingBiasFieldCorrection = true;
+  bool const                generatingOutput = true;
+  unsigned int const        slabNumberOfSamples = 10;
+  InputImagePixelType const slabBackgroundMinimumThreshold = 0;
+  double const              slabTolerance = 0.0;
+  int                       volumeCorrectionMaximumIteration = 200;
+  int                       interSliceCorrectionMaximumIteration = 100;
+  double                    optimizerInitialRadius = 0.02;
+  double const              optimizerGrowthFactor = 1.01;
+  double const              optimizerShrinkFactor = std::pow(optimizerGrowthFactor, -0.25);
+  bool                      usingInterSliceIntensityCorrection = true;
 
 
   filter->SetSlabNumberOfSamples(slabNumberOfSamples);

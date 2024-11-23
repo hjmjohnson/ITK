@@ -217,7 +217,7 @@ JointHistogramMutualInformationImageToImageMetricv4<TFixedImage,
   /* Prepare histograms for use in GetValueAndDerivative */
 
   // Initialize the joint pdf and the fixed and moving image marginal pdfs
-  PDFValueType pdfzero{};
+  PDFValueType const pdfzero{};
   this->m_JointPDF->FillBuffer(pdfzero);
   this->m_FixedImageMarginalPDF->FillBuffer(pdfzero);
   this->m_MovingImageMarginalPDF->FillBuffer(pdfzero);
@@ -227,7 +227,7 @@ JointHistogramMutualInformationImageToImageMetricv4<TFixedImage,
    */
   if (this->m_UseSampledPointSet)
   {
-    SizeValueType numberOfPoints = this->GetNumberOfDomainPoints();
+    SizeValueType const numberOfPoints = this->GetNumberOfDomainPoints();
     if (numberOfPoints < 1)
     {
       itkExceptionMacro("VirtualSampledPointSet must have 1 or more points.");

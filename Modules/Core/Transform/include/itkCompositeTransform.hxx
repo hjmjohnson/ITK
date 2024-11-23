@@ -27,7 +27,7 @@ auto
 CompositeTransform<TParametersValueType, VDimension>::GetTransformCategory() const -> TransformCategoryEnum
 {
   // Check if linear
-  bool isLinearTransform = this->IsLinear();
+  bool const isLinearTransform = this->IsLinear();
   if (isLinearTransform)
   {
     return Self::TransformCategoryEnum::Linear;
@@ -418,7 +418,7 @@ CompositeTransform<TParametersValueType, VDimension>::GetInverse(Self * inverse)
   inverse->ClearTransformQueue();
   for (it = this->m_TransformQueue.begin(); it != this->m_TransformQueue.end(); ++it)
   {
-    TransformTypePointer inverseTransform = ((*it)->GetInverseTransform()).GetPointer();
+    TransformTypePointer const inverseTransform = ((*it)->GetInverseTransform()).GetPointer();
     if (!inverseTransform)
     {
       inverse->ClearTransformQueue();
@@ -433,7 +433,7 @@ CompositeTransform<TParametersValueType, VDimension>::GetInverse(Self * inverse)
 
   /* Copy the optimization flags */
   inverse->m_TransformsToOptimizeFlags.clear();
-  for (bool m_TransformsToOptimizeFlag : this->m_TransformsToOptimizeFlags)
+  for (bool const m_TransformsToOptimizeFlag : this->m_TransformsToOptimizeFlags)
   {
     inverse->m_TransformsToOptimizeFlags.push_front(m_TransformsToOptimizeFlag);
   }
@@ -833,7 +833,7 @@ CompositeTransform<TParametersValueType, VDimension>::UpdateTransformParameters(
    * functor to return whether or not it does threading. If all sub-transforms
    * return that they don't thread, we could do each sub-transform in its
    * own thread from here. */
-  NumberOfParametersType numberOfParameters = this->GetNumberOfParameters();
+  NumberOfParametersType const numberOfParameters = this->GetNumberOfParameters();
 
   if (update.Size() != numberOfParameters)
   {
@@ -951,7 +951,7 @@ CompositeTransform<TParametersValueType, VDimension>::PrintSelf(std::ostream & o
   Superclass::PrintSelf(os, indent);
 
   os << indent << "TransformsToOptimizeFlags: " << std::endl << indent << indent;
-  for (bool m_TransformsToOptimizeFlag : m_TransformsToOptimizeFlags)
+  for (bool const m_TransformsToOptimizeFlag : m_TransformsToOptimizeFlags)
   {
     os << indent.GetNextIndent() << m_TransformsToOptimizeFlag << ' ';
   }
@@ -979,8 +979,8 @@ CompositeTransform<TParametersValueType, VDimension>::InternalClone() const
   // TODO: is it really the right behavior?
   // LightObject::Pointer loPtr = Superclass::InternalClone();
 
-  LightObject::Pointer   loPtr = CreateAnother();
-  typename Self::Pointer clone = dynamic_cast<Self *>(loPtr.GetPointer());
+  LightObject::Pointer         loPtr = CreateAnother();
+  typename Self::Pointer const clone = dynamic_cast<Self *>(loPtr.GetPointer());
   if (clone.IsNull())
   {
     itkExceptionMacro("downcast to type " << this->GetNameOfClass() << " failed.");

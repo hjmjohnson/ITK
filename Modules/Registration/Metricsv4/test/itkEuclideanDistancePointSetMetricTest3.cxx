@@ -60,7 +60,7 @@ itkEuclideanDistancePointSetMetricTest3Run(double distanceThreshold)
     fixedPoint[2] = pointMax;
     fixedPoints->SetPoint(3, fixedPoint);
   }
-  unsigned int numberOfPoints = fixedPoints->GetNumberOfPoints();
+  unsigned int const numberOfPoints = fixedPoints->GetNumberOfPoints();
 
   PointType movingPoint;
   for (unsigned int n = 0; n < numberOfPoints; ++n)
@@ -122,10 +122,10 @@ itkEuclideanDistancePointSetMetricTest3Run(double distanceThreshold)
   metric->Initialize();
 
   // test
-  typename PointSetMetricType::MeasureType    value = metric->GetValue();
-  typename PointSetMetricType::MeasureType    value2;
-  typename PointSetMetricType::DerivativeType derivative;
-  typename PointSetMetricType::DerivativeType derivative2;
+  typename PointSetMetricType::MeasureType const value = metric->GetValue();
+  typename PointSetMetricType::MeasureType       value2;
+  typename PointSetMetricType::DerivativeType    derivative;
+  typename PointSetMetricType::DerivativeType    derivative2;
   metric->GetDerivative(derivative);
   metric->GetValueAndDerivative(value2, derivative2);
 
@@ -153,7 +153,7 @@ itkEuclideanDistancePointSetMetricTest3Run(double distanceThreshold)
     }
   }
 
-  double valueTest = distanceSum / numberOfPoints;
+  double const valueTest = distanceSum / numberOfPoints;
   if (itk::Math::NotExactlyEquals(valueTest, value2))
   {
     std::cerr << "Value calculation is wrong when used threshold : " << distanceThreshold << "valueTest: " << valueTest
@@ -204,9 +204,9 @@ itkEuclideanDistancePointSetMetricTest3(int, char *[])
 {
   int result = EXIT_SUCCESS;
 
-  double distanceThresholdPositive = 0.5;
-  double distanceThresholdZero = 0.0;
-  double distanceThresholdNegative = -8.0;
+  double const distanceThresholdPositive = 0.5;
+  double const distanceThresholdZero = 0.0;
+  double const distanceThresholdNegative = -8.0;
 
   const unsigned int dimension2D = 2;
   const unsigned int dimension3D = 3;

@@ -77,7 +77,7 @@ ScalarToRGBColormapImageFilter<TInputImage, TOutputImage>::BeforeThreadedGenerat
 
     for (It.GoToBegin(); !It.IsAtEnd(); ++It)
     {
-      InputImagePixelType value = It.Get();
+      InputImagePixelType const value = It.Get();
       if (value < minimumValue)
       {
         minimumValue = value;
@@ -98,8 +98,8 @@ void
 ScalarToRGBColormapImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   const OutputImageRegionType & outputRegionForThread)
 {
-  InputImagePointer  inputPtr = this->GetInput();
-  OutputImagePointer outputPtr = this->GetOutput();
+  InputImagePointer const  inputPtr = this->GetInput();
+  OutputImagePointer const outputPtr = this->GetOutput();
 
   TotalProgressReporter progressReporter(this, this->GetOutput()->GetRequestedRegion().GetNumberOfPixels());
 

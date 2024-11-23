@@ -104,7 +104,7 @@ itkSubtractImageFilterTest(int, char *[])
 
 
   // Get the filter output
-  OutputImageType::Pointer outputImage = filter->GetOutput();
+  OutputImageType::Pointer const outputImage = filter->GetOutput();
 
 
   // Create an iterator for going through the image output

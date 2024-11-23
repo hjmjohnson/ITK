@@ -81,12 +81,12 @@ itkInitializationBiasedParticleSwarmOptimizerTest(int argc, char * argv[])
     initalizationBasedTestVerboseFlag = std::stoi(argv[5]) ? true : false;
   }
 
-  unsigned int i;
-  unsigned int allIterations = 10;
-  double       threshold = 0.8;
-  unsigned int success1;
-  unsigned int success2;
-  unsigned int success3;
+  unsigned int       i;
+  unsigned int const allIterations = 10;
+  double const       threshold = 0.8;
+  unsigned int       success1;
+  unsigned int       success2;
+  unsigned int       success3;
 
   std::cout << "Initialization Biased Particle Swarm Optimizer Test \n \n";
 
@@ -138,10 +138,10 @@ IBPSOTest1(typename OptimizerType::CoefficientType inertiaCoefficient,
   std::cout << "Particle Swarm Optimizer Test 1 [f(x) = if(x<0) x^2+4x; else 2x^2-8x]\n";
   std::cout << "-------------------------------\n";
 
-  double knownParameters = 2.0;
+  double const knownParameters = 2.0;
 
   // the function we want to optimize
-  itk::ParticleSwarmTestF1::Pointer costFunction = itk::ParticleSwarmTestF1::New();
+  itk::ParticleSwarmTestF1::Pointer const costFunction = itk::ParticleSwarmTestF1::New();
 
   auto itkOptimizer = OptimizerType::New();
 
@@ -167,10 +167,10 @@ IBPSOTest1(typename OptimizerType::CoefficientType inertiaCoefficient,
   // set optimizer parameters
   OptimizerType::ParameterBoundsType bounds;
   bounds.push_back(std::make_pair(-10, 10));
-  unsigned int                  numberOfParticles = 10;
-  unsigned int                  maxIterations = 200;
-  double                        xTolerance = 0.1;
-  double                        fTolerance = 0.001;
+  unsigned int const            numberOfParticles = 10;
+  unsigned int const            maxIterations = 200;
+  double const                  xTolerance = 0.1;
+  double const                  fTolerance = 0.001;
   OptimizerType::ParametersType initialParameters(1);
   OptimizerType::ParametersType finalParameters;
 
@@ -182,7 +182,7 @@ IBPSOTest1(typename OptimizerType::CoefficientType inertiaCoefficient,
   itkOptimizer->SetCostFunction(costFunction);
 
   // observe the iterations
-  itk::CommandIterationUpdateParticleSwarm::Pointer observer = itk::CommandIterationUpdateParticleSwarm::New();
+  itk::CommandIterationUpdateParticleSwarm::Pointer const observer = itk::CommandIterationUpdateParticleSwarm::New();
   if (initalizationBasedTestVerboseFlag)
   {
     itkOptimizer->AddObserver(itk::IterationEvent(), observer);
@@ -268,7 +268,7 @@ IBPSOTest2(typename OptimizerType::CoefficientType inertiaCoefficient,
   knownParameters[1] = -2.0;
 
   // the function we want to optimize
-  itk::ParticleSwarmTestF2::Pointer costFunction = itk::ParticleSwarmTestF2::New();
+  itk::ParticleSwarmTestF2::Pointer const costFunction = itk::ParticleSwarmTestF2::New();
 
   auto itkOptimizer = OptimizerType::New();
 
@@ -295,10 +295,10 @@ IBPSOTest2(typename OptimizerType::CoefficientType inertiaCoefficient,
   OptimizerType::ParameterBoundsType bounds;
   bounds.push_back(std::make_pair(-10, 10));
   bounds.push_back(std::make_pair(-10, 10));
-  unsigned int                  numberOfParticles = 10;
-  unsigned int                  maxIterations = 200;
-  double                        xTolerance = 0.1;
-  double                        fTolerance = 0.001;
+  unsigned int const            numberOfParticles = 10;
+  unsigned int const            maxIterations = 200;
+  double const                  xTolerance = 0.1;
+  double const                  fTolerance = 0.001;
   OptimizerType::ParametersType initialParameters(2);
   OptimizerType::ParametersType finalParameters;
 
@@ -310,7 +310,7 @@ IBPSOTest2(typename OptimizerType::CoefficientType inertiaCoefficient,
   itkOptimizer->SetCostFunction(costFunction);
 
   // observe the iterations
-  itk::CommandIterationUpdateParticleSwarm::Pointer observer = itk::CommandIterationUpdateParticleSwarm::New();
+  itk::CommandIterationUpdateParticleSwarm::Pointer const observer = itk::CommandIterationUpdateParticleSwarm::New();
   if (initalizationBasedTestVerboseFlag)
   {
     itkOptimizer->AddObserver(itk::IterationEvent(), observer);
@@ -368,7 +368,7 @@ IBPSOTest3(typename OptimizerType::CoefficientType inertiaCoefficient,
   knownParameters[1] = 1.0;
 
   // the function we want to optimize
-  itk::ParticleSwarmTestF3::Pointer costFunction = itk::ParticleSwarmTestF3::New();
+  itk::ParticleSwarmTestF3::Pointer const costFunction = itk::ParticleSwarmTestF3::New();
 
   auto itkOptimizer = OptimizerType::New();
 
@@ -395,10 +395,10 @@ IBPSOTest3(typename OptimizerType::CoefficientType inertiaCoefficient,
   OptimizerType::ParameterBoundsType bounds;
   bounds.push_back(std::make_pair(-100, 100));
   bounds.push_back(std::make_pair(-100, 100));
-  unsigned int                  numberOfParticles = 100;
-  unsigned int                  maxIterations = 1000;
-  double                        xTolerance = 0.1;
-  double                        fTolerance = 0.01;
+  unsigned int const            numberOfParticles = 100;
+  unsigned int const            maxIterations = 1000;
+  double const                  xTolerance = 0.1;
+  double const                  fTolerance = 0.01;
   OptimizerType::ParametersType initialParameters(2);
   OptimizerType::ParametersType finalParameters;
 
@@ -410,7 +410,7 @@ IBPSOTest3(typename OptimizerType::CoefficientType inertiaCoefficient,
   itkOptimizer->SetCostFunction(costFunction);
 
   // observe the iterations
-  itk::CommandIterationUpdateParticleSwarm::Pointer observer = itk::CommandIterationUpdateParticleSwarm::New();
+  itk::CommandIterationUpdateParticleSwarm::Pointer const observer = itk::CommandIterationUpdateParticleSwarm::New();
   if (initalizationBasedTestVerboseFlag)
   {
     itkOptimizer->AddObserver(itk::IterationEvent(), observer);

@@ -51,7 +51,7 @@ itkKdTreeGeneratorTest(int, char *[])
     treeGenerator->SetSample(sample);
     ITK_TEST_SET_GET_VALUE(sample, treeGenerator->GetSourceSample());
 
-    unsigned int bucketSize = 16;
+    unsigned int const bucketSize = 16;
     treeGenerator->SetBucketSize(bucketSize);
     ITK_TEST_SET_GET_VALUE(bucketSize, treeGenerator->GetBucketSize());
 
@@ -60,7 +60,7 @@ itkKdTreeGeneratorTest(int, char *[])
     using TreeType = TreeGeneratorType::KdTreeType;
     using NodeType = TreeType::KdTreeNodeType;
 
-    TreeType::Pointer tree = treeGenerator->GetOutput();
+    TreeType::Pointer const tree = treeGenerator->GetOutput();
 
     NodeType * root = tree->GetRoot();
 
@@ -96,7 +96,7 @@ itkKdTreeGeneratorTest(int, char *[])
     }
     distanceMetric->SetOrigin(origin);
 
-    unsigned int                           numberOfNeighbors = 3;
+    unsigned int const                     numberOfNeighbors = 3;
     TreeType::InstanceIdentifierVectorType neighbors;
     tree->Search(queryPoint, numberOfNeighbors, neighbors);
 
@@ -110,7 +110,7 @@ itkKdTreeGeneratorTest(int, char *[])
                 << "] : " << distanceMetric->Evaluate(tree->GetMeasurementVector(neighbors[i])) << std::endl;
     }
 
-    double radius = 437.0;
+    double const radius = 437.0;
 
     tree->Search(queryPoint, radius, neighbors);
 
@@ -151,7 +151,7 @@ itkKdTreeGeneratorTest(int, char *[])
     using TreeType = TreeGeneratorType::KdTreeType;
     using NodeType = TreeType::KdTreeNodeType;
 
-    TreeType::Pointer tree = treeGenerator->GetOutput();
+    TreeType::Pointer const tree = treeGenerator->GetOutput();
 
     NodeType * root = tree->GetRoot();
 
@@ -187,7 +187,7 @@ itkKdTreeGeneratorTest(int, char *[])
     }
     distanceMetric->SetOrigin(origin);
 
-    unsigned int                           numberOfNeighbors = 3;
+    unsigned int const                     numberOfNeighbors = 3;
     TreeType::InstanceIdentifierVectorType neighbors;
     tree->Search(queryPoint, numberOfNeighbors, neighbors);
 
@@ -201,7 +201,7 @@ itkKdTreeGeneratorTest(int, char *[])
                 << "] : " << distanceMetric->Evaluate(tree->GetMeasurementVector(neighbors[i])) << std::endl;
     }
 
-    double radius = 437.0;
+    double const radius = 437.0;
 
     tree->Search(queryPoint, radius, neighbors);
 

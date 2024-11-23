@@ -49,7 +49,7 @@ BSplineInterpolateImageFunction<TImageType, TCoordRep, TCoefficientType>::BSplin
   m_Coefficients = CoefficientImageType::New();
 
   m_SplineOrder = 0;
-  unsigned int SplineOrder = 3;
+  unsigned int const SplineOrder = 3;
   this->SetSplineOrder(SplineOrder);
 }
 
@@ -296,17 +296,17 @@ BSplineInterpolateImageFunction<TImageType, TCoordRep, TCoefficientType>::SetDer
   // the number
   // of switch statement executions to one per routine call.
   // Left as is for now for readability.
-  double w;
-  double w1;
-  double w2;
-  double w3;
-  double w4;
-  double w5;
-  double t;
-  double t0;
-  double t1;
-  double t2;
-  int    derivativeSplineOrder = static_cast<int>(splineOrder) - 1;
+  double    w;
+  double    w1;
+  double    w2;
+  double    w3;
+  double    w4;
+  double    w5;
+  double    t;
+  double    t0;
+  double    t1;
+  double    t2;
+  int const derivativeSplineOrder = static_cast<int>(splineOrder) - 1;
 
   switch (derivativeSplineOrder)
   {
@@ -533,7 +533,7 @@ BSplineInterpolateImageFunction<TImageType, TCoordRep, TCoefficientType>::Evalua
     double w = 1.0;
     for (unsigned int n = 0; n < ImageDimension; ++n)
     {
-      unsigned int indx = m_PointsToIndex[p][n];
+      unsigned int const indx = m_PointsToIndex[p][n];
       w *= (weights)[n][indx];
       coefficientIndex[n] = (evaluateIndex)[n][indx];
     }
@@ -656,7 +656,7 @@ BSplineInterpolateImageFunction<TImageType, TCoordRep, TCoefficientType>::Evalua
       tempValue = 1.0;
       for (unsigned int n1 = 0; n1 < ImageDimension; ++n1)
       {
-        unsigned int indx = m_PointsToIndex[p][n1];
+        unsigned int const indx = m_PointsToIndex[p][n1];
         coefficientIndex[n1] = (evaluateIndex)[n1][indx];
 
         if (n1 == n)

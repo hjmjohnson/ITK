@@ -255,7 +255,7 @@ public:
   Iterator
   Begin()
   {
-    Iterator iter(m_IdHolder.begin(), this);
+    Iterator const iter(m_IdHolder.begin(), this);
 
     return iter;
   }
@@ -265,7 +265,7 @@ public:
   Iterator
   End()
   {
-    Iterator iter(m_IdHolder.end(), this);
+    Iterator const iter(m_IdHolder.end(), this);
 
     return iter;
   }
@@ -273,7 +273,7 @@ public:
   ConstIterator
   Begin() const
   {
-    ConstIterator iter(m_IdHolder.begin(), this);
+    ConstIterator const iter(m_IdHolder.begin(), this);
 
     return iter;
   }
@@ -281,7 +281,7 @@ public:
   ConstIterator
   End() const
   {
-    ConstIterator iter(m_IdHolder.end(), this);
+    ConstIterator const iter(m_IdHolder.end(), this);
 
     return iter;
   }

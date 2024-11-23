@@ -122,7 +122,7 @@ itkSimpleFilterWatcherTest(int, char *[])
   }
 
   // Test GetNameOfClass().
-  std::string name = watcher3.GetNameOfClass();
+  std::string const name = watcher3.GetNameOfClass();
   if (name != filter->GetNameOfClass())
   {
     std::cout << "GetNameOfClass failed. Expected: " << filter->GetNameOfClass()

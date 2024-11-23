@@ -216,10 +216,10 @@ main(int argc, char * argv[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  unsigned long numberOfIterations = 100;
-  double        gradientTolerance = 1e-5; // convergence criterion
-  double        valueTolerance = 1e-5;    // convergence criterion
-  double        epsilonFunction = 1e-6;   // convergence criterion
+  unsigned long const numberOfIterations = 100;
+  double const        gradientTolerance = 1e-5; // convergence criterion
+  double const        valueTolerance = 1e-5;    // convergence criterion
+  double const        epsilonFunction = 1e-6;   // convergence criterion
 
 
   optimizer->SetScales(scales);

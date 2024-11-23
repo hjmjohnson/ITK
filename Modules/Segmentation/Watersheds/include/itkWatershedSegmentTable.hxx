@@ -60,7 +60,7 @@ template <typename TScalar>
 bool
 SegmentTable<TScalar>::Add(IdentifierType a, const segment_t & t)
 {
-  std::pair<Iterator, bool> result = m_HashMap.insert(ValueType(a, t));
+  std::pair<Iterator, bool> const result = m_HashMap.insert(ValueType(a, t));
   if (result.second == false)
   {
     return false;

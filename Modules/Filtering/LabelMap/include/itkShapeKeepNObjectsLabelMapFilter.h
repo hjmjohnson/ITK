@@ -153,12 +153,12 @@ protected:
       auto end = labelObjects.begin() + m_NumberOfObjects;
       if (m_ReverseOrdering)
       {
-        Functor::LabelObjectReverseComparator<LabelObjectType, TAttributeAccessor> comparator;
+        Functor::LabelObjectReverseComparator<LabelObjectType, TAttributeAccessor> const comparator;
         std::nth_element(labelObjects.begin(), end, labelObjects.end(), comparator);
       }
       else
       {
-        Functor::LabelObjectComparator<LabelObjectType, TAttributeAccessor> comparator;
+        Functor::LabelObjectComparator<LabelObjectType, TAttributeAccessor> const comparator;
         std::nth_element(labelObjects.begin(), end, labelObjects.end(), comparator);
       }
       progress.CompletedPixel();

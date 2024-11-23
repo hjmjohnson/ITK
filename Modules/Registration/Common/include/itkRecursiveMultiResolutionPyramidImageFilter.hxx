@@ -49,7 +49,7 @@ RecursiveMultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::GenerateD
   }
 
   // Get the input and output pointers
-  InputImageConstPointer inputPtr = this->GetInput();
+  InputImageConstPointer const inputPtr = this->GetInput();
 
   // Create caster, smoother and resampleShrink filters
   using CasterType = CastImageFilter<TInputImage, TOutputImage>;
@@ -225,7 +225,7 @@ RecursiveMultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::GenerateO
   }
 
   // find the index for this output
-  unsigned int refLevel = static_cast<unsigned int>(refOutputPtr->GetSourceOutputIndex());
+  unsigned int const refLevel = static_cast<unsigned int>(refOutputPtr->GetSourceOutputIndex());
 
   using OutputPixelType = typename TOutputImage::PixelType;
   using OperatorType = GaussianOperator<OutputPixelType, ImageDimension>;
@@ -338,7 +338,7 @@ RecursiveMultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::GenerateI
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  InputImagePointer inputPtr = const_cast<InputImageType *>(this->GetInput());
+  InputImagePointer const inputPtr = const_cast<InputImageType *>(this->GetInput());
   if (!inputPtr)
   {
     itkExceptionMacro("Input has not been set.");
@@ -356,7 +356,7 @@ RecursiveMultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::GenerateI
   unsigned int idim;
   for (idim = 0; idim < ImageDimension; ++idim)
   {
-    unsigned int factor = this->GetSchedule()[refLevel][idim];
+    unsigned int const factor = this->GetSchedule()[refLevel][idim];
     baseIndex[idim] *= static_cast<IndexValueType>(factor);
     baseSize[idim] *= static_cast<SizeValueType>(factor);
   }

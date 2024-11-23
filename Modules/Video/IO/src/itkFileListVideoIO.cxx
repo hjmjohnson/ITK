@@ -66,7 +66,7 @@ FileListVideoIO::SplitFileNames(const std::string & fileList)
   while (pos != std::string::npos && len > 0)
   {
     // Get the substring
-    std::string str = fileList.substr(pos, len);
+    std::string const str = fileList.substr(pos, len);
 
     // Update pos
     pos = str.find(',');
@@ -108,7 +108,7 @@ bool
 FileListVideoIO::CanReadFile(const char * filename)
 {
   // Make sure file names have been specified
-  std::string              strFileName = filename;
+  std::string const        strFileName = filename;
   std::vector<std::string> fileList = this->SplitFileNames(strFileName);
   if (fileList.empty())
   {
@@ -122,7 +122,7 @@ FileListVideoIO::CanReadFile(const char * filename)
   }
 
   // Make sure we can instantiate an ImageIO to read the first file
-  ImageIOBase::Pointer ioTemp =
+  ImageIOBase::Pointer const ioTemp =
     ImageIOFactory::CreateImageIO(fileList[0].c_str(), ImageIOFactory::IOFileModeEnum::ReadMode);
   if (ioTemp.IsNull())
   {
@@ -146,7 +146,7 @@ FileListVideoIO::ReadImageInformation()
   {
 
     // Make sure file can be read
-    std::string filename = m_FileNames[0];
+    std::string const filename = m_FileNames[0];
     if (!this->CanReadFile(filename.c_str()))
     {
       itkExceptionMacro("Cannot Read File: " << filename);
@@ -167,7 +167,7 @@ FileListVideoIO::ReadImageInformation()
     m_LastIFrame = m_FrameTotal - 1;
 
     // Fill dimensions and origin
-    unsigned int numberOfDimensions = m_ImageIO->GetNumberOfDimensions();
+    unsigned int const numberOfDimensions = m_ImageIO->GetNumberOfDimensions();
     this->SetNumberOfDimensions(numberOfDimensions);
 
     for (unsigned int i = 0; i < numberOfDimensions; ++i)
@@ -284,7 +284,7 @@ FileListVideoIO::CanWriteFile(const char * filename)
   }
 
   // Make sure we can instantiate an ImageIO to write the first file
-  ImageIOBase::Pointer ioTemp =
+  ImageIOBase::Pointer const ioTemp =
     ImageIOFactory::CreateImageIO(fileList[0].c_str(), ImageIOFactory::IOFileModeEnum::WriteMode);
   if (ioTemp.IsNull())
   {
@@ -469,14 +469,14 @@ FileListVideoIO::VerifyExtensions(const std::vector<std::string> & fileList) con
 {
   for (size_t i = 1; i < fileList.size(); ++i)
   {
-    size_t prevExtPos = fileList[i - 1].rfind(".");
-    size_t extPos = fileList[i].rfind(".");
+    size_t const prevExtPos = fileList[i - 1].rfind(".");
+    size_t const extPos = fileList[i].rfind(".");
     if (prevExtPos == std::string::npos || extPos == std::string::npos)
     {
       return false;
     }
-    std::string prevExt = fileList[i - 1].substr(prevExtPos + 1, fileList[i - 1].length() - prevExtPos - 1);
-    std::string ext = fileList[i].substr(extPos + 1, fileList[i].length() - extPos - 1);
+    std::string const prevExt = fileList[i - 1].substr(prevExtPos + 1, fileList[i - 1].length() - prevExtPos - 1);
+    std::string const ext = fileList[i].substr(extPos + 1, fileList[i].length() - extPos - 1);
 
     if (strcmp(prevExt.c_str(), ext.c_str()))
     {

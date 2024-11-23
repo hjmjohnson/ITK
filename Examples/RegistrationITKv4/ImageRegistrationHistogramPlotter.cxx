@@ -249,7 +249,7 @@ public:
   void
   WriteHistogramFile(unsigned int iterationNumber)
   {
-    std::string        outputFileBase = "JointHistogram";
+    std::string const  outputFileBase = "JointHistogram";
     std::ostringstream outputFilename;
     outputFilename << outputFileBase << "." << std::setfill('0')
                    << std::setw(3) << iterationNumber << "."
@@ -535,7 +535,7 @@ main(int argc, char * argv[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  unsigned int numberOfHistogramBins = std::stoi(argv[7]);
+  unsigned int const numberOfHistogramBins = std::stoi(argv[7]);
   MetricType::HistogramType::SizeType histogramSize;
   histogramSize.SetSize(2);
   histogramSize[0] = numberOfHistogramBins;
@@ -649,12 +649,12 @@ main(int argc, char * argv[])
 
   ParametersType finalParameters = registration->GetLastTransformParameters();
 
-  double TranslationAlongX = finalParameters[0];
-  double TranslationAlongY = finalParameters[1];
+  double const TranslationAlongX = finalParameters[0];
+  double const TranslationAlongY = finalParameters[1];
 
-  unsigned int numberOfIterations = optimizer->GetCurrentIteration();
+  unsigned int const numberOfIterations = optimizer->GetCurrentIteration();
 
-  double bestValue = optimizer->GetValue();
+  double const bestValue = optimizer->GetValue();
 
 
   std::cout << "Result = " << std::endl;
@@ -689,7 +689,7 @@ main(int argc, char * argv[])
   resample->SetTransform(finalTransform);
   resample->SetInput(movingImageReader->GetOutput());
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
 
   resample->SetSize(fixedImage->GetLargestPossibleRegion().GetSize());
   resample->SetOutputOrigin(fixedImage->GetOrigin());

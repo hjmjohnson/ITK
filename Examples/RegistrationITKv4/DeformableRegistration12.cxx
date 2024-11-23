@@ -149,14 +149,17 @@ main(int argc, char * argv[])
   auto fixedImageReader = FixedImageReaderType::New();
   fixedImageReader->SetFileName(argv[1]);
   fixedImageReader->Update();
-  FixedImageType::ConstPointer fixedImage = fixedImageReader->GetOutput();
-  FixedImageType::RegionType   fixedRegion = fixedImage->GetBufferedRegion();
+  FixedImageType::ConstPointer const fixedImage =
+    fixedImageReader->GetOutput();
+  FixedImageType::RegionType const fixedRegion =
+    fixedImage->GetBufferedRegion();
 
   using MovingImageReaderType = itk::ImageFileReader<MovingImageType>;
   auto movingImageReader = MovingImageReaderType::New();
   movingImageReader->SetFileName(argv[2]);
   movingImageReader->Update();
-  MovingImageType::ConstPointer movingImage = movingImageReader->GetOutput();
+  MovingImageType::ConstPointer const movingImage =
+    movingImageReader->GetOutput();
 
   // Software Guide : BeginCodeSnippet
   const unsigned int     SpaceDimension = ImageDimension;
@@ -321,7 +324,8 @@ main(int argc, char * argv[])
 
   // While the registration filter is run, it updates the output transform
   // parameters with the final registration parameters
-  OptimizerType::ParametersType finalParameters = transform->GetParameters();
+  OptimizerType::ParametersType const finalParameters =
+    transform->GetParameters();
 
   // Report the time and memory taken by the registration
   chronometer.Report(std::cout);

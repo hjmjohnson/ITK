@@ -23,7 +23,7 @@ itkQuadEdgeMeshDeleteEdgeTest(int, char *[])
 {
   using PixelType = double;
   using MeshType = itk::QuadEdgeMesh<PixelType, 3>;
-  std::string indent = "    ";
+  std::string const indent = "    ";
 
   auto mesh = MeshType::New();
 
@@ -53,12 +53,12 @@ itkQuadEdgeMeshDeleteEdgeTest(int, char *[])
   p5[1] = 3.09016994374947;
   p5[2] = 0.0;
 
-  MeshType::PointIdentifier pid0 = mesh->AddPoint(p0);
-  MeshType::PointIdentifier pid1 = mesh->AddPoint(p1);
-  MeshType::PointIdentifier pid2 = mesh->AddPoint(p2);
-  MeshType::PointIdentifier pid3 = mesh->AddPoint(p3);
-  MeshType::PointIdentifier pid4 = mesh->AddPoint(p4);
-  MeshType::PointIdentifier pid5 = mesh->AddPoint(p5);
+  MeshType::PointIdentifier const pid0 = mesh->AddPoint(p0);
+  MeshType::PointIdentifier const pid1 = mesh->AddPoint(p1);
+  MeshType::PointIdentifier const pid2 = mesh->AddPoint(p2);
+  MeshType::PointIdentifier const pid3 = mesh->AddPoint(p3);
+  MeshType::PointIdentifier const pid4 = mesh->AddPoint(p4);
+  MeshType::PointIdentifier const pid5 = mesh->AddPoint(p5);
 
   // Cells in a proper way
   mesh->AddEdge(pid3, pid4);
@@ -78,15 +78,15 @@ itkQuadEdgeMeshDeleteEdgeTest(int, char *[])
   mesh->AddEdge(pid2, pid0);
   mesh->AddEdge(pid2, pid3);
 
-  itk::IdentifierType edgesBefore = mesh->ComputeNumberOfEdges();
+  itk::IdentifierType const edgesBefore = mesh->ComputeNumberOfEdges();
 
   // Deleting two arbitrary edges:
   mesh->DeleteEdge(pid3, pid4);
   mesh->DeleteEdge(pid0, pid5);
 
   std::cout << indent << "Trying to remove only two edges...";
-  itk::IdentifierType expectedEdgeCount = 2;
-  itk::IdentifierType obtainedEdgeCount = edgesBefore - mesh->ComputeNumberOfEdges();
+  itk::IdentifierType const expectedEdgeCount = 2;
+  itk::IdentifierType const obtainedEdgeCount = edgesBefore - mesh->ComputeNumberOfEdges();
   if (obtainedEdgeCount != expectedEdgeCount)
   {
     std::cerr << "Test failed!" << std::endl;

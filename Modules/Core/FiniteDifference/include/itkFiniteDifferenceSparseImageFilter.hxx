@@ -164,7 +164,7 @@ FiniteDifferenceSparseImageFilter<TInputImageType, TSparseOutputImageType>::Calc
   // various threads.  There is one distinct slot for each possible thread,
   // so this data structure is thread-safe.  All of the time steps calculated
   // in each thread will be combined in the ResolveTimeStep method.
-  ThreadIdType workUnitCount = this->GetMultiThreader()->GetNumberOfWorkUnits();
+  ThreadIdType const workUnitCount = this->GetMultiThreader()->GetNumberOfWorkUnits();
 
   str.TimeStepList.resize(workUnitCount, false);
   str.ValidTimeStepList.resize(workUnitCount);
@@ -174,7 +174,7 @@ FiniteDifferenceSparseImageFilter<TInputImageType, TSparseOutputImageType>::Calc
   // Resolve the single value time step to return.  The default implementation
   // of ResolveTimeStep is to return the lowest value in the list that it is
   // given.
-  TimeStepType dt = this->ResolveTimeStep(str.TimeStepList, str.ValidTimeStepList);
+  TimeStepType const dt = this->ResolveTimeStep(str.TimeStepList, str.ValidTimeStepList);
 
   return dt;
 }
@@ -247,7 +247,7 @@ FiniteDifferenceSparseImageFilter<TInputImageType, TSparseOutputImageType>::Thre
 {
   using NeighborhoodIteratorType = typename FiniteDifferenceFunctionType::NeighborhoodType;
 
-  typename SparseOutputImageType::Pointer output = this->GetOutput();
+  typename SparseOutputImageType::Pointer const output = this->GetOutput();
 
   TimeStepType timeStep;
   void *       globalData;
@@ -287,7 +287,7 @@ FiniteDifferenceSparseImageFilter<TInputImageType, TSparseOutputImageType>::Thre
 {
   using NeighborhoodIteratorType = typename FiniteDifferenceFunctionType::NeighborhoodType;
 
-  typename SparseOutputImageType::Pointer output = this->GetOutput();
+  typename SparseOutputImageType::Pointer const output = this->GetOutput();
 
   const SizeType radius = m_SparseFunction->GetRadius();
 

@@ -40,7 +40,7 @@ TransformGeometryImageFilter<TInputImage, TOutputImage>::VerifyPreconditions() c
 {
   Superclass::VerifyPreconditions();
 
-  TransformConstPointer tx = this->GetTransform();
+  TransformConstPointer const tx = this->GetTransform();
 
   if (!tx->IsLinear())
   {
@@ -58,7 +58,7 @@ TransformGeometryImageFilter<TInputImage, TOutputImage>::GenerateOutputInformati
 
   OutputImageType * outputPtr = this->GetOutput();
 
-  TransformConstPointer tx = this->GetTransform();
+  TransformConstPointer const tx = this->GetTransform();
   tx->ApplyToImageMetadata(outputPtr);
 }
 

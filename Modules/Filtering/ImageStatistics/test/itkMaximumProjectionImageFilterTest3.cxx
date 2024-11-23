@@ -34,7 +34,7 @@ itkMaximumProjectionImageFilterTest3(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  int dim = std::stoi(argv[1]);
+  int const dim = std::stoi(argv[1]);
 
   using PixelType = unsigned char;
 
@@ -51,7 +51,7 @@ itkMaximumProjectionImageFilterTest3(int argc, char * argv[])
   filter->SetInput(reader->GetOutput());
   filter->SetProjectionDimension(dim);
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   using WriterType = itk::ImageFileWriter<Image2DType>;
   auto writer = WriterType::New();

@@ -55,7 +55,7 @@ itkGDCMImageIOTest2(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  itk::GDCMImageIO::Pointer dicomIO = itk::GDCMImageIO::New();
+  itk::GDCMImageIO::Pointer const dicomIO = itk::GDCMImageIO::New();
   // reader->GetOutput()->Print(std::cout);
 
   itk::MetaDataDictionary & dict = dicomIO->GetMetaDataDictionary();
@@ -184,7 +184,7 @@ itkGDCMImageIOTest2(int argc, char * argv[])
   }
   else
   {
-    itk::MetaDataObject<std::string>::ConstPointer tagvalue =
+    itk::MetaDataObject<std::string>::ConstPointer const tagvalue =
       dynamic_cast<const itk::MetaDataObject<std::string> *>(tagIt->second.GetPointer());
     if (tagvalue)
     {

@@ -91,7 +91,7 @@ template <unsigned int VDimension>
 auto
 MetaSurfaceConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObjectType * so) -> MetaObjectType *
 {
-  SurfaceSpatialObjectConstPointer surfaceSO = dynamic_cast<const SurfaceSpatialObjectType *>(so);
+  SurfaceSpatialObjectConstPointer const surfaceSO = dynamic_cast<const SurfaceSpatialObjectType *>(so);
 
   if (surfaceSO.IsNull())
   {

@@ -64,10 +64,10 @@ itkKmeansModelEstimatorTest(int, char *[])
 
   auto vecImage = VecImageType::New();
 
-  VecImageType::SizeType vecImgSize = { { IMGWIDTH, IMGHEIGHT, NFRAMES } };
+  VecImageType::SizeType const vecImgSize = { { IMGWIDTH, IMGHEIGHT, NFRAMES } };
 
-  VecImageType::IndexType  index{};
-  VecImageType::RegionType region;
+  VecImageType::IndexType const index{};
+  VecImageType::RegionType      region;
 
   region.SetSize(vecImgSize);
   region.SetIndex(index);
@@ -280,7 +280,7 @@ itkKmeansModelEstimatorTest(int, char *[])
   }
 
   // Validation with no codebook/initial Kmeans estimate
-  vnl_matrix<double> kmeansResult = applyKmeansEstimator->GetKmeansResults();
+  vnl_matrix<double> const kmeansResult = applyKmeansEstimator->GetKmeansResults();
   std::cout << "KMeansResults\n" << kmeansResult << std::endl;
 
   applyKmeansEstimator->SetCodebook(inCDBK);

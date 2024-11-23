@@ -61,7 +61,7 @@ STAPLEImageFilter<TInputImage, TOutputImage>::GenerateData()
   // Allocate the output "fuzzy" image.
   this->GetOutput()->SetBufferedRegion(this->GetOutput()->GetRequestedRegion());
   this->GetOutput()->Allocate();
-  typename TOutputImage::Pointer W = this->GetOutput();
+  typename TOutputImage::Pointer const W = this->GetOutput();
 
   // Initialize the output to all 0's
   W->FillBuffer(0.0);

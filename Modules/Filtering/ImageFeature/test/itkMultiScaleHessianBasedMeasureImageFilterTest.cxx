@@ -93,13 +93,13 @@ itkMultiScaleHessianBasedMeasureImageFilterTest(int argc, char * argv[])
 
   multiScaleEnhancementFilter->SetSigmaStepMethodToLogarithmic();
 
-  itk::SimpleFilterWatcher watcher(multiScaleEnhancementFilter);
+  itk::SimpleFilterWatcher const watcher(multiScaleEnhancementFilter);
 
   constexpr double tolerance = 0.01;
 
   if (argc > 4)
   {
-    double sigmaMinimum = std::stod(argv[4]);
+    double const sigmaMinimum = std::stod(argv[4]);
     multiScaleEnhancementFilter->SetSigmaMinimum(sigmaMinimum);
 
     if (itk::Math::abs(multiScaleEnhancementFilter->GetSigmaMinimum() - sigmaMinimum) > tolerance)
@@ -111,7 +111,7 @@ itkMultiScaleHessianBasedMeasureImageFilterTest(int argc, char * argv[])
 
   if (argc > 5)
   {
-    double sigmaMaximum = std::stod(argv[5]);
+    double const sigmaMaximum = std::stod(argv[5]);
     multiScaleEnhancementFilter->SetSigmaMaximum(sigmaMaximum);
 
     if (itk::Math::abs(multiScaleEnhancementFilter->GetSigmaMaximum() - sigmaMaximum) > tolerance)
@@ -123,7 +123,7 @@ itkMultiScaleHessianBasedMeasureImageFilterTest(int argc, char * argv[])
 
   if (argc > 6)
   {
-    unsigned int numberOfSigmaSteps = std::stoi(argv[6]);
+    unsigned int const numberOfSigmaSteps = std::stoi(argv[6]);
     multiScaleEnhancementFilter->SetNumberOfSigmaSteps(numberOfSigmaSteps);
 
     if (multiScaleEnhancementFilter->GetNumberOfSigmaSteps() != numberOfSigmaSteps)

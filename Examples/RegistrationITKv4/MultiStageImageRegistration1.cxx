@@ -113,8 +113,8 @@ public:
 
     const auto * registration = static_cast<const RegistrationType *>(object);
 
-    unsigned int currentLevel = registration->GetCurrentLevel();
-    typename RegistrationType::ShrinkFactorsPerDimensionContainerType
+    unsigned int const currentLevel = registration->GetCurrentLevel();
+    typename RegistrationType::ShrinkFactorsPerDimensionContainerType const
       shrinkFactors =
         registration->GetShrinkFactorsPerDimension(currentLevel);
     typename RegistrationType::SmoothingSigmasArrayType smoothingSigmas =
@@ -533,7 +533,7 @@ main(int argc, char * argv[])
   using RegionType = FixedImageType::RegionType;
   using SizeType = FixedImageType::SizeType;
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
 
   const SpacingType fixedSpacing = fixedImage->GetSpacing();
   const OriginType  fixedOrigin = fixedImage->GetOrigin();

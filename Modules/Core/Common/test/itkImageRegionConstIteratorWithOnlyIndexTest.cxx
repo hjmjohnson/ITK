@@ -81,9 +81,9 @@ public:
 
     while (!it.IsAtEnd())
     {
-      IndexType index = it.GetIndex();
+      IndexType const index = it.GetIndex();
       // Check to see if the index is within allowed bounds
-      bool isInside = region.IsInside(index);
+      bool const isInside = region.IsInside(index);
       if (!isInside)
       {
         std::cout << "Index is not inside region! - " << index << std::endl;

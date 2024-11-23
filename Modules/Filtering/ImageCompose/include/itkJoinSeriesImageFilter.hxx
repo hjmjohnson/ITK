@@ -81,8 +81,8 @@ JoinSeriesImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
   // this filter allows the input the output to be of different dimensions
 
   // Get pointers to the input and output
-  typename Superclass::OutputImagePointer     outputPtr = this->GetOutput();
-  typename Superclass::InputImageConstPointer inputPtr = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputPtr = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputPtr = this->GetInput();
 
   if (!outputPtr || !inputPtr)
   {
@@ -141,8 +141,8 @@ JoinSeriesImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
     using InputDirectionType = typename InputImageType::DirectionType;
     using OutputDirectionType = typename OutputImageType::DirectionType;
     InputDirectionType  inputDir = inputPtr->GetDirection();
-    unsigned int        inputdim = InputImageType::GetImageDimension();
-    unsigned int        outputdim = OutputImageType::GetImageDimension();
+    unsigned int const  inputdim = InputImageType::GetImageDimension();
+    unsigned int const  outputdim = OutputImageType::GetImageDimension();
     OutputDirectionType outputDir = outputPtr->GetDirection();
     for (unsigned int i = 0; i < outputdim; ++i)
     {
@@ -185,12 +185,12 @@ JoinSeriesImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   {
     return;
   }
-  OutputImageRegionType outputRegion = this->GetOutput()->GetRequestedRegion();
-  IndexValueType        begin = outputRegion.GetIndex(InputImageDimension);
-  IndexValueType        end = begin + outputRegion.GetSize(InputImageDimension);
+  OutputImageRegionType const outputRegion = this->GetOutput()->GetRequestedRegion();
+  IndexValueType const        begin = outputRegion.GetIndex(InputImageDimension);
+  IndexValueType const        end = begin + outputRegion.GetSize(InputImageDimension);
   for (IndexValueType idx = 0; idx < this->GetNumberOfIndexedInputs(); ++idx)
   {
-    InputImagePointer inputPtr = const_cast<InputImageType *>(this->GetInput(idx));
+    InputImagePointer const inputPtr = const_cast<InputImageType *>(this->GetInput(idx));
     if (!inputPtr)
     {
       // Because DataObject::PropagateRequestedRegion() allows only

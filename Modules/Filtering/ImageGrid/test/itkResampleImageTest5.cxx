@@ -53,13 +53,13 @@ itkResampleImageTest5(int argc, char * argv[])
   using InterpolatorType = itk::LinearInterpolateImageFunction<ImageType, CoordRepType>;
   using WriterType = itk::ImageFileWriter<ImageType>;
 
-  float scaling = std::stod(argv[1]);
+  float const scaling = std::stod(argv[1]);
 
   // Create and configure an image
-  ImagePointerType image = ImageType::New();
-  ImageIndexType   index = { { 0, 0 } };
-  ImageSizeType    size = { { 64, 64 } };
-  ImageRegionType  region{ index, size };
+  ImagePointerType const image = ImageType::New();
+  ImageIndexType         index = { { 0, 0 } };
+  ImageSizeType          size = { { 64, 64 } };
+  ImageRegionType const  region{ index, size };
   image->SetLargestPossibleRegion(region);
   image->SetBufferedRegion(region);
   image->Allocate();
@@ -89,7 +89,7 @@ itkResampleImageTest5(int argc, char * argv[])
   interp->SetInputImage(image);
 
   // Create and configure a resampling filter
-  itk::ResampleImageFilter<ImageType, ImageType>::Pointer resample =
+  itk::ResampleImageFilter<ImageType, ImageType>::Pointer const resample =
     itk::ResampleImageFilter<ImageType, ImageType>::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
@@ -110,7 +110,7 @@ itkResampleImageTest5(int argc, char * argv[])
   resample->SetOutputStartIndex(index);
   ITK_TEST_SET_GET_VALUE(index, resample->GetOutputStartIndex());
 
-  ImageType::PointType origin{};
+  ImageType::PointType const origin{};
   resample->SetOutputOrigin(origin);
   ITK_TEST_SET_GET_VALUE(origin, resample->GetOutputOrigin());
 

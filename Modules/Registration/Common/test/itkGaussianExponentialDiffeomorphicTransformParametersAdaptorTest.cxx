@@ -51,7 +51,7 @@ itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
   displacementField->SetDirection(direction);
   displacementField->Allocate();
 
-  TransformType::OutputVectorType zeroVector{};
+  TransformType::OutputVectorType const zeroVector{};
   displacementField->FillBuffer(zeroVector);
 
 
@@ -69,11 +69,11 @@ itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
   transform->SetConstantVelocityField(displacementField);
   transform->IntegrateVelocityField();
 
-  auto                           point = itk::MakeFilled<TransformType::InputPointType>(50.0);
-  TransformType::OutputPointType outputPointBeforeAdapt = transform->TransformPoint(point);
+  auto                                 point = itk::MakeFilled<TransformType::InputPointType>(50.0);
+  TransformType::OutputPointType const outputPointBeforeAdapt = transform->TransformPoint(point);
 
-  SpacingType spacingBefore = transform->GetConstantVelocityField()->GetSpacing();
-  SizeType    sizeBefore = transform->GetConstantVelocityField()->GetLargestPossibleRegion().GetSize();
+  SpacingType const spacingBefore = transform->GetConstantVelocityField()->GetSpacing();
+  SizeType const    sizeBefore = transform->GetConstantVelocityField()->GetLargestPossibleRegion().GetSize();
 
   /**
    * Instantiate the adaptor
@@ -98,8 +98,8 @@ itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
   adaptor->SetRequiredOrigin(displacementField->GetOrigin());
   adaptor->SetRequiredDirection(displacementField->GetDirection());
 
-  float updateSmoothingVariance = 3.0;
-  float velocitySmoothingVariance = 0;
+  float const updateSmoothingVariance = 3.0;
+  float const velocitySmoothingVariance = 0;
 
   adaptor->SetGaussianSmoothingVarianceForTheUpdateField(updateSmoothingVariance);
   adaptor->SetGaussianSmoothingVarianceForTheConstantVelocityField(velocitySmoothingVariance);
@@ -114,13 +114,13 @@ itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
   }
 
 
-  SpacingType spacingAfter = transform->GetConstantVelocityField()->GetSpacing();
-  SizeType    sizeAfter = transform->GetConstantVelocityField()->GetLargestPossibleRegion().GetSize();
+  SpacingType const spacingAfter = transform->GetConstantVelocityField()->GetSpacing();
+  SizeType const    sizeAfter = transform->GetConstantVelocityField()->GetLargestPossibleRegion().GetSize();
 
   std::cout << "Spacing: " << spacingBefore << "(before), " << spacingAfter << "(after)." << std::endl;
   std::cout << "Size: " << sizeBefore << "(before), " << sizeAfter << "(after)." << std::endl;
 
-  TransformType::ParametersType fixedParameters = adaptor->GetRequiredFixedParameters();
+  TransformType::ParametersType const fixedParameters = adaptor->GetRequiredFixedParameters();
   std::cout << "Fixed parameters: " << fixedParameters << std::endl;
   adaptor->SetRequiredFixedParameters(fixedParameters);
 
@@ -157,7 +157,7 @@ itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
     return EXIT_FAILURE;
   }
 
-  TransformType::OutputPointType outputPointAfterAdapt = transform->TransformPoint(point);
+  TransformType::OutputPointType const outputPointAfterAdapt = transform->TransformPoint(point);
   std::cout << point << " to (before) " << outputPointBeforeAdapt << std::endl;
   std::cout << point << " to (after) " << outputPointAfterAdapt << std::endl;
 

@@ -130,7 +130,7 @@ main(int argc, char * argv[])
   movingWriter->SetFileName(argv[4]);
 
 
-  FixedImageType::ConstPointer fixedImage = fixedReader->GetOutput();
+  FixedImageType::ConstPointer const fixedImage = fixedReader->GetOutput();
 
 
   using FilterType =
@@ -153,17 +153,19 @@ main(int argc, char * argv[])
   //  Software Guide : EndLatex
 
   //  Software Guide : BeginCodeSnippet
-  FixedImageType::SpacingType   fixedSpacing = fixedImage->GetSpacing();
-  FixedImageType::PointType     fixedOrigin = fixedImage->GetOrigin();
-  FixedImageType::DirectionType fixedDirection = fixedImage->GetDirection();
+  FixedImageType::SpacingType         fixedSpacing = fixedImage->GetSpacing();
+  FixedImageType::PointType const     fixedOrigin = fixedImage->GetOrigin();
+  FixedImageType::DirectionType const fixedDirection =
+    fixedImage->GetDirection();
 
   resampler->SetOutputSpacing(fixedSpacing);
   resampler->SetOutputOrigin(fixedOrigin);
   resampler->SetOutputDirection(fixedDirection);
 
 
-  FixedImageType::RegionType fixedRegion = fixedImage->GetBufferedRegion();
-  FixedImageType::SizeType   fixedSize = fixedRegion.GetSize();
+  FixedImageType::RegionType const fixedRegion =
+    fixedImage->GetBufferedRegion();
+  FixedImageType::SizeType fixedSize = fixedRegion.GetSize();
   resampler->SetSize(fixedSize);
   resampler->SetOutputStartIndex(fixedRegion.GetIndex());
 

@@ -55,8 +55,8 @@ SparseFieldLayer<TNodeType>::SplitRegions(int num) const -> RegionListType
   unsigned int            regionsize;
   size = Size();
   regionsize = static_cast<unsigned int>(std::ceil(static_cast<float>(size) / static_cast<float>(num)));
-  ConstIterator position = Begin();
-  ConstIterator last = End();
+  ConstIterator       position = Begin();
+  ConstIterator const last = End();
 
   for (int i = 0; i < num; ++i)
   {

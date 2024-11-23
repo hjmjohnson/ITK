@@ -63,7 +63,7 @@ BilateralImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  typename Superclass::InputImagePointer inputPtr = const_cast<TInputImage *>(this->GetInput());
+  typename Superclass::InputImagePointer const inputPtr = const_cast<TInputImage *>(this->GetInput());
 
   if (!inputPtr)
   {
@@ -207,10 +207,10 @@ BilateralImageFilter<TInputImage, TOutputImage>::BeforeThreadedGenerateData()
   // Now create the lookup table whose domain runs from 0.0 to
   // (max-min) and range is gaussian evaluated at
   // that point
-  double rangeVariance = m_RangeSigma * m_RangeSigma;
+  double const rangeVariance = m_RangeSigma * m_RangeSigma;
 
   // denominator (normalization factor) for Gaussian used for range
-  double rangeGaussianDenom = m_RangeSigma * std::sqrt(2.0 * itk::Math::pi);
+  double const rangeGaussianDenom = m_RangeSigma * std::sqrt(2.0 * itk::Math::pi);
 
   // Maximum delta for the dynamic range
   double tableDelta;
@@ -235,16 +235,16 @@ void
 BilateralImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   const OutputImageRegionType & outputRegionForThread)
 {
-  typename TInputImage::ConstPointer   input = this->GetInput();
-  typename TOutputImage::Pointer       output = this->GetOutput();
-  typename TInputImage::IndexValueType i;
-  const double                         rangeDistanceThreshold = m_DynamicRangeUsed;
+  typename TInputImage::ConstPointer const input = this->GetInput();
+  typename TOutputImage::Pointer const     output = this->GetOutput();
+  typename TInputImage::IndexValueType     i;
+  const double                             rangeDistanceThreshold = m_DynamicRangeUsed;
 
   ZeroFluxNeumannBoundaryCondition<TInputImage> BC;
 
   // Find the boundary "faces"
-  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                        fC;
-  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType faceList =
+  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                              fC;
+  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType const faceList =
     fC(this->GetInput(), outputRegionForThread, m_GaussianKernel.GetRadius());
 
   OutputPixelRealType centerPixel;

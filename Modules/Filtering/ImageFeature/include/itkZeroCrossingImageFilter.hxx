@@ -45,8 +45,8 @@ ZeroCrossingImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  typename Superclass::InputImagePointer  inputPtr = const_cast<TInputImage *>(this->GetInput());
-  typename Superclass::OutputImagePointer outputPtr = this->GetOutput();
+  typename Superclass::InputImagePointer const  inputPtr = const_cast<TInputImage *>(this->GetInput());
+  typename Superclass::OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -54,7 +54,7 @@ ZeroCrossingImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion
   }
 
   // Build an operator so that we can determine the kernel size
-  SizeValueType radius{};
+  SizeValueType const radius{};
 
   // get a copy of the input requested region (should equal the output
   // requested region)
@@ -98,8 +98,8 @@ ZeroCrossingImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   ConstNeighborhoodIterator<TInputImage> bit;
   ImageRegionIterator<TOutputImage>      it;
 
-  typename OutputImageType::Pointer     output = this->GetOutput();
-  typename InputImageType::ConstPointer input = this->GetInput();
+  typename OutputImageType::Pointer const     output = this->GetOutput();
+  typename InputImageType::ConstPointer const input = this->GetInput();
 
   // Calculate iterator radius
   static constexpr auto radius = Size<ImageDimension>::Filled(1);
@@ -111,11 +111,11 @@ ZeroCrossingImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
 
   TotalProgressReporter progress(this, output->GetRequestedRegion().GetNumberOfPixels());
 
-  InputImagePixelType this_one;
-  InputImagePixelType that;
-  InputImagePixelType abs_this_one;
-  InputImagePixelType abs_that;
-  InputImagePixelType zero{};
+  InputImagePixelType       this_one;
+  InputImagePixelType       that;
+  InputImagePixelType       abs_this_one;
+  InputImagePixelType       abs_that;
+  InputImagePixelType const zero{};
 
   FixedArray<OffsetValueType, 2 * ImageDimension> offset;
 

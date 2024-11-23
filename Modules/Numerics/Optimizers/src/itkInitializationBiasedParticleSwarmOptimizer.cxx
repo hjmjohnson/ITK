@@ -44,13 +44,13 @@ InitializationBiasedParticleSwarmOptimizer::PrintSelf(std::ostream & os, Indent 
 void
 InitializationBiasedParticleSwarmOptimizer::UpdateSwarm()
 {
-  itk::Statistics::MersenneTwisterRandomVariateGenerator::Pointer randomGenerator =
+  itk::Statistics::MersenneTwisterRandomVariateGenerator::Pointer const randomGenerator =
     Statistics::MersenneTwisterRandomVariateGenerator::GetInstance();
   ParametersType initialPosition = GetInitialPosition();
 
-  unsigned int n = static_cast<unsigned int>((GetCostFunction())->GetNumberOfParameters());
+  unsigned int const n = static_cast<unsigned int>((GetCostFunction())->GetNumberOfParameters());
   // linear decrease in the weight of the initial parameter values
-  double initializationCoefficient =
+  double const initializationCoefficient =
     this->m_InitializationCoefficient *
     (1.0 - static_cast<double>(m_IterationIndex) / static_cast<double>(m_MaximalNumberOfIterations));
 

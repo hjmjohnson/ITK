@@ -55,7 +55,7 @@ itkDeformableSimplexMesh3DBalloonForceFilterTest(int argc, char * argv[])
   auto                 mySphereMeshSource = SphereMeshSourceType::New();
   auto                 center = itk::MakeFilled<PointType>(10);
   PointType::ValueType scaleInit[3] = { 3, 3, 3 };
-  VectorType           scale = scaleInit;
+  VectorType const     scale = scaleInit;
 
   mySphereMeshSource->SetCenter(center);
   mySphereMeshSource->SetResolution(2);
@@ -140,7 +140,7 @@ itkDeformableSimplexMesh3DBalloonForceFilterTest(int argc, char * argv[])
   deformFilter->SetRigidity(0);
   deformFilter->Update();
 
-  SimplexMeshType::Pointer deformResult = deformFilter->GetOutput();
+  SimplexMeshType::Pointer const deformResult = deformFilter->GetOutput();
 
   std::cout << "Deformation Result: " << deformResult << std::endl;
 

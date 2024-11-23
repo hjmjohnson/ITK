@@ -93,7 +93,7 @@ GaussianMixtureModelComponent<TSample>::SetParameters(const ParametersType & par
 
   bool changed = false;
 
-  MeasurementVectorSizeType measurementVectorSize = this->GetSample()->GetMeasurementVectorSize();
+  MeasurementVectorSizeType const measurementVectorSize = this->GetSample()->GetMeasurementVectorSize();
 
   for (i = 0; i < measurementVectorSize; ++i)
   {
@@ -173,14 +173,14 @@ template <typename TSample>
 void
 GaussianMixtureModelComponent<TSample>::GenerateData()
 {
-  MeasurementVectorSizeType measurementVectorSize = this->GetSample()->GetMeasurementVectorSize();
+  MeasurementVectorSizeType const measurementVectorSize = this->GetSample()->GetMeasurementVectorSize();
 
   this->AreParametersModified(false);
 
   const WeightArrayType & weights = this->GetWeights();
 
-  typename TSample::ConstIterator iter = this->GetSample()->Begin();
-  typename TSample::ConstIterator end = this->GetSample()->End();
+  typename TSample::ConstIterator       iter = this->GetSample()->Begin();
+  typename TSample::ConstIterator const end = this->GetSample()->End();
 
   typename TSample::MeasurementVectorType measurements;
 

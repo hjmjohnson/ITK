@@ -53,7 +53,7 @@ VanHerkGilWermanErodeDilateImageFilter<TImage, TKernel, TFunction1>::DynamicThre
 
   InputImageConstPointer input = this->GetInput();
 
-  SizeValueType totalPixels =
+  SizeValueType const totalPixels =
     this->GetKernel().GetLines().size() * this->GetOutput()->GetRequestedRegion().GetNumberOfPixels();
   TotalProgressReporter progress(this, totalPixels);
 
@@ -66,10 +66,10 @@ VanHerkGilWermanErodeDilateImageFilter<TImage, TKernel, TFunction1>::DynamicThre
   auto internalbuffer = InputImageType::New();
   internalbuffer->SetRegions(IReg);
   internalbuffer->Allocate();
-  InputImagePointer output = internalbuffer;
+  InputImagePointer const output = internalbuffer;
 
   // get the region size
-  InputImageRegionType OReg = outputRegionForThread;
+  InputImageRegionType const OReg = outputRegionForThread;
   // maximum buffer length is sum of dimensions
   unsigned int bufflength = 0;
   for (unsigned int i = 0; i < TImage::ImageDimension; ++i)
@@ -91,16 +91,16 @@ VanHerkGilWermanErodeDilateImageFilter<TImage, TKernel, TFunction1>::DynamicThre
 
   for (unsigned int i = 0; i < decomposition.size(); ++i)
   {
-    typename KernelType::LType     ThisLine = decomposition[i];
-    typename BresType::OffsetArray TheseOffsets = BresLine.BuildLine(ThisLine, bufflength);
-    unsigned int                   SELength = GetLinePixels<KernelLType>(ThisLine);
+    typename KernelType::LType const     ThisLine = decomposition[i];
+    typename BresType::OffsetArray const TheseOffsets = BresLine.BuildLine(ThisLine, bufflength);
+    unsigned int                         SELength = GetLinePixels<KernelLType>(ThisLine);
     // want lines to be odd
     if (!(SELength % 2))
     {
       ++SELength;
     }
 
-    InputImageRegionType BigFace = MakeEnlargedFace<InputImageType, KernelLType>(input, IReg, ThisLine);
+    InputImageRegionType const BigFace = MakeEnlargedFace<InputImageType, KernelLType>(input, IReg, ThisLine);
 
     DoFace<TImage, BresType, TFunction1, KernelLType>(
       input, output, m_Boundary, ThisLine, TheseOffsets, SELength, buffer, forward, reverse, IReg, BigFace);

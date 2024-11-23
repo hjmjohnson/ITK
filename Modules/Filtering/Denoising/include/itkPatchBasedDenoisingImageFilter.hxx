@@ -362,7 +362,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::Initialize()
       {
         invFactor = m_IntensityRescaleInvFactor[0];
       }
-      RealValueType sigma = 5.0 / invFactor;
+      RealValueType const sigma = 5.0 / invFactor;
       this->SetComponent(m_NoiseSigma, pc, sigma);
       this->SetComponent(m_NoiseSigmaSquared, pc, sigma * sigma);
     }
@@ -472,9 +472,9 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::InitializePatchWeight
 
   // Allocate the patch weights (mask) as an image.
   // Done in physical space.
-  auto                                  physicalSize = WeightsImageType::SizeType::Filled(physicalDiameter);
-  typename WeightsImageType::RegionType physicalRegion(physicalSize);
-  auto                                  physicalWeightsImage = WeightsImageType::New();
+  auto                                        physicalSize = WeightsImageType::SizeType::Filled(physicalDiameter);
+  typename WeightsImageType::RegionType const physicalRegion(physicalSize);
+  auto                                        physicalWeightsImage = WeightsImageType::New();
   physicalWeightsImage->SetRegions(physicalRegion);
   physicalWeightsImage->SetSpacing(physicalSpacing);
   physicalWeightsImage->Allocate();
@@ -560,7 +560,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::InitializePatchWeight
 
   } // end for each element in the patch
 
-  typename PatchWeightsType::ValueType centerWeight = patchWeights[(this->GetPatchLengthInVoxels() - 1) / 2];
+  typename PatchWeightsType::ValueType const centerWeight = patchWeights[(this->GetPatchLengthInVoxels() - 1) / 2];
   if (centerWeight != 1.0)
   {
     if (centerWeight <= 0.0)
@@ -570,7 +570,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::InitializePatchWeight
     }
 
     // Normalize to the center weight to guarantee that the center weight == 1.0
-    typename PatchWeightsType::SizeValueType pSize = patchWeights.Size();
+    typename PatchWeightsType::SizeValueType const pSize = patchWeights.Size();
     for (pos = 0; pos < pSize; ++pos)
     {
       patchWeights[pos] = patchWeights[pos] / centerWeight;
@@ -713,7 +713,7 @@ typename PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::ThreadDataSt
     }
 
     // Only evaluating each pixel once, so nothing to cache
-    bool                              useCachedComputations = false;
+    bool const                        useCachedComputations = false;
     InputImageRegionConstIteratorType imgIt(img, *fIt);
     imgIt.GoToBegin();
     for (imgIt.GoToBegin(); !imgIt.IsAtEnd(); ++imgIt)
@@ -802,8 +802,8 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::ComputeSignedEuclidea
 {
   for (unsigned int pc = 0; pc < m_NumPixelComponents; ++pc)
   {
-    RealValueType tmpDiff = this->GetComponent(b, pc) - this->GetComponent(a, pc);
-    RealValueType tmpWeight = weight[pc];
+    RealValueType const tmpDiff = this->GetComponent(b, pc) - this->GetComponent(a, pc);
+    RealValueType const tmpWeight = weight[pc];
     this->SetComponent(diff, pc, tmpDiff);
     norm[pc] = tmpWeight * tmpWeight * tmpDiff * tmpDiff;
   }
@@ -887,7 +887,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::Compute3x3EigenAnalys
 
   // Compute phi = (acos((s/n) * sqrt(1/n)) / 3)
   RealTensorValueT phi;
-  double           acos_arg = (s / n) * 1 / sqrtn;
+  double const     acos_arg = (s / n) * 1 / sqrtn;
   // When floating point exceptions are enabled, std::acos generates
   // NaNs (domain errors) if itk::Math::abs(acos_arg) > 1.0
   // We treat those out of domain arguments as 1.0 (the max allowed value
@@ -1144,7 +1144,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::ComputeLogMapAndWeigh
 
   symMatrixLogMap[5] = YEigVal0 * temp20 * temp20 + YEigVal1 * temp21 * temp21 + YEigVal2 * temp22 * temp22;
 
-  RealValueType wt = weight[0];
+  RealValueType const wt = weight[0];
   geodesicDist[0] = wt * wt * (YEigVal0 * YEigVal0 + YEigVal1 * YEigVal1 + YEigVal2 * YEigVal2);
 }
 
@@ -1543,7 +1543,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::ThreadedComputeSigmaU
   inList->SetImage(output);
   inList->SetRadius(radius);
 
-  BaseSamplerPointer sampler = threadData.sampler;
+  BaseSamplerPointer const sampler = threadData.sampler;
 
   // Break the input into a series of regions. The first region is free
   // of boundary conditions, the rest with boundary conditions. We operate
@@ -1584,9 +1584,9 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::ThreadedComputeSigmaU
       // Skip this sample
       continue;
     }
-    InputImagePatchIterator currentPatch = sampleIt.GetMeasurementVector()[0];
-    IndexType               nIndex = currentPatch.GetIndex();
-    InstanceIdentifier      currentPatchId = inList->GetImage()->ComputeOffset(nIndex);
+    InputImagePatchIterator const currentPatch = sampleIt.GetMeasurementVector()[0];
+    IndexType                     nIndex = currentPatch.GetIndex();
+    InstanceIdentifier const      currentPatchId = inList->GetImage()->ComputeOffset(nIndex);
 
     // Select a set of patches from the full image, excluding points that have
     // neighbors outside the boundary at locations different than that of the
@@ -1653,7 +1653,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::ThreadedComputeSigmaU
     }
     else
     {
-      InputImagePatchIterator queryIt = sampler->GetSample()->GetMeasurementVector(currentPatchId)[0];
+      InputImagePatchIterator const queryIt = sampler->GetSample()->GetMeasurementVector(currentPatchId)[0];
       itkDebugMacro("unexpected index for current patch, search results are empty."
                     << "\ncurrent patch id: " << currentPatchId << "\ncurrent patch index: " << nIndex
                     << "\nindex calculated by searcher: " << queryIt.GetIndex(queryIt.GetCenterNeighborhoodIndex())
@@ -2344,7 +2344,7 @@ PatchBasedDenoisingImageFilter<TInputImage, TOutputImage>::ComputeGradientJointE
     RealValueType gaussianJointEntropy{};
     for (unsigned int ic = 0; ic < m_NumIndependentComponents; ++ic)
     {
-      RealValueType kernelSigma = m_KernelBandwidthSigma[ic];
+      RealValueType const kernelSigma = m_KernelBandwidthSigma[ic];
 
       distanceJointEntropy += squaredNorm[ic] / itk::Math::sqr(kernelSigma);
 

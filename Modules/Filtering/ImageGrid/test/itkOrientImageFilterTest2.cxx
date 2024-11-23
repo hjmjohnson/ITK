@@ -50,10 +50,10 @@ PrintImg(ImageType::Pointer img, const OrientImageFilterType::PermuteOrderArrayT
 ImageType::Pointer
 CreateAxialImage()
 {
-  const ImageType::SizeType imageSize = { { 4, 4, 4 } };
-  ImageType::IndexType      imageIndex = { { 0, 0, 0 } };
-  ImageType::RegionType     region{ imageIndex, imageSize };
-  auto                      img = ImageType::New();
+  const ImageType::SizeType   imageSize = { { 4, 4, 4 } };
+  ImageType::IndexType        imageIndex = { { 0, 0, 0 } };
+  ImageType::RegionType const region{ imageIndex, imageSize };
+  auto                        img = ImageType::New();
   img->SetRegions(region);
   img->Allocate();
 
@@ -103,10 +103,10 @@ CreateAxialImage()
 ImageType::Pointer
 CreateCoronalImage()
 {
-  const ImageType::SizeType imageSize = { { 4, 4, 4 } };
-  ImageType::IndexType      imageIndex = { { 0, 0, 0 } };
-  ImageType::RegionType     region{ imageIndex, imageSize };
-  auto                      img = ImageType::New();
+  const ImageType::SizeType   imageSize = { { 4, 4, 4 } };
+  ImageType::IndexType        imageIndex = { { 0, 0, 0 } };
+  ImageType::RegionType const region{ imageIndex, imageSize };
+  auto                        img = ImageType::New();
   img->SetRegions(region);
   img->Allocate();
 
@@ -169,7 +169,7 @@ CreateCoronalImage()
 int
 itkOrientImageFilterTest2(int, char *[])
 {
-  ImageType::Pointer axialImage = CreateAxialImage();
+  ImageType::Pointer const axialImage = CreateAxialImage();
   std::cerr << "Original" << std::endl;
   OrientImageFilterType::PermuteOrderArrayType permute;
   permute[0] = 0;
@@ -188,7 +188,7 @@ itkOrientImageFilterTest2(int, char *[])
   orienter->SetDesiredCoordinateOrientationToAxial();
   orienter->Update();
 
-  ImageType::Pointer axial = orienter->GetOutput();
+  ImageType::Pointer const axial = orienter->GetOutput();
   std::cerr << "axial" << std::endl;
   std::cout << "PermuteOrder: " << orienter->GetPermuteOrder() << std::endl;
   std::cout << "FlipAxes: " << orienter->GetFlipAxes() << std::endl;
@@ -202,7 +202,7 @@ itkOrientImageFilterTest2(int, char *[])
   orienter->SetDesiredCoordinateOrientationToCoronal();
   orienter->Update();
 
-  ImageType::Pointer coronal = orienter->GetOutput();
+  ImageType::Pointer const coronal = orienter->GetOutput();
   std::cerr << "coronal" << std::endl;
   orienter->GetOutput()->Print(std::cout);
   std::cout << "PermuteOrder: " << orienter->GetPermuteOrder() << std::endl;
@@ -217,7 +217,7 @@ itkOrientImageFilterTest2(int, char *[])
   orienter->SetDesiredCoordinateOrientationToSagittal();
   orienter->Update();
 
-  ImageType::Pointer sagittal = orienter->GetOutput();
+  ImageType::Pointer const sagittal = orienter->GetOutput();
   std::cerr << "sagittal" << std::endl;
   std::cout << "PermuteOrder: " << orienter->GetPermuteOrder() << std::endl;
   std::cout << "FlipAxes: " << orienter->GetFlipAxes() << std::endl;

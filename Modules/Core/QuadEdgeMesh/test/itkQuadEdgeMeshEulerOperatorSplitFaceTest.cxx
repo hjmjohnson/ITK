@@ -55,7 +55,7 @@ itkQuadEdgeMeshEulerOperatorSplitFaceTest(int, char *[])
   }
   std::cout << "OK" << std::endl;
 
-  MeshPointer mesh = MeshType::New();
+  MeshPointer const mesh = MeshType::New();
   CreateSquareTriangularMesh<MeshType>(mesh);
 
   splitFacet->SetInput(mesh);

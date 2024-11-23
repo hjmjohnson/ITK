@@ -275,7 +275,7 @@ public:
   {
     NeighborhoodIteratorType nIterator(m_Radius, m_Image, m_Region);
     nIterator.GoToBegin();
-    Iterator iter(nIterator, 0);
+    Iterator const iter(nIterator, 0);
     return iter;
   }
 
@@ -285,7 +285,7 @@ public:
   {
     NeighborhoodIteratorType nIterator(m_Radius, m_Image, m_Region);
     nIterator.GoToEnd();
-    Iterator iter(nIterator, m_Region.GetNumberOfPixels());
+    Iterator const iter(nIterator, m_Region.GetNumberOfPixels());
     return iter;
   }
 

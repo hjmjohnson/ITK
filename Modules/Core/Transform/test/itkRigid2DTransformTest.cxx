@@ -125,7 +125,7 @@ itkRigid2DTransformTest(int, char *[])
     {
       // Translate an itk::Point
       TransformType::InputPointType::ValueType pInit[2] = { 10, 10 };
-      TransformType::InputPointType            p = pInit;
+      TransformType::InputPointType const      p = pInit;
       TransformType::InputPointType            q;
       q = p + ioffset;
       TransformType::OutputPointType r;

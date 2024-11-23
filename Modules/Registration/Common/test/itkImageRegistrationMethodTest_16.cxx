@@ -91,8 +91,8 @@ DoRegistration()
 
   imageSource->GenerateImages(size);
 
-  typename FixedImageType::ConstPointer  fixedImage = imageSource->GetFixedImage();
-  typename MovingImageType::ConstPointer movingImage = imageSource->GetMovingImage();
+  typename FixedImageType::ConstPointer const  fixedImage = imageSource->GetFixedImage();
+  typename MovingImageType::ConstPointer const movingImage = imageSource->GetMovingImage();
 
   //
   // Connect all the components required for Registratio
@@ -118,9 +118,9 @@ DoRegistration()
   scales.Fill(1.0);
 
 
-  unsigned long numberOfIterations = 100;
-  double        translationScale = 1e-6;
-  double        learningRate = 1e-8;
+  unsigned long const numberOfIterations = 100;
+  double const        translationScale = 1e-6;
+  double const        learningRate = 1e-8;
 
   for (unsigned int i = 0; i < dimension; ++i)
   {

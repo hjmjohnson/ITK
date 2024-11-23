@@ -59,8 +59,8 @@ itkPointSetToImageRegistrationTest(int, char *[])
   imageSource->GenerateImages(size);
 
   // Create the two images
-  MovingImageType::ConstPointer movingImage = imageSource->GetMovingImage();
-  FixedImageType::ConstPointer  fixedImage = imageSource->GetFixedImage();
+  MovingImageType::ConstPointer const movingImage = imageSource->GetMovingImage();
+  FixedImageType::ConstPointer const  fixedImage = imageSource->GetFixedImage();
 
   // Create the point set and load it with data by sampling
   // the fixed image.
@@ -142,10 +142,10 @@ itkPointSetToImageRegistrationTest(int, char *[])
   OptimizerType::ScalesType scales(transform->GetNumberOfParameters());
   scales.Fill(1.0);
 
-  unsigned long numberOfIterations = 50;
-  double        maximumStepLength = 1.0; // no step will be larger than this
-  double        minimumStepLength = 0.01;
-  double        gradientTolerance = 1e-6; // convergence criterion
+  unsigned long const numberOfIterations = 50;
+  double const        maximumStepLength = 1.0; // no step will be larger than this
+  double const        minimumStepLength = 0.01;
+  double const        gradientTolerance = 1e-6; // convergence criterion
 
   optimizer->SetScales(scales);
   optimizer->SetNumberOfIterations(numberOfIterations);

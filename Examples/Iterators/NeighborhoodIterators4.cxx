@@ -100,7 +100,7 @@ main(int argc, char ** argv)
   output->SetRegions(reader->GetOutput()->GetRequestedRegion());
   output->Allocate();
 
-  itk::NeighborhoodInnerProduct<ImageType> innerProduct;
+  itk::NeighborhoodInnerProduct<ImageType> const innerProduct;
 
   using FaceCalculatorType =
     itk::NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<ImageType>;
@@ -170,7 +170,7 @@ main(int argc, char ** argv)
     // Swap the input and output buffers
     if (i != ImageType::ImageDimension - 1)
     {
-      ImageType::Pointer tmp = input;
+      ImageType::Pointer const tmp = input;
       input = output;
       output = tmp;
     }

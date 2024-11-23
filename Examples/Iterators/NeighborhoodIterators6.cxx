@@ -117,7 +117,7 @@ main(int argc, char ** argv)
     return EXIT_FAILURE;
   }
 
-  ImageType::Pointer input = adder->GetOutput();
+  ImageType::Pointer const input = adder->GetOutput();
 
   // Software Guide : BeginLatex
   //

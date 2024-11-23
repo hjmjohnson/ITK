@@ -101,7 +101,7 @@ OBJMeshIO::CloseFile()
 bool
 OBJMeshIO::SplitLine(const std::string & line, std::string & type, std::string & content)
 {
-  std::locale                 loc;
+  std::locale const           loc;
   std::string::const_iterator start = line.begin();
 
   while (start != line.end() && std::isspace(*start, loc))
@@ -137,10 +137,10 @@ OBJMeshIO::ReadMeshInformation()
   this->m_NumberOfPoints = 0;
   this->m_NumberOfCells = 0;
   this->m_NumberOfPointPixels = 0;
-  std::string line;
-  std::string inputLine;
-  std::string type;
-  std::locale loc;
+  std::string       line;
+  std::string       inputLine;
+  std::string       type;
+  std::locale const loc;
   while (std::getline(m_InputFile, line, '\n'))
   {
     if (SplitLine(line, type, inputLine) && !inputLine.empty())
@@ -223,10 +223,10 @@ OBJMeshIO::ReadPoints(void * buffer)
   SizeValueType index = 0;
 
   // Read and analyze the first line in the file
-  std::string line;
-  std::string inputLine;
-  std::string type;
-  std::locale loc;
+  std::string       line;
+  std::string       inputLine;
+  std::string       type;
+  std::locale const loc;
   while (std::getline(m_InputFile, line, '\n'))
   {
     if (SplitLine(line, type, inputLine) && !inputLine.empty())
@@ -255,10 +255,10 @@ OBJMeshIO::ReadCells(void * buffer)
   const auto    data = make_unique_for_overwrite<long[]>(this->m_CellBufferSize - this->m_NumberOfCells);
   SizeValueType index = 0;
 
-  std::string line;
-  std::string inputLine;
-  std::string type;
-  std::locale loc;
+  std::string       line;
+  std::string       inputLine;
+  std::string       type;
+  std::locale const loc;
   while (std::getline(m_InputFile, line, '\n'))
   {
     if (SplitLine(line, type, inputLine) && !inputLine.empty())
@@ -285,7 +285,7 @@ OBJMeshIO::ReadCells(void * buffer)
         }
 
         data[index++] = static_cast<long>(idList.size());
-        for (long it : idList)
+        for (long const it : idList)
         {
           data[index++] = (it - 1);
         }
@@ -312,10 +312,10 @@ OBJMeshIO::ReadPointData(void * buffer)
   SizeValueType index = 0;
 
   // Read and analyze the first line in the file
-  std::string line;
-  std::string inputLine;
-  std::string type;
-  std::locale loc;
+  std::string       line;
+  std::string       inputLine;
+  std::string       type;
+  std::locale const loc;
   while (std::getline(m_InputFile, line, '\n'))
   {
     if (SplitLine(line, type, inputLine) && !inputLine.empty())

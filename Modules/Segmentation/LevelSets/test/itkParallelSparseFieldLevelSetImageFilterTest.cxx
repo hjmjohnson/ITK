@@ -149,7 +149,7 @@ private:
   ScalarValueType
   PropagationSpeed(const NeighborhoodType & neighborhood, const FloatOffsetType &, GlobalDataStruct *) const override
   {
-    itk::Index<3> idx = neighborhood.GetIndex();
+    itk::Index<3> const idx = neighborhood.GetIndex();
     return m_DistanceTransform->GetPixel(idx);
   }
 };
@@ -242,9 +242,9 @@ itkParallelSparseFieldLevelSetImageFilterTest(int argc, char * argv[])
   auto im_init = ImageType::New();
   auto im_target = ImageType::New();
 
-  ImageType::RegionType r;
-  ImageType::SizeType   sz = { { PSFLSIFT::HEIGHT, PSFLSIFT::WIDTH, PSFLSIFT::DEPTH } };
-  ImageType::IndexType  idx = { { 0, 0, 0 } };
+  ImageType::RegionType      r;
+  ImageType::SizeType const  sz = { { PSFLSIFT::HEIGHT, PSFLSIFT::WIDTH, PSFLSIFT::DEPTH } };
+  ImageType::IndexType const idx = { { 0, 0, 0 } };
   r.SetSize(sz);
   r.SetIndex(idx);
 
@@ -300,17 +300,17 @@ itkParallelSparseFieldLevelSetImageFilterTest(int argc, char * argv[])
     itr.Value() = itr.Value() / std::sqrt((5.0f + itk::Math::sqr(itr.Value())));
   }
 
-  PSFLSIFT::MorphFilter::Pointer mf = PSFLSIFT::MorphFilter::New();
+  PSFLSIFT::MorphFilter::Pointer const mf = PSFLSIFT::MorphFilter::New();
   mf->SetDistanceTransform(im_target);
   mf->SetIterations(n);
   mf->SetInput(im_init);
   mf->SetNumberOfWorkUnits(numberOfWorkUnits);
 
-  typename PSFLSIFT::MorphFilter::StatusType numberOfLayers = 3;
+  typename PSFLSIFT::MorphFilter::StatusType const numberOfLayers = 3;
   mf->SetNumberOfLayers(numberOfLayers);
   ITK_TEST_SET_GET_VALUE(numberOfLayers, mf->GetNumberOfLayers());
 
-  typename PSFLSIFT::MorphFilter::ValueType isoSurfaceValue = 0.0;
+  typename PSFLSIFT::MorphFilter::ValueType const isoSurfaceValue = 0.0;
   mf->SetIsoSurfaceValue(isoSurfaceValue);
   ITK_TEST_SET_GET_VALUE(isoSurfaceValue, mf->GetIsoSurfaceValue());
 

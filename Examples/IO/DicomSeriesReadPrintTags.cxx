@@ -119,7 +119,7 @@ main(int argc, char * argv[])
 
   // Software Guide : BeginCodeSnippet
   using FileNamesContainer = std::vector<std::string>;
-  FileNamesContainer fileNames = nameGenerator->GetInputFileNames();
+  FileNamesContainer const fileNames = nameGenerator->GetInputFileNames();
 
   reader->SetFileNames(fileNames);
   // Software Guide : EndCodeSnippet
@@ -212,15 +212,15 @@ main(int argc, char * argv[])
   // Software Guide : BeginCodeSnippet
   while (itr != end)
   {
-    itk::MetaDataObjectBase::Pointer entry = itr->second;
+    itk::MetaDataObjectBase::Pointer const entry = itr->second;
 
-    MetaDataStringType::Pointer entryvalue =
+    MetaDataStringType::Pointer const entryvalue =
       dynamic_cast<MetaDataStringType *>(entry.GetPointer());
 
     if (entryvalue)
     {
-      std::string tagkey = itr->first;
-      std::string tagvalue = entryvalue->GetMetaDataObjectValue();
+      std::string const tagkey = itr->first;
+      std::string const tagvalue = entryvalue->GetMetaDataObjectValue();
       std::cout << tagkey << " = " << tagvalue << std::endl;
     }
 
@@ -238,7 +238,7 @@ main(int argc, char * argv[])
   //  Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  std::string entryId = "0010|0010";
+  std::string const entryId = "0010|0010";
 
   auto tagItr = dictionary.Find(entryId);
 
@@ -260,12 +260,12 @@ main(int argc, char * argv[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  MetaDataStringType::ConstPointer entryvalue =
+  MetaDataStringType::ConstPointer const entryvalue =
     dynamic_cast<const MetaDataStringType *>(tagItr->second.GetPointer());
 
   if (entryvalue)
   {
-    std::string tagvalue = entryvalue->GetMetaDataObjectValue();
+    std::string const tagvalue = entryvalue->GetMetaDataObjectValue();
     std::cout << "Patient's Name (" << entryId << ") ";
     std::cout << " is: " << tagvalue << std::endl;
   }

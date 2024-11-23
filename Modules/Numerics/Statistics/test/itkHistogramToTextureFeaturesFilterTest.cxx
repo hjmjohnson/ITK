@@ -137,23 +137,23 @@ itkHistogramToTextureFeaturesFilterTest(int, char *[])
     return EXIT_FAILURE;
   }
 
-  double trueEnergy = 0.295;
-  double trueEntropy = 2.26096;
-  double trueCorrelation = 0.12819;
-  double trueInverseDifferenceMoment = 0.85;
-  double trueInertia = 0.3;
-  double trueClusterShade = 139.1879;
-  double trueClusterProminence = 2732.557;
-  double trueHaralickCorrelation = 2264.549;
+  double const trueEnergy = 0.295;
+  double const trueEntropy = 2.26096;
+  double const trueCorrelation = 0.12819;
+  double const trueInverseDifferenceMoment = 0.85;
+  double const trueInertia = 0.3;
+  double const trueClusterShade = 139.1879;
+  double const trueClusterProminence = 2732.557;
+  double const trueHaralickCorrelation = 2264.549;
 
-  double energy = filter->GetEnergy();
-  double entropy = filter->GetEntropy();
-  double correlation = filter->GetCorrelation();
-  double inverseDifferenceMoment = filter->GetInverseDifferenceMoment();
-  double inertia = filter->GetInertia();
-  double clusterShade = filter->GetClusterShade();
-  double clusterProminence = filter->GetClusterProminence();
-  double haralickCorrelation = filter->GetHaralickCorrelation();
+  double const energy = filter->GetEnergy();
+  double const entropy = filter->GetEntropy();
+  double const correlation = filter->GetCorrelation();
+  double const inverseDifferenceMoment = filter->GetInverseDifferenceMoment();
+  double const inertia = filter->GetInertia();
+  double const clusterShade = filter->GetClusterShade();
+  double const clusterProminence = filter->GetClusterProminence();
+  double const haralickCorrelation = filter->GetHaralickCorrelation();
 
 
   if (itk::Math::abs(energy - trueEnergy) > 0.001)
@@ -217,25 +217,28 @@ itkHistogramToTextureFeaturesFilterTest(int, char *[])
   }
 
   // Get the texture features using GetFeature() method
-  double energy2 = filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Energy);
+  double const energy2 =
+    filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Energy);
 
-  double entropy2 = filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Entropy);
+  double const entropy2 =
+    filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Entropy);
 
-  double correlation2 =
+  double const correlation2 =
     filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Correlation);
 
-  double inverseDifferenceMoment2 =
+  double const inverseDifferenceMoment2 =
     filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::InverseDifferenceMoment);
 
-  double inertia2 = filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Inertia);
+  double const inertia2 =
+    filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Inertia);
 
-  double clusterShade2 =
+  double const clusterShade2 =
     filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::ClusterShade);
 
-  double clusterProminence2 =
+  double const clusterProminence2 =
     filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::ClusterProminence);
 
-  double haralickCorrelation2 =
+  double const haralickCorrelation2 =
     filter->GetFeature(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::HaralickCorrelation);
 
   if (itk::Math::abs(energy2 - trueEnergy) > 0.001)

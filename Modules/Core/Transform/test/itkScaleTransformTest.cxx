@@ -234,7 +234,7 @@ itkScaleTransformTest(int, char *[])
 
       scaleTransform->SetCenter(center);
 
-      CenterType c2 = scaleTransform->GetCenter();
+      CenterType const c2 = scaleTransform->GetCenter();
       if (c2.EuclideanDistanceTo(center) > 1e-5)
       {
         std::cerr << "Error in Set/Get center." << std::endl;

@@ -41,10 +41,10 @@ MomentsThresholdCalculator<THistogram, TOutput>::GenerateData()
     this->GetOutput()->Set(static_cast<OutputType>(histogram->GetMeasurement(0, 0)));
   }
 
-  unsigned int size = histogram->GetSize(0);
+  unsigned int const size = histogram->GetSize(0);
 
-  double                                     total = histogram->GetTotalFrequency();
-  double                                     m0 = 1.0;
+  double const                               total = histogram->GetTotalFrequency();
+  double const                               m0 = 1.0;
   double                                     m1 = 0.0;
   double                                     m2 = 0.0;
   double                                     m3 = 0.0;
@@ -66,7 +66,7 @@ MomentsThresholdCalculator<THistogram, TOutput>::GenerateData()
   // Calculate the first, second, and third order moments
   for (unsigned int i = 0; i < size; ++i)
   {
-    double m = histogram->GetMeasurement(i, 0);
+    double const m = histogram->GetMeasurement(i, 0);
     m1 += m * histo[i];
     m2 += m * m * histo[i];
     m3 += m * m * m * histo[i];

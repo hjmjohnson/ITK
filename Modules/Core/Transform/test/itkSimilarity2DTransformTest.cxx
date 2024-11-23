@@ -87,7 +87,7 @@ itkSimilarity2DTransformTest(int, char *[])
   auto transform1 = SimilarityTransformType::New();
   auto transform2 = SimilarityTransformType::New();
   transform1->SetIdentity();
-  double angle1 = .125;
+  double const angle1 = .125;
   transform1->SetAngle(angle1);
   transform2->SetMatrix(transform1->GetMatrix());
   std::cout << "Testing SetAngle(" << angle1 << ")/GetAngle():";
@@ -196,7 +196,7 @@ itkSimilarity2DTransformTest(int, char *[])
   transform->SetAngle(0);
 
   SimilarityTransformType::OffsetType::ValueType ioffsetInit[2] = { 1, 4 };
-  SimilarityTransformType::OffsetType            ioffset = ioffsetInit;
+  SimilarityTransformType::OffsetType const      ioffset = ioffsetInit;
 
   transform->SetOffset(ioffset);
 
@@ -327,7 +327,7 @@ itkSimilarity2DTransformTest(int, char *[])
     parameters[2] = 12.0;
     parameters[3] = -8.9;
     t1->SetParameters(parameters);
-    bool computedInverse = t1->GetInverse(t2);
+    bool const computedInverse = t1->GetInverse(t2);
     if (computedInverse)
     {
       std::cout << "Did not report singular matrix when computed inverse of singular matrix" << std::endl;
@@ -406,8 +406,8 @@ itkSimilarity2DTransformTest(int, char *[])
       minusPoint = t4->TransformPoint(p1);
       for (unsigned int j = 0; j < 2; ++j)
       {
-        double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
-        double computedDerivative = jacobian[j][k];
+        double const approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
+        double const computedDerivative = jacobian[j][k];
         approxJacobian[j][k] = approxDerivative;
         if (itk::Math::abs(approxDerivative - computedDerivative) > 1e-4)
         {
@@ -567,8 +567,8 @@ itkSimilarity2DTransformTest(int, char *[])
       minusPoint = t4->TransformPoint(p1);
       for (unsigned int j = 0; j < 2; ++j)
       {
-        double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
-        double computedDerivative = jacobian[j][k];
+        double const approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
+        double const computedDerivative = jacobian[j][k];
         approxJacobian[j][k] = approxDerivative;
         if (itk::Math::abs(approxDerivative - computedDerivative) > 1e-4)
         {

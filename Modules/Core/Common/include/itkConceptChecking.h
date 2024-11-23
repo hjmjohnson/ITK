@@ -152,7 +152,7 @@ template <typename T>
 void
 RequireBooleanExpression(const T & t)
 {
-  bool x = t;
+  bool const x = t;
 
   IgnoreUnusedVariable(x);
 }
@@ -648,7 +648,7 @@ struct Signed
     void
     constraints()
     {
-      SignedT a = TrueT();
+      SignedT const a = TrueT();
 
       Detail::IgnoreUnusedVariable(a);
     }
@@ -666,7 +666,7 @@ struct SameType
     void
     constraints()
     {
-      Detail::UniqueType<T1> a = Detail::UniqueType<T2>();
+      Detail::UniqueType<T1> const a = Detail::UniqueType<T2>();
       Detail::IgnoreUnusedVariable(a);
     }
   };
@@ -684,7 +684,7 @@ struct SameDimension
     void
     constraints()
     {
-      DT1 a = DT2();
+      DT1 const a = DT2();
 
       Detail::IgnoreUnusedVariable(a);
     }
@@ -738,7 +738,7 @@ struct HasPixelTraits
     constraints()
     {
       Detail::UniqueType<typename PixelTraits<T>::ValueType>();
-      unsigned int a = PixelTraits<T>::Dimension;
+      unsigned int const a = PixelTraits<T>::Dimension;
       Detail::IgnoreUnusedVariable(a);
     }
   };
@@ -814,7 +814,7 @@ struct SameDimensionOrMinusOne
     void
     constraints()
     {
-      Detail::UniqueType_unsigned_int<D2> tt;
+      Detail::UniqueType_unsigned_int<D2> const tt;
       this->f(tt);
     }
   };
@@ -862,7 +862,7 @@ struct IsInteger
     void
     constraints()
     {
-      IntegralT a = TrueT();
+      IntegralT const a = TrueT();
 
       Detail::IgnoreUnusedVariable(a);
     }
@@ -885,7 +885,7 @@ struct IsUnsignedInteger
     void
     constraints()
     {
-      UnsignedT a = TrueT();
+      UnsignedT const a = TrueT();
 
       Detail::IgnoreUnusedVariable(a);
     }
@@ -932,8 +932,8 @@ struct IsFloatingPoint
     void
     constraints()
     {
-      IntegralT a = FalseT();
-      ExactT    b = FalseT();
+      IntegralT const a = FalseT();
+      ExactT const    b = FalseT();
 
       Detail::IgnoreUnusedVariable(a);
       Detail::IgnoreUnusedVariable(b);

@@ -59,7 +59,7 @@ itkShotNoiseImageFilterTest(int argc, char * argv[])
 
   shotNoiseImageFilter->SetInput(reader->GetOutput());
 
-  itk::SimpleFilterWatcher watcher(shotNoiseImageFilter, "ShotNoiseImageFilter");
+  itk::SimpleFilterWatcher const watcher(shotNoiseImageFilter, "ShotNoiseImageFilter");
 
   using WriterType = itk::ImageFileWriter<ImageType>;
   auto writer = WriterType::New();

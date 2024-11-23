@@ -95,8 +95,8 @@ template <typename TPoint>
 double
 SimpleSignedDistance(const TPoint & p)
 {
-  auto   center = itk::MakeFilled<TPoint>(32);
-  double radius = 19.5;
+  auto         center = itk::MakeFilled<TPoint>(32);
+  double const radius = 19.5;
 
   double accum = 0.0;
   for (unsigned int j = 0; j < TPoint::PointDimension; ++j)
@@ -125,9 +125,9 @@ itkNarrowBandImageFilterBaseTest(int argc, char * argv[])
   using WriterImageType = itk::Image<WriterPixelType, ImageDimension>;
   using PointType = itk::Point<double, ImageDimension>;
 
-  ImageType::SizeType   size = { { 64, 64 } };
-  ImageType::IndexType  index = { { 0, 0 } };
-  ImageType::RegionType region{ index, size };
+  ImageType::SizeType const   size = { { 64, 64 } };
+  ImageType::IndexType const  index = { { 0, 0 } };
+  ImageType::RegionType const region{ index, size };
 
   auto inputImage = ImageType::New();
   inputImage->SetRegions(region);

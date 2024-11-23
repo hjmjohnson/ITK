@@ -67,7 +67,7 @@ itkVersorRigid3DTransformTest(int, char *[])
 
     auto axis = itk::MakeFilled<VectorType>(1.5);
 
-    ValueType angle = 120.0 * std::atan(1.0) / 45.0;
+    ValueType const angle = 120.0 * std::atan(1.0) / 45.0;
 
     VersorType versor;
     versor.Set(axis, angle);
@@ -93,8 +93,8 @@ itkVersorRigid3DTransformTest(int, char *[])
 
   {
     std::cout << "Test initial rotation matrix " << std::endl;
-    auto       transform = TransformType::New();
-    MatrixType matrix = transform->GetMatrix();
+    auto             transform = TransformType::New();
+    MatrixType const matrix = transform->GetMatrix();
     std::cout << "Matrix = " << std::endl;
     std::cout << matrix << std::endl;
   }
@@ -137,7 +137,7 @@ itkVersorRigid3DTransformTest(int, char *[])
     {
       // Rotate an itk::Point
       TransformType::InputPointType::ValueType pInit[3] = { 1, 4, 9 };
-      TransformType::InputPointType            p = pInit;
+      TransformType::InputPointType const      p = pInit;
       TransformType::OutputPointType           q;
       q = versor.Transform(p);
 
@@ -167,7 +167,7 @@ itkVersorRigid3DTransformTest(int, char *[])
     {
       // Translate an itk::Vector
       TransformType::InputVectorType::ValueType pInit[3] = { 1, 4, 9 };
-      TransformType::InputVectorType            p = pInit;
+      TransformType::InputVectorType const      p = pInit;
       TransformType::OutputVectorType           q;
       q = versor.Transform(p);
 
@@ -197,7 +197,7 @@ itkVersorRigid3DTransformTest(int, char *[])
     {
       // Translate an itk::CovariantVector
       TransformType::InputCovariantVectorType::ValueType pInit[3] = { 1, 4, 9 };
-      TransformType::InputCovariantVectorType            p = pInit;
+      TransformType::InputCovariantVectorType const      p = pInit;
       TransformType::OutputCovariantVectorType           q;
       q = versor.Transform(p);
 
@@ -302,7 +302,7 @@ itkVersorRigid3DTransformTest(int, char *[])
 
     ParametersType parameters(np); // Number of parameters
 
-    VersorType versor;
+    VersorType const versor;
 
     parameters[0] = versor.GetX(); // Rotation axis * std::sin(t/2)
     parameters[1] = versor.GetY();
@@ -404,7 +404,7 @@ itkVersorRigid3DTransformTest(int, char *[])
 
     ParametersType parameters(np); // Number of parameters
 
-    VersorType versor;
+    VersorType const versor;
 
     parameters[0] = versor.GetX(); // Rotation axis * std::sin(t/2)
     parameters[1] = versor.GetY();
@@ -474,7 +474,7 @@ itkVersorRigid3DTransformTest(int, char *[])
     // attempt to set an orthogonal matrix
     matrix.GetVnlMatrix().set_identity();
 
-    double a = 1.0 / 180.0 * itk::Math::pi;
+    double const a = 1.0 / 180.0 * itk::Math::pi;
     matrix[0][0] = std::cos(a);
     matrix[0][1] = -1.0 * std::sin(a);
     matrix[1][0] = std::sin(a);

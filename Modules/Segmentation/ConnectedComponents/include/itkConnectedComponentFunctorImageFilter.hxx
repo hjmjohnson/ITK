@@ -41,8 +41,8 @@ ConnectedComponentFunctorImageFilter<TInputImage, TOutputImage, TFunctor, TMaskI
   OutputPixelType       maxLabel{};
   const OutputPixelType maxPossibleLabel = NumericTraits<OutputPixelType>::max();
 
-  typename TOutputImage::Pointer     output = this->GetOutput();
-  typename TInputImage::ConstPointer input = this->GetInput();
+  typename TOutputImage::Pointer const     output = this->GetOutput();
+  typename TInputImage::ConstPointer const input = this->GetInput();
 
   // Allocate the output and initialize to unlabeled
   this->AllocateOutputs();
@@ -88,7 +88,7 @@ ConnectedComponentFunctorImageFilter<TInputImage, TOutputImage, TFunctor, TMaskI
   {
     // activate all "previous" neighbors that are face+edge+vertex
     // connected to the current pixel. do not include the center pixel
-    unsigned int centerIndex = onit.GetCenterNeighborhoodIndex();
+    unsigned int const centerIndex = onit.GetCenterNeighborhoodIndex();
     for (d = 0; d < centerIndex; ++d)
     {
       offset = onit.GetOffset(d);
@@ -109,7 +109,7 @@ ConnectedComponentFunctorImageFilter<TInputImage, TOutputImage, TFunctor, TMaskI
   ProgressReporter progress(this, 0, 2 * output->GetRequestedRegion().GetNumberOfPixels());
 
   // if the mask is set mark pixels not under the mask as background
-  typename TMaskImage::ConstPointer mask = this->GetMaskImage();
+  typename TMaskImage::ConstPointer const mask = this->GetMaskImage();
   if (mask)
   {
     ImageRegionConstIterator<MaskImageType> mit(mask, output->GetRequestedRegion());

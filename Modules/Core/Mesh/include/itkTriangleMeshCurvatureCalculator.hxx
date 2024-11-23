@@ -86,16 +86,16 @@ TriangleMeshCurvatureCalculator<TInputMesh>::ComputeGaussCurvature(const InputMe
 
   const unsigned int numberOfPoints = inputMesh->GetNumberOfPoints();
 
-  const auto K = make_unique_for_overwrite<double[]>(numberOfPoints);
-  const auto dA = std::make_unique<double[]>(numberOfPoints);
-  double     pi2 = itk::Math::twopi;
+  const auto   K = make_unique_for_overwrite<double[]>(numberOfPoints);
+  const auto   dA = std::make_unique<double[]>(numberOfPoints);
+  double const pi2 = itk::Math::twopi;
   for (unsigned int k = 0; k < numberOfPoints; ++k)
   {
     K[k] = pi2;
   }
 
-  CellsContainerConstPointer  outCells = inputMesh->GetCells();
-  CellsContainerConstIterator cellsItr = outCells->Begin();
+  CellsContainerConstPointer const outCells = inputMesh->GetCells();
+  CellsContainerConstIterator      cellsItr = outCells->Begin();
 
   while (cellsItr != outCells->End())
   {

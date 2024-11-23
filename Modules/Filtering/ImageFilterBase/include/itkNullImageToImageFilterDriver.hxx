@@ -165,18 +165,18 @@ NullImageToImageFilterDriver<TInputImage, TOutputImage>::Execute()
   //            << m_Filter->GetOutput() << std::endl;
 
   using ImageFilterType = ImageToImageFilter<TInputImage, TOutputImage>;
-  typename ImageFilterType::Pointer sourceBefore =
+  typename ImageFilterType::Pointer const sourceBefore =
     dynamic_cast<ImageFilterType *>(m_Filter->GetOutput()->GetSource().GetPointer());
 
   // Execute the filter
-  clock_t start = ::clock();
+  clock_t const start = ::clock();
   m_Filter->UpdateLargestPossibleRegion();
-  clock_t stop = ::clock();
+  clock_t const stop = ::clock();
 
   // print out the output object so we can see it modified times and regions
   std::cout << "Output object after filter execution" << std::endl << m_Filter->GetOutput() << std::endl;
 
-  typename ImageFilterType::Pointer sourceAfter =
+  typename ImageFilterType::Pointer const sourceAfter =
     dynamic_cast<ImageFilterType *>(m_Filter->GetOutput()->GetSource().GetPointer());
 
   std::cout << sourceBefore.GetPointer() << ", " << sourceAfter.GetPointer() << std::endl;

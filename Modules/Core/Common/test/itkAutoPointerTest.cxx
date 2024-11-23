@@ -83,7 +83,7 @@ itkAutoPointerTest(int, char *[])
   cptr1.TakeOwnership(new TestObject);
 
 
-  TestObject::ConstAutoPointer cptr2(cptr1);
+  TestObject::ConstAutoPointer const cptr2(cptr1);
 
 
   return EXIT_SUCCESS;

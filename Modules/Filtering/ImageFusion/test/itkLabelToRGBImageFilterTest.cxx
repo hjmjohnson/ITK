@@ -60,7 +60,7 @@ itkLabelToRGBImageFilterTest(int argc, char * argv[])
   filter->SetBackgroundValue(backgroundValue);
   ITK_TEST_SET_GET_VALUE(backgroundValue, filter->GetBackgroundValue());
 
-  typename FilterType::OutputPixelType backgroundColor{};
+  typename FilterType::OutputPixelType const backgroundColor{};
   filter->SetBackgroundColor(backgroundColor);
   ITK_TEST_SET_GET_VALUE(backgroundColor, filter->GetBackgroundColor());
 
@@ -72,7 +72,7 @@ itkLabelToRGBImageFilterTest(int argc, char * argv[])
   filter->SetBackgroundValue(backgroundValue);
 
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   // Instantiate output image
   using WriterType = itk::ImageFileWriter<ColorImageType>;
@@ -85,10 +85,10 @@ itkLabelToRGBImageFilterTest(int argc, char * argv[])
 
 
   // exercise the methods to change the colors
-  unsigned int numberOfColors1 = filter->GetNumberOfColors();
+  unsigned int const numberOfColors1 = filter->GetNumberOfColors();
   filter->AddColor(1, 255, 255);
 
-  unsigned int numberOfColors2 = filter->GetNumberOfColors();
+  unsigned int const numberOfColors2 = filter->GetNumberOfColors();
 
   if (numberOfColors2 != numberOfColors1 + 1)
   {
@@ -99,7 +99,7 @@ itkLabelToRGBImageFilterTest(int argc, char * argv[])
   filter->ResetColors();
   filter->AddColor(255, 255, 255);
 
-  unsigned int numberOfColors3 = filter->GetNumberOfColors();
+  unsigned int const numberOfColors3 = filter->GetNumberOfColors();
 
   if (numberOfColors3 != 1)
   {

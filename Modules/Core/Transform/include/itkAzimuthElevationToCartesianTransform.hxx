@@ -75,15 +75,15 @@ auto
 AzimuthElevationToCartesianTransform<TParametersValueType, VDimension>::TransformAzElToCartesian(
   const InputPointType & point) const -> OutputPointType
 {
-  OutputPointType result;
-  ScalarType      Azimuth =
+  OutputPointType  result;
+  ScalarType const Azimuth =
     ((2 * itk::Math::pi) / 360) * (point[0] * m_AzimuthAngularSeparation - ((m_MaxAzimuth - 1) / 2.0));
-  ScalarType Elevation =
+  ScalarType const Elevation =
     ((2 * itk::Math::pi) / 360) * (point[1] * m_ElevationAngularSeparation - ((m_MaxElevation - 1) / 2.0));
-  ScalarType r = (m_FirstSampleDistance + point[2]) * m_RadiusSampleSize;
+  ScalarType const r = (m_FirstSampleDistance + point[2]) * m_RadiusSampleSize;
 
-  ScalarType cosOfAzimuth = std::cos(Azimuth);
-  ScalarType tanOfElevation = std::tan(Elevation);
+  ScalarType const cosOfAzimuth = std::cos(Azimuth);
+  ScalarType const tanOfElevation = std::tan(Elevation);
 
   result[2] = (r * cosOfAzimuth) / std::sqrt((1 + cosOfAzimuth * cosOfAzimuth * tanOfElevation * tanOfElevation));
   result[0] = result[2] * std::tan(Azimuth);

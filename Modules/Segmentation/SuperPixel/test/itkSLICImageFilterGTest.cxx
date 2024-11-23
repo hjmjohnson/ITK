@@ -92,9 +92,9 @@ TEST_F(SLICFixture, SetGet)
 
   auto filter = Utils::FilterType::New();
 
-  typename Utils::FilterType::ConstPointer constfilter = (const Utils::FilterType *)(filter.GetPointer());
+  typename Utils::FilterType::ConstPointer const constfilter = (const Utils::FilterType *)(filter.GetPointer());
 
-  Utils::FilterType::SuperGridSizeType gridSize3(3);
+  Utils::FilterType::SuperGridSizeType const gridSize3(3);
   EXPECT_NO_THROW(filter->SetSuperGridSize(gridSize3));
   ITK_EXPECT_VECTOR_NEAR(gridSize3, filter->GetSuperGridSize(), 0);
 

@@ -22,7 +22,7 @@
 int
 itkDirectoryTest(int argc, char * argv[])
 {
-  itk::Directory::Pointer directory = itk::Directory::New();
+  itk::Directory::Pointer const directory = itk::Directory::New();
 
   if (argc < 2)
   {

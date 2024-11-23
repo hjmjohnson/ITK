@@ -504,7 +504,7 @@ template <typename TBuffer>
 void
 ConvertRASToFromLPS_CXYZT(TBuffer * buffer, size_t size)
 {
-  size_t numberOfVectors = size / 3;
+  size_t const numberOfVectors = size / 3;
   for (size_t i = 0; i < numberOfVectors; ++i)
   {
     buffer[0] *= -1;
@@ -521,7 +521,7 @@ ConvertRASToFromLPS_XYZTC(TBuffer * buffer, size_t size)
 {
   // Flip the sign of the first two components (L<->R, P<->A)
   // and keep the third component (S) unchanged.
-  size_t numberOfComponents = size / 3 * 2;
+  size_t const numberOfComponents = size / 3 * 2;
   for (size_t i = 0; i < numberOfComponents; ++i)
   {
     buffer[i] *= -1;
@@ -534,7 +534,7 @@ NiftiImageIO::Read(void * buffer)
 {
   void * data = nullptr;
 
-  ImageIORegion            regionToRead = this->GetIORegion();
+  ImageIORegion const      regionToRead = this->GetIORegion();
   ImageIORegion::SizeType  size = regionToRead.GetSize();
   ImageIORegion::IndexType start = regionToRead.GetIndex();
 
@@ -1339,8 +1339,8 @@ NiftiImageIO::ReadImageInformation()
       break;
   }
   // see http://www.grahamwideman.com/gw/brain/analyze/formatdoc.htm
-  bool ignore_negative_pixdim = this->m_NiftiImage->nifti_type == 0 &&
-                                this->GetLegacyAnalyze75Mode() == NiftiImageIOEnums::Analyze75Flavor::AnalyzeFSL;
+  bool const ignore_negative_pixdim = this->m_NiftiImage->nifti_type == 0 &&
+                                      this->GetLegacyAnalyze75Mode() == NiftiImageIOEnums::Analyze75Flavor::AnalyzeFSL;
 
   const int dims = this->GetNumberOfDimensions();
   switch (dims)
@@ -1564,7 +1564,7 @@ NiftiImageIO::WriteImageInformation()
   }
   const unsigned int numComponents = this->GetNumberOfComponents();
 
-  MetaDataDictionary & thisDic = this->GetMetaDataDictionary();
+  MetaDataDictionary const & thisDic = this->GetMetaDataDictionary();
 
   // TODO:  Also need to check for RGB images where numComponets=3
   if (numComponents > 1 && !(this->GetPixelType() == IOPixelEnum::COMPLEX && numComponents == 2) &&
@@ -1804,7 +1804,7 @@ Normalize(std::vector<double> & x)
 {
   double sum = 0.0;
 
-  for (double i : x)
+  for (double const i : x)
   {
     sum += (i * i);
   }
@@ -1963,8 +1963,8 @@ NiftiImageIO::SetImageIOOrientationFromNIfTI(unsigned short dims, double spacing
     // the 4x4 single precision sform fields, and that original representation
     // is converted (with lossy conversion) into the qform representation.
     const bool qform_sform_are_similar = [=]() -> bool {
-      vnl_matrix_fixed<float, 4, 4> sto_xyz{ &(this->m_NiftiImage->sto_xyz.m[0][0]) };
-      vnl_matrix_fixed<float, 4, 4> qto_xyz{ &(this->m_NiftiImage->qto_xyz.m[0][0]) };
+      vnl_matrix_fixed<float, 4, 4> const sto_xyz{ &(this->m_NiftiImage->sto_xyz.m[0][0]) };
+      vnl_matrix_fixed<float, 4, 4> const qto_xyz{ &(this->m_NiftiImage->qto_xyz.m[0][0]) };
 
       // First check rotation matrix components to ensure that they are similar;
       const auto srotation_scale = sto_xyz.extract(3, 3, 0, 0);
@@ -2365,7 +2365,7 @@ NiftiImageIO::SetNIfTIOrientationFromImageIO(unsigned short origdims, unsigned s
   this->m_NiftiImage->sto_xyz = matrix;
   //
   //
-  unsigned int sto_limit = origdims > 3 ? 3 : origdims;
+  unsigned int const sto_limit = origdims > 3 ? 3 : origdims;
   for (unsigned int ii = 0; ii < sto_limit; ++ii)
   {
     for (unsigned int jj = 0; jj < sto_limit; ++jj)

@@ -33,7 +33,7 @@ void
 OrthogonalSwath2DPathFilter<TParametricPath, TSwathMeritImage>::GenerateData()
 {
   // Get a convenience pointer
-  ImageConstPointer swathMeritImage = this->GetImageInput();
+  ImageConstPointer const swathMeritImage = this->GetImageInput();
 
   // Re-initialize the member variables
   m_SwathSize = swathMeritImage->GetLargestPossibleRegion().GetSize();
@@ -108,7 +108,7 @@ OrthogonalSwath2DPathFilter<TParametricPath, TSwathMeritImage>::GenerateData()
     {
       for (L = 0; L < m_SwathSize[1]; ++L)
       {
-        int bestL = FindAndStoreBestErrorStep(x, F, L);
+        int const bestL = FindAndStoreBestErrorStep(x, F, L);
         index[0] = x + 1;
         index[1] = L;
         MeritValue(F, L, x + 1) = MeritValue(F, bestL, x) + static_cast<double>(swathMeritImage->GetPixel(index));
@@ -159,7 +159,7 @@ OrthogonalSwath2DPathFilter<TParametricPath, TSwathMeritImage>::GenerateData()
   }
 
   // setup the output path
-  OutputPathPointer outputPtr = this->GetOutput(0);
+  OutputPathPointer const outputPtr = this->GetOutput(0);
   outputPtr->SetOriginalPath(this->GetPathInput());
   outputPtr->SetOrthogonalCorrectionTable(m_FinalOffsetValues);
 }

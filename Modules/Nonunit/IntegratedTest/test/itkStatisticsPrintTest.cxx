@@ -137,7 +137,7 @@ itkStatisticsPrintTest(int, char *[])
   std::cout << "----------ImageToListSampleAdaptor ";
   std::cout << ImageToListSampleAdaptorObj;
 
-  JointDomainImageToListSampleAdaptorType::Pointer JointDomainImageToListSampleAdaptorObj =
+  JointDomainImageToListSampleAdaptorType::Pointer const JointDomainImageToListSampleAdaptorObj =
     JointDomainImageToListSampleAdaptorType::New();
   std::cout << "----------JointDomainImageToListSampleAdaptor ";
   std::cout << JointDomainImageToListSampleAdaptorObj;
@@ -146,29 +146,29 @@ itkStatisticsPrintTest(int, char *[])
   std::cout << "----------PointSetToListSampleAdaptor ";
   std::cout << PointSetToListSampleAdaptorObj;
 
-  ScalarImageToCooccurrenceMatrixFilterType::Pointer ScalarImageToCooccurrenceMatrixFilterObj =
+  ScalarImageToCooccurrenceMatrixFilterType::Pointer const ScalarImageToCooccurrenceMatrixFilterObj =
     ScalarImageToCooccurrenceMatrixFilterType::New();
   std::cout << "----------ScalarImageToCooccurrenceMatrixFilter ";
   std::cout << ScalarImageToCooccurrenceMatrixFilterObj;
 
-  ScalarImageToCooccurrenceListSampleFilterType::Pointer ScalarImageToCooccurrenceListSampleFilterObj =
+  ScalarImageToCooccurrenceListSampleFilterType::Pointer const ScalarImageToCooccurrenceListSampleFilterObj =
     ScalarImageToCooccurrenceListSampleFilterType::New();
   std::cout << "----------ScalarImageToCooccurrenceListSampleFilter ";
   std::cout << ScalarImageToCooccurrenceListSampleFilterObj;
 
-  ScalarImageToTextureFeaturesFilterType::Pointer ScalarImageToTextureFeaturesFilterObj =
+  ScalarImageToTextureFeaturesFilterType::Pointer const ScalarImageToTextureFeaturesFilterObj =
     ScalarImageToTextureFeaturesFilterType::New();
   std::cout << "----------ScalarImageToTextureFeaturesFilter ";
   std::cout << ScalarImageToTextureFeaturesFilterObj;
 
-  HistogramToTextureFeaturesFilterType::Pointer HistogramToTextureFeaturesFilterObj =
+  HistogramToTextureFeaturesFilterType::Pointer const HistogramToTextureFeaturesFilterObj =
     HistogramToTextureFeaturesFilterType::New();
   std::cout << "----------HistogramToTextureFeaturesFilter " << HistogramToTextureFeaturesFilterObj;
 
   auto MembershipSampleObj = MembershipSampleType::New();
   std::cout << "----------MembershipSample " << MembershipSampleObj;
 
-  DistanceToCentroidMembershipFunctionType::Pointer DistanceToCentroidMembershipFunctionObj =
+  DistanceToCentroidMembershipFunctionType::Pointer const DistanceToCentroidMembershipFunctionObj =
     DistanceToCentroidMembershipFunctionType::New();
   std::cout << "----------DistanceToCentroidMembershipFunction " << DistanceToCentroidMembershipFunctionObj;
 
@@ -181,7 +181,7 @@ itkStatisticsPrintTest(int, char *[])
   auto covarianceFilterObj = CovarianceSampleFilterType::New();
   std::cout << "----------Covariance filter " << covarianceFilterObj;
 
-  WeightedCovarianceSampleFilterType::Pointer weighedCovarianceSampleFilterObj =
+  WeightedCovarianceSampleFilterType::Pointer const weighedCovarianceSampleFilterObj =
     WeightedCovarianceSampleFilterType::New();
   std::cout << "----------WeightedCovariance filter " << weighedCovarianceSampleFilterObj;
 

@@ -124,8 +124,8 @@ main()
   using TreeType = TreeGeneratorType::KdTreeType;
   using NodeType = TreeType::KdTreeNodeType;
 
-  TreeType::Pointer tree = treeGenerator->GetOutput();
-  TreeType::Pointer centroidTree = centroidTreeGenerator->GetOutput();
+  TreeType::Pointer const tree = treeGenerator->GetOutput();
+  TreeType::Pointer const centroidTree = centroidTreeGenerator->GetOutput();
 
   NodeType * root = tree->GetRoot();
 
@@ -212,7 +212,7 @@ main()
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  unsigned int                           numberOfNeighbors = 3;
+  unsigned int const                     numberOfNeighbors = 3;
   TreeType::InstanceIdentifierVectorType neighbors;
   tree->Search(queryPoint, numberOfNeighbors, neighbors);
 
@@ -308,7 +308,7 @@ main()
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  double radius = 437.0;
+  double const radius = 437.0;
 
   tree->Search(queryPoint, radius, neighbors);
 

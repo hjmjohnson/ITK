@@ -122,10 +122,10 @@ public:
 
     m_Transform->SetParameters(p);
 
-    PointType P2 = m_Transform->TransformPoint(m_P1);
-    PointType Q2 = m_Transform->TransformPoint(m_Q1);
+    PointType const P2 = m_Transform->TransformPoint(m_P1);
+    PointType const Q2 = m_Transform->TransformPoint(m_Q1);
 
-    MeasureType measure = P2.SquaredEuclideanDistanceTo(m_P) + Q2.SquaredEuclideanDistanceTo(m_Q);
+    MeasureType const measure = P2.SquaredEuclideanDistanceTo(m_P) + Q2.SquaredEuclideanDistanceTo(m_Q);
 
     return measure;
   }
@@ -155,9 +155,9 @@ public:
     versorY.SetRotationAroundY(deltaAngle);
     versorZ.SetRotationAroundZ(deltaAngle);
 
-    VersorType plusdDeltaX = currentVersor * versorX;
-    VersorType plusdDeltaY = currentVersor * versorY;
-    VersorType plusdDeltaZ = currentVersor * versorZ;
+    VersorType const plusdDeltaX = currentVersor * versorX;
+    VersorType const plusdDeltaY = currentVersor * versorY;
+    VersorType const plusdDeltaZ = currentVersor * versorZ;
 
     ParametersType parametersPlustDeltaVX = parameters;
     ParametersType parametersPlustDeltaVY = parameters;
@@ -250,7 +250,7 @@ itkVersorRigid3DTransformOptimizerTest(int, char *[])
   axis[1] = 0.0f;
   axis[2] = 0.0f;
 
-  VersorType::ValueType angle = 0.0f;
+  VersorType::ValueType const angle = 0.0f;
 
   VersorType initialRotation;
   initialRotation.Set(axis, angle);
@@ -349,7 +349,7 @@ itkVersorRigid3DTransformOptimizerTest(int, char *[])
   std::cout << "Final parameters = " << finalPosition << std::endl;
   std::cout << "True Parameters  = " << trueParameters << std::endl;
 
-  VersorType                  ratio = finalRotation * trueRotation.GetReciprocal();
+  VersorType const            ratio = finalRotation * trueRotation.GetReciprocal();
   const VersorType::ValueType cosHalfAngle = ratio.GetW();
   const VersorType::ValueType cosHalfAngleSquare = cosHalfAngle * cosHalfAngle;
   if (cosHalfAngleSquare < 0.95)

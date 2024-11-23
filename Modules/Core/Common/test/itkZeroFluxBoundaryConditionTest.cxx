@@ -76,9 +76,9 @@ TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
 
       // Access the pixel value through three different methods in the
       // boundary condition.
-      int pixel1 = p.GetBoundaryCondition()->GetPixel(index, p.GetImagePointer());
-      int pixel2 = p.GetPixel(i);
-      int pixel3 = v.GetPixel(i)[0];
+      int const pixel1 = p.GetBoundaryCondition()->GetPixel(index, p.GetImagePointer());
+      int const pixel2 = p.GetPixel(i);
+      int const pixel3 = v.GetPixel(i)[0];
 
       std::cout << pixel1 << ' ';
 
@@ -124,10 +124,10 @@ int
 itkZeroFluxBoundaryConditionTest(int, char *[])
 {
   // Test an image to cover one operator() method.
-  auto       image = ImageType::New();
-  RegionType imageRegion;
-  SizeType   imageSize = { { 5, 5 } };
-  IndexType  imageIndex = { { 0, 0 } };
+  auto            image = ImageType::New();
+  RegionType      imageRegion;
+  SizeType const  imageSize = { { 5, 5 } };
+  IndexType const imageIndex = { { 0, 0 } };
   imageRegion.SetSize(imageSize);
   imageRegion.SetIndex(imageIndex);
   image->SetRegions(imageRegion);
@@ -172,7 +172,7 @@ itkZeroFluxBoundaryConditionTest(int, char *[])
   for (it.GoToBegin(), vit.GoToBegin(); !it.IsAtEnd(); ++it, ++vit)
   {
     std::cout << "Index: " << it.GetIndex() << std::endl;
-    bool success = TestPrintNeighborhood(it, vit);
+    bool const success = TestPrintNeighborhood(it, vit);
     if (!success)
     {
       return EXIT_FAILURE;
@@ -193,7 +193,7 @@ itkZeroFluxBoundaryConditionTest(int, char *[])
   for (it2.GoToBegin(), vit2.GoToBegin(); !it2.IsAtEnd(); ++it2, ++vit2)
   {
     std::cout << "Index: " << it2.GetIndex() << std::endl;
-    bool success = TestPrintNeighborhood(it2, vit2);
+    bool const success = TestPrintNeighborhood(it2, vit2);
     if (!success)
     {
       return EXIT_FAILURE;

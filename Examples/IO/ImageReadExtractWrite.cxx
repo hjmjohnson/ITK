@@ -175,7 +175,7 @@ main(int argc, char ** argv)
 
   // Software Guide : BeginCodeSnippet
   reader->UpdateOutputInformation();
-  InputImageType::RegionType inputRegion =
+  InputImageType::RegionType const inputRegion =
     reader->GetOutput()->GetLargestPossibleRegion();
   // Software Guide : EndCodeSnippet
 

@@ -40,9 +40,9 @@ itkLevelSetDomainMapImageFilterTest(int, char *[])
   size[0] = 10;
   size[1] = 10;
 
-  InputImageType::RegionType region{ index, size };
+  InputImageType::RegionType const region{ index, size };
 
-  ListPixelType l;
+  ListPixelType const l;
 
   auto input = InputImageType::New();
   input->SetRegions(region);
@@ -67,7 +67,7 @@ itkLevelSetDomainMapImageFilterTest(int, char *[])
   filter->SetInput(input);
   filter->Update();
 
-  OutputImageType::Pointer output = filter->GetOutput();
+  OutputImageType::Pointer const output = filter->GetOutput();
 
   using OutputImageIteratorType = itk::ImageRegionConstIteratorWithIndex<OutputImageType>;
   OutputImageIteratorType it(output, output->GetLargestPossibleRegion());

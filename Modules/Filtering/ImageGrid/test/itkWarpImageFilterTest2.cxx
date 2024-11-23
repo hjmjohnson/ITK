@@ -44,22 +44,22 @@ ImageType::Pointer
 MakeCheckerboard()
 {
   using IteratorType = itk::ImageRegionIterator<ImageType>;
-  ImageType::SizeType    size = { { 16, 16, 16 } };
-  ImageType::SpacingType spacing;
+  ImageType::SizeType const size = { { 16, 16, 16 } };
+  ImageType::SpacingType    spacing;
   spacing[0] = spacing[1] = spacing[2] = 1.0;
-  ImageType::IndexType  index = { { 0, 0, 0 } };
-  ImageType::RegionType region{ index, size };
-  ImageType::Pointer    image;
+  ImageType::IndexType const  index = { { 0, 0, 0 } };
+  ImageType::RegionType const region{ index, size };
+  ImageType::Pointer          image;
   AllocateImageFromRegionAndSpacing(ImageType, image, region, spacing);
   image->FillBuffer(0.0);
   for (IteratorType it(image, image->GetLargestPossibleRegion()); !it.IsAtEnd(); ++it)
   {
     ImageType::IndexType ind(it.GetIndex());
     // initially checkboard 4 pixels wide
-    int  x = ind[0] / 4;
-    int  y = ind[1] / 4;
-    int  z = ind[2] / 4;
-    bool black(((x & 1) + (y & 1)) & 1);
+    int const x = ind[0] / 4;
+    int const y = ind[1] / 4;
+    int const z = ind[2] / 4;
+    bool      black(((x & 1) + (y & 1)) & 1);
     if (z & 1)
     {
       black = !black;
@@ -77,9 +77,9 @@ MakeDisplacementField()
   const DisplacementFieldType::SizeType size = { { TImageIndexSpaceSize, TImageIndexSpaceSize, TImageIndexSpaceSize } };
   DisplacementFieldType::SpacingType    spacing;
   spacing[0] = spacing[1] = spacing[2] = 16.0 / static_cast<double>(TImageIndexSpaceSize);
-  DisplacementFieldType::IndexType  index = { { 0, 0, 0 } };
-  DisplacementFieldType::RegionType region{ index, size };
-  DisplacementFieldType::Pointer    image;
+  DisplacementFieldType::IndexType const  index = { { 0, 0, 0 } };
+  DisplacementFieldType::RegionType const region{ index, size };
+  DisplacementFieldType::Pointer          image;
   AllocateImageFromRegionAndSpacing(DisplacementFieldType, image, region, spacing);
   for (IteratorType it(image, image->GetLargestPossibleRegion()); !it.IsAtEnd(); ++it)
   {
@@ -100,12 +100,12 @@ itkWarpImageFilterTest2(int, char *[])
 {
   // itk::MultiThreaderBase::SetGlobalDefaultNumberOfThreads(1);
   // Make test image
-  ImageType::Pointer image = MakeCheckerboard();
+  ImageType::Pointer const image = MakeCheckerboard();
 
   // Make full-res displacement field
-  DisplacementFieldType::Pointer defField1 = MakeDisplacementField<16u>();
+  DisplacementFieldType::Pointer const defField1 = MakeDisplacementField<16u>();
   // Make half-res displacement field
-  DisplacementFieldType::Pointer defField2 = MakeDisplacementField<8u>();
+  DisplacementFieldType::Pointer const defField2 = MakeDisplacementField<8u>();
 
   auto filter = WarpFilterType::New();
   // Test with full res
@@ -114,7 +114,7 @@ itkWarpImageFilterTest2(int, char *[])
   filter->SetOutputParametersFromImage(image);
   filter->Update();
   // Save output for later comparison
-  ImageType::Pointer result1 = filter->GetOutput();
+  ImageType::Pointer const result1 = filter->GetOutput();
   // Disconnect to create new output
   result1->DisconnectPipeline();
   // Test with half res
@@ -124,7 +124,7 @@ itkWarpImageFilterTest2(int, char *[])
   // Enforce re-execution just to be sure
   filter->Modified();
   filter->Update();
-  ImageType::Pointer                  result2 = filter->GetOutput();
+  ImageType::Pointer const            result2 = filter->GetOutput();
   itk::ImageRegionIterator<ImageType> it1(result1, result1->GetLargestPossibleRegion());
   itk::ImageRegionIterator<ImageType> it2(result2, result1->GetLargestPossibleRegion());
   for (it1.GoToBegin(), it2.GoToBegin(); !it1.IsAtEnd() && !it2.IsAtEnd(); ++it1, ++it2)

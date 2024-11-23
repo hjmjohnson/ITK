@@ -63,7 +63,7 @@ itkDynamicMeshTest(int, char *[])
   /**
    * Create the mesh through its object factory.
    */
-  MeshType::Pointer mesh(MeshType::New());
+  MeshType::Pointer const mesh(MeshType::New());
 
   PointType pointA;
   PointType pointB;
@@ -80,7 +80,7 @@ itkDynamicMeshTest(int, char *[])
   pointC = pointB + displacement;
   pointD = pointC + displacement;
 
-  PointsContainer::Pointer pointsContainter = mesh->GetPoints();
+  PointsContainer::Pointer const pointsContainter = mesh->GetPoints();
 
   pointsContainter->SetElement(0, pointA);
   pointsContainter->SetElement(1, pointB);
@@ -90,8 +90,8 @@ itkDynamicMeshTest(int, char *[])
 
   std::cout << "Number of Points = " << mesh->GetNumberOfPoints() << std::endl;
 
-  PointsIterator point = pointsContainter->Begin();
-  PointsIterator endpoint = pointsContainter->End();
+  PointsIterator       point = pointsContainter->Begin();
+  PointsIterator const endpoint = pointsContainter->End();
 
   while (point != endpoint)
   {

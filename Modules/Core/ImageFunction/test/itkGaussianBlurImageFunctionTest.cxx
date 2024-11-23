@@ -120,11 +120,11 @@ itkGaussianBlurImageFunctionTest(int, char *[])
   // Testing Set/GetMaximumKernelWidth()
   {
     std::cout << "Testing Set/GetMaximumKernelWidth(): ";
-    int setKernelWidth = 47;
+    int const setKernelWidth = 47;
 
     gaussianFunction->SetMaximumKernelWidth(setKernelWidth);
 
-    int readKernelWidth = gaussianFunction->GetMaximumKernelWidth();
+    int const readKernelWidth = gaussianFunction->GetMaximumKernelWidth();
 
     if (readKernelWidth != setKernelWidth)
     {

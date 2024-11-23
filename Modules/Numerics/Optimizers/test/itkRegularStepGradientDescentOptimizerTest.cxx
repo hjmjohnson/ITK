@@ -63,14 +63,14 @@ public:
   GetValue(const ParametersType & parameters) const override
   {
 
-    double x = parameters[0];
-    double y = parameters[1];
+    double const x = parameters[0];
+    double const y = parameters[1];
 
     std::cout << "GetValue( ";
     std::cout << x << ' ';
     std::cout << y << ") = ";
 
-    MeasureType measure = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - 2 * x + 8 * y;
+    MeasureType const measure = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - 2 * x + 8 * y;
 
     std::cout << measure << std::endl;
     return measure;
@@ -80,8 +80,8 @@ public:
   GetDerivative(const ParametersType & parameters, DerivativeType & derivative) const override
   {
 
-    double x = parameters[0];
-    double y = parameters[1];
+    double const x = parameters[0];
+    double const y = parameters[1];
 
     std::cout << "GetDerivative( ";
     std::cout << x << ' ';
@@ -157,7 +157,7 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
   itkOptimizer->SetMinimumStepLength(minimumStepLength);
   ITK_TEST_SET_GET_VALUE(minimumStepLength, itkOptimizer->GetMinimumStepLength());
 
-  itk::SizeValueType numberOfIterations = static_cast<itk::SizeValueType>(900);
+  itk::SizeValueType const numberOfIterations = static_cast<itk::SizeValueType>(900);
   itkOptimizer->SetNumberOfIterations(numberOfIterations);
   ITK_TEST_SET_GET_VALUE(numberOfIterations, itkOptimizer->GetNumberOfIterations());
 
@@ -173,8 +173,8 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
   std::cout << finalPosition[1] << ')' << std::endl;
 
   // Check results to see if it is within range
-  bool   pass = true;
-  double trueParameters[2] = { 2, -2 };
+  bool         pass = true;
+  double const trueParameters[2] = { 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
     if (itk::Math::abs(finalPosition[j] - trueParameters[j]) > 0.01)

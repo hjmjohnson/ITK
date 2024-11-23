@@ -49,11 +49,11 @@ itkUniformRandomSpatialNeighborSubsamplerTest(int argc, char * argv[])
   using SamplerType = itk::Statistics::UniformRandomSpatialNeighborSubsampler<AdaptorType, RegionType>;
   using WriterType = itk::ImageFileWriter<FloatImage>;
 
-  auto                          inImage = FloatImage::New();
-  typename SizeType::value_type regionSizeVal = 35;
-  auto                          sz = SizeType::Filled(regionSizeVal);
-  IndexType                     idx{};
-  RegionType                    region{ idx, sz };
+  auto                                inImage = FloatImage::New();
+  typename SizeType::value_type const regionSizeVal = 35;
+  auto                                sz = SizeType::Filled(regionSizeVal);
+  IndexType const                     idx{};
+  RegionType const                    region{ idx, sz };
 
   inImage->SetRegions(region);
   inImage->AllocateInitialized();
@@ -106,7 +106,7 @@ itkUniformRandomSpatialNeighborSubsamplerTest(int argc, char * argv[])
   ITK_TEST_SET_GET_BOOLEAN(samplerOrig, UseClockForSeed, useClockForSeed);
 
   // Test clone mechanism
-  SamplerType::Pointer sampler = samplerOrig->Clone().GetPointer();
+  SamplerType::Pointer const sampler = samplerOrig->Clone().GetPointer();
 
   ITK_TEST_SET_GET_VALUE(samplerOrig->GetSample(), sampler->GetSample());
   ITK_TEST_SET_GET_VALUE(samplerOrig->GetSampleRegion(), sampler->GetSampleRegion());

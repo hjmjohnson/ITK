@@ -45,11 +45,11 @@ itkExpectationMaximizationMixtureModelEstimatorTest(int argc, char * argv[])
   unsigned int i;
   unsigned int j;
   char *       dataFileName = argv[1];
-  int          dataSize = 2000;
-  int          maximumIteration = 200;
+  int const    dataSize = 2000;
+  int const    maximumIteration = 200;
   using ParametersType = itk::Array<double>;
-  double                      minStandardDeviation = 28.54746;
-  unsigned int                numberOfClasses = 2;
+  double const                minStandardDeviation = 28.54746;
+  unsigned int const          numberOfClasses = 2;
   std::vector<ParametersType> trueParameters(numberOfClasses);
   ParametersType              params(6);
   params[0] = 99.261;
@@ -95,8 +95,8 @@ itkExpectationMaximizationMixtureModelEstimatorTest(int argc, char * argv[])
   initialProportions[1] = 0.5;
 
   /* Loading point data */
-  auto                                 pointSet = PointSetType::New();
-  PointSetType::PointsContainerPointer pointsContainer = PointSetType::PointsContainer::New();
+  auto                                       pointSet = PointSetType::New();
+  PointSetType::PointsContainerPointer const pointsContainer = PointSetType::PointsContainer::New();
   pointsContainer->Reserve(dataSize);
   pointSet->SetPoints(pointsContainer);
 

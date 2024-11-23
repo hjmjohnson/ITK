@@ -78,7 +78,7 @@ ColorTableTestSpecialConditionChecker(typename itk::ColorTable<TComponent>::Poin
     return EXIT_FAILURE;
   }
 
-  RGBPixelType pixel = colors->GetColor(numberOfColors);
+  RGBPixelType const pixel = colors->GetColor(numberOfColors);
   if (pixel != zeroPixel)
   {
     std::cerr << "Test failed!" << std::endl;
@@ -87,7 +87,7 @@ ColorTableTestSpecialConditionChecker(typename itk::ColorTable<TComponent>::Poin
     return EXIT_FAILURE;
   }
 
-  bool tf = colors->SetColor(numberOfColors, 0, 0, 0, "NoMatterTheName");
+  bool const tf = colors->SetColor(numberOfColors, 0, 0, 0, "NoMatterTheName");
   if (tf != false)
   {
     std::cerr << "Test failed!" << std::endl;
@@ -96,7 +96,7 @@ ColorTableTestSpecialConditionChecker(typename itk::ColorTable<TComponent>::Poin
     return EXIT_FAILURE;
   }
 
-  std::string name = colors->GetColorName(numberOfColors);
+  std::string const name = colors->GetColorName(numberOfColors);
   if (!name.empty())
   {
     std::cerr << "Test failed!" << std::endl;

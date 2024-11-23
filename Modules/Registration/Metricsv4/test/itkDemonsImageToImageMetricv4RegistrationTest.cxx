@@ -177,7 +177,7 @@ itkDemonsImageToImageMetricv4RegistrationTest(int argc, char * argv[])
   std::cout << "fixedImage->GetLargestPossibleRegion(): " << fixedImage->GetLargestPossibleRegion() << std::endl;
   field->Allocate();
   // Fill it with 0's
-  DisplacementTransformType::OutputVectorType zeroVector{};
+  DisplacementTransformType::OutputVectorType const zeroVector{};
   field->FillBuffer(zeroVector);
   // Assign to transform
   displacementTransform->SetDisplacementField(field);
@@ -205,7 +205,7 @@ itkDemonsImageToImageMetricv4RegistrationTest(int argc, char * argv[])
   else
   {
     using PointType = PointSetType::PointType;
-    PointSetType::Pointer                             pset(PointSetType::New());
+    PointSetType::Pointer const                       pset(PointSetType::New());
     unsigned long                                     ind = 0;
     unsigned long                                     ct = 0;
     itk::ImageRegionIteratorWithIndex<FixedImageType> It(fixedImage, fixedImage->GetLargestPossibleRegion());
@@ -233,7 +233,7 @@ itkDemonsImageToImageMetricv4RegistrationTest(int argc, char * argv[])
 
   // scales & step estimator
   using RegistrationParameterScalesFromShiftType = itk::RegistrationParameterScalesFromPhysicalShift<MetricType>;
-  RegistrationParameterScalesFromShiftType::Pointer shiftScaleEstimator =
+  RegistrationParameterScalesFromShiftType::Pointer const shiftScaleEstimator =
     RegistrationParameterScalesFromShiftType::New();
   shiftScaleEstimator->SetMetric(metric);
 
@@ -286,12 +286,12 @@ itkDemonsImageToImageMetricv4RegistrationTest(int argc, char * argv[])
 
   // write out the displacement field
   using DisplacementWriterType = itk::ImageFileWriter<DisplacementFieldType>;
-  auto        displacementwriter = DisplacementWriterType::New();
-  std::string outfilename(argv[3]);
-  std::string ext = itksys::SystemTools::GetFilenameExtension(outfilename);
-  std::string name = itksys::SystemTools::GetFilenameWithoutExtension(outfilename);
-  std::string path = itksys::SystemTools::GetFilenamePath(outfilename);
-  std::string defout = path + std::string("/") + name + std::string("_def") + ext;
+  auto              displacementwriter = DisplacementWriterType::New();
+  std::string const outfilename(argv[3]);
+  std::string const ext = itksys::SystemTools::GetFilenameExtension(outfilename);
+  std::string const name = itksys::SystemTools::GetFilenameWithoutExtension(outfilename);
+  std::string const path = itksys::SystemTools::GetFilenamePath(outfilename);
+  std::string const defout = path + std::string("/") + name + std::string("_def") + ext;
   displacementwriter->SetFileName(defout.c_str());
   displacementwriter->SetInput(displacementTransform->GetDisplacementField());
   displacementwriter->Update();

@@ -46,7 +46,7 @@ MatchCardinalityImageToImageMetric<TFixedImage, TMovingImage>::GetNonconstValue(
 {
   itkDebugMacro("GetValue( " << parameters << " ) ");
 
-  FixedImageConstPointer fixedImage = this->m_FixedImage;
+  FixedImageConstPointer const fixedImage = this->m_FixedImage;
   if (!fixedImage)
   {
     itkExceptionMacro("Fixed image has not been assigned");
@@ -110,7 +110,7 @@ MatchCardinalityImageToImageMetric<TFixedImage, TMovingImage>::ThreadedGetValue(
   const FixedImageRegionType & regionForThread,
   ThreadIdType                 threadId)
 {
-  FixedImageConstPointer fixedImage = this->GetFixedImage();
+  FixedImageConstPointer const fixedImage = this->GetFixedImage();
 
   if (!fixedImage)
   {
@@ -137,7 +137,7 @@ MatchCardinalityImageToImageMetric<TFixedImage, TMovingImage>::ThreadedGetValue(
       continue;
     }
 
-    typename Superclass::OutputPointType transformedPoint = this->GetTransform()->TransformPoint(inputPoint);
+    typename Superclass::OutputPointType const transformedPoint = this->GetTransform()->TransformPoint(inputPoint);
 
     if (this->GetMovingImageMask() && !this->GetMovingImageMask()->IsInsideInWorldSpace(transformedPoint))
     {
@@ -202,9 +202,9 @@ MatchCardinalityImageToImageMetric<TFixedImage, TMovingImage>::SplitFixedRegion(
   }
 
   // determine the actual number of pieces that will be generated
-  typename FixedImageRegionType::SizeType::SizeValueType range = fixedRegionSize[splitAxis];
-  auto         valuesPerThread = Math::Ceil<int>(range / static_cast<double>(num));
-  ThreadIdType maxThreadIdUsed = Math::Ceil<int>(range / static_cast<double>(valuesPerThread)) - 1;
+  typename FixedImageRegionType::SizeType::SizeValueType const range = fixedRegionSize[splitAxis];
+  auto               valuesPerThread = Math::Ceil<int>(range / static_cast<double>(num));
+  ThreadIdType const maxThreadIdUsed = Math::Ceil<int>(range / static_cast<double>(valuesPerThread)) - 1;
 
   // Split the region
   if (i < maxThreadIdUsed)

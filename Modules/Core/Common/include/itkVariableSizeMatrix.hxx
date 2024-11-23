@@ -33,8 +33,8 @@ VariableSizeMatrix<T>::VariableSizeMatrix(unsigned int rows, unsigned int cols)
 template <typename T>
 Array<T> VariableSizeMatrix<T>::operator*(const Array<T> & vect) const
 {
-  unsigned int rows = this->Rows();
-  unsigned int cols = this->Cols();
+  unsigned int const rows = this->Rows();
+  unsigned int const cols = this->Cols();
 
   if (vect.Size() != cols)
   {

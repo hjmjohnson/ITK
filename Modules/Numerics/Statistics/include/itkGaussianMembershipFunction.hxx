@@ -110,10 +110,10 @@ GaussianMembershipFunction<TMeasurementVector>::SetCovariance(const CovarianceMa
   m_Covariance = cov;
 
   // the inverse of the covariance matrix is first computed by SVD
-  vnl_matrix_inverse<double> inv_cov(m_Covariance.GetVnlMatrix());
+  vnl_matrix_inverse<double> const inv_cov(m_Covariance.GetVnlMatrix());
 
   // the determinant is then costless this way
-  double det = inv_cov.determinant_magnitude();
+  double const det = inv_cov.determinant_magnitude();
 
   if (det < 0.)
   {
@@ -177,8 +177,8 @@ template <typename TVector>
 typename LightObject::Pointer
 GaussianMembershipFunction<TVector>::InternalClone() const
 {
-  LightObject::Pointer   loPtr = Superclass::InternalClone();
-  typename Self::Pointer membershipFunction = dynamic_cast<Self *>(loPtr.GetPointer());
+  LightObject::Pointer         loPtr = Superclass::InternalClone();
+  typename Self::Pointer const membershipFunction = dynamic_cast<Self *>(loPtr.GetPointer());
   if (membershipFunction.IsNull())
   {
     itkExceptionMacro("downcast to type " << this->GetNameOfClass() << " failed.");

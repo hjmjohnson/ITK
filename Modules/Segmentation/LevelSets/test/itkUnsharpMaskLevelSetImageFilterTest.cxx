@@ -68,9 +68,9 @@ itkUnsharpMaskLevelSetImageFilterTest(int, char *[])
 
   auto im_init = ImageType::New();
 
-  ImageType::RegionType r;
-  ImageType::SizeType   sz = { { HEIGHT, WIDTH } };
-  ImageType::IndexType  idx = { { 0, 0 } };
+  ImageType::RegionType      r;
+  ImageType::SizeType const  sz = { { HEIGHT, WIDTH } };
+  ImageType::IndexType const idx = { { 0, 0 } };
   r.SetSize(sz);
   r.SetIndex(idx);
 

@@ -54,8 +54,8 @@ ImageClassifierBase<TInputImage, TClassifiedImage>::Classify()
   }
 
   // Set the iterators and the pixel type definition for the input image
-  InputImageConstPointer  inputImage = this->GetInputImage();
-  InputImageConstIterator inIt(inputImage, inputImage->GetBufferedRegion());
+  InputImageConstPointer const inputImage = this->GetInputImage();
+  InputImageConstIterator      inIt(inputImage, inputImage->GetBufferedRegion());
 
   // Set the iterators and the pixel type definition for the classified image
   classifiedImage = this->GetClassifiedImage();
@@ -68,7 +68,7 @@ ImageClassifierBase<TInputImage, TClassifiedImage>::Classify()
 
   // Set up the storage containers to record the probability
   // measures for each class.
-  unsigned int numberOfClasses = this->GetNumberOfMembershipFunctions();
+  unsigned int const numberOfClasses = this->GetNumberOfMembershipFunctions();
 
   std::vector<double> discriminantScores;
   discriminantScores.resize(numberOfClasses);
@@ -76,8 +76,8 @@ ImageClassifierBase<TInputImage, TClassifiedImage>::Classify()
   unsigned int classIndex;
 
   // support progress methods/callbacks
-  SizeValueType totalPixels = inputImage->GetBufferedRegion().GetNumberOfPixels();
-  SizeValueType updateVisits = totalPixels / 10;
+  SizeValueType const totalPixels = inputImage->GetBufferedRegion().GetNumberOfPixels();
+  SizeValueType       updateVisits = totalPixels / 10;
   if (updateVisits < 1)
   {
     updateVisits = 1;
@@ -109,11 +109,11 @@ template <typename TInputImage, typename TClassifiedImage>
 void
 ImageClassifierBase<TInputImage, TClassifiedImage>::Allocate()
 {
-  InputImageConstPointer inputImage = this->GetInputImage();
+  InputImageConstPointer const inputImage = this->GetInputImage();
 
-  InputImageSizeType inputImageSize = inputImage->GetBufferedRegion().GetSize();
+  InputImageSizeType const inputImageSize = inputImage->GetBufferedRegion().GetSize();
 
-  ClassifiedImagePointer classifiedImage = TClassifiedImage::New();
+  ClassifiedImagePointer const classifiedImage = TClassifiedImage::New();
 
   this->SetClassifiedImage(classifiedImage);
 
@@ -128,7 +128,7 @@ template <typename TInputImage, typename TClassifiedImage>
 std::vector<double>
 ImageClassifierBase<TInputImage, TClassifiedImage>::GetPixelMembershipValue(const InputImagePixelType inputImagePixel)
 {
-  unsigned int        numberOfClasses = this->GetNumberOfClasses();
+  unsigned int const  numberOfClasses = this->GetNumberOfClasses();
   std::vector<double> pixelMembershipValue(numberOfClasses);
 
   for (unsigned int classIndex = 0; classIndex < numberOfClasses; ++classIndex)

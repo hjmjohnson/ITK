@@ -34,13 +34,13 @@ NormalizeSineWave(double frequencyPerImage, unsigned int order, double pixelSpac
 
   const double tolerance1 = std::pow(.001, 1.0 / order); // still larger than it should be!
 
-  double frequency = frequencyPerImage * 2.0 * itk::Math::pi / (imageSize * pixelSpacing);
+  double const frequency = frequencyPerImage * 2.0 * itk::Math::pi / (imageSize * pixelSpacing);
 
   // The theoretical maximal value should occur at this sigma
-  double sigmaMax = std::sqrt(static_cast<double>(order)) / frequency;
+  double const sigmaMax = std::sqrt(static_cast<double>(order)) / frequency;
 
   // The theoreical maximal value of the derivative, obtained at sigmaMax
-  double expectedMax = std::pow(static_cast<double>(order), order * 0.5) * std::exp(-0.5 * order);
+  double const expectedMax = std::pow(static_cast<double>(order), order * 0.5) * std::exp(-0.5 * order);
 
   using ImageType = itk::Image<double, ImageDimension>;
   auto image = ImageType::New();
@@ -62,7 +62,7 @@ NormalizeSineWave(double frequencyPerImage, unsigned int order, double pixelSpac
     ImageType::PointType p;
     image->TransformIndexToPhysicalPoint(iter.GetIndex(), p);
     const double x = p[0];
-    double       value = std::sin(x * frequency);
+    double const value = std::sin(x * frequency);
 
     iter.Set(value);
     ++iter;
@@ -79,7 +79,7 @@ NormalizeSineWave(double frequencyPerImage, unsigned int order, double pixelSpac
   filter->SetMaximumKernelWidth(500);
   filter->SetNormalizeAcrossScale(true);
 
-  ImageType::Pointer outputImage = filter->GetOutput();
+  ImageType::Pointer const outputImage = filter->GetOutput();
   outputImage->Update();
 
   // Maximal value of the first derivative

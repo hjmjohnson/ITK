@@ -67,7 +67,7 @@ itkEuler3DTransformTest(int, char *[])
 
   // Rotate an itk::Point
   EulerTransformType::InputPointType::ValueType pInit[3] = { 10, -5, 3 };
-  EulerTransformType::InputPointType            p = pInit;
+  EulerTransformType::InputPointType const      p = pInit;
   EulerTransformType::InputPointType            q;
 
   itk::Matrix<double, 3, 3> RotationX;
@@ -167,7 +167,7 @@ itkEuler3DTransformTest(int, char *[])
   eulerTransform->SetRotation(0, 0, 0);
 
   EulerTransformType::OffsetType::ValueType ioffsetInit[3] = { 1, -4, 8 };
-  EulerTransformType::OffsetType            ioffset = ioffsetInit;
+  EulerTransformType::OffsetType const      ioffset = ioffsetInit;
 
   eulerTransform->SetOffset(ioffset);
   std::cout << "eulerTransform: " << eulerTransform;
@@ -314,8 +314,8 @@ itkEuler3DTransformTest(int, char *[])
       minusPoint = eulerTransform->TransformPoint(pInit);
       for (unsigned int j = 0; j < 3; ++j)
       {
-        double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
-        double computedDerivative = jacobian[j][k];
+        double const approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
+        double const computedDerivative = jacobian[j][k];
         approxJacobian[j][k] = approxDerivative;
         if (itk::Math::abs(approxDerivative - computedDerivative) > 1e-5)
         {
@@ -414,7 +414,7 @@ itkEuler3DTransformTest(int, char *[])
     // attempt to set an orthogonal matrix
     matrix.GetVnlMatrix().set_identity();
 
-    double a = 1.0 / 180.0 * itk::Math::pi;
+    double const a = 1.0 / 180.0 * itk::Math::pi;
     matrix[0][0] = std::cos(a);
     matrix[0][1] = -1.0 * std::sin(a);
     matrix[1][0] = std::sin(a);

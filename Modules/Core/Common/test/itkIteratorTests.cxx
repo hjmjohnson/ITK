@@ -34,13 +34,13 @@ itkIteratorTests(int, char *[])
   double origin3D[3] = { 5, 2.1, 8.1 };
   double spacing3D[3] = { 1.5, 2.1, 1 };
 
-  ScalarImage::SizeType imageSize3D = { { 200, 200, 200 } };
-  ScalarImage::SizeType bufferSize3D = { { 200, 200, 200 } };
-  ScalarImage::SizeType regionSize3D = { { 190, 190, 190 } };
+  ScalarImage::SizeType const imageSize3D = { { 200, 200, 200 } };
+  ScalarImage::SizeType const bufferSize3D = { { 200, 200, 200 } };
+  ScalarImage::SizeType const regionSize3D = { { 190, 190, 190 } };
 
-  ScalarImage::IndexType startIndex3D = { { 0, 0, 0 } };
-  ScalarImage::IndexType bufferStartIndex3D = { { 0, 0, 0 } };
-  ScalarImage::IndexType regionStartIndex3D = { { 5, 5, 5 } };
+  ScalarImage::IndexType const startIndex3D = { { 0, 0, 0 } };
+  ScalarImage::IndexType const bufferStartIndex3D = { { 0, 0, 0 } };
+  ScalarImage::IndexType const regionStartIndex3D = { { 5, 5, 5 } };
 
 
   ScalarImage::RegionType region{ startIndex3D, imageSize3D };
@@ -58,10 +58,10 @@ itkIteratorTests(int, char *[])
   o3->Allocate();
 
   // extra variables
-  double        elapsedTime;
-  clock_t       start;
-  clock_t       end;
-  unsigned long num = 190 * 190 * 190;
+  double              elapsedTime;
+  clock_t             start;
+  clock_t             end;
+  unsigned long const num = 190 * 190 * 190;
 
   bool passed = true;
 
@@ -99,10 +99,10 @@ itkIteratorTests(int, char *[])
     }
   }
   // 3 nested loops
-  unsigned long ii;
-  unsigned long jj;
-  unsigned long kk;
-  unsigned long len = 190;
+  unsigned long       ii;
+  unsigned long       jj;
+  unsigned long       kk;
+  unsigned long const len = 190;
   start = clock();
   {
     unsigned int i = 0;
@@ -131,7 +131,7 @@ itkIteratorTests(int, char *[])
   start = clock();
   itk::ImageRegionIterator<ScalarImage> it(o3, region);
 
-  unsigned short scalar = 5;
+  unsigned short const scalar = 5;
 
   {
     unsigned int i = 0;

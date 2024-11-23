@@ -136,7 +136,7 @@ itkRegistrationParameterScalesFromPhysicalShiftPointSetTest(int, char *[])
   //
   using RegistrationParameterScalesFromPhysicalShiftType =
     itk::RegistrationParameterScalesFromPhysicalShift<MetricType>;
-  RegistrationParameterScalesFromPhysicalShiftType::Pointer shiftScaleEstimator =
+  RegistrationParameterScalesFromPhysicalShiftType::Pointer const shiftScaleEstimator =
     RegistrationParameterScalesFromPhysicalShiftType::New();
 
   shiftScaleEstimator->SetMetric(metric);
@@ -203,9 +203,9 @@ itkRegistrationParameterScalesFromPhysicalShiftPointSetTest(int, char *[])
   //
   MovingTransformType::ParametersType movingStep(movingTransform->GetNumberOfParameters());
   movingStep = movingTransform->GetParameters(); // the step is an identity transform
-  FloatType stepScale = shiftScaleEstimator->EstimateStepScale(movingStep);
+  FloatType const stepScale = shiftScaleEstimator->EstimateStepScale(movingStep);
   std::cout << "The step scale of shift for the affine transform = " << stepScale << std::endl;
-  FloatType learningRate = 1.0 / stepScale;
+  FloatType const learningRate = 1.0 / stepScale;
   std::cout << "The learning rate of shift for the affine transform = " << learningRate << std::endl;
 
   // compute truth
@@ -284,12 +284,12 @@ itkRegistrationParameterScalesFromPhysicalShiftPointSetTest(int, char *[])
   using FieldType = DisplacementTransformType::DisplacementFieldType;
   using VectorType = itk::Vector<double, Dimension>;
 
-  VectorType zero{};
+  VectorType const zero{};
 
   using RegionType = itk::ImageRegion<Dimension>;
   RegionType region;
   region.SetSize(virtualDomainSize);
-  RegionType::IndexType index{};
+  RegionType::IndexType const index{};
   region.SetIndex(index);
 
   auto field = FieldType::New();
@@ -341,13 +341,13 @@ itkRegistrationParameterScalesFromPhysicalShiftPointSetTest(int, char *[])
   //
   DisplacementTransformType::ParametersType displacementStep(displacementTransform->GetNumberOfParameters());
   displacementStep.Fill(1.0);
-  FloatType localStepScale = shiftScaleEstimator->EstimateStepScale(displacementStep);
+  FloatType const localStepScale = shiftScaleEstimator->EstimateStepScale(displacementStep);
   std::cout << "The step scale of shift for the displacement field transform = " << localStepScale << std::endl;
-  FloatType localLearningRate = 1.0 / localStepScale;
+  FloatType const localLearningRate = 1.0 / localStepScale;
   std::cout << "The learning rate of shift for the displacement field transform = " << localLearningRate << std::endl;
 
-  bool      localStepScalePass = false;
-  FloatType theoreticalLocalStepScale = std::sqrt(2.0);
+  bool            localStepScalePass = false;
+  FloatType const theoreticalLocalStepScale = std::sqrt(2.0);
   if (itk::Math::abs((localStepScale - theoreticalLocalStepScale) / theoreticalLocalStepScale) < 0.01)
   {
     localStepScalePass = true;
@@ -365,7 +365,7 @@ itkRegistrationParameterScalesFromPhysicalShiftPointSetTest(int, char *[])
   // Test that not setting a virtual domain point set for sampling fill fail
   //
   std::cout << "Test without setting virtual domain point set." << std::endl;
-  RegistrationParameterScalesFromPhysicalShiftType::Pointer shiftScaleEstimator2 =
+  RegistrationParameterScalesFromPhysicalShiftType::Pointer const shiftScaleEstimator2 =
     RegistrationParameterScalesFromPhysicalShiftType::New();
   shiftScaleEstimator2->SetMetric(metric);
   ITK_TRY_EXPECT_EXCEPTION(shiftScaleEstimator2->EstimateStepScale(displacementStep));

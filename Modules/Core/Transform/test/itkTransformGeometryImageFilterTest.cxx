@@ -40,7 +40,7 @@ template <typename ImageType>
 bool
 imagesDifferent(ImageType * baselineImage, ImageType * outputImage)
 {
-  double tol = 1.e-3; // tolerance
+  double const tol = 1.e-3; // tolerance
 
   typename ImageType::PointType     origin = outputImage->GetOrigin();
   typename ImageType::DirectionType direction = outputImage->GetDirection();
@@ -117,7 +117,7 @@ itkTransformGeometryImageFilterTest(int argc, char * argv[])
   rotationAxis[1] = 0.2;
   rotationAxis[2] = 0.7;
 
-  double rotationAngle = .5; // Radians
+  double const rotationAngle = .5; // Radians
 
   auto transform = TransformType::New(); // Identity by default
   transform->SetCenter(center);
@@ -144,7 +144,7 @@ itkTransformGeometryImageFilterTest(int argc, char * argv[])
   filter->SetTransform(transform);
   ITK_TEST_SET_GET_VALUE(transform, filter->GetTransform());
   ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
-  ImagePointer outputImage = filter->GetOutput();
+  ImagePointer const outputImage = filter->GetOutput();
   ITK_TRY_EXPECT_NO_EXCEPTION(itk::WriteImage(outputImage, argv[3]));
 
   // Read in baseline image
@@ -162,7 +162,7 @@ itkTransformGeometryImageFilterTest(int argc, char * argv[])
   rawPointerTransform->ApplyToImageMetadata(inputImage.GetPointer());
   const TransformType * constRawPointerTransform = transform.GetPointer();
   constRawPointerTransform->ApplyToImageMetadata(inputImage);
-  TransformType::ConstPointer constPointerTransform = transform.GetPointer();
+  TransformType::ConstPointer const constPointerTransform = transform.GetPointer();
   constPointerTransform->ApplyToImageMetadata(inputImage);
   constPointerTransform->ApplyToImageMetadata(inputImage.GetPointer());
 

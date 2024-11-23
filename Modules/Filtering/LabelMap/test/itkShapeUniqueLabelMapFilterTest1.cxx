@@ -59,7 +59,7 @@ itkShapeUniqueLabelMapFilterTest1(int argc, char * argv[])
   auto Unique = LabelUniqueType::New();
 
   // testing get and set macros for ReverseOrdering
-  bool reverseOrdering = std::stoi(argv[3]);
+  bool const reverseOrdering = std::stoi(argv[3]);
   Unique->SetReverseOrdering(reverseOrdering);
   ITK_TEST_SET_GET_VALUE(reverseOrdering, Unique->GetReverseOrdering());
 
@@ -71,13 +71,13 @@ itkShapeUniqueLabelMapFilterTest1(int argc, char * argv[])
   ITK_TEST_SET_GET_VALUE(false, Unique->GetReverseOrdering());
 
   // testing get and set macros for Attribute
-  LabelUniqueType::AttributeType attribute = std::stoi(argv[4]);
+  LabelUniqueType::AttributeType const attribute = std::stoi(argv[4]);
   Unique->SetAttribute(attribute);
   ITK_TEST_SET_GET_VALUE(attribute, Unique->GetAttribute());
 
   Unique->SetInput(i2l->GetOutput());
 
-  itk::SimpleFilterWatcher watcher(Unique, "filter");
+  itk::SimpleFilterWatcher const watcher(Unique, "filter");
 
   using L2IType = itk::LabelMapToLabelImageFilter<LabelMapType, ImageType>;
   auto l2i = L2IType::New();

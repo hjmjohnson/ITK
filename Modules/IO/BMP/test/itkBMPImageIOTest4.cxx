@@ -50,7 +50,7 @@ itkBMPImageIOTest4(int argc, char * argv[])
 
   auto lowerLeftImageReader = ReaderType::New();
 
-  itk::BMPImageIO::Pointer lowerLeftImageIO = itk::BMPImageIO::New();
+  itk::BMPImageIO::Pointer const lowerLeftImageIO = itk::BMPImageIO::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(lowerLeftImageIO, BMPImageIO, ImageIOBase);
 
@@ -59,7 +59,7 @@ itkBMPImageIOTest4(int argc, char * argv[])
 
   auto upperLeftImageReader = ReaderType::New();
 
-  itk::BMPImageIO::Pointer upperLeftImageIO = itk::BMPImageIO::New();
+  itk::BMPImageIO::Pointer const upperLeftImageIO = itk::BMPImageIO::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(lowerLeftImageIO, BMPImageIO, ImageIOBase);
 
@@ -86,8 +86,8 @@ itkBMPImageIOTest4(int argc, char * argv[])
   }
 
 
-  ImageType::RegionType lowerLeftImageRegion = lowerLeftImageReader->GetOutput()->GetLargestPossibleRegion();
-  ImageType::RegionType upperLeftImageRegion = upperLeftImageReader->GetOutput()->GetLargestPossibleRegion();
+  ImageType::RegionType const lowerLeftImageRegion = lowerLeftImageReader->GetOutput()->GetLargestPossibleRegion();
+  ImageType::RegionType const upperLeftImageRegion = upperLeftImageReader->GetOutput()->GetLargestPossibleRegion();
 
   if (lowerLeftImageRegion != upperLeftImageRegion)
   {

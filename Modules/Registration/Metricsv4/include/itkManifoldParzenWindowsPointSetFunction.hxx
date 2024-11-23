@@ -98,7 +98,7 @@ ManifoldParzenWindowsPointSetFunction<TPointSet, TOutput, TCoordRep>::SetInputPo
           {
             PointType neighbor = this->GetInputPointSet()->GetPoint(neighbors[j]);
 
-            RealType kernelValue = inputGaussians[index]->Evaluate(neighbor);
+            RealType const kernelValue = inputGaussians[index]->Evaluate(neighbor);
 
             denominator += kernelValue;
             if (kernelValue > 0.0)
@@ -107,7 +107,7 @@ ManifoldParzenWindowsPointSetFunction<TPointSet, TOutput, TCoordRep>::SetInputPo
               {
                 for (unsigned int n = m; n < PointDimension; ++n)
                 {
-                  RealType covariance = kernelValue * (neighbor[m] - point[m]) * (neighbor[n] - point[n]);
+                  RealType const covariance = kernelValue * (neighbor[m] - point[m]) * (neighbor[n] - point[n]);
                   Cout(m, n) += covariance;
                   Cout(n, m) += covariance;
                 }
@@ -151,7 +151,7 @@ ManifoldParzenWindowsPointSetFunction<TPointSet, TOutput, TCoordRep>::Evaluate(c
     itkExceptionMacro("The input point set has not been specified.");
   }
 
-  unsigned int numberOfNeighbors =
+  unsigned int const numberOfNeighbors =
     std::min(this->m_EvaluationKNeighborhood, static_cast<unsigned int>(this->m_Gaussians.size()));
 
   CompensatedSummation<OutputType> sum;

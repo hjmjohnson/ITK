@@ -100,8 +100,8 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
   // The true shape is just the circle.
   //
 
-  PixelType background = 0;
-  PixelType foreground = 190;
+  PixelType const background = 0;
+  PixelType const foreground = 190;
 
   // Fill in the background
   auto inputImage = ImageType::New();
@@ -121,7 +121,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
   ImageType::SizeType rectSize;
   rectSize[0] = 80;
   rectSize[1] = 10;
-  ImageType::RegionType rectRegion{ rectStart, rectSize };
+  ImageType::RegionType const rectRegion{ rectStart, rectSize };
 
   using Iterator = itk::ImageRegionIterator<ImageType>;
   Iterator it(inputImage, rectRegion);
@@ -148,7 +148,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
 
   while (!it.IsAtEnd())
   {
-    ImageType::IndexType          index = it.GetIndex();
+    ImageType::IndexType const    index = it.GetIndex();
     SphereFunctionType::PointType point;
     inputImage->TransformIndexToPhysicalPoint(index, point);
     if (sphere->Evaluate(point) <= 0.0)
@@ -239,8 +239,8 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
 
   while (!citer.IsAtEnd())
   {
-    ComponentImageType::IndexType index = citer.GetIndex();
-    SphereFunctionType::PointType point;
+    ComponentImageType::IndexType const index = citer.GetIndex();
+    SphereFunctionType::PointType       point;
     meanImage->TransformIndexToPhysicalPoint(index, point);
 
     citer.Set(sphere->Evaluate(point));
@@ -256,7 +256,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
   using ImageVectorType = ShapeFunctionType::ImagePointerVector;
   ImageVectorType pca;
 
-  unsigned int numberOfPCA = 1;
+  unsigned int const numberOfPCA = 1;
   pca.resize(numberOfPCA);
 
   pca[0] = ComponentImageType::New();
@@ -334,8 +334,8 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
   // Connect an observer to the filter.
   //
   using WatcherType = ShowIterationObject<FilterType>;
-  WatcherType                                    iterationWatcher(filter);
-  itk::SimpleMemberCommand<WatcherType>::Pointer command = itk::SimpleMemberCommand<WatcherType>::New();
+  WatcherType                                          iterationWatcher(filter);
+  itk::SimpleMemberCommand<WatcherType>::Pointer const command = itk::SimpleMemberCommand<WatcherType>::New();
   command->SetCallbackFunction(&iterationWatcher, &WatcherType::ShowIteration);
   filter->AddObserver(itk::IterationEvent(), command);
 

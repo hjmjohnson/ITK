@@ -119,7 +119,7 @@ LSMImageIO::~LSMImageIO() = default;
 bool
 LSMImageIO::CanReadFile(const char * filename)
 {
-  std::string fname(filename);
+  std::string const fname(filename);
 
   if (fname.empty())
   {
@@ -193,7 +193,7 @@ LSMImageIO::ReadImageInformation()
 bool
 LSMImageIO::CanWriteFile(const char * name)
 {
-  std::string filename = name;
+  std::string const filename = name;
 
   if (filename.empty())
   {
@@ -249,9 +249,9 @@ LSMImageIO::Write(const void * buffer)
     pages = m_Dimensions[2];
   }
 
-  uint16_t scomponents = this->GetNumberOfComponents();
-  float    resolution = -1;
-  uint16_t bps;
+  uint16_t const scomponents = this->GetNumberOfComponents();
+  float const    resolution = -1;
+  uint16_t       bps;
 
   switch (this->GetComponentType())
   {
@@ -276,8 +276,8 @@ LSMImageIO::Write(const void * buffer)
     return;
   }
 
-  uint32_t w = width;
-  uint32_t h = height;
+  uint32_t const w = width;
+  uint32_t const h = height;
 
   TIFFSetTagExtender(TagExtender);
   if (m_NumberOfDimensions == 3)
@@ -305,8 +305,8 @@ LSMImageIO::Write(const void * buffer)
     {
       // if number of scalar components is greater than 3, that means we assume
       // there is alpha.
-      uint16_t   extra_samples = scomponents - 3;
-      const auto sample_info = make_unique_for_overwrite<uint16_t[]>(scomponents - 3);
+      uint16_t const extra_samples = scomponents - 3;
+      const auto     sample_info = make_unique_for_overwrite<uint16_t[]>(scomponents - 3);
       sample_info[0] = EXTRASAMPLE_ASSOCALPHA;
       int cc;
       for (cc = 1; cc < scomponents - 3; ++cc)

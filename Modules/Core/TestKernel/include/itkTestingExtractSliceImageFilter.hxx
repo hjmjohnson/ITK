@@ -53,7 +53,7 @@ ExtractSliceImageFilter<TInputImage, TOutputImage>::CallCopyOutputRegionToInputR
   InputImageRegionType &        destRegion,
   const OutputImageRegionType & srcRegion)
 {
-  ExtractSliceImageFilterRegionCopierType extractImageRegionCopier;
+  ExtractSliceImageFilterRegionCopierType const extractImageRegionCopier;
 
   extractImageRegionCopier(destRegion, srcRegion, m_ExtractionRegion);
 }

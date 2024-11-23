@@ -55,8 +55,8 @@ main(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  std::string visibleHumanPath = argv[1];
-  std::string outputImageFile = argv[2];
+  std::string const visibleHumanPath = argv[1];
+  std::string const outputImageFile = argv[2];
 
   using RGBPixelType = itk::RGBPixel<unsigned char>;
   using PixelType = unsigned char;
@@ -162,7 +162,7 @@ main(int argc, char * argv[])
   writer->SetNumberOfStreamDivisions(200);
   writer->SetInput(extract->GetOutput());
 
-  itk::SimpleFilterWatcher watcher1(writer, "stream writing");
+  itk::SimpleFilterWatcher const watcher1(writer, "stream writing");
 
 
   try

@@ -232,9 +232,9 @@ BSplineCenteredResampleImageFilterBase<TInputImage, TOutputImage>::Reduce1DImage
   IndexValueType i1;
   IndexValueType i2;
 
-  SizeValueType outK;
-  SizeValueType inK;
-  SizeValueType outTraverseSize = inTraverseSize / 2;
+  SizeValueType       outK;
+  SizeValueType       inK;
+  SizeValueType const outTraverseSize = inTraverseSize / 2;
 
   inTraverseSize = outTraverseSize * 2; // ensures that an even number is used.
   SizeValueType inModK;                 // number for modulus math of in
@@ -279,7 +279,7 @@ BSplineCenteredResampleImageFilterBase<TInputImage, TOutputImage>::Reduce1DImage
   for (outK = 0; outK < outTraverseSize; ++outK)
   {
     i1 = 2 * outK;
-    double outVal = (temp[i1] + temp[i1 + 1]) / 2.0;
+    double const outVal = (temp[i1] + temp[i1 + 1]) / 2.0;
     out.Set(static_cast<OutputImagePixelType>(outVal));
     ++out;
     progress.CompletedPixel();
@@ -300,13 +300,13 @@ BSplineCenteredResampleImageFilterBase<TInputImage, TOutputImage>::Expand1DImage
   IndexValueType i1;
   IndexValueType i2;
 
-  IndexValueType inK;
-  SizeValueType  outTraverseSize = inTraverseSize * 2;
+  IndexValueType      inK;
+  SizeValueType const outTraverseSize = inTraverseSize * 2;
   // inTraverseSize = outTraverseSize/2;  // ensures that an even number is used.
   IndexValueType inModK; // number for modulus math of in
 
   inModK = outTraverseSize;
-  IndexValueType k0 = (this->m_HSize / 2) * 2 - 1L;
+  IndexValueType const k0 = (this->m_HSize / 2) * 2 - 1L;
 
   double outVal;
   double outVal2;
@@ -345,7 +345,7 @@ BSplineCenteredResampleImageFilterBase<TInputImage, TOutputImage>::Expand1DImage
     outVal2 = 0;
     for (IndexValueType k = -k0; k < this->m_HSize; k += 2L)
     {
-      IndexValueType kk = itk::Math::abs(static_cast<int>(k));
+      IndexValueType const kk = itk::Math::abs(static_cast<int>(k));
       i1 = inK + (k + 1L) / 2L;
       if (i1 < 0L)
       {

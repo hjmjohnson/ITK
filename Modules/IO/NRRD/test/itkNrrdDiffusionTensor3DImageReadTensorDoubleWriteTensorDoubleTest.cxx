@@ -55,7 +55,7 @@ itkNrrdDiffusionTensor3DImageReadTensorDoubleWriteTensorDoubleTest(int argc, cha
     return EXIT_FAILURE;
   }
 
-  InImage::Pointer image = reader->GetOutput();
+  InImage::Pointer const image = reader->GetOutput();
   image->Print(std::cout);
 
   // Generate test image

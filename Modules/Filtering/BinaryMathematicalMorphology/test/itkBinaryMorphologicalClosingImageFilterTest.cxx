@@ -74,7 +74,7 @@ itkBinaryMorphologicalClosingImageFilterTest(int argc, char * argv[])
   }
   filter->SetForegroundValue(std::stoi(argv[5]));
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   using WriterType = itk::ImageFileWriter<OutputImageType>;
   auto writer = WriterType::New();

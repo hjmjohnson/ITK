@@ -26,10 +26,10 @@ using ImageType = itk::Image<unsigned int, 3>;
 ImageType::Pointer
 CreateRandomImage()
 {
-  const ImageType::SizeType  imageSize = { { 4, 4, 4 } };
-  const ImageType::IndexType imageIndex = { { 0, 0, 0 } };
-  ImageType::RegionType      region{ imageIndex, imageSize };
-  auto                       img = ImageType::New();
+  const ImageType::SizeType   imageSize = { { 4, 4, 4 } };
+  const ImageType::IndexType  imageIndex = { { 0, 0, 0 } };
+  ImageType::RegionType const region{ imageIndex, imageSize };
+  auto                        img = ImageType::New();
   img->SetRegions(region);
   img->Allocate();
   itk::ImageRegionIterator<ImageType> ri(img, region);
@@ -70,7 +70,7 @@ itkOrientImageFilterTest(int argc, char * argv[])
   }
 
   itk::MultiThreaderBase::SetGlobalMaximumNumberOfThreads(1);
-  ImageType::Pointer randImage = CreateRandomImage();
+  ImageType::Pointer const randImage = CreateRandomImage();
   std::cerr << "Original" << std::endl;
   PrintImg(randImage);
 
@@ -88,7 +88,7 @@ itkOrientImageFilterTest(int argc, char * argv[])
   // Try permuting axes
   orienter->SetDesiredCoordinateOrientation(itk::AnatomicalOrientation::PositiveEnum::SLA);
   orienter->Update();
-  ImageType::Pointer SLA = orienter->GetOutput();
+  ImageType::Pointer const SLA = orienter->GetOutput();
   std::cerr << "SLA" << std::endl;
   PrintImg(SLA);
 
@@ -109,8 +109,8 @@ itkOrientImageFilterTest(int argc, char * argv[])
            originalIndex[0] < static_cast<ImageType::IndexType::IndexValueType>(originalSize[0]);
            originalIndex[0]++, transformedIndex[1]++)
       {
-        ImageType::PixelType orig = randImage->GetPixel(originalIndex);
-        ImageType::PixelType xfrm = SLA->GetPixel(transformedIndex);
+        ImageType::PixelType const orig = randImage->GetPixel(originalIndex);
+        ImageType::PixelType const xfrm = SLA->GetPixel(transformedIndex);
         if (orig != xfrm)
         {
           return EXIT_FAILURE;
@@ -125,7 +125,7 @@ itkOrientImageFilterTest(int argc, char * argv[])
   orienter->SetGivenCoordinateOrientation(itk::AnatomicalOrientation::NegativeEnum::RIP);
   orienter->SetDesiredCoordinateOrientation(itk::AnatomicalOrientation::NegativeEnum::LIP);
   orienter->Update();
-  ImageType::Pointer LIP = orienter->GetOutput();
+  ImageType::Pointer const LIP = orienter->GetOutput();
   std::cerr << "LIP" << std::endl;
   PrintImg(LIP);
   transformedSize = LIP->GetLargestPossibleRegion().GetSize();
@@ -142,8 +142,8 @@ itkOrientImageFilterTest(int argc, char * argv[])
            originalIndex[0] < static_cast<ImageType::IndexType::IndexValueType>(originalSize[0]);
            originalIndex[0]++, transformedIndex[0]--)
       {
-        ImageType::PixelType orig = randImage->GetPixel(originalIndex);
-        ImageType::PixelType xfrm = LIP->GetPixel(transformedIndex);
+        ImageType::PixelType const orig = randImage->GetPixel(originalIndex);
+        ImageType::PixelType const xfrm = LIP->GetPixel(transformedIndex);
         if (orig != xfrm)
         {
           return EXIT_FAILURE;

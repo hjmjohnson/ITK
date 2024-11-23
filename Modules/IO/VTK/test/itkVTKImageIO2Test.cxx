@@ -130,7 +130,7 @@ public:
 
       writer->SetInput(image);
 
-      std::string m_OutputFileName = VTKImageIOTester<char, 3>::SetupFileName(filePrefix, "vtk", outputPath);
+      std::string const m_OutputFileName = VTKImageIOTester<char, 3>::SetupFileName(filePrefix, "vtk", outputPath);
 
       writer->SetFileName(m_OutputFileName);
       writer->Update();
@@ -177,7 +177,7 @@ public:
         vtkIO->SetFileTypeToBinary();
       }
 
-      std::string m_OutputFileName = VTKImageIOTester::SetupFileName(filePrefix, "vtk", outputPath);
+      std::string const m_OutputFileName = VTKImageIOTester::SetupFileName(filePrefix, "vtk", outputPath);
       reader->SetFileName(m_OutputFileName);
 
       // Check that the correct content was written to the header.
@@ -192,7 +192,7 @@ public:
       }
 
       // read the image
-      typename ImageType::Pointer image = reader->GetOutput();
+      typename ImageType::Pointer const image = reader->GetOutput();
       reader->Update();
 
       // test the CanReadFile function after the fact (should always
@@ -203,9 +203,9 @@ public:
       }
 
       // check the size
-      typename ImageType::RegionType region = image->GetLargestPossibleRegion();
-      typename ImageType::SizeType   size = region.GetSize();
-      bool                           sizeGood = true;
+      typename ImageType::RegionType const region = image->GetLargestPossibleRegion();
+      typename ImageType::SizeType         size = region.GetSize();
+      bool                                 sizeGood = true;
       for (unsigned int i = 0; i < ImageType::GetImageDimension(); ++i)
       {
         if (size[i] != 10)
@@ -283,7 +283,7 @@ public:
     using IOType = itk::VTKImageIO;
     auto vtkIO = IOType::New();
 
-    std::string fileName = VTKImageIOTester::SetupFileName(filePrefix, fileExtension, outputPath);
+    std::string const fileName = VTKImageIOTester::SetupFileName(filePrefix, fileExtension, outputPath);
 
     return vtkIO->CanReadFile(fileName.c_str());
   }
@@ -294,7 +294,7 @@ public:
     using IOType = itk::VTKImageIO;
     auto vtkIO = IOType::New();
 
-    std::string fileName = VTKImageIOTester::SetupFileName(filePrefix, fileExtension, outputPath);
+    std::string const fileName = VTKImageIOTester::SetupFileName(filePrefix, fileExtension, outputPath);
 
     return vtkIO->CanWriteFile(fileName.c_str());
   }
@@ -357,8 +357,8 @@ itkVTKImageIO2Test(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  std::string filePrefix = argv[0];
-  std::string outputPath = argv[1];
+  std::string const filePrefix = argv[0];
+  std::string       outputPath = argv[1];
 
   //
   // test all usable pixel types

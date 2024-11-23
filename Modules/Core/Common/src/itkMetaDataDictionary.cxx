@@ -76,8 +76,8 @@ MetaDataDictionary::Get(const std::string & key) const
   {
     itkGenericExceptionMacro("Key '" << key << "' does not exist ");
   }
-  MetaDataObjectBase::Pointer entry = (*m_Dictionary)[key];
-  const MetaDataObjectBase *  constentry = entry.GetPointer();
+  MetaDataObjectBase::Pointer const entry = (*m_Dictionary)[key];
+  const MetaDataObjectBase *        constentry = entry.GetPointer();
   return constentry;
 }
 

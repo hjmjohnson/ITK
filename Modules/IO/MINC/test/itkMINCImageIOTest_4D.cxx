@@ -53,7 +53,7 @@ itkMINCImageIOTest_4D(int argc, char * argv[])
   ITK_TRY_EXPECT_NO_EXCEPTION(writer->Update());
 
 
-  ImageType::ConstPointer image = reader->GetOutput();
+  ImageType::ConstPointer const image = reader->GetOutput();
 
   image->Print(std::cout);
 

@@ -47,7 +47,7 @@ itkStandardDeviationProjectionImageFilterTest(int argc, char * argv[])
   auto filter = FilterType::New();
   filter->SetInput(reader->GetOutput());
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   using WriterType = itk::ImageFileWriter<ImageType>;
   auto writer = WriterType::New();

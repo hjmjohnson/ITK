@@ -53,7 +53,7 @@ itkSurfaceSpatialObjectTest(int, char *[])
   p.Print(std::cout);
 
   // Create a Surface Spatial Object
-  SurfacePointer Surface = SurfaceType::New();
+  SurfacePointer const Surface = SurfaceType::New();
   Surface->GetProperty().SetName("Surface 1");
   Surface->SetId(1);
   Surface->SetPoints(list);
@@ -193,9 +193,9 @@ itkSurfaceSpatialObjectTest(int, char *[])
     }
 
     // Copy
-    SurfacePointType pCopy(pOriginal);
+    SurfacePointType const pCopy(pOriginal);
     // Assign
-    SurfacePointType pAssign = pOriginal;
+    SurfacePointType const pAssign = pOriginal;
 
     std::vector<SurfacePointType> pointVector;
     pointVector.push_back(pCopy);

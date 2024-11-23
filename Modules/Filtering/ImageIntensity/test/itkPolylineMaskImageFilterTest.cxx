@@ -172,7 +172,7 @@ itkPolylineMaskImageFilterTest(int argc, char * argv[])
   ITK_TEST_SET_GET_VALUE(cameraCenterPoint, polylineMaskFilter->GetCameraCenterPoint());
 
   // Set the camera focal distance
-  double focalDistance = 30.0;
+  double const focalDistance = 30.0;
   polylineMaskFilter->SetFocalDistance(focalDistance);
 
   ITK_TEST_SET_GET_VALUE(focalDistance, polylineMaskFilter->GetFocalDistance());

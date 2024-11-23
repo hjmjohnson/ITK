@@ -144,12 +144,12 @@ itkImageRegistrationMethodTest_14(int, char *[])
    * Set up the two input images.
    * One image rotated (xy plane) and shifted with respect to the other.
    **********************************************************/
-  double displacement[dimension] = { 7, 3, 2 };
-  double angle = 10.0 / 180.0 * itk::Math::pi;
+  double const displacement[dimension] = { 7, 3, 2 };
+  double const angle = 10.0 / 180.0 * itk::Math::pi;
 
-  FixedImageType::SizeType   size = { { 100, 100, 40 } };
-  FixedImageType::IndexType  index = { { 0, 0, 0 } };
-  FixedImageType::RegionType region{ index, size };
+  FixedImageType::SizeType         size = { { 100, 100, 40 } };
+  FixedImageType::IndexType const  index = { { 0, 0, 0 } };
+  FixedImageType::RegionType const region{ index, size };
 
   fixedImage->SetRegions(region);
   fixedImage->Allocate();
@@ -266,8 +266,8 @@ itkImageRegistrationMethodTest_14(int, char *[])
    * Run the registration - reducing learning rate as we go
    ************************************************************/
   constexpr unsigned int numberOfLoops = 3;
-  unsigned int           iter[numberOfLoops] = { 300, 300, 350 };
-  double                 rates[numberOfLoops] = { 1e-3, 5e-4, 1e-4 };
+  unsigned int const     iter[numberOfLoops] = { 300, 300, 350 };
+  double const           rates[numberOfLoops] = { 1e-3, 5e-4, 1e-4 };
 
   for (j = 0; j < numberOfLoops; ++j)
   {
@@ -336,7 +336,7 @@ itkImageRegistrationMethodTest_14(int, char *[])
   /*************************************************
    * Check for parzen window exception
    **************************************************/
-  double oldValue = metric->GetMovingImageStandardDeviation();
+  double const oldValue = metric->GetMovingImageStandardDeviation();
   metric->SetMovingImageStandardDeviation(0.005);
 
   try
@@ -409,7 +409,7 @@ F(itk::Vector<double, 3> & v)
   x -= 8;
   y += 3;
   z += 0;
-  double r = std::sqrt(x * x + y * y + z * z);
+  double const r = std::sqrt(x * x + y * y + z * z);
   if (r > 35)
   {
     value = 2 * (itk::Math::abs(x) + 0.8 * itk::Math::abs(y) + 0.5 * itk::Math::abs(z));

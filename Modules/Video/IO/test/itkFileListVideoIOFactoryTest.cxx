@@ -47,7 +47,7 @@ test_FileListVideoIOFactory(const char * input, char * output, itk::SizeValueTyp
   // Create the VideoIOBase for reading from a file
   //////
   std::cout << "Trying to create IO for reading from file..." << std::endl;
-  itk::VideoIOBase::Pointer ioReadFile =
+  itk::VideoIOBase::Pointer const ioReadFile =
     itk::VideoIOFactory::CreateVideoIO(itk::VideoIOFactory::IOModeEnum::ReadFileMode, input);
   if (!ioReadFile)
   {
@@ -59,7 +59,7 @@ test_FileListVideoIOFactory(const char * input, char * output, itk::SizeValueTyp
   // Create the VideoIOBase for writing to a file
   //////
   std::cout << "Trying to create IO for writing to file..." << std::endl;
-  itk::VideoIOBase::Pointer ioWrite =
+  itk::VideoIOBase::Pointer const ioWrite =
     itk::VideoIOFactory::CreateVideoIO(itk::VideoIOFactory::IOModeEnum::WriteMode, output);
   if (!ioWrite)
   {

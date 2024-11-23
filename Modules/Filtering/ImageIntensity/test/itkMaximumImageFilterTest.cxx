@@ -73,8 +73,8 @@ itkMaximumImageFilterTest(int, char *[])
   inputImageB->Allocate();
 
   // Define the pixel values for each image
-  PixelType largePixelValue = 3;
-  PixelType smallPixelValue = 2;
+  PixelType const largePixelValue = 3;
+  PixelType const smallPixelValue = 2;
 
   // Declare Iterator types apropriated for each image
   using IteratorType = itk::ImageRegionIteratorWithIndex<ImageType>;
@@ -109,7 +109,7 @@ itkMaximumImageFilterTest(int, char *[])
   maximumImageFilter->SetInput2(inputImageB);
 
   // Get the Smart Pointer to the filter output
-  ImageType::Pointer outputImage = maximumImageFilter->GetOutput();
+  ImageType::Pointer const outputImage = maximumImageFilter->GetOutput();
 
 
   // Execute the filter
@@ -119,7 +119,7 @@ itkMaximumImageFilterTest(int, char *[])
   // Note that we are not comparing the entirety of the filter output in order
   // to keep compile time as small as possible
 
-  ImageType::IndexType pixelIndex = { { 0, 1, 1 } };
+  ImageType::IndexType const pixelIndex = { { 0, 1, 1 } };
 
   ITK_TEST_EXPECT_EQUAL(outputImage->GetPixel(start), largePixelValue);
   ITK_TEST_EXPECT_EQUAL(outputImage->GetPixel(pixelIndex), largePixelValue);

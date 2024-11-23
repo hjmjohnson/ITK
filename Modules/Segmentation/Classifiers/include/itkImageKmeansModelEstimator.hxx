@@ -223,7 +223,7 @@ ImageKmeansModelEstimator<TInputImage, TMembershipFunction>::EstimateModels()
   this->EstimateKmeansModelParameters();
 
   // Set up the membership calculators
-  unsigned int numberOfModels = this->GetNumberOfModels();
+  unsigned int const numberOfModels = this->GetNumberOfModels();
 
   // Call local function to estimate mean variances of the various
   // class labels in the training set
@@ -422,8 +422,8 @@ ImageKmeansModelEstimator<TInputImage, TMembershipFunction>::NearestNeighborSear
   *distortion = 0.0;
 
   // Declare the iterators for the image and the codebook
-  InputImageConstPointer  inputImage = this->GetInputImage();
-  InputImageConstIterator inputImageIt(inputImage, inputImage->GetBufferedRegion());
+  InputImageConstPointer const inputImage = this->GetInputImage();
+  InputImageConstIterator      inputImageIt(inputImage, inputImage->GetBufferedRegion());
   inputImageIt.GoToBegin();
 
   // Calculate the number of vectors in the input data set

@@ -54,9 +54,9 @@ MRASlabIdentifier<TInputImage>::GenerateSlabRegions()
   region = m_Image->GetLargestPossibleRegion();
   size = region.GetSize();
   index = region.GetIndex();
-  IndexValueType firstSlice = index[m_SlicingDirection];
-  IndexValueType lastSlice = firstSlice + size[m_SlicingDirection];
-  SizeValueType  totalSlices = size[m_SlicingDirection];
+  IndexValueType const firstSlice = index[m_SlicingDirection];
+  IndexValueType const lastSlice = firstSlice + size[m_SlicingDirection];
+  SizeValueType const  totalSlices = size[m_SlicingDirection];
 
   double              sum;
   std::vector<double> avgMin(totalSlices);
@@ -125,7 +125,7 @@ MRASlabIdentifier<TInputImage>::GenerateSlabRegions()
     ++am_iter;
   }
 
-  double average = sum / static_cast<double>(totalSlices);
+  double const average = sum / static_cast<double>(totalSlices);
 
   // determine slabs
   am_iter = avgMin.begin();
@@ -144,7 +144,7 @@ MRASlabIdentifier<TInputImage>::GenerateSlabRegions()
   while (am_iter != avgMin.end())
   {
     avgMinValue = *am_iter;
-    double sign = avgMinValue - average;
+    double const sign = avgMinValue - average;
     if ((sign * prevSign < 0) && (itk::Math::abs(sign) > m_Tolerance))
     {
       slabIndex[m_SlicingDirection] = slabBegin;

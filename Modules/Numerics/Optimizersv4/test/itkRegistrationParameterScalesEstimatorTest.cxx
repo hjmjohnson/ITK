@@ -164,7 +164,7 @@ public:
     this->SetNumberOfRandomSamples(1000);
     this->SampleVirtualDomain();
 
-    itk::SizeValueType numPara = this->GetTransform()->GetNumberOfParameters();
+    itk::SizeValueType const numPara = this->GetTransform()->GetNumberOfParameters();
     parameterScales.SetSize(numPara);
 
     ParametersType norms(numPara);
@@ -177,7 +177,7 @@ public:
     // checking each sample point
     for (itk::SizeValueType c = 0; c < numSamples; ++c)
     {
-      VirtualPointType point = this->m_SamplePoints[c];
+      VirtualPointType const point = this->m_SamplePoints[c];
 
       ParametersType squaredNorms(numPara);
       this->ComputeSquaredJacobianNorms(point, squaredNorms);
@@ -200,7 +200,7 @@ public:
   double
   EstimateStepScale(const ParametersType & step) override
   {
-    double norm = step.two_norm();
+    double const norm = step.two_norm();
     return norm;
   }
 
@@ -231,9 +231,9 @@ itkRegistrationParameterScalesEstimatorTest(int, char *[])
   using MovingImageType = itk::Image<PixelType, ImageDimension>;
   using VirtualImageType = itk::Image<PixelType, ImageDimension>;
 
-  auto                      fixedImage = FixedImageType::New();
-  auto                      movingImage = MovingImageType::New();
-  VirtualImageType::Pointer virtualImage = fixedImage;
+  auto                            fixedImage = FixedImageType::New();
+  auto                            movingImage = MovingImageType::New();
+  VirtualImageType::Pointer const virtualImage = fixedImage;
 
   auto size = MovingImageType::SizeType::Filled(100);
 
@@ -265,7 +265,7 @@ itkRegistrationParameterScalesEstimatorTest(int, char *[])
 
   // Scales for the affine transform from max squared norm of transform jacobians
   using RegistrationParameterScalesEstimatorTestType = RegistrationParameterScalesEstimatorTest<MetricType>;
-  RegistrationParameterScalesEstimatorTestType::Pointer jacobianScaleEstimator =
+  RegistrationParameterScalesEstimatorTestType::Pointer const jacobianScaleEstimator =
     RegistrationParameterScalesEstimatorTestType::New();
 
   jacobianScaleEstimator->SetMetric(metric);

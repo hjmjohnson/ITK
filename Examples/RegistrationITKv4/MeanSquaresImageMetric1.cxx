@@ -132,8 +132,8 @@ main(int argc, char * argv[])
 
   transform->SetIdentity();
 
-  ImageType::ConstPointer fixedImage = fixedReader->GetOutput();
-  ImageType::ConstPointer movingImage = movingReader->GetOutput();
+  ImageType::ConstPointer const fixedImage = fixedReader->GetOutput();
+  ImageType::ConstPointer const movingImage = movingReader->GetOutput();
 
 
   // Software Guide : BeginLatex

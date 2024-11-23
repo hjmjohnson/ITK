@@ -42,9 +42,9 @@ itkSimplexMeshToTriangleMeshFilterTest(int, char *[])
   using TriangleFilterType = itk::SimplexMeshToTriangleMeshFilter<SimplexMeshType, TriangleMeshType>;
   using TriangleMeshPointer = TriangleMeshType::Pointer;
   auto                 mySphereMeshSource = SphereMeshSourceType::New();
-  PointType            center{};
+  PointType const      center{};
   PointType::ValueType scaleInit[3] = { 5, 5, 5 };
-  VectorType           scale = scaleInit;
+  VectorType const     scale = scaleInit;
 
   mySphereMeshSource->SetCenter(center);
   mySphereMeshSource->SetResolution(1);
@@ -58,14 +58,14 @@ itkSimplexMeshToTriangleMeshFilterTest(int, char *[])
   backFilter->Update();
   backFilter->Print(std::cout);
 
-  SimplexMeshType::Pointer simplexMesh = simplexFilter->GetOutput();
-  TriangleMeshPointer      originalTriangleMesh = mySphereMeshSource->GetOutput();
+  SimplexMeshType::Pointer const simplexMesh = simplexFilter->GetOutput();
+  TriangleMeshPointer            originalTriangleMesh = mySphereMeshSource->GetOutput();
 
   std::cout << "Original triangle mesh: " << std::endl;
   std::cout << originalTriangleMesh << std::endl;
 
   std::cout << "Simplex Mesh: " << simplexMesh << std::endl;
-  TriangleMeshType::Pointer triangleMesh = backFilter->GetOutput();
+  TriangleMeshType::Pointer const triangleMesh = backFilter->GetOutput();
 
   std::cout << "Back filtered Triangle Mesh: " << triangleMesh << std::endl;
 

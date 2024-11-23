@@ -65,8 +65,8 @@ public:
       return;
     }
 
-    unsigned int                                             currentLevel = filter->GetCurrentLevel();
-    typename TFilter::ShrinkFactorsPerDimensionContainerType shrinkFactors =
+    unsigned int const                                             currentLevel = filter->GetCurrentLevel();
+    typename TFilter::ShrinkFactorsPerDimensionContainerType const shrinkFactors =
       filter->GetShrinkFactorsPerDimension(currentLevel);
     typename TFilter::SmoothingSigmasArrayType                 smoothingSigmas = filter->GetSmoothingSigmasPerLevel();
     typename TFilter::TransformParametersAdaptorsContainerType adaptors =
@@ -127,14 +127,14 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   auto fixedImageReader = ImageReaderType::New();
   fixedImageReader->SetFileName(argv[2]);
   fixedImageReader->Update();
-  typename FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  typename FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
   fixedImage->Update();
   fixedImage->DisconnectPipeline();
 
   auto movingImageReader = ImageReaderType::New();
   movingImageReader->SetFileName(argv[3]);
   movingImageReader->Update();
-  typename MovingImageType::Pointer movingImage = movingImageReader->GetOutput();
+  typename MovingImageType::Pointer const movingImage = movingImageReader->GetOutput();
   movingImage->Update();
   movingImage->DisconnectPipeline();
 
@@ -190,7 +190,8 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   affineResampler->SetDefaultPixelValue(0);
   affineResampler->Update();
 
-  std::string affineMovingImageFileName = std::string(argv[4]) + std::string("MovingImageAfterAffineTransform.nii.gz");
+  std::string const affineMovingImageFileName =
+    std::string(argv[4]) + std::string("MovingImageAfterAffineTransform.nii.gz");
 
   using AffineWriterType = itk::ImageFileWriter<FixedImageType>;
   auto affineWriter = AffineWriterType::New();
@@ -217,7 +218,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   inverseDisplacementField->FillBuffer(zeroVector);
 
   using DisplacementFieldRegistrationType = itk::SyNImageRegistrationMethod<FixedImageType, MovingImageType>;
-  typename DisplacementFieldRegistrationType::Pointer displacementFieldRegistration =
+  typename DisplacementFieldRegistrationType::Pointer const displacementFieldRegistration =
     DisplacementFieldRegistrationType::New();
 
   using OutputTransformType = typename DisplacementFieldRegistrationType::OutputTransformType;
@@ -260,7 +261,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   // if the user wishes to add that option, they can use the class
   // GaussianSmoothingOnUpdateDisplacementFieldTransformAdaptor
 
-  unsigned int numberOfLevels = 3;
+  unsigned int const numberOfLevels = 3;
 
   typename DisplacementFieldRegistrationType::NumberOfIterationsArrayType numberOfIterationsPerLevel;
   numberOfIterationsPerLevel.SetSize(3);
@@ -273,8 +274,8 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   numberOfIterationsPerLevel[1] = 1;
   numberOfIterationsPerLevel[2] = 1;
 #endif
-  RealType varianceForUpdateField = 1.75;
-  RealType varianceForTotalField = 0.5;
+  RealType const varianceForUpdateField = 1.75;
+  RealType const varianceForTotalField = 0.5;
 
   typename DisplacementFieldRegistrationType::ShrinkFactorsArrayType shrinkFactorsPerLevel;
   shrinkFactorsPerLevel.SetSize(3);
@@ -300,7 +301,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
     shrinkFilter->SetInput(displacementField);
     shrinkFilter->Update();
 
-    typename DisplacementFieldTransformAdaptorType::Pointer fieldTransformAdaptor =
+    typename DisplacementFieldTransformAdaptorType::Pointer const fieldTransformAdaptor =
       DisplacementFieldTransformAdaptorType::New();
     fieldTransformAdaptor->SetRequiredSpacing(shrinkFilter->GetOutput()->GetSpacing());
     fieldTransformAdaptor->SetRequiredSize(shrinkFilter->GetOutput()->GetBufferedRegion().GetSize());
@@ -326,17 +327,17 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   displacementFieldRegistration->SetSmoothingSigmasPerLevel(smoothingSigmasPerLevel);
   displacementFieldRegistration->SetMetric(correlationMetric);
 
-  typename OutputTransformType::Pointer fixedToMiddleTransform;
+  typename OutputTransformType::Pointer const fixedToMiddleTransform;
   displacementFieldRegistration->SetFixedToMiddleTransform(fixedToMiddleTransform);
 
-  typename OutputTransformType::Pointer movingToMiddleTransform;
+  typename OutputTransformType::Pointer const movingToMiddleTransform;
   displacementFieldRegistration->SetMovingToMiddleTransform(movingToMiddleTransform);
 
   const typename DisplacementFieldRegistrationType::RealType epsilon =
     itk::NumericTraits<typename DisplacementFieldRegistrationType::RealType>::epsilon();
   const typename DisplacementFieldRegistrationType::RealType learningRate = std::stod(argv[6]);
   displacementFieldRegistration->SetLearningRate(learningRate);
-  typename DisplacementFieldRegistrationType::RealType obtainedLearningRate =
+  typename DisplacementFieldRegistrationType::RealType const obtainedLearningRate =
     displacementFieldRegistration->GetLearningRate();
   if (!itk::Math::FloatAlmostEqual(obtainedLearningRate, learningRate, 10, epsilon))
   {
@@ -355,7 +356,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   displacementFieldRegistration->SetTransformParametersAdaptorsPerLevel(adaptors);
 
   displacementFieldRegistration->SetGaussianSmoothingVarianceForTheUpdateField(varianceForUpdateField);
-  RealType obtainedVarianceForUpdateField =
+  RealType const obtainedVarianceForUpdateField =
     displacementFieldRegistration->GetGaussianSmoothingVarianceForTheUpdateField();
   if (!itk::Math::FloatAlmostEqual(obtainedVarianceForUpdateField, varianceForUpdateField, 10, epsilon))
   {
@@ -369,7 +370,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   }
 
   displacementFieldRegistration->SetGaussianSmoothingVarianceForTheTotalField(varianceForTotalField);
-  RealType obtainedVarianceForTotalField =
+  RealType const obtainedVarianceForTotalField =
     displacementFieldRegistration->GetGaussianSmoothingVarianceForTheTotalField();
   if (!itk::Math::FloatAlmostEqual(obtainedVarianceForTotalField, varianceForTotalField, 10, epsilon))
   {
@@ -384,7 +385,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
 
   const typename DisplacementFieldRegistrationType::RealType convergenceThreshold = 1.0e-6;
   displacementFieldRegistration->SetConvergenceThreshold(convergenceThreshold);
-  typename DisplacementFieldRegistrationType::RealType obtainedConvergenceThreshold =
+  typename DisplacementFieldRegistrationType::RealType const obtainedConvergenceThreshold =
     displacementFieldRegistration->GetConvergenceThreshold();
   if (!itk::Math::FloatAlmostEqual(obtainedConvergenceThreshold, convergenceThreshold, 10, epsilon))
   {
@@ -421,7 +422,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   resampler->SetDefaultPixelValue(0);
   resampler->Update();
 
-  std::string warpedMovingImageFileName = std::string(argv[4]) + std::string("MovingImageAfterSyN.nii.gz");
+  std::string const warpedMovingImageFileName = std::string(argv[4]) + std::string("MovingImageAfterSyN.nii.gz");
 
   using WriterType = itk::ImageFileWriter<FixedImageType>;
   auto writer = WriterType::New();
@@ -430,7 +431,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   writer->Update();
 
   using InverseResampleFilterType = itk::ResampleImageFilter<FixedImageType, MovingImageType>;
-  typename InverseResampleFilterType::Pointer inverseResampler = ResampleFilterType::New();
+  typename InverseResampleFilterType::Pointer const inverseResampler = ResampleFilterType::New();
   inverseResampler->SetTransform(compositeTransform->GetInverseTransform());
   inverseResampler->SetInput(fixedImage);
   inverseResampler->SetSize(movingImage->GetBufferedRegion().GetSize());
@@ -440,7 +441,8 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   inverseResampler->SetDefaultPixelValue(0);
   inverseResampler->Update();
 
-  std::string inverseWarpedFixedImageFileName = std::string(argv[4]) + std::string("InverseWarpedFixedImage.nii.gz");
+  std::string const inverseWarpedFixedImageFileName =
+    std::string(argv[4]) + std::string("InverseWarpedFixedImage.nii.gz");
 
   using InverseWriterType = itk::ImageFileWriter<MovingImageType>;
   auto inverseWriter = InverseWriterType::New();
@@ -448,7 +450,7 @@ PerformDisplacementFieldImageRegistration(int argc, char * argv[])
   inverseWriter->SetInput(inverseResampler->GetOutput());
   inverseWriter->Update();
 
-  std::string displacementFieldFileName = std::string(argv[4]) + std::string("DisplacementField.nii.gz");
+  std::string const displacementFieldFileName = std::string(argv[4]) + std::string("DisplacementField.nii.gz");
 
   using DisplacementFieldWriterType = itk::ImageFileWriter<DisplacementFieldType>;
   auto displacementFieldWriter = DisplacementFieldWriterType::New();
@@ -479,7 +481,7 @@ itkSyNImageRegistrationTest(int argc, char * argv[])
   using MovingImageType = itk::Image<PixelType, ImageDimension>;
 
   using DisplacementFieldRegistrationType = itk::SyNImageRegistrationMethod<FixedImageType, MovingImageType>;
-  typename DisplacementFieldRegistrationType::Pointer displacementFieldRegistration =
+  typename DisplacementFieldRegistrationType::Pointer const displacementFieldRegistration =
     DisplacementFieldRegistrationType::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(

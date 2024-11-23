@@ -106,10 +106,10 @@ itkNiftiImageIOTest14(int argc, char * argv[])
   try
   {
     // read the image back in
-    ImageType::Pointer image_from_disk = itk::IOTestHelper::ReadImage<ImageType>(output_test_fn);
+    ImageType::Pointer const image_from_disk = itk::IOTestHelper::ReadImage<ImageType>(output_test_fn);
 
     // check the metadata for xyzt_units and toffset
-    itk::MetaDataDictionary & dictionary = image_from_disk->GetMetaDataDictionary();
+    itk::MetaDataDictionary const & dictionary = image_from_disk->GetMetaDataDictionary();
 
     std::string toffset;
     if (!itk::ExposeMetaData<std::string>(dictionary, "toffset", toffset))

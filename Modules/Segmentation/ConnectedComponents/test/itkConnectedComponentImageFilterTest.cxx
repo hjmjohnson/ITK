@@ -90,7 +90,7 @@ itkConnectedComponentImageFilterTest(int argc, char * argv[])
   }
   ITK_TEST_SET_GET_BOOLEAN(filter, FullyConnected, fullyConnected);
 
-  typename FilterType::OutputPixelType backgroundValue{};
+  typename FilterType::OutputPixelType const backgroundValue{};
   filter->SetBackgroundValue(backgroundValue);
   ITK_TEST_SET_GET_VALUE(backgroundValue, filter->GetBackgroundValue());
 
@@ -101,7 +101,7 @@ itkConnectedComponentImageFilterTest(int argc, char * argv[])
   relabel->SetInput(filter->GetOutput());
   if (argc > 6)
   {
-    int minSize = std::stoi(argv[6]);
+    int const minSize = std::stoi(argv[6]);
     relabel->SetMinimumObjectSize(minSize);
     std::cerr << "minSize: " << minSize << std::endl;
   }
@@ -121,7 +121,7 @@ itkConnectedComponentImageFilterTest(int argc, char * argv[])
   colored->SetRegions(filter->GetOutput()->GetBufferedRegion());
   colored->Allocate();
 
-  unsigned short numObjects = relabel->GetNumberOfObjects();
+  unsigned short const numObjects = relabel->GetNumberOfObjects();
 
   std::vector<RGBPixelType> colormap;
   RGBPixelType              px;

@@ -36,7 +36,7 @@ StreamingProcessObject::GenerateData()
   // minimum of what the user specified via SetNumberOfStreamDivisions()
   // and what the Splitter thinks is a reasonable value.
   //
-  unsigned int numberOfInputRequestRegion = this->GetNumberOfInputRequestedRegions();
+  unsigned int const numberOfInputRequestRegion = this->GetNumberOfInputRequestedRegions();
 
   //
   // Loop over the number of pieces, execute the upstream pipeline on each

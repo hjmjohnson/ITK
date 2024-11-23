@@ -30,7 +30,7 @@ template <typename TPixel, unsigned int TDimension, typename TAllocator>
 void
 AnnulusOperator<TPixel, TDimension, TAllocator>::CreateOperator()
 {
-  CoefficientVector coefficients = this->GenerateCoefficients();
+  CoefficientVector const coefficients = this->GenerateCoefficients();
 
   this->Fill(coefficients);
 }
@@ -65,7 +65,7 @@ AnnulusOperator<TPixel, TDimension, TAllocator>::GenerateCoefficients() -> Coeff
 
   if (m_Normalize)
   {
-    double bright = (m_BrightCenter ? 1.0 : -1.0);
+    double const bright = (m_BrightCenter ? 1.0 : -1.0);
 
     // Initial values for a normalized kernel
     interiorV = bright;
@@ -84,7 +84,7 @@ AnnulusOperator<TPixel, TDimension, TAllocator>::GenerateCoefficients() -> Coeff
   SizeType     r;
   unsigned int i;
   unsigned int j;
-  double       outerRadius = m_InnerRadius + m_Thickness;
+  double const outerRadius = m_InnerRadius + m_Thickness;
   for (i = 0; i < TDimension; ++i)
   {
     r[i] = Math::Ceil<SizeValueType>(outerRadius / m_Spacing[i]);
@@ -159,16 +159,16 @@ AnnulusOperator<TPixel, TDimension, TAllocator>::GenerateCoefficients() -> Coeff
   {
     // Calculate the mean and standard deviation of kernel values NOT
     // the exterior
-    auto   num = static_cast<double>(countNotExterior);
-    double mean = sumNotExterior / num;
-    double var = (sumNotExteriorSq - (sumNotExterior * sumNotExterior / num)) / (num - 1.0);
-    double std = std::sqrt(var);
+    auto         num = static_cast<double>(countNotExterior);
+    double const mean = sumNotExterior / num;
+    double const var = (sumNotExteriorSq - (sumNotExterior * sumNotExterior / num)) / (num - 1.0);
+    double const std = std::sqrt(var);
 
     // convert std to a scaling factor k such that
     //
     //        || (coeffP - mean) / k || = 1.0
     //
-    double k = std * std::sqrt(num - 1.0);
+    double const k = std * std::sqrt(num - 1.0);
 
     // Run through the kernel again, shifting and normalizing the
     // elements that are not exterior to the annulus.  This forces the

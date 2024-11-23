@@ -96,9 +96,9 @@ itkConnectedRegionsMeshFilterTest1(int, char *[])
 
   auto meshSource = SphereMeshSourceType::New();
 
-  PointType            center{};
+  PointType const      center{};
   PointType::ValueType scaleInit[3] = { 1, 1, 1 };
-  PointType            scale = scaleInit;
+  PointType const      scale = scaleInit;
 
   meshSource->SetCenter(center);
   meshSource->SetResolutionX(10);

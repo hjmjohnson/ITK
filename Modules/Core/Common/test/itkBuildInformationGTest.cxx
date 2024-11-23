@@ -32,7 +32,7 @@ TEST(ITKBuildInformation, InformationFeatures)
 {
   using MapType = itk::BuildInformation::MapType;
 
-  itk::BuildInformation::Pointer instance = itk::BuildInformation::GetInstance();
+  itk::BuildInformation::Pointer const instance = itk::BuildInformation::GetInstance();
   EXPECT_EQ(instance.IsNull(), false);
 
 

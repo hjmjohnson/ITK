@@ -342,8 +342,8 @@ DiscreteLevelSetImage<TOutput, VDimension>::EvaluateHessian(const InputType & in
   InputType inputIndexCa;
   InputType inputIndexDa;
 
-  bool backward = data.BackwardGradient.m_Computed;
-  bool forward = data.ForwardGradient.m_Computed;
+  bool const backward = data.BackwardGradient.m_Computed;
+  bool const forward = data.ForwardGradient.m_Computed;
 
   for (unsigned int dim1 = 0; dim1 < Dimension; ++dim1)
   {
@@ -457,7 +457,7 @@ DiscreteLevelSetImage<TOutput, VDimension>::EvaluateMeanCurvature(const InputTyp
     }
   }
 
-  OutputRealType gradNorm = grad.GetNorm();
+  OutputRealType const gradNorm = grad.GetNorm();
 
   if (gradNorm > itk::Math::eps)
   {
@@ -560,7 +560,7 @@ DiscreteLevelSetImage<TOutput, VDimension>::EvaluateMeanCurvature(const InputTyp
       }
     }
 
-    OutputRealType temp = data.GradientNorm.m_Value;
+    OutputRealType const temp = data.GradientNorm.m_Value;
 
     if (temp > itk::Math::eps)
     {

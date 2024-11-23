@@ -98,7 +98,7 @@ itkSquareImageFilterTest(int, char *[])
   filter->Update();
 
   // Get the Smart Pointer to the filter output
-  OutputImageType::Pointer outputImage = filter->GetOutput();
+  OutputImageType::Pointer const outputImage = filter->GetOutput();
 
   // Create an iterator for going through the image output
   OutputIteratorType ot(outputImage, outputImage->GetRequestedRegion());

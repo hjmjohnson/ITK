@@ -79,7 +79,7 @@ main(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  Image4DType::ConstPointer image4D = reader4D->GetOutput();
+  Image4DType::ConstPointer const image4D = reader4D->GetOutput();
 
   // Software Guide : BeginLatex
   //
@@ -106,7 +106,7 @@ main(int argc, char * argv[])
   Spacing3DType spacing3D;
   Origin3DType  origin3D;
 
-  Image4DType::RegionType region4D = image4D->GetBufferedRegion();
+  Image4DType::RegionType const region4D = image4D->GetBufferedRegion();
 
   Index4DType   index4D = region4D.GetIndex();
   Size4DType    size4D = region4D.GetSize();
@@ -168,7 +168,7 @@ main(int argc, char * argv[])
       sum += it.Get();
       ++it;
     }
-    MeanType mean =
+    MeanType const mean =
       static_cast<MeanType>(sum) / static_cast<MeanType>(timeLength);
 
     index3D[0] = index4D[0];

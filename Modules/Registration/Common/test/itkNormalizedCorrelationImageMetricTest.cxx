@@ -40,7 +40,7 @@ itkNormalizedCorrelationImageMetricTest(int, char *[])
 
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
-  itk::StdStreamStateSave coutState(std::cout);
+  itk::StdStreamStateSave const coutState(std::cout);
 
   //------------------------------------------------------------
   // Create two simple images
@@ -88,8 +88,8 @@ itkNormalizedCorrelationImageMetricTest(int, char *[])
   movingImageSource->Update(); // Force the filter to run
   fixedImageSource->Update();  // Force the filter to run
 
-  MovingImageType::Pointer movingImage = movingImageSource->GetOutput();
-  FixedImageType::Pointer  fixedImage = fixedImageSource->GetOutput();
+  MovingImageType::Pointer const movingImage = movingImageSource->GetOutput();
+  FixedImageType::Pointer const  fixedImage = fixedImageSource->GetOutput();
 
 
   //-----------------------------------------------------------
@@ -182,7 +182,7 @@ itkNormalizedCorrelationImageMetricTest(int, char *[])
 
   std::cout << "param[1]   Metric    d(Metric)/d(param[1] " << std::endl;
 
-  bool subtractMean = true;
+  bool const subtractMean = true;
   ITK_TEST_SET_GET_BOOLEAN(metric, SubtractMean, subtractMean);
 
   for (double trans = -10; trans <= 5; trans += 0.2)

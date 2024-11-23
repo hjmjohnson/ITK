@@ -252,8 +252,8 @@ AnatomicalOrientation::ConvertPositiveEnumToDirection(PositiveEnum orientationEn
 {
   const AnatomicalOrientation o(orientationEnum);
 
-  CoordinateEnum terms[Dimension] = { o.GetPrimaryTerm(), o.GetSecondaryTerm(), o.GetTertiaryTerm() };
-  DirectionType  direction{};
+  CoordinateEnum const terms[Dimension] = { o.GetPrimaryTerm(), o.GetSecondaryTerm(), o.GetTertiaryTerm() };
+  DirectionType        direction{};
 
   for (unsigned int i = 0; i < Dimension; ++i)
   {

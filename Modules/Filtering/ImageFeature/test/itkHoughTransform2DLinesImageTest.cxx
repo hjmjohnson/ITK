@@ -152,17 +152,17 @@ itkHoughTransform2DLinesImageTest(int, char *[])
 
   // Create a line
   constexpr unsigned int lines = 1;
-  double                 theta = 0.20; // radians
-  double                 radius = 50;
+  double const           theta = 0.20; // radians
+  double const           radius = 50;
 
-  double Vx = radius * std::cos(theta);
-  double Vy = radius * std::sin(theta);
+  double const Vx = radius * std::cos(theta);
+  double const Vy = radius * std::sin(theta);
 
-  double norm = std::sqrt(Vx * Vx + Vy * Vy);
-  double VxNorm = Vx / norm;
-  double VyNorm = Vy / norm;
+  double const norm = std::sqrt(Vx * Vx + Vy * Vy);
+  double const VxNorm = Vx / norm;
+  double const VyNorm = Vy / norm;
 
-  unsigned int numberOfPixels = size[0] * size[1];
+  unsigned int const numberOfPixels = size[0] * size[1];
 
   for (unsigned int i = 0; i < numberOfPixels; i += 1)
   {
@@ -200,8 +200,8 @@ itkHoughTransform2DLinesImageTest(int, char *[])
   auto threshFilter = ThresholdFilterType::New();
   threshFilter->SetInput(gradFilter->GetOutput());
   threshFilter->SetOutsideValue(0);
-  unsigned char lowerThreshold = 10;
-  unsigned char upperThreshold = 200;
+  unsigned char const lowerThreshold = 10;
+  unsigned char const upperThreshold = 200;
   threshFilter->ThresholdOutside(lowerThreshold, upperThreshold);
 
   threshFilter->Update();
@@ -214,11 +214,11 @@ itkHoughTransform2DLinesImageTest(int, char *[])
   ITK_EXERCISE_BASIC_OBJECT_METHODS(houghFilter, HoughTransform2DLinesImageFilter, ImageToImageFilter);
 
 
-  float threshold = 2.3;
+  float const threshold = 2.3;
   houghFilter->SetThreshold(threshold);
   ITK_TEST_SET_GET_VALUE(threshold, houghFilter->GetThreshold());
 
-  float angleResolution = 200.0;
+  float const angleResolution = 200.0;
   houghFilter->SetAngleResolution(angleResolution);
   ITK_TEST_SET_GET_VALUE(angleResolution, houghFilter->GetAngleResolution());
 
@@ -226,11 +226,11 @@ itkHoughTransform2DLinesImageTest(int, char *[])
   houghFilter->SetNumberOfLines(numberOfLines);
   ITK_TEST_SET_GET_VALUE(numberOfLines, houghFilter->GetNumberOfLines());
 
-  float discRadius = 25.0;
+  float const discRadius = 25.0;
   houghFilter->SetDiscRadius(discRadius);
   ITK_TEST_SET_GET_VALUE(discRadius, houghFilter->GetDiscRadius());
 
-  float variance = 10;
+  float const variance = 10;
   houghFilter->SetVariance(variance);
   ITK_TEST_SET_GET_VALUE(variance, houghFilter->GetVariance());
 
@@ -241,9 +241,9 @@ itkHoughTransform2DLinesImageTest(int, char *[])
 
   houghFilter->Simplify();
 
-  HoughImageType::Pointer accumulator = houghFilter->GetOutput();
+  HoughImageType::Pointer const accumulator = houghFilter->GetOutput();
 
-  HoughImageType::ConstPointer simplifyAccumulator = houghFilter->GetSimplifyAccumulator();
+  HoughImageType::ConstPointer const simplifyAccumulator = houghFilter->GetSimplifyAccumulator();
 
 
   // Blur the accumulator in order to find the maximum
@@ -259,12 +259,13 @@ itkHoughTransform2DLinesImageTest(int, char *[])
 
   gaussianFilter->Update();
 
-  HoughImageType::Pointer postProcessImage = gaussianFilter->GetOutput();
+  HoughImageType::Pointer const postProcessImage = gaussianFilter->GetOutput();
 
   using MinMaxCalculatorType = itk::MinimumMaximumImageCalculator<HoughImageType>;
   auto minMaxCalculator = MinMaxCalculatorType::New();
 
-  itk::ImageRegionIterator<HoughImageType> it_output(m_HoughSpaceImage, m_HoughSpaceImage->GetLargestPossibleRegion());
+  itk::ImageRegionIterator<HoughImageType> const it_output(m_HoughSpaceImage,
+                                                           m_HoughSpaceImage->GetLargestPossibleRegion());
 
   itk::ImageRegionIterator<HoughImageType> it_input(postProcessImage, postProcessImage->GetLargestPossibleRegion());
 
@@ -323,8 +324,8 @@ itkHoughTransform2DLinesImageTest(int, char *[])
   // Check the line detection
   auto it_list = linesList.begin();
 
-  double angleTolerance = 0.1;
-  double radiusTolerance = 1.0;
+  double const angleTolerance = 0.1;
+  double const radiusTolerance = 1.0;
   while (it_list != linesList.end())
   {
     if (!itk::Math::FloatAlmostEqual(it_list->angle, theta, 10, angleTolerance))

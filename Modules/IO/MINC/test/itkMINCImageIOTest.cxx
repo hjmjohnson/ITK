@@ -276,7 +276,7 @@ abs_vector_diff(const itk::VariableLengthVector<TPixel> & pix1, const itk::Varia
 
   for (size_t i = 0; i < pix1.GetSize(); ++i)
   {
-    double d = itk::Math::abs(static_cast<double>(pix1[i] - pix2[i]));
+    double const d = itk::Math::abs(static_cast<double>(pix1[i] - pix2[i]));
     if (d > diff)
     {
       diff = d;
@@ -323,7 +323,7 @@ MINCReadWriteTest(const char * fileName, const char * minc_storage_type, double 
 
   auto im = ImageType::New();
 
-  typename ImageType::RegionType region{ index, size };
+  typename ImageType::RegionType const region{ index, size };
   im->SetRegions(region);
   im->SetSpacing(spacing);
   im->SetOrigin(origin);
@@ -373,7 +373,7 @@ MINCReadWriteTest(const char * fileName, const char * minc_storage_type, double 
   metaDataIntArray[4] = 2;
   itk::EncapsulateMetaData<itk::Array<int>>(metaDict, "acquisition:TestIntArray", metaDataIntArray);
 
-  std::string metaDataStdString("Test std::string");
+  std::string const metaDataStdString("Test std::string");
   itk::EncapsulateMetaData<std::string>(metaDict, "acquisition:StdString", metaDataStdString);
 
   //
@@ -435,7 +435,7 @@ MINCReadWriteTest(const char * fileName, const char * minc_storage_type, double 
 
   //
   // Check MetaData
-  itk::MetaDataDictionary & metaDict2(im2->GetMetaDataDictionary());
+  itk::MetaDataDictionary const & metaDict2(im2->GetMetaDataDictionary());
 
   double metaDataDouble = 0.0;
   if (!itk::ExposeMetaData<double>(metaDict2, "acquisition:TestDouble", metaDataDouble) || metaDataDouble != 1.23)
@@ -469,14 +469,14 @@ MINCReadWriteTest(const char * fileName, const char * minc_storage_type, double 
     std::cerr << "Failure reading metaData "
               << "acquisition:TestDoubleArray " << std::endl;
     std::cerr << "metaDataDoubleArray=";
-    for (double i : metaDataDoubleArray)
+    for (double const i : metaDataDoubleArray)
     {
       std::cerr << i << ' ';
     }
     std::cerr << std::endl;
 
     std::cerr << "metaDataDoubleArray2=";
-    for (double i : metaDataDoubleArray2)
+    for (double const i : metaDataDoubleArray2)
     {
       std::cerr << i << ' ';
     }
@@ -492,14 +492,14 @@ MINCReadWriteTest(const char * fileName, const char * minc_storage_type, double 
     std::cerr << "Failure reading metaData "
               << "acquisition:TestFloatArray " << std::endl;
     std::cerr << "metaDataFloatArray=";
-    for (float i : metaDataFloatArray)
+    for (float const i : metaDataFloatArray)
     {
       std::cerr << i << ' ';
     }
     std::cerr << std::endl;
 
     std::cerr << "metaDataFloatArray2=";
-    for (float i : metaDataFloatArray2)
+    for (float const i : metaDataFloatArray2)
     {
       std::cerr << i << ' ';
     }
@@ -587,7 +587,7 @@ MINCReadWriteTestVector(const char * fileName,
   auto im = ImageType::New();
 
   // itk::IOTestHelper::AllocateImageFromRegionAndSpacing<ImageType>(imageRegion,spacing);
-  typename ImageType::RegionType region{ index, size };
+  typename ImageType::RegionType const region{ index, size };
   im->SetRegions(region);
   im->SetSpacing(spacing);
   im->SetOrigin(origin);
@@ -629,7 +629,7 @@ MINCReadWriteTestVector(const char * fileName,
   metaDataIntArray[4] = 2;
   itk::EncapsulateMetaData<itk::Array<int>>(metaDict, "acquisition:TestIntArray", metaDataIntArray);
 
-  std::string metaDataStdString("Test std::string");
+  std::string const metaDataStdString("Test std::string");
   itk::EncapsulateMetaData<std::string>(metaDict, "acquisition:StdString", metaDataStdString);
 
   //
@@ -691,7 +691,7 @@ MINCReadWriteTestVector(const char * fileName,
   }
 
   // Check MetaData
-  itk::MetaDataDictionary & metaDict2(im2->GetMetaDataDictionary());
+  itk::MetaDataDictionary const & metaDict2(im2->GetMetaDataDictionary());
 
   double metaDataDouble = 0.0;
   if (!itk::ExposeMetaData<double>(metaDict2, "acquisition:TestDouble", metaDataDouble) || metaDataDouble != 1.23)

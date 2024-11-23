@@ -195,8 +195,8 @@ main(int, char *[])
   //  Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  PointType pp;
-  bool      pointExists = pointsSet->GetPoint(1, &pp);
+  PointType  pp;
+  bool const pointExists = pointsSet->GetPoint(1, &pp);
 
   if (pointExists)
   {

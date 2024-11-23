@@ -41,7 +41,7 @@ BinaryGrindPeakImageFilter<TInputImage>::GenerateInputRequestedRegion()
   Superclass::GenerateInputRequestedRegion();
 
   // We need the whole input
-  InputImagePointer input = const_cast<InputImageType *>(this->GetInput());
+  InputImagePointer const input = const_cast<InputImageType *>(this->GetInput());
   if (input)
   {
     input->SetRequestedRegion(input->GetLargestPossibleRegion());

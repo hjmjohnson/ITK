@@ -66,9 +66,9 @@ BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ComputeBoundary()
       break;
   }
 
-  InputPointIdentifier i = 0;
-  InputIteratorGeom    it = bdryEdge->BeginGeomLnext();
-  InputIteratorGeom    end = bdryEdge->EndGeomLnext();
+  InputPointIdentifier    i = 0;
+  InputIteratorGeom       it = bdryEdge->BeginGeomLnext();
+  InputIteratorGeom const end = bdryEdge->EndGeomLnext();
 
   while (it != end)
   {
@@ -95,9 +95,9 @@ template <typename TInputMesh, typename TOutputMesh>
 auto
 BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ComputeLongestBorder() -> InputQEType *
 {
-  BoundaryRepresentativeEdgesPointer boundaryRepresentativeEdges = BoundaryRepresentativeEdgesType::New();
+  BoundaryRepresentativeEdgesPointer const boundaryRepresentativeEdges = BoundaryRepresentativeEdgesType::New();
 
-  InputMeshConstPointer input = this->GetInput();
+  InputMeshConstPointer const input = this->GetInput();
 
   InputEdgeListPointerType list;
   list.TakeOwnership(boundaryRepresentativeEdges->Evaluate(*input));
@@ -119,11 +119,11 @@ BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ComputeLongestBorder() -> Inp
     {
       InputQEType * t_edge = e_it.Value();
 
-      InputPointIdentifier id_org = t_edge->GetOrigin();
-      InputPointIdentifier id_dest = t_edge->GetDestination();
+      InputPointIdentifier const id_org = t_edge->GetOrigin();
+      InputPointIdentifier const id_dest = t_edge->GetDestination();
 
-      InputPointType org = input->GetPoint(id_org);
-      InputPointType dest = input->GetPoint(id_dest);
+      InputPointType const org = input->GetPoint(id_org);
+      InputPointType const dest = input->GetPoint(id_dest);
 
       length += org.EuclideanDistanceTo(dest);
     }
@@ -146,9 +146,9 @@ template <typename TInputMesh, typename TOutputMesh>
 auto
 BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ComputeLargestBorder() -> InputQEType *
 {
-  BoundaryRepresentativeEdgesPointer boundaryRepresentativeEdges = BoundaryRepresentativeEdgesType::New();
+  BoundaryRepresentativeEdgesPointer const boundaryRepresentativeEdges = BoundaryRepresentativeEdgesType::New();
 
-  InputMeshConstPointer input = this->GetInput();
+  InputMeshConstPointer const input = this->GetInput();
 
   InputEdgeListPointerType list;
   list.TakeOwnership(boundaryRepresentativeEdges->Evaluate(*input));
@@ -190,14 +190,14 @@ template <typename TInputMesh, typename TOutputMesh>
 void
 BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::DiskTransform()
 {
-  InputMeshConstPointer input = this->GetInput();
+  InputMeshConstPointer const input = this->GetInput();
 
   auto NbBoundaryPt = static_cast<InputPointIdentifier>(this->m_BoundaryPtMap.size());
 
-  InputCoordRepType r = this->RadiusMaxSquare();
+  InputCoordRepType const r = this->RadiusMaxSquare();
 
-  InputCoordRepType two_r = 2.0 * r;
-  InputCoordRepType inv_two_r = 1.0 / two_r;
+  InputCoordRepType const two_r = 2.0 * r;
+  InputCoordRepType const inv_two_r = 1.0 / two_r;
 
   InputPointIdentifier id = this->m_BoundaryPtMap.begin()->first;
   InputPointType       pt1 = input->GetPoint(id);
@@ -231,7 +231,7 @@ BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::DiskTransform()
     ++BoundaryPtIterator;
   }
 
-  InputCoordRepType a = (2.0 * itk::Math::pi) / tetas[NbBoundaryPt - 1];
+  InputCoordRepType const a = (2.0 * itk::Math::pi) / tetas[NbBoundaryPt - 1];
 
   if (this->m_Radius == 0.0)
   {
@@ -257,9 +257,9 @@ template <typename TInputMesh, typename TOutputMesh>
 auto
 BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::RadiusMaxSquare() -> InputCoordRepType
 {
-  InputMeshConstPointer input = this->GetInput();
+  InputMeshConstPointer const input = this->GetInput();
 
-  InputPointType center = this->GetMeshBarycentre();
+  InputPointType const center = this->GetMeshBarycentre();
 
   InputCoordRepType oRmax(0.);
   InputCoordRepType r;
@@ -285,7 +285,7 @@ template <typename TInputMesh, typename TOutputMesh>
 auto
 BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::GetMeshBarycentre() -> InputPointType
 {
-  InputMeshConstPointer input = this->GetInput();
+  InputMeshConstPointer const input = this->GetInput();
 
   InputPointType oCenter{};
 
@@ -306,7 +306,7 @@ BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::GetMeshBarycentre() -> InputP
     ++PointIterator;
   }
 
-  InputCoordRepType invNbOfPoints = 1.0 / static_cast<InputCoordRepType>(input->GetNumberOfPoints());
+  InputCoordRepType const invNbOfPoints = 1.0 / static_cast<InputCoordRepType>(input->GetNumberOfPoints());
 
   for (i = 0; i < PointDimension; ++i)
   {
@@ -344,9 +344,9 @@ template <typename TInputMesh, typename TOutputMesh>
 void
 BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ArcLengthSquareTransform()
 {
-  BoundaryRepresentativeEdgesPointer boundaryRepresentativeEdges = BoundaryRepresentativeEdgesType::New();
+  BoundaryRepresentativeEdgesPointer const boundaryRepresentativeEdges = BoundaryRepresentativeEdgesType::New();
 
-  InputMeshConstPointer input = this->GetInput();
+  InputMeshConstPointer const input = this->GetInput();
 
   InputEdgeListPointerType list;
   list.TakeOwnership(boundaryRepresentativeEdges->Evaluate(*input));
@@ -384,8 +384,8 @@ BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ArcLengthSquareTransform()
     this->m_Radius = 1000.;
   }
 
-  InputCoordRepType EdgeLength = 2.0 * this->m_Radius;
-  InputCoordRepType ratio = 4.0 * EdgeLength / TotalLength;
+  InputCoordRepType const EdgeLength = 2.0 * this->m_Radius;
+  InputCoordRepType const ratio = 4.0 * EdgeLength / TotalLength;
 
   for (i = 0; i < NbBoundaryPt + 1; ++i)
   {

@@ -351,7 +351,7 @@ main(int argc, char * argv[])
   //  Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  OptimizerType::ParametersType finalParameters =
+  OptimizerType::ParametersType const finalParameters =
     registration->GetLastTransformParameters();
 
   const unsigned int numberOfIterations = optimizer->GetCurrentIteration();
@@ -384,7 +384,7 @@ main(int argc, char * argv[])
   resampler->SetTransform(finalTransform);
   resampler->SetInput(movingImageReader->GetOutput());
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
 
   resampler->SetSize(fixedImage->GetLargestPossibleRegion().GetSize());
   resampler->SetOutputOrigin(fixedImage->GetOrigin());

@@ -45,10 +45,10 @@ itkJoinSeriesImageFilterTest(int, char *[])
   using OutputImageType = itk::Image<PixelType, 4>;
 
   // Expected result
-  OutputImageType::IndexType   expectedIndex = { { 1, 2, 0, 0 } };
-  OutputImageType::SizeType    expectedSize = { { 8, 5, 4, 1 } };
-  OutputImageType::RegionType  expectedRegion{ expectedIndex, expectedSize };
-  OutputImageType::SpacingType expectedSpacing;
+  OutputImageType::IndexType const  expectedIndex = { { 1, 2, 0, 0 } };
+  OutputImageType::SizeType const   expectedSize = { { 8, 5, 4, 1 } };
+  OutputImageType::RegionType const expectedRegion{ expectedIndex, expectedSize };
+  OutputImageType::SpacingType      expectedSpacing;
   expectedSpacing[0] = 1.1;
   expectedSpacing[1] = 1.2;
   expectedSpacing[2] = 1.3;
@@ -60,12 +60,12 @@ itkJoinSeriesImageFilterTest(int, char *[])
   expectedOrigin[3] = 0.0;
 
   // Create the input images
-  int                         numInputs = 4;
-  InputImageType::IndexType   index = { { 1, 2 } };
-  InputImageType::SizeType    size = { { 8, 5 } };
-  InputImageType::RegionType  region{ index, size };
-  constexpr double            spacingValue = 1.3;
-  InputImageType::SpacingType spacing;
+  int const                        numInputs = 4;
+  InputImageType::IndexType const  index = { { 1, 2 } };
+  InputImageType::SizeType const   size = { { 8, 5 } };
+  InputImageType::RegionType const region{ index, size };
+  constexpr double                 spacingValue = 1.3;
+  InputImageType::SpacingType      spacing;
   spacing[0] = 1.1;
   spacing[1] = 1.2;
   constexpr double          originValue = 0.3;
@@ -154,7 +154,7 @@ itkJoinSeriesImageFilterTest(int, char *[])
     return EXIT_FAILURE;
   }
 
-  OutputImageType::Pointer output = streamingImage->GetOutput();
+  OutputImageType::Pointer const output = streamingImage->GetOutput();
 
 
   // Check the information

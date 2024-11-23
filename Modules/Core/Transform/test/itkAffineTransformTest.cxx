@@ -114,7 +114,7 @@ itkAffineTransformTest(int, char *[])
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
   // scope.
-  itk::StdStreamStateSave coutState(std::cout);
+  itk::StdStreamStateSave const coutState(std::cout);
 
   /* Set outstream precision */
   std::cout.precision(20);
@@ -541,7 +541,7 @@ itkAffineTransformTest(int, char *[])
     return EXIT_FAILURE;
   }
 
-  Affine3DType::Pointer inv4 = dynamic_cast<Affine3DType *>(aff3->GetInverseTransform().GetPointer());
+  Affine3DType::Pointer const inv4 = dynamic_cast<Affine3DType *>(aff3->GetInverseTransform().GetPointer());
   if (!inv4)
   {
     std::cout << "Cannot compute inverse transformation inv4" << std::endl;
@@ -571,7 +571,7 @@ itkAffineTransformTest(int, char *[])
 
   double                     data[] = { 5, 10, 15, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,  0,  5, 10, 15,
                     0, 0,  0,  0, 1, 0, 0, 0, 0, 0, 0, 0, 5, 10, 15, 0, 0,  1 };
-  vnl_matrix<double>         vnlData(data, 3, 12);
+  vnl_matrix<double> const   vnlData(data, 3, 12);
   Affine3DType::JacobianType expectedJacobian(vnlData);
   for (unsigned int i = 0; i < 3; ++i)
   {
@@ -758,7 +758,7 @@ itkAffineTransformTest(int, char *[])
     }
   }
   /* Update with a non-unit scaling factor */
-  double factor = 0.5;
+  double const factor = 0.5;
   for (unsigned int i = 0; i < paff->GetNumberOfParameters(); ++i)
   {
     update[i] = i;
@@ -837,7 +837,8 @@ itkAffineTransformTest(int, char *[])
     auto other = TransformType::New();
     transform->GetInverse(other);
 
-    TransformType::Pointer otherbis = dynamic_cast<TransformType *>(transform->GetInverseTransform().GetPointer());
+    TransformType::Pointer const otherbis =
+      dynamic_cast<TransformType *>(transform->GetInverseTransform().GetPointer());
 
     parameters2 = other->GetParameters();
     TransformType::ParametersType parameters2bis = otherbis->GetParameters();
@@ -885,7 +886,7 @@ itkAffineTransformTest(int, char *[])
       return EXIT_FAILURE;
     }
 
-    TransformType::Pointer singularTransformInverse2 =
+    TransformType::Pointer const singularTransformInverse2 =
       dynamic_cast<TransformType *>(singularTransform->GetInverseTransform().GetPointer());
     if (!singularTransformInverse2)
     {

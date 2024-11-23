@@ -36,7 +36,7 @@ SpatialObjectDuplicator<TInputSpatialObject>::CopyObject(const InternalSpatialOb
 {
   using SOType = itk::SpatialObject<TInputSpatialObject::ObjectDimension>;
 
-  typename SOType::Pointer newSO = source->Clone();
+  typename SOType::Pointer const newSO = source->Clone();
   destination->AddChild(newSO);
   destination->Update();
 

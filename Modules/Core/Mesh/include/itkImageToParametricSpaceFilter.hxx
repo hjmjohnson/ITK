@@ -56,8 +56,8 @@ template <typename TInputImage, typename TOutputMesh>
 void
 ImageToParametricSpaceFilter<TInputImage, TOutputMesh>::GenerateOutputInformation()
 {
-  OutputMeshPointer      mesh = this->GetOutput();
-  PointsContainerPointer points = mesh->GetPoints();
+  OutputMeshPointer const      mesh = this->GetOutput();
+  PointsContainerPointer const points = mesh->GetPoints();
 
   PointDataContainerPointer pointData;
   if (mesh->GetPointData())
@@ -69,8 +69,8 @@ ImageToParametricSpaceFilter<TInputImage, TOutputMesh>::GenerateOutputInformatio
     pointData = PointDataContainer::New();
   }
 
-  InputImageConstPointer image = this->GetInput(0);
-  const SizeValueType    numberOfPixels = image->GetRequestedRegion().GetNumberOfPixels();
+  InputImageConstPointer const image = this->GetInput(0);
+  const SizeValueType          numberOfPixels = image->GetRequestedRegion().GetNumberOfPixels();
 
   points->Reserve(numberOfPixels);
   pointData->Reserve(numberOfPixels);
@@ -84,13 +84,13 @@ template <typename TInputImage, typename TOutputMesh>
 void
 ImageToParametricSpaceFilter<TInputImage, TOutputMesh>::GenerateData()
 {
-  OutputMeshPointer         mesh = this->GetOutput();
-  PointsContainerPointer    points = mesh->GetPoints();
-  PointDataContainerPointer pointData = PointDataContainer::New();
-  InputImageConstPointer    image = this->GetInput(0);
-  InputImageRegionType      region = image->GetRequestedRegion();
+  OutputMeshPointer const         mesh = this->GetOutput();
+  PointsContainerPointer const    points = mesh->GetPoints();
+  PointDataContainerPointer const pointData = PointDataContainer::New();
+  InputImageConstPointer          image = this->GetInput(0);
+  InputImageRegionType const      region = image->GetRequestedRegion();
 
-  SizeValueType numberOfPixels = region.GetNumberOfPixels();
+  SizeValueType const numberOfPixels = region.GetNumberOfPixels();
 
   points->Reserve(numberOfPixels);
   pointData->Reserve(numberOfPixels);

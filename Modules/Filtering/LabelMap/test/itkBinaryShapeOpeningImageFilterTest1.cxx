@@ -51,17 +51,17 @@ itkBinaryShapeOpeningImageFilterTest1(int argc, char * argv[])
   opening->SetInput(reader->GetOutput());
 
   // testing get/set ForegroundValue macro
-  int ForegroundValue = (std::stoi(argv[3]));
+  int const ForegroundValue = (std::stoi(argv[3]));
   opening->SetForegroundValue(ForegroundValue);
   ITK_TEST_SET_GET_VALUE(ForegroundValue, opening->GetForegroundValue());
 
   // testing get/set BackgroundValue macro
-  int BackgroundValue = (std::stoi(argv[4]));
+  int const BackgroundValue = (std::stoi(argv[4]));
   opening->SetBackgroundValue(BackgroundValue);
   ITK_TEST_SET_GET_VALUE(BackgroundValue, opening->GetBackgroundValue());
 
   // testing get and set macros for Lambda
-  double lambda = std::stod(argv[5]);
+  double const lambda = std::stod(argv[5]);
   opening->SetLambda(lambda);
   ITK_TEST_SET_GET_VALUE(lambda, opening->GetLambda());
 
@@ -73,7 +73,7 @@ itkBinaryShapeOpeningImageFilterTest1(int argc, char * argv[])
   ITK_TEST_SET_GET_VALUE(false, opening->GetReverseOrdering());
 
   // testing get and set macros or ReverseOrdering
-  bool reverseOrdering = std::stoi(argv[6]);
+  bool const reverseOrdering = std::stoi(argv[6]);
   opening->SetReverseOrdering(reverseOrdering);
   ITK_TEST_SET_GET_VALUE(reverseOrdering, opening->GetReverseOrdering());
 
@@ -85,16 +85,16 @@ itkBinaryShapeOpeningImageFilterTest1(int argc, char * argv[])
   ITK_TEST_SET_GET_VALUE(false, opening->GetFullyConnected());
 
   // testing get and set macros or FullyConnected
-  bool fullyConnected = std::stoi(argv[7]);
+  bool const fullyConnected = std::stoi(argv[7]);
   opening->SetFullyConnected(fullyConnected);
   ITK_TEST_SET_GET_VALUE(fullyConnected, opening->GetFullyConnected());
 
   // testing get and set macros for Attribute
-  BinaryOpeningType::AttributeType attribute = std::stoi(argv[8]);
+  BinaryOpeningType::AttributeType const attribute = std::stoi(argv[8]);
   opening->SetAttribute(attribute);
   ITK_TEST_SET_GET_VALUE(attribute, opening->GetAttribute());
 
-  itk::SimpleFilterWatcher watcher(opening, "filter");
+  itk::SimpleFilterWatcher const watcher(opening, "filter");
 
   using WriterType = itk::ImageFileWriter<IType>;
   auto writer = WriterType::New();

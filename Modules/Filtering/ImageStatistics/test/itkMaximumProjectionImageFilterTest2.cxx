@@ -36,7 +36,7 @@ itkMaximumProjectionImageFilterTest2(int argc, char * argv[])
 
   // Legacy compat with older MetaImages
   itk::MetaImageIO::SetDefaultDoublePrecision(6);
-  int dim = std::stoi(argv[1]);
+  int const dim = std::stoi(argv[1]);
 
   using PixelType = unsigned char;
 
@@ -54,7 +54,7 @@ itkMaximumProjectionImageFilterTest2(int argc, char * argv[])
   // proc computer
   filter->SetNumberOfWorkUnits(2);
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   using WriterType = itk::ImageFileWriter<ImageType>;
   auto writer = WriterType::New();

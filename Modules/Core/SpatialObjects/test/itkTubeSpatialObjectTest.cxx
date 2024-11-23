@@ -55,7 +55,7 @@ itkTubeSpatialObjectTest(int, char *[])
   std::cout << "==================================" << std::endl;
   std::cout << "Testing SpatialObject:" << std::endl << std::endl;
 
-  TubePointer tube1 = TubeType::New();
+  TubePointer const tube1 = TubeType::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(tube1, TubeSpatialObject, PointBasedSpatialObject);
 
@@ -123,7 +123,7 @@ itkTubeSpatialObjectTest(int, char *[])
     return EXIT_FAILURE;
   }
 
-  TubeType::CovariantVectorType expectedDerivative{};
+  TubeType::CovariantVectorType const expectedDerivative{};
 
   if (expectedDerivative != derivative)
   {
@@ -156,19 +156,19 @@ itkTubeSpatialObjectTest(int, char *[])
   ChildrenListPointer returnedList;
   unsigned int        nbChildren;
 
-  TubePointer tube2 = TubeType::New();
+  TubePointer const tube2 = TubeType::New();
   tube2->GetProperty().SetName("Tube 2");
   tube2->SetId(2);
   tube2->SetPoints(list);
   tube2->Update();
 
-  TubePointer tube3 = TubeType::New();
+  TubePointer const tube3 = TubeType::New();
   tube3->GetProperty().SetName("Tube 3");
   tube3->SetId(3);
   tube3->SetPoints(list);
   tube3->Update();
 
-  GroupPointer tubeNet1 = GroupType::New();
+  GroupPointer const tubeNet1 = GroupType::New();
   tubeNet1->GetProperty().SetName("tube network 1");
 
 
@@ -375,8 +375,8 @@ itkTubeSpatialObjectTest(int, char *[])
   std::cout << "==============================================" << std::endl;
   std::cout << "Testing references behavior for SpatialObject:" << std::endl << std::endl;
 
-  TubePointer  tube = TubeType::New();
-  GroupPointer net = GroupType::New();
+  TubePointer const  tube = TubeType::New();
+  GroupPointer const net = GroupType::New();
 
   unsigned int tubeCount;
   unsigned int netCount;
@@ -391,7 +391,7 @@ itkTubeSpatialObjectTest(int, char *[])
   }
   else
   {
-    TubePointer localTube = tube;
+    TubePointer const localTube = tube;
     tubeCount = tube->GetReferenceCount();
     if (tubeCount != 2)
     {
@@ -407,7 +407,7 @@ itkTubeSpatialObjectTest(int, char *[])
   }
   else
   {
-    GroupPointer localNet = net;
+    GroupPointer const localNet = net;
     netCount = net->GetReferenceCount();
     if (netCount != 2)
     {
@@ -568,9 +568,9 @@ itkTubeSpatialObjectTest(int, char *[])
     pOriginal.SetAlpha3(11.0);
 
     // Copy
-    TubePointType pCopy(pOriginal);
+    TubePointType const pCopy(pOriginal);
     // Assign
-    TubePointType pAssign = pOriginal;
+    TubePointType const pAssign = pOriginal;
 
     std::vector<TubePointType> pointVector;
     pointVector.push_back(pCopy);

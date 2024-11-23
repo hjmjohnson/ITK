@@ -81,13 +81,13 @@ itkConnectedComponentImageFilterTestRGB(int argc, char * argv[])
   filter->SetInput(threshold->GetOutput());
   if (argc > 5)
   {
-    int fullyConnected = std::stoi(argv[5]);
+    int const fullyConnected = std::stoi(argv[5]);
     filter->SetFullyConnected(fullyConnected);
   }
   relabel->SetInput(filter->GetOutput());
   if (argc > 6)
   {
-    int minSize = std::stoi(argv[6]);
+    int const minSize = std::stoi(argv[6]);
     relabel->SetMinimumObjectSize(minSize);
     std::cerr << "minSize: " << minSize << std::endl;
   }
@@ -100,7 +100,7 @@ itkConnectedComponentImageFilterTestRGB(int argc, char * argv[])
   colored->SetRegions(filter->GetOutput()->GetBufferedRegion());
   colored->Allocate();
 
-  unsigned short numObjects = relabel->GetNumberOfObjects();
+  unsigned short const numObjects = relabel->GetNumberOfObjects();
 
   std::vector<RGBPixelType> colormap;
   RGBPixelType              px;

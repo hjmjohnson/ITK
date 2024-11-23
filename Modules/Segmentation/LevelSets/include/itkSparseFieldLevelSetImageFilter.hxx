@@ -39,8 +39,8 @@ SparseFieldCityBlockNeighborList<TNeighborhoodType>::SparseFieldCityBlockNeighbo
     m_Radius[i] = 1;
     zero_offset[i] = 0;
   }
-  NeighborhoodType   it(m_Radius, dummy_image, dummy_image->GetRequestedRegion());
-  const unsigned int nCenter = it.Size() / 2;
+  NeighborhoodType const it(m_Radius, dummy_image, dummy_image->GetRequestedRegion());
+  const unsigned int     nCenter = it.Size() / 2;
 
   m_Size = 2 * Dimension;
   m_ArrayIndex.reserve(m_Size);
@@ -251,7 +251,7 @@ SparseFieldLevelSetImageFilter<TInputImage, TOutputImage>::ProcessStatusList(Lay
 
     for (unsigned int i = 0; i < m_NeighborList.GetSize(); ++i)
     {
-      StatusType neighbor_status = statusIt.GetPixel(m_NeighborList.GetArrayIndex(i));
+      StatusType const neighbor_status = statusIt.GetPixel(m_NeighborList.GetArrayIndex(i));
 
       // Have we bumped up against the boundary?  If so, turn on bounds
       // checking.
@@ -764,8 +764,8 @@ SparseFieldLevelSetImageFilter<TInputImage, TOutputImage>::InitializeActiveLayer
   ConstNeighborhoodIterator<OutputImageType> shiftedIt(
     m_NeighborList.GetRadius(), m_ShiftedImage, this->m_OutputImage->GetRequestedRegion());
 
-  const unsigned int                center = shiftedIt.Size() / 2;
-  typename OutputImageType::Pointer output = this->m_OutputImage;
+  const unsigned int                      center = shiftedIt.Size() / 2;
+  typename OutputImageType::Pointer const output = this->m_OutputImage;
 
   const NeighborhoodScalesType neighborhoodScales = this->GetDifferenceFunction()->ComputeNeighborhoodScales();
 

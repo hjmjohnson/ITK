@@ -104,8 +104,8 @@ main(int argc, char * argv[])
 
   reader->SetFileName(argv[1]);
 
-  std::string outputPrefix = argv[2];
-  std::string outputFileName;
+  std::string const outputPrefix = argv[2];
+  std::string       outputFileName;
 
   try
   {
@@ -162,7 +162,7 @@ main(int argc, char * argv[])
   gb->SetZeroOrder();
   gc->SetSecondOrder();
 
-  ImageType::Pointer inputImage = reader->GetOutput();
+  ImageType::Pointer const inputImage = reader->GetOutput();
 
   ga->SetInput(inputImage);
   gb->SetInput(ga->GetOutput());
@@ -173,7 +173,7 @@ main(int argc, char * argv[])
   gc->Update();
   duplicator->Update();
 
-  ImageType::Pointer Izz = duplicator->GetOutput();
+  ImageType::Pointer const Izz = duplicator->GetOutput();
   //  Software Guide: EndCodeSnippet
 
   writer->SetInput(Izz);
@@ -200,7 +200,7 @@ main(int argc, char * argv[])
   gc->Update();
   duplicator->Update();
 
-  ImageType::Pointer Iyy = duplicator->GetOutput();
+  ImageType::Pointer const Iyy = duplicator->GetOutput();
   //  Software Guide : EndCodeSnippet
 
   writer->SetInput(Iyy);
@@ -223,7 +223,7 @@ main(int argc, char * argv[])
   gc->Update();
   duplicator->Update();
 
-  ImageType::Pointer Ixx = duplicator->GetOutput();
+  ImageType::Pointer const Ixx = duplicator->GetOutput();
   //  Software Guide : EndCodeSnippet
 
   writer->SetInput(Ixx);
@@ -252,7 +252,7 @@ main(int argc, char * argv[])
   gc->Update();
   duplicator->Update();
 
-  ImageType::Pointer Iyz = duplicator->GetOutput();
+  ImageType::Pointer const Iyz = duplicator->GetOutput();
   //  Software Guide : EndCodeSnippet
 
   writer->SetInput(Iyz);
@@ -278,7 +278,7 @@ main(int argc, char * argv[])
   gc->Update();
   duplicator->Update();
 
-  ImageType::Pointer Ixz = duplicator->GetOutput();
+  ImageType::Pointer const Ixz = duplicator->GetOutput();
   //  Software Guide : EndCodeSnippet
 
   //  Software Guide : BeginLatex
@@ -305,7 +305,7 @@ main(int argc, char * argv[])
   gc->Update();
   duplicator->Update();
 
-  ImageType::Pointer Ixy = duplicator->GetOutput();
+  ImageType::Pointer const Ixy = duplicator->GetOutput();
 
   writer->SetInput(Ixy);
   outputFileName = outputPrefix + "-Ixy.mhd";

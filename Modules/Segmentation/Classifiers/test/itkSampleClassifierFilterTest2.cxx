@@ -69,7 +69,7 @@ itkSampleClassifierFilterTest2(int, char *[])
   // Add three membership functions and rerun the filter
   MembershipFunctionVectorType & membershipFunctionsVector = membershipFunctionsObject->Get();
 
-  MembershipFunctionPointer membershipFunction1 = MembershipFunctionType::New();
+  MembershipFunctionPointer const membershipFunction1 = MembershipFunctionType::New();
   membershipFunction1->SetMeasurementVectorSize(numberOfComponents);
   MeanVectorType mean1;
   itk::NumericTraits<MeanVectorType>::SetLength(mean1, numberOfComponents);
@@ -83,7 +83,7 @@ itkSampleClassifierFilterTest2(int, char *[])
   membershipFunction1->SetCovariance(covariance1);
   membershipFunctionsVector.push_back(membershipFunction1);
 
-  MembershipFunctionPointer membershipFunction2 = MembershipFunctionType::New();
+  MembershipFunctionPointer const membershipFunction2 = MembershipFunctionType::New();
   membershipFunction1->SetMeasurementVectorSize(numberOfComponents);
 
   MeanVectorType mean2;
@@ -103,10 +103,10 @@ itkSampleClassifierFilterTest2(int, char *[])
 
   using ClassLabelType = FilterType::ClassLabelType;
 
-  ClassLabelType class1 = 0;
+  ClassLabelType const class1 = 0;
   classLabelVector.push_back(class1);
 
-  ClassLabelType class2 = 1;
+  ClassLabelType const class2 = 1;
   classLabelVector.push_back(class2);
 
   // Set a decision rule type
@@ -127,9 +127,9 @@ itkSampleClassifierFilterTest2(int, char *[])
 
   MeasurementVectorType mv;
   itk::NumericTraits<MeasurementVectorType>::SetLength(mv, numberOfComponents);
-  double       mean = mean1[0];
-  double       standardDeviation = std::sqrt(covariance1[0][0]);
-  unsigned int numberOfSampleEachClass = 10;
+  double             mean = mean1[0];
+  double             standardDeviation = std::sqrt(covariance1[0][0]);
+  unsigned int const numberOfSampleEachClass = 10;
   for (unsigned int i = 0; i < numberOfSampleEachClass; ++i)
   {
     mv[0] = (normalGenerator->GetVariate() * standardDeviation) + mean;

@@ -32,9 +32,9 @@ auto
 SquaredEdgeLengthDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::Relocate(OutputQEType * iEdge)
   -> OutputPointType
 {
-  OutputMeshPointer     output = this->GetOutput();
-  OutputPointIdentifier id_org = iEdge->GetOrigin();
-  OutputPointIdentifier id_dest = iEdge->GetDestination();
+  OutputMeshPointer const     output = this->GetOutput();
+  OutputPointIdentifier const id_org = iEdge->GetOrigin();
+  OutputPointIdentifier const id_dest = iEdge->GetDestination();
 
   OutputPointType oPt;
 

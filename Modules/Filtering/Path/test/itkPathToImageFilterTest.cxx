@@ -60,11 +60,11 @@ itkPathToImageFilterTest(int, char *[])
 
   pathToImageFilter->SetInput(path);
 
-  PathToImageFilterType::ValueType pathValue = 1;
+  PathToImageFilterType::ValueType const pathValue = 1;
   pathToImageFilter->SetPathValue(pathValue);
   ITK_TEST_SET_GET_VALUE(pathValue, pathToImageFilter->GetPathValue());
 
-  PathToImageFilterType::ValueType backgroundValue = 0;
+  PathToImageFilterType::ValueType const backgroundValue = 0;
   pathToImageFilter->SetBackgroundValue(backgroundValue);
   ITK_TEST_SET_GET_VALUE(backgroundValue, pathToImageFilter->GetBackgroundValue());
 
@@ -115,7 +115,7 @@ itkPathToImageFilterTest(int, char *[])
   // Update the filter
   ITK_TRY_EXPECT_NO_EXCEPTION(pathToImageFilter->Update());
 
-  ImageType::Pointer image = pathToImageFilter->GetOutput();
+  ImageType::Pointer const image = pathToImageFilter->GetOutput();
 
   // Test the output image
   //

@@ -43,7 +43,7 @@ itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1(int argc, char * argv[])
   using PointType = SphereMeshSourceType::PointType;
   using VectorType = SphereMeshSourceType::VectorType;
 
-  PointType center{};
+  PointType const center{};
 
   auto scale = itk::MakeFilled<VectorType>(1.0);
 
@@ -58,7 +58,7 @@ itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1(int argc, char * argv[])
 
   std::cout << "mySphereMeshSource: " << mySphereMeshSource;
 
-  MeshType::Pointer myMesh = mySphereMeshSource->GetOutput();
+  MeshType::Pointer const myMesh = mySphereMeshSource->GetOutput();
 
   PointType pt{};
 
@@ -73,7 +73,7 @@ itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1(int argc, char * argv[])
   using CellsContainerPointer = MeshType::CellsContainerPointer;
   using CellType = MeshType::CellType;
 
-  CellsContainerPointer cells = myMesh->GetCells();
+  CellsContainerPointer const cells = myMesh->GetCells();
 
   unsigned int faceId = 0;
 
@@ -105,11 +105,11 @@ itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1(int argc, char * argv[])
   ITK_EXERCISE_BASIC_OBJECT_METHODS(writer, QuadEdgeMeshScalarDataVTKPolyDataWriter, VTKPolyDataWriter);
 
 
-  std::string cellDataName = "SphereCellData";
+  std::string const cellDataName = "SphereCellData";
   writer->SetCellDataName(cellDataName);
   ITK_TEST_SET_GET_VALUE(cellDataName, writer->GetCellDataName());
 
-  std::string pointDataName = "SpherePointData";
+  std::string const pointDataName = "SpherePointData";
   writer->SetPointDataName(pointDataName);
   ITK_TEST_SET_GET_VALUE(pointDataName, writer->GetPointDataName());
 

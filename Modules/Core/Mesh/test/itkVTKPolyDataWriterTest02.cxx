@@ -60,7 +60,7 @@ itkVTKPolyDataWriterTest02(int argc, char * argv[])
 
   std::cout << "mySphereMeshSource: " << mySphereMeshSource;
 
-  MeshType::Pointer myMesh = mySphereMeshSource->GetOutput();
+  MeshType::Pointer const myMesh = mySphereMeshSource->GetOutput();
 
   PointType pt{};
 
@@ -86,7 +86,7 @@ itkVTKPolyDataWriterTest02(int argc, char * argv[])
   using CellsContainerPointer = MeshType::CellsContainerPointer;
   using CellType = MeshType::CellType;
 
-  CellsContainerPointer cells = myMesh->GetCells();
+  CellsContainerPointer const cells = myMesh->GetCells();
 
   unsigned int faceId = 0;
 

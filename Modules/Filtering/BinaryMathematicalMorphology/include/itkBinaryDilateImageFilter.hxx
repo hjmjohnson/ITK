@@ -45,15 +45,15 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
   unsigned int j;
 
   // Retrieve input and output pointers
-  typename OutputImageType::Pointer     output = this->GetOutput();
-  typename InputImageType::ConstPointer input = this->GetInput();
+  typename OutputImageType::Pointer const     output = this->GetOutput();
+  typename InputImageType::ConstPointer const input = this->GetInput();
 
   // Get values from superclass
-  InputPixelType                    foregroundValue = this->GetForegroundValue();
-  InputPixelType                    backgroundValue = this->GetBackgroundValue();
-  KernelType                        kernel = this->GetKernel();
-  auto                              radius = InputSizeType::Filled(1);
-  typename TOutputImage::RegionType outputRegion = output->GetBufferedRegion();
+  InputPixelType const                    foregroundValue = this->GetForegroundValue();
+  InputPixelType const                    backgroundValue = this->GetBackgroundValue();
+  KernelType const                        kernel = this->GetKernel();
+  auto                                    radius = InputSizeType::Filled(1);
+  typename TOutputImage::RegionType const outputRegion = output->GetBufferedRegion();
 
   // compute the size of the temp image. It is needed to create the progress
   // reporter.
@@ -91,7 +91,7 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
 
   for (inIt.GoToBegin(), outIt.GoToBegin(); !outIt.IsAtEnd(); ++outIt, ++inIt)
   {
-    InputPixelType value = inIt.Get();
+    InputPixelType const value = inIt.Get();
     // replace foreground pixels with the default background
     if (Math::ExactlyEquals(value, foregroundValue))
     {
@@ -149,7 +149,7 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
 
   for (iRegIt.GoToBegin(), tmpRegIt.GoToBegin(); !tmpRegIt.IsAtEnd(); ++iRegIt, ++tmpRegIt)
   {
-    OutputPixelType pxl = iRegIt.Get();
+    OutputPixelType const pxl = iRegIt.Get();
     if (Math::ExactlyEquals(pxl, foregroundValue))
     {
       tmpRegIt.Set(onTag);
@@ -181,8 +181,8 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
   cbc.SetConstant(backgroundTag);
   oNeighbIt.OverrideBoundaryCondition(&cbc);
 
-  unsigned int neighborhoodSize = oNeighbIt.Size();
-  unsigned int centerPixelCode = neighborhoodSize / 2;
+  unsigned int const neighborhoodSize = oNeighbIt.Size();
+  unsigned int const centerPixelCode = neighborhoodSize / 2;
 
   std::queue<IndexType> propagQueue;
 
@@ -244,7 +244,7 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
         NeighborIndexContainer &                        idxDifferenceSet = this->GetDifferenceSet(centerPixelCode);
         for (itIdx = idxDifferenceSet.begin(); itIdx != idxDifferenceSet.end(); ++itIdx)
         {
-          IndexType idx = tmpRegIndexIt.GetIndex() + *itIdx;
+          IndexType const idx = tmpRegIndexIt.GetIndex() + *itIdx;
           if (outputRegion.IsInside(idx))
           {
             output->SetPixel(idx, static_cast<OutputPixelType>(foregroundValue));
@@ -258,7 +258,7 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
         while (!propagQueue.empty())
         {
           // Extract pixel index from queue
-          IndexType currentIndex = propagQueue.front();
+          IndexType const currentIndex = propagQueue.front();
           propagQueue.pop();
 
           nit += currentIndex - nit.GetIndex();
@@ -409,11 +409,11 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
     while (!ouRegIndexIt.IsAtEnd())
     {
       // Retrieve index of current output pixel
-      IndexType currentIndex = ouRegIndexIt.GetIndex();
+      IndexType const currentIndex = ouRegIndexIt.GetIndex();
       for (vecIt = vecBeginIt; vecIt != vecEndIt; ++vecIt)
       {
         // Translate
-        IndexType translatedIndex = currentIndex - *vecIt;
+        IndexType const translatedIndex = currentIndex - *vecIt;
 
         // translated index now is an index in input image in the
         // output requested region padded. Theoretically, this translated
@@ -438,10 +438,10 @@ BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
   {
     while (!ouRegIndexIt.IsAtEnd())
     {
-      IndexType currentIndex = ouRegIndexIt.GetIndex();
+      IndexType const currentIndex = ouRegIndexIt.GetIndex();
       for (vecIt = vecBeginIt; vecIt != vecEndIt; ++vecIt)
       {
-        IndexType translatedIndex = currentIndex - *vecIt;
+        IndexType const translatedIndex = currentIndex - *vecIt;
 
         if (inputRegionForThread.IsInside(translatedIndex) &&
             Math::ExactlyEquals(input->GetPixel(translatedIndex), foregroundValue))

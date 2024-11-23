@@ -81,7 +81,7 @@ BSplineExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::Upda
     }
   }
 
-  ConstantVelocityFieldPointer velocityField = this->GetModifiableConstantVelocityField();
+  ConstantVelocityFieldPointer const velocityField = this->GetModifiableConstantVelocityField();
   if (!velocityField)
   {
     itkExceptionMacro("The velocity field has not been set.");
@@ -111,7 +111,7 @@ BSplineExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::Upda
   {
     itkDebugMacro("Smoothing the update field.");
 
-    ConstantVelocityFieldPointer updateSmoothField =
+    ConstantVelocityFieldPointer const updateSmoothField =
       this->BSplineSmoothConstantVelocityField(updateField, this->GetNumberOfControlPointsForTheUpdateField());
 
     updateField = updateSmoothField;
@@ -130,7 +130,7 @@ BSplineExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::Upda
   adder->SetInput1(velocityField);
   adder->SetInput2(multiplier->GetOutput());
 
-  ConstantVelocityFieldPointer updatedVelocityField = adder->GetOutput();
+  ConstantVelocityFieldPointer const updatedVelocityField = adder->GetOutput();
   updatedVelocityField->Update();
   updatedVelocityField->DisconnectPipeline();
 
@@ -150,7 +150,7 @@ BSplineExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::Upda
   {
     itkDebugMacro("Smoothing the velocity field.");
 
-    ConstantVelocityFieldPointer velocitySmoothField = this->BSplineSmoothConstantVelocityField(
+    ConstantVelocityFieldPointer const velocitySmoothField = this->BSplineSmoothConstantVelocityField(
       updatedVelocityField, this->GetNumberOfControlPointsForTheConstantVelocityField());
 
     this->SetConstantVelocityField(velocitySmoothField);

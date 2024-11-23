@@ -58,7 +58,7 @@ itkDisplacementFieldTransformCloneTest(int, char *[])
   FieldType::SizeType   size;
   FieldType::IndexType  start;
   FieldType::RegionType region;
-  int                   dimLength = 20;
+  int const             dimLength = 20;
   size.Fill(dimLength);
   start.Fill(0);
   region.SetSize(size);
@@ -70,7 +70,7 @@ itkDisplacementFieldTransformCloneTest(int, char *[])
   field->FillBuffer(zeroVector);
   displacementTransform->SetDisplacementField(field);
 
-  DisplacementTransformType::Pointer displacementTransformClone = displacementTransform->Clone();
+  DisplacementTransformType::Pointer const displacementTransformClone = displacementTransform->Clone();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(displacementTransformClone, DisplacementFieldTransform, Transform);
 
@@ -89,8 +89,8 @@ itkDisplacementFieldTransformCloneTest(int, char *[])
     return EXIT_FAILURE;
   }
 
-  FieldType::ConstPointer originalField = displacementTransform->GetDisplacementField();
-  FieldType::ConstPointer cloneField = displacementTransformClone->GetDisplacementField();
+  FieldType::ConstPointer const originalField = displacementTransform->GetDisplacementField();
+  FieldType::ConstPointer const cloneField = displacementTransformClone->GetDisplacementField();
 
   itk::ImageRegionConstIterator<FieldType> originalIt(originalField, originalField->GetLargestPossibleRegion());
   itk::ImageRegionConstIterator<FieldType> cloneIt(cloneField, cloneField->GetLargestPossibleRegion());

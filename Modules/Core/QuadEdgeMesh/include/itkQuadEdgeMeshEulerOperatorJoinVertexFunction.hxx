@@ -128,15 +128,15 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::Process(QEType * e)
   QEType * e_sym = e->GetSym();
 
   // General case
-  bool wasLeftFace = e->IsLeftSet();
-  bool wasRiteFace = e->IsRightSet();
-  bool wasLeftTriangle = e->IsLnextOfTriangle();
-  bool wasRiteTriangle = e_sym->IsLnextOfTriangle();
+  bool const wasLeftFace = e->IsLeftSet();
+  bool const wasRiteFace = e->IsRightSet();
+  bool const wasLeftTriangle = e->IsLnextOfTriangle();
+  bool const wasRiteTriangle = e_sym->IsLnextOfTriangle();
 
-  PointIdentifier NewDest = e->GetDestination();
-  PointIdentifier NewOrg = e->GetOrigin();
-  QEType *        leftZip = e->GetLnext();
-  QEType *        riteZip = e->GetOprev();
+  PointIdentifier const NewDest = e->GetDestination();
+  PointIdentifier       NewOrg = e->GetOrigin();
+  QEType *              leftZip = e->GetLnext();
+  QEType *              riteZip = e->GetOprev();
 
   //
   //                    \   |   /                //
@@ -240,7 +240,7 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::ProcessIsolatedQuad
 
   m_OldPointID = temp->GetSym()->GetOrigin();
 
-  bool e_leftset = e->IsLeftSet();
+  bool const e_leftset = e->IsLeftSet();
   this->m_Mesh->LightWeightDeleteEdge(e);
   if (e_leftset)
   {
@@ -261,8 +261,8 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::ProcessIsolatedFace
   QEType *               e,
   std::stack<QEType *> & EdgesToBeDeleted)
 {
-  PointIdentifier org = e->GetOrigin();
-  PointIdentifier dest = e->GetDestination();
+  PointIdentifier const org = e->GetOrigin();
+  PointIdentifier const dest = e->GetDestination();
 
   // delete all elements
   while (!EdgesToBeDeleted.empty())
@@ -334,8 +334,8 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::CheckStatus(QEType 
 
   QEType * e_sym = e->GetSym();
 
-  bool IsEdgeIsolated = e->IsIsolated();
-  bool IsSymEdgeIsolated = e_sym->IsIsolated();
+  bool const IsEdgeIsolated = e->IsIsolated();
+  bool const IsSymEdgeIsolated = e_sym->IsIsolated();
   if (IsEdgeIsolated || IsSymEdgeIsolated)
   {
     if (IsEdgeIsolated && IsSymEdgeIsolated)
@@ -369,7 +369,7 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::CheckStatus(QEType 
     return QUADEDGE_ISOLATED;
   }
 
-  PointIdentifier number_common_vertices = CommonVertexNeighboor(e);
+  PointIdentifier const number_common_vertices = CommonVertexNeighboor(e);
   if (number_common_vertices > 2)
   {
     itkDebugMacro("The 2 vertices have more than 2 common neighboor vertices.");
@@ -386,8 +386,8 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::CheckStatus(QEType 
   }
 
   // General case
-  bool wasLeftFace = e->IsLeftSet();
-  bool wasRiteFace = e->IsRightSet();
+  bool const wasLeftFace = e->IsLeftSet();
+  bool const wasRiteFace = e->IsRightSet();
 
   if (wasLeftFace && wasRiteFace)
   {
@@ -435,8 +435,8 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::IsTetrahedron(QETyp
       {
         if (e_sym->GetLprev()->GetOrder() == 3)
         {
-          bool left_triangle = e->IsLnextOfTriangle();
-          bool right_triangle = e_sym->IsLnextOfTriangle();
+          bool const left_triangle = e->IsLnextOfTriangle();
+          bool const right_triangle = e_sym->IsLnextOfTriangle();
 
           if (left_triangle && right_triangle)
           {
@@ -505,8 +505,8 @@ template <typename TMesh, typename TQEType>
 bool
 QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::IsEye(QEType * e)
 {
-  bool OriginOrderIsTwo = (e->GetOrder() == 2);
-  bool DestinationOrderIsTwo = (e->GetSym()->GetOrder() == 2);
+  bool const OriginOrderIsTwo = (e->GetOrder() == 2);
+  bool const DestinationOrderIsTwo = (e->GetSym()->GetOrder() == 2);
 
   return ((OriginOrderIsTwo && !DestinationOrderIsTwo) || (!OriginOrderIsTwo && DestinationOrderIsTwo));
 }

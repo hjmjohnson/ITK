@@ -85,8 +85,8 @@ template <typename TInputMesh, typename TOutputImage>
 void
 TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::SetSpacing(const float spacing[3])
 {
-  Vector<float, 3> sf(spacing);
-  SpacingType      s;
+  Vector<float, 3> const sf(spacing);
+  SpacingType            s;
   s.CastFrom(sf);
   this->SetSpacing(s);
 }
@@ -95,7 +95,7 @@ template <typename TInputMesh, typename TOutputImage>
 void
 TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::SetOrigin(const double origin[3])
 {
-  PointType p(origin);
+  PointType const p(origin);
 
   this->SetOrigin(p);
 }
@@ -104,8 +104,8 @@ template <typename TInputMesh, typename TOutputImage>
 void
 TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::SetOrigin(const float origin[3])
 {
-  Point<float, 3> of(origin);
-  PointType       p;
+  Point<float, 3> const of(origin);
+  PointType             p;
   p.CastFrom(of);
   this->SetOrigin(p);
 }
@@ -139,7 +139,7 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::GenerateData()
   itkDebugMacro("TriangleMeshToBinaryImageFilter::Update() called");
 
   // Get the input and output pointers
-  OutputImagePointer OutputImage = this->GetOutput();
+  OutputImagePointer const OutputImage = this->GetOutput();
   if (m_InfoImage == nullptr)
   {
     if (m_Size[0] == 0 || m_Size[1] == 0 || m_Size[2] == 0)
@@ -183,8 +183,8 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::PolygonToImageRaster(
   // convert the polygon into a rasterizable form by finding its
   // intersection with each z plane, and store the (x,y) coords
   // of each intersection in a vector called "matrix"
-  int          zSize = extent[5] - extent[4] + 1;
-  int          zInc = extent[3] - extent[2] + 1;
+  int const    zSize = extent[5] - extent[4] + 1;
+  int const    zInc = extent[3] - extent[2] + 1;
   Point2DArray matrix(zSize);
 
   // each iteration of the following loop examines one edge of the
@@ -200,10 +200,10 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::PolygonToImageRaster(
     // calculate the area (actually double the area) of the polygon's
     // projection into the zy plane via cross product, one triangle
     // at a time
-    double v1y = p1[1] - p0[1];
-    double v1z = p1[2] - p0[2];
-    double v2y = p2[1] - p0[1];
-    double v2z = p2[2] - p0[2];
+    double const v1y = p1[1] - p0[1];
+    double const v1z = p1[2] - p0[2];
+    double const v2y = p2[1] - p0[1];
+    double const v2z = p2[2] - p0[2];
     area += (v1y * v2z - v2y * v1z);
 
     // skip any line segments that are perfectly horizontal
@@ -233,12 +233,12 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::PolygonToImageRaster(
     {
       zmax = extent[5] + 1;
     }
-    double temp = 1.0 / (p2[2] - p1[2]);
+    double const temp = 1.0 / (p2[2] - p1[2]);
     for (int z = zmin; z < zmax; ++z)
     {
-      double      r = (p2[2] - static_cast<double>(z)) * temp;
-      double      f = 1.0 - r;
-      Point2DType XY;
+      double const r = (p2[2] - static_cast<double>(z)) * temp;
+      double const f = 1.0 - r;
+      Point2DType  XY;
       XY[0] = r * p1[0] + f * p2[0];
       XY[1] = r * p1[1] + f * p2[1];
       matrix[z - extent[4]].push_back(XY);
@@ -283,27 +283,27 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::PolygonToImageRaster(
     for (int k = 0; k < n; ++k)
     {
       Point2DType & p2D1 = xylist[2 * k];
-      double        X1 = p2D1[0];
-      double        Y1 = p2D1[1];
+      double const  X1 = p2D1[0];
+      double const  Y1 = p2D1[1];
       Point2DType & p2D2 = xylist[2 * k + 1];
-      double        X2 = p2D2[0];
-      double        Y2 = p2D2[1];
+      double const  X2 = p2D2[0];
+      double const  Y2 = p2D2[1];
 
       if (Math::ExactlyEquals(Y2, Y1))
       {
         continue;
       }
-      double temp = 1.0 / (Y2 - Y1);
-      auto   ymin = static_cast<int>(std::ceil(Y1));
-      auto   ymax = static_cast<int>(std::ceil(Y2));
+      double const temp = 1.0 / (Y2 - Y1);
+      auto         ymin = static_cast<int>(std::ceil(Y1));
+      auto         ymax = static_cast<int>(std::ceil(Y2));
       for (int y = ymin; y < ymax; ++y)
       {
-        double r = (Y2 - y) * temp;
-        double f = 1.0 - r;
-        double X = r * X1 + f * X2;
+        double const r = (Y2 - y) * temp;
+        double const f = 1.0 - r;
+        double const X = r * X1 + f * X2;
         if (extent[2] <= y && y <= extent[3])
         {
-          int zyidx = (z - extent[4]) * zInc + (y - extent[2]);
+          int const zyidx = (z - extent[4]) * zInc + (y - extent[2]);
           zymatrix[zyidx].push_back(Point1D(X, sign));
         }
       }
@@ -317,10 +317,10 @@ template <typename TInputMesh, typename TOutputImage>
 void
 TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::RasterizeTriangles()
 {
-  InputMeshPointer input = this->GetInput(0);
+  InputMeshPointer const input = this->GetInput(0);
 
-  InputPointsContainerPointer  myPoints = input->GetPoints();
-  InputPointsContainerIterator points = myPoints->Begin();
+  InputPointsContainerPointer const myPoints = input->GetPoints();
+  InputPointsContainerIterator      points = myPoints->Begin();
 
   int extent[6];
 
@@ -332,7 +332,7 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::RasterizeTriangles()
   extent[4] = m_Index[2];
   extent[5] = m_Size[2] - 1;
 
-  OutputImagePointer OutputImage = this->GetOutput();
+  OutputImagePointer const OutputImage = this->GetOutput();
 
   // need to transform points from physical to index coordinates
   auto                    NewPoints = PointsContainer::New();
@@ -343,7 +343,7 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::RasterizeTriangles()
 
   while (points != myPoints->End())
   {
-    PointType p = points.Value();
+    PointType const p = points.Value();
     // the index value type must match the point value type
     const ContinuousIndex<PointType::ValueType, 3> ind =
       OutputImage->template TransformPhysicalPointToContinuousIndex<PointType::ValueType>(p);
@@ -356,13 +356,13 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::RasterizeTriangles()
   // the stencil is kept in 'zymatrix' that provides
   // the x extents for each (y,z) coordinate for which a ray
   // parallel to the x axis intersects the polydata
-  int          zInc = extent[3] - extent[2] + 1;
-  int          zSize = extent[5] - extent[4] + 1;
+  int const    zInc = extent[3] - extent[2] + 1;
+  int const    zSize = extent[5] - extent[4] + 1;
   Point1DArray zymatrix(zInc * zSize);
   PointVector  coords;
 
-  CellsContainerPointer  cells = input->GetCells();
-  CellsContainerIterator cellIt = cells->Begin();
+  CellsContainerPointer const cells = input->GetCells();
+  CellsContainerIterator      cellIt = cells->Begin();
 
   while (cellIt != cells->End())
   {
@@ -399,14 +399,14 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::RasterizeTriangles()
     ++cellIt;
   }
 
-  OutputImagePointer outputImage = this->GetOutput();
+  OutputImagePointer const outputImage = this->GetOutput();
   outputImage->FillBuffer(m_OutsideValue);
 
   for (int z = extent[4]; z <= extent[5]; ++z)
   {
     for (int y = extent[2]; y <= extent[3]; ++y)
     {
-      int           zyidx = (z - extent[4]) * zInc + (y - extent[2]);
+      int const     zyidx = (z - extent[4]) * zInc + (y - extent[2]);
       Point1DVector xlist = zymatrix[zyidx];
 
       if (xlist.size() <= 1)
@@ -430,12 +430,12 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::RasterizeTriangles()
       // surface
 
       std::vector<double> nlist;
-      size_t              m = xlist.size();
+      size_t const        m = xlist.size();
       for (size_t j = 1; j < m; ++j)
       {
-        Point1D p1D = xlist[j];
-        double  x = p1D.m_X;
-        int     sign = p1D.m_Sign;
+        Point1D const p1D = xlist[j];
+        double const  x = p1D.m_X;
+        int const     sign = p1D.m_Sign;
 
         // check absolute distance from lastx to x
         if (itk::Math::abs(x - lastx) > m_Tolerance)
@@ -453,8 +453,8 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::RasterizeTriangles()
       nlist.push_back(lastx);
 
       // create the stencil extents
-      int minx1 = extent[0]; // minimum allowable x1 value
-      int n = static_cast<int>(nlist.size()) / 2;
+      int       minx1 = extent[0]; // minimum allowable x1 value
+      int const n = static_cast<int>(nlist.size()) / 2;
 
       for (int i = 0; i < n; ++i)
       {

@@ -41,7 +41,7 @@ RegionOfInterestImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRe
   Superclass::GenerateInputRequestedRegion();
 
   // Get pointer to the input
-  typename Superclass::InputImagePointer inputPtr = const_cast<TInputImage *>(this->GetInput());
+  typename Superclass::InputImagePointer const inputPtr = const_cast<TInputImage *>(this->GetInput());
 
   if (inputPtr)
   {
@@ -69,8 +69,8 @@ RegionOfInterestImageFilter<TInputImage, TOutputImage>::GenerateOutputInformatio
   // this filter allows the input the output to be of different dimensions
 
   // Get pointers to the input and output
-  typename Superclass::OutputImagePointer     outputPtr = this->GetOutput();
-  typename Superclass::InputImageConstPointer inputPtr = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputPtr = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputPtr = this->GetInput();
 
   if (!outputPtr || !inputPtr)
   {
@@ -87,7 +87,7 @@ RegionOfInterestImageFilter<TInputImage, TOutputImage>::GenerateOutputInformatio
   outputPtr->SetLargestPossibleRegion(region);
 
   // Correct origin of the extracted region.
-  IndexType                                       roiStart(m_RegionOfInterest.GetIndex());
+  IndexType const                                 roiStart(m_RegionOfInterest.GetIndex());
   typename Superclass::OutputImageType::PointType outputOrigin;
   inputPtr->TransformIndexToPhysicalPoint(roiStart, outputOrigin);
   outputPtr->SetOrigin(outputOrigin);

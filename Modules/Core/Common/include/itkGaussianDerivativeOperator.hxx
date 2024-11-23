@@ -64,7 +64,7 @@ GaussianDerivativeOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients
   // operator, then the output kernel needs to be padded by N-1. For
   // these values to be computed the input kernel needs to be padded
   // by 2N-1 on both sides.
-  unsigned int N = (derivOp.Size() - 1) / 2;
+  unsigned int const N = (derivOp.Size() - 1) / 2;
 
   // copy the gaussian operator adding clamped boundary condition
   CoefficientVector paddedCoeff(coeff.size() + 4 * N - 2);
@@ -88,7 +88,7 @@ GaussianDerivativeOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients
     // current index in derivative op
     for (unsigned int j = 0; j < derivOp.Size(); ++j)
     {
-      unsigned int k = i + j - derivOp.Size() / 2;
+      unsigned int const k = i + j - derivOp.Size() / 2;
       conv += paddedCoeff[k] * derivOp[derivOp.Size() - 1 - j];
     }
 
@@ -156,7 +156,7 @@ GaussianDerivativeOperator<TPixel, VDimension, TAllocator>::GenerateGaussianCoef
   }
 
   // Make symmetric
-  size_t s = coeff.size() - 1;
+  size_t const s = coeff.size() - 1;
   coeff.insert(coeff.begin(), s, 0);
   std::copy_n(coeff.rbegin(), s, coeff.begin());
 

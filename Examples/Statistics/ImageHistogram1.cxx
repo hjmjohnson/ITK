@@ -206,7 +206,7 @@ main(int argc, char * argv[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  HistogramType::ConstPointer histogram = filter->GetOutput();
+  HistogramType::ConstPointer const histogram = filter->GetOutput();
   // Software Guide : EndCodeSnippet
 
   // Software Guide : BeginLatex

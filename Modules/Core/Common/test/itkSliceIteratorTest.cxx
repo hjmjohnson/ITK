@@ -156,13 +156,13 @@ itkSliceIteratorTest(int, char *[])
     reg.SetIndex(zeroIndex);
     reg.SetSize(imgSize);
 
-    std::slice                                              hslice(10, 5, 1); // slice through the horizontal center
-    std::slice                                              vslice(2, 5, 5);  // slice through the vertical center
-    itk::Neighborhood<int, 2>                               temp;
-    itk::SliceIterator<int, itk::Neighborhood<int, 2>>      hnsi(&temp, hslice);
-    itk::SliceIterator<int, itk::Neighborhood<int, 2>>      vnsi(&temp, vslice);
-    itk::ConstSliceIterator<int, itk::Neighborhood<int, 2>> hnsi2(&temp, hslice);
-    itk::ConstSliceIterator<int, itk::Neighborhood<int, 2>> vnsi2(&temp, vslice);
+    std::slice const                                         hslice(10, 5, 1); // slice through the horizontal center
+    std::slice const                                         vslice(2, 5, 5);  // slice through the vertical center
+    itk::Neighborhood<int, 2>                                temp;
+    itk::SliceIterator<int, itk::Neighborhood<int, 2>> const hnsi(&temp, hslice);
+    itk::SliceIterator<int, itk::Neighborhood<int, 2>> const vnsi(&temp, vslice);
+    itk::ConstSliceIterator<int, itk::Neighborhood<int, 2>> const hnsi2(&temp, hslice);
+    itk::ConstSliceIterator<int, itk::Neighborhood<int, 2>> const vnsi2(&temp, vslice);
 
     itk::Neighborhood<int, 2> op;
     op.SetRadius(hoodRadius);
@@ -170,7 +170,7 @@ itkSliceIteratorTest(int, char *[])
     itk::Index<2> idx;
     idx[0] = idx[1] = 0;
 
-    itk::Image<int, 2>::Pointer ip = itk::Image<int, 2>::New();
+    itk::Image<int, 2>::Pointer const ip = itk::Image<int, 2>::New();
     ip->SetRegions(reg);
     ip->Allocate();
 

@@ -195,7 +195,8 @@ main(int argc, char * argv[])
   fixedImageReader->SetFileName(argv[1]);
   movingImageReader->SetFileName(argv[2]);
 
-  FixedImageType::ConstPointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::ConstPointer const fixedImage =
+    fixedImageReader->GetOutput();
 
   registration->SetFixedImage(fixedImage);
   registration->SetMovingImage(movingImageReader->GetOutput());
@@ -221,7 +222,7 @@ main(int argc, char * argv[])
 
   auto transformInitializer = InitializerType::New();
 
-  unsigned int numberOfGridNodesInOneDimension = 8;
+  unsigned int const numberOfGridNodesInOneDimension = 8;
 
   TransformType::MeshSizeType meshSize;
   meshSize.Fill(numberOfGridNodesInOneDimension - SplineOrder);

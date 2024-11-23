@@ -48,9 +48,9 @@ itkMutualInformationMetricTest(int, char *[])
     ImageDimension = MovingImageType::ImageDimension
   };
 
-  MovingImageType::SizeType   size = { { 100, 100 } };
-  MovingImageType::IndexType  index = { { 0, 0 } };
-  MovingImageType::RegionType region{ index, size };
+  MovingImageType::SizeType const   size = { { 100, 100 } };
+  MovingImageType::IndexType const  index = { { 0, 0 } };
+  MovingImageType::RegionType const region{ index, size };
 
   auto imgMoving = MovingImageType::New();
   imgMoving->SetRegions(region);
@@ -154,8 +154,8 @@ itkMutualInformationMetricTest(int, char *[])
   //------------------------------------------------------------
   // Set up an affine transform parameters
   //------------------------------------------------------------
-  unsigned int   numberOfParameters = transformer->GetNumberOfParameters();
-  ParametersType parameters(numberOfParameters);
+  unsigned int const numberOfParameters = transformer->GetNumberOfParameters();
+  ParametersType     parameters(numberOfParameters);
 
   // set the parameters to the identity
   unsigned long count = 0;
@@ -219,7 +219,7 @@ itkMutualInformationMetricTest(int, char *[])
 
   metric->Print(std::cout);
 
-  itk::KernelFunctionBase<double>::Pointer theKernel = metric->GetModifiableKernelFunction();
+  itk::KernelFunctionBase<double>::Pointer const theKernel = metric->GetModifiableKernelFunction();
   metric->SetKernelFunction(theKernel);
   theKernel->Print(std::cout);
 

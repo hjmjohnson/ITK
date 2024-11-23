@@ -116,12 +116,12 @@ itkMultiResolutionImageRegistrationMethodTest_2(int, char *[])
    * Set up the two input images.
    * One image rotated (xy plane) and shifted with respect to the other.
    **********************************************************/
-  double displacement[dimension] = { 7, 3, 2 };
-  double angle = 10.0 / 180.0 * itk::Math::pi;
+  double const displacement[dimension] = { 7, 3, 2 };
+  double const angle = 10.0 / 180.0 * itk::Math::pi;
 
-  FixedImageType::SizeType   size = { { 100, 100, 40 } };
-  FixedImageType::IndexType  index = { { 0, 0, 0 } };
-  FixedImageType::RegionType region{ index, size };
+  FixedImageType::SizeType         size = { { 100, 100, 40 } };
+  FixedImageType::IndexType const  index = { { 0, 0, 0 } };
+  FixedImageType::RegionType const region{ index, size };
 
   fixedImage->SetRegions(region);
   fixedImage->Allocate();
@@ -245,7 +245,7 @@ itkMultiResolutionImageRegistrationMethodTest_2(int, char *[])
    ******************************************************************/
   SimpleMultiResolutionImageRegistrationUI2<RegistrationType> simpleUI(registration);
 
-  unsigned short numberOfLevels = 3;
+  unsigned short const numberOfLevels = 3;
 
   itk::Array<unsigned int> niter(numberOfLevels);
   itk::Array<double>       rates(numberOfLevels);
@@ -318,7 +318,7 @@ itkMultiResolutionImageRegistrationMethodTest_2(int, char *[])
   /*************************************************
    * Check for parzen window exception
    **************************************************/
-  double oldValue = metric->GetMovingImageStandardDeviation();
+  double const oldValue = metric->GetMovingImageStandardDeviation();
   metric->SetMovingImageStandardDeviation(0.005);
 
   try
@@ -392,7 +392,7 @@ F(itk::Vector<double, 3> & v)
   x -= 8;
   y += 3;
   z += 0;
-  double r = std::sqrt(x * x + y * y + z * z);
+  double const r = std::sqrt(x * x + y * y + z * z);
   if (r > 35)
   {
     value = 2 * (itk::Math::abs(x) + 0.8 * itk::Math::abs(y) + 0.5 * itk::Math::abs(z));

@@ -42,10 +42,10 @@ ChainCodeToFourierSeriesPathFilter<TInputChainCodePath, TOutputFourierSeriesPath
 
   size_t       numSteps;
   unsigned int numHarmonics = m_NumberOfHarmonics; // private copy
-  int          dimension = OffsetType::GetOffsetDimension();
+  int const    dimension = OffsetType::GetOffsetDimension();
 
-  typename Superclass::InputPathConstPointer inputPtr = this->GetInput();
-  typename Superclass::OutputPathPointer     outputPtr = this->GetOutput(0);
+  typename Superclass::InputPathConstPointer const inputPtr = this->GetInput();
+  typename Superclass::OutputPathPointer const     outputPtr = this->GetOutput(0);
 
   // outputPtr->SetRequestedRegion( inputPtr->GetRequestedRegion() );
   // outputPtr->SetBufferedRegion( inputPtr->GetBufferedRegion() );

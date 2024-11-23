@@ -62,12 +62,12 @@ SimilarityIndexImageFilter<TInputImage1, TInputImage2>::GenerateInputRequestedRe
   // - the corresponding region of the second image
   if (this->GetInput1())
   {
-    InputImage1Pointer image1 = const_cast<InputImage1Type *>(this->GetInput1());
+    InputImage1Pointer const image1 = const_cast<InputImage1Type *>(this->GetInput1());
     image1->SetRequestedRegionToLargestPossibleRegion();
 
     if (this->GetInput2())
     {
-      InputImage2Pointer image2 = const_cast<InputImage2Type *>(this->GetInput2());
+      InputImage2Pointer const image2 = const_cast<InputImage2Type *>(this->GetInput2());
       image2->SetRequestedRegion(this->GetInput1()->GetRequestedRegion());
     }
   }
@@ -86,7 +86,7 @@ void
 SimilarityIndexImageFilter<TInputImage1, TInputImage2>::AllocateOutputs()
 {
   // Pass the first input through as the output
-  InputImage1Pointer image = const_cast<TInputImage1 *>(this->GetInput1());
+  InputImage1Pointer const image = const_cast<TInputImage1 *>(this->GetInput1());
 
   this->GraftOutput(image);
 }
@@ -95,7 +95,7 @@ template <typename TInputImage1, typename TInputImage2>
 void
 SimilarityIndexImageFilter<TInputImage1, TInputImage2>::BeforeThreadedGenerateData()
 {
-  ThreadIdType numberOfWorkUnits = this->GetNumberOfWorkUnits();
+  ThreadIdType const numberOfWorkUnits = this->GetNumberOfWorkUnits();
 
   // Resize the thread temporaries
   m_CountOfImage1.SetSize(numberOfWorkUnits);
@@ -117,7 +117,7 @@ SimilarityIndexImageFilter<TInputImage1, TInputImage2>::AfterThreadedGenerateDat
   SizeValueType countImage2;
   SizeValueType countIntersect;
 
-  ThreadIdType numberOfWorkUnits = this->GetNumberOfWorkUnits();
+  ThreadIdType const numberOfWorkUnits = this->GetNumberOfWorkUnits();
 
   countImage1 = 0;
   countImage2 = 0;

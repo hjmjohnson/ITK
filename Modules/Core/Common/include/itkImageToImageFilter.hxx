@@ -116,7 +116,7 @@ ImageToImageFilter<TInputImage, TOutputImage>::CallCopyOutputRegionToInputRegion
   InputImageRegionType &        destRegion,
   const OutputImageRegionType & srcRegion)
 {
-  OutputToInputRegionCopierType regionCopier;
+  OutputToInputRegionCopierType const regionCopier;
 
   regionCopier(destRegion, srcRegion);
 }
@@ -127,7 +127,7 @@ void
 ImageToImageFilter<TInputImage, TOutputImage>::CallCopyInputRegionToOutputRegion(OutputImageRegionType & destRegion,
                                                                                  const InputImageRegionType & srcRegion)
 {
-  InputToOutputRegionCopierType regionCopier;
+  InputToOutputRegionCopierType const regionCopier;
 
   regionCopier(destRegion, srcRegion);
 }

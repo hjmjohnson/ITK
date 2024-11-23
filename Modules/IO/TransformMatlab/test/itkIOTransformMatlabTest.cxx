@@ -259,13 +259,13 @@ itkIOTransformMatlabTest(int argc, char * argv[])
     itksys::SystemTools::ChangeDirectory(argv[1]);
   }
 
-  int result1 = oneTest<float>("Transforms_float.mat", "TransformsBad_float.mat");
-  int result2 = secondTest<float>();
+  int const result1 = oneTest<float>("Transforms_float.mat", "TransformsBad_float.mat");
+  int const result2 = secondTest<float>();
 
-  int result3 = oneTest<double>("Transforms_double.mat", "TransformsBad_double.mat");
-  int result4 = secondTest<double>();
+  int const result3 = oneTest<double>("Transforms_double.mat", "TransformsBad_double.mat");
+  int const result4 = secondTest<double>();
 
-  int result5 = thirdTest<double>();
+  int const result5 = thirdTest<double>();
 
   return ((!(result1 == EXIT_SUCCESS && result2 == EXIT_SUCCESS)) &&
           (!(result3 == EXIT_SUCCESS && result4 == EXIT_SUCCESS)) && (!(result5 == EXIT_SUCCESS)));

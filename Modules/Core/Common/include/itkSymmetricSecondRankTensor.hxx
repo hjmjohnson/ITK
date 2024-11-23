@@ -256,7 +256,7 @@ template <typename T, unsigned int VDimension>
 void
 SymmetricSecondRankTensor<T, VDimension>::ComputeEigenValues(EigenValuesArrayType & eigenValues) const
 {
-  SymmetricEigenAnalysisType symmetricEigenSystem;
+  SymmetricEigenAnalysisType const symmetricEigenSystem;
 
   MatrixType tensorMatrix;
 
@@ -280,7 +280,7 @@ void
 SymmetricSecondRankTensor<T, VDimension>::ComputeEigenAnalysis(EigenValuesArrayType &   eigenValues,
                                                                EigenVectorsMatrixType & eigenVectors) const
 {
-  SymmetricEigenAnalysisType symmetricEigenSystem;
+  SymmetricEigenAnalysisType const symmetricEigenSystem;
 
   MatrixType tensorMatrix;
 

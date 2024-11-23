@@ -43,20 +43,20 @@ itkDOMTest2(int argc, char * argv[])
   try
   {
     // read a DOM object from an XML file
-    itk::DOMNodeXMLReader::Pointer reader = itk::DOMNodeXMLReader::New();
+    itk::DOMNodeXMLReader::Pointer const reader = itk::DOMNodeXMLReader::New();
 
     ITK_EXERCISE_BASIC_OBJECT_METHODS(reader, DOMNodeXMLReader, Object);
 
 
-    std::string inputFileName = argv[1];
+    std::string const inputFileName = argv[1];
     reader->SetFileName(inputFileName);
     ITK_TEST_SET_GET_VALUE(inputFileName, reader->GetFileName());
 
     reader->Update();
-    itk::DOMNode::Pointer dom = reader->GetOutput();
+    itk::DOMNode::Pointer const dom = reader->GetOutput();
 
     // write a DOM object to an XML file
-    itk::DOMNodeXMLWriter::Pointer writer = itk::DOMNodeXMLWriter::New();
+    itk::DOMNodeXMLWriter::Pointer const writer = itk::DOMNodeXMLWriter::New();
 
     ITK_EXERCISE_BASIC_OBJECT_METHODS(writer, DOMNodeXMLWriter, Object);
 
@@ -64,23 +64,23 @@ itkDOMTest2(int argc, char * argv[])
     writer->SetInput(dom);
     ITK_TEST_SET_GET_VALUE(dom, writer->GetInput());
 
-    std::string outputFileName = argv[2];
+    std::string const outputFileName = argv[2];
     writer->SetFileName(outputFileName);
     ITK_TEST_SET_GET_VALUE(outputFileName, writer->GetFileName());
 
     writer->Update();
 
     // write a DOM object to an XML stream
-    itk::DOMNode::Pointer dom1 = dom;
-    std::ostringstream    oss;
+    itk::DOMNode::Pointer const dom1 = dom;
+    std::ostringstream          oss;
     oss << *dom1;
-    std::string s = oss.str();
+    std::string const s = oss.str();
     std::cout << "Write DOM object to an output string stream: " << std::endl;
     std::cout << s << std::endl;
 
     // read a DOM object from an XML stream
-    itk::DOMNode::Pointer dom2 = itk::DOMNode::New();
-    std::istringstream    iss(s);
+    itk::DOMNode::Pointer const dom2 = itk::DOMNode::New();
+    std::istringstream          iss(s);
     iss >> *dom2;
     std::cout << "Read DOM object from an input string stream: " << std::endl;
     std::cout << *dom2 << std::endl;

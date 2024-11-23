@@ -38,7 +38,7 @@ template <unsigned int TDimension>
 void
 SpatialObject<TDimension>::Clear()
 {
-  typename BoundingBoxType::PointType pnt{};
+  typename BoundingBoxType::PointType const pnt{};
   m_FamilyBoundingBoxInObjectSpace->SetMinimum(pnt);
   m_FamilyBoundingBoxInObjectSpace->SetMaximum(pnt);
   m_FamilyBoundingBoxInWorldSpace->SetMinimum(pnt);
@@ -335,7 +335,7 @@ SpatialObject<TDimension>::InternalClone() const
 {
   typename LightObject::Pointer loPtr = CreateAnother();
 
-  typename Self::Pointer rval = dynamic_cast<Self *>(loPtr.GetPointer());
+  typename Self::Pointer const rval = dynamic_cast<Self *>(loPtr.GetPointer());
   if (rval.IsNull())
   {
     itkExceptionMacro("downcast to type " << this->GetNameOfClass() << " failed.");
@@ -602,7 +602,7 @@ template <unsigned int TDimension>
 void
 SpatialObject<TDimension>::ComputeMyBoundingBox()
 {
-  typename BoundingBoxType::PointType pnt{};
+  typename BoundingBoxType::PointType const pnt{};
   if (m_MyBoundingBoxInObjectSpace->GetMinimum() != pnt || m_MyBoundingBoxInObjectSpace->GetMaximum() != pnt)
   {
     m_MyBoundingBoxInObjectSpace->SetMinimum(pnt);
@@ -638,7 +638,7 @@ SpatialObject<TDimension>::ComputeFamilyBoundingBox(unsigned int depth, const st
 {
   itkDebugMacro("Computing Bounding Box");
 
-  typename BoundingBoxType::PointType zeroPnt{};
+  typename BoundingBoxType::PointType const zeroPnt{};
   m_FamilyBoundingBoxInObjectSpace->SetMinimum(zeroPnt);
   m_FamilyBoundingBoxInObjectSpace->SetMaximum(zeroPnt);
   bool bbDefined = false;
@@ -943,7 +943,7 @@ SpatialObject<TDimension>::FixIdValidity()
       id2 = (*it2)->GetId();
       if (id == id2 || id2 == -1)
       {
-        int idNew = this->GetNextAvailableId();
+        int const idNew = this->GetNextAvailableId();
         (*it2)->SetId(idNew);
         ChildrenListType * children2 = (*it2)->GetChildren(0);
         auto               childIt2 = children2->begin();

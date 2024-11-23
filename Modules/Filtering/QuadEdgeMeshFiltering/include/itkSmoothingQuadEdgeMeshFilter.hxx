@@ -49,13 +49,13 @@ template <typename TInputMesh, typename TOutputMesh>
 void
 SmoothingQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::GenerateData()
 {
-  OutputPointIdentifier numberOfPoints = this->GetInput()->GetNumberOfPoints();
+  OutputPointIdentifier const numberOfPoints = this->GetInput()->GetNumberOfPoints();
 
   ProgressReporter progress(this, 0, m_NumberOfIterations * (numberOfPoints + 1), 100);
 
   OutputMeshPointer mesh = OutputMeshType::New();
 
-  OutputPointsContainerPointer temp = OutputPointsContainer::New();
+  OutputPointsContainerPointer const temp = OutputPointsContainer::New();
   temp->Reserve(numberOfPoints);
 
   OutputPointsContainerPointer  points;

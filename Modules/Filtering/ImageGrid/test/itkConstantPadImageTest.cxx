@@ -54,8 +54,8 @@ itkConstantPadImageTest(int, char *[])
 
   // Create a filter
   using PadFilterType = itk::ConstantPadImageFilter<ShortImage, FloatImage>;
-  auto                     constantPad = PadFilterType::New();
-  itk::SimpleFilterWatcher watch(constantPad);
+  auto                           constantPad = PadFilterType::New();
+  itk::SimpleFilterWatcher const watch(constantPad);
   constantPad->SetInput(image);
 
   using SizeValueType = ShortImage::SizeValueType;
@@ -64,10 +64,10 @@ itkConstantPadImageTest(int, char *[])
   SizeValueType upperFactors[2] = { 0, 0 };
   SizeValueType lowerFactors[2] = { 0, 0 };
 
-  float constant = 13.3f;
+  float const constant = 13.3f;
   constantPad->SetConstant(constant);
   // check the method using the SizeType rather than the simple table type.
-  ShortImage::SizeType stfactors{};
+  ShortImage::SizeType const stfactors{};
   constantPad->SetPadLowerBound(stfactors);
   constantPad->SetPadUpperBound(stfactors);
   constantPad->SetPadBound(stfactors);
@@ -117,7 +117,7 @@ itkConstantPadImageTest(int, char *[])
       }
       else
       {
-        int nextVal = 8 * column + row;
+        int const nextVal = 8 * column + row;
         if (itk::Math::NotExactlyEquals(iteratorIn1.Get(), nextVal))
         {
           std::cout << "Error: (" << row << ", " << column << "), expected " << nextVal << " got " << iteratorIn1.Get()
@@ -189,7 +189,7 @@ itkConstantPadImageTest(int, char *[])
         }
         else
         {
-          int nextVal = 8 * column + row;
+          int const nextVal = 8 * column + row;
           if (itk::Math::NotExactlyEquals(iteratorIn2.Get(), nextVal))
           {
             std::cout << "Error: (" << row << ", " << column << "), expected " << nextVal << " got "

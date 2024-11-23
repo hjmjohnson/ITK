@@ -96,8 +96,8 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   //
   // The true shape is just the circle.
   //
-  PixelType background = 0;
-  PixelType foreground = 190;
+  PixelType const background = 0;
+  PixelType const foreground = 190;
 
   // Fill in the background
   auto inputImage = ImageType::New();
@@ -117,7 +117,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   ImageType::SizeType rectSize;
   rectSize[0] = 80;
   rectSize[1] = 10;
-  ImageType::RegionType rectRegion{ rectStart, rectSize };
+  ImageType::RegionType const rectRegion{ rectStart, rectSize };
 
   using Iterator = itk::ImageRegionIterator<ImageType>;
   Iterator it(inputImage, rectRegion);
@@ -144,7 +144,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
 
   while (!it.IsAtEnd())
   {
-    ImageType::IndexType         index = it.GetIndex();
+    ImageType::IndexType const   index = it.GetIndex();
     ShapeFunctionType::PointType point;
     inputImage->TransformIndexToPhysicalPoint(index, point);
     if (shape->Evaluate(point) <= 0.0)
@@ -264,8 +264,8 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   // Connect an observer to the filter
   //
   using WatcherType = ShowIterationObject<FilterType>;
-  WatcherType                                    iterationWatcher(filter);
-  itk::SimpleMemberCommand<WatcherType>::Pointer command = itk::SimpleMemberCommand<WatcherType>::New();
+  WatcherType                                          iterationWatcher(filter);
+  itk::SimpleMemberCommand<WatcherType>::Pointer const command = itk::SimpleMemberCommand<WatcherType>::New();
   command->SetCallbackFunction(&iterationWatcher, &WatcherType::ShowIteration);
   filter->AddObserver(itk::IterationEvent(), command);
 

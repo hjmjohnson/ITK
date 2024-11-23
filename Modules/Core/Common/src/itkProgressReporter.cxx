@@ -65,8 +65,8 @@ ProgressReporter::~ProgressReporter()
     // Set the progress to the end of its current range.
     // Make sure it increases the progress, in case multiple reporters
     // were used inside filter's GenerateData().
-    float newProgress = m_InitialProgress + m_ProgressWeight;
-    float oldProgress = m_Filter->GetProgress();
+    float const newProgress = m_InitialProgress + m_ProgressWeight;
+    float const oldProgress = m_Filter->GetProgress();
     if (newProgress > oldProgress)
     {
       m_Filter->UpdateProgress(m_InitialProgress + m_ProgressWeight);

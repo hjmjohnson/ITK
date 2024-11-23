@@ -102,7 +102,7 @@ doDenoising(const std::string & inputFileName,
   // Create filter and initialize
   auto filter = FilterType::New();
 
-  typename FilterType::InputImageType::Pointer inputImage = reader->GetOutput();
+  typename FilterType::InputImageType::Pointer const inputImage = reader->GetOutput();
   filter->SetInput(inputImage);
 
   // Set whether conditional derivatives should be used estimating sigma
@@ -114,9 +114,9 @@ doDenoising(const std::string & inputFileName,
   ITK_TEST_SET_GET_VALUE(patchRadius, filter->GetPatchRadius());
 
   // Instead of directly setting the weights, could also specify type
-  bool useSmoothDiscPatchWeights = true;
+  bool const useSmoothDiscPatchWeights = true;
   ITK_TEST_SET_GET_BOOLEAN(filter, UseSmoothDiscPatchWeights, useSmoothDiscPatchWeights);
-  bool useFastTensorComputations = true;
+  bool const useFastTensorComputations = true;
   ITK_TEST_SET_GET_BOOLEAN(filter, UseFastTensorComputations, useFastTensorComputations);
 
   // Noise model to use
@@ -141,7 +141,7 @@ doDenoising(const std::string & inputFileName,
   ITK_TEST_SET_GET_VALUE(noiseModel, filter->GetNoiseModel());
 
   // Stepsize or weight for smoothing term
-  double smoothingWeight = 1.0;
+  double const smoothingWeight = 1.0;
   filter->SetSmoothingWeight(smoothingWeight);
   ITK_TEST_SET_GET_VALUE(smoothingWeight, filter->GetSmoothingWeight());
 
@@ -178,16 +178,16 @@ doDenoising(const std::string & inputFileName,
   ITK_TEST_SET_GET_VALUE(sampler, filter->GetSampler());
 
   // Automatic estimation of the kernel bandwidth
-  bool kernelBandwidthEstimation = true;
+  bool const kernelBandwidthEstimation = true;
   ITK_TEST_SET_GET_BOOLEAN(filter, KernelBandwidthEstimation, kernelBandwidthEstimation);
 
   // Update bandwidth every 'n' iterations
-  unsigned int kernelBandwidthUpdateFrequency = 3;
+  unsigned int const kernelBandwidthUpdateFrequency = 3;
   filter->SetKernelBandwidthUpdateFrequency(kernelBandwidthUpdateFrequency);
   ITK_TEST_SET_GET_VALUE(kernelBandwidthUpdateFrequency, filter->GetKernelBandwidthUpdateFrequency());
 
   // Use 20% of the pixels for the sigma update calculation
-  double kernelBandwidthFractionPixelsForEstimation = 0.20;
+  double const kernelBandwidthFractionPixelsForEstimation = 0.20;
   filter->SetKernelBandwidthFractionPixelsForEstimation(kernelBandwidthFractionPixelsForEstimation);
   ITK_TEST_SET_GET_VALUE(kernelBandwidthFractionPixelsForEstimation,
                          filter->GetKernelBandwidthFractionPixelsForEstimation());
@@ -206,12 +206,13 @@ doDenoising(const std::string & inputFileName,
   if (filter->GetNoiseModel() == FilterType::NoiseModelEnum::RICIAN ||
       filter->GetNoiseModel() == FilterType::NoiseModelEnum::POISSON)
   {
-    typename ImageT::IndexType::IndexValueType indexValue = 0;
-    auto                                       pixelIndex = ImageT::IndexType::Filled(indexValue);
+    typename ImageT::IndexType::IndexValueType const indexValue = 0;
+    auto                                             pixelIndex = ImageT::IndexType::Filled(indexValue);
 
-    typename ImageT::PixelType originalPixelValue = inputImage->GetPixel(pixelIndex);
+    typename ImageT::PixelType const originalPixelValue = inputImage->GetPixel(pixelIndex);
 
-    typename ImageT::PixelType nonpositivePixelValue = itk::NumericTraits<typename ImageT::PixelType>::NonpositiveMin();
+    typename ImageT::PixelType const nonpositivePixelValue =
+      itk::NumericTraits<typename ImageT::PixelType>::NonpositiveMin();
     inputImage->SetPixel(pixelIndex, nonpositivePixelValue);
 
 
@@ -261,9 +262,9 @@ doDenoising(const std::string & inputFileName,
     while (expectedKernelBandwidthSigmaIt != expectedKernelBandwidthSigma.end() &&
            resultKernelBandwidthSigmaIt != resultKernelBandwidthSigma.end())
     {
-      typename FilterType::RealArrayType::ValueType expectedValue = *expectedKernelBandwidthSigmaIt;
-      typename FilterType::RealArrayType::ValueType resultValue = *resultKernelBandwidthSigmaIt;
-      double                                        tolerance = 1e-2 * expectedValue;
+      typename FilterType::RealArrayType::ValueType const expectedValue = *expectedKernelBandwidthSigmaIt;
+      typename FilterType::RealArrayType::ValueType const resultValue = *resultKernelBandwidthSigmaIt;
+      double const                                        tolerance = 1e-2 * expectedValue;
       if (!itk::Math::FloatAlmostEqual(expectedValue, resultValue, 10, tolerance))
       {
         std::cout.precision(static_cast<unsigned int>(itk::Math::abs(std::log10(tolerance))));

@@ -216,7 +216,7 @@ main(int, char *[])
   // Software Guide : BeginCodeSnippet
   for (unsigned int cellId = 0; cellId < numberOfCells; ++cellId)
   {
-    CellDataType value;
+    CellDataType const value;
     mesh->SetCellData(cellId, value);
   }
 
@@ -278,8 +278,8 @@ main(int, char *[])
   //  Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  CellDataIterator cellDataIterator = mesh->GetCellData()->Begin();
-  CellDataIterator end = mesh->GetCellData()->End();
+  CellDataIterator       cellDataIterator = mesh->GetCellData()->Begin();
+  CellDataIterator const end = mesh->GetCellData()->End();
   // Software Guide : EndCodeSnippet
 
 
@@ -299,7 +299,7 @@ main(int, char *[])
   // Software Guide : BeginCodeSnippet
   while (cellDataIterator != end)
   {
-    CellDataType cellValue = cellDataIterator.Value();
+    CellDataType const cellValue = cellDataIterator.Value();
     std::cout << cellValue << std::endl;
     ++cellDataIterator;
   }

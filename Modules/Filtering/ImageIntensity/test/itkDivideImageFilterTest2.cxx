@@ -79,8 +79,8 @@ itkDivideImageFilterTest2(int, char *[])
   inputImageB->Allocate();
 
   // Initialize the content of Image A
-  InputImageType1::PixelType            valueA(inputImageA->GetNumberOfComponentsPerPixel());
-  InputImageType1::PixelType::ValueType elementValueA = 2.0;
+  InputImageType1::PixelType                  valueA(inputImageA->GetNumberOfComponentsPerPixel());
+  InputImageType1::PixelType::ValueType const elementValueA = 2.0;
   valueA.Fill(elementValueA);
   inputImageA->FillBuffer(valueA);
 
@@ -107,7 +107,7 @@ itkDivideImageFilterTest2(int, char *[])
 
 
   // Get the filter output
-  OutputImageType::Pointer outputImage = filter->GetOutput();
+  OutputImageType::Pointer const outputImage = filter->GetOutput();
 
   // Create an iterator for going through the image output
   OutputImageIteratorType oIt(outputImage, outputImage->GetBufferedRegion());

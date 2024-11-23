@@ -52,7 +52,7 @@ itkMRFImageFilterTest(int, char *[])
 
   VecImageType::SizeType vecImgSize = { { IMGWIDTH, IMGHEIGHT, NFRAMES } };
 
-  VecImageType::IndexType index{};
+  VecImageType::IndexType const index{};
 
   VecImageType::RegionType region;
 
@@ -75,10 +75,10 @@ itkMRFImageFilterTest(int, char *[])
   using DataVector = VecImageType::PixelType;
   DataVector dblVec;
 
-  int i;
-  int k;
-  int halfWidth = static_cast<int>(vecImgSize[0]) / 2;
-  int halfHeight = static_cast<int>(vecImgSize[1]) / 2;
+  int       i;
+  int       k;
+  int const halfWidth = static_cast<int>(vecImgSize[0]) / 2;
+  int const halfHeight = static_cast<int>(vecImgSize[1]) / 2;
 
   //--------------------------------------------------------------------------
   // Manually create and store each vector
@@ -217,9 +217,9 @@ itkMRFImageFilterTest(int, char *[])
   using ClassImageType = itk::Image<unsigned short, NDIMENSION>;
   auto classImage = ClassImageType::New();
 
-  ClassImageType::SizeType classImgSize = { { IMGWIDTH, IMGHEIGHT, NFRAMES } };
+  ClassImageType::SizeType const classImgSize = { { IMGWIDTH, IMGHEIGHT, NFRAMES } };
 
-  ClassImageType::IndexType classindex{};
+  ClassImageType::IndexType const classindex{};
 
   ClassImageType::RegionType classregion;
 
@@ -346,7 +346,7 @@ itkMRFImageFilterTest(int, char *[])
   using ClassifierType = itk::ImageClassifierBase<VecImageType, ClassImageType>;
 
   using ClassifierPointer = ClassifierType::Pointer;
-  ClassifierPointer myClassifier = ClassifierType::New();
+  ClassifierPointer const myClassifier = ClassifierType::New();
   // Set the Classifier parameters
   myClassifier->SetNumberOfClasses(NUM_CLASSES);
 
@@ -391,7 +391,7 @@ itkMRFImageFilterTest(int, char *[])
   std::cout << "Stop condition: (1) Maximum number of iterations (2) Error tolerance:  "
             << applyMRFImageFilter->GetStopCondition() << std::endl;
 
-  ClassImageType::Pointer outClassImage = applyMRFImageFilter->GetOutput();
+  ClassImageType::Pointer const outClassImage = applyMRFImageFilter->GetOutput();
 
   // Testing of different parameter access functions in the filter
   std::cout << "The number of classes labelled was: " << applyMRFImageFilter->GetNumberOfClasses() << std::endl;
@@ -402,13 +402,13 @@ itkMRFImageFilterTest(int, char *[])
   std::cout << "The MRF neighborhood weights are: " << std::endl;
 
   // Test other optional access functions to test coverage
-  std::vector<double> MRFNeighborhoodWeight = applyMRFImageFilter->GetMRFNeighborhoodWeight();
-  std::vector<double> testNewNeighborhoodWeight(MRFNeighborhoodWeight.size(), 1);
+  std::vector<double> const MRFNeighborhoodWeight = applyMRFImageFilter->GetMRFNeighborhoodWeight();
+  std::vector<double> const testNewNeighborhoodWeight(MRFNeighborhoodWeight.size(), 1);
 
   applyMRFImageFilter->SetMRFNeighborhoodWeight(testNewNeighborhoodWeight);
 
   // Print the mrf labelled image
-  ClassImageIterator labeloutIt(outClassImage, outClassImage->GetBufferedRegion());
+  ClassImageIterator const labeloutIt(outClassImage, outClassImage->GetBufferedRegion());
 
   //---------------------------------------------------------------------
   // Set up the neighborhood iterators and the valid neighborhoods

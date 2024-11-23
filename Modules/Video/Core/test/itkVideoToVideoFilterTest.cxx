@@ -43,9 +43,9 @@ CreateInputFrame(InputPixelType val)
 {
   auto out = InputFrameType::New();
 
-  InputFrameType::RegionType largestRegion;
-  InputFrameType::SizeType   sizeLR;
-  InputFrameType::IndexType  startLR{};
+  InputFrameType::RegionType      largestRegion;
+  InputFrameType::SizeType        sizeLR;
+  InputFrameType::IndexType const startLR{};
   sizeLR[0] = 50;
   sizeLR[1] = 40;
   largestRegion.SetSize(sizeLR);
@@ -108,13 +108,13 @@ protected:
     const InputVideoStreamType * input = this->GetInput();
     OutputVideoStreamType *      output = this->GetOutput();
 
-    typename OutputVideoStreamType::TemporalRegionType outReqTempRegion = output->GetRequestedTemporalRegion();
-    SizeValueType                                      outputStart = outReqTempRegion.GetFrameStart();
-    SizeValueType                                      outputDuration = outReqTempRegion.GetFrameDuration();
+    typename OutputVideoStreamType::TemporalRegionType const outReqTempRegion = output->GetRequestedTemporalRegion();
+    SizeValueType const                                      outputStart = outReqTempRegion.GetFrameStart();
+    SizeValueType const                                      outputDuration = outReqTempRegion.GetFrameDuration();
 
-    typename InputVideoStreamType::TemporalRegionType inReqTempRegion = input->GetRequestedTemporalRegion();
-    SizeValueType                                     inputStart = inReqTempRegion.GetFrameStart();
-    SizeValueType                                     inputDuration = inReqTempRegion.GetFrameDuration();
+    typename InputVideoStreamType::TemporalRegionType const inReqTempRegion = input->GetRequestedTemporalRegion();
+    SizeValueType const                                     inputStart = inReqTempRegion.GetFrameStart();
+    SizeValueType const                                     inputDuration = inReqTempRegion.GetFrameDuration();
 
     // Print out your threadId
     std::cout << "Working on thread " << threadId << std::endl;
@@ -146,7 +146,7 @@ protected:
     while (!outIter.IsAtEnd())
     {
       // Average input pixel values
-      OutputPixelType val = ((OutputPixelType)inIter0.Get() + (OutputPixelType)inIter1.Get()) / 2;
+      OutputPixelType const val = ((OutputPixelType)inIter0.Get() + (OutputPixelType)inIter1.Get()) / 2;
       outIter.Set(val);
       ++outIter;
       ++inIter0;
@@ -178,8 +178,8 @@ itkVideoToVideoFilterTest(int, char *[])
   // Set up an input video stream
   auto                inputVideo = InputVideoType::New();
   itk::TemporalRegion inputLargestTemporalRegion;
-  SizeValueType       inputStart = 0;
-  SizeValueType       inputDuration = 10;
+  SizeValueType const inputStart = 0;
+  SizeValueType const inputDuration = 10;
   inputLargestTemporalRegion.SetFrameStart(inputStart);
   inputLargestTemporalRegion.SetFrameDuration(inputDuration);
   inputVideo->SetLargestPossibleTemporalRegion(inputLargestTemporalRegion);
@@ -225,8 +225,8 @@ itkVideoToVideoFilterTest(int, char *[])
   std::cout << "Number of output buffers: " << filter->GetOutput()->GetNumberOfBuffers() << std::endl;
 
   // Make sure results are correct in the requested spatial region
-  SizeValueType outputStart = filter->GetOutput()->GetRequestedTemporalRegion().GetFrameStart();
-  SizeValueType outputDuration = filter->GetOutput()->GetRequestedTemporalRegion().GetFrameDuration();
+  SizeValueType const outputStart = filter->GetOutput()->GetRequestedTemporalRegion().GetFrameStart();
+  SizeValueType const outputDuration = filter->GetOutput()->GetRequestedTemporalRegion().GetFrameDuration();
   for (SizeValueType i = outputStart; i < outputStart + outputDuration; ++i)
   {
     std::cout << "Checking frame: " << i << std::endl;
@@ -234,8 +234,8 @@ itkVideoToVideoFilterTest(int, char *[])
     const OutputFrameType *                        frame = filter->GetOutput()->GetFrame(i);
     itk::ImageRegionConstIterator<OutputFrameType> iter(frame, frame->GetRequestedRegion());
 
-    OutputPixelType expectedVal = ((OutputPixelType)(i)-1.0 + (OutputPixelType)(i)) / 2.0;
-    OutputPixelType epsilon = .00001;
+    OutputPixelType const expectedVal = ((OutputPixelType)(i)-1.0 + (OutputPixelType)(i)) / 2.0;
+    OutputPixelType const epsilon = .00001;
     while (!iter.IsAtEnd())
     {
       if (iter.Get() < expectedVal - epsilon || iter.Get() > expectedVal + epsilon)
@@ -248,7 +248,7 @@ itkVideoToVideoFilterTest(int, char *[])
     }
 
     // Make sure nothing set outside of requested spatial region
-    OutputFrameType::IndexType idx{};
+    OutputFrameType::IndexType const idx{};
     if (frame->GetRequestedRegion().IsInside(idx))
     {
       std::cerr << "Filter set pixel outside of requested region" << std::endl;
@@ -267,8 +267,8 @@ itkVideoToVideoFilterTest(int, char *[])
   filter->UpdateOutputInformation();
 
   // Make sure the requested spatial regions are empty
-  SizeValueType startFrame = filter->GetOutput()->GetLargestPossibleTemporalRegion().GetFrameStart();
-  SizeValueType numFrames = filter->GetOutput()->GetLargestPossibleTemporalRegion().GetFrameDuration();
+  SizeValueType const startFrame = filter->GetOutput()->GetLargestPossibleTemporalRegion().GetFrameStart();
+  SizeValueType const numFrames = filter->GetOutput()->GetLargestPossibleTemporalRegion().GetFrameDuration();
   if (numFrames == 0)
   {
     std::cerr << "Output's largest possible temporal region not set correctly" << std::endl;

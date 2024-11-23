@@ -83,7 +83,7 @@ main(int, char *[])
   //
   // Software Guide : EndLatex
   // Software Guide : BeginCodeSnippet
-  EllipseType::ArrayType myCurrentRadius =
+  EllipseType::ArrayType const myCurrentRadius =
     myEllipse->GetRadiusInObjectSpace();
   std::cout << "Current radius is " << myCurrentRadius << std::endl;
   // Software Guide : EndCodeSnippet

@@ -108,7 +108,8 @@ template <typename TInputImage, typename TOutputImage>
 void
 ComposeImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(const RegionType & outputRegionForThread)
 {
-  typename OutputImageType::Pointer outputImage = static_cast<OutputImageType *>(this->ProcessObject::GetOutput(0));
+  typename OutputImageType::Pointer const outputImage =
+    static_cast<OutputImageType *>(this->ProcessObject::GetOutput(0));
 
 
   TotalProgressReporter progress(this, outputImage->GetRequestedRegion().GetNumberOfPixels());

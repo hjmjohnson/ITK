@@ -64,7 +64,7 @@ itkPNGImageIOTestPalette(int argc, char * argv[])
   ITK_TEST_SET_GET_BOOLEAN(io, ExpandRGBPalette, expandRGBPalette);
 
   // Exercise exception cases
-  size_t sizeOfActualIORegion =
+  size_t const sizeOfActualIORegion =
     io->GetIORegion().GetNumberOfPixels() * (io->GetComponentSize() * io->GetNumberOfComponents());
   auto * loadBuffer = new char[sizeOfActualIORegion];
 
@@ -173,10 +173,10 @@ itkPNGImageIOTestPalette(int argc, char * argv[])
     // case not possible here
   }
 
-  ScalarImageType::Pointer inputImage = reader->GetOutput();
+  ScalarImageType::Pointer const inputImage = reader->GetOutput();
 
   // test writing palette
-  bool writePalette = !expandRGBPalette && isPaletteImage;
+  bool const writePalette = !expandRGBPalette && isPaletteImage;
   std::cerr << "Trying to write the image as " << ((writePalette) ? "palette" : "expanded palette") << std::endl;
   ITK_TEST_SET_GET_BOOLEAN(io, WritePalette, writePalette);
 
@@ -236,7 +236,7 @@ itkPNGImageIOTestPalette(int argc, char * argv[])
   }
 
   // Exercise other methods
-  itk::ImageIOBase::SizeType pixelStride = io->GetPixelStride();
+  itk::ImageIOBase::SizeType const pixelStride = io->GetPixelStride();
   std::cout << "PixelStride: " << itk::NumericTraits<itk::ImageIOBase::SizeType>::PrintType(pixelStride) << std::endl;
 
   // ToDo

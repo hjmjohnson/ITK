@@ -126,7 +126,7 @@ void
 VersorRigid3DTransform<TParametersValueType>::UpdateTransformParameters(const DerivativeType & update,
                                                                         TParametersValueType   factor)
 {
-  SizeValueType numberOfParameters = this->GetNumberOfParameters();
+  SizeValueType const numberOfParameters = this->GetNumberOfParameters();
 
   if (update.Size() != numberOfParameters)
   {
@@ -187,7 +187,7 @@ VersorRigid3DTransform<TParametersValueType>::UpdateTransformParameters(const De
   // Composing the currentRotation with the gradientRotation
   // produces the new Rotation versor
   //
-  VersorType newRotation = currentRotation * gradientRotation;
+  VersorType const newRotation = currentRotation * gradientRotation;
 
   ParametersType newParameters(numberOfParameters);
 

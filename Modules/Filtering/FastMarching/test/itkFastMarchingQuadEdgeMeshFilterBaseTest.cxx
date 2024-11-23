@@ -45,7 +45,7 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest(int, char *[])
 
   using FastMarchingType = itk::FastMarchingQuadEdgeMeshFilterBase<MeshType, MeshType>;
 
-  MeshType::PointType center{};
+  MeshType::PointType const center{};
 
   using SphereSourceType = itk::RegularSphereMeshSource<MeshType>;
   auto sphere_filter = SphereSourceType::New();
@@ -53,12 +53,12 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest(int, char *[])
   sphere_filter->SetResolution(5);
   sphere_filter->Update();
 
-  MeshType::Pointer sphere_output = sphere_filter->GetOutput();
+  MeshType::Pointer const sphere_output = sphere_filter->GetOutput();
 
-  MeshType::PointsContainerConstPointer points = sphere_output->GetPoints();
+  MeshType::PointsContainerConstPointer const points = sphere_output->GetPoints();
 
-  MeshType::PointsContainerConstIterator p_it = points->Begin();
-  MeshType::PointsContainerConstIterator p_end = points->End();
+  MeshType::PointsContainerConstIterator       p_it = points->Begin();
+  MeshType::PointsContainerConstIterator const p_end = points->End();
 
   while (p_it != p_end)
   {
@@ -72,7 +72,7 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest(int, char *[])
 
   auto trial = NodePairContainerType::New();
 
-  NodePairType node_pair(0, 0.);
+  NodePairType const node_pair(0, 0.);
   trial->push_back(node_pair);
 
   using CriterionType = itk::FastMarchingThresholdStoppingCriterion<MeshType, MeshType>;

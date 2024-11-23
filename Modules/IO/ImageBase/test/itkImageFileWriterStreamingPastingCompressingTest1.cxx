@@ -38,9 +38,9 @@ namespace
 bool
 SameImage(ImagePointer testImage, ImagePointer baselineImage)
 {
-  PixelType     intensityTolerance = 5; // need this for compression
-  int           radiusTolerance = 0;
-  unsigned long numberOfPixelTolerance = 0;
+  PixelType const     intensityTolerance = 5; // need this for compression
+  int const           radiusTolerance = 0;
+  unsigned long const numberOfPixelTolerance = 0;
 
   // NOTE ALEX: it look slike this filter does not take the spacing
   // into account, to check later.
@@ -52,7 +52,7 @@ SameImage(ImagePointer testImage, ImagePointer baselineImage)
   diff->SetToleranceRadius(radiusTolerance);
   diff->UpdateLargestPossibleRegion();
 
-  unsigned long status = diff->GetNumberOfPixelsWithDifferences();
+  unsigned long const status = diff->GetNumberOfPixelsWithDifferences();
 
   if (status > numberOfPixelTolerance)
   {
@@ -104,10 +104,10 @@ ActualTest(std::string inputFileName,
   outputFileNameStream << outputFileNameBase << streamWriting;
   outputFileNameStream << pasteWriting << compressWriting;
   outputFileNameStream << '.' << outputFileNameExtension;
-  std::string outputFileName = outputFileNameStream.str();
+  std::string const outputFileName = outputFileNameStream.str();
 
   std::cout << "Writing to File: " << outputFileName << std::endl;
-  unsigned int m_NumberOfPieces = 10;
+  unsigned int const m_NumberOfPieces = 10;
 
   // We remove the output file
   // NOTE ALEX: should we check it exists first?
@@ -137,7 +137,7 @@ ActualTest(std::string inputFileName,
   pasteSize[0] = largestRegion.GetSize()[0] / 3;
   pasteSize[1] = largestRegion.GetSize()[1] / 3;
   pasteSize[2] = 1;
-  ImageType::RegionType pasteRegion(pasteIndex, pasteSize);
+  ImageType::RegionType const pasteRegion(pasteIndex, pasteSize);
 
   // TODO: drew, check and save the spacing of the input image here
 

@@ -108,8 +108,8 @@ ShrinkImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   const OutputImageRegionType & outputRegionForThread)
 {
   // Get the input and output pointers
-  InputImageConstPointer inputPtr = this->GetInput();
-  OutputImagePointer     outputPtr = this->GetOutput();
+  InputImageConstPointer const inputPtr = this->GetInput();
+  OutputImagePointer const     outputPtr = this->GetOutput();
 
   TotalProgressReporter progress(this, outputPtr->GetRequestedRegion().GetNumberOfPixels());
 
@@ -141,7 +141,7 @@ ShrinkImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   // Given that the size is scaled by a constant factor eq:
   // inputIndex = outputIndex * factorSize
   // is equivalent up to a fixed offset which we now compute
-  OffsetValueType zeroOffset = 0;
+  OffsetValueType const zeroOffset = 0;
   for (i = 0; i < TInputImage::ImageDimension; ++i)
   {
     offsetIndex[i] = inputIndex[i] - outputIndex[i] * m_ShrinkFactors[i];
@@ -220,7 +220,7 @@ ShrinkImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   // Given that the size is scaled by a constant factor eq:
   // inputIndex = outputIndex * factorSize
   // is equivalent up to a fixed offset which we now compute
-  OffsetValueType zeroOffset = 0;
+  OffsetValueType const zeroOffset = 0;
   for (i = 0; i < TInputImage::ImageDimension; ++i)
   {
     offsetIndex[i] = inputIndex[i] - outputIndex[i] * m_ShrinkFactors[i];
@@ -311,7 +311,7 @@ ShrinkImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
   outputPtr->TransformContinuousIndexToPhysicalPoint(outputCenterIndex, outputCenterPoint);
 
   const typename TOutputImage::PointType & inputOrigin = inputPtr->GetOrigin();
-  typename TOutputImage::PointType         outputOrigin = inputOrigin + (inputCenterPoint - outputCenterPoint);
+  typename TOutputImage::PointType const   outputOrigin = inputOrigin + (inputCenterPoint - outputCenterPoint);
   outputPtr->SetOrigin(outputOrigin);
 
   // Set region

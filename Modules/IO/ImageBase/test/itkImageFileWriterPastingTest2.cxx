@@ -31,9 +31,9 @@ using ImagePointer = ImageType::Pointer;
 bool
 SameImage(ImagePointer testImage, ImagePointer baselineImage)
 {
-  PixelType     intensityTolerance = 0;
-  int           radiusTolerance = 0;
-  unsigned long numberOfPixelTolerance = 0;
+  PixelType const     intensityTolerance = 0;
+  int const           radiusTolerance = 0;
+  unsigned long const numberOfPixelTolerance = 0;
 
   using DiffType = itk::Testing::ComparisonImageFilter<ImageType, ImageType>;
   auto diff = DiffType::New();
@@ -43,7 +43,7 @@ SameImage(ImagePointer testImage, ImagePointer baselineImage)
   diff->SetToleranceRadius(radiusTolerance);
   diff->UpdateLargestPossibleRegion();
 
-  unsigned long status = diff->GetNumberOfPixelsWithDifferences();
+  unsigned long const status = diff->GetNumberOfPixelsWithDifferences();
 
   if (status > numberOfPixelTolerance)
   {
@@ -98,7 +98,7 @@ itkImageFileWriterPastingTest2(int argc, char * argv[])
   pasteSize[0] = largestRegion.GetSize()[0] / 3;
   pasteSize[1] = largestRegion.GetSize()[1] / 3;
   pasteSize[2] = largestRegion.GetSize()[2] / 3;
-  ImageType::RegionType pasteRegion(pasteIndex, pasteSize);
+  ImageType::RegionType const pasteRegion(pasteIndex, pasteSize);
 
   using MonitorFilter = itk::PipelineMonitorImageFilter<ImageType>;
   auto monitor = MonitorFilter::New();

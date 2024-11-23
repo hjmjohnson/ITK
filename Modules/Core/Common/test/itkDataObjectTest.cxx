@@ -54,11 +54,11 @@ protected:
 int
 itkDataObjectTest(int, char *[])
 {
-  itk::DataObjectTestHelper::Pointer dataObject = itk::DataObjectTestHelper::New();
+  itk::DataObjectTestHelper::Pointer const dataObject = itk::DataObjectTestHelper::New();
 
-  itk::RealTimeClock::Pointer clock = itk::RealTimeClock::New();
+  itk::RealTimeClock::Pointer const clock = itk::RealTimeClock::New();
   dataObject->SetRealTimeStamp(clock->GetRealTimeStamp());
-  itk::RealTimeStamp timeStamp = dataObject->GetRealTimeStamp();
+  itk::RealTimeStamp const timeStamp = dataObject->GetRealTimeStamp();
   dataObject->DataHasBeenGenerated();
   if (timeStamp != dataObject->GetRealTimeStamp())
   {

@@ -138,7 +138,7 @@ itkIdentityTransformTest(int, char *[])
     std::cout << " [ PASSED ] " << std::endl;
   }
 
-  IdentityTransformType::ParametersType params(0);
+  IdentityTransformType::ParametersType const params(0);
   transform->SetParameters(params);
   ITK_TEST_SET_GET_VALUE(params, transform->GetParameters());
 

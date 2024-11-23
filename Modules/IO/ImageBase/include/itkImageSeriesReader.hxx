@@ -93,7 +93,7 @@ template <typename TOutputImage>
 void
 ImageSeriesReader<TOutputImage>::GenerateOutputInformation()
 {
-  typename TOutputImage::Pointer output = this->GetOutput();
+  typename TOutputImage::Pointer const output = this->GetOutput();
 
   using SpacingScalarType = typename TOutputImage::SpacingValueType;
   Array<SpacingScalarType> position1(TOutputImage::ImageDimension);
@@ -101,7 +101,7 @@ ImageSeriesReader<TOutputImage>::GenerateOutputInformation()
   Array<SpacingScalarType> positionN(TOutputImage::ImageDimension);
   positionN.Fill(0.0f);
 
-  std::string key("ITK_ImageOrigin");
+  std::string const key("ITK_ImageOrigin");
 
   // Clear the previous content of the MetaDictionary array
   if (!m_MetaDataDictionaryArray.empty())
@@ -200,7 +200,7 @@ ImageSeriesReader<TOutputImage>::GenerateOutputInformation()
     {
       dirN[j] = positionN[j] - position1[j];
     }
-    SpacingScalarType dirNnorm = dirN.GetNorm();
+    SpacingScalarType const dirNnorm = dirN.GetNorm();
     if (Math::AlmostEquals(dirNnorm, 0.0))
     {
       spacing[this->m_NumberOfDimensionsInImage] = 1.0;
@@ -237,9 +237,9 @@ template <typename TOutputImage>
 void
 ImageSeriesReader<TOutputImage>::EnlargeOutputRequestedRegion(DataObject * output)
 {
-  typename TOutputImage::Pointer out = dynamic_cast<TOutputImage *>(output);
-  ImageRegionType                requestedRegion = out->GetRequestedRegion();
-  ImageRegionType                largestRegion = out->GetLargestPossibleRegion();
+  typename TOutputImage::Pointer const out = dynamic_cast<TOutputImage *>(output);
+  ImageRegionType const                requestedRegion = out->GetRequestedRegion();
+  ImageRegionType const                largestRegion = out->GetLargestPossibleRegion();
 
   if (m_UseStreaming)
   {
@@ -257,9 +257,9 @@ ImageSeriesReader<TOutputImage>::GenerateData()
 {
   TOutputImage * output = this->GetOutput();
 
-  ImageRegionType requestedRegion = output->GetRequestedRegion();
-  ImageRegionType largestRegion = output->GetLargestPossibleRegion();
-  ImageRegionType sliceRegionToRequest = output->GetRequestedRegion();
+  ImageRegionType const requestedRegion = output->GetRequestedRegion();
+  ImageRegionType const largestRegion = output->GetLargestPossibleRegion();
+  ImageRegionType       sliceRegionToRequest = output->GetRequestedRegion();
 
   // Each file must have the same size.
   SizeType validSize = largestRegion.GetSize();
@@ -356,7 +356,7 @@ ImageSeriesReader<TOutputImage>::GenerateData()
       }
 
       // get the size of the region to be read
-      SizeType readSize = readerOutput->GetRequestedRegion().GetSize();
+      SizeType const readSize = readerOutput->GetRequestedRegion().GetSize();
 
       if (readSize == sliceRegionToRequest.GetSize())
       {
@@ -429,7 +429,7 @@ ImageSeriesReader<TOutputImage>::GenerateData()
         {
           dirN[j] = static_cast<SpacingScalarType>(sliceOrigin[j]) - static_cast<SpacingScalarType>(prevSliceOrigin[j]);
         }
-        SpacingScalarType dirNnorm = dirN.GetNorm();
+        SpacingScalarType const dirNnorm = dirN.GetNorm();
 
         if (this->m_SpacingDefined &&
             !Math::AlmostEquals(

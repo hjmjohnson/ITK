@@ -147,7 +147,7 @@ MultiThreaderBase::GetGlobalDefaultThreaderPrivate()
     if (itksys::SystemTools::GetEnv("ITK_GLOBAL_DEFAULT_THREADER", envVar))
     {
       envVar = itksys::SystemTools::UpperCase(envVar);
-      ThreaderEnum threaderT = ThreaderTypeFromString(envVar);
+      ThreaderEnum const threaderT = ThreaderTypeFromString(envVar);
       if (threaderT != ThreaderEnum::Unknown)
       {
         MultiThreaderBase::SetGlobalDefaultThreaderPrivate(threaderT);
@@ -368,7 +368,7 @@ MultiThreaderBase::GetGlobalDefaultNumberOfThreadsByPlatform()
 
   itksys::SystemInformation mySys;
   mySys.RunCPUCheck();
-  int result = mySys.GetNumberOfPhysicalCPU(); // Avoid using hyperthreading cores.
+  int const result = mySys.GetNumberOfPhysicalCPU(); // Avoid using hyperthreading cores.
   if (result == -1)
   {
     num = 1;
@@ -391,7 +391,7 @@ MultiThreaderBase::New()
   Pointer smartPtr = itk::ObjectFactory<MultiThreaderBase>::Create();
   if (smartPtr == nullptr)
   {
-    ThreaderEnum threaderType = GetGlobalDefaultThreader();
+    ThreaderEnum const threaderType = GetGlobalDefaultThreader();
     switch (threaderType)
     {
       case ThreaderEnum::Platform:
@@ -480,7 +480,7 @@ MultiThreaderBase::ParallelizeArray(SizeValueType             firstIndex,
     filter = nullptr;
   }
   // Upon destruction, progress will be set to 1.0
-  ProgressReporter progress(filter, 0, 1);
+  ProgressReporter const progress(filter, 0, 1);
 
   if (firstIndex + 1 < lastIndexPlus1)
   {
@@ -500,15 +500,15 @@ MultiThreaderBase::ParallelizeArray(SizeValueType             firstIndex,
 ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
 MultiThreaderBase::ParallelizeArrayHelper(void * arg)
 {
-  auto *       workUnitInfo = static_cast<MultiThreaderBase::WorkUnitInfo *>(arg);
-  ThreadIdType workUnitID = workUnitInfo->WorkUnitID;
-  ThreadIdType workUnitCount = workUnitInfo->NumberOfWorkUnits;
-  auto *       acParams = static_cast<struct ArrayCallback *>(workUnitInfo->UserData);
+  auto *             workUnitInfo = static_cast<MultiThreaderBase::WorkUnitInfo *>(arg);
+  ThreadIdType const workUnitID = workUnitInfo->WorkUnitID;
+  ThreadIdType const workUnitCount = workUnitInfo->NumberOfWorkUnits;
+  auto *             acParams = static_cast<struct ArrayCallback *>(workUnitInfo->UserData);
 
-  SizeValueType range = acParams->lastIndexPlus1 - acParams->firstIndex;
-  double        fraction = static_cast<double>(range) / workUnitCount;
-  SizeValueType first = acParams->firstIndex + fraction * workUnitID;
-  SizeValueType afterLast = acParams->firstIndex + fraction * (workUnitID + 1);
+  SizeValueType const range = acParams->lastIndexPlus1 - acParams->firstIndex;
+  double const        fraction = static_cast<double>(range) / workUnitCount;
+  SizeValueType const first = acParams->firstIndex + fraction * workUnitID;
+  SizeValueType       afterLast = acParams->firstIndex + fraction * (workUnitID + 1);
   if (workUnitID == workUnitCount - 1) // last thread
   {
     // Avoid possible problems due to floating point arithmetic
@@ -541,7 +541,7 @@ MultiThreaderBase::ParallelizeImageRegion(unsigned int                          
   {
     filter = nullptr;
   }
-  ProgressReporter progress(filter, 0, 1);
+  ProgressReporter const progress(filter, 0, 1);
 
   struct RegionAndCallback rnc
   {
@@ -553,10 +553,10 @@ MultiThreaderBase::ParallelizeImageRegion(unsigned int                          
 ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
 MultiThreaderBase::ParallelizeImageRegionHelper(void * arg)
 {
-  auto *       workUnitInfo = static_cast<MultiThreaderBase::WorkUnitInfo *>(arg);
-  ThreadIdType workUnitID = workUnitInfo->WorkUnitID;
-  ThreadIdType workUnitCount = workUnitInfo->NumberOfWorkUnits;
-  auto *       rnc = static_cast<struct RegionAndCallback *>(workUnitInfo->UserData);
+  auto *             workUnitInfo = static_cast<MultiThreaderBase::WorkUnitInfo *>(arg);
+  ThreadIdType const workUnitID = workUnitInfo->WorkUnitID;
+  ThreadIdType const workUnitCount = workUnitInfo->NumberOfWorkUnits;
+  auto *             rnc = static_cast<struct RegionAndCallback *>(workUnitInfo->UserData);
 
   const ImageRegionSplitterBase * splitter = ImageSourceCommon::GetGlobalDefaultSplitter();
   ImageIORegion                   region(rnc->dimension);
@@ -565,7 +565,7 @@ MultiThreaderBase::ParallelizeImageRegionHelper(void * arg)
     region.SetIndex(d, rnc->index[d]);
     region.SetSize(d, rnc->size[d]);
   }
-  ThreadIdType total = splitter->GetSplit(workUnitID, workUnitCount, region);
+  ThreadIdType const total = splitter->GetSplit(workUnitID, workUnitCount, region);
 
   TotalProgressReporter reporter(rnc->filter, 0);
 

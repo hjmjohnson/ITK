@@ -81,7 +81,7 @@ testStringToolsWithBasicType()
     std::string s;
 
     // write out
-    DataType dataIn = '*';
+    DataType const dataIn = '*';
     itk::StringTools::FromData(s, dataIn);
 
     // read back
@@ -104,7 +104,7 @@ testStringToolsWithBasicType()
     std::string s;
 
     // write out
-    DataType dataIn = -1024;
+    DataType const dataIn = -1024;
     itk::StringTools::FromData(s, dataIn);
 
     // read back
@@ -127,7 +127,7 @@ testStringToolsWithBasicType()
     std::string s;
 
     // write out
-    DataType dataIn = -0.1;
+    DataType const dataIn = -0.1;
     itk::StringTools::FromData(s, dataIn);
 
     // read back

@@ -40,8 +40,8 @@ FullToHalfHermitianImageFilter<TInputImage>::GenerateOutputInformation()
   Superclass::GenerateOutputInformation();
 
   // Get pointers to the input and output
-  typename InputImageType::ConstPointer inputPtr = this->GetInput();
-  typename OutputImageType::Pointer     outputPtr = this->GetOutput();
+  typename InputImageType::ConstPointer const inputPtr = this->GetInput();
+  typename OutputImageType::Pointer const     outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -74,7 +74,7 @@ FullToHalfHermitianImageFilter<TInputImage>::GenerateInputRequestedRegion()
   Superclass::GenerateInputRequestedRegion();
 
   // Get pointers to the input and output
-  typename InputImageType::Pointer inputPtr = const_cast<InputImageType *>(this->GetInput());
+  typename InputImageType::Pointer const inputPtr = const_cast<InputImageType *>(this->GetInput());
   if (inputPtr)
   {
     inputPtr->SetRequestedRegionToLargestPossibleRegion();
@@ -86,8 +86,8 @@ void
 FullToHalfHermitianImageFilter<TInputImage>::DynamicThreadedGenerateData(
   const OutputImageRegionType & outputRegionForThread)
 {
-  typename InputImageType::ConstPointer inputPtr = this->GetInput();
-  typename OutputImageType::Pointer     outputPtr = this->GetOutput();
+  typename InputImageType::ConstPointer const inputPtr = this->GetInput();
+  typename OutputImageType::Pointer const     outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {

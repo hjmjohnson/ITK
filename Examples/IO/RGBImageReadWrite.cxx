@@ -102,7 +102,7 @@ main(int argc, char ** argv)
   // Software Guide : EndCodeSnippet
 
 
-  ImageType::Pointer image = reader->GetOutput();
+  ImageType::Pointer const image = reader->GetOutput();
   writer->SetInput(image);
 
 

@@ -89,8 +89,8 @@ VectorGradientMagnitudeImageFilter<TInputImage, TRealType, TOutputImage>::Genera
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  InputImagePointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  OutputImagePointer outputPtr = this->GetOutput();
+  InputImagePointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -195,7 +195,7 @@ VectorGradientMagnitudeImageFilter<TInputImage, TRealType, TOutputImage>::Dynami
   // Find the data-set boundary "faces"
   NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<RealVectorImageType> bC;
   auto                                                                     r1 = MakeFilled<RadiusType>(1);
-  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<RealVectorImageType>::FaceListType faceList =
+  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<RealVectorImageType>::FaceListType const faceList =
     bC(m_RealValuedInputImage.GetPointer(), outputRegionForThread, r1);
 
   TotalProgressReporter progress(this, this->GetOutput()->GetRequestedRegion().GetNumberOfPixels());
@@ -261,18 +261,18 @@ VectorGradientMagnitudeImageFilter<TInputImage, TRealType, TOutputImage>::CubicS
   const double epsilon = 1.0e-11;
 
   // Substitution of  x = y - c[2]/3 eliminate the quadric term  x^3 +px + q = 0
-  double sq_c2 = c[2] * c[2];
-  double p = 1.0 / 3 * (-1.0 / 3.0 * sq_c2 + c[1]);
-  double q = 1.0 / 2 * (2.0 / 27.0 * c[2] * sq_c2 - 1.0 / 3.0 * c[2] * c[1] + c[0]);
+  double const sq_c2 = c[2] * c[2];
+  double const p = 1.0 / 3 * (-1.0 / 3.0 * sq_c2 + c[1]);
+  double const q = 1.0 / 2 * (2.0 / 27.0 * c[2] * sq_c2 - 1.0 / 3.0 * c[2] * c[1] + c[0]);
 
   // Cardano's formula
-  double cb_p = p * p * p;
-  double D = q * q + cb_p;
+  double const cb_p = p * p * p;
+  double const D = q * q + cb_p;
 
   if (D < -epsilon) // D < 0, three real solutions, by far the common case.
   {
-    double phi = 1.0 / 3.0 * std::acos(-q / std::sqrt(-cb_p));
-    double t = 2.0 * std::sqrt(-p);
+    double const phi = 1.0 / 3.0 * std::acos(-q / std::sqrt(-cb_p));
+    double const t = 2.0 * std::sqrt(-p);
 
     s[0] = t * std::cos(phi);
     s[1] = -t * std::cos(phi + dpi / 3);
@@ -289,7 +289,7 @@ VectorGradientMagnitudeImageFilter<TInputImage, TRealType, TOutputImage>::CubicS
     }
     else
     {
-      double u = itk::Math::cbrt(-q);
+      double const u = itk::Math::cbrt(-q);
       s[0] = 2 * u;
       s[1] = -u;
       num = 2;
@@ -298,16 +298,16 @@ VectorGradientMagnitudeImageFilter<TInputImage, TRealType, TOutputImage>::CubicS
   else // Only one real solution. This case misses a double root on rare
        // occasions with very large char eqn coefficients.
   {
-    double sqrt_D = std::sqrt(D);
-    double u = itk::Math::cbrt(sqrt_D - q);
-    double v = -itk::Math::cbrt(sqrt_D + q);
+    double const sqrt_D = std::sqrt(D);
+    double const u = itk::Math::cbrt(sqrt_D - q);
+    double const v = -itk::Math::cbrt(sqrt_D + q);
 
     s[0] = u + v;
     num = 1;
   }
 
   // Resubstitute
-  double sub = 1.0 / 3.0 * c[2];
+  double const sub = 1.0 / 3.0 * c[2];
 
   for (int i = 0; i < num; ++i)
   {

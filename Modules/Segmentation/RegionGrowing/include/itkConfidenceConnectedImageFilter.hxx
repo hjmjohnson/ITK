@@ -106,7 +106,7 @@ ConfidenceConnectedImageFilter<TInputImage, TOutputImage>::GenerateInputRequeste
   Superclass::GenerateInputRequestedRegion();
   if (this->GetInput())
   {
-    InputImagePointer input = const_cast<TInputImage *>(this->GetInput());
+    InputImagePointer const input = const_cast<TInputImage *>(this->GetInput());
     input->SetRequestedRegionToLargestPossibleRegion();
   }
 }
@@ -131,11 +131,11 @@ ConfidenceConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
 
   unsigned int loop;
 
-  typename Superclass::InputImageConstPointer inputImage = this->GetInput();
-  typename Superclass::OutputImagePointer     outputImage = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputImage = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputImage = this->GetOutput();
 
   // Zero the output
-  OutputImageRegionType region = outputImage->GetRequestedRegion();
+  OutputImageRegionType const region = outputImage->GetRequestedRegion();
   outputImage->SetBufferedRegion(region);
   outputImage->AllocateInitialized();
 
@@ -160,9 +160,9 @@ ConfidenceConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
 
     InputRealType sumOfSquares{};
 
-    typename SeedsContainerType::const_iterator si = m_Seeds.begin();
-    typename SeedsContainerType::const_iterator li = m_Seeds.end();
-    SizeValueType                               num = 0;
+    typename SeedsContainerType::const_iterator       si = m_Seeds.begin();
+    typename SeedsContainerType::const_iterator const li = m_Seeds.end();
+    SizeValueType                                     num = 0;
     while (si != li)
     {
       if (region.IsInside(*si))
@@ -202,9 +202,9 @@ ConfidenceConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
     InputRealType sum{};
     InputRealType sumOfSquares{};
 
-    typename SeedsContainerType::const_iterator si = m_Seeds.begin();
-    typename SeedsContainerType::const_iterator li = m_Seeds.end();
-    SizeValueType                               num = 0;
+    typename SeedsContainerType::const_iterator       si = m_Seeds.begin();
+    typename SeedsContainerType::const_iterator const li = m_Seeds.end();
+    SizeValueType                                     num = 0;
     while (si != li)
     {
       if (region.IsInside(*si))
@@ -234,8 +234,8 @@ ConfidenceConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
   // Find the highest and lowest seed intensity.
   InputRealType lowestSeedIntensity = itk::NumericTraits<InputImagePixelType>::max();
   InputRealType highestSeedIntensity = itk::NumericTraits<InputImagePixelType>::NonpositiveMin();
-  typename SeedsContainerType::const_iterator si = m_Seeds.begin();
-  typename SeedsContainerType::const_iterator li = m_Seeds.end();
+  typename SeedsContainerType::const_iterator       si = m_Seeds.begin();
+  typename SeedsContainerType::const_iterator const li = m_Seeds.end();
   while (si != li)
   {
     if (region.IsInside(*si))

@@ -126,7 +126,7 @@ itkMirrorPadImageTest(int, char *[])
   itk::MirrorPadImageFilter<ShortImage, ShortImage>::Pointer mirrorPad;
 
   mirrorPad = itk::MirrorPadImageFilter<ShortImage, ShortImage>::New();
-  itk::SimpleFilterWatcher watcher(mirrorPad);
+  itk::SimpleFilterWatcher const watcher(mirrorPad);
 
   mirrorPad->SetInput(if2);
 

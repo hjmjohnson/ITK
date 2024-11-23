@@ -38,8 +38,8 @@ Inverse1DFFTImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the inputs
-  typename InputImageType::Pointer  input = const_cast<InputImageType *>(this->GetInput());
-  typename OutputImageType::Pointer output = this->GetOutput();
+  typename InputImageType::Pointer const  input = const_cast<InputImageType *>(this->GetInput());
+  typename OutputImageType::Pointer const output = this->GetOutput();
 
   if (!input || !output)
   {

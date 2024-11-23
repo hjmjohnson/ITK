@@ -85,7 +85,7 @@ TestImageOfVectors(const std::string & fname, const std::string & intentCode = "
 
   imageRegion.SetSize(size);
   imageRegion.SetIndex(index);
-  typename VectorImageType::Pointer vi =
+  typename VectorImageType::Pointer const vi =
     itk::IOTestHelper::AllocateImageFromRegionAndSpacing<VectorImageType>(imageRegion, spacing);
   vi->SetOrigin(origin);
   vi->SetDirection(myDirection);
@@ -148,7 +148,7 @@ TestImageOfVectors(const std::string & fname, const std::string & intentCode = "
     itk::MetaDataDictionary & dictionary = vi->GetMetaDataDictionary();
     itk::EncapsulateMetaData<std::string>(dictionary, "intent_code", intentCode);
   }
-  std::string description("text description of file content");
+  std::string const description("text description of file content");
   itk::EncapsulateMetaData<std::string>(vi->GetMetaDataDictionary(), "ITK_FileNotes", description);
   try
   {

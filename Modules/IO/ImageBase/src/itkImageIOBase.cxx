@@ -1106,7 +1106,7 @@ ImageIOBase::GenerateStreamableReadRegionFromRequestedRegion(const ImageIORegion
   }
 
   // dimension size we use to represent the region
-  unsigned int maxDimension =
+  unsigned int const maxDimension =
     minIODimension > requested.GetImageDimension() ? minIODimension : requested.GetImageDimension();
 
   // First: allocate with the correct dimensions

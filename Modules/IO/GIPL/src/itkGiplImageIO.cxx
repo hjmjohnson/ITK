@@ -99,7 +99,7 @@ bool
 GiplImageIO::CanReadFile(const char * filename)
 {
   // First check the filename extension
-  bool extensionFound = CheckExtension(filename);
+  bool const extensionFound = CheckExtension(filename);
 
   if (!extensionFound)
   {
@@ -177,14 +177,14 @@ GiplImageIO::CanReadFile(const char * filename)
 bool
 GiplImageIO::CanWriteFile(const char * name)
 {
-  std::string filename = name;
+  std::string const filename = name;
 
   if (filename.empty())
   {
     itkDebugMacro("No filename specified.");
   }
 
-  bool extensionFound = CheckExtension(name);
+  bool const extensionFound = CheckExtension(name);
 
   if (!extensionFound)
   {
@@ -703,7 +703,7 @@ GiplImageIO::Write(const void * buffer)
 {
   CheckExtension(m_FileName.c_str());
 
-  unsigned int nDims = this->GetNumberOfDimensions();
+  unsigned int const nDims = this->GetNumberOfDimensions();
 
   if (m_IsCompressed)
   {
@@ -1100,7 +1100,7 @@ GiplImageIO::PrintSelf(std::ostream & os, Indent indent) const
 bool
 GiplImageIO::CheckExtension(const char * filename)
 {
-  std::string fname = filename;
+  std::string const fname = filename;
 
   if (fname.empty())
   {

@@ -83,7 +83,7 @@ protected:
   void
   ComputeMeanAndGaussianCurvatures(const OutputPointType & iP)
   {
-    OutputMeshPointer output = this->GetOutput();
+    OutputMeshPointer const output = this->GetOutput();
 
     OutputQEType * qe = iP.GetEdge();
 
@@ -113,7 +113,7 @@ protected:
         OutputCurvatureType temp_area;
         OutputCoordType     temp_coeff;
 
-        CoefficientType coefficent;
+        CoefficientType const coefficent;
 
         do
         {

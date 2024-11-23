@@ -62,7 +62,7 @@ itkBSplineTransformInitializerTest1(int argc, char * argv[])
 
   movingReader->SetFileName(argv[3]);
 
-  FixedImageType::ConstPointer fixedImage = fixedReader->GetOutput();
+  FixedImageType::ConstPointer const fixedImage = fixedReader->GetOutput();
 
   using FilterType = itk::ResampleImageFilter<MovingImageType, FixedImageType>;
 
@@ -74,16 +74,16 @@ itkBSplineTransformInitializerTest1(int argc, char * argv[])
 
   resampler->SetInterpolator(interpolator);
 
-  FixedImageType::SpacingType   fixedSpacing = fixedImage->GetSpacing();
-  FixedImageType::PointType     fixedOrigin = fixedImage->GetOrigin();
-  FixedImageType::DirectionType fixedDirection = fixedImage->GetDirection();
+  FixedImageType::SpacingType const   fixedSpacing = fixedImage->GetSpacing();
+  FixedImageType::PointType const     fixedOrigin = fixedImage->GetOrigin();
+  FixedImageType::DirectionType const fixedDirection = fixedImage->GetDirection();
 
   resampler->SetOutputSpacing(fixedSpacing);
   resampler->SetOutputOrigin(fixedOrigin);
   resampler->SetOutputDirection(fixedDirection);
 
-  FixedImageType::RegionType fixedRegion = fixedImage->GetBufferedRegion();
-  FixedImageType::SizeType   fixedSize = fixedRegion.GetSize();
+  FixedImageType::RegionType const fixedRegion = fixedImage->GetBufferedRegion();
+  FixedImageType::SizeType const   fixedSize = fixedRegion.GetSize();
   resampler->SetSize(fixedSize);
   resampler->SetOutputStartIndex(fixedRegion.GetIndex());
 

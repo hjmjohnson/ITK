@@ -165,15 +165,15 @@ itkBlockMatchingImageFilterTest(int argc, char * argv[])
   ITK_TRY_EXPECT_NO_EXCEPTION(colormapImageFilter->Update());
 
 
-  OutputImageType::Pointer outputImage = colormapImageFilter->GetOutput();
+  OutputImageType::Pointer const outputImage = colormapImageFilter->GetOutput();
 
   // Highlight the feature points identified in the output image
   using PointIteratorType = PointSetType::PointsContainer::ConstIterator;
   using PointDataIteratorType = BlockMatchingFilterType::DisplacementsType::PointDataContainer::ConstIterator;
 
-  PointIteratorType     pointItr = featureSelectionFilter->GetOutput()->GetPoints()->Begin();
-  PointIteratorType     pointEnd = featureSelectionFilter->GetOutput()->GetPoints()->End();
-  PointDataIteratorType displItr = displacements->GetPointData()->Begin();
+  PointIteratorType       pointItr = featureSelectionFilter->GetOutput()->GetPoints()->Begin();
+  PointIteratorType const pointEnd = featureSelectionFilter->GetOutput()->GetPoints()->End();
+  PointDataIteratorType   displItr = displacements->GetPointData()->Begin();
 
   // define colors
   OutputPixelType red;
@@ -196,7 +196,7 @@ itkBlockMatchingImageFilterTest(int argc, char * argv[])
   {
     if (outputImage->TransformPhysicalPointToIndex(pointItr.Value(), index))
     {
-      OutputImageType::IndexType displ =
+      OutputImageType::IndexType const displ =
         outputImage->TransformPhysicalPointToIndex(pointItr.Value() + displItr.Value());
 
       // draw line between old and new location of a point in blue

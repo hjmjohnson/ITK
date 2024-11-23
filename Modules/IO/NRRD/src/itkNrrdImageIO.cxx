@@ -209,9 +209,9 @@ NrrdImageIO::CanReadFile(const char * filename)
   // Check the extension first to avoid opening files that do not
   // look like nrrds.  The file must have an appropriate extension to be
   // recognized.
-  std::string fname = filename;
+  std::string const fname = filename;
 
-  bool extensionFound = this->HasSupportedReadExtension(filename);
+  bool const extensionFound = this->HasSupportedReadExtension(filename);
 
   if (!extensionFound)
   {
@@ -331,7 +331,7 @@ NrrdImageIO::ReadImageInformation()
     }
     // set type of pixel components; this is orthogonal to pixel type
 
-    IOComponentEnum cmpType = this->NrrdToITKComponentType(nrrd->type);
+    IOComponentEnum const cmpType = this->NrrdToITKComponentType(nrrd->type);
     if (IOComponentEnum::UNKNOWNCOMPONENTTYPE == cmpType)
     {
       itkExceptionMacro("Nrrd type " << airEnumStr(nrrdType, nrrd->type)
@@ -366,8 +366,8 @@ NrrdImageIO::ReadImageInformation()
     else if (1 == rangeAxisNum)
     {
       this->SetNumberOfDimensions(nrrd->dim - 1);
-      int    kind = nrrd->axis[rangeAxisIdx[0]].kind;
-      size_t size = nrrd->axis[rangeAxisIdx[0]].size;
+      int const    kind = nrrd->axis[rangeAxisIdx[0]].kind;
+      size_t const size = nrrd->axis[rangeAxisIdx[0]].size;
       // NOTE: it is the NRRD readers responsibility to make sure that
       // the size (#of components) associated with a specific kind is
       // matches the actual size of the axis.
@@ -464,7 +464,7 @@ NrrdImageIO::ReadImageInformation()
 
     for (unsigned int axii = 0; axii < domainAxisNum; ++axii)
     {
-      unsigned int naxi = domainAxisIdx[axii];
+      unsigned int const naxi = domainAxisIdx[axii];
       this->SetDimensions(axii, static_cast<unsigned int>(nrrd->axis[naxi].size));
       spacingStatus = nrrdSpacingCalculate(nrrd, naxi, &spacing, spaceDir);
 
@@ -558,8 +558,8 @@ NrrdImageIO::ReadImageInformation()
     }
     else
     {
-      double spaceOrigin[NRRD_DIM_MAX];
-      int    originStatus = nrrdOriginCalculate(nrrd, domainAxisIdx, domainAxisNum, nrrdCenterCell, spaceOrigin);
+      double    spaceOrigin[NRRD_DIM_MAX];
+      int const originStatus = nrrdOriginCalculate(nrrd, domainAxisIdx, domainAxisNum, nrrdCenterCell, spaceOrigin);
       for (unsigned int saxi = 0; saxi < domainAxisNum; ++saxi)
       {
         switch (originStatus)
@@ -589,7 +589,7 @@ NrrdImageIO::ReadImageInformation()
     MetaDataDictionary & thisDic = this->GetMetaDataDictionary();
     // Necessary to clear dict if ImageIO object is re-used
     thisDic.Clear();
-    std::string classname(this->GetNameOfClass());
+    std::string const classname(this->GetNameOfClass());
     EncapsulateMetaData<std::string>(thisDic, ITK_InputFilterName, classname);
     for (unsigned int kvpi = 0; kvpi < nrrdKeyValueSize(nrrd); ++kvpi)
     {
@@ -609,7 +609,7 @@ NrrdImageIO::ReadImageInformation()
     NrrdAxisInfo * naxis;
     for (unsigned int axii = 0; axii < domainAxisNum; ++axii)
     {
-      unsigned int axi = domainAxisIdx[axii];
+      unsigned int const axi = domainAxisIdx[axii];
       naxis = nrrd->axis + axi;
       if (AIR_EXISTS(naxis->thickness))
       {
@@ -860,7 +860,7 @@ NrrdImageIO::Read(void * buffer)
 bool
 NrrdImageIO::CanWriteFile(const char * name)
 {
-  std::string filename = name;
+  std::string const filename = name;
 
   if (filename.empty())
   {
@@ -955,7 +955,7 @@ NrrdImageIO::Write(const void * buffer)
     size[axi + baseDim] = this->GetDimensions(axi);
     kind[axi + baseDim] = nrrdKindDomain;
     origin[axi] = this->GetOrigin(axi);
-    double spacing = this->GetSpacing(axi);
+    double const spacing = this->GetSpacing(axi);
     spaceDirStd = this->GetDirection(axi);
     for (unsigned int saxi = 0; saxi < spaceDim; ++saxi)
     {
@@ -1117,7 +1117,7 @@ NrrdImageIO::Write(const void * buffer)
   }
   else
   {
-    Superclass::IOFileEnum fileType = this->GetFileType();
+    Superclass::IOFileEnum const fileType = this->GetFileType();
     switch (fileType)
     {
       default:
@@ -1132,7 +1132,7 @@ NrrdImageIO::Write(const void * buffer)
   }
 
   // set desired endianness of output
-  Superclass::IOByteOrderEnum byteOrder = this->GetByteOrder();
+  Superclass::IOByteOrderEnum const byteOrder = this->GetByteOrder();
   switch (byteOrder)
   {
     default:

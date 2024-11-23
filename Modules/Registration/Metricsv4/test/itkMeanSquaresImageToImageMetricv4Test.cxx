@@ -34,12 +34,12 @@ itkMeanSquaresImageToImageMetricv4Test(int, char ** const)
   constexpr unsigned int imageDimensionality = 3;
   using ImageType = itk::Image<double, imageDimensionality>;
 
-  auto                     size = ImageType::SizeType::Filled(imageSize);
-  ImageType::IndexType     index{};
-  ImageType::RegionType    region{ index, size };
-  auto                     spacing = itk::MakeFilled<ImageType::SpacingType>(1.0);
-  ImageType::PointType     origin{};
-  ImageType::DirectionType direction;
+  auto                        size = ImageType::SizeType::Filled(imageSize);
+  ImageType::IndexType const  index{};
+  ImageType::RegionType const region{ index, size };
+  auto                        spacing = itk::MakeFilled<ImageType::SpacingType>(1.0);
+  ImageType::PointType const  origin{};
+  ImageType::DirectionType    direction;
   direction.SetIdentity();
 
   /* Create simple test images. */

@@ -451,8 +451,8 @@ main(int argc, char * argv[])
   finalTransform->SetParameters(finalParameters);
 
   // Software Guide : BeginCodeSnippet
-  TransformType::MatrixType matrix = finalTransform->GetMatrix();
-  TransformType::OffsetType offset = finalTransform->GetOffset();
+  TransformType::MatrixType const matrix = finalTransform->GetMatrix();
+  TransformType::OffsetType const offset = finalTransform->GetOffset();
   std::cout << "Matrix = " << std::endl << matrix << std::endl;
   std::cout << "Offset = " << std::endl << offset << std::endl;
   // Software Guide : EndCodeSnippet
@@ -562,7 +562,7 @@ main(int argc, char * argv[])
   resampler->SetTransform(finalTransform);
   resampler->SetInput(movingImageReader->GetOutput());
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
 
   resampler->SetSize(fixedImage->GetLargestPossibleRegion().GetSize());
   resampler->SetOutputOrigin(fixedImage->GetOrigin());
@@ -636,7 +636,7 @@ main(int argc, char * argv[])
   extractor->SetDirectionCollapseToSubmatrix();
   extractor->InPlaceOn();
 
-  FixedImageType::RegionType inputRegion =
+  FixedImageType::RegionType const inputRegion =
     fixedImage->GetLargestPossibleRegion();
   FixedImageType::SizeType  size = inputRegion.GetSize();
   FixedImageType::IndexType start = inputRegion.GetIndex();

@@ -47,9 +47,9 @@ template <typename TInputMesh, typename TOutputMesh, typename TSolverTraits>
 void
 ParameterizationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::ComputeListOfInteriorVertices()
 {
-  InputMeshConstPointer input = this->GetInput();
+  InputMeshConstPointer const input = this->GetInput();
 
-  typename InputPointsContainer::ConstPointer points = input->GetPoints();
+  typename InputPointsContainer::ConstPointer const points = input->GetPoints();
 
   InputPointIdentifier k(0);
   InputPointIdentifier id(0);
@@ -86,8 +86,8 @@ ParameterizationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::Fill
                                                                                        VectorType & ioBx,
                                                                                        VectorType & ioBy)
 {
-  InputMeshConstPointer input = this->GetInput();
-  OutputMeshPointer     output = this->GetOutput();
+  InputMeshConstPointer const input = this->GetInput();
+  OutputMeshPointer const     output = this->GetOutput();
 
   InputCoordRepType value;
 
@@ -156,8 +156,8 @@ ParameterizationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::Gene
 {
   this->CopyInputMeshToOutputMesh();
 
-  InputMeshConstPointer input = this->GetInput();
-  OutputMeshType *      output = this->GetOutput();
+  InputMeshConstPointer const input = this->GetInput();
+  OutputMeshType *            output = this->GetOutput();
 
   if (m_BorderTransform.IsNotNull())
   {

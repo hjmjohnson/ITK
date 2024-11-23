@@ -43,10 +43,10 @@ VectorAnisotropicDiffusionFunction<TImage>::CalculateAverageGradientMagnitudeSqu
   typename RNI_type::RadiusType             radius;
   typename BFC_type::FaceListType::iterator fit;
 
-  VectorNeighborhoodInnerProduct<TImage> SIP;
-  VectorNeighborhoodInnerProduct<TImage> IP;
-  RNI_type                               iterator_list[ImageDimension];
-  SNI_type                               face_iterator_list[ImageDimension];
+  VectorNeighborhoodInnerProduct<TImage> const SIP;
+  VectorNeighborhoodInnerProduct<TImage> const IP;
+  RNI_type                                     iterator_list[ImageDimension];
+  SNI_type                                     face_iterator_list[ImageDimension];
   using PixelValueType = typename PixelType::ValueType;
   DerivativeOperator<PixelValueType, ImageDimension> operator_list[ImageDimension];
 

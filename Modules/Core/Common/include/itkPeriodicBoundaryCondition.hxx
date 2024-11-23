@@ -155,9 +155,9 @@ PeriodicBoundaryCondition<TInputImage, TOutputImage>::GetInputRequestedRegion(
     {
       lowIndex += static_cast<IndexValueType>(imageSize[i]);
     }
-    IndexValueType highIndex = lowIndex + static_cast<IndexValueType>(outputSize[i]);
+    IndexValueType const highIndex = lowIndex + static_cast<IndexValueType>(outputSize[i]);
 
-    bool overlap = (highIndex >= static_cast<IndexValueType>(imageSize[i]));
+    bool const overlap = (highIndex >= static_cast<IndexValueType>(imageSize[i]));
 
     if (overlap)
     {
@@ -172,7 +172,7 @@ PeriodicBoundaryCondition<TInputImage, TOutputImage>::GetInputRequestedRegion(
       inputRequestedSize[i] = outputSize[i];
     }
   }
-  RegionType inputRequestedRegion(inputRequestedIndex, inputRequestedSize);
+  RegionType const inputRequestedRegion(inputRequestedIndex, inputRequestedSize);
 
   return inputRequestedRegion;
 }
@@ -183,9 +183,9 @@ auto
 PeriodicBoundaryCondition<TInputImage, TOutputImage>::GetPixel(const IndexType & index, const TInputImage * image) const
   -> OutputPixelType
 {
-  RegionType imageRegion = image->GetLargestPossibleRegion();
-  IndexType  imageIndex = imageRegion.GetIndex();
-  SizeType   imageSize = imageRegion.GetSize();
+  RegionType const imageRegion = image->GetLargestPossibleRegion();
+  IndexType        imageIndex = imageRegion.GetIndex();
+  SizeType         imageSize = imageRegion.GetSize();
 
   IndexType lookupIndex;
 

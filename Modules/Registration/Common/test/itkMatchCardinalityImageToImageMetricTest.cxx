@@ -84,7 +84,7 @@ itkMatchCardinalityImageToImageMetricTest(int argc, char * argv[])
   }
 
   std::cout << "Now measure mismatches..." << std::endl;
-  bool measureMatches = false;
+  bool const measureMatches = false;
   ITK_TEST_SET_GET_BOOLEAN(metric, MeasureMatches, measureMatches);
 
   for (float x = -200.0; x <= 200.0; x += 50.0)
@@ -107,11 +107,11 @@ itkMatchCardinalityImageToImageMetricTest(int argc, char * argv[])
   }
 
 
-  MetricType::ParametersType parameters = transform->GetParameters();
-  MetricType::DerivativeType derivative;
+  MetricType::ParametersType const parameters = transform->GetParameters();
+  MetricType::DerivativeType       derivative;
   metric->GetDerivative(parameters, derivative);
 
-  MetricType::DerivativeType derivative1{};
+  MetricType::DerivativeType const derivative1{};
   ITK_TEST_EXPECT_EQUAL(derivative, derivative1);
 
   return EXIT_SUCCESS;

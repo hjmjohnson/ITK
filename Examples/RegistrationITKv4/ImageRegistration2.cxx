@@ -319,7 +319,7 @@ main(int argc, char * argv[])
 
 
   fixedNormalizer->Update();
-  FixedImageType::RegionType fixedImageRegion =
+  FixedImageType::RegionType const fixedImageRegion =
     fixedNormalizer->GetOutput()->GetBufferedRegion();
   registration->SetFixedImageRegion(fixedImageRegion);
 
@@ -444,12 +444,12 @@ main(int argc, char * argv[])
 
   ParametersType finalParameters = registration->GetLastTransformParameters();
 
-  double TranslationAlongX = finalParameters[0];
-  double TranslationAlongY = finalParameters[1];
+  double const TranslationAlongX = finalParameters[0];
+  double const TranslationAlongY = finalParameters[1];
 
-  unsigned int numberOfIterations = optimizer->GetCurrentIteration();
+  unsigned int const numberOfIterations = optimizer->GetCurrentIteration();
 
-  double bestValue = optimizer->GetValue();
+  double const bestValue = optimizer->GetValue();
 
 
   // Print out results
@@ -510,7 +510,7 @@ main(int argc, char * argv[])
   resample->SetTransform(finalTransform);
   resample->SetInput(movingImageReader->GetOutput());
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
 
   resample->SetSize(fixedImage->GetLargestPossibleRegion().GetSize());
   resample->SetOutputOrigin(fixedImage->GetOrigin());

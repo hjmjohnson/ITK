@@ -89,14 +89,14 @@ itkEdgePotentialImageFilterTest(int, char *[])
   // create an EdgePotentialImageFilter
   using FilterType = itk::EdgePotentialImageFilter<InputImageType, OutputImageType>;
 
-  auto                     filter = FilterType::New();
-  itk::SimpleFilterWatcher watcher(filter);
+  auto                           filter = FilterType::New();
+  itk::SimpleFilterWatcher const watcher(filter);
 
   // Connect the input images
   filter->SetInput(inputImage);
 
   // Get the Smart Pointer to the Filter Output
-  OutputImageType::Pointer outputImage = filter->GetOutput();
+  OutputImageType::Pointer const outputImage = filter->GetOutput();
 
   // Execute the filter
   filter->Update();

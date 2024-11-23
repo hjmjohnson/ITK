@@ -45,7 +45,7 @@ itkCompose2DCovariantVectorImageFilterTest(int, char *[])
   size[1] = 2;
   size[2] = 2;
 
-  IndexType start{};
+  IndexType const start{};
 
   RegionType region;
   region.SetIndex(start);
@@ -77,7 +77,7 @@ itkCompose2DCovariantVectorImageFilterTest(int, char *[])
 
   using OutputImageType = FilterType::OutputImageType;
 
-  OutputImageType::Pointer twoVectorImage = filter->GetOutput();
+  OutputImageType::Pointer const twoVectorImage = filter->GetOutput();
 
   using OutputIterator = itk::ImageRegionIterator<OutputImageType>;
   using InputIterator = itk::ImageRegionIterator<InputImageType>;

@@ -289,7 +289,7 @@ LBFGSBOptimizer::StartOptimization()
 {
   // Check if all the bounds parameters are the same size as the initial
   // parameters.
-  unsigned int numberOfParameters = m_CostFunction->GetNumberOfParameters();
+  unsigned int const numberOfParameters = m_CostFunction->GetNumberOfParameters();
 
   if (this->GetInitialPosition().Size() < numberOfParameters)
   {

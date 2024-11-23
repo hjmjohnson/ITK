@@ -141,15 +141,15 @@ itkGradientVectorFlowImageFilterTest(int, char *[])
   m_GVFFilter->SetLaplacianFilter(m_LFilter);
   ITK_TEST_SET_GET_VALUE(m_LFilter, m_GVFFilter->GetLaplacianFilter());
 
-  double noiseLevel = 500;
+  double const noiseLevel = 500;
   m_GVFFilter->SetNoiseLevel(noiseLevel);
   ITK_TEST_SET_GET_VALUE(noiseLevel, m_GVFFilter->GetNoiseLevel());
 
-  double timeStep = 0.001;
+  double const timeStep = 0.001;
   m_GVFFilter->SetTimeStep(timeStep);
   ITK_TEST_SET_GET_VALUE(timeStep, m_GVFFilter->GetTimeStep());
 
-  int iterationNum = 2;
+  int const iterationNum = 2;
   m_GVFFilter->SetIterationNum(iterationNum);
   ITK_TEST_SET_GET_VALUE(iterationNum, m_GVFFilter->GetIterationNum());
 
@@ -158,10 +158,10 @@ itkGradientVectorFlowImageFilterTest(int, char *[])
   // It is important to do it AFTER the filter is Updated
   // Because the object connected to the output may be changed
   // by another during GenerateData() call
-  myGradientImageType::Pointer outputImage = filter->GetOutput();
+  myGradientImageType::Pointer const outputImage = filter->GetOutput();
 
   // Create an iterator for going through the output image
-  myOutputIteratorType itg(outputImage, outputImage->GetRequestedRegion());
+  myOutputIteratorType const itg(outputImage, outputImage->GetRequestedRegion());
 
   // Print the content of the result image
   std::cout << " Result " << std::endl;
@@ -180,7 +180,7 @@ itkGradientVectorFlowImageFilterTest(int, char *[])
 
   std::cout << m_GVFFilter->GetIterationNum() << std::endl;
 
-  myOutputIteratorType itgvf(m_GVFFilter->GetOutput(), m_GVFFilter->GetOutput()->GetRequestedRegion());
+  myOutputIteratorType const itgvf(m_GVFFilter->GetOutput(), m_GVFFilter->GetOutput()->GetRequestedRegion());
 
   std::cout << "Completed" << std::endl;
   // All objects should be automatically destroyed at this point

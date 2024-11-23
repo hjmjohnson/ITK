@@ -142,14 +142,14 @@ itkMeshTest(int, char *[])
   using namespace itkMeshTestTypes; // open the namespace here.
                                     // this is safe because only happens locally.
 
-  itk::FileOutputWindow::Pointer fow = itk::FileOutputWindow::New();
+  itk::FileOutputWindow::Pointer const fow = itk::FileOutputWindow::New();
   fow->SetInstance(fow);
 
   /**
    * Define the 3d geometric positions for 8 points in a cube.
    */
-  MeshType::CoordRepType testPointCoords[8][3] = { { 0, 0, 0 }, { 9, 0, 0 }, { 9, 0, 9 }, { 0, 0, 9 },
-                                                   { 0, 9, 0 }, { 9, 9, 0 }, { 9, 9, 9 }, { 0, 9, 9 } };
+  MeshType::CoordRepType const testPointCoords[8][3] = { { 0, 0, 0 }, { 9, 0, 0 }, { 9, 0, 9 }, { 0, 0, 9 },
+                                                         { 0, 9, 0 }, { 9, 9, 0 }, { 9, 9, 9 }, { 0, 9, 9 } };
 
   /**
    * List the points that the tetrahedron will use from the mesh.
@@ -190,17 +190,18 @@ itkMeshTest(int, char *[])
 
     // map to get number of points for each type of cell
     // Using 7 points in the polygon cell for testing purpose
-    std::map<itk::CellGeometryEnum, unsigned int> cellPointMap = { { itk::CellGeometryEnum::VERTEX_CELL, 1 },
-                                                                   { itk::CellGeometryEnum::LINE_CELL, 2 },
-                                                                   { itk::CellGeometryEnum::TRIANGLE_CELL, 3 },
-                                                                   { itk::CellGeometryEnum::QUADRILATERAL_CELL, 4 },
-                                                                   { itk::CellGeometryEnum::POLYGON_CELL, 7 },
-                                                                   { itk::CellGeometryEnum::TETRAHEDRON_CELL, 4 },
-                                                                   { itk::CellGeometryEnum::HEXAHEDRON_CELL, 8 },
-                                                                   { itk::CellGeometryEnum::QUADRATIC_EDGE_CELL, 3 },
-                                                                   { itk::CellGeometryEnum::QUADRATIC_TRIANGLE_CELL,
-                                                                     6 },
-                                                                   { itk::CellGeometryEnum::POLYLINE_CELL, 5 } };
+    std::map<itk::CellGeometryEnum, unsigned int> const cellPointMap = {
+      { itk::CellGeometryEnum::VERTEX_CELL, 1 },
+      { itk::CellGeometryEnum::LINE_CELL, 2 },
+      { itk::CellGeometryEnum::TRIANGLE_CELL, 3 },
+      { itk::CellGeometryEnum::QUADRILATERAL_CELL, 4 },
+      { itk::CellGeometryEnum::POLYGON_CELL, 7 },
+      { itk::CellGeometryEnum::TETRAHEDRON_CELL, 4 },
+      { itk::CellGeometryEnum::HEXAHEDRON_CELL, 8 },
+      { itk::CellGeometryEnum::QUADRATIC_EDGE_CELL, 3 },
+      { itk::CellGeometryEnum::QUADRATIC_TRIANGLE_CELL, 6 },
+      { itk::CellGeometryEnum::POLYLINE_CELL, 5 }
+    };
 
     // Insert cell of each kind
     auto          cellVectorContainer = MeshType::CellsVectorContainer::New();
@@ -208,8 +209,8 @@ itkMeshTest(int, char *[])
     unsigned long value = 1;
     for (auto & iter : cellPointMap)
     {
-      itk::CellGeometryEnum cellType = iter.first;
-      unsigned int          numOfPoints = iter.second;
+      itk::CellGeometryEnum const cellType = iter.first;
+      unsigned int const          numOfPoints = iter.second;
 
       // Insert cell type
       cellVectorContainer->InsertElement(index++, static_cast<unsigned long>(cellType));
@@ -231,8 +232,8 @@ itkMeshTest(int, char *[])
     index = 0;
     for (auto & iter : cellPointMap)
     {
-      unsigned int    numOfPoints = iter.second;
-      CellAutoPointer temp_cell;
+      unsigned int const numOfPoints = iter.second;
+      CellAutoPointer    temp_cell;
 
       if (mesh0->GetCell(index++, temp_cell))
       {
@@ -245,7 +246,7 @@ itkMeshTest(int, char *[])
 
     // Test the SetCellsArray with same cell type functionality
     index = 0;
-    unsigned int numOfCells = 3;
+    unsigned int const numOfCells = 3;
     cellVectorContainer->Initialize();
 
     for (unsigned int i = 0; i < numOfCells; ++i)
@@ -428,7 +429,7 @@ itkMeshTest(int, char *[])
      * triangles that bound the 3D cells haven't been added, so they
      * don't show up as additional neighbors.)
      */
-    int numberOfNeighbors =
+    int const numberOfNeighbors =
       mesh->GetCellBoundaryFeatureNeighbors(1,        // Topological dimension of feature.
                                             1,        // CellIdentifier
                                             1,        // CellFeatureIdentifier
@@ -687,14 +688,14 @@ itkMeshTest(int, char *[])
                                          MeshType::CoordRepType,
                                          MeshType::PointsContainer>;
 
-    BoundingBox::Pointer bbox(BoundingBox::New());
+    BoundingBox::Pointer const bbox(BoundingBox::New());
     bbox->SetPoints(mesh->GetPoints());
     bbox->ComputeBoundingBox();
 
     /**
      * Set up some visitors
      */
-    MeshType::CellType::MultiVisitor::Pointer mv = MeshType::CellType::MultiVisitor::New();
+    MeshType::CellType::MultiVisitor::Pointer const mv = MeshType::CellType::MultiVisitor::New();
     /**
      * Create a class to hold the counts of each cell type
      */

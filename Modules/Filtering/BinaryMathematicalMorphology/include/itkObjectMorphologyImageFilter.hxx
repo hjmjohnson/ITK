@@ -50,7 +50,7 @@ ObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::GenerateInputRe
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  typename Superclass::InputImagePointer inputPtr = const_cast<TInputImage *>(this->GetInput());
+  typename Superclass::InputImagePointer const inputPtr = const_cast<TInputImage *>(this->GetInput());
 
   if (!inputPtr)
   {
@@ -123,8 +123,8 @@ ObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::DynamicThreaded
   }
 
   // Find the boundary "faces"
-  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                        fC;
-  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType faceList =
+  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                              fC;
+  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType const faceList =
     fC(this->GetInput(), outputRegionForThread, m_Kernel.GetRadius());
 
 

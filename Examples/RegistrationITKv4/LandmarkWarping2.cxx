@@ -92,7 +92,7 @@ main(int argc, char * argv[])
   movingWriter->SetFileName(argv[4]);
 
 
-  FixedImageType::ConstPointer fixedImage = fixedReader->GetOutput();
+  FixedImageType::ConstPointer const fixedImage = fixedReader->GetOutput();
 
   //  Software Guide : BeginLatex
   //
@@ -189,7 +189,8 @@ main(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  DisplacementFieldType::Pointer displacementField = deformer->GetOutput();
+  DisplacementFieldType::Pointer const displacementField =
+    deformer->GetOutput();
 
   using InterpolatorPrecisionType = double;
   using TransformPrecisionType = float;

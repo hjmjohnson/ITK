@@ -53,7 +53,7 @@ main(int, char *[])
   using CovariantVectorType = SurfaceType::CovariantVectorType;
   using PointType = SurfaceType::PointType;
 
-  SurfacePointer surface = SurfaceType::New();
+  SurfacePointer const surface = SurfaceType::New();
   // Software Guide : EndCodeSnippet
 
   // Software Guide : BeginLatex
@@ -109,7 +109,7 @@ main(int, char *[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  SurfaceType::SurfacePointListType pointList = surface->GetPoints();
+  SurfaceType::SurfacePointListType const pointList = surface->GetPoints();
   std::cout << "Number of points representing the surface: ";
   std::cout << pointList.size() << std::endl;
   // Software Guide : EndCodeSnippet

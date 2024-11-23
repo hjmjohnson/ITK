@@ -203,7 +203,7 @@ public:
     void
     AddVisitor(VisitorType * v)
     {
-      CellGeometryEnum id = v->GetCellTopologyId();
+      CellGeometryEnum const id = v->GetCellTopologyId();
 
       if (id < CellGeometryEnum::LAST_ITK_CELL)
       {

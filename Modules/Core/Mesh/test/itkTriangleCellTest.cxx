@@ -88,7 +88,7 @@ itkTriangleCellTest(int, char *[])
   /**
    * Define the 3d geometric positions for 4 points in a square.
    */
-  MeshType::CoordRepType testPointCoords[numberOfPoints][3] = {
+  MeshType::CoordRepType const testPointCoords[numberOfPoints][3] = {
     { 0, 0, 0 }, { 10, 0, 0 }, { 10, 10, 0 }, { 0, 10, 0 }
   };
 

@@ -238,7 +238,7 @@ TriangleCell<TCellInterface>::DistanceToLine(PointType   x,
     denom += static_cast<double>(v21[i] * v21[i]);
   }
 
-  double tolerance = std::abs(1.e-05 * num);
+  double const tolerance = std::abs(1.e-05 * num);
   if ((-tolerance < denom) && (denom < tolerance)) // numerically bad!
   {
     closestPoint = p1; // arbitrary, point is (numerically) far away
@@ -370,14 +370,14 @@ TriangleCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
                                                double *                  minDist2,
                                                InterpolationWeightType * weights)
 {
-  unsigned int i;
-  double       dist2Point;
-  double       dist2Line1;
-  double       dist2Line2;
-  PointType    closest;
-  PointType    closestPoint1;
-  PointType    closestPoint2;
-  PointType    X(x);
+  unsigned int    i;
+  double          dist2Point;
+  double          dist2Line1;
+  double          dist2Line2;
+  PointType       closest;
+  PointType       closestPoint1;
+  PointType       closestPoint2;
+  PointType const X(x);
 
   if (!points)
   {
@@ -391,8 +391,8 @@ TriangleCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
 
   // Compute Vectors along the edges.
   // These two vectors form a vector base for the 2D space of the triangle cell.
-  VectorType v12 = pt1 - pt2;
-  VectorType v32 = pt3 - pt2;
+  VectorType const v12 = pt1 - pt2;
+  VectorType const v32 = pt3 - pt2;
 
   // Compute Vectors in the dual vector base inside the 2D space of the triangle
   // cell.
@@ -411,13 +411,13 @@ TriangleCell<TCellInterface>::EvaluatePosition(CoordRepType *            x,
 
   // Compute components of the input point in the 2D
   // space defined by v12 and v32
-  VectorType xo = X - pt2;
+  VectorType const xo = X - pt2;
 
   const double u12p = xo * u12;
   const double u32p = xo * u32;
 
-  VectorType x12 = v12 * u12p;
-  VectorType x32 = v32 * u32p;
+  VectorType const x12 = v12 * u12p;
+  VectorType const x32 = v32 * u32p;
 
   // The projection of point X in the plane is cp
   PointType cp = pt2 + x12 + x32;

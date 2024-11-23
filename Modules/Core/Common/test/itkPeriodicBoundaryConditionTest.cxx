@@ -77,8 +77,8 @@ TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
 
       // Access the pixel value through two different methods in the
       // boundary condition.
-      int pixel1 = p.GetBoundaryCondition()->GetPixel(index, p.GetImagePointer());
-      int pixel2 = p.GetPixel(i);
+      int const pixel1 = p.GetBoundaryCondition()->GetPixel(index, p.GetImagePointer());
+      int const pixel2 = p.GetPixel(i);
 
       std::cout << pixel1 << ' ';
 
@@ -124,10 +124,10 @@ int
 itkPeriodicBoundaryConditionTest(int, char *[])
 {
   // Test an image to cover one operator() method.
-  auto       image = ImageType::New();
-  RegionType imageRegion;
-  SizeType   imageSize = { { 5, 5 } };
-  IndexType  imageIndex = { { 0, 0 } };
+  auto            image = ImageType::New();
+  RegionType      imageRegion;
+  SizeType const  imageSize = { { 5, 5 } };
+  IndexType const imageIndex = { { 0, 0 } };
   imageRegion.SetSize(imageSize);
   imageRegion.SetIndex(imageIndex);
   image->SetRegions(imageRegion);
@@ -171,7 +171,7 @@ itkPeriodicBoundaryConditionTest(int, char *[])
   for (it.GoToBegin(); !it.IsAtEnd(); ++it)
   {
     std::cout << "Index: " << it.GetIndex() << std::endl;
-    bool success = TestPrintNeighborhood(it, vit);
+    bool const success = TestPrintNeighborhood(it, vit);
     if (!success)
     {
       return EXIT_FAILURE;
@@ -192,7 +192,7 @@ itkPeriodicBoundaryConditionTest(int, char *[])
   for (it2.GoToBegin(); !it2.IsAtEnd(); ++it2)
   {
     std::cout << "Index: " << it2.GetIndex() << std::endl;
-    bool success = TestPrintNeighborhood(it2, vit2);
+    bool const success = TestPrintNeighborhood(it2, vit2);
     if (!success)
     {
       return EXIT_FAILURE;
@@ -288,9 +288,9 @@ itkPeriodicBoundaryConditionTest(int, char *[])
 
   // Check when ConstNeighborhoodIterator is templated over the
   // PeriodicBoundaryCondition
-  auto                  testImage = ImageType::New();
-  ImageType::SizeType   testSize = { { 64, 64 } };
-  ImageType::RegionType testRegion(testSize);
+  auto                        testImage = ImageType::New();
+  ImageType::SizeType         testSize = { { 64, 64 } };
+  ImageType::RegionType const testRegion(testSize);
   testImage->SetRegions(testRegion);
   testImage->Allocate();
   testImage->FillBuffer(1);

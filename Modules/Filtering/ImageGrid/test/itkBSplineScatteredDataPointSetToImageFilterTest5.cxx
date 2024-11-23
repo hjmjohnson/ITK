@@ -36,7 +36,7 @@ makeTestableScalarImage(typename InternalImageType::Pointer internalImage, std::
   using OutputPixelType = uint8_t;
   using OutputImageType = itk::Image<OutputPixelType, 2>;
 
-  OutputImageType::Pointer outputImage = OutputImageType::New();
+  OutputImageType::Pointer const outputImage = OutputImageType::New();
   outputImage->CopyInformation(internalImage);
   outputImage->SetRegions(internalImage->GetBufferedRegion());
   outputImage->AllocateInitialized();
@@ -144,7 +144,7 @@ itkBSplineScatteredDataPointSetToImageFilterTest5(int argc, char * argv[])
   size[0] = 1000;
   size[1] = 100;
 
-  ImageType::PointType origin{};
+  ImageType::PointType const origin{};
 
   filter->SetSize(size);
   filter->SetOrigin(origin);

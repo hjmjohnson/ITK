@@ -116,9 +116,9 @@ itkVideoStreamTest(int, char *[])
   video2->SetFrame(2, frame3);
 
   // Test retreiving frames
-  FrameType::Pointer outFrame1 = video2->GetFrame(0);
-  FrameType::Pointer outFrame2 = video2->GetFrame(1);
-  FrameType::Pointer outFrame3 = video2->GetFrame(2);
+  FrameType::Pointer const outFrame1 = video2->GetFrame(0);
+  FrameType::Pointer const outFrame2 = video2->GetFrame(1);
+  FrameType::Pointer const outFrame3 = video2->GetFrame(2);
   if (outFrame3 != frame3 || outFrame2 != frame2 || outFrame1 != frame1)
   {
     std::cerr << "Frames not retreived correctly" << std::endl;
@@ -163,8 +163,8 @@ itkVideoStreamTest(int, char *[])
 
   // Set the buffered temporal region
   VideoType::TemporalRegionType temporalRegion;
-  SizeValueType                 startFrame = 0;
-  SizeValueType                 numFrames = 5;
+  SizeValueType const           startFrame = 0;
+  SizeValueType const           numFrames = 5;
   temporalRegion.SetFrameStart(startFrame);
   temporalRegion.SetFrameDuration(numFrames);
   video1->SetLargestPossibleTemporalRegion(temporalRegion);
@@ -175,9 +175,9 @@ itkVideoStreamTest(int, char *[])
   video1->InitializeEmptyFrames();
 
   // Set the buffered spatial region for each frame
-  FrameType::RegionType largestSpatialRegion = SetUpSpatialRegion(100, 100);
-  FrameType::RegionType requestedSpatialRegion = SetUpSpatialRegion(40, 40);
-  FrameType::RegionType bufferedSpatialRegion = SetUpSpatialRegion(50, 40);
+  FrameType::RegionType const largestSpatialRegion = SetUpSpatialRegion(100, 100);
+  FrameType::RegionType const requestedSpatialRegion = SetUpSpatialRegion(40, 40);
+  FrameType::RegionType const bufferedSpatialRegion = SetUpSpatialRegion(50, 40);
   video1->SetAllLargestPossibleSpatialRegions(largestSpatialRegion);
   video1->SetAllRequestedSpatialRegions(requestedSpatialRegion);
   video1->SetAllBufferedSpatialRegions(bufferedSpatialRegion);

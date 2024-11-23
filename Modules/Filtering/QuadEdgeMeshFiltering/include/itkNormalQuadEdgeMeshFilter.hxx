@@ -32,7 +32,7 @@ template <typename TInputMesh, typename TOutputMesh>
 auto
 NormalQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ComputeFaceNormal(OutputPolygonType * iPoly) -> OutputFaceNormalType
 {
-  OutputMeshPointer output = this->GetOutput();
+  OutputMeshPointer const output = this->GetOutput();
 
   OutputPointType pt[3];
   int             k(0);
@@ -53,8 +53,8 @@ template <typename TInputMesh, typename TOutputMesh>
 void
 NormalQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ComputeAllFaceNormals()
 {
-  OutputMeshPointer   output = this->GetOutput();
-  OutputPolygonType * poly;
+  OutputMeshPointer const output = this->GetOutput();
+  OutputPolygonType *     poly;
 
   for (OutputCellsContainerConstIterator cell_it = output->GetCells()->Begin(); cell_it != output->GetCells()->End();
        ++cell_it)
@@ -75,9 +75,9 @@ template <typename TInputMesh, typename TOutputMesh>
 void
 NormalQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::ComputeAllVertexNormals()
 {
-  OutputMeshPointer            output = this->GetOutput();
-  OutputPointsContainerPointer points = output->GetPoints();
-  OutputPointIdentifier        id;
+  OutputMeshPointer const            output = this->GetOutput();
+  OutputPointsContainerPointer const points = output->GetPoints();
+  OutputPointIdentifier              id;
 
   OutputMeshType * outputMesh = this->GetOutput();
 

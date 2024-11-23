@@ -133,7 +133,7 @@ main(int, char *[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  DTITubeType::DTITubePointListType pointList = dtiTube->GetPoints();
+  DTITubeType::DTITubePointListType const pointList = dtiTube->GetPoints();
   std::cout << "Number of points representing the fiber tract: ";
   std::cout << pointList.size() << std::endl;
   // Software Guide : EndCodeSnippet

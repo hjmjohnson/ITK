@@ -28,7 +28,7 @@ namespace watershed
 template <typename TScalar>
 SegmentTreeGenerator<TScalar>::SegmentTreeGenerator()
 {
-  typename SegmentTreeType::Pointer st = static_cast<SegmentTreeType *>(this->MakeOutput(0).GetPointer());
+  typename SegmentTreeType::Pointer const st = static_cast<SegmentTreeType *>(this->MakeOutput(0).GetPointer());
   this->SetNumberOfRequiredOutputs(1);
   this->ProcessObject::SetNthOutput(0, st.GetPointer());
   m_MergedSegmentsTable = OneWayEquivalencyTableType::New();
@@ -76,9 +76,9 @@ SegmentTreeGenerator<TScalar>::GenerateData()
   m_MergedSegmentsTable->Clear();
   this->GetOutputSegmentTree()->Clear();
 
-  typename SegmentTableType::Pointer input = this->GetInputSegmentTable();
-  auto                               mergeList = SegmentTreeType::New();
-  auto                               seg = SegmentTableType::New();
+  typename SegmentTableType::Pointer const input = this->GetInputSegmentTable();
+  auto                                     mergeList = SegmentTreeType::New();
+  auto                                     seg = SegmentTableType::New();
   if (m_ConsumeInput) // do not copy input
   {
     input->Modified();
@@ -116,9 +116,9 @@ template <typename TScalar>
 void
 SegmentTreeGenerator<TScalar>::MergeEquivalencies()
 {
-  typename SegmentTableType::Pointer      segTable = this->GetInputSegmentTable();
-  typename EquivalencyTableType::Pointer  eqTable = this->GetInputEquivalencyTable();
-  typename EquivalencyTableType::Iterator it;
+  typename SegmentTableType::Pointer const     segTable = this->GetInputSegmentTable();
+  typename EquivalencyTableType::Pointer const eqTable = this->GetInputEquivalencyTable();
+  typename EquivalencyTableType::Iterator      it;
   auto threshold = static_cast<ScalarType>(m_FloodLevel * segTable->GetMaximumDepth());
 
   eqTable->Flatten();
@@ -197,7 +197,7 @@ template <typename TScalar>
 void
 SegmentTreeGenerator<TScalar>::ExtractMergeHierarchy(SegmentTableTypePointer segments, SegmentTreeTypePointer heap)
 {
-  typename SegmentTreeType::Pointer list = this->GetOutputSegmentTree();
+  typename SegmentTreeType::Pointer const list = this->GetOutputSegmentTree();
 
   // Merges segments up to a specified flood level according to the information
   // in the heap of merges.  As two segments are merged, calculates a new

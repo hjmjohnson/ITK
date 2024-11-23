@@ -92,7 +92,7 @@ itkFlatStructuringElementTest2(int argc, char * argv[])
   ITK_TRY_EXPECT_NO_EXCEPTION(reader->UpdateLargestPossibleRegion());
 
 
-  ImageUCType::Pointer testImg = reader->GetOutput();
+  ImageUCType::Pointer const testImg = reader->GetOutput();
   using FSEType = itk::FlatStructuringElement<Dimension>;
 
 
@@ -110,10 +110,10 @@ itkFlatStructuringElementTest2(int argc, char * argv[])
   auto cast = castFilterType::New();
   cast->SetInput(rescale->GetOutput());
   cast->Update();
-  ImageBoolType::Pointer testImgBool = cast->GetOutput();
+  ImageBoolType::Pointer const testImgBool = cast->GetOutput();
 
-  FSEType              flatStructure = FSEType::FromImage(testImgBool);
-  ImageUCType::Pointer imgFromStructure = GetImage(flatStructure);
+  FSEType const              flatStructure = FSEType::FromImage(testImgBool);
+  ImageUCType::Pointer const imgFromStructure = GetImage(flatStructure);
 
   // Write result from GetImage for comparison with input image
 
@@ -135,13 +135,13 @@ itkFlatStructuringElementTest2(int argc, char * argv[])
   lowerExtendRegion[0] = 1;
   lowerExtendRegion[1] = 1;
   padFilter->SetPadLowerBound(lowerExtendRegion);
-  ImageBoolType::PixelType constPixel = true;
+  ImageBoolType::PixelType const constPixel = true;
   padFilter->SetConstant(constPixel);
 
   ITK_TRY_EXPECT_NO_EXCEPTION(padFilter->Update());
 
 
-  ImageBoolType::Pointer evenBoolImg = padFilter->GetOutput();
+  ImageBoolType::Pointer const evenBoolImg = padFilter->GetOutput();
 
   ITK_TRY_EXPECT_EXCEPTION(FSEType::FromImage(evenBoolImg));
 

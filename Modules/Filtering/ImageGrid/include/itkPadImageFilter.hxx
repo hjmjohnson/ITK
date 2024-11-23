@@ -90,8 +90,8 @@ PadImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
   Superclass::GenerateOutputInformation();
 
   // get pointers to the input and output
-  typename Superclass::InputImageConstPointer inputPtr = this->GetInput();
-  typename Superclass::OutputImagePointer     outputPtr = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputPtr = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputPtr = this->GetOutput();
 
   if (!outputPtr || !inputPtr)
   {

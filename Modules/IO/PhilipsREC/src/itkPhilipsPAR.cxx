@@ -503,7 +503,7 @@ PhilipsPAR::GetGeneralInfoString(std::string file, int lineNum)
   index = currentLine.find(":");
   if (index != std::string::npos)
   {
-    std::string tempString = ":";
+    std::string const tempString = ":";
     outString = currentLine.substr(index + tempString.length());
   }
   return outString;
@@ -809,7 +809,7 @@ PhilipsPAR::ReadPAR(std::string parFile, struct par_parameter * pPar)
         // Slices are not sorted.
         else
         {
-          int slice = tempInfo.slice;
+          int const slice = tempInfo.slice;
           ++pPar->image_blocks;
           ++pPar->num_image_types;
           pPar->image_types[0] = tempInfo.image_type_mr;
@@ -930,13 +930,13 @@ PhilipsPAR::ReadPAR(std::string parFile, struct par_parameter * pPar)
       // Only 1 slice, but how many repetitions of that slice?
       else
       {
-        int lineIncrement = 89;
-        int echoIndex = 0;
-        int cardiacIndex = 0;
-        int slice = tempInfo.slice;
-        int firstEchoNumber = echoNumber;
-        int firstCardiacPhase = cardiacPhase;
-        int firstDynamic = tempInfo.dynamic;
+        int       lineIncrement = 89;
+        int       echoIndex = 0;
+        int       cardiacIndex = 0;
+        int const slice = tempInfo.slice;
+        int const firstEchoNumber = echoNumber;
+        int const firstCardiacPhase = cardiacPhase;
+        int const firstDynamic = tempInfo.dynamic;
         ++pPar->image_blocks;
         ++pPar->num_image_types;
         pPar->image_types[0] = tempInfo.image_type_mr;
@@ -1324,7 +1324,7 @@ PhilipsPAR::ReadPAR(std::string parFile, struct par_parameter * pPar)
         // Slices are not sorted.
         else
         {
-          int slice = tempInfo.slice;
+          int const slice = tempInfo.slice;
           ++pPar->image_blocks;
           ++pPar->num_image_types;
           pPar->image_types[0] = tempInfo.image_type_mr;
@@ -1461,13 +1461,13 @@ PhilipsPAR::ReadPAR(std::string parFile, struct par_parameter * pPar)
       // Only 1 slice, but how many repetitions of that slice?
       else
       {
-        int lineIncrement = 92;
-        int echoIndex = 0;
-        int cardiacIndex = 0;
-        int slice = tempInfo.slice;
-        int firstEchoNumber = echoNumber;
-        int firstCardiacPhase = cardiacPhase;
-        int firstDynamic = tempInfo.dynamic;
+        int       lineIncrement = 92;
+        int       echoIndex = 0;
+        int       cardiacIndex = 0;
+        int const slice = tempInfo.slice;
+        int const firstEchoNumber = echoNumber;
+        int const firstCardiacPhase = cardiacPhase;
+        int const firstDynamic = tempInfo.dynamic;
         ++pPar->image_blocks;
         ++pPar->num_image_types;
         pPar->image_types[0] = tempInfo.image_type_mr;
@@ -1950,7 +1950,7 @@ PhilipsPAR::GetRECRescaleValues(std::string                             parFile,
   rescaleValues->clear();
   // Must match size of image_types
   rescaleValues->resize(PAR_DEFAULT_IMAGE_TYPES_SIZE);
-  PhilipsPAR::PARRescaleValues zero(0.0);
+  PhilipsPAR::PARRescaleValues const zero(0.0);
   for (auto & rescaleValue : *rescaleValues)
   {
     rescaleValue = zero; // Zero out everything
@@ -2104,7 +2104,7 @@ PhilipsPAR::GetDiffusionGradientOrientationAndBValues(std::string               
     tempInfo = GetImageInformationDefinitionV41(parFile, lineIncrement, this);
     while (!tempInfo.problemreading && tempInfo.slice && (gradientDirectionCount < tempPar.max_num_grad_orient))
     {
-      int tempGradientOrientationNumber = tempInfo.gradient_orientation_number;
+      int const tempGradientOrientationNumber = tempInfo.gradient_orientation_number;
       if (gradientOrientationNumber != tempGradientOrientationNumber)
       {
         PhilipsPAR::PARDiffusionValues direction;
@@ -2159,7 +2159,7 @@ PhilipsPAR::GetLabelTypesASL(std::string parFile, PhilipsPAR::PARLabelTypesASLCo
     tempInfo = GetImageInformationDefinitionV42(parFile, lineIncrement, this);
     while (!tempInfo.problemreading && tempInfo.slice && (aslLabelCount < tempPar.num_label_types))
     {
-      int tempASLLabelNumber = tempInfo.labelTypeASL;
+      int const tempASLLabelNumber = tempInfo.labelTypeASL;
       if (aslLabelNumber != tempASLLabelNumber)
       {
         (*labelTypes)[aslLabelCount] = tempASLLabelNumber;

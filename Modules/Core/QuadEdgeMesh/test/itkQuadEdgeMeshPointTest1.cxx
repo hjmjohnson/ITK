@@ -45,7 +45,7 @@ itkQuadEdgeMeshPointTest1(int, char *[])
   using SuperclassPointType = PointType::Superclass;
 
 
-  PointType p0; // Test default constructor
+  PointType const p0; // Test default constructor
 
   PointType p1;
 
@@ -53,7 +53,7 @@ itkQuadEdgeMeshPointTest1(int, char *[])
   p1[1] = 39.7;
   p1[2] = -49.7;
 
-  PointType p2(p1); // Test copy constructor
+  PointType const p2(p1); // Test copy constructor
 
   if (p1.EuclideanDistanceTo(p2) > 1e-6)
   {
@@ -70,7 +70,7 @@ itkQuadEdgeMeshPointTest1(int, char *[])
   ps[1] = 31;
   ps[2] = 37;
 
-  PointType pp = ps;
+  PointType const pp = ps;
 
   if (pp.EuclideanDistanceTo(ps) > 1e-6)
   {
@@ -92,7 +92,7 @@ itkQuadEdgeMeshPointTest1(int, char *[])
   cc[1] = 39.7;
   cc[2] = -49.7;
 
-  PointType p3(cc); // Test Array based constructor
+  PointType const p3(cc); // Test Array based constructor
 
   if (p2.EuclideanDistanceTo(p1) > 1e-6)
   {

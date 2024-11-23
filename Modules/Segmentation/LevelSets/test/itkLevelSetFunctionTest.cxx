@@ -141,7 +141,7 @@ private:
   ScalarValueType
   PropagationSpeed(const NeighborhoodType & neighborhood, const FloatOffsetType &, GlobalDataStruct *) const override
   {
-    itk::Index<2> idx = neighborhood.GetIndex();
+    itk::Index<2> const idx = neighborhood.GetIndex();
     return m_DistanceTransform->GetPixel(idx);
   }
 };
@@ -224,9 +224,9 @@ itkLevelSetFunctionTest(int, char *[])
   auto im_init = ImageType::New();
   auto im_target = ImageType::New();
 
-  ImageType::RegionType r;
-  ImageType::SizeType   sz = { { LSFT::HEIGHT, LSFT::WIDTH } };
-  ImageType::IndexType  idx = { { 0, 0 } };
+  ImageType::RegionType      r;
+  ImageType::SizeType const  sz = { { LSFT::HEIGHT, LSFT::WIDTH } };
+  ImageType::IndexType const idx = { { 0, 0 } };
   r.SetSize(sz);
   r.SetIndex(idx);
 
@@ -248,7 +248,7 @@ itkLevelSetFunctionTest(int, char *[])
     itr.Value() = itr.Value() / std::sqrt((5.0f + itk::Math::sqr(itr.Value())));
   }
 
-  LSFT::MorphFilter::Pointer mf = LSFT::MorphFilter::New();
+  LSFT::MorphFilter::Pointer const mf = LSFT::MorphFilter::New();
   mf->SetDistanceTransform(im_target);
   mf->SetIterations(n);
   mf->SetInput(im_init);

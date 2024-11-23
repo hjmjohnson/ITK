@@ -212,9 +212,9 @@ PhilipsRECImageIOSetupSliceIndex(PhilipsRECImageIO::SliceIndexType *         ind
                                  PhilipsPAR::PARSliceIndexImageTypeVector    sliceImageTypesIndex,
                                  PhilipsPAR::PARSliceIndexScanSequenceVector sliceScanSequenceIndex)
 {
-  int index = 0;
-  int actualSlices = parParam.slice;
-  int remainingVolumes = parParam.image_blocks / parParam.num_slice_repetitions;
+  int       index = 0;
+  int const actualSlices = parParam.slice;
+  int const remainingVolumes = parParam.image_blocks / parParam.num_slice_repetitions;
 
   if (indexMatrix->size() != (PhilipsRECImageIO::SliceIndexType::size_type)parParam.dim[2])
   {
@@ -410,7 +410,8 @@ PhilipsRECImageIO::PrintSelf(std::ostream & os, Indent indent) const
 PhilipsRECImageIO::IndexValueType
 PhilipsRECImageIO::GetSliceIndex(IndexValueType index) const
 {
-  IndexValueType maximumSliceNumber = Math::CastWithRangeCheck<IndexValueType, size_t>(this->m_SliceIndex->size()) - 1;
+  IndexValueType const maximumSliceNumber =
+    Math::CastWithRangeCheck<IndexValueType, size_t>(this->m_SliceIndex->size()) - 1;
 
   if ((index < 0) || (index > maximumSliceNumber))
   {
@@ -474,11 +475,11 @@ PhilipsRECImageIO::Read(void * buffer)
     numberOfSlices *= this->m_Dimensions[3];
   }
 
-  SizeType imageSliceSizeInBytes = this->GetImageSizeInBytes() / numberOfSlices;
+  SizeType const imageSliceSizeInBytes = this->GetImageSizeInBytes() / numberOfSlices;
 
   for (IndexValueType slice = 0; slice < numberOfSlices; ++slice)
   {
-    IndexValueType realIndex = this->GetSliceIndex(static_cast<int>(slice));
+    IndexValueType const realIndex = this->GetSliceIndex(static_cast<int>(slice));
     if (realIndex < 0)
     {
       std::ostringstream message;
@@ -502,10 +503,10 @@ PhilipsRECImageIO::Read(void * buffer)
 bool
 PhilipsRECImageIO::CanReadFile(const char * FileNameToRead)
 {
-  std::string filename(FileNameToRead);
+  std::string const filename(FileNameToRead);
 
   // we check that the correct extension is given by the user
-  std::string filenameext = GetExtension(filename);
+  std::string const filenameext = GetExtension(filename);
 
   if (filenameext != std::string(".PAR") && filenameext != std::string(".REC") &&
       filenameext != std::string(".REC.gz") && filenameext != std::string(".par") &&
@@ -602,11 +603,11 @@ PhilipsRECImageIO::ReadImageInformation()
   // Setup the slice index matrix.
   this->m_SliceIndex->clear();
   this->m_SliceIndex->resize(par.dim[2]);
-  PhilipsPAR::PARSliceIndexImageTypeVector sliceImageTypesIndexes =
+  PhilipsPAR::PARSliceIndexImageTypeVector const sliceImageTypesIndexes =
     philipsPAR->GetRECSliceIndexImageTypes(HeaderFileName);
-  PhilipsPAR::PARSliceIndexScanSequenceVector sliceScanSequencesIndexes =
+  PhilipsPAR::PARSliceIndexScanSequenceVector const sliceScanSequencesIndexes =
     philipsPAR->GetRECSliceIndexScanningSequence(HeaderFileName);
-  PhilipsPAR::PARImageTypeScanSequenceVector imageTypesScanSequencesIndexes =
+  PhilipsPAR::PARImageTypeScanSequenceVector const imageTypesScanSequencesIndexes =
     philipsPAR->GetImageTypesScanningSequence(HeaderFileName);
   PhilipsRECImageIOSetupSliceIndex(
     this->m_SliceIndex, 1, par, imageTypesScanSequencesIndexes, sliceImageTypesIndexes, sliceScanSequencesIndexes);
@@ -677,7 +678,7 @@ PhilipsRECImageIO::ReadImageInformation()
   MetaDataDictionary & thisDic = this->GetMetaDataDictionary();
   // Necessary to clear dict if ImageIO object is re-used
   thisDic.Clear();
-  std::string classname(this->GetNameOfClass());
+  std::string const classname(this->GetNameOfClass());
   EncapsulateMetaData<std::string>(thisDic, ITK_InputFilterName, classname);
 
   EncapsulateMetaData<std::string>(thisDic, ITK_ImageFileBaseName, GetRootName(this->m_FileName));
@@ -779,7 +780,7 @@ PhilipsRECImageIO::ReadImageInformation()
   r3[0][1] = std::sin(par.angFH * Math::pi / 180.0);
   r3[1][1] = std::cos(par.angFH * Math::pi / 180.0);
   // Total rotation matrix.
-  AffineMatrix rtotal = r1 * r2 * r3;
+  AffineMatrix const rtotal = r1 * r2 * r3;
 #ifdef DEBUG_ORIENTATION
   std::cout << "Right-Left rotation = " << r1 << std::endl
             << "Anterior-Posterior rotation = " << r2 << std::endl
@@ -788,7 +789,7 @@ PhilipsRECImageIO::ReadImageInformation()
 #endif
 
   // Find and set origin
-  AffineMatrix final = rtotal * spacing * direction;
+  AffineMatrix const final = rtotal * spacing * direction;
 #ifdef DEBUG_ORIENTATION
   std::cout << "Final transformation = " << final << std::endl;
 #endif

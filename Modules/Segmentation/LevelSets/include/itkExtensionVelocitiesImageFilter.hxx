@@ -37,7 +37,7 @@ ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::ExtensionVe
 
   for (unsigned int k = 0; k < VAuxDimension; ++k)
   {
-    AuxImagePointer ptr = AuxImageType::New();
+    AuxImagePointer const ptr = AuxImageType::New();
     this->ProcessObject::SetNthOutput(k + 1, ptr.GetPointer());
   }
 }
@@ -120,13 +120,13 @@ ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::AllocateOut
   // allocate memory for the output images
   for (unsigned int k = 0; k < VAuxDimension; ++k)
   {
-    AuxImagePointer output = this->GetOutputVelocityImage(k);
+    AuxImagePointer const output = this->GetOutputVelocityImage(k);
     output->SetBufferedRegion(output->GetRequestedRegion());
     output->Allocate();
   }
 
   // set the marcher output size
-  LevelSetPointer outputPtr = this->GetOutput();
+  LevelSetPointer const outputPtr = this->GetOutput();
   m_Marcher->SetOutputSize(outputPtr->GetRequestedRegion().GetSize());
 }
 
@@ -137,11 +137,11 @@ template <typename TLevelSet, typename TAuxValue, unsigned int VAuxDimension>
 void
 ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::GenerateDataFull()
 {
-  LevelSetConstPointer inputPtr = this->GetInput();
-  LevelSetPointer      outputPtr = this->GetOutput();
-  LevelSetPointer      tempLevelSet = m_Marcher->GetOutput();
+  LevelSetConstPointer const inputPtr = this->GetInput();
+  LevelSetPointer const      outputPtr = this->GetOutput();
+  LevelSetPointer const      tempLevelSet = m_Marcher->GetOutput();
 
-  double levelSetValue = this->GetLevelSetValue();
+  double const levelSetValue = this->GetLevelSetValue();
 
   // define iterators
   using LocalLevelSetImageType = typename LevelSetType::LevelSetImageType;
@@ -160,7 +160,7 @@ ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::GenerateDat
 
   for (unsigned int k = 0; k < VAuxDimension; ++k)
   {
-    AuxImagePointer ptr = this->GetOutputVelocityImage(k);
+    AuxImagePointer const ptr = this->GetOutputVelocityImage(k);
     auxOutputIt[k] = AuxIteratorType(ptr, ptr->GetBufferedRegion());
   }
 
@@ -186,7 +186,7 @@ ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::GenerateDat
 
   for (unsigned int k = 0; k < VAuxDimension; ++k)
   {
-    AuxImagePointer ptr = m_Marcher->GetAuxiliaryImage(k);
+    AuxImagePointer const ptr = m_Marcher->GetAuxiliaryImage(k);
     auxTempIt[k] = AuxIteratorType(ptr, ptr->GetBufferedRegion());
   }
 
@@ -272,13 +272,13 @@ template <typename TLevelSet, typename TAuxValue, unsigned int VAuxDimension>
 void
 ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::GenerateDataNarrowBand()
 {
-  LevelSetConstPointer inputPtr = this->GetInput();
-  LevelSetPointer      outputPtr = this->GetOutput();
-  LevelSetPointer      tempLevelSet = m_Marcher->GetOutput();
+  LevelSetConstPointer const inputPtr = this->GetInput();
+  LevelSetPointer const      outputPtr = this->GetOutput();
+  LevelSetPointer const      tempLevelSet = m_Marcher->GetOutput();
 
-  double levelSetValue = this->GetLevelSetValue();
-  double outputBandwidth = this->GetOutputNarrowBandwidth();
-  double inputBandwidth = this->GetInputNarrowBandwidth();
+  double const levelSetValue = this->GetLevelSetValue();
+  double const outputBandwidth = this->GetOutputNarrowBandwidth();
+  double const inputBandwidth = this->GetInputNarrowBandwidth();
 
   // define iterators
   using LocalLevelSetImageType = typename LevelSetType::LevelSetImageType;
@@ -327,7 +327,7 @@ ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::GenerateDat
 
   for (unsigned int k = 0; k < VAuxDimension; ++k)
   {
-    AuxImagePointer ptr = this->GetOutputVelocityImage(k);
+    AuxImagePointer const ptr = this->GetOutputVelocityImage(k);
     auxOutputIt[k] = AuxIteratorType(ptr, ptr->GetBufferedRegion());
     auxOutputIt[k].GoToBegin();
   }
@@ -349,7 +349,7 @@ ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::GenerateDat
   }
 
   // create a new output narrowband container
-  NodeContainerPointer outputNB = NodeContainer::New();
+  NodeContainerPointer const outputNB = NodeContainer::New();
   this->SetOutputNarrowBand(outputNB);
 
   this->UpdateProgress(0.0);
@@ -378,7 +378,7 @@ ExtensionVelocitiesImageFilter<TLevelSet, TAuxValue, VAuxDimension>::GenerateDat
   this->UpdateProgress(0.33);
 
   // march outward
-  double stoppingValue = (outputBandwidth / 2.0) + 2.0;
+  double const stoppingValue = (outputBandwidth / 2.0) + 2.0;
   m_Marcher->SetStoppingValue(stoppingValue);
   m_Marcher->CollectPointsOn();
   m_Marcher->SetTrialPoints(m_Locator->GetOutsidePoints());

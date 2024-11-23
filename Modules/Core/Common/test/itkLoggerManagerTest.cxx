@@ -36,25 +36,26 @@ itkLoggerManagerTest(int argc, char * argv[])
     }
 
     // Create an ITK StdStreamLogOutputs
-    itk::StdStreamLogOutput::Pointer coutput = itk::StdStreamLogOutput::New();
-    itk::StdStreamLogOutput::Pointer foutput = itk::StdStreamLogOutput::New();
+    itk::StdStreamLogOutput::Pointer const coutput = itk::StdStreamLogOutput::New();
+    itk::StdStreamLogOutput::Pointer const foutput = itk::StdStreamLogOutput::New();
     coutput->SetStream(std::cout);
     std::ofstream fout(argv[1]);
     foutput->SetStream(fout);
 
     // Create an ITK Loggers using itk::LoggerManager
-    itk::LoggerManager::Pointer manager = itk::LoggerManager::New();
+    itk::LoggerManager::Pointer const manager = itk::LoggerManager::New();
 
     ITK_EXERCISE_BASIC_OBJECT_METHODS(manager, LoggerManager, Object);
 
 
-    itk::Logger::Pointer logger = manager->CreateLogger("org.itk.logTester.logger",
-                                                        itk::LoggerBase::PriorityLevelEnum::DEBUG,
-                                                        itk::LoggerBase::PriorityLevelEnum::CRITICAL);
+    itk::Logger::Pointer const logger = manager->CreateLogger("org.itk.logTester.logger",
+                                                              itk::LoggerBase::PriorityLevelEnum::DEBUG,
+                                                              itk::LoggerBase::PriorityLevelEnum::CRITICAL);
 
-    itk::ThreadLogger::Pointer t_logger = manager->CreateThreadLogger("org.itk.ThreadLogger",
-                                                                      itk::LoggerBase::PriorityLevelEnum::WARNING,
-                                                                      itk::LoggerBase::PriorityLevelEnum::CRITICAL);
+    itk::ThreadLogger::Pointer const t_logger =
+      manager->CreateThreadLogger("org.itk.ThreadLogger",
+                                  itk::LoggerBase::PriorityLevelEnum::WARNING,
+                                  itk::LoggerBase::PriorityLevelEnum::CRITICAL);
 
     std::cout << "Testing itk::LoggerManager" << std::endl;
 

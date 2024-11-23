@@ -30,7 +30,7 @@ template <typename TInputMesh, typename TOutputMesh, typename TSpatialFunction>
 InteriorExteriorMeshFilter<TInputMesh, TOutputMesh, TSpatialFunction>::InteriorExteriorMeshFilter()
 {
   m_SpatialFunction = SpatialFunctionType::New();
-  SpatialFunctionDataObjectPointer spatialFunctionObject = SpatialFunctionDataObjectType::New();
+  SpatialFunctionDataObjectPointer const spatialFunctionObject = SpatialFunctionDataObjectType::New();
   spatialFunctionObject->Set(m_SpatialFunction);
   this->ProcessObject::SetNthInput(1, spatialFunctionObject);
 }
@@ -61,8 +61,8 @@ InteriorExteriorMeshFilter<TInputMesh, TOutputMesh, TSpatialFunction>::GenerateD
 
   using InputPointDataContainerConstPointer = typename TInputMesh::PointDataContainerConstPointer;
 
-  const InputMeshType * inputMesh = this->GetInput();
-  OutputMeshPointer     outputMesh = this->GetOutput();
+  const InputMeshType *   inputMesh = this->GetInput();
+  OutputMeshPointer const outputMesh = this->GetOutput();
 
   if (!inputMesh)
   {
@@ -82,8 +82,8 @@ InteriorExteriorMeshFilter<TInputMesh, TOutputMesh, TSpatialFunction>::GenerateD
 
   outputMesh->SetBufferedRegion(outputMesh->GetRequestedRegion());
 
-  InputPointsContainerConstPointer    inPoints = inputMesh->GetPoints();
-  InputPointDataContainerConstPointer inData = inputMesh->GetPointData();
+  InputPointsContainerConstPointer const    inPoints = inputMesh->GetPoints();
+  InputPointDataContainerConstPointer const inData = inputMesh->GetPointData();
 
   typename InputPointsContainer::ConstIterator    inputPoint = inPoints->Begin();
   typename InputPointDataContainer::ConstIterator inputData;
@@ -109,7 +109,7 @@ InteriorExteriorMeshFilter<TInputMesh, TOutputMesh, TSpatialFunction>::GenerateD
 
   while (inputPoint != inPoints->End())
   {
-    ValueType value = m_SpatialFunction->Evaluate(inputPoint.Value());
+    ValueType const value = m_SpatialFunction->Evaluate(inputPoint.Value());
 
     if (value) // Assumes return type is "bool"
     {
@@ -134,7 +134,7 @@ InteriorExteriorMeshFilter<TInputMesh, TOutputMesh, TSpatialFunction>::GenerateD
   this->CopyInputMeshToOutputMeshCells();
   this->CopyInputMeshToOutputMeshCellData();
 
-  unsigned int maxDimension = TInputMesh::MaxTopologicalDimension;
+  unsigned int const maxDimension = TInputMesh::MaxTopologicalDimension;
 
   for (unsigned int dim = 0; dim < maxDimension; ++dim)
   {

@@ -38,12 +38,12 @@ itkImageRegionTest(int, char *[])
 
   bool passed = true;
 
-  SizeType sizeA = { { 10, 20, 30 } };
-  SizeType sizeB = { { 5, 10, 15 } };
+  SizeType       sizeA = { { 10, 20, 30 } };
+  SizeType const sizeB = { { 5, 10, 15 } };
 
-  IndexType startA = { { 12, 12, 12 } };
-  IndexType startB = { { 14, 14, 14 } };
-  IndexType endA = { { 21, 31, 41 } };
+  IndexType       startA = { { 12, 12, 12 } };
+  IndexType const startB = { { 14, 14, 14 } };
+  IndexType const endA = { { 21, 31, 41 } };
 
   RegionType regionA;
   RegionType regionB;
@@ -273,7 +273,7 @@ itkImageRegionTest(int, char *[])
     std::cout << "NaN < -1 = " << (indexC[0] < -1.0) << std::endl;
     std::cout << "NaN > -1 = " << (indexC[0] > -1.0) << std::endl;
 
-    TCoordRepType NaN = ContinuousIndexNumericTraits::quiet_NaN();
+    TCoordRepType const NaN = ContinuousIndexNumericTraits::quiet_NaN();
     std::cout << "RoundHalfIntegerUp(NaN): " << itk::Math::RoundHalfIntegerUp<TCoordRepType>(NaN) << std::endl;
     std::cout << "RoundHalfIntegerUp< TCoordRepType >(NaN) < static_cast<TCoordRepType> (0): "
               << (itk::Math::RoundHalfIntegerUp<TCoordRepType>(NaN) < static_cast<TCoordRepType>(0)) << std::endl;
@@ -316,7 +316,7 @@ itkImageRegionTest(int, char *[])
   shrinkRegion.SetSize(shrinkSize);
   RegionType padAndShrinkRegion = shrinkRegion;
 
-  itk::OffsetValueType offsetValueRadius = 4;
+  itk::OffsetValueType const offsetValueRadius = 4;
   padAndShrinkRegion.PadByRadius(offsetValueRadius);
   padAndShrinkRegion.ShrinkByRadius(offsetValueRadius);
   if (shrinkRegion != padAndShrinkRegion)

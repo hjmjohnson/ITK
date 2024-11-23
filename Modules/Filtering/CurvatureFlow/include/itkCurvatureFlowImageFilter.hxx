@@ -76,8 +76,8 @@ CurvatureFlowImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegio
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  typename Superclass::InputImagePointer inputPtr = const_cast<InputImageType *>(this->GetInput());
-  OutputImagePointer                     outputPtr = this->GetOutput();
+  typename Superclass::InputImagePointer const inputPtr = const_cast<InputImageType *>(this->GetInput());
+  OutputImagePointer const                     outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -97,7 +97,7 @@ CurvatureFlowImageFilter<TInputImage, TOutputImage>::EnlargeOutputRequestedRegio
   auto * outputPtr = dynamic_cast<OutputImageType *>(ptr);
 
   // get input image pointer
-  typename Superclass::InputImagePointer inputPtr = const_cast<InputImageType *>(this->GetInput());
+  typename Superclass::InputImagePointer const inputPtr = const_cast<InputImageType *>(this->GetInput());
   if (!inputPtr || !outputPtr)
   {
     return;

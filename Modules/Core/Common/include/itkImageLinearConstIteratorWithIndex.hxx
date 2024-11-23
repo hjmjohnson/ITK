@@ -39,7 +39,7 @@ template <typename TImage>
 void
 ImageLinearConstIteratorWithIndex<TImage>::GoToReverseBeginOfLine()
 {
-  OffsetValueType distanceToEnd = this->m_EndIndex[m_Direction] - this->m_PositionIndex[m_Direction] - 1;
+  OffsetValueType const distanceToEnd = this->m_EndIndex[m_Direction] - this->m_PositionIndex[m_Direction] - 1;
 
   this->m_Position += m_Jump * distanceToEnd;
   this->m_PositionIndex[m_Direction] = this->m_EndIndex[m_Direction] - 1;
@@ -52,7 +52,7 @@ template <typename TImage>
 void
 ImageLinearConstIteratorWithIndex<TImage>::GoToBeginOfLine()
 {
-  OffsetValueType distanceToBegin = this->m_PositionIndex[m_Direction] - this->m_BeginIndex[m_Direction];
+  OffsetValueType const distanceToBegin = this->m_PositionIndex[m_Direction] - this->m_BeginIndex[m_Direction];
 
   this->m_Position -= m_Jump * distanceToBegin;
 
@@ -66,7 +66,7 @@ template <typename TImage>
 void
 ImageLinearConstIteratorWithIndex<TImage>::GoToEndOfLine()
 {
-  OffsetValueType distanceToEnd = this->m_EndIndex[m_Direction] - this->m_PositionIndex[m_Direction];
+  OffsetValueType const distanceToEnd = this->m_EndIndex[m_Direction] - this->m_PositionIndex[m_Direction];
 
   this->m_Position += m_Jump * distanceToEnd;
 

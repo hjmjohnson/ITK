@@ -314,14 +314,14 @@ main(int argc, const char * argv[])
   //  All the components are instantiated using their \code{New()} method
   //  and connected to the registration object as in previous example.
   //
-  TransformType::Pointer    transform = TransformType::New();
-  OptimizerType::Pointer    optimizer = OptimizerType::New();
-  InterpolatorType::Pointer interpolator = InterpolatorType::New();
-  RegistrationType::Pointer registration = RegistrationType::New();
-  MetricType::Pointer       metric = MetricType::New();
+  TransformType::Pointer const    transform = TransformType::New();
+  OptimizerType::Pointer const    optimizer = OptimizerType::New();
+  InterpolatorType::Pointer const interpolator = InterpolatorType::New();
+  RegistrationType::Pointer const registration = RegistrationType::New();
+  MetricType::Pointer const       metric = MetricType::New();
 
-  FixedImagePyramidType::Pointer  fixedImagePyramid = FixedImagePyramidType::New();
-  MovingImagePyramidType::Pointer movingImagePyramid = MovingImagePyramidType::New();
+  FixedImagePyramidType::Pointer const  fixedImagePyramid = FixedImagePyramidType::New();
+  MovingImagePyramidType::Pointer const movingImagePyramid = MovingImagePyramidType::New();
 
   registration->SetOptimizer(optimizer);
   registration->SetTransform(transform);
@@ -334,8 +334,8 @@ main(int argc, const char * argv[])
   using FixedImageReaderType = itk::ImageFileReader<FixedImageType>;
   using MovingImageReaderType = itk::ImageFileReader<MovingImageType>;
 
-  FixedImageReaderType::Pointer  fixedImageReader = FixedImageReaderType::New();
-  MovingImageReaderType::Pointer movingImageReader = MovingImageReaderType::New();
+  FixedImageReaderType::Pointer const  fixedImageReader = FixedImageReaderType::New();
+  MovingImageReaderType::Pointer const movingImageReader = MovingImageReaderType::New();
 
   fixedImageReader->SetFileName(fixedImageFile);
   movingImageReader->SetFileName(movingImageFile);
@@ -349,8 +349,8 @@ main(int argc, const char * argv[])
   using FixedCastFilterType = itk::CastImageFilter<FixedImageType, InternalImageType>;
   using MovingCastFilterType = itk::CastImageFilter<MovingImageType, InternalImageType>;
 
-  FixedCastFilterType::Pointer  fixedCaster = FixedCastFilterType::New();
-  MovingCastFilterType::Pointer movingCaster = MovingCastFilterType::New();
+  FixedCastFilterType::Pointer const  fixedCaster = FixedCastFilterType::New();
+  MovingCastFilterType::Pointer const movingCaster = MovingCastFilterType::New();
 
   //
   //  The output of the readers is connected as input to the cast
@@ -420,7 +420,7 @@ main(int argc, const char * argv[])
 
   // Create the Command observer and register it with the optimizer.
   //
-  CommandIterationUpdate::Pointer observer = CommandIterationUpdate::New();
+  CommandIterationUpdate::Pointer const observer = CommandIterationUpdate::New();
   optimizer->AddObserver(itk::IterationEvent(), observer);
 
 
@@ -431,7 +431,7 @@ main(int argc, const char * argv[])
   //
 
   using CommandType = RegistrationInterfaceCommand<RegistrationType>;
-  CommandType::Pointer command = CommandType::New();
+  CommandType::Pointer const command = CommandType::New();
   registration->AddObserver(itk::IterationEvent(), command);
 
   //
@@ -459,12 +459,12 @@ main(int argc, const char * argv[])
 
   ParametersType finalParameters = registration->GetLastTransformParameters();
 
-  double TranslationAlongX = finalParameters[0];
-  double TranslationAlongY = finalParameters[1];
+  double const TranslationAlongX = finalParameters[0];
+  double const TranslationAlongY = finalParameters[1];
 
-  unsigned int numberOfIterations = optimizer->GetCurrentIteration();
+  unsigned int const numberOfIterations = optimizer->GetCurrentIteration();
 
-  double bestValue = optimizer->GetValue();
+  double const bestValue = optimizer->GetValue();
 
 
   // Print out results
@@ -520,17 +520,17 @@ main(int argc, const char * argv[])
 
   using ResampleFilterType = itk::ResampleImageFilter<MovingImageType, FixedImageType>;
 
-  TransformType::Pointer finalTransform = TransformType::New();
+  TransformType::Pointer const finalTransform = TransformType::New();
 
   finalTransform->SetParameters(finalParameters);
   finalTransform->SetFixedParameters(transform->GetFixedParameters());
 
-  ResampleFilterType::Pointer resample = ResampleFilterType::New();
+  ResampleFilterType::Pointer const resample = ResampleFilterType::New();
 
   resample->SetTransform(finalTransform);
   resample->SetInput(movingImageReader->GetOutput());
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
 
 
   resample->SetSize(fixedImage->GetLargestPossibleRegion().GetSize());
@@ -549,8 +549,8 @@ main(int argc, const char * argv[])
   using WriterType = itk::ImageFileWriter<OutputImageType>;
 
 
-  WriterType::Pointer     writer = WriterType::New();
-  CastFilterType::Pointer caster = CastFilterType::New();
+  WriterType::Pointer const     writer = WriterType::New();
+  CastFilterType::Pointer const caster = CastFilterType::New();
 
 
   writer->SetFileName(outImagefile);
@@ -565,7 +565,7 @@ main(int argc, const char * argv[])
   //
   using CheckerBoardFilterType = itk::CheckerBoardImageFilter<FixedImageType>;
 
-  CheckerBoardFilterType::Pointer checker = CheckerBoardFilterType::New();
+  CheckerBoardFilterType::Pointer const checker = CheckerBoardFilterType::New();
 
   checker->SetInput1(fixedImage);
   checker->SetInput2(resample->GetOutput());
@@ -576,7 +576,7 @@ main(int argc, const char * argv[])
   resample->SetDefaultPixelValue(0);
 
   // Before registration
-  TransformType::Pointer identityTransform = TransformType::New();
+  TransformType::Pointer const identityTransform = TransformType::New();
   identityTransform->SetIdentity();
   resample->SetTransform(identityTransform);
 

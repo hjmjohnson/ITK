@@ -151,22 +151,22 @@ ExpectationMaximizationMixtureModelEstimator<TSample>::CalculateDensities()
   }
 
   double              temp;
-  size_t              numberOfComponents = m_ComponentVector.size();
+  size_t const        numberOfComponents = m_ComponentVector.size();
   std::vector<double> tempWeights(numberOfComponents, 0.);
 
-  typename TSample::ConstIterator iter = m_Sample->Begin();
-  typename TSample::ConstIterator last = m_Sample->End();
+  typename TSample::ConstIterator       iter = m_Sample->Begin();
+  typename TSample::ConstIterator const last = m_Sample->End();
   // Note: The data type of componentIndex should be unsigned int
   //       because itk::Array only supports 'unsigned int' number of elements.
   unsigned int componentIndex;
 
   using FrequencyType = typename TSample::AbsoluteFrequencyType;
   FrequencyType                           frequency;
-  FrequencyType                           zeroFrequency{};
+  FrequencyType const                     zeroFrequency{};
   typename TSample::MeasurementVectorType mvector;
   double                                  density;
   double                                  densitySum;
-  double                                  minDouble = NumericTraits<double>::epsilon();
+  double const                            minDouble = NumericTraits<double>::epsilon();
 
   SizeValueType measurementVectorIndex = 0;
 
@@ -179,8 +179,8 @@ ExpectationMaximizationMixtureModelEstimator<TSample>::CalculateDensities()
     {
       for (componentIndex = 0; componentIndex < numberOfComponents; ++componentIndex)
       {
-        double t_prop = m_Proportions[componentIndex];
-        double t_value = m_ComponentVector[componentIndex]->Evaluate(mvector);
+        double const t_prop = m_Proportions[componentIndex];
+        double const t_value = m_ComponentVector[componentIndex]->Evaluate(mvector);
         density = t_prop * t_value;
         tempWeights[componentIndex] = density;
         densitySum += density;
@@ -221,10 +221,10 @@ ExpectationMaximizationMixtureModelEstimator<TSample>::CalculateExpectation() co
 
   if (m_Sample)
   {
-    unsigned int  measurementVectorIndex;
-    SizeValueType size = m_Sample->Size();
-    double        logProportion;
-    double        temp;
+    unsigned int        measurementVectorIndex;
+    SizeValueType const size = m_Sample->Size();
+    double              logProportion;
+    double              temp;
     for (size_t componentIndex = 0; componentIndex < m_ComponentVector.size(); ++componentIndex)
     {
       temp = m_Proportions[static_cast<unsigned int>(componentIndex)];
@@ -282,13 +282,13 @@ template <typename TSample>
 bool
 ExpectationMaximizationMixtureModelEstimator<TSample>::UpdateProportions()
 {
-  size_t numberOfComponents = m_ComponentVector.size();
-  size_t sampleSize = m_Sample->Size();
-  auto   totalFrequency = static_cast<double>(m_Sample->GetTotalFrequency());
-  size_t i;
-  size_t j;
-  double tempSum;
-  bool   updated = false;
+  size_t const numberOfComponents = m_ComponentVector.size();
+  size_t const sampleSize = m_Sample->Size();
+  auto         totalFrequency = static_cast<double>(m_Sample->GetTotalFrequency());
+  size_t       i;
+  size_t       j;
+  double       tempSum;
+  bool         updated = false;
 
   for (i = 0; i < numberOfComponents; ++i)
   {
@@ -346,10 +346,10 @@ template <typename TSample>
 auto
 ExpectationMaximizationMixtureModelEstimator<TSample>::GetOutput() const -> const MembershipFunctionVectorObjectType *
 {
-  size_t                         numberOfComponents = m_ComponentVector.size();
+  size_t const                   numberOfComponents = m_ComponentVector.size();
   MembershipFunctionVectorType & membershipFunctionsVector = m_MembershipFunctionsObject->Get();
 
-  typename SampleType::MeasurementVectorSizeType measurementVectorSize = m_Sample->GetMeasurementVectorSize();
+  typename SampleType::MeasurementVectorSizeType const measurementVectorSize = m_Sample->GetMeasurementVectorSize();
 
   typename GaussianMembershipFunctionType::MeanVectorType mean;
   NumericTraits<typename GaussianMembershipFunctionType::MeanVectorType>::SetLength(mean, measurementVectorSize);
@@ -393,7 +393,7 @@ auto
 ExpectationMaximizationMixtureModelEstimator<TSample>::GetMembershipFunctionsWeightsArray() const
   -> const MembershipFunctionsWeightsArrayObjectType *
 {
-  size_t                 numberOfComponents = m_ComponentVector.size();
+  size_t const           numberOfComponents = m_ComponentVector.size();
   ProportionVectorType & membershipFunctionsWeightVector = m_MembershipFunctionsWeightArrayObject->Get();
 
   membershipFunctionsWeightVector.SetSize(static_cast<SizeValueType>(numberOfComponents));

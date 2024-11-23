@@ -120,16 +120,16 @@ itkBinaryMaskToNarrowBandPointSetFilterTest(int argc, char * argv[])
   using PointDataContainerPointer = PointDataContainer::Pointer;
   using PointDataIterator = PointDataContainer::ConstIterator;
 
-  PointSetType::Pointer pointSet = narrowBandGenerator->GetOutput();
+  PointSetType::Pointer const pointSet = narrowBandGenerator->GetOutput();
 
-  PointsContainerPointer    points = pointSet->GetPoints();
-  PointDataContainerPointer pointData = pointSet->GetPointData();
+  PointsContainerPointer const    points = pointSet->GetPoints();
+  PointDataContainerPointer const pointData = pointSet->GetPointData();
 
-  PointsIterator point = points->Begin();
-  PointsIterator lastPoint = points->End();
+  PointsIterator       point = points->Begin();
+  PointsIterator const lastPoint = points->End();
 
-  PointDataIterator data = pointData->Begin();
-  PointDataIterator lastData = pointData->End();
+  PointDataIterator       data = pointData->Begin();
+  PointDataIterator const lastData = pointData->End();
 
   while (point != lastPoint && data != lastData)
   {

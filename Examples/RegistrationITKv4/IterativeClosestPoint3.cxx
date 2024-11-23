@@ -235,7 +235,8 @@ main(int argc, char * argv[])
   pointsToImageFilter->SetSpacing(spacing);
   pointsToImageFilter->SetOrigin(origin);
   pointsToImageFilter->Update();
-  BinaryImageType::Pointer binaryImage = pointsToImageFilter->GetOutput();
+  BinaryImageType::Pointer const binaryImage =
+    pointsToImageFilter->GetOutput();
 
   using DistanceImageType = itk::Image<unsigned short, Dimension>;
   using DistanceFilterType =

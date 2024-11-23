@@ -114,7 +114,7 @@ itkAtan2ImageFilterTest(int, char *[])
   filter->SetInput2(cosImage);
 
   // Get the filter output
-  OutputImageType::Pointer outputImage = filter->GetOutput();
+  OutputImageType::Pointer const outputImage = filter->GetOutput();
 
   // Execute the filter
   filter->Update();

@@ -129,12 +129,12 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
   constexpr unsigned int imageDimensionality = 3;
   using ImageType = itk::Image<double, imageDimensionality>;
 
-  auto                     size = ImageType::SizeType::Filled(imageSize);
-  ImageType::IndexType     index{};
-  ImageType::RegionType    region{ index, size };
-  auto                     spacing = itk::MakeFilled<ImageType::SpacingType>(1.0);
-  ImageType::PointType     origin{};
-  ImageType::DirectionType direction;
+  auto                        size = ImageType::SizeType::Filled(imageSize);
+  ImageType::IndexType const  index{};
+  ImageType::RegionType const region{ index, size };
+  auto                        spacing = itk::MakeFilled<ImageType::SpacingType>(1.0);
+  ImageType::PointType const  origin{};
+  ImageType::DirectionType    direction;
   direction.SetIdentity();
 
   /* Create simple test images. */
@@ -166,8 +166,8 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
   itFixed.GoToBegin();
   while (!itFixed.IsAtEnd())
   {
-    IndexType ind = itFixed.GetIndex();
-    double    v = itkCorrelationImageToImageMetricv4Test_GetToyImagePixelValue(ind, p0, imageDimensionality, 0);
+    IndexType const ind = itFixed.GetIndex();
+    double const    v = itkCorrelationImageToImageMetricv4Test_GetToyImagePixelValue(ind, p0, imageDimensionality, 0);
     itFixed.Set(v);
     ++itFixed;
   }
@@ -183,8 +183,8 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
 
   while (!itMoving.IsAtEnd())
   {
-    IndexType ind = itMoving.GetIndex();
-    double    v = itkCorrelationImageToImageMetricv4Test_GetToyImagePixelValue(ind, p1, imageDimensionality, 0);
+    IndexType const ind = itMoving.GetIndex();
+    double const    v = itkCorrelationImageToImageMetricv4Test_GetToyImagePixelValue(ind, p1, imageDimensionality, 0);
     itMoving.Set(v);
     ++itMoving;
   }
@@ -237,7 +237,7 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
     result = EXIT_FAILURE;
   }
 
-  double myeps = 1e-8;
+  double const myeps = 1e-8;
   if (itk::Math::abs(value1 - value2) > 1e-8)
   {
     std::cerr << "value1: " << value1 << std::endl;
@@ -246,7 +246,7 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
     result = EXIT_FAILURE;
   }
 
-  vnl_vector<double> ddiff = (vnl_vector<double>)derivative1 - (vnl_vector<double>)derivative2;
+  vnl_vector<double> const ddiff = (vnl_vector<double>)derivative1 - (vnl_vector<double>)derivative2;
   if (ddiff.two_norm() > myeps)
   {
     std::cerr << "derivative1: " << derivative1 << std::endl;

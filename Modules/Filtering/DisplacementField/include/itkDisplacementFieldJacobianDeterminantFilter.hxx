@@ -96,8 +96,8 @@ DisplacementFieldJacobianDeterminantFilter<TInputImage, TRealType, TOutputImage>
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  InputImagePointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  OutputImagePointer outputPtr = this->GetOutput();
+  InputImagePointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -176,8 +176,8 @@ DisplacementFieldJacobianDeterminantFilter<TInputImage, TRealType, TOutputImage>
   ImageRegionIterator<TOutputImage>                     it;
 
   // Find the data-set boundary "faces"
-  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<RealVectorImageType>                        bC;
-  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<RealVectorImageType>::FaceListType faceList =
+  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<RealVectorImageType>                              bC;
+  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<RealVectorImageType>::FaceListType const faceList =
     bC(dynamic_cast<const RealVectorImageType *>(m_RealValuedInputImage.GetPointer()),
        outputRegionForThread,
        m_NeighborhoodRadius);

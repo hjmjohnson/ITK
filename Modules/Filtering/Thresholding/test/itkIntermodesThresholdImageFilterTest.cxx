@@ -59,7 +59,7 @@ itkIntermodesThresholdImageFilterTest(int argc, char * argv[])
   using FilterType = itk::IntermodesThresholdImageFilter<InputImageType, OutputImageType>;
   auto filter = FilterType::New();
 
-  itk::SimpleFilterWatcher watcher(filter);
+  itk::SimpleFilterWatcher const watcher(filter);
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, IntermodesThresholdImageFilter, HistogramThresholdImageFilter);
 
@@ -90,7 +90,7 @@ itkIntermodesThresholdImageFilterTest(int argc, char * argv[])
   ITK_TRY_EXPECT_EXCEPTION(filter->Update());
 
 
-  FilterType::CalculatorType::Pointer calculator = FilterType::CalculatorType::New();
+  FilterType::CalculatorType::Pointer const calculator = FilterType::CalculatorType::New();
   filter->SetCalculator(calculator);
   ITK_TEST_SET_GET_VALUE(calculator, filter->GetCalculator());
 
@@ -99,19 +99,19 @@ itkIntermodesThresholdImageFilterTest(int argc, char * argv[])
   filter->SetMaximumSmoothingIterations(10);
   ITK_TRY_EXPECT_EXCEPTION(filter->Update());
 
-  unsigned long maximumSmoothingIterations = std::stoi(argv[5]);
+  unsigned long const maximumSmoothingIterations = std::stoi(argv[5]);
   filter->SetMaximumSmoothingIterations(maximumSmoothingIterations);
   ITK_TEST_SET_GET_VALUE(maximumSmoothingIterations, filter->GetMaximumSmoothingIterations());
 
-  bool useInterMode = static_cast<bool>(std::stoi(argv[6]));
+  bool const useInterMode = static_cast<bool>(std::stoi(argv[6]));
   ITK_TEST_SET_GET_BOOLEAN(filter, UseInterMode, useInterMode);
 
 
   ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
 
   // Regression test: compare computed threshold
-  FilterType::InputPixelType expectedThreshold = std::stod(argv[7]);
-  FilterType::InputPixelType resultThreshold = filter->GetThreshold();
+  FilterType::InputPixelType const expectedThreshold = std::stod(argv[7]);
+  FilterType::InputPixelType const resultThreshold = filter->GetThreshold();
   if (itk::Math::NotAlmostEquals(expectedThreshold, resultThreshold))
   {
     std::cerr << "Test failed!" << std::endl;

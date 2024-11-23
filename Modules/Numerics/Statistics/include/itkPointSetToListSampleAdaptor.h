@@ -222,8 +222,9 @@ public:
   Iterator
   Begin()
   {
-    PointsContainerPointer nonConstPointsDataContainer = const_cast<PointsContainer *>(m_PointsContainer.GetPointer());
-    Iterator               iter(nonConstPointsDataContainer->Begin(), 0);
+    PointsContainerPointer const nonConstPointsDataContainer =
+      const_cast<PointsContainer *>(m_PointsContainer.GetPointer());
+    Iterator const iter(nonConstPointsDataContainer->Begin(), 0);
 
     return iter;
   }
@@ -232,9 +233,10 @@ public:
   Iterator
   End()
   {
-    PointsContainerPointer nonConstPointsDataContainer = const_cast<PointsContainer *>(m_PointsContainer.GetPointer());
+    PointsContainerPointer const nonConstPointsDataContainer =
+      const_cast<PointsContainer *>(m_PointsContainer.GetPointer());
 
-    Iterator iter(nonConstPointsDataContainer->End(), m_PointsContainer->Size());
+    Iterator const iter(nonConstPointsDataContainer->End(), m_PointsContainer->Size());
 
     return iter;
   }
@@ -243,7 +245,7 @@ public:
   ConstIterator
   Begin() const
   {
-    ConstIterator iter(m_PointsContainer->Begin(), 0);
+    ConstIterator const iter(m_PointsContainer->Begin(), 0);
 
     return iter;
   }
@@ -252,7 +254,7 @@ public:
   ConstIterator
   End() const
   {
-    ConstIterator iter(m_PointsContainer->End(), m_PointsContainer->Size());
+    ConstIterator const iter(m_PointsContainer->End(), m_PointsContainer->Size());
 
     return iter;
   }

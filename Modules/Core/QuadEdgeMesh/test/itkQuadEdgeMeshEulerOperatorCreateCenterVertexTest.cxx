@@ -60,7 +60,7 @@ itkQuadEdgeMeshEulerOperatorCreateCenterVertexTest(int, char *[])
 
   std::cout << "Checking CreateCenterVertex." << std::endl;
 
-  MeshPointer mesh = MeshType::New();
+  MeshPointer const mesh = MeshType::New();
   CreateSquareTriangularMesh<MeshType>(mesh);
 
   auto createCenterVertex = CreateCenterVertex::New();

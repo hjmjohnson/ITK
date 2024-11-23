@@ -35,13 +35,13 @@ ShanbhagThresholdCalculator<THistogram, TOutput>::GenerateData()
   {
     itkExceptionMacro("Histogram is empty");
   }
-  ProgressReporter progress(this, 0, histogram->GetSize(0));
+  ProgressReporter const progress(this, 0, histogram->GetSize(0));
   if (histogram->GetSize(0) == 1)
   {
     this->GetOutput()->Set(static_cast<OutputType>(histogram->GetMeasurement(0, 0)));
   }
 
-  unsigned int size = histogram->GetSize(0);
+  unsigned int const size = histogram->GetSize(0);
 
   const double                               tolerance = 2.220446049250313E-16;
   typename HistogramType::InstanceIdentifier threshold = 0;
@@ -58,7 +58,7 @@ ShanbhagThresholdCalculator<THistogram, TOutput>::GenerateData()
   std::vector<double>                        P1(size);         // cumulative normalized histogram
   std::vector<double>                        P2(size);
 
-  int total = histogram->GetTotalFrequency();
+  int const total = histogram->GetTotalFrequency();
 
   for (ih = 0; static_cast<unsigned int>(ih) < size; ++ih)
   {

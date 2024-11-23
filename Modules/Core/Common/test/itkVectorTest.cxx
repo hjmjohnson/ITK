@@ -39,8 +39,8 @@ itkVectorTest(int, char *[])
   RealVector t;
   RealVector r;
 
-  int  i = 4;
-  Real f = 2.1;
+  int const i = 4;
+  Real      f = 2.1;
 
   s.Fill(3.0);
   if (different(s[0], 3.0) || different(s[1], 3.0))

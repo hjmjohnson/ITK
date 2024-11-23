@@ -87,7 +87,7 @@ public:
 
     movingReader->SetFileName(argv[3]);
 
-    typename FixedImageType::ConstPointer fixedImage = fixedReader->GetOutput();
+    typename FixedImageType::ConstPointer const fixedImage = fixedReader->GetOutput();
 
 
     using FilterType = itk::ResampleImageFilter<MovingImageType, FixedImageType>;
@@ -100,17 +100,17 @@ public:
 
     resampler->SetInterpolator(interpolator);
 
-    typename FixedImageType::SpacingType   fixedSpacing = fixedImage->GetSpacing();
-    typename FixedImageType::PointType     fixedOrigin = fixedImage->GetOrigin();
-    typename FixedImageType::DirectionType fixedDirection = fixedImage->GetDirection();
+    typename FixedImageType::SpacingType         fixedSpacing = fixedImage->GetSpacing();
+    typename FixedImageType::PointType           fixedOrigin = fixedImage->GetOrigin();
+    typename FixedImageType::DirectionType const fixedDirection = fixedImage->GetDirection();
 
     resampler->SetOutputSpacing(fixedSpacing);
     resampler->SetOutputOrigin(fixedOrigin);
     resampler->SetOutputDirection(fixedDirection);
 
 
-    typename FixedImageType::RegionType fixedRegion = fixedImage->GetBufferedRegion();
-    typename FixedImageType::SizeType   fixedSize = fixedRegion.GetSize();
+    typename FixedImageType::RegionType const fixedRegion = fixedImage->GetBufferedRegion();
+    typename FixedImageType::SizeType         fixedSize = fixedRegion.GetSize();
     resampler->SetSize(fixedSize);
     resampler->SetOutputStartIndex(fixedRegion.GetIndex());
 

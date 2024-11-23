@@ -24,7 +24,7 @@ int
 itkNumericSeriesFileNamesTest(int, char *[])
 {
 
-  itk::NumericSeriesFileNames::Pointer fit = itk::NumericSeriesFileNames::New();
+  itk::NumericSeriesFileNames::Pointer const fit = itk::NumericSeriesFileNames::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(fit, NumericSeriesFileNames, Object);
 
@@ -59,7 +59,7 @@ itkNumericSeriesFileNamesTest(int, char *[])
   fit->SetIncrementIndex(incrementIndex);
   ITK_TEST_SET_GET_VALUE(incrementIndex, fit->GetIncrementIndex());
 
-  std::string format = "foo.%0200d.png";
+  std::string const format = "foo.%0200d.png";
   fit->SetSeriesFormat(format);
   ITK_TEST_SET_GET_VALUE(format, fit->GetSeriesFormat());
 

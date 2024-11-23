@@ -162,7 +162,7 @@ main(int argc, char * argv[])
   it.GoToBegin();
   while (!it.IsAtEnd())
   {
-    float value = it.Get();
+    float const value = it.Get();
     sum += value;
     ++it;
   }

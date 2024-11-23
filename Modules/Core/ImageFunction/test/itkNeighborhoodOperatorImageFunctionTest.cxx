@@ -50,7 +50,7 @@ itkNeighborhoodOperatorImageFunctionTest(int, char *[])
   image->SetRegions(region);
   image->Allocate();
 
-  ImageType::PixelType initialValue = 27;
+  ImageType::PixelType const initialValue = 27;
   image->FillBuffer(initialValue);
 
 

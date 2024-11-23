@@ -1192,23 +1192,23 @@ template <typename TInputImage, typename TCoordRep>
 void
 RayCastInterpolateImageFunction<TInputImage, TCoordRep>::RayCastHelper::IncrementVoxelPointers()
 {
-  double xBefore = m_Position3Dvox[0].GetSum();
-  double yBefore = m_Position3Dvox[1].GetSum();
-  double zBefore = m_Position3Dvox[2].GetSum();
+  double const xBefore = m_Position3Dvox[0].GetSum();
+  double const yBefore = m_Position3Dvox[1].GetSum();
+  double const zBefore = m_Position3Dvox[2].GetSum();
 
   m_Position3Dvox[0] += m_VoxelIncrement[0];
   m_Position3Dvox[1] += m_VoxelIncrement[1];
   m_Position3Dvox[2] += m_VoxelIncrement[2];
 
-  int dx = static_cast<int>(m_Position3Dvox[0].GetSum()) - static_cast<int>(xBefore);
-  int dy = static_cast<int>(m_Position3Dvox[1].GetSum()) - static_cast<int>(yBefore);
-  int dz = static_cast<int>(m_Position3Dvox[2].GetSum()) - static_cast<int>(zBefore);
+  int const dx = static_cast<int>(m_Position3Dvox[0].GetSum()) - static_cast<int>(xBefore);
+  int const dy = static_cast<int>(m_Position3Dvox[1].GetSum()) - static_cast<int>(yBefore);
+  int const dz = static_cast<int>(m_Position3Dvox[2].GetSum()) - static_cast<int>(zBefore);
 
   m_RayIntersectionVoxelIndex[0] += dx;
   m_RayIntersectionVoxelIndex[1] += dy;
   m_RayIntersectionVoxelIndex[2] += dz;
 
-  int totalRayVoxelPlanes = dx + dy * m_NumberOfVoxelsInX + dz * m_NumberOfVoxelsInX * m_NumberOfVoxelsInY;
+  int const totalRayVoxelPlanes = dx + dy * m_NumberOfVoxelsInX + dz * m_NumberOfVoxelsInX * m_NumberOfVoxelsInY;
 
   m_RayIntersectionVoxels[0] += totalRayVoxelPlanes;
   m_RayIntersectionVoxels[1] += totalRayVoxelPlanes;
@@ -1422,9 +1422,9 @@ RayCastInterpolateImageFunction<TInputImage, TCoordRep>::Evaluate(const PointTyp
 {
   double integral = 0;
 
-  OutputPointType transformedFocalPoint = m_Transform->TransformPoint(m_FocalPoint);
+  OutputPointType const transformedFocalPoint = m_Transform->TransformPoint(m_FocalPoint);
 
-  DirectionType direction = transformedFocalPoint - point;
+  DirectionType const direction = transformedFocalPoint - point;
 
   RayCastInterpolateImageFunction<TInputImage, TCoordRep>::RayCastHelper ray;
   ray.SetImage(this->m_Image);

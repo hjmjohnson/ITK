@@ -409,18 +409,19 @@ KdTreeBasedKmeansEstimator<TKdTree>::GetOutput() const -> const MembershipFuncti
 {
   // INSERT CHECKS if all the required inputs are set and optimization has been
   // run.
-  unsigned int                   numberOfClasses = m_Parameters.size() / m_MeasurementVectorSize;
+  unsigned int const             numberOfClasses = m_Parameters.size() / m_MeasurementVectorSize;
   MembershipFunctionVectorType & membershipFunctionsVector = m_MembershipFunctionsObject->Get();
 
   for (unsigned int i = 0; i < numberOfClasses; ++i)
   {
-    DistanceToCentroidMembershipFunctionPointer membershipFunction = DistanceToCentroidMembershipFunctionType::New();
+    DistanceToCentroidMembershipFunctionPointer const membershipFunction =
+      DistanceToCentroidMembershipFunctionType::New();
     membershipFunction->SetMeasurementVectorSize(m_MeasurementVectorSize);
     typename DistanceToCentroidMembershipFunctionType::CentroidType centroid;
     centroid.SetSize(m_MeasurementVectorSize);
     for (unsigned int j = 0; j < m_MeasurementVectorSize; ++j)
     {
-      unsigned int parameterIndex = i * m_MeasurementVectorSize + j;
+      unsigned int const parameterIndex = i * m_MeasurementVectorSize + j;
       centroid[j] = m_Parameters[parameterIndex];
     }
     membershipFunction->SetCentroid(centroid);

@@ -113,7 +113,7 @@ itkEuler2DTransformTest(int, char *[])
   eulerTransform->SetRotation(0);
 
   EulerTransformType::OffsetType::ValueType ioffsetInit[2] = { 1, 4 };
-  EulerTransformType::OffsetType            ioffset = ioffsetInit;
+  EulerTransformType::OffsetType const      ioffset = ioffsetInit;
 
   eulerTransform->SetOffset(ioffset);
 
@@ -323,8 +323,8 @@ itkEuler2DTransformTest(int, char *[])
       minusPoint = t4->TransformPoint(p1);
       for (unsigned int j = 0; j < 2; ++j)
       {
-        double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
-        double computedDerivative = jacobian2[j][k];
+        double const approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
+        double const computedDerivative = jacobian2[j][k];
         approxJacobian[j][k] = approxDerivative;
         if (itk::Math::abs(approxDerivative - computedDerivative) > 1e-4)
         {

@@ -34,7 +34,7 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   using TubePointListType = TubeType::TubePointListType;
   using TubePointType = TubeType::TubePointType;
 
-  TubePointer       tube1 = TubeType::New();
+  TubePointer const tube1 = TubeType::New();
   TubePointListType list;
 
   for (unsigned int i = 0; i < 10; ++i)
@@ -58,7 +58,7 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   pointSetFilter->SetChildrenDepth(childrenDepth);
   ITK_TEST_SET_GET_VALUE(childrenDepth, pointSetFilter->GetChildrenDepth());
 
-  unsigned int samplingFactor = 1;
+  unsigned int const samplingFactor = 1;
   pointSetFilter->SetSamplingFactor(samplingFactor);
   ITK_TEST_SET_GET_VALUE(samplingFactor, pointSetFilter->GetSamplingFactor());
 
@@ -67,7 +67,7 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
 
   pointSetFilter->Update();
 
-  PointSetType::Pointer pointSet = pointSetFilter->GetOutput();
+  PointSetType::Pointer const pointSet = pointSetFilter->GetOutput();
 
   std::cout << "Testing pointSet exists : ";
   if (!pointSet.GetPointer())
@@ -89,8 +89,8 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   std::cout << "Testing pointSet validity : ";
 
   using PointIterator = PointSetType::PointsContainer::ConstIterator;
-  PointIterator pointItr = pointSet->GetPoints()->Begin();
-  PointIterator pointEnd = pointSet->GetPoints()->End();
+  PointIterator       pointItr = pointSet->GetPoints()->Begin();
+  PointIterator const pointEnd = pointSet->GetPoints()->End();
 
   unsigned int val = 0;
   while (pointItr != pointEnd)
@@ -157,7 +157,7 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
 
   pointSetFilter3D->Update();
 
-  PointSet3DType::Pointer pointSet3D = pointSetFilter3D->GetOutput();
+  PointSet3DType::Pointer const pointSet3D = pointSetFilter3D->GetOutput();
 
   std::cout << "Testing pointSet3D exists : ";
   if (!pointSet3D.GetPointer())
@@ -178,8 +178,8 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   std::cout << "Testing pointSet3D validity : ";
 
   using PointIterator3D = PointSet3DType::PointsContainer::ConstIterator;
-  PointIterator3D pointItr2 = pointSet3D->GetPoints()->Begin();
-  PointIterator3D pointEnd2 = pointSet3D->GetPoints()->End();
+  PointIterator3D       pointItr2 = pointSet3D->GetPoints()->Begin();
+  PointIterator3D const pointEnd2 = pointSet3D->GetPoints()->End();
 
   val = 0;
   while (pointItr2 != pointEnd2)

@@ -51,7 +51,7 @@ itkBMPImageIOTest5(int argc, char * argv[])
 
   auto compressedImageReader = ReaderType::New();
 
-  itk::BMPImageIO::Pointer compressedImageIO = itk::BMPImageIO::New();
+  itk::BMPImageIO::Pointer const compressedImageIO = itk::BMPImageIO::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(compressedImageIO, BMPImageIO, ImageIOBase);
 
@@ -61,7 +61,7 @@ itkBMPImageIOTest5(int argc, char * argv[])
 
   auto uncompressedImageReader = ReaderType::New();
 
-  itk::BMPImageIO::Pointer uncompressedImageIO = itk::BMPImageIO::New();
+  itk::BMPImageIO::Pointer const uncompressedImageIO = itk::BMPImageIO::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(uncompressedImageIO, BMPImageIO, ImageIOBase);
 
@@ -121,8 +121,9 @@ itkBMPImageIOTest5(int argc, char * argv[])
   }
 
 
-  ImageType::RegionType compressedImageRegion = compressedImageReader->GetOutput()->GetLargestPossibleRegion();
-  ImageType::RegionType uncompressedImageRegion = uncompressedImageReader->GetOutput()->GetLargestPossibleRegion();
+  ImageType::RegionType const compressedImageRegion = compressedImageReader->GetOutput()->GetLargestPossibleRegion();
+  ImageType::RegionType const uncompressedImageRegion =
+    uncompressedImageReader->GetOutput()->GetLargestPossibleRegion();
 
   if (compressedImageRegion != uncompressedImageRegion)
   {

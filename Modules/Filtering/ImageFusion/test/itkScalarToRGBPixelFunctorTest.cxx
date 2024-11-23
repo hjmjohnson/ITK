@@ -48,7 +48,7 @@ itkScalarToRGBPixelFunctorTest(int, char *[])
   }
 
   // Test with unsigned char.
-  itk::Functor::ScalarToRGBPixelFunctor<unsigned char> ucf;
+  itk::Functor::ScalarToRGBPixelFunctor<unsigned char> const ucf;
 
   std::cout << "Testing unsigned char" << std::endl;
   for (char c = 0; c < 100; ++c)

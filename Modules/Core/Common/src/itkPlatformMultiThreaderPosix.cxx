@@ -191,7 +191,7 @@ PlatformMultiThreader::SpawnDispatchSingleMethodThread(PlatformMultiThreader::Wo
   pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM);
 #endif
 
-  int threadError = pthread_create(
+  int const threadError = pthread_create(
     &threadHandle, &attr, reinterpret_cast<c_void_cast>(this->SingleMethodProxy), reinterpret_cast<void *>(threadInfo));
   if (threadError != 0)
   {

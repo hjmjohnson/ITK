@@ -55,7 +55,7 @@ FastMarchingImageFilterBase<TInput, TOutput>::FastMarchingImageFilterBase()
 
   constexpr auto outputSize = OutputSizeType::Filled(16);
 
-  NodeType outputIndex{};
+  NodeType const outputIndex{};
 
   m_OutputRegion.SetSize(outputSize);
   m_OutputRegion.SetIndex(outputIndex);
@@ -77,7 +77,7 @@ FastMarchingImageFilterBase<TInput, TOutput>::GenerateOutputInformation()
   // Use user-specified output information
   if (!this->GetInput() || m_OverrideOutputInformation)
   {
-    OutputImagePointer output = this->GetOutput();
+    OutputImagePointer const output = this->GetOutput();
     output->SetLargestPossibleRegion(m_OutputRegion);
     output->SetOrigin(m_OutputOrigin);
     output->SetSpacing(m_OutputSpacing);
@@ -340,9 +340,9 @@ FastMarchingImageFilterBase<TInput, TOutput>::CheckTopology(OutputImageType * oI
   {
     if ((ImageDimension == 2) || (ImageDimension == 3))
     {
-      bool wellComposednessViolation = this->DoesVoxelChangeViolateWellComposedness(iNode);
+      bool const wellComposednessViolation = this->DoesVoxelChangeViolateWellComposedness(iNode);
 
-      bool strictTopologyViolation = this->DoesVoxelChangeViolateStrictTopology(iNode);
+      bool const strictTopologyViolation = this->DoesVoxelChangeViolateStrictTopology(iNode);
 
       if ((this->m_TopologyCheck == Superclass::TopologyCheckEnum::Strict) &&
           (wellComposednessViolation || strictTopologyViolation))
@@ -467,8 +467,8 @@ FastMarchingImageFilterBase<TInput, TOutput>::InitializeOutput(OutputImageType *
 
   if (this->m_AlivePoints)
   {
-    NodePairContainerConstIterator pointsIter = this->m_AlivePoints->Begin();
-    NodePairContainerConstIterator pointsEnd = this->m_AlivePoints->End();
+    NodePairContainerConstIterator       pointsIter = this->m_AlivePoints->Begin();
+    NodePairContainerConstIterator const pointsEnd = this->m_AlivePoints->End();
 
     while (pointsIter != pointsEnd)
     {
@@ -496,10 +496,10 @@ FastMarchingImageFilterBase<TInput, TOutput>::InitializeOutput(OutputImageType *
 
   if (this->m_ForbiddenPoints)
   {
-    NodePairContainerConstIterator pointsIter = this->m_ForbiddenPoints->Begin();
-    NodePairContainerConstIterator pointsEnd = this->m_ForbiddenPoints->End();
+    NodePairContainerConstIterator       pointsIter = this->m_ForbiddenPoints->Begin();
+    NodePairContainerConstIterator const pointsEnd = this->m_ForbiddenPoints->End();
 
-    OutputPixelType zero{};
+    OutputPixelType const zero{};
 
     while (pointsIter != pointsEnd)
     {
@@ -545,8 +545,8 @@ FastMarchingImageFilterBase<TInput, TOutput>::InitializeOutput(OutputImageType *
   // Process the input trial points
   if (this->m_TrialPoints)
   {
-    NodePairContainerConstIterator pointsIter = this->m_TrialPoints->Begin();
-    NodePairContainerConstIterator pointsEnd = this->m_TrialPoints->End();
+    NodePairContainerConstIterator       pointsIter = this->m_TrialPoints->Begin();
+    NodePairContainerConstIterator const pointsEnd = this->m_TrialPoints->End();
 
     while (pointsIter != pointsEnd)
     {

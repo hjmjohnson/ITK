@@ -26,10 +26,10 @@ template <typename TScalar, unsigned int TImageDimension>
 void
 EquivalenceRelabeler<TScalar, TImageDimension>::GenerateData()
 {
-  typename ImageType::ConstPointer input = this->GetInputImage();
-  typename ImageType::Pointer      output = this->GetOutputImage();
+  typename ImageType::ConstPointer const input = this->GetInputImage();
+  typename ImageType::Pointer const      output = this->GetOutputImage();
 
-  typename EquivalencyTableType::Pointer eqT = this->GetEquivalencyTable();
+  typename EquivalencyTableType::Pointer const eqT = this->GetEquivalencyTable();
 
   output->SetBufferedRegion(output->GetRequestedRegion());
   output->Allocate();

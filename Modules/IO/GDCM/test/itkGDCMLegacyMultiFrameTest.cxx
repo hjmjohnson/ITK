@@ -43,8 +43,8 @@ itkGDCMLegacyMultiFrameTest(int argc, char * argv[])
   using ImageType = itk::Image<PixelType, Dimension>;
 
   using ReaderType = itk::ImageFileReader<ImageType>;
-  auto                      reader = ReaderType::New();
-  itk::GDCMImageIO::Pointer imageIO = itk::GDCMImageIO::New();
+  auto                            reader = ReaderType::New();
+  itk::GDCMImageIO::Pointer const imageIO = itk::GDCMImageIO::New();
   reader->SetImageIO(imageIO);
   reader->SetFileName(inputFileName);
 

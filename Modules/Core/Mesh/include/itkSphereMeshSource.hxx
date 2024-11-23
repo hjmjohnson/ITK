@@ -79,13 +79,13 @@ SphereMeshSource<TOutputMesh>::GenerateData()
   typename OutputMeshType::PointIdentifier tripoints[3] = { 0, 1, 2 };
 
   // memory allocation for nodes
-  typename OutputMeshType::Pointer outputMesh = this->GetOutput();
+  typename OutputMeshType::Pointer const outputMesh = this->GetOutput();
 
   outputMesh->GetPoints()->Reserve(numpts);
 
   outputMesh->SetCellsAllocationMethod(MeshEnums::MeshClassCellsAllocationMethod::CellsAllocatedDynamicallyCellByCell);
 
-  PointsContainerPointer             myPoints = outputMesh->GetPoints();
+  PointsContainerPointer const       myPoints = outputMesh->GetPoints();
   typename PointsContainer::Iterator point = myPoints->Begin();
 
   OPointType p1;

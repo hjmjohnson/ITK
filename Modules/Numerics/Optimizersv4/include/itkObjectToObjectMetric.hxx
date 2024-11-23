@@ -348,7 +348,7 @@ ObjectToObjectMetric<TFixedDimension, TMovingDimension, TVirtualImage, TParamete
 {
   if (m_VirtualImage)
   {
-    OffsetValueType offset = this->m_VirtualImage->ComputeOffset(index) * numberOfLocalParameters;
+    OffsetValueType const offset = this->m_VirtualImage->ComputeOffset(index) * numberOfLocalParameters;
     return offset;
   }
   else
@@ -485,9 +485,9 @@ ObjectToObjectMetric<TFixedDimension, TMovingDimension, TVirtualImage, TParamete
                       "or a CompositeTransform with DisplacementFieldTransform as the last to have been added.");
   }
   using FieldType = typename MovingDisplacementFieldTransformType::DisplacementFieldType;
-  typename FieldType::ConstPointer field = displacementTransform->GetDisplacementField();
-  typename FieldType::RegionType   fieldRegion = field->GetBufferedRegion();
-  VirtualRegionType                virtualRegion = this->GetVirtualRegion();
+  typename FieldType::ConstPointer const field = displacementTransform->GetDisplacementField();
+  typename FieldType::RegionType const   fieldRegion = field->GetBufferedRegion();
+  VirtualRegionType const                virtualRegion = this->GetVirtualRegion();
   if (virtualRegion.GetSize() != fieldRegion.GetSize() || virtualRegion.GetIndex() != fieldRegion.GetIndex())
   {
     itkExceptionMacro(

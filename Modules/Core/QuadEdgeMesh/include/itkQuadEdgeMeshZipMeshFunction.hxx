@@ -75,13 +75,13 @@ QuadEdgeMeshZipMeshFunction<TMesh, TQEType>::Evaluate(QEType * e) -> OutputType
   //                  /  |  \                                      //
   //
   // Store for latter usage (since e and e->GetRight() will be deleted):
-  QEType *   a = e->GetLnext();
-  QEType *   b = e->GetOnext()->GetSym();
-  OutputType VLeft = e->GetDestination();
-  OutputType VRite = b->GetOrigin();
-  bool       wasFacePresent = e->IsRightSet();
-  const auto rightFaceID = e->GetRight();
-  OutputType resultingPointId = QEType::m_NoPoint;
+  QEType *         a = e->GetLnext();
+  QEType *         b = e->GetOnext()->GetSym();
+  OutputType const VLeft = e->GetDestination();
+  OutputType const VRite = b->GetOrigin();
+  bool const       wasFacePresent = e->IsRightSet();
+  const auto       rightFaceID = e->GetRight();
+  OutputType       resultingPointId = QEType::m_NoPoint;
 
   // We should be cautious and consider the case when the very
   // initial situation was the following:

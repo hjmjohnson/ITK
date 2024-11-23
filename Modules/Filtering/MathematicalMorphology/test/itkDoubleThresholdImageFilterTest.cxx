@@ -73,7 +73,7 @@ itkDoubleThresholdImageFilterTest(int argc, char * argv[])
   ITK_EXERCISE_BASIC_OBJECT_METHODS(threshold, DoubleThresholdImageFilter, ImageToImageFilter);
 
 
-  itk::SimpleFilterWatcher watcher(threshold, "threshold");
+  itk::SimpleFilterWatcher const watcher(threshold, "threshold");
 
   // Setup the input and output files
   reader->SetFileName(argv[1]);

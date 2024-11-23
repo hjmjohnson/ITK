@@ -54,8 +54,8 @@ GradientMagnitudeImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedR
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  InputImagePointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  OutputImagePointer outputPtr = this->GetOutput();
+  InputImagePointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -106,10 +106,10 @@ GradientMagnitudeImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerate
   ConstNeighborhoodIterator<TInputImage> bit;
   ImageRegionIterator<TOutputImage>      it;
 
-  NeighborhoodInnerProduct<TInputImage, RealType> SIP;
+  NeighborhoodInnerProduct<TInputImage, RealType> const SIP;
 
-  typename OutputImageType::Pointer     output = this->GetOutput();
-  typename InputImageType::ConstPointer input = this->GetInput();
+  typename OutputImageType::Pointer const     output = this->GetOutput();
+  typename InputImageType::ConstPointer const input = this->GetInput();
 
   // Set up operators
   DerivativeOperator<RealType, ImageDimension> op[ImageDimension];

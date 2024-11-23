@@ -117,15 +117,15 @@ main(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  ImageType::ConstPointer inputImage = reader->GetOutput();
+  ImageType::ConstPointer const inputImage = reader->GetOutput();
 
-  ImageType::PointType     origin = inputImage->GetOrigin();
-  ImageType::SpacingType   spacing = inputImage->GetSpacing();
-  ImageType::DirectionType direction = inputImage->GetDirection();
+  ImageType::PointType           origin = inputImage->GetOrigin();
+  ImageType::SpacingType         spacing = inputImage->GetSpacing();
+  ImageType::DirectionType const direction = inputImage->GetDirection();
 
   if (argc > 3)
   {
-    double scale = std::stod(argv[3]);
+    double const scale = std::stod(argv[3]);
     for (unsigned int i = 0; i < Dimension; ++i)
     {
       spacing[i] *= scale;
@@ -151,13 +151,14 @@ main(int argc, char * argv[])
 
   if (argc > 7)
   {
-    double additionalAngle = std::stod(argv[7]);
+    double const additionalAngle = std::stod(argv[7]);
 
     itk::Versor<itk::SpacePrecisionType> rotation;
-    double angleInRadians = additionalAngle * itk::Math::pi / 180.0;
+    double const angleInRadians = additionalAngle * itk::Math::pi / 180.0;
     rotation.SetRotationAroundZ(angleInRadians);
 
-    ImageType::DirectionType newDirection = direction * rotation.GetMatrix();
+    ImageType::DirectionType const newDirection =
+      direction * rotation.GetMatrix();
 
     filter->SetOutputDirection(newDirection);
     filter->ChangeDirectionOn();

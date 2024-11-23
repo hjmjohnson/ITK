@@ -150,26 +150,26 @@ protected:
   inline CriterionValueType
   Dyer07Criterion(OutputMeshType * iMesh, OutputQEType * iEdge) const
   {
-    OutputPointIdentifier id1 = iEdge->GetOrigin();
-    OutputPointIdentifier id2 = iEdge->GetDestination();
+    OutputPointIdentifier const id1 = iEdge->GetOrigin();
+    OutputPointIdentifier const id2 = iEdge->GetDestination();
 
-    OutputPointIdentifier idA = iEdge->GetLnext()->GetDestination();
-    OutputPointIdentifier idB = iEdge->GetRnext()->GetOrigin();
+    OutputPointIdentifier const idA = iEdge->GetLnext()->GetDestination();
+    OutputPointIdentifier const idB = iEdge->GetRnext()->GetOrigin();
 
-    OutputPointType pt1 = iMesh->GetPoint(id1);
-    OutputPointType pt2 = iMesh->GetPoint(id2);
-    OutputPointType ptA = iMesh->GetPoint(idA);
-    OutputPointType ptB = iMesh->GetPoint(idB);
+    OutputPointType const pt1 = iMesh->GetPoint(id1);
+    OutputPointType const pt2 = iMesh->GetPoint(id2);
+    OutputPointType const ptA = iMesh->GetPoint(idA);
+    OutputPointType const ptB = iMesh->GetPoint(idB);
 
-    OutputVectorType v1A = ptA - pt1;
-    OutputVectorType v1B = ptB - pt1;
-    OutputVectorType v2A = ptA - pt2;
-    OutputVectorType v2B = ptB - pt2;
+    OutputVectorType const v1A = ptA - pt1;
+    OutputVectorType const v1B = ptB - pt1;
+    OutputVectorType const v2A = ptA - pt2;
+    OutputVectorType const v2B = ptB - pt2;
 
-    OutputCoordRepType sq_norm1A = v1A * v1A;
-    OutputCoordRepType sq_norm1B = v1B * v1B;
-    OutputCoordRepType sq_norm2A = v2A * v2A;
-    OutputCoordRepType sq_norm2B = v2B * v2B;
+    OutputCoordRepType const sq_norm1A = v1A * v1A;
+    OutputCoordRepType const sq_norm1B = v1B * v1B;
+    OutputCoordRepType const sq_norm2A = v2A * v2A;
+    OutputCoordRepType const sq_norm2B = v2B * v2B;
 
     auto dotA = static_cast<CriterionValueType>(v1A * v2A);
     auto dotB = static_cast<CriterionValueType>(v1B * v2B);

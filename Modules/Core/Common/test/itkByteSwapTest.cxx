@@ -27,20 +27,20 @@ itkByteSwapTest(int, char *[])
 
   std::cout << "Starting test" << std::endl;
 
-  unsigned char      uc = 'a';
-  unsigned char      uc1 = 'a';
-  unsigned short     us = 1;
-  unsigned short     us1 = 1;
-  unsigned int       ui = 1;
-  unsigned int       ui1 = 1;
-  unsigned long      ul = 1;
-  unsigned long      ul1 = 1;
-  unsigned long long ull = 1;
-  unsigned long long ull1 = 1;
-  float              f = 1.0;
-  float              f1 = 1.0;
-  double             d = 1.0;
-  double             d1 = 1.0;
+  unsigned char            uc = 'a';
+  unsigned char const      uc1 = 'a';
+  unsigned short           us = 1;
+  unsigned short const     us1 = 1;
+  unsigned int             ui = 1;
+  unsigned int const       ui1 = 1;
+  unsigned long            ul = 1;
+  unsigned long const      ul1 = 1;
+  unsigned long long       ull = 1;
+  unsigned long long const ull1 = 1;
+  float                    f = 1.0;
+  float const              f1 = 1.0;
+  double                   d = 1.0;
+  double const             d1 = 1.0;
 
 
   // Try to swap a char

@@ -28,7 +28,7 @@ ImageToMeshFilter<TInputImage, TOutputMesh>::ImageToMeshFilter()
 {
   this->ProcessObject::SetNumberOfRequiredInputs(1);
 
-  OutputMeshPointer output = dynamic_cast<OutputMeshType *>(this->MakeOutput(0).GetPointer());
+  OutputMeshPointer const output = dynamic_cast<OutputMeshType *>(this->MakeOutput(0).GetPointer());
 
   this->ProcessObject::SetNumberOfRequiredOutputs(1);
   this->ProcessObject::SetNthOutput(0, output.GetPointer());
@@ -40,7 +40,7 @@ ImageToMeshFilter<TInputImage, TOutputMesh>::ImageToMeshFilter()
 template <typename TInputImage, typename TOutputMesh>
 DataObject::Pointer ImageToMeshFilter<TInputImage, TOutputMesh>::MakeOutput(DataObjectPointerArraySizeType)
 {
-  OutputMeshPointer outputMesh = OutputMeshType::New();
+  OutputMeshPointer const outputMesh = OutputMeshType::New();
 
   return dynamic_cast<DataObject *>(outputMesh.GetPointer());
 }

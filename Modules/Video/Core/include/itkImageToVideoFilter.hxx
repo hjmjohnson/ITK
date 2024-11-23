@@ -98,7 +98,7 @@ ImageToVideoFilter<TInputImage, TOutputVideoStream>::GenerateOutputInformation()
   const InputImageType * input = this->GetInput();
 
   // Get first input frame's largest possible spatial region
-  InputImageRegionType                 inputRegion = input->GetLargestPossibleRegion();
+  InputImageRegionType const           inputRegion = input->GetLargestPossibleRegion();
   typename InputImageType::SizeType    inputSize = inputRegion.GetSize();
   typename InputImageType::IndexType   inputIndex = inputRegion.GetIndex();
   typename InputImageType::SpacingType inputSpacing = input->GetSpacing();
@@ -116,8 +116,8 @@ ImageToVideoFilter<TInputImage, TOutputVideoStream>::GenerateOutputInformation()
     static_cast<RealTimeInterval::SecondsDifferenceType>(inputOrigin[m_FrameAxis]),
     static_cast<RealTimeInterval::MicroSecondsDifferenceType>(std::fmod(inputOrigin[m_FrameAxis], 1) * 1e6));
 
-  auto             realDurationRaw = inputSpacing[m_FrameAxis] * inputSize[m_FrameAxis];
-  RealTimeInterval realDuration(
+  auto                   realDurationRaw = inputSpacing[m_FrameAxis] * inputSize[m_FrameAxis];
+  RealTimeInterval const realDuration(
     static_cast<RealTimeInterval::SecondsDifferenceType>(realDurationRaw),
     static_cast<RealTimeInterval::MicroSecondsDifferenceType>(std::fmod(realDurationRaw, 1) * 1e6));
 
@@ -134,8 +134,8 @@ ImageToVideoFilter<TInputImage, TOutputVideoStream>::GenerateOutputInformation()
   {
     if (inputIdx != m_FrameAxis)
     {
-      SizeValueType  axisSize = inputSize[inputIdx];
-      IndexValueType axisStart = inputIndex[inputIdx];
+      SizeValueType const  axisSize = inputSize[inputIdx];
+      IndexValueType const axisStart = inputIndex[inputIdx];
       outputSpatialRegion.SetSize(outputIdx, axisSize);
       outputSpatialRegion.SetIndex(outputIdx, axisStart);
       ++outputIdx;
@@ -221,12 +221,12 @@ ImageToVideoFilter<TInputImage, TOutputVideoStream>::GenerateOutputRequestedRegi
 
   // Go through the requested temporal region and for any frame that doesn't
   // have a requested spatial region, set it to the largest possible
-  SizeValueType outFrameStart = vsOutput->GetRequestedTemporalRegion().GetFrameStart();
-  SizeValueType outFrameDuration = vsOutput->GetRequestedTemporalRegion().GetFrameDuration();
+  SizeValueType const outFrameStart = vsOutput->GetRequestedTemporalRegion().GetFrameStart();
+  SizeValueType const outFrameDuration = vsOutput->GetRequestedTemporalRegion().GetFrameDuration();
   for (SizeValueType i = outFrameStart; i < outFrameStart + outFrameDuration; ++i)
   {
     // Get the requested spatial region for this frame
-    OutputFrameSpatialRegionType spatialRegion = vsOutput->GetFrameRequestedSpatialRegion(i);
+    OutputFrameSpatialRegionType const spatialRegion = vsOutput->GetFrameRequestedSpatialRegion(i);
 
     // Check if the region has 0 size for all dimensions
     bool validRegion = false;
@@ -262,13 +262,13 @@ ImageToVideoFilter<TInputImage, TOutputVideoStream>::GenerateData()
   this->AllocateOutputs();
 
   // Set each frame in output to an image slice in the input image
-  InputImageType *     input = this->GetInput();
-  InputImageRegionType inputRegion = input->GetLargestPossibleRegion();
+  InputImageType *           input = this->GetInput();
+  InputImageRegionType const inputRegion = input->GetLargestPossibleRegion();
 
   // Graft input image slices onto output frames
   OutputVideoStreamType * output = this->GetOutput();
-  SizeValueType           outputStartFrame = output->GetRequestedTemporalRegion().GetFrameStart();
-  SizeValueType           outputDuration = output->GetRequestedTemporalRegion().GetFrameDuration();
+  SizeValueType const     outputStartFrame = output->GetRequestedTemporalRegion().GetFrameStart();
+  SizeValueType const     outputDuration = output->GetRequestedTemporalRegion().GetFrameDuration();
   for (auto idx = outputStartFrame; idx < outputStartFrame + outputDuration; idx++)
   {
     InputImageRegionType inputSliceRegion = inputRegion;

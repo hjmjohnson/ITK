@@ -58,8 +58,8 @@ itkMatrixIndexSelectionImageFilterTest(int argc, char * argv[])
 
   size = region.GetSize();
   index = region.GetIndex();
-  unsigned int width = size[0];
-  unsigned int height = size[1];
+  unsigned int const width = size[0];
+  unsigned int const height = size[1];
 
   size[0] = width;
   size[1] = height / 2;
@@ -114,8 +114,8 @@ itkMatrixIndexSelectionImageFilterTest(int argc, char * argv[])
 
   filter->SetInput(image);
 
-  unsigned int indexA = 0;
-  unsigned int indexB = 1;
+  unsigned int const indexA = 0;
+  unsigned int const indexB = 1;
   filter->SetIndices(indexA, indexB);
 
   unsigned int testIndexA;

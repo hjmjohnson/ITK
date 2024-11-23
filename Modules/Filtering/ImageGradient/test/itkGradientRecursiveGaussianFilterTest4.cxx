@@ -33,9 +33,9 @@ itkGradientRecursiveGaussianFilterTest4(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  std::string inFileName = argv[1];
+  std::string const inFileName = argv[1];
 
-  std::string outFileName = argv[2];
+  std::string const outFileName = argv[2];
 
   // Define the dimension of the images
   constexpr unsigned int myDimension = 2;

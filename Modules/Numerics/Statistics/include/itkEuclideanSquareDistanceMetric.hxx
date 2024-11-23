@@ -27,7 +27,7 @@ template <typename TVector>
 inline double
 EuclideanSquareDistanceMetric<TVector>::Evaluate(const MeasurementVectorType & x) const
 {
-  MeasurementVectorSizeType measurementVectorSize = this->GetMeasurementVectorSize();
+  MeasurementVectorSizeType const measurementVectorSize = this->GetMeasurementVectorSize();
 
   if (measurementVectorSize == 0)
   {
@@ -55,7 +55,7 @@ inline double
 EuclideanSquareDistanceMetric<TVector>::Evaluate(const MeasurementVectorType & x1,
                                                  const MeasurementVectorType & x2) const
 {
-  MeasurementVectorSizeType measurementVectorSize = NumericTraits<MeasurementVectorType>::GetLength(x1);
+  MeasurementVectorSizeType const measurementVectorSize = NumericTraits<MeasurementVectorType>::GetLength(x1);
 
   if (measurementVectorSize != NumericTraits<MeasurementVectorType>::GetLength(x2))
   {

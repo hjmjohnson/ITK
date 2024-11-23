@@ -47,12 +47,12 @@ NoiseImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   ImageRegionIterator<OutputImageType>      it;
 
   // Allocate output
-  typename OutputImageType::Pointer     output = this->GetOutput();
-  typename InputImageType::ConstPointer input = this->GetInput();
+  typename OutputImageType::Pointer const     output = this->GetOutput();
+  typename InputImageType::ConstPointer const input = this->GetInput();
 
   // Find the data-set boundary "faces"
-  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                        bC;
-  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType faceList =
+  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                              bC;
+  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType const faceList =
     bC(input, outputRegionForThread, this->GetRadius());
 
   TotalProgressReporter progress(this, output->GetRequestedRegion().GetNumberOfPixels());
@@ -68,7 +68,7 @@ NoiseImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   for (const auto & face : faceList)
   {
     bit = ConstNeighborhoodIterator<InputImageType>(this->GetRadius(), input, face);
-    unsigned int neighborhoodSize = bit.Size();
+    unsigned int const neighborhoodSize = bit.Size();
     num = static_cast<InputRealType>(bit.Size());
 
     it = ImageRegionIterator<OutputImageType>(output, face);

@@ -289,7 +289,7 @@ protected:
   void
   VerifyTargetReachedModeConditions(unsigned int targetModeMinPoints = 1) const
   {
-    bool targetPointsExist = this->IsTargetPointsExistenceConditionSatisfied();
+    bool const targetPointsExist = this->IsTargetPointsExistenceConditionSatisfied();
 
     if (!targetPointsExist)
     {
@@ -297,7 +297,7 @@ protected:
     }
     else
     {
-      SizeValueType availableNumberOfTargets = m_TargetPoints->Size();
+      SizeValueType const availableNumberOfTargets = m_TargetPoints->Size();
       if (targetModeMinPoints > availableNumberOfTargets)
       {
         itkExceptionMacro("Not enough target points: Available: " << availableNumberOfTargets

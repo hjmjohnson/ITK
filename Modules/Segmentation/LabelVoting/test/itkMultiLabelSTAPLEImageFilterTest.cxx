@@ -60,9 +60,9 @@ itkMultiLabelSTAPLEImageFilterTest(int, char *[])
   using ImageTypePointer = ImageType::Pointer;
 
   // Create two images
-  ImageTypePointer inputImageA = ImageType::New();
-  ImageTypePointer inputImageB = ImageType::New();
-  ImageTypePointer inputImageC = ImageType::New();
+  ImageTypePointer const inputImageA = ImageType::New();
+  ImageTypePointer const inputImageB = ImageType::New();
+  ImageTypePointer const inputImageC = ImageType::New();
 
   RegionType region;
   {
@@ -113,12 +113,12 @@ itkMultiLabelSTAPLEImageFilterTest(int, char *[])
   }
 
   // Create an LabelVoting Filter
-  FilterTypePointer filter = FilterType::New();
+  FilterTypePointer const filter = FilterType::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, MultiLabelSTAPLEImageFilter, ImageToImageFilter);
 
   // Get the Smart Pointer to the Filter Output
-  ImageTypePointer outputImage = filter->GetOutput();
+  ImageTypePointer const outputImage = filter->GetOutput();
 
   // Test first two input images with undecided label set to 255
 
@@ -128,7 +128,7 @@ itkMultiLabelSTAPLEImageFilterTest(int, char *[])
 
   ITK_TEST_EXPECT_TRUE(!filter->GetHasMaximumNumberOfIterations());
 
-  unsigned int maximumNumberOfIterations = 100;
+  unsigned int const maximumNumberOfIterations = 100;
   filter->SetMaximumNumberOfIterations(maximumNumberOfIterations);
   ITK_TEST_SET_GET_VALUE(maximumNumberOfIterations, filter->GetMaximumNumberOfIterations());
 
@@ -138,12 +138,12 @@ itkMultiLabelSTAPLEImageFilterTest(int, char *[])
 
   filter->UnsetMaximumNumberOfIterations();
 
-  typename FilterType::WeightsType terminationUpdateThreshold = 1e-5;
+  typename FilterType::WeightsType const terminationUpdateThreshold = 1e-5;
   filter->SetTerminationUpdateThreshold(terminationUpdateThreshold);
   ITK_TEST_SET_GET_VALUE(terminationUpdateThreshold, filter->GetTerminationUpdateThreshold());
 
   // Set label for undecided pixels
-  typename FilterType::OutputPixelType labelForUndecidedPixels = 255;
+  typename FilterType::OutputPixelType const labelForUndecidedPixels = 255;
   filter->SetLabelForUndecidedPixels(labelForUndecidedPixels);
   ITK_TEST_SET_GET_VALUE(labelForUndecidedPixels, filter->GetLabelForUndecidedPixels());
 
@@ -151,8 +151,8 @@ itkMultiLabelSTAPLEImageFilterTest(int, char *[])
 
   ITK_TEST_EXPECT_TRUE(!filter->GetHasPriorProbabilities());
 
-  typename FilterType::PriorProbabilitiesType::ValueType priorProbabilitiesVal(0.0);
-  typename FilterType::PriorProbabilitiesType            priorProbabilities(1);
+  typename FilterType::PriorProbabilitiesType::ValueType const priorProbabilitiesVal(0.0);
+  typename FilterType::PriorProbabilitiesType                  priorProbabilities(1);
   priorProbabilities.Fill(priorProbabilitiesVal);
   filter->SetPriorProbabilities(priorProbabilities);
   ITK_TEST_SET_GET_VALUE(priorProbabilities, filter->GetPriorProbabilities());

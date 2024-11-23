@@ -60,7 +60,7 @@ itkMembershipSampleTest3(int, char *[])
   membershipSample->Print(std::cout);
 
   // Add measurement vectors to the list sample
-  unsigned int          sampleSize = 10;
+  unsigned int const    sampleSize = 10;
   MeasurementVectorType mv;
   itk::NumericTraits<MeasurementVectorType>::SetLength(mv, MeasurementVectorSize);
 
@@ -77,8 +77,8 @@ itkMembershipSampleTest3(int, char *[])
   }
 
   // Add instances to the membership sample
-  SampleType::ConstIterator begin = sample->Begin();
-  SampleType::ConstIterator end = sample->End();
+  SampleType::ConstIterator const begin = sample->Begin();
+  SampleType::ConstIterator const end = sample->End();
 
   SampleType::ConstIterator iter = begin;
 
@@ -92,7 +92,7 @@ itkMembershipSampleTest3(int, char *[])
     {
       classLabel = 1;
     }
-    SampleType::InstanceIdentifier id = iter.GetInstanceIdentifier();
+    SampleType::InstanceIdentifier const id = iter.GetInstanceIdentifier();
     membershipSample->AddInstance(classLabel, id);
     ++iter;
     ++sampleCounter;
@@ -108,7 +108,7 @@ itkMembershipSampleTest3(int, char *[])
 
     IteratorType s_iter = membershipSample->Begin();
 
-    IteratorType bs_iter(s_iter);
+    IteratorType const bs_iter(s_iter);
     if (bs_iter != s_iter)
     {
       std::cerr << "Iterator::Copy Constructor failed" << std::endl;
@@ -183,7 +183,7 @@ itkMembershipSampleTest3(int, char *[])
     ConstIteratorType s_iter = membershipSample->Begin();
 
     // copy constructor
-    ConstIteratorType bs_iter(s_iter);
+    ConstIteratorType const bs_iter(s_iter);
     if (bs_iter != s_iter)
     {
       std::cerr << "Iterator::Copy Constructor (from const) failed" << std::endl;
@@ -200,8 +200,8 @@ itkMembershipSampleTest3(int, char *[])
     }
 
     // copy from non-const iterator
-    MembershipSampleType::Iterator      nonconst_iter = membershipSample->Begin();
-    MembershipSampleType::ConstIterator s2_iter(nonconst_iter);
+    MembershipSampleType::Iterator const nonconst_iter = membershipSample->Begin();
+    MembershipSampleType::ConstIterator  s2_iter(nonconst_iter);
     if (s2_iter != s_iter)
     {
       std::cerr << "Iterator::Copy Constructor (from non-const) failed" << std::endl;

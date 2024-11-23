@@ -70,8 +70,8 @@ itkCorrelationCoefficientHistogramImageToImageMetricTest(int, char *[])
     movingImageSource->Update(); // Force the filter to run
     fixedImageSource->Update();  // Force the filter to run
 
-    MovingImageType::Pointer movingImage = movingImageSource->GetOutput();
-    FixedImageType::Pointer  fixedImage = fixedImageSource->GetOutput();
+    MovingImageType::Pointer const movingImage = movingImageSource->GetOutput();
+    FixedImageType::Pointer const  fixedImage = fixedImageSource->GetOutput();
 
     // Set up the metric.
     using MetricType = itk::CorrelationCoefficientHistogramImageToImageMetric<FixedImageType, MovingImageType>;
@@ -81,7 +81,7 @@ itkCorrelationCoefficientHistogramImageToImageMetricTest(int, char *[])
 
     auto metric = MetricType::New();
 
-    unsigned int                        nBins = 256;
+    unsigned int const                  nBins = 256;
     MetricType::HistogramType::SizeType histSize;
     histSize.SetSize(2);
     histSize[0] = nBins;
@@ -130,8 +130,8 @@ itkCorrelationCoefficientHistogramImageToImageMetricTest(int, char *[])
     metric->Initialize();
 
     // Print out metric value and derivative.
-    MetricType::MeasureType    measure = metric->GetValue(parameters);
-    MetricType::DerivativeType derivative;
+    MetricType::MeasureType const measure = metric->GetValue(parameters);
+    MetricType::DerivativeType    derivative;
     metric->GetDerivative(parameters, derivative);
 
     std::cout << "Metric value = " << measure << std::endl << "Derivative = " << derivative << std::endl;

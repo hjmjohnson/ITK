@@ -65,15 +65,15 @@ itkBinaryImageToLabelMapFilterTest(int argc, char * argv[])
   auto fullyConnected = static_cast<bool>(std::stoi(argv[3]));
   ITK_TEST_SET_GET_BOOLEAN(imageToLabel, FullyConnected, fullyConnected);
 
-  typename ImageToLabelType::InputPixelType inputForegroundValue = std::stoi(argv[4]);
+  typename ImageToLabelType::InputPixelType const inputForegroundValue = std::stoi(argv[4]);
   imageToLabel->SetInputForegroundValue(inputForegroundValue);
   ITK_TEST_SET_GET_VALUE(inputForegroundValue, imageToLabel->GetInputForegroundValue());
 
-  typename ImageToLabelType::OutputPixelType outputBackgroundValue = std::stoi(argv[5]);
+  typename ImageToLabelType::OutputPixelType const outputBackgroundValue = std::stoi(argv[5]);
   imageToLabel->SetOutputBackgroundValue(outputBackgroundValue);
   ITK_TEST_SET_GET_VALUE(outputBackgroundValue, imageToLabel->GetOutputBackgroundValue());
 
-  itk::SimpleFilterWatcher watcher(imageToLabel);
+  itk::SimpleFilterWatcher const watcher(imageToLabel);
 
   using LabelToImageType = itk::LabelMapToLabelImageFilter<LabelMapType, ImageType>;
   auto labelToImage = LabelToImageType::New();
@@ -89,7 +89,7 @@ itkBinaryImageToLabelMapFilterTest(int argc, char * argv[])
   labelToImage->SetInput(imageToLabel->GetOutput());
   writer->SetInput(labelToImage->GetOutput());
 
-  bool expectfailure = std::stoi(argv[6]);
+  bool const expectfailure = std::stoi(argv[6]);
 
   if (expectfailure)
   {

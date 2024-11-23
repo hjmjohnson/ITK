@@ -40,13 +40,13 @@ ThinPlateSplineKernelTransform<TParametersValueType, VDimension>::ComputeDeforma
   const InputPointType & thisPoint,
   OutputPointType &      result) const
 {
-  unsigned long numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
+  unsigned long const numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
 
   PointsIterator sp = this->m_SourceLandmarks->GetPoints()->Begin();
 
   for (unsigned int lnd = 0; lnd < numberOfLandmarks; ++lnd)
   {
-    InputVectorType            position = thisPoint - sp->Value();
+    InputVectorType const      position = thisPoint - sp->Value();
     const TParametersValueType r = position.GetNorm();
 
     for (unsigned int odim = 0; odim < VDimension; ++odim)

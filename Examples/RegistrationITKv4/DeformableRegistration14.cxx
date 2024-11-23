@@ -161,18 +161,20 @@ main(int argc, char * argv[])
   fixedImageReader->SetFileName(argv[1]);
   movingImageReader->SetFileName(argv[2]);
 
-  FixedImageType::ConstPointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::ConstPointer const fixedImage =
+    fixedImageReader->GetOutput();
 
   registration->SetFixedImage(fixedImage);
   registration->SetMovingImage(movingImageReader->GetOutput());
 
   fixedImageReader->Update();
 
-  FixedImageType::RegionType fixedRegion = fixedImage->GetBufferedRegion();
+  FixedImageType::RegionType const fixedRegion =
+    fixedImage->GetBufferedRegion();
 
   registration->SetFixedImageRegion(fixedRegion);
 
-  unsigned int numberOfGridNodesInOneDimension = 5;
+  unsigned int const numberOfGridNodesInOneDimension = 5;
 
   // Software Guide : BeginCodeSnippet
 
@@ -301,7 +303,7 @@ main(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  OptimizerType::ParametersType finalParameters =
+  OptimizerType::ParametersType const finalParameters =
     registration->GetLastTransformParameters();
 
   // Report the time and memory taken by the registration

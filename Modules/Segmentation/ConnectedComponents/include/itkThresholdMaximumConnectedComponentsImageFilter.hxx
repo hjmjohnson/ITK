@@ -88,7 +88,7 @@ ThresholdMaximumConnectedComponentsImageFilter<TInputImage, TOutputImage>::Gener
   //
   //  Setup pointers to get input image and send info to output image
   //
-  typename Superclass::InputImageConstPointer inputPtr = this->GetInput();
+  typename Superclass::InputImageConstPointer const inputPtr = this->GetInput();
 
   // Find the min and max of the image.
   m_MinMaxCalculator->SetImage(this->GetInput());

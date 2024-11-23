@@ -90,7 +90,7 @@ itkFFTConvolutionImageFilterTest(int argc, char * argv[])
   using ChangeInformationFilterType = itk::ChangeInformationImageFilter<ImageType>;
   auto inputChanger = ChangeInformationFilterType::New();
   inputChanger->ChangeRegionOn();
-  ImageType::OffsetType inputOffset = { { -2, 3 } };
+  ImageType::OffsetType const inputOffset = { { -2, 3 } };
   inputChanger->SetOutputOffset(inputOffset);
   inputChanger->SetInput(reader1->GetOutput());
 
@@ -99,7 +99,7 @@ itkFFTConvolutionImageFilterTest(int argc, char * argv[])
   // Test generality of filter by changing the kernel index
   auto kernelChanger = ChangeInformationFilterType::New();
   kernelChanger->ChangeRegionOn();
-  ImageType::OffsetType kernelOffset = { { 3, -5 } };
+  ImageType::OffsetType const kernelOffset = { { 3, -5 } };
   kernelChanger->SetOutputOffset(kernelOffset);
   kernelChanger->SetInput(reader2->GetOutput());
 
@@ -107,7 +107,7 @@ itkFFTConvolutionImageFilterTest(int argc, char * argv[])
 
   if (argc >= 5)
   {
-    ConvolutionFilterType::SizeValueType sizeGreatestPrimeFactor = std::stoi(argv[4]);
+    ConvolutionFilterType::SizeValueType const sizeGreatestPrimeFactor = std::stoi(argv[4]);
     if (!itk::Math::IsPrime(sizeGreatestPrimeFactor))
     {
       std::cerr << "A prime number is expected for the greatest prime factor size!" << std::endl;
@@ -137,7 +137,7 @@ itkFFTConvolutionImageFilterTest(int argc, char * argv[])
 
   if (argc >= 7)
   {
-    std::string outputRegionMode(argv[6]);
+    std::string const outputRegionMode(argv[6]);
     if (outputRegionMode == "SAME")
     {
       convoluter->SetOutputRegionMode(itk::ConvolutionImageFilterBaseEnums::ConvolutionImageFilterOutputRegion::SAME);
@@ -175,7 +175,7 @@ itkFFTConvolutionImageFilterTest(int argc, char * argv[])
   itk::ZeroFluxNeumannBoundaryCondition<ImageType> zeroFluxNeumannBoundaryCondition;
   if (argc >= 7)
   {
-    std::string boundaryCondition(argv[7]);
+    std::string const boundaryCondition(argv[7]);
     if (boundaryCondition == "CONSTANT")
     {
       convoluter->SetBoundaryCondition(&constantBoundaryCondition);
@@ -199,7 +199,7 @@ itkFFTConvolutionImageFilterTest(int argc, char * argv[])
     }
   }
 
-  itk::SimpleFilterWatcher watcher(convoluter, "filter");
+  itk::SimpleFilterWatcher const watcher(convoluter, "filter");
 
   ITK_TRY_EXPECT_NO_EXCEPTION(convoluter->Update());
 
@@ -226,9 +226,9 @@ itkFFTConvolutionImageFilterTest(int argc, char * argv[])
   ITK_TRY_EXPECT_EXCEPTION(convoluter->Update());
 
   // Test for invalid request region.
-  auto                  invalidIndex = ImageType::IndexType::Filled(1000);
-  auto                  invalidSize = ImageType::SizeType::Filled(1000);
-  ImageType::RegionType invalidRequestRegion(invalidIndex, invalidSize);
+  auto                        invalidIndex = ImageType::IndexType::Filled(1000);
+  auto                        invalidSize = ImageType::SizeType::Filled(1000);
+  ImageType::RegionType const invalidRequestRegion(invalidIndex, invalidSize);
   convoluter->GetOutput()->SetRequestedRegion(invalidRequestRegion);
 
   ITK_TRY_EXPECT_EXCEPTION(convoluter->Update());

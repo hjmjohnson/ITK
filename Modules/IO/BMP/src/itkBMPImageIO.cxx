@@ -56,7 +56,7 @@ bool
 BMPImageIO::CanReadFile(const char * filename)
 {
   // First check the filename
-  std::string fname = filename;
+  std::string const fname = filename;
 
   if (fname.empty())
   {
@@ -64,7 +64,7 @@ BMPImageIO::CanReadFile(const char * filename)
   }
 
 
-  bool extensionFound = this->HasSupportedReadExtension(filename, false);
+  bool const extensionFound = this->HasSupportedReadExtension(filename, false);
 
   if (!extensionFound)
   {
@@ -99,7 +99,7 @@ BMPImageIO::CanReadFile(const char * filename)
   int  itmp;      // in case we are on a 64bit machine
 
   // get the size of the file
-  ::size_t sizeLong = sizeof(long);
+  ::size_t const sizeLong = sizeof(long);
   if (sizeLong == 4)
   {
     inputStream.read((char *)&tmp, 4);
@@ -150,14 +150,14 @@ BMPImageIO::CanReadFile(const char * filename)
 bool
 BMPImageIO::CanWriteFile(const char * name)
 {
-  std::string filename = name;
+  std::string const filename = name;
 
   if (filename.empty())
   {
     itkDebugMacro("No filename specified.");
   }
 
-  bool extensionFound = this->HasSupportedWriteExtension(name, false);
+  bool const extensionFound = this->HasSupportedWriteExtension(name, false);
 
   if (!extensionFound)
   {
@@ -190,9 +190,9 @@ BMPImageIO::Read(void * buffer)
     SizeValueType line = m_Dimensions[1] - 1;
     for (unsigned int i = 0; i < m_BMPDataSize; ++i)
     {
-      unsigned char byte1 = value[i];
+      unsigned char const byte1 = value[i];
       ++i;
-      unsigned char byte2 = value[i];
+      unsigned char const byte2 = value[i];
       if (byte1 == 0)
       {
         if (byte2 == 0)
@@ -211,9 +211,9 @@ BMPImageIO::Read(void * buffer)
         {
           // Delta
           ++i;
-          unsigned char dx = value[i];
+          unsigned char const dx = value[i];
           ++i;
-          unsigned char dy = value[i];
+          unsigned char const dy = value[i];
           posLine += dx;
           line -= dy;
           continue;
@@ -226,7 +226,7 @@ BMPImageIO::Read(void * buffer)
             for (unsigned long j = 0; j < byte2; ++j)
             {
               ++i;
-              RGBPixelType rgb = this->GetColorPaletteEntry(value[i]);
+              RGBPixelType const rgb = this->GetColorPaletteEntry(value[i]);
               l = 3 * (line * m_Dimensions[0] + posLine);
               p[l] = rgb.GetBlue();
               p[l + 1] = rgb.GetGreen();
@@ -256,7 +256,7 @@ BMPImageIO::Read(void * buffer)
         // Encoded run
         if (!this->GetIsReadAsScalarPlusPalette())
         {
-          RGBPixelType rgb = this->GetColorPaletteEntry(byte2);
+          RGBPixelType const rgb = this->GetColorPaletteEntry(byte2);
           for (unsigned long j = 0; j < byte1; ++j)
           {
             l = 3 * (line * m_Dimensions[0] + posLine);
@@ -282,9 +282,9 @@ BMPImageIO::Read(void * buffer)
   {
     // File is not compressed
     // Read one row at a time
-    long          streamRead = m_Dimensions[0] * m_Depth / 8;
-    long          paddedStreamRead = streamRead;
-    unsigned long step = this->GetNumberOfComponents();
+    long const          streamRead = m_Dimensions[0] * m_Depth / 8;
+    long                paddedStreamRead = streamRead;
+    unsigned long const step = this->GetNumberOfComponents();
     if (streamRead % 4)
     {
       paddedStreamRead = ((streamRead / 4) + 1) * 4;
@@ -323,7 +323,7 @@ BMPImageIO::Read(void * buffer)
           }
           else
           {
-            RGBPixelType rgb = this->GetColorPaletteEntry(value[i]);
+            RGBPixelType const rgb = this->GetColorPaletteEntry(value[i]);
             p[l++] = rgb.GetBlue();
             p[l++] = rgb.GetGreen();
             p[l++] = rgb.GetRed();
@@ -365,7 +365,7 @@ BMPImageIO::ReadImageInformation()
   }
 
   // get the size of the file
-  ::size_t sizeLong = sizeof(long);
+  ::size_t const sizeLong = sizeof(long);
   if (sizeLong == 4)
   {
     m_Ifstream.read((char *)&tmp, 4);
@@ -702,7 +702,7 @@ BMPImageIO::WriteImageInformation()
 void
 BMPImageIO::Write(const void * buffer)
 {
-  unsigned int nDims = this->GetNumberOfDimensions();
+  unsigned int const nDims = this->GetNumberOfDimensions();
 
   if (nDims != 2)
   {
@@ -856,7 +856,7 @@ BMPImageIO::Write(const void * buffer)
   {
     for (unsigned int n = 0; n < 256; ++n)
     {
-      char tmp2 = static_cast<unsigned char>(n);
+      char const tmp2 = static_cast<unsigned char>(n);
       m_Ofstream.write(&tmp2, sizeof(char));
       m_Ofstream.write(&tmp2, sizeof(char));
       m_Ofstream.write(&tmp2, sizeof(char));

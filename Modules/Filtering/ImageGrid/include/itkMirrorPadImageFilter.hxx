@@ -150,8 +150,8 @@ template <typename TInputImage, typename TOutputImage>
 int
 MirrorPadImageFilter<TInputImage, TOutputImage>::FindRegionsInArea(long start, long end, long size, long offset)
 {
-  int  result = 1;
-  long regionsize = end - start;
+  int        result = 1;
+  long const regionsize = end - start;
   if (regionsize > 0) // Find out home many regions we have,
   {
     result = regionsize / size;
@@ -470,8 +470,8 @@ MirrorPadImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   // Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  typename Superclass::InputImagePointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  typename Superclass::OutputImagePointer outputPtr = this->GetOutput();
+  typename Superclass::InputImagePointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  typename Superclass::OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {

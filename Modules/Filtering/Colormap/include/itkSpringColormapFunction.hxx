@@ -28,14 +28,14 @@ auto
 SpringColormapFunction<TScalar, TRGBPixel>::operator()(const TScalar & v) const -> RGBPixelType
 {
   // Map the input scalar between [0, 1].
-  RealType value = this->RescaleInputValue(v);
+  RealType const value = this->RescaleInputValue(v);
 
   // Apply the color mapping.
-  RealType red = 1.0;
+  RealType const red = 1.0;
 
-  RealType green = value;
+  RealType const green = value;
 
-  RealType blue = 1.0 - value;
+  RealType const blue = 1.0 - value;
 
   // Set the rgb components after rescaling the values.
   RGBPixelType pixel;

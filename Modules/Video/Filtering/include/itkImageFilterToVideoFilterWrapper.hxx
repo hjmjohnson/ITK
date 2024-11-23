@@ -59,11 +59,11 @@ ImageFilterToVideoFilterWrapper<TImageToImageFilter>::TemporalStreamingGenerateD
   OutputVideoStreamType *      output = this->GetOutput();
 
   // Get input and output frame numbers
-  typename OutputVideoStreamType::TemporalRegionType outReqTempRegion = output->GetRequestedTemporalRegion();
-  SizeValueType                                      outFrameNum = outReqTempRegion.GetFrameStart();
+  typename OutputVideoStreamType::TemporalRegionType const outReqTempRegion = output->GetRequestedTemporalRegion();
+  SizeValueType const                                      outFrameNum = outReqTempRegion.GetFrameStart();
 
-  typename InputVideoStreamType::TemporalRegionType inReqTempRegion = input->GetRequestedTemporalRegion();
-  SizeValueType                                     inFrameNum = inReqTempRegion.GetFrameStart();
+  typename InputVideoStreamType::TemporalRegionType const inReqTempRegion = input->GetRequestedTemporalRegion();
+  SizeValueType const                                     inFrameNum = inReqTempRegion.GetFrameStart();
 
   // Set up the internal image pipeline
   m_ImageFilter->SetInput(input->GetFrame(inFrameNum));

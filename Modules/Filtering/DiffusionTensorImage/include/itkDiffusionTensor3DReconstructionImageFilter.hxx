@@ -75,7 +75,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
       m_GradientImageTypeEnumeration !=
         DiffusionTensor3DReconstructionImageFilterEnums::GradientImageFormat::GradientIsInASingleImage)
   {
-    std::string gradientImageClassName(this->ProcessObject::GetInput(0)->GetNameOfClass());
+    std::string const gradientImageClassName(this->ProcessObject::GetInput(0)->GetNameOfClass());
     if (strcmp(gradientImageClassName.c_str(), "VectorImage") != 0)
     {
       itkExceptionMacro("There is only one Gradient image. I expect that to be a VectorImage. "
@@ -91,25 +91,25 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
   {
     return;
   }
-  typename ImageMaskSpatialObject<3>::Pointer maskSpatialObject =
+  typename ImageMaskSpatialObject<3>::Pointer const maskSpatialObject =
     dynamic_cast<ImageMaskSpatialObject<3> *>(this->ProcessObject::GetInput(1));
   if (maskSpatialObject.IsNull())
   {
     return; // not a mask image
   }
-  typename MaskImageType::ConstPointer maskImage = maskSpatialObject->GetImage();
+  typename MaskImageType::ConstPointer const maskImage = maskSpatialObject->GetImage();
 
-  typename MaskImageType::SizeType maskSize = maskImage->GetLargestPossibleRegion().GetSize();
-  typename MaskImageType::SizeType refSize;
+  typename MaskImageType::SizeType const maskSize = maskImage->GetLargestPossibleRegion().GetSize();
+  typename MaskImageType::SizeType       refSize;
 
-  typename MaskImageType::PointType maskOrigin = maskImage->GetOrigin();
-  typename MaskImageType::PointType refOrigin;
+  typename MaskImageType::PointType const maskOrigin = maskImage->GetOrigin();
+  typename MaskImageType::PointType       refOrigin;
 
-  typename MaskImageType::SpacingType maskSpacing = maskImage->GetSpacing();
-  typename MaskImageType::SpacingType refSpacing;
+  typename MaskImageType::SpacingType const maskSpacing = maskImage->GetSpacing();
+  typename MaskImageType::SpacingType       refSpacing;
 
-  typename MaskImageType::DirectionType maskDirection = maskImage->GetDirection();
-  typename MaskImageType::DirectionType refDirection;
+  typename MaskImageType::DirectionType const maskDirection = maskImage->GetDirection();
+  typename MaskImageType::DirectionType       refDirection;
 
   if (m_GradientImageTypeEnumeration ==
       DiffusionTensor3DReconstructionImageFilterEnums::GradientImageFormat::GradientIsInManyImages)
@@ -169,7 +169,8 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
                                            TMaskImageType>::DynamicThreadedGenerateData(const OutputImageRegionType &
                                                                                           outputRegionForThread)
 {
-  typename OutputImageType::Pointer outputImage = static_cast<OutputImageType *>(this->ProcessObject::GetOutput(0));
+  typename OutputImageType::Pointer const outputImage =
+    static_cast<OutputImageType *>(this->ProcessObject::GetOutput(0));
 
   ImageRegionIterator<OutputImageType> oit(outputImage, outputRegionForThread);
 
@@ -182,7 +183,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
   {
     maskSpatialObject = static_cast<MaskSpatialObjectType *>(this->ProcessObject::GetInput(1));
   }
-  bool useMask(maskSpatialObject.IsNotNull());
+  bool const useMask(maskSpatialObject.IsNotNull());
 
   // Two cases here .
   // 1. If the Gradients have been specified in multiple images, we will create
@@ -196,7 +197,8 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
   if (m_GradientImageTypeEnumeration ==
       DiffusionTensor3DReconstructionImageFilterEnums::GradientImageFormat::GradientIsInManyImages)
   {
-    typename ReferenceImageType::Pointer refImage = static_cast<ReferenceImageType *>(this->ProcessObject::GetInput(0));
+    typename ReferenceImageType::Pointer const refImage =
+      static_cast<ReferenceImageType *>(this->ProcessObject::GetInput(0));
     ImageRegionConstIteratorWithIndex<ReferenceImageType> it(refImage, outputRegionForThread);
     it.GoToBegin();
 
@@ -206,7 +208,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
     for (unsigned int i = 1; i <= m_NumberOfGradientDirections; ++i)
     {
 
-      typename GradientImageType::Pointer gradientImagePointer =
+      typename GradientImageType::Pointer const gradientImagePointer =
         dynamic_cast<GradientImageType *>(this->ProcessObject::GetInput(i + 1));
       if (gradientImagePointer.IsNull())
       {
@@ -227,7 +229,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
     while (!it.IsAtEnd())
     {
 
-      ReferencePixelType b0 = it.Get();
+      ReferencePixelType const b0 = it.Get();
 
       TensorPixelType tensor(0.0);
 
@@ -238,8 +240,8 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
       bool unmaskedPixel(true);
       if (useMask)
       {
-        typename ImageRegionConstIteratorWithIndex<ReferenceImageType>::IndexType index = it.GetIndex();
-        typename ReferenceImageType::PointType                                    point;
+        typename ImageRegionConstIteratorWithIndex<ReferenceImageType>::IndexType const index = it.GetIndex();
+        typename ReferenceImageType::PointType                                          point;
         refImage->TransformIndexToPhysicalPoint(index, point);
         unmaskedPixel = maskSpatialObject->IsInsideInWorldSpace(point);
       }
@@ -248,7 +250,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
       {
         for (unsigned int i = 0; i < m_NumberOfGradientDirections; ++i)
         {
-          GradientPixelType b = gradientItContainer[i]->Get();
+          GradientPixelType const b = gradientItContainer[i]->Get();
 
           if (Math::AlmostEquals(b, GradientPixelType{}))
           {
@@ -262,7 +264,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
           ++(*gradientItContainer[i]);
         }
 
-        vnl_svd<double> pseudoInverseSolver{ m_TensorBasis.as_matrix() };
+        vnl_svd<double> const pseudoInverseSolver{ m_TensorBasis.as_matrix() };
         if (m_NumberOfGradientDirections > 6)
         {
           D = pseudoInverseSolver.solve(m_BMatrix * B);
@@ -355,8 +357,8 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
       bool unmaskedPixel(true);
       if (useMask)
       {
-        typename ImageRegionConstIteratorWithIndex<ReferenceImageType>::IndexType index = git.GetIndex();
-        typename ReferenceImageType::PointType                                    point;
+        typename ImageRegionConstIteratorWithIndex<ReferenceImageType>::IndexType const index = git.GetIndex();
+        typename ReferenceImageType::PointType                                          point;
 
         gradientImagePointer->TransformIndexToPhysicalPoint(index, point);
         unmaskedPixel = maskSpatialObject->IsInsideInWorldSpace(point);
@@ -376,7 +378,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
           }
         }
 
-        vnl_svd<double> pseudoInverseSolver{ m_TensorBasis.as_matrix() };
+        vnl_svd<double> const pseudoInverseSolver{ m_TensorBasis.as_matrix() };
         if (m_NumberOfGradientDirections > 6)
         {
           D = pseudoInverseSolver.solve(m_BMatrix * B);
@@ -534,7 +536,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
 
   this->m_GradientDirectionContainer = gradientDirection;
 
-  unsigned int numImages = gradientDirection->Size();
+  unsigned int const numImages = gradientDirection->Size();
   this->m_NumberOfBaselineImages = 0;
   for (GradientDirectionContainerType::Iterator it = this->m_GradientDirectionContainer->Begin();
        it != this->m_GradientDirectionContainer->End();

@@ -183,7 +183,7 @@ itkCompositeTransformTest(int, char *[])
 
   /* Retrieve the transform and check that it's the same */
   std::cout << "Retrieve 1st transform." << std::endl;
-  AffineType::ConstPointer affineGet =
+  AffineType::ConstPointer const affineGet =
     dynamic_cast<AffineType const *>(compositeTransform->GetNthTransformConstPointer(0));
   if (affineGet.IsNull())
   {
@@ -192,8 +192,8 @@ itkCompositeTransformTest(int, char *[])
   }
 
   std::cout << "Retrieve matrix and offset. " << std::endl;
-  Matrix2Type matrix2Get = affineGet->GetMatrix();
-  Vector2Type vector2Get = affineGet->GetOffset();
+  Matrix2Type const matrix2Get = affineGet->GetMatrix();
+  Vector2Type const vector2Get = affineGet->GetOffset();
   if (!testMatrix(matrix2, matrix2Get) || !testVectorArray(vector2, vector2Get))
   {
     std::cout << "Failed retrieving correct transform data." << std::endl;
@@ -512,9 +512,9 @@ itkCompositeTransformTest(int, char *[])
 
   /* Test GetNumberOfParameters */
   std::cout << "GetNumberOfParameters: " << std::endl;
-  unsigned int affineParamsN = affine->GetNumberOfParameters();
-  unsigned int affine2ParamsN = affine2->GetNumberOfParameters();
-  unsigned int nParameters = compositeTransform->GetNumberOfParameters();
+  unsigned int       affineParamsN = affine->GetNumberOfParameters();
+  unsigned int       affine2ParamsN = affine2->GetNumberOfParameters();
+  unsigned int const nParameters = compositeTransform->GetNumberOfParameters();
   std::cout << "Number of parameters: " << nParameters << std::endl;
   if (nParameters != affineParamsN + affine2ParamsN)
   {
@@ -656,7 +656,7 @@ itkCompositeTransformTest(int, char *[])
   }
 
   /* Test accessors */
-  CompositeType::TransformQueueType transformQueue = compositeTransform->GetTransformQueue();
+  CompositeType::TransformQueueType const transformQueue = compositeTransform->GetTransformQueue();
   if (transformQueue.size() != 3)
   {
     std::cout << "Failed getting transform queue." << std::endl;
@@ -664,7 +664,7 @@ itkCompositeTransformTest(int, char *[])
   }
   std::cout << "Got TransformQueue." << std::endl;
 
-  CompositeType::TransformsToOptimizeFlagsType flagsQueue = compositeTransform->GetTransformsToOptimizeFlags();
+  CompositeType::TransformsToOptimizeFlagsType const flagsQueue = compositeTransform->GetTransformsToOptimizeFlags();
   if (flagsQueue.size() != 3)
   {
     std::cout << "Failed getting optimize flags queue." << std::endl;
@@ -703,7 +703,7 @@ itkCompositeTransformTest(int, char *[])
 
   parametersTest = compositeTransform->GetParameters();
   affineParamsN = affine->GetNumberOfParameters();
-  unsigned int affine3ParamsN = affine3->GetNumberOfParameters();
+  unsigned int const affine3ParamsN = affine3->GetNumberOfParameters();
   parametersTruth.SetSize(affineParamsN + affine3ParamsN);
   for (unsigned int n = 0; n < affine3ParamsN; ++n)
   {
@@ -782,7 +782,7 @@ itkCompositeTransformTest(int, char *[])
     compositeTransform->SetNthTransformToOptimizeOff(1);
     truth = compositeTransform->GetParameters();
     update.SetSize(compositeTransform->GetNumberOfParameters());
-    AffineType::ScalarType factor = 0.5;
+    AffineType::ScalarType const factor = 0.5;
     for (unsigned int i = 0; i < compositeTransform->GetNumberOfParameters(); ++i)
     {
       update[i] = i;
@@ -801,8 +801,8 @@ itkCompositeTransformTest(int, char *[])
   }
 
   /* Test RemoveTransform */
-  bool opt1 = compositeTransform->GetTransformsToOptimizeFlags()[0];
-  bool opt2 = compositeTransform->GetTransformsToOptimizeFlags()[1];
+  bool const opt1 = compositeTransform->GetTransformsToOptimizeFlags()[0];
+  bool const opt2 = compositeTransform->GetTransformsToOptimizeFlags()[1];
   compositeTransform->RemoveTransform();
   if (compositeTransform->GetNumberOfTransforms() != 2)
   {

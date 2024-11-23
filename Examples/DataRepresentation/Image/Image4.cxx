@@ -461,7 +461,7 @@ main(int, char *[])
   LeftEyeIndexVector[1] = LeftEyeIndex[1];
   LeftEyeIndexVector[2] = LeftEyeIndex[2];
 
-  ImageType::PointType LeftEyePointByHand =
+  ImageType::PointType const LeftEyePointByHand =
     ImageOrigin + ImageDirectionCosines * SpacingMatrix * LeftEyeIndexVector;
   // Software Guide : EndCodeSnippet
 

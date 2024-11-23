@@ -54,8 +54,8 @@ protected:
 
       auto image = ImageType::New();
 
-      auto                           imageSize = ImageType::SizeType::Filled(m_ImageSize);
-      typename ImageType::RegionType region(imageSize);
+      auto                                 imageSize = ImageType::SizeType::Filled(m_ImageSize);
+      typename ImageType::RegionType const region(imageSize);
       image->SetRegions(region);
       image->Allocate();
       image->FillBuffer(1);

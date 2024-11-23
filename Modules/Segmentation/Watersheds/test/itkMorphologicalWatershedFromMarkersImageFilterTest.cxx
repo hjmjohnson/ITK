@@ -59,10 +59,10 @@ itkMorphologicalWatershedFromMarkersImageFilterTest(int argc, char * argv[])
   ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, MorphologicalWatershedFromMarkersImageFilter, ImageToImageFilter);
 
 
-  bool markWatershedLine = std::stoi(argv[4]);
+  bool const markWatershedLine = std::stoi(argv[4]);
   ITK_TEST_SET_GET_BOOLEAN(filter, MarkWatershedLine, markWatershedLine);
 
-  bool fullyConnected = std::stoi(argv[5]);
+  bool const fullyConnected = std::stoi(argv[5]);
   ITK_TEST_SET_GET_BOOLEAN(filter, FullyConnected, fullyConnected);
 
 
@@ -81,12 +81,12 @@ itkMorphologicalWatershedFromMarkersImageFilterTest(int argc, char * argv[])
     size[i] = size[i] * 2;
   }
 
-  ImageType::RegionType::IndexType index{};
+  ImageType::RegionType::IndexType const index{};
 
   region.SetSize(size);
   region.SetIndex(index);
 
-  FilterType::LabelImageType::Pointer largerMarkerImage = FilterType::LabelImageType::New();
+  FilterType::LabelImageType::Pointer const largerMarkerImage = FilterType::LabelImageType::New();
   largerMarkerImage->SetBufferedRegion(region);
   largerMarkerImage->SetLargestPossibleRegion(region);
   largerMarkerImage->Allocate();
@@ -96,11 +96,11 @@ itkMorphologicalWatershedFromMarkersImageFilterTest(int argc, char * argv[])
   ITK_TRY_EXPECT_EXCEPTION(filter->Update());
 
 
-  FilterType::LabelImageType::Pointer markerImage = reader2->GetOutput();
+  FilterType::LabelImageType::Pointer const markerImage = reader2->GetOutput();
   filter->SetInput2(markerImage);
   ITK_TEST_SET_GET_VALUE(markerImage, filter->GetMarkerImage());
 
-  itk::SimpleFilterWatcher watcher(filter, "MorphologicalWatershedFromMarkersImageFilter");
+  itk::SimpleFilterWatcher const watcher(filter, "MorphologicalWatershedFromMarkersImageFilter");
 
   ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
 

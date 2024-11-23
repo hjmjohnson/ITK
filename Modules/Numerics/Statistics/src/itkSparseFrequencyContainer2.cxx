@@ -49,7 +49,7 @@ SparseFrequencyContainer2::SetFrequency(const InstanceIdentifier id, const Absol
 {
   // No need to test for bounds because in a map container the
   // element is allocated if the key doesn't exist yet
-  AbsoluteFrequencyType frequency = this->GetFrequency(id);
+  AbsoluteFrequencyType const frequency = this->GetFrequency(id);
 
   m_FrequencyContainer[id] = value;
   m_TotalFrequency += (value - frequency);
@@ -76,7 +76,7 @@ SparseFrequencyContainer2::IncreaseFrequency(const InstanceIdentifier id, const 
 {
   // No need to test for bounds because in a map container the
   // element is allocated if the key doesn't exist yet
-  AbsoluteFrequencyType frequency = this->GetFrequency(id);
+  AbsoluteFrequencyType const frequency = this->GetFrequency(id);
 
   m_FrequencyContainer[id] = frequency + value;
   m_TotalFrequency += value;

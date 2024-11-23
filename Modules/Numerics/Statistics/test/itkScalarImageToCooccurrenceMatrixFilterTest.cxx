@@ -42,10 +42,10 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
 
   auto image = InputImageType::New();
 
-  InputImageType::SizeType inputImageSize = { { IMGWIDTH, IMGHEIGHT } };
+  InputImageType::SizeType const inputImageSize = { { IMGWIDTH, IMGHEIGHT } };
 
-  InputImageType::IndexType  index{};
-  InputImageType::RegionType region;
+  InputImageType::IndexType const index{};
+  InputImageType::RegionType      region;
 
   region.SetSize(inputImageSize);
   region.SetIndex(index);
@@ -153,9 +153,9 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
 
     filter->SetInput(image);
 
-    InputImageType::OffsetType      offset1 = { { 0, 1 } };
-    InputImageType::OffsetType      offset2 = { { 1, 0 } };
-    FilterType::OffsetVectorPointer offsetV = FilterType::OffsetVector::New();
+    InputImageType::OffsetType const      offset1 = { { 0, 1 } };
+    InputImageType::OffsetType const      offset2 = { { 1, 0 } };
+    FilterType::OffsetVectorPointer const offsetV = FilterType::OffsetVector::New();
     offsetV->push_back(offset1);
     offsetV->push_back(offset2);
 
@@ -173,8 +173,8 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
 
     // First make sure the bins are sized properly:
 
-    float max = hist->GetBinMax(0, 255);
-    float min = hist->GetBinMin(0, 255);
+    float const max = hist->GetBinMax(0, 255);
+    float const min = hist->GetBinMin(0, 255);
 
     if (itk::Math::NotAlmostEquals(max, 256) || itk::Math::NotAlmostEquals(min, 255))
     {
@@ -270,7 +270,7 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     auto filter2 = FilterType::New();
 
     filter2->SetInput(image);
-    InputImageType::OffsetType offset3 = { { 0, 1 } };
+    InputImageType::OffsetType const offset3 = { { 0, 1 } };
 
     filter2->SetOffset(offset3);
     filter2->SetNumberOfBinsPerAxis(2);
@@ -304,7 +304,7 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     auto filter3 = FilterType::New();
 
     filter3->SetInput(image);
-    InputImageType::OffsetType offset4 = { { 1, 1 } };
+    InputImageType::OffsetType const offset4 = { { 1, 1 } };
 
     filter3->SetOffset(offset4);
 

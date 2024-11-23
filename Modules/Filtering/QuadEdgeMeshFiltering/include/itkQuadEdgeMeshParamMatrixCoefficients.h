@@ -103,13 +103,13 @@ public:
   InputCoordRepType
   operator()(const InputMeshType * iMesh, InputQEType * iEdge) const override
   {
-    InputPointIdentifier id1 = iEdge->GetOrigin();
-    InputPointIdentifier id2 = iEdge->GetDestination();
+    InputPointIdentifier const id1 = iEdge->GetOrigin();
+    InputPointIdentifier const id2 = iEdge->GetDestination();
 
-    InputPointType pt1 = iMesh->GetPoint(id1);
-    InputPointType pt2 = iMesh->GetPoint(id2);
+    InputPointType const pt1 = iMesh->GetPoint(id1);
+    InputPointType const pt2 = iMesh->GetPoint(id2);
 
-    InputCoordRepType oValue = 1.0 / pt1.EuclideanDistanceTo(pt2);
+    InputCoordRepType const oValue = 1.0 / pt1.EuclideanDistanceTo(pt2);
 
     return oValue;
   }
@@ -144,23 +144,23 @@ public:
   InputCoordRepType
   operator()(const InputMeshType * iMesh, InputQEType * iEdge) const override
   {
-    InputPointIdentifier id1 = iEdge->GetOrigin();
-    InputPointIdentifier id2 = iEdge->GetDestination();
-    InputPointType       pt1 = iMesh->GetPoint(id1);
-    InputPointType       pt2 = iMesh->GetPoint(id2);
+    InputPointIdentifier const id1 = iEdge->GetOrigin();
+    InputPointIdentifier const id2 = iEdge->GetDestination();
+    InputPointType const       pt1 = iMesh->GetPoint(id1);
+    InputPointType const       pt2 = iMesh->GetPoint(id2);
 
     InputCoordRepType oValue(0.0);
 
     if (iEdge->IsLeftSet())
     {
-      InputPointIdentifier idA = iEdge->GetLnext()->GetDestination();
-      InputPointType       ptA = iMesh->GetPoint(idA);
+      InputPointIdentifier const idA = iEdge->GetLnext()->GetDestination();
+      InputPointType const       ptA = iMesh->GetPoint(idA);
       oValue += TriangleHelper<InputPointType>::Cotangent(pt1, ptA, pt2);
     }
     if (iEdge->IsRightSet())
     {
-      InputPointIdentifier idB = iEdge->GetRnext()->GetOrigin();
-      InputPointType       ptB = iMesh->GetPoint(idB);
+      InputPointIdentifier const idB = iEdge->GetRnext()->GetOrigin();
+      InputPointType const       ptB = iMesh->GetPoint(idB);
       oValue += TriangleHelper<InputPointType>::Cotangent(pt1, ptB, pt2);
     }
 
@@ -199,25 +199,25 @@ public:
   InputCoordRepType
   operator()(const InputMeshType * iMesh, InputQEType * iEdge) const override
   {
-    InputPointIdentifier id1 = iEdge->GetOrigin();
-    InputPointType       pt1 = iMesh->GetPoint(id1);
+    InputPointIdentifier const id1 = iEdge->GetOrigin();
+    InputPointType const       pt1 = iMesh->GetPoint(id1);
 
-    InputPointIdentifier id2 = iEdge->GetDestination();
-    InputPointType       pt2 = iMesh->GetPoint(id2);
+    InputPointIdentifier const id2 = iEdge->GetDestination();
+    InputPointType const       pt2 = iMesh->GetPoint(id2);
 
     InputCoordRepType oValue{};
 
     if (iEdge->IsLeftSet())
     {
-      InputPointIdentifier idA = iEdge->GetLnext()->GetDestination();
-      InputPointType       ptA = iMesh->GetPoint(idA);
+      InputPointIdentifier const idA = iEdge->GetLnext()->GetDestination();
+      InputPointType const       ptA = iMesh->GetPoint(idA);
       oValue += TriangleHelper<InputPointType>::Cotangent(pt1, pt2, ptA);
     }
 
     if (iEdge->IsRightSet())
     {
-      InputPointIdentifier idB = iEdge->GetRnext()->GetOrigin();
-      InputPointType       ptB = iMesh->GetPoint(idB);
+      InputPointIdentifier const idB = iEdge->GetRnext()->GetOrigin();
+      InputPointType const       ptB = iMesh->GetPoint(idB);
       oValue += TriangleHelper<InputPointType>::Cotangent(pt1, pt2, ptB);
     }
 
@@ -287,34 +287,34 @@ public:
   InputCoordRepType
   operator()(const InputMeshType * iMesh, InputQEType * iEdge) const override
   {
-    InputPointIdentifier id1 = iEdge->GetOrigin();
-    InputPointIdentifier id2 = iEdge->GetDestination();
+    InputPointIdentifier const id1 = iEdge->GetOrigin();
+    InputPointIdentifier const id2 = iEdge->GetDestination();
 
-    InputPointIdentifier idA = iEdge->GetLnext()->GetDestination();
-    InputPointIdentifier idB = iEdge->GetRnext()->GetOrigin();
+    InputPointIdentifier const idA = iEdge->GetLnext()->GetDestination();
+    InputPointIdentifier const idB = iEdge->GetRnext()->GetOrigin();
 
-    InputPointType pt1 = iMesh->GetPoint(id1);
-    InputPointType pt2 = iMesh->GetPoint(id2);
-    InputPointType ptA = iMesh->GetPoint(idA);
-    InputPointType ptB = iMesh->GetPoint(idB);
+    InputPointType const pt1 = iMesh->GetPoint(id1);
+    InputPointType const pt2 = iMesh->GetPoint(id2);
+    InputPointType const ptA = iMesh->GetPoint(idA);
+    InputPointType const ptB = iMesh->GetPoint(idB);
 
-    InputVectorType v1A = ptA - pt1;
-    InputVectorType v1B = ptB - pt1;
-    InputVectorType v12 = pt2 - pt1;
+    InputVectorType const v1A = ptA - pt1;
+    InputVectorType const v1B = ptB - pt1;
+    InputVectorType const v12 = pt2 - pt1;
 
-    InputCoordRepType L1A = v1A * v1A;
-    InputCoordRepType L1B = v1B * v1B;
-    InputCoordRepType L12 = v12 * v12;
+    InputCoordRepType const L1A = v1A * v1A;
+    InputCoordRepType const L1B = v1B * v1B;
+    InputCoordRepType const L12 = v12 * v12;
 
-    InputCoordRepType L2A = pt2.SquaredEuclideanDistanceTo(ptA);
-    InputCoordRepType L2B = pt2.SquaredEuclideanDistanceTo(ptB);
+    InputCoordRepType const L2A = pt2.SquaredEuclideanDistanceTo(ptA);
+    InputCoordRepType const L2B = pt2.SquaredEuclideanDistanceTo(ptB);
 
-    CrossHelper<InputVectorType> cross;
+    CrossHelper<InputVectorType> const cross;
 
-    InputCoordRepType AreaA = 0.5 * (cross(v1A, v12).GetNorm());
-    InputCoordRepType AreaB = 0.5 * (cross(v1B, v12).GetNorm());
+    InputCoordRepType const AreaA = 0.5 * (cross(v1A, v12).GetNorm());
+    InputCoordRepType const AreaB = 0.5 * (cross(v1B, v12).GetNorm());
 
-    InputCoordRepType oValue = (L1A + L2A - L12) / AreaA + (L1B + L2B - L12) / AreaB;
+    InputCoordRepType const oValue = (L1A + L2A - L12) / AreaA + (L1B + L2B - L12) / AreaB;
 
     return oValue;
   }

@@ -88,7 +88,7 @@ LaplacianDeformationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::
       p[i] = points->GetElement(vId[i]);
     }
 
-    OutputCoordRepType area = TriangleType::ComputeMixedArea(p[0], p[1], p[2]);
+    OutputCoordRepType const area = TriangleType::ComputeMixedArea(p[0], p[1], p[2]);
 
     if (area < itk::Math::eps)
     {
@@ -234,7 +234,7 @@ LaplacianDeformationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::
 
         do
         {
-          CoefficientMapConstIterator coeffIt = m_CoefficientMap.find(temp);
+          CoefficientMapConstIterator const coeffIt = m_CoefficientMap.find(temp);
 
           if (coeffIt != m_CoefficientMap.end())
           {
@@ -250,8 +250,8 @@ LaplacianDeformationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::
           {
             if (m_AreaComputationType != AreaEnum::NONE)
             {
-              AreaMapConstIterator mixedIt = m_MixedAreaMap.find(vId);
-              OutputCoordRepType   mixedArea = NumericTraits<OutputCoordRepType>::OneValue();
+              AreaMapConstIterator const mixedIt = m_MixedAreaMap.find(vId);
+              OutputCoordRepType         mixedArea = NumericTraits<OutputCoordRepType>::OneValue();
 
               if (mixedIt != m_MixedAreaMap.end())
               {

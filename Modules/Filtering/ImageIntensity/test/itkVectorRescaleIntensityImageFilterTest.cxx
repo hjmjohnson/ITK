@@ -77,20 +77,20 @@ itkVectorRescaleIntensityImageFilterTest(int, char *[])
 
   ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
 
-  FilterType::InputRealType scale = filter->GetScale();
+  FilterType::InputRealType const scale = filter->GetScale();
   std::cout << "Input scale value: " << static_cast<itk::NumericTraits<FilterType::InputRealType>::PrintType>(scale)
             << std::endl;
 
-  FilterType::InputRealType shift = filter->GetShift();
+  FilterType::InputRealType const shift = filter->GetShift();
   std::cout << "Input scale value: " << static_cast<itk::NumericTraits<FilterType::InputRealType>::PrintType>(shift)
             << std::endl;
 
-  FilterType::InputRealType inputMaximumMagnitude = filter->GetInputMaximumMagnitude();
+  FilterType::InputRealType const inputMaximumMagnitude = filter->GetInputMaximumMagnitude();
   std::cout << "Input maximum magnitude: "
             << static_cast<itk::NumericTraits<FilterType::InputRealType>::PrintType>(inputMaximumMagnitude)
             << std::endl;
 
-  OutputImageType::ConstPointer outputImage = filter->GetOutput();
+  OutputImageType::ConstPointer const outputImage = filter->GetOutput();
 
   using IteratorType = itk::ImageRegionConstIterator<OutputImageType>;
 

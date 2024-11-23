@@ -97,7 +97,7 @@ KernelTransform<TParametersValueType, VDimension>::ComputeDeformationContributio
    * Default implementation of the the method. This can be overloaded
    * in transforms whose kernel produce diagonal G matrices.
    */
-  PointIdentifier numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
+  PointIdentifier const numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
 
   PointsIterator sp = this->m_SourceLandmarks->GetPoints()->Begin();
 
@@ -122,11 +122,11 @@ template <typename TParametersValueType, unsigned int VDimension>
 void
 KernelTransform<TParametersValueType, VDimension>::ComputeD()
 {
-  PointIdentifier numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
+  PointIdentifier const numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
 
-  PointsIterator sp = this->m_SourceLandmarks->GetPoints()->Begin();
-  PointsIterator tp = this->m_TargetLandmarks->GetPoints()->Begin();
-  PointsIterator end = this->m_SourceLandmarks->GetPoints()->End();
+  PointsIterator       sp = this->m_SourceLandmarks->GetPoints()->Begin();
+  PointsIterator       tp = this->m_TargetLandmarks->GetPoints()->Begin();
+  PointsIterator const end = this->m_SourceLandmarks->GetPoints()->End();
 
   this->m_Displacements->Reserve(numberOfLandmarks);
   typename VectorSetType::Iterator vt = this->m_Displacements->Begin();
@@ -149,7 +149,7 @@ KernelTransform<TParametersValueType, VDimension>::ComputeWMatrix()
 
   this->ComputeL();
   this->ComputeY();
-  SVDSolverType svd(this->m_LMatrix, 1e-8);
+  SVDSolverType const svd(this->m_LMatrix, 1e-8);
   this->m_WMatrix = svd.solve(this->m_YMatrix);
 
   this->ReorganizeW();
@@ -160,9 +160,9 @@ template <typename TParametersValueType, unsigned int VDimension>
 void
 KernelTransform<TParametersValueType, VDimension>::ComputeL()
 {
-  PointIdentifier numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
+  PointIdentifier const numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
 
-  vnl_matrix<TParametersValueType> O2(VDimension * (VDimension + 1), VDimension * (VDimension + 1), 0);
+  vnl_matrix<TParametersValueType> const O2(VDimension * (VDimension + 1), VDimension * (VDimension + 1), 0);
 
   this->ComputeP();
   this->ComputeK();
@@ -183,7 +183,7 @@ template <typename TParametersValueType, unsigned int VDimension>
 void
 KernelTransform<TParametersValueType, VDimension>::ComputeK()
 {
-  PointIdentifier numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
+  PointIdentifier const numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
 
 
   this->ComputeD();
@@ -192,8 +192,8 @@ KernelTransform<TParametersValueType, VDimension>::ComputeK()
 
   this->m_KMatrix.fill(0.0);
 
-  PointsIterator p1 = this->m_SourceLandmarks->GetPoints()->Begin();
-  PointsIterator end = this->m_SourceLandmarks->GetPoints()->End();
+  PointsIterator       p1 = this->m_SourceLandmarks->GetPoints()->Begin();
+  PointsIterator const end = this->m_SourceLandmarks->GetPoints()->End();
 
   GMatrixType G;
   // K matrix is symmetric, so only evaluate the upper triangle and
@@ -260,7 +260,7 @@ template <typename TParametersValueType, unsigned int VDimension>
 void
 KernelTransform<TParametersValueType, VDimension>::ComputeY()
 {
-  PointIdentifier numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
+  PointIdentifier const numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
 
   typename VectorSetType::ConstIterator displacement = this->m_Displacements->Begin();
 
@@ -286,7 +286,7 @@ template <typename TParametersValueType, unsigned int VDimension>
 void
 KernelTransform<TParametersValueType, VDimension>::ReorganizeW()
 {
-  PointIdentifier numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
+  PointIdentifier const numberOfLandmarks = this->m_SourceLandmarks->GetNumberOfPoints();
 
   // The deformable (non-affine) part of the registration goes here
   this->m_DMatrix.set_size(VDimension, numberOfLandmarks);
@@ -387,8 +387,8 @@ KernelTransform<TParametersValueType, VDimension>::SetParameters(const Parameter
   const unsigned int numberOfLandmarks = parameters.Size() / VDimension;
   landmarks->Reserve(numberOfLandmarks);
 
-  PointsIterator itr = landmarks->Begin();
-  PointsIterator end = landmarks->End();
+  PointsIterator       itr = landmarks->Begin();
+  PointsIterator const end = landmarks->End();
 
   InputPointType landMark;
 
@@ -427,8 +427,8 @@ KernelTransform<TParametersValueType, VDimension>::SetFixedParameters(const Fixe
 
   landmarks->Reserve(numberOfLandmarks);
 
-  PointsIterator itr = landmarks->Begin();
-  PointsIterator end = landmarks->End();
+  PointsIterator       itr = landmarks->Begin();
+  PointsIterator const end = landmarks->End();
 
   InputPointType landMark;
 
@@ -454,8 +454,8 @@ KernelTransform<TParametersValueType, VDimension>::UpdateParameters() const
 {
   this->m_Parameters = ParametersType(this->m_SourceLandmarks->GetNumberOfPoints() * VDimension);
 
-  PointsIterator itr = this->m_SourceLandmarks->GetPoints()->Begin();
-  PointsIterator end = this->m_SourceLandmarks->GetPoints()->End();
+  PointsIterator       itr = this->m_SourceLandmarks->GetPoints()->Begin();
+  PointsIterator const end = this->m_SourceLandmarks->GetPoints()->End();
 
   unsigned int pcounter = 0;
   while (itr != end)
@@ -489,8 +489,8 @@ KernelTransform<TParametersValueType, VDimension>::GetFixedParameters() const ->
   // This was added to support the Transform Reader/Writer mechanism
   this->m_FixedParameters = ParametersType(this->m_TargetLandmarks->GetNumberOfPoints() * VDimension);
 
-  PointsIterator itr = this->m_TargetLandmarks->GetPoints()->Begin();
-  PointsIterator end = this->m_TargetLandmarks->GetPoints()->End();
+  PointsIterator       itr = this->m_TargetLandmarks->GetPoints()->Begin();
+  PointsIterator const end = this->m_TargetLandmarks->GetPoints()->End();
 
   unsigned int pcounter = 0;
   while (itr != end)

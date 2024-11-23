@@ -70,8 +70,8 @@ QuadEdgeMeshEulerOperatorDeleteCenterVertexFunction<TMesh, TQEType>::Evaluate(QE
   pList.pop_back();
   PointId2 = pList.back();
   pList.pop_back();
-  FaceRefType FirstFace = this->m_Mesh->FindEdge(PointId1, PointId2)->GetLeft();
-  bool        SecondFaceFound = false;
+  FaceRefType const FirstFace = this->m_Mesh->FindEdge(PointId1, PointId2)->GetLeft();
+  bool              SecondFaceFound = false;
   while ((pList.size()) && (!SecondFaceFound))
   {
     PointId1 = PointId2;

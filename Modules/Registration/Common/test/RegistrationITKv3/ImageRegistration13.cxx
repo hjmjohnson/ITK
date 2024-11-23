@@ -112,17 +112,17 @@ main(int argc, char * argv[])
 
   using MetricType = itk::MattesMutualInformationImageToImageMetric<FixedImageType, MovingImageType>;
 
-  TransformType::Pointer    transform = TransformType::New();
-  OptimizerType::Pointer    optimizer = OptimizerType::New();
-  InterpolatorType::Pointer interpolator = InterpolatorType::New();
-  RegistrationType::Pointer registration = RegistrationType::New();
+  TransformType::Pointer const    transform = TransformType::New();
+  OptimizerType::Pointer const    optimizer = OptimizerType::New();
+  InterpolatorType::Pointer const interpolator = InterpolatorType::New();
+  RegistrationType::Pointer const registration = RegistrationType::New();
 
   registration->SetOptimizer(optimizer);
   registration->SetTransform(transform);
   registration->SetInterpolator(interpolator);
 
 
-  MetricType::Pointer metric = MetricType::New();
+  MetricType::Pointer const metric = MetricType::New();
   registration->SetMetric(metric);
 
 
@@ -156,8 +156,8 @@ main(int argc, char * argv[])
   using FixedImageReaderType = itk::ImageFileReader<FixedImageType>;
   using MovingImageReaderType = itk::ImageFileReader<MovingImageType>;
 
-  FixedImageReaderType::Pointer  fixedImageReader = FixedImageReaderType::New();
-  MovingImageReaderType::Pointer movingImageReader = MovingImageReaderType::New();
+  FixedImageReaderType::Pointer const  fixedImageReader = FixedImageReaderType::New();
+  MovingImageReaderType::Pointer const movingImageReader = MovingImageReaderType::New();
 
   fixedImageReader->SetFileName(argv[1]);
   movingImageReader->SetFileName(argv[2]);
@@ -184,7 +184,7 @@ main(int argc, char * argv[])
   // Here we adopt the first approach. The \code{GeometryOn()} method
   // toggles between the approaches.
   using TransformInitializerType = itk::CenteredTransformInitializer<TransformType, FixedImageType, MovingImageType>;
-  TransformInitializerType::Pointer initializer = TransformInitializerType::New();
+  TransformInitializerType::Pointer const initializer = TransformInitializerType::New();
   initializer->SetTransform(transform);
 
   initializer->SetFixedImage(fixedImageReader->GetOutput());
@@ -222,7 +222,7 @@ main(int argc, char * argv[])
 
   // Create the Command observer and register it with the optimizer.
   //
-  CommandIterationUpdate::Pointer observer = CommandIterationUpdate::New();
+  CommandIterationUpdate::Pointer const observer = CommandIterationUpdate::New();
   optimizer->AddObserver(itk::IterationEvent(), observer);
 
 
@@ -249,9 +249,9 @@ main(int argc, char * argv[])
   const double finalTranslationX = finalParameters[3];
   const double finalTranslationY = finalParameters[4];
 
-  unsigned int numberOfIterations = optimizer->GetCurrentIteration();
+  unsigned int const numberOfIterations = optimizer->GetCurrentIteration();
 
-  double bestValue = optimizer->GetValue();
+  double const bestValue = optimizer->GetValue();
 
   // Print out results
   //
@@ -271,17 +271,17 @@ main(int argc, char * argv[])
 
   using ResampleFilterType = itk::ResampleImageFilter<MovingImageType, FixedImageType>;
 
-  TransformType::Pointer finalTransform = TransformType::New();
+  TransformType::Pointer const finalTransform = TransformType::New();
 
   finalTransform->SetParameters(finalParameters);
   finalTransform->SetFixedParameters(transform->GetFixedParameters());
 
-  ResampleFilterType::Pointer resample = ResampleFilterType::New();
+  ResampleFilterType::Pointer const resample = ResampleFilterType::New();
 
   resample->SetTransform(finalTransform);
   resample->SetInput(movingImageReader->GetOutput());
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
 
   resample->SetSize(fixedImage->GetLargestPossibleRegion().GetSize());
   resample->SetOutputOrigin(fixedImage->GetOrigin());
@@ -294,7 +294,7 @@ main(int argc, char * argv[])
 
   using WriterType = itk::ImageFileWriter<OutputImageType>;
 
-  WriterType::Pointer writer = WriterType::New();
+  WriterType::Pointer const writer = WriterType::New();
 
   writer->SetFileName(argv[3]);
 

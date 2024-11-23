@@ -25,7 +25,7 @@
 int
 itkShrinkImageTest(int, char *[])
 {
-  itk::FileOutputWindow::Pointer fow = itk::FileOutputWindow::New();
+  itk::FileOutputWindow::Pointer const fow = itk::FileOutputWindow::New();
   fow->SetInstance(fow);
 
   std::cout << "Shrink an image by (2,3)" << std::endl;
@@ -44,9 +44,9 @@ itkShrinkImageTest(int, char *[])
   auto if2 = ShortImage::New();
 
   // fill in an image
-  ShortImage::IndexType  index = { { 0, 0 } };
-  ShortImage::SizeType   size = { { 8, 12 } };
-  ShortImage::RegionType region{ index, size };
+  ShortImage::IndexType const  index = { { 0, 0 } };
+  ShortImage::SizeType const   size = { { 8, 12 } };
+  ShortImage::RegionType const region{ index, size };
   if2->SetLargestPossibleRegion(region);
   if2->SetBufferedRegion(region);
   if2->Allocate();
@@ -116,7 +116,7 @@ itkShrinkImageTest(int, char *[])
     auto row = itk::Math::RoundHalfIntegerUp<short>(shrink->GetShrinkFactors()[1] * iterator2.GetIndex()[1] +
                                                     (shrink->GetShrinkFactors()[1] - 1.0) / 2.0);
     row += rowOffset;
-    short trueValue = col + region.GetSize()[0] * row;
+    short const trueValue = col + region.GetSize()[0] * row;
 
     if (iterator2.Get() != trueValue)
     {
@@ -194,11 +194,12 @@ itkShrinkImageTest(int, char *[])
     std::cout << "Pixel " << iterator2.GetIndex() << " = " << iterator2.Get() << std::endl;
     std::cout << std::flush;
 
-    short trueValue = itk::Math::RoundHalfIntegerUp<int>((shrink->GetShrinkFactors()[0] * iterator2.GetIndex()[0] +
-                                                          (shrink->GetShrinkFactors()[0] - 1.0) / 2.0)) +
-                      (region.GetSize()[0] *
-                       itk::Math::RoundHalfIntegerUp<int>((shrink->GetShrinkFactors()[1] * iterator2.GetIndex()[1] +
-                                                           (shrink->GetShrinkFactors()[1] - 1.0) / 2.0)));
+    short const trueValue =
+      itk::Math::RoundHalfIntegerUp<int>(
+        (shrink->GetShrinkFactors()[0] * iterator2.GetIndex()[0] + (shrink->GetShrinkFactors()[0] - 1.0) / 2.0)) +
+      (region.GetSize()[0] *
+       itk::Math::RoundHalfIntegerUp<int>(
+         (shrink->GetShrinkFactors()[1] * iterator2.GetIndex()[1] + (shrink->GetShrinkFactors()[1] - 1.0) / 2.0)));
     if (iterator2.Get() != trueValue)
     {
       std::cout << "B) Pixel " << iterator2.GetIndex() << " expected " << trueValue << " but got " << iterator2.Get()

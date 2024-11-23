@@ -59,7 +59,7 @@ itkKappaSigmaThresholdImageFilterTest(int argc, char * argv[])
   using FilterType = itk::KappaSigmaThresholdImageFilter<InputImageType, MaskImageType, OutputImageType>;
   auto filter = FilterType::New();
 
-  itk::SimpleFilterWatcher watcher(filter);
+  itk::SimpleFilterWatcher const watcher(filter);
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, KappaSigmaThresholdImageFilter, ImageToImageFilter);
 
@@ -76,7 +76,7 @@ itkKappaSigmaThresholdImageFilterTest(int argc, char * argv[])
   filter->SetMaskValue(maskValue);
   ITK_TEST_SET_GET_VALUE(maskValue, filter->GetMaskValue());
 
-  double sigmaFactor = std::stod(argv[4]);
+  double const sigmaFactor = std::stod(argv[4]);
   filter->SetSigmaFactor(sigmaFactor);
   ITK_TEST_SET_GET_VALUE(sigmaFactor, filter->GetSigmaFactor());
 
@@ -91,8 +91,8 @@ itkKappaSigmaThresholdImageFilterTest(int argc, char * argv[])
 
 
   // Regression test: compare computed threshold
-  FilterType::InputPixelType expectedThreshold = std::stod(argv[6]);
-  FilterType::InputPixelType resultThreshold = filter->GetThreshold();
+  FilterType::InputPixelType const expectedThreshold = std::stod(argv[6]);
+  FilterType::InputPixelType const resultThreshold = filter->GetThreshold();
   if (itk::Math::NotAlmostEquals(expectedThreshold, resultThreshold))
   {
     std::cerr << "Test failed!" << std::endl;

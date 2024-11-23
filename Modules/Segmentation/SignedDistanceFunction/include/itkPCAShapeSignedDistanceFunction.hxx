@@ -120,7 +120,7 @@ PCAShapeSignedDistanceFunction<TCoordRep, VSpaceDimension, TImage>::Initialize()
   }
 
   // verify image buffered region
-  typename ImageType::RegionType meanImageRegion = m_MeanImage->GetBufferedRegion();
+  typename ImageType::RegionType const meanImageRegion = m_MeanImage->GetBufferedRegion();
 
   for (unsigned int i = 0; i < m_NumberOfPrincipalComponents; ++i)
   {
@@ -165,7 +165,7 @@ PCAShapeSignedDistanceFunction<TCoordRep, VSpaceDimension, TImage>::Evaluate(con
   -> OutputType
 {
   // transform the point into the shape model space
-  PointType mappedPoint = m_Transform->TransformPoint(point);
+  PointType const mappedPoint = m_Transform->TransformPoint(point);
 
   itkDebugMacro("mappedPoint:" << mappedPoint);
 

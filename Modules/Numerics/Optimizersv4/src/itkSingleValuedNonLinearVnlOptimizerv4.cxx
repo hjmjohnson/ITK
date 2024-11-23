@@ -52,7 +52,7 @@ SingleValuedNonLinearVnlOptimizerv4::StartOptimization(bool doOnlyInitialization
   // where the per-iteration results of the vnl optimizer are accessible.
   if (!this->GetScalesAreIdentity())
   {
-    ScalesType scales = this->GetScales();
+    ScalesType const scales = this->GetScales();
     this->GetNonConstCostFunctionAdaptor()->SetScales(scales);
   }
 }

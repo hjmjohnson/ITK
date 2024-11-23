@@ -43,8 +43,8 @@ itkJoinSeriesImageFilterStreamingTest(int argc, char * argv[])
   }
 
 
-  std::string inputFileName = argv[1];
-  std::string outputFileName = argv[2];
+  std::string const inputFileName = argv[1];
+  std::string const outputFileName = argv[2];
 
   auto reader = ImageFileReaderType::New();
   reader->SetFileName(inputFileName);
@@ -55,7 +55,8 @@ itkJoinSeriesImageFilterStreamingTest(int argc, char * argv[])
     itk::Math::CastWithRangeCheck<unsigned int>(reader->GetOutput()->GetLargestPossibleRegion().GetSize(2));
 
 
-  itk::PipelineMonitorImageFilter<ImageType>::Pointer monitor1 = itk::PipelineMonitorImageFilter<ImageType>::New();
+  itk::PipelineMonitorImageFilter<ImageType>::Pointer const monitor1 =
+    itk::PipelineMonitorImageFilter<ImageType>::New();
   monitor1->SetInput(reader->GetOutput());
 
   std::vector<itk::ProcessObject::Pointer> savedPointers;
@@ -85,7 +86,8 @@ itkJoinSeriesImageFilterStreamingTest(int argc, char * argv[])
   }
 
 
-  itk::PipelineMonitorImageFilter<ImageType>::Pointer monitor2 = itk::PipelineMonitorImageFilter<ImageType>::New();
+  itk::PipelineMonitorImageFilter<ImageType>::Pointer const monitor2 =
+    itk::PipelineMonitorImageFilter<ImageType>::New();
   monitor2->SetInput(joinSeries->GetOutput());
 
   auto writer = ImageFileWriterType::New();

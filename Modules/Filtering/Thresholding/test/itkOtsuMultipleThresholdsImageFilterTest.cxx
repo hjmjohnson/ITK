@@ -66,7 +66,7 @@ itkOtsuMultipleThresholdsImageFilterTest(int argc, char * argv[])
   using FilterType = itk::OtsuMultipleThresholdsImageFilter<InputImageType, InternalImageType>;
   auto filter = FilterType::New();
 
-  itk::SimpleFilterWatcher watcher(filter);
+  itk::SimpleFilterWatcher const watcher(filter);
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, OtsuMultipleThresholdsImageFilter, ImageToImageFilter);
 
@@ -90,19 +90,19 @@ itkOtsuMultipleThresholdsImageFilterTest(int argc, char * argv[])
 
   if (argc > 6)
   {
-    bool valleyEmphasis = static_cast<bool>(std::stoi(argv[6]));
+    bool const valleyEmphasis = static_cast<bool>(std::stoi(argv[6]));
     ITK_TEST_SET_GET_BOOLEAN(filter, ValleyEmphasis, valleyEmphasis);
   }
 
   if (argc > 7)
   {
-    bool returnBinMidpoint = static_cast<bool>(std::stoi(argv[7]));
+    bool const returnBinMidpoint = static_cast<bool>(std::stoi(argv[7]));
     ITK_TEST_SET_GET_BOOLEAN(filter, ReturnBinMidpoint, returnBinMidpoint);
   }
 
-  FilterType::ThresholdVectorType thresholds = filter->GetThresholds();
+  FilterType::ThresholdVectorType const thresholds = filter->GetThresholds();
   std::cout << "filter->GetThresholds(): ";
-  for (double threshold : thresholds)
+  for (double const threshold : thresholds)
   {
     std::cout << itk::NumericTraits<FilterType::InputPixelType>::PrintType(threshold) << ' ';
   }

@@ -57,7 +57,7 @@ itkLaplacianDeformationQuadEdgeMeshFilterWithSoftConstraintsTest(int argc, char 
   filter->SetInput(reader->GetOutput());
   filter->SetOrder(1);
 
-  typename FilterType::OutputCoordRepType lambda = 1.0;
+  typename FilterType::OutputCoordRepType const lambda = 1.0;
   filter->SetLambda(lambda);
   ITK_TEST_SET_GET_VALUE(lambda, filter->GetLambda());
 
@@ -124,8 +124,8 @@ itkLaplacianDeformationQuadEdgeMeshFilterWithSoftConstraintsTest(int argc, char 
   writer->SetFileName(argv[2]);
   writer->Update();
 
-  MeshType::Pointer inputMesh = reader->GetOutput();
-  MeshType::Pointer outputMesh = filter->GetOutput();
+  MeshType::Pointer const inputMesh = reader->GetOutput();
+  MeshType::Pointer const outputMesh = filter->GetOutput();
 
   it = constraints.begin();
 

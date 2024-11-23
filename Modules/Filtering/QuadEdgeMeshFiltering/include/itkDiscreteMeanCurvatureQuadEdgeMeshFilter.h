@@ -83,7 +83,7 @@ protected:
   OutputCurvatureType
   EstimateCurvature(const OutputPointType & iP) override
   {
-    OutputMeshPointer output = this->GetOutput();
+    OutputMeshPointer const output = this->GetOutput();
 
     OutputQEType * qe = iP.GetEdge();
 
@@ -98,7 +98,7 @@ protected:
     {
       if (qe != qe->GetOnext())
       {
-        CoefficientType coefficent;
+        CoefficientType const coefficent;
 
         OutputQEType * qe_it = qe;
         OutputQEType * qe_it2;

@@ -69,7 +69,7 @@ itkEuclideanDistancePointSetMetricTest2Run()
     fixedPoint[2] = pointMax / 2.0;
     fixedPoints->SetPoint(6, fixedPoint);
   }
-  unsigned int numberOfPoints = fixedPoints->GetNumberOfPoints();
+  unsigned int const numberOfPoints = fixedPoints->GetNumberOfPoints();
 
   PointType movingPoint;
   for (unsigned int n = 0; n < numberOfPoints; ++n)
@@ -105,13 +105,13 @@ itkEuclideanDistancePointSetMetricTest2Run()
     direction[d][d] = 1.0;
   }
 
-  typename FieldType::PointType origin{};
+  typename FieldType::PointType const origin{};
 
   auto regionSize = RegionType::SizeType::Filled(static_cast<itk::SizeValueType>(pointMax + 1.0));
 
-  typename RegionType::IndexType regionIndex{};
+  typename RegionType::IndexType const regionIndex{};
 
-  RegionType region{ regionIndex, regionSize };
+  RegionType const region{ regionIndex, regionSize };
 
   auto displacementField = FieldType::New();
   displacementField->SetOrigin(origin);
@@ -119,7 +119,7 @@ itkEuclideanDistancePointSetMetricTest2Run()
   displacementField->SetSpacing(spacing);
   displacementField->SetRegions(region);
   displacementField->Allocate();
-  typename DisplacementFieldTransformType::OutputVectorType zeroVector{};
+  typename DisplacementFieldTransformType::OutputVectorType const zeroVector{};
   displacementField->FillBuffer(zeroVector);
   displacementTransform->SetDisplacementField(displacementField);
 
@@ -136,10 +136,10 @@ itkEuclideanDistancePointSetMetricTest2Run()
   metric->Initialize();
 
   // test
-  typename PointSetMetricType::MeasureType    value = metric->GetValue();
-  typename PointSetMetricType::MeasureType    value2;
-  typename PointSetMetricType::DerivativeType derivative;
-  typename PointSetMetricType::DerivativeType derivative2;
+  typename PointSetMetricType::MeasureType const value = metric->GetValue();
+  typename PointSetMetricType::MeasureType       value2;
+  typename PointSetMetricType::DerivativeType    derivative;
+  typename PointSetMetricType::DerivativeType    derivative2;
   metric->GetDerivative(derivative);
   metric->GetValueAndDerivative(value2, derivative2);
 
@@ -188,7 +188,7 @@ itkEuclideanDistancePointSetMetricTest2Run()
   // We should get a warning printed.
   fixedPoint[0] = 0.0;
   fixedPoint[1] = 2 * pointMax;
-  unsigned int numberExpected = fixedPoints->GetNumberOfPoints() - 1;
+  unsigned int const numberExpected = fixedPoints->GetNumberOfPoints() - 1;
   fixedPoints->SetPoint(fixedPoints->GetNumberOfPoints() - 1, fixedPoint);
   metric->GetValueAndDerivative(value2, derivative2);
   if (metric->GetNumberOfValidPoints() != numberExpected)
@@ -224,8 +224,8 @@ itkEuclideanDistancePointSetMetricTest2Run()
 
   // Test with invalid virtual domain, i.e.
   // one that doesn't match the displacement field.
-  auto       badSize = RegionType::SizeType::Filled(static_cast<itk::SizeValueType>(pointMax / 2.0));
-  RegionType badRegion{ regionIndex, badSize };
+  auto             badSize = RegionType::SizeType::Filled(static_cast<itk::SizeValueType>(pointMax / 2.0));
+  RegionType const badRegion{ regionIndex, badSize };
   metric->SetVirtualDomain(spacing, origin, direction, badRegion);
   ITK_TRY_EXPECT_EXCEPTION(metric->Initialize());
 

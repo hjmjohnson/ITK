@@ -111,7 +111,7 @@ main(int argc, char * argv[])
   //
   auto vecImage = VecImageType::New();
   using VecImagePixelType = VecImageType::PixelType;
-  VecImageType::SizeType vecImgSize = { { 181, 217, 1 } };
+  VecImageType::SizeType const vecImgSize = { { 181, 217, 1 } };
 
   VecImageType::IndexType index;
   index.Fill(0);
@@ -225,7 +225,7 @@ main(int argc, char * argv[])
   using ClassifierType =
     itk::ImageClassifierBase<VecImageType, ClassImageType>;
   using ClassifierPointer = ClassifierType::Pointer;
-  ClassifierPointer myClassifier = ClassifierType::New();
+  ClassifierPointer const myClassifier = ClassifierType::New();
   // Software Guide : EndCodeSnippet
 
   // Set the Classifier parameters

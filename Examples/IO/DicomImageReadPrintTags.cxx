@@ -198,9 +198,9 @@ main(int argc, char * argv[])
   // Software Guide : BeginCodeSnippet
   while (itr != end)
   {
-    itk::MetaDataObjectBase::Pointer entry = itr->second;
+    itk::MetaDataObjectBase::Pointer const entry = itr->second;
 
-    MetaDataStringType::Pointer entryvalue =
+    MetaDataStringType::Pointer const entryvalue =
       dynamic_cast<MetaDataStringType *>(entry.GetPointer());
     // Software Guide : EndCodeSnippet
 
@@ -221,9 +221,9 @@ main(int argc, char * argv[])
     // Software Guide : BeginCodeSnippet
     if (entryvalue)
     {
-      std::string tagkey = itr->first;
-      std::string labelId;
-      bool        found = itk::GDCMImageIO::GetLabelFromTag(tagkey, labelId);
+      std::string const tagkey = itr->first;
+      std::string       labelId;
+      bool const found = itk::GDCMImageIO::GetLabelFromTag(tagkey, labelId);
       // Software Guide : EndCodeSnippet
 
       // Software Guide : BeginLatex
@@ -236,7 +236,7 @@ main(int argc, char * argv[])
       // Software Guide : EndLatex
 
       // Software Guide : BeginCodeSnippet
-      std::string tagvalue = entryvalue->GetMetaDataObjectValue();
+      std::string const tagvalue = entryvalue->GetMetaDataObjectValue();
       // Software Guide : EndCodeSnippet
 
       // Software Guide : BeginLatex
@@ -281,8 +281,8 @@ main(int argc, char * argv[])
   //  Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  std::string entryId = "0010|0010";
-  auto        tagItr = dictionary.Find(entryId);
+  std::string const entryId = "0010|0010";
+  auto              tagItr = dictionary.Find(entryId);
   // Software Guide : EndCodeSnippet
   // Software Guide : BeginLatex
   //
@@ -294,7 +294,7 @@ main(int argc, char * argv[])
   // Software Guide : BeginCodeSnippet
   if (tagItr != end)
   {
-    MetaDataStringType::ConstPointer entryvalue =
+    MetaDataStringType::ConstPointer const entryvalue =
       dynamic_cast<const MetaDataStringType *>(tagItr->second.GetPointer());
     // Software Guide : EndCodeSnippet
 
@@ -309,7 +309,7 @@ main(int argc, char * argv[])
     // Software Guide : BeginCodeSnippet
     if (entryvalue)
     {
-      std::string tagvalue = entryvalue->GetMetaDataObjectValue();
+      std::string const tagvalue = entryvalue->GetMetaDataObjectValue();
       std::cout << "Patient's Name (" << entryId << ") ";
       std::cout << " is: " << tagvalue.c_str() << std::endl;
     }
@@ -325,8 +325,8 @@ main(int argc, char * argv[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  std::string tagkey = "0008|1050";
-  std::string labelId;
+  std::string const tagkey = "0008|1050";
+  std::string       labelId;
   if (itk::GDCMImageIO::GetLabelFromTag(tagkey, labelId))
   {
     std::string value;
@@ -365,8 +365,8 @@ main(int argc, char * argv[])
   //  Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  itk::IOPixelEnum     pixelType = reader->GetImageIO()->GetPixelType();
-  itk::IOComponentEnum componentType =
+  itk::IOPixelEnum const     pixelType = reader->GetImageIO()->GetPixelType();
+  itk::IOComponentEnum const componentType =
     reader->GetImageIO()->GetComponentType();
   std::cout << "PixelType: "
             << reader->GetImageIO()->GetPixelTypeAsString(pixelType)

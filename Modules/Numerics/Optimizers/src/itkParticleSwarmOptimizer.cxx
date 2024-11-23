@@ -46,10 +46,10 @@ ParticleSwarmOptimizer::PrintSelf(std::ostream & os, Indent indent) const
 void
 ParticleSwarmOptimizer::UpdateSwarm()
 {
-  itk::Statistics::MersenneTwisterRandomVariateGenerator::Pointer randomGenerator =
+  itk::Statistics::MersenneTwisterRandomVariateGenerator::Pointer const randomGenerator =
     Statistics::MersenneTwisterRandomVariateGenerator::GetInstance();
 
-  unsigned int n = static_cast<unsigned int>((GetCostFunction())->GetNumberOfParameters());
+  unsigned int const n = static_cast<unsigned int>((GetCostFunction())->GetNumberOfParameters());
 
   for (unsigned int j = 0; j < m_NumberOfParticles; ++j)
   {

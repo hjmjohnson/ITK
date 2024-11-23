@@ -74,7 +74,7 @@ itkGiftiMeshIOTest(int argc, char * argv[])
   itk::GiftiMeshIO::SizeValueType numberOfPoints = 0;
 
   // Test an inconsistent point/cell data count
-  bool requiresConsistency = std::stoul(argv[17]);
+  bool const requiresConsistency = std::stoul(argv[17]);
   if (requiresConsistency)
   {
     numberOfPoints = std::stoul(argv[11]) + 1;
@@ -110,8 +110,8 @@ itkGiftiMeshIOTest(int argc, char * argv[])
   giftiMeshIO->SetDirection(direction);
   ITK_TEST_SET_GET_VALUE(direction, giftiMeshIO->GetDirection());
 
-  itk::GiftiMeshIO::LabelColorContainerPointer colorMap = giftiMeshIO->GetLabelColorTable();
-  itk::GiftiMeshIO::LabelNameContainerPointer  labelMap = giftiMeshIO->GetLabelNameTable();
+  itk::GiftiMeshIO::LabelColorContainerPointer const colorMap = giftiMeshIO->GetLabelColorTable();
+  itk::GiftiMeshIO::LabelNameContainerPointer const  labelMap = giftiMeshIO->GetLabelNameTable();
 
   giftiMeshIO->SetLabelColorTable(colorMap);
   ITK_TEST_SET_GET_VALUE(colorMap, giftiMeshIO->GetLabelColorTable());
@@ -135,11 +135,11 @@ itkGiftiMeshIOTest(int argc, char * argv[])
   ITK_TEST_EXPECT_EQUAL(numberOfCellPixels, giftiMeshIO->GetNumberOfCellPixels());
 
   // Use sufficiently large buffer sizes
-  itk::SizeValueType pointBufferSize = 1000000;
-  itk::SizeValueType pointDataBufferSize = 1000000;
+  itk::SizeValueType const pointBufferSize = 1000000;
+  itk::SizeValueType const pointDataBufferSize = 1000000;
 
-  itk::SizeValueType cellBufferSize = 1000000;
-  itk::SizeValueType cellDataBufferSize = 1000000;
+  itk::SizeValueType const cellBufferSize = 1000000;
+  itk::SizeValueType const cellDataBufferSize = 1000000;
 
   const std::shared_ptr<void> pointBuffer =
     itk::MeshIOTestHelper::AllocateBuffer(giftiMeshIO->GetPointComponentType(), pointBufferSize);
@@ -163,20 +163,20 @@ itkGiftiMeshIOTest(int argc, char * argv[])
   giftiMeshIO->SetUpdatePointData(writeUpdatePointData);
 
   // Test writing exceptions
-  unsigned int numberOfPointPixelComponents = giftiMeshIO->GetNumberOfPointPixelComponents();
+  unsigned int const numberOfPointPixelComponents = giftiMeshIO->GetNumberOfPointPixelComponents();
   if (numberOfPointPixelComponents != 1 && numberOfPointPixelComponents != 3)
   {
-    bool localUpdatePointData = true;
+    bool const localUpdatePointData = true;
     giftiMeshIO->SetUpdatePointData(localUpdatePointData);
     ITK_TRY_EXPECT_EXCEPTION(giftiMeshIO->WriteMeshInformation());
 
     giftiMeshIO->SetUpdatePointData(writeUpdatePointData);
   }
 
-  unsigned int numberOfCellPixelComponents = giftiMeshIO->GetNumberOfCellPixelComponents();
+  unsigned int const numberOfCellPixelComponents = giftiMeshIO->GetNumberOfCellPixelComponents();
   if (numberOfCellPixelComponents != 1 && numberOfCellPixelComponents != 3)
   {
-    bool localUpdateCellData = true;
+    bool const localUpdateCellData = true;
     giftiMeshIO->SetUpdateCellData(localUpdateCellData);
     ITK_TRY_EXPECT_EXCEPTION(giftiMeshIO->WriteMeshInformation());
 

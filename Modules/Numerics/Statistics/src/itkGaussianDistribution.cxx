@@ -159,7 +159,7 @@ GaussianDistribution::PDF(double x)
 double
 GaussianDistribution::PDF(double x, double mean, double variance)
 {
-  double xminusmean = x - mean;
+  double const xminusmean = x - mean;
 
   return (itk::Math::one_over_sqrt2pi / std::sqrt(variance)) * std::exp(-0.5 * xminusmean * xminusmean / variance);
 }
@@ -189,7 +189,7 @@ double
 GaussianDistribution::CDF(double x, double mean, double variance)
 {
   // convert to zero mean unit variance
-  double u = (x - mean) / std::sqrt(variance);
+  double const u = (x - mean) / std::sqrt(variance);
 
   return 0.5 * (vnl_erf(itk::Math::sqrt1_2 * u) + 1.0);
 }
