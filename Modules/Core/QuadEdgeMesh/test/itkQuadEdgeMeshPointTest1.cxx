@@ -45,7 +45,7 @@ itkQuadEdgeMeshPointTest1(int, char *[])
   using SuperclassPointType = PointType::Superclass;
 
 
-  PointType const p0; // Test default constructor
+  PointType const p0{}; // Test default constructor
 
   PointType p1;
 

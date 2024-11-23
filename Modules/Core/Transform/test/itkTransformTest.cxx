@@ -190,7 +190,7 @@ public:
     transform->TransformPoint(pnt);
     std::cout << "TransformPoint()                              OK" << std::endl;
 
-    InputVectorType const vec;
+    InputVectorType const vec{} {};
     transform->TransformVector(vec);
     transform->TransformVector(vec, pnt);
 
@@ -200,12 +200,12 @@ public:
     transform->TransformVector(vecpix);
     transform->TransformVector(vecpix, pnt);
 
-    InputVnlVectorType const vec_vnl;
+    InputVnlVectorType const vec_vnl{} {};
     transform->TransformVector(vec_vnl);
     transform->TransformVector(vec_vnl, pnt);
     std::cout << "TransformVector()                             OK" << std::endl;
 
-    InputCovariantVectorType const covec;
+    InputCovariantVectorType const covec{} {};
     transform->TransformCovariantVector(covec);
     transform->TransformCovariantVector(vecpix);
     transform->TransformCovariantVector(covec, pnt);

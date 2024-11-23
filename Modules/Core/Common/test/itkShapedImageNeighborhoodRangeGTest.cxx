@@ -775,7 +775,7 @@ TEST(ShapedImageNeighborhoodRange, IteratorsSupportRandomAccess)
     static_assert(std::is_same_v<decltype(r += n), X &>, "Return type tested");
 
     r = initialIterator;
-    const auto expectedResult = [&r, n] {
+    const auto expectedResult = [&r] {
       // Operational semantics, as specified by the C++11 Standard:
       difference_type m = n;
       if (m >= 0)
@@ -797,7 +797,7 @@ TEST(ShapedImageNeighborhoodRange, IteratorsSupportRandomAccess)
     static_assert(std::is_same_v<decltype(a + n), X>, "Return type tested");
     static_assert(std::is_same_v<decltype(n + a), X>, "Return type tested");
 
-    const auto expectedResult = [a, n] {
+    const auto expectedResult = [a] {
       // Operational semantics, as specified by the C++11 Standard:
       X tmp = a;
       return tmp += n;
@@ -813,7 +813,7 @@ TEST(ShapedImageNeighborhoodRange, IteratorsSupportRandomAccess)
     static_assert(std::is_same_v<decltype(r -= n), X &>, "Return type tested");
 
     r = initialIterator;
-    const auto expectedResult = [&r, n] {
+    const auto expectedResult = [&r] {
       // Operational semantics, as specified by the C++11 Standard:
       return r += -n;
     }();
@@ -827,7 +827,7 @@ TEST(ShapedImageNeighborhoodRange, IteratorsSupportRandomAccess)
 
     static_assert(std::is_same_v<decltype(a - n), X>, "Return type tested");
 
-    const auto expectedResult = [a, n] {
+    const auto expectedResult = [a] {
       // Operational semantics, as specified by the C++11 Standard:
       X tmp = a;
       return tmp -= n;

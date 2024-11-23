@@ -401,7 +401,7 @@ itkDisplacementFieldTransformTest(int argc, char * argv[])
     return EXIT_FAILURE;
   }
 
-  DisplacementTransformType::IndexType const testIndex;
+  DisplacementTransformType::IndexType const testIndex{};
   testIdentity.SetSize(1, 1); // make sure it gets resized properly
   displacementTransform->ComputeJacobianWithRespectToParameters(testIndex, testIdentity);
 
