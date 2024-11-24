@@ -78,7 +78,7 @@ protected:
   void
   BeforeThreadedGenerateData() override;
   void
-  ThreadedGenerateData(const OutputImageRegionType & outputRegionForThread, ThreadIdType threadID) override;
+  ThreadedGenerateData(const OutputImageRegionType & outputRegion, ThreadIdType threadID) override;
 
   /** Override to return a splitter that does not split along the direction we
    *  are performing the transform. */

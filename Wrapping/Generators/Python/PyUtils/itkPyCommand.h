@@ -60,7 +60,7 @@ public:
    * to make sure the Callable sticks around.
    */
   void
-  SetCommandCallable(PyObject * obj);
+  SetCommandCallable(PyObject * o);
 
   PyObject *
   GetCommandCallable();

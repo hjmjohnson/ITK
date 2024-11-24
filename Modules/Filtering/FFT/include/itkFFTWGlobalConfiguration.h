@@ -320,15 +320,15 @@ public:
 
   /** Import or export some wisdom for the type double to/from a file */
   static bool
-  ImportWisdomFileDouble(const std::string & fname);
+  ImportWisdomFileDouble(const std::string & path);
   static bool
-  ExportWisdomFileDouble(const std::string & fname);
+  ExportWisdomFileDouble(const std::string & path);
 
   /** Import or export some wisdom for the type float to/from a file */
   static bool
-  ImportWisdomFileFloat(const std::string & fname);
+  ImportWisdomFileFloat(const std::string & path);
   static bool
-  ExportWisdomFileFloat(const std::string & fname);
+  ExportWisdomFileFloat(const std::string & path);
 
   /** Import or export some wisdom for the type double to/from the default file */
   static bool
