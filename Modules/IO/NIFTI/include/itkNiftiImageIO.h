@@ -282,7 +282,7 @@ private:
 
   NiftiImageIOEnums::Analyze75Flavor m_LegacyAnalyze75Mode{};
 
-  bool m_SFORM_Permissive;
+  bool m_SFORM_Permissive{ ITK_NIFTI_IO_SFORM_PERMISSIVE_DEFAULT };
   bool m_SFORM_Corrected{ false };
 };
 
