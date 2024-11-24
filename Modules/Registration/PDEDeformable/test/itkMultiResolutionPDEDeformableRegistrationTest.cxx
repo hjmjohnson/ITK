@@ -38,7 +38,7 @@ public:
     , m_Prefix("")
   {}
   void
-  ShowProgress()
+  ShowProgress() const
   {
     std::cout << m_Prefix;
     std::cout << "Progress " << m_Process->GetProgress() << std::endl;

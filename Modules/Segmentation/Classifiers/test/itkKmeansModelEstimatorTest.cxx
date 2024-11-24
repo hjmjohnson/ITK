@@ -45,7 +45,7 @@ class ShowProgressObject
 public:
   ShowProgressObject(itk::LightProcessObject * o) { m_Process = o; }
   void
-  ShowProgress()
+  ShowProgress() const
   {
     std::cout << "Progress " << m_Process->GetProgress() << std::endl;
   }

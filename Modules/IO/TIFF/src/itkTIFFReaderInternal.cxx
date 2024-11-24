@@ -278,7 +278,7 @@ TIFFReaderInternal::Initialize()
 }
 
 int
-TIFFReaderInternal::CanRead()
+TIFFReaderInternal::CanRead() const
 {
   const bool compressionSupported = (TIFFIsCODECConfigured(this->m_Compression) == 1);
   return (this->m_Image && (this->m_Width > 0) && (this->m_Height > 0) && (this->m_SamplesPerPixel > 0) &&

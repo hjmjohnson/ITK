@@ -37,7 +37,7 @@ public:
   Clean();
 
   int
-  CanRead();
+  CanRead() const;
 
   int
   Open(const char * filename, bool silent = false);
