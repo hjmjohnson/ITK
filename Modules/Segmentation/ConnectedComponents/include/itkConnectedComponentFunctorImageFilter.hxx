@@ -46,6 +46,8 @@ ConnectedComponentFunctorImageFilter<TInputImage, TOutputImage, TFunctor, TMaskI
 
   // Allocate the output and initialize to unlabeled
   this->AllocateOutputs();
+  constexpr OutputPixelType      maxPossibleLabel = NumericTraits<OutputPixelType>::max();
+  typename TOutputImage::Pointer output = this->GetOutput();
   output->FillBuffer(maxPossibleLabel);
 
   // Set up the boundary condition to be zero padded (used on output image)
