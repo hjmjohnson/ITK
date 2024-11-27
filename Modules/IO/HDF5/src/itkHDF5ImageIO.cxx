@@ -1101,9 +1101,9 @@ HDF5ImageIO::WriteImageInformation()
     //
     // MetaData.
     MetaDataDictionary & metaDict = this->GetMetaDataDictionary();
-    auto                 it = metaDict.Begin();
-    auto                 end = metaDict.End();
-    for (; it != end; ++it)
+
+    auto end = metaDict.End();
+    for (auto it = metaDict.Begin(); it != end; ++it)
     {
       MetaDataObjectBase * metaObj = it->second.GetPointer();
       std::string          objName(MetaDataGroupName);

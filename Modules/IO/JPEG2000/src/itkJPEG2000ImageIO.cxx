@@ -448,15 +448,13 @@ JPEG2000ImageIO::Read(void * buffer)
                                                               << "Reason: opj_setup_decoder returns false");
   }
 
-  OPJ_INT32 l_tile_x0;
-  OPJ_INT32 l_tile_y0;
-
+  OPJ_INT32  l_tile_x0;
+  OPJ_INT32  l_tile_y0;
   OPJ_UINT32 l_tile_width;
   OPJ_UINT32 l_tile_height;
   OPJ_UINT32 l_nb_tiles_x;
   OPJ_UINT32 l_nb_tiles_y;
-
-  bool bResult = opj_read_header(this->m_Internal->m_Dinfo,
+  bool       bResult = opj_read_header(this->m_Internal->m_Dinfo,
                                  &l_image,
                                  &l_tile_x0,
                                  &l_tile_y0,
@@ -514,15 +512,6 @@ JPEG2000ImageIO::Read(void * buffer)
                                                               << "Reason: opj_set_decode_area returns false");
   }
 
-  OPJ_INT32 l_current_tile_x0;
-  OPJ_INT32 l_current_tile_y0;
-  OPJ_INT32 l_current_tile_x1;
-  OPJ_INT32 l_current_tile_y1;
-
-  OPJ_UINT32 l_tile_index;
-  OPJ_UINT32 l_data_size;
-
-  OPJ_UINT32 l_nb_comps;
 
   OPJ_UINT32 l_max_data_size = 1000;
 
@@ -532,7 +521,14 @@ JPEG2000ImageIO::Read(void * buffer)
 
   while (l_go_on)
   {
-    bool tileHeaderRead = opj_read_tile_header(this->m_Internal->m_Dinfo,
+    OPJ_INT32  l_current_tile_x0;
+    OPJ_INT32  l_current_tile_y0;
+    OPJ_INT32  l_current_tile_x1;
+    OPJ_INT32  l_current_tile_y1;
+    OPJ_UINT32 l_tile_index;
+    OPJ_UINT32 l_data_size;
+    OPJ_UINT32 l_nb_comps;
+    bool       tileHeaderRead = opj_read_tile_header(this->m_Internal->m_Dinfo,
                                                &l_tile_index,
                                                &l_data_size,
                                                &l_current_tile_x0,
@@ -740,8 +736,6 @@ JPEG2000ImageIO::Write(const void * buffer)
 {
   itkDebugMacro("Write() " << this->GetNumberOfComponents());
 
-  bool bSuccess;
-
   opj_cparameters_t parameters;
   opj_set_default_encoder_parameters(&parameters);
 
@@ -815,10 +809,8 @@ JPEG2000ImageIO::Write(const void * buffer)
 
   //--------------------------------------------------------
   // Copy the contents into the image structure
-  int w;
-  int h;
-  w = this->m_Dimensions[0];
-  h = this->m_Dimensions[1];
+  int w = this->m_Dimensions[0];
+  int h = this->m_Dimensions[1];
 
 
   // Compute the proper number of resolutions to use.
@@ -1017,7 +1009,7 @@ JPEG2000ImageIO::Write(const void * buffer)
     free(parameters.cp_comment);
   }
 
-  bSuccess = opj_start_compress(cinfo, l_image, cio);
+  bool bSuccess = opj_start_compress(cinfo, l_image, cio);
   if (!bSuccess)
   {
     opj_stream_destroy(cio);
