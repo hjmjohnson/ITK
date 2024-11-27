@@ -1,0 +1,13 @@
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Optimizers/src/itkLevenbergMarquardtOptimizer.cxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Optimizers/src/itkParticleSwarmOptimizer.cxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Optimizers/src/itkParticleSwarmOptimizerBase.cxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Optimizers/src/itkPowellOptimizer.cxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Optimizers/test/itkParticleSwarmOptimizerTest.cxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Optimizersv4/include/itkPowellOptimizerv4.hxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Optimizersv4/include/itkRegistrationParameterScalesEstimator.hxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Statistics/include/itkKdTreeBasedKmeansEstimator.h
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Statistics/include/itkKdTreeBasedKmeansEstimator.hxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Statistics/include/itkManhattanDistanceMetric.hxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Statistics/include/itkScalarImageToRunLengthFeaturesFilter.hxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Statistics/src/itkMaximumRatioDecisionRule.cxx
+../comment-augmented-one-declaration-per-line/Modules/Numerics/Statistics/test/itkScalarImageToCooccurrenceMatrixFilterTest.cxx

@@ -271,10 +271,9 @@ itkEuler2DTransformTest(int, char *[])
     t1->CloneTo(t5);
     t5->Compose(t4, false);
 
-    TransformType::InputPointType p5, p6, p7;
-    p5 = t1->TransformPoint(p1);
-    p6 = t4->TransformPoint(p5);
-    p7 = t5->TransformPoint(p1);
+    TransformType::InputPointType p5 = t1->TransformPoint(p1);
+    TransformType::InputPointType p6 = t4->TransformPoint(p5);
+    TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,false): ";
     if (!CheckEqual(p6, p7))
@@ -368,9 +367,8 @@ itkEuler2DTransformTest(int, char *[])
     ip[0] = 8.0;
     ip[1] = 9.0;
 
-    TransformType::OutputPointType op1, op2;
-    op1 = t1->TransformPoint(ip);
-    op2 = t23->TransformPoint(ip);
+    TransformType::OutputPointType op1 = t1->TransformPoint(ip);
+    TransformType::OutputPointType op2 = t23->TransformPoint(ip);
 
     std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
     if (!CheckEqual(op1, op2))

@@ -136,9 +136,8 @@ itkDemonsImageToImageMetricv4Test(int, char ** const)
   }
 
   // Evaluate with GetValueAndDerivative
-  MetricType::MeasureType    valueReturn1, valueReturn2;
+  MetricType::MeasureType    valueReturn1;
   MetricType::DerivativeType derivativeReturn;
-
   try
   {
     std::cout << "Calling GetValueAndDerivative..." << std::endl;
@@ -161,7 +160,7 @@ itkDemonsImageToImageMetricv4Test(int, char ** const)
     std::cerr << "Caught unexpected exception during re-initialize: " << exc << std::endl;
     return EXIT_FAILURE;
   }
-
+  MetricType::MeasureType valueReturn2;
   try
   {
     std::cout << "Calling GetValue..." << std::endl;

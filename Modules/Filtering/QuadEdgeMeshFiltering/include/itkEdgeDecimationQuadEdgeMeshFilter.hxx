@@ -485,7 +485,7 @@ EdgeDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::NumberOfCommonVer
   OutputQEType * qe = m_Element;
   OutputQEType * e_it = qe->GetOnext();
 
-  std::list<OutputPointIdentifier> dir_list, sym_list, intersection_list;
+  std::list<OutputPointIdentifier> dir_list;
   do
   {
     dir_list.push_back(e_it->GetDestination());
@@ -494,7 +494,7 @@ EdgeDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::NumberOfCommonVer
 
   qe = qe->GetSym();
   e_it = qe;
-
+  std::list<OutputPointIdentifier> sym_list;
   do
   {
     sym_list.push_back(e_it->GetDestination());
@@ -504,6 +504,7 @@ EdgeDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::NumberOfCommonVer
   dir_list.sort();
   sym_list.sort();
 
+  std::list<OutputPointIdentifier> intersection_list;
   std::set_intersection(
     dir_list.begin(), dir_list.end(), sym_list.begin(), sym_list.end(), std::back_inserter(intersection_list));
 

@@ -116,9 +116,8 @@ itkMeanSquaresImageToImageMetricv4Test(int, char ** const)
   }
 
   // Evaluate with GetValueAndDerivative
-  MetricType::MeasureType    valueReturn1, valueReturn2;
+  MetricType::MeasureType    valueReturn1;
   MetricType::DerivativeType derivativeReturn;
-
   try
   {
     std::cout << "Calling GetValueAndDerivative..." << std::endl;
@@ -142,6 +141,7 @@ itkMeanSquaresImageToImageMetricv4Test(int, char ** const)
     return EXIT_FAILURE;
   }
 
+  MetricType::MeasureType valueReturn2;
   try
   {
     std::cout << "Calling GetValue..." << std::endl;
@@ -168,12 +168,13 @@ itkMeanSquaresImageToImageMetricv4Test(int, char ** const)
   // Test that using floating point correction produces
   // a different result
   std::cout << "Testing with different floating point correction settings." << std::endl;
-  MetricType::DerivativeType derivativeWithFPC, derivativeWithOutFPC;
   metric->SetMaximumNumberOfWorkUnits(1);
   metric->SetUseFloatingPointCorrection(false); // default
+  MetricType::DerivativeType derivativeWithOutFPC;
   metric->GetValueAndDerivative(valueReturn1, derivativeWithOutFPC);
   metric->SetUseFloatingPointCorrection(true);
   metric->SetFloatingPointCorrectionResolution(1e1); // severe truncation
+  MetricType::DerivativeType derivativeWithFPC;
   metric->GetValueAndDerivative(valueReturn1, derivativeWithFPC);
   if (derivativeWithFPC == derivativeWithOutFPC)
   {

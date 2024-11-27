@@ -97,14 +97,11 @@ SimplexMeshVolumeCalculator<TInputMesh>::CalculateTriangleVolume(InputPointType 
                                                                  InputPointType p2,
                                                                  InputPointType p3)
 {
-  double area;
-  double a, b, c, s;
-  double i[3], j[3], k[3], u[3], absu[3], length;
-  double ii[3], jj[3], kk[3];
-  double xavg, yavg, zavg;
-
   // Get i j k vectors ...
   //
+  double i[3];
+  double j[3];
+  double k[3];
   i[0] = (p2[0] - p1[0]);
   j[0] = (p2[1] - p1[1]);
   k[0] = (p2[2] - p1[2]);
@@ -117,13 +114,14 @@ SimplexMeshVolumeCalculator<TInputMesh>::CalculateTriangleVolume(InputPointType 
 
   // Cross product between two vectors, to determine normal vector
   //
+  double u[3];
   u[0] = (j[0] * k[1] - k[0] * j[1]);
   u[1] = (k[0] * i[1] - i[0] * k[1]);
   u[2] = (i[0] * j[1] - j[0] * i[1]);
 
   // Normalize normal
   //
-  length = std::sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
+  double length = std::sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
   if (length != 0.0)
   {
     u[0] /= length;
@@ -137,6 +135,8 @@ SimplexMeshVolumeCalculator<TInputMesh>::CalculateTriangleVolume(InputPointType 
 
   // Determine max unit normal component...
   //
+
+  double absu[3];
   absu[0] = itk::Math::abs(u[0]);
   absu[1] = itk::Math::abs(u[1]);
   absu[2] = itk::Math::abs(u[2]);
@@ -177,6 +177,10 @@ SimplexMeshVolumeCalculator<TInputMesh>::CalculateTriangleVolume(InputPointType 
 
   // This is reduced to ...
   //
+
+  double ii[3];
+  double jj[3];
+  double kk[3];
   ii[0] = i[0] * i[0];
   ii[1] = i[1] * i[1];
   ii[2] = i[2] * i[2];
@@ -189,17 +193,17 @@ SimplexMeshVolumeCalculator<TInputMesh>::CalculateTriangleVolume(InputPointType 
 
   // Area of a triangle using Heron's formula...
   //
-  a = std::sqrt(ii[1] + jj[1] + kk[1]);
-  b = std::sqrt(ii[0] + jj[0] + kk[0]);
-  c = std::sqrt(ii[2] + jj[2] + kk[2]);
-  s = 0.5 * (a + b + c);
-  area = std::sqrt(itk::Math::abs(s * (s - a) * (s - b) * (s - c)));
+  double a = std::sqrt(ii[1] + jj[1] + kk[1]);
+  double b = std::sqrt(ii[0] + jj[0] + kk[0]);
+  double c = std::sqrt(ii[2] + jj[2] + kk[2]);
+  double s = 0.5 * (a + b + c);
+  double area = std::sqrt(itk::Math::abs(s * (s - a) * (s - b) * (s - c)));
 
   // Volume elements ...
   //
-  zavg = (p1[2] + p2[2] + p3[2]) / 3.0;
-  yavg = (p1[1] + p2[1] + p3[1]) / 3.0;
-  xavg = (p1[0] + p2[0] + p3[0]) / 3.0;
+  double zavg = (p1[2] + p2[2] + p3[2]) / 3.0;
+  double yavg = (p1[1] + p2[1] + p3[1]) / 3.0;
+  double xavg = (p1[0] + p2[0] + p3[0]) / 3.0;
 
   m_VolumeX += (area * static_cast<double>(u[2]) * static_cast<double>(zavg));
   m_VolumeY += (area * static_cast<double>(u[1]) * static_cast<double>(yavg));
@@ -216,9 +220,11 @@ SimplexMeshVolumeCalculator<TInputMesh>::Compute()
 {
   this->Initialize();
 
-  InputPointType p1, p2, p3;
+  InputPointType p1;
   p1.Fill(0.0);
+  InputPointType p2;
   p2.Fill(0.0);
+  InputPointType p3;
   p3.Fill(0.0);
 
   InputPointsContainerPointer  Points = m_SimplexMesh->GetPoints();

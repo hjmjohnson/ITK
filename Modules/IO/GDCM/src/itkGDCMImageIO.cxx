@@ -708,11 +708,12 @@ GDCMImageIO::InternalReadImageInformation()
   }
 
   const double *     dircos = image.GetDirectionCosines();
-  vnl_vector<double> rowDirection(3), columnDirection(3);
+  vnl_vector<double> rowDirection(3);
   rowDirection[0] = dircos[0];
   rowDirection[1] = dircos[1];
   rowDirection[2] = dircos[2];
 
+  vnl_vector<double> columnDirection(3);
   columnDirection[0] = dircos[3];
   columnDirection[1] = dircos[4];
   columnDirection[2] = dircos[5];
@@ -839,8 +840,6 @@ GDCMImageIO::Write(const void * buffer)
 
   MetaDataDictionary & dict = this->GetMetaDataDictionary();
 
-  gdcm::Tag tag;
-
   itk::MetaDataDictionary::ConstIterator       itr = dict.Begin();
   const itk::MetaDataDictionary::ConstIterator end = dict.End();
 
@@ -848,7 +847,6 @@ GDCMImageIO::Write(const void * buffer)
   sf.SetFile(writer.GetFile());
 
   std::vector<std::string> problematicKeys;
-
   while (itr != end)
   {
     std::string         value;
@@ -859,7 +857,8 @@ GDCMImageIO::Write(const void * buffer)
     // currently ignored, same tag appears twice in the dictionary
     // once with comma separator and once with pipe. The last one
     // encountered is the one used to set the tag value.
-    bool b = tag.ReadFromPipeSeparatedString(key.c_str()) || tag.ReadFromCommaSeparatedString(key.c_str());
+    gdcm::Tag tag;
+    bool      b = tag.ReadFromPipeSeparatedString(key.c_str()) || tag.ReadFromCommaSeparatedString(key.c_str());
 
     // Anything that has been changed in the MetaData Dict will be pushed
     // into the DICOM header:
@@ -1269,13 +1268,13 @@ GDCMImageIO::Write(const void * buffer)
   // Whenever shift / scale is needed... do it !
   if (m_RescaleIntercept != 0.0 || m_RescaleSlope != 1.0 || outpixeltype != pixeltype)
   {
-    gdcm::Rescaler ir;
-    double         rescaleIntercept = m_RescaleIntercept;
+    double rescaleIntercept = m_RescaleIntercept;
     if (m_RescaleIntercept == 0.0 && outpixeltype != pixeltype)
     {
       // force type conversion when outputpixeltype != pixeltype
       rescaleIntercept = -0.0;
     }
+    gdcm::Rescaler ir;
     ir.SetIntercept(rescaleIntercept);
     ir.SetSlope(m_RescaleSlope);
     ir.SetPixelFormat(pixeltype);

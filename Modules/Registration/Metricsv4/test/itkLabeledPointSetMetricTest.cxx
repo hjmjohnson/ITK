@@ -102,9 +102,11 @@ itkLabeledPointSetMetricTestRun()
   metric->SetMovingTransform(translationTransform);
   metric->Initialize();
 
-  typename PointSetMetricType::MeasureType    value = metric->GetValue(), value2;
-  typename PointSetMetricType::DerivativeType derivative, derivative2;
+  typename PointSetMetricType::MeasureType    value = metric->GetValue();
+  typename PointSetMetricType::DerivativeType derivative;
   metric->GetDerivative(derivative);
+  typename PointSetMetricType::MeasureType    value2;
+  typename PointSetMetricType::DerivativeType derivative2;
   metric->GetValueAndDerivative(value2, derivative2);
 
   std::cout << "value: " << value << std::endl;

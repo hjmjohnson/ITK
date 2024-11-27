@@ -57,9 +57,9 @@ CreateAxialImage()
   img->SetRegions(region);
   img->Allocate();
 
-  std::string row, column, slice, label;
   for (imageIndex[2] = 0; imageIndex[2] < 4; imageIndex[2]++)
   {
+    std::string slice;
     if (imageIndex[2] < 2)
     {
       slice = "I";
@@ -70,6 +70,7 @@ CreateAxialImage()
     }
     for (imageIndex[1] = 0; imageIndex[1] < 4; imageIndex[1]++)
     {
+      std::string row;
       if (imageIndex[1] < 2)
       {
         row = "A";
@@ -80,6 +81,7 @@ CreateAxialImage()
       }
       for (imageIndex[0] = 0; imageIndex[0] < 4; imageIndex[0]++)
       {
+        std::string column;
         if (imageIndex[0] < 2)
         {
           column = "R";
@@ -88,7 +90,7 @@ CreateAxialImage()
         {
           column = "L";
         }
-        label = column + row + slice;
+        std::string label = column + row + slice;
         img->SetPixel(imageIndex, label);
       }
     }
@@ -120,9 +122,9 @@ CreateCoronalImage()
   imageDirection[1][2] = 1;
   imageDirection[2][2] = 0;
   img->SetDirection(imageDirection);
-  std::string row, column, slice, label;
   for (imageIndex[2] = 0; imageIndex[2] < 4; imageIndex[2]++)
   {
+    std::string slice;
     if (imageIndex[2] < 2)
     {
       slice = "A";
@@ -133,6 +135,7 @@ CreateCoronalImage()
     }
     for (imageIndex[1] = 0; imageIndex[1] < 4; imageIndex[1]++)
     {
+      std::string row;
       if (imageIndex[1] < 2)
       {
         row = "S";
@@ -143,6 +146,7 @@ CreateCoronalImage()
       }
       for (imageIndex[0] = 0; imageIndex[0] < 4; imageIndex[0]++)
       {
+        std::string column;
         if (imageIndex[0] < 2)
         {
           column = "R";
@@ -151,7 +155,7 @@ CreateCoronalImage()
         {
           column = "L";
         }
-        label = column + row + slice;
+        std::string label = column + row + slice;
         img->SetPixel(imageIndex, label);
       }
     }

@@ -38,11 +38,12 @@ EuclideanSquareDistanceMetric<TVector>::Evaluate(const MeasurementVectorType & x
     measurementVectorSize,
     "EuclideanSquareDistanceMetric::Evaluate Origin and input vector have different lengths");
 
-  double temp, distance = 0.0;
+
+  double distance = 0.0;
 
   for (unsigned int i = 0; i < measurementVectorSize; ++i)
   {
-    temp = this->GetOrigin()[i] - x[i];
+    double temp = this->GetOrigin()[i] - x[i];
     distance += temp * temp;
   }
 
@@ -61,13 +62,12 @@ EuclideanSquareDistanceMetric<TVector>::Evaluate(const MeasurementVectorType & x
     itkExceptionMacro("EuclideanSquareDistanceMetric:: The two measurement vectors have unequal size");
   }
 
-  double temp, distance = 0.0;
+  double distance = 0.0;
   for (unsigned int i = 0; i < measurementVectorSize; ++i)
   {
-    temp = x1[i] - x2[i];
+    double temp = x1[i] - x2[i];
     distance += temp * temp;
   }
-
   return distance;
 }
 } // end of namespace Statistics
