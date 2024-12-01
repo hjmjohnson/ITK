@@ -58,7 +58,7 @@ namespace gdcm
   std::string Tag::PrintAsContinuousString() const
     {
     std::ostringstream os;
-    const Tag &val = *this;
+   const  Tag &val = *this;
     os.setf( std::ios::right);
     os << std::hex << std::setw( 4 ) << std::setfill( '0' )
       << val[0] << std::setw( 4 ) << std::setfill( '0' )
@@ -69,7 +69,7 @@ namespace gdcm
   std::string Tag::PrintAsContinuousUpperCaseString() const
     {
     std::ostringstream os;
-    const Tag &val = *this;
+   const  Tag &val = *this;
     os.setf( std::ios::right);
     os << std::uppercase << std::hex << std::setw( 4 ) << std::setfill( '0' )
       << val[0] << std::setw( 4 ) << std::setfill( '0' )
@@ -80,7 +80,7 @@ namespace gdcm
   std::string Tag::PrintAsPipeSeparatedString() const
     {
     std::ostringstream _os;
-    const Tag &_val = *this;
+   const  Tag &_val = *this;
     _os.setf( std::ios::right);
     _os << std::hex << std::setw( 4 ) << std::setfill( '0' )
       << _val[0] << '|' << std::setw( 4 ) << std::setfill( '0' )

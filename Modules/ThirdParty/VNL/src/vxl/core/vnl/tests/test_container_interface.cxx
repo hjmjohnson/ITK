@@ -128,13 +128,13 @@ test_common_interface()
   ////////////////////////
 
   {
-    const typename TContainer::element_type data1[4] = { 0, 1, 2, 3 };
+   const  typename TContainer::element_type data1[4] = { 0, 1, 2, 3 };
     TContainer l(2, 2);
     l.copy_in(data1);
     TContainer l_swap(l);
     TContainer l_std_swap(l);
 
-    const typename TContainer::element_type data2[4] = { 4, 5, 6, 7 };
+   const  typename TContainer::element_type data2[4] = { 4, 5, 6, 7 };
     TContainer r(2, 2);
     r.copy_in(data2);
     TContainer r_swap(r);

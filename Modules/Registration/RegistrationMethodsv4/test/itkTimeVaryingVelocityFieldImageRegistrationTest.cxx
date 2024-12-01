@@ -57,8 +57,8 @@ public:
       return;
     }
 
-    unsigned int                                             currentLevel = filter->GetCurrentLevel();
-    typename TFilter::ShrinkFactorsPerDimensionContainerType shrinkFactors =
+    unsigned int const                                             currentLevel = filter->GetCurrentLevel();
+    typename TFilter::ShrinkFactorsPerDimensionContainerType const shrinkFactors =
       filter->GetShrinkFactorsPerDimension(currentLevel);
     typename TFilter::SmoothingSigmasArrayType                 smoothingSigmas = filter->GetSmoothingSigmasPerLevel();
     typename TFilter::TransformParametersAdaptorsContainerType adaptors =
@@ -115,14 +115,14 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   auto fixedImageReader = ImageReaderType::New();
   fixedImageReader->SetFileName(argv[2]);
   fixedImageReader->Update();
-  typename FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  typename FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
   fixedImage->Update();
   fixedImage->DisconnectPipeline();
 
   auto movingImageReader = ImageReaderType::New();
   movingImageReader->SetFileName(argv[3]);
   movingImageReader->Update();
-  typename MovingImageType::Pointer movingImage = movingImageReader->GetOutput();
+  typename MovingImageType::Pointer const movingImage = movingImageReader->GetOutput();
   movingImage->Update();
   movingImage->DisconnectPipeline();
 
@@ -177,7 +177,8 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   affineResampler->SetDefaultPixelValue(0);
   affineResampler->Update();
 
-  std::string affineMovingImageFileName = std::string(argv[4]) + std::string("MovingImageAfterAffineTransform.nii.gz");
+  const std::string affineMovingImageFileName =
+    std::string(argv[4]) + std::string("MovingImageAfterAffineTransform.nii.gz");
 
   using AffineWriterType = itk::ImageFileWriter<FixedImageType>;
   auto affineWriter = AffineWriterType::New();
@@ -295,11 +296,11 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   smoothingSigmasPerLevel[2] = 0;
   velocityFieldRegistration->SetSmoothingSigmasPerLevel(smoothingSigmasPerLevel);
 
-  typename VelocityFieldRegistrationType::RealType convergenceThreshold = 1.0e-7;
+  typename VelocityFieldRegistrationType::RealType const convergenceThreshold = 1.0e-7;
   velocityFieldRegistration->SetConvergenceThreshold(convergenceThreshold);
   ITK_TEST_SET_GET_VALUE(convergenceThreshold, velocityFieldRegistration->GetConvergenceThreshold());
 
-  unsigned int convergenceWindowSize = 10;
+  unsigned int const convergenceWindowSize = 10;
   velocityFieldRegistration->SetConvergenceWindowSize(convergenceWindowSize);
   ITK_TEST_SET_GET_VALUE(convergenceWindowSize, velocityFieldRegistration->GetConvergenceWindowSize());
 
@@ -342,7 +343,7 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
       }
     }
 
-    typename VelocityFieldTransformAdaptorType::Pointer fieldTransformAdaptor =
+    typename VelocityFieldTransformAdaptorType::Pointer const fieldTransformAdaptor =
       VelocityFieldTransformAdaptorType::New();
     fieldTransformAdaptor->SetRequiredSpacing(velocityFieldSpacing);
     fieldTransformAdaptor->SetRequiredSize(velocityFieldSize);
@@ -354,7 +355,7 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   velocityFieldRegistration->SetTransformParametersAdaptorsPerLevel(adaptors);
 
   using VelocityFieldRegistrationCommandType = CommandIterationUpdate<VelocityFieldRegistrationType>;
-  typename VelocityFieldRegistrationCommandType::Pointer displacementFieldObserver =
+  typename VelocityFieldRegistrationCommandType::Pointer const displacementFieldObserver =
     VelocityFieldRegistrationCommandType::New();
   velocityFieldRegistration->AddObserver(itk::IterationEvent(), displacementFieldObserver);
 
@@ -374,7 +375,7 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   resampler->SetDefaultPixelValue(0);
   resampler->Update();
 
-  std::string warpedMovingImageFileName =
+  const std::string warpedMovingImageFileName =
     std::string(argv[4]) + std::string("MovingImageAfterVelocityFieldTransform.nii.gz");
 
   using WriterType = itk::ImageFileWriter<FixedImageType>;
@@ -384,7 +385,7 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   writer->Update();
 
   using InverseResampleFilterType = itk::ResampleImageFilter<FixedImageType, MovingImageType>;
-  typename InverseResampleFilterType::Pointer inverseResampler = ResampleFilterType::New();
+  typename InverseResampleFilterType::Pointer const inverseResampler = ResampleFilterType::New();
   inverseResampler->SetTransform(compositeTransform->GetInverseTransform());
   inverseResampler->SetInput(fixedImage);
   inverseResampler->SetSize(movingImage->GetBufferedRegion().GetSize());
@@ -394,7 +395,8 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   inverseResampler->SetDefaultPixelValue(0);
   inverseResampler->Update();
 
-  std::string inverseWarpedFixedImageFileName = std::string(argv[4]) + std::string("InverseWarpedFixedImage.nii.gz");
+  const std::string inverseWarpedFixedImageFileName =
+    std::string(argv[4]) + std::string("InverseWarpedFixedImage.nii.gz");
 
   using InverseWriterType = itk::ImageFileWriter<MovingImageType>;
   auto inverseWriter = InverseWriterType::New();
@@ -402,7 +404,7 @@ PerformTimeVaryingVelocityFieldImageRegistration(int argc, char * argv[])
   inverseWriter->SetInput(inverseResampler->GetOutput());
   inverseWriter->Update();
 
-  std::string velocityFieldFileName = std::string(argv[4]) + std::string("VelocityField.nii.gz");
+  const std::string velocityFieldFileName = std::string(argv[4]) + std::string("VelocityField.nii.gz");
 
   using VelocityFieldWriterType = itk::ImageFileWriter<TimeVaryingVelocityFieldType>;
   auto velocityFieldWriter = VelocityFieldWriterType::New();

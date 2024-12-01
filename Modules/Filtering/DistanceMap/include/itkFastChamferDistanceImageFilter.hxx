@@ -122,7 +122,7 @@ FastChamferDistanceImageFilter<TInputImage, TOutputImage>::GenerateDataND()
   /** Scan the image */
   for (it.GoToBegin(); !it.IsAtEnd(); ++it)
   {
-    PixelType center_value = it.GetPixel(center_voxel);
+    PixelType const center_value = it.GetPixel(center_voxel);
     if (center_value >= m_MaximumDistance)
     {
       continue;
@@ -194,7 +194,7 @@ FastChamferDistanceImageFilter<TInputImage, TOutputImage>::GenerateDataND()
   /** Scan the image */
   for (it.GoToEnd(), --it; !it.IsAtBegin(); --it)
   {
-    PixelType center_value = it.GetPixel(center_voxel);
+    PixelType const center_value = it.GetPixel(center_voxel);
     if (center_value >= m_MaximumDistance)
     {
       continue;
@@ -271,7 +271,7 @@ void
 FastChamferDistanceImageFilter<TInputImage, TOutputImage>::GenerateData()
 {
   // Allocate the output image.
-  typename TOutputImage::Pointer output = this->GetOutput();
+  typename TOutputImage::Pointer const output = this->GetOutput();
 
   output->SetBufferedRegion(output->GetRequestedRegion());
   output->Allocate();

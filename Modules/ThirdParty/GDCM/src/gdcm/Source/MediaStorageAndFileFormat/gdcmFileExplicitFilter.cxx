@@ -45,7 +45,7 @@ bool FileExplicitFilter::ChangeFMI()
       {
       ts = TransferSyntax::ExplicitVRLittleEndian;
       }
-    const char *tsuid = TransferSyntax::GetTSString( ts );
+   const  char *tsuid = TransferSyntax::GetTSString( ts );
     DataElement de( Tag(0x0002,0x0010) );
     de.SetByteValue( tsuid, strlen(tsuid) );
     de.SetVR( Attribute<0x0002, 0x0010>::GetVR() );
@@ -70,8 +70,8 @@ bool FileExplicitFilter::ProcessDataSet(DataSet &ds, Dicts const & dicts)
     {
     DataElement de = *it;
     std::string strowner;
-    const char *owner = nullptr;
-    const Tag& t = de.GetTag();
+   const  char *owner = nullptr;
+   const  Tag& t = de.GetTag();
     if( t.IsPrivate() && !ChangePrivateTags
     // As a special exception we convert to proper VR :
     // - Private Group Length
@@ -89,8 +89,8 @@ bool FileExplicitFilter::ProcessDataSet(DataSet &ds, Dicts const & dicts)
       strowner = ds.GetPrivateCreator(t);
       owner = strowner.c_str();
       }
-    const DictEntry &entry = dicts.GetDictEntry(t,owner);
-    const VR &vr = entry.GetVR();
+   const  DictEntry &entry = dicts.GetDictEntry(t,owner);
+   const  VR &vr = entry.GetVR();
 
     //assert( de.GetVR() == VR::INVALID );
     VR cvr = DataSetHelper::ComputeVR(*F,ds, t);

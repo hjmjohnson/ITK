@@ -176,7 +176,7 @@ void Writer::SetFileName(const char *utf8path)
     if (utf8path && *utf8path)
       {
 #ifdef _MSC_VER
-      const std::wstring uncpath = System::ConvertToUNC(utf8path);
+     const  std::wstring uncpath = System::ConvertToUNC(utf8path);
       Ofstream->open(uncpath.c_str(), std::ios::out | std::ios::binary);
 #else
       Ofstream->open(utf8path, std::ios::out | std::ios::binary);

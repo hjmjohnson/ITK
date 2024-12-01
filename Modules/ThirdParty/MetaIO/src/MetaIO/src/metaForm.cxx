@@ -484,21 +484,21 @@ MetaForm::GetUserField(const char * _name)
   {
     int eSize;
     MET_SizeOfType((*it)->type, &eSize);
-    const auto itLength = static_cast<unsigned int>((*it)->length);
+   const  auto itLength = static_cast<unsigned int>((*it)->length);
     if (!strcmp((*it)->name, _name))
     {
       char *     out;
       if ((*it)->type == MET_STRING)
       {
-        const size_t outSize = (itLength + 1) * eSize;
+       const  size_t outSize = (itLength + 1) * eSize;
         out = new char[outSize];
         memcpy(out, (*it)->value, itLength * eSize);
         out[itLength] = 0;
       }
       else if ((*it)->type == MET_FLOAT_MATRIX)
       {
-        const unsigned int numMatrixElements = itLength * itLength;
-        const size_t outSize = numMatrixElements * eSize;
+       const  unsigned int numMatrixElements = itLength * itLength;
+       const  size_t outSize = numMatrixElements * eSize;
         out = new char[outSize];
         for (unsigned int i = 0; i < numMatrixElements; i++)
         {
@@ -507,7 +507,7 @@ MetaForm::GetUserField(const char * _name)
       }
       else
       {
-        const size_t outSize = itLength * eSize;
+       const  size_t outSize = itLength * eSize;
         out = new char[outSize];
         for (unsigned int i = 0; i < itLength; i++)
         {

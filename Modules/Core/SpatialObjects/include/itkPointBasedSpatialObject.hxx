@@ -130,8 +130,8 @@ PointBasedSpatialObject<TDimension, TSpatialObjectPointType>::ClosestPointInWorl
   double                 closestPointDistance = NumericTraits<double>::max();
   while (it != itend)
   {
-    typename SpatialObjectPoint<TDimension>::PointType curpos = it->GetPositionInWorldSpace();
-    double                                             curdistance = curpos.EuclideanDistanceTo(point);
+    typename SpatialObjectPoint<TDimension>::PointType const curpos = it->GetPositionInWorldSpace();
+    double const                                             curdistance = curpos.EuclideanDistanceTo(point);
     if (curdistance < closestPointDistance)
     {
       closestPoint = (*it);
@@ -154,13 +154,13 @@ PointBasedSpatialObject<TDimension, TSpatialObjectPointType>::ComputeMyBoundingB
 
   if (it == end)
   {
-    typename BoundingBoxType::PointType pnt{};
+    typename BoundingBoxType::PointType const pnt{};
     this->GetModifiableMyBoundingBoxInObjectSpace()->SetMinimum(pnt);
     this->GetModifiableMyBoundingBoxInObjectSpace()->SetMaximum(pnt);
     return;
   }
 
-  PointType pt = it->GetPositionInObjectSpace();
+  PointType const pt = it->GetPositionInObjectSpace();
 
   this->GetModifiableMyBoundingBoxInObjectSpace()->SetMinimum(pt);
   this->GetModifiableMyBoundingBoxInObjectSpace()->SetMaximum(pt);
@@ -212,7 +212,7 @@ PointBasedSpatialObject<TDimension, TSpatialObjectPointType>::InternalClone() co
   // this to new transform.
   typename LightObject::Pointer loPtr = Superclass::InternalClone();
 
-  typename Self::Pointer rval = dynamic_cast<Self *>(loPtr.GetPointer());
+  typename Self::Pointer const rval = dynamic_cast<Self *>(loPtr.GetPointer());
   if (rval.IsNull())
   {
     itkExceptionMacro("downcast to type " << this->GetNameOfClass() << " failed.");

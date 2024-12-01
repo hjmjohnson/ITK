@@ -523,8 +523,8 @@ MetaDTITube::M_Read()
       }
 
 
-      const int positionOfX = this->GetPosition("x");
-      const int positionOfY = this->GetPosition("y");
+     const  int positionOfX = this->GetPosition("x");
+     const  int positionOfY = this->GetPosition("y");
 
       if (positionOfX < 0)
       {
@@ -544,7 +544,7 @@ MetaDTITube::M_Read()
 
       if (m_NDims == 3)
       {
-        const int positionOfZ = this->GetPosition("z");
+       const  int positionOfZ = this->GetPosition("z");
 
         if (positionOfZ < 0)
         {
@@ -652,10 +652,10 @@ MetaDTITube::M_Write()
     MET_SizeOfType(m_ElementType, &elementSize);
 
     auto                      pntDim = static_cast<unsigned int>(m_NDims + 6);
-    const DTITubePnt::FieldListType & extraList = (*(m_PointList.begin()))->GetExtraFields();
+   const  DTITubePnt::FieldListType & extraList = (*(m_PointList.begin()))->GetExtraFields();
     pntDim += static_cast<unsigned int>(extraList.size());
 
-    const size_t dataSize = pntDim * m_NPoints * elementSize;
+   const  size_t dataSize = pntDim * m_NPoints * elementSize;
     char * data = new char[dataSize];
     int    i = 0;
     int    d;
@@ -676,7 +676,7 @@ MetaDTITube::M_Write()
       }
 
       // Add the extra fields
-      const DTITubePnt::FieldListType & extraList2 = (*it)->GetExtraFields();
+     const  DTITubePnt::FieldListType & extraList2 = (*it)->GetExtraFields();
       auto                              itFields = extraList2.begin();
       auto                              itFieldsEnd = extraList2.end();
       while (itFields != itFieldsEnd)
@@ -713,7 +713,7 @@ MetaDTITube::M_Write()
       }
 
       // Add the extra fields
-      const DTITubePnt::FieldListType & extraList = (*it)->GetExtraFields();
+     const  DTITubePnt::FieldListType & extraList = (*it)->GetExtraFields();
       auto                              itFields = extraList.begin();
       auto                              itFieldsEnd = extraList.end();
       while (itFields != itFieldsEnd)

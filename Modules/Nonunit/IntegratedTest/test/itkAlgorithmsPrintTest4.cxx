@@ -59,67 +59,68 @@ main(int, char *[])
   // Used for ImageToSpatialObjectRegistrationMethod
   using GroupType = itk::GroupSpatialObject<2>;
 
-  itk::GeodesicActiveContourLevelSetFunction<InputType>::Pointer GeodesicActiveContourLevelSetFunctionObj =
+  itk::GeodesicActiveContourLevelSetFunction<InputType>::Pointer const GeodesicActiveContourLevelSetFunctionObj =
     itk::GeodesicActiveContourLevelSetFunction<InputType>::New();
   std::cout << "-------------GeodesicActiveContourLevelSetFunction " << GeodesicActiveContourLevelSetFunctionObj;
 
-  itk::GeodesicActiveContourLevelSetImageFilter<InputType, OutputType>::Pointer
+  itk::GeodesicActiveContourLevelSetImageFilter<InputType, OutputType>::Pointer const
     GeodesicActiveContourLevelSetImageFilterObj =
       itk::GeodesicActiveContourLevelSetImageFilter<InputType, OutputType>::New();
   std::cout << "-------------GeodesicActiveContourLevelSetImageFilter " << GeodesicActiveContourLevelSetImageFilterObj;
 
-  itk::GradientVectorFlowImageFilter<GradientImageType, GradientImageType>::Pointer GradientVectorFlowImageFilterObj =
-    itk::GradientVectorFlowImageFilter<GradientImageType, GradientImageType>::New();
+  itk::GradientVectorFlowImageFilter<GradientImageType, GradientImageType>::Pointer const
+    GradientVectorFlowImageFilterObj = itk::GradientVectorFlowImageFilter<GradientImageType, GradientImageType>::New();
   std::cout << "-------------GradientVectorFlowImageFilter " << GradientVectorFlowImageFilterObj;
 
-  itk::HistogramMatchingImageFilter<InputType, OutputType>::Pointer HistogramMatchingImageFilterObj =
+  itk::HistogramMatchingImageFilter<InputType, OutputType>::Pointer const HistogramMatchingImageFilterObj =
     itk::HistogramMatchingImageFilter<InputType, OutputType>::New();
   std::cout << "-------------HistogramMatchingImageFilter " << HistogramMatchingImageFilterObj;
 
-  itk::ImageClassifierBase<VectorImageType, OutputType>::Pointer ImageClassifierBaseObj =
+  itk::ImageClassifierBase<VectorImageType, OutputType>::Pointer const ImageClassifierBaseObj =
     itk::ImageClassifierBase<VectorImageType, OutputType>::New();
   std::cout << "-------------ImageClassifierBase " << ImageClassifierBaseObj;
 
-  itk::ImageGaussianModelEstimator<VectorImageType, GaussianMemFuncType, UShortImageType>::Pointer
+  itk::ImageGaussianModelEstimator<VectorImageType, GaussianMemFuncType, UShortImageType>::Pointer const
     ImageGaussianModelEstimatorObj =
       itk::ImageGaussianModelEstimator<VectorImageType, GaussianMemFuncType, UShortImageType>::New();
   std::cout << "-------------ImageGaussianModelEstimator " << ImageGaussianModelEstimatorObj;
 
-  itk::ImageKmeansModelEstimator<VectorImageType, KMeansMemFuncType>::Pointer ImageKmeansModelEstimatorObj =
+  itk::ImageKmeansModelEstimator<VectorImageType, KMeansMemFuncType>::Pointer const ImageKmeansModelEstimatorObj =
     itk::ImageKmeansModelEstimator<VectorImageType, KMeansMemFuncType>::New();
   std::cout << "-------------ImageKmeansModelEstimator " << ImageKmeansModelEstimatorObj;
 
-  itk::ImageRegistrationMethod<InputType, InputType>::Pointer ImageRegistrationMethodObj =
+  itk::ImageRegistrationMethod<InputType, InputType>::Pointer const ImageRegistrationMethodObj =
     itk::ImageRegistrationMethod<InputType, InputType>::New();
   std::cout << "-------------ImageRegistrationMethod " << ImageRegistrationMethodObj;
 
-  itk::ImageToSpatialObjectRegistrationMethod<InputType, GroupType>::Pointer ImageToSpatialObjectRegistrationMethodObj =
-    itk::ImageToSpatialObjectRegistrationMethod<InputType, GroupType>::New();
+  itk::ImageToSpatialObjectRegistrationMethod<InputType, GroupType>::Pointer const
+    ImageToSpatialObjectRegistrationMethodObj =
+      itk::ImageToSpatialObjectRegistrationMethod<InputType, GroupType>::New();
   std::cout << "-------------ImageToSpatialObjectRegistrationMethod " << ImageToSpatialObjectRegistrationMethodObj;
 
-  itk::KLMRegionGrowImageFilter<VectorImageType, VectorImageType>::Pointer KLMRegionGrowImageFilterObj =
+  itk::KLMRegionGrowImageFilter<VectorImageType, VectorImageType>::Pointer const KLMRegionGrowImageFilterObj =
     itk::KLMRegionGrowImageFilter<VectorImageType, VectorImageType>::New();
   std::cout << "-------------KLMRegionGrowImageFilter " << KLMRegionGrowImageFilterObj;
 
-  itk::LaplacianSegmentationLevelSetFunction<InputType, InputType>::Pointer LaplacianSegmentationLevelSetFunctionObj =
-    itk::LaplacianSegmentationLevelSetFunction<InputType, InputType>::New();
+  itk::LaplacianSegmentationLevelSetFunction<InputType, InputType>::Pointer const
+    LaplacianSegmentationLevelSetFunctionObj = itk::LaplacianSegmentationLevelSetFunction<InputType, InputType>::New();
   std::cout << "-------------LaplacianSegmentationLevelSetFunction " << LaplacianSegmentationLevelSetFunctionObj;
 
-  itk::LaplacianSegmentationLevelSetImageFilter<InputType, InputType, float>::Pointer
+  itk::LaplacianSegmentationLevelSetImageFilter<InputType, InputType, float>::Pointer const
     LaplacianSegmentationLevelSetImageFilterObj =
       itk::LaplacianSegmentationLevelSetImageFilter<InputType, InputType, float>::New();
   std::cout << "-------------LaplacianSegmentationLevelSetImageFilter " << LaplacianSegmentationLevelSetImageFilterObj;
 
-  itk::LevelSetNeighborhoodExtractor<InputType>::Pointer LevelSetNeighborhoodExtractorObj =
+  itk::LevelSetNeighborhoodExtractor<InputType>::Pointer const LevelSetNeighborhoodExtractorObj =
     itk::LevelSetNeighborhoodExtractor<InputType>::New();
   std::cout << "-------------LevelSetNeighborhoodExtractor " << LevelSetNeighborhoodExtractorObj;
 
-  itk::LevelSetVelocityNeighborhoodExtractor<InputType, double>::Pointer LevelSetVelocityNeighborhoodExtractorObj =
-    itk::LevelSetVelocityNeighborhoodExtractor<InputType, double>::New();
+  itk::LevelSetVelocityNeighborhoodExtractor<InputType, double>::Pointer const
+    LevelSetVelocityNeighborhoodExtractorObj = itk::LevelSetVelocityNeighborhoodExtractor<InputType, double>::New();
 
   std::cout << "-------------LevelSetVelocityNeighborhoodExtractor " << LevelSetVelocityNeighborhoodExtractorObj;
 
-  itk::MeanReciprocalSquareDifferencePointSetToImageMetric<PointSetType, InputType>::Pointer
+  itk::MeanReciprocalSquareDifferencePointSetToImageMetric<PointSetType, InputType>::Pointer const
     MeanReciprocalSquareDifferencePointSetToImageMetricObj =
       itk::MeanReciprocalSquareDifferencePointSetToImageMetric<PointSetType, InputType>::New();
   std::cout << "-------------MeanReciprocalSquareDifferencePointSetToImageMetric "

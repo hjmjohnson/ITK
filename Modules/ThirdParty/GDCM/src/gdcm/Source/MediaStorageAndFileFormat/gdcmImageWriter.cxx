@@ -190,7 +190,7 @@ bool ImageWriter::Write()
   // (re)Compute MediaStorage:
   if( !ds.FindDataElement( Tag(0x0008, 0x0060) ) )
     {
-    const char *modality = ms.GetModality();
+   const  char *modality = ms.GetModality();
     DataElement de( Tag(0x0008, 0x0060 ) );
     VL::Type strlenModality = (VL::Type)strlen(modality);
     de.SetByteValue( modality, strlenModality );
@@ -199,7 +199,7 @@ bool ImageWriter::Write()
     }
   else
     {
-    const ByteValue *bv = ds.GetDataElement( Tag(0x0008, 0x0060 ) ).GetByteValue();
+   const  ByteValue *bv = ds.GetDataElement( Tag(0x0008, 0x0060 ) ).GetByteValue();
     std::string modality2;
     if( bv )
       {
@@ -229,7 +229,7 @@ bool ImageWriter::Write()
     if( ms == MediaStorage::SecondaryCaptureImageStorage )
       {
       // (0008,0064) CS [SI]                                     #   2, 1 ConversionType
-      const char conversion[] = "WSD "; // FIXME
+     const  char conversion[] = "WSD "; // FIXME
       DataElement de( Tag(0x0008, 0x0064 ) );
       VL::Type strlenConversion = (VL::Type)strlen(conversion);
       de.SetByteValue( conversion, strlenConversion );
@@ -281,7 +281,7 @@ bool ImageWriter::Write()
     //else
     if ( pi == PhotometricInterpretation::PALETTE_COLOR )
       {
-      const LookupTable &lut = PixelData->GetLUT();
+     const  LookupTable &lut = PixelData->GetLUT();
       assert( lut.Initialized() );
 //      assert( (pf.GetBitsAllocated() == 8  && pf.GetPixelRepresentation() == 0)
 //           || (pf.GetBitsAllocated() == 16 && pf.GetPixelRepresentation() == 0) );
@@ -376,7 +376,7 @@ Attribute<0x0028,0x0004> piat;
 //const DataElement &pide = ds.GetDataElement( piat.GetTag() );
 //const char *str1 = pide.GetByteValue()->GetPointer();
 {
-    const char *pistr = PhotometricInterpretation::GetPIString(pi);
+   const  char *pistr = PhotometricInterpretation::GetPIString(pi);
     DataElement de( Tag(0x0028, 0x0004 ) );
     VL::Type strlenPistr = (VL::Type)strlen(pistr);
     de.SetByteValue( pistr, strlenPistr );

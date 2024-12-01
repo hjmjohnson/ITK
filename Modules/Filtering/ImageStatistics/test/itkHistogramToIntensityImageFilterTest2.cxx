@@ -68,7 +68,7 @@ itkHistogramToIntensityImageFilterTest2(int argc, char * argv[])
 
   constexpr unsigned int NumberOfComponents = 2;
 
-  itk::MinimumMaximumImageFilter<ScalarImageType>::Pointer minmaxFilter =
+  itk::MinimumMaximumImageFilter<ScalarImageType>::Pointer const minmaxFilter =
     itk::MinimumMaximumImageFilter<ScalarImageType>::New();
 
   HistogramMeasurementVectorType imageMin(NumberOfComponents);

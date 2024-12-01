@@ -36,8 +36,8 @@ ComplexToComplex1DFFTImageFilter<TInputImage, TOutputImage>::GenerateInputReques
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the inputs
-  typename InputImageType::Pointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  typename OutputImageType::Pointer outputPtr = this->GetOutput();
+  typename InputImageType::Pointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  typename OutputImageType::Pointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {

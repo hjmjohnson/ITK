@@ -83,7 +83,7 @@ protected:
   OutputCurvatureType
   EstimateCurvature(const OutputPointType & iP) override
   {
-    OutputMeshPointer output = this->GetOutput();
+    OutputMeshPointer const output = this->GetOutput();
 
     OutputQEType * qe = iP.GetEdge();
 
@@ -98,23 +98,23 @@ protected:
     {
       if (qe != qe->GetOnext())
       {
-        CoefficientType coefficent;
+        CoefficientType const coefficent;
 
         OutputQEType * qe_it = qe;
 
         do
         {
-          OutputQEType *  qe_it2 = qe_it->GetOnext();
-          OutputPointType q0 = output->GetPoint(qe_it->GetDestination());
-          OutputPointType q1 = output->GetPoint(qe_it2->GetDestination());
+          OutputQEType *        qe_it2 = qe_it->GetOnext();
+          OutputPointType const q0 = output->GetPoint(qe_it->GetDestination());
+          OutputPointType const q1 = output->GetPoint(qe_it2->GetDestination());
 
-          OutputCoordType temp_coeff = coefficent(output, qe_it);
+          OutputCoordType const temp_coeff = coefficent(output, qe_it);
           Laplace += temp_coeff * (iP - q0);
 
-          OutputCurvatureType temp_area = this->ComputeMixedArea(qe_it, qe_it2);
+          OutputCurvatureType const temp_area = this->ComputeMixedArea(qe_it, qe_it2);
           area += temp_area;
 
-          OutputVectorType face_normal = TriangleType::ComputeNormal(q0, iP, q1);
+          OutputVectorType const face_normal = TriangleType::ComputeNormal(q0, iP, q1);
           normal += face_normal;
 
           qe_it = qe_it2;

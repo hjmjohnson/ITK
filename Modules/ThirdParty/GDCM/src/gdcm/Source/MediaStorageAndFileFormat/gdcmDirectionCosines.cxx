@@ -145,7 +145,7 @@ bool DirectionCosines::SetFromString(const char *str)
 {
   if( str )
     {
-    const int n = sscanf( str, R"(%lf\%lf\%lf\%lf\%lf\%lf)",
+   const  int n = sscanf( str, R"(%lf\%lf\%lf\%lf\%lf\%lf)",
       Values, Values+1, Values+2, Values+3, Values+4, Values+5 );
     if( n == 6 )
       {

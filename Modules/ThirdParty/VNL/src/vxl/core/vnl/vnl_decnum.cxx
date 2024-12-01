@@ -18,7 +18,7 @@ vnl_decnum::vnl_decnum(std::string const & r)
   , exp_(0L)
 {
   long exp = 0L;
-  char const * p = r.c_str();
+  const char * p = r.c_str();
   while (*p == ' ' || *p == '\t' || *p == '\n' || *p == '\r')
     ++p;
   if (*p == '-')

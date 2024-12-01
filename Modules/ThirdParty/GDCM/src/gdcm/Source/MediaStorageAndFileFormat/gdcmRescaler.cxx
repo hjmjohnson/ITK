@@ -211,8 +211,8 @@ PixelFormat::ScalarType Rescaler::ComputeInterceptSlopePixelType()
     }
   //if( PF.IsValid() )
     {
-    const double intercept = Intercept;
-    const double slope = Slope;
+   const  double intercept = Intercept;
+   const  double slope = Slope;
     output = ComputeBestFit (PF,intercept,slope);
     }
   return output;
@@ -494,11 +494,11 @@ static PixelFormat ComputeInverseBestFitFromMinMax(/*const PixelFormat &pf,*/ do
     int64_t max2 = max; // make a copy
     while (min2 >>= 1) ++log2min;
     while (max2 >>= 1) ++log2max;
-    const int64_t bs = std::max( log2min, log2max ) + 1 + 1 /* 2 complement */;
+   const  int64_t bs = std::max( log2min, log2max ) + 1 + 1 /* 2 complement */;
 #else
     int64_t max2 = max - min; // make a copy
     while (max2 >>= 1) ++log2max;
-    const int64_t bs = log2max + 1;
+   const  int64_t bs = log2max + 1;
 #endif
     assert( bs <= st.GetBitsAllocated() );
     st.SetBitsStored( (unsigned short)bs );

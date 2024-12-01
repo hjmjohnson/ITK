@@ -43,7 +43,7 @@ DoIt(int argc, char * argv[], const std::string pixelType)
   using IndexType = typename InputImageType::IndexType;
 
   auto                              inputimg = InputImageType::New();
-  IndexType                         index{};
+  IndexType const                   index{};
   typename InputImageType::SizeType size;
   size[0] = width;
   size[1] = height;
@@ -97,7 +97,7 @@ DoIt(int argc, char * argv[], const std::string pixelType)
   using FilterType = itk::HardConnectedComponentImageFilter<InputImageType, OutputImageType>;
   auto filter = FilterType::New();
 
-  itk::SimpleFilterWatcher watcher(filter);
+  itk::SimpleFilterWatcher const watcher(filter);
 
   filter->SetInput(inputimg);
   // filter->SetObjectSeed(Seed);

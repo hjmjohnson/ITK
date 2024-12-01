@@ -59,7 +59,7 @@ auto
 LevelSetFunctionWithRefitTerm<TImageType, TSparseImageType>::ComputeGlobalTimeStep(void * GlobalData) const
   -> TimeStepType
 {
-  TimeStepType dt = std::min(Superclass::ComputeGlobalTimeStep(GlobalData), this->m_WaveDT);
+  TimeStepType const dt = std::min(Superclass::ComputeGlobalTimeStep(GlobalData), this->m_WaveDT);
   return dt;
 }
 
@@ -145,7 +145,7 @@ LevelSetFunctionWithRefitTerm<TImageType, TSparseImageType>::PropagationSpeed(co
                                                                               GlobalDataStruct *       globaldata) const
   -> ScalarValueType
 {
-  IndexType       idx = neighborhood.GetIndex();
+  IndexType const idx = neighborhood.GetIndex();
   NodeType *      targetnode = m_SparseTargetImage->GetPixel(idx);
   ScalarValueType refitterm;
 
@@ -162,8 +162,8 @@ LevelSetFunctionWithRefitTerm<TImageType, TSparseImageType>::PropagationSpeed(co
   }
   else
   {
-    ScalarValueType cv = this->ComputeCurvature(neighborhood);
-    ScalarValueType tcv = targetnode->m_Curvature;
+    ScalarValueType const cv = this->ComputeCurvature(neighborhood);
+    ScalarValueType const tcv = targetnode->m_Curvature;
     refitterm = static_cast<ScalarValueType>(tcv - cv);
   }
 

@@ -95,8 +95,8 @@ void
 ThresholdImageFilter<TImage>::DynamicThreadedGenerateData(const OutputImageRegionType & outputRegionForThread)
 {
   // Get the input and output pointers
-  InputImagePointer  inputPtr = this->GetInput();
-  OutputImagePointer outputPtr = this->GetOutput(0);
+  InputImagePointer const  inputPtr = this->GetInput();
+  OutputImagePointer const outputPtr = this->GetOutput(0);
 
   TotalProgressReporter progress(this, outputPtr->GetRequestedRegion().GetNumberOfPixels());
 

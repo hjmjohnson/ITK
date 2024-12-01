@@ -20,7 +20,7 @@
 
 namespace gdcm
 {
-        static const char * const TransferSyntaxStrings[][2] = {
+        const static char * const TransferSyntaxStrings[][2] = {
 {nullptr,nullptr}, // Starts a 1, not 0
 {"1.2.840.10008.1.1","Verification SOP Class"},
 {"1.2.840.10008.1.2","Implicit VR Little Endian: Default Transfer Syntax for DICOM"},
@@ -503,7 +503,7 @@ namespace gdcm
 unsigned int UIDs::GetNumberOfTransferSyntaxStrings()
 {
   // Do not count NULL sentinels at end
-  static const unsigned int size = sizeof(TransferSyntaxStrings)/sizeof(*TransferSyntaxStrings) - 2;
+  const static unsigned int size = sizeof(TransferSyntaxStrings)/sizeof(*TransferSyntaxStrings) - 2;
   return size;
 }
 

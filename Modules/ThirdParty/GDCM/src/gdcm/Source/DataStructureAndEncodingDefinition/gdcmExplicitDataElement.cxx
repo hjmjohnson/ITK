@@ -31,7 +31,7 @@ VL ExplicitDataElement::GetLength() const
     // TODO can factor the code:
     if( sq )
       {
-      const VL sqlen = sq->ComputeLength<ExplicitDataElement>();
+     const  VL sqlen = sq->ComputeLength<ExplicitDataElement>();
       assert( sqlen % 2 == 0 );
       return TagField.GetLength() + VRField.GetLength() +
         ValueLengthField.GetLength() + sqlen;
@@ -40,7 +40,7 @@ VL ExplicitDataElement::GetLength() const
     if( sf )
       {
       assert( VRField & VR::OB_OW ); // VR::INVALID is not possible AFAIK...
-      const VL sflen = sf->ComputeLength();
+     const  VL sflen = sf->ComputeLength();
       assert( sflen % 2 == 0 );
       return TagField.GetLength() + VRField.GetLength()
         + ValueLengthField.GetLength() + sflen;
@@ -53,7 +53,7 @@ VL ExplicitDataElement::GetLength() const
     // Each time VR::GetLength() is 2 then Value Length is coded in 2
     //                              4 then Value Length is coded in 4
     assert( !ValueField || ValueField->GetLength() == ValueLengthField );
-    const bool vr16bitsimpossible = (VRField & VR::VL16) && (ValueLengthField > (uint32_t)VL::GetVL16Max());
+   const  bool vr16bitsimpossible = (VRField & VR::VL16) && (ValueLengthField > (uint32_t)VL::GetVL16Max());
 
     if( vr16bitsimpossible || VRField == VR::INVALID )
       return TagField.GetLength() + 2*VR::GetLength(VR::UN) + ValueLengthField;

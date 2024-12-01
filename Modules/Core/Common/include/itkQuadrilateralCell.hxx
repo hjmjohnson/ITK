@@ -333,7 +333,7 @@ QuadrilateralCell<TCellInterface>::EvaluatePosition(CoordinateType *          x,
       mat.put(1, i, scol[i]);
     }
 
-    double d = vnl_determinant(mat);
+    double const d = vnl_determinant(mat);
     // d=vtkMath::Determinant2x2(rcol,scol);
     if (itk::Math::abs(d) < 1.e-20)
     {

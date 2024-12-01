@@ -191,18 +191,18 @@ BSplineResampleImageFilterBase<TInputImage, TOutputImage>::Reduce1DImage(const s
                                                                          unsigned int                inTraverseSize,
                                                                          ProgressReporter &          progress)
 {
-  unsigned int outTraverseSize = inTraverseSize / 2;
+  unsigned int const outTraverseSize = inTraverseSize / 2;
 
-  inTraverseSize = outTraverseSize * 2;     // ensures that an even number is used.
-  unsigned int inModK = inTraverseSize - 1; // number for modulus math of in
+  inTraverseSize = outTraverseSize * 2;           // ensures that an even number is used.
+  unsigned int const inModK = inTraverseSize - 1; // number for modulus math of in
 
   // TODO:  m_GSize < 2 has not been tested.
   if (m_GSize < 2)
   {
     for (unsigned int outK = 0; outK < outTraverseSize; ++outK)
     {
-      unsigned int inK = 2 * outK;
-      int          i2 = inK + 1;
+      unsigned int const inK = 2 * outK;
+      int                i2 = inK + 1;
       if (i2 > static_cast<int>(inModK))
       {
         // Original was
@@ -221,7 +221,7 @@ BSplineResampleImageFilterBase<TInputImage, TOutputImage>::Reduce1DImage(const s
   {
     for (unsigned int outK = 0; outK < outTraverseSize; ++outK)
     {
-      unsigned int inK = 2L * outK;
+      unsigned int const inK = 2L * outK;
 
       double outVal = in[inK] * m_G[0];
 
@@ -264,9 +264,9 @@ BSplineResampleImageFilterBase<TInputImage, TOutputImage>::Expand1DImage(const s
                                                                          unsigned int                inTraverseSize,
                                                                          ProgressReporter &          progress)
 {
-  unsigned int outTraverseSize = inTraverseSize * 2;
+  unsigned int const outTraverseSize = inTraverseSize * 2;
   // inTraverseSize = outTraverseSize/2;  // ensures that an even number is used.
-  int inModK = inTraverseSize - 1; // number for modulus math of in
+  int const inModK = inTraverseSize - 1; // number for modulus math of in
 
   // TODO:  m_GSize < 2 has not been tested.
   if (m_HSize < 2)
@@ -324,8 +324,8 @@ void
 BSplineResampleImageFilterBase<TInputImage, TOutputImage>::ReduceNDImage(OutputImageIterator & outItr)
 {
   // Does not support streaming
-  typename Superclass::InputImagePointer inputPtr = const_cast<TInputImage *>(this->GetInput());
-  SizeType                               startSize = inputPtr->GetBufferedRegion().GetSize();
+  typename Superclass::InputImagePointer const inputPtr = const_cast<TInputImage *>(this->GetInput());
+  SizeType                                     startSize = inputPtr->GetBufferedRegion().GetSize();
 
   // Initialize scratchImage space and allocate memory
   InitializeScratch(startSize);
@@ -359,10 +359,10 @@ BSplineResampleImageFilterBase<TInputImage, TOutputImage>::ReduceNDImage(OutputI
    * OutputImage for direct writing into the final variable. */
 
   // The first time through the loop our input image is inputPtr
-  typename TInputImage::ConstPointer workingImage = inputPtr;
+  typename TInputImage::ConstPointer const workingImage = inputPtr;
 
-  unsigned int     count = scratchRegion.GetNumberOfPixels() * ImageDimension;
-  ProgressReporter progress(this, 0, count, 10);
+  unsigned int const count = scratchRegion.GetNumberOfPixels() * ImageDimension;
+  ProgressReporter   progress(this, 0, count, 10);
   for (unsigned int n = 0; n < ImageDimension; ++n)
   {
     // Setup iterators for input image.
@@ -433,8 +433,8 @@ BSplineResampleImageFilterBase<TInputImage, TOutputImage>::ExpandNDImage(OutputI
 {
   // Set up variables for waking the image regions.
   // Does not support streaming
-  typename Superclass::InputImagePointer inputPtr = const_cast<TInputImage *>(this->GetInput());
-  SizeType                               startSize = inputPtr->GetBufferedRegion().GetSize();
+  typename Superclass::InputImagePointer const inputPtr = const_cast<TInputImage *>(this->GetInput());
+  SizeType                                     startSize = inputPtr->GetBufferedRegion().GetSize();
 
   // Initialize scratchImage space and allocate memory
   InitializeScratch(startSize);
@@ -469,12 +469,12 @@ BSplineResampleImageFilterBase<TInputImage, TOutputImage>::ExpandNDImage(OutputI
   **/
 
   // The first time through the loop our input image is m_Image
-  typename TInputImage::ConstPointer workingImage = inputPtr;
+  typename TInputImage::ConstPointer const workingImage = inputPtr;
 
-  RegionType workingRegion = validRegion;
+  RegionType const workingRegion = validRegion;
 
-  unsigned int     count = scratchRegion.GetNumberOfPixels() * ImageDimension;
-  ProgressReporter progress(this, 0, count, 10);
+  unsigned int const count = scratchRegion.GetNumberOfPixels() * ImageDimension;
+  ProgressReporter   progress(this, 0, count, 10);
   for (unsigned int n = 0; n < ImageDimension; ++n)
   {
     // Setup iterators for input image.

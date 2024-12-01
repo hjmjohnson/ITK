@@ -92,8 +92,8 @@ MRFImageFilter<TInputImage, TClassifiedImage>::GenerateInputRequestedRegion()
 {
   // this filter requires that all of the input images
   // are the size of the output requested region
-  InputImagePointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  OutputImagePointer outputPtr = this->GetOutput();
+  InputImagePointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  OutputImagePointer const outputPtr = this->GetOutput();
 
   if (inputPtr && outputPtr)
   {
@@ -115,8 +115,8 @@ template <typename TInputImage, typename TClassifiedImage>
 void
 MRFImageFilter<TInputImage, TClassifiedImage>::GenerateOutputInformation()
 {
-  typename TInputImage::ConstPointer input = this->GetInput();
-  typename TClassifiedImage::Pointer output = this->GetOutput();
+  typename TInputImage::ConstPointer const input = this->GetInput();
+  typename TClassifiedImage::Pointer const output = this->GetOutput();
   output->SetLargestPossibleRegion(input->GetLargestPossibleRegion());
 }
 
@@ -128,7 +128,7 @@ MRFImageFilter<TInputImage, TClassifiedImage>::GenerateData()
   // generate the Gaussian model for the different classes
   // and then generate the initial labelled dataset.
 
-  InputImageConstPointer inputImage = this->GetInput();
+  InputImageConstPointer const inputImage = this->GetInput();
 
   // Give the input image and training image set to the
   // classifier
@@ -142,7 +142,7 @@ MRFImageFilter<TInputImage, TClassifiedImage>::GenerateData()
 
   this->ApplyMRFImageFilter();
   // Set the output labelled and allocate the memory
-  LabelledImagePointer outputPtr = this->GetOutput();
+  LabelledImagePointer const outputPtr = this->GetOutput();
 
   // Allocate the output buffer memory
   outputPtr->SetBufferedRegion(outputPtr->GetRequestedRegion());
@@ -231,7 +231,7 @@ MRFImageFilter<TInputImage, TClassifiedImage>::SetDefaultMRFNeighborhoodWeight()
 
   // Determine the default neighborhood size
   m_NeighborhoodSize = 1;
-  int neighborhoodRadius = 1; // Default assumes a radius of 1
+  int const neighborhoodRadius = 1; // Default assumes a radius of 1
   for (unsigned int i = 0; i < InputImageDimension; ++i)
   {
     m_NeighborhoodSize *= (2 * neighborhoodRadius + 1);
@@ -442,11 +442,11 @@ MRFImageFilter<TInputImage, TClassifiedImage>::ApplyICMLabeller()
   LabelStatusImageFaceListType labelStatusImageFaceList;
 
   // Compute the faces for the neighborhoods in the input/labelled image
-  InputImageConstPointer inputImage = this->GetInput();
+  InputImageConstPointer const inputImage = this->GetInput();
   inputImageFaceList =
     inputImageFacesCalculator(inputImage, inputImage->GetBufferedRegion(), m_InputImageNeighborhoodRadius);
 
-  LabelledImagePointer labelledImage = m_ClassifierPtr->GetClassifiedImage();
+  LabelledImagePointer const labelledImage = m_ClassifierPtr->GetClassifiedImage();
   labelledImageFaceList =
     labelledImageFacesCalculator(labelledImage, labelledImage->GetBufferedRegion(), m_LabelledImageNeighborhoodRadius);
 

@@ -457,7 +457,7 @@ std::ostream &
 operator<<(std::ostream & os, const Offset<VDimension> & ind)
 {
   os << '[';
-  unsigned int dimlim = VDimension - 1;
+  unsigned int const dimlim = VDimension - 1;
   for (unsigned int i = 0; i < dimlim; ++i)
   {
     os << ind[i] << ", ";

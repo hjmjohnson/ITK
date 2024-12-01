@@ -158,9 +158,9 @@ bool JPEGCodec::Decode(DataElement const &in, DataElement &out)
     for(unsigned int i = 0; i < sf0->GetNumberOfFragments(); ++i)
       {
       std::stringstream is;
-      const Fragment &frag = sf0->GetFragment(i);
+     const  Fragment &frag = sf0->GetFragment(i);
       if( frag.IsEmpty() ) return false;
-      const ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
+     const  ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
       size_t bv_len = bv.GetLength();
       char *mybuffer = new char[bv_len];
       bool b = bv.GetBuffer(mybuffer, bv.GetLength());
@@ -172,8 +172,8 @@ bool JPEGCodec::Decode(DataElement const &in, DataElement &out)
       if( !r )
         {
         gdcmDebugMacro( "Failed to decompress Frag #" << i );
-        const bool suspended = Internal->IsStateSuspension();
-        const size_t nfrags = sf0->GetNumberOfFragments();
+       const  bool suspended = Internal->IsStateSuspension();
+       const  size_t nfrags = sf0->GetNumberOfFragments();
         // In case of chunked-jpeg, this is always an error
         if( suspended )
           return false;
@@ -214,13 +214,13 @@ bool JPEGCodec::Decode(DataElement const &in, DataElement &out)
         return false;
       }
 
-      const SequenceOfFragments *sf = &sf_bug;
+     const  SequenceOfFragments *sf = &sf_bug;
       for(unsigned int i = 0; i < sf->GetNumberOfFragments(); ++i)
         {
         std::stringstream is;
-        const Fragment &frag = sf->GetFragment(i);
+       const  Fragment &frag = sf->GetFragment(i);
         if( frag.IsEmpty() ) return false;
-        const ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
+       const  ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
         size_t bv_len = bv.GetLength();
         char *mybuffer = new char[bv_len];
         bool b = bv.GetBuffer(mybuffer, bv.GetLength());
@@ -334,7 +334,7 @@ bool JPEGCodec::Code(DataElement const &in, DataElement &out)
   for(unsigned int dim = 0; dim < dims[2]; ++dim)
     {
     std::stringstream os;
-    const char *p = input + dim * image_len;
+   const  char *p = input + dim * image_len;
     bool r = Internal->InternalCode(p, image_len, os);
     if( !r )
       {
@@ -505,7 +505,7 @@ bool JPEGCodec::DecodeExtent(
       else if ( frag.GetTag() == Tag(0xddff,0x00e0) )
         {
         assert( nfrags == 1 );
-        const ByteValue *bv = frag.GetByteValue();
+       const  ByteValue *bv = frag.GetByteValue();
         assert( (unsigned char)bv->GetPointer()[ bv->GetLength() - 1 ] == 0xfe );
         // Yes this is an extra copy, this is a bug anyway, go fix YOUR code
         frag.SetByteValue( bv->GetPointer(), bv->GetLength() - 1 );
@@ -534,9 +534,9 @@ bool JPEGCodec::DecodeExtent(
     if(!b) return false;
     assert( b );
 
-    const unsigned int rowsize = xmax - xmin + 1;
-    const unsigned int colsize = ymax - ymin + 1;
-    const unsigned int bytesPerPixel = pf.GetPixelSize();
+   const  unsigned int rowsize = xmax - xmin + 1;
+   const  unsigned int colsize = ymax - ymin + 1;
+   const  unsigned int bytesPerPixel = pf.GetPixelSize();
     os.seekg(0, std::ios::beg );
     assert( os.good() );
     std::istream *theStream = &os;
@@ -570,7 +570,7 @@ bool JPEGCodec::DecodeExtent(
       {
       //std::streamoff relstart = is.tellg();
       //assert( relstart - thestart == 8 );
-      const std::streamoff off = frag.GetVL();
+     const  std::streamoff off = frag.GetVL();
       offsets.push_back( (size_t)off );
       is.seekg( off, std::ios::cur );
       ++numfrags;
@@ -594,7 +594,7 @@ bool JPEGCodec::DecodeExtent(
       //is.read( dummy_buffer, buf_size );
 
       std::stringstream os;
-      const bool b = DecodeByStreams(is, os); (void)b;
+     const  bool b = DecodeByStreams(is, os); (void)b;
       assert( b );
       /* free the memory containing the code-stream */
       //delete[] dummy_buffer;

@@ -109,7 +109,7 @@ namespace gdcm
                 // some other segments are required as references.
                 return false;
             }
-            const EntryType* first_segment = instances.begin()->first;
+           const  EntryType* first_segment = instances.begin()->first;
             const unsigned short* pOffset
                 = reinterpret_cast<const unsigned short*>(this->_first + 2);
             unsigned long offsetBytes
@@ -138,7 +138,7 @@ namespace gdcm
     {
         using SegmentList = std::deque<Segment<EntryType> *>;
         SegmentList segments;
-        const EntryType* raw_seg = raw_values;
+       const  EntryType* raw_seg = raw_values;
         while ( (std::distance(raw_values, raw_seg) * sizeof(EntryType)) <length ) {
             Segment<EntryType>* segment = nullptr;
             if ( *raw_seg == 0 ) {
@@ -185,8 +185,8 @@ void SegmentedPaletteColorLookupTable::SetLUT(LookupTableType type, const unsign
     }
   else if( BitSample == 16 )
     {
-    const uint16_t *array16 = (const uint16_t*)(const void*)array;
-    const uint16_t *segment_values = array16;
+   const  uint16_t *array16 = (const uint16_t*)(const void*)array;
+   const  uint16_t *segment_values = array16;
     std::vector<uint16_t> palette;
     unsigned int num_entries = GetLUTLength(type);
     palette.reserve(num_entries);

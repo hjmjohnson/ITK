@@ -91,7 +91,7 @@ TubeSpatialObject<TDimension, TTubePointType>::InternalClone() const
 {
   typename LightObject::Pointer loPtr = Superclass::InternalClone();
 
-  typename Self::Pointer rval = dynamic_cast<Self *>(loPtr.GetPointer());
+  typename Self::Pointer const rval = dynamic_cast<Self *>(loPtr.GetPointer());
   if (rval.IsNull())
   {
     itkExceptionMacro("downcast to type " << this->GetNameOfClass() << " failed.");
@@ -126,7 +126,7 @@ TubeSpatialObject<TDimension, TTubePointType>::ComputeMyBoundingBox()
 
   if (it == end)
   {
-    typename BoundingBoxType::PointType pnt{};
+    typename BoundingBoxType::PointType const pnt{};
     this->GetModifiableMyBoundingBoxInObjectSpace()->SetMinimum(pnt);
     this->GetModifiableMyBoundingBoxInObjectSpace()->SetMaximum(pnt);
     return;
@@ -187,10 +187,10 @@ TubeSpatialObject<TDimension, TTubePointType>::IsInsideInObjectSpace(const Point
     auto last = end;
     --last;
 
-    PointType firstP = first->GetPositionInObjectSpace();
-    double    firstR = first->GetRadiusInObjectSpace();
-    PointType lastP = last->GetPositionInObjectSpace();
-    double    lastR = last->GetRadiusInObjectSpace();
+    PointType const firstP = first->GetPositionInObjectSpace();
+    double const    firstR = first->GetRadiusInObjectSpace();
+    PointType const lastP = last->GetPositionInObjectSpace();
+    double const    lastR = last->GetRadiusInObjectSpace();
 
     bool withinEndCap = false;
     while (it2 != end)
@@ -233,10 +233,10 @@ TubeSpatialObject<TDimension, TTubePointType>::IsInsideInObjectSpace(const Point
         double lambda = A / B;
         B = std::sqrt(B);
 
-        double lambdaMin = 0;
-        double lambdaMax = 1;
-        double lambdaMinR = it->GetRadiusInObjectSpace();
-        double lambdaMaxR = it2->GetRadiusInObjectSpace();
+        double       lambdaMin = 0;
+        double       lambdaMax = 1;
+        double const lambdaMinR = it->GetRadiusInObjectSpace();
+        double const lambdaMaxR = it2->GetRadiusInObjectSpace();
         if (m_EndRounded || !withinEndCap)
         {
           lambdaMin = -(lambdaMinR / B);
@@ -262,7 +262,7 @@ TubeSpatialObject<TDimension, TTubePointType>::IsInsideInObjectSpace(const Point
             lambda = 1;
           }
 
-          double lambdaR = lambdaMinR + lambda * (lambdaMaxR - lambdaMinR);
+          double const lambdaR = lambdaMinR + lambda * (lambdaMaxR - lambdaMinR);
 
           PointType p;
           for (unsigned int i = 0; i < TDimension; ++i)

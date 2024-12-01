@@ -53,8 +53,8 @@ GradientImageFilter<TInputImage, TOperatorValueType, TOutputValueType, TOutputIm
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  InputImagePointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  OutputImagePointer outputPtr = this->GetOutput();
+  InputImagePointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -98,7 +98,7 @@ GradientImageFilter<TInputImage, TOperatorValueType, TOutputValueType, TOutputIm
   const OutputImageRegionType & outputRegionForThread)
 {
 
-  NeighborhoodInnerProduct<InputImageType, OperatorValueType, OutputValueType> SIP;
+  NeighborhoodInnerProduct<InputImageType, OperatorValueType, OutputValueType> const SIP;
 
   OutputImageType *      outputImage = this->GetOutput();
   const InputImageType * inputImage = this->GetInput();

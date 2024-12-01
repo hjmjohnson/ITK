@@ -72,7 +72,7 @@ itkBinaryOpeningByReconstructionImageFilterTest(int argc, char * argv[])
   reconstruction->SetBackgroundValue(backgroundValue);
   ITK_TEST_SET_GET_VALUE(backgroundValue, reconstruction->GetBackgroundValue());
 
-  itk::SimpleFilterWatcher watcher(reconstruction, "filter");
+  itk::SimpleFilterWatcher const watcher(reconstruction, "filter");
 
   using WriterType = itk::ImageFileWriter<IType>;
   auto writer = WriterType::New();

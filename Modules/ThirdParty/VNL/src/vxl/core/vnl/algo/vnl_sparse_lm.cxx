@@ -368,7 +368,7 @@ vnl_sparse_lm::allocate_matrices()
   // Iterate through all i and j to set the size of the matrices and vectors defined above
   for (int i = 0; i < num_a_; ++i)
   {
-    const unsigned int ai_size = f_->number_of_params_a(i);
+   const  unsigned int ai_size = f_->number_of_params_a(i);
     U_[i].set_size(ai_size, ai_size);
     Q_[i].set_size(size_c_, ai_size);
     Z_[i].set_size(size_c_, ai_size);
@@ -377,10 +377,10 @@ vnl_sparse_lm::allocate_matrices()
     vnl_crs_index::sparse_vector row = crs.sparse_row(i);
     for (auto & r_itr : row)
     {
-      const unsigned int j = r_itr.second;
-      const unsigned int k = r_itr.first;
-      const unsigned int bj_size = f_->number_of_params_b(j);
-      const unsigned int eij_size = f_->number_of_residuals(k);
+     const  unsigned int j = r_itr.second;
+     const  unsigned int k = r_itr.first;
+     const  unsigned int bj_size = f_->number_of_params_b(j);
+     const  unsigned int eij_size = f_->number_of_residuals(k);
       A_[k].set_size(eij_size, ai_size);
       B_[k].set_size(eij_size, bj_size);
       C_[k].set_size(eij_size, size_c_);
@@ -390,7 +390,7 @@ vnl_sparse_lm::allocate_matrices()
   }
   for (int j = 0; j < num_b_; ++j)
   {
-    const unsigned int bj_size = f_->number_of_params_b(j);
+   const  unsigned int bj_size = f_->number_of_params_b(j);
     V_[j].set_size(bj_size, bj_size);
     R_[j].set_size(size_c_, bj_size);
     Mb_[j].set_size(size_c_, bj_size);
@@ -469,13 +469,13 @@ vnl_sparse_lm::extract_diagonal() const
   int z = 0;
   for (int i = 0; i < num_a_; ++i)
   {
-    const vnl_matrix<double> & Ui = U_[i];
+   const  vnl_matrix<double> & Ui = U_[i];
     for (unsigned int ii = 0; ii < Ui.rows(); ++ii)
       diag_UVT[z++] = Ui(ii, ii);
   }
   for (int j = 0; j < num_b_; ++j)
   {
-    const vnl_matrix<double> & Vj = V_[j];
+   const  vnl_matrix<double> & Vj = V_[j];
     for (unsigned int ii = 0; ii < Vj.rows(); ++ii)
       diag_UVT[z++] = Vj(ii, ii);
   }

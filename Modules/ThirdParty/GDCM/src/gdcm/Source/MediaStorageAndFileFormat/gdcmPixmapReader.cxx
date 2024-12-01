@@ -176,13 +176,13 @@ static void DoIconImage(const DataSet& rootds, Pixmap& image)
   IconImage &pixeldata = image.GetIconImage();
   if( rootds.FindDataElement( ticonimage ) )
     {
-    const DataElement &iconimagesq = rootds.GetDataElement( ticonimage );
+   const  DataElement &iconimagesq = rootds.GetDataElement( ticonimage );
     //const SequenceOfItems* sq = iconimagesq.GetSequenceOfItems();
     SmartPointer<SequenceOfItems> sq = iconimagesq.GetValueAsSQ();
     // Is SQ empty ?
     if( !sq || sq->IsEmpty() ) return;
     SequenceOfItems::ConstIterator it = sq->Begin();
-    const DataSet &ds = it->GetNestedDataSet();
+   const  DataSet &ds = it->GetNestedDataSet();
 
     // D 0028|0011 [US] [Columns] [512]
       {
@@ -246,7 +246,7 @@ static void DoIconImage(const DataSet& rootds, Pixmap& image)
     PhotometricInterpretation pi = PhotometricInterpretation::MONOCHROME2;
     if( ds.FindDataElement( tphotometricinterpretation ) )
       {
-      const ByteValue *photometricinterpretation = ds.GetDataElement( tphotometricinterpretation ).GetByteValue();
+     const  ByteValue *photometricinterpretation = ds.GetDataElement( tphotometricinterpretation ).GetByteValue();
       std::string photometricinterpretation_str(
         photometricinterpretation->GetPointer(),
         photometricinterpretation->GetLength() );
@@ -296,7 +296,7 @@ static void DoIconImage(const DataSet& rootds, Pixmap& image)
         const Tag seglut(0x0028, (uint16_t)(0x1221 + i));
         if( ds.FindDataElement( tlut ) )
           {
-          const ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
+         const  ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
           assert( lut_raw );
           // LookupTableType::RED == 0
           lut->SetLUT( LookupTable::LookupTableType(i),
@@ -315,7 +315,7 @@ static void DoIconImage(const DataSet& rootds, Pixmap& image)
           }
         else if( ds.FindDataElement( seglut ) )
           {
-          const ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
+         const  ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
           assert( lut_raw );
           lut->SetLUT( LookupTable::LookupTableType(i),
             (const unsigned char*)lut_raw->GetPointer(), lut_raw->GetLength() );
@@ -336,20 +336,20 @@ static void DoIconImage(const DataSet& rootds, Pixmap& image)
       pixeldata.SetLUT(*lut);
       }
 
-    const Tag tpixeldata = Tag(0x7fe0, 0x0010);
+   const  Tag tpixeldata = Tag(0x7fe0, 0x0010);
     if( !ds.FindDataElement( tpixeldata ) )
       {
       gdcmWarningMacro( "Icon Sequence is incomplete. Giving up" );
       pixeldata.Clear();
       return;
       }
-    const DataElement& de = ds.GetDataElement( tpixeldata );
+   const  DataElement& de = ds.GetDataElement( tpixeldata );
     pixeldata.SetDataElement( de );
 
     // Pass TransferSyntax:
     // Warning This is legal for the Icon to be uncompress in a compressed image
     // We need to set the appropriate TS here:
-    const ByteValue *bv = de.GetByteValue();
+   const  ByteValue *bv = de.GetByteValue();
     if( bv )
       pixeldata.SetTransferSyntax( TransferSyntax::ImplicitVRLittleEndian );
     else
@@ -370,7 +370,7 @@ static void DoCurves(const DataSet& ds, Pixmap& pixeldata)
     unsigned int idxcurves = 0;
     while( !finished )
       {
-      const DataElement &de = ds.FindNextDataElement( curve );
+     const  DataElement &de = ds.FindNextDataElement( curve );
       // Are we done:
       if( de.GetTag().GetGroup() > 0x50FF ) // last possible curve curve
         {
@@ -417,7 +417,7 @@ static unsigned int GetNumberOfOverlaysInternal(DataSet const & ds, std::vector<
   unsigned int numoverlays = 0;
   while( !finished )
     {
-    const DataElement &de = ds.FindNextDataElement( overlay );
+   const  DataElement &de = ds.FindNextDataElement( overlay );
     if( de.GetTag().GetGroup() > 0x60FF ) // last possible curve
       {
       finished = true;
@@ -454,7 +454,7 @@ static unsigned int GetNumberOfOverlaysInternal(DataSet const & ds, std::vector<
       if( ds.FindDataElement( toverlaydata ) )
         {
         // ok so far so good...
-        const DataElement& overlaydata = ds.GetDataElement( toverlaydata );
+       const  DataElement& overlaydata = ds.GetDataElement( toverlaydata );
         //const DataElement& overlaydata = ds.GetDataElement(Tag(overlay.GetGroup(),0x0010));
         if( !overlaydata.IsEmpty() )
           {
@@ -467,10 +467,10 @@ static unsigned int GetNumberOfOverlaysInternal(DataSet const & ds, std::vector<
         {
         // Overlay Pixel are in Unused Pixel
         assert( !ds.FindDataElement( toverlaydata ) );
-        const DataElement& overlayrows = ds.GetDataElement( toverlayrows );
-        const DataElement& overlaycols = ds.GetDataElement( toverlaycols );
+       const  DataElement& overlayrows = ds.GetDataElement( toverlayrows );
+       const  DataElement& overlaycols = ds.GetDataElement( toverlaycols );
         assert( ds.FindDataElement( toverlaybitpos ) );
-        const DataElement& overlaybitpos = ds.GetDataElement( toverlaybitpos );
+       const  DataElement& overlaybitpos = ds.GetDataElement( toverlaybitpos );
         if( !overlayrows.IsEmpty() && !overlaycols.IsEmpty() && !overlaybitpos.IsEmpty() )
           {
           ++numoverlays;
@@ -511,7 +511,7 @@ static bool DoOverlays(const DataSet& ds, Pixmap& pixeldata)
       uint16_t currentoverlay = overlaylist[idxoverlays];
       Tag overlay(0x6000,0x0000);
       overlay.SetGroup( currentoverlay );
-      const DataElement &de = ds.FindNextDataElement( overlay );
+     const  DataElement &de = ds.FindNextDataElement( overlay );
       assert( !(currentoverlay % 2) ); // 0x6001 is not an overlay...
       // Now loop on all element from this current group:
       DataElement de2 = de;
@@ -574,7 +574,7 @@ static bool DoOverlays(const DataSet& ds, Pixmap& pixeldata)
   for( size_t ov_idx = pixeldata.GetNumberOfOverlays(); ov_idx != 0; --ov_idx )
     {
     size_t ov = ov_idx - 1;
-    const Overlay& o = pixeldata.GetOverlay(ov);
+   const  Overlay& o = pixeldata.GetOverlay(ov);
     if( o.IsInPixelData() )
       {
       unsigned short obp = o.GetBitPosition();
@@ -633,7 +633,7 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
     // PHILIPS_Gyroscan-12-Jpeg_Extended_Process_2_4.dcm
     gdcmDebugMacro( "Mixture of ACR NEMA and DICOM file" );
     isacrnema = true;
-    const char *str = ds.GetDataElement( trecognitioncode ).GetByteValue()->GetPointer();
+   const  char *str = ds.GetDataElement( trecognitioncode ).GetByteValue()->GetPointer();
     assert( strncmp( str, "ACR-NEMA", strlen( "ACR-NEMA" ) ) == 0 ||
       strncmp( str, "ACRNEMA", strlen( "ACRNEMA" ) ) == 0 ||
       strncmp( str, "MIPS 2.0", strlen( "MIPS 2.0" ) ) == 0 );
@@ -812,7 +812,7 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
   // well hopefully :(
   if( ds.FindDataElement( planarconfiguration ) && !ds.GetDataElement( planarconfiguration ).IsEmpty() )
     {
-    const DataElement& de = ds.GetDataElement( planarconfiguration );
+   const  DataElement& de = ds.GetDataElement( planarconfiguration );
     Attribute<0x0028,0x0006> at = { 0 };
     at.SetFromDataElement( de );
 
@@ -922,7 +922,7 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
       const Tag seglut(0x0028, (uint16_t)(0x1221 + i));
       if( ds.FindDataElement( tlut ) )
         {
-        const ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
+       const  ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
         if( lut_raw )
           {
           // LookupTableType::RED == 0
@@ -942,7 +942,7 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
         }
       else if( ds.FindDataElement( seglut ) )
         {
-        const ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
+       const  ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
         if( lut_raw )
           {
           lut->SetLUT( LookupTable::LookupTableType(i),
@@ -988,33 +988,33 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
     {
     if( ms == MediaStorage::MRSpectroscopyStorage )
       {
-      const Tag spectdata = Tag(0x5600, 0x0020);
+     const  Tag spectdata = Tag(0x5600, 0x0020);
       if( !ds.FindDataElement( spectdata ) )
         {
         gdcmWarningMacro( "No Spectroscopy Data Found" );
         return false;
         }
-      const DataElement& xde = ds.GetDataElement( spectdata );
+     const  DataElement& xde = ds.GetDataElement( spectdata );
       //bool need = PixelData->GetTransferSyntax() == TransferSyntax::ImplicitVRBigEndianPrivateGE;
       //PixelData->SetNeedByteSwap( need );
       PixelData->SetDataElement( xde );
       }
     else
       {
-      const Tag pixeldata = Tag(0x7fe0, 0x0010);
+     const  Tag pixeldata = Tag(0x7fe0, 0x0010);
       if( !ds.FindDataElement( pixeldata ) )
         {
         gdcmWarningMacro( "No Pixel Data Found" );
         return false;
         }
-      const DataElement& xde = ds.GetDataElement( pixeldata );
+     const  DataElement& xde = ds.GetDataElement( pixeldata );
       bool need = PixelData->GetTransferSyntax() == TransferSyntax::ImplicitVRBigEndianPrivateGE;
       PixelData->SetNeedByteSwap( need );
       PixelData->SetDataElement( xde );
       if( PixelData->GetTransferSyntax().IsEncapsulated() && PixelData->GetDataElement().GetByteValue() )
       {
         // Pixel Data attribute is not encapsulated, let's check for simple user error
-        const ByteValue *bv = PixelData->GetDataElement().GetByteValue();
+       const  ByteValue *bv = PixelData->GetDataElement().GetByteValue();
         if( bv->GetLength() == PixelData->GetBufferLength() ||
             bv->GetLength() == PixelData->GetBufferLength() + 1 )
         {
@@ -1029,7 +1029,7 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
 
       }
 
-    const unsigned int *dims = PixelData->GetDimensions();
+   const  unsigned int *dims = PixelData->GetDimensions();
     if( dims[0] == 0 || dims[1] == 0 )
       {
       // Pseudo-declared JPEG SC image storage. Let's fix col/row/pf/pi
@@ -1037,9 +1037,9 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
       if( jpeg.CanDecode( PixelData->GetTransferSyntax() ) )
         {
         std::stringstream ss;
-        const DataElement &de = PixelData->GetDataElement();
+       const  DataElement &de = PixelData->GetDataElement();
         //const ByteValue *bv = de.GetByteValue();
-        const SequenceOfFragments *sqf = de.GetSequenceOfFragments();
+       const  SequenceOfFragments *sqf = de.GetSequenceOfFragments();
         if( !sqf )
           {
           // TODO: It would be nice to recognize file such as JPEGDefinedLengthSequenceOfFragments.dcm
@@ -1101,7 +1101,7 @@ bool PixmapReader::ReadImageInternal(MediaStorage const &ms, bool handlepixeldat
     {
     haslossyflag = true;
     licat.SetFromDataSet( ds ); // could be empty
-    const CSComp & v = licat.GetValue();
+   const  CSComp & v = licat.GetValue();
     lossyflag = atoi( v.c_str() ) == 1;
     // Note: technically one can decompress into uncompressed form (eg.
     // Implicit Little Endian) an input JPEG Lossy. So we need to check
@@ -1143,7 +1143,7 @@ bool PixmapReader::ReadACRNEMAImage()
   const Tag timagedimensions = Tag(0x0028, 0x0005);
   if( ds.FindDataElement( timagedimensions ) )
     {
-    const DataElement& de0 = ds.GetDataElement( timagedimensions );
+   const  DataElement& de0 = ds.GetDataElement( timagedimensions );
     unsigned short imagedimensions = 0;
     if( de0.GetVR() == VR::SS )
     {
@@ -1164,7 +1164,7 @@ bool PixmapReader::ReadACRNEMAImage()
       {
       PixelData->SetNumberOfDimensions(3);
       // D 0028|0012 [US] [Planes] [262]
-      const DataElement& de1 = ds.GetDataElement( Tag(0x0028, 0x0012) );
+     const  DataElement& de1 = ds.GetDataElement( Tag(0x0028, 0x0012) );
       Attribute<0x0028,0x0012> at1 = { 0 };
       at1.SetFromDataElement( de1 );
       assert( at1.GetNumberOfValues() == 1 );
@@ -1213,7 +1213,7 @@ bool PixmapReader::ReadACRNEMAImage()
   const Tag trecognitioncode(0x0008,0x0010);
   if( ds.FindDataElement( trecognitioncode ) && !ds.GetDataElement( trecognitioncode ).IsEmpty() )
     {
-    const ByteValue *libido = ds.GetDataElement(trecognitioncode).GetByteValue();
+   const  ByteValue *libido = ds.GetDataElement(trecognitioncode).GetByteValue();
     assert( libido );
     std::string libido_str( libido->GetPointer(), libido->GetLength() );
     assert( libido_str != "CANRME_AILIBOD1_1." );
@@ -1221,7 +1221,7 @@ bool PixmapReader::ReadACRNEMAImage()
       {
       // Swap Columns & Rows
       // assert( PixelData->GetNumberOfDimensions() == 2 );
-      const unsigned int *dims = PixelData->GetDimensions();
+     const  unsigned int *dims = PixelData->GetDimensions();
       unsigned int tmp = dims[0];
       PixelData->SetDimension(0, dims[1] );
       PixelData->SetDimension(1, tmp );

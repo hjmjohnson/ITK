@@ -418,7 +418,7 @@ bool Reader::InternalReadCommon(const T_Caller &caller)
       gdcmDebugMacro( "no file meta info found" );
       }
 
-    const TransferSyntax &ts = F->GetHeader().GetDataSetTransferSyntax();
+   const  TransferSyntax &ts = F->GetHeader().GetDataSetTransferSyntax();
     if( !ts.IsValid() )
       {
       throw Exception( "Meta Header issue" );
@@ -835,7 +835,7 @@ void Reader::SetFileName(const char *utf8path)
   Ifstream = new std::ifstream();
   if (utf8path && *utf8path) {
 #ifdef _MSC_VER
-    const std::wstring uncpath = System::ConvertToUNC(utf8path);
+   const  std::wstring uncpath = System::ConvertToUNC(utf8path);
     Ifstream->open(uncpath.c_str(), std::ios::binary);
 #else
     Ifstream->open( utf8path, std::ios::binary);

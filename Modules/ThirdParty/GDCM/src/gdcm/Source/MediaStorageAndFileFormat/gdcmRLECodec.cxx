@@ -389,7 +389,7 @@ bool RLECodec::Code(DataElement const &in, DataElement &out)
     // Within each frame, create the RLE Segments:
     // lets' try a simple scheme where each Segments is given an equal portion
     // of the input image.
-    const char *ptr_img = input + dim * image_len;
+   const  char *ptr_img = input + dim * image_len;
     if( GetPlanarConfiguration() == 0 && GetPixelFormat().GetSamplesPerPixel() == 3 )
       {
       if( GetPixelFormat().GetBitsAllocated() == 8 )
@@ -420,7 +420,7 @@ bool RLECodec::Code(DataElement const &in, DataElement &out)
         {
         unsigned long iimage_len = image_len / div;
         char *ibuffer = buffer + j * iimage_len;
-        const char *iptr_img = ptr_img + j * iimage_len;
+       const  char *iptr_img = ptr_img + j * iimage_len;
         assert( iimage_len % 4 == 0 );
         for(unsigned long i = 0; i < iimage_len/4; ++i)
           {
@@ -466,7 +466,7 @@ bool RLECodec::Code(DataElement const &in, DataElement &out)
         {
         unsigned long iimage_len = image_len / div;
         char *ibuffer = buffer + j * iimage_len;
-        const char *iptr_img = ptr_img + j * iimage_len;
+       const  char *iptr_img = ptr_img + j * iimage_len;
         assert( iimage_len % 2 == 0 );
         for(unsigned long i = 0; i < iimage_len/2; ++i)
           {
@@ -488,12 +488,12 @@ bool RLECodec::Code(DataElement const &in, DataElement &out)
       ptr_img = buffer;
       }
     assert( image_len % MaxNumSegments == 0 );
-    const size_t input_seg_length = image_len / MaxNumSegments;
+   const  size_t input_seg_length = image_len / MaxNumSegments;
     std::string datastr;
     for(unsigned int seg = 0; seg < MaxNumSegments; ++seg )
       {
       size_t partition = input_seg_length;
-      const char *ptr = ptr_img + seg * input_seg_length;
+     const  char *ptr = ptr_img + seg * input_seg_length;
       assert( ptr < ptr_img + image_len );
       if( seg == MaxNumSegments - 1 )
         {
@@ -607,7 +607,7 @@ bool RLECodec::Decode(DataElement const &in, DataElement &out)
   if( NumberOfDimensions == 2 )
     {
     out = in;
-    const SequenceOfFragments *sf = in.GetSequenceOfFragments();
+   const  SequenceOfFragments *sf = in.GetSequenceOfFragments();
     if( !sf ) return false;
     unsigned long len = GetBufferLength();
     std::stringstream is;
@@ -630,27 +630,27 @@ bool RLECodec::Decode(DataElement const &in, DataElement &out)
   else if ( NumberOfDimensions == 3 )
     {
     out = in;
-    const SequenceOfFragments *sf = in.GetSequenceOfFragments();
+   const  SequenceOfFragments *sf = in.GetSequenceOfFragments();
     if( !sf ) return false;
-    const unsigned long len = GetBufferLength();
+   const  unsigned long len = GetBufferLength();
     unsigned long pos = 0;
     // Each RLE Frame store a 2D frame. len is the 3d length
-    const size_t nframes = sf->GetNumberOfFragments();
-    const size_t zdim = Dimensions[2];
+   const  size_t nframes = sf->GetNumberOfFragments();
+   const  size_t zdim = Dimensions[2];
     if( nframes != zdim )
     {
       gdcmErrorMacro( "Invalid number of fragments: " << nframes << " should be: " << zdim  );
       return false;
     }
     char *buffer = new char[len];
-    const std::size_t llen = len / nframes;
+   const  std::size_t llen = len / nframes;
     // assert( GetNumberOfDimensions() == 2
     //      || GetDimension(2) == sf->GetNumberOfFragments() );
     bool corruption = false;
     for(unsigned int i = 0; i < nframes; ++i)
       {
-      const Fragment &frag = sf->GetFragment(i);
-      const size_t check = DecodeFragment(frag, buffer + pos, llen); (void)check;
+     const  Fragment &frag = sf->GetFragment(i);
+     const  size_t check = DecodeFragment(frag, buffer + pos, llen); (void)check;
       if( check != llen )
       {
         gdcmDebugMacro( "RLE pb with frag: " << i );
@@ -701,7 +701,7 @@ bool RLECodec::DecodeExtent(
     std::streampos start = is.tellg();
 
     SetLength( dimensions[0] * dimensions[1] * pf.GetPixelSize() );
-    const bool r = DecodeByStreams(is, os); (void)r;
+   const  bool r = DecodeByStreams(is, os); (void)r;
     if( !r ) return false;
     assert( r );
 
@@ -996,7 +996,7 @@ bool RLECodec::AppendFrameEncode( std::ostream & out, const char * data, size_t 
 
   for( int y = 0; y < h; ++y )
     {
-    const int ret = re.encode_row( fd );
+   const  int ret = re.encode_row( fd );
     if( ret < 0 )
       {
       gdcmErrorMacro( "problem at row: " << y );

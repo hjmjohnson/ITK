@@ -70,7 +70,7 @@ itkLabelMapContourOverlayImageFilterTest3(int argc, char * argv[])
   functor.AddColor(255, 0, 0);
   colorizer->SetFunctor(functor);
 
-  itk::SimpleFilterWatcher watcher(colorizer, "filter");
+  itk::SimpleFilterWatcher const watcher(colorizer, "filter");
 
   using WriterType = itk::ImageFileWriter<ColorizerType::OutputImageType>;
   auto writer = WriterType::New();

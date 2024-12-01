@@ -53,8 +53,8 @@ bool Scanner2::AddPrivateTag( PrivateTag const & t )
 {
   if( !( t.IsPrivate() && t.GetOwner() && *t.GetOwner() ) ) return false;
   // Do not check IsIllegal at this point
-  static const Global &g = GlobalInstance;
-  static const Dicts &dicts = g.GetDicts();
+  const static Global &g = GlobalInstance;
+  const static Dicts &dicts = g.GetDicts();
   const DictEntry &entry = dicts.GetDictEntry( t );
   // Is this tag an ASCII on ?
   if( entry.GetVR() & VR::VRASCII )
@@ -78,8 +78,8 @@ bool Scanner2::AddPublicTag( Tag const & t )
 {
   if( !t.IsPublic() && !t.IsPrivateCreator() ) return false;
   if( t.IsIllegal() ) return false;
-  static const Global &g = GlobalInstance;
-  static const Dicts &dicts = g.GetDicts();
+  const static Global &g = GlobalInstance;
+  const static Dicts &dicts = g.GetDicts();
   const DictEntry &entry = dicts.GetDictEntry( t );
   // Is this tag an ASCII on ?
   if( entry.GetVR() & VR::VRASCII )
@@ -120,7 +120,7 @@ bool Scanner2::Scan( Directory::FilenamesType const & filenames )
     if( !PublicTags.empty() )
       {
       PublicTagsType::const_reverse_iterator it1 = PublicTags.rbegin();
-      const Tag & publiclast = *it1;
+     const  Tag & publiclast = *it1;
       last = publiclast;
       }
     if( !PrivateTags.empty() )
@@ -136,12 +136,12 @@ bool Scanner2::Scan( Directory::FilenamesType const & filenames )
 
     StringFilter sf;
     Directory::FilenamesType::const_iterator it = Filenames.begin();
-    const double progresstick = 1. / (double)Filenames.size();
+   const  double progresstick = 1. / (double)Filenames.size();
     Progress = 0;
     for(; it != Filenames.end(); ++it)
       {
       Reader reader;
-      const char *filename = it->c_str();
+     const  char *filename = it->c_str();
       assert( filename );
       reader.SetFileName( filename );
       bool read = false;
@@ -193,30 +193,30 @@ void Scanner2::Print( std::ostream & os ) const
   Directory::FilenamesType::const_iterator file = Filenames.begin();
   for(; file != Filenames.end(); ++file)
     {
-    const char *filename = file->c_str();
+   const  char *filename = file->c_str();
     assert( filename && *filename );
     bool b = IsKey(filename);
-    const char *comment = !b ? "could not be read" : "could be read";
+   const  char *comment = !b ? "could not be read" : "could be read";
     os << "Filename: " << filename << " (" << comment << ")\n";
     if( PublicMappings.find(filename) != PublicMappings.end() )
       {
-      const PublicTagToValue &mapping = GetPublicMapping(filename);
+     const  PublicTagToValue &mapping = GetPublicMapping(filename);
       PublicTagToValue::const_iterator it = mapping.begin();
       for( ; it != mapping.end(); ++it)
         {
-        const Tag & tag = it->first;
-        const char *value = it->second;
+       const  Tag & tag = it->first;
+       const  char *value = it->second;
         os << tag << " -> [" << value << "]\n";
         }
       }
     if( PrivateMappings.find(filename) != PrivateMappings.end() )
       {
-      const PrivateTagToValue &mapping = GetPrivateMapping(filename);
+     const  PrivateTagToValue &mapping = GetPrivateMapping(filename);
       PrivateTagToValue::const_iterator it = mapping.begin();
       for( ; it != mapping.end(); ++it)
         {
-        const PrivateTag & tag = it->first;
-        const char *value = it->second;
+       const  PrivateTag & tag = it->first;
+       const  char *value = it->second;
         os << tag << " -> [" << value << "]\n";
         }
       }
@@ -225,8 +225,8 @@ void Scanner2::Print( std::ostream & os ) const
 
 static bool IsVRUI(Tag const &tag)
 {
-  static const Global &g = Global::GetInstance();
-  static const Dicts &dicts = g.GetDicts();
+  const static Global &g = Global::GetInstance();
+  const static Dicts &dicts = g.GetDicts();
   const DictEntry &dictentry = dicts.GetDictEntry(tag);
   if( dictentry.GetVR() == VR::UI ) return true;
   return false;
@@ -234,8 +234,8 @@ static bool IsVRUI(Tag const &tag)
 
 static bool IsVRUI(PrivateTag const &tag)
 {
-  static const Global &g = Global::GetInstance();
-  static const Dicts &dicts = g.GetDicts();
+  const static Global &g = Global::GetInstance();
+  const static Dicts &dicts = g.GetDicts();
   const DictEntry &dictentry = dicts.GetDictEntry(tag);
   if( dictentry.GetVR() == VR::UI ) return true;
   return false;
@@ -250,7 +250,7 @@ void Scanner2::PrintTable( std::ostream & os, bool header ) const
     PublicTagsType::const_iterator tag = PublicTags.begin();
     for( ; tag != PublicTags.end(); ++tag )
       {
-      const Tag &t = *tag;
+     const  Tag &t = *tag;
       os << '"' << t << '"';
       os << "\t";
       }
@@ -259,7 +259,7 @@ void Scanner2::PrintTable( std::ostream & os, bool header ) const
     PrivateTagsType::const_iterator tag = PrivateTags.begin();
     for( ; tag != PrivateTags.end(); ++tag )
       {
-      const PrivateTag &t = *tag;
+     const  PrivateTag &t = *tag;
       os << '"' << t << '"';
       os << "\t";
       }
@@ -269,19 +269,19 @@ void Scanner2::PrintTable( std::ostream & os, bool header ) const
   Directory::FilenamesType::const_iterator file = Filenames.begin();
   for(; file != Filenames.end(); ++file)
     {
-    const char *filename = file->c_str();
+   const  char *filename = file->c_str();
     assert( filename && *filename );
     os << '"' << filename << '"' << "\t";
     {
     PublicTagsType::const_iterator tag = PublicTags.begin();
-    const PublicTagToValue &mapping = GetPublicMapping(filename);
+   const  PublicTagToValue &mapping = GetPublicMapping(filename);
     for( ; tag != PublicTags.end(); ++tag )
       {
-      const Tag &t = *tag;
+     const  Tag &t = *tag;
       bool isui = IsVRUI(t);
-      const char *value = "";
+     const  char *value = "";
       if( mapping.find(t) != mapping.end() ) {
-        const char * v = mapping.find(t)->second;
+       const  char * v = mapping.find(t)->second;
         if(v) value = v;
       }
       os << '"' << (isui ? String<>::Trim( value ) : value) << '"';
@@ -290,14 +290,14 @@ void Scanner2::PrintTable( std::ostream & os, bool header ) const
     }
     {
     PrivateTagsType::const_iterator tag = PrivateTags.begin();
-    const PrivateTagToValue &mapping = GetPrivateMapping(filename);
+   const  PrivateTagToValue &mapping = GetPrivateMapping(filename);
     for( ; tag != PrivateTags.end(); ++tag )
       {
-      const PrivateTag &t = *tag;
+     const  PrivateTag &t = *tag;
       bool isui = IsVRUI(t);
-      const char *value = "";
+     const  char *value = "";
       if( mapping.find(t) != mapping.end() ) {
-        const char * v = mapping.find(t)->second;
+       const  char * v = mapping.find(t)->second;
         if(v) value = v;
       }
       os << '"' << (isui ? String<>::Trim( value ) : value) << '"';
@@ -340,7 +340,7 @@ Directory::FilenamesType Scanner2::GetKeys() const
   Directory::FilenamesType::const_iterator file = Filenames.begin();
   for(; file != Filenames.end(); ++file)
     {
-    const char *filename = file->c_str();
+   const  char *filename = file->c_str();
     if( IsKey( filename ) )
       {
       keys.push_back( filename );
@@ -354,7 +354,7 @@ const char* Scanner2::GetPublicValue(const char *filename, Tag const &t) const
 {
   // \precondition
   assert( PublicTags.find( t ) != PublicTags.end() );
-  PublicTagToValue const &ftv = GetPublicMapping(filename);
+  const PublicTagToValue &ftv = GetPublicMapping(filename);
   if( ftv.find(t) != ftv.end() )
     {
     return ftv.find(t)->second;
@@ -366,7 +366,7 @@ const char* Scanner2::GetPrivateValue(const char *filename, PrivateTag const &t)
 {
   // \precondition
   assert( PrivateTags.find( t ) != PrivateTags.end() );
-  PrivateTagToValue const &ftv = GetPrivateMapping(filename);
+  const PrivateTagToValue &ftv = GetPrivateMapping(filename);
   if( ftv.find(t) != ftv.end() )
     {
     return ftv.find(t)->second;
@@ -380,11 +380,11 @@ const char *Scanner2::GetFilenameFromPublicTagToValue(Tag const &t, const char *
   if( valueref )
     {
     Directory::FilenamesType::const_iterator file = Filenames.begin();
-    const std::string valueref_str = String<>::Trim( valueref );
+   const  std::string valueref_str = String<>::Trim( valueref );
     for(; file != Filenames.end() && !filenameref; ++file)
       {
-      const char *filename = file->c_str();
-      const char * value = GetPublicValue(filename, t);
+     const  char *filename = file->c_str();
+     const  char * value = GetPublicValue(filename, t);
       if( value && valueref == value )
         {
         filenameref = filename;
@@ -400,11 +400,11 @@ const char *Scanner2::GetFilenameFromPrivateTagToValue(PrivateTag const &pt, con
   if( valueref )
     {
     Directory::FilenamesType::const_iterator file = Filenames.begin();
-    const std::string valueref_str = String<>::Trim( valueref );
+   const  std::string valueref_str = String<>::Trim( valueref );
     for(; file != Filenames.end() && !filenameref; ++file)
       {
-      const char *filename = file->c_str();
-      const char * value = GetPrivateValue(filename, pt);
+     const  char *filename = file->c_str();
+     const  char * value = GetPrivateValue(filename, pt);
       if( value && valueref_str == value )
         {
         filenameref = filename;
@@ -423,12 +423,12 @@ Directory::FilenamesType Scanner2::GetAllFilenamesFromPublicTagToValue(Tag const
   Directory::FilenamesType theReturn;
   if( valueref )
     {
-    const std::string valueref_str = String<>::Trim( valueref );
+   const  std::string valueref_str = String<>::Trim( valueref );
     Directory::FilenamesType::const_iterator file = Filenames.begin();
     for(; file != Filenames.end(); ++file)
       {
-      const char *filename = file->c_str();
-      const char * value = GetPublicValue(filename, t);
+     const  char *filename = file->c_str();
+     const  char * value = GetPublicValue(filename, t);
       if( value && valueref_str == value )
         {
         theReturn.push_back( filename );
@@ -443,12 +443,12 @@ Directory::FilenamesType Scanner2::GetAllFilenamesFromPrivateTagToValue(PrivateT
   Directory::FilenamesType theReturn;
   if( valueref )
     {
-    const std::string valueref_str = String<>::Trim( valueref );
+   const  std::string valueref_str = String<>::Trim( valueref );
     Directory::FilenamesType::const_iterator file = Filenames.begin();
     for(; file != Filenames.end(); ++file)
       {
-      const char *filename = file->c_str();
-      const char * value = GetPrivateValue(filename, pt);
+     const  char *filename = file->c_str();
+     const  char * value = GetPrivateValue(filename, pt);
       if( value && valueref_str == value )
         {
         theReturn.push_back( filename );
@@ -474,8 +474,8 @@ Scanner2::ValuesType Scanner2::GetPublicValues(Tag const &t) const
   Directory::FilenamesType::const_iterator file = Filenames.begin();
   for(; file != Filenames.end(); ++file)
     {
-    const char *filename = file->c_str();
-    PublicTagToValue const &ttv = GetPublicMapping(filename);
+   const  char *filename = file->c_str();
+    const PublicTagToValue &ttv = GetPublicMapping(filename);
     if( ttv.find(t) != ttv.end() )
       {
       vt.insert( ttv.find(t)->second );
@@ -490,8 +490,8 @@ Scanner2::ValuesType Scanner2::GetPrivateValues(PrivateTag const &pt) const
   Directory::FilenamesType::const_iterator file = Filenames.begin();
   for(; file != Filenames.end(); ++file)
     {
-    const char *filename = file->c_str();
-    PrivateTagToValue const &ttv = GetPrivateMapping(filename);
+   const  char *filename = file->c_str();
+    const PrivateTagToValue &ttv = GetPrivateMapping(filename);
     if( ttv.find(pt) != ttv.end() )
       {
       vt.insert( ttv.find(pt)->second );
@@ -506,8 +506,8 @@ Directory::FilenamesType Scanner2::GetPublicOrderedValues(Tag const &t) const
   Directory::FilenamesType::const_iterator file = Filenames.begin();
   for(; file != Filenames.end(); ++file)
     {
-    const char *filename = file->c_str();
-    PublicTagToValue const &ttv = GetPublicMapping(filename);
+   const  char *filename = file->c_str();
+    const PublicTagToValue &ttv = GetPublicMapping(filename);
     if( ttv.find(t) != ttv.end() )
       {
         std::string theVal = std::string(ttv.find(t)->second);
@@ -525,8 +525,8 @@ Directory::FilenamesType Scanner2::GetPrivateOrderedValues(PrivateTag const &pt)
   Directory::FilenamesType::const_iterator file = Filenames.begin();
   for(; file != Filenames.end(); ++file)
     {
-    const char *filename = file->c_str();
-    PrivateTagToValue const &ttv = GetPrivateMapping(filename);
+   const  char *filename = file->c_str();
+    const PrivateTagToValue &ttv = GetPrivateMapping(filename);
     if( ttv.find(pt) != ttv.end() )
       {
         std::string theVal = std::string(ttv.find(pt)->second);
@@ -553,13 +553,13 @@ void Scanner2::ProcessPublicTag(StringFilter &sf, const char *filename)
       {
       if( header.FindDataElement( *tag ) )
         {
-        DataElement const & de = header.GetDataElement( *tag );
+        const DataElement & de = header.GetDataElement( *tag );
         std::string s = sf.ToString(de.GetTag());
 
         // Store the potentially new value:
         Values.insert( s );
         assert( Values.find( s ) != Values.end() );
-        const char *value = Values.find( s )->c_str();
+       const  char *value = Values.find( s )->c_str();
         assert( value );
         mapping.insert(
           PublicTagToValue::value_type(*tag, value));
@@ -569,13 +569,13 @@ void Scanner2::ProcessPublicTag(StringFilter &sf, const char *filename)
       {
       if( ds.FindDataElement( *tag ) )
         {
-        DataElement const & de = ds.GetDataElement( *tag );
+        const DataElement & de = ds.GetDataElement( *tag );
         std::string s = sf.ToString(de.GetTag());
 
         // Store the potentially new value:
         Values.insert( s );
         assert( Values.find( s ) != Values.end() );
-        const char *value = Values.find( s )->c_str();
+       const  char *value = Values.find( s )->c_str();
         assert( value );
         mapping.insert(
           PublicTagToValue::value_type(*tag, value));
@@ -595,13 +595,13 @@ void Scanner2::ProcessPrivateTag(StringFilter &sf, const char *filename)
     {
     if( ds.FindDataElement( *ptag ) )
       {
-      DataElement const & de = ds.GetDataElement( *ptag );
+      const DataElement & de = ds.GetDataElement( *ptag );
       std::string s = sf.ToString(de.GetTag());
 
       // Store the potentially new value:
       Values.insert( s );
       assert( Values.find( s ) != Values.end() );
-      const char *value = Values.find( s )->c_str();
+     const  char *value = Values.find( s )->c_str();
       assert( value );
       mapping.insert(
         PrivateTagToValue::value_type(*ptag, value));

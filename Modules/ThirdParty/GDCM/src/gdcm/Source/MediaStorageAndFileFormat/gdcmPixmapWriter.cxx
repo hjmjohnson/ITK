@@ -98,7 +98,7 @@ void PixmapWriter::DoIconImage(DataSet & rootds, Pixmap const & image)
     }
   PhotometricInterpretation pi = icon.GetPhotometricInterpretation();
 Attribute<0x0028,0x0004> piat;
-    const char *pistr = PhotometricInterpretation::GetPIString(pi);
+   const  char *pistr = PhotometricInterpretation::GetPIString(pi);
 {
     DataElement de( Tag(0x0028, 0x0004 ) );
     VL::Type strlenPistr = (VL::Type)strlen(pistr);
@@ -109,7 +109,7 @@ Attribute<0x0028,0x0004> piat;
 
     if ( pi == PhotometricInterpretation::PALETTE_COLOR )
       {
-      const LookupTable &lut = icon.GetLUT();
+     const  LookupTable &lut = icon.GetLUT();
       assert( (pf.GetBitsAllocated() == 8  && pf.GetPixelRepresentation() == 0)
            || (pf.GetBitsAllocated() == 16 && pf.GetPixelRepresentation() == 0) );
       // lut descriptor:
@@ -281,7 +281,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
 
     {
     assert( pi != PhotometricInterpretation::UNKNOWN );
-    const char *pistr = PhotometricInterpretation::GetPIString(pi);
+   const  char *pistr = PhotometricInterpretation::GetPIString(pi);
     DataElement de( Tag(0x0028, 0x0004 ) );
     VL::Type strlenPistr = (VL::Type)strlen(pistr);
     de.SetByteValue( pistr, strlenPistr );
@@ -334,7 +334,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
     //else
     if ( pi == PhotometricInterpretation::PALETTE_COLOR )
       {
-      const LookupTable &lut = PixelData->GetLUT();
+     const  LookupTable &lut = PixelData->GetLUT();
       assert( lut.Initialized() );
 //      assert( (pf.GetBitsAllocated() == 8  && pf.GetPixelRepresentation() == 0)
 //           || (pf.GetBitsAllocated() == 16 && pf.GetPixelRepresentation() == 0) );
@@ -439,7 +439,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
     // (6000,0102) US 0                                        #   2, 1 OverlayBitPosition
     // (6000,3000) OW 0000\0000\0000\0000\0000\0000\0000\0000\0000\0000\0000\0000\0000... # 29282, 1 OverlayData
     DataElement de;
-    const Overlay &ov = PixelData->GetOverlay(ovidx);
+   const  Overlay &ov = PixelData->GetOverlay(ovidx);
     Attribute<0x6000,0x0010> overlayrows;
     overlayrows.SetValue( ov.GetRows() );
     de = overlayrows.GetAsDataElement();
@@ -482,7 +482,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
     // FIXME: for now rewrite 'Overlay in pixel data' still in the pixel data element...
     //if( !ov.IsInPixelData() )
       {
-      const ByteValue & overlaydatabv = ov.GetOverlayData();
+     const  ByteValue & overlaydatabv = ov.GetOverlayData();
       DataElement overlaydata( Tag(0x6000,0x3000) );
       overlaydata.SetByteValue( overlaydatabv.GetPointer(), overlaydatabv.GetLength() );
       overlaydata.SetVR( VR::OW ); // FIXME
@@ -498,7 +498,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
   // Sometime advanced user may use a gdcm::ImageRegionReader to feed an empty gdcm::Image
   if( !pde.IsEmpty() )
     {
-    const Value &v = PixelData->GetDataElement().GetValue();
+   const  Value &v = PixelData->GetDataElement().GetValue();
     depixdata.SetValue( v );
     bvpixdata = depixdata.GetByteValue();
     }
@@ -548,12 +548,12 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
 
       if( ts_orig == TransferSyntax::JPEG2000 )
         {
-        static const CSComp newvalues2[] = {"ISO_15444_1"};
+        const static CSComp newvalues2[] = {"ISO_15444_1"};
         at3.SetValues(  newvalues2, 1 );
         }
       else if( ts_orig == TransferSyntax::JPEGLSNearLossless )
         {
-        static const CSComp newvalues2[] = {"ISO_14495_1"};
+        const static CSComp newvalues2[] = {"ISO_14495_1"};
         at3.SetValues(  newvalues2, 1 );
         }
       else if (
@@ -563,7 +563,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
         ts_orig == TransferSyntax::JPEGSpectralSelectionProcess6_8 ||
         ts_orig == TransferSyntax::JPEGFullProgressionProcess10_12 )
         {
-        static const CSComp newvalues2[] = {"ISO_10918_1"};
+        const static CSComp newvalues2[] = {"ISO_10918_1"};
         at3.SetValues(  newvalues2, 1 );
         }
       else
@@ -588,7 +588,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
           at1.SetValue( "01" );
           ds.Replace( at1.GetAsDataElement() );
 
-          static const CSComp newvalues2[] = {"ISO_10918_1"};
+          const static CSComp newvalues2[] = {"ISO_10918_1"};
           at3.SetValues(  newvalues2, 1 );
           ds.Replace( at3.GetAsDataElement() );
         } else {
@@ -680,7 +680,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
     }
   else
     {
-    const ByteValue *bv = ds.GetDataElement( Tag(0x0008,0x0016) ).GetByteValue();
+   const  ByteValue *bv = ds.GetDataElement( Tag(0x0008,0x0016) ).GetByteValue();
     if( !bv )
       {
       gdcmErrorMacro( "Cannot be empty" );
@@ -752,7 +752,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
       }
     }
     {
-    const char *sop = uid.Generate();
+   const  char *sop = uid.Generate();
     DataElement de( Tag(0x0008,0x0018) );
     VL::Type strlenSOP = (VL::Type) strlen(sop);
     de.SetByteValue( sop, strlenSOP );
@@ -763,7 +763,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
   // Are we on a particular Study ? If not create a new UID
   if( !ds.FindDataElement( Tag(0x0020, 0x000d) ) )
     {
-    const char *study = uid.Generate();
+   const  char *study = uid.Generate();
     DataElement de( Tag(0x0020,0x000d) );
     VL::Type strlenStudy= (VL::Type)strlen(study);
     de.SetByteValue( study, strlenStudy );
@@ -774,7 +774,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
   // Are we on a particular Series ? If not create a new UID
   if( !ds.FindDataElement( Tag(0x0020, 0x000e) ) )
     {
-    const char *series = uid.Generate();
+   const  char *series = uid.Generate();
     DataElement de( Tag(0x0020,0x000e) );
     VL::Type strlenSeries= (VL::Type)strlen(series);
     de.SetByteValue( series, strlenSeries );
@@ -788,7 +788,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
     fmi.Clear();
     //assert( ts == TransferSyntax::ImplicitVRLittleEndian );
       {
-      const char *tsuid = TransferSyntax::GetTSString( ts );
+     const  char *tsuid = TransferSyntax::GetTSString( ts );
       DataElement de( Tag(0x0002,0x0010) );
       VL::Type strlenTSUID = (VL::Type)strlen(tsuid);
       de.SetByteValue( tsuid, strlenTSUID );
@@ -802,7 +802,7 @@ bool PixmapWriter::PrepareWrite( MediaStorage const & ref_ms )
   {
       Attribute<0x0002,0x0010> at;
       at.SetFromDataSet( fmi );
-      const char *tsuid = TransferSyntax::GetTSString( ts );
+     const  char *tsuid = TransferSyntax::GetTSString( ts );
       UIComp tsui  = at.GetValue();
       if( tsui != tsuid )
       {

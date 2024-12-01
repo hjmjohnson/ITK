@@ -52,7 +52,7 @@ itkLabelMapToRGBImageFilterTest2(int argc, char * argv[])
   auto colorizer = ColorizerType::New();
   colorizer->SetInput(converter->GetOutput());
 
-  itk::SimpleFilterWatcher watcher(colorizer, "filter");
+  itk::SimpleFilterWatcher const watcher(colorizer, "filter");
 
   using WriterType = itk::ImageFileWriter<OType>;
   auto writer = WriterType::New();

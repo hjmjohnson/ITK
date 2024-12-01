@@ -157,8 +157,8 @@ bool FileAnonymizer::ComputeReplaceTagPosition()
     PositionEmpty pe;
 
     std::set<Tag> removeme;
-    const Tag & t = rit->first;
-    const std::string & valuereplace = rit->second;
+   const  Tag & t = rit->first;
+   const  std::string & valuereplace = rit->second;
     removeme.insert( t );
 
     std::ifstream is( filename, std::ios::binary );
@@ -172,15 +172,15 @@ bool FileAnonymizer::ComputeReplaceTagPosition()
     pe.EndPos = pe.BeginPos = is.tellg();
     pe.action = REPLACE;
     pe.IsTagFound = false;
-    const File & f = reader.GetFile();
-    const DataSet &ds = f.GetDataSet();
-    const TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
+   const  File & f = reader.GetFile();
+   const  DataSet &ds = f.GetDataSet();
+   const  TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
     Internals->TS = ts;
 
     pe.DE.SetTag( t );
     if( ds.FindDataElement( t ) )
       {
-      const DataElement &de = ds.GetDataElement( t );
+     const  DataElement &de = ds.GetDataElement( t );
       pe.IsTagFound = true;
       pe.DE.SetVL( de.GetVL() ); // Length is not used, unless to check undefined flag
       pe.DE.SetVR( de.GetVR() );
@@ -251,7 +251,7 @@ bool FileAnonymizer::ComputeRemoveTagPosition()
     PositionEmpty pe;
 
     std::set<Tag> removeme;
-    const Tag & t = *rit;
+   const  Tag & t = *rit;
     removeme.insert( t );
 
     std::ifstream is( filename, std::ios::binary );
@@ -265,15 +265,15 @@ bool FileAnonymizer::ComputeRemoveTagPosition()
     pe.EndPos = pe.BeginPos = is.tellg();
     pe.action = REMOVE;
     pe.IsTagFound = false;
-    const File & f = reader.GetFile();
-    const DataSet &ds = f.GetDataSet();
-    const TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
+   const  File & f = reader.GetFile();
+   const  DataSet &ds = f.GetDataSet();
+   const  TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
     Internals->TS = ts;
 
     pe.DE.SetTag( t );
     if( ds.FindDataElement( t ) )
       {
-      const DataElement &de = ds.GetDataElement( t );
+     const  DataElement &de = ds.GetDataElement( t );
       pe.IsTagFound = true;
       pe.DE.SetVL( de.GetVL() ); // Length is not used, unless to check undefined flag
       pe.DE.SetVR( de.GetVR() );
@@ -336,7 +336,7 @@ bool FileAnonymizer::ComputeEmptyTagPosition()
     PositionEmpty pe;
 
     std::set<Tag> removeme;
-    const Tag & t = *rit;
+   const  Tag & t = *rit;
     removeme.insert( t );
 
     std::ifstream is( filename, std::ios::binary );
@@ -350,15 +350,15 @@ bool FileAnonymizer::ComputeEmptyTagPosition()
     pe.EndPos = pe.BeginPos = is.tellg();
     pe.action = EMPTY;
     pe.IsTagFound = false;
-    const File & f = reader.GetFile();
-    const DataSet &ds = f.GetDataSet();
-    const TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
+   const  File & f = reader.GetFile();
+   const  DataSet &ds = f.GetDataSet();
+   const  TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
     Internals->TS = ts;
 
     pe.DE.SetTag( t );
     if( ds.FindDataElement( t ) )
       {
-      const DataElement &de = ds.GetDataElement( t );
+     const  DataElement &de = ds.GetDataElement( t );
       pe.IsTagFound = true;
       pe.DE.SetVL( de.GetVL() ); // Length is not used, unless to check undefined flag
       pe.DE.SetVR( de.GetVR() );
@@ -468,12 +468,12 @@ bool FileAnonymizer::Write()
     Internals->PositionEmptyArray.begin();
   for( ; it != Internals->PositionEmptyArray.end(); ++it )
     {
-    const PositionEmpty & pe = *it;
+   const  PositionEmpty & pe = *it;
     Action action = pe.action;
 
     if( pe.IsTagFound )
       {
-      const DataElement & de = pe.DE;
+     const  DataElement & de = pe.DE;
       int vrlen = de.GetVR().GetLength();
       if( ts.GetNegociatedType() == TransferSyntax::Implicit )
         {

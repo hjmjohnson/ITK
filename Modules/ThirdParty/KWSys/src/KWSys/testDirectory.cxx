@@ -22,7 +22,7 @@ file Copyright.txt or https://cmake.org/licensing#kwsys for details.  */
 static int doLongPathTest()
 {
   using namespace kwsys;
-  static const int LONG_PATH_THRESHOLD = 512;
+  const static int LONG_PATH_THRESHOLD = 512;
   int res = 0;
   std::string topdir(TEST_SYSTEMTOOLS_BINARY_DIR "/directory_testing/");
   std::stringstream testpathstrm;

@@ -67,7 +67,7 @@ itkAdditiveGaussianNoiseImageFilterTest(int argc, char * argv[])
 
   additiveGaussianNoiseFilter->SetInput(reader->GetOutput());
 
-  itk::SimpleFilterWatcher watcher(additiveGaussianNoiseFilter, "AdditiveGaussianNoiseImageFilter");
+  itk::SimpleFilterWatcher const watcher(additiveGaussianNoiseFilter, "AdditiveGaussianNoiseImageFilter");
 
   using WriterType = itk::ImageFileWriter<ImageType>;
   auto writer = WriterType::New();

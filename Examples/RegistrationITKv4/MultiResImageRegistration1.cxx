@@ -209,8 +209,8 @@ public:
       static_cast<OptimizerPointer>(registration->GetModifiableOptimizer());
     // Software Guide : EndCodeSnippet
 
-    unsigned int currentLevel = registration->GetCurrentLevel();
-    typename RegistrationType::ShrinkFactorsPerDimensionContainerType
+    unsigned int const currentLevel = registration->GetCurrentLevel();
+    typename RegistrationType::ShrinkFactorsPerDimensionContainerType const
       shrinkFactors =
         registration->GetShrinkFactorsPerDimension(currentLevel);
     typename RegistrationType::SmoothingSigmasArrayType smoothingSigmas =
@@ -503,12 +503,12 @@ main(int argc, const char * argv[])
 
   ParametersType finalParameters = transform->GetParameters();
 
-  double TranslationAlongX = finalParameters[0];
-  double TranslationAlongY = finalParameters[1];
+  const double TranslationAlongX = finalParameters[0];
+  const double TranslationAlongY = finalParameters[1];
 
-  unsigned int numberOfIterations = optimizer->GetCurrentIteration();
+  unsigned int const numberOfIterations = optimizer->GetCurrentIteration();
 
-  double bestValue = optimizer->GetValue();
+  const double bestValue = optimizer->GetValue();
 
 
   // Print out results
@@ -570,7 +570,7 @@ main(int argc, const char * argv[])
   resample->SetTransform(transform);
   resample->SetInput(movingImageReader->GetOutput());
 
-  FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  const FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
 
 
   resample->SetSize(fixedImage->GetLargestPossibleRegion().GetSize());

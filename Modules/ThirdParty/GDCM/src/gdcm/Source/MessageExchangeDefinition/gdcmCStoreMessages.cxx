@@ -129,9 +129,9 @@ const DataSet* inDataSet = &file.GetDataSet();
     throw Exception("Server side refuse our proposed PC.");
     }
 
-  TransferSyntaxSub const & actssub = acpc->GetTransferSyntax();
+  const TransferSyntaxSub & actssub = acpc->GetTransferSyntax();
   assert( rqpc->GetNumberOfTransferSyntaxes() == 1 ); // TODO FIXME
-  TransferSyntaxSub const & rqtssub = rqpc->GetTransferSyntax(0);
+  const TransferSyntaxSub & rqtssub = rqpc->GetTransferSyntax(0);
   if( !(actssub == rqtssub) )
     {
     gdcmDebugMacro( "Faulty Presentation Context : "
@@ -142,8 +142,8 @@ const DataSet* inDataSet = &file.GetDataSet();
 #if 0
   // For some reason using a dcmtk 3.5.4 server. The PresCont even if refused returned
   // filled with the default Implicit Little Endian. So make sure TS matches
-  TransferSyntaxSub const & actssub = acpc->GetTransferSyntax();
-  TransferSyntaxSub const & dummy0 = pc.GetTransferSyntax(0);
+  const TransferSyntaxSub & actssub = acpc->GetTransferSyntax();
+  const TransferSyntaxSub & dummy0 = pc.GetTransferSyntax(0);
   if( !(actssub == pc.GetTransferSyntax(0)) )
     {
     gdcmDebugMacro( "Faulty Presentation Context : "
@@ -167,10 +167,10 @@ const DataSet* inDataSet = &file.GetDataSet();
   de.SetVR( VR::UI );
   if( !msinst.IsEmpty() )
     {
-    const ByteValue* bv = msinst.GetByteValue();
+   const  ByteValue* bv = msinst.GetByteValue();
     if( bv )
       {
-      const char *uid = bv->GetPointer();
+     const  char *uid = bv->GetPointer();
       assert( uid );
       suid = std::string(uid, bv->GetLength() );
       assert(suid.size() < std::numeric_limits<uint32_t>::max());
@@ -336,7 +336,7 @@ std::vector<PresentationDataValue> CStoreRSP::ConstructPDV(const DataSet* inData
   const PDataTFPDU* theDataPDU = dynamic_cast<const PDataTFPDU*>(inPDU);
   assert (theDataPDU);
   uint8_t thePDVValue;
-  PresentationDataValue const &input_pdv = theDataPDU->GetPresentationDataValue(0);
+  const PresentationDataValue &input_pdv = theDataPDU->GetPresentationDataValue(0);
   thePDVValue = input_pdv.GetPresentationContextID();
 
   pdv.SetPresentationContextID( thePDVValue );

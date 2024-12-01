@@ -203,7 +203,7 @@ bool JPEGLSCodec::DecodeByStreamsCommon(const char *buffer, size_t totalLen, std
 
   if( params.components == 3 )
     {
-    const unsigned int nBytes = (params.bitsPerSample + 7) / 8;
+   const  unsigned int nBytes = (params.bitsPerSample + 7) / 8;
     if( params.interleaveMode == InterleaveMode::None )
       {
       if(nBytes == 1 )
@@ -232,7 +232,7 @@ bool JPEGLSCodec::Decode(DataElement const &in, DataElement &out)
   using namespace charls;
   if( NumberOfDimensions == 2 )
     {
-    const SequenceOfFragments *sf = in.GetSequenceOfFragments();
+   const  SequenceOfFragments *sf = in.GetSequenceOfFragments();
     if (!sf) return false;
     unsigned long totalLen = sf->ComputeByteLength();
     char *buffer = new char[totalLen];
@@ -250,22 +250,22 @@ bool JPEGLSCodec::Decode(DataElement const &in, DataElement &out)
     }
   else if( NumberOfDimensions == 3 )
     {
-    const SequenceOfFragments *sf = in.GetSequenceOfFragments();
+   const  SequenceOfFragments *sf = in.GetSequenceOfFragments();
     if (!sf) return false;
     if (sf->GetNumberOfFragments() != Dimensions[2]) return false;
     std::stringstream os;
     for(unsigned int i = 0; i < sf->GetNumberOfFragments(); ++i)
       {
-      const Fragment &frag = sf->GetFragment(i);
+     const  Fragment &frag = sf->GetFragment(i);
       if( frag.IsEmpty() ) return false;
-      const ByteValue *bv = frag.GetByteValue();
+     const  ByteValue *bv = frag.GetByteValue();
       if (!bv) return false;
       size_t totalLen = bv->GetLength();
       char *mybuffer = new char[totalLen];
 
       bv->GetBuffer(mybuffer, bv->GetLength());
 
-      const unsigned char* pbyteCompressed = (const unsigned char*)mybuffer;
+     const  unsigned char* pbyteCompressed = (const unsigned char*)mybuffer;
       while( totalLen > 0 && pbyteCompressed[totalLen-1] != 0xd9 )
         {
         totalLen--;
@@ -426,13 +426,13 @@ bool JPEGLSCodec::Code(DataElement const &in, DataElement &out)
 
   for(unsigned int dim = 0; dim < dims[2]; ++dim)
     {
-    const char *inputdata = input + dim * image_len;
+   const  char *inputdata = input + dim * image_len;
 
     std::vector<unsigned char> rgbyteCompressed;
     rgbyteCompressed.resize(image_width * image_height * 4 * 2); // overallocate in case of weird case
 
     size_t cbyteCompressed;
-    const bool b = this->CodeFrameIntoBuffer((char*)rgbyteCompressed.data(), rgbyteCompressed.size(), cbyteCompressed, inputdata, inputlength );
+   const  bool b = this->CodeFrameIntoBuffer((char*)rgbyteCompressed.data(), rgbyteCompressed.size(), cbyteCompressed, inputdata, inputlength );
     if( !b ) return false;
 
     Fragment frag;
@@ -505,9 +505,9 @@ bool JPEGLSCodec::DecodeExtent(
     if( !b ) return false;
 
     unsigned char *raw = outv.data();
-    const unsigned int rowsize = xmax - xmin + 1;
-    const unsigned int colsize = ymax - ymin + 1;
-    const unsigned int bytesPerPixel = pf.GetPixelSize();
+   const  unsigned int rowsize = xmax - xmin + 1;
+   const  unsigned int colsize = ymax - ymin + 1;
+   const  unsigned int bytesPerPixel = pf.GetPixelSize();
 
     if( outv.size() != dimensions[0] * dimensions[1] * bytesPerPixel )
     {
@@ -515,7 +515,7 @@ bool JPEGLSCodec::DecodeExtent(
        return false;
     }
 
-    const unsigned char *tmpBuffer1 = raw;
+   const  unsigned char *tmpBuffer1 = raw;
     unsigned int z = 0;
     for (unsigned int y = ymin; y <= ymax; ++y)
       {
@@ -556,7 +556,7 @@ bool JPEGLSCodec::DecodeExtent(
       is.seekg( thestart + curoffset + 8 * z, std::ios::beg );
       is.seekg( 8, std::ios::cur );
 
-      const size_t buf_size = offsets[z];
+     const  size_t buf_size = offsets[z];
       char *dummy_buffer = new char[ buf_size ];
       is.read( dummy_buffer, buf_size );
 
@@ -567,9 +567,9 @@ bool JPEGLSCodec::DecodeExtent(
       if( !b ) return false;
 
       unsigned char *raw = outv.data();
-      const unsigned int rowsize = xmax - xmin + 1;
-      const unsigned int colsize = ymax - ymin + 1;
-      const unsigned int bytesPerPixel = pf.GetPixelSize();
+     const  unsigned int rowsize = xmax - xmin + 1;
+     const  unsigned int colsize = ymax - ymin + 1;
+     const  unsigned int bytesPerPixel = pf.GetPixelSize();
 
       if( outv.size() != dimensions[0] * dimensions[1] * bytesPerPixel )
       {
@@ -577,7 +577,7 @@ bool JPEGLSCodec::DecodeExtent(
          return false;
       }
 
-      const unsigned char *tmpBuffer1 = raw;
+     const  unsigned char *tmpBuffer1 = raw;
       for (unsigned int y = ymin; y <= ymax; ++y)
         {
         size_t theOffset = 0 + (0*dimensions[1]*dimensions[0] + y*dimensions[0] + xmin)*bytesPerPixel;

@@ -52,7 +52,7 @@ bool DICOMDIRGenerator::ComputeDirectoryRecordsOffset(const SequenceOfItems *sqi
   offsets[0] = start;
   for(SequenceOfItems::SizeType i = 1; i <= nitems; ++i)
     {
-    const Item &item = sqi->GetItem(i);
+   const  Item &item = sqi->GetItem(i);
     offsets[i] = offsets[i-1] + item.GetLength<ExplicitDataElement>();
     }
 
@@ -186,12 +186,12 @@ bool DICOMDIRGenerator::SeriesBelongToStudy(const char *seriesuid, const char *s
   assert( studyuid );
   const Scanner &scanner = GetScanner();
 
-  Scanner::TagToValue const &ttv = scanner.GetMappingFromTagToValue(Tag(0x20,0xe), seriesuid);
+  const Scanner::TagToValue &ttv = scanner.GetMappingFromTagToValue(Tag(0x20,0xe), seriesuid);
   Tag tstudyuid(0x20,0xd);
   bool b = false;
   if( ttv.find( tstudyuid ) != ttv.end() )
     {
-    const char *v = ttv.find(tstudyuid)->second;
+   const  char *v = ttv.find(tstudyuid)->second;
     if( v && strcmp(v, studyuid ) == 0 )
       {
       b = true;
@@ -207,11 +207,11 @@ bool DICOMDIRGenerator::ImageBelongToSeries(const char *sopuid, const char *seri
   assert( sopuid );
   const Scanner &scanner = GetScanner();
 
-  Scanner::TagToValue const &ttv = scanner.GetMappingFromTagToValue(t1, sopuid);
+  const Scanner::TagToValue &ttv = scanner.GetMappingFromTagToValue(t1, sopuid);
   bool b = false;
   if( ttv.find( t2 ) != ttv.end() )
     {
-    const char *v = ttv.find(t2)->second;
+   const  char *v = ttv.find(t2)->second;
     if( v && strcmp(v, seriesuid) == 0 )
       {
       b = true;
@@ -227,8 +227,8 @@ bool DICOMDIRGenerator::ImageBelongToSameSeries(const char *sopuid1, const char 
   assert( sopuid2 );
   const Scanner &scanner = GetScanner();
 
-  Scanner::TagToValue const &ttv1 = scanner.GetMappingFromTagToValue(t, sopuid1);
-  Scanner::TagToValue const &ttv2 = scanner.GetMappingFromTagToValue(t, sopuid2);
+  const Scanner::TagToValue &ttv1 = scanner.GetMappingFromTagToValue(t, sopuid1);
+  const Scanner::TagToValue &ttv2 = scanner.GetMappingFromTagToValue(t, sopuid2);
   Tag tseriesuid = GetParentTag( t );
   if( tseriesuid == Tag(0x0,0x0) )
     {
@@ -263,8 +263,8 @@ size_t DICOMDIRGenerator::FindLowerLevelDirectoryRecord( size_t item1, const cha
   SequenceOfItems::SizeType nitems = sqi->GetNumberOfItems();
   for(SequenceOfItems::SizeType i = item1 + 1; i <= nitems; ++i)
     {
-    const Item &item = sqi->GetItem(i);
-    const DataSet &ds = item.GetNestedDataSet();
+   const  Item &item = sqi->GetItem(i);
+   const  DataSet &ds = item.GetNestedDataSet();
     Attribute<0x4,0x1430> directoryrecordtype;
     directoryrecordtype.Set( ds );
 
@@ -299,8 +299,8 @@ size_t DICOMDIRGenerator::FindNextDirectoryRecord( size_t item1, const char *dir
   SequenceOfItems::SizeType nitems = sqi->GetNumberOfItems();
   for(SequenceOfItems::SizeType i = item1 + 1; i <= nitems; ++i)
     {
-    const Item &item = sqi->GetItem(i);
-    const DataSet &ds = item.GetNestedDataSet();
+   const  Item &item = sqi->GetItem(i);
+   const  DataSet &ds = item.GetNestedDataSet();
     Attribute<0x4,0x1430> directoryrecordtype;
     directoryrecordtype.Set( ds );
 
@@ -384,7 +384,7 @@ void SingleDataElementInserter(DataSet &ds, Scanner const & scanner)
 bool DICOMDIRGenerator::AddPatientDirectoryRecord()
 {
   DataSet &rootds = GetFile().GetDataSet();
-  Scanner const & scanner = GetScanner();
+  const Scanner & scanner = GetScanner();
 
   Attribute<0x10,0x20> patientid;
   Scanner::ValuesType patientids = scanner.GetValues( patientid.GetTag() );
@@ -414,10 +414,10 @@ bool DICOMDIRGenerator::AddPatientDirectoryRecord()
     Attribute<0x4,0x1430> directoryrecordtype;
     directoryrecordtype.SetValue( "PATIENT" );
     ds.Insert( directoryrecordtype.GetAsDataElement() );
-    const char *pid = it->c_str();
+   const  char *pid = it->c_str();
     if( ! (pid && *pid) )
       {
-      const char *fn = scanner.GetFilenameFromTagToValue(patientid.GetTag(), pid);
+     const  char *fn = scanner.GetFilenameFromTagToValue(patientid.GetTag(), pid);
       gdcmErrorMacro( "Missing Patient ID from file: " << fn );
       (void)fn; //warning removal
       return false;
@@ -426,7 +426,7 @@ bool DICOMDIRGenerator::AddPatientDirectoryRecord()
     patientid.SetValue( pid );
     ds.Insert( patientid.GetAsDataElement() );
 
-    Scanner::TagToValue const &ttv = scanner.GetMappingFromTagToValue(patientid.GetTag(), pid);
+    const Scanner::TagToValue &ttv = scanner.GetMappingFromTagToValue(patientid.GetTag(), pid);
     Attribute<0x10,0x10> patientsname;
     if( ttv.find( patientsname.GetTag() ) != ttv.end() )
       {
@@ -463,7 +463,7 @@ bool DICOMDIRGenerator::AddPatientDirectoryRecord()
 bool DICOMDIRGenerator::AddStudyDirectoryRecord()
 {
   DataSet &rootds = GetFile().GetDataSet();
-  Scanner const & scanner = GetScanner();
+  const Scanner & scanner = GetScanner();
 
   Attribute<0x20,0xd> studyinstanceuid;
   Scanner::ValuesType studyinstanceuids = scanner.GetValues( studyinstanceuid.GetTag() );
@@ -488,10 +488,10 @@ bool DICOMDIRGenerator::AddStudyDirectoryRecord()
     Attribute<0x4,0x1430> directoryrecordtype;
     directoryrecordtype.SetValue( "STUDY" );
     ds.Insert( directoryrecordtype.GetAsDataElement() );
-    const char *studyuid = it->c_str();
+   const  char *studyuid = it->c_str();
     if( ! (studyuid && *studyuid) )
       {
-      const char *fn = scanner.GetFilenameFromTagToValue(studyinstanceuid.GetTag(), studyuid);
+     const  char *fn = scanner.GetFilenameFromTagToValue(studyinstanceuid.GetTag(), studyuid);
       gdcmErrorMacro( "Missing Study Instance UID from file: " << fn );
       (void)fn;//warning removal
       return false;
@@ -506,7 +506,7 @@ bool DICOMDIRGenerator::AddStudyDirectoryRecord()
     //SingleDataElementInserter<0x8,0x1030>(ds, scanner);
     //SingleDataElementInserter<0x8,0x50>(ds, scanner);
     //SingleDataElementInserter<0x20,0x10>(ds, scanner);
-    Scanner::TagToValue const &ttv = scanner.GetMappingFromTagToValue(studyinstanceuid.GetTag(), studyuid);
+    const Scanner::TagToValue &ttv = scanner.GetMappingFromTagToValue(studyinstanceuid.GetTag(), studyuid);
 
     Attribute<0x8,0x20> studydate;
     if( ttv.find( studydate.GetTag() ) != ttv.end() )
@@ -564,7 +564,7 @@ bool DICOMDIRGenerator::AddStudyDirectoryRecord()
 bool DICOMDIRGenerator::AddSeriesDirectoryRecord()
 {
   DataSet &rootds = GetFile().GetDataSet();
-  Scanner const & scanner = GetScanner();
+  const Scanner & scanner = GetScanner();
 
   Attribute<0x20,0xe> seriesinstanceuid;
   Scanner::ValuesType seriesinstanceuids = scanner.GetValues( seriesinstanceuid.GetTag() );
@@ -589,10 +589,10 @@ bool DICOMDIRGenerator::AddSeriesDirectoryRecord()
     Attribute<0x4,0x1430> directoryrecordtype;
     directoryrecordtype.SetValue( "SERIES" );
     ds.Insert( directoryrecordtype.GetAsDataElement() );
-    const char *seriesuid = it->c_str();
+   const  char *seriesuid = it->c_str();
     if( ! (seriesuid && *seriesuid) )
       {
-      const char *fn = scanner.GetFilenameFromTagToValue(seriesinstanceuid.GetTag(), seriesuid);
+     const  char *fn = scanner.GetFilenameFromTagToValue(seriesinstanceuid.GetTag(), seriesuid);
       gdcmErrorMacro( "Missing Study Instance UID from file: " << fn );
       (void)fn;//warning removal
       return false;
@@ -601,7 +601,7 @@ bool DICOMDIRGenerator::AddSeriesDirectoryRecord()
     seriesinstanceuid.SetValue( seriesuid );
     ds.Insert( seriesinstanceuid.GetAsDataElement() );
 
-    Scanner::TagToValue const &ttv = scanner.GetMappingFromTagToValue(seriesinstanceuid.GetTag(), seriesuid);
+    const Scanner::TagToValue &ttv = scanner.GetMappingFromTagToValue(seriesinstanceuid.GetTag(), seriesuid);
     Attribute<0x8,0x60> modality;
     if( ttv.find( modality.GetTag() ) != ttv.end() )
       {
@@ -642,7 +642,7 @@ bool DICOMDIRGenerator::AddSeriesDirectoryRecord()
 bool DICOMDIRGenerator::AddImageDirectoryRecord()
 {
   DataSet &rootds = GetFile().GetDataSet();
-  Scanner const & scanner = GetScanner();
+  const Scanner & scanner = GetScanner();
 
   const Attribute<0x8,0x18> sopinstanceuid = { "" };
   Scanner::ValuesType sopinstanceuids = scanner.GetValues( sopinstanceuid.GetTag() );
@@ -672,10 +672,10 @@ bool DICOMDIRGenerator::AddImageDirectoryRecord()
     directoryrecordtype.SetValue( "IMAGE" );
     ds.Insert( directoryrecordtype.GetAsDataElement() );
 
-    const char *sopuid = it->c_str();
-    Scanner::TagToValue const &ttv = scanner.GetMappingFromTagToValue(sopinstanceuid.GetTag(), sopuid);
+   const  char *sopuid = it->c_str();
+    const Scanner::TagToValue &ttv = scanner.GetMappingFromTagToValue(sopinstanceuid.GetTag(), sopuid);
     Attribute<0x0004,0x1500> referencedfileid;
-    const char *fn_str = scanner.GetFilenameFromTagToValue(sopinstanceuid.GetTag(), sopuid);
+   const  char *fn_str = scanner.GetFilenameFromTagToValue(sopinstanceuid.GetTag(), sopuid);
     referencedfileid.SetNumberOfValues( 1 );
     Filename fn = fn_str;
     std::string relative = fn.ToWindowsSlashes();
@@ -727,7 +727,7 @@ bool DICOMDIRGenerator::AddImageDirectoryRecord()
     de2.SetVR( imagetype.GetVR() );
     if( ttv.find( imagetype.GetTag() ) != ttv.end() )
       {
-      const char *v = ttv.find(imagetype.GetTag())->second;
+     const  char *v = ttv.find(imagetype.GetTag())->second;
       VL::Type strlenV = (VL::Type)strlen(v);
       de2.SetByteValue( v, strlenV );
       }
@@ -845,7 +845,7 @@ bool DICOMDIRGenerator::Generate()
   // <entry group="0008" element="0008" vr="CS" vm="2-n" name="Image Type"/>
   scanner.AddTag( Tag(0x8,0x8) );
 
-  FilenamesType const &filenames = Internals->fns;
+  const FilenamesType &filenames = Internals->fns;
   Filename rootdir = Internals->rootdir.c_str();
   const char *rd = rootdir.ToWindowsSlashes();
   size_t strlen_rd = strlen( rd );
@@ -856,7 +856,7 @@ bool DICOMDIRGenerator::Generate()
   for( ; it != filenames.end(); ++it )
     {
     Filename fn = it->c_str();
-    const char *f = fn.ToWindowsSlashes();
+   const  char *f = fn.ToWindowsSlashes();
     std::string relative = f;
     std::string::size_type l = relative.find( rd );
     if( l != std::string::npos )
@@ -981,7 +981,7 @@ the File-set.
   DataSet::ConstIterator it = ds.Begin();
   for(; it != ds.End() && it->GetTag() != Tag(0x0004,0x1220); ++it)
     {
-    const DataElement &detmp = *it;
+   const  DataElement &detmp = *it;
     fmi_len_offset += detmp.GetLength<ExplicitDataElement>();
     }
   // Now add the partial length for attribute 0004,1220:
@@ -998,7 +998,7 @@ the File-set.
   DataSet::ConstIterator it = ds.Begin();
   for( ; it != ds.End() && it->GetTag() <= Tag(0x0004,0x1220); ++it)
     {
-    const DataElement &detmp = *it;
+   const  DataElement &detmp = *it;
     fmi_len_offset2 += detmp.GetLength<ExplicitDataElement>();
     }
 }

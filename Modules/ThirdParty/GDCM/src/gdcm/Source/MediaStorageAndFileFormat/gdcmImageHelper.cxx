@@ -143,7 +143,7 @@ static bool GetInterceptSlopeValueFromSequence(const DataSet& ds, const Tag& tfg
     //  (0028,1052) DS [0]                                        # 2,1 Rescale Intercept
     const Tag tps(0x0028,0x1052);
     if( !subds2.FindDataElement(tps) ) return false;
-    const DataElement &de = subds2.GetDataElement( tps );
+   const  DataElement &de = subds2.GetDataElement( tps );
     //assert( bv );
     Attribute<0x0028,0x1052> at;
     at.SetFromDataElement( de );
@@ -154,7 +154,7 @@ static bool GetInterceptSlopeValueFromSequence(const DataSet& ds, const Tag& tfg
     // (0028,1053) DS [5.65470085470085]                         # 16,1 Rescale Slope
     const Tag tps(0x0028,0x1053);
     if( !subds2.FindDataElement(tps) ) return false;
-    const DataElement &de = subds2.GetDataElement( tps );
+   const  DataElement &de = subds2.GetDataElement( tps );
     //assert( bv );
     Attribute<0x0028,0x1053> at;
     at.SetFromDataElement( de );
@@ -216,16 +216,16 @@ static bool ComputeZSpacingFromIPP(const DataSet &ds, double &zspacing)
   std::vector<double> distances;
   for(SequenceOfItems::SizeType i0 = 1; i0 <= nitems; ++i0)
     {
-    const Item &item = sqi->GetItem(i0);
-    const DataSet & subds = item.GetNestedDataSet();
+   const  Item &item = sqi->GetItem(i0);
+   const  DataSet & subds = item.GetNestedDataSet();
     // (0020,9113) SQ (Sequence with undefined length #=1)     # u/l, 1 PlanePositionSequence
     const Tag tpms(0x0020,0x9113);
     if( !subds.FindDataElement(tpms) ) return false;
     //const SequenceOfItems * sqi2 = subds.GetDataElement( tpms ).GetSequenceOfItems();
     SmartPointer<SequenceOfItems> sqi2 = subds.GetDataElement( tpms ).GetValueAsSQ();
     assert( sqi2 );
-    const Item &item2 = sqi2->GetItem(1);
-    const DataSet & subds2 = item2.GetNestedDataSet();
+   const  Item &item2 = sqi2->GetItem(1);
+   const  DataSet & subds2 = item2.GetNestedDataSet();
     // Check Image Orientation (Patient)
     if( ImageHelper::GetDirectionCosinesFromDataSet(subds2, dircos_subds2) )
       {
@@ -234,7 +234,7 @@ static bool ComputeZSpacingFromIPP(const DataSet &ds, double &zspacing)
     // (0020,0032) DS [-82.5\-82.5\1153.75]                    #  20, 3 ImagePositionPatient
     const Tag tps(0x0020,0x0032);
     if( !subds2.FindDataElement(tps) ) return false;
-    const DataElement &de = subds2.GetDataElement( tps );
+   const  DataElement &de = subds2.GetDataElement( tps );
     Attribute<0x0020,0x0032> ipp;
     ipp.SetFromDataElement(de);
     double dist = 0;
@@ -246,7 +246,7 @@ static bool ComputeZSpacingFromIPP(const DataSet &ds, double &zspacing)
   double prev = distances[0];
   for(unsigned int i = 1; i < nitems; ++i)
     {
-    const double current = distances[i] - prev;
+   const  double current = distances[i] - prev;
     meanspacing += current;
     prev = distances[i];
     }
@@ -270,11 +270,11 @@ static bool ComputeZSpacingFromIPP(const DataSet &ds, double &zspacing)
   if( !timeseries )
     {
     // Check spacing is consistent:
-    const double ZTolerance = 1e-3; // ??? FIXME
+   const  double ZTolerance = 1e-3; // ??? FIXME
     prev = distances[0];
     for(unsigned int i = 1; i < nitems; ++i)
       {
-      const double current = distances[i] - prev;
+     const  double current = distances[i] - prev;
       if( fabs(current - zspacing) > ZTolerance )
         {
         // For now simply gives up
@@ -292,20 +292,20 @@ static bool ComputeZSpacingFromIPP(const DataSet &ds, double &zspacing)
     SmartPointer<SequenceOfItems> sqi0 = ds.GetDataElement( tfgs0 ).GetValueAsSQ();
     if( !(sqi0 && sqi0->GetNumberOfItems() > 0) ) return true;
     // Get first item:
-    const Item &item = sqi0->GetItem(1);
-    const DataSet & subds = item.GetNestedDataSet();
+   const  Item &item = sqi0->GetItem(1);
+   const  DataSet & subds = item.GetNestedDataSet();
     // <entry group="0028" element="9110" vr="SQ" vm="1" name="Pixel Measures Sequence"/>
     const Tag tpms(0x0028,0x9110);
     if( !subds.FindDataElement(tpms) ) return true;
     //const SequenceOfItems * sqi2 = subds.GetDataElement( tpms ).GetSequenceOfItems();
     SmartPointer<SequenceOfItems> sqi2 = subds.GetDataElement( tpms ).GetValueAsSQ();
     assert( sqi2 );
-    const Item &item2 = sqi2->GetItem(1);
-    const DataSet & subds2 = item2.GetNestedDataSet();
+   const  Item &item2 = sqi2->GetItem(1);
+   const  DataSet & subds2 = item2.GetNestedDataSet();
     // <entry group="0028" element="0030" vr="DS" vm="2" name="Pixel Spacing"/>
     const Tag tps(0x0018,0x0088);
     if( !subds2.FindDataElement(tps) ) return true;
-    const DataElement &de = subds2.GetDataElement( tps );
+   const  DataElement &de = subds2.GetDataElement( tps );
     Attribute<0x0018,0x0088> at;
     at.SetFromDataElement( de );
     zspacing = at.GetValue();
@@ -558,8 +558,8 @@ std::vector<double> ImageHelper::GetOriginValue(File const & f)
       if( sqi && sqi->GetNumberOfItems() >= 1)
         {
         // Get first item:
-        const Item &item = sqi->GetItem(1);
-        const DataSet & subds = item.GetNestedDataSet();
+       const  Item &item = sqi->GetItem(1);
+       const  DataSet & subds = item.GetNestedDataSet();
         const Tag timagepositionpatient(0x0020, 0x0032);
         assert( subds.FindDataElement( timagepositionpatient ) );
         Attribute<0x0020,0x0032> at = {{0,0,0}}; // default value if empty
@@ -582,7 +582,7 @@ std::vector<double> ImageHelper::GetOriginValue(File const & f)
   const Tag timagepositionpatient(0x0020, 0x0032);
   if( (ms != MediaStorage::SecondaryCaptureImageStorage || SecondaryCaptureImagePlaneModule) && ds.FindDataElement( timagepositionpatient ) )
     {
-    const DataElement& de = ds.GetDataElement( timagepositionpatient );
+   const  DataElement& de = ds.GetDataElement( timagepositionpatient );
     Attribute<0x0020,0x0032> at = {{0,0,0}}; // default value if empty
     at.SetFromDataElement( de );
     for( unsigned int i = 0; i < at.GetNumberOfValues(); ++i )
@@ -607,7 +607,7 @@ bool ImageHelper::GetDirectionCosinesFromDataSet(DataSet const & ds, std::vector
   const Tag timageorientationpatient(0x0020, 0x0037);
   if( ds.FindDataElement( timageorientationpatient ) /*&& !ds.GetDataElement( timageorientationpatient ).IsEmpty()*/ )
     {
-    const DataElement& de = ds.GetDataElement( timageorientationpatient );
+   const  DataElement& de = ds.GetDataElement( timageorientationpatient );
     Attribute<0x0020,0x0037> at = {{1,0,0,0,1,0}}; // default value if empty
     at.SetFromDataElement( de );
     for( unsigned int i = 0; i < at.GetNumberOfValues(); ++i )
@@ -621,7 +621,7 @@ bool ImageHelper::GetDirectionCosinesFromDataSet(DataSet const & ds, std::vector
       if( dc.IsValid() )
         {
         gdcmWarningMacro( "DirectionCosines was not normalized. Fixed" );
-        const double * p = dc;
+       const  double * p = dc;
         dircos = std::vector<double>(p, p + 6);
         //return dircos;
         }
@@ -708,8 +708,8 @@ std::vector<double> ImageHelper::GetDirectionCosinesValue(File const & f)
       if( sqi && sqi->GetNumberOfItems() >= 1 )
         {
         // Get first item:
-        const Item &item = sqi->GetItem(1);
-        const DataSet & subds = item.GetNestedDataSet();
+       const  Item &item = sqi->GetItem(1);
+       const  DataSet & subds = item.GetNestedDataSet();
 
         dircos.resize( 6 );
         bool b2 = ImageHelper::GetDirectionCosinesFromDataSet(subds, dircos);
@@ -875,7 +875,7 @@ PixelFormat ImageHelper::GetPixelFormatValue(const File& f)
 /// If that tag is not present, default the z dimension to 1
 std::vector<unsigned int> ImageHelper::GetDimensionsValue(const File& f)
 {
-  DataSet const & ds = f.GetDataSet();
+  const DataSet & ds = f.GetDataSet();
 
   MediaStorage ms;
   ms.SetFromFile(f);
@@ -923,7 +923,7 @@ std::vector<unsigned int> ImageHelper::GetDimensionsValue(const File& f)
       Attribute<0x0028,0x0005> at = { 0 };
       if( ds.FindDataElement( at.GetTag() ) )
         {
-        const DataElement &de = ds.GetDataElement( at.GetTag() );
+       const  DataElement &de = ds.GetDataElement( at.GetTag() );
         // SIEMENS_MAGNETOM-12-MONO2-Uncompressed.dcm picks VR::SS instead...
         if( at.GetVR().Compatible( de.GetVR() ) )
           {
@@ -1022,7 +1022,7 @@ void ImageHelper::SetDimensionsValue(File& f, const Pixmap & img)
       const Tag tfgs(0x5200,0x9230);
       if( ds.FindDataElement( tfgs ) )
       {
-        const DataElement &de = ds.GetDataElement( tfgs );
+       const  DataElement &de = ds.GetDataElement( tfgs );
         SmartPointer<SequenceOfItems> sqi = de.GetValueAsSQ();
         assert( sqi );
         sqi->SetNumberOfItems( dims[2] );
@@ -1080,17 +1080,17 @@ std::vector<double> ImageHelper::GetRescaleInterceptSlopeValue(File const & f)
         SmartPointer<SequenceOfItems> sqi = ds.GetDataElement( t3 ).GetValueAsSQ();
         if(sqi && sqi->GetNumberOfItems() > 0)
           {
-          const Item &item = sqi->GetItem(1);
-          const DataSet & subds = item.GetNestedDataSet();
+         const  Item &item = sqi->GetItem(1);
+         const  DataSet & subds = item.GetNestedDataSet();
           const Tag tpi(0x0028,0x1052);
           const Tag tps(0x0028,0x1053);
           if( subds.FindDataElement(tps) &&  subds.FindDataElement(tpi))
             {
-            const DataElement &dei = subds.GetDataElement( tpi );
+           const  DataElement &dei = subds.GetDataElement( tpi );
             Attribute<0x0028,0x1052> ati;
             ati.SetFromDataElement( dei );
             interceptslope.push_back( ati.GetValue() );
-            const DataElement &des = subds.GetDataElement( tps );
+           const  DataElement &des = subds.GetDataElement( tps );
             Attribute<0x0028,0x1053> ats;
             ats.SetFromDataElement( des );
             interceptslope.push_back( ats.GetValue() );
@@ -1148,8 +1148,8 @@ std::vector<double> ImageHelper::GetRescaleInterceptSlopeValue(File const & f)
           }
         // don't know how to handle multiples:
         gdcmAssertAlwaysMacro( sqi->GetNumberOfItems() == 1 );
-        const Item &item = sqi->GetItem(1);
-        const DataSet & subds = item.GetNestedDataSet();
+       const  Item &item = sqi->GetItem(1);
+       const  DataSet & subds = item.GetNestedDataSet();
         //const Tag trwvi(0x0040,0x9224); // Real World Value Intercept
         //const Tag trwvs(0x0040,0x9225); // Real World Value Slope
         Attribute<0x0040,0x9224> at1 = {0};
@@ -1175,8 +1175,8 @@ std::vector<double> ImageHelper::GetRescaleInterceptSlopeValue(File const & f)
       // PMS DICOM CS states that Modality LUT for MR Image Storage is to be
       // used for image processing. VOI LUT are always recomputed, so output
       // from GDCM may not look right for display (sorry!)
-      const DataElement &priv_rescaleintercept = ds.GetDataElement( tpriv_rescaleintercept );
-      const DataElement &priv_rescaleslope = ds.GetDataElement( tpriv_rescaleslope );
+     const  DataElement &priv_rescaleintercept = ds.GetDataElement( tpriv_rescaleintercept );
+     const  DataElement &priv_rescaleslope = ds.GetDataElement( tpriv_rescaleslope );
       Element<VR::DS,VM::VM1> el_ri = {{ 0 }};
       el_ri.SetFromDataElement( priv_rescaleintercept );
       Element<VR::DS,VM::VM1> el_rs = {{ 1 }};
@@ -1502,11 +1502,11 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
     }
   if( spacingtag != Tag(0xffff,0xffff) && ds.FindDataElement( spacingtag ) && !ds.GetDataElement( spacingtag ).IsEmpty() )
     {
-    const DataElement& de = ds.GetDataElement( spacingtag );
-    const Global &g = GlobalInstance;
-    const Dicts &dicts = g.GetDicts();
-    const DictEntry &entry = dicts.GetDictEntry(de.GetTag());
-    const VR & vr = entry.GetVR();
+   const  DataElement& de = ds.GetDataElement( spacingtag );
+   const  Global &g = GlobalInstance;
+   const  Dicts &dicts = g.GetDicts();
+   const  DictEntry &entry = dicts.GetDictEntry(de.GetTag());
+   const  VR & vr = entry.GetVR();
     assert( vr.Compatible( de.GetVR() ) );
     switch(vr)
       {
@@ -1514,7 +1514,7 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
         {
         Element<VR::DS,VM::VM1_n> el;
         std::stringstream ss;
-        const ByteValue *bv = de.GetByteValue();
+       const  ByteValue *bv = de.GetByteValue();
         assert( bv );
         std::string s = std::string( bv->GetPointer(), bv->GetLength() );
         ss.str( s );
@@ -1559,7 +1559,7 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
         {
         Element<VR::IS,VM::VM1_n> el;
         std::stringstream ss;
-        const ByteValue *bv = de.GetByteValue();
+       const  ByteValue *bv = de.GetByteValue();
         assert( bv );
         std::string s = std::string( bv->GetPointer(), bv->GetLength() );
         ss.str( s );
@@ -1597,17 +1597,17 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
   Tag zspacingtag = ImageHelper::GetZSpacingTagFromMediaStorage(ms);
   if( zspacingtag != Tag(0xffff,0xffff) && ds.FindDataElement( zspacingtag ) )
     {
-    const DataElement& de = ds.GetDataElement( zspacingtag );
+   const  DataElement& de = ds.GetDataElement( zspacingtag );
     if( de.IsEmpty() )
       {
       sp.push_back( 1.0 );
       }
     else
       {
-      const Global &g = GlobalInstance;
-      const Dicts &dicts = g.GetDicts();
-      const DictEntry &entry = dicts.GetDictEntry(de.GetTag());
-      const VR & vr = entry.GetVR();
+     const  Global &g = GlobalInstance;
+     const  Dicts &dicts = g.GetDicts();
+     const  DictEntry &entry = dicts.GetDictEntry(de.GetTag());
+     const  VR & vr = entry.GetVR();
       assert( de.GetVR() == vr || de.GetVR() == VR::INVALID || de.GetVR() == VR::UN );
       if( entry.GetVM() == VM::VM1 )
         {
@@ -1617,7 +1617,7 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
             {
             Element<VR::DS,VM::VM1_n> el;
             std::stringstream ss;
-            const ByteValue *bv = de.GetByteValue();
+           const  ByteValue *bv = de.GetByteValue();
             assert( bv );
             std::string s = std::string( bv->GetPointer(), bv->GetLength() );
             ss.str( s );
@@ -1625,7 +1625,7 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
             el.Read( ss );
             for(unsigned int i = 0; i < el.GetLength(); ++i)
               {
-              const double value = el.GetValue(i);
+             const  double value = el.GetValue(i);
               sp.push_back( value );
               }
             //assert( sp.size() == entry.GetVM() );
@@ -1641,10 +1641,10 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
         assert( entry.GetVM() == VM::VM2_n );
         assert( vr == VR::DS );
         Attribute<0x28,0x8> numberoframes;
-        const DataElement& de1 = ds.GetDataElement( numberoframes.GetTag() );
+       const  DataElement& de1 = ds.GetDataElement( numberoframes.GetTag() );
         numberoframes.SetFromDataElement( de1 );
         Attribute<0x3004,0x000c> gridframeoffsetvector;
-        const DataElement& de2 = ds.GetDataElement( gridframeoffsetvector.GetTag() );
+       const  DataElement& de2 = ds.GetDataElement( gridframeoffsetvector.GetTag() );
         gridframeoffsetvector.SetFromDataElement( de2 );
         double v1 = gridframeoffsetvector[0];
         double v2 = gridframeoffsetvector[1];
@@ -1655,7 +1655,7 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
     }
   else if( ds.FindDataElement( Tag(0x0028,0x0009) ) ) // Frame Increment Pointer
     {
-    const DataElement& de = ds.GetDataElement( Tag(0x0028,0x0009) );
+   const  DataElement& de = ds.GetDataElement( Tag(0x0028,0x0009) );
     Attribute<0x0028,0x0009,VR::AT,VM::VM1> at;
     at.SetFromDataElement( de );
     assert( ds.FindDataElement( at.GetTag() ) );
@@ -1665,7 +1665,7 @@ std::vector<double> ImageHelper::GetSpacingValue(File const & f)
 $ dcmdump D_CLUNIE_NM1_JPLL.dcm" | grep 0028,0009
 (0028,0009) AT (0054,0010)\(0054,0020)                  #   8, 2 FrameIncrementPointer
 */
-      const DataElement& de2 = ds.GetDataElement( at.GetValue() );
+     const  DataElement& de2 = ds.GetDataElement( at.GetValue() );
       if( at.GetValue() == Tag(0x0018,0x1063) && at.GetNumberOfValues() == 1 )
         {
         Attribute<0x0018,0x1063> at2;
@@ -1830,15 +1830,15 @@ void ImageHelper::SetSpacingValue(DataSet & ds, const std::vector<double> & spac
   //spacingtags.push_back( spacingtag );
   //spacingtags.push_back( zspacingtag );
     {
-    const Tag &currentspacing = spacingtag;
+   const  Tag &currentspacing = spacingtag;
     if( currentspacing != Tag(0xffff,0xffff) )
       {
       DataElement de( currentspacing );
-      const Global &g = GlobalInstance;
-      const Dicts &dicts = g.GetDicts();
-      const DictEntry &entry = dicts.GetDictEntry(de.GetTag());
-      const VR & vr = entry.GetVR();
-      const VM & vm = entry.GetVM(); (void)vm;
+     const  Global &g = GlobalInstance;
+     const  Dicts &dicts = g.GetDicts();
+     const  DictEntry &entry = dicts.GetDictEntry(de.GetTag());
+     const  VR & vr = entry.GetVR();
+     const  VM & vm = entry.GetVM(); (void)vm;
       assert( de.GetVR() == vr || de.GetVR() == VR::INVALID );
       switch(vr)
         {
@@ -1888,15 +1888,15 @@ void ImageHelper::SetSpacingValue(DataSet & ds, const std::vector<double> & spac
       }
     }
     {
-    const Tag &currentspacing = zspacingtag;
+   const  Tag &currentspacing = zspacingtag;
     if( currentspacing != Tag(0xffff,0xffff) )
       {
       DataElement de( currentspacing );
-      const Global &g = GlobalInstance;
-      const Dicts &dicts = g.GetDicts();
-      const DictEntry &entry = dicts.GetDictEntry(de.GetTag());
-      const VR & vr = entry.GetVR();
-      const VM & vm = entry.GetVM(); (void)vm;
+     const  Global &g = GlobalInstance;
+     const  Dicts &dicts = g.GetDicts();
+     const  DictEntry &entry = dicts.GetDictEntry(de.GetTag());
+     const  VR & vr = entry.GetVR();
+     const  VM & vm = entry.GetVM(); (void)vm;
       assert( de.GetVR() == vr || de.GetVR() == VR::INVALID );
       if( entry.GetVM() == VM::VM2_n )
         {
@@ -1906,7 +1906,7 @@ void ImageHelper::SetSpacingValue(DataSet & ds, const std::vector<double> & spac
         // Make we are multiframes:
         if( ds.FindDataElement( numberoframes.GetTag() ) )
           {
-          const DataElement& de1 = ds.GetDataElement( numberoframes.GetTag() );
+         const  DataElement& de1 = ds.GetDataElement( numberoframes.GetTag() );
           numberoframes.SetFromDataElement( de1 );
 
           Element<VR::DS,VM::VM2_n> el;
@@ -1963,7 +1963,7 @@ void ImageHelper::SetSpacingValue(DataSet & ds, const std::vector<double> & spac
 
 static void SetDataElementInSQAsItemNumber(DataSet & ds, DataElement const & de, Tag const & sqtag, unsigned int itemidx)
 {
-    const Tag tfgs = sqtag; //(0x5200,0x9230);
+   const  Tag tfgs = sqtag; //(0x5200,0x9230);
     SmartPointer<SequenceOfItems> sqi = InsertOrReplaceSQ( ds, tfgs );
     if( sqi->GetNumberOfItems() < itemidx )
       {
@@ -2071,7 +2071,7 @@ void ImageHelper::SetOriginValue(DataSet & ds, const Image & image)
     Attribute<0x0020,0x0032> ipp = {{0,0,0}}; // default value
     double zspacing = image.GetSpacing(2);
     unsigned int dimz = image.GetDimension(2);
-    const double *cosines = image.GetDirectionCosines();
+   const  double *cosines = image.GetDirectionCosines();
     DirectionCosines dc( cosines );
 
     double normal[3];
@@ -2597,9 +2597,9 @@ bool ImageHelper::ComputeSpacingFromImagePositionPatient(const std::vector<doubl
   spacing[0] = spacing[1] = spacing[2] = 0.;
   for( ; it != imageposition.end(); ++it)
     {
-    const double x = *it++;
-    const double y = *it++;
-    const double z = *it;
+   const  double x = *it++;
+   const  double y = *it++;
+   const  double z = *it;
     spacing[0] += x;
     spacing[1] += y;
     spacing[2] += z;
@@ -2693,10 +2693,10 @@ unsigned int ImageHelper::GetPlanarConfigurationValue(const File& f)
   unsigned int pc = 0;
   // FIXME: Whatif planaconfiguration is send in a grayscale image... it would be empty...
   // well hopefully :(
-  DataSet const & ds = f.GetDataSet();
+  const DataSet & ds = f.GetDataSet();
   if( ds.FindDataElement( planarconfiguration ) && !ds.GetDataElement( planarconfiguration ).IsEmpty() )
     {
-    const DataElement& de = ds.GetDataElement( planarconfiguration );
+   const  DataElement& de = ds.GetDataElement( planarconfiguration );
     Attribute<0x0028,0x0006> at = { 0 };
     at.SetFromDataElement( de );
 
@@ -2714,7 +2714,7 @@ unsigned int ImageHelper::GetPlanarConfigurationValue(const File& f)
   //returns the lookup table of an image file
 SmartPointer<LookupTable> ImageHelper::GetLUT(File const& f)
 {
-  DataSet const & ds = f.GetDataSet();
+  const DataSet & ds = f.GetDataSet();
   PixelFormat pf = GetPixelFormatValue(f);
   PhotometricInterpretation pi = GetPhotometricInterpretationValue(f);
   // Do the Palette Color:
@@ -2804,7 +2804,7 @@ SmartPointer<LookupTable> ImageHelper::GetLUT(File const& f)
     const Tag seglut(0x0028, (uint16_t)(0x1221 + i));
     if( ds.FindDataElement( tlut ) )
       {
-      const ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
+     const  ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
       if( lut_raw )
         {
         // LookupTableType::RED == 0
@@ -2824,7 +2824,7 @@ SmartPointer<LookupTable> ImageHelper::GetLUT(File const& f)
       }
     else if( ds.FindDataElement( seglut ) )
       {
-      const ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
+     const  ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
       if( lut_raw )
         {
         lut->SetLUT( LookupTable::LookupTableType(i),
@@ -2858,7 +2858,7 @@ const ByteValue* ImageHelper::GetPointerFromElement(Tag const &tag, const File& 
   const DataSet &ds = inF.GetDataSet();
   if( ds.FindDataElement( tag ) )
     {
-    const DataElement &de = ds.GetDataElement( tag );
+   const  DataElement &de = ds.GetDataElement( tag );
     return de.GetByteValue();
     }
   return nullptr;

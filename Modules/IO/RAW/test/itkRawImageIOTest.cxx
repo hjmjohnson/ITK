@@ -71,7 +71,7 @@ itkRawImageIOTest(int argc, char * argv[])
 
   ITK_TEST_EXPECT_TRUE(io->SupportsDimension(Dimension));
 
-  unsigned long dim = 3;
+  unsigned long const dim = 3;
   ITK_TEST_EXPECT_TRUE(!io->SupportsDimension(dim));
 
   // Binary files have no image information to read

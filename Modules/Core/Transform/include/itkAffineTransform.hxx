@@ -175,16 +175,16 @@ AffineTransform<TParametersValueType, VDimension>::Rotate3D(const OutputVectorTy
                                                             bool                     pre)
 {
   // Convert the axis to a unit vector
-  ScalarType r = std::sqrt(axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2]);
-  ScalarType x1 = axis[0] / r;
-  ScalarType x2 = axis[1] / r;
-  ScalarType x3 = axis[2] / r;
+  ScalarType const r = std::sqrt(axis[0] * axis[0] + axis[1] * axis[1] + axis[2] * axis[2]);
+  ScalarType const x1 = axis[0] / r;
+  ScalarType const x2 = axis[1] / r;
+  ScalarType const x3 = axis[2] / r;
 
   // Compute quaternion elements
-  ScalarType q0 = std::cos(angle / 2.0);
-  ScalarType q1 = x1 * std::sin(angle / 2.0);
-  ScalarType q2 = x2 * std::sin(angle / 2.0);
-  ScalarType q3 = x3 * std::sin(angle / 2.0);
+  ScalarType const q0 = std::cos(angle / 2.0);
+  ScalarType const q1 = x1 * std::sin(angle / 2.0);
+  ScalarType const q2 = x2 * std::sin(angle / 2.0);
+  ScalarType const q3 = x3 * std::sin(angle / 2.0);
 
   MatrixType trans;
   // Compute elements of the rotation matrix
@@ -264,10 +264,10 @@ AffineTransform<TParametersValueType, VDimension>::Metric(const Self * other) co
   {
     for (unsigned int j = 0; j < VDimension; ++j)
     {
-      ScalarType term1 = this->GetMatrix()[i][j] - other->GetMatrix()[i][j];
+      ScalarType const term1 = this->GetMatrix()[i][j] - other->GetMatrix()[i][j];
       result += term1 * term1;
     }
-    ScalarType term2 = this->GetOffset()[i] - other->GetOffset()[i];
+    ScalarType const term2 = this->GetOffset()[i] - other->GetOffset()[i];
     result += term2 * term2;
   }
   return std::sqrt(result);
@@ -294,7 +294,7 @@ AffineTransform<TParametersValueType, VDimension>::Metric() const -> ScalarType
       }
       result += term * term;
     }
-    ScalarType term2 = this->GetOffset()[i];
+    ScalarType const term2 = this->GetOffset()[i];
     result += term2 * term2;
   }
 

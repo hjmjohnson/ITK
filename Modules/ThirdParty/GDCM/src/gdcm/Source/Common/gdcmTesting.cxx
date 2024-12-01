@@ -55,7 +55,7 @@ const char * const *Testing::GetFileNames()
 unsigned int Testing::GetNumberOfFileNames()
 {
   // Do not count NULL value:
-  static const unsigned int size = sizeof(gdcmDataFileNames)/sizeof(*gdcmDataFileNames) - 1;
+  const static unsigned int size = sizeof(gdcmDataFileNames)/sizeof(*gdcmDataFileNames) - 1;
   return size;
 }
 
@@ -72,7 +72,7 @@ Testing::MediaStorageDataFilesType Testing::GetMediaStorageDataFiles()
 unsigned int Testing::GetNumberOfMediaStorageDataFiles()
 {
   // Do not count NULL value:
-  static const unsigned int size = sizeof(gdcmMediaStorageDataFiles)/sizeof(*gdcmMediaStorageDataFiles) - 1;
+  const static unsigned int size = sizeof(gdcmMediaStorageDataFiles)/sizeof(*gdcmMediaStorageDataFiles) - 1;
   return size;
 }
 const char * const * Testing::GetMediaStorageDataFile(unsigned int file)
@@ -111,7 +111,7 @@ Testing::MD5DataImagesType Testing::GetMD5DataImages()
 unsigned int Testing::GetNumberOfMD5DataImages()
 {
   // Do not count NULL value:
-  static const unsigned int size = sizeof(gdcmMD5DataImages)/sizeof(*gdcmMD5DataImages) - 1;
+  const static unsigned int size = sizeof(gdcmMD5DataImages)/sizeof(*gdcmMD5DataImages) - 1;
   return size;
 }
 

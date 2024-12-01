@@ -432,7 +432,7 @@ static bool CheckFileOperations()
 
   std::string const testBadSymlink(testNewDir + "/badSymlink.txt");
   std::string const testBadSymlinkTgt(testNewDir + "/missing/symlinkTgt.txt");
-  kwsys::Status const symlinkStatus =
+  const kwsys::Status symlinkStatus =
     kwsys::SystemTools::CreateSymlink(testBadSymlinkTgt, testBadSymlink);
 #if defined(_WIN32)
   // Under Windows, the user may not have enough privileges to create symlinks
@@ -740,7 +740,7 @@ static bool CheckRelativePaths()
 
 static bool CheckCollapsePath(const std::string& path,
                               const std::string& expected,
-                              const char* base = nullptr)
+                             const  char* base = nullptr)
 {
   std::string result = kwsys::SystemTools::CollapseFullPath(path, base);
   if (!kwsys::SystemTools::ComparePath(expected, result)) {
@@ -1116,7 +1116,7 @@ static bool CheckCopyFileIfDifferent()
         !writeFile("file_b", diff_test_cases[i].b)) {
       return false;
     }
-    const char* cptarget =
+   const  char* cptarget =
       i < 4 ? TEST_SYSTEMTOOLS_BINARY_DIR "/file_b" : "file_b";
     if (!kwsys::SystemTools::CopyFileIfDifferent("file_a", cptarget)) {
       std::cerr << "CopyFileIfDifferent() returned false for test case "
@@ -1179,7 +1179,7 @@ static bool CheckSplitString()
 
   auto check_split = [](std::string const& input,
                         std::initializer_list<const char*> expected) -> bool {
-    auto const components = kwsys::SystemTools::SplitString(input, '/');
+    const auto components = kwsys::SystemTools::SplitString(input, '/');
     if (components.size() != expected.size()) {
       std::cerr << "Incorrect split count for " << input << ": "
                 << components.size() << std::endl;

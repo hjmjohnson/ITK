@@ -99,9 +99,9 @@ MetaImageConverter<VDimension, PixelType, TSpatialObjectType>::MetaObjectToSpati
     itkExceptionMacro("Can't convert MetaObject to MetaImage");
   }
 
-  ImageSpatialObjectPointer imageSO = ImageSpatialObjectType::New();
+  ImageSpatialObjectPointer const imageSO = ImageSpatialObjectType::New();
 
-  typename ImageType::Pointer myImage = this->AllocateImage(imageMO);
+  typename ImageType::Pointer const myImage = this->AllocateImage(imageMO);
 
   this->MetaObjectToSpatialObjectBase(imageMO, imageSO);
 
@@ -131,7 +131,7 @@ MetaImageConverter<VDimension, PixelType, TSpatialObjectType>::SpatialObjectToMe
   }
   using ImageConstPointer = typename ImageType::ConstPointer;
 
-  ImageConstPointer SOImage = imageSO->GetImage();
+  ImageConstPointer const SOImage = imageSO->GetImage();
 
   int    size[VDimension];
   double spacing[VDimension];

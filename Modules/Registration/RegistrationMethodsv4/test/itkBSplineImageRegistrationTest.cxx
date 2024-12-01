@@ -55,8 +55,8 @@ public:
       return;
     }
 
-    unsigned int                                             currentLevel = filter->GetCurrentLevel();
-    typename TFilter::ShrinkFactorsPerDimensionContainerType shrinkFactors =
+    unsigned int const                                             currentLevel = filter->GetCurrentLevel();
+    typename TFilter::ShrinkFactorsPerDimensionContainerType const shrinkFactors =
       filter->GetShrinkFactorsPerDimension(currentLevel);
     typename TFilter::SmoothingSigmasArrayType                 smoothingSigmas = filter->GetSmoothingSigmasPerLevel();
     typename TFilter::TransformParametersAdaptorsContainerType adaptors =
@@ -64,7 +64,7 @@ public:
 
     const itk::ObjectToObjectOptimizerBase * optimizerBase = filter->GetOptimizer();
     using GradientDescentOptimizerv4Type = itk::GradientDescentOptimizerv4;
-    typename GradientDescentOptimizerv4Type::ConstPointer optimizer =
+    typename GradientDescentOptimizerv4Type::ConstPointer const optimizer =
       dynamic_cast<const GradientDescentOptimizerv4Type *>(optimizerBase);
     if (!optimizer)
     {
@@ -119,14 +119,14 @@ PerformBSplineImageRegistration(int argc, char * argv[])
   auto fixedImageReader = ImageReaderType::New();
   fixedImageReader->SetFileName(argv[2]);
   fixedImageReader->Update();
-  typename FixedImageType::Pointer fixedImage = fixedImageReader->GetOutput();
+  typename FixedImageType::Pointer const fixedImage = fixedImageReader->GetOutput();
   fixedImage->Update();
   fixedImage->DisconnectPipeline();
 
   auto movingImageReader = ImageReaderType::New();
   movingImageReader->SetFileName(argv[3]);
   movingImageReader->Update();
-  typename MovingImageType::Pointer movingImage = movingImageReader->GetOutput();
+  typename MovingImageType::Pointer const movingImage = movingImageReader->GetOutput();
   movingImage->Update();
   movingImage->DisconnectPipeline();
 
@@ -150,7 +150,7 @@ PerformBSplineImageRegistration(int argc, char * argv[])
   }
 
   using GradientDescentOptimizerv4Type = itk::GradientDescentOptimizerv4;
-  typename GradientDescentOptimizerv4Type::Pointer affineOptimizer =
+  typename GradientDescentOptimizerv4Type::Pointer const affineOptimizer =
     dynamic_cast<GradientDescentOptimizerv4Type *>(affineSimple->GetModifiableOptimizer());
   if (!affineOptimizer)
   {
@@ -166,7 +166,7 @@ PerformBSplineImageRegistration(int argc, char * argv[])
 
   {
     using ImageMetricType = itk::ImageToImageMetricv4<FixedImageType, MovingImageType>;
-    typename ImageMetricType::Pointer imageMetric =
+    typename ImageMetricType::Pointer const imageMetric =
       dynamic_cast<ImageMetricType *>(affineSimple->GetModifiableMetric());
     if (imageMetric.IsNull())
     {
@@ -181,7 +181,7 @@ PerformBSplineImageRegistration(int argc, char * argv[])
 
   {
     using ImageMetricType = itk::ImageToImageMetricv4<FixedImageType, MovingImageType>;
-    typename ImageMetricType::Pointer imageMetric =
+    typename ImageMetricType::Pointer const imageMetric =
       dynamic_cast<ImageMetricType *>(affineOptimizer->GetModifiableMetric());
     std::cout << "Affine parameters after registration: " << std::endl
               << affineOptimizer->GetCurrentPosition() << std::endl

@@ -58,7 +58,7 @@ protected:
   template <unsigned int D, typename TPixelType = unsigned short>
   struct FixtureUtilities
   {
-    static const unsigned int Dimension = D;
+    const static unsigned int Dimension = D;
 
     using PixelType = TPixelType;
     using OutputPixelType = unsigned int;
@@ -92,9 +92,9 @@ TEST_F(SLICFixture, SetGet)
 
   auto filter = Utils::FilterType::New();
 
-  typename Utils::FilterType::ConstPointer constfilter = (const Utils::FilterType *)(filter.GetPointer());
+  typename Utils::FilterType::ConstPointer const constfilter = (const Utils::FilterType *)(filter.GetPointer());
 
-  Utils::FilterType::SuperGridSizeType gridSize3(3);
+  const Utils::FilterType::SuperGridSizeType gridSize3(3);
   EXPECT_NO_THROW(filter->SetSuperGridSize(gridSize3));
   ITK_EXPECT_VECTOR_NEAR(gridSize3, filter->GetSuperGridSize(), 0);
 

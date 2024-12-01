@@ -105,7 +105,7 @@ EStateID ULActionAE3::PerformAction(Subject *, ULEvent& inEvent, ULConnection& i
 
   // once again duplicate AAssociateACPDU vs ULConnection
   for( unsigned int index = 0; index < acpdu->GetNumberOfPresentationContextAC(); index++ ){
-    PresentationContextAC const &pc = acpdu->GetPresentationContextAC(index);
+    const PresentationContextAC &pc = acpdu->GetPresentationContextAC(index);
     inConnection.AddAcceptedPresentationContext(pc);
   }
 
@@ -182,13 +182,13 @@ EStateID ULActionAE6::PerformAction(Subject *, ULEvent& inEvent, ULConnection& i
       // FIXME we should check :
       // rqpdu.GetAbstractSyntax() contains LittleEndian
       PresentationContextAC pcac1;
-      PresentationContextRQ const &pc = rqpdu->GetPresentationContext(index);
+      const PresentationContextRQ &pc = rqpdu->GetPresentationContext(index);
       //add the presentation context back into the connection,
       //so later functions will know what's allowed on this connection
       // BOGUS (MM):
       //inConnection.AddAcceptedPresentationContext(pc);
 
-      const uint8_t id = pc.GetPresentationContextID();
+     const  uint8_t id = pc.GetPresentationContextID();
 
       std::vector<TransferSyntaxSub> const & tsSet = pc.GetTransferSyntaxes();
       std::vector<TransferSyntaxSub>::const_iterator tsitor;

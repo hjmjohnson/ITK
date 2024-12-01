@@ -43,8 +43,8 @@ IterativeInverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::Generat
 
   time.Start(); // time measurement
 
-  InputImageConstPointer inputPtr = this->GetInput(0);
-  OutputImagePointer     outputPtr = this->GetOutput(0);
+  InputImageConstPointer const inputPtr = this->GetInput(0);
+  OutputImagePointer const     outputPtr = this->GetOutput(0);
 
   // some checks
   if (inputPtr.IsNull())
@@ -54,7 +54,7 @@ IterativeInverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::Generat
 
   // calculate a first guess
   // (calculate negative displacement field and apply it to itself)
-  InputImagePointer negField = InputImageType::New();
+  InputImagePointer const negField = InputImageType::New();
   negField->SetRegions(inputPtr->GetLargestPossibleRegion());
   negField->SetOrigin(inputPtr->GetOrigin());
   negField->SetSpacing(inputPtr->GetSpacing());
@@ -95,19 +95,19 @@ IterativeInverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::Generat
   else
   {
     // calculate the inverted field
-    double spacing = inputPtr->GetSpacing()[0];
+    double const spacing = inputPtr->GetSpacing()[0];
 
 
-    InputImageRegionType region = inputPtr->GetLargestPossibleRegion();
-    unsigned int         numberOfPoints = 1;
+    InputImageRegionType const region = inputPtr->GetLargestPossibleRegion();
+    unsigned int               numberOfPoints = 1;
     for (unsigned int i = 0; i < ImageDimension; ++i)
     {
       numberOfPoints *= region.GetSize()[i];
     }
 
-    ProgressReporter         progress(this, 0, inputPtr->GetLargestPossibleRegion().GetNumberOfPixels());
-    OutputIterator           OutputIt(outputPtr, outputPtr->GetRequestedRegion());
-    FieldInterpolatorPointer inputFieldInterpolator = FieldInterpolatorType::New();
+    ProgressReporter               progress(this, 0, inputPtr->GetLargestPossibleRegion().GetNumberOfPixels());
+    OutputIterator                 OutputIt(outputPtr, outputPtr->GetRequestedRegion());
+    FieldInterpolatorPointer const inputFieldInterpolator = FieldInterpolatorType::New();
     inputFieldInterpolator->SetInputImage(inputPtr);
 
     double smallestError = 0;
@@ -116,8 +116,8 @@ IterativeInverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::Generat
     while (!OutputIt.IsAtEnd())
     {
       // get the output image index
-      OutputImageIndexType index = OutputIt.GetIndex();
-      OutputImagePointType originalPoint;
+      OutputImageIndexType const index = OutputIt.GetIndex();
+      OutputImagePointType       originalPoint;
       outputPtr->TransformIndexToPhysicalPoint(index, originalPoint);
 
       int    stillSamePoint = 0;

@@ -83,9 +83,9 @@ public:
       return RealType{};
     }
 
-    typename NumericTraits<TInputPixel>::RealType mean = ((RealType)m_Sum) / m_Size;
-    typename std::vector<TInputPixel>::iterator   it;
-    RealType                                      squaredSum{};
+    typename NumericTraits<TInputPixel>::RealType const mean = ((RealType)m_Sum) / m_Size;
+    typename std::vector<TInputPixel>::iterator         it;
+    RealType                                            squaredSum{};
     for (it = m_Values.begin(); it != m_Values.end(); ++it)
     {
       squaredSum += itk::Math::sqr(*it - mean);

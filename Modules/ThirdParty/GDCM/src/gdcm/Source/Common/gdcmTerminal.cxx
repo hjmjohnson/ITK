@@ -89,7 +89,7 @@ public:
   }
   void set_attributes(int color) {
 #ifdef _WIN32
-  static const int colors[8] = { 0, 4, 2, 6, 1, 5, 3, 7 };
+  const static int colors[8] = { 0, 4, 2, 6, 1, 5, 3, 7 };
   WORD wAttributes;
 
   wAttributes = get_attributes();

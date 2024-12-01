@@ -150,8 +150,8 @@ template <typename TInputImage, typename TOutputImage>
 int
 MirrorPadImageFilter<TInputImage, TOutputImage>::FindRegionsInArea(long start, long end, long size, long offset)
 {
-  int  result = 1;
-  long regionsize = end - start;
+  int        result = 1;
+  long const regionsize = end - start;
   if (regionsize > 0) // Find out home many regions we have,
   {
     result = regionsize / size;
@@ -189,12 +189,12 @@ MirrorPadImageFilter<TInputImage, TOutputImage>::ConvertOutputIndexToInputIndex(
   {
     // Output region goes from a to a+b-1
     // Input region goes from c to c+b-1
-    long a = outputRegionStart[dimCtr];
-    long c = inputRegionStart[dimCtr];
+    long const a = outputRegionStart[dimCtr];
+    long const c = inputRegionStart[dimCtr];
 
     if (oddRegionArray[dimCtr])
     {
-      long b = inputSizes[dimCtr];
+      long const b = inputSizes[dimCtr];
       inputIndex[dimCtr] = a + c + b - 1 - outputIndex[dimCtr];
     }
     else
@@ -235,11 +235,11 @@ MirrorPadImageFilter<TInputImage, TOutputImage>::RegionIsOdd(long base, long tes
 
   if (test < base)
   {
-    long oddness = (base - test - 1) / size;
+    long const oddness = (base - test - 1) / size;
     return !(oddness & 1);
   }
 
-  long oddness = (test - base) / size;
+  long const oddness = (test - base) / size;
   return (oddness & 1);
 }
 
@@ -454,8 +454,8 @@ MirrorPadImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   // Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  typename Superclass::InputImagePointer  inputPtr = const_cast<InputImageType *>(this->GetInput());
-  typename Superclass::OutputImagePointer outputPtr = this->GetOutput();
+  typename Superclass::InputImagePointer const  inputPtr = const_cast<InputImageType *>(this->GetInput());
+  typename Superclass::OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -731,9 +731,9 @@ MirrorPadImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   {
     // If both a valid output and input region are defined for the particular
     // defined region, then copy the input values to the output values.
-    int goodOutput =
+    int const goodOutput =
       this->GenerateNextOutputRegion(outRegIndices, outRegLimit, outputRegionStart, outputRegionSizes, outputRegion);
-    int goodInput =
+    int const goodInput =
       this->GenerateNextInputRegion(inRegIndices, inRegLimit, inputRegionStart, inputRegionSizes, inputRegion);
     if (goodInput && goodOutput)
     {

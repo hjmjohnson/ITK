@@ -74,8 +74,8 @@ QuadEdgeMeshEulerOperatorSplitFacetFunction<TMesh, TQEType>::Evaluate(QEType * h
   using VertexRefType = typename MeshType::VertexRefType;
 
   this->m_Mesh->DeleteFace(h->GetLeft());
-  VertexRefType orgPid = h->GetDestination();
-  VertexRefType destPid = g->GetDestination();
+  VertexRefType const orgPid = h->GetDestination();
+  VertexRefType const destPid = g->GetDestination();
 
   // Create an new isolated edge and set its geometry:
   auto *   newEdge = new EdgeCellType;

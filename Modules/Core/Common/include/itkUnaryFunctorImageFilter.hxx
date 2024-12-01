@@ -62,8 +62,8 @@ UnaryFunctorImageFilter<TInputImage, TOutputImage, TFunction>::GenerateOutputInf
   this->CallCopyInputRegionToOutputRegion(outputLargestPossibleRegion, inputPtr->GetLargestPossibleRegion());
   outputPtr->SetLargestPossibleRegion(outputLargestPossibleRegion);
 
-  ImageToImageFilterDetail::ImageInformationCopier<Superclass::OutputImageDimension, Superclass::InputImageDimension>
-    informationCopier;
+  ImageToImageFilterDetail::ImageInformationCopier<Superclass::OutputImageDimension,
+                                                   Superclass::InputImageDimension> const informationCopier;
   informationCopier(outputPtr, inputPtr);
 }
 

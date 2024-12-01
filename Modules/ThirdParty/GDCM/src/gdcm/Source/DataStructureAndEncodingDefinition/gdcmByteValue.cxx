@@ -68,7 +68,7 @@ namespace gdcm_ns
     std::vector<char>::const_iterator it = Internal.begin();
     for(; it != Internal.begin()+length; ++it)
       {
-      const char &c = *it;
+     const  char &c = *it;
       if ( !( isprint((unsigned char)c) || isspace((unsigned char)c) ) ) os << ".";
       else os << c;
       }
@@ -126,7 +126,7 @@ namespace gdcm_ns
     std::vector<char>::const_iterator it = Internal.begin();
     for(; it != (Internal.begin() + Length); ++it)
       {
-      const char &c = *it;
+     const  char &c = *it;
       if ( c == '^' )
         {
         if(count2==1)
@@ -273,7 +273,7 @@ namespace gdcm_ns
 
     for(; it != (Internal.begin() + Length); ++it)
       {
-      const char &c = *it;
+     const  char &c = *it;
       if ( c == '\\' )
         {
         count++;

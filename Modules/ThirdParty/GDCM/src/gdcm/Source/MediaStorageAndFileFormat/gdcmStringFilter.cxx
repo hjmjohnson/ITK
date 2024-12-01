@@ -90,12 +90,12 @@ std::pair<std::string, std::string> StringFilter::ToStringPair(const Tag& t) con
 {
   if( t.GetGroup() == 0x2 )
     {
-    const FileMetaInformation &header = GetFile().GetHeader();
+   const  FileMetaInformation &header = GetFile().GetHeader();
     return ToStringPair(t, header);
     }
   else
     {
-    const DataSet &ds = GetFile().GetDataSet();
+   const  DataSet &ds = GetFile().GetDataSet();
     return ToStringPair(t, ds);
     }
 }
@@ -105,12 +105,12 @@ std::pair<std::string, std::string> StringFilter::ToStringPair(const DataElement
   const Tag & t = de.GetTag();
   if( t.GetGroup() == 0x2 )
     {
-    const FileMetaInformation &header = GetFile().GetHeader();
+   const  FileMetaInformation &header = GetFile().GetHeader();
     return ToStringPairInternal(de, header);
     }
   else
     {
-    const DataSet &ds = GetFile().GetDataSet();
+   const  DataSet &ds = GetFile().GetDataSet();
     return ToStringPairInternal(de, ds);
     }
 }
@@ -124,7 +124,7 @@ bool StringFilter::ExecuteQuery(std::string const & query_const, std::string &va
 //    }
 //  else
     {
-    const DataSet &ds = GetFile().GetDataSet();
+   const  DataSet &ds = GetFile().GetDataSet();
     return ExecuteQuery(query_const, ds, value);
     }
 }
@@ -134,8 +134,8 @@ bool StringFilter::ExecuteQuery(std::string const & query_const,
 {
   //std::pair<std::string, std::string> ret;
   static Global &g = Global::GetInstance();
-  static const Dicts &dicts = g.GetDicts();
-  static const Dict &pubdict = dicts.GetPublicDict();
+  const static Dicts &dicts = g.GetDicts();
+  const static Dict &pubdict = dicts.GetPublicDict();
 
   char *query = strdup( query_const.c_str() );
   const char delim[] = "/";
@@ -181,7 +181,7 @@ bool StringFilter::ExecuteQuery(std::string const & query_const,
         break;
         }
       assert( subtokens[1] == "keyword" );
-      const char *k = subtokens[2].c_str();
+     const  char *k = subtokens[2].c_str();
       /*const DictEntry &dictentry = */pubdict.GetDictEntryByKeyword(k, t);
       if( !curds->FindDataElement( t ) )
         {
@@ -201,7 +201,7 @@ bool StringFilter::ExecuteQuery(std::string const & query_const,
         state = -1;
         break;
         }
-      Item const &item = sqi->GetItem( atoi( subtokens[2].c_str() ) );
+      const Item &item = sqi->GetItem( atoi( subtokens[2].c_str() ) );
       curds = &item.GetNestedDataSet();
       }
     else if( subtokens[0] == "Value" )
@@ -211,7 +211,7 @@ bool StringFilter::ExecuteQuery(std::string const & query_const,
       state = 2;
       assert( subtokens[1] == "number" );
 #if !defined(NDEBUG)
-      const ByteValue * const bv = curde->GetByteValue(); (void)bv;
+     const  ByteValue * const bv = curde->GetByteValue(); (void)bv;
       assert( bv );
       //bv->Print( std::cout << std::endl );
 #endif
@@ -273,7 +273,7 @@ bool StringFilter::ExecuteQuery(std::string const & query_const,
   if( VR::IsASCII( vr ) )
     {
     assert( vr & VR::VRASCII );
-    const ByteValue *bv = de.GetByteValue();
+   const  ByteValue *bv = de.GetByteValue();
     if( de.GetVL() )
       {
       assert( bv /*|| bv->IsEmpty()*/ );
@@ -290,7 +290,7 @@ bool StringFilter::ExecuteQuery(std::string const & query_const,
   else
     {
     assert( vr & VR::VRBINARY );
-    const ByteValue *bv = de.GetByteValue();
+   const  ByteValue *bv = de.GetByteValue();
     if( bv )
       {
       //VM::VMType vm = entry.GetVM();//!!mmr-- can I remove this, or will it mess with the stream?
@@ -411,7 +411,7 @@ std::pair<std::string, std::string> StringFilter::ToStringPairInternal(const Dat
   if( VR::IsASCII( vr ) )
     {
     assert( vr & VR::VRASCII );
-    const ByteValue *bv = de.GetByteValue();
+   const  ByteValue *bv = de.GetByteValue();
     if( de.GetVL() )
       {
       assert( bv /*|| bv->IsEmpty()*/ );
@@ -428,7 +428,7 @@ std::pair<std::string, std::string> StringFilter::ToStringPairInternal(const Dat
   else
     {
     assert( vr & VR::VRBINARY );
-    const ByteValue *bv = de.GetByteValue();
+   const  ByteValue *bv = de.GetByteValue();
     if( bv )
       {
       //VM::VMType vm = entry.GetVM();//!!mmr-- can I remove this, or will it mess with the stream?

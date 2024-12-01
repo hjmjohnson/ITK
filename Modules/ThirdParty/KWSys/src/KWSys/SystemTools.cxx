@@ -441,8 +441,8 @@ struct kwsysEnvCompare
   bool operator()(const envchar* l, const envchar* r) const
   {
 #if defined(_WIN32)
-    const wchar_t* leq = wcschr(l, L'=');
-    const wchar_t* req = wcschr(r, L'=');
+   const  wchar_t* leq = wcschr(l, L'=');
+   const  wchar_t* req = wcschr(r, L'=');
     size_t llen = leq ? (leq - l) : wcslen(l);
     size_t rlen = req ? (req - r) : wcslen(r);
     if (llen == rlen) {
@@ -451,8 +451,8 @@ struct kwsysEnvCompare
       return wcscmp(l, r) < 0;
     }
 #else
-    const char* leq = strchr(l, '=');
-    const char* req = strchr(r, '=');
+   const  char* leq = strchr(l, '=');
+   const  char* req = strchr(r, '=');
     size_t llen = leq ? static_cast<size_t>(leq - l) : strlen(l);
     size_t rlen = req ? static_cast<size_t>(req - r) : strlen(r);
     if (llen == rlen) {
@@ -484,7 +484,7 @@ public:
 
   const envchar* Release(const envchar* env)
   {
-    const envchar* old = nullptr;
+   const  envchar* old = nullptr;
     auto i = this->find(env);
     if (i != this->end()) {
       old = *i;
@@ -581,7 +581,7 @@ public:
    */
   static std::string FindName(
     const std::string& name,
-    const std::vector<std::string>& userPaths = std::vector<std::string>(),
+   const  std::vector<std::string>& userPaths = std::vector<std::string>(),
     bool no_system_path = false);
 };
 
@@ -645,7 +645,7 @@ std::string SystemToolsStatic::GetCasePathName(std::string const& pathIn,
 
         bool found_in_cache = false;
         if (cache) {
-          auto const it = SystemToolsStatics->FindFileMap.find(test_str);
+          const auto it = SystemToolsStatics->FindFileMap.find(test_str);
           if (it != SystemToolsStatics->FindFileMap.end()) {
             path_components[idx] = it->second;
             found_in_cache = true;
@@ -936,7 +936,7 @@ public:
   {
     for (iterator i = this->begin(); i != this->end(); ++i) {
 #  if defined(_WIN32)
-      const std::string s = Encoding::ToNarrow(*i);
+     const  std::string s = Encoding::ToNarrow(*i);
       kwsysUnPutEnv(s);
 #  else
       kwsysUnPutEnv(*i);
@@ -947,7 +947,7 @@ public:
   bool Put(const char* env)
   {
 #  if defined(_WIN32)
-    const std::wstring wEnv = Encoding::ToWide(env);
+   const  std::wstring wEnv = Encoding::ToWide(env);
     wchar_t* newEnv = _wcsdup(wEnv.c_str());
 #  else
     char* newEnv = strdup(env);
@@ -963,7 +963,7 @@ public:
   bool UnPut(const char* env)
   {
 #  if defined(_WIN32)
-    const std::wstring wEnv = Encoding::ToWide(env);
+   const  std::wstring wEnv = Encoding::ToWide(env);
     Free oldEnv(this->Release(wEnv.c_str()));
 #  else
     Free oldEnv(this->Release(env));
@@ -1832,7 +1832,7 @@ char* SystemTools::RemoveChars(const char* str, const char* toremove)
   char* clean_str = new char[strlen(str) + 1];
   char* ptr = clean_str;
   while (*str) {
-    const char* str2 = toremove;
+   const  char* str2 = toremove;
     while (*str2 && *str != *str2) {
       ++str2;
     }
@@ -1870,7 +1870,7 @@ char* SystemTools::ReplaceChars(char* str, const char* toreplace,
   if (str) {
     char* ptr = str;
     while (*ptr) {
-      const char* ptr2 = toreplace;
+     const  char* ptr2 = toreplace;
       while (*ptr2) {
         if (*ptr == *ptr2) {
           *ptr = replacement;
@@ -1935,7 +1935,7 @@ const char* SystemTools::FindLastString(const char* str1, const char* str2)
 
   size_t len1 = strlen(str1), len2 = strlen(str2);
   if (len1 >= len2) {
-    const char* ptr = str1 + len1 - len2;
+   const  char* ptr = str1 + len1 - len2;
     do {
       if (!strncmp(ptr, str2, len2)) {
         return ptr;
@@ -2077,7 +2077,7 @@ std::string SystemTools::EscapeChars(const char* str,
     } else {
       n.reserve(strlen(str));
       while (*str) {
-        const char* ptr = chars_to_escape;
+       const  char* ptr = chars_to_escape;
         while (*ptr) {
           if (*str == *ptr) {
             n += escape_char;
@@ -2101,8 +2101,8 @@ static void ConvertVMSToUnix(std::string& path)
   if (rootEnd != std::string::npos) {
     std::string root = path.substr(0, rootEnd);
     std::string pathPart = path.substr(rootEnd + 2, pathEnd - rootEnd - 2);
-    const char* pathCString = pathPart.c_str();
-    const char* pos0 = pathCString;
+   const  char* pathCString = pathPart.c_str();
+   const  char* pos0 = pathCString;
     for (std::string::size_type pos = 0; *pos0; ++pos) {
       if (*pos0 == '.') {
         pathPart[pos] = '/';
@@ -2288,7 +2288,7 @@ SystemTools::CopyStatus SystemTools::CopyFileIfDifferent(
   // special check for a destination that is a directory
   // FilesDiffer does not handle file to directory compare
   if (SystemTools::FileIsDirectory(destination)) {
-    const std::string new_destination = FileInDir(source, destination);
+   const  std::string new_destination = FileInDir(source, destination);
     if (!SystemTools::ComparePath(new_destination, destination)) {
       return SystemTools::CopyFileIfDifferent(source, new_destination);
     }
@@ -2453,7 +2453,7 @@ SystemTools::CopyStatus SystemTools::CopyFileContentBlockwise(
   // before using the data, but the fin.gcount() will be zero if an
   // error occurred.  Therefore, the loop should be safe everywhere.
   while (fin) {
-    const int bufferSize = 4096;
+   const  int bufferSize = 4096;
     char buffer[bufferSize];
 
     fin.read(buffer, bufferSize);
@@ -3499,8 +3499,8 @@ static void SystemToolsAppendComponents(
   std::vector<std::string>::iterator first,
   std::vector<std::string>::iterator last)
 {
-  static const std::string up = "..";
-  static const std::string cur = ".";
+  const static std::string up = "..";
+  const static std::string cur = ".";
   for (std::vector<std::string>::const_iterator i = first; i != last; ++i) {
     if (*i == up) {
       // Remove the previous component if possible.  Ignore ../ components

@@ -962,7 +962,7 @@ MET_StringToWordArray(const char * s, int * n, char *** val)
 bool
 MET_GetFilePath(const std::string & _fName, std::string & _fPath)
 {
-  auto const pos = _fName.find_last_of("/\\");
+  const auto pos = _fName.find_last_of("/\\");
   if (pos == std::string::npos)
   {
     _fPath = "";

@@ -43,7 +43,7 @@ std::vector<PresentationDataValue> CMoveRQ::ConstructPDV(
   if (dynamic_cast<const StudyRootQuery*>(inRootQuery)!=NULL)
     {
     contextID = eStudyRootQueryRetrieveInformationModelMOVE;
-    const char *uid2 = UIDs::GetUIDString(
+   const  char *uid2 = UIDs::GetUIDString(
       UIDs::StudyRootQueryRetrieveInformationModelMOVE );
     suid = uid2;
     }

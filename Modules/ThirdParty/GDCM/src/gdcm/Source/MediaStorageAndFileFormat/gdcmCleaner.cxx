@@ -509,7 +509,7 @@ static const PrivateTag part15_table_E_1_1[] = {
 };
 
 static inline bool in_part15(const PrivateTag &pt) {
-  static const size_t len =
+  const static size_t len =
       sizeof(part15_table_E_1_1) / sizeof *part15_table_E_1_1;
   for (size_t i = 0; i < len; ++i) {
     if (part15_table_E_1_1[i] == pt) {
@@ -561,10 +561,10 @@ struct Cleaner::impl {
       return true;
     } else {
       // Let's check if VR of tag is already contained in VR
-      static const Global &g = GlobalInstance;
-      static const Dicts &dicts = g.GetDicts();
-      const DictEntry &entry = dicts.GetDictEntry(t);
-      const VR &refvr = entry.GetVR();
+      const static Global &g = GlobalInstance;
+      const static Dicts &dicts = g.GetDicts();
+     const  DictEntry &entry = dicts.GetDictEntry(t);
+     const  VR &refvr = entry.GetVR();
       if (empty_or_remove_vrs.find(refvr) != empty_or_remove_vrs.end()) {
         gdcmWarningMacro(
             "Tag: " << t << " is also cleanup with VR cleaning. skipping");
@@ -585,7 +585,7 @@ struct Cleaner::impl {
     return false;
   }
   bool Empty(PrivateTag const &pt) {
-    const char *owner = pt.GetOwner();
+   const  char *owner = pt.GetOwner();
     if (pt.IsPrivate() && *owner) {
       if (in_part15(pt)) {
         gdcmErrorMacro("Cannot add Part 15 attribute for now");
@@ -614,7 +614,7 @@ struct Cleaner::impl {
     return false;
   }
   bool Remove(PrivateTag const &pt) {
-    const char *owner = pt.GetOwner();
+   const  char *owner = pt.GetOwner();
     if (pt.IsPrivate() && *owner) {
       if (in_part15(pt)) {
         gdcmErrorMacro("Cannot add Part 15 attribute for now");
@@ -638,12 +638,12 @@ struct Cleaner::impl {
 
   bool Scrub(Tag const & /*t*/) { return false; }
   bool Scrub(PrivateTag const &pt) {
-    static const PrivateTag &csa1 = CSAHeader::GetCSAImageHeaderInfoTag();
-    static const PrivateTag &csa2 = CSAHeader::GetCSASeriesHeaderInfoTag();
+    const static PrivateTag &csa1 = CSAHeader::GetCSAImageHeaderInfoTag();
+    const static PrivateTag &csa2 = CSAHeader::GetCSASeriesHeaderInfoTag();
     const PrivateTag mec_mr3(0x700d, 0x08, "TOSHIBA_MEC_MR3");
-    static const PrivateTag &pmtf1 = gdcm::MEC_MR3::GetPMTFInformationDataTag();
-    static const PrivateTag &pmtf2 = gdcm::MEC_MR3::GetToshibaMECMR3Tag();
-    static const PrivateTag &pmtf3 = gdcm::MEC_MR3::GetCanonMECMR3Tag();
+    const static PrivateTag &pmtf1 = gdcm::MEC_MR3::GetPMTFInformationDataTag();
+    const static PrivateTag &pmtf2 = gdcm::MEC_MR3::GetToshibaMECMR3Tag();
+    const static PrivateTag &pmtf3 = gdcm::MEC_MR3::GetCanonMECMR3Tag();
 
     if (pt == csa1 || pt == csa2 || pt == mec_mr3 || pt == pmtf1 ||
         pt == pmtf2 || pt == pmtf3) {
@@ -682,8 +682,8 @@ static VR ComputeDictVR(File &file, DataSet &ds, DataElement const &de) {
   bool compute_dict_vr = true;
   if (tag.IsPublic() || tag.IsGroupLength() || tag.IsPrivateCreator()) {
   } else {
-    const PrivateTag pt = ds.GetPrivateTag(tag);
-    const char *owner = pt.GetOwner();
+   const  PrivateTag pt = ds.GetPrivateTag(tag);
+   const  char *owner = pt.GetOwner();
     assert(owner);
     compute_dict_vr = *owner != 0;
   }
@@ -723,7 +723,7 @@ static std::vector<std::string> tag2strings(DataSet const &ds, Tag const &tag) {
     ret.push_back(tostring(tag.GetGroup()));
     ret.push_back(tostring(tag.GetElement()));
   } else {
-    const PrivateTag pt = ds.GetPrivateTag(tag);
+   const  PrivateTag pt = ds.GetPrivateTag(tag);
     ret.push_back(tostring(pt.GetGroup()));
     ret.push_back(tostring(pt.GetElement(), 2));
     ret.push_back(pt.GetOwner());
@@ -733,7 +733,7 @@ static std::vector<std::string> tag2strings(DataSet const &ds, Tag const &tag) {
 
 template <typename T>
 static void print_contents(std::ostream &oss, const std::vector<T> &v,
-                           const char *const separator = ",") {
+                          const  char *const separator = ",") {
   if (!v.empty()) {
     std::copy(v.begin(), --v.end(), std::ostream_iterator<T>(oss, separator));
     oss << v.back();
@@ -794,7 +794,7 @@ static T GetCSAType(std::string &ref, const DataSet &ds, const PrivateTag &pt,
   T series_type = (T)-1;  // UNK
   ref = "";
   if (ds.FindDataElement(pt)) {
-    const gdcm::DataElement &de1 = ds.GetDataElement(pt);
+   const  gdcm::DataElement &de1 = ds.GetDataElement(pt);
     Element<VR::CS, VM::VM1> el = {};
     el.SetFromDataElement(de1);
     ref = el.GetValue().Trim();
@@ -858,7 +858,7 @@ bool Cleaner::impl::CleanCSAImage(DataSet &ds, const DataElement &de) {
     image_type = GetCSAType<CSAImageHeaderType>(ref, ds, ihtTag,
                                                 CSAImageHeaderTypeStrings);
   }
-  static const char sv10[] = "SV10\4\3\2\1";  // 8
+  const static char sv10[] = "SV10\4\3\2\1";  // 8
   // what if a dumb anonymizer removed the CSA Image Header Type:
   bool isSV10 = false;
   if (image_type == IMAGE_UNK) {
@@ -925,7 +925,7 @@ bool Cleaner::impl::CleanCSASeries(DataSet &ds, const DataElement &de) {
     series_type = GetCSAType<CSASeriesHeaderType>(ref, ds, shtTag,
                                                   CSASeriesHeaderTypeStrings);
   }
-  static const char sv10[] = "SV10\4\3\2\1";  // 8
+  const static char sv10[] = "SV10\4\3\2\1";  // 8
   // what if a dumb anonymizer removed the CSA Series Header Type:
   bool isSV10 = false;
   if (series_type == SERIES_UNK) {
@@ -1043,7 +1043,7 @@ static bool CleanPMTF(DataSet &ds, const DataElement &de) {
     } else {
       std::ostringstream os;
       revds.Write<gdcm::ExplicitDataElement, gdcm::SwapperNoOp>(os);
-      const std::string str = os.str();
+     const  std::string str = os.str();
       std::vector<char> v(str.c_str(), str.c_str() + str.size());
       std::reverse(v.begin(), v.end());
 
@@ -1096,7 +1096,7 @@ Cleaner::impl::ACTION Cleaner::impl::ComputeAction(
   }
 
   if (tag.IsPublic()) {
-    const DPath dpath = ConstructDPath(tag_path, ds, tag);
+   const  DPath dpath = ConstructDPath(tag_path, ds, tag);
     // Preserve
     if (IsDPathInSet(preserve_dpaths, dpath)) return Cleaner::impl::NONE;
     // Scrub
@@ -1120,15 +1120,15 @@ Cleaner::impl::ACTION Cleaner::impl::ComputeAction(
   }
 
   if (tag.IsPrivate() && !tag.IsPrivateCreator() && !tag.IsGroupLength()) {
-    const PrivateTag pt = ds.GetPrivateTag(tag);
-    const char *owner = pt.GetOwner();
+   const  PrivateTag pt = ds.GetPrivateTag(tag);
+   const  char *owner = pt.GetOwner();
     assert(owner);
     if (*owner == 0 && AllMissingPrivateCreator) {
       return Cleaner::impl::REMOVE;
     }
     // At this point we have a private creator, it makes sense to check for
     // preserve: Preserve
-    const DPath dpath = ConstructDPath(tag_path, ds, tag);
+   const  DPath dpath = ConstructDPath(tag_path, ds, tag);
     if (IsDPathInSet(preserve_dpaths, dpath)) return Cleaner::impl::NONE;
     // Scrub
     if (scrub_privatetags.find(pt) != scrub_privatetags.end() ||
@@ -1185,9 +1185,9 @@ bool Cleaner::impl::ProcessDataSet(Subject &subject, File &file, DataSet &ds,
   ConstIterator it = ds.GetDES().begin();
 
   for (; it != ds.GetDES().end(); /*++it*/) {
-    const DataElement &de = *it;
+   const  DataElement &de = *it;
     ++it;  // 'Remove/Empty' may invalidate iterator
-    const Tag &tag = de.GetTag();
+   const  Tag &tag = de.GetTag();
     AnonymizeEvent ae;
     ae.SetTag(tag);
 
@@ -1205,7 +1205,7 @@ bool Cleaner::impl::ProcessDataSet(Subject &subject, File &file, DataSet &ds,
             Item &item = sqi->GetItem(i);
 
             DataSet &nestedds = item.GetNestedDataSet();
-            const std::vector<std::string> tag_strings = tag2strings(ds, tag);
+           const  std::vector<std::string> tag_strings = tag2strings(ds, tag);
 
             std::ostringstream os;
             os << tag_path;  // already padded with trailing '/'
@@ -1250,33 +1250,33 @@ bool Cleaner::impl::ProcessDataSet(Subject &subject, File &file, DataSet &ds,
       ds.Remove(tag);
       subject.InvokeEvent(ae);
     } else if (action == Cleaner::impl::SCRUB) {
-      const PrivateTag pt = ds.GetPrivateTag(tag);
+     const  PrivateTag pt = ds.GetPrivateTag(tag);
 
-      static const PrivateTag &csa1 = CSAHeader::GetCSAImageHeaderInfoTag();
-      static const PrivateTag &csa2 = CSAHeader::GetCSASeriesHeaderInfoTag();
+      const static PrivateTag &csa1 = CSAHeader::GetCSAImageHeaderInfoTag();
+      const static PrivateTag &csa2 = CSAHeader::GetCSASeriesHeaderInfoTag();
       const PrivateTag mec_mr3(0x700d, 0x08, "TOSHIBA_MEC_MR3");
-      static const PrivateTag &pmtf1 =
+      const static PrivateTag &pmtf1 =
           gdcm::MEC_MR3::GetPMTFInformationDataTag();
-      static const PrivateTag &pmtf2 = gdcm::MEC_MR3::GetToshibaMECMR3Tag();
-      static const PrivateTag &pmtf3 = gdcm::MEC_MR3::GetCanonMECMR3Tag();
+      const static PrivateTag &pmtf2 = gdcm::MEC_MR3::GetToshibaMECMR3Tag();
+      const static PrivateTag &pmtf3 = gdcm::MEC_MR3::GetCanonMECMR3Tag();
 
       if (pt == csa1) {
-        const bool ret = CleanCSAImage(ds, de);
+       const  bool ret = CleanCSAImage(ds, de);
         if (!ret) return false;
       } else if (pt == csa2) {
-        const bool ret = CleanCSASeries(ds, de);
+       const  bool ret = CleanCSASeries(ds, de);
         if (!ret) return false;
       } else if (pt == mec_mr3) {
-        const bool ret = CleanMEC_MR3(ds, de);
+       const  bool ret = CleanMEC_MR3(ds, de);
         if (!ret) return false;
       } else if (pt == pmtf1) {
-        const bool ret = CleanPMTF(ds, de);
+       const  bool ret = CleanPMTF(ds, de);
         if (!ret) return false;
       } else if (pt == pmtf2) {
-        const bool ret = CleanPMTF(ds, de);
+       const  bool ret = CleanPMTF(ds, de);
         if (!ret) return false;
       } else if (pt == pmtf3) {
-        const bool ret = CleanPMTF(ds, de);
+       const  bool ret = CleanPMTF(ds, de);
         if (!ret) return false;
       } else {
         gdcmErrorMacro(" not implemented");

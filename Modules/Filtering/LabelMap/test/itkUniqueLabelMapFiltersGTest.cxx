@@ -63,7 +63,7 @@ protected:
   template <unsigned int D, typename TPixelType = unsigned short>
   struct FixtureUtilities
   {
-    static const unsigned int Dimension = D;
+    const static unsigned int Dimension = D;
 
     using LabelPixelType = TPixelType;
     using LabelImageType = itk::Image<LabelPixelType, Dimension>;

@@ -617,12 +617,12 @@ Apparently tag <-> vr has no relation ... it must be derived from something else
 
 VR GetVRFromDataSetFormatDict( const Tag& t )
 {
-  static const unsigned int nentries = sizeof(DataSetFormatDict) / sizeof(*DataSetFormatDict);
+  const static unsigned int nentries = sizeof(DataSetFormatDict) / sizeof(*DataSetFormatDict);
   VR ret = VR::VR_END;
   //static const Tag tend = Tag(0xffff,0xffff);
   for( unsigned int i = 0; i < nentries; ++i)
     {
-    const DataSetFormatEntry &entry = DataSetFormatDict[i];
+   const  DataSetFormatEntry &entry = DataSetFormatDict[i];
     if( entry.t == t )
       {
       ret = entry.vr;
@@ -908,7 +908,7 @@ static equ mapping[] = {
 
 bool check_mapping(uint32_t syngodt, const char *vr)
 {
-  static const unsigned int max = sizeof(mapping) / sizeof(equ);
+  const static unsigned int max = sizeof(mapping) / sizeof(equ);
   const equ *p = mapping;
   if( syngodt > mapping[max-1].syngodt ) return false;
   assert( syngodt <= mapping[max-1].syngodt );
@@ -1215,7 +1215,7 @@ const CSAElement &CSAHeader::GetCSAElementByName(const char *name)
     std::set<CSAElement>::const_iterator it = InternalCSADataSet.begin();
     for(; it != InternalCSADataSet.end(); ++it)
       {
-      const char *itname = it->GetName();
+     const  char *itname = it->GetName();
       assert( itname );
       if( strcmp(name, itname) == 0 )
         {
@@ -1233,7 +1233,7 @@ bool CSAHeader::FindCSAElementByName(const char *name)
     std::set<CSAElement>::const_iterator it = InternalCSADataSet.begin();
     for(; it != InternalCSADataSet.end(); ++it)
       {
-      const char *itname = it->GetName();
+     const  char *itname = it->GetName();
       assert( itname );
       if( strcmp(name, itname) == 0 )
         {
@@ -1279,34 +1279,34 @@ bool CSAHeader::GetMrProtocol( const DataSet & ds, MrProtocol & mrProtocol )
 
   //  28 - 'MrProtocolVersion' VM 1, VR IS, SyngoDT 6, NoOfItems 6, Data '21710006'
   int mrprotocolversion = 0;
-  static const char version[] = "MrProtocolVersion";
+  const static char version[] = "MrProtocolVersion";
   // This is not an error if we do not find the version:
   if( FindCSAElementByName( version ) )
   {
-    const CSAElement &csavers = GetCSAElementByName( version );
+   const  CSAElement &csavers = GetCSAElementByName( version );
     if( !csavers.IsEmpty() )
     {
-      const ByteValue* bv = csavers.GetByteValue();
+     const  ByteValue* bv = csavers.GetByteValue();
       std::string str( bv->GetPointer(), bv->GetLength() );
       std::istringstream is(str);
       is >> mrprotocolversion;
     }
   }
 
-  static const char * candidates[] = {
+  const static char * candidates[] = {
     "MrProtocol",
     "MrPhoenixProtocol" 
   };
-  static const int n = sizeof candidates / sizeof * candidates;
+  const static int n = sizeof candidates / sizeof * candidates;
   bool found = false;
   for( int i = 0; i < n; ++i )
   {
-    const char * candidate = candidates[i];
+   const  char * candidate = candidates[i];
     if( FindCSAElementByName( candidate ) )
     {
       // assume the correct one is the one that is not empty,
       // ideally we should rely on the version...
-      const gdcm::CSAElement &csael = GetCSAElementByName( candidate );
+     const  gdcm::CSAElement &csael = GetCSAElementByName( candidate );
       if( !csael.IsEmpty() )
       {
         if( mrProtocol.Load(csael.GetByteValue(), candidate, mrprotocolversion) )

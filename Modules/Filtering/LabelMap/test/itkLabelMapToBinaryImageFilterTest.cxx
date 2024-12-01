@@ -65,7 +65,7 @@ itkLabelMapToBinaryImageFilterTest(int argc, char * argv[])
   l2i->SetBackgroundValue(std::stoi(argv[4]));
   ITK_TEST_SET_GET_VALUE(std::stoi(argv[4]), l2i->GetBackgroundValue());
 
-  itk::SimpleFilterWatcher watcher(l2i);
+  itk::SimpleFilterWatcher const watcher(l2i);
 
   using WriterType = itk::ImageFileWriter<BinaryImageType>;
   auto writer = WriterType::New();

@@ -1475,7 +1475,7 @@ MetaObject::M_SetupWriteFields()
 
   if (m_DistanceUnits != MET_DISTANCE_UNITS_UNKNOWN)
   {
-    const char * str = DistanceUnitsName();
+   const  char * str = DistanceUnitsName();
     mF = new MET_FieldRecordType;
     MET_InitWriteField(mF, "DistanceUnits", MET_STRING, strlen(str), str);
     m_Fields.push_back(mF);
@@ -1483,7 +1483,7 @@ MetaObject::M_SetupWriteFields()
 
   if (m_AnatomicalOrientation[0] != MET_ORIENTATION_UNKNOWN)
   {
-    const char * str = AnatomicalOrientationAcronym();
+   const  char * str = AnatomicalOrientationAcronym();
     mF = new MET_FieldRecordType;
     MET_InitWriteField(mF, "AnatomicalOrientation", MET_STRING, strlen(str), str);
     m_Fields.push_back(mF);
@@ -1837,7 +1837,7 @@ MetaObject ::GetUserField(const char * _name)
     }
     int eSize;
     MET_SizeOfType((*it)->type, &eSize);
-    const auto itLength = static_cast<unsigned int>((*it)->length);
+   const  auto itLength = static_cast<unsigned int>((*it)->length);
     if (!strcmp((*it)->name, _name))
     {
       char *     out;
@@ -1849,8 +1849,8 @@ MetaObject ::GetUserField(const char * _name)
       }
       else if ((*it)->type == MET_FLOAT_MATRIX)
       {
-        const unsigned int numMatrixElements = itLength * itLength;
-        const size_t outSize = numMatrixElements * eSize;
+       const  unsigned int numMatrixElements = itLength * itLength;
+       const  size_t outSize = numMatrixElements * eSize;
         out = new char[outSize];
         for (unsigned int i = 0; i < numMatrixElements; i++)
         {
@@ -1859,7 +1859,7 @@ MetaObject ::GetUserField(const char * _name)
       }
       else
       {
-        const size_t outSize = itLength * eSize;
+       const  size_t outSize = itLength * eSize;
         out = new char[outSize];
         for (unsigned int i = 0; i < itLength; i++)
         {

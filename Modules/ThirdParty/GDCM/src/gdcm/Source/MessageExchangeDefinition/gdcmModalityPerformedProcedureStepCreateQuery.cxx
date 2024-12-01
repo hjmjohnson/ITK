@@ -27,7 +27,7 @@ namespace gdcm
   bool ModalityPerformedProcedureStepCreateQuery::ValidateQuery(bool inStrict ) const
   {
     //if it's empty, it's not useful
-    const DataSet &ds = GetQueryDataSet();
+   const  DataSet &ds = GetQueryDataSet();
     if (ds.Size() == 0)
     {
       if (inStrict) {

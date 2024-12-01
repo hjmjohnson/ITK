@@ -80,21 +80,21 @@ itkBinaryMask3DMeshSourceTest(int argc, char * argv[])
   size[1] = 128;
   size[2] = 128;
 
-  IndexType start{};
+  IndexType const start{};
 
   RegionType region{ start, size };
 
-  ImagePointerType image = ImageType::New();
+  const ImagePointerType image = ImageType::New();
   image->SetRegions(region);
   image->Allocate();
   image->FillBuffer(backgroundValue);
 
   for (unsigned char counter = 0; counter < 18; ++counter)
   {
-    unsigned int i = (counter / 1) % 2; // 0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1.
-    unsigned int j = (counter / 2) % 2; // 0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1.
-    unsigned int k = (counter / 4) % 2; // 0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1.
-    unsigned int l = (counter / 8) % 2; // 0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1.
+    unsigned int const i = (counter / 1) % 2; // 0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1.
+    unsigned int const j = (counter / 2) % 2; // 0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1.
+    unsigned int const k = (counter / 4) % 2; // 0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1.
+    unsigned int const l = (counter / 8) % 2; // 0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1.
     Create16CubeConfig(image, 0, 0, 3 * counter, i, j, k, l);
   }
 

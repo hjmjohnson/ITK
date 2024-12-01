@@ -78,7 +78,7 @@ itkCenteredVersorTransformInitializerTest(int, char *[])
   index[1] = 0;
   index[2] = 0;
 
-  RegionType region{ index, size };
+  RegionType const region{ index, size };
 
 
   auto fixedImage = FixedImageType::New();

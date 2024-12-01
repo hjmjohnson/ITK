@@ -48,13 +48,13 @@ bool PresentationContextGenerator::GenerateFromUID(UIDs::TSName asname)
   // There is a special case for MOVE operations. Need to have alternate FIND operations
   if( asname == UIDs::PatientRootQueryRetrieveInformationModelMOVE )
     {
-    const char *asnamestr0 = UIDs::GetUIDString(
+   const  char *asnamestr0 = UIDs::GetUIDString(
       UIDs::PatientRootQueryRetrieveInformationModelFIND );
     AddPresentationContext( asnamestr0, tsnamestr );
     }
   else if( asname == UIDs::StudyRootQueryRetrieveInformationModelMOVE )
     {
-    const char *asnamestr0 = UIDs::GetUIDString(
+   const  char *asnamestr0 = UIDs::GetUIDString(
       UIDs::StudyRootQueryRetrieveInformationModelFIND );
     AddPresentationContext( asnamestr0, tsnamestr );
     }
@@ -67,20 +67,20 @@ bool PresentationContextGenerator::GenerateFromUID(UIDs::TSName asname)
 bool PresentationContextGenerator::AddFromFile(const File &file)
 {
   Tag sopclass(0x8,0x16);
-  DataSet const & ds = file.GetDataSet();
+  const DataSet & ds = file.GetDataSet();
   if( ds.FindDataElement( sopclass ) )
     {
     // by design gdcmscu will not send/retrieve a dataset that cannot be read
     // this should not be too restricitive
-    const TransferSyntax &fmits = file.GetHeader().GetDataSetTransferSyntax();
-    const char *tsuidvalue = fmits.GetString();
+   const  TransferSyntax &fmits = file.GetHeader().GetDataSetTransferSyntax();
+   const  char *tsuidvalue = fmits.GetString();
 
-    const DataElement &tsde = ds.GetDataElement( sopclass );
+   const  DataElement &tsde = ds.GetDataElement( sopclass );
     // Passing pointer directly. We do not try to analyze what Media Storage
     // it is. We should be able to support to send/receive unknown media storage
-    const ByteValue *bv = tsde.GetByteValue();
+   const  ByteValue *bv = tsde.GetByteValue();
     std::string buffer( bv->GetPointer(), bv->GetLength() );
-    const char *sopclassvalue = buffer.c_str();
+   const  char *sopclassvalue = buffer.c_str();
 
     AddPresentationContext( sopclassvalue, tsuidvalue );
     return true;
@@ -107,7 +107,7 @@ bool PresentationContextGenerator::GenerateFromFilenames(const Directory::Filena
     // I cannot use gdcm::Scanner as I need the TS of the file. When the file
     // only contains the DataSet I cannot know if this is Explicit or Implicit
     // Instead re-use the lower level bricks of gdcm::Scanner here:
-    const char *fn = file->c_str();
+   const  char *fn = file->c_str();
     Reader reader;
     reader.SetFileName( fn );
     // NOTE: There is a small overhead right here: what if we are sending Deflated

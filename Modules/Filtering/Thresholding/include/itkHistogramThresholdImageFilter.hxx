@@ -73,7 +73,7 @@ HistogramThresholdImageFilter<TInputImage, TOutputImage, TMaskImage>::GenerateDa
   auto progress = ProgressAccumulator::New();
   progress->SetMiniPipelineFilter(this);
 
-  HistogramGeneratorPointer histogramGenerator = HistogramGeneratorType::New();
+  HistogramGeneratorPointer const histogramGenerator = HistogramGeneratorType::New();
 
   using MaskedHistogramGeneratorType = Statistics::MaskedImageToHistogramFilter<InputImageType, MaskImageType>;
   auto maskedHistogramGenerator = MaskedHistogramGeneratorType::New();

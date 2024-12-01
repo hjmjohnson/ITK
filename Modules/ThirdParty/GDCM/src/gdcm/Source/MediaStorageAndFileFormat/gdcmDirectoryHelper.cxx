@@ -194,7 +194,7 @@ std::string DirectoryHelper::RetrieveSOPInstanceUIDFromZPosition(double inZPos,
       if (fabs(at.GetValue(2) - inZPos)<interSlice)
         {
         DataElement de2 = itor->GetDataElement(theSOPInstanceUID);
-        const ByteValue* theVal = de2.GetByteValue();
+       const  ByteValue* theVal = de2.GetByteValue();
         size_t theValLen = theVal->GetLength();
         std::string theReturn(de2.GetByteValue()->GetPointer(), theValLen);
         return theReturn;
@@ -213,7 +213,7 @@ std::string DirectoryHelper::RetrieveSOPInstanceUIDFromIndex(int inIndex,
   std::string blank;//return only if there's a problem
   if (inDS[inIndex].FindDataElement(theSOPInstanceUID)){
     DataElement de = inDS[inIndex].GetDataElement(theSOPInstanceUID);
-    const ByteValue* theVal = de.GetByteValue();
+   const  ByteValue* theVal = de.GetByteValue();
     size_t theValLen = theVal->GetLength();
     std::string theReturn(de.GetByteValue()->GetPointer(), theValLen);
     return theReturn;
@@ -229,7 +229,7 @@ std::string DirectoryHelper::GetSOPClassUID(const std::vector<DataSet>& inDS)
   std::string blank;//return only if there's a problem
   if (inDS[0].FindDataElement(theSOPClassUID)){
     DataElement de = inDS[0].GetDataElement(theSOPClassUID);
-    const ByteValue* theVal = de.GetByteValue();
+   const  ByteValue* theVal = de.GetByteValue();
     size_t theValLen = theVal->GetLength();
     std::string theReturn(de.GetByteValue()->GetPointer(), theValLen);
     return theReturn;
@@ -244,7 +244,7 @@ std::string DirectoryHelper::GetFrameOfReference(const std::vector<DataSet>& inD
   std::string blank;//return only if there's a problem
   if (inDS[0].FindDataElement(theSOPClassUID)){
     DataElement de = inDS[0].GetDataElement(theSOPClassUID);
-    const ByteValue* theVal = de.GetByteValue();
+   const  ByteValue* theVal = de.GetByteValue();
     size_t theValLen = theVal->GetLength();
     std::string theReturn(de.GetByteValue()->GetPointer(), theValLen);
     return theReturn;
@@ -261,8 +261,8 @@ std::string DirectoryHelper::GetStringValueFromTag(const Tag& t, const DataSet& 
 
   if( ds.FindDataElement( t ) )
     {
-    const DataElement& de = ds.GetDataElement( t );
-    const ByteValue *bv = de.GetByteValue();
+   const  DataElement& de = ds.GetDataElement( t );
+   const  ByteValue *bv = de.GetByteValue();
     if( bv ) // Can be Type 2
       {
       buffer = std::string( bv->GetPointer(), bv->GetLength() );

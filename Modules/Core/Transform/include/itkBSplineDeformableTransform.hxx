@@ -578,7 +578,7 @@ BSplineDeformableTransform<TParametersValueType, VDimension, VSplineOrder>::Comp
 
   const RegionType supportRegion(supportIndex, supportSize);
 
-  IndexType startIndex = this->m_CoefficientImages[0]->GetLargestPossibleRegion().GetIndex();
+  IndexType const startIndex = this->m_CoefficientImages[0]->GetLargestPossibleRegion().GetIndex();
 
   const SizeType & MeshGridSize = this->m_GridRegion.GetSize();
   SizeType         cumulativeGridSizes;
@@ -588,7 +588,7 @@ BSplineDeformableTransform<TParametersValueType, VDimension, VSplineOrder>::Comp
     cumulativeGridSizes[d] = cumulativeGridSizes[d - 1] * MeshGridSize[d];
   }
 
-  SizeValueType numberOfParametersPerDimension = this->GetNumberOfParametersPerDimension();
+  SizeValueType const numberOfParametersPerDimension = this->GetNumberOfParametersPerDimension();
 
   unsigned long counter = 0;
   for (ImageRegionConstIteratorWithIndex<ImageType> It(this->m_CoefficientImages[0], supportRegion); !It.IsAtEnd();

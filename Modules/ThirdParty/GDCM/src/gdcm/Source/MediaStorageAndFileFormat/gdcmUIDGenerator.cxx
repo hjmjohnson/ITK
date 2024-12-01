@@ -78,7 +78,7 @@ struct fnv_hash
     uint64_t nHashVal    = FNV1_64_INIT,
              nMagicPrime = 0x00000100000001b3ULL;
 
-    const unsigned char* pFirst = ( const unsigned char* )( pBuffer ),
+   const  unsigned char* pFirst = ( const unsigned char* )( pBuffer ),
                        * pLast  = pFirst + nByteLen;
 
     while( pFirst < pLast )

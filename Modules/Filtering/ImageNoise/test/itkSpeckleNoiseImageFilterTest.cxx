@@ -59,7 +59,7 @@ itkSpeckleNoiseImageFilterTest(int argc, char * argv[])
 
   speckleNoiseImageFilter->SetInput(reader->GetOutput());
 
-  itk::SimpleFilterWatcher watcher(speckleNoiseImageFilter, "SpeckleNoiseImageFilter");
+  itk::SimpleFilterWatcher const watcher(speckleNoiseImageFilter, "SpeckleNoiseImageFilter");
 
   using WriterType = itk::ImageFileWriter<ImageType>;
   auto writer = WriterType::New();

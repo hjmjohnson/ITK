@@ -66,7 +66,7 @@ itkGrayscaleMorphologicalClosingImageFilterTest(int argc, char * argv[])
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, GrayscaleMorphologicalClosingImageFilter, KernelImageFilter);
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   auto safeBorder = static_cast<bool>(std::stoi(argv[3]));
   ITK_TEST_SET_GET_BOOLEAN(filter, SafeBorder, safeBorder);

@@ -64,7 +64,7 @@ RegistrationParameterScalesFromShiftBase<TMetric>::EstimateScales(ScalesType & p
     }
     else
     {
-      VirtualIndexType centralIndex = this->GetVirtualDomainCentralIndex();
+      VirtualIndexType const centralIndex = this->GetVirtualDomainCentralIndex();
       offset = this->m_Metric->ComputeParameterOffsetFromVirtualIndex(centralIndex, numLocalPara);
     }
   }
@@ -149,8 +149,8 @@ RegistrationParameterScalesFromShiftBase<TMetric>::EstimateStepScale(const Param
   }
   else
   {
-    FloatType      factor = this->m_SmallParameterVariation / maxStep;
-    ParametersType smallStep(step.size());
+    FloatType const factor = this->m_SmallParameterVariation / maxStep;
+    ParametersType  smallStep(step.size());
     // Use a small step to have a linear approximation.
     smallStep = step * factor;
     return this->ComputeMaximumVoxelShift(smallStep) / factor;
@@ -188,8 +188,8 @@ RegistrationParameterScalesFromShiftBase<TMetric>::EstimateLocalStepScales(const
   const auto numSamples = static_cast<const SizeValueType>(this->m_SamplePoints.size());
   for (SizeValueType c = 0; c < numSamples; ++c)
   {
-    VirtualPointType & point = this->m_SamplePoints[c];
-    IndexValueType     localId = this->m_Metric->ComputeParameterOffsetFromVirtualPoint(point, numPara) / numPara;
+    VirtualPointType const & point = this->m_SamplePoints[c];
+    IndexValueType const     localId = this->m_Metric->ComputeParameterOffsetFromVirtualPoint(point, numPara) / numPara;
     localStepScales[localId] = sampleShifts[c];
   }
 }

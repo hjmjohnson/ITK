@@ -130,7 +130,7 @@ InvokeEvent( const Event & event,
   for(std::list<Observer* >::iterator i = m_Observers.begin();
       i != m_Observers.end(); ++i)
     {
-    const Event * e =  (*i)->m_Event;
+   const  Event * e =  (*i)->m_Event;
     if(e->CheckEvent(&event))
       {
       (*i)->m_Command->Execute(self, event);
@@ -146,7 +146,7 @@ InvokeEvent( const Event & event,
   for(std::list<Observer* >::iterator i = m_Observers.begin();
       i != m_Observers.end(); ++i)
     {
-    const Event * e =  (*i)->m_Event;
+   const  Event * e =  (*i)->m_Event;
     if(e->CheckEvent(&event))
       {
       (*i)->m_Command->Execute(self, event);
@@ -177,7 +177,7 @@ HasObserver(const Event & event) const
   for(std::list<Observer* >::const_iterator i = m_Observers.begin();
       i != m_Observers.end(); ++i)
     {
-    const Event * e =  (*i)->m_Event;
+   const  Event * e =  (*i)->m_Event;
     if(e->CheckEvent(&event))
       {
       return true;
@@ -198,8 +198,8 @@ PrintObservers(std::ostream& os, std::string indent) const
   for(std::list<Observer* >::const_iterator i = m_Observers.begin();
       i != m_Observers.end(); ++i)
     {
-    const Event * e =  (*i)->m_Event;
-    const Command* c = (*i)->m_Command; (void)c;
+   const  Event * e =  (*i)->m_Event;
+   const  Command* c = (*i)->m_Command; (void)c;
     os << indent << e->GetEventName() << "(" /* << c->GetNameOfClass() */ << ")\n";
     }
   return true;

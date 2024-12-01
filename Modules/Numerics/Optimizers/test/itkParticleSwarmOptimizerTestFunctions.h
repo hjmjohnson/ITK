@@ -219,7 +219,7 @@ public:
       std::cout << "f(x): " << optimizer->GetValue() << std::endl;
       if (m_PrintOptimizer)
       {
-        ParticleSwarmOptimizerBase::Pointer optimizerPtr = const_cast<ParticleSwarmOptimizerBase *>(optimizer);
+        ParticleSwarmOptimizerBase::Pointer const optimizerPtr = const_cast<ParticleSwarmOptimizerBase *>(optimizer);
         std::cout << optimizerPtr;
       }
     }

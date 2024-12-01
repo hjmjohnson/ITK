@@ -142,10 +142,10 @@ TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<TTransform>::UpdateReq
   OriginType origin;
   for (SizeValueType i = 0; i < TotalDimension; ++i)
   {
-    FixedParametersValueType domainPhysicalDimensions =
+    FixedParametersValueType const domainPhysicalDimensions =
       (this->m_RequiredTransformDomainSize[i] - 1.0) * this->m_RequiredTransformDomainSpacing[i];
 
-    FixedParametersValueType gridSpacing =
+    FixedParametersValueType const gridSpacing =
       domainPhysicalDimensions / static_cast<FixedParametersValueType>(this->m_RequiredTransformDomainMeshSize[i]);
     origin[i] = -0.5 * gridSpacing * (this->m_SplineOrder - 1);
   }
@@ -209,10 +209,10 @@ TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<TTransform>::SetRequir
   OriginType origin;
   for (SizeValueType i = 0; i < TotalDimension; ++i)
   {
-    FixedParametersValueType domainPhysicalDimensions =
+    FixedParametersValueType const domainPhysicalDimensions =
       static_cast<FixedParametersValueType>(this->m_RequiredTransformDomainSize[i] - 1.0) *
       this->m_RequiredTransformDomainSpacing[i];
-    FixedParametersValueType gridSpacing =
+    FixedParametersValueType const gridSpacing =
       domainPhysicalDimensions / static_cast<FixedParametersValueType>(this->m_RequiredTransformDomainMeshSize[i]);
     origin[i] = 0.5 * gridSpacing * (this->m_SplineOrder - 1);
   }
@@ -251,14 +251,14 @@ TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<TTransform>::AdaptTran
     return;
   }
 
-  SizeType      requiredLatticeSize = this->GetRequiredControlPointLatticeSize();
-  OriginType    requiredLatticeOrigin = this->GetRequiredControlPointLatticeOrigin();
-  SpacingType   requiredLatticeSpacing = this->GetRequiredControlPointLatticeSpacing();
-  DirectionType requiredLatticeDirection = this->GetRequiredControlPointLatticeDirection();
+  SizeType const      requiredLatticeSize = this->GetRequiredControlPointLatticeSize();
+  OriginType const    requiredLatticeOrigin = this->GetRequiredControlPointLatticeOrigin();
+  SpacingType const   requiredLatticeSpacing = this->GetRequiredControlPointLatticeSpacing();
+  DirectionType const requiredLatticeDirection = this->GetRequiredControlPointLatticeDirection();
 
   const RegionType & latticeRegion =
     this->m_Transform->GetTimeVaryingVelocityFieldControlPointLattice()->GetLargestPossibleRegion();
-  IndexType requiredLatticeIndex = latticeRegion.GetIndex();
+  IndexType const requiredLatticeIndex = latticeRegion.GetIndex();
 
   using ComponentImageType = Image<ParametersValueType, TotalDimension>;
 
@@ -267,7 +267,7 @@ TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<TTransform>::AdaptTran
   using UpsampleFilterType = ResampleImageFilter<ComponentImageType, ComponentImageType, ParametersValueType>;
   using DecompositionFilterType = BSplineDecompositionImageFilter<ComponentImageType, ComponentImageType>;
 
-  TimeVaryingVelocityFieldControlPointLatticePointer requiredLattice =
+  TimeVaryingVelocityFieldControlPointLatticePointer const requiredLattice =
     TimeVaryingVelocityFieldControlPointLatticeType::New();
   requiredLattice->SetRegions(requiredLatticeSize);
   requiredLattice->SetOrigin(requiredLatticeOrigin);

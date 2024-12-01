@@ -202,7 +202,7 @@ bool System::FileExists(const char* filename)
 # define R_OK 04
 #endif
 #ifdef _MSC_VER
-    const std::wstring unc = System::ConvertToUNC(filename);
+   const  std::wstring unc = System::ConvertToUNC(filename);
     if (_waccess(unc.c_str(), R_OK) != 0)
 #else
   if ( access(filename, R_OK) != 0 )
@@ -221,7 +221,7 @@ bool System::FileIsDirectory(const char* name)
 {
 #ifdef _MSC_VER
     struct _stat64i32 fs;
-    const std::wstring wname = System::ConvertToUNC(name);
+   const  std::wstring wname = System::ConvertToUNC(name);
     if (_wstat(wname.c_str(), &fs) == 0)
 #else
   struct stat fs;
@@ -355,11 +355,11 @@ bool System::DeleteDirectory(const char *source)
   Directory dir;
   unsigned int numfiles = dir.Load(source, false);
   (void)numfiles;
-  Directory::FilenamesType const & files = dir.GetFilenames();
+  const Directory::FilenamesType & files = dir.GetFilenames();
   for ( Directory::FilenamesType::const_iterator it = files.begin();
     it != files.end(); ++it )
     {
-    const char *filename = it->c_str();
+   const  char *filename = it->c_str();
     if( System::FileIsDirectory(filename) &&
       !System::FileIsSymlink(filename) )
       {
@@ -400,7 +400,7 @@ bool System::DeleteDirectory(const char *source)
   static inline bool ComputeFullPath(std::wstring const &in,
                                      std::wstring &out) {
     // consider an input fileName of type PCWSTR (const wchar_t*)
-    const wchar_t *fileName = in.c_str();
+   const  wchar_t *fileName = in.c_str();
     DWORD requiredBufferLength =
         GetFullPathNameW(fileName, 0, nullptr, nullptr);
 
@@ -433,12 +433,12 @@ bool System::DeleteDirectory(const char *source)
         // nothing to do
       } else if (out[0] == '\\' && out[1] == '\\' && out[2] != '?') {
         // server path
-        const std::wstring prefix = LR"(\\?\UNC\)";
+       const  std::wstring prefix = LR"(\\?\UNC\)";
         out = prefix + (out.c_str() + 2);
       } else {
         // regular C:\ style path:
         assert(out[1] == ':');
-        const std::wstring prefix = LR"(\\?\)";
+       const  std::wstring prefix = LR"(\\?\)";
         out = prefix + out.c_str();
       }
       return out;
@@ -451,8 +451,8 @@ bool System::DeleteDirectory(const char *source)
 std::wstring System::ConvertToUNC(const char *utf8path)
 {
 #ifdef _MSC_VER
-    const std::wstring uft16path = ToUtf16(utf8path);
-    const std::wstring uncpath = HandleMaxPath(uft16path);
+   const  std::wstring uft16path = ToUtf16(utf8path);
+   const  std::wstring uncpath = HandleMaxPath(uft16path);
     return uncpath;
 #else
     (void)utf8path;
@@ -627,7 +627,7 @@ size_t System::EncodeBytes(char *out, const unsigned char *data, int size)
   while(!zero)
     {
     int res = getlastdigit(addr, size);
-    const char v = (char)('0' + res);
+   const  char v = (char)('0' + res);
     sres.insert(sres.begin(), v);
     zero = true;
     for(int i = 0; i < size; ++i)
@@ -797,7 +797,7 @@ bool System::ParseDateTime(time_t &timep, long &milliseconds, const char date[22
   milliseconds = 0;
   if( len > 14 ) // more data to process
     {
-    const char *ptr = date + 14;
+   const  char *ptr = date + 14;
     if( *ptr != '.' ) return false;
     ++ptr;
     if( !*ptr || sscanf( ptr, "%06ld", &milliseconds ) != 1 )

@@ -52,7 +52,7 @@ itkTobogganImageFilterTest(int argc, char * argv[])
   using GMGaussianType = itk::GradientMagnitudeRecursiveGaussianImageFilter<FloatImageType, FloatImageType>;
 
 
-  itk::ImageFileReader<InputImageType>::Pointer reader = itk::ImageFileReader<InputImageType>::New();
+  itk::ImageFileReader<InputImageType>::Pointer const reader = itk::ImageFileReader<InputImageType>::New();
 
   reader->SetFileName(argv[1]);
 

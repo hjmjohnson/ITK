@@ -419,7 +419,7 @@ MetaBlob::M_Write()
     int                           elementSize;
     MET_SizeOfType(m_ElementType, &elementSize);
 
-    const size_t dataSize = (m_NDims + 4) * m_NPoints * elementSize;
+   const  size_t dataSize = (m_NDims + 4) * m_NPoints * elementSize;
     char * data = new char[dataSize];
     int    i = 0;
     int    d;

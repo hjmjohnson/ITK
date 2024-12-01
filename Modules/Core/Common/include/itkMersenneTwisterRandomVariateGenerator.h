@@ -499,8 +499,8 @@ MersenneTwisterRandomVariateGenerator::GetIntegerVariate(const IntegerType & n)
 inline double
 MersenneTwisterRandomVariateGenerator::Get53BitVariate()
 {
-  IntegerType a = GetIntegerVariate() >> 5;
-  IntegerType b = GetIntegerVariate() >> 6;
+  IntegerType const a = GetIntegerVariate() >> 5;
+  IntegerType const b = GetIntegerVariate() >> 6;
 
   return (a * 67108864.0 + b) * (1.0 / 9007199254740992.0); // by Isaku
                                                             // Wada
@@ -513,8 +513,8 @@ MersenneTwisterRandomVariateGenerator::GetNormalVariate(const double mean, const
 {
   // Return a real number from a normal (Gaussian) distribution with given
   // mean and variance by Box-Muller method
-  double r = std::sqrt(-2.0 * std::log(1.0 - GetVariateWithOpenRange()) * variance);
-  double phi = 2.0 * itk::Math::pi * GetVariateWithOpenUpperRange();
+  double const r = std::sqrt(-2.0 * std::log(1.0 - GetVariateWithOpenRange()) * variance);
+  double const phi = 2.0 * itk::Math::pi * GetVariateWithOpenUpperRange();
 
   return mean + r * std::cos(phi);
 }
@@ -524,7 +524,7 @@ MersenneTwisterRandomVariateGenerator::GetNormalVariate(const double mean, const
 inline double
 MersenneTwisterRandomVariateGenerator::GetUniformVariate(const double a, const double b)
 {
-  double u = GetVariateWithOpenUpperRange();
+  double const u = GetVariateWithOpenUpperRange();
 
   return ((1.0 - u) * a + u * b);
 }

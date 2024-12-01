@@ -37,8 +37,8 @@ static bool reorganize_mosaic(const unsigned short *input, const unsigned int *i
       {
       for(unsigned int x = 0; x < outputdims[0]; ++x)
         {
-        const size_t outputidx = x + y*outputdims[0] + z*outputdims[0]*outputdims[1];
-        const size_t inputidx = (x + (z%square)*outputdims[0]) +
+       const  size_t outputidx = x + y*outputdims[0] + z*outputdims[0]*outputdims[1];
+       const  size_t inputidx = (x + (z%square)*outputdims[0]) +
           (y + (z/square)*outputdims[1])*inputdims[0];
         output[ outputidx ] = input[ inputidx ];
         }
@@ -56,8 +56,8 @@ static bool reorganize_mosaic_invert(const unsigned short *input, const unsigned
       {
       for(unsigned int x = 0; x < outputdims[0]; ++x)
         {
-        const size_t outputidx = x + y*outputdims[0] + (outputdims[2]-1-z)*outputdims[0]*outputdims[1];
-        const size_t inputidx = (x + (z%square)*outputdims[0]) +
+       const  size_t outputidx = x + y*outputdims[0] + (outputdims[2]-1-z)*outputdims[0]*outputdims[1];
+       const  size_t inputidx = (x + (z%square)*outputdims[0]) +
           (y + (z/square)*outputdims[1])*inputdims[0];
         output[ outputidx ] = input[ inputidx ];
         }
@@ -123,7 +123,7 @@ bool SplitMosaicFilter::GetAcquisitionSize(unsigned int size[2], DataSet const &
 unsigned int SplitMosaicFilter::GetNumberOfImagesInMosaic( File const & file )
 {
   unsigned int numberOfImagesInMosaic = 0;
-  DataSet const &ds = file.GetDataSet();
+  const DataSet &ds = file.GetDataSet();
   CSAHeader csa;
 
   const PrivateTag &t1 = csa.GetCSAImageHeaderInfoTag();
@@ -131,7 +131,7 @@ unsigned int SplitMosaicFilter::GetNumberOfImagesInMosaic( File const & file )
   {
     if( csa.FindCSAElementByName( "NumberOfImagesInMosaic" ) )
     {
-      const CSAElement &csael4 = csa.GetCSAElementByName( "NumberOfImagesInMosaic" );
+     const  CSAElement &csael4 = csa.GetCSAElementByName( "NumberOfImagesInMosaic" );
       if( !csael4.IsEmpty() )
       {
         Element<VR::IS, VM::VM1> el4 = {{ 0 }};
@@ -149,8 +149,8 @@ unsigned int SplitMosaicFilter::GetNumberOfImagesInMosaic( File const & file )
     PrivateTag t2 (0x0019,0x0a, "SIEMENS MR HEADER");
     if( ds.FindDataElement( t2 ) )
     {
-      const DataElement &de = ds.GetDataElement( t2 );
-      const ByteValue * bv = de.GetByteValue();
+     const  DataElement &de = ds.GetDataElement( t2 );
+     const  ByteValue * bv = de.GetByteValue();
       if( bv )
       {
         Element<VR::US, VM::VM1> el1 = {{0}};
@@ -235,15 +235,15 @@ bool SplitMosaicFilter::ComputeMOSAICSliceNormal( double slicenormalvector[3], b
   double normal[3];
   bool snvfound = false;
   const PrivateTag &t1 = csa.GetCSAImageHeaderInfoTag();
-  static const char snvstr[] = "SliceNormalVector";
+  const static char snvstr[] = "SliceNormalVector";
   if( csa.LoadFromDataElement( ds.GetDataElement( t1 ) ) )
   {
     if( csa.FindCSAElementByName( snvstr ) )
     {
-      const CSAElement &snv_csa = csa.GetCSAElementByName( snvstr );
+     const  CSAElement &snv_csa = csa.GetCSAElementByName( snvstr );
       if( !snv_csa.IsEmpty() )
       {
-        const ByteValue * bv = snv_csa.GetByteValue();
+       const  ByteValue * bv = snv_csa.GetByteValue();
         const std::string str(bv->GetPointer(), bv->GetLength());
         std::istringstream is;
         is.str( str );
@@ -263,7 +263,7 @@ bool SplitMosaicFilter::ComputeMOSAICSliceNormal( double slicenormalvector[3], b
     DirectionCosines dc( iop.GetValues() );
     double z[3];
     dc.Cross (z);
-    const double snv_dot = dc.Dot( normal, z );
+   const  double snv_dot = dc.Dot( normal, z );
     if( fabs(1. - snv_dot) < 1e-6 )
     {
       gdcmDebugMacro("Same direction");

@@ -41,7 +41,7 @@ itkMetaImageIOTest(int argc, char * argv[])
   using PixelType = unsigned short;
   using myImage = itk::Image<PixelType, 3>;
 
-  itk::ImageFileReader<myImage>::Pointer reader = itk::ImageFileReader<myImage>::New();
+  itk::ImageFileReader<myImage>::Pointer const reader = itk::ImageFileReader<myImage>::New();
 
   // Force use of MetaIO
   using IOType = itk::MetaImageIO;
@@ -61,8 +61,8 @@ itkMetaImageIOTest(int argc, char * argv[])
   }
 
   // Test subsampling factor (change it then change it back)
-  unsigned int origSubSamplingFactor = metaIn->GetSubSamplingFactor();
-  unsigned int subSamplingFactor = 2;
+  unsigned int const origSubSamplingFactor = metaIn->GetSubSamplingFactor();
+  unsigned int const subSamplingFactor = 2;
   metaIn->SetSubSamplingFactor(subSamplingFactor);
   ITK_TEST_SET_GET_VALUE(subSamplingFactor, metaIn->GetSubSamplingFactor());
 
@@ -87,13 +87,13 @@ itkMetaImageIOTest(int argc, char * argv[])
     ITK_TRY_EXPECT_NO_EXCEPTION(reader->Update());
   }
 
-  myImage::Pointer image = reader->GetOutput();
+  const myImage::Pointer image = reader->GetOutput();
   image->Print(std::cout);
 
   // MetaImage is expected to have a modality tag
   image->GetMetaDataDictionary().Get("Modality");
 
-  myImage::RegionType region = image->GetLargestPossibleRegion();
+  const myImage::RegionType region = image->GetLargestPossibleRegion();
   std::cout << "region " << region;
 
   // Generate test image

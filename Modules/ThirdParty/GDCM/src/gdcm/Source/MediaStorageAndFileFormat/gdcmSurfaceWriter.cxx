@@ -92,11 +92,11 @@ bool SurfaceWriter::PrepareWrite()
 
   // Fill the Surface Sequence
   {
-    const size_t nbItems    = surfacesSQ->GetNumberOfItems();
+   const  size_t nbItems    = surfacesSQ->GetNumberOfItems();
     if (nbItems < nbSurfaces)
     {
-      const size_t diff           = nbSurfaces - nbItems;
-      const size_t nbOfItemToMake = (diff > 0?diff:0);
+     const  size_t diff           = nbSurfaces - nbItems;
+     const  size_t nbOfItemToMake = (diff > 0?diff:0);
       for(unsigned int i = 1; i <= nbOfItemToMake; ++i)
       {
         Item item;
@@ -147,7 +147,7 @@ bool SurfaceWriter::PrepareWrite()
       surfaceDS.Replace( surfaceNumberAt.GetAsDataElement() );
 
       // Surface Comments (Type 3)
-      const char * surfaceComments = surface->GetSurfaceComments();
+     const  char * surfaceComments = surface->GetSurfaceComments();
       if (strcmp(surfaceComments, "") != 0)
       {
         Attribute<0x0066, 0x0004> surfaceCommentsAt;
@@ -156,7 +156,7 @@ bool SurfaceWriter::PrepareWrite()
       }
 
       // Surface Processing
-      const bool surfaceProcessing = surface->GetSurfaceProcessing();
+     const  bool surfaceProcessing = surface->GetSurfaceProcessing();
       Attribute<0x0066, 0x0009> surfaceProcessingAt;
       surfaceProcessingAt.SetValue( (surfaceProcessing ? "YES" : "NO") );
       surfaceDS.Replace( surfaceProcessingAt.GetAsDataElement() );
@@ -167,7 +167,7 @@ bool SurfaceWriter::PrepareWrite()
         surfaceProcessingRatioAt.SetValue( surface->GetSurfaceProcessingRatio() );
         surfaceDS.Replace( surfaceProcessingRatioAt.GetAsDataElement() );
 
-        const char * surfaceProcessingDescription = surface->GetSurfaceProcessingDescription();
+       const  char * surfaceProcessingDescription = surface->GetSurfaceProcessingDescription();
         if (strcmp(surfaceProcessingDescription, "") != 0)
         {
           Attribute<0x0066, 0x000B> surfaceProcessingDescriptionAt;
@@ -204,7 +204,7 @@ bool SurfaceWriter::PrepareWrite()
           //*****   Algorithm Family Code Sequence    *****//
           //See: PS.3.3 Table 8.8-1 and PS 3.16 Context ID 7162
           {
-            const SegmentHelper::BasicCodedEntry & processingAlgo = surface->GetProcessingAlgorithm();
+           const  SegmentHelper::BasicCodedEntry & processingAlgo = surface->GetProcessingAlgorithm();
             if (processingAlgo.IsEmpty())
             {
               gdcmWarningMacro("Surface processing algorithm family not specified or incomplete");
@@ -263,7 +263,7 @@ bool SurfaceWriter::PrepareWrite()
 
       // Presentation Type
       Attribute<0x0066, 0x000D> presentationType;
-      const char * reconmmendedPresentationType = Surface::GetVIEWTypeString( surface->GetRecommendedPresentationType() );
+     const  char * reconmmendedPresentationType = Surface::GetVIEWTypeString( surface->GetRecommendedPresentationType() );
       if (reconmmendedPresentationType != nullptr)
         presentationType.SetValue( reconmmendedPresentationType );
       else
@@ -304,9 +304,9 @@ bool SurfaceWriter::PrepareWrite()
       //            (0066,0021) OF                                         #  0, 1_n Vector Coordinate Data
       //          (fffe,e00d) na (ItemDelimitationItem)                   #   0, 0 ItemDelimitationItem
       //        (fffe,e0dd) na (SequenceDelimitationItem)               #   0, 0 SequenceDelimitationItem
-      const unsigned long           numberofvectors = surface->GetNumberOfVectors();
+     const  unsigned long           numberofvectors = surface->GetNumberOfVectors();
       SmartPointer< MeshPrimitive > meshPrimitive   = surface->GetMeshPrimitive();
-      const MeshPrimitive::MPType   primitiveType   = meshPrimitive->GetPrimitiveType();
+     const  MeshPrimitive::MPType   primitiveType   = meshPrimitive->GetPrimitiveType();
       if (numberofvectors > 0
        && primitiveType != MeshPrimitive::TRIANGLE_STRIP
        && primitiveType != MeshPrimitive::TRIANGLE_FAN)
@@ -348,7 +348,7 @@ bool SurfaceWriter::PrepareWrite()
 
         // Vector Accuracy (Type 3)
         Attribute<0x0066, 0x0020> vectorAccuracyAt;
-        const float * vectorAccuracy = surface->GetVectorAccuracy();
+       const  float * vectorAccuracy = surface->GetVectorAccuracy();
         if (vectorAccuracy != nullptr)
         {
           vectorAccuracyAt.SetValues( vectorAccuracy, vectorDimensionality );
@@ -358,10 +358,10 @@ bool SurfaceWriter::PrepareWrite()
         // Vector Coordinate Data
         DataElement vectorCoordDataDE( Tag(0x0066, 0x0021) );
         vectorCoordDataDE.SetVR( VR::OF );
-        const Value & vectorCoordinateDataValue = surface->GetVectorCoordinateData().GetValue();
+       const  Value & vectorCoordinateDataValue = surface->GetVectorCoordinateData().GetValue();
         vectorCoordDataDE.SetValue( vectorCoordinateDataValue );
 
-        const ByteValue *bv = vectorCoordDataDE.GetByteValue();
+       const  ByteValue *bv = vectorCoordDataDE.GetByteValue();
         VL vl;
         if ( bv )
           vl = bv->GetLength();
@@ -507,13 +507,13 @@ bool SurfaceWriter::PrepareWrite()
           typedSequenceSQ->SetLengthToUndefined();
 
           // Fill the Segment Sequence
-          const unsigned int              numberOfPrimitives  = meshPrimitive->GetNumberOfPrimitivesData();
+         const  unsigned int              numberOfPrimitives  = meshPrimitive->GetNumberOfPrimitivesData();
           assert( numberOfPrimitives );
-          const size_t nbItems             = typedSequenceSQ->GetNumberOfItems();
+         const  size_t nbItems             = typedSequenceSQ->GetNumberOfItems();
           if (nbItems < numberOfPrimitives)
           {
-            const size_t diff           = numberOfPrimitives - nbItems;
-            const size_t nbOfItemToMake = (diff > 0?diff:0);
+           const  size_t diff           = numberOfPrimitives - nbItems;
+           const  size_t nbOfItemToMake = (diff > 0?diff:0);
             for(unsigned int i = 1; i <= nbOfItemToMake; ++i)
             {
               Item item;
@@ -535,10 +535,10 @@ bool SurfaceWriter::PrepareWrite()
             // "Typed" Point Index List
             DataElement typedPointIndexListDE( typedPrimitiveTag );
 
-            const Value & pointIndexListValue = it->GetValue();
+           const  Value & pointIndexListValue = it->GetValue();
             typedPointIndexListDE.SetValue( pointIndexListValue );
 
-            const ByteValue * pointIndexListBV = typedPointIndexListDE.GetByteValue();
+           const  ByteValue * pointIndexListBV = typedPointIndexListDE.GetByteValue();
             VL pointIndexListVL;
             if( pointIndexListBV )
             {
@@ -563,10 +563,10 @@ bool SurfaceWriter::PrepareWrite()
           // "Typed" Point Index List
           DataElement   typedPointIndexListDE( typedPrimitiveTag );
 
-          const Value & pointIndexListValue = meshPrimitive->GetPrimitiveData().GetValue();
+         const  Value & pointIndexListValue = meshPrimitive->GetPrimitiveData().GetValue();
           typedPointIndexListDE.SetValue( pointIndexListValue );
 
-          const ByteValue * pointIndexListBV = typedPointIndexListDE.GetByteValue();
+         const  ByteValue * pointIndexListBV = typedPointIndexListDE.GetByteValue();
           VL pointIndexListVL;
           if ( pointIndexListBV )
             pointIndexListVL = pointIndexListBV->GetLength();
@@ -698,7 +698,7 @@ bool SurfaceWriter::PrepareWrite()
 
         //*****   Algorithm Family Code Sequence    *****//
         //See: PS.3.3 Table 8.8-1 and PS 3.16 Context ID 7162
-        const SegmentHelper::BasicCodedEntry & algoFamily = surface->GetAlgorithmFamily();
+       const  SegmentHelper::BasicCodedEntry & algoFamily = surface->GetAlgorithmFamily();
         if (algoFamily.IsEmpty())
         {
           gdcmWarningMacro("Segment surface generation algorithm family not specified or incomplete");
@@ -750,7 +750,7 @@ bool SurfaceWriter::PrepareWrite()
           }
 
         // Algorithm Version
-        const char * algorithmVersion = surface->GetAlgorithmVersion();
+       const  char * algorithmVersion = surface->GetAlgorithmVersion();
         if (strcmp(algorithmVersion, "") != 0)
         {
           gdcmWarningMacro("No algorithm version specified");
@@ -760,7 +760,7 @@ bool SurfaceWriter::PrepareWrite()
         segmentsAlgoIdDS.Replace( algorithmVersionAt.GetAsDataElement() );
 
         // Algorithm Name
-        const char * algorithmName = surface->GetAlgorithmName();
+       const  char * algorithmName = surface->GetAlgorithmName();
         if (strcmp(algorithmName, "") != 0)
         {
           gdcmWarningMacro("No algorithm name specified");
@@ -777,7 +777,7 @@ bool SurfaceWriter::PrepareWrite()
   // Is SOP Class UID defined?
   if( !ds.FindDataElement( Tag(0x0008, 0x0016) ) )
   {
-    const char * SOPClassUID = MediaStorage::GetMSString(MediaStorage::SurfaceSegmentationStorage);
+   const  char * SOPClassUID = MediaStorage::GetMSString(MediaStorage::SurfaceSegmentationStorage);
 
     DataElement de( Tag(0x0008, 0x0016) );
     VL::Type strlenSOPClassUID= (VL::Type)strlen(SOPClassUID);
@@ -791,7 +791,7 @@ bool SurfaceWriter::PrepareWrite()
   {
     UIDGenerator  UIDgen;
     UIDgen.SetRoot( MediaStorage::GetMSString(MediaStorage::SurfaceSegmentationStorage) );
-    const char * SOPInstanceUID = UIDgen.Generate();
+   const  char * SOPInstanceUID = UIDgen.Generate();
 
     DataElement de( Tag(0x0008, 0x0018) );
     VL::Type strlenSOPInstanceUID= (VL::Type)strlen(SOPInstanceUID);
@@ -802,7 +802,7 @@ bool SurfaceWriter::PrepareWrite()
 
   fmi.Clear();
   {
-    const char *tsuid = TransferSyntax::GetTSString( ts );
+   const  char *tsuid = TransferSyntax::GetTSString( ts );
     DataElement de( Tag(0x0002,0x0010) );
     VL::Type strlenTSUID = (VL::Type)strlen(tsuid);
     de.SetByteValue( tsuid, strlenTSUID );
@@ -870,10 +870,10 @@ bool SurfaceWriter::PrepareWritePointMacro(SmartPointer< Surface > surface,
 
     // Point Coordinates Data
     DataElement pointCoordDataDE( Tag(0x0066, 0x0016) );
-    const Value & pointCoordinateDataValue = surface->GetPointCoordinatesData().GetValue();
+   const  Value & pointCoordinateDataValue = surface->GetPointCoordinatesData().GetValue();
     pointCoordDataDE.SetValue( pointCoordinateDataValue );
 
-    const ByteValue *bv = pointCoordDataDE.GetByteValue();
+   const  ByteValue *bv = pointCoordDataDE.GetByteValue();
     VL vl;
     if ( bv )
       vl = bv->GetLength();
@@ -896,7 +896,7 @@ bool SurfaceWriter::PrepareWritePointMacro(SmartPointer< Surface > surface,
 
     // Point Position Accuracy (Type 3)
     Attribute<0x0066, 0x0017> pointPositionAccuracyAt;
-    const float * pointPositionAccuracy = surface->GetPointPositionAccuracy();
+   const  float * pointPositionAccuracy = surface->GetPointPositionAccuracy();
     if (pointPositionAccuracy != nullptr)
     {
       pointPositionAccuracyAt.SetValues( pointPositionAccuracy );
@@ -923,7 +923,7 @@ bool SurfaceWriter::PrepareWritePointMacro(SmartPointer< Surface > surface,
 
     // Point Bounding Box Coordinates (Type 3)
     Attribute<0x0066, 0x001a> pointsBoundingBoxCoordinatesAt;
-    const float * pointsBoundingBoxCoordinates = surface->GetPointsBoundingBoxCoordinates();
+   const  float * pointsBoundingBoxCoordinates = surface->GetPointsBoundingBoxCoordinates();
     if (pointsBoundingBoxCoordinates != nullptr)
     {
       pointsBoundingBoxCoordinatesAt.SetValues( pointsBoundingBoxCoordinates );
@@ -932,7 +932,7 @@ bool SurfaceWriter::PrepareWritePointMacro(SmartPointer< Surface > surface,
 
     // Axis of Rotation (Type 3)
     Attribute<0x0066, 0x001b> axisOfRotationAt;
-    const float * axisOfRotation = surface->GetAxisOfRotation();
+   const  float * axisOfRotation = surface->GetAxisOfRotation();
     if (axisOfRotation != nullptr)
     {
       axisOfRotationAt.SetValues( axisOfRotation );
@@ -941,7 +941,7 @@ bool SurfaceWriter::PrepareWritePointMacro(SmartPointer< Surface > surface,
 
     // Center of Rotation (Type 3)
     Attribute<0x0066, 0x001c> centerOfRotationAt;
-    const float * centerOfRotation = surface->GetCenterOfRotation();
+   const  float * centerOfRotation = surface->GetCenterOfRotation();
     if (centerOfRotation != nullptr)
     {
       centerOfRotationAt.SetValues( centerOfRotation );

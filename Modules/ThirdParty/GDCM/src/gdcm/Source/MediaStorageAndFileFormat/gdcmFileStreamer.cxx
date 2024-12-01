@@ -115,9 +115,9 @@ static bool prepare_file( FILE * pFile, const off64_t offset, const off64_t insl
       off64_t read_start_offset = offset;
       while (bytes_to_move != 0)
         {
-        const size_t bytes_this_time = static_cast<size_t>(std::min((off64_t)BUFFERSIZE, bytes_to_move));
-        const off64_t rd_off = read_start_offset;
-        const off64_t wr_off = rd_off + inslen;
+       const  size_t bytes_this_time = static_cast<size_t>(std::min((off64_t)BUFFERSIZE, bytes_to_move));
+       const  off64_t rd_off = read_start_offset;
+       const  off64_t wr_off = rd_off + inslen;
         if( FSeeko(pFile, rd_off, SEEK_SET) )
           {
           return false;
@@ -155,10 +155,10 @@ static bool prepare_file( FILE * pFile, const off64_t offset, const off64_t insl
         off64_t read_end_offset = sb.st_size;
         while (bytes_to_move != 0)
           {
-          const size_t bytes_this_time = static_cast<size_t>(std::min((off64_t)BUFFERSIZE, bytes_to_move));
-          const off64_t rd_off = read_end_offset - bytes_this_time;
+         const  size_t bytes_this_time = static_cast<size_t>(std::min((off64_t)BUFFERSIZE, bytes_to_move));
+         const  off64_t rd_off = read_end_offset - bytes_this_time;
           assert( (off64_t)rd_off >= offset );
-          const off64_t wr_off = rd_off + inslen;
+         const  off64_t wr_off = rd_off + inslen;
           if( FSeeko(pFile, rd_off, SEEK_SET) )
             {
             return false;
@@ -215,7 +215,7 @@ public:
     PrivateCreator = de;
     operation = GROUPDATAELEMENT;
     StartOffset = startoffset;
-    static const size_t limitmax = std::numeric_limits<uint32_t>::max();
+    const static size_t limitmax = std::numeric_limits<uint32_t>::max();
     if( maxsizde % 2 == 0
       && maxsizde < limitmax )
       {
@@ -268,7 +268,7 @@ public:
   bool StartDataElement( const Tag & t )
     {
     Self->InvokeEvent( StartEvent() );
-    const char *outfilename = OutFilename.c_str();
+   const  char *outfilename = OutFilename.c_str();
     assert( outfilename );
     actualde = 0;
       {
@@ -285,9 +285,9 @@ public:
         return false;
         }
 
-      const File & f = reader.GetFile();
-      const DataSet &ds = f.GetDataSet();
-      const TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
+     const  File & f = reader.GetFile();
+     const  DataSet &ds = f.GetDataSet();
+     const  TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
       TS = ts;
 
       // At least on Visual Studio compiler, I need to call clear(), to get
@@ -299,7 +299,7 @@ public:
 
       if( ds.FindDataElement( t ) )
         {
-        const DataElement & de = ds.GetDataElement( t );
+       const  DataElement & de = ds.GetDataElement( t );
         // Here is the actual trick:
         if( !de.IsEmpty() )
           {
@@ -354,16 +354,16 @@ public:
         return false;
         }
       // insert new data in between
-      const Tag tag = t;
-      const VL vl = 0; // will be updated later (UpdateDataElement)
-      const size_t ddsize = WriteHelper( thepos, tag, vl );
+     const  Tag tag = t;
+     const  VL vl = 0; // will be updated later (UpdateDataElement)
+     const  size_t ddsize = WriteHelper( thepos, tag, vl );
       assert( ddsize == dicomlen ); (void)ddsize;
       thepos += dicomlen;
       }
     else
       {
       assert( pFile );
-      const off64_t curpos = FTello(pFile);
+     const  off64_t curpos = FTello(pFile);
       assert( curpos == thepos );
       if( ReservedDataLength >= (off64_t)len )
         {
@@ -372,7 +372,7 @@ public:
         }
       else
         {
-        const off64_t plength = len - ReservedDataLength;
+       const  off64_t plength = len - ReservedDataLength;
         assert( plength >= 0 );
         if( !prepare_file( pFile, (off64_t)curpos, plength) )
           {
@@ -393,7 +393,7 @@ public:
   bool StopDataElement( const Tag & t )
     {
     // Update DataElement:
-    const size_t currentdatalenth = CurrentDataLenth;
+   const  size_t currentdatalenth = CurrentDataLenth;
     assert( ReservedDataLength >= 0);
     //const off64_t refpos = FTello(pFile);
     if( !UpdateDataElement( t ) )
@@ -402,7 +402,7 @@ public:
       }
     if( ReservedDataLength > 0)
       {
-      const off64_t curpos = thepos;
+     const  off64_t curpos = thepos;
       if( !prepare_file( pFile, curpos + ReservedDataLength, - ReservedDataLength) )
         {
         return false;
@@ -415,7 +415,7 @@ public:
     // Do some extra work:
     if( CheckPixelDataElement )
       {
-      const char *outfilename = OutFilename.c_str();
+     const  char *outfilename = OutFilename.c_str();
       Reader reader;
       reader.SetFileName( outfilename );
       std::set<Tag> tagset;
@@ -438,10 +438,10 @@ public:
         {
         return false;
         }
-      const File & f = reader.GetFile();
-      const DataSet &ds = f.GetDataSet();
-      const FileMetaInformation &fmi = f.GetHeader();
-      const TransferSyntax &ts = fmi.GetDataSetTransferSyntax();
+     const  File & f = reader.GetFile();
+     const  DataSet &ds = f.GetDataSet();
+     const  FileMetaInformation &fmi = f.GetHeader();
+     const  TransferSyntax &ts = fmi.GetDataSetTransferSyntax();
       if( ts.IsEncapsulated() )
         {
         gdcmDebugMacro( "Only RAW (uncompressed) Pixel Data is supported for now" );
@@ -457,7 +457,7 @@ public:
         gdcmErrorMacro( "old ACR NEMA file: " << ba.GetValue() );
         return false;
         }
-      const size_t computedlength = spp.GetValue() * nframes.GetValue() * rows.GetValue() * cols.GetValue() * ( ba.GetValue() / 8 );
+     const  size_t computedlength = spp.GetValue() * nframes.GetValue() * rows.GetValue() * cols.GetValue() * ( ba.GetValue() / 8 );
       if( computedlength != currentdatalenth )
         {
         gdcmDebugMacro( "Invalid size for Pixel Data Element: " << computedlength << " vs " << currentdatalenth );
@@ -486,7 +486,7 @@ public:
     Self->InvokeEvent( StartEvent() );
     // Need to cleanup the whole group, well not really, since as per DICOM
     // mechanism we can simply append
-    const char *outfilename = OutFilename.c_str();
+   const  char *outfilename = OutFilename.c_str();
     DataElement private_creator = ori_pt.GetAsDataElement();
     assert( outfilename );
     Tag curtag = ori_pt;
@@ -509,8 +509,8 @@ public:
           return false;
           }
 
-        const File & f = reader.GetFile();
-        const DataSet &ds = f.GetDataSet();
+       const  File & f = reader.GetFile();
+       const  DataSet &ds = f.GetDataSet();
         cont = ds.FindDataElement( curtag );
         if( cont )
           {
@@ -518,7 +518,7 @@ public:
           }
         else
           {
-          const TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
+         const  TransferSyntax &ts = f.GetHeader().GetDataSetTransferSyntax();
           TS = ts;
           thepos = is.tellg();
           }
@@ -582,7 +582,7 @@ public:
       is.close();
       }
 
-    const size_t pclen = dicomdata.size();
+   const  size_t pclen = dicomdata.size();
     assert( pFile == nullptr );
     pFile = fopen(outfilename, "r+b");
     assert( pFile );
@@ -620,7 +620,7 @@ public:
     while( len_to_move != 0 )
       {
       Self->InvokeEvent( IterationEvent() );
-      const size_t len_this_time = std::min(MaxSizeDE - CurrentDataLenth, len_to_move);
+     const  size_t len_this_time = std::min(MaxSizeDE - CurrentDataLenth, len_to_move);
       assert( len_this_time % 2 == 0 );
       if( !AppendToDataElement( CurrentGroupTag, data, len_this_time ) )
         {
@@ -638,7 +638,7 @@ public:
           }
         assert( CurrentDataLenth == 0 );
         CurrentGroupTag.SetElement( (uint16_t)(CurrentGroupTag.GetElement() + 1) );
-        const int lowbits = CurrentGroupTag.GetElement() & 0x00ff;
+       const  int lowbits = CurrentGroupTag.GetElement() & 0x00ff;
         if( lowbits == 0 )
           {
           // we are wrapping, this is not handled:
@@ -685,7 +685,7 @@ private:
       {
       if( CurrentDataLenth % 2 == 1 )
         {
-        const off64_t curpos = FTello(pFile);
+       const  off64_t curpos = FTello(pFile);
         if( ReservedDataLength >= 1 )
           {
           // simply update remaining reserved buffer:
@@ -714,9 +714,9 @@ private:
         }
       vlpos -= 4; // Tag
       gdcmAssertAlwaysMacro( vlpos >= 0 );
-      const Tag tag = t;
+     const  Tag tag = t;
       gdcmAssertAlwaysMacro( CurrentDataLenth < std::numeric_limits<uint32_t>::max() );
-      const VL vl = (uint32_t)CurrentDataLenth;
+     const  VL vl = (uint32_t)CurrentDataLenth;
       size_t ret = WriteHelper( vlpos, tag, vl );
       (void)ret;
       CurrentDataLenth = 0;
@@ -740,7 +740,7 @@ private:
       vl.Write<SwapperDoOp>(ss);
     else
       vl.Write<SwapperNoOp>(ss);
-    const std::string dicomdata = ss.str();
+   const  std::string dicomdata = ss.str();
     fwrite(dicomdata.c_str(), 1, dicomdata.size(), pFile);
     return dicomdata.size();
     }
@@ -768,8 +768,8 @@ bool FileStreamer::InitializeCopy()
   static int checksize = 0;
   if( !checksize )
     {
-    const int soff = sizeof( off64_t );
-    const int si64 = sizeof( int64_t );
+   const  int soff = sizeof( off64_t );
+   const  int si64 = sizeof( int64_t );
     if( soff != si64 ) return false;
     if( !(sizeof(sb.st_size) > 4) ) // LFS ?
       {
@@ -781,8 +781,8 @@ bool FileStreamer::InitializeCopy()
 
   if( !this->Internals->InitializeCopy )
     {
-    const char *filename = this->Internals->TemplateFilename.c_str();
-    const char *outfilename = this->Internals->OutFilename.c_str();
+   const  char *filename = this->Internals->TemplateFilename.c_str();
+   const  char *outfilename = this->Internals->OutFilename.c_str();
     if( this->Internals->CheckTemplateFileName )
       {
       // Prefer a GDCM copy, even if this is slower in most cases, this

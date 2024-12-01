@@ -43,7 +43,7 @@ itkCannyEdgeDetectionImageFilterTest(int argc, char * argv[])
   using CannyEdgeDetectionImageFilterType = itk::CannyEdgeDetectionImageFilter<InputImage, InputImage>;
 
 
-  itk::ImageFileReader<InputImage>::Pointer reader = itk::ImageFileReader<InputImage>::New();
+  itk::ImageFileReader<InputImage>::Pointer const reader = itk::ImageFileReader<InputImage>::New();
   reader->SetFileName(argv[1]);
 
   // Set up the filter
@@ -51,28 +51,28 @@ itkCannyEdgeDetectionImageFilterTest(int argc, char * argv[])
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, CannyEdgeDetectionImageFilter, ImageToImageFilter);
 
-  itk::SimpleFilterWatcher watcher(filter);
+  itk::SimpleFilterWatcher const watcher(filter);
 
   filter->SetInput(reader->GetOutput());
 
-  CannyEdgeDetectionImageFilterType::OutputImagePixelType upperThreshold = 30;
+  const CannyEdgeDetectionImageFilterType::OutputImagePixelType upperThreshold = 30;
   filter->SetUpperThreshold(upperThreshold);
   ITK_TEST_SET_GET_VALUE(upperThreshold, filter->GetUpperThreshold());
 
-  CannyEdgeDetectionImageFilterType::OutputImagePixelType lowerThreshold = 15;
+  const CannyEdgeDetectionImageFilterType::OutputImagePixelType lowerThreshold = 15;
   filter->SetLowerThreshold(lowerThreshold);
   ITK_TEST_SET_GET_VALUE(lowerThreshold, filter->GetLowerThreshold());
 
-  CannyEdgeDetectionImageFilterType::ArrayType variance(1.0f);
+  CannyEdgeDetectionImageFilterType::ArrayType const variance(1.0f);
   filter->SetVariance(variance);
   ITK_TEST_SET_GET_VALUE(variance, filter->GetVariance());
 
-  CannyEdgeDetectionImageFilterType::ArrayType maximumError(.01f);
+  CannyEdgeDetectionImageFilterType::ArrayType const maximumError(.01f);
   filter->SetMaximumError(maximumError);
   ITK_TEST_SET_GET_VALUE(maximumError, filter->GetMaximumError());
 
 
-  itk::RescaleIntensityImageFilter<InputImage, OutputImage>::Pointer rescale =
+  itk::RescaleIntensityImageFilter<InputImage, OutputImage>::Pointer const rescale =
     itk::RescaleIntensityImageFilter<InputImage, OutputImage>::New();
 
   rescale->SetInput(filter->GetOutput());
@@ -80,7 +80,7 @@ itkCannyEdgeDetectionImageFilterTest(int argc, char * argv[])
   rescale->SetOutputMinimum(0);
   rescale->SetOutputMaximum(255);
 
-  itk::ImageFileWriter<OutputImage>::Pointer writer = itk::ImageFileWriter<OutputImage>::New();
+  itk::ImageFileWriter<OutputImage>::Pointer const writer = itk::ImageFileWriter<OutputImage>::New();
   writer->SetInput(rescale->GetOutput());
   writer->SetFileName(argv[2]);
 

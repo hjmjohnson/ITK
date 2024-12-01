@@ -76,7 +76,7 @@ LaplacianDeformationQuadEdgeMeshFilterWithHardConstraints<TInputMesh, TOutputMes
       const OutputPointIdentifier vId2 = rIt->first;
       const OutputCoordRepType    weight = rIt->second;
 
-      ConstraintMapConstIterator cIt = this->m_Constraints.find(vId2);
+      ConstraintMapConstIterator const cIt = this->m_Constraints.find(vId2);
       if (cIt != this->m_Constraints.end())
       {
         iBx[internalId1] -= weight * (cIt->second)[0];

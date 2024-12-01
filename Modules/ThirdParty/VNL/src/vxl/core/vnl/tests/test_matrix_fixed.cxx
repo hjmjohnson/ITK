@@ -299,8 +299,8 @@ test_int()
     const vnl_matrix_fixed<int,2,2> outm( out_values);
 
     vnl_matrix_fixed<unsigned int,2,2> unsigned_m22(vvalues);
-    const vnl_matrix_fixed<int,2,2> minus_v1 = -unsigned_m22;
-    const vnl_matrix_fixed<int,2,2> minus_v2 = unsigned_m22.operator-();
+   const  vnl_matrix_fixed<int,2,2> minus_v1 = -unsigned_m22;
+   const  vnl_matrix_fixed<int,2,2> minus_v2 = unsigned_m22.operator-();
     TEST("unsigned_m22.operator-()",
          (outm(0, 0) == minus_v1(0, 0) && outm(0, 1) == minus_v1(0, 1) && outm(1, 0) == minus_v1(1, 0) &&
           outm(1, 1) == minus_v1(1, 1)), true);

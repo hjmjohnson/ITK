@@ -25,7 +25,7 @@ template <typename T>
 void
 PrintValue(const char * t, T)
 {
-  itk::NumberToString<T> convert;
+  itk::NumberToString<T> const convert;
   std::cout << t << "(min) "
             << "raw: " << itk::NumericTraits<T>::min() << " converted: " << convert(itk::NumericTraits<T>::min())
             << std::endl;

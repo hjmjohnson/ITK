@@ -93,15 +93,15 @@ FrameAverageVideoFilter<TInputVideoStream, TOutputVideoStream>::ThreadedGenerate
   // Get the input and output video streams
   const InputVideoStreamType * input = this->GetInput();
   OutputVideoStreamType *      output = this->GetOutput();
-  SizeValueType                numFrames = this->TemporalProcessObject::m_UnitInputNumberOfFrames;
+  SizeValueType const          numFrames = this->TemporalProcessObject::m_UnitInputNumberOfFrames;
 
   // Get output frame number
-  typename OutputVideoStreamType::TemporalRegionType outReqTempRegion = output->GetRequestedTemporalRegion();
-  SizeValueType                                      outputFrameNumber = outReqTempRegion.GetFrameStart();
+  typename OutputVideoStreamType::TemporalRegionType const outReqTempRegion = output->GetRequestedTemporalRegion();
+  SizeValueType const                                      outputFrameNumber = outReqTempRegion.GetFrameStart();
 
-  typename InputVideoStreamType::TemporalRegionType inReqTempRegion = input->GetRequestedTemporalRegion();
-  SizeValueType                                     inputStart = inReqTempRegion.GetFrameStart();
-  SizeValueType                                     inputDuration = inReqTempRegion.GetFrameDuration();
+  typename InputVideoStreamType::TemporalRegionType const inReqTempRegion = input->GetRequestedTemporalRegion();
+  SizeValueType const                                     inputStart = inReqTempRegion.GetFrameStart();
+  SizeValueType const                                     inputDuration = inReqTempRegion.GetFrameDuration();
 
   // Make sure we've got the right duration
   if (inputDuration != numFrames)

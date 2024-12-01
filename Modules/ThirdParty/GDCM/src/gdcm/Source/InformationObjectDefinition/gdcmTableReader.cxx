@@ -109,7 +109,7 @@ void TableReader::HandleMacroEntry(const char **atts)
     if( strgrp == *current )
       {
       unsigned int v;
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       int r = sscanf(raw, "%04x", &v);
       assert( r == 1 );
       assert( v <= 0xFFFF );
@@ -119,7 +119,7 @@ void TableReader::HandleMacroEntry(const char **atts)
     else if( strelt == *current )
       {
       unsigned int v;
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       int r = sscanf(raw, "%04x", &v);
       assert( r == 1 );
       assert( v <= 0xFFFF );
@@ -128,12 +128,12 @@ void TableReader::HandleMacroEntry(const char **atts)
       }
     else if( strname == *current )
       {
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       moduleentry.SetName( raw );
       }
     else if( strtype == *current )
       {
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       moduleentry.SetType( Type::GetTypeType(raw) );
       }
     else
@@ -159,7 +159,7 @@ void TableReader::HandleModuleEntry(const char **atts)
     if( strgrp == *current )
       {
       unsigned int v;
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       int r = sscanf(raw, "%04x", &v);
       assert( r == 1 );
       assert( v <= 0xFFFF );
@@ -169,7 +169,7 @@ void TableReader::HandleModuleEntry(const char **atts)
     else if( strelt == *current )
       {
       unsigned int v;
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       int r = sscanf(raw, "%04x", &v);
       assert( r == 1 );
       assert( v <= 0xFFFF );
@@ -178,12 +178,12 @@ void TableReader::HandleModuleEntry(const char **atts)
       }
     else if( strname == *current )
       {
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       moduleentry.SetName( raw );
       }
     else if( strtype == *current )
       {
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       moduleentry.SetType( Type::GetTypeType(raw) );
       }
     else
@@ -207,7 +207,7 @@ void TableReader::HandleIODEntry(const char **atts)
   const char **current = atts;
   while(*current /*&& current+1*/)
     {
-    const char *raw = *(current+1);
+   const  char *raw = *(current+1);
     if( strie == *current )
       {
       iodentry.SetIE( raw );

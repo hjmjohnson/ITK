@@ -45,8 +45,8 @@ VoronoiDiagram2DGenerator<TCoordinateType>::SetRandomSeeds(int num)
   PointType curr;
 
   m_Seeds.clear();
-  double ymax{ m_VorBoundary[1] };
-  double xmax{ m_VorBoundary[0] };
+  double const ymax{ m_VorBoundary[1] };
+  double const xmax{ m_VorBoundary[0] };
   for (int i = 0; i < num; ++i)
   {
     curr[0] = (CoordinateType)(vnl_sample_uniform(0, xmax));
@@ -186,8 +186,8 @@ template <typename TCoordinateType>
 bool
 VoronoiDiagram2DGenerator<TCoordinateType>::almostsame(CoordinateType p1, CoordinateType p2)
 {
-  double diff = p1 - p2;
-  bool   save = ((diff < -DIFF_TOLERENCE) || (diff > DIFF_TOLERENCE));
+  double const diff = p1 - p2;
+  bool const   save = ((diff < -DIFF_TOLERENCE) || (diff > DIFF_TOLERENCE));
   return (!save);
 }
 
@@ -227,8 +227,8 @@ VoronoiDiagram2DGenerator<TCoordinateType>::ConstructDiagram()
 
   m_OutputVD->Reset();
 
-  EdgeInfo currentPtID;
-  int      edges = m_OutputVD->EdgeListSize();
+  EdgeInfo  currentPtID;
+  int const edges = m_OutputVD->EdgeListSize();
 
   EdgeInfo LRsites;
   for (int i = 0; i < edges; ++i)
@@ -270,9 +270,9 @@ VoronoiDiagram2DGenerator<TCoordinateType>::ConstructDiagram()
   EdgeInfo                               curr1;
   EdgeInfo                               curr2;
 
-  unsigned char               frontbnd;
-  unsigned char               backbnd;
-  std::vector<IdentifierType> cellPoints;
+  unsigned char                     frontbnd;
+  unsigned char                     backbnd;
+  std::vector<IdentifierType> const cellPoints;
   for (unsigned int i = 0; i < m_NumberOfSeeds; ++i)
   {
     buildEdges.clear();
@@ -313,8 +313,8 @@ VoronoiDiagram2DGenerator<TCoordinateType>::ConstructDiagram()
       }
       else if ((frontbnd != 0) || (backbnd != 0))
       {
-        unsigned char cfrontbnd = Pointonbnd(curr[0]);
-        unsigned char cbackbnd = Pointonbnd(curr[1]);
+        unsigned char const cfrontbnd = Pointonbnd(curr[0]);
+        unsigned char const cbackbnd = Pointonbnd(curr[1]);
 
         if ((cfrontbnd == backbnd) && (backbnd))
         {
@@ -423,7 +423,7 @@ VoronoiDiagram2DGenerator<TCoordinateType>::right_of(FortuneHalfEdge * el, Point
   FortuneEdge * e = el->m_Edge;
   FortuneSite * topsite = e->m_Reg[1];
 
-  bool right_of_site = (((*p)[0]) > (topsite->m_Coord[0]));
+  bool const right_of_site = (((*p)[0]) > (topsite->m_Coord[0]));
 
   if (right_of_site && (!(el->m_RorL)))
   {
@@ -437,8 +437,8 @@ VoronoiDiagram2DGenerator<TCoordinateType>::right_of(FortuneHalfEdge * el, Point
   bool fast;
   if (e->m_A == 1.0)
   {
-    double dyp = ((*p)[1]) - (topsite->m_Coord[1]);
-    double dxp = ((*p)[0]) - (topsite->m_Coord[0]);
+    double const dyp = ((*p)[1]) - (topsite->m_Coord[1]);
+    double const dxp = ((*p)[0]) - (topsite->m_Coord[0]);
     fast = false;
     if (((!right_of_site) && ((e->m_B) < 0.0)) || (right_of_site && ((e->m_B) >= 0.0)))
     {
@@ -459,7 +459,7 @@ VoronoiDiagram2DGenerator<TCoordinateType>::right_of(FortuneHalfEdge * el, Point
     }
     if (!fast)
     {
-      double dxs = topsite->m_Coord[0] - ((e->m_Reg[0])->m_Coord[0]);
+      double const dxs = topsite->m_Coord[0] - ((e->m_Reg[0])->m_Coord[0]);
       above = (((e->m_B) * (dxp * dxp - dyp * dyp)) < (dxs * dyp * (1.0 + 2.0 * dxp / dxs + (e->m_B) * (e->m_B))));
       if ((e->m_B) < 0.0)
       {
@@ -469,10 +469,10 @@ VoronoiDiagram2DGenerator<TCoordinateType>::right_of(FortuneHalfEdge * el, Point
   }
   else
   { // e->m_B == 1.0
-    double y1 = (e->m_C) - (e->m_A) * ((*p)[0]);
-    double t1 = ((*p)[1]) - y1;
-    double t2 = ((*p)[0]) - topsite->m_Coord[0];
-    double t3 = y1 - topsite->m_Coord[1];
+    double const y1 = (e->m_C) - (e->m_A) * ((*p)[0]);
+    double const t1 = ((*p)[1]) - y1;
+    double const t2 = ((*p)[0]) - topsite->m_Coord[0];
+    double const t3 = y1 - topsite->m_Coord[1];
     above = ((t1 * t1) > (t2 * t2 + t3 * t3));
   }
   return (el->m_RorL ? (!above) : above);
@@ -572,8 +572,8 @@ template <typename TCoordinateType>
 double
 VoronoiDiagram2DGenerator<TCoordinateType>::dist(FortuneSite * s1, FortuneSite * s2)
 {
-  double dx = (s1->m_Coord[0]) - (s2->m_Coord[0]);
-  double dy = (s1->m_Coord[1]) - (s2->m_Coord[1]);
+  double const dx = (s1->m_Coord[0]) - (s2->m_Coord[0]);
+  double const dy = (s1->m_Coord[1]) - (s2->m_Coord[1]);
 
   return (std::sqrt(dx * dx + dy * dy));
 }
@@ -713,10 +713,10 @@ VoronoiDiagram2DGenerator<TCoordinateType>::bisect(FortuneEdge * answer, Fortune
   answer->m_Ep[0] = nullptr;
   answer->m_Ep[1] = nullptr;
 
-  double dx = (s2->m_Coord[0]) - (s1->m_Coord[0]);
-  double dy = (s2->m_Coord[1]) - (s1->m_Coord[1]);
-  double adx = (dx > 0) ? dx : -dx;
-  double ady = (dy > 0) ? dy : -dy;
+  double const dx = (s2->m_Coord[0]) - (s1->m_Coord[0]);
+  double const dy = (s2->m_Coord[1]) - (s1->m_Coord[1]);
+  double const adx = (dx > 0) ? dx : -dx;
+  double const ady = (dy > 0) ? dy : -dy;
 
   answer->m_C = (s1->m_Coord[0]) * dx + (s1->m_Coord[1]) * dy + (dx * dx + dy * dy) * 0.5;
   if (adx > ady)
@@ -764,7 +764,7 @@ VoronoiDiagram2DGenerator<TCoordinateType>::intersect(FortuneSite * newV, Fortun
     return;
   }
 
-  double d = (e1->m_A) * (e2->m_B) - (e1->m_B) * (e2->m_A);
+  double const d = (e1->m_A) * (e2->m_B) - (e1->m_B) * (e2->m_A);
 
   if ((d > -NUMERIC_TOLERENCE) && (d < NUMERIC_TOLERENCE))
   {
@@ -772,8 +772,8 @@ VoronoiDiagram2DGenerator<TCoordinateType>::intersect(FortuneSite * newV, Fortun
     return;
   }
 
-  double xmeet = ((e1->m_C) * (e2->m_B) - (e2->m_C) * (e1->m_B)) / d;
-  double ymeet = ((e2->m_C) * (e1->m_A) - (e1->m_C) * (e2->m_A)) / d;
+  double const xmeet = ((e1->m_C) * (e2->m_B) - (e2->m_C) * (e1->m_B)) / d;
+  double const ymeet = ((e2->m_C) * (e1->m_A) - (e1->m_C) * (e2->m_A)) / d;
 
   if (comp(e1->m_Reg[1]->m_Coord, e2->m_Reg[1]->m_Coord))
   {
@@ -786,7 +786,7 @@ VoronoiDiagram2DGenerator<TCoordinateType>::intersect(FortuneSite * newV, Fortun
     saveE = e2;
   }
 
-  bool right_of_site = (xmeet >= (saveE->m_Reg[1]->m_Coord[0]));
+  bool const right_of_site = (xmeet >= (saveE->m_Reg[1]->m_Coord[0]));
   if ((right_of_site && (!(saveHE->m_RorL))) || ((!right_of_site) && (saveHE->m_RorL)))
   {
     newV->m_Sitenbr = -4;

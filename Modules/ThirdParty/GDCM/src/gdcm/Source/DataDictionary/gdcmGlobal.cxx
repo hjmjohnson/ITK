@@ -45,11 +45,11 @@ public:
   void LoadDefaultPaths()
     {
     assert( ResourcePaths.empty() );
-    const char filename2[] = GDCM_CMAKE_INSTALL_PREFIX "/" GDCM_INSTALL_DATA_DIR "/XML/";
+   const  char filename2[] = GDCM_CMAKE_INSTALL_PREFIX "/" GDCM_INSTALL_DATA_DIR "/XML/";
     ResourcePaths.emplace_back(filename2 );
-    const char filename3[] = GDCM_CMAKE_INSTALL_PREFIX " " GDCM_API_VERSION "/" GDCM_INSTALL_DATA_DIR "/XML/";
+   const  char filename3[] = GDCM_CMAKE_INSTALL_PREFIX " " GDCM_API_VERSION "/" GDCM_INSTALL_DATA_DIR "/XML/";
     ResourcePaths.emplace_back(filename3 );
-    const char *curprocfn = System::GetCurrentProcessFileName();
+   const  char *curprocfn = System::GetCurrentProcessFileName();
     if( curprocfn )
       {
       Filename fn( curprocfn );
@@ -57,14 +57,14 @@ public:
       str += "/../" GDCM_INSTALL_DATA_DIR "/XML/";
       ResourcePaths.push_back( str );
       }
-    const char *respath = System::GetCurrentResourcesDirectory();
+   const  char *respath = System::GetCurrentResourcesDirectory();
     if( respath )
       {
       ResourcePaths.emplace_back(respath );
       }
 #ifdef GDCM_BUILD_TESTING
     // Needed for backward compat and dashboard
-    const char src_path[] = GDCM_SOURCE_DIR "/Source/InformationObjectDefinition/";
+   const  char src_path[] = GDCM_SOURCE_DIR "/Source/InformationObjectDefinition/";
     ResourcePaths.emplace_back(src_path );
     std::rotate(ResourcePaths.rbegin(), ResourcePaths.rbegin() + 1, ResourcePaths.rend());
 #endif
@@ -149,7 +149,7 @@ const char *Global::Locate(const char *resfile) const
   std::vector<std::string>::const_iterator it = Internals->ResourcePaths.begin();
   for( ; it != Internals->ResourcePaths.end(); ++it)
     {
-    const std::string &p = *it;
+   const  std::string &p = *it;
     gdcmDebugMacro( "Trying to locate in: " << p );
     std::string fullpath = p + "/" + resfile;
     if( System::FileExists(fullpath.c_str()) )

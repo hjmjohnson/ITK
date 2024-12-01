@@ -44,7 +44,7 @@ itkXMLFilterWatcherTest(int argc, char * argv[])
 
   reader->SetFileName(argv[1]);
 
-  itk::XMLFilterWatcher watcher(reader, "filter");
+  itk::XMLFilterWatcher const watcher(reader, "filter");
 
   reader->Update();
 

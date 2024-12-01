@@ -45,7 +45,7 @@ VL SequenceOfFragments::ComputeLength() const
   FragmentVector::const_iterator it = Fragments.begin();
   for(;it != Fragments.end(); ++it)
     {
-    const VL fraglen = it->ComputeLength();
+   const  VL fraglen = it->ComputeLength();
     assert( fraglen % 2 == 0 );
     length += fraglen;
     }
@@ -70,9 +70,9 @@ bool SequenceOfFragments::GetFragBuffer(unsigned int fragNb, char *buffer, unsig
 {
   FragmentVector::const_iterator it = Fragments.begin();
     {
-    const Fragment &frag = *(it+fragNb);
-    const ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
-    const VL len = frag.GetVL();
+   const  Fragment &frag = *(it+fragNb);
+   const  ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
+   const  VL len = frag.GetVL();
     bv.GetBuffer(buffer, len);
     length = len;
     }
@@ -93,9 +93,9 @@ bool SequenceOfFragments::GetBuffer(char *buffer, unsigned long length) const
   unsigned long total = 0;
   for(;it != Fragments.end(); ++it)
     {
-    const Fragment &frag = *it;
-    const ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
-    const VL len = frag.GetVL();
+   const  Fragment &frag = *it;
+   const  ByteValue &bv = dynamic_cast<const ByteValue&>(frag.GetValue());
+   const  VL len = frag.GetVL();
     bv.GetBuffer(buffer, len);
     buffer += len;
     total += len;
@@ -115,10 +115,10 @@ bool SequenceOfFragments::WriteBuffer(std::ostream &os) const
   unsigned long total = 0;
   for(;it != Fragments.end(); ++it)
     {
-    const Fragment &frag = *it;
-    const ByteValue *bv = frag.GetByteValue();
+   const  Fragment &frag = *it;
+   const  ByteValue *bv = frag.GetByteValue();
     assert( bv );
-    const VL len = frag.GetVL();
+   const  VL len = frag.GetVL();
     bv->WriteBuffer(os);
     total += len;
     }

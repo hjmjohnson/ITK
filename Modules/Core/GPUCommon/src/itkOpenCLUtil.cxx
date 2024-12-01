@@ -267,7 +267,7 @@ OpenCLCheckError(cl_int error, const char * filename, int lineno, const char * l
 {
   if (error != CL_SUCCESS)
   {
-    static const char * const errorString[] = {
+    const static char * const errorString[] = {
       "CL_SUCCESS",
       "CL_DEVICE_NOT_FOUND",
       "CL_DEVICE_NOT_AVAILABLE",

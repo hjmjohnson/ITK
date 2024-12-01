@@ -98,12 +98,12 @@ MetaArrow::CopyInfo(const MetaObject * _object)
     if (arrow)
     {
       m_Length = arrow->Length();
-      const double * direction = arrow->Direction();
+     const  double * direction = arrow->Direction();
       for (int i = 0; i < m_NDims; i++)
       {
         m_Direction[i] = direction[i];
       }
-      const double * position = arrow->Position();
+     const  double * position = arrow->Position();
       for (int i = 0; i < m_NDims; i++)
       {
         m_Position[i] = position[i];

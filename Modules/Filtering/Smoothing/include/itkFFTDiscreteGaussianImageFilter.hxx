@@ -39,7 +39,7 @@ FFTDiscreteGaussianImageFilter<TInputImage, TOutputImage>::GenerateInputRequeste
   ImageToImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion();
 
   // Get pointer to input
-  typename Superclass::InputImagePointer inputPtr = const_cast<TInputImage *>(this->GetInput());
+  typename Superclass::InputImagePointer const inputPtr = const_cast<TInputImage *>(this->GetInput());
   if (inputPtr.IsNull())
   {
     return;
@@ -88,8 +88,8 @@ FFTDiscreteGaussianImageFilter<TInputImage, TOutputImage>::GenerateKernelImage()
     }
 
     // Set up kernel image
-    typename RealImageType::IndexType  index{};
-    typename RealImageType::RegionType region;
+    typename RealImageType::IndexType const index{};
+    typename RealImageType::RegionType      region;
     region.SetSize(kernelSize);
     region.SetIndex(index);
     m_KernelImage->SetRegions(region);
@@ -140,7 +140,7 @@ FFTDiscreteGaussianImageFilter<TInputImage, TOutputImage>::GenerateKernelImage()
     KernelMeanType mean;
     for (size_t dim = 0; dim < ImageDimension; ++dim)
     {
-      double radius = (kernelSize[dim] - 1) / 2;
+      double const radius = (kernelSize[dim] - 1) / 2;
       mean[dim] = inputSpacing[dim] * radius + inputOrigin[dim]; // center pixel pos
     }
     kernelSource->SetMean(mean);

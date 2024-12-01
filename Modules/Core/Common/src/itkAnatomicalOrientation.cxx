@@ -158,7 +158,7 @@ AnatomicalOrientation::GetCodeToString()
 
     return orientToString;
   };
-  static const std::map<PositiveEnum, std::string> codeToString = createCodeToString();
+  const static std::map<PositiveEnum, std::string> codeToString = createCodeToString();
   return codeToString;
 }
 
@@ -177,7 +177,7 @@ AnatomicalOrientation::GetStringToCode()
     return stringToCode;
   };
 
-  static const std::map<std::string, AnatomicalOrientation::PositiveEnum> stringToCode = createStringToCode();
+  const static std::map<std::string, AnatomicalOrientation::PositiveEnum> stringToCode = createStringToCode();
   return stringToCode;
 }
 
@@ -252,8 +252,8 @@ AnatomicalOrientation::ConvertPositiveEnumToDirection(PositiveEnum orientationEn
 {
   const AnatomicalOrientation o(orientationEnum);
 
-  CoordinateEnum terms[Dimension] = { o.GetPrimaryTerm(), o.GetSecondaryTerm(), o.GetTertiaryTerm() };
-  DirectionType  direction{};
+  const CoordinateEnum terms[Dimension] = { o.GetPrimaryTerm(), o.GetSecondaryTerm(), o.GetTertiaryTerm() };
+  DirectionType        direction{};
 
   for (unsigned int i = 0; i < Dimension; ++i)
   {

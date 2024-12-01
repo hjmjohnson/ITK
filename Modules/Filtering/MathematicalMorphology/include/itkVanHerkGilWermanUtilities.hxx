@@ -43,10 +43,10 @@ FillForwardExt(std::vector<PixelType> & pixbuffer,
                const unsigned int       KernLen,
                unsigned int             len)
 {
-  unsigned int size = len;
-  unsigned int blocks = size / KernLen;
-  unsigned int i = 0;
-  TFunction    m_TF;
+  unsigned int const size = len;
+  unsigned int const blocks = size / KernLen;
+  unsigned int       i = 0;
+  TFunction          m_TF;
 
   for (unsigned int j = 0; j < blocks; ++j)
   {
@@ -82,10 +82,10 @@ FillReverseExt(std::vector<PixelType> & pixbuffer,
                const unsigned int       KernLen,
                unsigned int             len)
 {
-  auto           size = (IndexValueType)(len);
-  IndexValueType blocks = size / static_cast<int>(KernLen);
-  IndexValueType i = size - 1;
-  TFunction      m_TF;
+  auto                 size = (IndexValueType)(len);
+  IndexValueType const blocks = size / static_cast<int>(KernLen);
+  IndexValueType       i = size - 1;
+  TFunction            m_TF;
 
   if (i > blocks * static_cast<int>(KernLen) - 1)
   {
@@ -145,13 +145,13 @@ DoFace(typename TImage::ConstPointer             input,
   TLine NormLine = line;
   NormLine.Normalize();
   // set a generous tolerance
-  float     tol = 1.0 / LineOffsets.size();
-  TFunction m_TF;
+  float const tol = 1.0 / LineOffsets.size();
+  TFunction   m_TF;
   for (unsigned int it = 0; it < face.GetNumberOfPixels(); ++it)
   {
-    typename TImage::IndexType Ind = dumbImg->ComputeIndex(it);
-    unsigned int               start; /*one-line-declaration*/
-    unsigned int               end;   /*one-line-declaration*/
+    typename TImage::IndexType const Ind = dumbImg->ComputeIndex(it);
+    unsigned int                     start; /*one-line-declaration*/
+    unsigned int                     end;   /*one-line-declaration*/
     if (FillLineBuffer<TImage, TBres, TLine>(input, Ind, NormLine, tol, LineOffsets, AllImage, pixbuffer, start, end))
     {
       const unsigned int len = end - start + 1;
@@ -161,7 +161,7 @@ DoFace(typename TImage::ConstPointer             input,
       FillForwardExt<typename TImage::PixelType, TFunction>(pixbuffer, fExtBuffer, KernLen, len + 2);
       FillReverseExt<typename TImage::PixelType, TFunction>(pixbuffer, rExtBuffer, KernLen, len + 2);
       // now compute result
-      unsigned int size = len + 2;
+      unsigned int const size = len + 2;
       if (size <= KernLen / 2)
       {
         for (unsigned int j = 0; j < size; ++j)
@@ -196,8 +196,8 @@ DoFace(typename TImage::ConstPointer             input,
              j++, k++, l++)
         {
 
-          typename TImage::PixelType V1 = fExtBuffer[k];
-          typename TImage::PixelType V2 = rExtBuffer[l];
+          typename TImage::PixelType const V1 = fExtBuffer[k];
+          typename TImage::PixelType const V2 = rExtBuffer[l];
           pixbuffer[j] = m_TF(V1, V2);
         }
         // line end -- involves resetting the end of the reverse

@@ -76,7 +76,7 @@ bool PGXCodec::Write(const char *filename, const DataElement &out) const
 
   for( unsigned int i = 0; i < num_images; ++i, img_buffer += image_size )
     {
-    const char *targetname = fg.GetFilename( i );
+   const  char *targetname = fg.GetFilename( i );
 
     std::ofstream os( targetname, std::ios::binary );
     os << "PG ML ";

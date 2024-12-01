@@ -33,7 +33,7 @@ dynamic_castDownCast(const char * type, const char * instanceSource, itk::Object
   static constexpr int passed = 0;
   static constexpr int failed = 1;
 
-  DerivedType const * derived = dynamic_cast<DerivedType const *>(base);
+  const DerivedType * derived = dynamic_cast<DerivedType const *>(base);
   if (derived != nullptr)
   {
     std::cout << type << " cast in library B      for an instance from " << instanceSource << "\tsucceeded."

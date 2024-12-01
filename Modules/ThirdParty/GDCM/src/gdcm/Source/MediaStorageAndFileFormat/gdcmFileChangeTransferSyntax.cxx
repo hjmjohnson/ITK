@@ -132,10 +132,10 @@ bool FileChangeTransferSyntax::Change()
     vbuffer.resize( dims[0] * pixsize );
 
     char *data = vbuffer.data();
-    const size_t datalen = vbuffer.size();
+   const  size_t datalen = vbuffer.size();
 
-    const size_t nscanlines = dims[2] * dims[1];
-    const double progresstick = 1. / (double)nscanlines;
+   const  size_t nscanlines = dims[2] * dims[1];
+   const  double progresstick = 1. / (double)nscanlines;
 
     for( unsigned int z = 0; z < dims[2]; ++z )
       {
@@ -155,10 +155,10 @@ bool FileChangeTransferSyntax::Change()
         pe.SetProgress( Internals->Progress );
         this->InvokeEvent( pe );
         }
-      const std::streampos end = os.tellp();
+     const  std::streampos end = os.tellp();
 
       // Compute JPEG length:
-      const VL jpegvl = (uint32_t)(end - start);
+     const  VL jpegvl = (uint32_t)(end - start);
       len += jpegvl;
       start -= 4;
       if( jpegvl.IsOdd() )
@@ -177,10 +177,10 @@ bool FileChangeTransferSyntax::Change()
     vbuffer.resize( dims[0] * dims[1] * pixsize );
 
     char *data = vbuffer.data();
-    const size_t datalen = vbuffer.size();
+   const  size_t datalen = vbuffer.size();
 
-    const size_t nscanlines = dims[2];
-    const double progresstick = 1. / (double)nscanlines;
+   const  size_t nscanlines = dims[2];
+   const  double progresstick = 1. / (double)nscanlines;
 
     for( unsigned int z = 0; z < dims[2]; ++z )
       {
@@ -199,10 +199,10 @@ bool FileChangeTransferSyntax::Change()
         pe.SetProgress( Internals->Progress );
         this->InvokeEvent( pe );
         }
-      const std::streampos end = os.tellp();
+     const  std::streampos end = os.tellp();
 
       // Compute JPEG length:
-      const VL jpegvl = (uint32_t)(end - start);
+     const  VL jpegvl = (uint32_t)(end - start);
       len += jpegvl;
       start -= 4;
       if( jpegvl.IsOdd() )
@@ -323,8 +323,8 @@ bool FileChangeTransferSyntax::InitializeCopy()
     }
   if( !this->Internals->InitializeCopy )
     {
-    const char *filename = this->Internals->InFilename.c_str();
-    const char *outfilename = this->Internals->OutFilename.c_str();
+   const  char *filename = this->Internals->InFilename.c_str();
+   const  char *outfilename = this->Internals->OutFilename.c_str();
       {
       // Make sure to update image meta data:
       std::ifstream is( filename, std::ios::binary );
@@ -341,12 +341,12 @@ bool FileChangeTransferSyntax::InitializeCopy()
       DataSet & ds = file.GetDataSet();
       if( ds.FindDataElement( Tag(0x7fe0,0x0010) ) )
         {
-        const DataElement & de = ds.GetDataElement( Tag(0x7fe0,0x0010) );
+       const  DataElement & de = ds.GetDataElement( Tag(0x7fe0,0x0010) );
         gdcmAssertAlwaysMacro( "Impossible happen"); (void)de;
         return false;
         }
       FileMetaInformation & fmi = file.GetHeader();
-      const TransferSyntax &ts = fmi.GetDataSetTransferSyntax();
+     const  TransferSyntax &ts = fmi.GetDataSetTransferSyntax();
       if( ts.IsEncapsulated() )
         {
         gdcmDebugMacro( "Don't know how to handle encapsulated TS: " << ts );
@@ -393,8 +393,8 @@ bool FileChangeTransferSyntax::InitializeCopy()
           gdcmErrorMacro( "Missing Tag" );
           return false;
           }
-        const DataElement &sopclassuid = ds.GetDataElement( Tag(0x0008,0x0016) );
-        const DataElement &sopinstanceuid = ds.GetDataElement( Tag(0x0008,0x0018) );
+       const  DataElement &sopclassuid = ds.GetDataElement( Tag(0x0008,0x0016) );
+       const  DataElement &sopinstanceuid = ds.GetDataElement( Tag(0x0008,0x0018) );
         // Make sure that const char* pointer will be properly padded with \0 char:
         std::string sopclassuid_str( sopclassuid.GetByteValue()->GetPointer(), sopclassuid.GetByteValue()->GetLength() );
         std::string sopinstanceuid_str( sopinstanceuid.GetByteValue()->GetPointer(), sopinstanceuid.GetByteValue()->GetLength() );
@@ -402,7 +402,7 @@ bool FileChangeTransferSyntax::InitializeCopy()
         UIDGenerator uid;
         //ds.Remove( Tag(0x8,0x18) );
           {
-          const char *sop = uid.Generate();
+         const  char *sop = uid.Generate();
           DataElement de( Tag(0x0008,0x0018) );
           VL::Type strlenSOP = (VL::Type) strlen(sop);
           de.SetByteValue( sop, strlenSOP );
@@ -456,15 +456,15 @@ bool FileChangeTransferSyntax::InitializeCopy()
         ISO_13818_2 = MPEG2 Compression
          */
         Attribute<0x0028,0x2114> at3;
-        const TransferSyntax ts_orig = Internals->TS;
+       const  TransferSyntax ts_orig = Internals->TS;
         if( ts_orig == TransferSyntax::JPEG2000 )
           {
-          static const CSComp newvalues2[] = {"ISO_15444_1"};
+          const static CSComp newvalues2[] = {"ISO_15444_1"};
           at3.SetValues( newvalues2, 1 );
           }
         else if( ts_orig == TransferSyntax::JPEGLSNearLossless )
           {
-          static const CSComp newvalues2[] = {"ISO_14495_1"};
+          const static CSComp newvalues2[] = {"ISO_14495_1"};
           at3.SetValues( newvalues2, 1 );
           }
         else if (
@@ -474,7 +474,7 @@ bool FileChangeTransferSyntax::InitializeCopy()
           ts_orig == TransferSyntax::JPEGSpectralSelectionProcess6_8 ||
           ts_orig == TransferSyntax::JPEGFullProgressionProcess10_12 )
           {
-          static const CSComp newvalues2[] = {"ISO_10918_1"};
+          const static CSComp newvalues2[] = {"ISO_10918_1"};
           at3.SetValues( newvalues2, 1 );
           }
         else

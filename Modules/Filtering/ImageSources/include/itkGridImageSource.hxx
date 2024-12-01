@@ -62,7 +62,7 @@ GridImageSource<TOutputImage>::BeforeThreadedGenerateData()
 
       // Add two extra functions in the front and one in the back to ensure
       // coverage.
-      unsigned int numberOfGaussians =
+      unsigned int const numberOfGaussians =
         Math::Ceil<unsigned int>(this->GetSize()[i] * output->GetSpacing()[i] / this->m_GridSpacing[i]) + 4u;
       for (It.GoToBegin(); !It.IsAtEndOfLine(); ++It)
       {
@@ -73,8 +73,8 @@ GridImageSource<TOutputImage>::BeforeThreadedGenerateData()
         RealType val = 0;
         for (unsigned int j = 0; j < numberOfGaussians; ++j)
         {
-          RealType num = point[i] - static_cast<RealType>(j - 2) * this->m_GridSpacing[i] - output->GetOrigin()[i] -
-                         this->m_GridOffset[i];
+          RealType const num = point[i] - static_cast<RealType>(j - 2) * this->m_GridSpacing[i] -
+                               output->GetOrigin()[i] - this->m_GridOffset[i];
           val += this->m_KernelFunction->Evaluate(num / this->m_Sigma[i]);
         }
         pixels[index[i]] = val;

@@ -54,9 +54,9 @@ void
 CheckerBoardImageFilter<TImage>::DynamicThreadedGenerateData(const ImageRegionType & outputRegionForThread)
 {
   // Get the output pointers
-  OutputImagePointer     outputPtr = this->GetOutput();
-  InputImageConstPointer input1Ptr = this->GetInput(0);
-  InputImageConstPointer input2Ptr = this->GetInput(1);
+  OutputImagePointer const     outputPtr = this->GetOutput();
+  InputImageConstPointer const input1Ptr = this->GetInput(0);
+  InputImageConstPointer const input2Ptr = this->GetInput(1);
 
   // Create an iterator that will walk the output region for this thread.
   using OutputIterator = ImageRegionIteratorWithIndex<OutputImageType>;

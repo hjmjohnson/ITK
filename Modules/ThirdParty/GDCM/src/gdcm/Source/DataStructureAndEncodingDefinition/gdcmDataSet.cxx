@@ -37,9 +37,9 @@ std::string DataSet::GetPrivateCreator(const Tag &t) const
         // FIXME, could this happen ?
         return "";
         }
-      const DataElement &de = *it;
+     const  DataElement &de = *it;
       if( de.IsEmpty() ) return "";
-      const ByteValue *bv = de.GetByteValue();
+     const  ByteValue *bv = de.GetByteValue();
       assert( bv );
       std::string owner = std::string(bv->GetPointer(),bv->GetLength()).c_str();
       // There should not be any trailing space character...
@@ -78,7 +78,7 @@ Tag DataSet::ComputeDataElement(const PrivateTag & t) const
   while( it != DES.end() && it->GetTag().GetGroup() == t.GetGroup() && it->GetTag().GetElement() < 0x100 )
     {
     //assert( it->GetTag().GetOwner() );
-    const ByteValue * bv = it->GetByteValue();
+   const  ByteValue * bv = it->GetByteValue();
     if( bv )
       {
       //if( strcmp( bv->GetPointer(), refowner ) == 0 )
@@ -134,7 +134,7 @@ MediaStorage DataSet::GetMediaStorage() const
     }
   std::string ts;
     {
-    const ByteValue *bv = de.GetByteValue();
+   const  ByteValue *bv = de.GetByteValue();
     assert( bv );
     if( bv->GetPointer() && bv->GetLength() )
       {

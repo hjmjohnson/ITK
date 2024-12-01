@@ -49,7 +49,7 @@ ExtractImageFilter<TInputImage, TOutputImage>::CallCopyOutputRegionToInputRegion
   InputImageRegionType &        destRegion,
   const OutputImageRegionType & srcRegion)
 {
-  ExtractImageFilterRegionCopierType extractImageRegionCopier;
+  ExtractImageFilterRegionCopierType const extractImageRegionCopier;
 
   extractImageRegionCopier(destRegion, srcRegion, m_ExtractionRegion);
 }
@@ -105,8 +105,8 @@ ExtractImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
   // this filter allows the input and the output to be of different dimensions
 
   // get pointers to the input and output
-  typename Superclass::OutputImagePointer     outputPtr = this->GetOutput();
-  typename Superclass::InputImageConstPointer inputPtr = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputPtr = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputPtr = this->GetInput();
 
   if (!outputPtr || !inputPtr)
   {

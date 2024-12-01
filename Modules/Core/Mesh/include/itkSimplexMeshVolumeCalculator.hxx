@@ -27,10 +27,10 @@ template <typename TInputMesh>
 void
 SimplexMeshVolumeCalculator<TInputMesh>::Initialize()
 {
-  SimplexVisitorInterfacePointer simplexVisitor = SimplexVisitorInterfaceType::New();
+  SimplexVisitorInterfacePointer const simplexVisitor = SimplexVisitorInterfaceType::New();
 
   simplexVisitor->SetMesh(m_SimplexMesh);
-  CellMultiVisitorPointer mv = CellMultiVisitorType::New();
+  CellMultiVisitorPointer const mv = CellMultiVisitorType::New();
   mv->AddVisitor(simplexVisitor);
   m_SimplexMesh->Accept(mv);
   m_SimplexMesh->BuildCellLinks();
@@ -121,7 +121,7 @@ SimplexMeshVolumeCalculator<TInputMesh>::CalculateTriangleVolume(InputPointType 
 
   // Normalize normal
   //
-  double length = std::sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
+  double const length = std::sqrt(u[0] * u[0] + u[1] * u[1] + u[2] * u[2]);
   if (length != 0.0)
   {
     u[0] /= length;
@@ -193,17 +193,17 @@ SimplexMeshVolumeCalculator<TInputMesh>::CalculateTriangleVolume(InputPointType 
 
   // Area of a triangle using Heron's formula...
   //
-  double a = std::sqrt(ii[1] + jj[1] + kk[1]);
-  double b = std::sqrt(ii[0] + jj[0] + kk[0]);
-  double c = std::sqrt(ii[2] + jj[2] + kk[2]);
-  double s = 0.5 * (a + b + c);
-  double area = std::sqrt(itk::Math::abs(s * (s - a) * (s - b) * (s - c)));
+  double const a = std::sqrt(ii[1] + jj[1] + kk[1]);
+  double const b = std::sqrt(ii[0] + jj[0] + kk[0]);
+  double const c = std::sqrt(ii[2] + jj[2] + kk[2]);
+  double const s = 0.5 * (a + b + c);
+  double const area = std::sqrt(itk::Math::abs(s * (s - a) * (s - b) * (s - c)));
 
   // Volume elements ...
   //
-  double zavg = (p1[2] + p2[2] + p3[2]) / 3.0;
-  double yavg = (p1[1] + p2[1] + p3[1]) / 3.0;
-  double xavg = (p1[0] + p2[0] + p3[0]) / 3.0;
+  double const zavg = (p1[2] + p2[2] + p3[2]) / 3.0;
+  double const yavg = (p1[1] + p2[1] + p3[1]) / 3.0;
+  double const xavg = (p1[0] + p2[0] + p3[0]) / 3.0;
 
   m_VolumeX += (area * static_cast<double>(u[2]) * static_cast<double>(zavg));
   m_VolumeY += (area * static_cast<double>(u[1]) * static_cast<double>(yavg));
@@ -227,21 +227,21 @@ SimplexMeshVolumeCalculator<TInputMesh>::Compute()
   InputPointType p3;
   p3.Fill(0.0);
 
-  InputPointsContainerPointer  Points = m_SimplexMesh->GetPoints();
-  InputPointsContainerIterator pointsIt = Points->Begin();
-  InputPointsContainerIterator pointsEnd = Points->End();
+  InputPointsContainerPointer const  Points = m_SimplexMesh->GetPoints();
+  InputPointsContainerIterator       pointsIt = Points->Begin();
+  InputPointsContainerIterator const pointsEnd = Points->End();
 
   while (pointsIt != pointsEnd)
   {
     typename InputMeshType::IndexArray n = m_SimplexMesh->GetNeighbors(pointsIt.Index());
 
-    IdentifierType newId1 = FindCellId(n[0], pointsIt.Index(), n[1]);
-    IdentifierType newId2 = FindCellId(n[1], pointsIt.Index(), n[2]);
-    IdentifierType newId3 = FindCellId(n[2], pointsIt.Index(), n[0]);
+    IdentifierType const newId1 = FindCellId(n[0], pointsIt.Index(), n[1]);
+    IdentifierType const newId2 = FindCellId(n[1], pointsIt.Index(), n[2]);
+    IdentifierType const newId3 = FindCellId(n[2], pointsIt.Index(), n[0]);
 
-    bool b1 = m_Centers->GetElementIfIndexExists(newId1, &p1);
-    bool b2 = m_Centers->GetElementIfIndexExists(newId2, &p2);
-    bool b3 = m_Centers->GetElementIfIndexExists(newId3, &p3);
+    bool const b1 = m_Centers->GetElementIfIndexExists(newId1, &p1);
+    bool const b2 = m_Centers->GetElementIfIndexExists(newId2, &p2);
+    bool const b3 = m_Centers->GetElementIfIndexExists(newId3, &p3);
 
     if (!(b1 && b2 && b3))
     {

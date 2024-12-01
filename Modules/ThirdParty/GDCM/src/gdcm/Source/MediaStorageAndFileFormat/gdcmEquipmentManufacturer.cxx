@@ -96,7 +96,7 @@ static const Mapping mappings[] = {
 static bool IsPrivateCreatorFound(DataSet const& ds, Tag const& private_tag,
                                   std::string const& creator_value) {
   if (ds.FindDataElement(private_tag)) {
-    const DataElement& de = ds.GetDataElement(private_tag);
+   const  DataElement& de = ds.GetDataElement(private_tag);
     Element<VR::LO, VM::VM1> priv_creator;
     priv_creator.SetFromDataElement(de);
     if (priv_creator.GetValue().Trim() == creator_value) return true;
@@ -108,7 +108,7 @@ template <long long TVR, int TVM>
 static std::string GetPrivateTagValueOrEmpty(DataSet const& ds,
                                              PrivateTag const& pt) {
   if (ds.FindDataElement(pt)) {
-    const DataElement& de = ds.GetDataElement(pt);
+   const  DataElement& de = ds.GetDataElement(pt);
     Element<TVR, TVM> value = {""};
     value.SetFromDataElement(de);
     return value.GetValue().Trim();

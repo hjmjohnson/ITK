@@ -84,7 +84,7 @@ private:
 
 int main(int argc, char * argv[])
 {
-    const char * filename = argv[1];
+   const  char * filename = argv[1];
     std::ifstream is( filename, std::ios::binary );
     int len = 258000;
     std::vector<char> v;

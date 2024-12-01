@@ -1162,7 +1162,7 @@ MetaMesh::M_Write()
     int                           elementSize;
     MET_SizeOfType(m_PointType, &elementSize);
 
-    const size_t dataSize = (m_NDims)*m_NPoints * elementSize + m_NPoints * sizeof(int);
+   const  size_t dataSize = (m_NDims)*m_NPoints * elementSize + m_NPoints * sizeof(int);
     char * data = new char[dataSize];
     int    i = 0;
     int    d;
@@ -1236,7 +1236,7 @@ MetaMesh::M_Write()
       if (m_BinaryData)
       {
         auto         totalCellsSize = static_cast<unsigned int>(m_CellListArray[i]->size() * (MET_CellSize[i] + 1));
-        const size_t dataSize = totalCellsSize * sizeof(int);
+       const  size_t dataSize = totalCellsSize * sizeof(int);
         char *       data = new char[dataSize];
         unsigned int d;
         int          j = 0;
@@ -1321,7 +1321,7 @@ MetaMesh::M_Write()
     /** Then copy all cell links */
     if (m_BinaryData)
     {
-      const size_t                     dataSize = cellLinksSize * sizeof(int);
+     const  size_t                     dataSize = cellLinksSize * sizeof(int);
       char *                           data = new char[dataSize];
       int                              j = 0;
       CellLinkListType::const_iterator it = m_CellLinks.begin();

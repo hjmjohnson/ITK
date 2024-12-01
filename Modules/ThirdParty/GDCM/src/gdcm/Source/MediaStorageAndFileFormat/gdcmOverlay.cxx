@@ -257,17 +257,17 @@ bool Overlay::GrabOverlayFromPixelData(DataSet const &ds)
       gdcmWarningMacro("Could not find Pixel Data. Cannot extract Overlay." );
       return false;
       }
-    const DataElement &pixeldata = ds.GetDataElement( Tag(0x7fe0,0x0010) );
-    const ByteValue *bv = pixeldata.GetByteValue();
+   const  DataElement &pixeldata = ds.GetDataElement( Tag(0x7fe0,0x0010) );
+   const  ByteValue *bv = pixeldata.GetByteValue();
     if( !bv )
       {
       gdcmWarningMacro("Could not extract overlay from encapsulated stream." );
       return false;
       }
-    const char *array = bv->GetPointer();
-    const unsigned int length = ovlength * 8 * 1; //bv->GetLength();
-    const uint8_t *p = (const uint8_t*)(const void*)array;
-    const uint8_t *end = (const uint8_t*)(const void*)(array + length);
+   const  char *array = bv->GetPointer();
+   const  unsigned int length = ovlength * 8 * 1; //bv->GetLength();
+   const  uint8_t *p = (const uint8_t*)(const void*)array;
+   const  uint8_t *end = (const uint8_t*)(const void*)(array + length);
     assert( 8 * ovlength == (unsigned int)Internal->Rows * Internal->Columns );
     if( Internal->Data.empty() )
       {
@@ -280,7 +280,7 @@ bool Overlay::GrabOverlayFromPixelData(DataSet const &ds)
     assert( length / 1 == ovlength * 8 );
     while( p != end )
       {
-      const uint8_t val = *p & pmask;
+     const  uint8_t val = *p & pmask;
       assert( val == 0x0 || val == pmask );
       // 128 -> 0x80
       if( val )
@@ -304,8 +304,8 @@ bool Overlay::GrabOverlayFromPixelData(DataSet const &ds)
       gdcmWarningMacro("Could not find Pixel Data. Cannot extract Overlay." );
       return false;
       }
-    const DataElement &pixeldata = ds.GetDataElement( Tag(0x7fe0,0x0010) );
-    const ByteValue *bv = pixeldata.GetByteValue();
+   const  DataElement &pixeldata = ds.GetDataElement( Tag(0x7fe0,0x0010) );
+   const  ByteValue *bv = pixeldata.GetByteValue();
     if( !bv )
       {
       // XA_GE_JPEG_02_with_Overlays.dcm
@@ -313,12 +313,12 @@ bool Overlay::GrabOverlayFromPixelData(DataSet const &ds)
       return false;
       }
     assert( bv );
-    const char *array = bv->GetPointer();
+   const  char *array = bv->GetPointer();
     // SIEMENS_GBS_III-16-ACR_NEMA_1.acr is pain to support,
     // I cannot simply use the bv->GetLength I have to use the image dim:
-    const unsigned int length = ovlength * 8 * 2; //bv->GetLength();
-    const uint16_t *p = (const uint16_t*)(const void*)array;
-    const uint16_t *end = (const uint16_t*)(const void*)(array + length);
+   const  unsigned int length = ovlength * 8 * 2; //bv->GetLength();
+   const  uint16_t *p = (const uint16_t*)(const void*)array;
+   const  uint16_t *end = (const uint16_t*)(const void*)(array + length);
     //const unsigned int ovlength = length / (8*2);
     assert( 8 * ovlength == (unsigned int)Internal->Rows * Internal->Columns );
     if( Internal->Data.empty() )
@@ -332,7 +332,7 @@ bool Overlay::GrabOverlayFromPixelData(DataSet const &ds)
     assert( length / 2 == ovlength * 8 );
     while( p != end )
       {
-      const uint16_t val = *p & pmask;
+     const  uint16_t val = *p & pmask;
       assert( val == 0x0 || val == pmask );
       // 128 -> 0x80
       if( val )
@@ -379,7 +379,7 @@ const char *Overlay::GetOverlayTypeAsString(OverlayType ot)
 }
 Overlay::OverlayType Overlay::GetOverlayTypeFromString(const char *s)
 {
-  static const int n = sizeof( OverlayTypeStrings ) / sizeof ( *OverlayTypeStrings );
+  const static int n = sizeof( OverlayTypeStrings ) / sizeof ( *OverlayTypeStrings );
   if( s )
     {
     for( int i = 0; i < n; ++i )

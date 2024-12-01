@@ -86,7 +86,7 @@ itkBinaryProjectionImageFilterTest(int argc, char * argv[])
 
   filter->SetBackgroundValue(std::stoi(argv[4]));
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   using WriterType = itk::ImageFileWriter<ImageType>;
   auto writer = WriterType::New();

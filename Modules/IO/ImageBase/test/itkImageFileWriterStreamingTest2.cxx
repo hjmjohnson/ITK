@@ -34,9 +34,9 @@ bool
 SameImage(std::string output, std::string baseline)
 {
 
-  PixelType    intensityTolerance = 0;
-  unsigned int radiusTolerance = 0;
-  unsigned int numberOfPixelTolerance = 0;
+  const PixelType    intensityTolerance = 0;
+  unsigned int const radiusTolerance = 0;
+  unsigned int const numberOfPixelTolerance = 0;
 
   auto testReader = ReaderType::New();
   auto baselineReader = ReaderType::New();
@@ -51,7 +51,7 @@ SameImage(std::string output, std::string baseline)
   diff->SetToleranceRadius(radiusTolerance);
   diff->UpdateLargestPossibleRegion();
 
-  unsigned long status = diff->GetNumberOfPixelsWithDifferences();
+  unsigned long const status = diff->GetNumberOfPixelsWithDifferences();
 
   if (status > numberOfPixelTolerance)
   {
@@ -79,7 +79,7 @@ itkImageFileWriterStreamingTest2(int argc, char * argv[])
   //
 
 
-  unsigned int numberOfDataPieces = 4;
+  unsigned int const numberOfDataPieces = 4;
 
   auto reader = ReaderType::New();
   reader->SetFileName(argv[1]);

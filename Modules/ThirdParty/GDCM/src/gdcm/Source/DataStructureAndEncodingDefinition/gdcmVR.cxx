@@ -309,7 +309,7 @@ const char *VR::GetVRString(VRType vr)
 const char *VR::GetVRStringFromFile(VRType vr)
 {
 #if 1
-  static const int N = sizeof(VRValue) / sizeof(VRType);
+  const static int N = sizeof(VRValue) / sizeof(VRType);
   assert( N == 35 );
   static VRType *start = VRValue;
   static VRType *end   = VRValue+N;
@@ -344,10 +344,10 @@ VR::VRType VR::GetVRTypeFromFile(const char *vr)
  * Running TestReader on gdcmData, leads to 2.2% improvement
  */
 #if 0
-  static const int N = sizeof(VRValue) / sizeof(VRType);
+  const static int N = sizeof(VRValue) / sizeof(VRType);
   assert( N == 35 );
-  static const char **start = VRStrings+1;
-  static const char **end   = VRStrings+N;
+  const static char **start = VRStrings+1;
+  const static char **end   = VRStrings+N;
   //std::cerr << "VR=" << vr << std::endl;
   const char **p =
     std::lower_bound(start, end, vr, MySort());
@@ -371,7 +371,7 @@ VR::VRType VR::GetVRTypeFromFile(const char *vr)
   VRType r = VR::VR_END;
   for (int i = 1; VRStrings[i] != nullptr; i++)
     {
-    const char *ref = VRStrings[i];
+   const  char *ref = VRStrings[i];
     // Use lazy evaluation instead of strncmp
     if (ref[0] == vr[0] && ref[1] == vr[1] )
       {
@@ -445,7 +445,7 @@ bool VR::IsValid(const char *vr)
 {
   for (int i = 1; VRStrings[i] != nullptr; i++)
     {
-    const char *ref = VRStrings[i];
+   const  char *ref = VRStrings[i];
     // Use lazy evaluation instead of strncmp
     if (ref[0] == vr[0] && ref[1] == vr[1] )
       {

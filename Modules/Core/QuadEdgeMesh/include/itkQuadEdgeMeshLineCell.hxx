@@ -107,7 +107,7 @@ void
 QuadEdgeMeshLineCell<TCellInterface>::Accept(CellIdentifier cellId, MultiVisitor * mv)
 {
   using IntVis = CellInterfaceVisitor<PixelType, CellTraits>;
-  typename IntVis::Pointer v = mv->GetVisitor(this->GetType());
+  typename IntVis::Pointer const v = mv->GetVisitor(this->GetType());
   if (v)
   {
     v->VisitFromCell(cellId, this);

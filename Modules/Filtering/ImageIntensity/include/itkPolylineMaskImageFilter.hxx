@@ -135,7 +135,7 @@ PolylineMaskImageFilter<TInputImage, TPolyline, TVector, TOutputImage>::Transfor
 
   ProjPlanePointType result;
 
-  double factor = m_FocalDistance / (rotated[2]);
+  double const factor = m_FocalDistance / (rotated[2]);
 
   result[0] = m_FocalPoint[0] + (rotated[0] * factor);
   result[1] = m_FocalPoint[1] + (rotated[1] * factor);
@@ -160,11 +160,12 @@ PolylineMaskImageFilter<TInputImage, TPolyline, TVector, TOutputImage>::Generate
 
   using OriginType = Point<double, 3>;
 
-  typename TInputImage::ConstPointer inputImagePtr(dynamic_cast<const TInputImage *>(this->ProcessObject::GetInput(0)));
-  typename TPolyline::ConstPointer   polylinePtr(dynamic_cast<const TPolyline *>(this->ProcessObject::GetInput(1)));
-  typename TOutputImage::Pointer     outputImagePtr(dynamic_cast<TOutputImage *>(this->ProcessObject::GetOutput(0)));
+  typename TInputImage::ConstPointer const inputImagePtr(
+    dynamic_cast<const TInputImage *>(this->ProcessObject::GetInput(0)));
+  typename TPolyline::ConstPointer const polylinePtr(dynamic_cast<const TPolyline *>(this->ProcessObject::GetInput(1)));
+  typename TOutputImage::Pointer const outputImagePtr(dynamic_cast<TOutputImage *>(this->ProcessObject::GetOutput(0)));
 
-  OriginType originInput{};
+  OriginType const originInput{};
   // outputImagePtr->SetOrigin(inputImagePtr->GetOrigin());
   outputImagePtr->SetOrigin(originInput);
   outputImagePtr->SetSpacing(inputImagePtr->GetSpacing());
@@ -295,7 +296,7 @@ PolylineMaskImageFilter<TInputImage, TPolyline, TVector, TOutputImage>::Generate
   projectionStart[1] = 0;
 
   ProjectionImageSizeType projectionSize;
-  IndexValueType          pad = 5;
+  IndexValueType const    pad = 5;
 
   projectionSize[0] = (IndexValueType)(bounds[1] - bounds[0]) + pad;
   projectionSize[1] = (IndexValueType)(bounds[3] - bounds[2]) + pad;
@@ -325,7 +326,7 @@ PolylineMaskImageFilter<TInputImage, TPolyline, TVector, TOutputImage>::Generate
   projectionImagePtr->AllocateInitialized();
 
   using ProjectionImageIteratorType = ImageRegionIterator<ProjectionImageType>;
-  ProjectionImageIteratorType projectionIt(projectionImagePtr, projectionImagePtr->GetLargestPossibleRegion());
+  ProjectionImageIteratorType const projectionIt(projectionImagePtr, projectionImagePtr->GetLargestPossibleRegion());
 
   itkDebugMacro("Rotation matrix" << m_RotationMatrix);
 

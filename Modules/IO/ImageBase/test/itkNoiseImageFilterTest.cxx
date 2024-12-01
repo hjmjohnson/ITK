@@ -42,14 +42,14 @@ itkNoiseImageFilterTest(int argc, char * argv[])
   using myImageIn = itk::Image<unsigned short, 2>;
   using myImageOut = itk::Image<float, 2>;
   using myImageChar = itk::Image<unsigned char, 2>;
-  itk::ImageFileReader<myImageIn>::Pointer input = itk::ImageFileReader<myImageIn>::New();
+  itk::ImageFileReader<myImageIn>::Pointer const input = itk::ImageFileReader<myImageIn>::New();
   input->SetFileName(argv[1]);
 
   // Create a filter
   using FilterType = itk::NoiseImageFilter<myImageIn, myImageOut>;
 
-  auto                     filter = FilterType::New();
-  itk::SimpleFilterWatcher filterWatch(filter);
+  auto                           filter = FilterType::New();
+  itk::SimpleFilterWatcher const filterWatch(filter);
 
   using RescaleFilterType = itk::RescaleIntensityImageFilter<myImageOut, myImageChar>;
 

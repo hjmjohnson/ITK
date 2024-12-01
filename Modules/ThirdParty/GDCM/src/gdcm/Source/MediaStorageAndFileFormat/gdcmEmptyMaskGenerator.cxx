@@ -63,7 +63,7 @@ bool EmptyMaskGenerator::impl::collectuids( Tag const & tag, std::map< std::stri
   for( Scanner::ValuesType::const_iterator it = vt.begin();
     it != vt.end(); ++it )
     {
-    const char * newuid = uid.Generate();
+   const  char * newuid = uid.Generate();
     hash.insert( std::make_pair( *it, newuid ) );
     }
   return true;
@@ -85,7 +85,7 @@ bool EmptyMaskGenerator::impl::setmask( File & file )
     copy.SetValue(i, imtype.GetValue(i) );
     }
   // Make up non empty values:
-  static const CSComp values[] = {"DERIVED","SECONDARY","OTHER"};
+  const static CSComp values[] = {"DERIVED","SECONDARY","OTHER"};
   for( unsigned int i = nvalues; i < 3u;  ++i )
     {
     copy.SetValue(i, values[i] );
@@ -110,7 +110,7 @@ bool EmptyMaskGenerator::impl::setup(const char * dirname, const char * outdir)
     gdcmDebugMacro( "No files found in: " << dirname );
     return false;
     }
-  Directory::FilenamesType const & filenames = d.GetFilenames();
+  const Directory::FilenamesType & filenames = d.GetFilenames();
 
   s.AddTag( TSOPClassUID );
   s.AddTag( TSOPInstanceUID );
@@ -380,10 +380,10 @@ bool EmptyMaskGenerator::impl::run(const char * filename, const char * outfile)
     return false;
     }
     {
-    const unsigned int chunk = 4096u;
+   const  unsigned int chunk = 4096u;
     char bytes[chunk] = {};
-    const unsigned int nchunks = (unsigned int)( buflen / chunk);
-    const unsigned int remain = buflen % chunk;
+   const  unsigned int nchunks = (unsigned int)( buflen / chunk);
+   const  unsigned int remain = buflen % chunk;
     for( unsigned int i = 0; i < nchunks; ++i )
       {
       // Read the source file into a byte array.
@@ -437,10 +437,10 @@ bool EmptyMaskGenerator::Execute()
     return false;
     }
   bool success = true;
-  Directory::FilenamesType const & filenames = pimpl->s.GetFilenames();
+  const Directory::FilenamesType & filenames = pimpl->s.GetFilenames();
   for( Directory::FilenamesType::const_iterator it =  filenames.begin(); it != filenames.end(); ++it )
     {
-    const char * filename = it->c_str();
+   const  char * filename = it->c_str();
     Filename fn( filename );
     std::string outfile = outdir;
     outfile += '/';

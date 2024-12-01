@@ -115,7 +115,7 @@ bool PNMCodec::Write(const char *filename, const DataElement &out) const
     std::stringstream is;
     is.write( bv->GetPointer(), bv->GetLength() );
 
-    const LookupTable &lut = this->GetLUT();
+   const  LookupTable &lut = this->GetLUT();
     lut.Decode(is, os);
     }
   else
@@ -126,7 +126,7 @@ bool PNMCodec::Write(const char *filename, const DataElement &out) const
       }
     else if( pf.GetBitsAllocated() == 1 )
       {
-      const uint8_t *x = (const uint8_t*) bv->GetPointer();
+     const  uint8_t *x = (const uint8_t*) bv->GetPointer();
       for( size_t i = 0; i < bv->GetLength(); i++ )
         {
         uint8_t b = reverseBitsByte(x[i]);
@@ -296,7 +296,7 @@ bool PNMCodec::GetHeaderInfo(std::istream &is, TransferSyntax &ts)
   size_t m = ((size_t)len - (size_t)pos ) / ( dims[0]*dims[1] );
   bool cond;
   if( type == "P4" ) {
-    const size_t bytesPerRow = dims[0] / 8 + (dims[0] % 8 != 0 ? 1 : 0);
+   const  size_t bytesPerRow = dims[0] / 8 + (dims[0] % 8 != 0 ? 1 : 0);
     cond = bytesPerRow * dims[1] != ((size_t)len - (size_t)pos);
   }
   else

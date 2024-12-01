@@ -468,7 +468,7 @@ public:
   Iterator
   Begin()
   {
-    Iterator iter(0, this);
+    Iterator const iter(0, this);
 
     return iter;
   }
@@ -482,7 +482,7 @@ public:
   ConstIterator
   Begin() const
   {
-    ConstIterator iter(0, this);
+    ConstIterator const iter(0, this);
 
     return iter;
   }

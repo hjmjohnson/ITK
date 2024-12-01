@@ -52,7 +52,7 @@ bool FilenameGenerator::Generate()
     }
   else if( Pattern.empty() && !Prefix.empty() ) // no pattern but a prefix
     {
-    const SizeType numfiles = Filenames.size();
+   const  SizeType numfiles = Filenames.size();
     for( SizeType i = 0; i < numfiles; ++i)
       {
       std::ostringstream os;
@@ -65,16 +65,16 @@ bool FilenameGenerator::Generate()
   else if( !Pattern.empty() )
     {
     std::string::size_type pat_len = Pattern.size();
-    const SizeType padding = 10; // FIXME is this large enough for all cases ?
-    const SizeType internal_len = pat_len + padding;
-    const SizeType numfiles = Filenames.size();
+   const  SizeType padding = 10; // FIXME is this large enough for all cases ?
+   const  SizeType internal_len = pat_len + padding;
+   const  SizeType numfiles = Filenames.size();
     if( numfiles == 0 )
       {
       gdcmDebugMacro( "Need to specify the number of files" );
       // I am pretty sure this is an error:
       return false;
       }
-    const char *pattern = Pattern.c_str();
+   const  char *pattern = Pattern.c_str();
     int num_percent = 0;
     while( (pattern = strchr( pattern, '%')) )
       {

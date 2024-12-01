@@ -45,14 +45,14 @@ HDF5TransformIOTemplate<TParametersValueType>::CanReadFile(const char * fileName
   bool rval = true;
   try
   {
-    htri_t ishdf5 = H5Fis_hdf5(fileName);
+    htri_t const ishdf5 = H5Fis_hdf5(fileName);
 
     if (ishdf5 <= 0)
     {
       return false;
     }
 
-    H5::H5File h5file(fileName, H5F_ACC_RDONLY);
+    H5::H5File const h5file(fileName, H5F_ACC_RDONLY);
 
 #if (H5_VERS_MAJOR == 1) && (H5_VERS_MINOR < 10)
     // check the file has the "TransformGroup"
@@ -83,7 +83,7 @@ HDF5TransformIOTemplate<TParametersValueType>::CanWriteFile(const char * fileNam
   const char * extensions[] = {
     ".hdf", ".h4", ".hdf4", ".h5", ".hdf5", ".he4", ".he5", ".hd5", nullptr,
   };
-  std::string ext(itksys::SystemTools::GetFilenameLastExtension(fileName));
+  std::string const ext(itksys::SystemTools::GetFilenameLastExtension(fileName));
   for (unsigned int i = 0; extensions[i] != nullptr; ++i)
   {
     if (ext == extensions[i])
@@ -117,8 +117,8 @@ void
 HDF5TransformIOTemplate<TParametersValueType>::WriteParameters(const std::string &    name,
                                                                const ParametersType & parameters)
 {
-  const hsize_t dim(parameters.Size());
-  H5::DataSpace paramSpace(1, &dim);
+  const hsize_t       dim(parameters.Size());
+  H5::DataSpace const paramSpace(1, &dim);
 
   H5::DataSet paramSet;
 
@@ -130,7 +130,7 @@ HDF5TransformIOTemplate<TParametersValueType>::WriteParameters(const std::string
     // set up properties for chunked, compressed writes.
     // in this case, set the chunk size to be the N-1 dimension
     // region
-    H5::DSetCreatPropList plist;
+    H5::DSetCreatPropList const plist;
     plist.setDeflate(5); // Set intermediate compression level
     constexpr hsize_t oneMegabyte = 1024 * 1024;
     const hsize_t     chunksize = (dim > oneMegabyte) ? oneMegabyte : dim; // Use chunks of 1 MB if large, else use dim
@@ -151,9 +151,9 @@ void
 HDF5TransformIOTemplate<TParametersValueType>::WriteFixedParameters(const std::string &         name,
                                                                     const FixedParametersType & fixedParameters)
 {
-  const hsize_t dim(fixedParameters.Size());
-  H5::DataSpace paramSpace(1, &dim);
-  H5::DataSet   paramSet = this->m_H5File->createDataSet(name, H5::PredType::NATIVE_DOUBLE, paramSpace);
+  const hsize_t       dim(fixedParameters.Size());
+  H5::DataSpace const paramSpace(1, &dim);
+  H5::DataSet         paramSet = this->m_H5File->createDataSet(name, H5::PredType::NATIVE_DOUBLE, paramSpace);
   paramSet.write(fixedParameters.data_block(), H5::PredType::NATIVE_DOUBLE);
   paramSet.close();
 }
@@ -180,7 +180,7 @@ HDF5TransformIOTemplate<TParametersValueType>::ReadParameters(const std::string 
   Space.getSimpleExtentDims(&dim, nullptr);
   ParametersType ParameterArray;
   ParameterArray.SetSize(dim);
-  H5::FloatType ParamType = paramSet.getFloatType();
+  const H5::FloatType ParamType = paramSet.getFloatType();
 
   if (ParamType.getSize() == sizeof(double))
   {
@@ -211,8 +211,8 @@ HDF5TransformIOTemplate<TParametersValueType>::ReadFixedParameters(const std::st
   -> FixedParametersType
 {
 
-  H5::DataSet paramSet = this->m_H5File->openDataSet(DataSetName);
-  H5T_class_t Type = paramSet.getTypeClass();
+  H5::DataSet       paramSet = this->m_H5File->openDataSet(DataSetName);
+  H5T_class_t const Type = paramSet.getTypeClass();
   if (Type != H5T_FLOAT)
   {
     itkExceptionMacro("Wrong data type for " << DataSetName << "in HDF5 File");
@@ -257,10 +257,10 @@ template <typename TParametersValueType>
 void
 HDF5TransformIOTemplate<TParametersValueType>::WriteString(const std::string & path, const std::string & value)
 {
-  hsize_t       numStrings(1);
-  H5::DataSpace strSpace(1, &numStrings);
-  H5::StrType   strType(H5::PredType::C_S1, H5T_VARIABLE);
-  H5::DataSet   strSet = this->m_H5File->createDataSet(path, strType, strSpace);
+  hsize_t const       numStrings(1);
+  H5::DataSpace const strSpace(1, &numStrings);
+  H5::StrType const   strType(H5::PredType::C_S1, H5T_VARIABLE);
+  H5::DataSet         strSet = this->m_H5File->createDataSet(path, strType, strSpace);
   strSet.write(value, strType);
   strSet.close();
 }
@@ -298,7 +298,7 @@ HDF5TransformIOTemplate<TParametersValueType>::Read()
 
     for (unsigned int i = 0; i < transformGroup.getNumObjs(); ++i)
     {
-      std::string transformName(GetTransformName(i));
+      std::string const transformName(GetTransformName(i));
 
       // open /TransformGroup/N
       H5::Group currentTransformGroup = this->m_H5File->openGroup(transformName);
@@ -306,10 +306,10 @@ HDF5TransformIOTemplate<TParametersValueType>::Read()
       // read transform type
       std::string transformType;
       {
-        hsize_t       numStrings(1);
-        H5::DataSpace strSpace(1, &numStrings);
-        H5::StrType   typeType(H5::PredType::C_S1, H5T_VARIABLE);
-        std::string   typeName(transformName);
+        hsize_t const       numStrings(1);
+        H5::DataSpace const strSpace(1, &numStrings);
+        H5::StrType const   typeType(H5::PredType::C_S1, H5T_VARIABLE);
+        std::string         typeName(transformName);
         typeName += transformTypeName;
         H5::DataSet typeSet = this->m_H5File->openDataSet(typeName);
         typeSet.read(transformType, typeType, strSpace);
@@ -337,7 +337,7 @@ HDF5TransformIOTemplate<TParametersValueType>::Read()
 #endif
           fixedParamsName = transformName + transformFixedNameMisspelled;
         }
-        FixedParametersType fixedparams(this->ReadFixedParameters(fixedParamsName));
+        FixedParametersType const fixedparams(this->ReadFixedParameters(fixedParamsName));
         transform->SetFixedParameters(fixedparams);
 
         std::string paramsName(transformName + transformParamsName);
@@ -351,7 +351,7 @@ HDF5TransformIOTemplate<TParametersValueType>::Read()
 #endif
           paramsName = transformName + transformParamsNameMisspelled;
         }
-        ParametersType params = this->ReadParameters(paramsName);
+        const ParametersType params = this->ReadParameters(paramsName);
         transform->SetParametersByValue(params);
       }
       currentTransformGroup.close();
@@ -371,7 +371,7 @@ void
 HDF5TransformIOTemplate<TParametersValueType>::WriteOneTransform(const int             transformIndex,
                                                                  const TransformType * curTransform)
 {
-  std::string transformName(GetTransformName(transformIndex));
+  std::string const transformName(GetTransformName(transformIndex));
   this->m_H5File->createGroup(transformName);
   const std::string transformType = curTransform->GetTransformTypeAsString();
   //
@@ -394,12 +394,12 @@ HDF5TransformIOTemplate<TParametersValueType>::WriteOneTransform(const int      
   {
     //
     // write out Fixed Parameters
-    FixedParametersType FixedtmpArray = curTransform->GetFixedParameters();
-    const std::string   fixedParamsName(transformName + transformFixedName);
+    const FixedParametersType FixedtmpArray = curTransform->GetFixedParameters();
+    const std::string         fixedParamsName(transformName + transformFixedName);
     this->WriteFixedParameters(fixedParamsName, FixedtmpArray);
     // parameters
-    ParametersType    tmpArray = curTransform->GetParameters();
-    const std::string paramsName(transformName + transformParamsName);
+    const ParametersType tmpArray = curTransform->GetParameters();
+    const std::string    paramsName(transformName + transformParamsName);
     this->WriteParameters(paramsName, tmpArray);
   }
 }
@@ -412,7 +412,7 @@ HDF5TransformIOTemplate<TParametersValueType>::Write()
   sysInfo.RunOSCheck();
   try
   {
-    H5::FileAccPropList fapl;
+    H5::FileAccPropList const fapl;
 #if (H5_VERS_MAJOR > 1) || (H5_VERS_MAJOR == 1) && (H5_VERS_MINOR > 10) || \
   (H5_VERS_MAJOR == 1) && (H5_VERS_MINOR == 10) && (H5_VERS_RELEASE >= 2)
     // File format which is backwards compatible with HDF5 version 1.8
@@ -438,7 +438,7 @@ HDF5TransformIOTemplate<TParametersValueType>::Write()
     {
       itkExceptionMacro(<< "No transforms to write");
     }
-    std::string compositeTransformType = transformList.front()->GetTransformTypeAsString();
+    const std::string compositeTransformType = transformList.front()->GetTransformTypeAsString();
 
     CompositeTransformIOHelperTemplate<TParametersValueType> helper;
     //
@@ -450,7 +450,7 @@ HDF5TransformIOTemplate<TParametersValueType>::Write()
       transformList = helper.GetTransformList(transformList.front().GetPointer());
     }
 
-    typename ConstTransformListType::const_iterator end = transformList.end();
+    typename ConstTransformListType::const_iterator const end = transformList.end();
 
     int count = 0;
 

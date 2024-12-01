@@ -228,9 +228,9 @@ test_functions()
   {
     for (unsigned int chisq_int = 0; chisq_int < 200; chisq_int += 20)
     {
-      const auto chisq = static_cast<double>(chisq_int);
-      const double cdf = vnl_chi_squared_cumulative(chisq, n);
-      const double err = std::fabs(cdf - cdf_baseline[idx++]);
+     const  auto chisq = static_cast<double>(chisq_int);
+     const  double cdf = vnl_chi_squared_cumulative(chisq, n);
+     const  double err = std::fabs(cdf - cdf_baseline[idx++]);
       std::cout << "vnl_chi_squared_cumulative(" << chisq << ',' << n << ')';
       TEST_NEAR(" CDF", err, 0.0, 2e-15);
       if (err >= 2e-15)

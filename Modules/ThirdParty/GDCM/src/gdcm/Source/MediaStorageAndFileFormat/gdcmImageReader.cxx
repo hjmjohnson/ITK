@@ -112,7 +112,7 @@ bool ImageReader::ReadACRNEMAImage()
   const Tag tpixelspacing(0x0028, 0x0030);
   if( ds.FindDataElement( tpixelspacing ) )
     {
-    const DataElement& de = ds.GetDataElement( tpixelspacing );
+   const  DataElement& de = ds.GetDataElement( tpixelspacing );
     Attribute<0x0028,0x0030> at;
     at.SetFromDataElement( de );
     pixeldata.SetSpacing( 0, at.GetValue(0));
@@ -122,7 +122,7 @@ bool ImageReader::ReadACRNEMAImage()
   const Tag timageposition(0x0020, 0x0030);
   if( ds.FindDataElement( timageposition) )
     {
-    const DataElement& de = ds.GetDataElement( timageposition);
+   const  DataElement& de = ds.GetDataElement( timageposition);
     Attribute<0x0020,0x0030> at = {{}};
     at.SetFromDataElement( de );
     pixeldata.SetOrigin( at.GetValues() );
@@ -134,7 +134,7 @@ bool ImageReader::ReadACRNEMAImage()
   const Tag timageorientation(0x0020, 0x0035);
   if( ds.FindDataElement( timageorientation) )
     {
-    const DataElement& de = ds.GetDataElement( timageorientation);
+   const  DataElement& de = ds.GetDataElement( timageorientation);
     Attribute<0x0020,0x0035> at = {{1,0,0,0,1,0}};//to get rid of brackets warnings in linux, lots of {}
     at.SetFromDataElement( de );
     pixeldata.SetDirectionCosines( at.GetValues() );

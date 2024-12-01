@@ -35,7 +35,7 @@ protected:
   template <unsigned int D, typename TPixelType = unsigned short>
   struct FixtureUtilities
   {
-    static const unsigned int Dimension = D;
+    const static unsigned int Dimension = D;
     using PixelType = TPixelType;
     using ImageType = itk::Image<PixelType, Dimension>;
     using IndexType = typename ImageType::IndexType;
@@ -49,8 +49,8 @@ protected:
     {
       auto image = ImageType::New();
 
-      auto                           imageSize = ImageType::SizeType::Filled(m_ImageSize);
-      typename ImageType::RegionType region(imageSize);
+      auto                                 imageSize = ImageType::SizeType::Filled(m_ImageSize);
+      typename ImageType::RegionType const region(imageSize);
       image->SetRegions(region);
       image->Allocate();
       image->FillBuffer(fillValue);

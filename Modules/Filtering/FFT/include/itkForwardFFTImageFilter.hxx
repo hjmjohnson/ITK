@@ -30,7 +30,7 @@ ForwardFFTImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   Superclass::GenerateInputRequestedRegion();
 
   // Get pointer to the input.
-  typename InputImageType::Pointer input = const_cast<InputImageType *>(this->GetInput());
+  typename InputImageType::Pointer const input = const_cast<InputImageType *>(this->GetInput());
 
   if (!input)
   {

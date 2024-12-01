@@ -60,10 +60,10 @@ AnchorErodeDilateImageFilter<TImage, TKernel, TFunction1>::DynamicThreadedGenera
   auto internalbuffer = InputImageType::New();
   internalbuffer->SetRegions(IReg);
   internalbuffer->Allocate();
-  InputImagePointer output = internalbuffer;
+  InputImagePointer const output = internalbuffer;
 
   // get the region size
-  InputImageRegionType OReg = outputRegionForThread;
+  InputImageRegionType const OReg = outputRegionForThread;
   // maximum buffer length is sum of dimensions
   unsigned int bufflength = 0;
   for (unsigned int i = 0; i < TImage::ImageDimension; ++i)
@@ -83,8 +83,8 @@ AnchorErodeDilateImageFilter<TImage, TKernel, TFunction1>::DynamicThreadedGenera
 
   for (unsigned int i = 0; i < decomposition.size(); ++i)
   {
-    typename KernelType::LType     ThisLine = decomposition[i];
-    typename BresType::OffsetArray TheseOffsets = BresLine.BuildLine(ThisLine, bufflength);
+    typename KernelType::LType const     ThisLine = decomposition[i];
+    typename BresType::OffsetArray const TheseOffsets = BresLine.BuildLine(ThisLine, bufflength);
 
     using KernelLType = typename KernelType::LType;
 
@@ -96,7 +96,7 @@ AnchorErodeDilateImageFilter<TImage, TKernel, TFunction1>::DynamicThreadedGenera
       ++SELength;
     }
 
-    InputImageRegionType BigFace = MakeEnlargedFace<InputImageType, KernelLType>(input, IReg, ThisLine);
+    InputImageRegionType const BigFace = MakeEnlargedFace<InputImageType, KernelLType>(input, IReg, ThisLine);
 
     AnchorLine.SetSize(SELength);
 

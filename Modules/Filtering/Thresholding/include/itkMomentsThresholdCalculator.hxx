@@ -41,9 +41,9 @@ MomentsThresholdCalculator<THistogram, TOutput>::GenerateData()
     this->GetOutput()->Set(static_cast<OutputType>(histogram->GetMeasurement(0, 0)));
   }
 
-  unsigned int size = histogram->GetSize(0);
+  unsigned int const size = histogram->GetSize(0);
 
-  double                                     total = histogram->GetTotalFrequency();
+  double const                               total = histogram->GetTotalFrequency();
   typename HistogramType::InstanceIdentifier threshold = 0;
 
   std::vector<double> histo(size);
@@ -53,13 +53,13 @@ MomentsThresholdCalculator<THistogram, TOutput>::GenerateData()
   }
 
   // Calculate the first, second, and third order moments
-  double m0 = 1.0;
-  double m1 = 0.0;
-  double m2 = 0.0;
-  double m3 = 0.0;
+  double const m0 = 1.0;
+  double       m1 = 0.0;
+  double       m2 = 0.0;
+  double       m3 = 0.0;
   for (unsigned int i = 0; i < size; ++i)
   {
-    double m = histogram->GetMeasurement(i, 0);
+    double const m = histogram->GetMeasurement(i, 0);
     m1 += m * histo[i];
     m2 += m * m * histo[i];
     m3 += m * m * m * histo[i];
@@ -70,12 +70,12 @@ MomentsThresholdCalculator<THistogram, TOutput>::GenerateData()
   // of the target binary image. This leads to 4 equalities whose solutions
   // are given in the Appendix of Ref. 1
   //
-  double cd = m0 * m2 - m1 * m1;
-  double c0 = (-m2 * m2 + m1 * m3) / cd;
-  double c1 = (m0 * -m3 + m2 * m1) / cd;
-  double z0 = 0.5 * (-c1 - std::sqrt(c1 * c1 - 4.0 * c0));
-  double z1 = 0.5 * (-c1 + std::sqrt(c1 * c1 - 4.0 * c0));
-  double p0 = (z1 - m1) / (z1 - z0); // Fraction of the object pixels in the target binary image
+  double const cd = m0 * m2 - m1 * m1;
+  double const c0 = (-m2 * m2 + m1 * m3) / cd;
+  double const c1 = (m0 * -m3 + m2 * m1) / cd;
+  double const z0 = 0.5 * (-c1 - std::sqrt(c1 * c1 - 4.0 * c0));
+  double const z1 = 0.5 * (-c1 + std::sqrt(c1 * c1 - 4.0 * c0));
+  double const p0 = (z1 - m1) / (z1 - z0); // Fraction of the object pixels in the target binary image
 
   // The threshold is the gray-level closest to the p0-tile of the normalized
   // histogram

@@ -1042,7 +1042,7 @@ MetaTube::M_Read()
       m_PointList.push_back(pnt);
     }
 
-    const std::string objectType = MET_ReadType(*m_ReadStream);
+   const  std::string objectType = MET_ReadType(*m_ReadStream);
     if (objectType.empty())
     {
       // to avoid unrecognized characters

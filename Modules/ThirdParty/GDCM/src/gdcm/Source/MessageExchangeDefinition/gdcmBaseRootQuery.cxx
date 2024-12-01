@@ -54,7 +54,7 @@ namespace gdcm
     //nothing to do, really
   }
 
-  static const char *QueryLevelStrings[] = {
+  const static char *QueryLevelStrings[] = {
     "PATIENT ",
     "STUDY ",
     "SERIES",
@@ -70,8 +70,8 @@ namespace gdcm
   {
     if( str )
     {
-      const std::string s = str;
-      static const int n =
+     const  std::string s = str;
+      const static int n =
         sizeof( QueryLevelStrings ) / sizeof( *QueryLevelStrings );
       for( int i = 0; i < n; ++i )
       {

@@ -279,7 +279,7 @@ bool ServiceClassUser::SendStore(File const &file)
   assert( theDataSets.size() == 1 );
   const DataSet &ds = theDataSets[0];
   assert ( ds.FindDataElement(Tag(0x0, 0x0900)) );
-  DataElement const & de = ds.GetDataElement(Tag(0x0,0x0900));
+  const DataElement & de = ds.GetDataElement(Tag(0x0,0x0900));
   Attribute<0x0,0x0900> at;
   at.SetFromDataElement( de );
   // PS 3.4 - 2011
@@ -298,7 +298,7 @@ bool ServiceClassUser::SendStore(File const &file)
       gdcmErrorMacro( "C-Store of file was a failure." );
       Attribute<0x0,0x0902> errormsg;
       errormsg.SetFromDataSet( ds );
-      const char *themsg = errormsg.GetValue();
+     const  char *themsg = errormsg.GetValue();
       assert( themsg ); (void)themsg;
       gdcmErrorMacro( "Response Status: " << themsg );
       ret = false; // at least one file was not sent correctly
@@ -350,7 +350,7 @@ bool ServiceClassUser::SendFind(const BaseRootQuery* query, std::vector<DataSet>
       if( ds.FindDataElement( errormsg.GetTag() ) )
         {
         errormsg.SetFromDataSet( ds );
-        gdcm::Tag const & t = errormsg.GetValue();
+        const gdcm::Tag & t = errormsg.GetValue();
         gdcmErrorMacro( "Offending Element: " << t ); (void)t;
         }
       else
@@ -363,7 +363,7 @@ bool ServiceClassUser::SendFind(const BaseRootQuery* query, std::vector<DataSet>
       {
       Attribute<0x0,0x0902> errormsg;
       errormsg.SetFromDataSet( ds );
-      const char *themsg = errormsg.GetValue();
+     const  char *themsg = errormsg.GetValue();
       assert( themsg ); (void)themsg;
       gdcmErrorMacro( "Response Status: [" << themsg << "]" );
       }
@@ -380,7 +380,7 @@ bool ServiceClassUser::SendFind(const BaseRootQuery* query, std::vector<DataSet>
         {
         Attribute<0x0,0x0902> errormsg;
         errormsg.SetFromDataSet( ds );
-        const char *themsg = errormsg.GetValue();
+       const  char *themsg = errormsg.GetValue();
         assert( themsg ); (void)themsg;
         gdcmErrorMacro( "Response Status: " << themsg );
         }
@@ -597,7 +597,7 @@ EStateID ServiceClassUser::RunEventLoop(network::ULEvent& currentEvent,
               if (theVal != pendingDE1 && theVal != pendingDE2 && theVal != success)
                 {
                 //check for other error fields
-                const ByteValue *err1 = nullptr, *err2 = nullptr;
+               const  ByteValue *err1 = nullptr, *err2 = nullptr;
                 gdcmErrorMacro( "Transfer failed with code " << theVal << std::endl);
                 switch (theVal){
                   case 0xA701:
@@ -902,7 +902,7 @@ EStateID ServiceClassUser::RunMoveEventLoop(ULEvent& currentEvent, ULConnectionC
           }
           if (theVal != pendingDE1 && theVal != pendingDE2 && theVal != success){
             //check for other error fields
-            const ByteValue *err1 = nullptr, *err2 = nullptr;
+           const  ByteValue *err1 = nullptr, *err2 = nullptr;
             gdcmErrorMacro( "Transfer failed with code " << theVal << std::endl);
             switch (theVal){
               case 0xA701:

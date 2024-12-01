@@ -30,7 +30,7 @@ makeRandomImageInterpolator(const int SplineOrder)
   /** Generate a random input image and connect to BSpline decomposition filter */
 
   using SourceType = itk::RandomImageSource<ImageType>;
-  typename SourceType::Pointer source = SourceType::New();
+  typename SourceType::Pointer const source = SourceType::New();
   {
     using DirectionType = typename ImageType::DirectionType;
     DirectionType nonTrivialDirection;
@@ -64,7 +64,7 @@ makeRandomImageInterpolator(const int SplineOrder)
   source->SetMin(0.0);
   source->SetMax(10.0);
   source->Update();
-  typename ImageType::Pointer randImage = source->GetOutput();
+  typename ImageType::Pointer const randImage = source->GetOutput();
 
   /** Set up a BSplineInterpolateImageFunction for comparison. */
 

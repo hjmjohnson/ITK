@@ -208,7 +208,7 @@ lsqrBase::Dnrm2( unsigned int n, const double *x ) const
     if ( x[i] != 0.0 )
       {
       double dx = x[i];
-      const double absxi = std::abs(dx);
+     const  double absxi = std::abs(dx);
 
       if ( magnitudeOfLargestElement < absxi )
         {
@@ -426,8 +426,8 @@ Solve( unsigned int m, unsigned int n, const double * b, double * x )
     if ( damped )
       {
       rhbar1 = this->D2Norm( rhobar, damp );
-      const double cs1    = rhobar / rhbar1;
-      const double sn1    = this->damp / rhbar1;
+     const  double cs1    = rhobar / rhbar1;
+     const  double sn1    = this->damp / rhbar1;
       psi    = sn1 * phibar;
       phibar = cs1 * phibar;
       }
@@ -499,12 +499,12 @@ Solve( unsigned int m, unsigned int n, const double * b, double * x )
     //  super-diagonal element (theta) of the upper-bidiagonal matrix.
     //  Then use the result to estimate  norm(x).
     //----------------------------------------------------------------
-    const double delta  =   sn2 * rho;
-    const double gambar = - cs2 * rho;
-    const double rhs    =   phi - delta * z;
-    const double zbar   =   rhs   /gambar;
+   const  double delta  =   sn2 * rho;
+   const  double gambar = - cs2 * rho;
+   const  double rhs    =   phi - delta * z;
+   const  double zbar   =   rhs   /gambar;
     this->xnorm  =   this->D2Norm( xnorm1, zbar );
-    const double gamma  =   this->D2Norm( gambar, theta );
+   const  double gamma  =   this->D2Norm( gambar, theta );
     cs2    =   gambar / gamma;
     sn2    =   theta  / gamma;
     z      =   rhs    / gamma;
@@ -526,7 +526,7 @@ Solve( unsigned int m, unsigned int n, const double * b, double * x )
     // Now use these norms to estimate certain other quantities,
     // some of which will be small near a solution.
 
-    const double alfopt = sqrt( this->rnorm / ( dnorm * this->xnorm ) );
+   const  double alfopt = sqrt( this->rnorm / ( dnorm * this->xnorm ) );
     test1  = this->rnorm / bnorm;
     test2  = this->Arnorm / ( this->Anorm * this->rnorm );
     test3  = one   / this->Acond;
@@ -606,7 +606,7 @@ Solve( unsigned int m, unsigned int n, const double * b, double * x )
       }
     else
       {
-      const unsigned int nconv = 1;
+     const  unsigned int nconv = 1;
       nstop = nstop + 1;
 
       if ( ( nstop < nconv ) && ( this->itn < this->itnlim ) )

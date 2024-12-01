@@ -83,26 +83,26 @@ EEventID PDUFactory::DetermineEventByPDU(const BasePDU* inPDU)
 {
   if(inPDU)
     {
-    const AAssociateRQPDU* theAAssociateRQPDU = dynamic_cast<const AAssociateRQPDU*>(inPDU);
+   const  AAssociateRQPDU* theAAssociateRQPDU = dynamic_cast<const AAssociateRQPDU*>(inPDU);
     if (theAAssociateRQPDU != nullptr)
       {
       return eAASSOCIATE_RQPDUreceived;
       }
-    const AAssociateACPDU* theAAssociateACPDU = dynamic_cast<const AAssociateACPDU*>(inPDU);
+   const  AAssociateACPDU* theAAssociateACPDU = dynamic_cast<const AAssociateACPDU*>(inPDU);
     if (theAAssociateACPDU != nullptr)
       {
       return eASSOCIATE_ACPDUreceived;
       }
-    const AAssociateRJPDU* theAAssociateRJPDU = dynamic_cast<const AAssociateRJPDU*>(inPDU);
+   const  AAssociateRJPDU* theAAssociateRJPDU = dynamic_cast<const AAssociateRJPDU*>(inPDU);
     if (theAAssociateRJPDU != nullptr)
       {
       return eASSOCIATE_RJPDUreceived;
       }
-    const PDataTFPDU* thePDataTFPDU = dynamic_cast<const PDataTFPDU*>(inPDU);
+   const  PDataTFPDU* thePDataTFPDU = dynamic_cast<const PDataTFPDU*>(inPDU);
     if (thePDataTFPDU != nullptr)
       {
       ///
-      const PresentationDataValue &pdv = thePDataTFPDU->GetPresentationDataValue(0);
+     const  PresentationDataValue &pdv = thePDataTFPDU->GetPresentationDataValue(0);
       (void)pdv;
 #if 0
       int mh = pdv.GetMessageHeader();
@@ -116,17 +116,17 @@ EEventID PDUFactory::DetermineEventByPDU(const BasePDU* inPDU)
 #endif
       return ePDATATFPDU;
       }
-    const AReleaseRQPDU* theAReleaseRQPDU = dynamic_cast<const AReleaseRQPDU*>(inPDU);
+   const  AReleaseRQPDU* theAReleaseRQPDU = dynamic_cast<const AReleaseRQPDU*>(inPDU);
     if (theAReleaseRQPDU != nullptr)
       {
       return eARELEASE_RQPDUReceivedOpen;
       }
-    const AReleaseRPPDU* theAReleaseRPPDU = dynamic_cast<const AReleaseRPPDU*>(inPDU);
+   const  AReleaseRPPDU* theAReleaseRPPDU = dynamic_cast<const AReleaseRPPDU*>(inPDU);
     if (theAReleaseRPPDU != nullptr)
       {
       return eARELEASE_RPPDUReceived;
       }
-    const AAbortPDU* theAAbortPDU = dynamic_cast<const AAbortPDU*>(inPDU);
+   const  AAbortPDU* theAAbortPDU = dynamic_cast<const AAbortPDU*>(inPDU);
     if (theAAbortPDU != nullptr)
       {
       return eAABORTPDUReceivedOpen;

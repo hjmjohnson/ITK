@@ -57,7 +57,7 @@ namespace gdcm
     //borrowed this code from anonymization; not sure if it's correct, though.
     DataElement de;
     de.SetTag( inTag );
-    const VR &vr = inDictEntry.GetVR();
+   const  VR &vr = inDictEntry.GetVR();
     if( vr.IsDual() )
     {
       if( vr == VR::US_SS )
@@ -98,23 +98,23 @@ namespace gdcm
     //IF WE WANTED, we could validate the incoming tag as belonging to our set of tags.
     //but we will not.
 
-    static const Global &g = Global::GetInstance();
-    static const Dicts &dicts = g.GetDicts();
-    static const Dict &pubdict = dicts.GetPublicDict();
+    const static Global &g = Global::GetInstance();
+    const static Dicts &dicts = g.GetDicts();
+    const static Dict &pubdict = dicts.GetPublicDict();
 
-    const DictEntry &dictentry = pubdict.GetDictEntry(inTag);
+   const  DictEntry &dictentry = pubdict.GetDictEntry(inTag);
 
     SetSearchParameter(inTag, dictentry, inValue);
 
   }
   void BaseQuery::SetSearchParameter(const std::string& inKeyword, const std::string& inValue){
 
-    static const Global &g = Global::GetInstance();
-    static const Dicts &dicts = g.GetDicts();
-    static const Dict &pubdict = dicts.GetPublicDict();
+    const static Global &g = Global::GetInstance();
+    const static Dicts &dicts = g.GetDicts();
+    const static Dict &pubdict = dicts.GetPublicDict();
 
     Tag theTag;
-    const DictEntry &dictentry = pubdict.GetDictEntryByName(inKeyword.c_str(), theTag);
+   const  DictEntry &dictentry = pubdict.GetDictEntryByName(inKeyword.c_str(), theTag);
     SetSearchParameter(theTag, dictentry, inValue);
   }
 
@@ -217,7 +217,7 @@ namespace gdcm
     BaseQuery::Print(std::ostream &os) const
   {
     UIDs::TSName asuid = GetAbstractSyntaxUID();
-    const char *asname = UIDs::GetUIDName( asuid );
+   const  char *asname = UIDs::GetUIDName( asuid );
     os << "===================== OUTGOING DIMSE MESSAGE ====================" << std::endl;
     os << "Affected SOP Class UID        :" << asname << std::endl;
     os << "======================= END DIMSE MESSAGE =======================" << std::endl;

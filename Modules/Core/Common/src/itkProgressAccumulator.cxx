@@ -41,8 +41,8 @@ void
 ProgressAccumulator::RegisterInternalFilter(GenericFilterType * filter, float weight)
 {
   // Observe the filter
-  unsigned long progressTag = filter->AddObserver(ProgressEvent(), m_CallbackCommand);
-  unsigned long startTag = filter->AddObserver(StartEvent(), m_CallbackCommand);
+  unsigned long const progressTag = filter->AddObserver(ProgressEvent(), m_CallbackCommand);
+  unsigned long const startTag = filter->AddObserver(StartEvent(), m_CallbackCommand);
 
   // Create a record for the filter
   struct FilterRecord record;
@@ -104,8 +104,8 @@ ProgressAccumulator::ResetFilterProgressAndKeepAccumulatedProgress()
 void
 ProgressAccumulator::ReportProgress(Object * who, const EventObject & event)
 {
-  ProgressEvent pe;
-  StartEvent    se;
+  ProgressEvent const pe;
+  StartEvent const    se;
 
   if (typeid(event) == typeid(pe))
   {
@@ -116,7 +116,7 @@ ProgressAccumulator::ReportProgress(Object * who, const EventObject & event)
     FilterRecordVector::iterator it;
     for (it = m_FilterRecord.begin(); it != m_FilterRecord.end(); ++it)
     {
-      float progress = it->Filter->GetProgress();
+      const float progress = it->Filter->GetProgress();
       if (progress != it->AccumulatedProgress)
       {
         m_AccumulatedProgress += progress * it->Weight;

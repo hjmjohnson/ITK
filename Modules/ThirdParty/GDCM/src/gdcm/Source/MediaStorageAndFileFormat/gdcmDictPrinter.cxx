@@ -71,12 +71,12 @@ VM GuessVMType(DataElement const &de)
     case VR::IS: case VR::DS: case VR::DT: case VR::CS:
         {
         // Need to count \\ character
-        const ByteValue *bv = dynamic_cast<const ByteValue*>(&value);
+       const  ByteValue *bv = dynamic_cast<const ByteValue*>(&value);
         vm = VM::VM1; // why not ?
         if(!de.IsEmpty())
           {
           assert( bv && "not bv" );
-          const char *array = bv->GetPointer();
+         const  char *array = bv->GetPointer();
           size_t c = VM::GetNumberOfElementsFromArray(array, vl);
           vm = VM::GetVMTypeFromLength( c, 1 );
           }
@@ -446,14 +446,14 @@ void DictPrinter::PrintDataElement2(std::ostream& os, const DataSet &ds, const D
   // illegal element do not have private creator:
   if(owner && *owner)
     {
-    const DictEntry &entry = dicts.GetDictEntry(t,owner);
+   const  DictEntry &entry = dicts.GetDictEntry(t,owner);
     dict_vr = entry.GetVR();
 
     assert(t.GetElement() >= 0x0100 );
     //owner = GetOwner(ds,de);
     //version = GetVersion(owner);
 
-    const VR &vr = de.GetVR();
+   const  VR &vr = de.GetVR();
     VR pvr = vr;
     if( vr == VR::INVALID ) pvr = VR::UN;
     if( de.GetTag().GetElement() == 0x0 )
@@ -503,8 +503,8 @@ void DictPrinter::PrintDataElement2(std::ostream& os, const DataSet &ds, const D
       SequenceOfItems::ItemVector::const_iterator it = sqi->Items.begin();
       for(; it != sqi->Items.end(); ++it)
         {
-        const Item &item = *it;
-        const DataSet &nestedds = item.GetNestedDataSet();
+       const  Item &item = *it;
+       const  DataSet &nestedds = item.GetNestedDataSet();
         PrintDataSet2(os, nestedds);
         }
       }
@@ -517,7 +517,7 @@ void DictPrinter::PrintDataSet2(std::ostream& os, const DataSet &ds)
   DataSet::ConstIterator it = ds.Begin();
   for( ; it != ds.End(); ++it )
     {
-    const DataElement &de = *it;
+   const  DataElement &de = *it;
     PrintDataElement2(os, ds, de);
     }
 }

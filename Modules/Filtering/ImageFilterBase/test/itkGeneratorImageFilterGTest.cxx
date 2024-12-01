@@ -31,7 +31,7 @@ namespace
 template <unsigned int D, typename TPixelType = float>
 struct Utilities
 {
-  static const unsigned int Dimension = D;
+  const static unsigned int Dimension = D;
 
   using PixelType = TPixelType;
   using ImageType = itk::Image<PixelType, Dimension>;
@@ -106,7 +106,7 @@ TEST(UnaryGeneratorImageFilter, SetGetBasic)
   auto filter = FilterType::New();
   filter->Print(std::cout);
 
-  FilterType::ConstPointer constFilter = (const FilterType *)(filter.GetPointer());
+  const FilterType::ConstPointer constFilter = (const FilterType *)(filter.GetPointer());
 
   EXPECT_STREQ("UnaryGeneratorImageFilter", filter->GetNameOfClass());
   EXPECT_STREQ("InPlaceImageFilter", filter->Superclass::GetNameOfClass());
@@ -125,7 +125,7 @@ TEST(BinaryGeneratorImageFilter, SetGetBasic)
   filter->Print(std::cout);
 
 
-  FilterType::ConstPointer constFilter = (const FilterType *)(filter.GetPointer());
+  const FilterType::ConstPointer constFilter = (const FilterType *)(filter.GetPointer());
 
   EXPECT_STREQ("BinaryGeneratorImageFilter", filter->GetNameOfClass());
   EXPECT_STREQ("InPlaceImageFilter", filter->Superclass::GetNameOfClass());
@@ -154,7 +154,7 @@ TEST(TernaryGeneratorImageFilter, SetGetBasic)
   filter->Print(std::cout);
 
 
-  FilterType::ConstPointer constFilter = (const FilterType *)(filter.GetPointer());
+  const FilterType::ConstPointer constFilter = (const FilterType *)(filter.GetPointer());
 
   EXPECT_STREQ("TernaryGeneratorImageFilter", filter->GetNameOfClass());
   EXPECT_STREQ("InPlaceImageFilter", filter->Superclass::GetNameOfClass());
@@ -190,7 +190,7 @@ TEST(UnaryGeneratorImageFilter, SetFunctor)
 
   Utils::ImageType::Pointer outputImage;
 
-  Utils::IndexType idx{};
+  Utils::IndexType const idx{};
 
   // Test with C style function pointer
   filter->SetFunctor(static_cast<ValueFunctionType *>(std::cos));
@@ -212,7 +212,7 @@ TEST(UnaryGeneratorImageFilter, SetFunctor)
   EXPECT_NEAR(10.0, outputImage->GetPixel(idx), 1e-8);
 
   // test with std::functional
-  std::function<float(float)> func1 = static_cast<ValueFunctionType *>(std::sin);
+  std::function<float(float)> const func1 = static_cast<ValueFunctionType *>(std::sin);
 
   filter->SetFunctor(func1);
   EXPECT_NO_THROW(filter->Update());
@@ -221,7 +221,7 @@ TEST(UnaryGeneratorImageFilter, SetFunctor)
   EXPECT_NEAR(0.0, outputImage->GetPixel(idx), 1e-8);
 
 
-  std::function<float(const float &)> func2 = static_cast<ConstRefFunctionType *>(Utils::MyUnaryFunction);
+  std::function<float(const float &)> const func2 = static_cast<ConstRefFunctionType *>(Utils::MyUnaryFunction);
 
   filter->SetFunctor(func2);
   EXPECT_NO_THROW(filter->Update());
@@ -259,7 +259,7 @@ TEST(BinaryGeneratorImageFilter, SetFunctor)
 
   Utils::ImageType::Pointer outputImage;
 
-  Utils::IndexType idx{};
+  Utils::IndexType const idx{};
 
   // Test with C style function pointer
   filter->SetFunctor(Utils::MyBinaryFunction1);
@@ -280,7 +280,7 @@ TEST(BinaryGeneratorImageFilter, SetFunctor)
   EXPECT_NEAR(4.0, outputImage->GetPixel(idx), 1e-8);
 
   // test with std::functional
-  std::function<float(float, float)> func1 = Utils::MyBinaryFunction1;
+  std::function<float(float, float)> const func1 = Utils::MyBinaryFunction1;
 
   filter->SetFunctor(func1);
   EXPECT_NO_THROW(filter->Update());
@@ -289,7 +289,7 @@ TEST(BinaryGeneratorImageFilter, SetFunctor)
   EXPECT_NEAR(7.0, outputImage->GetPixel(idx), 1e-8);
 
 
-  std::function<float(const float &, const float &)> func2 = Utils::MyBinaryFunction2;
+  std::function<float(const float &, const float &)> const func2 = Utils::MyBinaryFunction2;
 
   filter->SetFunctor(func2);
   EXPECT_NO_THROW(filter->Update());
@@ -333,7 +333,7 @@ TEST(TernaryGeneratorImageFilter, SetFunctor)
 
   Utils::ImageType::Pointer outputImage;
 
-  Utils::IndexType idx{};
+  Utils::IndexType const idx{};
 
   // Test with C style function pointer
   filter->SetFunctor(Utils::MyTernaryFunction1);
@@ -354,7 +354,7 @@ TEST(TernaryGeneratorImageFilter, SetFunctor)
   EXPECT_NEAR(-5.0, outputImage->GetPixel(idx), 1e-8);
 
   // test with std::functional
-  std::function<float(float, float, float)> func1 = Utils::MyTernaryFunction1;
+  std::function<float(float, float, float)> const func1 = Utils::MyTernaryFunction1;
 
   filter->SetFunctor(func1);
   EXPECT_NO_THROW(filter->Update());
@@ -363,7 +363,7 @@ TEST(TernaryGeneratorImageFilter, SetFunctor)
   EXPECT_NEAR(6.0, outputImage->GetPixel(idx), 1e-8);
 
 
-  std::function<float(const float &, const float &, const float &)> func2 = Utils::MyTernaryFunction2;
+  std::function<float(const float &, const float &, const float &)> const func2 = Utils::MyTernaryFunction2;
 
   filter->SetFunctor(func2);
   EXPECT_NO_THROW(filter->Update());
@@ -400,7 +400,7 @@ TEST(TernaryGeneratorImageFilter, Constants)
 
   Utils::ImageType::Pointer outputImage;
 
-  Utils::IndexType idx{};
+  Utils::IndexType const idx{};
 
   // Test with C style function pointer
   filter->SetFunctor(Utils::MyTernaryFunction1);

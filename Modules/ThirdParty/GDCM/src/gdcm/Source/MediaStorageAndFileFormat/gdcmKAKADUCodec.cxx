@@ -154,9 +154,9 @@ bool KAKADUCodec::Decode(DataElement const &in, DataElement &out)
       output += ".rawl";
 
       std::ofstream outfile(input.c_str(), std::ios::binary);
-      const Fragment &frag = sf->GetFragment(i);
+     const  Fragment &frag = sf->GetFragment(i);
       assert( !frag.IsEmpty() );
-      const ByteValue *bv = frag.GetByteValue();
+     const  ByteValue *bv = frag.GetByteValue();
       assert( bv );
       //sf->WriteBuffer(outfile);
       bv->WriteBuffer( outfile );

@@ -139,7 +139,7 @@ int StreamImageWriter::WriteRawHeader(RAWCodec* inCodec, std::ostream* inStream)
     uint16_t seventhTag = 0xe000;
     uint32_t eightthTag = 0x00000000;
 
-    const int theBufferSize = 4*sizeof(uint16_t)+sizeof(uint32_t)+2*sizeof(uint16_t)+sizeof(uint32_t);
+   const  int theBufferSize = 4*sizeof(uint16_t)+sizeof(uint32_t)+2*sizeof(uint16_t)+sizeof(uint32_t);
     char* tmpBuffer1 = new char[theBufferSize];
 
     memcpy(&(tmpBuffer1[0]), &firstTag, sizeof(uint16_t));

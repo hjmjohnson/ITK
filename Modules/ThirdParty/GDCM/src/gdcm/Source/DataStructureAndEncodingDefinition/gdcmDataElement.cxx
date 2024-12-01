@@ -35,7 +35,7 @@ namespace gdcm_ns
   }
 
   const SequenceOfFragments* DataElement::GetSequenceOfFragments() const {
-    const SequenceOfFragments *sqf = dynamic_cast<SequenceOfFragments*>(ValueField.GetPointer());
+   const  SequenceOfFragments *sqf = dynamic_cast<SequenceOfFragments*>(ValueField.GetPointer());
     return sqf;
   }
   SequenceOfFragments* DataElement::GetSequenceOfFragments() {
@@ -71,7 +71,7 @@ namespace gdcm_ns
         {
         if( GetVR() == VR::INVALID )
           {
-          const ByteValue *bv = GetByteValue();
+         const  ByteValue *bv = GetByteValue();
           assert( bv );
           SequenceOfItems *sqi = new SequenceOfItems;
           sqi->SetLength( bv->GetLength() );
@@ -112,7 +112,7 @@ namespace gdcm_ns
         else if  ( GetVR() == VR::UN ) // cp 246, IVRLE SQ
           {
           assert( GetVR() == VR::UN ); // cp 246, IVRLE SQ
-          const ByteValue *bv = GetByteValue();
+         const  ByteValue *bv = GetByteValue();
           assert( bv );
           SequenceOfItems *sqi = new SequenceOfItems;
           sqi->SetLength( bv->GetLength() );
@@ -167,7 +167,7 @@ namespace gdcm_ns
           }
         else if  ( GetVR() & VR::OB_OW ) // pre-dicom 1993 ?
           {
-          const ByteValue *bv = GetByteValue();
+         const  ByteValue *bv = GetByteValue();
           assert( bv );
           SequenceOfItems *sqi = new SequenceOfItems;
           sqi->SetLength( bv->GetLength() );

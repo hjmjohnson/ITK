@@ -41,9 +41,9 @@ itkSymmetricSecondRankTensorImageReadTest(int argc, char * argv[])
 
   auto size = MatrixImageType::SizeType::Filled(10);
 
-  MatrixImageType::IndexType start{};
+  MatrixImageType::IndexType const start{};
 
-  MatrixImageType::RegionType region{ start, size };
+  MatrixImageType::RegionType const region{ start, size };
 
   matrixImage->SetRegions(region);
   matrixImage->Allocate();

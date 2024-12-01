@@ -105,9 +105,9 @@ test_symmetric_eigensystem()
         M22 = rng.drand64() * 10.0 - 5.0;
         M23 = rng.drand64() * 10.0 - 5.0;
         M33 = rng.drand64() * 10.0 - 5.0;
-        const auto timer_01 = std::chrono::high_resolution_clock::now();
+       const  auto timer_01 = std::chrono::high_resolution_clock::now();
         vnl_symmetric_eigensystem_compute_eigenvals(M11, M12, M13, M22, M23, M33, c[0], c[1], c[2]);
-        const auto timer_02 = std::chrono::high_resolution_clock::now();
+       const  auto timer_02 = std::chrono::high_resolution_clock::now();
         fixed_time += (timer_02 - timer_01).count();
       }
     }
@@ -129,9 +129,9 @@ test_symmetric_eigensystem()
         M(2, 1) = M(1, 2) = rng.drand64() * 10.0 - 5.0;
         M(2, 2) = rng.drand64() * 10.0 - 5.0;
 
-        const auto timer_03 = std::chrono::high_resolution_clock::now();
+       const  auto timer_03 = std::chrono::high_resolution_clock::now();
         vnl_symmetric_eigensystem_compute(M.as_ref(), evecs.as_ref().non_const(), evals.as_ref().non_const());
-        const auto timer_04 = std::chrono::high_resolution_clock::now();
+       const  auto timer_04 = std::chrono::high_resolution_clock::now();
         netlib_time += (timer_04 - timer_03).count();
         c[0] = evals[0];
         c[1] = evals[1];
@@ -146,7 +146,7 @@ test_symmetric_eigensystem()
     double max_dsq = 0.0;
     for (unsigned c = 0; c < n; ++c)
     {
-      const double dsq = vnl_c_vector<double>::euclid_dist_sq(netlib_data[c], fixed_data[c], 3);
+     const  double dsq = vnl_c_vector<double>::euclid_dist_sq(netlib_data[c], fixed_data[c], 3);
       max_dsq = std::max(dsq, max_dsq);
       sum_dsq += dsq;
     }

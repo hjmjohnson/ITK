@@ -288,14 +288,14 @@ Type Defs::GetTypeFromTag(const File& file, const Tag& tag) const
   // Iterate over each iod entry in order:
   for(unsigned int idx = 0; idx < niods; ++idx)
     {
-    const IODEntry &iodentry = iod.GetIODEntry(idx);
-    const char *ref = iodentry.GetRef();
+   const  IODEntry &iodentry = iod.GetIODEntry(idx);
+   const  char *ref = iodentry.GetRef();
     //Usage::UsageType ut = iodentry.GetUsageType();
 
-    const Module &module = modules.GetModule( ref );
+   const  Module &module = modules.GetModule( ref );
     if( module.FindModuleEntryInMacros(macros, tag ) )
       {
-      const ModuleEntry &module_entry = module.GetModuleEntryInMacros(macros,tag);
+     const  ModuleEntry &module_entry = module.GetModuleEntryInMacros(macros,tag);
       ret = module_entry.GetType();
       }
     }
@@ -325,11 +325,11 @@ bool Defs::Verify(const File& file) const
   // Iterate over each iod entry in order:
   for(unsigned int idx = 0; idx < niods; ++idx)
     {
-    const IODEntry &iodentry = iod.GetIODEntry(idx);
-    const char *ref = iodentry.GetRef();
+   const  IODEntry &iodentry = iod.GetIODEntry(idx);
+   const  char *ref = iodentry.GetRef();
     Usage::UsageType ut = iodentry.GetUsageType();
 
-    const Module &module = modules.GetModule( ref );
+   const  Module &module = modules.GetModule( ref );
     //std::cout << module << std::endl;
     v = v && module.Verify( file.GetDataSet(), ut );
     }
@@ -360,11 +360,11 @@ bool Defs::Verify(const DataSet& ds) const
   // Iterate over each iod entry in order:
   for(unsigned int idx = 0; idx < niods; ++idx)
     {
-    const IODEntry &iodentry = iod.GetIODEntry(idx);
-    const char *ref = iodentry.GetRef();
+   const  IODEntry &iodentry = iod.GetIODEntry(idx);
+   const  char *ref = iodentry.GetRef();
     Usage::UsageType ut = iodentry.GetUsageType();
 
-    const Module &module = modules.GetModule( ref );
+   const  Module &module = modules.GetModule( ref );
     //std::cout << module << std::endl;
     v = v && module.Verify( ds, ut );
     }

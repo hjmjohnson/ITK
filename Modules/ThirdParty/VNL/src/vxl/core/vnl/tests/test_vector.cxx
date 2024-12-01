@@ -323,8 +323,8 @@ vnl_vector_test_int()
     int out_values[] = {-1, -2, -3, -4};
 
     vnl_vector<unsigned int> unsigned_v(4, 4, vvalues);
-    const vnl_vector<int> minus_v1 = -unsigned_v;
-    const vnl_vector<int> minus_v2 = unsigned_v.operator-();
+   const  vnl_vector<int> minus_v1 = -unsigned_v;
+   const  vnl_vector<int> minus_v2 = unsigned_v.operator-();
     TEST("unsigned_v.operator-()",
          (out_values[0] == minus_v1[0] && out_values[1] == minus_v1[1] && out_values[2] == minus_v1[2] &&
           out_values[3] == minus_v1[3]), true);
@@ -338,8 +338,8 @@ vnl_vector_test_int()
     int out_values[] = {-1, -2, -3, -4};
 
     vnl_vector_fixed<unsigned int,4> unsigned_v(vvalues);
-    const vnl_vector_fixed<int,4> minus_v1 = -unsigned_v;
-    const vnl_vector_fixed<int,4> minus_v2 = unsigned_v.operator-();
+   const  vnl_vector_fixed<int,4> minus_v1 = -unsigned_v;
+   const  vnl_vector_fixed<int,4> minus_v2 = unsigned_v.operator-();
     TEST("unsigned_v.operator-()",
          (out_values[0] == minus_v1[0] && out_values[1] == minus_v1[1] && out_values[2] == minus_v1[2] &&
           out_values[3] == minus_v1[3]), true);
@@ -676,7 +676,7 @@ vnl_vector_test_conversion()
     // convert from a vnl_vector to a block array:
     int v1values[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
     vnl_vector<int> v1(12, 12, v1values);
-    const int * data = v1.data_block();
+   const  int * data = v1.data_block();
     {
       check = true;
       for (int d = 0; d < 12; d++)
@@ -686,7 +686,7 @@ vnl_vector_test_conversion()
     TEST("(const int*) m.data_block", check, true);
 
     typedef int block[12];
-    const block & v2 = *((const block *)data);
+   const  block & v2 = *((const block *)data);
     {
       check = true;
       for (int i = 0; i < 12; i++)

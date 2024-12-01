@@ -230,7 +230,7 @@ public:
     transform->TransformSymmetricSecondRankTensor(vecpix, pnt);
     std::cout << "TransformSymmetricSecondRankTensor()          OK" << std::endl;
 
-    typename TransformType::ParametersType parameters(6);
+    typename TransformType::ParametersType const parameters(6);
     try
     {
       transform->SetParameters(parameters);

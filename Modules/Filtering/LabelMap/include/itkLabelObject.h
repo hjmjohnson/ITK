@@ -245,7 +245,7 @@ public:
     ConstLineIterator
     operator++(int)
     {
-      ConstLineIterator tmp = *this;
+      ConstLineIterator const tmp = *this;
       ++(*this);
       return tmp;
     }

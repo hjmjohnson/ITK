@@ -188,12 +188,12 @@ static void DataElementToJSONArray( const VR::VRType vr, const DataElement & de,
   if( vr == VR::UI )
     {
     const std::string strui( value, len );
-    const size_t lenuid = strlen( strui.c_str() ); // trick to remove trailing \0
+   const  size_t lenuid = strlen( strui.c_str() ); // trick to remove trailing \0
     json_object_array_add(my_array, json_object_new_string_len(strui.c_str(), lenuid));
     }
   else if( vr == VR::PN )
     {
-    const char *str1 = value;
+   const  char *str1 = value;
     // remove whitespace:
     while( str1[len-1] == ' ' )
       {
@@ -201,7 +201,7 @@ static void DataElementToJSONArray( const VR::VRType vr, const DataElement & de,
       }
     assert( str1 );
     std::stringstream ss;
-    static const char *Keys[] = {
+    const static char *Keys[] = {
       "Alphabetic",
       "Ideographic",
       "Phonetic",
@@ -209,13 +209,13 @@ static void DataElementToJSONArray( const VR::VRType vr, const DataElement & de,
     while (1)
       {
       assert( str1 && (size_t)(str1 - value) <= len );
-      const char * sep = strchr(str1, '\\');
-      const size_t llen = (sep != NULL) ? (sep - str1) : (value + len - str1);
+     const  char * sep = strchr(str1, '\\');
+     const  size_t llen = (sep != NULL) ? (sep - str1) : (value + len - str1);
       const std::string component(str1, llen);
 
-      const char *str2 = component.c_str();
+     const  char *str2 = component.c_str();
       assert( str2 );
-      const size_t len2 = component.size();
+     const  size_t len2 = component.size();
       assert( len2 == llen );
 
       int idx = 0;
@@ -223,10 +223,10 @@ static void DataElementToJSONArray( const VR::VRType vr, const DataElement & de,
       while (1)
         {
         assert( str2 && (size_t)(str2 - component.c_str() ) <= len2 );
-        const char * sep2 = strchr(str2, '=');
-        const size_t llen2 = (sep2 != NULL) ? (sep2 - str2) : (component.c_str() + len2 - str2);
+       const  char * sep2 = strchr(str2, '=');
+       const  size_t llen2 = (sep2 != NULL) ? (sep2 - str2) : (component.c_str() + len2 - str2);
         const std::string group(str2, llen2);
-        const char *thekey = Keys[idx++];
+       const  char *thekey = Keys[idx++];
 
         json_object_object_add(my_object_comp, thekey,
           json_object_new_string_len( group.c_str(), group.size() ) );
@@ -241,7 +241,7 @@ static void DataElementToJSONArray( const VR::VRType vr, const DataElement & de,
     }
   else if( vr == VR::DS || vr == VR::IS )
     {
-    const char *str1 = value;
+   const  char *str1 = value;
     assert( str1 );
     VRToType<VR::IS>::Type vris;
     VRToType<VR::DS>::Type vrds;
@@ -249,8 +249,8 @@ static void DataElementToJSONArray( const VR::VRType vr, const DataElement & de,
       {
       std::stringstream ss;
       assert( str1 && (size_t)(str1 - value) <= len );
-      const char * sep = strchr(str1, '\\');
-      const size_t llen = (sep != NULL) ? (sep - str1) : (value + len - str1);
+     const  char * sep = strchr(str1, '\\');
+     const  size_t llen = (sep != NULL) ? (sep - str1) : (value + len - str1);
       // This is complex, IS/DS should not be stored as string anymore
       switch( vr )
         {
@@ -274,13 +274,13 @@ static void DataElementToJSONArray( const VR::VRType vr, const DataElement & de,
     }
   else if( checkbackslash )
     {
-    const char *str1 = value;
+   const  char *str1 = value;
     assert( str1 );
     while (1)
       {
       assert( str1 && (size_t)(str1 - value) <= len );
-      const char * sep = strchr(str1, '\\');
-      const size_t llen = (sep != NULL) ? (sep - str1) : (value + len - str1);
+     const  char * sep = strchr(str1, '\\');
+     const  size_t llen = (sep != NULL) ? (sep - str1) : (value + len - str1);
       json_object_array_add(my_array, json_object_new_string_len(str1, llen));
       if (sep == NULL) break;
       str1 = sep + 1;
@@ -305,25 +305,25 @@ static void ProcessNestedDataSet( const DataSet & ds, json_object *my_object, co
   for( DataSet::ConstIterator it = ds.Begin();
     it != ds.End(); ++it )
     {
-    const DataElement &de = *it;
+   const  DataElement &de = *it;
     VR::VRType vr = de.GetVR();
-    const Tag& t = de.GetTag();
+   const  Tag& t = de.GetTag();
     if( t.IsGroupLength() ) continue; // I do not see why we should send those ?
     std::string strowner;
-    const char *owner = 0;
+   const  char *owner = 0;
     if( t.IsPrivate() && !t.IsPrivateCreator() )
       {
       strowner = ds.GetPrivateCreator(t);
       owner = strowner.c_str();
       }
-    const DictEntry &entry = dicts.GetDictEntry(t,owner);
-    const std::string & str_tag = t.PrintAsContinuousUpperCaseString();
-    const bool issequence = vr == VR::SQ || de.IsUndefinedLength();
-    const bool isprivatecreator = t.IsPrivateCreator();
+   const  DictEntry &entry = dicts.GetDictEntry(t,owner);
+   const  std::string & str_tag = t.PrintAsContinuousUpperCaseString();
+   const  bool issequence = vr == VR::SQ || de.IsUndefinedLength();
+   const  bool isprivatecreator = t.IsPrivateCreator();
     if( issequence ) vr = VR::SQ;
     else if( isprivatecreator ) vr = VR::LO; // always prefer VR::LO (over invalid/UN)
     else if( vr == VR::INVALID ) vr = VR::UN;
-    const char * vr_str = VR::GetVRString(vr);
+   const  char * vr_str = VR::GetVRString(vr);
     assert( VR::GetVRTypeFromFile(vr_str) != VR::INVALID );
 
     json_object *my_object_cur;
@@ -350,8 +350,8 @@ static void ProcessNestedDataSet( const DataSet & ds, json_object *my_object, co
         int nitems = sqi->GetNumberOfItems();
         for(int i = 1; i <= nitems; ++i)
           {
-          const Item &item = sqi->GetItem( i );
-          const DataSet &nested = item.GetNestedDataSet();
+         const  Item &item = sqi->GetItem( i );
+         const  DataSet &nested = item.GetNestedDataSet();
 
           json_object *my_object_sq;
           my_object_sq = json_object_new_object();
@@ -392,7 +392,7 @@ static void ProcessNestedDataSet( const DataSet & ds, json_object *my_object, co
       }
     else
       {
-      const char *wheretostore = "Value";
+     const  char *wheretostore = "Value";
       switch( vr )
         {
       case VR::FD:
@@ -469,7 +469,7 @@ static void ProcessNestedDataSet( const DataSet & ds, json_object *my_object, co
           int ellen = el.GetLength();
           for( int i = 0; i < ellen; ++i )
             {
-            const std::string atstr = el.GetValue( i ).PrintAsContinuousUpperCaseString();
+           const  std::string atstr = el.GetValue( i ).PrintAsContinuousUpperCaseString();
             json_object_array_add(my_array, json_object_new_string( atstr.c_str() ));
             }
           }
@@ -482,16 +482,16 @@ static void ProcessNestedDataSet( const DataSet & ds, json_object *my_object, co
       case VR::OW:
           {
           assert( !de.IsUndefinedLength() ); // handled before
-          const ByteValue * bv = de.GetByteValue();
+         const  ByteValue * bv = de.GetByteValue();
           wheretostore = "InlineBinary";
           if( bv )
             {
-            const char *src = bv->GetPointer();
-            const size_t len = bv->GetLength();
+           const  char *src = bv->GetPointer();
+           const  size_t len = bv->GetLength();
             assert( len % 2 == 0 );
-            const size_t len64 = Base64::GetEncodeLength(src, len);
+           const  size_t len64 = Base64::GetEncodeLength(src, len);
             buffer.resize( len64 );
-            const size_t ret = Base64::Encode( &buffer[0], len64, src, len );
+           const  size_t ret = Base64::Encode( &buffer[0], len64, src, len );
             assert( ret != 0 );
             json_object_array_add(my_array, json_object_new_string_len(&buffer[0], len64));
             }
@@ -640,7 +640,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
 
         while (!json_object_iter_equal(&it, &itEnd))
           {
-          const char *name = json_object_iter_peek_name(&it);
+         const  char *name = json_object_iter_peek_name(&it);
           assert( name );
           json_object * value = json_object_iter_peek_value (&it);
           DataElement lde;
@@ -677,7 +677,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
     if( jvaluetype == json_type_array )
       {
       //assert( vrtype != VR::PN );
-      const int valuelen = json_object_array_length ( jvalue );
+     const  int valuelen = json_object_array_length ( jvalue );
       std::string str;
       for( int validx = 0; validx < valuelen; ++validx )
         {
@@ -701,7 +701,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
               jopn[2]= json_object_object_get_old(value, "Phonetic");
               for( int i = 0; i < 3; ++i )
                 {
-                const char *tmp = json_object_get_string ( jopn[i] );
+               const  char *tmp = json_object_get_string ( jopn[i] );
                 if( tmp )
                   {
                   if( i ) value_str += '=';
@@ -759,8 +759,8 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
     if( jvaluetype == json_type_array )
       {
       DataElement locde;
-      const int valuelen = json_object_array_length ( jvalue );
-      const int vrsizeof = vrtype == VR::INVALID ? 0 : de.GetVR().GetSizeof();
+     const  int valuelen = json_object_array_length ( jvalue );
+     const  int vrsizeof = vrtype == VR::INVALID ? 0 : de.GetVR().GetSizeof();
       switch( vrtype )
         {
       case VR::FD:
@@ -771,7 +771,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             {
             json_object * value = json_object_array_get_idx ( jvalue, validx );
             assert( json_object_get_type( value ) == json_type_double );
-            const double v = json_object_get_double ( value );
+           const  double v = json_object_get_double ( value );
             el.SetValue(v, validx);
             }
           locde = el.GetAsDataElement();
@@ -785,7 +785,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             {
             json_object * value = json_object_array_get_idx ( jvalue, validx );
             assert( json_object_get_type( value ) == json_type_double );
-            const double v = json_object_get_double ( value );
+           const  double v = json_object_get_double ( value );
             el.SetValue(v, validx);
             }
           locde = el.GetAsDataElement();
@@ -799,7 +799,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             {
             json_object * value = json_object_array_get_idx ( jvalue, validx );
             assert( json_object_get_type( value ) == json_type_int );
-            const int v = json_object_get_int( value );
+           const  int v = json_object_get_int( value );
             el.SetValue(v, validx);
             }
           locde = el.GetAsDataElement();
@@ -813,7 +813,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             {
             json_object * value = json_object_array_get_idx ( jvalue, validx );
             assert( json_object_get_type( value ) == json_type_int );
-            const int v = json_object_get_int( value );
+           const  int v = json_object_get_int( value );
             el.SetValue(v, validx);
             }
           locde = el.GetAsDataElement();
@@ -827,7 +827,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             {
             json_object * value = json_object_array_get_idx ( jvalue, validx );
             assert( json_object_get_type( value ) == json_type_int );
-            const int v = json_object_get_int( value );
+           const  int v = json_object_get_int( value );
             el.SetValue(v, validx);
             }
           locde = el.GetAsDataElement();
@@ -841,7 +841,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             {
             json_object * value = json_object_array_get_idx ( jvalue, validx );
             assert( json_object_get_type( value ) == json_type_int );
-            const int v = json_object_get_int( value );
+           const  int v = json_object_get_int( value );
             el.SetValue(v, validx);
             }
           locde = el.GetAsDataElement();
@@ -855,7 +855,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             {
             json_object * value = json_object_array_get_idx ( jvalue, validx );
             assert( json_object_get_type( value ) == json_type_string );
-            const char *atstr = json_object_get_string( value );
+           const  char *atstr = json_object_get_string( value );
             Tag t;
             t.ReadFromContinuousString( atstr );
             el.SetValue(t, validx);
@@ -872,7 +872,7 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
     else if( jvaluebintype == json_type_array )
       {
       DataElement locde;
-      const int valuelen = json_object_array_length ( jvaluebin );
+     const  int valuelen = json_object_array_length ( jvaluebin );
       switch( vrtype )
         {
       case VR::UN:
@@ -890,13 +890,13 @@ static void ProcessJSONElement( const char *tag_str, json_object * obj, DataElem
             if( value )
               {
               assert( valuetype != json_type_null );
-              const char * value_str = json_object_get_string ( value );
+             const  char * value_str = json_object_get_string ( value );
               assert( value_str );
-              const size_t len64 = strlen( value_str );
-              const size_t len = Base64::GetDecodeLength( value_str, len64 );
+             const  size_t len64 = strlen( value_str );
+             const  size_t len = Base64::GetDecodeLength( value_str, len64 );
               std::vector<char> buffer;
               buffer.resize( len );
-              const size_t ret = Base64::Decode( &buffer[0], len,
+             const  size_t ret = Base64::Decode( &buffer[0], len,
                 value_str, len64 );
               assert( ret != 0 );
               locde.SetByteValue( &buffer[0], len );
@@ -978,7 +978,7 @@ bool JSON::Decode(std::istream & is, DataSet & ds)
 
   while (!json_object_iter_equal(&it, &itEnd))
     {
-    const char *name = json_object_iter_peek_name(&it);
+   const  char *name = json_object_iter_peek_name(&it);
     assert( name );
     json_object * value = json_object_iter_peek_value (&it);
     DataElement de;

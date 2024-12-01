@@ -65,7 +65,7 @@ FillWithCircle(TImage *                   image,
   it.GoToBegin();
 
   typename TImage::IndexType index;
-  double                     r2 = itk::Math::sqr(radius);
+  const double               r2 = itk::Math::sqr(radius);
 
   for (; !it.IsAtEnd(); ++it)
   {
@@ -123,9 +123,9 @@ itkFastSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   SizeType                 size;
   size.SetSize(sizeArray);
 
-  IndexType index{};
+  IndexType const index{};
 
-  RegionType region{ index, size };
+  RegionType const region{ index, size };
 
   auto moving = ImageType::New();
   auto fixed = ImageType::New();
@@ -143,10 +143,10 @@ itkFastSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   initField->SetBufferedRegion(region);
   initField->Allocate();
 
-  double    center[ImageDimension];
-  double    radius;
-  PixelType fgnd = 250;
-  PixelType bgnd = 15;
+  double          center[ImageDimension];
+  double          radius;
+  const PixelType fgnd = 250;
+  const PixelType bgnd = 15;
 
   // fill moving with circle
   center[0] = 64;
@@ -161,7 +161,7 @@ itkFastSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   FillWithCircle<ImageType>(fixed, center, radius, fgnd, bgnd);
 
   // fill initial deformation with zero vectors
-  VectorType zeroVec{};
+  VectorType const zeroVec{};
   initField->FillBuffer(zeroVec);
 
   using CasterType = itk::CastImageFilter<FieldType, FieldType>;
@@ -191,8 +191,8 @@ itkFastSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   registrator->SetNumberOfIterations(numberOfIterations);
   ITK_TEST_SET_GET_VALUE(numberOfIterations, registrator->GetNumberOfIterations());
 
-  double                                   standardDeviationsVal = 1.0;
-  RegistrationType::StandardDeviationsType standardDeviations{ standardDeviationsVal };
+  const double                                   standardDeviationsVal = 1.0;
+  RegistrationType::StandardDeviationsType const standardDeviations{ standardDeviationsVal };
   registrator->SetStandardDeviations(standardDeviationsVal);
   ITK_TEST_SET_GET_VALUE(standardDeviations, registrator->GetStandardDeviations());
 
@@ -203,7 +203,7 @@ itkFastSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   registrator->SetMaximumError(maximumError);
   ITK_TEST_SET_GET_VALUE(maximumError, registrator->GetMaximumError());
 
-  unsigned int maximumKernelWidth = 10;
+  unsigned int const maximumKernelWidth = 10;
   registrator->SetMaximumKernelWidth(maximumKernelWidth);
   ITK_TEST_SET_GET_VALUE(maximumKernelWidth, registrator->GetMaximumKernelWidth());
 
@@ -217,8 +217,8 @@ itkFastSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   auto smoothUpdateField = false;
   ITK_TEST_SET_GET_BOOLEAN(registrator, SmoothUpdateField, smoothUpdateField);
 
-  double                                   updateFieldStandardDeviationsVal = 1.0;
-  RegistrationType::StandardDeviationsType updateFieldStandardDeviations{ updateFieldStandardDeviationsVal };
+  const double                                   updateFieldStandardDeviationsVal = 1.0;
+  RegistrationType::StandardDeviationsType const updateFieldStandardDeviations{ updateFieldStandardDeviationsVal };
   registrator->SetUpdateFieldStandardDeviations(updateFieldStandardDeviationsVal);
   ITK_TEST_SET_GET_VALUE(updateFieldStandardDeviations, registrator->GetUpdateFieldStandardDeviations());
 

@@ -86,7 +86,7 @@ PhotometricInterpretation::PIType PhotometricInterpretation::GetPIType(const cha
   // the toolkit which wrote the image is buggy and tolerate \0 padded ASCII
   // string
   // warning this piece of code will do MONOCHROME -> MONOCHROME1
-  static const unsigned int n = sizeof(PIStrings) / sizeof(*PIStrings) - 1;
+  const static unsigned int n = sizeof(PIStrings) / sizeof(*PIStrings) - 1;
 
   size_t len = strlen(pi);
   if( pi[len-1] == ' ' ) len--;

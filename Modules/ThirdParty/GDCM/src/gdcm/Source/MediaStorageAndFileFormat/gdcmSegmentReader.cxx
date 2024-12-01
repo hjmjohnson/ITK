@@ -86,8 +86,8 @@ bool SegmentReader::Read()
   }
   else
   {
-    const char *    modality  = ms.GetModality();
-    const DataSet & dsRoot    = F->GetDataSet();
+   const  char *    modality  = ms.GetModality();
+   const  DataSet & dsRoot    = F->GetDataSet();
     if (modality != nullptr)
     { // Check modality
       String<> modalityStr( modality );
@@ -121,7 +121,7 @@ bool SegmentReader::ReadSegments()
   {
     SmartPointer< SequenceOfItems > segmentSQ = ds.GetDataElement(segmentSQTag).GetValueAsSQ();
 
-    const size_t numberOfSegments = segmentSQ->GetNumberOfItems();
+   const  size_t numberOfSegments = segmentSQ->GetNumberOfItems();
     if ( numberOfSegments == 0)
     {
       gdcmErrorMacro( "No segment found" );
@@ -155,8 +155,8 @@ Segment::BasicCodedEntryVector readCodeSequenceMacroAttributes(const Tag & tag, 
     SequenceOfItems::Iterator it = sequence->Begin();
     for(; it != sequence->End(); ++it)
     {
-      const Item & item = *it;
-      const DataSet & itemDataSet = item.GetNestedDataSet();
+     const  Item & item = *it;
+     const  DataSet & itemDataSet = item.GetNestedDataSet();
 
       SegmentHelper::BasicCodedEntry entry;
 
@@ -318,7 +318,7 @@ bool SegmentReader::ReadSegment(const Item & segmentItem, const unsigned int idx
       unsigned long                  numberOfSurfaces = 0;
       for (; itRefSurface != itEndRefSurface; itRefSurface++)
       {
-        const DataSet & refSurfaceDS = itRefSurface->GetNestedDataSet();
+       const  DataSet & refSurfaceDS = itRefSurface->GetNestedDataSet();
 
         // Referenced Surface Number
         Attribute<0x0066, 0x002C> refSurfaceNumberAt;

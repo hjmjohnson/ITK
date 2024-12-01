@@ -43,7 +43,7 @@ BayesianClassifierImageFilter<TInputVectorImage, TLabelsType, TPosteriorsPrecisi
 
 {
   this->SetNumberOfRequiredOutputs(2);
-  PosteriorsImagePointer p = static_cast<PosteriorsImageType *>(this->MakeOutput(1).GetPointer());
+  PosteriorsImagePointer const p = static_cast<PosteriorsImageType *>(this->MakeOutput(1).GetPointer());
   this->SetNthOutput(1, p.GetPointer());
 }
 
@@ -139,7 +139,7 @@ BayesianClassifierImageFilter<TInputVectorImage, TLabelsType, TPosteriorsPrecisi
   itkDebugMacro("Computing Bayes Rule");
   const InputImageType * membershipImage = this->GetInput();
 
-  ImageRegionType imageRegion = membershipImage->GetBufferedRegion();
+  ImageRegionType const imageRegion = membershipImage->GetBufferedRegion();
 
   if (m_UserProvidedPriors)
   {
@@ -323,9 +323,9 @@ void
 BayesianClassifierImageFilter<TInputVectorImage, TLabelsType, TPosteriorsPrecisionType, TPriorsPrecisionType>::
   ClassifyBasedOnPosteriors()
 {
-  OutputImagePointer labels = this->GetOutput();
+  OutputImagePointer const labels = this->GetOutput();
 
-  ImageRegionType imageRegion = labels->GetBufferedRegion();
+  ImageRegionType const imageRegion = labels->GetBufferedRegion();
 
   PosteriorsImageType * posteriorsImage = this->GetPosteriorImage();
 
@@ -337,7 +337,7 @@ BayesianClassifierImageFilter<TInputVectorImage, TLabelsType, TPosteriorsPrecisi
   OutputImageIteratorType     itrLabelsImage(labels, imageRegion);
   PosteriorsImageIteratorType itrPosteriorsImage(posteriorsImage, imageRegion);
 
-  DecisionRulePointer decisionRule = DecisionRuleType::New();
+  DecisionRulePointer const decisionRule = DecisionRuleType::New();
 
   itrLabelsImage.GoToBegin();
   itrPosteriorsImage.GoToBegin();

@@ -68,7 +68,7 @@ public:
   DataObjectConstIterator
   operator++(int)
   {
-    DataObjectConstIterator tmp = *this;
+    DataObjectConstIterator const tmp = *this;
     ++(*this);
     return tmp;
   }

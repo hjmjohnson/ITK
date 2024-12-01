@@ -30,7 +30,7 @@ int
 itkObjectStoreTest(int, char *[])
 {
 
-  itk::ObjectStore<TestObject>::Pointer store = itk::ObjectStore<TestObject>::New();
+  itk::ObjectStore<TestObject>::Pointer const store = itk::ObjectStore<TestObject>::New();
 
   std::list<TestObject *> borrowed_list;
   store->SetGrowthStrategyToExponential();

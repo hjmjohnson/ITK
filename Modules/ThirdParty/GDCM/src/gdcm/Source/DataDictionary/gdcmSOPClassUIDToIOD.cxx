@@ -17,7 +17,7 @@
 
 namespace gdcm
 {
-  static const char * const SOPClassUIDToIODStrings[][2] = {
+  const static char * const SOPClassUIDToIODStrings[][2] = {
 {"1.2.840.10008.1.3.10" , "Basic Directory IOD Modules"}, // IOD defined in PS 3.3
 {"1.2.840.10008.5.1.4.1.1.1" , "CR Image IOD Modules"},
 {"1.2.840.10008.5.1.4.1.1.1.1" , "Digital X Ray Image IOD Modules"}, //  DX IOD (see B.5.1.1)
@@ -134,7 +134,7 @@ namespace gdcm
 
 unsigned int SOPClassUIDToIOD::GetNumberOfSOPClassToIOD()
 {
-  static const unsigned int n = sizeof( SOPClassUIDToIODStrings ) / sizeof( *SOPClassUIDToIODStrings );
+  const static unsigned int n = sizeof( SOPClassUIDToIODStrings ) / sizeof( *SOPClassUIDToIODStrings );
   assert( n > 0 );
   return n - 1;
 }

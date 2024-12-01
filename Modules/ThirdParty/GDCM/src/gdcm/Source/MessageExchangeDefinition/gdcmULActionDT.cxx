@@ -68,7 +68,7 @@ static void process_input(iosockinet& sio)
     // FIXME we should check :
     // rqpdu.GetAbstractSyntax() contains LittleENdian
     PresentationContextAC pcac1;
-    PresentationContext const &pc = rqpdu.GetPresentationContext(index);
+    const PresentationContext &pc = rqpdu.GetPresentationContext(index);
     uint8_t id = pc.GetPresentationContextID();
 
     pcac1.SetPresentationContextID( id );
@@ -91,7 +91,7 @@ static void process_input(iosockinet& sio)
   size_t n = pdata.GetNumPDVs();
 
   assert( n == 1 );
-  PresentationDataValue const &input_pdv = pdata.GetPresentationDataValue(0);
+  const PresentationDataValue &input_pdv = pdata.GetPresentationDataValue(0);
 
   //std::cout << "done PDataTFPDU 1!" << std::endl;
 
@@ -118,7 +118,7 @@ static void process_input(iosockinet& sio)
       //pdata2.Print( std::cout );
       size_t n2 = pdata.GetNumPDVs();
       assert( n2 == 1 );
-      PresentationDataValue const &pdv = pdata2.GetPresentationDataValue(0);
+      const PresentationDataValue &pdv = pdata2.GetPresentationDataValue(0);
       messageheader = pdv.GetMessageHeader();
       //std::cout << "---------------- done PDataTFPDU: " << i << std::endl;
       //std::cout << "---------------- done MessageHeader: " << (int)messageheader << std::endl;
@@ -134,11 +134,11 @@ static void process_input(iosockinet& sio)
     inpdvs.push_back( input_pdv );
     DataSet ds1 = PresentationDataValue::ConcatenatePDVBlobs( inpdvs );
 
-    const DataElement &de1 = ds1.GetDataElement( Tag( 0x0000,0x0002 ) );
-    const ByteValue *bv1 = de1.GetByteValue();
+   const  DataElement &de1 = ds1.GetDataElement( Tag( 0x0000,0x0002 ) );
+   const  ByteValue *bv1 = de1.GetByteValue();
     std::string s1( bv1->GetPointer(), bv1->GetLength() );
-    const DataElement &de2 = ds1.GetDataElement( Tag( 0x0000,0x1000 ) );
-    const ByteValue *bv2 = de2.GetByteValue();
+   const  DataElement &de2 = ds1.GetDataElement( Tag( 0x0000,0x1000 ) );
+   const  ByteValue *bv2 = de2.GetByteValue();
     std::string s2( bv2->GetPointer(), bv2->GetLength() );
 
     //pdv.MyInit2( s1.c_str(), s2.c_str() );

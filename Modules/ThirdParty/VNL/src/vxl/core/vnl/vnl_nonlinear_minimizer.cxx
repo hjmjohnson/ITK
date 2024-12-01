@@ -64,7 +64,7 @@ vnl_nonlinear_minimizer::report_iter()
 std::string
 vnl_nonlinear_minimizer::is_a() const
 {
-  static const std::string class_name_ = "vnl_nonlinear_minimizer";
+  const static std::string class_name_ = "vnl_nonlinear_minimizer";
   return class_name_;
 }
 

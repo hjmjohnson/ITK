@@ -158,13 +158,13 @@ bool SegmentWriter::PrepareWrite()
 
   {
     // Fill the Segment Sequence
-    const unsigned int              numberOfSegments  = this->GetNumberOfSegments();
+   const  unsigned int              numberOfSegments  = this->GetNumberOfSegments();
     assert( numberOfSegments );
-    const size_t nbItems           = segmentsSQ->GetNumberOfItems();
+   const  size_t nbItems           = segmentsSQ->GetNumberOfItems();
     if (nbItems < numberOfSegments)
     {
-      const size_t diff           = numberOfSegments - nbItems;
-      const size_t nbOfItemToMake = (diff > 0?diff:0);
+     const  size_t diff           = numberOfSegments - nbItems;
+     const  size_t nbOfItemToMake = (diff > 0?diff:0);
       for(unsigned int i = 1; i <= nbOfItemToMake; ++i)
       {
         Item item;
@@ -196,7 +196,7 @@ bool SegmentWriter::PrepareWrite()
     segmentDS.Replace( segmentNumberAt.GetAsDataElement() );
 
     // Segment Label (Type 1)
-    const char * segmentLabel = segment->GetSegmentLabel();
+   const  char * segmentLabel = segment->GetSegmentLabel();
     if ( strcmp(segmentLabel, "") != 0 )
     {
       gdcmWarningMacro("No segment label specified");
@@ -206,7 +206,7 @@ bool SegmentWriter::PrepareWrite()
     segmentDS.Replace( segmentLabelAt.GetAsDataElement() );
 
     // Segment Description (Type 3)
-    const char * segmentDescription = segment->GetSegmentDescription();
+   const  char * segmentDescription = segment->GetSegmentDescription();
     if ( strcmp(segmentDescription, "") != 0 )
     {
       Attribute<0x0062, 0x0006> segmentDescriptionAt;
@@ -215,7 +215,7 @@ bool SegmentWriter::PrepareWrite()
     }
 
     // Segment Algorithm Type (Type 1)
-    const char * segmentAlgorithmType = Segment::GetALGOTypeString( segment->GetSegmentAlgorithmType() );
+   const  char * segmentAlgorithmType = Segment::GetALGOTypeString( segment->GetSegmentAlgorithmType() );
     if ( segmentAlgorithmType == nullptr )
     {
       gdcmWarningMacro("No segment algorithm type specified");
@@ -234,13 +234,13 @@ bool SegmentWriter::PrepareWrite()
     // General Anatomy Optional Macro Attributes
     {
       // Anatomic Region Sequence (Type 3) - Only a single Item allowed
-      const SegmentHelper::BasicCodedEntry & anatomicRegion = segment->GetAnatomicRegion();
+     const  SegmentHelper::BasicCodedEntry & anatomicRegion = segment->GetAnatomicRegion();
       if(!anatomicRegion.IsEmpty())
       {
         writeCodeSequenceMacroAttributes(anatomicRegion, Tag(0x0008, 0x2218), segmentDS, false);
 
         // Anatomic Region Modifier Sequence (Type 3)
-        const Segment::BasicCodedEntryVector & anatomicRegionModifiers = segment->GetAnatomicRegionModifiers();
+       const  Segment::BasicCodedEntryVector & anatomicRegionModifiers = segment->GetAnatomicRegionModifiers();
         if(!anatomicRegionModifiers.empty())
         {
           SmartPointer<SequenceOfItems> sequence = segmentDS.GetDataElement(Tag(0x0008, 0x2218)).GetValueAsSQ();
@@ -254,7 +254,7 @@ bool SegmentWriter::PrepareWrite()
     }
 
     // Segmented Property Category Code Sequence (Type 1) - Only a single Item allowed
-    const SegmentHelper::BasicCodedEntry & propertyCategory = segment->GetPropertyCategory();
+   const  SegmentHelper::BasicCodedEntry & propertyCategory = segment->GetPropertyCategory();
     if(propertyCategory.IsEmpty())
     {
       gdcmWarningMacro("The property category is not specified or incomplete");
@@ -263,7 +263,7 @@ bool SegmentWriter::PrepareWrite()
 
 
     // Segmented Property Type Code Sequence (Type 1) - Only a single Item allowed
-    const SegmentHelper::BasicCodedEntry & propertyType = segment->GetPropertyType();
+   const  SegmentHelper::BasicCodedEntry & propertyType = segment->GetPropertyType();
     if(propertyType.IsEmpty())
     {
       gdcmWarningMacro("The property type is not specified or incomplete");
@@ -272,7 +272,7 @@ bool SegmentWriter::PrepareWrite()
 
 
     // Segmented Property Type Modifier Code Sequence (Type 3)
-    const Segment::BasicCodedEntryVector & propertyTypeModifiers = segment->GetPropertyTypeModifiers();
+   const  Segment::BasicCodedEntryVector & propertyTypeModifiers = segment->GetPropertyTypeModifiers();
     if(!propertyTypeModifiers.empty())
     {
       SmartPointer<SequenceOfItems> sequence = segmentDS.GetDataElement(Tag(0x0062, 0x000F)).GetValueAsSQ();
@@ -284,7 +284,7 @@ bool SegmentWriter::PrepareWrite()
 
 
     //*****   Surface segmentation    *****//
-    const unsigned long surfaceCount = segment->GetSurfaceCount();
+   const  unsigned long surfaceCount = segment->GetSurfaceCount();
     if (surfaceCount > 0)
     {
       // Surface Count
@@ -307,11 +307,11 @@ bool SegmentWriter::PrepareWrite()
       segmentsRefSQ->SetLengthToUndefined();
 
       // Fill the Segment Surface Generation Algorithm Identification Sequence
-      const size_t nbItems        = segmentsRefSQ->GetNumberOfItems();
+     const  size_t nbItems        = segmentsRefSQ->GetNumberOfItems();
       if (nbItems < surfaceCount)
       {
-        const size_t diff           = surfaceCount - nbItems;
-        const size_t nbOfItemToMake = (diff > 0?diff:0);
+       const  size_t diff           = surfaceCount - nbItems;
+       const  size_t nbOfItemToMake = (diff > 0?diff:0);
         for(unsigned int i = 1; i <= nbOfItemToMake; ++i)
         {
           Item item;
@@ -366,7 +366,7 @@ bool SegmentWriter::PrepareWrite()
     else
     {
       // Segment Algorithm Name (Type 1)
-      const char * segmentAlgorithmName = segment->GetSegmentAlgorithmName();
+     const  char * segmentAlgorithmName = segment->GetSegmentAlgorithmName();
       if ( strcmp(segmentAlgorithmName, "") != 0 )
       {
         gdcmWarningMacro("No segment algorithm name specified");

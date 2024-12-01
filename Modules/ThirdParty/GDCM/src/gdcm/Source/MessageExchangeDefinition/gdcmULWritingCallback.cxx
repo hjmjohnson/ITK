@@ -34,8 +34,8 @@ void ULWritingCallback::HandleDataSet(const DataSet& inDataSet)
   if (inDataSet.FindDataElement(Tag(0x0008,0x0018)) &&
     !inDataSet.GetDataElement(Tag(0x0008,0x0018)).IsEmpty() )
     {
-    const DataElement &de = inDataSet.GetDataElement(Tag(0x0008,0x0018));
-    const ByteValue *bv = de.GetByteValue();
+   const  DataElement &de = inDataSet.GetDataElement(Tag(0x0008,0x0018));
+   const  ByteValue *bv = de.GetByteValue();
     const std::string sopclassuid_str( bv->GetPointer(), bv->GetLength() );
     Writer w;
     std::string theLoc = mDirectoryName + "/" + sopclassuid_str.c_str() + ".dcm";

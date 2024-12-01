@@ -44,8 +44,8 @@ test_decimal_digits_to_string()
     const vnl_bignum bignum{ static_cast<T>(i) };
     vnl_bignum_to_string(bignum_as_string, bignum);
 
-    const auto expected_string = std::to_string(i);
-    const auto message = std::string("to_string<") + typeid(T).name() + ">(" + expected_string + ")";
+   const  auto expected_string = std::to_string(i);
+   const  auto message = std::string("to_string<") + typeid(T).name() + ">(" + expected_string + ")";
     TEST(message.c_str(), bignum_as_string, expected_string);
   }
 }

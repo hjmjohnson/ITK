@@ -122,20 +122,20 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
     {
     xde.SetTag( Tag(0x0002, 0x0001) );
     xde.SetVR( VR::OB );
-    const char *version = FileMetaInformation::GetFileMetaInformationVersion();
+   const  char *version = FileMetaInformation::GetFileMetaInformationVersion();
     xde.SetByteValue( version, 2 /*strlen(version)*/ );
     Insert( xde );
     }
   else
     {
-    const DataElement &de = GetDataElement( Tag(0x0002,0x0001) );
-    const ByteValue *bv = de.GetByteValue();
+   const  DataElement &de = GetDataElement( Tag(0x0002,0x0001) );
+   const  ByteValue *bv = de.GetByteValue();
     if( bv->GetLength() != 2
       || memcmp( bv->GetPointer(), FileMetaInformation::GetFileMetaInformationVersion(), 2 ) != 0 )
       {
       xde.SetTag( Tag(0x0002, 0x0001) );
       xde.SetVR( VR::OB );
-      const char *version = FileMetaInformation::GetFileMetaInformationVersion();
+     const  char *version = FileMetaInformation::GetFileMetaInformationVersion();
       xde.SetByteValue( version, 2 /*strlen(version)*/ );
       Replace( xde );
       }
@@ -147,7 +147,7 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
       {
       MediaStorage ms;
       ms.SetFromModality(ds);
-      const char *msstr = ms.GetString();
+     const  char *msstr = ms.GetString();
       if( msstr )
         {
         VL::Type strlenMsstr = (VL::Type) strlen(msstr);
@@ -165,7 +165,7 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
       }
     else
       {
-      const DataElement& msclass = ds.GetDataElement( Tag(0x0008, 0x0016) );
+     const  DataElement& msclass = ds.GetDataElement( Tag(0x0008, 0x0016) );
       xde = msclass;
       xde.SetTag( Tag(0x0002, 0x0002) );
       if( msclass.GetVR() == VR::UN || msclass.GetVR() == VR::INVALID )
@@ -188,10 +188,10 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
         }
       else
         {
-        const DataElement& sopclass = ds.GetDataElement( Tag(0x0008, 0x0016) );
+       const  DataElement& sopclass = ds.GetDataElement( Tag(0x0008, 0x0016) );
         DataElement mssopclass = GetDataElement( Tag(0x0002, 0x0002) );
         assert( !mssopclass.IsEmpty() );
-        const ByteValue *bv = sopclass.GetByteValue();
+       const  ByteValue *bv = sopclass.GetByteValue();
         if( bv )
           {
           mssopclass.SetByteValue( bv->GetPointer(), bv->GetLength() );
@@ -210,7 +210,7 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
     {
     if( ds.FindDataElement( Tag(0x0008, 0x0018) ) )
       {
-      const DataElement& msinst = ds.GetDataElement( Tag(0x0008, 0x0018) );
+     const  DataElement& msinst = ds.GetDataElement( Tag(0x0008, 0x0018) );
       if( msinst.IsEmpty() )
         {
         // Ok there is nothing...
@@ -250,11 +250,11 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
         throw gdcm::Exception( "No 8,18 element sorry" );
         //assert(0);
         }
-      const DataElement& sopinst = ds.GetDataElement( Tag(0x0008, 0x0018) );
+     const  DataElement& sopinst = ds.GetDataElement( Tag(0x0008, 0x0018) );
       //const DataElement & foo = GetDataElement( Tag(0x0002, 0x0003) );
       assert( !GetDataElement( Tag(0x0002, 0x0003) ).IsEmpty() );
       DataElement mssopinst = GetDataElement( Tag(0x0002, 0x0003) );
-      const ByteValue *bv = sopinst.GetByteValue();
+     const  ByteValue *bv = sopinst.GetByteValue();
       assert( bv );
       mssopinst.SetByteValue( bv->GetPointer(), bv->GetLength() );
       Replace( mssopinst );
@@ -265,8 +265,8 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
   if( FindDataElement( Tag(0x0002, 0x0010) ) && !GetDataElement( Tag(0x0002,0x0010) ).IsEmpty() )
     {
     DataElement tsuid = GetDataElement( Tag(0x0002, 0x0010) );
-    const char * datasetts = DataSetTS.GetString();
-    const ByteValue * bv = tsuid.GetByteValue();
+   const  char * datasetts = DataSetTS.GetString();
+   const  ByteValue * bv = tsuid.GetByteValue();
     assert( bv );
     std::string currentts( bv->GetPointer(), bv->GetPointer() + bv->GetLength() );
     if( strlen(currentts.c_str()) != strlen(datasetts)
@@ -293,7 +293,7 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
       {
       throw gdcm::Exception( "No TransferSyntax specified." );
       }
-    const char* str = TransferSyntax::GetTSString(DataSetTS);
+   const  char* str = TransferSyntax::GetTSString(DataSetTS);
     VL::Type strlenStr = (VL::Type) strlen(str);
     xde.SetByteValue( str, strlenStr );
     xde.SetVR( VR::UI );
@@ -306,7 +306,7 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
     xde.SetTag( Tag(0x0002, 0x0012) );
     xde.SetVR( VR::UI );
     //const char implementation[] = GDCM_IMPLEMENTATION_CLASS_UID;
-    const char *implementation = FileMetaInformation::GetImplementationClassUID();
+   const  char *implementation = FileMetaInformation::GetImplementationClassUID();
     VL::Type strlenImplementation = (VL::Type) strlen(implementation);
     xde.SetByteValue( implementation, strlenImplementation );
     Insert( xde );
@@ -341,7 +341,7 @@ void FileMetaInformation::FillFromDataSet(DataSet const &ds)
     xde.SetTag( Tag(0x0002, 0x0016) );
     xde.SetVR( VR::AE );
     //const char title[] = GDCM_SOURCE_APPLICATION_ENTITY_TITLE;
-    const char *title = FileMetaInformation::GetSourceApplicationEntityTitle();
+   const  char *title = FileMetaInformation::GetSourceApplicationEntityTitle();
     VL::Type strlenTitle = (VL::Type)strlen(title);
     xde.SetByteValue( title, strlenTitle );
     Insert( xde );
@@ -870,7 +870,7 @@ std::string FileMetaInformation::GetMediaStorageAsString() const
   const DataElement &de = GetDataElement(t);
   std::string ts;
     {
-    const ByteValue *bv = de.GetByteValue();
+   const  ByteValue *bv = de.GetByteValue();
     assert( bv );
     if( bv->GetPointer() && bv->GetLength() )
       {

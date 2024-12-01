@@ -1055,7 +1055,7 @@ void DICOMAppHelper::TransferSyntaxCallback(
   dicom_stream::cout << "Platform byte order: " << platformByteOrder << dicom_stream::endl;
 #endif
 
-  static const char* TRANSFER_UID_EXPLICIT_BIG_ENDIAN = "1.2.840.10008.1.2.2";
+  const static char* TRANSFER_UID_EXPLICIT_BIG_ENDIAN = "1.2.840.10008.1.2.2";
 
   // Only add the ToggleSwapBytes callback when we need it.
   if (strcmp(TRANSFER_UID_EXPLICIT_BIG_ENDIAN, reinterpret_cast<char*>(val)) == 0)
@@ -1516,13 +1516,13 @@ void DICOMAppHelper::RegisterPixelDataCallback(DICOMParser* parser)
 
 const char* DICOMAppHelper::TransferSyntaxUIDDescription(const char* uid)
 {
-  static const char* DICOM_IMPLICIT_VR_LITTLE_ENDIAN = "1.2.840.10008.1.2";
-  static const char* DICOM_LOSSLESS_JPEG = "1.2.840.10008.1.2.4.70";
-  static const char* DICOM_LOSSY_JPEG_8BIT = "1.2.840.10008.1.2.4.50";
-  static const char* DICOM_LOSSY_JPEG_16BIT = "1.2.840.10008.1.2.4.51";
-  static const char* DICOM_EXPLICIT_VR_LITTLE_ENDIAN = "1.2.840.10008.1.2.1";
-  static const char* DICOM_EXPLICIT_VR_BIG_ENDIAN = "1.2.840.10008.1.2.2";
-  static const char* DICOM_GE_PRIVATE_IMPLICIT_BIG_ENDIAN = "1.2.840.113619.5.2";
+  const static char* DICOM_IMPLICIT_VR_LITTLE_ENDIAN = "1.2.840.10008.1.2";
+  const static char* DICOM_LOSSLESS_JPEG = "1.2.840.10008.1.2.4.70";
+  const static char* DICOM_LOSSY_JPEG_8BIT = "1.2.840.10008.1.2.4.50";
+  const static char* DICOM_LOSSY_JPEG_16BIT = "1.2.840.10008.1.2.4.51";
+  const static char* DICOM_EXPLICIT_VR_LITTLE_ENDIAN = "1.2.840.10008.1.2.1";
+  const static char* DICOM_EXPLICIT_VR_BIG_ENDIAN = "1.2.840.10008.1.2.2";
+  const static char* DICOM_GE_PRIVATE_IMPLICIT_BIG_ENDIAN = "1.2.840.113619.5.2";
 
   if (!strcmp(DICOM_IMPLICIT_VR_LITTLE_ENDIAN, uid))
   {

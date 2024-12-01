@@ -718,7 +718,7 @@ MetaContour::M_Write()
     ControlPointListType::const_iterator it = m_ControlPointsList.begin();
     ControlPointListType::const_iterator itEnd = m_ControlPointsList.end();
 
-    const size_t dataSize = (m_NDims * 3 + 5) * m_NControlPoints * 4;
+   const  size_t dataSize = (m_NDims * 3 + 5) * m_NControlPoints * 4;
     char * data = new char[dataSize];
     int    i = 0;
     int    d;
@@ -832,7 +832,7 @@ MetaContour::M_Write()
     InterpolatedPointListType::const_iterator it = m_InterpolatedPointsList.begin();
     InterpolatedPointListType::const_iterator itEnd = m_InterpolatedPointsList.end();
 
-    const size_t dataSize = (m_NDims + 5) * m_NInterpolatedPoints * 4;
+   const  size_t dataSize = (m_NDims + 5) * m_NInterpolatedPoints * 4;
     char * data = new char[dataSize];
     int    i = 0;
     int    d;

@@ -50,7 +50,7 @@ itkMapGrayscaleDilateImageFilterTest(int argc, char * argv[])
   auto filter = FilterType::New();
   filter->SetInput(reader->GetOutput());
 
-  itk::SimpleFilterWatcher watcher(filter, "filter");
+  itk::SimpleFilterWatcher const watcher(filter, "filter");
 
   using RadiusType = FilterType::RadiusType;
 

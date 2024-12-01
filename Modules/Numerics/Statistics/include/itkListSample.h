@@ -245,7 +245,7 @@ public:
   Iterator
   Begin()
   {
-    Iterator iter(m_InternalContainer.begin(), 0);
+    Iterator const iter(m_InternalContainer.begin(), 0);
 
     return iter;
   }
@@ -254,7 +254,7 @@ public:
   Iterator
   End()
   {
-    Iterator iter(m_InternalContainer.end(), static_cast<InstanceIdentifier>(m_InternalContainer.size()));
+    Iterator const iter(m_InternalContainer.end(), static_cast<InstanceIdentifier>(m_InternalContainer.size()));
 
     return iter;
   }
@@ -263,7 +263,7 @@ public:
   ConstIterator
   Begin() const
   {
-    ConstIterator iter(m_InternalContainer.begin(), 0);
+    ConstIterator const iter(m_InternalContainer.begin(), 0);
 
     return iter;
   }
@@ -272,7 +272,7 @@ public:
   ConstIterator
   End() const
   {
-    ConstIterator iter(m_InternalContainer.end(), static_cast<InstanceIdentifier>(m_InternalContainer.size()));
+    ConstIterator const iter(m_InternalContainer.end(), static_cast<InstanceIdentifier>(m_InternalContainer.size()));
 
     return iter;
   }

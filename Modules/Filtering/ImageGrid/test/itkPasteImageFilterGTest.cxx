@@ -55,7 +55,7 @@ protected:
   template <typename TInputImage, typename TSourceImage = TInputImage>
   struct FixtureUtilities
   {
-    static const unsigned int Dimension = TInputImage::ImageDimension;
+    const static unsigned int Dimension = TInputImage::ImageDimension;
 
     using PixelType = typename TInputImage::PixelType;
     using OutputPixelType = PixelType;

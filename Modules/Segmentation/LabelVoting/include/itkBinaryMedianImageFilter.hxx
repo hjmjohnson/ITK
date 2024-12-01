@@ -48,8 +48,8 @@ BinaryMedianImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  typename Superclass::InputImagePointer  inputPtr = const_cast<TInputImage *>(this->GetInput());
-  typename Superclass::OutputImagePointer outputPtr = this->GetOutput();
+  typename Superclass::InputImagePointer const  inputPtr = const_cast<TInputImage *>(this->GetInput());
+  typename Superclass::OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -97,12 +97,12 @@ BinaryMedianImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   ImageRegionIterator<OutputImageType>      it;
 
   // Allocate output
-  typename OutputImageType::Pointer     output = this->GetOutput();
-  typename InputImageType::ConstPointer input = this->GetInput();
+  typename OutputImageType::Pointer const     output = this->GetOutput();
+  typename InputImageType::ConstPointer const input = this->GetInput();
 
   // Find the data-set boundary "faces"
-  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                        bC;
-  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType faceList =
+  NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>                              bC;
+  typename NeighborhoodAlgorithm::ImageBoundaryFacesCalculator<InputImageType>::FaceListType const faceList =
     bC(input, outputRegionForThread, m_Radius);
 
   TotalProgressReporter progress(this, output->GetRequestedRegion().GetNumberOfPixels());
@@ -116,12 +116,12 @@ BinaryMedianImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
     bit.OverrideBoundaryCondition(&nbc);
     bit.GoToBegin();
 
-    unsigned int neighborhoodSize = bit.Size();
+    unsigned int const neighborhoodSize = bit.Size();
 
     // All of our neighborhoods have an odd number of pixels, so there is
     // always a median index (if there where an even number of pixels
     // in the neighborhood we have to average the middle two values).
-    unsigned int medianPosition = neighborhoodSize / 2;
+    unsigned int const medianPosition = neighborhoodSize / 2;
 
     while (!bit.IsAtEnd())
     {
@@ -129,7 +129,7 @@ BinaryMedianImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
       unsigned int count = 0;
       for (unsigned int i = 0; i < neighborhoodSize; ++i)
       {
-        InputPixelType value = bit.GetPixel(i);
+        InputPixelType const value = bit.GetPixel(i);
         if (Math::ExactlyEquals(value, m_ForegroundValue))
         {
           ++count;

@@ -15,7 +15,7 @@ vnl_crs_index::vnl_crs_index(const std::vector<std::vector<bool>> & mask)
   int k = 0;
   for (unsigned int i = 0; i < mask.size(); ++i)
   {
-    const std::vector<bool> & col = mask[i];
+   const  std::vector<bool> & col = mask[i];
     row_ptr_[i] = k;
     for (unsigned int j = 0; j < num_cols_; ++j)
     {

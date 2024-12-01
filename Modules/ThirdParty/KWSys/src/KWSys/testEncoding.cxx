@@ -86,7 +86,7 @@ static int testRobustEncoding()
 
   wstr = kwsys::Encoding::ToWide(nullptr);
   if (!wstr.empty()) {
-    const wchar_t* wcstr = wstr.c_str();
+   const  wchar_t* wcstr = wstr.c_str();
     std::cout << "ToWide(NULL) returned";
     for (size_t i = 0; i < wstr.size(); i++) {
       std::cout << " " << std::hex << static_cast<int>(wcstr[i]);
@@ -96,7 +96,7 @@ static int testRobustEncoding()
   }
   wstr = kwsys::Encoding::ToWide("");
   if (!wstr.empty()) {
-    const wchar_t* wcstr = wstr.c_str();
+   const  wchar_t* wcstr = wstr.c_str();
     std::cout << "ToWide(\"\") returned";
     for (size_t i = 0; i < wstr.size(); i++) {
       std::cout << " " << std::hex << static_cast<int>(wcstr[i]);

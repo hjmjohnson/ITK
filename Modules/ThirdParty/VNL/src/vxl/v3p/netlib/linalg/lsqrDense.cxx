@@ -42,7 +42,7 @@ Aprod1(unsigned int m, unsigned int n, const double * x, double * y ) const
 {
   for ( unsigned int row = 0; row < m; row++ )
     {
-    const double * rowA = this->A[row];
+   const  double * rowA = this->A[row];
     double sum = 0.0;
 
     for ( unsigned int col = 0; col < n; col++ )

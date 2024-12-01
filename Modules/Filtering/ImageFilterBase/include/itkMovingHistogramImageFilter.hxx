@@ -47,14 +47,14 @@ MovingHistogramImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::Dyna
 
   OutputImageType *      outputImage = this->GetOutput();
   const InputImageType * inputImage = this->GetInput();
-  RegionType             inputRegion = inputImage->GetRequestedRegion();
+  RegionType const       inputRegion = inputImage->GetRequestedRegion();
 
   TotalProgressReporter progress(this, outputImage->GetRequestedRegion().GetNumberOfPixels());
 
   // initialize the histogram
   for (auto listIt = this->m_KernelOffsets.begin(); listIt != this->m_KernelOffsets.end(); ++listIt)
   {
-    IndexType idx = outputRegionForThread.GetIndex() + (*listIt);
+    IndexType const idx = outputRegionForThread.GetIndex() + (*listIt);
     if (inputRegion.IsInside(idx))
     {
       histogram.AddPixel(inputImage->GetPixel(idx));
@@ -67,7 +67,7 @@ MovingHistogramImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::Dyna
 
   // now move the histogram
   auto       direction = MakeFilled<FixedArray<short, ImageDimension>>(1);
-  int        axis = ImageDimension - 1;
+  int const  axis = ImageDimension - 1;
   OffsetType offset{};
   RegionType stRegion;
   stRegion.SetSize(this->m_Kernel.GetSize());
@@ -79,8 +79,8 @@ MovingHistogramImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::Dyna
     centerOffset[i] = stRegion.GetSize()[i] / 2;
   }
 
-  int BestDirection = this->m_Axes[axis];
-  int LineLength = inputRegion.GetSize()[BestDirection];
+  int const BestDirection = this->m_Axes[axis];
+  int const LineLength = inputRegion.GetSize()[BestDirection];
 
   // init the offset and get the lists for the best axis
   offset[BestDirection] = direction[BestDirection];
@@ -115,11 +115,11 @@ MovingHistogramImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::Dyna
   while (!InLineIt.IsAtEnd())
   {
     HistogramType & histRef = HistVec[BestDirection];
-    IndexType       PrevLineStart = InLineIt.GetIndex();
+    IndexType const PrevLineStart = InLineIt.GetIndex();
     for (InLineIt.GoToBeginOfLine(); !InLineIt.IsAtEndOfLine(); ++InLineIt)
     {
       // Update the histogram
-      IndexType currentIdx = InLineIt.GetIndex();
+      IndexType const currentIdx = InLineIt.GetIndex();
       outputImage->SetPixel(currentIdx,
                             static_cast<OutputPixelType>(histRef.GetValue(inputImage->GetPixel(currentIdx))));
       stRegion.SetIndex(currentIdx - centerOffset);
@@ -145,7 +145,7 @@ MovingHistogramImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::Dyna
     OffsetType Changes;
     this->GetDirAndOffset(LineStart, PrevLineStart, LineOffset, Changes, LineDirection);
     ++(Steps[LineDirection]);
-    IndexType              PrevLineStartHist = LineStart - LineOffset;
+    IndexType const        PrevLineStartHist = LineStart - LineOffset;
     const OffsetListType * addedListLine = &this->m_AddedOffsets[LineOffset];
     const OffsetListType * removedListLine = &this->m_RemovedOffsets[LineOffset];
     HistogramType &        tmpHist = HistVec[LineDirection];
@@ -197,7 +197,7 @@ MovingHistogramImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::Push
     // update the histogram
     for (auto addedIt = addedList->begin(); addedIt != addedList->end(); ++addedIt)
     {
-      IndexType idx = currentIdx + (*addedIt);
+      IndexType const idx = currentIdx + (*addedIt);
       if (inputRegion.IsInside(idx))
       {
         histogram.AddPixel(inputImage->GetPixel(idx));
@@ -209,7 +209,7 @@ MovingHistogramImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::Push
     }
     for (auto removedIt = removedList->begin(); removedIt != removedList->end(); ++removedIt)
     {
-      IndexType idx = currentIdx + (*removedIt);
+      IndexType const idx = currentIdx + (*removedIt);
       if (inputRegion.IsInside(idx))
       {
         histogram.RemovePixel(inputImage->GetPixel(idx));

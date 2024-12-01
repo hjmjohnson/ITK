@@ -151,9 +151,9 @@ void
 KalmanLinearEstimator<T, VEstimatorDimension>::UpdateWithNewMeasure(const ValueType &  newMeasure,
                                                                     const VectorType & newPredictor)
 {
-  ValueType measurePrediction = dot_product(newPredictor, m_Estimator);
+  ValueType const measurePrediction = dot_product(newPredictor, m_Estimator);
 
-  ValueType errorMeasurePrediction = newMeasure - measurePrediction;
+  ValueType const errorMeasurePrediction = newMeasure - measurePrediction;
 
   VectorType Corrector = m_Variance * newPredictor;
 
@@ -171,7 +171,7 @@ KalmanLinearEstimator<T, VEstimatorDimension>::UpdateVariance(const VectorType &
 {
   VectorType aux = m_Variance * newPredictor;
 
-  ValueType denominator = 1.0 / (1.0 + dot_product(aux, newPredictor));
+  ValueType const denominator = 1.0 / (1.0 + dot_product(aux, newPredictor));
 
   for (unsigned int col = 0; col < VEstimatorDimension; ++col)
   {

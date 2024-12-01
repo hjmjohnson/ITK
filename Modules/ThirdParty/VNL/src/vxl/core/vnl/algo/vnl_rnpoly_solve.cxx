@@ -772,7 +772,7 @@ Perform_Distributed_Task(std::vector<unsigned int> const & ideg,
   icount[0] = 0;
   bool solflag; // flag used to remember if a root is found
 #ifdef DEBUG
-  char const * FILENAM = "/tmp/cont.results";
+  const char * FILENAM = "/tmp/cont.results";
   std::ofstream F(FILENAM);
   if (!F)
   {

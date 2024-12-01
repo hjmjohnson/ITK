@@ -42,8 +42,8 @@ bool Module::FindModuleEntryInMacros(Macros const &macros, const Tag &tag) const
   for( ArrayIncludeMacrosType::const_iterator it = ArrayIncludeMacros.begin();
     it != ArrayIncludeMacros.end(); ++it)
     {
-    const std::string &name = *it;
-    const Macro &macro = macros.GetMacro( name.c_str() );
+   const  std::string &name = *it;
+   const  Macro &macro = macros.GetMacro( name.c_str() );
     if( macro.FindMacroEntry( tag ) )
       {
       return true;
@@ -77,7 +77,7 @@ const ModuleEntry& Module::GetModuleEntryInMacros(Macros const &macros, const Ta
   for( ArrayIncludeMacrosType::const_iterator it2 = ArrayIncludeMacros.begin();
     it2 != ArrayIncludeMacros.end(); ++it2)
     {
-    const std::string &name = *it2;
+   const  std::string &name = *it2;
     const Macro &macro= macros.GetMacro( name.c_str() );
     if( macro.FindMacroEntry( tag ) )
       {
@@ -95,13 +95,13 @@ bool Module::Verify(const DataSet& ds, Usage const & usage) const
   Module::MapModuleEntry::const_iterator it = ModuleInternal.begin();
   for(;it != ModuleInternal.end(); ++it)
     {
-    const Tag &tag = it->first;
-    const ModuleEntry &me = it->second;
-    const gdcm::Type &type = me.GetType();
+   const  Tag &tag = it->first;
+   const  ModuleEntry &me = it->second;
+   const  gdcm::Type &type = me.GetType();
     if( ds.FindDataElement( tag ) )
       {
       // element found
-      const DataElement &de = ds.GetDataElement( tag );
+     const  DataElement &de = ds.GetDataElement( tag );
       if ( de.IsEmpty() && (type == Type::T1 || type == Type::T1C ) )
         {
         gdcmWarningMacro( "T1 element cannot be empty: " << de );

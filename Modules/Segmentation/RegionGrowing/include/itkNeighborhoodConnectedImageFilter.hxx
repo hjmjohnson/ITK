@@ -88,7 +88,7 @@ NeighborhoodConnectedImageFilter<TInputImage, TOutputImage>::GenerateInputReques
   Superclass::GenerateInputRequestedRegion();
   if (this->GetInput())
   {
-    InputImagePointer image = const_cast<InputImageType *>(this->GetInput());
+    InputImagePointer const image = const_cast<InputImageType *>(this->GetInput());
     image->SetRequestedRegionToLargestPossibleRegion();
   }
 }
@@ -105,8 +105,8 @@ template <typename TInputImage, typename TOutputImage>
 void
 NeighborhoodConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
 {
-  typename Superclass::InputImageConstPointer inputImage = this->GetInput();
-  typename Superclass::OutputImagePointer     outputImage = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputImage = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputImage = this->GetOutput();
 
   // Zero the output
   outputImage->SetBufferedRegion(outputImage->GetRequestedRegion());

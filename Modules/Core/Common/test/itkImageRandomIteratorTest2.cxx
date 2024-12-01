@@ -50,11 +50,11 @@ itkImageRandomIteratorTest2(int argc, char * argv[])
   size[0] = 1000;
   size[1] = 1000;
 
-  unsigned long numberOfSamples = size[0] * size[1];
+  unsigned long const numberOfSamples = size[0] * size[1];
 
-  ImageType::IndexType start{};
+  ImageType::IndexType const start{};
 
-  ImageType::RegionType region{ start, size };
+  ImageType::RegionType const region{ start, size };
 
   image->SetRegions(region);
   image->AllocateInitialized();

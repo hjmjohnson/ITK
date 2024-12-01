@@ -40,10 +40,10 @@ namespace gdcm_ns
     // This is not considered an error to specify element as 1010 for example.
     // just keep the lower bits of element:
     SetElement( (uint8_t)element );
-    const char *owner = str + nchar;
+   const  char *owner = str + nchar;
     SetOwner( owner );
-    const bool hasBackslash = strchr(owner,'\\') != nullptr;
-    const char * creator = GetOwner();
+   const  bool hasBackslash = strchr(owner,'\\') != nullptr;
+   const  char * creator = GetOwner();
     if( !*creator || hasBackslash )
       {
       gdcmDebugMacro( ": " << str );
@@ -54,12 +54,12 @@ namespace gdcm_ns
 
   bool PrivateTag::operator<(const PrivateTag &_val) const
     {
-    const Tag & t1 = *this;
-    const Tag & t2 = _val;
+   const  Tag & t1 = *this;
+   const  Tag & t2 = _val;
     if( t1 == t2 )
       {
-      const char *s1 = Owner.c_str();
-      const char *s2 = _val.GetOwner();
+     const  char *s1 = Owner.c_str();
+     const  char *s2 = _val.GetOwner();
       assert( s1 );
       assert( s2 );
       if( *s1 )
@@ -75,7 +75,7 @@ namespace gdcm_ns
         // or "Philips Imaging DD 001" vr "PHILIPS IMAGING DD 001"
         //assert( strcmp(Owner.c_str(), _val.GetOwner()) == 0 );
         //return true;
-        const bool res2 = gdcm::System::StrCaseCmp(s1,s2) < 0;
+       const  bool res2 = gdcm::System::StrCaseCmp(s1,s2) < 0;
         res = res2;
         assert( 0 );
         }

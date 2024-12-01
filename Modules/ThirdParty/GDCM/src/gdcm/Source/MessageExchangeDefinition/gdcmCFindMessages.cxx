@@ -44,7 +44,7 @@ std::vector<PresentationDataValue> CFindRQ::ConstructPDV(
   if (dynamic_cast<const StudyRootQuery*>(inRootQuery)!=NULL)
     {
     contextID = eStudyRootQueryRetrieveInformationModelFIND;
-    const char *uid2 = UIDs::GetUIDString(
+   const  char *uid2 = UIDs::GetUIDString(
       UIDs::StudyRootQueryRetrieveInformationModelFIND );
     suid = uid2;
     }

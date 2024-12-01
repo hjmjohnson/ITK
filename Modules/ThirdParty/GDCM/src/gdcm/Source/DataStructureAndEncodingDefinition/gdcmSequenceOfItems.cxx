@@ -78,7 +78,7 @@ bool SequenceOfItems::FindDataElement(const Tag &t) const
   bool found = false;
   for(; it != End() && !found; ++it)
     {
-    const Item & item = *it;
+   const  Item & item = *it;
     found = item.FindDataElement( t );
     }
   return found;

@@ -165,10 +165,10 @@ MetaScene::Read(const char * _headerName)
       m_Event->SetCurrentIteration(static_cast<unsigned int>(i + 1));
     }
 
-    const std::string objectType = MET_ReadType(*m_ReadStream);
+   const  std::string objectType = MET_ReadType(*m_ReadStream);
     if (objectType.find("Tube") != std::string::npos || ((objectType.empty()) && !strcmp(suf, "tre")))
     {
-    const std::string subtype = MET_ReadSubType(*m_ReadStream);
+   const  std::string subtype = MET_ReadSubType(*m_ReadStream);
       if (subtype.find("Vessel") != std::string::npos)
       {
         auto * vesseltube = new MetaVesselTube();

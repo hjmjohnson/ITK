@@ -124,7 +124,7 @@ void SerieHelper::SetDirectory(std::string const &dir, bool recursive)
   Directory dirList;
   unsigned int nfiles = dirList.Load(dir, recursive); (void)nfiles;
 
-  Directory::FilenamesType const &filenames = dirList.GetFilenames();
+  const Directory::FilenamesType &filenames = dirList.GetFilenames();
   for( Directory::FilenamesType::const_iterator it = filenames.begin();
     it != filenames.end(); ++it)
     {
@@ -192,7 +192,7 @@ bool SerieHelper::AddFile(FileWithName &header)
     it2 != Restrictions.end();
     ++it2)
     {
-    const Rule &r = *it2;
+   const  Rule &r = *it2;
     //s = header->GetEntryValue( r.group, r.elem );
     s = sf.ToString( Tag(r.group,r.elem) );
     if ( !CompareDicomString(s, r.value.c_str(), r.op) )
@@ -292,7 +292,7 @@ bool SerieHelper::ImageNumberOrdering( FileList *fileList )
     it != fileList->end(); ++it )
     {
     instancenumber.SetValue( -1 );
-    const DataSet& ds = (*it)->GetDataSet();
+   const  DataSet& ds = (*it)->GetDataSet();
     instancenumber.SetFromDataSet( ds );
     int in = instancenumber.GetValue();
     instancenumbers.insert( in );
@@ -466,7 +466,7 @@ std::string SerieHelper::CreateUniqueSeriesIdentifier( File * inFile )
         it2 != Refine.end();
         ++it2)
         {
-        const Rule &r = *it2;
+       const  Rule &r = *it2;
         //std::string s = inFile->GetEntryValue( r.group, r.elem );
         std::string s = sf.ToString( Tag(r.group, r.elem) );
         //if( s == GDCM_UNFOUND )

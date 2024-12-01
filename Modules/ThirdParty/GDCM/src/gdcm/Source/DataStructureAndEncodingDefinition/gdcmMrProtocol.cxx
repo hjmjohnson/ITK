@@ -62,9 +62,9 @@ bool MrProtocol::Load( const ByteValue * bv, const char * csastr, int version )
     // ### ASCCONV BEGIN object=MrProtDataImpl@MrProtocolData version=41310008 converter=%MEASCONST%/ConverterList/Prot_Converter.txt ###
     // and
     //       "### ASCCONV BEGIN object=MrProtDataImpl@MrProtocolData version=51130001 converter=%MEASCONST%/ConverterList/Prot_Converter.txt ###
-    static const char begin[] = "### ASCCONV BEGIN ";
-    static const char begin2[] = "\"### ASCCONV BEGIN ";
-    static const char end[] = "### ASCCONV END ###";
+    const static char begin[] = "### ASCCONV BEGIN ";
+    const static char begin2[] = "\"### ASCCONV BEGIN ";
+    const static char end[] = "### ASCCONV END ###";
     bool hasstarted = false;
     while( std::getline(is, s ) )
     {
@@ -76,10 +76,10 @@ bool MrProtocol::Load( const ByteValue * bv, const char * csastr, int version )
         if( hasstarted ) {
           if( version == -1 ) {
             // find version if not specified:
-            static const char vers[] = "version=";
+            const static char vers[] = "version=";
             std::string::size_type p = s.find(vers);
             if ( p != std::string::npos) {
-              const char *v = s.c_str() + p + sizeof(vers) - 1;
+             const  char *v = s.c_str() + p + sizeof(vers) - 1;
               Pimpl->version = atoi(v);
             }
           }
@@ -176,7 +176,7 @@ bool MrProtocol::GetSliceArray( MrProtocol::SliceArray & sa ) const
   // d -> double
   // ...
   sa.Slices.clear();
-  static const char saSize[] = "sSliceArray.lSize";
+  const static char saSize[] = "sSliceArray.lSize";
   const char * sizestr = GetMrProtocolByName(saSize);
   if( sizestr == nullptr ) return false;
   const int size = atoi( sizestr );
@@ -186,9 +186,9 @@ bool MrProtocol::GetSliceArray( MrProtocol::SliceArray & sa ) const
   // sSliceArray.asSlice[*].sPosition.dCor
   // sSliceArray.asSlice[*].sPosition.dTra
   char buf[512];
-  static const char templ1[] = "sSliceArray.asSlice[%d].sPosition.%s";
-  static const char templ2[] = "sSliceArray.asSlice[%d].sNormal.%s";
-  static const char *dir[3] = { "dSag", "dCor", "dTra"};
+  const static char templ1[] = "sSliceArray.asSlice[%d].sPosition.%s";
+  const static char templ2[] = "sSliceArray.asSlice[%d].sNormal.%s";
+  const static char *dir[3] = { "dSag", "dCor", "dTra"};
   for( int i = 0; i < size; ++i )
   {
     Slice & slice = sa.Slices[i];
@@ -197,7 +197,7 @@ bool MrProtocol::GetSliceArray( MrProtocol::SliceArray & sa ) const
       for( int j = 0; j < 3; ++j )
       {
         snprintf( buf, sizeof(buf), templ1, i, dir[j] );
-        const char * valstr = GetMrProtocolByName(buf);
+       const  char * valstr = GetMrProtocolByName(buf);
         // when not present this means 0.0
         double val = 0.0;
         if( valstr ) val = atof( valstr );
@@ -213,7 +213,7 @@ bool MrProtocol::GetSliceArray( MrProtocol::SliceArray & sa ) const
       for( int j = 0; j < 3; ++j )
       {
         snprintf( buf, sizeof(buf), templ2, i, dir[j] );
-        const char * valstr = GetMrProtocolByName(buf);
+       const  char * valstr = GetMrProtocolByName(buf);
         // when not present this means 0.0
         double val = 0.0;
         if( valstr ) val = atof( valstr );

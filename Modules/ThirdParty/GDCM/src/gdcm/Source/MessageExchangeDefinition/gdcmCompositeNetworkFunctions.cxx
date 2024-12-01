@@ -113,7 +113,7 @@ BaseRootQuery* CompositeNetworkFunctions::ConstructQuery( ERootType inRootType,
   for(; it != keys.end(); ++it)
     {
     DataElement de( it->first );
-    const std::string &s = it->second;
+   const  std::string &s = it->second;
     de.SetByteValue ( s.c_str(), (uint32_t)s.size() );
     ds.Insert( de );
     }
@@ -279,7 +279,7 @@ bool CompositeNetworkFunctions::CFind( const char *remote, uint16_t portno,
       {
       Attribute<0x0,0x0901> errormsg;
       errormsg.SetFromDataSet( ds );
-      gdcm::Tag const & t = errormsg.GetValue();
+      const gdcm::Tag & t = errormsg.GetValue();
       gdcmErrorMacro( "Offending Element: " << t ); (void)t;
       }
     break;
@@ -287,7 +287,7 @@ bool CompositeNetworkFunctions::CFind( const char *remote, uint16_t portno,
       {
       Attribute<0x0,0x0902> errormsg;
       errormsg.SetFromDataSet( ds );
-      const char *themsg = errormsg.GetValue();
+     const  char *themsg = errormsg.GetValue();
       assert( themsg ); (void)themsg;
       gdcmErrorMacro( "Response Status: [" << themsg << "]" );
       }
@@ -304,7 +304,7 @@ bool CompositeNetworkFunctions::CFind( const char *remote, uint16_t portno,
         {
         Attribute<0x0,0x0902> errormsg;
         errormsg.SetFromDataSet( ds );
-        const char *themsg = errormsg.GetValue();
+       const  char *themsg = errormsg.GetValue();
         assert( themsg ); (void)themsg;
         gdcmErrorMacro( "Response Status: " << themsg );
         }
@@ -331,7 +331,7 @@ public:
     }
   void ShowProgress(Subject *caller, const Event &evt) override
     {
-    const ProgressEvent &pe = dynamic_cast<const ProgressEvent&>(evt);
+   const  ProgressEvent &pe = dynamic_cast<const ProgressEvent&>(evt);
     (void)caller;
     progress = refprogress + (1. / (double)nfiles ) * pe.GetProgress();
 //    std::cout << "Progress: " << progress << " " << pe.GetProgress() << std::endl;
@@ -356,7 +356,7 @@ bool CompositeNetworkFunctions::CStore( const char *remote, uint16_t portno,
 
   SmartPointer<network::ULConnectionManager> ps = new network::ULConnectionManager;
   network::ULConnectionManager &theManager = *ps;
-  Directory::FilenamesType const &files = filenames;
+  const Directory::FilenamesType &files = filenames;
 
   //SimpleSubjectWatcher watcher(ps, "cstore");
   MyWatcher watcher(ps, "cstore", files.size() );
@@ -382,7 +382,7 @@ bool CompositeNetworkFunctions::CStore( const char *remote, uint16_t portno,
     {
     for( size_t i = 0; i < files.size(); ++i )
       {
-      const std::string & filename = files[i];
+     const  std::string & filename = files[i];
       fn = filename.c_str();
       assert( fn && *fn ); (void)fn;
       Reader reader;
@@ -393,7 +393,7 @@ bool CompositeNetworkFunctions::CStore( const char *remote, uint16_t portno,
         gdcmErrorMacro( "Could not read: " << filename );
         return false;
         }
-      const File &file = reader.GetFile();
+     const  File &file = reader.GetFile();
       std::vector<DataSet> theDataSets;
       theDataSets = theManager.SendStore( file );
       if( theDataSets.empty() )
@@ -402,14 +402,14 @@ bool CompositeNetworkFunctions::CStore( const char *remote, uint16_t portno,
         return false;
         }
       assert( theDataSets.size() == 1 );
-      const DataSet &ds = theDataSets[0];
+     const  DataSet &ds = theDataSets[0];
       assert ( ds.FindDataElement(Tag(0x0, 0x0900)) );
-      DataElement const & de = ds.GetDataElement(Tag(0x0,0x0900));
+      const DataElement & de = ds.GetDataElement(Tag(0x0,0x0900));
       Attribute<0x0,0x0900> at;
       at.SetFromDataElement( de );
       // PS 3.4 - 2011
       // Table W.4-1 C-STORE RESPONSE STATUS VALUES
-      const uint16_t theVal = at.GetValue();
+     const  uint16_t theVal = at.GetValue();
       // http://dicom.nema.org/medical/dicom/current/output/chtml/part07/chapter_C.html
       if( theVal == 0x0 ) // Success
         {
@@ -428,7 +428,7 @@ bool CompositeNetworkFunctions::CStore( const char *remote, uint16_t portno,
           gdcmErrorMacro( "C-Store of file " << filename << " was a failure." );
           Attribute<0x0,0x0902> errormsg;
           errormsg.SetFromDataSet( ds );
-          const char *themsg = errormsg.GetValue();
+         const  char *themsg = errormsg.GetValue();
           assert( themsg ); (void)themsg;
           gdcmErrorMacro( "Response Status: " << themsg );
           ret = false; // at least one file was not sent correctly

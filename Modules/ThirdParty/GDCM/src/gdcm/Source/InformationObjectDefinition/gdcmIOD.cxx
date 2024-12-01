@@ -25,22 +25,22 @@ Type IOD::GetTypeFromTag(const Defs &defs, const Tag& tag) const
 {
   Type ret;
   const IOD &iod = *this;
-  static const Modules &modules = defs.GetModules();
-  static const Macros &macros = defs.GetMacros();
+  const static Modules &modules = defs.GetModules();
+  const static Macros &macros = defs.GetMacros();
 
   const size_t niods = iod.GetNumberOfIODs();
   // Iterate over each iod entry in order:
   bool found = false;
   for(unsigned int idx = 0; !found && idx < niods; ++idx)
     {
-    const IODEntry &iodentry = iod.GetIODEntry(idx);
-    const char *ref = iodentry.GetRef();
+   const  IODEntry &iodentry = iod.GetIODEntry(idx);
+   const  char *ref = iodentry.GetRef();
     //Usage::UsageType ut = iodentry.GetUsageType();
 
-    const Module &module = modules.GetModule( ref );
+   const  Module &module = modules.GetModule( ref );
     if( module.FindModuleEntryInMacros(macros, tag ) )
       {
-      const ModuleEntry &module_entry = module.GetModuleEntryInMacros(macros,tag);
+     const  ModuleEntry &module_entry = module.GetModuleEntryInMacros(macros,tag);
       ret = module_entry.GetType();
       found = true;
       }

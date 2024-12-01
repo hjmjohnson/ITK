@@ -51,7 +51,7 @@ GrayscaleGrindPeakImageFilter<TInputImage, TOutputImage>::GenerateInputRequested
   Superclass::GenerateInputRequestedRegion();
 
   // We need all the input.
-  InputImagePointer input = const_cast<InputImageType *>(this->GetInput());
+  InputImagePointer const input = const_cast<InputImageType *>(this->GetInput());
   if (input)
   {
     input->SetRequestedRegion(input->GetLargestPossibleRegion());
@@ -84,10 +84,10 @@ GrayscaleGrindPeakImageFilter<TInputImage, TOutputImage>::GenerateData()
   calculator->SetImage(this->GetInput());
   calculator->ComputeMinimum();
 
-  InputImagePixelType minValue = calculator->GetMinimum();
+  InputImagePixelType const minValue = calculator->GetMinimum();
 
   // allocate a marker image
-  InputImagePointer markerPtr = InputImageType::New();
+  InputImagePointer const markerPtr = InputImageType::New();
   markerPtr->SetRegions(this->GetInput()->GetRequestedRegion());
   markerPtr->CopyInformation(this->GetInput());
   markerPtr->Allocate();

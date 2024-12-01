@@ -28,7 +28,7 @@ template <typename TFixedImage, typename TMovingImage, typename TDisplacementFie
 SymmetricForcesDemonsRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::
   SymmetricForcesDemonsRegistrationFunction()
 {
-  RadiusType r{};
+  RadiusType const r{};
   this->SetRadius(r);
 
   m_TimeStep = 1.0;

@@ -155,7 +155,7 @@ void Bitmap::SetPlanarConfiguration(unsigned int pc)
       gdcmWarningMacro( "Cannot have Planar Configuration in non RGB input. Discarding" );
       PlanarConfiguration = 0;
       }
-    const TransferSyntax &ts = GetTransferSyntax();
+   const  TransferSyntax &ts = GetTransferSyntax();
     if(  ts == TransferSyntax::JPEGBaselineProcess1
       || ts == TransferSyntax::JPEGExtendedProcess2_4
       || ts == TransferSyntax::JPEGExtendedProcess3_5
@@ -217,7 +217,7 @@ bool Bitmap::GetBuffer(char *buffer) const
     // KODAK_CompressedIcon.dcm
     // contains a compressed Icon Sequence, one has to guess this is lossless jpeg...
 #ifdef MDEBUG
-    const SequenceOfFragments *sqf = PixelData.GetSequenceOfFragments();
+   const  SequenceOfFragments *sqf = PixelData.GetSequenceOfFragments();
     std::ofstream os( "/tmp/kodak.ljpeg", std::ios::binary);
     sqf->WriteBuffer( os );
 #endif
@@ -285,7 +285,7 @@ unsigned long Bitmap::GetBufferLength() const
   else if( PF == PixelFormat::SINGLEBIT )
     {
     assert( PF.GetSamplesPerPixel() == 1 );
-    const size_t bytesPerRow = Dimensions[0] / 8 + (Dimensions[0] % 8 != 0 ? 1 : 0);
+   const  size_t bytesPerRow = Dimensions[0] / 8 + (Dimensions[0] % 8 != 0 ? 1 : 0);
     size_t save = bytesPerRow * Dimensions[1];
     if( NumberOfDimensions > 2 )
       save *= Dimensions[2];
@@ -300,7 +300,7 @@ unsigned long Bitmap::GetBufferLength() const
     // BitsStored         :14
     // HighBit            :13
     assert( PF.GetSamplesPerPixel() == 1 );
-    const ByteValue *bv = PixelData.GetByteValue();
+   const  ByteValue *bv = PixelData.GetByteValue();
     assert( bv );
     unsigned int ref = bv->GetLength() / mul;
     if( !GetTransferSyntax().IsEncapsulated() )
@@ -397,11 +397,11 @@ bool Bitmap::TryJPEGCodec(char *buffer, bool &lossyflag) const
     if( codec.CanDecode( ts ) ) // short path
       {
       TransferSyntax ts2;
-      const SequenceOfFragments *sf = PixelData.GetSequenceOfFragments();
+     const  SequenceOfFragments *sf = PixelData.GetSequenceOfFragments();
       if( !sf ) return false;
-      const Fragment &frag = sf->GetFragment(0);
+     const  Fragment &frag = sf->GetFragment(0);
       if( frag.IsEmpty() ) return false;
-      const ByteValue &bv2 = dynamic_cast<const ByteValue&>(frag.GetValue());
+     const  ByteValue &bv2 = dynamic_cast<const ByteValue&>(frag.GetValue());
       PixelFormat pf = GetPixelFormat(); // PixelFormat::UINT8;
       codec.SetPixelFormat( pf );
 
@@ -420,7 +420,7 @@ bool Bitmap::TryJPEGCodec(char *buffer, bool &lossyflag) const
         i->SetPixelFormat( codec.GetPixelFormat() );
         }
 #else
-      const PixelFormat & cpf = codec.GetPixelFormat();
+     const  PixelFormat & cpf = codec.GetPixelFormat();
       // SC16BitsAllocated_8BitsStoredJPEG.dcm
       if( cpf.GetBitsAllocated() <= pf.GetBitsAllocated() )
         {
@@ -484,8 +484,8 @@ bool Bitmap::TryJPEGCodec(char *buffer, bool &lossyflag) const
     //  i->SetPhotometricInterpretation( codec.GetPhotometricInterpretation() );
     //  }
 #if 1
-    const PixelFormat & cpf = codec.GetPixelFormat();
-    const PixelFormat & pf = GetPixelFormat();
+   const  PixelFormat & cpf = codec.GetPixelFormat();
+   const  PixelFormat & pf = GetPixelFormat();
     if ( pf != cpf )
       {
       // gdcmData/DCMTK_JPEGExt_12Bits.dcm
@@ -498,8 +498,8 @@ bool Bitmap::TryJPEGCodec(char *buffer, bool &lossyflag) const
         }
       }
 #else
-      const PixelFormat & cpf = codec.GetPixelFormat();
-      const PixelFormat & pf = GetPixelFormat();
+     const  PixelFormat & cpf = codec.GetPixelFormat();
+     const  PixelFormat & pf = GetPixelFormat();
       // SC16BitsAllocated_8BitsStoredJPEG.dcm
       if( cpf.GetBitsAllocated() <= pf.GetBitsAllocated() )
         {
@@ -524,7 +524,7 @@ bool Bitmap::TryJPEGCodec(char *buffer, bool &lossyflag) const
     //  Bitmap *i = (Bitmap*)this;
     //  i->SetPhotometricInterpretation( PhotometricInterpretation::RGB );
     //  }
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     assert( outbv );
     unsigned long check = outbv->GetLength();  // FIXME
     (void)check;
@@ -573,7 +573,7 @@ bool Bitmap::TryJPEGCodec2(std::ostream &os) const
       //Bitmap *i = (Bitmap*)this;
       //i->SetPhotometricInterpretation( codec.GetPhotometricInterpretation() );
       }
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     assert( outbv );
     unsigned long check = outbv->GetLength();  // FIXME
     (void)check;
@@ -612,7 +612,7 @@ bool Bitmap::TryPVRGCodec(char *buffer, bool &lossyflag) const
       Bitmap *i = const_cast<Bitmap*>(this);
       i->PlanarConfiguration = codec.GetPlanarConfiguration();
       }
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     assert( outbv );
     unsigned long check = outbv->GetLength();  // FIXME
     (void)check;
@@ -645,7 +645,7 @@ bool Bitmap::TryKAKADUCodec(char *buffer, bool &lossyflag) const
     DataElement out;
     bool r = codec.Decode(PixelData, out);
     if( !r ) return false;
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     assert( outbv );
     unsigned long check = outbv->GetLength();  // FIXME
     (void)check;
@@ -675,11 +675,11 @@ bool Bitmap::TryJPEGLSCodec(char *buffer, bool &lossyflag) const
     if( codec.CanDecode( ts ) ) // short path
       {
       TransferSyntax ts2;
-      const SequenceOfFragments *sf = PixelData.GetSequenceOfFragments();
+     const  SequenceOfFragments *sf = PixelData.GetSequenceOfFragments();
       if( !sf ) return false;
-      const Fragment &frag = sf->GetFragment(0);
+     const  Fragment &frag = sf->GetFragment(0);
       if( frag.IsEmpty() ) return false;
-      const ByteValue &bv2 = dynamic_cast<const ByteValue&>(frag.GetValue());
+     const  ByteValue &bv2 = dynamic_cast<const ByteValue&>(frag.GetValue());
 
       std::stringstream ss;
       ss.write( bv2.GetPointer(), bv2.GetLength() );
@@ -719,7 +719,7 @@ bool Bitmap::TryJPEGLSCodec(char *buffer, bool &lossyflag) const
     DataElement out;
     bool r = codec.Decode(PixelData, out);
     if( !r ) return false;
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     assert( outbv );
     unsigned long check = outbv->GetLength();  // FIXME
     (void)check;
@@ -734,8 +734,8 @@ bool Bitmap::TryJPEGLSCodec(char *buffer, bool &lossyflag) const
       {
       gdcmErrorMacro( "EVIL file, it is declared as lossless but is in fact lossy." );
       }
-      const PixelFormat & cpf = codec.GetPixelFormat();
-      const PixelFormat & pf = GetPixelFormat();
+     const  PixelFormat & cpf = codec.GetPixelFormat();
+     const  PixelFormat & pf = GetPixelFormat();
       if( cpf.GetBitsAllocated() == pf.GetBitsAllocated() )
         {
         if( cpf.GetPixelRepresentation() == pf.GetPixelRepresentation() )
@@ -804,11 +804,11 @@ bool Bitmap::TryJPEG2000Codec(char *buffer, bool &lossyflag) const
     if( codec.CanDecode( ts ) ) // short path
       {
       TransferSyntax ts2;
-      const SequenceOfFragments *sf = PixelData.GetSequenceOfFragments();
+     const  SequenceOfFragments *sf = PixelData.GetSequenceOfFragments();
       if( !sf ) return false;
-      const Fragment &frag = sf->GetFragment(0);
+     const  Fragment &frag = sf->GetFragment(0);
       if( frag.IsEmpty() ) return false;
-      const ByteValue &bv2 = dynamic_cast<const ByteValue&>(frag.GetValue());
+     const  ByteValue &bv2 = dynamic_cast<const ByteValue&>(frag.GetValue());
 
       bool b = codec.GetHeaderInfo( bv2.GetPointer(), bv2.GetLength() , ts2 );
       if( !b ) return false;
@@ -825,8 +825,8 @@ bool Bitmap::TryJPEG2000Codec(char *buffer, bool &lossyflag) const
 #else
       // lets only check the only issue we have:
       // OsirixFake16BitsStoredFakeSpacing.dcm
-      const PixelFormat & cpf = codec.GetPixelFormat();
-      const PixelFormat & pf = GetPixelFormat();
+     const  PixelFormat & cpf = codec.GetPixelFormat();
+     const  PixelFormat & pf = GetPixelFormat();
       if( cpf.GetBitsAllocated() == pf.GetBitsAllocated() )
         {
         if( cpf.GetPixelRepresentation() == pf.GetPixelRepresentation() )
@@ -878,7 +878,7 @@ bool Bitmap::TryJPEG2000Codec(char *buffer, bool &lossyflag) const
     bool r = codec.Decode(PixelData, out);
     if(!r) return false;
     assert( r );
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     assert( outbv );
     unsigned long check = outbv->GetLength();  // FIXME
     (void)check;
@@ -901,8 +901,8 @@ bool Bitmap::TryJPEG2000Codec(char *buffer, bool &lossyflag) const
 #else
       // lets only check the only issue we have:
       // OsirixFake16BitsStoredFakeSpacing.dcm
-      const PixelFormat & cpf = codec.GetPixelFormat();
-      const PixelFormat & pf = GetPixelFormat();
+     const  PixelFormat & cpf = codec.GetPixelFormat();
+     const  PixelFormat & pf = GetPixelFormat();
       if( cpf.GetBitsAllocated() == pf.GetBitsAllocated() )
         {
         if( cpf.GetPixelRepresentation() == pf.GetPixelRepresentation() )
@@ -943,7 +943,7 @@ bool Bitmap::TryJPEG2000Codec2(std::ostream &os) const
     DataElement out;
     bool r = codec.Code(PixelData, out);
     assert( r );
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     assert( outbv );
     unsigned long check = outbv->GetLength();  // FIXME
     (void)check;
@@ -975,7 +975,7 @@ bool Bitmap::TryRLECodec(char *buffer, bool &lossyflag ) const
     DataElement out;
     bool r = codec.Decode(PixelData, out);
     if( !r ) return false;
-    const ByteValue *outbv = out.GetByteValue();
+   const  ByteValue *outbv = out.GetByteValue();
     //unsigned long check = outbv->GetLength();  // FIXME
     // DermaColorLossLess.dcm has a len of 63531, but DICOM will give us: 63532 ...
     assert( len <= outbv->GetLength() );

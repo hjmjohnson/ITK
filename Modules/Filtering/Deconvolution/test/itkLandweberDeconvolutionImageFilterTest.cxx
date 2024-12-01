@@ -78,7 +78,7 @@ itkLandweberDeconvolutionImageFilterTest(int argc, char * argv[])
   auto observer = IterationCommandType::New();
   deconvolutionFilter->AddObserver(itk::IterationEvent(), observer);
 
-  itk::SimpleFilterWatcher watcher(deconvolutionFilter);
+  itk::SimpleFilterWatcher const watcher(deconvolutionFilter);
 
   // Write the deconvolution result
   try

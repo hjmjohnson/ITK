@@ -280,7 +280,7 @@ bool ImageRegionReader::ReadRAWIntoBuffer(char *buffer, size_t buflen)
         return false;
         }
 #if 0
-      const char * check = &(buffer[((z-zmin)*rowsize*colsize + (y-ymin)*rowsize)*bytesPerPixel]);
+     const  char * check = &(buffer[((z-zmin)*rowsize*colsize + (y-ymin)*rowsize)*bytesPerPixel]);
       assert( check >= buffer && check < buffer + buflen );
       assert( check + rowsize*bytesPerPixel <= buffer + buflen );
 #endif

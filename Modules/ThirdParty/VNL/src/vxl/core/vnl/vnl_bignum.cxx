@@ -1188,7 +1188,7 @@ divide_aux(const vnl_bignum & b1, Data d, vnl_bignum & q, Data & r)
   for (Counter j = b1.count; j > 0; j--)
   {
     // get remainder, append next
-    const unsigned long temp = (unsigned long)r * 0x10000L + (unsigned long)b1.data[j - 1];
+   const  unsigned long temp = (unsigned long)r * 0x10000L + (unsigned long)b1.data[j - 1];
     if (j < 1 + q.count)
       q.data[j - 1] = Data(temp / d); //   digit, then divide
     r = Data(temp % d);               // calculate new remainder
@@ -1233,7 +1233,7 @@ estimate_q_hat(const vnl_bignum & u, const vnl_bignum & v, Counter j)
   for (Counter i = 0; i < 2; i++)
   {                                                                       // loop at most twice
                                                                           // lhs, rhs of Knuth inequality
-    const unsigned long lhs = (unsigned long)v2 * (unsigned long)q_hat;   // Calculate left-hand side of ineq.
+   const  unsigned long lhs = (unsigned long)v2 * (unsigned long)q_hat;   // Calculate left-hand side of ineq.
     unsigned long rhs = (unsigned long)u0 * 0x10000L + (unsigned long)u1; // Calculate part of right-hand side
     rhs -= ((unsigned long)q_hat * (unsigned long)v1);                    // Now subtract off part
 

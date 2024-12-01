@@ -31,10 +31,10 @@ itkConicShellInteriorExteriorSpatialFunctionTest(int, char *[])
   constexpr unsigned int PointDimension = 3;
 
   // Define the point coordinate representation type
-  using PointCoordRepType = float;
+  using PointCoordinateType = float;
 
   // Define the point type
-  using PointType = itk::Point<PointCoordRepType, PointDimension>;
+  using PointType = itk::Point<PointCoordinateType, PointDimension>;
 
   // Define the type for the conic spatial function
   using ConicShellInteriorExteriorSpatialFunctionType =
@@ -42,7 +42,7 @@ itkConicShellInteriorExteriorSpatialFunctionTest(int, char *[])
 
 
   // Create the conic shell function
-  ConicShellInteriorExteriorSpatialFunctionType::Pointer conicShellInteriorExteriorSpatialFunction =
+  const ConicShellInteriorExteriorSpatialFunctionType::Pointer conicShellInteriorExteriorSpatialFunction =
     ConicShellInteriorExteriorSpatialFunctionType::New();
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(conicShellInteriorExteriorSpatialFunction,
@@ -59,7 +59,7 @@ itkConicShellInteriorExteriorSpatialFunctionTest(int, char *[])
   originGradient.GetVnlVector().normalize();
   conicShellInteriorExteriorSpatialFunction->SetOriginGradient(originGradient);
 
-  double tolerance = 10e-6;
+  const double tolerance = 10e-6;
   std::cerr.precision(static_cast<int>(itk::Math::abs(std::log10(tolerance))));
   for (unsigned int i = 0; i < originGradient.Size(); ++i)
   {
@@ -74,15 +74,15 @@ itkConicShellInteriorExteriorSpatialFunctionTest(int, char *[])
     }
   }
 
-  double distanceMin = 10.0;
+  const double distanceMin = 10.0;
   conicShellInteriorExteriorSpatialFunction->SetDistanceMin(distanceMin);
   ITK_TEST_SET_GET_VALUE(distanceMin, conicShellInteriorExteriorSpatialFunction->GetDistanceMin());
 
-  double distanceMax = 50.0;
+  const double distanceMax = 50.0;
   conicShellInteriorExteriorSpatialFunction->SetDistanceMax(distanceMax);
   ITK_TEST_SET_GET_VALUE(distanceMax, conicShellInteriorExteriorSpatialFunction->GetDistanceMax());
 
-  double epsilon = 1e-3;
+  const double epsilon = 1e-3;
   conicShellInteriorExteriorSpatialFunction->SetEpsilon(epsilon);
   ITK_TEST_SET_GET_VALUE(epsilon, conicShellInteriorExteriorSpatialFunction->GetEpsilon());
 

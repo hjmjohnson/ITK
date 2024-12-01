@@ -72,8 +72,8 @@ itkHConvexConcaveImageFilterTest(int argc, char * argv[])
   auto hConvexFilter = HConvexFilterType::New();
   auto hConcaveFilter = HConcaveFilterType::New();
 
-  itk::SimpleFilterWatcher watchConvex(hConvexFilter, "HConvexImageFilter");
-  itk::SimpleFilterWatcher watchConcave(hConcaveFilter, "HConcaveImageFilter");
+  itk::SimpleFilterWatcher const watchConvex(hConvexFilter, "HConvexImageFilter");
+  itk::SimpleFilterWatcher const watchConcave(hConcaveFilter, "HConcaveImageFilter");
 
   // Set up the input and output files
   reader->SetFileName(argv[1]);

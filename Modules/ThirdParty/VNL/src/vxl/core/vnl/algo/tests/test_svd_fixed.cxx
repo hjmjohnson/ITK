@@ -143,7 +143,7 @@ test_speed(vnl_random & rng)
   int ms_heap;
   {
     double sum = 0;
-    const std::clock_t timer_01 = std::clock();
+   const  std::clock_t timer_01 = std::clock();
     vnl_matrix<double> A(3, 3);
     for (unsigned count = 0; count < 10000; ++count)
     {
@@ -151,14 +151,14 @@ test_speed(vnl_random & rng)
       vnl_svd<double> svd(A);
       sum += svd.inverse().fro_norm();
     }
-    const std::clock_t timer_02 = std::clock();
+   const  std::clock_t timer_02 = std::clock();
     ms_heap = ((timer_02 - timer_01) * 1000) / CLOCKS_PER_SEC;
     std::cout << "vnl_svd time for 10000 3x3 inversions: " << ms_heap << "ms." << std::endl;
   }
   int ms_stack;
   {
     double sum = 0;
-    const std::clock_t timer_03 = std::clock();
+   const  std::clock_t timer_03 = std::clock();
     vnl_matrix_fixed<double, 3, 3> A;
     for (unsigned count = 0; count < 10000; ++count)
     {
@@ -166,21 +166,21 @@ test_speed(vnl_random & rng)
       vnl_svd_fixed<double, 3, 3> svd(A);
       sum += svd.inverse().fro_norm();
     }
-    const std::clock_t timer_04 = std::clock();
+   const  std::clock_t timer_04 = std::clock();
     ms_stack = ((timer_04 - timer_03) * 1000) / CLOCKS_PER_SEC;
     std::cout << "vnl_svd_fixed time for 10000 3x3 inversions: " << ms_stack << "ms." << std::endl;
   }
   int ms_nosvd;
   {
     double sum = 0;
-    const std::clock_t timer_05 = std::clock();
+   const  std::clock_t timer_05 = std::clock();
     vnl_matrix_fixed<double, 3, 3> A;
     for (unsigned count = 0; count < 10000; ++count)
     {
       test_util_fill_random(A.begin(), A.end(), rng);
       sum += vnl_inverse(A).fro_norm();
     }
-    const std::clock_t timer_06 = std::clock();
+   const  std::clock_t timer_06 = std::clock();
     ms_nosvd = ((timer_06 - timer_05) * 1000) / CLOCKS_PER_SEC;
     std::cout << "(c.f. vnl_inverse no-SVD time for 10000 3x3 inversions: " << ms_nosvd << "ms.)" << std::endl;
   }

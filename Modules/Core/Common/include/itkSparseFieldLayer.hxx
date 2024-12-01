@@ -50,10 +50,11 @@ template <typename TNodeType>
 auto
 SparseFieldLayer<TNodeType>::SplitRegions(int num) const -> RegionListType
 {
-  unsigned int  size = Size();
-  unsigned int  regionsize = static_cast<unsigned int>(std::ceil(static_cast<float>(size) / static_cast<float>(num)));
-  ConstIterator position = Begin();
-  ConstIterator last = End();
+  unsigned int const size = Size();
+  unsigned int const regionsize =
+    static_cast<unsigned int>(std::ceil(static_cast<float>(size) / static_cast<float>(num)));
+  ConstIterator       position = Begin();
+  ConstIterator const last = End();
 
   std::vector<RegionType> regionlist;
   regionlist.reserve(num);

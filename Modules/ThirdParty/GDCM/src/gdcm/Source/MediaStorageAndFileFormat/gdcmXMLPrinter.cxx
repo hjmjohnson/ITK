@@ -240,7 +240,7 @@ VR XMLPrinter::PrintDataElement(std::ostream &os, const Dicts &dicts, const Data
       el.Set( de.GetValue() ); \
       if( el.GetLength() ) { \
       os << "<Value number = \"1\" >" ;os << "" << el.GetValue();os << "</Value>\n"; \
-      const uint32_t l = (uint32_t)el.GetLength(); \
+     const  uint32_t l = (uint32_t)el.GetLength(); \
       for(uint32_t i = 1; i < l; ++i) \
       { \
       os << "<Value number = \"" << (i+1) << "\" >" ;\
@@ -315,7 +315,7 @@ VR XMLPrinter::PrintDataElement(std::ostream &os, const Dicts &dicts, const Data
             {
             if(bv->GetLength())
               {
-              const char *suid = UIDgen.Generate();
+             const  char *suid = UIDgen.Generate();
               os << "<BulkData uuid = \""<<
                 suid << "\" />\n";
               HandleBulkData( suid, ts, bv->GetPointer(), bv->GetLength() );
@@ -365,7 +365,7 @@ VR XMLPrinter::PrintDataElement(std::ostream &os, const Dicts &dicts, const Data
           {
           if(bv->GetLength())
             {
-            const char *suid = UIDgen.Generate();
+           const  char *suid = UIDgen.Generate();
             os << "<BulkData uuid = \""<<
               suid << "\" />\n";
             HandleBulkData( suid, ts, bv->GetPointer(), bv->GetLength() );
@@ -423,8 +423,8 @@ void XMLPrinter::PrintSQ(const SequenceOfItems *sqi, const TransferSyntax & ts, 
   SequenceOfItems::ItemVector::const_iterator it = sqi->Items.begin();
   for(; it != sqi->Items.end(); ++it)
     {
-    const Item &item = *it;
-    const DataSet &ds = item.GetNestedDataSet();
+   const  Item &item = *it;
+   const  DataSet &ds = item.GetNestedDataSet();
     //const DataElement &deitem = item;
     /*
     os << "<DicomAttribute  tag = \"";
@@ -472,9 +472,9 @@ void XMLPrinter::PrintDataSet(const DataSet &ds, const TransferSyntax & ts, std:
   
   for( ; it != ds.End(); ++it )
     {
-    const DataElement &de = *it;
+   const  DataElement &de = *it;
     
-    const SequenceOfFragments *sqf = de.GetSequenceOfFragments();
+   const  SequenceOfFragments *sqf = de.GetSequenceOfFragments();
     
     os << "<DicomAttribute  " ;
     VR refvr = PrintDataElement(os, dicts, ds, de, ts);
@@ -505,12 +505,12 @@ void XMLPrinter::PrintDataSet(const DataSet &ds, const TransferSyntax & ts, std:
       		}
       	}
       /*      
-      const BasicOffsetTable & table = sqf->GetTable();
-      const ByteValue *bv = table.GetByteValue();
+     const  BasicOffsetTable & table = sqf->GetTable();
+     const  ByteValue *bv = table.GetByteValue();
       
       if(bv->GetLength())
       	{
-        const char *suid = UIDgen.Generate();
+       const  char *suid = UIDgen.Generate();
         os << "<BulkData uuid = \""<<
         			 suid << "\" />\n";
         HandleBulkData( suid, ts, bv->GetPointer(), bv->GetLength() );
@@ -519,8 +519,8 @@ void XMLPrinter::PrintDataSet(const DataSet &ds, const TransferSyntax & ts, std:
       unsigned int numfrag = sqf->GetNumberOfFragments();
       for(unsigned int i = 0; i < numfrag; i++)
         {        
-        const Fragment& frag = sqf->GetFragment(i);
-        const ByteValue *bv = frag.GetByteValue();
+       const  Fragment& frag = sqf->GetFragment(i);
+       const  ByteValue *bv = frag.GetByteValue();
         if(bv->GetLength())
       		{
         	const char *suid = UIDgen.Generate();
@@ -556,12 +556,12 @@ void XMLPrinter::Print(std::ostream& os)
   os << R"(<?xml version="1.0" encoding=")";
   if(ds.FindDataElement(CharacterEncoding))
     {
-    const DataElement &de = ds.GetDataElement(CharacterEncoding);
+   const  DataElement &de = ds.GetDataElement(CharacterEncoding);
     if( !de.IsEmpty() )
       {
       Attribute<0x8,0x5> at;
       at.SetFromDataElement( de );
-      const char* EncodingFromFile = at.GetValue(0);
+     const  char* EncodingFromFile = at.GetValue(0);
       if (!strcmp(EncodingFromFile,"ISO_IR 6"))
         os << "UTF-8";
       else if (!strcmp(EncodingFromFile,"ISO_IR 192"))

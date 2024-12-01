@@ -195,8 +195,8 @@ int main( int , char * [] )
 
   for ( unsigned int i = 0; i < mm; i++ )
     {
-    const double expectedValue = ( i*5.0*factor );
-    const double ratioOfDifference =
+   const  double expectedValue = ( i*5.0*factor );
+   const  double ratioOfDifference =
       fabs( xx[i] - expectedValue ) / expectedValue;
 
     if ( ratioOfDifference > tolerance )

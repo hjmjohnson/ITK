@@ -34,7 +34,7 @@ int source::read_into_segments( char * out, int len, image_info const & ii )
   // fast path (should even be inlined on most compiler)
   if( numsegs == 1 )
     {
-    const int nvalues = read(out, len);
+   const  int nvalues = read(out, len);
     assert( nvalues == len ); (void)nvalues;
     }
   else
@@ -45,7 +45,7 @@ int source::read_into_segments( char * out, int len, image_info const & ii )
     //const int buffer_size = numsegs;
     if( ii.get_planar_configuration() == 0 )
       {
-      const int llen = len / numsegs;
+     const  int llen = len / numsegs;
       char *sbuf[12]; // max possible is 12
       for( int s = 0; s < numsegs; ++s )
         {
@@ -54,14 +54,14 @@ int source::read_into_segments( char * out, int len, image_info const & ii )
       char values[12];
       for(int l = 0; l < llen; ++l )
         {
-        const int nvalues = read(values, numsegs);
+       const  int nvalues = read(values, numsegs);
         assert( nvalues == numsegs ); (void)nvalues;
         for( int c = 0; c < nc; ++c )
           {
           for( int p = 0; p < npadded; ++p )
             {
-            const int i = p + c * npadded;
-            const int j = (npadded - 1 - p) + c * npadded; // little endian
+           const  int i = p + c * npadded;
+           const  int j = (npadded - 1 - p) + c * npadded; // little endian
             *sbuf[i]++ = values[j];
             }
           }
@@ -71,7 +71,7 @@ int source::read_into_segments( char * out, int len, image_info const & ii )
       {
       if( numsegs == 3 )
         {
-        const int llen = len / numsegs;
+       const  int llen = len / numsegs;
         assert( ii.get_width()  == llen );
         size_t plane = (size_t)ii.get_width() * (size_t)ii.get_height() * 1;
         streampos_t pos = tell();

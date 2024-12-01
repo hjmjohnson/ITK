@@ -48,7 +48,7 @@ bool SurfaceReader::Read()
   else
   {
     // Try to find Surface Sequence
-    const DataSet & dsRoot = F->GetDataSet();
+   const  DataSet & dsRoot = F->GetDataSet();
     if (dsRoot.FindDataElement( Tag(0x0066, 0x0002) ))
     {
       res = ReadSurfaces();
@@ -160,8 +160,8 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
 
       if (processingAlgoSQ->GetNumberOfItems() > 0)  // Only one item (type 1)
       {
-        const Item &    processingAlgoItem = processingAlgoSQ->GetItem(1);
-        const DataSet & processingAlgoDS   = processingAlgoItem.GetNestedDataSet();
+       const  Item &    processingAlgoItem = processingAlgoSQ->GetItem(1);
+       const  DataSet & processingAlgoDS   = processingAlgoItem.GetNestedDataSet();
 
         //*****   Algorithm Family Code Sequence    *****//
         if( processingAlgoDS.FindDataElement( Tag(0x0066, 0x002F) ) )
@@ -170,8 +170,8 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
 
           if (algoFamilySQ->GetNumberOfItems() > 0)  // Only one item (type 1)
           {
-            const Item &    algoFamilyItem = algoFamilySQ->GetItem(1);
-            const DataSet & algoFamilyDS   = algoFamilyItem.GetNestedDataSet();
+           const  Item &    algoFamilyItem = algoFamilySQ->GetItem(1);
+           const  DataSet & algoFamilyDS   = algoFamilyItem.GetNestedDataSet();
 
             //*****   CODE SEQUENCE MACRO ATTRIBUTES   *****//
             SegmentHelper::BasicCodedEntry & processingAlgo = surface->GetProcessingAlgorithm();
@@ -235,7 +235,7 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
 
     if ( surfaceNormalsSQ->GetNumberOfItems() > 0)  // One Item shall be permitted
     {
-      const DataSet & surfaceNormalsDS = surfaceNormalsSQ->GetItem(1).GetNestedDataSet();
+     const  DataSet & surfaceNormalsDS = surfaceNormalsSQ->GetItem(1).GetNestedDataSet();
 
       // Number of Vectors
       Attribute<0x0066, 0x001E> numberOfVectors;
@@ -248,10 +248,10 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
       surface->SetVectorDimensionality( vectorDimensionality.GetValue() );
 
       // Vector Accuracy (Type 3)
-      const Tag vectorAccuracyTag = Tag(0x0066, 0x0020);
+     const  Tag vectorAccuracyTag = Tag(0x0066, 0x0020);
       if ( surfaceNormalsDS.FindDataElement( vectorAccuracyTag ) )
       {
-        const DataElement & vectorAccuracyDE = surfaceNormalsDS.GetDataElement( vectorAccuracyTag );
+       const  DataElement & vectorAccuracyDE = surfaceNormalsDS.GetDataElement( vectorAccuracyTag );
         if ( !vectorAccuracyDE.IsEmpty() )
         {
           Attribute<0x0066, 0x0020> vectorAccuracyAt;
@@ -260,10 +260,10 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
         }
       }
 
-      const Tag vectorCoordDataTag = Tag(0x0066, 0x0021);
+     const  Tag vectorCoordDataTag = Tag(0x0066, 0x0021);
       if( surfaceNormalsDS.FindDataElement( vectorCoordDataTag ) )
       {
-        const DataElement & de = surfaceNormalsDS.GetDataElement( vectorCoordDataTag );
+       const  DataElement & de = surfaceNormalsDS.GetDataElement( vectorCoordDataTag );
         surface->SetVectorCoordinateData( de );
       }
       else
@@ -389,7 +389,7 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
 
     if (typedSQ->GetNumberOfItems() > 0)
     {
-      const size_t nbItems = typedSQ->GetNumberOfItems();
+     const  size_t nbItems = typedSQ->GetNumberOfItems();
       MeshPrimitive::PrimitivesData & primitivesData= meshPrimitive->GetPrimitivesData();
       primitivesData.reserve( nbItems );
 
@@ -397,7 +397,7 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
       SequenceOfItems::ConstIterator itEnd= typedSQ->End();
       for (; it != itEnd; it++)
       {
-        const DataSet & typedPrimitivesDS = it->GetNestedDataSet();
+       const  DataSet & typedPrimitivesDS = it->GetNestedDataSet();
         // Primitive Sequence
         if ( typedPrimitivesDS.FindDataElement( Tag(0x0066, 0x0040)) )
         {
@@ -425,7 +425,7 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
 
   if (typedTag.GetElementTag() != 0)
   {
-    const DataElement & meshPrimitiveData = surfacePrimitivesDS.GetDataElement( typedTag );
+   const  DataElement & meshPrimitiveData = surfacePrimitivesDS.GetDataElement( typedTag );
     meshPrimitive->SetPrimitiveData( meshPrimitiveData );
   }
   else
@@ -444,7 +444,7 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
   bool                            findItem        = false;
   while( !findItem && itSegment != itEndSegment )
   {
-    const DataSet &                 segmentDS       = itSegment->GetNestedDataSet();
+   const  DataSet &                 segmentDS       = itSegment->GetNestedDataSet();
 
     //*****   Referenced Surface Sequence    *****//
     SmartPointer<SequenceOfItems>   refSurfaceSQ    = segmentDS.GetDataElement( Tag(0x0066, 0x002B) ).GetValueAsSQ();
@@ -452,7 +452,7 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
     SequenceOfItems::ConstIterator  itEndRefSurface = refSurfaceSQ->End();
     while( !findItem && itRefSurface != itEndRefSurface )
     {
-      const DataSet &                 refSurfaceDS       = itRefSurface->GetNestedDataSet();
+     const  DataSet &                 refSurfaceDS       = itRefSurface->GetNestedDataSet();
 
       // Referenced Surface Number
       Attribute<0x0066, 0x002C> refSurfaceNumberAt;
@@ -478,8 +478,8 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
 
           if (algoSQ->GetNumberOfItems() > 0)  // Only one item is a type 1
           {
-            const Item &    algoItem = algoSQ->GetItem(1);
-            const DataSet & algoDS   = algoItem.GetNestedDataSet();
+           const  Item &    algoItem = algoSQ->GetItem(1);
+           const  DataSet & algoDS   = algoItem.GetNestedDataSet();
 
             //*****   Algorithm Family Code Sequence    *****//
             if( algoDS.FindDataElement( Tag(0x0066, 0x002F) ) )
@@ -488,8 +488,8 @@ bool SurfaceReader::ReadSurface(const Item & surfaceItem, const unsigned long id
 
               if (algoFamilySQ->GetNumberOfItems() > 0)  // Only one item is a type 1
               {
-                const Item &    algoFamilyItem = algoFamilySQ->GetItem(1);
-                const DataSet & algoFamilyDS   = algoFamilyItem.GetNestedDataSet();
+               const  Item &    algoFamilyItem = algoFamilySQ->GetItem(1);
+               const  DataSet & algoFamilyDS   = algoFamilyItem.GetNestedDataSet();
 
                 //*****   CODE SEQUENCE MACRO ATTRIBUTES   *****//
                 SegmentHelper::BasicCodedEntry & algoFamily = surface->GetAlgorithmFamily();
@@ -577,7 +577,7 @@ bool SurfaceReader::ReadPointMacro(SmartPointer< Surface > surface, const DataSe
   }
   else
   {
-    const unsigned long numberOfSurfacePoints = (unsigned long) ( pointCoordDataDe.GetVL().GetLength() / (VR::GetLength(VR::OF) * 3) );
+   const  unsigned long numberOfSurfacePoints = (unsigned long) ( pointCoordDataDe.GetVL().GetLength() / (VR::GetLength(VR::OF) * 3) );
     surface->SetNumberOfSurfacePoints( numberOfSurfacePoints );
   }
 

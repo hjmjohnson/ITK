@@ -168,7 +168,7 @@ QuaternionRigidTransform<TParametersValueType>::ComputeJacobianWithRespectToPara
   jacobian[2][3] = jacobian[0][1];
 
   // compute derivatives for the translation part
-  unsigned int blockOffset = 4;
+  unsigned int const blockOffset = 4;
   for (unsigned int dim = 0; dim < SpaceDimension; ++dim)
   {
     jacobian[dim][blockOffset + dim] = 1.0;
@@ -195,10 +195,10 @@ template <typename TParametersValueType>
 void
 QuaternionRigidTransform<TParametersValueType>::ComputeMatrix()
 {
-  VnlQuaternionType conjugateRotation = m_Rotation.conjugate();
+  VnlQuaternionType const conjugateRotation = m_Rotation.conjugate();
   // this is done to compensate for the transposed representation
   // between VNL and ITK
-  MatrixType newMatrix = conjugateRotation.rotation_matrix_transpose();
+  MatrixType const newMatrix = conjugateRotation.rotation_matrix_transpose();
   this->SetVarMatrix(newMatrix);
 }
 
@@ -206,7 +206,7 @@ template <typename TParametersValueType>
 void
 QuaternionRigidTransform<TParametersValueType>::ComputeMatrixParameters()
 {
-  VnlQuaternionType quat(this->GetMatrix().GetVnlMatrix());
+  VnlQuaternionType const quat(this->GetMatrix().GetVnlMatrix());
 
   m_Rotation = quat.conjugate();
 }

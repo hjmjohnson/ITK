@@ -38,7 +38,7 @@ SpatialFunctionImageEvaluatorFilter<TSpatialFunction, TInputImage, TOutputImage>
   itkDebugMacro("SpatialFunctionImageEvaluatorFilter::GenerateData() called");
 
   // Allocate the output image
-  typename TOutputImage::Pointer outputPtr = this->GetOutput();
+  typename TOutputImage::Pointer const outputPtr = this->GetOutput();
   outputPtr->SetBufferedRegion(outputPtr->GetRequestedRegion());
   outputPtr->Allocate();
 
@@ -58,7 +58,7 @@ SpatialFunctionImageEvaluatorFilter<TSpatialFunction, TInputImage, TOutputImage>
   // Walk the output image, evaluating the spatial function at each pixel
   for (; !outIt.IsAtEnd(); ++outIt)
   {
-    typename TOutputImage::IndexType index = outIt.GetIndex();
+    typename TOutputImage::IndexType const index = outIt.GetIndex();
     outputPtr->TransformIndexToPhysicalPoint(index, evalPoint);
     value = m_PixelFunction->Evaluate(evalPoint);
 

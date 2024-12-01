@@ -35,18 +35,18 @@ MaximumEntropyThresholdCalculator<THistogram, TOutput>::GenerateData()
   {
     itkExceptionMacro("Histogram is empty");
   }
-  ProgressReporter progress(this, 0, histogram->GetSize(0));
+  ProgressReporter const progress(this, 0, histogram->GetSize(0));
   if (histogram->GetSize(0) == 1)
   {
     this->GetOutput()->Set(static_cast<OutputType>(histogram->GetMeasurement(0, 0)));
   }
 
-  unsigned int size = histogram->GetSize(0);
+  unsigned int const size = histogram->GetSize(0);
 
   typename HistogramType::InstanceIdentifier threshold = 0;
 
   const double tolerance = itk::NumericTraits<double>::epsilon();
-  int          total = histogram->GetTotalFrequency();
+  int const    total = histogram->GetTotalFrequency();
 
   std::vector<double> norm_histo(size); // normalized histogram
   for (int ih = 0; static_cast<unsigned int>(ih) < size; ++ih)
@@ -111,7 +111,7 @@ MaximumEntropyThresholdCalculator<THistogram, TOutput>::GenerateData()
       }
     }
 
-    double tot_ent = ent_back + ent_obj; // total entropy
+    double const tot_ent = ent_back + ent_obj; // total entropy
     // IJ.log(""+max_ent+"  "+tot_ent);
 
     constexpr double tol = 0.00001;

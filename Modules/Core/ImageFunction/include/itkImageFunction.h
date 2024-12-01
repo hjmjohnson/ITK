@@ -179,7 +179,7 @@ public:
     /* Call IsInsideBuffer to test against BufferedRegion bounds.
      * TransformPhysicalPointToContinuousIndex tests against
      * LargestPossibleRegion */
-    bool isInside = IsInsideBuffer(index);
+    bool const isInside = IsInsideBuffer(index);
     return isInside;
   }
 

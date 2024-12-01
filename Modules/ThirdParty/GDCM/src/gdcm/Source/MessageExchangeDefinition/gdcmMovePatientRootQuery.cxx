@@ -222,7 +222,7 @@ bool MovePatientRootQuery::ValidateQuery(bool inStrict) const
     unsigned int thePresentTagCount = 0;
     for (itor = ds.Begin(); itor != ds.End(); itor++)
       {
-      const Tag &t = itor->GetTag();
+     const  Tag &t = itor->GetTag();
       if (t == level.GetTag()) continue;
       if (t == language.GetTag()) continue;
       assert( !tags.empty() );

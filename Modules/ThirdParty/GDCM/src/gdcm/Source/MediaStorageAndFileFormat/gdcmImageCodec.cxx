@@ -540,7 +540,7 @@ bool ImageCodec::DoOverlayCleanup(std::istream &is, std::ostream &os)
       // On Windows, is.read and os.write are expensive operations.
       // If we called it for each value then conversion would be extremely slow.
       // Therefore we read/mask/write 1000 values at once.
-      const unsigned int bufferSize = 1000;
+     const  unsigned int bufferSize = 1000;
       std::vector<uint16_t> buffer(bufferSize);
       while (is)
         {
@@ -628,7 +628,7 @@ bool ImageCodec::DecodeByStreams(std::istream &is, std::ostream &os)
     //DoYBR(*cur_is,pi_os);
     //cur_is = &pi_os;
     {
-      const JPEGCodec *c = dynamic_cast<const JPEGCodec*>(this);
+     const  JPEGCodec *c = dynamic_cast<const JPEGCodec*>(this);
       if( c )
         {
         // The following is required for very special case of color space conversion
@@ -648,7 +648,7 @@ bool ImageCodec::DecodeByStreams(std::istream &is, std::ostream &os)
       {
       // US-GE-4AICL142.dcm
       // Hopefully it has been done by the JPEG decoder itself...
-      const JPEGCodec *c = dynamic_cast<const JPEGCodec*>(this);
+     const  JPEGCodec *c = dynamic_cast<const JPEGCodec*>(this);
       if( !c )
         {
         //gdcmErrorMacro( "YBR_FULL_422 is not implemented in GDCM. Image will be displayed incorrectly" );

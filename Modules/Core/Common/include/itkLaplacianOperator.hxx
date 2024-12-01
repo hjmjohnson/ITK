@@ -35,7 +35,7 @@ template <typename TPixel, unsigned int VDimension, typename TAllocator>
 void
 LaplacianOperator<TPixel, VDimension, TAllocator>::CreateOperator()
 {
-  CoefficientVector coefficients = this->GenerateCoefficients();
+  CoefficientVector const coefficients = this->GenerateCoefficients();
 
   this->Fill(coefficients);
 }
@@ -70,14 +70,14 @@ LaplacianOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients() -> Coe
   this->SetRadius(r);
 
   // Create a vector of the correct size to hold the coefficients.
-  unsigned int      w = this->Size();
-  CoefficientVector coeffP(w);
+  unsigned int const w = this->Size();
+  CoefficientVector  coeffP(w);
 
   // Set the coefficients
   double sum = 0.0;
   for (unsigned int i = 0; i < 2 * VDimension; i += 2)
   {
-    OffsetValueType stride = this->GetStride(i / 2);
+    OffsetValueType const stride = this->GetStride(i / 2);
 
     const double hsq = m_DerivativeScalings[i / 2] * m_DerivativeScalings[i / 2];
     coeffP[w / 2 - stride] = coeffP[w / 2 + stride] = hsq;

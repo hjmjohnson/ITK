@@ -100,8 +100,8 @@ VR DataSetHelper::ComputeVR(File const &file, DataSet const &ds, const Tag& tag)
     // New public/private tag, let's forward what is found in the file (hopefully correct)
     if( ds.FindDataElement( t ) )
       {
-      const DataElement &de = ds.GetDataElement( t );
-      const VR &devr = de.GetVR();
+     const  DataElement &de = ds.GetDataElement( t );
+     const  VR &devr = de.GetVR();
       if( devr != VR::INVALID && devr != VR::UN )
         {
         gdcmWarningMacro("Please report. Missing dict entry for: [" << (owner ? owner : "<null>") << "]" << " de is: "  << de );
@@ -120,8 +120,8 @@ VR DataSetHelper::ComputeVR(File const &file, DataSet const &ds, const Tag& tag)
   {
     if( ds.FindDataElement( t ) )
       {
-      const DataElement &de = ds.GetDataElement( t );
-      const VR &devr = de.GetVR();
+     const  DataElement &de = ds.GetDataElement( t );
+     const  VR &devr = de.GetVR();
       if( devr != refvr )
         {
         if(!refvr.Compatible(devr)) {
@@ -142,9 +142,9 @@ VR DataSetHelper::ComputeVR(File const &file, DataSet const &ds, const Tag& tag)
       {
       // In case of SAX parser, we would have had to process Pixel Representation already:
       Attribute<0x0028,0x0103> at;
-      const Tag &pixelrep = at.GetTag();
+     const  Tag &pixelrep = at.GetTag();
       assert( pixelrep < t );
-      const DataSet &rootds = file.GetDataSet();
+     const  DataSet &rootds = file.GetDataSet();
       // FIXME
       // PhilipsWith15Overlays.dcm has a Private SQ with public elements such as
       // 0028,3002, so we cannot look up element in current dataset, but have to get the root dataset
@@ -223,8 +223,8 @@ VR DataSetHelper::ComputeVR(File const &file, DataSet const &ds, const Tag& tag)
       vr = VR::OW;
       if( ds.FindDataElement( t ) )
         {
-        const DataElement &de = ds.GetDataElement( t );
-        const gdcm::SequenceOfFragments * sqf = de.GetSequenceOfFragments();
+       const  DataElement &de = ds.GetDataElement( t );
+       const  gdcm::SequenceOfFragments * sqf = de.GetSequenceOfFragments();
         if( sqf ) vr = VR::OB;
         }
       }
@@ -259,8 +259,8 @@ VR DataSetHelper::ComputeVR(File const &file, DataSet const &ds, const Tag& tag)
         // no clue which VR to pick, try to re-use the one from the file:
         if( ds.FindDataElement( t ) )
           {
-          const DataElement &de = ds.GetDataElement( t );
-          const VR &devr = de.GetVR();
+         const  DataElement &de = ds.GetDataElement( t );
+         const  VR &devr = de.GetVR();
           if( devr != VR::INVALID && devr != VR::UN )
             {
             gdcmWarningMacro("Possibly incorrect VR for: " << de );
@@ -326,7 +326,7 @@ SequenceOfItems* DataSetHelper::ComputeSQFromByteValue(File const & file, DataSe
       if( ts.GetNegociatedType() == TransferSyntax::Implicit )
         {
         assert( de.GetVR() == VR::INVALID );
-        const ByteValue *bv = de.GetByteValue();
+       const  ByteValue *bv = de.GetByteValue();
         assert( bv );
         SequenceOfItems *sqi = new SequenceOfItems;
         sqi->SetLength( bv->GetLength() );
@@ -338,7 +338,7 @@ SequenceOfItems* DataSetHelper::ComputeSQFromByteValue(File const & file, DataSe
       else
         {
         assert( de.GetVR() == VR::UN ); // cp 246, IVRLE SQ
-        const ByteValue *bv = de.GetByteValue();
+       const  ByteValue *bv = de.GetByteValue();
         assert( bv );
         SequenceOfItems *sqi = new SequenceOfItems;
         sqi->SetLength( bv->GetLength() );

@@ -87,10 +87,10 @@ itkGEImageIOTest(int argc, char * argv[])
   {
     return EXIT_FAILURE;
   }
-  std::string               failmode(argv[1]);
-  std::string               filetype(argv[2]);
-  std::string               filename(argv[3]);
-  bool                      Failmode = failmode == std::string("true");
+  std::string const         failmode(argv[1]);
+  std::string const         filetype(argv[2]);
+  std::string const         filename(argv[3]);
+  const bool                Failmode = failmode == std::string("true");
   itk::ImageIOBase::Pointer io;
   if (filetype == "GE4")
   {

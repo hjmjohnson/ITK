@@ -89,7 +89,7 @@ bool IconImage::GetBuffer(char *buffer) const
     // KODAK_CompressedIcon.dcm
     // contains a compressed Icon Sequence, one has to guess this is lossless jpeg...
 #ifdef MDEBUG
-    const SequenceOfFragments *sqf = PixelData.GetSequenceOfFragments();
+   const  SequenceOfFragments *sqf = PixelData.GetSequenceOfFragments();
     std::ofstream os( "/tmp/kodak.ljpeg", std::ios::binary );
     sqf->WriteBuffer( os );
 #endif

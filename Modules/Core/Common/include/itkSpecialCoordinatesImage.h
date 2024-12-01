@@ -204,7 +204,7 @@ public:
   const TPixel &
   GetPixel(const IndexType & index) const
   {
-    OffsetValueType offset = this->FastComputeOffset(index);
+    OffsetValueType const offset = this->FastComputeOffset(index);
     return ((*m_Buffer)[offset]);
   }
 

@@ -47,7 +47,7 @@ LabelMapFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   Superclass::GenerateInputRequestedRegion();
 
   // We need all the input.
-  InputImagePointer input = const_cast<InputImageType *>(this->GetInput());
+  InputImagePointer const input = const_cast<InputImageType *>(this->GetInput());
 
   if (!input)
   {

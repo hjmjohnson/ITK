@@ -211,9 +211,9 @@ Retrieved from: http://en.literateprograms.org/Median_cut_algorithm_(C_Plus_Plus
     //Point* Points = (Point*)malloc(sizeof(Point) * numPoints);
     Point* Points = new Point[numPoints];
     assert( Points );
-    const ByteValue *bv = PixelData.GetByteValue();
+   const  ByteValue *bv = PixelData.GetByteValue();
     assert( bv );
-    const unsigned char *inbuffer = (const unsigned char*)bv->GetPointer();
+   const  unsigned char *inbuffer = (const unsigned char*)bv->GetPointer();
     assert( inbuffer );
     size_t bvlen = bv->GetLength(); (void)bvlen;
     assert( bvlen == (size_t) numPoints * 3 ); // only 8bits RGB please
@@ -293,7 +293,7 @@ Retrieved from: http://en.literateprograms.org/Median_cut_algorithm_(C_Plus_Plus
 
       for(int i = 0; i < numPoints; i++)
         {
-        const unsigned char *currentcolor = inbuffer + 3 * i;
+       const  unsigned char *currentcolor = inbuffer + 3 * i;
         for(size_t j = 0; j < (size_t)block.numPoints(); j++)
           {
           assert( currentcolor < inbuffer + bvlen );
@@ -337,7 +337,7 @@ void IconImageGenerator::BuildLUT( Bitmap & bitmap, unsigned int maxcolor )
   std::list<Point>::const_iterator it = palette.begin();
   for( ; it != palette.end(); ++it )
     {
-    Point const & p = *it;
+    const Point & p = *it;
     for( int i = 0; i < 3; ++i )
       buffer[i].push_back( p.x[i] );
     }
@@ -539,7 +539,7 @@ f. If a Palette Color lookup Table is used, an 8 Bit Allocated (0028,0100) shall
   size_t framelen = P->GetBufferLength();
   if( P->GetNumberOfDimensions() == 3 )
     {
-    const unsigned int *dims = P->GetDimensions();
+   const  unsigned int *dims = P->GetDimensions();
     assert( framelen % dims[2] == 0 );
     framelen /= dims[2];
     }
@@ -598,10 +598,10 @@ f. If a Palette Color lookup Table is used, an 8 Bit Allocated (0028,0100) shall
       // - Read the value from window/level to get better min,max value
       // - iterate over all possible value to find the min,max as we are looping
       // over all values anyway
-      const double min = 0; // oripf.GetMin();
-      const double max = 65536 - 1; //oripf.GetMax();
+     const  double min = 0; // oripf.GetMin();
+     const  double max = 65536 - 1; //oripf.GetMax();
       r.SetSlope( 255. / (max - min + 0) ); // UINT8_MAX
-      const double step = min * r.GetSlope();
+     const  double step = min * r.GetSlope();
       r.SetIntercept( 0 - step );
 
       // paranoid self check:
@@ -824,10 +824,10 @@ f. If a Palette Color lookup Table is used, an 8 Bit Allocated (0028,0100) shall
       // - Read the value from window/level to get better min,max value
       // - iterate over all possible value to find the min,max as we are looping
       // over all values anyway
-      const double min = 0; // oripf.GetMin();
-      const double max = 65536 - 1; //oripf.GetMax();
+     const  double min = 0; // oripf.GetMin();
+     const  double max = 65536 - 1; //oripf.GetMax();
       r.SetSlope( 255. / (max - min + 0) ); // UINT8_MAX
-      const double step = min * r.GetSlope();
+     const  double step = min * r.GetSlope();
       r.SetIntercept( 0 - step );
 
       // paranoid self check:
@@ -888,11 +888,11 @@ f. If a Palette Color lookup Table is used, an 8 Bit Allocated (0028,0100) shall
       {
       void *p = vbuffer2.data();
       size_t len = vbuffer2.size();
-      const PixelFormat &pf = I->GetPixelFormat();
+     const  PixelFormat &pf = I->GetPixelFormat();
       assert( pf.GetSamplesPerPixel() == 1 );
       if( Internals->UseOutsideValuePixel )
         {
-        const double d = Internals->OutsideValuePixel;
+       const  double d = Internals->OutsideValuePixel;
         switch ( pf.GetScalarType() )
           {
         case PixelFormat::UINT8:
@@ -951,7 +951,7 @@ f. If a Palette Color lookup Table is used, an 8 Bit Allocated (0028,0100) shall
         }
       }
     r.SetSlope( 255. / (max - min + 0) ); // UINT8_MAX
-    const double step = min * r.GetSlope();
+   const  double step = min * r.GetSlope();
     r.SetIntercept( 0 - step );
 
     // paranoid self check:

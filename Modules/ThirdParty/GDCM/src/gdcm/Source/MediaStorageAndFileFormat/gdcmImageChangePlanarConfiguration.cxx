@@ -64,10 +64,10 @@ bool ImageChangePlanarConfiguration::Change()
     {
     for(unsigned int z = 0; z < dims[2]; ++z)
       {
-      const char *frame = p + z * framesize;
-      const void *r = frame + 0;
-      const void *g = frame + size;
-      const void *b = frame + size + size;
+     const  char *frame = p + z * framesize;
+     const  void *r = frame + 0;
+     const  void *g = frame + size;
+     const  void *b = frame + size + size;
 
       void *framecopy = copy + z * framesize;
       if( pf.GetBitsAllocated() == 16 )
@@ -85,7 +85,7 @@ bool ImageChangePlanarConfiguration::Change()
     assert( PlanarConfiguration == 1 );
     for(unsigned int z = 0; z < dims[2]; ++z)
       {
-      const void *frame = p + z * framesize;
+     const  void *frame = p + z * framesize;
       char *framecopy = copy + z * framesize;
       void *r = framecopy + 0;
       void *g = framecopy + size;

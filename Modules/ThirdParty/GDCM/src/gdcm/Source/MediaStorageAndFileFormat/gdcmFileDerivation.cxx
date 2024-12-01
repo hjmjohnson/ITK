@@ -464,11 +464,11 @@ bool FileDerivation::Derive()
     {
     // (0008,0008) CS [ORIGINAL\SECONDARY]                     #  18, 2 ImageType
     Attribute<0x0008,0x0008> at3;
-    static const CSComp values[] = {"DERIVED","SECONDARY"};
+    const static CSComp values[] = {"DERIVED","SECONDARY"};
     at3.SetValues( values, 2, true ); // true => copy data !
     if( ds.FindDataElement( at3.GetTag() ) )
       {
-      const DataElement &de = ds.GetDataElement( at3.GetTag() );
+     const  DataElement &de = ds.GetDataElement( at3.GetTag() );
       if( !de.IsEmpty() )
         at3.SetFromDataElement( de );
       // Make sure that value #1 is at least 'DERIVED', so override in all cases:

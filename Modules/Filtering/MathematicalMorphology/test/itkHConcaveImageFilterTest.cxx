@@ -64,7 +64,7 @@ itkHConcaveImageFilterTest(int argc, char * argv[])
 
   ITK_EXERCISE_BASIC_OBJECT_METHODS(hConcaveFilter, HConcaveImageFilter, ImageToImageFilter);
 
-  itk::SimpleFilterWatcher watchConcave(hConcaveFilter, "HConcaveImageFilter");
+  itk::SimpleFilterWatcher const watchConcave(hConcaveFilter, "HConcaveImageFilter");
 
   // Set up the filter
   auto height = static_cast<HConcaveFilterType::InputImagePixelType>(std::stod(argv[3]));

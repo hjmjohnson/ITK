@@ -238,7 +238,7 @@ public:
   void
   SetNumberOfLayers(const unsigned int n) override
   {
-    unsigned int nm = std::max(this->GetMinimumNumberOfLayers(), n);
+    unsigned int const nm = std::max(this->GetMinimumNumberOfLayers(), n);
 
     if (nm != this->GetNumberOfLayers())
     {
@@ -253,7 +253,7 @@ public:
   InitializeIteration() override
   {
     Superclass::InitializeIteration();
-    ValueType rmschange = this->GetRMSChange();
+    ValueType const rmschange = this->GetRMSChange();
 
     if ((this->GetElapsedIterations() == 0) || (m_RefitIteration == m_MaxRefitIteration) ||
         (rmschange <= m_RMSChangeNormalProcessTrigger) || (this->ActiveLayerCheckBand()))

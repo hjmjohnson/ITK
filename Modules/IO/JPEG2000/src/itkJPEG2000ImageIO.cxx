@@ -162,7 +162,7 @@ JPEG2000ImageIO::ReadImageInformation()
   /* decode the code-stream */
   /* ---------------------- */
 
-  std::string extension = itksys::SystemTools::GetFilenameLastExtension(this->m_FileName);
+  const std::string extension = itksys::SystemTools::GetFilenameLastExtension(this->m_FileName);
 
   if (extension == ".j2k")
   {
@@ -474,7 +474,7 @@ JPEG2000ImageIO::Read(void * buffer)
                                                               << "Reason: opj_read_header returns false");
   }
 
-  ImageIORegion regionToRead = this->GetIORegion();
+  const ImageIORegion regionToRead = this->GetIORegion();
 
   ImageIORegion::SizeType  size = regionToRead.GetSize();
   ImageIORegion::IndexType start = regionToRead.GetIndex();
@@ -528,16 +528,16 @@ JPEG2000ImageIO::Read(void * buffer)
     OPJ_UINT32 l_tile_index;
     OPJ_UINT32 l_data_size;
     OPJ_UINT32 l_nb_comps;
-    bool       tileHeaderRead = opj_read_tile_header(this->m_Internal->m_Dinfo,
-                                               &l_tile_index,
-                                               &l_data_size,
-                                               &l_current_tile_x0,
-                                               &l_current_tile_y0,
-                                               &l_current_tile_x1,
-                                               &l_current_tile_y1,
-                                               &l_nb_comps,
-                                               &l_go_on,
-                                               l_stream);
+    const bool tileHeaderRead = opj_read_tile_header(this->m_Internal->m_Dinfo,
+                                                     &l_tile_index,
+                                                     &l_data_size,
+                                                     &l_current_tile_x0,
+                                                     &l_current_tile_y0,
+                                                     &l_current_tile_x1,
+                                                     &l_current_tile_y1,
+                                                     &l_nb_comps,
+                                                     &l_go_on,
+                                                     l_stream);
 
     if (!tileHeaderRead)
     {
@@ -580,7 +580,7 @@ JPEG2000ImageIO::Read(void * buffer)
         l_max_data_size = l_data_size;
       }
 
-      bool decodeTileData =
+      const bool decodeTileData =
         opj_decode_tile_data(this->m_Internal->m_Dinfo, l_tile_index, l_data, l_data_size, l_stream);
 
       if (!decodeTileData)
@@ -739,7 +739,7 @@ JPEG2000ImageIO::Write(const void * buffer)
   opj_cparameters_t parameters;
   opj_set_default_encoder_parameters(&parameters);
 
-  std::string extension = itksys::SystemTools::GetFilenameLastExtension(this->m_FileName.c_str());
+  const std::string extension = itksys::SystemTools::GetFilenameLastExtension(this->m_FileName.c_str());
   if (extension == ".j2k")
   {
     parameters.cod_format = static_cast<int>(JPEG2000ImageIOInternal::DecodingFormatEnum::J2K_CFMT);
@@ -793,7 +793,7 @@ JPEG2000ImageIO::Write(const void * buffer)
     parameters.cp_comment = (char *)malloc(commentLength);
     snprintf(parameters.cp_comment, commentLength, "%s%s with JPWL", comment, version);
 #else
-    size_t commentLength = clen + strlen(version) + 11;
+    size_t const commentLength = clen + strlen(version) + 11;
     parameters.cp_comment = (char *)malloc(commentLength);
     snprintf(parameters.cp_comment, commentLength, "%s%s", comment, version);
 #endif
@@ -809,8 +809,8 @@ JPEG2000ImageIO::Write(const void * buffer)
 
   //--------------------------------------------------------
   // Copy the contents into the image structure
-  int w = this->m_Dimensions[0];
-  int h = this->m_Dimensions[1];
+  const int w = this->m_Dimensions[0];
+  const int h = this->m_Dimensions[1];
 
 
   // Compute the proper number of resolutions to use.
@@ -894,16 +894,16 @@ JPEG2000ImageIO::Write(const void * buffer)
 
   l_image->numcomps = this->GetNumberOfComponents();
 
-  int subsampling_dx = parameters.subsampling_dx;
-  int subsampling_dy = parameters.subsampling_dy;
+  const int subsampling_dx = parameters.subsampling_dx;
+  const int subsampling_dy = parameters.subsampling_dy;
   l_image->x0 = parameters.image_offset_x0;
   l_image->y0 = parameters.image_offset_y0;
   l_image->x1 = !l_image->x0 ? (w - 1) * subsampling_dx + 1 : l_image->x0 + (w - 1) * subsampling_dx + 1;
   l_image->y1 = !l_image->y0 ? (h - 1) * subsampling_dy + 1 : l_image->y0 + (h - 1) * subsampling_dy + 1;
 
   // HERE, copy the buffer
-  SizeValueType index = 0;
-  SizeValueType numberOfPixels = SizeValueType(w) * SizeValueType(h);
+  SizeValueType       index = 0;
+  const SizeValueType numberOfPixels = SizeValueType(w) * SizeValueType(h);
   itkDebugMacro(" START COPY BUFFER");
   if (this->GetComponentType() == IOComponentEnum::UCHAR)
   {
@@ -1088,13 +1088,13 @@ JPEG2000ImageIO::ComputeRegionInTileBoundaries(unsigned int    dimension,
                                                SizeValueType   tileSize,
                                                ImageIORegion & streamableRegion) const
 {
-  SizeValueType  requestedSize = streamableRegion.GetSize(dimension);
-  IndexValueType requestedIndex = streamableRegion.GetIndex(dimension);
+  const SizeValueType  requestedSize = streamableRegion.GetSize(dimension);
+  const IndexValueType requestedIndex = streamableRegion.GetIndex(dimension);
 
-  IndexValueType startQuantizedInTileSize = requestedIndex - (requestedIndex % tileSize);
-  IndexValueType requestedEnd = requestedIndex + requestedSize;
-  SizeValueType  extendedSize = requestedEnd - startQuantizedInTileSize;
-  SizeValueType  tileRemanent = extendedSize % tileSize;
+  const IndexValueType startQuantizedInTileSize = requestedIndex - (requestedIndex % tileSize);
+  const IndexValueType requestedEnd = requestedIndex + requestedSize;
+  const SizeValueType  extendedSize = requestedEnd - startQuantizedInTileSize;
+  const SizeValueType  tileRemanent = extendedSize % tileSize;
 
   SizeValueType sizeQuantizedInTileSize = extendedSize;
 
@@ -1103,7 +1103,7 @@ JPEG2000ImageIO::ComputeRegionInTileBoundaries(unsigned int    dimension,
     sizeQuantizedInTileSize += tileSize - tileRemanent;
   }
 
-  IndexValueType endQuantizedInTileSize = startQuantizedInTileSize + sizeQuantizedInTileSize - 1;
+  const IndexValueType endQuantizedInTileSize = startQuantizedInTileSize + sizeQuantizedInTileSize - 1;
 
   if (endQuantizedInTileSize > static_cast<int>(this->GetDimensions(dimension)))
   {

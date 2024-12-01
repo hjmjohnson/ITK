@@ -176,11 +176,11 @@ static bool parsej2k_imp( const char * const stream, const size_t file_size, boo
 
       if( marker == COD )
         {
-        const uint8_t MCTransformation = *(cur+4);
+       const  uint8_t MCTransformation = *(cur+4);
         if( MCTransformation == 0x0 ) *mct = false;
         else if( MCTransformation == 0x1 ) *mct = true;
         else return false;
-        const uint8_t Transformation = *(cur+9);
+       const  uint8_t Transformation = *(cur+9);
         if( Transformation == 0x0 ) { *lossless = false; return true; }
         else if( Transformation == 0x1 ) *lossless = true;
         else return false;
@@ -214,7 +214,7 @@ static bool parsejp2_imp( const char * const stream, const size_t file_size, boo
       }
     if( marker == JP2C )
       {
-      const size_t start = cur - stream;
+     const  size_t start = cur - stream;
       if( !len64 )
         {
         len64 = (size_t)(file_size - start + 8);
@@ -222,7 +222,7 @@ static bool parsejp2_imp( const char * const stream, const size_t file_size, boo
       assert( len64 >= 8 );
       return parsej2k_imp( cur, (size_t)(len64 - 8), lossless, mct );
       }
-      const size_t lenmarker = (size_t)(len64 - 8);
+     const  size_t lenmarker = (size_t)(len64 - 8);
       cur += lenmarker;
     }
 
@@ -451,7 +451,7 @@ void JPEG2000Codec::SetNumberOfThreadsForDecompression( int nThreads)
 #if ((OPJ_VERSION_MAJOR == 2 && OPJ_VERSION_MINOR >= 3) || (OPJ_VERSION_MAJOR > 2))
   if( nThreads < 0 )
   {
-    const int x = opj_get_num_cpus();
+   const  int x = opj_get_num_cpus();
     Internals->nNumberOfThreadsForDecompression = x == 1 ? 0 : x;
   }
   else
@@ -518,8 +518,8 @@ bool JPEG2000Codec::Decode(DataElement const &in, DataElement &out)
 {
   if( NumberOfDimensions == 2 )
     {
-    const SequenceOfFragments *sf = in.GetSequenceOfFragments();
-    const ByteValue *j2kbv = in.GetByteValue();
+   const  SequenceOfFragments *sf = in.GetSequenceOfFragments();
+   const  ByteValue *j2kbv = in.GetByteValue();
     if( !sf && !j2kbv ) return false;
     SmartPointer<SequenceOfFragments> sf_bug = new SequenceOfFragments;
     if ( j2kbv )
@@ -566,7 +566,7 @@ bool JPEG2000Codec::Decode(DataElement const &in, DataElement &out)
      * MM: hopefully this is the standard so people are following it ...
      */
     //#ifdef SUPPORT_MULTIFRAMESJ2K_ONLY
-    const SequenceOfFragments *sf = in.GetSequenceOfFragments();
+   const  SequenceOfFragments *sf = in.GetSequenceOfFragments();
     if( !sf ) return false;
     std::stringstream os;
     if( sf->GetNumberOfFragments() != Dimensions[2] )
@@ -577,9 +577,9 @@ bool JPEG2000Codec::Decode(DataElement const &in, DataElement &out)
     for(unsigned int i = 0; i < sf->GetNumberOfFragments(); ++i)
       {
       std::stringstream is;
-      const Fragment &frag = sf->GetFragment(i);
+     const  Fragment &frag = sf->GetFragment(i);
       if( frag.IsEmpty() ) return false;
-      const ByteValue *bv = frag.GetByteValue();
+     const  ByteValue *bv = frag.GetByteValue();
       if( !bv ) return false;
       size_t bv_len = bv->GetLength();
       char *mybuffer = new char[bv_len];
@@ -1225,8 +1225,8 @@ bool JPEG2000Codec::CodeFrameIntoBuffer(char * outdata, size_t outlen, size_t & 
     }
 
   if(parameters.cp_comment == nullptr) {
-    const char comment[] = "Created by GDCM/OpenJPEG version %s";
-    const char * vers = opj_version();
+   const  char comment[] = "Created by GDCM/OpenJPEG version %s";
+   const  char * vers = opj_version();
     parameters.cp_comment = (char*)malloc(strlen(comment) + 10);
     snprintf( parameters.cp_comment, strlen(comment) + 10, comment, vers );
     /* no need to delete parameters.cp_comment on exit */
@@ -1379,13 +1379,13 @@ bool JPEG2000Codec::Code(DataElement const &in, DataElement &out)
 
   for(unsigned int dim = 0; dim < dims[2]; ++dim)
     {
-    const char *inputdata = input + dim * image_len;
+   const  char *inputdata = input + dim * image_len;
 
     std::vector<char> rgbyteCompressed;
     rgbyteCompressed.resize(image_width * image_height * 4);
 
     size_t cbyteCompressed;
-    const bool b = this->CodeFrameIntoBuffer((char*)rgbyteCompressed.data(), rgbyteCompressed.size(), cbyteCompressed, inputdata, inputlength );
+   const  bool b = this->CodeFrameIntoBuffer((char*)rgbyteCompressed.data(), rgbyteCompressed.size(), cbyteCompressed, inputdata, inputlength );
     if( !b ) return false;
 
     Fragment frag;
@@ -1722,7 +1722,7 @@ bool JPEG2000Codec::DecodeExtent(
     std::pair<char*,size_t> raw_len = this->DecodeByStreamsCommon(dummy_buffer, buf_size);
     if( !raw_len.first || !raw_len.second ) return false;
     // check pixel format *after* DecodeByStreamsCommon !
-    const PixelFormat & pf2 = this->GetPixelFormat();
+   const  PixelFormat & pf2 = this->GetPixelFormat();
     // SC16BitsAllocated_8BitsStoredJ2K.dcm
     if( pf.GetSamplesPerPixel() != pf2.GetSamplesPerPixel()
      || pf.GetBitsAllocated() != pf2.GetBitsAllocated()
@@ -1736,11 +1736,11 @@ bool JPEG2000Codec::DecodeExtent(
       }
 
     char *raw = raw_len.first;
-    const unsigned int rowsize = xmax - xmin + 1;
-    const unsigned int colsize = ymax - ymin + 1;
-    const unsigned int bytesPerPixel = pf.GetPixelSize();
+   const  unsigned int rowsize = xmax - xmin + 1;
+   const  unsigned int colsize = ymax - ymin + 1;
+   const  unsigned int bytesPerPixel = pf.GetPixelSize();
 
-    const char *tmpBuffer1 = raw;
+   const  char *tmpBuffer1 = raw;
     unsigned int z = 0;
     for (unsigned int y = ymin; y <= ymax; ++y)
       {
@@ -1783,7 +1783,7 @@ bool JPEG2000Codec::DecodeExtent(
       is.seekg( thestart + curoffset + 8 * z, std::ios::beg );
       is.seekg( 8, std::ios::cur );
 
-      const size_t buf_size = offsets[z];
+     const  size_t buf_size = offsets[z];
       char *dummy_buffer = new char[ buf_size ];
       is.read( dummy_buffer, buf_size );
       std::pair<char*,size_t> raw_len = this->DecodeByStreamsCommon(dummy_buffer, buf_size);
@@ -1791,7 +1791,7 @@ bool JPEG2000Codec::DecodeExtent(
       delete[] dummy_buffer;
       if( !raw_len.first || !raw_len.second ) return false;
       // check pixel format *after* DecodeByStreamsCommon !
-      const PixelFormat & pf2 = this->GetPixelFormat();
+     const  PixelFormat & pf2 = this->GetPixelFormat();
       if( pf.GetSamplesPerPixel() != pf2.GetSamplesPerPixel()
        || pf.GetBitsAllocated() != pf2.GetBitsAllocated()
       )
@@ -1802,11 +1802,11 @@ bool JPEG2000Codec::DecodeExtent(
 
 
       char *raw = raw_len.first;
-      const unsigned int rowsize = xmax - xmin + 1;
-      const unsigned int colsize = ymax - ymin + 1;
-      const unsigned int bytesPerPixel = pf.GetPixelSize();
+     const  unsigned int rowsize = xmax - xmin + 1;
+     const  unsigned int colsize = ymax - ymin + 1;
+     const  unsigned int bytesPerPixel = pf.GetPixelSize();
 
-      const char *tmpBuffer1 = raw;
+     const  char *tmpBuffer1 = raw;
       for (unsigned int y = ymin; y <= ymax; ++y)
         {
         size_t theOffset = 0 + (0*dimensions[1]*dimensions[0] + y*dimensions[0] + xmin)*bytesPerPixel;

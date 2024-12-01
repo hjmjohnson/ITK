@@ -295,7 +295,7 @@ itkContourSpatialObjectTest(int, char *[])
   // Run PrintSelf for the sake of coverage (and to make sure no
   // segfault/exceptions arise)
   //
-  itk::Indent idt;
+  itk::Indent const idt;
   contour->Print(std::cout, idt);
 
   // Test streaming enumeration for ContourSpatialObjectEnum::InterpolationMethod elements

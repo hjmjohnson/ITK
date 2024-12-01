@@ -170,7 +170,7 @@ void Printer::PrintElement(std::ostream& os, const ImplicitDataElement &ide, Dic
     {
     // FIXME FIXME:
     // value could dereference a NULL pointer in case of 0 length...
-    const Value& value = _val.GetValue();
+   const  Value& value = _val.GetValue();
     if( dictVR != VR::INVALID && VR::IsBinary(dictVR) )
       {
       PrintValue(dictVR, vm, value);
@@ -265,9 +265,9 @@ void PrintValue(VR::VRType const &vr, VM const &vm, const Value &v)
 {
   try
     {
-    const ByteValue &bv = dynamic_cast<const ByteValue&>(v);
-    const void *array = bv.GetVoidPointer();
-    const VL &length = bv.GetLength();
+   const  ByteValue &bv = dynamic_cast<const ByteValue&>(v);
+   const  void *array = bv.GetVoidPointer();
+   const  VL &length = bv.GetLength();
     //unsigned short val = *(unsigned short*)(array);
     std::ostream &os = std::cout;
 
@@ -301,9 +301,9 @@ void Printer::PrintDataSet(std::ostream& os, const DataSet<ImplicitDataElement> 
     DataSet<ImplicitDataElement>::ConstIterator it = ds.Begin();
     for( ; it != ds.End(); ++it )
       {
-      const ImplicitDataElement &de = *it;
-      const Tag &t = de.GetTag();
-      const DictEntry &entry = d.GetDictEntry(de.GetTag());
+     const  ImplicitDataElement &de = *it;
+     const  Tag &t = de.GetTag();
+     const  DictEntry &entry = d.GetDictEntry(de.GetTag());
       // Use VR from dictionary
       VR::VRType vr = entry.GetVR();
       VM::VMType vm = entry.GetVM();
@@ -368,10 +368,10 @@ void Printer::PrintDataSet(std::ostream& os, const DataSet<ImplicitDataElement> 
       // TODO It would be nice to have a TagToVR<0x0028,0x0103>::VRType
       // and TagToVM<0x0028,0x0103>::VMType ...
       // to be able to have an independent Standard from implementation :)
-      const ImplicitDataElement &pixel_rep =
+     const  ImplicitDataElement &pixel_rep =
         ds.GetDataElement( Tag(0x0028, 0x0103) );
-      const Value &value = pixel_rep.GetValue();
-      const ByteValue &bv = static_cast<const ByteValue&>(value);
+     const  Value &value = pixel_rep.GetValue();
+     const  ByteValue &bv = static_cast<const ByteValue&>(value);
       // FIXME:
       unsigned short pixel_rep_value = *(unsigned short*)(bv.GetPointer());
       assert( pixel_rep_value == 0x0 || pixel_rep_value == 0x1 );
@@ -388,7 +388,7 @@ void Printer::PrintDataSet(std::ostream& os, const DataSet<ImplicitDataElement> 
       else
         {
         assert(0);
-        const Value& val = de.GetValue();
+       const  Value& val = de.GetValue();
         _os << de.GetTag();
         if ( printVR )
           {
@@ -881,9 +881,9 @@ void Printer::PrintSQ(const SequenceOfItems *sqi, std::ostream & os, std::string
   SequenceOfItems::ItemVector::const_iterator it = sqi->Items.begin();
   for(; it != sqi->Items.end(); ++it)
     {
-    const Item &item = *it;
-    const DataSet &ds = item.GetNestedDataSet();
-    const DataElement &deitem = item;
+   const  Item &item = *it;
+   const  DataSet &ds = item.GetNestedDataSet();
+   const  DataElement &deitem = item;
     std::string nextindent = indent + "  ";
     os << nextindent << deitem.GetTag();
     os << " ";
@@ -921,10 +921,10 @@ void Printer::PrintDataSet(const DataSet &ds, std::ostream &out, std::string con
   DataSet::ConstIterator it = ds.Begin();
   for( ; it != ds.End(); ++it )
     {
-    const DataElement &de = *it;
+   const  DataElement &de = *it;
 
     //const ByteValue *bv = de.GetByteValue();
-    const SequenceOfFragments *sqf = de.GetSequenceOfFragments();
+   const  SequenceOfFragments *sqf = de.GetSequenceOfFragments();
 
     std::ostringstream os;
 
@@ -936,7 +936,7 @@ void Printer::PrintDataSet(const DataSet &ds, std::ostream &out, std::string con
       SmartPointer<SequenceOfItems> sqi2 = de.GetValueAsSQ(); // may throw
       PrintSQ(sqi2, os, indent);
       /*
-      const SequenceOfItems *sqi = de.GetSequenceOfItems();
+     const  SequenceOfItems *sqi = de.GetSequenceOfItems();
       if( sqi ) // empty SQ ?
       {
       assert( sqi );
@@ -961,13 +961,13 @@ void Printer::PrintDataSet(const DataSet &ds, std::ostream &out, std::string con
     else if ( sqf )
       {
       std::string nextindent = indent + "  ";
-      const BasicOffsetTable & table = sqf->GetTable();
+     const  BasicOffsetTable & table = sqf->GetTable();
       //os << nextindent  << table.GetTag() << "\n";
       PrintDataElement(os,dicts,ds,table,out,nextindent);
       size_t numfrag = sqf->GetNumberOfFragments();
       for(size_t i = 0; i < numfrag; ++i)
         {
-        const Fragment& frag = sqf->GetFragment(i);
+       const  Fragment& frag = sqf->GetFragment(i);
         //os << nextindent<< frag << "\n";
         PrintDataElement(os,dicts,ds,frag,out,nextindent);
         }
@@ -990,9 +990,9 @@ void DumpDataSet(const DataSet &ds, std::ostream &os )
   DataSet::ConstIterator it = ds.Begin();
   for( ; it != ds.End(); ++it )
     {
-    const DataElement &de = *it;
-    const Tag& t = de.GetTag(); (void)t;
-    const VR& vr = de.GetVR(); (void)vr;
+   const  DataElement &de = *it;
+   const  Tag& t = de.GetTag(); (void)t;
+   const  VR& vr = de.GetVR(); (void)vr;
     os << de << std::endl;
     //if( VR::IsASCII( vr ) )
     //  {

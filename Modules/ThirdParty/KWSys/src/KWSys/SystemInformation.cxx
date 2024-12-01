@@ -1666,7 +1666,7 @@ int SystemInformationImplementation::GetFullyQualifiedDomainName(
         !(ifa->ifa_flags & IFF_LOOPBACK)) {
       char host[NI_MAXHOST] = { '\0' };
 
-      const size_t addrlen = (fam == AF_INET ? sizeof(struct sockaddr_in)
+     const  size_t addrlen = (fam == AF_INET ? sizeof(struct sockaddr_in)
                                              : sizeof(struct sockaddr_in6));
 
       ierr = getnameinfo(ifa->ifa_addr, static_cast<socklen_t>(addrlen), host,
@@ -3723,7 +3723,7 @@ long long SystemInformationImplementation::GetHostMemoryAvailable(
   // access to it is severely restricted. The system will
   // apply a limit across a set of processes. Units are in KiB.
   if (hostLimitEnvVarName) {
-    const char* hostLimitEnvVarValue = getenv(hostLimitEnvVarName);
+   const  char* hostLimitEnvVarValue = getenv(hostLimitEnvVarName);
     if (hostLimitEnvVarValue) {
       long long hostLimit = std::atoll(hostLimitEnvVarValue);
       if (hostLimit > 0) {
@@ -3747,7 +3747,7 @@ long long SystemInformationImplementation::GetProcMemoryAvailable(
   // the following mechanism is provide for systems where rlimits
   // are not employed. Units are in KiB.
   if (procLimitEnvVarName) {
-    const char* procLimitEnvVarValue = getenv(procLimitEnvVarName);
+   const  char* procLimitEnvVarValue = getenv(procLimitEnvVarName);
     if (procLimitEnvVarValue) {
       long long procLimit = std::atoll(procLimitEnvVarValue);
       if (procLimit > 0) {
@@ -3818,7 +3818,7 @@ long long SystemInformationImplementation::GetHostMemoryUsed()
   long long values2[2] = { 0 };
   int ierr = GetFieldsFromFile("/proc/meminfo", names2, values2);
   if (ierr) {
-    const char* names4[5] = { "MemTotal:", "MemFree:", "Buffers:", "Cached:",
+   const  char* names4[5] = { "MemTotal:", "MemFree:", "Buffers:", "Cached:",
                               nullptr };
     long long values4[4] = { 0 };
     ierr = GetFieldsFromFile("/proc/meminfo", names4, values4);
@@ -4200,7 +4200,7 @@ bool SystemInformationImplementation::QueryLinuxMemory()
       mSwapTotal,
       mSwapFree
     };
-    const char* format[6] = { "MemTotal:%lu kB",  "MemFree:%lu kB",
+   const  char* format[6] = { "MemTotal:%lu kB",  "MemFree:%lu kB",
                               "Buffers:%lu kB",   "Cached:%lu kB",
                               "SwapTotal:%lu kB", "SwapFree:%lu kB" };
     bool have[6] = { false, false, false, false, false, false };

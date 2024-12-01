@@ -175,7 +175,7 @@ protected:
   void
   AddNewClass(double mean, double sigma)
   {
-    TargetClass aClass(mean, sigma);
+    TargetClass const aClass(mean, sigma);
 
     m_Targets.push_back(aClass);
   }

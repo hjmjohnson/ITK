@@ -131,7 +131,7 @@ bool rle_encoder::write_header( dest & d )
     src->read_into_segments( buffer, buflen, internals->img );
     for( int s = 0; s < nsegs; ++s )
       {
-      const int ret = compute_compressed_length( buffer + s * w, w );
+     const  int ret = compute_compressed_length( buffer + s * w, w );
       assert( ret > 0 );
       comp_len[s] += ret;
       }
@@ -275,13 +275,13 @@ int rle_encoder::encode_row( dest & d )
   int n = 0;
   for( int s = 0; s < numsegs; ++s )
     {
-    const int ret = encode_row_internal(
+   const  int ret = encode_row_internal(
       internals->outvalues.data(), internals->outvalues.size(),
       internals->invalues.data() + s * w, w );
     if( ret < 0 ) return -1;
     n += ret;
 
-    const bool b = d.seek( comp_pos[s] );
+   const  bool b = d.seek( comp_pos[s] );
     if( !b ) return -1;
     if( d.write( internals->outvalues.data(), ret ) < 0 ) return -1;
     comp_pos[s] += ret;
@@ -384,19 +384,19 @@ static inline bool skip_row_internal( source & s, const int width )
   bool re = false; // read error
   while( numOutBytes < width && !re && !s.eof() )
     {
-    const int check = s.read( &b, 1 );
+   const  int check = s.read( &b, 1 );
     if( check != 1 ) re = true;
     if( b >= 0 /*&& b <= 127*/ ) /* 2nd is always true */
       {
       char buffer[128];
-      const int nbytes = s.read( buffer, b + 1 );
+     const  int nbytes = s.read( buffer, b + 1 );
       if( nbytes != b + 1 ) re = true;
       numOutBytes += nbytes;
       }
     else if( b <= -1 && b >= -127 )
       {
       rle_decoder::byte nextByte;
-      const int nbytes = s.read( &nextByte, 1 );
+     const  int nbytes = s.read( &nextByte, 1 );
       if( nbytes != 1 ) re = true;
       numOutBytes += -b + 1;
       }
@@ -461,7 +461,7 @@ static int decode_internal( char * output, source & s, const int maxlen, const i
         break;
         }
       assert( (cur - output) % nstride == 0 );
-      const int diff = ( cur - output ) / nstride + nbytes - maxlen;
+     const  int diff = ( cur - output ) / nstride + nbytes - maxlen;
       if( diff > 0 ) // handle row crossing artefacts
         {
         nbytes -= diff;
@@ -476,12 +476,12 @@ static int decode_internal( char * output, source & s, const int maxlen, const i
     else if( b <= -1 && b >= -127 )
       {
       rle_decoder::byte nextByte;
-      const int nbytes = s.read( &nextByte, 1 );
+     const  int nbytes = s.read( &nextByte, 1 );
       assert( nbytes == 1 ); (void)nbytes;
       int nrep = -b + 1; // number of repetitions
       memset(buffer, nextByte, nrep);
       assert( (cur - output) % nstride == 0 );
-      const int diff = ( cur - output ) / nstride + nrep - maxlen;
+     const  int diff = ( cur - output ) / nstride + nrep - maxlen;
       if( diff > 0 )
         {
         nrep -= diff;
@@ -520,10 +520,10 @@ int rle_decoder::decode_row( dest & d )
     {
     for( int p = 0; p < npadded; ++p )
       {
-      const int i = p + c * npadded;
+     const  int i = p + c * npadded;
       source * s = internals->sources[i];
-      const int j = (npadded - 1 - p) + c * npadded; // little endian
-      const int numOutBytes = decode_internal( scanbuf, *s,
+     const  int j = (npadded - 1 - p) + c * npadded; // little endian
+     const  int numOutBytes = decode_internal( scanbuf, *s,
         internals->img.get_width(), j, internals->nsources,
         internals->cross_row[i], internals->nstorage[i] );
       assert( numOutBytes <= internals->img.get_width() );
@@ -545,7 +545,7 @@ rle_decoder::streamsize_t rle_decoder::decode_frame( dest & d )
   const int mult = internals->img.get_pixel_info().compute_num_segments();
   for(int h = 0; h < internals->img.get_height(); ++h)
     {
-    const int numOutBytes = decode_row( d );
+   const  int numOutBytes = decode_row( d );
     assert( numOutBytes <= internals->img.get_width() * mult ); (void)mult;
     numOutBytesFull += numOutBytes;
     }

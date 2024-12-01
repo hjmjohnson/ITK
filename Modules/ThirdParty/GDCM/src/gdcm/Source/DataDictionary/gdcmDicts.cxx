@@ -40,8 +40,8 @@ const DictEntry &Dicts::GetDictEntry(const Tag& tag, const char *owner) const
 {
   if( tag.IsGroupLength() )
     {
-    const DictEntry & de = PublicDict.GetDictEntry(tag);
-    const char *name = de.GetName();
+   const  DictEntry & de = PublicDict.GetDictEntry(tag);
+   const  char *name = de.GetName();
     if( name && *name )
       {
       return de;
@@ -65,7 +65,7 @@ const DictEntry &Dicts::GetDictEntry(const Tag& tag, const char *owner) const
       {
       size_t len = strlen(owner); (void)len;
       PrivateTag ptag(tag.GetGroup(), (uint16_t)(((uint16_t)(tag.GetElement() << 8)) >> 8), owner);
-      const DictEntry &de = GetPrivateDict().GetDictEntry(ptag);
+     const  DictEntry &de = GetPrivateDict().GetDictEntry(ptag);
       return de;
       }
     else

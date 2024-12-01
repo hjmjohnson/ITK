@@ -71,9 +71,9 @@ LoggerBase::PrivateFlush()
 std::string
 LoggerBase::BuildFormattedEntry(PriorityLevelEnum level, std::string const & content)
 {
-  static std::string m_LevelString[] = { "(MUSTFLUSH) ", "(FATAL) ", "(CRITICAL) ", "(WARNING) ",
-                                         "(INFO) ",      "(DEBUG) ", "(NOTSET) " };
-  std::ostringstream s;
+  static std::string const m_LevelString[] = { "(MUSTFLUSH) ", "(FATAL) ", "(CRITICAL) ", "(WARNING) ",
+                                               "(INFO) ",      "(DEBUG) ", "(NOTSET) " };
+  std::ostringstream       s;
 
   switch (this->m_TimeStampFormat)
   {

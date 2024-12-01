@@ -32,7 +32,7 @@ bool DPath::IsValid(const char *path) {
 
 template <typename T>
 static void print_contents(std::ostream &oss, const std::vector<T> &v,
-                           const char *const separator = ",") {
+                          const  char *const separator = ",") {
   if (!v.empty()) {
     std::copy(v.begin(), --v.end(), std::ostream_iterator<T>(oss, separator));
     oss << v.back();
@@ -72,10 +72,10 @@ static std::vector<std::string> split_from_slash_separated(
   std::istringstream is(path);
   std::string sub;
   while (std::getline(is, sub, separator)) {
-    const bool isEmpty = sub.empty();
-    const bool isDigits = is_digits(sub);
-    const bool isWildCard = sub == "*";
-    const bool hasComma = sub.find(',') != std::string::npos;
+   const  bool isEmpty = sub.empty();
+   const  bool isDigits = is_digits(sub);
+   const  bool isWildCard = sub == "*";
+   const  bool hasComma = sub.find(',') != std::string::npos;
     if (isEmpty && comps.empty()) {
       comps.push_back(sub);
     } else if (isDigits) {
@@ -128,12 +128,12 @@ bool DPath::ConstructFromString(const char *spath) {
   ++it;
   for (; it != comps.end(); ++it) {
     os << SEPARATOR;
-    const char *str = it->c_str();
+   const  char *str = it->c_str();
     if (pt.ReadFromCommaSeparatedString(str)) {
-      const std::vector<std::string> tag_strings = tag2strings(pt);
+     const  std::vector<std::string> tag_strings = tag2strings(pt);
       print_contents(os, tag_strings, ",");
     } else if (t.ReadFromCommaSeparatedString(str)) {
-      const std::vector<std::string> tag_strings = tag2strings(t);
+     const  std::vector<std::string> tag_strings = tag2strings(t);
       print_contents(os, tag_strings, ",");
     } else if (is_digits(str) && sscanf(str, "%u", &index) == 1 && index > 0) {
       os << index;

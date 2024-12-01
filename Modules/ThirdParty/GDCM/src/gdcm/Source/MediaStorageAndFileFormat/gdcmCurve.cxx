@@ -76,7 +76,7 @@ public:
     os << "TypeOfData                         :" << TypeOfData << std::endl;
     os << "CurveDescription                   :" << CurveDescription << std::endl;
     os << "DataValueRepresentation            :" << DataValueRepresentation << std::endl;
-    const unsigned short * p = (const unsigned short*)(const void*)Data.data();
+   const  unsigned short * p = (const unsigned short*)(const void*)Data.data();
     for(int i = 0; i < NumberOfPoints; i+=2)
       {
       os << p[i] << "," << p[i+1] << std::endl;
@@ -114,7 +114,7 @@ unsigned int Curve::GetNumberOfCurves(DataSet const & ds)
   unsigned int numoverlays = 0;
   while( !finished )
     {
-    const DataElement &de = ds.FindNextDataElement( overlay );
+   const  DataElement &de = ds.FindNextDataElement( overlay );
     if( de.GetTag().GetGroup() > 0x50FF ) // last possible curve
       {
       finished = true;
@@ -133,7 +133,7 @@ unsigned int Curve::GetNumberOfCurves(DataSet const & ds)
         {
         // ok so far so good...
         //const DataElement& overlaydata = ds.GetDataElement(Tag(overlay.GetGroup(),0x3000));
-        const DataElement& overlaydata = ds.GetDataElement(Tag(de.GetTag().GetGroup(),0x3000));
+       const  DataElement& overlaydata = ds.GetDataElement(Tag(de.GetTag().GetGroup(),0x3000));
         if( !overlaydata.IsEmpty() )
           {
           ++numoverlays;

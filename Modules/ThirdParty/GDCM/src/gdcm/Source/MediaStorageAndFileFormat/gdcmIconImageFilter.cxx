@@ -47,7 +47,7 @@ void IconImageFilter::ExtractIconImages()
   // Public Icon
   if( rootds.FindDataElement( ticonimage ) )
     {
-    const DataElement &iconimagesq = rootds.GetDataElement( ticonimage );
+   const  DataElement &iconimagesq = rootds.GetDataElement( ticonimage );
     SmartPointer<SequenceOfItems> sq = iconimagesq.GetValueAsSQ();
     // Is SQ empty ?
     if( sq && sq->GetNumberOfItems() == 1 )
@@ -57,7 +57,7 @@ void IconImageFilter::ExtractIconImages()
       SmartPointer< IconImage > si1 = new IconImage;
       IconImage &pixeldata = *si1;
       SequenceOfItems::ConstIterator it = sq->Begin();
-      const DataSet &ds = it->GetNestedDataSet();
+     const  DataSet &ds = it->GetNestedDataSet();
 
         {
         Attribute<0x0028,0x0011> at = { 0 };
@@ -101,7 +101,7 @@ void IconImageFilter::ExtractIconImages()
       // D 0028|0004 [CS] [Photometric Interpretation] [MONOCHROME2 ]
       const Tag tphotometricinterpretation(0x0028, 0x0004);
       assert( ds.FindDataElement( tphotometricinterpretation ) );
-      const ByteValue *photometricinterpretation =
+     const  ByteValue *photometricinterpretation =
         ds.GetDataElement( tphotometricinterpretation ).GetByteValue();
       std::string photometricinterpretation_str(
         photometricinterpretation->GetPointer(),
@@ -150,7 +150,7 @@ void IconImageFilter::ExtractIconImages()
           const Tag seglut(0x0028, (uint16_t)(0x1221 + i));
           if( ds.FindDataElement( tlut ) )
             {
-            const ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
+           const  ByteValue *lut_raw = ds.GetDataElement( tlut ).GetByteValue();
             assert( lut_raw );
             // LookupTableType::RED == 0
             lut->SetLUT( LookupTable::LookupTableType(i),
@@ -164,7 +164,7 @@ void IconImageFilter::ExtractIconImages()
             }
           else if( ds.FindDataElement( seglut ) )
             {
-            const ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
+           const  ByteValue *lut_raw = ds.GetDataElement( seglut ).GetByteValue();
             assert( lut_raw );
             lut->SetLUT( LookupTable::LookupTableType(i),
               (const unsigned char*)lut_raw->GetPointer(), lut_raw->GetLength() );
@@ -185,14 +185,14 @@ void IconImageFilter::ExtractIconImages()
         pixeldata.SetLUT(*lut);
         }
 
-      const Tag tpixeldata = Tag(0x7fe0, 0x0010);
+     const  Tag tpixeldata = Tag(0x7fe0, 0x0010);
       if( !ds.FindDataElement( tpixeldata ) )
         {
         gdcmWarningMacro( "Icon Sequence is incomplete. Giving up" );
         pixeldata.Clear();
         return;
         }
-      const DataElement& de = ds.GetDataElement( tpixeldata );
+     const  DataElement& de = ds.GetDataElement( tpixeldata );
       pixeldata.SetDataElement( de );
 
       // Pass TransferSyntax:
@@ -212,7 +212,7 @@ void IconImageFilter::ExtractIconImages()
   // Private Icon
   if( rootds.FindDataElement( tgeiconimage ) )
     {
-    const DataElement &iconimagesq = rootds.GetDataElement( tgeiconimage );
+   const  DataElement &iconimagesq = rootds.GetDataElement( tgeiconimage );
     //const SequenceOfItems* sq = iconimagesq.GetSequenceOfItems();
     SmartPointer<SequenceOfItems> sq = iconimagesq.GetValueAsSQ();
     // Is SQ empty ?
@@ -222,7 +222,7 @@ void IconImageFilter::ExtractIconImages()
     IconImage &pixeldata = *si1;
 
     SequenceOfItems::ConstIterator it = sq->Begin();
-    const DataSet &ds = it->GetNestedDataSet();
+   const  DataSet &ds = it->GetNestedDataSet();
 
     // D 0028|0011 [US] [Columns] [512]
       {
@@ -280,7 +280,7 @@ void IconImageFilter::ExtractIconImages()
     // D 0028|0004 [CS] [Photometric Interpretation] [MONOCHROME2 ]
     const Tag tphotometricinterpretation(0x0028, 0x0004);
     assert( ds.FindDataElement( tphotometricinterpretation ) );
-    const ByteValue *photometricinterpretation = ds.GetDataElement( tphotometricinterpretation ).GetByteValue();
+   const  ByteValue *photometricinterpretation = ds.GetDataElement( tphotometricinterpretation ).GetByteValue();
     std::string photometricinterpretation_str(
       photometricinterpretation->GetPointer(),
       photometricinterpretation->GetLength() );
@@ -289,10 +289,10 @@ void IconImageFilter::ExtractIconImages()
         photometricinterpretation_str.c_str()));
     assert( pi != PhotometricInterpretation::UNKNOWN);
     pixeldata.SetPhotometricInterpretation( pi );
-    const Tag tpixeldata = Tag(0x7fe0, 0x0010);
+   const  Tag tpixeldata = Tag(0x7fe0, 0x0010);
     assert( ds.FindDataElement( tpixeldata ) );
       {
-      const DataElement& de = ds.GetDataElement( tpixeldata );
+     const  DataElement& de = ds.GetDataElement( tpixeldata );
 #if 0
       JPEGCodec jpeg;
       jpeg.SetPhotometricInterpretation( pixeldata.GetPhotometricInterpretation() );
@@ -318,7 +318,7 @@ void IconImageFilter::ExtractIconImages()
 #endif
 #if 1
       std::istringstream is;
-      const ByteValue *bv = de.GetByteValue();
+     const  ByteValue *bv = de.GetByteValue();
       assert( bv );
       is.str( std::string( bv->GetPointer(), bv->GetLength() ) );
       TransferSyntax jpegts;
@@ -349,7 +349,7 @@ void IconImageFilter::ExtractIconImages()
 
   if( rootds.FindDataElement( tgeiconimage2 ) )
     {
-    const DataElement &iconimagesq = rootds.GetDataElement( tgeiconimage2 );
+   const  DataElement &iconimagesq = rootds.GetDataElement( tgeiconimage2 );
     //const SequenceOfItems* sq = iconimagesq.GetSequenceOfItems();
     SmartPointer<SequenceOfItems> sq = iconimagesq.GetValueAsSQ();
     // Is SQ empty ?
@@ -360,11 +360,11 @@ void IconImageFilter::ExtractIconImages()
     IconImage &pixeldata = *si1;
 
     SequenceOfItems::ConstIterator it = sq->Begin();
-    const DataSet &ds = it->GetNestedDataSet();
+   const  DataSet &ds = it->GetNestedDataSet();
 
     // D 0028|0011 [US] [Columns] [512]
       {
-      const DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0011) );
+     const  DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0011) );
       Attribute<0x0028,0x0011> at;
       at.SetFromDataElement( de );
       pixeldata.SetDimension(0, at.GetValue() );
@@ -372,7 +372,7 @@ void IconImageFilter::ExtractIconImages()
 
     // D 0028|0010 [US] [Rows] [512]
       {
-      const DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0010) );
+     const  DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0010) );
       Attribute<0x0028,0x0010> at;
       at.SetFromDataElement( de );
       pixeldata.SetDimension(1, at.GetValue() );
@@ -381,35 +381,35 @@ void IconImageFilter::ExtractIconImages()
     PixelFormat pf;
     // D 0028|0100 [US] [Bits Allocated] [16]
       {
-      const DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0100) );
+     const  DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0100) );
       Attribute<0x0028,0x0100> at;
       at.SetFromDataElement( de );
       pf.SetBitsAllocated( at.GetValue() );
       }
     // D 0028|0101 [US] [Bits Stored] [12]
       {
-      const DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0101) );
+     const  DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0101) );
       Attribute<0x0028,0x0101> at;
       at.SetFromDataElement( de );
       pf.SetBitsStored( at.GetValue() );
       }
     // D 0028|0102 [US] [High Bit] [11]
       {
-      const DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0102) );
+     const  DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0102) );
       Attribute<0x0028,0x0102> at;
       at.SetFromDataElement( de );
       pf.SetHighBit( at.GetValue() );
       }
     // D 0028|0103 [US] [Pixel Representation] [0]
       {
-      const DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0103) );
+     const  DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0103) );
       Attribute<0x0028,0x0103> at;
       at.SetFromDataElement( de );
       pf.SetPixelRepresentation( at.GetValue() );
       }
     // (0028,0002) US 1                                        #   2, 1 SamplesPerPixel
       {
-      const DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0002) );
+     const  DataElement& de = ds.GetDataElement( Tag(0x0028, 0x0002) );
       Attribute<0x0028,0x0002> at;
       at.SetFromDataElement( de );
       pf.SetSamplesPerPixel( at.GetValue() );
@@ -418,7 +418,7 @@ void IconImageFilter::ExtractIconImages()
     // D 0028|0004 [CS] [Photometric Interpretation] [MONOCHROME2 ]
     const Tag tphotometricinterpretation(0x0028, 0x0004);
     assert( ds.FindDataElement( tphotometricinterpretation ) );
-    const ByteValue *photometricinterpretation = ds.GetDataElement( tphotometricinterpretation ).GetByteValue();
+   const  ByteValue *photometricinterpretation = ds.GetDataElement( tphotometricinterpretation ).GetByteValue();
     std::string photometricinterpretation_str(
       photometricinterpretation->GetPointer(),
       photometricinterpretation->GetLength() );
@@ -431,7 +431,7 @@ void IconImageFilter::ExtractIconImages()
     const PrivateTag tpixeldata(0x6003,0x0011,"GEMS_Ultrasound_ImageGroup_001");
     assert( ds.FindDataElement( tpixeldata ) );
       {
-      const DataElement& de = ds.GetDataElement( tpixeldata );
+     const  DataElement& de = ds.GetDataElement( tpixeldata );
       pixeldata.SetDataElement( de );
       /*
       JPEGCodec jpeg;
@@ -491,23 +491,23 @@ void IconImageFilter::ExtractVeproIconImages()
   // Prefer VIF over VIM ?
   if( rootds.FindDataElement( ticon1 ) )
     {
-    const DataElement &de = rootds.GetDataElement( ticon1 );
+   const  DataElement &de = rootds.GetDataElement( ticon1 );
     bv = de.GetByteValue();
     }
   else if( rootds.FindDataElement( ticon2 ) )
     {
-    const DataElement &de = rootds.GetDataElement( ticon2 );
+   const  DataElement &de = rootds.GetDataElement( ticon2 );
     bv = de.GetByteValue();
     }
 
   if( bv )
     {
-    const char *buf = bv->GetPointer();
+   const  char *buf = bv->GetPointer();
     size_t len = bv->GetLength();
     VeproData data;
     memcpy(&data, buf, sizeof(data));
 
-    const char *raw = buf + sizeof(data);
+   const  char *raw = buf + sizeof(data);
 
     size_t offset = 4;
     // All header starts with the letter 'RAW\0', it looks like we need

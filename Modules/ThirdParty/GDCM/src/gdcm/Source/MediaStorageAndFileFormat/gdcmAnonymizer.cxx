@@ -131,7 +131,7 @@ bool Anonymizer::Remove( PrivateTag const &pt )
   DataSet &ds = F->GetDataSet();
   if(ds.FindDataElement(pt))
     {
-    const DataElement &de = ds.GetDataElement(pt);
+   const  DataElement &de = ds.GetDataElement(pt);
     return ds.Remove( de.GetTag() ) == 1;
     }
   else
@@ -163,8 +163,8 @@ bool Anonymizer::Replace( PrivateTag const &pt, const char *value )
 bool Anonymizer::Replace( Tag const &t, const char *value, VL const & vl )
 {
   if( t.GetGroup() < 0x0008 ) return false;
-  static const Global &g = GlobalInstance;
-  static const Dicts &dicts = g.GetDicts();
+  const static Global &g = GlobalInstance;
+  const static Dicts &dicts = g.GetDicts();
   DataSet &ds = F->GetDataSet();
   // Let's do the private tag:
   bool ret = false;
@@ -211,7 +211,7 @@ bool Anonymizer::Replace( Tag const &t, const char *value, VL const & vl )
     {
     // Ok this is a public element
     assert( t.IsPublic() || t.IsPrivateCreator() );
-    const DictEntry &dictentry = dicts.GetDictEntry(t);
+   const  DictEntry &dictentry = dicts.GetDictEntry(t);
     if ( dictentry.GetVR() == VR::INVALID
       || dictentry.GetVR() == VR::UN
       || dictentry.GetVR() == VR::SQ
@@ -302,7 +302,7 @@ bool Anonymizer::Replace( Tag const &t, const char *value, VL const & vl )
           {
           de.SetVR( dictentry.GetVR() );
           }
-        const VL::Type paddedSize = (VL::Type) padded.size();//casting to avoid size_t warning on 64
+       const  VL::Type paddedSize = (VL::Type) padded.size();//casting to avoid size_t warning on 64
         de.SetByteValue( padded.c_str(), paddedSize );
         ds.Replace( de );
         ret = true;
@@ -317,7 +317,7 @@ bool Anonymizer::Replace( PrivateTag const &pt, const char *value, VL const & vl
   DataSet &ds = F->GetDataSet();
   if(ds.FindDataElement(pt))
     {
-    const DataElement &de = ds.GetDataElement(pt);
+   const  DataElement &de = ds.GetDataElement(pt);
     return Replace( de.GetTag(), value, vl );
     }
   else
@@ -329,8 +329,8 @@ bool Anonymizer::Replace( PrivateTag const &pt, const char *value, VL const & vl
     Tag maxCreator = pt;
     maxCreator.SetElement(0x00ff);
     do {
-      const DataElement& de = ds.FindNextDataElement( start );
-      const ByteValue* bv = de.GetByteValue();
+     const  DataElement& de = ds.FindNextDataElement( start );
+     const  ByteValue* bv = de.GetByteValue();
       std::string creator_str;
       if(bv) {
         creator_str = std::string(bv->GetPointer(),bv->GetLength());
@@ -360,9 +360,9 @@ bool Anonymizer::Replace( PrivateTag const &pt, const char *value, VL const & vl
       ds.Insert(creator);
     }
     // add empty element:
-    static const Global &g = GlobalInstance;
-    static const Dicts &dicts = g.GetDicts();
-    const DictEntry &dictentry = dicts.GetDictEntry(pt);
+    const static Global &g = GlobalInstance;
+    const static Dicts &dicts = g.GetDicts();
+   const  DictEntry &dictentry = dicts.GetDictEntry(pt);
     DataElement fake;
     Tag privateLocation(pt);
     assert( pt.GetElement() <= 0xff );
@@ -379,19 +379,19 @@ bool Anonymizer::Replace( PrivateTag const &pt, const char *value, VL const & vl
 
 static bool Anonymizer_RemoveRetired(File const &file, DataSet &ds)
 {
-  static const Global &g = GlobalInstance;
-  static const Dicts &dicts = g.GetDicts();
-  static const Dict &pubdict = dicts.GetPublicDict();
+  const static Global &g = GlobalInstance;
+  const static Dicts &dicts = g.GetDicts();
+  const static Dict &pubdict = dicts.GetPublicDict();
   DataSet::Iterator it = ds.Begin();
   for( ; it != ds.End(); )
     {
-    const DataElement &de1 = *it;
+   const  DataElement &de1 = *it;
     // std::set::erase invalidate iterator, so we need to make a copy first:
     DataSet::Iterator dup = it;
     ++it;
     if( de1.GetTag().IsPublic() )
       {
-      const DictEntry &entry = pubdict.GetDictEntry( de1.GetTag() );
+     const  DictEntry &entry = pubdict.GetDictEntry( de1.GetTag() );
       if( entry.GetRetired() )
         {
         ds.GetDES().erase(dup);
@@ -399,7 +399,7 @@ static bool Anonymizer_RemoveRetired(File const &file, DataSet &ds)
       }
     else
       {
-      const DataElement &de = *dup;
+     const  DataElement &de = *dup;
       VR vr = DataSetHelper::ComputeVR(file, ds, de.GetTag() );
       if( vr.Compatible(VR::SQ) )
         {
@@ -435,7 +435,7 @@ static bool Anonymizer_RemoveGroupLength(File const &file, DataSet &ds)
   DataSet::Iterator it = ds.Begin();
   for( ; it != ds.End(); )
     {
-    const DataElement &de1 = *it;
+   const  DataElement &de1 = *it;
     // std::set::erase invalidate iterator, so we need to make a copy first:
     DataSet::Iterator dup = it;
     ++it;
@@ -445,7 +445,7 @@ static bool Anonymizer_RemoveGroupLength(File const &file, DataSet &ds)
       }
     else
       {
-      const DataElement &de = *dup;
+     const  DataElement &de = *dup;
       VR vr = DataSetHelper::ComputeVR(file, ds, de.GetTag() );
       if( vr.Compatible(VR::SQ) )
         {
@@ -481,7 +481,7 @@ static bool Anonymizer_RemovePrivateTags(File const &file, DataSet &ds)
   DataSet::Iterator it = ds.Begin();
   for( ; it != ds.End(); )
     {
-    const DataElement &de1 = *it;
+   const  DataElement &de1 = *it;
       // std::set::erase invalidate iterator, so we need to make a copy first:
       DataSet::Iterator dup = it;
       ++it;
@@ -491,7 +491,7 @@ static bool Anonymizer_RemovePrivateTags(File const &file, DataSet &ds)
       }
     else
       {
-      const DataElement &de = *dup;
+     const  DataElement &de = *dup;
       VR vr = DataSetHelper::ComputeVR(file, ds, de.GetTag() );
       if( vr.Compatible(VR::SQ) )
         {
@@ -545,24 +545,24 @@ bool Anonymizer::BasicApplicationLevelConfidentialityProfile(bool deidentify)
 
 std::vector<Tag> Anonymizer::GetBasicApplicationLevelConfidentialityProfileAttributes()
 {
-  static const unsigned int deidSize = sizeof(Tag);
-  static const unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
-  static const Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
-  static const Tag *end = start + numDeIds;
+  const static unsigned int deidSize = sizeof(Tag);
+  const static unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
+  const static Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
+  const static Tag *end = start + numDeIds;
   return std::vector<Tag>(start, end);
 }
 
 bool Anonymizer::CheckIfSequenceContainsAttributeToAnonymize(File const &file, SequenceOfItems* sqi) const
 {
-  static const unsigned int deidSize = sizeof(Tag);
-  static const unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
-  static const Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
-  static const Tag *end = start + numDeIds;
+  const static unsigned int deidSize = sizeof(Tag);
+  const static unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
+  const static Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
+  const static Tag *end = start + numDeIds;
 
   bool found = false;
   for(const Tag *ptr = start ; ptr != end && !found ; ++ptr)
     {
-    const Tag& tag = *ptr;
+   const  Tag& tag = *ptr;
     found = sqi->FindDataElement( tag );
     }
   // ok we can exit.
@@ -577,7 +577,7 @@ bool Anonymizer::CheckIfSequenceContainsAttributeToAnonymize(File const &file, S
     DataSet::Iterator it = nested.Begin();
     for( ; it != nested.End() && !found; ++it)
       {
-      const DataElement &de = *it;
+     const  DataElement &de = *it;
       VR vr = DataSetHelper::ComputeVR(file, nested, de.GetTag() );
       SmartPointer<SequenceOfItems> sqi2 = nullptr;
       if( vr == VR::SQ )
@@ -602,10 +602,10 @@ bool Anonymizer::CheckIfSequenceContainsAttributeToAnonymize(File const &file, S
 // N AnonymizeEvent (depend on number of tag found)
 bool Anonymizer::BasicApplicationLevelConfidentialityProfile1()
 {
-  static const unsigned int deidSize = sizeof(Tag);
-  static const unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
-  static const Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
-  static const Tag *end = start + numDeIds;
+  const static unsigned int deidSize = sizeof(Tag);
+  const static unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
+  const static Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
+  const static Tag *end = start + numDeIds;
   if( !CMS )
     {
     gdcmErrorMacro( "Need a certificate" );
@@ -620,7 +620,7 @@ bool Anonymizer::BasicApplicationLevelConfidentialityProfile1()
     {
     gdcm::Attribute<0x0012,0x0062> patientIdentityRemoved = {};
     patientIdentityRemoved.SetFromDataSet( ds );
-    const std::string value = patientIdentityRemoved.GetValue().Trim();
+   const  std::string value = patientIdentityRemoved.GetValue().Trim();
     if( value != "NO" ) {
       gdcmErrorMacro( "EncryptedContentTransferSyntax Attribute Patient is set !" );
       return false;
@@ -668,7 +668,7 @@ bool Anonymizer::BasicApplicationLevelConfidentialityProfile1()
   // Loop over root level attributes:
   for(const Tag *ptr = start ; ptr != end ; ++ptr)
     {
-    const Tag& tag = *ptr;
+   const  Tag& tag = *ptr;
     if( ds.FindDataElement( tag ) )
       encryptedds.Insert( ds.GetDataElement( tag ) );
     }
@@ -678,7 +678,7 @@ bool Anonymizer::BasicApplicationLevelConfidentialityProfile1()
   DataSet::ConstIterator it = ds.Begin();
   for( ; it != ds.End(); ++it )
     {
-    const DataElement &de = *it;
+   const  DataElement &de = *it;
     //const SequenceOfItems *sqi = de.GetSequenceOfItems();
     SmartPointer<SequenceOfItems> sqi = nullptr;
     VR vr = DataSetHelper::ComputeVR(*F, ds, de.GetTag() );
@@ -755,12 +755,12 @@ bool Anonymizer::BasicApplicationLevelConfidentialityProfile1()
     // <entry group="0400" element="0510" vr="UI" vm="1" name="Encrypted Content Transfer Syntax UID"/>
     DataElement encrypted_ts_de( Tag(0x400,0x510) );
     encrypted_ts_de.SetVR( Attribute<0x0400, 0x0510>::GetVR() );
-    const VL::Type encryptedStrLen = (VL::Type)strlen(encrypted_ts.GetString());
+   const  VL::Type encryptedStrLen = (VL::Type)strlen(encrypted_ts.GetString());
     encrypted_ts_de.SetByteValue( encrypted_ts.GetString(), encryptedStrLen );
     // <entry group="0400" element="0520" vr="OB" vm="1" name="Encrypted Content"/>
     DataElement encrypted_de( Tag(0x400,0x520) );
     encrypted_de.SetVR( Attribute<0x0400, 0x0520>::GetVR() );
-    const VL::Type encryptedLenSize = (VL::Type)encrypted_len;
+   const  VL::Type encryptedLenSize = (VL::Type)encrypted_len;
     encrypted_de.SetByteValue( (char*)buf, encryptedLenSize );
     delete[] buf;
     delete[] orig;
@@ -868,8 +868,8 @@ catch(...)
 
 static bool IsVRUI(Tag const &tag)
 {
-  static const Global &g = Global::GetInstance();
-  static const Dicts &dicts = g.GetDicts();
+  const static Global &g = Global::GetInstance();
+  const static Dicts &dicts = g.GetDicts();
   const DictEntry &dictentry = dicts.GetDictEntry(tag);
   if( dictentry.GetVR() == VR::UI ) return true;
   //if( tag == Tag(0x0020,0x000d)   // Study Instance UID : UI
@@ -890,9 +890,9 @@ static const Tag SpecialTypeTags[] = {
 
 bool Anonymizer::CanEmptyTag(Tag const &tag, const IOD &iod) const
 {
-  static const Global &g = Global::GetInstance();
+  const static Global &g = Global::GetInstance();
   //static const Dicts &dicts = g.GetDicts();
-  static const Defs &defs = g.GetDefs();
+  const static Defs &defs = g.GetDefs();
   const DataSet &ds = F->GetDataSet(); (void)ds;
   //Type told = defs.GetTypeFromTag(*F, tag);
   Type t = iod.GetTypeFromTag(defs, tag);
@@ -933,8 +933,8 @@ generate a DICOMDIR
 
 => Sup 142
 */
-  static const unsigned int deidSize = sizeof(Tag);
-  static const unsigned int numDeIds = sizeof(SpecialTypeTags) / deidSize;
+  const static unsigned int deidSize = sizeof(Tag);
+  const static unsigned int numDeIds = sizeof(SpecialTypeTags) / deidSize;
 
   bool b = std::binary_search(SpecialTypeTags, SpecialTypeTags + numDeIds, tag);
 
@@ -1013,7 +1013,7 @@ bool Anonymizer::BALCPProtect(DataSet &ds, Tag const & tag, IOD const & iod)
       assert( dummyMapNonUIDTags.count( tvk ) == 0 || dummyMapNonUIDTags.count( tvk ) == 1 );
       if( dummyMapNonUIDTags.count( tvk ) == 0 )
         {
-        const char *ret = DummyValueGenerator::Generate( tvk.second.c_str() );
+       const  char *ret = DummyValueGenerator::Generate( tvk.second.c_str() );
         if( ret )
           {
           dummyMapNonUIDTags[ tvk ] = ret;
@@ -1041,13 +1041,13 @@ void Anonymizer::RecurseDataSet( DataSet & ds )
 {
   if( ds.IsEmpty() ) return;
 
-  static const unsigned int deidSize = sizeof(Tag);
-  static const unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
-  static const Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
-  static const Tag *end = start + numDeIds;
+  const static unsigned int deidSize = sizeof(Tag);
+  const static unsigned int numDeIds = sizeof(BasicApplicationLevelConfidentialityProfileAttributes) / deidSize;
+  const static Tag *start = BasicApplicationLevelConfidentialityProfileAttributes;
+  const static Tag *end = start + numDeIds;
 
-  static const Global &g = Global::GetInstance();
-  static const Defs &defs = g.GetDefs();
+  const static Global &g = Global::GetInstance();
+  const static Defs &defs = g.GetDefs();
   if( defs.IsEmpty() )
   {
     gdcmWarningMacro( "Missing Definitions, see Global.LoadResourcesFiles()" );
@@ -1057,7 +1057,7 @@ void Anonymizer::RecurseDataSet( DataSet & ds )
 
   for(const Tag *ptr = start ; ptr != end ; ++ptr)
     {
-    const Tag& tag = *ptr;
+   const  Tag& tag = *ptr;
     // FIXME Type 1 !
     if( ds.FindDataElement( tag ) )
       {
@@ -1219,7 +1219,7 @@ bool Anonymizer::BasicApplicationLevelConfidentialityProfile2()
   //const SequenceOfItems *sqi = dummy.GetSequenceOfItems();
   SmartPointer<SequenceOfItems> sqi = dummy.GetValueAsSQ();
   assert( sqi && sqi->GetNumberOfItems() == 1 );
-  Item const & item2 = sqi->GetItem( 1 );
+  const Item & item2 = sqi->GetItem( 1 );
   const DataSet &nds2 = item2.GetNestedDataSet();
   DataSet::ConstIterator it = nds2.Begin();
   for( ; it != nds2.End(); ++it )

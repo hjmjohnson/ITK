@@ -108,7 +108,7 @@ void ULConnection::SetPresentationContexts(
   mPresentationContexts.clear();
   for( size_t i = 0; i < inContexts.size(); ++i )
     {
-    PresentationContext const &in = inContexts[i];
+    const PresentationContext &in = inContexts[i];
     mPresentationContexts.emplace_back(in );
     }
 }

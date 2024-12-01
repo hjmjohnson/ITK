@@ -135,14 +135,14 @@ bool PVRGCodec::Decode(DataElement const &in, DataElement &out)
     os << input;
     os << ".";
     os << file; // don't ask
-    const std::string altfile = os.str();
-    const size_t len = System::FileSize(altfile.c_str());
+   const  std::string altfile = os.str();
+   const  size_t len = System::FileSize(altfile.c_str());
     if( !len )
       {
       gdcmDebugMacro( "Output file was really empty: " << altfile );
       return false;
       }
-    const char *rawfile = altfile.c_str();
+   const  char *rawfile = altfile.c_str();
 
     gdcmDebugMacro( "Processing: " << rawfile );
     std::ifstream is(rawfile, std::ios::binary);

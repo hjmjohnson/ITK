@@ -45,8 +45,8 @@ ChangeInformationImageFilter<TInputImage>::GenerateOutputInformation()
   itkDebugMacro("GenerateOutputInformation Start");
 
   // Get pointers to the input and output
-  typename Superclass::OutputImagePointer output = this->GetOutput();
-  typename Superclass::InputImagePointer  input = const_cast<TInputImage *>(this->GetInput());
+  typename Superclass::OutputImagePointer const output = this->GetOutput();
+  typename Superclass::InputImagePointer const  input = const_cast<TInputImage *>(this->GetInput());
 
   if (!output || !input)
   {

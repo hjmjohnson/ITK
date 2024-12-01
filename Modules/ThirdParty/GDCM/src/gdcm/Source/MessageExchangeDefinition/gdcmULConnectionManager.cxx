@@ -673,14 +673,14 @@ EStateID ULConnectionManager::RunMoveEventLoop(ULEvent& currentEvent, ULConnecti
             Trace::GetStream() << std::endl;
             }
           if (theRSP.FindDataElement(Tag(0x0, 0x0800))){
-            DataElement const & de = theRSP.GetDataElement(Tag(0x0,0x0800));
+            const DataElement & de = theRSP.GetDataElement(Tag(0x0,0x0800));
             Attribute<0x0,0x0800> at;
             at.SetFromDataElement( de );
             unsigned short datasettype = at.GetValue();
             assert( datasettype == 0x0101 || datasettype == 0x1 ); (void)datasettype;
           }
           if (theRSP.FindDataElement(Tag(0x0, 0x0900))){
-            DataElement const & de = theRSP.GetDataElement(Tag(0x0,0x0900));
+            const DataElement & de = theRSP.GetDataElement(Tag(0x0,0x0900));
             Attribute<0x0,0x0900> at;
             at.SetFromDataElement( de );
             theVal = at.GetValues()[0];
@@ -692,7 +692,7 @@ EStateID ULConnectionManager::RunMoveEventLoop(ULEvent& currentEvent, ULConnecti
           }
           uint32_t theCommandCode = 0;
           if (theRSP.FindDataElement(Tag(0x0,0x0100))){
-            DataElement const & de = theRSP.GetDataElement(Tag(0x0,0x0100));
+            const DataElement & de = theRSP.GetDataElement(Tag(0x0,0x0100));
             Attribute<0x0,0x0100> at;
             at.SetFromDataElement( de );
             theCommandCode = at.GetValues()[0];
@@ -710,7 +710,7 @@ EStateID ULConnectionManager::RunMoveEventLoop(ULEvent& currentEvent, ULConnecti
           }
           if (theVal != pendingDE1 && theVal != pendingDE2 && theVal != success){
             //check for other error fields
-            const ByteValue *err1 = nullptr, *err2 = nullptr;
+           const  ByteValue *err1 = nullptr, *err2 = nullptr;
             gdcmErrorMacro( "Transfer failed with code " << theVal << std::endl);
             switch (theVal){
               case 0xA701:
@@ -1014,7 +1014,7 @@ EStateID ULConnectionManager::RunEventLoop(ULEvent& currentEvent, ULConnection* 
               if (theVal != pendingDE1 && theVal != pendingDE2 && theVal != success)
                 {
                 //check for other error fields
-                const ByteValue *err1 = nullptr, *err2 = nullptr;
+               const  ByteValue *err1 = nullptr, *err2 = nullptr;
                 gdcmErrorMacro( "Transfer failed with code " << theVal << std::endl);
                 switch (theVal){
                   case 0xA701:
@@ -1110,7 +1110,7 @@ EStateID ULConnectionManager::RunEventLoop(ULEvent& currentEvent, ULConnection* 
                   ts1.SetNameFromUID( UIDs::ImplicitVRLittleEndianDefaultTransferSyntaxforDICOM );
                   if( mSecondaryConnection )
                     {
-                    const TransferSyntaxSub & ts_ = mSecondaryConnection->GetCStoreTransferSyntax();
+                   const  TransferSyntaxSub & ts_ = mSecondaryConnection->GetCStoreTransferSyntax();
                     if( strcmp(ts_.GetName(), ts1.GetName()) != 0)
                       {
                       useimplicit = false;

@@ -29,7 +29,7 @@ EquivalencyTable::Add(unsigned long a, unsigned long b)
   }
   else if (a < b)
   { // swap a, b
-    unsigned long temp = a;
+    unsigned long const temp = a;
     a = b;
     b = temp;
   }
@@ -62,12 +62,12 @@ EquivalencyTable::AddAndFlatten(unsigned long a, unsigned long b)
   }
   else if (a < b)
   { // swap a, b
-    unsigned long temp = a;
+    unsigned long const temp = a;
     a = b;
     b = temp;
   }
 
-  unsigned long bFlattened = this->RecursiveLookup(b);
+  unsigned long const bFlattened = this->RecursiveLookup(b);
   result = m_HashMap.insert(ValueType(a, bFlattened));
 
   if (result.second == false)

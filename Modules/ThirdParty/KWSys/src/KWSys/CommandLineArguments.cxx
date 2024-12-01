@@ -133,7 +133,7 @@ bool CommandLineArguments::GetMatchedArguments(
   // Does the argument match to any we know about?
   for (it = this->Internals->Callbacks.begin();
        it != this->Internals->Callbacks.end(); ++it) {
-    const CommandLineArguments::Internal::String& parg = it->first;
+   const  CommandLineArguments::Internal::String& parg = it->first;
     CommandLineArgumentsCallbackStructure* cs = &it->second;
     if (cs->ArgumentType == CommandLineArguments::NO_ARGUMENT ||
         cs->ArgumentType == CommandLineArguments::SPACE_ARGUMENT) {
@@ -155,7 +155,7 @@ int CommandLineArguments::Parse()
     this->Internals->UnusedArguments.clear();
   }
   for (cc = 0; cc < this->Internals->Argv.size(); cc++) {
-    const std::string& arg = this->Internals->Argv[cc];
+   const  std::string& arg = this->Internals->Argv[cc];
     CommandLineArguments_DEBUG("Process argument: " << arg);
     this->Internals->LastArgument = cc;
     if (this->GetMatchedArguments(&matches, arg)) {
@@ -174,7 +174,7 @@ int CommandLineArguments::Parse()
       // additional value
       CommandLineArgumentsCallbackStructure* cs =
         &this->Internals->Callbacks[matches[maxidx]];
-      const std::string& sarg = matches[maxidx];
+     const  std::string& sarg = matches[maxidx];
       if (cs->Argument != sarg) {
         abort();
       }
@@ -220,7 +220,7 @@ int CommandLineArguments::Parse()
           // Suck in all the rest of the arguments
           CommandLineArguments_DEBUG("This is a multi argument: " << arg);
           for (cc++; cc < this->Internals->Argv.size(); ++cc) {
-            const std::string& marg = this->Internals->Argv[cc];
+           const  std::string& marg = this->Internals->Argv[cc];
             CommandLineArguments_DEBUG(
               " check multi argument value: " << marg);
             if (this->GetMatchedArguments(&matches, marg)) {
@@ -547,7 +547,7 @@ void CommandLineArguments::GenerateHelp()
       }
       str << "  " << argument.substr(0, maxstrlen) << "  ";
     }
-    const char* ptr = this->Internals->Callbacks[mpit->first].Help;
+   const  char* ptr = this->Internals->Callbacks[mpit->first].Help;
     size_t len = strlen(ptr);
     int cnt = 0;
     while (len > 0) {

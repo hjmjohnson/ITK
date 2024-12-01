@@ -42,15 +42,15 @@ struct dircos_key {
   void read( const std::string & str ) {
     DirectionCosines dc;
     dc.SetFromString( str.c_str() );
-    const double * ptr = dc;
+   const  double * ptr = dc;
     memcpy( dircos, ptr, sizeof(dircos) );
   }
 };
 
 struct dircos_comp {
   bool operator()( dircos_key const & lhs, dircos_key const & rhs ) const {
-    const double *iop1 = lhs.dircos;
-    const double *iop2 = rhs.dircos;
+   const  double *iop1 = lhs.dircos;
+   const  double *iop2 = rhs.dircos;
     return std::lexicographical_compare(iop1, iop1+6,
         iop2, iop2+6);
   }
@@ -143,14 +143,14 @@ bool IPPSorter::Sort(std::vector<std::string> const & filenames)
   for(std::vector<std::string>::const_iterator it1 = filenames.begin();
     it1 != filenames.end(); ++it1)
     {
-    const char *filename = it1->c_str();
+   const  char *filename = it1->c_str();
     bool iskey = scanner.IsKey(filename);
     if( iskey )
       {
       reference = filename;
       }
     }
-  Scanner::TagToValue const &t2v = scanner.GetMapping(reference);
+  const Scanner::TagToValue &t2v = scanner.GetMapping(reference);
   Scanner::TagToValue::const_iterator it = t2v.find( tiop );
   // Take the first file in the list of filenames, if not IOP is found, simply gives up:
   if( it == t2v.end() )
@@ -194,16 +194,16 @@ bool IPPSorter::Sort(std::vector<std::string> const & filenames)
   DirectionCosines dc2;
   for(; it1 != filenames.end(); ++it1)
     {
-    const char *filename = it1->c_str();
+   const  char *filename = it1->c_str();
     bool iskey = scanner.IsKey(filename);
     if( iskey )
       {
-      const char *value =  scanner.GetValue(filename, tipp);
+     const  char *value =  scanner.GetValue(filename, tipp);
       if( value )
         {
         if( DirCosTolerance != 0. )
           {
-          const char *value2 =  scanner.GetValue(filename, tiop);
+         const  char *value2 =  scanner.GetValue(filename, tiop);
           if( !dc2.SetFromString( value2 ) )
             {
             if( value2 ) {
@@ -284,7 +284,7 @@ bool IPPSorter::Sort(std::vector<std::string> const & filenames)
       {
       // If user ask for a ZTolerance of 1e-4, there is no need for us to
       // store the extra digits... this will make sure to return 2.2 from a 2.1999938551239993 value
-      const int l = (int)( -log10(ZTolerance) );
+     const  int l = (int)( -log10(ZTolerance) );
       ZSpacing = spacing_round(zspacing, l);
       }
     if( !spacingisgood )

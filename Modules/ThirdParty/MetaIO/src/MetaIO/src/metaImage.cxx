@@ -1512,7 +1512,7 @@ MetaImage::ReadStream(int _nDims, METAIO_STREAM::ifstream * _stream, bool _readE
 
       auto * readStreamTemp = new METAIO_STREAM::ifstream;
 
-      const char * extensions[] = { "", ".gz", ".Z", nullptr };
+     const  char * extensions[] = { "", ".gz", ".Z", nullptr };
       for (unsigned ii = 0; extensions[ii] != nullptr; ii++)
       {
         std::string tempFName(fName);
@@ -1840,7 +1840,7 @@ MetaImage::WriteROI(int *        _indexMin,
     {
       seekoff = seekoff - 1;
       tmpWriteStream->seekp(dataPos + seekoff, std::ios::beg);
-      const char zerobyte = 0;
+     const  char zerobyte = 0;
       tmpWriteStream->write(&zerobyte, 1);
     }
 
@@ -1995,7 +1995,7 @@ MetaImage::WriteROI(int *        _indexMin,
     std::streamoff seekoff = m_Quantity * elementNumberOfBytes;
     seekoff -= 1;
     m_WriteStream->seekp(seekoff, std::ios::cur);
-    const char zerobyte = 0;
+   const  char zerobyte = 0;
     m_WriteStream->write(&zerobyte, 1);
 
     writeResult = M_WriteElementsROI(m_WriteStream, elementData, dataPos, _indexMin, _indexMax);
@@ -2244,7 +2244,7 @@ MetaImage::M_SetupWriteFields()
   i = MET_GetFieldRecordNumber("AnatomicalOrientation", &m_Fields);
   if (i < 0)
   {
-    const char * str = AnatomicalOrientationAcronym();
+   const  char * str = AnatomicalOrientationAcronym();
     mF = new MET_FieldRecordType;
     MET_InitWriteField(mF, "AnatomicalOrientation", MET_STRING, strlen(str), str);
     m_Fields.push_back(mF);
@@ -3153,7 +3153,7 @@ MetaImage::ReadROIStream(int *           _indexMin,
 
       auto * readStreamTemp = new METAIO_STREAM::ifstream;
 
-      const char * extensions[] = { "", ".gz", ".Z", nullptr };
+     const  char * extensions[] = { "", ".gz", ".Z", nullptr };
       for (unsigned ii = 0; extensions[ii] != nullptr; ii++)
       {
         std::string tempFName(fName);

@@ -210,7 +210,7 @@ lsmrBase::Dnrm2( unsigned int n, const double *x ) const
       if ( x[i] != 0.0 )
     {
       double dx = x[i];
-      const double absxi = std::abs(dx);
+     const  double absxi = std::abs(dx);
 
       if ( magnitudeOfLargestElement < absxi )
         {

@@ -178,7 +178,7 @@ ExceptionObject::what() const noexcept
 void
 ExceptionObject::Print(std::ostream & os) const
 {
-  Indent indent;
+  Indent const indent;
 
   // Print header
   os << std::endl;

@@ -39,13 +39,13 @@ testMetaGroup(int argc, char * argv[])
   std::cout << " [PASSED] " << std::endl;
 
   std::cout << "Testing Reading:";
-  MetaGroup groupLoad("group.meta");
+  MetaGroup const groupLoad("group.meta");
   std::cout << " [PASSED] " << std::endl;
 
   groupLoad.PrintInfo();
 
   std::cout << "Testing Copy:";
-  MetaGroup groupCopy(&groupLoad);
+  MetaGroup const groupCopy(&groupLoad);
   std::cout << " [PASSED] " << std::endl;
 
   groupCopy.PrintInfo();

@@ -109,8 +109,8 @@ PermuteAxesImageFilter<TImage>::GenerateOutputInformation()
   Superclass::GenerateOutputInformation();
 
   // get pointers to the input and output
-  typename Superclass::InputImageConstPointer inputPtr = this->GetInput();
-  typename Superclass::OutputImagePointer     outputPtr = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputPtr = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -159,8 +159,8 @@ PermuteAxesImageFilter<TImage>::GenerateInputRequestedRegion()
   Superclass::GenerateInputRequestedRegion();
 
   // get pointers to the input and output
-  InputImagePointer  inputPtr = const_cast<TImage *>(this->GetInput());
-  OutputImagePointer outputPtr = this->GetOutput();
+  InputImagePointer const  inputPtr = const_cast<TImage *>(this->GetInput());
+  OutputImagePointer const outputPtr = this->GetOutput();
 
   if (!inputPtr || !outputPtr)
   {
@@ -189,8 +189,8 @@ void
 PermuteAxesImageFilter<TImage>::DynamicThreadedGenerateData(const OutputImageRegionType & outputRegionForThread)
 {
   // Get the input and output pointers
-  typename Superclass::InputImageConstPointer inputPtr = this->GetInput();
-  typename Superclass::OutputImagePointer     outputPtr = this->GetOutput();
+  typename Superclass::InputImageConstPointer const inputPtr = this->GetInput();
+  typename Superclass::OutputImagePointer const     outputPtr = this->GetOutput();
 
   TotalProgressReporter progress(this, outputPtr->GetRequestedRegion().GetNumberOfPixels());
 

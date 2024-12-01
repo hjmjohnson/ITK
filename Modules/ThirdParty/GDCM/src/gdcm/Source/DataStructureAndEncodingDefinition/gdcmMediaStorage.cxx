@@ -355,14 +355,14 @@ unsigned int MediaStorage::GetNumberOfMSType()
 
 unsigned int MediaStorage::GetNumberOfMSString()
 {
-  static const unsigned int n = sizeof( MSStrings ) / sizeof( *MSStrings );
+  const static unsigned int n = sizeof( MSStrings ) / sizeof( *MSStrings );
   assert( n > 0 );
   return n - 1;
 }
 
 unsigned int MediaStorage::GetNumberOfModality()
 {
-  static const unsigned int n = sizeof( MSModalityTypes ) / sizeof( *MSModalityTypes );
+  const static unsigned int n = sizeof( MSModalityTypes ) / sizeof( *MSModalityTypes );
   assert( n > 0 );
   return n - 1;
 }
@@ -407,7 +407,7 @@ std::string MediaStorage::GetFromDataSetOrHeader(DataSet const &ds, const Tag & 
 {
   if( ds.FindDataElement( tag ) )
     {
-    const ByteValue *sopclassuid = ds.GetDataElement( tag ).GetByteValue();
+   const  ByteValue *sopclassuid = ds.GetDataElement( tag ).GetByteValue();
     // Empty SOP Class UID:
     // lifetechmed/A0038329.DCM
     if( !sopclassuid || !sopclassuid->GetPointer() ) return std::string();
@@ -472,18 +472,18 @@ void MediaStorage::SetFromSourceImageSequence(DataSet const &ds)
   const Tag sourceImageSequenceTag(0x0008,0x2112);
   if( ds.FindDataElement( sourceImageSequenceTag ) )
     {
-    const DataElement &sourceImageSequencesq = ds.GetDataElement( sourceImageSequenceTag );
+   const  DataElement &sourceImageSequencesq = ds.GetDataElement( sourceImageSequenceTag );
     //const SequenceOfItems* sq = sourceImageSequencesq.GetSequenceOfItems();
     SmartPointer<SequenceOfItems> sq = sourceImageSequencesq.GetValueAsSQ();
     if( !sq ) return;
     SequenceOfItems::ConstIterator it = sq->Begin();
-    const DataSet &subds = it->GetNestedDataSet();
+   const  DataSet &subds = it->GetNestedDataSet();
     // (0008,1150) UI =MRImageStorage                          #  26, 1 ReferencedSOPClassUID
     const Tag referencedSOPClassUIDTag(0x0008,0x1150);
     if( subds.FindDataElement( referencedSOPClassUIDTag ) )
       {
-      const DataElement& de = subds.GetDataElement( referencedSOPClassUIDTag );
-      const ByteValue *sopclassuid = de.GetByteValue();
+     const  DataElement& de = subds.GetDataElement( referencedSOPClassUIDTag );
+     const  ByteValue *sopclassuid = de.GetByteValue();
       // LEADTOOLS_FLOWERS-8-PAL-Uncompressed.dcm
       //assert( sopclassuid );
       if( sopclassuid )
@@ -520,7 +520,7 @@ bool MediaStorage::SetFromModality(DataSet const &ds)
       // Someone defined the Transfer Syntax but I have no clue what
       // it is. Since there is Pixel Data element, let's try to read
       // that as a buggy DICOM Image file...
-      const ByteValue *bv = ds.GetDataElement( Tag(0x0008,0x0060) ).GetByteValue();
+     const  ByteValue *bv = ds.GetDataElement( Tag(0x0008,0x0060) ).GetByteValue();
       if( bv )
         {
         std::string modality = std::string( bv->GetPointer(), bv->GetLength() );

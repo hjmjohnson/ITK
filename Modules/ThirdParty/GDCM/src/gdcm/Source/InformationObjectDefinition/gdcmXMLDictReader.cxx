@@ -55,7 +55,7 @@ void XMLDictReader::HandleEntry(const char **atts)
     if( group == *current )
       {
       unsigned int v;
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       int r = sscanf(raw, "%04x", &v);
       assert( r == 1 );
       assert( v <= 0xFFFF );
@@ -78,7 +78,7 @@ void XMLDictReader::HandleEntry(const char **atts)
     else if( element == *current )
       {
       unsigned int v;
-      const char *raw = *(current+1);
+     const  char *raw = *(current+1);
       int r = sscanf(raw, "%04x", &v);
       assert( r == 1 );
       assert( v <= 0xFFFF );

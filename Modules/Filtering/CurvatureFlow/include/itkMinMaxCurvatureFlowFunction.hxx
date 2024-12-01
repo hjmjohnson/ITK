@@ -61,10 +61,10 @@ MinMaxCurvatureFlowFunction<TImage>::InitializeStencilOperator()
 
   m_StencilOperator.SetRadius(m_StencilRadius);
 
-  RadiusValueType counter[ImageDimension];
-  unsigned int    j;
-  RadiusValueType span = 2 * m_StencilRadius + 1;
-  RadiusValueType sqrRadius = m_StencilRadius * m_StencilRadius;
+  RadiusValueType       counter[ImageDimension];
+  unsigned int          j;
+  RadiusValueType const span = 2 * m_StencilRadius + 1;
+  RadiusValueType const sqrRadius = m_StencilRadius * m_StencilRadius;
   for (j = 0; j < ImageDimension; ++j)
   {
     counter[j] = 0;
@@ -151,8 +151,8 @@ MinMaxCurvatureFlowFunction<TImage>::ComputeThreshold(const DispatchBase &, cons
   // Search for all position in the neighborhood perpendicular to
   // the gradient and at a distance of StencilRadius from center.
 
-  RadiusValueType counter[ImageDimension];
-  RadiusValueType span = 2 * m_StencilRadius + 1;
+  RadiusValueType       counter[ImageDimension];
+  RadiusValueType const span = 2 * m_StencilRadius + 1;
   for (j = 0; j < ImageDimension; ++j)
   {
     counter[j] = 0;
@@ -172,7 +172,8 @@ MinMaxCurvatureFlowFunction<TImage>::ComputeThreshold(const DispatchBase &, cons
 
     for (j = 0; j < ImageDimension; ++j)
     {
-      IndexValueType diff = static_cast<IndexValueType>(counter[j]) - static_cast<IndexValueType>(m_StencilRadius);
+      IndexValueType const diff =
+        static_cast<IndexValueType>(counter[j]) - static_cast<IndexValueType>(m_StencilRadius);
 
       dotProduct += static_cast<PixelType>(diff) * gradient[j];
       vectorMagnitude += static_cast<PixelType>(itk::Math::sqr(diff));
@@ -348,16 +349,16 @@ MinMaxCurvatureFlowFunction<TImage>::ComputeThreshold(const Dispatch<3> &, const
     phi = std::atan(gradient[1] / gradient[0]);
   }
 
-  double cosTheta = std::cos(theta);
-  double sinTheta = std::sin(theta);
-  double cosPhi = std::cos(phi);
-  double sinPhi = std::sin(phi);
+  double const cosTheta = std::cos(theta);
+  double const sinTheta = std::sin(theta);
+  double const cosPhi = std::cos(phi);
+  double const sinPhi = std::sin(phi);
 
-  double rSinTheta = m_StencilRadius * sinTheta;
-  double rCosThetaCosPhi = m_StencilRadius * cosTheta * cosPhi;
-  double rCosThetaSinPhi = m_StencilRadius * cosTheta * sinPhi;
-  double rSinPhi = m_StencilRadius * sinPhi;
-  double rCosPhi = m_StencilRadius * cosPhi;
+  double const rSinTheta = m_StencilRadius * sinTheta;
+  double const rCosThetaCosPhi = m_StencilRadius * cosTheta * cosPhi;
+  double const rCosThetaSinPhi = m_StencilRadius * cosTheta * sinPhi;
+  double const rSinPhi = m_StencilRadius * sinPhi;
+  double const rCosPhi = m_StencilRadius * cosPhi;
 
   // Point 1: angle = 0;
   position[0] = Math::Round<SizeValueType>(m_StencilRadius + rCosThetaCosPhi);
@@ -397,17 +398,17 @@ MinMaxCurvatureFlowFunction<TImage>::ComputeUpdate(const NeighborhoodType & it,
                                                    void *                   globalData,
                                                    const FloatOffsetType &  offset) -> PixelType
 {
-  PixelType update = this->Superclass::ComputeUpdate(it, globalData, offset);
+  PixelType const update = this->Superclass::ComputeUpdate(it, globalData, offset);
 
   if (update == 0.0)
   {
     return update;
   }
 
-  PixelType threshold = this->ComputeThreshold(Dispatch<ImageDimension>(), it);
+  PixelType const threshold = this->ComputeThreshold(Dispatch<ImageDimension>(), it);
 
-  NeighborhoodInnerProduct<ImageType> innerProduct;
-  PixelType                           avgValue = innerProduct(it, m_StencilOperator);
+  NeighborhoodInnerProduct<ImageType> const innerProduct;
+  PixelType const                           avgValue = innerProduct(it, m_StencilOperator);
 
   if (avgValue < threshold)
   {

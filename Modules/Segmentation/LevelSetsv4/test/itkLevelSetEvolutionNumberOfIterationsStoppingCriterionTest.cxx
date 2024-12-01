@@ -38,11 +38,11 @@ itkLevelSetEvolutionNumberOfIterationsStoppingCriterionTest(int, char *[])
   ITK_EXERCISE_BASIC_OBJECT_METHODS(
     criterion, LevelSetEvolutionNumberOfIterationsStoppingCriterion, LevelSetEvolutionStoppingCriterion);
 
-  typename StoppingCriterionType::IterationIdType numberOfIterations = 5;
+  typename StoppingCriterionType::IterationIdType const numberOfIterations = 5;
   criterion->SetNumberOfIterations(numberOfIterations);
   ITK_TEST_SET_GET_VALUE(numberOfIterations, criterion->GetNumberOfIterations());
 
-  typename StoppingCriterionType::OutputRealType rmsChangeAccumulator = 0.1;
+  typename StoppingCriterionType::OutputRealType const rmsChangeAccumulator = 0.1;
   criterion->SetRMSChangeAccumulator(rmsChangeAccumulator);
   ITK_TEST_SET_GET_VALUE(rmsChangeAccumulator, criterion->GetRMSChangeAccumulator());
 
