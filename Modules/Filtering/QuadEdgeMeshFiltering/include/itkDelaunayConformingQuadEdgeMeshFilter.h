@@ -51,8 +51,8 @@ public:
   using InputMeshPointer = typename InputMeshType::Pointer;
   using InputCoordinateType = typename InputMeshType::CoordinateType;
 #ifndef ITK_FUTURE_LEGACY_REMOVE
-  using InputCoordRepType ITK_FUTURE_DEPRECATED(
-    "ITK 6 discourages using `InputCoordRepType`. Please use `InputCoordinateType` instead!") = InputCoordinateType;
+  using InputCoordinateType ITK_FUTURE_DEPRECATED(
+    "ITK 6 discourages using `InputCoordinateType`. Please use `InputCoordinateType` instead!") = InputCoordinateType;
 #endif
   using InputPointType = typename InputMeshType::PointType;
   using InputPointVectorType = typename InputPointType::VectorType;
@@ -79,8 +79,9 @@ public:
   using OutputMeshPointer = typename OutputMeshType::Pointer;
   using OutputCoordinateType = typename OutputMeshType::CoordinateType;
 #ifndef ITK_FUTURE_LEGACY_REMOVE
-  using OutputCoordRepType ITK_FUTURE_DEPRECATED(
-    "ITK 6 discourages using `OutputCoordRepType`. Please use `OutputCoordinateType` instead!") = OutputCoordinateType;
+  using OutputCoordinateType ITK_FUTURE_DEPRECATED(
+    "ITK 6 discourages using `OutputCoordinateType`. Please use `OutputCoordinateType` instead!") =
+    OutputCoordinateType;
 #endif
   using OutputPointType = typename OutputMeshType::PointType;
   using OutputPointIdentifier = typename OutputMeshType::PointIdentifier;
@@ -158,26 +159,26 @@ protected:
   inline CriterionValueType
   Dyer07Criterion(OutputMeshType * iMesh, OutputQEType * iEdge) const
   {
-    OutputPointIdentifier id1 = iEdge->GetOrigin();
-    OutputPointIdentifier id2 = iEdge->GetDestination();
+    const OutputPointIdentifier id1 = iEdge->GetOrigin();
+    const OutputPointIdentifier id2 = iEdge->GetDestination();
 
-    OutputPointIdentifier idA = iEdge->GetLnext()->GetDestination();
-    OutputPointIdentifier idB = iEdge->GetRnext()->GetOrigin();
+    const OutputPointIdentifier idA = iEdge->GetLnext()->GetDestination();
+    const OutputPointIdentifier idB = iEdge->GetRnext()->GetOrigin();
 
-    OutputPointType pt1 = iMesh->GetPoint(id1);
-    OutputPointType pt2 = iMesh->GetPoint(id2);
-    OutputPointType ptA = iMesh->GetPoint(idA);
-    OutputPointType ptB = iMesh->GetPoint(idB);
+    const OutputPointType pt1 = iMesh->GetPoint(id1);
+    const OutputPointType pt2 = iMesh->GetPoint(id2);
+    const OutputPointType ptA = iMesh->GetPoint(idA);
+    const OutputPointType ptB = iMesh->GetPoint(idB);
 
-    OutputVectorType v1A = ptA - pt1;
-    OutputVectorType v1B = ptB - pt1;
-    OutputVectorType v2A = ptA - pt2;
-    OutputVectorType v2B = ptB - pt2;
+    const OutputVectorType v1A = ptA - pt1;
+    const OutputVectorType v1B = ptB - pt1;
+    const OutputVectorType v2A = ptA - pt2;
+    const OutputVectorType v2B = ptB - pt2;
 
-    OutputCoordinateType sq_norm1A = v1A * v1A;
-    OutputCoordinateType sq_norm1B = v1B * v1B;
-    OutputCoordinateType sq_norm2A = v2A * v2A;
-    OutputCoordinateType sq_norm2B = v2B * v2B;
+    const OutputCoordinateType sq_norm1A = v1A * v1A;
+    const OutputCoordinateType sq_norm1B = v1B * v1B;
+    const OutputCoordinateType sq_norm2A = v2A * v2A;
+    const OutputCoordinateType sq_norm2B = v2B * v2B;
 
     auto dotA = static_cast<CriterionValueType>(v1A * v2A);
     auto dotB = static_cast<CriterionValueType>(v1B * v2B);
