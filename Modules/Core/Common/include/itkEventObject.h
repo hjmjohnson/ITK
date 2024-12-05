@@ -142,16 +142,22 @@ operator<<(std::ostream & os, const EventObject & e)
   };                                                       \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define itkEventMacroDefinition(classname, super)                            \
-  classname::classname(const classname & s)                                  \
-    : super(s){};                                                            \
-  classname::~classname() {}                                                 \
-  const char * classname::GetEventName() const { return #classname; }        \
-  bool         classname::CheckEvent(const itk::EventObject * e) const       \
-  {                                                                          \
-    return (dynamic_cast<const classname *>(e) != nullptr);                  \
-  }                                                                          \
-  itk::EventObject * classname::MakeObject() const { return new classname; } \
+#define itkEventMacroDefinition(classname, super)              \
+  classname::classname(const classname & s)                    \
+    : super(s) {};                                             \
+  classname::~classname() {}                                   \
+  const char * classname::GetEventName() const                 \
+  {                                                            \
+    return #classname;                                         \
+  }                                                            \
+  bool classname::CheckEvent(const itk::EventObject * e) const \
+  {                                                            \
+    return (dynamic_cast<const classname *>(e) != nullptr);    \
+  }                                                            \
+  itk::EventObject * classname::MakeObject() const             \
+  {                                                            \
+    return new classname;                                      \
+  }                                                            \
   ITK_MACROEND_NOOP_STATEMENT
 
 #if !defined(ITK_LEGACY_REMOVE)
@@ -190,7 +196,7 @@ operator<<(std::ostream & os, const EventObject & e)
         return new Self;                                   \
       }                                                    \
       classname(const Self & s)                            \
-        : super(s){};                                      \
+        : super(s) {};                                     \
                                                            \
     private:                                               \
       void                                                 \

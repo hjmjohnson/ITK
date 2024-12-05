@@ -517,8 +517,7 @@ PhilipsRECImageIO::CanReadFile(const char * FileNameToRead)
   const std::string HeaderFileName = GetHeaderFileName(filename);
 
   // Try to read the par file.
-  struct par_parameter par
-  {};
+  struct par_parameter par{};
 
   auto philipsPAR = PhilipsPAR::New();
   try
@@ -543,8 +542,7 @@ void
 PhilipsRECImageIO::ReadImageInformation()
 {
   const std::string    HeaderFileName = GetHeaderFileName(this->m_FileName);
-  struct par_parameter par
-  {};
+  struct par_parameter par{};
 
   // Read PAR file.
   auto philipsPAR = PhilipsPAR::New();

@@ -404,7 +404,11 @@ public:
 
   operator nifti_image *() { return m_ptr; }
 
-  nifti_image * operator->() { return m_ptr; }
+  nifti_image *
+  operator->()
+  {
+    return m_ptr;
+  }
 };
 
 

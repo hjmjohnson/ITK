@@ -55,8 +55,11 @@
 /** Get built-in type.  Creates member Get"name"() (e.g., GetVisibility()); */
 #define IPLGetMacroDeclaration(name, type) virtual type Get##name()
 
-#define IPLGetMacroDefinition(class, name, type)      \
-  type class ::Get##name() { return this->m_##name; } \
+#define IPLGetMacroDefinition(class, name, type) \
+  type class ::Get##name()                       \
+  {                                              \
+    return this->m_##name;                       \
+  }                                              \
   ITK_MACROEND_NOOP_STATEMENT
 namespace itk
 {
@@ -163,7 +166,8 @@ public:
     return m_List.end();
   }
 
-  IPLFileSortInfo * operator[](unsigned int __n)
+  IPLFileSortInfo *
+  operator[](unsigned int __n)
   {
     auto it = begin();
     auto itend = end();
