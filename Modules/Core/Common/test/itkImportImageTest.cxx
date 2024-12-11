@@ -77,7 +77,7 @@ itkImportImageTest(int, char *[])
     std::cout << "import->GetOrigin(): " << originValue << std::endl;
 
     import->SetRegion(region);
-    import->SetImportPointer(rawImage, static_cast<SizeValueType>(8 * 12), true);
+    import->SetImportPointer(rawImage, static_cast<itk::SizeValueType>(8 * 12), true);
     import->Update();
     image = import->GetOutput();
   }

@@ -78,7 +78,7 @@ itkLevelSetDomainPartitionImageWithKdTreeTest(int, char *[])
 
   for (unsigned int i = 0; i < numberOfLevelSetFunctions; ++i)
   {
-    index[0] = static_cast<value_type>(10 * i);
+    index[0] = static_cast<vnl_alloc::value_type>(10 * i);
     index[1] = 0;
     size.Fill(10);
 

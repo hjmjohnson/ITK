@@ -72,7 +72,8 @@ itkSubsampleTest2(int, char *[])
   {
     std::cout << "Measurement Vector: " << i << '\t' << subSample->GetMeasurementVector(i) << std::endl;
 
-    if (subSample->GetMeasurementVector(i) != sample->GetMeasurementVector(static_cast<InstanceIdentifier>(i * 2)))
+    if (subSample->GetMeasurementVector(i) !=
+        sample->GetMeasurementVector(static_cast<itk::Statistics::MeasurementVectorTraits::InstanceIdentifier>(i * 2)))
     {
       std::cerr << "Subsampling is not correctly done!" << std::endl;
       return EXIT_FAILURE;
@@ -105,7 +106,8 @@ itkSubsampleTest2(int, char *[])
   {
     std::cout << "Measurement Vector: " << i << '\t' << subSample2->GetMeasurementVector(i) << std::endl;
 
-    if (subSample2->GetMeasurementVector(i) != sample->GetMeasurementVector(static_cast<InstanceIdentifier>(i * 4)))
+    if (subSample2->GetMeasurementVector(i) !=
+        sample->GetMeasurementVector(static_cast<itk::Statistics::MeasurementVectorTraits::InstanceIdentifier>(i * 4)))
     {
       std::cerr << "Subsampling of a subsample is not correctly done!" << std::endl;
       return EXIT_FAILURE;

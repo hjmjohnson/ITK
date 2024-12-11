@@ -109,7 +109,7 @@ itkRingBufferTest(int, char *[])
   }
 
   // Test looping buffer offset backward
-  ringBuffer->MoveHead(static_cast<OffsetValueType>(-2 * static_cast<int>(ringBuffer->GetNumberOfBuffers())));
+  ringBuffer->MoveHead(static_cast<itk::OffsetValueType>(-2 * static_cast<int>(ringBuffer->GetNumberOfBuffers())));
   if (ringBuffer->GetHeadIndex() != oldHeadIndex)
   {
     // DEBUG

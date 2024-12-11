@@ -57,7 +57,7 @@ itkPNGImageIOTest(int argc, char * argv[])
   // Exercise exception cases
   const size_t sizeOfActualIORegion =
     io->GetIORegion().GetNumberOfPixels() *
-    (static_cast<SizeValueType>(io->GetComponentSize() * io->GetNumberOfComponents()));
+    (static_cast<itk::SizeValueType>(io->GetComponentSize() * io->GetNumberOfComponents()));
   auto * loadBuffer = new char[sizeOfActualIORegion];
 
   ITK_TRY_EXPECT_EXCEPTION(io->Read(loadBuffer));

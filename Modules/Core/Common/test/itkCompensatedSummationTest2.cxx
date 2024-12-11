@@ -155,7 +155,7 @@ itkCompensatedSummationTest2(int, char *[])
 
   const itk::ThreadIdType maxNumberOfThreads = domainThreader->GetMultiThreader()->GetGlobalMaximumNumberOfThreads();
   domain[0] = 0;
-  domain[1] = static_cast<value_type>(maxNumberOfThreads * 10000);
+  domain[1] = static_cast<vnl_alloc::value_type>(maxNumberOfThreads * 10000);
 
   /* Test with single thread. We should get the same result. */
   const itk::ThreadIdType numberOfThreads = 1;
