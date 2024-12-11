@@ -297,12 +297,12 @@ namespace itk
   ::itk::LightObject::Pointer CreateAnother() const override { return x::New().GetPointer(); } \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define itkCloneMacro(x)                                                  \
-  Pointer Clone() const                                                   \
-  {                                                                       \
-    Pointer rval = dynamic_cast<x *>(this->InternalClone().GetPointer()); \
-    return rval;                                                          \
-  }                                                                       \
+#define itkCloneMacro(x)                                                    \
+  Pointer Clone() const                                                     \
+  {                                                                         \
+    Pointer rval = dynamic_cast<(x) *>(this->InternalClone().GetPointer()); \
+    return rval;                                                            \
+  }                                                                         \
   ITK_MACROEND_NOOP_STATEMENT
 
 /** Define an object creation method throwing an exception if the object
@@ -360,11 +360,11 @@ namespace itk
 // prohibits the use of copy/move construction and copy/move assignment
 // functions.
 //
-#define ITK_DISALLOW_COPY_AND_MOVE(TypeName)       \
-  TypeName(const TypeName &) = delete;             \
-  TypeName & operator=(const TypeName &) = delete; \
-  TypeName(TypeName &&) = delete;                  \
-  TypeName & operator=(TypeName &&) = delete
+#define ITK_DISALLOW_COPY_AND_MOVE(TypeName)         \
+  TypeName(const TypeName &) = delete;               \
+  (TypeName) & operator=(const TypeName &) = delete; \
+  TypeName((TypeName) &&) = delete;                  \
+  (TypeName) & operator=((TypeName) &&) = delete
 
 #if !defined(ITK_LEGACY_REMOVE)
 #  define ITK_DISALLOW_COPY_AND_ASSIGN(TypeName) ITK_DISALLOW_COPY_AND_MOVE(TypeName)
@@ -381,11 +381,11 @@ user-declared destructor [-Wdeprecated]" (Mac10.13-AppleClang)
  - "warning C5267: definition of implicit copy constructor for '<TypeName>' is deprecated because it has a user-provided
 destructor." (Visual Studio 2022/MSVC)
   Intended to be used in the public section of a class. */
-#define ITK_DEFAULT_COPY_AND_MOVE(TypeName)         \
-  TypeName(const TypeName &) = default;             \
-  TypeName & operator=(const TypeName &) = default; \
-  TypeName(TypeName &&) = default;                  \
-  TypeName & operator=(TypeName &&) = default
+#define ITK_DEFAULT_COPY_AND_MOVE(TypeName)           \
+  TypeName(const TypeName &) = default;               \
+  (TypeName) & operator=(const TypeName &) = default; \
+  TypeName((TypeName) &&) = default;                  \
+  (TypeName) & operator=((TypeName) &&) = default
 
 
 // When ITK_EXPERIMENTAL_CXX20_REWRITTEN_UNEQUAL_OPERATOR is defined, ITK uses
@@ -535,7 +535,8 @@ OutputWindowDisplayDebugText(const char *);
 #define itkDeclareExceptionMacro(newexcp, parentexcp, whatmessage)                   \
   namespace itk                                                                      \
   {                                                                                  \
-  class newexcp : public parentexcp                                                  \
+  class(newexcp)                                                                     \
+    : public(parentexcp)                                                             \
   {                                                                                  \
   public:                                                                            \
     /* default message provides backward compatibility for a given exception type */ \
@@ -591,13 +592,13 @@ OutputWindowDisplayDebugText(const char *);
   }                                                      \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define itkLogMacroStatic(obj, x, y)                    \
-  {                                                     \
-    if (obj->GetLogger())                               \
-    {                                                   \
-      obj->GetLogger()->Write(::itk::LoggerBase::x, y); \
-    }                                                   \
-  }                                                     \
+#define itkLogMacroStatic(obj, x, y)                      \
+  {                                                       \
+    if ((obj)->GetLogger())                               \
+    {                                                     \
+      (obj)->GetLogger()->Write(::itk::LoggerBase::x, y); \
+    }                                                     \
+  }                                                       \
   ITK_MACROEND_NOOP_STATEMENT
 
 //----------------------------------------------------------------------------
@@ -693,10 +694,10 @@ OutputWindowDisplayDebugText(const char *);
 // Each struct will take up some multiple of cacheline sizes.
 // This is particularly useful for arrays of thread private variables.
 //
-#define itkPadStruct(mincachesize, oldtype, newtype)                      \
-  struct newtype : public oldtype                                         \
-  {                                                                       \
-    char _StructPadding[mincachesize - (sizeof(oldtype) % mincachesize)]; \
+#define itkPadStruct(mincachesize, oldtype, newtype)                          \
+  struct newtype : public oldtype                                             \
+  {                                                                           \
+    char _StructPadding[(mincachesize) - (sizeof(oldtype) % (mincachesize))]; \
   }
 
 //
@@ -708,7 +709,7 @@ OutputWindowDisplayDebugText(const char *);
 #elif defined(_MSC_VER)
 #  define itkAlignedTypedef(alignment, oldtype, newtype) using newtype = __declspec(align(alignment)) oldtype
 #else
-#  define itkAlignedTypedef(alignment, oldtype, newtype) using newtype = oldtype
+#  define itkAlignedTypedef(alignment, oldtype, newtype) using(newtype) = oldtype
 #endif
 
 #if defined(ITK_FUTURE_LEGACY_REMOVE)
@@ -754,9 +755,9 @@ compilers.
 // API.
 #define itkForLoopAssignmentMacro(                                                                        \
   DestinationType, SourceType, DestinationElementType, DestinationArray, SourceArray, NumberOfIterations) \
-  for (unsigned int i = 0; i < NumberOfIterations; ++i)                                                   \
+  for (unsigned int i = 0; i < (NumberOfIterations); ++i)                                                 \
   {                                                                                                       \
-    DestinationArray[i] = static_cast<DestinationElementType>(SourceArray[i]);                            \
+    (DestinationArray)[i] = static_cast<DestinationElementType>((SourceArray)[i]);                        \
   }                                                                                                       \
   ITK_MACROEND_NOOP_STATEMENT
 
@@ -771,9 +772,9 @@ compilers.
 // API.
 #define itkForLoopRoundingAndAssignmentMacro(                                                                     \
   DestinationType, Sourcrnd_halfintup, DestinationElementType, DestinationArray, SourceArray, NumberOfIterations) \
-  for (unsigned int i = 0; i < NumberOfIterations; ++i)                                                           \
+  for (unsigned int i = 0; i < (NumberOfIterations); ++i)                                                         \
   {                                                                                                               \
-    DestinationArray[i] = ::itk::Math::Round<DestinationElementType>(SourceArray[i]);                             \
+    (DestinationArray)[i] = ::itk::Math::Round<DestinationElementType>((SourceArray)[i]);                         \
   }                                                                                                               \
   ITK_MACROEND_NOOP_STATEMENT
 
@@ -788,14 +789,14 @@ compilers.
 #  endif
 
 #else
-#  define itkAssertInDebugOrThrowInReleaseMacro(msg) itkGenericExceptionMacro(<< msg);
+#  define itkAssertInDebugOrThrowInReleaseMacro(msg) itkGenericExceptionMacro(<< (msg));
 #endif
 
 #define itkAssertOrThrowMacro(test, message)                     \
   if (!(test))                                                   \
   {                                                              \
     std::ostringstream msgstr;                                   \
-    msgstr << message;                                           \
+    msgstr << (message);                                         \
     itkAssertInDebugOrThrowInReleaseMacro(msgstr.str().c_str()); \
   }                                                              \
   ITK_MACROEND_NOOP_STATEMENT
@@ -838,16 +839,16 @@ compilers.
 #endif
 
 /** Set an input. This defines the Set"name"() method */
-#define itkSetInputMacro(name, type)                                                     \
-  virtual void Set##name(const type * _arg)                                              \
-  {                                                                                      \
-    itkDebugMacro("setting input " #name " to " << _arg);                                \
-    if (_arg != itkDynamicCastInDebugMode<type *>(this->ProcessObject::GetInput(#name))) \
-    {                                                                                    \
-      this->ProcessObject::SetInput(#name, const_cast<type *>(_arg));                    \
-      this->Modified();                                                                  \
-    }                                                                                    \
-  }                                                                                      \
+#define itkSetInputMacro(name, type)                                                       \
+  virtual void Set##name(const type * _arg)                                                \
+  {                                                                                        \
+    itkDebugMacro("setting input " #name " to " << _arg);                                  \
+    if (_arg != itkDynamicCastInDebugMode<(type) *>(this->ProcessObject::GetInput(#name))) \
+    {                                                                                      \
+      this->ProcessObject::SetInput(#name, const_cast<(type) *>(_arg));                    \
+      this->Modified();                                                                    \
+    }                                                                                      \
+  }                                                                                        \
   ITK_MACROEND_NOOP_STATEMENT
 
 /** Get an input. This defines the Get"name"() method */
@@ -1078,7 +1079,7 @@ compilers.
 #define itkSetClampMacro(name, type, min, max)                                  \
   virtual void Set## name(type _arg)                                             \
   {                                                                             \
-    const type temp_extrema = (_arg <= min ? min : (_arg >= max ? max : _arg)); \
+    const type temp_extrema = (_arg <= (min) ? (min) : (_arg >= (max) ? (max) : _arg)); \
     itkDebugMacro("setting " << #name " to " << _arg);                          \
     ITK_GCC_PRAGMA_PUSH                                                         \
     ITK_GCC_SUPPRESS_Wfloat_equal                                               \
@@ -1097,7 +1098,7 @@ compilers.
  * Creates method Set"name"() (e.g., SetPoints()). Note that using
  * smart pointers requires using raw pointers when setting input. */
 #define itkSetObjectMacro(name, type)                  \
-  virtual void Set## name(type * _arg)                  \
+  virtual void Set## name((type) * _arg)                  \
   {                                                    \
     itkDebugMacro("setting " << #name " to " << _arg); \
     if (this->m_## name != _arg)                        \
@@ -1159,12 +1160,11 @@ compilers.
 #else // defined ( ITK_FUTURE_LEGACY_REMOVE )
 /** Get a raw pointer to an object.  Creates the member
  * Get"name"() (e.g., GetPoints()). */
-#  define itkGetObjectMacro(name, type)                                \
-    virtual type * Get##name() { return this->m_##name.GetPointer(); } \
-    ITK_MACROEND_NOOP_STATEMENT
-#  define itkGetModifiableObjectMacro(name, type)                                \
-    virtual type * GetModifiable##name() { return this->m_##name.GetPointer(); } \
-    itkGetConstObjectMacro(name, type);                                          \
+#  define itkGetObjectMacro(name, type) \
+    (virtual(type) * Get##name() { return this->m_##name.GetPointer(); } ITK_MACROEND_NOOP_STATEMENT)
+#  define itkGetModifiableObjectMacro(name, type)                                 \
+    virtual(type) * GetModifiable##name() { return this->m_##name.GetPointer(); } \
+    itkGetConstObjectMacro(name, type);                                           \
     itkGetObjectMacro(name, type)
 #endif // defined ( ITK_FUTURE_LEGACY_REMOVE )
 
@@ -1208,7 +1208,7 @@ compilers.
   virtual void Set## name(type data[])        \
   {                                          \
     unsigned int i;                          \
-    for (i = 0; i < count; ++i)              \
+    for (i = 0; i < (count); ++i)              \
     {                                        \
       ITK_GCC_PRAGMA_PUSH                        \
       ITK_GCC_SUPPRESS_Wfloat_equal              \
@@ -1218,10 +1218,10 @@ compilers.
       }                                      \
       ITK_GCC_PRAGMA_POP                     \
     }                                        \
-    if (i < count)                           \
+    if (i < (count))                           \
     {                                        \
       this->Modified();                      \
-      for (i = 0; i < count; ++i)            \
+      for (i = 0; i < (count); ++i)            \
       {                                      \
         this->m_## name[i] = data[i];         \
       }                                      \
@@ -1232,8 +1232,8 @@ compilers.
 
 /** Get vector macro. Returns pointer to type (i.e., array of type).
  * This is for efficiency. */
-#define itkGetVectorMacro(name, type, count)                  \
-  virtual type * Get##name() const { return this->m_##name; } \
+#define itkGetVectorMacro(name, type, count)                   \
+  virtual(type) * Get##name() const { return this->m_##name; } \
   ITK_MACROEND_NOOP_STATEMENT
 
 /**\def itkGPUKernelClassMacro

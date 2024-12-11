@@ -198,13 +198,13 @@ public:
 //       a temporary variable that is initialized from the
 //       constexpr [Zero|One] to be passed by const reference
 //       to the GENERIC_ARRAY<T,D> constructor.
-#define itkStaticNumericTraitsGenericArrayMacro(GENERIC_ARRAY, T, D)                    \
-  template <>                                                                           \
-  ITKCommon_EXPORT const GENERIC_ARRAY<T, D> NumericTraits<GENERIC_ARRAY<T, D>>::Zero = \
-    MakeFilled<GENERIC_ARRAY<T, D>>(NumericTraits<T>::Zero);                            \
-  template <>                                                                           \
-  ITKCommon_EXPORT const GENERIC_ARRAY<T, D> NumericTraits<GENERIC_ARRAY<T, D>>::One =  \
-    MakeFilled<GENERIC_ARRAY<T, D>>(NumericTraits<T>::One);                             \
+#define itkStaticNumericTraitsGenericArrayMacro(GENERIC_ARRAY, T, D)                   \
+  template <>                                                                          \
+    ITKCommon_EXPORT const GENERIC_ARRAY<T, D> NumericTraits < (GENERIC_ARRAY) < T,    \
+    (D) >> ::Zero = MakeFilled < (GENERIC_ARRAY) < T, (D) >> (NumericTraits<T>::Zero); \
+  template <>                                                                          \
+    ITKCommon_EXPORT const GENERIC_ARRAY<T, D> NumericTraits < (GENERIC_ARRAY) < T,    \
+    (D) >> ::One = MakeFilled < (GENERIC_ARRAY) < T, (D) >> (NumericTraits<T>::One);   \
   ITK_MACROEND_NOOP_STATEMENT
 
 //

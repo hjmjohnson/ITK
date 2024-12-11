@@ -22,24 +22,24 @@
 #include "itkMath.h"
 #include "itkTestingMacros.h"
 
-#define CHECK_FOR_VALUE(a, b)                                                            \
-  {                                                                                      \
-    double eps = 4.0 * itk::NumericTraits<double>::epsilon();                            \
-    ITK_GCC_PRAGMA_PUSH                                                                  \
-    ITK_GCC_SUPPRESS_Wfloat_equal                                                        \
-    eps = (b == 0.0) ? eps : itk::Math::abs(b * eps);                                    \
-    ITK_GCC_PRAGMA_POP                                                                   \
-    if (itk::Math::abs(a - b) > eps)                                                     \
-    {                                                                                    \
-      std::cerr << "Error in " #a << " expected " << b << " but got " << a << std::endl; \
-      return EXIT_FAILURE;                                                               \
-    }                                                                                    \
-  }                                                                                      \
+#define CHECK_FOR_VALUE(a, b)                                                                \
+  {                                                                                          \
+    double eps = 4.0 * itk::NumericTraits<double>::epsilon();                                \
+    ITK_GCC_PRAGMA_PUSH                                                                      \
+    ITK_GCC_SUPPRESS_Wfloat_equal                                                            \
+    eps = ((b) == 0.0) ? eps : itk::Math::abs((b) * eps);                                    \
+    ITK_GCC_PRAGMA_POP                                                                       \
+    if (itk::Math::abs((a) - (b)) > eps)                                                     \
+    {                                                                                        \
+      std::cerr << "Error in " #a << " expected " << (b) << " but got " << (a) << std::endl; \
+      return EXIT_FAILURE;                                                                   \
+    }                                                                                        \
+  }                                                                                          \
   ITK_MACROEND_NOOP_STATEMENT
 
 #define CHECK_FOR_BOOLEAN(x, expected)          \
   {                                             \
-    if ((x) != expected)                        \
+    if ((x) != (expected))                      \
     {                                           \
       std::cerr << "Error in " #x << std::endl; \
       return EXIT_FAILURE;                      \

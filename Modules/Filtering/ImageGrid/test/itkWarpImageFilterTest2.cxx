@@ -30,10 +30,10 @@ using WarpFilterType = itk::WarpImageFilter<ImageType, ImageType, DisplacementFi
 using MonitorFilter = itk::PipelineMonitorImageFilter<ImageType>;
 #define AllocateImageFromRegionAndSpacing(ImageType, rval, region, spacing) \
   {                                                                         \
-    rval = ImageType::New();                                                \
-    rval->SetSpacing(spacing);                                              \
-    rval->SetRegions(region);                                               \
-    rval->Allocate();                                                       \
+    (rval) = ImageType::New();                                              \
+    (rval)->SetSpacing(spacing);                                            \
+    (rval)->SetRegions(region);                                             \
+    (rval)->Allocate();                                                     \
   }                                                                         \
   ITK_MACROEND_NOOP_STATEMENT
 

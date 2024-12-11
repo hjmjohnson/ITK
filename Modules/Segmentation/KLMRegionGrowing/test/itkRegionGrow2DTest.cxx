@@ -164,14 +164,14 @@ test_RegionGrowKLMExceptionHandling()
   passed = false;                                       \
   try                                                   \
   {                                                     \
-    std::cout << MSG << std::endl;                      \
-    FILTER->Update();                                   \
+    std::cout << (MSG) << std::endl;                    \
+    (FILTER)->Update();                                 \
   }                                                     \
   catch (const itk::ExceptionObject & err)              \
   {                                                     \
     std::cout << "Caught expected error." << std::endl; \
     std::cout << err << std::endl;                      \
-    FILTER->ResetPipeline();                            \
+    (FILTER)->ResetPipeline();                          \
     passed = true;                                      \
   }                                                     \
   if (!passed)                                          \
@@ -292,7 +292,7 @@ test_regiongrowKLM1D()
 #define LOCAL_TEST_EXCEPTION_MACRO(FILTER)                \
   try                                                     \
   {                                                       \
-    FILTER->Update();                                     \
+    (FILTER)->Update();                                   \
   }                                                       \
   catch (const itk::ExceptionObject & err)                \
   {                                                       \

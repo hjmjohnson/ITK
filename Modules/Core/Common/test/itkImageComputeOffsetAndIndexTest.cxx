@@ -122,14 +122,14 @@ itkImageComputeOffsetAndIndexTest(int, char *[])
     myImage->Allocate();                                                \
     collector.Start("ComputeIndexFast " #dim "D");                      \
     unsigned int totalSize = 1;                                         \
-    for (unsigned int i = 0; i < dim; ++i)                              \
+    for (unsigned int i = 0; i < (dim); ++i)                            \
       totalSize *= size[i];                                             \
     unsigned int repeat = 1000;                                         \
-    if (dim > 2)                                                        \
+    if ((dim) > 2)                                                      \
       repeat = 100;                                                     \
-    if (dim > 3)                                                        \
+    if ((dim) > 3)                                                      \
       repeat = 10;                                                      \
-    if (dim > 4)                                                        \
+    if ((dim) > 4)                                                      \
       repeat = 1;                                                       \
     ComputeFastIndex<ImageType>(myImage, totalSize, repeat);            \
     collector.Stop("ComputeIndexFast " #dim "D");                       \
@@ -148,14 +148,14 @@ itkImageComputeOffsetAndIndexTest(int, char *[])
     myImage->Allocate();                                                \
     collector.Start("ComputeIndex " #dim "D");                          \
     unsigned int totalSize = 1;                                         \
-    for (unsigned int i = 0; i < dim; ++i)                              \
+    for (unsigned int i = 0; i < (dim); ++i)                            \
       totalSize *= size[i];                                             \
     unsigned int repeat = 1000;                                         \
-    if (dim > 2)                                                        \
+    if ((dim) > 2)                                                      \
       repeat = 100;                                                     \
-    if (dim > 3)                                                        \
+    if ((dim) > 3)                                                      \
       repeat = 10;                                                      \
-    if (dim > 4)                                                        \
+    if ((dim) > 4)                                                      \
       repeat = 1;                                                       \
     ComputeIndex<ImageType>(myImage, totalSize, repeat);                \
     collector.Stop("ComputeIndex " #dim "D");                           \
@@ -174,10 +174,10 @@ itkImageComputeOffsetAndIndexTest(int, char *[])
     myImage->Allocate();                                                \
     collector.Start("ComputeOffsetFast " #dim "D");                     \
     unsigned int repeat = 1;                                            \
-    if (dim < 4)                                                        \
+    if ((dim) < 4)                                                      \
       repeat = 100;                                                     \
     unsigned int totalSize = 1;                                         \
-    for (unsigned int i = 0; i < dim; ++i)                              \
+    for (unsigned int i = 0; i < (dim); ++i)                            \
       totalSize *= size[i];                                             \
     ComputeFastOffset<ImageType>(myImage, size[0], totalSize * repeat); \
     collector.Stop("ComputeOffsetFast " #dim "D");                      \
@@ -195,10 +195,10 @@ itkImageComputeOffsetAndIndexTest(int, char *[])
     myImage->Allocate();                                                \
     collector.Start("ComputeOffset " #dim "D");                         \
     unsigned int repeat = 1;                                            \
-    if (dim < 4)                                                        \
+    if ((dim) < 4)                                                      \
       repeat = 100;                                                     \
     unsigned int totalSize = 1;                                         \
-    for (unsigned int i = 0; i < dim; ++i)                              \
+    for (unsigned int i = 0; i < (dim); ++i)                            \
       totalSize *= size[i];                                             \
     ComputeOffset<ImageType>(myImage, size[0], totalSize * repeat);     \
     collector.Stop("ComputeOffset " #dim "D");                          \

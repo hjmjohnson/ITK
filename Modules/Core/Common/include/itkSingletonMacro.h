@@ -36,7 +36,7 @@
 #define itkGetGlobalSimpleMacro(Class, Type, Name) itkGetGlobalInitializeMacro(Class, Type, Name, Class, (void)0)
 
 #define itkGetGlobalValueMacro(Class, Type, Name, Value) \
-  itkGetGlobalInitializeMacro(Class, Type, Name, Name, *m_##Name = Value)
+  itkGetGlobalInitializeMacro(Class, Type, Name, Name, *m_##Name = (Value))
 
 #define itkGetGlobalInitializeMacro(Class, Type, VarName, SingletonName, Init)                      \
   Type * Class::Get##VarName##Pointer()                                                             \

@@ -22,15 +22,15 @@
 // the microseconds. In other words, both of them are measured toward the same
 // direction of time.
 #define ALIGN_THE_ARROW_OF_TIME(seconds, micro_seconds) \
-  if (seconds > 0 && micro_seconds < 0)                 \
+  if ((seconds) > 0 && (micro_seconds) < 0)             \
   {                                                     \
-    seconds -= 1;                                       \
-    micro_seconds = 1000000L - micro_seconds;           \
+    (seconds) -= 1;                                     \
+    (micro_seconds) = 1000000L - (micro_seconds);       \
   }                                                     \
-  if (seconds < 0 && micro_seconds > 0)                 \
+  if ((seconds) < 0 && (micro_seconds) > 0)             \
   {                                                     \
-    seconds += 1;                                       \
-    micro_seconds = 1000000L + micro_seconds;           \
+    (seconds) += 1;                                     \
+    (micro_seconds) = 1000000L + (micro_seconds);       \
   }                                                     \
   ITK_MACROEND_NOOP_STATEMENT
 

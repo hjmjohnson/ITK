@@ -33,7 +33,7 @@
 
 /* Structure with LSM-specific data ( only in the first image directory). */
 #define TIF_CZ_LSMINFO 34412 /* 0x866c, Type: TIF_BYTE, Length: 512 */
-#define TIF_CZ_LSMINFO_SIZE_RESERVED 90 + 6
+#define TIF_CZ_LSMINFO_SIZE_RESERVED (90 + 6)
 #define TIF_CZ_LSMINFO_SIZE 512
 
 namespace itk

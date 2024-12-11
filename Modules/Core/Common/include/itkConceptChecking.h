@@ -65,7 +65,7 @@
 #  define itkConceptMacro(name, concept) \
     enum                                 \
     {                                    \
-      name = sizeof concept              \
+      name = sizeof(concept)             \
     };                                   \
     ITK_MACROEND_NOOP_STATEMENT
 

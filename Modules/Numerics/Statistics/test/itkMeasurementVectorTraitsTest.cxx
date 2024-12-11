@@ -20,7 +20,7 @@
 
 #define itkSetGetLengthVerificationMacro(measure, type, len1, len2) \
   itk::NumericTraits<type>::SetLength((measure), len1);             \
-  if (itk::NumericTraits<type>::GetLength((measure)) != len2)       \
+  if (itk::NumericTraits<type>::GetLength((measure)) != (len2))     \
   {                                                                 \
     std::cerr << "Set/GetLength() failed in measure " << std::endl; \
   }                                                                 \

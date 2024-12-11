@@ -259,7 +259,7 @@ VideoFileReader<TOutputVideoStream>::DoConvertBuffer(const void * inputData, Fra
   const unsigned int numberOfPixels = this->GetOutput()->GetFrame(frameNumber)->GetPixelContainer()->Size();
   const bool isVectorImage(strcmp(this->GetOutput()->GetFrame(frameNumber)->GetNameOfClass(), "VectorImage") == 0);
 #define ITK_CONVERT_BUFFER_IF_BLOCK(_CType, type)                                                              \
-  else if (m_VideoIO->GetComponentType() == _CType)                                                            \
+  else if (m_VideoIO->GetComponentType() == (_CType))                                                          \
   {                                                                                                            \
     if (isVectorImage)                                                                                         \
     {                                                                                                          \

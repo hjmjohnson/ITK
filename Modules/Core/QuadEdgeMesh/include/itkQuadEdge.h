@@ -53,35 +53,35 @@
  * \todo Should this macro be added to doxygen macros?
  */
 #define itkQEAccessorsMacro(st, pt, dt)                                                          \
-  pt * GetOnext() { return (dynamic_cast<pt *>(this->st::GetOnext())); }                         \
+  pt * GetOnext() { return (dynamic_cast<((pt)) *>(this->st::GetOnext())); }                     \
                                                                                                  \
-  dt * GetRot() { return (dynamic_cast<dt *>(this->st::GetRot())); }                             \
+  ((dt)) * GetRot() { return (dynamic_cast<((dt)) *>(this->st::GetRot())); }                     \
                                                                                                  \
-  pt * GetSym() { return (dynamic_cast<pt *>(this->st::GetSym())); }                             \
+  ((pt)) * GetSym() { return (dynamic_cast<((pt)) *>(this->st::GetSym())); }                     \
                                                                                                  \
-  pt * GetLnext() { return (dynamic_cast<pt *>(this->st::GetLnext())); }                         \
+  ((pt)) * GetLnext() { return (dynamic_cast<((pt)) *>(this->st::GetLnext())); }                 \
                                                                                                  \
-  pt * GetRnext() { return (dynamic_cast<pt *>(this->st::GetRnext())); }                         \
+  ((pt)) * GetRnext() { return (dynamic_cast<((pt)) *>(this->st::GetRnext())); }                 \
                                                                                                  \
-  pt * GetDnext() { return (dynamic_cast<pt *>(this->st::GetDnext())); }                         \
+  ((pt)) * GetDnext() { return (dynamic_cast<((pt)) *>(this->st::GetDnext())); }                 \
                                                                                                  \
-  pt * GetOprev() { return (dynamic_cast<pt *>(this->st::GetOprev())); }                         \
+  ((pt)) * GetOprev() { return (dynamic_cast<((pt)) *>(this->st::GetOprev())); }                 \
                                                                                                  \
-  pt * GetLprev() { return (dynamic_cast<pt *>(this->st::GetLprev())); }                         \
+  ((pt)) * GetLprev() { return (dynamic_cast<((pt)) *>(this->st::GetLprev())); }                 \
                                                                                                  \
-  pt * GetRprev() { return (dynamic_cast<pt *>(this->st::GetRprev())); }                         \
+  ((pt)) * GetRprev() { return (dynamic_cast<((pt)) *>(this->st::GetRprev())); }                 \
                                                                                                  \
-  pt * GetDprev() { return (dynamic_cast<pt *>(this->st::GetDprev())); }                         \
+  ((pt)) * GetDprev() { return (dynamic_cast<((pt)) *>(this->st::GetDprev())); }                 \
                                                                                                  \
-  dt * GetInvRot() { return (dynamic_cast<dt *>(this->st::GetInvRot())); }                       \
+  ((dt)) * GetInvRot() { return (dynamic_cast<((dt)) *>(this->st::GetInvRot())); }               \
                                                                                                  \
-  pt * GetInvOnext() { return (dynamic_cast<pt *>(this->st::GetInvOnext())); }                   \
+  ((pt)) * GetInvOnext() { return (dynamic_cast<((pt)) *>(this->st::GetInvOnext())); }           \
                                                                                                  \
-  pt * GetInvLnext() { return (dynamic_cast<pt *>(this->st::GetInvLnext())); }                   \
+  ((pt)) * GetInvLnext() { return (dynamic_cast<((pt)) *>(this->st::GetInvLnext())); }           \
                                                                                                  \
-  pt * GetInvRnext() { return (dynamic_cast<pt *>(this->st::GetInvRnext())); }                   \
+  ((pt)) * GetInvRnext() { return (dynamic_cast<((pt)) *>(this->st::GetInvRnext())); }           \
                                                                                                  \
-  pt *       GetInvDnext() { return (dynamic_cast<pt *>(this->st::GetInvDnext())); }             \
+  ((pt)) * GetInvDnext() { return (dynamic_cast<((pt)) *>(this->st::GetInvDnext())); }           \
   const pt * GetOnext() const { return (dynamic_cast<const pt *>(this->st::GetOnext())); }       \
                                                                                                  \
   const dt * GetRot() const { return (dynamic_cast<const dt *>(this->st::GetRot())); }           \

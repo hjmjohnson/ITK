@@ -232,7 +232,7 @@ GE5ImageIO::ReadHeader(const char * FileNameToRead)
 
   // if we have a version2 file, most of the fields are offset from
   // their version3 positions.
-#define VOff(a, b) (imageHdr.GENESIS_IH_img_version != 2 ? a : b)
+#define VOff(a, b) (imageHdr.GENESIS_IH_img_version != 2 ? (a) : (b))
   // Create a buffer to read the exam header.
   // Now seek to the exam header and read the data into the buffer.
   std::unique_ptr<char[]> buffer;

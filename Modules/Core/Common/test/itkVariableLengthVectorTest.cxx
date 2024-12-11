@@ -20,15 +20,15 @@
 #include "itkVariableLengthVector.h"
 #include "itkMath.h"
 
-#define ASSERT(cond, text)                                                                                         \
-  ITK_GCC_PRAGMA_PUSH                                                                                              \
-  ITK_GCC_SUPPRESS_Wfloat_equal                                                                                    \
-  if (!(cond))                                                                                                     \
-  {                                                                                                                \
-    std::cerr << __FILE__ << ':' << __LINE__ << ':' << "Assertion failed: " << #cond << ": " << text << std::endl; \
-    result = EXIT_FAILURE;                                                                                         \
-  }                                                                                                                \
-  ITK_GCC_PRAGMA_POP                                                                                               \
+#define ASSERT(cond, text)                                                                                           \
+  ITK_GCC_PRAGMA_PUSH                                                                                                \
+  ITK_GCC_SUPPRESS_Wfloat_equal                                                                                      \
+  if (!(cond))                                                                                                       \
+  {                                                                                                                  \
+    std::cerr << __FILE__ << ':' << __LINE__ << ':' << "Assertion failed: " << #cond << ": " << (text) << std::endl; \
+    result = EXIT_FAILURE;                                                                                           \
+  }                                                                                                                  \
+  ITK_GCC_PRAGMA_POP                                                                                                 \
   ITK_MACROEND_NOOP_STATEMENT
 
 int

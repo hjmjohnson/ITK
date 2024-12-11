@@ -54,7 +54,7 @@ namespace itk
 #if defined(__GNUC__)
 #define ITK_EXERCISE_BASIC_OBJECT_METHODS(object, ClassName, SuperclassName)                                           \
   object->Print(std::cout);                                                                                            \
-  std::cout << "Name of Class = " << object->GetNameOfClass() << std::endl;                                            \
+  std::cout << "Name of Class = " << (object)->GetNameOfClass() << std::endl;                                            \
   ITK_MACROEND_NOOP_STATEMENT
 #else // not GCC
 #define ITK_EXERCISE_BASIC_OBJECT_METHODS(object, ClassName, SuperclassName)                                           \
@@ -126,7 +126,7 @@ namespace itk
       std::cerr << "  In " __FILE__ ", line " << __LINE__ << std::endl;         \
       std::cerr << "Expected true" << std::endl;                                \
       std::cerr << "  but got  " << _ITK_TEST_EXPECT_TRUE_command << std::endl; \
-      statusVal = EXIT_FAILURE;                                                 \
+      (statusVal) = EXIT_FAILURE;                                               \
     }                                                                           \
   }                                                                             \
   ITK_MACROEND_NOOP_STATEMENT
@@ -162,7 +162,7 @@ namespace itk
       std::cerr << "\tlh: " << (lh) << std::endl;                       \
       std::cerr << "\trh: " << (rh) << std::endl;                       \
       std::cerr << "Expression is not equal" << std::endl;              \
-      statusVal = EXIT_FAILURE;                                         \
+      (statusVal) = EXIT_FAILURE;                                       \
     }                                                                   \
   }                                                                     \
   ITK_MACROEND_NOOP_STATEMENT
@@ -187,12 +187,12 @@ namespace itk
 
 
 #define ITK_TEST_SET_GET(variable, command)                           \
-  if (variable != command)                                            \
+  if ((variable) != (command))                                        \
   {                                                                   \
     std::cerr << "Error in " << #command << std::endl;                \
     std::cerr << "  In " __FILE__ ", line " << __LINE__ << std::endl; \
-    std::cerr << "Expected " << variable.GetPointer() << std::endl;   \
-    std::cerr << "but got  " << command << std::endl;                 \
+    std::cerr << "Expected " << (variable).GetPointer() << std::endl; \
+    std::cerr << "but got  " << (command) << std::endl;               \
     return EXIT_FAILURE;                                              \
   }                                                                   \
   ITK_MACROEND_NOOP_STATEMENT
@@ -201,68 +201,69 @@ namespace itk
 #define ITK_TEST_SET_GET_VALUE(variable, command)                     \
   ITK_GCC_PRAGMA_PUSH                                                 \
   ITK_GCC_SUPPRESS_Wfloat_equal                                       \
-  if (variable != command)                                            \
+  if ((variable) != (command))                                        \
   {                                                                   \
     std::cerr << "Error in " << #command << std::endl;                \
     std::cerr << "  In " __FILE__ ", line " << __LINE__ << std::endl; \
-    std::cerr << "Expected " << variable << std::endl;                \
-    std::cerr << "but got  " << command << std::endl;                 \
+    std::cerr << "Expected " << (variable) << std::endl;              \
+    std::cerr << "but got  " << (command) << std::endl;               \
     return EXIT_FAILURE;                                              \
   }                                                                   \
   ITK_GCC_PRAGMA_POP                                                  \
   ITK_MACROEND_NOOP_STATEMENT
 
 #define ITK_TEST_SET_GET_NULL_VALUE(command)                          \
-  if (nullptr != command)                                             \
+  if (nullptr != (command))                                           \
   {                                                                   \
     std::cerr << "Error in " << #command << std::endl;                \
     std::cerr << "  In " __FILE__ ", line " << __LINE__ << std::endl; \
     std::cerr << "Expected "                                          \
               << "nullptr" << std::endl;                              \
-    std::cerr << "but got  " << command << std::endl;                 \
+    std::cerr << "but got  " << (command) << std::endl;               \
     return EXIT_FAILURE;                                              \
   }                                                                   \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define ITK_TEST_SET_GET_BOOLEAN(object, variable, value)                                               \
-  object->Set##variable(false);                                                                         \
-  object->Set##variable(true);                                                                          \
-  if (object->Get##variable() != 1)                                                                     \
-  {                                                                                                     \
-    std::cerr << "Error in Set/Get" #variable << ", Get" #variable << " is " << object->Get##variable() \
-              << " instead of 1" << std::endl;                                                          \
-    return EXIT_FAILURE;                                                                                \
-  }                                                                                                     \
-  object->Set##variable(false);                                                                         \
-  if (object->Get##variable() != 0)                                                                     \
-  {                                                                                                     \
-    std::cerr << "Error in Set/Get" #variable << ", Get" #variable << " is " << object->Get##variable() \
-              << " instead of 0" << std::endl;                                                          \
-    return EXIT_FAILURE;                                                                                \
-  }                                                                                                     \
-  object->variable##On();                                                                               \
-  if (object->Get##variable() != 1)                                                                     \
-  {                                                                                                     \
-    std::cerr << "Error in On/Get" #variable << ", Get" #variable << " is " << object->Get##variable()  \
-              << " instead of 1" << std::endl;                                                          \
-    return EXIT_FAILURE;                                                                                \
-  }                                                                                                     \
-  object->variable##Off();                                                                              \
-  if (object->Get##variable() != 0)                                                                     \
-  {                                                                                                     \
-    std::cerr << "Error in Off/Get" #variable << ", Get" #variable << " is " << object->Get##variable() \
-              << " instead of 0" << std::endl;                                                          \
-    return EXIT_FAILURE;                                                                                \
-  }                                                                                                     \
-  object->Set##variable(value)
+#define ITK_TEST_SET_GET_BOOLEAN(object, variable, value)                                                 \
+  object->Set##variable(false);                                                                           \
+  (object)->Set##variable(true);                                                                          \
+  if ((object)->Get##variable() != 1)                                                                     \
+  {                                                                                                       \
+    std::cerr << "Error in Set/Get" #variable << ", Get" #variable << " is " << (object)->Get##variable() \
+              << " instead of 1" << std::endl;                                                            \
+    return EXIT_FAILURE;                                                                                  \
+  }                                                                                                       \
+  (object)->Set##variable(false);                                                                         \
+  if ((object)->Get##variable() != 0)                                                                     \
+  {                                                                                                       \
+    std::cerr << "Error in Set/Get" #variable << ", Get" #variable << " is " << (object)->Get##variable() \
+              << " instead of 0" << std::endl;                                                            \
+    return EXIT_FAILURE;                                                                                  \
+  }                                                                                                       \
+  (object)->variable##On();                                                                               \
+  if ((object)->Get##variable() != 1)                                                                     \
+  {                                                                                                       \
+    std::cerr << "Error in On/Get" #variable << ", Get" #variable << " is " << (object)->Get##variable()  \
+              << " instead of 1" << std::endl;                                                            \
+    return EXIT_FAILURE;                                                                                  \
+  }                                                                                                       \
+  (object)->variable##Off();                                                                              \
+  if ((object)->Get##variable() != 0)                                                                     \
+  {                                                                                                       \
+    std::cerr << "Error in Off/Get" #variable << ", Get" #variable << " is " << (object)->Get##variable() \
+              << " instead of 0" << std::endl;                                                            \
+    return EXIT_FAILURE;                                                                                  \
+  }                                                                                                       \
+  (object)->Set##variable(value)
 
 /** The name of the executable, argv[0], is not always available as argv[0] may be null.
  * In that case, use the name of the test function.
  */
-#define itkNameOfTestExecutableMacro(argv)                                                                             \
-  [argv](const std::string & functionName) {                                                                           \
-    return ((argv == nullptr) || (argv[0] == nullptr) || (argv[0][0] == '\0')) ? ("<" + functionName + " executable>") \
-                                                                               : argv[0];                              \
+#define itkNameOfTestExecutableMacro(argv)                                           \
+  [argv](const std::string & functionName) {                                         \
+    return (((argv) == nullptr) || ((argv)[0] == nullptr) || ((argv)[0][0] == '\0')) \
+             ? ("<" + functionName + " executable>")                                 \
+             : (argv)[0];                                                            \
   }(__func__)
 
 #endif

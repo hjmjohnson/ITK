@@ -465,7 +465,7 @@ ImageFileReader<TOutputImage, ConvertPixelTraits>::DoConvertBuffer(const void * 
   // type InternalPixelType, but each pixel is really 'k' consecutive pixels.
 
 #define ITK_CONVERT_BUFFER_IF_BLOCK(_CType, type)                                                              \
-  else if (m_ImageIO->GetComponentType() == _CType)                                                            \
+  else if (m_ImageIO->GetComponentType() == (_CType))                                                          \
   {                                                                                                            \
     if (isVectorImage)                                                                                         \
     {                                                                                                          \

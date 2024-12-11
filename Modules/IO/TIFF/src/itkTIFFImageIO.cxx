@@ -1165,7 +1165,7 @@ TIFFImageIO::ReadTIFFTags()
     {                                                                                  \
       a[cnt] = (static_cast<const T2 *>(raw_data))[cnt];                               \
     }                                                                                  \
-    EncapsulateMetaData<itk::Array<T1>>(dict, field_name, a);                          \
+    EncapsulateMetaData<itk::Array<(T1)>>(dict, field_name, a);                        \
   }                                                                                    \
   else                                                                                 \
   {                                                                                    \

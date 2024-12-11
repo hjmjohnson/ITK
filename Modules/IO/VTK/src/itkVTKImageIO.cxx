@@ -821,7 +821,7 @@ VTKImageIO::WriteBufferAsASCII(std::ostream &              os,
     const ImageIOBase::BufferSizeType numberImageComponents =                                                  \
       static_cast<ImageIOBase::BufferSizeType>(this->GetImageSizeInComponents());                              \
     const bool isSymmetricSecondRankTensor = (this->GetPixelType() == IOPixelEnum::SYMMETRICSECONDRANKTENSOR); \
-    const auto tempmemory = make_unique_for_overwrite<storageType[]>(numberImageComponents);                   \
+    const auto tempmemory = make_unique_for_overwrite<(storageType)[]>(numberImageComponents);                 \
     memcpy(tempmemory.get(), buffer, numbytes);                                                                \
     ByteSwapper<storageType>::SwapRangeFromSystemToBigEndian(tempmemory.get(), numberImageComponents);         \
     /* write the image */                                                                                      \
@@ -844,7 +844,7 @@ VTKImageIO::WriteBufferAsASCII(std::ostream &              os,
       static_cast<ImageIOBase::BufferSizeType>(this->GetIORegionSizeInBytes());                        \
     const ImageIOBase::BufferSizeType numberImageComponents =                                          \
       static_cast<ImageIOBase::BufferSizeType>(this->GetIORegionSizeInComponents());                   \
-    const auto tempmemory = make_unique_for_overwrite<storageType[]>(numberImageComponents);           \
+    const auto tempmemory = make_unique_for_overwrite<(storageType)[]>(numberImageComponents);         \
     memcpy(tempmemory.get(), buffer, numbytes);                                                        \
     ByteSwapper<storageType>::SwapRangeFromSystemToBigEndian(tempmemory.get(), numberImageComponents); \
     /* write the image */                                                                              \
