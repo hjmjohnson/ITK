@@ -41,7 +41,10 @@ public:
 
   static const ElementIdentifierType m_ElementNotFound;
 
+private:
   ElementWrapperInterface() = default;
+
+public:
   virtual ~ElementWrapperInterface() = default;
 
   virtual ElementIdentifierType
@@ -55,6 +58,7 @@ public:
 
   virtual bool
   is_greater(const ElementType & element1, const ElementType & element2) const = 0;
+  friend TElement;
 };
 // ------------------------------------------------------------------------
 
