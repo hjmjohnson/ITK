@@ -81,7 +81,7 @@ ReadWrite(TScalar low, TScalar hi, char * file1, char * file2, bool ascii)
   char          firstline[25];
   istrm.getline(firstline, 24);
   istrm.close();
-  if (strncmp(firstline, "# vtk DataFile Version ", 24) != 0)
+  if (strncmp(firstline, "# vtk DataFile Version ", 23) != 0)
   {
     std::cout << "Header string was not written properly." << std::endl;
     return EXIT_FAILURE;
