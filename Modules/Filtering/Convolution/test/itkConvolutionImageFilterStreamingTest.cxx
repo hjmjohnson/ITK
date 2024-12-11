@@ -108,7 +108,7 @@ doConvolutionImageFilterStreamingTest(int argc, char * argv[])
   // two inputs (Primary and KernelImage)
   const unsigned int requestsPerStream = 2;
   // Verify ConvolutionImageFilter upstream requests
-  ITK_TEST_EXPECT_EQUAL(inputMonitor->GetOutputRequestedRegions().size(), requestsPerStream * numStreamDivisions);
+  ITK_TEST_EXPECT_EQUAL(inputMonitor->GetOutputRequestedRegions().size(), static_cast<size_type>(requestsPerStream * numStreamDivisions);
   ITK_TEST_EXPECT_EQUAL(inputMonitor->GetNumberOfUpdates(), numStreamDivisions);
 
   // Verify ConvolutionImageFilter downstream outputs
