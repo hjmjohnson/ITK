@@ -42,7 +42,7 @@ itkImageFileReaderIOToRequestedRegionMismatchTest(int argc, char * argv[])
   for (int i = 1; i < argc; ++i)
   {
     // Instantiate a new reader for each image
-    typename itk::ImageFileReader<InputImageType>::Pointer reader = itk::ImageFileReader<InputImageType>::New();
+    const typename itk::ImageFileReader<InputImageType>::Pointer reader = itk::ImageFileReader<InputImageType>::New();
 
     reader->SetFileName(argv[i]);
     stapleImageFilter->SetInput(itk::Math::CastWithRangeCheck<unsigned int>(i - 1), reader->GetOutput());
