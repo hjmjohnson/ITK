@@ -93,15 +93,13 @@ ItpackSparseMatrix::Initialize()
   m_JA = new integer[m_NZ];
   m_IWORK = new integer[m_NZ];
   m_A = new doublereal[m_NZ];
-
-  int i;
-  for (i = 0; i < m_NZ; ++i)
+  for (int i = 0; i < m_NZ; ++i)
   {
     m_JA[i] = 0;
     m_IWORK[i] = 0;
     m_A[i] = 0.0;
   }
-  for (i = 0; i <= m_N; ++i)
+  for (int i = 0; i <= m_N; ++i)
   {
     m_IA[i] = 0;
   }
@@ -113,7 +111,7 @@ ItpackSparseMatrix::Initialize()
   m_MatrixInitialized = 1;
   m_MatrixFinalized = 0;
   /* Do this to avoid itpack ignorance (unless it's somehow my ignorance) */
-  for (i = 0; i < m_N; ++i)
+  for (int i = 0; i < m_N; ++i)
   {
     this->Set(i, i, 0.0);
   }

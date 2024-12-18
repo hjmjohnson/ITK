@@ -30,13 +30,11 @@ template <typename TSize>
 inline TSize
 FloorLog(TSize size)
 {
-  TSize k;
-
-  for (k = 0; size != 1; size >>= 1)
+  TSize k = 0;
+  for (; size != 1; size >>= 1)
   {
     ++k;
   }
-
   return k;
 }
 

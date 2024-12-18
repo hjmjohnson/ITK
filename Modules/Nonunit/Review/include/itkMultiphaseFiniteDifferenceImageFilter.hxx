@@ -210,9 +210,8 @@ MultiphaseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputImage, 
   {
     bool          flag = false;
     SizeValueType k = 0;
-    SizeValueType i;
 
-    for (i = 0; i < size; ++i)
+    for (SizeValueType i = 0; i < size; ++i)
     {
       if (valid[i])
       {
@@ -229,7 +228,7 @@ MultiphaseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputImage, 
     }
 
     // find minimum value
-    for (i = k; i < size; ++i)
+    for (SizeValueType i = k; i < size; ++i)
     {
       if (valid[i] && (timeStepList[i] < oMin))
       {
