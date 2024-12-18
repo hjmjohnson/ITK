@@ -77,9 +77,7 @@ LinearSystemWrapper::ScaleVector(Float scale, unsigned int vectorIndex)
   {
     return;
   }
-
-  unsigned int i;
-  for (i = 0; i < m_Order; ++i)
+  for (unsigned int i = 0; i < m_Order; ++i)
   {
     this->SetVectorValue(i, scale * GetVectorValue(i, vectorIndex), vectorIndex);
   }
@@ -93,9 +91,7 @@ LinearSystemWrapper::ScaleSolution(Float scale, unsigned int solutionIndex)
   {
     return;
   }
-
-  unsigned int i;
-  for (i = 0; i < m_Order; ++i)
+  for (unsigned int i = 0; i < m_Order; ++i)
   {
     this->SetSolutionValue(i, scale * GetSolutionValue(i, solutionIndex), solutionIndex);
   }
@@ -217,9 +213,8 @@ LinearSystemWrapper::CopyMatrix(unsigned int matrixIndex1, unsigned int matrixIn
 void
 LinearSystemWrapper::AddMatrixMatrix(unsigned int matrixIndex1, unsigned int matrixIndex2)
 {
-  ColumnArray  cols;
-  unsigned int r;
-  for (r = 0; r < this->m_Order; ++r)
+  ColumnArray cols;
+  for (unsigned int r = 0; r < this->m_Order; ++r)
   {
     this->GetColumnsOfNonZeroMatrixElementsInRow(r, cols, matrixIndex2);
     for (const auto & col : cols)
@@ -232,8 +227,7 @@ LinearSystemWrapper::AddMatrixMatrix(unsigned int matrixIndex1, unsigned int mat
 void
 LinearSystemWrapper::CopyVector(unsigned int vectorSource, unsigned int vectorDestination)
 {
-  unsigned int r;
-  for (r = 0; r < this->m_Order; ++r)
+  for (unsigned int r = 0; r < this->m_Order; ++r)
   {
     this->SetVectorValue(r, this->GetVectorValue(r, vectorSource), vectorDestination);
   }
@@ -242,8 +236,7 @@ LinearSystemWrapper::CopyVector(unsigned int vectorSource, unsigned int vectorDe
 void
 LinearSystemWrapper::AddVectorVector(unsigned int vectorIndex1, unsigned int vectorIndex2)
 {
-  unsigned int r;
-  for (r = 0; r < this->m_Order; ++r)
+  for (unsigned int r = 0; r < this->m_Order; ++r)
   {
     this->AddVectorValue(r, this->GetVectorValue(r, vectorIndex2), vectorIndex1);
   }

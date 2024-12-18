@@ -294,8 +294,7 @@ LinearSystemWrapperVNL::ScaleMatrix(Float scale, unsigned int matrixIndex)
 
 LinearSystemWrapperVNL::~LinearSystemWrapperVNL()
 {
-  unsigned int i;
-  for (i = 0; i < m_NumberOfMatrices; ++i)
+  for (unsigned int i = 0; i < m_NumberOfMatrices; ++i)
   {
     this->DestroyMatrix(i);
   }

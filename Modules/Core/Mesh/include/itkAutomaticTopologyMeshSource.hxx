@@ -63,10 +63,9 @@ template <typename TOutputMesh>
 auto
 AutomaticTopologyMeshSource<TOutputMesh>::AddPoint(const CoordinateType * p0) -> IdentifierType
 {
-  PointType    newPoint;
-  unsigned int i;
+  PointType newPoint;
 
-  for (i = 0; i < PointDimension; ++i)
+  for (unsigned int i = 0; i < PointDimension; ++i)
   {
     newPoint[i] = p0[i];
   }
