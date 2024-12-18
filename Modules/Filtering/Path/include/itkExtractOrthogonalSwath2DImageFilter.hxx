@@ -29,9 +29,8 @@ template <typename TImage>
 void
 ExtractOrthogonalSwath2DImageFilter<TImage>::SetSpacing(const double * spacing)
 {
-  unsigned int i;
-
-  for (i = 0; i < ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < ImageDimension; ++i)
   {
     if (Math::NotExactlyEquals(spacing[i], m_Spacing[i]))
     {
@@ -51,9 +50,8 @@ template <typename TImage>
 void
 ExtractOrthogonalSwath2DImageFilter<TImage>::SetSpacing(const float * spacing)
 {
-  unsigned int i;
-
-  for (i = 0; i < ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < ImageDimension; ++i)
   {
     if (Math::NotExactlyEquals(static_cast<double>(spacing[i]), m_Spacing[i]))
     {
@@ -81,9 +79,8 @@ template <typename TImage>
 void
 ExtractOrthogonalSwath2DImageFilter<TImage>::SetOrigin(const double * origin)
 {
-  unsigned int i;
-
-  for (i = 0; i < ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < ImageDimension; ++i)
   {
     if (Math::NotExactlyEquals(origin[i], m_Origin[i]))
     {
@@ -103,9 +100,8 @@ template <typename TImage>
 void
 ExtractOrthogonalSwath2DImageFilter<TImage>::SetOrigin(const float * origin)
 {
-  unsigned int i;
-
-  for (i = 0; i < ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < ImageDimension; ++i)
   {
     if (Math::NotExactlyEquals(static_cast<double>(origin[i]), m_Origin[i]))
     {

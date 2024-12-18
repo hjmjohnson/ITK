@@ -78,9 +78,8 @@ template <typename TInputImage, typename TOutput>
 void
 GaussianBlurImageFunction<TInputImage, TOutput>::SetSigma(const double * sigma)
 {
-  unsigned int i;
-
-  for (i = 0; i < Self::ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < Self::ImageDimension; ++i)
   {
     if (sigma[i] != m_Sigma[i])
     {
@@ -102,9 +101,8 @@ template <typename TInputImage, typename TOutput>
 void
 GaussianBlurImageFunction<TInputImage, TOutput>::SetSigma(const double sigma)
 {
-  unsigned int i;
-
-  for (i = 0; i < Self::ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < Self::ImageDimension; ++i)
   {
     if (Math::NotExactlyEquals(sigma, m_Sigma[i]))
     {
@@ -126,9 +124,8 @@ template <typename TInputImage, typename TOutput>
 void
 GaussianBlurImageFunction<TInputImage, TOutput>::SetExtent(const double * extent)
 {
-  unsigned int i;
-
-  for (i = 0; i < Self::ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < Self::ImageDimension; ++i)
   {
     if (extent[i] != m_Extent[i])
     {
@@ -150,9 +147,8 @@ template <typename TInputImage, typename TOutput>
 void
 GaussianBlurImageFunction<TInputImage, TOutput>::SetExtent(const double extent)
 {
-  unsigned int i;
-
-  for (i = 0; i < Self::ImageDimension; ++i)
+  unsigned int i = 0;
+  for (; i < Self::ImageDimension; ++i)
   {
     if (Math::NotExactlyEquals(extent, m_Extent[i]))
     {

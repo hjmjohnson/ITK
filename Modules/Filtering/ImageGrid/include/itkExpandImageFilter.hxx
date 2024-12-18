@@ -66,9 +66,8 @@ template <typename TInputImage, typename TOutputImage>
 void
 ExpandImageFilter<TInputImage, TOutputImage>::SetExpandFactors(const unsigned int factor)
 {
-  unsigned int j;
-
-  for (j = 0; j < ImageDimension; ++j)
+  unsigned int j = 0;
+  for (; j < ImageDimension; ++j)
   {
     if (factor != m_ExpandFactors[j])
     {

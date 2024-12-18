@@ -84,9 +84,8 @@ template <typename TFixedImage, typename TMovingImage, typename TDisplacementFie
 void
 PDEDeformableRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>::SetStandardDeviations(double value)
 {
-  unsigned int j;
-
-  for (j = 0; j < ImageDimension; ++j)
+  unsigned int j = 0;
+  for (; j < ImageDimension; ++j)
   {
     if (Math::NotExactlyEquals(value, m_StandardDeviations[j]))
     {
@@ -111,9 +110,8 @@ void
 PDEDeformableRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>::SetUpdateFieldStandardDeviations(
   double value)
 {
-  unsigned int j;
-
-  for (j = 0; j < ImageDimension; ++j)
+  unsigned int j = 0;
+  for (; j < ImageDimension; ++j)
   {
     if (Math::NotExactlyEquals(value, m_UpdateFieldStandardDeviations[j]))
     {

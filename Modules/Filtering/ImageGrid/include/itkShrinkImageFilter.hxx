@@ -64,9 +64,8 @@ template <typename TInputImage, typename TOutputImage>
 void
 ShrinkImageFilter<TInputImage, TOutputImage>::SetShrinkFactors(unsigned int factor)
 {
-  unsigned int j;
-
-  for (j = 0; j < ImageDimension; ++j)
+  unsigned int j = 0;
+  for (; j < ImageDimension; ++j)
   {
     if (factor != m_ShrinkFactors[j])
     {

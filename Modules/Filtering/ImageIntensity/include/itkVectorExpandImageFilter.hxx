@@ -68,9 +68,8 @@ template <typename TInputImage, typename TOutputImage>
 void
 VectorExpandImageFilter<TInputImage, TOutputImage>::SetExpandFactors(const float factor)
 {
-  unsigned int j;
-
-  for (j = 0; j < ImageDimension; ++j)
+  unsigned int j = 0;
+  for (; j < ImageDimension; ++j)
   {
     if (Math::NotExactlyEquals(factor, m_ExpandFactors[j]))
     {
