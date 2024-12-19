@@ -281,8 +281,6 @@ template <typename TInputSpatialObject, typename TOutputImage>
 void
 SpatialObjectToImageFilter<TInputSpatialObject, TOutputImage>::GenerateData()
 {
-  unsigned int i;
-
   itkDebugMacro("SpatialObjectToImageFilter::Update() called");
 
   // Get the input and output pointers
@@ -293,7 +291,7 @@ SpatialObjectToImageFilter<TInputSpatialObject, TOutputImage>::GenerateData()
   SizeType size;
 
   InputObject->ComputeFamilyBoundingBox(m_ChildrenDepth);
-  for (i = 0; i < ObjectDimension; ++i)
+  for (unsigned int i = 0; i < ObjectDimension; ++i)
   {
     size[i] = static_cast<SizeValueType>(InputObject->GetFamilyBoundingBoxInWorldSpace()->GetMaximum()[i] -
                                          InputObject->GetFamilyBoundingBoxInWorldSpace()->GetMinimum()[i]);
@@ -307,7 +305,7 @@ SpatialObjectToImageFilter<TInputSpatialObject, TOutputImage>::GenerateData()
   // object's bounding box will be used as default.
 
   bool specified = false;
-  for (i = 0; i < OutputImageDimension; ++i)
+  for (unsigned int i = 0; i < OutputImageDimension; ++i)
   {
     if (m_Size[i] != 0)
     {
@@ -346,7 +344,7 @@ SpatialObjectToImageFilter<TInputSpatialObject, TOutputImage>::GenerateData()
   {
     // ValueAtInWorldSpace requires the point to be in physical coordinate i.e
     OutputImage->TransformIndexToPhysicalPoint(it.GetIndex(), imagePoint);
-    for (i = 0; i < ObjectDimension; ++i)
+    for (unsigned int i = 0; i < ObjectDimension; ++i)
     {
       objectPoint[i] = imagePoint[i];
     }
