@@ -179,7 +179,7 @@ ResourceProbesCollectorBase<TProbe>::JSONReport(std::ostream & os, bool printSys
 
   if (probe == end)
   {
-    os << "{ \"Status\": \"No probes have been created\" }" << std::endl;
+    os << R"({ "Status": "No probes have been created" })" << std::endl;
     return;
   }
 
@@ -220,7 +220,7 @@ ResourceProbesCollectorBase<TProbe>::JSONReport(const char * name, std::ostream 
   auto pos = this->m_Probes.find(tid);
   if (pos == this->m_Probes.end())
   {
-    os << "  { \"ProbeName\": \"" << name << "\", \"Status\": \"Does not exist!\" }" << std::endl;
+    os << R"(  { "ProbeName": ")" << name << R"(", "Status": "Does not exist!" })" << std::endl;
     return;
   }
 
