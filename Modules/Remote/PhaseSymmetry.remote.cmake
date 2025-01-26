@@ -55,5 +55,5 @@ https://doi.org/10.54294/gcb82u
 "
   MODULE_COMPLIANCE_LEVEL 2
   GIT_REPOSITORY https://github.com/KitwareMedical/ITKPhaseSymmetry.git
-  GIT_TAG eb791a8ae9559469ec24fe4ccb49e8b8bd6c8dd3
+  GIT_TAG 9dc0df3af26ce20f9b0d8864cc014fd6a3e339d0
   )

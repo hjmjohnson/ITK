@@ -50,5 +50,5 @@ itk_fetch_module(
   "A module to perform variational image registration. https://doi.org/10.54294/ts6kgm"
   MODULE_COMPLIANCE_LEVEL 2
   GIT_REPOSITORY https://github.com/InsightSoftwareConsortium/ITKVariationalRegistration.git
-  GIT_TAG b8e3af90e9dea45fad7db81958ab2fd305a72b3e
+  GIT_TAG 559674ca54ff934ff7da3aa487df47f982a23cf5
   )
