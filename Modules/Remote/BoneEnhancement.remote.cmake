@@ -46,5 +46,5 @@ itk_fetch_module(
   "Various filters for enhancing cortical bones in quantitative computed tomography."
   MODULE_COMPLIANCE_LEVEL 3
   GIT_REPOSITORY https://github.com/InsightSoftwareConsortium/ITKBoneEnhancement.git
-  GIT_TAG d6f6649c9ba0c96612d6868d161ea7c13dd34603
+  GIT_TAG bdff87c2b99c28974ab6059fb867d4ba9087df0f
   )

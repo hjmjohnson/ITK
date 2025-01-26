@@ -46,5 +46,5 @@ itk_fetch_module(
   "FDFImageIO plugin for ITK. Authors Gleen Pierce/Nick Tustison/Kent Williams"
   MODULE_COMPLIANCE_LEVEL 2
   GIT_REPOSITORY https://github.com/InsightSoftwareConsortium/ITKIOFDF.git
-  GIT_TAG 1570924e00090dccf31493f9274202455a51add4
+  GIT_TAG df1cdb4f450d2119f7490d6b4df81338cfafee83
   )
