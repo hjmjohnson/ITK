@@ -256,6 +256,11 @@ function(itk_fetch_module _name _description)
                      "      instead of value 'GIT_TAG=${_fetch_options_GIT_TAG}'\n"
                      "      specified in file ${ITK_SOURCE_DIR}/Modules/Remote/${_name}.remote.cmake'")
     endif()
+    # When modifying remote modules, this tag can help prevent overwriting the fixes.
+    option(DISABLE_REMOTE_MODULE_TAG_UPDATE "After initial download, prevent automatic pinning to the specified value" True)
+    if(DISABLE_REMOTE_MODULE_TAG_UPDATE)
+      set(REMOTE_GIT_TAG "HEAD")
+    endif()
     set(Module_${_name}_GIT_TAG
         "${REMOTE_GIT_TAG}"
         CACHE STRING "Override default GIT_TAG value for remote module ${_name}")
