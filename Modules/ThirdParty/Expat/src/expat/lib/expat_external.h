@@ -85,13 +85,16 @@
 #endif /* not defined XMLCALL */
 
 #if ! defined(XML_STATIC) && ! defined(XMLIMPORT)
-#  ifndef XML_BUILDING_EXPAT
+#  ifdef XML_BUILDING_EXPAT
 /* using Expat from an application */
 
 #    if defined(_MSC_EXTENSIONS) && ! defined(__BEOS__) && ! defined(__CYGWIN__)
+#      define XMLIMPORT __declspec(dllexport)
+#    endif
+#  else
+#    if defined(_MSC_EXTENSIONS) && !defined(__BEOS__) && !defined(__CYGWIN__)
 #      define XMLIMPORT __declspec(dllimport)
 #    endif
-
 #  endif
 #endif /* not defined XML_STATIC */
 

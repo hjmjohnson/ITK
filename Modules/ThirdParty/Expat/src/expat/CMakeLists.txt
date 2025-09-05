@@ -479,8 +479,13 @@ if (ITK_USE_UPSTREAM_CODE) # ITK UNUSED UPSTREAM CODE
 
 else () # ITK CHANGE START
   # Historically, ITK used a simpler link and install mechanism
-  add_library(ITKEXPAT ${_EXPAT_C_SOURCES})
-
+  add_library(ITKEXPAT  ${_SHARED} ${_EXPAT_C_SOURCES} ${_EXPAT_EXTRA_SOURCES})
+  if (_EXPAT_LIBM_FOUND)
+    target_link_libraries(expat m)
+  endif ()
+  if (EXPAT_WITH_LIBBSD)
+    target_link_libraries(expat ${LIB_BSD})
+  endif ()
   # Apply user-defined properties to the library target.
   if (ITK_LIBRARY_PROPERTIES)
     set_target_properties(ITKEXPAT PROPERTIES ${ITK_LIBRARY_PROPERTIES})
