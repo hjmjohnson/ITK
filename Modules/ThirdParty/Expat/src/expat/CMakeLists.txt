@@ -334,8 +334,6 @@ expat_install(FILES "${CMAKE_CURRENT_BINARY_DIR}/expat_config.h" DESTINATION ${C
 else()
 configure_file(expat_config.h.cmake "${ITK3P_EXPAT_BINARY_DIR}/expat_config.h")
 
-configure_file(${ITK3P_EXPAT_SOURCE_DIR}/expatConfig.h.in
-               ${ITK3P_EXPAT_BINARY_DIR}/expatConfig.h)
 configure_file(${ITK3P_EXPAT_SOURCE_DIR}/expatDllConfig.h.in
                ${ITK3P_EXPAT_BINARY_DIR}/expatDllConfig.h)
 
