@@ -40,6 +40,15 @@
 #ifndef Expat_External_INCLUDED
 #  define Expat_External_INCLUDED 1
 
+// ITK --start  override with ITK import/export conventions
+// Inserted code for ITK support
+// upstream expat uses a .def file for visual studio to define exported
+// symbols.  ITK uses a paradigm that is used throughout ITK codebase
+// to accomplish exporting symbols.
+#    include "expatDllConfig.h"
+#    include "itk_expat_mangle.h"
+// ITK --stop
+
 /* External API definitions */
 
 /* Expat tries very hard to make the API boundary very specifically
@@ -92,7 +101,6 @@
           && ! defined(__CYGWIN__)
 #        define XMLIMPORT __declspec(dllimport)
 #      endif
-
 #    endif
 #  endif /* not defined XML_STATIC */
 
@@ -101,7 +109,16 @@
 #  endif
 
 #  if ! defined(XMLIMPORT) && XML_ENABLE_VISIBILITY
+// ITK --start
+#  if defined(_MSC_EXTENSIONS) && ! defined(__BEOS__)                      \
+     && ! defined(__CYGWIN__) && defined(ITKEXPAT_EXPORTS)
+#    define XMLIMPORT __declspec( dllexport )
+#  else
+// ITK --stop
 #    define XMLIMPORT __attribute__((visibility("default")))
+//ITK --start
+#  endif
+// ITK --stop
 #  endif
 
 /* If we didn't define it above, define it away: */
@@ -124,25 +141,6 @@
 #    define XML_ATTR_ALLOC_SIZE(x)
 #  endif
 
-#  if 1 // ITK --start  override with ITK import/export conventions
-// Inserted code for ITK support
-// upstream expat uses a .def file for visual studio to define exported
-// symobls.  ITK uses a paradigm that is used throughout ITK codebase
-// to accomplish exporting symobls.
-#    include "expatDllConfig.h"
-#    include "itk_expat_mangle.h"
-
-#    undef XMLIMPORT
-#    if defined(_WIN32) && !defined(ITK_EXPAT_STATIC)
-#      if defined(ITKEXPAT_EXPORTS)
-#        define XMLIMPORT __declspec( dllexport )
-#      else
-#        define XMLIMPORT __declspec( dllimport )
-#      endif
-#    else
-#      define XMLIMPORT __attribute__((visibility("default")))
-#    endif
-#  endif // ITK --stop
 #  define XMLPARSEAPI(type) XMLIMPORT type XMLCALL
 
 #  ifdef __cplusplus
