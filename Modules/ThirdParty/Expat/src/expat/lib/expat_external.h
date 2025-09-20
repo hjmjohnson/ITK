@@ -124,23 +124,26 @@
 #    define XML_ATTR_ALLOC_SIZE(x)
 #  endif
 
-# if 0 // Skip for ITK internal build
-#  define XMLPARSEAPI(type) XMLIMPORT type XMLCALL
-# else
-// ITK --start // Inserted code for ITK support
-#include "expatDllConfig.h"
+#  if 1 // ITK --start  override with ITK import/export conventions
+// Inserted code for ITK support
+// upstream expat uses a .def file for visual studio to define exported
+// symobls.  ITK uses a paradigm that is used throughout ITK codebase
+// to accomplish exporting symobls.
+#    include "expatDllConfig.h"
+#    include "itk_expat_mangle.h"
 
-#if defined(_WIN32) && !defined(ITK_EXPAT_STATIC)
-#  if defined(ITKEXPAT_EXPORTS)
-#    define XMLPARSEAPI(type) __declspec( dllexport ) type __cdecl
-#  else
-#    define XMLPARSEAPI(type) __declspec( dllimport ) type __cdecl
-#  endif
-#else
-#  define XMLPARSEAPI(type) type
-#endif
-// ITK --stop
-#endif //ITK_REMOVED_CODE
+#    undef XMLIMPORT
+#    if defined(_WIN32) && !defined(ITK_EXPAT_STATIC)
+#      if defined(ITKEXPAT_EXPORTS)
+#        define XMLIMPORT __declspec( dllexport )
+#      else
+#        define XMLIMPORT __declspec( dllimport )
+#      endif
+#    else
+#      define XMLIMPORT __attribute__((visibility("default")))
+#    endif
+#  endif // ITK --stop
+#  define XMLPARSEAPI(type) XMLIMPORT type XMLCALL
 
 #  ifdef __cplusplus
 extern "C" {
