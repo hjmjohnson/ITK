@@ -484,6 +484,8 @@ endif()
 if(WIN32)
   if(NOT EXPAT_SHARED_LIBS)
     set (ITK_EXPAT_STATIC 1)
+  else()
+    unset (ITK_EXPAT_STATIC)
   endif()
 endif()
 endif() #ITK --stop
