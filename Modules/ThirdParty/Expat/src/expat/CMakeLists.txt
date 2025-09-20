@@ -31,9 +31,9 @@
 # Copyright (c) 2021      Alex Richardson <Alexander.Richardson@cl.cam.ac.uk>
 # Unlike most of Expat,
 # this file is copyrighted under the BSD-license for buildsystem files of KDE.
-
+if(0) # ITK --start
 cmake_minimum_required(VERSION 3.1.3)
-
+endif() #ITK --stop
 # This allows controlling documented build time switches
 # when Expat is pulled in using the add_subdirectory function, e.g.
 #
