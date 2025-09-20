@@ -334,10 +334,6 @@ expat_install(FILES "${CMAKE_CURRENT_BINARY_DIR}/expat_config.h" DESTINATION ${C
 else()
 configure_file(expat_config.h.cmake "${ITK3P_EXPAT_BINARY_DIR}/expat_config.h")
 
-configure_file(${ITK3P_EXPAT_SOURCE_DIR}/expatDllConfig.h.in
-               ${ITK3P_EXPAT_BINARY_DIR}/expatDllConfig.h)
-
-
 set(MANGLE_PREFIX itk_expat)
 configure_file(itk_expat_mangle.h.in
                "${ITK3P_EXPAT_BINARY_DIR}/itk_expat_mangle.h"
@@ -477,14 +473,6 @@ if(_EXPAT_LIBM_FOUND)
 endif()
 if(EXPAT_WITH_LIBBSD)
   target_link_libraries(ITKEXPAT ${LIB_BSD})
-endif()
-
-if(WIN32)
-  if(NOT EXPAT_SHARED_LIBS)
-    set (ITK_EXPAT_STATIC 1)
-  else()
-    unset (ITK_EXPAT_STATIC)
-  endif()
 endif()
 endif() #ITK --stop
 if(1) # ITK --start
