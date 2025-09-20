@@ -406,9 +406,11 @@ set(expat_SRCS
 
 if(EXPAT_SHARED_LIBS)
     set(_SHARED SHARED)
+    if(0) # ITK --start  ITK does not use the .def file for MSVC
     if(MSVC)
         set(expat_SRCS ${expat_SRCS} lib/libexpat.def)
     endif()
+    endif() # ITK --stop
 else()
     set(_SHARED STATIC)
 endif()
