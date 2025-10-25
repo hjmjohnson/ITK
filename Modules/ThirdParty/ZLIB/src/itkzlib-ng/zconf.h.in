@@ -75,6 +75,8 @@
 #  else
 #    define Z_EXTERN extern __declspec(dllimport)
 #  endif
+#else
+  #define Z_EXTERN extern __attribute__((visibility("default")))
 #endif
 
 /* If building or using zlib with the WINAPI/WINAPIV calling convention,
