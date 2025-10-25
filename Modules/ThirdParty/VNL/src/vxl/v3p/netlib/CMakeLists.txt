@@ -441,6 +441,7 @@ endif()
 vxl_add_library(
     LIBRARY_NAME ${VXL_LIB_PREFIX}v3p_netlib
     LIBRARY_SOURCES ${v3p_netlib_sources}
+    STATIC
     DISABLE_MSVC_MP
 )
 

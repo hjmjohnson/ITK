@@ -75,15 +75,20 @@ endmacro()
 #
 function( vxl_add_library )
   cmake_parse_arguments(vxl_add
-     "DISABLE_MSVC_MP"  # options
+     "DISABLE_MSVC_MP;STATIC"  # options
      "LIBRARY_NAME;HEADER_BUILD_DIR;HEADER_INSTALL_DIR"  # oneValueArgs
      "LIBRARY_SOURCES"  # multiValueArgs
      ${ARGN} )
 
-  ## If not source files, then no lib created
-  list(LENGTH vxl_add_LIBRARY_SOURCES num_src_files)
-  if( ${num_src_files} GREATER 0 )
-    add_library(${vxl_add_LIBRARY_NAME} ${vxl_add_LIBRARY_SOURCES} )
+if (vxl_add_STATIC)
+    set(FORCE_STATIC STATIC)
+else ()
+    unset(FORCE_STATIC)
+endif ()
+## If not source files, then no lib created
+list(LENGTH vxl_add_LIBRARY_SOURCES num_src_files)
+if (${num_src_files} GREATER 0)
+    add_library(${vxl_add_LIBRARY_NAME} ${FORCE_STATIC} ${vxl_add_LIBRARY_SOURCES})
 
     # This enables object-level build parallelism in VNL libraries for MSVC
     # - disabled for MSVC simulators such as clang-cl
