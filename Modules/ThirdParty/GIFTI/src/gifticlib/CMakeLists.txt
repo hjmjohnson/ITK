@@ -67,6 +67,16 @@ endif(ZLIB_FOUND)
 set(GIFTIIO_SRC gifti_io.c gifti_xml.c)
 
 set(GIFTICLIB_NAME ${PACKAGE_PREFIX}giftiio)
+
+if(BUILD_SHARED_LIBS)
+    if(NOT MSVC)
+        # Override to force default visibility when building shared libraries
+        # A more fine grained solution would be to explicitly export the
+        # the required symbols.
+        set_source_files_properties(${GIFTIIO_SRC} PROPERTIES COMPILE_OPTIONS "-fvisibility=default")
+    endif()
+endif()
+
 add_library(${GIFTICLIB_NAME} ${GIFTIIO_SRC})
 target_link_libraries(${GIFTICLIB_NAME} ${EXPAT_LIBRARIES} ${ZLIB_LIBRARIES} ${NIFTI_LIBRARIES})
 if(BUILD_SHARED_LIBS AND GIFTI_LIBRARY_PROPERTIES)
