@@ -41,102 +41,105 @@
 #  if (METAIO_USE_NAMESPACE)
 namespace METAIO_NAMESPACE
 {
+
+
+
 #  endif
 
 class METAIO_EXPORT LandmarkPnt
 {
 public:
-  explicit LandmarkPnt(int dim);
-  ~LandmarkPnt();
+    explicit LandmarkPnt(int dim);
+    ~LandmarkPnt();
 
-  unsigned int m_Dim;
-  float *      m_X;
-  float        m_Color[4]{};
+    unsigned int m_Dim;
+    float* m_X;
+    float m_Color[4]{};
 };
 
 
 class METAIO_EXPORT MetaLandmark : public MetaObject
 {
-
-  // PUBLIC
+    // PUBLIC
 public:
-  typedef std::list<LandmarkPnt *> PointListType;
-  // Constructors & Destructor
-  MetaLandmark();
+    typedef std::list<LandmarkPnt*> PointListType;
+    // Constructors & Destructor
+    MetaLandmark();
 
-  explicit MetaLandmark(const char * _headerName);
+    explicit MetaLandmark(const char* _headerName);
 
-  explicit MetaLandmark(const MetaLandmark * _tube);
+    explicit MetaLandmark(const MetaLandmark* _tube);
 
-  explicit MetaLandmark(unsigned int dim);
+    explicit MetaLandmark(unsigned int dim);
 
-  ~MetaLandmark() override;
+    ~MetaLandmark() override;
 
-  void
-  PrintInfo() const override;
+    void
+    PrintInfo() const override;
 
-  void
-  CopyInfo(const MetaObject * _object) override;
+    void
+    CopyInfo(const MetaObject* _object) override;
 
-  //    NPoints(...)
-  //       Required Field
-  //       Number of points which compose the tube
-  void
-  NPoints(int npnt);
-  int
-  NPoints() const;
+    //    NPoints(...)
+    //       Required Field
+    //       Number of points which compose the tube
+    void
+    NPoints(int npnt);
+    int
+    NPoints() const;
 
-  //    PointDim(...)
-  //       Required Field
-  //       Definition of points
-  void
-  PointDim(const char * pointDim);
-  const char *
-  PointDim() const;
+    //    PointDim(...)
+    //       Required Field
+    //       Definition of points
+    void
+    PointDim(const char* pointDim);
+    const char*
+    PointDim() const;
 
 
-  void
-  Clear() override;
+    void
+    Clear() override;
 
-  PointListType &
-  GetPoints()
-  {
-    return m_PointList;
-  }
-  const PointListType &
-  GetPoints() const
-  {
-    return m_PointList;
-  }
+    PointListType&
+    GetPoints()
+    {
+        return m_PointList;
+    }
 
-  MET_ValueEnumType
-  ElementType() const;
-  void
-  ElementType(MET_ValueEnumType _elementType);
+    const PointListType&
+    GetPoints() const
+    {
+        return m_PointList;
+    }
 
-  // PROTECTED
+    MET_ValueEnumType
+    ElementType() const;
+    void
+    ElementType(MET_ValueEnumType _elementType);
+
+    // PROTECTED
 protected:
-  bool m_ElementByteOrderMSB{};
+    bool m_ElementByteOrderMSB{};
 
-  void
-  M_SetupReadFields() override;
+    void
+    M_SetupReadFields() override;
 
-  void
-  M_SetupWriteFields() override;
+    void
+    M_SetupWriteFields() override;
 
-  bool
-  M_Read() override;
+    bool
+    M_Read() override;
 
-  bool
-  M_Write() override;
+    bool
+    M_Write() override;
 
-  int m_NPoints; // "NPoints = "         0
+    int m_NPoints; // "NPoints = "         0
 
-  char m_PointDim[255]{}; // "PointDim = "       "x y z r"
+    char m_PointDim[255]{}; // "PointDim = "       "x y z r"
 
-  PointListType m_PointList;
+    PointListType m_PointList;
 
-  MET_ValueEnumType m_ElementType;
+    MET_ValueEnumType m_ElementType;
 };
 
 #  if (METAIO_USE_NAMESPACE)
