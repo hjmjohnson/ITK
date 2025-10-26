@@ -1,4 +1,4 @@
-ADD_LIBRARY( itkNetlibSlatec
+add_library( itkNetlibSlatec
   # from SLATEC/FNLIB
   d1mach.c
   d9lgmc.c
@@ -22,22 +22,22 @@ ADD_LIBRARY( itkNetlibSlatec
   d_mod.c
  )
 
-IF(ITK_USE_SYSTEM_VXL)
-  TARGET_LINK_LIBRARIES( itkNetlibSlatec v3p_netlib netlib)
-ELSE(ITK_USE_SYSTEM_VXL)
-  TARGET_LINK_LIBRARIES( itkNetlibSlatec itkv3p_netlib )
-ENDIF(ITK_USE_SYSTEM_VXL)
+if(ITK_USE_SYSTEM_VXL)
+  target_link_libraries( itkNetlibSlatec v3p_netlib netlib)
+else(ITK_USE_SYSTEM_VXL)
+  target_link_libraries( itkNetlibSlatec itkv3p_netlib )
+endif(ITK_USE_SYSTEM_VXL)
 
-IF(ITK_LIBRARY_PROPERTIES)
-  SET_TARGET_PROPERTIES(itkNetlibSlatec PROPERTIES ${ITK_LIBRARY_PROPERTIES})
-ENDIF(ITK_LIBRARY_PROPERTIES)
+if(ITK_LIBRARY_PROPERTIES)
+  set_target_properties(itkNetlibSlatec PROPERTIES ${ITK_LIBRARY_PROPERTIES})
+endif(ITK_LIBRARY_PROPERTIES)
 
-INSTALL(TARGETS itkNetlibSlatec
+install(TARGETS itkNetlibSlatec
   EXPORT ${ITK3P_INSTALL_EXPORT_NAME}
   RUNTIME DESTINATION ${ITK3P_INSTALL_RUNTIME_DIR} COMPONENT RuntimeLibraries
   LIBRARY DESTINATION ${ITK3P_INSTALL_LIBRARY_DIR} COMPONENT RuntimeLibraries
   ARCHIVE DESTINATION ${ITK3P_INSTALL_ARCHIVE_DIR} COMPONENT Development)
 
-IF (BORLAND)
-  SET (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w-8004 -w-8057")
-ENDIF (BORLAND)
+if (BORLAND)
+  set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w-8004 -w-8057")
+endif (BORLAND)

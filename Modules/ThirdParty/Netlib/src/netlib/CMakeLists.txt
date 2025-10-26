@@ -1,1 +1,1 @@
-ADD_SUBDIRECTORY( slatec )
+add_subdirectory( slatec )
