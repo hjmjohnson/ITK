@@ -22,7 +22,7 @@
 // The WriteNiftiTestFiles function writes binary data to disk to ensure that both big and little endian files are
 // available. This allows all the data necessary to create the images to be stored in source files rather than have
 // separate reference images.
-int
+ITKIONIFTI_EXPORT int
 WriteNiftiTestFiles(const std::string & prefix)
 {
 #include "LittleEndian_hdr.h"
@@ -73,7 +73,7 @@ WriteNiftiTestFiles(const std::string & prefix)
   return EXIT_SUCCESS;
 }
 
-int
+ITKIONIFTI_EXPORT int
 TestNiftiByteSwap(const std::string & prefix)
 {
   using ImageType = itk::Image<double, 3>;
@@ -137,7 +137,7 @@ RemoveNiftiByteSwapTestFiles(const std::string & prefix)
   itk::IOTestHelper::Remove((prefix + "NiftiBigEndian.img").c_str());
 }
 
-void
+ITKIONIFTI_EXPORT void
 TestEnumStreaming()
 {
   // Test streaming enumeration for Analyze75Flavor elements
