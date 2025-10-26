@@ -36,9 +36,7 @@ set(headers
   utils.h
   ${CMAKE_CURRENT_BINARY_DIR}/double-conversion-configure.h
 )
-
-
-add_library(itkdouble-conversion
+set(doubleconvert_SRCS
   bignum.cc
   bignum-dtoa.cc
   cached-powers.cc
@@ -48,6 +46,20 @@ add_library(itkdouble-conversion
   string-to-double.cc
   strtod.cc
   ${headers}
+)
+
+
+if(BUILD_SHARED_LIBS)
+    if(NOT MSVC)
+        # Override to force default visibility when building shared libraries
+        # A more fine grained solution would be to explicitly export the
+        # the required symbols.
+        set_source_files_properties(${doubleconvert_SRCS} PROPERTIES COMPILE_OPTIONS "-fvisibility=default")
+    endif()
+endif()
+
+add_library(itkdouble-conversion
+  ${doubleconvert_SRCS}
 )
 
 if(ITK_LIBRARY_PROPERTIES)
