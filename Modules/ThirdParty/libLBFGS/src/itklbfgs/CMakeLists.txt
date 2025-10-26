@@ -1,3 +1,12 @@
+
+if(BUILD_SHARED_LIBS)
+    if(NOT MSVC)
+        # Override to force default visibility when building shared libraries
+        # A more fine grained solution would be to explicitly export the
+        # the required symbols.
+        set_source_files_properties(lib/lbfgs.c PROPERTIES COMPILE_OPTIONS "-fvisibility=default")
+    endif()
+endif()
 add_library(itklbfgs lib/lbfgs.c)
 target_include_directories(itklbfgs PRIVATE include)
 
