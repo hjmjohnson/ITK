@@ -28,5 +28,17 @@ set(
   itkTestingExtractSliceImageFilter.cxx
   itkTestingHashImageFilter.cxx
 )
-
+if(BUILD_SHARED_LIBS)
+  if(NOT MSVC)
+    # Override to force default visibility when building shared libraries
+    # A more fine grained solution would be to explicitly export the
+    # the required symbols.
+    set_source_files_properties(
+      ${ITKTestKernel_SRCS}
+      PROPERTIES
+        COMPILE_OPTIONS
+          "-fvisibility=default"
+    )
+  endif()
+endif()
 itk_module_add_library(ITKTestKernel ${ITKTestKernel_SRCS})
