@@ -59,7 +59,7 @@ set(tiff_private_HEADERS
 
 add_library(itktiff ${CMAKE_CURRENT_BINARY_DIR}/itktiff.def)
 
-target_sources(itktiff PRIVATE
+set(itktiff_SRCS
         ${tiff_public_HEADERS}
         ${tiff_private_HEADERS}
         tif_aux.c
@@ -105,6 +105,10 @@ target_sources(itktiff PRIVATE
         tif_zip.c
         tif_zstd.c)
 
+target_sources(itktiff PRIVATE
+        ${itktiff_SRCS}
+)
+
 if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.16)
   set_property(SOURCE tif_jpeg.c tif_jpeg12.c PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 endif ()
@@ -117,9 +121,20 @@ set_property(SOURCE tif_open.c APPEND PROPERTY COMPILE_DEFINITIONS ALLOW_TIFF_NO
 if(USE_WIN32_FILEIO)
   target_sources(itktiff PRIVATE tif_win32.c)
   set_property(SOURCE tif_win32.c APPEND PROPERTY COMPILE_DEFINITIONS ALLOW_TIFF_NON_EXT_ALLOC_FUNCTIONS)
+  set(itktiff_platform_SRCS tif_win32.c)
 else()
   target_sources(itktiff PRIVATE tif_unix.c)
   set_property(SOURCE tif_unix.c APPEND PROPERTY COMPILE_DEFINITIONS ALLOW_TIFF_NON_EXT_ALLOC_FUNCTIONS)
+  set(itktiff_platform_SRCS tif_unix.c)
+endif()
+
+if(BUILD_SHARED_LIBS)
+    if(NOT MSVC)
+        # Override to force default visibility when building shared libraries
+        # A more fine grained solution would be to explicitly export the
+        # the required symbols.
+        set_source_files_properties(${itktiff_SRCS} ${itktiff_platform_SRCS} PROPERTIES COMPILE_OPTIONS "-fvisibility=default")
+    endif()
 endif()
 
 target_include_directories(itktiff
