@@ -29,6 +29,7 @@
 #define itkTransformFactoryBase_h
 
 #include "itkObjectFactoryBase.h"
+#include "../../TransformBase/include/itkTransformIOBase.h"
 
 namespace itk
 {
@@ -37,7 +38,7 @@ namespace itk
  * \ingroup ITKTransformFactory
  */
 
-class TransformFactoryBase : public ObjectFactoryBase
+class ITKIOTransformBase_EXPORT TransformFactoryBase : public ObjectFactoryBase
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(TransformFactoryBase);
@@ -90,7 +91,6 @@ public:
                     bool                       enableFlag,
                     CreateObjectFunctionBase * createFunction)
   {
-
     // Ensure there is only one transform registered by a name, this
     // may happen on windows where this library is static, and the
     // global init flag may not be unique.
