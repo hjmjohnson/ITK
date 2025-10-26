@@ -62,6 +62,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#if defined(__has_attribute)
+  #if __has_attribute(visibility)
+    #define HAS_VISIBILITY_ATTRIBUTE 1
+  #else
+    #define HAS_VISIBILITY_ATTRIBUTE 0
+  #endif
+#elif defined(__GNUC__) && (__GNUC__ >= 4)
+  // GCC added visibility attributes in 4.0
+  #define HAS_VISIBILITY_ATTRIBUTE 1
+#else
+  #define HAS_VISIBILITY_ATTRIBUTE 0
+#endif
 
 #if defined(_WIN32) && !defined(__CYGWIN__) && !defined(TEEM_STATIC)
 #  if defined(TEEM_BUILD) || defined(air_EXPORTS) || defined(teem_EXPORTS)
@@ -70,7 +82,12 @@ extern "C" {
 #    define NRRDIO_EXPORT extern __declspec(dllimport)
 #  endif
 #else /* TEEM_STATIC || UNIX */
-#  define NRRDIO_EXPORT extern
+#  if HAS_VISIBILITY_ATTRIBUTE
+/* Explicitly set visibility for when "hidden" visibility is the default setting */
+#    define NRRDIO_EXPORT extern __attribute__((visibility("default")))
+#  else
+#    define NRRDIO_EXPORT extern
+#  endif
 #endif
 
 #if defined(_WIN32) && !defined(__CYGWIN__) && !defined(__MINGW32__)
