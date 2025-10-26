@@ -42,6 +42,12 @@ uuidP.h
 
 if (BUILD_SHARED_LIBS)
   add_definitions(-DUUID_DLL)
+  if(NOT MSVC)
+      # Override to force default visibility when building shared libraries
+      # A more fine grained solution would be to explicitly export the
+      # the required symbols.
+      set_source_files_properties(${UUID_SRCS} PROPERTIES COMPILE_OPTIONS "-fvisibility=default")
+  endif()
 endif()
 
 
