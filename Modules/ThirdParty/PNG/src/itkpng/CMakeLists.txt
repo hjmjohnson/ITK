@@ -25,6 +25,10 @@ if(WIN32)
   else(BUILD_SHARED_LIBS)
     set(PNG_STATIC 1)
   endif(BUILD_SHARED_LIBS)
+else(WIN32)
+    if(BUILD_SHARED_LIBS)
+        add_definitions(-DPNG_BUILD_ITKSHARED=1)
+    endif()
 endif(WIN32)
 
 configure_file(${ITK3P_PNG_SOURCE_DIR}/pngDllConfig.h.in

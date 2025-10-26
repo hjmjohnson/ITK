@@ -333,6 +333,13 @@
        * definitions.
        */
 #     define PNG_IMPEXP
+/* ITK MODIFICATION START*/
+#    ifdef PNG_BUILD_ITKSHARED
+#      define PNG_IMPEXP __attribute__((visibility ("default")))
+#    else
+#      define PNG_IMPEXP
+#    endif
+/* ITK MODIFICATION STOP*/
 #  endif
 #endif
 

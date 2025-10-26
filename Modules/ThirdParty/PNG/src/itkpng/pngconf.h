@@ -271,7 +271,11 @@
      /* This forces use of a DLL, disallowing static linking */
 #    define PNG_IMPEXP PNG_DLL_IMPORT
 #  endif
-
+/* ITK MODIFICATION START*/
+#  ifdef PNG_BUILD_ITKSHARED
+#     define PNG_IMPEXP __attribute__((visibility ("default")))
+#  endif
+/* ITK MODIFICATION STOP*/
 #  ifndef PNG_IMPEXP
 #    define PNG_IMPEXP
 #  endif
