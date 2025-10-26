@@ -89,6 +89,14 @@ if(NOT WIN32 AND CMAKE_COMPILER_IS_GNUCC AND CMAKE_C_COMPILER MATCHES ".*mingw32
   set(WIN32 YES)
 endif()
 
+if(BUILD_SHARED_LIBS)
+    if(NOT MSVC)
+        # Override to force default visibility when building shared libraries
+        # A more fine grained solution would be to explicitly export the
+        # the required symbols.
+        set_source_files_properties(${OPENJPEG_SRCS} PROPERTIES COMPILE_OPTIONS "-fvisibility=default")
+    endif()
+endif()
 # Build the library
 add_library(${OPENJPEG_LIBRARY_NAME} ${OPENJPEG_SRCS})
 set(INSTALL_LIBS ${OPENJPEG_LIBRARY_NAME})
