@@ -458,6 +458,16 @@ ENDIF(LIBMINC_MINC1_SUPPORT)
 SET(VOLUME_IO_LIBRARY  ${LIBMINC_EXTERNAL_LIB_PREFIX}minc2)
 SET(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX})
 
+if(BUILD_SHARED_LIBS)
+    if(NOT MSVC)
+        # Override to force default visibility when building shared libraries
+        # A more fine grained solution would be to explicitly export the
+        # the required symbols.
+        set_source_files_properties(${minc_LIB_SRCS} ${minc_HEADERS} ${volume_io_LIB_SRCS} ${volume_io_HEADERS}
+                PROPERTIES COMPILE_OPTIONS "-fvisibility=default")
+    endif()
+endif()
+
 ADD_LIBRARY(${LIBMINC_LIBRARY} ${LIBRARY_TYPE} ${minc_LIB_SRCS} ${minc_HEADERS} ${volume_io_LIB_SRCS} ${volume_io_HEADERS} )
 
 IF(NIFTI_FOUND AND NOT LIBMINC_USE_SYSTEM_NIFTI)
