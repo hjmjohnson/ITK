@@ -24,13 +24,13 @@ add_library( itkNetlibSlatec
 
 if(ITK_USE_SYSTEM_VXL)
   target_link_libraries( itkNetlibSlatec v3p_netlib netlib)
-else(ITK_USE_SYSTEM_VXL)
+else()
   target_link_libraries( itkNetlibSlatec itkv3p_netlib )
-endif(ITK_USE_SYSTEM_VXL)
+endif()
 
 if(ITK_LIBRARY_PROPERTIES)
   set_target_properties(itkNetlibSlatec PROPERTIES ${ITK_LIBRARY_PROPERTIES})
-endif(ITK_LIBRARY_PROPERTIES)
+endif()
 
 install(TARGETS itkNetlibSlatec
   EXPORT ${ITK3P_INSTALL_EXPORT_NAME}
@@ -40,4 +40,4 @@ install(TARGETS itkNetlibSlatec
 
 if (BORLAND)
   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w-8004 -w-8057")
-endif (BORLAND)
+endif ()
