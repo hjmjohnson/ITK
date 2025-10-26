@@ -110,7 +110,7 @@ target_sources(itktiff PRIVATE
 )
 
 if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.16)
-  set_property(SOURCE tif_jpeg.c tif_jpeg12.c PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+  set_property(SOURCE tif_jpeg.c tif_jpeg_12.c PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 endif ()
 
 # For all files (but tif_open.c, tif_unix.c and tif_win32.c), forbid the use
