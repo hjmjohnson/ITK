@@ -15,6 +15,7 @@
 
 #define V3P_NETLIB_SRC
 #include "v3p_netlib.h"
+#include "netlibslatec_export.h"
 
 /* Table of constant values */
 
@@ -23,7 +24,7 @@ static integer c__1 = 1;
 static integer c__2 = 2;
 
 /* DECK DBETAI */
-doublereal dbetai_(doublereal *x, doublereal *pin, doublereal *qin)
+NETLIBSLATEC_EXPORT doublereal dbetai_(doublereal* x, doublereal* pin, doublereal* qin)
 {
     /* Initialized data */
 

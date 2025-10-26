@@ -14,6 +14,7 @@
 
 #define V3P_NETLIB_SRC
 #include "v3p_netlib.h"
+#include "netlibslatec_export.h"
 
 /* Table of constant values */
 
@@ -24,7 +25,7 @@ static integer c__2 = 2;
 static integer c__1 = 1;
 
 /* DECK DGAMMA */
-doublereal dgamma_(doublereal *x)
+NETLIBSLATEC_EXPORT doublereal dgamma_(doublereal* x)
 {
     /* Initialized data */
 

@@ -12,6 +12,7 @@
 
 #define V3P_NETLIB_SRC
 #include "v3p_netlib.h"
+#include "netlibslatec_export.h"
 
 /* Table of constant values */
 
@@ -19,7 +20,7 @@ static integer c__1 = 1;
 static integer c__2 = 2;
 
 /* DECK DGAMI */
-doublereal dgami_(doublereal *a, doublereal *x)
+NETLIBSLATEC_EXPORT doublereal dgami_(doublereal* a, doublereal* x)
 {
     /* System generated locals */
     doublereal ret_val;
