@@ -105,12 +105,7 @@ _itkcheckundefinedsymbolsallowed()
 
 macro(itk_target_link_libraries_with_dynamic_lookup target)
   if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set_target_properties(
-      ${target}
-      PROPERTIES
-        LINK_FLAGS
-          "-undefined dynamic_lookup"
-    )
+    target_link_options(${target} PRIVATE "LINKER:-undefined,dynamic_lookup")
   elseif(ITK_UNDEFINED_SYMBOLS_ALLOWED)
     # linker allows undefined symbols, let's just not link
   else()
