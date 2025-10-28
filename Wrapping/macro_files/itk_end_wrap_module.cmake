@@ -497,6 +497,12 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
   if(NOT TARGET ${lib})
     set(development_component "Development.Module")
     if(ITK_USE_PYTHON_LIMITED_API)
+      if(CMAKE_VERSION VERSION_LESS 3.26)
+        message(
+          FATAL_ERROR
+          "Python3 Wrapping requires CMAKE 3.26 or greater to support Python3_SABI_LIBRARIES"
+        )
+      endif()
       set(development_component "Development.SABIModule")
     endif()
     find_package(
