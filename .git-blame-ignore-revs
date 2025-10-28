@@ -10,6 +10,11 @@
 # $ git config blame.ignoreRevsFile .git-blame-ignore-revs
 #
 # Ignore changes introduced when doing global file format changes
+
+# STYLE: Remove extra spaces between parentheses of CMake command calls
+7ba787a2d0df3d99fdbaa5ad343e87506c1045cd
+# ENH: Add cmake-format linter to pre-commit
+b4baa24f9c0937404b83fa02c01021af1d0304e4
 # STYLE: Apply consistent pep8 compatible indentation.
 425060c49332919006bddb89a9417e0fbc05745f
 # STYLE: Use consistent formatting for python files
