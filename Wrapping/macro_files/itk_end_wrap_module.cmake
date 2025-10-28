@@ -618,10 +618,12 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
     endif()
     # Link the modules together
     target_link_libraries(${lib} LINK_PUBLIC ${WRAPPER_LIBRARY_LINK_LIBRARIES})
-    if(ITK_USE_PYTHON_LIMITED_API)
+    ## TAGGED LINKAGE:  link without forcing
+    if(ITK_USE_PYTHON_LIMITED_API AND Python3_SABI_LIBRARIES)
       itk_target_link_libraries_with_dynamic_lookup(${lib} LINK_PUBLIC ${Python3_SABI_LIBRARIES})
     else()
-      itk_target_link_libraries_with_dynamic_lookup(${lib} LINK_PUBLIC ${Python3_LIBRARIES})
+      ## TAGGED LINKAGE
+      itk_target_link_libraries_with_dynamic_lookup(${lib} LINK_PUBLIC Python3::Module)
     endif()
 
     if(USE_COMPILER_HIDDEN_VISIBILITY)

@@ -408,12 +408,26 @@ endmacro()
 # Macro for linking to modules dependencies. Links this module to every
 # dependency given to itk_module either publicly or privately.
 macro(itk_module_link_dependencies)
+  ## TAGGED LINKAGE
+  find_package(Python3 REQUIRED Development)
   # link to public dependencies
   foreach(dep IN LISTS ITK_MODULE_${itk-module}_PUBLIC_DEPENDS)
     if(DEFINED ${dep}_LIBRARIES)
-      target_link_libraries(${itk-module} LINK_PUBLIC ${${dep}_LIBRARIES})
+      ## TAGGED LINKAGE
+      target_link_libraries(
+        ${itk-module}
+        LINK_PUBLIC
+          ${${dep}_LIBRARIES}
+          Python3::Python
+      )
     elseif(DEFINED ${dep})
-      target_link_libraries(${itk-module} LINK_PUBLIC ${${dep}})
+      ## TAGGED LINKAGE
+      target_link_libraries(
+        ${itk-module}
+        LINK_PUBLIC
+          ${${dep}}
+          Python3::Python
+      )
     else()
       message(
         FATAL_ERROR
