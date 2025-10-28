@@ -119,7 +119,7 @@ endmacro()
 # Configure the path-dependent itkConfig.py
 
 # we specify these directories with relative paths  so that the file can be
-# bundled up into an install conventiently. Python will take care of turning
+# bundled up into an install conveniently. Python will take care of turning
 # the / path separator into \ on windows if needed.
 if(NOT EXTERNAL_WRAP_ITK_PROJECT)
   # copy the files to expose build options in python
