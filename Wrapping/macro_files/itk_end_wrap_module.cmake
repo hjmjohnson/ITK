@@ -516,6 +516,7 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
       COMPONENTS
         Interpreter
         ${development_component}
+        NumPy # Needed for testing, prefer to fail early
       REQUIRED
     )
     #Python3_add_library sets PREFIX "" and the correct extension suffix automatically.
