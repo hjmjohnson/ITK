@@ -480,117 +480,63 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
       ""
   )
 
-  set(use_python_limited_api_default 0)
-  if(ITK_WRAP_PYTHON_VERSION VERSION_GREATER_EQUAL 3.11)
-    set(use_python_limited_api_default 1)
-  endif()
-  set(
-    ITK_USE_PYTHON_LIMITED_API
-    ${use_python_limited_api_default}
-    CACHE BOOL
-    "Use Python's limited API for Python minor version compatibility."
+  set(_ITK_MINIMUM_SUPPORTED_LIMITED_API_VERSION 3.11)
+  if(
+    ITK_WRAP_PYTHON_VERSION
+      VERSION_GREATER_EQUAL
+      ${_ITK_MINIMUM_SUPPORTED_LIMITED_API_VERSION}
   )
+    set(
+      ITK_USE_PYTHON_LIMITED_API
+      1
+      CACHE BOOL
+      "Use Python's limited API for Python minor version compatibility."
+    )
+  else()
+    set(ITK_USE_PYTHON_LIMITED_API 0 CACHE BOOL "Disable Python's limited API.")
+  endif()
   mark_as_advanced(ITK_USE_PYTHON_LIMITED_API)
-  unset(use_python_limited_api_default)
 
   # build all the c++ files from this module in a common lib
   if(NOT TARGET ${lib})
     set(development_component "Development.Module")
+    set(Python3_ABI_SETTINGS)
     if(ITK_USE_PYTHON_LIMITED_API)
       set(development_component "Development.SABIModule")
+      set(
+        Python3_ABI_SETTINGS
+        USE_SABI
+        ${_ITK_MINIMUM_SUPPORTED_LIMITED_API_VERSION}
+        WITH_SOABI
+      )
     endif()
     find_package(
       Python3
-      ${PYTHON_VERSION_MIN}...${PYTHON_VERSION_MAX}
+      ${ITK_WRAP_PYTHON_VERSION} # Force python version to match previously found
       COMPONENTS
         Interpreter
         ${development_component}
       REQUIRED
     )
-    add_library(
+    #Python3_add_library sets PREFIX "" and the correct extension suffix automatically.
+    # No manual SUFFIX editing is needed.
+    #WITH_SOABI can be added to Python3_add_library(...) if you want the SOABI tag
+    #in the filename for non-SABI builds.
+    #Use Development.Module for normal CPython extensions. Use Development.SABIModule plus Py_LIMITED_API for abi3-compatible builds.
+    python3_add_library(
       ${lib}
       MODULE
+      ${Python3_ABI_SETTINGS}
       ${cpp_file}
       ${ITK_WRAP_PYTHON_CXX_FILES}
       ${WRAPPER_LIBRARY_CXX_SOURCES}
     )
-    set_target_properties(
-      ${lib}
-      PROPERTIES
-        PREFIX
-          "_"
-    )
+    # Python Limited API / Stable ABI
+    target_include_directories(${lib} PRIVATE ${Python3_INCLUDE_DIRS})
+    # Link the modules together
+    target_link_libraries(${lib} LINK_PUBLIC ${WRAPPER_LIBRARY_LINK_LIBRARIES})
 
-    # gcc 4.4 complains a lot without this flag when building in release mode
-    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-      set_target_properties(
-        ${lib}
-        PROPERTIES
-          COMPILE_FLAGS
-            "-fno-strict-aliasing -w"
-      )
-    endif()
-    # extension is not the same on windows
-    if(WIN32)
-      set_target_properties(
-        ${lib}
-        PROPERTIES
-          SUFFIX
-            .pyd
-      )
-      set_target_properties(
-        ${lib}
-        PROPERTIES
-          DEBUG_POSTFIX
-            "_d"
-      )
-
-      if(MSVC)
-        # Disables 'conversion from 'type1' to 'type2', possible loss of data warnings
-        set_target_properties(
-          ${lib}
-          PROPERTIES
-            COMPILE_FLAGS
-              "/wd4244"
-        )
-      endif()
-    else()
-      if(ITK_USE_PYTHON_LIMITED_API)
-        set_target_properties(
-          ${lib}
-          PROPERTIES
-            SUFFIX
-              .abi3.so
-        )
-      else()
-        if(NOT PYTHON3_FOUND)
-          find_package(
-            Python3
-            ${PYTHON_VERSION_MIN}...${PYTHON_VERSION_MAX}
-            COMPONENTS
-              Interpreter
-              Development.Module
-              ${SKBUILD_SABI_COMPONENT}
-          )
-        endif()
-        if(PYTHON3_FOUND)
-          # Graalpy Patch
-          set_target_properties(
-            ${lib}
-            PROPERTIES
-              SUFFIX
-                .${Python3_SOABI}.so
-          )
-        else()
-          set_target_properties(
-            ${lib}
-            PROPERTIES
-              SUFFIX
-                .so
-          )
-        endif()
-      endif()
-    endif()
+    # Set IPO if it is supported
     if(NOT MSVC)
       include(CheckIPOSupported)
       check_ipo_supported(RESULT ipo_is_supported)
@@ -604,18 +550,6 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
         )
       endif()
       unset(ipo_is_supported)
-    endif()
-
-    # Python Limited API / Stable ABI
-    if(ITK_USE_PYTHON_LIMITED_API)
-      target_compile_definitions(${lib} PUBLIC -DPy_LIMITED_API=0x030b0000)
-    endif()
-    # Link the modules together
-    target_link_libraries(${lib} LINK_PUBLIC ${WRAPPER_LIBRARY_LINK_LIBRARIES})
-    if(ITK_USE_PYTHON_LIMITED_API)
-      itk_target_link_libraries_with_dynamic_lookup(${lib} LINK_PUBLIC ${Python3_SABI_LIBRARIES})
-    else()
-      itk_target_link_libraries_with_dynamic_lookup(${lib} LINK_PUBLIC ${Python3_LIBRARIES})
     endif()
 
     if(USE_COMPILER_HIDDEN_VISIBILITY)
@@ -671,6 +605,7 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
       endforeach()
     endif()
   endif()
+  unset(_ITK_MINIMUM_SUPPORTED_LIMITED_API_VERSION)
 
   if(${module_prefix}_WRAP_DOC)
     # be sure to not include a header several times
