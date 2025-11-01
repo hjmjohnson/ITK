@@ -532,6 +532,15 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
       ${ITK_WRAP_PYTHON_CXX_FILES}
       ${WRAPPER_LIBRARY_CXX_SOURCES}
     )
+    # Override the default naming convensions for libraries
+    # and add an ITK python prefix of "_" for the generated names
+    set_target_properties(
+      ${lib}
+      PROPERTIES
+        PREFIX
+          "_"
+    )
+
     # Python Limited API / Stable ABI
     target_include_directories(${lib} PRIVATE ${Python3_INCLUDE_DIRS})
     # Link the modules together
