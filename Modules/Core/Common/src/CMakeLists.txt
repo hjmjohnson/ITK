@@ -255,7 +255,7 @@ if(UNIX)
   endif()
 endif()
 if(ITK_WRAP_PYTHON)
-  target_link_libraries(ITKCommon PRIVATE Python3::Python)
+  target_link_libraries(ITKCommon LINK_PUBLIC Python3::Python)
 endif()
 
 if(ITK_USE_TBB)
