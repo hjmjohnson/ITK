@@ -19,7 +19,6 @@
 #include "itkHessianToObjectnessMeasureImageFilter.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkRescaleIntensityImageFilter.h"
 #include "itkHessianRecursiveGaussianImageFilter.h"
 #include "itkTestingMacros.h"
 

@@ -19,7 +19,6 @@
 #include <iostream>
 
 #include "itkCenteredRigid2DTransform.h"
-#include "itkTestingMacros.h"
 
 
 namespace

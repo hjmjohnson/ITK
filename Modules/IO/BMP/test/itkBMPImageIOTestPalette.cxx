@@ -19,7 +19,6 @@
 #include "itkBMPImageIO.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkImageRegionConstIterator.h"
 #include "itkMetaDataDictionary.h"
 #include "itkTestingMacros.h"
 #include <fstream>

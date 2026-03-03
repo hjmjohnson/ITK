@@ -18,7 +18,6 @@
 
 #include "itkMetaArrayWriter.h"
 #include "itkMetaArrayReader.h"
-#include "itkLightProcessObject.h"
 #include "itksys/SystemTools.hxx"
 #include "itkTestingMacros.h"
 

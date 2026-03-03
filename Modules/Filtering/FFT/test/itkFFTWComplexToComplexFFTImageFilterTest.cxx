@@ -34,10 +34,7 @@
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkForwardFFTImageFilter.h"
-#include "itkInverseFFTImageFilter.h"
 
-#include "itkObjectFactoryBase.h"
 #include "itkFFTWComplexToComplexFFTImageFilter.h"
 #include "itkFFTWForwardFFTImageFilter.h"
 #include "itkFFTWInverseFFTImageFilter.h"

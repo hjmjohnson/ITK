@@ -25,7 +25,6 @@
 
 #include "itkGDCMImageIO.h"
 #include "itkImageFileReader.h"
-#include "itkMetaDataObject.h"
 
 std::string
 FindDicomTag(const std::string &             entryId,

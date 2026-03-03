@@ -18,7 +18,6 @@
 #include "itkSimplexMeshGeometry.h"
 #include "itkMath.h"
 
-#include "vxl_version.h"
 #include "vnl/vnl_cross.h"
 
 namespace itk

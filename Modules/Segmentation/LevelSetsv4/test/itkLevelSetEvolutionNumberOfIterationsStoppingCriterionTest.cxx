@@ -19,7 +19,6 @@
 #include "itkWhitakerSparseLevelSetImage.h"
 #include "itkLevelSetContainer.h"
 #include "itkLevelSetEvolutionNumberOfIterationsStoppingCriterion.h"
-#include "itkMath.h"
 #include "itkTestingMacros.h"
 
 int

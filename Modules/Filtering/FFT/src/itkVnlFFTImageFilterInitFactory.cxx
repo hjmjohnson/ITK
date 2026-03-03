@@ -26,10 +26,6 @@
 #include "itkVnlInverseFFTImageFilter.h"
 #include "itkVnlRealToHalfHermitianForwardFFTImageFilter.h"
 
-#include "itkCreateObjectFunction.h"
-#include "itkVersion.h"
-#include "itkObjectFactoryBase.h"
-
 namespace itk
 {
 VnlFFTImageFilterInitFactory::VnlFFTImageFilterInitFactory() { VnlFFTImageFilterInitFactory::RegisterFactories(); }

@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkEllipseSpatialObject.h"
-#include "itkLineSpatialObject.h"
 #include "itkGroupSpatialObject.h"
 #include "itkSpatialObjectToImageFilter.h"
 #include "itkImageToSpatialObjectRegistrationMethod.h"

@@ -21,7 +21,7 @@
 
 #include "itkConstShapedNeighborhoodIterator.h"
 #include "itkImage.h"
-#include "itkImageNeighborhoodOffsets.h"
+#include "itkImageNeighborhoodOffsets.h" //NOLINT -- For GenerateImageNeighborhoodOffsets
 #include "itkLexicographicCompare.h"
 #include "itkOffset.h"
 #include "itkSize.h"

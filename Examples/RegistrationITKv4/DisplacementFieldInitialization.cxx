@@ -40,7 +40,6 @@
 #include "itkImage.h"
 #include "itkVector.h"
 #include "itkLandmarkDisplacementFieldSource.h"
-#include "itkImageFileWriter.h"
 
 #include <fstream>
 

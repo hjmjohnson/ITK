@@ -31,13 +31,11 @@
 #include "itkTranslationTransform.h"
 #include "itkMattesMutualInformationImageToImageMetric.h"
 #include "itkAmoebaOptimizer.h"
-#include "itkMersenneTwisterRandomVariateGenerator.h"
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 
 #include "itkResampleImageFilter.h"
-#include "itkCastImageFilter.h"
 
 
 //  The following section of code implements a Command observer

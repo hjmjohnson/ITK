@@ -51,7 +51,6 @@
 
 // Software Guide : BeginCodeSnippet
 #include "itkPointSet.h"
-#include "itkVector.h"
 // Software Guide : EndCodeSnippet
 
 int

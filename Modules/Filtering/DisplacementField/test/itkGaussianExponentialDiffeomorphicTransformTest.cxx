@@ -19,7 +19,6 @@
 #include <iostream>
 
 #include "itkGaussianExponentialDiffeomorphicTransform.h"
-#include "itkNumericTraits.h"
 #include "itkMath.h"
 
 /**

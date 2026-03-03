@@ -19,7 +19,6 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkMetaDataObject.h"
 #include "itkTestingMacros.h"
 #include "itkTIFFImageIO.h"
 

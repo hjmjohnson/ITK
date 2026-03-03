@@ -32,7 +32,6 @@
 
 #include "itkImageRegistrationMethod.h"
 #include "itkMattesMutualInformationImageToImageMetric.h"
-#include "itkMersenneTwisterRandomVariateGenerator.h"
 
 #include "itkTimeProbesCollectorBase.h"
 #include "itkMemoryProbesCollectorBase.h"

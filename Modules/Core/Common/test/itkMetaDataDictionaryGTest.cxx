@@ -20,8 +20,6 @@
 #include "itkGTestPredicate.h"
 
 #include "itkMetaDataDictionary.h"
-#include "itkMetaDataObject.h"
-#include "itkTestVerifyMetaData.h"
 
 #include <iterator>
 #include <numeric>     // For iota.

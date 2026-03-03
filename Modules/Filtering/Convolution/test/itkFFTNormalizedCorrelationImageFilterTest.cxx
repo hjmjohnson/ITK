@@ -23,15 +23,7 @@
 #include "itkSimpleFilterWatcher.h"
 #include "itkTestingMacros.h"
 
-#include "itkObjectFactoryBase.h"
-#include "itkVnlForwardFFTImageFilter.h"
-#include "itkVnlInverseFFTImageFilter.h"
-#include "itkVnlRealToHalfHermitianForwardFFTImageFilter.h"
-#include "itkVnlHalfHermitianToRealInverseFFTImageFilter.h"
 #if defined(ITK_USE_FFTWD) || defined(ITK_USE_FFTWF)
-#  include "itkFFTWForwardFFTImageFilter.h"
-#  include "itkFFTWInverseFFTImageFilter.h"
-#  include "itkFFTWRealToHalfHermitianForwardFFTImageFilter.h"
 #  include "itkFFTWHalfHermitianToRealInverseFFTImageFilter.h"
 #endif
 

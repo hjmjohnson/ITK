@@ -18,7 +18,6 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include "itkIOCommon.h"
-#include "itkMetaDataObject.h"
 #include "itkAnatomicalOrientation.h"
 #include "itkTestingMacros.h"
 

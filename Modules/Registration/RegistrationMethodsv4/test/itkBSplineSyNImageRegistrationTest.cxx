@@ -24,7 +24,6 @@
 
 #include "itkAffineTransform.h"
 #include "itkANTSNeighborhoodCorrelationImageToImageMetricv4.h"
-#include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"
 #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor.h"
 #include "itkCompositeTransform.h"
 #include "itkVector.h"

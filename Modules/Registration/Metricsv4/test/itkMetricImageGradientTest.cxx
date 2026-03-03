@@ -22,9 +22,7 @@
 #include "itkCentralDifferenceImageFunction.h"
 #include "itkResampleImageFilter.h"
 #include "itkAffineTransform.h"
-#include "itkContinuousIndex.h"
 #include <iomanip>
-#include "itkLinearInterpolateImageFunction.h"
 #include "itkImageFileWriter.h"
 #include "itkImageToImageMetricv4.h"
 

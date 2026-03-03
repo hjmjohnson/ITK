@@ -101,7 +101,6 @@
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkZeroCrossingImageFilter.h"
 
 
 int

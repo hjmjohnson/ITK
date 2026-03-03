@@ -21,7 +21,6 @@
 #include "itkRegistrationParameterScalesFromIndexShift.h"
 #include "itkRegistrationParameterScalesFromJacobian.h"
 
-#include "itkSize.h"
 #include "itkImageRegistrationMethodImageSource.h"
 #include "itkMath.h"
 #include "itkTestingMacros.h"

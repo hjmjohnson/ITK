@@ -15,9 +15,6 @@
  *  limitations under the License.
  *
  *=========================================================================*/
-
-#include "itkWin32Header.h"
-
 #include <fstream>
 
 #include "itkImageToNeighborhoodSampleAdaptor.h"

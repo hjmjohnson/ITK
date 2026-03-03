@@ -21,7 +21,6 @@
 #include "itkMRCImageIOFactory.h"
 #include "itkTestingMacros.h"
 #include "itkVectorImage.h"
-#include "itkMetaDataObject.h"
 #include "itkTestingHashImageFilter.h"
 
 

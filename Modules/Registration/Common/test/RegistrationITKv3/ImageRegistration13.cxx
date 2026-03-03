@@ -21,23 +21,14 @@
 //  and with MutualInformation metric.
 //
 
-
 #include "itkImageRegistrationMethod.h"
-
 #include "itkCenteredRigid2DTransform.h"
 #include "itkCenteredTransformInitializer.h"
-
 #include "itkMattesMutualInformationImageToImageMetric.h"
-
 #include "itkRegularStepGradientDescentOptimizer.h"
-#include "itkMersenneTwisterRandomVariateGenerator.h"
-
-
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-
 #include "itkResampleImageFilter.h"
-#include "itkCastImageFilter.h"
 
 
 //  The following section of code implements a Command observer

@@ -23,7 +23,6 @@
 #include "itkMath.h"
 #include "itkSingleton.h"
 #include "itkMakeUniqueForOverwrite.h"
-#include "metaImageUtils.h"
 
 #include <set>
 

@@ -19,8 +19,6 @@
 #include <iostream>
 
 // Native ITK stuff
-#include "itkImageRegionIterator.h"
-
 // Spatial function stuff
 #include "itkSphereSpatialFunction.h"
 #include "itkFloodFilledSpatialFunctionConditionalIterator.h"

@@ -30,7 +30,6 @@
 // Software Guide : EndLatex
 
 #include "itkImageAdaptor.h"
-#include "itkImageRegionIteratorWithIndex.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include "itkRescaleIntensityImageFilter.h"

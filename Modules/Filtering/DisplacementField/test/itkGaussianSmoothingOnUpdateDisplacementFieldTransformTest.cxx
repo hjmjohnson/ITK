@@ -19,7 +19,6 @@
 #include <iostream>
 
 #include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"
-#include "itkNumericTraits.h"
 #include "itkMath.h"
 
 /**

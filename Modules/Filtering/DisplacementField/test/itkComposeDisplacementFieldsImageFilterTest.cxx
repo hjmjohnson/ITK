@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkComposeDisplacementFieldsImageFilter.h"
-#include "itkImageRegionIterator.h"
 
 int
 itkComposeDisplacementFieldsImageFilterTest(int, char *[])

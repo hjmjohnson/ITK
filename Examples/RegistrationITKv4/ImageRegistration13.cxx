@@ -34,8 +34,6 @@
 // Software Guide : EndCodeSnippet
 
 #include "itkRegularStepGradientDescentOptimizerv4.h"
-#include "itkMersenneTwisterRandomVariateGenerator.h"
-
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"

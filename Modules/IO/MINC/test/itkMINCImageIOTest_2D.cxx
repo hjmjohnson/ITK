@@ -19,7 +19,6 @@
 #include "itkImage.h"
 #include <iostream>
 
-#include "itkMINCImageIO.h"
 #include "itkMINCImageIOFactory.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"

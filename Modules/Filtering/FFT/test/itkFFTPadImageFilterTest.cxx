@@ -26,8 +26,6 @@
 #include "itkConstantBoundaryCondition.h"
 #include "itkTestingMacros.h"
 
-#include "itkObjectFactoryBase.h"
-#include "itkVnlForwardFFTImageFilter.h"
 #if defined(ITK_USE_FFTWD) || defined(ITK_USE_FFTWF)
 #  include "itkFFTWForwardFFTImageFilter.h"
 #endif

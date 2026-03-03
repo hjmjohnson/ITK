@@ -42,7 +42,6 @@
 // Software Guide : EndLatex
 
 // Software Guide : BeginCodeSnippet
-#include "itkVector.h"
 #include "itkArray.h"
 #include "itkEuclideanDistanceMetric.h"
 // Software Guide : EndCodeSnippet

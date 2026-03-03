@@ -22,14 +22,12 @@
 #include "itkTransformFileReader.h"
 #include "itkAffineTransform.h"
 #include "itkTransformFactory.h"
-#include "itkSimilarity2DTransform.h"
 #include "itkBSplineTransform.h"
 #include "itkTestingMacros.h"
 #include "itksys/SystemTools.hxx"
 #include <iomanip>
 
 // Transforms from Filtering/DisplacementField/include
-#include "itkBSplineExponentialDiffeomorphicTransform.h"
 #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"
 #include "itkConstantVelocityFieldTransform.h"
 #include "itkDisplacementFieldTransform.h"

@@ -17,7 +17,6 @@
  *=========================================================================*/
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkMetaDataObject.h"
 #include "itksys/SystemTools.hxx"
 #include "itkNrrdImageIO.h"
 

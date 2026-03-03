@@ -27,7 +27,6 @@
 #include "itkBinaryImageToLevelSetImageAdaptor.h"
 #include "itkAtanRegularizedHeavisideStepFunction.h"
 #include "itkLevelSetDomainMapImageFilter.h"
-#include "itkTestingMacros.h"
 
 int
 itkMultiLevelSetDenseImageSubset2DTest(int, char *[])

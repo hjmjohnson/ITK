@@ -17,7 +17,6 @@
  *=========================================================================*/
 #include "itkTDistribution.h"
 #include "itkGaussianDistribution.h"
-#include "vnl/vnl_erf.h"
 #include "itkMath.h"
 
 extern "C" double

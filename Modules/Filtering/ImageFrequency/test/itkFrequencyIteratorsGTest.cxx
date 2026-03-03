@@ -37,7 +37,6 @@
 #include "itkImage.h"
 #include "itkImageFileWriter.h"
 #include "itkTestingComparisonImageFilter.h"
-#include "itkTestingMacros.h"
 
 #include "itkTestDriverIncludeRequiredFactories.h"
 

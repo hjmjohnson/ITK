@@ -19,7 +19,6 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include "itkRandomImageSource.h"
-#include "itkMetaDataObject.h"
 #include "itkMetaImageIO.h"
 #include "itkTestingMacros.h"
 

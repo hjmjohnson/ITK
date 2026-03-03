@@ -18,11 +18,8 @@
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkForwardFFTImageFilter.h"
-#include "itkInverseFFTImageFilter.h"
 #include "itkTestingMacros.h"
 
-#include "itkObjectFactoryBase.h"
 #include "itkVnlComplexToComplexFFTImageFilter.h"
 #include "itkVnlForwardFFTImageFilter.h"
 #include "itkVnlInverseFFTImageFilter.h"

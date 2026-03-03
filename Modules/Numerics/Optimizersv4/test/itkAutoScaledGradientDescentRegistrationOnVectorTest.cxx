@@ -21,7 +21,6 @@
 #include "itkRegistrationParameterScalesFromPhysicalShift.h"
 #include "itkRegistrationParameterScalesFromJacobian.h"
 
-#include "itkSize.h"
 #include "itkImageRegistrationMethodImageSource.h"
 #include "itkVectorImageToImageMetricTraitsv4.h"
 #include "itkTestingMacros.h"

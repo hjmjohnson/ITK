@@ -57,8 +57,6 @@
 #include "itkCastImageFilter.h"
 #include "itkSquaredDifferenceImageFilter.h"
 
-#include "itkTransformFileReader.h"
-
 #include "itkBSplineTransformInitializer.h"
 #include "itkTransformToDisplacementFieldFilter.h"
 

@@ -21,7 +21,6 @@
 #include "itkCastImageFilter.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkTextOutput.h"
 #include "itkTestingMacros.h"
 
 

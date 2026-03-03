@@ -21,7 +21,6 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include "itkVotingBinaryHoleFillingImageFilter.h"
-#include "itkTextOutput.h"
 #include "itkTestingMacros.h"
 
 

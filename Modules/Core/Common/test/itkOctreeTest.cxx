@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkOctree.h"
-#include "itkNumericTraits.h"
 #include "itkImageRegionIterator.h"
 #include "itkTestingMacros.h"
 #include <cstdlib>

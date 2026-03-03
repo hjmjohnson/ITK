@@ -20,7 +20,6 @@
 
 #include "itkEuler2DTransform.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
 
 
 namespace

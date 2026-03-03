@@ -18,7 +18,6 @@
 
 #include "itkDivideOrZeroOutImageFilter.h"
 #include "itkImageRegionConstIteratorWithIndex.h"
-#include "itkNumericTraits.h"
 #include "itkMath.h"
 
 int

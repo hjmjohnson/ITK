@@ -30,9 +30,6 @@
 //
 // Software Guide : EndLatex
 
-// The following include to make Visual Studio 6 happy
-#include "itkImageHelper.h"
-
 // Software Guide : BeginCodeSnippet
 #include "itkSpatialObjectReader.h"
 #include "itkSpatialObjectWriter.h"

@@ -21,7 +21,6 @@
 #include "itkPolyLineParametricPath.h"
 #include "itkPathFunctions.h"
 #include "itkPathIterator.h"
-#include "itkTestingMacros.h"
 
 int
 itkPathFunctionsTest(int, char *[])

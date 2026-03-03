@@ -16,7 +16,6 @@
  *
  *=========================================================================*/
 #include "itkCoxDeBoorBSplineKernelFunction.h"
-#include "itkTestingMacros.h"
 
 /**
  * In this test, we check to see that the coefficients that are

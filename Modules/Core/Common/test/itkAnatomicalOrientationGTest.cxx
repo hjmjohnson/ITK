@@ -18,7 +18,6 @@
 
 #include <gtest/gtest.h>
 
-#include "itkGTest.h"
 #ifndef ITK_FUTURE_LEGACY_REMOVE
 #  define ITK_LEGACY_SILENT
 #endif

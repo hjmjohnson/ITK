@@ -19,7 +19,6 @@
 #include <fstream>
 
 #include "itkFileListVideoIO.h"
-#include "itkImportImageFilter.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 #include "itkMath.h"

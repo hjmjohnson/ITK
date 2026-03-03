@@ -24,7 +24,6 @@
 #include "itkBSplineTransform.h"
 #include "itkBSplineTransformInitializer.h"
 
-#include "itkObject.h"
 #include "itkTestingMacros.h"
 
 #include <fstream>

@@ -19,7 +19,6 @@
 #include "itkMetaImageIO.h"
 #include "itkTestingMacros.h"
 #include "itkImage.h"
-#include "itkIntTypes.h"
 #include "itkVectorImage.h"
 
 #include "itkImageIOFactory.h" // required to instantiate an instance of ImageIOBase

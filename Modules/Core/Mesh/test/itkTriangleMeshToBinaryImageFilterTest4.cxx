@@ -20,7 +20,6 @@
 #include "itkTriangleMeshToBinaryImageFilter.h"
 #include "itkImageFileWriter.h"
 #include "itkMeshFileReader.h"
-#include "itkTestingMacros.h"
 #include "itkImage.h"
 #include "itkMath.h"
 int

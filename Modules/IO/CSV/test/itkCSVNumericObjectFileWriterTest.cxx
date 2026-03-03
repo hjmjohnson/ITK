@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkCSVNumericObjectFileWriter.h"
-#include "itkLightProcessObject.h"
 #include "itkTestingMacros.h"
 
 int

@@ -32,7 +32,6 @@
 
 #include "itkAdaptImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkImageRegionIterator.h"
 #include "itkNthElementPixelAccessor.h"
 #include "itkTestingMacros.h"
 #include "itkVariableLengthVector.h"

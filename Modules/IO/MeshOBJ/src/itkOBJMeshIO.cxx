@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkOBJMeshIO.h"
-#include "itkNumericTraits.h"
 #include "itksys/SystemTools.hxx"
 #include "itkMakeUniqueForOverwrite.h"
 #include <locale>

@@ -20,7 +20,6 @@
 #include "itkImageRegionIterator.h"
 #include "itkPolyLineParametricPath.h"
 #include "itkPathIterator.h"
-#include "itkTestingMacros.h"
 
 int
 itkPathIteratorTest(int, char *[])

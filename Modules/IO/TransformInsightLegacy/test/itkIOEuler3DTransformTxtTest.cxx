@@ -18,7 +18,6 @@
 
 #include "itkTransformFileWriter.h"
 #include "itkTransformFileReader.h"
-#include "itkTransformFactory.h"
 #include "itkTxtTransformIOFactory.h"
 #include "itkEuler3DTransform.h"
 #include "itkMath.h"

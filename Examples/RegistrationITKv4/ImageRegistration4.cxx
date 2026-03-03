@@ -53,7 +53,6 @@
 #include "itkResampleImageFilter.h"
 #include "itkCastImageFilter.h"
 #include "itkCheckerBoardImageFilter.h"
-#include "itkMersenneTwisterRandomVariateGenerator.h"
 
 
 //  The following section of code implements a Command observer

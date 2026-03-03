@@ -17,37 +17,11 @@
  *=========================================================================*/
 #include "itkTransformFactory.h"
 #include "itkVersion.h"
-
-#include "itkAzimuthElevationToCartesianTransform.h"
-#include "itkCenteredAffineTransform.h"
 #include "itkCenteredEuler3DTransform.h"
-#include "itkCenteredRigid2DTransform.h"
-#include "itkCenteredSimilarity2DTransform.h"
-#include "itkEuler2DTransform.h"
-#include "itkFixedCenterOfRotationAffineTransform.h"
-#include "itkIdentityTransform.h"
-#include "itkQuaternionRigidTransform.h"
-#include "itkRigid3DPerspectiveTransform.h"
-#include "itkScaleLogarithmicTransform.h"
-#include "itkScaleVersor3DTransform.h"
-#include "itkScaleSkewVersor3DTransform.h"
-#include "itkSimilarity2DTransform.h"
-#include "itkSimilarity3DTransform.h"
-#include "itkTranslationTransform.h"
-#include "itkBSplineTransform.h"
-#include "itkCompositeTransform.h"
-
-// Transforms from Filtering/DisplacementField/include
 #include "itkBSplineExponentialDiffeomorphicTransform.h"
 #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"
-#include "itkConstantVelocityFieldTransform.h"
 #include "itkDisplacementFieldTransform.h"
-#include "itkGaussianExponentialDiffeomorphicTransform.h"
 #include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"
-#include "itkGaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform.h"
-#include "itkTimeVaryingBSplineVelocityFieldTransform.h"
-#include "itkTimeVaryingVelocityFieldTransform.h"
-#include "itkVelocityFieldTransform.h"
 
 #if !defined(ITK_LEGACY_REMOVE)
 #  include "itkBSplineDeformableTransform.h"

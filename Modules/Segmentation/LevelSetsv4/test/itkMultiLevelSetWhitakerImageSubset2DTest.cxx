@@ -28,7 +28,6 @@
 #include "itkBinaryImageToLevelSetImageAdaptor.h"
 #include "itkAtanRegularizedHeavisideStepFunction.h"
 #include "itkLevelSetDomainMapImageFilter.h"
-#include "itkTestingMacros.h"
 
 int
 itkMultiLevelSetWhitakerImageSubset2DTest(int, char *[])

@@ -20,7 +20,6 @@
 #include "itkImageFileWriter.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkLabelOverlayImageFilter.h"
-#include "itkVectorImage.h"
 #include "itkMath.h"
 #include "itkTestingMacros.h"
 

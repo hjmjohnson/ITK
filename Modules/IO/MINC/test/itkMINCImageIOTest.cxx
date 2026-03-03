@@ -21,7 +21,6 @@
 #include "itkMINCImageIO.h"
 #include "itkMINCImageIOFactory.h"
 #include "itkIOTestHelper.h"
-#include "itkMetaDataObject.h"
 #include "itkObjectFactoryBase.h"
 
 static void

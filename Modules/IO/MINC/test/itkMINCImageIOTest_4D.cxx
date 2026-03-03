@@ -16,7 +16,6 @@
  *
  *=========================================================================*/
 
-#include "itkImageAlgorithm.h"
 #include <iostream>
 
 #include "itkMINCImageIOFactory.h"

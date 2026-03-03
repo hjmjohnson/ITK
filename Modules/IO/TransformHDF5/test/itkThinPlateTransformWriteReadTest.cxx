@@ -32,7 +32,6 @@
 #include "itksys/SystemTools.hxx"
 #include "itkTestingMacros.h"
 #include "itkHDF5TransformIOFactory.h"
-#include "itkHDF5TransformIO.h"
 #include "itkTransformFactory.h"
 
 template <typename TransformType>

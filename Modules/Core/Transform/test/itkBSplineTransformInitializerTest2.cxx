@@ -23,7 +23,6 @@
 
 #include "itkPermuteAxesImageFilter.h"
 
-#include "itkObject.h"
 #include "itkTestingMacros.h"
 
 #include <fstream>

@@ -48,7 +48,6 @@
 // Software Guide : BeginCodeSnippet
 #include "itkImageFileReader.h"
 #include "itkGDCMImageIO.h"
-#include "itkMetaDataObject.h"
 // Software Guide : EndCodeSnippet
 
 #include "gdcmGlobal.h"

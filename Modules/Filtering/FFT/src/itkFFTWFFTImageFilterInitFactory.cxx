@@ -30,10 +30,6 @@
 #  include "itkFFTWInverseFFTImageFilter.h"
 #  include "itkFFTWRealToHalfHermitianForwardFFTImageFilter.h"
 
-#  include "itkCreateObjectFunction.h"
-#  include "itkVersion.h"
-#  include "itkObjectFactoryBase.h"
-
 namespace itk
 {
 FFTWFFTImageFilterInitFactory::FFTWFFTImageFilterInitFactory() { FFTWFFTImageFilterInitFactory::RegisterFactories(); }

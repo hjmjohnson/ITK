@@ -39,7 +39,6 @@
 #include "itkImage.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkRescaleIntensityImageFilter.h"
 
 // Software Guide : BeginLatex
 //

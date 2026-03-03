@@ -21,10 +21,8 @@
 #include "itkImageSeriesReader.h"
 #include "itkImageFileWriter.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkShrinkImageFilter.h"
 #include "itkComposeImageFilter.h"
 #include "itkExtractImageFilter.h"
-#include "itkShrinkImageFilter.h"
 #include "itkMeanImageFilter.h"
 
 // The Insight Toolkit was originally motivated by a need for software
@@ -119,14 +117,6 @@ main(int argc, char * argv[])
   composeRGB->SetInput1(rreader->GetOutput());
   composeRGB->SetInput2(greader->GetOutput());
   composeRGB->SetInput3(breader->GetOutput());
-
-  // this filter is needed if square pixels are needed
-  //   constexpr int xyShrinkFactor = 3;
-  //   using ShrinkImageFilterType = itk::ShrinkImageFilter<  RGB3DImageType,
-  //   RGB3DImageType >; auto shrinker =
-  //   ShrinkImageFilterType::New(); shrinker->SetInput(
-  //   composeRGB->GetOutput() ); shrinker->SetShrinkFactors(  xyShrinkFactor
-  //   ); shrinker->SetShrinkFactor( 2, 1 );
 
   // update output information to know propagate the size of the largest
   // possible region

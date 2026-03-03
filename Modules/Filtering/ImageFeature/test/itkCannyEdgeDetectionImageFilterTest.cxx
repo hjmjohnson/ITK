@@ -22,7 +22,6 @@
 #include "itkImageFileWriter.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkRescaleIntensityImageFilter.h"
-#include "itkMath.h"
 #include "itkTestingMacros.h"
 
 

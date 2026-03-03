@@ -28,7 +28,6 @@
 #include "itkCompositeTransform.h"
 #include "itkEuler2DTransform.h"
 #include "itkEuler3DTransform.h"
-#include "itkVector.h"
 #include "itkTestingMacros.h"
 
 template <class TComputeType, unsigned int TImageDimension>

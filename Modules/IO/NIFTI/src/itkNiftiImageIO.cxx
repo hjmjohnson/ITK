@@ -24,7 +24,6 @@
 #include "itkNiftiImageIOConfigurePrivate.h"
 #include "itkMakeUniqueForOverwrite.h"
 #include "itksys/SystemTools.hxx"
-#include "itksys/SystemInformation.hxx"
 
 namespace itk
 {

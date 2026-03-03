@@ -81,7 +81,6 @@
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkZeroCrossingImageFilter.h"
 
 int
 main(int argc, char * argv[])

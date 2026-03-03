@@ -19,7 +19,6 @@
 #include <fstream>
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkMetaDataObject.h"
 #include "itkMetaImageIO.h"
 #include "itkTestingHashImageFilter.h"
 #include "itkTestingMacros.h"

@@ -21,8 +21,6 @@
 #include "itkSLICImageFilter.h"
 #include "itkVectorImage.h"
 
-#include "itkCommand.h"
-
 #include "itkTestDriverIncludeRequiredFactories.h"
 #include "itkTestingHashImageFilter.h"
 

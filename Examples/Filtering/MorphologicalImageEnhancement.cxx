@@ -32,7 +32,6 @@
 
 // Software Guide : BeginCodeSnippet
 #include "itkImage.h"
-#include "itkPNGImageIO.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 

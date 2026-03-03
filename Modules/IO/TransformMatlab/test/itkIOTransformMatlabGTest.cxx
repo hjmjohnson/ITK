@@ -23,7 +23,6 @@
 #include "itkTransformFactory.h"
 #include "itkCompositeTransform.h"
 #include "itksys/SystemTools.hxx"
-#include "itkMatlabTransformIO.h"
 
 #include "itkGTest.h"
 #include "itkTestDriverIncludeRequiredFactories.h"

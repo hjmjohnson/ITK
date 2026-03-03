@@ -21,7 +21,6 @@
 #include "itkFFTDiscreteGaussianImageFilter.h"
 #include "itkDiscreteGaussianImageFilter.h"
 #include "itkImageFileReader.h"
-#include "itkImageFileWriter.h"
 #include "itkTestingMacros.h"
 
 int

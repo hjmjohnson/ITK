@@ -21,7 +21,6 @@
 #include "itkJensenHavrdaCharvatTsallisPointSetToPointSetMetricv4.h"
 #include "itkLabeledPointSetToPointSetMetricv4.h"
 #include "itkGradientDescentOptimizerv4.h"
-#include "itkTransform.h"
 #include "itkAffineTransform.h"
 #include "itkRegistrationParameterScalesFromPhysicalShift.h"
 #include "itkCommand.h"

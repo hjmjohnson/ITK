@@ -36,7 +36,6 @@
 #include "itkImageFileWriter.h"
 
 #include "itkResampleImageFilter.h"
-#include "itkCastImageFilter.h"
 // Software Guide : EndCodeSnippet
 
 //  The following section of code implements a Command observer

@@ -20,7 +20,6 @@
 #include "itkImageFileWriter.h"
 #include "itkRescaleIntensityImageFilter.h"
 #include "itkGDCMImageIO.h"
-#include "itkMetaDataObject.h"
 #include "itkTestingMacros.h"
 
 // Specific ImageIO test

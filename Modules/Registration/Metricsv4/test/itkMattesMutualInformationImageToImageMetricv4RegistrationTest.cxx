@@ -32,7 +32,6 @@
 
 #include "itkCastImageFilter.h"
 
-#include "itkCommand.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 

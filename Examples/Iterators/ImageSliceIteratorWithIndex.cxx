@@ -96,7 +96,6 @@
 // Software Guide : EndLatex
 
 #include "itkImage.h"
-#include "itkMath.h"
 
 // Software Guide : BeginCodeSnippet
 #include "itkImageSliceConstIteratorWithIndex.h"

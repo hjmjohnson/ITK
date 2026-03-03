@@ -33,13 +33,10 @@
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkImageRegionIterator.h"
-#include "itkThresholdImageFilter.h"
-#include "itkMinimumMaximumImageCalculator.h"
+
 #include "itkGradientMagnitudeImageFilter.h"
 #include "itkDiscreteGaussianImageFilter.h"
 #include <list>
-#include "itkCastImageFilter.h"
 #include "itkMath.h"
 
 int

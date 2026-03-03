@@ -16,7 +16,6 @@
  *
  *=========================================================================*/
 #include "itkBinShrinkImageFilter.h"
-#include "itkShrinkImageFilter.h"
 #include "itkPipelineMonitorImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkImageRegionConstIteratorWithIndex.h"

@@ -22,7 +22,6 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
 #include "itkSubtractImageFilter.h"
-#include "itkUnaryGeneratorImageFilter.h"
 #include "itkTestingMacros.h"
 
 int

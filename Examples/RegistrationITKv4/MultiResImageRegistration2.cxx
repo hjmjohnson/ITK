@@ -56,7 +56,6 @@
 #include "itkMultiResolutionImageRegistrationMethod.h"
 #include "itkMattesMutualInformationImageToImageMetric.h"
 #include "itkRegularStepGradientDescentOptimizer.h"
-#include "itkRecursiveMultiResolutionPyramidImageFilter.h"
 #include "itkImage.h"
 
 #include "itkImageFileReader.h"

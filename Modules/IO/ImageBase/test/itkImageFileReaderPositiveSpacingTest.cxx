@@ -20,7 +20,6 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkTestingComparisonImageFilter.h"
 #include "itkMath.h"
-#include "itkNumericTraits.h"
 #include "itkTestingMacros.h"
 #include "metaImage.h"
 

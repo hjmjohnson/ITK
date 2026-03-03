@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkAffineTransform.h"
-#include "itkCompositeTransform.h"
 #include "itkDisplacementFieldTransform.h"
 #include "itkImageRegionConstIterator.h"
 #include "itkMath.h"

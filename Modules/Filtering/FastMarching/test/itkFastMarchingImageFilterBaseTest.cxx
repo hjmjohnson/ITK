@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkFastMarchingImageFilterBase.h"
-#include "itkFastMarchingThresholdStoppingCriterion.h"
 #include "itkTestingMacros.h"
 
 /*

@@ -26,11 +26,8 @@
 #include "itkTestingMacros.h"
 #include "itkZeroFluxNeumannBoundaryCondition.h"
 
-#include "itkObjectFactoryBase.h"
-#include "itkVnlRealToHalfHermitianForwardFFTImageFilter.h"
 #include "itkVnlHalfHermitianToRealInverseFFTImageFilter.h"
 #if defined(ITK_USE_FFTWD) || defined(ITK_USE_FFTWF)
-#  include "itkFFTWRealToHalfHermitianForwardFFTImageFilter.h"
 #  include "itkFFTWHalfHermitianToRealInverseFFTImageFilter.h"
 #endif
 

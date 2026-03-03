@@ -65,8 +65,6 @@
 #include "itkHardConnectedComponentImageFilter.h"
 #include "itkHausdorffDistanceImageFilter.h"
 
-#include "itkSphereSpatialFunction.h"
-
 
 struct node_type
 {

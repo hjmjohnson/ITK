@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkFrequencyFFTLayoutImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
 
 #include <iostream>
 #include <complex>

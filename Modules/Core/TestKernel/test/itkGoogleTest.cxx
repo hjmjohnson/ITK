@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkGTest.h"
-#include "itkMath.h"
 
 // Minimal test to verify Google Test works
 TEST(GoogleTest, t1)

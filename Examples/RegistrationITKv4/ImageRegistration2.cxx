@@ -47,8 +47,6 @@
 #include "itkGradientDescentOptimizer.h"
 // Software Guide : EndCodeSnippet
 
-#include "itkMersenneTwisterRandomVariateGenerator.h"
-
 
 //  Software Guide : BeginLatex
 //

@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkImage.h"
-#include "itkVectorImage.h"
 #include "itkMath.h"
 #include "itkMinimumMaximumImageCalculator.h"
 #include "itkRGBPixel.h"

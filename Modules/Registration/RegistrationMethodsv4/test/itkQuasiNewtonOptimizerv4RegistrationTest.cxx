@@ -31,20 +31,15 @@
 #include "itkRegistrationParameterScalesFromPhysicalShift.h"
 
 #include "itkIdentityTransform.h"
-#include "itkTranslationTransform.h"
 #include "itkAffineTransform.h"
 #include "itkEuler2DTransform.h"
-#include "itkEuler3DTransform.h"
 #include "itkCompositeTransform.h"
 #include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"
-#include "itkRegistrationParameterScalesFromJacobian.h"
 
 #include "itkCastImageFilter.h"
-#include "itkLinearInterpolateImageFunction.h"
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkCommand.h"
 #include "itksys/SystemTools.hxx"
 #include "itkResampleImageFilter.h"
 #include "itkTestingMacros.h"

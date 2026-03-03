@@ -50,7 +50,6 @@
 //  Software Guide : EndLatex
 
 // Software Guide : BeginCodeSnippet
-#include "itkTriangleCell.h"
 #include "itkAutomaticTopologyMeshSource.h"
 // Software Guide : EndCodeSnippet
 

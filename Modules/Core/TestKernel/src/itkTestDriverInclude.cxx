@@ -32,7 +32,6 @@
 #include "itkImage.h"
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-#include "itkImageRegionConstIterator.h"
 #include "itkTestingStretchIntensityImageFilter.h"
 #include "itkTestingExtractSliceImageFilter.h"
 #include "itkTestingComparisonImageFilter.h"

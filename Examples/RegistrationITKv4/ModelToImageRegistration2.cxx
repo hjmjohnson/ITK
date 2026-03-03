@@ -64,8 +64,6 @@
 #include "itkBinaryMaskToNarrowBandPointSetFilter.h"
 //  Software Guide : EndCodeSnippet
 
-#include "itkBinaryMaskToNarrowBandPointSetFilter.h"
-
 #include "itkPointSet.h"
 #include "itkPointSetToImageRegistrationMethod.h"
 #include "itkNormalizedCorrelationPointSetToImageMetric.h"

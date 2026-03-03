@@ -18,7 +18,6 @@
 
 #include "itkMultiThreaderBase.h"
 #include "itkTimeProbe.h"
-#include "itkConfigure.h"
 #include <mutex>
 
 namespace
