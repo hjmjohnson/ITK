@@ -8,7 +8,6 @@ set(
   itkFilterDispatchTest.cxx
   itkFloodFilledSpatialFunctionTest.cxx
   itkFloodFillIteratorTest.cxx
-  itkGaussianDerivativeOperatorTest.cxx
   itkMapContainerTest.cxx
   itkVectorContainerTest.cxx
   itkIteratorTests.cxx
@@ -404,12 +403,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     VNLSparseLUSolverTraitsTest
-)
-itk_add_test(
-  NAME itkGaussianDerivativeOperatorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkGaussianDerivativeOperatorTest
 )
 itk_add_test(
   NAME itkSobelOperatorImageConvolutionHorizTest
@@ -1663,6 +1656,7 @@ set(
   itkCommandObserverObjectGTest.cxx
   itkCovariantVectorGeometryGTest.cxx
   itkCrossHelperGTest.cxx
+  itkGaussianDerivativeOperatorGTest.cxx
   itkDerivativeOperatorGTest.cxx
   itkDecoratorGTest.cxx
   itkExceptionObjectGTest.cxx
