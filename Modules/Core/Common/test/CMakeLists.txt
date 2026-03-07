@@ -52,7 +52,6 @@ set(
   itkRealTimeClockTest.cxx
   itkRealTimeIntervalTest.cxx
   itkRealTimeStampTest.cxx
-  itkBSplineKernelFunctionTest.cxx
   itkArrayTest.cxx
   itkImageIteratorTest.cxx
   itkImageRegionIteratorTest.cxx
@@ -385,12 +384,6 @@ itk_add_test(
   COMMAND
     ITKCommon2TestDriver
     itkBSplineInterpolationWeightFunctionTest
-)
-itk_add_test(
-  NAME itkBSplineKernelFunctionTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkBSplineKernelFunctionTest
 )
 itk_add_test(
   NAME itkSpatialOrientationTest
@@ -1720,6 +1713,7 @@ set(
   itkMetaDataDictionaryGTest.cxx
   itkSpatialOrientationAdaptorGTest.cxx
   itkAnatomicalOrientationGTest.cxx
+  itkBSplineKernelFunctionGTest.cxx
 )
 creategoogletestdriver(ITKCommon "${ITKCommon-Test_LIBRARIES}" "${ITKCommonGTests}")
 # If `-static` was passed to CMAKE_EXE_LINKER_FLAGS, compilation fails. No need to
