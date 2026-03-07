@@ -86,7 +86,6 @@ set(
   itkTimeProbeTest.cxx
   itkTimeProbeTest2.cxx
   itkSpatialOrientationTest.cxx
-  itkStdStreamStateSaveTest.cxx
   VNLSparseLUSolverTraitsTest.cxx
   itkSobelOperatorImageConvolutionTest.cxx
   itkSobelOperatorImageFilterTest.cxx
@@ -838,13 +837,6 @@ itk_add_test(
     ITKCommon1TestDriver
     itkPointGeometryTest
 )
-itk_add_test(
-  NAME itkStdStreamStateSaveTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkStdStreamStateSaveTest
-)
-
 #
 # This test should be enabled if you suspect that the memory leak detector
 # is not working
@@ -1773,6 +1765,7 @@ set(
   itkBresenhamLineGTest.cxx
   itkHashTableGTest.cxx
   itkPixelAccessGTest.cxx
+  itkStdStreamStateSaveGTest.cxx
   itkMetaDataDictionaryGTest.cxx
   itkSpatialOrientationAdaptorGTest.cxx
   itkAnatomicalOrientationGTest.cxx
