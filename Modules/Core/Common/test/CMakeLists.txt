@@ -44,7 +44,6 @@ set(
   itkStreamingImageFilterTest2.cxx
   itkStreamingImageFilterTest3.cxx
   itkLoggerTest.cxx
-  itkDerivativeOperatorTest.cxx
   itkColorTableTest.cxx
   itkNumericTraitsTest.cxx
   itkImageRegionTest.cxx
@@ -347,12 +346,6 @@ itk_add_test(
     ITKCommon1TestDriver
     itkDirectoryTest
     ${TEMP}
-)
-itk_add_test(
-  NAME itkDerivativeOperatorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkDerivativeOperatorTest
 )
 itk_add_test(
   NAME itkMultipleLogOutputTest
@@ -1688,6 +1681,7 @@ set(
   itkDerefGTest.cxx
   itkDiffusionTensor3DGTest.cxx
   itkAnnulusOperatorGTest.cxx
+  itkDerivativeOperatorGTest.cxx
   itkDecoratorGTest.cxx
   itkExceptionObjectGTest.cxx
   itkImportContainerGTest.cxx
