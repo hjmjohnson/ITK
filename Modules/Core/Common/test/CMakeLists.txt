@@ -78,7 +78,6 @@ set(
   itkSparseFieldLayerTest.cxx
   itkDataObjectTest.cxx
   itkAtanRegularizedHeavisideStepFunctionTest1.cxx
-  itkHashTableTest.cxx
   itkHeavisideStepFunctionTest1.cxx
   itkSinRegularizedHeavisideStepFunctionTest1.cxx
   itkPixelAccessTest.cxx
@@ -821,12 +820,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     itkAtanRegularizedHeavisideStepFunctionTest1
-)
-itk_add_test(
-  NAME itkHashTableTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkHashTableTest
 )
 itk_add_test(
   NAME itkHeavisideStepFunctionTest1
@@ -1785,6 +1778,7 @@ set(
   itkAbortProcessObjectGTest.cxx
   itkAutoPointerGTest.cxx
   itkBresenhamLineGTest.cxx
+  itkHashTableGTest.cxx
   itkMetaDataDictionaryGTest.cxx
   itkSpatialOrientationAdaptorGTest.cxx
   itkAnatomicalOrientationGTest.cxx
