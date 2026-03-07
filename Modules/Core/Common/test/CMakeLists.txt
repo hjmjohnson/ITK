@@ -123,7 +123,6 @@ set(
   itkMinimumMaximumImageCalculatorTest.cxx
   itkSliceIteratorTest.cxx
   itkImageRegionExclusionIteratorWithIndexTest.cxx
-  itkImageTransformTest.cxx
   itkImageFillBufferTest.cxx
   itkMemoryLeakTest.cxx
   itkVectorGeometryTest.cxx
@@ -289,12 +288,6 @@ itk_add_test(
     ITKCommon1TestDriver
     itkMultipleLogOutputTest
     ${TEMP}/test_multi.txt
-)
-itk_add_test(
-  NAME itkImageTransformTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageTransformTest
 )
 itk_add_test(
   NAME itkMinimumMaximumImageCalculatorTest
@@ -1644,6 +1637,7 @@ set(
   itkFloodFilledSpatialFunctionGTest.cxx
   itkThreadedImageRegionPartitionerGTest.cxx
   itkThreadedIndexedContainerPartitionerGTest.cxx
+  itkImageTransformGTest.cxx
 )
 creategoogletestdriver(ITKCommon "${ITKCommon-Test_LIBRARIES}" "${ITKCommonGTests}")
 # If `-static` was passed to CMAKE_EXE_LINKER_FLAGS, compilation fails. No need to
