@@ -51,7 +51,6 @@ set(
   itkExceptionObjectTest.cxx
   itkNeighborhoodOperatorTest.cxx
   itkNumericsTest.cxx
-  itkAnnulusOperatorTest.cxx
   itkLineIteratorTest.cxx
   itkGaussianSpatialFunctionTest.cxx
   itkRealTimeClockTest.cxx
@@ -311,13 +310,6 @@ itk_add_test(
     ITKCommon1TestDriver
     itkFloodFillIteratorTest
 )
-itk_add_test(
-  NAME itkAnnulusOperatorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkAnnulusOperatorTest
-)
-
 itk_add_test(
   NAME itkColorTableTest1
   COMMAND
@@ -1695,6 +1687,7 @@ set(
   itkCovariantVectorGTest.cxx
   itkDerefGTest.cxx
   itkDiffusionTensor3DGTest.cxx
+  itkAnnulusOperatorGTest.cxx
   itkDecoratorGTest.cxx
   itkExceptionObjectGTest.cxx
   itkImportContainerGTest.cxx
