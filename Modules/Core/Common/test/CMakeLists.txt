@@ -80,7 +80,6 @@ set(
   itkAtanRegularizedHeavisideStepFunctionTest1.cxx
   itkHeavisideStepFunctionTest1.cxx
   itkSinRegularizedHeavisideStepFunctionTest1.cxx
-  itkPixelAccessTest.cxx
   itkPointGeometryTest.cxx
   itkMersenneTwisterRandomVariateGeneratorTest.cxx
   itkNumberToStringTest.cxx
@@ -832,12 +831,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     itkSinRegularizedHeavisideStepFunctionTest1
-)
-itk_add_test(
-  NAME itkPixelAccessTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkPixelAccessTest
 )
 itk_add_test(
   NAME itkPointGeometryTest
@@ -1779,6 +1772,7 @@ set(
   itkAutoPointerGTest.cxx
   itkBresenhamLineGTest.cxx
   itkHashTableGTest.cxx
+  itkPixelAccessGTest.cxx
   itkMetaDataDictionaryGTest.cxx
   itkSpatialOrientationAdaptorGTest.cxx
   itkAnatomicalOrientationGTest.cxx
