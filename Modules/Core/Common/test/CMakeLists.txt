@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKCommon1Tests
   itkImageRegionExplicitTest.cxx
-  itkCommandObserverObjectTest.cxx
   itkAdaptorComparisonTest.cxx
   itkExtractImage3Dto2DTest.cxx
   itkExtractImageTest.cxx
@@ -217,12 +216,6 @@ if(ITK_BUILD_SHARED_LIBS)
   add_dependencies(ITKCommon2TestDriver FactoryTestLib)
 endif()
 
-itk_add_test(
-  NAME itkCommandObserverObjectTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkCommandObserverObjectTest
-)
 itk_add_test(
   NAME itkAdaptorComparisonTest
   COMMAND
@@ -1674,6 +1667,7 @@ set(
   itkDerefGTest.cxx
   itkDiffusionTensor3DGTest.cxx
   itkAnnulusOperatorGTest.cxx
+  itkCommandObserverObjectGTest.cxx
   itkCovariantVectorGeometryGTest.cxx
   itkDerivativeOperatorGTest.cxx
   itkDecoratorGTest.cxx
