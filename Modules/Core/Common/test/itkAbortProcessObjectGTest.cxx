@@ -16,11 +16,11 @@
  *
  *=========================================================================*/
 
-#include <iostream>
 #include "itkExtractImageFilter.h"
-#include "itkTestingMacros.h"
-
+#include "itkGTest.h"
 #include "itkCommand.h"
+
+#include <iostream>
 
 //
 // This test ensures the abort event occurs and the ProcessAborted
@@ -56,9 +56,10 @@ onAbort(itk::Object *, const itk::EventObject &, void *)
 
 } // namespace
 
-int
-itkAbortProcessObjectTest(int, char *[])
+TEST(AbortProcessObject, AbortEventAndException)
 {
+  onAbortCalled = false;
+
   // type alias to simplify the syntax
   using ShortImage = itk::Image<short, 2>;
   auto img = ShortImage::New();
@@ -99,19 +100,16 @@ itkAbortProcessObjectTest(int, char *[])
   extract->AddObserver(itk::AbortEvent(), abortCmd);
 
   std::cout << extract << std::endl;
+
+  bool exceptionCaught = false;
   try
   {
     extract->UpdateLargestPossibleRegion();
   }
   catch (const itk::ProcessAborted &)
   {
-    if (onAbortCalled)
-    {
-      std::cout << "PASS: Abort event occurred and exception was thrown." << std::endl;
-      return EXIT_SUCCESS;
-    }
-    std::cout << "Caught expected abort exception, but didn't get Abort Event!";
+    exceptionCaught = true;
   }
-  std::cout << "Test FAILED!" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(exceptionCaught) << "Expected ProcessAborted exception to be thrown.";
+  EXPECT_TRUE(onAbortCalled) << "Expected Abort Event callback to be called.";
 }

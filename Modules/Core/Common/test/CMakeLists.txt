@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKCommon1Tests
   itkImageRegionExplicitTest.cxx
-  itkAbortProcessObjectTest.cxx
   itkCommandObserverObjectTest.cxx
   itkAdaptorComparisonTest.cxx
   itkCovariantVectorGeometryTest.cxx
@@ -228,12 +227,6 @@ if(ITK_BUILD_SHARED_LIBS)
   add_dependencies(ITKCommon2TestDriver FactoryTestLib)
 endif()
 
-itk_add_test(
-  NAME itkAbortProcessObjectTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkAbortProcessObjectTest
-)
 itk_add_test(
   NAME itkCommandObserverObjectTest
   COMMAND
@@ -1803,6 +1796,7 @@ set(
   itkMathRoundGTest.cxx
   itkModifiedTimeGTest.cxx
   itkVersionGTest.cxx
+  itkAbortProcessObjectGTest.cxx
   itkMetaDataDictionaryGTest.cxx
   itkSpatialOrientationAdaptorGTest.cxx
   itkAnatomicalOrientationGTest.cxx
