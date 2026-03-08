@@ -58,7 +58,6 @@ set(
   itkImageIteratorTest.cxx
   itkImageRegionIteratorTest.cxx
   itkImageScanlineIteratorTest1.cxx
-  itkCrossHelperTest.cxx
   itkImageIteratorWithIndexTest.cxx
   itkDirectoryTest.cxx
   itkObjectStoreTest.cxx
@@ -551,12 +550,6 @@ itk_add_test(
     itkGaussianSpatialFunctionTest
     19.0
     1
-)
-itk_add_test(
-  NAME itkCrossHelperTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkCrossHelperTest
 )
 itk_add_test(
   NAME itkImageIteratorTest
@@ -1669,6 +1662,7 @@ set(
   itkAnnulusOperatorGTest.cxx
   itkCommandObserverObjectGTest.cxx
   itkCovariantVectorGeometryGTest.cxx
+  itkCrossHelperGTest.cxx
   itkDerivativeOperatorGTest.cxx
   itkDecoratorGTest.cxx
   itkExceptionObjectGTest.cxx
