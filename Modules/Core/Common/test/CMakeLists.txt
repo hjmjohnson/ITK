@@ -75,7 +75,6 @@ set(
   itkPointSetTest.cxx
   itkPointSetToImageFilterTest1.cxx
   itkPointSetToImageFilterTest2.cxx
-  itkBresenhamLineTest.cxx
   itkSparseFieldLayerTest.cxx
   itkDataObjectTest.cxx
   itkAtanRegularizedHeavisideStepFunctionTest1.cxx
@@ -811,12 +810,6 @@ itk_add_test(
     itkPointSetToImageFilterTest2
     DATA{${ITK_DATA_ROOT}/Input/VascularTreePointSet.txt}
     ${ITK_TEST_OUTPUT_DIR}/itkPointSetToImageFilterTest2.mha
-)
-itk_add_test(
-  NAME itkBresenhamLineTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkBresenhamLineTest
 )
 itk_add_test(
   NAME itkSparseFieldLayerTest
@@ -1797,6 +1790,7 @@ set(
   itkModifiedTimeGTest.cxx
   itkVersionGTest.cxx
   itkAbortProcessObjectGTest.cxx
+  itkBresenhamLineGTest.cxx
   itkMetaDataDictionaryGTest.cxx
   itkSpatialOrientationAdaptorGTest.cxx
   itkAnatomicalOrientationGTest.cxx
