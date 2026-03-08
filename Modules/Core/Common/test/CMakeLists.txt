@@ -128,7 +128,6 @@ set(
   itkConstNeighborhoodIteratorTest.cxx
   itkShapedNeighborhoodIteratorTest.cxx
   itkMatrixTest.cxx
-  itkAutoPointerTest.cxx
   itkNeighborhoodIteratorTest.cxx
   itkLoggerManagerTest.cxx
   itkBSplineInterpolationWeightFunctionTest.cxx
@@ -428,12 +427,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     itkArray2DTest
-)
-itk_add_test(
-  NAME itkAutoPointerTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkAutoPointerTest
 )
 itk_add_test(
   NAME itkBSplineInterpolationWeightFunctionTest
@@ -1790,6 +1783,7 @@ set(
   itkModifiedTimeGTest.cxx
   itkVersionGTest.cxx
   itkAbortProcessObjectGTest.cxx
+  itkAutoPointerGTest.cxx
   itkBresenhamLineGTest.cxx
   itkMetaDataDictionaryGTest.cxx
   itkSpatialOrientationAdaptorGTest.cxx
