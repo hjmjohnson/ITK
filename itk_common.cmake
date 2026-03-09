@@ -394,6 +394,7 @@ while(NOT dashboard_done)
   set(ENV{HOME} "${dashboard_user_home}")
 
   # Start a new submission.
+  message(STATUS "::group::CTestStart") # Start section in github CI action
   if(COMMAND dashboard_hook_start)
     dashboard_hook_start()
   endif()
@@ -422,40 +423,51 @@ while(NOT dashboard_done)
   set(CTEST_CHECKOUT_COMMAND) # checkout on first iteration only
   message("Found ${count} changed files")
 
+  message(STATUS "::endgroup::") # "::group::CTestStart"
   if(dashboard_fresh OR NOT dashboard_continuous OR count GREATER 0)
     ctest_configure(RETURN_VALUE configure_return)
     ctest_read_custom_files(${CTEST_BINARY_DIRECTORY})
 
+    message(STATUS "::group::CTestBuild") # Start section in github CI action
     if(COMMAND dashboard_hook_build)
       dashboard_hook_build()
     endif()
     ctest_build(RETURN_VALUE build_return
                 NUMBER_ERRORS build_errors
                 NUMBER_WARNINGS build_warnings)
+    message(STATUS "::endgroup::") # "::group::CTestBuild"
 
+    message(STATUS "::group::CTestTest") # Start section in github CI action
     if(COMMAND dashboard_hook_test)
       dashboard_hook_test()
     endif()
     ctest_test(${CTEST_TEST_ARGS} RETURN_VALUE test_return)
+    message(STATUS "::endgroup::") # "::group::CTestTest"
 
     if(dashboard_do_coverage)
+      message(STATUS "::group::CTestCoverage") # Start section in github CI action
       if(COMMAND dashboard_hook_coverage)
         dashboard_hook_coverage()
       endif()
       ctest_coverage(${CTEST_COVERAGE_ARGS})
+      message(STATUS "::endgroup::") # "::group::CTestCoverage"
     endif()
     if(dashboard_do_memcheck)
+      message(STATUS "::group::CTestMemCheck") # Start section in github CI action
       if(COMMAND dashboard_hook_memcheck)
         dashboard_hook_memcheck()
       endif()
       ctest_memcheck(${CTEST_MEMCHECK_ARGS})
+      message(STATUS "::endgroup::") # "::group::CTestMemCheck"
     endif()
+    message(STATUS "::group::CTestSubmit") # Start section in github CI action
     if(COMMAND dashboard_hook_submit)
       dashboard_hook_submit()
     endif()
     if(NOT dashboard_no_submit)
       ctest_submit()
     endif()
+    message(STATUS "::endgroup::") # "::group::CTestSubmit"
     if(COMMAND dashboard_hook_end)
       dashboard_hook_end()
     endif()
