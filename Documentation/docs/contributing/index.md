@@ -244,7 +244,7 @@ effectively.
 
 ```{important}
 **Please open AI-agent-assisted pull requests in Draft mode.** We prefer that
-an agent-created PR not be converted to *Ready for Review* until the human
+an AI-agent-assisted PR not be converted to *Ready for Review* until the human
 author has personally verified that:
 
 - all automated CI tests pass,
