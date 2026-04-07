@@ -88,7 +88,7 @@ CenteredTransformInitializer<TTransform, TFixedImage, TMovingImage>::InitializeT
                             static_cast<ContinuousIndexValueType>(fixedSize[k] - 1) / 2.0;
     }
 
-    m_FixedImage->TransformContinuousIndexToPhysicalPoint(centerFixedIndex, centerFixedPoint);
+    centerFixedPoint = m_FixedImage->TransformContinuousIndexToPhysicalPoint(centerFixedIndex);
 
     const typename MovingImageType::RegionType & movingRegion = m_MovingImage->GetLargestPossibleRegion();
     const typename MovingImageType::IndexType &  movingIndex = movingRegion.GetIndex();
@@ -104,7 +104,7 @@ CenteredTransformInitializer<TTransform, TFixedImage, TMovingImage>::InitializeT
                              static_cast<ContinuousIndexValueType>(movingSize[m] - 1) / 2.0;
     }
 
-    m_MovingImage->TransformContinuousIndexToPhysicalPoint(centerMovingIndex, centerMovingPoint);
+    centerMovingPoint = m_MovingImage->TransformContinuousIndexToPhysicalPoint(centerMovingIndex);
 
     for (unsigned int i = 0; i < InputSpaceDimension; ++i)
     {

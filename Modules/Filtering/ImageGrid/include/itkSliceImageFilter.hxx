@@ -283,7 +283,7 @@ SliceImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
   outputPtr->SetSpacing(outputSpacing);
 
   typename TOutputImage::PointType outputOrigin;
-  inputPtr->TransformIndexToPhysicalPoint(inputStartIndex, outputOrigin);
+  outputOrigin = inputPtr->TransformIndexToPhysicalPoint(inputStartIndex);
   outputPtr->SetOrigin(outputOrigin);
 
   // Set region

@@ -500,7 +500,7 @@ RegistrationParameterScalesEstimator<TMetric>::SampleVirtualDomainWithRegion(Vir
   while (!regionIter.IsAtEnd())
   {
     VirtualPointType point;
-    image->TransformIndexToPhysicalPoint(regionIter.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(regionIter.GetIndex());
     this->m_SamplePoints[count] = point;
     ++regionIter;
     ++count;
@@ -530,7 +530,7 @@ RegistrationParameterScalesEstimator<TMetric>::SampleVirtualDomainWithCorners()
       corner[d] = firstCorner[d] + bit * (size[d] - 1);
     }
     VirtualPointType point;
-    image->TransformIndexToPhysicalPoint(corner, point);
+    point = image->TransformIndexToPhysicalPoint(corner);
     this->m_SamplePoints[i] = point;
   }
 }
@@ -571,7 +571,7 @@ RegistrationParameterScalesEstimator<TMetric>::SampleVirtualDomainRandomly()
   VirtualPointType point;
   for (SizeValueType i = 0; i < m_NumberOfRandomSamples; ++i)
   {
-    image->TransformIndexToPhysicalPoint(randIter.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(randIter.GetIndex());
     this->m_SamplePoints[i] = point;
     ++randIter;
   }

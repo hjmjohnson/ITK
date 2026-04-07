@@ -104,7 +104,7 @@ GaussianImageSource<TOutputImage>::GenerateData()
     const typename TOutputImage::IndexType index = outIt.GetIndex();
     // The position at which the function is evaluated
     typename FunctionType::InputType evalPoint;
-    outputPtr->TransformIndexToPhysicalPoint(index, evalPoint);
+    evalPoint = outputPtr->TransformIndexToPhysicalPoint(index);
     const double value = gaussian->Evaluate(evalPoint);
 
     // Set the pixel value to the function value

@@ -63,7 +63,7 @@ GaborImageSource<TOutputImage>::GenerateData()
     const typename OutputImageType::IndexType index = outIt.GetIndex();
     // The position at which the function is evaluated
     typename OutputImageType::PointType evalPoint;
-    outputPtr->TransformIndexToPhysicalPoint(index, evalPoint);
+    evalPoint = outputPtr->TransformIndexToPhysicalPoint(index);
     double sum = 0.0;
     for (unsigned int i = 1; i < ImageDimension; ++i)
     {

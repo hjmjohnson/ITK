@@ -165,7 +165,7 @@ InverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::PrepareKernelBas
 
     // Here we try to evaluate the inverse transform, so points from
     // input displacement field are actually the target points
-    sampledInput->TransformIndexToPhysicalPoint(ot.GetIndex(), targetPoint);
+    targetPoint = sampledInput->TransformIndexToPhysicalPoint(ot.GetIndex());
 
     target->InsertElement(landmarkId, targetPoint);
 
@@ -232,7 +232,7 @@ InverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::GenerateData()
   {
     // Determine the index of the current output pixel
     outputIndex = outIt.GetIndex();
-    outputPtr->TransformIndexToPhysicalPoint(outputIndex, outputPoint);
+    outputPoint = outputPtr->TransformIndexToPhysicalPoint(outputIndex);
 
     // Compute corresponding inverse displacement vector
     OutputPointType interpolation = m_KernelTransform->TransformPoint(outputPoint);

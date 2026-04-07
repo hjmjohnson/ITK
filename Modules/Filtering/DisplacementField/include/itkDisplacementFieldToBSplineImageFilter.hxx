@@ -204,7 +204,7 @@ DisplacementFieldToBSplineImageFilter<TInputImage, TInputPointSet, TOutputImage>
         const VectorType                      data{};
         typename InputPointSetType::PointType point;
 
-        bsplineParametricDomainField->TransformIndexToPhysicalPoint(index, point);
+        point = bsplineParametricDomainField->TransformIndexToPhysicalPoint(index);
 
         fieldPoints->SetPoint(numberOfPoints, point);
         fieldPoints->SetPointData(numberOfPoints, data);
@@ -254,12 +254,12 @@ DisplacementFieldToBSplineImageFilter<TInputImage, TInputPointSet, TOutputImage>
       PointType                             parametricPoint;
       typename InputPointSetType::PointType physicalPoint;
 
-      inputField->TransformIndexToPhysicalPoint(index, physicalPoint);
+      physicalPoint = inputField->TransformIndexToPhysicalPoint(index);
       const ContinuousIndexType cidx =
         bsplinePhysicalDomainField
           ->template TransformPhysicalPointToContinuousIndex<typename InputFieldPointType::CoordinateType>(
             physicalPoint);
-      bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx, parametricPoint);
+      parametricPoint = bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx);
 
       bool isInside = true;
 
@@ -285,10 +285,10 @@ DisplacementFieldToBSplineImageFilter<TInputImage, TInputPointSet, TOutputImage>
         imagePoint.CastFrom(physicalPoint);
 
         ContinuousIndexType cidx2;
-        isInside = bsplinePhysicalDomainField->TransformPhysicalPointToContinuousIndex(imagePoint, cidx2);
+        cidx2 = isInside = bsplinePhysicalDomainField->TransformPhysicalPointToContinuousIndex(imagePoint);
         if (isInside)
         {
-          bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx2, parametricPoint);
+          parametricPoint = bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx2);
         }
       }
 
@@ -338,7 +338,7 @@ DisplacementFieldToBSplineImageFilter<TInputImage, TInputPointSet, TOutputImage>
       imagePoint.CastFrom(physicalPoint);
 
       ContinuousIndexType cidx;
-      isInside = bsplinePhysicalDomainField->TransformPhysicalPointToContinuousIndex(imagePoint, cidx);
+      cidx = isInside = bsplinePhysicalDomainField->TransformPhysicalPointToContinuousIndex(imagePoint);
 
       if (isInside && this->m_EnforceStationaryBoundary)
       {
@@ -359,7 +359,7 @@ DisplacementFieldToBSplineImageFilter<TInputImage, TInputPointSet, TOutputImage>
 
       if (isInside)
       {
-        bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx, parametricPoint);
+        parametricPoint = bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx);
 
         fieldPoints->SetPoint(numberOfPoints, parametricPoint);
         fieldPoints->SetPointData(numberOfPoints, data);

@@ -89,7 +89,7 @@ FlipImageFilter<TImage>::GenerateOutputInformation()
     }
   }
 
-  inputPtr->TransformIndexToPhysicalPoint(newIndex, outputOrigin);
+  outputOrigin = inputPtr->TransformIndexToPhysicalPoint(newIndex);
 
   // Finally, flip about the origin if needed
   if (m_FlipAboutOrigin)

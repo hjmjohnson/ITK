@@ -89,7 +89,7 @@ RegionOfInterestImageFilter<TInputImage, TOutputImage>::GenerateOutputInformatio
   // Correct origin of the extracted region.
   const IndexType                                 roiStart(m_RegionOfInterest.GetIndex());
   typename Superclass::OutputImageType::PointType outputOrigin;
-  inputPtr->TransformIndexToPhysicalPoint(roiStart, outputOrigin);
+  outputOrigin = inputPtr->TransformIndexToPhysicalPoint(roiStart);
   outputPtr->SetOrigin(outputOrigin);
 }
 

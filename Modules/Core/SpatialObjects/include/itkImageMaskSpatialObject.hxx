@@ -83,7 +83,7 @@ ImageMaskSpatialObject<TDimension, TPixel>::ComputeMyBoundingBox()
     // both the minimum and maximum of the bounding box (in object space).
     // Afterwards, all other corners are considered.
     PointType firstPoint;
-    image->TransformContinuousIndexToPhysicalPoint(minContinuousIndex, firstPoint);
+    firstPoint = image->TransformContinuousIndexToPhysicalPoint(minContinuousIndex);
     boundingBoxInObjectSpace->SetMinimum(firstPoint);
     boundingBoxInObjectSpace->SetMaximum(firstPoint);
 
@@ -108,7 +108,7 @@ ImageMaskSpatialObject<TDimension, TPixel>::ComputeMyBoundingBox()
 
       // Consider the corner point that corresponds to this n-dimensional index.
       PointType cornerPoint;
-      image->TransformContinuousIndexToPhysicalPoint(continuousIndex, cornerPoint);
+      cornerPoint = image->TransformContinuousIndexToPhysicalPoint(continuousIndex);
       boundingBoxInObjectSpace->ConsiderPoint(cornerPoint);
     }
   }

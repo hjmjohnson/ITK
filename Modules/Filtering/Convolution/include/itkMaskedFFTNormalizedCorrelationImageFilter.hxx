@@ -702,7 +702,7 @@ MaskedFFTNormalizedCorrelationImageFilter<TInputImage, TOutputImage, TMaskImage>
   {
     movingImageOffset[i] = -static_cast<float>(movingImage->GetLargestPossibleRegion().GetSize()[i] - 1) / 2.0;
   }
-  fixedImage->TransformContinuousIndexToPhysicalPoint(movingImageOffset, outputOrigin);
+  outputOrigin = fixedImage->TransformContinuousIndexToPhysicalPoint(movingImageOffset);
   output->SetOrigin(outputOrigin);
 }
 

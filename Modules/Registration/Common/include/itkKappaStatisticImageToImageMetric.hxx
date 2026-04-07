@@ -84,7 +84,7 @@ KappaStatisticImageToImageMetric<TFixedImage, TMovingImage>::GetValue(const Tran
     fixedIndex = fi.GetIndex();
 
     InputPointType fixedInputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(fixedIndex, fixedInputPoint);
+    fixedInputPoint = fixedImage->TransformIndexToPhysicalPoint(fixedIndex);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(fixedInputPoint))
     {
@@ -201,7 +201,7 @@ KappaStatisticImageToImageMetric<TFixedImage, TMovingImage>::GetDerivative(const
     index = ti.GetIndex();
 
     InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(inputPoint))
     {

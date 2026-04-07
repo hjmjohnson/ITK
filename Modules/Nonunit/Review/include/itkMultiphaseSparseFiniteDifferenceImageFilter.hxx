@@ -849,8 +849,8 @@ MultiphaseSparseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputI
 
         InputPointType p1, p2;
         ValueType      dist = 0; // compute the distance between neighbors
-        this->m_LevelSet[sparsePtr->m_Index]->TransformIndexToPhysicalPoint(statusIt.GetIndex(indexNeighbor), p1);
-        this->m_LevelSet[sparsePtr->m_Index]->TransformIndexToPhysicalPoint(indexCurrent, p2);
+        p1 = this->m_LevelSet[sparsePtr->m_Index]->TransformIndexToPhysicalPoint(statusIt.GetIndex(indexNeighbor));
+        p2 = this->m_LevelSet[sparsePtr->m_Index]->TransformIndexToPhysicalPoint(indexCurrent);
         for (unsigned int j = 0; j < ImageDimension; ++j)
         {
           dist += (p1[j] - p2[j]) * (p1[j] - p2[j]);

@@ -282,7 +282,7 @@ MaskFeaturePointSelectionFilter<TImage, TMask, TFeatures>::GenerateData()
 
       // add the point to the container
       PointType point;
-      image->TransformIndexToPhysicalPoint(indexOfPointToPick, point);
+      point = image->TransformIndexToPhysicalPoint(indexOfPointToPick);
       points->InsertElement(numberOfPointsInserted, point);
 
       // mark off connected points

@@ -68,7 +68,7 @@ GridImageSource<TOutputImage>::BeforeThreadedGenerateData()
       {
         typename ImageType::IndexType index = It.GetIndex();
         typename ImageType::PointType point;
-        output->TransformIndexToPhysicalPoint(index, point);
+        point = output->TransformIndexToPhysicalPoint(index);
 
         RealType val = 0;
         for (unsigned int j = 0; j < numberOfGaussians; ++j)

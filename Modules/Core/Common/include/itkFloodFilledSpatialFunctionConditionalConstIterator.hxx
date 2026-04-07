@@ -54,7 +54,7 @@ FloodFilledSpatialFunctionConditionalConstIterator<TImage, TFunction>::IsPixelIn
     case 0:
     {
       // Get the physical location of this index
-      this->m_Image->TransformIndexToPhysicalPoint(index, position);
+      position = this->m_Image->TransformIndexToPhysicalPoint(index);
 
       // Evaluate the function at this point
       return this->GetFunction()->Evaluate(position);
@@ -75,7 +75,7 @@ FloodFilledSpatialFunctionConditionalConstIterator<TImage, TFunction>::IsPixelIn
       }
 
       // Get the physical location of this index
-      this->m_Image->TransformContinuousIndexToPhysicalPoint(contIndex, position);
+      position = this->m_Image->TransformContinuousIndexToPhysicalPoint(contIndex);
 
       // Evaluate the function at this point
       return this->GetFunction()->Evaluate(position);
@@ -128,7 +128,7 @@ FloodFilledSpatialFunctionConditionalConstIterator<TImage, TFunction>::IsPixelIn
 
         // Now that we've built an index, we can test it
         // Get the physical location of this index
-        this->m_Image->TransformIndexToPhysicalPoint(tempIndex, position);
+        position = this->m_Image->TransformIndexToPhysicalPoint(tempIndex);
 
         // Evaluate the function at this index, if it's false
         // then the AND of all function dimensions is false,
@@ -171,7 +171,7 @@ FloodFilledSpatialFunctionConditionalConstIterator<TImage, TFunction>::IsPixelIn
 
         // Now that we've built an index, we can test it
         // Get the physical location of this index
-        this->m_Image->TransformIndexToPhysicalPoint(tempIndex, position);
+        position = this->m_Image->TransformIndexToPhysicalPoint(tempIndex);
 
         // Evaluate the function at this index, if it's true
         // then the OR of all function dimensions is true,

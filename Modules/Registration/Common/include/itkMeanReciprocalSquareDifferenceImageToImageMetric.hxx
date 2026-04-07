@@ -68,7 +68,7 @@ MeanReciprocalSquareDifferenceImageToImageMetric<TFixedImage, TMovingImage>::Get
     index = ti.GetIndex();
 
     InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(inputPoint))
     {

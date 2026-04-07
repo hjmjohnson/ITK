@@ -217,7 +217,7 @@ FEMScatteredDataPointSetToImageFilter<TInputPointSet,
     for (float i = 0; i <= m_NumberOfElements[0]; ++i)
     {
       pointIndex[0] = i * m_PixelsPerElement[0];
-      image->TransformContinuousIndexToPhysicalPoint(pointIndex, pointCoordinate);
+      pointCoordinate = image->TransformContinuousIndexToPhysicalPoint(pointIndex);
 
       this->m_Mesh->SetPoint(globalNumbering, pointCoordinate);
 
@@ -286,7 +286,7 @@ FEMScatteredDataPointSetToImageFilter<TInputPointSet,
       for (float i = 0; i <= m_NumberOfElements[0]; ++i)
       {
         pointIndex[0] = i * m_PixelsPerElement[0];
-        image->TransformContinuousIndexToPhysicalPoint(pointIndex, pointCoordinate);
+        pointCoordinate = image->TransformContinuousIndexToPhysicalPoint(pointIndex);
         this->m_Mesh->SetPoint(globalNumbering, pointCoordinate);
 
         ++globalNumbering;
@@ -710,7 +710,7 @@ FEMScatteredDataPointSetToImageFilter<TInputPointSet,
   // step over all points within the region
   for (iter.GoToBegin(); !iter.IsAtEnd(); ++iter)
   {
-    output->TransformIndexToPhysicalPoint(iter.ComputeIndex(), point);
+    point = output->TransformIndexToPhysicalPoint(iter.ComputeIndex());
     for (unsigned int d = 0; d < ImageDimension; ++d)
     {
       globalPoint[d] = point[d];

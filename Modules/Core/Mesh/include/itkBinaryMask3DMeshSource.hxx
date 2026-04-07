@@ -2367,7 +2367,7 @@ BinaryMask3DMeshSource<TInputImage, TOutputMesh>::AddNodes(int               ind
       // have the notion
       // of spacing and origin
       OPointType new_p;
-      this->m_InputImage->TransformContinuousIndexToPhysicalPoint(indTemp, new_p);
+      new_p = this->m_InputImage->TransformContinuousIndexToPhysicalPoint(indTemp);
       this->m_OutputMesh->SetPoint(m_NumberOfNodes, new_p);
 
       switch (nodesid[i])

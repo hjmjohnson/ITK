@@ -229,7 +229,7 @@ ShapeLabelMapFilter<TImage, TLabelImage>::ThreadedProcessLabelObject(LabelObject
       for (IndexType iidx = idx; iidx[0] < endIdx0; iidx[0]++)
       {
         typename LabelObjectType::CentroidType pP;
-        output->TransformIndexToPhysicalPoint(iidx, pP);
+        pP = output->TransformIndexToPhysicalPoint(iidx);
 
         for (unsigned int i = 0; i < ImageDimension; ++i)
         {
@@ -248,7 +248,7 @@ ShapeLabelMapFilter<TImage, TLabelImage>::ThreadedProcessLabelObject(LabelObject
       // get the physical position and the spacing - they are used several times
       // later
       typename LabelObjectType::CentroidType physicalPosition;
-      output->TransformIndexToPhysicalPoint(idx, physicalPosition);
+      physicalPosition = output->TransformIndexToPhysicalPoint(idx);
 
       const typename ImageType::DirectionType & direction = output->GetDirection();
       auto                                      scale = MakeFilled<VectorType>(output->GetSpacing()[0]);
@@ -294,7 +294,7 @@ ShapeLabelMapFilter<TImage, TLabelImage>::ThreadedProcessLabelObject(LabelObject
   }
   const typename LabelObjectType::RegionType boundingBox(mins, boundingBoxSize);
   typename LabelObjectType::CentroidType     physicalCentroid;
-  output->TransformContinuousIndexToPhysicalPoint(centroid, physicalCentroid);
+  physicalCentroid = output->TransformContinuousIndexToPhysicalPoint(centroid);
 
   // Center the second order moments
   for (unsigned int i = 0; i < ImageDimension; ++i)
@@ -783,7 +783,7 @@ ShapeLabelMapFilter<TImage, TLabelImage>::ComputeOrientedBoundingBox(LabelObject
     // add start index of line as physical point relative to centroid
     IndexType                     idx = line.GetIndex();
     typename ImageType::PointType pt;
-    output->TransformIndexToPhysicalPoint(idx, pt);
+    pt = output->TransformIndexToPhysicalPoint(idx);
     for (unsigned int j = 0; j < ImageDimension; ++j)
     {
       pixelLocations(j, l * 2) = pt[j] - centroid[j];
@@ -791,7 +791,7 @@ ShapeLabelMapFilter<TImage, TLabelImage>::ComputeOrientedBoundingBox(LabelObject
 
     // add end index of line as physical point relative to centroid
     idx[0] += line.GetLength() - 1;
-    output->TransformIndexToPhysicalPoint(idx, pt);
+    pt = output->TransformIndexToPhysicalPoint(idx);
     for (unsigned int j = 0; j < ImageDimension; ++j)
     {
       pixelLocations(j, l * 2 + 1) = pt[j] - centroid[j];

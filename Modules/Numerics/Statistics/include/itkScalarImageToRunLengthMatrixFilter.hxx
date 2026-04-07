@@ -237,9 +237,9 @@ ScalarImageToRunLengthMatrixFilter<TImageType, THistogramFrequencyContainer>::Ge
       }
 
       PointType centerPoint;
-      inputImage->TransformIndexToPhysicalPoint(centerIndex, centerPoint);
+      centerPoint = inputImage->TransformIndexToPhysicalPoint(centerIndex);
       PointType point;
-      inputImage->TransformIndexToPhysicalPoint(lastGoodIndex, point);
+      point = inputImage->TransformIndexToPhysicalPoint(lastGoodIndex);
 
       run[0] = centerPixelIntensity;
       run[1] = centerPoint.EuclideanDistanceTo(point);

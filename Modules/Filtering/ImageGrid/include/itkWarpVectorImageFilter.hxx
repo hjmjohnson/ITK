@@ -158,7 +158,7 @@ WarpVectorImageFilter<TInputImage, TOutputImage, TDisplacementField>::DynamicThr
   while (!outputIt.IsAtEnd())
   {
     index = outputIt.GetIndex();
-    outputPtr->TransformIndexToPhysicalPoint(index, point);
+    point = outputPtr->TransformIndexToPhysicalPoint(index);
     displacement = fieldIt.Get();
 
     // compute the required input image point

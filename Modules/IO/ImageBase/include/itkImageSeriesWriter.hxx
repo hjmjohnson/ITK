@@ -300,7 +300,7 @@ ImageSeriesWriter<TInputImage, TOutputImage>::WriteFiles()
         // n-dimensional space of the input image.
         typename InputImageType::PointType origin2;
 
-        inputImage->TransformIndexToPhysicalPoint(inIndex, origin2);
+        origin2 = inputImage->TransformIndexToPhysicalPoint(inIndex);
 
         const unsigned int inputImageDimension = TInputImage::ImageDimension;
 

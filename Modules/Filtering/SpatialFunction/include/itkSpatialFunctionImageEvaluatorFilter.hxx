@@ -57,7 +57,7 @@ SpatialFunctionImageEvaluatorFilter<TSpatialFunction, TInputImage, TOutputImage>
   for (; !outIt.IsAtEnd(); ++outIt)
   {
     const typename TOutputImage::IndexType index = outIt.GetIndex();
-    outputPtr->TransformIndexToPhysicalPoint(index, evalPoint);
+    evalPoint = outputPtr->TransformIndexToPhysicalPoint(index);
     value = m_PixelFunction->Evaluate(evalPoint);
 
     // Set the pixel value to the function value

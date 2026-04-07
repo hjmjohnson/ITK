@@ -128,7 +128,7 @@ MatchCardinalityImageToImageMetric<TFixedImage, TMovingImage>::ThreadedGetValue(
     const typename FixedImageType::IndexType index = ti.GetIndex();
 
     typename Superclass::InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->GetFixedImageMask() && !this->GetFixedImageMask()->IsInsideInWorldSpace(inputPoint))
     {

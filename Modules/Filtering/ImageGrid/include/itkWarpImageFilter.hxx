@@ -297,7 +297,7 @@ WarpImageFilter<TInputImage, TOutputImage, TDisplacementField>::DynamicThreadedG
     {
       // get the output image index
       index = outputIt.GetIndex();
-      outputPtr->TransformIndexToPhysicalPoint(index, point);
+      point = outputPtr->TransformIndexToPhysicalPoint(index);
 
       // get the required displacement
       displacement = fieldIt.Get();
@@ -329,7 +329,7 @@ WarpImageFilter<TInputImage, TOutputImage, TDisplacementField>::DynamicThreadedG
     {
       // get the output image index
       index = outputIt.GetIndex();
-      outputPtr->TransformIndexToPhysicalPoint(index, point);
+      point = outputPtr->TransformIndexToPhysicalPoint(index);
 
       this->EvaluateDisplacementAtPhysicalPoint(point, fieldPtr, displacement);
       // compute the required input image point

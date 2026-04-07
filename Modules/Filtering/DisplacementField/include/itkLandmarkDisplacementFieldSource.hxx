@@ -135,7 +135,7 @@ LandmarkDisplacementFieldSource<TOutputImage>::GenerateData()
   {
     // Determine the index of the current output pixel
     outputIndex = outIt.GetIndex();
-    outputPtr->TransformIndexToPhysicalPoint(outputIndex, outputPoint);
+    outputPoint = outputPtr->TransformIndexToPhysicalPoint(outputIndex);
 
     // Compute corresponding inverse displacement vector
     OutputPointType interpolatedDisplacement = m_KernelTransform->TransformPoint(outputPoint);

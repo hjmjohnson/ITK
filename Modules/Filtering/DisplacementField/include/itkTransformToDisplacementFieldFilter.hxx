@@ -191,7 +191,7 @@ TransformToDisplacementFieldFilter<TOutputImage, TParametersValueType>::Nonlinea
     while (!outIt.IsAtEndOfLine())
     {
       // Determine the index of the current output pixel
-      output->TransformIndexToPhysicalPoint(outIt.ComputeIndex(), outputPoint);
+      outputPoint = output->TransformIndexToPhysicalPoint(outIt.ComputeIndex());
 
       // Compute corresponding input pixel position
       transformedPoint = transform->TransformPoint(outputPoint);
@@ -238,12 +238,12 @@ TransformToDisplacementFieldFilter<TOutputImage, TParametersValueType>::LinearTh
     IndexType index = computedIndex;
     index[0] = largestPossibleRegion.GetIndex(0);
 
-    outputPtr->TransformIndexToPhysicalPoint(index, outputPoint);
+    outputPoint = outputPtr->TransformIndexToPhysicalPoint(index);
     inputPoint = transformPtr->TransformPoint(outputPoint);
     const typename PointType::VectorType startDisplacement = inputPoint - outputPoint;
 
     index[0] += largestPossibleRegion.GetSize(0);
-    outputPtr->TransformIndexToPhysicalPoint(index, outputPoint);
+    outputPoint = outputPtr->TransformIndexToPhysicalPoint(index);
     inputPoint = transformPtr->TransformPoint(outputPoint);
     const typename PointType::VectorType endDisplacement = inputPoint - outputPoint;
 

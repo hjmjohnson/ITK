@@ -118,7 +118,7 @@ BSplineTransformInitializer<TTransform, TImage>::InitializeTransform() const
                                                           2.0 * BSplineTransformDomainEpsilon));
     }
     ImagePointType point;
-    this->m_Image->TransformContinuousIndexToPhysicalPoint(whichIndex, point);
+    point = this->m_Image->TransformContinuousIndexToPhysicalPoint(whichIndex);
     PointType corner;
     corner.CastFrom(point);
     cornerPoints->SetPoint(d, corner);

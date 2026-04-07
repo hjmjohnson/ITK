@@ -86,7 +86,7 @@ ImageMomentsCalculator<TImage>::Compute()
     IndexType indexPosition = it.GetIndex();
 
     Point<double, ImageDimension> physicalPosition;
-    m_Image->TransformIndexToPhysicalPoint(indexPosition, physicalPosition);
+    physicalPosition = m_Image->TransformIndexToPhysicalPoint(indexPosition);
 
     if (m_SpatialObjectMask.IsNull() || m_SpatialObjectMask->IsInsideInWorldSpace(physicalPosition))
     {

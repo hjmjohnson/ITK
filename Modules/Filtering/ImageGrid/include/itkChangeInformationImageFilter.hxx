@@ -113,7 +113,7 @@ ChangeInformationImageFilter<TInputImage>::GenerateOutputInformation()
     {
       centerIndex[i] = static_cast<double>((outputSize[i] - 1) / 2.0);
     }
-    output->TransformContinuousIndexToPhysicalPoint(centerIndex, centerPoint);
+    centerPoint = output->TransformContinuousIndexToPhysicalPoint(centerIndex);
     for (unsigned int i = 0; i < ImageDimension; ++i)
     {
       origin[i] = output->GetOrigin()[i] - centerPoint[i];

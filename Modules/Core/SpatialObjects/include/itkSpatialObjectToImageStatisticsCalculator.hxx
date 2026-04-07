@@ -124,7 +124,7 @@ SpatialObjectToImageStatisticsCalculator<TInputImage, TInputSpatialObject, TSamp
       if (it.Get() > 0) // if inside the mask
       {
         ind = it.GetIndex();
-        maskImage->TransformIndexToPhysicalPoint(ind, pnt);
+        pnt = maskImage->TransformIndexToPhysicalPoint(ind);
         tPnt = maskSpatialObject->GetObjectToWorldTransform()->TransformPoint(pnt);
         ind = m_Image->TransformPhysicalPointToIndex(tPnt);
         mv[0] = m_Image->GetPixel(ind);
@@ -186,7 +186,7 @@ SpatialObjectToImageStatisticsCalculator<TInputImage, TInputSpatialObject, TSamp
     while (!it.IsAtEnd())
     {
       ind = it.GetIndex();
-      m_Image->TransformIndexToPhysicalPoint(ind, pnt);
+      pnt = m_Image->TransformIndexToPhysicalPoint(ind);
       if (m_SpatialObject->IsInsideInWorldSpace(pnt))
       {
         mv[0] = it.Get();

@@ -292,7 +292,7 @@ SliceBySliceImageFilter<TInputImage,
       originIndex[m_Dimension] = slice;
 
       typename InputImageType::PointType inputOrigin;
-      this->GetInput(i)->TransformIndexToPhysicalPoint(originIndex, inputOrigin);
+      inputOrigin = this->GetInput(i)->TransformIndexToPhysicalPoint(originIndex);
 
       InternalPointType internalInputOrigin;
       unsigned int      internalDim = 0;

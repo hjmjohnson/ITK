@@ -158,7 +158,7 @@ ImageToRectilinearFEMObjectFilter<TInputImage>::Generate2DRectilinearMesh()
     for (typename ImageSizeType::SizeValueType i = 0; i <= m_NumberOfElements[0]; ++i)
     {
       nodeIndex[0] = i * m_PixelsPerElement[0];
-      image->TransformIndexToPhysicalPoint(nodeIndex, nodePoint);
+      nodePoint = image->TransformIndexToPhysicalPoint(nodeIndex);
       Element::VectorType pt(2);
       pt[0] = nodePoint[0];
       pt[1] = nodePoint[1];
@@ -229,7 +229,7 @@ ImageToRectilinearFEMObjectFilter<TInputImage>::Generate3DRectilinearMesh()
       for (unsigned int i = 0; i <= m_NumberOfElements[0]; ++i)
       {
         nodeIndex[0] = i * m_PixelsPerElement[0];
-        image->TransformIndexToPhysicalPoint(nodeIndex, nodePoint);
+        nodePoint = image->TransformIndexToPhysicalPoint(nodeIndex);
         Element::VectorType pt(3);
         pt[0] = nodePoint[0];
         pt[1] = nodePoint[1];

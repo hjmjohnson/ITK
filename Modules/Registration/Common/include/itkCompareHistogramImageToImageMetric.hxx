@@ -110,7 +110,7 @@ CompareHistogramImageToImageMetric<TFixedImage, TMovingImage>::FormTrainingHisto
          (this->Superclass::GetUsePaddingValue() && ti.Get() > this->Superclass::GetPaddingValue())))
     {
       typename Superclass::InputPointType inputPoint;
-      this->m_TrainingFixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+      inputPoint = this->m_TrainingFixedImage->TransformIndexToPhysicalPoint(index);
 
       const typename Superclass::OutputPointType transformedPoint =
         this->m_TrainingTransform->TransformPoint(inputPoint);

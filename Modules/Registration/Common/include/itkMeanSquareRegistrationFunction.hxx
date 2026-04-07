@@ -112,7 +112,7 @@ MeanSquareRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::C
   // Get moving image related information
   const DisplacementFieldPixelType itvec = this->GetDisplacementField()->GetPixel(index);
   PointType                        mappedPoint;
-  this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedPoint);
+  mappedPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
   for (unsigned int j = 0; j < ImageDimension; ++j)
   {
     mappedPoint[j] += itvec[j];

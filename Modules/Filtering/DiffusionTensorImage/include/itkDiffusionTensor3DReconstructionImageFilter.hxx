@@ -237,7 +237,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
       {
         const typename ImageRegionConstIteratorWithIndex<ReferenceImageType>::IndexType index = it.GetIndex();
         typename ReferenceImageType::PointType                                          point;
-        refImage->TransformIndexToPhysicalPoint(index, point);
+        point = refImage->TransformIndexToPhysicalPoint(index);
         unmaskedPixel = maskSpatialObject->IsInsideInWorldSpace(point);
       }
 
@@ -349,7 +349,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
         const typename ImageRegionConstIteratorWithIndex<ReferenceImageType>::IndexType index = git.GetIndex();
         typename ReferenceImageType::PointType                                          point;
 
-        gradientImagePointer->TransformIndexToPhysicalPoint(index, point);
+        point = gradientImagePointer->TransformIndexToPhysicalPoint(index);
         unmaskedPixel = maskSpatialObject->IsInsideInWorldSpace(point);
       }
 

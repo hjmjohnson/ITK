@@ -178,7 +178,7 @@ ObjectToObjectMetric<TFixedDimension, TMovingDimension, TVirtualImage, TParamete
 {
   if (this->m_VirtualImage)
   {
-    return this->m_VirtualImage->TransformPhysicalPointToIndex(point, index);
+    index = return this->m_VirtualImage->TransformPhysicalPointToIndex(point);
   }
 
   itkExceptionStringMacro("m_VirtualImage is undefined. Cannot transform.");
@@ -194,7 +194,7 @@ ObjectToObjectMetric<TFixedDimension, TMovingDimension, TVirtualImage, TParamete
 {
   if (this->m_VirtualImage)
   {
-    this->m_VirtualImage->TransformIndexToPhysicalPoint(index, point);
+    point = this->m_VirtualImage->TransformIndexToPhysicalPoint(index);
   }
   else
   {

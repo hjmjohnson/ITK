@@ -75,7 +75,7 @@ bool
 ImageSpatialObject<TDimension, PixelType>::IsInsideInObjectSpace(const PointType & point) const
 {
   IndexType index;
-  return m_Image->TransformPhysicalPointToIndex(point, index);
+  index = return m_Image->TransformPhysicalPointToIndex(point);
 }
 
 template <unsigned int TDimension, typename PixelType>
@@ -127,8 +127,8 @@ ImageSpatialObject<TDimension, PixelType>::ComputeMyBoundingBox()
   }
   PointType pnt1;
   PointType pnt2;
-  m_Image->TransformIndexToPhysicalPoint(index, pnt1);
-  m_Image->TransformIndexToPhysicalPoint(index2, pnt2);
+  pnt1 = m_Image->TransformIndexToPhysicalPoint(index);
+  pnt2 = m_Image->TransformIndexToPhysicalPoint(index2);
 
   this->GetModifiableMyBoundingBoxInObjectSpace()->SetMinimum(pnt1);
   this->GetModifiableMyBoundingBoxInObjectSpace()->SetMaximum(pnt1);

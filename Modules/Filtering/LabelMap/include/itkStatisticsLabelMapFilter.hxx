@@ -134,7 +134,7 @@ StatisticsLabelMapFilter<TImage, TFeatureImage>::ThreadedProcessLabelObject(Labe
 
     // moments
     PointType physicalPosition;
-    output->TransformIndexToPhysicalPoint(idx, physicalPosition);
+    physicalPosition = output->TransformIndexToPhysicalPoint(idx);
     for (unsigned int i = 0; i < ImageDimension; ++i)
     {
       centerOfGravity[i] += physicalPosition[i] * v;

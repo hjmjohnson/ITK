@@ -177,7 +177,7 @@ ImageFileWriter<TInputImage>::Write()
   // origin = input->GetOrigin();
   const typename TInputImage::IndexType & startIndex = largestRegion.GetIndex();
   typename TInputImage::PointType         origin;
-  input->TransformIndexToPhysicalPoint(startIndex, origin);
+  origin = input->TransformIndexToPhysicalPoint(startIndex);
 
   for (unsigned int i = 0; i < TInputImage::ImageDimension; ++i)
   {

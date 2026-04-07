@@ -122,7 +122,7 @@ JointDomainImageToListSampleAdaptor<TImage>::GetMeasurementVector(InstanceIdenti
 {
   m_TempIndex = this->GetImage()->ComputeIndex(id);
 
-  this->GetImage()->TransformIndexToPhysicalPoint(m_TempIndex, m_TempPoint);
+  m_TempPoint = this->GetImage()->TransformIndexToPhysicalPoint(m_TempIndex);
 
   for (unsigned int i = 0; i < TImage::ImageDimension; ++i)
   {

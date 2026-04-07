@@ -296,7 +296,7 @@ BinShrinkImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
     }
   }
 
-  inputPtr->TransformContinuousIndexToPhysicalPoint(inputIndexOutputOrigin, outputOrigin);
+  outputOrigin = inputPtr->TransformContinuousIndexToPhysicalPoint(inputIndexOutputOrigin);
 
   outputPtr->SetSpacing(outputSpacing);
   outputPtr->SetOrigin(outputOrigin);

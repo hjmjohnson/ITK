@@ -146,7 +146,7 @@ TimeVaryingVelocityFieldIntegrationImageFilter<TTimeVaryingVelocityField, TDispl
   for (ImageRegionIteratorWithIndex It(outputField, region); !It.IsAtEnd(); ++It)
   {
     PointType point;
-    outputField->TransformIndexToPhysicalPoint(It.GetIndex(), point);
+    point = outputField->TransformIndexToPhysicalPoint(It.GetIndex());
     const VectorType displacement = this->IntegrateVelocityAtPoint(point, inputField);
     It.Set(displacement);
   }
@@ -195,7 +195,7 @@ TimeVaryingVelocityFieldIntegrationImageFilter<TTimeVaryingVelocityField, TDispl
     }
 
     typename TimeVaryingVelocityFieldType::PointType spaceTimeEnd;
-    inputField->TransformIndexToPhysicalPoint(lastIndex, spaceTimeEnd);
+    spaceTimeEnd = inputField->TransformIndexToPhysicalPoint(lastIndex);
 
     timeOrigin = spaceTimeOrigin[InputImageDimension - 1];
     const RealType timeEnd = spaceTimeEnd[InputImageDimension - 1];

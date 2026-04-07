@@ -1412,7 +1412,7 @@ RayCastInterpolateImageFunction<TInputImage, TCoordinate>::EvaluateAtContinuousI
 {
   OutputPointType point;
 
-  this->m_Image->TransformContinuousIndexToPhysicalPoint(index, point);
+  point = this->m_Image->TransformContinuousIndexToPhysicalPoint(index);
 
   return this->Evaluate(point);
 }
