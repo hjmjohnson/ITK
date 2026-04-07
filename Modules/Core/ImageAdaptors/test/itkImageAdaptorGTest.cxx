@@ -55,6 +55,9 @@ Expect_TransformPhysicalPoint_member_functions_return_the_same_for_ImageAdaptor_
                                    image.template TransformPhysicalPointToContinuousIndex<float>(point));
   Expect_same_type_and_equal_value(imageAdaptor.template TransformPhysicalPointToContinuousIndex<double>(point),
                                    image.template TransformPhysicalPointToContinuousIndex<double>(point));
+  // Default template argument (PointValueType = SpacePrecisionType) should match between adaptor and image.
+  Expect_same_type_and_equal_value(imageAdaptor.TransformPhysicalPointToContinuousIndex(point),
+                                   image.TransformPhysicalPointToContinuousIndex(point));
 }
 
 
@@ -71,6 +74,9 @@ Expect_TransformContinuousIndexToPhysicalPoint_returns_the_same_for_ImageAdaptor
   Expect_same_type_and_equal_value(
     imageAdaptor.template TransformContinuousIndexToPhysicalPoint<double>(continuousIndex),
     image.template TransformContinuousIndexToPhysicalPoint<double>(continuousIndex));
+  // Default template argument (PointValueType = SpacePrecisionType) should match between adaptor and image.
+  Expect_same_type_and_equal_value(imageAdaptor.TransformContinuousIndexToPhysicalPoint(continuousIndex),
+                                   image.TransformContinuousIndexToPhysicalPoint(continuousIndex));
 }
 
 
@@ -85,6 +91,9 @@ Expect_TransformIndexToPhysicalPoint_returns_the_same_for_ImageAdaptor_as_for_im
                                    image.template TransformIndexToPhysicalPoint<float>(index));
   Expect_same_type_and_equal_value(imageAdaptor.template TransformIndexToPhysicalPoint<double>(index),
                                    image.template TransformIndexToPhysicalPoint<double>(index));
+  // Default template argument (PointValueType = SpacePrecisionType) should match between adaptor and image.
+  Expect_same_type_and_equal_value(imageAdaptor.TransformIndexToPhysicalPoint(index),
+                                   image.TransformIndexToPhysicalPoint(index));
 }
 
 

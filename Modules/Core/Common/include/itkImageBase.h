@@ -503,7 +503,7 @@ public:
    *  the returned index is inside the image. Of course, the user can
    * still test this afterwards by calling ImageRegion::IsInside(index):
      \code
-     auto index = image->TransformPhysicalPointToContinuousIndex<double>(point);
+     auto index = image->TransformPhysicalPointToContinuousIndex(point);
      if (image->GetLargestPossibleRegion().IsInside(index)) // Et cetera...
      \endcode
    * Which is equivalent to the following code, which calls the other overload:

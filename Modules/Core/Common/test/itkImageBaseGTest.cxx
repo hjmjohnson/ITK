@@ -89,6 +89,14 @@ Expect_by_default_Transform_result_equals_default_constructed_value(const typena
   Expect_same_type_and_equal_value(imageBase.template TransformIndexToPhysicalPoint<double>(IndexType()),
                                    itk::Point<double, ImageDimension>());
 
+  // When no explicit template argument is specified, the default (PointValueType = SpacePrecisionType) is used.
+  Expect_same_type_and_equal_value(imageBase.TransformPhysicalPointToContinuousIndex(PointType()),
+                                   itk::ContinuousIndex<itk::SpacePrecisionType, ImageDimension>());
+  Expect_same_type_and_equal_value(imageBase.TransformContinuousIndexToPhysicalPoint(ContinuousIndexType()),
+                                   itk::Point<itk::SpacePrecisionType, ImageDimension>());
+  Expect_same_type_and_equal_value(imageBase.TransformIndexToPhysicalPoint(IndexType()),
+                                   itk::Point<itk::SpacePrecisionType, ImageDimension>());
+
   // The two member functions TransformLocalVectorToPhysicalVector and
   // TransformPhysicalVectorToLocalVector are expected to return an
   // array or vector of the same type as their first function argument.

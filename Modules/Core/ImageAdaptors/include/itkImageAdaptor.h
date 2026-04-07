@@ -121,6 +121,7 @@ public:
   /** Origin type alias support  The origin is the geometric coordinates
    * of the index (0,0). */
   using typename Superclass::PointType;
+  using typename Superclass::PointValueType;
 
   /** Direction type alias support  The Direction is a matrix of
    * direction cosines that specify the direction between samples.
@@ -395,7 +396,7 @@ public:
   VerifyRequestedRegion() override;
 
   /** Returns the continuous index from a physical point. */
-  template <typename TIndexRep, typename TCoordinate>
+  template <typename TIndexRep = PointValueType, typename TCoordinate>
   [[nodiscard]] ContinuousIndex<TIndexRep, TImage::ImageDimension>
   TransformPhysicalPointToContinuousIndex(const Point<TCoordinate, TImage::ImageDimension> & point) const
   {
@@ -454,7 +455,7 @@ public:
   }
 
   /** Returns a physical point from a continuous index (in the index space) */
-  template <typename TCoordinate, typename TIndexRep>
+  template <typename TCoordinate = PointValueType, typename TIndexRep>
   [[nodiscard]] Point<TCoordinate, TImage::ImageDimension>
   TransformContinuousIndexToPhysicalPoint(const ContinuousIndex<TIndexRep, Self::ImageDimension> & index) const
   {
@@ -474,7 +475,7 @@ public:
   }
 
   /** Returns a physical point from a discrete index (in the index space) */
-  template <typename TCoordinate>
+  template <typename TCoordinate = PointValueType>
   [[nodiscard]] Point<TCoordinate, Self::ImageDimension>
   TransformIndexToPhysicalPoint(const IndexType & index) const
   {
