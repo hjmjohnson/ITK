@@ -49,10 +49,10 @@ TestTransform()
   auto index = IndexType::Filled(5);
 
   std::cout << "TransformIndexToPhysicalPoint (dim=" << TDimension << ")..." << std::endl;
-  orientedImage->TransformIndexToPhysicalPoint(index, point);
+  point = orientedImage->TransformIndexToPhysicalPoint(index);
   std::cout << "    OrientedImage: " << index << " -> " << point << std::endl;
 
-  image->TransformIndexToPhysicalPoint(index, point);
+  point = image->TransformIndexToPhysicalPoint(index);
   std::cout << "    Image:         " << index << " -> " << point << std::endl;
 
   std::cout << "TransformPhysicalPointToIndex (dim=" << TDimension << ")..." << std::endl;
