@@ -512,7 +512,7 @@ public:
      if (image->TransformPhysicalPointToContinuousIndex(point, index)) // Et cetera...
      \endcode
    * \sa Transform */
-  template <typename TIndexRep, typename TCoordinate>
+  template <typename TIndexRep = PointValueType, typename TCoordinate>
   [[nodiscard]] ContinuousIndex<TIndexRep, VImageDimension>
   TransformPhysicalPointToContinuousIndex(const Point<TCoordinate, VImageDimension> & point) const
   {
@@ -575,7 +575,7 @@ public:
    * the origin and spacing information comes from)
    * from a continuous index (in the index space)
    * \sa Transform */
-  template <typename TCoordinate, typename TIndexRep>
+  template <typename TCoordinate = PointValueType, typename TIndexRep>
   [[nodiscard]] Point<TCoordinate, VImageDimension>
   TransformContinuousIndexToPhysicalPoint(const ContinuousIndex<TIndexRep, VImageDimension> & index) const
   {
@@ -608,7 +608,7 @@ public:
    * from a discrete index (in the index space)
    *
    * \sa Transform */
-  template <typename TCoordinate>
+  template <typename TCoordinate = PointValueType>
   [[nodiscard]] Point<TCoordinate, VImageDimension>
   TransformIndexToPhysicalPoint(const IndexType & index) const
   {
