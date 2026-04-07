@@ -461,7 +461,7 @@ PolylineMaskImageFilter<TInputImage, TPolyline, TVector, TOutputImage>::Generate
 
   while (!inputIt.IsAtEnd())
   {
-    outputImagePtr->TransformIndexToPhysicalPoint(outputIt.ComputeIndex(), inputPoint);
+    inputPoint = outputImagePtr->TransformIndexToPhysicalPoint(outputIt.ComputeIndex());
     outputPoint = this->TransformProjectPoint(inputPoint);
     projectionImageIndex = projectionImagePtr->TransformPhysicalPointToIndex(outputPoint);
 

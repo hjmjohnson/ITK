@@ -110,7 +110,7 @@ MattesMutualInformationImageToImageMetric<TFixedImage, TMovingImage>::Initialize
       typename TFixedImage::PointType fixedSpacePhysicalPoint;
       while (!fi.IsAtEnd())
       {
-        this->m_FixedImage->TransformIndexToPhysicalPoint(fi.GetIndex(), fixedSpacePhysicalPoint);
+        fixedSpacePhysicalPoint = this->m_FixedImage->TransformIndexToPhysicalPoint(fi.GetIndex());
         const bool shouldCheckPixelIntensity = this->m_FixedImageMask->IsInsideInWorldSpace(fixedSpacePhysicalPoint);
         if (shouldCheckPixelIntensity)
         {
@@ -140,7 +140,7 @@ MattesMutualInformationImageToImageMetric<TFixedImage, TMovingImage>::Initialize
         typename TMovingImage::PointType movingSpacePhysicalPoint;
         while (!mi.IsAtEnd())
         {
-          this->m_MovingImage->TransformIndexToPhysicalPoint(mi.GetIndex(), movingSpacePhysicalPoint);
+          movingSpacePhysicalPoint = this->m_MovingImage->TransformIndexToPhysicalPoint(mi.GetIndex());
           const bool shouldCheckPixelIntensity =
             this->m_MovingImageMask->IsInsideInWorldSpace(movingSpacePhysicalPoint);
           if (shouldCheckPixelIntensity)

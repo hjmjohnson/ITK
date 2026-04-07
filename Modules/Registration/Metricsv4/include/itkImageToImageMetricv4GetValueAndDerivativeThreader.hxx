@@ -34,7 +34,7 @@ ImageToImageMetricv4GetValueAndDerivativeThreader<
   for (ImageRegionConstIteratorWithIndex it(virtualImage, imageSubRegion); !it.IsAtEnd(); ++it)
   {
     const VirtualIndexType & virtualIndex = it.GetIndex();
-    virtualImage->TransformIndexToPhysicalPoint(virtualIndex, virtualPoint);
+    virtualPoint = virtualImage->TransformIndexToPhysicalPoint(virtualIndex);
     this->ProcessVirtualPoint(virtualIndex, virtualPoint, threadId);
   }
   // Finalize per thread actions

@@ -324,7 +324,7 @@ ESMDemonsRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::Co
   else if (this->m_UseGradientType == GradientEnum::MappedMoving)
   {
     PointType mappedPoint{};
-    this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedPoint);
+    mappedPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
     for (unsigned int j = 0; j < ImageDimension; ++j)
     {
       mappedPoint[j] += it.GetCenterPixel()[j];

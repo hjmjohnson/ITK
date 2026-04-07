@@ -950,7 +950,7 @@ ImageRegistrationMethodv4<TFixedImage, TMovingImage, TTransform, TVirtualImage, 
           {
             count = 0; // Reset counter
             SamplePointType point;
-            virtualImage->TransformIndexToPhysicalPoint(It.GetIndex(), point);
+            point = virtualImage->TransformIndexToPhysicalPoint(It.GetIndex());
 
             // randomly perturb the point within a voxel (approximately)
             for (SizeValueType d = 0; d < ImageDimension; ++d)
@@ -986,7 +986,7 @@ ImageRegistrationMethodv4<TFixedImage, TMovingImage, TTransform, TVirtualImage, 
         for (ItR.GoToBegin(); !ItR.IsAtEnd(); ++ItR)
         {
           SamplePointType point;
-          virtualImage->TransformIndexToPhysicalPoint(ItR.GetIndex(), point);
+          point = virtualImage->TransformIndexToPhysicalPoint(ItR.GetIndex());
 
           // randomly perturb the point within a voxel (approximately)
           for (unsigned int d = 0; d < ImageDimension; ++d)

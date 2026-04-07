@@ -288,7 +288,7 @@ SpatialObjectToImageFilter<TInputSpatialObject, TOutputImage>::GenerateData()
   while (!it.IsAtEnd())
   {
     // ValueAtInWorldSpace requires the point to be in physical coordinate i.e
-    OutputImage->TransformIndexToPhysicalPoint(it.GetIndex(), imagePoint);
+    imagePoint = OutputImage->TransformIndexToPhysicalPoint(it.GetIndex());
     for (unsigned int i = 0; i < ObjectDimension; ++i)
     {
       objectPoint[i] = imagePoint[i];

@@ -297,7 +297,7 @@ GPUDemonsRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::Co
   // Get moving image related information
   PointType mappedPoint;
 
-  this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedPoint);
+  mappedPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
   for (unsigned int j = 0; j < ImageDimension; ++j)
   {
     mappedPoint[j] += it.GetCenterPixel()[j];

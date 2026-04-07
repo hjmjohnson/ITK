@@ -65,7 +65,7 @@ ShapePriorMAPCostFunction<TFeatureImage, TOutputPixel>::ComputeLogInsideTerm(con
     NodeType                              node = iter.Value();
     typename ShapeFunctionType::PointType point;
 
-    this->GetFeatureImage()->TransformIndexToPhysicalPoint(node.GetIndex(), point);
+    point = this->GetFeatureImage()->TransformIndexToPhysicalPoint(node.GetIndex());
 
     if (node.GetValue() <= 0.0)
     {
@@ -124,7 +124,7 @@ ShapePriorMAPCostFunction<TFeatureImage, TOutputPixel>::ComputeLogGradientTerm(c
     NodeType                              node = iter.Value();
     typename ShapeFunctionType::PointType point;
 
-    this->GetFeatureImage()->TransformIndexToPhysicalPoint(node.GetIndex(), point);
+    point = this->GetFeatureImage()->TransformIndexToPhysicalPoint(node.GetIndex());
 
     sum += itk::Math::sqr(m_GaussianFunction->Evaluate(this->m_ShapeFunction->Evaluate(point)) - 1.0 +
                           this->GetFeatureImage()->GetPixel(node.GetIndex()));

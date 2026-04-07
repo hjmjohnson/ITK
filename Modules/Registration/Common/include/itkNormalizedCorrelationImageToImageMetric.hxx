@@ -59,7 +59,7 @@ NormalizedCorrelationImageToImageMetric<TFixedImage, TMovingImage>::GetValue(
     index = ti.GetIndex();
 
     InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(inputPoint))
     {
@@ -168,7 +168,7 @@ NormalizedCorrelationImageToImageMetric<TFixedImage, TMovingImage>::GetDerivativ
     index = ti.GetIndex();
 
     InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(inputPoint))
     {
@@ -212,7 +212,7 @@ NormalizedCorrelationImageToImageMetric<TFixedImage, TMovingImage>::GetDerivativ
     index = ti.GetIndex();
 
     InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(inputPoint))
     {
@@ -353,7 +353,7 @@ NormalizedCorrelationImageToImageMetric<TFixedImage, TMovingImage>::GetValueAndD
     index = ti.GetIndex();
 
     InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(inputPoint))
     {
@@ -396,7 +396,7 @@ NormalizedCorrelationImageToImageMetric<TFixedImage, TMovingImage>::GetValueAndD
     index = ti.GetIndex();
 
     InputPointType inputPoint;
-    fixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+    inputPoint = fixedImage->TransformIndexToPhysicalPoint(index);
 
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(inputPoint))
     {

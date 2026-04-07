@@ -48,7 +48,7 @@ LevelSetDomainPartitionImageWithKdTree<TImage>::PopulateDomainWithKdTree()
     const ListIndexType & index = lIt.GetIndex();
     ListPointType         pt;
 
-    this->m_ListDomain->TransformIndexToPhysicalPoint(index, pt);
+    pt = this->m_ListDomain->TransformIndexToPhysicalPoint(index);
 
     const CentroidVectorType queryPoint = pt.GetVectorFromOrigin();
 

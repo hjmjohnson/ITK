@@ -128,7 +128,7 @@ ImageToParametricSpaceFilter<TInputImage, TOutputMesh>::GenerateData()
       //  of the corresponding pixel on the image.
       using MeshPixelType = typename OutputMeshType::PixelType;
       MeshPixelType point;
-      image->TransformIndexToPhysicalPoint(itr.GetIndex(), point);
+      point = image->TransformIndexToPhysicalPoint(itr.GetIndex());
       (data.Value()) = point;
       ++itr;
       ++data;

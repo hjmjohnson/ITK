@@ -131,7 +131,7 @@ NCCRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::ComputeU
       using DeformationPixelType = typename TDisplacementField::PixelType;
       const DeformationPixelType vec = this->GetDisplacementField()->GetPixel(index);
       PointType                  mappedPoint;
-      this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedPoint);
+      mappedPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
       for (unsigned int j = 0; j < ImageDimension; ++j)
       {
         mappedPoint[j] += vec[j];

@@ -117,7 +117,7 @@ MutualInformationImageToImageMetric<TFixedImage, TMovingImage>::SampleFixedImage
     // Get sampled fixed image value
     iter->FixedImageValue = randIter.Get();
     // Translate index to point
-    this->m_FixedImage->TransformIndexToPhysicalPoint(index, iter->FixedImagePointValue);
+    iter->FixedImagePointValue = this->m_FixedImage->TransformIndexToPhysicalPoint(index);
 
     // If not inside the fixed mask, ignore the point
     if (this->m_FixedImageMask && !this->m_FixedImageMask->IsInsideInWorldSpace(iter->FixedImagePointValue))

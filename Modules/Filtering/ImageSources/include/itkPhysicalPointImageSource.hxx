@@ -58,7 +58,7 @@ PhysicalPointImageSource<TOutputImage>::DynamicThreadedGenerateData(const Region
 
   for (; !it.IsAtEnd(); ++it)
   {
-    image->TransformIndexToPhysicalPoint(it.GetIndex(), pt);
+    pt = image->TransformIndexToPhysicalPoint(it.GetIndex());
 
     for (unsigned int i = 0; i < TOutputImage::ImageDimension; ++i)
     {

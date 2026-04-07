@@ -152,7 +152,7 @@ SymmetricForcesDemonsRegistrationFunction<TFixedImage, TMovingImage, TDisplaceme
 
   using DisplacementPixelType = typename DisplacementFieldType::PixelType;
   PointType mappedCenterPoint;
-  this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedCenterPoint);
+  mappedCenterPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
   for (unsigned int dim = 0; dim < ImageDimension; ++dim)
   {
     mappedCenterPoint[dim] += it.GetCenterPixel()[dim];
@@ -165,7 +165,7 @@ SymmetricForcesDemonsRegistrationFunction<TFixedImage, TMovingImage, TDisplaceme
     {
       tmpIndex[dim] += 1;
       DisplacementPixelType displacement = field->GetPixel(tmpIndex);
-      this->GetFixedImage()->TransformIndexToPhysicalPoint(tmpIndex, mappedNeighPoint);
+      mappedNeighPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(tmpIndex);
       for (unsigned int j = 0; j < ImageDimension; ++j)
       {
         mappedNeighPoint[j] += displacement[j];
@@ -181,7 +181,7 @@ SymmetricForcesDemonsRegistrationFunction<TFixedImage, TMovingImage, TDisplaceme
 
       tmpIndex[dim] -= 2;
       displacement = field->GetPixel(tmpIndex);
-      this->GetFixedImage()->TransformIndexToPhysicalPoint(tmpIndex, mappedNeighPoint);
+      mappedNeighPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(tmpIndex);
       for (unsigned int j = 0; j < ImageDimension; ++j)
       {
         mappedNeighPoint[j] += displacement[j];

@@ -189,7 +189,7 @@ MIRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::ComputeUp
       const DeformationPixelType itvec = this->GetDisplacementField()->GetPixel(index);
 
       PointType mappedPoint;
-      this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedPoint);
+      mappedPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
       for (unsigned int j = 0; j < ImageDimension; ++j)
       {
         mappedPoint[j] += itvec[j];
@@ -282,7 +282,7 @@ MIRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::ComputeUp
         using DeformationPixelType = typename DisplacementFieldType::PixelType;
         const DeformationPixelType itvec = this->GetDisplacementField()->GetPixel(index);
         PointType                  mappedPoint;
-        this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedPoint);
+        mappedPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
         for (unsigned int j = 0; j < ImageDimension; ++j)
         {
           mappedPoint[j] += itvec[j];
@@ -352,7 +352,7 @@ MIRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::ComputeUp
       // Get moving image related information
       const typename DisplacementFieldType::PixelType hooditvec = this->m_DisplacementField->GetPixel(index);
       PointType                                       mappedPoint;
-      this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedPoint);
+      mappedPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
       for (unsigned int j = 0; j < ImageDimension; ++j)
       {
         mappedPoint[j] += hooditvec[j];

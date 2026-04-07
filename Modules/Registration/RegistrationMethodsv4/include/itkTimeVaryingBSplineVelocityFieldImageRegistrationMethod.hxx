@@ -524,7 +524,7 @@ TimeVaryingBSplineVelocityFieldImageRegistrationMethod<
         {
           typename DisplacementFieldType::PointType imagePoint;
 
-          fixedDisplacementField->TransformIndexToPhysicalPoint(index, imagePoint);
+          imagePoint = fixedDisplacementField->TransformIndexToPhysicalPoint(index);
           typename VelocityFieldPointSetType::PointType spatioTemporalPoint;
           for (unsigned int d = 0; d < ImageDimension; ++d)
           {
@@ -795,7 +795,7 @@ TimeVaryingBSplineVelocityFieldImageRegistrationMethod<
       cidx[d] = static_cast<typename ContinuousIndexType::CoordinateType>(index[d]);
     }
     DisplacementFieldPointType parametricPoint;
-    bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx, parametricPoint);
+    parametricPoint = bsplineParametricDomainField->TransformContinuousIndexToPhysicalPoint(cidx);
 
     typename VelocityFieldPointSetType::PointType velocityFieldPoint;
 

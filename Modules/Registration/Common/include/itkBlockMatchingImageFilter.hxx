@@ -357,7 +357,7 @@ BlockMatchingImageFilter<TFixedImage, TMovingImage, TFeatures, TDisplacements, T
       if (sim >= similarity)
       {
         FeaturePointsPhysicalCoordinates newLocation;
-        fixedImage->TransformIndexToPhysicalPoint(windowIterator.GetIndex(), newLocation);
+        newLocation = fixedImage->TransformIndexToPhysicalPoint(windowIterator.GetIndex());
         displacement = newLocation - originalLocation;
         similarity = sim;
       }

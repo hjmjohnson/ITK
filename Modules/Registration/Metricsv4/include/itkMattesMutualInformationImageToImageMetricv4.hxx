@@ -162,7 +162,7 @@ MattesMutualInformationImageToImageMetricv4<TFixedImage,
         while (!fi.IsAtEnd())
         {
           typename TFixedImage::PointType fixedSpacePhysicalPoint;
-          this->m_FixedImage->TransformIndexToPhysicalPoint(fi.GetIndex(), fixedSpacePhysicalPoint);
+          fixedSpacePhysicalPoint = this->m_FixedImage->TransformIndexToPhysicalPoint(fi.GetIndex());
           const bool usePoint = this->m_FixedImageMask->IsInsideInWorldSpace(fixedSpacePhysicalPoint);
           if (usePoint)
           {
@@ -201,7 +201,7 @@ MattesMutualInformationImageToImageMetricv4<TFixedImage,
         while (!mi.IsAtEnd())
         {
           typename TMovingImage::PointType movingSpacePhysicalPoint;
-          this->m_MovingImage->TransformIndexToPhysicalPoint(mi.GetIndex(), movingSpacePhysicalPoint);
+          movingSpacePhysicalPoint = this->m_MovingImage->TransformIndexToPhysicalPoint(mi.GetIndex());
           const bool usePoint = this->m_MovingImageMask->IsInsideInWorldSpace(movingSpacePhysicalPoint);
           if (usePoint)
           {

@@ -88,7 +88,7 @@ ComposeDisplacementFieldsImageFilter<InputImage, TOutputImage>::DynamicThreadedG
 
   for (ItW.GoToBegin(), ItF.GoToBegin(); !ItW.IsAtEnd(); ++ItW, ++ItF)
   {
-    warpingField->TransformIndexToPhysicalPoint(ItW.GetIndex(), pointIn1);
+    pointIn1 = warpingField->TransformIndexToPhysicalPoint(ItW.GetIndex());
 
     VectorType warpVector = ItW.Get();
 

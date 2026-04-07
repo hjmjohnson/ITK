@@ -123,7 +123,7 @@ ShrinkImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   // We wish to perform the following mapping of outputIndex to
   // inputIndex on all points in our region
   typename TOutputImage::PointType tempPoint;
-  outputPtr->TransformIndexToPhysicalPoint(outputIndex, tempPoint);
+  tempPoint = outputPtr->TransformIndexToPhysicalPoint(outputIndex);
   InputIndexType inputIndex = inputPtr->TransformPhysicalPointToIndex(tempPoint);
 
   // Given that the size is scaled by a constant factor eq:
@@ -196,7 +196,7 @@ ShrinkImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
   // We wish to perform the following mapping of outputIndex to
   // inputIndex on all points in our region
   typename TOutputImage::PointType tempPoint;
-  outputPtr->TransformIndexToPhysicalPoint(outputIndex, tempPoint);
+  tempPoint = outputPtr->TransformIndexToPhysicalPoint(outputIndex);
   InputIndexType inputIndex = inputPtr->TransformPhysicalPointToIndex(tempPoint);
 
   // Given that the size is scaled by a constant factor eq:
@@ -287,8 +287,8 @@ ShrinkImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
 
   typename TOutputImage::PointType inputCenterPoint;
   typename TOutputImage::PointType outputCenterPoint;
-  inputPtr->TransformContinuousIndexToPhysicalPoint(inputCenterIndex, inputCenterPoint);
-  outputPtr->TransformContinuousIndexToPhysicalPoint(outputCenterIndex, outputCenterPoint);
+  inputCenterPoint = inputPtr->TransformContinuousIndexToPhysicalPoint(inputCenterIndex);
+  outputCenterPoint = outputPtr->TransformContinuousIndexToPhysicalPoint(outputCenterIndex);
 
   const typename TOutputImage::PointType & inputOrigin = inputPtr->GetOrigin();
   const typename TOutputImage::PointType   outputOrigin = inputOrigin + (inputCenterPoint - outputCenterPoint);

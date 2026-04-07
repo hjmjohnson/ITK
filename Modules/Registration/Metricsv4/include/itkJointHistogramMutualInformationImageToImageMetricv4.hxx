@@ -91,7 +91,7 @@ JointHistogramMutualInformationImageToImageMetricv4<TFixedImage,
   while (!fi.IsAtEnd())
   {
     typename TFixedImage::PointType fixedSpacePhysicalPoint;
-    this->m_FixedImage->TransformIndexToPhysicalPoint(fi.GetIndex(), fixedSpacePhysicalPoint);
+    fixedSpacePhysicalPoint = this->m_FixedImage->TransformIndexToPhysicalPoint(fi.GetIndex());
     /* A null mask implies entire space is to be used.*/
     if (this->m_FixedImageMask.IsNull() || this->m_FixedImageMask->IsInsideInWorldSpace(fixedSpacePhysicalPoint))
     {
@@ -116,7 +116,7 @@ JointHistogramMutualInformationImageToImageMetricv4<TFixedImage,
   while (!mi.IsAtEnd())
   {
     typename TMovingImage::PointType movingSpacePhysicalPoint;
-    this->m_MovingImage->TransformIndexToPhysicalPoint(mi.GetIndex(), movingSpacePhysicalPoint);
+    movingSpacePhysicalPoint = this->m_MovingImage->TransformIndexToPhysicalPoint(mi.GetIndex());
 
     /* A null mask implies entire space is to be used.*/
     if (this->m_MovingImageMask.IsNull() || this->m_MovingImageMask->IsInsideInWorldSpace(movingSpacePhysicalPoint))

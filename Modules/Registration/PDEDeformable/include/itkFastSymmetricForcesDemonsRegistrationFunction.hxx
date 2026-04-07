@@ -173,7 +173,7 @@ FastSymmetricForcesDemonsRegistrationFunction<TFixedImage, TMovingImage, TDispla
   // center point coordinates
   PointType mappedCenterPoint;
 
-  this->GetFixedImage()->TransformIndexToPhysicalPoint(index, mappedCenterPoint);
+  mappedCenterPoint = this->GetFixedImage()->TransformIndexToPhysicalPoint(index);
   for (unsigned int dim = 0; dim < ImageDimension; ++dim)
   {
     mappedCenterPoint[dim] += it.GetCenterPixel()[dim];

@@ -258,9 +258,7 @@ ImageAlgorithm::EnlargeRegionOverBox(const typename InputImageType::RegionType &
     }
 
     using InputPointType = Point<SpacePrecisionType, InputImageType::ImageDimension>;
-    const InputPointType inputPoint =
-      inputImage->template TransformContinuousIndexToPhysicalPoint<SpacePrecisionType, ContinuousIndexValueType>(
-        currentInputCornerIndex);
+    const InputPointType inputPoint = inputImage->TransformContinuousIndexToPhysicalPoint(currentInputCornerIndex);
     using OutputPointType = Point<SpacePrecisionType, OutputImageType::ImageDimension>;
     OutputPointType outputPoint{};
     if (transform != nullptr)

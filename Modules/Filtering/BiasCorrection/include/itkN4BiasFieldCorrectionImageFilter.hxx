@@ -521,7 +521,7 @@ N4BiasFieldCorrectionImageFilter<TInputImage, TMaskImage, TOutputImage>::UpdateB
         (confidenceImageBufferRange.empty() || confidenceImageBufferRange[indexValue] > 0.0))
     {
       PointType point;
-      parametricFieldEstimate->TransformIndexToPhysicalPoint(It.GetIndex(), point);
+      point = parametricFieldEstimate->TransformIndexToPhysicalPoint(It.GetIndex());
 
       ScalarType scalar;
       scalar[0] = It.Get();

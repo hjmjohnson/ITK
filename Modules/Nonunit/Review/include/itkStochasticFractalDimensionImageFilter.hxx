@@ -123,7 +123,7 @@ StochasticFractalDimensionImageFilter<TInputImage, TMaskImage, TOutputImage>::Ge
         if (!this->m_MaskImage || this->m_MaskImage->GetPixel(It.GetIndex(i)))
         {
           PointType point1;
-          inputImage->TransformIndexToPhysicalPoint(It.GetIndex(i), point1);
+          point1 = inputImage->TransformIndexToPhysicalPoint(It.GetIndex(i));
 
           for (unsigned int j = 0; j < It.GetNeighborhood().Size(); ++j)
           {
@@ -143,7 +143,7 @@ StochasticFractalDimensionImageFilter<TInputImage, TMaskImage, TOutputImage>::Ge
             if (!this->m_MaskImage || this->m_MaskImage->GetPixel(It.GetIndex(j)))
             {
               PointType point2;
-              inputImage->TransformIndexToPhysicalPoint(It.GetIndex(j), point2);
+              point2 = inputImage->TransformIndexToPhysicalPoint(It.GetIndex(j));
 
               const RealType distance = point1.SquaredEuclideanDistanceTo(point2);
 

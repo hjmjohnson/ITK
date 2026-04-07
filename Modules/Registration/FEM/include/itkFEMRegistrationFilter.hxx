@@ -643,7 +643,7 @@ FEMRegistrationFilter<TMovingImage, TFixedImage, TFemObject>::InterpolateVectorF
       // Get element pointer from the solver elt pointer image
       typename FieldType::PointType physicalPoint;
       rindex = fieldIter.GetIndex();
-      field->TransformIndexToPhysicalPoint(rindex, physicalPoint);
+      physicalPoint = field->TransformIndexToPhysicalPoint(rindex);
       for (unsigned int d = 0; d < ImageDimension; ++d)
       {
         Gpt[d] = static_cast<double>(physicalPoint[d]);
@@ -734,7 +734,7 @@ FEMRegistrationFilter<TMovingImage, TFixedImage, TFemObject>::InterpolateVectorF
               physicalPoint[f] = Gpt[f];
             }
 
-            inimage = m_FixedImage->TransformPhysicalPointToIndex(physicalPoint, rindex);
+            rindex = inimage = m_FixedImage->TransformPhysicalPointToIndex(physicalPoint);
             if (inimage)
             {
               field->SetPixel(rindex, disp);

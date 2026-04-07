@@ -1034,7 +1034,7 @@ RobustSolver<VDimension>::InitializeInterpolationGrid()
     {
       // Note: Iterator is guaranteed to be within image, since the
       // elements with BB outside are skipped before.
-      this->m_InterpolationGrid->TransformIndexToPhysicalPoint(iter.ComputeIndex(), pt);
+      pt = this->m_InterpolationGrid->TransformIndexToPhysicalPoint(iter.ComputeIndex());
       for (FEMIndexType d = 0; d < NumberOfDimensions; ++d)
       {
         global_point[d] = pt[d];

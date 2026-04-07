@@ -441,7 +441,7 @@ ImageToImageMetric<TFixedImage, TMovingImage>::SampleFixedImageIndexes(FixedImag
     // Get sampled index
     const FixedImageIndexType index = m_FixedImageIndexes[i];
     // Translate index to point
-    m_FixedImage->TransformIndexToPhysicalPoint(index, iter->point);
+    iter->point = m_FixedImage->TransformIndexToPhysicalPoint(index);
 
     // Get sampled fixed image value
     iter->value = m_FixedImage->GetPixel(index);
@@ -509,7 +509,7 @@ ImageToImageMetric<TFixedImage, TMovingImage>::SampleFixedImageRegion(FixedImage
       // Get sampled index
       const FixedImageIndexType index = randIter.GetIndex();
       // Check if the Index is inside the mask, translate index to point
-      m_FixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+      inputPoint = m_FixedImage->TransformIndexToPhysicalPoint(index);
 
       if (m_FixedImageMask.IsNotNull())
       {
@@ -555,7 +555,7 @@ ImageToImageMetric<TFixedImage, TMovingImage>::SampleFixedImageRegion(FixedImage
       // Get sampled index
       const FixedImageIndexType index = randIter.GetIndex();
       // Translate index to point
-      m_FixedImage->TransformIndexToPhysicalPoint(index, iter->point);
+      iter->point = m_FixedImage->TransformIndexToPhysicalPoint(index);
       // Get sampled fixed image value
       iter->value = randIter.Get();
       iter->valueIndex = 0;
@@ -594,7 +594,7 @@ ImageToImageMetric<TFixedImage, TMovingImage>::SampleFullFixedImageRegion(FixedI
       // Get sampled index
       const FixedImageIndexType index = regionIter.GetIndex();
       // Check if the Index is inside the mask, translate index to point
-      m_FixedImage->TransformIndexToPhysicalPoint(index, inputPoint);
+      inputPoint = m_FixedImage->TransformIndexToPhysicalPoint(index);
 
       if (m_FixedImageMask.IsNotNull())
       {
@@ -642,7 +642,7 @@ ImageToImageMetric<TFixedImage, TMovingImage>::SampleFullFixedImageRegion(FixedI
       const FixedImageIndexType index = regionIter.GetIndex();
 
       // Translate index to point
-      m_FixedImage->TransformIndexToPhysicalPoint(index, iter->point);
+      iter->point = m_FixedImage->TransformIndexToPhysicalPoint(index);
       // Get sampled fixed image value
       iter->value = regionIter.Get();
       iter->valueIndex = 0;

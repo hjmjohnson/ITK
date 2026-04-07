@@ -388,7 +388,7 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
     // Determine the index of the current output pixel
 
     OutputPointType outputPoint; // Coordinates of current output pixel
-    outputPtr->TransformIndexToPhysicalPoint(outIt.GetIndex(), outputPoint);
+    outputPoint = outputPtr->TransformIndexToPhysicalPoint(outIt.GetIndex());
 
     // Compute corresponding input pixel position
     const InputPointType inputPoint = transformPtr->TransformPoint(outputPoint);

@@ -147,7 +147,7 @@ SLICImageFilter<TInputImage, TOutputImage, TDistancePixel>::BeforeThreadedGenera
 
       const IndexType &                  idx = it.ComputeIndex();
       typename InputImageType::PointType pt;
-      shrunkImage->TransformIndexToPhysicalPoint(idx, pt);
+      pt = shrunkImage->TransformIndexToPhysicalPoint(idx);
       const ContinuousIndexType cidx =
         inputImage->template TransformPhysicalPointToContinuousIndex<typename PointType::ValueType>(pt);
       for (unsigned int i = 0; i < ImageDimension; ++i)

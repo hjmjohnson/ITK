@@ -840,7 +840,7 @@ Solver<VDimension>::FillInterpolationGrid()
     {
       // Note: Iterator is guaranteed to be within image, since the
       //       elements with BB outside are skipped before.
-      m_InterpolationGrid->TransformIndexToPhysicalPoint(iter.ComputeIndex(), pt);
+      pt = m_InterpolationGrid->TransformIndexToPhysicalPoint(iter.ComputeIndex());
       for (unsigned int d = 0; d < NumberOfDimensions; ++d)
       {
         global_point[d] = pt[d];
