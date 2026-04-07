@@ -76,7 +76,7 @@ itkHessianRecursiveGaussianFilterScaleSpaceTest(int, char *[])
     // scales, only sigma should change
     while (!it.IsAtEnd())
     {
-      inputImage->TransformIndexToPhysicalPoint(it.GetIndex(), point);
+      point = inputImage->TransformIndexToPhysicalPoint(it.GetIndex());
       const double value = std::exp(-point[0] * point[0] / (2.0 * objectSize * objectSize));
       it.Set(value);
       ++it;
@@ -130,7 +130,7 @@ itkHessianRecursiveGaussianFilterScaleSpaceTest(int, char *[])
     // scales, only sigma should change
     while (!it.IsAtEnd())
     {
-      inputImage->TransformIndexToPhysicalPoint(it.GetIndex(), point);
+      point = inputImage->TransformIndexToPhysicalPoint(it.GetIndex());
       const double value = std::exp(-point[0] * point[0] / (2.0 * objectSize * objectSize));
       it.Set(value);
       ++it;

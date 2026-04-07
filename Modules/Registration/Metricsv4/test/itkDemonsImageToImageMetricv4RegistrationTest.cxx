@@ -217,7 +217,7 @@ itkDemonsImageToImageMetricv4RegistrationTest(int argc, char * argv[])
       if (ct % 10 == 0)
       {
         PointType pt;
-        fixedImage->TransformIndexToPhysicalPoint(It.GetIndex(), pt);
+        pt = fixedImage->TransformIndexToPhysicalPoint(It.GetIndex());
         pset->SetPoint(ind, pt);
         ind++;
       }

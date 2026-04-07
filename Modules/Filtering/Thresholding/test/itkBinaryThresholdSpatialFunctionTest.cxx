@@ -139,7 +139,7 @@ itkBinaryThresholdSpatialFunctionTest(int, char *[])
   while (!iterator.IsAtEnd())
   {
     index = iterator.GetIndex();
-    image->TransformIndexToPhysicalPoint(index, point);
+    point = image->TransformIndexToPhysicalPoint(index);
     const double value = sphere->Evaluate(point);
 
     // Check if value is within range

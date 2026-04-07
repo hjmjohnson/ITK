@@ -45,10 +45,10 @@ CheckValueIsPhysicalPoint(const TImageType * img)
   bool match = true;
 
   typename TImageType::PointType pt;
-  img->TransformIndexToPhysicalPoint(it.ComputeIndex(), pt);
+  pt = img->TransformIndexToPhysicalPoint(it.ComputeIndex());
   while (!it.IsAtEnd())
   {
-    img->TransformIndexToPhysicalPoint(it.ComputeIndex(), pt);
+    pt = img->TransformIndexToPhysicalPoint(it.ComputeIndex());
     for (unsigned int i = 0; i < TImageType::ImageDimension; ++i)
     {
       EXPECT_DOUBLE_EQ(pt[i], it.Get()[i])

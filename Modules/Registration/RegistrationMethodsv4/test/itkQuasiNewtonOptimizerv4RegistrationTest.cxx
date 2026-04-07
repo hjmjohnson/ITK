@@ -159,7 +159,7 @@ itkQuasiNewtonOptimizerv4RegistrationTestMain(int argc, char * argv[])
       if (ct % 20 == 0)
       {
         PointType pt;
-        fixedImage->TransformIndexToPhysicalPoint(It.GetIndex(), pt);
+        pt = fixedImage->TransformIndexToPhysicalPoint(It.GetIndex());
         pset->SetPoint(ind, pt);
         ind++;
       }

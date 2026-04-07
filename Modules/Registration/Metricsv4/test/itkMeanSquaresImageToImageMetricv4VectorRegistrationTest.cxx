@@ -161,7 +161,7 @@ itkMeanSquaresImageToImageMetricv4VectorRegistrationTest(int argc, char * argv[]
     if (ct % 2 == 0)
     {
       PointType pt;
-      fixedImage->TransformIndexToPhysicalPoint(It.GetIndex(), pt);
+      pt = fixedImage->TransformIndexToPhysicalPoint(It.GetIndex());
       pset->SetPoint(ind, pt);
       ind++;
     }

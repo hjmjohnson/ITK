@@ -82,7 +82,7 @@ FastChamferDistanceImageFilterTest(unsigned int iPositive, unsigned int iNegativ
   while (!it.IsAtEnd())
   {
     PointType point;
-    inputImage->TransformIndexToPhysicalPoint(it.GetIndex(), point);
+    point = inputImage->TransformIndexToPhysicalPoint(it.GetIndex());
     it.Set(SimpleSignedDistance(point));
     ++it;
   }

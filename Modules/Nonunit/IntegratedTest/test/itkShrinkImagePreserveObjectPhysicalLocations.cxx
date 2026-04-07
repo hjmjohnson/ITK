@@ -78,11 +78,11 @@ GetImageCenterPhysicalPoint(TImageType::Pointer & image)
     centerIndex[q] = 0.5 * (imageOverallSize[q] - 1);
   }
   TImageType::PointType centerLocation;
-  image->TransformContinuousIndexToPhysicalPoint(centerIndex, centerLocation);
+  centerLocation = image->TransformContinuousIndexToPhysicalPoint(centerIndex);
   TImageType::PointType firstLocation;
-  image->TransformContinuousIndexToPhysicalPoint(firstIndex, firstLocation);
+  firstLocation = image->TransformContinuousIndexToPhysicalPoint(firstIndex);
   TImageType::PointType lastLocation;
-  image->TransformContinuousIndexToPhysicalPoint(lastIndex, lastLocation);
+  lastLocation = image->TransformContinuousIndexToPhysicalPoint(lastIndex);
   std::cout << "FirstLocation=" << firstLocation << " LastLocation=" << lastLocation
             << " CenterLocation=" << centerLocation << std::endl;
   return centerLocation;
@@ -118,7 +118,7 @@ ComputeCG(TImageType::Pointer img)
     sumMass += value;
     const TImageType::IndexType indexPosition = it.GetIndex();
     TImageType::PointType       physicalPosition;
-    img->TransformIndexToPhysicalPoint(indexPosition, physicalPosition);
+    physicalPosition = img->TransformIndexToPhysicalPoint(indexPosition);
 
     for (unsigned int i = 0; i < TImageType::ImageDimension; ++i)
     {

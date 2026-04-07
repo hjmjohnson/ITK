@@ -138,7 +138,7 @@ itkNarrowBandImageFilterBaseTest(int argc, char * argv[])
   while (!iter.IsAtEnd())
   {
     PointType point;
-    inputImage->TransformIndexToPhysicalPoint(iter.GetIndex(), point);
+    point = inputImage->TransformIndexToPhysicalPoint(iter.GetIndex());
     iter.Set(SimpleSignedDistance(point));
     ++iter;
   }

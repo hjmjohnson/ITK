@@ -148,7 +148,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   {
     const ImageType::IndexType   index = it.ComputeIndex();
     ShapeFunctionType::PointType point;
-    inputImage->TransformIndexToPhysicalPoint(index, point);
+    point = inputImage->TransformIndexToPhysicalPoint(index);
     if (shape->Evaluate(point) <= 0.0)
     {
       it.Set(foreground);

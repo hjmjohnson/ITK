@@ -36,12 +36,12 @@ CheckValueIsPhysicalPoint(const TImageType * img)
   bool match = true;
 
   typename TImageType::PointType pt;
-  img->TransformIndexToPhysicalPoint(it.ComputeIndex(), pt);
+  pt = img->TransformIndexToPhysicalPoint(it.ComputeIndex());
   while (!it.IsAtEnd())
   {
     for (unsigned int i = 0; i < TImageType::ImageDimension; ++i)
     {
-      img->TransformIndexToPhysicalPoint(it.ComputeIndex(), pt);
+      pt = img->TransformIndexToPhysicalPoint(it.ComputeIndex());
       if (!itk::Math::FloatAlmostEqual<itk::SpacePrecisionType>(pt[i], it.Get()[i]))
       {
         typename TImageType::PointType::VectorType diff;

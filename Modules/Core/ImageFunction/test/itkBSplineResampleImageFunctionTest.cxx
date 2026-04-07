@@ -69,7 +69,7 @@ itkBSplineResampleImageFunctionTest(int, char *[])
   ImageType::IndexType Last{};
   Last[0] = randImage->GetLargestPossibleRegion().GetSize()[0] - 1;
   ImageType::PointType LastPhysicalLocation;
-  randImage->TransformIndexToPhysicalPoint(Last, LastPhysicalLocation);
+  LastPhysicalLocation = randImage->TransformIndexToPhysicalPoint(Last);
 
   const double minValue = randImage->GetOrigin()[0];
   const double maxValue = LastPhysicalLocation[0];

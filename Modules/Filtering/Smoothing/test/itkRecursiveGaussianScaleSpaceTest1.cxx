@@ -60,7 +60,7 @@ NormalizeSineWave(double frequencyPerImage, unsigned int order, double pixelSpac
   while (!iter.IsAtEnd())
   {
     ImageType::PointType p;
-    image->TransformIndexToPhysicalPoint(iter.ComputeIndex(), p);
+    p = image->TransformIndexToPhysicalPoint(iter.ComputeIndex());
     const double x = p[0];
     const double value = std::sin(x * frequency);
 

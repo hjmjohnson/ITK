@@ -171,7 +171,7 @@ itkRegistrationParameterScalesFromIndexShiftTest(int, char *[])
   RegistrationParameterScalesFromShiftType::ScalesType theoreticalMovingScales(
     movingTransform->GetNumberOfParameters());
   VirtualImageType::PointType upperPoint;
-  virtualImage->TransformIndexToPhysicalPoint(virtualImage->GetLargestPossibleRegion().GetUpperIndex(), upperPoint);
+  upperPoint = virtualImage->TransformIndexToPhysicalPoint(virtualImage->GetLargestPossibleRegion().GetUpperIndex());
 
   itk::SizeValueType param = 0;
   for (itk::SizeValueType row = 0; row < ImageDimension; ++row)

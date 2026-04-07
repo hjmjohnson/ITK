@@ -88,7 +88,7 @@ itkApproximateSignedDistanceMapImageFilterTest(int argc, char * argv[])
   while (!iter.IsAtEnd())
   {
     PointType point;
-    image->TransformIndexToPhysicalPoint(iter.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(iter.GetIndex());
     iter.Set(SimpleSignedDistance(point) > 0 ? outsideValue : insideValue);
     ++iter;
   }
@@ -149,7 +149,7 @@ itkApproximateSignedDistanceMapImageFilterTest(int argc, char * argv[])
   while (!oIt.IsAtEnd())
   {
     PointType point;
-    image->TransformIndexToPhysicalPoint(oIt.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(oIt.GetIndex());
     const OutputPixelType distance = itk::Math::Absolute(oIt.Get() - SimpleSignedDistance(point));
     if (distance > maxDistance)
     {

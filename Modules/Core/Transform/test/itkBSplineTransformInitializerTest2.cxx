@@ -107,7 +107,7 @@ itkBSplineTransformInitializerTest2(int argc, char * argv[])
   for (it.GoToBegin(); !it.IsAtEnd(); ++it)
   {
     FixedImageType::PointType point;
-    coefficientImages[0]->TransformIndexToPhysicalPoint(it.GetIndex(), point);
+    point = coefficientImages[0]->TransformIndexToPhysicalPoint(it.GetIndex());
     controlPointLocations.push_back(point);
   }
 
@@ -147,7 +147,7 @@ itkBSplineTransformInitializerTest2(int argc, char * argv[])
   for (it2.GoToBegin(); !it2.IsAtEnd(); ++it2)
   {
     FixedImageType::PointType point;
-    coefficientImages[0]->TransformIndexToPhysicalPoint(it2.GetIndex(), point);
+    point = coefficientImages[0]->TransformIndexToPhysicalPoint(it2.GetIndex());
     controlPointLocations2.push_back(point);
   }
 

@@ -99,7 +99,7 @@ itkImageMaskSpatialObjectTest3(int, char *[])
   for (it.GoToBegin(); !it.IsAtEnd(); ++it)
   {
     ImageType::PointType point;
-    image->TransformIndexToPhysicalPoint(it.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(it.GetIndex());
     if (imageMaskSpatialObject->IsInsideInWorldSpace(point))
     {
       std::cout << "Pixel Reported Inside mask, even though mask image is all zeros" << std::endl;

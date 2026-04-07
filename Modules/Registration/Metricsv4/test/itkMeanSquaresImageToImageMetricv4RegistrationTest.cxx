@@ -153,7 +153,7 @@ itkMeanSquaresImageToImageMetricv4RegistrationTest(int argc, char * argv[])
     if (ct % 20 == 0) // about a factor of 5 speed-up over dense
     {
       PointType pt;
-      fixedImage->TransformIndexToPhysicalPoint(It.GetIndex(), pt);
+      pt = fixedImage->TransformIndexToPhysicalPoint(It.GetIndex());
       pset->SetPoint(ind, pt);
       ind++;
     }

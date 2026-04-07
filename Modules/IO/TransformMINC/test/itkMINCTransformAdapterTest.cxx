@@ -213,7 +213,7 @@ compare_nonlinear_double(const char * nonlinear_transform)
     DisplacementFieldTransform::OutputPointType v2;
     DisplacementFieldType::PointType            pnt;
 
-    field->TransformIndexToPhysicalPoint(it.GetIndex(), pnt);
+    pnt = field->TransformIndexToPhysicalPoint(it.GetIndex());
 
     v1 = disp->TransformPoint(pnt);
     v2 = xfm->TransformPoint(pnt);

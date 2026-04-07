@@ -135,7 +135,7 @@ ImageToImageMetricv4RegistrationTestRun(typename TMetric::Pointer  metric,
       if (ct % 2 == 0)
       {
         PointType pt;
-        fixedImage->TransformIndexToPhysicalPoint(itS.GetIndex(), pt);
+        pt = fixedImage->TransformIndexToPhysicalPoint(itS.GetIndex());
         pset->SetPoint(ind, pt);
         ind++;
       }

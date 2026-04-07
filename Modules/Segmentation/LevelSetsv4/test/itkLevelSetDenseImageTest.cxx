@@ -117,7 +117,7 @@ itkLevelSetDenseImageTest(int, char *[])
   while (!it.IsAtEnd())
   {
     idx = it.GetIndex();
-    input->TransformIndexToPhysicalPoint(idx, pt);
+    pt = input->TransformIndexToPhysicalPoint(idx);
 
     const PixelType tempValue = testFunction->Evaluate(pt);
     it.Set(tempValue);
@@ -141,7 +141,7 @@ itkLevelSetDenseImageTest(int, char *[])
   while (!it.IsAtEnd())
   {
     idx = it.GetIndex();
-    input->TransformIndexToPhysicalPoint(idx, pt);
+    pt = input->TransformIndexToPhysicalPoint(idx);
 
     const LevelSetType::OutputType theoreticalValue = testFunction->Evaluate(pt);
     const LevelSetType::OutputType value = levelSet->Evaluate(idx);
@@ -167,7 +167,7 @@ itkLevelSetDenseImageTest(int, char *[])
   while (!it.IsAtEnd())
   {
     idx = it.GetIndex();
-    input->TransformIndexToPhysicalPoint(idx, pt);
+    pt = input->TransformIndexToPhysicalPoint(idx);
 
     LevelSetType::GradientType theoreticalGradient = testFunction->EvaluateGradient(pt);
     LevelSetType::GradientType gradient = levelSet->EvaluateGradient(idx);
@@ -188,7 +188,7 @@ itkLevelSetDenseImageTest(int, char *[])
    * laplacian, gradient norm. */
   idx[0] = 9;
   idx[1] = 18;
-  input->TransformIndexToPhysicalPoint(idx, pt);
+  pt = input->TransformIndexToPhysicalPoint(idx);
   LevelSetType::HessianType hessian = levelSet->EvaluateHessian(idx);
   std::cout << "hessian = " << std::endl << hessian << std::endl;
 

@@ -182,7 +182,7 @@ itkVectorExpandImageFilterTest(int, char *[])
     {
 
       ImageType::PointType point;
-      expanderOutput->TransformIndexToPhysicalPoint(outIter.GetIndex(), point);
+      point = expanderOutput->TransformIndexToPhysicalPoint(outIter.GetIndex());
       const ImageType::IndexType inputIndex = input->TransformPhysicalPointToIndex(point);
       const double               baseValue = pattern.Evaluate(inputIndex);
 

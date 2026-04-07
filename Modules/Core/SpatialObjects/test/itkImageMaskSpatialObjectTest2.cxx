@@ -113,7 +113,7 @@ itkImageMaskSpatialObjectTest2(int, char *[])
       const ImageType::IndexType constIndex = itr.ComputeIndex();
 
       ImageType::PointType point;
-      image->TransformIndexToPhysicalPoint(constIndex, point);
+      point = image->TransformIndexToPhysicalPoint(constIndex);
       const bool isInsideTest = maskSO->IsInsideInWorldSpace(point);
 
       double outsideIfZeroValue = NAN;
@@ -139,7 +139,7 @@ itkImageMaskSpatialObjectTest2(int, char *[])
       const bool                 reference = insideRegion.IsInside(constIndex);
 
       ImageType::PointType point;
-      image->TransformIndexToPhysicalPoint(constIndex, point);
+      point = image->TransformIndexToPhysicalPoint(constIndex);
       const bool test = maskSO->IsInsideInWorldSpace(point);
       if (test != reference)
       {
@@ -182,8 +182,8 @@ itkImageMaskSpatialObjectTest2(int, char *[])
     };
     ImageType::PointType startPoint;
     ImageType::PointType endPoint;
-    image->TransformIndexToPhysicalPoint(startPointIndex, startPoint);
-    image->TransformIndexToPhysicalPoint(endPointIndex, endPoint);
+    startPoint = image->TransformIndexToPhysicalPoint(startPointIndex);
+    endPoint = image->TransformIndexToPhysicalPoint(endPointIndex);
 
     // Traverse along the line that goes through mask boundaries and
     // check if the value and the mask is consistent

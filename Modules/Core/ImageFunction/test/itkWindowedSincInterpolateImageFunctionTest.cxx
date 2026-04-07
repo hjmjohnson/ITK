@@ -210,7 +210,7 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -231,7 +231,7 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -253,7 +253,7 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -274,7 +274,7 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = SincInterpolate::TestGeometricPoint(interp, point, false, output);
 
   if (!passed)
@@ -295,7 +295,7 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)

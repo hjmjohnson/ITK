@@ -137,7 +137,7 @@ itkExtensionVelocitiesImageFilterTest(int, char *[])
   while (!iter.IsAtEnd())
   {
     PointType point;
-    image->TransformIndexToPhysicalPoint(iter.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(iter.GetIndex());
     iter.Set(SimpleSignedDistance(point));
     ++iter;
   }
@@ -165,7 +165,7 @@ itkExtensionVelocitiesImageFilterTest(int, char *[])
   while (!iter.IsAtEnd())
   {
     PointType point;
-    aux2->TransformIndexToPhysicalPoint(iter.GetIndex(), point);
+    point = aux2->TransformIndexToPhysicalPoint(iter.GetIndex());
     iter.Set(SimpleVelocity(point));
     ++iter;
   }

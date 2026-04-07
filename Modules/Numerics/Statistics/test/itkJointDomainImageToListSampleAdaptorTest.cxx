@@ -155,7 +155,7 @@ itkJointDomainImageToListSampleAdaptorTest(int, char *[])
         index[2] = i;
 
         JointDomainImageToListSampleAdaptorType::PointType tempPoint;
-        adaptor->GetImage()->TransformIndexToPhysicalPoint(index, tempPoint);
+        tempPoint = adaptor->GetImage()->TransformIndexToPhysicalPoint(index);
 
         ImageType::PixelType pixel = adaptor->GetImage()->GetPixel(index);
 

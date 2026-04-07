@@ -233,7 +233,7 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -267,7 +267,7 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -290,7 +290,7 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -312,7 +312,7 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint(interp, point, false, output);
 
   if (!passed)
@@ -334,7 +334,7 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint(interp, point, true, output);
 
   if (!passed)

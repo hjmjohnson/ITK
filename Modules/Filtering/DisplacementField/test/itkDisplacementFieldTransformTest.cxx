@@ -314,7 +314,7 @@ itkDisplacementFieldTransformTest(int argc, char * argv[])
   while (!it.IsAtEnd())
   {
     FieldType::PointType pt;
-    field->TransformIndexToPhysicalPoint(it.GetIndex(), pt);
+    pt = field->TransformIndexToPhysicalPoint(it.GetIndex());
     const FieldType::PointType       pt2 = affineTransform->TransformPoint(pt);
     FieldType::PointType::VectorType vec = pt2 - pt;
     FieldType::PixelType             v;

@@ -39,7 +39,7 @@ TestTransformIndexToPhysicalPoint(T * image)
       for (int i = 0; i < 1000; ++i)
       {
         index3D[0] = i;
-        image->TransformIndexToPhysicalPoint(index3D, point3D);
+        point3D = image->TransformIndexToPhysicalPoint(index3D);
       }
     }
     if (k == 5)

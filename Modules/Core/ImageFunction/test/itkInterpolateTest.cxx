@@ -169,7 +169,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
   PointType point;
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, true, 70);
 
   if (!passed)
@@ -197,7 +197,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, true, 60);
 
   if (!passed)
@@ -216,7 +216,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, true, 79);
 
   if (!passed)
@@ -234,7 +234,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, false, 0);
 
   if (!passed)
@@ -252,7 +252,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, true, 59.65);
 
   if (!passed)
@@ -285,7 +285,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, true, 59.85);
 
   if (!passed)
@@ -313,7 +313,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, true, 59.75);
 
   if (!passed)
@@ -341,7 +341,7 @@ itkInterpolateTest(int, char *[])
     flag = 1;
   }
 
-  image->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = image->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = TestGeometricPoint<InterpolatorType>(interp, point, true, 58.75);
 
   if (!passed)

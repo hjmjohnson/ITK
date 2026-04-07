@@ -174,7 +174,7 @@ itkRegistrationParameterScalesFromJacobianTest(int, char *[])
   RegistrationParameterScalesFromJacobianType::ScalesType theoreticalJacobianScales(
     movingTransform->GetNumberOfParameters());
   VirtualImageType::PointType upperPoint;
-  virtualImage->TransformIndexToPhysicalPoint(virtualImage->GetLargestPossibleRegion().GetUpperIndex(), upperPoint);
+  upperPoint = virtualImage->TransformIndexToPhysicalPoint(virtualImage->GetLargestPossibleRegion().GetUpperIndex());
 
   itk::SizeValueType param = 0;
   for (itk::SizeValueType row = 0; row < ImageDimension; ++row)
@@ -234,7 +234,7 @@ itkRegistrationParameterScalesFromJacobianTest(int, char *[])
   FloatType                   theoreticalStepScale = 0.0;
   FloatType                   count = 0.0;
   VirtualImageType::PointType lowerPoint;
-  virtualImage->TransformIndexToPhysicalPoint(virtualImage->GetLargestPossibleRegion().GetIndex(), lowerPoint);
+  lowerPoint = virtualImage->TransformIndexToPhysicalPoint(virtualImage->GetLargestPossibleRegion().GetIndex());
 
   for (FloatType x = lowerPoint[0]; x <= upperPoint[0]; x += upperPoint[0] - lowerPoint[0])
   {

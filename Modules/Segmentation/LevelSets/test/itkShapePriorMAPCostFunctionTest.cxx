@@ -104,7 +104,7 @@ itkShapePriorMAPCostFunctionTest(int, char *[])
     ImageType::IndexType         index;
     ShapeFunctionType::PointType point;
     index = iter.GetIndex();
-    input->TransformIndexToPhysicalPoint(index, point);
+    point = input->TransformIndexToPhysicalPoint(index);
 
     const float value = shape->Evaluate(point);
     iter.Set(value);

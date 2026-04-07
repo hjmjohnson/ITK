@@ -103,9 +103,9 @@ itkNiftiImageIOTest12(int argc, char * argv[])
 
     constexpr ImageType::IndexType threeIndex{ 3, 3, 3 };
     ImageType::PointType           origPhysLocationIndexThree;
-    image->TransformIndexToPhysicalPoint<itk::SpacePrecisionType>(threeIndex, origPhysLocationIndexThree);
+    origPhysLocationIndexThree = image->TransformIndexToPhysicalPoint(threeIndex);
     ImageType::PointType readPhysLocationIndexThree;
-    readImage->TransformIndexToPhysicalPoint<itk::SpacePrecisionType>(threeIndex, readPhysLocationIndexThree);
+    readPhysLocationIndexThree = readImage->TransformIndexToPhysicalPoint(threeIndex);
 
     // If the origins, and the spacings, and the direction cosines are the same,
     // then index locations should all represent the same physical locations as well.

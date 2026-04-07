@@ -148,7 +148,7 @@ itkTransformToDisplacementFieldFilterTest1(int argc, char * argv[])
     // Set the options.
     auto      imageCenter = IndexType::Filled(11);
     PointType centerPoint;
-    image->TransformIndexToPhysicalPoint(imageCenter, centerPoint);
+    centerPoint = image->TransformIndexToPhysicalPoint(imageCenter);
     eulerTransform->SetCenter(centerPoint);
 
     // Create and set parameters.

@@ -43,7 +43,7 @@ itkImageFileWriterTest2(int argc, char * argv[])
   image->AllocateInitialized();
 
   ImageNDType::PointType originalPoint;
-  image->TransformIndexToPhysicalPoint(index, originalPoint);
+  originalPoint = image->TransformIndexToPhysicalPoint(index);
   std::cout << "Original Starting Index: " << index << std::endl;
   std::cout << "Original Starting Point (physical cooridents) : " << originalPoint << std::endl;
   std::cout << "Original Origin: " << image->GetOrigin() << std::endl;
@@ -61,7 +61,7 @@ itkImageFileWriterTest2(int argc, char * argv[])
     reader->SetFileName(argv[1]);
     reader->Update();
     index = reader->GetOutput()->GetLargestPossibleRegion().GetIndex();
-    reader->GetOutput()->TransformIndexToPhysicalPoint(index, readPoint);
+    readPoint = reader->GetOutput()->TransformIndexToPhysicalPoint(index);
     std::cout << "Read Starting Index: " << index << std::endl;
     std::cout << "Original Starting Point (physical cooridents) : " << readPoint << std::endl;
     std::cout << "Read Origin: " << image->GetOrigin() << std::endl;

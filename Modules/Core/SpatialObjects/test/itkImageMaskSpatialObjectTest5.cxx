@@ -77,7 +77,7 @@ itkImageMaskSpatialObjectTest5(int, char *[])
     const ImageType::IndexType constIndex = itr.ComputeIndex();
     const bool                 reference = insideRegion.IsInside(constIndex);
     ImageType::PointType       point;
-    image->TransformIndexToPhysicalPoint(constIndex, point);
+    point = image->TransformIndexToPhysicalPoint(constIndex);
     const bool test = maskSO->IsInsideInWorldSpace(point);
     if (test != reference)
     {
@@ -98,7 +98,7 @@ itkImageMaskSpatialObjectTest5(int, char *[])
     const ImageType::IndexType constIndex = itr.ComputeIndex();
     const bool                 reference = insideRegion.IsInside(constIndex);
     ImageType::PointType       point;
-    image->TransformIndexToPhysicalPoint(constIndex, point);
+    point = image->TransformIndexToPhysicalPoint(constIndex);
     const bool test = maskSO->IsInsideInWorldSpace(point);
     if (test != reference)
     {
@@ -120,7 +120,7 @@ itkImageMaskSpatialObjectTest5(int, char *[])
     const ImageType::IndexType constIndex = itr.ComputeIndex();
     const bool                 reference = insideRegion.IsInside(constIndex);
     ImageType::PointType       point;
-    image->TransformIndexToPhysicalPoint(constIndex, point);
+    point = image->TransformIndexToPhysicalPoint(constIndex);
     const bool test = maskSO->IsInsideInWorldSpace(point);
     if (test == true)
     {

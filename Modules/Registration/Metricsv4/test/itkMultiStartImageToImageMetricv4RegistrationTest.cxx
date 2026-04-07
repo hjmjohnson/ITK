@@ -108,10 +108,10 @@ itkMultiStartImageToImageMetricv4RegistrationTest(int argc, char * argv[])
   InternalImageType::PointType fpoint;
   centerindex[0] = movingImage->GetLargestPossibleRegion().GetSize()[0] / 2;
   centerindex[1] = movingImage->GetLargestPossibleRegion().GetSize()[1] / 2;
-  movingImage->TransformIndexToPhysicalPoint(centerindex, mpoint);
+  mpoint = movingImage->TransformIndexToPhysicalPoint(centerindex);
   centerindex[0] = fixedImage->GetLargestPossibleRegion().GetSize()[0] / 2;
   centerindex[1] = fixedImage->GetLargestPossibleRegion().GetSize()[1] / 2;
-  fixedImage->TransformIndexToPhysicalPoint(centerindex, fpoint);
+  fpoint = fixedImage->TransformIndexToPhysicalPoint(centerindex);
   AffineTransformType::OutputVectorType moffset;
   moffset[0] = mpoint[0] * (-1);
   moffset[1] = mpoint[1] * (-1);
@@ -162,7 +162,7 @@ itkMultiStartImageToImageMetricv4RegistrationTest(int argc, char * argv[])
     if (ct % 20 == 0)
     {
       PointType pt;
-      fixedImage->TransformIndexToPhysicalPoint(It.GetIndex(), pt);
+      pt = fixedImage->TransformIndexToPhysicalPoint(It.GetIndex());
       pset->SetPoint(ind, pt);
       ind++;
     }

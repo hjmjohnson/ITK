@@ -246,7 +246,7 @@ ImageToImageMetricv4TestComputeIdentityTruthValues(const ImageToImageMetricv4Tes
         ImageToImageMetricv4TestMetricType::FixedImageGradientCalculatorType::ConstPointer;
       const FixedGradientCalculatorPointer fixedGradientCalculator = metric->GetFixedImageGradientCalculator();
       ImageToImageMetricv4TestMetricType::FixedImagePointType point;
-      fixedImage->TransformIndexToPhysicalPoint(itFixed.ComputeIndex(), point);
+      point = fixedImage->TransformIndexToPhysicalPoint(itFixed.ComputeIndex());
       fixedImageDerivative = fixedGradientCalculator->Evaluate(point);
       // We can skip the call to TransformCovariantVector since we're
       // working with identity transforms only.
@@ -263,7 +263,7 @@ ImageToImageMetricv4TestComputeIdentityTruthValues(const ImageToImageMetricv4Tes
         ImageToImageMetricv4TestMetricType::MovingImageGradientCalculatorType::ConstPointer;
       const MovingGradientCalculatorPointer movingGradientCalculator = metric->GetMovingImageGradientCalculator();
       ImageToImageMetricv4TestMetricType::FixedImagePointType point;
-      movingImage->TransformIndexToPhysicalPoint(itMoving.ComputeIndex(), point);
+      point = movingImage->TransformIndexToPhysicalPoint(itMoving.ComputeIndex());
       movingImageDerivative = movingGradientCalculator->Evaluate(point);
     }
 

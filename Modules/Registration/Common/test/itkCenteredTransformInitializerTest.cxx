@@ -56,7 +56,7 @@ RunTest(itk::SmartPointer<TFixedImage> fixedImage, itk::SmartPointer<TMovingImag
     assert(0 < fixedSize[i]);
     fixedCenterIndex[i] = static_cast<double>(fixedIndex[i]) + static_cast<double>(fixedSize[i] - 1) / 2.0;
   }
-  fixedImage->TransformContinuousIndexToPhysicalPoint(fixedCenterIndex, fixedCenter);
+  fixedCenter = fixedImage->TransformContinuousIndexToPhysicalPoint(fixedCenterIndex);
 
   const typename MovingImageType::RegionType & movingRegion = movingImage->GetLargestPossibleRegion();
   const typename MovingImageType::SizeType &   movingSize = movingRegion.GetSize();
@@ -67,7 +67,7 @@ RunTest(itk::SmartPointer<TFixedImage> fixedImage, itk::SmartPointer<TMovingImag
     assert(0 < movingSize[i]);
     movingCenterIndex[i] = static_cast<double>(movingIndex[i]) + static_cast<double>(movingSize[i] - 1) / 2.0;
   }
-  movingImage->TransformContinuousIndexToPhysicalPoint(movingCenterIndex, movingCenter);
+  movingCenter = movingImage->TransformContinuousIndexToPhysicalPoint(movingCenterIndex);
 
   TransformType::InputVectorType relativeCenter = movingCenter - fixedCenter;
 

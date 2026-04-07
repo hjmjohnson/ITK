@@ -263,7 +263,7 @@ TestMattesMetricWithAffineTransform(TInterpolator * const interpolator, const bo
       if (ct % 5 == 0)
       {
         PointType pt;
-        imgFixed->TransformIndexToPhysicalPoint(It.GetIndex(), pt);
+        pt = imgFixed->TransformIndexToPhysicalPoint(It.GetIndex());
         pset->SetPoint(ind, pt);
         ind++;
       }

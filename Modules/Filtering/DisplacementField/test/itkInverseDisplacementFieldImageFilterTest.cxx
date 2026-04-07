@@ -115,7 +115,7 @@ itkInverseDisplacementFieldImageFilterTest(int argc, char * argv[])
   while (!it.IsAtEnd())
   {
     DisplacementFieldType::PointType p1;
-    field->TransformIndexToPhysicalPoint(it.GetIndex(), p1);
+    p1 = field->TransformIndexToPhysicalPoint(it.GetIndex());
 
     DisplacementFieldType::PixelType fp1 = it.Get();
 

@@ -283,7 +283,7 @@ itkMetricImageGradientTestRunTest(unsigned int                 imageSize,
 
   // Image gradient from moving image
   typename ImageType::PointType virtualPoint;
-  image->TransformIndexToPhysicalPoint(virtualIndex, virtualPoint);
+  virtualPoint = image->TransformIndexToPhysicalPoint(virtualIndex);
   const typename ImageType::PointType mappedPoint = movingTransform->TransformPoint(virtualPoint);
 
   using MetricType = itk::VanillaImageToImageMetricv4<ImageType, ImageType>;

@@ -299,7 +299,7 @@ itkANTSNeighborhoodCorrelationImageToImageMetricv4Test(int, char ** const)
   {
     // take every point
     PointType pt;
-    fixedImage->TransformIndexToPhysicalPoint(It.GetIndex(), pt);
+    pt = fixedImage->TransformIndexToPhysicalPoint(It.GetIndex());
     pset->SetPoint(ind, pt);
     ind++;
   }

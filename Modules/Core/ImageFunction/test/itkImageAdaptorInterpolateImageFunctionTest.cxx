@@ -226,7 +226,7 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = adaptor->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -248,7 +248,7 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = adaptor->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -271,7 +271,7 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = adaptor->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)
@@ -293,7 +293,7 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = adaptor->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, false, output);
 
   if (!passed)
@@ -315,7 +315,7 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     flag = 1;
   }
 
-  adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
+  point = adaptor->TransformContinuousIndexToPhysicalPoint(cindex);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
   if (!passed)

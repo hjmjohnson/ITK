@@ -106,7 +106,7 @@ itkCentralDifferenceImageFunctionOnVectorSpeedTestRun(char * argv[])
       if (doE)
       {
         typename FunctionType::PointType point;
-        image->TransformIndexToPhysicalPoint(index, point);
+        point = image->TransformIndexToPhysicalPoint(index);
         const OutputType pointOutput = function->Evaluate(point);
         total += pointOutput;
       }

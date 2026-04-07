@@ -174,7 +174,7 @@ itkBSplineTransformInitializerTest1(int argc, char * argv[])
   while (!fi.IsAtEnd())
   {
     index = fi.ComputeIndex();
-    field->TransformIndexToPhysicalPoint(index, fixedPoint);
+    fixedPoint = field->TransformIndexToPhysicalPoint(index);
     movingPoint = bsplineTransform->TransformPoint(fixedPoint);
     bsplineTransform->ComputeJacobianWithRespectToParameters(fixedPoint, jacobian);
     displacement = movingPoint - fixedPoint;

@@ -88,7 +88,7 @@ TEST(IsoContourDistanceImageFilter, Test)
   while (!iter.IsAtEnd())
   {
     PointType point;
-    image->TransformIndexToPhysicalPoint(iter.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(iter.GetIndex());
     iter.Set(SimpleSignedDistance(point));
     ++iter;
   }

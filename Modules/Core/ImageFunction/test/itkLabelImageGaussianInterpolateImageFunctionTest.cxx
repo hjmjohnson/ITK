@@ -182,7 +182,7 @@ itkLabelImageGaussianInterpolateImageFunctionTest(int, char *[])
         const IndexType      index = { { x, y } };
         const PixelType      known_value = valarray[x][y];
         ImageType::PointType physPoint;
-        large_image->TransformIndexToPhysicalPoint(index, physPoint);
+        physPoint = large_image->TransformIndexToPhysicalPoint(index);
         if (interpolator->IsInsideBuffer(physPoint))
         {
           // test scalar small_image

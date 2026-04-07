@@ -227,7 +227,7 @@ public:
     while (!fi.IsAtEnd())
     {
       index = fi.ComputeIndex();
-      field->TransformIndexToPhysicalPoint(index, fixedPoint);
+      fixedPoint = field->TransformIndexToPhysicalPoint(index);
       movingPoint = bsplineTransform->TransformPoint(fixedPoint);
       displacement[0] = movingPoint[0] - fixedPoint[0];
       displacement[1] = movingPoint[1] - fixedPoint[1];

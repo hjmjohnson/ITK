@@ -99,7 +99,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   SphereType::InputType point;
   while (!i_iter.IsAtEnd())
   {
-    image->TransformIndexToPhysicalPoint(i_iter.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(i_iter.GetIndex());
     if (sphere->Evaluate(point) == 1) // inside or on surface
     {
       i_iter.Set(randomGenerator->GetNormalVariate() * classSigmas[1] + classMeans[1]);

@@ -70,7 +70,7 @@ itkBinaryMask3DQuadEdgeMeshSourceTest(int, char *[])
   centralIndex[2] += size[2] / 2;
 
   PointType center;
-  image->TransformIndexToPhysicalPoint(centralIndex, center);
+  center = image->TransformIndexToPhysicalPoint(centralIndex);
 
   //
   //  Create a digitized sphere in the middle of the image.
@@ -78,7 +78,7 @@ itkBinaryMask3DQuadEdgeMeshSourceTest(int, char *[])
   while (!it.IsAtEnd())
   {
     PointType point;
-    image->TransformIndexToPhysicalPoint(it.GetIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(it.GetIndex());
     const PointType::VectorType radial = point - center;
     if (radial.GetNorm() < 60.0)
     {

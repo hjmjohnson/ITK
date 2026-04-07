@@ -101,7 +101,7 @@ itkImageFileReaderPositiveSpacingTest(int argc, char * argv[])
   {
     const ImageNDType::IndexType index = it.GetIndex();
     ImageNDType::PointType       point;
-    image->TransformIndexToPhysicalPoint(index, point);
+    point = image->TransformIndexToPhysicalPoint(index);
     // Compute index from physical point in baseline
     ImageNDType::IndexType baselineIndex;
     for (unsigned int ii = 0; ii < ImageNDType::ImageDimension; ++ii)

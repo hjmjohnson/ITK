@@ -70,7 +70,7 @@ itkBSplineScatteredDataPointSetToImageFilterTest(int argc, char * argv[])
       // and the pixel value of that point.
 
       PointSetType::PointType point;
-      reader->GetOutput()->TransformIndexToPhysicalPoint(It.GetIndex(), point);
+      point = reader->GetOutput()->TransformIndexToPhysicalPoint(It.GetIndex());
 
       const unsigned long i = pointSet->GetNumberOfPoints();
       pointSet->SetPoint(i, point);

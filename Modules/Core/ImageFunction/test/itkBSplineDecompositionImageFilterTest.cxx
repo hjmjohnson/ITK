@@ -144,7 +144,7 @@ itkBSplineDecompositionImageFilterTest(int argc, char * argv[])
   ImageType::IndexType last{};
   last[0] = randImage->GetLargestPossibleRegion().GetSize()[0] - 1;
   ImageType::PointType lastPhysicalLocation;
-  randImage->TransformIndexToPhysicalPoint(last, lastPhysicalLocation);
+  lastPhysicalLocation = randImage->TransformIndexToPhysicalPoint(last);
 
   const double minValue = randImage->GetOrigin()[0];
   const double maxValue = lastPhysicalLocation[0];

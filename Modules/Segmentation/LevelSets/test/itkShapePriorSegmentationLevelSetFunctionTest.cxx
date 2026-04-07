@@ -143,7 +143,7 @@ itkShapePriorSegmentationLevelSetFunctionTest(int, char *[])
     ImageType::IndexType         index;
     ShapeFunctionType::PointType point;
     index = iter.GetIndex();
-    input->TransformIndexToPhysicalPoint(index, point);
+    point = input->TransformIndexToPhysicalPoint(index);
     iter.Set(shape->Evaluate(point));
     ++iter;
   }
@@ -202,7 +202,7 @@ itkShapePriorSegmentationLevelSetFunctionTest(int, char *[])
     CharImageType::IndexType     index;
     ShapeFunctionType::PointType point;
     index = citer.GetIndex();
-    input->TransformIndexToPhysicalPoint(index, point);
+    point = input->TransformIndexToPhysicalPoint(index);
     if (shape->Evaluate(point) < 0.0)
     {
       citer.Set(255);
