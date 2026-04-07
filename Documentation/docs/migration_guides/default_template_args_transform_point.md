@@ -172,11 +172,40 @@ projects: **ITK** (Modules/), **BRAINSTools**, **ANTs**, and **3D Slicer**.
    correctness in template code, not because the underlying type differs
    from the image's coordinate precision.
 
-3. **Only 6% of calls use `<float>`**, all intentionally. These are in
-   ITK's `ImageAdaptor` GTest (verifying `<float>` works), one BRAINSTools
-   site (processing float-precision segmentation masks), and ITK's
-   `TriangleMeshToBinaryImageFilter`. All would continue to specify
-   `<float>` explicitly.
+3. **Only 6% of calls use `<float>`** (10 sites total), all intentionally.
+   These would continue to specify `<float>` explicitly and are unaffected
+   by the default. Detailed breakdown:
+
+   - **ITK** (9 sites):
+     - `itkImageBaseGTest.cxx` (3 sites) — GTest that verifies the
+       return type of the `<float>` specialization matches
+       `Point<float, N>` / `ContinuousIndex<float, N>`.
+       **Rationale:** API contract test — confirms the template
+       machinery works for non-default precision types. These tests
+       would remain as-is to continue validating `<float>` behavior.
+     - `itkImageAdaptorGTest.cxx` (6 sites) — GTest that verifies
+       `ImageAdaptor` delegates `<float>` calls identically to the
+       underlying `Image`.
+       **Rationale:** Behavioral equivalence test — ensures the
+       adaptor pattern does not alter results when a non-default
+       precision is requested. Also remains as-is.
+   - **BRAINSTools** (1 site):
+     - `BRAINSABCUtilities.cxx:217` — Uses `<float>` to compute a
+       physical point for a bounding-box containment test
+       (`bb->IsInside(thisPoint)`). The result is assigned to
+       `MaskType::PointType` which is `Point<double, 3>`, so the
+       `float` result is immediately widened to `double`.
+       **Rationale:** Likely a historical micro-optimization or
+       copy-paste artifact — the image (`FloatImageType`) stores
+       `float` pixels, but `PointValueType` is still
+       `SpacePrecisionType` (`double`). The `<float>` produces a
+       lower-precision intermediate that is widened on assignment,
+       so there is no precision benefit.  A candidate for cleanup
+       to use the default, but not a compatibility concern.
+   - **ANTs** (0 sites):
+     No `<float>` usage found in ANTs source.
+   - **3D Slicer** (0 sites outside embedded BRAINSTools/ITK):
+     No `<float>` usage found in Slicer-specific source.
 
 4. **`ITK_USE_FLOAT_SPACE_PRECISION` is respected.** If a downstream
    project configures ITK with single-precision spatial coordinates,
