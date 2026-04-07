@@ -88,7 +88,7 @@ main(int argc, char * argv[])
   {
 
     // Convert the pixel position into a Point
-    image->TransformIndexToPhysicalPoint(it.ComputeIndex(), point);
+    point = image->TransformIndexToPhysicalPoint(it.ComputeIndex());
     pointSet->SetPoint(pointId, point);
 
     // Transfer the pixel data to the value associated with the point.

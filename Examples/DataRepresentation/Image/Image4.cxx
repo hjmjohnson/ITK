@@ -315,8 +315,8 @@ main(int, char *[])
   // Software Guide : EndLatex
 
   // Software Guide : BeginCodeSnippet
-  const bool isInside =
-    image->TransformPhysicalPointToIndex(point, pixelIndex);
+  const bool isInside = pixelIndex =
+    image->TransformPhysicalPointToIndex(point);
   if (isInside)
   {
     ImageType::PixelType pixelValue = image->GetPixel(pixelIndex);
@@ -355,7 +355,7 @@ main(int, char *[])
   // Software Guide : BeginCodeSnippet
   const ImageType::IndexType LeftEyeIndex = GetIndexFromMouseClick();
   ImageType::PointType       LeftEyePoint;
-  image->TransformIndexToPhysicalPoint(LeftEyeIndex, LeftEyePoint);
+  LeftEyePoint = image->TransformIndexToPhysicalPoint(LeftEyeIndex);
   // Software Guide : EndCodeSnippet
 
   std::cout << "===========================================" << std::endl;

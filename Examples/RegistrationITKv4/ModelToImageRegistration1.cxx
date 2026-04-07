@@ -291,7 +291,8 @@ public:
 
     while (!it.IsAtEnd())
     {
-      this->m_FixedImage->TransformIndexToPhysicalPoint(it.GetIndex(), point);
+      point =
+        this->m_FixedImage->TransformIndexToPhysicalPoint(it.GetIndex());
 
       if (this->m_MovingSpatialObject->IsInsideInWorldSpace(point, 99999))
       {

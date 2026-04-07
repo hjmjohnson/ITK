@@ -180,7 +180,7 @@ ExampleMain(int argc, const char * const argv[])
   while (!fi.IsAtEnd())
   {
     index = fi.ComputeIndex();
-    field->TransformIndexToPhysicalPoint(index, point1);
+    point1 = field->TransformIndexToPhysicalPoint(index);
     point2 = tps->TransformPoint(point1);
     for (unsigned int i = 0; i < ImageDimension; ++i)
     {
