@@ -18,15 +18,18 @@
 
 #include "itkConnectedComponentImageFilter.h"
 #include "itkSimpleFilterWatcher.h"
+#include "itkGTest.h"
 
-int
-itkConnectedComponentImageFilterTooManyObjectsTest(int itkNotUsed(argc), char *[] itkNotUsed(argv))
+namespace
 {
+using PixelType = unsigned char;
+constexpr unsigned int Dimension{ 2 };
+using ImageType = itk::Image<PixelType, Dimension>;
+} // namespace
 
-  using PixelType = unsigned char;
-  constexpr unsigned int Dimension{ 2 };
-  using ImageType = itk::Image<PixelType, Dimension>;
 
+TEST(ConnectedComponentImageFilter, TooManyObjectsThrows)
+{
   // create a test input image with more objects in it than what the output type
   // can handle - 255
   auto img = ImageType::New();
@@ -49,17 +52,6 @@ itkConnectedComponentImageFilterTooManyObjectsTest(int itkNotUsed(argc), char *[
   filter->SetInput(img);
   const itk::SimpleFilterWatcher watcher(filter);
 
-  try
-  {
-    filter->Update();
-    // no exception - that's not normal
-  }
-  catch (const itk::ExceptionObject & excep)
-  {
-    std::cerr << "exception caught:" << std::endl;
-    std::cerr << excep << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  return EXIT_FAILURE;
+  // Filter should throw because output type cannot hold enough labels
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 }

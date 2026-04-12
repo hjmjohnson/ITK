@@ -9,7 +9,6 @@ set(
   itkThresholdMaximumConnectedComponentsImageFilterTest.cxx
   itkScalarConnectedComponentImageFilterTest.cxx
   itkVectorConnectedComponentImageFilterTest.cxx
-  itkConnectedComponentImageFilterTooManyObjectsTest.cxx
   itkMaskConnectedComponentImageFilterTest.cxx
 )
 
@@ -157,12 +156,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/VectorConnectedComponentImageFilterTest.png
 )
 itk_add_test(
-  NAME itkConnectedComponentImageFilterTooManyObjectsTest
-  COMMAND
-    ITKConnectedComponentsTestDriver
-    itkConnectedComponentImageFilterTooManyObjectsTest
-)
-itk_add_test(
   NAME itkMaskConnectedComponentImageFilterTest
   COMMAND
     ITKConnectedComponentsTestDriver
@@ -178,8 +171,9 @@ itk_add_test(
 
 set(
   ITKConnectedComponentsGTests
-  itkRelabelComponentImageFilterGTest.cxx
   itkConnectedComponentImageFilterGTest.cxx
+  itkConnectedComponentImageFilterTooManyObjectsGTest.cxx
+  itkRelabelComponentImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKConnectedComponents "${ITKConnectedComponents-Test_LIBRARIES}"
                        "${ITKConnectedComponentsGTests}"
