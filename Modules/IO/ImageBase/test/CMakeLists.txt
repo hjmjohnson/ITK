@@ -3,7 +3,6 @@ set(
   ITKIOImageBaseTests
   itkConvertBufferTest.cxx
   itkConvertBufferTest2.cxx
-  itkImageFileReaderTest1.cxx
   itkImageFileWriterTest.cxx
   itkIOCommonTest.cxx
   itkIOCommonTest2.cxx
@@ -123,12 +122,6 @@ itk_add_test(
   COMMAND
     ITKIOImageBaseTestDriver
     itkConvertBufferTest2
-)
-itk_add_test(
-  NAME itkImageFileReaderTest1
-  COMMAND
-    ITKIOImageBaseTestDriver
-    itkImageFileReaderTest1
 )
 itk_add_test(
   NAME itkImageFileWriterTest
@@ -1007,5 +1000,9 @@ target_link_libraries(itkUnicodeIOTest ${ITKIOImageBase-Test_LIBRARIES})
 itk_module_target_label(itkUnicodeIOTest)
 itk_add_test(NAME itkUnicodeIOTest COMMAND itkUnicodeIOTest)
 
-set(ITKIOImageBaseGTests itkWriteImageFunctionGTest.cxx)
+set(
+  ITKIOImageBaseGTests
+  itkImageFileReaderGTest.cxx
+  itkWriteImageFunctionGTest.cxx
+)
 creategoogletestdriver(ITKIOImageBase "${ITKIOImageBase-Test_LIBRARIES}" "${ITKIOImageBaseGTests}")
