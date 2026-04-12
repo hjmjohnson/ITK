@@ -16,17 +16,20 @@
  *
  *=========================================================================*/
 
-#include <iostream>
 #include "itkLabelObjectLine.h"
 #include "itkLabelObjectLineComparator.h"
+#include "itkGTest.h"
 
-int
-itkLabelObjectLineComparatorTest(int, char *[])
+namespace
 {
-  using LabelObjectLineType = itk::LabelObjectLine<2>;
-  using IndexType = itk::LabelObjectLine<2>::IndexType;
-  using ComparatorType = itk::Functor::LabelObjectLineComparator<LabelObjectLineType>;
+using LabelObjectLineType = itk::LabelObjectLine<2>;
+using IndexType = itk::LabelObjectLine<2>::IndexType;
+using ComparatorType = itk::Functor::LabelObjectLineComparator<LabelObjectLineType>;
+} // namespace
 
+
+TEST(LabelObjectLineComparator, ConvertedLegacyTest)
+{
   constexpr ComparatorType lessThan;
 
   IndexType lowIndex;
@@ -41,29 +44,15 @@ itkLabelObjectLineComparatorTest(int, char *[])
   const LabelObjectLineType high(highIndex, 11);
   const LabelObjectLineType lowlong(lowIndex, 15);
 
-  if (lessThan(high, low))
-  {
-    std::cerr << "Failed, high<low returned true." << std::endl;
-    return EXIT_FAILURE;
-  }
+  // high<low should be false
+  EXPECT_FALSE(lessThan(high, low));
 
-  if (!lessThan(low, high))
-  {
-    std::cerr << "Failed, low<high returned false." << std::endl;
-    return EXIT_FAILURE;
-  }
+  // low<high should be true
+  EXPECT_TRUE(lessThan(low, high));
 
-  if (lessThan(low, low))
-  {
-    std::cerr << "Failed, low<low returned true." << std::endl;
-    return EXIT_FAILURE;
-  }
+  // low<low should be false (irreflexive)
+  EXPECT_FALSE(lessThan(low, low));
 
-  if (!lessThan(low, lowlong))
-  {
-    std::cerr << "Failed, low<lowlong returned false." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  // low<lowlong should be true (same index, shorter length is less)
+  EXPECT_TRUE(lessThan(low, lowlong));
 }

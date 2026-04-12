@@ -39,7 +39,6 @@ set(
   itkLabelMapToAttributeImageFilterTest1.cxx
   itkLabelMapToBinaryImageFilterTest.cxx
   itkLabelMapToLabelImageFilterTest.cxx
-  itkLabelObjectLineComparatorTest.cxx
   itkLabelObjectLineTest.cxx
   itkLabelObjectTest.cxx
   itkLabelSelectionLabelMapFilterTest.cxx
@@ -1134,12 +1133,6 @@ itk_add_test(
     itkLabelMapToLabelImageFilterTest
 )
 itk_add_test(
-  NAME itkLabelObjectLineComparatorTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelObjectLineComparatorTest
-)
-itk_add_test(
   NAME itkLabelObjectLineTest
   COMMAND
     ITKLabelMapTestDriver
@@ -1596,6 +1589,7 @@ itk_add_test(
 
 set(
   ITKLabelMapGTests
+  itkLabelObjectLineComparatorGTest.cxx
   itkShapeLabelMapFilterGTest.cxx
   itkStatisticsLabelMapFilterGTest.cxx
   itkUniqueLabelMapFiltersGTest.cxx
