@@ -757,6 +757,7 @@ include(ITKSBOMGeneration)
 if(ITK_GENERATE_SBOM)
   itk_generate_sbom()
 endif()
+include(ITKSBOMValidation)
 
 # Setup clang-tidy for code best-practices enforcement for C++11
 include(ITKClangTidySetup)
