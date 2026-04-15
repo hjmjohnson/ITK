@@ -88,3 +88,20 @@ set_tests_properties(
     LABELS
       "SBOM"
 )
+
+# Verify SPDX_VERSION entries match UpdateFromUpstream.sh tags.
+# This catches the case where a vendored dependency is updated but
+# the SPDX_VERSION in itk-module.cmake is not bumped.
+add_test(
+  NAME ITKSBOMVersionConsistency
+  COMMAND
+    ${Python3_EXECUTABLE}
+    "${ITK_SOURCE_DIR}/Utilities/Maintenance/VerifySPDXVersions.py"
+    "${ITK_SOURCE_DIR}"
+)
+set_tests_properties(
+  ITKSBOMVersionConsistency
+  PROPERTIES
+    LABELS
+      "SBOM"
+)
