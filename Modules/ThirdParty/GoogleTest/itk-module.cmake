@@ -10,6 +10,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "BSD-3-Clause"
+  SPDX_VERSION
+  "1.17.0"
   SPDX_DOWNLOAD_LOCATION
   "https://github.com/google/googletest"
   SPDX_COPYRIGHT

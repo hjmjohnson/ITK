@@ -12,6 +12,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "Libpng-2.0"
+  SPDX_VERSION
+  "1.6.54"
   SPDX_DOWNLOAD_LOCATION
   "https://www.libpng.org/pub/png/libpng.html"
   SPDX_COPYRIGHT

@@ -11,6 +11,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "Zlib"
+  SPDX_VERSION
+  "2.2.5"
   SPDX_DOWNLOAD_LOCATION
   "https://github.com/zlib-ng/zlib-ng"
   SPDX_COPYRIGHT

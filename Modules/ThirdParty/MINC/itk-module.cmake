@@ -12,6 +12,8 @@ if(ITK_USE_SYSTEM_MINC)
     EXCLUDE_FROM_DEFAULT
     SPDX_LICENSE
     "LGPL-2.1-only"
+    SPDX_VERSION
+    "2.4.06"
     SPDX_DOWNLOAD_LOCATION
     "https://github.com/BIC-MNI/libminc"
     SPDX_COPYRIGHT
@@ -28,6 +30,8 @@ else()
     EXCLUDE_FROM_DEFAULT
     SPDX_LICENSE
     "LGPL-2.1-only"
+    SPDX_VERSION
+    "2.4.06"
     SPDX_DOWNLOAD_LOCATION
     "https://github.com/BIC-MNI/libminc"
     SPDX_COPYRIGHT

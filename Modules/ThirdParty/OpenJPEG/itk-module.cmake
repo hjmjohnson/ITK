@@ -13,6 +13,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "BSD-2-Clause"
+  SPDX_VERSION
+  "2.5.4"
   SPDX_DOWNLOAD_LOCATION
   "https://www.openjpeg.org"
   SPDX_COPYRIGHT

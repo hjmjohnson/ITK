@@ -10,6 +10,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "IJG AND BSD-3-Clause AND Zlib"
+  SPDX_VERSION
+  "3.0.4"
   SPDX_DOWNLOAD_LOCATION
   "https://libjpeg-turbo.org"
   SPDX_COPYRIGHT

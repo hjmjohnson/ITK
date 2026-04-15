@@ -8,6 +8,7 @@
   Per-module SPDX metadata is declared in each module's itk-module.cmake via
   the itk_module() macro arguments:
     SPDX_LICENSE             - SPDX license identifier (e.g. "Apache-2.0")
+    SPDX_VERSION             - Version of the vendored dependency
     SPDX_DOWNLOAD_LOCATION   - URL for the upstream source
     SPDX_COPYRIGHT           - Copyright text
     SPDX_CUSTOM_LICENSE_TEXT  - Extracted text for custom LicenseRef-* IDs
@@ -217,8 +218,12 @@ function(itk_generate_sbom)
       continue()
     endif()
 
+    set(_pkg_version "${ITK_MODULE_${_mod}_SPDX_VERSION}")
     set(_pkg_download "${ITK_MODULE_${_mod}_SPDX_DOWNLOAD_LOCATION}")
     set(_pkg_copyright "${ITK_MODULE_${_mod}_SPDX_COPYRIGHT}")
+    if(NOT _pkg_version)
+      set(_pkg_version "NOASSERTION")
+    endif()
     if(NOT _pkg_download)
       set(_pkg_download "NOASSERTION")
     endif()
@@ -249,7 +254,7 @@ function(itk_generate_sbom)
     string(APPEND _json "    {\n")
     string(APPEND _json "      \"SPDXID\": \"SPDXRef-${_spdx_id}\",\n")
     string(APPEND _json "      \"name\": \"${_mod}\",\n")
-    string(APPEND _json "      \"versionInfo\": \"NOASSERTION\",\n")
+    string(APPEND _json "      \"versionInfo\": \"${_pkg_version}\",\n")
     string(APPEND _json "      \"downloadLocation\": \"${_pkg_download}\",\n")
     string(APPEND _json "      \"supplier\": \"NOASSERTION\",\n")
     string(APPEND _json "      \"licenseConcluded\": \"${_pkg_license}\",\n")

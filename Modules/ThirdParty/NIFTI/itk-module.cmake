@@ -13,8 +13,10 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "LicenseRef-NIFTI-Public-Domain"
+  SPDX_VERSION
+  "3.0.0"
   SPDX_DOWNLOAD_LOCATION
-  "https://nifti.nimh.nih.gov"
+  "https://github.com/NIFTI-Imaging/nifti_clib"
   SPDX_COPYRIGHT
   "NOASSERTION"
   SPDX_CUSTOM_LICENSE_NAME

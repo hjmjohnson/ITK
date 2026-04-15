@@ -13,6 +13,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "libtiff"
+  SPDX_VERSION
+  "4.7.0"
   SPDX_DOWNLOAD_LOCATION
   "https://libtiff.maptools.org"
   SPDX_COPYRIGHT

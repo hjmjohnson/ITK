@@ -12,6 +12,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "BSD-3-Clause"
+  SPDX_VERSION
+  "1.14.5"
   SPDX_DOWNLOAD_LOCATION
   "https://www.hdfgroup.org/solutions/hdf5"
   SPDX_COPYRIGHT

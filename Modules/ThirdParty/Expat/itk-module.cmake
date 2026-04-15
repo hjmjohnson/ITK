@@ -10,6 +10,8 @@ itk_module(
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
   "MIT"
+  SPDX_VERSION
+  "2.7.4"
   SPDX_DOWNLOAD_LOCATION
   "https://libexpat.github.io"
   SPDX_COPYRIGHT
