@@ -18,6 +18,11 @@ if(NOT EXISTS "${_sbom_file}")
   return()
 endif()
 
+if(NOT Python3_EXECUTABLE)
+  message(WARNING "Python3 not found; skipping SBOM validation tests.")
+  return()
+endif()
+
 add_test(
   NAME ITKSBOMValidation
   COMMAND

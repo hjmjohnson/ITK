@@ -11,7 +11,7 @@ itk_module(
     ITKZLIB
   DESCRIPTION "${DOCUMENTATION}"
   SPDX_LICENSE
-  "Libpng-2.0"
+  "Libpng"
   SPDX_VERSION
   "1.6.54"
   SPDX_DOWNLOAD_LOCATION

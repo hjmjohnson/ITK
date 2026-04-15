@@ -26,6 +26,13 @@ if(NOT ITK_GENERATE_SBOM)
   return()
 endif()
 
+set(
+  ITK_SBOM_SPDX_LICENSE_LIST_VERSION
+  "3.25"
+  CACHE STRING
+  "SPDX license list version recorded in the generated SBOM"
+)
+
 #-----------------------------------------------------------------------------
 # Allow remote modules to register SBOM package metadata.
 #
@@ -90,24 +97,40 @@ function(itk_sbom_register_package)
   # Sanitize the name for use as SPDX ID (only alphanumeric and -)
   string(REGEX REPLACE "[^A-Za-z0-9-]" "-" _spdx_id "${_pkg_NAME}")
 
+  # Escape all user-supplied fields for JSON safety
+  _itk_sbom_json_escape("${_pkg_NAME}" _pkg_NAME_escaped)
+  _itk_sbom_json_escape("${_pkg_VERSION}" _pkg_VERSION_escaped)
+  _itk_sbom_json_escape("${_pkg_DOWNLOAD_LOCATION}" _pkg_DOWNLOAD_escaped)
+  _itk_sbom_json_escape("${_pkg_SUPPLIER}" _pkg_SUPPLIER_escaped)
+  _itk_sbom_json_escape("${_pkg_SPDX_LICENSE}" _pkg_LICENSE_escaped)
+  _itk_sbom_json_escape("${_pkg_COPYRIGHT}" _pkg_COPYRIGHT_escaped)
+
   set(_entry "")
   string(APPEND _entry "    {\n")
   string(APPEND _entry "      \"SPDXID\": \"SPDXRef-${_spdx_id}\",\n")
-  string(APPEND _entry "      \"name\": \"${_pkg_NAME}\",\n")
-  string(APPEND _entry "      \"versionInfo\": \"${_pkg_VERSION}\",\n")
+  string(APPEND _entry "      \"name\": \"${_pkg_NAME_escaped}\",\n")
+  string(APPEND _entry "      \"versionInfo\": \"${_pkg_VERSION_escaped}\",\n")
   string(
     APPEND
     _entry
-    "      \"downloadLocation\": \"${_pkg_DOWNLOAD_LOCATION}\",\n"
+    "      \"downloadLocation\": \"${_pkg_DOWNLOAD_escaped}\",\n"
   )
-  string(APPEND _entry "      \"supplier\": \"${_pkg_SUPPLIER}\",\n")
+  string(APPEND _entry "      \"supplier\": \"${_pkg_SUPPLIER_escaped}\",\n")
   string(
     APPEND
     _entry
-    "      \"licenseConcluded\": \"${_pkg_SPDX_LICENSE}\",\n"
+    "      \"licenseConcluded\": \"${_pkg_LICENSE_escaped}\",\n"
   )
-  string(APPEND _entry "      \"licenseDeclared\": \"${_pkg_SPDX_LICENSE}\",\n")
-  string(APPEND _entry "      \"copyrightText\": \"${_pkg_COPYRIGHT}\",\n")
+  string(
+    APPEND
+    _entry
+    "      \"licenseDeclared\": \"${_pkg_LICENSE_escaped}\",\n"
+  )
+  string(
+    APPEND
+    _entry
+    "      \"copyrightText\": \"${_pkg_COPYRIGHT_escaped}\",\n"
+  )
   string(APPEND _entry "      \"filesAnalyzed\": false\n")
   string(APPEND _entry "    }")
 
@@ -174,7 +197,11 @@ function(itk_generate_sbom)
   string(APPEND _json "      \"Tool: CMake-${CMAKE_VERSION}\",\n")
   string(APPEND _json "      \"Organization: NumFOCUS\"\n")
   string(APPEND _json "    ],\n")
-  string(APPEND _json "    \"licenseListVersion\": \"3.22\"\n")
+  string(
+    APPEND
+    _json
+    "    \"licenseListVersion\": \"${ITK_SBOM_SPDX_LICENSE_LIST_VERSION}\"\n"
+  )
   string(APPEND _json "  },\n")
 
   # --- packages array ---
@@ -215,6 +242,13 @@ function(itk_generate_sbom)
     # Only include modules that have SPDX metadata declared
     set(_pkg_license "${ITK_MODULE_${_mod}_SPDX_LICENSE}")
     if(NOT _pkg_license)
+      if(${_mod}_THIRD_PARTY)
+        message(
+          AUTHOR_WARNING
+          "ThirdParty module ${_mod} has no SPDX_LICENSE in itk-module.cmake. "
+          "Please add SPDX metadata for SBOM compliance."
+        )
+      endif()
       continue()
     endif()
 
@@ -231,7 +265,12 @@ function(itk_generate_sbom)
       set(_pkg_copyright "NOASSERTION")
     endif()
 
-    # Get description from module declaration and escape for JSON
+    # Escape all user-supplied fields for JSON safety
+    _itk_sbom_json_escape("${_pkg_version}" _pkg_version)
+    _itk_sbom_json_escape("${_pkg_download}" _pkg_download)
+    _itk_sbom_json_escape("${_pkg_license}" _pkg_license)
+    _itk_sbom_json_escape("${_pkg_copyright}" _pkg_copyright)
+
     set(_pkg_description "${ITK_MODULE_${_mod}_DESCRIPTION}")
     if(_pkg_description)
       _itk_sbom_json_escape("${_pkg_description}" _pkg_description)
@@ -307,7 +346,7 @@ function(itk_generate_sbom)
 
   # Append extra packages registered by remote modules
   get_property(_extra_packages GLOBAL PROPERTY ITK_SBOM_EXTRA_PACKAGES)
-  foreach(_extra_pkg ${_extra_packages})
+  foreach(_extra_pkg IN LISTS _extra_packages)
     string(APPEND _json ",\n${_extra_pkg}")
   endforeach()
 
@@ -335,7 +374,7 @@ function(itk_generate_sbom)
 
   # Extra packages registered by remote modules
   get_property(_extra_spdx_ids GLOBAL PROPERTY ITK_SBOM_EXTRA_SPDX_IDS)
-  foreach(_spdx_id ${_extra_spdx_ids})
+  foreach(_spdx_id IN LISTS _extra_spdx_ids)
     string(APPEND _json ",\n")
     string(APPEND _json "    {\n")
     string(APPEND _json "      \"spdxElementId\": \"SPDXRef-ITK\",\n")
