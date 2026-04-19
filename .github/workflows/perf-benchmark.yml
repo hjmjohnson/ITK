@@ -1,0 +1,283 @@
+name: ITK.Performance.Benchmark
+
+# Build ITK at the PR's merge-base and at its HEAD, run the ASV harness
+# from ITKPerformanceBenchmarking against each, then `asv compare` to
+# surface regressions.
+#
+# Opt-in: runs only on PRs labelled "performance" or via manual dispatch.
+# Rationale: each run builds ITK twice (~30–45 min on Linux with ccache).
+on:
+    workflow_dispatch:
+        inputs:
+            base_ref:
+                description: 'Ref to compare against (default: master)'
+                required: false
+                default: 'master'
+    pull_request:
+        types: [labeled, synchronize, reopened]
+        paths-ignore:
+            - '*.md'
+            - LICENSE
+            - NOTICE
+            - 'Documentation/**'
+
+concurrency:
+    group: '${{ github.workflow }}@${{ github.head_ref || github.ref }}'
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+    ExternalDataVersion: 5.4.5
+    # Branch of ITKPerformanceBenchmarking carrying the ASV harness.
+    # Pinned while the harness is landing upstream; switch to a SHA once
+    # the harness is merged to that repo's master.
+    PERF_HARNESS_REPO: InsightSoftwareConsortium/ITKPerformanceBenchmarking
+    PERF_HARNESS_REF: asv-native-harness
+
+jobs:
+    gate:
+        # Skip unless the PR is explicitly opted in.
+        runs-on: ubuntu-22.04
+        outputs:
+            should_run: ${{ steps.check.outputs.should_run }}
+        steps:
+            - id: check
+              run: |
+                  if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                      echo "should_run=true" >> "$GITHUB_OUTPUT"
+                  elif [ "${{ github.event_name }}" = "pull_request" ] \
+                      && echo '${{ toJSON(github.event.pull_request.labels.*.name) }}' \
+                      | grep -q '"performance"'; then
+                      echo "should_run=true" >> "$GITHUB_OUTPUT"
+                  else
+                      echo "should_run=false" >> "$GITHUB_OUTPUT"
+                  fi
+
+    benchmark:
+        needs: gate
+        if: needs.gate.outputs.should_run == 'true'
+        runs-on: ubuntu-22.04
+        timeout-minutes: 180
+        steps:
+            - name: Checkout ITK (full history for merge-base)
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
+                  clean: true
+
+            - name: Determine SHAs to compare
+              id: shas
+              shell: bash
+              run: |
+                  if [ "${{ github.event_name }}" = "pull_request" ]; then
+                      BASE_REF="origin/${{ github.base_ref }}"
+                      HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+                  else
+                      BASE_REF="origin/${{ github.event.inputs.base_ref }}"
+                      HEAD_SHA="$(git rev-parse HEAD)"
+                  fi
+                  git fetch origin --no-tags --prune --depth=1000 \
+                      "${BASE_REF#origin/}" || true
+                  BASE_SHA="$(git merge-base "$BASE_REF" "$HEAD_SHA")"
+                  echo "base_sha=$BASE_SHA" >> "$GITHUB_OUTPUT"
+                  echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+                  echo "base_short=${BASE_SHA:0:10}" >> "$GITHUB_OUTPUT"
+                  echo "head_short=${HEAD_SHA:0:10}" >> "$GITHUB_OUTPUT"
+                  echo "Comparing $BASE_SHA → $HEAD_SHA"
+
+            - name: Install apt prerequisites
+              run: |
+                  sudo apt-get update -qq
+                  sudo apt-get install -y ccache ninja-build python3-venv
+
+            - name: Configure ccache
+              shell: bash
+              run: |
+                  echo "CCACHE_DIR=${{ runner.temp }}/ccache" >> "$GITHUB_ENV"
+                  echo "CCACHE_MAXSIZE=6G" >> "$GITHUB_ENV"
+                  echo "CCACHE_COMPILERCHECK=content" >> "$GITHUB_ENV"
+                  echo "CCACHE_BASEDIR=${GITHUB_WORKSPACE}" >> "$GITHUB_ENV"
+                  echo "CCACHE_NOHASHDIR=true" >> "$GITHUB_ENV"
+
+            - name: Restore ccache
+              uses: actions/cache/restore@v5
+              with:
+                  path: ${{ runner.temp }}/ccache
+                  key: ccache-v1-perf-${{ github.sha }}
+                  restore-keys: |
+                      ccache-v1-perf-
+
+            - name: Free disk space
+              uses: BRAINSia/free-disk-space@v2
+              with:
+                  removalmode: rmz
+                  tool-cache: true
+                  haskell: true
+                  dotnet: true
+                  large-packages: true
+                  swap-storage: true
+
+            - name: Download ExternalData fixtures
+              run: |
+                  curl -L \
+                      "https://github.com/InsightSoftwareConsortium/ITK/releases/download/v${ExternalDataVersion}/InsightData-${ExternalDataVersion}.tar.gz" \
+                      -o InsightData.tar.gz
+                  cmake -E tar xfz InsightData.tar.gz
+                  mkdir -p "${GITHUB_WORKSPACE}/.ExternalData/CID"
+                  cp -r "InsightToolkit-${ExternalDataVersion}/.ExternalData/CID/"* \
+                        "${GITHUB_WORKSPACE}/.ExternalData/CID/"
+                  rm -rf "InsightToolkit-${ExternalDataVersion}" InsightData.tar.gz
+
+            - name: Build ITK @ merge-base
+              id: build_base
+              shell: bash
+              run: |
+                  git worktree add ../itk-base ${{ steps.shas.outputs.base_sha }}
+                  cmake \
+                      -S ../itk-base -B ../itk-base-build \
+                      -GNinja \
+                      -DCMAKE_BUILD_TYPE=Release \
+                      -DBUILD_TESTING=ON \
+                      -DBUILD_SHARED_LIBS=OFF \
+                      -DBUILD_EXAMPLES=ON \
+                      -DITK_USE_CCACHE=ON \
+                      -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                      -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+                      -DModule_PerformanceBenchmarking=ON
+                  cmake --build ../itk-base-build --target \
+                      MedianBenchmark BinaryAddBenchmark GradientMagnitudeBenchmark \
+                      CopyIterationBenchmark VectorIterationBenchmark \
+                      ITKBenchmarksData
+
+            - name: Build ITK @ PR HEAD
+              id: build_head
+              shell: bash
+              run: |
+                  cmake \
+                      -S . -B ../itk-head-build \
+                      -GNinja \
+                      -DCMAKE_BUILD_TYPE=Release \
+                      -DBUILD_TESTING=ON \
+                      -DBUILD_SHARED_LIBS=OFF \
+                      -DBUILD_EXAMPLES=ON \
+                      -DITK_USE_CCACHE=ON \
+                      -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+                      -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+                      -DModule_PerformanceBenchmarking=ON
+                  cmake --build ../itk-head-build --target \
+                      MedianBenchmark BinaryAddBenchmark GradientMagnitudeBenchmark \
+                      CopyIterationBenchmark VectorIterationBenchmark \
+                      ITKBenchmarksData
+
+            - name: Locate benchmark binaries and fixture
+              id: locate
+              shell: bash
+              run: |
+                  echo "base_bin=${GITHUB_WORKSPACE}/../itk-base-build/bin" >> "$GITHUB_OUTPUT"
+                  echo "head_bin=${GITHUB_WORKSPACE}/../itk-head-build/bin" >> "$GITHUB_OUTPUT"
+                  # The ExternalData fixture lands under the head build's tree;
+                  # the base and head builds resolve the same brainweb object.
+                  FIXTURE_DIR="${GITHUB_WORKSPACE}/../itk-head-build/ExternalData/Modules/Remote/PerformanceBenchmarking/examples/Data/Input"
+                  echo "fixture_dir=$FIXTURE_DIR" >> "$GITHUB_OUTPUT"
+
+            - name: Checkout ASV harness
+              uses: actions/checkout@v5
+              with:
+                  repository: ${{ env.PERF_HARNESS_REPO }}
+                  ref: ${{ env.PERF_HARNESS_REF }}
+                  path: perf-harness
+
+            - name: Set up Python + asv + shim
+              run: |
+                  python3 -m venv .venv
+                  . .venv/bin/activate
+                  pip install --quiet --upgrade pip
+                  pip install --quiet "asv>=0.6,<0.7"
+                  pip install --quiet -e perf-harness/python
+
+            - name: Wire itk-repo symlink + machine metadata
+              working-directory: perf-harness
+              run: |
+                  . ../.venv/bin/activate
+                  ln -sfn "${GITHUB_WORKSPACE}" itk-repo
+                  asv machine --yes --machine github-actions-ubuntu-22
+
+            - name: Run ASV @ merge-base
+              working-directory: perf-harness
+              env:
+                  ITK_BENCHMARK_BIN: ${{ steps.locate.outputs.base_bin }}
+                  ITK_BENCHMARK_DATA: ${{ steps.locate.outputs.fixture_dir }}
+                  ITK_BENCHMARK_SCRATCH: ${{ runner.temp }}/itkperf-base
+              run: |
+                  . ../.venv/bin/activate
+                  mkdir -p "$ITK_BENCHMARK_SCRATCH"
+                  asv run --machine github-actions-ubuntu-22 \
+                      --set-commit-hash ${{ steps.shas.outputs.base_sha }} \
+                      --python=same
+
+            - name: Run ASV @ PR HEAD
+              working-directory: perf-harness
+              env:
+                  ITK_BENCHMARK_BIN: ${{ steps.locate.outputs.head_bin }}
+                  ITK_BENCHMARK_DATA: ${{ steps.locate.outputs.fixture_dir }}
+                  ITK_BENCHMARK_SCRATCH: ${{ runner.temp }}/itkperf-head
+              run: |
+                  . ../.venv/bin/activate
+                  mkdir -p "$ITK_BENCHMARK_SCRATCH"
+                  asv run --machine github-actions-ubuntu-22 \
+                      --set-commit-hash ${{ steps.shas.outputs.head_sha }} \
+                      --python=same
+
+            - name: Compare base → head
+              id: compare
+              working-directory: perf-harness
+              shell: bash
+              run: |
+                  . ../.venv/bin/activate
+                  {
+                      echo '## ITK performance benchmark'
+                      echo ''
+                      echo "Base: \`${{ steps.shas.outputs.base_short }}\` → Head: \`${{ steps.shas.outputs.head_short }}\`"
+                      echo ''
+                      echo '```'
+                      asv compare --factor=1.10 --split \
+                          ${{ steps.shas.outputs.base_sha }} \
+                          ${{ steps.shas.outputs.head_sha }} || true
+                      echo '```'
+                      echo ''
+                      echo '_Shared GHA runners are noisy; ±10% changes are within jitter. Treat as informational until a trend emerges._'
+                  } > compare.md
+                  cat compare.md
+
+            - name: Publish ASV HTML
+              working-directory: perf-harness
+              run: |
+                  . ../.venv/bin/activate
+                  asv publish
+
+            - name: Upload ASV results
+              uses: actions/upload-artifact@v4
+              with:
+                  name: asv-html-${{ steps.shas.outputs.head_short }}
+                  path: perf-harness/.asv/html
+                  retention-days: 14
+
+            - name: Upload comparison summary
+              uses: actions/upload-artifact@v4
+              with:
+                  name: asv-compare-${{ steps.shas.outputs.head_short }}
+                  path: perf-harness/compare.md
+                  retention-days: 14
+
+            - name: Post PR comment
+              if: github.event_name == 'pull_request'
+              uses: marocchino/sticky-pull-request-comment@v2
+              with:
+                  header: itk-perf-benchmark
+                  path: perf-harness/compare.md
+
+            - name: Save ccache
+              if: always()
+              uses: actions/cache/save@v5
+              with:
+                  path: ${{ runner.temp }}/ccache
+                  key: ccache-v1-perf-${{ github.sha }}
