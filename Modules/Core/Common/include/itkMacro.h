@@ -109,12 +109,14 @@ namespace itk
 #  define ITK_GCC_SUPPRESS_Wfloat_equal ITK_PRAGMA(GCC diagnostic ignored "-Wfloat-equal")
 #  define ITK_GCC_SUPPRESS_Wformat_nonliteral ITK_PRAGMA(GCC diagnostic ignored "-Wformat-nonliteral")
 #  define ITK_GCC_SUPPRESS_Warray_bounds ITK_PRAGMA(GCC diagnostic ignored "-Warray-bounds")
+#  define ITK_GCC_SUPPRESS_Wmaybe_uninitialized ITK_PRAGMA(GCC diagnostic ignored "-Wmaybe-uninitialized")
 #else
 #  define ITK_GCC_PRAGMA_PUSH
 #  define ITK_GCC_PRAGMA_POP
 #  define ITK_GCC_SUPPRESS_Wfloat_equal
 #  define ITK_GCC_SUPPRESS_Wformat_nonliteral
 #  define ITK_GCC_SUPPRESS_Warray_bounds
+#  define ITK_GCC_SUPPRESS_Wmaybe_uninitialized
 #endif
 
 // For Clang only (and not GCC):
