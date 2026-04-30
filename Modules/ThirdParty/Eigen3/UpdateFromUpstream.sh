@@ -8,8 +8,9 @@ readonly name="Eigen3"
 readonly ownership="Eigen Upstream <kwrobot@kitware.com>"
 readonly subtree="Modules/ThirdParty/Eigen3/src/itkeigen"
 readonly repo="https://github.com/InsightSoftwareConsortium/eigen"
-readonly tag="for/itk-20260305-4c99fca"
+readonly tag="for/itk-20260430-fef1460ek"
 readonly paths="
+Eigen/AccelerateSupport
 Eigen/Cholesky
 Eigen/CholmodSupport
 Eigen/Core
@@ -20,6 +21,7 @@ Eigen/Geometry
 Eigen/Householder
 Eigen/IterativeLinearSolvers
 Eigen/Jacobi
+Eigen/KLUSupport
 Eigen/LU
 Eigen/MetisSupport
 Eigen/OrderingMethods
@@ -38,7 +40,9 @@ Eigen/StdDeque
 Eigen/StdList
 Eigen/StdVector
 Eigen/SuperLUSupport
+Eigen/ThreadPool
 Eigen/UmfPackSupport
+Eigen/Version
 Eigen/src
 
 COPYING.BSD
