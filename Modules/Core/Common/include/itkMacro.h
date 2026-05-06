@@ -1468,6 +1468,39 @@ ContainerCopyWithCheck(MemberContainerType & m, const CopyFromContainerType & c,
   }                                                                                                                   \
   ITK_MACROEND_NOOP_STATEMENT
 /** @ITKEndGrouping */
+
+// itkVirtual...Macro: explicit-virtual wrappers around the standard Get/Set
+// macros. Use these at base-class sites where derived classes override the
+// member, to mark the polymorphism requirement explicitly.
+#define itkVirtualSetMacro(name, type) itkSetMacro(name, type)
+#define itkVirtualGetMacro(name, type) itkGetMacro(name, type)
+#define itkVirtualGetConstMacro(name, type) itkGetConstMacro(name, type)
+#define itkVirtualGetConstReferenceMacro(name, type) itkGetConstReferenceMacro(name, type)
+#define itkVirtualSetEnumMacro(name, type) itkSetEnumMacro(name, type)
+#define itkVirtualGetEnumMacro(name, type) itkGetEnumMacro(name, type)
+#define itkVirtualSetStringMacro(name) itkSetStringMacro(name)
+#define itkVirtualGetStringMacro(name) itkGetStringMacro(name)
+#define itkVirtualSetClampMacro(name, type, min, max) itkSetClampMacro(name, type, min, max)
+#define itkVirtualSetObjectMacro(name, type) itkSetObjectMacro(name, type)
+#define itkVirtualGetObjectMacro(name, type) itkGetObjectMacro(name, type)
+#define itkVirtualGetModifiableObjectMacro(name, type) itkGetModifiableObjectMacro(name, type)
+#define itkVirtualGetConstObjectMacro(name, type) itkGetConstObjectMacro(name, type)
+#define itkVirtualGetConstReferenceObjectMacro(name, type) itkGetConstReferenceObjectMacro(name, type)
+#define itkVirtualSetConstObjectMacro(name, type) itkSetConstObjectMacro(name, type)
+#define itkVirtualBooleanMacro(name) itkBooleanMacro(name)
+#define itkVirtualSetVectorMacro(name, type, count) itkSetVectorMacro(name, type, count)
+#define itkVirtualGetVectorMacro(name, type, count) itkGetVectorMacro(name, type, count)
+#define itkVirtualSetInputMacro(name, type) itkSetInputMacro(name, type)
+#define itkVirtualGetInputMacro(name, type) itkGetInputMacro(name, type)
+#define itkVirtualSetDecoratedInputMacro(name, type) itkSetDecoratedInputMacro(name, type)
+#define itkVirtualGetDecoratedInputMacro(name, type) itkGetDecoratedInputMacro(name, type)
+#define itkVirtualSetGetDecoratedInputMacro(name, type) itkSetGetDecoratedInputMacro(name, type)
+#define itkVirtualSetDecoratedObjectInputMacro(name, type) itkSetDecoratedObjectInputMacro(name, type)
+#define itkVirtualGetDecoratedObjectInputMacro(name, type) itkGetDecoratedObjectInputMacro(name, type)
+#define itkVirtualSetGetDecoratedObjectInputMacro(name, type) itkSetGetDecoratedObjectInputMacro(name, type)
+#define itkVirtualSetDecoratedOutputMacro(name, type) itkSetDecoratedOutputMacro(name, type)
+#define itkVirtualGetDecoratedOutputMacro(name, type) itkGetDecoratedOutputMacro(name, type)
+
 // ITK_FUTURE_DEPRECATED is only for internal use, within the implementation of ITK. It allows triggering "deprecated"
 // warnings when legacy support is removed, which warn that a specific feature may be removed in the future.
 #if defined(ITK_LEGACY_REMOVE) && !defined(ITK_LEGACY_SILENT)
@@ -1522,6 +1555,11 @@ ContainerCopyWithCheck(MemberContainerType & m, const CopyFromContainerType & c,
 #  define ITK_ITERATOR_OVERRIDE static_assert(false, "ERROR: ITK_ITERATOR_OVERRIDE must be removed")
 #  define ITK_ITERATOR_FINAL static_assert(false, "ERROR: ITK_ITERATOR_FINAL must be removed")
 
+#  define ITK_GETSET_VIRTUAL                                                                                          \
+    static_assert(false,                                                                                              \
+                  "ERROR: ITK_GETSET_VIRTUAL must be replaced by itkVirtualSetMacro/itkVirtualGetMacro at the base, " \
+                  "or removed if the override is no longer needed")
+
 #else
 // DEPRECATED: These macros are left here for compatibility with remote modules.
 // Once they have been removed from all known remote modules, this code should
@@ -1564,6 +1602,8 @@ ContainerCopyWithCheck(MemberContainerType & m, const CopyFromContainerType & c,
 #  define ITK_ITERATOR_VIRTUAL  /*purposefully empty for ITKv6, iterators are not virtual for performance reasons*/
 #  define ITK_ITERATOR_OVERRIDE /*purposefully empty for ITKv6, iterators are not virtual for performance reasons*/
 #  define ITK_ITERATOR_FINAL    /*purposefully empty for ITKv6, iterators are not virtual for performance reasons*/
+
+#  define ITK_GETSET_VIRTUAL /*marker for downstream code that overrides an ITK Get/Set; empty in ITKv6*/
 #endif
 
 #define allow_inclusion_of_itkExceptionObject_h
