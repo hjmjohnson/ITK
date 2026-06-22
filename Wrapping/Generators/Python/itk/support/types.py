@@ -18,7 +18,7 @@
 
 import importlib
 from importlib.metadata import metadata
-from typing import Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, TypeAlias, Union
 import os
 
 try:
@@ -182,21 +182,20 @@ if os.name == "nt":
 if TYPE_CHECKING:
     import itk
 
-# These should eventually explicitly be marked as TypeAlias's per PEP 613, available in CPython 3.10
-ImageBase = "itk.ImageBase"
-Image = "itk.Image"
-VectorImage = "itk.VectorImage"
+ImageBase: TypeAlias = "itk.ImageBase"
+Image: TypeAlias = "itk.Image"
+VectorImage: TypeAlias = "itk.VectorImage"
 
-RGBPixel = "itk.RGBPixel"
-Vector = "itk.Vector"
-CovariantVector = "itk.CovariantVector"
-SymmetricSecondRankTensor = "itk.SymmetricSecondRankTensor"
-Offset = "itk.Offset"
-FixedArray = "itk.FixedArray"
-VariableLengthVector = "itk.VariableLengthVector"
-complex_ = "itk.complex"
+RGBPixel: TypeAlias = "itk.RGBPixel"
+Vector: TypeAlias = "itk.Vector"
+CovariantVector: TypeAlias = "itk.CovariantVector"
+SymmetricSecondRankTensor: TypeAlias = "itk.SymmetricSecondRankTensor"
+Offset: TypeAlias = "itk.Offset"
+FixedArray: TypeAlias = "itk.FixedArray"
+VariableLengthVector: TypeAlias = "itk.VariableLengthVector"
+complex_: TypeAlias = "itk.complex"
 
-PixelTypes = Union[
+PixelTypes: TypeAlias = Union[
     itkCType,
     RGBPixel,
     Vector,
@@ -207,9 +206,9 @@ PixelTypes = Union[
     complex_,
 ]
 
-ImageSource = "itk.ImageSource"
+ImageSource: TypeAlias = "itk.ImageSource"
 
-ImageOrImageSource = Union[ImageBase, ImageSource]
+ImageOrImageSource: TypeAlias = Union[ImageBase, ImageSource]
 # Can be coerced into an itk.ImageBase
 if _HAVE_XARRAY and _HAVE_TORCH:
     ImageLike = Union[ImageBase, ArrayLike, "xr.DataArray", "torch.Tensor"]
@@ -220,38 +219,38 @@ elif _HAVE_TORCH:
 else:
     ImageLike = Union[ImageBase, ArrayLike]
 
-ImageIOBase = "itk.ImageIOBase"
+ImageIOBase: TypeAlias = "itk.ImageIOBase"
 
-LightObject = "itk.LightObject"
-Object = "itk.Object"
-DataObject = "itk.DataObject"
+LightObject: TypeAlias = "itk.LightObject"
+Object: TypeAlias = "itk.Object"
+DataObject: TypeAlias = "itk.DataObject"
 
-PointSet = "itk.PointSet"
-Mesh = "itk.Mesh"
-QuadEdgeMesh = "itk.QuadEdgeMesh"
+PointSet: TypeAlias = "itk.PointSet"
+Mesh: TypeAlias = "itk.Mesh"
+QuadEdgeMesh: TypeAlias = "itk.QuadEdgeMesh"
 
-Path = "itk.Path"
-ParametricPath = "itk.ParametricPath"
-PolyLineParametricPath = "itk.PolyLineParametricPath"
-SpatialObject = "itk.SpatialObject"
+Path: TypeAlias = "itk.Path"
+ParametricPath: TypeAlias = "itk.ParametricPath"
+PolyLineParametricPath: TypeAlias = "itk.PolyLineParametricPath"
+SpatialObject: TypeAlias = "itk.SpatialObject"
 
-TransformBase = "itk.TransformBaseTemplate"
-Transform = "itk.Transform"
+TransformBase: TypeAlias = "itk.TransformBaseTemplate"
+Transform: TypeAlias = "itk.Transform"
 
-ImageRegion = "itk.ImageRegion"
+ImageRegion: TypeAlias = "itk.ImageRegion"
 
-VectorContainer = "itk.VectorContainer"
-Matrix = "itk.Matrix"
+VectorContainer: TypeAlias = "itk.VectorContainer"
+Matrix: TypeAlias = "itk.Matrix"
 
 # Return types for the functional interfaces to ProcessObject's.
 # When there is a single indexed output, it is returned directly.
 # When there are multiple indexed outputs, a tuple of the indexed outputs is
 # returned.
-ImageSourceReturn = Union[ImageLike, tuple[ImageLike, ...]]
-MeshSourceReturn = Union[Mesh, tuple[Mesh, ...]]
-PathSourceReturn = Union[Path, tuple[Path, ...]]
+ImageSourceReturn: TypeAlias = Union[ImageLike, tuple[ImageLike, ...]]
+MeshSourceReturn: TypeAlias = Union[Mesh, tuple[Mesh, ...]]
+PathSourceReturn: TypeAlias = Union[Path, tuple[Path, ...]]
 
-InterpolateImageFunction = "itk.InterpolateImageFunction"
-ExtrapolateImageFunction = "itk.ExtrapolateImageFunction"
-ImageBoundaryCondition = "itk.ImageBoundaryCondition"
-FlatStructuringElement = "itk.FlatStructuringElement"
+InterpolateImageFunction: TypeAlias = "itk.InterpolateImageFunction"
+ExtrapolateImageFunction: TypeAlias = "itk.ExtrapolateImageFunction"
+ImageBoundaryCondition: TypeAlias = "itk.ImageBoundaryCondition"
+FlatStructuringElement: TypeAlias = "itk.FlatStructuringElement"
