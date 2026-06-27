@@ -259,8 +259,11 @@ TEST_F(ShapeLabelMapFixture, 3D_T3x2x1_Direction)
   EXPECT_EQ(6u, labelObject->GetNumberOfPixels());
   EXPECT_EQ(0u, labelObject->GetNumberOfPixelsOnBorder());
   ITK_EXPECT_VECTOR_NEAR(itk::MakeVector(1u, 2u, 3u), labelObject->GetOrientedBoundingBoxSize(), 1e-10);
+  // Origin is a sign-arbitrary corner; assert it is a box vertex and check the invariant center.
+  EXPECT_TRUE(Utils::TestListHasPoint(
+    labelObject->GetOrientedBoundingBoxVertices(), itk::MakePoint(6.02222, -4.47691, -15.57049), 1e-4));
   ITK_EXPECT_VECTOR_NEAR(
-    itk::MakePoint(6.02222, -4.47691, -15.57049), labelObject->GetOrientedBoundingBoxOrigin(), 1e-4);
+    itk::MakePoint(5.06906, -3.25286, -14.52493), labelObject->GetOrientedBoundingBoxCenter(), 1e-4);
   EXPECT_NEAR(14.62414, labelObject->GetPerimeter(), 1e-4); // resulting value
   EXPECT_EQ(0.0, labelObject->GetPerimeterOnBorder());
   EXPECT_EQ(0.0, labelObject->GetPerimeterOnBorderRatio());
@@ -376,9 +379,12 @@ TEST_F(ShapeLabelMapFixture, 3D_T2x2x2_Spacing_Direction)
   EXPECT_EQ(8u, labelObject->GetNumberOfPixels());
   EXPECT_EQ(0u, labelObject->GetNumberOfPixelsOnBorder());
   ITK_EXPECT_VECTOR_NEAR(itk::MakeVector(2.0, 2.2, 4.4), labelObject->GetOrientedBoundingBoxSize(), 1e-10);
+  // Origin is a sign-arbitrary corner; assert it is a box vertex and check the invariant center.
+  EXPECT_TRUE(Utils::TestListHasPoint(
+    labelObject->GetOrientedBoundingBoxVertices(), itk::MakePoint(9.75747, 5.36134, -28.03480), 1e-4));
   ITK_EXPECT_VECTOR_NEAR(
-    itk::MakePoint(9.75747, 5.36134, -28.03480), labelObject->GetOrientedBoundingBoxOrigin(), 1e-4); // resulting value
-  EXPECT_NEAR(28.3919, labelObject->GetPerimeter(), 1e-4);                                           // resulting value
+    itk::MakePoint(10.13655, 4.21036, -25.67228), labelObject->GetOrientedBoundingBoxCenter(), 1e-4);
+  EXPECT_NEAR(28.3919, labelObject->GetPerimeter(), 1e-4); // resulting value
   EXPECT_EQ(0.0, labelObject->GetPerimeterOnBorder());
   EXPECT_EQ(0.0, labelObject->GetPerimeterOnBorderRatio());
   EXPECT_NEAR(19.36, labelObject->GetPhysicalSize(), 1e-10);

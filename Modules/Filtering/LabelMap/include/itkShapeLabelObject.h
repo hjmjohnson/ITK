@@ -538,6 +538,11 @@ public:
     m_PerimeterOnBorderRatio = v;
   }
 
+  /** Get the origin corner of the oriented bounding box.
+   * \note The corner is selected from the sign-arbitrary principal-axis
+   * eigenvectors and is not reproducible across solvers/platforms; use
+   * GetOrientedBoundingBoxVertices() or GetOrientedBoundingBoxCenter() for
+   * portable geometry. */
   const OrientedBoundingBoxPointType &
   GetOrientedBoundingBoxOrigin() const
   {
@@ -579,6 +584,21 @@ public:
   GetOrientedBoundingBoxDirection() const
   {
     return this->GetPrincipalAxes();
+  }
+
+  /** Get the geometric center of the oriented bounding box. Unlike the origin
+   * corner, the center is invariant to the eigenvector signs and is therefore
+   * reproducible across solvers and platforms. */
+  OrientedBoundingBoxPointType
+  GetOrientedBoundingBoxCenter() const
+  {
+    const MatrixType               obbToPhysical(this->GetOrientedBoundingBoxDirection().GetTranspose());
+    Vector<double, ImageDimension> halfExtent;
+    for (unsigned int j = 0; j < ImageDimension; ++j)
+    {
+      halfExtent[j] = 0.5 * m_OrientedBoundingBoxSize[j];
+    }
+    return m_OrientedBoundingBoxOrigin + obbToPhysical * halfExtent;
   }
 
   /** Get an array of point vertices which define the corners of the
