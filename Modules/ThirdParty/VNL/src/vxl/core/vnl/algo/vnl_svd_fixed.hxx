@@ -18,10 +18,12 @@
 #include <vnl/vnl_math.h>
 #include <vnl/vnl_fortran_copy_fixed.h>
 #include <vnl/algo/vnl_netlib.h> // dsvdc_()
+#include <vnl/algo/vnl_svd_native.h> // vnl_native_svdc()
 
-// use C++ overloading to call the right linpack routine from the template code :
+// Route the SVD engine through the native C++ xsvdc port (byte-exact drop-in for
+// the LINPACK svdc, see vnl_svd_native.h). Overloading picks the precision.
 #define macro(p, T) \
-  inline void vnl_linpack_svdc_fixed(vnl_netlib_svd_proto(T)) { v3p_netlib_##p##svdc_(vnl_netlib_svd_params); }
+  inline void vnl_linpack_svdc_fixed(vnl_netlib_svd_proto(T)) { vnl_native_svdc(vnl_netlib_svd_params); }
 macro(s, float);
 macro(d, double);
 macro(c, std::complex<float>);
