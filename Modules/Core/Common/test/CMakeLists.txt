@@ -1485,6 +1485,7 @@ set(
   itkMathRoundGTest.cxx
   itkMathVnlParityGTest.cxx
   itkMathSVDGTest.cxx
+  itkVnlSVDEngineGTest.cxx
   itkMatrixExponentialGTest.cxx
   itkMatrixGTest.cxx
   itkMersenneTwisterRandomVariateGeneratorGTest.cxx
