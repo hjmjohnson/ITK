@@ -21,7 +21,6 @@
 #undef cqrsl_
 #undef cscal_
 #undef csrot_
-#undef csvdc_
 #undef cswap_
 #undef cub_
 #undef dasum_
@@ -78,7 +77,6 @@
 #undef dsortr_
 #undef dstats_
 #undef dstqrb_
-#undef dsvdc_
 #undef dswap_
 #undef dtrmm_
 #undef dtrmv_
@@ -180,7 +178,6 @@
 #undef sspmv_
 #undef sspr2_
 #undef sspr_
-#undef ssvdc_
 #undef sswap_
 #undef ssymv_
 #undef ssyr2_
@@ -234,7 +231,6 @@
 #undef zqrdc_
 #undef zqrsl_
 #undef zscal_
-#undef zsvdc_
 #undef zswap_
 #undef ztrevc_
 #undef ztrmm_

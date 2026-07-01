@@ -83,12 +83,6 @@ set(V3P_NETLIB_blas_SOURCES
      blas/zscal.c blas/zscal.h
      blas/zswap.c blas/zswap.h
    )
-set(V3P_NETLIB_linpack_SOURCES
-     linpack/csvdc.c linpack/csvdc.h
-     linpack/dsvdc.c linpack/dsvdc.h
-     linpack/ssvdc.c linpack/ssvdc.h
-     linpack/zsvdc.c linpack/zsvdc.h
-   )
 set(V3P_NETLIB_eispack_SOURCES
      eispack/balanc.c eispack/balanc.h
      eispack/balbak.c eispack/balbak.h
@@ -148,7 +142,6 @@ set(v3p_netlib_sources
      ${V3P_NETLIB_base_SOURCES}
      ${V3P_NETLIB_libf2c_SOURCES}
      ${V3P_NETLIB_blas_SOURCES}
-     ${V3P_NETLIB_linpack_SOURCES}
      ${V3P_NETLIB_eispack_SOURCES}
      ${V3P_NETLIB_napack_SOURCES}
      ${V3P_NETLIB_opt_SOURCES}
@@ -158,14 +151,6 @@ set(v3p_netlib_sources
 
 # Adjust the compiler flags to avoid problems with f2c-generated code.
 if(CMAKE_COMPILER_IS_GNUCC)
-  # Adjust optimization of floating point computation for some sources.
-  # See comments in the sources for details.
-  set_source_files_properties(
-     linpack/ssvdc.c
-     linpack/dsvdc.c
-     PROPERTIES COMPILE_FLAGS -ffloat-store
-    )
-
   # Disable global optimizations for some source files.
   # See comments in the sources for details.
   set_source_files_properties(

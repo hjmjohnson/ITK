@@ -30,7 +30,6 @@ nm libv3p_netlib.a |grep " [TR] "
 #define cqrsl_ v3p_netlib_cqrsl_
 #define cscal_ v3p_netlib_cscal_
 #define csrot_ v3p_netlib_csrot_
-#define csvdc_ v3p_netlib_csvdc_
 #define cswap_ v3p_netlib_cswap_
 #define cub_ v3p_netlib_cub_
 #define dasum_ v3p_netlib_dasum_
@@ -87,7 +86,6 @@ nm libv3p_netlib.a |grep " [TR] "
 #define dsortr_ v3p_netlib_dsortr_
 #define dstats_ v3p_netlib_dstats_
 #define dstqrb_ v3p_netlib_dstqrb_
-#define dsvdc_ v3p_netlib_dsvdc_
 #define dswap_ v3p_netlib_dswap_
 #define dtrmm_ v3p_netlib_dtrmm_
 #define dtrmv_ v3p_netlib_dtrmv_
@@ -189,7 +187,6 @@ nm libv3p_netlib.a |grep " [TR] "
 #define sspmv_ v3p_netlib_sspmv_
 #define sspr2_ v3p_netlib_sspr2_
 #define sspr_ v3p_netlib_sspr_
-#define ssvdc_ v3p_netlib_ssvdc_
 #define sswap_ v3p_netlib_sswap_
 #define ssymv_ v3p_netlib_ssymv_
 #define ssyr2_ v3p_netlib_ssyr2_
@@ -243,7 +240,6 @@ nm libv3p_netlib.a |grep " [TR] "
 #define zqrdc_ v3p_netlib_zqrdc_
 #define zqrsl_ v3p_netlib_zqrsl_
 #define zscal_ v3p_netlib_zscal_
-#define zsvdc_ v3p_netlib_zsvdc_
 #define zswap_ v3p_netlib_zswap_
 #define ztrevc_ v3p_netlib_ztrevc_
 #define ztrmm_ v3p_netlib_ztrmm_
