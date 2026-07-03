@@ -107,6 +107,9 @@ else(ITK_USE_SYSTEM_DCMTK)
 
   # DCMTK build options; compiler and language-standard settings inherit from ITK's scope.
   set(BUILD_APPS OFF)
+  # Per-library targets only: a single-library build renames targets with a
+  # suffix the DCMTK IO modules' DCMTK::<lib> link names cannot match.
+  set(BUILD_SINGLE_SHARED_LIBRARY OFF CACHE INTERNAL "")
   set(DCMTK_ENABLE_CXX11 ON)
   set(DCMTK_FORCE_FPIC_ON_UNIX ON)
   set(DCMTK_DEFAULT_DICT builtin)
@@ -148,32 +151,43 @@ else(ITK_USE_SYSTEM_DCMTK)
   # namespaced name in ITKTargets.cmake, matching what find_package(DCMTK)
   # yields for downstream consumers.
   foreach(_dcmtk_lib IN LISTS _ITKDCMTK_LIB_NAMES)
-    set(_dcmtk_target "${_dcmtk_lib}${DCMTK_LIBRARY_SUFFIX}")
-    if(TARGET "${_dcmtk_target}")
-      if(NOT TARGET "DCMTK::${_dcmtk_target}")
-        add_library("DCMTK::${_dcmtk_target}" INTERFACE IMPORTED GLOBAL)
-        target_link_libraries(
-          "DCMTK::${_dcmtk_target}"
-          INTERFACE
-            "${_dcmtk_target}"
-        )
+    if(TARGET "${_dcmtk_lib}")
+      if(NOT TARGET "DCMTK::${_dcmtk_lib}")
+        add_library("DCMTK::${_dcmtk_lib}" INTERFACE IMPORTED GLOBAL)
+        target_link_libraries("DCMTK::${_dcmtk_lib}" INTERFACE "${_dcmtk_lib}")
       endif()
-      list(APPEND ITKDCMTK_LIBRARIES "DCMTK::${_dcmtk_target}")
+      list(APPEND ITKDCMTK_LIBRARIES "DCMTK::${_dcmtk_lib}")
     endif()
   endforeach()
   unset(_dcmtk_lib)
-  unset(_dcmtk_target)
 
-  # Build-tree consumers: locate DCMTKConfig.cmake in ITK's build root.
+  # Build-tree consumers: locate DCMTKConfig.cmake in ITK's build root. The
+  # build-tree export was written by export(TARGETS NAMESPACE), which
+  # mis-prefixes ITK's codec targets as DCMTK::ITK::*Module; rewrite those
+  # link-interface entries to their real ITK::* names after import.
+  list(JOIN _ITKDCMTK_LIB_NAMES " " _itkdcmtk_lib_names_spaced)
   set(
     ITKDCMTK_EXPORT_CODE_BUILD
     "
 if(NOT ITK_BINARY_DIR)
   set(DCMTK_DIR \"${CMAKE_BINARY_DIR}\")
   find_package(DCMTK REQUIRED NO_MODULE)
+  foreach(_itkdcmtk_lib ${_itkdcmtk_lib_names_spaced})
+    if(TARGET DCMTK::\${_itkdcmtk_lib})
+      get_target_property(_itkdcmtk_ll DCMTK::\${_itkdcmtk_lib} INTERFACE_LINK_LIBRARIES)
+      if(_itkdcmtk_ll MATCHES \"DCMTK::ITK::\")
+        string(REPLACE \"DCMTK::ITK::\" \"ITK::\" _itkdcmtk_ll \"\${_itkdcmtk_ll}\")
+        set_target_properties(DCMTK::\${_itkdcmtk_lib} PROPERTIES
+          INTERFACE_LINK_LIBRARIES \"\${_itkdcmtk_ll}\")
+      endif()
+    endif()
+  endforeach()
+  unset(_itkdcmtk_lib)
+  unset(_itkdcmtk_ll)
 endif()
 "
   )
+  unset(_itkdcmtk_lib_names_spaced)
   # Install-tree consumers: locate DCMTKConfig.cmake under ITK_INSTALL_PREFIX.
   set(
     ITKDCMTK_EXPORT_CODE_INSTALL

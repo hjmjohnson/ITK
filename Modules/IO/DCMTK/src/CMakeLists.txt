@@ -21,12 +21,12 @@ target_include_directories(ITKIODCMTK PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(
   ITKIODCMTK
   PRIVATE
-    dcmdata
-    dcmimgle
-    dcmimage
-    dcmjpeg
-    dcmjpls
-    oflog
+    DCMTK::dcmdata
+    DCMTK::dcmimgle
+    DCMTK::dcmimage
+    DCMTK::dcmjpeg
+    DCMTK::dcmjpls
+    DCMTK::oflog
 )
 
 if(DEFINED DCMTK_HAVE_CONFIG_H_OPTIONAL AND NOT DCMTK_HAVE_CONFIG_H_OPTIONAL)

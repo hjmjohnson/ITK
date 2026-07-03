@@ -5,7 +5,8 @@ option(ITK_USE_SYSTEM_DCMTK "Use an outside build of DCMTK." OFF)
 if(ITK_USE_SYSTEM_DCMTK)
   # Use local FindDCMTK.cmake.
   list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}/CMake")
-  find_package(DCMTK REQUIRED NO_MODULE)
+  # 3.7.0 matches the vendored DCMTK and guarantees DCMTK::-namespaced targets.
+  find_package(DCMTK 3.7.0 REQUIRED NO_MODULE)
 else()
   # Change default from OFF to ON for portability.
   option(
