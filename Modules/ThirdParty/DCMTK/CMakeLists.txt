@@ -161,16 +161,56 @@ else(ITK_USE_SYSTEM_DCMTK)
   endforeach()
   unset(_dcmtk_lib)
 
-  # Build-tree consumers: locate DCMTKConfig.cmake in ITK's build root.
+  # Build-tree consumers: locate DCMTKConfig.cmake in ITK's build root. The
+  # build-tree export was written by export(TARGETS NAMESPACE), which
+  # mis-prefixes superproject targets (e.g. DCMTK::ITK::*Module); strip the
+  # prefix from any reference that is not an existing target after import.
+  # Matches the fix proposed upstream in DCMTK/dcmtk#150.
+  list(JOIN _ITKDCMTK_LIB_NAMES " " _itkdcmtk_lib_names_spaced)
   set(
     ITKDCMTK_EXPORT_CODE_BUILD
     "
 if(NOT ITK_BINARY_DIR)
   set(DCMTK_DIR \"${CMAKE_BINARY_DIR}\")
   find_package(DCMTK REQUIRED NO_MODULE)
+  foreach(_itkdcmtk_lib ${_itkdcmtk_lib_names_spaced})
+    if(TARGET DCMTK::\${_itkdcmtk_lib})
+      get_target_property(_itkdcmtk_ll DCMTK::\${_itkdcmtk_lib} INTERFACE_LINK_LIBRARIES)
+      if(_itkdcmtk_ll)
+        set(_itkdcmtk_ll_new \"\")
+        foreach(_itkdcmtk_entry IN LISTS _itkdcmtk_ll)
+          set(_itkdcmtk_name \"\${_itkdcmtk_entry}\")
+          set(_itkdcmtk_link_only 0)
+          if(_itkdcmtk_entry MATCHES \"^\\\\\$<LINK_ONLY:(.+)>\$\")
+            set(_itkdcmtk_name \"\${CMAKE_MATCH_1}\")
+            set(_itkdcmtk_link_only 1)
+          endif()
+          if(_itkdcmtk_name MATCHES \"^DCMTK::(.+)\$\" AND NOT TARGET \"\${_itkdcmtk_name}\")
+            set(_itkdcmtk_name \"\${CMAKE_MATCH_1}\")
+          endif()
+          if(_itkdcmtk_link_only)
+            list(APPEND _itkdcmtk_ll_new \"\$<LINK_ONLY:\${_itkdcmtk_name}>\")
+          else()
+            list(APPEND _itkdcmtk_ll_new \"\${_itkdcmtk_name}\")
+          endif()
+        endforeach()
+        if(NOT \"\${_itkdcmtk_ll_new}\" STREQUAL \"\${_itkdcmtk_ll}\")
+          set_target_properties(DCMTK::\${_itkdcmtk_lib} PROPERTIES
+            INTERFACE_LINK_LIBRARIES \"\${_itkdcmtk_ll_new}\")
+        endif()
+        unset(_itkdcmtk_ll_new)
+        unset(_itkdcmtk_entry)
+        unset(_itkdcmtk_name)
+        unset(_itkdcmtk_link_only)
+      endif()
+      unset(_itkdcmtk_ll)
+    endif()
+  endforeach()
+  unset(_itkdcmtk_lib)
 endif()
 "
   )
+  unset(_itkdcmtk_lib_names_spaced)
   # Install-tree consumers: locate DCMTKConfig.cmake under ITK_INSTALL_PREFIX.
   set(
     ITKDCMTK_EXPORT_CODE_INSTALL
