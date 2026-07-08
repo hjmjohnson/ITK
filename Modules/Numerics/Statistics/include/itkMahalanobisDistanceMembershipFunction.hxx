@@ -21,7 +21,10 @@
 
 #include "vnl/vnl_vector.h"
 #include "vnl/vnl_matrix.h"
-#include "vnl/algo/vnl_matrix_inverse.h"
+#include "itkMathSVD.h"
+#if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
+#  include "vnl/algo/vnl_matrix_inverse.h" // transitional transitive include; dropped on ITK legacy removal
+#endif
 
 namespace itk::Statistics
 {
@@ -92,10 +95,10 @@ MahalanobisDistanceMembershipFunction<TVector>::SetCovariance(const CovarianceMa
   m_Covariance = cov;
 
   // the inverse of the covariance matrix is first computed by SVD
-  const vnl_matrix_inverse<double> inv_cov(m_Covariance.GetVnlMatrix());
+  const auto inv_cov = itk::Math::SVD(m_Covariance.GetVnlMatrix());
 
   // the determinant is then costless this way
-  const double det = inv_cov.determinant_magnitude();
+  const double det = inv_cov.DeterminantMagnitude();
 
   if (det < 0.)
   {
@@ -109,7 +112,7 @@ MahalanobisDistanceMembershipFunction<TVector>::SetCovariance(const CovarianceMa
   if (m_CovarianceNonsingular)
   {
     // allocate the memory for m_InverseCovariance matrix
-    m_InverseCovariance.GetVnlMatrix() = inv_cov.inverse();
+    m_InverseCovariance.GetVnlMatrix() = inv_cov.PseudoInverse();
   }
   else
   {

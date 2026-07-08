@@ -102,16 +102,12 @@ GaussianMembershipFunction<TMeasurementVector>::SetCovariance(const CovarianceMa
   }
 
   // the inverse of the covariance matrix is first computed by SVD
-  const vnl_matrix_inverse<double> inv_cov(cov.GetVnlMatrix());
+  const auto inv_cov = itk::Math::SVD(cov.GetVnlMatrix());
 
-  // Compute the *signed* determinant of the covariance matrix.
-  // vnl_matrix_inverse::determinant_magnitude() (which used to be used
-  // here) returns the product of singular values and is always
-  // non-negative, so it cannot detect a non-positive-definite matrix.
-  // Use vnl_determinant on the original covariance instead; this is
-  // O(n^3) but n is the measurement-vector dimension (typically very
-  // small) so the cost is negligible compared to the SVD already
-  // computed for the inverse.
+  // Signed determinant: the SVD's singular-value product is always
+  // non-negative and cannot detect a non-positive-definite matrix, so use
+  // vnl_determinant on the covariance. O(n^3) but n is the (tiny)
+  // measurement-vector dimension.
   const double det = vnl_determinant(cov.GetVnlMatrix());
 
   if (det <= 0.0)
@@ -131,7 +127,7 @@ GaussianMembershipFunction<TMeasurementVector>::SetCovariance(const CovarianceMa
   if (m_CovarianceNonsingular)
   {
     // allocate the memory for m_InverseCovariance matrix
-    m_InverseCovariance.GetVnlMatrix() = inv_cov.inverse();
+    m_InverseCovariance.GetVnlMatrix() = inv_cov.PseudoInverse();
 
     // calculate coefficient C of multivariate gaussian
     m_PreFactor = 1.0 / (std::sqrt(det) * std::pow(std::sqrt(2.0 * itk::Math::pi),

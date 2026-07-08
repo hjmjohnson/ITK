@@ -19,6 +19,9 @@
 #define itkKernelTransform_h
 
 #include "itkTransform.h"
+#if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
+#  include "vnl/algo/vnl_svd.h" // transitional transitive include; dropped on ITK legacy removal
+#endif
 #include "itkMatrix.h"
 #include "itkPointSet.h"
 #include <deque>
@@ -27,7 +30,6 @@
 #include "vnl/vnl_matrix.h"
 #include "vnl/vnl_vector.h"
 #include "vnl/vnl_vector_fixed.h"
-#include "vnl/algo/vnl_svd.h"
 
 namespace itk
 {

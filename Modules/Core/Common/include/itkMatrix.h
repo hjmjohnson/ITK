@@ -24,8 +24,20 @@
 #include <vxl_version.h>
 #include "vnl/vnl_matrix_fixed.hxx" // Get the templates
 #include "vnl/vnl_transpose.h"
-#include "vnl/algo/vnl_matrix_inverse.h"
+#include "itkMathSVD.h"
 #include "vnl/vnl_matrix.h"
+
+// GetInverse is Eigen-backed via itk::Math::SVD, but ITK 5.4 exposed
+// vnl_matrix_inverse (and through it vnl_svd / vnl_diag_matrix) transitively to
+// every itkMatrix.h consumer. Retain that surface for release-5.4 source
+// compatibility in default builds; ITK proper includes what it uses, so
+// ITK_LEGACY_REMOVE drops the leak. The transitional guard keeps the
+// vnl_matrix_inverse deprecation warning off itkMatrix consumers.
+#if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
+#  define ITK_VNL_SVD_TRANSITIONAL_INCLUDE
+#  include "vnl/algo/vnl_matrix_inverse.h"
+#  undef ITK_VNL_SVD_TRANSITIONAL_INCLUDE
+#endif
 #include "vnl/algo/vnl_determinant.h"
 #include "itkMath.h"
 #include <type_traits> // For is_same.
@@ -315,8 +327,7 @@ public:
     {
       itkGenericExceptionMacro("Singular matrix. Determinant is 0.");
     }
-    const vnl_matrix_inverse<T> inverse(m_Matrix.as_ref());
-    return vnl_matrix_fixed<T, VColumns, VRows>{ inverse.as_matrix() };
+    return vnl_matrix_fixed<T, VColumns, VRows>{ Math::SVD(m_Matrix.as_ref()).PseudoInverse() };
   }
 
   /** Return the transposed matrix. */

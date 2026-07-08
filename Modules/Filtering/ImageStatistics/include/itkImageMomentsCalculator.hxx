@@ -21,6 +21,7 @@
 #include "itkRealEigenDecomposition.h"
 #include "itkSymmetricEigenDecomposition.h"
 #include "itkImageRegionConstIteratorWithIndex.h"
+#include "vnl/vnl_diag_matrix.h"
 
 namespace itk
 {

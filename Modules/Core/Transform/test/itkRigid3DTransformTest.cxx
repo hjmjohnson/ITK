@@ -709,7 +709,7 @@ itkRigid3DTransformTest(int, char *[])
     }
     TransformType::MatrixType expectedInverse{};
     expectedInverse.SetIdentity();
-    ITK_TEST_EXPECT_EQUAL(inverse->GetMatrix(), expectedInverse);
+    ITK_TEST_EXPECT_TRUE(inverse->GetMatrix().GetVnlMatrix().is_equal(expectedInverse.GetVnlMatrix(), 1e-10));
 
     // An orthogonal transform should have an inverse: use a rotation matrix
     transform->SetIdentity();
@@ -743,7 +743,7 @@ itkRigid3DTransformTest(int, char *[])
     expectedInverse[0][1] = -sinth;
     expectedInverse[1][0] = sinth;
     expectedInverse[1][1] = costh;
-    ITK_TEST_EXPECT_EQUAL(inverse->GetMatrix(), expectedInverse);
+    ITK_TEST_EXPECT_TRUE(inverse->GetMatrix().GetVnlMatrix().is_equal(expectedInverse.GetVnlMatrix(), 1e-10));
 
     // Cannot test a singular matrix (i.e. not having an inverse) since ITK does not allow to set a
     // non-orthogonal rotation matrix to the transform

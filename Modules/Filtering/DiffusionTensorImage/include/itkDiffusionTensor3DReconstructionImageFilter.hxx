@@ -25,6 +25,7 @@
 #include "itkImageMaskSpatialObject.h"
 #include "vnl/vnl_vector.h"
 #include "itkTotalProgressReporter.h"
+#include "vnl/algo/vnl_svd.h"
 
 namespace itk
 {
@@ -435,7 +436,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
     m_TensorBasis = m_BMatrix;
   }
 
-  m_TensorBasisInverse = vnl_svd<double>{ m_TensorBasis.as_matrix() }.pinverse();
+  m_TensorBasisInverse = itk::Math::SVD(m_TensorBasis.as_matrix()).PseudoInverse();
 
   m_BMatrix.inplace_transpose();
 }

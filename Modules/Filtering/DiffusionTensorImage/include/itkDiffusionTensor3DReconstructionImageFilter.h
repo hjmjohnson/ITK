@@ -24,7 +24,10 @@
 #include "vnl/vnl_matrix.h"
 #include "vnl/vnl_vector_fixed.h"
 #include "vnl/vnl_matrix_fixed.h"
-#include "vnl/algo/vnl_svd.h"
+#include "itkMathSVD.h"
+#if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
+#  include "vnl/algo/vnl_svd.h" // transitional transitive include; dropped on ITK legacy removal
+#endif
 #include "itkVectorContainer.h"
 #include "itkVectorImage.h"
 #include "ITKDiffusionTensorImageExport.h"
@@ -105,15 +108,6 @@ operator<<(std::ostream & out, const DiffusionTensor3DReconstructionImageFilterE
  * of the DiffusionTensor3D pixel (double, float etc).
  *
  * For additional details see \cite westin2002 and \cite westin2002a.
- *
- * \warning
- * Although this filter has been written to support multiple threads, please
- * set the number of threads to 1.
-   \code
-           filter->SetNumberOfWorkUnits(1);
-   \endcode
- * This is due to buggy code in netlib/dsvdc, that is called by vnl_svd.
- * (used to compute the pseudo-inverse to find the dual tensor basis).
  *
  * \author Xiaodong Tao, GE, for contributing parts of this class.
  * \author Casey Goodlet, UNC for patches to support multiple baseline

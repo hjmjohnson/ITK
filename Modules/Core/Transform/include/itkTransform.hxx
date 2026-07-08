@@ -19,7 +19,10 @@
 #define itkTransform_hxx
 
 #include "itkCrossHelper.h"
-#include "vnl/algo/vnl_svd_fixed.h"
+#include "itkMathSVD.h"
+#if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
+#  include "vnl/algo/vnl_svd_fixed.h" // transitional transitive include; dropped on ITK legacy removal
+#endif
 #include "itkMetaProgrammingLibrary.h"
 
 namespace itk
@@ -532,10 +535,15 @@ Transform<TParametersValueType, VInputDimension, VOutputDimension>::ComputeInver
   JacobianPositionType forward_jacobian;
   this->ComputeJacobianWithRespectToPosition(pnt, forward_jacobian);
 
-  using SVDAlgorithmType =
-    vnl_svd_fixed<typename JacobianPositionType::element_type, VOutputDimension, VInputDimension>;
-  const SVDAlgorithmType svd(forward_jacobian);
-  jacobian.set(svd.inverse().data_block());
+  if constexpr (VOutputDimension == VInputDimension)
+  {
+    // Square: fixed-size pseudo-inverse avoids the dynamic as_matrix() round-trip.
+    jacobian = Math::SVD(forward_jacobian).PseudoInverse();
+  }
+  else
+  {
+    jacobian.set(Math::SVD(forward_jacobian.as_matrix()).PseudoInverse().data_block());
+  }
 }
 
 template <typename TParametersValueType, unsigned int VInputDimension, unsigned int VOutputDimension>

@@ -30,6 +30,7 @@
 #include "itkMath.h"
 #include "itkLexicographicCompare.h"
 #include <deque>
+#include "vnl/vnl_diag_matrix.h"
 #include <map>
 
 namespace itk

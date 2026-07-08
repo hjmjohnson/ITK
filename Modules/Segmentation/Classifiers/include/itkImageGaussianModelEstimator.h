@@ -19,6 +19,9 @@
 #define itkImageGaussianModelEstimator_h
 
 #include <cmath>
+#if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
+#  include "vnl/algo/vnl_matrix_inverse.h" // transitional transitive include; dropped on ITK legacy removal
+#endif
 #include <cfloat>
 #include <memory> // For unique_ptr.
 
@@ -26,7 +29,6 @@
 #include "vnl/vnl_matrix.h"
 #include "vnl/vnl_matrix_fixed.h"
 #include "itkMath.h"
-#include "vnl/algo/vnl_matrix_inverse.h"
 
 #include "itkImageRegionIterator.h"
 #include "itkMacro.h"

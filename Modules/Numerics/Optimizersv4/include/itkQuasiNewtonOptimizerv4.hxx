@@ -399,9 +399,7 @@ QuasiNewtonOptimizerv4Template<TInternalComputationValueType>::ComputeHessianAnd
       gradient[p] = this->m_Gradient[offset + p];
     }
 
-    const vnl_matrix<TInternalComputationValueType> hessianInverse{
-      vnl_matrix_inverse<TInternalComputationValueType>(newHessian).as_matrix()
-    };
+    const vnl_matrix<TInternalComputationValueType> hessianInverse{ itk::Math::SVD(newHessian).PseudoInverse() };
     // gradient is already negated
     const DerivativeType newtonStep{ hessianInverse * gradient };
     for (SizeValueType p = 0; p < numLocalPara; ++p)
