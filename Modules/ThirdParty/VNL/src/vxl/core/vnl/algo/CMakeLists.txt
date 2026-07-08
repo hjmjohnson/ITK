@@ -10,10 +10,6 @@ set( vnl_algo_sources
   vnl_netlib.h
 
   # matrix decompositions
-  vnl_svd.hxx vnl_svd.h
-  vnl_svd_economy.hxx vnl_svd_economy.h
-  vnl_svd_fixed.hxx vnl_svd_fixed.h
-  vnl_matrix_inverse.hxx vnl_matrix_inverse.h
   vnl_qr.hxx vnl_qr.h
   vnl_cholesky.cxx vnl_cholesky.h
   vnl_ldl_cholesky.cxx vnl_ldl_cholesky.h
@@ -29,7 +25,6 @@ set( vnl_algo_sources
   vnl_powell.cxx vnl_powell.h
   vnl_brent.cxx vnl_brent.h
   vnl_lsqr.cxx vnl_lsqr.h
-  vnl_solve_qp.cxx vnl_solve_qp.h
   vnl_bracket_minimum.cxx vnl_bracket_minimum.h
   vnl_brent_minimizer.cxx vnl_brent_minimizer.h
 
@@ -59,11 +54,35 @@ if(NOT ITK_FUTURE_LEGACY_REMOVE)
   )
 endif()
 
+# vnl_matrix_inverse is a thin vnl_svd wrapper deprecated for itk::Math::SVD;
+# drop it and its template instantiations under ITK_FUTURE_LEGACY_REMOVE.
+if(NOT ITK_FUTURE_LEGACY_REMOVE)
+  list(APPEND vnl_algo_sources
+    vnl_matrix_inverse.hxx vnl_matrix_inverse.h
+  )
+endif()
+
+# LINPACK-svdc-backed legacy: vnl_svd{,_economy,_fixed} and vnl_solve_qp (its
+# only client outside the deprecated eigensystem/matrix_inverse wrappers) are
+# the consumers of the netlib svdc engine. They are deprecated for itk::Math::SVD;
+# drop them and their template instantiations once the APIs are removed, leaving
+# no svdc dependency to build.
+if(NOT ITK_FUTURE_LEGACY_REMOVE)
+  list(APPEND vnl_algo_sources
+    vnl_svd.hxx vnl_svd.h
+    vnl_svd_economy.hxx vnl_svd_economy.h
+    vnl_svd_fixed.hxx vnl_svd_fixed.h
+    vnl_solve_qp.cxx vnl_solve_qp.h
+  )
+endif()
+
 aux_source_directory(Templates vnl_algo_sources)
 
 if(ITK_FUTURE_LEGACY_REMOVE)
   list(FILTER vnl_algo_sources EXCLUDE REGEX "vnl_symmetric_eigensystem\\+")
   list(FILTER vnl_algo_sources EXCLUDE REGEX "vnl_scatter_3x3\\+")
+  list(FILTER vnl_algo_sources EXCLUDE REGEX "vnl_matrix_inverse\\+")
+  list(FILTER vnl_algo_sources EXCLUDE REGEX "vnl_svd.*\\+")
 endif()
 
 # If VXL_INSTALL_INCLUDE_DIR is the default value

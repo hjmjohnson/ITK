@@ -2,6 +2,25 @@
 #ifndef vnl_solve_qp_h_
 #define vnl_solve_qp_h_
 
+// ITK deprecation shim: vnl_solve_qp is the last non-eigensystem consumer of the
+// LINPACK-svdc engine (through vnl_svd); it has no ITK client and no itk::Math
+// replacement. The guard is active only when itkConfigure.h is reachable (an ITK
+// consumer), so ITK's own VXL build is unaffected.
+#if __has_include(<itkConfigure.h>)
+#  include <itkConfigure.h>
+#  if defined(ITK_FUTURE_LEGACY_REMOVE)
+#    error \
+      "vnl/algo/vnl_solve_qp.h is deprecated and removed with the vnl_svd/LINPACK-svdc engine; no itk::Math replacement."
+#  elif defined(ITK_LEGACY_REMOVE) && !defined(ITK_LEGACY_SILENT) && !defined(ITK_LEGACY_TEST)
+#    if defined(_MSC_VER)
+#      pragma message( \
+        "vnl/algo/vnl_solve_qp.h is deprecated and removed with the vnl_svd/LINPACK-svdc engine; no itk::Math replacement.")
+#    else
+#      warning \
+        "vnl/algo/vnl_solve_qp.h is deprecated and removed with the vnl_svd/LINPACK-svdc engine; no itk::Math replacement."
+#    endif
+#  endif
+#endif
 //:
 // \file
 // \brief Functions to solve various forms of constrained quadratic programming

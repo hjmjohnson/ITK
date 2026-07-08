@@ -14,7 +14,10 @@
 #include "testlib/testlib_test.h"
 #include <vnl/algo/vnl_svd_economy.h>
 #include <vnl/algo/vnl_svd.h>
-#include <vnl/algo/vnl_matrix_inverse.h>
+#ifndef ITK_FUTURE_LEGACY_REMOVE
+#  define ITK_LEGACY_TEST // exercising the deprecated vnl_matrix_inverse
+#  include <vnl/algo/vnl_matrix_inverse.h>
+#endif
 
 static void
 test_matrix_inverse()
@@ -42,10 +45,12 @@ test_matrix_inverse()
   vnl_matrix<std::complex<double>> V0 = svd.V();
   TEST_NEAR("complex vnl_svd_economy", V[0][1], V0[0][1], 1e-6);
 
+#ifndef ITK_FUTURE_LEGACY_REMOVE
   const vnl_matrix<std::complex<double>> inv{ vnl_matrix_inverse<std::complex<double>>(m).as_matrix() };
   vnl_matrix<std::complex<double>> identity(4, 4);
   identity.set_identity();
   TEST_NEAR("complex vnl_matrix_inverse", (m * inv - identity).array_inf_norm(), 0, 1e-6);
+#endif
 }
 
 void

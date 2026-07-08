@@ -116,6 +116,11 @@ set(V3P_NETLIB_eispack_SOURCES
 if(ITK_FUTURE_LEGACY_REMOVE)
   set(V3P_NETLIB_eispack_SOURCES "")
 endif()
+# linpack svdc ({s,d,c,z}svdc) backs only the deprecated vnl_svd family and
+# vnl_solve_qp. Drop the dead engine once those APIs are removed.
+if(ITK_FUTURE_LEGACY_REMOVE)
+  set(V3P_NETLIB_linpack_SOURCES "")
+endif()
 set(V3P_NETLIB_napack_SOURCES
      napack/cg.c napack/cg.h
    )

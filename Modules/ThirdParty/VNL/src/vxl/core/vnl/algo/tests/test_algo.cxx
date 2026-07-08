@@ -24,7 +24,10 @@
 #include <vnl/algo/vnl_lbfgs.h>
 #include <vnl/algo/vnl_lbfgsb.h>
 #include <vnl/algo/vnl_lsqr.h>
-#include <vnl/algo/vnl_matrix_inverse.h>
+#ifndef ITK_FUTURE_LEGACY_REMOVE
+#  define ITK_LEGACY_TEST // exercising the deprecated vnl_matrix_inverse
+#  include <vnl/algo/vnl_matrix_inverse.h>
+#endif
 #include <vnl/algo/vnl_powell.h>
 #include <vnl/algo/vnl_svd_economy.h>
 #include <vnl/algo/vnl_svd.h>
@@ -42,10 +45,12 @@ test_matrix_inverse()
   vnl_matrix<double> V0 = svd.V();
   TEST_NEAR("vnl_svd_economy", V[0][1], V0[0][1], 1e-6);
 
+#ifndef ITK_FUTURE_LEGACY_REMOVE
   const vnl_matrix<double> inv{ vnl_matrix_inverse<double>(m).as_matrix() };
   vnl_matrix<double> identity(4, 4);
   identity.set_identity();
   TEST_NEAR("vnl_matrix_inverse", (m * inv - identity).array_inf_norm(), 0, 1e-6);
+#endif
 }
 
 class F_test_powell : public vnl_cost_function
