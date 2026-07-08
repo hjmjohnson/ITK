@@ -15,6 +15,7 @@
  *  limitations under the License.
  *
  *=========================================================================*/
+#define ITK_LEGACY_TEST
 #include "itkGTest.h"
 #include <iostream>
 

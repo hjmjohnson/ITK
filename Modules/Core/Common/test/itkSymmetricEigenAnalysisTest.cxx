@@ -24,6 +24,7 @@
 #include <array>
 #include <set>
 #include "itkTestingMacros.h"
+#include "vnl/vnl_diag_matrix.h"
 
 
 // Test template instantiations for various supported template arguments:
