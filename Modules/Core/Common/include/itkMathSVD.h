@@ -19,7 +19,6 @@
 #define itkMathSVD_h
 
 #include "itkMacro.h"
-#include "itkMatrix.h"
 #include "itkEigenDecompositionSignConvention.h"
 #include "vnl/vnl_matrix.h"
 #include "vnl/vnl_matrix_fixed.h"
@@ -30,9 +29,16 @@
 #include ITK_EIGEN(Dense)
 
 #include <limits>
+#include <type_traits>
 
 namespace itk
 {
+// Forward-declared to break the itkMatrix.h <-> itkMathSVD.h include cycle; the
+// itk::Matrix SVD overload needs the complete type only at instantiation, where
+// the caller has already included itkMatrix.h.
+template <typename T, unsigned int VRows, unsigned int VColumns>
+class Matrix;
+
 namespace Math
 {
 
@@ -47,15 +53,15 @@ ResolveRcond(TReal rcond, unsigned int n)
 }
 
 // Moore-Penrose pseudo-inverse V diag(1/w) U^T, with singular values at or below
-// rcond*max(w) treated as zero. Works for vnl_matrix and vnl_matrix_fixed.
-template <typename TMatrix, typename TVector, typename TReal>
-TMatrix
-PseudoInverse(const TMatrix & U, const TVector & W, const TMatrix & V, TReal rcond)
+// rcond*max(w) treated as zero. U and V may be distinct types (rectangular fixed).
+template <typename TMatrixU, typename TVector, typename TMatrixV, typename TReal>
+auto
+PseudoInverse(const TMatrixU & U, const TVector & W, const TMatrixV & V, TReal rcond)
 {
   const unsigned int k = W.size();
   // W is sorted descending (Eigen guarantee), so W[0] is the max without an O(k) scan.
   const TReal tol = ResolveRcond(rcond, k) * W[0];
-  TMatrix     scaledV = V;
+  TMatrixV    scaledV = V;
   for (unsigned int col = 0; col < k; ++col)
   {
     const TReal s = (W[col] > tol) ? TReal{ 1 } / W[col] : TReal{ 0 };
@@ -68,13 +74,13 @@ PseudoInverse(const TMatrix & U, const TVector & W, const TMatrix & V, TReal rco
 }
 
 // Least-squares / minimum-norm solution x = V diag(1/w) U^T b of A x = b.
-template <typename TMatrix, typename TVector, typename TReal>
-TVector
-SolveLinear(const TMatrix & U, const TVector & W, const TMatrix & V, const TVector & b, TReal rcond)
+template <typename TMatrixU, typename TVector, typename TMatrixV, typename TVectorB, typename TReal>
+auto
+SolveLinear(const TMatrixU & U, const TVector & W, const TMatrixV & V, const TVectorB & b, TReal rcond)
 {
   const unsigned int n = W.size();
   const TReal        tol = ResolveRcond(rcond, n) * W[0]; // W sorted descending; W[0] == max
-  TVector            utb = U.transpose() * b;
+  auto               utb = U.transpose() * b;
   for (unsigned int k = 0; k < n; ++k)
   {
     utb[k] = (W[k] > tol) ? utb[k] / W[k] : TReal{ 0 };
@@ -101,13 +107,13 @@ NumericalRank(const TVector & W, TReal rcond)
 
 // Reconstruct U diag(w) V^T, treating singular values at or below rcond*max(w) as
 // zero (a truncated, rank-reduced reconstruction of A).
-template <typename TMatrix, typename TVector, typename TReal>
-TMatrix
-Recompose(const TMatrix & U, const TVector & W, const TMatrix & V, TReal rcond)
+template <typename TMatrixU, typename TVector, typename TMatrixV, typename TReal>
+auto
+Recompose(const TMatrixU & U, const TVector & W, const TMatrixV & V, TReal rcond)
 {
   const unsigned int k = W.size();
   const TReal        tol = ResolveRcond(rcond, k) * W[0]; // W sorted descending; W[0] == max
-  TMatrix            scaledU = U;
+  TMatrixU           scaledU = U;
   for (unsigned int col = 0; col < k; ++col)
   {
     const TReal s = (W[col] > tol) ? W[col] : TReal{ 0 };
@@ -117,6 +123,49 @@ Recompose(const TMatrix & U, const TVector & W, const TMatrix & V, TReal rcond)
     }
   }
   return scaledU * V.transpose();
+}
+
+// Reconstruct U diag(w') V^T with caller-supplied singular values (no truncation);
+// serves the modify-W-then-recompose idiom (value clamping/inversion/zeroing).
+template <typename TMatrixU, typename TVector, typename TMatrixV>
+auto
+RecomposeWith(const TMatrixU & U, const TVector & modifiedW, const TMatrixV & V)
+{
+  TMatrixU scaledU = U;
+  for (unsigned int col = 0; col < modifiedW.size(); ++col)
+  {
+    for (unsigned int i = 0; i < scaledU.rows(); ++i)
+    {
+      scaledU(i, col) *= modifiedW[col];
+    }
+  }
+  return scaledU * V.transpose();
+}
+
+// Reciprocal condition number sigma_min/sigma_max; 0 when the matrix is singular.
+template <typename TVector>
+auto
+WellCondition(const TVector & W) -> std::decay_t<decltype(W[0])>
+{
+  const unsigned int k = W.size();
+  if (k == 0 || W[0] == 0)
+  {
+    return 0;
+  }
+  return W[k - 1] / W[0]; // W sorted descending
+}
+
+// Product of the singular values (|det A| for a square A).
+template <typename TVector>
+auto
+DeterminantMagnitude(const TVector & W) -> std::decay_t<decltype(W[0])>
+{
+  std::decay_t<decltype(W[0])> product{ 1 };
+  for (unsigned int k = 0; k < W.size(); ++k)
+  {
+    product *= W[k];
+  }
+  return product;
 }
 } // namespace detail
 
@@ -156,6 +205,35 @@ struct FixedSquareSVDResult
   {
     return detail::Recompose(U, W, V, rcond);
   }
+
+  /** Reconstruct U diag(modifiedW) V^T with caller-supplied singular values. */
+  vnl_matrix_fixed<TReal, VDim, VDim>
+  RecomposeWith(const vnl_vector_fixed<TReal, VDim> & modifiedW) const
+  {
+    return detail::RecomposeWith(U, modifiedW, V);
+  }
+
+  /** Singular vector for the smallest singular value (last column of V); spans
+   * the nullspace when A is rank-deficient. */
+  vnl_vector_fixed<TReal, VDim>
+  NullVector() const
+  {
+    return V.get_column(VDim - 1);
+  }
+
+  /** Reciprocal condition number sigma_min/sigma_max (0 = singular, 1 = perfect). */
+  TReal
+  WellCondition() const
+  {
+    return detail::WellCondition(W);
+  }
+
+  /** Product of the singular values (magnitude of the determinant for a square A). */
+  TReal
+  DeterminantMagnitude() const
+  {
+    return detail::DeterminantMagnitude(W);
+  }
 };
 
 /** Result of a runtime-sized SVD (square or rectangular): A == U diag(W) V^T,
@@ -194,6 +272,114 @@ struct SVDResult
   Recompose(TReal rcond = TReal{ -1 }) const
   {
     return detail::Recompose(U, W, V, rcond);
+  }
+
+  /** Reconstruct U diag(modifiedW) V^T with caller-supplied singular values. */
+  vnl_matrix<TReal>
+  RecomposeWith(const vnl_vector<TReal> & modifiedW) const
+  {
+    return detail::RecomposeWith(U, modifiedW, V);
+  }
+
+  /** Singular vector for the smallest singular value (last column of V); spans
+   * the nullspace when A is rank-deficient. Defined only for rows >= cols: an
+   * underdetermined input's thin V (cols x min(rows,cols)) cannot span the
+   * nullspace, so this throws rather than return a misleading direction. */
+  vnl_vector<TReal>
+  NullVector() const
+  {
+    if (U.rows() < V.rows())
+    {
+      itkGenericExceptionMacro(
+        "NullVector() requires rows >= cols; the thin V of an underdetermined input does not span the nullspace.");
+    }
+    return V.get_column(V.cols() - 1);
+  }
+
+  /** Reciprocal condition number sigma_min/sigma_max (0 = singular, 1 = perfect). */
+  TReal
+  WellCondition() const
+  {
+    return detail::WellCondition(W);
+  }
+
+  /** Product of the singular values (magnitude of the determinant for a square A). */
+  TReal
+  DeterminantMagnitude() const
+  {
+    return detail::DeterminantMagnitude(W);
+  }
+};
+
+/** Result of a fixed-size rectangular SVD with thin factors: A (VRows x VCols)
+ * == U diag(W) V^T, where U is VRows x K, V is VCols x K and K = min(VRows,
+ * VCols); W is descending. \a rcond < 0 auto-selects a K*epsilon threshold. */
+template <typename TReal, unsigned int VRows, unsigned int VCols>
+struct FixedRectangularSVDResult
+{
+  static constexpr unsigned int K = (VRows < VCols) ? VRows : VCols;
+
+  vnl_matrix_fixed<TReal, VRows, K> U{};
+  vnl_vector_fixed<TReal, K>        W{};
+  vnl_matrix_fixed<TReal, VCols, K> V{};
+
+  /** Moore-Penrose pseudo-inverse A^+ (VCols x VRows). */
+  vnl_matrix_fixed<TReal, VCols, VRows>
+  PseudoInverse(TReal rcond = TReal{ -1 }) const
+  {
+    return detail::PseudoInverse(U, W, V, rcond);
+  }
+
+  /** Least-squares / minimum-norm solution of A x = b. */
+  vnl_vector_fixed<TReal, VCols>
+  Solve(const vnl_vector_fixed<TReal, VRows> & b, TReal rcond = TReal{ -1 }) const
+  {
+    return detail::SolveLinear(U, W, V, b, rcond);
+  }
+
+  /** Numerical rank (count of singular values above rcond*max(w)). */
+  unsigned int
+  Rank(TReal rcond = TReal{ -1 }) const
+  {
+    return detail::NumericalRank(W, rcond);
+  }
+
+  /** Reconstruct A with singular values at or below rcond*max(w) zeroed. */
+  vnl_matrix_fixed<TReal, VRows, VCols>
+  Recompose(TReal rcond = TReal{ -1 }) const
+  {
+    return detail::Recompose(U, W, V, rcond);
+  }
+
+  /** Reconstruct U diag(modifiedW) V^T with caller-supplied singular values. */
+  vnl_matrix_fixed<TReal, VRows, VCols>
+  RecomposeWith(const vnl_vector_fixed<TReal, K> & modifiedW) const
+  {
+    return detail::RecomposeWith(U, modifiedW, V);
+  }
+
+  /** Singular vector for the smallest singular value (last column of V); spans
+   * the nullspace when A is rank-deficient. Overdetermined shapes only: the thin
+   * V of an underdetermined input does not span the nullspace. */
+  vnl_vector_fixed<TReal, VCols>
+  NullVector() const
+  {
+    static_assert(VRows >= VCols, "NullVector() requires VRows >= VCols (thin V cannot span the nullspace).");
+    return V.get_column(K - 1);
+  }
+
+  /** Reciprocal condition number sigma_min/sigma_max (0 = singular, 1 = perfect). */
+  TReal
+  WellCondition() const
+  {
+    return detail::WellCondition(W);
+  }
+
+  /** Product of the singular values (magnitude of the determinant for a square A). */
+  TReal
+  DeterminantMagnitude() const
+  {
+    return detail::DeterminantMagnitude(W);
   }
 };
 
@@ -364,6 +550,31 @@ FixedSquareSVDResult<TReal, VDim>
 SVD(const Matrix<TReal, VDim, VDim> & A, bool canonicalizeSigns = true)
 {
   return SVD<TReal, VDim>(A.GetVnlMatrix(), canonicalizeSigns);
+}
+
+/** SVD of a fixed-size rectangular vnl_matrix_fixed (thin U/V factors); serves
+ * fixed non-square consumers such as an OutputDim x InputDim transform Jacobian.
+ * Square fixed inputs take the dedicated square overload. */
+template <typename TReal, unsigned int VRows, unsigned int VCols, typename = std::enable_if_t<VRows != VCols>>
+FixedRectangularSVDResult<TReal, VRows, VCols>
+SVD(const vnl_matrix_fixed<TReal, VRows, VCols> & A, bool canonicalizeSigns = true)
+{
+  FixedRectangularSVDResult<TReal, VRows, VCols> result;
+  detail::RectangularSVDEigen<TReal>(
+    A.data_block(), VRows, VCols, result.U.data_block(), result.W.data_block(), result.V.data_block());
+  if (canonicalizeSigns)
+  {
+    itk::detail::CanonicalizeColumnSignsPaired(result.U, result.V);
+  }
+  return result;
+}
+
+/** SVD of a fixed-size rectangular itk::Matrix (thin U/V factors). */
+template <typename TReal, unsigned int VRows, unsigned int VCols, typename = std::enable_if_t<VRows != VCols>>
+FixedRectangularSVDResult<TReal, VRows, VCols>
+SVD(const Matrix<TReal, VRows, VCols> & A, bool canonicalizeSigns = true)
+{
+  return SVD<TReal, VRows, VCols>(A.GetVnlMatrix(), canonicalizeSigns);
 }
 
 /** SVD of a runtime-sized vnl_matrix (square or rectangular). Square inputs take

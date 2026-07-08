@@ -54,12 +54,13 @@ CanonicalizeEigenvectorColumnSigns(vnl_matrix<T> & V)
 /** Same canonicalization as \c CanonicalizeEigenvectorColumnSigns, applied to \a u,
  * with the identical per-column flip mirrored onto \a paired so a factor pair (e.g.
  * the U and V of an SVD) stays
- * consistent. Templated on the matrix type so it serves vnl_matrix and
- * vnl_matrix_fixed; the sign is well-defined only when the leading per-column
+ * consistent. Templated on the matrix types so it serves vnl_matrix and
+ * vnl_matrix_fixed, including pairs of distinct fixed types (a rectangular SVD's
+ * U and V); the sign is well-defined only when the leading per-column
  * magnitude is unambiguous (distinct singular values). */
-template <typename TMatrix>
+template <typename TMatrixU, typename TMatrixV>
 void
-CanonicalizeColumnSignsPaired(TMatrix & u, TMatrix & paired)
+CanonicalizeColumnSignsPaired(TMatrixU & u, TMatrixV & paired)
 {
   // u and paired share a column count but may differ in row count (an SVD's
   // thin U is rows x k, V is cols x k), so each is flipped over its own rows.
@@ -75,7 +76,7 @@ CanonicalizeColumnSignsPaired(TMatrix & u, TMatrix & paired)
         pivot = i;
       }
     }
-    if (u(pivot, j) < typename TMatrix::element_type{ 0 })
+    if (u(pivot, j) < typename TMatrixU::element_type{ 0 })
     {
       for (unsigned int i = 0; i < uRows; ++i)
       {
