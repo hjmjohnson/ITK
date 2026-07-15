@@ -273,6 +273,18 @@ if(ITK_BRAINWEB_DATA_ROOT)
 endif()
 
 #-----------------------------------------------------------------------------
+# Enable the highdicom-fixture cross-validation test suite (ITK GDCM/DCMTK
+# pixel decoding vs. pydicom ground truth). Requires DCMTK, GDCM, and Python
+# wrapping; enforced once module enablement and wrapping options are known
+# (see the ITK_USE_HIGHDICOM_TEST_DATA check below ITKModuleEnablement).
+option(
+  ITK_USE_HIGHDICOM_TEST_DATA
+  "Download and use highdicom DICOM test fixtures for GDCM/DCMTK/pydicom cross-validation testing"
+  OFF
+)
+mark_as_advanced(ITK_USE_HIGHDICOM_TEST_DATA)
+
+#-----------------------------------------------------------------------------
 # CMAKE_C_COMPILER_ARG1 is a CMake internal variable. It should not be used
 # in ITK's configuration. If it is set, it most likely means that
 # a developer is configuring ITK to be built with a launcher such as ccache
@@ -780,6 +792,21 @@ add_subdirectory(Modules/Remote)
 
 # Enable modules according to user inputs and the module dependency DAG.
 include(ITKModuleEnablement)
+
+#----------------------------------------------------------------------
+# ITK_USE_HIGHDICOM_TEST_DATA requires DCMTK, GDCM, and Python wrapping
+# to actually exercise the cross-validation the test suite performs.
+if(ITK_USE_HIGHDICOM_TEST_DATA)
+  if(NOT Module_ITKIODCMTK OR NOT Module_ITKIOGDCM OR NOT ITK_WRAP_PYTHON)
+    message(
+      FATAL_ERROR
+      "ITK_USE_HIGHDICOM_TEST_DATA requires Module_ITKIODCMTK=ON, "
+      "Module_ITKIOGDCM=ON, and ITK_WRAP_PYTHON=ON. "
+      "Current values: Module_ITKIODCMTK=${Module_ITKIODCMTK}, "
+      "Module_ITKIOGDCM=${Module_ITKIOGDCM}, ITK_WRAP_PYTHON=${ITK_WRAP_PYTHON}."
+    )
+  endif()
+endif()
 
 # Setup clang-tidy for code best-practices enforcement for C++11
 include(ITKClangTidySetup)
