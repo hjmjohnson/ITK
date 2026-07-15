@@ -156,9 +156,25 @@ ImageSeriesReader<TOutputImage>::GenerateOutputInformation()
     {
       position1[j] = static_cast<SpacingScalarType>(origin[j]);
     }
-    // Override the position if there is an ITK_ImageOrigin
-    ExposeMetaData<Array<SpacingScalarType>>(firstReader->GetImageIO()->GetMetaDataDictionary(), key, position1);
+    // Override the position if there is an ITK_ImageOrigin. Only an
+    // undersized array is unsafe (the loop below reads ImageDimension
+    // elements); a longer array is accepted and its extra elements ignored,
+    // as before this validation was added.
+    if (ExposeMetaData<Array<SpacingScalarType>>(firstReader->GetImageIO()->GetMetaDataDictionary(), key, position1) &&
+        position1.GetSize() < TOutputImage::ImageDimension)
+    {
+      itkExceptionMacro("ITK_ImageOrigin of " << m_FileNames[firstFileName] << " has " << position1.GetSize()
+                                              << " elements; expected at least " << TOutputImage::ImageDimension);
+    }
 
+    if (m_ImageIO)
+    {
+      // firstReader and lastReader share this ImageIOBase instance. Erase
+      // any ITK_ImageOrigin left over from reading the first file so it
+      // cannot be mistaken for a fresh override if the last file's read
+      // below does not set the key itself.
+      m_ImageIO->GetMetaDataDictionary().Erase(key);
+    }
 
     // last of multiple slices
     lastReader->UpdateOutputInformation();
@@ -170,7 +186,12 @@ ImageSeriesReader<TOutputImage>::GenerateOutputInformation()
       positionN[j] = static_cast<SpacingScalarType>(last->GetOrigin()[j]);
     }
     // Override the position if there is an ITK_ImageOrigin
-    ExposeMetaData<Array<SpacingScalarType>>(lastReader->GetImageIO()->GetMetaDataDictionary(), key, positionN);
+    if (ExposeMetaData<Array<SpacingScalarType>>(lastReader->GetImageIO()->GetMetaDataDictionary(), key, positionN) &&
+        positionN.GetSize() < TOutputImage::ImageDimension)
+    {
+      itkExceptionMacro("ITK_ImageOrigin of " << m_FileNames[lastFileName] << " has " << positionN.GetSize()
+                                              << " elements; expected at least " << TOutputImage::ImageDimension);
+    }
 
     // Compute and set the inter-slice spacing
     // and last (usually third) axis of a direction
