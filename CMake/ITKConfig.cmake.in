@@ -69,6 +69,13 @@ set(ITK_MODULES_ENABLED "@ITK_CONFIG_MODULES_ENABLED@")
 # Define the ITK library namespace for CMake targets, without the trailing ::.
 set(ITK_LIBRARY_NAMESPACE "@ITK_LIBRARY_NAMESPACE@")
 
+# ITKNrrdIO's exported link interface names Threads::Threads, so the target must
+# exist before ITKTargets.cmake is included.
+if(UNIX)
+  include(CMakeFindDependencyMacro)
+  find_dependency(Threads)
+endif()
+
 # Import ITK targets.
 set(ITK_CONFIG_TARGETS_FILE "@ITK_CONFIG_TARGETS_FILE@")
 if(NOT ITK_TARGETS_IMPORTED@ITK_CONFIG_TARGETS_CONDITION@)
