@@ -222,6 +222,21 @@ mark_as_advanced(ITK_TEMPLATE_VISIBILITY_DEFAULT)
 # TBB module name (Module_ITKTBB) for code readability.
 set(ITK_USE_TBB ${Module_ITKTBB})
 
+# extern "C" names carry no C++ namespace, so a renamed build must set this explicitly.
+set(
+  ITK_LOAD_FUNCTION_NAME
+  "itkLoad"
+  CACHE STRING
+  "Name of the C entry point ObjectFactoryBase looks up in each autoloaded library."
+)
+mark_as_advanced(ITK_LOAD_FUNCTION_NAME)
+if(NOT ITK_LOAD_FUNCTION_NAME MATCHES "^[A-Za-z_][A-Za-z0-9_]*$")
+  message(
+    FATAL_ERROR
+    "ITK_LOAD_FUNCTION_NAME must be a valid C identifier, got '${ITK_LOAD_FUNCTION_NAME}'"
+  )
+endif()
+
 configure_file(src/itkConfigure.h.in itkConfigure.h)
 configure_file(src/itkConfigurePrivate.h.in itkConfigurePrivate.h)
 configure_file(src/itkNamespace.h.in itkNamespace.h)
