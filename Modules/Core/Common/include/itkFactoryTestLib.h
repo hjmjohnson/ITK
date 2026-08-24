@@ -24,11 +24,12 @@
  * Routine that is called when the shared library is loaded by
  * itk::ObjectFactoryBase::LoadDynamicFactories().
  *
- * itkLoad() is C (not C++) function.
+ * This entry point is a C (not C++) function.
  */
 extern "C"
 {
-  ITK_ABI_EXPORT itk::ObjectFactoryBase * ITK_ABI_NAMESPACE_MANGLE(itkLoad)();
+  ITK_ABI_EXPORT itk::ObjectFactoryBase *
+                 ITK_LOAD_FUNCTION_NAME();
 }
 
 #endif
