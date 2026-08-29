@@ -40,6 +40,7 @@
 
 #include "itkWin32Header.h"
 #include "itkConfigure.h"
+#include "itkABINamespace.h"
 #include "ITKCommonExport.h"
 
 #include <typeinfo>

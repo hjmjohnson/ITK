@@ -1412,6 +1412,7 @@ endif()
 
 set(
   ITKCommonGTests
+  itkABINamespaceGTest.cxx
   itkAbortProcessObjectGTest.cxx
   itkAdaptorComparisonGTest.cxx
   itkAggregateTypesGTest.cxx

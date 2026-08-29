@@ -222,6 +222,58 @@ mark_as_advanced(ITK_TEMPLATE_VISIBILITY_DEFAULT)
 # TBB module name (Module_ITKTBB) for code readability.
 set(ITK_USE_TBB ${Module_ITKTBB})
 
+# Inline namespace used to mangle ITK symbols, so that independently
+# distributed ITK builds can coexist in one process. See ITK issue #6786.
+set(
+  ITK_ABI_NAMESPACE_NAME
+  "<DEFAULT>"
+  CACHE STRING
+  "Inline namespace name for mangling ITK symbols."
+)
+mark_as_advanced(ITK_ABI_NAMESPACE_NAME)
+set(
+  ITK_ABI_NAMESPACE_ATTRIBUTES
+  "<DEFAULT>"
+  CACHE STRING
+  "Inline namespace attributes for mangling ITK symbols."
+)
+mark_as_advanced(ITK_ABI_NAMESPACE_ATTRIBUTES)
+
+# The default is no ABI namespace, which leaves ITK_ABI_NAMESPACE_BEGIN/END
+# expanding to nothing and every translation unit unchanged.
+if(ITK_ABI_NAMESPACE_NAME STREQUAL "<DEFAULT>")
+  set(ITK_ABI_NAMESPACE_NAME "")
+endif()
+if(ITK_ABI_NAMESPACE_ATTRIBUTES STREQUAL "<DEFAULT>")
+  set(ITK_ABI_NAMESPACE_ATTRIBUTES "")
+endif()
+
+if(ITK_ABI_NAMESPACE_NAME STREQUAL "")
+  set(ITK_HAS_ABI_NAMESPACE OFF)
+  set(ITK_ABI_NAMESPACE_BEGIN "")
+  set(ITK_ABI_NAMESPACE_END "")
+else()
+  message(STATUS "ITK ABI namespace: ${ITK_ABI_NAMESPACE_NAME}")
+  # Pasted into an identifier by ITK_ABI_NAMESPACE_MANGLE, so it must be a
+  # single valid identifier; attributes have their own variable.
+  if(NOT ITK_ABI_NAMESPACE_NAME MATCHES "^[a-zA-Z0-9_]+$")
+    message(
+      FATAL_ERROR
+      "The configured ITK_ABI_NAMESPACE_NAME='${ITK_ABI_NAMESPACE_NAME}' is "
+      "not supported, it must match the regular expression '^[a-zA-Z0-9_]+$'. "
+      "To add things like attributes, configure ITK with "
+      "-DITK_ABI_NAMESPACE_ATTRIBUTES='__attribute__((visibility(\"hidden\")))'."
+    )
+  endif()
+  set(ITK_HAS_ABI_NAMESPACE ON)
+  set(
+    ITK_ABI_NAMESPACE_BEGIN
+    "inline namespace ${ITK_ABI_NAMESPACE_ATTRIBUTES} ${ITK_ABI_NAMESPACE_NAME} {"
+  )
+  set(ITK_ABI_NAMESPACE_END "}")
+endif()
+
+configure_file(src/itkABINamespace.h.in itkABINamespace.h)
 configure_file(src/itkConfigure.h.in itkConfigure.h)
 configure_file(src/itkConfigurePrivate.h.in itkConfigurePrivate.h)
 
@@ -232,6 +284,7 @@ itk_module_impl()
 
 install(
   FILES
+    ${ITKCommon_BINARY_DIR}/itkABINamespace.h
     ${ITKCommon_BINARY_DIR}/itkConfigure.h
   DESTINATION ${ITKCommon_INSTALL_INCLUDE_DIR}
   COMPONENT Development
