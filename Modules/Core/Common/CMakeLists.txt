@@ -261,8 +261,9 @@ else()
       FATAL_ERROR
       "The configured ITK_ABI_NAMESPACE_NAME='${ITK_ABI_NAMESPACE_NAME}' is "
       "not supported, it must match the regular expression '^[a-zA-Z0-9_]+$'. "
-      "To add things like attributes, configure ITK with "
-      "-DITK_ABI_NAMESPACE_ATTRIBUTES='__attribute__((visibility(\"hidden\")))'."
+      "Attributes belong in ITK_ABI_NAMESPACE_ATTRIBUTES instead, spelled for "
+      "the compiler in use: __attribute__((visibility(\"hidden\"))) for GCC and "
+      "Clang, __declspec(...) for MSVC."
     )
   endif()
   set(ITK_HAS_ABI_NAMESPACE ON)

@@ -34,8 +34,20 @@
 
 // Confine pocketfft to an ITK-private namespace so its symbols never collide
 // with a ::pocketfft from another library (mreineck/pocketfft#30).
+#include "itkABINamespace.h"
+
+// Declares itk::detail inside the ABI namespace before the nested-namespace
+// definition below reopens it, so both name the same entity.
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace detail
+{}
+ITK_ABI_NAMESPACE_END
+} // namespace itk
+
 #ifndef POCKETFFT_NAMESPACE
-#  define POCKETFFT_NAMESPACE itk::detail::pocketfft
+#  define POCKETFFT_NAMESPACE itk::ITK_ABI_NAMESPACE_QUALIFIER detail::pocketfft
 #endif
 
 // Reuse up to 16 cached plans for repeated same-size transforms.
