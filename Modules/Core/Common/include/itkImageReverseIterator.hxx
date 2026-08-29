@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ImageReverseIterator<TImage>::ImageReverseIterator(TImage * ptr, const RegionType & region)
   : ImageRegionReverseConstIterator<TImage>(ptr, region)
@@ -43,6 +44,7 @@ ImageReverseIterator<TImage>::operator=(const ImageRegionReverseConstIterator<TI
   this->ImageRegionReverseConstIterator<TImage>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

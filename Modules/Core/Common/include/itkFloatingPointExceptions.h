@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FloatingPointExceptionsEnums
  * \brief Contains all enum classes used by FloatingPointExceptions class.
  * \ingroup ITKCommon
@@ -119,6 +120,7 @@ private:
   /** static member that controls what happens during an exception */
   static ExceptionGlobals * m_PimplGlobals;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ShapedNeighborhoodIterator
  *
  * \brief  A neighborhood iterator which can take on an arbitrary shape.
@@ -281,6 +282,7 @@ template <typename TImage>
 ShapedNeighborhoodIterator(const typename TImage::SizeType &, SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ShapedNeighborhoodIterator<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

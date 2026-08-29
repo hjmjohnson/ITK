@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PeriodicBoundaryCondition
  * \brief
  * A function object that determines values outside of image boundaries
@@ -106,6 +107,7 @@ public:
   OutputPixelType
   GetPixel(const IndexType & index, const TInputImage * image) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

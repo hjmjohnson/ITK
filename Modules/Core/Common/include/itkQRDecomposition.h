@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class QRDecomposition
  * \brief QR decomposition A = Q R of a real or complex matrix, backed by Eigen.
@@ -165,6 +166,7 @@ private:
   bool       m_Square{ false };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkQRDecomposition_h

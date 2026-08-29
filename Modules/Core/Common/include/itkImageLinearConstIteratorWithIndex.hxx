@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------
 //  Constructor
 //----------------------------------------------------------------------
@@ -72,6 +73,7 @@ ImageLinearConstIteratorWithIndex<TImage>::GoToEndOfLine()
 
   this->m_PositionIndex[m_Direction] = this->m_EndIndex[m_Direction];
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

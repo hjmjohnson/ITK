@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImportImageFilter
  * \brief Import data from a standard C array into an itk::Image
  *
@@ -176,6 +177,7 @@ private:
   typename ImportImageContainerType::Pointer m_ImportImageContainer{};
   SizeValueType                              m_Size{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

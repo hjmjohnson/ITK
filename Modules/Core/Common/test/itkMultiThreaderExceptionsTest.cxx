@@ -25,6 +25,7 @@ using ThreaderEnum = itk::MultiThreaderBase::ThreaderEnum;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 class ITK_TEMPLATE_EXPORT DummyImageSource : public ImageSource<TOutputImage>
 {
@@ -75,6 +76,7 @@ protected:
 private:
   IndexValueType m_ExceptionIndex{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 int

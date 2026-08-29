@@ -93,6 +93,7 @@ SynchronizeList(FactoryListType & output, FactoryListType & input, bool internal
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * static list of factories.
@@ -896,4 +897,5 @@ ObjectFactoryBase::GetLibraryPath()
 }
 
 ObjectFactoryBase::ObjectFactoryBasePrivate * ObjectFactoryBase::m_PimplGlobals;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

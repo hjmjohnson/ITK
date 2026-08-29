@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SingleMultiThreader
  * \brief A class for performing multithreaded execution using only the
  * calling thread.
@@ -99,5 +100,6 @@ protected:
    * Multithreader. */
   friend class ProcessObject;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkSingleMultiThreader_h

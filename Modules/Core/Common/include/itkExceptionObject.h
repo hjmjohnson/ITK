@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class LightObject;
 
@@ -267,5 +268,6 @@ itkDynamicCastInDebugMode(TSource x)
 #endif
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkExceptionObject_h

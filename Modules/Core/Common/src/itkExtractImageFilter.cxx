@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Define how to print enumeration */
 std::ostream &
 operator<<(std::ostream & out, const ExtractImageFilterEnums::DirectionCollapseStrategy value)
@@ -39,4 +40,5 @@ operator<<(std::ostream & out, const ExtractImageFilterEnums::DirectionCollapseS
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

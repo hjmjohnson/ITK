@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \brief Represent a n-dimensional offset between two n-dimensional indexes of n-dimensional image.
  *
@@ -530,6 +531,7 @@ swap(Offset<VDimension> & one, Offset<VDimension> & two) noexcept
   std::swap(one.m_InternalArray, two.m_InternalArray);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

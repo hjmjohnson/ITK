@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutput, unsigned int VImageDimension, typename TInput>
 auto
 GaussianDerivativeSpatialFunction<TOutput, VImageDimension, TInput>::Evaluate(const TInput & position) const
@@ -87,6 +88,7 @@ GaussianDerivativeSpatialFunction<TOutput, VImageDimension, TInput>::PrintSelf(s
   itkPrintSelfBooleanMacro(Normalized);
   os << indent << "Direction: " << m_Direction << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PyCommand
  *  \brief Command subclass that calls a Python callable object, e.g.
@@ -88,6 +89,7 @@ private:
 };
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // _itkPyCommand_h

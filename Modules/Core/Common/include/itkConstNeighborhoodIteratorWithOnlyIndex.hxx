@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 bool
 ConstNeighborhoodIteratorWithOnlyIndex<TImage>::InBounds() const
@@ -443,6 +444,7 @@ ConstNeighborhoodIteratorWithOnlyIndex<TImage>::operator-=(const OffsetType & id
   m_Loop -= idx;
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

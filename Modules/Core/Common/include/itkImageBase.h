@@ -43,6 +43,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** The default tolerance when comparing the geometry of two images.
  *
@@ -925,6 +926,7 @@ private:
   RegionType m_RequestedRegion{};
   RegionType m_BufferedRegion{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

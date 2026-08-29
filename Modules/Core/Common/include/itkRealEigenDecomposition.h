@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class RealEigenDecomposition
  * \brief Eigenvalues and eigenvectors of a general real matrix, backed by Eigen.
@@ -98,6 +99,7 @@ private:
   ComplexMatrixType m_Eigenvectors;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkRealEigenDecomposition_h

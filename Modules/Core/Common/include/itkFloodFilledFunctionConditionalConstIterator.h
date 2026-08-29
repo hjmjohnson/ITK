@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FloodFilledFunctionConditionalConstIterator
  * \brief Iterates over a flood-filled spatial function.
@@ -274,6 +275,7 @@ protected: // made protected so other iterators can access
   /** Indicates whether or not an index is valid (inside an image)/ */
   bool m_IsValidIndex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

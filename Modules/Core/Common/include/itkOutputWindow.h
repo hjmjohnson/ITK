@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct OutputWindowGlobals;
 
@@ -168,6 +169,7 @@ private:
   std::mutex                   m_cerrMutex{};
   static OutputWindowGlobals * m_PimplGlobals;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

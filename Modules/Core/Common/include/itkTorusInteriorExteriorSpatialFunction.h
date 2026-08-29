@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TorusInteriorExteriorSpatialFunction
  * \brief Spatial function implementation of torus symmetric about the z-axis in 3D
@@ -92,6 +93,7 @@ private:
   double    m_MajorRadius{ 3.0 };
   double    m_MinorRadius{ 1.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

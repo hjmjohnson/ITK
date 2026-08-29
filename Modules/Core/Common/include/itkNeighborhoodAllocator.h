@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NeighborhoodAllocator
  *  \brief A memory allocator for use as the default allocator type in
  *         Neighborhood.
@@ -216,5 +217,6 @@ operator!=(const NeighborhoodAllocator<TPixel> & lhs, const NeighborhoodAllocato
 {
   return !(lhs == rhs);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

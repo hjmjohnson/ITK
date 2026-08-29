@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPointsContainer>
 void
 PointSetBase<TPointsContainer>::PrintSelf(std::ostream & os, Indent indent) const
@@ -379,6 +380,7 @@ PointSetBase<TPointsContainer>::InternalClone() const
 template <typename TPointsContainer>
 PointSetBase<TPointsContainer>::~PointSetBase() = default;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

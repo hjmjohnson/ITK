@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TBoundaryCondition>
 void
@@ -211,6 +212,7 @@ NeighborhoodIterator<TImage, TBoundaryCondition>::SetNeighborhood(const Neighbor
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

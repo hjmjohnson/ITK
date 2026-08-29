@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DiffusionTensor3D
  * \brief Represent a diffusion tensor as used in DTI images.
  *
@@ -167,6 +168,7 @@ swap(DiffusionTensor3D<T> & a, DiffusionTensor3D<T> & b) noexcept
   a.swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #include "itkNumericTraitsDiffusionTensor3DPixel.h"
 

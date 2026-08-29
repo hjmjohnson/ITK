@@ -50,6 +50,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Matrix
  * \brief A templated class holding a M x N size Matrix.
@@ -442,6 +443,7 @@ swap(const Matrix<T, VRows, VColumns> & a, const Matrix<T, VRows, VColumns> & b)
   a.swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

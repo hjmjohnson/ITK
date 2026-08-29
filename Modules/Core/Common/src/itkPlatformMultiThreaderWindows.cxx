@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 #if !defined(ITK_LEGACY_REMOVE)
 void
 PlatformMultiThreader::MultipleMethodExecute()
@@ -175,4 +176,5 @@ PlatformMultiThreader::SpawnDispatchSingleMethodThread(PlatformMultiThreader::Wo
   return threadHandle;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

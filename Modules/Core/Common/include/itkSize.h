@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \brief Represent a n-dimensional size (bounds) of a n-dimensional image.
  *
@@ -518,6 +519,7 @@ MakeSize(const T... values)
   return Size<sizeof...(T)>{ { toValueType(values)... } };
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

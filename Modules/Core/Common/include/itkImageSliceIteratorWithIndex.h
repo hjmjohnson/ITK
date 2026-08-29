@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageSliceIteratorWithIndex
  * \brief A multi-dimensional image iterator that extends the
  * ImageLinearIteratorWithIndex from iteration along lines in an image to
@@ -131,6 +132,7 @@ template <typename TImage>
 ImageSliceIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageSliceIteratorWithIndex<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

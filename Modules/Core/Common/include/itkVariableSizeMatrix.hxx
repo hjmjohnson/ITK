@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename T>
 VariableSizeMatrix<T>::VariableSizeMatrix(unsigned int rows, unsigned int cols)
   : m_Matrix(rows, cols)
@@ -225,6 +226,7 @@ VariableSizeMatrix<T>::operator*(const vnl_vector<T> & vc) const
 {
   return m_Matrix * vc;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

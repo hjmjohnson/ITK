@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Get a reference to the element at the given index.
  * If the index does not exist, it is created automatically.
@@ -236,6 +237,7 @@ MapContainer<TElementIdentifier, TElement>::Initialize()
 {
   this->MapType::clear();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

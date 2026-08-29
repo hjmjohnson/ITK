@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Compute weights for interpolation at continuous index position */
 template <typename TCoordinate, unsigned int VSpaceDimension, unsigned int VSplineOrder>
 auto
@@ -91,6 +92,7 @@ BSplineInterpolationWeightFunction<TCoordinate, VSpaceDimension, VSplineOrder>::
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

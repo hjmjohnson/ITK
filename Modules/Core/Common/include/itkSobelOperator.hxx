@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 void
 SobelOperator<TPixel, VDimension, TAllocator>::Fill(const CoefficientVector & coeff)
@@ -142,6 +143,7 @@ SobelOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients() -> Coeffic
                                               << ").");
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

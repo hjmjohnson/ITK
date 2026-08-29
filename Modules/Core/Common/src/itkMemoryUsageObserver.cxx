@@ -56,6 +56,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MemoryUsageObserverBase::~MemoryUsageObserverBase() = default;
 
 #if defined(WIN32) || defined(_WIN32)
@@ -477,4 +478,5 @@ MallinfoMemoryUsageObserver::GetMemoryUsage()
 
 // Destructor for MemoryUsageObserver
 MemoryUsageObserver::~MemoryUsageObserver() = default;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

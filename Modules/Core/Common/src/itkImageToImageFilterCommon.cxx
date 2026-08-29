@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -51,4 +52,5 @@ ImageToImageFilterCommon::GetGlobalDefaultDirectionTolerance()
   return globalDefaultDirectionTolerance;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

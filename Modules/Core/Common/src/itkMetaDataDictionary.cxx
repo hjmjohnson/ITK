@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MetaDataDictionary::MetaDataDictionary()
   : m_Dictionary(std::make_shared<MetaDataDictionaryMapType>())
 {}
@@ -196,4 +197,5 @@ MetaDataDictionary::Erase(const std::string & key)
   return false;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

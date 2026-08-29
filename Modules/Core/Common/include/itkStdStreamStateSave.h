@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StdStreamStateSave
  *
  * \brief Save a stream's format state and restore it upon destruction
@@ -61,6 +62,7 @@ private:
   std::ios & m_Ios;
   std::ios   m_State;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

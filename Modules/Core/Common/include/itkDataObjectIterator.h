@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DataObjectIterator
  * \brief A forward iterator over the DataObject of a ProcessObject
  * \author Gaetan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
@@ -101,5 +102,6 @@ protected:
   InternalIteratorType m_Begin;
   InternalIteratorType m_End;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

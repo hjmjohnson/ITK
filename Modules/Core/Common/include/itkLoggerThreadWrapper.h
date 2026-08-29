@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class LoggerThreadWrapperEnums
  * \brief enums for LoggerThreadWrapper
@@ -170,6 +171,7 @@ private:
 
 }; // class LoggerThreadWrapper
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

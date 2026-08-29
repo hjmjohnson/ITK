@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ByteSwapper
  * \brief Perform machine dependent byte swapping.
  *
@@ -171,6 +172,7 @@ private:
 #endif
   };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

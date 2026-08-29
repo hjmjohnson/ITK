@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TValue>
 Array<TValue>::Array(const Self & rhs)
@@ -168,6 +169,7 @@ Array<TValue>::operator=(const VnlVectorType & rhs) -> Self &
   }
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

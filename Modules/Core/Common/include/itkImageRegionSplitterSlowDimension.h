@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ImageRegionSplitterSlowDimension
  * \brief Divide an image region along the slowest dimension
@@ -77,6 +78,7 @@ protected:
                    IndexValueType regionIndex[],
                    SizeValueType  regionSize[]) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

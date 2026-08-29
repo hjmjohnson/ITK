@@ -19,6 +19,7 @@
 #define itkConstNeighborhoodIterator_hxx
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TBoundaryCondition>
 bool
 ConstNeighborhoodIterator<TImage, TBoundaryCondition>::InBounds() const
@@ -758,6 +759,7 @@ ConstNeighborhoodIterator<TImage, TBoundaryCondition>::operator-=(const OffsetTy
 
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

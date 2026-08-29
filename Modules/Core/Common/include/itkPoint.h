@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Point
  * \brief A templated class holding a geometric point in n-Dimensional space.
@@ -372,6 +373,7 @@ MakePoint(const TValue firstValue, const TVariadic... otherValues)
   return Point<TValue, dimension>{ stdArray };
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

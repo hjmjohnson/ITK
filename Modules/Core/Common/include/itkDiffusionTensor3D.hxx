@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename T>
 DiffusionTensor3D<T>::DiffusionTensor3D(const Superclass & r)
@@ -145,6 +146,7 @@ DiffusionTensor3D<T>::GetInnerScalarProduct() const -> RealValueType
 
   return xx * xx + yy * yy + zz * zz + 2.0 * (xy * xy + xz * xz + yz * yz);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

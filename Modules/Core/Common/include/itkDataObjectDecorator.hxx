@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -139,6 +140,7 @@ DataObjectDecorator<T>::PrintSelf(std::ostream & os, Indent indent) const
 
   os << indent << "Component: " << m_Component << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

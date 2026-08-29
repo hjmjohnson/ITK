@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TMapDataType>
 bool
@@ -188,6 +189,7 @@ VMMapFileParser<TVMMapDataType>::ReadFile(const std::string & mapFileLocation)
     itkGenericExceptionMacro("The vmmap file is an invalid file or contains errors:\n" << excp);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkSmapsFileParser_hxx

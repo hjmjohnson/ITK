@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 LoggerManager::~LoggerManager() = default;
 
 /** create a logger and add it into LoggerManager */
@@ -120,4 +121,5 @@ LoggerManager::PrintSelf(std::ostream & os, Indent indent) const
 
   os << indent << "The number of loggers: " << m_LoggerSet.size() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

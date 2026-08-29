@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class BoundingBox
@@ -209,6 +210,7 @@ private:
   mutable TimeStamp       m_BoundsMTime{}; // The last time the bounds
                                            // were computed.
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

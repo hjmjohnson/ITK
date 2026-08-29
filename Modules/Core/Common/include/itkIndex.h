@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \brief Represent a n-dimensional index in a n-dimensional image.
  *
@@ -604,6 +605,7 @@ MakeIndex(const T... values)
   return Index<sizeof...(T)>{ { toValueType(values)... } };
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

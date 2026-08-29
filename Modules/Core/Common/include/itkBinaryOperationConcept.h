@@ -23,7 +23,10 @@
 
 /// \cond HIDE_META_PROGRAMMING
 
-namespace itk::Details::op
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Details::op
 {
 /** Root Binary Operation Concept.
  * All binary operations are expected to inherit from this type.
@@ -96,7 +99,9 @@ struct Div : BinaryOperationConcept
   }
 };
 
-} // namespace itk::Details::op
+} // namespace Details::op
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 /// \endcond
 
 #endif // itkBinaryOperationConcept_h

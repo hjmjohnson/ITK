@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ProgressTransformer
  * \brief Transforms progress updates from [0%, 100%] to desired scale.
@@ -69,5 +70,6 @@ private:
 
   unsigned long m_ProgressTag{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkProgressTransformer_h

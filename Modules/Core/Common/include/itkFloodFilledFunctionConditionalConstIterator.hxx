@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TFunction>
 FloodFilledFunctionConditionalConstIterator<TImage, TFunction>::FloodFilledFunctionConditionalConstIterator(
   const ImageType * imagePtr,
@@ -213,6 +214,7 @@ FloodFilledFunctionConditionalConstIterator<TImage, TFunction>::DoFloodStep()
     this->m_IsAtEnd = true;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

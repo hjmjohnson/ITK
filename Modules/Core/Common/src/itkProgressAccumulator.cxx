@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ProgressAccumulator::ProgressAccumulator()
   : m_MiniPipelineFilter(nullptr)
 // Initialize the progress values
@@ -167,4 +168,5 @@ ProgressAccumulator::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << m_AccumulatedProgress << std::endl;
   os << indent << m_BaseAccumulatedProgress << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // End namespace itk

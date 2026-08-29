@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MinimumMaximumImageCalculator
  *  \brief Computes the minimum and the maximum intensity values of
  *         an image.
@@ -125,6 +126,7 @@ private:
   RegionType m_Region{};
   bool       m_RegionSetByUser{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

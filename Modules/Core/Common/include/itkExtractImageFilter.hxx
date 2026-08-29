@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ExtractImageFilter<TInputImage, TOutputImage>::ExtractImageFilter()
@@ -271,6 +272,7 @@ ExtractImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   ImageAlgorithm::Copy(inputPtr, outputPtr, inputRegionForThread, outputRegionForThread);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

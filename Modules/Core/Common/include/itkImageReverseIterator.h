@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageReverseIterator
  * \brief A multi-dimensional image iterator designed to walk a specified
  * region in reverse.
@@ -126,6 +127,7 @@ protected:
 template <typename TImage>
 ImageReverseIterator(SmartPointer<TImage>, const typename TImage::RegionType &) -> ImageReverseIterator<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class TestDataObject : public DataObject
 {
@@ -555,6 +556,7 @@ public:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

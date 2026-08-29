@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SymmetricEllipsoidInteriorExteriorSpatialFunction
  * \brief Function implementation of an ellipsoid
  *
@@ -98,6 +99,7 @@ private:
   /** The vector ratio. */
   double m_VectorRatio{ 0.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HexahedronCellTopology
  *  \brief Holds data defining the topological connections of
  *         the vertices and edges of a HexahedronCell.
@@ -47,6 +48,7 @@ protected:
   static const int m_Edges[12][2];
   static const int m_Faces[6][4];
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

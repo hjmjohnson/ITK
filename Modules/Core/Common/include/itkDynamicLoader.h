@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // BTX
 using LibHandle = itksys::DynamicLoader::LibraryHandle;
@@ -88,6 +89,7 @@ protected:
   DynamicLoader();
   ~DynamicLoader() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

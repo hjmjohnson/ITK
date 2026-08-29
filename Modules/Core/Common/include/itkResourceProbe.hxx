@@ -43,6 +43,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename ValueType, typename MeanType>
 ResourceProbe<ValueType, MeanType>::ResourceProbe(std::string type, std::string unit)
@@ -595,6 +596,7 @@ ResourceProbe<ValueType, MeanType>::PrintJSONSystemInformation(std::ostream & os
   os << "  }";
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

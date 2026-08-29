@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class DerefError
  * Exception thrown when trying to dereference a null pointer.
@@ -53,6 +54,7 @@ Deref(T * const ptr)
   }
   return *ptr;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

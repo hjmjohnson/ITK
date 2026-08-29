@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Constructor */
 StdStreamLogOutput::StdStreamLogOutput() = default;
 
@@ -90,4 +91,5 @@ StdStreamLogOutput::PrintSelf(std::ostream & os, Indent indent) const
   Superclass::PrintSelf(os, indent);
   os << indent << "Stream: " << m_Stream << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

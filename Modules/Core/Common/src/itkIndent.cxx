@@ -32,6 +32,7 @@ constexpr int ITK_NUMBER_OF_BLANKS{ 40 };
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 static constexpr char blanks[ITK_NUMBER_OF_BLANKS + 1] = "                                        ";
 
 Indent *
@@ -58,4 +59,5 @@ operator<<(std::ostream & os, const Indent & ind)
   os << blanks + (ITK_NUMBER_OF_BLANKS - ind.m_Indent);
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

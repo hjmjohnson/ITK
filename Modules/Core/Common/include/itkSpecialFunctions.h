@@ -18,12 +18,14 @@
 #ifndef itkSpecialFunctions_h
 #define itkSpecialFunctions_h
 
+#include "itkABINamespace.h"
 #include "itk_eigen.h"
 #include ITK_EIGEN_UNSUPPORTED(SpecialFunctions)
 #include <type_traits>
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Math
 {
 
@@ -46,6 +48,7 @@ RegularizedIncompleteBeta(TReal a, TReal b, TReal x)
 }
 
 } // namespace Math
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkSpecialFunctions_h

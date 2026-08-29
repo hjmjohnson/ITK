@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Print out the bounding box.
  */
@@ -369,6 +370,7 @@ BoundingBox<TPointIdentifier, VPointDimension, TCoordinate, TPointsContainer>::D
 
   return clone;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

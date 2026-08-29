@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionExclusionIteratorWithIndex
  *  \brief A multi-dimensional image iterator that walks an image region,
  *         excluding a second region contained within the first, with write
@@ -130,6 +131,7 @@ template <typename TImage>
 ImageRegionExclusionIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRegionExclusionIteratorWithIndex<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

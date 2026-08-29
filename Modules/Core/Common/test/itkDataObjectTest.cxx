@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class DataObjectTestHelper : public DataObject
 {
@@ -49,6 +50,7 @@ protected:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 int

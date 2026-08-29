@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PixelTraits
  * \brief Traits for a pixel that define the dimension and component type.
  *
@@ -1447,6 +1448,7 @@ public:
 
 /// \endcond
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkPixelTraits_h

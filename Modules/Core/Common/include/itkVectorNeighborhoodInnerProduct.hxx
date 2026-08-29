@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 auto
 VectorNeighborhoodInnerProduct<TImage>::operator()(const std::slice &                        s,
@@ -71,5 +72,6 @@ VectorNeighborhoodInnerProduct<TImage>::operator()(const std::slice &       s,
 
   return sum;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

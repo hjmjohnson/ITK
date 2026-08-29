@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SliceIterator
  * \brief A flexible iterator for itk containers(i.e. itk::Neighborhood)
  * that support pixel access through operator[].
@@ -148,6 +149,7 @@ private:
   /** Slice structure information. */
   std::slice m_Slice;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename T>
 void
@@ -53,6 +54,7 @@ AutoPointerDataObjectDecorator<T>::PrintSelf(std::ostream & os, Indent indent) c
 
   os << indent << "Component: " << typeid(m_Component).name() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

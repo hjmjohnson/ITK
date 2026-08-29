@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 void
@@ -102,6 +103,7 @@ ImageKernelOperator<TPixel, VDimension, TAllocator>::Fill(const CoefficientVecto
     *data = static_cast<TPixel>(*it);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

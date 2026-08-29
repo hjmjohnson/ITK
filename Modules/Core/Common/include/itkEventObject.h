@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EventObject
  * \brief Abstraction of the Events used to communicating among filters
     and with GUIs.
@@ -226,6 +227,7 @@ itkEventMacroDeclaration(UserEvent, AnyEvent);
 #undef ITKEvent_EXPORT
 #define ITKEvent_EXPORT ITK_ABI_EXPORT
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

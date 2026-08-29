@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class OptimizerParameters
  *  \brief Class to hold and manage different parameter types used during
  *  optimization.
@@ -185,6 +186,7 @@ private:
   std::unique_ptr<OptimizerParametersHelperType> m_Helper{ std::make_unique<OptimizerParametersHelperType>() };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

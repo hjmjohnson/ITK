@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ImageRegionSplitterSlowDimension::ImageRegionSplitterSlowDimension() = default;
 
@@ -91,4 +92,5 @@ ImageRegionSplitterSlowDimension::GetSplitInternal(unsigned int   dim,
   return maxPieceIdUsed + 1;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class OptimizerParametersHelper
  *  \brief Basic helper class to manage parameter data as an Array type,
  *  the default type.
@@ -77,6 +78,7 @@ public:
   virtual ~OptimizerParametersHelper() = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

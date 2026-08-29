@@ -18,8 +18,10 @@
 #ifndef itkMakeFilled_h
 #define itkMakeFilled_h
 
+#include "itkABINamespace.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Yields a container of the specified type, filled by the specified value, assigned to each of its elements.
  * Only intended for container types of a compile-time fixed size, including instances of FixedArray (and derived
  * classes), Index, Offset, Size, and std::array. Moreover, their size (number of elements) should be greater than zero.
@@ -41,6 +43,7 @@ MakeFilled(typename TContainer::const_reference value)
   }
   return container;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMakeFilled_h

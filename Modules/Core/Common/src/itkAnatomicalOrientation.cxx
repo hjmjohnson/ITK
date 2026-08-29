@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 #ifndef ITK_FUTURE_LEGACY_REMOVE
@@ -329,4 +330,5 @@ operator<<(std::ostream & out, const AnatomicalOrientation & orientation)
   return out << terms[0] << " " << terms[1] << " " << terms[2];
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

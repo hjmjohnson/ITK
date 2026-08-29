@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 auto
 ZeroFluxNeumannBoundaryCondition<TInputImage, TOutputImage>::operator()(const OffsetType &       point_index,
@@ -182,6 +183,7 @@ ZeroFluxNeumannBoundaryCondition<TInputImage, TOutputImage>::GetPixel(const Inde
   return static_cast<OutputPixelType>(image->GetPixel(lookupIndex));
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

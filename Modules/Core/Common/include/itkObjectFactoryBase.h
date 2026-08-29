@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ObjectFactoryBase
  * \brief Create instances of classes using an object factory.
  *
@@ -289,6 +290,7 @@ private:
 
   static ObjectFactoryBasePrivate * m_PimplGlobals;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

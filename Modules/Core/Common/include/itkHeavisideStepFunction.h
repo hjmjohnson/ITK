@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HeavisideStepFunction
  *
  * \brief Implementation of the classical Heaviside step function.
@@ -70,6 +71,7 @@ protected:
   HeavisideStepFunction() = default;
   ~HeavisideStepFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

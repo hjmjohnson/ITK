@@ -74,6 +74,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace Math::Detail
 {
@@ -500,6 +501,7 @@ template <>
 struct FloatOrDouble<double>
 {};
 } // end namespace Concept
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #undef USE_SSE2_32IMPL

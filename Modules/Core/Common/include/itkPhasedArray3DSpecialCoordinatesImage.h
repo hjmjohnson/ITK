@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PhasedArray3DSpecialCoordinatesImage
  *  \brief Templated 3D nonrectilinear-coordinate image class for
  *  phased-array "range" images.
@@ -423,6 +424,7 @@ private:
   double m_RadiusSampleSize{};
   double m_FirstSampleDistance{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

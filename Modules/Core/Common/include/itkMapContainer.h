@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MapContainer
  * \brief A wrapper of the STL "map" container.
  *
@@ -472,6 +473,7 @@ public:
   void
   Initialize();
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

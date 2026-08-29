@@ -22,6 +22,7 @@
 // per-TU Eigen instantiation cost.
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Math
 {
 namespace detail
@@ -47,4 +48,5 @@ RectangularSVDEigen<double>(const double *, unsigned int, unsigned int, double *
 ITK_GCC_PRAGMA_DIAG_POP()
 } // namespace detail
 } // namespace Math
+ITK_ABI_NAMESPACE_END
 } // namespace itk

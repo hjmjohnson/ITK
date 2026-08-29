@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Prompting off by default
  */
@@ -81,4 +82,5 @@ FileOutputWindow::DisplayText(const char * txt)
     m_Stream->flush();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

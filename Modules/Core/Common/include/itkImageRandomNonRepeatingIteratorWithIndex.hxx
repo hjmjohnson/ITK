@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ImageRandomNonRepeatingIteratorWithIndex<TImage>::ImageRandomNonRepeatingIteratorWithIndex(TImage *           ptr,
                                                                                            const RegionType & region)
@@ -47,6 +48,7 @@ ImageRandomNonRepeatingIteratorWithIndex<TImage>::operator=(
   this->ImageRandomNonRepeatingConstIteratorWithIndex<TImage>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

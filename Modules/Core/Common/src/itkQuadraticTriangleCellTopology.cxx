@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * The triangle's topology data: Edges
  */
@@ -27,4 +28,5 @@ const int QuadraticTriangleCellTopology::m_Edges[3][3] = { { 0, 4, 1 }, { 1, 5, 
 QuadraticTriangleCellTopology::QuadraticTriangleCellTopology() = default;
 
 QuadraticTriangleCellTopology::~QuadraticTriangleCellTopology() = default;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

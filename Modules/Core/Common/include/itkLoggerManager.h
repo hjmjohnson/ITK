@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LoggerManager
  *  \brief Used for centrally managing loggers.
  *
@@ -110,6 +111,7 @@ protected:
 private:
   std::map<NameType, LoggerPointer> m_LoggerSet{};
 }; // class Logger
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLoggerManager_h

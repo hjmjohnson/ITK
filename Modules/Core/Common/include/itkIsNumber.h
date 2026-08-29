@@ -28,7 +28,10 @@
 
 
 /// \cond HIDE_META_PROGRAMMING
-namespace itk::mpl
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace mpl
 {
 /** Tells whether a type is a number.
  * \c TrueType for all kinds of numbers from \c short to `long long`,
@@ -82,7 +85,9 @@ struct IsNumber<long double> : TrueType
 {};
 /// \endcond
 
-} // namespace itk::mpl
+} // namespace mpl
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 /// \endcond
 
 #else // ITK_LEGACY_REMOVE

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WeakPointer
  * \brief Implements a weak reference to an object.
  *
@@ -166,6 +167,7 @@ operator<<(std::ostream & os, const WeakPointer<T> p)
   p.Print(os);
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

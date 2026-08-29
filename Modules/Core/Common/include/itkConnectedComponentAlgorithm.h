@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TIterator>
 TIterator *
 setConnectivity(TIterator * it, bool fullyConnected = false)
@@ -127,6 +128,7 @@ setConnectivityLater(TIterator * it, bool fullyConnected = false)
   }
   return it;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

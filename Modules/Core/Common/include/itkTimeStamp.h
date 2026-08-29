@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TimeStamp
  * \brief Generate a unique, increasing time value.
  *
@@ -130,6 +131,7 @@ private:
    * */
   static GlobalTimeStampType * m_GlobalTimeStamp;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

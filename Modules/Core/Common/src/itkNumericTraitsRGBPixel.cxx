@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // All the specializations that were here previously have now been
 // replaced with a single template in the header file.
 //
@@ -51,4 +52,5 @@ RGBPIXELSTATICTRAITSMACRO(double);
 RGBPIXELSTATICTRAITSMACRO(long long);
 RGBPIXELSTATICTRAITSMACRO(unsigned long long);
 RGBPIXELSTATICTRAITSMACRO(long double);
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

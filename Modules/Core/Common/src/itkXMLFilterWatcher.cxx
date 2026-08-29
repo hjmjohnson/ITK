@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 XMLFilterWatcher::ShowProgress()
 {
@@ -57,4 +58,5 @@ void
 XMLFilterWatcher::EndFilter()
 {}
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

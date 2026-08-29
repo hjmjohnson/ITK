@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \brief NumericTraits for Vector
  * \tparam T Component type for Vector
  * \tparam D Space dimension (Dimension of Vector)
@@ -238,6 +239,7 @@ public:
   static const Self ITKCommon_EXPORT Zero;
   static const Self ITKCommon_EXPORT One;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsVectorPixel_h

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutput, unsigned int VImageDimension, typename TInput>
 auto
 GaussianSpatialFunction<TOutput, VImageDimension, TInput>::Evaluate(const TInput & position) const -> OutputType
@@ -68,6 +69,7 @@ GaussianSpatialFunction<TOutput, VImageDimension, TInput>::PrintSelf(std::ostrea
   os << indent << "Scale: " << m_Scale << std::endl;
   itkPrintSelfBooleanMacro(Normalized);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

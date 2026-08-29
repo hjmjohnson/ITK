@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class QuadrilateralCell
  *  \brief Represents a quadrilateral for a Mesh.
  *
@@ -151,6 +152,7 @@ protected:
                    CoordinateType            x[PointDimension],
                    InterpolationWeightType * weights);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Math
 {
 
@@ -85,6 +86,7 @@ CholeskyLowerTriangle(const vnl_matrix<T> & A)
 }
 
 } // namespace Math
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkCholeskySolve_h

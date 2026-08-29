@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename MetaDataObjectType>
 const char *
 MetaDataObject<MetaDataObjectType>::GetMetaDataObjectTypeName() const
@@ -81,6 +82,7 @@ MetaDataObject<MetaDataObjectType>::Print(std::ostream & os) const
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

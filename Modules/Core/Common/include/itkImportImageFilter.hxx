@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  *
@@ -168,6 +169,7 @@ ImportImageFilter<TPixel, VImageDimension>::SetDirection(const DirectionType & d
     this->Modified();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

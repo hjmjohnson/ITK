@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 itkStaticNumericTraitsGenericArrayDimensionsMacro(Vector, char);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(Vector, unsigned char);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(Vector, signed char);
@@ -33,4 +34,5 @@ itkStaticNumericTraitsGenericArrayDimensionsMacro(Vector, double);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(Vector, long double);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(Vector, long long);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(Vector, unsigned long long);
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

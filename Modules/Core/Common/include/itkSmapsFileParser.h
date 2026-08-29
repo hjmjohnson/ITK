@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MapRecord
  * \brief MapRecord class.
  *
@@ -317,6 +318,7 @@ public:
   void
   ReadFile(const std::string & mapFileLocation = "") override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

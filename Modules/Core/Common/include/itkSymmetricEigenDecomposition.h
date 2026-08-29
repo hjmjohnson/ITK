@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SymmetricEigenDecomposition
  * \brief Stored eigendecomposition of a real symmetric matrix, Eigen-backed.
@@ -125,6 +126,7 @@ public:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkSymmetricEigenDecomposition_h

@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TElementIdentifier, typename TElement>
 ImportImageContainer<TElementIdentifier, TElement>::~ImportImageContainer()
 {
@@ -206,6 +207,7 @@ ImportImageContainer<TElementIdentifier, TElement>::PrintSelf(std::ostream & os,
   os << indent << "Size: " << m_Size << std::endl;
   os << indent << "Capacity: " << m_Capacity << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

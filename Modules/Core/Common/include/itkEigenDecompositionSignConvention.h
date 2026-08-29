@@ -18,10 +18,14 @@
 #ifndef itkEigenDecompositionSignConvention_h
 #define itkEigenDecompositionSignConvention_h
 
+#include "itkABINamespace.h"
 #include "vnl/vnl_matrix.h"
 #include <cmath>
 
-namespace itk::detail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace detail
 {
 
 /** Canonicalize the sign of every eigenvector column of \a V so that its
@@ -90,6 +94,8 @@ CanonicalizeColumnSignsPaired(TMatrixU & u, TMatrixV & paired)
   }
 }
 
-} // namespace itk::detail
+} // namespace detail
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkEigenDecompositionSignConvention_h

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 IterationReporter::IterationReporter(ProcessObject * filter, ThreadIdType threadId, unsigned long stepsPerUpdate)
   : m_Filter(filter)
@@ -27,4 +28,5 @@ IterationReporter::IterationReporter(ProcessObject * filter, ThreadIdType thread
   // Only thread 0 should update progress.
   , m_StepsBeforeUpdate(m_StepsPerUpdate)
 {}
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

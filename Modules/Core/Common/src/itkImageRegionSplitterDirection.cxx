@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ImageRegionSplitterDirection::ImageRegionSplitterDirection() = default;
 
@@ -102,4 +103,5 @@ ImageRegionSplitterDirection::GetSplitInternal(unsigned int   dim,
   return maxPieceIdUsed + 1;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

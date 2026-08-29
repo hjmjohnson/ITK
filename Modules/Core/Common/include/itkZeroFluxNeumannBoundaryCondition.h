@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ZeroFluxNeumannBoundaryCondition
  * \brief
  * A function object that determines a neighborhood of values at an
@@ -123,6 +124,7 @@ public:
   OutputPixelType
   GetPixel(const IndexType & index, const TInputImage * image) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

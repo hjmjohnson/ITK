@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace detail
 {
 /* Helper functions returning pointer to matrix data for different types.  */
@@ -1107,6 +1108,7 @@ operator<<(std::ostream &                                                       
   os << "  UseEigenLibrary: " << s.GetUseEigenLibrary() << std::endl;
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -50,6 +50,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Math
 {
 namespace detail
@@ -269,6 +270,7 @@ InverseSymmetric(const vnl_matrix<TReal> & A)
 }
 
 } // namespace Math
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMathLDLT_h

@@ -19,6 +19,7 @@
 #ifndef itkSmartPointer_h
 #define itkSmartPointer_h
 
+#include "itkABINamespace.h"
 #include <iostream>
 #include <utility>
 #include <type_traits>
@@ -27,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SmartPointer
  * \brief Implements transparent reference counting.
  *
@@ -331,6 +333,7 @@ swap(SmartPointer<T> & a, SmartPointer<T> & b) noexcept
   a.Swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

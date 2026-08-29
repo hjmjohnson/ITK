@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TComponent>
 void
@@ -364,6 +365,7 @@ ColorTable<TComponent>::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "ColorName: " << m_ColorName << std::endl;
   os << indent << "Color: " << m_Color << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

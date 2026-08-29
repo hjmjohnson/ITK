@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ObjectFactory
  * \brief Create instances of a class.
  *
@@ -63,6 +64,7 @@ public:
     return dynamic_cast<T *>(ret.GetPointer());
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

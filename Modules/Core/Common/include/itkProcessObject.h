@@ -41,6 +41,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class MultiThreaderBase;
 
@@ -1030,6 +1031,7 @@ private:
 
   friend class TestProcessObject;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

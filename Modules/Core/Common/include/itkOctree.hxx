@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int ColorTableSize, typename MappingFunctionType>
 Octree<TPixel, ColorTableSize, MappingFunctionType>::Octree()
   : m_Tree()
@@ -331,6 +332,7 @@ Octree<TPixel, ColorTableSize, MappingFunctionType>::GetColorTableSize() const
 {
   return ColorTableSize;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Command
  *  \brief Superclass for callback/observer methods.
  *
@@ -453,6 +454,7 @@ protected:
   FunctionObjectType m_FunctionObject{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

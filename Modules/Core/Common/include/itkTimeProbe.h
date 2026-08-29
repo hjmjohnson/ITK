@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TimeProbe
  *
  *  \brief Computes the time passed between two points in code.
@@ -83,6 +84,7 @@ public:
 private:
   RealTimeClock::Pointer m_RealTimeClock{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkTimeProbe_h

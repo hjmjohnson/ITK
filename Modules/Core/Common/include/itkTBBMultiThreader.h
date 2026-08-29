@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TBBMultiThreader
  * \brief A class for performing multithreaded execution with a thread
  * pool back end, uses the Intel Threading Building Blocks (TBB) library.
@@ -99,5 +100,6 @@ private:
   friend class ProcessObject;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

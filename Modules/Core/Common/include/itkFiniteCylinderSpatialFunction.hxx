@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename TInput>
 FiniteCylinderSpatialFunction<VDimension, TInput>::FiniteCylinderSpatialFunction()
   : m_AxisLength(1.0f) // Length of cylinder axis.
@@ -35,6 +36,7 @@ FiniteCylinderSpatialFunction<VDimension, TInput>::FiniteCylinderSpatialFunction
   m_Orientation.Fill(orientationVal);
   m_NormalizedOrientation.Fill(orientationVal);
   m_Center.Fill(0.0f); // Origin of cylinder}
+  ITK_ABI_NAMESPACE_END
 }
 
 template <unsigned int VDimension, typename TInput>

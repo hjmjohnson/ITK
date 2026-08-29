@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixelType, unsigned int VDimension, typename TMeshTraits>
 void
 PointSet<TPixelType, VDimension, TMeshTraits>::PrintSelf(std::ostream & os, Indent indent) const
@@ -160,6 +161,7 @@ PointSet<TPixelType, VDimension, TMeshTraits>::InternalClone() const
   }
   itkExceptionMacro("downcast to type " << this->GetNameOfClass() << " failed.");
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

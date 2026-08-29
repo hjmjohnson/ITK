@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SymmetricSecondRankTensor
  * \brief Represent a symmetric tensor of second rank.
  *
@@ -262,6 +263,7 @@ swap(SymmetricSecondRankTensor<T> & a, SymmetricSecondRankTensor<T> & b) noexcep
 {
   a.swap(b);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkNumericTraitsTensorPixel.h"

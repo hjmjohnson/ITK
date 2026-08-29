@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class IndexedContainerInterface
  *  \brief This should only be used for reference when writing containers
  *         conforming to this interface.
@@ -180,6 +181,7 @@ public:
   void
   Initialize();
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

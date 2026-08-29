@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 #if !defined(ITK_LEGACY_REMOVE)
 template <>
@@ -88,4 +89,5 @@ const std::complex<long double> NumericTraits<std::complex<long double>>::Zero =
 template <>
 const std::complex<long double> NumericTraits<std::complex<long double>>::One = std::complex<long double>(1.0, 0.0);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

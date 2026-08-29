@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Forward reference because of circular dependencies
 template <typename TIterator>
@@ -153,6 +154,7 @@ protected:
   ~ThreadedIteratorRangePartitioner() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

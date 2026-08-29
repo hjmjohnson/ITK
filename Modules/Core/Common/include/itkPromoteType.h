@@ -89,11 +89,13 @@ ITK_ASSOCIATE(13, long double);
  * between \c std::complex<>, write:
  \code
  namespace itk {
+ITK_ABI_NAMESPACE_BEGIN
    template <typename TA, typename TB>
    struct PromoteType<std::complex<TA>, std::complex<TB> > {
      using Type = std::complex<typename PromoteType<TA,TB>::Type>;
    };
- }
+ ITK_ABI_NAMESPACE_END
+}
  \endcode
  *
  * \ingroup MetaProgrammingLibrary

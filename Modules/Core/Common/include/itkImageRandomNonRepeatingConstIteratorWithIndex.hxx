@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 ImageRandomNonRepeatingConstIteratorWithIndex<TImage>::ImageRandomNonRepeatingConstIteratorWithIndex(
@@ -115,6 +116,7 @@ ImageRandomNonRepeatingConstIteratorWithIndex<TImage>::UpdatePosition()
 
   this->m_Position = this->m_Image->GetBufferPointer() + this->m_Image->ComputeOffset(this->m_PositionIndex);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

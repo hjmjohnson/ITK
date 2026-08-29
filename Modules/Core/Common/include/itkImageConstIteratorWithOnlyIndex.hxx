@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------
 //  Constructor
 //----------------------------------------------------------------------
@@ -69,6 +70,7 @@ ImageConstIteratorWithOnlyIndex<TImage>::GoToReverseBegin()
   m_Remaining = m_Region.GetNumberOfPixels() > 0;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * The quadrilateral's topology data: Edges.
  */
@@ -27,4 +28,5 @@ const int QuadrilateralCellTopology::m_Edges[4][2] = { { 0, 1 }, { 1, 2 }, { 2, 
 QuadrilateralCellTopology::QuadrilateralCellTopology() = default;
 
 QuadrilateralCellTopology::~QuadrilateralCellTopology() = default;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

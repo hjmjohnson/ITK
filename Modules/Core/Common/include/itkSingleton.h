@@ -39,6 +39,7 @@ Unused(const T &)
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SingletonIndex
  * \brief Implementation detail.
  *
@@ -157,6 +158,7 @@ T * Singleton(const char * globalName, std::function<void(void *)> itkNotUsed(fu
 }
 #endif
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

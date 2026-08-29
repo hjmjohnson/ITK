@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Function
 {
 template <typename TInput, typename TOutput>
@@ -79,6 +80,7 @@ protected:
   ~TanHelperImageFilter() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace

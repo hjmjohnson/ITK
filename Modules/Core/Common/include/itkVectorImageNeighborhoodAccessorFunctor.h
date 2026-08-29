@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorImageNeighborhoodAccessorFunctor
  * \brief Provides accessor interfaces to Access pixels and is meant to be
  * used on pointers to pixels held by the Neighborhood class.
@@ -136,5 +137,6 @@ private:
                                             // (precomputed for speedup).
   InternalPixelType * m_Begin{ nullptr };   // Begin of the buffer.
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

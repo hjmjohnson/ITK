@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShapedFloodFilledImageFunctionConditionalIterator
  * \brief Iterates over a flood-filled image function with write access
@@ -113,6 +114,7 @@ public:
   /** Default Destructor. */
   ~ShapedFloodFilledImageFunctionConditionalIterator() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

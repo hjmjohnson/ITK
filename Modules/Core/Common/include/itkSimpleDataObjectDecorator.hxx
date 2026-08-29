@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -63,6 +64,7 @@ SimpleDataObjectDecorator<T>::PrintSelf(std::ostream & os, Indent indent) const
 #endif
   os << indent << "Initialized: " << this->m_Initialized << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

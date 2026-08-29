@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 ThreadIdType
@@ -35,6 +36,7 @@ ThreadedImageRegionPartitioner<VDimension>::PartitionDomain(const ThreadIdType t
   return static_cast<ThreadIdType>(maxNumberOfSplits);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -19,8 +19,10 @@
 #ifndef itkCopy_h
 #define itkCopy_h
 
+#include "itkABINamespace.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** Returns a copy of its argument. Primarily used to make the act of copying (typically involving a copy-constructor
  * call) explicit, and to avoid warnings like:
@@ -53,6 +55,7 @@ Copy(const T & original)
   return original;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

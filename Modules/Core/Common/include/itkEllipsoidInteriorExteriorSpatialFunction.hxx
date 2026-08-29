@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename TInput>
 auto
 EllipsoidInteriorExteriorSpatialFunction<VDimension, TInput>::Evaluate(const InputType & position) const -> OutputType
@@ -81,6 +82,7 @@ EllipsoidInteriorExteriorSpatialFunction<VDimension, TInput>::PrintSelf(std::ost
     os << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

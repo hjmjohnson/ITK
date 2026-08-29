@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class EllipsoidInteriorExteriorSpatialFunction
  * \brief Function implementation of an ellipsoid
@@ -99,6 +100,7 @@ private:
   /** The orientation vectors (must be orthogonal) of the ellipsoid axes. */
   OrientationType m_Orientations{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

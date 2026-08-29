@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class BresenhamLine
  * \brief Compute indices along a line in n dimensions.
@@ -59,6 +60,7 @@ public:
   IndexArray
   BuildLine(IndexType p0, IndexType p1);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

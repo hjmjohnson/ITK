@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRandomIteratorWithIndex
  * \brief A multi-dimensional image iterator that visits a random set of pixels
  * within an image region.
@@ -129,6 +130,7 @@ template <typename TImage>
 ImageRandomIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRandomIteratorWithIndex<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

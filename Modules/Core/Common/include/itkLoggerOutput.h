@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LoggerOutput
  * \brief Used for overriding itk::OutputWindow to redirect
  *        messages to itk::Logger.
@@ -116,6 +117,7 @@ protected:
 private:
   Logger * m_Logger{ nullptr };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkLoggerOutput_h

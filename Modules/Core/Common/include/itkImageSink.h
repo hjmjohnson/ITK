@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ImageSink
  *
@@ -205,6 +206,7 @@ private:
   /** @ITKEndGrouping */
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkImageSink.hxx"

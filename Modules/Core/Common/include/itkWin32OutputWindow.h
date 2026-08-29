@@ -35,6 +35,7 @@
 #  include "itkWindows.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Win32OutputWindow
  * \brief Collect error and debug messages on Win32-based systems.
  *
@@ -91,6 +92,7 @@ protected:
 private:
   static HWND m_OutputWindow;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // _MSC_VER

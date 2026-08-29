@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class StoppingCriterionBase
  * \brief An abstract base class to represent a stopping criterion for an iterative
@@ -63,5 +64,6 @@ protected:
   ~StoppingCriterionBase() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

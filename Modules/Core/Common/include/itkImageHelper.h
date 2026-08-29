@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageHelper
  *  \brief Fast Index/Offset computation
  *
@@ -112,6 +113,7 @@ public:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

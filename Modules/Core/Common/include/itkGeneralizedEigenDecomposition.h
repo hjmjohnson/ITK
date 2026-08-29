@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class GeneralizedEigenDecomposition
  * \brief Symmetric-definite generalized eigenproblem A x = lambda B x, Eigen-backed.
@@ -105,6 +106,7 @@ private:
   MatrixType m_Eigenvectors;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkGeneralizedEigenDecomposition_h

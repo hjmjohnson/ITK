@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -282,4 +283,5 @@ StringToFloat(const std::string & str, const char * context)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

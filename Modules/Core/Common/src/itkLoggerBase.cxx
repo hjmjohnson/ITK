@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 LoggerBase::LoggerBase()
   : m_PriorityLevel(LoggerBase::PriorityLevelEnum::NOTSET)
   , m_LevelForFlushing(LoggerBase::PriorityLevelEnum::MUSTFLUSH)
@@ -147,4 +148,5 @@ operator<<(std::ostream & out, const LoggerBaseEnums::TimeStampFormat value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

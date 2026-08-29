@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ContinuousIndex
  * \brief A templated class holding a point in n-Dimensional image space.
  *
@@ -91,6 +92,7 @@ public:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

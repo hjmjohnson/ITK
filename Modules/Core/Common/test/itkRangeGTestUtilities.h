@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Utilities for GoogleTest unit tests of iterator ranges.
 // Note: This class is only for internal (testing) purposes.
 // It is not part of the public API of ITK.
@@ -294,6 +295,7 @@ private:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

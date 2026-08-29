@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 DynamicLoader::DynamicLoader() = default;
 
 //----------------------------------------------------------------------------
@@ -66,4 +67,5 @@ DynamicLoader::LastError()
 {
   return itksys::DynamicLoader::LastError();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

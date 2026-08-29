@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TOutput>
 auto
@@ -42,6 +43,7 @@ AtanRegularizedHeavisideStepFunction<TInput, TOutput>::EvaluateDerivative(const 
   return static_cast<OutputType>(Math::one_over_pi * oneOverEpsilon / (1.0 + t * t));
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension, typename TContainer>
 void
 Neighborhood<TPixel, VDimension, TContainer>::ComputeNeighborhoodStrideTable()
@@ -122,6 +123,7 @@ Neighborhood<TPixel, VDimension, TContainer>::PrintSelf(std::ostream & os, Inden
   os << indent << "StrideTable: " << m_StrideTable << std::endl;
   os << indent << "OffsetTable: " << m_OffsetTable << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AutoPointer
  * \brief Implements an Automatic Pointer to an object.
  *
@@ -253,6 +254,7 @@ TransferAutoPointer(TAutoPointerBase & pa, TAutoPointerDerived & pb)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

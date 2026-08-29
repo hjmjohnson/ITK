@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 itkStaticNumericTraitsGenericArrayDimensionsMacro(SymmetricSecondRankTensor, char);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(SymmetricSecondRankTensor, unsigned char);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(SymmetricSecondRankTensor, signed char);
@@ -37,4 +38,5 @@ itkStaticNumericTraitsGenericArrayDimensionsMacro(SymmetricSecondRankTensor, uns
 //    This was split in two files in order to help the Sun CC 5.6 compiler to
 //    manage the size of the compilation unit.
 //
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

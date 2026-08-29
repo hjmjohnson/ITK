@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BuildInformation
  * \brief Static information about this build
  *
@@ -102,5 +103,6 @@ private:
   static BuildInformationGlobals * m_PimplGlobals;
 
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

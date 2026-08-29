@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  Product by a Vector
  */
@@ -224,6 +225,7 @@ Matrix<T, VRows, VColumns>::operator*(const vnl_vector<T> & vc) const
 {
   return m_Matrix * vc;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

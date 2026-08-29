@@ -21,6 +21,7 @@
 #include "itkVertexCell.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PolyLineCell
  *  \brief Represents a series of connected line segments for a Mesh.
  *
@@ -135,6 +136,7 @@ protected:
   /** For storing the points needed for a line segment. */
   std::vector<PointIdentifier> m_PointIds{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

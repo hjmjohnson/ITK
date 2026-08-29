@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VImageDimension>
 auto
 ImageRegion<VImageDimension>::GetUpperIndex() const -> IndexType
@@ -254,6 +255,7 @@ operator<<(std::ostream & os, const ImageRegion<VImageDimension> & region)
   region.Print(os);
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

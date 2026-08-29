@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Cross
  * \brief Compute the cross product of two vectors of dimension 3,
  *        independently of the type of the values of vector's elements.
@@ -60,6 +61,7 @@ public:
     return oCross;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class QuadraticTriangleCellTopology
  *  \brief QuadraticTriangleCellTopology holds data defining the topological
  *         connections of the vertices and edges of a TriangleCell.
@@ -43,6 +44,7 @@ protected:
   /** Triangle topology data. */
   static const int m_Edges[3][3];
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

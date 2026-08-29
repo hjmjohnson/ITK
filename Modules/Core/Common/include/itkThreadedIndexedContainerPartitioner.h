@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ThreadedIndexedContainerPartitioner
  *  \brief Partitions an indexed container.
@@ -89,6 +90,7 @@ protected:
   ~ThreadedIndexedContainerPartitioner() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

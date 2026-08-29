@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Move the data pointer */
 template <typename TValue, unsigned int VVectorDimension, unsigned int VImageDimension>
 void
@@ -76,5 +77,6 @@ ImageVectorOptimizerParametersHelper<TValue, VVectorDimension, VImageDimension>:
   container->SetData(valuePointer, sz, false);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

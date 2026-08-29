@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ForwardDifferenceOperator
  * \brief Operator whose inner product with a neighborhood returns
@@ -72,6 +73,7 @@ protected:
     this->FillCenteredDirectional(coeff);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -19,11 +19,13 @@
 #ifndef itkMakeUniqueForOverwrite_h
 #define itkMakeUniqueForOverwrite_h
 
+#include "itkABINamespace.h"
 #include <memory>      // For unique_ptr.
 #include <type_traits> // For remove_extent_t, false_type, etc.
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Namespace of implementation details (not part of the public ITK interface).
 namespace MakeUniqueForOverwriteImplDetail
@@ -65,6 +67,7 @@ make_unique_for_overwrite(const size_t numberOfElements)
   return std::unique_ptr<TUnboundedArray>(new std::remove_extent_t<TUnboundedArray>[numberOfElements]);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMakeUniqueForOverwrite_h

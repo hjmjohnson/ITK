@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TExpr1, typename TExpr2, typename TBinaryOp>
 struct VariableLengthVectorExpression;
@@ -1589,6 +1590,7 @@ swap(VariableLengthVector<T> & l_, VariableLengthVector<T> & r_) noexcept
   l_.Swap(r_);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkNumericTraitsVariableLengthVectorPixel.h"

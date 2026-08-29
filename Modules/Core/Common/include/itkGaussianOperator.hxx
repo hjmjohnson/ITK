@@ -21,6 +21,7 @@
 #include "itkMacro.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 auto
 GaussianOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients() -> CoefficientVector
@@ -184,6 +185,7 @@ GaussianOperator<TPixel, VDimension, TAllocator>::ModifiedBesselI(int n, double 
     return accumulator;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

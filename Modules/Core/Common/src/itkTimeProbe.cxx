@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 TimeProbe::TimeProbe()
   : ResourceProbe<TimeStampType, TimeStampType>("Time", "s")
 {
@@ -41,4 +42,5 @@ TimeProbe::GetInstantValue() const
   return m_RealTimeClock->GetTimeInSeconds();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

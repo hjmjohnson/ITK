@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * The hexahedron's topology data: Edges.
  */
@@ -34,4 +35,5 @@ const int HexahedronCellTopology::m_Faces[6][4] = { { 0, 4, 7, 3 }, { 1, 2, 6, 5
 HexahedronCellTopology::HexahedronCellTopology() = default;
 
 HexahedronCellTopology::~HexahedronCellTopology() = default;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

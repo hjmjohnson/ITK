@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Assignment from a plain array
  */
@@ -291,6 +292,7 @@ operator>>(std::istream & is, Point<T, TPointDimension> & vct)
   return is;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

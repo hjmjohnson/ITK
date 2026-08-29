@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward reference of CellInterface because of circular #include dependencies
 template <typename TPixelType, typename TCellTraits>
 class ITK_TEMPLATE_EXPORT CellInterface;
@@ -135,6 +136,7 @@ protected:
   CellInterfaceVisitorImplementation() = default;
   ~CellInterfaceVisitorImplementation() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

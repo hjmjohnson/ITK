@@ -18,8 +18,10 @@
 #ifndef itkBoolean_h
 #define itkBoolean_h
 
+#include "itkABINamespace.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class Boolean
@@ -57,6 +59,7 @@ private:
   bool m_Value = false;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

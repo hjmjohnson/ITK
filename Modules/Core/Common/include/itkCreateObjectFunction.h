@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CreateObjectFunctionBase
  *  \brief Define API for object creation callback functions.
  *
@@ -79,6 +80,7 @@ protected:
   CreateObjectFunction() = default;
   ~CreateObjectFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

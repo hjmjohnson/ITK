@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageReverseConstIterator
  * \brief Multi-dimensional image iterator.
  *
@@ -410,6 +411,7 @@ template <typename TImage>
 ImageReverseConstIterator(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageReverseConstIterator<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

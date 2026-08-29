@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // All the specializations that were here previously have now been
 // replaced with a single template in the header file.
 //
@@ -50,4 +51,5 @@ DIFFUSIONTENSOR3DPIXELSTATICTRAITSMACRO(float);
 DIFFUSIONTENSOR3DPIXELSTATICTRAITSMACRO(double);
 DIFFUSIONTENSOR3DPIXELSTATICTRAITSMACRO(long long);
 DIFFUSIONTENSOR3DPIXELSTATICTRAITSMACRO(unsigned long long);
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

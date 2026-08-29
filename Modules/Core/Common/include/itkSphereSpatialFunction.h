@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SphereSpatialFunction
  * \brief Spatial function implementation of a sphere
  *
@@ -82,6 +83,7 @@ private:
   /** The radius of the sphere. */
   double m_Radius{ 1.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

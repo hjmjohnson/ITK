@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * The triangle's topology data: Edges
  */
@@ -27,4 +28,5 @@ const int TriangleCellTopology::m_Edges[3][2] = { { 0, 1 }, { 1, 2 }, { 2, 0 } }
 TriangleCellTopology::TriangleCellTopology() = default;
 
 TriangleCellTopology::~TriangleCellTopology() = default;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

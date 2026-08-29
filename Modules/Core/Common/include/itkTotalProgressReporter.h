@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TotalProgressReporter
  *  \brief A progress reporter for concurrent threads.
  *
@@ -129,6 +130,7 @@ protected:
   SizeValueType   m_PixelsBeforeUpdate;
   float           m_ProgressWeight;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

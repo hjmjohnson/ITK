@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorNeighborhoodInnerProduct
  *  \brief Defines the inner product operation between an itk::Neighborhood
  *         and an itk::NeighborhoodOperator.
@@ -77,6 +78,7 @@ public:
   PixelType
   operator()(const std::slice & s, const NeighborhoodType & it, const OperatorType & op) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

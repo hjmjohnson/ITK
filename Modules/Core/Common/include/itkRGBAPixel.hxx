@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename T>
 RGBAPixel<T> &
@@ -180,6 +181,7 @@ operator>>(std::istream & is, RGBAPixel<TComponent> & c)
   c.SetAlpha(alpha);
   return is;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

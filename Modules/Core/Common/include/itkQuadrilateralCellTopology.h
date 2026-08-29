@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class QuadrilateralCellTopology
  *  \brief Holds data defining the topological
  *         connections of the vertices and edges of a QuadrilateralCell.
@@ -43,6 +44,7 @@ protected:
   /** Quadrilateral topology data. */
   static const int m_Edges[4][2];
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

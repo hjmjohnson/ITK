@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class STLContainerAdaptor
  *  \brief An adapter object that casts a itk::XxxContainer into std::xxx
  *         and enables access to the underlying data structure.
@@ -72,6 +73,7 @@ public:
     return m_AdapteeRef.CastToSTLContainer();
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

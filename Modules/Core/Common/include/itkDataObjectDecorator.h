@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DataObjectDecorator
  * \brief Decorates any subclass of itkObject with a DataObject API
  *
@@ -144,6 +145,7 @@ protected:
 private:
   ComponentPointer m_Component{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

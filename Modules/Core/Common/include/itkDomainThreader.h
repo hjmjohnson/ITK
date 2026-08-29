@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class DomainThreader
  *  \brief Multi-threaded processing on a domain by processing sub-domains per
@@ -189,6 +190,7 @@ private:
   MultiThreaderBase::Pointer              m_MultiThreader{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -72,4 +73,5 @@ Directory::GetFile(unsigned int index)
 {
   return m_Internal.GetFile(index);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

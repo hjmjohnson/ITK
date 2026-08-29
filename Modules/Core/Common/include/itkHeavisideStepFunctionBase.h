@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HeavisideStepFunctionBase
  *
  * \brief Base class of the Heaviside function.
@@ -71,6 +72,7 @@ protected:
   {}
   ~HeavisideStepFunctionBase() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

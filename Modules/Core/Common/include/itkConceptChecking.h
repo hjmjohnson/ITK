@@ -110,7 +110,10 @@
 
 /** All concept class definitions are contained in the "itk::Concept"
     namespace. */
-namespace itk::Concept
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Concept
 {
 
 /**
@@ -976,6 +979,8 @@ struct IsFixedPoint
 
   itkConceptConstraintsMacro();
 };
-} // namespace itk::Concept
+} // namespace Concept
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

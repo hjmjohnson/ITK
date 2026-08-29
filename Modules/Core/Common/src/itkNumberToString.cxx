@@ -63,6 +63,7 @@ FloatingPointNumberToString(const TValue val)
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <>
 std::string
@@ -78,4 +79,5 @@ NumberToString<float>::operator()(float val) const
   return FloatingPointNumberToString(val);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

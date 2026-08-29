@@ -62,6 +62,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Constructor to initialize a time stamp
@@ -359,4 +360,5 @@ operator<<(std::ostream & os, const RealTimeStamp & v)
   return os;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

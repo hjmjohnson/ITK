@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 auto
 PeriodicBoundaryCondition<TInputImage, TOutputImage>::operator()(const OffsetType &       point_index,
@@ -200,6 +201,7 @@ PeriodicBoundaryCondition<TInputImage, TOutputImage>::GetPixel(const IndexType &
   return static_cast<OutputPixelType>(image->GetPixel(lookupIndex));
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

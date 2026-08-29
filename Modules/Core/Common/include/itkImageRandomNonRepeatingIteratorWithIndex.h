@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRandomNonRepeatingIteratorWithIndex
  * \brief A multi-dimensional image iterator that visits image pixels within a
  * region in a random order, without repeating.
@@ -141,6 +142,7 @@ template <typename TImage>
 ImageRandomNonRepeatingIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRandomNonRepeatingIteratorWithIndex<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

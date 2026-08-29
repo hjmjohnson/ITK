@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 enum
 {
   B2_MASKFILE_BLACK = 0,
@@ -229,6 +230,7 @@ private:
   OctreeNode          m_Tree{};
   MappingFunctionType m_MappingFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

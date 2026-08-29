@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MetaDataObjectBase
  * \brief The common interface for MetaDataObject's.
  *
@@ -102,6 +103,7 @@ private:
   virtual bool
   Equal(const MetaDataObjectBase &) const = 0;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMetaDataObjectBase_h

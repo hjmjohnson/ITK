@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //----------------------------------------------------------------------
 //  Constructor
@@ -49,6 +50,7 @@ ImageIteratorWithIndex<TImage>::operator=(const ImageConstIteratorWithIndex<TIma
   return *this;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

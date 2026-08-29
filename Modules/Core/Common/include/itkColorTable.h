@@ -26,6 +26,7 @@
 #include <vector>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ColorTable
  *  \brief Define a color table for image visualisation.
  *
@@ -134,6 +135,7 @@ private:
   ColorNameVectorType m_ColorName{};
   ColorVectorType     m_Color{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class AnatomicalOrientation
  * \brief Representations of anatomical orientations and methods to convert between conventions.
@@ -578,6 +579,7 @@ ITKCommon_EXPORT std::ostream &
                  operator<<(std::ostream & out, const AnatomicalOrientation & orientation);
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

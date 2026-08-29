@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename T, unsigned int TVectorDimension>
 CovariantVector<T, TVectorDimension>::CovariantVector(const ValueType & r)
   : Superclass{ r }
@@ -180,6 +181,7 @@ CovariantVector<T, VVectorDimension>::GetVnlVector() const
   return vnl_vector<T>(this->GetDataPointer(), VVectorDimension);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

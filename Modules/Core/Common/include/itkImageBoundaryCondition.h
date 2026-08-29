@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageBoundaryCondition
  * \brief A virtual base object that defines an interface to a class of
@@ -153,6 +154,7 @@ public:
   virtual OutputPixelType
   GetPixel(const IndexType & index, const TInputImage * image) const = 0;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

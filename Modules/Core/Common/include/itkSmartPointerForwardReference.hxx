@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 template <typename T>
 SmartPointerForwardReference<T>::SmartPointerForwardReference(const SmartPointerForwardReference<T> & p)
@@ -182,6 +183,7 @@ SmartPointerForwardReference<T>::UnRegister() noexcept
     m_Pointer->UnRegister();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

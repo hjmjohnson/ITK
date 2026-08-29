@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct ImageSourceCommonGlobals
 {
@@ -39,4 +40,5 @@ ImageSourceCommon::GetGlobalDefaultSplitter()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

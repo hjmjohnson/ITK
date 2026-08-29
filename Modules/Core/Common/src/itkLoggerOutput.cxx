@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 LoggerOutput::~LoggerOutput() = default;
 
 /** Send a string to display. */
@@ -95,4 +96,5 @@ LoggerOutput::PrintSelf(std::ostream & os, Indent indent) const
   Superclass::PrintSelf(os, indent);
   os << indent << "Logger: " << m_Logger << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

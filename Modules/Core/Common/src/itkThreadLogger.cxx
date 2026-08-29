@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ThreadLogger::ThreadLogger()
   : m_TerminationRequested(false) // ms
@@ -212,4 +213,5 @@ ThreadLogger::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Delay: " << m_Delay << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

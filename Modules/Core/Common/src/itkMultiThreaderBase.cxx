@@ -59,6 +59,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct MultiThreaderBaseGlobals
 {
@@ -641,4 +642,5 @@ operator<<(std::ostream & out, const MultiThreaderBaseEnums::ThreadExitCode valu
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FiniteCylinderSpatialFunction
  * \brief Function implementation of an finite cylinder
@@ -109,6 +110,7 @@ private:
   InputType m_Orientation{};
   InputType m_NormalizedOrientation{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

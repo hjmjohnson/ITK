@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class FrustumSpatialFunctionEnums
  *
@@ -148,6 +149,7 @@ private:
   FrustumRotationPlaneType m_RotationPlane{ RotationPlaneEnum::RotateInXZPlane };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

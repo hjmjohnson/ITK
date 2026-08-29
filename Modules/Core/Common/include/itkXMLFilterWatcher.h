@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class XMLFilterWatcher
  * \brief Simple mechanism for monitoring the pipeline events of a
  * filter and reporting these events to std::cout. Formats reports
@@ -48,6 +49,7 @@ protected:
   void
   EndFilter() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

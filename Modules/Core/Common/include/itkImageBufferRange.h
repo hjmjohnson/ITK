@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ImageBufferRange
@@ -686,5 +687,6 @@ MakeImageBufferRange(TImage * const image)
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

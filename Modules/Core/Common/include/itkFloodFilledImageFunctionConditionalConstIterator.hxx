@@ -21,12 +21,14 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TFunction>
 bool
 FloodFilledImageFunctionConditionalConstIterator<TImage, TFunction>::IsPixelIncluded(const IndexType & index) const
 {
   return this->m_Function->EvaluateAtIndex(index);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

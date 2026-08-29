@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename InputImageType, typename OutputImageType>
 void
@@ -313,6 +314,7 @@ ImageAlgorithm::EnlargeRegionOverBox(const typename InputImageType::RegionType &
   return outputRegion;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

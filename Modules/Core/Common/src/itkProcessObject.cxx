@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 namespace
@@ -1829,4 +1830,5 @@ ProcessObject::SetNumberOfRequiredInputs(DataObjectPointerArraySizeType nb)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

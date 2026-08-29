@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NodeOfPermutation
  *  \brief A node to be used when computing permutations.
  *
@@ -361,6 +362,7 @@ template <typename TImage>
 ImageRandomNonRepeatingConstIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRandomNonRepeatingConstIteratorWithIndex<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

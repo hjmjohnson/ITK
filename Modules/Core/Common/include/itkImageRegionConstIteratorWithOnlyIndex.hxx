@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------
 //  Advance along the line
 //----------------------------------------------------------------------
@@ -66,6 +67,7 @@ ImageRegionConstIteratorWithOnlyIndex<TImage>::operator--()
 
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

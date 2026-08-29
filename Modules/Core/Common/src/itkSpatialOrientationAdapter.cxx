@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SpatialOrientationAdapter::OrientationType
 SpatialOrientationAdapter::FromDirectionCosines(const DirectionType & Dir)
 {
@@ -176,4 +177,5 @@ SpatialOrientationAdapter::ToDirectionCosines(const OrientationType & Or)
   // TODO:  Should check that directions are orthogonal.
   return direction;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

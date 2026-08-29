@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TetrahedronCell
  *  \brief TetrahedronCell represents a tetrahedron for a Mesh.
  *
@@ -183,6 +184,7 @@ protected:
   std::array<PointIdentifier, NumberOfPoints> m_PointIds{ MakeFilled<std::array<PointIdentifier, NumberOfPoints>>(
     NumericTraits<PointIdentifier>::max()) };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

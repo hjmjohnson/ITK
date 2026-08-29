@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConstSparseFieldLayerIterator
  * \brief Used to iterate through an itkSparseFieldLayer.
@@ -322,6 +323,7 @@ private:
   const std::unique_ptr<NodeType> m_HeadNode{ std::make_unique<NodeType>() };
   unsigned int                    m_Size{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

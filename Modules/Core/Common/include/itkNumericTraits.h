@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // forward declare to avoid circular dependencies
 template <typename TValue, unsigned int VLength>
@@ -2005,6 +2006,7 @@ public:
 #endif // defined(ITK_LEGACY_REMOVE)
 };
 /// \endcond
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkFixedArray.h"

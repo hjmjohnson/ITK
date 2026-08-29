@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TIterator>
 ThreadIdType
@@ -67,6 +68,7 @@ ThreadedIteratorRangePartitioner<TIterator>::PartitionDomain(const ThreadIdType 
   return maxThreadIdUsed + 1;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

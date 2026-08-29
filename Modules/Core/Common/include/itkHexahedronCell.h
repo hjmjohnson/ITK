@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HexahedronCell
  *  \brief Represents a hexahedron (cuboid) for a Mesh.
  *
@@ -176,6 +177,7 @@ public:
 
   ~HexahedronCell() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

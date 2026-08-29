@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 itkStaticNumericTraitsGenericArrayDimensionsMacro(FixedArray, char);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(FixedArray, unsigned char);
 itkStaticNumericTraitsGenericArrayDimensionsMacro(FixedArray, signed char);
@@ -37,4 +38,5 @@ itkStaticNumericTraitsGenericArrayDimensionsMacro(FixedArray, unsigned long);
 //    This was split in two files in order to help the Sun CC 5.6 compiler to
 //    manage the size of the compilation unit.
 //
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

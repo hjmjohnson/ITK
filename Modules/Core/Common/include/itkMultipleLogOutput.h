@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MultipleLogOutput
  * \brief Allows writing simultaneously to multiple streams. Note that the
  *        class derives from std::streambuf and contains a
@@ -85,6 +86,7 @@ protected:
 private:
   std::set<OutputType::Pointer> m_Output{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMultipleLogOutput_h

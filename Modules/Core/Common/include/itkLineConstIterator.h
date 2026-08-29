@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LineConstIterator
  * \brief An iterator that walks a Bresenham line through an ND image
@@ -190,6 +191,7 @@ protected: // made protected so other iterators can access
   // two times the number of pixels in the line
   IndexType m_ReduceErrorAfterIncrement{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

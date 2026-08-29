@@ -40,7 +40,10 @@
  * ImageToImageFilter would force the instantiation of all versions of
  * these overloaded functions.
  */
-namespace itk::ImageToImageFilterDetail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace ImageToImageFilterDetail
 {
 
 /** \struct  DispatchBase
@@ -445,6 +448,8 @@ public:
 };
 
 
-} // namespace itk::ImageToImageFilterDetail
+} // namespace ImageToImageFilterDetail
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

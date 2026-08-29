@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TNodeType>
 SparseFieldLayer<TNodeType>::SparseFieldLayer()
 {
@@ -72,6 +73,7 @@ SparseFieldLayer<TNodeType>::SplitRegions(int num) const -> RegionListType
 
   return regionlist;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

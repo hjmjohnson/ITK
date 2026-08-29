@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TValue>
 VariableLengthVector<TValue>::VariableLengthVector(unsigned int length)
@@ -414,6 +415,7 @@ VariableLengthVectorExpression<TExpr1, TExpr2, TBinaryOp>::GetSquaredNorm() cons
   return itk::GetSquaredNorm(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VImageDimension, typename TInput>
 auto
 SphereSpatialFunction<VImageDimension, TInput>::Evaluate(const InputType & position) const -> OutputType
@@ -57,6 +58,7 @@ SphereSpatialFunction<VImageDimension, TInput>::PrintSelf(std::ostream & os, Ind
 
   os << indent << "Radius: " << m_Radius << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

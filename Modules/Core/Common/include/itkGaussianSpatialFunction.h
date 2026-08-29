@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GaussianSpatialFunction
  * \brief N-dimensional Gaussian spatial function class
  *
@@ -107,6 +108,7 @@ private:
 
   bool m_Normalized{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

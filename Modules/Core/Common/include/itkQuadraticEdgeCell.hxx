@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Standard CellInterface:
  */
@@ -236,6 +237,7 @@ QuadraticEdgeCell<TCellInterface>::EvaluateShapeFunctions(const ParametricCoordA
   weights[1] = (2 * x - 1.0) * (x);
   weights[2] = 4 * (1.0 - x) * (x);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

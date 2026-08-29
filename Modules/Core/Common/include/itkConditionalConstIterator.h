@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConditionalConstIterator
  *  \brief A base class for other iterators where membership in the set
  *         of output pixels is conditional upon some property, calculation,
@@ -114,6 +115,7 @@ protected: // made protected so other iterators can access
   /** Is the iterator at the end of its walk? */
   bool m_IsAtEnd{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

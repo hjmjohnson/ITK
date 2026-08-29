@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NumericTraits
  * \brief Define numeric traits for std::vector.
  * \tparam T Component type of std::vector
@@ -170,6 +171,7 @@ public:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsStdVector_h

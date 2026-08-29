@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 auto
@@ -98,6 +99,7 @@ ConstantBoundaryCondition<TInputImage, TOutputImage>::Print(std::ostream & os, I
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

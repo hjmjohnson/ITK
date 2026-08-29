@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FloodFilledSpatialFunctionConditionalConstIterator
  * \brief Iterates over a flood-filled spatial function with read-only access
@@ -127,6 +128,7 @@ protected: // made protected so other iterators can access
 
   unsigned char m_InclusionStrategy{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

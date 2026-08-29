@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AnnulusOperator
  *
@@ -254,6 +255,7 @@ private:
   PixelType   m_ExteriorValue{};
   SpacingType m_Spacing{ MakeFilled<SpacingType>(1.0) };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

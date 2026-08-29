@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SimpleFilterWatcher::SimpleFilterWatcher(ProcessObject * o, const char * comment)
   : m_Comment(comment)
   , m_Process{ o }
@@ -140,4 +141,5 @@ SimpleFilterWatcher::~SimpleFilterWatcher()
     this->RemoveObservers();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPointSet, typename TOutputImage>
 PointSetToImageFilter<TInputPointSet, TOutputImage>::PointSetToImageFilter()
@@ -231,6 +232,7 @@ PointSetToImageFilter<TInputPointSet, TOutputImage>::PrintSelf(std::ostream & os
   print_helper::PrintNumericTrait(os, indent, "Inside Value ", m_InsideValue);
   print_helper::PrintNumericTrait(os, indent, "Outside Value ", m_OutsideValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

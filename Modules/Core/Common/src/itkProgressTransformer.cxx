@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace // Anonymous, limits exposure of symbols
 {
 class DummyProcess : public itk::ProcessObject
@@ -66,4 +67,5 @@ ProgressTransformer::~ProgressTransformer()
     m_Dummy->RemoveObserver(m_ProgressTag);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

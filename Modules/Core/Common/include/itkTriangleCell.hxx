@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TCellInterface>
 void
@@ -584,6 +585,7 @@ TriangleCell<TCellInterface>::EvaluatePosition(CoordinateType *          x,
 
   return false; // Default case that should never be reached.
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

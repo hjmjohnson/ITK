@@ -17,8 +17,13 @@
  *=========================================================================*/
 #include "itkRandomVariateGeneratorBase.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 RandomVariateGeneratorBase::RandomVariateGeneratorBase() = default;
 RandomVariateGeneratorBase::~RandomVariateGeneratorBase() = default;
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

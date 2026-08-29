@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 ImageRandomConstIteratorWithOnlyIndex<TImage>::ImageRandomConstIteratorWithOnlyIndex(const TImage *     ptr,
@@ -63,6 +64,7 @@ ImageRandomConstIteratorWithOnlyIndex<TImage>::RandomJump()
     position /= sizeInThisDimension;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

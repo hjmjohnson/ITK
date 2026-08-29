@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class FixedArray
  *  \brief Simulate a standard C array with copy semantics.
@@ -514,6 +515,7 @@ swap(FixedArray<TValue, VLength> & a, FixedArray<TValue, VLength> & b) noexcept
   a.swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DefaultVectorPixelAccessor
  * \brief Give access to partial aspects of a type
  *
@@ -127,6 +128,7 @@ private:
   VectorLengthType m_VectorLength{ 0 };
   VectorLengthType m_OffsetMultiplier{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

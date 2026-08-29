@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CompensatedSummation
  * \brief Perform more precise accumulation of floating point numbers.
@@ -137,6 +138,7 @@ CompensatedSummationAddElement(float & compensation, float & sum, const float el
 void ITKCommon_EXPORT
 CompensatedSummationAddElement(double & compensation, double & sum, const double element);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

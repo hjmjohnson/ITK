@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 TotalProgressReporter::TotalProgressReporter(ProcessObject * filter,
                                              SizeValueType   totalNumberOfPixels,
@@ -63,4 +64,5 @@ TotalProgressReporter::~TotalProgressReporter()
     m_Filter->GetMultiThreader()->SetUpdateProgress(m_Filter->GetThreaderUpdateProgress());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

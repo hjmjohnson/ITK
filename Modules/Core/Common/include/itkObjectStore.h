@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ObjectStoreEnums
  *
  * \brief enums for ObjectStore
@@ -207,6 +208,7 @@ private:
   std::vector<MemoryBlock> m_Store{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

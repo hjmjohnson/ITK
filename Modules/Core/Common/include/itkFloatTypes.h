@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Allow using single precision by default
 #if defined(ITK_USE_FLOAT_SPACE_PRECISION)
@@ -30,6 +31,7 @@ using SpacePrecisionType = float;
 using SpacePrecisionType = double;
 #endif
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkFloatTypes_h */

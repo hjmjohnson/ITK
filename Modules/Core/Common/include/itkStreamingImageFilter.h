@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StreamingImageFilter
  * \brief Pipeline object to control data streaming for large data processing.
  *
@@ -119,6 +120,7 @@ private:
   unsigned int          m_NumberOfStreamDivisions{};
   RegionSplitterPointer m_RegionSplitter{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

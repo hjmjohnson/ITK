@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BufferedImageNeighborhoodPixelAccessPolicy
  * ImageNeighborhoodPixelAccessPolicy class for ShapedImageNeighborhoodRange.
@@ -128,6 +129,7 @@ public:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

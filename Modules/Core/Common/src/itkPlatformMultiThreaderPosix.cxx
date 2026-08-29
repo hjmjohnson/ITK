@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 extern "C"
 {
   using c_void_cast = void * (*)(void *);
@@ -181,4 +182,5 @@ PlatformMultiThreader::SpawnDispatchSingleMethodThread(PlatformMultiThreader::Wo
   return threadHandle;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -148,6 +148,7 @@ itk_fedisableexcept(unsigned int /*excepts*/)
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void
 FloatingPointExceptions::Enable()
@@ -192,4 +193,5 @@ FloatingPointExceptions::HasFloatingPointExceptionsSupport()
 #endif
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

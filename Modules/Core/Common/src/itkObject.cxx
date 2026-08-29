@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Initialize static member that controls warning display.
  */
@@ -611,4 +612,5 @@ Object::SetMetaDataDictionary(MetaDataDictionary && rrhs)
   *m_MetaDataDictionary = std::move(rrhs);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

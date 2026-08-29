@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixel, unsigned int VImageDimension>
 void
@@ -94,6 +95,7 @@ SpecialCoordinatesImage<TPixel, VImageDimension>::PrintSelf(std::ostream & os, I
 
   // m_Origin and m_Spacing are printed in the Superclass
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

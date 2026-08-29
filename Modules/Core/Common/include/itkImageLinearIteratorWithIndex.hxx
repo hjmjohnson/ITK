@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ImageLinearIteratorWithIndex<TImage>::ImageLinearIteratorWithIndex(TImage * ptr, const RegionType & region)
   : ImageLinearConstIteratorWithIndex<TImage>(ptr, region)
@@ -43,6 +44,7 @@ ImageLinearIteratorWithIndex<TImage>::operator=(const ImageLinearConstIteratorWi
   this->ImageLinearConstIteratorWithIndex<TImage>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

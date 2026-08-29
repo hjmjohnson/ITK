@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward reference because of circular dependencies
 class ITK_FORWARD_EXPORT ProcessObject;
 class ITK_FORWARD_EXPORT DataObject;
@@ -593,6 +594,7 @@ private:
   friend class ProcessObject;
   friend class DataObjectError;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

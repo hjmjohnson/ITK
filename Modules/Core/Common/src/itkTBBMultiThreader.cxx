@@ -43,6 +43,7 @@ get_default_num_threads()
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 TBBMultiThreader::TBBMultiThreader()
 {
@@ -154,6 +155,7 @@ TBBMultiThreader::ParallelizeArray(SizeValueType             firstIndex,
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace
@@ -238,6 +240,7 @@ struct TBBImageRegionSplitter : public itk::ImageIORegion
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 TBBMultiThreader::ParallelizeImageRegion(unsigned int         dimension,
                                          const IndexValueType index[],
@@ -280,4 +283,5 @@ TBBMultiThreader::ParallelizeImageRegion(unsigned int         dimension,
     }); // we implicitly use auto_partitioner for load balancing
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConstSliceIterator
  * \brief A flexible iterator for ITK containers(i.e. itk::Neighborhood)
@@ -149,6 +150,7 @@ private:
   /** Slice structure information. */
   std::slice m_Slice;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

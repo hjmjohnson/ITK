@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Image
  *  \brief Templated n-dimensional image class.
  *
@@ -414,6 +415,7 @@ private:
   /** Memory for the current buffer. */
   PixelContainerPointer m_Buffer{ PixelContainer::New() };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

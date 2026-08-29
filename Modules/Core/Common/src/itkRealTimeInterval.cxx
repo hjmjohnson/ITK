@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Constructor to initialize a time stamp
@@ -313,4 +314,5 @@ operator<<(std::ostream & os, const RealTimeInterval & v)
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -212,6 +213,7 @@ StreamingImageFilter<TInputImage, TOutputImage>::UpdateOutputData(DataObject * i
   // Mark that we are no longer updating the data in this filter
   this->m_Updating = false;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

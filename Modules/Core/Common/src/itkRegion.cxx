@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 Region::Print(std::ostream & os, Indent indent) const
 {
@@ -50,4 +51,5 @@ Region::PrintTrailer(std::ostream & itkNotUsed(os), Indent itkNotUsed(indent)) c
 void
 Region::PrintSelf(std::ostream &, Indent) const
 {}
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

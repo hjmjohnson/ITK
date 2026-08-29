@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DefaultConvertPixelTraits
  *  \brief Traits class used to by ConvertPixels to convert blocks of pixels.
  *
@@ -363,5 +364,6 @@ public:
 //  End of Traits for the classes deriving from std::complex.
 //
 //
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class RectangularImageNeighborhoodShape
@@ -122,6 +123,7 @@ private:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

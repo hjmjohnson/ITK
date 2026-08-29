@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LightObject
  * \brief Light weight base class for most itk classes.
  *
@@ -174,6 +175,7 @@ protected:
 ITKCommon_EXPORT std::ostream &
                  operator<<(std::ostream & os, const LightObject & o);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

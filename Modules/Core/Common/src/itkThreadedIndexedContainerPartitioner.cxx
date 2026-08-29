@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ThreadedIndexedContainerPartitioner::ThreadedIndexedContainerPartitioner() = default;
 
@@ -56,4 +57,5 @@ ThreadedIndexedContainerPartitioner::PartitionDomain(const ThreadIdType threadId
   return maxThreadIdUsed + 1;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

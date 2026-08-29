@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \brief NumericTraits for Array
  * \tparam T type of the array component
  */
@@ -133,6 +134,7 @@ public:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsArrayPixel_h
