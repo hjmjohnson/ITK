@@ -27,6 +27,9 @@
 // mangles C symbols exported from ITK (e.g. extern "C" { void some_func(); }).
 #  define ITK_ABI_NAMESPACE_NAME @ITK_ABI_NAMESPACE_NAME@
 #  define ITK_ABI_NAMESPACE_MANGLE(x) @ITK_ABI_NAMESPACE_NAME@_##x
+// Spells the inline namespace as a qualifier, for the rare place that has to
+// name it in a nested-namespace definition rather than open it with BEGIN.
+#  define ITK_ABI_NAMESPACE_QUALIFIER @ITK_ABI_NAMESPACE_NAME@::
 
 #  if defined(__cplusplus)
 #    define ITK_ABI_NAMESPACE_BEGIN @ITK_ABI_NAMESPACE_BEGIN@
@@ -39,9 +42,17 @@
 #else
 
 #  define ITK_ABI_NAMESPACE_MANGLE(x) x
+#  define ITK_ABI_NAMESPACE_QUALIFIER
 #  define ITK_ABI_NAMESPACE_BEGIN
 #  define ITK_ABI_NAMESPACE_END
 
 #endif
+
+// Spells a mangled C symbol as a string literal, for the places that resolve a
+// symbol by name at run time. Two levels of indirection so the argument is
+// expanded before it is stringified.
+#define ITK_ABI_NAMESPACE_MANGLE_STRING(x) ITK_ABI_NAMESPACE_STRINGIFY_(ITK_ABI_NAMESPACE_MANGLE(x))
+#define ITK_ABI_NAMESPACE_STRINGIFY_(x) ITK_ABI_NAMESPACE_STRINGIFY__(x)
+#define ITK_ABI_NAMESPACE_STRINGIFY__(x) #x
 
 #endif // itkABINamespace_h

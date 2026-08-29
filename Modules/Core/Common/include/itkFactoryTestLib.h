@@ -28,8 +28,7 @@
  */
 extern "C"
 {
-  ITK_ABI_EXPORT itk::ObjectFactoryBase *
-                 itkLoad();
+  ITK_ABI_EXPORT itk::ObjectFactoryBase * ITK_ABI_NAMESPACE_MANGLE(itkLoad)();
 }
 
 #endif

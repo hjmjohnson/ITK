@@ -405,9 +405,11 @@ ObjectFactoryBase::LoadLibrariesInPath(const char * path)
       if (lib)
       {
         /**
-         * Look for the symbol itkLoad in the library
+         * Look for the symbol itkLoad in the library. The name carries the ABI
+         * namespace so a factory built for one ITK is not loaded by another.
          */
-        auto loadfunction = (ITK_LOAD_FUNCTION)DynamicLoader::GetSymbolAddress(lib, "itkLoad");
+        auto loadfunction =
+          (ITK_LOAD_FUNCTION)DynamicLoader::GetSymbolAddress(lib, ITK_ABI_NAMESPACE_MANGLE_STRING(itkLoad));
         /**
          * if the symbol is found call it to create the factory
          * from the library

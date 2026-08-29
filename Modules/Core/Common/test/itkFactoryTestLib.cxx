@@ -178,7 +178,7 @@ private:
  */
 static ImportImageContainerFactory::Pointer staticImportImageContainerFactory;
 itk::ObjectFactoryBase *
-itkLoad()
+ITK_ABI_NAMESPACE_MANGLE(itkLoad)()
 {
   staticImportImageContainerFactory = ImportImageContainerFactory::New();
   return staticImportImageContainerFactory;
