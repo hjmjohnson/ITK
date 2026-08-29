@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TKernelImage, typename TOutputImage>
 void
 ConvolutionImageFilter<TInputImage, TKernelImage, TOutputImage>::GenerateData()
@@ -279,5 +280,6 @@ ConvolutionImageFilter<TInputImage, TKernelImage, TOutputImage>::GenerateInputRe
     kernelPtr->SetRequestedRegionToLargestPossibleRegion();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

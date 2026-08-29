@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TData>
 CSVArray2DFileReader<TData>::CSVArray2DFileReader()
@@ -137,6 +138,7 @@ CSVArray2DFileReader<TData>::GetOutput() -> Array2DDataObjectPointer
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

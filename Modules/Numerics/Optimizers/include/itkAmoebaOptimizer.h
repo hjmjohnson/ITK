@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AmoebaOptimizer
  * \brief Wrap of the vnl_amoeba algorithm
  *
@@ -186,6 +187,7 @@ private:
 
   std::ostringstream m_StopConditionDescription{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

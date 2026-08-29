@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShapeUniqueLabelMapFilter
  * \brief Remove some pixels in the label object according to the value of their shape attribute to ensure that a pixel
@@ -361,6 +362,7 @@ private:
     }
   };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

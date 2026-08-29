@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace
 {
 // Order slices by geometric position (ImagePositionPatient projected on the
@@ -372,4 +373,5 @@ DCMTKSeriesFileNames::AddSeriesRestriction(const std::string & tag)
   m_Restrictions.emplace_back(static_cast<unsigned short>(group), static_cast<unsigned short>(element));
   this->Modified();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

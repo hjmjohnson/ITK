@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class StatisticsKeepNObjectsLabelMapFilter
  * \brief keep N objects according to their statistics attributes
@@ -86,6 +87,7 @@ protected:
   void
   GenerateData() override;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PocketFFTInverse1DFFTImageFilter
  *
@@ -79,6 +80,7 @@ struct FFTImageFilterTraits<PocketFFTInverse1DFFTImageFilter>
   using FilterDimensions = std::integer_sequence<unsigned int, 4, 3, 2, 1>;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

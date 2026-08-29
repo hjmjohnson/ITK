@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PolyDataToMeshFilter
  *
  * \brief Convert PolyData to a Mesh
@@ -109,6 +110,7 @@ protected:
 
 private:
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

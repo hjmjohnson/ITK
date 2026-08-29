@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *    Constructor
  */
@@ -152,6 +153,7 @@ BinaryPruningImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os
   os << indent << "Pruning image: " << std::endl;
   os << indent << "Iteration: " << m_Iteration << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

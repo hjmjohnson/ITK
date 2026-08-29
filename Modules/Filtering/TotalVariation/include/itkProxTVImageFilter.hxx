@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -113,6 +114,7 @@ ProxTVImageFilter<TInputImage, TOutputImage>::GenerateData()
   this->GraftOutput(outputCastFilter->GetOutput());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkProxTVImageFilter_hxx

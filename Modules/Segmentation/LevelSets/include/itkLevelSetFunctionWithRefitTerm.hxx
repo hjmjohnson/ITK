@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TSparseImageType>
 const typename LevelSetFunctionWithRefitTerm<TImageType, TSparseImageType>::NeighborhoodSizeValueType
   LevelSetFunctionWithRefitTerm<TImageType, TSparseImageType>::m_NumVertex = 1 << TImageType::ImageDimension;
@@ -168,6 +169,7 @@ LevelSetFunctionWithRefitTerm<TImageType, TSparseImageType>::PropagationSpeed(co
 
   return m_RefitWeight * refitterm + m_OtherPropagationWeight * OtherPropagationSpeed(neighborhood, offset, globaldata);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

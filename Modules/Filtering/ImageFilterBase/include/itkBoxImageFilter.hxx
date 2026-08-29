@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BoxImageFilter<TInputImage, TOutputImage>::BoxImageFilter()
 {
@@ -100,6 +101,7 @@ BoxImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Indent i
 
   os << indent << "Radius: " << m_Radius << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

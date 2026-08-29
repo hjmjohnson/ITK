@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class UnaryFunctorWithIndexImageFilter
  *
@@ -93,6 +94,7 @@ protected:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType, typename TCoordinate>
 GaussianInterpolateImageFunction<TImageType, TCoordinate>::GaussianInterpolateImageFunction()
@@ -245,6 +246,7 @@ GaussianInterpolateImageFunction<TImageType, TCoordinate>::PrintSelf(std::ostrea
   os << indent << "ScalingFactor: " << m_ScalingFactor << std::endl;
   os << indent << "CutOffDistance: " << m_CutOffDistance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

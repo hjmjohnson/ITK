@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FastMarchingReachedTargetNodesStoppingCriterionEnums
  * \brief Contains all enum classes used by FastMarchingReachedTargetNodesStoppingCriterion class
  * \ingroup ITKFastMarching
@@ -230,5 +231,6 @@ protected:
     m_Initialized = true;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkFastMarchingThresholdStoppingCriterion_h

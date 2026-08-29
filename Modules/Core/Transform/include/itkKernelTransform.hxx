@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 KernelTransform<TParametersValueType, VDimension>::KernelTransform()
@@ -560,6 +561,7 @@ KernelTransform<TParametersValueType, VDimension>::PrintSelf(std::ostream & os, 
   os << indent << "Stiffness: " << this->m_Stiffness << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

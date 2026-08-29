@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 Bruker2dseqImageIOFactory::Bruker2dseqImageIOFactory()
 {
   this->RegisterOverride("itkImageIOBase",
@@ -60,4 +61,5 @@ Bruker2dseqImageIOFactoryRegister__Private()
 {
   ObjectFactoryBase::RegisterInternalFactoryOnce<Bruker2dseqImageIOFactory>();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VersorTransformOptimizer
  * \brief Implement a gradient descent optimizer
  *
@@ -78,6 +79,7 @@ protected:
   VersorTransformOptimizer() = default;
   ~VersorTransformOptimizer() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

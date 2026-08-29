@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Set the parameters
 template <typename TParametersValueType, unsigned int VDimension, unsigned int VSplineOrder>
@@ -303,5 +304,6 @@ BSplineBaseTransform<TParametersValueType, VDimension, VSplineOrder>::TransformP
   return outputPoint;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

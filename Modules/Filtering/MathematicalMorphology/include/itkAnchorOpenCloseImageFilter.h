@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AnchorOpenCloseImageFilter
  * \brief class to implement openings and closings using anchor
@@ -122,6 +123,7 @@ private:
              const InputImageRegionType         AllImage,
              const InputImageRegionType         face);
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

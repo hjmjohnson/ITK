@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixelType, unsigned int VDimension, typename TMeshTraits>
 SimplexMesh<TPixelType, VDimension, TMeshTraits>::SimplexMesh()
@@ -408,6 +409,7 @@ SimplexMesh<TPixelType, VDimension, TMeshTraits>::ComputeNormal(PointIdentifier 
 
   return normal;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

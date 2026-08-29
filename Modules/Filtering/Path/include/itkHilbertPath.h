@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HilbertPath
  * \brief  Represent an n-dimensional Hilbert path for a given order
@@ -204,6 +205,7 @@ private:
   HilbertOrderType m_HilbertOrder{ 1 };
   HilbertPathType  m_HilbertPath{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

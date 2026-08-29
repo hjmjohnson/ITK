@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEvolutionBase
  *  \brief Class for iterating and evolving the dense level-set function
@@ -177,6 +178,7 @@ protected:
   typename LevelSetContainerType::Iterator m_LevelSetContainerIteratorToProcessWhenThreading{};
   typename LevelSetContainerType::Iterator m_LevelSetUpdateContainerIteratorToProcessWhenThreading{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

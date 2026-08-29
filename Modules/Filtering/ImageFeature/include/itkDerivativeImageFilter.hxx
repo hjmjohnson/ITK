@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 DerivativeImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
@@ -145,6 +146,7 @@ DerivativeImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, I
   os << indent << "Direction: " << m_Direction << std::endl;
   itkPrintSelfBooleanMacro(UseImageSpacing);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

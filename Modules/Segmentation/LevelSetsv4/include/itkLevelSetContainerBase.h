@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetContainerBase
  *  \brief Container of level set
@@ -335,6 +336,7 @@ private:
   DomainMapImageFilterPointer m_DomainMapFilter{};
   LevelSetContainerType       m_Container{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

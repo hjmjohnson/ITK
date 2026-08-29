@@ -39,6 +39,7 @@ constexpr int32_t BIORAD_MAGIC_NUMBER{ 12345 };
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 union Aligned4ByteUnion
 {
   float localFloatMagFactor;
@@ -499,4 +500,5 @@ BioRadImageIO::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FileListVideoIO
  *
@@ -202,6 +203,7 @@ private:
 
   std::vector<std::string> m_FileNames{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkFileListVideoIO_h

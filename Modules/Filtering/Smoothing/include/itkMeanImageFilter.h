@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MeanImageFilter
  * \brief Applies an averaging filter to an image
@@ -120,6 +121,7 @@ private:
                           const std::vector<Offset<InputImageDimension>> & neighborhoodOffsets,
                           const VariableLengthVector<TValue> *);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

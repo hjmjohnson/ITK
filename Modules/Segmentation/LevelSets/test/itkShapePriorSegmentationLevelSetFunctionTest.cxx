@@ -43,7 +43,10 @@
  *
  */
 
-namespace itk::SPSLSF
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace SPSLSF
 {
 
 template <typename TImage>
@@ -105,7 +108,9 @@ private:
   }
 };
 
-} // namespace itk::SPSLSF
+} // namespace SPSLSF
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

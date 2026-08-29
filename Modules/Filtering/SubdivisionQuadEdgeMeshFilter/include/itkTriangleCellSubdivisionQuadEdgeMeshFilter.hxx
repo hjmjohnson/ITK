@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 TriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::TriangleCellSubdivisionQuadEdgeMeshFilter()
 {
@@ -292,5 +293,6 @@ TriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::PrintSelf(st
   Superclass::PrintSelf(os, indent);
   os << indent << "Is Uniform Subdivision: " << m_Uniform << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

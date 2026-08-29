@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void
 TransformFactoryBase::RegisterTransformFactoryDoubleParameters()
@@ -29,4 +30,5 @@ TransformFactoryBase::RegisterTransformFactoryDoubleParameters()
   Self::RegisterTransformFactory<double>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

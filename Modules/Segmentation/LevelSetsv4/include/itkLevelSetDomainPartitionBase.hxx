@@ -22,11 +22,13 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomain>
 LevelSetDomainPartitionBase<TDomain>::LevelSetDomainPartitionBase()
   : m_NumberOfLevelSetFunctions(NumericTraits<IdentifierType>::OneValue())
 {}
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

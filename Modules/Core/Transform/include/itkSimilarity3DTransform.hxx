@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 Similarity3DTransform<TParametersValueType>::Similarity3DTransform()
@@ -315,6 +316,7 @@ Similarity3DTransform<TParametersValueType>::GetInverseTransform() const -> Inve
   return Superclass::InvertTransform(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

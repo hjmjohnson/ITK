@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GiplImageIOFactory
  * \brief Create instances of GiplImageIO objects using an object factory.
@@ -66,6 +67,7 @@ protected:
   GiplImageIOFactory();
   ~GiplImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

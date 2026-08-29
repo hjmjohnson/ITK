@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ShiftScaleLabelMapFilter<TImage>::ShiftScaleLabelMapFilter()
   : m_Scale(1.0)
@@ -74,5 +75,6 @@ ShiftScaleLabelMapFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) co
   os << indent << "Scale: " << m_Scale << std::endl;
   os << indent << "ChangeBackgroundValue: " << m_ChangeBackgroundValue << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

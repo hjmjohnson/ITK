@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NormalizedCorrelationImageFilter
  * \brief Computes the normalized correlation of an image and a template.
@@ -164,6 +165,7 @@ protected:
     Superclass::PrintSelf(os, indent);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 VTKImageExportBase::PrintSelf(std::ostream & os, Indent indent) const
 {
@@ -266,4 +267,5 @@ VTKImageExportBase::UpdateDataCallbackFunction(void * userData)
 {
   static_cast<VTKImageExportBase *>(userData)->UpdateDataCallback();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

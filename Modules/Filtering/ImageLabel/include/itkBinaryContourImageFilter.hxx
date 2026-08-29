@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BinaryContourImageFilter<TInputImage, TOutputImage>::BinaryContourImageFilter()
   : ScanlineFilterCommon<TInputImage, TOutputImage>(this)
@@ -251,6 +252,7 @@ BinaryContourImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os
   print_helper::PrintNumericTrait(os, indent, "ForegroundValue", m_ForegroundValue);
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue", m_BackgroundValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

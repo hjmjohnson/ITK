@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AbsoluteValueDifferenceImageFilter
  * \brief Implements pixel-wise the computation of absolute value difference.
@@ -117,6 +118,7 @@ protected:
   }
   ~AbsoluteValueDifferenceImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

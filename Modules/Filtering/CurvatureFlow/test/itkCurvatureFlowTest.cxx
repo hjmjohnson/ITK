@@ -46,6 +46,7 @@ public:
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Dummy difference function for error testing
 
 template <typename TImageType>
@@ -91,6 +92,7 @@ protected:
   ~DummyFunction() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

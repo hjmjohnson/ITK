@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationPropagationTerm
  *  \brief Derived class to represents a propagation term in the level-set evolution PDE
@@ -144,6 +145,7 @@ protected:
   /** @ITKEndGrouping */
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

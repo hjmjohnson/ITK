@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ChangeLabelLabelMapFilter
  * \brief  Replace the label Ids of selected LabelObjects with new label Ids.
@@ -110,6 +111,7 @@ protected:
 
   ChangeMapType m_MapOfLabelToBeReplaced{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

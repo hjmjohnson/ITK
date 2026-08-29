@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * This class contains the objects properties such as colors, opacity, etc...
  * it's templated over the representation to use for each color component.
@@ -170,6 +171,7 @@ private:
   std::map<std::string, std::string> m_StringDictionary{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // __SpatialObjectProperty_h

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, bool DoOpen, typename TOutputImage>
 void
 ParabolicOpenCloseSafeBorderImageFilter<TInputImage, DoOpen, TOutputImage>::GenerateData()
@@ -139,6 +140,7 @@ ParabolicOpenCloseSafeBorderImageFilter<TInputImage, DoOpen, TOutputImage>::Prin
     os << "Scale in voxels: " << this->GetScale() << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

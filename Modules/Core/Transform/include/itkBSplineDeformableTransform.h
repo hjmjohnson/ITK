@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineDeformableTransform
  *
  * \brief Deformable transform using a BSpline representation
@@ -374,6 +375,7 @@ private:
   UpdateValidGridRegion();
 
 }; // class BSplineDeformableTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

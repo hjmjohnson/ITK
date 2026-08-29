@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class KullbackLeiblerCompareHistogramImageToImageMetric
  *  \brief Computes the Kubler Lieblach(KL) metric between the histogram
  *  of the two images to be registered and a training histogram.
@@ -145,6 +146,7 @@ protected:
 
   double m_Epsilon{};
 };
+ITK_ABI_NAMESPACE_END
 } // End namespace itk.
 
 #ifndef ITK_MANUAL_INSTANTIATION

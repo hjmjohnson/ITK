@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MultipleImageIterator
  * \brief An wrapper around image iterators to iterate over several images simultaneously
  * All iterators must
@@ -95,5 +96,6 @@ public:
 protected:
   std::vector<IteratorType> m_Iterators;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkMultipleImageIterator_h

@@ -20,7 +20,10 @@
 
 #include <string>
 
-namespace itk::test
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace test
 {
 
 /** Decimal-comma locale names in POSIX and Windows spelling; a test loops over
@@ -48,6 +51,8 @@ NoCommaDecimalLocaleMessage()
          "NOT exercised on this runner. Install e.g. de_DE.UTF-8 (Linux: locale-gen) to cover them.";
 }
 
-} // namespace itk::test
+} // namespace test
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkTestNumericLocale_h

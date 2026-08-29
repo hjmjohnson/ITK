@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void
 TransformFactoryBase::RegisterTransformFactoryFloatParameters()
@@ -29,4 +30,5 @@ TransformFactoryBase::RegisterTransformFactoryFloatParameters()
   Self::RegisterTransformFactory<float>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

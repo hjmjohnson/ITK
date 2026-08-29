@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFrequencyIterator>
 FrequencyBandImageFilter<TImageType, TFrequencyIterator>::FrequencyBandImageFilter()
   : m_LowFrequencyThreshold(0)
@@ -192,6 +193,7 @@ FrequencyBandImageFilter<TImageType, TFrequencyIterator>::BandPass(FrequencyIter
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

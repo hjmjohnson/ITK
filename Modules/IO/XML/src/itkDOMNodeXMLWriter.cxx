@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 DOMNodeXMLWriter::DOMNodeXMLWriter()
   : m_IndentStep("  ")
@@ -109,4 +110,5 @@ DOMNodeXMLWriter::Update()
   os.close();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

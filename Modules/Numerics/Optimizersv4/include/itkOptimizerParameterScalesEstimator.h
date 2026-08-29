@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class OptimizerParameterScalesEstimatorTemplate
@@ -88,6 +89,7 @@ protected:
 /** This helps to meet backward compatibility */
 using OptimizerParameterScalesEstimator = OptimizerParameterScalesEstimatorTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

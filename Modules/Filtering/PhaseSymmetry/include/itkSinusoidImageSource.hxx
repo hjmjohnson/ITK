@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 SinusoidImageSource<TOutputImage>::SinusoidImageSource()
@@ -133,6 +134,7 @@ SinusoidImageSource<TOutputImage>::GenerateData()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

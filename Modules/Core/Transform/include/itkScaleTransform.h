@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScaleTransform
  * \brief Scale transformation of a vector space (e.g. space coordinates)
  *
@@ -222,6 +223,7 @@ private:
 
 }; // class ScaleTransform
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

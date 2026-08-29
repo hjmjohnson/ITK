@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 Euler2DTransform<TParametersValueType>::Euler2DTransform()
@@ -86,6 +87,7 @@ Euler2DTransform<TParametersValueType>::PrintSelf(std::ostream & os, Indent inde
 {
   this->Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,7 +23,10 @@
 #include "itkMeasurementVectorTraits.h"
 #include "ITKStatisticsExport.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class DenseFrequencyContainer2
@@ -119,6 +122,8 @@ private:
   FrequencyContainerPointer  m_FrequencyContainer{};
   TotalAbsoluteFrequencyType m_TotalFrequency{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

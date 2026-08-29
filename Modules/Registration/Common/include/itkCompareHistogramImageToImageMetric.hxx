@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFixedImage, typename TMovingImage>
 CompareHistogramImageToImageMetric<TFixedImage, TMovingImage>::CompareHistogramImageToImageMetric()
   : m_TrainingFixedImage(nullptr)
@@ -156,6 +157,7 @@ CompareHistogramImageToImageMetric<TFixedImage, TMovingImage>::PrintSelf(std::os
   itkPrintSelfObjectMacro(TrainingHistogram);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkCompareHistogramImageToImageMetric_hxx

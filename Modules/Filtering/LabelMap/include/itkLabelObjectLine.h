@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelObjectLine
  * LabelObjectLine is the line object used in the LabelObject class
@@ -103,6 +104,7 @@ private:
   IndexType  m_Index{};
   LengthType m_Length{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

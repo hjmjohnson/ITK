@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace utils
 {
 
@@ -55,4 +56,5 @@ template <>
 unsigned int
 ComputeMaxNumberOfLevels<2>(const Size<2> & inputSize, const unsigned int & scaleFactor);
 } // end namespace utils
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

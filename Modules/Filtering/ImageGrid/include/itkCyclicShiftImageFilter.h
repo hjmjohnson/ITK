@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CyclicShiftImageFilter
  * \brief Perform a cyclic spatial shift of image intensities on the
  * image grid.
@@ -104,6 +105,7 @@ protected:
   Modified(). */
   OffsetType m_Shift{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

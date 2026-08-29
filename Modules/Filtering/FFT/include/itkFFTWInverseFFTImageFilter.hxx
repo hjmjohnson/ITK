@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 FFTWInverseFFTImageFilter<TInputImage, TOutputImage>::FFTWInverseFFTImageFilter()
@@ -132,5 +133,6 @@ FFTWInverseFFTImageFilter<TInputImage, TOutputImage>::GetSizeGreatestPrimeFactor
   return FFTWProxyType::GREATEST_PRIME_FACTOR;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // _itkFFTWInverseFFTImageFilter_hxx

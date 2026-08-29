@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MahalanobisDistanceThresholdImageFunction
  * \brief Returns true if the pixel value of a vector image has a
@@ -180,6 +181,7 @@ private:
   MeanVectorType       m_Mean{};
   CovarianceMatrixType m_Covariance{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

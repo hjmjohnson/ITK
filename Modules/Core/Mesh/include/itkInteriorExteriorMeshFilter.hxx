@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -141,6 +142,7 @@ InteriorExteriorMeshFilter<TInputMesh, TOutputMesh, TSpatialFunction>::GenerateD
     outputMesh->SetBoundaryAssignments(dim, inputMesh->GetBoundaryAssignments(dim));
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

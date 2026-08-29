@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename T, typename SType, typename TTransform>
@@ -473,6 +474,7 @@ RANSAC<T, SType, TTransform>::Choose(unsigned int n, unsigned int m)
     return static_cast<unsigned int>(resultLocal);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

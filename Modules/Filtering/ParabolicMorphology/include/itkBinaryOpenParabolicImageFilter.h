@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryOpenParabolicImageFilter
  * \brief Class for binary morphological opening operation.
@@ -176,6 +177,7 @@ private:
   typename RCastTypeA::Pointer m_RectCastA;
   typename RCastTypeB::Pointer m_RectCastB;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

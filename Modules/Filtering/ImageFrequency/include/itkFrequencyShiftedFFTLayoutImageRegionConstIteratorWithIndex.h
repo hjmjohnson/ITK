@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FrequencyShiftedFFTLayoutImageRegionConstIteratorWithIndex
  * \brief A multi-dimensional iterator templated over image type that walks
@@ -269,5 +270,6 @@ private:
   FrequencyType m_FrequencySpacing;
   bool          m_ActualXDimensionIsOdd;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

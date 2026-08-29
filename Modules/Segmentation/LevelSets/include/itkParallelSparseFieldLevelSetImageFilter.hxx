@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TNeighborhoodType>
 ParallelSparseFieldCityBlockNeighborList<TNeighborhoodType>::ParallelSparseFieldCityBlockNeighborList()
 {
@@ -2553,6 +2554,7 @@ ParallelSparseFieldLevelSetImageFilter<TInputImage, TOutputImage>::PrintSelf(std
   itkPrintSelfBooleanMacro(InterpolateSurfaceLocation);
   itkPrintSelfBooleanMacro(BoundsCheckingActive);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutput>
 GaussianDerivativeImageFunction<TInputImage, TOutput>::GaussianDerivativeImageFunction()
@@ -211,6 +212,7 @@ GaussianDerivativeImageFunction<TInputImage, TOutput>::PrintSelf(std::ostream & 
   os << indent << "GaussianDerivativeSpatialFunction: " << m_GaussianDerivativeSpatialFunction << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

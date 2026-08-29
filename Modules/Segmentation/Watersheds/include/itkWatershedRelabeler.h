@@ -21,7 +21,10 @@
 #include "itkWatershedSegmentTree.h"
 #include "itkWatershedSegmenter.h"
 
-namespace itk::watershed
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace watershed
 {
 /**
  * \class Relabeler
@@ -163,7 +166,9 @@ protected:
   void
   GenerateInputRequestedRegion() override;
 };
-} // namespace itk::watershed
+} // namespace watershed
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWatershedRelabeler.hxx"

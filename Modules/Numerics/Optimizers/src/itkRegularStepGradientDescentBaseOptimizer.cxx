@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 RegularStepGradientDescentBaseOptimizer::~RegularStepGradientDescentBaseOptimizer() = default;
 
 /**
@@ -276,4 +277,5 @@ operator<<(std::ostream & out, const RegularStepGradientDescentBaseOptimizerEnum
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

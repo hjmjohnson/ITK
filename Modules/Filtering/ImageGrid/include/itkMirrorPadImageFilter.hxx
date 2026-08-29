@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Given an n dimensional list of output region breakpoints in indices
  * and size (where the current region and maximum region for each dimension
@@ -771,6 +772,7 @@ MirrorPadImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

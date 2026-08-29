@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUFiniteDifferenceFunction
  *
@@ -122,6 +123,7 @@ protected:
   /** GPU kernel handle for GPUComputeUpdate() */
   int m_ComputeUpdateGPUKernelHandle{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

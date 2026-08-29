@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputImage, typename TFunction, typename TIdCell>
 void
 MultiphaseDenseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputImage, TFunction, TIdCell>::PrintSelf(
@@ -255,6 +256,7 @@ MultiphaseDenseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputIm
 {
   this->CopyInputToOutput();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -44,6 +44,7 @@ itkLoad()
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 FileFreeImageIOFactory::FileFreeImageIOFactory()
 {
@@ -68,4 +69,5 @@ FileFreeImageIOFactory::GetDescription() const
   return "ImageIO that creates an in-memory file from a text description";
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

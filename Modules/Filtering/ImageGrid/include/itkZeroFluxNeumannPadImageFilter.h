@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ZeroFluxNeumannPadImageFilter
@@ -109,6 +110,7 @@ protected:
 private:
   ZeroFluxNeumannBoundaryCondition<TInputImage, TOutputImage> m_InternalBoundaryCondition{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

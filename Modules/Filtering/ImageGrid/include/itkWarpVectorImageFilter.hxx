@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TDisplacementField>
 WarpVectorImageFilter<TInputImage, TOutputImage, TDisplacementField>::WarpVectorImageFilter()
@@ -234,6 +235,7 @@ WarpVectorImageFilter<TInputImage, TOutputImage, TDisplacementField>::GenerateOu
     outputPtr->SetLargestPossibleRegion(fieldPtr->GetLargestPossibleRegion());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

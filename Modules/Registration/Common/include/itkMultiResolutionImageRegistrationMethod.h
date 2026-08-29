@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MultiResolutionImageRegistrationMethod
  * \brief Base class for multi-resolution image registration methods
  *
@@ -287,6 +288,7 @@ private:
   bool m_ScheduleSpecified{};
   bool m_NumberOfLevelsSpecified{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

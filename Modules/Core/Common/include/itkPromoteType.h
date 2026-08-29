@@ -24,7 +24,10 @@
 
 
 /// \cond HIDE_META_PROGRAMMING
-namespace itk::mpl
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace mpl
 {
 
 namespace Details
@@ -89,12 +92,10 @@ ITK_ASSOCIATE(13, long double);
  * between \c std::complex<>, write:
  \code
  namespace itk {
-ITK_ABI_NAMESPACE_BEGIN
    template <typename TA, typename TB>
    struct PromoteType<std::complex<TA>, std::complex<TB> > {
      using Type = std::complex<typename PromoteType<TA,TB>::Type>;
    };
- ITK_ABI_NAMESPACE_END
 }
  \endcode
  *
@@ -155,7 +156,9 @@ public:
    */
   using Type = typename Details::SizeToType<sizeof Check(a + b, 0), TA, TB>::Type;
 };
-} // namespace itk::mpl
+} // namespace mpl
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 /// \endcond
 

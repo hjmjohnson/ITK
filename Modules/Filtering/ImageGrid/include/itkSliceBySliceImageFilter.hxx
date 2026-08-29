@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage,
           typename TOutputImage,
           typename TInputFilter,
@@ -382,6 +383,7 @@ SliceBySliceImageFilter<TInputImage,
   itkPrintSelfObjectMacro(OutputFilter);
   os << indent << "SliceIndex: " << m_SliceIndex << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

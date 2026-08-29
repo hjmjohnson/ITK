@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 int
 PolygonGroupSpatialObjectXMLFileReader::CanReadFile(const char * name)
 {
@@ -279,4 +280,5 @@ PolygonGroupSpatialObjectXMLFileWriter::WriteFile()
   delete children;
   return 0;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

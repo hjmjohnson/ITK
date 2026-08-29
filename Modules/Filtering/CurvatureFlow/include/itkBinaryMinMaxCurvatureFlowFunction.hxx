@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 auto
@@ -48,6 +49,7 @@ BinaryMinMaxCurvatureFlowFunction<TImage>::ComputeUpdate(const NeighborhoodType 
 
   return std::max(update, PixelType{});
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

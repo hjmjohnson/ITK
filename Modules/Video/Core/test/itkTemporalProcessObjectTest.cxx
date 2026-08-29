@@ -25,7 +25,10 @@
  * TemporalDataObject for testing
  */
 
-namespace itk::TemporalProcessObjectTest
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace TemporalProcessObjectTest
 {
 
 using SizeValueType = itk::SizeValueType;
@@ -518,7 +521,9 @@ private:
   SizeValueType m_IdNumber{ 0 };
 };
 
-} // namespace itk::TemporalProcessObjectTest
+} // namespace TemporalProcessObjectTest
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

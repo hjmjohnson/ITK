@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GradientDifferenceImageToImageMetric
  * \brief Computes similarity between two objects to be registered
  *
@@ -209,6 +210,7 @@ private:
 
   double m_DerivativeDelta{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

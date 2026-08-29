@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class YenThresholdImageFilter
@@ -101,6 +102,7 @@ protected:
   ~YenThresholdImageFilter() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

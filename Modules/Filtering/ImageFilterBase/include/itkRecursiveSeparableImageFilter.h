@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RecursiveSeparableImageFilter
  * \brief Base class for recursive convolution with a kernel.
  *
@@ -252,6 +253,7 @@ private:
    * this should be in the range [0,ImageDimension-1]. */
   unsigned int m_Direction{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

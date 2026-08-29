@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename THistogram, typename TOutput>
 void
@@ -330,6 +331,7 @@ RenyiEntropyThresholdCalculator<THistogram, TOutput>::PrintSelf(std::ostream & o
   print_helper::PrintNumericTrait(os, indent, "LastBin", m_LastBin);
   print_helper::PrintNumericTrait(os, indent, "Size", m_Size);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

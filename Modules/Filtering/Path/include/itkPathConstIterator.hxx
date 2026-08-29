@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TPath>
 PathConstIterator<TImage, TPath>::PathConstIterator(const ImageType * imagePtr, const PathType * pathPtr)
   : m_Image(imagePtr)
@@ -100,6 +101,7 @@ PathConstIterator<TImage, TPath>::operator++()
     m_CurrentImageIndex += offset;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

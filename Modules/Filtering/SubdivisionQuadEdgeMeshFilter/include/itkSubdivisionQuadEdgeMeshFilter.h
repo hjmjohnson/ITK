@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SubdivisionQuadEdgeMeshFilter
  * \brief Abstract base class for itk::QuadEdgeMesh subdivision
@@ -111,6 +112,7 @@ protected:
 
   EdgePointIdentifierContainerPointer m_EdgesPointIdentifier;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

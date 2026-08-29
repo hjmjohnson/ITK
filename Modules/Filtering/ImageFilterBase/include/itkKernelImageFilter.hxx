@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 KernelImageFilter<TInputImage, TOutputImage, TKernel>::KernelImageFilter()
 {
@@ -61,6 +62,7 @@ KernelImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(std::ostream & 
 
   os << indent << "Kernel: " << m_Kernel << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

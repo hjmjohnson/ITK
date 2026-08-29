@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegistrationMethodv4Enums
  *\brief Contains all enum classes for ImageRegistrationMethodv4 class.
  * \ingroup ITKRegistrationMethodsv4
@@ -627,6 +628,7 @@ private:
     ptr = IdentityTransform<RealType, ImageDimension>::New().GetPointer();
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

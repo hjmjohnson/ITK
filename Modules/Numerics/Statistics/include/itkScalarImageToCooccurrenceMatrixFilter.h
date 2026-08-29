@@ -24,7 +24,10 @@
 #include "itkNumericTraits.h"
 #include "itkProcessObject.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class ScalarImageToCooccurrenceMatrixFilter
  *  \brief This class computes a co-occurrence matrix (histogram) from
@@ -222,7 +225,9 @@ private:
 
   MaskPixelType m_InsidePixelValue{};
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkScalarImageToCooccurrenceMatrixFilter.hxx"

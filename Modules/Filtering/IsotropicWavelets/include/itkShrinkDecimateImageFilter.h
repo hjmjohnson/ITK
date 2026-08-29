@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ShrinkDecimateImageFilter
  * \brief Reduce the size of an image by an integer factor in each
  * dimension just cutting off samples without any interpolation.
@@ -136,6 +137,7 @@ private:
     return static_cast<TOutputType>(input);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

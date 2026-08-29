@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ContourSpatialObjectPoint
  * \brief Point used for a Contour definition
@@ -76,6 +77,7 @@ private:
   CovariantVectorType m_NormalInObjectSpace{};
   PointType           m_PickedPointInObjectSpace{};
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

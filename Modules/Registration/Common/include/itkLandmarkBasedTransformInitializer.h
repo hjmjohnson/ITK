@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LandmarkBasedTransformInitializer
  * This class computes the transform that aligns the fixed and moving images
  * given a set of pair landmarks. The class is templated over the Transform type
@@ -222,6 +223,7 @@ private:
   unsigned int       m_BSplineNumberOfControlPoints{ 4 };
 
 }; // class LandmarkBasedTransformInitializer
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

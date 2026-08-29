@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TPixelAccumulateType, typename TInterpolator>
 TileMergeImageFilter<TImageType, TPixelAccumulateType, TInterpolator>::TileMergeImageFilter()
 {
@@ -577,6 +578,7 @@ TileMergeImageFilter<TImageType, TPixelAccumulateType, TInterpolator>::ResampleS
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkTileMergeImageFilter_hxx

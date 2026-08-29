@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Remove a particular type of character from a string
 std::string
@@ -77,4 +78,5 @@ ParseLine(std::string line)
 
   return line;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

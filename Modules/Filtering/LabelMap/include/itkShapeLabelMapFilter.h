@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShapeLabelMapFilter
  * \brief The valuator class for the ShapeLabelObject
@@ -180,6 +181,7 @@ private:
 };
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

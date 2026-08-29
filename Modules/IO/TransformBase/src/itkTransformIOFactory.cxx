@@ -20,6 +20,7 @@
 #include "itkTransformIOFactory.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 TransformIOFactoryTemplate<TParametersValueType>::TransformIOFactoryTemplate() = default;
@@ -55,4 +56,5 @@ template class ITKIOTransformBase_EXPORT TransformIOFactoryTemplate<float>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

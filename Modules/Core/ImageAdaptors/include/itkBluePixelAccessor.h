@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BluePixelAccessor
  * \brief Give access to the Blue component of a RGBPixel type
@@ -73,6 +74,7 @@ public:
 
   ITK_UNEQUAL_OPERATOR_MEMBER_FUNCTION(Self);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

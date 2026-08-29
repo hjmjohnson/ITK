@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //----------------------------------------------------------------------
 // Construct without computing moments
@@ -323,6 +324,7 @@ ImageMomentsCalculator<TImage>::GetPhysicalAxesToPrincipalAxesTransform() const 
 
   return inverse;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage1, typename TInputImage2>
 HausdorffDistanceImageFilter<TInputImage1, TInputImage2>::HausdorffDistanceImageFilter()
   : m_HausdorffDistance(RealType{})
@@ -152,5 +153,6 @@ HausdorffDistanceImageFilter<TInputImage1, TInputImage2>::PrintSelf(std::ostream
   os << indent << "AverageHausdorffDistance: " << m_AverageHausdorffDistance << std::endl;
   os << indent << "Use Image Spacing: " << m_UseImageSpacing << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

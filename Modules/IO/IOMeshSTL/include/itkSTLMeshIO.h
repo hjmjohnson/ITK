@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class STLMeshIO
  * \brief This class defines how to read and write STL file format.
  *
@@ -295,6 +296,7 @@ private:
   using CellsVectorType = std::vector<TripletType>;
   CellsVectorType m_CellsVector;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkSTLMeshIO_h

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputPixelType, typename TOutputPixelType, typename TRadiusPixelType>
 HoughTransform2DCirclesImageFilter<TInputPixelType, TOutputPixelType, TRadiusPixelType>::
   HoughTransform2DCirclesImageFilter()
@@ -302,6 +303,7 @@ HoughTransform2DCirclesImageFilter<TInputPixelType, TOutputPixelType, TRadiusPix
 
   os << indent << "OldModifiedTime: " << NumericTraits<ModifiedTimeType>::PrintType(m_OldModifiedTime) << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

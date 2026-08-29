@@ -23,7 +23,10 @@
 #include "itkKdTree.h"
 #include "itkStatisticsAlgorithm.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class KdTreeGenerator
@@ -204,7 +207,9 @@ private:
   /** Length of a measurement vector */
   MeasurementVectorSizeType m_MeasurementVectorSize{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkKdTreeGenerator.hxx"

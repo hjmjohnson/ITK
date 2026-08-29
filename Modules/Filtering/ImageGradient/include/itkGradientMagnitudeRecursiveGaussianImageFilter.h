@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GradientMagnitudeRecursiveGaussianImageFilter
  * \brief Computes the Magnitude of the Gradient of an image by convolution
@@ -170,6 +171,7 @@ private:
   /** Normalize the image across scale space */
   bool m_NormalizeAcrossScale{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

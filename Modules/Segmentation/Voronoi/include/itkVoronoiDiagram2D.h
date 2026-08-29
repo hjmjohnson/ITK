@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VoronoiDiagram2D
  * \brief Implements the 2-Dimensional Voronoi Diagram.
  *
@@ -335,6 +336,7 @@ private:
   std::vector<VoronoiEdge> m_EdgeList{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

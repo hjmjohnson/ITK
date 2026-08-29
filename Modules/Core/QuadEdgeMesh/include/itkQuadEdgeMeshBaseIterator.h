@@ -50,6 +50,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshBaseIterator
  *
@@ -391,6 +392,7 @@ public:
     return this->m_Iterator->GetOrigin();
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

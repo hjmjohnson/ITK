@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 MetaArrayReader::MetaArrayReader()
   : m_FileName("")
@@ -52,4 +53,5 @@ MetaArrayReader::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "FileName: " << m_FileName << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

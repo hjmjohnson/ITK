@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TJointHistogramMetric>
 void
@@ -57,5 +58,6 @@ JointHistogramMutualInformationComputeJointPDFThreader<ThreadedIndexedContainerP
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

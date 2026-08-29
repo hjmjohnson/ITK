@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh, typename TTransform>
 class MeshSourceGraftOutputFilter : public MeshToMeshFilter<TInputMesh, TOutputMesh>
 {
@@ -173,6 +174,7 @@ MeshSourceGraftOutputFilter<TInputMesh, TOutputMesh, TTransform>::GenerateData()
   */
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 int

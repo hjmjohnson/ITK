@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ChainCodePath
  * \brief  Represent a path as a sequence of connected image index offsets
@@ -162,6 +163,7 @@ private:
   IndexType     m_Start{}; // origin image index for the path
   ChainCodeType m_Chain{}; // the chain code (vector of offsets)
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

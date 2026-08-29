@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Default constructor
 GEAdwImageIO::GEAdwImageIO() = default;
 GEAdwImageIO::~GEAdwImageIO() = default;
@@ -206,4 +207,5 @@ GEAdwImageIO::ReadHeader(const char * FileNameToRead)
 
   return hdr;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

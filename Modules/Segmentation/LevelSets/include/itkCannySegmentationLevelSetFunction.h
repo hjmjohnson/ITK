@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CannySegmentationLevelSetFunction
  * \brief A refinement of the standard level-set function which computes a
  * speed term and advection term based on pseudo-Canny edges.  See
@@ -161,6 +162,7 @@ private:
     m_Canny->SetInput(feature);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

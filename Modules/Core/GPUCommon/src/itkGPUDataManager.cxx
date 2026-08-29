@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // constructor
 GPUDataManager::GPUDataManager()
 {
@@ -276,4 +277,5 @@ GPUDataManager::PrintSelf(std::ostream & os, Indent indent) const
   itkPrintSelfBooleanMacro(IsCPUBufferDirty);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

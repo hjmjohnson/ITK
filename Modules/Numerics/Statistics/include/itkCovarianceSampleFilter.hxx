@@ -20,7 +20,10 @@
 
 #include "itkMeanSampleFilter.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 CovarianceSampleFilter<TSample>::CovarianceSampleFilter()
@@ -216,6 +219,8 @@ CovarianceSampleFilter<TSample>::GetMean() const -> const MeasurementVectorRealT
 {
   return this->GetMeanOutput()->Get();
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

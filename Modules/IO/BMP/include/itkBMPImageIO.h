@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BMPImageIO
  *
@@ -125,6 +126,7 @@ private:
   unsigned long  m_BMPDataSize{ 0 };
   PaletteType    m_ColorPalette{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkBMPImageIO_h

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 MorphologicalSignedDistanceTransformImageFilter<TInputImage,
                                                 TOutputImage>::MorphologicalSignedDistanceTransformImageFilter()
@@ -133,6 +134,7 @@ MorphologicalSignedDistanceTransformImageFilter<TInputImage, TOutputImage>::Prin
   os << "Outside Value = " << (OutputPixelType)m_OutsideValue << std::endl;
   os << "ImageScale = " << m_Erode->GetUseImageSpacing() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

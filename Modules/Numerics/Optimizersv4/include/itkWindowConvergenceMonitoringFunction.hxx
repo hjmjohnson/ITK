@@ -25,7 +25,10 @@
 #include "itkPointSet.h"
 #include "itkVector.h"
 
-namespace itk::Function
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Function
 {
 
 template <typename TScalar>
@@ -134,6 +137,8 @@ WindowConvergenceMonitoringFunction<TScalar>::PrintSelf(std::ostream & os, Inden
   os << indent << "Window size: " << this->m_WindowSize << std::endl;
 }
 
-} // namespace itk::Function
+} // namespace Function
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

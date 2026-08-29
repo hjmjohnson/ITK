@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Default constructor
 IPLCommonImageIO::IPLCommonImageIO()
   : m_SystemByteOrder(ByteSwapper<int>::SystemIsBigEndian() ? IOByteOrderEnum::BigEndian
@@ -509,4 +510,5 @@ IPLCommonImageIO::statTimeToAscii(void * clock, char * timeString, int len)
   }
   return 1;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

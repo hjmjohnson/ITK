@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SegmentationRegion::SegmentationRegion() = default;
 
 SegmentationRegion::~SegmentationRegion() = default;
@@ -35,4 +36,5 @@ SegmentationRegion::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Region label            : " << m_RegionLabel << std::endl;
   os << indent << "Area of the region      : " << m_RegionArea << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

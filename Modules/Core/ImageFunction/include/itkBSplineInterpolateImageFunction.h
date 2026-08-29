@@ -40,6 +40,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BSplineInterpolateImageFunction
  *
@@ -406,6 +407,7 @@ private:
   std::unique_ptr<vnl_matrix<double>[]> m_ThreadedWeights;
   std::unique_ptr<vnl_matrix<double>[]> m_ThreadedWeightsDerivative;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

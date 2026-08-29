@@ -18,7 +18,10 @@
 #ifndef itkKdTreeGenerator_hxx
 #define itkKdTreeGenerator_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 KdTreeGenerator<TSample>::KdTreeGenerator()
@@ -204,6 +207,8 @@ KdTreeGenerator<TSample>::GenerateTreeLoop(unsigned int            beginIndex,
     return this->GenerateNonterminalNode(beginIndex, endIndex, lowerBound, upperBound, level + 1);
   }
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

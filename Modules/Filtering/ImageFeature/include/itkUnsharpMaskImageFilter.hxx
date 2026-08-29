@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TInternalPrecision>
 UnsharpMaskImageFilter<TInputImage, TOutputImage, TInternalPrecision>::UnsharpMaskImageFilter()
@@ -109,6 +110,7 @@ UnsharpMaskImageFilter<TInputImage, TOutputImage, TInternalPrecision>::PrintSelf
   os << indent << "Clamp: " << m_Clamp << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

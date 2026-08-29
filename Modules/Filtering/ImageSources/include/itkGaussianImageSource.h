@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GaussianImageSource
  * \brief Generate an n-dimensional image of a Gaussian.
@@ -152,6 +153,7 @@ private:
 
   bool m_Normalized{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

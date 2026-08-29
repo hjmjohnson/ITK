@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /*
  * TimeVaryingVelocityFieldIntegrationImageFilter class definitions
@@ -291,6 +292,7 @@ TimeVaryingVelocityFieldIntegrationImageFilter<TTimeVaryingVelocityField, TDispl
   itkPrintSelfObjectMacro(DisplacementFieldInterpolator);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

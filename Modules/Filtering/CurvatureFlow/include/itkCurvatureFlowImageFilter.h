@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CurvatureFlowImageFilter
  * \brief Denoise an image using curvature driven flow.
@@ -183,6 +184,7 @@ protected:
 private:
   TimeStepType m_TimeStep{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

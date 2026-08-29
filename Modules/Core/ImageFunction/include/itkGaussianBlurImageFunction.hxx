@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Set the Input Image */
 template <typename TInputImage, typename TOutput>
 GaussianBlurImageFunction<TInputImage, TOutput>::GaussianBlurImageFunction()
@@ -376,6 +377,7 @@ GaussianBlurImageFunction<TInputImage, TOutput>::EvaluateAtContinuousIndex(const
 
   return this->EvaluateAtIndex(index, m_ContinuousOperatorArray);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ScatterMatrixImageFunction
  * \brief Calculate the scatter matrix in the neighborhood of a pixel in a Vector image.
@@ -125,6 +126,7 @@ protected:
 private:
   unsigned int m_NeighborhoodRadius{ 1 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

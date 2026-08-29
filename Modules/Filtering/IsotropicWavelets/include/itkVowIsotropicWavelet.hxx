@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFunctionValue, unsigned int VImageDimension, typename TInput>
 VowIsotropicWavelet<TFunctionValue, VImageDimension, TInput>::VowIsotropicWavelet()
   : m_Kappa(0.75)
@@ -62,6 +63,7 @@ VowIsotropicWavelet<TFunctionValue, VImageDimension, TInput>::EvaluateMagnitude(
   }
   return 0;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

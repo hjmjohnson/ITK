@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LinearAnisotropicDiffusionLBRImageFilter
  *
@@ -165,6 +166,7 @@ protected:
   static ScalarType
   ScalarProduct(const TensorType &, const VectorType &, const VectorType &);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

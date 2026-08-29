@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetQuadEdgeMesh
  *  \brief Base class for the surface mesh representation of a level-set function
@@ -114,6 +115,7 @@ protected:
 private:
   MeshPointer m_Mesh{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

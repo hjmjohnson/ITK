@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ManifoldParzenWindowsPointSetFunction
  * \brief Point set function based on n-dimensional parzen windowing.
@@ -207,6 +208,7 @@ private:
   MultiThreaderBase::Pointer m_MultiThreader{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -30,6 +30,7 @@
 #if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VnlForwardFFTImageFilter
  * \brief Deprecated compatibility wrapper that routes to PocketFFTForwardFFTImageFilter.
  *
@@ -81,6 +82,7 @@ struct FFTImageFilterTraits<VnlForwardFFTImageFilter> : public FFTImageFilterTra
 #    pragma warning(pop)
 #  endif
 /** \endcond */
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // !ITK_LEGACY_REMOVE && !ITK_FUTURE_LEGACY_REMOVE
 

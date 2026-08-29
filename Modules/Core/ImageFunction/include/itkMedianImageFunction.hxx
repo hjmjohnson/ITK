@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 void
@@ -74,6 +75,7 @@ MedianImageFunction<TInputImage, TCoordinate>::EvaluateAtIndex(const IndexType &
 
   return *medianIterator;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

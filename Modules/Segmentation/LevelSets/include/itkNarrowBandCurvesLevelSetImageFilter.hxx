@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputType>
 NarrowBandCurvesLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::NarrowBandCurvesLevelSetImageFilter()
   : m_CurvesFunction(CurvesFunctionType::New())
@@ -60,6 +61,7 @@ NarrowBandCurvesLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::Ge
   // Continue with Superclass implementation
   Superclass::GenerateData();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

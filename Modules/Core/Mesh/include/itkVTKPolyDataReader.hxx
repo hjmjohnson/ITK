@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //
 // Constructor
 //
@@ -344,6 +345,7 @@ VTKPolyDataReader<TOutputMesh>::PrintSelf(std::ostream & os, Indent indent) cons
   os << indent << "Version: " << m_Version << std::endl;
   os << indent << "Header: " << m_Header << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

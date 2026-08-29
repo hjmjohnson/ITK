@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationContainer
  *  \brief Class for holding a set of level set equations (PDEs).
@@ -309,6 +310,7 @@ protected:
   MapContainerType         m_Container{};
   InputImagePointer        m_Input{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

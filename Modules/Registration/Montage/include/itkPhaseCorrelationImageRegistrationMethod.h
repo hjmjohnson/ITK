@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PhaseCorrelationImageRegistrationMethodEnums
  * \ingroup Montage
@@ -492,6 +493,7 @@ private:
   typename IFFTFilterType::Pointer m_IFFT = IFFTFilterType::New();
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

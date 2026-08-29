@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageIterator
  * \brief A multi-dimensional iterator templated over image type.
@@ -174,6 +175,7 @@ public:
     return const_cast<ImageType *>(this->m_Image.GetPointer());
   }
 }; // no additional implementation required
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkRLEImageIterator_h

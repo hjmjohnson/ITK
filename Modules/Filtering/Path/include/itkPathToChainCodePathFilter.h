@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PathToChainCodePathFilter
  * \brief Filter that produces a chain code version of a path.
@@ -80,6 +81,7 @@ protected:
 private:
   bool m_MaximallyConnected{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

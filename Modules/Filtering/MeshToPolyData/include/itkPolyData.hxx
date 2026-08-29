@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixelType, typename TCellPixel>
 PolyData<TPixelType, TCellPixel>::PolyData()
@@ -483,6 +484,7 @@ PolyData<TPixelType, TCellPixel>::Initialize()
   m_TriangleStripsContainer = nullptr;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkPolyData_hxx

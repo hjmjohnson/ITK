@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class TernaryOperatorImageFilter
@@ -96,6 +97,7 @@ protected:
   }
   ~TernaryOperatorImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

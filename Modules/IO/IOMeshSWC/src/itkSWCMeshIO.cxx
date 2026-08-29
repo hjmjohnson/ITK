@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 std::ostream &
 operator<<(std::ostream & out, const SWCMeshIOEnums::SWCPointData value)
@@ -781,4 +782,5 @@ SWCMeshIO ::SetHeaderContent(const HeaderContentType & headerContent)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 typename HigherOrderAccurateDerivativeOperator<TPixel, VDimension, TAllocator>::CoefficientVector
@@ -74,6 +75,7 @@ HigherOrderAccurateDerivativeOperator<TPixel, VDimension, TAllocator>::GenerateF
   return coeff;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

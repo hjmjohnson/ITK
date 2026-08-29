@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutput, unsigned int VImageDimension, typename TInput>
 SinusoidSpatialFunction<TOutput, VImageDimension, TInput>::SinusoidSpatialFunction()
 {
@@ -69,6 +70,7 @@ SinusoidSpatialFunction<TOutput, VImageDimension, TInput>::PrintSelf(std::ostrea
   os << "]" << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

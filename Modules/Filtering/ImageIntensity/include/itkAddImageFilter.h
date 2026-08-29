@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class AddImageFilter
@@ -114,6 +115,7 @@ protected:
   }
   ~AddImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

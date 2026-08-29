@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class MathematicalMorphologyEnums
@@ -52,6 +53,7 @@ public:
 extern ITKMathematicalMorphology_EXPORT std::ostream &
 operator<<(std::ostream & out, const MathematicalMorphologyEnums::Algorithm value);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

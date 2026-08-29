@@ -16,6 +16,7 @@
  *
  *=========================================================================*/
 
+#include "itkABINamespace.h"
 #include "itkEigenLevenbergMarquardtEngine.h"
 
 #include "itk_eigen.h"
@@ -25,7 +26,10 @@
 
 #include <vector>
 
-namespace itk::detail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace detail
 {
 namespace
 {
@@ -152,4 +156,6 @@ EigenLevenbergMarquardtSolve(unsigned int                                       
   result.residualNorm = residualNorm;
   return result;
 }
-} // namespace itk::detail
+} // namespace detail
+ITK_ABI_NAMESPACE_END
+} // namespace itk

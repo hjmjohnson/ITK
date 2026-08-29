@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EigenToMeasureImageFilter
  * \brief Abstract class for computing a measure from local structure.
  *
@@ -108,6 +109,7 @@ protected:
   void
   GenerateData() override;
 }; // end class
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

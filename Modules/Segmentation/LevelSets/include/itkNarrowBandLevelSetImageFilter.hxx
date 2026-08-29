@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputPixelType, typename TOutputImage>
 void
 NarrowBandLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelType, TOutputImage>::PrintSelf(
@@ -142,6 +143,7 @@ NarrowBandLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelType, TOut
   m_IsoFilter->SetInput(nullptr);
   m_ChamferFilter->SetInput(nullptr);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

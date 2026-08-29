@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 StreamingImageIOBase::StreamingImageIOBase()
   : ImageIOBase()
 {}
@@ -413,4 +414,5 @@ StreamingImageIOBase::RequestedToStream() const
 
   return largestRegion != ioregion;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

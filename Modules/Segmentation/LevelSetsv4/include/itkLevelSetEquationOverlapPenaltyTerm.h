@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationOverlapPenaltyTerm
  *  \brief Class to represent the overlap penalty among many level-sets
@@ -137,6 +138,7 @@ private:
   CacheImageType *           m_CacheImage{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEquationOverlapPenaltyTerm.hxx"

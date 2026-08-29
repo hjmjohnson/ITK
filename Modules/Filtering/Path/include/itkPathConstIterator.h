@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PathConstIterator
  * \brief PathConstIterator iterates (traces) over a path through an image.
@@ -240,6 +241,7 @@ protected: // made protected so other iterators can access
   /** Current ND index position in the image of the path */
   IndexType m_CurrentImageIndex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

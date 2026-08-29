@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscretePrincipalCurvaturesQuadEdgeMeshFilter
  *
@@ -139,6 +140,7 @@ protected:
     return std::max(static_cast<OutputCurvatureType>(0.), m_Mean * m_Mean - m_Gaussian);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

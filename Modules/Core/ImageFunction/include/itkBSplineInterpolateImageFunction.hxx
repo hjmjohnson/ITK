@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType, typename TCoordinate, typename TCoefficientType>
 BSplineInterpolateImageFunction<TImageType, TCoordinate, TCoefficientType>::BSplineInterpolateImageFunction()
@@ -641,6 +642,7 @@ BSplineInterpolateImageFunction<TImageType, TCoordinate, TCoefficientType>::Eval
 
   return derivativeValue;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

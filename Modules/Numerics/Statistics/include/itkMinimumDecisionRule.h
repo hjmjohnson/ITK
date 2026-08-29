@@ -21,7 +21,10 @@
 #include "itkDecisionRule.h"
 #include "ITKStatisticsExport.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class MinimumDecisionRule
  *  \brief A decision rule that returns the class label with the
@@ -67,6 +70,8 @@ protected:
   ~MinimumDecisionRule() override;
 
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

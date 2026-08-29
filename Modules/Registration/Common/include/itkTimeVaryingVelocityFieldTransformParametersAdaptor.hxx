@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 TimeVaryingVelocityFieldTransformParametersAdaptor<TTransform>::TimeVaryingVelocityFieldTransformParametersAdaptor()
@@ -221,6 +222,7 @@ TimeVaryingVelocityFieldTransformParametersAdaptor<TTransform>::AdaptTransformPa
   this->m_Transform->IntegrateVelocityField();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

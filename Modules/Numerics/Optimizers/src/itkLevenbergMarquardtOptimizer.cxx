@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 LevenbergMarquardtOptimizer::LevenbergMarquardtOptimizer()
   : m_NumberOfIterations(2000)
   , m_ValueTolerance(1e-8)
@@ -198,4 +199,5 @@ LevenbergMarquardtOptimizer::GetStopConditionDescription() const
   reason << this->GetNameOfClass() << ": " << m_StopConditionDescription;
   return reason.str();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

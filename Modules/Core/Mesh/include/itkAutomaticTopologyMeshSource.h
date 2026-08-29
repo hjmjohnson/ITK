@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AutomaticTopologyMeshSource
  * \brief Convenience class for generating meshes.
  *
@@ -416,6 +417,7 @@ private:
   CellHashMap  m_CellsHashTable{};
   MeshPointer  m_OutputMesh{}; // Retained for convenience.
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

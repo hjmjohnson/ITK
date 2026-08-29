@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputMesh>
 BinaryMask3DMeshSource<TInputImage, TOutputMesh>::BinaryMask3DMeshSource()
   : m_ObjectValue(NumericTraits<InputPixelType>::OneValue())
@@ -2754,6 +2755,7 @@ BinaryMask3DMeshSource<TInputImage, TOutputMesh>::PrintSelf(std::ostream & os, I
     os << "(null)" << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

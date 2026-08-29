@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class GeometryUtilities
@@ -57,5 +58,6 @@ public:
   HyperSphereRadiusFromVolume(const int dim, const double volume);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

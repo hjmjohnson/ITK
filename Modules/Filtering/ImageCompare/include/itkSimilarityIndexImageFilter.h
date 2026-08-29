@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SimilarityIndexImageFilter
  * \brief Measures the similarity between the set of non-zero pixels of
@@ -165,6 +166,7 @@ private:
   Array<SizeValueType> m_CountOfImage2{};
   Array<SizeValueType> m_CountOfIntersection{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

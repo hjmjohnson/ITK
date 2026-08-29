@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class DecimateFramesVideoFilter
@@ -79,6 +80,7 @@ protected:
   ThreadedGenerateData(const FrameSpatialRegionType & outputRegionForThread, int threadId) override;
 }; // end class DecimateFramesVideoFilter
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

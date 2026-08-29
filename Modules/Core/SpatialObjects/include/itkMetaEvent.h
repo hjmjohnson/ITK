@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MetaEvent
  * \brief Event abstract class
@@ -45,6 +46,7 @@ public:
   ~MetaEvent() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

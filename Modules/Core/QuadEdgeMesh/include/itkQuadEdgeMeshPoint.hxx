@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 // ResetEdge would be a better name than Initialize.
 template <typename TCoordinate, unsigned int VPointDimension, typename TQuadEdge>
@@ -128,6 +129,7 @@ QuadEdgeMeshPoint<TCoordinate, VPointDimension, TQuadEdge>::SetPoint(const Super
 {
   this->Superclass::operator=(point);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

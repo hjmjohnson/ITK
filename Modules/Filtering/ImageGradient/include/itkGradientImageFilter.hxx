@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOperatorValueType, typename TOutputValueType, typename TOutputImageType>
 GradientImageFilter<TInputImage, TOperatorValueType, TOutputValueType, TOutputImageType>::GradientImageFilter()
@@ -219,6 +220,7 @@ GradientImageFilter<TInputImage, TOperatorValueType, TOutputValueType, TOutputIm
     os << "(null)" << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

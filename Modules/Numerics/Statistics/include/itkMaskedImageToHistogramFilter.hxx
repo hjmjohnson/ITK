@@ -21,7 +21,10 @@
 #include "itkProgressReporter.h"
 #include "itkImageRegionConstIterator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TImage, typename TMaskImage>
 MaskedImageToHistogramFilter<TImage, TMaskImage>::MaskedImageToHistogramFilter()
@@ -105,6 +108,8 @@ MaskedImageToHistogramFilter<TImage, TMaskImage>::ThreadedStreamedGenerateData(c
   this->ThreadedMergeHistogram(std::move(histogram));
 }
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

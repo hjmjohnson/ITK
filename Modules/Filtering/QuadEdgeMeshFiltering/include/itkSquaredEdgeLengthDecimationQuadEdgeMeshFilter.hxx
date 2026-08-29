@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput, typename TCriterion>
 SquaredEdgeLengthDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::
   SquaredEdgeLengthDecimationQuadEdgeMeshFilter()
@@ -42,5 +43,6 @@ SquaredEdgeLengthDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::Relo
 
   return oPt;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

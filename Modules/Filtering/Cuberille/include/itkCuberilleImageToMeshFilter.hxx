@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputMesh, typename TInterpolator>
 CuberilleImageToMeshFilter<TInputImage, TOutputMesh, TInterpolator>::CuberilleImageToMeshFilter()
@@ -1004,5 +1005,6 @@ CuberilleImageToMeshFilter<TInputImage, TOutputMesh, TInterpolator>::PrintSelf(s
   os << indent << "ProjectVertexStepLengthRelaxationFactor: " << m_ProjectVertexStepLengthRelaxationFactor << std::endl;
   os << indent << "ProjectVertexMaximumNumberOfSteps: " << m_ProjectVertexMaximumNumberOfSteps << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

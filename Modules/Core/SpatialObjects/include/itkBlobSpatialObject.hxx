@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 BlobSpatialObject<TDimension>::BlobSpatialObject()
@@ -51,6 +52,7 @@ BlobSpatialObject<TDimension>::InternalClone() const
   return loPtr;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MRCImageIOFactory
  * \brief Create instances of MRCImageIO objects using an object factory.
@@ -82,6 +83,7 @@ protected:
   MRCImageIOFactory();
   ~MRCImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

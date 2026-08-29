@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 LabelVotingImageFilter<TInputImage, TOutputImage>::LabelVotingImageFilter()
   : m_LabelForUndecidedPixels(0)
@@ -155,6 +156,7 @@ LabelVotingImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, 
   itkPrintSelfBooleanMacro(HasLabelForUndecidedPixels);
   os << indent << "TotalLabelCount: " << m_TotalLabelCount << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /* Necessary forward declaration */
 /**
  * \class LBFGSBOptimizerHelperv4
@@ -187,5 +188,6 @@ private:
   BoundValueType     m_UpperBound{};
   BoundSelectionType m_BoundSelection{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

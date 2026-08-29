@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor
 STLMeshIO ::STLMeshIO()
 {
@@ -886,4 +887,5 @@ STLMeshIO ::PrintSelf(std::ostream & os, Indent indent) const
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

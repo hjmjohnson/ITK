@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 long
 IsotropicWaveletsUtilities::Factorial(const long n)
 {
@@ -53,4 +54,5 @@ IsotropicWaveletsUtilities::ComputeMaxNumberOfLevels(const Size<3> & inputSize, 
   return itk::utils::ComputeMaxNumberOfLevels<3>(inputSize, scaleFactor);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class TimeVaryingVelocityFieldImageRegistrationMethodv4
  * \brief Interface method for the current registration framework
@@ -189,6 +190,7 @@ private:
 
   NumberOfIterationsArrayType m_NumberOfIterationsPerLevel{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

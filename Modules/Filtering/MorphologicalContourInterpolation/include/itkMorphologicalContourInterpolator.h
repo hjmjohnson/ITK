@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MorphologicalContourInterpolator
  *
  *  \brief Interpolates contours between slices. Based on a paper by Albu et al.
@@ -403,6 +404,7 @@ protected:
   using ConnectedComponentsType = ConnectedComponentImageFilter<BoolSliceType, SliceType>;
   typename ConnectedComponentsType::Pointer m_ConnectedComponents;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

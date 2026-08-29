@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TobogganImageFilter
  * \brief toboggan image segmentation
  * The Toboggan segmentation takes a gradient magnitude image
@@ -110,6 +111,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

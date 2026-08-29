@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MedianImageFilter
  * \brief Applies a median filter to an image
@@ -105,6 +106,7 @@ protected:
   void
   DynamicThreadedGenerateData(const OutputImageRegionType & outputRegionForThread) override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

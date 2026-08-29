@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor
  * \brief Helper class for multiresolution image registration
  *
@@ -133,6 +134,7 @@ private:
 
 
 }; // class BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

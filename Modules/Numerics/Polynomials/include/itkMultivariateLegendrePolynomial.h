@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MultivariateLegendrePolynomial
  * \brief 2D and 3D multivariate Legendre Polynomial
@@ -318,5 +319,6 @@ private:
 
 ITKPolynomials_EXPORT std::ostream &
                       operator<<(std::ostream & os, const MultivariateLegendrePolynomial & poly);
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 #endif

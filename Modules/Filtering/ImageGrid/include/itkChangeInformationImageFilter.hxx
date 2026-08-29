@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 void
@@ -195,6 +196,7 @@ ChangeInformationImageFilter<TInputImage>::PrintSelf(std::ostream & os, Indent i
   print_helper::PrintNumericTrait(os, indent, "OutputOffset", m_OutputOffset);
   print_helper::PrintNumericTrait(os, indent, "Shift", m_Shift);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

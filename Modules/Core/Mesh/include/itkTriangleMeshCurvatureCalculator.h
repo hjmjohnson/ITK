@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TriangleMeshCurvatureCalculatorEnum
  * \brief Different modes of operation. Currently only Gaussian curvature is supported.
  * Using enum for future extension to Mean, Max and Min curvature.
@@ -140,6 +141,7 @@ private:
   MeshConstPointer             m_TriangleMesh{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkTriangleMeshCurvatureCalculator.hxx"

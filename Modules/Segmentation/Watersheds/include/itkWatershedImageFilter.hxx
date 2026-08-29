@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 void
 WatershedImageFilter<TInputImage>::SetThreshold(double val)
@@ -201,6 +202,7 @@ WatershedImageFilter<TInputImage>::PrintSelf(std::ostream & os, Indent indent) c
   os << indent << "Threshold: " << m_Threshold << std::endl;
   os << indent << "Level: " << m_Level << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

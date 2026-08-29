@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TMesh>
 void
@@ -48,6 +49,7 @@ LevelSetDomainPartitionMesh<TMesh>::PopulateListDomain()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

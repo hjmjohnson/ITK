@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 MorphologyImageFilter<TInputImage, TOutputImage, TKernel>::MorphologyImageFilter()
 {
@@ -82,5 +83,6 @@ MorphologyImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(std::ostrea
 
   os << indent << "Boundary condition: " << typeid(*m_BoundaryCondition).name() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

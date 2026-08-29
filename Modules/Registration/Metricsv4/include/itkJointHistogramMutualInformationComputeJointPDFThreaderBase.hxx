@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomainPartitioner, typename TJointHistogramMetric>
 JointHistogramMutualInformationComputeJointPDFThreaderBase<TDomainPartitioner, TJointHistogramMetric>::
@@ -149,6 +150,7 @@ JointHistogramMutualInformationComputeJointPDFThreaderBase<TDomainPartitioner,
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

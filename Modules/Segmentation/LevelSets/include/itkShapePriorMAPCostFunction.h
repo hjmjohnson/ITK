@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ShapePriorMAPCostFunction
  * \brief Represents the maximum aprior (MAP) cost function used
  * ShapePriorSegmentationLevelSetImageFilter to estimate the shape parameters.
@@ -159,6 +160,7 @@ private:
 
   GaussianKernelFunction<double>::Pointer m_GaussianFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

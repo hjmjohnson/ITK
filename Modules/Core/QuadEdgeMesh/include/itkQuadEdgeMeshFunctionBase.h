@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshFunctionBase
  * \ingroup QEMeshModifierFunctions
@@ -98,6 +99,7 @@ protected:
   /** Mesh on which to apply the modification */
   MeshType * m_Mesh{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

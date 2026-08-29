@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class DOMTextNode
@@ -67,6 +68,7 @@ private:
   std::string m_Text{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDOMTextNode_h

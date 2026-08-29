@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEvolution
  *  \brief Class for iterating and evolving the level-set function
@@ -451,6 +452,7 @@ protected:
   void
   UpdateEquations() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

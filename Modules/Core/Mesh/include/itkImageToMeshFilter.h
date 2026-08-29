@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageToMeshFilter
  * \brief
  *
@@ -98,6 +99,7 @@ protected:
   ImageToMeshFilter();
   ~ImageToMeshFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HalfHermitianToRealInverseFFTImageFilter
  *
@@ -112,6 +113,7 @@ protected:
   void
   EnlargeOutputRequestedRegion(DataObject * itkNotUsed(output)) override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

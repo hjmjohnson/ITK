@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingImage>
 PointSetToImageMetric<TFixedPointSet, TMovingImage>::PointSetToImageMetric()
@@ -120,6 +121,7 @@ PointSetToImageMetric<TFixedPointSet, TMovingImage>::PrintSelf(std::ostream & os
 
   itkPrintSelfObjectMacro(GradientImage);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

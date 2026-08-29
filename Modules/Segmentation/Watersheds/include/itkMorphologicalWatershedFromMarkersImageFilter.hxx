@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TLabelImage>
 MorphologicalWatershedFromMarkersImageFilter<TInputImage, TLabelImage>::MorphologicalWatershedFromMarkersImageFilter()
@@ -428,5 +429,6 @@ MorphologicalWatershedFromMarkersImageFilter<TInputImage, TLabelImage>::PrintSel
   os << indent << "MarkWatershedLine: " << m_MarkWatershedLine << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

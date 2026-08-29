@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationBinaryMaskTerm
  *  \brief Class to represent the mask boundary as a negative energy
@@ -123,6 +124,7 @@ protected:
   InputImagePointer m_Mask{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEquationBinaryMaskTerm.hxx"

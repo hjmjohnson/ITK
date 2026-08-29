@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 FreeSurferBinaryMeshIO::FreeSurferBinaryMeshIO()
 {
   this->AddSupportedWriteExtension(".fsb");
@@ -614,4 +615,5 @@ FreeSurferBinaryMeshIO::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

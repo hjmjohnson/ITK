@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LevelSetEvolutionStoppingCriterion
 \ingroup ITKLevelSetsv4
@@ -75,6 +76,7 @@ protected:
   /** Destructor */
   ~LevelSetEvolutionNumberOfIterationsStoppingCriterion() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEvolutionNumberOfIterationsStoppingCriterion.hxx"

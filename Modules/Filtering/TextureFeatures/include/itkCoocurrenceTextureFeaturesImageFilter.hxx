@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Statistics
 {
 template <typename TInputImage, typename TOutputImage, typename TMaskImage>
@@ -445,6 +446,7 @@ CoocurrenceTextureFeaturesImageFilter<TInputImage, TOutputImage, TMaskImage>::Pr
   os << indent << "Normalize: " << m_Normalize << std::endl;
 }
 } // end of namespace Statistics
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

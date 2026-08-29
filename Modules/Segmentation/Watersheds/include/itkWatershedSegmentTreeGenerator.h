@@ -25,7 +25,10 @@
 #include <algorithm>
 #include <utility>
 
-namespace itk::watershed
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace watershed
 {
 /**
  * \class SegmentTreeGenerator
@@ -242,7 +245,9 @@ private:
    *  updates. */
   double m_HighestCalculatedFloodLevel{ 0.0 };
 };
-} // namespace itk::watershed
+} // namespace watershed
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWatershedSegmentTreeGenerator.hxx"

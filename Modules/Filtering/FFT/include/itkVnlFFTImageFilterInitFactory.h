@@ -24,6 +24,7 @@
 #if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VnlFFTImageFilterInitFactory
  * \brief Deprecated. Registers the (now PocketFFT-backed) Vnl FFT filters.
@@ -61,6 +62,7 @@ protected:
   VnlFFTImageFilterInitFactory();
   ~VnlFFTImageFilterInitFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // !ITK_LEGACY_REMOVE && !ITK_FUTURE_LEGACY_REMOVE
 

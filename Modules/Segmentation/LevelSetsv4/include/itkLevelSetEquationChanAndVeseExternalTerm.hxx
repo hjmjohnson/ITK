@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TLevelSetContainer>
 LevelSetEquationChanAndVeseExternalTerm<TInput, TLevelSetContainer>::LevelSetEquationChanAndVeseExternalTerm()
   : m_DomainMapImageFilter(nullptr)
@@ -134,6 +135,7 @@ LevelSetEquationChanAndVeseExternalTerm<TInput, TLevelSetContainer>::UpdatePixel
   this->m_TotalValue += input * productChange;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

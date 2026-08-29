@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class OtsuThresholdCalculator
@@ -92,6 +93,7 @@ private:
   bool                                                           m_ReturnBinMidpoint{ false };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

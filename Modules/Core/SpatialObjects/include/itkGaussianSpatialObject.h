@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GaussianSpatialObject
  *
@@ -157,6 +158,7 @@ private:
   ScalarType m_SigmaInObjectSpace{};
   PointType  m_CenterInObjectSpace{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

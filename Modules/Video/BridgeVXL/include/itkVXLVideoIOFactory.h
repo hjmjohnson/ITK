@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VXLVideoIOFactory
  * \brief Create instances of VXLVideoIO objects using an object factory.
@@ -66,6 +67,7 @@ protected:
   VXLVideoIOFactory();
   ~VXLVideoIOFactory();
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TLevelSetEvolution>
 void
@@ -222,6 +223,7 @@ LevelSetEvolutionComputeIterationThreader<
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

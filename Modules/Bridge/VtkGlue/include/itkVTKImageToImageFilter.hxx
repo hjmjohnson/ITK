@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 VTKImageToImageFilter<TOutputImage>::VTKImageToImageFilter()
@@ -87,6 +88,7 @@ VTKImageToImageFilter<TOutputImage>::GetImporter() const -> const Superclass *
   return this;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

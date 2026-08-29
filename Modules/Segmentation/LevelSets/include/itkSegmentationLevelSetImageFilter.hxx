@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TFeatureImage, typename TOutputPixelType>
 SegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelType>::SegmentationLevelSetImageFilter()
@@ -122,6 +123,7 @@ SegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelType>::P
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

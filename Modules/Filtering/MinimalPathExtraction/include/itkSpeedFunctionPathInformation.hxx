@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPoint>
 SpeedFunctionPathInformation<TPoint>::SpeedFunctionPathInformation()
@@ -251,6 +252,7 @@ SpeedFunctionPathInformation<TPoint>::PrintSelf(std::ostream & os, Indent indent
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

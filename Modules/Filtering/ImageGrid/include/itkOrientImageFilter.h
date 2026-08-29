@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class OrientImageFilter
  * \brief Permute axes and then flip images as needed to obtain
  *  agreement in coordinateOrientation codes.
@@ -258,6 +259,7 @@ private:
   FlipAxesArrayType     m_FlipAxes{ false };
 
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

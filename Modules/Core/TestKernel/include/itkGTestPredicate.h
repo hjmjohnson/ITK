@@ -45,7 +45,10 @@
  *  \brief The Predicate namespace contains functions used to
  *  implement custom GTest Predicate-Formatters.
  */
-namespace itk::GTest::Predicate
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace GTest::Predicate
 {
 
 /** Implements GTest Predicate Formatter for ITK_EXPECT_METADATA_VALUE
@@ -204,7 +207,9 @@ VectorDoubleRMSPredFormat(const char * expr1,
                                        << rmsErrorExpr << " evaluates to " << rmsError << '.';
 }
 
-} // namespace itk::GTest::Predicate
+} // namespace GTest::Predicate
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 // end namespace GTest
 
 #endif // itkGTestPredicate_h

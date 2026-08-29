@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TPolyline, typename TVector, typename TOutputImage>
 PolylineMaskImageFilter<TInputImage, TPolyline, TVector, TOutputImage>::PolylineMaskImageFilter()
@@ -498,5 +499,6 @@ PolylineMaskImageFilter<TInputImage, TPolyline, TVector, TOutputImage>::PrintSel
   os << indent << "Focal Distance     : " << m_FocalDistance << std::endl;
   os << indent << "Rotation matrix    : " << m_RotationMatrix << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

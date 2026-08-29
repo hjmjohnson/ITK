@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MedianProjectionImageFilter
  * \brief Median projection
  *
@@ -103,6 +104,7 @@ protected:
   MedianProjectionImageFilter() = default;
   ~MedianProjectionImageFilter() override = default;
 }; // end MedianProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

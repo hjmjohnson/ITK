@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -77,6 +78,7 @@ ImageToMeshFilter<TInputImage, TOutputMesh>::GetOutput() -> OutputMeshType *
   return dynamic_cast<OutputMeshType *>(this->ProcessObject::GetOutput(0));
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

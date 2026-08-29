@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 void
@@ -85,6 +86,7 @@ VectorMeanImageFunction<TInputImage, TCoordinate>::EvaluateAtIndex(const IndexTy
 
   return sum;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

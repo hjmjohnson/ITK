@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 GrayscaleMorphologicalOpeningImageFilter<TInputImage, TOutputImage, TKernel>::GrayscaleMorphologicalOpeningImageFilter()
   : m_HistogramDilateFilter(HistogramDilateFilterType::New())
@@ -335,5 +336,6 @@ GrayscaleMorphologicalOpeningImageFilter<TInputImage, TOutputImage, TKernel>::Pr
   os << indent << "Algorithm: " << m_Algorithm << std::endl;
   os << indent << "SafeBorder: " << m_SafeBorder << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Create the structuring element
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 void
@@ -34,6 +35,7 @@ BinaryCrossStructuringElement<TPixel, VDimension, TAllocator>::CreateStructuring
   // Copy the cross into the kernel
   std::copy(flatKernel.Begin(), flatKernel.End(), this->Begin());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -45,6 +45,7 @@ struct lt_pair_alphabetic_string_string
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 RegularExpressionSeriesFileNames::~RegularExpressionSeriesFileNames() = default;
 
 const std::vector<std::string> &
@@ -136,4 +137,5 @@ RegularExpressionSeriesFileNames::PrintSelf(std::ostream & os, Indent indent) co
     os << indent << "FileNames[" << i << "]: " << m_FileNames[i] << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

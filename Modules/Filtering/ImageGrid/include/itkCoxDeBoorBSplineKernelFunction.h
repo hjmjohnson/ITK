@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CoxDeBoorBSplineKernelFunction
  * \brief BSpline kernel used for density estimation and nonparametric
@@ -133,6 +134,7 @@ private:
   MatrixType   m_BSplineShapeFunctions{};
   unsigned int m_SplineOrder{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

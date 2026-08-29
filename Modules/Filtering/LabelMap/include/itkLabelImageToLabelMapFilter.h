@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelImageToLabelMapFilter
  * \brief convert a labeled image to a label collection image
@@ -129,6 +130,7 @@ private:
 
   typename std::vector<OutputImagePointer> m_TemporaryImages{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

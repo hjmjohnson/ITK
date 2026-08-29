@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class OFFMeshIO
  * \brief this class defines how to read and write Object file format.
@@ -201,6 +202,7 @@ private:
   StreamOffsetType m_CellsStartPosition{};  // file position for cells relative to std::ios::beg
   bool             m_TriangleCellType{};    // if all cells are triangle it is true. otherwise, it is false.
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

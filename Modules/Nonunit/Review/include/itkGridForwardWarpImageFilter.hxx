@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDisplacementField, typename TOutputImage>
 GridForwardWarpImageFilter<TDisplacementField, TOutputImage>::GridForwardWarpImageFilter()
@@ -146,6 +147,7 @@ GridForwardWarpImageFilter<TDisplacementField, TOutputImage>::PrintSelf(std::ost
   print_helper::PrintNumericTrait(os, indent, "ForegroundValue", m_ForegroundValue);
   os << indent << "GridPixSpacing: " << m_GridPixSpacing << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

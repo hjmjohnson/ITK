@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MorphologicalWatershedImageFilter
  * \brief Watershed segmentation implementation with morphological operators
  *
@@ -138,6 +139,7 @@ private:
 
   InputImagePixelType m_Level{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

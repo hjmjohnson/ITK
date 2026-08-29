@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TPointDimension>
 TubeSpatialObjectPoint<TPointDimension>::TubeSpatialObjectPoint()
@@ -169,6 +170,7 @@ TubeSpatialObjectPoint<TPointDimension>::PrintSelf(std::ostream & os, Indent ind
   os << indent << "RadiusInObjectSpace: " << m_RadiusInObjectSpace << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

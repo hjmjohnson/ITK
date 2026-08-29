@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class IntermodesThresholdCalculator
@@ -107,6 +108,7 @@ private:
   bool          m_UseInterMode{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

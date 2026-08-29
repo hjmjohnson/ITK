@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VersorTransform
  *
  * VersorTransform of a vector space (e.g. space coordinates)
@@ -174,6 +175,7 @@ private:
   /** Versor containing the rotation */
   VersorType m_Versor{};
 }; // class VersorTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

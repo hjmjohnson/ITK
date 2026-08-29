@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <class TImageType>
 FrequencyShrinkImageFilter<TImageType>::FrequencyShrinkImageFilter()
 {
@@ -407,6 +408,7 @@ FrequencyShrinkImageFilter<TImageType>::PrintSelf(std::ostream & os, Indent inde
 
   itkPrintSelfObjectMacro(FrequencyBandFilter);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

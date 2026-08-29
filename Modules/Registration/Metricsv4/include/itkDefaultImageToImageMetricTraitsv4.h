@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DefaultImageToImageMetricTraitsv4
  * \brief A simple structure holding type information for ImageToImageMetricv4 classes
  *
@@ -114,6 +115,7 @@ public:
   itkConceptMacro(OnlyDefinedForFloatingPointTypes1, (itk::Concept::IsFloatingPoint<MovingRealType>));
   /** @ITKEndGrouping */
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage, typename TOutputImage>
 KappaSigmaThresholdImageFilter<TInputImage, TMaskImage, TOutputImage>::KappaSigmaThresholdImageFilter()
   : m_MaskValue(NumericTraits<MaskPixelType>::max())
@@ -83,5 +84,6 @@ KappaSigmaThresholdImageFilter<TInputImage, TMaskImage, TOutputImage>::PrintSelf
   print_helper::PrintNumericTrait(os, indent, "Inside value", this->m_InsideValue);
   print_helper::PrintNumericTrait(os, indent, "Outside value", this->m_OutsideValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

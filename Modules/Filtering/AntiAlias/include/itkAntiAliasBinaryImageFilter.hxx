@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 AntiAliasBinaryImageFilter<TInputImage, TOutputImage>::AntiAliasBinaryImageFilter()
@@ -124,6 +125,7 @@ AntiAliasBinaryImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & 
   print_helper::PrintNumericTrait(os, indent, "UpperBinaryValue", m_UpperBinaryValue);
   print_helper::PrintNumericTrait(os, indent, "LowerBinaryValue", m_LowerBinaryValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

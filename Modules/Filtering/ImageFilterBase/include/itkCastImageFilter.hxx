@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage, typename TOutputImage>
@@ -175,6 +176,7 @@ CastImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateDataDispatche
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

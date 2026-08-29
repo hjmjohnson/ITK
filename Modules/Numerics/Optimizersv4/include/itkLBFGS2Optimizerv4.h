@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /*** \class LBFGS2Optimizerv4Enums
  * \brief Scoped Enum classes for LBFGS2Optimizerv4Template class
  * \ingroup ITKOptimizersv4
@@ -553,6 +554,7 @@ private:
 /** This helps to meet backward compatibility */
 using LBFGS2Optimizerv4 = LBFGS2Optimizerv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

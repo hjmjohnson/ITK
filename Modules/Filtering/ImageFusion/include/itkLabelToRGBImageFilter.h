@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelToRGBImageFilter
  * \brief Apply a colormap to a label image
@@ -123,6 +124,7 @@ private:
   OutputPixelType m_BackgroundColor{};
   LabelPixelType  m_BackgroundValue{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

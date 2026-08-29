@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class KLMSegmentationRegion
  * \brief Base class for KLMSegmentationRegion object
@@ -245,6 +246,7 @@ private:
   RegionBorderVectorType  m_RegionBorderVector{};
   MeanRegionIntensityType m_MeanRegionIntensity{};
 }; // class SegmentationRegion
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

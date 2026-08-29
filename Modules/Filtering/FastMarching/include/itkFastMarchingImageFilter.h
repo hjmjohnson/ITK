@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FastMarchingImageFilterEnums
  * \brief Contains all enum classes used by the FastMarchingImageFilter class.
  * \ingroup ITKFastMarching
@@ -462,6 +463,7 @@ private:
 
   double m_NormalizationFactor{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

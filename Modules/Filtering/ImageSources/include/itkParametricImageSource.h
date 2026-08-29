@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ParametricImageSource
@@ -91,6 +92,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

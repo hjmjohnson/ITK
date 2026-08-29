@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GDCMImageIOEnums
  * \ingroup ITKIOGDCM
  */
@@ -302,6 +303,7 @@ private:
   InternalHeader * m_DICOMHeader{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkGDCMImageIO_h

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelSetErodeImageFilter
  * \brief Class for binary morphological erosion of label images.
@@ -91,6 +92,7 @@ protected:
 private:
   using DistanceImageType = typename Superclass::DistanceImageType;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NotImageFilter
  * \brief Implements the NOT logical operator pixel-wise on an image.
  *
@@ -129,6 +130,7 @@ protected:
   }
   ~NotImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

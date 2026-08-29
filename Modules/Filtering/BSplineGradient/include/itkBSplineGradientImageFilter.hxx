@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputValueType, typename TCoordRep, typename TCoefficientType>
 BSplineGradientImageFilter<TInputImage, TOutputValueType, TCoordRep, TCoefficientType>::BSplineGradientImageFilter() =
@@ -100,6 +101,7 @@ BSplineGradientImageFilter<TInputImage, TOutputValueType, TCoordRep, TCoefficien
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

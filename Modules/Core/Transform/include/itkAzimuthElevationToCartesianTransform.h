@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AzimuthElevationToCartesianTransform
  *
  * \brief Transforms from an azimuth, elevation, radius coordinate system to
@@ -252,6 +253,7 @@ private:
   double m_FirstSampleDistance{};
   bool   m_ForwardAzimuthElevationToPhysical{};
 }; // class AzimuthElevationToCartesianTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

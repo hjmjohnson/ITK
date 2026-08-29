@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorCurvatureNDAnisotropicDiffusionFunction
  *
  * This class is a simple extension of the
@@ -114,6 +115,7 @@ private:
   SizeValueType m_Center{};
   SizeValueType m_Stride[ImageDimension]{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

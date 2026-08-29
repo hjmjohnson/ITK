@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class BSplineExponentialDiffeomorphicTransform
  * \brief Exponential transform using B-splines as the smoothing kernel.
@@ -179,6 +180,7 @@ private:
   SplineOrderType m_SplineOrder{ 3 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

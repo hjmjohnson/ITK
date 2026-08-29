@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BinaryMedianImageFilter<TInputImage, TOutputImage>::BinaryMedianImageFilter()
   : m_ForegroundValue(NumericTraits<InputPixelType>::max())
@@ -159,6 +160,7 @@ BinaryMedianImageFilter<TInputImage, TOutput>::PrintSelf(std::ostream & os, Inde
   os << indent << "Foreground value : " << m_ForegroundValue << std::endl;
   os << indent << "Background value : " << m_BackgroundValue << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

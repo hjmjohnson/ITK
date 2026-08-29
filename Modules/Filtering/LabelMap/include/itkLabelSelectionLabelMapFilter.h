@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelSelectionLabelMapFilter
  * \brief remove the objects according to the value of their attribute
@@ -131,6 +132,7 @@ protected:
   ~LabelSelectionLabelMapFilter() override = default;
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

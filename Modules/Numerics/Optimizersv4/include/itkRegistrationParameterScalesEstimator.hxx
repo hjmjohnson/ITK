@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TMetric>
 RegistrationParameterScalesEstimator<TMetric>::RegistrationParameterScalesEstimator()
@@ -632,6 +633,7 @@ RegistrationParameterScalesEstimator<TMetric>::PrintSelf(std::ostream & os, Inde
   os << indent << "SamplingStrategy: " << m_SamplingStrategy << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkRegistrationParameterScalesEstimator_hxx */

@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 FFTWFFTImageFilterInitFactory::FFTWFFTImageFilterInitFactory() { FFTWFFTImageFilterInitFactory::RegisterFactories(); }
 
 FFTWFFTImageFilterInitFactory::~FFTWFFTImageFilterInitFactory() = default;
@@ -62,6 +63,7 @@ FFTWFFTImageFilterInitFactoryRegister__Private()
   FFTWFFTImageFilterInitFactory::RegisterFactories();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // defined(ITK_USE_FFTWF) || defined(ITK_USE_FFTWD)

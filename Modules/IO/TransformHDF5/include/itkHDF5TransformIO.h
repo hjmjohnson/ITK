@@ -37,6 +37,7 @@ class PredType;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 /** \class HDF5CommonPathNames
@@ -170,6 +171,7 @@ GetTransformName(int);
 /** This helps to meet backward compatibility */
 using HDF5TransformIO = HDF5TransformIOTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // Note: Explicit instantiation is done in itkHDF5TransformIO.cxx
@@ -195,6 +197,7 @@ using HDF5TransformIO = HDF5TransformIOTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
 
@@ -203,6 +206,7 @@ extern template class ITKIOTransformHDF5_EXPORT_EXPLICIT HDF5TransformIOTemplate
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformHDF5_EXPORT_EXPLICIT
 #endif

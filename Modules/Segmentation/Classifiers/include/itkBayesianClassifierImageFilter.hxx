@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputVectorImage,
           typename TLabelsType,
@@ -369,6 +370,7 @@ BayesianClassifierImageFilter<TInputVectorImage, TLabelsType, TPosteriorsPrecisi
 
   os << indent << "NumberOfSmoothingIterations: " << m_NumberOfSmoothingIterations << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

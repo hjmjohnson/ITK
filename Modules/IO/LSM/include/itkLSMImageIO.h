@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LSMImageIO
  *
@@ -104,6 +105,7 @@ private:
   void
   FillZeissStruct(char * cz);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkLSMImageIO_h

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorCurvatureAnisotropicDiffusionImageFilter
  *
  * This filter performs anisotropic diffusion on a vector itk::Image using the
@@ -113,6 +114,7 @@ protected:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

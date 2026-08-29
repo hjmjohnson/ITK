@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 QuadEdge::QuadEdge()
   : m_Onext(this)
@@ -467,4 +468,5 @@ QuadEdge::GetOrder() const
   }
   return 0;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

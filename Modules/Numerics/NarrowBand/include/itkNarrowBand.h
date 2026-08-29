@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * A data structure used with NarrowBand to store a list of indices
  * (m_Index) that define the band, and an accompanying list of update values
@@ -203,6 +204,7 @@ protected:
 private:
   NodeContainerType m_NodeContainer{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

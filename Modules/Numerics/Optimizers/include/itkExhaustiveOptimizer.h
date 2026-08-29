@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ExhaustiveOptimizer
  * \brief Optimizer that fully samples a grid on the parametric space.
  *
@@ -175,6 +176,7 @@ protected:
 private:
   std::ostringstream m_StopConditionDescription{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

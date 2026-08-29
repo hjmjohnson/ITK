@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryMorphologyImageFilter
  * \brief Base class for fast binary dilation and erosion
@@ -239,6 +240,7 @@ private:
    * to the CC */
   std::vector<OffsetType> m_KernelCCVector{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

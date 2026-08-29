@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class NoiseBaseImageFilter
@@ -84,6 +85,7 @@ protected:
 private:
   uint32_t m_Seed{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 BinaryFillholeImageFilter<TInputImage>::BinaryFillholeImageFilter()
@@ -133,5 +134,6 @@ BinaryFillholeImageFilter<TInputImage>::PrintSelf(std::ostream & os, Indent inde
   itkPrintSelfBooleanMacro(FullyConnected);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 CenteredEuler3DTransform<TParametersValueType>::CenteredEuler3DTransform()
@@ -205,6 +206,7 @@ CenteredEuler3DTransform<TParametersValueType>::PrintSelf(std::ostream & os, Ind
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

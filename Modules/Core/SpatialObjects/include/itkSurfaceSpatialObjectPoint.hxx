@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TPointDimension>
 SurfaceSpatialObjectPoint<TPointDimension>::SurfaceSpatialObjectPoint()
@@ -76,6 +77,7 @@ SurfaceSpatialObjectPoint<TPointDimension>::PrintSelf(std::ostream & os, Indent 
   os << indent << "NormalInObjectSpace: " << m_NormalInObjectSpace << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

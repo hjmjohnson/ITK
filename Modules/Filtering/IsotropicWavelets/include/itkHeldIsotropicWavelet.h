@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HeldIsotropicWavelet
  * \brief Wavelet based on paper Steerable Wavelet Frames Based on the Held
  * Transform (Held et al 2010).
@@ -89,6 +90,7 @@ private:
   /** The order of the polynom. */
   unsigned int m_PolynomialOrder{ 5 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUContextManager
  *
  * \brief Singleton class to store the GPU context.
@@ -71,6 +72,7 @@ private:
 
   static GPUContextManager * m_Instance;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

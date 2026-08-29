@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MultiResolutionPyramidImageFilter
  * \brief Framework for creating images in a multi-resolution
  * pyramid.
@@ -233,6 +234,7 @@ protected:
 
   bool m_UseShrinkImageFilter{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 GradientRecursiveGaussianImageFilter<TInputImage, TOutputImage>::GradientRecursiveGaussianImageFilter()
@@ -317,6 +318,7 @@ GradientRecursiveGaussianImageFilter<TInputImage, TOutputImage>::PrintSelf(std::
   os << indent << "Sigma: " << m_Sigma << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

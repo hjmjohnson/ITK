@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PCAShapeSignedDistanceFunction
  * \brief Compute the signed distance from a N-dimensional PCA Shape.
@@ -209,6 +210,7 @@ private:
   ParametersType m_WeightOfPrincipalComponents{};
   ParametersType m_TransformParameters{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

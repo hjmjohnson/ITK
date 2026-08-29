@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MaskedFFTNormalizedCorrelationImageFilter
  * \brief Calculate masked normalized cross correlation using FFTs.
@@ -342,6 +343,7 @@ private:
   /** The total accumulated progress */
   float m_AccumulatedProgress{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

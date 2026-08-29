@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FlipImageFilter
  * \brief Flips an image across user specified axes.
  *
@@ -141,6 +142,7 @@ private:
   FlipAxesArrayType m_FlipAxes{};
   bool              m_FlipAboutOrigin{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

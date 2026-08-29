@@ -26,7 +26,10 @@
 #  include "vnl/algo/vnl_matrix_inverse.h" // transitional transitive include; dropped on ITK legacy removal
 #endif
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TVector>
 MahalanobisDistanceMembershipFunction<TVector>::MahalanobisDistanceMembershipFunction()
@@ -184,6 +187,8 @@ MahalanobisDistanceMembershipFunction<TVector>::InternalClone() const
   return loPtr;
 }
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BinaryDilateParabolicImageFilter<TInputImage, TOutputImage>::BinaryDilateParabolicImageFilter()
 {
@@ -151,5 +152,6 @@ BinaryDilateParabolicImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostr
     os << "Radius in voxels: " << this->GetRadius() << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

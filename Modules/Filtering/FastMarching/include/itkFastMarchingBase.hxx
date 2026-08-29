@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // -----------------------------------------------------------------------------
 template <typename TInput, typename TOutput>
 FastMarchingBase<TInput, TOutput>::FastMarchingBase()
@@ -204,6 +205,7 @@ FastMarchingBase<TInput, TOutput>::GenerateData()
 }
 // -----------------------------------------------------------------------------
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

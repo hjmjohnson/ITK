@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RegionGrowImageFilter
  * \brief Base class for RegionGrowImageFilter object
@@ -143,6 +144,7 @@ private:
 
   GridSizeType m_GridSize{};
 }; // class RegionGrowImageFilter
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

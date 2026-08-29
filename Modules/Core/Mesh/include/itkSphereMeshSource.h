@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SphereMeshSource
  * \brief
  *
@@ -109,6 +110,7 @@ protected:
   double m_Squareness1{};
   double m_Squareness2{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkSphereMeshSource.hxx"

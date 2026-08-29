@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // This internal proxy class provides a pointer-like interface to a gifti_image*, by supporting
 // conversions between proxy and gifti_image pointer and arrow syntax (e.g., m_GiftiImage->data).
 class GiftiMeshIO::GiftiImageProxy
@@ -1799,4 +1800,5 @@ GiftiMeshIO::GetNumberOfPixelComponentsFromGifti(int datatype)
 
   return numComponents;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

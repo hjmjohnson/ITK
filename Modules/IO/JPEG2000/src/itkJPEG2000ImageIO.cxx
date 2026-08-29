@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class JPEG2000ImageIOInternal
 {
 public:
@@ -1097,4 +1098,5 @@ operator<<(std::ostream & out, const JPEG2000ImageIOInternalEnums::DFMFormat val
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType>
 PipelineMonitorImageFilter<TImageType>::PipelineMonitorImageFilter()
@@ -333,6 +334,7 @@ PipelineMonitorImageFilter<TImageType>::PrintSelf(std::ostream & os, Indent inde
   os << indent << "UpdatedOutputLargestPossibleRegion: " << m_UpdatedOutputLargestPossibleRegion << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif //  itkPipelineMonitorImageFilter_hxx

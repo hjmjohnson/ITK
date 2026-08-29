@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TParentImageFilter>
 GPUDenseFiniteDifferenceImageFilter<TInputImage, TOutputImage, TParentImageFilter>::
   GPUDenseFiniteDifferenceImageFilter()
@@ -181,6 +182,7 @@ GPUDenseFiniteDifferenceImageFilter<TInputImage, TOutputImage, TParentImageFilte
   GPUSuperclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

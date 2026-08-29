@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFeatureImageType>
 void
 LaplacianSegmentationLevelSetFunction<TImageType, TFeatureImageType>::CalculateSpeedImage()
@@ -45,6 +46,7 @@ LaplacianSegmentationLevelSetFunction<TImageType, TFeatureImageType>::CalculateS
   // unfortunately functions are not filters so we can't graft back
   this->GetSpeedImage()->Graft(filter->GetOutput());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

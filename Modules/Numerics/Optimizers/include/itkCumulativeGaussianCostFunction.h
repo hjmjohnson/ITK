@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CumulativeGaussianCostFunction
  * \brief Cost function for the Cumulative Gaussian Optimizer.
  *
@@ -131,6 +132,7 @@ private:
   mutable MeasureType    m_MeasurePointer{};
   mutable ParametersType m_Parameters{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

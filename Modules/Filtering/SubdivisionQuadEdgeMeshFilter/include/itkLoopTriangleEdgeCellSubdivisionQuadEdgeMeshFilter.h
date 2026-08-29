@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LoopTriangleEdgeCellSubdivisionQuadEdgeMeshFilter
  *
@@ -94,6 +95,7 @@ protected:
   virtual void
   AverageOriginOfEdge(InputQEType * edge, const InputPointsContainer * points);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

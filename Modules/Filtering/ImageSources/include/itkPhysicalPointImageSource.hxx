@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 void
 PhysicalPointImageSource<TOutputImage>::GenerateOutputInformation()
@@ -68,6 +69,7 @@ PhysicalPointImageSource<TOutputImage>::DynamicThreadedGenerateData(const Region
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

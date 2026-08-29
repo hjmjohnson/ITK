@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class IsotropicFrequencyFunction
  * Abstract-Interface class for \sa FrequencyFunction that are isotropic,
  * so Evaluate(frequency_point) only depends on the magnitude of the vector/point.
@@ -96,6 +97,7 @@ protected:
     Superclass::PrintSelf(os, indent);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

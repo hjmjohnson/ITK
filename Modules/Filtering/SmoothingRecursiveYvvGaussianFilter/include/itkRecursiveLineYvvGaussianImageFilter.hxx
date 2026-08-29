@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 RecursiveLineYvvGaussianImageFilter<TInputImage, TOutputImage>::RecursiveLineYvvGaussianImageFilter()
 {
@@ -436,6 +437,7 @@ RecursiveLineYvvGaussianImageFilter<TInputImage, TOutputImage>::PrintSelf(std::o
 
   os << indent << "Direction: " << m_Direction << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

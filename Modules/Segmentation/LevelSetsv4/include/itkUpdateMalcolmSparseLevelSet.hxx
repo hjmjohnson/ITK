@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension, typename TEquationContainer>
 UpdateMalcolmSparseLevelSet<VDimension, TEquationContainer>::UpdateMalcolmSparseLevelSet()
@@ -419,5 +420,6 @@ UpdateMalcolmSparseLevelSet<VDimension, TEquationContainer>::CompactLayersToSing
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkUpdateMalcolmSparseLevelSet_hxx

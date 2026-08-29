@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegularExpressionSeriesFileNames
  * \brief Generate an ordered sequence of filenames that match a
  * regular expression.
@@ -131,6 +132,7 @@ private:
 
   std::vector<std::string> m_FileNames{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkRegularExpressionSeriesFileNames_h

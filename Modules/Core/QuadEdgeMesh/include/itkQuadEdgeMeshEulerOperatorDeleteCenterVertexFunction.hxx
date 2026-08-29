@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh, typename TQEType>
 auto
 QuadEdgeMeshEulerOperatorDeleteCenterVertexFunction<TMesh, TQEType>::Evaluate(QEType * g) -> OutputType
@@ -112,6 +113,7 @@ QuadEdgeMeshEulerOperatorDeleteCenterVertexFunction<TMesh, TQEType>::Evaluate(QE
   return h;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

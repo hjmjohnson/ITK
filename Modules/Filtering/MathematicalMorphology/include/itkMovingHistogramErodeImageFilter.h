@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MovingHistogramErodeImageFilter
  * \brief Grayscale erosion of an image.
@@ -86,6 +87,7 @@ protected:
 
   ~MovingHistogramErodeImageFilter() override = default;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

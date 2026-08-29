@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TFeatureImage>
 StatisticsLabelMapFilter<TImage, TFeatureImage>::StatisticsLabelMapFilter()
 {
@@ -322,5 +323,6 @@ StatisticsLabelMapFilter<TImage, TFeatureImage>::PrintSelf(std::ostream & os, In
   os << indent << "ComputeHistogram: " << m_ComputeHistogram << std::endl;
   os << indent << "NumberOfBins: " << m_NumberOfBins << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastMarchingNumberOfElementsStoppingCriterion
  * \brief Stopping Criterion is verified when Current Number of Elements is equal
@@ -100,5 +101,6 @@ protected:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkFastMarchingNumberOfElementsStoppingCriterion_h

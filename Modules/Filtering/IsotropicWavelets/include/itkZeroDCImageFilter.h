@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ZeroDCImageFilter
  * \brief Set the DC component of the image to Zero.
  *
@@ -94,6 +95,7 @@ private:
   typename StatisticsFilterType::Pointer m_StatisticsFilter;
   typename SubtractFilterType::Pointer   m_SubtractFilter;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

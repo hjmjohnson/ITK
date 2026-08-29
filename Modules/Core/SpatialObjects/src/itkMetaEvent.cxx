@@ -19,6 +19,8 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MetaEvent::MetaEvent() = default;
 MetaEvent::~MetaEvent() = default;
+ITK_ABI_NAMESPACE_END
 } // namespace itk

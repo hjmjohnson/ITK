@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage, typename TOutputImage, typename TOperatorValueType>
 void
 MaskNeighborhoodOperatorImageFilter<TInputImage, TMaskImage, TOutputImage, TOperatorValueType>::SetMaskImage(
@@ -163,6 +164,7 @@ MaskNeighborhoodOperatorImageFilter<TInputImage, TMaskImage, TOutputImage, TOper
   print_helper::PrintNumericTrait(os, indent, "Default value ", m_DefaultValue);
   os << indent << "UseDefaultValue : " << m_UseDefaultValue << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

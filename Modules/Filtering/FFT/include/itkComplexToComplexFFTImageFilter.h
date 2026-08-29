@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ComplexToComplexFFTImageFilterEnums
  * \brief Contains enum classes used by ComplexToComplexFFTImageFilter class
  * \ingroup ITKFFT
@@ -128,6 +129,7 @@ protected:
 private:
   TransformDirectionEnum m_TransformDirection{ TransformDirectionEnum::FORWARD };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

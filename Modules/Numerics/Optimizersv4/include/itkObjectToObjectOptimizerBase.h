@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ObjectToObjectOptimizerBaseTemplateEnums
  *\brief This class contains all the enum classes used by ObjectToObjectOptimizerBaseTemplate class.
  *\ingroup ITKOptimizersv4
@@ -328,6 +329,7 @@ protected:
 /** This helps to meet backward compatibility */
 using ObjectToObjectOptimizerBase = ObjectToObjectOptimizerBaseTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif
@@ -351,6 +353,7 @@ using ObjectToObjectOptimizerBase = ObjectToObjectOptimizerBaseTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -363,6 +366,7 @@ extern template class ITKOptimizersv4_EXPORT_EXPLICIT ObjectToObjectOptimizerBas
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKOptimizersv4_EXPORT_EXPLICIT
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 StatisticsImageFilter<TInputImage>::StatisticsImageFilter()
 {
@@ -149,5 +150,6 @@ StatisticsImageFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Variance: " << this->GetVariance() << std::endl;
   os << indent << "SumOfSquares: " << this->GetSumOfSquares() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

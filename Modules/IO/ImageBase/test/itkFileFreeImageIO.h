@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FileFreeImageIO
  * \brief ImageIO object for reading images from memory
  *
@@ -89,5 +90,6 @@ private:
   SplitString(const std::string & text, const std::string & separators, std::vector<std::string> & words);
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkFileFreeImageIO_h

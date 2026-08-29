@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteCurvatureTensorQuadEdgeMeshFilter
  *
@@ -59,6 +60,7 @@ protected:
   GenerateData() override
   {}
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

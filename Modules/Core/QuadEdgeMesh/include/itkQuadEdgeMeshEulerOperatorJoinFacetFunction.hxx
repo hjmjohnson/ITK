@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh, typename TQEType>
 auto
 QuadEdgeMeshEulerOperatorJoinFacetFunction<TMesh, TQEType>::Evaluate(QEType * e) -> OutputType
@@ -78,6 +79,7 @@ QuadEdgeMeshEulerOperatorJoinFacetFunction<TMesh, TQEType>::Evaluate(QEType * e)
   return return_e;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

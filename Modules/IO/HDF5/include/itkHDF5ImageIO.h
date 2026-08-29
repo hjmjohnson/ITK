@@ -44,6 +44,7 @@ class DataSet;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HDF5ImageIO
  *
@@ -218,6 +219,7 @@ private:
   std::unique_ptr<H5::DataSet> m_VoxelDataSet;
   bool                         m_ImageInformationWritten{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkHDF5ImageIO_h

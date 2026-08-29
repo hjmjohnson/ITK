@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 NMinimaMaximaImageCalculator<TInputImage>::NMinimaMaximaImageCalculator()
@@ -210,6 +211,7 @@ NMinimaMaximaImageCalculator<TInputImage>::PrintSelf(std::ostream & os, Indent i
   os << indent << "Region set by User: " << m_RegionSetByUser << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

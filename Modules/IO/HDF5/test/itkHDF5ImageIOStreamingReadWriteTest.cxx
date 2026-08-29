@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DemoImageSource
  *
@@ -85,6 +86,7 @@ private:
   typename TOutputImage::PixelType m_Value;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 template <typename TPixel>

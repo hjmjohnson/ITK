@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TKernel>
 void
 BinaryClosingByReconstructionImageFilter<TInputImage, TKernel>::GenerateInputRequestedRegion()
@@ -106,5 +107,6 @@ BinaryClosingByReconstructionImageFilter<TInputImage, TKernel>::PrintSelf(std::o
   itkPrintSelfBooleanMacro(FullyConnected);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

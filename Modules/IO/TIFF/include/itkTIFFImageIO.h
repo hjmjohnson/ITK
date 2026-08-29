@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // BTX
 class TIFFReaderInternal;
 // ETX
@@ -318,6 +319,7 @@ private:
   uint64_t     m_TotalColors{ 0 };
   unsigned int m_ImageFormat{ TIFFImageIO::NOFORMAT };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkTIFFImageIO_h

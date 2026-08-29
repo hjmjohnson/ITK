@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputType>
 VectorThresholdSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::
   VectorThresholdSegmentationLevelSetImageFilter()
@@ -38,6 +39,7 @@ VectorThresholdSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutp
   Superclass::PrintSelf(os, indent);
   os << indent << "ThresholdFunction: " << m_ThresholdFunction;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage,
           typename TMovingImage,
@@ -756,6 +757,7 @@ MattesMutualInformationImageToImageMetricv4<TFixedImage,
   m_CurrentFillSize = 0; // Reset fill size back to zero.
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

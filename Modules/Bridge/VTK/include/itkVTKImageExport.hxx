@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * The constructor records the name of the pixel's scalar type for the
  * image to be sent to vtkImageImport's ScalarTypeCallback.
@@ -421,6 +422,7 @@ VTKImageExport<TInputImage>::BufferPointerCallback()
 
   return input->GetBufferPointer();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

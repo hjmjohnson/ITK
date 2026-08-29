@@ -28,6 +28,7 @@ class DicomImage;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DCMTKImageIOEnums
  * \brief Enums used by the DCMTKImageIO class
  * \ingroup IOFilters
@@ -192,6 +193,7 @@ private:
 extern ITKIODCMTK_EXPORT std::ostream &
                          operator<<(std::ostream & out, DCMTKImageIO::LogLevelEnum value);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkDCMTKImageIO_h

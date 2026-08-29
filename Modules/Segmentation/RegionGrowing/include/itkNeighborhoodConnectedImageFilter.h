@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NeighborhoodConnectedImageFilter
  * \brief Label pixels that are connected to a seed and lie within a neighborhood
@@ -143,6 +144,7 @@ protected:
   void
   GenerateData() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

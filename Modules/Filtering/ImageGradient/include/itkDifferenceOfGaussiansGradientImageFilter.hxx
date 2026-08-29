@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TDataType>
 DifferenceOfGaussiansGradientImageFilter<TInputImage, TDataType>::DifferenceOfGaussiansGradientImageFilter()
   : m_Width(2)
@@ -137,6 +138,7 @@ DifferenceOfGaussiansGradientImageFilter<TInputImage, TDataType>::PrintSelf(std:
 
   os << indent << "Width is " << m_Width << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TLevelSetContainer>
 LevelSetEquationChanAndVeseInternalTerm<TInput, TLevelSetContainer>::LevelSetEquationChanAndVeseInternalTerm()
@@ -180,5 +181,6 @@ LevelSetEquationChanAndVeseInternalTerm<TInput, TLevelSetContainer>::Accumulate(
   this->m_TotalH += static_cast<LevelSetOutputRealType>(heavisideValue);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

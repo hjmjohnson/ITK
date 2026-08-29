@@ -21,7 +21,10 @@
 #include "itkSubsample.h"
 #include "itkProcessObject.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class SampleToSubsampleFilter
  * \brief Base class of filters intended to select subsamples from samples.
@@ -97,7 +100,9 @@ protected:
   MakeOutput(DataObjectPointerArraySizeType idx) override;
   /** @ITKEndGrouping */
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkSampleToSubsampleFilter.hxx"

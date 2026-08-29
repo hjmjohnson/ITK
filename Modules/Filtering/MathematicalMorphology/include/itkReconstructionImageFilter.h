@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ReconstructionImageFilter
  * \brief Performs a grayscale geodesic reconstruction -- for
  * performance comparison with GrayscaleGeodesicDilateImageFilter.
@@ -175,6 +176,7 @@ private:
   using CNInputIterator = ConstShapedNeighborhoodIterator<InputImageType>;
   using NOutputIterator = ShapedNeighborhoodIterator<OutputImageType>;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

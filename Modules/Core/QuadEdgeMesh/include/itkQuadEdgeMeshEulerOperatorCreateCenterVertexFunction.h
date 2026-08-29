@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshEulerOperatorCreateCenterVertexFunction
  * \brief Create a vertex at the barycenter of the given face.
@@ -81,6 +82,7 @@ protected:
 private:
   PointIdentifier m_NewPointID{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkQuadEdgeMeshEulerOperatorCreateCenterVertexFunction.hxx"

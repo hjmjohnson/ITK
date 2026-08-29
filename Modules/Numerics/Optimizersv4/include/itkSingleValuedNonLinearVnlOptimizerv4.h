@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SingleValuedNonLinearVnlOptimizerv4
  * \brief This is a base for the ITKv4 Optimization methods using
@@ -134,6 +135,7 @@ private:
   mutable ParametersType m_CachedCurrentPosition{};
   mutable DerivativeType m_CachedDerivative{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

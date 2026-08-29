@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 void
 VectorAnisotropicDiffusionFunction<TImage>::CalculateAverageGradientMagnitudeSquared(TImage * ip)
@@ -114,6 +115,7 @@ VectorAnisotropicDiffusionFunction<TImage>::CalculateAverageGradientMagnitudeSqu
 
   this->SetAverageGradientMagnitudeSquared(accumulator / counter);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

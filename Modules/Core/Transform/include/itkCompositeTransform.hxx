@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 auto
@@ -995,6 +996,7 @@ CompositeTransform<TParametersValueType, VDimension>::InternalClone() const
   return loPtr;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

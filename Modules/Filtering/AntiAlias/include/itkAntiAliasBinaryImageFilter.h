@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AntiAliasBinaryImageFilter
  * \brief A method for estimation of a surface from a binary volume.
@@ -178,6 +179,7 @@ private:
 
   typename CurvatureFunctionType::Pointer m_CurvatureFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

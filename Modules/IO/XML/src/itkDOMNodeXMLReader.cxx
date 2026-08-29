@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * The following three functions are called by the expat XML parser during the parsing process,
@@ -188,4 +189,5 @@ DOMNodeXMLReader::CharacterDataHandler(const char * text, int len)
   this->m_Context->AddTextChildAtEnd(s);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

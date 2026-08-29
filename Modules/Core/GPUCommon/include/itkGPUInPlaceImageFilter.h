@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUInPlaceImageFilter
  * \brief Base class for GPU filters that take an image as input and overwrite that image as the output
  *
@@ -104,6 +105,7 @@ protected:
   ReleaseInputs() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

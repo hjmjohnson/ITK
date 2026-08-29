@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /////////////////////////////////////////////////////////////////////////////
 // helper functions for string manipulations
@@ -283,4 +284,5 @@ StringTools::ContainSub(const std::string & s1, const std::string & s2, bool ign
   return false;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputPixelType>
 LaplacianSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelType>::
   LaplacianSegmentationLevelSetImageFilter()
@@ -36,6 +37,7 @@ LaplacianSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixe
 {
   //   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

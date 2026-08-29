@@ -21,6 +21,7 @@
 #include <string>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ViewImage
@@ -53,6 +54,7 @@ public:
        size_t              windowWidth = 600,
        size_t              windowHeight = 600);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

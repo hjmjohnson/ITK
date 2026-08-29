@@ -27,6 +27,7 @@
 #include <itkWaveletUtilities.h>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TWaveletFilterBank>
 WaveletFrequencyInverseUndecimated<TInputImage, TOutputImage, TWaveletFilterBank>::WaveletFrequencyInverseUndecimated()
 {
@@ -372,5 +373,6 @@ WaveletFrequencyInverseUndecimated<TInputImage, TOutputImage, TWaveletFilterBank
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

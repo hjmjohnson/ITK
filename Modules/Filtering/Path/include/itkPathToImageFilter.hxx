@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPath, typename TOutputImage>
 PathToImageFilter<TInputPath, TOutputImage>::PathToImageFilter()
@@ -241,6 +242,7 @@ PathToImageFilter<TInputPath, TOutputImage>::PrintSelf(std::ostream & os, Indent
   print_helper::PrintNumericTrait(os, indent, "PathValue ", m_PathValue);
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue ", m_BackgroundValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

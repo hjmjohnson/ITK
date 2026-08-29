@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageMomentsCalculator
  * \brief Compute moments of an n-dimensional image.
  *
@@ -229,6 +230,7 @@ private:
   ImageConstPointer         m_Image{};
   SpatialObjectConstPointer m_SpatialObjectMask{};
 }; // class ImageMomentsCalculator
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

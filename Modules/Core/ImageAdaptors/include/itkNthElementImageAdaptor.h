@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NthElementImageAdaptor
  * \brief Presents an image as being composed of the N-th element of its pixels
@@ -84,6 +85,7 @@ protected:
   NthElementImageAdaptor() = default;
   ~NthElementImageAdaptor() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

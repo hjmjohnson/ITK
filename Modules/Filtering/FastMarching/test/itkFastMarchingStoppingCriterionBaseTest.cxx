@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput>
 class FastMarchingStoppingCriterionBaseHelperTest : public FastMarchingStoppingCriterionBase<TInput, TOutput>
 {
@@ -64,6 +65,7 @@ protected:
   Reset() override
   {}
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 int

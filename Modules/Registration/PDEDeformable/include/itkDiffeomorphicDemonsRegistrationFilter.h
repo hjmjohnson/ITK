@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DiffeomorphicDemonsRegistrationFilter
  * \brief Deformably register two images using a diffeomorphic demons algorithm.
  *
@@ -213,6 +214,7 @@ private:
   AdderPointer              m_Adder{};
   bool                      m_UseFirstOrderExp{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastApproximateRankImageFilter
  * \brief A separable rank filter
@@ -116,6 +117,7 @@ protected:
 private:
   float m_Rank{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPointSet, typename TOutputPointSet>
 PointFeature<TInputPointSet, TOutputPointSet>::PointFeature()
@@ -303,6 +304,7 @@ PointFeature<TInputPointSet, TOutputPointSet>::GenerateData()
   return;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkPointFeature_hxx

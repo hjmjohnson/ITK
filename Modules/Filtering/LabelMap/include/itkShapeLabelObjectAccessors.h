@@ -30,7 +30,10 @@
  *
  */
 
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 template <typename TLabelObject>
 class NumberOfPixelsLabelObjectAccessor
@@ -270,6 +273,8 @@ public:
   }
 };
 
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

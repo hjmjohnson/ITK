@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshExtendedTraits
  *
@@ -149,6 +150,7 @@ public:
   /** Other useful types. */
   using VectorType = typename PointType::VectorType;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

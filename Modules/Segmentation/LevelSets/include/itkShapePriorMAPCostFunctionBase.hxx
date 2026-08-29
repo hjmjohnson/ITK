@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFeatureImage, typename TOutputPixel>
 ShapePriorMAPCostFunctionBase<TFeatureImage, TOutputPixel>::ShapePriorMAPCostFunctionBase()
@@ -68,6 +69,7 @@ ShapePriorMAPCostFunctionBase<TFeatureImage, TOutputPixel>::Initialize()
     itkExceptionStringMacro("FeatureImage is not present.");
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

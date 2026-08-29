@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension, unsigned int VSubDimensions>
 auto
@@ -337,6 +338,7 @@ MultiTransform<TParametersValueType, VDimension, VSubDimensions>::PrintSelf(std:
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

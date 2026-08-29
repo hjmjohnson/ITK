@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TParentImageFilter>
 void
@@ -91,6 +92,7 @@ GPUAnisotropicDiffusionImageFilter<TInputImage, TOutputImage, TParentImageFilter
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryReconstructionLabelMapFilter
  * \brief Mark the objects at least partially at the same position as the objects in a binary image
@@ -128,6 +129,7 @@ private:
 
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

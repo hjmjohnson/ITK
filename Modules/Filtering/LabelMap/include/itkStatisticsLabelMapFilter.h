@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class StatisticsLabelMapFilter
  * \brief The valuator class for the StatisticsLabelObject
@@ -158,6 +159,7 @@ private:
   unsigned int          m_NumberOfBins{ GetDefaultNumberOfBins() };
   bool                  m_ComputeHistogram{ true };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

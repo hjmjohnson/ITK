@@ -22,7 +22,10 @@
 
 #include <iostream>
 
-namespace itk::Statistics::MembershipFunctionBaseTest
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics::MembershipFunctionBaseTest
 {
 
 template <typename TMeasurementVector>
@@ -53,7 +56,9 @@ public:
   }
 };
 
-} // namespace itk::Statistics::MembershipFunctionBaseTest
+} // namespace Statistics::MembershipFunctionBaseTest
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 TEST(MembershipFunctionBase, ConvertedLegacyTest)

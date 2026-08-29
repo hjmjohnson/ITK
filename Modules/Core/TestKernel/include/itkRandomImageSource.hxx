@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 RandomImageSource<TOutputImage>::RandomImageSource()
 {
@@ -201,6 +202,7 @@ RandomImageSource<TOutputImage>::DynamicThreadedGenerateData(const OutputImageRe
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

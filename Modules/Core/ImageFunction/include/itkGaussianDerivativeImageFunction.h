@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GaussianDerivativeImageFunction
  * \brief Compute the Gaussian derivatives of an the image
@@ -197,6 +198,7 @@ private:
     GaussianDerivativeSpatialFunctionType::New()
   };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

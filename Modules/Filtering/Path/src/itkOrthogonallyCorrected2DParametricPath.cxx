@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 OrthogonallyCorrected2DParametricPath::OutputType
 OrthogonallyCorrected2DParametricPath::Evaluate(const InputType & inputValue) const
 {
@@ -93,4 +94,5 @@ OrthogonallyCorrected2DParametricPath::PrintSelf(std::ostream & os, Indent inden
   os << indent << "Original Path:  " << m_OriginalPath << std::endl;
   os << indent << "Correction Table:  " << m_OrthogonalCorrectionTable << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

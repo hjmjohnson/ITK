@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 GradientDescentOptimizerv4Template<TInternalComputationValueType>::GradientDescentOptimizerv4Template()
@@ -287,6 +288,7 @@ GradientDescentOptimizerv4Template<TInternalComputationValueType>::PrintSelf(std
   itkPrintSelfBooleanMacro(ReturnBestParametersAndValue);
   print_helper::PrintNumericTrait(os, indent, "PreviousGradient", this->m_PreviousGradient);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformFactory
  * \brief Create instances of Transforms
  * \ingroup ITKTransformFactory
@@ -59,6 +60,7 @@ public:
                          CreateObjectFunction<T>::New());
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VectorLinearInterpolateNearestNeighborExtrapolateImageFunction
  * \brief Linearly interpolate or NN extrapolate a vector image at
@@ -141,6 +142,7 @@ private:
   /** Number of neighbors used in the interpolation */
   static const unsigned int m_Neighbors;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

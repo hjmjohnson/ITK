@@ -117,6 +117,7 @@
 /** @ITKEndGrouping */
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdge
  * \brief Base class for the implementation of a quad-edge data structure as
@@ -452,6 +453,7 @@ private:
   Self * m_Onext{}; /**< Onext ring */
   Self * m_Rot{};   /**< Rot ring */
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

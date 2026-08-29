@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TKernel, typename TFunction1>
 VanHerkGilWermanErodeDilateImageFilter<TImage, TKernel, TFunction1>::VanHerkGilWermanErodeDilateImageFilter()
   : m_Boundary(InputImagePixelType{})
@@ -122,6 +123,7 @@ VanHerkGilWermanErodeDilateImageFilter<TImage, TKernel, TFunction1>::PrintSelf(s
   os << indent << "Boundary: " << m_Boundary << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

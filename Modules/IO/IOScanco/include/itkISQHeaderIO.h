@@ -26,6 +26,7 @@ struct RADEncodedHeaderBlock;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class ISQHeaderIO : public ScancoHeaderIO
 {
 public:
@@ -113,6 +114,7 @@ private:
   unsigned long m_HeaderSize;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkISQHeaderIO_h

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage>
 BoneMorphometryFeaturesFilter<TInputImage, TMaskImage>::BoneMorphometryFeaturesFilter()
   : m_Threshold(1)
@@ -212,6 +213,7 @@ BoneMorphometryFeaturesFilter<TInputImage, TMaskImage>::PrintSelf(std::ostream &
   os << indent << "m_NumYO: " << m_NumYO.load() << std::endl;
   os << indent << "m_NumZO: " << m_NumZO.load() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkBoneMorphometryFeaturesFilter_hxx

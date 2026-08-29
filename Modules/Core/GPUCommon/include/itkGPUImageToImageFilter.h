@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUImageToImageFilter
  *
  * \brief class to abstract the behaviour of the GPU filters.
@@ -108,6 +109,7 @@ private:
   bool m_GPUEnabled{ true };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

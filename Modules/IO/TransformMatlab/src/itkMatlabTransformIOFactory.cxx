@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 MatlabTransformIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -61,4 +62,5 @@ MatlabTransformIOFactoryRegister__Private()
 {
   ObjectFactoryBase::RegisterInternalFactoryOnce<MatlabTransformIOFactory>();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

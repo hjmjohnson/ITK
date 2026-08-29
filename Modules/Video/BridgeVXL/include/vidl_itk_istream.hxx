@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //
 // Constructor
@@ -391,6 +392,7 @@ vidl_itk_istream<TVideoStream>::seek_frame(unsigned int frameNumber)
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

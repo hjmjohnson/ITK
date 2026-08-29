@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RichardsonLucyDeconvolutionImageFilter
  * \brief Deconvolve an image using the Richardson-Lucy deconvolution
@@ -128,6 +129,7 @@ private:
   typename IFFTFilterType::Pointer               m_IFFTFilter2{};
   typename MultiplyFilterType::Pointer           m_MultiplyFilter{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

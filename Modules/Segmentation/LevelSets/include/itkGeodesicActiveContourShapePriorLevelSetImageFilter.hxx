@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputType>
 GeodesicActiveContourShapePriorLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::
   GeodesicActiveContourShapePriorLevelSetImageFilter()
@@ -63,6 +64,7 @@ GeodesicActiveContourShapePriorLevelSetImageFilter<TInputImage, TFeatureImage, T
   os << indent << "GeodesicActiveContourFunction: " << m_GeodesicActiveContourFunction.GetPointer() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

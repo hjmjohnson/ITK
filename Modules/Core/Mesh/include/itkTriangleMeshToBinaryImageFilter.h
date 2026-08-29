@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class Point1D
 {
 public:
@@ -260,6 +261,7 @@ private:
   static bool
   ComparePoints1D(Point1D a, Point1D b);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

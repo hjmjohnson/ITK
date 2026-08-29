@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension>
 auto
 PolyLineParametricPath<VDimension>::Evaluate(const InputType & input) const -> OutputType
@@ -178,6 +179,7 @@ PolyLineParametricPath<VDimension>::PrintSelf(std::ostream & os, Indent indent) 
   Superclass::PrintSelf(os, indent);
   os << indent << "Vertices:  " << m_VertexList << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

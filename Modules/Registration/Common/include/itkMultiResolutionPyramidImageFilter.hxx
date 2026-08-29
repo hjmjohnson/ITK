@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 MultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::MultiResolutionPyramidImageFilter()
@@ -515,6 +516,7 @@ MultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::GenerateInputReque
   // set the input requested region
   inputPtr->SetRequestedRegion(inputRequestedRegion);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

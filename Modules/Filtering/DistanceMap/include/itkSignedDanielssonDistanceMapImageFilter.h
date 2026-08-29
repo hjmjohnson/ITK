@@ -23,7 +23,10 @@
 
 // Simple functor to invert an image for Outside Danielsson distance map
 
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 template <typename InputPixelType>
 class ITK_TEMPLATE_EXPORT InvertIntensityFunctor{ public: InputPixelType operator()(InputPixelType input)
@@ -34,10 +37,13 @@ return NumericTraits<InputPixelType>::OneValue();
 } // namespace itk
 }
 ;
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SignedDanielssonDistanceMapImageFilter
  * \brief This filter computes the signed distance map of the input
@@ -223,6 +229,7 @@ private:
   bool m_InsideIsPositive{}; // ON is treated as inside pixels
 }; // end of SignedDanielssonDistanceMapImageFilter
    // class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

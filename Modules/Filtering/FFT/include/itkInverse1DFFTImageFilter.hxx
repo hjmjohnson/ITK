@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -98,6 +99,7 @@ Inverse1DFFTImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os,
   os << indent << "Direction: " << m_Direction << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkInverse1DFFTImageFilter_hxx

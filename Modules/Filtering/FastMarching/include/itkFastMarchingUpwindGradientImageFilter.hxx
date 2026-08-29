@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TLevelSet, typename TSpeedImage>
 FastMarchingUpwindGradientImageFilter<TLevelSet, TSpeedImage>::FastMarchingUpwindGradientImageFilter()
@@ -319,6 +320,7 @@ FastMarchingUpwindGradientImageFilter<TLevelSet, TSpeedImage>::ComputeGradient(
 
   gradientImage->SetPixel(index, gradientPixel);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

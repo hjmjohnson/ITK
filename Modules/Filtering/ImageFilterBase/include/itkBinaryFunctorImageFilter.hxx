@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage1, typename TInputImage2, typename TOutputImage, typename TFunction>
 BinaryFunctorImageFilter<TInputImage1, TInputImage2, TOutputImage, TFunction>::BinaryFunctorImageFilter()
@@ -245,6 +246,7 @@ BinaryFunctorImageFilter<TInputImage1, TInputImage2, TOutputImage, TFunction>::D
     itkGenericExceptionMacro("At most one of the inputs can be a constant.");
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

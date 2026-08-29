@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TScalar>
 class Rigid3DTransformSurrogate : public Rigid3DTransform<TScalar>
 {
@@ -51,6 +52,7 @@ private:
   ~Rigid3DTransformSurrogate() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 bool

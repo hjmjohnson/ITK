@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutput, typename TCoordinate>
 ImageFunction<TInputImage, TOutput, TCoordinate>::ImageFunction()
@@ -65,6 +66,7 @@ ImageFunction<TInputImage, TOutput, TCoordinate>::SetInputImage(const InputImage
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

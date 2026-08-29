@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 ButterworthFilterFreqImageSource<TOutputImage>::ButterworthFilterFreqImageSource()
@@ -86,6 +87,7 @@ ButterworthFilterFreqImageSource<TOutputImage>::DynamicThreadedGenerateData(
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

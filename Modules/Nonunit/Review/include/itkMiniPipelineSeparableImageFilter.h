@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MiniPipelineSeparableImageFilter
  * \brief A separable filter for filter which are using radius
@@ -109,6 +110,7 @@ protected:
   typename FilterType::Pointer m_Filters[ImageDimension]{};
   typename CastType::Pointer   m_Cast{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

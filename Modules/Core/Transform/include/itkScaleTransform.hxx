@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 ScaleTransform<TParametersValueType, VDimension>::ScaleTransform()
@@ -312,6 +313,7 @@ ScaleTransform<TParametersValueType, VDimension>::BackTransform(const OutputCova
   return result;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

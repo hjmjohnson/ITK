@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SurfaceSpatialObjectPoint
  * \brief Point used for a Surface definition
@@ -76,6 +77,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

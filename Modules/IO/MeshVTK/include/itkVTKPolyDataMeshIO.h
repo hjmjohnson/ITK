@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VTKPolyDataMeshIO
  * \brief This class defines how to read and write vtk legacy file format.
@@ -1202,6 +1203,7 @@ private:
 
   uint8_t m_ReadMeshVersionMajor{ 4 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkVTKPolyDataMeshIO_h

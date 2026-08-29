@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConstantImageSource
  * Image Source that generates an image with constant pixel value.
@@ -78,6 +79,7 @@ ConstantImageSource<TOutputImage>::GenerateData()
   out->FillBuffer(m_Value);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 /**

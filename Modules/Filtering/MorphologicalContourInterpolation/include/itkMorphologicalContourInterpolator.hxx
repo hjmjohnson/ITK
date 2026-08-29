@@ -41,6 +41,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 struct SegmentBetweenTwo
 {
@@ -1629,6 +1630,7 @@ MorphologicalContourInterpolator<TImage>::GenerateData()
     ++itO;
   }
 } // >::GenerateData
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMorphologicalContourInterpolator_hxx

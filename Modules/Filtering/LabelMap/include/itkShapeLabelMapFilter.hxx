@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TLabelImage>
 void
 ShapeLabelMapFilter<TImage, TLabelImage>::BeforeThreadedGenerateData()
@@ -908,5 +909,6 @@ ShapeLabelMapFilter<TImage, TLabelImage>::PrintSelf(std::ostream & os, Indent in
   os << indent << "ComputeOrientedBoundingBox: " << m_ComputeOrientedBoundingBox << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

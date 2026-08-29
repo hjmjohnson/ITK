@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class IdentityTransform
  * \brief Implementation of an Identity Transform.
  *
@@ -243,6 +244,7 @@ protected:
   IdentityTransform() = default;
   ~IdentityTransform() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

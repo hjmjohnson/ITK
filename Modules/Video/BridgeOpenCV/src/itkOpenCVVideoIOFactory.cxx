@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 OpenCVVideoIOFactory::OpenCVVideoIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ OpenCVVideoIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<OpenCVVideoIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

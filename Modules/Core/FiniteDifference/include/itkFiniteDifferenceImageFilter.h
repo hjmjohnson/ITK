@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FiniteDifferenceImageFilter
  *
@@ -375,6 +376,7 @@ private:
   /** The function that will be used in calculating updates for each pixel. */
   typename FiniteDifferenceFunctionType::Pointer m_DifferenceFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

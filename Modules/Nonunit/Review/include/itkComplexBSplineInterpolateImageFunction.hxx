@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType, typename TCoordinate, typename TCoefficientType>
 ComplexBSplineInterpolateImageFunction<TImageType, TCoordinate, TCoefficientType>::
@@ -87,6 +88,7 @@ ComplexBSplineInterpolateImageFunction<TImageType, TCoordinate, TCoefficientType
 
   return ReturnType(realPart, imagPart);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

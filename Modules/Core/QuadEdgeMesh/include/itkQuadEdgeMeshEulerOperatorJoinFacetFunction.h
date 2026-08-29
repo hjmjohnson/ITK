@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshEulerOperatorJoinFacetFunction
  * \brief Join the two facets which are on both sides of a given internal edge.
@@ -59,6 +60,7 @@ protected:
   QuadEdgeMeshEulerOperatorJoinFacetFunction() = default;
   ~QuadEdgeMeshEulerOperatorJoinFacetFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkQuadEdgeMeshEulerOperatorJoinFacetFunction.hxx"

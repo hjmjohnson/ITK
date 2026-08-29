@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FrequencyImageRegionConstIteratorWithIndex
  * \brief A multi-dimensional iterator templated over image type that walks
@@ -184,5 +185,6 @@ private:
   FrequencyType m_FrequencyOrigin;
   FrequencyType m_FrequencySpacing;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

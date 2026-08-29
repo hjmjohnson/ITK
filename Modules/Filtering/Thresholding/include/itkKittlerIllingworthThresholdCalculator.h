@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class KittlerIllingworthThresholdCalculator
@@ -91,6 +92,7 @@ private:
   C(InstanceIdentifier j);
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

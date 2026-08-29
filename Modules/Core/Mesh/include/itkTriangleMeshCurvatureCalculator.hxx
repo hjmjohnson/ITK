@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh>
 void
@@ -160,6 +161,7 @@ TriangleMeshCurvatureCalculator<TInputMesh>::ComputeGaussCurvature(const InputMe
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

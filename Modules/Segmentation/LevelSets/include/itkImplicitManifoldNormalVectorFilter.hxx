@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TSparseOutputImage>
 ImplicitManifoldNormalVectorFilter<TInputImage, TSparseOutputImage>::ImplicitManifoldNormalVectorFilter()
   : m_NormalFunction(nullptr)
@@ -231,6 +232,7 @@ ImplicitManifoldNormalVectorFilter<TInputImage, TSparseOutputImage>::PostProcess
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteGaussianDerivativeImageFilter
  * \brief Calculates image derivatives using discrete derivative gaussian kernels.
@@ -237,6 +238,7 @@ private:
   pipeline. The upstream pipeline will not be effected. */
   unsigned int m_InternalNumberOfStreamDivisions{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

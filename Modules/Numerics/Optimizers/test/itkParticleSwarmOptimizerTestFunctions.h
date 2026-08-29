@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParticleSwarmTestF1
  *
@@ -226,5 +227,6 @@ private:
   bool          m_PrintOptimizer{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkParticleSwarmOptimizerTestFunctions_h

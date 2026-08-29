@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 DirectFourierReconstructionImageToImageFilter<TInputImage,
@@ -379,6 +380,7 @@ DirectFourierReconstructionImageToImageFilter<TInputImage, TOutputImage>::Genera
     inputIt.NextSlice();
   } // while ( !inputIt.IsAtEnd() )
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DisplacementFieldJacobianDeterminantFilter
  *
  * \brief Computes a scalar image from a vector image (e.g., deformation field)
@@ -275,6 +276,7 @@ private:
 
   InternalMatrixType m_InputDirection{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

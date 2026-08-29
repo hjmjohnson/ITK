@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -101,6 +102,7 @@ ComplexToComplex1DFFTImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostr
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkComplexToComplex1DFFTImageFilter_hxx

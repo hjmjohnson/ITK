@@ -22,7 +22,10 @@
 #include "itkSimpleDataObjectDecorator.h"
 #include "itkInPlaceImageFilter.h"
 
-namespace itk::Testing
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Testing
 {
 /** \class HashImageFilterEnums
  * \brief Enum classes for HashImageFilter
@@ -154,7 +157,9 @@ private:
   HashFunctionEnum m_HashFunction{ HashFunctionEnum::MD5 };
 };
 
-} // namespace itk::Testing
+} // namespace Testing
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 #include "itkTestingHashImageFilter.hxx"

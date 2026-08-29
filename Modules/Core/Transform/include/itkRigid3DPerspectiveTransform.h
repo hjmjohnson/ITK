@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \brief Rigid3DTramsform of a vector space (e.g. space coordinates)
  *
  * This transform applies a rotation and translation to the 3D space
@@ -268,6 +269,7 @@ private:
   /** Center of rotation */
   InputPointType m_CenterOfRotation{};
 }; // class Rigid3DPerspectiveTransform:
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

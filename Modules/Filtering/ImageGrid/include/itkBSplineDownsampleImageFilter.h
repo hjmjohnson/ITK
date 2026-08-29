@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BSplineDownsampleImageFilter
  * \brief Down-samples an image by a factor of 2 using B-Spline filter interpolation.
@@ -138,6 +139,7 @@ protected:
   BSplineDownsampleImageFilter() = default;
   ~BSplineDownsampleImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

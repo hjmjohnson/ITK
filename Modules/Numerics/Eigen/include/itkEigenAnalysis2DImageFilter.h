@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EigenAnalysis2DImageFilter
  * \brief Computes pixel-wise the eigen values and eigen vectors
  *        of a 2D symmetrical matrix.
@@ -136,6 +137,7 @@ protected:
   void
   GenerateData() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class MetaConverterBase
@@ -103,6 +104,7 @@ private:
   unsigned int m_MetaIOVersion{ 0 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTATIATION

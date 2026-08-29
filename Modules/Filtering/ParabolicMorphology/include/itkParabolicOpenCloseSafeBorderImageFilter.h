@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, bool DoOpen, typename TOutputImage = TInputImage>
 class ITK_TEMPLATE_EXPORT ParabolicOpenCloseSafeBorderImageFilter : public ImageToImageFilter<TInputImage, TOutputImage>
 {
@@ -177,6 +178,7 @@ private:
   bool m_UseContactPoint;
   bool m_UseIntersection;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkParabolicOpenCloseSafeBorderImageFilter.hxx"

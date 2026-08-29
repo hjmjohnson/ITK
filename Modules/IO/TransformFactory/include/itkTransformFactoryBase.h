@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformFactoryBase
  * \brief Create instances of Transforms
  * \ingroup ITKTransformFactory
@@ -125,6 +126,7 @@ private:
 
   static TransformFactoryBase * m_Factory;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

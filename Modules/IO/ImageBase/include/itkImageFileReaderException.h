@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageFileReaderException
  *
  * \brief Base exception class for IO conflicts.
@@ -47,5 +48,6 @@ public:
   /** Has to have empty throw(). */
   ~ImageFileReaderException() noexcept override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkImageFileReaderException_h

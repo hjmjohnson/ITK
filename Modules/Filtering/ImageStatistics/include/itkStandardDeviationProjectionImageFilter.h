@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StandardDeviationProjectionImageFilter
  * \brief Mean projection
  *
@@ -138,6 +139,7 @@ protected:
   StandardDeviationProjectionImageFilter() = default;
   ~StandardDeviationProjectionImageFilter() override = default;
 }; // end StandardDeviationProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

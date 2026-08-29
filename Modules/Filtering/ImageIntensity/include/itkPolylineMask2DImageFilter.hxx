@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TPolyline, typename TOutputImage>
 PolylineMask2DImageFilter<TInputImage, TPolyline, TOutputImage>::PolylineMask2DImageFilter()
@@ -226,5 +227,6 @@ PolylineMask2DImageFilter<TInputImage, TPolyline, TOutputImage>::GenerateData()
     ++outputI;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

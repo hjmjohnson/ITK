@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace Functor
 {
@@ -127,6 +128,7 @@ ClampImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Indent
   print_helper::PrintNumericTrait(os, indent, "Lower bound", this->GetLowerBound());
   print_helper::PrintNumericTrait(os, indent, "Upper bound", this->GetUpperBound());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

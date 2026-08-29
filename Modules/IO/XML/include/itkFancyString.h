@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class FancyString
@@ -206,6 +207,7 @@ private:
 
 }; // class FancyString
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 /////////////////////////////////////////////////////////////////////////////
@@ -228,6 +230,7 @@ operator==(itk::FancyString & s, const itk::FancyString &);
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /////////////////////////////////////////////////////////////////////////////
 // manipulators for FancyString (currently only one is defined)
 /////////////////////////////////////////////////////////////////////////////
@@ -306,6 +309,7 @@ template <typename T>
 FancyString &
 operator<<(FancyString & s, const T & data);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

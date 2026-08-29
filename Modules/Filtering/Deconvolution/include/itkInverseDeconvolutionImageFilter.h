@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class InverseDeconvolutionImageFilter
  * \brief The direct linear inverse deconvolution filter.
@@ -170,6 +171,7 @@ private:
 };
 } // namespace Functor
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

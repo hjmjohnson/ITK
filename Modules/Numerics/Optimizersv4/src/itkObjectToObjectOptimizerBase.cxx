@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -235,4 +236,5 @@ operator<<(std::ostream &                                                       
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

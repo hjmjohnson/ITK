@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename THistogram, typename TOutput>
 void
 OtsuThresholdCalculator<THistogram, TOutput>::GenerateData()
@@ -46,6 +47,7 @@ OtsuThresholdCalculator<THistogram, TOutput>::PrintSelf(std::ostream & os, Inden
   itkPrintSelfObjectMacro(OtsuMultipleThresholdsCalculator);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

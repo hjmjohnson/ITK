@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  * \author Burstein, Pablo D.; Yushkevich, Paul; Gee, James C.
@@ -49,4 +50,5 @@ VoxBoCUBImageIOFactory::GetDescription() const
 {
   return "VoxBo CUB ImageIO Factory, allows the loading of VoxBoCUB images into Insight";
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

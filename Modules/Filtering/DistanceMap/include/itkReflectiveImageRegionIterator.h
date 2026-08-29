@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ReflectiveImageRegionIterator
  * \brief Multi-dimensional image iterator which only walks a region.
@@ -103,6 +104,7 @@ protected:
   Self &
   operator=(const ReflectiveImageRegionConstIterator<TImage> & it);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

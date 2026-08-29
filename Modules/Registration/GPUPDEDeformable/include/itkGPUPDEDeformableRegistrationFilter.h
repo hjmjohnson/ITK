@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUPDEDeformableRegistrationFilter
  * \brief Deformably register two images using a PDE algorithm.
@@ -234,6 +235,7 @@ private:
   /* GPU kernel handle for GPUSmoothDisplacementField */
   int m_SmoothDisplacementFieldGPUKernelHandle{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

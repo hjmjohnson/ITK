@@ -22,7 +22,10 @@
 #include "itkMacro.h"
 #include "itkObjectFactory.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class Subsample
@@ -289,7 +292,9 @@ private:
   unsigned int               m_ActiveDimension{};
   TotalAbsoluteFrequencyType m_TotalFrequency{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkSubsample.hxx"

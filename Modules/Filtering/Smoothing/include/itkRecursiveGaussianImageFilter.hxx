@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Explicitly set a zeroth order derivative.
 template <typename TInputImage, typename TOutputImage>
 void
@@ -323,6 +324,7 @@ RecursiveGaussianImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream 
   os << indent << "Order: " << m_Order << std::endl;
   os << indent << "NormalizeAcrossScale: " << m_NormalizeAcrossScale << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

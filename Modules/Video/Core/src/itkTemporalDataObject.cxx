@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //----------------------------------------------------------------------------
 TemporalDataObject::TemporalDataObject()
@@ -377,4 +378,5 @@ operator<<(std::ostream & out, const TemporalDataObjectEnums::TemporalUnit value
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

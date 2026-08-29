@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ProjectedLandweberDeconvolutionImageFilter
  * \brief Deconvolve an image using the projected Landweber
@@ -82,6 +83,7 @@ protected:
   ProjectedLandweberDeconvolutionImageFilter() = default;
   ~ProjectedLandweberDeconvolutionImageFilter() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

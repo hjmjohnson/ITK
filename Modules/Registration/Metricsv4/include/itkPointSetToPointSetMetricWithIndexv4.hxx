@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingPointSet, class TInternalComputationValueType>
 PointSetToPointSetMetricWithIndexv4<TFixedPointSet, TMovingPointSet, TInternalComputationValueType>::
@@ -662,6 +663,7 @@ PointSetToPointSetMetricWithIndexv4<TFixedPointSet, TMovingPointSet, TInternalCo
   print_helper::PrintNumericTrait(os, indent, "MovingTransformedPointSetTime", m_MovingTransformedPointSetTime);
   print_helper::PrintNumericTrait(os, indent, "FixedTransformedPointSetTime", m_FixedTransformedPointSetTime);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

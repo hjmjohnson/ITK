@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegistrationParameterScalesEstimatorEnums
  * \brief This class contains all the enum classes used by RegistrationParameterScalesEstimator class.
  * \ingroup ITKOptimizersv4
@@ -368,6 +369,7 @@ private:
   SamplingStrategyType m_SamplingStrategy{};
 
 }; // class RegistrationParameterScalesEstimator
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

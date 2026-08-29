@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *    Constructor
  */
@@ -181,6 +182,7 @@ SignedDanielssonDistanceMapImageFilter<TInputImage, TOutputImage, TVoronoiImage>
   os << indent << "Squared Distance  : " << m_SquaredDistance << std::endl;
   os << indent << "Inside is positive  : " << m_InsideIsPositive << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

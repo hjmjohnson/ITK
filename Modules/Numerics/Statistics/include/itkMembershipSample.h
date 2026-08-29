@@ -21,7 +21,10 @@
 #include <unordered_map>
 #include "itkSubsample.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class MembershipSample
@@ -315,7 +318,9 @@ private:
   SampleConstPointer              m_Sample{};
   unsigned int                    m_NumberOfClasses{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkMembershipSample.hxx"

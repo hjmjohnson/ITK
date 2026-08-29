@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryThresholdImageFunction
  * \brief Returns true is the value of an image lies within a range
@@ -155,6 +156,7 @@ private:
   PixelType m_Lower{};
   PixelType m_Upper{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

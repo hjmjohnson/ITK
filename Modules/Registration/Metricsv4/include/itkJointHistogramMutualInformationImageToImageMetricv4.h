@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class JointHistogramMutualInformationImageToImageMetricv4
  * \brief Computes the mutual information between two images to be
  * registered using the method described in \cite thevenaz2000.
@@ -241,6 +242,7 @@ private:
   JointPDFIndexValueType        m_Padding{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUDiscreteGaussianImageFilter
  * \brief Blurs an image by separable convolution with discrete gaussian kernels.
@@ -119,6 +120,7 @@ private:
   std::vector<typename IntermediateFilterType::Pointer> m_IntermediateFilters{};
   typename SingleFilterType::Pointer                    m_SingleFilter{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

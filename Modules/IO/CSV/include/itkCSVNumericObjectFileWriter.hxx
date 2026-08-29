@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TValue, unsigned int VRows, unsigned int VColumns>
 CSVNumericObjectFileWriter<TValue, VRows, VColumns>::CSVNumericObjectFileWriter()
   : m_InputObject(nullptr)
@@ -209,6 +210,7 @@ CSVNumericObjectFileWriter<TValue, VRows, VColumns>::PrintSelf(std::ostream & os
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

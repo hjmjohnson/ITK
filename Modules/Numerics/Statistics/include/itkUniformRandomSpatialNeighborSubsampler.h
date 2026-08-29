@@ -21,7 +21,10 @@
 #include "itkSpatialNeighborSubsampler.h"
 #include "itkMersenneTwisterRandomVariateGenerator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class UniformRandomSpatialNeighborSubsampler
@@ -161,7 +164,9 @@ protected:
   bool                         m_UseClockForSeed{};
 }; // end of class UniformRandomSpatialNeighborSubsampler
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkUniformRandomSpatialNeighborSubsampler.hxx"

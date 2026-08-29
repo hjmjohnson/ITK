@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 AmoebaOptimizerv4::AmoebaOptimizerv4()
@@ -285,4 +286,5 @@ AmoebaOptimizerv4::ValidateSettings()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

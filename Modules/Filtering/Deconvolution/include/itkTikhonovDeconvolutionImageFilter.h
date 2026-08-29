@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TikhonovDeconvolutionImageFilter
  * \brief An inverse deconvolution filter regularized in the Tikhonov sense.
@@ -184,6 +185,7 @@ private:
 };
 } // namespace Functor
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

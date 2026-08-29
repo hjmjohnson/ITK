@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VImageDimension>
 RieszRotationMatrix<VImageDimension>::RieszRotationMatrix()
   : Superclass()
@@ -450,6 +451,7 @@ RieszRotationMatrix<VImageDimension>::ComputeSteerableMatrix()
 
   return this->GetVnlMatrix(); // return S;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

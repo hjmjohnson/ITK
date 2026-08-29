@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObjectToImageFilter
  * \brief Base class for filters that take a SpatialObject
@@ -233,6 +234,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

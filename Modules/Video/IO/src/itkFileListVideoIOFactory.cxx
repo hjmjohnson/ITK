@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 FileListVideoIOFactory::FileListVideoIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ FileListVideoIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<FileListVideoIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 STLMeshIOFactory ::PrintSelf(std::ostream &, Indent) const
 {}
@@ -59,4 +60,5 @@ STLMeshIOFactoryRegister__Private()
     STLMeshIOFactory::RegisterOneFactory();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

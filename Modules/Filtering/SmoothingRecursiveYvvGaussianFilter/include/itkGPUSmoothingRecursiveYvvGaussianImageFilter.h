@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUSmoothingRecursiveYvvGaussianImageFilter
  * \brief Recursive Gaussian blur based on Young-Van Vliet's algorithm and
@@ -199,6 +200,7 @@ private:
   /** Standard deviation of the gaussian used for smoothing */
   SigmaArrayType m_Sigma;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #  ifndef ITK_MANUAL_INSTANTIATION

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 LogGaborFreqImageSource<TOutputImage>::LogGaborFreqImageSource()
@@ -92,6 +93,7 @@ LogGaborFreqImageSource<TOutputImage>::DynamicThreadedGenerateData(const OutputI
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

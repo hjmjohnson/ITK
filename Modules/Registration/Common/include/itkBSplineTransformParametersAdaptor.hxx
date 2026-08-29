@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 BSplineTransformParametersAdaptor<TTransform>::BSplineTransformParametersAdaptor()
@@ -284,6 +285,7 @@ BSplineTransformParametersAdaptor<TTransform>::PrintSelf(std::ostream & os, Inde
   os << indent << "Required transform domain mesh size: " << this->m_RequiredTransformDomainMeshSize << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

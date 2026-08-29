@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class MultiphaseSparseFiniteDifferenceImageFilter
  *
@@ -519,6 +520,7 @@ private:
       false when methods do not need to check for boundary conditions. */
   bool m_BoundsCheckingActive{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

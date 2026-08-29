@@ -53,6 +53,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class Mesh
  * \brief Implements the N-dimensional mesh structure.
@@ -607,6 +608,7 @@ private:
 /** Define how to print enumeration */
 extern ITKMesh_EXPORT std::ostream &
                       operator<<(std::ostream & out, const MeshEnums::MeshClassCellsAllocationMethod value);
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ----------------------------------------------------------------------------
 template <typename TInputImage, typename TLevelSetContainer>
 LevelSetEquationTermBase<TInputImage, TLevelSetContainer>::LevelSetEquationTermBase()
@@ -117,6 +118,7 @@ LevelSetEquationTermBase<TInputImage, TLevelSetContainer>::SetUp()
 }
 // ----------------------------------------------------------------------------
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLevelSetEquationTermBase_hxx

@@ -35,7 +35,10 @@
 #include "itkTotalProgressReporter.h"
 #include "itkPrintHelper.h"
 
-namespace itk::Testing
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Testing
 {
 
 template <typename TInputImage, typename TOutputImage>
@@ -159,6 +162,8 @@ StretchIntensityImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   print_helper::PrintNumericTrait(os, indent, "Output Minimum", m_OutputMinimum);
   print_helper::PrintNumericTrait(os, indent, "Output Maximum", m_OutputMaximum);
 }
-} // namespace itk::Testing
+} // namespace Testing
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

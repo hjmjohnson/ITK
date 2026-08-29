@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**  \class SimplexMeshToTriangleMeshFilter
  * \brief This filter converts a 2-simplex mesh into a triangle mesh
  *
@@ -180,6 +181,7 @@ protected:
   /** attribute stores the result of the simplex cell visitor */
   PointMapPointer m_Centers{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

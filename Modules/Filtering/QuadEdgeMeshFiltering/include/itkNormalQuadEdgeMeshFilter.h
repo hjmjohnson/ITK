@@ -24,6 +24,7 @@
 #include "ITKQuadEdgeMeshFilteringExport.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NormalQuadEdgeMeshFilterEnums
  * \brief Contains enum classes used by NormalQuadEdgeMeshFilter class
  * \ingroup ITKQuadEdgeMeshFiltering
@@ -195,6 +196,7 @@ protected:
   void
   GenerateData() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkNormalQuadEdgeMeshFilter.hxx"

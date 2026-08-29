@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NeighborhoodOperatorImageFilter
  * \brief Applies a single NeighborhoodOperator to an image region.
  *
@@ -190,6 +191,7 @@ private:
   /** Default boundary condition */
   DefaultBoundaryCondition m_DefaultBoundaryCondition{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

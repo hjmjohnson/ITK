@@ -22,7 +22,10 @@
 #include "itkMath.h"
 #include "itkMakeUniqueForOverwrite.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TImage, typename THistogramFrequencyContainer>
 ScalarImageToRunLengthFeaturesFilter<TImage, THistogramFrequencyContainer>::ScalarImageToRunLengthFeaturesFilter()
@@ -349,6 +352,8 @@ ScalarImageToRunLengthFeaturesFilter<TImage, THistogramFrequencyContainer>::Prin
   os << indent << "Offsets: " << this->GetOffsets() << std::endl;
   os << indent << "FeatureMeans: " << this->GetFeatureMeans() << std::endl;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

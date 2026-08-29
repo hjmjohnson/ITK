@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 Similarity2DTransform<TParametersValueType>::Similarity2DTransform()
@@ -304,6 +305,7 @@ Similarity2DTransform<TParametersValueType>::SetMatrix(const MatrixType & matrix
   this->Modified();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

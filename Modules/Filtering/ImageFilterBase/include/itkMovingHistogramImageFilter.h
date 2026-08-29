@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MovingHistogramImageFilter
  * \brief Implements a generic moving histogram algorithm
@@ -157,6 +158,7 @@ protected:
                 const InputImageType * inputImage,
                 const IndexType        currentIdx);
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

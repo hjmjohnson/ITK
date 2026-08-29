@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 InitializationBiasedParticleSwarmOptimizer::~InitializationBiasedParticleSwarmOptimizer() = default;
 
 InitializationBiasedParticleSwarmOptimizer::InitializationBiasedParticleSwarmOptimizer()
@@ -88,4 +89,5 @@ InitializationBiasedParticleSwarmOptimizer::UpdateSwarm()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

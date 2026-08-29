@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 auto
@@ -140,6 +141,7 @@ MetaBlobConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObjectType
   return Blob;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

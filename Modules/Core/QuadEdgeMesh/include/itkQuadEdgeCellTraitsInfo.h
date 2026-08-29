@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshCellTraitsInfo
  *  \brief Helper class holding the traits of QuadEdge cells.
@@ -70,5 +71,6 @@ public:
   using PointIdInternalIterator = typename TQE::IteratorGeom;
   using PointIdInternalConstIterator = typename TQE::ConstIteratorGeom;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

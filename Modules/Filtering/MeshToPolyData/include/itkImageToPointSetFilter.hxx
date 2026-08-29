@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputMesh>
 void
@@ -71,6 +72,7 @@ ImageToPointSetFilter<TInputImage, TOutputMesh>::GenerateData()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LaplacianDeformationQuadEdgeMeshFilterWithHardConstraints
  *
@@ -101,6 +102,7 @@ protected:
   void
   GenerateData() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkLaplacianDeformationQuadEdgeMeshFilterWithHardConstraints.hxx"

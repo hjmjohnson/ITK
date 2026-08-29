@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MinimumMaximumImageFilter
  * \brief Computes the minimum and the maximum intensity values of
  * an image.
@@ -141,6 +142,7 @@ private:
 
   std::mutex m_Mutex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

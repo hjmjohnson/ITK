@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ProjectionImageFilter
  * \brief Implements an accumulation of an image along a selected direction.
  *
@@ -120,6 +121,7 @@ protected:
 private:
   unsigned int m_ProjectionDimension{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

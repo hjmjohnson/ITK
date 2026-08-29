@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 GDCMImageIOFactory::GDCMImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ GDCMImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<GDCMImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

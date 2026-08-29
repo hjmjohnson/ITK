@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //
 // Constructor
@@ -114,6 +115,7 @@ DecimateFramesVideoFilter<TVideoStream>::ThreadedGenerateData(const FrameSpatial
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

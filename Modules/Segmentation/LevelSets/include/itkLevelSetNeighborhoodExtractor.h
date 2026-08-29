@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LevelSetNeighborhoodExtractor
  * \brief Locate pixels of a particular level set.
  *
@@ -196,6 +197,7 @@ private:
 
   bool m_LastPointIsInside{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

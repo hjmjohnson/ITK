@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class FastMarchingUpwindGradientImageFilterEnums
  *
@@ -323,6 +324,7 @@ private:
   // Distinct target count; duplicates must not make AllTargets unreachable.
   SizeValueType m_TotalDistinctTargets{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

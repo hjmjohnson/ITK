@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 StatisticsRelabelLabelMapFilter<TImage>::StatisticsRelabelLabelMapFilter()
 {
@@ -39,5 +40,6 @@ StatisticsRelabelLabelMapFilter<TImage>::GenerateData()
     break;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

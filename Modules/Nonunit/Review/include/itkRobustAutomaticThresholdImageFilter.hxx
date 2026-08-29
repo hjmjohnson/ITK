@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TGradientImage, typename TOutputImage>
 RobustAutomaticThresholdImageFilter<TInputImage, TGradientImage, TOutputImage>::RobustAutomaticThresholdImageFilter()
   : m_Threshold(InputPixelType{})
@@ -83,5 +84,6 @@ RobustAutomaticThresholdImageFilter<TInputImage, TGradientImage, TOutputImage>::
   print_helper::PrintNumericTrait(os, indent, "OutsideValue", m_OutsideValue);
   print_helper::PrintNumericTrait(os, indent, "InsideValue", m_InsideValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

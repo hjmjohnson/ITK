@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BinaryImageToShapeLabelMapFilter<TInputImage, TOutputImage>::BinaryImageToShapeLabelMapFilter()
   : m_OutputBackgroundValue(NumericTraits<OutputImagePixelType>::NonpositiveMin())
@@ -98,5 +99,6 @@ BinaryImageToShapeLabelMapFilter<TInputImage, TOutputImage>::PrintSelf(std::ostr
   os << indent << "ComputePerimeter: " << m_ComputePerimeter << std::endl;
   os << indent << "ComputeOrientedBoundingBox: " << m_ComputeOrientedBoundingBox << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

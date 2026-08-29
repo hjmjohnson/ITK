@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DescoteauxEigenToMeasureParameterEstimationFilter
  * \brief Automatic parameter estimation as defined by Descoteaux et al.
  *
@@ -129,6 +130,7 @@ private:
 
   std::mutex m_Mutex;
 }; // end class
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

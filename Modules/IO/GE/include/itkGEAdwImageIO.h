@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GEAdwImageIO
  *
@@ -436,6 +437,7 @@ private:
                                         integer */
   };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkGEAdwImageIO_h

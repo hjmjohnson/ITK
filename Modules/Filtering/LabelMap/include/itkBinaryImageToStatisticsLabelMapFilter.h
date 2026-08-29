@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryImageToStatisticsLabelMapFilter
  * \brief a convenient class to convert a binary image to a label map and valuate the statistics attributes at once
@@ -212,6 +213,7 @@ private:
   unsigned int         m_NumberOfBins{};
   bool                 m_ComputeHistogram{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

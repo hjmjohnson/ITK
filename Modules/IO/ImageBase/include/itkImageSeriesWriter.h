@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageSeriesWriterException
  *  \brief Base exception class for IO problems during writing.
  * \ingroup ITKIOImageBase
@@ -256,6 +257,7 @@ private:
   void
   WriteFiles();
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

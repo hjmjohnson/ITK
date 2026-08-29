@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RieszFrequencyFunction
  * Riesz function is a Hilbert transform for N-Dimension signal.
  *
@@ -211,6 +212,7 @@ private:
   unsigned int m_Order{ 0 };
   SetType      m_Indices;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

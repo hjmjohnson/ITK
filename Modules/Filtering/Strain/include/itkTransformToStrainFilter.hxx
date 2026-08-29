@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform, typename TOperatorValue, typename TOutputValue>
 TransformToStrainFilter<TTransform, TOperatorValue, TOutputValue>::TransformToStrainFilter()
@@ -153,6 +154,7 @@ TransformToStrainFilter<TTransform, TOperatorValue, TOutputValue>::PrintSelf(std
   os << indent << "StrainForm: " << static_cast<typename NumericTraits<StrainFormType>::PrintType>(m_StrainForm)
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

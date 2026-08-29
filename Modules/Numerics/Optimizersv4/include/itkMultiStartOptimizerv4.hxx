@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 MultiStartOptimizerv4Template<TInternalComputationValueType>::MultiStartOptimizerv4Template()
@@ -210,6 +211,7 @@ MultiStartOptimizerv4Template<TInternalComputationValueType>::ResumeOptimization
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

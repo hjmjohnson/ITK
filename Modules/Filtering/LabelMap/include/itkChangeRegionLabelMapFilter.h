@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ChangeRegionLabelMapFilter
  * \brief Change the region of a label map.
@@ -127,6 +128,7 @@ protected:
 private:
   OutputImageRegionType m_Region{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

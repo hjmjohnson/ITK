@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class BSplineSmoothingOnUpdateDisplacementFieldTransform
  * \brief Representation of a smooth deformation field  with B-splines.
@@ -198,6 +199,7 @@ private:
   ArrayType       m_NumberOfControlPointsForTheTotalField{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

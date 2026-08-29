@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PNGImageIOFactory
  * \brief Create instances of PNGImageIO objects using an object factory.
@@ -71,6 +72,7 @@ protected:
   PNGImageIOFactory();
   ~PNGImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

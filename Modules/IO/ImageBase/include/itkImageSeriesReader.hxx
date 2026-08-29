@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 void
 ImageSeriesReader<TOutputImage>::PrintSelf(std::ostream & os, Indent indent) const
@@ -525,6 +526,7 @@ ImageSeriesReader<TOutputImage>::GetMetaDataDictionaryArray() const -> Dictionar
   }
   return &m_MetaDataDictionaryArray;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

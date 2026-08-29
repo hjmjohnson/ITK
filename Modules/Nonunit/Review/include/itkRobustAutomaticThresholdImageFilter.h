@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RobustAutomaticThresholdImageFilter
  * \brief Threshold an image using robust automatic threshold selection (RATS) method.
  *
@@ -161,6 +162,7 @@ private:
   OutputPixelType m_InsideValue{};
   OutputPixelType m_OutsideValue{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 DisplacementFieldTransform<TParametersValueType, VDimension>::DisplacementFieldTransform()
@@ -587,6 +588,7 @@ DisplacementFieldTransform<TParametersValueType, VDimension>::PrintSelf(std::ost
   os << indent << "CoordinateTolerance: " << m_CoordinateTolerance << std::endl;
   os << indent << "DirectionTolerance: " << m_DirectionTolerance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

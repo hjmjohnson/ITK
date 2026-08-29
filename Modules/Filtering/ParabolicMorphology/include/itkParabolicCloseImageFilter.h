@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParabolicCloseImageFilter
  * \brief Class for morphological closing
@@ -90,6 +91,7 @@ protected:
   virtual ~ParabolicCloseImageFilter() {}
   //   void PrintSelf(std::ostream& os, Indent indent) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

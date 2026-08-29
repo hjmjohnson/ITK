@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename THistogram, typename TOutput>
 void
@@ -93,6 +94,7 @@ MomentsThresholdCalculator<THistogram, TOutput>::GenerateData()
   this->GetOutput()->Set(static_cast<OutputType>(histogram->GetMeasurement(threshold, 0)));
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

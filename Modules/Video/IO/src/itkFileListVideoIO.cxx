@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 FileListVideoIO::FileListVideoIO() { this->ResetMembers(); }
 
@@ -491,4 +492,5 @@ FileListVideoIO::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "FileNames: " << m_FileNames << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

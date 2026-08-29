@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MaskNeighborhoodOperatorImageFilter
  * \brief Applies a single NeighborhoodOperator to an image,
  * processing only those pixels that are under a mask.
@@ -176,6 +177,7 @@ private:
   OutputPixelType m_DefaultValue{};
   bool            m_UseDefaultValue{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

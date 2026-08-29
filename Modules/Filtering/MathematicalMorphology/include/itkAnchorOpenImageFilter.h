@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TKernel>
 class AnchorOpenImageFilter
   : public AnchorOpenCloseImageFilter<TImage,
@@ -52,6 +53,7 @@ protected:
   }
   ~AnchorOpenImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

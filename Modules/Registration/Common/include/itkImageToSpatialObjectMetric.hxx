@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingSpatialObject>
 ImageToSpatialObjectMetric<TFixedImage, TMovingSpatialObject>::ImageToSpatialObjectMetric()
@@ -94,6 +95,7 @@ ImageToSpatialObjectMetric<TFixedImage, TMovingSpatialObject>::PrintSelf(std::os
 
   os << indent << "LastTransformParameters: " << m_LastTransformParameters << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ThresholdMaximumConnectedComponentsImageFilter<TInputImage,
@@ -188,6 +189,7 @@ ThresholdMaximumConnectedComponentsImageFilter<TInputImage, TOutputImage>::Print
   print_helper::PrintNumericTrait(os, indent, "Threshold Value", m_ThresholdValue);
   print_helper::PrintNumericTrait(os, indent, "NumberOfObjects", m_NumberOfObjects);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

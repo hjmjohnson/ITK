@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VTKPolyDataReader
  * \brief
  * Reads a vtkPolyData file and create an itkMesh.
@@ -118,6 +119,7 @@ private:
   std::string m_Header{};
   std::string m_Version{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

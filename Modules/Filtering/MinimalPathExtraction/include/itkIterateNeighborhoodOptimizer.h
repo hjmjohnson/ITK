@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class IterateNeighborhoodOptimizer
  * \brief Finds the local minima/maxima by iteratively choosing the
@@ -135,6 +136,7 @@ private:
   NeighborhoodSizeType m_NeighborhoodSize;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

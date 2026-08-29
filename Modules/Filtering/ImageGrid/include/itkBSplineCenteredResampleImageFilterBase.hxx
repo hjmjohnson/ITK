@@ -31,6 +31,7 @@
 #include "itkProgressReporter.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Standard "PrintSelf" method
  */
@@ -381,6 +382,7 @@ BSplineCenteredResampleImageFilterBase<TInputImage, TOutputImage>::Expand1DImage
   // setting m_Position correctly
   out.GoToEndOfLine();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

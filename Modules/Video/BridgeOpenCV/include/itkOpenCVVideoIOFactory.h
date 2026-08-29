@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class OpenCVVideoIOFactory
  * \brief Create instances of OpenCVVideoIO objects using an object factory.
@@ -67,6 +68,7 @@ protected:
   OpenCVVideoIOFactory();
   ~OpenCVVideoIOFactory();
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

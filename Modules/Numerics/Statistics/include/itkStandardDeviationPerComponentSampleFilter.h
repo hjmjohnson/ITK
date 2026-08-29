@@ -24,7 +24,10 @@
 #include "itkSimpleDataObjectDecorator.h"
 #include "itkNumericTraitsFixedArrayPixel.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class StandardDeviationPerComponentSampleFilter
@@ -117,7 +120,9 @@ protected:
   MeasurementVectorSizeType
   GetMeasurementVectorSize() const;
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkStandardDeviationPerComponentSampleFilter.hxx"

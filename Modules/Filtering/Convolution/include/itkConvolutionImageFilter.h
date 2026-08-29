@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConvolutionImageFilter
  * \brief Convolve a given image with an arbitrary image kernel.
@@ -135,6 +136,7 @@ private:
   void
   ComputeConvolution(const TImage * kernelImage, ProgressAccumulator * progress);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TTensorImage>
 StructureTensorImageFilter<TImage, TTensorImage>::StructureTensorImageFilter()
@@ -158,6 +159,7 @@ StructureTensorImageFilter<TImage, TTensorImage>::GenerateData()
   this->GraftOutput(scaleFilter->GetOutput());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

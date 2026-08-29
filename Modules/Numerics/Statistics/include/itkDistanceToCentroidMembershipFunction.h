@@ -21,7 +21,10 @@
 #include "itkMembershipFunctionBase.h"
 #include "itkDistanceMetric.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class DistanceToCentroidMembershipFunction
  * \brief DistanceToCentroidMembershipFunction models class membership
@@ -110,7 +113,9 @@ protected:
 private:
   DistanceMetricPointer m_DistanceMetric{};
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkDistanceToCentroidMembershipFunction.hxx"

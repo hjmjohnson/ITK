@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FrequencyShrinkImageFilter
  * \brief Reduce the size of an image in the frequency domain by an integer
  * factor --fixed to 2 at the moment-- in each dimension.
@@ -155,6 +156,7 @@ private:
   bool                                      m_ApplyBandFilter{ false };
   typename FrequencyBandFilterType::Pointer m_FrequencyBandFilter;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

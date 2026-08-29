@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputHistogram>
 OtsuMultipleThresholdsCalculator<TInputHistogram>::OtsuMultipleThresholdsCalculator()
 {
@@ -337,6 +338,7 @@ OtsuMultipleThresholdsCalculator<TInputHistogram>::PrintSelf(std::ostream & os, 
   }
   os << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

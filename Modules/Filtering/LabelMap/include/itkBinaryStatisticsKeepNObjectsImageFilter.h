@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryStatisticsKeepNObjectsImageFilter
  * \brief keep N objects according to their statistics attributes
@@ -211,6 +212,7 @@ private:
   bool                 m_ReverseOrdering{ false };
   AttributeType        m_Attribute{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

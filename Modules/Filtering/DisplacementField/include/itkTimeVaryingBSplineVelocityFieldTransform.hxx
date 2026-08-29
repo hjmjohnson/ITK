@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 TimeVaryingBSplineVelocityFieldTransform<TParametersValueType, VDimension>::TimeVaryingBSplineVelocityFieldTransform()
@@ -167,6 +168,7 @@ TimeVaryingBSplineVelocityFieldTransform<TParametersValueType, VDimension>::Prin
   os << indent << "  origin: " << this->m_VelocityFieldOrigin << std::endl;
   os << indent << "  direction: " << this->m_VelocityFieldDirection << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

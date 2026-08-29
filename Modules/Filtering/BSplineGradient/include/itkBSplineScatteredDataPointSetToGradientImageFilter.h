@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineScatteredDataPointSetToGradientImageFilter
  *
  * \brief Uses a B-spline approximation to a PointSet to calculate a gradient
@@ -157,6 +158,7 @@ private:
   ArrayType m_NumberOfLevels;
   ArrayType m_SplineOrder;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

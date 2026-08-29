@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BinomialBlurImageFilter<TInputImage, TOutputImage>::BinomialBlurImageFilter()
   // The default is to just do one repetition
@@ -238,6 +239,7 @@ BinomialBlurImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os,
 
   os << indent << "Number of repetitions: " << m_Repetitions << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

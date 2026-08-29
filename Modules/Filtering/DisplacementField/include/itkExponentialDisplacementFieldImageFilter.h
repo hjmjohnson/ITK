@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ExponentialDisplacementFieldImageFilter
  * \brief Computes a diffeomorphic displacement field as the Lie group
  * exponential of a vector field.
@@ -166,6 +167,7 @@ private:
   VectorWarperPointer     m_Warper{};
   AdderPointer            m_Adder{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

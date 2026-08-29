@@ -82,6 +82,7 @@ private:
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DummySpatialObject
  */
@@ -214,6 +215,7 @@ protected:
   ~MetaDummyConverter() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 int

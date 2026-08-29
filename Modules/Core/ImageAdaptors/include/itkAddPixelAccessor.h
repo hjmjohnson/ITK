@@ -20,7 +20,10 @@
 
 #include "itkNumericTraits.h"
 
-namespace itk::Accessor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Accessor
 {
 /**
  * \class AddPixelAccessor
@@ -98,6 +101,8 @@ public:
 private:
   TPixel m_Value;
 };
-} // namespace itk::Accessor
+} // namespace Accessor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

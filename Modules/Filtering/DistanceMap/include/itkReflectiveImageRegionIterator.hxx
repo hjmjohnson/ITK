@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ReflectiveImageRegionIterator<TImage>::ReflectiveImageRegionIterator()
   : ReflectiveImageRegionConstIterator<TImage>()
@@ -49,6 +50,7 @@ ReflectiveImageRegionIterator<TImage>::operator=(const ReflectiveImageRegionCons
   this->ReflectiveImageRegionConstIterator<TImage>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

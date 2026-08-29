@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * This class defines the interface for parameter estimators.
@@ -119,6 +120,7 @@ private:
   operator=(const Self &); // purposely not implemented
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

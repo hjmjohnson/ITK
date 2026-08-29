@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class MeanSquaresImageToImageMetricv4GetValueAndDerivativeThreader
  * \brief Processes points for MeanSquaresImageToImageMetricv4 \c
@@ -83,6 +84,7 @@ protected:
                const ThreadIdType              threadId) const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

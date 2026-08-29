@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class DOMTestObject : public Object
 {
@@ -57,6 +58,7 @@ private:
   std::string m_FooFileName{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDOMTestObject_h

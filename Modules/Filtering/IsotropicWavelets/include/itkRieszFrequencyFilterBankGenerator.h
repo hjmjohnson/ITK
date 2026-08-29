@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RieszFrequencyFilterBankGenerator
  * Generate a filter bank of M components using the RieszFrequencyFunction.
  * \f$ M = p(N,d) \f$ where N = Order of the RieszTransform, and d = ImageDimension.
@@ -127,6 +128,7 @@ private:
   unsigned int         m_Order{ 0 };
   RieszFunctionPointer m_Evaluator;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkRieszFrequencyFilterBankGenerator.hxx"

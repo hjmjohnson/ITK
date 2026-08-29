@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StimulateImageIOFactory
  * \brief Create instances of StimulateImageIO objects using an object factory.
  * \ingroup ITKIOStimulate
@@ -75,6 +76,7 @@ protected:
   StimulateImageIOFactory();
   ~StimulateImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

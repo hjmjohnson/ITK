@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingImage>
 MeanReciprocalSquareDifferencePointSetToImageMetric<TFixedPointSet,
@@ -293,6 +294,7 @@ MeanReciprocalSquareDifferencePointSetToImageMetric<TFixedPointSet, TMovingImage
   os << indent << "Lambda: " << m_Lambda << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

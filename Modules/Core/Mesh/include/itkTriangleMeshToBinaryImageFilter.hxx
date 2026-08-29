@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputImage>
 TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::TriangleMeshToBinaryImageFilter()
@@ -498,6 +499,7 @@ TriangleMeshToBinaryImageFilter<TInputMesh, TOutputImage>::PrintSelf(std::ostrea
   os << indent << "Direction: " << std::endl << m_Direction << std::endl;
   os << indent << "Index: " << m_Index << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

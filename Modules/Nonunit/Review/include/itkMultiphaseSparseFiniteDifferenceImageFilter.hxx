@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputImage, typename TFunction, typename TIdCell>
 double MultiphaseSparseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputImage, TFunction, TIdCell>::
   m_ConstantGradientValue = 1.0;
@@ -1397,6 +1398,7 @@ MultiphaseSparseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputI
   os << indent << "RMSCounter: " << m_RMSCounter << std::endl;
   os << indent << "BoundsCheckingActive: " << m_BoundsCheckingActive << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

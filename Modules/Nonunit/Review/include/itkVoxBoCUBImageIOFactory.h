@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VoxBoCUBImageIOFactory
  *
  * \brief Create instances of VoxBoCUBImageIO objects using an object factory.
@@ -71,6 +72,7 @@ protected:
   VoxBoCUBImageIOFactory();
   ~VoxBoCUBImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

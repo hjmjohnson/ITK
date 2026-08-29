@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MultiScaleHessianEnhancementImageFilter
  * \brief Compute an image enhancement using eigenvalues of the local hessian matrix over many scales.
  *
@@ -222,6 +223,7 @@ private:
   SigmaArrayType m_SigmaArray;
 
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

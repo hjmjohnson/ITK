@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 GPUCastImageFilter<TInputImage, TOutputImage>::GPUCastImageFilter()
@@ -59,6 +60,7 @@ GPUCastImageFilter<TInputImage, TOutputImage>::GPUGenerateData()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif /* itkGPUCastImageFilter_hxx */

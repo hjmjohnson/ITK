@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MeshSource
  *  \brief Base class for all process objects that output mesh data.
  *
@@ -170,6 +171,7 @@ private:
   int m_GenerateDataRegion{};
   int m_GenerateDataNumberOfRegions{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

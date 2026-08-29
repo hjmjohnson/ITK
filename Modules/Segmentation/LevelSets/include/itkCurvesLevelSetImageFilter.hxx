@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputType>
 CurvesLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::CurvesLevelSetImageFilter()
   : m_CurvesFunction(CurvesFunctionType::New())
@@ -61,6 +62,7 @@ CurvesLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::GenerateData
   // Continue with Superclass implementation
   Superclass::GenerateData();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

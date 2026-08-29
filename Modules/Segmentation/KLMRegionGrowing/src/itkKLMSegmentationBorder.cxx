@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 KLMSegmentationBorder::KLMSegmentationBorder() = default;
 
 KLMSegmentationBorder::~KLMSegmentationBorder() = default;
@@ -97,4 +98,5 @@ KLMSegmentationBorder::PrintBorderInfo()
 
   std::cout << "Location      : " << this << std::endl << "Lambda        : " << m_Lambda << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

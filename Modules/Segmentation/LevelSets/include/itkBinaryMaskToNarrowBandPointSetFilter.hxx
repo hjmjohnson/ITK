@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -123,6 +124,7 @@ BinaryMaskToNarrowBandPointSetFilter<TInputImage, TOutputMesh>::GenerateData()
   // the pipeline.
   mesh->SetBufferedRegion(mesh->GetRequestedRegion());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

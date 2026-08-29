@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TLevelSetContainer>
 bool
 LevelSetEvolutionNumberOfIterationsStoppingCriterion<TLevelSetContainer>::IsSatisfied() const
@@ -36,5 +37,6 @@ LevelSetEvolutionNumberOfIterationsStoppingCriterion<TLevelSetContainer>::GetDes
   return "Current Iteration Number >= Number Of Iterations";
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

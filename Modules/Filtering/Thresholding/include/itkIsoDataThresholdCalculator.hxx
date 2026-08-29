@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename THistogram, typename TOutput>
 void
@@ -98,6 +99,7 @@ IsoDataThresholdCalculator<THistogram, TOutput>::GenerateData()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

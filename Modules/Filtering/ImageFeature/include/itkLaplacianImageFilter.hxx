@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 LaplacianImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Indent indent) const
@@ -147,6 +148,7 @@ LaplacianImageFilter<TInputImage, TOutputImage>::GenerateData()
   // this copies back the region ivars and meta-dataig
   this->GraftOutput(filter->GetOutput());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -18,7 +18,10 @@
 #ifndef itkJointDomainImageToListSampleAdaptor_hxx
 #define itkJointDomainImageToListSampleAdaptor_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TImage>
 JointDomainImageToListSampleAdaptor<TImage>::JointDomainImageToListSampleAdaptor()
@@ -145,6 +148,8 @@ JointDomainImageToListSampleAdaptor<TImage>::GetMeasurementVector(InstanceIdenti
 
   return m_TempVector;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

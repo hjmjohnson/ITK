@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EdgePotentialImageFilter
  *
  * \brief Computes the edge potential of an image from the image gradient.
@@ -90,6 +91,7 @@ protected:
 
   ~EdgePotentialImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 MeanSquaresImageToImageMetric<TFixedImage, TMovingImage>::MeanSquaresImageToImageMetric()
@@ -268,6 +269,7 @@ MeanSquaresImageToImageMetric<TFixedImage, TMovingImage>::GetDerivative(const Pa
   this->GetValueAndDerivative(parameters, value, derivative);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

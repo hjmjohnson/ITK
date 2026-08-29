@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 GaussianSpatialObject<TDimension>::GaussianSpatialObject()
@@ -194,6 +195,7 @@ GaussianSpatialObject<TDimension>::PrintSelf(std::ostream & os, Indent indent) c
   os << indent << "Sigma: " << m_SigmaInObjectSpace << std::endl;
   os << indent << "Center: " << m_CenterInObjectSpace << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 CacheableScalarFunction::CacheableScalarFunction()
   : m_CacheTable(0)
 {}
@@ -52,4 +53,5 @@ CacheableScalarFunction::Evaluate(MeasureType x)
 {
   return x;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

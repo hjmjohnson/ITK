@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NormalBandNode
  *
@@ -354,6 +355,7 @@ private:
   static const SizeValueType m_NumVertex;
   static const ValueType     m_DimConst;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

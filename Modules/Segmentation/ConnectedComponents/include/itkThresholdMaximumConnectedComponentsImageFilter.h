@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ThresholdMaximumConnectedComponentsImageFilter
  * \brief Finds the threshold value of an image based on  maximizing the number
  * of objects in the image that are larger than a given minimal size.
@@ -224,6 +225,7 @@ private:
   PixelType     m_ThresholdValue{};
   SizeValueType m_NumberOfObjects{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

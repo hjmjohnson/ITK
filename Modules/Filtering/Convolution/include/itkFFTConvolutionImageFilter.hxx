@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TKernelImage, typename TOutputImage, typename TInternalPrecision>
 FFTConvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TInternalPrecision>::FFTConvolutionImageFilter()
@@ -517,5 +518,6 @@ FFTConvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TInternalPrec
   os << indent << "SizeGreatestPrimeFactor: " << m_SizeGreatestPrimeFactor << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkFFTConvolutionImageFilter_hxx

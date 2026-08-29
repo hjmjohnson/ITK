@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TLevelSetContainer, typename TPropagationImage>
 LevelSetEquationPropagationTerm<TInput, TLevelSetContainer, TPropagationImage>::LevelSetEquationPropagationTerm()
 {
@@ -106,6 +107,7 @@ LevelSetEquationPropagationTerm<TInput, TLevelSetContainer, TPropagationImage>::
   return propagation_gradient;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

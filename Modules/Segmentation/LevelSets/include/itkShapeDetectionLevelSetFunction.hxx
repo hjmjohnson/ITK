@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFeatureImageType>
 void
 ShapeDetectionLevelSetFunction<TImageType, TFeatureImageType>::CalculateSpeedImage()
@@ -33,6 +34,7 @@ ShapeDetectionLevelSetFunction<TImageType, TFeatureImageType>::CalculateSpeedIma
                        this->GetFeatureImage()->GetRequestedRegion(),
                        this->GetFeatureImage()->GetRequestedRegion());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

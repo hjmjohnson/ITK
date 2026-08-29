@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VInputDimension, unsigned int VOutputDimension>
 Transform<TParametersValueType, VInputDimension, VOutputDimension>::Transform(NumberOfParametersType numberOfParameters)
@@ -591,6 +592,7 @@ Transform<TParametersValueType, VInputDimension, VOutputDimension>::CopyInFixedP
   this->SetFixedParameters(this->m_FixedParameters);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

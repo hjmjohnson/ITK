@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PadImageFilterBase
  * \brief Increase the image size by padding. Superclass for filters that fill
@@ -120,6 +121,7 @@ private:
   BoundaryConditionType * m_BoundaryCondition{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

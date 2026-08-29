@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class GPUGradientAnisotropicDiffusionImageFilterFactory
@@ -108,6 +109,7 @@ private:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

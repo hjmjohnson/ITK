@@ -23,7 +23,10 @@
 #include "itkMeasurementVectorTraits.h"
 #include <vector> // for the size_type declaration
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class Sample
@@ -182,6 +185,8 @@ protected:
 private:
   MeasurementVectorSizeType m_MeasurementVectorSize{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

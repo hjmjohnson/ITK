@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 void
@@ -30,6 +31,7 @@ ParametricImageSource<TOutputImage>::PrintSelf(std::ostream & os, Indent indent)
 
   os << indent << "NumberOfParameters: " << this->GetNumberOfParameters() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

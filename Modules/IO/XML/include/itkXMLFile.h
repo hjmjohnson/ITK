@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class XMLReaderBase
  * XMLReaderBase encapsulates the expat library (Insight/Utilities/expat
@@ -221,5 +222,6 @@ protected:
   T *         m_InputObject{}; // object to write out to an XML file
   std::string m_Filename{};    // name of file to write.
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CenteredSimilarity2DTransform
  *  \brief CenteredSimilarity2DTransform of a vector space
  *        (e.g. space coordinates)
@@ -182,6 +183,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

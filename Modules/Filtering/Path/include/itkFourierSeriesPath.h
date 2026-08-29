@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FourierSeriesPath
  * \brief  Represent a closed path through ND Space by its frequency components
@@ -126,6 +127,7 @@ private:
   CoefficientsPointer m_CosCoefficients{};
   CoefficientsPointer m_SinCoefficients{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

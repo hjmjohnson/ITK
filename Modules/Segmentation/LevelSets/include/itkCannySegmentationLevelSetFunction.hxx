@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFeatureImageType>
 void
 CannySegmentationLevelSetFunction<TImageType, TFeatureImageType>::CalculateSpeedImage()
@@ -94,6 +95,7 @@ CannySegmentationLevelSetFunction<TImageType, TFeatureImageType>::CalculateDista
   m_Distance->GetOutput()->SetRequestedRegion(this->GetSpeedImage()->GetRequestedRegion());
   m_Distance->Update();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

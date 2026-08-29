@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 CannyEdgeDetectionImageFilter<TInputImage, TOutputImage>::CannyEdgeDetectionImageFilter()
   : m_UpperThreshold(OutputImagePixelType{})
@@ -467,5 +468,6 @@ CannyEdgeDetectionImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream
   itkPrintSelfObjectMacro(MultiplyImageFilter);
   itkPrintSelfObjectMacro(UpdateBuffer1);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

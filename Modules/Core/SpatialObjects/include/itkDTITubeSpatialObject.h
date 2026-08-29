@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DTITubeSpatialObject
  * \brief Representation of a tube based on the spatial object classes.
@@ -75,6 +76,7 @@ protected:
   [[nodiscard]] LightObject::Pointer
   InternalClone() const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

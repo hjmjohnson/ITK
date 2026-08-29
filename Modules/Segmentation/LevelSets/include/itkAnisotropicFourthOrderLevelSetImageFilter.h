@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AnisotropicFourthOrderLevelSetImageFilter
  *
@@ -137,6 +138,7 @@ private:
   /** The number of iterations for which this filter will run. */
   unsigned int m_MaxFilterIteration{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

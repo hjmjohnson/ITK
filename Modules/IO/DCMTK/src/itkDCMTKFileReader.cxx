@@ -55,6 +55,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void
 DCMTKItem::SetDcmItem(DcmItem * item)
@@ -1473,4 +1474,5 @@ CompareDCMTKFileReaders(DCMTKFileReader * a, DCMTKFileReader * b)
   return a->GetFileNumber() < b->GetFileNumber();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

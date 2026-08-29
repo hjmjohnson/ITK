@@ -23,6 +23,7 @@
 #include "itkStatisticsImageFilter.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 PhaseAnalysisSoftThresholdImageFilter<TInputImage, TOutputImage>::PhaseAnalysisSoftThresholdImageFilter()
   : m_NumOfSigmas(2.0)
@@ -114,5 +115,6 @@ PhaseAnalysisSoftThresholdImageFilter<TInputImage, TOutputImage>::ThreadedComput
     outIt.NextLine(), ampIt.NextLine(), phaseIt.NextLine();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

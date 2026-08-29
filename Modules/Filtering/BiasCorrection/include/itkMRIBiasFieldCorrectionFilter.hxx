@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TImageMask, typename TBiasField>
 MRIBiasEnergyFunction<TImage, TImageMask, TBiasField>::MRIBiasEnergyFunction()
@@ -950,6 +951,7 @@ MRIBiasFieldCorrectionFilter<TInputImage, TOutputImage, TMaskImage>::PrintSelf(s
   os << indent << "TissueClassMeans: " << m_TissueClassMeans << std::endl;
   os << indent << "TissueClassSigmas: " << m_TissueClassSigmas << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

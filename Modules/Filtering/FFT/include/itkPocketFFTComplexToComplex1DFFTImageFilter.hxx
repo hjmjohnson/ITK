@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -113,6 +114,7 @@ PocketFFTComplexToComplex1DFFTImageFilter<TInputImage, TOutputImage>::GenerateDa
     this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

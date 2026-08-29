@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObjectFactoryBase
  * \brief Create instances of SpatialObjects
@@ -100,5 +101,6 @@ protected:
 private:
   static SpatialObjectFactoryBase * m_Factory;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

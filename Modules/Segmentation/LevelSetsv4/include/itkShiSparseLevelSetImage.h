@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class ShiSparseLevelSetImage
  *  \brief Derived class for the shi representation of level-set function
@@ -134,6 +135,7 @@ protected:
   void
   InitializeInternalLabelList() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

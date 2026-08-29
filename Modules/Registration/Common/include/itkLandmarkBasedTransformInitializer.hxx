@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Default transform initializer, if transform type isn't
  * specifically handled.
  */
@@ -818,6 +819,7 @@ LandmarkBasedTransformInitializer<TTransform, TFixedImage, TMovingImage>::PrintS
 
   os << indent << "BSplineNumberOfControlPoints: " << m_BSplineNumberOfControlPoints << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkLandmarkBasedTransformInitializer_hxx */

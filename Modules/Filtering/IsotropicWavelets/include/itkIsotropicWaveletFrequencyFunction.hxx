@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFunctionValue, unsigned int VImageDimension, typename TInput>
 IsotropicWaveletFrequencyFunction<TFunctionValue, VImageDimension, TInput>::IsotropicWaveletFrequencyFunction()
   : m_FreqCutOff(0.25)
@@ -130,6 +131,7 @@ IsotropicWaveletFrequencyFunction<TFunctionValue, VImageDimension, TInput>::Eval
 {
   return this->EvaluateForwardSubBand(freq_norm_in_hz, j);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

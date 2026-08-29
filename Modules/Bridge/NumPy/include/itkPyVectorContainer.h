@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PyVectorContainer
  *
@@ -65,6 +66,7 @@ public:
   _vector_container_from_array(PyObject * arr, PyObject * shape);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

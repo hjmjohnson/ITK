@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LevelSetDomainPartition
  *
@@ -61,6 +62,7 @@ protected:
   LevelSetDomainPartition() = default;
   ~LevelSetDomainPartition() = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

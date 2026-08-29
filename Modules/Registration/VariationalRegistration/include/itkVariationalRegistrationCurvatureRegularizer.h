@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class itk::VariationalRegistrationCurvatureRegularizer
  *
@@ -184,6 +185,7 @@ private:
   SolveCurvatureLESThreaderCallback(void * vargs);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #  ifndef ITK_MANUAL_INSTANTIATION

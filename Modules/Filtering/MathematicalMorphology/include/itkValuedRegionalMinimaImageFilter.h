@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ValuedRegionalMinimaImageFilter
  *
  * \brief Transforms the image so that any pixel that is not a
@@ -89,5 +90,6 @@ protected:
   ~ValuedRegionalMinimaImageFilter() override = default;
 }; // end
    // ValuedRegionalMinimaImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

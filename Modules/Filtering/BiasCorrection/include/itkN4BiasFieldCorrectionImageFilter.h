@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class N4BiasFieldCorrectionImageFilter
@@ -445,6 +446,7 @@ private:
   ArrayType    m_NumberOfFittingLevels{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class LiThresholdCalculator
@@ -75,6 +76,7 @@ protected:
   GenerateData() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

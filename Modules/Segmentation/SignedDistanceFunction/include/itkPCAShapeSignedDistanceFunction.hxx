@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TCoordinate, unsigned int VSpaceDimension, typename TImage>
 PCAShapeSignedDistanceFunction<TCoordinate, VSpaceDimension, TImage>::PCAShapeSignedDistanceFunction()
@@ -190,6 +191,7 @@ PCAShapeSignedDistanceFunction<TCoordinate, VSpaceDimension, TImage>::Evaluate(c
   return output;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

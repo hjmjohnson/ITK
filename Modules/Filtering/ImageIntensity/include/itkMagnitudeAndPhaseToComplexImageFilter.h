@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MagnitudeAndPhaseToComplexImageFilter
  *
  * \brief Implements pixel-wise conversion of magnitude and phase data into
@@ -119,6 +120,7 @@ protected:
 
   ~MagnitudeAndPhaseToComplexImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

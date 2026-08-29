@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GrayscaleDilateImageFilter
  * \brief Grayscale dilation of an image.
@@ -163,6 +164,7 @@ private:
   // the boundary condition need to be stored here
   DefaultBoundaryConditionType m_BoundaryCondition{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

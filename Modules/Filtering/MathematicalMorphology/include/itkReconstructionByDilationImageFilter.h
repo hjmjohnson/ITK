@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ReconstructionByDilationImageFilter
  * \brief grayscale reconstruction by dilation of an image
  *
@@ -105,6 +106,7 @@ protected:
   ~ReconstructionByDilationImageFilter() override = default;
 };
 // end ReconstructionByDilationImageFilter
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

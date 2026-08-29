@@ -42,6 +42,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WaveletCoeffsPhaseAnalyzis
  * @brief IsotropicWavelet multiscale analysis and reconstructing phase analysis results where input is an image in the
  * spatial domain. Output Layout: Output is a single spatial domain image carrying the reconstructed phase analysis
@@ -145,6 +146,7 @@ private:
   bool         m_ApplySoftThreshold;
   double       m_ThresholdNumOfSigmas;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWaveletCoeffsPhaseAnalyzisImageFilter.hxx"

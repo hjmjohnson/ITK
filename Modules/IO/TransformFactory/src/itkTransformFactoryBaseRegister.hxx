@@ -67,6 +67,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 namespace
@@ -180,6 +181,7 @@ TransformFactoryBase::RegisterTransformFactory()
   TransformFactory<VelocityFieldTransform<TParameterType, 3>>::RegisterTransform();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

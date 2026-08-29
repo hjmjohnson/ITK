@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 GiftiMeshIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -55,4 +56,5 @@ GiftiMeshIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<GiftiMeshIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

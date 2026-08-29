@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**  Constructor.  */
 SingleValuedVnlCostFunctionAdaptor::SingleValuedVnlCostFunctionAdaptor(unsigned int spaceDimension)
   : vnl_cost_function(spaceDimension)
@@ -254,4 +255,5 @@ SingleValuedVnlCostFunctionAdaptor::GetCachedCurrentParameters() const
 {
   return m_CachedCurrentParameters;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

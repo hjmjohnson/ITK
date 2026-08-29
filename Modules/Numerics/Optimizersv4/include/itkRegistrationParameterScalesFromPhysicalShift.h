@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class RegistrationParameterScalesFromPhysicalShift
@@ -81,6 +82,7 @@ private:
 
 }; // class RegistrationParameterScalesFromPhysicalShift
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

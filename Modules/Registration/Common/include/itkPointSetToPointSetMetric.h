@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PointSetToPointSetMetric
  * \brief Computes similarity between two point sets.
  *
@@ -140,6 +141,7 @@ protected:
 
   mutable TransformPointer m_Transform{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class itk::VariationalRegistrationElasticRegularizer
  *
@@ -199,6 +200,7 @@ private:
   SolveElasticLESThreaderCallback(void * vargs);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #  ifndef ITK_MANUAL_INSTANTIATION

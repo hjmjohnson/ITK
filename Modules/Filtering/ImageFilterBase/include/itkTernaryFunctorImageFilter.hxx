@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage1,
           typename TInputImage2,
           typename TInputImage3,
@@ -152,6 +153,7 @@ TernaryFunctorImageFilter<TInputImage1, TInputImage2, TInputImage3, TOutputImage
     progress.Completed(outputRegionForThread.GetSize()[0]);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

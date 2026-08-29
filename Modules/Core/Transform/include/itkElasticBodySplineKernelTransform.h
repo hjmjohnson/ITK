@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ElasticBodySplineKernelTransform
  * \brief This class defines the elastic body spline (EBS) transformation.
  *
@@ -117,6 +118,7 @@ protected:
    */
   TParametersValueType m_Alpha{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

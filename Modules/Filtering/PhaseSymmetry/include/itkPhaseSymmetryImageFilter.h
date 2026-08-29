@@ -52,6 +52,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class PhaseSymmetryImageFilter
@@ -215,6 +216,7 @@ private:
   FloatImageBank m_FilterBank;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

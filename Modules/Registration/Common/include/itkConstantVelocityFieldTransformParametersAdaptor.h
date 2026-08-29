@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConstantVelocityFieldTransformParametersAdaptor
  * \brief ConstantVelocityFieldTransformParametersAdaptor is a helper class intended to
  * definition.
@@ -134,6 +135,7 @@ protected:
   ConstantVelocityFieldTransformParametersAdaptor();
   ~ConstantVelocityFieldTransformParametersAdaptor() override = default;
 }; // class ConstantVelocityFieldTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

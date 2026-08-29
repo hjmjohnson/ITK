@@ -20,7 +20,10 @@
 
 #include "itkEuclideanDistanceMetric.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TVector>
 DistanceToCentroidMembershipFunction<TVector>::DistanceToCentroidMembershipFunction()
@@ -88,5 +91,7 @@ DistanceToCentroidMembershipFunction<TVector>::PrintSelf(std::ostream & os, Inde
 
   os << indent << "Distance Metric: " << m_DistanceMetric.GetPointer() << std::endl;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TEquationContainer, typename TImage>
 LevelSetEvolution<TEquationContainer, LevelSetDenseImage<TImage>>::LevelSetEvolution()
@@ -418,5 +419,6 @@ LevelSetEvolution<TEquationContainer, MalcolmSparseLevelSetImage<VDimension>>::U
 {
   this->m_EquationContainer->UpdateInternalEquationTerms();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkLevelSetEvolution_hxx

@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TRealType, typename TOutputImage>
 DisplacementFieldJacobianDeterminantFilter<TInputImage, TRealType, TOutputImage>::
   DisplacementFieldJacobianDeterminantFilter()
@@ -270,6 +271,7 @@ DisplacementFieldJacobianDeterminantFilter<TInputImage, TRealType, TOutputImage>
   os << indent << "RealValuedInputImage: " << m_RealValuedInputImage.GetPointer() << std::endl;
   print_helper::PrintNumericTrait(os, indent, "NeighborhoodRadius", m_NeighborhoodRadius);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

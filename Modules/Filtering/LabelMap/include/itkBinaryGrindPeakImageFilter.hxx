@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 BinaryGrindPeakImageFilter<TInputImage>::BinaryGrindPeakImageFilter()
@@ -108,5 +109,6 @@ BinaryGrindPeakImageFilter<TInputImage>::PrintSelf(std::ostream & os, Indent ind
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue", m_BackgroundValue);
   itkPrintSelfBooleanMacro(FullyConnected);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

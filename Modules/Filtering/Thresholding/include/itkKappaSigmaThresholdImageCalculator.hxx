@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage>
 KappaSigmaThresholdImageCalculator<TInputImage, TMaskImage>::KappaSigmaThresholdImageCalculator()
   : m_MaskValue(NumericTraits<MaskPixelType>::max())
@@ -127,6 +128,7 @@ KappaSigmaThresholdImageCalculator<TInputImage, TMaskImage>::PrintSelf(std::ostr
   itkPrintSelfObjectMacro(Image);
   itkPrintSelfObjectMacro(Mask);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CleanQuadEdgeMeshFilter
  * \brief TODO
@@ -133,6 +134,7 @@ private:
   CriterionPointer   m_Criterion{};
   DecimationPointer  m_Decimation{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

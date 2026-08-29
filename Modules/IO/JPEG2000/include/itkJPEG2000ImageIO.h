@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class JPEG2000ImageIOInternal;
 class JPEG2000ImageIOInternalEnums;
@@ -170,6 +171,7 @@ private:
   void
   ComputeRegionInTileBoundaries(unsigned int dimension, SizeValueType tileSize, ImageIORegion & streamableRegion) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkJPEG2000ImageIO_h

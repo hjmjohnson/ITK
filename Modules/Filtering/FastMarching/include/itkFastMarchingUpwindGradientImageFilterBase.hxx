@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -157,6 +158,7 @@ FastMarchingUpwindGradientImageFilterBase<TInput, TOutput>::ComputeGradient(Outp
   const GradientImagePointer GradientImage = this->GetGradientImage();
   GradientImage->SetPixel(iNode, gradientPixel);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

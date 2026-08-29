@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SigmoidImageFilter
  * \brief Computes the sigmoid function pixel-wise
@@ -242,6 +243,7 @@ protected:
   SigmoidImageFilter() = default;
   ~SigmoidImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

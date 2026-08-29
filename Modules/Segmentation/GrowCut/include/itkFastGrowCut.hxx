@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TLabelImage, typename TMaskImage>
 void
 FastGrowCut<TInputImage, TLabelImage, TMaskImage>::Reset()
@@ -421,5 +422,6 @@ FastGrowCut<TInputImage, TLabelImage, TMaskImage>::PrintSelf(std::ostream & os, 
   // TODO: print other members
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // ifndef itkFastGrowCut_hxx

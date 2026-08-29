@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 class ImageToImageFilterTestHelper : public ImageToImageFilter<TInputImage, TOutputImage>
@@ -35,6 +36,7 @@ public:
   itkNewMacro(Self);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 int

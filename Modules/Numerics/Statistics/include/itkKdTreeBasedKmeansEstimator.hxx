@@ -20,7 +20,10 @@
 
 #include "itkStatisticsAlgorithm.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TKdTree>
 KdTreeBasedKmeansEstimator<TKdTree>::KdTreeBasedKmeansEstimator()
@@ -429,6 +432,8 @@ KdTreeBasedKmeansEstimator<TKdTree>::PrintPoint(ParameterType & point)
   }
   std::cout << ']';
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOperatorValueType, typename TOutputValueType>
 StrainImageFilter<TInputImage, TOperatorValueType, TOutputValueType>::StrainImageFilter()
@@ -188,6 +189,7 @@ StrainImageFilter<TInputImage, TOperatorValueType, TOutputValueType>::PrintSelf(
   os << indent << "StrainForm: " << static_cast<typename NumericTraits<StrainFormType>::PrintType>(m_StrainForm)
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

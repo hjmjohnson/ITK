@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 ParticleSwarmOptimizer::ParticleSwarmOptimizer()
@@ -81,4 +82,5 @@ ParticleSwarmOptimizer::UpdateSwarm()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

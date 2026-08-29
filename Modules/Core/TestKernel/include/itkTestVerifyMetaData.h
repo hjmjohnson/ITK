@@ -22,6 +22,7 @@
 #include "itkMetaDataObject.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /* A utility function used for testing, this is not intended to be part of the public interface */
 /* Used only to avoid duplicate code in itkMetaDictionaryGTest.cxx and itkHDF5ImageIOTest.cxx */
 template <typename T>
@@ -143,6 +144,7 @@ VerifyMetaDataPrivateTestingUtility(const MetaDataDictionary & metaDict, const s
   }
   return status;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkTestVerifyMetaData_h

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 BinaryShapeKeepNObjectsImageFilter<TInputImage>::BinaryShapeKeepNObjectsImageFilter()
   : m_BackgroundValue(NumericTraits<OutputImagePixelType>::NonpositiveMin())
@@ -120,5 +121,6 @@ BinaryShapeKeepNObjectsImageFilter<TInputImage>::PrintSelf(std::ostream & os, In
   os << indent << "Attribute: " << LabelObjectType::GetNameFromAttribute(m_Attribute) << " (" << m_Attribute << ')'
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension>
 auto
 MetaGroupConverter<VDimension>::CreateMetaObject() -> MetaObjectType *
@@ -81,6 +82,7 @@ MetaGroupConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObjectTyp
   return group;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

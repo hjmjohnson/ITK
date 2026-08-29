@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage, typename TOutputImage>
@@ -87,6 +88,7 @@ ZeroCrossingBasedEdgeDetectionImageFilter<TInputImage, TOutputImage>::PrintSelf(
   print_helper::PrintNumericTrait(os, indent, "ForegroundValue", m_ForegroundValue);
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue", m_BackgroundValue);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ChainCodePath2D::OutputType
 ChainCodePath2D::Evaluate(const InputType & input) const
 {
@@ -132,4 +133,5 @@ ChainCodePath2D::PrintSelf(std::ostream & os, Indent indent) const
   Superclass::PrintSelf(os, indent);
   os << indent << "Chain code 2D:  " << GetChainCodeAsString() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorGradientAnisotropicDiffusionImageFilter
  *
  * This filter performs anisotropic diffusion on a vector itk::Image using the
@@ -95,6 +96,7 @@ protected:
 
   ~VectorGradientAnisotropicDiffusionImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

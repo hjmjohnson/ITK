@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ReinitializeLevelSetImageFilter
  *  \brief Reinitialize the level set to the signed distance function.
  *
@@ -186,6 +187,7 @@ private:
   NodeContainerPointer m_InputNarrowBand{};
   NodeContainerPointer m_OutputNarrowBand{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

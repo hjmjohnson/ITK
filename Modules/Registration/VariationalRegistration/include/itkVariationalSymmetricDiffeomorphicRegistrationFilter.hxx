@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -232,6 +233,7 @@ VariationalSymmetricDiffeomorphicRegistrationFilter<TFixedImage, TMovingImage, T
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

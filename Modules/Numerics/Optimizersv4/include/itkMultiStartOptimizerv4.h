@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class MultiStartOptimizerv4Template
@@ -182,6 +183,7 @@ protected:
 /** This helps to meet backward compatibility */
 using MultiStartOptimizerv4 = MultiStartOptimizerv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

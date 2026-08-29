@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 JoinSeriesImageFilter<TInputImage, TOutputImage>::JoinSeriesImageFilter()
 {
@@ -252,6 +253,7 @@ JoinSeriesImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, I
   os << indent << "Spacing: " << m_Spacing << std::endl;
   os << indent << "Origin: " << m_Origin << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

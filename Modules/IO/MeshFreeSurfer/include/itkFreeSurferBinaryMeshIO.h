@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FreeSurferBinaryMeshIO
  * \brief This class defines how to read Freesurfer binary surface file format.
  * To use IO factory, define the suffix as *.fsb.
@@ -194,6 +195,7 @@ private:
   itk::uint32_t    m_FileTypeIdentifier{ 0 };
   std::ifstream    m_InputFile{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

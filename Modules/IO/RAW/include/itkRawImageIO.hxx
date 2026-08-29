@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** Utility function for writing RAW bytes */
 extern void
@@ -201,5 +202,6 @@ RawImageIO<TPixel, VImageDimension>::Write(const void * buffer)
     WriteRawBytesAfterSwapping(componentType, buffer, file, m_ByteOrder, numberOfBytes, numberOfComponents);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

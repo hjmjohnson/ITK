@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CompareHistogramImageToImageMetric
  *  \brief Compares Histograms between two images to be registered to
  *   a Training Histogram.
@@ -168,6 +169,7 @@ private:
   HistogramPointerType    m_TrainingHistogram{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

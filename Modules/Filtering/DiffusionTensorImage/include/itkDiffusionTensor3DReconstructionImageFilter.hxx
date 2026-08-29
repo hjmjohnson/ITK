@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TReferenceImagePixelType,
           typename TGradientImagePixelType,
           typename TTensorPixelType,
@@ -641,6 +642,7 @@ DiffusionTensor3DReconstructionImageFilter<TReferenceImagePixelType,
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

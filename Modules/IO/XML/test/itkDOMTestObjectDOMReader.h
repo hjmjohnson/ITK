@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class DOMTestObjectDOMReader : public DOMReader<DOMTestObject>
 {
@@ -92,6 +93,7 @@ DOMTestObjectDOMReader::GenerateData(const DOMNodeType * inputdom, const void *)
   ifs.close();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDOMTestObjectDOMReader_h

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Constructor
  */
@@ -261,6 +262,7 @@ HessianGaussianImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & 
   os << "DerivativeFilter: " << m_DerivativeFilter << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkHessianGaussianImageFilter_hxx

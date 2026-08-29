@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /*#=== IMAGE INFORMATION DEFINITION ============================================
 #
 #The rest of this file contains ONE line per image, this line contains the
@@ -2149,4 +2150,5 @@ PhilipsPAR::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

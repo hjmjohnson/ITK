@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RecursiveMultiResolutionPyramidImageFilter
  * \brief Creates a multi-resolution pyramid using a recursive implementation.
  *
@@ -114,6 +115,7 @@ protected:
   void
   GenerateData() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

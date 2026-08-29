@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /*
  * ComposeDisplacementFieldsImageFilter class definitions
@@ -122,6 +123,7 @@ ComposeDisplacementFieldsImageFilter<InputImage, TOutputImage>::PrintSelf(std::o
   itkPrintSelfObjectMacro(Interpolator);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

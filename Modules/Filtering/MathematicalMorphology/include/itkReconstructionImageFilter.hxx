@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TCompare>
 ReconstructionImageFilter<TInputImage, TOutputImage, TCompare>::ReconstructionImageFilter()
   : m_UseInternalCopy(true)
@@ -342,5 +343,6 @@ ReconstructionImageFilter<TInputImage, TOutputImage, TCompare>::PrintSelf(std::o
   os << indent << "MarkerValue: " << m_MarkerValue << std::endl;
   os << indent << "UseInternalCopy: " << m_UseInternalCopy << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

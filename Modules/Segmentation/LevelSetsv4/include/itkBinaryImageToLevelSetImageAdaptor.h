@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryImageToLevelSetImageAdaptor
  *  \brief Converts one binary image to the appropriate level-set type
@@ -430,6 +431,7 @@ protected:
   CreateMinimalInterface();
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

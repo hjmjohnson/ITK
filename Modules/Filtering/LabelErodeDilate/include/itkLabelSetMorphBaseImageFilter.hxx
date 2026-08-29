@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, bool doDilate, typename TOutputImage>
 LabelSetMorphBaseImageFilter<TInputImage, doDilate, TOutputImage>::LabelSetMorphBaseImageFilter()
 {
@@ -276,5 +277,6 @@ LabelSetMorphBaseImageFilter<TInputImage, doDilate, TOutputImage>::writeDist(std
   writer->SetFileName(fname.c_str());
   writer->Update();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

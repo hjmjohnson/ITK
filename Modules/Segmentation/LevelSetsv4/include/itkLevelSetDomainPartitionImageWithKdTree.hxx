@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 void
 LevelSetDomainPartitionImageWithKdTree<TImage>::PopulateListDomain()
@@ -68,5 +69,6 @@ LevelSetDomainPartitionImageWithKdTree<TImage>::PopulateDomainWithKdTree()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

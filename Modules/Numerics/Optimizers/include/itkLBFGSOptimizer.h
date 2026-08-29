@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LBFGSOptimizer
  * \brief Wrap of the vnl_lbfgs algorithm for use in ITKv4 registration framework.
  * The vnl_lbfgs is a wrapper for the NETLIB fortran code by Nocedal
@@ -179,6 +180,7 @@ private:
   double       m_LineSearchAccuracy{};
   double       m_DefaultStepLength{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

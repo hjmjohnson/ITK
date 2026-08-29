@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BYUMeshIO
  * \brief This class defines how to read and write BYU Geometry File Format.
@@ -165,6 +166,7 @@ private:
   SizeValueType    m_FirstCellId{};
   SizeValueType    m_LastCellId{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

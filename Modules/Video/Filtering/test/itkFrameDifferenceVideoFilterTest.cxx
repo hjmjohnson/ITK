@@ -39,7 +39,10 @@ using SizeValueType = itk::SizeValueType;
  * Helper function
  */
 
-namespace itk::FrameDifferenceVideoFilterTest
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace FrameDifferenceVideoFilterTest
 {
 
 /**
@@ -67,7 +70,9 @@ CreateInputFrame(InputPixelType val)
   return out;
 }
 
-} // namespace itk::FrameDifferenceVideoFilterTest
+} // namespace FrameDifferenceVideoFilterTest
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 /**

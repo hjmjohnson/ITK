@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MorphologicalSignedDistanceTransformImageFilter
  * \brief Signed distance transform of a mask using parabolic morphological
@@ -196,6 +197,7 @@ private:
   typename ThreshType::Pointer m_Thresh;
   typename HelperType::Pointer m_Helper;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkMorphologicalSignedDistanceTransformImageFilter.hxx"

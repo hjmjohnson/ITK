@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageToParametricSpaceFilter
  * \brief Generate a mesh of parametric space from input images.
  *
@@ -110,6 +111,7 @@ private:
    * will be stored as Data at each one of the mesh points. */
   bool m_ComputeIndices{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

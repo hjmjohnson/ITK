@@ -40,6 +40,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TWaveletFunction>
 WaveletCoeffsPhaseAnalyzisImageFilter<TImageType, TWaveletFunction>::WaveletCoeffsPhaseAnalyzisImageFilter()
 {
@@ -140,5 +141,6 @@ WaveletCoeffsPhaseAnalyzisImageFilter<TImageType, TWaveletFunction>::PrintSelf(s
   os << indent << " ApplySoftThreshold: " << m_ApplySoftThreshold << std::endl;
   os << indent << " ThresholdNumOfSigmas: " << m_ThresholdNumOfSigmas << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

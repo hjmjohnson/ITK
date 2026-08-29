@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NormalizedCorrelationTwoImageToOneImageMetric
  * \brief Computes similarity between two fixed images and one moving image
  *
@@ -108,6 +109,7 @@ private:
   bool m_SubtractMean;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

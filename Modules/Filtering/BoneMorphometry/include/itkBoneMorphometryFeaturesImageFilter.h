@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BoneMorphometryFeaturesImageFilter
  * \brief Compute the percent bone volume [BVTV], trabecular thickness [TbTh], trabecular separation [TbSp],
  * trabecular number [TbN] and Bone Surface to Bone Volume ratio [BSBV] for each voxel of
@@ -152,6 +153,7 @@ private:
   NeighborhoodRadiusType m_NeighborhoodRadius;
 
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

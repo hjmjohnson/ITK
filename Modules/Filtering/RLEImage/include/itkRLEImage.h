@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RLEImage
  *
  *  \brief Run-Length Encoded image.
@@ -299,6 +300,7 @@ private:
   /** Memory for the current buffer. */
   mutable typename BufferType::Pointer m_Buffer;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

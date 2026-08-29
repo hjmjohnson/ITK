@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 MultiGradientOptimizerv4Template<TInternalComputationValueType>::MultiGradientOptimizerv4Template()
@@ -219,6 +220,7 @@ MultiGradientOptimizerv4Template<TInternalComputationValueType>::ResumeOptimizat
   } // while (!m_Stop)
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

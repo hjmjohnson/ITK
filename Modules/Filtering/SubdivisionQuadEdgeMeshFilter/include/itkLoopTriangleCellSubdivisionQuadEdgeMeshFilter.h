@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LoopTriangleCellSubdivisionQuadEdgeMeshFilter
  * \brief Subdivide a triangular surface QuadEdgeMesh using Loop Subdivision
@@ -121,6 +122,7 @@ protected:
   InputPointType
   SmoothingPoint(const InputPointType & ipt, const InputPointsContainer * points);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLoopTriangleCellSubdivisionQuadEdgeMeshFilter.hxx"

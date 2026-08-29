@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class IterativeDeconvolutionImageFilter
  * \brief Abstract base class for filters that implement iterative
@@ -158,6 +159,7 @@ private:
   ModifiedTimeType m_InputMTime{};
   ModifiedTimeType m_KernelMTime{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

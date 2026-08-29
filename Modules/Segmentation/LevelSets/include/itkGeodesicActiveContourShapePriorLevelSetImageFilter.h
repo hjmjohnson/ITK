@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GeodesicActiveContourShapePriorLevelSetImageFilter
  * \brief Segments structures in an image based on a user supplied edge potential map
  * and user supplied shape model.
@@ -170,6 +171,7 @@ protected:
 private:
   GeodesicActiveContourFunctionPointer m_GeodesicActiveContourFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

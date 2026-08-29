@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class JPEG2000ImageIOFactory
  * \brief Supports for the JPEG2000 file format based on openjpeg
@@ -84,6 +85,7 @@ protected:
   JPEG2000ImageIOFactory();
   ~JPEG2000ImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

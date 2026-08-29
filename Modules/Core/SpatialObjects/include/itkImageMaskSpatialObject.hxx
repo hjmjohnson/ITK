@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension, typename TPixel>
 ImageMaskSpatialObject<TDimension, TPixel>::ImageMaskSpatialObject()
@@ -230,6 +231,7 @@ ImageMaskSpatialObject<TDimension, TPixel>::GetAxisAlignedBoundingBoxRegion() co
   return ComputeMyBoundingBoxInIndexSpace();
 }
 #endif // ITK_LEGACY_REMOVE
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif //__ImageMaskSpatialObject_hxx

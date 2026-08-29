@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputMesh>
 ConformalFlatteningMeshFilter<TInputMesh, TOutputMesh>::ConformalFlatteningMeshFilter()
@@ -548,6 +549,7 @@ ConformalFlatteningMeshFilter<TInputMesh, TOutputMesh>::GenerateData()
     outputMesh->SetBoundaryAssignments(dim, inputMesh->GetBoundaryAssignments(dim));
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

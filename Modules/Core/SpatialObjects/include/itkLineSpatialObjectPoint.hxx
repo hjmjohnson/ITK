@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TPointDimension>
 LineSpatialObjectPoint<TPointDimension>::LineSpatialObjectPoint()
@@ -58,6 +59,7 @@ LineSpatialObjectPoint<TPointDimension>::SetNormalInObjectSpace(CovariantVectorT
   m_NormalArrayInObjectSpace[index] = normal;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

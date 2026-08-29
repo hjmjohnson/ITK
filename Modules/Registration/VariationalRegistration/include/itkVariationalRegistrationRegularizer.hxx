@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -48,6 +49,7 @@ VariationalRegistrationRegularizer<TDisplacementField>::PrintSelf(std::ostream &
   os << m_UseImageSpacing << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

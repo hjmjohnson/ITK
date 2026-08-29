@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class GaussianSmoothingOnUpdateDisplacementFieldTransform
  * \brief Modifies the UpdateTransformParameters method
@@ -128,6 +129,7 @@ protected:
   GaussianSmoothingOperatorType m_GaussianSmoothingOperator{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

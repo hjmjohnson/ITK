@@ -23,7 +23,10 @@
 #include "itkCompensatedSummation.h"
 #include "itkMeasurementVectorTraits.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 WeightedMeanSampleFilter<TSample>::WeightedMeanSampleFilter()
@@ -178,6 +181,8 @@ WeightedMeanSampleFilter<TSample>::ComputeMeanWithWeightingFunction()
 
   decoratedOutput->Set(output);
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

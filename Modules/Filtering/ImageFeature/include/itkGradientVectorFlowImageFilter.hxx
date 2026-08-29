@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TInternalPixel>
 GradientVectorFlowImageFilter<TInputImage, TOutputImage, TInternalPixel>::GradientVectorFlowImageFilter()
   : m_TimeStep(0.001)
@@ -254,6 +255,7 @@ GradientVectorFlowImageFilter<TInputImage, TOutputImage, TInternalPixel>::PrintS
   os << indent << "TimeStep: " << m_TimeStep << std::endl;
   itkPrintSelfObjectMacro(LaplacianFilter);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

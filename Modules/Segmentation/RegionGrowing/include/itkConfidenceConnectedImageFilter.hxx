@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ConfidenceConnectedImageFilter<TInputImage, TOutputImage>::ConfidenceConnectedImageFilter()
@@ -377,6 +378,7 @@ ConfidenceConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
     throw ProcessAborted(__FILE__, __LINE__);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

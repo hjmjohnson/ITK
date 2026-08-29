@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ShanbhagThresholdImageFilter
@@ -102,6 +103,7 @@ protected:
   ~ShanbhagThresholdImageFilter() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

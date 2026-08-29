@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ExpectationBasedPointSetToPointSetMetricv4
  * \brief Computes an expectation-based metric between two point sets.
@@ -135,6 +136,7 @@ private:
   MeasureType    m_Denominator{};
   unsigned int   m_EvaluationKNeighborhood{ 50 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

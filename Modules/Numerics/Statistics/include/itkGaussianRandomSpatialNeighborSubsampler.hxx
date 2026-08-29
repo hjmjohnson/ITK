@@ -18,7 +18,10 @@
 #ifndef itkGaussianRandomSpatialNeighborSubsampler_hxx
 #define itkGaussianRandomSpatialNeighborSubsampler_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 template <typename TSample, typename TRegion>
@@ -68,6 +71,8 @@ GaussianRandomSpatialNeighborSubsampler<TSample, TRegion>::PrintSelf(std::ostrea
   os << std::endl;
 }
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

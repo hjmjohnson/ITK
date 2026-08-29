@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class MultiTransform
  * \brief This abstract class contains a list of transforms and provides basic methods.
@@ -350,6 +351,7 @@ protected:
   mutable ModifiedTimeType       m_LocalParametersUpdateTime{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

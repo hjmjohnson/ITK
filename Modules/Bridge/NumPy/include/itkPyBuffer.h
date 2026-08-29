@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class PyBuffer
@@ -80,6 +81,7 @@ public:
   _get_image_view_from_contiguous_array(PyObject * arr, PyObject * shape, PyObject * numOfComponent);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SingleValuedNonLinearVnlOptimizerv4::SingleValuedNonLinearVnlOptimizerv4()
   : m_CostFunctionAdaptor(nullptr)
 {
@@ -108,4 +109,5 @@ SingleValuedNonLinearVnlOptimizerv4::PrintSelf(std::ostream & os, Indent indent)
   os << indent << "Command observer " << this->m_Command.GetPointer() << std::endl;
   os << indent << "Cost Function adaptor" << this->m_CostFunctionAdaptor.get() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

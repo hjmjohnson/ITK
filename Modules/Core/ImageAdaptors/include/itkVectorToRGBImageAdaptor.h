@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VectorToRGBImageAdaptor
  * \brief Presents an image of pixel type Vector as being and image of
@@ -62,6 +63,7 @@ protected:
   VectorToRGBImageAdaptor() = default;
   ~VectorToRGBImageAdaptor() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

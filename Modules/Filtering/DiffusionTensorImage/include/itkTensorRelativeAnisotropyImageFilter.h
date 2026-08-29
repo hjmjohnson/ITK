@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // This functor class invokes the computation of relative anisotropy from
 // every pixel.
 namespace Functor
@@ -108,6 +109,7 @@ protected:
   TensorRelativeAnisotropyImageFilter() = default;
   ~TensorRelativeAnisotropyImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegionalMaximaImageFilter
  * \brief Produce a binary image where foreground is the regional maxima of the
  * input image.
@@ -150,6 +151,7 @@ private:
   OutputImagePixelType m_ForegroundValue{};
   OutputImagePixelType m_BackgroundValue{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class OrthogonallyCorrected2DParametricPath
  * \brief  Represent an orthogonally corrected 2D parametric path
@@ -124,6 +125,7 @@ private:
   OriginalPathConstPointer         m_OriginalPath{};
   OrthogonalCorrectionTablePointer m_OrthogonalCorrectionTable{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

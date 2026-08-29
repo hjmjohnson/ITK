@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // VALID file extensions
 static const std::string __MGH_EXT(".mgh");
@@ -806,4 +807,5 @@ MGHImageIO ::GetOrientation(itk::Matrix<double> directions)
   }
   return orientation;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

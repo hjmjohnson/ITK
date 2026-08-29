@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage1, typename TInputImage2>
 ContourDirectedMeanDistanceImageFilter<TInputImage1, TInputImage2>::ContourDirectedMeanDistanceImageFilter()
   : m_DistanceMap(nullptr)
@@ -240,5 +241,6 @@ ContourDirectedMeanDistanceImageFilter<TInputImage1, TInputImage2>::PrintSelf(st
   itkPrintSelfBooleanMacro(UseImageSpacing);
   os << indent << "ContourDirectedMeanDistance: " << m_ContourDirectedMeanDistance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

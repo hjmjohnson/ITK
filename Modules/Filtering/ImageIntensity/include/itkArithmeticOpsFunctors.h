@@ -20,7 +20,10 @@
 
 #include "itkMath.h"
 
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 
 /**
@@ -359,7 +362,9 @@ public:
     return (TOutput)(-A);
   }
 };
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 #endif

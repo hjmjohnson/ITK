@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 auto
@@ -488,6 +489,7 @@ NormalizedCorrelationImageToImageMetric<TFixedImage, TMovingImage>::PrintSelf(st
   os << indent << "SubtractMean: " << m_SubtractMean << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

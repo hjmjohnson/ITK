@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFixedImage, typename TMovingImage>
 auto
 CorrelationCoefficientHistogramImageToImageMetric<TFixedImage, TMovingImage>::EvaluateMeasure(
@@ -131,6 +132,7 @@ CorrelationCoefficientHistogramImageToImageMetric<TFixedImage, TMovingImage>::Co
 
   return var;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkCorrelationCoefficientHistogramImageToImageMetric_hxx

@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 MedialThicknessImageFilter3D<TInputImage, TOutputImage>::MedialThicknessImageFilter3D()
@@ -56,6 +57,7 @@ MedialThicknessImageFilter3D<TInputImage, TOutputImage>::PrintSelf(std::ostream 
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMedialThicknessImageFilter3D_hxx

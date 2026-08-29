@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MetaImageIOFactory
  * \brief Create instances of MetaImageIO objects using an object factory.
@@ -66,6 +67,7 @@ protected:
   MetaImageIOFactory();
   ~MetaImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

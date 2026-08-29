@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 CollidingFrontsImageFilter<TInputImage, TOutputImage>::CollidingFrontsImageFilter()
   : m_SeedPoints1(nullptr)
@@ -154,6 +155,7 @@ CollidingFrontsImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & 
 
   os << indent << "NegativeEpsilon: " << m_NegativeEpsilon << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

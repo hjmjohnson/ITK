@@ -48,6 +48,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ScancoImageIO::ScancoImageIO()
 {
   this->m_FileType = IOFileEnum::Binary;
@@ -877,4 +878,5 @@ ScancoImageIO::Write(const void * buffer)
   outFile.close();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

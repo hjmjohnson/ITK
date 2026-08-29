@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TTriangleCellSubdivisionFilter>
 void
 CellAreaTriangleCellSubdivisionCriterion<TTriangleCellSubdivisionFilter>::Compute(MeshType *                 mesh,
@@ -64,5 +65,6 @@ CellAreaTriangleCellSubdivisionCriterion<TTriangleCellSubdivisionFilter>::Comput
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryThresholdProjectionImageFilter
  * \brief BinaryThreshold projection
@@ -189,6 +190,7 @@ protected:
   /** Pixel value for input Threshold */
   InputPixelType m_ThresholdValue{};
 }; // end BinaryThresholdProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

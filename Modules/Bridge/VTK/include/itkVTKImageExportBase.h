@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VTKImageExportBase
  * \brief Superclass for VTKImageExport instantiations.
@@ -239,6 +240,7 @@ private:
   /** PipelineMTime from the last call to PipelineModifiedCallback. */
   ModifiedTimeType m_LastPipelineMTime{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class FastMarchingStoppingCriterionBase
@@ -107,5 +108,6 @@ protected:
     m_CurrentValue = iValue;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

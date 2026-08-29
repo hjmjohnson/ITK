@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageIOFactory
  * \brief Create instances of ImageIO objects using an object factory.
  * \ingroup ITKIOImageBase
@@ -66,6 +67,7 @@ protected:
   ~ImageIOFactory() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

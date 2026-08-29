@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TKernelImage, typename TOutputImage, typename TInternalPrecision>
 InverseDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TInternalPrecision>::
@@ -84,5 +85,6 @@ InverseDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TIntern
   os << indent << "KernelZeroMagnitudeThreshold: " << m_KernelZeroMagnitudeThreshold << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

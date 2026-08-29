@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class NullImageToImageFilterDriver
@@ -192,5 +193,6 @@ NullImageToImageFilterDriver<TInputImage, TOutputImage>::Execute()
   std::cout << "Execution time was approximately " << (stop - start) << " clock cycles." << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

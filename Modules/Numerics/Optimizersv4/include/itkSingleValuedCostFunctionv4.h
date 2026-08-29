@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SingleValuedCostFunctionv4Template
  * \brief This class is a base for a CostFunction that returns a
@@ -93,6 +94,7 @@ protected:
 /** This helps to meet backward compatibility */
 using SingleValuedCostFunctionv4 = SingleValuedCostFunctionv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

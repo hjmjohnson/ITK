@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType, unsigned int VDimension>
 CenteredAffineTransform<TParametersValueType, VDimension>::CenteredAffineTransform()
@@ -175,6 +176,7 @@ CenteredAffineTransform<TParametersValueType, VDimension>::GetInverseTransform()
   return Superclass::InvertTransform(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 LevelSetDomainMapImageFilter<TInputImage, TOutputImage>::LevelSetDomainMapImageFilter()
   : m_InputImage(nullptr)
@@ -184,6 +185,7 @@ LevelSetDomainMapImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream 
   os << indent << "DomainMap size: " << this->m_DomainMap.size() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } /* end namespace itk */
 
 #endif

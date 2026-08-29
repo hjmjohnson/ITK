@@ -41,6 +41,7 @@ constexpr int8_t LBG_COMPLETED{ 3 };
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageKmeansModelEstimator
  * \brief Base class for ImageKmeansModelEstimator object.
@@ -294,6 +295,7 @@ private:
   CodebookMatrixOfDoubleType  m_CodewordDistortion{};
 }; // class ImageKmeansModelEstimator
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

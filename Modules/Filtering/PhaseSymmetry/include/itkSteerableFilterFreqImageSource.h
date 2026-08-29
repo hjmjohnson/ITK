@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 class SteerableFilterFreqImageSource : public ImageSource<TOutputImage>
@@ -147,6 +148,7 @@ private:
   double          m_AngularBandwidth;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

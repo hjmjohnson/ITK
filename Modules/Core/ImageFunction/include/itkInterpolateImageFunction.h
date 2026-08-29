@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class InterpolateImageFunction
  * \brief Base class for all image interpolators.
@@ -144,6 +145,7 @@ protected:
     Superclass::PrintSelf(os, indent);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput>
 FastMarchingQuadEdgeMeshFilterBase<TInput, TOutput>::FastMarchingQuadEdgeMeshFilterBase()
   : Superclass()
@@ -675,6 +676,7 @@ FastMarchingQuadEdgeMeshFilterBase<TInput, TOutput>::InitializeOutput(OutputMesh
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkFastMarchingQuadEdgeMeshFilterBase_hxx

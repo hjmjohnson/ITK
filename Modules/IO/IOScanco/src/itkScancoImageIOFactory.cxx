@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ScancoImageIOFactory::ScancoImageIOFactory()
 {
   this->RegisterOverride(
@@ -54,4 +55,5 @@ ScancoImageIOFactoryRegister__Private()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

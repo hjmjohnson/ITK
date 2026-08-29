@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PathIterator
  * \brief PathIterator iterates (traces) over a path through an image.
@@ -128,6 +129,7 @@ public:
   /** Default Destructor. */
   ~PathIterator() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

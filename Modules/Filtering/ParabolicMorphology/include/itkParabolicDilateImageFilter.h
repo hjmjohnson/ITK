@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParabolicDilateImageFilter
  * \brief Class for morphological dilation
@@ -87,6 +88,7 @@ protected:
   ~ParabolicDilateImageFilter() override = default;
   //   void PrintSelf(std::ostream& os, Indent indent) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

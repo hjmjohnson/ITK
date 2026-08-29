@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // ----------------------------------------------------------------------------
 template <typename TOutput, unsigned int VDimension>
@@ -705,5 +706,6 @@ DiscreteLevelSetImage<TOutput, VDimension>::Graft(const DataObject * data)
   this->m_NeighborhoodScales = LevelSet->m_NeighborhoodScales;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkDiscreteLevelSetImage_hxx

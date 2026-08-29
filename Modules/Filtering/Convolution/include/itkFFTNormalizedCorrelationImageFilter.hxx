@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 FFTNormalizedCorrelationImageFilter<TInputImage, TOutputImage>::GenerateData()
@@ -41,6 +42,7 @@ FFTNormalizedCorrelationImageFilter<TInputImage, TOutputImage>::PrintSelf(std::o
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

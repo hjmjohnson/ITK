@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MatrixCoefficients
  * \brief Superclass for all the matrix coefficients computation classes.
  * \note  Belongs to the parameterisation package.
@@ -347,5 +348,6 @@ public:
     return oValue;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

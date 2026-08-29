@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const DeformableSimplexMesh3DGradientConstraintForceFilterEnums::SIDE value)
@@ -37,4 +38,5 @@ operator<<(std::ostream & out, const DeformableSimplexMesh3DGradientConstraintFo
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

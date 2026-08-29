@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUUnaryFunctorImageFilter
  * \brief Implements pixel-wise generic operation on one image using the GPU.
  *
@@ -111,6 +112,7 @@ private:
   FunctorType m_Functor{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

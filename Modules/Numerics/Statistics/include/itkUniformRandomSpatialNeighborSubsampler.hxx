@@ -19,7 +19,10 @@
 #define itkUniformRandomSpatialNeighborSubsampler_hxx
 #include <set>
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 template <typename TSample, typename TRegion>
@@ -198,6 +201,8 @@ UniformRandomSpatialNeighborSubsampler<TSample, TRegion>::PrintSelf(std::ostream
   os << std::endl;
 }
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

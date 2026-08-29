@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class IsoContourDistanceImageFilter
  *  \brief Compute an approximate distance from an interpolated isocontour
@@ -204,6 +205,7 @@ private:
 
   std::mutex m_Mutex{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

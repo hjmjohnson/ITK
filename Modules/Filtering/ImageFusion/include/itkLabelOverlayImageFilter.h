@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelOverlayImageFilter
  * \brief Apply a colormap to a label image and put it on top of the
@@ -151,6 +152,7 @@ private:
   double         m_Opacity{};
   LabelPixelType m_BackgroundValue{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

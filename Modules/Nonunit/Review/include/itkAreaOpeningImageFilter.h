@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AreaOpeningImageFilter
  * \brief Morphological opening by attributes
@@ -132,5 +133,6 @@ protected:
 private:
   bool m_UseImageSpacing{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

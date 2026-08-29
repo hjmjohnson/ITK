@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ExtrapolateImageFunction
  * \brief Base class for all image extrapolaters.
@@ -111,6 +112,7 @@ protected:
   ExtrapolateImageFunction() = default;
   ~ExtrapolateImageFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

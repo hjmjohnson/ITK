@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SpatialObjectProperty::SpatialObjectProperty() { this->Clear(); }
 
 void
@@ -204,4 +205,5 @@ SpatialObjectProperty::PrintSelf(std::ostream & os, Indent indent) const
     os << indent.GetNextIndent() << keyval.first << ": " << keyval.second << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

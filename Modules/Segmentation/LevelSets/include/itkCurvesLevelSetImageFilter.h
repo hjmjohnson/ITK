@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CurvesLevelSetImageFilter
  *  \brief Segments structures in images based on user supplied edge potential map.
  *
@@ -155,6 +156,7 @@ protected:
 private:
   CurvesFunctionPointer m_CurvesFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

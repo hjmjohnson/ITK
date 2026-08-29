@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 Rigid3DPerspectiveTransform<TParametersValueType>::Rigid3DPerspectiveTransform()
@@ -195,6 +196,7 @@ Rigid3DPerspectiveTransform<TParametersValueType>::ComputeJacobianWithRespectToP
   // TODO
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // See https://docs.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2059?view=vs-2019
 #ifdef STRICT
 #  define TEMPINPLACELABELMAPSTRICT STRICT
@@ -173,6 +174,7 @@ private:
   void
   MergeWithStrict();
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

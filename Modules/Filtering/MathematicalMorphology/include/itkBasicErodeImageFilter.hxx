@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 BasicErodeImageFilter<TInputImage, TOutputImage, TKernel>::BasicErodeImageFilter()
 {
@@ -56,5 +57,6 @@ BasicErodeImageFilter<TInputImage, TOutputImage, TKernel>::Evaluate(const Neighb
 
   return min;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

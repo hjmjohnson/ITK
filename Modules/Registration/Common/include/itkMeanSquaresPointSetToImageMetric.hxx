@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Get the match Measure
  */
@@ -277,6 +278,7 @@ MeanSquaresPointSetToImageMetric<TFixedPointSet, TMovingImage>::GetValueAndDeriv
   value = measure;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

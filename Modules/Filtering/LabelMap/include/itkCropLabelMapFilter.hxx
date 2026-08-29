@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 void
 CropLabelMapFilter<TInputImage>::GenerateOutputInformation()
@@ -71,6 +72,7 @@ CropLabelMapFilter<TInputImage>::PrintSelf(std::ostream & os, Indent indent) con
   os << indent << "UpperBoundaryCropSize: " << m_UpperBoundaryCropSize << std::endl;
   os << indent << "LowerBoundaryCropSize: " << m_LowerBoundaryCropSize << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

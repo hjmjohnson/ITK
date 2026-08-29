@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TileMontage
  * \brief Determines registrations for an n-Dimensional mosaic of images.
  *
@@ -357,6 +358,7 @@ private:
   friend class TileMergeImageFilter;
 }; // class TileMontage
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

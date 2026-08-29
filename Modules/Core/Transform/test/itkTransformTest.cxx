@@ -21,7 +21,10 @@
 #include "itkTestingMacros.h"
 #include "itkTransform.h"
 
-namespace itk::itkTransformTestHelpers
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace itkTransformTestHelpers
 {
 
 template <typename TScalar, unsigned int VInputDimension, unsigned int VOutputDimension>
@@ -325,7 +328,9 @@ public:
 };
 
 
-} // namespace itk::itkTransformTestHelpers
+} // namespace itkTransformTestHelpers
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

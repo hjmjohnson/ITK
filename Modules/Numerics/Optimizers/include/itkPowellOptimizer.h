@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PowellOptimizer
  * \brief Implements Powell optimization using Brent line search.
  *
@@ -284,6 +285,7 @@ private:
 
   std::ostringstream m_StopConditionDescription{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

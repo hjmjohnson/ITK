@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // This functor class applies a linear transformation A.x + B
 // to input values.
 namespace Functor
@@ -203,6 +204,7 @@ private:
   OutputPixelType m_OutputMinimum{};
   OutputPixelType m_OutputMaximum{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

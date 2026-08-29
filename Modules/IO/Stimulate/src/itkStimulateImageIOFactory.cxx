@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 StimulateImageIOFactory::StimulateImageIOFactory()
 {
   this->RegisterOverride(
@@ -59,4 +60,5 @@ StimulateImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<StimulateImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

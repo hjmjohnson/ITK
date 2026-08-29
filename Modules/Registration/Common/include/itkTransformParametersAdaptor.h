@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformParametersAdaptor
  * \brief Base helper class intended for multi-resolution image registration.
  *
@@ -123,6 +124,7 @@ protected:
 
   TransformPointer m_Transform{};
 }; // class TransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkTransformParametersAdaptor_h */

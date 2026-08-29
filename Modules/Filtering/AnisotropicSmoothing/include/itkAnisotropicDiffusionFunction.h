@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AnisotropicDiffusionFunction
  * This class is a virtual base for anisotropic diffusion function objects.  It
@@ -252,6 +253,7 @@ private:
   double       m_ConductanceParameter{};
   TimeStepType m_TimeStep{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

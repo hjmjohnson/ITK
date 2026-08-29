@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 DisplacementFieldTransformParametersAdaptor<TTransform>::DisplacementFieldTransformParametersAdaptor()
@@ -237,6 +238,7 @@ DisplacementFieldTransformParametersAdaptor<TTransform>::AdaptTransformParameter
   this->m_Transform->SetInverseDisplacementField(newInverseDisplacementField);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

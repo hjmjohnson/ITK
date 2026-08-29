@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType, typename TKernel>
 void
@@ -66,6 +67,7 @@ AdaptiveHistogramEqualizationImageFilter<TImageType, TKernel>::PrintSelf(std::os
 
   itkPrintSelfBooleanMacro(UseLookupTable);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

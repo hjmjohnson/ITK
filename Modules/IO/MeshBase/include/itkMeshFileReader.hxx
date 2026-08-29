@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputMesh, typename ConvertPointPixelTraits, typename ConvertCellPixelTraits>
 MeshFileReader<TOutputMesh, ConvertPointPixelTraits, ConvertCellPixelTraits>::MeshFileReader()
   : m_MeshIO(nullptr)
@@ -846,5 +847,6 @@ MeshFileReader<TOutputMesh, ConvertPointPixelTraits, ConvertCellPixelTraits>::Re
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

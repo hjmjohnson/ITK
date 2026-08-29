@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegionBasedLevelSetFunctionData
  *
  * \brief Helper class used to share data in the ScalarChanAndVeseLevelSetFunction.
@@ -125,6 +126,7 @@ protected:
   RegionBasedLevelSetFunctionData() = default;
   ~RegionBasedLevelSetFunctionData() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,7 +23,10 @@ constexpr unsigned int MeasurementVectorSize2{ 3 };
 
 using MeasurementVectorType2 = itk::Array<float>;
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 class MyWeightedCovarianceSampleFilter : public WeightedCovarianceSampleFilter<TSample>
@@ -49,7 +52,9 @@ public:
     Superclass::MakeOutput(index);
   }
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

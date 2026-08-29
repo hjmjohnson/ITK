@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 PermuteAxesImageFilter<TImage>::PermuteAxesImageFilter()
@@ -216,6 +217,7 @@ PermuteAxesImageFilter<TImage>::DynamicThreadedGenerateData(const OutputImageReg
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

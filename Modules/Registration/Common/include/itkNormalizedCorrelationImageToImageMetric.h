@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NormalizedCorrelationImageToImageMetric
  * \brief Computes similarity between two images to be registered
  *
@@ -109,6 +110,7 @@ protected:
 private:
   bool m_SubtractMean{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

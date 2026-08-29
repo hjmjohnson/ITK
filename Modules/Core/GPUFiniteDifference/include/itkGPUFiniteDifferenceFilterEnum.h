@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUFiniteDifferenceFilterEnum
  * \ingroup ITKGPUFiniteDifference
@@ -36,6 +37,7 @@ enum class GPUFiniteDifferenceFilterEnum : uint8_t
 /** Define how to print enumeration values */
 extern ITKGPUFiniteDifference_EXPORT std::ostream &
                                      operator<<(std::ostream & out, const GPUFiniteDifferenceFilterEnum value);
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

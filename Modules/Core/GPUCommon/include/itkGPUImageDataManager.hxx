@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename ImageType>
 void
 GPUImageDataManager<ImageType>::SetImagePointer(ImageType * img)
@@ -140,6 +141,7 @@ GPUImageDataManager<ImageType>::MakeGPUBufferUpToDate()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

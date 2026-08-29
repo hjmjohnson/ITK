@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //////////////////////////////////////////////////////////////////////////////
 /** \def itkQEMeshForAllPointsMacro
  * \brief Iterate on all the itk::QuadEdgeMeshPoint of a given
@@ -163,6 +164,7 @@ namespace itk
   }                                        \
   itkQEMeshForAllCellsEndMacro             \
   }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

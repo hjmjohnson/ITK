@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ParticleSwarmOptimizerBase
  * \brief Abstract implementation of a Particle Swarm Optimization (PSO) algorithm.
  *
@@ -257,6 +258,7 @@ protected:
   RandomVariateGeneratorType::IntegerType m_Seed{};
   bool                                    m_UseSeed{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

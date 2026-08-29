@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TAttributeAccessor>
 AttributeKeepNObjectsLabelMapFilter<TImage, TAttributeAccessor>::AttributeKeepNObjectsLabelMapFilter()
@@ -96,5 +97,6 @@ AttributeKeepNObjectsLabelMapFilter<TImage, TAttributeAccessor>::PrintSelf(std::
   os << indent << "NumberOfObjects: " << m_NumberOfObjects << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

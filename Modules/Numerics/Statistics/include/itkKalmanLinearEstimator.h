@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class KalmanLinearEstimator
  * \brief Implement a linear recursive estimator.
@@ -181,6 +182,7 @@ KalmanLinearEstimator<T, VEstimatorDimension>::UpdateVariance(const VectorType &
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

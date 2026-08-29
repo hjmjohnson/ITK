@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform<TParametersValueType, VDimension>::
@@ -249,6 +250,7 @@ GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform<TParametersValueType,
      << this->m_GaussianTemporalSmoothingVarianceForTheTotalField << std::endl
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

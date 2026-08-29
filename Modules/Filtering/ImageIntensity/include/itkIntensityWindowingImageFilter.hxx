@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 IntensityWindowingImageFilter<TInputImage, TOutputImage>::IntensityWindowingImageFilter()
@@ -115,6 +116,7 @@ IntensityWindowingImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream
   print_helper::PrintNumericTrait(os, indent, "Shift offset", this->m_Shift);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

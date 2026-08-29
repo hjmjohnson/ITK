@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension, typename TTraits>
 const typename QuadEdgeMesh<TPixel, VDimension, TTraits>::PointIdentifier
   QuadEdgeMesh<TPixel, VDimension, TTraits>::m_NoPoint = std::numeric_limits<PointIdentifier>::max();
@@ -1464,6 +1465,7 @@ QuadEdgeMesh<TPixel, VDimension, TTraits>::ComputeNumberOfEdges() const -> CellI
 {
   return static_cast<CellIdentifier>(this->GetEdgeCells()->size());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

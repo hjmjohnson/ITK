@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 GiplImageIOFactory::GiplImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ GiplImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<GiplImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EigenToMeasureParameterEstimationFilter
  * \brief Abstract class for estimating local-structure parameters from an eigen-image.
  *
@@ -125,6 +126,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // end class
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

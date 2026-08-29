@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TMetric>
 RegistrationParameterScalesFromShiftBase<TMetric>::RegistrationParameterScalesFromShiftBase()
@@ -220,6 +221,7 @@ RegistrationParameterScalesFromShiftBase<TMetric>::PrintSelf(std::ostream & os, 
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkRegistrationParameterScalesFromShiftBase_hxx */

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ShapeDetectionLevelSetImageFilter
  * \brief Segments structures in images based on a user supplied edge potential map.
  *
@@ -140,6 +141,7 @@ protected:
 private:
   ShapeDetectionFunctionPointer m_ShapeDetectionFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

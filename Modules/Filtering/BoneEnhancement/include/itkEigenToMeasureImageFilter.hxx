@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -77,6 +78,7 @@ EigenToMeasureImageFilter<TInputImage, TOutputImage>::GenerateData()
   this->AfterThreadedGenerateData();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkEigenToMeasureImageFilter_hxx */

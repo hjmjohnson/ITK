@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class itk::VariationalDiffeomorphicRegistrationFilter
  *
@@ -201,6 +202,7 @@ private:
   unsigned int m_NumberOfExponentiatorIterations;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

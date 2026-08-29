@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Forward1DFFTImageFilter
  * \brief Perform the Fast Fourier Transform, in the forward direction, with
  * real inputs, but only along one dimension.
@@ -98,6 +99,7 @@ private:
    * this should be in the range [0,ImageDimension-1]. */
   unsigned int m_Direction{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

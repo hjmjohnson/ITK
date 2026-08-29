@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LevelSetMotionRegistrationFilter
  * \brief Deformably register two images using level set motion.
  *
@@ -201,6 +202,7 @@ protected:
   bool
   Halt() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

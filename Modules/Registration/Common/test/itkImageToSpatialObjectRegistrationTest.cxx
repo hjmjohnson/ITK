@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class Iteration callback */
 template <typename TOptimizer>
@@ -198,6 +199,7 @@ private:
   PointListType m_PointList;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

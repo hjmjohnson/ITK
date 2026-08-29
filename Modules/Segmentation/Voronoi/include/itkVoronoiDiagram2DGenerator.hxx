@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 constexpr double NUMERIC_TOLERENCE{ 1.0e-10 };
 constexpr double DIFF_TOLERENCE{ 0.001 };
 
@@ -1312,6 +1313,7 @@ VoronoiDiagram2DGenerator<TCoordinate>::PrintSelf(std::ostream & os, Indent inde
     os << indent << '[' << i << "]: " << m_ELHash[i] << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

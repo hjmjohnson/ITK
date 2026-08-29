@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class MZ3MeshIOInternals;
 
 /** \class MZ3MeshIO
@@ -276,6 +277,7 @@ private:
 
   const std::unique_ptr<MZ3MeshIOInternals> m_Internal;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

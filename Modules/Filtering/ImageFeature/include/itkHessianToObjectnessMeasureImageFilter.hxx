@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 HessianToObjectnessMeasureImageFilter<TInputImage, TOutputImage>::HessianToObjectnessMeasureImageFilter()
@@ -186,6 +187,7 @@ HessianToObjectnessMeasureImageFilter<TInputImage, TOutputImage>::PrintSelf(std:
   os << indent << "ObjectDimension: " << m_ObjectDimension << std::endl;
   os << indent << "BrightObject: " << m_BrightObject << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

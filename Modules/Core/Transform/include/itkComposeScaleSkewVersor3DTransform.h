@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ComposeScaleSkewVersor3DTransform
  * \brief ComposeScaleSkewVersor3DTransform of a vector space (space coords)
  *
@@ -189,6 +190,7 @@ private:
   /**  Vector containing the skew */
   SkewVectorType m_Skew{};
 }; // class ComposeScaleSkewVersor3DTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

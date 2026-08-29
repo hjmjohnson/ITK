@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshEulerOperatorSplitEdgeFunction
  * \brief Given Edge is split into two and associated faces see their
@@ -92,6 +93,7 @@ protected:
 private:
   typename SplitVertex::Pointer m_SplitVertex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkQuadEdgeMeshEulerOperatorSplitEdgeFunction.h

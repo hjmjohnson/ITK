@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteCurvatureQuadEdgeMeshFilter
  *
@@ -119,6 +120,7 @@ private:
   /** Cache output pointer to avoid calls in inner loop to GetOutput() */
   OutputMeshType * m_OutputMesh{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

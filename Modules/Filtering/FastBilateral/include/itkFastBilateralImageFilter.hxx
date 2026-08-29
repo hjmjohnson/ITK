@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 void
@@ -306,6 +307,7 @@ FastBilateralImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os
   os << indent << "RangeSigma: " << m_RangeSigma << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

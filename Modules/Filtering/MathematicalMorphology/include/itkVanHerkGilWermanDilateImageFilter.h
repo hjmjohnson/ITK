@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel>
 class MaxFunctor
 {
@@ -59,6 +60,7 @@ protected:
   VanHerkGilWermanDilateImageFilter() { this->m_Boundary = NumericTraits<PixelType>::NonpositiveMin(); }
   ~VanHerkGilWermanDilateImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

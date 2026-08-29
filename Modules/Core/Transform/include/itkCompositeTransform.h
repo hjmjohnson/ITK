@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CompositeTransform
  * \brief This class contains a list of transforms and concatenates them by composition.
@@ -470,6 +471,7 @@ private:
   mutable ModifiedTimeType m_PreviousTransformsToOptimizeUpdateTime{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

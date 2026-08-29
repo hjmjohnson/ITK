@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MorphologicalSharpeningImageFilter
  * \brief Image sharpening using methods based on parabolic
@@ -172,6 +173,7 @@ private:
   typename CastType::Pointer      m_Cast;
   typename SharpenOpType::Pointer m_SharpenOp;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkMorphologicalSharpeningImageFilter.hxx"

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformParametersAdaptorBase
  * \brief Base helper class intended for multi-resolution image registration.
  *
@@ -102,6 +103,7 @@ protected:
 
   FixedParametersType m_RequiredFixedParameters{};
 }; // class TransformParametersAdaptorBase
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkTransformParametersAdaptorBase_h */

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ScanlineFilterCommon
  * \brief Helper class for a group of filters which operate on scan-lines.
@@ -510,6 +511,7 @@ protected:
   std::deque<WorkUnitData>   m_WorkUnitResults;
   LineMapType                m_LineMap;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

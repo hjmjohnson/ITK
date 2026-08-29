@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TxtTransformIOTemplate
  * \brief Create instances of TxtTransformIOTemplate objects.
  * \ingroup ITKIOTransformInsightLegacy
@@ -87,6 +88,7 @@ private:
 /** This helps to meet backward compatibility */
 using TxtTransformIO = TxtTransformIOTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 // Note: Explicit instantiation is done in itkTxtTransformIO.cxx
@@ -112,6 +114,7 @@ using TxtTransformIO = TxtTransformIOTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -121,6 +124,7 @@ extern template class ITKIOTransformInsightLegacy_EXPORT_EXPLICIT TxtTransformIO
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformInsightLegacy_EXPORT_EXPLICIT
 #endif

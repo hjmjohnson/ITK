@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage, typename TOutputImage>
 StochasticFractalDimensionImageFilter<TInputImage, TMaskImage, TOutputImage>::StochasticFractalDimensionImageFilter()
   : m_MaskImage(nullptr)
@@ -213,6 +214,7 @@ StochasticFractalDimensionImageFilter<TInputImage, TMaskImage, TOutputImage>::Pr
 
   os << indent << "Neighborhood radius: " << this->m_NeighborhoodRadius << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

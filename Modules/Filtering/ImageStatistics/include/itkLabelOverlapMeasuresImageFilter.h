@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LabelOverlapMeasuresImageFilter
  * \brief Computes overlap measures between the same set of labels of
  * pixels of two images. Background is assumed to be 0.
@@ -247,6 +248,7 @@ private:
   std::mutex m_Mutex{};
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

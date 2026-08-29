@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage, typename ConvertPixelTraits>
 ImageFileReader<TOutputImage, ConvertPixelTraits>::ImageFileReader()
   : m_ImageIO(nullptr)
@@ -520,6 +521,7 @@ ImageFileReader<TOutputImage, ConvertPixelTraits>::DoConvertBuffer(const void * 
   }
 #undef ITK_CONVERT_BUFFER_IF_BLOCK
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

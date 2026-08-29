@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh>
 void
@@ -279,6 +280,7 @@ SimplexMeshVolumeCalculator<TInputMesh>::PrintSelf(std::ostream & os, Indent ind
   print_helper::PrintNumericTrait(os, indent, "Muncz", m_Muncz);
   print_helper::PrintNumericTrait(os, indent, "NumberOfTriangles", m_NumberOfTriangles);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

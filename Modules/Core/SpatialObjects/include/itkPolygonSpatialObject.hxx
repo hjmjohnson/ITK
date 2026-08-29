@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 PolygonSpatialObject<TDimension>::PolygonSpatialObject()
@@ -310,5 +311,6 @@ PolygonSpatialObject<TDimension>::PrintSelf(std::ostream & os, Indent indent) co
   os << indent << "ThicknessInObjectSpace: " << m_ThicknessInObjectSpace << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

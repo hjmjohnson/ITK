@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage1, typename TInputImage2>
 DirectedHausdorffDistanceImageFilter<TInputImage1, TInputImage2>::DirectedHausdorffDistanceImageFilter()
 {
@@ -208,5 +209,6 @@ DirectedHausdorffDistanceImageFilter<TInputImage1, TInputImage2>::PrintSelf(std:
   print_helper::PrintNumericTrait(os, indent, "AverageHausdorffDistance", m_AverageHausdorffDistance);
   itkPrintSelfBooleanMacro(UseImageSpacing);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PointSetToImageMetric
  * \brief Computes similarity between a point set and an image.
  *
@@ -185,6 +186,7 @@ protected:
 
   GradientImagePointer m_GradientImage{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VTKPolyDataWriter
  * \brief
  * Writes an itkMesh to a file in VTK file format.
@@ -115,6 +116,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

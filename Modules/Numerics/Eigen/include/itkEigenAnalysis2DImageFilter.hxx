@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TEigenValueImage, typename TEigenVectorImage>
 EigenAnalysis2DImageFilter<TInputImage, TEigenValueImage, TEigenVectorImage>::EigenAnalysis2DImageFilter()
@@ -192,6 +193,7 @@ EigenAnalysis2DImageFilter<TInputImage, TEigenValueImage, TEigenVectorImage>::Ge
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class LabelImageGaussianInterpolateImageFunction
@@ -128,6 +129,7 @@ private:
   EvaluateAtContinuousIndex(const ContinuousIndexType &, OutputType *) const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

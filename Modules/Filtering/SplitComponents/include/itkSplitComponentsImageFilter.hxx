@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, unsigned int TComponents>
 SplitComponentsImageFilter<TInputImage, TOutputImage, TComponents>::SplitComponentsImageFilter()
@@ -105,6 +106,7 @@ SplitComponentsImageFilter<TInputImage, TOutputImage, TComponents>::DynamicThrea
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

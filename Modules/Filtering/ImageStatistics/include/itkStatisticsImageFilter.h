@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StatisticsImageFilter
  * \brief Compute min, max, variance and mean of an Image.
  *
@@ -168,6 +169,7 @@ private:
 
   std::mutex m_Mutex{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TLabelImage>
 LabelOverlapMeasuresImageFilter<TLabelImage>::LabelOverlapMeasuresImageFilter()
@@ -458,5 +459,6 @@ LabelOverlapMeasuresImageFilter<TLabelImage>::PrintSelf(std::ostream & os, Inden
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

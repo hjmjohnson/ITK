@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 TwoImageToOneImageMetric<TFixedImage, TMovingImage>::TwoImageToOneImageMetric()
@@ -180,6 +181,7 @@ TwoImageToOneImageMetric<TFixedImage, TMovingImage>::PrintSelf(std::ostream & os
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

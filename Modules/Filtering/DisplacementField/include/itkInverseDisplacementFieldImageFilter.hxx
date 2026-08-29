@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Initialize new instance
  */
@@ -385,6 +386,7 @@ InverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::GetMTime() const
   return latestTime;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConvertPixelBuffer
  *  \brief Class to convert blocks of data from one type to another.
@@ -51,6 +52,7 @@ public:
   static void
   Convert(InputPixelType * inputData, int inputNumberOfComponents, VariableLengthVector<T> * outputData, size_t size);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

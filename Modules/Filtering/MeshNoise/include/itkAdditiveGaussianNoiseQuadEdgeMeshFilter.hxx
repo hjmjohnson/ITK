@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputMesh>
 AdditiveGaussianNoiseQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::AdditiveGaussianNoiseQuadEdgeMeshFilter()
@@ -64,6 +65,7 @@ AdditiveGaussianNoiseQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::GenerateData()
     ++it;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

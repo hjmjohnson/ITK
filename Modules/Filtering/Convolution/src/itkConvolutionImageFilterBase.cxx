@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Define how to print enumerations */
 std::ostream &
 operator<<(std::ostream & out, const ConvolutionImageFilterBaseEnums::ConvolutionImageFilterOutputRegion value)
@@ -35,4 +36,5 @@ operator<<(std::ostream & out, const ConvolutionImageFilterBaseEnums::Convolutio
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

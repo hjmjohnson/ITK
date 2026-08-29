@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineTransformInitializer
  * \brief BSplineTransformInitializer is a helper class intended to
  * initialize the control point grid such that it has a physically consistent
@@ -121,6 +122,7 @@ private:
   bool         m_SetTransformDomainMeshSizeViaInitializer{ false };
 
 }; // class BSplineTransformInitializer
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

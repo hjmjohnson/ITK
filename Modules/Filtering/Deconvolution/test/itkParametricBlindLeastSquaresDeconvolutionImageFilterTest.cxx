@@ -27,6 +27,7 @@
 // parameters
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 class ExampleImageSource : public GaussianImageSource<TOutputImage>
 {
@@ -104,6 +105,7 @@ protected:
   ExampleImageSource() = default;
   ~ExampleImageSource() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

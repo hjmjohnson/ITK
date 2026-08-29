@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 ComposeScaleSkewVersor3DTransform<TParametersValueType>::ComposeScaleSkewVersor3DTransform()
@@ -413,6 +414,7 @@ ComposeScaleSkewVersor3DTransform<TParametersValueType>::ComputeJacobianWithResp
   jacobian[2][11] = 2 * s1 * x2 * (v0w + v1v2);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

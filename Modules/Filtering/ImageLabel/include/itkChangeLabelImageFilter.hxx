@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -82,6 +83,7 @@ ChangeLabelImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, 
   Superclass::PrintSelf(os, indent);
   // Maybe should iterate the change map and print it here
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

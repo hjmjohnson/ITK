@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class OnePlusOneEvolutionaryOptimizer
  * \brief 1+1 evolutionary strategy optimizer
  *
@@ -245,6 +246,7 @@ private:
    */
   double m_FrobeniusNorm{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

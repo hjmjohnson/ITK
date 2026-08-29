@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TMembershipFunction, typename TTrainingImage>
 void
@@ -255,6 +256,7 @@ ImageGaussianModelEstimator<TInputImage, TMembershipFunction, TTrainingImage>::E
     } // end if loop
   } // end class index loop
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

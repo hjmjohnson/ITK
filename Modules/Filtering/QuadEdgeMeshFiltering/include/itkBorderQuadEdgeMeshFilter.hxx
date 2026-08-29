@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ----------------------------------------------------------------------------
 template <typename TInputMesh, typename TOutputMesh>
 BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::BorderQuadEdgeMeshFilter()
@@ -431,6 +432,7 @@ BorderQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::PrintSelf(std::ostream & os, 
   os << indent << "BorderPick: " << static_cast<char>(m_BorderPick) << std::endl;
   os << indent << "Radius: " << m_Radius << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

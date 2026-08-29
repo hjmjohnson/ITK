@@ -22,7 +22,10 @@
 #include "itkRigid3DTransform.h"
 #include "itkVersor.h"
 
-namespace itk::v3
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace v3
 {
 /** \class Rigid3DTransform
  * \brief ITK3.x compatible Rigid3DTransform of a vector space (e.g. space coordinates)
@@ -128,7 +131,9 @@ public:
 protected:
   Rigid3DTransform() = default;
 }; // class Rigid3DTransform
-} // namespace itk::v3
+} // namespace v3
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 #if !defined(ITK_LEGACY_REMOVE)

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType>
 auto
 LevelSetFunction<TImageType>::ComputeCurvatureTerm(const NeighborhoodType & neighborhood,
@@ -407,6 +408,7 @@ LevelSetFunction<TImageType>::ComputeUpdate(const NeighborhoodType & it,
   // Return the combination of all the terms.
   return (PixelType)(curvature_term - propagation_term - advection_term - laplacian_term);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

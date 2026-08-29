@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelMapFilter
  * \brief Base class for filters that take an image as input and overwrite that image as the output
@@ -136,6 +137,7 @@ protected:
 private:
   typename InputImageType::Iterator m_LabelObjectIterator{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

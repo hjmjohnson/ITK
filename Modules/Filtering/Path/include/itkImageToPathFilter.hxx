@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputPath>
 ImageToPathFilter<TInputImage, TOutputPath>::ImageToPathFilter()
@@ -80,6 +81,7 @@ ImageToPathFilter<TInputImage, TOutputPath>::PrintSelf(std::ostream & os, Indent
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput, typename TCriterion>
 EdgeDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::EdgeDecimationQuadEdgeMeshFilter()
   : Superclass()
@@ -563,5 +564,6 @@ EdgeDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::IsCriterionSatisf
 
   return this->m_Criterion->is_satisfied(this->GetOutput(), 0, m_Priority.second);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

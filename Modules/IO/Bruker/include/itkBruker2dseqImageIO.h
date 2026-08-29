@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Bruker2dseqImageIO
  * \brief Class that defines how to read Bruker file format.
@@ -139,6 +140,7 @@ private:
   IOByteOrderEnum m_MachineByteOrder{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkBruker2dseqImageIO_h

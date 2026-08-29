@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TMetric>
 void
@@ -181,6 +182,7 @@ RegistrationParameterScalesFromJacobian<TMetric>::PrintSelf(std::ostream & os, I
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkRegistrationParameterScalesFromJacobian_hxx */

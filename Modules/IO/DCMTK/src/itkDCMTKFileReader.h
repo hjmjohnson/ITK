@@ -58,6 +58,7 @@ class DcmDictEntry;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward reference because of circular dependencies
 class ITK_FORWARD_EXPORT DCMTKSequence;
 
@@ -520,6 +521,7 @@ private:
 
 extern bool
 CompareDCMTKFileReaders(DCMTKFileReader * a, DCMTKFileReader * b);
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDCMTKFileReader_h

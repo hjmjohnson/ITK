@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 #ifdef ITK_HAS_GCC_PRAGMA_DIAG_PUSHPOP
 ITK_GCC_PRAGMA_DIAG_PUSH()
@@ -37,4 +38,5 @@ ITK_GCC_PRAGMA_DIAG_POP()
 ITK_GCC_PRAGMA_DIAG(warning "-Wattributes")
 #endif
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

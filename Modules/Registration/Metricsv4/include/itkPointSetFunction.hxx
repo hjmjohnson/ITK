@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPointSet, typename TOutput, typename TCoordinate>
 void
@@ -38,6 +39,7 @@ PointSetFunction<TInputPointSet, TOutput, TCoordinate>::SetInputPointSet(const I
   this->m_PointSet = ptr;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

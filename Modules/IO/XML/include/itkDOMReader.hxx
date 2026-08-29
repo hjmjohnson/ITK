@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutput>
 DOMReader<TOutput>::DOMReader()
@@ -148,6 +149,7 @@ DOMReader<TOutput>::Update()
   itksys::SystemTools::ChangeDirectory(sOldWorkingDir);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDOMReader_hxx

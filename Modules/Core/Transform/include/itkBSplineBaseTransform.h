@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineBaseTransform
  * \brief A base class with common elements of BSplineTransform and BSplineDeformableTransform
  *
@@ -407,6 +408,7 @@ private:
   static CoefficientImageArray
   ArrayOfImagePointerGeneratorHelper();
 }; // class BSplineBaseTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

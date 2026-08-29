@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh, typename TQEType>
 auto
 QuadEdgeMeshEulerOperatorSplitVertexFunction<TMesh, TQEType>::Evaluate(QEType * h, QEType * g) -> OutputType
@@ -66,6 +67,7 @@ QuadEdgeMeshEulerOperatorSplitVertexFunction<TMesh, TQEType>::Evaluate(QEType * 
 
   return ReturnedEdge;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

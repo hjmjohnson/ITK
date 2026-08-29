@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  *PrintSelf
@@ -108,6 +109,7 @@ ConjugateGradientLineSearchOptimizerv4Template<TInternalComputationValueType>::S
   Superclass::SetLearningRate(learningRate);  // Call base class method to set the base class m_LearningRate
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

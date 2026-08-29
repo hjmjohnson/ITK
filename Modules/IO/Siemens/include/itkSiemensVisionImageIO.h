@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SiemensVisionImageIO
  *
@@ -419,6 +420,7 @@ private:
     HDR_TOTAL_LENGTH = 6144 // Total length of Siemens Header
   };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkSiemensVisionImageIO_h

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 GaborImageSource<TOutputImage>::GaborImageSource()
@@ -88,6 +89,7 @@ GaborImageSource<TOutputImage>::PrintSelf(std::ostream & os, Indent indent) cons
   os << indent << "Sigma: " << this->GetSigma() << std::endl;
   os << indent << "Mean: " << this->GetMean() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

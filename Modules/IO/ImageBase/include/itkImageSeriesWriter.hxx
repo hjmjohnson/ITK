@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //---------------------------------------------------------
 template <typename TInputImage, typename TOutputImage>
 ImageSeriesWriter<TInputImage, TOutputImage>::ImageSeriesWriter()
@@ -361,6 +362,7 @@ ImageSeriesWriter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Inden
   itkPrintSelfBooleanMacro(UseCompression);
   os << indent << "MetaDataDictionaryArray: " << m_MetaDataDictionaryArray << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -43,6 +43,7 @@ ITK_GCC_PRAGMA_POP
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TMaskImage, typename TOutputImage>
 N4BiasFieldCorrectionImageFilter<TInputImage, TMaskImage, TOutputImage>::N4BiasFieldCorrectionImageFilter()
@@ -709,6 +710,7 @@ N4BiasFieldCorrectionImageFilter<TInputImage, TMaskImage, TOutputImage>::PrintSe
   itkPrintSelfObjectMacro(LogBiasFieldControlPointLattice);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 RecursiveMultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::RecursiveMultiResolutionPyramidImageFilter()
@@ -379,6 +380,7 @@ RecursiveMultiResolutionPyramidImageFilter<TInputImage, TOutputImage>::GenerateI
   // set the input requested region
   inputPtr->SetRequestedRegion(inputRequestedRegion);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SurfaceSpatialObject
  * \brief Representation of a Surface based on the spatial object classes.
@@ -89,6 +90,7 @@ protected:
   InternalClone() const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

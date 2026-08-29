@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MeshRegion
  * \brief A mesh region represents an unstructured region of data.
  *
@@ -115,6 +116,7 @@ private:
   // The specified region.
   SizeValueType m_Region{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

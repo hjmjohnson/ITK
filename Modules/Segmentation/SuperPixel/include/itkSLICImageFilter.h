@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SLICImageFilter
  * \brief Simple Linear Iterative Clustering (SLIC) super-pixel segmentation
@@ -240,6 +241,7 @@ private:
   double     m_AverageResidual{};
   std::mutex m_Mutex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

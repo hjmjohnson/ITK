@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 VTKImageImport<TOutputImage>::VTKImageImport()
 {
@@ -388,6 +389,7 @@ VTKImageImport<TOutputImage>::PrintSelf(std::ostream & os, Indent indent) const
     os << indent << "CallbackUserData: " << m_CallbackUserData << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

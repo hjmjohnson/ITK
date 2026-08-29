@@ -58,6 +58,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshFrontBaseIterator
  *
@@ -294,6 +295,7 @@ public:
     return this->m_CurrentEdge;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkQuadEdgeMeshFrontIterator.hxx"

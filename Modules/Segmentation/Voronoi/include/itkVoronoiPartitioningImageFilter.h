@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VoronoiPartitioningImageFilter
  *
  * Perform a partitioning of 2D images (single channel) by Voronoi Diagram.
@@ -107,6 +108,7 @@ protected:
   // Threshold for homogeneity criterion
   double m_SigmaThreshold{ 10 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

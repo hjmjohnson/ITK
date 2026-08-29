@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VSplineOrder, typename TRealValueType>
 CoxDeBoorBSplineKernelFunction<VSplineOrder, TRealValueType>::CoxDeBoorBSplineKernelFunction()
   : m_SplineOrder(VSplineOrder)
@@ -246,6 +247,7 @@ CoxDeBoorBSplineKernelFunction<VSplineOrder, TRealValueType>::PrintSelf(std::ost
 
   os << indent << "SplineOrder: " << m_SplineOrder << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

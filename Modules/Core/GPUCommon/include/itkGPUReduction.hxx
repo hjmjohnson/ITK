@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TElement>
 GPUReduction<TElement>::GPUReduction()
@@ -372,6 +373,7 @@ GPUReduction<TElement>::CPUGenerateData(TElement * data, int size)
   return sum;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

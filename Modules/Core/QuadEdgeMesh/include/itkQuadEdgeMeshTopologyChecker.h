@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshTopologyChecker
  *  \brief Make some basic checks in order to verify that the considered
@@ -94,6 +95,7 @@ private:
   CellIdentifier  m_ExpectedNumberOfBoundaries{};
   OffsetValueType m_ExpectedGenus{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

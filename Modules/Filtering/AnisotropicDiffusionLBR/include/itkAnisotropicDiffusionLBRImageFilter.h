@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class AnisotropicDiffusionLBRImageFilter
  *
@@ -137,6 +138,7 @@ protected:
   struct DiffusionTensorFunctor;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 BoxSpatialObject<TDimension>::BoxSpatialObject()
@@ -103,6 +104,7 @@ BoxSpatialObject<TDimension>::PrintSelf(std::ostream & os, Indent indent) const
   print_helper::PrintNumericTrait(os, indent, "SizeInObjectSpace", m_SizeInObjectSpace);
   print_helper::PrintNumericTrait(os, indent, "PositionInObjectSpace", m_PositionInObjectSpace);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

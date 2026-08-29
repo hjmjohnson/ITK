@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingPointSet, class TInternalComputationValueType>
 typename EuclideanDistancePointSetToPointSetMetricv4<TFixedPointSet, TMovingPointSet, TInternalComputationValueType>::
@@ -80,6 +81,7 @@ EuclideanDistancePointSetToPointSetMetricv4<TFixedPointSet, TMovingPointSet, TIn
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

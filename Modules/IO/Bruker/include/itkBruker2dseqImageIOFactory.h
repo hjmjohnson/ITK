@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Bruker2dseqImageIOFactory
  * \brief Create instances of Bruker2dseqImageIO objects using an object factory.
@@ -73,6 +74,7 @@ protected:
   Bruker2dseqImageIOFactory();
   ~Bruker2dseqImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

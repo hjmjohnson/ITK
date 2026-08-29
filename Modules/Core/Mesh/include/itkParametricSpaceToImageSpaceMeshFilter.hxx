@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputMesh>
 ParametricSpaceToImageSpaceMeshFilter<TInputMesh, TOutputMesh>::ParametricSpaceToImageSpaceMeshFilter()
@@ -128,6 +129,7 @@ ParametricSpaceToImageSpaceMeshFilter<TInputMesh, TOutputMesh>::GenerateOutputIn
 {
   // No additional information needs to be copied
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

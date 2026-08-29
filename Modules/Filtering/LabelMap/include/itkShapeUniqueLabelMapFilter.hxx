@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ShapeUniqueLabelMapFilter<TImage>::ShapeUniqueLabelMapFilter()
   : m_Attribute(LabelObjectType::NUMBER_OF_PIXELS)
@@ -48,5 +49,6 @@ ShapeUniqueLabelMapFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) c
   os << indent << "Attribute: " << LabelObjectType::GetNameFromAttribute(m_Attribute) << " (" << m_Attribute << ')'
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 OBJMeshIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -54,4 +55,5 @@ OBJMeshIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<OBJMeshIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

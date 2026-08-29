@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 NormalQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::NormalQuadEdgeMeshFilter()
   : m_Weight(WeightEnum::THURMER)
@@ -227,6 +228,7 @@ NormalQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::PrintSelf(std::ostream & os, 
 
   std::cout << indent << "Weight: " << m_Weight << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

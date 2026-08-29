@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUNeighborhoodOperatorImageFilter
  * \brief Applies a single NeighborhoodOperator to an image region
  * using the GPU.
@@ -190,6 +191,7 @@ private:
 
   typename NeighborhoodGPUBufferType::Pointer m_NeighborhoodGPUBuffer{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

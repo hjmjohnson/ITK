@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TKernelImage, typename TOutputImage, typename TInternalPrecision>
 void
@@ -77,5 +78,6 @@ TikhonovDeconvolutionImageFilter<TInputImage, TOutputImage, TKernelImage, TInter
   os << indent << "RegularizationConstant: " << m_RegularizationConstant << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

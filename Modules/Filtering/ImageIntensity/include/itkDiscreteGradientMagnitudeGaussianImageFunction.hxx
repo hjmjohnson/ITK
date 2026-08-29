@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Set the Input Image */
 template <typename TInputImage, typename TOutput>
 DiscreteGradientMagnitudeGaussianImageFunction<TInputImage, TOutput>::DiscreteGradientMagnitudeGaussianImageFunction()
@@ -284,6 +285,7 @@ DiscreteGradientMagnitudeGaussianImageFunction<TInputImage, TOutput>::EvaluateAt
   }
   return static_cast<OutputType>(value);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

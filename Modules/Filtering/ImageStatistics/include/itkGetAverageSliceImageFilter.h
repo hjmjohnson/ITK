@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GetAverageSliceImageFilter
  * \brief Averages a single dimension of an image.
  *
@@ -76,6 +77,7 @@ protected:
 private:
   unsigned int m_AveragedOutDimension{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

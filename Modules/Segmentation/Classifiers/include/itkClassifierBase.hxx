@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TDataContainer>
 void
 ClassifierBase<TDataContainer>::PrintSelf(std::ostream & os, Indent indent) const
@@ -68,6 +69,7 @@ ClassifierBase<TDataContainer>::AddMembershipFunction(MembershipFunctionType * f
   m_MembershipFunctions.push_back(function);
   return static_cast<unsigned int>(m_MembershipFunctions.size());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

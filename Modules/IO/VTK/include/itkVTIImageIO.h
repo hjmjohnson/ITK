@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VTIImageIO
  *
@@ -239,6 +240,7 @@ private:
                  bool                         headerUInt64,
                  std::vector<unsigned char> & uncompressed);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkVTIImageIO_h

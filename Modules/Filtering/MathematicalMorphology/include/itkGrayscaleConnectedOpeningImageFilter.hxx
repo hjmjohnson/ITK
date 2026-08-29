@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 GrayscaleConnectedOpeningImageFilter<TInputImage, TOutputImage>::GrayscaleConnectedOpeningImageFilter()
 {
@@ -139,5 +140,6 @@ GrayscaleConnectedOpeningImageFilter<TInputImage, TOutputImage>::PrintSelf(std::
   os << indent << "Number of iterations used to produce current output: " << m_NumberOfIterationsUsed << std::endl;
   itkPrintSelfBooleanMacro(FullyConnected);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

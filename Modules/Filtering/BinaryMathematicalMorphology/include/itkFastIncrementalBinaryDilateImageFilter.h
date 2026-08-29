@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastIncrementalBinaryDilateImageFilter
  * \brief Fast binary dilation
@@ -76,6 +77,7 @@ protected:
   FastIncrementalBinaryDilateImageFilter() = default;
   ~FastIncrementalBinaryDilateImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

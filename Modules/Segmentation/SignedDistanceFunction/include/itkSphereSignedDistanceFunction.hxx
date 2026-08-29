@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TCoordinate, unsigned int VSpaceDimension>
 SphereSignedDistanceFunction<TCoordinate, VSpaceDimension>::SphereSignedDistanceFunction()
@@ -81,6 +82,7 @@ SphereSignedDistanceFunction<TCoordinate, VSpaceDimension>::Evaluate(const Point
 
   return output;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

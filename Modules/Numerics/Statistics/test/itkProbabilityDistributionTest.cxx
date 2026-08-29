@@ -18,7 +18,10 @@
 
 #include "itkProbabilityDistribution.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 class ProbabilityDistributionTestingHelper : public ProbabilityDistribution
@@ -97,7 +100,9 @@ public:
   }
 };
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

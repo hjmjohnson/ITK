@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class GiplImageIOInternals
 {
 public:
@@ -906,4 +907,5 @@ GiplImageIO::CheckExtension(const char * filename)
 
   return extensionFound;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

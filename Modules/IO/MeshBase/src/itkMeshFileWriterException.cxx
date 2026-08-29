@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MeshFileWriterException::~MeshFileWriterException() noexcept = default;
 
 MeshFileWriterException::MeshFileWriterException(std::string  file,
@@ -27,4 +28,5 @@ MeshFileWriterException::MeshFileWriterException(std::string  file,
                                                  std::string  location)
   : ExceptionObject(std::move(file), line, std::move(message), std::move(location))
 {}
+ITK_ABI_NAMESPACE_END
 } // namespace itk

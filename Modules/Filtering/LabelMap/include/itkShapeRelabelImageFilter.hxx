@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 ShapeRelabelImageFilter<TInputImage>::ShapeRelabelImageFilter()
   : m_BackgroundValue(NumericTraits<OutputImagePixelType>::NonpositiveMin())
@@ -111,5 +112,6 @@ ShapeRelabelImageFilter<TInputImage>::PrintSelf(std::ostream & os, Indent indent
   os << indent << "Attribute: " << LabelObjectType::GetNameFromAttribute(m_Attribute) << " (" << m_Attribute << ')'
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

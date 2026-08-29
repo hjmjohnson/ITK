@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageClassifierBase
  * \brief Base class for the ImageClassifierBase object.
@@ -158,6 +159,7 @@ private:
   virtual void
   Classify();
 }; // class ImageClassifierBase
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

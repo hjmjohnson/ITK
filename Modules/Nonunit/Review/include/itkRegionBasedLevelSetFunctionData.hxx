@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage>
 void
 RegionBasedLevelSetFunctionData<TInputImage, TFeatureImage>::CreateHeavisideFunctionOfLevelSetImage(
@@ -72,6 +73,7 @@ RegionBasedLevelSetFunctionData<TInputImage, TFeatureImage>::GetFeatureIndex(con
 
   return index;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

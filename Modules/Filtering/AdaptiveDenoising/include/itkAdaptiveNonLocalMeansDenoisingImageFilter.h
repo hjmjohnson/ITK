@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class AdaptiveNonLocalMeansDenoisingImageFilter
@@ -213,6 +214,7 @@ private:
   NeighborhoodRadiusType m_NeighborhoodRadiusForLocalMeanAndVariance;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

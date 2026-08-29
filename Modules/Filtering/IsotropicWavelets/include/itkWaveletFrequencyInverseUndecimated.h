@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WaveletFrequencyInverseUndecimated
  * @brief Wavelet analysis where input is an FFT image.
  * Aim to be Isotropic.
@@ -179,6 +180,7 @@ private:
   WaveletFilterBankPointer m_WaveletFilterBank;
   InputsType               m_WaveletFilterBankPyramid;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWaveletFrequencyInverseUndecimated.hxx"

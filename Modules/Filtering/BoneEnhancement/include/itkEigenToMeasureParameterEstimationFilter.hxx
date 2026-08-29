@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 EigenToMeasureParameterEstimationFilter<TInputImage, TOutputImage>::EigenToMeasureParameterEstimationFilter()
@@ -176,6 +177,7 @@ EigenToMeasureParameterEstimationFilter<TInputImage, TOutputImage>::PrintSelf(st
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkEigenToMeasureParameterEstimationFilter_hxx

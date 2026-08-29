@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastMarchingImageToNodePairContainerAdaptor
  * \brief Convenient adaptor class which converts Image into
@@ -159,6 +160,7 @@ protected:
   void
   SetPointsFromImage(const ImageType * image, const LabelType & iLabel, const OutputPixelType & iValue);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TInputSpatialObject, unsigned int TSampleDimension>
 SpatialObjectToImageStatisticsCalculator<TInputImage, TInputSpatialObject, TSampleDimension>::
@@ -231,6 +232,7 @@ SpatialObjectToImageStatisticsCalculator<TInputImage, TInputSpatialObject, TSamp
   itkPrintSelfObjectMacro(Sample);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

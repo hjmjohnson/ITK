@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AdditiveGaussianNoiseMeshFilter
  * \brief Add Gaussian noise to the points defining an itkMesh.
  *
@@ -92,6 +93,7 @@ protected:
   int            m_Seed;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 SobelEdgeDetectionImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
@@ -140,6 +141,7 @@ SobelEdgeDetectionImageFilter<TInputImage, TOutputImage>::GenerateData()
   // this is needed to get the appropriate regions passed back.
   this->GraftOutput(sqrtFilter->GetOutput());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

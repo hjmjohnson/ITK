@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputVideoStream>
 VideoFileReader<TOutputVideoStream>::VideoFileReader()
@@ -319,6 +320,7 @@ VideoFileReader<TOutputVideoStream>::PrintSelf(std::ostream & os, Indent indent)
   itkPrintSelfObjectMacro(VideoIO);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

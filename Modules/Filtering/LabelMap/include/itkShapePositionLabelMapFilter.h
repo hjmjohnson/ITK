@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShapePositionLabelMapFilter
  * \brief Mark a single pixel in the label object which correspond to a position given by an attribute
@@ -136,6 +137,7 @@ protected:
   AttributeType m_Attribute{};
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MultiphaseFiniteDifferenceImageFilter
  *
@@ -518,6 +519,7 @@ private:
   /** State that the filter is in, i.e. UNINITIALIZED or INITIALIZED */
   bool m_InitializedState{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

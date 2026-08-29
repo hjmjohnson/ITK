@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Functor
 {
 /**
@@ -165,6 +166,7 @@ private:
   typename IFFTFilterType::Pointer      m_IFFTFilter{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

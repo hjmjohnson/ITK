@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // IplImageToITKImage
 template <typename TOutputImageType>
 typename TOutputImageType::Pointer
@@ -391,6 +392,7 @@ OpenCVImageBridge::ITKImageToCVMat(const TInputImageType * in, bool force3Channe
   return out;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

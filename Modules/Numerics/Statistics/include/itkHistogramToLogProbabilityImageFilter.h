@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HistogramToLogProbabilityImageFilter
  * \brief The class takes a histogram as an input and gives the log probability
  * image as the output. A pixel, at position I,  in the output image is given by
@@ -122,6 +123,7 @@ protected:
   HistogramToLogProbabilityImageFilter() = default;
   ~HistogramToLogProbabilityImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

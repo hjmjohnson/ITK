@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TTransform, typename TFixedImage, typename TMovingImage>
 void
 CenteredTransformInitializer<TTransform, TFixedImage, TMovingImage>::InitializeTransform()
@@ -133,6 +134,7 @@ CenteredTransformInitializer<TTransform, TFixedImage, TMovingImage>::PrintSelf(s
   itkPrintSelfObjectMacro(MovingCalculator);
   itkPrintSelfObjectMacro(FixedCalculator);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkCenteredTransformInitializer_hxx */

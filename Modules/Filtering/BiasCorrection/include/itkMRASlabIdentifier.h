@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MRASlabIdentifier
  * \brief Identifies slabs in MR images comparing minimum intensity averages.
@@ -151,6 +152,7 @@ private:
   double               m_Tolerance{};
   SlabRegionVectorType m_Slabs{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

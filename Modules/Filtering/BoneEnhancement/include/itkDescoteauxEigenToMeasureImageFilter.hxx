@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 DescoteauxEigenToMeasureImageFilter<TInputImage, TOutputImage>::DescoteauxEigenToMeasureImageFilter()
   : m_EnhanceType(-1.0)
@@ -93,6 +94,7 @@ DescoteauxEigenToMeasureImageFilter<TInputImage, TOutputImage>::PrintSelf(std::o
   os << indent << "Direction: " << GetEnhanceType() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkDescoteauxEigenToMeasureImageFilter_hxx */

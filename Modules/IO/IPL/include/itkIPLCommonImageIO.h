@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class IPLCommonImageIO
  *
@@ -196,6 +197,7 @@ protected:
   double
   hdr2Double(char * hdr);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #define RAISE_EXCEPTION()                            \
   {                                                  \

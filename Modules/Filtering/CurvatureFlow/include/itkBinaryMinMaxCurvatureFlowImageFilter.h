@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryMinMaxCurvatureFlowImageFilter
  * \brief Denoise a binary image using min/max curvature flow.
@@ -126,6 +127,7 @@ protected:
 private:
   double m_Threshold{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

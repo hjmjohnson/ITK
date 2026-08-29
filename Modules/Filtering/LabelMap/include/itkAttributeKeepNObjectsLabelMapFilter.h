@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AttributeKeepNObjectsLabelMapFilter
  * \brief keep N objects according to their attribute value
@@ -144,6 +145,7 @@ private:
 
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

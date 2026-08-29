@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 FFTWComplexToComplex1DFFTImageFilter<TInputImage, TOutputImage>::FFTWComplexToComplex1DFFTImageFilter()
@@ -195,6 +196,7 @@ FFTWComplexToComplex1DFFTImageFilter<TInputImage, TOutputImage>::ThreadedGenerat
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // defined( ITK_USE_FFTWF ) || defined( ITK_USE_FFTWD )

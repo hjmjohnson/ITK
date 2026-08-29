@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename PixelType, typename TMeshTraits>
 SpatialObjectReader<VDimension, PixelType, TMeshTraits>::SpatialObjectReader()
   : m_FileName("")
@@ -66,6 +67,7 @@ SpatialObjectReader<VDimension, PixelType, TMeshTraits>::RegisterMetaConverter(c
   this->m_MetaToSpatialConverter->RegisterMetaConverter(metaTypeName, spatialObjectTypeName, converter);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

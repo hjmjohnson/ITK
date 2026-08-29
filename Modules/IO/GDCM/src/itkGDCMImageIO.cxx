@@ -68,6 +68,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 class InternalHeader
@@ -1540,4 +1541,5 @@ operator<<(std::ostream & out, const GDCMImageIOEnums::Compression value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

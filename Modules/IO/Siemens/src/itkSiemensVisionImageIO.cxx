@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Default constructor
 SiemensVisionImageIO::SiemensVisionImageIO() = default;
 
@@ -319,4 +320,5 @@ SiemensVisionImageIO::ReadHeader(const char * FileNameToRead)
   hdr->offset = HDR_TOTAL_LENGTH;
   return hdr;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

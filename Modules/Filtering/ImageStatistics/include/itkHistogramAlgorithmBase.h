@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HistogramAlgorithmBase
  * \brief base class for algorithms operating on histograms
  *
@@ -93,6 +94,7 @@ private:
   /** Target histogram data pointer */
   typename TInputHistogram::ConstPointer m_InputHistogram{ nullptr };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

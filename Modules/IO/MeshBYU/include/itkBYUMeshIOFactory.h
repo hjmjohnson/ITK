@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BYUMeshIOFactory
  * \brief Create instances of BYUMeshIO objects using an object factory.
@@ -70,6 +71,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

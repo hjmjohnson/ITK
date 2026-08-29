@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Statistics
 {
 
@@ -327,6 +328,7 @@ template <typename TImage, typename TBoundaryCondition>
 std::ostream &
 operator<<(std::ostream & os, const std::vector<ConstNeighborhoodIterator<TImage, TBoundaryCondition>> & mv);
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

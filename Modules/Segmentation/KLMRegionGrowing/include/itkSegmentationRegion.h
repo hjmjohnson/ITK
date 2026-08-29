@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SegmentationRegion
  * \brief Base class for SegmentationRegion object
@@ -93,6 +94,7 @@ private:
   RegionLabelType m_RegionLabel{ 0 };
   double          m_RegionArea{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

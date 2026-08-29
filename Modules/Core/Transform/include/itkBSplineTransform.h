@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineTransform
  * \brief Deformable transform using a BSpline representation
  *
@@ -330,6 +331,7 @@ private:
                                                    const MeshSizeType &           meshSize);
 
 }; // class BSplineTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

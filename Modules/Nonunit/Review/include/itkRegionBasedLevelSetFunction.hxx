@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TFeature, typename TSharedData>
 double RegionBasedLevelSetFunction<TInput, TFeature, TSharedData>::m_WaveDT = 1.0 / (2.0 * ImageDimension);
 
@@ -382,6 +383,7 @@ RegionBasedLevelSetFunction<TInput, TFeature, TSharedData>::ComputeGlobalTerm(
 
   return globalTerm;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

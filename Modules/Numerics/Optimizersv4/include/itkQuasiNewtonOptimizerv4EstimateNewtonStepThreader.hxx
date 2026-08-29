@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInternalComputationValueType>
 void
 QuasiNewtonOptimizerv4EstimateNewtonStepThreaderTemplate<TInternalComputationValueType>::ThreadedExecution(
@@ -30,6 +31,7 @@ QuasiNewtonOptimizerv4EstimateNewtonStepThreaderTemplate<TInternalComputationVal
   this->m_Associate->EstimateNewtonStepOverSubRange(subrange);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

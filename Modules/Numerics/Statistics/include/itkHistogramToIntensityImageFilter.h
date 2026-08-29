@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HistogramToIntensityImageFilter
  * \brief The class takes a histogram as an input and produces an image
  * as the output. A pixel, at position I,  in the output image is given by
@@ -104,6 +105,7 @@ protected:
   HistogramToIntensityImageFilter() = default;
   ~HistogramToIntensityImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

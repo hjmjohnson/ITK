@@ -31,6 +31,7 @@ class MultiLabelMeshPipeline;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageConstIterator
  *  \brief A multi-dimensional image iterator templated over image type.
  *  Specialized for RLEImage.
@@ -475,6 +476,7 @@ public:
     : ImageConstIterator<ImageType>(ptr, region)
   {}
 }; // no additional implementation required
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkRLEImageConstIterator_h

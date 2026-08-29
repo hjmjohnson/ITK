@@ -26,6 +26,7 @@ class vnl_levenberg_marquardt;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LevenbergMarquardtOptimizer
  * \brief Wrap of the vnl_levenberg_marquardt algorithm
  *
@@ -109,6 +110,7 @@ private:
   double       m_EpsilonFunction{};
   std::string  m_StopConditionDescription{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

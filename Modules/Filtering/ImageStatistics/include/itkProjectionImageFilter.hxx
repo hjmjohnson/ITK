@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TAccumulator>
 ProjectionImageFilter<TInputImage, TOutputImage, TAccumulator>::ProjectionImageFilter()
   : m_ProjectionDimension(InputImageDimension - 1)
@@ -356,6 +357,7 @@ ProjectionImageFilter<TInputImage, TOutputImage, TAccumulator>::PrintSelf(std::o
 
   os << indent << "ProjectionDimension: " << m_ProjectionDimension << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

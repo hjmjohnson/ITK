@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage, typename TWaveletFunction, typename TFrequencyRegionIterator>
 WaveletFrequencyFilterBankGenerator<TOutputImage, TWaveletFunction, TFrequencyRegionIterator>::
   WaveletFrequencyFilterBankGenerator()
@@ -177,5 +178,6 @@ WaveletFrequencyFilterBankGenerator<TOutputImage, TWaveletFunction, TFrequencyRe
                   << " outputIndex: " << outputItList[m_HighPassSubBands].GetIndex());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 DilateObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::DilateObjectMorphologyImageFilter()
 {
@@ -53,5 +54,6 @@ DilateObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

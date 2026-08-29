@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AttributePositionLabelMapFilter
  * \brief Mark a single pixel in the label object which correspond to a position given by an attribute
@@ -92,6 +93,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

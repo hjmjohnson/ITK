@@ -45,6 +45,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Get the local block size based on the desired Image Dimension
  * currently set as follows:
  * OpenCL workgroup (block) size for 1/2/3D - needs to be tuned based on the GPU architecture
@@ -100,6 +101,7 @@ GetTypenameInString(const std::type_info & intype, std::ostringstream & ret);
 int
 GetPixelDimension(const std::type_info & intype);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

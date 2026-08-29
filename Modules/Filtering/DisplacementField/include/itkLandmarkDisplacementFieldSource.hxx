@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 LandmarkDisplacementFieldSource<TOutputImage>::LandmarkDisplacementFieldSource()
@@ -203,6 +204,7 @@ LandmarkDisplacementFieldSource<TOutputImage>::GetMTime() const
   return latestTime;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

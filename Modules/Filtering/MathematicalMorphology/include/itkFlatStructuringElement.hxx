@@ -28,14 +28,17 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TKernel>
 class VanHerkGilWermanDilateImageFilter;
-}
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #include "itkVanHerkGilWermanDilateImageFilter.h"
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 FlatStructuringElement<VDimension>
@@ -1302,6 +1305,7 @@ FlatStructuringElement<VDimension>::FromImage(const ImageType * image)
   return res;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

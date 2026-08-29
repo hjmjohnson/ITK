@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelContourImageFilter
  * \brief Labels the pixels on the border of the objects in a labeled image.
@@ -174,6 +175,7 @@ private:
 
   LineMapType m_LineMap{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

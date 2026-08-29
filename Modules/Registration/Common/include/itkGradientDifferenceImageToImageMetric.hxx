@@ -29,6 +29,7 @@
 #include "itkSimpleFilterWatcher.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 GradientDifferenceImageToImageMetric<TFixedImage, TMovingImage>::GradientDifferenceImageToImageMetric()
@@ -434,6 +435,7 @@ GradientDifferenceImageToImageMetric<TFixedImage, TMovingImage>::GetValueAndDeri
   Value = this->GetValue(parameters);
   this->GetDerivative(parameters, Derivative);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

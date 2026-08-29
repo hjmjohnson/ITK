@@ -43,6 +43,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward reference for VariableLengthVector
 template <typename TValue>
 class VariableLengthVector;
@@ -1051,6 +1052,7 @@ ReadRawBytesAfterSwapping(IOComponentEnum componentType,
                           IOByteOrderEnum byteOrder,
                           SizeValueType   numberOfComponents);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkImageIOBase_h

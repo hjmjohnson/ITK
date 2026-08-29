@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class PyVnl
@@ -79,6 +80,7 @@ public:
   _GetVnlMatrixFromArray(PyObject * arr, PyObject * shape);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TKernelImage, typename TOutputImage>
 ParametricBlindLeastSquaresDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage>::
@@ -281,6 +282,7 @@ ParametricBlindLeastSquaresDeconvolutionImageFilter<TInputImage, TKernelImage, T
   os << indent << "Alpha: " << m_Alpha << std::endl;
   os << indent << "Beta: " << m_Beta << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

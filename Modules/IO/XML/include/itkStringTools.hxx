@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /////////////////////////////////////////////////////////////////////////////
 // helper functions for converting a string to/from a std::vector
@@ -225,6 +226,7 @@ StringTools::FromData(std::string & s, const T & data)
   return s;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkStringTools_hxx

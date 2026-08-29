@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 CurvatureFlowFunction<TImage>::CurvatureFlowFunction()
@@ -134,6 +135,7 @@ CurvatureFlowFunction<TImage>::ComputeUpdate(const NeighborhoodType & it,
   update /= magnitudeSqr;
   return static_cast<PixelType>(update);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

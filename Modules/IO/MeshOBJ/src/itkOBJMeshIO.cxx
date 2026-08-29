@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 OBJMeshIO::OBJMeshIO() { this->AddSupportedWriteExtension(".obj"); }
 
 OBJMeshIO::~OBJMeshIO() = default;
@@ -641,4 +642,5 @@ OBJMeshIO::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

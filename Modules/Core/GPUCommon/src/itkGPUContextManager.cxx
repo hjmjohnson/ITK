@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // static variable initialization
 GPUContextManager * GPUContextManager::m_Instance = nullptr;
 
@@ -121,4 +122,5 @@ GPUContextManager::GetDeviceId(int i)
   return m_Devices[i];
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

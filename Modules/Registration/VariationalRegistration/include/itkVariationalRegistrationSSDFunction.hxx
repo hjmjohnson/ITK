@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -173,6 +174,7 @@ VariationalRegistrationSSDFunction<TFixedImage, TMovingImage, TDisplacementField
   os << m_Normalizer << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

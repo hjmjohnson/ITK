@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class PeakSignalToNoiseRatioCalculator
@@ -108,6 +109,7 @@ private:
 
 }; // class PeakSignalToNoiseRatioCalculator
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

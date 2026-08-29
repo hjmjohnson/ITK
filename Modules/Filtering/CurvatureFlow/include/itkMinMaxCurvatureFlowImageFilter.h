@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MinMaxCurvatureFlowImageFilter
  * \brief Denoise an image using min/max curvature flow.
@@ -139,6 +140,7 @@ protected:
 private:
   RadiusValueType m_StencilRadius{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

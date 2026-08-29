@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -189,6 +190,7 @@ VariationalRegistrationDemonsFunction<TFixedImage, TMovingImage, TDisplacementFi
   return update;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

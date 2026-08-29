@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 GaussianExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::GaussianExponentialDiffeomorphicTransform()
@@ -238,6 +239,7 @@ GaussianExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::Pri
     os, indent, "GaussianSmoothingVarianceForTheUpdateField", m_GaussianSmoothingVarianceForTheUpdateField);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

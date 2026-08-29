@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 InterpolateImageFilter<TInputImage, TOutputImage>::InterpolateImageFilter()
   : m_IntermediateImage(nullptr)
@@ -181,6 +182,7 @@ InterpolateImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

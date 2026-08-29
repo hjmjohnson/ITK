@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CenteredTransformInitializer
  * \brief CenteredTransformInitializer is a helper class intended to
  * initialize the center of rotation and the translation of Transforms having
@@ -159,6 +160,7 @@ private:
   const FixedImageCalculatorPointer  m_FixedCalculator{ FixedImageCalculatorType::New() };
   const MovingImageCalculatorPointer m_MovingCalculator{ MovingImageCalculatorType::New() };
 }; // class CenteredTransformInitializer
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

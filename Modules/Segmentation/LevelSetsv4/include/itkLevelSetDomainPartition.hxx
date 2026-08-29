@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 void
@@ -35,5 +36,6 @@ LevelSetDomainPartition<TImage>::PopulateListImage()
   this->m_NearestNeighborListImage->FillBuffer(pixelList);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

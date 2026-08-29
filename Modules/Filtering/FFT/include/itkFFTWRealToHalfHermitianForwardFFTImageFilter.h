@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FFTWRealToHalfHermitianForwardFFTImageFilter
  *
@@ -164,6 +165,7 @@ struct FFTImageFilterEnableDouble<FFTWRealToHalfHermitianForwardFFTImageFilter> 
 {};
 #endif
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Functor
 {
 /**
@@ -179,6 +180,7 @@ private:
 
   FunctorType m_Functor{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

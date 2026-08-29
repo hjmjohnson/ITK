@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class JointHistogramMutualInformationGetValueAndDerivativeThreader
  * \brief Processes points for
@@ -131,6 +132,7 @@ private:
   InternalComputationValueType m_MovingIntensityRange{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

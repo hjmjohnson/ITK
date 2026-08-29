@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 std::ostream &
 operator<<(std::ostream & out, const FastMarchingUpwindGradientImageFilterEnums::TargetCondition value)
@@ -39,4 +40,5 @@ operator<<(std::ostream & out, const FastMarchingUpwindGradientImageFilterEnums:
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

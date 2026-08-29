@@ -26,7 +26,9 @@
 // #else
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 using VersorRigid3DTransformOptimizer = VersorTransformOptimizer;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 // #endif
 

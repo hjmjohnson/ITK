@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 NumericSeriesFileNames::~NumericSeriesFileNames() = default;
 
 NumericSeriesFileNames::NumericSeriesFileNames()
@@ -95,4 +96,5 @@ NumericSeriesFileNames::PrintSelf(std::ostream & os, Indent indent) const
     os << indent << "FileNames[" << i << "]: " << m_FileNames[i] << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

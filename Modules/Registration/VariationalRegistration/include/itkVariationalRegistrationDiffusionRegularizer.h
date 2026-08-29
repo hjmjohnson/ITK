@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class itk::VariationalRegistrationDiffusionRegularizer
  *
@@ -190,6 +191,7 @@ private:
   ValueType * m_MatrixGamma[ImageDimension];
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

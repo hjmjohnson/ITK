@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageGaussianModelEstimator
  * \brief Base class for ImageGaussianModelEstimator object.
@@ -161,6 +162,7 @@ private:
 
   TrainingImagePointer m_TrainingImage{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

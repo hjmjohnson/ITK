@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class HigherOrderAccurateDerivativeImageFilter
  * \brief Computes the higher order accurate directional derivative of an image.
@@ -152,6 +153,7 @@ private:
   bool m_UseImageSpacing{ true };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

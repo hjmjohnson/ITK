@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationTermBase
  *  \brief Abstract class to represents a term in the level-set evolution PDE
@@ -192,6 +193,7 @@ protected:
 
   RequiredDataType m_RequiredData{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

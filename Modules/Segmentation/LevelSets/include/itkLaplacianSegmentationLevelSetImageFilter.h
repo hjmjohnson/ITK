@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**   \class LaplacianSegmentationLevelSetImageFilter
  *    \brief Segments structures in images based on a second derivative image features.
  *
@@ -135,6 +136,7 @@ protected:
 private:
   typename LaplacianFunctionType::Pointer m_LaplacianFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //
 // Constructor
 //
@@ -264,6 +265,7 @@ VTKPolyDataWriter<TInputMesh>::PrintSelf(std::ostream & os, Indent indent) const
 
   os << indent << "FileName: " << this->m_FileName << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

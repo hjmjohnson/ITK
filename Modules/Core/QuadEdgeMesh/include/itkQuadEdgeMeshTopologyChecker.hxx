@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh>
 QuadEdgeMeshTopologyChecker<TMesh>::QuadEdgeMeshTopologyChecker()
   : m_Mesh(nullptr)
@@ -130,5 +131,6 @@ QuadEdgeMeshTopologyChecker<TMesh>::PrintSelf(std::ostream & os, Indent indent) 
   os << indent << "ExpectedGenus: " << m_ExpectedGenus << std::endl;
   os << indent << "Mesh: " << m_Mesh << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

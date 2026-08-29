@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 HConcaveImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
@@ -99,5 +100,6 @@ HConcaveImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Ind
   os << indent << "Number of iterations used to produce current output: " << m_NumberOfIterationsUsed << std::endl;
   itkPrintSelfBooleanMacro(FullyConnected);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

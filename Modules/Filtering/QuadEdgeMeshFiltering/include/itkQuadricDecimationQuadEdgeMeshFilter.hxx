@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TOutput, typename TCriterion>
 void
@@ -81,5 +82,6 @@ QuadricDecimationQuadEdgeMeshFilter<TInput, TOutput, TCriterion>::Relocate(Outpu
 
   return Q.ComputeOptimalLocation(mid);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

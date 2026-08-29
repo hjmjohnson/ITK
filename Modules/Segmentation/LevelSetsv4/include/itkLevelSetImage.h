@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetImage
  *  \brief Abstract class for a level-set function on one Image.
@@ -79,6 +80,7 @@ protected:
   IsInsideDomain(const InputType & iP) const = 0;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

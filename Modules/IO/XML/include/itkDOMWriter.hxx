@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput>
 DOMWriter<TInput>::DOMWriter()
@@ -141,6 +142,7 @@ DOMWriter<TInput>::Update()
   writer->Update();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDOMWriter_hxx

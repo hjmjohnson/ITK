@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension, typename TSurfacePointType>
 SurfaceSpatialObject<TDimension, TSurfacePointType>::SurfaceSpatialObject()
@@ -248,6 +249,7 @@ SurfaceSpatialObject<TDimension, TSurfacePointType>::ComputeNormals()
   return true;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

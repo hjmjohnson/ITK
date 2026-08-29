@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class JPEGImageIO
  *
@@ -128,6 +129,7 @@ protected:
 
   bool m_IsCMYK{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkJPEGImageIO_h

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastChamferDistanceImageFilter
  * \brief This class compute the signed (positive and negative) chamfer distance in a narrow band
@@ -167,6 +168,7 @@ private:
   /** Region in the image to process.  */
   RegionType m_RegionToProcess{};
 }; // end of FastChamferDistanceImageFilter class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

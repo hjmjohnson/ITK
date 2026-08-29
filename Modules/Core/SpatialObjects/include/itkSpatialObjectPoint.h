@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObjectPoint
  * \brief Point used for spatial objects
@@ -245,6 +246,7 @@ protected:
   WeakPointer<SpatialObjectType> m_SpatialObject{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

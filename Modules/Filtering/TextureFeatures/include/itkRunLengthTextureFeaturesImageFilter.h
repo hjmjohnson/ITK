@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Statistics
 {
 /** \class RunLengthTextureFeaturesImageFilter
@@ -280,6 +281,7 @@ private:
   typename TInputImage::SpacingType    m_Spacing;
 };
 } // end of namespace Statistics
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

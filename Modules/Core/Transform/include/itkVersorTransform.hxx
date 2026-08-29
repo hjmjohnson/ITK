@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 VersorTransform<TParametersValueType>::VersorTransform()
@@ -198,6 +199,7 @@ VersorTransform<TParametersValueType>::GetInverseTransform() const -> InverseTra
   return Superclass::InvertTransform(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

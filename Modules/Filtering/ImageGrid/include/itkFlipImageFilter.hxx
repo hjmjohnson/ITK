@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 FlipImageFilter<TImage>::FlipImageFilter()
@@ -242,6 +243,7 @@ FlipImageFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "FlipAxes: " << m_FlipAxes << std::endl;
   os << indent << "FlipAboutOrigin: " << m_FlipAboutOrigin << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

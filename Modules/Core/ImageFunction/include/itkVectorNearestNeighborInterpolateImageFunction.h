@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VectorNearestNeighborInterpolateImageFunction
  * \brief Nearest neighbor interpolate a vector image at specified positions.
@@ -100,6 +101,7 @@ protected:
   VectorNearestNeighborInterpolateImageFunction() = default;
   ~VectorNearestNeighborInterpolateImageFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

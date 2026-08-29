@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ModifiedButterflyTriangleCellSubdivisionQuadEdgeMeshFilter
  * \brief Interpolating subdivision scheme.
@@ -91,6 +92,7 @@ protected:
   void
   AddNewCellPoints(InputCellType * cell) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkModifiedButterflyTriangleCellSubdivisionQuadEdgeMeshFilter.hxx"

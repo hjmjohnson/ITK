@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AttributeRelabelLabelMapFilter
  * \brief relabel objects according to their shape attributes
@@ -137,6 +138,7 @@ private:
 
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

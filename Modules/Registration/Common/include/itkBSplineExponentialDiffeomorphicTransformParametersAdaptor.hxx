@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 BSplineExponentialDiffeomorphicTransformParametersAdaptor<
@@ -128,6 +129,7 @@ BSplineExponentialDiffeomorphicTransformParametersAdaptor<TTransform>::PrintSelf
      << this->m_NumberOfControlPointsForTheConstantVelocityField << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

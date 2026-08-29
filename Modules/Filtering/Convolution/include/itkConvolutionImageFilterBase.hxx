@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TKernelImage, typename TOutputImage>
 ConvolutionImageFilterBase<TInputImage, TKernelImage, TOutputImage>::ConvolutionImageFilterBase()
   : m_BoundaryCondition(&m_DefaultBoundaryCondition)
@@ -123,5 +124,6 @@ ConvolutionImageFilterBase<TInputImage, TKernelImage, TOutputImage>::PrintSelf(s
   }
   os << indent << "OutputRegionMode: " << m_OutputRegionMode << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

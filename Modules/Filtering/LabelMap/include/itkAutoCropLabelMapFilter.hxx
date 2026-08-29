@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 AutoCropLabelMapFilter<TInputImage>::AutoCropLabelMapFilter()
 {
@@ -119,6 +120,7 @@ AutoCropLabelMapFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) cons
 
   os << indent << "Crop Border: " << m_CropBorder << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

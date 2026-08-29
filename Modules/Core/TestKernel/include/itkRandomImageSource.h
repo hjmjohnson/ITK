@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RandomImageSource
  * \brief Generate an n-dimensional image of random pixel values.
@@ -164,6 +165,7 @@ private:
   mutable PointValueArrayType   m_OriginArray{};
   mutable SpacingValueArrayType m_SpacingArray{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

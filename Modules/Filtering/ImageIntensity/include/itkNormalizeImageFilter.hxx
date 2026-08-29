@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 NormalizeImageFilter<TInputImage, TOutputImage>::NormalizeImageFilter()
   : m_StatisticsFilter(StatisticsImageFilter<TInputImage>::New())
@@ -81,6 +82,7 @@ NormalizeImageFilter<TInputImage, TOutputImage>::GenerateData()
   // Graft the mini pipeline output to this filters output
   this->GraftOutput(m_ShiftScaleFilter->GetOutput());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

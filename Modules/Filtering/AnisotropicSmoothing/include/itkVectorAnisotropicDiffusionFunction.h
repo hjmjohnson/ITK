@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorAnisotropicDiffusionFunction
  *
  * This class implements a vector-valued version of
@@ -88,6 +89,7 @@ protected:
     Superclass::PrintSelf(os, indent);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

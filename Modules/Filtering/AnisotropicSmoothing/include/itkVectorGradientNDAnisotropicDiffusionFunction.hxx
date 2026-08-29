@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 double VectorGradientNDAnisotropicDiffusionFunction<TImage>::m_MIN_NORM = 1.0e-10;
 
@@ -153,6 +154,7 @@ VectorGradientNDAnisotropicDiffusionFunction<TImage>::ComputeUpdate(const Neighb
 
   return delta;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

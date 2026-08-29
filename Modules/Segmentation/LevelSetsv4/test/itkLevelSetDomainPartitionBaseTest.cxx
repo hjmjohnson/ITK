@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomain>
 class LevelSetDomainPartitionBaseHelper : public LevelSetDomainPartitionBase<TDomain>
@@ -46,6 +47,7 @@ protected:
   {}
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

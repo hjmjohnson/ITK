@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /*
  * DisplacementFieldToBSplineImageFilter class definitions
@@ -425,6 +426,7 @@ DisplacementFieldToBSplineImageFilter<TInputImage, TInputPointSet, TOutputImage>
   itkPrintSelfBooleanMacro(UseInputFieldToDefineTheBSplineDomain);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

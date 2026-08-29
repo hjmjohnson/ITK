@@ -18,7 +18,10 @@
 #ifndef itkBlueColormapFunction_hxx
 #define itkBlueColormapFunction_hxx
 
-namespace itk::Function
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Function
 {
 template <typename TScalar, typename TRGBPixel>
 auto
@@ -37,6 +40,8 @@ BlueColormapFunction<TScalar, TRGBPixel>::operator()(const TScalar & v) const ->
 
   return pixel;
 }
-} // namespace itk::Function
+} // namespace Function
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

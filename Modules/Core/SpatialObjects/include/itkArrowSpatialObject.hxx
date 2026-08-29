@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 ArrowSpatialObject<TDimension>::ArrowSpatialObject()
@@ -163,6 +164,7 @@ ArrowSpatialObject<TDimension>::PrintSelf(std::ostream & os, Indent indent) cons
   print_helper::PrintNumericTrait(os, indent, "PositionInObjectSpace", m_PositionInObjectSpace);
   os << indent << "LengthInObjectSpace: " << m_LengthInObjectSpace << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // end itkArrowSpatialObject_hxx

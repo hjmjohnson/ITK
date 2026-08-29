@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -491,6 +492,7 @@ VariationalRegistrationCurvatureRegularizer<TDisplacementField>::PrintSelf(std::
   os << m_Spacing << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

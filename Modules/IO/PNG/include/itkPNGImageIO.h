@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PNGImageIO
  *
@@ -119,6 +120,7 @@ protected:
 
   PaletteType m_ColorPalette{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkPNGImageIO_h

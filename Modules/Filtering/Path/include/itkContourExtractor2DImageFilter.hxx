@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage>
@@ -695,6 +696,7 @@ ContourExtractor2DImageFilter<TInputImage>::PrintSelf(std::ostream & os, Indent 
   }
   os << indent << "UnusedLabel: " << static_cast<InputPixelPrintType>(m_UnusedLabel) << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

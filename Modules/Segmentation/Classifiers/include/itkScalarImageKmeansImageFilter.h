@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ScalarImageKmeansImageFilter
  * \brief Classifies the intensity values of a scalar image using the K-Means algorithm.
@@ -180,6 +181,7 @@ private:
 
   bool m_ImageRegionDefined{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

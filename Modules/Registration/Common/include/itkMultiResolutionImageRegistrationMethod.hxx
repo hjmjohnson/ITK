@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 MultiResolutionImageRegistrationMethod<TFixedImage, TMovingImage>::MultiResolutionImageRegistrationMethod()
@@ -416,6 +417,7 @@ MultiResolutionImageRegistrationMethod<TFixedImage, TMovingImage>::MakeOutput(Da
   }
   return TransformOutputType::New().GetPointer();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

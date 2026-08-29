@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AdditiveGaussianNoiseQuadEdgeMeshFilter
  * \brief Add Gaussian noise to the points defining an itkQuadEdgeMesh.
  *
@@ -86,6 +87,7 @@ protected:
   int            m_Seed;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

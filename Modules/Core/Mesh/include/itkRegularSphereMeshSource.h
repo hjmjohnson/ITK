@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegularSphereMeshSource
  * \brief
  * Inputs are the center of the mesh, the scale (radius in each dimension) of the mesh
@@ -119,6 +120,7 @@ protected:
   /** model scales */
   VectorType m_Scale{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

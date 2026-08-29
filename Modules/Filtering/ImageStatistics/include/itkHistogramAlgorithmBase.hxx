@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputHistogram>
 void
 HistogramAlgorithmBase<TInputHistogram>::PrintSelf(std::ostream & os, Indent indent) const
@@ -29,6 +30,7 @@ HistogramAlgorithmBase<TInputHistogram>::PrintSelf(std::ostream & os, Indent ind
 
   itkPrintSelfObjectMacro(InputHistogram);
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

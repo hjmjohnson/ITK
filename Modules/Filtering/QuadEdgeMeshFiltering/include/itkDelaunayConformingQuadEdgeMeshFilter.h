@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class DelaunayConformingQuadEdgeMeshFilter
  *
@@ -218,6 +219,7 @@ protected:
     return std::acos(dotA) + std::acos(dotB) - itk::Math::pi;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkDelaunayConformingQuadEdgeMeshFilter.hxx"

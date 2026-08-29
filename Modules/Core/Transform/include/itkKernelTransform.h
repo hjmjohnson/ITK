@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class KernelTransform
  * Intended to be a base class for elastic body spline and thin plate spline.
@@ -405,6 +406,7 @@ protected:
   /** The list of target landmarks, denoted 'q'. */
   PointSetPointer m_TargetLandmarks{ PointSetType::New() };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

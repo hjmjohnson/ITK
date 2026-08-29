@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HistogramToProbabilityImageFilter
  * \brief The class takes a histogram as an input and gives the probability
@@ -116,6 +117,7 @@ protected:
   HistogramToProbabilityImageFilter() = default;
   ~HistogramToProbabilityImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

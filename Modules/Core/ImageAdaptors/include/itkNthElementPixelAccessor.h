@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NthElementPixelAccessor
  * \brief Give access to the N-th of a Container type
@@ -206,6 +207,7 @@ private:
   VectorLengthType m_ElementNumber{ 0 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

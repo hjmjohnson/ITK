@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFunctionValue, unsigned int VImageDimension, typename TInput>
 HeldIsotropicWavelet<TFunctionValue, VImageDimension, TInput>::HeldIsotropicWavelet() = default;
 
@@ -99,6 +100,7 @@ HeldIsotropicWavelet<TFunctionValue, VImageDimension, TInput>::ComputePolynom(co
   }
   return static_cast<FunctionValueType>(y);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

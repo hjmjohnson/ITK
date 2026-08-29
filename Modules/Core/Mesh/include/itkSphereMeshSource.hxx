@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -209,6 +210,7 @@ SphereMeshSource<TOutputMesh>::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Squareness1: " << m_Squareness1 << std::endl;
   os << indent << "Squareness2: " << m_Squareness2 << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

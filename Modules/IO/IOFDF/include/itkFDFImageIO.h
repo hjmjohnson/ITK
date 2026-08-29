@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class FDFImageIO
  *
@@ -133,6 +134,7 @@ private:
   std::vector<float> m_Roi;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

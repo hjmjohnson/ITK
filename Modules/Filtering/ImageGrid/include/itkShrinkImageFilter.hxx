@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 ShrinkImageFilter<TInputImage, TOutputImage>::ShrinkImageFilter()
 {
@@ -299,6 +300,7 @@ ShrinkImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
 
   outputPtr->SetLargestPossibleRegion(outputLargestPossibleRegion);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

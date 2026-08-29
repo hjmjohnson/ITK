@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage, typename TDisplacementField>
 FastSymmetricForcesDemonsRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::
@@ -271,6 +272,7 @@ FastSymmetricForcesDemonsRegistrationFunction<TFixedImage, TMovingImage, TDispla
     m_RMSChange = std::sqrt(m_SumOfSquaredChange / static_cast<double>(m_NumberOfPixelsProcessed));
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

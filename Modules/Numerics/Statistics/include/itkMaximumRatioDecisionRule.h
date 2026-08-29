@@ -25,7 +25,10 @@
 #include "itkDecisionRule.h"
 #include "ITKStatisticsExport.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class MaximumRatioDecisionRule
@@ -112,6 +115,8 @@ private:
   PriorProbabilityVectorType m_PriorProbabilities{};
 
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

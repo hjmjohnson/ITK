@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInternalComputationValueType>
 class ITK_FORWARD_EXPORT GradientDescentOptimizerBasev4Template;
 
@@ -68,6 +69,7 @@ protected:
 using GradientDescentOptimizerBasev4ModifyGradientByScalesThreader =
   GradientDescentOptimizerBasev4ModifyGradientByScalesThreaderTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

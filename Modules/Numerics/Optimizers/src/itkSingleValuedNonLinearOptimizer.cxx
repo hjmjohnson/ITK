@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SingleValuedNonLinearOptimizer::~SingleValuedNonLinearOptimizer() = default;
 
 SingleValuedNonLinearOptimizer::SingleValuedNonLinearOptimizer()
@@ -82,4 +83,5 @@ SingleValuedNonLinearOptimizer::PrintSelf(std::ostream & os, Indent indent) cons
     os << indent << "Cost Function: " << m_CostFunction.GetPointer() << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

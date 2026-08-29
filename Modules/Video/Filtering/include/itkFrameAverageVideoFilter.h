@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class FrameAverageVideoFilter
@@ -81,6 +82,7 @@ protected:
   ThreadedGenerateData(const OutputFrameSpatialRegionType & outputRegionForThread, int threadId) override;
 }; // end class FrameAverageVideoFilter
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

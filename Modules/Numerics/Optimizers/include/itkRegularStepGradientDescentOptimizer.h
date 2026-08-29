@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegularStepGradientDescentOptimizer
  * \brief Implement a gradient descent optimizer
  *
@@ -63,6 +64,7 @@ protected:
   void
   StepAlongGradient(double factor, const DerivativeType & transformedGradient) override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

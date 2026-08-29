@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 FiniteDifferenceImageFilter<TInputImage, TOutputImage>::FiniteDifferenceImageFilter()
   : m_NumberOfIterations(NumericTraits<IdentifierType>::max())
@@ -294,6 +295,7 @@ FiniteDifferenceImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   }
   os << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -55,6 +55,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 TransformFactoryBase * TransformFactoryBase::m_Factory = nullptr;
 
 namespace TransformFactoryBasePrivate
@@ -117,4 +118,5 @@ TransformFactoryBase::GetDescription() const
 {
   return "Transform FactoryBase";
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

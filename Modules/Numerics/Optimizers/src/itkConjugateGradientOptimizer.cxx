@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Constructor
  */
@@ -146,4 +147,5 @@ ConjugateGradientOptimizer::GetCurrentIteration() const
 {
   return m_VnlOptimizer->get_num_iterations();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

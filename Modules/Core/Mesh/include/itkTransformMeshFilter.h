@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformMeshFilter
  * \brief
  *
@@ -89,6 +90,7 @@ protected:
   /** Transform to apply to all the mesh points. */
   typename TransformType::Pointer m_Transform{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

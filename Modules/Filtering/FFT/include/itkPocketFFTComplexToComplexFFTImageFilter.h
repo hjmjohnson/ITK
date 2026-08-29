@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PocketFFTComplexToComplexFFTImageFilter
  *
@@ -79,6 +80,7 @@ struct FFTImageFilterTraits<PocketFFTComplexToComplexFFTImageFilter>
   using FilterDimensions = std::integer_sequence<unsigned int, 4, 3, 2, 1>;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

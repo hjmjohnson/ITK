@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** TODO:  There should be compile time type checks so that
            if only ITK_USE_FFTWF is defined, then only floats are valid.
            and if ITK_USE_FFTWD is defined, then only doubles are valid.
@@ -157,6 +158,7 @@ FFTWForwardFFTImageFilter<TInputImage, TOutputImage>::GetSizeGreatestPrimeFactor
   return FFTWProxyType::GREATEST_PRIME_FACTOR;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif //_itkFFTWForwardFFTImageFilter_hxx

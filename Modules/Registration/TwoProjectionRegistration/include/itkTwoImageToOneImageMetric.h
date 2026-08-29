@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class TwoImageToOneImageMetric
  * \brief Computes similarity between two fixed images and one fixed image.
@@ -235,6 +236,7 @@ private:
   FixedImageRegionType m_FixedImageRegion2;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

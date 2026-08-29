@@ -275,6 +275,7 @@ private:
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh>
 MeshToPolyDataFilter<TInputMesh>::MeshToPolyDataFilter()
@@ -685,6 +686,7 @@ MeshToPolyDataFilter<TInputMesh>::GenerateDataDispatch()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMeshToPolyDataFilter_hxx

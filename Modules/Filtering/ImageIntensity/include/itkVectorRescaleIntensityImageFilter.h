@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // This functor class applies a scaling transformation A.x
 // to input values.
 namespace Functor
@@ -163,6 +164,7 @@ private:
   InputRealType  m_InputMaximumMagnitude{};
   OutputRealType m_OutputMaximumMagnitude{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

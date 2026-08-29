@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BinaryProjectionImageFilter
  * \brief Binary projection
  *
@@ -183,6 +184,7 @@ protected:
   /** Pixel value for background */
   OutputPixelType m_BackgroundValue{};
 }; // end BinaryProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

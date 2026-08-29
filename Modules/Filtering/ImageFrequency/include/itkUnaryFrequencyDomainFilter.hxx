@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFrequencyIterator>
 UnaryFrequencyDomainFilter<TImageType, TFrequencyIterator>::UnaryFrequencyDomainFilter()
 {
@@ -79,6 +80,7 @@ UnaryFrequencyDomainFilter<TInputImage, TFrequencyIterator>::DynamicThreadedGene
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkUnaryFrequencyDomainFilter_hxx

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Functor
 {
 template <typename TInput, typename TOutput>
@@ -126,6 +127,7 @@ protected:
   MatrixIndexSelectionImageFilter() = default;
   ~MatrixIndexSelectionImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

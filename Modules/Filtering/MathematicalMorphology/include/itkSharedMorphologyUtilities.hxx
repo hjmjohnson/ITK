@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SharedMorphUtilities
  * \brief functionality in common for anchor and VanHerkGilWerman openings/closings and
@@ -455,6 +456,7 @@ GetLinePixels(const TLine line)
   N *= correction;
   return static_cast<int>(N + 0.5);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

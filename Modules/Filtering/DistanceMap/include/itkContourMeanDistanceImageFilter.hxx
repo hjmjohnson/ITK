@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage1, typename TInputImage2>
 ContourMeanDistanceImageFilter<TInputImage1, TInputImage2>::ContourMeanDistanceImageFilter()
   : m_MeanDistance(RealType{})
@@ -152,5 +153,6 @@ ContourMeanDistanceImageFilter<TInputImage1, TInputImage2>::PrintSelf(std::ostre
   itkPrintSelfBooleanMacro(UseImageSpacing);
   os << indent << "MeanDistance: " << m_MeanDistance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 GaussianImageSource<TOutputImage>::GaussianImageSource()
@@ -123,6 +124,7 @@ GaussianImageSource<TOutputImage>::PrintSelf(std::ostream & os, Indent indent) c
   os << indent << "Scale: " << m_Scale << std::endl;
   itkPrintSelfBooleanMacro(Normalized);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

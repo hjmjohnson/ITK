@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 KrcahPreprocessingImageToImageFilter<TInputImage, TOutputImage>::KrcahPreprocessingImageToImageFilter()
   : m_Sigma(1.0f)
@@ -110,6 +111,7 @@ KrcahPreprocessingImageToImageFilter<TInputImage, TOutputImage>::PrintSelf(std::
   os << indent << "ReleaseInternalFilterData: " << GetReleaseInternalFilterData() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkKrcahPreprocessingImageToImageFilter_hxx

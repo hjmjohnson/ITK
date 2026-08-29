@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GradientDescentOptimizerBasev4
  *  \brief Abstract base class for gradient descent-style optimizers.
@@ -216,6 +217,7 @@ protected:
 /** This helps to meet backward compatibility */
 using GradientDescentOptimizerBasev4 = GradientDescentOptimizerBasev4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

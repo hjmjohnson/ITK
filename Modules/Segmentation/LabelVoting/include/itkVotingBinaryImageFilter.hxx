@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 VotingBinaryImageFilter<TInputImage, TOutputImage>::VotingBinaryImageFilter()
   : m_ForegroundValue(NumericTraits<InputPixelType>::max())
@@ -163,6 +164,7 @@ VotingBinaryImageFilter<TInputImage, TOutput>::PrintSelf(std::ostream & os, Inde
   os << indent << "Birth Threshold   : " << m_BirthThreshold << std::endl;
   os << indent << "Survival Threshold   : " << m_SurvivalThreshold << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

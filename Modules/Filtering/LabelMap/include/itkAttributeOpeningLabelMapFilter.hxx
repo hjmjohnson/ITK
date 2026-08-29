@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TAttributeAccessor>
 AttributeOpeningLabelMapFilter<TImage, TAttributeAccessor>::AttributeOpeningLabelMapFilter()
@@ -86,5 +87,6 @@ AttributeOpeningLabelMapFilter<TImage, TAttributeAccessor>::PrintSelf(std::ostre
   print_helper::PrintNumericTrait(os, indent, "Lambda", m_Lambda);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

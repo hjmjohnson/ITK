@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PathToPathFilter
  * \brief Base class for filters that take a path as input and produce a path as output.
@@ -86,6 +87,7 @@ protected:
   void
   GenerateInputRequestedRegion() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

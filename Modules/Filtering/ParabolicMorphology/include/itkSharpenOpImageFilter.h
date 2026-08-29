@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SharpenOpImageFilter
  * \brief Implements the sharpening operation. The inputs are the
  * dilated, eroded and original images.
@@ -121,6 +122,7 @@ protected:
   SharpenOpImageFilter() = default;
   ~SharpenOpImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

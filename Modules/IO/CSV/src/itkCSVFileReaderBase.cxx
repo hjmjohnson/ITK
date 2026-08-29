@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 CSVFileReaderBase::CSVFileReaderBase()
   : m_FileName("")
@@ -282,4 +283,5 @@ CSVFileReaderBase::GetNextField(std::string & str)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

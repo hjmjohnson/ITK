@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomainPartitioner, typename TImageToImageMetric, typename TMattesMutualInformationMetric>
 void
@@ -462,6 +463,7 @@ MattesMutualInformationImageToImageMetricv4GetValueAndDerivativeThreader<
   this->m_MattesAssociate->ComputeResults();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegionOfInterestImageFilter
  * \brief Extract a region of interest from the input image or convert
  *  between itk::Image and RLEImage (a custom region can be used).
@@ -411,6 +412,7 @@ protected:
 private:
   RegionType m_RegionOfInterest;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

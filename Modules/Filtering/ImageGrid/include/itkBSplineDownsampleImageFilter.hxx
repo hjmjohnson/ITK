@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename ResamplerType>
 void
 BSplineDownsampleImageFilter<TInputImage, TOutputImage, ResamplerType>::GenerateData()
@@ -161,6 +162,7 @@ BSplineDownsampleImageFilter<TInputImage, TOutputImage, ResamplerType>::EnlargeO
                     << typeid(output).name() << " to " << typeid(TOutputImage *).name());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

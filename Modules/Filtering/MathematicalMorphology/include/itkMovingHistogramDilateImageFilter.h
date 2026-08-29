@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MovingHistogramDilateImageFilter
  * \brief Grayscale dilation of an image.
@@ -87,6 +88,7 @@ protected:
 
   ~MovingHistogramDilateImageFilter() override = default;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -48,6 +48,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ScalarToRGBColormapImageFilter<TInputImage, TOutputImage>::ScalarToRGBColormapImageFilter()
@@ -245,6 +246,7 @@ ScalarToRGBColormapImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostrea
   }
   os << indent << "Use Input Image Extrema for Scaling " << this->m_UseInputImageExtremaForScaling << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

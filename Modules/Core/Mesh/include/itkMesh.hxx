@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixelType, unsigned int VDimension, typename TMeshTraits>
 void
 Mesh<TPixelType, VDimension, TMeshTraits>::PrintSelf(std::ostream & os, Indent indent) const
@@ -1118,6 +1119,7 @@ Mesh<TPixelType, VDimension, TMeshTraits>::DeleteUnusedCellData()
     this->GetCellData()->DeleteIndex(c);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

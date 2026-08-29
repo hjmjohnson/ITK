@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class MeshConvertPixelTraits
@@ -455,5 +456,6 @@ ITK_MESH_DEFAULTCONVERTTRAITS_ARRAY_TYPE_ALL_TYPES_MACRO(VariableLengthVector);
 //
 //
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

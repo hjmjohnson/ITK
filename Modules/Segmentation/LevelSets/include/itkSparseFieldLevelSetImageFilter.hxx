@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TNeighborhoodType>
 SparseFieldCityBlockNeighborList<TNeighborhoodType>::SparseFieldCityBlockNeighborList()
   : m_Size(2 * Dimension)
@@ -1104,6 +1105,7 @@ SparseFieldLevelSetImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostrea
 
   itkPrintSelfBooleanMacro(BoundsCheckingActive);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

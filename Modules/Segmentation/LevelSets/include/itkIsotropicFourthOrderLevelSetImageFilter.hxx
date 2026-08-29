@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 IsotropicFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>::IsotropicFourthOrderLevelSetImageFilter()
 {
@@ -49,6 +50,7 @@ IsotropicFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>::PrintSelf(st
   Superclass::PrintSelf(os, indent);
   os << indent << "MaxFilterIteration: " << m_MaxFilterIteration << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

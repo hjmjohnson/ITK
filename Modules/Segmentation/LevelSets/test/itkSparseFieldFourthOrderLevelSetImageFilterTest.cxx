@@ -80,6 +80,7 @@ evaluate_function(itk::Image<float, 2> * im, float (*f)(unsigned int, unsigned i
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 class IsotropicDiffusionLevelSetFilter : public SparseFieldFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>
 {
@@ -130,6 +131,7 @@ protected:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 int

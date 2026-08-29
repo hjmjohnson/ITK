@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class InitializationBiasedParticleSwarmOptimizer
  * \brief Implementation of a biased/regularized Particle Swarm Optimization
  *        (PSO) algorithm.
@@ -126,6 +127,7 @@ private:
   ParametersType::ValueType m_InitializationCoefficient{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

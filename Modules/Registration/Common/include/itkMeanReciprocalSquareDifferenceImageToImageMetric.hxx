@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 MeanReciprocalSquareDifferenceImageToImageMetric<TFixedImage,
@@ -132,6 +133,7 @@ MeanReciprocalSquareDifferenceImageToImageMetric<TFixedImage, TMovingImage>::Get
   Value = this->GetValue(parameters);
   this->GetDerivative(parameters, Derivative);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

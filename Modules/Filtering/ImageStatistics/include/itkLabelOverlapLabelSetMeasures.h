@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LabelOverlapLabelSetMeasures
  * \brief Metrics stored per label
  * \ingroup ITKImageStatistics
@@ -72,5 +73,6 @@ struct LabelOverlapLabelSetMeasures
     return m_TargetComplement;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkLabelOverlapLabelSetMeasures_h

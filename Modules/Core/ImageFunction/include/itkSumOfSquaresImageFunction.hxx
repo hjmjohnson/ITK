@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 SumOfSquaresImageFunction<TInputImage, TCoordinate>::SumOfSquaresImageFunction()
@@ -70,6 +71,7 @@ SumOfSquaresImageFunction<TInputImage, TCoordinate>::PrintSelf(std::ostream & os
   os << indent << "NeighborhoodSize: " << this->m_NeighborhoodSize << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TITKData, typename TOpenCVData>
 struct OpenCVBasicTypeBridge
 {};
@@ -208,5 +209,6 @@ struct OpenCVBasicTypeBridge<TVector, cv::Vec<typename TVector::ValueType, TVect
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

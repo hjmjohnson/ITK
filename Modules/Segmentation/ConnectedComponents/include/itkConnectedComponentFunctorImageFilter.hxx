@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TFunctor, typename TMaskImage>
 void
 ConnectedComponentFunctorImageFilter<TInputImage, TOutputImage, TFunctor, TMaskImage>::GenerateData()
@@ -219,6 +220,7 @@ ConnectedComponentFunctorImageFilter<TInputImage, TOutputImage, TFunctor, TMaskI
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

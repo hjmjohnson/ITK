@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TElement>
 RingBuffer<TElement>::RingBuffer()
@@ -164,6 +165,7 @@ RingBuffer<TElement>::GetOffsetBufferIndex(OffsetValueType offset) -> OffsetValu
   return (signedHeadIndex + (this->GetNumberOfBuffers() - moddedOffset)) % this->GetNumberOfBuffers();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

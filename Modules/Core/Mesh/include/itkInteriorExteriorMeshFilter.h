@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class InteriorExteriorMeshFilter
  * \brief
  *
@@ -98,6 +99,7 @@ protected:
   /** Transform applied to all the mesh points. */
   typename SpatialFunctionType::Pointer m_SpatialFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

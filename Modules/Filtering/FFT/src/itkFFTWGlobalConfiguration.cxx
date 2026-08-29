@@ -41,6 +41,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct FFTWGlobalConfigurationGlobals
 {
@@ -824,6 +825,7 @@ FFTWGlobalConfiguration::GetWisdomCacheBase()
   return GetInstance()->m_WisdomCacheBase;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

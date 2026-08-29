@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CheckerBoardImageFilter
  * \brief Combines two images in a checkerboard pattern.
@@ -107,6 +108,7 @@ protected:
 private:
   PatternArrayType m_CheckerPattern{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

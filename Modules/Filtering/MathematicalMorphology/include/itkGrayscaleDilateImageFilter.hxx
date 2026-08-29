@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 GrayscaleDilateImageFilter<TInputImage, TOutputImage, TKernel>::GrayscaleDilateImageFilter()
   : m_HistogramFilter(HistogramFilterType::New())
@@ -219,5 +220,6 @@ GrayscaleDilateImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(std::o
   print_helper::PrintNumericTrait(os, indent, "Boundary", m_Boundary);
   os << indent << "Algorithm: " << m_Algorithm << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

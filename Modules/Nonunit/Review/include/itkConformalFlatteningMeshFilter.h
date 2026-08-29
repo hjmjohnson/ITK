@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConformalFlatteningMeshFilter
  * \brief
  *
@@ -140,6 +141,7 @@ private:
    *  Determines how far the farthest point goes. */
   double m_MapScale{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

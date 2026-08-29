@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageModelEstimatorBase
  * \brief Base class for model estimation from images used for classification.
@@ -160,6 +161,7 @@ private:
   virtual void
   EstimateModels() = 0;
 }; // class ImageModelEstimator
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

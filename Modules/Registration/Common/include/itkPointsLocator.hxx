@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPointsContainer>
 PointsLocator<TPointsContainer>::PointsLocator()
@@ -121,6 +122,7 @@ PointsLocator<TPointsContainer>::PrintSelf(std::ostream & os, Indent indent) con
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

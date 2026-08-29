@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BinaryMaskToNarrowBandPointSetFilter
  * \brief Generate a PointSet containing the narrow band around the edges of a
  * input binary image.
@@ -151,6 +152,7 @@ private:
 
   float m_BandWidth{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

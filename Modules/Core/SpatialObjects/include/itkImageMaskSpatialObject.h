@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageMaskSpatialObject
  * \brief Implementation of an image mask as spatial object.
@@ -138,6 +139,7 @@ private:
   bool      m_UseMaskValue{ false };
   PixelType m_MaskValue{ NumericTraits<PixelType>::OneValue() };
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

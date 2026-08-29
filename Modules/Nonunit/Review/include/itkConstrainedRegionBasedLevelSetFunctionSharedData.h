@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConstrainedRegionBasedLevelSetFunctionSharedData
  *
  * \brief Helper class used to share data in the ScalarChanAndVeseLevelSetFunction.
@@ -164,6 +165,7 @@ protected:
   {}
   ~ConstrainedRegionBasedLevelSetFunctionSharedData() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

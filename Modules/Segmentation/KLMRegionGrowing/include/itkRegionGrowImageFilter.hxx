@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 RegionGrowImageFilter<TInputImage, TOutputImage>::RegionGrowImageFilter()
 {
@@ -37,6 +38,7 @@ RegionGrowImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, I
   os << indent << "MaximumNumberOfRegions: " << m_MaximumNumberOfRegions << std::endl;
   print_helper::PrintNumericTrait(os, indent, "GridSize", m_GridSize);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

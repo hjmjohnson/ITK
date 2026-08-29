@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TMaskImage>
 HistogramThresholdImageFilter<TInputImage, TOutputImage, TMaskImage>::HistogramThresholdImageFilter()
@@ -160,5 +161,6 @@ HistogramThresholdImageFilter<TInputImage, TOutputImage, TMaskImage>::PrintSelf(
   os << indent << "AutoMinimumMaximm: " << m_AutoMinimumMaximum << std::endl;
   os << indent << "MaskOutput: " << m_MaskOutput << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

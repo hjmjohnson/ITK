@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TMetric>
 void
@@ -92,6 +93,7 @@ RegistrationParameterScalesFromPhysicalShift<TMetric>::PrintSelf(std::ostream & 
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TParentImageFilter>
 GPUFiniteDifferenceImageFilter<TInputImage, TOutputImage, TParentImageFilter>::GPUFiniteDifferenceImageFilter()
 {
@@ -309,6 +310,7 @@ GPUFiniteDifferenceImageFilter<TInputImage, TOutputImage, TParentImageFilter>::P
   os << indent << "State: " << m_State << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

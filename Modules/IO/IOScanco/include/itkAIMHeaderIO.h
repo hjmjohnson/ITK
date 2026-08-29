@@ -26,6 +26,7 @@ struct AIMV030StructHeader;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class AIMHeaderIO : public ScancoHeaderIO
 {
 public:
@@ -123,5 +124,6 @@ private:
   size_t m_ImgStructSize{ 0 };
   size_t m_ProcessingLogSize{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkAIMHeaderIO_h

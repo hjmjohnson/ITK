@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 const unsigned long VectorLinearInterpolateImageFunction<TInputImage, TCoordinate>::m_Neighbors =
@@ -106,6 +107,7 @@ VectorLinearInterpolateImageFunction<TInputImage, TCoordinate>::EvaluateAtContin
 
   return output;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 StructureTensorImageFilter<TInputImage, TOutputImage>::StructureTensorImageFilter()
 {
@@ -361,5 +362,6 @@ StructureTensorImageFilter<TInputImage, TOutputImage>::ComputeCoherencyImage() c
 
   return coherencyImage;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

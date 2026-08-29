@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh>
 auto
 QuadEdgeMeshBoundaryEdgesMeshFunction<TMesh>::Evaluate(const InputType & mesh) const -> OutputType
@@ -99,6 +100,7 @@ QuadEdgeMeshBoundaryEdgesMeshFunction<TMesh>::Evaluate(const InputType & mesh) c
 
   return ResultList;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

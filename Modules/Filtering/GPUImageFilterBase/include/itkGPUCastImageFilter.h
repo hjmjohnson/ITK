@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** Create a helper GPU Kernel class for GPUCastImageFilter */
 itkGPUKernelClassMacro(GPUCastImageFilterKernel);
@@ -113,6 +114,7 @@ protected:
   GPUGenerateData() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

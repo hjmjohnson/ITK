@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 AffineTransform<TParametersValueType, VDimension>::AffineTransform()
@@ -302,6 +303,7 @@ AffineTransform<TParametersValueType, VDimension>::Metric() const -> ScalarType
 
   return std::sqrt(result);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

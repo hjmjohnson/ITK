@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage,
           typename TMovingImage,
@@ -450,6 +451,7 @@ TimeVaryingVelocityFieldImageRegistrationMethodv4<TFixedImage,
   os << indent << "NumberOfIterationsPerLevel: " << m_NumberOfIterationsPerLevel << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

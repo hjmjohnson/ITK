@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInternalComputationValueType>
 PowellOptimizerv4<TInternalComputationValueType>::PowellOptimizerv4()
   : m_CurrentCost(0)
@@ -537,5 +538,6 @@ PowellOptimizerv4<TInternalComputationValueType>::PrintSelf(std::ostream & os, I
   os << indent << "Current Line Iteration " << m_CurrentLineIteration << std::endl;
   os << indent << "Stop              " << m_Stop << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 #endif

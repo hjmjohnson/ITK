@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NoiseImageFilter
  * \brief Calculate the local noise in an image.
  *
@@ -102,6 +103,7 @@ protected:
   void
   DynamicThreadedGenerateData(const OutputImageRegionType & outputRegionForThread) override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

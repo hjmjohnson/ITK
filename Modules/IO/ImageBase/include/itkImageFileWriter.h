@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \brief Base exception class for IO problems during writing.
  *
  * \class ImageFileWriterException
@@ -257,6 +258,7 @@ WriteImage(TImagePointer && image, const std::string & filename, bool compress =
   writer->Update();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

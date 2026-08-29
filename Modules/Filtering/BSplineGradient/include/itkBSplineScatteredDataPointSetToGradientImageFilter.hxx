@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPointSet, typename TOutputValueType>
 BSplineScatteredDataPointSetToGradientImageFilter<TInputPointSet,
@@ -214,6 +215,7 @@ BSplineScatteredDataPointSetToGradientImageFilter<TInputPointSet, TOutputValueTy
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

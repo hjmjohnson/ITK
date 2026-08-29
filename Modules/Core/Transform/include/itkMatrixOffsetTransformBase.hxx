@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VInputDimension, unsigned int VOutputDimension>
 MatrixOffsetTransformBase<TParametersValueType, VInputDimension, VOutputDimension>::MatrixOffsetTransformBase(
@@ -671,6 +672,7 @@ MatrixOffsetTransformBase<TParametersValueType, VInputDimension, VOutputDimensio
   // set.
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

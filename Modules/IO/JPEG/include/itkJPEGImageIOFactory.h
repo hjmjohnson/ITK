@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class JPEGImageIOFactory
  * \brief Create instances of JPEGImageIO objects using an object factory.
@@ -71,6 +72,7 @@ protected:
   JPEGImageIOFactory();
   ~JPEGImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

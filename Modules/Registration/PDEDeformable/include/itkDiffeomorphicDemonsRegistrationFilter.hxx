@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage, typename TDisplacementField>
 DiffeomorphicDemonsRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>::
@@ -293,6 +294,7 @@ DiffeomorphicDemonsRegistrationFilter<TFixedImage, TMovingImage, TDisplacementFi
   os << indent << "Intensity difference threshold: " << this->GetIntensityDifferenceThreshold() << std::endl;
   os << indent << "Use First Order exponential: " << this->m_UseFirstOrderExp << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

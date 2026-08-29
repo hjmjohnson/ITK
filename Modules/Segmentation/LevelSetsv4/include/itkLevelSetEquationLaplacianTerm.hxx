@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TLevelSetContainer>
 LevelSetEquationLaplacianTerm<TInput, TLevelSetContainer>::LevelSetEquationLaplacianTerm()
 {
@@ -72,6 +73,7 @@ LevelSetEquationLaplacianTerm<TInput, TLevelSetContainer>::Value(const LevelSetI
   return laplacian;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

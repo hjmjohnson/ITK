@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class RegistrationParameterScalesFromShiftBase
@@ -114,6 +115,7 @@ private:
 }; // class RegistrationParameterScalesFromShiftBase
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

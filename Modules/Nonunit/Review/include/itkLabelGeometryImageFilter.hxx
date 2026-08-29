@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // This class is deprecated; its own implementation legitimately references it.
 #if defined(__GNUC__) || defined(__clang__)
 #  pragma GCC diagnostic push
@@ -1003,5 +1004,6 @@ LabelGeometryImageFilter<TImage, TLabelImage>::PrintSelf(std::ostream & os, Inde
 #if defined(__GNUC__) || defined(__clang__)
 #  pragma GCC diagnostic pop
 #endif
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

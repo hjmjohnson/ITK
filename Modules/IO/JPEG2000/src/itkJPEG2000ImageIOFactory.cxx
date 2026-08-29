@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 JPEG2000ImageIOFactory::JPEG2000ImageIOFactory()
 {
   this->RegisterOverride(
@@ -51,4 +52,5 @@ JPEG2000ImageIOFactoryRegister__Private()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

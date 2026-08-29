@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -499,6 +500,7 @@ VariationalRegistrationStopCriterion<TRegistrationFilter, TMRFilter>::PrintSelf(
   // TODO print stop criterion members
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

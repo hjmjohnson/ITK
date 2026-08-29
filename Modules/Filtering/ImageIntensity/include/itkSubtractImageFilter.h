@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SubtractImageFilter
  * \brief Pixel-wise subtraction of two images.
@@ -100,6 +101,7 @@ protected:
 
   ~SubtractImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

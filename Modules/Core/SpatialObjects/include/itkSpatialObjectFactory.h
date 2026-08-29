@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObjectFactory
  * \brief Create instances of SpatialObjects
@@ -54,6 +55,7 @@ public:
                              CreateObjectFunction<T>::New());
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

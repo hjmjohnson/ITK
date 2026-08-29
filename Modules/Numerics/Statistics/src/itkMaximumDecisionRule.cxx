@@ -17,7 +17,10 @@
  *=========================================================================*/
 #include "itkMaximumDecisionRule.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 MaximumDecisionRule::~MaximumDecisionRule() = default;
 
@@ -41,4 +44,6 @@ MaximumDecisionRule::Evaluate(const MembershipVectorType & discriminantScores) c
   }
   return maxIndex;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

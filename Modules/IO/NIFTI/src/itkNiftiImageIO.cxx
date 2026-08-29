@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -2295,4 +2296,5 @@ operator<<(std::ostream & out, const NiftiImageIOEnums::NiftiFileEnum value)
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

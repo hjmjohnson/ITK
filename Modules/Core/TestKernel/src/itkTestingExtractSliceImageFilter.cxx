@@ -17,7 +17,10 @@
  *=========================================================================*/
 #include "itkTestingExtractSliceImageFilter.h"
 
-namespace itk::Testing
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Testing
 {
 /** Print enum values */
 std::ostream &
@@ -43,4 +46,6 @@ operator<<(std::ostream & out, const ExtractSliceImageFilterEnums::TestExtractSl
     }
   }();
 }
-} // namespace itk::Testing
+} // namespace Testing
+ITK_ABI_NAMESPACE_END
+} // namespace itk

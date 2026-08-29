@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TElementIdentifier, typename TElement>
 PyObject *
@@ -82,6 +83,7 @@ PyVectorContainer<TElementIdentifier, TElement>::_vector_container_from_array(Py
   return output;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

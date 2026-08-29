@@ -26,6 +26,7 @@ extern "C"
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LBFGSBOptimizerHelper
  * \brief Wrapper helper around vnl_lbfgsb.
  *
@@ -434,4 +435,5 @@ LBFGSBOptimizer::GetStopConditionDescription() const
   }
   return stopConditionDescription.str();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

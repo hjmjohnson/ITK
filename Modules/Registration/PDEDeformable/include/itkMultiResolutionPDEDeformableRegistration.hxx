@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage,
           typename TMovingImage,
@@ -669,6 +670,7 @@ MultiResolutionPDEDeformableRegistration<TFixedImage,
     outputPtr->SetRequestedRegionToLargestPossibleRegion();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

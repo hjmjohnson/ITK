@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /* MatrixOrthogonalityTolerance is a utility to
  * allow setting the tolerance limits used for
@@ -592,6 +593,7 @@ private:
   TimeStamp         m_MatrixMTime{};
   mutable TimeStamp m_InverseMatrixMTime{};
 }; // class MatrixOffsetTransformBase
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

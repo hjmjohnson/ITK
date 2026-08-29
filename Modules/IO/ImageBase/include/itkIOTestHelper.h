@@ -31,6 +31,7 @@
 #include <type_traits>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class IOTestHelper
 {
 public:
@@ -250,5 +251,6 @@ public:
     return rval;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkIOTestHelper_h

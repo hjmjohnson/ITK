@@ -43,6 +43,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MeshIOBase
  * \brief Abstract superclass defines mesh IO interface.
@@ -896,6 +897,7 @@ private:
   ArrayOfExtensionsType m_SupportedReadExtensions{};
   ArrayOfExtensionsType m_SupportedWriteExtensions{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

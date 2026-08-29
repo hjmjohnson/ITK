@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 KLMRegionGrowImageFilter<TInputImage, TOutputImage>::KLMRegionGrowImageFilter()
 {
@@ -787,6 +788,7 @@ KLMRegionGrowImageFilter<TInputImage, TOutputImage>::PrintAlgorithmBorderStats()
     m_BordersDynamicPointer[k].m_Pointer->PrintBorderInfo();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

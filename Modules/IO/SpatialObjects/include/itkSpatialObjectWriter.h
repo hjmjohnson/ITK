@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SpatialObjectWriter
  *
  * \brief TODO
@@ -122,6 +123,7 @@ private:
 
   typename MetaSceneConverterType::Pointer m_MetaToSpatialConverter{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

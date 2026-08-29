@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TimeVaryingVelocityFieldTransformParametersAdaptor
  * \brief TimeVaryingVelocityFieldTransformParametersAdaptor is a helper class intended to
  * definition.
@@ -135,6 +136,7 @@ protected:
   TimeVaryingVelocityFieldTransformParametersAdaptor();
   ~TimeVaryingVelocityFieldTransformParametersAdaptor() override = default;
 }; // class TimeVaryingVelocityFieldTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

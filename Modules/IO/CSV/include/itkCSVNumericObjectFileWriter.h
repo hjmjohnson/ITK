@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CSVNumericObjectFileWriter
  * \brief Writes out numeric itk data objects to a csv file.
@@ -139,6 +140,7 @@ private:
   StringVectorType m_RowHeaders{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

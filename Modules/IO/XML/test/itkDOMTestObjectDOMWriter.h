@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class DOMTestObjectDOMWriter : public DOMWriter<DOMTestObject>
 {
@@ -82,6 +83,7 @@ DOMTestObjectDOMWriter::GenerateData(DOMNodeType * outputdom, const void *) cons
   ofs.close();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDOMTestObjectDOMWriter_h

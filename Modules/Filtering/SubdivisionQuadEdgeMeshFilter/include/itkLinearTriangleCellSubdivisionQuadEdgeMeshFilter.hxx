@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 void
 LinearTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::AddNewCellPoints(InputCellType * cell)
@@ -68,5 +69,6 @@ LinearTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::AddNew
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

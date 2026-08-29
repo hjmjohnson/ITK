@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TAttribute, typename TFunction>
 void
 AttributeMorphologyBaseImageFilter<TInputImage, TOutputImage, TAttribute, TFunction>::GenerateInputRequestedRegion()
@@ -233,6 +234,7 @@ AttributeMorphologyBaseImageFilter<TInputImage, TOutputImage, TAttribute, TFunct
   itkPrintSelfBooleanMacro(FullyConnected);
   print_helper::PrintNumericTrait(os, indent, "Lambda", m_Lambda);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

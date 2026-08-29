@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Standard "PrintSelf" method
@@ -190,6 +191,7 @@ BSplineL2ResampleImageFilterBase<TInputImage, TOutputImage>::InitializePyramidSp
       break;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

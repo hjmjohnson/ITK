@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class MINCTransformAdapter
  * \ingroup  ITKIOTransformMINC
@@ -324,5 +325,6 @@ protected:
   bool m_Initialized_invert{ false };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkMINCTransformAdapter_h

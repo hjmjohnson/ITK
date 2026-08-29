@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshPoint
  *
@@ -115,6 +116,7 @@ protected:
 protected:
   TQuadEdge * m_Edge{}; /**< Entry edge for this point into an Onext ring */
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

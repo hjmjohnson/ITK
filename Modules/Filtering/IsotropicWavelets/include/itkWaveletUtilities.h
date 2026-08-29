@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace utils
 {
 using IndexPairType = std::pair<unsigned int, unsigned int>;
@@ -114,6 +115,7 @@ ComputeMaxNumberOfLevels(const Size<VImageDimension> & inputSize, const unsigned
 }
 
 } // end namespace utils
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

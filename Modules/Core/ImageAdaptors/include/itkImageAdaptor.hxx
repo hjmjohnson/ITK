@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TAccessor>
 ImageAdaptor<TImage, TAccessor>::ImageAdaptor()
@@ -401,6 +402,7 @@ ImageAdaptor<TImage, TAccessor>::GetRequestedRegion() const -> const RegionType 
   // delegation to internal image
   return m_Image->GetRequestedRegion();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

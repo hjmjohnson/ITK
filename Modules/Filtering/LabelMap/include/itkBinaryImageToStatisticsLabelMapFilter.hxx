@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputImage>
 BinaryImageToStatisticsLabelMapFilter<TInputImage, TFeatureImage, TOutputImage>::BinaryImageToStatisticsLabelMapFilter()
   : m_OutputBackgroundValue(NumericTraits<OutputImagePixelType>::NonpositiveMin())
@@ -107,5 +108,6 @@ BinaryImageToStatisticsLabelMapFilter<TInputImage, TFeatureImage, TOutputImage>:
   os << indent << "ComputeHistogram: " << m_ComputeHistogram << std::endl;
   os << indent << "NumberOfBins: " << m_NumberOfBins << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MorphSDTHelperImageFilter
  * \brief Implements a pixel-wise operator to form a signed distance transform.
  *
@@ -136,6 +137,7 @@ protected:
   MorphSDTHelperImageFilter() {}
   virtual ~MorphSDTHelperImageFilter() {}
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

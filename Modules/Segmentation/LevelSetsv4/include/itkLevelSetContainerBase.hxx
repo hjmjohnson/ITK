@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TIdentifier, typename TLevelSet>
 auto
@@ -152,6 +153,7 @@ LevelSetContainerBase<TIdentifier, TLevelSet>::HasDomainMap() const
   return false;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLevelSetContainerBase_hxx

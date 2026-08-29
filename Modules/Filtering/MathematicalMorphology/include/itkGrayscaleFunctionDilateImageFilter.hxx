@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 GrayscaleFunctionDilateImageFilter<TInputImage, TOutputImage, TKernel>::GrayscaleFunctionDilateImageFilter()
 {
@@ -57,5 +58,6 @@ GrayscaleFunctionDilateImageFilter<TInputImage, TOutputImage, TKernel>::Evaluate
 
   return max;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

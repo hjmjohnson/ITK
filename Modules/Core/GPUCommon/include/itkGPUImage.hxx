@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VImageDimension>
 GPUImage<TPixel, VImageDimension>::GPUImage()
 {
@@ -212,6 +213,7 @@ GPUImage<TPixel, VImageDimension>::Graft(const DataObject * data)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

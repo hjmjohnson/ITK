@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Initialize new instance
  */
@@ -200,6 +201,7 @@ ExponentialDisplacementFieldImageFilter<TInputImage, TOutputImage>::GenerateData
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

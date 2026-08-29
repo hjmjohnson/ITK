@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 void
 RegionFromReferenceLabelMapFilter<TInputImage>::GenerateOutputInformation()
@@ -67,6 +68,7 @@ RegionFromReferenceLabelMapFilter<TInputImage>::PrintSelf(std::ostream & os, Ind
 {
   this->Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

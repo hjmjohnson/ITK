@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage, typename TOutputImage, typename TKernel, typename THistogram>
 MaskedMovingHistogramImageFilter<TInputImage, TMaskImage, TOutputImage, TKernel, THistogram>::
   MaskedMovingHistogramImageFilter()
@@ -361,5 +362,6 @@ MaskedMovingHistogramImageFilter<TInputImage, TMaskImage, TOutputImage, TKernel,
   print_helper::PrintNumericTrait(os, indent, "MaskValue", m_MaskValue);
   print_helper::PrintNumericTrait(os, indent, "BackgroundMaskValue", m_BackgroundMaskValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

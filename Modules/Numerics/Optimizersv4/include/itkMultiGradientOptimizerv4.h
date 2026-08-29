@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MultiGradientOptimizerv4Template
  *  \brief Multiple gradient-based optimizers are combined in order to perform a multi-objective optimization.
@@ -146,6 +147,7 @@ protected:
 /** This helps to meet backward compatibility */
 using MultiGradientOptimizerv4 = MultiGradientOptimizerv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

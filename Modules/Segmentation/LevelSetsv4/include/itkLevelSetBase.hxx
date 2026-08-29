@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // ----------------------------------------------------------------------------
 template <typename TInput, unsigned int VDimension, typename TOutput, typename TDomain>
@@ -298,6 +299,7 @@ LevelSetBase<TInput, VDimension, TOutput, TDomain>::SetBufferedRegion(const Regi
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkLevelSetBase_hxx

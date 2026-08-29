@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BinaryImageToLabelMapFilter<TInputImage, TOutputImage>::BinaryImageToLabelMapFilter()
   : ScanlineFilterCommon<TInputImage, TOutputImage>(this)
@@ -206,6 +207,7 @@ BinaryImageToLabelMapFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   print_helper::PrintNumericTrait(os, indent, "OutputBackgroundValue", this->m_OutputBackgroundValue);
   os << indent << "Number of Objects: " << this->m_NumberOfObjects << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

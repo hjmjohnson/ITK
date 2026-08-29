@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TValue>
 class ITK_TEMPLATE_EXPORT ListNode
 {
@@ -276,6 +277,7 @@ private:
 
   OutputImageType * m_OutputImage{};
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

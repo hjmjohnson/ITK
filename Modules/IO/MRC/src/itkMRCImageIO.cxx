@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 const char * MRCImageIO::m_MetaDataHeaderName = "MRCHeader";
 
 MRCImageIO::MRCImageIO()
@@ -612,4 +613,5 @@ MRCImageIO::Write(const void * buffer)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

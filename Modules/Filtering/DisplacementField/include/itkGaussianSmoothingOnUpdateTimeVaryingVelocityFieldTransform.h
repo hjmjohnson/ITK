@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform
  * \brief Modifies the UpdateTransformParameters method
@@ -140,6 +141,7 @@ protected:
   ScalarType m_GaussianTemporalSmoothingVarianceForTheTotalField{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

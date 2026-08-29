@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ModifiedButterflyTriangleEdgeCellSubdivisionQuadEdgeMeshFilter
  *
@@ -88,6 +89,7 @@ protected:
   void
   AddNewEdgePoints(InputQEType * edge) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

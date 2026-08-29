@@ -21,7 +21,10 @@
 
 #include "itkObject.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 Subsample<TSample>::Subsample()
@@ -217,6 +220,8 @@ Subsample<TSample>::Graft(const DataObject * thatObject)
     this->m_TotalFrequency = that->m_TotalFrequency;
   }
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

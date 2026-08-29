@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LBFGSOptimizerv4
  * \brief Wrap of the vnl_lbfgs algorithm for use in ITKv4 registration framework.
@@ -139,5 +140,6 @@ private:
   double m_LineSearchAccuracy{ 0.9 };
   double m_DefaultStepLength{ 1.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

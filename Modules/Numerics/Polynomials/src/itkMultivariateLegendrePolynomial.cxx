@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MultivariateLegendrePolynomial::MultivariateLegendrePolynomial(unsigned int           dimension,
                                                                unsigned int           degree,
                                                                const DomainSizeType & domainSize)
@@ -247,4 +248,5 @@ operator<<(std::ostream & os, const MultivariateLegendrePolynomial & poly)
   poly.Print(os);
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

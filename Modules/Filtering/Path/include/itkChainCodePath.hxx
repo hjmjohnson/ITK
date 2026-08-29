@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension>
 auto
 ChainCodePath<VDimension>::EvaluateToIndex(const InputType & input) const -> IndexType
@@ -98,6 +99,7 @@ ChainCodePath<VDimension>::PrintSelf(std::ostream & os, Indent indent) const
   print_helper::PrintNumericTrait(os, indent, "Start", m_Start);
   os << indent << "Chain: " << m_Chain << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -25,7 +25,10 @@
 #include "itkProcessObject.h"
 #include <unordered_map>
 
-namespace itk::watershed
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace watershed
 {
 /** \class Boundary
  * \par
@@ -273,7 +276,9 @@ protected:
    * information.    */
   std::vector<std::pair<bool, bool>> m_Valid{};
 };
-} // namespace itk::watershed
+} // namespace watershed
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWatershedBoundary.hxx"

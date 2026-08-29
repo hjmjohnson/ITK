@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SliceImageFilter
  * \brief Slices an image based on a starting index and a stopping
  * index, and a step size.
@@ -160,6 +161,7 @@ private:
   IndexType m_Stop{};
   ArrayType m_Step{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

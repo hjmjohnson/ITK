@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingSpatialObject>
 PointSetToSpatialObjectDemonsRegistration<TFixedPointSet,
@@ -40,5 +41,6 @@ PointSetToSpatialObjectDemonsRegistration<TFixedPointSet, TMovingSpatialObject>:
   itkPrintSelfObjectMacro(FixedPointSet);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

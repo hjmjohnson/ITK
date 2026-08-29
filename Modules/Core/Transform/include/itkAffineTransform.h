@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Affine transformation of a vector space (e.g. space coordinates)
  *
@@ -287,6 +288,7 @@ protected:
 
 }; // class AffineTransform
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

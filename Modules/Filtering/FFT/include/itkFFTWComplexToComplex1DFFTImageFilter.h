@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class FFTWComplexToComplex1DFFTImageFilter
  * \brief only do FFT along one dimension using FFTW as a backend.
@@ -126,6 +127,7 @@ struct FFTImageFilterEnableDouble<FFTWComplexToComplex1DFFTImageFilter> : std::f
 {};
 #endif
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

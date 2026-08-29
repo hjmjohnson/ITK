@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetContainer
  *  \brief Container of Level-Sets
@@ -183,6 +184,7 @@ protected:
   ~LevelSetContainer() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLevelSetContainer_h

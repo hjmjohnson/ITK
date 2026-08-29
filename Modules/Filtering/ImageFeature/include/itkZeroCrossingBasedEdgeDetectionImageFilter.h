@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ZeroCrossingBasedEdgeDetectionImageFilter
  * \brief This filter implements a zero-crossing based edge detector.
@@ -176,6 +177,7 @@ private:
   OutputImagePixelType m_BackgroundValue{};
   OutputImagePixelType m_ForegroundValue{};
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

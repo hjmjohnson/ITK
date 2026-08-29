@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ScalarAnisotropicDiffusionFunction
  * This class forms the base for any anisotropic diffusion function that
@@ -70,6 +71,7 @@ protected:
   ScalarAnisotropicDiffusionFunction() = default;
   ~ScalarAnisotropicDiffusionFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

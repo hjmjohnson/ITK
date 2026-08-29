@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // This functor class invokes the computation of Eigen Analysis for
 // every pixel. The input pixel type must provide the API for the [][]
 // operator, while the output pixel type must provide the API for the
@@ -383,6 +384,7 @@ protected:
   SymmetricEigenAnalysisFixedDimensionImageFilter() = default;
   ~SymmetricEigenAnalysisFixedDimensionImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

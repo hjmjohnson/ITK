@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -367,6 +368,7 @@ RegularSphereMeshSource<TOutputMesh>::PrintSelf(std::ostream & os, Indent indent
   os << indent << "Scale: " << m_Scale << std::endl;
   os << indent << "Resolution: " << m_Resolution << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

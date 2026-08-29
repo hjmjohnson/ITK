@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 void
 ChangeRegionLabelMapFilter<TInputImage>::GenerateInputRequestedRegion()
@@ -148,6 +149,7 @@ ChangeRegionLabelMapFilter<TInputImage>::PrintSelf(std::ostream & os, Indent ind
   Superclass::PrintSelf(os, indent);
   os << indent << "Region: " << m_Region << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

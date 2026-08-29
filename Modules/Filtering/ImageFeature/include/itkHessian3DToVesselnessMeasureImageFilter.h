@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Hessian3DToVesselnessMeasureImageFilter
  * \brief Line filter to provide a vesselness measure for tubular objects from the
@@ -137,6 +138,7 @@ private:
   double m_Alpha1{};
   double m_Alpha2{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

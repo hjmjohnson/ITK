@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MetaImageIOFactory::MetaImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ MetaImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<MetaImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

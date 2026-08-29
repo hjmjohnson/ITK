@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class OpenCVVideoIO
  *
@@ -191,6 +192,7 @@ private:
 
   int m_CameraIndex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkOpenCVVideoIO_h

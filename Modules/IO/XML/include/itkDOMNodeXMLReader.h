@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class DOMNodeXMLReader
@@ -176,6 +177,7 @@ private:
   OutputType * m_Context{ nullptr };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 /** The operator ">>" is overloaded such that a DOM object can be conveniently read from an input stream. */

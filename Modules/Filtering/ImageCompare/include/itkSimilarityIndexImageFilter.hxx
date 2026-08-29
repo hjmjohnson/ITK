@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage1, typename TInputImage2>
 SimilarityIndexImageFilter<TInputImage1, TInputImage2>::SimilarityIndexImageFilter()
   : m_SimilarityIndex(RealType{})
@@ -179,5 +180,6 @@ SimilarityIndexImageFilter<TInputImage1, TInputImage2>::PrintSelf(std::ostream &
 
   os << indent << "SimilarityIndex: " << m_SimilarityIndex << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

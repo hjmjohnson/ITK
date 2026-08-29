@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage,
           typename TMovingImage,
@@ -110,6 +111,7 @@ CorrelationImageToImageMetricv4<TFixedImage,
    */
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

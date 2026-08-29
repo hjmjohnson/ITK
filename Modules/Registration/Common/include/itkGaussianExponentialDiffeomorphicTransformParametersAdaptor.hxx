@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 GaussianExponentialDiffeomorphicTransformParametersAdaptor<
@@ -100,6 +101,7 @@ GaussianExponentialDiffeomorphicTransformParametersAdaptor<TTransform>::PrintSel
                                   m_GaussianSmoothingVarianceForTheUpdateFieldSetTime);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

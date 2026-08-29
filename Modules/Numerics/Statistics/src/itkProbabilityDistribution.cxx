@@ -17,7 +17,10 @@
  *=========================================================================*/
 #include "itkProbabilityDistribution.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 void
 ProbabilityDistribution::SetParameters(const ParametersType & params)
@@ -39,4 +42,6 @@ ProbabilityDistribution::PrintSelf(std::ostream & os, Indent indent) const
   Superclass::PrintSelf(os, indent);
   os << indent << "Parameters: " << m_Parameters << std::endl;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

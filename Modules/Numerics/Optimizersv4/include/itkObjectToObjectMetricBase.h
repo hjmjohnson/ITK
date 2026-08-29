@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ObjectToObjectMetricBaseTemplateEnums
  *\brief This class contains all the enum classes used by the ObjectToObjectMetricBaseTemplate class.
  * \ingroup ITKOptimizersv4
@@ -268,6 +269,7 @@ protected:
 
 /** This helps to meet backward compatibility */
 using ObjectToObjectMetricBase = ObjectToObjectMetricBaseTemplate<double>;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

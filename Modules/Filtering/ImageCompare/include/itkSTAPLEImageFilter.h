@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class STAPLEImageFilter
  *
@@ -247,6 +248,7 @@ private:
   std::vector<double> m_Sensitivity{};
   std::vector<double> m_Specificity{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

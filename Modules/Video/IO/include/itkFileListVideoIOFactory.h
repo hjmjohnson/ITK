@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FileListVideoIOFactory
  * \brief Create instances of FileListVideoIO objects using an object factory.
@@ -67,6 +68,7 @@ protected:
   FileListVideoIOFactory();
   ~FileListVideoIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

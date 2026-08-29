@@ -40,6 +40,7 @@
 #if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 VnlFFTImageFilterInitFactory::VnlFFTImageFilterInitFactory() { VnlFFTImageFilterInitFactory::RegisterFactories(); }
 
 VnlFFTImageFilterInitFactory::~VnlFFTImageFilterInitFactory() = default;
@@ -63,5 +64,6 @@ VnlFFTImageFilterInitFactoryRegister__Private()
 {
   VnlFFTImageFilterInitFactory::RegisterFactories();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // !ITK_LEGACY_REMOVE && !ITK_FUTURE_LEGACY_REMOVE

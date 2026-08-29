@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingPointSet>
 PointSetToPointSetRegistrationMethod<TFixedPointSet, TMovingPointSet>::PointSetToPointSetRegistrationMethod()
@@ -214,5 +215,6 @@ PointSetToPointSetRegistrationMethod<TFixedPointSet, TMovingPointSet>::PrintSelf
   os << indent << "Initial Transform Parameters: " << m_InitialTransformParameters << std::endl;
   os << indent << "Last    Transform Parameters: " << m_LastTransformParameters << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

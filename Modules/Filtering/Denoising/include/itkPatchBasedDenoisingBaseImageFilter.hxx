@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 PatchBasedDenoisingBaseImageFilter<TInputImage, TOutputImage>::PatchBasedDenoisingBaseImageFilter()
@@ -256,6 +257,7 @@ PatchBasedDenoisingBaseImageFilter<TInputImage, TOutputImage>::PrintSelf(std::os
   os << indent << "ComponentSpace: " << m_ComponentSpace << std::endl;
   itkPrintSelfBooleanMacro(ManualReinitialization);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

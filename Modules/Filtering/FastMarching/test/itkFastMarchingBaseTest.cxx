@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput>
 class FastMarchingBaseTestHelper : public FastMarchingBase<TInput, TOutput>
 {
@@ -96,6 +97,7 @@ protected:
   InitializeOutput(OutputDomainType *) override
   {}
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 // -----------------------------------------------------------------------------

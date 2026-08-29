@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SliceBySliceImageFilter
  * \brief Apply a filter or a pipeline slice by slice on an image
@@ -186,6 +187,7 @@ private:
 
   IndexValueType m_SliceIndex{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

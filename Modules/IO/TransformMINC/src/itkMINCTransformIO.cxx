@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 MINCTransformIOTemplate<TParametersValueType>::MINCTransformIOTemplate() = default;
@@ -472,4 +473,5 @@ template class ITKIOTransformMINC_EXPORT MINCTransformIOTemplate<float>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 void
 LevelSetDomainPartitionImage<TImage>::SetLevelSetDomainRegionVector(const LevelSetDomainRegionVectorType & domain)
@@ -74,6 +75,7 @@ LevelSetDomainPartitionImage<TImage>::AllocateListDomain()
   this->m_ListDomain->Allocate();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

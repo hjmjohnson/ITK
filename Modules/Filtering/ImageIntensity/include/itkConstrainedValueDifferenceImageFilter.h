@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConstrainedValueDifferenceImageFilter
  * \brief Implements pixel-wise the computation of constrained value difference.
  *
@@ -119,6 +120,7 @@ protected:
 
   ~ConstrainedValueDifferenceImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

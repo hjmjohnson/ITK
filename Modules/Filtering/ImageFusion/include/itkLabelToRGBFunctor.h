@@ -21,7 +21,10 @@
 #include <vector>
 #include "itkNumericTraits.h"
 
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 /**
  * \class LabelToRGBFunctor
@@ -160,6 +163,8 @@ public:
 
   TLabel m_BackgroundValue;
 };
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

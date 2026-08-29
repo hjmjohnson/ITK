@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TBasisImage>
 ImagePCADecompositionCalculator<TInputImage, TBasisImage>::ImagePCADecompositionCalculator()
@@ -151,6 +152,7 @@ ImagePCADecompositionCalculator<TInputImage, TBasisImage>::PrintSelf(std::ostrea
   itkPrintSelfBooleanMacro(BasisMatrixCalculated);
   print_helper::PrintNumericTrait(os, indent, "NumPixels", m_NumPixels);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

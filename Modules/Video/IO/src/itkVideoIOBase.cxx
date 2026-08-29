@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 VideoIOBase::VideoIOBase()
   : m_FrameTotal(SizeValueType{})
@@ -51,4 +52,5 @@ operator<<(std::ostream & out, const VideoIOBaseEnums::ReadFrom value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

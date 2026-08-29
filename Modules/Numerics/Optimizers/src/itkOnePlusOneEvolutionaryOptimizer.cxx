@@ -21,6 +21,7 @@
 #include "itkMath.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 OnePlusOneEvolutionaryOptimizer::~OnePlusOneEvolutionaryOptimizer() = default;
 
 OnePlusOneEvolutionaryOptimizer::OnePlusOneEvolutionaryOptimizer()
@@ -315,4 +316,5 @@ OnePlusOneEvolutionaryOptimizer::PrintSelf(std::ostream & os, Indent indent) con
   os << indent << "CatchGetValueException   " << GetCatchGetValueException() << std::endl;
   os << indent << "MetricWorstPossibleValue " << GetMetricWorstPossibleValue() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

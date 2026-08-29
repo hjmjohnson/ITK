@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Set the Input Image */
 template <typename TInputImage, typename TOutput>
 DiscreteHessianGaussianImageFunction<TInputImage, TOutput>::DiscreteHessianGaussianImageFunction()
@@ -282,6 +283,7 @@ DiscreteHessianGaussianImageFunction<TInputImage, TOutput>::EvaluateAtContinuous
 
   return hessian;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

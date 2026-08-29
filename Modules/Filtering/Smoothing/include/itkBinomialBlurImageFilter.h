@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinomialBlurImageFilter
  * \brief Performs a separable blur on each dimension of an image.
@@ -111,6 +112,7 @@ private:
   /** How many times should we apply the blur? */
   unsigned int m_Repetitions{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

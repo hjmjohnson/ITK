@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 InvertIntensityImageFilter<TInputImage, TOutputImage>::InvertIntensityImageFilter()
@@ -54,6 +55,7 @@ InvertIntensityImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & 
 
   print_helper::PrintNumericTrait(os, indent, "Maximum", m_Maximum);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

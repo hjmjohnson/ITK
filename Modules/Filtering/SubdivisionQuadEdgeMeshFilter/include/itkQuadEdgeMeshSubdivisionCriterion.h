@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *\class QuadEdgeMeshSubdivisionCriterion
  *\brief
@@ -67,5 +68,6 @@ protected:
   ~QuadEdgeMeshSubdivisionCriterion() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

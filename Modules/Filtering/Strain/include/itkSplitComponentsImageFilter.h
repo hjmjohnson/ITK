@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SplitComponentsImageFilter
  *
@@ -100,6 +101,7 @@ private:
   ComponentsMaskType m_ComponentsMask;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -21,7 +21,10 @@
 #include "itkImageFileReader.h"
 #include "itkTestingMacros.h"
 
-namespace itk::Function
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Function
 {
 
 /**
@@ -96,7 +99,9 @@ public:
 protected:
 };
 
-} // namespace itk::Function
+} // namespace Function
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

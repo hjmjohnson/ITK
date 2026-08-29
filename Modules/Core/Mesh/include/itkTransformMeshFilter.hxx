@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -112,6 +113,7 @@ TransformMeshFilter<TInputMesh, TOutputMesh, TTransform>::GenerateData()
     outputMesh->SetBoundaryAssignments(dim, inputMesh->GetBoundaryAssignments(dim));
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

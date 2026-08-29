@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 Rigid3DTransform<TParametersValueType>::Rigid3DTransform()
@@ -147,6 +148,7 @@ Rigid3DTransform<TParametersValueType>::Translate(const OffsetType & offset, boo
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

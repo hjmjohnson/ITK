@@ -18,7 +18,10 @@
 #ifndef itkMixtureModelComponentBase_hxx
 #define itkMixtureModelComponentBase_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 MixtureModelComponentBase<TSample>::MixtureModelComponentBase()
@@ -153,6 +156,8 @@ MixtureModelComponentBase<TSample>::Update()
 {
   this->GenerateData();
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

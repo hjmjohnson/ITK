@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObject
  * \brief Implementation of the composite pattern
@@ -772,6 +773,7 @@ private:
   double m_DefaultOutsideValue{ 0.0 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #if !defined(ITK_WRAPPING_PARSER)

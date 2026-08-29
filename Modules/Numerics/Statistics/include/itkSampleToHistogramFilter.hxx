@@ -20,7 +20,10 @@
 
 #include "itkStatisticsAlgorithm.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample, typename THistogram>
 SampleToHistogramFilter<TSample, THistogram>::SampleToHistogramFilter()
@@ -276,6 +279,8 @@ SampleToHistogramFilter<TSample, THistogram>::GenerateData()
     ++iter;
   }
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RecursiveLineYvvGaussianImageFilter
  * \brief 1D recursive Gaussian blur based on Young-Van Vliet's algorithm,
@@ -188,6 +189,7 @@ private:
   bool                                  m_NormalizeAcrossScale;
   ImageRegionSplitterDirection::Pointer m_ImageRegionSplitter;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
