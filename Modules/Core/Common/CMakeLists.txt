@@ -274,6 +274,15 @@ else()
   set(ITK_ABI_NAMESPACE_END "}")
 endif()
 
+# An inline namespace cannot reach the factory entry point, because extern "C"
+# names carry no C++ namespace. Derive the configured autoload symbol from the
+# ABI namespace so the loader and every plugin agree by construction. An
+# explicitly configured ITK_LOAD_FUNCTION_NAME wins.
+if(ITK_HAS_ABI_NAMESPACE AND ITK_LOAD_FUNCTION_NAME STREQUAL "itkLoad")
+  set(ITK_LOAD_FUNCTION_NAME "${ITK_ABI_NAMESPACE_NAME}_itkLoad")
+  message(STATUS "ITK autoload symbol: ${ITK_LOAD_FUNCTION_NAME}")
+endif()
+
 configure_file(src/itkABINamespace.h.in itkABINamespace.h)
 configure_file(src/itkConfigure.h.in itkConfigure.h)
 configure_file(src/itkConfigurePrivate.h.in itkConfigurePrivate.h)
