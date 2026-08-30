@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ComplexBSplineInterpolateImageFunction.
  * \brief Complex wrapper around BSplineInterpolateImageFunction.
@@ -152,6 +153,7 @@ private:
 
   typename ImaginaryFilterType::Pointer m_ImaginaryFilter{};
 }; // class
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

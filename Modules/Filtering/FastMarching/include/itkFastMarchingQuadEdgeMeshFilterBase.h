@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastMarchingQuadEdgeMeshFilterBase
   \brief Fast Marching Method on QuadEdgeMesh
@@ -174,6 +175,7 @@ protected:
 private:
   const InputMeshType * m_InputMesh{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

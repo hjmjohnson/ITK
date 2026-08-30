@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 VersorRigid3DTransform<TParametersValueType>::VersorRigid3DTransform()
@@ -282,6 +283,7 @@ VersorRigid3DTransform<TParametersValueType>::GetInverseTransform() const -> Inv
   return Superclass::InvertTransform(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

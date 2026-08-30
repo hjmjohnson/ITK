@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class ExceptionObject::ExceptionData
 {
 public:
@@ -244,4 +245,5 @@ ExceptionObject::Print(std::ostream & os) const
   os << indent << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

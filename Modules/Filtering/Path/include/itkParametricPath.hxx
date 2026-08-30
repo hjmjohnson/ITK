@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 auto
@@ -120,6 +121,7 @@ ParametricPath<VDimension>::PrintSelf(std::ostream & os, Indent indent) const
 
   print_helper::PrintNumericTrait(os, indent, "DefaultInputStepSize", m_DefaultInputStepSize);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

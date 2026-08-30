@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 FFTWInverse1DFFTImageFilter<TInputImage, TOutputImage>::FFTWInverse1DFFTImageFilter()
@@ -171,6 +172,7 @@ FFTWInverse1DFFTImageFilter<TInputImage, TOutputImage>::ThreadedGenerateData(con
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // defined( ITK_USE_FFTWF ) || defined( ITK_USE_FFTWD )

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutput>
 void
@@ -49,6 +50,7 @@ NeighborhoodOperatorImageFunction<TInputImage, TOutput>::EvaluateAtIndex(const I
 
   return smartInnerProduct(bit, m_Operator);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

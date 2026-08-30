@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 GrayscaleFunctionErodeImageFilter<TInputImage, TOutputImage, TKernel>::GrayscaleFunctionErodeImageFilter()
 {
@@ -58,5 +59,6 @@ GrayscaleFunctionErodeImageFilter<TInputImage, TOutputImage, TKernel>::Evaluate(
 
   return min;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

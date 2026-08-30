@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VectorMeanImageFunction
  * \brief Calculate the mean value in the neighborhood of a pixel in a Vector image.
@@ -121,6 +122,7 @@ protected:
 private:
   unsigned int m_NeighborhoodRadius{ 1 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

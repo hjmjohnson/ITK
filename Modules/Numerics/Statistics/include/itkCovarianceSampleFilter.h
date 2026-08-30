@@ -23,7 +23,10 @@
 #include "itkVariableSizeMatrix.h"
 #include "itkSimpleDataObjectDecorator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class CovarianceSampleFilter
@@ -137,7 +140,9 @@ protected:
   void
   GenerateData() override;
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkCovarianceSampleFilter.hxx"

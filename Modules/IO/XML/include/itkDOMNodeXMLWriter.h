@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class DOMNodeXMLWriter
@@ -116,6 +117,7 @@ private:
   std::string m_IndentStep{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 /** The operator "<<" is overloaded such that a DOM object can be conveniently write to an output stream. */

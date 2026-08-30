@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConicShellInteriorExteriorSpatialFunction
  * \brief Spatial function implementation of a conic shell
@@ -140,6 +141,7 @@ private:
   double       m_Epsilon{ 0.0 };
   bool         m_Polarity{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

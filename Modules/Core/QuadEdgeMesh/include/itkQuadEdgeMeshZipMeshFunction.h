@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshZipMeshFunction
  * \brief Fuse the incoming edge and its Onext() follower (like a zipper does).
@@ -64,6 +65,7 @@ protected:
   QuadEdgeMeshZipMeshFunction() = default;
   ~QuadEdgeMeshZipMeshFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkQuadEdgeMeshZipMeshFunction.hxx"

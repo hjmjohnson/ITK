@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MeshFileWriterException.
  * \brief Base exception class for IO problems during writing.
@@ -46,6 +47,7 @@ public:
                           std::string  message = "Error in IO",
                           std::string  location = {});
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

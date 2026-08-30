@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShiftScaleLabelMapFilter
  * \brief Shifts and scales a label map filter, giving the option to change the background value.
@@ -100,6 +101,7 @@ protected:
 
   bool m_ChangeBackgroundValue{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

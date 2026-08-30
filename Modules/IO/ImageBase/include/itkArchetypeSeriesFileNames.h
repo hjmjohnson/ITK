@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ArchetypeSeriesFileNames
  * \brief Generate an ordered sequence of filenames.
  *
@@ -127,6 +128,7 @@ private:
   TimeStamp m_ArchetypeMTime{};
   TimeStamp m_ScanTime{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkArchetypeSeriesFileNames_h

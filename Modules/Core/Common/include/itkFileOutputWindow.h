@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FileOutputWindow
  * \brief Messages sent from the system are sent to a file.
  *
@@ -97,6 +98,7 @@ protected:
   bool m_Flush{};
   bool m_Append{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

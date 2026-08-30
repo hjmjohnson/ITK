@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 VXLVideoIOFactory::VXLVideoIOFactory()
 {
   this->RegisterOverride("itkVideoIOBase", "itkVXLVideoIO", "VXL Video IO", 1, CreateObjectFunction<VXLVideoIO>::New());
@@ -48,4 +49,5 @@ VXLVideoIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<VXLVideoIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

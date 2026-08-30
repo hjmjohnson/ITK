@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegionBasedLevelSetFunction
  *
  * \brief LevelSet function that computes a speed image based on regional integrals
@@ -475,6 +476,7 @@ protected:
   /** Zero vector constant. */
   static VectorType m_ZeroVectorConstant;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

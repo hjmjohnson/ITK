@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CorrelationImageToImageMetricv4GetValueAndDerivativeThreader
  * \brief Helper class for CorrelationImageToImageMetricv4 \c
@@ -141,6 +142,7 @@ private:
   TCorrelationMetric * m_CorrelationAssociate{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

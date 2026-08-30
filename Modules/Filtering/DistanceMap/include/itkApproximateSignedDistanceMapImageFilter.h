@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ApproximateSignedDistanceMapImageFilter
  * \brief Create a map of the approximate signed distance from the boundaries of
@@ -147,6 +148,7 @@ private:
   InputPixelType m_InsideValue{};
   InputPixelType m_OutsideValue{};
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

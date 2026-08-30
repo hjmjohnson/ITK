@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \brief NumericTraits for Point
  * \tparam T Component type for Point
@@ -183,6 +184,7 @@ public:
   static const Self ITKCommon_EXPORT Zero;
   static const Self ITKCommon_EXPORT One;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsPointPixel_h

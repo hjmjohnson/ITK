@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageToSpatialObjectMetric
  * \brief Computes similarity between a moving spatial object
  *        and an Image to be registered
@@ -177,6 +178,7 @@ protected:
   FixedImageConstPointer          m_FixedImage{};
   ParametersType                  m_LastTransformParameters{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

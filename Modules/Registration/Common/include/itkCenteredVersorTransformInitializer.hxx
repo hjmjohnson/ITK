@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFixedImage, typename TMovingImage>
 CenteredVersorTransformInitializer<TFixedImage, TMovingImage>::CenteredVersorTransformInitializer()
 {
@@ -57,6 +58,7 @@ CenteredVersorTransformInitializer<TFixedImage, TMovingImage>::PrintSelf(std::os
   this->Superclass::PrintSelf(os, indent);
   os << indent << "Compute Rotation " << this->m_ComputeRotation << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkCenteredVersorTransformInitializer_hxx */

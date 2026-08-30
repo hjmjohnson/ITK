@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TriangleCellSubdivisionQuadEdgeMeshFilter
  * \brief Abstract class to subdivide triangular surface QuadEdgeMesh.
@@ -133,6 +134,7 @@ protected:
   SubdivisionCellContainer m_CellsToBeSubdivided;
   bool                     m_Uniform;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

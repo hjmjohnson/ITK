@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionIteratorWithIndex
  * \brief A multi-dimensional iterator templated over image type that walks
  * pixels within a region and is specialized to keep track of its image index
@@ -135,6 +136,7 @@ template <typename TImage>
 ImageRegionIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRegionIteratorWithIndex<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

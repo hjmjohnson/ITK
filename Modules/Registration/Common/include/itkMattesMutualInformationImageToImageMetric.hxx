@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 MattesMutualInformationImageToImageMetric<TFixedImage, TMovingImage>::MattesMutualInformationImageToImageMetric()
@@ -1026,6 +1027,7 @@ MattesMutualInformationImageToImageMetric<TFixedImage, TMovingImage>::ComputePDF
   } // end if-block transform is BSpline
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

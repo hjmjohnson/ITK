@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 InverseFFTImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
@@ -49,5 +50,6 @@ InverseFFTImageFilter<TInputImage, TOutputImage>::GetSizeGreatestPrimeFactor() c
   return 2;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

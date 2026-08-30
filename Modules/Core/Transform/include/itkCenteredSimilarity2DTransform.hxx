@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 CenteredSimilarity2DTransform<TParametersValueType>::CenteredSimilarity2DTransform()
@@ -229,6 +230,7 @@ CenteredSimilarity2DTransform<TParametersValueType>::CloneTo(Pointer & result) c
   result->SetTranslation(this->GetTranslation());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

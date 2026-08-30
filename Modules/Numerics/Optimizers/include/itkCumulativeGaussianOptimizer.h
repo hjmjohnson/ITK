@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CumulativeGaussianOptimizer
  * \brief This is an optimizer specific to estimating
  * the parameters of Cumulative Gaussian sampled data.
@@ -179,6 +180,7 @@ private:
   /** Describe the stop condition */
   std::ostringstream m_StopConditionDescription{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

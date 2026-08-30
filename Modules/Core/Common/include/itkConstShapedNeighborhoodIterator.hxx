@@ -19,6 +19,7 @@
 #define itkConstShapedNeighborhoodIterator_hxx
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TBoundaryCondition>
 void
 ConstShapedNeighborhoodIterator<TImage, TBoundaryCondition>::PrintSelf(std::ostream & os, Indent indent) const
@@ -351,6 +352,7 @@ ConstShapedNeighborhoodIterator<TImage, TBoundaryCondition>::operator-=(const Of
   }
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class KLMRegionGrowImageFilter
  * \brief Base class for a region growing object that performs energy-based
@@ -379,6 +380,7 @@ private:
   MeanRegionIntensityType m_InitialRegionMean{};
   double                  m_InitialRegionArea{ 0 };
 }; // class KLMRegionGrowImageFilter
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

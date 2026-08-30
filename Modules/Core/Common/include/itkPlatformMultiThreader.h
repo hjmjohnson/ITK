@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PlatformMultiThreader
  * \brief A class for performing multithreaded execution
  *
@@ -190,5 +191,6 @@ private:
    * Multithreader. */
   friend class ProcessObject;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkPlatformMultiThreader_h

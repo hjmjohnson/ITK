@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Create the operator */
 template <typename TPixel, unsigned int TDimension, typename TAllocator>
 void
@@ -183,6 +184,7 @@ AnnulusOperator<TPixel, TDimension, TAllocator>::GenerateCoefficients() -> Coeff
   return coeffP;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

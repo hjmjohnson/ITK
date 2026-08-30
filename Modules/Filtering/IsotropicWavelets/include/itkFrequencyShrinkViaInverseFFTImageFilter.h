@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FrequencyShrinkViaInverseFFTImageFilter
  * \brief Reduce the size of an image in the frequency domain by an integer
  * factor in each dimension.
@@ -122,6 +123,7 @@ private:
   typename ShrinkFilterType::Pointer            m_Shrinker;
   typename ChangeInformationFilterType::Pointer m_ChangeInformation;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

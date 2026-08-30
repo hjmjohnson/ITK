@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageKernelOperator
  * \brief A NeighborhoodOperator whose coefficients are from an image.
@@ -89,6 +90,7 @@ protected:
 private:
   typename ImageType::ConstPointer m_ImageKernel{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

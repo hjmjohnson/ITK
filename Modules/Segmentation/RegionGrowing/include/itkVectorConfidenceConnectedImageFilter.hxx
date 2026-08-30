@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 VectorConfidenceConnectedImageFilter<TInputImage, TOutputImage>::VectorConfidenceConnectedImageFilter()
@@ -357,6 +358,7 @@ VectorConfidenceConnectedImageFilter<TInputImage, TOutputImage>::GetMean() const
   return m_ThresholdFunction->GetMean();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

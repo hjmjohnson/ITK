@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class itk::VariationalRegistrationLogger
  *  \brief A simple callback/observer class to print information during the registration process.
@@ -82,6 +83,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

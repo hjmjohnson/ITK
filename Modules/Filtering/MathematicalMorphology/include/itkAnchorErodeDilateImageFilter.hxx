@@ -22,6 +22,7 @@
 #include "itkAnchorUtilities.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TKernel, typename TFunction1>
 AnchorErodeDilateImageFilter<TImage, TKernel, TFunction1>::AnchorErodeDilateImageFilter()
   : m_Boundary(InputImagePixelType{})
@@ -123,6 +124,7 @@ AnchorErodeDilateImageFilter<TImage, TKernel, TFunction1>::PrintSelf(std::ostrea
   os << indent << "Boundary: " << m_Boundary << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

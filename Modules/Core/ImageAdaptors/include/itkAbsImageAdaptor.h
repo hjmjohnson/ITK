@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Accessor
 {
 /**
@@ -96,6 +97,7 @@ protected:
   AbsImageAdaptor() = default;
   ~AbsImageAdaptor() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

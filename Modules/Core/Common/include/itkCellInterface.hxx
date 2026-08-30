@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Get the interpolation order of the cell.  Usually linear.
  */
@@ -152,6 +153,7 @@ CellInterface<TPixelType, TCellTraits>::UsingCellsEnd() -> UsingCellsContainerIt
 }
 
 #endif
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

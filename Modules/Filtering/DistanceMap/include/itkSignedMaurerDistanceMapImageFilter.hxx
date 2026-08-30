@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 SignedMaurerDistanceMapImageFilter<TInputImage, TOutputImage>::SignedMaurerDistanceMapImageFilter()
   : m_BackgroundValue(InputPixelType{})
@@ -452,6 +453,7 @@ SignedMaurerDistanceMapImageFilter<TInputImage, TOutputImage>::PrintSelf(std::os
   os << indent << "Use image spacing: " << this->m_UseImageSpacing << std::endl;
   os << indent << "Squared distance: " << this->m_SquaredDistance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

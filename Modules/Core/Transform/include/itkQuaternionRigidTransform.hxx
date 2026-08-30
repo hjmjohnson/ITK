@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 QuaternionRigidTransform<TParametersValueType>::QuaternionRigidTransform()
@@ -216,6 +217,7 @@ QuaternionRigidTransform<TParametersValueType>::GetInverseTransform() const -> I
   return Superclass::InvertTransform(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

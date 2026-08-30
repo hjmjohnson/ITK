@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MultipleLogOutput::MultipleLogOutput() = default;
 
 MultipleLogOutput::~MultipleLogOutput() = default;
@@ -70,4 +71,5 @@ MultipleLogOutput::Write(const std::string & content, double timestamp)
     output->Write(content, timestamp);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

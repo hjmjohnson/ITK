@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 DiscreteGaussianDerivativeImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
@@ -281,6 +282,7 @@ DiscreteGaussianDerivativeImageFilter<TInputImage, TOutputImage>::PrintSelf(std:
   os << indent << "NormalizeAcrossScale: " << m_NormalizeAcrossScale << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class IOCommonEnums
  * \brief Contains all enum classes used by IOCommon class.
  * \ingroup ITKIOImageBase
@@ -126,6 +127,7 @@ extern const ITKIOImageBase_EXPORT char * const ROI_Z_RESOLUTION;
 extern const ITKIOImageBase_EXPORT char * const ROI_NUM_SEGMENTS;
 extern const ITKIOImageBase_EXPORT char * const ROI_PLANE;
 extern const ITKIOImageBase_EXPORT char * const ROI_SCAN_ID;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkIOCommon_h

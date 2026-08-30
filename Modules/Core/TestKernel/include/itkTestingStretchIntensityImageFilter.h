@@ -20,7 +20,10 @@
 
 #include "itkUnaryFunctorImageFilter.h"
 
-namespace itk::Testing
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Testing
 {
 
 /**
@@ -122,7 +125,9 @@ private:
   OutputPixelType m_OutputMinimum{};
   OutputPixelType m_OutputMaximum{};
 };
-} // namespace itk::Testing
+} // namespace Testing
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkTestingStretchIntensityImageFilter.hxx"

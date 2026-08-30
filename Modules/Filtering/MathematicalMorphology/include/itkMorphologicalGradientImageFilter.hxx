@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 MorphologicalGradientImageFilter<TInputImage, TOutputImage, TKernel>::MorphologicalGradientImageFilter()
   : m_HistogramFilter(HistogramFilterType::New())
@@ -218,5 +219,6 @@ MorphologicalGradientImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(
 
   os << indent << "Algorithm: " << m_Algorithm << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

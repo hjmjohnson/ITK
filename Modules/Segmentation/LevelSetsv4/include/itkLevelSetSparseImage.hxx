@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutput, unsigned int VDimension>
 auto
@@ -191,6 +192,7 @@ LevelSetSparseImage<TOutput, VDimension>::GetAsLabelObject()
   return object;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkLevelSetSparseImage_h

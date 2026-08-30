@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename THistogram, typename TOutput>
 class RenyiEntropyThresholdCalculatorGTestHelper : public RenyiEntropyThresholdCalculator<THistogram, TOutput>
@@ -40,6 +41,7 @@ public:
   using Superclass::MaxEntropyThresholding2;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace

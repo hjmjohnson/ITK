@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SquareImageFilter
  * \brief Computes the square of the intensity values pixel-wise
@@ -91,6 +92,7 @@ protected:
 
   ~SquareImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

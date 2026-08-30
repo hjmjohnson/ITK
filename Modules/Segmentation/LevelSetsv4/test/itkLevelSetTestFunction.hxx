@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixel>
 auto
@@ -41,6 +42,7 @@ LevelSetTestFunction<TPixel>::EvaluateGradient(const PointType & point) const ->
   return gradient;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

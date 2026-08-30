@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteGaussianImageFilter
  * \brief Blurs an image by separable convolution with discrete gaussian kernels.
@@ -409,6 +410,7 @@ private:
   /** Default boundary condition use for the intermediate filters */
   RealDefaultBoundaryConditionType m_RealDefaultBoundaryCondition{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

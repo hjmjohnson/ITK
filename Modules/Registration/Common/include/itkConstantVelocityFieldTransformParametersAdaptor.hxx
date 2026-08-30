@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 ConstantVelocityFieldTransformParametersAdaptor<TTransform>::ConstantVelocityFieldTransformParametersAdaptor()
@@ -222,6 +223,7 @@ ConstantVelocityFieldTransformParametersAdaptor<TTransform>::AdaptTransformParam
   this->m_Transform->IntegrateVelocityField();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

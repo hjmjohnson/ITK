@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingPointSet>
 PointSetToPointSetMetric<TFixedPointSet, TMovingPointSet>::PointSetToPointSetMetric()
@@ -77,6 +78,7 @@ PointSetToPointSetMetric<TFixedPointSet, TMovingPointSet>::PrintSelf(std::ostrea
   itkPrintSelfObjectMacro(FixedPointSet);
   itkPrintSelfObjectMacro(Transform);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

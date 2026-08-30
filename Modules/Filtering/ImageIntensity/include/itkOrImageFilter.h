@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class OrImageFilter
  * \brief Implements the OR bitwise operator pixel-wise between two images.
@@ -88,6 +89,7 @@ protected:
 
   ~OrImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

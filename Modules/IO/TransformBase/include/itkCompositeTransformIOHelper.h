@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CompositeTransformIOHelperTemplate
  *  \brief An adapter that adapts CompositeTransform into the
@@ -96,6 +97,7 @@ private:
 /** This helps to meet backward compatibility */
 using CompositeTransformIOHelper = CompositeTransformIOHelperTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 // Note: Explicit instantiation is done in itkCompositeTransformIOHelper.cxx
@@ -121,6 +123,7 @@ using CompositeTransformIOHelper = CompositeTransformIOHelperTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -130,6 +133,7 @@ extern template class ITKIOTransformBase_EXPORT_EXPLICIT CompositeTransformIOHel
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformBase_EXPORT_EXPLICIT
 #endif

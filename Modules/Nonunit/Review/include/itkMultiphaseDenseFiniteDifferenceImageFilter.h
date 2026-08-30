@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MultiphaseDenseFiniteDifferenceImageFilter
  *
@@ -207,6 +208,7 @@ private:
   /** The buffer that holds the updates for an iteration of the algorithm. */
   std::vector<InputImagePointer> m_UpdateBuffers{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

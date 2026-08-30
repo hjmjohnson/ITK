@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshEulerOperatorDeleteCenterVertexFunction
  * \brief Delete the vertex, connected edges and faces and create a new face
@@ -75,6 +76,7 @@ protected:
 private:
   PointIdentifier m_OldPointID{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkQuadEdgeMeshEulerOperatorDeleteCenterVertexFunction.hxx"

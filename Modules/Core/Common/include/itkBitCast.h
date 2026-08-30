@@ -19,11 +19,13 @@
 #ifndef itkBitCast_h
 #define itkBitCast_h
 
+#include "itkABINamespace.h"
 #include <cstring>     // For memcpy.
 #include <type_traits> // For is_trivially_copyable and remove_const_t.
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** Rudimentary `bit_cast` implementation for C++14/C++17. From C++20, `std::bit_cast` would be preferred, at least if
  * the C++20 feature macro `__cpp_lib_bit_cast` is defined.
@@ -42,6 +44,7 @@ bit_cast(const TSource & source)
   return result;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

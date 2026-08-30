@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ImageSource
  *  \brief Base class for all process objects that output image data.
@@ -405,6 +406,7 @@ protected:
   /** @ITKEndGrouping */
   bool m_DynamicMultiThreading{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

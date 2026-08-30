@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor<
@@ -132,6 +133,7 @@ BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor<TTransform>:
     os, indent, "NumberOfControlPointsForTheTotalFieldSetTime", m_NumberOfControlPointsForTheTotalFieldSetTime);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

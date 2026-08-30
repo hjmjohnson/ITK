@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Make a chain code trace another path of same dimensionality.
  * If restrictMovement is true, then individual steps are allowed to move
  * through only one dimension at a time; for 2D paths this results in an
@@ -128,6 +129,7 @@ MakeFourierSeriesPathTraceChainCode(TFourierSeriesPath &   FSPath,
     FSPath.AddHarmonic(cosCoefficient, sinCoefficient);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

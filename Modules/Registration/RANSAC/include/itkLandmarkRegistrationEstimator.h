@@ -27,6 +27,7 @@
 #include "itkParametersEstimator.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <unsigned int Dimension, typename TTransform>
@@ -102,6 +103,7 @@ private:
   std::unique_ptr<KdTreeT>   mat_adaptor;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // the implementation is in this file

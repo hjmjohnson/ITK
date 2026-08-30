@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DirectedHausdorffDistanceImageFilter
  * \brief Computes the directed Hausdorff distance between the set of
@@ -190,6 +191,7 @@ private:
 
   std::mutex m_Mutex{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

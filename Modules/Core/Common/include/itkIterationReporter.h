@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class IterationReporter
  * \brief Implements iterations tracking for a filter.
  *
@@ -82,6 +83,7 @@ protected:
   unsigned long   m_StepsPerUpdate;
   unsigned long   m_StepsBeforeUpdate;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 PhilipsRECImageIOFactory::PhilipsRECImageIOFactory()
 {
   this->RegisterOverride("itkImageIOBase",
@@ -63,4 +64,5 @@ PhilipsRECImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<PhilipsRECImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

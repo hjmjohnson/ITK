@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FreeSurferAsciiMeshIO
  * \brief This class defines how to read and write freesurfer ASCII surface format.
  * To use IO factory, define the suffix as *.fsa.
@@ -186,6 +187,7 @@ protected:
 private:
   std::ifstream m_InputFile{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

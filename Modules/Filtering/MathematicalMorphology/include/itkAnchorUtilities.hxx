@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * AnchorUtilities
  * functionality in common for anchor openings/closings and
@@ -65,6 +66,7 @@ DoAnchorFace(const TImage *                            input,
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

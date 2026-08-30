@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshEulerOperatorSplitVertexFunction
  * \brief Split a vertex into two new connected vertices.
@@ -81,6 +82,7 @@ protected:
 private:
   PointIdentifier m_NewPoint{}; // stock newly created point ID for user.
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkQuadEdgeMeshEulerOperatorSplitVertexFunction.hxx"

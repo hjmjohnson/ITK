@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 auto
 DerivativeOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients() -> CoefficientVector
@@ -61,6 +62,7 @@ DerivativeOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients() -> Co
 
   return coeff;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

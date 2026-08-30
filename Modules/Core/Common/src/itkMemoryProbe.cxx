@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MemoryProbe::MemoryProbe()
   : ResourceProbe<MemoryProbe::MemoryLoadType, double>("Memory", "kB")
 {}
@@ -30,4 +31,5 @@ MemoryProbe::GetInstantValue() const
 {
   return static_cast<MemoryProbe::MemoryLoadType>(m_MemoryObserver.GetMemoryUsage());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

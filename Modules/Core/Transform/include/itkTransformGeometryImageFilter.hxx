@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage, typename TOutputImage>
@@ -93,6 +94,7 @@ TransformGeometryImageFilter<TInputImage, TOutputImage>::GenerateData()
   output->SetBufferedRegion(castFilter->GetOutput()->GetBufferedRegion());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

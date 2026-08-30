@@ -20,7 +20,10 @@
 
 #include "itkNumericTraits.h"
 
-namespace itk::detail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace detail
 {
 
 template <typename TElementIdentifier, typename TElement>
@@ -178,6 +181,8 @@ VectorContainer<TElementIdentifier, TElement>::Reserve(ElementIdentifier sz)
 {
   this->CreateIndex(sz - 1);
 }
-} // namespace itk::detail
+} // namespace detail
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

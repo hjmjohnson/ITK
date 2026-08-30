@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage, typename TDisplacementField, typename TImageForceFunction>
 CurvatureRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField, TImageForceFunction>::
@@ -273,6 +274,7 @@ CurvatureRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField, TImag
 
   this->GetDisplacementField()->Modified();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // !defined(ITK_USE_CUFFTW) && defined(ITK_USE_FFTWD)

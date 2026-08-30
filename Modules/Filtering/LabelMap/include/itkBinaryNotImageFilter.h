@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class BinaryNotImageFilter
@@ -147,6 +148,7 @@ private:
   PixelType m_BackgroundValue{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

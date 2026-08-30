@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 StatisticsPositionLabelMapFilter<TImage>::StatisticsPositionLabelMapFilter()
@@ -65,5 +66,6 @@ StatisticsPositionLabelMapFilter<TImage>::ThreadedProcessLabelObject(LabelObject
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

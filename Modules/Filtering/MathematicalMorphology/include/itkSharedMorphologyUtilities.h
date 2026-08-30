@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TRegion, typename TLine>
 bool
 NeedToDoFace(const TRegion AllImage, const TRegion face, const TLine line);
@@ -74,6 +75,7 @@ template <typename TLine>
 unsigned int
 GetLinePixels(const TLine line);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

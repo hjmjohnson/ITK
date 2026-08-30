@@ -22,11 +22,13 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TLevelSetContainer>
 LevelSetEvolutionStoppingCriterion<TLevelSetContainer>::LevelSetEvolutionStoppingCriterion()
   : m_RMSChangeAccumulator(OutputRealType{})
   , m_NumberOfIterations(IterationIdType{})
   , m_CurrentIteration(IterationIdType{})
 {}
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

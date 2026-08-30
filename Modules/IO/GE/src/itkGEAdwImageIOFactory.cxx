@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 GEAdwImageIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -53,4 +54,5 @@ GEAdwImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<GEAdwImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -20,7 +20,10 @@
 
 #include "itkColormapFunction.h"
 
-namespace itk::Function
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Function
 {
 /**
  * \class RedColormapFunction
@@ -63,7 +66,9 @@ protected:
   RedColormapFunction() = default;
   ~RedColormapFunction() override = default;
 };
-} // namespace itk::Function
+} // namespace Function
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkRedColormapFunction.hxx"

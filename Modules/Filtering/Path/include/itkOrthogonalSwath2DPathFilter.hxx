@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * GenerateData Performs the reflection
@@ -253,6 +254,7 @@ OrthogonalSwath2DPathFilter<TParametricPath, TSwathMeritImage>::FindAndStoreBest
   StepValue(F, L, x) = bestL;
   return bestL;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

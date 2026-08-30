@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TNode, unsigned int VImageDimension>
 void
 SparseImage<TNode, VImageDimension>::PrintSelf(std::ostream & os, Indent indent) const
@@ -37,6 +38,7 @@ SparseImage<TNode, VImageDimension>::Initialize()
   m_NodeList = NodeListType::New();
   m_NodeStore = NodeStoreType::New();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

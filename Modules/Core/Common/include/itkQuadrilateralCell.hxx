@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Standard CellInterface:
@@ -507,6 +508,7 @@ QuadrilateralCell<TCellInterface>::EvaluateLocation(int &                     it
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

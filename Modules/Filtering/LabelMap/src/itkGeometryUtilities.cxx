@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 long
 GeometryUtilities::Factorial(const long n)
@@ -74,4 +75,5 @@ GeometryUtilities::HyperSphereRadiusFromVolume(const int dim, const double volum
   return std::pow(volume * GammaN2p1(dim) / std::pow(itk::Math::pi, dim * 0.5), 1.0 / dim);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

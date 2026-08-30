@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TValue, unsigned int VLength>
 FixedArray<TValue, VLength>::FixedArray(const ValueType & r)
@@ -147,6 +148,7 @@ operator<<(std::ostream & os, const FixedArray<TValue, VLength> & arr)
   os << ']';
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

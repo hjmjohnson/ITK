@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShapeLabelObject
  *  \brief A Label object to store the common attributes related to the shape of the object
@@ -776,6 +777,7 @@ private:
   OrientedBoundingBoxSizeType  m_OrientedBoundingBoxSize{};
   OrientedBoundingBoxPointType m_OrientedBoundingBoxOrigin{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

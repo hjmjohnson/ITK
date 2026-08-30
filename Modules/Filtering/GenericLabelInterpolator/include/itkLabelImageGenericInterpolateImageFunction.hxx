@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage,
           template <typename TInterpInputImage, typename TCoordRep> class TInterpolator,
@@ -84,6 +85,7 @@ LabelImageGenericInterpolateImageFunction<TInputImage, TInterpolator, TCoordRep>
   return best_label;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

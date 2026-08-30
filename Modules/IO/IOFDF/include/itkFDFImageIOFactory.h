@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FDFImageIOFactory
  * \brief Create instances of FDFImageIO objects using an object factory.
  * \ingroup IOFDF
@@ -64,6 +65,7 @@ protected:
 };
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

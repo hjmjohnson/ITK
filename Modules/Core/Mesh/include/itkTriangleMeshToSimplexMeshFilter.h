@@ -26,6 +26,7 @@
 #include "itkPolygonCell.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TriangleMeshToSimplexMeshFilter
  * \brief This filter converts a triangle mesh into a 2-simplex mesh.
@@ -234,6 +235,7 @@ protected:
    */
   OutputCellAutoPointer m_NewSimplexCellPointer{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

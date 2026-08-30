@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VanHerkGilWermanUtilities
  * \brief functionality in common for anchor openings/closings and
@@ -58,6 +59,7 @@ DoFace(typename TImage::ConstPointer             input,
        std::vector<typename TImage::PixelType> & rExtBuffer,
        const typename TImage::RegionType         AllImage,
        const typename TImage::RegionType         face);
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

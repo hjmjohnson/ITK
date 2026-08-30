@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BinaryFunctorImageFilter
  * \brief Implements pixel-wise generic operation of two images,
  * or of an image and a constant.
@@ -208,6 +209,7 @@ protected:
 private:
   FunctorType m_Functor{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

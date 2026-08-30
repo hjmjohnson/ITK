@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage,
           typename TOutputImage,
@@ -343,5 +344,6 @@ ObjectByObjectLabelMapFilter<TInputImage,
   print_helper::PrintNumericTrait(os, indent, "Label", m_Label);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

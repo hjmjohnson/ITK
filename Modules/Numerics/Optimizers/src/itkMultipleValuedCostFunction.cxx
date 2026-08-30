@@ -19,5 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MultipleValuedCostFunction::~MultipleValuedCostFunction() = default;
-}
+ITK_ABI_NAMESPACE_END
+} // namespace itk

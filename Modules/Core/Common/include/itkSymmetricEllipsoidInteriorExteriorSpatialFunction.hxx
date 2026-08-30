@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename TInput>
 SymmetricEllipsoidInteriorExteriorSpatialFunction<VDimension,
                                                   TInput>::SymmetricEllipsoidInteriorExteriorSpatialFunction()
@@ -84,6 +85,7 @@ SymmetricEllipsoidInteriorExteriorSpatialFunction<VDimension, TInput>::SetOrient
   m_SymmetricAxes = symmetricAxes; // Length of symmetric axes
   m_UniqueAxis = uniqueAxis;       // Length of unique axis
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

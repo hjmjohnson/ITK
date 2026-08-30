@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AnisotropicDiffusionImageFilter
  *  This filter is the base class for a set of filters that iteratively diffuse
  *  images by solving non-linear partial differential equations based on the
@@ -167,6 +168,7 @@ private:
 
   TimeStepType m_TimeStep{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

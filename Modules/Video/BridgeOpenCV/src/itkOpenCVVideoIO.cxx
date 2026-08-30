@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 OpenCVVideoIO::OpenCVVideoIO() { this->ResetMembers(); }
 
@@ -620,4 +621,5 @@ OpenCVVideoIO::PrintSelf(std::ostream & os, Indent indent) const
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 DCMTKImageIOFactory::DCMTKImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ DCMTKImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<DCMTKImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

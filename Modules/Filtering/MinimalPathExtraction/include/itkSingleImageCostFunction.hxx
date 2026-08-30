@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 SingleImageCostFunction<TImage>::SingleImageCostFunction()
@@ -157,6 +158,7 @@ SingleImageCostFunction<TImage>::PrintSelf(std::ostream & os, Indent indent) con
   os << indent << "GradientImageFunction: " << m_GradientImageFunction.GetPointer() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

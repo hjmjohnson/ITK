@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Constructor
  */
@@ -314,4 +315,5 @@ LBFGSOptimizer::GetStopConditionDescription() const
 
   return {};
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

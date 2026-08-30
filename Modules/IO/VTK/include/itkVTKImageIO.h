@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VTKImageIO
  *
@@ -176,6 +177,7 @@ private:
 
   SizeType m_HeaderSize{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkVTKImageIO_h

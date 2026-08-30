@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Functor
 {
 template <typename TInput, typename TOutput>
@@ -164,6 +165,7 @@ protected:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

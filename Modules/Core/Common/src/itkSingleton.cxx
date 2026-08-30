@@ -78,6 +78,7 @@ GlobalSingletonIndexInitializer::SingletonIndex * GlobalSingletonIndexInitialize
 // work, and could use some type of Holder<T> class for intrinsic types
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void *
 SingletonIndex::GetGlobalInstancePrivate(const char * globalName)
 {
@@ -125,4 +126,5 @@ SingletonIndex::~SingletonIndex()
 SingletonIndex::Self * SingletonIndex::m_Instance;
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

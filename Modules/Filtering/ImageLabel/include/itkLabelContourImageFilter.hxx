@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 LabelContourImageFilter<TInputImage, TOutputImage>::LabelContourImageFilter()
   : ScanlineFilterCommon<TInputImage, TOutputImage>(this)
@@ -223,6 +224,7 @@ LabelContourImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os,
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue", m_BackgroundValue);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

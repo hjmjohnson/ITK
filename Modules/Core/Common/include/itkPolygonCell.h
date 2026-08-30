@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PolygonCell
  *  \brief Represents a polygon in a Mesh.
  *
@@ -159,6 +160,7 @@ protected:
   std::vector<EdgeInfo>        m_Edges{};
   std::vector<PointIdentifier> m_PointIds{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

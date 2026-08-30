@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageIteratorWithIndex
  * \brief A base class for multi-dimensional iterators templated over image
@@ -135,6 +136,7 @@ protected:
 template <typename TImage>
 ImageIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &) -> ImageIteratorWithIndex<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

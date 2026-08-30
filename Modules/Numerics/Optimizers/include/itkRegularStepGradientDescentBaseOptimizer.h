@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegularStepGradientDescentBaseOptimizerEnums
  *\brief Contains all enum classes for RegularStepGradientDescentBaseOptimizer class.
  * \ingroup ITKOptimizers
@@ -189,6 +190,7 @@ protected:
   SizeValueType      m_CurrentIteration{};
   std::ostringstream m_StopConditionDescription{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

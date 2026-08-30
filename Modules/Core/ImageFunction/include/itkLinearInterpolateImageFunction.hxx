@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TCoordinate>
 auto
 LinearInterpolateImageFunction<TInputImage, TCoordinate>::EvaluateUnoptimized(const ContinuousIndexType & index) const
@@ -101,6 +102,7 @@ LinearInterpolateImageFunction<TInputImage, TCoordinate>::PrintSelf(std::ostream
 {
   this->Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

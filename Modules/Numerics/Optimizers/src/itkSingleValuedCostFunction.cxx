@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 SingleValuedCostFunction::GetValueAndDerivative(const ParametersType & parameters,
                                                 MeasureType &          value,
@@ -29,4 +30,5 @@ SingleValuedCostFunction::GetValueAndDerivative(const ParametersType & parameter
 }
 
 SingleValuedCostFunction::~SingleValuedCostFunction() = default;
+ITK_ABI_NAMESPACE_END
 } // namespace itk

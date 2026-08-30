@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 PocketFFTImageFilterInitFactory::PocketFFTImageFilterInitFactory()
 {
   PocketFFTImageFilterInitFactory::RegisterFactories();
@@ -61,4 +62,5 @@ PocketFFTImageFilterInitFactoryRegister__Private()
   PocketFFTImageFilterInitFactory::RegisterFactories();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

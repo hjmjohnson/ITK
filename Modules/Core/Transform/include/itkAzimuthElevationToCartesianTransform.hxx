@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 AzimuthElevationToCartesianTransform<TParametersValueType, VDimension>::AzimuthElevationToCartesianTransform()
@@ -143,5 +144,6 @@ AzimuthElevationToCartesianTransform<TParametersValueType, VDimension>::SetForwa
 {
   m_ForwardAzimuthElevationToPhysical = false;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

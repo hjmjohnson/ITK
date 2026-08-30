@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TGradientImage>
 RobustAutomaticThresholdCalculator<TInputImage, TGradientImage>::RobustAutomaticThresholdCalculator()
   : m_Output(InputPixelType{})
@@ -82,6 +83,7 @@ RobustAutomaticThresholdCalculator<TInputImage, TGradientImage>::PrintSelf(std::
   itkPrintSelfObjectMacro(Input);
   itkPrintSelfObjectMacro(Gradient);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

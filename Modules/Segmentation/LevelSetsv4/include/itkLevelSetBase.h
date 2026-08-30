@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetBase
  *  \brief Abstract base class for the representation of a level-set function
@@ -273,6 +274,7 @@ protected:
   RegionType m_BufferedRegion{ 0 };
   RegionType m_RequestedRegion{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -30,7 +30,10 @@
 
 #include "itkImageToImageFilterDetail.h"
 
-namespace itk::ImageToImageFilterDetail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace ImageToImageFilterDetail
 {
 /**
  *  Call the base class version: ImageToImageFilterDefaultCopyRegion
@@ -153,6 +156,8 @@ public:
     ImageRegionCopier<T1, T2>::operator()(destRegion, srcRegion);
   }
 };
-} // namespace itk::ImageToImageFilterDetail
+} // namespace ImageToImageFilterDetail
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

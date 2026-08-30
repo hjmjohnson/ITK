@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Euler3DTransform
  *
  * \brief Euler3DTransform of a vector space (e.g. space coordinates)
@@ -174,6 +175,7 @@ private:
   ScalarType m_AngleZ{};
   bool       m_ComputeZYX{};
 }; // class Euler3DTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

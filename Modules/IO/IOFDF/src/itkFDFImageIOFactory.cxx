@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 FDFImageIOFactory::FDFImageIOFactory()
 {
   this->RegisterOverride(
@@ -61,4 +62,5 @@ FDFImageIOFactoryRegister__Private()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

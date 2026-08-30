@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Standard CellInterface:
  */
@@ -395,6 +396,7 @@ PolygonCell<TCellInterface>::GetEdge(CellFeatureIdentifier edgeId, EdgeAutoPoint
   edgePointer.TakeOwnership(edge);
   return true;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

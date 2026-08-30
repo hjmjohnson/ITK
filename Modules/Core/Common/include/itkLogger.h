@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Logger
  *  \brief Used for logging information during a run.
  *
@@ -56,6 +57,7 @@ protected:
   /** Destructor */
   ~Logger() override;
 }; // class Logger
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLogger_h

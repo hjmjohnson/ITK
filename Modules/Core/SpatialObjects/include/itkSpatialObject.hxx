@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 SpatialObject<TDimension>::~SpatialObject()
@@ -1226,6 +1227,7 @@ SpatialObject<TDimension>::CopyInformation(const DataObject * data)
   // this->SetParent( source->GetParent() );
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif // __SpatialObject_hxx

@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 RegularStepGradientDescentOptimizer::~RegularStepGradientDescentOptimizer() = default;
 
 /**
@@ -45,4 +46,5 @@ RegularStepGradientDescentOptimizer::StepAlongGradient(double factor, const Deri
 
   this->SetCurrentPosition(newPosition);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

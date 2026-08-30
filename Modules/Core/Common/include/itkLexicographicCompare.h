@@ -29,7 +29,10 @@ The  Functor was only used in one spot in the
 LevelSet class,  It does not exist in Slicer, BRAINSTools, Remote modules,
 ANTs, or any other project that I could find.
 */
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 /** \class LexicographicCompare
  * \brief Order Index instances lexicographically.
@@ -82,6 +85,8 @@ public:
 };
 
 
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RGBToLuminanceImageFilter
  * \brief Converts an RGB image into a grayscale image.
@@ -90,6 +91,7 @@ protected:
   }
   ~RGBToLuminanceImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

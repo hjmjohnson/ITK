@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixelType, unsigned int VImageDimension>
 class VectorImage;
@@ -223,6 +224,7 @@ private:
   }
   /// \endcond
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GradientDescentOptimizerv4Template
  *  \brief Gradient descent optimizer.
@@ -251,6 +252,7 @@ protected:
 /** This helps to meet backward compatibility */
 using GradientDescentOptimizerv4 = GradientDescentOptimizerv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

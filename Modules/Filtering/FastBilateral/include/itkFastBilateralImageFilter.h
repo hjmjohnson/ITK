@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastBilateralImageFilter
  * \brief A fast approximation to the bilateral filter
@@ -188,6 +189,7 @@ protected:
   DomainSigmaArrayType m_DomainSigma;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**  \class FastMarchingTraits
   \brief Base class traits to be used by the FastMarchingBase
 
@@ -135,5 +136,6 @@ public:
   static constexpr unsigned int PointDimension = VDimension;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkFastMarchingTraits_h

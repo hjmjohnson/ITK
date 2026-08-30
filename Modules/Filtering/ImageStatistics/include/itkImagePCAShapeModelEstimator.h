@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImagePCAShapeModelEstimator
  * \brief Base class for ImagePCAShapeModelEstimator object
  *
@@ -214,6 +215,7 @@ private:
   unsigned int m_NumberOfPrincipalComponentsRequired{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUGradientAnisotropicDiffusionImageFilter
  * This filter performs anisotropic diffusion on a scalar itk::Image using the
@@ -84,6 +85,7 @@ protected:
   ~GPUGradientAnisotropicDiffusionImageFilter() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

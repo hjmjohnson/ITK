@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CenteredVersorTransformInitializer
  * \brief CenteredVersorTransformInitializer is a helper class intended to
  * initialize the center of rotation, versor, and translation of the
@@ -101,6 +102,7 @@ protected:
 private:
   bool m_ComputeRotation{ false };
 }; // class CenteredVersorTransformInitializer
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

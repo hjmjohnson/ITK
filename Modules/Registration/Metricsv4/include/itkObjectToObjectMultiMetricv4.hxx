@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TFixedDimension,
           unsigned int TMovingDimension,
@@ -405,6 +406,7 @@ ObjectToObjectMultiMetricv4<TFixedDimension, TMovingDimension, TVirtualImage, TI
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkObjectToObjectMultiMetricv4_hxx

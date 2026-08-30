@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VarianceImageFunction
  * \brief Calculate the variance in the neighborhood of a pixel
@@ -119,6 +120,7 @@ protected:
 private:
   unsigned int m_NeighborhoodRadius{ 1 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

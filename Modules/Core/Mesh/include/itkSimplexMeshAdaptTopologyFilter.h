@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SimplexMeshAdaptTopologyFilter
  *  \brief This filter changes the topology of a 2-simplex mesh
  *
@@ -324,6 +325,7 @@ protected:
 
   InputCellAutoPointer m_NewSimplexCellPointer{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

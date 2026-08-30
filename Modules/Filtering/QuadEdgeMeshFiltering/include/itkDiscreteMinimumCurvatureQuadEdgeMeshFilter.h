@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteMinimumCurvatureQuadEdgeMeshFilter
  *
@@ -78,6 +79,7 @@ protected:
     return this->m_Mean - std::sqrt(this->ComputeDelta());
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

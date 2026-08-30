@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 MZ3MeshIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -58,4 +59,5 @@ MZ3MeshIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<MZ3MeshIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

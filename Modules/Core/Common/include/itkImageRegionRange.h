@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ImageRegionRange
@@ -476,6 +477,7 @@ public:
 template <typename TImage>
 ImageRegionRange(TImage &) -> ImageRegionRange<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

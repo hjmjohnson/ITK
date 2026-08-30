@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPointSet, class TInternalComputationValueType>
 JensenHavrdaCharvatTsallisPointSetToPointSetMetricv4<TPointSet, TInternalComputationValueType>::
@@ -213,6 +214,7 @@ JensenHavrdaCharvatTsallisPointSetToPointSetMetricv4<TPointSet, TInternalComputa
   print_helper::PrintNumericTrait(os, indent, "Prefactor0", m_Prefactor0);
   print_helper::PrintNumericTrait(os, indent, "Prefactor1", m_Prefactor1);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

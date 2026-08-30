@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 VoronoiSegmentationRGBImageFilter<TInputImage, TOutputImage>::VoronoiSegmentationRGBImageFilter()
@@ -394,6 +395,7 @@ VoronoiSegmentationRGBImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ost
   os << indent << "MaxValueOfRGB: " << m_MaxValueOfRGB << std::endl;
   os << indent << "Mean: " << m_Mean << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

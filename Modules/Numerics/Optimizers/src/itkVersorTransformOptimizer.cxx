@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 VersorTransformOptimizer::~VersorTransformOptimizer() = default;
 
 /**
@@ -84,4 +85,5 @@ VersorTransformOptimizer::StepAlongGradient(double factor, const DerivativeType 
 
   this->SetCurrentPosition(newParameters);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

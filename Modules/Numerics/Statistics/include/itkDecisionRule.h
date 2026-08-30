@@ -25,7 +25,10 @@
 #include "itkArray.h"
 #include "ITKStatisticsExport.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class DecisionRule
@@ -76,6 +79,8 @@ protected:
   DecisionRule();
   ~DecisionRule() override;
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

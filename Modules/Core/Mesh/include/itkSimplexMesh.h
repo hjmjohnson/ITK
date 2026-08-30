@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SimplexMesh
  * \brief The class represents a 2-simplex mesh.
  *
@@ -307,6 +308,7 @@ protected:
    */
   CellIdentifier m_LastCellId{};
 }; // End Class:  SimplexMesh
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

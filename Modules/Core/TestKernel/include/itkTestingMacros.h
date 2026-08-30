@@ -29,8 +29,10 @@
  * within the itk:: namespace. */
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // end namespace itk - this is here for documentation purposes
-}
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 // DEPRECATED: These macros are left here for compatibility.
 // In the future, they will be removed in favor of the "ITK_" prefixed

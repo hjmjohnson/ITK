@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 MGHImageIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -61,4 +62,5 @@ MGHImageIOFactoryRegister__Private()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

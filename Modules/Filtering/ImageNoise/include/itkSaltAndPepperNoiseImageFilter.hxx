@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 SaltAndPepperNoiseImageFilter<TInputImage, TOutputImage>::SaltAndPepperNoiseImageFilter()
@@ -105,6 +106,7 @@ SaltAndPepperNoiseImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream
 
   print_helper::PrintNumericTrait(os, indent, "Probability", m_Probability);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

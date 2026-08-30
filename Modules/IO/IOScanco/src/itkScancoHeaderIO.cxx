@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ScancoHeaderIO::ScancoHeaderIO(itkScancoHeaderData * headerData, std::string filename)
   : m_HeaderData(headerData)
   , m_FileName(filename)
@@ -120,4 +121,5 @@ ScancoHeaderIO::WriteHeader(unsigned long imageSize, const std::string filename)
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

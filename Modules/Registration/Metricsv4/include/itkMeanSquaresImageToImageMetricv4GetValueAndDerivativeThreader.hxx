@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomainPartitioner, typename TImageToImageMetric, typename TMeanSquaresMetric>
 bool
@@ -83,6 +84,7 @@ MeanSquaresImageToImageMetricv4GetValueAndDerivativeThreader<
   return true;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

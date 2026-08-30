@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FFTDiscreteGaussianImageFilterFactory
  *
  * \brief Object Factory implementation for overriding
@@ -110,6 +111,7 @@ protected:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkFFTDiscreteGaussianImageFilterFactory_h

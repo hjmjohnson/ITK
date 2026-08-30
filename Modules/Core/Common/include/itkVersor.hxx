@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename T>
 void
 Versor<T>::SetIdentity()
@@ -579,6 +580,7 @@ Versor<T>::GetMatrix() const
 
   return matrix;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

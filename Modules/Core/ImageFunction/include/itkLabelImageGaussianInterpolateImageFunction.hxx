@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate, typename TPixelCompare>
 auto
@@ -88,6 +89,7 @@ LabelImageGaussianInterpolateImageFunction<TInputImage, TCoordinate, TPixelCompa
   return Vmax;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

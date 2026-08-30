@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixel>
 void
@@ -42,6 +43,7 @@ PhasedArray3DSpecialCoordinatesImage<TPixel>::PrintSelf(std::ostream & os, Inden
   os << indent << "ElevationAngularSeparation: " << m_ElevationAngularSeparation << std::endl;
   os << indent << "FirstSampleDistance: " << m_FirstSampleDistance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

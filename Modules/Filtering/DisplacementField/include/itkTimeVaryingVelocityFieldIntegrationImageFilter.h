@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TimeVaryingVelocityFieldIntegrationImageFilter
  * \brief Integrate a time-varying velocity field using 4th order Runge-Kutta.
@@ -196,6 +197,7 @@ protected:
 private:
   VelocityFieldInterpolatorPointer m_VelocityFieldInterpolator{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

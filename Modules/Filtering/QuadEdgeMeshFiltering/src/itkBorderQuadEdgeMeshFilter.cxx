@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const BorderQuadEdgeMeshFilterEnums::BorderTransform value)
@@ -53,4 +54,5 @@ operator<<(std::ostream & out, const BorderQuadEdgeMeshFilterEnums::BorderPick v
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

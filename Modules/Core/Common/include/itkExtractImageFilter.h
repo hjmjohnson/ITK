@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ExtractionImageFilterEnums
  *
@@ -320,6 +321,7 @@ private:
   DirectionCollapseStrategyEnum m_DirectionCollapseStrategy{ DirectionCollapseStrategyEnum::DIRECTIONCOLLAPSETOUNKOWN };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------
 //  Advance to Next Line
 //----------------------------------------------------------------------
@@ -226,6 +227,7 @@ ImageSliceConstIteratorWithIndex<TImage>::operator--()
   this->m_Position -= m_PixelJump;
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

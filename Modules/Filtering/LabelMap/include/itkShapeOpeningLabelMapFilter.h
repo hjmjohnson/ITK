@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShapeOpeningLabelMapFilter
  * \brief Remove objects according to the value of their shape attribute.
@@ -172,6 +173,7 @@ protected:
 
   AttributeType m_Attribute{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

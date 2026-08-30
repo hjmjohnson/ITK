@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MatrixResizeableDataObject
  * \brief Allows a VNL matrix to be a DataObject with the flexibility of
@@ -58,6 +59,7 @@ protected:
   /** Default Destructor. */
   ~MatrixResizeableDataObject() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

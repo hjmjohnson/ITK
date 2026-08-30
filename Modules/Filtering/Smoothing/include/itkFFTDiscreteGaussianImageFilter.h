@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FFTDiscreteGaussianImageFilterEnums
  * \brief Contains all enum classes used by FFTDiscreteGaussianImageFilter class.
  * \ingroup ITKSmoothing
@@ -183,6 +184,7 @@ private:
    * on repeated calls to GenerateData() */
   typename ConvolutionImageFilterType::Pointer m_ConvolutionImageFilter = ConvolutionImageFilterType::New();
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

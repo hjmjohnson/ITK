@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage>
 PeakSignalToNoiseRatioCalculator<TInputImage>::PeakSignalToNoiseRatioCalculator()
@@ -83,6 +84,7 @@ PeakSignalToNoiseRatioCalculator<TInputImage>::GetOutput() const
   return m_Output;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

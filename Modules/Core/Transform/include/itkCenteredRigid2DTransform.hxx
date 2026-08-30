@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 CenteredRigid2DTransform<TParametersValueType>::CenteredRigid2DTransform()
@@ -221,6 +222,7 @@ CenteredRigid2DTransform<TParametersValueType>::PrintSelf(std::ostream & os, Ind
   this->Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

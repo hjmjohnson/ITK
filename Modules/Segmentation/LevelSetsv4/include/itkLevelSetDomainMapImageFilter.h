@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
   \class LevelSetDomainMapImageFilter
   \tparam TInputImage  Image where the pixel type is a container (e.g. std::list) of level set ids
@@ -141,6 +142,7 @@ private:
   OutputImageType *      m_OutputImage{};
 };
 
+ITK_ABI_NAMESPACE_END
 } /* namespace itk */
 
 #ifndef ITK_MANUAL_INSTANTIATION

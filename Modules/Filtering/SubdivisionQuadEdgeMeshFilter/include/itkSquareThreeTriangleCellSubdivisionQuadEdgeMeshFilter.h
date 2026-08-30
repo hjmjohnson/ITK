@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SquareThreeTriangleCellSubdivisionQuadEdgeMeshFilter
  *
@@ -96,6 +97,7 @@ protected:
   void
   GenerateOutputCells() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

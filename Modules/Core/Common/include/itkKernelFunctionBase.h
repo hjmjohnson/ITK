@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class KernelFunctionBase
  * \brief Kernel used for density estimation and nonparametric regression.
  *
@@ -61,6 +62,7 @@ protected:
   KernelFunctionBase() = default;
   ~KernelFunctionBase() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkKernelFunctionBase_h

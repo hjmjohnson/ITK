@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ThreadPool
@@ -172,5 +173,6 @@ private:
   ThreadExecute();
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

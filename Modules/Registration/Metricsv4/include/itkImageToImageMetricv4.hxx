@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage,
           typename TMovingImage,
@@ -657,6 +658,7 @@ ImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage, TInternalComputat
   itkPrintSelfObjectMacro(MovingImageMask);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

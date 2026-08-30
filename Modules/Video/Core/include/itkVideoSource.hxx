@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //-CONSTRUCTOR PRINT-----------------------------------------------------------
 
@@ -357,6 +358,7 @@ VideoSource<TOutputVideoStream>::ThreaderCallback(void * arg)
   return ITK_THREAD_RETURN_DEFAULT_VALUE;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

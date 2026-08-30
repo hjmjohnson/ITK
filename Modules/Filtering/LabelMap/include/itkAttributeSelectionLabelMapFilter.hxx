@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TAttributeAccessor>
 AttributeSelectionLabelMapFilter<TImage, TAttributeAccessor>::AttributeSelectionLabelMapFilter()
@@ -83,5 +84,6 @@ AttributeSelectionLabelMapFilter<TImage, TAttributeAccessor>::PrintSelf(std::ost
   os << indent << "Exclude: " << m_Exclude << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

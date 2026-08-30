@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformBaseTemplateEnums
  * \brief Contains all enum classes used by TransformBaseTemplate class.
  * \ingroup ITKTransform
@@ -189,6 +190,7 @@ private:
 
 /** This helps to meet backward compatibility */
 using TransformBase = TransformBaseTemplate<double>;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif
@@ -212,11 +214,13 @@ using TransformBase = TransformBaseTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
 extern template class ITKTransform_EXPORT_EXPLICIT TransformBaseTemplate<double>;
 extern template class ITKTransform_EXPORT_EXPLICIT TransformBaseTemplate<float>;
 ITK_GCC_PRAGMA_DIAG_POP()
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKTransform_EXPORT_EXPLICIT
 #endif

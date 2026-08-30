@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FiniteDifferenceSparseImageFilter
  *
@@ -212,6 +213,7 @@ private:
       which are passed to each thread for parallel processing. */
   typename NodeListType::RegionListType m_RegionList{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

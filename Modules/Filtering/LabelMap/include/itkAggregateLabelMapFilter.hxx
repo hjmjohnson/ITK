@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 void
 AggregateLabelMapFilter<TImage>::GenerateData()
@@ -66,5 +67,6 @@ AggregateLabelMapFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) con
 {
   this->Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

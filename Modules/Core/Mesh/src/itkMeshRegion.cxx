@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Instantiate object.
  */
@@ -28,4 +29,5 @@ MeshRegion::MeshRegion() = default;
  * Destructor for the MeshRegion class.
  */
 MeshRegion::~MeshRegion() = default;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

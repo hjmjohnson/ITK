@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixelType, unsigned int VImageDimension>
 class VectorImage;
@@ -548,6 +549,7 @@ private:
   // it converts the presentation of a pixel
   AccessorType m_PixelAccessor{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImplicitManifoldNormalVectorFilter
  *
@@ -210,6 +211,7 @@ private:
   NodeValueType m_DimConst2{};
   RadiusType    m_ManifoldRadius{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

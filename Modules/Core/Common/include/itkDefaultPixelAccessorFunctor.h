@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DefaultPixelAccessorFunctor
  * \brief Provides a common API for pixel accessors for Image and VectorImage.
  *
@@ -116,6 +117,7 @@ public:
 private:
   PixelAccessorType m_PixelAccessor; // The pixel accessor
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

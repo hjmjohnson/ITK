@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int TDimension, typename TAllocator>
 auto
 BackwardDifferenceOperator<TPixel, TDimension, TAllocator>::GenerateCoefficients() -> CoefficientVector
@@ -33,6 +34,7 @@ BackwardDifferenceOperator<TPixel, TDimension, TAllocator>::GenerateCoefficients
 
   return coeff;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

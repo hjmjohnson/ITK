@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class  SparseFieldLevelSetNode
  * A data structure used in the SparseFieldLevelSetImageFilter to construct
  * lists of indices and other values.
@@ -528,6 +529,7 @@ private:
       false when methods do not need to check for boundary conditions. */
   bool m_BoundsCheckingActive{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class KrcahEigenToMeasureParameterEstimationFilter
  * \brief Automatic parameter estimation as defined by Krcah et al.
  *
@@ -187,6 +188,7 @@ private:
 
   std::mutex m_Mutex;
 }; // end class
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

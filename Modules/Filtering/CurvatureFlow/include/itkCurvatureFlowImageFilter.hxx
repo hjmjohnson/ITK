@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 CurvatureFlowImageFilter<TInputImage, TOutputImage>::CurvatureFlowImageFilter()
@@ -124,6 +125,7 @@ CurvatureFlowImageFilter<TInputImage, TOutputImage>::EnlargeOutputRequestedRegio
 
   outputPtr->SetRequestedRegion(outputRequestedRegion);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -21,6 +21,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Bring print_helper's operator<< overloads for std::vector<T>,
 // std::list<T>, and std::array<T, N> into scope so the explicit
 // MetaDataObject<...>::Print() instantiations below can resolve the
@@ -30,11 +31,13 @@ namespace itk
 // has_output_operator<> trait dispatch stays local to this single
 // translation unit.
 using namespace print_helper;
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #include "itkMetaDataObject.h"
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -67,4 +70,5 @@ template class ITKCommon_EXPORT MetaDataObject<std::vector<std::vector<float>>>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void
 VTKPolyDataMeshIOFactory::PrintSelf(std::ostream &, Indent) const
@@ -60,4 +61,5 @@ VTKPolyDataMeshIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<VTKPolyDataMeshIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

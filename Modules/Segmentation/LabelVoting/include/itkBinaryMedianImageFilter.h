@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryMedianImageFilter
  * \brief Applies a version of the median filter optimized for binary images.
@@ -140,6 +141,7 @@ private:
   InputPixelType m_ForegroundValue{};
   InputPixelType m_BackgroundValue{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

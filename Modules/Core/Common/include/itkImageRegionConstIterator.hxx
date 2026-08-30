@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //----------------------------------------------------------------------------
 // Increment when the fastest moving direction has reached its bound.
@@ -115,6 +116,7 @@ ImageRegionConstIterator<TImage>::Decrement()
   m_SpanBeginOffset = m_SpanEndOffset - static_cast<OffsetValueType>(size[0]);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

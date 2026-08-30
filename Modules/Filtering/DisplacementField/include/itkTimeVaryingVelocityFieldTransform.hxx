@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 void
@@ -74,6 +75,7 @@ TimeVaryingVelocityFieldTransform<TParametersValueType, VDimension>::IntegrateVe
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

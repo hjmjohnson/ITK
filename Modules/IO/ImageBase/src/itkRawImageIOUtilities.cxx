@@ -71,6 +71,7 @@ _ReadRawBytesAfterSwappingUtility(void * buffer, itk::IOByteOrderEnum byteOrder,
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void
 WriteRawBytesAfterSwapping(IOComponentEnum componentType,
@@ -177,4 +178,5 @@ ReadRawBytesAfterSwapping(IOComponentEnum componentType,
     _ReadRawBytesAfterSwappingUtility<double>(buffer, byteOrder, numberOfComponents);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

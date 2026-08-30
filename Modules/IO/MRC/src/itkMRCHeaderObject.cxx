@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 MRCHeaderObject::DeepCopy(ConstPointer h)
 {
@@ -392,4 +393,5 @@ MRCHeaderObject::PrintSelf(std::ostream & os, Indent indent) const
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

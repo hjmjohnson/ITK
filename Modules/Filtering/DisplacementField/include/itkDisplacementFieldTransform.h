@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class DisplacementFieldTransform
  * \brief Provides local/dense/high-dimensionality transformation via a
@@ -513,6 +514,7 @@ private:
   double m_DirectionTolerance{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

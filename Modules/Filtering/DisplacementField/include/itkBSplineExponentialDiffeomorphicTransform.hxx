@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 BSplineExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::BSplineExponentialDiffeomorphicTransform()
@@ -198,6 +199,7 @@ BSplineExponentialDiffeomorphicTransform<TParametersValueType, VDimension>::Prin
   print_helper::PrintNumericTrait(os, indent, "SplineOrder", m_SplineOrder);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

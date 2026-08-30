@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -433,4 +434,5 @@ GDCMSeriesFileNames::SetUseSeriesDetails(bool useSeriesDetails)
     this->Modified();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

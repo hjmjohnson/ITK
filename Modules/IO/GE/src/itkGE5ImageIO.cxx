@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 static constexpr char GE_PROD_STR[] = "SIGNA";
 // Default constructor
 GE5ImageIO::GE5ImageIO() = default;
@@ -521,4 +522,5 @@ GE5ImageIO::ModifyImageInformation()
     this->SetOrigin(2, m_ImageHeader->tlhcS);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

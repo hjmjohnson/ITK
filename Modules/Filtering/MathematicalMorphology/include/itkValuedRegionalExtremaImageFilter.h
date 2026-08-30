@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ValuedRegionalExtremaImageFilter
  *
  * \brief Uses a flooding algorithm to set all voxels that are not a
@@ -165,6 +166,7 @@ private:
   using NOutputIterator = ShapedNeighborhoodIterator<OutputImageType>;
   using IndexStack = std::stack<OutIndexType>;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

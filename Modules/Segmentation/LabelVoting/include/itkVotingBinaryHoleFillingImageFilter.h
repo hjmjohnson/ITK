@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VotingBinaryHoleFillingImageFilter
  * \brief Fills in holes and cavities by applying a voting operation on each pixel.
@@ -146,6 +147,7 @@ private:
   // Auxiliary array for multi-threading
   Array<SizeValueType> m_Count{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

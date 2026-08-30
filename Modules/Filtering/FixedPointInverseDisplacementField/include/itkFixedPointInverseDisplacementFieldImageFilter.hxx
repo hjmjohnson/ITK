@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 // Constructor
 template <typename TInputImage, typename TOutputImage>
@@ -187,6 +188,7 @@ FixedPointInverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::PrintS
   os << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

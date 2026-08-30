@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LaplacianImageFilter
  * \brief This filter computes the Laplacian of a scalar-valued image.
@@ -139,6 +140,7 @@ protected:
 private:
   bool m_UseImageSpacing{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

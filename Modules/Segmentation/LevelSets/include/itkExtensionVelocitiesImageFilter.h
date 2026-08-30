@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ExtensionVelocitiesImageFilter
  *  \brief Extend velocities smoothly from a particular level set.
  *
@@ -128,6 +129,7 @@ private:
 
   typename FastMarchingImageFilterType::Pointer m_Marcher{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

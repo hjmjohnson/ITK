@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 void
 LaplacianOperator<TPixel, VDimension, TAllocator>::SetDerivativeScalings(const double * s)
@@ -87,6 +88,7 @@ LaplacianOperator<TPixel, VDimension, TAllocator>::GenerateCoefficients() -> Coe
 
   return coeffP;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LaplacianDeformationQuadEdgeMeshFilterWithSoftConstraints
  *
  *  \brief Laplacian deformation with soft constraints (approximating
@@ -115,6 +116,7 @@ protected:
 
   std::unordered_map<OutputPointIdentifier, OutputCoordinateType> m_LocalLambdaSquare{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkLaplacianDeformationQuadEdgeMeshFilterWithSoftConstraints.hxx"

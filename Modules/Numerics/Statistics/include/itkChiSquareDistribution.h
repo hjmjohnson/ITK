@@ -22,7 +22,10 @@
 #include "itkNumericTraits.h"
 #include "ITKStatisticsExport.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class ChiSquareDistribution
  * \brief ChiSquareDistribution class defines the interface for a
@@ -231,6 +234,8 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

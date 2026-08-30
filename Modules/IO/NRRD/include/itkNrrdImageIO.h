@@ -27,6 +27,7 @@ struct NrrdEncoding_t;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NrrdImageIOEnums
  * \brief Contains all enum classes used by NrrdImageIO class.
  * \ingroup ITKIONRRD
@@ -227,6 +228,7 @@ protected:
 
   AxesReorderEnum m_AxesReorder{ AxesReorderEnum::UseAnyRangeAxisAsPixel };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNrrdImageIO_h

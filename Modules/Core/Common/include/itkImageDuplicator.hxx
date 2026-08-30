@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 void
@@ -67,6 +68,7 @@ ImageDuplicator<TInputImage>::PrintSelf(std::ostream & os, Indent indent) const
 
   print_helper::PrintNumericTrait(os, indent, "InternalImageTime", m_InternalImageTime);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

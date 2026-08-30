@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegistrationMethod
  * \brief Base class for Image Registration Methods
  *
@@ -242,6 +243,7 @@ private:
   bool                 m_FixedImageRegionDefined{};
   FixedImageRegionType m_FixedImageRegion{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

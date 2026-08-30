@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NeighborhoodAccessorFunctor
  * \brief Provides accessor interfaces to Get pixels and is meant to be
  * used on pointers contained within Neighborhoods. A typical user should
@@ -97,6 +98,7 @@ public:
     return 0;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // template< typename TImage > const unsigned int

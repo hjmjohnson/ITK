@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryImageToLevelSetImageAdaptorBase
  *  \ingroup ITKLevelSetsv4
@@ -80,6 +81,7 @@ protected:
   InputImagePointer m_InputImage{};
   LevelSetPointer   m_LevelSet{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkBinaryImageToLevelSetImageAdaptorBase_h

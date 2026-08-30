@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class VectorFieldPCA
  * \brief Produce the principle components of a vector valued function.
@@ -236,6 +237,7 @@ private:
   bool m_PCACalculated{ false };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

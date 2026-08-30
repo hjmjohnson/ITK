@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LevelSetNode
  * \brief Represent a node in a level set.
@@ -153,6 +154,7 @@ private:
   PixelType m_Value;
   IndexType m_Index;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

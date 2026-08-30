@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LabelGeometryImageFilter
  * \brief Given a label map and an optional intensity image, compute
  * geometric features.
@@ -513,6 +514,7 @@ private:
   LabelsType    m_AllLabels{};
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

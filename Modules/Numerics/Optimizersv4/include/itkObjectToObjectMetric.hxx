@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TFixedDimension,
           unsigned int TMovingDimension,
@@ -545,6 +546,7 @@ ObjectToObjectMetric<TFixedDimension, TMovingDimension, TVirtualImage, TParamete
   print_helper::PrintNumericTrait(os, indent, "NumberOfValidPoints", m_NumberOfValidPoints);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

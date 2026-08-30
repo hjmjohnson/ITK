@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SWCMeshIOEnums
  *
@@ -330,6 +331,7 @@ private:
 
   SWCMeshIOEnums::SWCPointData m_PointDataContent{ SWCMeshIOEnums::SWCPointData::TypeIdentifier };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

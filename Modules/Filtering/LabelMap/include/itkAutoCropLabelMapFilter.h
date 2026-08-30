@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AutoCropLabelMapFilter
  * \brief Crop a LabelMap image to fit exactly the objects in the LabelMap.
@@ -113,6 +114,7 @@ protected:
 private:
   SizeType m_CropBorder{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

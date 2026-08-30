@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  */
 template <typename TVRef, typename TFRef, typename TPrimalData, typename TDualData, bool PrimalDual>
@@ -677,6 +678,7 @@ GeometricalQuadEdge<TVRef, TFRef, TPrimalData, TDualData, PrimalDual>::IsLeftSet
 
   return p1->IsOriginSet();
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

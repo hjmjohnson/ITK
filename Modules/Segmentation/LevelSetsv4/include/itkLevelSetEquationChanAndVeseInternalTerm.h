@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationChanAndVeseInternalTerm
  *  \brief Class to represent the internal energy Chan And Vese term
@@ -141,6 +142,7 @@ protected:
   LevelSetOutputRealType m_TotalH{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEquationChanAndVeseInternalTerm.hxx"

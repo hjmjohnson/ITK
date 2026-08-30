@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScalarToRGBColormapImageFilterEnums
  * \brief Contains all enum classes for ScalarToRGBColormapImageFilter class
  * \ingroup ITKColormap
@@ -245,6 +246,7 @@ private:
 
   bool m_UseInputImageExtremaForScaling{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

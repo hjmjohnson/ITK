@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DoubleThresholdImageFilter
  * \brief Binarize an input image using double thresholding.
  *
@@ -159,6 +160,7 @@ private:
 
   bool m_FullyConnected{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

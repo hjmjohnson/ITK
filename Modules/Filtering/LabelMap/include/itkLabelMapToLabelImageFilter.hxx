@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage, typename TOutputImage>
@@ -52,6 +53,7 @@ LabelMapToLabelImageFilter<TInputImage, TOutputImage>::ThreadedProcessLabelObjec
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

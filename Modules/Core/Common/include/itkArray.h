@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Array
  *  \brief Array class with size defined at construction time.
@@ -246,6 +247,7 @@ swap(Array<T> & a, Array<T> & b) noexcept
   a.Swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

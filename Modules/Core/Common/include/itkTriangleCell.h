@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TriangleCell
  * TriangleCell represents a triangle for a Mesh.
  *
@@ -200,6 +201,7 @@ private:
   double
   DistanceToLine(PointType x, PointType p1, PointType p2, double & t, PointType & closestPoint);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Set the priority level for the current logger. Only messages that have
  * priorities equal or greater than the one set here will be posted to the
  * current outputs */
@@ -231,6 +232,7 @@ LoggerThreadWrapper<SimpleLoggerType>::PrintSelf(std::ostream & os, Indent inden
   os << indent << "Delay: " << m_Delay << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLoggerThreadWrapper_hxx

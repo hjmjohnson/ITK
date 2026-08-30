@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TLevelSetContainer, typename TCurvatureImage>
 LevelSetEquationCurvatureTerm<TInput, TLevelSetContainer, TCurvatureImage>::LevelSetEquationCurvatureTerm()
 {
@@ -89,5 +90,6 @@ LevelSetEquationCurvatureTerm<TInput, TLevelSetContainer, TCurvatureImage>::Valu
   return m_CurvatureImage->GetPixel(iP) * this->m_CurrentLevelSetPointer->EvaluateMeanCurvature(iP);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class UnaryCorrespondenceMatrix
  * \brief A matrix used to store the Unary Metric
@@ -57,6 +58,7 @@ protected:
   /** Default Destructor. */
   ~UnaryCorrespondenceMatrix() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

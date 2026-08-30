@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageContainerInterface
  *  \brief Used for reference when writing containers conforming to
  *         this interface.
@@ -95,6 +96,7 @@ public:
   virtual void
   Squeeze() = 0;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

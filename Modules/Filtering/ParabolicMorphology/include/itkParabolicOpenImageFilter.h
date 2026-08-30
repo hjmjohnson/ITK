@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParabolicOpenImageFilter
  * \brief Class for morphological opening
@@ -86,6 +87,7 @@ protected:
   ~ParabolicOpenImageFilter() override = default;
   //   void PrintSelf(std::ostream& os, Indent indent) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

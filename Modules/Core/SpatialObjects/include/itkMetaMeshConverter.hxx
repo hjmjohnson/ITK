@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension, typename PixelType, typename TMeshTraits>
 auto
@@ -362,6 +363,7 @@ MetaMeshConverter<VDimension, PixelType, TMeshTraits>::SpatialObjectToMetaObject
   return metamesh;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

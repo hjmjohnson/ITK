@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class TransformIOBaseTemplate
  *
@@ -231,6 +232,7 @@ TransformIOBaseTemplate<double>::GetTypeNameString()
 /** This helps to meet backward compatibility */
 using TransformIOBase = TransformIOBaseTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkTransformIOBase_h
@@ -254,6 +256,7 @@ using TransformIOBase = TransformIOBaseTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -263,6 +266,7 @@ extern template class ITKIOTransformBase_EXPORT_EXPLICIT TransformIOBaseTemplate
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformBase_EXPORT_EXPLICIT
 #endif

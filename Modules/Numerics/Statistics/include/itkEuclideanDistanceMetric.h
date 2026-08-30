@@ -20,7 +20,10 @@
 
 #include "itkDistanceMetric.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class EuclideanDistanceMetric
@@ -70,7 +73,9 @@ protected:
   EuclideanDistanceMetric() = default;
   ~EuclideanDistanceMetric() override = default;
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkEuclideanDistanceMetric.hxx"

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 #define BRUKER_LITTLE_ENDIAN "littleEndian"
 #define BRUKER_BIG_ENDIAN "bigEndian"
@@ -1128,4 +1129,5 @@ Bruker2dseqImageIO::PrintSelf(std::ostream & os, Indent indent) const
   print_helper::PrintNumericTrait(os, indent, "OnDiskComponentType", m_OnDiskComponentType);
   print_helper::PrintNumericTrait(os, indent, "MachineByteOrder", m_MachineByteOrder);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

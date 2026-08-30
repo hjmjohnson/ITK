@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TParentImageFilter>
 GPUImageToImageFilter<TInputImage, TOutputImage, TParentImageFilter>::GPUImageToImageFilter()
@@ -114,6 +115,7 @@ GPUImageToImageFilter<TInputImage, TOutputImage, TParentImageFilter>::GraftOutpu
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

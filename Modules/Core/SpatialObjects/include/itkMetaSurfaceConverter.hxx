@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension>
 auto
 MetaSurfaceConverter<VDimension>::CreateMetaObject() -> MetaObjectType *
@@ -148,6 +149,7 @@ MetaSurfaceConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObjectT
   return surfaceMO;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

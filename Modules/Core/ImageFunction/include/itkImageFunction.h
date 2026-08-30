@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ImageFunction
  * \brief Evaluates a function of an image at specified position.
@@ -227,6 +228,7 @@ protected:
   ContinuousIndexType m_StartContinuousIndex{};
   ContinuousIndexType m_EndContinuousIndex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

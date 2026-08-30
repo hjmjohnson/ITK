@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 SliceImageFilter<TInputImage, TOutputImage>::SliceImageFilter()
@@ -310,6 +311,7 @@ SliceImageFilter<TInputImage, TOutputImage>::VerifyInputInformation() const
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

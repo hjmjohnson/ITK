@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 TranslationTransform<TParametersValueType, VDimension>::TranslationTransform()
@@ -204,6 +205,7 @@ TranslationTransform<TParametersValueType, VDimension>::SetIdentity()
   m_Offset.Fill(0.0);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

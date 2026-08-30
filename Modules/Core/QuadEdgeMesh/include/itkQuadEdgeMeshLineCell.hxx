@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 template <typename TCellInterface>
 QuadEdgeMeshLineCell<TCellInterface>::QuadEdgeMeshLineCell()
@@ -283,6 +284,7 @@ QuadEdgeMeshLineCell<TCellInterface>::GetNumberOfPoints() const
 {
   return 2;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

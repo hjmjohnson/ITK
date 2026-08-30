@@ -24,7 +24,10 @@
 #include "itkListSample.h"
 #include "itkSmartPointer.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class PointSetToListSampleAdaptor
@@ -268,7 +271,9 @@ private:
   /** temporary points for conversions */
   mutable PointType m_TempPoint{};
 }; // end of class PointSetToListSampleAdaptor
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkPointSetToListSampleAdaptor.hxx"

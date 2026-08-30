@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GiftiMeshIO
  * \brief This class defines how to read and write Gifti file format.
  * \ingroup IOFilters
@@ -182,6 +183,7 @@ private:
   int
   GetNumberOfPixelComponentsFromGifti(int datatype);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

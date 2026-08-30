@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const TransformBaseTemplateEnums::TransformCategory value)
@@ -54,4 +55,5 @@ template class ITKTransform_EXPORT TransformBaseTemplate<float>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

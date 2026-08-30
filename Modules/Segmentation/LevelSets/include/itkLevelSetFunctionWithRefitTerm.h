@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LevelSetFunctionWithRefitTerm
  *
@@ -169,6 +170,7 @@ private:
   static const NeighborhoodSizeValueType m_NumVertex;
   static const ScalarValueType           m_DimConst;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

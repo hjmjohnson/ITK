@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryImageToLabelMapFilter
  * \brief Label the connected components in a binary image and produce a
@@ -186,6 +187,7 @@ private:
   InputPixelType  m_InputForegroundValue{};
   SizeValueType   m_NumberOfObjects{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

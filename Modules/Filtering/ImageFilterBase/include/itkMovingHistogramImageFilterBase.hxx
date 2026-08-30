@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 MovingHistogramImageFilterBase<TInputImage, TOutputImage, TKernel>::MovingHistogramImageFilterBase()
 {
@@ -214,5 +215,6 @@ MovingHistogramImageFilterBase<TInputImage, TOutputImage, TKernel>::PrintSelf(st
 
   os << indent << "PixelsPerTranslation: " << m_PixelsPerTranslation << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

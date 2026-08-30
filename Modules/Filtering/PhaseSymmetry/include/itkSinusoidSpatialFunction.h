@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SinusoidSpatialFunction
  * \brief N-dimensional sinusoid spatial function class
  *
@@ -94,6 +95,7 @@ private:
   /** The phase shift. */
   double m_PhaseOffset{ 0.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

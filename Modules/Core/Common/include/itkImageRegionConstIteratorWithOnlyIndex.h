@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionConstIteratorWithOnlyIndex
  * \brief A multi-dimensional iterator templated over image type that walks
  * an image region and is specialized to keep track of its index location
@@ -196,6 +197,7 @@ template <typename TImage>
 ImageRegionConstIteratorWithOnlyIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRegionConstIteratorWithOnlyIndex<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

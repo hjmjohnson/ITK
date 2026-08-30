@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NearestNeighborExtrapolateImageFunction
  * \brief Nearest neighbor extrapolation of a scalar image.
@@ -126,6 +127,7 @@ protected:
     Superclass::PrintSelf(os, indent);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParabolicErodeDilateImageFilter
  * \brief Parent class for morphological operations with parabolic
@@ -200,6 +201,7 @@ private:
 
   unsigned int m_CurrentDimension;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

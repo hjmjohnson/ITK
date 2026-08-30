@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RecursiveGaussianImageFilterEnums
  * \brief Contains all enum classes used by RecursiveGaussianImageFilter class.
  * \ingroup ITKSmoothing
@@ -261,6 +262,7 @@ private:
 
   GaussianOrderEnum m_Order{ GaussianOrderEnum::ZeroOrder };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

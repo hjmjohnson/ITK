@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class DiscreteLevelSetImage
  *  \brief Abstract class for a level-set function on one Image.
@@ -134,6 +135,7 @@ protected:
   void
   Graft(const DataObject * data) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

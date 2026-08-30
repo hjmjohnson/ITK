@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MetaDataDictionary
  *  \brief Provides a mechanism for storing a collection of arbitrary
  *         data types
@@ -189,5 +190,6 @@ swap(MetaDataDictionary & a, MetaDataDictionary & b) noexcept
   a.Swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkMetaDataDictionary_h

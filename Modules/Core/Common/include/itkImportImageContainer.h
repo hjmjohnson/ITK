@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImportImageContainer
  *  \brief Defines an itk::Image front-end to a standard C-array.
  *
@@ -212,6 +213,7 @@ private:
   TElementIdentifier m_Capacity{};
   bool               m_ContainerManageMemory{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

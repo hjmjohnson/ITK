@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Standard CellInterface:
  */
@@ -265,6 +266,7 @@ PolyLineCell<TCellInterface>::GetVertex(CellFeatureIdentifier vertexId, VertexAu
   vertexPointer.TakeOwnership(vert);
   return true;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

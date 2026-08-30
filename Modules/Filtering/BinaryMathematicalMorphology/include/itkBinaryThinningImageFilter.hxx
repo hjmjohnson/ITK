@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *    Constructor
  */
@@ -275,6 +276,7 @@ BinaryThinningImageFilter<TInputImage, TOutputImage>::GenerateData()
   itkDebugMacro("GenerateData: Computing Thinning Image");
   this->ComputeThinImage();
 } // end GenerateData()
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

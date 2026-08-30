@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ImageToImageMetricv4GetValueAndDerivativeThreader
  * \brief Provides threading for ImageToImageMetricv4::GetValueAndDerivative.
@@ -201,6 +202,7 @@ protected:
   /** @ITKEndGrouping */
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

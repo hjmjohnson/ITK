@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension, typename PixelType, typename TMeshTraits>
 MetaSceneConverter<VDimension, PixelType, TMeshTraits>::MetaSceneConverter()
@@ -315,6 +316,7 @@ MetaSceneConverter<VDimension, PixelType, TMeshTraits>::RegisterMetaConverter(co
   this->m_ConverterMap[spatialObjectTypeName] = converter;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

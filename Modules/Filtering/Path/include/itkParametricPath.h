@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParametricPath
  * \brief  Represent a parametric path through ND Space
@@ -142,6 +143,7 @@ protected:
   InputType m_DefaultInputStepSize{ 0.3 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

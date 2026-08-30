@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 STAPLEImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Indent indent) const
@@ -260,6 +261,7 @@ STAPLEImageFilter<TInputImage, TOutputImage>::GenerateData()
   }
   m_ElapsedIterations = iter;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -330,6 +330,7 @@ TryDispatchNrrdReservedField(NrrdWriteReservedFieldCtx & ctx, const char * keyFi
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** Print enum values */
 std::ostream &
@@ -1456,4 +1457,5 @@ NrrdImageIO::Write(const void * buffer)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

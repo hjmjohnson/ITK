@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NeighborhoodBinaryThresholdImageFunction
  * \brief Determine whether all the pixels in the specified neighborhood meet a threshold criteria
@@ -119,6 +120,7 @@ protected:
 private:
   InputSizeType m_Radius{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

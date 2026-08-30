@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixel>
 Hessian3DToVesselnessMeasureImageFilter<TPixel>::Hessian3DToVesselnessMeasureImageFilter()
@@ -95,6 +96,7 @@ Hessian3DToVesselnessMeasureImageFilter<TPixel>::PrintSelf(std::ostream & os, In
   os << indent << "Alpha1: " << m_Alpha1 << std::endl;
   os << indent << "Alpha2: " << m_Alpha2 << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

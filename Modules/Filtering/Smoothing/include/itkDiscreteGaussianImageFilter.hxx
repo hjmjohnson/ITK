@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 DiscreteGaussianImageFilter<TInputImage, TOutputImage>::GenerateKernel(const unsigned int dimension,
@@ -344,6 +345,7 @@ DiscreteGaussianImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   itkPrintSelfBooleanMacro(UseImageSpacing);
   os << indent << "RealBoundaryCondition: " << m_RealBoundaryCondition << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

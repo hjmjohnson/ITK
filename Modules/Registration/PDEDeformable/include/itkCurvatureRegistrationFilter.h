@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CurvatureRegistrationFilter
  * \brief Deformably register two images using the fast curvature algorithm.
  *
@@ -197,6 +198,7 @@ private:
 
   RealTypeDFT * m_DiagonalElements[ImageDimension]{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #  ifndef ITK_MANUAL_INSTANTIATION

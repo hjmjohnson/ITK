@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionSplitterDirection
  *
  * Splits an Image region along the slowest axis not in the specified
@@ -80,6 +81,7 @@ protected:
 private:
   unsigned int m_Direction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

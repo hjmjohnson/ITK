@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MeanSquaresPointSetToImageMetric
  * \brief Computes similarity between pixel values of a point set and
  * intensity values of an image.
@@ -93,6 +94,7 @@ protected:
   MeanSquaresPointSetToImageMetric() = default;
   ~MeanSquaresPointSetToImageMetric() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

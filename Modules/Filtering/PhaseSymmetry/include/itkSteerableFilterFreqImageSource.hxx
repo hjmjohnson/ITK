@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage>
 SteerableFilterFreqImageSource<TOutputImage>::SteerableFilterFreqImageSource()
@@ -280,6 +281,7 @@ SteerableFilterFreqImageSource<TOutputImage>::SetSize(const SizeType size)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BlockMatchingImageFilter
  * \brief Computes displacements of given points from a fixed image in a
  * floating image.
@@ -226,6 +227,7 @@ private:
   std::unique_ptr<DisplacementsVector[]> m_DisplacementsVectorsArray;
   std::unique_ptr<SimilaritiesValue[]>   m_SimilaritiesValuesArray;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

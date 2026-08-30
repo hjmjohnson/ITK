@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class StatisticsOpeningLabelMapFilter
  * \brief remove the objects according to the value of their statistics attribute
@@ -86,6 +87,7 @@ protected:
   void
   GenerateData() override;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

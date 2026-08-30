@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const RecursiveGaussianImageFilterEnums::GaussianOrder value)
@@ -37,4 +38,5 @@ operator<<(std::ostream & out, const RecursiveGaussianImageFilterEnums::Gaussian
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

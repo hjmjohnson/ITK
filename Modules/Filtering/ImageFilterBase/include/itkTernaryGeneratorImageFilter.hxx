@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage1, typename TInputImage2, typename TInputImage3, typename TOutputImage>
 TernaryGeneratorImageFilter<TInputImage1, TInputImage2, TInputImage3, TOutputImage>::TernaryGeneratorImageFilter()
 {
@@ -340,6 +341,7 @@ TernaryGeneratorImageFilter<TInputImage1, TInputImage2, TInputImage3, TOutputIma
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

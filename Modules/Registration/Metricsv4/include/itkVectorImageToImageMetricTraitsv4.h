@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorImageToImageMetricTraitsv4
  * \brief A simple structure holding type information for ImageToImageMetricv4 classes
  *
@@ -109,6 +110,7 @@ public:
   using DefaultMovingImageGradientCalculator =
     CentralDifferenceImageFunction<MovingImageType, CoordinateRepresentationType, MovingImageGradientType>;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

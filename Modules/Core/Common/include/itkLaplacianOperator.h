@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LaplacianOperator
  * \brief A NeighborhoodOperator for use in calculating the Laplacian at a pixel.
@@ -121,6 +122,7 @@ private:
   /** Weights applied to derivatives in each axial direction */
   double m_DerivativeScalings[VDimension]{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

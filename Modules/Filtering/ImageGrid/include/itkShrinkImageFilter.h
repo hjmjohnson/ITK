@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShrinkImageFilter
  * \brief Reduce the size of an image by an integer factor in each
@@ -159,6 +160,7 @@ protected:
 private:
   ShrinkFactorsType m_ShrinkFactors{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

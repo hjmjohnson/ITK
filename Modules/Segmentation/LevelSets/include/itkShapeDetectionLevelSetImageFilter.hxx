@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputType>
 ShapeDetectionLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::ShapeDetectionLevelSetImageFilter()
   : m_ShapeDetectionFunction(ShapeDetectionFunctionType::New())
@@ -60,6 +61,7 @@ ShapeDetectionLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::Gene
   // Continue with Superclass implementation
   Superclass::GenerateData();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GE5ImageIO
  *
@@ -128,6 +129,7 @@ private:
   int
   CheckGE5xImages(const char * const imageFileTemplate, std::string & reason);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkGE5ImageIO_h

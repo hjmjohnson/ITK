@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename THistogram, typename TOutput>
 bool
@@ -152,6 +153,7 @@ IntermodesThresholdCalculator<THistogram, TOutput>::PrintSelf(std::ostream & os,
   os << indent << "UseInterMode: " << m_UseInterMode << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

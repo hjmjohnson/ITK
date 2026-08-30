@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingPointSet, class TInternalComputationValueType>
 ExpectationBasedPointSetToPointSetMetricv4<TFixedPointSet, TMovingPointSet, TInternalComputationValueType>::
@@ -147,6 +148,7 @@ ExpectationBasedPointSetToPointSetMetricv4<TFixedPointSet, TMovingPointSet, TInt
   os << indent << "PointSetSigma: " << this->m_PointSetSigma << std::endl;
   os << indent << "EvaluateKNeighborhood: " << this->m_EvaluationKNeighborhood << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

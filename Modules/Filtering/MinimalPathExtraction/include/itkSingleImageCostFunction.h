@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SingleImageCostFunction
  * \brief This class is a cost function which queries
@@ -165,6 +166,7 @@ private:
   typename DerivativeType::ValueType m_DerivativeThreshold;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

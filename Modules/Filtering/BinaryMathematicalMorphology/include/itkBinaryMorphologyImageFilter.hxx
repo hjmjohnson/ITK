@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 BinaryMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::BinaryMorphologyImageFilter()
 {
@@ -324,6 +325,7 @@ BinaryMorphologyImageFilter<TInputImage, TOutput, TKernel>::PrintSelf(std::ostre
   print_helper::PrintNumericTrait(os, indent, "Background Value", m_BackgroundValue);
   os << indent << "BoundaryToForeground: " << m_BoundaryToForeground << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

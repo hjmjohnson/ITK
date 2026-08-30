@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NeighborhoodOperatorImageFunction
  * \brief Compute the convolution of a neighborhood operator with the image
@@ -123,6 +124,7 @@ protected:
 private:
   mutable NeighborhoodType m_Operator{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

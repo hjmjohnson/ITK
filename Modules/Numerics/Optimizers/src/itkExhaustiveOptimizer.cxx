@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ExhaustiveOptimizer::~ExhaustiveOptimizer() = default;
 
 ExhaustiveOptimizer::ExhaustiveOptimizer() = default;
@@ -212,4 +213,5 @@ ExhaustiveOptimizer::PrintSelf(std::ostream & os, Indent indent) const
 
   os << indent << "StopConditionDescription: " << m_StopConditionDescription.str() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

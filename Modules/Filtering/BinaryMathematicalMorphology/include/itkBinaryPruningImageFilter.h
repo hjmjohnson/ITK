@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryPruningImageFilter
  *
@@ -135,6 +136,7 @@ protected:
 private:
   unsigned int m_Iteration{ 3 };
 }; // end of BinaryThinningImageFilter class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

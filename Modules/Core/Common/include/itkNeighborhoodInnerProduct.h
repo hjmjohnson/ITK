@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NeighborhoodInnerProduct
  *  \brief Defines the inner product operation between an
  *         Neighborhood and a NeighborhoodOperator.
@@ -101,6 +102,7 @@ public:
     return Self::Compute(N, op);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

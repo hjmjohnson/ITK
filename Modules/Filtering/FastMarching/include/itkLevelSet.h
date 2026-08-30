@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**  \class LevelSetTypeDefault
  * \brief Level set type information.
  *
@@ -110,6 +111,7 @@ public:
   using AuxImagePointer = typename AuxImageType::Pointer;
   using AuxImageConstPointer = typename AuxImageType::ConstPointer;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

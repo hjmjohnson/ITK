@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 PhaseAnalysisImageFilter<TInputImage, TOutputImage>::PhaseAnalysisImageFilter()
 {
@@ -101,5 +102,6 @@ PhaseAnalysisImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData
 //     out += direction[r] * monoPixel[r];
 //   return out;
 // }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

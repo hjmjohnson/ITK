@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ProgressReporter
  * \brief Implements progress tracking for a filter.
  *
@@ -120,6 +121,7 @@ protected:
   float           m_InitialProgress;
   float           m_ProgressWeight;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

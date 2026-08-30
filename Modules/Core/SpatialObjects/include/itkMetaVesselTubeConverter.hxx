@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 auto
@@ -235,6 +236,7 @@ MetaVesselTubeConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObje
   return vesselTubeMO;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

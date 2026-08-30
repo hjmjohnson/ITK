@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class MalcolmSparseLevelSetImage
  *  \brief Derived class for the Malcolm representation of level-set function
@@ -133,6 +134,7 @@ protected:
   void
   InitializeInternalLabelList() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkMalcolmSparseLevelSetImage.hxx"

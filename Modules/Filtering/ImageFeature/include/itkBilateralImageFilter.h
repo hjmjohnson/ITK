@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BilateralImageFilter
  * \brief Blurs an image while preserving edges
@@ -230,6 +231,7 @@ private:
   double              m_DynamicRangeUsed{};
   std::vector<double> m_RangeGaussianTable{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

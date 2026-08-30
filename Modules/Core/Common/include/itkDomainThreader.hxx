@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomainPartitioner, typename TAssociate>
 DomainThreader<TDomainPartitioner, TAssociate>::DomainThreader()
@@ -124,6 +125,7 @@ DomainThreader<TDomainPartitioner, TAssociate>::ThreaderCallback(void * arg)
 
   return ITK_THREAD_RETURN_DEFAULT_VALUE;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

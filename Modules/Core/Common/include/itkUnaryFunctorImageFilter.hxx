@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TFunction>
 UnaryFunctorImageFilter<TInputImage, TOutputImage, TFunction>::UnaryFunctorImageFilter()
 {
@@ -102,6 +103,7 @@ UnaryFunctorImageFilter<TInputImage, TOutputImage, TFunction>::DynamicThreadedGe
     progress.Completed(outputRegionForThread.GetSize()[0]);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

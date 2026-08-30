@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class JoinSeriesImageFilter
  * \brief Join N-D images into an (N+1)-D image
@@ -132,6 +133,7 @@ private:
   double m_Spacing{ 1.0 };
   double m_Origin{ 0.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

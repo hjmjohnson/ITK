@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TElement>
 PyObject *
@@ -142,6 +143,7 @@ PyVnl<TElement>::_GetVnlMatrixFromArray(PyObject * arr, PyObject * const shape) 
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

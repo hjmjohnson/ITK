@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FloodFilledImageFunctionConditionalConstIterator
  * \brief Iterates over a flood-filled image function with read-only
@@ -104,6 +105,7 @@ public:
   bool
   IsPixelIncluded(const IndexType & index) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

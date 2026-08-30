@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**   \class CannySegmentationLevelSetImageFilter
  *    \brief Segments structures in images based on image features derived from
  *           pseudo-canny-edges.
@@ -202,6 +203,7 @@ protected:
 private:
   typename CannyFunctionType::Pointer m_CannyFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

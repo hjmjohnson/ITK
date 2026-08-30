@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward declaration
 class GenericCUBFileAdaptor;
 
@@ -145,6 +146,7 @@ private:
   static const char * m_VB_DATATYPE_FLOAT;
   static const char * m_VB_DATATYPE_DOUBLE;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkVoxBoCUBImageIO_h

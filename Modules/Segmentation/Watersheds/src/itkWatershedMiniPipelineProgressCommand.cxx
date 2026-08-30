@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 WatershedMiniPipelineProgressCommand::~WatershedMiniPipelineProgressCommand() = default;
 
 void
@@ -68,4 +69,5 @@ WatershedMiniPipelineProgressCommand::PrintSelf(std::ostream & os, Indent indent
   os << indent << "NumberOfFilters: " << m_NumberOfFilters << std::endl;
   os << indent << "Count: " << m_Count << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -27,6 +27,7 @@
 #include <itkGaussianImageSource.h>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StructureTensorImageFilter
  * Given an array of inputs, StructureTensor computes the linear combination (or direction) of inputs that maximizes the
 response for each location in the image.
@@ -229,6 +230,7 @@ private:
   typename GaussianSourceType::Pointer m_GaussianSource;
   InputsType                           m_SquareSmoothedImages;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkStructureTensorImageFilter.hxx"

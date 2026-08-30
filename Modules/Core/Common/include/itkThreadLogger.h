@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ThreadLogger
  *  \brief Providing logging service as a separate thread.
  *
@@ -143,6 +144,7 @@ private:
   DelayType m_Delay{};
 
 }; // class ThreadLogger
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkThreadLogger_h

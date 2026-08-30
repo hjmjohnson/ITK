@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HardConnectedComponentImageFilter
  * The purpose of this program is to produce the connected components
@@ -123,6 +124,7 @@ protected:
 private:
   ListType m_Seeds{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

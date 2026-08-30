@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelUniqueLabelMapFilter
  * \brief Make sure that the objects are not overlapping
@@ -89,6 +90,7 @@ protected:
   ~LabelUniqueLabelMapFilter() override = default;
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GrayscaleGrindPeakImageFilter
  * \brief Remove local maxima not connected to the boundary of the image.
  *
@@ -138,6 +139,7 @@ private:
 
   bool m_FullyConnected{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

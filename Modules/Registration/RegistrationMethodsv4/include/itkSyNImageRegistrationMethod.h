@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SyNImageRegistrationMethod
  * \brief Interface method for the performing greedy SyN image registration.
@@ -260,6 +261,7 @@ private:
   RealType m_GaussianSmoothingVarianceForTheUpdateField{ 3.0 };
   RealType m_GaussianSmoothingVarianceForTheTotalField{ 0.5 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

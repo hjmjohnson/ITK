@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 OtsuMultipleThresholdsImageFilter<TInputImage, TOutputImage>::OtsuMultipleThresholdsImageFilter()
   : m_LabelOffset(OutputPixelType{})
@@ -91,5 +92,6 @@ OtsuMultipleThresholdsImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ost
        << static_cast<typename NumericTraits<InputPixelType>::PrintType>(m_Thresholds[j]) << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

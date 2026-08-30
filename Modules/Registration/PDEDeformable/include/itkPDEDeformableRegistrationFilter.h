@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PDEDeformableRegistrationFilter
  * \brief Deformably register two images using a PDE algorithm.
@@ -310,6 +311,7 @@ private:
   /** Flag to indicate user stop registration request. */
   bool m_StopRegistrationFlag{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

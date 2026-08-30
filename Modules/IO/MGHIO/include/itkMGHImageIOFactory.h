@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MGHImageIOFactory
  * \brief Create instances of MGHImageIO objects using an object factory.
  * \ingroup MGHIO
@@ -69,6 +70,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif /// itkMGHImageIOFactory_h

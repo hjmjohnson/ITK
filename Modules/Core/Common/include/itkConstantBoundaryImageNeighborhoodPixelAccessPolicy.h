@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class ConstantBoundaryImageNeighborhoodPixelAccessPolicy
@@ -145,6 +146,7 @@ public:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

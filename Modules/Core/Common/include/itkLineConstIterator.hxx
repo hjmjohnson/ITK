@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 LineConstIterator<TImage>::LineConstIterator(const ImageType * imagePtr,
                                              const IndexType & firstIndex,
@@ -146,6 +147,7 @@ LineConstIterator<TImage>::operator++()
     itkWarningMacro("Line left region; unable to finish tracing it");
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

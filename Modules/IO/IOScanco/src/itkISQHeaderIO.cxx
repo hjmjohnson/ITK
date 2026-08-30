@@ -112,6 +112,7 @@ constexpr const char * ISQVersionString = "CTDATA-HEADER_V1";
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 unsigned long
 ISQHeaderIO::ReadHeader(std::ifstream & infile)
@@ -458,4 +459,5 @@ ISQHeaderIO::WriteExtendedHeader(std::ofstream & outfile)
   return ScancoHeaderBlockSize + sizeof(ISQCalibrationHeaderBlock);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \brief Define numeric traits for RGBAPixel.
  * \tparam T Component type of RBGAPixel
@@ -223,6 +224,7 @@ public:
   static const Self ITKCommon_EXPORT Zero;
   static const Self ITKCommon_EXPORT One;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsRGBAPixel_h

@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 void
 PadLabelMapFilter<TInputImage>::GenerateOutputInformation()
@@ -70,6 +71,7 @@ PadLabelMapFilter<TInputImage>::PrintSelf(std::ostream & os, Indent indent) cons
   os << indent << "UpperBoundaryPadSize: " << m_UpperBoundaryPadSize << std::endl;
   os << indent << "LowerBoundaryPadSize: " << m_LowerBoundaryPadSize << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

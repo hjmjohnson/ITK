@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 BioRadImageIOFactory::BioRadImageIOFactory()
 {
   this->RegisterOverride(
@@ -59,4 +60,5 @@ BioRadImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<BioRadImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

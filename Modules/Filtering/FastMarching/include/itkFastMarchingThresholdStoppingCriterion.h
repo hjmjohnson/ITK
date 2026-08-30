@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastMarchingThresholdStoppingCriterion
  * \brief Stopping Criterion is verified when Current Value is equal to or
@@ -88,5 +89,6 @@ protected:
   {}
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkFastMarchingThresholdStoppingCriterion_h

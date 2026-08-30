@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, bool doDilate, typename TOutputImage>
 ParabolicErodeDilateImageFilter<TInputImage, doDilate, TOutputImage>::ParabolicErodeDilateImageFilter()
 {
@@ -294,5 +295,6 @@ ParabolicErodeDilateImageFilter<TInputImage, doDilate, TOutputImage>::PrintSelf(
     os << "Scale in voxels: " << m_Scale << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

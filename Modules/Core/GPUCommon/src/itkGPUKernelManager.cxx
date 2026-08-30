@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 GPUKernelManager::GPUKernelManager()
 {
   m_Program = nullptr;
@@ -675,4 +676,5 @@ GPUKernelManager::GetCurrentCommandQueueID() const
   return m_CommandQueueId;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

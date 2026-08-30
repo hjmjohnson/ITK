@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TMesh>
 MeshSpatialObject<TMesh>::MeshSpatialObject()
@@ -180,6 +181,7 @@ MeshSpatialObject<TMesh>::GetMTime() const
 
   return latestMTime;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif //__MeshSpatialObject_hxx

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 const char * const ITK_OnDiskStorageTypeName = "ITK_OnDiskStorageTypeName";
 const char * const ITK_ImageFileBaseName = "ITK_ImageFileBaseName";
 const char * const ITK_VoxelUnits = "ITK_VoxelUnits";
@@ -160,4 +161,5 @@ operator<<(std::ostream & out, const IOCommonEnums::AtomicPixel value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

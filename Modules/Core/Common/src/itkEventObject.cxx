@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 EventObject::Print(std::ostream & os) const
 {
@@ -76,4 +77,5 @@ itkEventMacroDefinition(GradientEvaluationIterationEvent, IterationEvent);
 itkEventMacroDefinition(FunctionAndGradientEvaluationIterationEvent, IterationEvent);
 itkEventMacroDefinition(UserEvent, AnyEvent);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

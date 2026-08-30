@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class DCMTKTransformIO
  *
@@ -93,6 +94,7 @@ private:
   std::string m_FrameOfReferenceUID;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkDCMTKTransformIO_h
@@ -115,6 +117,7 @@ private:
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -122,6 +125,7 @@ extern template class IOTransformDCMTK_EXPORT_EXPLICIT DCMTKTransformIO<double>;
 extern template class IOTransformDCMTK_EXPORT_EXPLICIT DCMTKTransformIO<float>;
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef IOTransformDCMTK_EXPORT_EXPLICIT
 #endif

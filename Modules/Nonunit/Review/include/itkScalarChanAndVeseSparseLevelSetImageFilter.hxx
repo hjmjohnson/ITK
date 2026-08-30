@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage,
           typename TFeatureImage,
           typename TOutputImage,
@@ -140,6 +141,7 @@ ScalarChanAndVeseSparseLevelSetImageFilter<TInputImage, TFeatureImage, TOutputIm
 
   iterator.SetPixel(idx, newValue, status);
 }
+ITK_ABI_NAMESPACE_END
 } /* end namespace itk */
 
 #endif

@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PatchBasedDenoisingImageFilter
  * \brief Derived class implementing a specific patch-based denoising algorithm, as detailed below.
@@ -568,6 +569,7 @@ private:
   BaseSamplerPointer                m_Sampler{};
   typename ListAdaptorType::Pointer m_SearchSpaceList{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

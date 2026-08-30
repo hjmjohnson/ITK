@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TMaskImage>
 ConnectedComponentImageFilter<TInputImage, TOutputImage, TMaskImage>::ConnectedComponentImageFilter()
   : ScanlineFilterCommon<TInputImage, TOutputImage>(this)
@@ -265,6 +266,7 @@ ConnectedComponentImageFilter<TInputImage, TOutputImage, TMaskImage>::PrintSelf(
 
   os << indent << "ObjectCount: " << m_ObjectCount << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

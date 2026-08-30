@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 #if !defined(ITK_LEGACY_REMOVE)
 namespace Functor
 {
@@ -147,6 +148,7 @@ protected:
   void
   DynamicThreadedGenerateDataDispatched(const OutputImageRegionType & outputRegionForThread);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

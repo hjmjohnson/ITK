@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor
  * \brief Helper class for multiresolution image registration
  *
@@ -84,6 +85,7 @@ private:
   ModifiedTimeType m_GaussianSmoothingVarianceForTheTotalFieldSetTime{ 0 };
 
 }; // class GaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

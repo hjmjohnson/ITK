@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RealTimeClock
  * \brief Provides a timestamp from a real-time clock.
  *
@@ -89,6 +90,7 @@ private:
   const TimeStamp &
   GetTimeStamp() const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif // itkRealTimeClock_h

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Prompting off by default
  */
@@ -163,4 +164,5 @@ XMLFileOutputWindow::DisplayDebugText(const char * text)
 {
   this->DisplayXML("Debug", text);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

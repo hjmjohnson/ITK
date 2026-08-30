@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *\class CellAreaTriangleCellSubdivisionCriterion
  *\brief
@@ -78,6 +79,7 @@ private:
   CoordinateType m_MaximumArea;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkCellAreaTriangleCellSubdivisionCriterion.hxx"

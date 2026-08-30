@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class TimeVaryingBSplineVelocityFieldTransform
@@ -196,6 +197,7 @@ private:
   VelocityFieldSizeType      m_VelocityFieldSize{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

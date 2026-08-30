@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputSpatialObject>
 SpatialObjectDuplicator<TInputSpatialObject>::SpatialObjectDuplicator()
   : m_Input(nullptr)
@@ -95,6 +96,7 @@ SpatialObjectDuplicator<TInputSpatialObject>::PrintSelf(std::ostream & os, Inden
   os << indent << "Output SpatialObject: " << m_DuplicateSpatialObject << std::endl;
   os << indent << "Internal SpatialObject Time: " << m_InternalSpatialObjectTime << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

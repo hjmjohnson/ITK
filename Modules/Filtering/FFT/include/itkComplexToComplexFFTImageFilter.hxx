@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -54,6 +55,7 @@ ComplexToComplexFFTImageFilter<TInputImage, TOutputImage>::EnlargeOutputRequeste
   output->SetRequestedRegionToLargestPossibleRegion();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -47,6 +47,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GE4ImageIO
  *
@@ -133,6 +134,7 @@ private:
   float
   MvtSunf(int numb);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkGE4ImageIO_h

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TKernel>
 class AnchorDilateImageFilter
   : public AnchorErodeDilateImageFilter<TImage, TKernel, std::greater<typename TImage::PixelType>>
@@ -48,6 +49,7 @@ protected:
   AnchorDilateImageFilter() { this->m_Boundary = NumericTraits<PixelType>::NonpositiveMin(); }
   ~AnchorDilateImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

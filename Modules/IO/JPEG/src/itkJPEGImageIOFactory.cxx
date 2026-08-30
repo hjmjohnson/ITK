@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 JPEGImageIOFactory::JPEGImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ JPEGImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<JPEGImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

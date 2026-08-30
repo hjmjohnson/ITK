@@ -21,6 +21,7 @@
 #include "itkMacro.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PixelAccessor
  * \brief Give access to partial aspects of a type
@@ -75,6 +76,7 @@ public:
     return (TExternalType)input;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

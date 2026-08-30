@@ -27,6 +27,7 @@ class MultiLabelMeshPipeline;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionConstIterator
  * \brief A multi-dimensional iterator templated over image type that walks a
  * region of pixels.
@@ -256,6 +257,7 @@ ImageRegionConstIterator(const RLEImage<TPixel, VImageDimension, CounterType> *,
                          const typename RLEImage<TPixel, VImageDimension, CounterType>::RegionType &)
   -> ImageRegionConstIterator<RLEImage<TPixel, VImageDimension, CounterType>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkRLEImageRegionConstIterator_h

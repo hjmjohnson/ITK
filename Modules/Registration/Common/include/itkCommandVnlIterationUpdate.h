@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  *  Implementation of the Command Pattern to be invoked every iteration
@@ -129,6 +130,7 @@ private:
 };
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

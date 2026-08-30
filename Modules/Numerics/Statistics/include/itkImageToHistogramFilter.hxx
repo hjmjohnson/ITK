@@ -20,7 +20,10 @@
 
 #include "itkImageRegionConstIterator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TImage>
 ImageToHistogramFilter<TImage>::ImageToHistogramFilter()
@@ -377,6 +380,8 @@ ImageToHistogramFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) cons
     os << indent << "HistogramSize: " << this->GetHistogramSize() << std::endl;
   }
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

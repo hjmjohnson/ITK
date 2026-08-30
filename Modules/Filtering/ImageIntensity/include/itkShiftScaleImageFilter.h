@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ShiftScaleImageFilter
  * \brief Shift and scale the pixels in an image.
  *
@@ -124,6 +125,7 @@ private:
 
   std::mutex m_Mutex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

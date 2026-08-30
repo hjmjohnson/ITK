@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VotingBinaryIterativeHoleFillingImageFilter
  * \brief Fills in holes and cavities by iteratively applying a voting operation.
@@ -158,6 +159,7 @@ private:
   unsigned int m_MajorityThreshold{};
   unsigned int m_NumberOfPixelsChanged{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

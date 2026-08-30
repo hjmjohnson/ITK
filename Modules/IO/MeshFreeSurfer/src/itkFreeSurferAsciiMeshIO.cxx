@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 FreeSurferAsciiMeshIO::FreeSurferAsciiMeshIO() { this->AddSupportedWriteExtension(".fsa"); }
 
 FreeSurferAsciiMeshIO::~FreeSurferAsciiMeshIO() = default;
@@ -439,4 +440,5 @@ FreeSurferAsciiMeshIO::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

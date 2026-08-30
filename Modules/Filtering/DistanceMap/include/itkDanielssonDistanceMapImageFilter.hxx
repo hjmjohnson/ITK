@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TVoronoiImage>
 DanielssonDistanceMapImageFilter<TInputImage, TOutputImage, TVoronoiImage>::DanielssonDistanceMapImageFilter()
@@ -401,6 +402,7 @@ DanielssonDistanceMapImageFilter<TInputImage, TOutputImage, TVoronoiImage>::Prin
   os << indent << "Use Image Spacing : " << m_UseImageSpacing << std::endl;
   os << indent << "Squared Distance  : " << m_SquaredDistance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

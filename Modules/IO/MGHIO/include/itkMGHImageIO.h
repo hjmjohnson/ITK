@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MGHImageIO
  *
  * \author Hans J. Johnson
@@ -155,6 +156,7 @@ private:
   void
   CloseFile();
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMGHImageIO_h

@@ -20,7 +20,10 @@
 
 #include "itkByteSwapper.h"
 
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 template <typename TScalar>
 ScalarToRGBPixelFunctor<TScalar>::ScalarToRGBPixelFunctor()
@@ -69,6 +72,8 @@ ScalarToRGBPixelFunctor<TScalar>::operator()(const TScalar & v) const -> RGBPixe
 
   return ans;
 }
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

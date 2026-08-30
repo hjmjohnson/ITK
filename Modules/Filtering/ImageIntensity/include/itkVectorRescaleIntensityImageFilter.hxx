@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 VectorRescaleIntensityImageFilter<TInputImage, TOutputImage>::VectorRescaleIntensityImageFilter()
@@ -87,6 +88,7 @@ VectorRescaleIntensityImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ost
   print_helper::PrintNumericTrait(os, indent, "Internal Scale ", m_Scale);
   print_helper::PrintNumericTrait(os, indent, "Internal Shift ", m_Shift);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

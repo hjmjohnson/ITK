@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MaximumProjectionImageFilter
  * \brief Maximum projection
  *
@@ -134,6 +135,7 @@ protected:
   ~MaximumProjectionImageFilter() override = default;
 }; // end
    // MaximumProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

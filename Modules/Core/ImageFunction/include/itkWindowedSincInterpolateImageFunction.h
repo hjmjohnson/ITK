@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // clang-format off
 namespace Function
 {
@@ -352,6 +353,7 @@ private:
     return (x == 0.0) ? 1.0 : std::sin(px) / px;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension, class TSpatialObjectPointType>
 PointBasedSpatialObject<TDimension, TSpatialObjectPointType>::PointBasedSpatialObject()
@@ -232,6 +233,7 @@ PointBasedSpatialObject<TDimension, TSpatialObjectPointType>::PrintSelf(std::ost
   // ToDo
   // os << indent << "Points: " << m_Points << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // end itkPointBasedSpatialObject_hxx

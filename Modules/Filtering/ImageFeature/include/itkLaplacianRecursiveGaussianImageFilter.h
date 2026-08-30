@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LaplacianRecursiveGaussianImageFilter
  * \brief Computes the Laplacian of Gaussian (LoG) of an image.
@@ -136,6 +137,7 @@ private:
   /** Normalize the image across scale space */
   bool m_NormalizeAcrossScale{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

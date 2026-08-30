@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TIndexValue, unsigned int VDimension>
 void
@@ -241,6 +242,7 @@ HilbertPath<TIndexValue, VDimension>::PrintSelf(std::ostream & os, Indent indent
   os << "HilbertOrder: " << static_cast<NumericTraits<HilbertOrderType>::PrintType>(m_HilbertOrder) << std::endl;
   os << "HilbertPath: " << m_HilbertPath << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

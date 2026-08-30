@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TClassifiedImage>
 RGBGibbsPriorFilter<TInputImage, TClassifiedImage>::RGBGibbsPriorFilter()
@@ -699,6 +700,7 @@ RGBGibbsPriorFilter<TInputImage, TClassifiedImage>::PrintSelf(std::ostream & os,
   itkPrintSelfObjectMacro(LabelledImage);
   itkPrintSelfObjectMacro(ClassifierPtr);
 }
+ITK_ABI_NAMESPACE_END
 } /* end namespace itk. */
 
 #endif

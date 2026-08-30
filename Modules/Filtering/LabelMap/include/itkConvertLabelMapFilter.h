@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConvertLabelMapFilter
  * \brief Converts the LabelObjects of a LabelMap to a different type of LabelObject
@@ -83,6 +84,7 @@ protected:
   void
   GenerateData() override;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

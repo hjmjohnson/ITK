@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -157,6 +158,7 @@ LevelSetVelocityNeighborhoodExtractor<TLevelSet, TAuxValue, VAuxDimension>::Calc
 
   return distance;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

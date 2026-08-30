@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType>
 FiniteDifferenceFunction<TImageType>::FiniteDifferenceFunction()
 {
@@ -89,6 +90,7 @@ FiniteDifferenceFunction<TImageType>::ComputeNeighborhoodScales() const -> const
   }
   return neighborhoodScales;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

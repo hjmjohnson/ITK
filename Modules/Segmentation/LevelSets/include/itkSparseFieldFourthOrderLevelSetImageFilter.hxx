@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 const SizeValueType SparseFieldFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>::m_NumVertex =
   1 << ImageDimension;
@@ -229,6 +230,7 @@ SparseFieldFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>::ProcessNor
   this->ComputeCurvatureTarget(tmp, SparseNormalImage);
   m_LevelSetFunction->SetSparseTargetImage(SparseNormalImage);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

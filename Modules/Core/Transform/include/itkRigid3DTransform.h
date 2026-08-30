@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Rigid3DTransform
  * \brief Rigid3DTransform of a vector space (e.g. space coordinates)
  *
@@ -170,6 +171,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // class Rigid3DTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

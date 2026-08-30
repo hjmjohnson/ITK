@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageVectorOptimizerParametersHelper
  *  \brief Class to hold and manage parameters of type
  *          Image<Vector<...>,...>, used in Transforms, etc.
@@ -77,6 +78,7 @@ private:
   ParameterImagePointer m_ParameterImage{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NodePair
  * \brief Represents a Node and its associated value (front value)
@@ -112,5 +113,6 @@ public:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkNodePair_h

@@ -18,10 +18,14 @@
 #ifndef itkBridgeEigenDecompositionSolverInfo_h
 #define itkBridgeEigenDecompositionSolverInfo_h
 
+#include "itkABINamespace.h"
 #include "itk_eigen.h"
 #include ITK_EIGEN(Dense)
 
-namespace itk::bridge::detail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace bridge::detail
 {
 
 /** Human-readable name and likely cause for an Eigen solver status, so a
@@ -43,6 +47,8 @@ EigenComputationInfoString(Eigen::ComputationInfo info)
   return "an unrecognized Eigen::ComputationInfo value";
 }
 
-} // namespace itk::bridge::detail
+} // namespace bridge::detail
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkBridgeEigenDecompositionSolverInfo_h

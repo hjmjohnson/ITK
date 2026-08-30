@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPointBasedSpatialObject, typename TOutputPointSet>
 SpatialObjectToPointSetFilter<TPointBasedSpatialObject, TOutputPointSet>::SpatialObjectToPointSetFilter()
@@ -153,6 +154,7 @@ SpatialObjectToPointSetFilter<TPointBasedSpatialObject, TOutputPointSet>::PrintS
   os << indent << "Children depth : " << m_ChildrenDepth << std::endl;
   os << indent << "Sampling Factor : " << m_SamplingFactor << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

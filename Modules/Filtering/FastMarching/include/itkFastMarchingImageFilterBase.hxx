@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TOutput>
 class FastMarchingImageFilterBase<TInput, TOutput>::InternalNodeStructure
@@ -1017,5 +1018,6 @@ FastMarchingImageFilterBase<TInput, TOutput>::PrintSelf(std::ostream & os, Inden
 
   itkPrintSelfObjectMacro(InputCache);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkFastMarchingImageFilterBase_hxx

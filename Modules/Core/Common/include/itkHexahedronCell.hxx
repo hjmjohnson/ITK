@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // C++11 work-around for compile time minimize compatible with constexpr
 // https://stackoverflow.com/a/40285868/485602
@@ -687,6 +688,7 @@ HexahedronCell<TCellInterface>::EvaluateLocation(int &                     itkNo
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

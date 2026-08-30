@@ -21,7 +21,10 @@
 
 #include <atomic>
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 namespace
 {
@@ -284,4 +287,6 @@ MersenneTwisterRandomVariateGenerator::PrintSelf(std::ostream & os, Indent inden
   os << indent << "Values left before next reload: " << m_Left << std::endl;
 }
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

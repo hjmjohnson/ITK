@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ShapeSignedDistanceFunction
  * \brief Base class for functions which evaluates the signed distance
@@ -133,6 +134,7 @@ protected:
 
   ParametersType m_Parameters{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

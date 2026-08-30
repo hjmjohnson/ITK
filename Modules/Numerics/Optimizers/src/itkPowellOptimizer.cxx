@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 PowellOptimizer::PowellOptimizer()
   : m_MaximumIteration(100)
   , m_MaximumLineIteration(100)
@@ -528,4 +529,5 @@ PowellOptimizer::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Current Line Iteration " << m_CurrentLineIteration << std::endl;
   os << indent << "Stop              " << m_Stop << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename THistogramMeasurement>
 HistogramMatchingImageFilter<TInputImage, TOutputImage, THistogramMeasurement>::HistogramMatchingImageFilter()
   : m_SourceMinValue(THistogramMeasurement{})
@@ -454,6 +455,7 @@ HistogramMatchingImageFilter<TInputImage, TOutputImage, THistogramMeasurement>::
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

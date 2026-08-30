@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MetaBlobConverter
  *  \brief converts between MetaObject<->SpatialObject.
@@ -76,6 +77,7 @@ protected:
   MetaBlobConverter() = default;
   ~MetaBlobConverter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

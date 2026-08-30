@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FlatStructuringElement
  * \brief A class to support a variety of flat structuring elements,
  * including versions created by decomposition of lines.
@@ -261,6 +262,7 @@ private:
   static RadiusType
   CheckImageSize(const ImageType * image);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

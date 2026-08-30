@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LevelSetEvolutionStoppingCriterion
  \ingroup ITKLevelSetsv4
@@ -86,6 +87,7 @@ protected:
   IterationIdType          m_NumberOfIterations{};
   IterationIdType          m_CurrentIteration{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEvolutionStoppingCriterion.hxx"

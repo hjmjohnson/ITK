@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 WarpHarmonicEnergyCalculator<TInputImage>::WarpHarmonicEnergyCalculator()
@@ -168,6 +169,7 @@ WarpHarmonicEnergyCalculator<TInputImage>::PrintSelf(std::ostream & os, Indent i
   os << indent << "Derivative Weights: " << this->m_DerivativeWeights << std::endl;
   os << indent << "Neighborhood Radius: " << this->m_NeighborhoodRadius << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

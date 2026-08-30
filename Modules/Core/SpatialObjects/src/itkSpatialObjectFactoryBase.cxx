@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SpatialObjectFactoryBase * SpatialObjectFactoryBase::m_Factory = nullptr;
 
 SpatialObjectFactoryBase::SpatialObjectFactoryBase() = default;
@@ -56,4 +57,5 @@ SpatialObjectFactoryBase::GetDescription() const
 {
   return "SpatialObject FactoryBase";
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

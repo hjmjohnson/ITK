@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Directory
  * \brief Portable directory/filename traversal.
  *
@@ -82,6 +83,7 @@ protected:
 private:
   ::itksys::Directory m_Internal;
 }; // End Class: Directory
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -130,6 +130,7 @@ isNoPreambleDicom(std::ifstream & file) // NOTE: Similar function is in itkGDCMI
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Constructor */
 DCMTKImageIO::DCMTKImageIO()
 {
@@ -579,4 +580,5 @@ operator<<(std::ostream & out, const DCMTKImageIOEnums::LogLevel value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

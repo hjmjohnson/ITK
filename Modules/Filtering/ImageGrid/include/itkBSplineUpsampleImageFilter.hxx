@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Standard "PrintSelf" method
@@ -170,6 +171,7 @@ BSplineUpsampleImageFilter<TInputImage, TOutputImage, ResamplerType>::EnlargeOut
                     << typeid(output).name() << " to " << typeid(TOutputImage *).name());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

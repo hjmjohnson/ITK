@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename PixelType, typename TMeshTraits>
 SpatialObjectWriter<VDimension, PixelType, TMeshTraits>::SpatialObjectWriter()
   : m_FileName("")
@@ -82,6 +83,7 @@ SpatialObjectWriter<VDimension, PixelType, TMeshTraits>::RegisterMetaConverter(c
   this->m_MetaToSpatialConverter->RegisterMetaConverter(metaTypeName, spatialObjectTypeName, converter);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -24,6 +24,7 @@
 #include <vector>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace LabSet
 {
 template <class LineBufferType, class RealType>
@@ -677,5 +678,6 @@ doOneDimensionDilate(TInIter &          inputIterator,
   }
 }
 } // namespace LabSet
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

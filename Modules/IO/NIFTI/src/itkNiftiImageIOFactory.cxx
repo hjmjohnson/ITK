@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 NiftiImageIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -53,4 +54,5 @@ NiftiImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<NiftiImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

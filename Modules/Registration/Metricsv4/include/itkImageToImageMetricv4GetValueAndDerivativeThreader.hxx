@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageToImageMetricv4>
 void
@@ -62,6 +63,7 @@ ImageToImageMetricv4GetValueAndDerivativeThreader<ThreadedIndexedContainerPartit
   this->m_Associate->FinalizeThread(threadId);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

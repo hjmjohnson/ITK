@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -41,6 +42,7 @@ ModulusImageFilter<TInputImage1, TInputImage2, TOutputImage>::ModulusImageFilter
   this->SetConstant2(static_cast<typename TInputImage2::PixelType>(5));
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

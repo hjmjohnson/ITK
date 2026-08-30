@@ -18,7 +18,10 @@
 #ifndef itkImageToListSampleAdaptor_hxx
 #define itkImageToListSampleAdaptor_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TImage>
 auto
@@ -115,6 +118,8 @@ ImageToListSampleAdaptor<TImage>::GetTotalFrequency() const -> TotalAbsoluteFreq
 
   return this->Size();
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

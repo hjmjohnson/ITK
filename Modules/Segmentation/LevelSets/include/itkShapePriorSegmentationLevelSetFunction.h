@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ShapePriorSegmentationLevelSetFunction
  *
  * \brief This function is used in ShapePriorSegmentationLevelSetFilter to
@@ -162,6 +163,7 @@ private:
   ShapeFunctionPointer m_ShapeFunction{};
   ScalarValueType      m_ShapePriorWeight{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

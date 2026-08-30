@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelMap
  *  \brief Templated n-dimensional image to store labeled objects.
@@ -479,6 +480,7 @@ private:
   void
   RemovePixel(const LabelObjectContainerIterator & it, const IndexType & idx, bool iEmitModifiedEvent);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

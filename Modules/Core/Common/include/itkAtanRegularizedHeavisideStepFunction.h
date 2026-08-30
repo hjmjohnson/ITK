@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AtanRegularizedHeavisideStepFunction
  *
  * \brief Atan-based implementation of the Regularized (smoothed) Heaviside functions.
@@ -66,6 +67,7 @@ protected:
   AtanRegularizedHeavisideStepFunction() = default;
   ~AtanRegularizedHeavisideStepFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

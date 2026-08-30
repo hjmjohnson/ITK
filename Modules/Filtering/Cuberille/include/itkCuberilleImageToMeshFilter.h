@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CuberilleImageToMeshFilter
  *
@@ -438,6 +439,7 @@ private:
   unsigned int                m_ProjectVertexMaximumNumberOfSteps{ 50 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

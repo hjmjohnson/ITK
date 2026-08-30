@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TubeSpatialObjectPoint
  * \brief Point used for a tube definition
@@ -286,6 +287,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

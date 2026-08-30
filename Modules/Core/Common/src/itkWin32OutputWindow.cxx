@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** */
 HWND Win32OutputWindow::m_OutputWindow = nullptr;
 
@@ -229,4 +230,5 @@ Win32OutputWindow::PromptText(const char * text)
     Object::GlobalWarningDisplayOff();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

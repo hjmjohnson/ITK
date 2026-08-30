@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void ITKCommon_EXPORT
 CompensatedSummationAddElement(float & compensation, float & sum, const float element)
@@ -36,4 +37,5 @@ CompensatedSummationAddElement(double & compensation, double & sum, const double
   CompensatedSummationAddElement(compensation, sum, element, 1);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

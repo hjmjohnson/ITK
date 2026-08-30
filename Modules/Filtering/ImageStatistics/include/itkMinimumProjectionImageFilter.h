@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MinimumProjectionImageFilter
  * \brief Minimum projection
  *
@@ -132,6 +133,7 @@ protected:
   ~MinimumProjectionImageFilter() override = default;
 }; // end
    // MinimumProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

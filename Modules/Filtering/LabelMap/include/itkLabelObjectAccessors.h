@@ -29,7 +29,10 @@
  *
  */
 
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 template <typename TLabelObject>
 class LabelLabelObjectAccessor
@@ -100,6 +103,8 @@ public:
 private:
   AttributeAccessorType m_Accessor;
 };
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

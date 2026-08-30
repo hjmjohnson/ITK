@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NumberToString
  * \brief Convert floating and fixed point numbers to strings
  *
@@ -86,6 +87,7 @@ ConvertNumberToString(const TValue val)
   return convert(val);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

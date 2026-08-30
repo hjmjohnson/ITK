@@ -26,7 +26,10 @@
 
 #include <cmath> // For abs.
 
-namespace itk::Testing
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Testing
 {
 //----------------------------------------------------------------------------
 template <typename TInputImage, typename TOutputImage>
@@ -232,6 +235,8 @@ ComparisonImageFilter<TInputImage, TOutputImage>::VerifyInputInformation() const
 }
 
 
-} // namespace itk::Testing
+} // namespace Testing
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

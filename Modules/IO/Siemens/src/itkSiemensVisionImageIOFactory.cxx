@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 SiemensVisionImageIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -56,4 +57,5 @@ SiemensVisionImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<SiemensVisionImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

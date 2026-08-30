@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PolylineMaskImageFilter
  * \brief Implements image masking operation constrained by a polyline on a plane
@@ -143,6 +144,7 @@ private:
 
   double m_FocalDistance{ 0.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageSliceConstIteratorWithIndex
  * \brief Multi-dimensional image iterator which only walks a region.
  *
@@ -228,6 +229,7 @@ template <typename TImage>
 ImageSliceConstIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageSliceConstIteratorWithIndex<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

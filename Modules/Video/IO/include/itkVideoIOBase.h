@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VideoIOBaseEnums
  * \brief This contains all enum classes used from VideoIOBase class.
  * \ingroup ITKVideoIO
@@ -172,6 +173,7 @@ protected:
   bool               m_WriterOpen{ false };
   bool               m_ReaderOpen{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkVideoIOBase_h

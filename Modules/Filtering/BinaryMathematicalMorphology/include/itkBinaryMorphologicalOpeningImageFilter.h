@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryMorphologicalOpeningImageFilter
  * \brief binary morphological opening of an image.
@@ -114,6 +115,7 @@ private:
 
   PixelType m_BackgroundValue{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

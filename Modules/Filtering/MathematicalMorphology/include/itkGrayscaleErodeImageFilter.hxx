@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 GrayscaleErodeImageFilter<TInputImage, TOutputImage, TKernel>::GrayscaleErodeImageFilter()
   : m_HistogramFilter(HistogramFilterType::New())
@@ -219,5 +220,6 @@ GrayscaleErodeImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(std::os
   print_helper::PrintNumericTrait(os, indent, "Boundary", m_Boundary);
   os << indent << "Algorithm: " << m_Algorithm << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

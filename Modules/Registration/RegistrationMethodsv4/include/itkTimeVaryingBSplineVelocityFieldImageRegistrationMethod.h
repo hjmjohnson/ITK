@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class TimeVaryingBSplineVelocityFieldImageRegistrationMethod
  * \brief Interface method for the current registration framework
@@ -257,6 +258,7 @@ private:
 
   WeightsElementType m_BoundaryWeight{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 extern "C"
 {
@@ -126,4 +127,5 @@ XMLReaderBase::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Filename: " << m_Filename << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

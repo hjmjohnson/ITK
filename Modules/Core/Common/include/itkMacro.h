@@ -41,6 +41,7 @@
 #include "itkWin32Header.h"
 #include "itkConfigure.h"
 #include "itkABINamespace.h"
+#include "itkABINamespace.h"
 #include "ITKCommonExport.h"
 
 #include <typeinfo>
@@ -64,8 +65,10 @@
  * within the itk:: namespace. */
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // end namespace itk - this is here for documentation purposes
-}
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 /** A convenience macro marks variables as not being used by a method,
  * avoiding compile-time warnings. */
@@ -470,6 +473,7 @@ destructor." (Visual Studio 2022/MSVC)
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * The following is used to output debug, warning, and error messages.
  * Use a global function which actually calls:
@@ -520,6 +524,7 @@ extern ITKCommon_EXPORT void
 OutputWindowDisplayGenericOutputText(const char * file, unsigned int line, const char * message);
 /** @ITKEndGrouping */
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // The itkDebugStatement is to be used to protect code that is only used in the itkDebugMacro

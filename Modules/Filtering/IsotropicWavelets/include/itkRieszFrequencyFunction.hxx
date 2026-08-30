@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFunctionValue, unsigned int VImageDimension, typename TInput>
 RieszFrequencyFunction<TFunctionValue, VImageDimension, TInput>::RieszFrequencyFunction()
 {
@@ -162,6 +163,7 @@ RieszFrequencyFunction<TFunctionValue, VImageDimension, TInput>::PrintSelf(std::
     std::cout << ")" << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

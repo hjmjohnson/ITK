@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 IsolatedConnectedImageFilter<TInputImage, TOutputImage>::IsolatedConnectedImageFilter()
@@ -356,6 +357,7 @@ IsolatedConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
   }
   iterate.CompletedStep();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

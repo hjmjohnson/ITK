@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 void
@@ -192,5 +193,6 @@ ChangeLabelLabelMapFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) c
     ++pairToReplace;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

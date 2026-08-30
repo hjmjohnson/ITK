@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Define the number of neighbors
  */
@@ -156,6 +157,7 @@ VectorLinearInterpolateNearestNeighborExtrapolateImageFunction<TInputImage, TCoo
   // since we have ensured that the index lies in the image region
   return this->Superclass::EvaluateAtIndex(insideIndex);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

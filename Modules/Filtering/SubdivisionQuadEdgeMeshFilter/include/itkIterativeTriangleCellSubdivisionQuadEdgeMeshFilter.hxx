@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TCellSubdivisionFilter>
 IterativeTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TCellSubdivisionFilter>::
   IterativeTriangleCellSubdivisionQuadEdgeMeshFilter()
@@ -80,5 +81,6 @@ IterativeTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TCellSubdivisionF
   Superclass::PrintSelf(os, indent);
   std::cout << indent << "Subdivision Resolution Levels: " << m_ResolutionLevels << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

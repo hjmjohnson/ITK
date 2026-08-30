@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionConstIterator
  * \brief A multi-dimensional iterator templated over image type that walks a
  * region of pixels.
@@ -273,6 +274,7 @@ template <typename TImage>
 ImageRegionConstIterator(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRegionConstIterator<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

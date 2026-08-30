@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageToImageMetricv4
  *
  * Computes similarity between regions of two images, using two
@@ -897,6 +898,7 @@ private:
   itkConceptMacro(OnlyDefinedForFloatingPointTypes1, (itk::Concept::IsFloatingPoint<MovingImagePixelValueType>));
   /** @ITKEndGrouping */
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

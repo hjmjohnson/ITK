@@ -60,6 +60,7 @@ struct ForcedFailureTestCase
 // test implementation of NumericTraits designed to fail
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <>
 class NumericTraits<ForcedFailureTestCase> : public std::numeric_limits<ForcedFailureTestCase>
@@ -79,6 +80,7 @@ public:
   static constexpr bool IsInteger = true; // should match that of their base type, so this should fail
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 namespace numeric_traits_test

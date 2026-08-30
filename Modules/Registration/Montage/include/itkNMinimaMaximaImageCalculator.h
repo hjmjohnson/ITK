@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NMinimaMaximaImageCalculator
  *  \brief Computes the N highest and/or lowest intensity values of an image.
  *
@@ -149,6 +150,7 @@ private:
   bool       m_ComputeMinima{ true };
   std::mutex m_Mutex;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

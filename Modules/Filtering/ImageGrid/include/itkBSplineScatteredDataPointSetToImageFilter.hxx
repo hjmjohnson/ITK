@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPointSet, typename TOutputImage>
 BSplineScatteredDataPointSetToImageFilter<TInputPointSet, TOutputImage>::BSplineScatteredDataPointSetToImageFilter()
@@ -1132,6 +1133,7 @@ BSplineScatteredDataPointSetToImageFilter<TInputPointSet, TOutputImage>::PrintSe
   os << indent << "Omega lattice per thread: " << m_OmegaLatticePerThread << std::endl;
   os << indent << "Delta lattice per thread: " << m_DeltaLatticePerThread << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

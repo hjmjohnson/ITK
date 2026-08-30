@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput>
 void
 RegularizedHeavisideStepFunction<TInput, TOutput>::SetEpsilon(const RealType & ieps)
@@ -35,6 +36,7 @@ RegularizedHeavisideStepFunction<TInput, TOutput>::SetEpsilon(const RealType & i
     itkGenericExceptionMacro("ERROR: Epsilon needs to be greater than " << NumericTraits<RealType>::epsilon());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

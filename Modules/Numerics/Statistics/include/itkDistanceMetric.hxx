@@ -18,7 +18,10 @@
 #ifndef itkDistanceMetric_hxx
 #define itkDistanceMetric_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TVector>
 DistanceMetric<TVector>::DistanceMetric()
@@ -66,6 +69,8 @@ DistanceMetric<TVector>::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Origin: " << this->GetOrigin() << std::endl;
   os << indent << "MeasurementVectorSize: " << this->GetMeasurementVectorSize() << std::endl;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage,
           typename TOutputImage,
@@ -670,6 +671,7 @@ ResampleImageFilter<TInputImage, TOutputImage, TInterpolatorPrecisionType, TTran
   os << indent << "Extrapolator: " << m_Extrapolator.GetPointer() << std::endl;
   itkPrintSelfBooleanMacro(UseReferenceImage);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

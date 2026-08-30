@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GradientVectorFlowImageFilter
  * \brief
@@ -157,6 +158,7 @@ private:
   typename Superclass::InputImagePointer m_CImage{}; // store the $c_i$ value for
                                                      // every pixel
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

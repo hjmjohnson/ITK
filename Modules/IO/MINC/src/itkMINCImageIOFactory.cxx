@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MINCImageIOFactory::MINCImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ MINCImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<MINCImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -80,6 +81,7 @@ PocketFFTInverseFFTImageFilter<TInputImage, TOutputImage>::GetSizeGreatestPrimeF
   return 11;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

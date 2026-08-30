@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TData>
 auto
@@ -270,6 +271,7 @@ CSVArray2DDataObject<TData>::FillMatrix(TData value)
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TLabelImage, typename TOutputImage>
 LabelOverlayImageFilter<TInputImage, TLabelImage, TOutputImage>::LabelOverlayImageFilter()
@@ -105,6 +106,7 @@ LabelOverlayImageFilter<TInputImage, TLabelImage, TOutputImage>::PrintSelf(std::
      << "BackgroundValue: " << static_cast<typename NumericTraits<LabelPixelType>::PrintType>(m_BackgroundValue)
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

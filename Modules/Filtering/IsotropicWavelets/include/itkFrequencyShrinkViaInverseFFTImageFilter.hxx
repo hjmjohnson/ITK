@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <class TImageType>
 FrequencyShrinkViaInverseFFTImageFilter<TImageType>::FrequencyShrinkViaInverseFFTImageFilter()
 {
@@ -186,6 +187,7 @@ FrequencyShrinkViaInverseFFTImageFilter<TImageType>::GenerateOutputInformation()
 
   outputPtr->SetLargestPossibleRegion(outputLargestPossibleRegion);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

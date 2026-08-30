@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**  Constructor.  */
 MultipleValuedVnlCostFunctionAdaptor::MultipleValuedVnlCostFunctionAdaptor(unsigned int spaceDimension,
                                                                            unsigned int numberOfValues)
@@ -242,4 +243,5 @@ MultipleValuedVnlCostFunctionAdaptor::GetCachedCurrentParameters() const
 {
   return m_CachedCurrentParameters;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

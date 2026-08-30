@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MemoryProbesCollectorBase
  *  \brief Aggregates a set of memory probes.
  *
@@ -39,6 +40,7 @@ class ITKCommon_EXPORT MemoryProbesCollectorBase : public ResourceProbesCollecto
 public:
   ~MemoryProbesCollectorBase() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMemoryProbesCollectorBase_h

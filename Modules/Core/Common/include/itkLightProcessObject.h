@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LightProcessObject
  * \brief LightProcessObject is the base class for all process objects (source,
           filters, mappers) in the Insight data processing pipeline.
@@ -137,6 +138,7 @@ private:
   bool  m_AbortGenerateData{};
   float m_Progress{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

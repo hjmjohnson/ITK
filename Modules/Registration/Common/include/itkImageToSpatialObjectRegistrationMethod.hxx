@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingSpatialObject>
 ImageToSpatialObjectRegistrationMethod<TFixedImage, TMovingSpatialObject>::ImageToSpatialObjectRegistrationMethod()
@@ -230,6 +231,7 @@ ImageToSpatialObjectRegistrationMethod<TFixedImage, TMovingSpatialObject>::Print
   os << indent << "Last    Transform Parameters: " << m_LastTransformParameters << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

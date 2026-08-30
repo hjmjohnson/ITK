@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 Version::Version() = default;
 
 Version::~Version() = default;
@@ -62,4 +63,5 @@ Version::GetITKSourceVersion()
 {
   return ITK_SOURCE_VERSION;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -620,6 +621,7 @@ VariationalRegistrationElasticRegularizer<TDisplacementField>::PrintSelf(std::os
   os << m_Spacing << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

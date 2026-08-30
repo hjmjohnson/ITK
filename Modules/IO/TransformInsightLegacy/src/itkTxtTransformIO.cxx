@@ -28,6 +28,7 @@
 #include <sstream>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TParametersValueType>
 TxtTransformIOTemplate<TParametersValueType>::TxtTransformIOTemplate() = default;
 
@@ -317,4 +318,5 @@ template class ITKIOTransformInsightLegacy_EXPORT TxtTransformIOTemplate<float>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

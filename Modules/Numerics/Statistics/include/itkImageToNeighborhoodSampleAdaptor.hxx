@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Statistics
 {
 
@@ -239,6 +240,7 @@ operator<<(std::ostream & os, const std::vector<ConstNeighborhoodIterator<TImage
   return os;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

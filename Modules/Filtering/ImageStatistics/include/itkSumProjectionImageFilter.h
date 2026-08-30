@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SumProjectionImageFilter
  * \brief Sum projection
  *
@@ -113,6 +114,7 @@ protected:
   SumProjectionImageFilter() = default;
   ~SumProjectionImageFilter() override = default;
 }; // end SumProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

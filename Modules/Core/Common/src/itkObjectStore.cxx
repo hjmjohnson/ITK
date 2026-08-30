@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Define how to print enumerations */
 std::ostream &
 operator<<(std::ostream & out, const ObjectStoreEnums::GrowthStrategy value)
@@ -35,4 +36,5 @@ operator<<(std::ostream & out, const ObjectStoreEnums::GrowthStrategy value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

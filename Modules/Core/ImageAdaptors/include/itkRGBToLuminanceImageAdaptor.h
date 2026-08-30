@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Accessor
 {
 /**
@@ -99,6 +100,7 @@ protected:
   RGBToLuminanceImageAdaptor() = default;
   ~RGBToLuminanceImageAdaptor() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

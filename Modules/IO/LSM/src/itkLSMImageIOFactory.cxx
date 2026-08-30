@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 LSMImageIOFactory::LSMImageIOFactory()
 {
   this->RegisterOverride(
@@ -59,4 +60,5 @@ LSMImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<LSMImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

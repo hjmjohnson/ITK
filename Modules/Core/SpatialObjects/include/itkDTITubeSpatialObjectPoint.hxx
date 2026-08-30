@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TPointDimension>
 DTITubeSpatialObjectPoint<TPointDimension>::DTITubeSpatialObjectPoint()
@@ -155,6 +156,7 @@ DTITubeSpatialObjectPoint<TPointDimension>::GetField(DTITubeSpatialObjectPointFi
   return -1;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

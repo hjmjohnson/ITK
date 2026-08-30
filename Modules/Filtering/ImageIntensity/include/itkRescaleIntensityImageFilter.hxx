@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 RescaleIntensityImageFilter<TInputImage, TOutputImage>::RescaleIntensityImageFilter()
@@ -100,6 +101,7 @@ RescaleIntensityImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   print_helper::PrintNumericTrait(os, indent, "Output Maximum", this->m_OutputMaximum);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

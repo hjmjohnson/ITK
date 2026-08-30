@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class GaussianExponentialDiffeomorphicTransform
  * \brief Exponential transform using a Gaussian smoothing kernel.
@@ -137,6 +138,7 @@ private:
   ScalarType m_GaussianSmoothingVarianceForTheConstantVelocityField{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

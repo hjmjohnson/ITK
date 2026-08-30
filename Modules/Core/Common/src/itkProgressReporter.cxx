@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 ProgressReporter::ProgressReporter(ProcessObject * filter,
                                    ThreadIdType    threadId,
@@ -78,4 +79,5 @@ ProgressReporter::~ProgressReporter()
     m_Filter->GetMultiThreader()->SetUpdateProgress(m_Filter->GetThreaderUpdateProgress());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const LBFGS2Optimizerv4Enums::LineSearchMethod value)
@@ -40,4 +41,5 @@ operator<<(std::ostream & out, const LBFGS2Optimizerv4Enums::LineSearchMethod va
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

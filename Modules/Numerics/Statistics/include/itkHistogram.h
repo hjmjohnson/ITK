@@ -25,7 +25,10 @@
 #include "itkDenseFrequencyContainer2.h"
 #include "itkSparseFrequencyContainer2.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 /**
@@ -513,7 +516,9 @@ private:
 
   bool m_ClipBinsAtEnds{ true };
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkHistogram.hxx"

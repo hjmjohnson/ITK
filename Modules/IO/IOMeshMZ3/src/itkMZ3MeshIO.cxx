@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 MZ3MeshIO::MZ3MeshIO()
   : m_Internal(std::make_unique<MZ3MeshIOInternals>())
@@ -752,4 +753,5 @@ MZ3MeshIO::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

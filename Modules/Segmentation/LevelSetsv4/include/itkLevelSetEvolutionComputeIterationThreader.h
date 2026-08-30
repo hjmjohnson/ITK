@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class LevelSetEvolutionComputeIterationThreader
@@ -209,6 +210,7 @@ protected:
   NodePairsPerThreadType m_NodePairsPerThread{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

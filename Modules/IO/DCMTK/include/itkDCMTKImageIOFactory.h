@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DCMTKImageIOFactory
  * \brief Create instances of DCMTKImageIO objects using an object factory.
@@ -66,6 +67,7 @@ protected:
   DCMTKImageIOFactory();
   ~DCMTKImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TParametersValueType, unsigned int VDimension>
 void
 ThinPlateR2LogRSplineKernelTransform<TParametersValueType, VDimension>::ComputeG(const InputVectorType & x,
@@ -55,5 +56,6 @@ ThinPlateR2LogRSplineKernelTransform<TParametersValueType, VDimension>::ComputeD
     ++sp;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPointSet, typename TOutput, typename TCoordinate>
 ManifoldParzenWindowsPointSetFunction<TPointSet, TOutput, TCoordinate>::ManifoldParzenWindowsPointSetFunction()
@@ -206,6 +207,7 @@ ManifoldParzenWindowsPointSetFunction<TPointSet, TOutput, TCoordinate>::PrintSel
   os << indent << "Use anisotropic covariances: " << this->m_UseAnisotropicCovariances << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

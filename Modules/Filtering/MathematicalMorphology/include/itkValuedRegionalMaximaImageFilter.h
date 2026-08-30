@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ValuedRegionalMaximaImageFilter
  *
  * \brief Transforms the image so that any pixel that is not a
@@ -96,6 +97,7 @@ protected:
   ~ValuedRegionalMaximaImageFilter() override = default;
 }; // end
    // ValuedRegionalMaximaImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

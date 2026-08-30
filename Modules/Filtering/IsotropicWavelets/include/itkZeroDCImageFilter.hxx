@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Default constructor
  */
@@ -67,6 +68,7 @@ ZeroDCImageFilter<TImageType>::PrintSelf(std::ostream & os, Indent indent) const
   itkPrintSelfObjectMacro(StatisticsFilter);
   itkPrintSelfObjectMacro(SubtractFilter);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

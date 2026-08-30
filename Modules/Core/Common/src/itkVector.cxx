@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  Methods specialized by dimension
  *
@@ -56,4 +57,5 @@ CrossProduct(const Vector<int, 3> & a, const Vector<int, 3> & b)
   c[2] = a[0] * b[1] - a[1] * b[0];
   return c;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

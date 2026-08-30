@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 BinaryErodeImageFilter<TInputImage, TOutputImage, TKernel>::BinaryErodeImageFilter()
 {
@@ -471,6 +472,7 @@ BinaryErodeImageFilter<TInputImage, TOutput, TKernel>::PrintSelf(std::ostream & 
   Superclass::PrintSelf(os, indent);
   print_helper::PrintNumericTrait(os, indent, "Dilate Value", this->GetForegroundValue());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

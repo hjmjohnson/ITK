@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ComposeImageFilter
  * \brief ComposeImageFilter combine several scalar images into a multicomponent image
@@ -106,6 +107,7 @@ private:
   using InputIteratorType = ImageScanlineConstIterator<InputImageType>;
   using InputIteratorContainerType = std::vector<InputIteratorType>;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

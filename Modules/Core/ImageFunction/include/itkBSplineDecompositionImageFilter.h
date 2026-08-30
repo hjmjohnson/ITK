@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BSplineDecompositionImageFilter
  * \brief Calculates the B-Spline coefficients of an image. Spline order may be from 0 to 5.
@@ -190,6 +191,7 @@ private:
   /** Direction for iterator incrementing. Default is 0. */
   unsigned int m_IteratorDirection{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh>
 void
 MeshFileWriter<TInputMesh>::SetInput(const InputMeshType * input)
@@ -461,6 +462,7 @@ MeshFileWriter<TInputMesh>::PrintSelf(std::ostream & os, Indent indent) const
   itkPrintSelfBooleanMacro(UseCompression);
   itkPrintSelfBooleanMacro(FileTypeIsBINARY);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

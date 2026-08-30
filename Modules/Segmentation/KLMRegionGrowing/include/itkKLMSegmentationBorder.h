@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class KLMDynamicBorderArray
  * \brief  Object maintaining a reference to a list of borders associated
@@ -193,6 +194,7 @@ private:
   KLMSegmentationRegion * m_Region1{};
   KLMSegmentationRegion * m_Region2{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

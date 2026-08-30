@@ -62,6 +62,7 @@ struct FFTWGlobalConfigurationGlobals;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * A set of functions for defining wisdom filename
  * generation strategies.
@@ -375,6 +376,7 @@ private:
   // wisdom file creation policies.
   WisdomFilenameGeneratorBase * m_WisdomFilenameGenerator;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif
 #endif

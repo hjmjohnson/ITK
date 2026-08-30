@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineTransformParametersAdaptor
  * \brief BSplineTransformParametersAdaptor adapts a BSplineTransform to the
  * new specified fixed parameters.
@@ -156,6 +157,7 @@ private:
   PhysicalDimensionsType m_RequiredTransformDomainPhysicalDimensions{};
 
 }; // class BSplineTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

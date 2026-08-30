@@ -61,6 +61,7 @@ WriteDebug(const TImage * out, const char * filename)
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TRealPixelType, unsigned int VImageDimension>
 PhaseCorrelationOptimizer<TRealPixelType, VImageDimension>::PhaseCorrelationOptimizer()
@@ -640,6 +641,7 @@ PhaseCorrelationOptimizer<TRealPixelType, VImageDimension>::ComputeOffset()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TBinaryPriorImage>
 VoronoiSegmentationImageFilterBase<TInputImage, TOutputImage, TBinaryPriorImage>::VoronoiSegmentationImageFilterBase()
@@ -1064,6 +1065,7 @@ VoronoiSegmentationImageFilterBase<TInputImage, TOutputImage, TBinaryPriorImage>
   // set the output requested region to the LargestPossibleRegion
   this->GetOutput()->SetRequestedRegion(this->GetOutput()->GetLargestPossibleRegion());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

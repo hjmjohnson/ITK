@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class KappaSigmaThresholdImageCalculator
  * \brief Computes a Kappa-Sigma-Clipping threshold for an image.
@@ -131,6 +132,7 @@ private:
   InputImageConstPointer m_Image{};
   MaskImageConstPointer  m_Mask{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 MeshIOFactory::MeshIOFactory() = default;
 
@@ -66,4 +67,5 @@ MeshIOFactory::CreateMeshIO(const char * path, IOFileModeEnum mode)
   return nullptr;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

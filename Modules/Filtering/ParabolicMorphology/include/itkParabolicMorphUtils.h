@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // contact point algorithm
 template <typename LineBufferType, typename RealType, typename TInputPixel, bool doDilate>
 void
@@ -316,5 +317,6 @@ doOneDimension(TInIter &          inputIterator,
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

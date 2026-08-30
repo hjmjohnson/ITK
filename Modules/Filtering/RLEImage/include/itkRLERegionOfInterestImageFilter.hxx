@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename RLEImageTypeIn, typename RLEImageTypeOut>
 void
 copyImagePortion(ImageRegionConstIterator<typename RLEImageTypeIn::BufferType> iIt,
@@ -692,6 +693,7 @@ RegionOfInterestImageFilter<RLEImage<TPixel, VImageDimension, CounterType>, Imag
     ++iIt;
   }
 } // DynamicThreadedGenerateData
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkRLERegionOfInterestImageFilter_hxx

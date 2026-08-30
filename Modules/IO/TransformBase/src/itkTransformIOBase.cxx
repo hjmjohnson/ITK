@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 TransformIOBaseTemplate<TParametersValueType>::TransformIOBaseTemplate() = default;
@@ -133,4 +134,5 @@ template class ITKIOTransformBase_EXPORT TransformIOBaseTemplate<float>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

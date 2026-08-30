@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DiffusionTensor3DReconstructionImageFilterEnums
  * \brief Contains all enum classes used by DiffusionTensor3DReconstructionImageFilter class.
  * \ingroup ITKDiffusionTensorImage
@@ -347,6 +348,7 @@ private:
   /** Mask Image Present */
   bool m_MaskImagePresent{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

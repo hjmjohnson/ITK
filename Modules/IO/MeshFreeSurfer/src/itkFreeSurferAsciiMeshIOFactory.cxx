@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 FreeSurferAsciiMeshIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -58,4 +59,5 @@ FreeSurferAsciiMeshIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<FreeSurferAsciiMeshIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

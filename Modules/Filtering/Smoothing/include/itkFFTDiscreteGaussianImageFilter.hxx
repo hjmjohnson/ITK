@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 FFTDiscreteGaussianImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
@@ -214,6 +215,7 @@ FFTDiscreteGaussianImageFilter<TInputImage, TOutputImage>::GenerateData()
   // bulk data
   this->GraftOutput(output);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

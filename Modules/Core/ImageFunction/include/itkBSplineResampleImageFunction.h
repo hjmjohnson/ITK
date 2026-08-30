@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BSplineResampleImageFunction
  * \brief Resample image intensity from a BSpline coefficient image.
@@ -90,6 +91,7 @@ protected:
   BSplineResampleImageFunction() = default;
   ~BSplineResampleImageFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

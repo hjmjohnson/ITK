@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HConvexImageFilter
  * \brief Identify local maxima whose height above the baseline is greater than h.
  *
@@ -123,6 +124,7 @@ private:
   unsigned long       m_NumberOfIterationsUsed{ 1 };
   bool                m_FullyConnected{ false };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

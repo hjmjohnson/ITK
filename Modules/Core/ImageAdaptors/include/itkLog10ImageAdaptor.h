@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Accessor
 {
 /**
@@ -98,6 +99,7 @@ protected:
   Log10ImageAdaptor() = default;
   ~Log10ImageAdaptor() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

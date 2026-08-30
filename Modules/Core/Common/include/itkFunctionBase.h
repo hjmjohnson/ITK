@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FunctionBase
  * \brief Base class for all ITK function objects
@@ -69,6 +70,7 @@ protected:
   FunctionBase() = default;
   ~FunctionBase() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage, typename TSourceImage, typename TOutputImage>
@@ -307,6 +308,7 @@ PasteImageFilter<TInputImage, TSourceImage, TOutputImage>::PrintSelf(std::ostrea
   print_helper::PrintNumericTrait(os, indent, "DestinationIndex", m_DestinationIndex);
   os << indent << "DestinationSkipAxes: " << m_DestinationSkipAxes << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WatershedImageFilter
  *  \brief A low-level image analysis algorithm that automatically produces a
  *   hierarchy of segmented, labeled images from a scalar-valued image input.
@@ -298,6 +299,7 @@ private:
 
   TimeStamp m_GenerateDataMTime{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

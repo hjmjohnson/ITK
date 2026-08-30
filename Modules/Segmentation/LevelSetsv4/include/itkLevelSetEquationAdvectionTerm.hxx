@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TLevelSetContainer>
 LevelSetEquationAdvectionTerm<TInput, TLevelSetContainer>::LevelSetEquationAdvectionTerm()
 {
@@ -180,6 +181,7 @@ LevelSetEquationAdvectionTerm<TInput, TLevelSetContainer>::Value(const LevelSetI
   return oValue;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

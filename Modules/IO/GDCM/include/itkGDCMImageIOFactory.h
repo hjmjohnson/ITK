@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GDCMImageIOFactory
  * \brief Create instances of GDCMImageIO objects using an object factory.
@@ -66,6 +67,7 @@ protected:
   GDCMImageIOFactory();
   ~GDCMImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

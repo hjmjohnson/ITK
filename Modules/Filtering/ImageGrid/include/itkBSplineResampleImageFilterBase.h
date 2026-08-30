@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BSplineResampleImageFilterBase
  *  \brief Uses the "l2" spline pyramid implementation of B-Spline Filters to
@@ -186,6 +187,7 @@ private:
   std::vector<double> m_Scratch{}; // temp storage for processing
                                    // of Coefficients
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

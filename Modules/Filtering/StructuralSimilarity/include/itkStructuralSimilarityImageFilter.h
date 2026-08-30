@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class StructuralSimilarityImageFilter
  * \brief Computes the Structural Similarity Index Measure (SSIM) between two images.
@@ -286,6 +287,7 @@ private:
 
   double m_MeanSSIM{ 0.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

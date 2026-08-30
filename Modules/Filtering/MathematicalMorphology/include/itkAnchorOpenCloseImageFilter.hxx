@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TKernel, typename TCompare1, typename TCompare2>
 AnchorOpenCloseImageFilter<TImage, TKernel, TCompare1, TCompare2>::AnchorOpenCloseImageFilter()
   : m_Boundary1(InputImagePixelType{})
@@ -207,6 +208,7 @@ AnchorOpenCloseImageFilter<TImage, TKernel, TCompare1, TCompare2>::PrintSelf(std
   print_helper::PrintNumericTrait(os, indent, "Boundary2", m_Boundary2);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

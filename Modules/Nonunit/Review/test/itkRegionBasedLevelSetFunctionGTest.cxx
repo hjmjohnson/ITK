@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TOutput>
 class ConstantDerivativeHeavisideStepFunction : public HeavisideStepFunctionBase<TInput, TOutput>
@@ -148,6 +149,7 @@ protected:
   ~RegionBasedLevelSetReinitTestFunction() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace

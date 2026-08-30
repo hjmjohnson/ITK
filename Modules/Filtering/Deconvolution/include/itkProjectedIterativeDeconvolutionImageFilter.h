@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ProjectedIterativeDeconvolutionImageFilter
  * \brief Mix-in class that adds a projection step after each
@@ -87,6 +88,7 @@ private:
 
   typename ProjectionFilterType::Pointer m_ProjectionFilter{ nullptr };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

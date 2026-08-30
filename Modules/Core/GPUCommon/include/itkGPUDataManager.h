@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUDataManager
  * \brief GPU memory manager implemented using OpenCL. Required by GPUImage class.
  *
@@ -168,6 +169,7 @@ protected:
   std::mutex m_Mutex{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

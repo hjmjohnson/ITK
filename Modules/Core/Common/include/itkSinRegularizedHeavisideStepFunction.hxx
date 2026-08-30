@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput>
 auto
 SinRegularizedHeavisideStepFunction<TInput, TOutput>::Evaluate(const InputType & input) const -> OutputType
@@ -59,6 +60,7 @@ SinRegularizedHeavisideStepFunction<TInput, TOutput>::EvaluateDerivative(const I
   return static_cast<OutputType>(0.5 * angleFactor * std::cos(angle));
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

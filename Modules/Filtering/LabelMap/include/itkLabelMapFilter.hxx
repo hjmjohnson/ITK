@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 LabelMapFilter<TInputImage, TOutputImage>::LabelMapFilter()
 {
@@ -122,6 +123,7 @@ LabelMapFilter<TInputImage, TOutputImage>::ThreadedProcessLabelObject(LabelObjec
 {
   // the subclass should override this method
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

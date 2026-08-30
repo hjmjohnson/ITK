@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DecimationQuadEdgeMeshFilter
  * \brief
@@ -119,6 +120,7 @@ protected:
   /** Cache pointer to output to use in inner loops */
   OutputMeshType * m_OutputMesh{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

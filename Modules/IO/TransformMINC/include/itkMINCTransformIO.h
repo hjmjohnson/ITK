@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class MINCTransformIOTemplate
  *
@@ -112,6 +113,7 @@ private:
 /** This helps to meet backward compatibility */
 using MINCTransformIO = MINCTransformIOTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // Note: Explicit instantiation is done in itkMINCTransformIO.cxx
@@ -137,6 +139,7 @@ using MINCTransformIO = MINCTransformIOTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -146,6 +149,7 @@ extern template class ITKIOTransformMINC_EXPORT_EXPLICIT MINCTransformIOTemplate
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformMINC_EXPORT_EXPLICIT
 #endif

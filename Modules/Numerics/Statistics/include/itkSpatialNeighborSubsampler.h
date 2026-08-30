@@ -21,7 +21,10 @@
 #include "itkRegionConstrainedSubsampler.h"
 #include "itkImageHelper.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class SpatialNeighborSubsampler
@@ -126,7 +129,9 @@ protected:
   bool       m_RadiusInitialized{};
 }; // end of class SpatialNeighborSubsampler
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkSpatialNeighborSubsampler.hxx"

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObjectToImageStatisticsCalculator
  * This calculator computes the mean and the covariance matrices of a certain
@@ -144,6 +145,7 @@ private:
 
   typename SampleType::Pointer m_Sample{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

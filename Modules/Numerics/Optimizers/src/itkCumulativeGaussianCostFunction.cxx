@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 CumulativeGaussianCostFunction::CumulativeGaussianCostFunction() = default;
 
 CumulativeGaussianCostFunction::~CumulativeGaussianCostFunction() = default;
@@ -208,4 +209,5 @@ CumulativeGaussianCostFunction::PrintSelf(std::ostream & os, Indent indent) cons
 
   os << indent << "Parameters: " << m_Parameters << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

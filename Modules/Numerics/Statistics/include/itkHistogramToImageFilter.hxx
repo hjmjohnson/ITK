@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename THistogram, typename TImage, typename TFunction>
 HistogramToImageFilter<THistogram, TImage, TFunction>::HistogramToImageFilter()
@@ -155,6 +156,7 @@ HistogramToImageFilter<THistogram, TImage, TFunction>::PrintSelf(std::ostream & 
   os << indent << "Sum of frequencies of measurement vectors of the histogram: " << m_Functor.GetTotalFrequency()
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

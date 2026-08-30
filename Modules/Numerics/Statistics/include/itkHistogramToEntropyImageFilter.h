@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HistogramToEntropyImageFilter
  * \brief The class takes a histogram as an input and gives the entropy
@@ -127,6 +128,7 @@ protected:
   HistogramToEntropyImageFilter() = default;
   ~HistogramToEntropyImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

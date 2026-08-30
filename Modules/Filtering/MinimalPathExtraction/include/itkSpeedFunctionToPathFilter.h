@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SpeedFunctionToPathFilter
  * \brief Extracts a path from a speed function between a start point
@@ -185,6 +186,7 @@ protected:
   InputImagePointer                                  m_CurrentArrivalFunction;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

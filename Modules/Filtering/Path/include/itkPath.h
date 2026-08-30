@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Path
  * \brief  Represent a path through ND Space
@@ -133,6 +134,7 @@ protected:
     return IndexType{};
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

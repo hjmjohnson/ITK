@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 template <typename TInputMesh, typename TOutputMesh, typename TSolverTraits>
 ParameterizationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::ParameterizationQuadEdgeMeshFilter()
@@ -191,6 +192,7 @@ ParameterizationQuadEdgeMeshFilter<TInputMesh, TOutputMesh, TSolverTraits>::Prin
   os << indent << "BorderTransform: " << m_BorderTransform << std::endl;
   os << indent << "CoefficientsMethod: " << m_CoefficientsMethod << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

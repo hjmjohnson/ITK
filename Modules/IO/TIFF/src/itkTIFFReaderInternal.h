@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class ITKIOTIFF_HIDDEN TIFFReaderInternal
 {
@@ -71,6 +72,7 @@ public:
   bool m_ErrorSilence{ false };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkTIFFReaderInternal_h

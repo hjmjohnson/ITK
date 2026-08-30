@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 bool
 TIFFImageIO::CanReadFile(const char * file)
@@ -1731,4 +1732,5 @@ TIFFImageIO::RGBAImageToBuffer(void * out, const uint32_t * tempImage)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

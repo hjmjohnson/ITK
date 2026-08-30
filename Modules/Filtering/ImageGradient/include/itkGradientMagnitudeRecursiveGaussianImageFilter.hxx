@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 GradientMagnitudeRecursiveGaussianImageFilter<TInputImage,
@@ -259,6 +260,7 @@ GradientMagnitudeRecursiveGaussianImageFilter<TInputImage, TOutputImage>::Genera
   m_SqrtFilter->UpdateLargestPossibleRegion();
   this->GraftOutput(m_SqrtFilter->GetOutput());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

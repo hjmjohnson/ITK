@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConvolutionImageFilterBaseEnums
  * \brief Contains all enum classes used by ConvolutionImageFilterBase class.
  * \ingroup ITKConvolution
@@ -169,6 +170,7 @@ private:
 
   OutputRegionModeEnum m_OutputRegionMode{ ConvolutionImageFilterBaseEnums::ConvolutionImageFilterOutputRegion::SAME };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

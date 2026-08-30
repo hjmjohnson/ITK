@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PyImageFilter
  * \brief ImageToImageFilter subclass that calls a Python callable object, e.g.
@@ -125,6 +126,7 @@ private:
   PyObject * m_GenerateDataCallable{ nullptr };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

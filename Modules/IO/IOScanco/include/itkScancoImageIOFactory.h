@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScancoImageIOFactory
  * \brief Create instances of ScancoImageIO objects using an object factory.
  * \ingroup ITKIOScanco
@@ -65,6 +66,7 @@ protected:
   ScancoImageIOFactory();
   ~ScancoImageIOFactory() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

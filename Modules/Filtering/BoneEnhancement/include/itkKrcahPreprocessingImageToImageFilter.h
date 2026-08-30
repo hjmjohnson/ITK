@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class KrcahPreprocessingImageToImageFilter
  * \brief Perform preprocessing as defined by Krcah et al
  *
@@ -136,6 +137,7 @@ private:
   typename MultiplyFilterType::Pointer  m_MultiplyFilter;
   typename AddFilterType::Pointer       m_AddFilter;
 }; // end class
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

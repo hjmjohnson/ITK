@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput,   // LevelSetImageType
           typename TFeature, // FeatureImageType
@@ -139,6 +140,7 @@ public:
   SingleData * m_LevelSetDataPointerVector[19];
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 int

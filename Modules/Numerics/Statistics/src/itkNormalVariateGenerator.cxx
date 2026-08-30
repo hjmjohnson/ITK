@@ -19,7 +19,10 @@
 
 #include "itkNormalVariateGenerator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 NormalVariateGenerator::NormalVariateGenerator()
   : m_Scale(30000000.0)
@@ -476,4 +479,6 @@ recalcsumsq:
   m_ActualRSD = 1.0 / ts; /* Reciprocal of actual Standard Deviation */
   goto startpass;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

@@ -24,7 +24,10 @@
 #include "itk_eigen.h"
 #include ITK_EIGEN(Dense)
 
-namespace itk::bridge
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace bridge
 {
 namespace Math
 {
@@ -85,6 +88,8 @@ CholeskyLowerTriangle(const vnl_matrix<T> & A)
 }
 
 } // namespace Math
-} // namespace itk::bridge
+} // namespace bridge
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkBridgeCholeskySolve_h

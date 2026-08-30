@@ -24,7 +24,10 @@
 #include "itkProjectionImageFilter.h"
 #include "itkTestingMacros.h"
 
-namespace itk::ProjectionImageFilterNamespace::Function
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace ProjectionImageFilterNamespace::Function
 {
 
 template <typename TInputPixel, typename TOutputPixel>
@@ -62,7 +65,9 @@ public:
 
   bool m_IsForeground{ false };
 };
-} // namespace itk::ProjectionImageFilterNamespace::Function
+} // namespace ProjectionImageFilterNamespace::Function
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 // end namespace ProjectionImageFilterNamespace
 

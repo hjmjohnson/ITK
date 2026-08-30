@@ -24,6 +24,7 @@
 #include <string>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GradientDescentOptimizerEnums
  * \brief Contains all enum classes in the GradientDescentOptimizer class.
  * \ingroup ITKOptimizers
@@ -196,6 +197,7 @@ private:
 extern ITKOptimizers_EXPORT std::ostream &
 operator<<(std::ostream & out, const GradientDescentOptimizer::StopConditionGradientDescentOptimizerEnum value);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

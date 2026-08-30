@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TKernelImage, typename TOutputImage, typename TInternalPrecision>
 RichardsonLucyDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TInternalPrecision>::
@@ -154,6 +155,7 @@ RichardsonLucyDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, 
   this->Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

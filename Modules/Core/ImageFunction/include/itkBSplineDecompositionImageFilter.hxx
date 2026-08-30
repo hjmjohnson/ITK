@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 BSplineDecompositionImageFilter<TInputImage, TOutputImage>::BSplineDecompositionImageFilter()
@@ -355,6 +356,7 @@ BSplineDecompositionImageFilter<TInputImage, TOutputImage>::GenerateData()
   // Clean up
   m_Scratch.clear();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

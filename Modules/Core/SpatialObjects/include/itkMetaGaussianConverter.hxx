@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 auto
@@ -85,6 +86,7 @@ MetaGaussianConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObject
   return metaGaussian;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class WarpImageFilter
  * \brief Warps an image using an input displacement field.
@@ -292,6 +293,7 @@ private:
   SizeType            m_OutputSize{};       // Size of the output image
   IndexType           m_OutputStartIndex{}; // output image start index
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

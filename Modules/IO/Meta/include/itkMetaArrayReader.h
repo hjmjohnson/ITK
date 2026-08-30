@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class ITKIOMeta_EXPORT MetaArrayReader : public LightProcessObject
 {
 public:
@@ -252,6 +253,7 @@ private:
 
   void * m_Buffer{ nullptr };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMetaArrayReader_h

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SpatialFunctionImageEvaluatorFilter
  * \brief Evaluates a SpatialFunction onto a source image
  *
@@ -103,6 +104,7 @@ private:
   /** The function that will be evaluated over the image */
   FunctionType * m_PixelFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

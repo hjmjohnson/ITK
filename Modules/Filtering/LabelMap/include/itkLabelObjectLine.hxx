@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VImageDimension>
 LabelObjectLine<VImageDimension>::LabelObjectLine()
   : m_Length(SizeValueType{})
@@ -126,6 +127,7 @@ LabelObjectLine<VImageDimension>::PrintSelf(std::ostream & os, Indent indent) co
   os << indent << "Index: " << this->m_Index << std::endl;
   os << indent << "Length: " << this->m_Length << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

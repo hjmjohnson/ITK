@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Macro added in libtiff 4.5.0
 #if defined(TIFFLIB_AT_LEAST)
@@ -300,4 +301,5 @@ TIFFReaderInternal::CanRead()
           !(this->m_Photometrics == PHOTOMETRIC_MINISWHITE && this->m_SampleFormat == SAMPLEFORMAT_IEEEFP));
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 MeanImageFilter<TInputImage, TOutputImage>::MeanImageFilter()
 {
@@ -151,6 +152,7 @@ MeanImageFilter<TInputImage, TOutputImage>::GenerateDataInSubregion(
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -20,9 +20,11 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 StoppingCriterionBase::StoppingCriterionBase() = default;
 
 StoppingCriterionBase::~StoppingCriterionBase() = default;
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

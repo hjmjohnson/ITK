@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -1798,4 +1799,5 @@ VTIImageIO::Write(const void * buffer)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

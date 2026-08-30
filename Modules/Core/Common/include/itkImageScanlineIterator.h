@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageScanlineIterator
  * \brief A multi-dimensional iterator templated over image type that walks a
  * region of pixels, scanline by scanline or in the direction of the
@@ -103,6 +104,7 @@ protected:
 template <typename TImage>
 ImageScanlineIterator(SmartPointer<TImage>, const typename TImage::RegionType &) -> ImageScanlineIterator<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

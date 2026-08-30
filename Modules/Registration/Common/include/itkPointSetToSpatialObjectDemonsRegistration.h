@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PointSetToSpatialObjectDemonsRegistration
  * \brief Implementation of Demons Registration between a PointSet and a SpatialObject
  *
@@ -92,6 +93,7 @@ private:
   MovingSpatialObjectConstPointer m_MovingSpatialObject{};
   FixedPointSetConstPointer       m_FixedPointSet{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

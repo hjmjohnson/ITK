@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DirectFourierReconstructionImageToImageFilter
  * \brief Direct fourier reconstruction filter of a tomographic volume.
@@ -185,6 +186,7 @@ private:
   RegionType m_InputRequestedRegion{}; /**< The region requested from* the input
                                        image   */
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

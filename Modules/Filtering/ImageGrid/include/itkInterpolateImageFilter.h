@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class InterpolateImageFilter
  * \brief Interpolate an image from two N-D images.
@@ -138,6 +139,7 @@ private:
 
   double m_Distance{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

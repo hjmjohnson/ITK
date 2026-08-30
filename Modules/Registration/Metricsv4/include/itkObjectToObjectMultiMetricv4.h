@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ObjectToObjectMultiMetricv4
  * \brief This class takes one or more ObjectToObject metrics and assigns weights to their derivatives
  * to compute a single result.
@@ -232,6 +233,7 @@ private:
   mutable MetricValueArrayType m_MetricValueArray{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ImageToImageFilter
  * \brief Base class for filters that take an image as input and produce an image as output.
@@ -376,6 +377,7 @@ private:
   double m_CoordinateTolerance{};
   double m_DirectionTolerance{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

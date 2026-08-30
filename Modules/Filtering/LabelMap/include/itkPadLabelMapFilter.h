@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PadLabelMapFilter
  * \brief Pad a LabelMap image
@@ -128,6 +129,7 @@ private:
   SizeType m_UpperBoundaryPadSize{};
   SizeType m_LowerBoundaryPadSize{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

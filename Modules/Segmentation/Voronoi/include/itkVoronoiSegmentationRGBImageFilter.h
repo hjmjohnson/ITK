@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VoronoiSegmentationRGBImageFilter
  *
  * Segmentation of 2D RGB images using Voronoi Diagram.
@@ -227,6 +228,7 @@ private:
   bool
   TestHomogeneity(IndexList & Plist) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

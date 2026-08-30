@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename THessianImage, typename TOutputImage>
 MultiScaleHessianBasedMeasureImageFilter<TInputImage, THessianImage, TOutputImage>::
@@ -352,6 +353,7 @@ MultiScaleHessianBasedMeasureImageFilter<TInputImage, THessianImage, TOutputImag
   os << indent << "GenerateScalesOutput: " << m_GenerateScalesOutput << std::endl;
   os << indent << "GenerateHessianOutput: " << m_GenerateHessianOutput << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

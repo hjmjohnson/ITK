@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class JointHistogramMutualInformationComputeJointPDFThreaderBase
  * \brief Compute the JointPDF image.
@@ -97,6 +98,7 @@ protected:
   std::unique_ptr<AlignedJointHistogramMIPerThreadStruct[]> m_JointHistogramMIPerThreadVariables;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

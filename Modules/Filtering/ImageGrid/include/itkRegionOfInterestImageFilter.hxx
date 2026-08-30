@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 RegionOfInterestImageFilter<TInputImage, TOutputImage>::RegionOfInterestImageFilter()
@@ -129,6 +130,7 @@ RegionOfInterestImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
 
   os << indent << "RegionOfInterest: " << m_RegionOfInterest << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

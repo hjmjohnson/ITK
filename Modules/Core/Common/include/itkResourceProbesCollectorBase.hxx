@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TProbe>
 void
@@ -235,6 +236,7 @@ ResourceProbesCollectorBase<TProbe>::Clear()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkResourceProbesCollectorBase_hxx

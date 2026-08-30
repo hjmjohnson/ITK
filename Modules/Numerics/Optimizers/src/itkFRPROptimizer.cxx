@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 constexpr double FRPR_TINY{ 1e-20 };
 
 FRPROptimizer::FRPROptimizer()
@@ -232,4 +233,5 @@ operator<<(std::ostream & out, const FRPROptimizerEnums::Optimization value)
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

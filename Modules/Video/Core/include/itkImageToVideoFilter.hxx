@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputVideoStream>
 ImageToVideoFilter<TInputImage, TOutputVideoStream>::ImageToVideoFilter()
 {
@@ -284,6 +285,7 @@ ImageToVideoFilter<TInputImage, TOutputVideoStream>::GenerateData()
     output->GetFrame(idx)->Graft(extractFilter->GetOutput());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkImageToVideoFilter_hxx

@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ResampleImageFilter
  * \brief Resample an image via a coordinate transform
@@ -387,6 +388,7 @@ private:
   IndexType       m_OutputStartIndex{};     // output image start index
   bool            m_UseReferenceImage{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

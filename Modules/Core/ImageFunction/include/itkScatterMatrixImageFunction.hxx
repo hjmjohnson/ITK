@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 void
@@ -91,6 +92,7 @@ ScatterMatrixImageFunction<TInputImage, TCoordinate>::EvaluateAtIndex(const Inde
 
   return covariance;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

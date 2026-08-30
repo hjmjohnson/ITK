@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 FastChamferDistanceImageFilter<TInputImage, TOutputImage>::FastChamferDistanceImageFilter()
 {
@@ -309,6 +310,7 @@ FastChamferDistanceImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostrea
 
   os << indent << "Maximal computed distance   : " << m_MaximumDistance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

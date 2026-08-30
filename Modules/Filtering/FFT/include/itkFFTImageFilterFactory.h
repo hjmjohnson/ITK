@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Compile-time predicates selecting which precisions a templated FFT filter
 // is registered for. Both default to enabled; an FFT backend specializes the
@@ -180,6 +181,7 @@ protected:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkFFTImageFilterFactory_h

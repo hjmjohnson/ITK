@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AttributeOpeningLabelMapFilter
  * \brief remove the objects according to the value of their attribute
@@ -115,6 +116,7 @@ private:
 
 }; // end of class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

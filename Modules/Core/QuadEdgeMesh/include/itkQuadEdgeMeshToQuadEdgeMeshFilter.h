@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshToQuadEdgeMeshFilter
  *  \brief Duplicates the content of a Mesh
@@ -331,6 +332,7 @@ CopyMeshToMeshPoints(const TInputMesh * in, TOutputMesh * out)
     ++inIt;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelVotingImageFilter
  *
@@ -177,6 +178,7 @@ private:
   bool            m_HasLabelForUndecidedPixels{ false };
   size_t          m_TotalLabelCount{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

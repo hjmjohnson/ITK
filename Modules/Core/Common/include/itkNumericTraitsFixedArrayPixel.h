@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \brief Define numeric traits for FixedArray.
  * \tparam T Component type of the FixedArray
@@ -223,6 +224,7 @@ public:
   itkStaticNumericTraitsGenericArrayMacro(GENERIC_ARRAY, T, 9);             \
   itkStaticNumericTraitsGenericArrayMacro(GENERIC_ARRAY, T, 10);            \
   ITK_MACROEND_NOOP_STATEMENT
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsFixedArrayPixel_h

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 ShotNoiseImageFilter<TInputImage, TOutputImage>::ShotNoiseImageFilter()
@@ -115,6 +116,7 @@ ShotNoiseImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, In
 
   print_helper::PrintNumericTrait(os, indent, "Scale", m_Scale);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

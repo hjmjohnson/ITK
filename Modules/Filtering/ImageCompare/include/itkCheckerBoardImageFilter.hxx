@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 CheckerBoardImageFilter<TImage>::CheckerBoardImageFilter()
@@ -118,6 +119,7 @@ CheckerBoardImageFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) con
 
   os << indent << "Checker pattern: " << m_CheckerPattern << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

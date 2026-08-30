@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class QuaternionRigidTransform
  * \brief QuaternionRigidTransform of a vector space (e.g. space coordinates).
  *
@@ -171,6 +172,7 @@ private:
   /** Rotation of the transformation. */
   VnlQuaternionType m_Rotation{};
 }; // class QuaternionRigidTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MorphologicalDistanceTransformImageFilter
  * \brief Distance transform of a mask using parabolic morphological
@@ -149,6 +150,7 @@ private:
   typename SqrtType::Pointer   m_Sqrt;
   bool                         m_SqrDist;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkMorphologicalDistanceTransformImageFilter.hxx"

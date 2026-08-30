@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NormalVectorFunctionBase
  *
@@ -125,6 +126,7 @@ private:
   /** The time step for normal vector finite difference computations. */
   TimeStepType m_TimeStep{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

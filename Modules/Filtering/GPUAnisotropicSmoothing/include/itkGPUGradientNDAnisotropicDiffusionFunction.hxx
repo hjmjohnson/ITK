@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 double GPUGradientNDAnisotropicDiffusionFunction<TImage>::m_MIN_NORM = 1.0e-10;
 
@@ -178,6 +179,7 @@ GPUGradientNDAnisotropicDiffusionFunction<TImage>::GPUComputeUpdate(const typena
   this->m_GPUKernelManager->LaunchKernel(this->m_ComputeUpdateGPUKernelHandle, ImageDim, globalSize, localSize);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

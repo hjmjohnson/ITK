@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LogOutput
  * \brief Represents an output stream.
  *
@@ -67,6 +68,7 @@ protected:
   /** Destructor */
   ~LogOutput() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLogOutput_h

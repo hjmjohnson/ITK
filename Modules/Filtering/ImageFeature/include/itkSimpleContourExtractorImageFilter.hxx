@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 SimpleContourExtractorImageFilter<TInputImage, TOutputImage>::SimpleContourExtractorImageFilter()
   : m_InputForegroundValue(NumericTraits<InputPixelType>::max())
@@ -120,6 +121,7 @@ SimpleContourExtractorImageFilter<TInputImage, TOutput>::PrintSelf(std::ostream 
   print_helper::PrintNumericTrait(os, indent, "Output Foreground Value", m_OutputForegroundValue);
   print_helper::PrintNumericTrait(os, indent, "Output Background Value", m_OutputBackgroundValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ChainCodePath2D
  * \brief  Represent a 2D path as a sequence of connected image index offsets
@@ -190,6 +191,7 @@ private:
   // inverse of m_FreemanCode[][].  It is initialized in the constructor.
   OffsetType m_ReverseFreemanCode[9]{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

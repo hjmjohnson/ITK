@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPoint>
 bool
 TriangleHelper<TPoint>::IsObtuse(const PointType & iA, const PointType & iB, const PointType & iC)
@@ -236,6 +237,7 @@ TriangleHelper<TPoint>::ComputeMixedArea(const PointType & iP1, const PointType 
     return 0.25 * area;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

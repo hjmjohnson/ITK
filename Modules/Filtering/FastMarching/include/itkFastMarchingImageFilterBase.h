@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastMarchingImageFilterBase
  * \brief Apply the Fast Marching method to solve an Eikonal equation on an image.
@@ -269,6 +270,7 @@ protected:
 
   const InputImageType * m_InputCache{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

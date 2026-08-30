@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TLevelSetContainer>
 LevelSetEquationBinaryMaskTerm<TInput, TLevelSetContainer>::LevelSetEquationBinaryMaskTerm()
@@ -75,5 +76,6 @@ LevelSetEquationBinaryMaskTerm<TInput, TLevelSetContainer>::Value(const LevelSet
   return value;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

@@ -19,6 +19,8 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 CreateObjectFunctionBase::CreateObjectFunctionBase() = default;
 CreateObjectFunctionBase::~CreateObjectFunctionBase() = default;
+ITK_ABI_NAMESPACE_END
 } // namespace itk

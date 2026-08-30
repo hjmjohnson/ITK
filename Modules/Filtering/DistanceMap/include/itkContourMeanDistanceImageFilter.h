@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ContourMeanDistanceImageFilter
  * \brief Computes the Mean distance between the boundaries of
@@ -154,6 +155,7 @@ private:
   RealType m_MeanDistance{};
   bool     m_UseImageSpacing{ true };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

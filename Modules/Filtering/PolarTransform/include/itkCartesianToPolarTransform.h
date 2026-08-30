@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CartesianToPolarTransform
  *
@@ -191,6 +192,7 @@ private:
   bool                                m_ConstArcIncr = false;
 }; // class CartesianToPolarTransform
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

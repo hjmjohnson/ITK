@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TEquationContainer, typename TLevelSet>
 LevelSetEvolutionBase<TEquationContainer, TLevelSet>::LevelSetEvolutionBase()
   : m_Alpha(0.9)
@@ -232,5 +233,6 @@ LevelSetEvolutionBase<TEquationContainer, TLevelSet>::Evolve()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkLevelSetEvolutionBase_hxx

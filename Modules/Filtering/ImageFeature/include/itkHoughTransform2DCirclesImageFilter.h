@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HoughTransform2DCirclesImageFilter
  * \brief Performs the Hough Transform to find circles in a 2D image.
@@ -224,6 +225,7 @@ private:
   bool                m_UseImageSpacing{ true };
   ModifiedTimeType    m_OldModifiedTime{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

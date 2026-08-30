@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConfidenceConnectedImageFilter
  * \brief Segment pixels with similar statistics using connectivity
@@ -174,6 +175,7 @@ private:
   InputRealType        m_Mean{};
   InputRealType        m_Variance{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

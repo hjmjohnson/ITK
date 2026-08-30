@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutputImage, typename TParametersValueType>
 TransformToDisplacementFieldFilter<TOutputImage, TParametersValueType>::TransformToDisplacementFieldFilter()
@@ -269,6 +270,7 @@ TransformToDisplacementFieldFilter<TOutputImage, TParametersValueType>::LinearTh
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

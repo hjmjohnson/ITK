@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------
 //  Constructor
 //----------------------------------------------------------------------
@@ -149,6 +150,7 @@ ImageConstIteratorWithIndex<TImage>::GoToReverseBegin()
   m_Position = buffer + offset;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /// TODO explicit specification for VDimension=3!!!
 template <typename TPoint>
 class QuadEdgeMeshDecimationQuadricElementHelper
@@ -278,5 +279,6 @@ protected:
     // m_MatrixFilled = true;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

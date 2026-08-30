@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 SWCMeshIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -58,4 +59,5 @@ SWCMeshIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<SWCMeshIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

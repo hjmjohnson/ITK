@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 Command::Command() = default;
 
 Command::~Command() = default;
@@ -97,4 +98,5 @@ FunctionCommand::Execute(const Object *, const EventObject & event)
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -22,7 +22,10 @@
 
 #include "itkGTest.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 template <typename TSample>
@@ -59,7 +62,9 @@ protected:
   }
 };
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 TEST(MixtureModelComponentBase, ConvertedLegacyTest)

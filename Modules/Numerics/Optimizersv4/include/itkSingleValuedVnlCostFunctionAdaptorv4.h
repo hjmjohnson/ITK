@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SingleValuedVnlCostFunctionAdaptorv4
  * \brief This class is an Adaptor that allows to pass
@@ -131,6 +132,7 @@ private:
 
 }; // end of Class CostFunction
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

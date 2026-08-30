@@ -23,7 +23,10 @@
 #include "itkMath.h"
 #include <cmath>
 
-namespace itk::Function
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Function
 {
 
 /* \class AdaptiveEqualizationHistogram
@@ -160,6 +163,8 @@ private:
   size_t  m_BoundaryCount{ 0 };
 };
 
-} // namespace itk::Function
+} // namespace Function
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkAdaptiveHistogramHistogram_h

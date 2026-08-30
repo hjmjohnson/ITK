@@ -21,7 +21,10 @@
 #include "itkMeasurementVectorTraits.h"
 #include "itkMath.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 StandardDeviationPerComponentSampleFilter<TSample>::StandardDeviationPerComponentSampleFilter()
@@ -206,6 +209,8 @@ StandardDeviationPerComponentSampleFilter<TSample>::GetMeanPerComponent() const 
 {
   return this->GetMeanPerComponentOutput()->Get();
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

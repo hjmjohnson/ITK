@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 KLMSegmentationRegion::KLMSegmentationRegion() { m_MeanRegionIntensity = 0; }
 
 KLMSegmentationRegion::~KLMSegmentationRegion() = default;
@@ -476,4 +477,5 @@ KLMSegmentationRegion::PrintRegionInfo()
 
   std::cout << "------------------------------" << std::endl;
 } // end PrintRegionInfo
+ITK_ABI_NAMESPACE_END
 } // namespace itk

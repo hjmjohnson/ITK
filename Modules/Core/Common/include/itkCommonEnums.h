@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CommonEnums
  *
@@ -297,6 +298,7 @@ public:
 extern ITKCommon_EXPORT std::ostream &
                         operator<<(std::ostream & out, const ObjectFactoryEnums::InsertionPosition value);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkCommonEnums_h

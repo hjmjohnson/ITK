@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -38,6 +39,7 @@ ImageShapeModelEstimatorBase<TInputImage, TOutputImage>::PrintSelf(std::ostream 
 
   itkPrintSelfObjectMacro(InputImage);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

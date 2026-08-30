@@ -18,8 +18,10 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Opened this namespace, just to avoid KWStyle check error, "namespace not defined".
-}
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 //
 // Check if the compiler support the GNU attribute extension for

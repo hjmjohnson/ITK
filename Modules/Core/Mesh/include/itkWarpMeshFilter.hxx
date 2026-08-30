@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -139,6 +140,7 @@ WarpMeshFilter<TInputMesh, TOutputMesh, TDisplacementField>::GenerateData()
     outputMesh->SetBoundaryAssignments(dim, inputMesh->GetBoundaryAssignments(dim));
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

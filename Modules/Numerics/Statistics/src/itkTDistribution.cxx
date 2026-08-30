@@ -22,7 +22,10 @@
 #include "itkSpecialFunctions.h"
 #include <cmath>
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 TDistribution::~TDistribution() = default;
 
@@ -361,4 +364,6 @@ TDistribution::PrintSelf(std::ostream & os, Indent indent) const
     os << indent << "Degrees of freedom: (unknown)" << std::endl;
   }
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

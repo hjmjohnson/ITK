@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FRPROptimizerEnums
  * \brief Contains enum classes used by FRPROptimizer class
  * \ingroup ITKOptimizers
@@ -138,6 +139,7 @@ private:
 
   bool m_UseUnitLengthGradient{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

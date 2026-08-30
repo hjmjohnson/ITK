@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 MergeLabelMapFilter<TImage>::MergeLabelMapFilter()
   : m_Method(ChoiceMethodEnum::KEEP)
@@ -254,5 +255,6 @@ MergeLabelMapFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) const
 
   os << indent << "Method: " << this->m_Method << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

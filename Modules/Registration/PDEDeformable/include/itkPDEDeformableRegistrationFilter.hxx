@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage, typename TDisplacementField>
 PDEDeformableRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>::PDEDeformableRegistrationFilter()
@@ -359,6 +360,7 @@ PDEDeformableRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>::
   field->SetLargestPossibleRegion(smoothers[ImageDimension - 1]->GetOutput()->GetLargestPossibleRegion());
   field->CopyInformation(smoothers[ImageDimension - 1]->GetOutput());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

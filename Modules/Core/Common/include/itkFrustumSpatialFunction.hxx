@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename TInput>
 auto
 FrustumSpatialFunction<VDimension, TInput>::Evaluate(const InputType & position) const -> OutputType
@@ -125,6 +126,7 @@ FrustumSpatialFunction<VDimension, TInput>::PrintSelf(std::ostream & os, Indent 
   os << indent << "RotationPlane: " << m_RotationPlane << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

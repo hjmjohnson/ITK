@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class EdgeDecimationQuadEdgeMeshFilter
  * \brief
@@ -307,6 +308,7 @@ protected:
   bool
   IsCriterionSatisfied() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkEdgeDecimationQuadEdgeMeshFilter.hxx"

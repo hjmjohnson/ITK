@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MetaArrayWriter::MetaArrayWriter()
   : m_FileName("")
   , m_DataFileName("")
@@ -61,4 +62,5 @@ MetaArrayWriter::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Binary: " << m_Binary << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

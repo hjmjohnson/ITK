@@ -104,6 +104,7 @@ struct AIMPreHeaderV030
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 unsigned long
 AIMHeaderIO::ReadHeader(std::ifstream & infile)
 {
@@ -693,4 +694,5 @@ AIMHeaderIO::WritePreHeader(std::ofstream & outfile, size_t imageSize, ScancoFil
 
 AIMHeaderIO::~AIMHeaderIO() {}
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

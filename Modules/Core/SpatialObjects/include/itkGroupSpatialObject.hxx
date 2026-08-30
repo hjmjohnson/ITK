@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 GroupSpatialObject<TDimension>::GroupSpatialObject()
@@ -45,6 +46,7 @@ GroupSpatialObject<TDimension>::InternalClone() const
   return loPtr;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // end itkGroupSpatialObject_hxx

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFixedImage, typename TMovingImage>
 auto
 NormalizedMutualInformationHistogramImageToImageMetric<TFixedImage, TMovingImage>::EvaluateMeasure(
@@ -76,6 +77,7 @@ NormalizedMutualInformationHistogramImageToImageMetric<TFixedImage, TMovingImage
 
   return (entropyX + entropyY) / jointEntropy;
 }
+ITK_ABI_NAMESPACE_END
 } // End namespace itk
 
 #endif // itkNormalizedMutualInformationHistogramImageToImageMetric_hxx

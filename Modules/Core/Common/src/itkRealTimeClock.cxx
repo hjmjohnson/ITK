@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 RealTimeClock::RealTimeClock()
 {
@@ -134,4 +135,5 @@ RealTimeClock::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Difference : " << m_Difference << std::endl;
   os << indent << "Origin : " << m_Origin << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

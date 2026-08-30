@@ -25,7 +25,10 @@
 
 
 // Implementation details for MetaDataObject meta programming
-namespace itk::MetaDataObjectDetail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace MetaDataObjectDetail
 {
 template <class T, class = void>
 struct has_Print : std::false_type
@@ -43,7 +46,9 @@ template <class T>
 struct has_output_operator<T, std::void_t<decltype(std::declval<std::ostream &>() << std::declval<T>())>>
   : std::true_type
 {};
-} // namespace itk::MetaDataObjectDetail
+} // namespace MetaDataObjectDetail
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 #endif

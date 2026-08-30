@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class UpdateMalcolmSparseLevelSet
  *  \brief Base class for updating the Malcolm representation of level-set function
@@ -156,6 +157,7 @@ private:
 
   using NodePairType = std::pair<LevelSetInputType, LevelSetOutputType>;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

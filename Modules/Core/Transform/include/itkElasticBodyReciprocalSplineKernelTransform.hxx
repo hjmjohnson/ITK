@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TParametersValueType, unsigned int VDimension>
 ElasticBodyReciprocalSplineKernelTransform<TParametersValueType,
                                            VDimension>::ElasticBodyReciprocalSplineKernelTransform()
@@ -61,5 +62,6 @@ ElasticBodyReciprocalSplineKernelTransform<TParametersValueType, VDimension>::Pr
 
   print_helper::PrintNumericTrait(os, indent, "Alpha", m_Alpha);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

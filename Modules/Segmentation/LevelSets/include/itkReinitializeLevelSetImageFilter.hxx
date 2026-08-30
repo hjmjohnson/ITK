@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TLevelSet>
 ReinitializeLevelSetImageFilter<TLevelSet>::ReinitializeLevelSetImageFilter()
@@ -297,6 +298,7 @@ ReinitializeLevelSetImageFilter<TLevelSet>::GenerateDataNarrowBand()
     }
   } // end for loop
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

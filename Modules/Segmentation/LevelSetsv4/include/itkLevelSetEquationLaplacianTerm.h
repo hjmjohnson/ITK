@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationLaplacianTerm
  *  \brief Derived class to represents a propagation term in the level-set evolution PDE
@@ -132,6 +133,7 @@ protected:
   Value(const LevelSetInputIndexType & iP, const LevelSetDataType & iData) override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEquationLaplacianTerm.hxx"

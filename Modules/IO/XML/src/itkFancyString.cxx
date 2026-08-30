@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 FancyString::FancyString() = default; // : std::string()
 
@@ -172,6 +173,7 @@ FancyString::ContainSub(const std::string & s2, bool ignoreCase)
   return StringTools::ContainSub(this->m_Value, s2, ignoreCase);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 bool

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh>
 auto
 LevelSetQuadEdgeMesh<TMesh>::Evaluate(const InputType & iP) const -> OutputType
@@ -129,6 +130,7 @@ LevelSetQuadEdgeMesh<TMesh>::Graft(const DataObject * data)
   this->m_Mesh = levelSet->m_Mesh;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLevelSetQuadEdgeMesh_hxx

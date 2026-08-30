@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -156,6 +157,7 @@ HigherOrderAccurateDerivativeImageFilter<TInputImage, TOutputImage>::PrintSelf(s
   os << indent << "UseImageSpacing: " << m_UseImageSpacing << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

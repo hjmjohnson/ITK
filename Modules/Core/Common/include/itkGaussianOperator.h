@@ -22,6 +22,7 @@
 #include <cmath>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GaussianOperator
  * \brief A NeighborhoodOperator whose coefficients are a one
@@ -214,6 +215,7 @@ private:
   /** Enable/disable kernel generation debug warnings */
   mutable bool m_Debug{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

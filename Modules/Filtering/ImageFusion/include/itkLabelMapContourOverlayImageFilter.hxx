@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TLabelMap, typename TFeatureImage, typename TOutputImage>
 LabelMapContourOverlayImageFilter<TLabelMap, TFeatureImage, TOutputImage>::LabelMapContourOverlayImageFilter()
@@ -306,5 +307,6 @@ LabelMapContourOverlayImageFilter<TLabelMap, TFeatureImage, TOutputImage>::Print
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

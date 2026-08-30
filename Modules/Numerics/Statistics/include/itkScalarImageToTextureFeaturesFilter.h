@@ -23,7 +23,10 @@
 #include "itkHistogramToTextureFeaturesFilter.h"
 #include "itkScalarImageToCooccurrenceMatrixFilter.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class ScalarImageToTextureFeaturesFilter
  *  \brief This class computes texture descriptions from an image.
@@ -237,7 +240,9 @@ private:
   OffsetVectorConstPointer      m_Offsets{};
   bool                          m_FastCalculations{};
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkScalarImageToTextureFeaturesFilter.hxx"

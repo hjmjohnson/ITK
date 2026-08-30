@@ -23,7 +23,10 @@
 #include "itkHistogram.h"
 #include "itkObject.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class ScalarImageToHistogramGenerator
@@ -116,7 +119,9 @@ private:
 
   GeneratorPointer m_HistogramGenerator{};
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkScalarImageToHistogramGenerator.hxx"

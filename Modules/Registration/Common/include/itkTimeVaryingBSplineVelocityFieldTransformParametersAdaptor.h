@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TimeVaryingBSplineVelocityFieldTransformParametersAdaptor
  * \brief TimeVaryingBSplineVelocityFieldTransformParametersAdaptor is a helper class intended to
  * definition.
@@ -222,6 +223,7 @@ private:
   SizeValueType m_SplineOrder{};
 
 }; // class TimeVaryingBSplineVelocityFieldTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

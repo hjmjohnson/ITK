@@ -22,6 +22,7 @@
 #include "itkQuadEdgeMeshLineCell.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshPolygonCell
  * Class that connects the QE with itk
@@ -308,6 +309,7 @@ private:
    */
   EdgeCellListType m_EdgeCellList{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

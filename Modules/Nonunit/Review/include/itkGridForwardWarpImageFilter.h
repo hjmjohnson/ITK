@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GridForwardWarpImageFilter
  * \brief Warps a grid using an input deformation field.
  *
@@ -124,6 +125,7 @@ private:
   PixelType    m_ForegroundValue{};
   unsigned int m_GridPixSpacing{ 5 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

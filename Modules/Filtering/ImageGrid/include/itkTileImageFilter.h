@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TileImageFilter
  * \brief Tile multiple input images into a single output image.
@@ -158,6 +159,7 @@ private:
 
   LayoutArrayType m_Layout{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

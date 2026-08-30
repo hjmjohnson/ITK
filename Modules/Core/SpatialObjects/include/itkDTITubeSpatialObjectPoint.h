@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DTITubeSpatialObjectPointEnums
  * \brief Contains all enum classes used by DTITubeSpatialObjectPoint class.
  * \ingroup ITKSpatialObjects
@@ -157,6 +158,7 @@ protected:
   [[nodiscard]] std::string
   TranslateEnumToChar(DTITubeSpatialObjectPointFieldEnum name) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

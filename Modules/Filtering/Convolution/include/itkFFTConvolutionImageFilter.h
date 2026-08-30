@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FFTConvolutionImageFilter
  * \brief Convolve a given image with an arbitrary image kernel using
@@ -206,6 +207,7 @@ private:
   InternalSizeType   m_FFTPadSize{ { 0 } };
   InternalRegionType m_PaddedInputRegion{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

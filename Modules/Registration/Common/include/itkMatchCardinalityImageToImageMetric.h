@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MatchCardinalityImageToImageMetric
  * \brief Computes similarity between two objects to be registered
  *
@@ -184,6 +185,7 @@ private:
   std::vector<MeasureType>   m_ThreadMatches{};
   std::vector<SizeValueType> m_ThreadCounts{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

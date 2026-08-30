@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 MedianImageFilter<TInputImage, TOutputImage>::MedianImageFilter()
 {
@@ -104,6 +105,7 @@ MedianImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

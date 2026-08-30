@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 std::ostream &
 operator<<(std::ostream & out, const LoggerThreadWrapperEnums::Operation value)
 {
@@ -38,4 +39,5 @@ operator<<(std::ostream & out, const LoggerThreadWrapperEnums::Operation value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

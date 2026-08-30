@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AdaptiveHistogramEqualizationImageFilter
  * \brief Power Law Adaptive Histogram Equalization
@@ -185,6 +186,7 @@ private:
 
   bool m_UseLookupTable{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

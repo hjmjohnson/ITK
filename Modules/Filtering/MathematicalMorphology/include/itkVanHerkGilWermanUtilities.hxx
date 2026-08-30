@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VanHerkGilWermanUtilities
  * \brief functionality in common for VanHerkGilWerman openings/closings and
@@ -201,6 +202,7 @@ DoFace(typename TImage::ConstPointer             input,
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

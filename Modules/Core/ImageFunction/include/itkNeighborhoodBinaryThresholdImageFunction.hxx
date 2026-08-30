@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 NeighborhoodBinaryThresholdImageFunction<TInputImage, TCoordinate>::NeighborhoodBinaryThresholdImageFunction()
@@ -78,6 +79,7 @@ NeighborhoodBinaryThresholdImageFunction<TInputImage, TCoordinate>::EvaluateAtIn
 
   return allInside;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

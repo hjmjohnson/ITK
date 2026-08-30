@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputMesh>
 DeformableSimplexMesh3DGradientConstraintForceFilter<TInputMesh, TOutputMesh>::
@@ -414,6 +415,7 @@ DeformableSimplexMesh3DGradientConstraintForceFilter<TInputMesh, TOutputMesh>::C
   data->externalForce[1] = vec_for[1];
   data->externalForce[2] = vec_for[2];
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

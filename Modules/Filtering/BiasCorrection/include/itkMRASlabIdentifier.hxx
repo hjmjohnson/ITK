@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 MRASlabIdentifier<TInputImage>::MRASlabIdentifier()
   : m_Image(nullptr)
@@ -183,6 +184,7 @@ MRASlabIdentifier<TInputImage>::PrintSelf(std::ostream & os, Indent indent) cons
   os << indent << "Background Pixel Minimum Intensity Threshold: " << m_BackgroundMinimumThreshold << std::endl;
   os << indent << "Tolerance: " << m_Tolerance << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif /* itkMRASlabIdentifier_hxx */

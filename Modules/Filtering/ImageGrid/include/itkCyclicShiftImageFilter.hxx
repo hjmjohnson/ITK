@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 CyclicShiftImageFilter<TInputImage, TOutputImage>::CyclicShiftImageFilter()
@@ -91,5 +92,6 @@ CyclicShiftImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, 
   os << indent << "Shift: " << m_Shift << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

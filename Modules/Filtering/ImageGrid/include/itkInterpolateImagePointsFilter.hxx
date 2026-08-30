@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TCoordinate, typename InterpolatorType>
 InterpolateImagePointsFilter<TInputImage, TOutputImage, TCoordinate, InterpolatorType>::InterpolateImagePointsFilter()
@@ -177,6 +178,7 @@ InterpolateImagePointsFilter<TInputImage, TOutputImage, TCoordinate, Interpolato
 
   os << indent << "Default (background) pixel level: " << m_DefaultPixelValue << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

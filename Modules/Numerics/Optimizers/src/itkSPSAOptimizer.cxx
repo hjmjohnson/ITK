@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SPSAOptimizer::~SPSAOptimizer() = default;
 
 SPSAOptimizer::SPSAOptimizer()
@@ -423,4 +424,5 @@ operator<<(std::ostream & out, const SPSAOptimizerEnums::StopConditionSPSAOptimi
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

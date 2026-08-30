@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MRCImageIO
  *
@@ -148,6 +149,7 @@ private:
 
   MRCHeaderObject::Pointer m_MRCHeader{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

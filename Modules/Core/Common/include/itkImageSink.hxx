@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 ImageSink<TInputImage>::ImageSink()
@@ -268,6 +269,7 @@ ImageSink<TInputImage>::StreamedGenerateData(unsigned int inputRequestedRegionNu
     pt.GetProcessObject());
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkImageSink_hxx

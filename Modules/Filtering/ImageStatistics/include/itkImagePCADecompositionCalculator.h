@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImagePCADecompositionCalculator
  * \brief Decomposes an image into directions along basis components.
  *
@@ -162,6 +163,7 @@ private:
   bool                    m_BasisMatrixCalculated{};
   SizeValueType           m_NumPixels{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FFTWInverseFFTImageFilter
  *
@@ -165,6 +166,7 @@ struct FFTImageFilterEnableDouble<FFTWInverseFFTImageFilter> : std::false_type
 {};
 #endif
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

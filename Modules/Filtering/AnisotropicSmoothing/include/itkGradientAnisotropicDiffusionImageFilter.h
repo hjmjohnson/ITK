@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GradientAnisotropicDiffusionImageFilter
  * \brief This filter performs anisotropic diffusion on a scalar
  * itk::Image using the classic Perona-Malik, gradient magnitude based
@@ -83,6 +84,7 @@ protected:
 
   ~GradientAnisotropicDiffusionImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

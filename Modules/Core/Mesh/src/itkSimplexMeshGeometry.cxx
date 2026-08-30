@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SimplexMeshGeometry::SimplexMeshGeometry()
 {
   constexpr double    c{ 1.0 / 3.0 };
@@ -145,4 +146,5 @@ SimplexMeshGeometry::CopyNeigborSet(const NeighborSetType * nset)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

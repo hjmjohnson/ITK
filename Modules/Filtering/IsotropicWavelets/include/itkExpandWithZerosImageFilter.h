@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ExpandWithZerosImageFilter
  * \brief Expand the size of an image by an integer factor in each
  * dimension.
@@ -155,6 +156,7 @@ protected:
 private:
   ExpandFactorsType m_ExpandFactors;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

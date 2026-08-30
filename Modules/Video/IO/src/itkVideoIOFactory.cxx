@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 VideoIOBase::Pointer
 VideoIOFactory::CreateVideoIO(IOModeEnum mode, const char * arg)
 {
@@ -98,4 +99,5 @@ operator<<(std::ostream & out, const VideoIOFactoryEnums::IOMode value)
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

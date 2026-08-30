@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TAttributeAccessor, bool VPhysicalPosition>
 void
@@ -66,5 +67,6 @@ AttributePositionLabelMapFilter<TImage, TAttributeAccessor, VPhysicalPosition>::
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

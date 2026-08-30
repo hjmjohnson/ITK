@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage>
 LabelStatisticsKeepNObjectsImageFilter<TInputImage, TFeatureImage>::LabelStatisticsKeepNObjectsImageFilter()
   : m_BackgroundValue(NumericTraits<OutputImagePixelType>::NonpositiveMin())
@@ -118,5 +119,6 @@ LabelStatisticsKeepNObjectsImageFilter<TInputImage, TFeatureImage>::PrintSelf(st
   os << indent << "Attribute: " << LabelObjectType::GetNameFromAttribute(m_Attribute) << " (" << m_Attribute << ')'
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

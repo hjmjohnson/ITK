@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType, typename TFeatureImageType>
 void
@@ -100,6 +101,7 @@ GeodesicActiveContourShapePriorLevelSetFunction<TImageType, TFeatureImageType>::
   os << indent << "DerivativeSigma: " << m_DerivativeSigma << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConnectedComponentImageFilter
  * \brief Label the objects in a binary image
@@ -203,6 +204,7 @@ private:
 
   typename TInputImage::ConstPointer m_Input{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

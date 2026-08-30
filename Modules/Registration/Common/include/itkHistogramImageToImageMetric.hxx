@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFixedImage, typename TMovingImage>
 HistogramImageToImageMetric<TFixedImage, TMovingImage>::HistogramImageToImageMetric()
   : m_UpperBoundIncreaseFactor(0.001)
@@ -370,6 +371,7 @@ HistogramImageToImageMetric<TFixedImage, TMovingImage>::PrintSelf(std::ostream &
   os << indent << "Histogram computed by GetValue(): ";
   os << m_Histogram.GetPointer() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkHistogramImageToImageMetric_hxx

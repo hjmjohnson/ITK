@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GeometricalQuadEdge
  * \brief This class extends the QuadEdge by adding a reference to the Origin.
@@ -369,6 +370,7 @@ protected:
   bool               m_DataSet{ false }; // Indicates if the data is set.
   LineCellIdentifier m_LineCellIdent{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

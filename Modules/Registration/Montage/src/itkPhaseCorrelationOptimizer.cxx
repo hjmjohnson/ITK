@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Define how to print enumerations */
 std::ostream &
 operator<<(std::ostream & out, const PhaseCorrelationOptimizerEnums::PeakInterpolationMethod value)
@@ -41,4 +42,5 @@ operator<<(std::ostream & out, const PhaseCorrelationOptimizerEnums::PeakInterpo
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

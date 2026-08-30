@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PointSetBase
  * \brief A superclass of PointSet
@@ -232,6 +233,7 @@ protected:
   RegionType m_BufferedRegion{ -1 };
   RegionType m_RequestedRegion{ -1 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 BinaryThresholdImageFilter<TInputImage, TOutputImage>::BinaryThresholdImageFilter()
@@ -241,6 +242,7 @@ BinaryThresholdImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & 
   print_helper::PrintNumericTrait(os, indent, "LowerThreshold", this->GetLowerThreshold());
   print_helper::PrintNumericTrait(os, indent, "UpperThreshold", this->GetUpperThreshold());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

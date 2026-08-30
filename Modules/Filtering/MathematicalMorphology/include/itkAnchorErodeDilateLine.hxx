@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputPix, typename TCompare>
 void
 AnchorErodeDilateLine<TInputPix, TCompare>::DoLine(std::vector<TInputPix> & buffer,
@@ -313,6 +314,7 @@ AnchorErodeDilateLine<TInputPix, TCompare>::PrintSelf(std::ostream & os, Indent 
 {
   os << indent << "Size: " << m_Size << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

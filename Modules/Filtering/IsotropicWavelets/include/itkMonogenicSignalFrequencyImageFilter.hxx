@@ -20,6 +20,7 @@
 #include "itkImageRegionIterator.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFrequencyImageRegionConstIterator>
 MonogenicSignalFrequencyImageFilter<TInputImage,
                                     TFrequencyImageRegionConstIterator>::MonogenicSignalFrequencyImageFilter()
@@ -82,5 +83,6 @@ MonogenicSignalFrequencyImageFilter<TInputImage, TFrequencyImageRegionConstItera
     os << this->m_Evaluator << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

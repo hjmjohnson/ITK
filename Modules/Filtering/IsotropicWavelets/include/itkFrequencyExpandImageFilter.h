@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FrequencyExpandImageFilter
  * \brief Expand the size of an image in the frequency domain by an integer
  * factor in each dimension.
@@ -175,6 +176,7 @@ protected:
 private:
   ExpandFactorsType m_ExpandFactors;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

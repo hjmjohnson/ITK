@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -106,6 +107,7 @@ LabelToRGBImageFilter<TLabelImage, TOutputImage>::PrintSelf(std::ostream & os, I
      << "ColorBackground: " << static_cast<typename NumericTraits<OutputPixelType>::PrintType>(m_BackgroundColor)
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

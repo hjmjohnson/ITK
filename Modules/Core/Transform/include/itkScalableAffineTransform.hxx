@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 ScalableAffineTransform<TParametersValueType, VDimension>::ScalableAffineTransform()
@@ -173,6 +174,7 @@ ScalableAffineTransform<TParametersValueType, VDimension>::ComputeMatrix()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

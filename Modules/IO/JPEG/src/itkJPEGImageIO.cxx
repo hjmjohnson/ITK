@@ -67,6 +67,7 @@ extern "C"
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // simple class to call fopen on construct and
 // fclose on destruct
@@ -597,4 +598,5 @@ JPEGImageIO::WriteSlice(const std::string & fileName, const void * const buffer)
   jpeg_destroy_compress(&cinfo);
   delete[] row_pointers;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Vector
  * \brief A templated class holding a n-Dimensional vector.
  *
@@ -346,6 +347,7 @@ MakeVector(const TValue firstValue, const TVariadic... otherValues)
   return Vector<TValue, dimension>{ stdArray };
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

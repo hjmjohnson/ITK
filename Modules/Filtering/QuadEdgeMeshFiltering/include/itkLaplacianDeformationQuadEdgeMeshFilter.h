@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LaplacianDeformationQuadEdgeMeshFilterEnums
  * \brief Contains all enum classes used by LaplacianDeformationQuadEdgeMeshFilter class.
  * \ingroup ITKQuadEdgeMeshFiltering
@@ -305,6 +306,7 @@ private:
     unsigned int          m_Degree;
   };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkLaplacianDeformationQuadEdgeMeshFilter.hxx"

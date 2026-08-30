@@ -33,14 +33,19 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward-declared to break the itkMatrix.h <-> itkBridgeMathSVD.h include
 // cycle; the itk::Matrix SVD overload needs the complete type only at
 // instantiation, where the caller has already included itkMatrix.h.
 template <typename T, unsigned int VRows, unsigned int VColumns>
 class Matrix;
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
-namespace itk::bridge
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace bridge
 {
 namespace Math
 {
@@ -654,6 +659,8 @@ SVD(const vnl_matrix<TReal> & A, bool canonicalizeSigns = true)
 }
 
 } // namespace Math
-} // namespace itk::bridge
+} // namespace bridge
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkBridgeMathSVD_h

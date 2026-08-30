@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SingleValuedNonLinearOptimizer
  * \brief This class is a base for the Optimization methods that
  * optimize a single valued function.
@@ -84,6 +85,7 @@ protected:
 
   CostFunctionPointer m_CostFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

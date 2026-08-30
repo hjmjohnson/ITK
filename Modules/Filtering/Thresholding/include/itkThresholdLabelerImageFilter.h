@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ThresholdLabelerImageFilter
  *
@@ -216,6 +217,7 @@ private:
   RealThresholdVector m_RealThresholds{};
   OutputPixelType     m_LabelOffset{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

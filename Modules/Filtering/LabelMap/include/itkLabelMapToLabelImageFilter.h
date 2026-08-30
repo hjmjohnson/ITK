@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelMapToLabelImageFilter
  * \brief Converts a LabelMap to a labeled image.
@@ -90,6 +91,7 @@ protected:
   void
   ThreadedProcessLabelObject(LabelObjectType * labelObject) override;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

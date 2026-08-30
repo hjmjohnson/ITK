@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 LBFGSOptimizerv4::LBFGSOptimizerv4() = default;
 
 LBFGSOptimizerv4::~LBFGSOptimizerv4() = default;
@@ -183,4 +184,5 @@ LBFGSOptimizerv4::StartOptimization(bool /* doOnlyInitialization */)
 
   this->m_Metric->SetParameters(parameters);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

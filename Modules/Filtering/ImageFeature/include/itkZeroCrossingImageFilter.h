@@ -21,6 +21,7 @@
 #include "itkImageToImageFilter.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ZeroCrossingImageFilter
  * \brief This filter finds the closest pixel to the zero-crossings
@@ -144,6 +145,7 @@ protected:
   void
   DynamicThreadedGenerateData(const OutputImageRegionType & outputRegionForThread) override;
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

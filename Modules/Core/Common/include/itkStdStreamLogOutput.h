@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StdStreamLogOutput
  *  \brief Represents a standard stream output stream.
  *
@@ -92,6 +93,7 @@ private:
 
   std::mutex m_Mutex{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkStdStreamLogOutput_h

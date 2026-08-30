@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //
 // Get the block size based on the desired image dimension
 //
@@ -501,4 +502,5 @@ GetPixelDimension(const std::type_info & intype)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

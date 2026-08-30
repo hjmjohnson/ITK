@@ -38,6 +38,7 @@ constexpr uint32_t TIF_CZ_LSMINFO_SIZE{ 512 };
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 extern "C"
 {
   static void
@@ -413,4 +414,5 @@ LSMImageIO::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

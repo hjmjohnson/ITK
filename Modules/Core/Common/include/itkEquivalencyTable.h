@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EquivalencyTable
  * \brief Hash table to manage integral label equivalencies
  *
@@ -178,6 +179,7 @@ protected:
 
   HashTableType m_HashMap{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

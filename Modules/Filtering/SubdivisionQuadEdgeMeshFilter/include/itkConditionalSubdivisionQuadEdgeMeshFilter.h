@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConditionalSubdivisionQuadEdgeMeshFilter
  *
@@ -91,6 +92,7 @@ protected:
   SubdivisionCellContainer m_CellsToBeSubdivided;
   CriterionPointer         m_SubdivisionCriterion;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

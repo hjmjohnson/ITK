@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PointSet
  * \brief A superclass of the N-dimensional mesh structure;
@@ -167,6 +168,7 @@ protected:
   InternalClone() const override;
 
 }; // End Class: PointSet
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

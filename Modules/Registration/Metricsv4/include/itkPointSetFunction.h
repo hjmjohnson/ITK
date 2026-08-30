@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 /** \class PointSetFunction
@@ -119,6 +120,7 @@ protected:
   InputPointSetConstPointer m_PointSet{ nullptr };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // Define instantiation macro for this template.

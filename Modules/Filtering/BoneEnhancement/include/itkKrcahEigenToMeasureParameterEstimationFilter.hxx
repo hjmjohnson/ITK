@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 KrcahEigenToMeasureParameterEstimationFilter<TInputImage, TOutputImage>::KrcahEigenToMeasureParameterEstimationFilter()
@@ -209,6 +210,7 @@ KrcahEigenToMeasureParameterEstimationFilter<TInputImage, TOutputImage>::PrintSe
   os << indent << "ParameterSet: " << static_cast<char>(GetParameterSet()) << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkKrcahEigenToMeasureParameterEstimationFilter_hxx */

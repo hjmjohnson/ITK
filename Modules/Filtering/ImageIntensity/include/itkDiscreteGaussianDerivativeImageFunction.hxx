@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Set the Input Image */
 template <typename TInputImage, typename TOutput>
 DiscreteGaussianDerivativeImageFunction<TInputImage, TOutput>::DiscreteGaussianDerivativeImageFunction()
@@ -250,6 +251,7 @@ DiscreteGaussianDerivativeImageFunction<TInputImage, TOutput>::EvaluateAtContinu
   }
   return static_cast<OutputType>(value);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

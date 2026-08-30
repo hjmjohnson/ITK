@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ExpandImageFilter
  * \brief Expand the size of an image by an integer factor in each
@@ -166,6 +167,7 @@ private:
   ExpandFactorsType   m_ExpandFactors{};
   InterpolatorPointer m_Interpolator{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

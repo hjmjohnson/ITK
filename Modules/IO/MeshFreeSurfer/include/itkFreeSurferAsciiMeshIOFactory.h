@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FreeSurferAsciiMeshIOFactory
  * \brief Create instances of FreeSurferAsciiMeshIO objects using an object factory.
  * \ingroup ITKIOMeshFreeSurfer
@@ -68,6 +69,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

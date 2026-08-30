@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelStatisticsOpeningImageFilter
  * \brief remove the objects according to the value of their statistics attribute
@@ -189,6 +190,7 @@ private:
   bool                 m_ReverseOrdering{};
   AttributeType        m_Attribute{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

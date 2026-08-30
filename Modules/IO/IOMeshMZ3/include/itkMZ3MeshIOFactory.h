@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MZ3MeshIOFactory
  * \brief Create instances of MZ3MeshIO objects using an object factory.
@@ -70,6 +71,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

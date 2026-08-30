@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename FixedImageType,
           typename MovingImageType,
@@ -382,6 +383,7 @@ DoDebugTest(FixedImageReaderType * fixedImageReader, MovingImageReaderType * mov
   exit(EXIT_SUCCESS);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

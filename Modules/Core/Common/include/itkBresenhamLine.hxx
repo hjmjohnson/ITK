@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension>
 auto
 BresenhamLine<VDimension>::BuildLine(LType Direction, IdentifierType length) -> OffsetArray
@@ -128,6 +129,7 @@ BresenhamLine<VDimension>::BuildLine(IndexType p0, IndexType p1) -> IndexArray
   return indices;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

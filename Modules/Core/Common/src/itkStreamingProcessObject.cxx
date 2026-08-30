@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 void
@@ -268,4 +269,5 @@ void
 StreamingProcessObject::AfterStreamedGenerateData()
 {}
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

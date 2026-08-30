@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VowIsotropicWavelet
  * \brief Wavelet based on paper VOW: Variance-Optimal Wavelets for Steerable Pyramid (P.Pad et al 2014).
  *
@@ -90,6 +91,7 @@ private:
   /** kappa value, default is optimal:0.75 */
   FunctionValueType m_Kappa;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

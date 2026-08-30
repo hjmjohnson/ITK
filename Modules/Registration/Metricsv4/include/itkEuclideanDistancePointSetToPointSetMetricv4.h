@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EuclideanDistancePointSetToPointSetMetricv4
  * \brief Computes the Euclidan distance metric between two point sets.
  *
@@ -111,6 +112,7 @@ protected:
 private:
   RealType m_DistanceThreshold = -1.0;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

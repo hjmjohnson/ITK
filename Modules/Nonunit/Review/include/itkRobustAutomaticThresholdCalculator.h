@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RobustAutomaticThresholdCalculator
  * \brief Compute the robust automatic threshold
  *
@@ -120,6 +121,7 @@ private:
   InputImageConstPointer    m_Input{};
   GradientImageConstPointer m_Gradient{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

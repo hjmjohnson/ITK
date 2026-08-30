@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageConstIterator
  * \brief A multi-dimensional image iterator templated over image type.
  *
@@ -406,6 +407,7 @@ template <typename TImage>
 ImageConstIterator(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageConstIterator<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

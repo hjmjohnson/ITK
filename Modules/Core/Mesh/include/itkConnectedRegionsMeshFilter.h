@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConnectedRegionsMeshFilter
  * \brief Extract portions of a mesh that are connected at vertices.
  *
@@ -273,6 +274,7 @@ private:
   std::vector<IdentifierType> * m_Wave{ nullptr };
   std::vector<IdentifierType> * m_Wave2{ nullptr };
 }; // class declaration
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

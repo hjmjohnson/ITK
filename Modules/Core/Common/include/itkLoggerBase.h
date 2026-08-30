@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /*** \class LoggerBaseEnums
  * \brief Contains all enum classes used by LoggerBase class.
  * \ingroup ITKCommon
@@ -251,6 +252,7 @@ protected:
 private:
   std::string m_Name{};
 }; // class LoggerBase
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLoggerBase_h

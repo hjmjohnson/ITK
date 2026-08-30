@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 RankImageFilter<TInputImage, TOutputImage, TKernel>::RankImageFilter()
   : m_Rank(0.5)
@@ -59,5 +60,6 @@ RankImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(std::ostream & os
 
   print_helper::PrintNumericTrait(os, indent, "Rank", m_Rank);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

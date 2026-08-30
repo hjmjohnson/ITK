@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 PyImageFilter<TInputImage, TOutputImage>::~PyImageFilter()
@@ -264,6 +265,7 @@ PyImageFilter<TInputImage, TOutputImage>::GenerateData()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

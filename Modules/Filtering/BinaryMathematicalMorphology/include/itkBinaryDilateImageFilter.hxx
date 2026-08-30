@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 BinaryDilateImageFilter<TInputImage, TOutputImage, TKernel>::BinaryDilateImageFilter()
 {
@@ -463,6 +464,7 @@ BinaryDilateImageFilter<TInputImage, TOutput, TKernel>::PrintSelf(std::ostream &
   Superclass::PrintSelf(os, indent);
   print_helper::PrintNumericTrait(os, indent, "Dilate Value", this->GetForegroundValue());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

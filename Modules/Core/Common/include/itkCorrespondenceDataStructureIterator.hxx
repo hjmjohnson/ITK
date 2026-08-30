@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TStructureType>
 CorrespondenceDataStructureIterator<TStructureType>::CorrespondenceDataStructureIterator(TStructureType * StructurePtr)
@@ -98,6 +99,7 @@ CorrespondenceDataStructureIterator<TStructureType>::Reset()
   m_CorrespondingListPointer = &(*m_SecondaryListIterator);
   m_CorrespondingListIterator = m_CorrespondingListPointer->begin();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

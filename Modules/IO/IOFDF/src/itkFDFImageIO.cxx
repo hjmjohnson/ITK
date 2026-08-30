@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 bool
 FDFImageIO::CanReadFile(const char * file)
@@ -592,4 +593,5 @@ FDFImageIO::Write(const void * /* buffer */)
   // not possible to write a fdf file
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

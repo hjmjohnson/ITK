@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 TileImageFilter<TInputImage, TOutputImage>::TileImageFilter()
 {
@@ -427,5 +428,6 @@ TileImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Indent 
   print_helper::PrintNumericTrait(os, indent, "DefaultPixelValue", m_DefaultPixelValue);
   os << indent << "Layout: " << m_Layout << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

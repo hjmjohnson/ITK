@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GrayscaleGeodesicDilateImageFilter
  * \brief Geodesic grayscale dilation of an image.
  *
@@ -187,6 +188,7 @@ private:
   unsigned long m_NumberOfIterationsUsed{};
   bool          m_FullyConnected{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

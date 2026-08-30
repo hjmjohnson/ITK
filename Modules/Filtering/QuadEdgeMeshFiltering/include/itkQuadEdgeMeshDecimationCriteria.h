@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshDecimationCriterion
  * \brief
@@ -285,6 +286,7 @@ protected:
   MinMeasureBoundCriterion() = default;
   ~MinMeasureBoundCriterion() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

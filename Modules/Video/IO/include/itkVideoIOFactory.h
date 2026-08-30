@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VideoIOFactoryEnums
  * \brief Contains all enum classes used by VideoIOFactory class
  * \ingroup ITKVideoIO
@@ -90,6 +91,7 @@ protected:
   VideoIOFactory();
   ~VideoIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 SubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::SubdivisionQuadEdgeMeshFilter()
 {
@@ -44,5 +45,6 @@ SubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::PrintSelf(std::ostream &
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

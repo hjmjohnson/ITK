@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUBoxImageFilter
  * \brief A base class for all the GPU filters working on a box neighborhood
@@ -83,6 +84,7 @@ protected:
     GPUSuperclass::PrintSelf(os, indent);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

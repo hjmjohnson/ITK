@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PointSetToPointSetRegistrationMethod
  * \brief Base class for PointSet to PointSet Registration Methods.
  *
@@ -186,6 +187,7 @@ private:
   ParametersType m_InitialTransformParameters{};
   ParametersType m_LastTransformParameters{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

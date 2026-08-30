@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh, typename TQEType>
 QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::QuadEdgeMeshEulerOperatorJoinVertexFunction()
   : Superclass()
@@ -585,6 +586,7 @@ QuadEdgeMeshEulerOperatorJoinVertexFunction<TMesh, TQEType>::IsEdgeLinkingTwoDif
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

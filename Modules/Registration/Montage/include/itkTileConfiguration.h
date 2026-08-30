@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned Dimension>
 struct ITK_TEMPLATE_EXPORT Tile
 {
@@ -374,6 +375,7 @@ template <unsigned Dimension>
 double_conversion::DoubleToStringConverter TileConfiguration<
   Dimension>::doubleConverter(double_conversion::DoubleToStringConverter::NO_FLAGS, nullptr, nullptr, 'e', 0, 17, 1, 0);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkTileConfiguration_h

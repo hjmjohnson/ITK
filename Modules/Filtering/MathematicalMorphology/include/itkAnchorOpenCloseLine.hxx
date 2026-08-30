@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputPix, typename TCompare>
 void
 AnchorOpenCloseLine<TInputPix, TCompare>::DoLine(std::vector<InputImagePixelType> & buffer, unsigned int bufflength)
@@ -250,6 +251,7 @@ AnchorOpenCloseLine<TInputPix, TCompare>::PrintSelf(std::ostream & os, Indent in
 {
   os << indent << "Size: " << m_Size << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputImage, typename TFunction, typename TSharedData>
 void
 ScalarChanAndVeseDenseLevelSetImageFilter<TInputImage, TFeatureImage, TOutputImage, TFunction, TSharedData>::
@@ -98,6 +99,7 @@ ScalarChanAndVeseDenseLevelSetImageFilter<TInputImage, TFeatureImage, TOutputIma
     this->m_DifferenceFunctions[fId]->UpdateSharedData(false);
   }
 }
+ITK_ABI_NAMESPACE_END
 } /* end namespace itk */
 
 #endif

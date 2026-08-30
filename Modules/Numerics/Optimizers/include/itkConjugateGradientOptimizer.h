@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConjugateGradientOptimizer
  * \brief Wrap of the vnl_conjugate_gradient
  *
@@ -89,6 +90,7 @@ private:
   bool                                   m_OptimizerInitialized{};
   std::unique_ptr<InternalOptimizerType> m_VnlOptimizer;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

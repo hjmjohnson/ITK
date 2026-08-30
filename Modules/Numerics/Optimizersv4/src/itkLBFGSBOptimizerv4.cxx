@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LBFGSBOptimizerHelperv4
  * \brief Wrapper helper around vnl_lbfgsb.
@@ -236,4 +237,5 @@ LBFGSBOptimizerv4::StartOptimization(bool /*doOnlyInitialization*/)
   this->InvokeEvent(EndEvent());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \brief Affine transformation with a specified center of rotation.
  *
@@ -168,6 +169,7 @@ private:
   double          m_Scale[VDimension]{};
   InputVectorType m_MatrixScale{};
 }; // class ScalableAffineTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

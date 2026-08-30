@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CovariantVector
  * \brief A templated class holding a n-Dimensional covariant vector.
@@ -292,6 +293,7 @@ swap(CovariantVector<T, VVectorDimension> & a, CovariantVector<T, VVectorDimensi
   a.swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 //

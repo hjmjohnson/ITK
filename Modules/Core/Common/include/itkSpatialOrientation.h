@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SpatialOrientationEnums
  *
  * \brief Enums for spatial orientation of images.
@@ -592,6 +593,7 @@ inline constexpr ValidCoordinateOrientationFlags ITK_COORDINATE_ORIENTATION_ASL 
 
 } // end of namespace SpatialOrientation
 #endif // !ITK_LEGACY_REMOVE
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

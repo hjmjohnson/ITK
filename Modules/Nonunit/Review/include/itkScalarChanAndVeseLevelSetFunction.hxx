@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Computes the foreground constant and background constant value. For the Dense
 // image filter, this is called prior to the start of every iteration. For the
 // sparse filter, this is only called one during initialization.
@@ -170,5 +171,6 @@ ScalarChanAndVeseLevelSetFunction<TInputImage, TFeatureImage, TSharedData>::Comp
 
   return t * t;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

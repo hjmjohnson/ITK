@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HessianGaussianImageFilter
  * \brief Computes the Hessian matrix of an image by convolution
  *        with the Second and Cross derivatives of a Gaussian
@@ -149,6 +150,7 @@ private:
   DerivativeFilterPointer   m_DerivativeFilter;
   OutputImageAdaptorPointer m_ImageAdaptor;
 }; // end class
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

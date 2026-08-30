@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MRIBiasEnergyFunction
  * \brief Represents a cost function for MRI bias field correction optimization.
@@ -657,6 +658,7 @@ private:
   Array<double> m_TissueClassSigmas{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

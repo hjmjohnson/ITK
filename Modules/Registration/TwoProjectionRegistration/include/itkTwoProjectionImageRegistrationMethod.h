@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class TwoProjectionImageRegistrationMethod
  * \brief Base class for Image Registration Methods
@@ -245,6 +246,7 @@ private:
   FixedImageRegionType m_FixedImageRegion2;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

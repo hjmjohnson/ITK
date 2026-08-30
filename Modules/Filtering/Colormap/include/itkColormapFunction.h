@@ -24,7 +24,10 @@
 #include "itkRGBPixel.h"
 #include "itkPrintHelper.h"
 
-namespace itk::Function
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Function
 {
 /**
  * \class ColormapFunction
@@ -129,6 +132,8 @@ private:
   RGBComponentType m_MinimumRGBComponentValue{};
   RGBComponentType m_MaximumRGBComponentValue{};
 };
-} // namespace itk::Function
+} // namespace Function
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

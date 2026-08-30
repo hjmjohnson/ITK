@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension, unsigned int VSplineOrder>
 BSplineTransform<TParametersValueType, VDimension, VSplineOrder>::BSplineTransform()
@@ -670,6 +671,7 @@ BSplineTransform<TParametersValueType, VDimension, VSplineOrder>::PrintSelf(std:
   os << indent << "GridDirection: " << this->m_CoefficientImages[0]->GetDirection() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

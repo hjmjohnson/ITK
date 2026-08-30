@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BinaryBallStructuringElement
  * \brief A Neighborhood that represents a ball structuring element
  *       (ellipsoid) with binary elements.
@@ -114,6 +115,7 @@ public:
   void
   CreateStructuringElement();
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

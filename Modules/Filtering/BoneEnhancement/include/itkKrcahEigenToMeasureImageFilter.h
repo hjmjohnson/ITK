@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class KrcahEigenToMeasureImageFilter
  * \brief Convert eigenvalues into a measure of sheetness according to the method of Krcah et al.
  *
@@ -130,6 +131,7 @@ private:
   /* Member variables */
   RealType m_EnhanceType;
 }; // end class
+ITK_ABI_NAMESPACE_END
 } /* end namespace itk */
 
 #ifndef ITK_MANUAL_INSTANTIATION

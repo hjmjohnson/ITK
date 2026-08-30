@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TFunction>
 NaryFunctorImageFilter<TInputImage, TOutputImage, TFunction>::NaryFunctorImageFilter()
 {
@@ -92,6 +93,7 @@ NaryFunctorImageFilter<TInputImage, TOutputImage, TFunction>::DynamicThreadedGen
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

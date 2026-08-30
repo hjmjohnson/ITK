@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType, typename TFeatureImageType>
 ShapePriorSegmentationLevelSetFunction<TImageType, TFeatureImageType>::ShapePriorSegmentationLevelSetFunction()
@@ -125,6 +126,7 @@ ShapePriorSegmentationLevelSetFunction<TImageType, TFeatureImageType>::ComputeGl
 
   return dt;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

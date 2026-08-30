@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const ComplexToComplexFFTImageFilterEnums::TransformDirection value)
@@ -35,4 +36,5 @@ operator<<(std::ostream & out, const ComplexToComplexFFTImageFilterEnums::Transf
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  *
@@ -46,6 +47,7 @@ ConstantPadImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, 
   print_helper::PrintNumericTrait(os, indent, "Constant", m_InternalBoundaryCondition.GetConstant());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

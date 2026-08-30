@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //
 // Constructor
@@ -142,6 +143,7 @@ FrameDifferenceVideoFilter<TInputVideoStream, TOutputVideoStream>::ThreadedGener
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

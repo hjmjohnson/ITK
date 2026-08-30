@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GrayscaleConnectedClosingImageFilter
  * \brief Enhance pixels associated with a dark object (identified by
  * a seed pixel) where the dark object is surrounded by a brighter object.
@@ -121,6 +122,7 @@ private:
 
   bool m_FullyConnected{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

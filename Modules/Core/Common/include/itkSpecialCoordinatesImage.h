@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SpecialCoordinatesImage
  *  \brief Templated n-dimensional nonrectilinear-coordinate image base class.
  *
@@ -345,6 +346,7 @@ private:
   /** Memory for the current buffer. */
   PixelContainerPointer m_Buffer{ PixelContainer::New() };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

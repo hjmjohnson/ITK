@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 MorphologicalWatershedImageFilter<TInputImage, TOutputImage>::MorphologicalWatershedImageFilter()
@@ -149,5 +150,6 @@ MorphologicalWatershedImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ost
   print_helper::PrintNumericTrait(os, indent, "Level", m_Level);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

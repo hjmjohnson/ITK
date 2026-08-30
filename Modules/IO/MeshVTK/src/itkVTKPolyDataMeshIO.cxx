@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -2216,4 +2217,5 @@ VTKPolyDataMeshIO::ReadComponentsAsASCII(std::ifstream &     inputFile,
   ReadFloatingPointsAsASCII(inputFile, buffer, numberOfComponents);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

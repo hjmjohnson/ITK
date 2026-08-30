@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 VoronoiPartitioningImageFilter<TInputImage, TOutputImage>::ClassifyDiagram()
@@ -180,6 +181,7 @@ VoronoiPartitioningImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostrea
 
   os << indent << "SigmaThreshold: " << m_SigmaThreshold << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

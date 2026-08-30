@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TValue>
 std::string
@@ -35,5 +36,6 @@ NumberToString<TValue>::operator()(TValue val) const
   return output.str();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

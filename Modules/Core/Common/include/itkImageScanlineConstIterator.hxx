@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 void
@@ -61,6 +62,7 @@ ImageScanlineConstIterator<TImage>::NextLine()
   m_SpanBeginOffset = this->m_Offset;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

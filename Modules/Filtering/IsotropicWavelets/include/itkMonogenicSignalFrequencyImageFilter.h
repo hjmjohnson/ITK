@@ -24,6 +24,7 @@
 #include "itkRieszFrequencyFunction.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MonogenicSignalFrequencyImageFilter
  * Analytical or monogenic signal filter, analogous to Hilbert transform in nD.
  * Require input to be a complex image.
@@ -98,6 +99,7 @@ protected:
 private:
   RieszFunctionPointer m_Evaluator;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkMonogenicSignalFrequencyImageFilter.hxx"

@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 void
 BinaryMorphologicalOpeningImageFilter<TInputImage, TOutputImage, TKernel>::GenerateData()
@@ -81,5 +82,6 @@ BinaryMorphologicalOpeningImageFilter<TInputImage, TOutputImage, TKernel>::Print
   print_helper::PrintNumericTrait(os, indent, "ForegroundValue", m_ForegroundValue);
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue", m_BackgroundValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

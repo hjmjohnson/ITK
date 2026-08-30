@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Accessor
 {
 /** \class LabelSelectionPixelAccessor
@@ -64,5 +65,6 @@ protected:
   TInternalType m_AcceptedValue;
 };
 } // end namespace Accessor
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

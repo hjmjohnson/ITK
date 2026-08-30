@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward declaration so itkPrintHelper.h can be safely included from
 // itkMacro.h without re-entering itkNumericTraits.h (which itself uses
 // macros defined later in itkMacro.h).  Every PrintNumericTrait() call
@@ -39,9 +40,13 @@ namespace itk
 // sites already #include "itkNumericTraits.h" directly or transitively.
 template <typename T>
 class NumericTraits;
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
-namespace itk::print_helper
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace print_helper
 {
 
 // Forward declarations so the per-container bodies below see all overloads at
@@ -183,6 +188,8 @@ operator<<(std::ostream & os, const T (&arr)[VLength])
   return os << arr[VLength - 1] << ')';
 }
 
-} // namespace itk::print_helper
+} // namespace print_helper
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkPrintHelper_h

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 DOMNode::DOMNode() = default;
 
@@ -686,4 +687,5 @@ DOMNode::SetTextChild(const std::string & text, IdentifierType i)
   this->SetChild((DOMTextNode *)tnode, i);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

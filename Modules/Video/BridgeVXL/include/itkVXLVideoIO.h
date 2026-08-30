@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VXLVideoIO
  *
@@ -196,6 +197,7 @@ private:
   /** device index for reading from a camera (may move to base class) */
   int m_CameraIndex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkVXLVideoIO_h

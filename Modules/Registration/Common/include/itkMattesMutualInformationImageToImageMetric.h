@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MattesMutualInformationImageToImageMetric
  * \brief Computes the mutual information between two images to be
  * registered using the method of Mattes et al.
@@ -362,6 +363,7 @@ private:
   bool         m_UseExplicitPDFDerivatives{ true };
   mutable bool m_ImplicitDerivativesSecondPass{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SimpleFilterWatcher
  * \brief Simple mechanism for monitoring the pipeline events of a filter
  * and reporting these events to std::cout.
@@ -318,6 +319,7 @@ private:
   unsigned long m_IterationTag{ 0 };
   unsigned long m_AbortTag{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

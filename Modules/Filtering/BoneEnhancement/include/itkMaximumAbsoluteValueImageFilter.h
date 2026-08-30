@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Functor
 {
 /** \class MaximumAbsoluteValue
@@ -122,6 +123,7 @@ protected:
   MaximumAbsoluteValueImageFilter() = default;
   ~MaximumAbsoluteValueImageFilter() override = default;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMaximumAbsoluteValueImageFilter_h

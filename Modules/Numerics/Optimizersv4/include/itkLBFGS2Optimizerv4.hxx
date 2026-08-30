@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInternalComputationValueType>
@@ -614,5 +615,6 @@ LBFGS2Optimizerv4Template<TInternalComputationValueType>::GetOrthantwiseEnd() co
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

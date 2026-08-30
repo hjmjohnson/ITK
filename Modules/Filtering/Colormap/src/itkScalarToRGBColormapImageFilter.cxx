@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Define how to print enumerations */
 std::ostream &
 operator<<(std::ostream & out, const ScalarToRGBColormapImageFilterEnums::RGBColormapFilter value)
@@ -59,4 +60,5 @@ operator<<(std::ostream & out, const ScalarToRGBColormapImageFilterEnums::RGBCol
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

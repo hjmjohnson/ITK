@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SinRegularizedHeavisideStepFunction
  *
  * \brief Sin-based implementation of the Regularized (smoothed) Heaviside functions.
@@ -65,6 +66,7 @@ protected:
   SinRegularizedHeavisideStepFunction() = default;
   ~SinRegularizedHeavisideStepFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Similarity2DTransform
  * \brief Similarity2DTransform of a vector space (e.g. space coordinates)
  *
@@ -251,6 +252,7 @@ protected:
 private:
   ScaleType m_Scale{};
 }; // class Similarity2DTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

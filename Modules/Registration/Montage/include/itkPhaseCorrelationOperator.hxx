@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /*
  * \author Jakub Bican, jakub.bican@matfyz.cz, Department of Image Processing,
  *         Institute of Information Theory and Automation,
@@ -218,6 +219,7 @@ PhaseCorrelationOperator<TRealPixel, VImageDimension>::EnlargeOutputRequestedReg
   output->SetRequestedRegionToLargestPossibleRegion();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

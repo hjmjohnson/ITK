@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate = SpacePrecisionType>
 class TestImageFunction
@@ -94,6 +95,7 @@ protected:
   ~TestImageFunction() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 /****************************************/

@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LabelStatisticsImageFilter
  * \brief Given an intensity image and a label map, compute min, max, variance and mean of the pixels associated with
  * each label or segment
@@ -407,6 +408,7 @@ private:
   std::mutex m_Mutex{};
 
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

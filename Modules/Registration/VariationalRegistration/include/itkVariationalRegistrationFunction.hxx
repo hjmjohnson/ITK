@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -181,6 +182,7 @@ VariationalRegistrationFunction<TFixedImage, TMovingImage, TDisplacementField>::
   os << m_SumOfSquaredChange << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

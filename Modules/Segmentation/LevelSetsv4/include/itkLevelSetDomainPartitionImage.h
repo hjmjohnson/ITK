@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LevelSetDomainPartitionImage
  *
@@ -107,6 +108,7 @@ protected:
   ListImagePointer               m_ListDomain{};
   LevelSetDomainRegionVectorType m_LevelSetDomainRegionVector{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

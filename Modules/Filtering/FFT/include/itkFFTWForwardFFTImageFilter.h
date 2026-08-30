@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FFTWForwardFFTImageFilter
  *
@@ -164,6 +165,7 @@ struct FFTImageFilterEnableDouble<FFTWForwardFFTImageFilter> : std::false_type
 {};
 #endif
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

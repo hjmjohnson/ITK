@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \brief Data source that reads image data from a series of disk files.
  *
  * This class builds an n-dimension image from multiple n-1
@@ -241,6 +242,7 @@ private:
   /** Indicated if the MMDA should be updated */
   bool m_MetaDataDictionaryArrayUpdate{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

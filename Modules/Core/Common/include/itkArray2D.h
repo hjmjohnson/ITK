@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Array2D
  *  \brief Array2D class representing a 2D array.
  *
@@ -152,6 +153,7 @@ template <>
 ITKCommon_EXPORT std::ostream &
                  operator<<(std::ostream & os, const Array2D<double> & arr);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

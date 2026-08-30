@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StructHashFunction
  *
  *  \brief Generic hash function for an arbitrary struct (or class).
@@ -64,6 +65,7 @@ StructHashFunction<TInput>::operator()(const InputType & key) const
   hash += (hash >> 5);
   return hash;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // ndef itkStructHashFunction_h

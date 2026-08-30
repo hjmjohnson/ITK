@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ImageIORegion::~ImageIORegion() = default;
 
@@ -256,4 +257,5 @@ ImageIORegion::PrintSelf(std::ostream & os, Indent indent) const
   }
   os << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

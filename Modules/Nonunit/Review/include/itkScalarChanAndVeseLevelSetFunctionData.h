@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScalarChanAndVeseLevelSetFunctionData
  *
  * \brief Helper class used to share data in the ScalarChanAndVeseLevelSetFunction.
@@ -94,6 +95,7 @@ protected:
 
   ~ScalarChanAndVeseLevelSetFunctionData() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

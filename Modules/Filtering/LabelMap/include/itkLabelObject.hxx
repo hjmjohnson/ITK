@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TLabel, unsigned int VImageDimension>
 LabelObject<TLabel, VImageDimension>::LabelObject()
   : m_Label(LabelType{})
@@ -387,6 +388,7 @@ LabelObject<TLabel, VImageDimension>::PrintSelf(std::ostream & os, Indent indent
   os << indent << "LineContainer: " << &m_LineContainer << std::endl;
   print_helper::PrintNumericTrait(os, indent, "Label", m_Label);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

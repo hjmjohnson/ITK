@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Set the parameters
 template <typename TParametersValueType, unsigned int VDimension>
 void
@@ -97,6 +98,7 @@ ScaleLogarithmicTransform<TParametersValueType, VDimension>::GetInverseTransform
   return Superclass::InvertTransform(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

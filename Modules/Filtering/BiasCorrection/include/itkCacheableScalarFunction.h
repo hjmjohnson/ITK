@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CacheableScalarFunction
  * \brief function cache implementation
@@ -155,5 +156,6 @@ private:
   /** Is the cache available?   */
   bool m_CacheAvailable{ false };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 #endif

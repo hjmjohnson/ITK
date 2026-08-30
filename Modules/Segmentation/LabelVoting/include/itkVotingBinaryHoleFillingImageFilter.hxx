@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 VotingBinaryHoleFillingImageFilter<TInputImage, TOutputImage>::VotingBinaryHoleFillingImageFilter()
   : m_MajorityThreshold(1)
@@ -170,6 +171,7 @@ VotingBinaryHoleFillingImageFilter<TInputImage, TOutput>::PrintSelf(std::ostream
   os << indent << "Majority Threshold           : " << m_MajorityThreshold << std::endl;
   os << indent << "Number of Pixels Changed     : " << m_NumberOfPixelsChanged << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

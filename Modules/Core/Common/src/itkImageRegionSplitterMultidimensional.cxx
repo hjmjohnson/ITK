@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  *
@@ -161,4 +162,5 @@ ImageRegionSplitterMultidimensional::ComputeSplits(unsigned int         dim,
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

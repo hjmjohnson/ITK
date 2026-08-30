@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PDEDeformableRegistrationFunction
  *
  * This is an abstract base class for all PDE functions which drives a
@@ -174,6 +175,7 @@ protected:
 
   mutable double m_GradientStep{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \brief Helpers shared by the PocketFFT image filters.
  * \ingroup ITKFFT
  */
@@ -81,6 +82,7 @@ Transform1D(std::complex<TValue> * data, const size_t lineLength, const bool for
 }
 
 } // namespace PocketFFTCommon
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

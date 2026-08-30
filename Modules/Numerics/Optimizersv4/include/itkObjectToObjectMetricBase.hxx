@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //-------------------------------------------------------------------
 template <typename TInternalComputationValueType>
@@ -67,6 +68,7 @@ ObjectToObjectMetricBaseTemplate<TInternalComputationValueType>::PrintSelf(std::
   os << indent << "GradientSourceEnum: " << m_GradientSource << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

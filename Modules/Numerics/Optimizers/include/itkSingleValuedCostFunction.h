@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SingleValuedCostFunction
  * \brief This class is a base for the CostFunctions returning a
  * single value
@@ -77,6 +78,7 @@ protected:
   SingleValuedCostFunction() = default;
   ~SingleValuedCostFunction() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

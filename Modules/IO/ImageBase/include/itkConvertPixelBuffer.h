@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConvertPixelBuffer
  *  \brief Class to convert blocks of data from one type to another.
@@ -181,6 +182,7 @@ protected:
   static std::enable_if_t<std::is_integral_v<UComponentType>, UComponentType>
   DefaultAlphaValue();
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

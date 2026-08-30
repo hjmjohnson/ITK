@@ -80,6 +80,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CellInterface
  *  \brief An abstract interface for cells.
@@ -562,6 +563,7 @@ public:
                  PointType,               \
                  PointsContainer,         \
                  UsingCellsContainer>
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #if !defined(ITK_WRAPPING_PARSER)

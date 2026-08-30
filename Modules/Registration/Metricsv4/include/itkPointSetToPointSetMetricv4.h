@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PointSetToPointSetMetricv4
  * \brief Computes similarity between two point sets.
  *
@@ -234,6 +235,7 @@ private:
     this->GetLocalNeighborhoodValueAndDerivative(point, measure, derivative, pixel);
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

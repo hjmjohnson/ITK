@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TernaryGeneratorImageFilter
  * \brief Implements pixel-wise generic operation of three images or images with constants.
  *
@@ -269,6 +270,7 @@ protected:
 private:
   std::function<void(const OutputImageRegionType &)> m_DynamicThreadedGenerateDataFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 auto
@@ -138,6 +139,7 @@ MetaLandmarkConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObject
   return landmarkMO;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

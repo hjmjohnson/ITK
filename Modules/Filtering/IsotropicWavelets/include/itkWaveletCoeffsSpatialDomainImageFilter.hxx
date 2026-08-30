@@ -40,6 +40,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TWaveletFunction>
 WaveletCoeffsSpatialDomainImageFilter<TImageType, TWaveletFunction>::WaveletCoeffsSpatialDomainImageFilter()
 {
@@ -112,5 +113,6 @@ WaveletCoeffsSpatialDomainImageFilter<TImageType, TWaveletFunction>::PrintSelf(s
   os << indent << " Levels: " << this->m_Levels << std::endl;
   os << indent << " HighPassSubBands: " << this->m_HighPassSubBands << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

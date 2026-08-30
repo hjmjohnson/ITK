@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TParentImageFilter>
 GPUInPlaceImageFilter<TInputImage, TOutputImage, TParentImageFilter>::~GPUInPlaceImageFilter() = default;
 
@@ -108,6 +109,7 @@ GPUInPlaceImageFilter<TInputImage, TOutputImage, TParentImageFilter>::AllocateOu
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

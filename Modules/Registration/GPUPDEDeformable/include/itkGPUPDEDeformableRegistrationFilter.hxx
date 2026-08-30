@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage, typename TDisplacementField, typename TParentImageFilter>
 GPUPDEDeformableRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField, TParentImageFilter>::
@@ -557,6 +558,7 @@ GPUPDEDeformableRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField
   m_GPUImageSizes->SetGPUDirtyFlag(true);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TScalar>
 AnisotropicDiffusionLBRImageFilter<TImage, TScalar>::AnisotropicDiffusionLBRImageFilter()
@@ -161,6 +162,7 @@ AnisotropicDiffusionLBRImageFilter<TImage, TScalar>::ComputeDiffusionTensors(Ima
   m_TensorImage = imageFunctor->GetOutput();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

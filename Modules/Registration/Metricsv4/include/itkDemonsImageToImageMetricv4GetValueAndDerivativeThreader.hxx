@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TDomainPartitioner, typename TImageToImageMetric, typename TDemonsMetric>
 void
 DemonsImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric, TDemonsMetric>::
@@ -105,6 +106,7 @@ DemonsImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TIma
   return true;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

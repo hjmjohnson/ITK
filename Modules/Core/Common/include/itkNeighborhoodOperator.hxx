@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 void
 NeighborhoodOperator<TPixel, VDimension, TAllocator>::ScaleCoefficients(PixelRealType s)
@@ -140,6 +141,7 @@ NeighborhoodOperator<TPixel, VDimension, TAllocator>::FillCenteredDirectional(co
     *data = static_cast<TPixel>(*it);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

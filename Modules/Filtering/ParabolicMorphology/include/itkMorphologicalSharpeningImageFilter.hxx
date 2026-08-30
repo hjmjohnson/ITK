@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 MorphologicalSharpeningImageFilter<TInputImage, TOutputImage>::MorphologicalSharpeningImageFilter()
 {
@@ -96,6 +97,7 @@ MorphologicalSharpeningImageFilter<TInputImage, TOutputImage>::PrintSelf(std::os
   Superclass::PrintSelf(os, indent);
   os << "Iterations = " << m_Iterations << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

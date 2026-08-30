@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage, typename TLevelSetEvolution>
 void
@@ -87,6 +88,7 @@ LevelSetEvolutionUpdateLevelSetsThreader<LevelSetDenseImage<TImage>,
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

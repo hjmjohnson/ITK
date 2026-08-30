@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TOperator, typename TComputation>
 auto
 NeighborhoodInnerProduct<TImage, TOperator, TComputation>::Compute(const ConstNeighborhoodIterator<TImage> & it,
@@ -78,5 +79,6 @@ NeighborhoodInnerProduct<TImage, TOperator, TComputation>::Compute(
 
   return static_cast<OutputPixelType>(sum);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 void
@@ -119,6 +120,7 @@ MetaConverterBase<VDimension>::WriteMeta(const SpatialObjectType * spatialObject
   return true;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMetaConverterBase_hxx

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 StatisticsUniqueLabelMapFilter<TImage>::StatisticsUniqueLabelMapFilter()
 {
@@ -40,5 +41,6 @@ StatisticsUniqueLabelMapFilter<TImage>::GenerateData()
     break;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

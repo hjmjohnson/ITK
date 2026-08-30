@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Constructor with default arguments
 template <typename TParametersValueType>
 ScaleSkewVersor3DTransform<TParametersValueType>::ScaleSkewVersor3DTransform()
@@ -309,6 +310,7 @@ ScaleSkewVersor3DTransform<TParametersValueType>::ComputeJacobianWithRespectToPa
   jacobian[2][14] = py;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 TxtTransformIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -61,4 +62,5 @@ TxtTransformIOFactoryRegister__Private()
 {
   ObjectFactoryBase::RegisterInternalFactoryOnce<TxtTransformIOFactory>();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

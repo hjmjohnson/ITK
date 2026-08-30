@@ -21,7 +21,10 @@
 #include "itkFunctionBase.h"
 #include "itkMeasurementVectorTraits.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class DistanceMetric
@@ -136,7 +139,9 @@ private:
   /** Number of components in the MeasurementVectorType */
   MeasurementVectorSizeType m_MeasurementVectorSize{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkDistanceMetric.hxx"

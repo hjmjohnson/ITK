@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObjectToPointSetFilter
  * \brief Base class for filters that take a SpatialObject
@@ -117,6 +118,7 @@ private:
   unsigned int m_ChildrenDepth{ 0 };
   unsigned int m_SamplingFactor{ 1 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

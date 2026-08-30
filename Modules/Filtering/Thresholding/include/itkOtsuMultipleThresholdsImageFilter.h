@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class OtsuMultipleThresholdsImageFilter
  * \brief Threshold an image using multiple Otsu Thresholds.
@@ -158,6 +159,7 @@ private:
   bool                m_ValleyEmphasis{ false };
   bool                m_ReturnBinMidpoint{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

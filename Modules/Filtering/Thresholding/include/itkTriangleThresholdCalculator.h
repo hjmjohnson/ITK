@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class TriangleThresholdCalculator
@@ -77,6 +78,7 @@ protected:
   GenerateData() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryImageToShapeLabelMapFilter
  * \brief Converts a binary image to a label map and valuate the shape attributes.
@@ -185,6 +186,7 @@ private:
   bool                 m_ComputePerimeter{};
   bool                 m_ComputeOrientedBoundingBox{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

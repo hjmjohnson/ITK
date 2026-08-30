@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \brief Convert a string to a numeric value, wrapping low-level
  *  conversion exceptions as itk::ExceptionObject.
@@ -99,6 +100,7 @@ StringToDouble(const std::string & str, const char * context);
 ITKCommon_EXPORT float
 StringToFloat(const std::string & str, const char * context);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

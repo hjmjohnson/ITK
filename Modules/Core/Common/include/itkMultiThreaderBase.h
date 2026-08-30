@@ -43,6 +43,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class MultiThreaderBaseEnums
  *
@@ -510,6 +511,7 @@ private:
 };
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

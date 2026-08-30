@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename InputPixelType, typename T, typename OutputConvertTraits>
 void
 ConvertPixelBuffer<InputPixelType, Array<T>, OutputConvertTraits>::Convert(InputPixelType * inputData,
@@ -41,6 +42,7 @@ ConvertPixelBuffer<InputPixelType, Array<T>, OutputConvertTraits>::Convert(Input
     ++outputData;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

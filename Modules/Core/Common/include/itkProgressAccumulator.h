@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ProgressAccumulator
  * \brief Facilitates progress reporting for filters that wrap around
@@ -167,6 +168,7 @@ private:
   /** The callback command */
   CommandPointer m_CallbackCommand{};
 };
+ITK_ABI_NAMESPACE_END
 } // End namespace itk
 
 #endif // itkProgressAccumulator_h_

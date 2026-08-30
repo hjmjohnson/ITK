@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VectorConfidenceConnectedImageFilter
  * \brief Segment pixels with similar statistics using connectivity
@@ -173,6 +174,7 @@ private:
 
   DistanceThresholdFunctionPointer m_ThresholdFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

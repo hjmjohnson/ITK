@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 template <typename TInputImage, typename TOutputImage>
 ComposeImageFilter<TInputImage, TOutputImage>::ComposeImageFilter()
@@ -159,6 +160,7 @@ ComposeImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(const
     progress.Completed(outputRegionForThread.GetSize()[0]);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

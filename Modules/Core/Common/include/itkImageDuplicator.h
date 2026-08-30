@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageDuplicator
  * \brief A helper class which creates an image which is perfect copy of the input image.
  *
@@ -126,6 +127,7 @@ private:
   ImagePointer      m_DuplicateImage{};
   ModifiedTimeType  m_InternalImageTime{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VImageDimension>
 void
 ImageBase<VImageDimension>::Initialize()
@@ -531,6 +532,7 @@ ImageBase<VImageDimension>::PrintSelf(std::ostream & os, Indent indent) const
   this->m_InverseDirection.PrintSelf(os, indent.GetNextIndent());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

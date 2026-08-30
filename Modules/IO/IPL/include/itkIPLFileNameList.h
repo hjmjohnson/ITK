@@ -60,6 +60,7 @@
   ITK_MACROEND_NOOP_STATEMENT
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class IPLSortInfo
  *  \brief -- holds info on one file for IPLCommonImageIO
@@ -285,5 +286,6 @@ private:
                      i.e. echoNumber */
   int m_SortOrder{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif /* itkIPLFileNameList_h */

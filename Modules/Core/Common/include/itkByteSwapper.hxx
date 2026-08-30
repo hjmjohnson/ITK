@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // The following are the public methods --------------------------------
 
 //------Big Endian methods----------------------------------------------
@@ -161,6 +162,7 @@ ByteSwapper<T>::SwapWriteRange(const T * buffer, SizeValueType numberOfElements,
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

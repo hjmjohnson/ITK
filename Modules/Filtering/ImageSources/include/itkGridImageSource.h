@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GridImageSource
  * \brief Generate an n-dimensional image of a grid.
@@ -153,6 +154,7 @@ private:
 
   RealType m_Scale{ 255.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

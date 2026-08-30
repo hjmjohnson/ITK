@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RelabelComponentImageFilter
  * \brief Relabel the components in an image such that consecutive labels are used.
@@ -289,6 +290,7 @@ private:
   ObjectSizeInPixelsContainerType        m_SizeOfObjectsInPixels{};
   ObjectSizeInPhysicalUnitsContainerType m_SizeOfObjectsInPhysicalUnits{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TLevelSet, typename TAuxValue, unsigned int VAuxDimension, typename TSpeedImage>
 FastMarchingExtensionImageFilter<TLevelSet, TAuxValue, VAuxDimension, TSpeedImage>::FastMarchingExtensionImageFilter()
   : m_AuxAliveValues(nullptr)
@@ -257,6 +258,7 @@ FastMarchingExtensionImageFilter<TLevelSet, TAuxValue, VAuxDimension, TSpeedImag
 
   return solution;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

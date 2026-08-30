@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class VideoSource
@@ -190,6 +191,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // end class VideoSource
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

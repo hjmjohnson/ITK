@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace utils
 {
 
@@ -78,4 +79,5 @@ bool
 LessOrEqualIndiceComparisson<std::vector<unsigned int>, 2>(const std::vector<unsigned int> & rhs,
                                                            const std::vector<unsigned int> & lhs);
 } // end namespace utils
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

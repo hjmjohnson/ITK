@@ -39,6 +39,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VTKImageImport
  * \brief Connect the end of an VTK pipeline to an ITK image pipeline.
@@ -223,6 +224,7 @@ private:
 
   std::string m_ScalarTypeName{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

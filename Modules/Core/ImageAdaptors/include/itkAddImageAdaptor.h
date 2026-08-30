@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AddImageAdaptor
  * \brief Presents an image as being the addition of a constant value to all pixels
@@ -73,6 +74,7 @@ protected:
   AddImageAdaptor() = default;
   ~AddImageAdaptor() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

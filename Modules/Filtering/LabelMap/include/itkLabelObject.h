@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelObject
  *  \brief The base class for the representation of a labeled binary object in an image.
@@ -393,6 +394,7 @@ private:
   LineContainerType m_LineContainer{};
   LabelType         m_Label{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

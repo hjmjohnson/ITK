@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MINCImageIOFactory
  * \brief Create instances of MINCImageIO objects using an object factory.
@@ -75,6 +76,7 @@ protected:
   MINCImageIOFactory();
   ~MINCImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

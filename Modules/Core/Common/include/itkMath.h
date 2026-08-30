@@ -45,7 +45,10 @@
 #  include <vnl/vnl_math.h>
 #endif
 
-namespace itk::Math
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Math
 {
 // These mathematical constants originate from VXL's vnl_math.h: correctly-rounded
 // double-precision literals (OEIS references in vnl_math.h), defined identically under
@@ -1191,6 +1194,8 @@ abs(T x) noexcept
 }
 #endif
 
-} // namespace itk::Math
+} // namespace Math
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // end of itkMath.h

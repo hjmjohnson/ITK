@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImageType, typename TOutputImageType>
 class NbTestClass : public NarrowBandImageFilterBase<TInputImageType, TOutputImageType>
 {
@@ -85,6 +86,7 @@ protected:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace

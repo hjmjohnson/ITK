@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 #if !defined(ITK_LEGACY_REMOVE)
 using TransformIOFactoryFileModeEnum = IOFileModeEnum;
@@ -68,6 +69,7 @@ protected:
 /** This helps to meet backward compatibility */
 using TransformIOFactory = TransformIOFactoryTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 // Note: Explicit instantiation is done in itkTransformIOFactory.cxx
@@ -93,6 +95,7 @@ using TransformIOFactory = TransformIOFactoryTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -102,6 +105,7 @@ extern template class ITKIOTransformBase_EXPORT_EXPLICIT TransformIOFactoryTempl
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformBase_EXPORT_EXPLICIT
 #endif

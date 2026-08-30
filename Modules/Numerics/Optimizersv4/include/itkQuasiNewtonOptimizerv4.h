@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuasiNewtonOptimizerv4Template
  * \brief Implement a Quasi-Newton optimizer with BFGS Hessian estimation.
@@ -213,6 +214,7 @@ private:
 /** This helps to meet backward compatibility */
 using QuasiNewtonOptimizerv4 = QuasiNewtonOptimizerv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

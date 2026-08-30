@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GeodesicActiveContourShapePriorLevelSetFunction
  *
  * \brief This function is used in
@@ -178,6 +179,7 @@ protected:
 private:
   double m_DerivativeSigma{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 LightObject::LightObject()
   : m_ReferenceCount(1)
@@ -235,4 +236,5 @@ operator<<(std::ostream & os, const LightObject & o)
   o.Print(os);
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

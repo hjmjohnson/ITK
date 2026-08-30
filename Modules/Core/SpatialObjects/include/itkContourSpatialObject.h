@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /*** \class ContourSpatialObjectEnums
  *
  * \brief Enum classes for the ContourSpatialObject class.
@@ -214,6 +215,7 @@ private:
   mutable ModifiedTimeType m_OrientationInObjectSpaceMTime{};
   int                      m_AttachedToSlice{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

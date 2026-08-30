@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PoolMultiThreader
  * \brief A class for performing multithreaded execution with a thread
  * pool back end
@@ -130,5 +131,6 @@ private:
   friend class ProcessObject;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

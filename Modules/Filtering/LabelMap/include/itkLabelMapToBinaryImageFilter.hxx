@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 LabelMapToBinaryImageFilter<TInputImage, TOutputImage>::LabelMapToBinaryImageFilter()
   : m_BackgroundValue(NumericTraits<OutputImagePixelType>::NonpositiveMin())
@@ -152,6 +153,7 @@ LabelMapToBinaryImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   print_helper::PrintNumericTrait(os, indent, "ForegroundValue", this->m_ForegroundValue);
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue", this->m_BackgroundValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

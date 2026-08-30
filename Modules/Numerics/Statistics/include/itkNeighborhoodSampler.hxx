@@ -18,7 +18,10 @@
 #ifndef itkNeighborhoodSampler_hxx
 #define itkNeighborhoodSampler_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 template <typename TSample>
@@ -53,6 +56,8 @@ NeighborhoodSampler<TSample>::PrintSelf(std::ostream & os, Indent indent) const
   // m_Radius
   os << indent << "Radius: " << this->GetRadiusInput() << std::endl;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

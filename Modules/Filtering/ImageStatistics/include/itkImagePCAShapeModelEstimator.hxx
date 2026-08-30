@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 ImagePCAShapeModelEstimator<TInputImage, TOutputImage>::ImagePCAShapeModelEstimator()
 {
@@ -385,6 +386,7 @@ ImagePCAShapeModelEstimator<TInputImage, TOutputImage>::EstimatePCAShapeModelPar
   m_EigenVectorNormalizedEnergy.normalize();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

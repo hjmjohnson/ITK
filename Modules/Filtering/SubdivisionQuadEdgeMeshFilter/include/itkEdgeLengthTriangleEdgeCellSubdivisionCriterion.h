@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *\class EdgeLengthTriangleEdgeCellSubdivisionCriterion
  *\brief
@@ -77,6 +78,7 @@ private:
   CoordinateType m_MaximumLength;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkEdgeLengthTriangleEdgeCellSubdivisionCriterion.hxx"

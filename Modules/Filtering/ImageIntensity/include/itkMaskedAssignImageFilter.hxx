@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage, typename TOutputImage>
 MaskedAssignImageFilter<TInputImage, TMaskImage, TOutputImage>::MaskedAssignImageFilter()
 {
@@ -44,6 +45,7 @@ MaskedAssignImageFilter<TInputImage, TMaskImage, TOutputImage>::MaskedAssignImag
   this->SetFunctor(func);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

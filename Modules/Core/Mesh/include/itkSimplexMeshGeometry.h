@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SimplexMeshGeometry
  * \brief handle geometric properties for vertices of a simplex mesh
@@ -146,6 +147,7 @@ public:
   void
   ComputeGeometry();
 }; // end of class SimplexMeshGeometry
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

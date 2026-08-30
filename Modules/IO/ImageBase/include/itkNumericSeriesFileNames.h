@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NumericSeriesFileNames
  * \brief Generate an ordered sequence of filenames.
  *
@@ -116,6 +117,7 @@ private:
 
   std::vector<std::string> m_FileNames{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkNumericSeriesFileNames_h

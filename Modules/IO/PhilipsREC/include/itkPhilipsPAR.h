@@ -72,6 +72,7 @@ enum
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \struct par_parameter
  */
@@ -322,6 +323,7 @@ private:
   /** Vector of strings for storing each line of PAR file. */
   std::vector<std::string> m_PARFileLines{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif /* itkPhilipsPAR_h */

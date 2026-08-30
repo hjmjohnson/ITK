@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class StreamingProcessObject
  * \brief Base class interface to process data on multiple requested input chunks.
@@ -119,6 +120,7 @@ private:
   int m_CurrentRequestNumber{ -1 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkStreamingProcessObject_h

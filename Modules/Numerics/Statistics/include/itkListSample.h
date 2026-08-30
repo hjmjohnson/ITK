@@ -24,7 +24,10 @@
 
 #include <vector>
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class ListSample
  *  \brief This class is the native implementation of the a Sample with an STL container
@@ -277,7 +280,9 @@ protected:
 private:
   InternalDataContainerType m_InternalContainer{};
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkListSample.hxx"

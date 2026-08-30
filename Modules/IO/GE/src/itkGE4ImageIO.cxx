@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Default constructor
 GE4ImageIO::GE4ImageIO() = default;
 GE4ImageIO::~GE4ImageIO() = default;
@@ -320,4 +321,5 @@ GE4ImageIO::MvtSunf(int numb)
   const unsigned int sun_num{ dg_sign | (sun_exp << smantlen) | ((dg_mantissa >> 9) & smantissa) };
   return bit_cast<float>(sun_num);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

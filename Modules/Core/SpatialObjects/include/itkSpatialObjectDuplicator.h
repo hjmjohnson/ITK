@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SpatialObjectDuplicator
  *  This helper class create an SpatialObject which is perfect
@@ -110,6 +111,7 @@ private:
   SpatialObjectPointer      m_DuplicateSpatialObject{};
   ModifiedTimeType          m_InternalSpatialObjectTime{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

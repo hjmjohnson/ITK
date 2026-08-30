@@ -23,6 +23,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 GenerateImageSource<TOutputImage>::GenerateImageSource()
   : m_Spacing(MakeFilled<SpacingType>(1.0))
@@ -102,6 +103,7 @@ GenerateImageSource<TOutputImage>::PrintSelf(std::ostream & os, Indent indent) c
   print_helper::PrintNumericTrait(os, indent, "Direction", m_Direction);
   os << indent << "UseReferenceImage: " << this->GetUseReferenceImage() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkGenerateImageSour_hxx

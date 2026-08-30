@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CenteredAffineTransform
  * \brief Affine transformation with a specified center of rotation.
  *
@@ -119,6 +120,7 @@ protected:
   /** Destroy an CenteredAffineTransform object */
   ~CenteredAffineTransform() override = default;
 }; // class CenteredAffineTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

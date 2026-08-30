@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 IsoContourDistanceImageFilter<TInputImage, TOutputImage>::IsoContourDistanceImageFilter()
@@ -379,6 +380,7 @@ IsoContourDistanceImageFilter<TInputImage, TOutputImage>::ComputeValue(const Inp
   } // end for n
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

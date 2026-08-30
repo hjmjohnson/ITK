@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryErodeImageFilter
  * \brief Fast binary erosion of a single intensity value in the image.
@@ -136,6 +137,7 @@ protected:
   // type inherited from the superclass
   using typename Superclass::NeighborIndexContainer;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -22,6 +22,7 @@
 #include <itkSmartPointer.h>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename T>
 class Instance : public T::Pointer
 {
@@ -30,6 +31,7 @@ public:
     : SmartPointer<T>(T::New())
   {}
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

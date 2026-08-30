@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RealTimeStamp
  * \brief The RealTimeStamp is a data structure for representing time with high
  * precision and a large dynamic range.
@@ -121,6 +122,7 @@ private:
   MicroSecondsCounterType m_MicroSeconds;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif // itkRealTimeStamp_h

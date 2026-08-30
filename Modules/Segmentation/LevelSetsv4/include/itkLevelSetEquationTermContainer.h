@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationTermContainer
  *  \brief Class for container holding the terms of a given level set update equation
@@ -344,6 +345,7 @@ protected:
   MapCFLContainerType m_TermContribution{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEquationTermContainer.hxx"

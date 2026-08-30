@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TLevelSet>
 LevelSetNeighborhoodExtractor<TLevelSet>::LevelSetNeighborhoodExtractor()
@@ -287,6 +288,7 @@ LevelSetNeighborhoodExtractor<TLevelSet>::CalculateDistance(IndexType & index)
 
   return distance;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

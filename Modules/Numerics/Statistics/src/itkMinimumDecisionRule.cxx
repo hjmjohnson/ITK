@@ -17,7 +17,10 @@
  *=========================================================================*/
 #include "itkMinimumDecisionRule.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 MinimumDecisionRule::~MinimumDecisionRule() = default;
 
@@ -41,4 +44,6 @@ MinimumDecisionRule::Evaluate(const MembershipVectorType & discriminantScores) c
   }
   return minIndex;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

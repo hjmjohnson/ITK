@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TLevelSetContainer>
 LevelSetEquationOverlapPenaltyTerm<TInput, TLevelSetContainer>::LevelSetEquationOverlapPenaltyTerm()
@@ -128,5 +129,6 @@ LevelSetEquationOverlapPenaltyTerm<TInput, TLevelSetContainer>::ComputeSumTerm(c
   sum += compensatedSummation.GetSum();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

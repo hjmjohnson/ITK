@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Region
  * \brief A region represents some portion or piece of data.
  *
@@ -106,6 +107,7 @@ protected:
   virtual void
   PrintTrailer(std::ostream & os, Indent indent) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

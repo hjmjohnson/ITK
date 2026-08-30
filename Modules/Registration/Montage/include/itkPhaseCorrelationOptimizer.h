@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class PhaseCorrelationOptimizerEnums
  * \ingroup Montage
@@ -288,6 +289,7 @@ private:
   typename FFTFilterType::Pointer m_FFTFilter = FFTFilterType::New();
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

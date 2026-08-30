@@ -93,6 +93,7 @@ setConnectivityEarlyBox(TIterator * it, bool fullyConnected = false)
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -619,6 +620,7 @@ BoxSquareAccumulateFunction(const TInputImage *               inputImage,
     noutIt.SetCenterPixel(o);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 BMPImageIO::BMPImageIO()
   : m_ColorPalette(0) // palette has no element by default
 {
@@ -936,4 +937,5 @@ BMPImageIO::PrintSelf(std::ostream & os, Indent indent) const
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

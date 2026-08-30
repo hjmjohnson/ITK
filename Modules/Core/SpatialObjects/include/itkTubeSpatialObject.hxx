@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension, typename TTubePointType>
 TubeSpatialObject<TDimension, TTubePointType>::TubeSpatialObject()
@@ -538,6 +539,7 @@ TubeSpatialObject<TDimension, TTubePointType>::ComputeTangentsAndNormals()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // end itkTubeSpatialObject_hxx

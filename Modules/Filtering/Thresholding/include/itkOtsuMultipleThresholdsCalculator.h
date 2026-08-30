@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class OtsuMultipleThresholdsCalculator
  * \brief Computes Otsu's multiple thresholds for a histogram.
@@ -123,6 +124,7 @@ private:
   bool          m_ValleyEmphasis{ false };
   bool          m_ReturnBinMidpoint{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage, typename TDisplacementField>
 LevelSetMotionRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>::LevelSetMotionRegistrationFilter()
@@ -240,6 +241,7 @@ LevelSetMotionRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>:
 
   this->SetRMSChange(drfp->GetRMSChange());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

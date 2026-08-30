@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Platform specific type alias for simple types
  */
 /** @ITKStartGrouping */
@@ -103,6 +104,7 @@ struct ConditionVariableType
 #endif
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 // Compile-time conditional code for different threading models

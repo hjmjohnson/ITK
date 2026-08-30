@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Optimizer
  * \brief Generic representation for an optimization method.
  *
@@ -114,6 +115,7 @@ private:
   ScalesType     m_Scales{};
   ScalesType     m_InverseScales{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

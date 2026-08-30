@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TimeProbesCollectorBase
  *  \brief Aggregates a set of time probes.
  *
@@ -44,6 +45,7 @@ public:
   /** destructor */
   ~TimeProbesCollectorBase() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkTimeProbesCollectorBase_h

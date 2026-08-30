@@ -19,7 +19,10 @@
 #include "vnl/vnl_erf.h"
 #include "itkMath.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 GaussianDistribution::~GaussianDistribution() = default;
 
@@ -442,4 +445,6 @@ GaussianDistribution::PrintSelf(std::ostream & os, Indent indent) const
     os << indent << "Variance: (unknown)" << std::endl;
   }
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

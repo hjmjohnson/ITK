@@ -21,7 +21,10 @@
 #include "itkObjectFactory.h"
 #include "itkMath.h"
 
-namespace itk::Statistics::SampleTest
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics::SampleTest
 {
 
 template <typename TMeasurementVector>
@@ -117,7 +120,9 @@ private:
   std::vector<AbsoluteFrequencyType> m_Frequencies;
 };
 
-} // namespace itk::Statistics::SampleTest
+} // namespace Statistics::SampleTest
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

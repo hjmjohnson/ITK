@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Structure for "Pointer to Implementation" or "Private
 // Implementation" to hide MINC data from the ITK interface.
@@ -162,6 +163,7 @@ private:
   // int m_Complex;
   bool m_RAStoLPS{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMINCImageIO_h

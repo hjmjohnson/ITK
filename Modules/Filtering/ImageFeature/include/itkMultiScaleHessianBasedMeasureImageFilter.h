@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MultiScaleHessianBasedMeasureImageFilterEnums
  * \brief This class contains all enum classes used by MultiScaleHessianBasedMeasureImageFilter class.
  * \ingroup ITKImageFeature
@@ -256,6 +257,7 @@ private:
   bool m_GenerateScalesOutput{};
   bool m_GenerateHessianOutput{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

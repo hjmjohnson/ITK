@@ -22,6 +22,7 @@
 #include "vnl/vnl_matrix.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInternalComputationValueType>
 OnePlusOneEvolutionaryOptimizerv4<TInternalComputationValueType>::OnePlusOneEvolutionaryOptimizerv4()
   : m_RandomGenerator(nullptr)
@@ -314,5 +315,6 @@ OnePlusOneEvolutionaryOptimizerv4<TInternalComputationValueType>::PrintSelf(std:
   os << indent << "CatchGetValueException   " << GetCatchGetValueException() << std::endl;
   os << indent << "MetricWorstPossibleValue " << GetMetricWorstPossibleValue() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 #endif

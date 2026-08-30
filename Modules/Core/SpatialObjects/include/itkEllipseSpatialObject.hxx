@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension>
 EllipseSpatialObject<TDimension>::EllipseSpatialObject()
@@ -138,6 +139,7 @@ EllipseSpatialObject<TDimension>::PrintSelf(std::ostream & os, Indent indent) co
   os << indent << "Object Center: " << m_CenterInObjectSpace << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

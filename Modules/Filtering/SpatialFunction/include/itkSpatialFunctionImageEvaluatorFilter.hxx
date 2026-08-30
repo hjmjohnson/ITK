@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TSpatialFunction, typename TInputImage, typename TOutputImage>
 SpatialFunctionImageEvaluatorFilter<TSpatialFunction, TInputImage, TOutputImage>::SpatialFunctionImageEvaluatorFilter()
   : m_PixelFunction(nullptr) // Set the internal function to null
@@ -77,6 +78,7 @@ SpatialFunctionImageEvaluatorFilter<TSpatialFunction, TInputImage, TOutputImage>
   os << indent << "PixelFunction: " << m_PixelFunction << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

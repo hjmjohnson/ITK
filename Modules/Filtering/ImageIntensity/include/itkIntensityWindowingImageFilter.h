@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // This functor class applies a linear transformation A.x + B inside a specified
 // range. Values below the range are mapped to a constant. Values over the range
 // are mapped to another constant.
@@ -227,6 +228,7 @@ private:
   OutputPixelType m_OutputMinimum{};
   OutputPixelType m_OutputMaximum{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

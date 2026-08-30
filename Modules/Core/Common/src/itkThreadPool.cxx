@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct ThreadPoolGlobals
 {
@@ -214,4 +215,5 @@ ThreadPool::ThreadExecute()
 
 ThreadPoolGlobals * ThreadPool::m_PimplGlobals;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

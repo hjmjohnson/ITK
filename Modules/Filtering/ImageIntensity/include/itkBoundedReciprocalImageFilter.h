@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BoundedReciprocalImageFilter
  *
  * \brief Computes 1/(1+x) for each pixel in the image
@@ -95,6 +96,7 @@ protected:
 
   ~BoundedReciprocalImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

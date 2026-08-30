@@ -24,7 +24,10 @@
 
 
 /// \cond HIDE_META_PROGRAMMING
-namespace itk::mpl
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace mpl
 {
 
 namespace Details
@@ -153,7 +156,9 @@ public:
    */
   using Type = typename Details::SizeToType<sizeof Check(a + b, 0), TA, TB>::Type;
 };
-} // namespace itk::mpl
+} // namespace mpl
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 /// \endcond
 

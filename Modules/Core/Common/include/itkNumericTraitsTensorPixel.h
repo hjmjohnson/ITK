@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \brief Define numeric traits for SymmetricSecondRankTensor.
  * \tparam T Component type of SymmetricSecondRankTensor
@@ -198,6 +199,7 @@ public:
   static const Self ITKCommon_EXPORT Zero;
   static const Self ITKCommon_EXPORT One;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsTensorPixel_h

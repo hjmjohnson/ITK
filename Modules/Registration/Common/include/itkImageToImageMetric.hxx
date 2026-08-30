@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 ImageToImageMetric<TFixedImage, TMovingImage>::ImageToImageMetric()
@@ -1333,6 +1334,7 @@ ImageToImageMetric<TFixedImage, TMovingImage>::SynchronizeTransforms() const
     this->m_ThreaderTransform[threadId]->SetParameters(this->m_Transform->GetParameters());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

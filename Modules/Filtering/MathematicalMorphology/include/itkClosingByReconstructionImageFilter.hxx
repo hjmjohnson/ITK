@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 ClosingByReconstructionImageFilter<TInputImage, TOutputImage, TKernel>::ClosingByReconstructionImageFilter()
   : m_Kernel()
@@ -138,5 +139,6 @@ ClosingByReconstructionImageFilter<TInputImage, TOutputImage, TKernel>::PrintSel
   itkPrintSelfBooleanMacro(FullyConnected);
   os << indent << "PreserveIntensities: " << m_PreserveIntensities << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

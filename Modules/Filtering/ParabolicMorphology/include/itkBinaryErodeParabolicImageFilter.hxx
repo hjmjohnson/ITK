@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BinaryErodeParabolicImageFilter<TInputImage, TOutputImage>::BinaryErodeParabolicImageFilter()
 {
@@ -151,5 +152,6 @@ BinaryErodeParabolicImageFilter<TInputImage, TOutputImage>::Modified() const
   m_RectPara->Modified();
   m_RectCast->Modified();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

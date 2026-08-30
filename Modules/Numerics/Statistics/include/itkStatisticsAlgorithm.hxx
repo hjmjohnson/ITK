@@ -20,7 +20,10 @@
 
 #include "itkNumericTraits.h"
 
-namespace itk::Statistics::Algorithm
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics::Algorithm
 {
 template <typename TSize>
 inline TSize
@@ -649,7 +652,9 @@ IntrospectiveSort(TSubsample * sample, unsigned int activeDimension, int beginIn
     sample, activeDimension, beginIndex, endIndex, 2 * FloorLog(endIndex - beginIndex), sizeThreshold);
   InsertSort<TSubsample>(sample, activeDimension, beginIndex, endIndex);
 }
-} // namespace itk::Statistics::Algorithm
+} // namespace Statistics::Algorithm
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 // end of namespace Statistics
 
 #endif // #ifndef itkStatisticsAlgorithm_hxx

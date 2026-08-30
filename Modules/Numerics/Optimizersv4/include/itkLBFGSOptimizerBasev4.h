@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /* Necessary forward declaration see below for definition */
 /**
  * \class LBFGSOptimizerBaseHelperv4
@@ -188,6 +189,7 @@ protected:
   report_iter() override;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
@@ -215,6 +217,7 @@ protected:
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -227,6 +230,7 @@ extern template class ITKOptimizersv4_EXPORT_EXPLICIT LBFGSOptimizerBasev4<vnl_l
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKOptimizersv4_EXPORT_EXPLICIT
 #endif

@@ -52,6 +52,7 @@
 // BEGIN namespace
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 /************************************************************
@@ -206,6 +207,7 @@ public:
 };
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /*include guard*/

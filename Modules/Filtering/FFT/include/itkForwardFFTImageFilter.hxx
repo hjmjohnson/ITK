@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 ForwardFFTImageFilter<TInputImage, TOutputImage>::GenerateInputRequestedRegion()
@@ -55,5 +56,6 @@ ForwardFFTImageFilter<TInputImage, TOutputImage>::GetSizeGreatestPrimeFactor() c
   return 2;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

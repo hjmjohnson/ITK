@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 BSplineResampleImageFilterBase<TInputImage, TOutputImage>::BSplineResampleImageFilterBase()
@@ -592,6 +593,7 @@ BSplineResampleImageFilterBase<TInputImage, TOutputImage>::CopyOutputLineToScrat
     ++j;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 #if ITK_VERSION_MAJOR < 4
 using ThreadIdType = int;
 using RegionIndexType = int;
@@ -149,6 +150,7 @@ protected:
   // support elliptical operations
   RealType m_BaseSigma;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

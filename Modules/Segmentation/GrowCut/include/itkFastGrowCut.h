@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class FastGrowCut
  *
@@ -208,6 +209,7 @@ private:
   bool          m_bSegInitialized{ false };
   double        m_DistancePenalty{ 0.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

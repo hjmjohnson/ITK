@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ReconstructionByErosionImageFilter
  * \brief grayscale reconstruction by erosion of an image
  *
@@ -104,6 +105,7 @@ protected:
    //
    //
    // ReconstructionByErosionImageFilter
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

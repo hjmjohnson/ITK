@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \brief Define numeric traits for VariableLengthVector.
  * \tparam T Component type of VariableLengthVector
@@ -214,6 +215,7 @@ public:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkNumericTraitsVariableLengthVector_h

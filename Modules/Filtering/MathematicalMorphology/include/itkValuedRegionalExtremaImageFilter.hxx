@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage, typename TOutputImage, typename TFunction1, typename TFunction2>
@@ -211,6 +212,7 @@ ValuedRegionalExtremaImageFilter<TInputImage, TOutputImage, TFunction1, TFunctio
   os << indent << "MarkerValue: " << m_MarkerValue << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

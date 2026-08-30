@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 RegularStepGradientDescentOptimizerv4<TInternalComputationValueType>::RegularStepGradientDescentOptimizerv4()
@@ -277,6 +278,7 @@ RegularStepGradientDescentOptimizerv4<TInternalComputationValueType>::PrintSelf(
   os << indent << "Current learning rate relaxation: " << this->m_CurrentLearningRateRelaxation << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

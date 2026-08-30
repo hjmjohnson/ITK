@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFeatureImage, typename TOutputPixel>
 ShapePriorMAPCostFunction<TFeatureImage, TOutputPixel>::ShapePriorMAPCostFunction()
@@ -163,6 +164,7 @@ ShapePriorMAPCostFunction<TFeatureImage, TOutputPixel>::Initialize()
                       << this->m_ShapeFunction->GetNumberOfShapeParameters() << " number of elements.");
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

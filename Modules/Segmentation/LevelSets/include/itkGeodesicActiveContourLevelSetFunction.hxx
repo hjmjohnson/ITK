@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFeatureImageType>
 void
 GeodesicActiveContourLevelSetFunction<TImageType, TFeatureImageType>::CalculateSpeedImage()
@@ -100,6 +101,7 @@ GeodesicActiveContourLevelSetFunction<TImageType, TFeatureImageType>::PrintSelf(
   os << indent << "DerivativeSigma: " << m_DerivativeSigma << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

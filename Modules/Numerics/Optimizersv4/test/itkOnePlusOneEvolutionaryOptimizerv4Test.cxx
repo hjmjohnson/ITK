@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class OnePlusOneMetric
@@ -188,6 +189,7 @@ public:
 private:
   double m_LastMetricValue{ 0.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 int

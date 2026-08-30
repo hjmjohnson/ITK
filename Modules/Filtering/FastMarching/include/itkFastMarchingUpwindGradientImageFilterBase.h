@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastMarchingUpwindGradientImageFilterBase
  *
@@ -166,6 +167,7 @@ protected:
 //  void operator = ( const Self& );
 //  IsotropicFastMarchingUpwindGradientImageFilterBase( const Self& );
 //  };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

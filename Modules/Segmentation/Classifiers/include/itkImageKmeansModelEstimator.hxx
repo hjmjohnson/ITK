@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMembershipFunction>
 ImageKmeansModelEstimator<TInputImage, TMembershipFunction>::ImageKmeansModelEstimator()
   : m_Threshold(0.01)
@@ -629,6 +630,7 @@ ImageKmeansModelEstimator<TInputImage, TMembershipFunction>::WithoutCodebookUseL
   return LBG_COMPLETED;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

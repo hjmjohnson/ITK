@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class MeanSquaresImageToImageMetric
@@ -134,6 +135,7 @@ private:
   itkAlignedTypedef(64, PerThreadS, AlignedPerThreadType);
   std::unique_ptr<AlignedPerThreadType[]> m_PerThread;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

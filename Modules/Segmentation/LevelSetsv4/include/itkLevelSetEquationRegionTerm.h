@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TLevelSetContainer>
 class ITK_TEMPLATE_EXPORT LevelSetEquationRegionTerm : public LevelSetEquationTermBase<TInput, TLevelSetContainer>
 {
@@ -50,5 +51,6 @@ protected:
 
   ~LevelSetEquationRegionTerm() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkLevelSetEquationRegionTerm_h

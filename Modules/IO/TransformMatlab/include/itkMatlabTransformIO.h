@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MatlabTransformIOTemplate
  *  \brief Create instances of MatlabTransformIOTemplate objects.
  * \ingroup ITKIOTransformMatlab
@@ -74,6 +75,7 @@ protected:
 /** This helps to meet backward compatibility */
 using MatlabTransformIO = MatlabTransformIOTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 // Note: Explicit instantiation is done in itkMatlabTransformIO.cxx
@@ -99,11 +101,13 @@ using MatlabTransformIO = MatlabTransformIOTemplate<double>;
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
 extern template class ITKIOTransformMatlab_EXPORT_EXPLICIT MatlabTransformIOTemplate<double>;
 extern template class ITKIOTransformMatlab_EXPORT_EXPLICIT MatlabTransformIOTemplate<float>;
 ITK_GCC_PRAGMA_DIAG_POP()
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformMatlab_EXPORT_EXPLICIT
 #endif

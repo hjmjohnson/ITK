@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 GradientDescentOptimizer::~GradientDescentOptimizer() = default;
 
 /**
@@ -186,4 +187,5 @@ operator<<(std::ostream & out, const GradientDescentOptimizerEnums::StopConditio
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

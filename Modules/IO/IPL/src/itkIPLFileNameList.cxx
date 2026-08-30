@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 struct IPLFileSortInfo_ascend_compare : public std::greater<IPLFileSortInfo *>
 {
 private:
@@ -201,4 +202,5 @@ IPLGetMacroDefinition(IPLFileNameList, Key1, int);
 IPLSetMacroDefinition(IPLFileNameList, Key2, int);
 IPLGetMacroDefinition(IPLFileNameList, Key2, int);
 IPLSetMacroDefinition(IPLFileNameList, SortOrder, int);
+ITK_ABI_NAMESPACE_END
 } // namespace itk

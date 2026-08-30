@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationCurvatureTerm
  *  \brief Derived class to represents a curvature term in the level-set evolution PDE
@@ -150,6 +151,7 @@ protected:
   bool m_UseCurvatureImage{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

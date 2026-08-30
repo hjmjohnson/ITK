@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 DCMTKTransformIO<TInternalComputationValueType>::DCMTKTransformIO() = default;
@@ -291,6 +292,7 @@ DCMTKTransformIO<TInternalComputationValueType>::Write()
   itkExceptionMacro("Write to file has not yet been implemented.");
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

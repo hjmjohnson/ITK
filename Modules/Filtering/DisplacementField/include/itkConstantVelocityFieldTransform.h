@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ConstantVelocityFieldTransform
  * \brief Provides local/dense/high-dimensionality transformation via a
@@ -230,6 +231,7 @@ private:
   SetFixedParametersFromConstantVelocityField() const;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

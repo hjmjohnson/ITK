@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomainPartitioner, typename TImageToImageMetric, typename TJointHistogramMetric>
 JointHistogramMutualInformationGetValueAndDerivativeThreader<
@@ -273,6 +274,7 @@ JointHistogramMutualInformationGetValueAndDerivativeThreader<
   return deriv;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VTKImageExport
  * \brief Connect the end of an ITK image pipeline to a VTK pipeline.
@@ -137,6 +138,7 @@ private:
   float       m_FloatDataSpacing[3]{};
   float       m_FloatDataOrigin[3]{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

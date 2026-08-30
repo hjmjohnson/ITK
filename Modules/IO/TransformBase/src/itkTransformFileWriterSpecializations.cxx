@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TParametersValueType>
@@ -402,4 +403,5 @@ template class ITKIOTransformBase_EXPORT TransformFileWriterTemplate<float>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

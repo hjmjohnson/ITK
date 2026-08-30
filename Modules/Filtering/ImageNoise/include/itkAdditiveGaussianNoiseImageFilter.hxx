@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 AdditiveGaussianNoiseImageFilter<TInputImage, TOutputImage>::AdditiveGaussianNoiseImageFilter()
@@ -90,6 +91,7 @@ AdditiveGaussianNoiseImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostr
   print_helper::PrintNumericTrait(os, indent, "Mean", m_Mean);
   print_helper::PrintNumericTrait(os, indent, "StandardDeviation", m_StandardDeviation);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

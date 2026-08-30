@@ -31,6 +31,7 @@
 #if !defined(ITK_LEGACY_REMOVE) && !defined(ITK_FUTURE_LEGACY_REMOVE)
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VnlInverse1DFFTImageFilter
  * \brief Deprecated compatibility wrapper that routes to PocketFFTInverse1DFFTImageFilter.
  *
@@ -83,6 +84,7 @@ struct FFTImageFilterTraits<VnlInverse1DFFTImageFilter> : public FFTImageFilterT
 #    pragma warning(pop)
 #  endif
 /** \endcond */
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // !ITK_LEGACY_REMOVE && !ITK_FUTURE_LEGACY_REMOVE
 

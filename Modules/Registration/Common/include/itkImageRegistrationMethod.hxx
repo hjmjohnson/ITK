@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 ImageRegistrationMethod<TFixedImage, TMovingImage>::ImageRegistrationMethod()
@@ -302,5 +303,6 @@ ImageRegistrationMethod<TFixedImage, TMovingImage>::SetMovingImage(const MovingI
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

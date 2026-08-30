@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MaskedRankImageFilter
  * \brief Rank filter of a greyscale image
@@ -139,6 +140,7 @@ protected:
 private:
   float m_Rank{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

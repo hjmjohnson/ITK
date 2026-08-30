@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionSplitterMultidimensional
  * \brief Divide a region into several pieces.
  *
@@ -100,6 +101,7 @@ private:
                 const SizeValueType  regionSize[],
                 unsigned int         splits[]);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

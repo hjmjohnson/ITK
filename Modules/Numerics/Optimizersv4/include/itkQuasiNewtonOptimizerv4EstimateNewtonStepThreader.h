@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInternalComputationValueType>
 class ITK_FORWARD_EXPORT QuasiNewtonOptimizerv4Template;
 
@@ -66,6 +67,7 @@ protected:
 using QuasiNewtonOptimizerv4EstimateNewtonStepThreader =
   QuasiNewtonOptimizerv4EstimateNewtonStepThreaderTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

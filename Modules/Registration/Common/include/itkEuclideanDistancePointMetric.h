@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class EuclideanDistancePointMetric
  * \brief Computes the minimum distance between a moving point-set
  *  and a fixed point-set. A vector of minimum closest point distance is
@@ -129,6 +130,7 @@ private:
   DistanceMapPointer m_DistanceMap{};
   bool               m_ComputeSquaredDistance{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

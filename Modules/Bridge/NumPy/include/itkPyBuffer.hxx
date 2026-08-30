@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TImage>
 PyObject *
@@ -126,6 +127,7 @@ PyBuffer<TImage>::_get_image_view_from_contiguous_array(PyObject * arr, PyObject
   return output;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

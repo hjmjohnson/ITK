@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationAdvectionTerm
  *  \brief Derived class to represents an advection term in the level-set evolution PDE
@@ -159,6 +160,7 @@ private:
   GenerateAdvectionImage();
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

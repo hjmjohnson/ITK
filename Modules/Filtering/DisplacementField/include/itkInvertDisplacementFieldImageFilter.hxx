@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /*
  * InvertDisplacementFieldImageFilter class definitions
@@ -260,6 +261,7 @@ InvertDisplacementFieldImageFilter<TInputImage, TOutputImage>::PrintSelf(std::os
   os << indent << "Mean error tolerance threshold: " << this->m_MeanErrorToleranceThreshold << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

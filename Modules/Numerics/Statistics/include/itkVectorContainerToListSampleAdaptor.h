@@ -24,7 +24,10 @@
 #include "itkSmartPointer.h"
 #include "itkVectorContainer.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class VectorContainerToListSampleAdaptor
  *  \brief This class provides ListSample interface to ITK VectorContainer
@@ -252,7 +255,9 @@ protected:
 private:
   VectorContainerConstPointer m_VectorContainer{ nullptr };
 }; // end of class VectorContainerToListSampleAdaptor
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkVectorContainerToListSampleAdaptor.hxx"

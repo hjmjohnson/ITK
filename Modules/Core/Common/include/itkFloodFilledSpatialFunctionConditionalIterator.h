@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FloodFilledSpatialFunctionConditionalIterator
  * \brief Iterates over a flood-filled spatial function with write access
@@ -105,6 +106,7 @@ public:
   /** Default Destructor. */
   ~FloodFilledSpatialFunctionConditionalIterator() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

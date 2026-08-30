@@ -20,7 +20,10 @@
 #include "itkListSample.h"
 #include "itkSampleToSubsampleFilter.h"
 
-namespace itk::Statistics::itkSampleToSubsampleFilter1Namespace
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics::itkSampleToSubsampleFilter1Namespace
 {
 
 template <typename TSample>
@@ -54,7 +57,9 @@ protected:
   {}
 };
 
-} // namespace itk::Statistics::itkSampleToSubsampleFilter1Namespace
+} // namespace Statistics::itkSampleToSubsampleFilter1Namespace
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 int

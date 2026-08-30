@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WarpHarmonicEnergyCalculator
  *
  * \brief Compute the harmonic energy of a deformation field.
@@ -150,6 +151,7 @@ private:
 
   RadiusType m_NeighborhoodRadius{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

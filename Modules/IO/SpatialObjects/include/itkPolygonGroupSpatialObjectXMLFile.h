@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PolygonGroupSpatialObjectXMLFileReader
  *
  * Reads an XML-format file containing a list of polygons, and
@@ -117,5 +118,6 @@ protected:
   PolygonGroupSpatialObjectXMLFileWriter() = default;
   ~PolygonGroupSpatialObjectXMLFileWriter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

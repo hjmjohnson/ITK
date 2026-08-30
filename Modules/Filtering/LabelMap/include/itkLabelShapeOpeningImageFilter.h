@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelShapeOpeningImageFilter
  * \brief remove the objects according to the value of their shape attribute
@@ -157,6 +158,7 @@ private:
   bool                 m_ReverseOrdering{};
   AttributeType        m_Attribute{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

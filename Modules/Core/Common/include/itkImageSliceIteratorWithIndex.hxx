@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ImageSliceIteratorWithIndex<TImage>::ImageSliceIteratorWithIndex(TImage * ptr, const RegionType & region)
   : ImageSliceConstIteratorWithIndex<TImage>(ptr, region)
@@ -43,6 +44,7 @@ ImageSliceIteratorWithIndex<TImage>::operator=(const ImageSliceConstIteratorWith
   this->ImageSliceConstIteratorWithIndex<TImage>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

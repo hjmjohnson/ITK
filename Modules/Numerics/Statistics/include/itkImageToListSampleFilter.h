@@ -23,7 +23,10 @@
 #include "itkProcessObject.h"
 #include "itkDataObjectDecorator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class ImageToListSampleFilter
@@ -145,7 +148,9 @@ protected:
 private:
   MaskPixelType m_MaskValue{};
 }; // end of class ImageToListSampleFilter
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkImageToListSampleFilter.hxx"

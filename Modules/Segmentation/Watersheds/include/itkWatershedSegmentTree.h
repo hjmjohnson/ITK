@@ -22,7 +22,10 @@
 #include <deque>
 #include <functional>
 
-namespace itk::watershed
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace watershed
 {
 /**
  * \class SegmentTree
@@ -220,7 +223,9 @@ protected:
 
   DequeType m_Deque{};
 };
-} // namespace itk::watershed
+} // namespace watershed
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWatershedSegmentTree.hxx"

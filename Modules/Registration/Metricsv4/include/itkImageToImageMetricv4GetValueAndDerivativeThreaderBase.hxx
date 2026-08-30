@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TDomainPartitioner, typename TImageToImageMetricv4>
 ImageToImageMetricv4GetValueAndDerivativeThreaderBase<TDomainPartitioner, TImageToImageMetricv4>::
@@ -334,6 +335,7 @@ ImageToImageMetricv4GetValueAndDerivativeThreaderBase<TDomainPartitioner, TImage
   return this->m_Associate->GetComputeDerivative();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

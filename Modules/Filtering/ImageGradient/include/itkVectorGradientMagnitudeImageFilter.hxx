@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TRealType, typename TOutputImage>
 VectorGradientMagnitudeImageFilter<TInputImage, TRealType, TOutputImage>::VectorGradientMagnitudeImageFilter()
   : m_UsePrincipleComponents(true)
@@ -312,6 +313,7 @@ VectorGradientMagnitudeImageFilter<TInputImage, TRealType, TOutputImage>::CubicS
 
   return num;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

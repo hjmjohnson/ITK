@@ -17,7 +17,10 @@
  *=========================================================================*/
 #include "itkSparseFrequencyContainer2.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 SparseFrequencyContainer2::~SparseFrequencyContainer2() = default;
 
@@ -86,4 +89,6 @@ SparseFrequencyContainer2::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TDisplacementField>
 WarpImageFilter<TInputImage, TOutputImage, TDisplacementField>::WarpImageFilter()
 {
@@ -437,6 +438,7 @@ WarpImageFilter<TInputImage, TOutputImage, TDisplacementField>::GenerateOutputIn
     outputPtr->SetLargestPossibleRegion(region);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

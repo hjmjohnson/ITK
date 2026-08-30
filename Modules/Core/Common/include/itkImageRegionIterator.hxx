@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ImageRegionIterator<TImage>::ImageRegionIterator(TImage * ptr, const RegionType & region)
   : ImageRegionConstIterator<TImage>(ptr, region)
@@ -44,6 +45,7 @@ ImageRegionIterator<TImage>::operator=(const ImageRegionConstIterator<TImage> & 
   return *this;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

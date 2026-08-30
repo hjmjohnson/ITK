@@ -17,10 +17,13 @@
  *=========================================================================*/
 #ifndef itkMvtSunf_h
 #define itkMvtSunf_h
+#include "itkABINamespace.h"
 #include "ITKIOGEExport.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 extern float
 MvtSunf(int numb);
-}
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 #endif

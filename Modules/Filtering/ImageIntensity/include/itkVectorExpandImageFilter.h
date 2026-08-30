@@ -24,6 +24,7 @@
 #if !defined(ITK_LEGACY_REMOVE)
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorExpandImageFilter
  * \brief Expand the size of a vector image by an integer factor in each
  * dimension.
@@ -188,6 +189,7 @@ private:
   ExpandFactorsArrayType m_ExpandFactors{};
   InterpolatorPointer    m_Interpolator{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #  ifndef ITK_MANUAL_INSTANTIATION

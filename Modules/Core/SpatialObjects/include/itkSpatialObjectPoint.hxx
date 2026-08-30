@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TPointDimension>
 SpatialObjectPoint<TPointDimension>::SpatialObjectPoint()
@@ -140,6 +141,7 @@ SpatialObjectPoint<TPointDimension>::PrintSelf(std::ostream & os, Indent indent)
 
   os << indent << "SpatialObject: " << m_SpatialObject << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

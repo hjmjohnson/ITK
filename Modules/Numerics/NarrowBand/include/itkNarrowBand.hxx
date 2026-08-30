@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 #if !defined(ITK_WRAPPING_PARSER)
 template <typename NodeType>
 std::vector<typename NarrowBand<NodeType>::RegionType>
@@ -76,6 +77,7 @@ NarrowBand<NodeType>::SplitBand(const SizeType & n)
 }
 
 #endif
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

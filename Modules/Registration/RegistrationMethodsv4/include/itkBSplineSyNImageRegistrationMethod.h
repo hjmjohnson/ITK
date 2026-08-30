@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class BSplineSyNImageRegistrationMethod
  * \brief Interface method for the performing greedy B-spline SyN image registration.
@@ -155,6 +156,7 @@ protected:
                                  const WeightedMaskImageType *,
                                  const BSplinePointSetType *);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class GiplImageIOInternals;
 
 /**
@@ -103,6 +104,7 @@ private:
 
   const std::unique_ptr<GiplImageIOInternals> m_Internal;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkGiplImageIO_h

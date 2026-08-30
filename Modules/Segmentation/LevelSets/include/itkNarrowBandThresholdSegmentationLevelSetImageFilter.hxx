@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputType>
 NarrowBandThresholdSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputType>::
   NarrowBandThresholdSegmentationLevelSetImageFilter()
@@ -41,6 +42,7 @@ NarrowBandThresholdSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, T
   Superclass::PrintSelf(os, indent);
   os << indent << "ThresholdFunction: " << m_ThresholdFunction;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

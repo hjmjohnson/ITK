@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 CumulativeGaussianOptimizer::CumulativeGaussianOptimizer()
   : m_DifferenceTolerance(1e-10)
 {
@@ -399,4 +400,5 @@ CumulativeGaussianOptimizer::PrintSelf(std::ostream & os, Indent indent) const
 
   os << indent << "StopConditionDescription: " << m_StopConditionDescription.str() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DefaultDynamicMeshTraits
  *  \brief A simple structure that holds type information for a mesh and its cells.
  *
@@ -137,6 +138,7 @@ public:
    * the IndexedContainerInterface. */
   using CellDataContainer = MapContainer<CellIdentifier, CellPixelType>;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

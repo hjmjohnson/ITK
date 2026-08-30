@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 /**
@@ -139,6 +140,7 @@ ContinuousBorderWarpImageFilter<TInputImage, TOutputImage, TDisplacementField>::
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

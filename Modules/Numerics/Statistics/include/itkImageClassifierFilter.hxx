@@ -20,7 +20,10 @@
 
 #include "itkImageRegionIterator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample, typename TInputImage, typename TOutputImage>
 ImageClassifierFilter<TSample, TInputImage, TOutputImage>::ImageClassifierFilter()
@@ -169,6 +172,8 @@ ImageClassifierFilter<TSample, TInputImage, TOutputImage>::GenerateData()
     ++outItr;
   }
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

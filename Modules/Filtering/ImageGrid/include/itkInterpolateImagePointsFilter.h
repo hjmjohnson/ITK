@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class InterpolateImagePointsFilter
  *  \brief Resamples an image at the coordinates specified by the user.
  *
@@ -188,6 +189,7 @@ private:
   PixelType           m_DefaultPixelValue{}; // default pixel value if the
                                              // point is outside the image
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -21,11 +21,13 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TKernelImage, typename TOutputImage, typename TInternalPrecision>
 ProjectedLandweberDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TInternalPrecision>::
   ~ProjectedLandweberDeconvolutionImageFilter() = default;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

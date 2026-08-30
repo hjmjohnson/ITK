@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** Generates the offsets for a neighborhood of the specified shape. */
 template <typename TImageNeighborhoodShape>
@@ -45,5 +46,6 @@ GenerateRectangularImageNeighborhoodOffsets(const Size<VImageDimension> & radius
   return GenerateImageNeighborhoodOffsets(shape);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

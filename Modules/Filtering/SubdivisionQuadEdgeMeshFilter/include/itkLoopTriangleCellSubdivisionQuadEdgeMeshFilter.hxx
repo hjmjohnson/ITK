@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 void
 LoopTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::AddNewCellPoints(InputCellType * cell)
@@ -234,5 +235,6 @@ LoopTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::Smoothin
   }
   return opt;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

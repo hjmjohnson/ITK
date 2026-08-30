@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class TranslationTransform
  * \brief Translation transformation of a vector space (e.g. space coordinates)
@@ -290,6 +291,7 @@ TranslationTransform<TParametersValueType, VDimension>::BackTransform(const Outp
   return vect;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

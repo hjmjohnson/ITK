@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TCoordinate>
 TileMontage<TImageType, TCoordinate>::TileMontage()
 {
@@ -809,6 +810,7 @@ TileMontage<TImageType, TCoordinate>::GenerateData()
   this->UpdateProgress(1.0f);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkTileMontage_hxx

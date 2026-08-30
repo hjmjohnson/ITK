@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScalarChanAndVeseLevelSetFunction
  *
  * \brief LevelSet function that computes a speed image based on regional integrals of probabilities
@@ -141,6 +142,7 @@ protected:
                                     const FeaturePixelType & iVal,
                                     const ScalarValueType &  iChange) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

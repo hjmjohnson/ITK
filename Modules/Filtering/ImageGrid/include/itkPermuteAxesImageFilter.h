@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PermuteAxesImageFilter
  * \brief Permutes the image axes according to a user specified order.
  *
@@ -134,6 +135,7 @@ private:
   PermuteOrderArrayType m_Order{};
   PermuteOrderArrayType m_InverseOrder{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteHessianGaussianImageFunction
  * \brief Compute the Hessian Gaussian of an image at a specific location in space
@@ -252,6 +253,7 @@ private:
   /** Interpolation mode */
   InterpolationModeEnum m_InterpolationMode{ InterpolationModeEnum::NearestNeighbourInterpolation };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

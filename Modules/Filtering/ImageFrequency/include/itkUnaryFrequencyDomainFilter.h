@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class UnaryFrequencyDomainFilter
  * \brief Performs a unary operation on a frequency domain image
@@ -205,6 +206,7 @@ private:
 
   bool m_ActualXDimensionIsOdd{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

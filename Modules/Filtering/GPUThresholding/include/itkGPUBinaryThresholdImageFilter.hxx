@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 GPUBinaryThresholdImageFilter<TInputImage, TOutputImage>::GPUBinaryThresholdImageFilter()
@@ -118,6 +119,7 @@ GPUBinaryThresholdImageFilter<TInputImage, TOutputImage>::GPUGenerateData()
   GPUSuperclass::GPUGenerateData();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

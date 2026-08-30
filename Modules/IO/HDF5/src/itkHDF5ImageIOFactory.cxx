@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 void
 HDF5ImageIOFactory::PrintSelf(std::ostream &, Indent) const
 {}
@@ -53,4 +54,5 @@ HDF5ImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<HDF5ImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

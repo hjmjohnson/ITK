@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class XMLFileOutputWindow
  * \brief Messages sent from the system are sent to a file with each message
  *        enclosed by XML tags.
@@ -105,6 +106,7 @@ protected:
   virtual void
   DisplayXML(const char *, const char *);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

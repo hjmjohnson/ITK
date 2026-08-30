@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFixedImage, typename TMovingImage>
 KullbackLeiblerCompareHistogramImageToImageMetric<TFixedImage,
                                                   TMovingImage>::KullbackLeiblerCompareHistogramImageToImageMetric()
@@ -99,6 +100,7 @@ KullbackLeiblerCompareHistogramImageToImageMetric<TFixedImage, TMovingImage>::Pr
 
   os << indent << "Epsilon: " << m_Epsilon << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // End namespace itk
 
 #endif // itkKullbackLeiblerCompareHistogramImageToImageMetric_hxx

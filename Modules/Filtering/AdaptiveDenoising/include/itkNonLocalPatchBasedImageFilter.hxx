@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 NonLocalPatchBasedImageFilter<TInputImage, TOutputImage>::NonLocalPatchBasedImageFilter()
@@ -255,6 +256,7 @@ NonLocalPatchBasedImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream
   os << indent << "Neighborhood patch radius = " << this->m_NeighborhoodPatchRadius << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

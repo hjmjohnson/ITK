@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LabeledPointSetToPointSetMetricv4
  * \brief Computes the distance metric and gradient between two
  * labeled point sets.
@@ -162,6 +163,7 @@ private:
   LabelSetType m_MovingPointSetLabels{};
   LabelSetType m_CommonPointSetLabels{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

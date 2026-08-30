@@ -27,13 +27,18 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward declaration lets the Matrix overload parse under the circular include
 // with itkMatrix.h; its body instantiates only where itk::Matrix is complete.
 template <typename T, unsigned int VRows, unsigned int VColumns>
 class Matrix;
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
-namespace itk::bridge
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace bridge
 {
 namespace Math
 {
@@ -124,6 +129,8 @@ Determinant(const vnl_matrix_fixed<TReal, VRows, VColumns> & A)
 }
 
 } // namespace Math
-} // namespace itk::bridge
+} // namespace bridge
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkBridgeMathDeterminant_h

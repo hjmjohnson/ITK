@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorNeighborhoodOperatorImageFilter
  * \brief Applies a single scalar NeighborhoodOperator to an
  * itk::Vector image region.
@@ -165,6 +166,7 @@ private:
    * for the image iterator. */
   ImageBoundaryConditionPointerType m_BoundsCondition{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

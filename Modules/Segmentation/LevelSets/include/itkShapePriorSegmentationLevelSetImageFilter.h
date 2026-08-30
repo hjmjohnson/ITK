@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  * \class ShapePriorSegmentationLevelSetImageFilter
@@ -205,6 +206,7 @@ private:
 
   ShapePriorSegmentationFunctionType * m_ShapePriorSegmentationFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

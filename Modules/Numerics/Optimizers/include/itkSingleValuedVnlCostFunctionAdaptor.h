@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SingleValuedVnlCostFunctionAdaptor
  * \brief This class is an Adaptor that allows to pass
  * itk::SingleValuedCostFunctions to vnl_optimizers expecting
@@ -160,6 +161,7 @@ private:
   mutable DerivativeType m_CachedDerivative{};
   mutable ParametersType m_CachedCurrentParameters{};
 }; // end of Class CostFunction
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

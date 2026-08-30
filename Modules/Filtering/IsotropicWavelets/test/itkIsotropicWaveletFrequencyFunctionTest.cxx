@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Testing
 {
 // Generate values from a linear space
@@ -52,6 +53,7 @@ linSpaceForIWFF(double init = 0.0, double end = 1.0, size_t points = 1000)
   return wArray;
 }
 } // namespace Testing
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 template <unsigned int VDimension, typename TWaveletFunction>

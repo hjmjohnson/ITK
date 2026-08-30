@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 GrayscaleGeodesicDilateImageFilter<TInputImage, TOutputImage>::GrayscaleGeodesicDilateImageFilter()
 {
@@ -367,5 +368,6 @@ GrayscaleGeodesicDilateImageFilter<TInputImage, TOutputImage>::PrintSelf(std::os
   os << indent << "NumberOfIterationsUsed: " << m_NumberOfIterationsUsed << std::endl;
   itkPrintSelfBooleanMacro(FullyConnected);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

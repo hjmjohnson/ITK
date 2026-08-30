@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace utils
 {
 /// Factorial
@@ -153,6 +154,7 @@ LessOrEqualIndiceComparisson(const TIndicesArrayType & rhs, const TIndicesArrayT
   return true;
 }
 } // end namespace utils
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

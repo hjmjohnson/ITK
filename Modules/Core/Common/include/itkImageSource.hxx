@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 ImageSource<TOutputImage>::ImageSource()
 {
@@ -294,6 +295,7 @@ ImageSource<TOutputImage>::PrintSelf(std::ostream & os, Indent indent) const
   itkPrintSelfBooleanMacro(DynamicMultiThreading);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

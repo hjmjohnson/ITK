@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LinearInterpolateImageFunction
  * \brief Linearly interpolate an image at specified positions.
@@ -503,6 +504,7 @@ private:
     tempZeros = RealTypeScalarRealType{};
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

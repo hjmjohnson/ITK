@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class InPlaceImageFilter
  * \brief Base class for filters that take an image as input and overwrite that image as the output
  *
@@ -184,6 +185,7 @@ private:
   bool m_InPlace{ true }; // enable the possibility of in-place
   bool m_RunningInPlace{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

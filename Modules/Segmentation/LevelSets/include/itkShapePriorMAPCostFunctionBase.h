@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ShapePriorMAPCostFunctionBase
  * \brief Represents the base class of maximum aprior (MAP) cost function used
  * ShapePriorSegmentationLevelSetImageFilter to estimate the shape parameters.
@@ -160,6 +161,7 @@ protected:
 
   FeatureImagePointer m_FeatureImage{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

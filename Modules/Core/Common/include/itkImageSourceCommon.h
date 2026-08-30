@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct ImageSourceCommonGlobals;
 
@@ -52,6 +53,7 @@ private:
   static ImageSourceCommonGlobals * m_PimplGlobals;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

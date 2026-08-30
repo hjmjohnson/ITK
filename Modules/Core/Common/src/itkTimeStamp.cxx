@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 itkGetGlobalValueMacro(TimeStamp, TimeStamp::GlobalTimeStampType, GlobalTimeStamp, 0);
 
@@ -59,4 +60,5 @@ TimeStamp::Modified()
 
 TimeStamp::GlobalTimeStampType * TimeStamp::m_GlobalTimeStamp;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

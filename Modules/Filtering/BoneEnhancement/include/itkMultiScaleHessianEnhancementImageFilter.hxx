@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 MultiScaleHessianEnhancementImageFilter<TInputImage, TOutputImage>::MultiScaleHessianEnhancementImageFilter()
 {
@@ -341,6 +342,7 @@ MultiScaleHessianEnhancementImageFilter<TInputImage, TOutputImage>::PrintSelf(st
   os << indent << "SigmaArray: " << m_SigmaArray << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMultiScaleHessianEnhancementImageFilter_hxx

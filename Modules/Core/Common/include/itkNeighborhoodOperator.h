@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NeighborhoodOperator
  * \brief Virtual class that defines a common interface to all
  *        neighborhood operator subtypes.
@@ -183,6 +184,7 @@ private:
   /** Direction (dimension number) of the derivative. */
   unsigned int m_Direction{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

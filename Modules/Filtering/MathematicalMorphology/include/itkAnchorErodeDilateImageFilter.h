@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AnchorErodeDilateImageFilter
  * \brief class to implement erosions and dilations using anchor
@@ -95,6 +96,7 @@ private:
   // the class that operates on lines
   using AnchorLineType = AnchorErodeDilateLine<InputImagePixelType, TFunction1>;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -27,7 +27,10 @@
 #include "itk_eigen.h"
 #include ITK_EIGEN(Dense)
 
-namespace itk::bridge
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace bridge
 {
 
 /** \class SymmetricEigenDecomposition
@@ -125,6 +128,8 @@ public:
   }
 };
 
-} // namespace itk::bridge
+} // namespace bridge
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif // itkBridgeSymmetricEigenDecomposition_h

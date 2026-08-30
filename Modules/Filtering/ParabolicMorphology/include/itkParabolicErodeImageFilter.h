@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParabolicErodeImageFilter
  * \brief Class for morphological erosion
@@ -89,6 +90,7 @@ protected:
   ~ParabolicErodeImageFilter() override = default;
   //   void PrintSelf(std::ostream& os, Indent indent) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

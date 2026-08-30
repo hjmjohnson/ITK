@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DerivativeOperator
  * \brief A NeighborhoodOperator for taking an n-th order derivative
@@ -119,6 +120,7 @@ private:
   /** Order of the derivative. */
   unsigned int m_Order{ 1 };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

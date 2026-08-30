@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TCellInterface>
 void
@@ -181,6 +182,7 @@ VertexCell<TCellInterface>::EvaluatePosition(CoordinateType *          x,
   }
   return false;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

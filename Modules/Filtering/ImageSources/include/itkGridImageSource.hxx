@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage>
 GridImageSource<TOutputImage>::GridImageSource()
 {
@@ -133,6 +134,7 @@ GridImageSource<TOutputImage>::PrintSelf(std::ostream & os, Indent indent) const
 
   os << indent << "Pixel arrays: " << m_PixelArrays << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

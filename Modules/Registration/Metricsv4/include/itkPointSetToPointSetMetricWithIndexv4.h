@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PointSetToPointSetMetricWithIndexv4
  * \brief Computes similarity between two point sets.
  *
@@ -488,6 +489,7 @@ private:
   const PointIdentifierRanges
   CreateRanges() const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

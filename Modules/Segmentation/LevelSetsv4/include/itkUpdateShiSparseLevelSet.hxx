@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension, typename TEquationContainer>
 UpdateShiSparseLevelSet<VDimension, TEquationContainer>::UpdateShiSparseLevelSet()
@@ -409,6 +410,7 @@ UpdateShiSparseLevelSet<VDimension, TEquationContainer>::Con(const LevelSetInput
   return false;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkUpdateShiSparseLevelSet_hxx

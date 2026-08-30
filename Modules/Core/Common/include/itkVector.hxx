@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename T, unsigned int TVectorDimension>
 Vector<T, TVectorDimension>::Vector(const ValueType & r)
   : Superclass{ r }
@@ -206,5 +207,6 @@ Vector<T, TVectorDimension>::operator*(const Self & other) const
   return value;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

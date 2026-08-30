@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GaussianBlurImageFunction
  * \brief Compute the convolution of a neighborhood operator with the image
@@ -206,6 +207,7 @@ private:
   /** Neighborhood Image Function */
   GaussianFunctionPointer m_GaussianFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

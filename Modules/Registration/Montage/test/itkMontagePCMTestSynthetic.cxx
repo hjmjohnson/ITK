@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension>
 class HyperSphereImageSource : public itk::Object
 {
@@ -114,6 +115,7 @@ public:
   typename ImageType::SpacingType   m_ImageSpacing;
   typename ImageType::DirectionType m_ImageDirection;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

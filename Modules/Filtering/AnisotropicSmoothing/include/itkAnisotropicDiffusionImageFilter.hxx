@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 AnisotropicDiffusionImageFilter<TInputImage, TOutputImage>::AnisotropicDiffusionImageFilter()
@@ -108,6 +109,7 @@ AnisotropicDiffusionImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostre
   os << indent << "ConductanceScalingUpdateInterval: " << m_ConductanceScalingUpdateInterval << std::endl;
   os << indent << "FixedAverageGradientMagnitude: " << m_FixedAverageGradientMagnitude << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

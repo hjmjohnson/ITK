@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ImageToImageFilter<TInputImage, TOutputImage>::ImageToImageFilter()
@@ -258,6 +259,7 @@ ImageToImageFilter<TInputImage, TOutputImage>::PopFrontInput()
   this->ProcessObject::PopFrontInput();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -26,6 +26,7 @@ extern "C"
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInternalVnlOptimizerType>
@@ -218,4 +219,5 @@ LBFGSOptimizerBasev4<TInternalVnlOptimizerType>::GetStopConditionDescription() c
 template class ITKOptimizersv4_EXPORT LBFGSOptimizerBasev4<vnl_lbfgs>;
 template class ITKOptimizersv4_EXPORT LBFGSOptimizerBasev4<vnl_lbfgsb>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

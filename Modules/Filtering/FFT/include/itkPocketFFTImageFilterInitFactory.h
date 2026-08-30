@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PocketFFTImageFilterInitFactory
  * \brief Initialize PocketFFT image filter factory backends.
@@ -66,6 +67,7 @@ protected:
   PocketFFTImageFilterInitFactory();
   ~PocketFFTImageFilterInitFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

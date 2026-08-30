@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 void
 ModifiedButterflyTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::AddNewCellPoints(
@@ -143,5 +144,6 @@ ModifiedButterflyTriangleCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMe
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

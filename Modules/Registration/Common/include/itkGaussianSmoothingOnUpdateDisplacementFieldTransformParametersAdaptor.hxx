@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 GaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor<
@@ -95,6 +96,7 @@ GaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor<TTransform>
     os, indent, "GaussianSmoothingVarianceForTheTotalFieldSetTime", m_GaussianSmoothingVarianceForTheTotalFieldSetTime);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

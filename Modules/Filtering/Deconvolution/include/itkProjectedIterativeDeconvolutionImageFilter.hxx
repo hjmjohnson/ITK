@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TSuperclass>
 ProjectedIterativeDeconvolutionImageFilter<TSuperclass>::~ProjectedIterativeDeconvolutionImageFilter()
@@ -54,6 +55,7 @@ ProjectedIterativeDeconvolutionImageFilter<TSuperclass>::Iteration(ProgressAccum
   this->m_CurrentEstimate->DisconnectPipeline();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

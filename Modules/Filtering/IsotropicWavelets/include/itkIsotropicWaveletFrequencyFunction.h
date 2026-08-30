@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class IsotropicWaveletFrequencyFunction
  * Abstract class for IsotropicWaveletFrequencyFunction, subclass of
  * \sa IsotropicFrequencyFunction implementing a M-Band decomposition of frequencies.
@@ -126,6 +127,7 @@ protected:
   unsigned int      m_HighPassSubBands{ 1 };
   FunctionValueType m_FreqCutOff;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

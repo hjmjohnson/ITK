@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HMinimaImageFilter
  * \brief Suppress local minima whose depth below the baseline is less than h.
  *
@@ -133,6 +134,7 @@ private:
   unsigned long       m_NumberOfIterationsUsed{ 1 };
   bool                m_FullyConnected{ false };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

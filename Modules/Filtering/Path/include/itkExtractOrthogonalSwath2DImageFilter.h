@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ExtractOrthogonalSwath2DImageFilter
  * \brief Extracts into rectangular form a "swath" image from the input image along the parametric path.
@@ -169,6 +170,7 @@ private:
   double         m_Origin[ImageDimension]{};
   double         m_Spacing[ImageDimension]{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

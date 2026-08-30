@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 TIFFImageIOFactory::TIFFImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ TIFFImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<TIFFImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

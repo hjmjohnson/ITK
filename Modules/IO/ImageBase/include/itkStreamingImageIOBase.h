@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StreamingImageIOBase
  *
  * \brief A base class for specific ImageIO file formats which support
@@ -169,6 +170,7 @@ protected:
     return this->GetHeaderSize();
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

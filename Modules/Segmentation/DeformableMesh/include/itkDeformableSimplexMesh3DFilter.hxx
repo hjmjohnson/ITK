@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputMesh>
 DeformableSimplexMesh3DFilter<TInputMesh, TOutputMesh>::DeformableSimplexMesh3DFilter()
@@ -554,6 +555,7 @@ DeformableSimplexMesh3DFilter<TInputMesh, TOutputMesh>::ComputeBarycentricCoordi
 
   return eps;
 }
+ITK_ABI_NAMESPACE_END
 } /* end namespace itk. */
 
 #endif // itkDeformableSimplexMesh3DFilter_hxx

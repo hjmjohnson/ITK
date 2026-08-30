@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConnectedThresholdImageFilterEnums
  * \brief Contains all the enum classes used by the ConnectedThresholdImageFilter class.
  * \ingroup RegionGrowingSegmentation
@@ -202,6 +203,7 @@ private:
 
   ConnectedThresholdImageFilterEnums::Connectivity m_Connectivity{ ConnectivityEnum::FaceConnectivity };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

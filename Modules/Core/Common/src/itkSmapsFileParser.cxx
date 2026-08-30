@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 bool ITKCommon_EXPORT
 ci_equal(char a, char b)
 {
@@ -550,4 +551,5 @@ VMMapData_10_2::GetStackUsage()
 {
   return this->GetMemoryUsage("stack", "Size");
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

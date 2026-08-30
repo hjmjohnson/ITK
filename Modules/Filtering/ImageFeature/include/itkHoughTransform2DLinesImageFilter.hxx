@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPixelType, typename TOutputPixelType>
 HoughTransform2DLinesImageFilter<TInputPixelType, TOutputPixelType>::HoughTransform2DLinesImageFilter()
@@ -370,6 +371,7 @@ HoughTransform2DLinesImageFilter<TInputPixelType, TOutputPixelType>::PrintSelf(s
 
   os << indent << "OldModifiedTime: " << NumericTraits<ModifiedTimeType>::PrintType(m_OldModifiedTime) << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

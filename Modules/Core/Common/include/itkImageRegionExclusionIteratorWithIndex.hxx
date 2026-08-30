@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ImageRegionExclusionIteratorWithIndex<TImage>::ImageRegionExclusionIteratorWithIndex(TImage *           ptr,
                                                                                      const RegionType & region)
@@ -46,6 +47,7 @@ ImageRegionExclusionIteratorWithIndex<TImage>::operator=(const ImageRegionExclus
   this->ImageRegionExclusionConstIteratorWithIndex<TImage>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

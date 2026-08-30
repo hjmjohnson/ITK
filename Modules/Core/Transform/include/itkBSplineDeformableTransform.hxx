@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // Constructor with default arguments
 template <typename TParametersValueType, unsigned int VDimension, unsigned int VSplineOrder>
@@ -600,6 +601,7 @@ BSplineDeformableTransform<TParametersValueType, VDimension, VSplineOrder>::Comp
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PathSource
  *  \brief Base class for all process objects that output path data.
@@ -192,6 +193,7 @@ protected:
   // Inherit ProcessObject::PrepareOutputs(), which calls Initialize()
   // (Image replaces w/ empty function)
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

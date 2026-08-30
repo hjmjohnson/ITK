@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //-CONSTRUCTOR PRINT-----------------------------------------------------------
 
@@ -224,6 +225,7 @@ VideoToVideoFilter<TInputVideoStream, TOutputVideoStream>::BeforeTemporalStreami
   input->SetMinimumBufferSize(this->TemporalProcessObject::m_UnitInputNumberOfFrames);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

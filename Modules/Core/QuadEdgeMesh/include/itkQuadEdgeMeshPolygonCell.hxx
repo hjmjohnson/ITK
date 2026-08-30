@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 template <typename TCellInterface>
 QuadEdgeMeshPolygonCell<TCellInterface>::QuadEdgeMeshPolygonCell(PointIdentifier nPoints)
@@ -328,6 +329,7 @@ QuadEdgeMeshPolygonCell<TCellInterface>::InternalPointIdsEnd() const -> PointIdI
 
   return iterator;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

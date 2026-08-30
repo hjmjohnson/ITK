@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RealTimeInterval
  * \brief A data structure for representing the time
  * span between two RealTimeStamps, with similar high precision and a large
@@ -121,6 +122,7 @@ private:
   MicroSecondsDifferenceType m_MicroSeconds;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif // itkRealTimeInterval_h

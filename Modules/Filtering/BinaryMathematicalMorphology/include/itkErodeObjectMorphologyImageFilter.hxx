@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 ErodeObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::ErodeObjectMorphologyImageFilter()
 {
@@ -54,5 +55,6 @@ ErodeObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(
   Superclass::PrintSelf(os, indent);
   os << indent << "BackgroundValue : " << m_BackgroundValue << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

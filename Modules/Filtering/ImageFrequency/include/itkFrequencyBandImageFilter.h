@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FrequencyBandImageFilter
  * \brief Performs a frequency band filtering on a frequency domain image
@@ -216,6 +217,7 @@ private:
   bool m_PassNegativeLowFrequencyThreshold{ true };
   bool m_PassNegativeHighFrequencyThreshold{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

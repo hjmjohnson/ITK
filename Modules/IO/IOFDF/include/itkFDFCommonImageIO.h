@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 std::string
 RemoveCharacters(std::string, char);
@@ -95,6 +96,7 @@ PrintVector(std::ostream & os, std::string name, const std::vector<T> & vect)
   os << "}" << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

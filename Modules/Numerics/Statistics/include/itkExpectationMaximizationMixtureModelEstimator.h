@@ -23,7 +23,10 @@
 #include "itkGaussianMembershipFunction.h"
 #include "itkSimpleDataObjectDecorator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class ExpectationMaximizationMixtureModelEstimatorEnums
  * \brief Contains all enum classes used by ExpectationMaximizationMixtureModelEstimator class.
@@ -237,7 +240,9 @@ private:
   MembershipFunctionVectorObjectPointer  m_MembershipFunctionsObject{};
   MembershipFunctionsWeightsArrayPointer m_MembershipFunctionsWeightArrayObject{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkExpectationMaximizationMixtureModelEstimator.hxx"

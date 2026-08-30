@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryErodeParabolicImageFilter
  * \brief Class for binary morphological erosion operation.
@@ -156,6 +157,7 @@ private:
   typename RectParabolicType::Pointer m_RectPara;
   typename RCastType::Pointer         m_RectCast;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

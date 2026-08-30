@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RayCastInterpolateImageFunction
  * \brief Projective interpolation of an image at specified positions.
@@ -199,6 +200,7 @@ protected:
 private:
   class RayCastHelper;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename TLevelSetValueType, typename TEquationContainer>
 UpdateWhitakerSparseLevelSet<VDimension, TLevelSetValueType, TEquationContainer>::UpdateWhitakerSparseLevelSet()
   : m_TimeStep(NumericTraits<LevelSetOutputType>::OneValue())
@@ -950,5 +951,6 @@ UpdateWhitakerSparseLevelSet<VDimension, TLevelSetValueType, TEquationContainer>
     layerPlus2.erase(tempIt);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkUpdateWhitakerSparseLevelSet_hxx

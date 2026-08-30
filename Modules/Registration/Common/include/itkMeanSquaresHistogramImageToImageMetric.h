@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MeanSquaresHistogramImageToImageMetric
  * \brief Computes mean squared difference similarity measure between
  * two images to be registered.
@@ -85,6 +86,7 @@ protected:
   MeasureType
   EvaluateMeasure(HistogramType & histogram) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // End namespace itk.
 
 #ifndef ITK_MANUAL_INSTANTIATION

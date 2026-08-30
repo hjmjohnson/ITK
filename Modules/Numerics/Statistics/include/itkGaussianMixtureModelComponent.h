@@ -23,7 +23,10 @@
 #include "itkWeightedMeanSampleFilter.h"
 #include "itkWeightedCovarianceSampleFilter.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class GaussianMixtureModelComponent
@@ -115,7 +118,9 @@ private:
 
   typename CovarianceEstimatorType::Pointer m_CovarianceEstimator{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkGaussianMixtureModelComponent.hxx"

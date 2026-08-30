@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageLinearIteratorWithIndex
  * \brief A multi-dimensional image iterator that visits image pixels within a
  * region in a "scan-line" order.
@@ -129,6 +130,7 @@ template <typename TImage>
 ImageLinearIteratorWithIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageLinearIteratorWithIndex<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

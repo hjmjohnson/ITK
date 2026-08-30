@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FiniteDifferenceFunction
  *
@@ -202,6 +203,7 @@ protected:
   RadiusType    m_Radius{};
   PixelRealType m_ScaleCoefficients[ImageDimension]{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

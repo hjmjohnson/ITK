@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TOutput>
 auto
@@ -37,6 +38,7 @@ HeavisideStepFunction<TInput, TOutput>::EvaluateDerivative(const InputType & inp
   return (Math::ExactlyEquals(input, InputType{})) ? NumericTraits<OutputType>::OneValue() : OutputType{};
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkHeavisideStepFunction_hxx

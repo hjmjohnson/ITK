@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 GaussianSmoothingOnUpdateDisplacementFieldTransform<TParametersValueType,
@@ -251,6 +252,7 @@ GaussianSmoothingOnUpdateDisplacementFieldTransform<TParametersValueType, VDimen
     os, indent, "GaussianSmoothingVarianceForTheTotalField", m_GaussianSmoothingVarianceForTheTotalField);
   os << indent << "GaussianSmoothingOperator: " << m_GaussianSmoothingOperator << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

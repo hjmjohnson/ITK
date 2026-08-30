@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 BYUMeshIO::BYUMeshIO()
   : m_PartId(NumericTraits<SizeValueType>::max())
   , m_FirstCellId(NumericTraits<SizeValueType>::OneValue())
@@ -509,4 +510,5 @@ BYUMeshIO::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "First Cell Id: " << m_FirstCellId << std::endl;
   os << indent << "Last Cell Id: " << m_LastCellId << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

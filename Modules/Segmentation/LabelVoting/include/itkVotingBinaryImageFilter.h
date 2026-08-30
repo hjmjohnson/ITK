@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VotingBinaryImageFilter
  * \brief Applies a voting operation in a neighborhood of each pixel.
@@ -144,6 +145,7 @@ private:
   unsigned int m_BirthThreshold{};
   unsigned int m_SurvivalThreshold{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

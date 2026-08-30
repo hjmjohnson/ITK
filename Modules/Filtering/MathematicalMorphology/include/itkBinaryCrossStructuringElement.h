@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BinaryCrossStructuringElement
  * \brief A Neighborhood that represents a cross structuring element
  *        with binary elements.
@@ -114,6 +115,7 @@ public:
   void
   CreateStructuringElement();
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

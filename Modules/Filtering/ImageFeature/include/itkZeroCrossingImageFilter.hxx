@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ZeroCrossingImageFilter<TInputImage, TOutputImage>::ZeroCrossingImageFilter()
@@ -168,6 +169,7 @@ ZeroCrossingImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os,
   print_helper::PrintNumericTrait(os, indent, "ForegroundValue", m_ForegroundValue);
   print_helper::PrintNumericTrait(os, indent, "BackgroundValue", m_BackgroundValue);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputMesh>
 DeformableSimplexMesh3DBalloonForceFilter<TInputMesh, TOutputMesh>::DeformableSimplexMesh3DBalloonForceFilter()
@@ -136,6 +137,7 @@ DeformableSimplexMesh3DBalloonForceFilter<TInputMesh, TOutputMesh>::ComputeExter
   data->externalForce[1] = vec_for[1];
   data->externalForce[2] = vec_for[2];
 }
+ITK_ABI_NAMESPACE_END
 } /* end namespace itk. */
 
 #endif // itkDeformableSimplexMesh3DBalloonForceFilter_hxx

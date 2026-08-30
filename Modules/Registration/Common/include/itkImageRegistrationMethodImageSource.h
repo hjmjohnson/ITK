@@ -32,7 +32,10 @@
  *  Therefore the solution of the registration is |-7 -3|
  */
 
-namespace itk::testhelper
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace testhelper
 {
 
 template <typename TFixedPixelType, typename TMovingPixelType, unsigned int VDimension>
@@ -152,7 +155,9 @@ private:
   ParametersType m_Parameters{};
 };
 
-} // namespace itk::testhelper
+} // namespace testhelper
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 // end namespace itk
 #endif

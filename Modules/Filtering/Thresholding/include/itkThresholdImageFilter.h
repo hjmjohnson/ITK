@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ThresholdImageFilter
  * \brief Set image values to a user-specified value if they are below,
@@ -158,6 +159,7 @@ private:
   PixelType m_Lower{};
   PixelType m_Upper{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

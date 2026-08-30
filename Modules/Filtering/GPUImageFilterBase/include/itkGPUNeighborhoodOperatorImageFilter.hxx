@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /*
 template< typename TInputImage, typename TOutputImage, typename TOperatorValueType >
 void
@@ -267,6 +268,7 @@ GPUNeighborhoodOperatorImageFilter<TInputImage, TOutputImage, TOperatorValueType
     */
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

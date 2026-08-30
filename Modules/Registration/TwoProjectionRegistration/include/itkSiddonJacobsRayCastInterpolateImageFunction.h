@@ -42,6 +42,7 @@ CIT 6, 89-94 (1998).
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class SiddonJacobsRayCastInterpolateImageFunction
  * \brief Projective interpolation of an image at specified positions.
@@ -228,6 +229,7 @@ private:
   PointType        m_SourceWorld;        // Coordinate of the source in the world coordinate system
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform, typename TImage>
 void
@@ -256,6 +257,7 @@ BSplineTransformInitializer<TTransform, TImage>::PrintSelf(std::ostream & os, In
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

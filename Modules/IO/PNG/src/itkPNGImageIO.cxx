@@ -37,6 +37,7 @@ extern "C"
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // simple class to call fopen on construct and
 // fclose on destruct
@@ -690,4 +691,5 @@ PNGImageIO::WriteSlice(const std::string & fileName, const void * const buffer)
 
   png_destroy_write_struct(&png_ptr, &info_ptr);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CompositeValleyFunction
  * \brief Multiple valley shaped curve function
@@ -188,5 +189,6 @@ private:
    * which has the lowest mean value * 9. */
   double m_LowerBound{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 #endif

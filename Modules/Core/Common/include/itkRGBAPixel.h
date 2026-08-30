@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RGBAPixel
  * \brief Represent Red, Green, Blue and Alpha components for color images.
  *
@@ -262,6 +263,7 @@ swap(RGBAPixel<T> & a, RGBAPixel<T> & b) noexcept
   a.swap(b);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 //

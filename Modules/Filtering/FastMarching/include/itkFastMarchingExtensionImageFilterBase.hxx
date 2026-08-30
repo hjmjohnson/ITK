@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInput, typename TOutput, typename TAuxValue, unsigned int VAuxDimension>
 FastMarchingExtensionImageFilterBase<TInput, TOutput, TAuxValue, VAuxDimension>::FastMarchingExtensionImageFilterBase()
   : m_AuxiliaryAliveValues(nullptr)
@@ -262,6 +263,7 @@ FastMarchingExtensionImageFilterBase<TInput, TOutput, TAuxValue, VAuxDimension>:
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

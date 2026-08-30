@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 DescoteauxEigenToMeasureParameterEstimationFilter<TInputImage,
@@ -161,6 +162,7 @@ DescoteauxEigenToMeasureParameterEstimationFilter<TInputImage, TOutputImage>::Pr
   os << indent << "FrobeniusNormWeight: " << GetFrobeniusNormWeight() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkDescoteauxEigenToMeasureParameterEstimationFilter_hxx */

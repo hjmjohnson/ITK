@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 FFTPadImageFilter<TInputImage, TOutputImage>::FFTPadImageFilter()
@@ -85,5 +86,6 @@ FFTPadImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Inden
   m_DefaultBoundaryCondition.Print(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

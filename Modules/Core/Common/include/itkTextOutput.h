@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // this class is used to send output to stdout and not the itk window
 class ITKCommon_EXPORT TextOutput : public OutputWindow
 {
@@ -49,6 +50,7 @@ protected:
   TextOutput();
   ~TextOutput() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

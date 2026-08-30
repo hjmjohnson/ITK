@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 template <typename TMesh, typename TQE>
 QuadEdgeMeshFrontBaseIterator<TMesh, TQE>::QuadEdgeMeshFrontBaseIterator(MeshType * mesh, bool start, QEType * seed)
@@ -140,5 +141,6 @@ QuadEdgeMeshFrontBaseIterator<TMesh, TQE>::FindDefaultSeed() -> QEType *
   }
   return (QEType *)nullptr;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  */
@@ -101,6 +102,7 @@ ImageAndPathToImageFilter<TInputImage, TInputPath, TOutputImage>::PrintSelf(std:
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

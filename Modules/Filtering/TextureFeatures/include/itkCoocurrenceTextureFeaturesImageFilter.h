@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Statistics
 {
 /** \class CoocurrenceTextureFeaturesImageFilter
@@ -254,6 +255,7 @@ private:
   bool                   m_Normalize;
 };
 } // end of namespace Statistics
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

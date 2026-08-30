@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 ShiSparseLevelSetImage<VDimension>::ShiSparseLevelSetImage()
@@ -164,6 +165,7 @@ ShiSparseLevelSetImage<VDimension>::InitializeInternalLabelList()
   this->m_InternalLabelList.push_back(MinusOneLayer());
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkShiSparseLevelSetImage_h

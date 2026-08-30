@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TCoordinate>
 void
@@ -183,6 +184,7 @@ VoronoiDiagram2D<TCoordinate>::InsertCells()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

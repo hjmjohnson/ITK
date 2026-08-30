@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageLinearConstIteratorWithIndex
  * \brief A multi-dimensional image iterator that visits image pixels within a
  * region in a "scan-line" order.
@@ -308,6 +309,7 @@ ImageLinearConstIteratorWithIndex<TImage>::PreviousLine()
     this->m_PositionIndex[n] = this->m_EndIndex[n] - 1;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

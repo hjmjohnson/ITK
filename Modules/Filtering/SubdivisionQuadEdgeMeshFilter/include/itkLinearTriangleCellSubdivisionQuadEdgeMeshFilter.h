@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class LinearTriangleCellSubdivisionQuadEdgeMeshFilter
  * \brief It is the simplest interpolating subdivision scheme, the new vertices
@@ -90,6 +91,7 @@ protected:
   void
   AddNewCellPoints(InputCellType * cell) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

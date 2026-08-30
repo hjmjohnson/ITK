@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage>
 MinimumMaximumImageFilter<TInputImage>::MinimumMaximumImageFilter()
 {
@@ -127,5 +128,6 @@ MinimumMaximumImageFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) c
   print_helper::PrintNumericTrait(os, indent, "Minimum", this->GetMinimum());
   print_helper::PrintNumericTrait(os, indent, "Maximum", this->GetMaximum());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

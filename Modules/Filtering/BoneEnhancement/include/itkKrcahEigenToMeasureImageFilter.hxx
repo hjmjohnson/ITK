@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 KrcahEigenToMeasureImageFilter<TInputImage, TOutputImage>::KrcahEigenToMeasureImageFilter()
   : Superclass()
@@ -91,6 +92,7 @@ KrcahEigenToMeasureImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostrea
   os << indent << "Direction: " << GetEnhanceType() << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkKrcahEigenToMeasureImageFilter_hxx */

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LandmarkDisplacementFieldSource
  * \brief Computes a displacement field from two sets of landmarks.
  *
@@ -178,6 +179,7 @@ private:
   LandmarkContainerPointer m_TargetLandmarks{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

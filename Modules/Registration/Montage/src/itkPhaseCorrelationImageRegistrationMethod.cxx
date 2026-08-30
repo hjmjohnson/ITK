@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Define how to print enumerations */
 std::ostream &
 operator<<(std::ostream & out, const PhaseCorrelationImageRegistrationMethodEnums::PaddingMethod value)
@@ -37,4 +38,5 @@ operator<<(std::ostream & out, const PhaseCorrelationImageRegistrationMethodEnum
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MemoryProbe
  *
  *  \brief Computes the memory allocated between two points in code.
@@ -55,6 +56,7 @@ protected:
 private:
   mutable MemoryUsageObserver m_MemoryObserver{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkMemoryProbe_h

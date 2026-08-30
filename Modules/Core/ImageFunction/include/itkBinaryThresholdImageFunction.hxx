@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TCoordinate>
 BinaryThresholdImageFunction<TInputImage, TCoordinate>::BinaryThresholdImageFunction()
   : m_Lower(NumericTraits<PixelType>::NonpositiveMin())
@@ -83,6 +84,7 @@ BinaryThresholdImageFunction<TInputImage, TCoordinate>::PrintSelf(std::ostream &
   os << indent << "Lower: " << m_Lower << std::endl;
   os << indent << "Upper: " << m_Upper << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

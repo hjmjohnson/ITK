@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TriangleHelper
  * \brief A convenience class for computation of various triangle elements in
  *        2D or 3D.
@@ -88,6 +89,7 @@ public:
   static CoordinateType
   ComputeMixedArea(const PointType & iP1, const PointType & iP2, const PointType & iP3);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkTriangleHelper.hxx"

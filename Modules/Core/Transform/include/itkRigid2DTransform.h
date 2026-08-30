@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Rigid2DTransform
  * \brief Rigid2DTransform of a vector space (e.g. space coordinates)
  *
@@ -336,6 +337,7 @@ Rigid2DTransform<TParametersValueType>::BackTransform(const OutputCovariantVecto
   return this->GetMatrix() * vect;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

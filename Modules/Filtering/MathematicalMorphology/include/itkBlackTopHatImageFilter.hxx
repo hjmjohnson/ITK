@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 BlackTopHatImageFilter<TInputImage, TOutputImage, TKernel>::BlackTopHatImageFilter()
   : m_SafeBorder(true)
@@ -91,5 +92,6 @@ BlackTopHatImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(std::ostre
   os << indent << "SafeBorder: " << m_SafeBorder << std::endl;
   os << indent << "ForceAlgorithm: " << m_ForceAlgorithm << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

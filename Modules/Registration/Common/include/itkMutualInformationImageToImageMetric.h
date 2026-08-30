@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MutualInformationImageToImageMetric
  * \brief Computes the mutual information between two images to be registered
  *
@@ -257,6 +258,7 @@ private:
 
   typename DerivativeFunctionType::Pointer m_DerivativeCalculator{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

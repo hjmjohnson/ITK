@@ -76,6 +76,7 @@ makeTestableScalarImage(typename InternalImageType::Pointer internalImage, std::
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TInputImage, typename TInternalImage, typename TOutputImage>
@@ -252,6 +253,7 @@ public:
     return EXIT_SUCCESS;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

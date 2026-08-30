@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshEulerOperatorJoinVertexFunction
  *
@@ -163,6 +164,7 @@ protected:
   QEType *
   ProcessIsolatedFace(QEType * e, std::stack<QEType *> & EdgesToBeDeleted);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkQuadEdgeMeshEulerOperatorJoinVertexFunction.hxx"

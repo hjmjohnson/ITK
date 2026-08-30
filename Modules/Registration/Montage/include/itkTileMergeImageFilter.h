@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TileMergeImageFilter
  * \brief Resamples an n-Dimensional mosaic of images into a single composite image.
  *
@@ -243,6 +244,7 @@ private:
   std::vector<ContributingTiles> m_RegionContributors; // set of input tiles which contribute to corresponding regions
 }; // class TileMergeImageFilter
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *
  * \class GenericCUBFileAdaptor
@@ -887,4 +888,5 @@ VoxBoCUBImageIO::SwapBytesIfNecessary(void * buffer, BufferSizeType numberOfByte
     throw exception;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

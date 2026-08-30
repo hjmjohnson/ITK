@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ThinPlateSplineKernelTransform
  * This class defines the thin plate spline (TPS) transformation.
  * It is implemented in as straightforward a manner as possible from
@@ -103,6 +104,7 @@ protected:
   void
   ComputeDeformationContribution(const InputPointType & thisPoint, OutputPointType & result) const override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

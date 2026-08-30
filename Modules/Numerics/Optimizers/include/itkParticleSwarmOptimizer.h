@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ParticleSwarmOptimizer
  * \brief Implementation of a Particle Swarm Optimization (PSO) algorithm.
  *
@@ -106,6 +107,7 @@ private:
   ParametersType::ValueType m_GlobalCoefficient{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

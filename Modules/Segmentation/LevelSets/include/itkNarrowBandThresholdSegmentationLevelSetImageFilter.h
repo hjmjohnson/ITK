@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NarrowBandThresholdSegmentationLevelSetImageFilter
  *    \brief Segments structures in images based on intensity values.
  *
@@ -232,6 +233,7 @@ protected:
 private:
   ThresholdFunctionPointer m_ThresholdFunction{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -17,7 +17,10 @@
  *=========================================================================*/
 #include "itkExpectationMaximizationMixtureModelEstimator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** Print enum values */
 std::ostream &
@@ -35,4 +38,6 @@ operator<<(std::ostream & out, const ExpectationMaximizationMixtureModelEstimato
     }
   }();
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScaleLogarithmicTransform
  * \brief Logarithmic Scale transformation of a vector space (e.g. space coordinates)
  *
@@ -124,6 +125,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // class
    // ScaleLogarithmicTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

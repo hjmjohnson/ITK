@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TObjectType>
 ObjectStore<TObjectType>::~ObjectStore()
 {
@@ -138,6 +139,7 @@ ObjectStore<TObjectType>::PrintSelf(std::ostream & os, Indent indent) const
   print_helper::PrintNumericTrait(os, indent, "LinearGrowthSize", m_LinearGrowthSize);
   os << indent << "FreeList: " << m_FreeList << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

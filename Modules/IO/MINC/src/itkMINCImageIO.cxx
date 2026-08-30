@@ -59,6 +59,7 @@ MINCIOFreeTmpDimHandle(unsigned int size, const midimhandle_t * const ptr)
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct ITKIOMINC_HIDDEN MINCImageIOPImpl
 {
@@ -1466,4 +1467,5 @@ MINCImageIO::Write(const void * buffer)
   this->CloseVolume();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

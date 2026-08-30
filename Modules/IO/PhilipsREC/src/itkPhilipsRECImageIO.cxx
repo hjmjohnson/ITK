@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 const char * const PAR_Version = "PAR_Version";
 const char * const PAR_SliceOrientation = "PAR_SliceOrientation";
 const char * const PAR_ExaminationName = "PAR_ExaminationName";
@@ -951,4 +952,5 @@ PhilipsRECImageIO::ReadImageInformation()
   EncapsulateMetaData<int>(thisDic, PAR_NumberOfASLLabelTypes, par.num_label_types);
   EncapsulateMetaData<LabelTypesASLContainerType::Pointer>(thisDic, PAR_ASLLabelTypes, labelTypesASLVector);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

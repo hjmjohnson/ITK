@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class DemonsImageToImageMetricv4GetValueAndDerivativeThreader
  * \brief Processes points for DemonsImageToImageMetricv4 \c
@@ -98,6 +99,7 @@ private:
   TDemonsMetric * m_DemonsAssociate{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

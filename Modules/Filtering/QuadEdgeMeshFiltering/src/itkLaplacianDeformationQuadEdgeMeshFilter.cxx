@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const LaplacianDeformationQuadEdgeMeshFilterEnums::Area value)
@@ -36,4 +37,5 @@ operator<<(std::ostream & out, const LaplacianDeformationQuadEdgeMeshFilterEnums
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LevelSetFunction
  * \brief The LevelSetFunction class is a generic function object which can be
  * used to create a level set method filter when combined with an appropriate
@@ -380,6 +381,7 @@ protected:
   /** Laplacian smoothing term */
   ScalarValueType m_LaplacianSmoothingWeight{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

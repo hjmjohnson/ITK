@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConstShapedNeighborhoodIterator
  *
  * \brief Const version of ShapedNeighborhoodIterator, defining iteration
@@ -436,6 +437,7 @@ ConstShapedNeighborhoodIterator(const typename TImage::SizeType &,
                                 const typename TImage::RegionType &)
   -> ConstShapedNeighborhoodIterator<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

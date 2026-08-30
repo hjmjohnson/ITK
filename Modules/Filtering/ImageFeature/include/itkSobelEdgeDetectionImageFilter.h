@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SobelEdgeDetectionImageFilter
  * \brief A 2D or 3D edge detection using the Sobel operator.
@@ -141,6 +142,7 @@ private:
   bool m_UseLegacyOperatorCoefficients{ true };
 #endif
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

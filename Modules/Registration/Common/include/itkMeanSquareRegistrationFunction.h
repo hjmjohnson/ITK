@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MeanSquareRegistrationFunction
  *
@@ -198,6 +199,7 @@ private:
   /** Threshold below which two intensity value are assumed to match. */
   double m_IntensityDifferenceThreshold{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

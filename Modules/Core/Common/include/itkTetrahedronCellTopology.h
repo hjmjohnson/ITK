@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TetrahedronCellTopology
  *  \brief TetrahedronCellTopology holds data defining the topological
  *         connections of the vertices and edges of a TetrahedronCell.
@@ -44,6 +45,7 @@ protected:
   static const int m_Edges[6][2];
   static const int m_Faces[4][3];
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

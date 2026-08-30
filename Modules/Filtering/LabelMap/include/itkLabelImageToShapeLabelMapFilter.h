@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelImageToShapeLabelMapFilter
  * \brief Converts a label image to a label map and valuates the shape attributes
@@ -154,6 +155,7 @@ private:
   bool                 m_ComputePerimeter{};
   bool                 m_ComputeOrientedBoundingBox{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

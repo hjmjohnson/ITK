@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Function
 {
 template <typename TInputPixel>
@@ -282,6 +283,7 @@ protected:
   MovingHistogramMorphologicalGradientImageFilter() = default;
   ~MovingHistogramMorphologicalGradientImageFilter() override = default;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

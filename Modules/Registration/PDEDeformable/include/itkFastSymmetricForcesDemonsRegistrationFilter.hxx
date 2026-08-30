@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage, typename TDisplacementField>
 FastSymmetricForcesDemonsRegistrationFilter<TFixedImage, TMovingImage, TDisplacementField>::
@@ -228,6 +229,7 @@ FastSymmetricForcesDemonsRegistrationFilter<TFixedImage, TMovingImage, TDisplace
   Superclass::PrintSelf(os, indent);
   os << indent << "Intensity difference threshold: " << this->GetIntensityDifferenceThreshold() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

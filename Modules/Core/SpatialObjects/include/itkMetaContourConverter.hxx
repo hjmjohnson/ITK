@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension>
 auto
@@ -243,6 +244,7 @@ MetaContourConverter<VDimension>::SpatialObjectToMetaObject(const SpatialObjectT
   return contourMO;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

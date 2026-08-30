@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class HuangThresholdCalculator
@@ -93,6 +94,7 @@ private:
   SizeValueType      m_Size{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

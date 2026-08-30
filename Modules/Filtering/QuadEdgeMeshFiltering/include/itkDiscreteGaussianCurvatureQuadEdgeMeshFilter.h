@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteGaussianCurvatureQuadEdgeMeshFilter
  * \brief see the following paper
@@ -108,6 +109,7 @@ protected:
     return 0.;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

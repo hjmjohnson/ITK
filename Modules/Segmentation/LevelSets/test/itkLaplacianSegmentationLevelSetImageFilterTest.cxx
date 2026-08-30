@@ -111,6 +111,7 @@ evaluate_function(itk::Image<signed char, 3> * im, float (*f)(float, float, floa
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class RMSCommand : public Command
 {
@@ -146,6 +147,7 @@ protected:
   ~RMSCommand() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

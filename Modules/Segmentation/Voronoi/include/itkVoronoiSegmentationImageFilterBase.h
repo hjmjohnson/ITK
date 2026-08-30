@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VoronoiSegmentationImageFilterBase
  * \brief Base class for VoronoiSegmentationImageFilter
  *
@@ -302,6 +303,7 @@ protected:
   void
   drawVDline(VDImagePointer result, PointType p1, PointType p2, unsigned char color);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WatershedMiniPipelineProgressCommand
  * A specialized Command object for updating the progress of a
  *  MiniPipeline.  Follows the progress of a series of filters
@@ -86,6 +87,7 @@ private:
   ProcessObject * m_Filter{ nullptr };
   unsigned int    m_NumberOfFilters{ 1 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

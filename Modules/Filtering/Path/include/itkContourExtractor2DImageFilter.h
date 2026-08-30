@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ContourExtractor2DImageFilter
  * \brief Computes a list of PolyLineParametricPath objects from the contours in
@@ -319,6 +320,7 @@ private:
 
   InputPixelType m_UnusedLabel{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

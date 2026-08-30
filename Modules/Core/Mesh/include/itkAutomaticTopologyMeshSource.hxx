@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputMesh>
 AutomaticTopologyMeshSource<TOutputMesh>::AutomaticTopologyMeshSource()
   : m_OutputMesh(TOutputMesh::New())
@@ -710,6 +711,7 @@ AutomaticTopologyMeshSource<TOutputMesh>::AddHexahedron(const CoordinateType * p
   pointIDs[7] = AddPoint(p7);
   return AddHexahedron(pointIDs);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

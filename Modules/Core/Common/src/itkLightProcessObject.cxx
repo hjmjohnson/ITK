@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Instantiate object with no start, end, or progress methods.
  */
@@ -83,4 +84,5 @@ LightProcessObject::UpdateOutputData()
   // Notify end event observers
   this->InvokeEvent(EndEvent());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

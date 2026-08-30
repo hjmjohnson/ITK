@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \brief Data source that reads image data from a single file.
  *
@@ -192,6 +193,7 @@ ReadImage(const std::string & filename)
   return reader->GetOutput();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

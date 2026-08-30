@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TFilter>
 MiniPipelineSeparableImageFilter<TInputImage, TOutputImage, TFilter>::MiniPipelineSeparableImageFilter()
 {
@@ -102,6 +103,7 @@ MiniPipelineSeparableImageFilter<TInputImage, TOutputImage, TFilter>::GenerateDa
   m_Cast->Update();
   this->GraftOutput(m_Cast->GetOutput());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

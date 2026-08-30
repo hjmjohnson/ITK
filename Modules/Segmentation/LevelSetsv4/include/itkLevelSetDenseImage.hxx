@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 void
@@ -105,5 +106,6 @@ LevelSetDenseImage<TImage>::IsInsideDomain(const InputType & inputIndex) const
   return largestRegion.IsInside(mapIndex);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkLevelSetDenseImage_hxx

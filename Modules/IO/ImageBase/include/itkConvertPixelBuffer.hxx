@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename InputPixelType, typename OutputPixelType, typename OutputConvertTraits>
 template <typename UComponentType>
@@ -630,6 +631,7 @@ ConvertPixelBuffer<InputPixelType, OutputPixelType, OutputConvertTraits>::Conver
     ++inputData;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

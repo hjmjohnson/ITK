@@ -23,6 +23,7 @@
 #include "itkMahalanobisDistanceMembershipFunction.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VectorThresholdSegmentationLevelSetFunction
  *
  * \brief This function is used in VectorThresholdSegmentationLevelSetImageFilter to
@@ -172,6 +173,7 @@ protected:
   MahalanobisFunctionPointer m_Mahalanobis{};
   ScalarValueType            m_Threshold{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

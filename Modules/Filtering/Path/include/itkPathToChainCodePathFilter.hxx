@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPath, typename TOutputChainCodePath>
 PathToChainCodePathFilter<TInputPath, TOutputChainCodePath>::PathToChainCodePathFilter()
@@ -87,6 +88,7 @@ PathToChainCodePathFilter<TInputPath, TOutputChainCodePath>::PrintSelf(std::ostr
 
   os << indent << "MaximallyConnected: " << m_MaximallyConnected << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -22,7 +22,10 @@
 #include "itkNumericTraits.h"
 #include "itkMath.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 // constructor
@@ -350,7 +353,9 @@ HistogramToRunLengthFeaturesFilter<THistogram>::PrintSelf(std::ostream & os, Ind
   Superclass::PrintSelf(os, indent);
 }
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 #endif

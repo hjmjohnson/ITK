@@ -19,6 +19,8 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 Logger::Logger() = default;
 Logger::~Logger() = default;
+ITK_ABI_NAMESPACE_END
 } // namespace itk

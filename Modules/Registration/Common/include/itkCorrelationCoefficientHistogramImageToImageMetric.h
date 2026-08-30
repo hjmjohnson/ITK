@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CorrelationCoefficientHistogramImageToImageMetric
     \brief Computes correlation coefficient similarity measure between two
     images to be registered.
@@ -109,6 +110,7 @@ private:
   MeasureType
   Covariance(HistogramType & histogram) const;
 };
+ITK_ABI_NAMESPACE_END
 } // End namespace itk.
 
 #ifndef ITK_MANUAL_INSTANTIATION

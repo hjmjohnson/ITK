@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Print enum values */
 std::ostream &
 operator<<(std::ostream & out, const CommonEnums::IOPixel value)
@@ -305,4 +306,5 @@ operator<<(std::ostream & out, const ObjectFactoryEnums::InsertionPosition value
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

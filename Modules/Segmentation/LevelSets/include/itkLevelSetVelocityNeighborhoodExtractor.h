@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LevelSetVelocityNeighborhoodExtractor
  * \brief Locate pixels of a particular level set.
  *
@@ -132,6 +133,7 @@ private:
   typename AuxValueContainer::Pointer m_AuxOutsideValues{};
   AuxImageConstPointer                m_AuxImage[VAuxDimension]{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

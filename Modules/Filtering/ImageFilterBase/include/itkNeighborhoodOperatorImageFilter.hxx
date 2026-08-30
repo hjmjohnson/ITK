@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TOperatorValueType>
 void
 NeighborhoodOperatorImageFilter<TInputImage, TOutputImage, TOperatorValueType>::GenerateInputRequestedRegion()
@@ -112,6 +113,7 @@ NeighborhoodOperatorImageFilter<TInputImage, TOutputImage, TOperatorValueType>::
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

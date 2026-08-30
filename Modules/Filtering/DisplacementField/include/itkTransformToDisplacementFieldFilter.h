@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformToDisplacementFieldFilter
  * \brief Generate a displacement field from a coordinate transform
  *
@@ -197,6 +198,7 @@ private:
   DirectionType m_OutputDirection{};  // output image direction cosines
   bool          m_UseReferenceImage{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType>
 Rigid2DTransform<TParametersValueType>::Rigid2DTransform()
@@ -294,6 +295,7 @@ Rigid2DTransform<TParametersValueType>::ComputeJacobianWithRespectToParameters(c
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MorphologyImageFilter
  * \brief Base class for the morphological operations such as erosion and dilation
  *
@@ -156,6 +157,7 @@ private:
   /** Default boundary condition */
   DefaultBoundaryConditionType m_DefaultBoundaryCondition{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

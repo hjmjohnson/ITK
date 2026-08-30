@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class RegistrationParameterScalesFromJacobian
@@ -121,6 +122,7 @@ protected:
 }; // class RegistrationParameterScalesFromJacobian
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

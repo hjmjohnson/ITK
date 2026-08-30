@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TMask, typename TFeatures>
 MaskFeaturePointSelectionFilter<TImage, TMask, TFeatures>::MaskFeaturePointSelectionFilter()
   : m_NonConnectivity(Self::VERTEX_CONNECTIVITY)
@@ -299,6 +300,7 @@ MaskFeaturePointSelectionFilter<TImage, TMask, TFeatures>::GenerateData()
   pointSet->SetPoints(points);
   pointSet->SetPointData(pointData);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

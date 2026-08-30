@@ -41,6 +41,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class CastSpatialObjectFilter
  * \brief This filter casts one spatialobject to another, when the class
@@ -233,6 +234,7 @@ private:
 
 }; // End class CastSpatialObjectFilter
 
+ITK_ABI_NAMESPACE_END
 } // End namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

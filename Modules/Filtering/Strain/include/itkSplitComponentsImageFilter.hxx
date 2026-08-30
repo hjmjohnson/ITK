@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, unsigned int TComponents>
 SplitComponentsImageFilter<TInputImage, TOutputImage, TComponents>::SplitComponentsImageFilter()
@@ -114,6 +115,7 @@ SplitComponentsImageFilter<TInputImage, TOutputImage, TComponents>::PrintSelf(st
      << "ComponentsMask: " << static_cast<typename NumericTraits<ComponentsMaskType>::PrintType>(m_ComponentsMask)
      << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

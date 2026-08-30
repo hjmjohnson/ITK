@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ArchetypeSeriesFileNames::~ArchetypeSeriesFileNames() = default;
 
 ArchetypeSeriesFileNames::ArchetypeSeriesFileNames()
@@ -232,4 +233,5 @@ ArchetypeSeriesFileNames::PrintSelf(std::ostream & os, Indent indent) const
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

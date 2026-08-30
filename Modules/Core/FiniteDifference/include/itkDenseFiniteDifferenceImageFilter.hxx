@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 DenseFiniteDifferenceImageFilter<TInputImage, TOutputImage>::CopyInputToOutput()
@@ -278,6 +279,7 @@ DenseFiniteDifferenceImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostr
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

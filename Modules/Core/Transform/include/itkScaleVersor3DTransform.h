@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScaleVersor3DTransform
  *
  * \brief This transform applies a Versor rotation, translation and
@@ -167,6 +168,7 @@ private:
   /**  Vector containing the scale. */
   ScaleVectorType m_Scale{};
 }; // class ScaleVersor3DTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

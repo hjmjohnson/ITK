@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteGradientMagnitudeGaussianImageFunction
  * \brief Compute the discrete gradient magnitude gaussian of an the image
@@ -252,6 +253,7 @@ private:
   /** Interpolation mode */
   InterpolationModeEnum m_InterpolationMode{ InterpolationModeEnum::NearestNeighbourInterpolation };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

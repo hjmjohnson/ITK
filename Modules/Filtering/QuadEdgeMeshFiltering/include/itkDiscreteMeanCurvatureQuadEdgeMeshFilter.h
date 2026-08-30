@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DiscreteMeanCurvatureQuadEdgeMeshFilter
  * \brief see the following paper
@@ -138,5 +139,6 @@ protected:
     return oH;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

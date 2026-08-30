@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename TInput>
 void
 ConicShellInteriorExteriorSpatialFunction<VDimension, TInput>::SetOriginGradient(GradientType grad)
@@ -102,6 +103,7 @@ ConicShellInteriorExteriorSpatialFunction<VDimension, TInput>::PrintSelf(std::os
   os << indent << "Epsilon: " << m_Epsilon << std::endl;
   os << indent << "Polarity: " << m_Polarity << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

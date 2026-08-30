@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BoxImageFilter
  * \brief A base class for all the filters working on a box neighborhood
@@ -93,6 +94,7 @@ protected:
 private:
   RadiusType m_Radius{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

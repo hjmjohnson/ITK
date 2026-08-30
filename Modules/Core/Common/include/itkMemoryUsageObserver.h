@@ -34,6 +34,7 @@ using NTSTATUS = LONG;
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MemoryUsageObserver
  * \brief Provides the memory usage of the process.
  *
@@ -173,6 +174,7 @@ public:
   /** destructor */
   ~MemoryUsageObserver() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif // itkMemoryUsageObserver_h

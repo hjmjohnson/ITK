@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BMPImageIOFactory
  * \brief Create instances of BMPImageIO objects using an object factory.
@@ -66,6 +67,7 @@ protected:
   BMPImageIOFactory();
   ~BMPImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

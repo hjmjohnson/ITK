@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HessianToObjectnessMeasureImageFilter
  * \brief A filter to enhance M-dimensional objects in N-dimensional images
@@ -158,6 +159,7 @@ private:
   bool         m_BrightObject{ true };
   bool         m_ScaleObjectnessMeasure{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

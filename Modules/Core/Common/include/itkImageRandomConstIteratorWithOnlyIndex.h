@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRandomConstIteratorWithOnlyIndex
  * \brief A multi-dimensional image iterator that visits a random set of locations
  * within an image region, providing index information.
@@ -245,6 +246,7 @@ template <typename TImage>
 ImageRandomConstIteratorWithOnlyIndex(SmartPointer<TImage>, const typename TImage::RegionType &)
   -> ImageRandomConstIteratorWithOnlyIndex<std::remove_const_t<TImage>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

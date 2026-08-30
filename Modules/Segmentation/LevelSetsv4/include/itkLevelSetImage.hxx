@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ----------------------------------------------------------------------------
 template <typename TInput, unsigned int VDimension, typename TOutput>
 LevelSetImage<TInput, VDimension, TOutput>::LevelSetImage()
@@ -29,5 +30,6 @@ LevelSetImage<TInput, VDimension, TOutput>::LevelSetImage()
   this->m_NeighborhoodScales.Fill(NumericTraits<OutputRealType>::OneValue());
   this->m_DomainOffset.Fill(OffsetValueType{});
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkLevelSetImage_hxx

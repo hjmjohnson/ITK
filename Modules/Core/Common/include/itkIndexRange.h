@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
   * \class IndexRange
@@ -497,6 +498,7 @@ MakeIndexRange(const Index<VDimension> & imageRegionIndex, const Size<VDimension
   return ImageRegionIndexRange<VDimension>(ImageRegion<VDimension>{ imageRegionIndex, imageRegionSize });
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

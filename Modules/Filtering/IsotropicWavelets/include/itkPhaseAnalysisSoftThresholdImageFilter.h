@@ -21,6 +21,7 @@
 #include <itkPhaseAnalysisImageFilter.h>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PhaseAnalysisSoftThresholdImageFilter
  * This filter operates on an input MonogenicSignal in the Spatial Domain.
  * Represented as a VectorImage of ImageDimension + 1.
@@ -115,6 +116,7 @@ private:
   OutputImagePixelType m_SigmaAmp;
   OutputImagePixelType m_Threshold;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkPhaseAnalysisSoftThresholdImageFilter.hxx"

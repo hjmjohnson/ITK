@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalVnlOptimizerType>
 bool
@@ -39,6 +40,7 @@ LBFGSOptimizerBaseHelperv4<TInternalVnlOptimizerType>::report_iter()
   return false;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageRegionIterator
  * \brief A multi-dimensional iterator templated over image type that walks a
  * region of pixels.
@@ -169,6 +170,7 @@ ImageRegionIterator(RLEImage<TPixel, VImageDimension, CounterType> *,
                     const typename RLEImage<TPixel, VImageDimension, CounterType>::RegionType &)
   -> ImageRegionIterator<RLEImage<TPixel, VImageDimension, CounterType>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkRLEImageRegionIterator_h

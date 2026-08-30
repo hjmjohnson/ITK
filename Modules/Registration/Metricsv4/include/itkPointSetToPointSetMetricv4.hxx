@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedPointSet, typename TMovingPointSet, class TInternalComputationValueType>
 typename PointSetToPointSetMetricv4<TFixedPointSet, TMovingPointSet, TInternalComputationValueType>::LocalDerivativeType
@@ -33,6 +34,7 @@ PointSetToPointSetMetricv4<TFixedPointSet, TMovingPointSet, TInternalComputation
   return localDerivative;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

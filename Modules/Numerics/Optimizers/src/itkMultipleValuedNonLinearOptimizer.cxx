@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MultipleValuedNonLinearOptimizer::~MultipleValuedNonLinearOptimizer() = default;
 
 MultipleValuedNonLinearOptimizer::MultipleValuedNonLinearOptimizer()
@@ -63,4 +64,5 @@ MultipleValuedNonLinearOptimizer::PrintSelf(std::ostream & os, Indent indent) co
     os << indent << "Cost Function: " << m_CostFunction.GetPointer() << std::endl;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 BSplineControlPointImageFunction<TInputImage, TCoordinate>::BSplineControlPointImageFunction()
@@ -629,6 +630,7 @@ BSplineControlPointImageFunction<TInputImage, TCoordinate>::PrintSelf(std::ostre
   os << indent << "  Size:      " << this->m_Size << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

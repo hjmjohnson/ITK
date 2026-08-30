@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 BasicDilateImageFilter<TInputImage, TOutputImage, TKernel>::BasicDilateImageFilter()
 {
@@ -55,5 +56,6 @@ BasicDilateImageFilter<TInputImage, TOutputImage, TKernel>::Evaluate(const Neigh
 
   return max;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

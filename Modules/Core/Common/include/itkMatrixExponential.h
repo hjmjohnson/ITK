@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Math
 {
 
@@ -96,6 +97,7 @@ MatrixExponential(const vnl_matrix<T> & A)
 }
 
 } // namespace Math
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMatrixExponential_h

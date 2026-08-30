@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 RelabelComponentImageFilter<TInputImage, TOutputImage>::RelabelComponentImageFilter()
 {
@@ -295,6 +296,7 @@ RelabelComponentImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

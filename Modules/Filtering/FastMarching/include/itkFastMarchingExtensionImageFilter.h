@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FastMarchingExtensionImageFilter
  * \brief Extend auxiliary variables smoothly using Fast Marching.
@@ -152,6 +153,7 @@ private:
 
   AuxImageType * m_AuxImages[AuxDimension]{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

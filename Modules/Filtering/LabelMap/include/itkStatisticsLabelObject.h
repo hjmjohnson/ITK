@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class StatisticsLabelObject
  *  \brief A Label object to store the common attributes related to the statistics of the object
@@ -596,6 +597,7 @@ private:
 
   double m_WeightedFlatness{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

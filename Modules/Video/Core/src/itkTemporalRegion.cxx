@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //
 // Constructor
@@ -135,4 +136,5 @@ operator<<(std::ostream & os, const TemporalRegion & region)
   return os;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

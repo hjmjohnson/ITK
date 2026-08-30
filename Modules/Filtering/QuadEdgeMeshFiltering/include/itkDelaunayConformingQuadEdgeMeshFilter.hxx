@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 template <typename TInputMesh, typename TOutputMesh>
 DelaunayConformingQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::DelaunayConformingQuadEdgeMeshFilter()
@@ -213,6 +214,7 @@ DelaunayConformingQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::PrintSelf(std::os
   os << indent << "NumberOfEdgeFlips: " << m_NumberOfEdgeFlips << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

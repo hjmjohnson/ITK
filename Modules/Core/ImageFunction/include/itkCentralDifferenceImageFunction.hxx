@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate, typename TOutputType>
 CentralDifferenceImageFunction<TInputImage, TCoordinate, TOutputType>::CentralDifferenceImageFunction()
@@ -578,6 +579,7 @@ CentralDifferenceImageFunction<TInputImage, TCoordinate, TOutputType>::EvaluateA
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

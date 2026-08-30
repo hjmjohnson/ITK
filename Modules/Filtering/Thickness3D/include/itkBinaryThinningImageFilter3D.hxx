@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 BinaryThinningImageFilter3D<TInputImage, TOutputImage>::BinaryThinningImageFilter3D()
@@ -1095,6 +1096,7 @@ BinaryThinningImageFilter3D<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkBinaryThinningImageFilter3D_hxx

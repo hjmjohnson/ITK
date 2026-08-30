@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TSparseImageType>
 NormalVectorFunctionBase<TSparseImageType>::NormalVectorFunctionBase()
   : m_TimeStep(NumericTraits<TimeStepType>::OneValue())
@@ -34,6 +35,7 @@ NormalVectorFunctionBase<TSparseImageType>::PrintSelf(std::ostream & os, Indent 
   Superclass::PrintSelf(os, indent);
   os << indent << "TimeStep: " << m_TimeStep << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MultipleValuedNonLinearVnlOptimizer
  * \brief This class is a base for the Optimization methods that
  * optimize a multi-valued function.
@@ -138,6 +139,7 @@ private:
   mutable MeasureType    m_CachedValue{};
   mutable DerivativeType m_CachedDerivative{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

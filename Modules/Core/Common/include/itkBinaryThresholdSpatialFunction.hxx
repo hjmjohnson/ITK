@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFunction>
 void
@@ -47,6 +48,7 @@ BinaryThresholdSpatialFunction<TFunction>::Evaluate(const InputType & point) con
   }
   return false;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

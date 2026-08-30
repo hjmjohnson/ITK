@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Standard CellInterface:
  */
@@ -288,6 +289,7 @@ QuadraticTriangleCell<TCellInterface>::EvaluateShapeFunctions(const ParametricCo
   weights[4] = 4.0 * L1 * L2;
   weights[5] = 4.0 * L2 * L3;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

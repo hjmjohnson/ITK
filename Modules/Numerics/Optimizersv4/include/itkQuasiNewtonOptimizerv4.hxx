@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 QuasiNewtonOptimizerv4Template<TInternalComputationValueType>::QuasiNewtonOptimizerv4Template()
@@ -412,6 +413,7 @@ QuasiNewtonOptimizerv4Template<TInternalComputationValueType>::ComputeHessianAnd
   return true;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

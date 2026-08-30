@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RegularStepGradientDescentOptimizerv4
  *  \brief Regular Step Gradient descent optimizer.
@@ -152,6 +153,7 @@ private:
   MeasureType m_CurrentLearningRateRelaxation{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

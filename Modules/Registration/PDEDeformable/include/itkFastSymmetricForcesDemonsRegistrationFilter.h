@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class FastSymmetricForcesDemonsRegistrationFilter
  * \brief Deformably register two images using a symmetric forces demons algorithm.
  *
@@ -193,6 +194,7 @@ private:
   MultiplyByConstantPointer m_Multiplier{};
   AdderPointer              m_Adder{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

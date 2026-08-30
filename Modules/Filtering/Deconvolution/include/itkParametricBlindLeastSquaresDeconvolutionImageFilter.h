@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ParametricBlindLeastSquaresDeconvolutionImageFilter
  *
@@ -152,6 +153,7 @@ private:
   typename ImageUpdateFilterType::Pointer m_ImageUpdateFilter{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

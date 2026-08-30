@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageToSpatialObjectRegistrationMethod
  * \brief Base class for Image Registration Methods
  *
@@ -217,6 +218,7 @@ private:
   TransformPointer    m_Transform{};
   InterpolatorPointer m_Interpolator{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

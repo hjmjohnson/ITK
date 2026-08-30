@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GiftiMeshIOFactory
  * \brief Create instances of GiftiMeshIO objects using an object factory.
  * \ingroup ITKIOMeshGifti
@@ -69,6 +70,7 @@ protected:
   PrintSelf(std::ostream & os, Indent indent) const override;
 };
 // /////////////////////////////////////////////////////////////////////
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

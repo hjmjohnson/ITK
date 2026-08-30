@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NormalizeImageFilter
  * \brief Normalize an image by setting its mean to zero and variance to one.
@@ -92,6 +93,7 @@ private:
 
   typename ShiftScaleImageFilter<TInputImage, TOutputImage>::Pointer m_ShiftScaleFilter{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

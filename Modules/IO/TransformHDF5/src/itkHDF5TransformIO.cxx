@@ -469,6 +469,7 @@ HDF5TransformIOTemplate<TParametersValueType>::Write()
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // HDF uses hierarchical paths to find particular data
 // in a file. These strings are used by both reading and
@@ -509,4 +510,5 @@ template class ITKIOTransformHDF5_EXPORT HDF5TransformIOTemplate<float>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

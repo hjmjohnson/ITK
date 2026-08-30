@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ThreadedDomainPartitioner
  *  \brief Virtual base class for partitioning a domain into subsets to be
@@ -83,6 +84,7 @@ protected:
   ~ThreadedDomainPartitioner() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

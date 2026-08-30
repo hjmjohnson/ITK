@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TLabelImage>
 LabelStatisticsImageFilter<TInputImage, TLabelImage>::LabelStatisticsImageFilter()
   : m_LowerBound(static_cast<RealType>(NumericTraits<PixelType>::NonpositiveMin()))
@@ -475,5 +476,6 @@ LabelStatisticsImageFilter<TImage, TLabelImage>::PrintSelf(std::ostream & os, In
   print_helper::PrintNumericTrait(os, indent, "LowerBound", m_LowerBound);
   print_helper::PrintNumericTrait(os, indent, "UpperBound", m_UpperBound);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

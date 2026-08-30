@@ -36,6 +36,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace
 {
 std::chrono::milliseconds threadCompletionPollingInterval = std::chrono::milliseconds(10);
@@ -312,4 +313,5 @@ PoolMultiThreader::PrintSelf(std::ostream & os, Indent indent) const
   Superclass::PrintSelf(os, indent);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension>
 auto
 FourierSeriesPath<VDimension>::Evaluate(const InputType & input) const -> OutputType
@@ -97,6 +98,7 @@ FourierSeriesPath<VDimension>::PrintSelf(std::ostream & os, Indent indent) const
   itkPrintSelfObjectMacro(CosCoefficients);
   itkPrintSelfObjectMacro(SinCoefficients);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

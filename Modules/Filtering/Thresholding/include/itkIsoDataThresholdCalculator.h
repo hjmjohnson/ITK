@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class IsoDataThresholdCalculator
@@ -80,6 +81,7 @@ protected:
   using InstanceIdentifier = typename HistogramType::InstanceIdentifier;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

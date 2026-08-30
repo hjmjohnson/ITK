@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class QuadEdgeMeshEulerOperatorFlipEdgeFunctionEnums
  *
  * \brief Contains enumerations for QuadEdgeMeshEulerOperatorFlipEdgeFunction class.
@@ -119,6 +120,7 @@ protected:
   OutputType
   Process(QEType * h);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkQuadEdgeMeshEulerOperatorFlipEdgeFunction.hxx"

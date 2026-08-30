@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ComplexToPhaseImageFilter
  * \brief Computes pixel-wise the modulus of a complex image.
@@ -87,6 +88,7 @@ protected:
 
   ~ComplexToPhaseImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

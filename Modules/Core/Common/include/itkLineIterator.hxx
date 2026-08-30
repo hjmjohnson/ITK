@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 LineIterator<TImage>::LineIterator(ImageType * imagePtr, const IndexType & firstIndex, const IndexType & lastIndex)
   : LineConstIterator<TImage>(imagePtr, firstIndex, lastIndex)
@@ -33,6 +34,7 @@ LineIterator<TImage>::operator=(const Self & it)
   this->LineConstIterator<TImage>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class MeshFileReader
@@ -227,6 +228,7 @@ ReadMesh(const std::string & filename)
   reader->Update();
   return reader->GetOutput();
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

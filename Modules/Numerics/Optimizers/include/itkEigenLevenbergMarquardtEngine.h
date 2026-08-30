@@ -18,11 +18,15 @@
 #ifndef itkEigenLevenbergMarquardtEngine_h
 #define itkEigenLevenbergMarquardtEngine_h
 
+#include "itkABINamespace.h"
 #include "ITKOptimizersExport.h"
 #include "vnl/vnl_vector.h"
 #include <functional>
 
-namespace itk::detail
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace detail
 {
 /** \brief Tolerances and limits for the Eigen Levenberg-Marquardt engine.
  *
@@ -70,6 +74,8 @@ EigenLevenbergMarquardtSolve(unsigned int                                       
                              const std::function<void(const double *, double *)> & jacobian,
                              const vnl_vector<double> &                            initialPosition,
                              const EigenLevenbergMarquardtOptions &                options);
-} // namespace itk::detail
+} // namespace detail
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

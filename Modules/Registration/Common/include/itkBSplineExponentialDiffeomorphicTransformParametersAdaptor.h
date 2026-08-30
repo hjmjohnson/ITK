@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineExponentialDiffeomorphicTransformParametersAdaptor
  * \brief Helper class for multiresolution image registration
  *
@@ -133,6 +134,7 @@ private:
   ModifiedTimeType m_NumberOfControlPointsForTheUpdateFieldSetTime{};
 
 }; // class BSplineExponentialDiffeomorphicTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

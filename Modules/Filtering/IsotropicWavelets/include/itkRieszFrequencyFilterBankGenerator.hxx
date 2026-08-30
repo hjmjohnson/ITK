@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TOutputImage, typename TRieszFunction, typename TFrequencyRegionIterator>
 RieszFrequencyFilterBankGenerator<TOutputImage, TRieszFunction, TFrequencyRegionIterator>::
   RieszFrequencyFilterBankGenerator()
@@ -101,5 +102,6 @@ RieszFrequencyFilterBankGenerator<TOutputImage, TRieszFunction, TFrequencyRegion
                   << " outputIndex: " << outputItList[0].GetIndex());
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

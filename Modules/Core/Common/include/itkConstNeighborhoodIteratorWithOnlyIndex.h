@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConstNeighborhoodIteratorWithOnlyIndex
  *
  * \brief Index-only version of ConstNeighborhoodIterator, defining iteration of a local
@@ -441,6 +442,7 @@ operator-(const ConstNeighborhoodIteratorWithOnlyIndex<TImage> &                
   ret -= ind;
   return ret;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

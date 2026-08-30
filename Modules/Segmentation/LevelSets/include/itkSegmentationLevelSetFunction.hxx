@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFeatureImageType>
 void
 SegmentationLevelSetFunction<TImageType, TFeatureImageType>::SetSpeedImage(ImageType * s)
@@ -118,6 +119,7 @@ SegmentationLevelSetFunction<TImageType, TFeatureImageType>::AdvectionField(cons
   // Just return the default else
   return m_AdvectionImage->GetPixel(idx);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

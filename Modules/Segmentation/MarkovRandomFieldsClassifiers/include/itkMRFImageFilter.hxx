@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TClassifiedImage>
 MRFImageFilter<TInputImage, TClassifiedImage>::MRFImageFilter()
   : m_ClassifierPtr(nullptr)
@@ -534,6 +535,7 @@ MRFImageFilter<TInputImage, TClassifiedImage>::DoNeighborhoodOperation(
     labelStatusIter.SetCenterPixel(0);
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

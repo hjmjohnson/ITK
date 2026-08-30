@@ -41,6 +41,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WaveletCoeffsInverseFFT
  * @brief IsotropicWavelet multiscale coefficients extraction where input is an image in the spatial domain.
  * Output Layout:
@@ -125,6 +126,7 @@ private:
   unsigned int m_Levels;
   unsigned int m_HighPassSubBands;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWaveletCoeffsSpatialDomainImageFilter.hxx"

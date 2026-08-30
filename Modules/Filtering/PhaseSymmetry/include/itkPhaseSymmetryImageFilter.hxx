@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 PhaseSymmetryImageFilter<TInputImage, TOutputImage>::PhaseSymmetryImageFilter()
@@ -495,6 +496,7 @@ PhaseSymmetryImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os
   //  os << indent << " Integral Filter Normalize By: " << m_Cutoff << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

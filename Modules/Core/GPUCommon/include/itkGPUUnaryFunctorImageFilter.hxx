@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TFunction, typename TParentImageFilter>
 void
@@ -79,6 +80,7 @@ GPUUnaryFunctorImageFilter<TInputImage, TOutputImage, TFunction, TParentImageFil
   this->m_GPUKernelManager->LaunchKernel(m_UnaryFunctorImageFilterGPUKernelHandle, ImageDim, globalSize, localSize);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

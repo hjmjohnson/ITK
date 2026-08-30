@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TValue>
 Array2D<TValue>::Array2D(unsigned int numberOfRows, unsigned int numberOfCols)
@@ -51,6 +52,7 @@ Array2D<TValue>::SetSize(unsigned int m, unsigned int n)
 {
   this->set_size(m, n);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

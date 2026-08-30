@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CropImageFilter
  * \brief Decrease the image size by cropping the image by an itk::Size at
@@ -116,6 +117,7 @@ private:
   SizeType m_UpperBoundaryCropSize{};
   SizeType m_LowerBoundaryCropSize{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

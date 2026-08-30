@@ -24,7 +24,10 @@
 #include "itkArray.h"
 #include "ITKStatisticsExport.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class ProbabilityDistribution
  * \brief ProbabilityDistribution class defines common interface for
@@ -164,6 +167,8 @@ protected:
 
   ParametersType m_Parameters{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

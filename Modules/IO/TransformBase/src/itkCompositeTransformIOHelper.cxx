@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -216,4 +217,5 @@ template class ITKIOTransformBase_EXPORT CompositeTransformIOHelperTemplate<floa
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

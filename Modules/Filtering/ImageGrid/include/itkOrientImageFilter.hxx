@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 OrientImageFilter<TInputImage, TOutputImage>::OrientImageFilter()
   : m_FlipAxes(false)
@@ -501,5 +502,6 @@ OrientImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Inden
   os << indent << "Permute Axes: " << m_PermuteOrder << std::endl;
   os << indent << "Flip Axes: " << m_FlipAxes << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 ImageToVTKImageFilter<TInputImage>::ImageToVTKImageFilter()
@@ -114,6 +115,7 @@ ImageToVTKImageFilter<TInputImage>::UpdateLargestPossibleRegion()
   m_Importer->UpdateWholeExtent();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

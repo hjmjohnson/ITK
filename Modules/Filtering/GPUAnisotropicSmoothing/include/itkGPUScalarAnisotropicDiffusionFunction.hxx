@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 GPUScalarAnisotropicDiffusionFunction<TImage>::GPUScalarAnisotropicDiffusionFunction()
@@ -169,6 +170,7 @@ GPUScalarAnisotropicDiffusionFunction<TImage>::GPUCalculateAverageGradientMagnit
   this->SetAverageGradientMagnitudeSquared(static_cast<double>(sum / static_cast<double>(numPixel)));
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

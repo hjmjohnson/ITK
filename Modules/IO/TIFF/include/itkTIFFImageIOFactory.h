@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TIFFImageIOFactory
  * \brief Create instances of TIFFImageIO objects using an object factory.
@@ -71,6 +72,7 @@ protected:
   TIFFImageIOFactory();
   ~TIFFImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

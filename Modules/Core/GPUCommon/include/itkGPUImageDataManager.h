@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension>
 class GPUImage;
 
@@ -94,6 +95,7 @@ private:
   GPUDataManager::Pointer m_GPUBufferedRegionSize{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

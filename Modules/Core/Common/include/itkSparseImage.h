@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SparseImage
  *
@@ -155,6 +156,7 @@ private:
 
   typename NodeStoreType::Pointer m_NodeStore{ NodeStoreType::New() };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ValarrayImageContainer
  *  \brief Defines a front-end to the std\\::\<valarray\> container that conforms to the
  *         ImageContainerInterface.
@@ -172,6 +173,7 @@ public:
     os << indent << "Size: " << this->Size() << std::endl;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

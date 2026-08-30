@@ -20,7 +20,10 @@
 
 #include "itkMacro.h"
 
-namespace itk::Functor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Functor
 {
 
 /**
@@ -121,6 +124,8 @@ public:
     return static_cast<TOutput>(~A);
   }
 };
-} // namespace itk::Functor
+} // namespace Functor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

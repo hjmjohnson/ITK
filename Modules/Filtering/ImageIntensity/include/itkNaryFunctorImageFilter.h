@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NaryFunctorImageFilter
  * \brief Perform a generic pixel-wise operation on N images.
  *
@@ -122,6 +123,7 @@ protected:
 private:
   FunctorType m_Functor{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

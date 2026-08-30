@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class AggregateLabelMapFilter
  * \brief Collapses all labels into the first label.
@@ -86,6 +87,7 @@ protected:
   void
   GenerateData() override;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

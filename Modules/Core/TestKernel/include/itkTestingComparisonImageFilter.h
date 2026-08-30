@@ -23,7 +23,10 @@
 #include "itkImageToImageFilter.h"
 #include <mutex>
 
-namespace itk::Testing
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Testing
 {
 /**
  * \class ComparisonImageFilter
@@ -142,7 +145,9 @@ private:
 
   std::mutex m_Mutex;
 };
-} // namespace itk::Testing
+} // namespace Testing
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkTestingComparisonImageFilter.hxx"

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUAnisotropicDiffusionImageFilter
  * This filter is the GPU base class for AnisotropicDiffusionImageFilter.
@@ -72,6 +73,7 @@ protected:
   void
   InitializeIteration() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

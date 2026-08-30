@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 NarrowBandImageFilterBase<TInputImage, TOutputImage>::ClearNarrowBand()
@@ -292,6 +293,7 @@ NarrowBandImageFilterBase<TInputImage, TOutputImage>::PrintSelf(std::ostream & o
   Superclass::PrintSelf(os, indent);
   print_helper::PrintNumericTrait(os, indent, "IsoSurfaceValue", m_IsoSurfaceValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

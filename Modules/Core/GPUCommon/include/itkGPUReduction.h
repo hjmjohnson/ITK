@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Create a helper GPU Kernel class for GPUReduction */
 itkGPUKernelClassMacro(GPUReductionKernel);
 
@@ -118,6 +119,7 @@ protected:
 
   TElement m_GPUResult, m_CPUResult{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

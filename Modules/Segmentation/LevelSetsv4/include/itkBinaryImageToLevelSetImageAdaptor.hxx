@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TLevelSetImage>
 BinaryImageToLevelSetImageAdaptor<TInputImage, LevelSetDenseImage<TLevelSetImage>>::BinaryImageToLevelSetImageAdaptor()
   : m_SignedDistanceTransformFilter(SignedMaurerDistanceMapImageFilter<InputImageType, LevelSetImageType>::New())
@@ -663,6 +664,7 @@ BinaryImageToLevelSetImageAdaptor<TInput, MalcolmSparseLevelSetImage<TInput::Ima
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkBinaryImageToLevelSetImageAdaptor_hxx

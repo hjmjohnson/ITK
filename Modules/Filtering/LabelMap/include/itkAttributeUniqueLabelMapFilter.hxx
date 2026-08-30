@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TImage, typename TAttributeAccessor>
@@ -267,5 +268,6 @@ AttributeUniqueLabelMapFilter<TImage, TAttributeAccessor>::PrintSelf(std::ostrea
   os << indent << "ReverseOrdering: " << m_ReverseOrdering << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

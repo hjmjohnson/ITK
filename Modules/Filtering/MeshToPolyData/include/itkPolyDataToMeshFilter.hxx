@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputPolyData>
 PolyDataToMeshFilter<TInputPolyData>::PolyDataToMeshFilter()
@@ -379,6 +380,7 @@ PolyDataToMeshFilter<TInputPolyData>::GenerateData()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkPolyDataToMeshFilter_hxx

@@ -42,6 +42,7 @@ CIT 6, 89-94 (1998).
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordRep>
 SiddonJacobsRayCastInterpolateImageFunction<TInputImage, TCoordRep>::SiddonJacobsRayCastInterpolateImageFunction()
@@ -435,6 +436,7 @@ SiddonJacobsRayCastInterpolateImageFunction<TInputImage, TCoordRep>::Initialize(
   m_SourceWorld = m_InverseTransform->TransformPoint(m_SourcePoint);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 std::ostream &
 operator<<(std::ostream & out, const SpatialOrientationEnums::CoordinateTerms value)
 {
@@ -174,4 +175,5 @@ operator<<(std::ostream & out, const SpatialOrientationEnums::ValidCoordinateOri
     }
   }();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RedPixelAccessor
  * \brief Give access to the red component of a RGBPixel type.
@@ -72,6 +73,7 @@ public:
 
   ITK_UNEQUAL_OPERATOR_MEMBER_FUNCTION(Self);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

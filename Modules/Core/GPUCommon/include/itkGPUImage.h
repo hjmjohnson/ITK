@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUImage
  *  \brief Templated n-dimensional image class for the GPU.
  *
@@ -317,6 +318,7 @@ public:
   using Type = GPUImage<TPixelType, VDimension>;
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

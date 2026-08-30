@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CollidingFrontsImageFilter
  *
  * \brief Selects a region of space where two independent fronts run towards
@@ -172,6 +173,7 @@ private:
 
   double m_NegativeEpsilon{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

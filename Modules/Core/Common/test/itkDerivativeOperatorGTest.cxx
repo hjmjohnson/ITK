@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VDimension = 2>
 class DerivativeOperatorTestHelper : public DerivativeOperator<TPixel, VDimension>
 {
@@ -56,6 +57,7 @@ public:
     return true;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

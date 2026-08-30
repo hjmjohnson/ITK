@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LevelSetDomainPartitionImageWithKdTree
  *
@@ -93,6 +94,7 @@ private:
   NeighborsIdType m_NumberOfNeighbors{ 10 };
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

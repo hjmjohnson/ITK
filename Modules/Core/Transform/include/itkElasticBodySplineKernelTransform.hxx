@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TParametersValueType, unsigned int VDimension>
 ElasticBodySplineKernelTransform<TParametersValueType, VDimension>::ElasticBodySplineKernelTransform()
   // Alpha = 12 ( 1 - \nu ) - 1
@@ -59,5 +60,6 @@ ElasticBodySplineKernelTransform<TParametersValueType, VDimension>::PrintSelf(st
 
   print_helper::PrintNumericTrait(os, indent, "Alpha", m_Alpha);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

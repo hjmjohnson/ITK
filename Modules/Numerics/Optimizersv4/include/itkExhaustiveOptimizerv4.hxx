@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 ExhaustiveOptimizerv4<TInternalComputationValueType>::ExhaustiveOptimizerv4()
@@ -241,6 +242,7 @@ ExhaustiveOptimizerv4<TInternalComputationValueType>::PrintSelf(std::ostream & o
 
   os << indent << "StopConditionDescription: " << m_StopConditionDescription.str() << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

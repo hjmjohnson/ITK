@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FFTWFFTImageFilterInitFactory
  * \brief Initialize FFTW FFT image filter factory backends.
@@ -68,6 +69,7 @@ protected:
   FFTWFFTImageFilterInitFactory();
   ~FFTWFFTImageFilterInitFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

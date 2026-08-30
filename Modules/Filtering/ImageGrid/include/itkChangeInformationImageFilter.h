@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ChangeInformationImageFilter
  * \brief Change the origin, spacing and/or region of an Image.
  *
@@ -265,6 +266,7 @@ private:
   OutputImageOffsetType m_OutputOffset{};
   OutputImageOffsetType m_Shift{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

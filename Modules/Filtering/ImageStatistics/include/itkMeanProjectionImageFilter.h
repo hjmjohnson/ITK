@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MeanProjectionImageFilter
  * \brief Mean projection
  *
@@ -119,6 +120,7 @@ protected:
   MeanProjectionImageFilter() = default;
   ~MeanProjectionImageFilter() override = default;
 }; // end MeanProjectionImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

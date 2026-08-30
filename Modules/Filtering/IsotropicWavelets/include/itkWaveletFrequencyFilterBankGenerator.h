@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WaveletFrequencyFilterBankGenerator
  * This implementation generates a pair of low-pass / high-pass wavelet filter.
  * Or if HighPassSubBands > 1 multiple high-pass-subbands instead of only one.
@@ -154,6 +155,7 @@ private:
   /** m_ScaleFactor^m_Level */
   double m_LevelFactor{ 1 };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWaveletFrequencyFilterBankGenerator.hxx"

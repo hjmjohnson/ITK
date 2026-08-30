@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputSpatialObject, typename TOutputImage>
 SpatialObjectToImageFilter<TInputSpatialObject, TOutputImage>::SpatialObjectToImageFilter()
@@ -358,6 +359,7 @@ SpatialObjectToImageFilter<TInputSpatialObject, TOutputImage>::PrintSelf(std::os
   os << indent << "OutsideValue: " << m_OutsideValue << std::endl;
   itkPrintSelfBooleanMacro(UseObjectValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

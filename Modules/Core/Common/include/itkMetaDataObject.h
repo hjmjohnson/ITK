@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MetaDataObject
  * \brief Allows arbitrary data types to be stored as MetaDataObjectBase types,
@@ -255,6 +256,7 @@ ExposeMetaData(const MetaDataDictionary & Dictionary, const std::string key, T &
   return true;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
@@ -282,6 +284,7 @@ ExposeMetaData(const MetaDataDictionary & Dictionary, const std::string key, T &
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -314,6 +317,7 @@ extern template class ITKCommon_EXPORT_EXPLICIT MetaDataObject<Matrix<double>>;
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKCommon_EXPORT_EXPLICIT
 #endif

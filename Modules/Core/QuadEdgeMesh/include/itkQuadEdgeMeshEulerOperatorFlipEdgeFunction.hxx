@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh, typename TQEType>
 QuadEdgeMeshEulerOperatorFlipEdgeFunction<TMesh, TQEType>::QuadEdgeMeshEulerOperatorFlipEdgeFunction()
   : Superclass()
@@ -148,6 +149,7 @@ QuadEdgeMeshEulerOperatorFlipEdgeFunction<TMesh, TQEType>::Process(QEType * h) -
 
   return splitFacet->Evaluate(H, G);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

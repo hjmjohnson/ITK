@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 SmoothingRecursiveYvvGaussianImageFilter<TInputImage, TOutputImage>::SmoothingRecursiveYvvGaussianImageFilter()
 {
@@ -286,6 +287,7 @@ SmoothingRecursiveYvvGaussianImageFilter<TInputImage, TOutputImage>::PrintSelf(s
   os << "NormalizeAcrossScale: " << m_NormalizeAcrossScale << std::endl;
   os << "Sigma: " << m_Sigma << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

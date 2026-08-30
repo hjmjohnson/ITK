@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Neighborhood
  * \brief A light-weight container object for storing an N-dimensional
  * neighborhood of values.
@@ -358,6 +359,7 @@ operator<<(std::ostream & os, const Neighborhood<TPixel, VDimension, TContainer>
 
   return os;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

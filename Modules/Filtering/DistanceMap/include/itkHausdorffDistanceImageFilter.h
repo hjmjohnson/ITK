@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class HausdorffDistanceImageFilter
  * \brief Computes the Hausdorff distance between the set of
@@ -149,6 +150,7 @@ private:
   RealType m_AverageHausdorffDistance{};
   bool     m_UseImageSpacing{ true };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

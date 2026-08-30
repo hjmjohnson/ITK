@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TWaveletFilterBank, typename TFrequencyShrinkFilterType>
 WaveletFrequencyForward<TInputImage, TOutputImage, TWaveletFilterBank, TFrequencyShrinkFilterType>::
   WaveletFrequencyForward()
@@ -543,5 +544,6 @@ WaveletFrequencyForward<TInputImage, TOutputImage, TWaveletFilterBank, TFrequenc
     } // end update inputPerLevel
   } // end level
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

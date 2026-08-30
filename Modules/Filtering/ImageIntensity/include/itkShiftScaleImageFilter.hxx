@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -100,5 +101,6 @@ ShiftScaleImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, I
   os << indent << "UnderflowCount: " << m_UnderflowCount << std::endl;
   os << indent << "OverflowCount: " << m_OverflowCount << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

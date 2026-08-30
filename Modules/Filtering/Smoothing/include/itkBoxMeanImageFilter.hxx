@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BoxMeanImageFilter<TInputImage, TOutputImage>::BoxMeanImageFilter()
 {
@@ -68,5 +69,6 @@ BoxMeanImageFilter<TInputImage, TOutputImage>::DynamicThreadedGenerateData(
   BoxMeanCalculatorFunction<AccumImageType, TOutputImage>(
     accImage.GetPointer(), outputImage, accumRegion, outputRegionForThread, this->GetRadius());
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

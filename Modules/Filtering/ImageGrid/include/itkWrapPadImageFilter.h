@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class WrapPadImageFilter
  * \brief Increase the image size by padding with replicants of the
@@ -100,6 +101,7 @@ protected:
 private:
   PeriodicBoundaryCondition<TInputImage, TOutputImage> m_InternalBoundaryCondition{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 GradientDescentLineSearchOptimizerv4Template<
@@ -195,6 +196,7 @@ GradientDescentLineSearchOptimizerv4Template<TInternalComputationValueType>::Gol
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

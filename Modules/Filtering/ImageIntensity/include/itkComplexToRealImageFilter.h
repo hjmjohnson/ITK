@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ComplexToRealImageFilter
  * \brief Computes pixel-wise the real(x) part of a complex image.
  *
@@ -86,6 +87,7 @@ protected:
   }
   ~ComplexToRealImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

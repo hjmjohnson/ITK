@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -424,6 +425,7 @@ VariationalRegistrationFastNCCFunction<TFixedImage, TMovingImage, TDisplacementF
   delete globalData;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

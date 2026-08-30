@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ArrowSpatialObject
  * \brief Representation of a Arrow based on the spatial object classes.
@@ -112,6 +113,7 @@ private:
   double     m_LengthInObjectSpace{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 BinaryReconstructionByDilationImageFilter<TInputImage>::BinaryReconstructionByDilationImageFilter()
@@ -121,5 +122,6 @@ BinaryReconstructionByDilationImageFilter<TInputImage>::PrintSelf(std::ostream &
   print_helper::PrintNumericTrait(os, indent, "ForegroundValue", m_ForegroundValue);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

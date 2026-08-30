@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TPixel, unsigned int VImageDimension, typename CounterType>
 inline auto
 RLEImage<TPixel, VImageDimension, CounterType>::truncateIndex(const IndexType & index) -> typename BufferType::IndexType
@@ -278,5 +279,6 @@ RLEImage<TPixel, VImageDimension, CounterType>::PrintSelf(std::ostream & os, itk
   os << indent << "Compressed size in relation to original size: " << cr * 100 << "%" << std::endl;
   os.precision(prec);
 } // >::PrintSelf
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif // itkRLEImage_hxx

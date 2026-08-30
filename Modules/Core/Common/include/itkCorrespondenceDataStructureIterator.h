@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CorrespondenceDataStructureIterator
  * \brief An iterator designed to easily traverse an
  *        CorrespondenceDataStructure.
@@ -109,6 +110,7 @@ protected:
   SecondaryNodeListType * m_SecondaryListPointer{};
   NodeListType *          m_NodeListPointer{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 LabelSetDilateImageFilter<TInputImage, TOutputImage>::ThreadedGenerateData(
@@ -143,5 +144,6 @@ LabelSetDilateImageFilter<TInputImage, TOutputImage>::ThreadedGenerateData(
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUAnisotropicDiffusionFunction
  * This is the GPU version of AnisotropicDiffusionFunction class.
@@ -163,6 +164,7 @@ private:
   double       m_ConductanceParameter{};
   TimeStepType m_TimeStep{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

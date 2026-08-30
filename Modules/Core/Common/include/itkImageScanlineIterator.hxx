@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 ImageScanlineIterator<TImage>::ImageScanlineIterator(TImage * ptr, const RegionType & region)
   : ImageScanlineConstIterator<TImage>(ptr, region)
@@ -44,6 +45,7 @@ ImageScanlineIterator<TImage>::operator=(const ImageScanlineConstIterator<TImage
   return *this;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

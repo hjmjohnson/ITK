@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 SpeckleNoiseImageFilter<TInputImage, TOutputImage>::SpeckleNoiseImageFilter()
@@ -124,6 +125,7 @@ SpeckleNoiseImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os,
 
   print_helper::PrintNumericTrait(os, indent, "StandardDeviation", m_StandardDeviation);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

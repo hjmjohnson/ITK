@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PatchBasedDenoisingBaseImageFilterEnums
  * \brief Contains all enum classes used by the PatchBasedDenoisingBaseImageFilter class.
  * \ingroup ITKDenoising
@@ -434,6 +435,7 @@ private:
 
   FilterStateEnum m_State{ FilterStateEnum::UNINITIALIZED };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

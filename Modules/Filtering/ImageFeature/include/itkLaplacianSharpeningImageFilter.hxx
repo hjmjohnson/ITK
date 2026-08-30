@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 void
@@ -162,6 +163,7 @@ LaplacianSharpeningImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostrea
   itkPrintSelfBooleanMacro(UseImageSpacing);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

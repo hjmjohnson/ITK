@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class StochasticFractalDimensionImageFilter
  *  \brief This filter computes the stochastic fractal dimension of the input image.
  *
@@ -110,6 +111,7 @@ private:
 
   typename MaskImageType::Pointer m_MaskImage{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

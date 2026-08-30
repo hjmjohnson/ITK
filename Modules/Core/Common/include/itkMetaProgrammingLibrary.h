@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /// \cond HIDE_META_PROGRAMMING
 namespace mpl
@@ -246,5 +247,6 @@ using mpl::TrueType;
 using mpl::FalseType;
 
 /// \endcond
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkMetaProgrammingLibrary_h

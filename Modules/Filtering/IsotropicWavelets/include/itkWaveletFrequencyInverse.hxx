@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TWaveletFilterBank, typename TFrequencyExpandFilterType>
 WaveletFrequencyInverse<TInputImage, TOutputImage, TWaveletFilterBank, TFrequencyExpandFilterType>::
   WaveletFrequencyInverse()
@@ -434,5 +435,6 @@ WaveletFrequencyInverse<TInputImage, TOutputImage, TWaveletFilterBank, TFrequenc
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

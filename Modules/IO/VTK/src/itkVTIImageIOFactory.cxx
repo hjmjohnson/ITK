@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 VTIImageIOFactory::VTIImageIOFactory()
 {
   this->RegisterOverride(
@@ -49,4 +50,5 @@ VTIImageIOFactoryRegister__Private()
   ObjectFactoryBase::RegisterInternalFactoryOnce<VTIImageIOFactory>();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

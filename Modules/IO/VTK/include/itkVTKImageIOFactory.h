@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VTKImageIOFactory
  * \brief Create instances of VTKImageIO objects using an object factory.
@@ -76,6 +77,7 @@ protected:
   VTKImageIOFactory();
   ~VTKImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

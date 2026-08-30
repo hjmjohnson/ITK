@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputVideoStream>
 VideoFileWriter<TInputVideoStream>::VideoFileWriter()
@@ -312,6 +313,7 @@ VideoFileWriter<TInputVideoStream>::PrintSelf(std::ostream & os, Indent indent) 
   os << indent << "ComponentType: " << m_ComponentType << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

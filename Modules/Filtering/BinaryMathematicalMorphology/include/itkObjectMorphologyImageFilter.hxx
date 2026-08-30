@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel>
 ObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::ObjectMorphologyImageFilter()
 {
@@ -219,5 +220,6 @@ ObjectMorphologyImageFilter<TInputImage, TOutputImage, TKernel>::PrintSelf(std::
   print_helper::PrintNumericTrait(os, indent, "Kernel", m_Kernel);
   print_helper::PrintNumericTrait(os, indent, "ObjectValue", m_ObjectValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

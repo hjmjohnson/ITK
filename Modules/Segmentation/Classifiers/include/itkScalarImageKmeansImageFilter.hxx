@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 ScalarImageKmeansImageFilter<TInputImage, TOutputImage>::SetImageRegion(const ImageRegionType & region)
@@ -236,6 +237,7 @@ ScalarImageKmeansImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream 
   os << indent << "ImageRegion: " << m_ImageRegion << std::endl;
   os << indent << "ImageRegionDefined: " << m_ImageRegionDefined << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

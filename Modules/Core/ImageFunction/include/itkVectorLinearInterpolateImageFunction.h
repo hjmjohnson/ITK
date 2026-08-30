@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VectorLinearInterpolateImageFunction
  * \brief Linearly interpolate a vector image at specified positions.
@@ -99,6 +100,7 @@ private:
   /** Number of neighbors used in the interpolation */
   static const unsigned long m_Neighbors;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

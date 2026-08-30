@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput, typename TOutput, typename TImage>
 FastMarchingImageToNodePairContainerAdaptor<TInput, TOutput, TImage>::FastMarchingImageToNodePairContainerAdaptor()
@@ -171,6 +172,7 @@ FastMarchingImageToNodePairContainerAdaptor<TInput, TOutput, TImage>::SetPointsF
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkFastMarchingImageToNodePairContainerAdaptor_hxx

@@ -47,6 +47,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Forward declaration of ImageBase so it can be declared a friend
 // (needed for PrintSelf mechanism)
 template <unsigned int VImageDimension>
@@ -423,6 +424,7 @@ ImageRegion(const Index<VImageDimension> &, const Size<VImageDimension> &) -> Im
 template <unsigned int VImageDimension>
 std::ostream &
 operator<<(std::ostream & os, const ImageRegion<VImageDimension> & region);
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

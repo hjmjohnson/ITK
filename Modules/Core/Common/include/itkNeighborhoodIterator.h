@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class NeighborhoodIterator
  *
@@ -335,6 +336,7 @@ template <typename TImage>
 NeighborhoodIterator(const typename TImage::SizeType &, SmartPointer<TImage>, const typename TImage::RegionType &)
   -> NeighborhoodIterator<TImage>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -20,6 +20,7 @@
 #include <itkUnaryFunctorImageFilter.h>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GreaterEqualValImageFilter
  * \brief Computes the absolute difference between an image and a
  * constant. Can be done with ShiftScale and AbsIamgeFilters.
@@ -103,6 +104,7 @@ protected:
   GreaterEqualValImageFilter() = default;
   ~GreaterEqualValImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

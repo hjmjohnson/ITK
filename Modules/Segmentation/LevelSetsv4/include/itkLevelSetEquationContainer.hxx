@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TTermContainer>
 void
 LevelSetEquationContainer<TTermContainer>::AddEquation(const LevelSetIdentifierType & iId,
@@ -145,6 +146,7 @@ LevelSetEquationContainer<TTermContainer>::ComputeCFLContribution() const -> Lev
   return oValue;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkLevelSetEquationContainer_hxx

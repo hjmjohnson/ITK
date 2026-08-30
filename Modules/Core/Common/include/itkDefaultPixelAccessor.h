@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DefaultPixelAccessor
  * \brief Give access to partial aspects a type
@@ -83,6 +84,7 @@ public:
     return input;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TProbabilityPrecisionType>
 BayesianClassifierInitializationImageFilter<TInputImage,
                                             TProbabilityPrecisionType>::BayesianClassifierInitializationImageFilter()
@@ -289,6 +290,7 @@ BayesianClassifierInitializationImageFilter<TInputImage, TProbabilityPrecisionTy
 
   itkPrintSelfObjectMacro(MembershipFunctionContainer);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -18,7 +18,10 @@
 #ifndef itkSpatialNeighborSubsampler_hxx
 #define itkSpatialNeighborSubsampler_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 
 template <typename TSample, typename TRegion>
@@ -191,6 +194,8 @@ SpatialNeighborSubsampler<TSample, TRegion>::PrintSelf(std::ostream & os, Indent
   os << std::endl;
 }
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

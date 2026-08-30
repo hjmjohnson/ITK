@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Functor
 {
 /** \class GPUFunctorBase
@@ -46,6 +47,7 @@ public:
 };
 
 } // end of namespace Functor
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

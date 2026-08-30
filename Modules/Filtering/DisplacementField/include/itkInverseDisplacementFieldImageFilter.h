@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class InverseDisplacementFieldImageFilter
  * \brief Computes the inverse of a displacement field.
  *
@@ -223,6 +224,7 @@ private:
   unsigned int m_SubsamplingFactor{}; // factor to subsample the
                                       // input field.
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

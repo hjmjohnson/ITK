@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BioRadImageIOFactory
  * \brief Create instances of BioRadImageIO objects using an object factory.
@@ -76,6 +77,7 @@ protected:
   BioRadImageIOFactory();
   ~BioRadImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

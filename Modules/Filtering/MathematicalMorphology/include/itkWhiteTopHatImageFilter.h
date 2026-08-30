@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class WhiteTopHatImageFilter
  * \brief White top hat extracts local maxima that are larger than the structuring element
@@ -117,6 +118,7 @@ private:
 
   bool m_ForceAlgorithm{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

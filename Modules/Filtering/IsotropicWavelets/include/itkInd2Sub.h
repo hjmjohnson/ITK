@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * @brief Return SubIndex [i,j,k,...] from linear index and matrix size.
  * Based on Ind2Sub from Matlab.
@@ -95,5 +96,6 @@ Ind2Sub(const unsigned int & linear_index, const itk::Size<VN> & ns)
 
   return out_index;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

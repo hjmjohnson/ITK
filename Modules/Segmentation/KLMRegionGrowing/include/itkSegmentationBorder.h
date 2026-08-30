@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SegmentationBorder
  * \brief Base class for SegmentationBorder object
@@ -83,6 +84,7 @@ protected:
 private:
   double m_BorderLength{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

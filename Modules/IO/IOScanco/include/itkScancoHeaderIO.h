@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScancoHeaderIO
  *
  * \brief Read Scanco image headers.
@@ -113,6 +114,7 @@ protected:
   itkScancoHeaderData * m_HeaderData{ nullptr }; // Pointer data structure to be filled with header information
   std::string           m_FileName = "";
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkScancoHeaderIO_h

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Utility class for wrappings purposes.
  *
@@ -99,5 +100,6 @@ struct IsotropicWaveletsUtilities
   static unsigned int
   ComputeMaxNumberOfLevels(const Size<3> & inputSize, const unsigned int & scaleFactor);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

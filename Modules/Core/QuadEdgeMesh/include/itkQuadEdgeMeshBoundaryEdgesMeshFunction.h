@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshBoundaryEdgesMeshFunction
  *
@@ -65,6 +66,7 @@ public:
 protected:
   QuadEdgeMeshBoundaryEdgesMeshFunction() = default;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

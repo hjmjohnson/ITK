@@ -40,6 +40,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DeformableSimplexMesh3DFilter
  * \brief Three-dimensional deformable model for image segmentation
@@ -320,6 +321,7 @@ protected:
   GeometryMapPointer m_Data{};
 
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

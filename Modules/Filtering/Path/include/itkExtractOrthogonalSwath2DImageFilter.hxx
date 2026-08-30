@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage>
 void
 ExtractOrthogonalSwath2DImageFilter<TImage>::SetSpacing(const double * spacing)
@@ -176,6 +177,7 @@ ExtractOrthogonalSwath2DImageFilter<TImage>::PrintSelf(std::ostream & os, Indent
   os << indent << "Size:  " << m_Size << std::endl;
   print_helper::PrintNumericTrait(os, indent, "DefaultPixelValue:  ", m_DefaultPixelValue);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

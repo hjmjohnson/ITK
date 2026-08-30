@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMembershipFunction>
 void
 ImageModelEstimatorBase<TInputImage, TMembershipFunction>::Update()
@@ -58,6 +59,7 @@ ImageModelEstimatorBase<TInputImage, TMembershipFunction>::AddMembershipFunction
   m_MembershipFunctions.push_back(function);
   return static_cast<unsigned int>(m_MembershipFunctions.size());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

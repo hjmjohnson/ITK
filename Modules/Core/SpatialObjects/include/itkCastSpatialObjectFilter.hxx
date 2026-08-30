@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  *  Print Self
@@ -44,6 +45,7 @@ CastSpatialObjectFilter<ObjectDimension>::PrintSelf(std::ostream & os, Indent in
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

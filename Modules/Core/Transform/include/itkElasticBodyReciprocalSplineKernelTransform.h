@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ElasticBodyReciprocalSplineKernelTransform
  * This class defines the elastic body spline (EBS) transformation.
  * It is implemented in as straightforward a manner as possible from
@@ -114,6 +115,7 @@ protected:
   /** alpha, Poisson's ratio */
   TParametersValueType m_Alpha{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

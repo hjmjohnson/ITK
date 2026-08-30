@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ThresholdLabelerImageFilter<TInputImage, TOutputImage>::ThresholdLabelerImageFilter()
@@ -69,6 +70,7 @@ ThresholdLabelerImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream &
   os << indent << "Real Thresholds: " << m_RealThresholds << std::endl;
   os << indent << "LabelOffset: " << m_LabelOffset << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

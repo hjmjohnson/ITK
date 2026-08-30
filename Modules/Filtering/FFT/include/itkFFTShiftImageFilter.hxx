@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 void
 FFTShiftImageFilter<TInputImage, TOutputImage>::GenerateData()
@@ -53,5 +54,6 @@ FFTShiftImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, Ind
   os << indent << "Inverse: " << m_Inverse << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

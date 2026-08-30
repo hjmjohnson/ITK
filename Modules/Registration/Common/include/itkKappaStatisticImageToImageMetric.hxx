@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TFixedImage, typename TMovingImage>
 KappaStatisticImageToImageMetric<TFixedImage, TMovingImage>::KappaStatisticImageToImageMetric()
@@ -367,6 +368,7 @@ KappaStatisticImageToImageMetric<TFixedImage, TMovingImage>::PrintSelf(std::ostr
   os << indent << "ForegroundValue: " << m_ForegroundValue << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

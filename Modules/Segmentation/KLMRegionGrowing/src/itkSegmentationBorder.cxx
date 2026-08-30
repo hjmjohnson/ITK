@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 SegmentationBorder::SegmentationBorder() = default;
 
 SegmentationBorder::~SegmentationBorder() = default;
@@ -33,4 +34,5 @@ SegmentationBorder::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Segmentation border object" << std::endl;
   os << indent << "Length of the border: " << m_BorderLength << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

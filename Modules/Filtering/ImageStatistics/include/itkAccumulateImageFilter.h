@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AccumulateImageFilter
  * \brief Implements an accumulation of an image along a selected direction.
  *
@@ -129,6 +130,7 @@ private:
   unsigned int m_AccumulateDimension{};
   bool         m_Average{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

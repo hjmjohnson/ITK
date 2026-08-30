@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TTransform>
 TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<
@@ -343,6 +344,7 @@ TimeVaryingBSplineVelocityFieldTransformParametersAdaptor<TTransform>::PrintSelf
   os << indent << "Required transform domain direction: " << this->m_RequiredTransformDomainDirection << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

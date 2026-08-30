@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PhilipsRECImageIOFactory
  * \brief Create instances of PhilipsRECImageIO objects using an object factory.
  *
@@ -77,6 +78,7 @@ protected:
   PhilipsRECImageIOFactory();
   ~PhilipsRECImageIOFactory() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

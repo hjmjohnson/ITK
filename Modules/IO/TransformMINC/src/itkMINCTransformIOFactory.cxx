@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 void
 MINCTransformIOFactory::PrintSelf(std::ostream &, Indent) const
@@ -68,4 +69,5 @@ MINCTransformIOFactoryRegister__Private()
   // register additional transform type
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

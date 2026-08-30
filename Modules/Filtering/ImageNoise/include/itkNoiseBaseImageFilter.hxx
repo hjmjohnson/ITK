@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <class TInputImage, class TOutputImage>
 NoiseBaseImageFilter<TInputImage, TOutputImage>::NoiseBaseImageFilter()
@@ -72,6 +73,7 @@ NoiseBaseImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, In
 
   print_helper::PrintNumericTrait(os, indent, "Seed", m_Seed);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

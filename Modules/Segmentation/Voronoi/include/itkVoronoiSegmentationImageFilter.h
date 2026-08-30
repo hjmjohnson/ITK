@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VoronoiSegmentationImageFilter
  *
  * Perform the segmentation of 2D images (single channel) by Voronoi Diagram.
@@ -135,6 +136,7 @@ private:
   bool
   TestHomogeneity(IndexList & Plist) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ----------------------------------------------------------------------------
 template <unsigned int VDimension>
 MalcolmSparseLevelSetImage<VDimension>::MalcolmSparseLevelSetImage()
@@ -172,5 +173,6 @@ MalcolmSparseLevelSetImage<VDimension>::InitializeInternalLabelList()
   this->m_InternalLabelList.push_back(ZeroLayer());
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // itkMalcolmSparseLevelSetImage_hxx

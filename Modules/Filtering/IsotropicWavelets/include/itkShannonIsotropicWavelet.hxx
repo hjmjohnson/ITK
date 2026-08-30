@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFunctionValue, unsigned int VImageDimension, typename TInput>
 ShannonIsotropicWavelet<TFunctionValue, VImageDimension, TInput>::ShannonIsotropicWavelet() = default;
 
@@ -48,6 +49,7 @@ ShannonIsotropicWavelet<TFunctionValue, VImageDimension, TInput>::EvaluateMagnit
   }
   return 0;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

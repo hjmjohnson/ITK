@@ -63,6 +63,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ScancoImageIO
  *
  * \brief Read Scanco image file formats.
@@ -379,6 +380,7 @@ private:
 
   SizeValueType m_HeaderSize{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkScancoImageIO_h

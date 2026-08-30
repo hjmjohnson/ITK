@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MRFImageFilterEnums
  * \brief Contains all enum classes in MRFImageFilter class;
  * \ingroup ITKMarkovRandomFieldsClassifiers
@@ -430,6 +431,7 @@ private:
   void
   ApplyICMLabeller();
 }; // class MRFImageFilter
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

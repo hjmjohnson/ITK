@@ -23,12 +23,14 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 itkEventMacroDeclaration(TestEvent, UserEvent);
 itkEventMacroDefinition(TestEvent, UserEvent);
 itkEventMacroDeclaration(TestDerivedEvent, TestEvent);
 itkEventMacroDefinition(TestDerivedEvent, TestEvent);
 itkEventMacroDeclaration(TestOtherEvent, AnyEvent);
 itkEventMacroDefinition(TestOtherEvent, AnyEvent);
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 TEST(EventObject, EventDerivationCheck)

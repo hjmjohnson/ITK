@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int NDimensions>
 PolarToCartesianTransform<TParametersValueType, NDimensions>::PolarToCartesianTransform()
@@ -80,6 +81,7 @@ PolarToCartesianTransform<TParametersValueType, NDimensions>::TransformPoint(con
   return outputPoint;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

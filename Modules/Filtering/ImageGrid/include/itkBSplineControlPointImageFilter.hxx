@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 BSplineControlPointImageFilter<TInputImage, TOutputImage>::BSplineControlPointImageFilter()
@@ -573,6 +574,7 @@ BSplineControlPointImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostrea
   os << indent << "  Direction: " << this->m_Direction << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

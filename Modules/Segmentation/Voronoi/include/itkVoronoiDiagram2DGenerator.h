@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class VoronoiDiagram2DGenerator
  * \brief Implement the Sweep Line Algorithm for the construction of the
  *        2D Voronoi Diagram.
@@ -318,6 +319,7 @@ private:
   void
   makeEndPoint(FortuneEdge * task, bool lr, FortuneSite * ends);
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

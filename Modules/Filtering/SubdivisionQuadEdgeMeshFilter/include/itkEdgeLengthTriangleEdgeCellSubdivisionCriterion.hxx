@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh>
 void
 EdgeLengthTriangleEdgeCellSubdivisionCriterion<TMesh>::Compute(MeshType * mesh, SubdivisionCellContainer & edgeList)
@@ -48,5 +49,6 @@ EdgeLengthTriangleEdgeCellSubdivisionCriterion<TMesh>::Compute(MeshType * mesh, 
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

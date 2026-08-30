@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct ExceptionGlobals
 {
@@ -95,6 +96,7 @@ operator<<(std::ostream & out, const FloatingPointExceptionsEnums::ExceptionActi
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** Create a helper GPU Kernel class for GPUImageOps */
 itkGPUKernelClassMacro(GPUImageOpsKernel);
 
@@ -44,6 +45,7 @@ public:
   /** Get OpenCL Kernel source as a string, creates a GetOpenCLSource method */
   itkGetOpenCLSourceFromKernelMacro(GPUImageOpsKernel);
 };
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MorphologicalGradientImageFilter
  * \brief Compute the gradient of a grayscale image.
@@ -149,6 +150,7 @@ private:
   // and the name of the filter
   AlgorithmEnum m_Algorithm{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

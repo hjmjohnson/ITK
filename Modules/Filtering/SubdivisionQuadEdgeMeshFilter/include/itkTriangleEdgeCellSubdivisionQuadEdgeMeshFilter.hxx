@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 TriangleEdgeCellSubdivisionQuadEdgeMeshFilter<TInputMesh,
                                               TOutputMesh>::TriangleEdgeCellSubdivisionQuadEdgeMeshFilter() = default;
@@ -97,5 +98,6 @@ TriangleEdgeCellSubdivisionQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::PrintSel
 {
   Superclass::PrintSelf(os, indent);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

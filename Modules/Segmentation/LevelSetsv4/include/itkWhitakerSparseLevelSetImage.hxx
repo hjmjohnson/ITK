@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TOutput, unsigned int VDimension>
 WhitakerSparseLevelSetImage<TOutput, VDimension>::WhitakerSparseLevelSetImage()
@@ -104,6 +105,7 @@ WhitakerSparseLevelSetImage<TOutput, VDimension>::InitializeInternalLabelList()
   this->m_InternalLabelList.push_back(MinusOneLayer());
   this->m_InternalLabelList.push_back(ZeroLayer());
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkWhitakerSparseLevelSetImage_hxx

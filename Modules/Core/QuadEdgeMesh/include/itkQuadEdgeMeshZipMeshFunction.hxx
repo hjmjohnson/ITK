@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TMesh, typename TQEType>
 auto
 QuadEdgeMeshZipMeshFunction<TMesh, TQEType>::Evaluate(QEType * e) -> OutputType
@@ -215,6 +216,7 @@ QuadEdgeMeshZipMeshFunction<TMesh, TQEType>::Evaluate(QEType * e) -> OutputType
   this->m_Mesh->Modified();
   return resultingPointId;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

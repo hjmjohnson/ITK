@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage>
 HalfToFullHermitianImageFilter<TInputImage>::HalfToFullHermitianImageFilter()
@@ -154,6 +155,7 @@ HalfToFullHermitianImageFilter<TInputImage>::DynamicThreadedGenerateData(
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkHalfToFullHermitianImageFilter_hxx

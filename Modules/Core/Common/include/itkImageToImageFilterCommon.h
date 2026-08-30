@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class ImageToImageFilterCommon
  * \brief Secondary base class of ImageToImageFilter common between templates
@@ -48,6 +49,7 @@ public:
   GetGlobalDefaultDirectionTolerance();
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

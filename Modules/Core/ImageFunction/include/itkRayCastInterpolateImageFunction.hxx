@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class Helper class to maintain state when casting a ray.
  *  This helper class keeps the RayCastInterpolateImageFunction thread safe.
@@ -1415,6 +1416,7 @@ RayCastInterpolateImageFunction<TInputImage, TCoordinate>::EvaluateAtContinuousI
 
   return this->Evaluate(point);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

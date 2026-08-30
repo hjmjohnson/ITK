@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMeshEulerOperatorSplitFacetFunction
  * \brief Given two edges h and g sharing the same Left() face, create a
@@ -63,6 +64,7 @@ protected:
   QuadEdgeMeshEulerOperatorSplitFacetFunction() = default;
   ~QuadEdgeMeshEulerOperatorSplitFacetFunction() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #include "itkQuadEdgeMeshEulerOperatorSplitFacetFunction.hxx"

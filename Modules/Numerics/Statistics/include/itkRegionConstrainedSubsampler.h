@@ -21,7 +21,10 @@
 #include "itkSubsamplerBase.h"
 #include "itkImageRegion.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class RegionConstrainedSubsampler
@@ -132,7 +135,9 @@ protected:
   bool       m_SampleRegionInitialized{};
 }; // end of class RegionConstrainedSubsampler
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkRegionConstrainedSubsampler.hxx"

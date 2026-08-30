@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** \class MattesMutualInformationImageToImageMetricv4GetValueAndDerivativeThreader
  * \brief Processes points for MattesMutualInformationImageToImageMetricv4 \c
@@ -126,6 +127,7 @@ private:
   TMattesMutualInformationMetric * m_MattesAssociate{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

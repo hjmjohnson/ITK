@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BinaryThresholdSpatialFunction
  * \brief A spatial functions that returns if the internal spatial function
  * is within user specified thresholds.
@@ -100,6 +101,7 @@ protected:
 
   typename FunctionType::Pointer m_Function{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

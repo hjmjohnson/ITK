@@ -18,7 +18,10 @@
 #ifndef itkListSample_hxx
 #define itkListSample_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TMeasurementVector>
 void
@@ -131,6 +134,8 @@ ListSample<TMeasurementVector>::PrintSelf(std::ostream & os, Indent indent) cons
 
   os << indent << "InternalContainer: " << &m_InternalContainer << std::endl;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

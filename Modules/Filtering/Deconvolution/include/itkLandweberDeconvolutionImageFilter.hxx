@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TKernelImage, typename TOutputImage, typename TInternalPrecision>
 LandweberDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TInternalPrecision>::
@@ -111,6 +112,7 @@ LandweberDeconvolutionImageFilter<TInputImage, TKernelImage, TOutputImage, TInte
 
   os << indent << "Alpha: " << m_Alpha << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

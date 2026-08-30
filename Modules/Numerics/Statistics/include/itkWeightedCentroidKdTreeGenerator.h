@@ -23,7 +23,10 @@
 #include "itkSubsample.h"
 #include "itkKdTreeGenerator.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class WeightedCentroidKdTreeGenerator
@@ -110,7 +113,9 @@ private:
   MeasurementVectorType m_TempUpperBound{};
   MeasurementVectorType m_TempMean{};
 }; // end of class
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWeightedCentroidKdTreeGenerator.hxx"

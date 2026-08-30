@@ -35,6 +35,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadEdgeMesh
  *
@@ -472,6 +473,7 @@ protected:
   FreePointIndexesType m_FreePointIndexes{};
   FreeCellIndexesType  m_FreeCellIndexes{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

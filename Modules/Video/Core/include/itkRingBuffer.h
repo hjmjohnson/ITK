@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RingBuffer
  *  \brief Templated ring buffer for holding anything
@@ -124,6 +125,7 @@ protected:
   std::vector<ElementPointer> m_PointerVector{};
 }; // end RingBuffer class
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ResourceProbe
  *  \brief Computes the change of a value between two points in code.
  *
@@ -208,6 +209,7 @@ private:
 
   static constexpr unsigned int tabwidth = 15;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

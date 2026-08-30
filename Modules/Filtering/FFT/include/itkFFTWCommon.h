@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace fftw
 {
 /**
@@ -811,5 +812,6 @@ public:
 
 #endif
 } // end namespace fftw
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

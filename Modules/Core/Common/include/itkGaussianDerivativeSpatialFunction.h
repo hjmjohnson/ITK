@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GaussianDerivativeSpatialFunction
  * \brief N-dimensional Gaussian spatial function class
  *
@@ -113,6 +114,7 @@ private:
   /** Whether or not to normalize the Gaussian. */
   bool m_Normalized{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 // -----------------------------------------------------------------------------
 template <typename TElement, typename TElementIdentifier>
@@ -465,6 +466,7 @@ PriorityQueueContainer<TElementWrapper, TElementWrapperInterface, TElementPriori
   SetElementAtLocation(id, element);
 }
 // -----------------------------------------------------------------------------
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkPriorityQueueContainer_hxx

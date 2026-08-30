@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TransformFileWriterTemplate
  *
  * \brief TODO
@@ -148,6 +149,7 @@ TransformFileWriterTemplate<float>::PushBackTransformList(const Object * transOb
 /** @ITKEndGrouping */
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #if defined ITK_TRANSFORMIO_FACTORY_REGISTER_MANAGER || defined ITK_IO_FACTORY_REGISTER_MANAGER
@@ -177,6 +179,7 @@ ITK_GCC_PRAGMA_DIAG_POP()
 #endif
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ITK_GCC_PRAGMA_DIAG_PUSH()
 ITK_GCC_PRAGMA_DIAG(ignored "-Wattributes")
@@ -186,6 +189,7 @@ extern template class ITKIOTransformBase_EXPORT_EXPLICIT TransformFileWriterTemp
 
 ITK_GCC_PRAGMA_DIAG_POP()
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #undef ITKIOTransformBase_EXPORT_EXPLICIT
 #endif

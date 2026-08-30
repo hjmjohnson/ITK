@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -158,6 +159,7 @@ VariationalRegistrationGaussianRegularizer<TDisplacementField>::PrintSelf(std::o
   os << m_MaximumKernelWidth << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

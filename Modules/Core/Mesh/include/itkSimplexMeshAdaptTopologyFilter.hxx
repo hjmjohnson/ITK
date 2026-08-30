@@ -32,6 +32,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 SimplexMeshAdaptTopologyFilter<TInputMesh, TOutputMesh>::SimplexMeshAdaptTopologyFilter()
   : m_IdOffset(0)
@@ -416,6 +417,7 @@ SimplexMeshAdaptTopologyFilter<TInputMesh, TOutputMesh>::ComputeCellCenter(Input
 
   return cellCenter;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkSimplexMeshAdaptTopologyFilter_hxx

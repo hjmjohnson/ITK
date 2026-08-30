@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GPUDemonsRegistrationFunction
  *
@@ -300,6 +301,7 @@ private:
   /** Mutex lock to protect modification to metric. */
   mutable std::mutex m_MetricCalculationMutex{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

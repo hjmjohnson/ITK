@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SquaredEdgeLengthDecimationQuadEdgeMeshFilter
  * \brief
@@ -103,6 +104,7 @@ protected:
   OutputPointType
   Relocate(OutputQEType * iEdge) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkSquaredEdgeLengthDecimationQuadEdgeMeshFilter.hxx"

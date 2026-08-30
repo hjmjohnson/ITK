@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class WaveletFrequencyForward
  * @brief IsotropicWavelet multiscale analysis where input is an image in the frequency domain.
  * Output Layout:
@@ -201,6 +202,7 @@ private:
   bool                     m_StoreWaveletFilterBankPyramid{ false };
   OutputsType              m_WaveletFilterBankPyramid;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkWaveletFrequencyForward.hxx"

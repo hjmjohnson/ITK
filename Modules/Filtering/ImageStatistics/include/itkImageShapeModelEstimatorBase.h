@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageShapeModelEstimatorBase
  * \brief Base class for statistical shape model estimation.
  *
@@ -81,6 +82,7 @@ private:
   InputImagePointer m_InputImage{};
 
 }; // class ImageShapeModelEstimator
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

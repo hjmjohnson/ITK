@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImageType>
 class NodeClass
@@ -37,6 +38,7 @@ public:
   NodeClass * Previous;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace

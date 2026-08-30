@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 class DOMTextNode; // forward declaration
 
@@ -294,6 +295,7 @@ private:
   OrderedAttributesContainer m_OrderedAttributes{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkDOMTextNode.h"

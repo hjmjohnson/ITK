@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class VariableSizeMatrix
  * \brief A templated class holding a M x N size Matrix.
@@ -293,6 +294,7 @@ VariableSizeMatrix<T>::operator==(const Self & matrix) const
   }
   return equal;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

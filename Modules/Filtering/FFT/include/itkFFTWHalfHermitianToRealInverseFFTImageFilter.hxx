@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 FFTWHalfHermitianToRealInverseFFTImageFilter<TInputImage, TOutputImage>::FFTWHalfHermitianToRealInverseFFTImageFilter()
@@ -166,5 +167,6 @@ FFTWHalfHermitianToRealInverseFFTImageFilter<TInputImage, TOutputImage>::GetSize
   return FFTWProxyType::GREATEST_PRIME_FACTOR;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif // _itkFFTWHalfHermitianToRealInverseFFTImageFilter_hxx

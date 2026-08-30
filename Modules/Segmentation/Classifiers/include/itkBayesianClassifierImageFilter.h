@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BayesianClassifierImageFilter
  *
@@ -230,6 +231,7 @@ private:
 
   unsigned int m_NumberOfSmoothingIterations{ 0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

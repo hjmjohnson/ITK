@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CenteredRigid2DTransform
  * \brief CenteredRigid2DTransform of a vector space (e.g. space coordinates)
  *
@@ -176,6 +177,7 @@ protected:
   void
   PrintSelf(std::ostream & os, Indent indent) const override;
 }; // class CenteredRigid2DTransform
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

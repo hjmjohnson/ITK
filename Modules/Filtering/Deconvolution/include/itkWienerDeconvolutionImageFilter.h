@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class WienerDeconvolutionImageFilter
  * \brief The Wiener deconvolution image filter is designed to restore an
@@ -217,6 +218,7 @@ private:
 };
 } // namespace Functor
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

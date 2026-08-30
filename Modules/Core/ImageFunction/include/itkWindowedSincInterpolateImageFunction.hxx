@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage,
           unsigned int VRadius,
           typename TWindowFunction,
@@ -183,6 +184,7 @@ WindowedSincInterpolateImageFunction<TInputImage, VRadius, TWindowFunction, TBou
   // Return the interpolated value
   return static_cast<OutputType>(xPixelValue);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TParametersValueType, unsigned int VDimension>
 FixedCenterOfRotationAffineTransform<TParametersValueType, VDimension>::FixedCenterOfRotationAffineTransform()
@@ -56,6 +57,7 @@ FixedCenterOfRotationAffineTransform<TParametersValueType, VDimension>::GetInver
   return Superclass::InvertTransform(*this);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class LabelSelectionImageAdaptor
  * \brief Presents a label image as a binary image of one label
  *
@@ -63,6 +64,7 @@ protected:
   LabelSelectionImageAdaptor() = default;
   ~LabelSelectionImageAdaptor() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

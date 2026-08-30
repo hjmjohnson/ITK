@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename PixelType, typename TSpatialObjectType>
 auto
 MetaImageConverter<VDimension, PixelType, TSpatialObjectType>::CreateMetaObject() -> MetaObjectType *
@@ -186,6 +187,7 @@ MetaImageConverter<VDimension, PixelType, TSpatialObjectType>::SpatialObjectToMe
   return imageMO;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

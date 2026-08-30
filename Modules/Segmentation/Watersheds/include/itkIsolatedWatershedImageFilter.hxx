@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 IsolatedWatershedImageFilter<TInputImage, TOutputImage>::IsolatedWatershedImageFilter()
@@ -190,6 +191,7 @@ IsolatedWatershedImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream 
   os << indent << "IsolatedValueTolerance: " << m_IsolatedValueTolerance << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

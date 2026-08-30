@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Indent
  * \brief Control indentation during Print() invocation.
  *
@@ -88,6 +89,7 @@ public:
 private:
   int m_Indent;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

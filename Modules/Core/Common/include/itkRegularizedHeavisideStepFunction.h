@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class RegularizedHeavisideStepFunction
  *
  * \brief Base class of the Regularized (smoothed) Heaviside functions.
@@ -64,6 +65,7 @@ private:
   RealType m_Epsilon{ NumericTraits<RealType>::OneValue() };
   RealType m_OneOverEpsilon{ NumericTraits<RealType>::OneValue() };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

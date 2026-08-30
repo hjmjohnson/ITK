@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class LabelShapeKeepNObjectsImageFilter
  * \brief keep N objects according to their shape attributes
@@ -160,6 +161,7 @@ private:
   bool                 m_ReverseOrdering{};
   AttributeType        m_Attribute{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

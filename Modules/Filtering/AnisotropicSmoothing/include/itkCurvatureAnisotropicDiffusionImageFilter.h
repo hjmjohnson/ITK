@@ -23,6 +23,7 @@
 #include "itkMacro.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CurvatureAnisotropicDiffusionImageFilter
  * \brief This filter performs anisotropic diffusion on a scalar
@@ -101,6 +102,7 @@ protected:
     }
   }
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

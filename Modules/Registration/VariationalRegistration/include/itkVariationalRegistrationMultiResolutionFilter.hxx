@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * Default constructor
@@ -639,6 +640,7 @@ VariationalRegistrationMultiResolutionFilter<TFixedImage, TMovingImage, TDisplac
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

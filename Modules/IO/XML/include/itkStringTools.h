@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class StringTools
@@ -165,6 +166,7 @@ public:
   ContainSub(const std::string & s1, const std::string & s2, bool ignoreCase = true);
 }; // class StringTools
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

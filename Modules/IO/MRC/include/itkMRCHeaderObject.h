@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class MRCHeaderObject
@@ -293,6 +294,7 @@ private:
 
   bool m_BigEndianHeader{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

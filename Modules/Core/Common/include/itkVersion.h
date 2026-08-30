@@ -40,6 +40,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Version
  * \brief Track the current version of the software.
  *
@@ -94,6 +95,7 @@ protected:
   Version();
   ~Version() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

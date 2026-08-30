@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class AnchorUtilities
  * \brief functionality in common for anchor openings/closings and
  * erosions/dilation
@@ -54,6 +55,7 @@ DoAnchorFace(const TImage *                            input,
              const typename TImage::RegionType         AllImage,
              const typename TImage::RegionType         face);
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

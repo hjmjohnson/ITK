@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SmoothingQuadEdgeMeshFilter
  *
  * \brief QuadEdgeMesh Smoothing Filter
@@ -140,6 +141,7 @@ protected:
   void
   GenerateData() override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #include "itkSmoothingQuadEdgeMeshFilter.hxx"

@@ -42,6 +42,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PhilipsRECImageIO
  * \author Don C. Bigler
  * \brief Reads Philips REC/PAR image files.
@@ -161,6 +162,7 @@ private:
   SliceIndexType * m_SliceIndex{};
   IOByteOrderEnum  m_MachineByteOrder{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkPhilipsRECImageIO_h

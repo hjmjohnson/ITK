@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SimpleDataObjectDecorator
  * \brief Decorates any "simple" data type (data types without smart pointers) with a DataObject API
  *
@@ -110,6 +111,7 @@ private:
   ComponentType m_Component{};
   bool          m_Initialized{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

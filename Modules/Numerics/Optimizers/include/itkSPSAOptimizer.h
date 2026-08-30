@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class SPSAOptimizerEnums
  * \brief Contains all enum classes used by SPSAOptimizer class.
  * \ingroup ITKOptimizers
@@ -332,6 +333,7 @@ private:
 extern ITKOptimizers_EXPORT std::ostream &
                             operator<<(std::ostream & out, const SPSAOptimizer::StopConditionSPSAOptimizerEnum value);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // end #ifndef itkSPSAOptimizer_h

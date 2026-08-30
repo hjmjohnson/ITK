@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class TemporalDataObjectEnums
  * \brief Contains all enum classes used by TemporalUnit class.
  * \ingroup ITKVideoCore
@@ -165,6 +166,7 @@ protected:
 
   TemporalUnitEnum m_TemporalUnit{ TemporalUnitEnum::Frame };
 }; // end class TemporalDataObject
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

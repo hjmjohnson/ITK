@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ComplexToImaginaryImageFilter
  * \brief Computes pixel-wise the imaginary part of a complex image.
@@ -87,6 +88,7 @@ protected:
   }
   ~ComplexToImaginaryImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

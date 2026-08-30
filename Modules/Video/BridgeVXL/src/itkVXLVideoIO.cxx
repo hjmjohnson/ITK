@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 ///////////////////////////////////////////////////////////////////////////////
 // Constructor, Destructor, and Print
@@ -777,4 +778,5 @@ VXLVideoIO::ResetMembers()
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

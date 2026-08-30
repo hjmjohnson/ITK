@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class AdditiveGaussianNoiseImageFilter
@@ -111,6 +112,7 @@ private:
   double m_Mean{ 0.0 };
   double m_StandardDeviation{ 1.0 };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

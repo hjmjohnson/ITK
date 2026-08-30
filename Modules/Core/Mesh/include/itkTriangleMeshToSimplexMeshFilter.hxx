@@ -22,6 +22,7 @@
 #include "itkPrintHelper.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 TriangleMeshToSimplexMeshFilter<TInputMesh, TOutputMesh>::TriangleMeshToSimplexMeshFilter()
   : m_FaceSet(nullptr)
@@ -425,6 +426,7 @@ TriangleMeshToSimplexMeshFilter<TInputMesh, TOutputMesh>::ComputeFaceCenter(Cell
 
   return result;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif //_TRIANGLE_MESH_TO_SIMPLEX_MESH_FILTER_TXX

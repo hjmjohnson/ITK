@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 RealToHalfHermitianForwardFFTImageFilter<TInputImage, TOutputImage>::RealToHalfHermitianForwardFFTImageFilter()
 {
@@ -103,5 +104,6 @@ RealToHalfHermitianForwardFFTImageFilter<TInputImage, TOutputImage>::GetSizeGrea
   return 2;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

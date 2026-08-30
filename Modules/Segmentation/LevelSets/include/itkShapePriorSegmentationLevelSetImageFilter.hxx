@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputPixelType>
 void
 ShapePriorSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelType>::PrintSelf(std::ostream & os,
@@ -167,6 +168,7 @@ ShapePriorSegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPix
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

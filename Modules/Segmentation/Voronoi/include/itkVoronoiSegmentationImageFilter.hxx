@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage, typename TBinaryPriorImage>
 void
@@ -205,6 +206,7 @@ VoronoiSegmentationImageFilter<TInputImage, TOutputImage, TBinaryPriorImage>::Pr
   os << indent << "MeanPercentError: " << m_MeanPercentError << std::endl;
   os << indent << "STDPercentError: " << m_STDPercentError << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

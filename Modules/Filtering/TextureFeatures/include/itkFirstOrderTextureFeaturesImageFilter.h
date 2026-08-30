@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class FirstOrderTextureFeaturesImageFilter
  * \brief Compute first order statistics in a neighborhood for each
@@ -120,6 +121,7 @@ protected:
 
   ~FirstOrderTextureFeaturesImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

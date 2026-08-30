@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineScatteredDataPointSetToImageFilter
  * \brief Image filter which provides a B-spline output approximation.
  *
@@ -379,6 +380,7 @@ private:
   bool     m_IsFittingComplete{ false };
   bool     m_DoUpdateResidualValues{ false };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

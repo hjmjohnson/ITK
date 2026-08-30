@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 void
@@ -111,5 +112,6 @@ ViewImage<TImage>::View(const ImageType * img, const std::string & winTitle, siz
   renderWindowInteractor->Initialize();
   renderWindowInteractor->Start();
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

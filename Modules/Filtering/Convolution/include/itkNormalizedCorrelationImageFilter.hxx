@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TMaskImage, typename TOutputImage, typename TOperatorValueType>
 void
 NormalizedCorrelationImageFilter<TInputImage, TMaskImage, TOutputImage, TOperatorValueType>::SetMaskImage(
@@ -255,6 +256,7 @@ NormalizedCorrelationImageFilter<TInputImage, TMaskImage, TOutputImage, TOperato
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

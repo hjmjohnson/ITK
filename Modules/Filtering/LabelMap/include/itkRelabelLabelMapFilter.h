@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class RelabelLabelMapFilter
  * \brief This filter relabels the LabelObjects; the new labels are arranged
@@ -86,6 +87,7 @@ protected:
   RelabelLabelMapFilter() { this->SetReverseOrdering(true); }
   ~RelabelLabelMapFilter() override = default;
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 

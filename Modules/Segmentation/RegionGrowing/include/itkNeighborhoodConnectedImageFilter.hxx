@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 NeighborhoodConnectedImageFilter<TInputImage, TOutputImage>::NeighborhoodConnectedImageFilter()
@@ -125,6 +126,7 @@ NeighborhoodConnectedImageFilter<TInputImage, TOutputImage>::GenerateData()
     progress.CompletedPixel();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

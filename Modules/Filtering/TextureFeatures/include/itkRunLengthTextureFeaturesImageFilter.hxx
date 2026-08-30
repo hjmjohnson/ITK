@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Statistics
 {
 template <typename TInputImage, typename TOutputImage, typename TMaskImage>
@@ -476,6 +477,7 @@ RunLengthTextureFeaturesImageFilter<TInputImage, TOutputImage, TMaskImage>::Prin
      << std::endl;
 }
 } // end of namespace Statistics
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

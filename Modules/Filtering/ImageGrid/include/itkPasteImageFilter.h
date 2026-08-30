@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 /** \class PasteImageFilter
@@ -213,6 +214,7 @@ protected:
   static_assert(InputImageDimension >= SourceImageDimension,
                 "The source image dimension is greater than the input image.");
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

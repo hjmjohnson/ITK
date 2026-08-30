@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ComplexToComplex1DFFTImageFilter
  * \brief Perform the Fast Fourier Transform, complex input to complex output,
  * but only along one dimension.
@@ -116,6 +117,7 @@ protected:
   TransformDirectionType m_TransformDirection{ DIRECT };
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

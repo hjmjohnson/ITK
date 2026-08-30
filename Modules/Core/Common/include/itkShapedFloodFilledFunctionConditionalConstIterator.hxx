@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TFunction>
 ShapedFloodFilledFunctionConditionalConstIterator<TImage, TFunction>::ShapedFloodFilledFunctionConditionalConstIterator(
   const ImageType * imagePtr,
@@ -222,6 +223,7 @@ ShapedFloodFilledFunctionConditionalConstIterator<TImage, TFunction>::GetFullyCo
 {
   return this->m_FullyConnected;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

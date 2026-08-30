@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // ---------------------------------------------------------------------
 template <typename TInputMesh, typename TOutputMesh>
 QuadEdgeMeshToQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::QuadEdgeMeshToQuadEdgeMeshFilter()
@@ -113,6 +114,7 @@ QuadEdgeMeshToQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::CopyInputMeshToOutput
 
   CopyMeshToMeshCellData(in, out);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class MeanReciprocalSquareDifferencePointSetToImageMetric
  * \brief Computes similarity between pixel values of a point set and
  * intensity values in an image.
@@ -110,6 +111,7 @@ protected:
 private:
   double m_Lambda{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

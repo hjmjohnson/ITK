@@ -59,6 +59,7 @@ itkMetricImageGradientTestRunTest(unsigned int                 imageSize,
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /*
  * \class VanillaImageToImageMetricv4GetValueAndDerivativeThreader
  * \brief A vanilla class of metric thread, required to implement the virtual base class
@@ -195,6 +196,7 @@ protected:
     VanillaImageToImageMetricv4GetValueAndDerivativeThreader<ThreadedIndexedContainerPartitioner, Superclass>;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 template <unsigned int ImageDimensionality, typename TTransform>

@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class FileTools
@@ -43,6 +44,7 @@ public:
   CreateFile(const std::string & fn);
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 // here comes the implementation
@@ -50,6 +52,7 @@ public:
 #include "itksys/SystemTools.hxx"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** Helper function to create the directory, if it does not exist. */
 inline void
@@ -109,6 +112,7 @@ FileTools::CreateFile(const std::string & fn)
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkFileTools_h

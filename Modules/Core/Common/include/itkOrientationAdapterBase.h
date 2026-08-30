@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class OrientationAdapterBase
  *  \brief base class that converts Orientation representations to direction cosines.
  *
@@ -67,6 +68,7 @@ protected:
   virtual ~OrientationAdapterBase() = default;
   /** @ITKEndGrouping */
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #else // ITK_LEGACY_REMOVE
 #  error itkOrientationAdapterBase.h is a legacy file since ITK 5.3 and will be removed in the future.

@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TParametersValueType, unsigned int VDimension>
 void
 VolumeSplineKernelTransform<TParametersValueType, VDimension>::ComputeG(const InputVectorType & x,
@@ -58,5 +59,6 @@ VolumeSplineKernelTransform<TParametersValueType, VDimension>::ComputeDeformatio
     ++sp;
   }
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

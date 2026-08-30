@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ConjugateGradientLineSearchOptimizerv4Template
  *  \brief Conjugate gradient descent optimizer with a golden section line search for nonlinear optimization.
@@ -124,6 +125,7 @@ private:
 /** This helps to meet backward compatibility */
 using ConjugateGradientLineSearchOptimizerv4 = ConjugateGradientLineSearchOptimizerv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

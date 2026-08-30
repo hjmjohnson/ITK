@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BinaryMask3DMeshSource
  *
  *
@@ -257,6 +258,7 @@ private:
   OutputMeshType *       m_OutputMesh{};
   const InputImageType * m_InputImage{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

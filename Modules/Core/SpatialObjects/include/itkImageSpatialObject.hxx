@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int TDimension, typename PixelType>
 ImageSpatialObject<TDimension, PixelType>::ImageSpatialObject()
@@ -256,6 +257,7 @@ ImageSpatialObject<TDimension, PixelType>::SetSliceNumber(unsigned int dimension
     this->Modified();
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif //__ImageSpatialObject_hxx

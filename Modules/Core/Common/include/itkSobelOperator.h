@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class SobelOperator
  *
@@ -164,6 +165,7 @@ private:
   bool m_UseLegacyCoefficients{ true };
 #endif
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

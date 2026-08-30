@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 ShapePositionLabelMapFilter<TImage>::ShapePositionLabelMapFilter()
@@ -59,5 +60,6 @@ ShapePositionLabelMapFilter<TImage>::PrintSelf(std::ostream & os, Indent indent)
      << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

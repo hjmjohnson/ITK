@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 ExpandImageFilter<TInputImage, TOutputImage>::ExpandImageFilter()
 {
@@ -240,6 +241,7 @@ ExpandImageFilter<TInputImage, TOutputImage>::GenerateOutputInformation()
 
   outputPtr->SetLargestPossibleRegion(outputLargestPossibleRegion);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

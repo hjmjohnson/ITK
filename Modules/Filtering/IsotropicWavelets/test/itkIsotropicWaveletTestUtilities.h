@@ -23,6 +23,7 @@
 #include <iomanip>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Testing
 {
 /** Check if Image is Hermitian f(x) = std:conj(f(-x)).
@@ -89,5 +90,6 @@ ComplexImageIsHermitian(Image<std::complex<TValueType>, N> *                    
   return isHermitian;
 }
 } // namespace Testing
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #endif

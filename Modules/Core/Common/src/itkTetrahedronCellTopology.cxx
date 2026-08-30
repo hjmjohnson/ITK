@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * The tetrahedron's topology data: Faces
  */
@@ -32,4 +33,5 @@ const int TetrahedronCellTopology::m_Edges[6][2] = { { 0, 1 }, { 1, 2 }, { 2, 0 
 TetrahedronCellTopology::TetrahedronCellTopology() = default;
 
 TetrahedronCellTopology::~TetrahedronCellTopology() = default;
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

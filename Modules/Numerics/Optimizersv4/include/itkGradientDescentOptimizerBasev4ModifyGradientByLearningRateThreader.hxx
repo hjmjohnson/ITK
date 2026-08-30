@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInternalComputationValueType>
 void
 GradientDescentOptimizerBasev4ModifyGradientByLearningRateThreaderTemplate<
@@ -30,6 +31,7 @@ GradientDescentOptimizerBasev4ModifyGradientByLearningRateThreaderTemplate<
   this->m_Associate->ModifyGradientByLearningRateOverSubRange(subrange);
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

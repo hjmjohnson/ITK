@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace detail
 {
 /** \class VectorContainer
@@ -611,6 +612,7 @@ MakeVectorContainer(std::vector<TElement> stdVector)
   return vectorContainer;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

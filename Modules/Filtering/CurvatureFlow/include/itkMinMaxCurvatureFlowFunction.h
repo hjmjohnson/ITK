@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class MinMaxCurvatureFlowFunction
  *
@@ -125,6 +126,7 @@ private:
   PixelType
   ComputeThreshold(const DispatchBase &, const NeighborhoodType & it) const;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

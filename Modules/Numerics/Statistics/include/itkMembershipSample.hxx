@@ -18,7 +18,10 @@
 #ifndef itkMembershipSample_hxx
 #define itkMembershipSample_hxx
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 template <typename TSample>
 void
@@ -148,6 +151,8 @@ MembershipSample<TSample>::PrintSelf(std::ostream & os, Indent indent) const
   os << indent << "Sample: " << m_Sample.GetPointer() << std::endl;
   os << indent << "NumberOfClasses: " << this->GetNumberOfClasses() << std::endl;
 }
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

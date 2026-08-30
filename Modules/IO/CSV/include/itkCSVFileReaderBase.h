@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class CSVFileReaderBase
  * \brief A base class that contains common methods used for parsing csv files.
@@ -184,6 +185,7 @@ protected:
   PrepareForParsing();
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

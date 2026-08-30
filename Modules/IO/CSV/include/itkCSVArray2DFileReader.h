@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /**
  * \class CSVArray2DFileReader
@@ -133,6 +134,7 @@ private:
   Array2DDataObjectPointer m_Array2DDataObject{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

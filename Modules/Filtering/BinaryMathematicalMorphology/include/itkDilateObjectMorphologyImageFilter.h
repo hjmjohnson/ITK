@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DilateObjectMorphologyImageFilter
  * \brief dilation of an object in an image
@@ -100,6 +101,7 @@ private:
   // NumericTraits<PixelType>::NonpositiveMin()
   DefaultBoundaryConditionType m_DilateBoundaryCondition{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

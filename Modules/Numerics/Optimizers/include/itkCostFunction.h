@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class CostFunction
  * \brief Base class for cost functions intended to be used with Optimizers.
  *
@@ -68,6 +69,7 @@ protected:
 /** This helps to meet backward compatibility */
 using CostFunction = CostFunctionTemplate<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

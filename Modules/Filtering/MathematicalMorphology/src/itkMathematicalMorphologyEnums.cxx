@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 std::ostream &
 operator<<(std::ostream & out, const MathematicalMorphologyEnums::Algorithm value)
@@ -42,4 +43,5 @@ operator<<(std::ostream & out, const MathematicalMorphologyEnums::Algorithm valu
   }();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

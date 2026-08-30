@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GradientDescentLineSearchOptimizerv4Template
  *  \brief Gradient descent optimizer with a golden section line search.
@@ -157,6 +158,7 @@ protected:
 /** This helps to meet backward compatibility */
 using GradientDescentLineSearchOptimizerv4 = GradientDescentLineSearchOptimizerv4Template<double>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

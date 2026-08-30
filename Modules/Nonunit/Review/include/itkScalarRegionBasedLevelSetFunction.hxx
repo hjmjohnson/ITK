@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TFeatureImage, typename TSharedData>
 auto
@@ -109,5 +110,6 @@ ScalarRegionBasedLevelSetFunction<TInputImage, TFeatureImage, TSharedData>::Upda
 
   this->m_SharedData->m_LevelSetDataPointerVector[fId]->m_HeavisideFunctionOfLevelSetImage->SetPixel(inputIndex, newH);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

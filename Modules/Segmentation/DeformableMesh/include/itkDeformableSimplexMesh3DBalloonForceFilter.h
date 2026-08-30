@@ -37,6 +37,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class DeformableSimplexMesh3DBalloonForceFilter
  * \brief
@@ -113,6 +114,7 @@ protected:
 
   double m_Kappa{};
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

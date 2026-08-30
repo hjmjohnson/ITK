@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ConstantPadImageFilter
  * \brief Increase the image size by padding with a constant value.
  *
@@ -112,6 +113,7 @@ protected:
 private:
   ConstantBoundaryCondition<TInputImage, TOutputImage> m_InternalBoundaryCondition{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

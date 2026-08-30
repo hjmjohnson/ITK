@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class InPlaceLabelMapFilter
  * \brief Base class for filters that takes an image as input and overwrites
@@ -179,6 +180,7 @@ protected:
 private:
   bool m_InPlace{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

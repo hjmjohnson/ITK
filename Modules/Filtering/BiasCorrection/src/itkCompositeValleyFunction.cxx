@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 CompositeValleyFunction::CompositeValleyFunction(const MeasureArrayType & classMeans,
                                                  const MeasureArrayType & classSigmas)
 {
@@ -91,4 +92,5 @@ CompositeValleyFunction::Evaluate(MeasureType x)
 
   return res;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk

@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImage, typename TPath>
 PathIterator<TImage, TPath>::PathIterator(ImageType * imagePtr, const PathType * pathPtr)
   : PathConstIterator<TImage, TPath>(imagePtr, pathPtr)
@@ -34,6 +35,7 @@ PathIterator<TImage, TPath>::operator=(const Self & it)
   this->PathConstIterator<TImage, TPath>::operator=(it);
   return *this;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

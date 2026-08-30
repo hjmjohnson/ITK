@@ -32,6 +32,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GrayscaleMorphologicalOpeningImageFilter
  * \brief Grayscale opening of an image.
@@ -159,6 +160,7 @@ private:
 
   bool m_SafeBorder{ true };
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

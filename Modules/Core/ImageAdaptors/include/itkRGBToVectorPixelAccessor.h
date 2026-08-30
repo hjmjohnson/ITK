@@ -21,7 +21,10 @@
 #include "itkRGBPixel.h"
 #include "itkVector.h"
 
-namespace itk::Accessor
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Accessor
 {
 /**
  * \class RGBToVectorPixelAccessor
@@ -69,6 +72,8 @@ public:
     return v;
   }
 };
-} // namespace itk::Accessor
+} // namespace Accessor
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

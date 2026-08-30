@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputImage>
 ApproximateSignedDistanceMapImageFilter<TInputImage, TOutputImage>::ApproximateSignedDistanceMapImageFilter()
@@ -127,6 +128,7 @@ ApproximateSignedDistanceMapImageFilter<TInputImage, TOutputImage>::PrintSelf(st
   os << indent << "IsoContourDistanceImageFilter (used internally): " << m_IsoContourFilter << std::endl;
   os << indent << "FastChamferDistanceImageFilter (used internally): " << m_ChamferFilter << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end of namespace itk
 
 #endif

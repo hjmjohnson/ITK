@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //
 // Helper functions, better than Macros
 //
@@ -101,6 +102,7 @@ public:
   DirectionType
   ToDirectionCosines(const OrientationType & Or);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkSpatialOrientationAdapter_h

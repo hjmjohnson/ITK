@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class DCMTKFileReader;
 /**
  * \class DCMTKSeriesFileNames
@@ -225,6 +226,7 @@ private:
   bool m_LoadSequences{};
   bool m_LoadPrivateTags{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkDCMTKSeriesFileNames_h

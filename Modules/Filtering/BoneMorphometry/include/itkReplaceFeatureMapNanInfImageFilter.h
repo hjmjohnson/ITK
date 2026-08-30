@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ReplaceFeatureMapNanInfImageFilter
  * \brief This new filter can be used after the usage of itkBoneMorphometryFeaturesImageFilter
  * in order to remove the Nan and Inf values of the feature maps. (Those values are due to
@@ -98,6 +99,7 @@ private:
   typename IndexSelectionFiterType::Pointer m_IndexSelectionFiter;
 
 }; // end of class
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

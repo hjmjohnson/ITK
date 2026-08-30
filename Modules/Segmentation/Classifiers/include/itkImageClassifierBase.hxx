@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TClassifiedImage>
 void
@@ -136,6 +137,7 @@ ImageClassifierBase<TInputImage, TClassifiedImage>::GetPixelMembershipValue(cons
 
   return pixelMembershipValue;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

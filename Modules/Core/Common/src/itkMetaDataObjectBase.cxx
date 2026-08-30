@@ -19,6 +19,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 MetaDataObjectBase::MetaDataObjectBase() = default;
 
@@ -46,4 +47,5 @@ MetaDataObjectBase::Print(std::ostream & os) const
   os << "[UNKNOWN_PRINT_CHARACTERISTICS]" << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

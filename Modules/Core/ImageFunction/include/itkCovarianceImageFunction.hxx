@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TCoordinate>
 auto
@@ -105,6 +106,7 @@ CovarianceImageFunction<TInputImage, TCoordinate>::PrintSelf(std::ostream & os, 
 
   os << indent << "NeighborhoodRadius: " << m_NeighborhoodRadius << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

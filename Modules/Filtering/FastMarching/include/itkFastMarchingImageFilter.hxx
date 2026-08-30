@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TLevelSet, typename TSpeedImage>
 FastMarchingImageFilter<TLevelSet, TSpeedImage>::FastMarchingImageFilter()
   : m_AlivePoints(nullptr)
@@ -457,6 +458,7 @@ FastMarchingImageFilter<TLevelSet, TSpeedImage>::UpdateValue(const IndexType &  
 
   return solution;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

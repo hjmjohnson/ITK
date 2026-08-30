@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class QuadricDecimationQuadEdgeMeshFilter
  * \brief Quadric decimation
@@ -156,6 +157,7 @@ protected:
 private:
   QuadricElementMapType m_Quadric{};
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkQuadricDecimationQuadEdgeMeshFilter.hxx"

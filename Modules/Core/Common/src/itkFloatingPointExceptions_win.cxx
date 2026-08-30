@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 #if defined(_MSC_VER)
 #  include <cfloat>
@@ -81,4 +82,5 @@ FloatingPointExceptions::HasFloatingPointExceptionsSupport()
 
 #endif // defined(_MSC_VER)
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

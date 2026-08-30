@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class BinaryContourImageFilter
  * \brief Labels the pixels on the border of the objects in a binary image.
@@ -182,6 +183,7 @@ private:
   InputImagePixelType  m_ForegroundValue{};
   OutputImagePixelType m_BackgroundValue{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

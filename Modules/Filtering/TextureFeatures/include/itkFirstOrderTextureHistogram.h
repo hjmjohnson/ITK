@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 namespace Function
 {
 
@@ -141,5 +142,6 @@ private:
 };
 
 } // end namespace Function
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

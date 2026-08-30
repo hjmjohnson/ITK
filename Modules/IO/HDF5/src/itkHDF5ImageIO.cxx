@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 HDF5ImageIO::HDF5ImageIO()
 {
@@ -1483,4 +1484,5 @@ HDF5ImageIO::GetHeaderSize() const
   return 0;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

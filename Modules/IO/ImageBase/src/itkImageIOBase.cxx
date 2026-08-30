@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 ImageIOBase::ImageIOBase() { Reset(false); }
 
 void
@@ -1159,4 +1160,5 @@ ImageIOBase::PrintSelf(std::ostream & os, Indent indent) const
   itkPrintSelfBooleanMacro(WritePalette);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

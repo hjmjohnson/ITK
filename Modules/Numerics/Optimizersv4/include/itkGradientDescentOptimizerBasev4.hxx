@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInternalComputationValueType>
 GradientDescentOptimizerBasev4Template<TInternalComputationValueType>::GradientDescentOptimizerBasev4Template()
@@ -185,6 +186,7 @@ GradientDescentOptimizerBasev4Template<TInternalComputationValueType>::ModifyGra
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

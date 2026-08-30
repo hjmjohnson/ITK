@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * Assignment Operator from a scalar constant
  */
@@ -404,6 +405,7 @@ operator>>(std::istream & is, SymmetricSecondRankTensor<T, VDimension> & dt)
   }
   return is;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

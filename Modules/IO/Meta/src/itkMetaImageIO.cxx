@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 // Explicitly set std::numeric_limits<double>::max_digits10 this will provide
 // better accuracy when writing out floating point number in MetaImage header.
 itkGetGlobalValueMacro(MetaImageIO, unsigned int, DefaultDoublePrecision, 17);
@@ -934,4 +935,5 @@ MetaImageIO::GetDefaultDoublePrecision()
   return *MetaImageIO::GetDefaultDoublePrecisionPointer();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

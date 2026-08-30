@@ -34,6 +34,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ScalarConnectedComponentImageFilter
  *
@@ -148,6 +149,7 @@ protected:
   ScalarConnectedComponentImageFilter() = default;
   ~ScalarConnectedComponentImageFilter() override = default;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

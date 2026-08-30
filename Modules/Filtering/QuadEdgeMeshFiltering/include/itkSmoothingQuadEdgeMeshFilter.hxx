@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputMesh, typename TOutputMesh>
 SmoothingQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::SmoothingQuadEdgeMeshFilter()
   : m_CoefficientsMethod(nullptr)
@@ -161,6 +162,7 @@ SmoothingQuadEdgeMeshFilter<TInputMesh, TOutputMesh>::PrintSelf(std::ostream & o
   os << indent << "NumberOfIterations: " << m_NumberOfIterations << std::endl;
   os << indent << "RelaxationFactor: " << m_RelaxationFactor << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class BSplineKernelFunction
  * \brief BSpline kernel used for density estimation and nonparametric
  *  regression.
@@ -181,6 +182,7 @@ private:
   }
 };
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

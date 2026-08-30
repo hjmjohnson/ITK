@@ -20,6 +20,7 @@
 #include "itkNumberToString.h"
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <>
 std::ostream & operator<< <double>(std::ostream & os, const Array<double> & arr)
@@ -106,4 +107,5 @@ std::ostream & operator<< <float>(std::ostream & os, const Array2D<float> & arr)
 }
 
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

@@ -27,9 +27,13 @@
 #  endif
 #endif
 
+#include "itkABINamespace.h"
 #include <mutex>
 
-namespace itk::fftw
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace fftw
 {
 /**
  * \class Interface
@@ -358,6 +362,8 @@ public:
 };
 
 #endif
-} // namespace itk::fftw
+} // namespace fftw
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #endif

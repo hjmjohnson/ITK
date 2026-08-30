@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 ParticleSwarmOptimizerBase::ParticleSwarmOptimizerBase()
@@ -487,4 +488,5 @@ ParticleSwarmOptimizerBase::RandomInitialization()
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk

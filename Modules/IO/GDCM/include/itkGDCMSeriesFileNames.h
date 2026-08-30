@@ -28,6 +28,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GDCMSeriesFileNames
  * \brief Generate a sequence of filenames from a DICOM series.
@@ -267,6 +268,7 @@ private:
   bool m_LoadSequences = false;
   bool m_LoadPrivateTags = false;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkGDCMSeriesFileNames_h

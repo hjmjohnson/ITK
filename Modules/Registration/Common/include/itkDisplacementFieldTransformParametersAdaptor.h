@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class DisplacementFieldTransformParametersAdaptor
  * \brief DisplacementFieldTransformParametersAdaptor is a helper class intended to
  * definition.
@@ -135,6 +136,7 @@ protected:
   DisplacementFieldTransformParametersAdaptor();
   ~DisplacementFieldTransformParametersAdaptor() override = default;
 }; // class DisplacementFieldTransformParametersAdaptor
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

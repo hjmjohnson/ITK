@@ -29,6 +29,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage>
 BilateralImageFilter<TInputImage, TOutputImage>::BilateralImageFilter()
   : m_RangeSigma(50.0)
@@ -321,6 +322,7 @@ BilateralImageFilter<TInputImage, TOutputImage>::PrintSelf(std::ostream & os, In
   os << indent << "AutomaticKernelSize: " << m_AutomaticKernelSize << std::endl;
   os << indent << "Radius: " << m_Radius << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

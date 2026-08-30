@@ -26,6 +26,7 @@
 #include <itkFixedArray.h>
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class PhaseAnalysisImageFilter
  * Base class for phase analysis filters.
  * The output represents the phase of some image.
@@ -178,6 +179,7 @@ protected:
     return out;
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkPhaseAnalysisImageFilter.hxx"

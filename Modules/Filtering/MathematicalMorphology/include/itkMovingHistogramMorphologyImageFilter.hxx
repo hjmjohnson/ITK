@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TOutputImage, typename TKernel, typename THistogram>
 MovingHistogramMorphologyImageFilter<TInputImage, TOutputImage, TKernel, THistogram>::
   MovingHistogramMorphologyImageFilter()
@@ -45,5 +46,6 @@ MovingHistogramMorphologyImageFilter<TInputImage, TOutputImage, TKernel, THistog
 
   os << indent << "Boundary: " << m_Boundary << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 #endif

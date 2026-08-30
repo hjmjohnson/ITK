@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class UnsharpMaskImageFilter
  * \brief Edge enhancement filter.
@@ -237,6 +238,7 @@ private:
     }
   }; // end UnsharpMaskingFunctor
 }; // end UnsharpMaskImageFilter
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

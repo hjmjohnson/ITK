@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 MeshIOBase::MeshIOBase()
   : m_NumberOfPoints(SizeValueType{})
   , m_NumberOfCells(SizeValueType{})
@@ -254,4 +255,5 @@ MeshIOBase::OpenInputFile() const
 
   return inputFile;
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk

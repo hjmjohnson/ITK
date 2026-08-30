@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TPixel, unsigned int VDimension, typename TAllocator>
 auto
@@ -280,6 +281,7 @@ GaussianDerivativeOperator<TPixel, VDimension, TAllocator>::PrintSelf(std::ostre
   os << indent << "Spacing: " << m_Spacing << std::endl;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

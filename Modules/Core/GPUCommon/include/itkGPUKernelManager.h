@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class GPUKernelManager
  * \brief GPU kernel manager implemented using OpenCL.
  *
@@ -209,6 +210,7 @@ private:
   bool
   SetTypedKernelArg(int kernelIdx, cl_uint argIdx, TArg argVal);
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

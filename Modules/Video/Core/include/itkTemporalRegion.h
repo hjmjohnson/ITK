@@ -31,6 +31,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class TemporalRegion
  * \brief Region subclass that holds a region in time
@@ -136,6 +137,7 @@ protected:
 ITKVideoCore_EXPORT std::ostream &
                     operator<<(std::ostream & os, const TemporalRegion & region);
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

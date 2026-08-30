@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageScanlineIterator
  *  \brief A multi-dimensional iterator templated over image type that
  *  walks a region of pixels, scanline by scanline or in the direction
@@ -115,6 +116,7 @@ ImageScanlineIterator(RLEImage<TPixel, VImageDimension, CounterType> *,
                       const typename RLEImage<TPixel, VImageDimension, CounterType>::RegionType &)
   -> ImageScanlineIterator<RLEImage<TPixel, VImageDimension, CounterType>>;
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif // itkRLEImageScanlineIterator_h

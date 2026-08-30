@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 itkGetGlobalValueMacro(DataObject, bool, GlobalReleaseDataFlag, false);
 // after use by filter
@@ -381,4 +382,5 @@ DataObject::GetUpdateMTime() const
   return m_UpdateMTime.GetMTime();
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

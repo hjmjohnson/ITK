@@ -32,7 +32,10 @@
 #include <algorithm>
 #include <iostream>
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class ScalarImageToCooccurrenceListSampleFilter
@@ -121,7 +124,9 @@ protected:
 private:
   OffsetTable m_OffsetTable{};
 }; // end of class ScalarImageToListSampleFilter
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkScalarImageToCooccurrenceListSampleFilter.hxx"

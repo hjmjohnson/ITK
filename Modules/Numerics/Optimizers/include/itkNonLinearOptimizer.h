@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class NonLinearOptimizer
  * \brief Wrap of the vnl_nonlinear_minimizer to be adapted
  *
@@ -57,6 +58,7 @@ protected:
   NonLinearOptimizer() = default;
   ~NonLinearOptimizer() override;
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

@@ -38,6 +38,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TImage>
 ThresholdImageFilter<TImage>::ThresholdImageFilter()
@@ -141,6 +142,7 @@ ThresholdImageFilter<TImage>::PrintSelf(std::ostream & os, Indent indent) const
   print_helper::PrintNumericTrait(os, indent, "Lower", m_Lower);
   print_helper::PrintNumericTrait(os, indent, "Upper", m_Upper);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

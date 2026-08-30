@@ -18,11 +18,13 @@
 #ifndef itkBooleanStdVector_h
 #define itkBooleanStdVector_h
 
+#include "itkABINamespace.h"
 #include "itkBoolean.h"
 #include <vector>
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /** The type alias `BooleanStdVectorType` provides an alternative to `std::vector<bool>`. `std::vector<bool>` is not
  * thread safe due to the possibility of multiple bits being packed together in the same memory location.
@@ -33,6 +35,7 @@ namespace itk
  */
 using BooleanStdVectorType = std::vector<Boolean>;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif

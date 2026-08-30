@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputImage, typename TOutputValueType>
 BSplineApproximationGradientImageFilter<TInputImage, TOutputValueType>::BSplineApproximationGradientImageFilter()
@@ -111,6 +112,7 @@ BSplineApproximationGradientImageFilter<TInputImage, TOutputValueType>::Generate
   }
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

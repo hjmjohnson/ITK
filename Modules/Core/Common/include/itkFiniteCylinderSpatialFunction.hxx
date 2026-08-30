@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <unsigned int VDimension, typename TInput>
 FiniteCylinderSpatialFunction<VDimension, TInput>::FiniteCylinderSpatialFunction()
   : m_AxisLength(1.0f) // Length of cylinder axis.
@@ -133,6 +134,7 @@ FiniteCylinderSpatialFunction<VDimension, TInput>::PrintSelf(std::ostream & os, 
   }
   os << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

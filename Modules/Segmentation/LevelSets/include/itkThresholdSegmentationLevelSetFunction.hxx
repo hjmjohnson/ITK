@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TImageType, typename TFeatureImageType>
 void
 ThresholdSegmentationLevelSetFunction<TImageType, TFeatureImageType>::CalculateSpeedImage()
@@ -79,6 +80,7 @@ ThresholdSegmentationLevelSetFunction<TImageType, TFeatureImageType>::CalculateS
     }
   }
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

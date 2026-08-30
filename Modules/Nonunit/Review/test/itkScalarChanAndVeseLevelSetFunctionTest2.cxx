@@ -20,6 +20,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInput,   // LevelSetImageType
           typename TFeature, // FeatureImageType
@@ -73,6 +74,7 @@ protected:
   ~ScalarChanAndVeseLevelSetFunctionTest2Helper() override = default;
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 int

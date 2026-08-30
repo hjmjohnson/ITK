@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetEquationChanAndVeseExternalTerm
  *  \brief Class to represent the external energy Chan And Vese term
@@ -116,6 +117,7 @@ private:
   CacheImageType *           m_CacheImage{};
 };
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkLevelSetEquationChanAndVeseExternalTerm.hxx"

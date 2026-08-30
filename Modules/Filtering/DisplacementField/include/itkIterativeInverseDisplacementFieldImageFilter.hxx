@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 //----------------------------------------------------------------------------
 template <typename TInputImage, typename TOutputImage>
 void
@@ -235,6 +236,7 @@ IterativeInverseDisplacementFieldImageFilter<TInputImage, TOutputImage>::PrintSe
   os << indent << "Elapsed time:         " << m_Time << " sec" << std::endl;
   os << std::endl;
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

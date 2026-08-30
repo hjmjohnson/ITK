@@ -23,7 +23,10 @@
 #include "itkHistogramToRunLengthFeaturesFilter.h"
 #include "itkScalarImageToRunLengthMatrixFilter.h"
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /**
  * \class ScalarImageToRunLengthFeaturesFilter
@@ -223,7 +226,9 @@ private:
   OffsetVectorConstPointer      m_Offsets{};
   bool                          m_FastCalculations{};
 };
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
 #  include "itkScalarImageToRunLengthFeaturesFilter.hxx"

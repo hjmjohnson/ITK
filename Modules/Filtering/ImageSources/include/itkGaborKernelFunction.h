@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GaborKernelFunction
  * \brief Gabor kernel used for various computer vision tasks.
@@ -125,6 +126,7 @@ private:
 
   bool m_CalculateImaginaryPart{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

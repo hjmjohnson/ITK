@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class PolyLineParametricPath
  * \brief  Represent a path of line segments through ND Space
@@ -147,6 +148,7 @@ protected:
 private:
   VertexListPointer m_VertexList{};
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

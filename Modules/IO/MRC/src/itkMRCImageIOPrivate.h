@@ -30,6 +30,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 namespace
 {
@@ -101,6 +102,7 @@ min_max_element(TInputIter first, TInputIter last)
 
 } // end anonymous namespace
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMRCImageIOPrivate_h

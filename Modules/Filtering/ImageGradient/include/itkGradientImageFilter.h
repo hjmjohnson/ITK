@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 
 template <typename TPixelType, unsigned int VImageDimension>
@@ -257,6 +258,7 @@ private:
     std::make_unique<ZeroFluxNeumannBoundaryCondition<TInputImage>>()
   };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <unsigned int VDimension, typename TFixedImagePixel, typename TMovingImagePixel>
 [[nodiscard]] int
@@ -134,6 +135,7 @@ PhaseCorrelationRegistrationFiles(int argc, char * argv[])
   return testStatus;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 

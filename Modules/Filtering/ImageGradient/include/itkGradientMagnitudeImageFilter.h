@@ -22,6 +22,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class GradientMagnitudeImageFilter
  * \brief Computes the gradient magnitude of an image region at each pixel.
@@ -143,6 +144,7 @@ protected:
 private:
   bool m_UseImageSpacing{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

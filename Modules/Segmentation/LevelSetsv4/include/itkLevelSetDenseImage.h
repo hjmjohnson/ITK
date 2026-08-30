@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  *  \class LevelSetDenseImage
  *  \brief Base class for the "dense" representation of a level-set function on
@@ -103,6 +104,7 @@ protected:
   void
   Graft(const DataObject * data) override;
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

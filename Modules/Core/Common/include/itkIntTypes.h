@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 using std::int8_t;
 using std::uint8_t;
 using std::int16_t;
@@ -100,6 +101,7 @@ using ThreadIdType = unsigned int;
 /** Type to count and reference the modification time of objects */
 using ModifiedTimeType = SizeValueType;
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif /* itkIntTypes_h */

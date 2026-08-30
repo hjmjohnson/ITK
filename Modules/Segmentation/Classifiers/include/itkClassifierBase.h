@@ -26,6 +26,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /**
  * \class ClassifierBase
  * \brief Base class for classifier objects.
@@ -176,6 +177,7 @@ private:
   /** Container to hold the membership functions */
   MembershipFunctionPointerVector m_MembershipFunctions{};
 }; // class Classifier
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

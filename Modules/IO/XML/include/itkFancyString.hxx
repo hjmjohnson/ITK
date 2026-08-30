@@ -23,6 +23,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /////////////////////////////////////////////////////////////////////////////
 // manipulators for FancyString
@@ -141,10 +142,12 @@ FancyString::FromData(const T & inputData)
   return *this;
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 /////////////////////////////////////////////////////////////////////////////
 // helper functions for converting a string to/from a std::vector
@@ -226,6 +229,7 @@ operator<<(FancyString & s, const T & data)
   return s.FromData(data);
 }
 
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkFancyString_hxx

@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TInputImage, typename TFeatureImage, typename TOutputPixelType>
 CannySegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelType>::
   CannySegmentationLevelSetImageFilter()
@@ -28,6 +29,7 @@ CannySegmentationLevelSetImageFilter<TInputImage, TFeatureImage, TOutputPixelTyp
 {
   this->SetSegmentationFunction(m_CannyFunction);
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

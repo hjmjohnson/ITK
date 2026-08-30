@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class HistogramMatchingImageFilter
  * \brief Normalize the grayscale values for a source image by
  * matching the shape of the source image histogram to a
@@ -253,6 +254,7 @@ private:
   double            m_UpperGradient{ 0.0 };
   bool              m_GenerateReferenceHistogramFromImage{ true };
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION

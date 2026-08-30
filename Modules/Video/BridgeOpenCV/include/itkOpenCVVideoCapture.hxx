@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 //-CONSTRUCTORS----------------------------------------------------------------
 
@@ -375,6 +376,7 @@ OpenCVVideoCapture<TVideoStream>::get(int propId)
   return true;
 }
 
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

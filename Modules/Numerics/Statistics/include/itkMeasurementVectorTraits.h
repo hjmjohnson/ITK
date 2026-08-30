@@ -28,7 +28,10 @@
 #include "itkSize.h"
 #include <vector>
 
-namespace itk::Statistics
+namespace itk
+{
+ITK_ABI_NAMESPACE_BEGIN
+namespace Statistics
 {
 /** \class MeasurementVectorTraits
  * \ingroup ITKStatistics
@@ -526,7 +529,9 @@ public:
 
 /// \endcond
 
-} // namespace itk::Statistics
+} // namespace Statistics
+ITK_ABI_NAMESPACE_END
+} // namespace itk
 
 
 #endif // itkMeasurementVectorTraits_h

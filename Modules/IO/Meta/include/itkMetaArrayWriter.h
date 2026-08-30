@@ -27,6 +27,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 class ITKIOMeta_EXPORT MetaArrayWriter : public LightProcessObject
 {
 public:
@@ -164,6 +165,7 @@ private:
 
   const void * m_Buffer{ nullptr };
 };
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif // itkMetaArrayWriter_h

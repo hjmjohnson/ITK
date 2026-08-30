@@ -33,6 +33,7 @@ m_PimplGlobals->m_Map.emplace(                                                  
 )
 
 namespace itk {
+ITK_ABI_NAMESPACE_BEGIN
 
 struct BuildInformationGlobals
 {
@@ -124,4 +125,5 @@ BuildInformation
   @MAPPING_VALUES@
 }
 
+ITK_ABI_NAMESPACE_END
 } //end namespace itk

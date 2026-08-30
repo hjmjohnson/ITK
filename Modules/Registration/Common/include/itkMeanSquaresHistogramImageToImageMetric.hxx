@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 template <typename TFixedImage, typename TMovingImage>
 auto
 MeanSquaresHistogramImageToImageMetric<TFixedImage, TMovingImage>::EvaluateMeasure(HistogramType & histogram) const
@@ -47,6 +48,7 @@ MeanSquaresHistogramImageToImageMetric<TFixedImage, TMovingImage>::EvaluateMeasu
 
   return measure;
 }
+ITK_ABI_NAMESPACE_END
 } // End namespace itk
 
 #endif // itkMeanSquaresHistogramImageToImageMetric_hxx

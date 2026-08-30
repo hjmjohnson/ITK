@@ -21,6 +21,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 
 template <typename TInputMesh, typename TOutputMesh>
 void
@@ -123,6 +124,7 @@ SimplexMeshToTriangleMeshFilter<TInputMesh, TOutputMesh>::PrintSelf(std::ostream
 
   itkPrintSelfObjectMacro(Centers);
 }
+ITK_ABI_NAMESPACE_END
 } // namespace itk
 
 #endif //__SimplexMeshToTriangleMeshFilter_hxx

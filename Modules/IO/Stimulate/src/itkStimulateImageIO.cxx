@@ -33,6 +33,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 StimulateImageIO::StimulateImageIO()
 {
   m_DisplayRange[0] = 0;
@@ -586,4 +587,5 @@ StimulateImageIO::PrintSelf(std::ostream & os, Indent indent) const
   Superclass::PrintSelf(os, indent);
   os << indent << "\nDisplayRange: " << m_DisplayRange[0] << ' ' << m_DisplayRange[1];
 }
+ITK_ABI_NAMESPACE_END
 } // end namespace itk

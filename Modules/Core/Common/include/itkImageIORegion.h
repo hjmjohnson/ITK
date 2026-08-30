@@ -25,6 +25,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class ImageIORegion
  * \brief An ImageIORegion represents a structured region of data.
  *
@@ -276,6 +277,7 @@ public:
     outImageRegion = { index, size };
   }
 };
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #endif

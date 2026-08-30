@@ -24,6 +24,7 @@
 
 namespace itk
 {
+ITK_ABI_NAMESPACE_BEGIN
 /** \class Versor
  * \brief A templated class holding a unit quaternion.
  *
@@ -345,6 +346,7 @@ operator<<(std::ostream & os, const Versor<T> & v)
 template <typename T>
 std::istream &
 operator>>(std::istream & is, Versor<T> & v);
+ITK_ABI_NAMESPACE_END
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
