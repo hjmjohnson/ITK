@@ -20,11 +20,17 @@ if(
     COMMAND
       ${CMAKE_CURRENT_SOURCE_DIR}/VtkGlueRoundTripTest.py
   )
+  itk_python_add_test(
+    NAME PythonVtkGlueTypemapCoverageTest
+    COMMAND
+      ${CMAKE_CURRENT_SOURCE_DIR}/VtkGlueTypemapCoverageTest.py
+  )
   # itkTestDriver prepends ITK's own entries to whatever PYTHONPATH it inherits.
   set_property(
     TEST
       PythonVtkGlueABI3EncodingTest
       PythonVtkGlueRoundTripTest
+      PythonVtkGlueTypemapCoverageTest
     PROPERTY
       ENVIRONMENT
         "PYTHONPATH=${VTK_PREFIX_PATH}/${VTK_PYTHONPATH}"
