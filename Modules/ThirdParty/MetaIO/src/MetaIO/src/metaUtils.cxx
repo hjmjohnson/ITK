@@ -57,7 +57,22 @@ bool META_DEBUG = false;
 
 static char MET_SeperatorChar = '=';
 
-constexpr static std::streamoff MET_MaxChunkSize = 1024 * 1024 * 1024;
+static std::streamoff MET_MaxChunkSize = 1024 * 1024 * 1024;
+
+void
+MET_SetMaxChunkSize(std::streamoff chunkSize)
+{
+  if (chunkSize > 0)
+  {
+    MET_MaxChunkSize = chunkSize;
+  }
+}
+
+std::streamoff
+MET_GetMaxChunkSize()
+{
+  return MET_MaxChunkSize;
+}
 
 MET_FieldRecordType *
 MET_GetFieldRecord(const char * _fieldName, std::vector<MET_FieldRecordType *> * _fields)
@@ -890,6 +905,29 @@ MET_PerformUncompression(const unsigned char * sourceCompressed,
       }
     } while (d_stream.avail_out == 0);
   } while (err != Z_STREAM_END && err >= 0);
+  // The output buffer can fill before the trailer arrives in a later input
+  // chunk; keep feeding input so zlib can reach the CRC and report stream end.
+  unsigned char trailerScratch[1];
+  while (err == Z_BUF_ERROR && dest_pos == uncompressedDataSize)
+  {
+    if (d_stream.avail_in == 0)
+    {
+      if (source_pos >= sourceCompressedSize)
+      {
+        break;
+      }
+      d_stream.next_in = const_cast<unsigned char *>(sourceCompressed + source_pos);
+      d_stream.avail_in = static_cast<uInt>(std::min(sourceCompressedSize - source_pos, max_chunk_size));
+      source_pos += d_stream.avail_in;
+    }
+    d_stream.next_out = trailerScratch;
+    d_stream.avail_out = 1;
+    err = inflate(&d_stream, Z_NO_FLUSH);
+    if (d_stream.avail_out == 0)
+    {
+      break;
+    }
+  }
   inflateEnd(&d_stream);
   if (err != Z_STREAM_END)
   {
