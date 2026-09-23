@@ -95,6 +95,8 @@ __all__ = [
     "image_from_xarray",
     "vtk_image_from_image",
     "image_from_vtk_image",
+    "image_from_simpleitk",
+    "simpleitk_from_image",
     "dict_from_image",
     "image_from_dict",
     "image_intensity_min_max",
@@ -268,26 +270,20 @@ def _get_itk_pixelid(numpy_array_type):
 
     import itk
 
-    def _long_type():
-        if os.name == "nt":
-            return itk.ULL
-        else:
-            return itk.UL
-
     # This is a Mapping from numpy array types to itk pixel types.
     _np_itk = {
-        np.dtype(np.uint8): itk.UC,
-        np.dtype(np.uint16): itk.US,
-        np.dtype(np.uint32): itk.UI,
-        np.dtype(np.uint64): _long_type(),
-        np.dtype(np.int8): itk.SC,
-        np.dtype(np.int16): itk.SS,
-        np.dtype(np.int32): itk.SI,
-        np.dtype(np.int64): itk.SL,
-        np.dtype(np.float32): itk.F,
-        np.dtype(np.float64): itk.D,
-        np.dtype(np.complex64): itk.complex[itk.F],
-        np.dtype(np.complex128): itk.complex[itk.D],
+        np.dtype(np.uint8): itk.uint8_t,
+        np.dtype(np.uint16): itk.uint16_t,
+        np.dtype(np.uint32): itk.uint32_t,
+        np.dtype(np.uint64): itk.uint64_t,
+        np.dtype(np.int8): itk.int8_t,
+        np.dtype(np.int16): itk.int16_t,
+        np.dtype(np.int32): itk.int32_t,
+        np.dtype(np.int64): itk.int64_t,
+        np.dtype(np.float32): itk.float32_t,
+        np.dtype(np.float64): itk.float64_t,
+        np.dtype(np.complex64): itk.complex[itk.float32_t],
+        np.dtype(np.complex128): itk.complex[itk.float64_t],
     }
     try:
         return _np_itk[numpy_array_type.dtype]
@@ -551,10 +547,7 @@ def vector_container_from_array(arr: ArrayLike, ttype=None) -> itkt.VectorContai
         arr = np.asarray(arr)
 
     # Return VectorContainer with 64-bit index type
-    if os.name == "nt":
-        IndexType = itk.ULL
-    else:
-        IndexType = itk.UL
+    IndexType = itk.uint64_t
 
     # Find container type
     if ttype is not None:
@@ -795,6 +788,140 @@ def image_from_vtk_image(vtk_image: vtk.vtkImageData) -> itkt.ImageBase:
     return l_image
 
 
+# Explicit rather than built from the name: an unknown name must fail loudly,
+# not resolve to a missing accessor and silently leave ITK defaults in place.
+_SPATIAL_ACCESSORS = {
+    "spacing": "GetSpacing",
+    "origin": "GetOrigin",
+    "direction": "GetDirection",
+}
+
+
+def _spatial_from_order_explicit(obj, name: str):
+    """Read one xyz-ordered spatial attribute, never the order-ambiguous bare key (#6706)."""
+    accessor_name = _SPATIAL_ACCESSORS[name]
+    if hasattr(obj, "__getitem__"):
+        try:
+            return obj[f"{name}_xyz"]
+        except KeyError:
+            pass
+    accessor = getattr(obj, accessor_name, None)
+    return None if accessor is None else accessor()
+
+
+def image_from_simpleitk(sitk_image) -> itkt.ImageBase:
+    """Convert a SimpleITK Image to an itk.Image.
+
+    Geometry is read in ITK (x, y, z) order, via the order-explicit
+    ``spacing_xyz``/``origin_xyz``/``direction_xyz`` keys when the object
+    provides them and otherwise via ``GetSpacing()``/``GetOrigin()``/
+    ``GetDirection()``. Pixels are deep-copied into a buffer the returned
+    image owns, so it is independent of ``sitk_image`` and safe for
+    grafting or in-place filters. Multi-component images become an
+    itk.VectorImage. Entries reported by ``GetMetaDataKeys()`` are copied
+    into the MetaDataDictionary.
+
+    Parameters
+    ----------
+    sitk_image :
+        A SimpleITK.Image.
+
+    Returns
+    -------
+    image :
+        The resulting itk.Image, or itk.VectorImage for multi-component pixels.
+    """
+    import itk
+    import SimpleITK as sitk
+
+    dim = sitk_image.GetDimension()
+    number_of_components = sitk_image.GetNumberOfComponentsPerPixel()
+    is_vector = number_of_components != 1
+
+    array = sitk.GetArrayViewFromImage(sitk_image)
+
+    l_image = itk.image_from_array(array, is_vector=is_vector)
+
+    spacing = _spatial_from_order_explicit(sitk_image, "spacing")
+    if spacing is not None:
+        l_image.SetSpacing([float(s) for s in spacing])
+    origin = _spatial_from_order_explicit(sitk_image, "origin")
+    if origin is not None:
+        l_image.SetOrigin([float(o) for o in origin])
+    direction = _spatial_from_order_explicit(sitk_image, "direction")
+    if direction is not None:
+        l_image.SetDirection(np.asarray(direction, dtype=np.float64).reshape(dim, dim))
+
+    metadata = l_image.GetMetaDataDictionary()
+    for key in sitk_image.GetMetaDataKeys():
+        metadata[key] = sitk_image.GetMetaData(key)
+
+    return l_image
+
+
+def simpleitk_from_image(image: itkt.ImageOrImageSource):
+    """Convert an itk.Image to a SimpleITK Image.
+
+    The inverse of :func:`image_from_simpleitk`. Geometry is transferred in ITK
+    (x, y, z) order and the MetaDataDictionary is copied across.
+
+    SimpleITK images always start at index 0. The origin is set to the physical
+    location of the first buffered voxel, so the pixels keep their position; the
+    ITK start index itself is not carried over.
+
+    Raises
+    ------
+    ValueError
+        If the buffered region differs from the largest possible region. A
+        SimpleITK image carries a single extent, so the distinction would be
+        lost without notice.
+    """
+    import itk
+    import SimpleITK as sitk
+
+    image = itk.output(image)
+
+    # Updates the image; a view is safe since GetImageFromArray deep-copies.
+    array = itk.array_view_from_image(image)
+
+    buffered_region = image.GetBufferedRegion()
+    largest_region = image.GetLargestPossibleRegion()
+    if buffered_region != largest_region:
+        raise ValueError(
+            "cannot convert an image whose buffered region differs from its "
+            "largest possible region: buffered index "
+            f"{list(buffered_region.GetIndex())} size {list(buffered_region.GetSize())}, "
+            f"largest index {list(largest_region.GetIndex())} size "
+            f"{list(largest_region.GetSize())}. A SimpleITK image holds one "
+            "extent, so the difference cannot be represented. Update the image "
+            "over its largest possible region before converting."
+        )
+
+    is_vector = image.GetNumberOfComponentsPerPixel() != 1
+    sitk_image = sitk.GetImageFromArray(array, isVector=is_vector)
+
+    start_index = tuple(buffered_region.GetIndex())
+
+    sitk_image.SetSpacing([float(s) for s in image.GetSpacing()])
+    # The first stored voxel becomes index 0, so the origin moves with it and
+    # the pixels keep their physical location.
+    sitk_image.SetOrigin(
+        [float(o) for o in image.TransformIndexToPhysicalPoint(list(start_index))]
+    )
+    sitk_image.SetDirection(
+        [float(d) for d in np.asarray(image.GetDirection()).ravel()]
+    )
+
+    metadata = image.GetMetaDataDictionary()
+    for key in metadata.GetKeys():
+        try:
+            sitk_image.SetMetaData(key, str(metadata[key]))
+        except (RuntimeError, TypeError):
+            # SimpleITK stores strings only; entries that do not render are skipped.
+            pass
+    return sitk_image
+
+
 def dict_from_image(image: itkt.Image) -> dict:
     """Serialize a Python itk.Image object to a pickable Python dictionary."""
     import itk
@@ -907,10 +1034,7 @@ def dict_from_mesh(mesh: itkt.Mesh) -> dict:
     else:
         cell_data_numpy = itk.array_from_vector_container(cell_data)
 
-    if os.name == "nt":
-        cell_component_type = python_to_js(itk.ULL)
-    else:
-        cell_component_type = python_to_js(itk.UL)
+    cell_component_type = python_to_js(itk.uint64_t)
 
     point_component_type = python_to_js(itk.F)
 
@@ -982,10 +1106,7 @@ def dict_from_pointset(pointset: itkt.PointSet) -> dict:
     else:
         point_data_numpy = itk.array_from_vector_container(point_data)
 
-    if os.name == "nt":
-        cell_component_type = python_to_js(itk.ULL)
-    else:
-        cell_component_type = python_to_js(itk.UL)
+    cell_component_type = python_to_js(itk.uint64_t)
 
     point_component_type = python_to_js(itk.F)
 
@@ -1089,11 +1210,15 @@ def dict_from_transform(
     def add_transform_dict(transform):
         transform_type = transform.GetTransformTypeAsString()
         if "CompositeTransform" in transform_type:
-            # Add the transforms inside the composite transform
+            # Add the transforms inside the composite transform, recursing
+            # into nested composite transforms so that they are flattened.
+            # GetNthTransform returns the TransformBase interface, so the
+            # child is down-cast to reach GetNumberOfTransforms when it is
+            # itself a composite transform.
             # range is over-ridden so using this hack to create a list
             for i, _ in enumerate([0] * transform.GetNumberOfTransforms()):
-                current_transform = transform.GetNthTransform(i)
-                dict_array.append(update_transform_dict(current_transform))
+                current_transform = itk.down_cast(transform.GetNthTransform(i))
+                add_transform_dict(current_transform)
             return True
         else:
             dict_array.append(update_transform_dict(transform))

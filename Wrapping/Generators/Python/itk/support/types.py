@@ -22,6 +22,8 @@ import importlib.util
 from typing import Self, TypeAlias, Union, TYPE_CHECKING
 import os
 
+from itkConfig import ITK_GLOBAL_WRAPPING_TYPE_ALIASES
+
 try:
     from numpy.typing import ArrayLike
 except ImportError:
@@ -94,22 +96,26 @@ class itkCType:
         """
         import numpy as np
 
+        # Note: The order in which the following itkCType objects are created
+        # is relevant! For each NumPy `dtype`, only the last created itkCType
+        # object for that particular `dtype` is stored in the mapping from
+        # `dtype` to itkCType (using the Python dict `__c_types_for_dtype__`).
         _F: itkCType = cls("float", "F", np.dtype(np.float32))
         _D: itkCType = cls("double", "D", np.dtype(np.float64))
         _UC: itkCType = cls("unsigned char", "UC", np.dtype(np.uint8))
         _US: itkCType = cls("unsigned short", "US", np.dtype(np.uint16))
-        _UI: itkCType = cls("unsigned int", "UI", np.dtype(np.uint32))
+        _ULL: itkCType = cls("unsigned long long", "ULL", np.dtype(np.uint64))
+        _SLL: itkCType = cls("signed long long", "SLL", np.dtype(np.int64))
         if os.name == "nt":
             _UL: itkCType = cls("unsigned long", "UL", np.dtype(np.uint32))
             _SL: itkCType = cls("signed long", "SL", np.dtype(np.int32))
         else:
             _UL: itkCType = cls("unsigned long", "UL", np.dtype(np.uint64))
             _SL: itkCType = cls("signed long", "SL", np.dtype(np.int64))
-        _ULL: itkCType = cls("unsigned long long", "ULL", np.dtype(np.uint64))
+        _UI: itkCType = cls("unsigned int", "UI", np.dtype(np.uint32))
         _SC: itkCType = cls("signed char", "SC", np.dtype(np.int8))
         _SS: itkCType = cls("signed short", "SS", np.dtype(np.int16))
         _SI: itkCType = cls("signed int", "SI", np.dtype(np.int32))
-        _SLL: itkCType = cls("signed long long", "SLL", np.dtype(np.int64))
         _B: itkCType = cls("bool", "B", np.dtype(np.bool_))
         return _F, _D, _UC, _US, _UI, _UL, _SL, _ULL, _SC, _SS, _SI, _SLL, _B
 
@@ -145,14 +151,31 @@ B: itkCType
     B,
 ) = itkCType.initialize_c_types_once()
 
-# Aliases for SizeValueType, IdentifierType, OffsetType
-ST = UL
-IT = UL
-OT = SL
-if os.name == "nt":
-    ST = ULL
-    IT = ULL
-    OT = SLL
+# Aliases for numeric types of specific sizes (specified by their number of bits)
+float32_t = F
+float64_t = D
+uint8_t = UC
+uint16_t = US
+uint32_t = UI
+uint64_t = UL if UL.dtype.itemsize == 8 else ULL
+int8_t = SC
+int16_t = SS
+int32_t = SI
+int64_t = SL if SL.dtype.itemsize == 8 else SLL
+
+# Aliases for SizeValueType, IdentifierType, OffsetType, resolved from the
+# C types the wrapping actually instantiated rather than re-derived here.
+_c_type_by_mangled_name: dict[str, itkCType] = {
+    "UL": UL,
+    "ULL": ULL,
+    "SL": SL,
+    "SLL": SLL,
+}
+ST = _c_type_by_mangled_name[ITK_GLOBAL_WRAPPING_TYPE_ALIASES["ST"]]
+IT = _c_type_by_mangled_name[ITK_GLOBAL_WRAPPING_TYPE_ALIASES["IT"]]
+OT = _c_type_by_mangled_name[ITK_GLOBAL_WRAPPING_TYPE_ALIASES["OT"]]
+del _c_type_by_mangled_name
+del ITK_GLOBAL_WRAPPING_TYPE_ALIASES
 
 # Type aliases to avoid expensive import, circular references. Use with forward references.
 if TYPE_CHECKING:
