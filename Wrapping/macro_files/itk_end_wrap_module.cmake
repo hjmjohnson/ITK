@@ -529,11 +529,12 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
       if(MSVC)
         # /wd4244: Disables 'conversion from 'type1' to 'type2', possible loss of data warnings
         # /wd4996: Disables deprecated declaration warnings in generated wrapper code
+        # /Zc:__cplusplus: Make MSVC correctly report __cplusplus version
         set_target_properties(
           ${lib}
           PROPERTIES
             COMPILE_FLAGS
-              "/wd4244 /wd4996"
+              "/wd4244 /wd4996 /Zc:__cplusplus"
         )
       endif()
       target_link_directories(${lib} PUBLIC ${Python3_LIBRARY_DIRS})
@@ -645,6 +646,8 @@ ${DO_NOT_WAIT_FOR_THREADS_CALLS}
   # Add testing
   set(wrapping_test_directory ${CMAKE_CURRENT_SOURCE_DIR}/test)
   if(BUILD_TESTING AND EXISTS ${wrapping_test_directory}/CMakeLists.txt)
+    # itk_add_test labels with ${itk-module}, which is unset in this scope.
+    set(itk-module ${WRAPPER_LIBRARY_NAME})
     add_subdirectory(${wrapping_test_directory})
   endif()
   unset(wrapping_test_directory)

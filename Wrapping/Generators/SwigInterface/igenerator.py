@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 igenerator.py
 PURPOSE:
@@ -531,6 +531,7 @@ class SwigInputGenerator:
         r"itk::ObjectFactoryBasePrivate",
         r"itk::ThreadPoolGlobals",
         r"itk::MultiThreaderBaseGlobals",
+        r"itk::GenericCUBFileAdaptor",  # private implementation detail of VoxBoCUBImageIO
         ".+[(][*][)][(].+",  # functor functions
     ]
 

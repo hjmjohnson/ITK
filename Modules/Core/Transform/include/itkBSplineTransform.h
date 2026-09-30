@@ -299,23 +299,8 @@ protected:
 private:
   /** Construct control point grid size from transform domain information in the fixed parameters. */
   void
-  SetCoefficientImageInformationFromFixedParameters() override;
+  SetCoefficientImageInformationFromFixedParameters() final;
 
-  /** Methods have empty implementations */
-  /** @ITKStartGrouping */
-  void
-  SetFixedParametersGridSizeFromTransformDomainInformation() const override
-  {}
-  void
-  SetFixedParametersGridOriginFromTransformDomainInformation() const override
-  {}
-  void
-  SetFixedParametersGridSpacingFromTransformDomainInformation() const override
-  {}
-  void
-  SetFixedParametersGridDirectionFromTransformDomainInformation() const override
-  {}
-  /** @ITKEndGrouping */
   /** Check if a continuous index is inside the valid region. */
   bool
   InsideValidRegion(ContinuousIndexType &) const override;

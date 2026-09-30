@@ -85,7 +85,11 @@ set(
 set(VTK_DIR \"${VTK_DIR}\")
 find_package(VTK 9.1 NO_MODULE REQUIRED)
 if(NOT VTK_RENDERING_BACKEND)
-  set(VTK_RENDERING_BACKEND OpenGL2)
+  if(TARGET VTK::RenderingOpenGL2)
+    set(VTK_RENDERING_BACKEND OpenGL2)
+  else()
+    set(VTK_RENDERING_BACKEND None)
+  endif()
 endif()
 set(_target_freetypeopengl)
 if(TARGET VTK::RenderingFreeType\${VTK_RENDERING_BACKEND})
@@ -99,7 +103,6 @@ set(_required_vtk_libraries
   )
 if(ITK_WRAP_PYTHON)
   list(APPEND _required_vtk_libraries
-    VTK::WrappingPythonCore
     VTK::CommonCore
     VTK::CommonDataModel
     VTK::CommonExecutionModel)
@@ -124,7 +127,11 @@ if(NOT ITK_BINARY_DIR)
   set(VTK_DIR \"${VTK_DIR}\")
   find_package(VTK 9.1 NO_MODULE REQUIRED)
   if(NOT VTK_RENDERING_BACKEND)
-    set(VTK_RENDERING_BACKEND OpenGL2)
+    if(TARGET VTK::RenderingOpenGL2)
+      set(VTK_RENDERING_BACKEND OpenGL2)
+    else()
+      set(VTK_RENDERING_BACKEND None)
+    endif()
   endif()
   set(_target_freetypeopengl)
   if(TARGET VTK::RenderingFreeType\${VTK_RENDERING_BACKEND})

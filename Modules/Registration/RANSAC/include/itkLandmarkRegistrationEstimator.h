@@ -47,36 +47,36 @@ public:
 
   using KdTreeT = KDTreeVectorOfVectorsAdaptor<VectorofVectorsT, double>;
 
-  using PointsLocatorType = itk::PointsLocator<itk::VectorContainer<IdentifierType, itk::Point<double, 3>>>;
-  using PointsContainer = itk::VectorContainer<IdentifierType, itk::Point<double, 3>>;
+  using PointsLocatorType = itk::PointsLocator<itk::VectorContainer<itk::Point<double, 3>>>;
+  using PointsContainer = itk::VectorContainer<itk::Point<double, 3>>;
 
   itkOverrideGetNameOfClassMacro(LandmarkRegistrationEstimator);
   /** New method for creating an object using a factory. */
   itkNewMacro(Self);
 
-  virtual void
+  void
   Estimate(std::vector<Point<double, Dimension> *> & data, std::vector<double> & parameters) override;
-  virtual void
+  void
   Estimate(std::vector<Point<double, Dimension>> & data, std::vector<double> & parameters) override;
 
-  virtual void
+  void
   LeastSquaresEstimate(std::vector<Point<double, Dimension> *> & data, std::vector<double> & parameters) override;
-  virtual void
+  void
   LeastSquaresEstimate(std::vector<Point<double, Dimension>> & data, std::vector<double> & parameters) override;
 
-  virtual bool
+  bool
   Agree(std::vector<double> & parameters, Point<double, Dimension> & data) override;
 
-  virtual std::vector<double>
+  std::vector<double>
   AgreeMultiple(std::vector<double> &                   parameters,
                 std::vector<Point<double, Dimension>> & data,
                 unsigned int                            currentBest) override;
 
-  virtual bool
+  bool
   CheckCorresspondenceDistance(std::vector<double> &                     parameters,
                                std::vector<Point<double, Dimension> *> & data) override;
 
-  virtual bool
+  bool
   CheckCorresspondenceEdgeLength(std::vector<double> &                     parameters,
                                  std::vector<Point<double, Dimension> *> & data,
                                  double                                    edgeLength) override;

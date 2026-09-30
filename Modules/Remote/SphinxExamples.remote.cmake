@@ -51,5 +51,5 @@ itk_fetch_module(
   "This module builds the examples found at https://itk.org/ITKExamples/"
   MODULE_COMPLIANCE_LEVEL 5
   GIT_REPOSITORY https://github.com/InsightSoftwareConsortium/ITKSphinxExamples.git
-  GIT_TAG 55f4807ae858dffa49c531217832f7db0f4d3f06
+  GIT_TAG 32bf48ae3705ab4d2440679293f6135def87854f
   )
