@@ -17,10 +17,9 @@
  *=========================================================================*/
 
 #include "itkTimeVaryingBSplineVelocityFieldTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkTimeVaryingBSplineVelocityFieldTransformTest(int, char *[])
+TEST(TimeVaryingBSplineVelocityFieldTransform, ConvertedLegacyTest)
 {
   using VectorType = itk::Vector<double, 3>;
   using DisplacementFieldType = itk::Image<VectorType, 3>;
@@ -66,11 +65,7 @@ itkTimeVaryingBSplineVelocityFieldTransformTest(int, char *[])
   VectorType displacementPixel = displacementField->GetPixel(index);
 
   std::cout << "Estimated forward displacement vector: " << displacementPixel << std::endl;
-  if (itk::Math::Absolute(displacementPixel[0] - 0.045) > 0.01)
-  {
-    std::cerr << "Failed to produce the correct forward integration." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(displacementPixel[0] - 0.045), 0.01);
 
   auto inverseIntegrator = IntegratorType::New();
   inverseIntegrator->SetInput(timeVaryingVelocityFieldControlPointLattice);
@@ -83,11 +78,7 @@ itkTimeVaryingBSplineVelocityFieldTransformTest(int, char *[])
   // due to numerical computations
   const DisplacementFieldType * inverseField = inverseIntegrator->GetOutput();
   displacementPixel = inverseField->GetPixel(index);
-  if (itk::Math::Absolute(displacementPixel[0] + 0.1) > 0.01)
-  {
-    std::cerr << "Failed to produce the correct inverse integration." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(displacementPixel[0] + 0.1), 0.01);
 
   // Now test the transform
 
@@ -110,32 +101,31 @@ itkTimeVaryingBSplineVelocityFieldTransformTest(int, char *[])
   using TransformType = itk::TimeVaryingBSplineVelocityFieldTransform<double, 3>;
   auto transform = TransformType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(transform, TimeVaryingBSplineVelocityFieldTransform, VelocityFieldTransform);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(transform, TimeVaryingBSplineVelocityFieldTransform, VelocityFieldTransform);
 
 
   transform->SetLowerTimeBound(0.0);
   transform->SetUpperTimeBound(1.0);
 
   transform->SetSplineOrder(splineOrder);
-  ITK_TEST_SET_GET_VALUE(splineOrder, transform->GetSplineOrder());
+  EXPECT_EQ(splineOrder, transform->GetSplineOrder());
 
   transform->SetVelocityFieldOrigin(timeVaryingVelocityFieldOrigin);
-  ITK_TEST_SET_GET_VALUE(timeVaryingVelocityFieldOrigin, transform->GetVelocityFieldOrigin());
+  EXPECT_EQ(timeVaryingVelocityFieldOrigin, transform->GetVelocityFieldOrigin());
 
   transform->SetVelocityFieldDirection(timeVaryingVelocityFieldDirection);
-  ITK_TEST_SET_GET_VALUE(timeVaryingVelocityFieldDirection, transform->GetVelocityFieldDirection());
+  EXPECT_EQ(timeVaryingVelocityFieldDirection, transform->GetVelocityFieldDirection());
 
   transform->SetVelocityFieldSize(timeVaryingVelocityFieldSize);
-  ITK_TEST_SET_GET_VALUE(timeVaryingVelocityFieldSize, transform->GetVelocityFieldSize());
+  EXPECT_EQ(timeVaryingVelocityFieldSize, transform->GetVelocityFieldSize());
 
   transform->SetVelocityFieldSpacing(timeVaryingVelocityFieldSpacing);
-  ITK_TEST_SET_GET_VALUE(timeVaryingVelocityFieldSpacing, transform->GetVelocityFieldSpacing());
+  EXPECT_EQ(timeVaryingVelocityFieldSpacing, transform->GetVelocityFieldSpacing());
 
   transform->SetNumberOfIntegrationSteps(10);
 
   transform->SetTimeVaryingVelocityFieldControlPointLattice(timeVaryingVelocityFieldControlPointLattice);
-  ITK_TEST_SET_GET_VALUE(timeVaryingVelocityFieldControlPointLattice,
-                         transform->GetTimeVaryingVelocityFieldControlPointLattice());
+  EXPECT_EQ(timeVaryingVelocityFieldControlPointLattice, transform->GetTimeVaryingVelocityFieldControlPointLattice());
 
   transform->IntegrateVelocityField();
 
@@ -149,11 +139,7 @@ itkTimeVaryingBSplineVelocityFieldTransformTest(int, char *[])
   auto displacement = itk::MakeFilled<VectorType>(0.1);
 
   point += displacement;
-  if (point.EuclideanDistanceTo(transformedPoint) > 0.1)
-  {
-    std::cerr << "Failed to produce the expected transformed point." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(point.EuclideanDistanceTo(transformedPoint), 0.1);
   point -= displacement;
 
   TransformType::InputPointType point2;
@@ -164,12 +150,5 @@ itkTimeVaryingBSplineVelocityFieldTransformTest(int, char *[])
 
   transformedPoint = inverseTransform->TransformPoint(point2);
 
-  if (point.EuclideanDistanceTo(transformedPoint) > 0.1)
-  {
-    std::cerr << "Failed to produce the expected inverse transformed point." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  return EXIT_SUCCESS;
+  EXPECT_LE(point.EuclideanDistanceTo(transformedPoint), 0.1);
 }
