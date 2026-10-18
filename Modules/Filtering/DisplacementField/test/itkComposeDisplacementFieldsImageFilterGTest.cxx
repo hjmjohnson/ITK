@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkComposeDisplacementFieldsImageFilter.h"
+#include "itkGTest.h"
 #include "itkImageRegionIterator.h"
 
-int
-itkComposeDisplacementFieldsImageFilterTest(int, char *[])
+TEST(ComposeDisplacementFieldsImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 2 };
 
@@ -77,6 +77,4 @@ itkComposeDisplacementFieldsImageFilterTest(int, char *[])
   }
 
   composer->Print(std::cout, 3);
-
-  return EXIT_SUCCESS;
 }
