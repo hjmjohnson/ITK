@@ -19,10 +19,9 @@
 #include "itkBinaryDilateImageFilter.h"
 #include "itkBinaryBallStructuringElement.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkBinaryDilateImageFilterTest(int, char *[])
+TEST(BinaryDilateImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -109,7 +108,7 @@ itkBinaryDilateImageFilterTest(int, char *[])
   // Create the filter
   auto filter = myFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, BinaryDilateImageFilter, BinaryMorphologyImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, BinaryDilateImageFilter, BinaryMorphologyImageFilter);
 
 
   const itk::SimpleFilterWatcher filterWatcher(filter);
@@ -127,14 +126,14 @@ itkBinaryDilateImageFilterTest(int, char *[])
   filter->SetKernel(ball);
 
   filter->SetDilateValue(fgValue);
-  ITK_TEST_SET_GET_VALUE(fgValue, filter->GetDilateValue());
+  EXPECT_EQ(fgValue, filter->GetDilateValue());
 
 
   // Get the Smart Pointer to the Filter Output
   const myImageType::Pointer outputImage = filter->GetOutput();
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
 
   // Create an iterator for going through the image output
@@ -156,7 +155,4 @@ itkBinaryDilateImageFilterTest(int, char *[])
 
 
   // All objects should be automatically destroyed at this point
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
