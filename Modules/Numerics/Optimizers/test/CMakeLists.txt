@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKOptimizersTests
   itkInitializationBiasedParticleSwarmOptimizerTest.cxx
-  itkLBFGSOptimizerTest.cxx
   itkLevenbergMarquardtOptimizerTest.cxx
   itkOnePlusOneEvolutionaryOptimizerTest.cxx
   itkOptimizersHierarchyTest.cxx
@@ -47,12 +46,6 @@ itk_add_test(
   COMMAND
     ITKOptimizersTestDriver
     itkSPSAOptimizerTest
-)
-itk_add_test(
-  NAME itkLBFGSOptimizerTest
-  COMMAND
-    ITKOptimizersTestDriver
-    itkLBFGSOptimizerTest
 )
 itk_add_test(
   NAME itkRegularStepGradientDescentOptimizerTest
@@ -104,6 +97,7 @@ set(
   itkFRPROptimizerGTest.cxx
   itkGradientDescentOptimizerGTest.cxx
   itkLBFGSBOptimizerGTest.cxx
+  itkLBFGSOptimizerGTest.cxx
   itkLevenbergMarquardtOptimizerGTest.cxx
 )
 creategoogletestdriver(ITKOptimizers "${ITKOptimizers-Test_LIBRARIES}" "${ITKOptimizersGTests}")
