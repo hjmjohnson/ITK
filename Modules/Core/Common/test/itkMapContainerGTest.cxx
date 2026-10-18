@@ -16,11 +16,11 @@
  *
  *=========================================================================*/
 
-#include "itkTestingMacros.h"
 #include "itkMapContainer.h"
 #include "itkPoint.h"
 
 #include <iostream>
+#include "itkGTest.h"
 
 /**
  * Some type alias to make things easier.
@@ -31,8 +31,7 @@ using VectorType = itk::Vector<float, 3>;
 using ContainerType = itk::MapContainer<unsigned long, PointType>;
 using ContainerPointer = ContainerType::Pointer;
 
-int
-itkMapContainerTest(int, char *[])
+TEST(MapContainer, ConvertedLegacyTest)
 {
 
   /**
@@ -64,8 +63,8 @@ itkMapContainerTest(int, char *[])
 
     while (p != container->End())
     {
-      ITK_TEST_EXPECT_EQUAL(p.Value(), p_copy.Value());
-      ITK_TEST_EXPECT_EQUAL(p.Value(), p_assign.Value());
+      EXPECT_EQ(p.Value(), p_copy.Value());
+      EXPECT_EQ(p.Value(), p_assign.Value());
 
       ++p;
       ++p_copy;
@@ -82,8 +81,8 @@ itkMapContainerTest(int, char *[])
 
     while (p != container->End())
     {
-      ITK_TEST_EXPECT_EQUAL(p.Value(), p_copy.Value());
-      ITK_TEST_EXPECT_EQUAL(p.Value(), p_assign.Value());
+      EXPECT_EQ(p.Value(), p_copy.Value());
+      EXPECT_EQ(p.Value(), p_assign.Value());
 
       ++p;
       ++p_copy;
@@ -92,11 +91,5 @@ itkMapContainerTest(int, char *[])
   }
 
   container->Initialize();
-  if (container->Size() != 0)
-  {
-    std::cerr << "Initialize() didn't get rid of elements" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(container->Size(), 0u) << "Initialize() didn't get rid of elements";
 }
