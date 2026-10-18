@@ -25,5 +25,6 @@ set(
   itkCurvatureAnisotropicDiffusionImageFilterGTest.cxx
   itkGradientAnisotropicDiffusionImageFilterGTest.cxx
   itkMinMaxCurvatureFlowImageFilterGTest.cxx
+  itkVectorAnisotropicDiffusionImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKAnisotropicSmoothing "${ITKAnisotropicSmoothing-Test_LIBRARIES}" "${ITKAnisotropicSmoothingGTests}")
