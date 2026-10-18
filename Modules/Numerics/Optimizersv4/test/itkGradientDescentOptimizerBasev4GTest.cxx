@@ -17,8 +17,10 @@
  *=========================================================================*/
 #include "itkGradientDescentOptimizerBasev4.h"
 #include "itkImage.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 /* Create a simple metric to use for testing here. */
 template <typename TFixedObject, typename TMovingObject>
 class GradientDescentOptimizerBasev4TestMetric : public itk::ObjectToObjectMetricBase
@@ -160,10 +162,10 @@ protected:
   GradientDescentOptimizerBasev4TestOptimizer() = default;
   ~GradientDescentOptimizerBasev4TestOptimizer() override = default;
 };
+} // namespace
 
 
-int
-itkGradientDescentOptimizerBasev4Test(int, char *[])
+TEST(GradientDescentOptimizerBasev4, ConvertedLegacyTest)
 {
   constexpr int ImageDimension{ 2 };
   using ImageType = itk::Image<double, ImageDimension>;
@@ -174,20 +176,17 @@ itkGradientDescentOptimizerBasev4Test(int, char *[])
   auto optimizer = GradientDescentOptimizerBasev4TestOptimizer::New();
 
   constexpr bool doEstimateScales{ true };
-  ITK_TEST_SET_GET_BOOLEAN(optimizer, DoEstimateScales, doEstimateScales);
+  ITK_GTEST_SET_GET_BOOLEAN(optimizer, DoEstimateScales, doEstimateScales);
 
   optimizer->SetMetric(metric);
-  ITK_TEST_SET_GET_VALUE(metric, optimizer->GetMetric());
+  EXPECT_EQ(metric, optimizer->GetMetric());
 
-  ITK_TEST_SET_GET_VALUE(0.0, optimizer->GetCurrentMetricValue());
+  EXPECT_EQ(0.0, optimizer->GetCurrentMetricValue());
 
   optimizer->SetNumberOfWorkUnits(2);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(optimizer->StartOptimization());
+  ASSERT_NO_THROW(optimizer->StartOptimization());
 
   std::cout << "Printing self.." << std::endl;
   std::cout << optimizer << std::endl;
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
