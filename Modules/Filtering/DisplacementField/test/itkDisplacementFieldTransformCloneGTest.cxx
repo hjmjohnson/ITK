@@ -21,9 +21,11 @@
 #include "itkDisplacementFieldTransform.h"
 #include "itkImageRegionConstIterator.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 template <typename TVector>
 bool
 testVector(const TVector & v1, const TVector & v2)
@@ -40,9 +42,9 @@ testVector(const TVector & v1, const TVector & v2)
   }
   return pass;
 }
+} // namespace
 
-int
-itkDisplacementFieldTransformCloneTest(int, char *[])
+TEST(DisplacementFieldTransformClone, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimensions{ 3 };
 
@@ -67,22 +69,13 @@ itkDisplacementFieldTransformCloneTest(int, char *[])
 
   const DisplacementTransformType::Pointer displacementTransformClone = displacementTransform->Clone();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(displacementTransformClone, DisplacementFieldTransform, Transform);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(displacementTransformClone, DisplacementFieldTransform, Transform);
 
 
-  if (displacementTransformClone.IsNull())
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Failed downcast to displacement transform.";
-    return EXIT_FAILURE;
-  }
+  ASSERT_FALSE(displacementTransformClone.IsNull());
 
-  if (!testVector(displacementTransform->GetFixedParameters(), displacementTransformClone->GetFixedParameters()))
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Fixed parameters of clone do not match original." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(
+    testVector(displacementTransform->GetFixedParameters(), displacementTransformClone->GetFixedParameters()));
 
   const FieldType::ConstPointer originalField = displacementTransform->GetDisplacementField();
   const FieldType::ConstPointer cloneField = displacementTransformClone->GetDisplacementField();
@@ -92,21 +85,9 @@ itkDisplacementFieldTransformCloneTest(int, char *[])
 
   for (; !originalIt.IsAtEnd() && !cloneIt.IsAtEnd(); ++originalIt, ++cloneIt)
   {
-    if (!testVector(originalIt.Value(), cloneIt.Value()))
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Displacement Field voxel mismatch" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(testVector(originalIt.Value(), cloneIt.Value()));
   }
 
-  if (!originalIt.IsAtEnd() || !cloneIt.IsAtEnd())
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Displacement field size mismatch" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(originalIt.IsAtEnd());
+  EXPECT_TRUE(cloneIt.IsAtEnd());
 }
