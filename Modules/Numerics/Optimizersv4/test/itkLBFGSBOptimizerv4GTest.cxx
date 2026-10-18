@@ -19,7 +19,7 @@
 #include "itkLBFGSBOptimizerv4.h"
 #include "itkTextOutput.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <iostream>
 
 /**
@@ -41,6 +41,8 @@
  *
  * \class LBFGSBOptimizerv4TestMetric
  */
+namespace
+{
 class LBFGSBOptimizerv4TestMetric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -219,10 +221,10 @@ private:
   bool m_HadIterationEvent{ false };
   bool m_HadEndEvent{ false };
 };
+} // namespace
 
 
-int
-itkLBFGSBOptimizerv4Test(int, char *[])
+TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -234,7 +236,7 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, LBFGSBOptimizerv4, LBFGSOptimizerBasev4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, LBFGSBOptimizerv4, LBFGSOptimizerBasev4);
 
 
   // Declaration of the metric
@@ -243,28 +245,28 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   itkOptimizer->SetMetric(metric);
 
   constexpr bool trace{ false };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Trace, trace);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Trace, trace);
 
-  constexpr double F_Convergence_Factor{ 1e+7 };  // Function value tolerance
-  constexpr double Projected_G_Tolerance{ 1e-5 }; // Proj gradient tolerance
-  constexpr int    Max_Iterations{ 25 };          // Maximum number of iterations
+  constexpr double       F_Convergence_Factor{ 1e+7 };  // Function value tolerance
+  constexpr double       Projected_G_Tolerance{ 1e-5 }; // Proj gradient tolerance
+  constexpr unsigned int Max_Iterations{ 25 };          // Maximum number of iterations
 
   itkOptimizer->SetCostFunctionConvergenceFactor(F_Convergence_Factor);
-  ITK_TEST_SET_GET_VALUE(F_Convergence_Factor, itkOptimizer->GetCostFunctionConvergenceFactor());
+  EXPECT_EQ(F_Convergence_Factor, itkOptimizer->GetCostFunctionConvergenceFactor());
 
   itkOptimizer->SetGradientConvergenceTolerance(Projected_G_Tolerance);
-  ITK_TEST_SET_GET_VALUE(Projected_G_Tolerance, itkOptimizer->GetGradientConvergenceTolerance());
+  EXPECT_EQ(Projected_G_Tolerance, itkOptimizer->GetGradientConvergenceTolerance());
 
   itkOptimizer->SetNumberOfIterations(Max_Iterations);
-  ITK_TEST_SET_GET_VALUE(Max_Iterations, itkOptimizer->GetNumberOfIterations());
+  EXPECT_EQ(Max_Iterations, itkOptimizer->GetNumberOfIterations());
 
   constexpr unsigned int maximumNumberOfEvaluations{ 100 };
   itkOptimizer->SetMaximumNumberOfFunctionEvaluations(maximumNumberOfEvaluations);
-  ITK_TEST_SET_GET_VALUE(maximumNumberOfEvaluations, itkOptimizer->GetMaximumNumberOfFunctionEvaluations());
+  EXPECT_EQ(maximumNumberOfEvaluations, itkOptimizer->GetMaximumNumberOfFunctionEvaluations());
 
   constexpr unsigned int maximumNumberOfCorrections{ 5 };
   itkOptimizer->SetMaximumNumberOfCorrections(maximumNumberOfCorrections);
-  ITK_TEST_SET_GET_VALUE(maximumNumberOfCorrections, itkOptimizer->GetMaximumNumberOfCorrections());
+  EXPECT_EQ(maximumNumberOfCorrections, itkOptimizer->GetMaximumNumberOfCorrections());
 
   constexpr unsigned int        SpaceDimension{ 2 };
   OptimizerType::ParametersType initialValue(SpaceDimension);
@@ -282,7 +284,7 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   currentValue = initialValue;
 
   itkOptimizer->SetInitialPosition(currentValue);
-  ITK_TEST_SET_GET_VALUE(currentValue, itkOptimizer->GetInitialPosition());
+  EXPECT_EQ(currentValue, itkOptimizer->GetInitialPosition());
 
   /**
    * Set the boundary condition for each variable, where
@@ -300,22 +302,22 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   select.Fill(itk::LBFGSBOptimizerv4::BOTHBOUNDED);
 
   itkOptimizer->SetLowerBound(lower);
-  ITK_TEST_SET_GET_VALUE(lower, itkOptimizer->GetLowerBound());
+  EXPECT_EQ(lower, itkOptimizer->GetLowerBound());
 
   itkOptimizer->SetUpperBound(upper);
-  ITK_TEST_SET_GET_VALUE(upper, itkOptimizer->GetUpperBound());
+  EXPECT_EQ(upper, itkOptimizer->GetUpperBound());
 
   itkOptimizer->SetBoundSelection(select);
-  ITK_TEST_SET_GET_VALUE(select, itkOptimizer->GetBoundSelection());
+  EXPECT_EQ(select, itkOptimizer->GetBoundSelection());
 
-  ITK_TEST_EXPECT_TRUE(!itkOptimizer->CanUseScales());
+  EXPECT_FALSE(itkOptimizer->CanUseScales());
 
   auto eventChecker = EventChecker::New();
   itkOptimizer->AddObserver(itk::StartEvent(), eventChecker);
   itkOptimizer->AddObserver(itk::IterationEvent(), eventChecker);
   itkOptimizer->AddObserver(itk::EndEvent(), eventChecker);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(itkOptimizer->StartOptimization());
+  ASSERT_NO_THROW(itkOptimizer->StartOptimization());
 
 
   const OptimizerType::ParametersType & finalPosition = itkOptimizer->GetCurrentPosition();
@@ -328,58 +330,25 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   std::cout << "End condition   = " << itkOptimizer->GetStopConditionDescription() << std::endl;
   std::cout << "CurrentOfIterations  = " << itkOptimizer->GetCurrentIteration() << std::endl;
 
-  if (!eventChecker->GetHadStartEvent())
-  {
-    std::cerr << "Did not have StartEvent!" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!eventChecker->GetHadIterationEvent())
-  {
-    std::cerr << "Did not have IterationEvent!" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!eventChecker->GetHadEndEvent())
-  {
-    std::cerr << "Did not have EndEvent!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(eventChecker->GetHadStartEvent()) << "Did not have StartEvent!";
+  EXPECT_TRUE(eventChecker->GetHadIterationEvent()) << "Did not have IterationEvent!";
+  EXPECT_TRUE(eventChecker->GetHadEndEvent()) << "Did not have EndEvent!";
 
   //
   // check results to see if it is within range
   //
-  bool        pass = true;
-  std::string errorIn;
-
   // true parameters considering bounding constrains -1 <= x <= 10
   double trueParameters[2] = { 4.0 / 3.0, -1.0 };
 
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (!itk::Math::FloatAlmostEqual(finalPosition[j], trueParameters[j]))
-    {
-      pass = false;
-      errorIn = "solution";
-    }
+    EXPECT_DOUBLE_EQ(finalPosition[j], trueParameters[j]) << "Error in solution.";
   }
 
-  if (!itk::Math::FloatAlmostEqual(itkOptimizer->GetValue(), -7.66667, 4, 0.01))
-  {
-    pass = false;
-    errorIn = "final function value";
-  }
+  EXPECT_NEAR(itkOptimizer->GetValue(), -7.66667, 0.01) << "Error in final function value.";
 
-  if (!itk::Math::FloatAlmostEqual(itkOptimizer->GetInfinityNormOfProjectedGradient(), 1.77636e-15, 4, 0.01))
-  {
-    pass = false;
-    errorIn = "infinity norm of projected gradient";
-  }
-
-  if (!pass)
-  {
-    std::cerr << "\nError in " << errorIn << ".\n";
-    std::cerr << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(itkOptimizer->GetInfinityNormOfProjectedGradient(), 1.77636e-15, 0.01)
+    << "Error in infinity norm of projected gradient.";
 
   //
   // Test stopping when number of iterations reached
@@ -390,17 +359,13 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   metric->SetParameters(initialValue);
   itkOptimizer->SetNumberOfIterations(1);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(itkOptimizer->StartOptimization());
+  ASSERT_NO_THROW(itkOptimizer->StartOptimization());
 
 
   std::cout << "Solution        = (" << finalPosition[0] << ',' << finalPosition[1] << ')' << std::endl;
   std::cout << "NumberOfIterations  = " << itkOptimizer->GetCurrentIteration() << std::endl;
 
-  if (itkOptimizer->GetCurrentIteration() != 1)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(itkOptimizer->GetCurrentIteration(), 1u);
 
 
   //
@@ -409,7 +374,7 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   //
   std::cout << "-------------------------------" << std::endl;
   metric->SetHasLocalSupport(true);
-  ITK_TRY_EXPECT_EXCEPTION(itkOptimizer->StartOptimization());
+  EXPECT_THROW(itkOptimizer->StartOptimization(), itk::ExceptionObject);
 
   //
   //  Test in unbounded mode
@@ -438,7 +403,7 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   itkOptimizer2->AddObserver(itk::IterationEvent(), eventChecker);
   itkOptimizer2->AddObserver(itk::EndEvent(), eventChecker);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(itkOptimizer2->StartOptimization());
+  ASSERT_NO_THROW(itkOptimizer2->StartOptimization());
 
 
   std::cout << "Boundaries after optimization: " << std::endl;
@@ -450,7 +415,6 @@ itkLBFGSBOptimizerv4Test(int, char *[])
   std::cout << "Final Function Value = " << itkOptimizer2->GetValue() << std::endl;
 
   // check results
-  pass = true;
 
   // true parameters when there is no constrain
   trueParameters[0] = 2.0;
@@ -458,26 +422,8 @@ itkLBFGSBOptimizerv4Test(int, char *[])
 
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (!itk::Math::FloatAlmostEqual(finalPosition2[j], trueParameters[j], 4, 0.01))
-    {
-      pass = false;
-      errorIn = "solution";
-    }
+    EXPECT_NEAR(finalPosition2[j], trueParameters[j], 0.01) << "Error in solution.";
   }
 
-  if (!itk::Math::FloatAlmostEqual(itkOptimizer2->GetValue(), -10.0, 4, 0.01))
-  {
-    pass = false;
-    errorIn = "final function value";
-  }
-
-  if (!pass)
-  {
-    std::cerr << "\nError in " << errorIn << ".\n";
-    std::cerr << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(itkOptimizer2->GetValue(), -10.0, 0.01) << "Error in final function value.";
 }
