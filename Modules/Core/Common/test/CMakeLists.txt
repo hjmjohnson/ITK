@@ -10,7 +10,6 @@ set(
   itkImageRandomIteratorTest2.cxx
   itkImageRegionTest.cxx
   itkImageTest.cxx
-  itkIteratorTests.cxx
   itkLightObjectTest.cxx
   itkLineIteratorTest.cxx
   itkLoggerTest.cxx
@@ -450,12 +449,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     itkVectorContainerTest
-)
-itk_add_test(
-  NAME itkIteratorTests
-  COMMAND
-    ITKCommon1TestDriver
-    itkIteratorTests
 )
 itk_add_test(
   NAME itkObjectFactoryTest
@@ -1348,6 +1341,7 @@ set(
   itkIndexGTest.cxx
   itkIndexRangeGTest.cxx
   itkIntTypesGTest.cxx
+  itkIteratorsGTest.cxx
   itkLightObjectGTest.cxx
   itkMakeUniqueForOverwriteGTest.cxx
   itkMathCastWithRangeCheckGTest.cxx
