@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKCommon1Tests
   itkColorTableTest.cxx
-  itkDataObjectTest.cxx
   itkDirectoryTest.cxx
   itkExceptionObjectTest.cxx
   itkFixedArrayTest2.cxx
@@ -654,12 +653,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkPointSetToImageFilterTest2.mha
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkPointSetToImageFilterTest2.mha
-)
-itk_add_test(
-  NAME itkDataObjectTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkDataObjectTest
 )
 itk_add_test(
   NAME itkPointGeometryTest
@@ -1471,6 +1464,7 @@ set(
   itkCovariantVectorGTest.cxx
   itkCrossHelperGTest.cxx
   itkDataObjectAndProcessObjectGTest.cxx
+  itkDataObjectGTest.cxx
   itkDataTypeGTest.cxx
   itkDecoratorGTest.cxx
   itkDerefGTest.cxx
