@@ -16,8 +16,12 @@
  *
  *=========================================================================*/
 
-#include "itkNeighborhoodIteratorTestCommon.hxx"
 #include "itkConstNeighborhoodIteratorWithOnlyIndex.h"
+#include "itkNeighborhoodIteratorTestCommon.hxx"
+#include "itkGTest.h"
+
+namespace
+{
 
 template <typename TImage>
 typename TImage::Pointer
@@ -38,7 +42,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestGetTestImage(int d1, int d2, int d3
 }
 
 template <typename TImage>
-[[nodiscard]] int
+void
 itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
 {
   const typename TImage::Pointer img = itkConstNeighborhoodIteratorWithOnlyIndexTestGetTestImage<TImage>(10, 10, 5, 3);
@@ -60,19 +64,10 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   std::cout << "Moving iterator using SetLocation() to loc: " << loc << std::endl;
   it.SetLocation(loc);
   it.Print(std::cout);
-  if (it.GetIndex() != loc)
-  {
-    std::cerr << "Error with SetLocation." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex(), loc) << "Error with SetLocation.";
 
   std::cout << "Test GetIndex( NeighborhoodIndex )" << std::endl;
-  if (it.GetIndex(it.GetCenterNeighborhoodIndex()) != loc)
-  {
-    std::cerr << "Error getting index from center nhood index. Returned "
-              << it.GetIndex(it.GetCenterNeighborhoodIndex()) << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex(it.GetCenterNeighborhoodIndex()), loc) << "Error getting index from center nhood index.";
   IndexType truthIndex;
   for (unsigned int i = 0; i < 4; ++i)
   {
@@ -86,19 +81,11 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   std::cout << "Testing GoToBegin()" << std::endl;
   it.GoToBegin();
   it.Print(std::cout);
-  if (it.GetIndex() != idx)
-  {
-    std::cerr << "Error with GoToBegin. Expected: " << idx << ", GetIndex: " << it.GetIndex() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex(), idx) << "Error with GoToBegin.";
 
   std::cout << "Testing IsAtBegin()" << std::endl;
   std::cout << it.IsAtBegin() << std::endl;
-  if (!it.IsAtBegin())
-  {
-    std::cerr << "Error with IsAtBegin." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(it.IsAtBegin()) << "Error with IsAtBegin.";
 
   std::cout << "Testing GoToEnd()" << std::endl;
   it.GoToEnd();
@@ -106,21 +93,13 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
 
   std::cout << "Testing IsAtEnd()" << std::endl;
   std::cout << it.IsAtEnd() << std::endl;
-  if (!it.IsAtEnd())
-  {
-    std::cerr << "Error with either IsAtEnd or GoToEnd." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(it.IsAtEnd()) << "Error with either IsAtEnd or GoToEnd.";
 
   std::cout << "Testing forward iteration" << std::endl;
   it.GoToBegin();
   IndexType index = it.GetIndex();
   ++it;
-  if (it.GetIndex()[0] != index[0] + 1)
-  {
-    std::cerr << "Error with fwd iteration" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex()[0], index[0] + 1) << "Error with fwd iteration";
   while (!it.IsAtEnd())
   {
     ++it;
@@ -133,11 +112,8 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   {
     ++it;
   }
-  if (it.GetIndex()[0] != index[0] || it.GetIndex()[1] != index[1] + 1)
-  {
-    std::cerr << "Error with fwd iteration by one line." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex()[0], index[0]) << "Error with fwd iteration by one line.";
+  EXPECT_EQ(it.GetIndex()[1], index[1] + 1) << "Error with fwd iteration by one line.";
 
   // fwd iterate by a slice
   index = it.GetIndex();
@@ -145,43 +121,32 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   {
     ++it;
   }
-  if (it.GetIndex()[0] != index[0] || it.GetIndex()[1] != index[1] || it.GetIndex()[2] != index[2] + 1)
-  {
-    std::cerr << "Error with fwd iteration by one slice." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex()[0], index[0]) << "Error with fwd iteration by one slice.";
+  EXPECT_EQ(it.GetIndex()[1], index[1]) << "Error with fwd iteration by one slice.";
+  EXPECT_EQ(it.GetIndex()[2], index[2] + 1) << "Error with fwd iteration by one slice.";
 
   std::cout << "Testing reverse iteration" << std::endl;
   it.GoToEnd();
   index = it.GetIndex();
   --it;
-  if (it.GetIndex()[3] != index[3] - 1)
-  {
-    std::cerr << "Error with reverse iteration" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex()[3], index[3] - 1) << "Error with reverse iteration";
 
   index = it.GetIndex();
   for (unsigned int i = 0; i < sz[0]; ++i)
   {
     --it;
   }
-  if (it.GetIndex()[0] != index[0] || it.GetIndex()[1] != index[1] - 1)
-  {
-    std::cerr << "Error with reverse iteration by one line." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex()[0], index[0]) << "Error with reverse iteration by one line.";
+  EXPECT_EQ(it.GetIndex()[1], index[1] - 1) << "Error with reverse iteration by one line.";
 
   index = it.GetIndex();
   for (unsigned int i = 0; i < sz[0] * sz[1]; ++i)
   {
     --it;
   }
-  if (it.GetIndex()[0] != index[0] || it.GetIndex()[1] != index[1] || it.GetIndex()[2] != index[2] - 1)
-  {
-    std::cerr << "Error with reverse iteration by one slice." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(it.GetIndex()[0], index[0]) << "Error with reverse iteration by one slice.";
+  EXPECT_EQ(it.GetIndex()[1], index[1]) << "Error with reverse iteration by one slice.";
+  EXPECT_EQ(it.GetIndex()[2], index[2] - 1) << "Error with reverse iteration by one slice.";
 
   std::cout << "Moving iterator using SetLocation()" << std::endl;
   it.SetLocation(loc);
@@ -211,16 +176,10 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   ConstNeighborhoodIteratorType copy_it = ra_it;
 
   std::cout << "Test copying." << std::endl;
-  if (copy_it != ra_it || !(copy_it == ra_it))
-  {
-    std::cerr << "Failure with copying or equality comparison." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!(copy_it >= ra_it) || !(copy_it <= ra_it))
-  {
-    std::cerr << "Failure with copying or >= or <= comparison." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(copy_it != ra_it) << "Failure with copying or equality comparison.";
+  EXPECT_EQ(copy_it, ra_it) << "Failure with copying or equality comparison.";
+  EXPECT_GE(copy_it, ra_it) << "Failure with copying or >= or <= comparison.";
+  EXPECT_LE(copy_it, ra_it) << "Failure with copying or >= or <= comparison.";
 
   std::cout << "Testing random access" << std::endl;
   ra_it.SetLocation(loc);
@@ -231,35 +190,21 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   for (unsigned int i = 0; i < 4; ++i)
   {
     IndexType ind = ra_it.GetIndex();
-    if (ind[i] != loc[i] + 1)
-    {
-      std::cerr << "Error with adding offset " << a_off << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ind[i], loc[i] + 1) << "Error with adding offset " << a_off;
   }
 
   std::cout << "Test iterator comparisons" << std::endl;
-  if (!(copy_it < ra_it) || !(copy_it <= ra_it))
-  {
-    std::cerr << "Error with < or <=." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!(copy_it < ra_it) || !(copy_it <= ra_it))
-  {
-    std::cerr << "Error with < or <=." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LT(copy_it, ra_it) << "Error with < or <=.";
+  EXPECT_LE(copy_it, ra_it) << "Error with < or <=.";
+  EXPECT_LT(copy_it, ra_it) << "Error with < or <=.";
+  EXPECT_LE(copy_it, ra_it) << "Error with < or <=.";
 
   std::cout << "Subtracting [1, 1, 1, 1]" << std::endl;
   ra_it -= a_off;
   for (unsigned int i = 0; i < 4; ++i)
   {
     IndexType ind = ra_it.GetIndex();
-    if (ind[i] != loc[i])
-    {
-      std::cerr << "Error with subtracting offset " << a_off << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ind[i], loc[i]) << "Error with subtracting offset " << a_off;
   }
 
   copy_it = ra_it;
@@ -273,18 +218,13 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   for (unsigned int i = 0; i < 4; ++i)
   {
     IndexType ind = ra_it.GetIndex();
-    if (ind[i] != truth[i])
-    {
-      std::cerr << "Error with adding offset " << a_off << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ind[i], truth[i]) << "Error with adding offset " << a_off;
   }
 
-  if (ra_it < copy_it || ra_it <= copy_it || copy_it > ra_it || copy_it >= ra_it)
-  {
-    std::cerr << "Error with > or >= comparison after adding offset." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(ra_it < copy_it) << "Error with > or >= comparison after adding offset.";
+  EXPECT_FALSE(ra_it <= copy_it) << "Error with > or >= comparison after adding offset.";
+  EXPECT_FALSE(copy_it > ra_it) << "Error with > or >= comparison after adding offset.";
+  EXPECT_FALSE(copy_it >= ra_it) << "Error with > or >= comparison after adding offset.";
 
   copy_it = ra_it;
 
@@ -296,20 +236,13 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   for (unsigned int i = 0; i < 4; ++i)
   {
     IndexType ind = ra_it.GetIndex();
-    if (ind[i] != truth[i])
-    {
-      std::cerr << "Error with adding offset " << a_off << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ind[i], truth[i]) << "Error with adding offset " << a_off;
   }
 
-  if (ra_it < copy_it || ra_it <= copy_it || copy_it > ra_it || copy_it >= ra_it)
-  {
-    std::cerr << "Error with comparison after adding offset " << a_off << std::endl;
-    std::cerr << (ra_it < copy_it) << ", " << (ra_it <= copy_it) << ", " << (copy_it > ra_it) << ", "
-              << (copy_it >= ra_it) << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(ra_it < copy_it) << "Error with comparison after adding offset " << a_off;
+  EXPECT_FALSE(ra_it <= copy_it) << "Error with comparison after adding offset " << a_off;
+  EXPECT_FALSE(copy_it > ra_it) << "Error with comparison after adding offset " << a_off;
+  EXPECT_FALSE(copy_it >= ra_it) << "Error with comparison after adding offset " << a_off;
 
   copy_it = ra_it;
 
@@ -323,18 +256,13 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   for (unsigned int i = 0; i < 4; ++i)
   {
     IndexType ind = ra_it.GetIndex();
-    if (ind[i] != truth[i])
-    {
-      std::cerr << "Error with adding offset " << a_off << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ind[i], truth[i]) << "Error with adding offset " << a_off;
   }
 
-  if (ra_it > copy_it || ra_it >= copy_it || copy_it < ra_it || copy_it <= ra_it)
-  {
-    std::cerr << "Error with comparison after adding offset." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(ra_it > copy_it) << "Error with comparison after adding offset.";
+  EXPECT_FALSE(ra_it >= copy_it) << "Error with comparison after adding offset.";
+  EXPECT_FALSE(copy_it < ra_it) << "Error with comparison after adding offset.";
+  EXPECT_FALSE(copy_it <= ra_it) << "Error with comparison after adding offset.";
 
   //
   // Test IndexInBounds
@@ -362,48 +290,27 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
 
   iib_it.GoToBegin();
   bool inside = iib_it.IndexInBounds(0, internalIndex, resultOffset);
-  if (inside)
-  {
-    std::cerr << "IndexInBounds failed for index 0, expected false." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(inside) << "IndexInBounds failed for index 0, expected false.";
   for (unsigned int n = 0; n < 4; ++n)
   {
-    if (resultOffset[n] != static_cast<itk::OffsetValueType>(radius[n]))
-    {
-      std::cerr << "IndexInBounds failed. Expected resultOffset of " << radius << ", but got " << resultOffset
-                << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(resultOffset[n], static_cast<itk::OffsetValueType>(radius[n]))
+      << "IndexInBounds failed. Expected resultOffset of " << radius << ", but got " << resultOffset;
   }
   inside = iib_it.IndexInBounds(iib_it.Size() - 1, internalIndex, resultOffset);
-  if (!inside)
-  {
-    std::cerr << "IndexInBounds failed for index size-1, expected true." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(inside) << "IndexInBounds failed for index size-1, expected true.";
   for (unsigned int n = 0; n < 4; ++n)
   {
-    if (resultOffset[n] != 0)
-    {
-      std::cerr << "IndexInBounds failed. Expected resultOffset of 0, but got " << resultOffset << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(resultOffset[n], 0) << "IndexInBounds failed. Expected resultOffset of 0, but got " << resultOffset;
   }
 
   // Test min boundary by dimension
-  int result = EXIT_SUCCESS;
   for (unsigned int n = 0; n < 4; ++n)
   {
     typename IteratorType::IndexType boundaryLoc = centerLoc;
     boundaryLoc[n] = 0;
     iib_it.SetLocation(boundaryLoc);
-    if (iib_it.IndexInBounds(0, internalIndex, resultOffset))
-    {
-      std::cerr << "IndexInBounds failed for min boundaryLoc: " << boundaryLoc << " and dimension: " << n
-                << ". Expected false." << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_FALSE(iib_it.IndexInBounds(0, internalIndex, resultOffset))
+      << "IndexInBounds failed for min boundaryLoc: " << boundaryLoc << " and dimension: " << n << ". Expected false.";
   }
 
   // Test max boundary by dimension
@@ -412,42 +319,28 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
     typename IteratorType::IndexType boundaryLoc = centerLoc;
     boundaryLoc[n] = dims[n] - 1;
     iib_it.SetLocation(boundaryLoc);
-    if (iib_it.IndexInBounds(iib_it.Size() - 1, internalIndex, resultOffset))
-    {
-      std::cerr << "IndexInBounds failed for max boundaryLoc: " << boundaryLoc << " and dimension: " << n
-                << ". Expected false." << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_FALSE(iib_it.IndexInBounds(iib_it.Size() - 1, internalIndex, resultOffset))
+      << "IndexInBounds failed for max boundaryLoc: " << boundaryLoc << " and dimension: " << n << ". Expected false.";
   }
 
   // Test center
   iib_it.SetLocation(centerLoc);
   inside = iib_it.IndexInBounds(0, internalIndex, resultOffset);
-  if (!inside)
-  {
-    std::cerr << "IndexInBounds failed for index 0, expected true." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  return result;
+  EXPECT_TRUE(inside) << "IndexInBounds failed for index 0, expected true.";
 }
+} // namespace
 
-int
-itkConstNeighborhoodIteratorWithOnlyIndexTest(int, char *[])
+TEST(ConstNeighborhoodIteratorWithOnlyIndex, ConvertedLegacyTest)
 {
   std::cout << "*** Testing with itk::Image" << std::endl << std::endl;
-  if (itkConstNeighborhoodIteratorWithOnlyIndexTestRun<itk::Image<signed char, 4>>() == EXIT_FAILURE)
   {
-    std::cerr << "XXX Failed with itk::Image XXX" << std::endl;
-    return EXIT_FAILURE;
+    SCOPED_TRACE("itk::Image");
+    itkConstNeighborhoodIteratorWithOnlyIndexTestRun<itk::Image<signed char, 4>>();
   }
 
   std::cout << std::endl << std::endl << "*** Testing with itk::ImageBase" << std::endl << std::endl;
-  if (itkConstNeighborhoodIteratorWithOnlyIndexTestRun<itk::ImageBase<4>>() == EXIT_FAILURE)
   {
-    std::cerr << "XXX Failed with itk::ImageBase XXX" << std::endl;
-    return EXIT_FAILURE;
+    SCOPED_TRACE("itk::ImageBase");
+    itkConstNeighborhoodIteratorWithOnlyIndexTestRun<itk::ImageBase<4>>();
   }
-
-  return EXIT_SUCCESS;
 }
