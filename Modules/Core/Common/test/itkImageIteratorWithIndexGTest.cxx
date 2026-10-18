@@ -21,8 +21,11 @@
 #include "itkMath.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkNumericTraits.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 template <typename TPixelType>
 class itkImageIteratorWithIndexTestIteratorTester
 {
@@ -129,278 +132,122 @@ public:
 private:
   typename ImageType::Pointer m_Image;
 };
+} // namespace
 
-int
-itkImageIteratorWithIndexTest(int, char *[])
+TEST(ImageIteratorWithIndex, ConvertedLegacyTest)
 {
-
-  bool testPassed = true; // let's be optimistic
-
   // Instantiate image of various types and
   // test the iterators on them
 
   std::cout << "Testing with Image< char, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<int8_t> TesterC(10);
-  if (TesterC.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterC.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterC.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterC.TestIterator());
+  EXPECT_TRUE(TesterC.TestConstIterator());
+  EXPECT_TRUE(TesterC.TestReverseIteration());
 
   std::cout << "Testing with Image< unsigned char, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<unsigned char> TesterUC(10);
-  if (TesterUC.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterUC.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterUC.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterUC.TestIterator());
+  EXPECT_TRUE(TesterUC.TestConstIterator());
+  EXPECT_TRUE(TesterUC.TestReverseIteration());
 
   std::cout << "Testing with Image< short, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<short> TesterS(10);
-  if (TesterS.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterS.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterS.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterS.TestIterator());
+  EXPECT_TRUE(TesterS.TestConstIterator());
+  EXPECT_TRUE(TesterS.TestReverseIteration());
 
   std::cout << "Testing with Image< unsigned short, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<unsigned short> TesterUS(10);
-  if (TesterUS.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterUS.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterUS.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterUS.TestIterator());
+  EXPECT_TRUE(TesterUS.TestConstIterator());
+  EXPECT_TRUE(TesterUS.TestReverseIteration());
 
   std::cout << "Testing with Image< int, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<int> TesterI(10);
-  if (TesterI.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterI.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterI.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterI.TestIterator());
+  EXPECT_TRUE(TesterI.TestConstIterator());
+  EXPECT_TRUE(TesterI.TestReverseIteration());
 
   std::cout << "Testing with Image< unsigned int, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<unsigned int> TesterUI(10);
-  if (TesterUI.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterUI.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterUI.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterUI.TestIterator());
+  EXPECT_TRUE(TesterUI.TestConstIterator());
+  EXPECT_TRUE(TesterUI.TestReverseIteration());
 
   std::cout << "Testing with Image< float, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<float> TesterF(10.0);
-  if (TesterF.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterF.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterF.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterF.TestIterator());
+  EXPECT_TRUE(TesterF.TestConstIterator());
+  EXPECT_TRUE(TesterF.TestReverseIteration());
 
   std::cout << "Testing with Image< double, 3 > " << std::endl;
   itkImageIteratorWithIndexTestIteratorTester<double> TesterD(10.0);
-  if (TesterD.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterD.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterD.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterD.TestIterator());
+  EXPECT_TRUE(TesterD.TestConstIterator());
+  EXPECT_TRUE(TesterD.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<int8_t,4>, 3 > " << std::endl;
   using VC = itk::Vector<int8_t, 4>;
   auto                                            vc = itk::MakeFilled<VC>(127);
   itkImageIteratorWithIndexTestIteratorTester<VC> TesterVC(vc);
-  if (TesterVC.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVC.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVC.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterVC.TestIterator());
+  EXPECT_TRUE(TesterVC.TestConstIterator());
+  EXPECT_TRUE(TesterVC.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<unsigned char,4>, 3 > " << std::endl;
   using VUC = itk::Vector<unsigned char, 4>;
   auto                                             vuc = itk::MakeFilled<VUC>(10);
   itkImageIteratorWithIndexTestIteratorTester<VUC> TesterVUC(vuc);
-  if (TesterVUC.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVUC.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVUC.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterVUC.TestIterator());
+  EXPECT_TRUE(TesterVUC.TestConstIterator());
+  EXPECT_TRUE(TesterVUC.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<short,4>, 3 > " << std::endl;
   using VS = itk::Vector<short, 4>;
   auto                                            vs = itk::MakeFilled<VS>(10);
   itkImageIteratorWithIndexTestIteratorTester<VS> TesterVS(vs);
-  if (TesterVS.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVS.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVS.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterVS.TestIterator());
+  EXPECT_TRUE(TesterVS.TestConstIterator());
+  EXPECT_TRUE(TesterVS.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<unsigned short,4>, 3 > " << std::endl;
   using VUS = itk::Vector<unsigned short, 4>;
   auto                                             vus = itk::MakeFilled<VUS>(10);
   itkImageIteratorWithIndexTestIteratorTester<VUS> TesterVUS(vus);
-  if (TesterVUS.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVUS.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVUS.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterVUS.TestIterator());
+  EXPECT_TRUE(TesterVUS.TestConstIterator());
+  EXPECT_TRUE(TesterVUS.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<int,4>, 3 > " << std::endl;
   using VI = itk::Vector<int, 4>;
   auto                                            vi = itk::MakeFilled<VI>(10);
   itkImageIteratorWithIndexTestIteratorTester<VI> TesterVI(vi);
-  if (TesterVI.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVI.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVI.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterVI.TestIterator());
+  EXPECT_TRUE(TesterVI.TestConstIterator());
+  EXPECT_TRUE(TesterVI.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<unsigned int,4>, 3 > " << std::endl;
   using VUI = itk::Vector<unsigned int, 4>;
   auto                                             vui = itk::MakeFilled<VUI>(10);
   itkImageIteratorWithIndexTestIteratorTester<VUI> TesterVUI(vui);
-  if (TesterVUI.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVUI.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVUI.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterVUI.TestIterator());
+  EXPECT_TRUE(TesterVUI.TestConstIterator());
+  EXPECT_TRUE(TesterVUI.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<float,4>, 3 > " << std::endl;
   using VF = itk::Vector<float, 4>;
   auto                                            vf = itk::MakeFilled<VF>(10);
   itkImageIteratorWithIndexTestIteratorTester<VF> TesterVF(vf);
-  if (TesterVF.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVF.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVF.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
+  EXPECT_TRUE(TesterVF.TestIterator());
+  EXPECT_TRUE(TesterVF.TestConstIterator());
+  EXPECT_TRUE(TesterVF.TestReverseIteration());
 
   std::cout << "Testing with Image< itk::Vector<double,4>, 3 > " << std::endl;
   using VD = itk::Vector<double, 4>;
   auto                                            vd = itk::MakeFilled<VD>(10);
   itkImageIteratorWithIndexTestIteratorTester<VD> TesterVD(vd);
-  if (TesterVD.TestIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVD.TestConstIterator() == false)
-  {
-    testPassed = false;
-  }
-  if (TesterVD.TestReverseIteration() == false)
-  {
-    testPassed = false;
-  }
-
-  if (!testPassed)
-  {
-    std::cout << "Failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Success" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(TesterVD.TestIterator());
+  EXPECT_TRUE(TesterVD.TestConstIterator());
+  EXPECT_TRUE(TesterVD.TestReverseIteration());
 }
