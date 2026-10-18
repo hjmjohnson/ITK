@@ -19,7 +19,10 @@
 #include "itkEigenAnalysis2DImageFilter.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <unsigned int myDimension = 2,
           typename TComputeType = double,
           typename myVectorType = itk::Vector<TComputeType, myDimension>>
@@ -119,7 +122,7 @@ class EigenAnalysis2DImageFilterTester
   }
 
 public:
-  int
+  void
   Run()
   {
     // Create the images
@@ -157,34 +160,32 @@ public:
     PrintImage(maxEigenVector, "Max Eigen Vector");
 
     // All objects should be automatically destroyed at this point
-    return EXIT_SUCCESS;
   }
 };
+} // namespace
 
-int
-itkEigenAnalysis2DImageFilterTest(int, char *[])
+TEST(EigenAnalysis2DImageFilter, ConvertedLegacyTest)
 {
-  int status = EXIT_SUCCESS;
   {
     using myComputeType = double;
     constexpr unsigned int myDimension{ 2 };
     using myVectorType = itk::Vector<myComputeType, 2>;
     auto t1 = EigenAnalysis2DImageFilterTester<myDimension, myComputeType, myVectorType>();
-    status |= t1.Run();
+    t1.Run();
   }
   {
     using myComputeType = float;
     constexpr unsigned int myDimension{ 2 };
     using myVectorType = itk::Vector<myComputeType, 2>;
     auto t1 = EigenAnalysis2DImageFilterTester<myDimension, myComputeType, myVectorType>();
-    status |= t1.Run();
+    t1.Run();
   }
   {
     using myComputeType = float;
     constexpr unsigned int myDimension{ 3 };
     using myVectorType = itk::Vector<myComputeType, 2>;
     auto t1 = EigenAnalysis2DImageFilterTester<myDimension, myComputeType, myVectorType>();
-    status |= t1.Run();
+    t1.Run();
   }
   /* The two test below should cause compilation errors.
   {
@@ -193,7 +194,7 @@ itkEigenAnalysis2DImageFilterTest(int, char *[])
     <-- ******* error: static assertion failed: Error: PixelType of EigenVector Image must have exactly 2 elements!
     using myVectorType = itk::Vector<myComputeType, 3>;
     auto t1 = EigenAnalysis2DImageFilterTester<myDimension, myComputeType, myVectorType>();
-    status |= t1.Run();
+    t1.Run();
   }
   {
     using myComputeType = float;
@@ -201,8 +202,7 @@ itkEigenAnalysis2DImageFilterTest(int, char *[])
     using myVectorType = std::array<myComputeType, 2>;
     <-- ******* error: no type named ‘ValueType’ in ‘using PixelType = struct std::array<float, 2>
     auto t1 = EigenAnalysis2DImageFilterTester<myDimension, myComputeType, myVectorType>();
-    status |= t1.Run();
+    t1.Run();
   }
   */
-  return status;
 }
