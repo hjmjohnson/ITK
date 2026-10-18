@@ -20,17 +20,20 @@
 #include "itkParticleSwarmOptimizer.h"
 #include "itkParticleSwarmOptimizerTestFunctions.h"
 #include "itkMersenneTwisterRandomVariateGenerator.h"
+#include "itkGTest.h"
 
 using OptimizerType = itk::ParticleSwarmOptimizer;
 static OptimizerType::RandomVariateGeneratorType::IntegerType seedOffset = 0;
 
+namespace
+{
 /**
  * Test using a 1D function with two minima, two parabolas. Check that the
  * optimizer converges to the global minimum if it is initialized inside the
  * domain of either parabolas (runs the optimizer once with initial guess in
  * each of the domains).
  */
-[[nodiscard]] int
+[[nodiscard]] bool
 PSOTest1();
 
 
@@ -38,34 +41,26 @@ PSOTest1();
  * Test using a 2D quadratic function (single minimum), check that converges
  * correctly.
  */
-[[nodiscard]] int
+[[nodiscard]] bool
 PSOTest2();
 
 
 /**
  * Test using the 2D Rosenbrock function.
  */
-[[nodiscard]] int
+[[nodiscard]] bool
 PSOTest3();
 
-namespace
-{
 bool verboseFlag = false;
-}
+} // namespace
 
 /**
  * The particle swarm optimizer is a stochastic algorithm. Consequentially, we run
  * the same test multiple times and deem it a success if the number of successful
  * runs is above a threshold.
  */
-int
-itkParticleSwarmOptimizerTest(int argc, char * argv[])
+TEST(ParticleSwarmOptimizer, ConvertedLegacyTest)
 {
-  if (argc > 1)
-  {
-    verboseFlag = std::stoi(argv[1]) ? true : false;
-  }
-
   constexpr unsigned int allIterations{ 10 };
   constexpr double       threshold{ 0.8 };
   unsigned int           success1{};
@@ -76,15 +71,15 @@ itkParticleSwarmOptimizerTest(int argc, char * argv[])
 
   for (unsigned int i = 0; i < allIterations; ++i)
   {
-    if (EXIT_SUCCESS == PSOTest1())
+    if (PSOTest1())
     {
       success1++;
     }
-    if (EXIT_SUCCESS == PSOTest2())
+    if (PSOTest2())
     {
       success2++;
     }
-    if (EXIT_SUCCESS == PSOTest3())
+    if (PSOTest3())
     {
       success3++;
     }
@@ -92,19 +87,15 @@ itkParticleSwarmOptimizerTest(int argc, char * argv[])
 
   std::cout << "All Tests Completed." << std::endl;
 
-  if (static_cast<double>(success1) / static_cast<double>(allIterations) <= threshold ||
-      static_cast<double>(success2) / static_cast<double>(allIterations) <= threshold ||
-      static_cast<double>(success3) / static_cast<double>(allIterations) <= threshold)
-  {
-    std::cout << "[FAILURE]\n";
-    return EXIT_FAILURE;
-  }
-  std::cout << "[SUCCESS]" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_GT(static_cast<double>(success1) / static_cast<double>(allIterations), threshold);
+  EXPECT_GT(static_cast<double>(success2) / static_cast<double>(allIterations), threshold);
+  EXPECT_GT(static_cast<double>(success3) / static_cast<double>(allIterations), threshold);
 }
 
 
-[[nodiscard]] int
+namespace
+{
+[[nodiscard]] bool
 PSOTest1()
 {
   std::cout << "Particle Swarm Optimizer Test 1 [f(x) = if(x<0) x^2+4x; else 2x^2-8x]\n";
@@ -160,7 +151,7 @@ PSOTest1()
     if (itk::Math::Absolute(finalParameters[0] - knownParameters) > xTolerance)
     {
       std::cout << "[Test 1 FAILURE]" << std::endl;
-      return EXIT_FAILURE;
+      return false;
     }
     // run optimization again with a different initial value
     initialParameters[0] = 9;
@@ -184,7 +175,7 @@ PSOTest1()
     if (itk::Math::Absolute(finalParameters[0] - knownParameters) > xTolerance)
     {
       std::cout << "[Test 1 FAILURE]" << std::endl;
-      return EXIT_FAILURE;
+      return false;
     }
   }
   catch (const itk::ExceptionObject & e)
@@ -194,14 +185,14 @@ PSOTest1()
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   }
   std::cout << "[Test 1 SUCCESS]" << std::endl;
-  return EXIT_SUCCESS;
+  return true;
 }
 
 
-[[nodiscard]] int
+[[nodiscard]] bool
 PSOTest2()
 {
   std::cout << "Particle Swarm Optimizer Test 2 [f(x) = 1/2 x^T A x - b^T x]\n";
@@ -260,7 +251,7 @@ PSOTest2()
         itk::Math::Absolute(finalParameters[1] - knownParameters[1]) > xTolerance)
     {
       std::cout << "[Test 2 FAILURE]" << std::endl;
-      return EXIT_FAILURE;
+      return false;
     }
   }
   catch (const itk::ExceptionObject & e)
@@ -270,14 +261,14 @@ PSOTest2()
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   }
   std::cout << "[Test 2 SUCCESS]" << std::endl;
-  return EXIT_SUCCESS;
+  return true;
 }
 
 
-[[nodiscard]] int
+[[nodiscard]] bool
 PSOTest3()
 {
   std::cout << "Particle Swarm Optimizer Test 3 [f(x,y) = (1-x)^2 + 100(y-x^2)^2]\n";
@@ -315,14 +306,14 @@ PSOTest3()
   if (numberOfParticles != itkOptimizer->GetNumberOfParticles())
   {
     std::cerr << "Error in Set/Get methods for NumberOfParticles";
-    return EXIT_FAILURE;
+    return false;
   }
 
   itkOptimizer->SetMaximalNumberOfIterations(maxIterations);
   if (maxIterations != itkOptimizer->GetMaximalNumberOfIterations())
   {
     std::cerr << "Error in Set/Get methods for maxIterations";
-    return EXIT_FAILURE;
+    return false;
   }
 
   constexpr unsigned int numberOfGenerationsWithMinimalImprovement{ 1 };
@@ -330,7 +321,7 @@ PSOTest3()
   if (itkOptimizer->GetNumberOfGenerationsWithMinimalImprovement() != numberOfGenerationsWithMinimalImprovement)
   {
     std::cerr << "Error in Set/Get methods for number of generations allowed with minimal improvement ";
-    return EXIT_FAILURE;
+    return false;
   }
 
   itkOptimizer->SetParametersConvergenceTolerance(xTolerance, costFunction->GetNumberOfParameters());
@@ -339,7 +330,7 @@ PSOTest3()
   if (itk::Math::Absolute(itkOptimizer->GetFunctionConvergenceTolerance() - fTolerance) > tolerance)
   {
     std::cerr << "Error in Set/Get method for FunctionConvergenceTolerance";
-    return EXIT_FAILURE;
+    return false;
   }
   itkOptimizer->SetCostFunction(costFunction);
 
@@ -348,7 +339,7 @@ PSOTest3()
   if (itk::Math::Absolute(itkOptimizer->GetPercentageParticlesConverged() - percentageParticlesConverged) > tolerance)
   {
     std::cerr << "Error in Set/Get methods for percentage particles converged parameter";
-    return EXIT_FAILURE;
+    return false;
   }
 
   constexpr double inertiaCoefficient{ 0.7298 };
@@ -356,7 +347,7 @@ PSOTest3()
   if (itk::Math::Absolute(itkOptimizer->GetInertiaCoefficient() - inertiaCoefficient))
   {
     std::cerr << "Error in Set/Get method for inertia coefficient parameter";
-    return EXIT_FAILURE;
+    return false;
   }
 
   constexpr double personalCoefficient{ 1.496 };
@@ -364,7 +355,7 @@ PSOTest3()
   if (itk::Math::Absolute(itkOptimizer->GetPersonalCoefficient() - personalCoefficient))
   {
     std::cerr << "Error in Set/Get method for personal coefficient parameter";
-    return EXIT_FAILURE;
+    return false;
   }
 
   constexpr double gobalCoefficient{ 1.496 };
@@ -372,7 +363,7 @@ PSOTest3()
   if (itk::Math::Absolute(itkOptimizer->GetGlobalCoefficient() - gobalCoefficient))
   {
     std::cerr << "Error in Set/Get method for global coefficient parameter";
-    return EXIT_FAILURE;
+    return false;
   }
 
   // Exercise the print self method
@@ -405,7 +396,7 @@ PSOTest3()
         itk::Math::Absolute(finalParameters[1] - knownParameters[1]) > xTolerance)
     {
       std::cout << "[Test 3 FAILURE]" << std::endl;
-      return EXIT_FAILURE;
+      return false;
     }
 
     // initial position near known minimum (1,1) - for PSO this
@@ -434,7 +425,7 @@ PSOTest3()
         itk::Math::Absolute(finalParameters[1] - knownParameters[1]) > xTolerance)
     {
       std::cout << "[Test 3 FAILURE]" << std::endl;
-      return EXIT_FAILURE;
+      return false;
     }
 
     // initial position near known minimum (1,1) - potentially reduce
@@ -448,7 +439,7 @@ PSOTest3()
     if (!itkOptimizer->GetInitializeNormalDistribution())
     {
       std::cerr << " Error in Set/Get methods for initialize normal distribution ";
-      return EXIT_FAILURE;
+      return false;
     }
 
     // reset the iteration count done by the observer
@@ -470,7 +461,7 @@ PSOTest3()
         itk::Math::Absolute(finalParameters[1] - knownParameters[1]) > xTolerance)
     {
       std::cout << "[Test 3 FAILURE]" << std::endl;
-      return EXIT_FAILURE;
+      return false;
     }
   }
   catch (const itk::ExceptionObject & e)
@@ -480,8 +471,9 @@ PSOTest3()
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   }
   std::cout << "[Test 3 SUCCESS]" << std::endl;
-  return EXIT_SUCCESS;
+  return true;
 }
+} // namespace
