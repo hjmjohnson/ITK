@@ -23,9 +23,9 @@
 #include "itkImageRegionIterator.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include <ctime>
+#include "itkGTest.h"
 
-int
-itkIteratorTests(int, char *[])
+TEST(Iterators, ConvertedLegacyTest)
 {
   std::cout << "Creating an image" << std::endl;
   using ScalarImage = itk::Image<unsigned short, 3>;
@@ -56,7 +56,6 @@ itkIteratorTests(int, char *[])
   // extra variables
   constexpr unsigned long num = 190 * 190 * 190;
 
-  bool passed = true;
   // memset
   clock_t          start = clock();
   unsigned short * ptr = o3->GetBufferPointer();
@@ -85,10 +84,7 @@ itkIteratorTests(int, char *[])
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 
-    if (i != num)
-    {
-      passed = false;
-    }
+    EXPECT_EQ(i, num);
   }
   // 3 nested loops
   const unsigned long len = 190;
@@ -111,10 +107,7 @@ itkIteratorTests(int, char *[])
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 
-    if (i != num)
-    {
-      passed = false;
-    }
+    EXPECT_EQ(i, num);
   }
   // ImageRegionIterator
   start = clock();
@@ -136,10 +129,7 @@ itkIteratorTests(int, char *[])
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 
-    if (i != num)
-    {
-      passed = false;
-    }
+    EXPECT_EQ(i, num);
   }
   // ImageRegionIteratorWithIndex
   start = clock();
@@ -158,17 +148,6 @@ itkIteratorTests(int, char *[])
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 
-    if (i != num)
-    {
-      passed = false;
-    }
+    EXPECT_EQ(i, num);
   }
-  if (passed)
-  {
-    std::cout << "Iterator tests passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Iterator tests failed" << std::endl;
-  return EXIT_FAILURE;
 }
