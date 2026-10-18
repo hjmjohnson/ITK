@@ -23,10 +23,9 @@
 #include "itkImageFileWriter.h"
 #include "itkSphereSpatialFunction.h"
 #include "itkMersenneTwisterRandomVariateGenerator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkMRIBiasFieldCorrectionFilterTest(int, char *[])
+TEST(MRIBiasFieldCorrectionFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -155,7 +154,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, MRIBiasFieldCorrectionFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, MRIBiasFieldCorrectionFilter, ImageToImageFilter);
 
   // To see the debug output for each iteration, uncomment the
   // following line.
@@ -204,27 +203,27 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   filter->SetOptimizerGrowthFactor(optimizerGrowthFactor);
   filter->SetOptimizerShrinkFactor(optimizerShrinkFactor);
 
-  ITK_TEST_SET_GET_BOOLEAN(filter, BiasFieldMultiplicative, isBiasFieldMultiplicative);
-  ITK_TEST_SET_GET_BOOLEAN(filter, UsingSlabIdentification, usingSlabIdentification);
-  ITK_TEST_SET_GET_BOOLEAN(filter, UsingBiasFieldCorrection, usingBiasFieldCorrection);
-  ITK_TEST_SET_GET_BOOLEAN(filter, GeneratingOutput, generatingOutput);
-  ITK_TEST_SET_GET_VALUE(slabNumberOfSamples, filter->GetSlabNumberOfSamples());
-  ITK_TEST_SET_GET_VALUE(slabBackgroundMinimumThreshold, filter->GetSlabBackgroundMinimumThreshold());
-  ITK_TEST_SET_GET_VALUE(slabTolerance, filter->GetSlabTolerance());
-  ITK_TEST_SET_GET_VALUE(biasDegree, filter->GetBiasFieldDegree());
-  ITK_TEST_SET_GET_VALUE(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
-  ITK_TEST_SET_GET_VALUE(optimizerGrowthFactor, filter->GetOptimizerGrowthFactor());
-  ITK_TEST_SET_GET_VALUE(optimizerShrinkFactor, filter->GetOptimizerShrinkFactor());
-  ITK_TEST_SET_GET_BOOLEAN(filter, UsingInterSliceIntensityCorrection, usingInterSliceIntensityCorrection);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, BiasFieldMultiplicative, isBiasFieldMultiplicative);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UsingSlabIdentification, usingSlabIdentification);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UsingBiasFieldCorrection, usingBiasFieldCorrection);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, GeneratingOutput, generatingOutput);
+  EXPECT_EQ(slabNumberOfSamples, filter->GetSlabNumberOfSamples());
+  EXPECT_EQ(slabBackgroundMinimumThreshold, filter->GetSlabBackgroundMinimumThreshold());
+  EXPECT_EQ(slabTolerance, filter->GetSlabTolerance());
+  EXPECT_EQ(biasDegree, filter->GetBiasFieldDegree());
+  EXPECT_EQ(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
+  EXPECT_EQ(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
+  EXPECT_EQ(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
+  EXPECT_EQ(optimizerGrowthFactor, filter->GetOptimizerGrowthFactor());
+  EXPECT_EQ(optimizerShrinkFactor, filter->GetOptimizerShrinkFactor());
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UsingInterSliceIntensityCorrection, usingInterSliceIntensityCorrection);
 
   filter->SetBiasFieldDegree(biasDegree); // default value = 3
   filter->SetTissueClassStatistics(classMeans, classSigmas);
   // ITK_TEST_SET_GET_VALUE( classMeans, classSigmas, filter->GetTissueClassStatistics() );
 
   filter->SetSlicingDirection(slicingDirection);
-  ITK_TEST_SET_GET_VALUE(slicingDirection, filter->GetSlicingDirection());
+  EXPECT_EQ(slicingDirection, filter->GetSlicingDirection());
 
   filter->SetInitialBiasFieldCoefficients(initCoefficients);
   // ITK_TEST_SET_GET_VALUE( initCoefficients, filter->GetInitialBiasFieldCoefficients() );
@@ -267,20 +266,16 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
 
   std::cout << "Absolute Avg. error without input and output mask = "
             << sumOfError / (imageSize[0] * imageSize[1] * imageSize[2]) << std::endl;
-  if (origSumError < sumOfError)
-  {
-    std::cout << "ERROR: sumOfError: " << sumOfError << " is less than origSumError: " << origSumError << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GE(origSumError, sumOfError);
 
   std::cout << "Computing bias correction with mask" << std::endl;
   filter->SetInput(imageWithBias);
 
   filter->SetInputMask(image);
-  ITK_TEST_SET_GET_VALUE(image, filter->GetInputMask());
+  EXPECT_EQ(image, filter->GetInputMask());
 
   filter->SetOutputMask(image);
-  ITK_TEST_SET_GET_VALUE(image, filter->GetOutputMask());
+  EXPECT_EQ(image, filter->GetOutputMask());
 
   volumeCorrectionMaximumIteration = 200;
   interSliceCorrectionMaximumIteration = 100;
@@ -290,9 +285,9 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   filter->SetInterSliceCorrectionMaximumIteration(interSliceCorrectionMaximumIteration);
   filter->SetOptimizerInitialRadius(optimizerInitialRadius);
 
-  ITK_TEST_SET_GET_VALUE(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
+  EXPECT_EQ(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
+  EXPECT_EQ(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
+  EXPECT_EQ(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
 
   filter->SetInitialBiasFieldCoefficients(initCoefficients);
   // ITK_TEST_SET_GET_VALUE( initCoefficients, filter->GetInitialBiasFieldCoefficients() );
@@ -314,11 +309,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
 
   std::cout << "Absolute Avg. error with input and output mask = "
             << sumOfError / (imageSize[0] * imageSize[1] * imageSize[2]) << std::endl;
-  if (origSumError < sumOfError)
-  {
-    std::cout << "ERROR: sumOfError: " << sumOfError << " is less than origSumError: " << origSumError << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GE(origSumError, sumOfError);
 
   // default schedule is 2 2 2 - 1 1 1, let's change this
   std::cout << "Computing bias correction only with 2,2,2 resolution & no interSlice/Slab" << std::endl;
@@ -334,12 +325,12 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   filter->SetVolumeCorrectionMaximumIteration(volumeCorrectionMaximumIteration);
   filter->SetInterSliceCorrectionMaximumIteration(interSliceCorrectionMaximumIteration);
 
-  ITK_TEST_SET_GET_BOOLEAN(filter, UsingInterSliceIntensityCorrection, usingInterSliceIntensityCorrection);
-  ITK_TEST_SET_GET_BOOLEAN(filter, UsingSlabIdentification, usingSlabIdentification);
-  ITK_TEST_SET_GET_VALUE(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
-  ITK_TEST_SET_GET_VALUE(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UsingInterSliceIntensityCorrection, usingInterSliceIntensityCorrection);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UsingSlabIdentification, usingSlabIdentification);
+  EXPECT_EQ(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
+  EXPECT_EQ(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
+  EXPECT_EQ(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
+  EXPECT_EQ(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
 
   unsigned int numberOfLevels = 1;
 
@@ -351,8 +342,8 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   filter->SetNumberOfLevels(numberOfLevels);
   filter->SetSchedule(schedule);
 
-  ITK_TEST_SET_GET_VALUE(numberOfLevels, filter->GetNumberOfLevels());
-  ITK_TEST_SET_GET_VALUE(schedule, filter->GetSchedule());
+  EXPECT_EQ(numberOfLevels, filter->GetNumberOfLevels());
+  EXPECT_EQ(schedule, filter->GetSchedule());
 
   filter->SetInitialBiasFieldCoefficients(initCoefficients);
   // ITK_TEST_SET_GET_VALUE( initCoefficients, filter->GetInitialBiasFieldCoefficients() );
@@ -374,11 +365,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
 
   std::cout << "Absolute Avg. error with input and output mask = "
             << sumOfError / (imageSize[0] * imageSize[1] * imageSize[2]) << std::endl;
-  if (origSumError < sumOfError)
-  {
-    std::cout << "ERROR: sumOfError: " << sumOfError << " is less than origSumError: " << origSumError << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GE(origSumError, sumOfError);
 
   std::cout << "Computing bias correction only with 4,4,4 resolution & no interSlice/Slab" << std::endl;
 
@@ -400,13 +387,13 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   filter->SetNumberOfLevels(numberOfLevels);
   filter->SetSchedule(schedule);
 
-  ITK_TEST_SET_GET_BOOLEAN(filter, UsingInterSliceIntensityCorrection, usingInterSliceIntensityCorrection);
-  ITK_TEST_SET_GET_BOOLEAN(filter, UsingSlabIdentification, usingSlabIdentification);
-  ITK_TEST_SET_GET_VALUE(numberOfLevels, filter->GetNumberOfLevels());
-  ITK_TEST_SET_GET_VALUE(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
-  ITK_TEST_SET_GET_VALUE(schedule, filter->GetSchedule());
-  ITK_TEST_SET_GET_VALUE(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UsingInterSliceIntensityCorrection, usingInterSliceIntensityCorrection);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UsingSlabIdentification, usingSlabIdentification);
+  EXPECT_EQ(numberOfLevels, filter->GetNumberOfLevels());
+  EXPECT_EQ(optimizerInitialRadius, filter->GetOptimizerInitialRadius());
+  EXPECT_EQ(schedule, filter->GetSchedule());
+  EXPECT_EQ(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
+  EXPECT_EQ(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
 
   filter->SetInitialBiasFieldCoefficients(initCoefficients);
   // ITK_TEST_SET_GET_VALUE( initCoefficients, filter->GetInitialBiasFieldCoefficients() );
@@ -428,11 +415,7 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
 
   std::cout << "Absolute Avg. error with input and output mask = "
             << sumOfError / (imageSize[0] * imageSize[1] * imageSize[2]) << std::endl;
-  if (origSumError < sumOfError)
-  {
-    std::cout << "ERROR: sumOfError: " << sumOfError << " is less than origSumError: " << origSumError << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GE(origSumError, sumOfError);
 
   std::cout << "Computing bias correction only with 4,4,4 resolution & no interSlice/Slab & more iterations"
             << std::endl;
@@ -445,8 +428,8 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
   filter->SetVolumeCorrectionMaximumIteration(volumeCorrectionMaximumIteration);
   filter->SetInterSliceCorrectionMaximumIteration(interSliceCorrectionMaximumIteration);
 
-  ITK_TEST_SET_GET_VALUE(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
-  ITK_TEST_SET_GET_VALUE(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
+  EXPECT_EQ(volumeCorrectionMaximumIteration, filter->GetVolumeCorrectionMaximumIteration());
+  EXPECT_EQ(interSliceCorrectionMaximumIteration, filter->GetInterSliceCorrectionMaximumIteration());
 
   filter->SetInitialBiasFieldCoefficients(initCoefficients);
   // ITK_TEST_SET_GET_VALUE( initCoefficients, filter->GetInitialBiasFieldCoefficients() );
@@ -468,12 +451,5 @@ itkMRIBiasFieldCorrectionFilterTest(int, char *[])
 
   std::cout << "Absolute Avg. error with input and output mask = "
             << sumOfErrorFinal / (imageSize[0] * imageSize[1] * imageSize[2]) << std::endl;
-  if (sumOfError < sumOfErrorFinal)
-  {
-    std::cout << "ERROR: sumOfError: " << sumOfError << " is less than sumOfErrorFinal: " << sumOfErrorFinal
-              << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_GE(sumOfError, sumOfErrorFinal);
 }
