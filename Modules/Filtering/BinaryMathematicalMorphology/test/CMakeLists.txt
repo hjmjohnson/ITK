@@ -8,7 +8,6 @@ set(
   itkBinaryMorphologicalOpeningImageFilterTest.cxx
   itkBinaryOpeningByReconstructionImageFilterTest.cxx
   itkBinaryThinningImageFilterTest.cxx
-  itkErodeObjectMorphologyImageFilterTest.cxx
   itkFastIncrementalBinaryDilateImageFilterTest.cxx
 )
 
@@ -16,12 +15,6 @@ createtestdriver(ITKBinaryMathematicalMorphology "${ITKBinaryMathematicalMorphol
                  "${ITKBinaryMathematicalMorphologyTests}"
 )
 
-itk_add_test(
-  NAME itkErodeObjectMorphologyImageFilterTest
-  COMMAND
-    ITKBinaryMathematicalMorphologyTestDriver
-    itkErodeObjectMorphologyImageFilterTest
-)
 itk_add_test(
   NAME itkBinaryClosingByReconstructionImageFilterTest
   COMMAND
@@ -399,5 +392,6 @@ set(
   ITKBinaryMathematicalMorphologyGTests
   itkBinaryDilateImageFilterGTest.cxx
   itkBinaryErodeImageFilterGTest.cxx
+  itkErodeObjectMorphologyImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKBinaryMathematicalMorphology "${ITKBinaryMathematicalMorphology-Test_LIBRARIES}" "${ITKBinaryMathematicalMorphologyGTests}")
