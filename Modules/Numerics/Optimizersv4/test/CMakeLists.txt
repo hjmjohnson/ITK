@@ -4,7 +4,6 @@ set(
   itkAutoScaledGradientDescentRegistrationOnVectorTest.cxx
   itkAutoScaledGradientDescentRegistrationTest.cxx
   itkMultiGradientOptimizerv4Test.cxx
-  itkMultiStartOptimizerv4Test.cxx
   itkObjectToObjectMetricBaseTest.cxx
   itkObjectToObjectOptimizerBaseTest.cxx
   itkOnePlusOneEvolutionaryOptimizerv4Test.cxx
@@ -39,6 +38,7 @@ set(
   itkLBFGSBOptimizerv4GTest.cxx
   itkLBFGSOptimizerv4GTest.cxx
   itkMultiGradientOptimizerv4GTest.cxx
+  itkMultiStartOptimizerv4GTest.cxx
   itkWindowConvergenceMonitoringFunctionGTest.cxx
 )
 creategoogletestdriver(ITKOptimizersv4 "${ITKOptimizersv4-Test_LIBRARIES}" "${ITKOptimizersv4GTests}")
@@ -48,13 +48,6 @@ itk_add_test(
   COMMAND
     ITKOptimizersv4TestDriver
     itkObjectToObjectOptimizerBaseTest
-)
-
-itk_add_test(
-  NAME itkMultiStartOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkMultiStartOptimizerv4Test
 )
 
 itk_add_test(
