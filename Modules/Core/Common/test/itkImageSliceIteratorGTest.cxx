@@ -16,12 +16,12 @@
  *
  *=========================================================================*/
 
+#include "itkImageSliceIteratorWithIndex.h"
 #include <iostream>
 
-#include "itkImageSliceIteratorWithIndex.h"
+#include "itkGTest.h"
 
-int
-itkImageSliceIteratorTest(int, char *[])
+TEST(ImageSliceIterator, ConvertedLegacyTest)
 {
   std::cout << "Creating an image of indices" << std::endl;
 
@@ -86,15 +86,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!ot.IsAtEndOfLine())
         {
           index = ot.GetIndex();
-          if (ot.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << std::endl;
-            std::cerr << "It should be ";
-            std::cerr << ot.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(ot.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           ++ot;
         }
         ot.NextLine();
@@ -119,15 +111,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!cot.IsAtEndOfLine())
         {
           index = cot.GetIndex();
-          if (cot.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << std::endl;
-            std::cerr << "It should be ";
-            std::cerr << cot.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(cot.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           ++cot;
         }
         cot.NextLine();
@@ -152,13 +136,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!ior.IsAtReverseEndOfLine())
         {
           index = ior.GetIndex();
-          if (ior.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << " value is " << ior.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(ior.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           --ior;
         }
         ior.PreviousLine();
@@ -184,13 +162,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!cor.IsAtReverseEndOfLine())
         {
           index = cor.GetIndex();
-          if (cor.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << " value is " << cor.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(cor.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           --cor;
         }
         cor.PreviousLine();
@@ -228,15 +200,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!ot.IsAtEndOfLine())
         {
           index = ot.GetIndex();
-          if (ot.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << std::endl;
-            std::cerr << "It should be ";
-            std::cerr << ot.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(ot.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           ++ot;
         }
         ot.NextLine();
@@ -261,15 +225,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!cot.IsAtEndOfLine())
         {
           index = cot.GetIndex();
-          if (cot.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << std::endl;
-            std::cerr << "It should be ";
-            std::cerr << cot.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(cot.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           ++cot;
         }
         cot.NextLine();
@@ -294,13 +250,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!ior.IsAtReverseEndOfLine())
         {
           index = ior.GetIndex();
-          if (ior.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << " value is " << ior.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(ior.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           --ior;
         }
         ior.PreviousLine();
@@ -326,13 +276,7 @@ itkImageSliceIteratorTest(int, char *[])
         while (!cor.IsAtReverseEndOfLine())
         {
           index = cor.GetIndex();
-          if (cor.Get() != index)
-          {
-            std::cerr << "Values don't correspond to what was stored " << std::endl;
-            std::cerr << "Test failed at index ";
-            std::cerr << index << " value is " << cor.Get() << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(cor.Get(), index) << "Values don't correspond to what was stored. Test failed at index " << index;
           --cor;
         }
         cor.PreviousLine();
@@ -343,6 +287,4 @@ itkImageSliceIteratorTest(int, char *[])
   }
 
   std::cout << "Test passed" << std::endl;
-
-  return EXIT_SUCCESS;
 }
