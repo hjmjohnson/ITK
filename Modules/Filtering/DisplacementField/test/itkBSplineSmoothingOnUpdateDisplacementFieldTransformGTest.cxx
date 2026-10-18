@@ -19,7 +19,7 @@
 
 #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  * Test the UpdateTransformParameters and related methods,
@@ -28,8 +28,7 @@
  * TODO: Create a more complete numerical test for the smoothing.
  */
 
-int
-itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
+TEST(BSplineSmoothingOnUpdateDisplacementFieldTransform, ConvertedLegacyTest)
 {
 
   constexpr unsigned int dimensions{ 2 };
@@ -38,17 +37,17 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
   /* Create a displacement field transform */
   auto displacementTransform = DisplacementTransformType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     displacementTransform, BSplineSmoothingOnUpdateDisplacementFieldTransform, DisplacementFieldTransform);
 
 
   constexpr DisplacementTransformType::ArrayType::ValueType controlPointsUpdateFieldVal = 4;
   auto controlPointsUpdateField = itk::MakeFilled<DisplacementTransformType::ArrayType>(controlPointsUpdateFieldVal);
-  ITK_TEST_SET_GET_VALUE(controlPointsUpdateField, displacementTransform->GetNumberOfControlPointsForTheUpdateField());
+  EXPECT_EQ(controlPointsUpdateField, displacementTransform->GetNumberOfControlPointsForTheUpdateField());
 
   constexpr DisplacementTransformType::ArrayType::ValueType controlPointsTotalFieldVal = 0;
   auto controlPointsTotalField = itk::MakeFilled<DisplacementTransformType::ArrayType>(controlPointsTotalFieldVal);
-  ITK_TEST_SET_GET_VALUE(controlPointsTotalField, displacementTransform->GetNumberOfControlPointsForTheTotalField());
+  EXPECT_EQ(controlPointsTotalField, displacementTransform->GetNumberOfControlPointsForTheTotalField());
 
   using FieldType = DisplacementTransformType::DisplacementFieldType;
   auto field = FieldType::New(); // This is based on itk::Image
@@ -83,10 +82,10 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
 
   constexpr DisplacementTransformType::SplineOrderType splineOrder = 3;
   displacementTransform->SetSplineOrder(splineOrder);
-  ITK_TEST_SET_GET_VALUE(splineOrder, displacementTransform->GetSplineOrder());
+  EXPECT_EQ(splineOrder, displacementTransform->GetSplineOrder());
 
   auto enforceStationaryBoundary = true;
-  ITK_TEST_SET_GET_BOOLEAN(displacementTransform, EnforceStationaryBoundary, enforceStationaryBoundary);
+  ITK_GTEST_SET_GET_BOOLEAN(displacementTransform, EnforceStationaryBoundary, enforceStationaryBoundary);
 
   displacementTransform->SetParameters(paramsFill);
 
@@ -119,13 +118,7 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
       ok = false;
     }
 
-    if (!ok)
-    {
-      std::cout << "0-valued boundaries not found when expected "
-                << "after smoothing." << std::endl;
-      std::cout << "params: " << std::endl << params << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(ok);
   }
 
   /* Check that we have some smoothing around the outlier we set above. */
@@ -138,12 +131,7 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
     {
       const unsigned int index = outlier + static_cast<unsigned int>(i * static_cast<int>(dimLength * dimensions) + j);
       std::cout << params(index) << ' ';
-      if (itk::Math::AlmostEquals(params(index), paramsFillValue))
-      {
-        std::cout << "Expected to read a smoothed value at this index."
-                  << " Instead, read " << params(index) << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FALSE(itk::Math::AlmostEquals(params(index), paramsFillValue));
     }
     std::cout << std::endl;
   }
@@ -180,13 +168,7 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
         ok = false;
       }
 
-      if (!ok)
-      {
-        std::cout << "0-valued boundaries not found when expected "
-                  << "after UpdateTransformParameters:" << std::endl;
-        std::cout << "params: " << std::endl << params << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(ok);
     }
   }
 
@@ -209,15 +191,8 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
     {
       const unsigned int index = outlier + static_cast<unsigned int>(i * static_cast<int>(dimLength * dimensions) + j);
       std::cout << params(index) << ' ';
-      if (itk::Math::AlmostEquals(params(index), paramsFillValue))
-      {
-        std::cout << "Expected to read a smoothed value at this index."
-                  << " Instead, read " << params(index) << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FALSE(itk::Math::AlmostEquals(params(index), paramsFillValue));
     }
     std::cout << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
