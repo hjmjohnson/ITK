@@ -72,9 +72,11 @@ IPLCommonImageIO::GetComponentSize() const
 void
 IPLCommonImageIO::Read(void * buffer)
 {
-  auto * img_buffer = static_cast<short *>(buffer);
-  auto   it = m_FilenameList->begin();
-  auto   itend = m_FilenameList->end();
+  auto *              img_buffer = static_cast<short *>(buffer);
+  auto                it = m_FilenameList->begin();
+  auto                itend = m_FilenameList->end();
+  const SizeValueType pixelsPerSlice =
+    static_cast<SizeValueType>(m_FilenameList->GetXDim()) * static_cast<SizeValueType>(m_FilenameList->GetYDim());
 
   for (; it != itend; ++it)
   {
@@ -83,7 +85,7 @@ IPLCommonImageIO::Read(void * buffer)
     this->OpenFileForReading(f, curfilename);
 
     f.seekg((*it)->GetSliceOffset(), std::ios::beg);
-    if (!this->ReadBufferAsBinary(f, img_buffer, m_FilenameList->GetXDim() * m_FilenameList->GetYDim() * sizeof(short)))
+    if (!this->ReadBufferAsBinary(f, img_buffer, pixelsPerSlice * sizeof(short)))
     {
       f.close();
       RAISE_EXCEPTION();
@@ -93,9 +95,8 @@ IPLCommonImageIO::Read(void * buffer)
     // the FILE endian-ness, not as the name would lead you to believe.
     // So, on LittleEndian systems, SwapFromSystemToBigEndian will swap.
     // On BigEndian systems, SwapFromSystemToBigEndian will do nothing.
-    itk::ByteSwapper<short>::SwapRangeFromSystemToBigEndian(img_buffer,
-                                                            m_FilenameList->GetXDim() * m_FilenameList->GetYDim());
-    img_buffer += m_FilenameList->GetXDim() * m_FilenameList->GetYDim();
+    itk::ByteSwapper<short>::SwapRangeFromSystemToBigEndian(img_buffer, pixelsPerSlice);
+    img_buffer += pixelsPerSlice;
   }
 }
 
