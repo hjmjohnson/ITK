@@ -16,16 +16,15 @@
  *
  *=========================================================================*/
 
+#include "itkImageDuplicator.h"
 #include <iostream>
 #include "itkMath.h"
-#include "itkImageDuplicator.h"
 #include "itkRGBPixel.h"
 #include "itkVectorImage.h"
 #include "itkShiftScaleImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkImageDuplicatorTest(int, char *[])
+TEST(ImageDuplicator, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<float, 3>;
   constexpr ImageType::SizeType size{ 10, 20, 30 };
@@ -61,7 +60,7 @@ itkImageDuplicatorTest(int, char *[])
     using DuplicatorType = itk::ImageDuplicator<ImageType>;
     auto duplicator = DuplicatorType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(duplicator, ImageDuplicator, Object);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(duplicator, ImageDuplicator, Object);
 
 
     duplicator->SetInputImage(shift->GetOutput());
@@ -75,11 +74,7 @@ itkImageDuplicatorTest(int, char *[])
     i = 0;
     while (!it2.IsAtEnd())
     {
-      if (itk::Math::NotAlmostEquals(it2.Get(), i))
-      {
-        std::cout << "Error: Pixel value mismatched: " << it2.Get() << " vs. " << i << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FLOAT_EQ(it2.Get(), i) << "Error: Pixel value mismatched";
       i++;
       ++it2;
     }
@@ -98,11 +93,7 @@ itkImageDuplicatorTest(int, char *[])
     i = 0;
     while (!it2b.IsAtEnd())
     {
-      if (itk::Math::NotAlmostEquals(it2b.Get(), i + 1))
-      {
-        std::cout << "Error: Pixel value mismatched: " << it2b.Get() << " vs. " << i + 1 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FLOAT_EQ(it2b.Get(), i + 1) << "Error: Pixel value mismatched";
       i++;
       ++it2b;
     }
@@ -120,11 +111,7 @@ itkImageDuplicatorTest(int, char *[])
     i = 0;
     while (!it2c.IsAtEnd())
     {
-      if (itk::Math::NotAlmostEquals(it2c.Get(), i + 1))
-      {
-        std::cout << "Error: Pixel value mismatched: " << it2c.Get() << " vs. " << i + 1 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FLOAT_EQ(it2c.Get(), i + 1) << "Error: Pixel value mismatched";
       i++;
       ++it2c;
     }
@@ -197,24 +184,9 @@ itkImageDuplicatorTest(int, char *[])
     {
 
       const itk::RGBPixel<unsigned char> pixel = it4.Get();
-      if (pixel.GetRed() != r)
-      {
-        std::cout << "Error: Pixel R value mismatched: " << static_cast<float>(pixel.GetRed()) << " vs. "
-                  << static_cast<float>(r) << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (pixel.GetGreen() != g)
-      {
-        std::cout << "Error: Pixel G value mismatched: " << static_cast<float>(pixel.GetGreen()) << " vs. "
-                  << static_cast<float>(g) << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (pixel.GetBlue() != b)
-      {
-        std::cout << "Error: Pixel B value mismatched: " << static_cast<float>(pixel.GetBlue()) << " vs. "
-                  << static_cast<float>(b) << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(pixel.GetRed(), r) << "Error: Pixel R value mismatched";
+      EXPECT_EQ(pixel.GetGreen(), g) << "Error: Pixel G value mismatched";
+      EXPECT_EQ(pixel.GetBlue(), b) << "Error: Pixel B value mismatched";
       r++;
       if (r == 255)
       {
@@ -272,10 +244,7 @@ itkImageDuplicatorTest(int, char *[])
     {
       const itk::VariableLengthVector<PixelType> pixel4 = it4.Get();
       const itk::VariableLengthVector<PixelType> pixel3 = it3.Get();
-      if (pixel4 != pixel3)
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(pixel4, pixel3);
       ++it4;
       ++it3;
     }
@@ -285,5 +254,4 @@ itkImageDuplicatorTest(int, char *[])
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
