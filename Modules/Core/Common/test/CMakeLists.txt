@@ -8,7 +8,6 @@ set(
   itkGaussianSpatialFunctionTest.cxx
   itkImageDuplicatorTest2.cxx
   itkImageRandomIteratorTest2.cxx
-  itkImageRegionIteratorTest.cxx
   itkImageRegionTest.cxx
   itkImageReverseIteratorTest.cxx
   itkImageScanlineIteratorTest1.cxx
@@ -353,12 +352,6 @@ itk_add_test(
     itkGaussianSpatialFunctionTest
     19.0
     1
-)
-itk_add_test(
-  NAME itkImageRegionIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageRegionIteratorTest
 )
 itk_add_test(
   NAME itkImageScanlineIteratorTest1
@@ -1364,6 +1357,7 @@ set(
   itkImageRegionExclusionIteratorWithIndexGTest.cxx
   itkImageRegionExplicitGTest.cxx
   itkImageRegionGTest.cxx
+  itkImageRegionIteratorGTest.cxx
   itkImageRegionRangeGTest.cxx
   itkImageTransformGTest.cxx
   itkImageVectorOptimizerParametersHelperGTest.cxx
