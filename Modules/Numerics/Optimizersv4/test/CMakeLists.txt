@@ -3,7 +3,6 @@ set(
   ITKOptimizersv4Tests
   itkAutoScaledGradientDescentRegistrationOnVectorTest.cxx
   itkAutoScaledGradientDescentRegistrationTest.cxx
-  itkGradientDescentOptimizerv4Test.cxx
   itkGradientDescentOptimizerv4Test2.cxx
   itkLBFGS2Optimizerv4Test.cxx
   itkLBFGSBOptimizerv4Test.cxx
@@ -37,6 +36,7 @@ set(
   itkExhaustiveOptimizerv4GTest.cxx
   itkGradientDescentLineSearchOptimizerv4GTest.cxx
   itkGradientDescentOptimizerBasev4GTest.cxx
+  itkGradientDescentOptimizerv4GTest.cxx
   itkGradientDescentOptimizerv4ObserverGTest.cxx
   itkMultiGradientOptimizerv4GTest.cxx
   itkWindowConvergenceMonitoringFunctionGTest.cxx
@@ -48,13 +48,6 @@ itk_add_test(
   COMMAND
     ITKOptimizersv4TestDriver
     itkObjectToObjectOptimizerBaseTest
-)
-
-itk_add_test(
-  NAME itkGradientDescentOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkGradientDescentOptimizerv4Test
 )
 
 itk_add_test(
