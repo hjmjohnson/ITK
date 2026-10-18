@@ -97,7 +97,6 @@ set(
   itkVNLRoundProfileTest1.cxx
   itkMemoryProbesCollecterBaseTest.cxx
   itkImageAlgorithmCopyTest.cxx
-  itkDataObjectAndProcessObjectTest.cxx
   itkOptimizerParametersTest.cxx
   itkImageRegionConstIteratorWithOnlyIndexTest.cxx
   itkImageRandomConstIteratorWithOnlyIndexTest.cxx
@@ -1245,12 +1244,6 @@ itk_add_test(
     ${CMAKE_BINARY_DIR}
 )
 itk_add_test(
-  NAME itkDataObjectAndProcessObjectTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkDataObjectAndProcessObjectTest
-)
-itk_add_test(
   NAME itkImageRegionConstIteratorWithOnlyIndexTest
   COMMAND
     ITKCommon2TestDriver
@@ -1423,6 +1416,7 @@ set(
   itkCopyGTest.cxx
   itkCovariantVectorGTest.cxx
   itkCrossHelperGTest.cxx
+  itkDataObjectAndProcessObjectGTest.cxx
   itkDataTypeGTest.cxx
   itkDecoratorGTest.cxx
   itkDerefGTest.cxx
