@@ -16,7 +16,7 @@
  *
  *=========================================================================*/
 #include "itkConjugateGradientLineSearchOptimizerv4.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  *  \class ConjugateGradientLineSearchOptimizerv4TestMetric for test
@@ -35,6 +35,8 @@
  *   the solution is the vector | 2 -2 |
  *
  */
+namespace
+{
 class ConjugateGradientLineSearchOptimizerv4TestMetric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -157,7 +159,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////
-[[nodiscard]] int
+void
 ConjugateGradientLineSearchOptimizerv4RunTest(itk::ConjugateGradientLineSearchOptimizerv4::Pointer & itkOptimizer)
 {
   try
@@ -172,7 +174,7 @@ ConjugateGradientLineSearchOptimizerv4RunTest(itk::ConjugateGradientLineSearchOp
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   using ParametersType = ConjugateGradientLineSearchOptimizerv4TestMetric::ParametersType;
@@ -187,20 +189,12 @@ ConjugateGradientLineSearchOptimizerv4RunTest(itk::ConjugateGradientLineSearchOp
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      std::cerr << "Results do not match: " << std::endl
-                << "expected: " << trueParameters[0] << ", " << trueParameters[1] << std::endl
-                << "returned: " << finalPosition << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 ///////////////////////////////////////////////////////////
-int
-itkConjugateGradientLineSearchOptimizerv4Test(int, char *[])
+TEST(ConjugateGradientLineSearchOptimizerv4, ConvertedLegacyTest)
 {
   std::cout << "Gradient Descent Object Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -234,10 +228,7 @@ itkConjugateGradientLineSearchOptimizerv4Test(int, char *[])
 
   // test the optimization
   std::cout << "Test optimization 1:" << std::endl;
-  if (ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   //
   // test with non-identity scales
@@ -251,10 +242,7 @@ itkConjugateGradientLineSearchOptimizerv4Test(int, char *[])
   itkOptimizer->SetEpsilon(1.e-4);
   itkOptimizer->SetMaximumLineSearchIterations(5);
   metric->SetParameters(initialPosition);
-  if (ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   std::cout << "Test optimization with few linear search iterations:" << std::endl;
   scales.Fill(0.5);
@@ -265,10 +253,7 @@ itkConjugateGradientLineSearchOptimizerv4Test(int, char *[])
   itkOptimizer->SetUpperLimit(1);
   itkOptimizer->SetEpsilon(1.e-4);
   metric->SetParameters(initialPosition);
-  if (ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   // Test repeat runs with the same parameters
   initialPosition[0] = 200;
@@ -290,10 +275,7 @@ itkConjugateGradientLineSearchOptimizerv4Test(int, char *[])
   itkOptimizer->SetNumberOfIterations(50);
 
   std::cout << "Test optimization retest 1 (initial):" << std::endl;
-  if (ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   // Store the first result
   ParametersType firstFinalPosition = itkOptimizer->GetMetric()->GetParameters();
@@ -302,34 +284,15 @@ itkConjugateGradientLineSearchOptimizerv4Test(int, char *[])
 
   // Run the optimizer a second time
   std::cout << "Test optimization 2 (restart with same parameters):" << std::endl;
-  if (ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   // Store the second result
   ParametersType secondFinalPosition = itkOptimizer->GetMetric()->GetParameters();
 
   // Compare results
-  bool identical = true;
   for (unsigned int j = 0; j < spaceDimension; ++j)
   {
-    if (itk::Math::Absolute(firstFinalPosition[j] - secondFinalPosition[j]) > itk::NumericTraits<double>::epsilon())
-    {
-      identical = false;
-    }
-  }
-
-  if (!identical)
-  {
-    std::cerr << "ERROR: Optimizer does not reset properly: results differ runs with same parameters." << std::endl;
-    std::cerr << "First run result: " << firstFinalPosition << std::endl;
-    std::cerr << "Second run result: " << secondFinalPosition << std::endl;
-    return EXIT_FAILURE;
-  }
-  else
-  {
-    std::cout << "SUCCESS: Optimizer produces identical results on restart." << std::endl;
+    EXPECT_NEAR(firstFinalPosition[j], secondFinalPosition[j], itk::NumericTraits<double>::epsilon());
   }
 
   // Exercise various member functions
@@ -345,26 +308,7 @@ itkConjugateGradientLineSearchOptimizerv4Test(int, char *[])
   std::cout << "Stop description   = " << itkOptimizer->GetStopConditionDescription() << std::endl;
 
   auto badOptimizer = OptimizerType::New();
-  bool caught = false;
-  try
-  {
-    badOptimizer->GetCurrentPosition();
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    std::cout << "Caught expected exception!";
-    std::cout << e << std::endl;
-    caught = true;
-  }
-
-  if (!caught)
-  {
-    std::cout << "Failed to catch expected exception! " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_THROW(badOptimizer->GetCurrentPosition(), itk::ExceptionObject);
   std::cout << "Printing self.. " << std::endl;
   std::cout << itkOptimizer << std::endl;
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
