@@ -3,7 +3,6 @@ set(
   ITKOptimizersTests
   itkInitializationBiasedParticleSwarmOptimizerTest.cxx
   itkLevenbergMarquardtOptimizerTest.cxx
-  itkOnePlusOneEvolutionaryOptimizerTest.cxx
   itkOptimizersHierarchyTest.cxx
   itkParticleSwarmOptimizerTest.cxx
   itkPowellOptimizerTest.cxx
@@ -81,12 +80,6 @@ itk_add_test(
     1.49609
     1.49609
 )
-itk_add_test(
-  NAME itkOnePlusOneEvolutionaryOptimizerTest
-  COMMAND
-    ITKOptimizersTestDriver
-    itkOnePlusOneEvolutionaryOptimizerTest
-)
 
 set(
   ITKOptimizersGTests
@@ -99,5 +92,6 @@ set(
   itkLBFGSBOptimizerGTest.cxx
   itkLBFGSOptimizerGTest.cxx
   itkLevenbergMarquardtOptimizerGTest.cxx
+  itkOnePlusOneEvolutionaryOptimizerGTest.cxx
 )
 creategoogletestdriver(ITKOptimizers "${ITKOptimizers-Test_LIBRARIES}" "${ITKOptimizersGTests}")
