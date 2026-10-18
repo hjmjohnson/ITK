@@ -23,7 +23,7 @@
 #include "itkNullImageToImageFilterDriver.hxx"
 #include "itkPermuteAxesImageFilter.h"
 #include "itkStdStreamStateSave.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 static bool
@@ -81,7 +81,7 @@ TestDisplacementJacobianDeterminantValue()
   using FilterType = itk::DisplacementFieldJacobianDeterminantFilter<VectorImageType, float>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, DisplacementFieldJacobianDeterminantFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, DisplacementFieldJacobianDeterminantFilter, ImageToImageFilter);
 
 
   constexpr bool useImageSpacing{ true };
@@ -95,7 +95,7 @@ TestDisplacementJacobianDeterminantValue()
     filter->SetUseImageSpacingOff();
   }
 #endif
-  ITK_TEST_SET_GET_BOOLEAN(filter, UseImageSpacing, useImageSpacing);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UseImageSpacing, useImageSpacing);
 
   filter->SetInput(displacementField);
   filter->Update();
@@ -233,8 +233,7 @@ TestDisplacementJacobianDeterminantValue()
   return testPassed;
 }
 
-int
-itkDisplacementFieldJacobianDeterminantFilterTest(int, char *[])
+TEST(DisplacementFieldJacobianDeterminantFilter, ConvertedLegacyTest)
 {
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
@@ -242,58 +241,43 @@ itkDisplacementFieldJacobianDeterminantFilterTest(int, char *[])
   const itk::StdStreamStateSave coutState(std::cout);
 
   const bool ValueTestPassed = TestDisplacementJacobianDeterminantValue();
-  try
-  {
-    using VectorType = itk::Vector<float, 3>;
-    using VectorImageType = itk::Image<VectorType, 3>;
-    using ScalarVectorImageType = itk::Image<float, 3>;
+  using VectorType = itk::Vector<float, 3>;
+  using VectorImageType = itk::Image<VectorType, 3>;
+  using ScalarVectorImageType = itk::Image<float, 3>;
 
-    // Set up filter
+  // Set up filter
 
-    using FilterType = itk::DisplacementFieldJacobianDeterminantFilter<VectorImageType, float>;
-    auto filter = FilterType::New();
+  using FilterType = itk::DisplacementFieldJacobianDeterminantFilter<VectorImageType, float>;
+  auto filter = FilterType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, DisplacementFieldJacobianDeterminantFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, DisplacementFieldJacobianDeterminantFilter, ImageToImageFilter);
 
 
-    // Run the test
-    itk::Size<3> sz;
-    sz[0] = 100;
-    sz[1] = 100;
-    sz[2] = 100;
-    itk::NullImageToImageFilterDriver<VectorImageType, ScalarVectorImageType> test1;
-    test1.SetImageSize(sz);
-    test1.SetFilter(filter);
-    test1.Execute();
-    filter->Print(std::cout);
+  // Run the test
+  itk::Size<3> sz;
+  sz[0] = 100;
+  sz[1] = 100;
+  sz[2] = 100;
+  itk::NullImageToImageFilterDriver<VectorImageType, ScalarVectorImageType> test1;
+  test1.SetImageSize(sz);
+  test1.SetFilter(filter);
+  EXPECT_NO_THROW(test1.Execute());
+  filter->Print(std::cout);
 
-    // Run the test again with ImageSpacingOn
-    constexpr bool useImageSpacing{ true };
-    ITK_TEST_SET_GET_BOOLEAN(filter, UseImageSpacing, useImageSpacing);
-
-
-    test1.Execute();
-    filter->Print(std::cout);
-
-    // Run the test again with specified weights
-    const typename FilterType::WeightsType weights{ { { 1.0, 2.0, 3.0 } } };
-    filter->SetDerivativeWeights(weights);
-    ITK_TEST_SET_GET_VALUE(weights, filter->GetDerivativeWeights());
-
-    test1.Execute();
-    filter->Print(std::cout);
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    std::cerr << err << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (ValueTestPassed == false)
-  {
-    return EXIT_FAILURE;
-  }
+  // Run the test again with ImageSpacingOn
+  constexpr bool useImageSpacing{ true };
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UseImageSpacing, useImageSpacing);
 
 
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(test1.Execute());
+  filter->Print(std::cout);
+
+  // Run the test again with specified weights
+  const typename FilterType::WeightsType weights{ { { 1.0, 2.0, 3.0 } } };
+  filter->SetDerivativeWeights(weights);
+  EXPECT_EQ(weights, filter->GetDerivativeWeights());
+
+  EXPECT_NO_THROW(test1.Execute());
+  filter->Print(std::cout);
+  EXPECT_TRUE(ValueTestPassed);
 }
