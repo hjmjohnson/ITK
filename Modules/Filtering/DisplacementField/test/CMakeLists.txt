@@ -7,7 +7,6 @@ set(
   itkInvertDisplacementFieldImageFilterTest.cxx
   itkIterativeInverseDisplacementFieldImageFilterTest.cxx
   itkLandmarkDisplacementFieldSourceTest.cxx
-  itkTimeVaryingBSplineVelocityFieldTransformTest.cxx
   itkTimeVaryingVelocityFieldIntegrationImageFilterTest.cxx
   itkTimeVaryingVelocityFieldTransformTest.cxx
   itkTransformToDisplacementFieldFilterTest.cxx
@@ -75,12 +74,6 @@ itk_add_test(
     1.0
     0.0
     100
-)
-itk_add_test(
-  NAME itkTimeVaryingBSplineVelocityFieldTransformTest
-  COMMAND
-    ITKDisplacementFieldTestDriver
-    itkTimeVaryingBSplineVelocityFieldTransformTest
 )
 itk_add_test(
   NAME itkInvertDisplacementFieldImageFilterTest
@@ -157,6 +150,7 @@ set(
   itkGaussianSmoothingOnUpdateDisplacementFieldTransformGTest.cxx
   itkInverseDisplacementFieldImageFilterGTest.cxx
   itkIterativeInverseDisplacementFieldImageFilterGTest.cxx
+  itkTimeVaryingBSplineVelocityFieldTransformGTest.cxx
   itkVelocityFieldTransformGTest.cxx
 )
 creategoogletestdriver(ITKDisplacementField "${ITKDisplacementField-Test_LIBRARIES}" "${ITKDisplacementFieldGTests}")
