@@ -16,7 +16,7 @@
  *
  *=========================================================================*/
 #include "itkGradientDescentOptimizerv4.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /* Cribbed from itkGradientDescentOptimizerTest */
 
@@ -37,6 +37,8 @@
  *   the solution is the vector | 2 -2 |
  *
  */
+namespace
+{
 class GradientDescentOptimizerv4TestMetric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -152,7 +154,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////
-[[nodiscard]] int
+void
 GradientDescentOptimizerv4RunTest(itk::GradientDescentOptimizerv4::Pointer &             itkOptimizer,
                                   GradientDescentOptimizerv4TestMetric::ParametersType & trueParameters)
 {
@@ -168,7 +170,7 @@ GradientDescentOptimizerv4RunTest(itk::GradientDescentOptimizerv4::Pointer &    
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   using ParametersType = GradientDescentOptimizerv4TestMetric::ParametersType;
@@ -183,24 +185,15 @@ GradientDescentOptimizerv4RunTest(itk::GradientDescentOptimizerv4::Pointer &    
   constexpr ParametersType::ValueType eps{ 0.03 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > eps)
-    {
-      std::cerr << "Results do not match: " << std::endl
-                << "expected: " << trueParameters << std::endl
-                << "returned: " << finalPosition << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], eps);
   }
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 ///////////////////////////////////////////////////////////
-int
-itkGradientDescentOptimizerv4Test(int, char *[])
+TEST(GradientDescentOptimizerv4, ConvertedLegacyTest)
 {
   std::cout << "Gradient Descent Object Optimizer Test ";
   std::cout << std::endl << std::endl;
-  int result = EXIT_SUCCESS;
 
   using OptimizerType = itk::GradientDescentOptimizerv4;
 
@@ -209,7 +202,7 @@ itkGradientDescentOptimizerv4Test(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     itkOptimizer, GradientDescentOptimizerv4Template, GradientDescentOptimizerBasev4Template);
 
 
@@ -231,24 +224,24 @@ itkGradientDescentOptimizerv4Test(int, char *[])
 
   constexpr double learningRate{ 0.1 };
   itkOptimizer->SetLearningRate(learningRate);
-  ITK_TEST_SET_GET_VALUE(learningRate, itkOptimizer->GetLearningRate());
+  EXPECT_EQ(learningRate, itkOptimizer->GetLearningRate());
 
   constexpr itk::SizeValueType numberOfIterations{ 50 };
   itkOptimizer->SetNumberOfIterations(numberOfIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, itkOptimizer->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, itkOptimizer->GetNumberOfIterations());
 
   constexpr double maximumStepSizeInPhysicalUnits{ 0.0 };
   itkOptimizer->SetMaximumStepSizeInPhysicalUnits(maximumStepSizeInPhysicalUnits);
-  ITK_TEST_SET_GET_VALUE(maximumStepSizeInPhysicalUnits, itkOptimizer->GetMaximumStepSizeInPhysicalUnits());
+  EXPECT_EQ(maximumStepSizeInPhysicalUnits, itkOptimizer->GetMaximumStepSizeInPhysicalUnits());
 
   constexpr bool doEstimateLearningRateAtEachIteration{ false };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, DoEstimateLearningRateAtEachIteration, doEstimateLearningRateAtEachIteration);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, DoEstimateLearningRateAtEachIteration, doEstimateLearningRateAtEachIteration);
 
   constexpr bool doEstimateLearningRateOnce{ true };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, DoEstimateLearningRateOnce, doEstimateLearningRateOnce);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, DoEstimateLearningRateOnce, doEstimateLearningRateOnce);
 
   constexpr bool returnBestParametersAndValue{ false };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, ReturnBestParametersAndValue, returnBestParametersAndValue);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, ReturnBestParametersAndValue, returnBestParametersAndValue);
 
   // Truth
   ParametersType trueParameters(2);
@@ -257,20 +250,14 @@ itkGradientDescentOptimizerv4Test(int, char *[])
 
   // test the optimization
   std::cout << "Test optimization 1:" << std::endl;
-  if (GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters) == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-  }
+  GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters);
 
   // test with non-identity scales
   std::cout << "Test optimization with non-identity scales:" << std::endl;
   ScalesType scales(metric->GetNumberOfLocalParameters(), 0.5);
   itkOptimizer->SetScales(scales);
   metric->SetParameters(initialPosition);
-  if (GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters) == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-  }
+  GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters);
 
   // test with weights {0.4,0.5}
   std::cout << std::endl << "Test with weights {0.4,0.5}:" << std::endl;
@@ -282,10 +269,7 @@ itkGradientDescentOptimizerv4Test(int, char *[])
   itkOptimizer->SetWeights(weights);
   itkOptimizer->SetNumberOfIterations(110);
   metric->SetParameters(initialPosition);
-  if (GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters) == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-  }
+  GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters);
 
   // test with weights {0,1}
   std::cout << std::endl << "Test with weights {0,1}:" << std::endl;
@@ -298,10 +282,7 @@ itkGradientDescentOptimizerv4Test(int, char *[])
   trueParameters[1] = -34.6667;
   metric->SetParameters(initialPosition);
   itkOptimizer->SetNumberOfIterations(40);
-  if (GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters) == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-  }
+  GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters);
 
   // test with weights {1,0}
   std::cout << std::endl << "Test with weights {1,0}:" << std::endl;
@@ -313,10 +294,7 @@ itkGradientDescentOptimizerv4Test(int, char *[])
   trueParameters[0] = 67.3333;
   trueParameters[1] = initialPosition[1];
   metric->SetParameters(initialPosition);
-  if (GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters) == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-  }
+  GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters);
 
   // For test of learning rate and scales estimation options
   // in an actual registration, see
@@ -332,47 +310,14 @@ itkGradientDescentOptimizerv4Test(int, char *[])
     metric->SetParameters(initialPosition);
     trueParameters[0] = 100;
     trueParameters[1] = -100;
-    if (GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters) == EXIT_FAILURE)
-    {
-      result = EXIT_FAILURE;
-    }
-    if (itkOptimizer->GetCurrentIteration() > 0)
-    {
-      std::cout << "The optimizer is running iterations despite of ";
-      std::cout << "having a maximum number of iterations set to zero" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters);
+    EXPECT_LE(itkOptimizer->GetCurrentIteration(), 0u)
+      << "The optimizer is running iterations despite of having a maximum number of iterations set to zero";
   }
 
   std::cout << "\nTest the Exception if the optimizer is not set properly:" << std::endl;
   auto badOptimizer = OptimizerType::New();
-  bool caught = false;
-  try
-  {
-    badOptimizer->GetCurrentPosition();
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    std::cout << "Caught expected exception!";
-    std::cout << e << std::endl;
-    caught = true;
-  }
-
-  if (!caught)
-  {
-    std::cout << "Failed to catch expected exception! " << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_THROW(badOptimizer->GetCurrentPosition(), itk::ExceptionObject);
   std::cout << "Printing self.. " << std::endl;
   std::cout << itkOptimizer << std::endl;
-
-  if (result != EXIT_FAILURE)
-  {
-    std::cout << "Test passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "Test FAILED." << std::endl;
-  }
-  return result;
 }
