@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKDisplacementFieldTests
-  itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest.cxx
   itkComposeDisplacementFieldsImageFilterTest.cxx
   itkDisplacementFieldJacobianDeterminantFilterTest.cxx
   itkDisplacementFieldToBSplineImageFilterTest.cxx
@@ -79,12 +78,6 @@ itk_add_test(
   COMMAND
     ITKDisplacementFieldTestDriver
     itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest
-)
-itk_add_test(
-  NAME itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest
-  COMMAND
-    ITKDisplacementFieldTestDriver
-    itkBSplineSmoothingOnUpdateDisplacementFieldTransformTest
 )
 itk_add_test(
   NAME itkGaussianExponentialDiffeomorphicTransformTest
@@ -195,6 +188,7 @@ itk_add_test(
 set(
   ITKDisplacementFieldGTests
   itkBSplineExponentialDiffeomorphicTransformGTest.cxx
+  itkBSplineSmoothingOnUpdateDisplacementFieldTransformGTest.cxx
   itkExponentialDisplacementFieldImageFilterGTest.cxx
   itkInverseDisplacementFieldImageFilterGTest.cxx
   itkIterativeInverseDisplacementFieldImageFilterGTest.cxx
