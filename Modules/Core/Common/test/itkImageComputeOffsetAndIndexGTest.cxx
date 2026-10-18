@@ -20,7 +20,10 @@
 
 #include "itkImage.h"
 #include "itkTimeProbesCollectorBase.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TImage>
 void
 ComputeIndex(TImage * image, unsigned int count, unsigned int repeat)
@@ -103,9 +106,9 @@ ComputeFastOffset(TImage * image, unsigned int count, unsigned int repeat)
   }
   std::cout << "Last offset: " << offset << ": " << accum << std::endl;
 }
+} // namespace
 
-int
-itkImageComputeOffsetAndIndexTest(int, char *[])
+TEST(ImageComputeOffsetAndIndex, ConvertedLegacyTest)
 {
 
   itk::TimeProbesCollectorBase collector;
@@ -221,6 +224,4 @@ itkImageComputeOffsetAndIndexTest(int, char *[])
 
   // Print the results of the time probes
   collector.Report();
-
-  return EXIT_SUCCESS;
 }
