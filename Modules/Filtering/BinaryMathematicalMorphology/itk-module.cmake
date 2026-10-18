@@ -13,5 +13,6 @@ itk_module(
     ITKMathematicalMorphology
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )
