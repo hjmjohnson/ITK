@@ -97,7 +97,6 @@ set(
   itkVNLRoundProfileTest1.cxx
   itkMemoryProbesCollecterBaseTest.cxx
   itkImageAlgorithmCopyTest.cxx
-  itkConstantBoundaryConditionTest.cxx
   itkDataObjectAndProcessObjectTest.cxx
   itkOptimizerParametersTest.cxx
   itkImageRegionConstIteratorWithOnlyIndexTest.cxx
@@ -1143,12 +1142,6 @@ itk_add_test(
     itkVectorGeometryTest
 )
 itk_add_test(
-  NAME itkConstantBoundaryConditionTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkConstantBoundaryConditionTest
-)
-itk_add_test(
   NAME itkVNLRoundProfileTest1
   COMMAND
     ITKCommon2TestDriver
@@ -1424,6 +1417,7 @@ set(
   itkCompensatedSummationGTest.cxx
   itkConicShellInteriorExteriorSpatialFunctionGTest.cxx
   itkConnectedImageNeighborhoodShapeGTest.cxx
+  itkConstantBoundaryConditionGTest.cxx
   itkConstantBoundaryImageNeighborhoodPixelAccessPolicyGTest.cxx
   itkConstNeighborhoodIteratorWithOnlyIndexGTest.cxx
   itkCopyGTest.cxx
