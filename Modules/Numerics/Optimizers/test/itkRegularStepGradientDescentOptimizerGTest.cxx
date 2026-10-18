@@ -19,7 +19,7 @@
 #include <set>
 #include "itkRegularStepGradientDescentOptimizer.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  *  The objectif function is the quadratic form:
@@ -37,6 +37,8 @@
  *
  * \class RSGCostFunction
  */
+namespace
+{
 class RSGCostFunction : public itk::SingleValuedCostFunction
 {
 public:
@@ -99,9 +101,9 @@ public:
     return SpaceDimension;
   }
 };
+} // namespace
 
-int
-itkRegularStepGradientDescentOptimizerTest(int, char *[])
+TEST(RegularStepGradientDescentOptimizer, ConvertedLegacyTest)
 {
   using OptimizerType = itk::RegularStepGradientDescentOptimizer;
 
@@ -111,7 +113,7 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     itkOptimizer, RegularStepGradientDescentOptimizer, RegularStepGradientDescentBaseOptimizer);
 
 
@@ -137,32 +139,32 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
   parametersScale[1] = 1.0;
 
   auto minimize = true;
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Minimize, minimize);
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, !minimize);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Minimize, minimize);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, !minimize);
 
   itkOptimizer->SetScales(parametersScale);
-  ITK_TEST_SET_GET_VALUE(parametersScale, itkOptimizer->GetScales());
+  EXPECT_EQ(parametersScale, itkOptimizer->GetScales());
 
   auto gradientMagnitudeTolerance = 1e-6;
   itkOptimizer->SetGradientMagnitudeTolerance(gradientMagnitudeTolerance);
-  ITK_TEST_SET_GET_VALUE(gradientMagnitudeTolerance, itkOptimizer->GetGradientMagnitudeTolerance());
+  EXPECT_EQ(gradientMagnitudeTolerance, itkOptimizer->GetGradientMagnitudeTolerance());
 
   auto maximumStepLength = 30.0;
   itkOptimizer->SetMaximumStepLength(maximumStepLength);
-  ITK_TEST_SET_GET_VALUE(maximumStepLength, itkOptimizer->GetMaximumStepLength());
+  EXPECT_EQ(maximumStepLength, itkOptimizer->GetMaximumStepLength());
 
   auto minimumStepLength = 1e-6;
   itkOptimizer->SetMinimumStepLength(minimumStepLength);
-  ITK_TEST_SET_GET_VALUE(minimumStepLength, itkOptimizer->GetMinimumStepLength());
+  EXPECT_EQ(minimumStepLength, itkOptimizer->GetMinimumStepLength());
 
   constexpr auto numberOfIterations = static_cast<itk::SizeValueType>(900);
   itkOptimizer->SetNumberOfIterations(numberOfIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, itkOptimizer->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, itkOptimizer->GetNumberOfIterations());
 
   itkOptimizer->SetInitialPosition(initialPosition);
-  ITK_TEST_SET_GET_VALUE(initialPosition, itkOptimizer->GetInitialPosition());
+  EXPECT_EQ(initialPosition, itkOptimizer->GetInitialPosition());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(itkOptimizer->StartOptimization());
+  EXPECT_NO_THROW(itkOptimizer->StartOptimization());
 
 
   ParametersType finalPosition = itkOptimizer->GetCurrentPosition();
@@ -171,20 +173,10 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
   std::cout << finalPosition[1] << ')' << std::endl;
 
   // Check results to see if it is within range
-  bool             pass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      pass = false;
-    }
-  }
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
 
 
@@ -194,9 +186,9 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
 
     auto relaxationFactor = 0.8;
     itkOptimizer->SetRelaxationFactor(relaxationFactor);
-    ITK_TEST_SET_GET_VALUE(relaxationFactor, itkOptimizer->GetRelaxationFactor());
+    EXPECT_EQ(relaxationFactor, itkOptimizer->GetRelaxationFactor());
 
-    ITK_TRY_EXPECT_NO_EXCEPTION(itkOptimizer->StartOptimization());
+    EXPECT_NO_THROW(itkOptimizer->StartOptimization());
 
 
     finalPosition = itkOptimizer->GetCurrentPosition();
@@ -205,19 +197,9 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
     std::cout << finalPosition[1] << ')' << std::endl;
 
     // Check results to see if it is within range
-    pass = true;
     for (unsigned int j = 0; j < 2; ++j)
     {
-      if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-      {
-        pass = false;
-      }
-    }
-
-    if (!pass)
-    {
-      std::cout << "Test failed." << std::endl;
-      return EXIT_FAILURE;
+      EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
     }
   }
 
@@ -227,15 +209,11 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
     itkOptimizer->SetNumberOfIterations(0);
     itkOptimizer->SetInitialPosition(initialPosition);
 
-    ITK_TRY_EXPECT_NO_EXCEPTION(itkOptimizer->StartOptimization());
+    EXPECT_NO_THROW(itkOptimizer->StartOptimization());
 
 
-    if (itkOptimizer->GetCurrentIteration() > 0)
-    {
-      std::cerr << "The optimizer is running iterations despite of ";
-      std::cerr << "having a maximum number of iterations set to zero" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(itkOptimizer->GetCurrentIteration(), 0u) << "The optimizer is running iterations despite of "
+                                                       << "having a maximum number of iterations set to zero";
   }
 
   //
@@ -243,7 +221,7 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
   //
   itkOptimizer->SetGradientMagnitudeTolerance(-1.0);
 
-  ITK_TRY_EXPECT_EXCEPTION(itkOptimizer->StartOptimization());
+  EXPECT_THROW(itkOptimizer->StartOptimization(), itk::ExceptionObject);
 
 
   // Test streaming enumeration for
@@ -260,7 +238,4 @@ itkRegularStepGradientDescentOptimizerTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE RegularStepGradientDescentBaseOptimizerEnums::StopCondition: " << ee << std::endl;
   }
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
