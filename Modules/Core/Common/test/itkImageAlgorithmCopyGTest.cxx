@@ -15,13 +15,16 @@
  *  limitations under the License.
  *
  *=========================================================================*/
+#include "itkImageAlgorithm.h"
 #include "itkFloatingPointExceptions.h"
 #include "itkTimeProbe.h"
-#include "itkImageAlgorithm.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 template <typename TImage>
-static void
+void
 AverageTestCopy(typename TImage::SizeType & size)
 {
 
@@ -110,9 +113,9 @@ AverageTestCopy(typename TImage::SizeType & size)
     itk::FloatingPointExceptions::Enable();
   }
 }
+} // namespace
 
-int
-itkImageAlgorithmCopyTest(int, char *[])
+TEST(ImageAlgorithmCopy, ConvertedLegacyTest)
 {
   using ImageType3D = itk::Image<signed char, 3>;
   auto size3d = ImageType3D::SizeType::Filled(16);
@@ -136,7 +139,4 @@ itkImageAlgorithmCopyTest(int, char *[])
 
   size2d.Fill(64);
   AverageTestCopy<ImageType2D>(size2d);
-
-
-  return EXIT_SUCCESS;
 }
