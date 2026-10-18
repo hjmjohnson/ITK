@@ -19,7 +19,7 @@
 #include <set>
 #include "itkGradientDescentOptimizer.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 /**
@@ -38,6 +38,8 @@
  *
  * \class gradientCostFunction
  */
+namespace
+{
 class gradientCostFunction : public itk::SingleValuedCostFunction
 {
 public:
@@ -104,9 +106,9 @@ public:
     return SpaceDimension;
   }
 };
+} // namespace
 
-int
-itkGradientDescentOptimizerTest(int, char *[])
+TEST(GradientDescentOptimizer, ConvertedLegacyTest)
 {
   std::cout << "Gradient Descent Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -117,7 +119,7 @@ itkGradientDescentOptimizerTest(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, GradientDescentOptimizer, SingleValuedNonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, GradientDescentOptimizer, SingleValuedNonLinearOptimizer);
 
 
   // Declaration of the CostFunction
@@ -139,21 +141,21 @@ itkGradientDescentOptimizerTest(int, char *[])
 
 
   constexpr bool maximize{ false };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, maximize);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, maximize);
 
   constexpr bool minimize{ !maximize };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Minimize, minimize);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Minimize, minimize);
 
   constexpr double learningRate{ 0.1 };
   itkOptimizer->SetLearningRate(learningRate);
-  ITK_TEST_SET_GET_VALUE(learningRate, itkOptimizer->GetLearningRate());
+  EXPECT_EQ(learningRate, itkOptimizer->GetLearningRate());
 
   constexpr itk::SizeValueType numberOfIterations{ 50 };
   itkOptimizer->SetNumberOfIterations(numberOfIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, itkOptimizer->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, itkOptimizer->GetNumberOfIterations());
 
   itkOptimizer->SetInitialPosition(initialPosition);
-  ITK_TEST_SET_GET_VALUE(initialPosition, itkOptimizer->GetInitialPosition());
+  EXPECT_EQ(initialPosition, itkOptimizer->GetInitialPosition());
 
   try
   {
@@ -165,7 +167,7 @@ itkGradientDescentOptimizerTest(int, char *[])
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   ParametersType finalPosition = itkOptimizer->GetCurrentPosition();
@@ -176,14 +178,10 @@ itkGradientDescentOptimizerTest(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool             pass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      pass = false;
-    }
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
 
   std::cout << "Stop description   = " << itkOptimizer->GetStopConditionDescription() << std::endl;
@@ -202,13 +200,4 @@ itkGradientDescentOptimizerTest(int, char *[])
     std::cout << "STREAMED ENUM VALUE GradientDescentOptimizerEnums::StopConditionGradientDescentOptimizer: " << ee
               << std::endl;
   }
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
