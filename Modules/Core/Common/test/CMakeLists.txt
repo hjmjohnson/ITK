@@ -102,7 +102,6 @@ set(
   itkOptimizerParametersTest.cxx
   itkImageRegionConstIteratorWithOnlyIndexTest.cxx
   itkImageRandomConstIteratorWithOnlyIndexTest.cxx
-  itkConstNeighborhoodIteratorWithOnlyIndexTest.cxx
   itkImageToImageToleranceTest.cxx
   itkImageRegionSplitterSlowDimensionTest.cxx
   itkImageRegionSplitterDirectionTest.cxx
@@ -1270,12 +1269,6 @@ itk_add_test(
     ITKCommon2TestDriver
     itkImageRandomConstIteratorWithOnlyIndexTest
 )
-itk_add_test(
-  NAME itkConstNeighborhoodIteratorWithOnlyIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkConstNeighborhoodIteratorWithOnlyIndexTest
-)
 
 itk_add_test(
   NAME itkImageToImageToleranceTest
@@ -1432,6 +1425,7 @@ set(
   itkConicShellInteriorExteriorSpatialFunctionGTest.cxx
   itkConnectedImageNeighborhoodShapeGTest.cxx
   itkConstantBoundaryImageNeighborhoodPixelAccessPolicyGTest.cxx
+  itkConstNeighborhoodIteratorWithOnlyIndexGTest.cxx
   itkCopyGTest.cxx
   itkCovariantVectorGTest.cxx
   itkCrossHelperGTest.cxx
