@@ -23,7 +23,7 @@
 #include "itkVersorTransformOptimizer.h"
 #include "itkQuaternionRigidTransformGradientDescentOptimizer.h"
 #include "itkOnePlusOneEvolutionaryOptimizer.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 #include <iostream>
@@ -38,8 +38,7 @@
  *  only code conformance.
  */
 
-int
-itkOptimizersHierarchyTest(int, char *[])
+TEST(OptimizersHierarchy, ConvertedLegacyTest)
 {
 
   using OptimizerType = itk::Optimizer;
@@ -61,96 +60,84 @@ itkOptimizersHierarchyTest(int, char *[])
 
   for (unsigned int i = 0; i < spaceDimension; ++i)
   {
-    if (itk::Math::Absolute(parameterScaleGot[i] - parameterScale[i]) > tolerance)
-    {
-      std::cout << "Test failed." << std::endl;
-      std::cout << "Scale parameters are damaged after being set." << std::endl;
-      std::cout << "Scale was set to: " << parameterScale << std::endl;
-      std::cout << "Scale was got as: " << parameterScaleGot << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(parameterScaleGot[i], parameterScale[i], tolerance)
+      << "Scale parameters are damaged after being set." << std::endl
+      << "Scale was set to: " << parameterScale << std::endl
+      << "Scale was got as: " << parameterScaleGot;
   }
 
   OptimizerType::ParametersType initialPositionGot = genericOptimizer->GetInitialPosition();
 
   for (unsigned int i = 0; i < spaceDimension; ++i)
   {
-    if (itk::Math::Absolute(initialPositionGot[i] - initialPosition[i]) > tolerance)
-    {
-      std::cout << "Test failed." << std::endl;
-      std::cout << "InitialPosition parameters are damaged after being set." << std::endl;
-      std::cout << "InitialPosition was set to: " << initialPosition << std::endl;
-      std::cout << "InitialPosition was got as: " << initialPositionGot << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(initialPositionGot[i], initialPosition[i], tolerance)
+      << "InitialPosition parameters are damaged after being set." << std::endl
+      << "InitialPosition was set to: " << initialPosition << std::endl
+      << "InitialPosition was got as: " << initialPositionGot;
   }
 
   using NonLinearOptimizerType = itk::NonLinearOptimizer;
   auto nonLinearOptimizer = NonLinearOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(nonLinearOptimizer, NonLinearOptimizer, Optimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(nonLinearOptimizer, NonLinearOptimizer, Optimizer);
 
 
   using SingleValuedNonLinearOptimizerType = itk::SingleValuedNonLinearOptimizer;
   auto singleValuedOptimizer = SingleValuedNonLinearOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(singleValuedOptimizer, SingleValuedNonLinearOptimizer, NonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(singleValuedOptimizer, SingleValuedNonLinearOptimizer, NonLinearOptimizer);
 
 
   using AmoebaOptimizerType = itk::AmoebaOptimizer;
   auto amoeba = AmoebaOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(amoeba, AmoebaOptimizer, SingleValuedNonLinearVnlOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(amoeba, AmoebaOptimizer, SingleValuedNonLinearVnlOptimizer);
 
 
   using ConjugateGradientOptimizerType = itk::ConjugateGradientOptimizer;
   auto conjugate = ConjugateGradientOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(conjugate, ConjugateGradientOptimizer, SingleValuedNonLinearVnlOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(conjugate, ConjugateGradientOptimizer, SingleValuedNonLinearVnlOptimizer);
 
 
   using LBFGSOptimizerType = itk::LBFGSOptimizer;
   auto lbfgs = LBFGSOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(lbfgs, LBFGSOptimizer, SingleValuedNonLinearVnlOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(lbfgs, LBFGSOptimizer, SingleValuedNonLinearVnlOptimizer);
 
 
   // Note that a "Versor" is a Unit Quaternion
   using VersorOptimizerType = itk::VersorTransformOptimizer;
   auto versorOpt = VersorOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(versorOpt, VersorTransformOptimizer, RegularStepGradientDescentBaseOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(versorOpt, VersorTransformOptimizer, RegularStepGradientDescentBaseOptimizer);
 
 
   using QuaternionOptimizerType = itk::QuaternionRigidTransformGradientDescentOptimizer;
   auto quaternionOpt = QuaternionOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     quaternionOpt, QuaternionRigidTransformGradientDescentOptimizer, GradientDescentOptimizer);
 
   using OnePlusOneEvolutionaryOptimizerType = itk::OnePlusOneEvolutionaryOptimizer;
   auto onePlusOne = OnePlusOneEvolutionaryOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(onePlusOne, OnePlusOneEvolutionaryOptimizer, SingleValuedNonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(onePlusOne, OnePlusOneEvolutionaryOptimizer, SingleValuedNonLinearOptimizer);
 
   using CumulativeGaussianOptimizerType = itk::CumulativeGaussianOptimizer;
   auto cumGaussOpt = CumulativeGaussianOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(cumGaussOpt, CumulativeGaussianOptimizer, MultipleValuedNonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(cumGaussOpt, CumulativeGaussianOptimizer, MultipleValuedNonLinearOptimizer);
 
 
   using CumulativeGaussianCostFunctionType = itk::CumulativeGaussianCostFunction;
   auto cumGaussCostFunc = CumulativeGaussianCostFunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(cumGaussCostFunc, CumulativeGaussianCostFunction, MultipleValuedCostFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(cumGaussCostFunc, CumulativeGaussianCostFunction, MultipleValuedCostFunction);
 
 
   // Not used; empty method body; called for coverage purposes
   const CumulativeGaussianCostFunctionType::ParametersType parameters{};
   CumulativeGaussianCostFunctionType::DerivativeType       derivative;
   cumGaussCostFunc->GetDerivative(parameters, derivative);
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
