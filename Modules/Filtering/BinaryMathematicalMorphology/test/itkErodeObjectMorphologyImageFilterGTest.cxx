@@ -19,10 +19,9 @@
 #include "itkErodeObjectMorphologyImageFilter.h"
 #include "itkBinaryBallStructuringElement.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkErodeObjectMorphologyImageFilterTest(int, char *[])
+TEST(ErodeObjectMorphologyImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -126,17 +125,17 @@ itkErodeObjectMorphologyImageFilterTest(int, char *[])
 
   // Connect the input image
   filter->SetInput(inputImage);
-  ITK_TEST_SET_GET_VALUE(inputImage, filter->GetInput());
+  EXPECT_EQ(inputImage, filter->GetInput());
 
   filter->SetKernel(ball);
-  ITK_TEST_SET_GET_VALUE(ball, filter->GetKernel());
+  EXPECT_EQ(ball, filter->GetKernel());
 
   filter->SetErodeValue(fgValue);
-  ITK_TEST_SET_GET_VALUE(fgValue, filter->GetErodeValue());
+  EXPECT_EQ(fgValue, filter->GetErodeValue());
 
   constexpr unsigned short backgroundValue{ 5 };
   filter->SetBackgroundValue(backgroundValue);
-  ITK_TEST_SET_GET_VALUE(backgroundValue, filter->GetBackgroundValue());
+  EXPECT_EQ(backgroundValue, filter->GetBackgroundValue());
 
   std::cout << "BoundaryCondition: " << filter->GetBoundaryCondition() << std::endl;
 
@@ -144,7 +143,7 @@ itkErodeObjectMorphologyImageFilterTest(int, char *[])
   const myImageType::Pointer outputImage = filter->GetOutput();
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
   // Create an iterator for going through the image output
   myIteratorType it2(outputImage, outputImage->GetBufferedRegion());
@@ -164,7 +163,4 @@ itkErodeObjectMorphologyImageFilterTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
