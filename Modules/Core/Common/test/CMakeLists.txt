@@ -7,7 +7,6 @@ set(
   itkFloatingPointExceptionsTest.cxx
   itkGaussianSpatialFunctionTest.cxx
   itkImageDuplicatorTest2.cxx
-  itkImageRandomIteratorTest.cxx
   itkImageRandomIteratorTest2.cxx
   itkImageRegionExplicitTest.cxx
   itkImageRegionIteratorTest.cxx
@@ -459,12 +458,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/vol-raw-big-dup2.nrrd
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/vol-raw-big-dup2.nrrd
-)
-itk_add_test(
-  NAME itkImageRandomIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageRandomIteratorTest
 )
 itk_add_test(
   NAME itkImageRandomIteratorTest2
@@ -1440,6 +1433,7 @@ set(
   itkImageNeighborhoodOffsetsGTest.cxx
   itkImageRandomConstIteratorWithIndexGTest.cxx
   itkImageRandomConstIteratorWithOnlyIndexGTest.cxx
+  itkImageRandomIteratorGTest.cxx
   itkImageRandomNonRepeatingIteratorWithIndexGTest.cxx
   itkImageRegionGTest.cxx
   itkImageRegionRangeGTest.cxx
