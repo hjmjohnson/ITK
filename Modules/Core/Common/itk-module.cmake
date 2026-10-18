@@ -36,5 +36,5 @@ itk_module(
 )
 
 # Extra test dependency on ITKMesh is introduced by itkCellInterfaceTest.
-# Extra test dependency on ITKImageIntensity is introduced by itkImageDuplicatorTest.
+# Extra test dependency on ITKImageIntensity is introduced by itkImageDuplicatorGTest.
 # Extra test dependency on ITKIOImageBase is introduced by itkImageRandomIteratorTest22.
