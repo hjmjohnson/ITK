@@ -16,14 +16,17 @@
  *
  *=========================================================================*/
 
+#include "itkImageRegionExclusionIteratorWithIndex.h"
 #include <iostream>
 
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkImageRegionExclusionIteratorWithIndex.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 template <typename TRegion>
-static bool
+bool
 RunTest(const TRegion & region, const TRegion & exclusionRegion)
 {
   const unsigned int ImageDimension = TRegion::ImageDimension;
@@ -247,10 +250,10 @@ RunTest(const TRegion & region, const TRegion & exclusionRegion)
 
   return true;
 }
+} // namespace
 
 
-int
-itkImageRegionExclusionIteratorWithIndexTest(int, char *[])
+TEST(ImageRegionExclusionIteratorWithIndex, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using SizeType = itk::Size<Dimension>;
@@ -280,11 +283,7 @@ itkImageRegionExclusionIteratorWithIndexTest(int, char *[])
 
           const RegionType exclusionRegion(exclusionStart, exclusionSize);
 
-          if (!RunTest(region, exclusionRegion))
-          {
-            std::cerr << "Test failed for exclusion region: " << exclusionRegion;
-            return EXIT_FAILURE;
-          }
+          EXPECT_TRUE(RunTest(region, exclusionRegion)) << "Test failed for exclusion region: " << exclusionRegion;
         }
       }
     }
@@ -295,11 +294,5 @@ itkImageRegionExclusionIteratorWithIndexTest(int, char *[])
   auto             exclusionSize = SizeType::Filled(2);
   const RegionType exclusionRegion(exclusionStart, exclusionSize);
 
-  if (!RunTest(region, exclusionRegion))
-  {
-    std::cerr << "Test failed for exclusion region: " << exclusionRegion;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(RunTest(region, exclusionRegion)) << "Test failed for exclusion region: " << exclusionRegion;
 }
