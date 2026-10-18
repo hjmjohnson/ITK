@@ -18,11 +18,10 @@
 
 #include "itkMultiScaleHessianEnhancementImageFilter.h"
 #include "itkArray.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkMath.h"
 
-int
-itkMultiScaleHessianEnhancementImageFilterStaticMethodsTest(int, char *[])
+TEST(MultiScaleHessianEnhancementImageFilterStaticMethods, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension = 2;
   using PixelType = int;
@@ -33,11 +32,11 @@ itkMultiScaleHessianEnhancementImageFilterStaticMethodsTest(int, char *[])
   /* Test the two cases of step size zero */
   ArrayType sigmaArray;
 
-  ITK_TRY_EXPECT_EXCEPTION(sigmaArray =
-                             MultiScaleHessianEnhancementImageFilterType::GenerateLogarithmicSigmaArray(5, 5, 0));
+  EXPECT_THROW(sigmaArray = MultiScaleHessianEnhancementImageFilterType::GenerateLogarithmicSigmaArray(5, 5, 0),
+               itk::ExceptionObject);
 
-  ITK_TRY_EXPECT_EXCEPTION(sigmaArray =
-                             MultiScaleHessianEnhancementImageFilterType::GenerateEquispacedSigmaArray(5, 5, 0));
+  EXPECT_THROW(sigmaArray = MultiScaleHessianEnhancementImageFilterType::GenerateEquispacedSigmaArray(5, 5, 0),
+               itk::ExceptionObject);
 
   /* Test that we get one when min equals max */
   ArrayType expectedOneSigmaArray;
@@ -46,9 +45,9 @@ itkMultiScaleHessianEnhancementImageFilterStaticMethodsTest(int, char *[])
 
   /* Test the two cases of min equals max with a large number of values */
   sigmaArray = MultiScaleHessianEnhancementImageFilterType::GenerateLogarithmicSigmaArray(1, 1, 100);
-  ITK_TEST_EXPECT_EQUAL(expectedOneSigmaArray, sigmaArray);
+  EXPECT_EQ(expectedOneSigmaArray, sigmaArray);
   sigmaArray = MultiScaleHessianEnhancementImageFilterType::GenerateEquispacedSigmaArray(1, 1, 100);
-  ITK_TEST_EXPECT_EQUAL(expectedOneSigmaArray, sigmaArray);
+  EXPECT_EQ(expectedOneSigmaArray, sigmaArray);
 
   /* Test the Logarithmic method */
   ArrayType expectedLogarithmicArray;
@@ -61,19 +60,19 @@ itkMultiScaleHessianEnhancementImageFilterStaticMethodsTest(int, char *[])
 
   ArrayType logarithmicArray = MultiScaleHessianEnhancementImageFilterType::GenerateLogarithmicSigmaArray(1, 5, 5);
   /* Here we need to do some floating point comparisons */
-  ITK_TEST_EXPECT_EQUAL(expectedLogarithmicArray.GetSize(), logarithmicArray.GetSize());
+  EXPECT_EQ(expectedLogarithmicArray.GetSize(), logarithmicArray.GetSize());
   for (ArrayType::SizeValueType i = 0; i < expectedLogarithmicArray.GetSize(); ++i)
   {
-    ITK_TEST_EXPECT_TRUE(
+    EXPECT_TRUE(
       itk::Math::FloatAlmostEqual(expectedLogarithmicArray.GetElement(i), logarithmicArray.GetElement(i), 6, 0.000001));
   }
 
   logarithmicArray = MultiScaleHessianEnhancementImageFilterType::GenerateLogarithmicSigmaArray(5, 1, 5);
   /* Should be the same if we flip min and max */
-  ITK_TEST_EXPECT_EQUAL(expectedLogarithmicArray.GetSize(), logarithmicArray.GetSize());
+  EXPECT_EQ(expectedLogarithmicArray.GetSize(), logarithmicArray.GetSize());
   for (ArrayType::SizeValueType i = 0; i < expectedLogarithmicArray.GetSize(); ++i)
   {
-    ITK_TEST_EXPECT_TRUE(
+    EXPECT_TRUE(
       itk::Math::FloatAlmostEqual(expectedLogarithmicArray.GetElement(i), logarithmicArray.GetElement(i), 6, 0.000001));
   }
 
@@ -89,21 +88,19 @@ itkMultiScaleHessianEnhancementImageFilterStaticMethodsTest(int, char *[])
   ArrayType equidistanceArray = MultiScaleHessianEnhancementImageFilterType::GenerateEquispacedSigmaArray(1, 5, 5);
   /* Here we need to do some floating point comparisons. These are exact, but we should still do a floating point
    * comparison to be sure */
-  ITK_TEST_EXPECT_EQUAL(expectedEquidistanceArray.GetSize(), equidistanceArray.GetSize());
+  EXPECT_EQ(expectedEquidistanceArray.GetSize(), equidistanceArray.GetSize());
   for (ArrayType::SizeValueType i = 0; i < expectedEquidistanceArray.GetSize(); ++i)
   {
-    ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual(
+    EXPECT_TRUE(itk::Math::FloatAlmostEqual(
       expectedEquidistanceArray.GetElement(i), equidistanceArray.GetElement(i), 6, 0.000001));
   }
 
   equidistanceArray = MultiScaleHessianEnhancementImageFilterType::GenerateEquispacedSigmaArray(5, 1, 5);
   /* Should be the same if we flip min and max */
-  ITK_TEST_EXPECT_EQUAL(expectedEquidistanceArray.GetSize(), equidistanceArray.GetSize());
+  EXPECT_EQ(expectedEquidistanceArray.GetSize(), equidistanceArray.GetSize());
   for (ArrayType::SizeValueType i = 0; i < expectedEquidistanceArray.GetSize(); ++i)
   {
-    ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual(
+    EXPECT_TRUE(itk::Math::FloatAlmostEqual(
       expectedEquidistanceArray.GetElement(i), equidistanceArray.GetElement(i), 6, 0.000001));
   }
-
-  return EXIT_SUCCESS;
 }
