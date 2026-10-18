@@ -22,7 +22,7 @@
 #include "itkExhaustiveOptimizer.h"
 
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  *  The objectif function is the quadratic form:
@@ -40,6 +40,8 @@
  *
  * \class RSGCostFunction
  */
+namespace
+{
 class RSGCostFunction : public itk::SingleValuedCostFunction
 {
 public:
@@ -140,9 +142,9 @@ public:
 
   std::vector<unsigned long> m_VisitedIndices;
 };
+} // namespace
 
-int
-itkExhaustiveOptimizerTest(int, char *[])
+TEST(ExhaustiveOptimizer, ConvertedLegacyTest)
 {
   std::cout << "ExhaustiveOptimizer Test ";
   std::cout << std::endl << std::endl;
@@ -155,7 +157,7 @@ itkExhaustiveOptimizerTest(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, ExhaustiveOptimizer, SingleValuedNonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, ExhaustiveOptimizer, SingleValuedNonLinearOptimizer);
 
 
   // Index observer (enables us to check if all positions were indeed visited):
@@ -189,7 +191,7 @@ itkExhaustiveOptimizerTest(int, char *[])
 
   auto stepLength = 1.0;
   itkOptimizer->SetStepLength(stepLength);
-  ITK_TEST_SET_GET_VALUE(stepLength, itkOptimizer->GetStepLength());
+  EXPECT_EQ(stepLength, itkOptimizer->GetStepLength());
 
 
   using StepsType = OptimizerType::StepsType;
@@ -198,7 +200,7 @@ itkExhaustiveOptimizerTest(int, char *[])
   steps[1] = 10;
 
   itkOptimizer->SetNumberOfSteps(steps);
-  ITK_TEST_SET_GET_VALUE(steps, itkOptimizer->GetNumberOfSteps());
+  EXPECT_EQ(steps, itkOptimizer->GetNumberOfSteps());
 
 
   std::cout << "MaximumNumberOfIterations: " << itkOptimizer->GetMaximumNumberOfIterations() << std::endl;
@@ -213,16 +215,16 @@ itkExhaustiveOptimizerTest(int, char *[])
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
 
-  const bool minimumValuePass = itk::Math::Absolute(itkOptimizer->GetMinimumMetricValue() - -10) < 1E-3;
+  EXPECT_NEAR(itkOptimizer->GetMinimumMetricValue(), -10, 1E-3);
 
   std::cout << "MinimumMetricValue = " << itkOptimizer->GetMinimumMetricValue() << std::endl;
   std::cout << "Minimum Position = " << itkOptimizer->GetMinimumMetricValuePosition() << std::endl;
 
-  const bool maximumValuePass = itk::Math::Absolute(itkOptimizer->GetMaximumMetricValue() - 926) < 1E-3;
+  EXPECT_NEAR(itkOptimizer->GetMaximumMetricValue(), 926, 1E-3);
   std::cout << "MaximumMetricValue = " << itkOptimizer->GetMaximumMetricValue() << std::endl;
   std::cout << "Maximum Position = " << itkOptimizer->GetMaximumMetricValuePosition() << std::endl;
 
@@ -231,14 +233,10 @@ itkExhaustiveOptimizerTest(int, char *[])
   std::cout << finalPosition[0] << ',';
   std::cout << finalPosition[1] << ')' << std::endl;
 
-  bool                       visitedIndicesPass = true;
   std::vector<unsigned long> visitedIndices = idxObserver->m_VisitedIndices;
 
   const size_t requiredNumberOfSteps = (2 * steps[0] + 1) * (2 * steps[1] + 1);
-  if (visitedIndices.size() != requiredNumberOfSteps)
-  {
-    visitedIndicesPass = false;
-  }
+  EXPECT_EQ(visitedIndices.size(), requiredNumberOfSteps);
 
   std::sort(visitedIndices.begin(), visitedIndices.end());
 
@@ -246,8 +244,7 @@ itkExhaustiveOptimizerTest(int, char *[])
   {
     if (visitedIndices[i] != i)
     {
-      visitedIndicesPass = false;
-      std::cout << "Mismatch in visited index " << visitedIndices[i] << " @ " << i << std::endl;
+      ADD_FAILURE() << "Mismatch in visited index " << visitedIndices[i] << " @ " << i;
       break;
     }
   }
@@ -255,27 +252,9 @@ itkExhaustiveOptimizerTest(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool             trueParamsPass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      trueParamsPass = false;
-    }
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
-
-  if (!minimumValuePass || !maximumValuePass || !trueParamsPass || !visitedIndicesPass)
-  {
-    std::cout << "minimumValuePass   = " << minimumValuePass << std::endl;
-    std::cout << "maximumValuePass   = " << maximumValuePass << std::endl;
-    std::cout << "trueParamsPass     = " << trueParamsPass << std::endl;
-    std::cout << "visitedIndicesPass = " << visitedIndicesPass << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
