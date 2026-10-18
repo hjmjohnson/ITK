@@ -16,7 +16,7 @@
  *
  *=========================================================================*/
 #include "itkMemoryProbesCollectorBase.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #if defined(TEST_WITH_SLEEP)
 #  if defined(_WIN32) && !defined(__CYGWIN__)
 #    include <windows.h>
@@ -33,8 +33,7 @@ Sleep(unsigned int milliseconds)
 #endif             // defined(TEST_WITH_SLEEP)
 
 
-int
-itkMemoryProbesCollecterBaseTest(int, char *[])
+TEST(MemoryProbesCollecterBase, ConvertedLegacyTest)
 {
   constexpr size_t bufsize{ 768L * 1024L * 1024L }; // 768 MiB
 
@@ -62,23 +61,17 @@ itkMemoryProbesCollecterBaseTest(int, char *[])
     std::cout << "WARNING: Total memory usage should be greater than zero. Memory Probes do not work on this platform"
               << std::endl;
     delete[] buf;
-    return EXIT_SUCCESS;
+    return;
   }
   mcollecter.Report();
   probe.Start();
   delete[] buf;
   Sleep(5000);
   probe.Stop();
-  if (total < probe.GetTotal())
-  {
-    std::cerr << "Freeing memory should result in less memory but it is " << probe.GetTotal() << probe.GetUnit()
-              << " instead of " << total << probe.GetUnit() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GE(total, probe.GetTotal()) << "Freeing memory should result in less memory but it is " << probe.GetTotal()
+                                     << probe.GetUnit() << " instead of " << total << probe.GetUnit();
 
 
-  ITK_TRY_EXPECT_EXCEPTION(mcollecter.GetProbe("IDoNotExist"));
-  ITK_TRY_EXPECT_NO_EXCEPTION(mcollecter.GetProbe("Update"));
-
-  return EXIT_SUCCESS;
+  EXPECT_THROW(mcollecter.GetProbe("IDoNotExist"), itk::ExceptionObject);
+  EXPECT_NO_THROW(mcollecter.GetProbe("Update"));
 }
