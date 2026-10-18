@@ -18,8 +18,11 @@
 
 #include "itkConjugateGradientOptimizer.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 /**
  *  The objectif function is the quadratic form:
  *
@@ -151,9 +154,9 @@ private:
   itk::FunctionEvaluationIterationEvent m_FunctionEvent;
   itk::GradientEvaluationIterationEvent m_GradientEvent;
 };
+} // namespace
 
-int
-itkConjugateGradientOptimizerTest(int, char *[])
+TEST(ConjugateGradientOptimizer, ConvertedLegacyTest)
 {
   std::cout << "Conjugate Gradient Optimizer Test \n \n";
 
@@ -216,7 +219,7 @@ itkConjugateGradientOptimizerTest(int, char *[])
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
 
@@ -238,34 +241,14 @@ itkConjugateGradientOptimizerTest(int, char *[])
   std::cout << finalPosition[0] << ',';
   std::cout << finalPosition[1] << ')' << std::endl;
 
-  bool             pass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      pass = false;
-    }
-  }
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
 
   // Get the final value of the optimizer
   std::cout << "Testing GetValue() : ";
   const OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
-  if (itk::Math::Absolute(finalValue + 10.0) > 0.01)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "[SUCCESS]" << std::endl;
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(finalValue, -10.0, 0.01);
 }
