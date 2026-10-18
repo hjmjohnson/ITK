@@ -3,7 +3,6 @@ set(
   ITKOptimizersv4Tests
   itkAutoScaledGradientDescentRegistrationOnVectorTest.cxx
   itkAutoScaledGradientDescentRegistrationTest.cxx
-  itkLBFGSBOptimizerv4Test.cxx
   itkLBFGSOptimizerv4Test.cxx
   itkMultiGradientOptimizerv4Test.cxx
   itkMultiStartOptimizerv4Test.cxx
@@ -38,6 +37,7 @@ set(
   itkGradientDescentOptimizerv4GTest2.cxx
   itkGradientDescentOptimizerv4ObserverGTest.cxx
   itkLBFGS2Optimizerv4GTest.cxx
+  itkLBFGSBOptimizerv4GTest.cxx
   itkMultiGradientOptimizerv4GTest.cxx
   itkWindowConvergenceMonitoringFunctionGTest.cxx
 )
@@ -182,13 +182,6 @@ itk_add_test(
   COMMAND
     ITKOptimizersv4TestDriver
     itkLBFGSOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkLBFGSBOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkLBFGSBOptimizerv4Test
 )
 
 itk_add_test(
