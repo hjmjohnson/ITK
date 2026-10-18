@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKOptimizersTests
-  itkCumulativeGaussianOptimizerTest.cxx
   itkExhaustiveOptimizerTest.cxx
   itkFRPROptimizerTest.cxx
   itkGradientDescentOptimizerTest.cxx
@@ -84,12 +83,6 @@ itk_add_test(
     itkLBFGSOptimizerTest
 )
 itk_add_test(
-  NAME itkCumulativeGaussianOptimizerTest
-  COMMAND
-    ITKOptimizersTestDriver
-    itkCumulativeGaussianOptimizerTest
-)
-itk_add_test(
   NAME itkRegularStepGradientDescentOptimizerTest
   COMMAND
     ITKOptimizersTestDriver
@@ -134,6 +127,7 @@ set(
   ITKOptimizersGTests
   itkAmoebaOptimizerGTest.cxx
   itkConjugateGradientOptimizerGTest.cxx
+  itkCumulativeGaussianOptimizerGTest.cxx
   itkLevenbergMarquardtOptimizerGTest.cxx
 )
 creategoogletestdriver(ITKOptimizers "${ITKOptimizers-Test_LIBRARIES}" "${ITKOptimizersGTests}")
