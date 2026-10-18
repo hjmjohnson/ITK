@@ -16,7 +16,7 @@
  *
  *=========================================================================*/
 #include "itkMultiStartOptimizerv4.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  *  \class MultiStartOptimizerv4TestMetric for test
@@ -35,6 +35,8 @@
  *   the solution is the vector | 2 -2 |
  *
  */
+namespace
+{
 class MultiStartOptimizerv4TestMetric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -153,7 +155,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////
-[[nodiscard]] int
+void
 MultiStartOptimizerv4RunTest(itk::MultiStartOptimizerv4::Pointer & itkOptimizer)
 {
   try
@@ -168,7 +170,7 @@ MultiStartOptimizerv4RunTest(itk::MultiStartOptimizerv4::Pointer & itkOptimizer)
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   using ParametersType = MultiStartOptimizerv4TestMetric::ParametersType;
@@ -190,20 +192,12 @@ MultiStartOptimizerv4RunTest(itk::MultiStartOptimizerv4::Pointer & itkOptimizer)
   trueParameters[1] = -2.0;
   for (itk::SizeValueType j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(bestPosition[j] - trueParameters[j]) > 0.01)
-    {
-      std::cerr << "Results do not match: " << std::endl
-                << "expected: " << trueParameters << std::endl
-                << "returned: " << finalPosition << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(bestPosition[j], trueParameters[j], 0.01);
   }
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 ///////////////////////////////////////////////////////////
-int
-itkMultiStartOptimizerv4Test(int, char *[])
+TEST(MultiStartOptimizerv4, ConvertedLegacyTest)
 {
   std::cout << "MultiStart  Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -213,11 +207,12 @@ itkMultiStartOptimizerv4Test(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, MultiStartOptimizerv4Template, ObjectToObjectOptimizerBaseTemplate);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    itkOptimizer, MultiStartOptimizerv4Template, ObjectToObjectOptimizerBaseTemplate);
 
 
   auto stopCondition = itk::StopConditionObjectToObjectOptimizerEnum::MAXIMUM_NUMBER_OF_ITERATIONS;
-  ITK_TEST_EXPECT_EQUAL(stopCondition, itkOptimizer->GetStopCondition());
+  EXPECT_EQ(stopCondition, itkOptimizer->GetStopCondition());
 
   // Declaration of the Metric
   auto metric = MultiStartOptimizerv4TestMetric::New();
@@ -248,10 +243,7 @@ itkMultiStartOptimizerv4Test(int, char *[])
   itkOptimizer->SetParametersList(parametersList);
   // test the optimization
   std::cout << "Test optimization 1 without local optimizer:" << std::endl;
-  if (MultiStartOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(MultiStartOptimizerv4RunTest(itkOptimizer));
   std::cout << "Test 1 passed." << std::endl;
 
   /*
@@ -272,10 +264,7 @@ itkMultiStartOptimizerv4Test(int, char *[])
   }
   metric->SetParameters(parametersList[0]);
   itkOptimizer->SetParametersList(parametersList);
-  if (MultiStartOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(MultiStartOptimizerv4RunTest(itkOptimizer));
   std::cout << "Test 2 passed." << std::endl;
 
   /*
@@ -299,11 +288,7 @@ itkMultiStartOptimizerv4Test(int, char *[])
   optimizer->SetLearningRate(1.e-1);
   optimizer->SetNumberOfIterations(25);
   itkOptimizer->SetLocalOptimizer(optimizer);
-  ITK_TEST_SET_GET_VALUE(optimizer, itkOptimizer->GetLocalOptimizer());
-  if (MultiStartOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(optimizer, itkOptimizer->GetLocalOptimizer());
+  ASSERT_NO_FATAL_FAILURE(MultiStartOptimizerv4RunTest(itkOptimizer));
   std::cout << "Test 3 passed." << std::endl;
-  return EXIT_SUCCESS;
 }
