@@ -2,18 +2,11 @@ itk_module_test()
 set(
   ITKDiffusionTensorImageTests
   itkDiffusionTensor3DReconstructionImageFilterTest.cxx
-  itkDiffusionTensor3DTest.cxx
   itkTensorFractionalAnisotropyImageFilterTest.cxx
 )
 
 createtestdriver(ITKDiffusionTensorImage "${ITKDiffusionTensorImage-Test_LIBRARIES}" "${ITKDiffusionTensorImageTests}")
 
-itk_add_test(
-  NAME itkDiffusionTensor3DTest
-  COMMAND
-    ITKDiffusionTensorImageTestDriver
-    itkDiffusionTensor3DTest
-)
 itk_add_test(
   NAME itkDiffusionTensor3DReconstructionImageFilterTest
   COMMAND
@@ -30,6 +23,7 @@ itk_add_test(
 
 set(
   ITKDiffusionTensorImageGTests
+  itkDiffusionTensor3DGTest.cxx
   itkDiffusionTensor3DReconstructionSingleImageGTest.cxx
   itkTensorRelativeAnisotropyImageFilterGTest.cxx
 )
