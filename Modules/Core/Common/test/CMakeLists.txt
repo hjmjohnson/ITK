@@ -4,7 +4,6 @@ set(
   itkColorTableTest.cxx
   itkDirectoryTest.cxx
   itkExceptionObjectTest.cxx
-  itkFixedArrayTest2.cxx
   itkFloatingPointExceptionsTest.cxx
   itkGaussianSpatialFunctionTest.cxx
   itkImageComputeOffsetAndIndexTest.cxx
@@ -259,12 +258,6 @@ itk_add_test(
     ${TEMP}/test_multi.txt
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/test_multi.txt
-)
-itk_add_test(
-  NAME itkFixedArrayTest2
-  COMMAND
-    ITKCommon1TestDriver
-    itkFixedArrayTest2
 )
 itk_add_test(
   NAME itkObjectStoreTest
@@ -1479,6 +1472,7 @@ set(
   itkFilterDispatchGTest.cxx
   itkFiniteCylinderSpatialFunctionGTest.cxx
   itkFixedArrayGTest.cxx
+  itkFixedArrayGTest2.cxx
   itkFloodFilledSpatialFunctionGTest.cxx
   itkFloodFillIteratorGTest.cxx
   itkFrustumSpatialFunctionGTest.cxx
