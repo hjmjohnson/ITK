@@ -20,69 +20,59 @@
 #include "itkVectorGradientAnisotropicDiffusionImageFilter.h"
 #include "itkVectorCurvatureAnisotropicDiffusionImageFilter.h"
 #include "itkNullImageToImageFilterDriver.hxx"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkVectorAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(VectorAnisotropicDiffusionImageFilter, ConvertedLegacyTest)
 {
-  try
-  {
-    using ImageType = itk::Image<itk::Vector<float, 3>, 2>;
+  using ImageType = itk::Image<itk::Vector<float, 3>, 2>;
 
-    // Set up Gradient diffusion filter
-    const itk::VectorGradientAnisotropicDiffusionImageFilter<ImageType, ImageType>::Pointer filter =
-      itk::VectorGradientAnisotropicDiffusionImageFilter<ImageType, ImageType>::New();
+  // Set up Gradient diffusion filter
+  const itk::VectorGradientAnisotropicDiffusionImageFilter<ImageType, ImageType>::Pointer filter =
+    itk::VectorGradientAnisotropicDiffusionImageFilter<ImageType, ImageType>::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(
-      filter, VectorGradientAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    filter, VectorGradientAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
 
 
-    filter->SetNumberOfIterations(1);
-    filter->SetConductanceParameter(3.0f);
-    filter->SetTimeStep(0.125f);
+  filter->SetNumberOfIterations(1);
+  filter->SetConductanceParameter(3.0f);
+  filter->SetTimeStep(0.125f);
 
-    filter->GetNumberOfIterations();
-    filter->GetConductanceParameter();
-    filter->GetTimeStep();
+  filter->GetNumberOfIterations();
+  filter->GetConductanceParameter();
+  filter->GetTimeStep();
 
-    // Run Test
-    itk::Size<2> sz;
-    sz[0] = 100; // std::stoi(argv[1]);
-    sz[1] = 100; // std::stoi(argv[2]);
-    //      sz[2] = 10;//std::stoi(argv[3]);
-    //      sz[3] = 5;//std::stoi(argv[4]);
-    itk::NullImageToImageFilterDriver<ImageType, ImageType> test1;
-    test1.SetImageSize(sz);
-    test1.SetFilter(filter);
-    test1.Execute();
-
-
-    // Set up Curvature diffusion filter
-    const itk::VectorCurvatureAnisotropicDiffusionImageFilter<ImageType, ImageType>::Pointer filter2 =
-      itk::VectorCurvatureAnisotropicDiffusionImageFilter<ImageType, ImageType>::New();
-
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(
-      filter2, VectorCurvatureAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
+  // Run Test
+  itk::Size<2> sz;
+  sz[0] = 100; // std::stoi(argv[1]);
+  sz[1] = 100; // std::stoi(argv[2]);
+  //      sz[2] = 10;//std::stoi(argv[3]);
+  //      sz[3] = 5;//std::stoi(argv[4]);
+  itk::NullImageToImageFilterDriver<ImageType, ImageType> test1;
+  test1.SetImageSize(sz);
+  test1.SetFilter(filter);
+  ASSERT_NO_THROW(test1.Execute());
 
 
-    filter2->SetNumberOfIterations(1);
-    filter2->SetConductanceParameter(3.0f);
-    filter2->SetTimeStep(0.1f);
+  // Set up Curvature diffusion filter
+  const itk::VectorCurvatureAnisotropicDiffusionImageFilter<ImageType, ImageType>::Pointer filter2 =
+    itk::VectorCurvatureAnisotropicDiffusionImageFilter<ImageType, ImageType>::New();
 
-    filter2->GetNumberOfIterations();
-    filter2->GetConductanceParameter();
-    filter2->GetTimeStep();
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    filter2, VectorCurvatureAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
 
-    // Run Test
-    itk::NullImageToImageFilterDriver<ImageType, ImageType> test2;
-    test2.SetImageSize(sz);
-    test2.SetFilter(filter2);
-    test2.Execute();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    err.Print(std::cerr);
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+
+  filter2->SetNumberOfIterations(1);
+  filter2->SetConductanceParameter(3.0f);
+  filter2->SetTimeStep(0.1f);
+
+  filter2->GetNumberOfIterations();
+  filter2->GetConductanceParameter();
+  filter2->GetTimeStep();
+
+  // Run Test
+  itk::NullImageToImageFilterDriver<ImageType, ImageType> test2;
+  test2.SetImageSize(sz);
+  test2.SetFilter(filter2);
+  EXPECT_NO_THROW(test2.Execute());
 }
