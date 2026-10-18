@@ -21,6 +21,7 @@
 #include "itkConstantBoundaryCondition.h"
 #include "itkConstNeighborhoodIterator.h"
 #include "itkVectorImage.h"
+#include "itkGTest.h"
 
 using ImageType = itk::Image<int, 2>;
 using RegionType = ImageType::RegionType;
@@ -32,7 +33,9 @@ using RadiusType = IteratorType::RadiusType;
 using VectorImageType = itk::VectorImage<int, 2>;
 using VectorIteratorType = itk::ConstNeighborhoodIterator<VectorImageType>;
 
-static bool
+namespace
+{
+bool
 TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
 {
   bool success = true;
@@ -96,29 +99,9 @@ TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
 
   return success;
 }
+} // namespace
 
-static bool
-CheckInputRequestedRegion(const RegionType & imageRegion,
-                          const RegionType & requestedRegion,
-                          const RegionType & expectedRegion)
-{
-  if (requestedRegion != expectedRegion)
-  {
-    std::cerr << "Unexpected input region for request region: " << std::endl;
-    std::cerr << imageRegion << std::endl;
-    std::cerr << "Got:" << std::endl;
-    std::cerr << requestedRegion << std::endl;
-    std::cerr << "Expected: " << std::endl;
-    std::cerr << expectedRegion << std::endl;
-
-    return false;
-  }
-
-  return true;
-}
-
-int
-itkConstantBoundaryConditionTest(int, char *[])
+TEST(ConstantBoundaryCondition, ConvertedLegacyTest)
 {
   // Test an image to cover one operator() method.
   auto               image = ImageType::New();
@@ -159,21 +142,13 @@ itkConstantBoundaryConditionTest(int, char *[])
   constexpr ImageType::PixelType constant{ 3 };
   bc.SetConstant(constant);
 
-  if (bc.GetConstant() != constant)
-  {
-    std::cerr << "Got unexpected constant " << bc.GetConstant() << ", expected " << constant << '.' << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(bc.GetConstant(), constant);
 
   VectorImageType::PixelType vectorConstant(1);
   vectorConstant[0] = constant;
   vbc.SetConstant(vectorConstant);
 
-  if (vbc.GetConstant()[0] != constant)
-  {
-    std::cerr << "Got unexpected constant " << vbc.GetConstant() << ", expected " << vectorConstant << '.' << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(vbc.GetConstant()[0], constant);
 
   it.OverrideBoundaryCondition(&bc);
   vit.OverrideBoundaryCondition(&vbc);
@@ -186,10 +161,7 @@ itkConstantBoundaryConditionTest(int, char *[])
   {
     std::cout << "Index: " << it.GetIndex() << std::endl;
     const bool success = TestPrintNeighborhood(it, vit);
-    if (!success)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(success);
   }
 
   radiusTwo[0] = radiusTwo[1] = 2;
@@ -207,10 +179,7 @@ itkConstantBoundaryConditionTest(int, char *[])
   {
     std::cout << "Index: " << it2.GetIndex() << std::endl;
     const bool success = TestPrintNeighborhood(it2, vit2);
-    if (!success)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(success);
   }
 
   // Now test the input region calculation
@@ -224,12 +193,7 @@ itkConstantBoundaryConditionTest(int, char *[])
   RegionType expectedRegion = requestRegion;
 
   RegionType inputRegion = bc.GetInputRequestedRegion(imageRegion, requestRegion);
-  if (!CheckInputRequestedRegion(imageRegion, inputRegion, expectedRegion))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "[PASSED]" << std::endl;
+  EXPECT_EQ(inputRegion, expectedRegion) << "Unexpected input region for request region: " << imageRegion;
 
   // Test 2
   std::cout << "GetInputRequestedRegion() Test 2" << std::endl;
@@ -247,12 +211,7 @@ itkConstantBoundaryConditionTest(int, char *[])
   expectedRegion.SetSize(expectedSize);
 
   inputRegion = bc.GetInputRequestedRegion(imageRegion, requestRegion);
-  if (!CheckInputRequestedRegion(imageRegion, inputRegion, expectedRegion))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "[PASSED]" << std::endl;
+  EXPECT_EQ(inputRegion, expectedRegion) << "Unexpected input region for request region: " << imageRegion;
 
   // Test 3
   std::cout << "GetInputRequestedRegion() Test 3" << std::endl;
@@ -269,23 +228,12 @@ itkConstantBoundaryConditionTest(int, char *[])
   expectedRegion = { expectedIndex, expectedSize };
 
   inputRegion = bc.GetInputRequestedRegion(imageRegion, requestRegion);
-  if (!CheckInputRequestedRegion(imageRegion, inputRegion, expectedRegion))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "[PASSED]" << std::endl;
+  EXPECT_EQ(inputRegion, expectedRegion) << "Unexpected input region for request region: " << imageRegion;
 
   // Other boundary condition tests
-  if (bc.RequiresCompleteNeighborhood() != false)
-  {
-    std::cerr << "RequiresCompleteNeighborhood() expected to return false, got true instead." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(bc.RequiresCompleteNeighborhood());
 
   // Print boundary conditions
   bc.Print(std::cout);
   vbc.Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
