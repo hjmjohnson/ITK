@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkMinMaxCurvatureFlowImageFilter.h"
+#include "itkGTest.h"
 #include "itkCommand.h"
 #include <random> // For mt19937.
 
@@ -36,7 +37,6 @@ public:
   }
   itk::ProcessObject::Pointer m_Process;
 };
-} // namespace
 
 constexpr unsigned int MAXRUNS{ 5 }; // maximum number of runs
 
@@ -47,6 +47,7 @@ testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,
                         int                          numberOfRuns,
                         unsigned int                 niter[],
                         unsigned long                radii[]);
+} // namespace
 
 /**
  * This file tests the functionality of the MinMaxCurvatureFlowImageFilter.
@@ -59,8 +60,7 @@ testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,
  * We then test the ability of MinMaxCurvatureFlowImageFilter to denoise
  * the image.
  */
-int
-itkMinMaxCurvatureFlowImageFilterTest(int, char *[])
+TEST(MinMaxCurvatureFlowImageFilter, ConvertedLegacyTest)
 {
   itk::Size<2> size2D;
   size2D[0] = 32;
@@ -106,14 +106,12 @@ itkMinMaxCurvatureFlowImageFilterTest(int, char *[])
   std::cout << "3D Test passed: " << !err3D << std::endl;
   std::cout << "4D Test passed: " << !err4D << std::endl;
 
-  if (err2D /*|| err3D || err4D*/)
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  EXPECT_EQ(err2D /*|| err3D || err4D*/, EXIT_SUCCESS);
 }
 
 
+namespace
+{
 template <unsigned int VImageDimension>
 [[nodiscard]] int
 testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,         // ND image size
@@ -316,3 +314,4 @@ testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,         // ND image s
   std::cout << "Test passed." << std::endl;
   return EXIT_SUCCESS;
 }
+} // namespace
