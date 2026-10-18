@@ -18,10 +18,9 @@
 
 #include "itkFastIncrementalBinaryDilateImageFilter.h"
 #include "itkBinaryCrossStructuringElement.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkFastIncrementalBinaryDilateImageFilterTest(int, char *[])
+TEST(FastIncrementalBinaryDilateImageFilter, ConvertedLegacyTest)
 {
   unsigned int i = 0;
 
@@ -115,7 +114,7 @@ itkFastIncrementalBinaryDilateImageFilterTest(int, char *[])
   // Create the filter
   auto filter = myFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, FastIncrementalBinaryDilateImageFilter, BinaryDilateImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, FastIncrementalBinaryDilateImageFilter, BinaryDilateImageFilter);
 
 
   // Create the structuring element
@@ -124,19 +123,19 @@ itkFastIncrementalBinaryDilateImageFilterTest(int, char *[])
 
   // Connect the input image
   filter->SetInput(inputImage);
-  ITK_TEST_SET_GET_VALUE(inputImage, filter->GetInput());
+  EXPECT_EQ(inputImage, filter->GetInput());
 
   filter->SetKernel(cross);
-  ITK_TEST_SET_GET_VALUE(cross, filter->GetKernel());
+  EXPECT_EQ(cross, filter->GetKernel());
 
   filter->SetDilateValue(fgValue);
-  ITK_TEST_SET_GET_VALUE(fgValue, filter->GetDilateValue());
+  EXPECT_EQ(fgValue, filter->GetDilateValue());
 
   // Get the Smart Pointer to the Filter Output
   const myImageType::Pointer outputImage = filter->GetOutput();
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
 
   // Create an iterator for going through the image output
@@ -165,7 +164,7 @@ itkFastIncrementalBinaryDilateImageFilterTest(int, char *[])
   filter->Modified();
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
 
   // Set the iterator for going through the image output
@@ -187,7 +186,4 @@ itkFastIncrementalBinaryDilateImageFilterTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
