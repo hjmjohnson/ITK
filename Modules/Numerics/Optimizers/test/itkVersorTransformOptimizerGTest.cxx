@@ -18,6 +18,7 @@
 
 #include "itkVersorTransformOptimizer.h"
 #include "itkVersorTransform.h"
+#include "itkGTest.h"
 
 
 /**
@@ -41,6 +42,8 @@
  *
  * \class versorCostFunction
  */
+namespace
+{
 class versorCostFunction : public itk::SingleValuedCostFunction
 {
 public:
@@ -174,9 +177,9 @@ public:
 private:
   mutable TransformType::Pointer m_Transform;
 };
+} // namespace
 
-int
-itkVersorTransformOptimizerTest(int, char *[])
+TEST(VersorTransformOptimizer, ConvertedLegacyTest)
 {
   std::cout << "VersorTransform Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -243,7 +246,7 @@ itkVersorTransformOptimizerTest(int, char *[])
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   ParametersType finalPosition(spaceDimensions);
@@ -261,8 +264,6 @@ itkVersorTransformOptimizerTest(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool pass = true;
-
   // True versor
 
   VersorType::VectorType trueAxis;
@@ -283,17 +284,5 @@ itkVersorTransformOptimizerTest(int, char *[])
   const VersorType            ratio = finalRotation * trueRotation.GetReciprocal();
   const VersorType::ValueType cosHalfAngle = ratio.GetW();
   const VersorType::ValueType cosHalfAngleSquare = cosHalfAngle * cosHalfAngle;
-  if (cosHalfAngleSquare < 0.95)
-  {
-    pass = false;
-  }
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_GE(cosHalfAngleSquare, 0.95);
 }
