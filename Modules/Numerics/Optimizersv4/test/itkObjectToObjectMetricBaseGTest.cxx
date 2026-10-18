@@ -17,13 +17,15 @@
  *=========================================================================*/
 #include "itkImage.h"
 #include "itkObjectToObjectMetricBase.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /* Test basic operation of ObjectToObjectMetricBase.
  *
  * TODO Finish exercising all methods.
  */
 
+namespace
+{
 template <typename TFixedObject, typename TMovingObject>
 class ObjectToObjectMetricTestMetric : public itk::ObjectToObjectMetricBase
 {
@@ -112,9 +114,9 @@ private:
   ObjectToObjectMetricTestMetric() = default;
   ~ObjectToObjectMetricTestMetric() override = default;
 };
+} // namespace
 
-int
-itkObjectToObjectMetricBaseTest(int, char *[])
+TEST(ObjectToObjectMetricBase, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<unsigned char, 3>;
   using ObjectMetricType = ObjectToObjectMetricTestMetric<ImageType, ImageType>;
@@ -131,9 +133,9 @@ itkObjectToObjectMetricBaseTest(int, char *[])
 
   ParametersType parameters(13, 19.5);
 
-  ITK_TEST_EXPECT_EQUAL(objectMetric->GetValue(), 1.0);
+  EXPECT_EQ(objectMetric->GetValue(), 1.0);
 
-  ITK_TEST_EXPECT_EQUAL(objectMetric->GetCurrentValue(), 1.0);
+  EXPECT_EQ(objectMetric->GetCurrentValue(), 1.0);
 
   // Test streaming enumeration for ObjectToObjectMetricBaseTemplateEnums::GradientSource elements
   const std::set<itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource> allGradientSource{
@@ -158,5 +160,4 @@ itkObjectToObjectMetricBaseTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE ObjectToObjectMetricBaseTemplateEnums::MetricCategory: " << ee << std::endl;
   }
-  return EXIT_SUCCESS;
 }
