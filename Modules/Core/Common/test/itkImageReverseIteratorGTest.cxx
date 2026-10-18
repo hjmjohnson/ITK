@@ -16,12 +16,15 @@
  *
  *=========================================================================*/
 
+#include "itkImageRegionReverseIterator.h"
 #include <iostream>
 
-#include "itkImageRegionReverseIterator.h"
 #include "itkImageRegionReverseConstIterator.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 // This routine is used to make sure that we call the "const" version
 // of GetPixel() (via the operator[])
 template <typename T, unsigned int VImageDimension>
@@ -42,10 +45,10 @@ TestConstPixelAccess(const itk::Image<T, VImageDimension> & in, itk::Image<T, VI
   out[regionStartIndex3D] = vec;
   out[regionEndIndex3D] = in[regionStartIndex3D];
 }
+} // namespace
 
 
-int
-itkImageReverseIteratorTest(int, char *[])
+TEST(ImageReverseIterator, ConvertedLegacyTest)
 {
 
   using PixelType = itk::Vector<unsigned short, 5>;
@@ -178,7 +181,6 @@ itkImageReverseIteratorTest(int, char *[])
   it.GoToBegin();
   itk::ImageRegionReverseIterator<ImageType> castBackReverseIt(it);
   castBackReverseIt.GoToEnd();
-  int status = 0;
   std::cout << "It and Reverse check: ";
   for (; !it.IsAtEnd(); ++it)
   {
@@ -187,20 +189,7 @@ itkImageReverseIteratorTest(int, char *[])
     itk::Image<itk::Vector<unsigned short, 5>, 3>::IndexType rindex = castBackReverseIt.GetIndex();
     for (unsigned int i = 0; i < index.GetIndexDimension(); ++i)
     {
-      if (index[i] != rindex[i])
-      {
-        std::cout << index[i] << " != " << rindex[i] << std::endl;
-        status = EXIT_FAILURE;
-      }
+      EXPECT_EQ(index[i], rindex[i]);
     }
   }
-  if (status == EXIT_SUCCESS)
-  {
-    std::cout << "Passed" << std::endl;
-  }
-  else
-  {
-    std::cout << "Failed" << std::endl;
-  }
-  return status;
 }
