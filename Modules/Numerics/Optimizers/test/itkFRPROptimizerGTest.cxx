@@ -17,7 +17,7 @@
  *=========================================================================*/
 #include <set>
 #include "itkFRPROptimizer.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 /**
@@ -36,6 +36,8 @@
  *
  * \class FRPRGradientCostFunction
  */
+namespace
+{
 class FRPRGradientCostFunction : public itk::SingleValuedCostFunction
 {
 public:
@@ -102,9 +104,9 @@ public:
     return SpaceDimension;
   }
 };
+} // namespace
 
-int
-itkFRPROptimizerTest(int, char *[])
+TEST(FRPROptimizer, ConvertedLegacyTest)
 {
   std::cout << "FRPR Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -114,7 +116,7 @@ itkFRPROptimizerTest(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, FRPROptimizer, PowellOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, FRPROptimizer, PowellOptimizer);
 
   // Declaration of the CostFunction
   auto costFunction = FRPRGradientCostFunction::New();
@@ -138,7 +140,7 @@ itkFRPROptimizerTest(int, char *[])
   itkOptimizer->SetMaximumIteration(50);
 
   constexpr bool useUnitLengthGradient{ false };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, UseUnitLengthGradient, useUnitLengthGradient);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, UseUnitLengthGradient, useUnitLengthGradient);
 
   {
     // Exercise the methods that set the optimization mode
@@ -157,7 +159,7 @@ itkFRPROptimizerTest(int, char *[])
       std::cout << "An error occurred during Optimization" << std::endl;
       std::cout << "Location    = " << e.GetLocation() << std::endl;
       std::cout << "Description = " << e.GetDescription() << std::endl;
-      return EXIT_FAILURE;
+      FAIL();
     }
 
     ParametersType finalPosition = itkOptimizer->GetCurrentPosition();
@@ -168,14 +170,10 @@ itkFRPROptimizerTest(int, char *[])
     //
     // check results to see if it is within range
     //
-    bool             pass = true;
     constexpr double trueParameters[2]{ 2, -2 };
     for (unsigned int j = 0; j < 2; ++j)
     {
-      if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-      {
-        pass = false;
-      }
+      EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
     }
 
     // Exercise various member functions.
@@ -185,14 +183,6 @@ itkFRPROptimizerTest(int, char *[])
     std::cout << std::endl;
 
     itkOptimizer->Print(std::cout);
-
-    if (!pass)
-    {
-      std::cout << "Fletch Reeves test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    std::cout << "Fletch Reeves test passed." << std::endl;
   }
 
   {
@@ -212,7 +202,7 @@ itkFRPROptimizerTest(int, char *[])
       std::cout << "An error occurred during Optimization" << std::endl;
       std::cout << "Location    = " << e.GetLocation() << std::endl;
       std::cout << "Description = " << e.GetDescription() << std::endl;
-      return EXIT_FAILURE;
+      FAIL();
     }
 
     ParametersType finalPosition = itkOptimizer->GetCurrentPosition();
@@ -223,14 +213,10 @@ itkFRPROptimizerTest(int, char *[])
     //
     // check results to see if it is within range
     //
-    bool             pass = true;
     constexpr double trueParameters[2]{ 2, -2 };
     for (unsigned int j = 0; j < 2; ++j)
     {
-      if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-      {
-        pass = false;
-      }
+      EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
     }
 
     // Exercise various member functions.
@@ -240,14 +226,6 @@ itkFRPROptimizerTest(int, char *[])
     std::cout << std::endl;
 
     itkOptimizer->Print(std::cout);
-
-    if (!pass)
-    {
-      std::cout << "Polak Ribiere test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    std::cout << "Polak Ribiere test passed." << std::endl;
   }
 
   // Test streaming enumeration for FRPROptimizerEnums::Optimization elements
@@ -258,5 +236,4 @@ itkFRPROptimizerTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE FRPROptimizerEnums::Optimization: " << ee << std::endl;
   }
-  return EXIT_SUCCESS;
 }
