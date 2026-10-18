@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKDisplacementFieldTests
-  itkDisplacementFieldTransformCloneTest.cxx
   itkDisplacementFieldTransformTest.cxx
   itkExponentialDisplacementFieldImageFilterTest.cxx
   itkGaussianExponentialDiffeomorphicTransformTest.cxx
@@ -152,12 +151,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/warpedImage.nii
 )
 itk_add_test(
-  NAME itkDisplacementFieldTransformCloneTest
-  COMMAND
-    ITKDisplacementFieldTestDriver
-    itkDisplacementFieldTransformCloneTest
-)
-itk_add_test(
   NAME itkExponentialDisplacementFieldImageFilterTest
   COMMAND
     ITKDisplacementFieldTestDriver
@@ -171,6 +164,7 @@ set(
   itkComposeDisplacementFieldsImageFilterGTest.cxx
   itkDisplacementFieldJacobianDeterminantFilterGTest.cxx
   itkDisplacementFieldToBSplineImageFilterGTest.cxx
+  itkDisplacementFieldTransformCloneGTest.cxx
   itkExponentialDisplacementFieldImageFilterGTest.cxx
   itkInverseDisplacementFieldImageFilterGTest.cxx
   itkIterativeInverseDisplacementFieldImageFilterGTest.cxx
