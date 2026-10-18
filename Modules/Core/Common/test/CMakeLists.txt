@@ -78,7 +78,6 @@ set(
   itkMemoryLeakTest.cxx
   itkVectorGeometryTest.cxx
   itkVNLRoundProfileTest1.cxx
-  itkMemoryProbesCollecterBaseTest.cxx
   itkOptimizerParametersTest.cxx
   itkImageToImageToleranceTest.cxx
   itkImageRegionSplitterSlowDimensionTest.cxx
@@ -1024,12 +1023,6 @@ itk_add_test(
     ITKCommon2TestDriver
     itkVNLRoundProfileTest1
 )
-itk_add_test(
-  NAME itkMemoryProbesCollecterBaseTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMemoryProbesCollecterBaseTest
-)
 if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 4)
   itk_add_test(
     NAME itkImageFillBufferTest4.1
@@ -1342,6 +1335,7 @@ set(
   itkMathGTest.cxx
   itkMathRoundGTest.cxx
   itkMathVnlParityGTest.cxx
+  itkMemoryProbesCollecterBaseGTest.cxx
   itkBridgeMathSVDGTest.cxx
   itkBridgeMathLDLTGTest.cxx
   itkVnlCholeskyEngineGTest.cxx
