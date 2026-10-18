@@ -16,14 +16,12 @@
  *
  *=========================================================================*/
 
-#include <iostream>
 #include "itkCurvatureAnisotropicDiffusionImageFilter.h"
 #include "itkNullImageToImageFilterDriver.hxx"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkCurvatureAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(CurvatureAnisotropicDiffusionImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -35,7 +33,8 @@ itkCurvatureAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itk
   // Set up filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, CurvatureAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    filter, CurvatureAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
 
 
   const itk::SimpleFilterWatcher watcher(filter);
@@ -43,15 +42,15 @@ itkCurvatureAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itk
 
   constexpr itk::IdentifierType numberOfIterations{ 1 };
   filter->SetNumberOfIterations(numberOfIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, filter->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, filter->GetNumberOfIterations());
 
   auto conductanceParameter = 3.0;
   filter->SetConductanceParameter(conductanceParameter);
-  ITK_TEST_SET_GET_VALUE(conductanceParameter, filter->GetConductanceParameter());
+  EXPECT_EQ(conductanceParameter, filter->GetConductanceParameter());
 
   constexpr FilterType::TimeStepType timeStep{ 0.125 };
   filter->SetTimeStep(timeStep);
-  ITK_TEST_SET_GET_VALUE(timeStep, filter->GetTimeStep());
+  EXPECT_EQ(timeStep, filter->GetTimeStep());
 
   // Run test
   itk::Size<2> sz;
@@ -61,9 +60,5 @@ itkCurvatureAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itk
   test1.SetImageSize(sz);
   test1.SetFilter(filter);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(test1.Execute());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(test1.Execute());
 }
