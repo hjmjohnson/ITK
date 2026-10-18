@@ -90,7 +90,6 @@ set(
   itkMemoryProbesCollecterBaseTest.cxx
   itkOptimizerParametersTest.cxx
   itkImageRegionConstIteratorWithOnlyIndexTest.cxx
-  itkImageRandomConstIteratorWithOnlyIndexTest.cxx
   itkImageToImageToleranceTest.cxx
   itkImageRegionSplitterSlowDimensionTest.cxx
   itkImageRegionSplitterDirectionTest.cxx
@@ -1239,12 +1238,6 @@ itk_add_test(
     ITKCommon2TestDriver
     itkImageRegionConstIteratorWithOnlyIndexTest
 )
-itk_add_test(
-  NAME itkImageRandomConstIteratorWithOnlyIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageRandomConstIteratorWithOnlyIndexTest
-)
 
 itk_add_test(
   NAME itkImageToImageToleranceTest
@@ -1446,6 +1439,7 @@ set(
   itkImageLinearIteratorGTest.cxx
   itkImageNeighborhoodOffsetsGTest.cxx
   itkImageRandomConstIteratorWithIndexGTest.cxx
+  itkImageRandomConstIteratorWithOnlyIndexGTest.cxx
   itkImageRandomNonRepeatingIteratorWithIndexGTest.cxx
   itkImageRegionGTest.cxx
   itkImageRegionRangeGTest.cxx
