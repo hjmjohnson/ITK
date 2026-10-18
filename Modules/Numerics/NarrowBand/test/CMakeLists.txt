@@ -1,18 +1,8 @@
 itk_module_test()
-set(
-  ITKNarrowBandTests
-  itkNarrowBandImageFilterBaseTest.cxx
-  itkNarrowBandTest.cxx
-)
+set(ITKNarrowBandTests itkNarrowBandImageFilterBaseTest.cxx)
 
 createtestdriver(ITKNarrowBand "${ITKNarrowBand-Test_LIBRARIES}" "${ITKNarrowBandTests}")
 
-itk_add_test(
-  NAME itkNarrowBandTest
-  COMMAND
-    ITKNarrowBandTestDriver
-    itkNarrowBandTest
-)
 itk_add_test(
   NAME itkNarrowBandImageFilterBaseTest
   COMMAND
@@ -23,5 +13,9 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkNarrowBandImageFilterBaseTest.png
 )
 
-set(ITKNarrowBandGTests itkNarrowBandSmallBandGTest.cxx)
+set(
+  ITKNarrowBandGTests
+  itkNarrowBandGTest.cxx
+  itkNarrowBandSmallBandGTest.cxx
+)
 creategoogletestdriver(ITKNarrowBand "${ITKNarrowBand-Test_LIBRARIES}" "${ITKNarrowBandGTests}")
