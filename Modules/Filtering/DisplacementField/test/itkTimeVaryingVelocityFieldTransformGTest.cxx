@@ -17,11 +17,10 @@
  *=========================================================================*/
 
 #include "itkTimeVaryingVelocityFieldTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkTimeVaryingVelocityFieldTransformTest(int, char *[])
+TEST(TimeVaryingVelocityFieldTransform, ConvertedLegacyTest)
 {
   constexpr unsigned int ComponentDimension{ 3 };
   constexpr unsigned int VelocityFieldDimension{ 4 };
@@ -70,11 +69,7 @@ itkTimeVaryingVelocityFieldTransformTest(int, char *[])
   VectorType displacementPixel = displacementField->GetPixel(index);
 
   std::cout << "Estimated forward displacement vector: " << displacementPixel << std::endl;
-  if (itk::Math::Absolute(displacementPixel[0] - 0.045) > 0.0001)
-  {
-    std::cerr << "Failed to produce the correct forward integration." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(displacementPixel[0] - 0.045), 0.0001);
 
   auto inverseIntegrator = IntegratorType::New();
   inverseIntegrator->SetInput(timeVaryingVelocityField);
@@ -88,30 +83,26 @@ itkTimeVaryingVelocityFieldTransformTest(int, char *[])
   // due to numerical computations
   const DisplacementFieldType * inverseField = inverseIntegrator->GetOutput();
   displacementPixel = inverseField->GetPixel(index);
-  if (itk::Math::Absolute(displacementPixel[0] + 0.101852) > 0.01)
-  {
-    std::cerr << "Failed to produce the correct inverse integration." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(displacementPixel[0] + 0.101852), 0.01);
 
   // Now test the transform
 
   using TransformType = itk::TimeVaryingVelocityFieldTransform<ComponentType, ComponentDimension>;
   auto transform = TransformType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(transform, TimeVaryingVelocityFieldTransform, VelocityFieldTransform);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(transform, TimeVaryingVelocityFieldTransform, VelocityFieldTransform);
 
   transform->SetLowerTimeBound(0.0);
   transform->SetUpperTimeBound(1.0);
 
-  ITK_TRY_EXPECT_EXCEPTION(transform->IntegrateVelocityField());
+  EXPECT_THROW(transform->IntegrateVelocityField(), itk::ExceptionObject);
 
 
   transform->SetVelocityField(timeVaryingVelocityField);
-  ITK_TEST_SET_GET_VALUE(timeVaryingVelocityField, transform->GetModifiableTimeVaryingVelocityField());
-  ITK_TEST_SET_GET_VALUE(timeVaryingVelocityField, transform->GetTimeVaryingVelocityField());
+  EXPECT_EQ(timeVaryingVelocityField, transform->GetModifiableTimeVaryingVelocityField());
+  EXPECT_EQ(timeVaryingVelocityField, transform->GetTimeVaryingVelocityField());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(transform->IntegrateVelocityField());
+  EXPECT_NO_THROW(transform->IntegrateVelocityField());
 
 
   // Now Clone the Transform and test transform again
@@ -127,16 +118,8 @@ itkTimeVaryingVelocityFieldTransformTest(int, char *[])
 
   point += displacement;
 
-  if (point.EuclideanDistanceTo(transformedPoint) > 0.01)
-  {
-    std::cerr << "Failed to produce the expected transformed point." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (point.EuclideanDistanceTo(cloneTransformedPoint) > 0.01)
-  {
-    std::cerr << "Cloned transform failed to produce the expected transformed point." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(point.EuclideanDistanceTo(transformedPoint), 0.01);
+  EXPECT_LE(point.EuclideanDistanceTo(cloneTransformedPoint), 0.01);
   point -= displacement;
 
   TransformType::InputPointType point2;
@@ -152,20 +135,8 @@ itkTimeVaryingVelocityFieldTransformTest(int, char *[])
   transformedPoint = inverseTransform->TransformPoint(point2);
   cloneTransformedPoint = cloneInverseTransform->TransformPoint(clonePoint2);
 
-  if (point.EuclideanDistanceTo(transformedPoint) > 0.01)
-  {
-    std::cerr << "Failed to produce the expected inverse transformed point." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (point.EuclideanDistanceTo(cloneTransformedPoint) > 0.01)
-  {
-    std::cerr << "Cloned transform failed to produce the expected inverse transformed point." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(point.EuclideanDistanceTo(transformedPoint), 0.01);
+  EXPECT_LE(point.EuclideanDistanceTo(cloneTransformedPoint), 0.01);
 
   transform->Print(std::cout, 3);
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
