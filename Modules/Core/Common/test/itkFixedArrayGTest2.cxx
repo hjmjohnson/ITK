@@ -18,11 +18,11 @@
 
 #include <iostream>
 #include "itkFixedArray.h"
+#include "itkGTest.h"
 #include <ctime>
 #include <cstring>
 
-int
-itkFixedArrayTest2(int, char *[])
+TEST(FixedArray2, ConvertedLegacyTest)
 {
   // Define the number of elements in the array
   constexpr unsigned int nelements{ 10000000L };
@@ -117,19 +117,11 @@ itkFixedArrayTest2(int, char *[])
 
   std::cout << "Performance ratio = " << ratio << '%' << std::endl;
 
-  if (!sameptr && ratio > 20.0) // tolerates only 20%
-  {
-    std::cerr << "Performance degraded below tolerance" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(!sameptr && ratio > 20.0) << "Performance degraded below tolerance"; // tolerates only 20%
 
 
   // Make sure we do something with the sums otherwise everything
   // could be optimized away by the compiler
-  if (acc1 == 0.0 && acc2 == 0.0)
-  {
-    return EXIT_SUCCESS;
-  }
-
-  return EXIT_FAILURE;
+  EXPECT_EQ(acc1, 0.0);
+  EXPECT_EQ(acc2, 0.0);
 }
