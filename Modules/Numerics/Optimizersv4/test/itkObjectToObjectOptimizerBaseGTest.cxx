@@ -17,8 +17,10 @@
  *=========================================================================*/
 #include "itkObjectToObjectOptimizerBase.h"
 #include "itkImage.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 /* Create a simple metric to use for testing here. */
 template <typename TFixedObject, typename TMovingObject>
 class ObjectToObjectOptimizerBaseTestMetric : public itk::ObjectToObjectMetricBase
@@ -141,11 +143,11 @@ public:
     return { "Placeholder test return string" };
   }
 };
+} // namespace
 
 /**
  */
-int
-itkObjectToObjectOptimizerBaseTest(int, char *[])
+TEST(ObjectToObjectOptimizerBase, ConvertedLegacyTest)
 {
   constexpr int ImageDimension{ 2 };
   using ImageType = itk::Image<double, ImageDimension>;
@@ -155,18 +157,11 @@ itkObjectToObjectOptimizerBaseTest(int, char *[])
   auto metric = MetricType::New();
   auto optimizer = ObjectToObjectOptimizerBaseTestOptimizer::New();
 
-  if (optimizer->GetStopConditionDescription() != std::string("Placeholder test return string"))
-  {
-    std::cerr << "GetStopConditionDescription did not return properly" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(optimizer->GetStopConditionDescription(), std::string("Placeholder test return string"))
+    << "GetStopConditionDescription did not return properly";
   /* exercise some methods */
   optimizer->SetMetric(metric);
-  if (optimizer->GetMetric() != metric)
-  {
-    std::cerr << "Set/GetMetric failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(optimizer->GetMetric(), metric) << "Set/GetMetric failed.";
 
   std::cout << "value: " << optimizer->GetCurrentMetricValue() << std::endl;
 
@@ -177,72 +172,52 @@ itkObjectToObjectOptimizerBaseTest(int, char *[])
   ScalesType scales(scalesSize, 3.19);
   optimizer->SetScales(scales);
   const ScalesType & scalesReturn = optimizer->GetScales();
-  if (scalesReturn != scales)
-  {
-    std::cerr << "Set/GetScales failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(scalesReturn, scales) << "Set/GetScales failed.";
 
   optimizer->SetNumberOfWorkUnits(1);
 
   /* Test StartOptimization */
-  ITK_TRY_EXPECT_NO_EXCEPTION(optimizer->StartOptimization());
+  ASSERT_NO_THROW(optimizer->StartOptimization());
 
   /* Test with incorrectly-sized scales. Expect exception */
   scales.SetSize(scalesSize + 1);
   optimizer->SetScales(scales);
-  ITK_TRY_EXPECT_EXCEPTION(optimizer->StartOptimization());
+  EXPECT_THROW(optimizer->StartOptimization(), itk::ExceptionObject);
 
   /* Test with scales close to identity, within tolerance.
    * The flag indicating identity scales should be set. */
   scales.SetSize(scalesSize);
   scales.Fill(0.999);
   optimizer->SetScales(scales);
-  ITK_TRY_EXPECT_NO_EXCEPTION(optimizer->StartOptimization());
-  if (!optimizer->GetScalesAreIdentity())
-  {
-    std::cerr << "Expected GetScalesAreIdentity to return true." << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(optimizer->StartOptimization());
+  EXPECT_TRUE(optimizer->GetScalesAreIdentity()) << "Expected GetScalesAreIdentity to return true.";
 
   /* Test that weights are initialized by default to identity */
   const ObjectToObjectOptimizerBaseTestOptimizer::NumberOfParametersType weightsSize =
     metric->GetNumberOfLocalParameters();
-  ITK_TRY_EXPECT_NO_EXCEPTION(optimizer->StartOptimization());
+  ASSERT_NO_THROW(optimizer->StartOptimization());
   ScalesType weightsReturn = optimizer->GetWeights();
-  if (weightsReturn.Size() != 0 || !optimizer->GetWeightsAreIdentity())
-  {
-    std::cerr << "Expected returned weights to be empty, and flag set to identity. But got: " << weightsReturn
-              << ", GetWeightsAreIdentity: " << optimizer->GetWeightsAreIdentity() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(weightsReturn.Size(), 0u);
+  EXPECT_TRUE(optimizer->GetWeightsAreIdentity());
 
   /* Test set/get of weights */
   ScalesType weights(weightsSize, 3.19);
   optimizer->SetWeights(weights);
   weightsReturn = optimizer->GetWeights();
-  if (weightsReturn != weights)
-  {
-    std::cerr << "Set/GetWeights failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(weightsReturn, weights) << "Set/GetWeights failed.";
 
   /* Test with incorrectly-sized weights. Expect exception */
   weights.SetSize(weightsSize + 1);
   optimizer->SetWeights(weights);
-  ITK_TRY_EXPECT_EXCEPTION(optimizer->StartOptimization());
+  EXPECT_THROW(optimizer->StartOptimization(), itk::ExceptionObject);
 
   /* Test with weights close to identity, within tolerance.
    * The flag indicating identity weights should be set. */
   weights.SetSize(weightsSize);
   weights.Fill(0.99999);
   optimizer->SetWeights(weights);
-  ITK_TRY_EXPECT_NO_EXCEPTION(optimizer->StartOptimization());
-  if (!optimizer->GetWeightsAreIdentity())
-  {
-    std::cerr << "Expected GetWeightsAreIdentity to return true." << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(optimizer->StartOptimization());
+  EXPECT_TRUE(optimizer->GetWeightsAreIdentity()) << "Expected GetWeightsAreIdentity to return true.";
 
   std::cout << "Printing self.." << std::endl;
   std::cout << optimizer << std::endl;
@@ -265,6 +240,4 @@ itkObjectToObjectOptimizerBaseTest(int, char *[])
     std::cout << "STREAMED ENUM VALUE ObjectToObjectOptimizerBaseTemplateEnums::StopConditionObjectToObjectOptimizer: "
               << ee << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
