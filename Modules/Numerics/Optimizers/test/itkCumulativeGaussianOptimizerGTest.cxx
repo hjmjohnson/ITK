@@ -18,7 +18,7 @@
 
 #include "itkCumulativeGaussianOptimizer.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -31,8 +31,7 @@
  * be within differenceTolerance of the fitError.
  */
 
-int
-itkCumulativeGaussianOptimizerTest(int, char *[])
+TEST(CumulativeGaussianOptimizer, ConvertedLegacyTest)
 {
   constexpr double mean{ 3 };                    // Mean of the Cumulative Gaussian.
                                                  // Ranges from 0 to N-1, where N is numberOfSamples.
@@ -46,7 +45,7 @@ itkCumulativeGaussianOptimizerTest(int, char *[])
   using CumulativeGaussianOptimizerType = itk::CumulativeGaussianOptimizer;
   auto optimizer = CumulativeGaussianOptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(optimizer, CumulativeGaussianOptimizer, MultipleValuedNonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(optimizer, CumulativeGaussianOptimizer, MultipleValuedNonLinearOptimizer);
 
 
   // Typedef and initialization for the Cumulative Gaussian Cost Function.
@@ -83,11 +82,11 @@ itkCumulativeGaussianOptimizerTest(int, char *[])
 
   // Set the tolerance for the Gaussian iteration error.
   optimizer->SetDifferenceTolerance(differenceTolerance);
-  ITK_TEST_SET_GET_VALUE(differenceTolerance, optimizer->GetDifferenceTolerance());
+  EXPECT_EQ(differenceTolerance, optimizer->GetDifferenceTolerance());
 
   // Print results after each iteration.
   constexpr bool verbose{ true };
-  ITK_TEST_SET_GET_BOOLEAN(optimizer, Verbose, verbose);
+  ITK_GTEST_SET_GET_BOOLEAN(optimizer, Verbose, verbose);
 
   // Set the data array.
   optimizer->SetDataArray(cumGaussianArray);
@@ -99,32 +98,18 @@ itkCumulativeGaussianOptimizerTest(int, char *[])
 
   // The test passes if the difference between the given parameters and estimated parameters
   // is less than or equal to 0.1.
-  if (itk::Math::Absolute(optimizer->GetComputedMean() - mean) <= 0.1 &&
-      itk::Math::Absolute(optimizer->GetComputedStandardDeviation() - standardDeviation) <= 0.1 &&
-      itk::Math::Absolute(optimizer->GetUpperAsymptote() - upperAsymptote) <= 0.1 &&
-      itk::Math::Absolute(optimizer->GetLowerAsymptote() - lowerAsymptote) <= 0.1)
-  {
-    std::cerr << std::endl << "Test Passed with a Fit Error of " << optimizer->GetFitError() << std::endl << std::endl;
+  EXPECT_NEAR(optimizer->GetComputedMean(), mean, 0.1);
+  EXPECT_NEAR(optimizer->GetComputedStandardDeviation(), standardDeviation, 0.1);
+  EXPECT_NEAR(optimizer->GetUpperAsymptote(), upperAsymptote, 0.1);
+  EXPECT_NEAR(optimizer->GetLowerAsymptote(), lowerAsymptote, 0.1);
 
-    // Print out the resulting parameters.
-    std::cerr << "Fitted mean = " << optimizer->GetComputedMean() << std::endl;
-    std::cerr << "Fitted standard deviation = " << optimizer->GetComputedStandardDeviation() << std::endl;
-    std::cerr << "Fitted upper intensity = " << optimizer->GetUpperAsymptote() << std::endl;
-    std::cerr << "Fitted lower intensity = " << optimizer->GetLowerAsymptote() << std::endl;
-
-    std::cerr << "FinalSampledArray: " << optimizer->GetFinalSampledArray() << std::endl;
-
-    std::cout << "[TEST DONE]" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cerr << std::endl << "Test Failed with a Fit Error of " << optimizer->GetFitError() << std::endl << std::endl;
+  std::cerr << std::endl << "Fit Error of " << optimizer->GetFitError() << std::endl << std::endl;
 
   // Print out the resulting parameters.
   std::cerr << "Fitted mean = " << optimizer->GetComputedMean() << std::endl;
   std::cerr << "Fitted standard deviation = " << optimizer->GetComputedStandardDeviation() << std::endl;
-  std::cerr << "Fitted upper asymptote = " << optimizer->GetUpperAsymptote() << std::endl;
-  std::cerr << "Fitted lower asymptote = " << optimizer->GetLowerAsymptote() << std::endl;
+  std::cerr << "Fitted upper intensity = " << optimizer->GetUpperAsymptote() << std::endl;
+  std::cerr << "Fitted lower intensity = " << optimizer->GetLowerAsymptote() << std::endl;
 
-  return EXIT_FAILURE;
+  std::cerr << "FinalSampledArray: " << optimizer->GetFinalSampledArray() << std::endl;
 }
