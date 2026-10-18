@@ -3,7 +3,6 @@ set(
   ITKOptimizersv4Tests
   itkAutoScaledGradientDescentRegistrationOnVectorTest.cxx
   itkAutoScaledGradientDescentRegistrationTest.cxx
-  itkConjugateGradientLineSearchOptimizerv4Test.cxx
   itkExhaustiveOptimizerv4Test.cxx
   itkGradientDescentLineSearchOptimizerv4Test.cxx
   itkGradientDescentOptimizerBasev4Test.cxx
@@ -37,6 +36,7 @@ createtestdriver(ITKOptimizersv4 "${ITKOptimizersv4-Test_LIBRARIES}" "${ITKOptim
 set(
   ITKOptimizersv4GTests
   itkAmoebaOptimizerv4GTest.cxx
+  itkConjugateGradientLineSearchOptimizerv4GTest.cxx
   itkGradientDescentOptimizerv4ObserverGTest.cxx
   itkMultiGradientOptimizerv4GTest.cxx
   itkObjectToObjectMetricGTest.cxx
@@ -70,13 +70,6 @@ itk_add_test(
   COMMAND
     ITKOptimizersv4TestDriver
     itkGradientDescentLineSearchOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkConjugateGradientLineSearchOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkConjugateGradientLineSearchOptimizerv4Test
 )
 
 itk_add_test(
