@@ -19,10 +19,13 @@
 #include <iostream>
 
 #include "itkImageIterator.h"
+#include "itkGTest.h"
 
 
 // This routine is used to make sure that we call the "const" version
 // of GetPixel() (via the operator[])
+namespace
+{
 template <typename T, unsigned int VImageDimension>
 void
 TestConstPixelAccess(const itk::Image<T, VImageDimension> & in, itk::Image<T, VImageDimension> & out)
@@ -41,10 +44,10 @@ TestConstPixelAccess(const itk::Image<T, VImageDimension> & in, itk::Image<T, VI
   out[regionStartIndex3D] = vec;
   out[regionEndIndex3D] = in[regionStartIndex3D];
 }
+} // namespace
 
 
-int
-itkImageIteratorTest(int, char *[])
+TEST(ImageIterator, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -102,102 +105,50 @@ itkImageIteratorTest(int, char *[])
   itr4 = itr1;
 
   // Exercise operator!=
-  if (itr4 != itr1)
-  {
-    std::cerr << "Error in operator= or operator!=" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(itr4 != itr1) << "Error in operator= or operator!=";
 
   // Exercise operator==
-  if (!(itr4 == itr1))
-  {
-    std::cerr << "Error in operator= or operator==" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(itr4, itr1) << "Error in operator= or operator==";
 
   // Exercise operator<=
-  if (!(itr4 <= itr1))
-  {
-    std::cerr << "Error in operator= or operator<=" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itr4, itr1) << "Error in operator= or operator<=";
 
   // Exercise operator<
-  if (itr4 < itr1)
-  {
-    std::cerr << "Error in operator= or operator<" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(itr4 < itr1) << "Error in operator= or operator<";
 
   // Exercise operator>=
-  if (!(itr4 >= itr1))
-  {
-    std::cerr << "Error in operator= or operator>=" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GE(itr4, itr1) << "Error in operator= or operator>=";
 
   // Exercise operator>
-  if (itr4 > itr1)
-  {
-    std::cerr << "Error in operator= or operator>" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(itr4 > itr1) << "Error in operator= or operator>";
 
   // Exercise GetImageIteratorDimension()
-  if (itr1.GetImageIteratorDimension() != ImageDimension)
-  {
-    std::cerr << "Error in GetImageIteratorDimension" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(itr1.GetImageIteratorDimension(), ImageDimension) << "Error in GetImageIteratorDimension";
 
   // Exercise GetIndex()
   const VectorImageType::IndexType index1 = itr1.ComputeIndex();
-  if (index1 != startIndex3D)
-  {
-    std::cerr << "Error in GetIndex()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(index1, startIndex3D) << "Error in GetIndex()";
 
   // Exercise SetIndex()
   VectorImageType::IndexType index2 = index1;
   index2[0]++;
   VectorImageIterator itr5 = itr1;
   itr5.SetIndex(index2);
-  if (itr5.ComputeIndex() != index2)
-  {
-    std::cerr << "Error in GetIndex() and/or SetIndex()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(itr5.ComputeIndex(), index2) << "Error in GetIndex() and/or SetIndex()";
 
-  if (itr5.ComputeIndex() == itr1.ComputeIndex())
-  {
-    std::cerr << "Error in GetIndex() and/or SetIndex()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(itr5.ComputeIndex(), itr1.ComputeIndex()) << "Error in GetIndex() and/or SetIndex()";
 
   // Exercise GetRegion()
   const VectorImageType::RegionType region1 = itr1.GetRegion();
-  if (region1 != region)
-  {
-    std::cerr << "Error in GetRegion()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(region1, region) << "Error in GetRegion()";
 
   // Exercise GetImage() non-const version
   VectorImageType * image1 = itr1.GetImage();
-  if (image1 != o3.GetPointer())
-  {
-    std::cerr << "Error in GetImage()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(image1, o3.GetPointer()) << "Error in GetImage()";
 
   // Exercise GetImage() const version
   const VectorImageType * image2 = itr2.GetImage();
-  if (image2 != o3.GetPointer())
-  {
-    std::cerr << "Error in GetImage()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(image2, o3.GetPointer()) << "Error in GetImage()";
 
   // Exercise Get() non-const and const version
   {
@@ -205,20 +156,12 @@ itkImageIteratorTest(int, char *[])
     VectorPixelType vp2 = itr2.Get();
     std::cout << "vp1: " << vp1 << std::endl;
     std::cout << "vp2: " << vp2 << std::endl;
-    if (vp1 != vp2)
-    {
-      std::cerr << "Error in Get()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(vp1, vp2) << "Error in Get()";
     // verify that the value can be modified
     vp1[0]++;
     itr1.Set(vp1);
     vp2 = itr2.Get();
-    if (vp1 != vp2)
-    {
-      std::cerr << "Error in Get() and/or Set()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(vp1, vp2) << "Error in Get() and/or Set()";
   }
 
 
@@ -226,53 +169,26 @@ itkImageIteratorTest(int, char *[])
   {
     VectorPixelType vp1 = itr1.Value();
     VectorPixelType vp2 = itr2.Value();
-    if (vp1 != vp2)
-    {
-      std::cerr << "Error in Value()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(vp1, vp2) << "Error in Value()";
     // verify that the value can be modified
     vp1[0]++;
     itr1.Value() = vp1;
     vp2 = itr2.Value();
-    if (vp1 != vp2)
-    {
-      std::cerr << "Error in Get() and/or Set()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(vp1, vp2) << "Error in Get() and/or Set()";
   }
 
   // Exercise Begin(), GoToBegin(), IsAtBegin() and IsAtEnd()
   {
     itr1.GoToBegin();
-    if (!itr1.IsAtBegin())
-    {
-      std::cerr << "Error in Begin() and/or IsAtBegin()" << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (itr1.IsAtEnd())
-    {
-      std::cerr << "Error in Begin() and/or IsAtEnd()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(itr1.IsAtBegin()) << "Error in Begin() and/or IsAtBegin()";
+    EXPECT_FALSE(itr1.IsAtEnd()) << "Error in Begin() and/or IsAtEnd()";
   }
 
 
   // Exercise End(), GoToEnd(), IsAtBegin() and IsAtEnd()
   {
     itr1.GoToEnd();
-    if (!itr1.IsAtEnd())
-    {
-      std::cerr << "Error in End() and/or IsAtEnd()" << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (itr1.IsAtBegin())
-    {
-      std::cerr << "Error in End() and/or IsAtBegin()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(itr1.IsAtEnd()) << "Error in End() and/or IsAtEnd()";
+    EXPECT_FALSE(itr1.IsAtBegin()) << "Error in End() and/or IsAtBegin()";
   }
-
-
-  return EXIT_SUCCESS;
 }
