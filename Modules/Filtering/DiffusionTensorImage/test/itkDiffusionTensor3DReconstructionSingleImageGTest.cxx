@@ -23,10 +23,9 @@
 #include "itkDiffusionTensor3DReconstructionImageFilter.h"
 #include "itkImageRegionIterator.h"
 #include <cmath>
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkDiffusionTensor3DReconstructionSingleImageTest(int, char *[])
+TEST(DiffusionTensor3DReconstructionSingleImage, ConvertedLegacyTest)
 {
   using ReferencePixelType = short;
   using GradientPixelType = short;
@@ -126,14 +125,6 @@ itkDiffusionTensor3DReconstructionSingleImageTest(int, char *[])
   }
 
   std::cout << "SingleImage vs MultiImage max tensor difference: " << maxDiff << std::endl;
-  ITK_TEST_EXPECT_TRUE(anyNonZero);
-  if (maxDiff > tolerance)
-  {
-    std::cerr << "Single-image path disagrees with multi-image path (max diff " << maxDiff << " > " << tolerance << ')'
-              << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(anyNonZero);
+  EXPECT_LE(maxDiff, tolerance);
 }
