@@ -1,26 +1,17 @@
 itk_module_test()
-set(
-  ITKCurvatureFlowTests
-  itkBinaryMinMaxCurvatureFlowImageFilterTest.cxx
-  itkCurvatureFlowTest.cxx
-)
+set(ITKCurvatureFlowTests itkCurvatureFlowTest.cxx)
 
 createtestdriver(ITKCurvatureFlow "${ITKCurvatureFlow-Test_LIBRARIES}" "${ITKCurvatureFlowTests}")
 
 set(
   ITKCurvatureFlowGTests
+  itkBinaryMinMaxCurvatureFlowImageFilterGTest.cxx
   itkCurvatureFlowFunctionGTest.cxx
   itkMinMaxCurvatureFlowFunctionGTest.cxx
 )
 
 creategoogletestdriver(ITKCurvatureFlow "${ITKCurvatureFlow-Test_LIBRARIES}" "${ITKCurvatureFlowGTests}")
 
-itk_add_test(
-  NAME itkBinaryMinMaxCurvatureFlowImageFilterTest
-  COMMAND
-    ITKCurvatureFlowTestDriver
-    itkBinaryMinMaxCurvatureFlowImageFilterTest
-)
 itk_add_test(
   NAME itkCurvatureFlowTesti
   COMMAND
