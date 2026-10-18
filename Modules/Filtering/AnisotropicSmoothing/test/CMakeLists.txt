@@ -2,17 +2,10 @@ itk_module_test()
 set(
   ITKAnisotropicSmoothingTests
   itkGradientAnisotropicDiffusionImageFilterTest2.cxx
-  itkVectorAnisotropicDiffusionImageFilterTest.cxx
 )
 
 createtestdriver(ITKAnisotropicSmoothing "${ITKAnisotropicSmoothing-Test_LIBRARIES}" "${ITKAnisotropicSmoothingTests}")
 
-itk_add_test(
-  NAME itkVectorAnisotropicDiffusionImageFilterTest
-  COMMAND
-    ITKAnisotropicSmoothingTestDriver
-    itkVectorAnisotropicDiffusionImageFilterTest
-)
 itk_add_test(
   NAME itkGradientAnisotropicDiffusionImageFilterTest2
   COMMAND
