@@ -20,11 +20,10 @@
 #include "itkTensorFractionalAnisotropyImageFilter.h"
 #include "itkDiffusionTensor3D.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkTensorFractionalAnisotropyImageFilterTest(int, char *[])
+TEST(TensorFractionalAnisotropyImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -103,7 +102,7 @@ itkTensorFractionalAnisotropyImageFilterTest(int, char *[])
 
   auto fractionalAnisotropyFilter = FAFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     fractionalAnisotropyFilter, TensorFractionalAnisotropyImageFilter, UnaryFunctorImageFilter);
 
   fractionalAnisotropyFilter->SetInput(filter->GetOutput());
@@ -132,8 +131,4 @@ itkTensorFractionalAnisotropyImageFilterTest(int, char *[])
     std::cout << itg.GetIndex() << " = " << itg.Get() << std::endl;
     ++itg;
   }
-
-
-  std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
