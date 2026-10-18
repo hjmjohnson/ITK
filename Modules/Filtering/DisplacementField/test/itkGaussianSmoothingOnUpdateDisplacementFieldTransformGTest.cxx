@@ -19,6 +19,7 @@
 #include <iostream>
 
 #include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"
+#include "itkGTest.h"
 #include "itkNumericTraits.h"
 #include "itkMath.h"
 
@@ -29,8 +30,7 @@
  * TODO: Create a more complete numerical test for the smoothing.
  */
 
-int
-itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
+TEST(GaussianSmoothingOnUpdateDisplacementFieldTransform, ConvertedLegacyTest)
 {
 
   constexpr unsigned int dimensions{ 2 };
@@ -89,13 +89,7 @@ itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
     {
       ok = false;
     }
-    if (!ok)
-    {
-      std::cout << "0-valued boundaries not found when expected "
-                << "after smoothing." << std::endl;
-      std::cout << "params: " << std::endl << params << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(ok);
   }
   /* Check that we have some smoothing around the outlier we set above. */
   std::cout << "Parameters *after* SmoothDisplacementFieldGauss, around "
@@ -137,13 +131,7 @@ itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
       {
         ok = false;
       }
-      if (!ok)
-      {
-        std::cout << "0-valued boundaries not found when expected "
-                  << "after UpdateTransformParameters:" << std::endl;
-        std::cout << "params: " << std::endl << params << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(ok);
     }
   }
 
@@ -166,12 +154,7 @@ itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
     {
       const unsigned int index = outlier + static_cast<unsigned int>(i * static_cast<int>(dimLength * dimensions) + j);
       std::cout << params(index) << ' ';
-      if (itk::Math::AlmostEquals(params(index), paramsFillValue))
-      {
-        std::cout << "Expected to read a smoothed value at this index."
-                  << " Instead, read " << params(index) << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FALSE(itk::Math::AlmostEquals(params(index), paramsFillValue));
     }
     std::cout << std::endl;
   }
@@ -182,6 +165,4 @@ itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest(int, char *[])
 
   displacementTransform->SetGaussianSmoothingVarianceForTheTotalField(2);
   std::cout << "sigma: " << displacementTransform->GetGaussianSmoothingVarianceForTheTotalField() << std::endl;
-
-  return EXIT_SUCCESS;
 }
