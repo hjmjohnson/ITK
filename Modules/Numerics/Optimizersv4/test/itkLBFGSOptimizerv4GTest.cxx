@@ -19,7 +19,7 @@
 #include "itkLBFGSOptimizerv4.h"
 #include "itkMath.h"
 #include "vnl/algo/vnl_lbfgs.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <iostream>
 
 /**
@@ -41,6 +41,8 @@
  *   the solution is the vector | 2 -2 |
  *
  */
+namespace
+{
 class itkLBFGSOptimizerv4TestMetric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -150,10 +152,10 @@ private:
   ParametersType m_Parameters;
   bool           m_HasLocalSupport{ false };
 };
+} // namespace
 
 
-int
-itkLBFGSOptimizerv4Test(int, char *[])
+TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
 {
   std::cout << "LBFGS Optimizerv4 Test \n \n";
 
@@ -163,7 +165,7 @@ itkLBFGSOptimizerv4Test(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, LBFGSOptimizerv4, LBFGSOptimizerBasev4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, LBFGSOptimizerv4, LBFGSOptimizerBasev4);
 
 
   // Declaration of the metric
@@ -172,29 +174,29 @@ itkLBFGSOptimizerv4Test(int, char *[])
   // Set some optimizer parameters
   constexpr bool trace{ false };
   itkOptimizer->SetTrace(trace);
-  ITK_TEST_SET_GET_VALUE(trace, itkOptimizer->GetTrace());
+  EXPECT_EQ(trace, itkOptimizer->GetTrace());
 
   unsigned int maximumNumberOfFunctionEvaluations = 1000;
   itkOptimizer->SetMaximumNumberOfFunctionEvaluations(maximumNumberOfFunctionEvaluations);
-  ITK_TEST_SET_GET_VALUE(maximumNumberOfFunctionEvaluations, itkOptimizer->GetMaximumNumberOfFunctionEvaluations());
+  EXPECT_EQ(maximumNumberOfFunctionEvaluations, itkOptimizer->GetMaximumNumberOfFunctionEvaluations());
 
   double gradientConvergenceTolerance = 1e-3;
   itkOptimizer->SetGradientConvergenceTolerance(gradientConvergenceTolerance);
-  ITK_TEST_SET_GET_VALUE(gradientConvergenceTolerance, itkOptimizer->GetGradientConvergenceTolerance());
+  EXPECT_EQ(gradientConvergenceTolerance, itkOptimizer->GetGradientConvergenceTolerance());
 
   double lineSearchAccuracy = 0.1;
   itkOptimizer->SetLineSearchAccuracy(lineSearchAccuracy);
-  ITK_TEST_SET_GET_VALUE(lineSearchAccuracy, itkOptimizer->GetLineSearchAccuracy());
+  EXPECT_EQ(lineSearchAccuracy, itkOptimizer->GetLineSearchAccuracy());
 
   double defaultStepLength = 5.0;
   itkOptimizer->SetDefaultStepLength(defaultStepLength);
-  ITK_TEST_SET_GET_VALUE(defaultStepLength, itkOptimizer->GetDefaultStepLength());
+  EXPECT_EQ(defaultStepLength, itkOptimizer->GetDefaultStepLength());
 
   const OptimizerType::DerivativeType cachedDerivative{};
-  ITK_TEST_EXPECT_EQUAL(cachedDerivative, itkOptimizer->GetCachedDerivative());
+  EXPECT_EQ(cachedDerivative, itkOptimizer->GetCachedDerivative());
 
   const OptimizerType::ParametersType cachedCurrentPos{};
-  ITK_TEST_EXPECT_EQUAL(cachedCurrentPos, itkOptimizer->GetCachedCurrentPosition());
+  EXPECT_EQ(cachedCurrentPos, itkOptimizer->GetCachedCurrentPosition());
 
   std::cout << "GetValue() before optimizer starts: " << itkOptimizer->GetValue() << std::endl;
   std::cout << "SetMetric." << std::endl;
@@ -220,19 +222,19 @@ itkLBFGSOptimizerv4Test(int, char *[])
   // Set some optimizer parameters
   maximumNumberOfFunctionEvaluations = 100;
   itkOptimizer->SetMaximumNumberOfFunctionEvaluations(maximumNumberOfFunctionEvaluations);
-  ITK_TEST_SET_GET_VALUE(maximumNumberOfFunctionEvaluations, itkOptimizer->GetMaximumNumberOfFunctionEvaluations());
+  EXPECT_EQ(maximumNumberOfFunctionEvaluations, itkOptimizer->GetMaximumNumberOfFunctionEvaluations());
 
   gradientConvergenceTolerance = 1e-4;
   itkOptimizer->SetGradientConvergenceTolerance(gradientConvergenceTolerance);
-  ITK_TEST_SET_GET_VALUE(gradientConvergenceTolerance, itkOptimizer->GetGradientConvergenceTolerance());
+  EXPECT_EQ(gradientConvergenceTolerance, itkOptimizer->GetGradientConvergenceTolerance());
 
   lineSearchAccuracy = 0.9;
   itkOptimizer->SetLineSearchAccuracy(lineSearchAccuracy);
-  ITK_TEST_SET_GET_VALUE(lineSearchAccuracy, itkOptimizer->GetLineSearchAccuracy());
+  EXPECT_EQ(lineSearchAccuracy, itkOptimizer->GetLineSearchAccuracy());
 
   defaultStepLength = 1.0;
   itkOptimizer->SetDefaultStepLength(defaultStepLength);
-  ITK_TEST_SET_GET_VALUE(defaultStepLength, itkOptimizer->GetDefaultStepLength());
+  EXPECT_EQ(defaultStepLength, itkOptimizer->GetDefaultStepLength());
 
   std::cout << "Start optimization." << std::endl;
   try
@@ -245,7 +247,7 @@ itkLBFGSOptimizerv4Test(int, char *[])
     std::cerr << "An error occurred during Optimization" << std::endl;
     std::cerr << "Location    = " << e.GetLocation() << std::endl;
     std::cerr << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   std::cout << "Stop description   = " << itkOptimizer->GetStopConditionDescription() << std::endl;
@@ -265,33 +267,17 @@ itkLBFGSOptimizerv4Test(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool             pass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   constexpr double tolerance{ 1e-2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (std::abs(finalPosition[j] - trueParameters[j]) > tolerance)
-    {
-      pass = false;
-    }
-  }
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], tolerance);
   }
 
   // Get the final value of the optimizer
   std::cout << "Testing GetValue() : ";
   const OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
-  if (itk::Math::Absolute(finalValue + 10.0) > 0.01)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "[SUCCESS]" << std::endl;
+  EXPECT_NEAR(finalValue, -10.0, 0.01);
 
 
   //
@@ -310,18 +296,13 @@ itkLBFGSOptimizerv4Test(int, char *[])
     std::cerr << "Exception thrown ! " << std::endl;
     std::cerr << "An error occurred during Optimization" << std::endl;
     std::cerr << e << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   std::cout << "Solution        = (" << finalPosition[0] << ',' << finalPosition[1] << ')' << std::endl;
   std::cout << "NumberOfIterations  = " << itkOptimizer->GetCurrentIteration() << std::endl;
 
-  if (itkOptimizer->GetCurrentIteration() != 5)
-  {
-    std::cout << "Not expected number of iterations!" << std::endl;
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(itkOptimizer->GetCurrentIteration(), 5u);
 
 
   // Test with non-identity scales
@@ -346,7 +327,7 @@ itkLBFGSOptimizerv4Test(int, char *[])
     std::cerr << "An error occurred during Optimization" << std::endl;
     std::cerr << "Location    = " << e.GetLocation() << std::endl;
     std::cerr << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   std::cout << "Scales after optimization: " << itkOptimizer->GetScales() << std::endl;
@@ -354,26 +335,13 @@ itkLBFGSOptimizerv4Test(int, char *[])
   std::cout << "Solution        = (" << finalPosition[0] << ',' << finalPosition[1] << ')' << std::endl;
 
   // check results to see if it is within range
-  pass = true;
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (std::abs(finalPosition[j] - trueParameters[j]) > tolerance)
-    {
-      pass = false;
-    }
-  }
-
-  if (!pass)
-  {
-    std::cerr << "Test failed. finalPosition is not correct." << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], tolerance);
   }
 
   // Test with local-support transform. Should FAIL.
   // Such transforms are not yet supported.
   metric->SetHasLocalSupport(true);
-  ITK_TRY_EXPECT_EXCEPTION(itkOptimizer->StartOptimization());
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_THROW(itkOptimizer->StartOptimization(), itk::ExceptionObject);
 }
