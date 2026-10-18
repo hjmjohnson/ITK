@@ -4,7 +4,6 @@ set(
   itkAutoScaledGradientDescentRegistrationOnVectorTest.cxx
   itkAutoScaledGradientDescentRegistrationTest.cxx
   itkMultiGradientOptimizerv4Test.cxx
-  itkObjectToObjectMetricBaseTest.cxx
   itkObjectToObjectOptimizerBaseTest.cxx
   itkOnePlusOneEvolutionaryOptimizerv4Test.cxx
   itkOptimizerParameterScalesEstimatorTest.cxx
@@ -39,6 +38,7 @@ set(
   itkLBFGSOptimizerv4GTest.cxx
   itkMultiGradientOptimizerv4GTest.cxx
   itkMultiStartOptimizerv4GTest.cxx
+  itkObjectToObjectMetricBaseGTest.cxx
   itkWindowConvergenceMonitoringFunctionGTest.cxx
 )
 creategoogletestdriver(ITKOptimizersv4 "${ITKOptimizersv4-Test_LIBRARIES}" "${ITKOptimizersv4GTests}")
@@ -161,13 +161,6 @@ itk_add_test(
   COMMAND
     ITKOptimizersv4TestDriver
     itkRegistrationParameterScalesFromPhysicalShiftPointSetTest
-)
-
-itk_add_test(
-  NAME itkObjectToObjectMetricBaseTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkObjectToObjectMetricBaseTest
 )
 
 itk_add_test(
