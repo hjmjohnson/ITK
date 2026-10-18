@@ -94,7 +94,6 @@ set(
   itkVectorGeometryTest.cxx
   itkVNLRoundProfileTest1.cxx
   itkMemoryProbesCollecterBaseTest.cxx
-  itkImageAlgorithmCopyTest.cxx
   itkOptimizerParametersTest.cxx
   itkImageRegionConstIteratorWithOnlyIndexTest.cxx
   itkImageRandomConstIteratorWithOnlyIndexTest.cxx
@@ -1163,12 +1162,6 @@ if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 4)
 endif()
 
 itk_add_test(
-  NAME itkImageAlgorithmCopyTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageAlgorithmCopyTest
-)
-itk_add_test(
   NAME itkOptimizerParametersTest
   COMMAND
     ITKCommon2TestDriver
@@ -1426,6 +1419,7 @@ set(
   itkHashTableGTest.cxx
   itkHeavisideStepFunctionGTest.cxx
   itkImageAdaptorPipeLineGTest.cxx
+  itkImageAlgorithmCopyGTest.cxx
   itkImageAlgorithmCopyGTest2.cxx
   itkImageBaseGTest.cxx
   itkImageBufferRangeGTest.cxx
