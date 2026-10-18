@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKDisplacementFieldTests
-  itkDisplacementFieldJacobianDeterminantFilterTest.cxx
   itkDisplacementFieldToBSplineImageFilterTest.cxx
   itkDisplacementFieldTransformCloneTest.cxx
   itkDisplacementFieldTransformTest.cxx
@@ -21,12 +20,6 @@ set(
 
 createtestdriver(ITKDisplacementField "${ITKDisplacementField-Test_LIBRARIES}" "${ITKDisplacementFieldTests}")
 
-itk_add_test(
-  NAME itkDisplacementFieldJacobianDeterminantFilterTest
-  COMMAND
-    ITKDisplacementFieldTestDriver
-    itkDisplacementFieldJacobianDeterminantFilterTest
-)
 itk_add_test(
   NAME itkIterativeInverseDisplacementFieldImageFilterTest
   COMMAND
@@ -183,6 +176,7 @@ set(
   itkBSplineExponentialDiffeomorphicTransformGTest.cxx
   itkBSplineSmoothingOnUpdateDisplacementFieldTransformGTest.cxx
   itkComposeDisplacementFieldsImageFilterGTest.cxx
+  itkDisplacementFieldJacobianDeterminantFilterGTest.cxx
   itkExponentialDisplacementFieldImageFilterGTest.cxx
   itkInverseDisplacementFieldImageFilterGTest.cxx
   itkIterativeInverseDisplacementFieldImageFilterGTest.cxx
