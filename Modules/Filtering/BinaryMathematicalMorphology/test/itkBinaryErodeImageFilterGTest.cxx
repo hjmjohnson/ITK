@@ -19,10 +19,9 @@
 #include "itkBinaryErodeImageFilter.h"
 #include "itkBinaryBallStructuringElement.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkBinaryErodeImageFilterTest(int, char *[])
+TEST(BinaryErodeImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -109,7 +108,7 @@ itkBinaryErodeImageFilterTest(int, char *[])
   // Create the filter
   auto filter = myFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, BinaryErodeImageFilter, BinaryMorphologyImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, BinaryErodeImageFilter, BinaryMorphologyImageFilter);
 
 
   const itk::SimpleFilterWatcher watcher(filter, "filter");
@@ -127,14 +126,14 @@ itkBinaryErodeImageFilterTest(int, char *[])
   filter->SetKernel(ball);
 
   filter->SetErodeValue(fgValue);
-  ITK_TEST_SET_GET_VALUE(fgValue, filter->GetErodeValue());
+  EXPECT_EQ(fgValue, filter->GetErodeValue());
 
   // Get the Smart Pointer to the Filter Output
   const myImageType::Pointer outputImage = filter->GetOutput();
 
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
 
   // Create an iterator for going through the image output
@@ -155,7 +154,4 @@ itkBinaryErodeImageFilterTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
