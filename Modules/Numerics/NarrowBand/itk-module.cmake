@@ -12,5 +12,6 @@ itk_module(
     ITKCurvatureFlow
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )

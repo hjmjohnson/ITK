@@ -17,11 +17,10 @@
  *=========================================================================*/
 
 #include "itkNarrowBand.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkNarrowBandTest(int, char *[])
+TEST(NarrowBand, ConvertedLegacyTest)
 {
   using IndexType = unsigned int;
   using DataType = float;
@@ -31,7 +30,7 @@ itkNarrowBandTest(int, char *[])
 
   auto band = BandType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(band, NarrowBand, LightObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(band, NarrowBand, LightObject);
 
 
   band->Reserve(100);
@@ -74,6 +73,4 @@ itkNarrowBandTest(int, char *[])
     }
     i++;
   }
-  std::cout << "Test Passed. " << std::endl;
-  return EXIT_SUCCESS;
 }
