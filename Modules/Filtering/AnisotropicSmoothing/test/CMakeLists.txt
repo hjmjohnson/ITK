@@ -2,18 +2,11 @@ itk_module_test()
 set(
   ITKAnisotropicSmoothingTests
   itkGradientAnisotropicDiffusionImageFilterTest2.cxx
-  itkMinMaxCurvatureFlowImageFilterTest.cxx
   itkVectorAnisotropicDiffusionImageFilterTest.cxx
 )
 
 createtestdriver(ITKAnisotropicSmoothing "${ITKAnisotropicSmoothing-Test_LIBRARIES}" "${ITKAnisotropicSmoothingTests}")
 
-itk_add_test(
-  NAME itkMinMaxCurvatureFlowImageFilterTest
-  COMMAND
-    ITKAnisotropicSmoothingTestDriver
-    itkMinMaxCurvatureFlowImageFilterTest
-)
 itk_add_test(
   NAME itkVectorAnisotropicDiffusionImageFilterTest
   COMMAND
@@ -38,5 +31,6 @@ set(
   ITKAnisotropicSmoothingGTests
   itkCurvatureAnisotropicDiffusionImageFilterGTest.cxx
   itkGradientAnisotropicDiffusionImageFilterGTest.cxx
+  itkMinMaxCurvatureFlowImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKAnisotropicSmoothing "${ITKAnisotropicSmoothing-Test_LIBRARIES}" "${ITKAnisotropicSmoothingGTests}")
