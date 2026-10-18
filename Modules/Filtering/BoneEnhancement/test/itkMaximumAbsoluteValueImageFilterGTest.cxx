@@ -17,12 +17,10 @@
  *=========================================================================*/
 
 #include "itkMaximumAbsoluteValueImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkImageRegionIterator.h"
-#include "itkTestingMacros.h"
 
-int
-itkMaximumAbsoluteValueImageFilterTest(int, char *[])
+TEST(MaximumAbsoluteValueImageFilter, ConvertedLegacyTest)
 {
   const unsigned int Dimension = 2;
   using PixelType = int;
@@ -30,7 +28,7 @@ itkMaximumAbsoluteValueImageFilterTest(int, char *[])
   using MaximumAbsoluteValueImageFilterType = itk::MaximumAbsoluteValueImageFilter<ImageType>;
   MaximumAbsoluteValueImageFilterType::Pointer maxAbsFilter = MaximumAbsoluteValueImageFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(maxAbsFilter, MaximumAbsoluteValueImageFilter, BinaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(maxAbsFilter, MaximumAbsoluteValueImageFilter, BinaryFunctorImageFilter);
 
   /** Create an image and run a basic test */
   ImageType::RegionType region;
@@ -79,7 +77,7 @@ itkMaximumAbsoluteValueImageFilterTest(int, char *[])
 
   maxAbsFilter->SetInput1(image1);
   maxAbsFilter->SetInput2(image2);
-  ITK_TRY_EXPECT_NO_EXCEPTION(maxAbsFilter->Update());
+  ASSERT_NO_THROW(maxAbsFilter->Update());
   ImageType::Pointer outputImage = maxAbsFilter->GetOutput();
 
   IteratorType ot(outputImage, region);
@@ -89,13 +87,12 @@ itkMaximumAbsoluteValueImageFilterTest(int, char *[])
   {
     if ((i % 2) == 0)
     {
-      ITK_TEST_EXPECT_EQUAL(ot.Get(), -2);
+      EXPECT_EQ(ot.Get(), -2);
     }
     else
     {
-      ITK_TEST_EXPECT_EQUAL(ot.Get(), 2);
+      EXPECT_EQ(ot.Get(), 2);
     }
     ++ot;
   }
-  return EXIT_SUCCESS;
 }
