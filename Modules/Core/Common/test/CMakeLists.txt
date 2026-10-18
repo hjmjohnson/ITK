@@ -83,7 +83,6 @@ set(
   itkImageRegionSplitterSlowDimensionTest.cxx
   itkImageRegionSplitterDirectionTest.cxx
   itkImageRegionSplitterMultidimensionalTest.cxx
-  itkMetaDataObjectTest.cxx
   # itkVectorMultiplyTest.cxx
   itkXMLFileOutputWindowTest.cxx
   itkXMLFilterWatcherTest.cxx
@@ -1189,13 +1188,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkMetaDataObjectTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMetaDataObjectTest
-)
-
-itk_add_test(
   NAME itkMultithreadingTest
   COMMAND
     ITKCommon2TestDriver
@@ -1400,6 +1392,7 @@ set(
   itkMatrixGTest.cxx
   itkMersenneTwisterRandomVariateGeneratorGTest.cxx
   itkMetaDataDictionaryGTest.cxx
+  itkMetaDataObjectGTest.cxx
   itkMinimumMaximumImageCalculatorGTest.cxx
   itkModifiedTimeGTest.cxx
   itkNeighborhoodAllocatorGTest.cxx
