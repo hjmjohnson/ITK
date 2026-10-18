@@ -19,7 +19,7 @@
 #include <set>
 #include "itkLBFGS2Optimizerv4.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <iostream>
 
 /**
@@ -41,6 +41,8 @@
  *   the solution is the vector | 2 -2 |
  *
  */
+namespace
+{
 class itkLBFGS2Optimizerv4TestMetric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -150,10 +152,10 @@ private:
   ParametersType m_Parameters;
   bool           m_HasLocalSupport{ false };
 };
+} // namespace
 
 
-int
-itkLBFGS2Optimizerv4Test(int, char *[])
+TEST(LBFGS2Optimizerv4, ConvertedLegacyTest)
 {
   std::cout << "LBFGS2 Optimizerv4 Test \n \n";
 
@@ -162,7 +164,7 @@ itkLBFGS2Optimizerv4Test(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, LBFGS2Optimizerv4Template, GradientDescentOptimizerv4Template);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, LBFGS2Optimizerv4Template, GradientDescentOptimizerv4Template);
 
 
   // Declaration of the metric
@@ -171,75 +173,75 @@ itkLBFGS2Optimizerv4Test(int, char *[])
   // Set some optimizer parameters
   auto hessianApproximationAccuracy = 5;
   itkOptimizer->SetHessianApproximationAccuracy(hessianApproximationAccuracy);
-  ITK_TEST_SET_GET_VALUE(hessianApproximationAccuracy, itkOptimizer->GetHessianApproximationAccuracy());
+  EXPECT_EQ(hessianApproximationAccuracy, itkOptimizer->GetHessianApproximationAccuracy());
 
   constexpr typename OptimizerType::PrecisionType solutionAccuracy = 1e-5;
   itkOptimizer->SetSolutionAccuracy(solutionAccuracy);
-  ITK_TEST_SET_GET_VALUE(solutionAccuracy, itkOptimizer->GetSolutionAccuracy());
+  EXPECT_EQ(solutionAccuracy, itkOptimizer->GetSolutionAccuracy());
 
   auto deltaConvergenceDistance = 0;
   itkOptimizer->SetDeltaConvergenceDistance(deltaConvergenceDistance);
-  ITK_TEST_SET_GET_VALUE(deltaConvergenceDistance, itkOptimizer->GetDeltaConvergenceDistance());
+  EXPECT_EQ(deltaConvergenceDistance, itkOptimizer->GetDeltaConvergenceDistance());
 
   constexpr typename OptimizerType::PrecisionType deltaConvergenceTolerance = 0;
   itkOptimizer->SetDeltaConvergenceTolerance(deltaConvergenceTolerance);
-  ITK_TEST_SET_GET_VALUE(deltaConvergenceTolerance, itkOptimizer->GetDeltaConvergenceTolerance());
+  EXPECT_EQ(deltaConvergenceTolerance, itkOptimizer->GetDeltaConvergenceTolerance());
 
   auto maximumIterations = 0;
   itkOptimizer->SetMaximumIterations(maximumIterations);
-  ITK_TEST_SET_GET_VALUE(maximumIterations, itkOptimizer->GetMaximumIterations());
+  EXPECT_EQ(maximumIterations, itkOptimizer->GetMaximumIterations());
 
   auto numberOfIterations = static_cast<itk::SizeValueType>(maximumIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, itkOptimizer->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, itkOptimizer->GetNumberOfIterations());
 
   itkOptimizer->SetNumberOfIterations(maximumIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, itkOptimizer->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, itkOptimizer->GetNumberOfIterations());
 
   constexpr typename OptimizerType::LineSearchMethodEnum lineSearchMethod =
     OptimizerType::LineSearchMethodEnum::LINESEARCH_DEFAULT;
   itkOptimizer->SetLineSearch(lineSearchMethod);
-  ITK_TEST_SET_GET_VALUE(lineSearchMethod, itkOptimizer->GetLineSearch());
+  EXPECT_EQ(lineSearchMethod, itkOptimizer->GetLineSearch());
 
   auto maximumLineSearchEvaluations = 20;
   itkOptimizer->SetMaximumLineSearchEvaluations(maximumLineSearchEvaluations);
-  ITK_TEST_SET_GET_VALUE(maximumLineSearchEvaluations, itkOptimizer->GetMaximumLineSearchEvaluations());
+  EXPECT_EQ(maximumLineSearchEvaluations, itkOptimizer->GetMaximumLineSearchEvaluations());
 
   constexpr typename OptimizerType::PrecisionType minimumLineSearchStep = 1e-20;
   itkOptimizer->SetMinimumLineSearchStep(minimumLineSearchStep);
-  ITK_TEST_SET_GET_VALUE(minimumLineSearchStep, itkOptimizer->GetMinimumLineSearchStep());
+  EXPECT_EQ(minimumLineSearchStep, itkOptimizer->GetMinimumLineSearchStep());
 
   constexpr typename OptimizerType::PrecisionType maximumLineSearchStep = 1e+20;
   itkOptimizer->SetMaximumLineSearchStep(maximumLineSearchStep);
-  ITK_TEST_SET_GET_VALUE(maximumLineSearchStep, itkOptimizer->GetMaximumLineSearchStep());
+  EXPECT_EQ(maximumLineSearchStep, itkOptimizer->GetMaximumLineSearchStep());
 
   constexpr typename OptimizerType::PrecisionType lineSearchAccuracy = 1e-4;
   itkOptimizer->SetLineSearchAccuracy(lineSearchAccuracy);
-  ITK_TEST_SET_GET_VALUE(lineSearchAccuracy, itkOptimizer->GetLineSearchAccuracy());
+  EXPECT_EQ(lineSearchAccuracy, itkOptimizer->GetLineSearchAccuracy());
 
   constexpr typename OptimizerType::PrecisionType wolfeCoefficient = 0;
   itkOptimizer->SetWolfeCoefficient(wolfeCoefficient);
-  ITK_TEST_SET_GET_VALUE(wolfeCoefficient, itkOptimizer->GetWolfeCoefficient());
+  EXPECT_EQ(wolfeCoefficient, itkOptimizer->GetWolfeCoefficient());
 
   constexpr typename OptimizerType::PrecisionType lineSearchGradientAccuracy = 0.9;
   itkOptimizer->SetLineSearchGradientAccuracy(lineSearchGradientAccuracy);
-  ITK_TEST_SET_GET_VALUE(lineSearchGradientAccuracy, itkOptimizer->GetLineSearchGradientAccuracy());
+  EXPECT_EQ(lineSearchGradientAccuracy, itkOptimizer->GetLineSearchGradientAccuracy());
 
   // itkOptimizer->SetMachinePrecisionTolerance():
 
   constexpr typename OptimizerType::PrecisionType orthantwiseCoefficient = 0;
   itkOptimizer->SetOrthantwiseCoefficient(orthantwiseCoefficient);
-  ITK_TEST_SET_GET_VALUE(orthantwiseCoefficient, itkOptimizer->GetOrthantwiseCoefficient());
+  EXPECT_EQ(orthantwiseCoefficient, itkOptimizer->GetOrthantwiseCoefficient());
 
   auto orthantwiseStart = 0;
   itkOptimizer->SetOrthantwiseStart(orthantwiseStart);
-  ITK_TEST_SET_GET_VALUE(orthantwiseStart, itkOptimizer->GetOrthantwiseStart());
+  EXPECT_EQ(orthantwiseStart, itkOptimizer->GetOrthantwiseStart());
 
   auto orthantwiseEnd = 1;
   itkOptimizer->SetOrthantwiseEnd(orthantwiseEnd);
-  ITK_TEST_SET_GET_VALUE(orthantwiseEnd, itkOptimizer->GetOrthantwiseEnd());
+  EXPECT_EQ(orthantwiseEnd, itkOptimizer->GetOrthantwiseEnd());
 
   auto estimateScalesAtEachIteration = true;
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, EstimateScalesAtEachIteration, estimateScalesAtEachIteration);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, EstimateScalesAtEachIteration, estimateScalesAtEachIteration);
 
   std::cout << "GetValue() before optimizer starts: ";
   std::cout << itkOptimizer->GetValue() << std::endl;
@@ -272,7 +274,7 @@ itkLBFGS2Optimizerv4Test(int, char *[])
     std::cerr << "An error occurred during Optimization" << std::endl;
     std::cerr << "Location    = " << e.GetLocation() << std::endl;
     std::cerr << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
 
@@ -291,32 +293,16 @@ itkLBFGS2Optimizerv4Test(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool             pass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::FloatAlmostEqual(finalPosition[j], trueParameters[j]))
-    {
-      pass = false;
-    }
-  }
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_FALSE(itk::Math::FloatAlmostEqual(finalPosition[j], trueParameters[j]));
   }
 
   // Get the final value of the optimizer
   std::cout << "Testing GetValue() : ";
   const OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
-  if (itk::Math::Absolute(finalValue + 10.0) > 0.01)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "[SUCCESS]" << std::endl;
+  EXPECT_NEAR(finalValue, -10.0, 0.01);
 
 
   //
@@ -335,18 +321,13 @@ itkLBFGS2Optimizerv4Test(int, char *[])
     std::cerr << "Exception thrown ! " << std::endl;
     std::cerr << "An error occurred during Optimization" << std::endl;
     std::cerr << e << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   std::cout << "Solution        = (" << finalPosition[0] << ',' << finalPosition[1] << ')' << std::endl;
   std::cout << "NumberOfIterations  = " << itkOptimizer->GetCurrentIteration() << std::endl;
 
-  if (itkOptimizer->GetCurrentIteration() != 2)
-  {
-    std::cout << "Not expected number of iterations!" << std::endl;
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(itkOptimizer->GetCurrentIteration(), 2u);
 
   // Test streaming enumeration for LBFGS2Optimizerv4Enums::LineSearchMethod elements
   const std::set<itk::LBFGS2Optimizerv4Enums::LineSearchMethod> allLineSearchMethod{
@@ -361,7 +342,4 @@ itkLBFGS2Optimizerv4Test(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE LBFGS2Optimizerv4Enums::LineSearchMethod: " << ee << std::endl;
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
