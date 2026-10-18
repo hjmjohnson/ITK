@@ -81,7 +81,6 @@ set(
   itkObjectFactoryTest3.cxx
   itkObjectFactoryOnlyNewTest.cxx
   itkSliceIteratorTest.cxx
-  itkImageRegionExclusionIteratorWithIndexTest.cxx
   itkImageFillBufferTest.cxx
   itkMemoryLeakTest.cxx
   itkVectorGeometryTest.cxx
@@ -432,12 +431,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     itkImageRegionTest
-)
-itk_add_test(
-  NAME itkImageRegionExclusionIteratorWithIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageRegionExclusionIteratorWithIndexTest
 )
 itk_add_test(
   NAME itkImageReverseIteratorTest
@@ -1429,6 +1422,7 @@ set(
   itkImageRandomIteratorGTest.cxx
   itkImageRandomNonRepeatingIteratorWithIndexGTest.cxx
   itkImageRegionConstIteratorWithOnlyIndexGTest.cxx
+  itkImageRegionExclusionIteratorWithIndexGTest.cxx
   itkImageRegionGTest.cxx
   itkImageRegionRangeGTest.cxx
   itkImageTransformGTest.cxx
