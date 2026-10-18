@@ -13,7 +13,6 @@ set(
   itkLightObjectTest.cxx
   itkLineIteratorTest.cxx
   itkLoggerTest.cxx
-  itkMapContainerTest.cxx
   itkMultipleLogOutputTest.cxx
   itkNeighborhoodAlgorithmTest.cxx
   itkNeighborhoodOperatorTest.cxx
@@ -490,12 +489,6 @@ itk_add_test(
   COMMAND
     ITKCommon2TestDriver
     itkMatrixTest
-)
-itk_add_test(
-  NAME itkMapContainerTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkMapContainerTest
 )
 itk_add_test(
   NAME itkVectorContainerTest
@@ -1398,6 +1391,7 @@ set(
   itkIteratorsGTest.cxx
   itkLightObjectGTest.cxx
   itkMakeUniqueForOverwriteGTest.cxx
+  itkMapContainerGTest.cxx
   itkMathCastWithRangeCheckGTest.cxx
   itkMathGTest.cxx
   itkMathRoundGTest.cxx
