@@ -16,13 +16,10 @@
  *
  *=========================================================================*/
 
-#include <iostream>
 #include "itkImageRegion.h"
+#include <iostream>
+#include "itkGTest.h"
 
 extern template class itk::ImageRegion<1u>;
 
-int
-itkImageRegionExplicitTest(int, char *[])
-{
-  return 0;
-}
+TEST(ImageRegionExplicit, ConvertedLegacyTest) {}
