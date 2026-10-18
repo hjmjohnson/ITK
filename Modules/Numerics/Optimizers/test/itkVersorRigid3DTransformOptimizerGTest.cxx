@@ -18,6 +18,7 @@
 
 #include "itkVersorRigid3DTransformOptimizer.h"
 #include "itkVersorRigid3DTransform.h"
+#include "itkGTest.h"
 
 
 /** The objectif function is the sum of squared distances between two pairs of points.
@@ -47,6 +48,8 @@
  * \class versorRigid3DCostFunction
  *
  */
+namespace
+{
 class versorRigid3DCostFunction : public itk::SingleValuedCostFunction
 {
 public:
@@ -218,9 +221,9 @@ private:
   PointType m_P1;
   PointType m_Q1;
 };
+} // namespace
 
-int
-itkVersorRigid3DTransformOptimizerTest(int, char *[])
+TEST(VersorRigid3DTransformOptimizer, ConvertedLegacyTest)
 {
   std::cout << "VersorRigid3DTransform Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -296,7 +299,7 @@ itkVersorRigid3DTransformOptimizerTest(int, char *[])
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   ParametersType finalPosition(parametersDimensions);
@@ -324,8 +327,6 @@ itkVersorRigid3DTransformOptimizerTest(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool pass = true;
-
   // True versor
 
   VersorType::VectorType trueAxis;
@@ -351,17 +352,5 @@ itkVersorRigid3DTransformOptimizerTest(int, char *[])
   const VersorType            ratio = finalRotation * trueRotation.GetReciprocal();
   const VersorType::ValueType cosHalfAngle = ratio.GetW();
   const VersorType::ValueType cosHalfAngleSquare = cosHalfAngle * cosHalfAngle;
-  if (cosHalfAngleSquare < 0.95)
-  {
-    pass = false;
-  }
-
-  if (!pass)
-  {
-    std::cout << std::endl << "Test FAILEd !" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << std::endl << "Test PASSED !" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_GE(cosHalfAngleSquare, 0.95);
 }
