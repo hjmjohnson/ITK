@@ -4,7 +4,6 @@ set(
   itkInitializationBiasedParticleSwarmOptimizerTest.cxx
   itkLevenbergMarquardtOptimizerTest.cxx
   itkPowellOptimizerTest.cxx
-  itkVersorTransformOptimizerTest.cxx
 )
 
 createtestdriver(ITKOptimizers "${ITKOptimizers-Test_LIBRARIES}" "${ITKOptimizersTests}")
@@ -22,12 +21,6 @@ itk_add_test(
     100
     0
     0.0
-)
-itk_add_test(
-  NAME itkVersorTransformOptimizerTest
-  COMMAND
-    ITKOptimizersTestDriver
-    itkVersorTransformOptimizerTest
 )
 itk_add_test(
   NAME itkLevenbergMarquardtOptimizerTest
@@ -63,5 +56,6 @@ set(
   itkRegularStepGradientDescentOptimizerGTest.cxx
   itkSPSAOptimizerGTest.cxx
   itkVersorRigid3DTransformOptimizerGTest.cxx
+  itkVersorTransformOptimizerGTest.cxx
 )
 creategoogletestdriver(ITKOptimizers "${ITKOptimizers-Test_LIBRARIES}" "${ITKOptimizersGTests}")
