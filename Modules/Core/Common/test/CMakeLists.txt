@@ -6,7 +6,6 @@ set(
   itkExceptionObjectTest.cxx
   itkFloatingPointExceptionsTest.cxx
   itkGaussianSpatialFunctionTest.cxx
-  itkImageDuplicatorTest.cxx
   itkImageDuplicatorTest2.cxx
   itkImageIteratorsForwardBackwardTest.cxx
   itkImageIteratorTest.cxx
@@ -465,12 +464,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     itkImageReverseIteratorTest
-)
-itk_add_test(
-  NAME itkImageDuplicatorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageDuplicatorTest
 )
 itk_add_test(
   NAME itkImageDuplicatorTest2
@@ -1544,6 +1537,7 @@ set(
   itkImageBaseGTest.cxx
   itkImageBufferRangeGTest.cxx
   itkImageComputeOffsetAndIndexGTest.cxx
+  itkImageDuplicatorGTest.cxx
   itkImageGTest.cxx
   itkImageIORegionGTest.cxx
   itkImageIteratorsGTest.cxx
