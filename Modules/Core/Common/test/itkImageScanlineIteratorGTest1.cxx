@@ -16,12 +16,15 @@
  *
  *=========================================================================*/
 
+#include "itkImageScanlineIterator.h"
 #include <iostream>
 
-#include "itkImageScanlineIterator.h"
 #include <array>
+#include "itkGTest.h"
 
 
+namespace
+{
 // This routine is used to make sure that we call the "const" version
 // of GetPixel() (via the operator[])
 template <typename T, unsigned int VImageDimension>
@@ -42,15 +45,13 @@ TestConstPixelAccess(const itk::Image<T, VImageDimension> & in, itk::Image<T, VI
   out[regionStartIndex3D] = vec;
   out[regionEndIndex3D] = in[regionStartIndex3D];
 }
+} // namespace
 
 
-int
-itkImageScanlineIteratorTest1(int, char *[])
+TEST(ImageScanlineIterator, ConvertedLegacyTest)
 {
   const itk::Image<itk::Vector<unsigned short, 5>, 3>::Pointer o3 =
     itk::Image<itk::Vector<unsigned short, 5>, 3>::New();
-
-  int status = EXIT_SUCCESS;
 
   float origin3D[3] = { 5.0f, 2.1f, 8.1f };
   float spacing3D[3] = { 1.5f, 2.1f, 1.0f };
@@ -187,10 +188,7 @@ itkImageScanlineIteratorTest1(int, char *[])
     {
       while (!imageIterator.IsAtEndOfLine())
       {
-        if (imageIterator.Get() != expectedValuesRegion1[counter])
-        {
-          status = EXIT_FAILURE; // Fail
-        }
+        EXPECT_EQ(imageIterator.Get(), expectedValuesRegion1[counter]);
         counter++;
         ++imageIterator;
       }
@@ -211,10 +209,7 @@ itkImageScanlineIteratorTest1(int, char *[])
     {
       while (!imageIterator.IsAtEndOfLine())
       {
-        if (imageIterator.Get() != expectedValuesRegion2[counter])
-        {
-          status = EXIT_FAILURE; // Fail
-        }
+        EXPECT_EQ(imageIterator.Get(), expectedValuesRegion2[counter]);
         counter++;
         ++imageIterator;
       }
@@ -222,6 +217,4 @@ itkImageScanlineIteratorTest1(int, char *[])
     }
 
   } // end "Change Region" test
-
-  return status;
 }
