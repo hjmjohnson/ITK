@@ -3,7 +3,6 @@ set(
   ITKDisplacementFieldTests
   itkDisplacementFieldTransformTest.cxx
   itkExponentialDisplacementFieldImageFilterTest.cxx
-  itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest.cxx
   itkInverseDisplacementFieldImageFilterTest.cxx
   itkInvertDisplacementFieldImageFilterTest.cxx
   itkIterativeInverseDisplacementFieldImageFilterTest.cxx
@@ -55,12 +54,6 @@ itk_add_test(
     itkDisplacementFieldTransformTest
     1e-6
     1e-6
-)
-itk_add_test(
-  NAME itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest
-  COMMAND
-    ITKDisplacementFieldTestDriver
-    itkGaussianSmoothingOnUpdateDisplacementFieldTransformTest
 )
 itk_add_test(
   NAME itkTimeVaryingVelocityFieldTransformTest
@@ -160,6 +153,7 @@ set(
   itkDisplacementFieldTransformCloneGTest.cxx
   itkExponentialDisplacementFieldImageFilterGTest.cxx
   itkGaussianExponentialDiffeomorphicTransformGTest.cxx
+  itkGaussianSmoothingOnUpdateDisplacementFieldTransformGTest.cxx
   itkInverseDisplacementFieldImageFilterGTest.cxx
   itkIterativeInverseDisplacementFieldImageFilterGTest.cxx
 )
