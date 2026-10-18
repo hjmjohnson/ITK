@@ -137,6 +137,11 @@ IPLCommonImageIO::ReadImageInformation()
   {
     itkExceptionMacro("ReadHeader failed for " << FileNameToRead);
   }
+  if (m_ImageHeader->imageXsize <= 0 || m_ImageHeader->imageYsize <= 0)
+  {
+    itkExceptionMacro("Image dimensions must be positive, got "
+                      << m_ImageHeader->imageXsize << " x " << m_ImageHeader->imageYsize << " in " << FileNameToRead);
+  }
 
   bool              isCT = false;
   const std::string modality = m_ImageHeader->modality;

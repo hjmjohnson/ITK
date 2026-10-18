@@ -3,6 +3,14 @@ set(ITKIOGETests itkGEImageIOTest.cxx)
 
 createtestdriver(ITKIOGE "${ITKIOGE-Test_LIBRARIES}" "${ITKIOGETests}")
 
+set(ITKIOGEGTests itkGEAdwImageIOGTest.cxx)
+creategoogletestdriver(ITKIOGE "${ITKIOGE-Test_LIBRARIES}" "${ITKIOGEGTests}")
+target_compile_definitions(
+  ITKIOGEGTestDriver
+  PRIVATE
+    "ITK_TEST_OUTPUT_DIR=${ITK_TEST_OUTPUT_DIR}"
+)
+
 itk_add_test(
   NAME itkGE4
   COMMAND

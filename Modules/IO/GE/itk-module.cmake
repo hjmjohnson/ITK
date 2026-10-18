@@ -15,6 +15,7 @@ itk_module(
     ITKTestKernel
     ITKIOIPL
     ITKIOSiemens
+    ITKGoogleTest
   FACTORY_NAMES
     ImageIO::GE4
     ImageIO::GE5
