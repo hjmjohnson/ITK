@@ -4,7 +4,6 @@ set(
   BoneEnhancementTests
   itkMaximumAbsoluteValueImageFilterTest.cxx
   itkMultiScaleHessianEnhancementImageFilterStaticMethodsTest.cxx
-  itkHessianGaussianImageFilterTest.cxx
 )
 
 createtestdriver(BoneEnhancement "${BoneEnhancement-Test_LIBRARIES}" "${BoneEnhancementTests}")
@@ -23,17 +22,11 @@ itk_add_test(
     itkMultiScaleHessianEnhancementImageFilterStaticMethodsTest
 )
 
-itk_add_test(
-  NAME itkHessianGaussianImageFilterTest
-  COMMAND
-    BoneEnhancementTestDriver
-    itkHessianGaussianImageFilterTest
-)
-
 set(
   BoneEnhancementUnitTests
   itkDescoteauxEigenToMeasureParameterEstimationFilterUnitTest.cxx
   itkDescoteauxEigenToMeasureImageFilterUnitTest.cxx
+  itkHessianGaussianImageFilterGTest.cxx
   itkKrcahEigenToMeasureParameterEstimationFilterUnitTest.cxx
 )
 
