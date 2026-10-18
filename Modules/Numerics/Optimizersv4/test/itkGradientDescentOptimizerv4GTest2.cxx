@@ -16,6 +16,7 @@
  *
  *=========================================================================*/
 #include "itkGradientDescentOptimizerv4.h"
+#include "itkGTest.h"
 
 /* This test simulates the use of a metric with a transform
  * with local support, testing the proper handling of scales for such a case.
@@ -31,6 +32,8 @@
  *  of applying scales in one iteration of optimization.
  *
  */
+namespace
+{
 class GradientDescentOptimizerv4Test2Metric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -134,10 +137,10 @@ public:
 private:
   ParametersType m_Parameters;
 };
+} // namespace
 
 ///////////////////////////////////////////////////////////
-int
-itkGradientDescentOptimizerv4Test2(int, char *[])
+TEST(GradientDescentOptimizerv4, ConvertedLegacyTest2)
 {
   std::cout << "Gradient Descent Object Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -193,7 +196,7 @@ itkGradientDescentOptimizerv4Test2(int, char *[])
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   ParametersType finalPosition = metric->GetParameters();
@@ -204,15 +207,6 @@ itkGradientDescentOptimizerv4Test2(int, char *[])
   //
   for (NumberOfParametersType j = 0; j < metric->GetNumberOfParameters(); ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - truth[j]) > 0.000001)
-    {
-      std::cerr << "Results do not match: " << std::endl
-                << "expected: " << truth << std::endl
-                << "actual: " << finalPosition << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(finalPosition[j], truth[j], 0.000001);
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
