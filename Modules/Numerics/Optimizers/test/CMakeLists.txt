@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKOptimizersTests
-  itkAmoebaOptimizerTest.cxx
   itkConjugateGradientOptimizerTest.cxx
   itkCumulativeGaussianOptimizerTest.cxx
   itkExhaustiveOptimizerTest.cxx
@@ -116,12 +115,6 @@ itk_add_test(
     itkVersorRigid3DTransformOptimizerTest
 )
 itk_add_test(
-  NAME itkAmoebaOptimizerTest
-  COMMAND
-    ITKOptimizersTestDriver
-    itkAmoebaOptimizerTest
-)
-itk_add_test(
   NAME itkParticleSwarmOptimizerTest
   COMMAND
     ITKOptimizersTestDriver
@@ -144,5 +137,9 @@ itk_add_test(
     itkOnePlusOneEvolutionaryOptimizerTest
 )
 
-set(ITKOptimizersGTests itkLevenbergMarquardtOptimizerGTest.cxx)
+set(
+  ITKOptimizersGTests
+  itkAmoebaOptimizerGTest.cxx
+  itkLevenbergMarquardtOptimizerGTest.cxx
+)
 creategoogletestdriver(ITKOptimizers "${ITKOptimizers-Test_LIBRARIES}" "${ITKOptimizersGTests}")
