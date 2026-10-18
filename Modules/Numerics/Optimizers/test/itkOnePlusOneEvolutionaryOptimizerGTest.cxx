@@ -20,9 +20,9 @@
 #include "itkNormalVariateGenerator.h"
 #include "itkCommand.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 
 /**
@@ -137,33 +137,33 @@ private:
   double m_LastMetricValue{ 0.0 };
 };
 
-} // namespace itk
+} // namespace
 
 
-int
-itkOnePlusOneEvolutionaryOptimizerTest(int, char *[])
+TEST(OnePlusOneEvolutionaryOptimizer, ConvertedLegacyTest)
 {
   using OptimizerType = itk::OnePlusOneEvolutionaryOptimizer;
 
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, OnePlusOneEvolutionaryOptimizer, SingleValuedNonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    itkOptimizer, OnePlusOneEvolutionaryOptimizer, SingleValuedNonLinearOptimizer);
 
 
-  ITK_TEST_EXPECT_TRUE(!itkOptimizer->GetInitialized());
+  EXPECT_FALSE(itkOptimizer->GetInitialized());
 
-  const itk::OnePlusOneCommandIterationUpdate::Pointer observer = itk::OnePlusOneCommandIterationUpdate::New();
+  const OnePlusOneCommandIterationUpdate::Pointer observer = OnePlusOneCommandIterationUpdate::New();
   itkOptimizer->AddObserver(itk::IterationEvent(), observer);
 
   // Declaration of the CostFunction
-  const itk::OnePlusOneCostFunction::Pointer costFunction = itk::OnePlusOneCostFunction::New();
+  const OnePlusOneCostFunction::Pointer costFunction = OnePlusOneCostFunction::New();
 
 
   itkOptimizer->SetCostFunction(costFunction);
 
 
-  using ParametersType = itk::OnePlusOneCostFunction::ParametersType;
+  using ParametersType = OnePlusOneCostFunction::ParametersType;
 
   const unsigned int spaceDimension = costFunction->GetNumberOfParameters();
 
@@ -175,44 +175,44 @@ itkOnePlusOneEvolutionaryOptimizerTest(int, char *[])
 
   auto maximize = false;
   itkOptimizer->MinimizeOn();
-  ITK_TEST_SET_GET_VALUE(!maximize, itkOptimizer->GetMinimize());
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, maximize);
+  EXPECT_EQ(!maximize, itkOptimizer->GetMinimize());
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, maximize);
 
   constexpr unsigned int maximumIteration{ 8000 };
   itkOptimizer->SetMaximumIteration(8000);
-  ITK_TEST_SET_GET_VALUE(maximumIteration, itkOptimizer->GetMaximumIteration());
+  EXPECT_EQ(maximumIteration, itkOptimizer->GetMaximumIteration());
 
   auto growthFactor = 1.05;
   itkOptimizer->SetGrowthFactor(growthFactor);
-  ITK_TEST_SET_GET_VALUE(growthFactor, itkOptimizer->GetGrowthFactor());
+  EXPECT_EQ(growthFactor, itkOptimizer->GetGrowthFactor());
 
   auto shrinkFactor = std::pow(growthFactor, -0.25);
   itkOptimizer->SetShrinkFactor(shrinkFactor);
-  ITK_TEST_SET_GET_VALUE(shrinkFactor, itkOptimizer->GetShrinkFactor());
+  EXPECT_EQ(shrinkFactor, itkOptimizer->GetShrinkFactor());
 
   auto initialRadius = 1.01;
   itkOptimizer->SetInitialRadius(initialRadius);
-  ITK_TEST_SET_GET_VALUE(initialRadius, itkOptimizer->GetInitialRadius());
+  EXPECT_EQ(initialRadius, itkOptimizer->GetInitialRadius());
 
   auto epsilon = 0.1;
   itkOptimizer->SetEpsilon(epsilon);
-  ITK_TEST_SET_GET_VALUE(epsilon, itkOptimizer->GetEpsilon());
+  EXPECT_EQ(epsilon, itkOptimizer->GetEpsilon());
 
   auto catchGetValueException = false;
   itkOptimizer->SetCatchGetValueException(catchGetValueException);
-  ITK_TEST_SET_GET_VALUE(catchGetValueException, itkOptimizer->GetCatchGetValueException());
+  EXPECT_EQ(catchGetValueException, itkOptimizer->GetCatchGetValueException());
 
   auto metricWorstPossibleValue = 0;
   itkOptimizer->SetMetricWorstPossibleValue(metricWorstPossibleValue);
-  ITK_TEST_SET_GET_VALUE(metricWorstPossibleValue, itkOptimizer->GetMetricWorstPossibleValue());
+  EXPECT_EQ(metricWorstPossibleValue, itkOptimizer->GetMetricWorstPossibleValue());
 
   initialRadius = 10;
   itkOptimizer->Initialize(initialRadius);
-  ITK_TEST_SET_GET_VALUE(initialRadius, itkOptimizer->GetInitialRadius());
-  ITK_TEST_SET_GET_VALUE(growthFactor, itkOptimizer->GetGrowthFactor());
-  ITK_TEST_SET_GET_VALUE(shrinkFactor, itkOptimizer->GetShrinkFactor());
+  EXPECT_EQ(initialRadius, itkOptimizer->GetInitialRadius());
+  EXPECT_EQ(growthFactor, itkOptimizer->GetGrowthFactor());
+  EXPECT_EQ(shrinkFactor, itkOptimizer->GetShrinkFactor());
 
-  ITK_TEST_EXPECT_TRUE(itkOptimizer->GetInitialized());
+  EXPECT_TRUE(itkOptimizer->GetInitialized());
 
   using GeneratorType = itk::Statistics::NormalVariateGenerator;
   auto generator = GeneratorType::New();
@@ -220,7 +220,7 @@ itkOnePlusOneEvolutionaryOptimizerTest(int, char *[])
 
   itkOptimizer->SetInitialPosition(initialPosition);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(itkOptimizer->StartOptimization());
+  ASSERT_NO_THROW(itkOptimizer->StartOptimization());
 
 
   ParametersType finalPosition = itkOptimizer->GetCurrentPosition();
@@ -231,14 +231,10 @@ itkOnePlusOneEvolutionaryOptimizerTest(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool             pass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      pass = false;
-    }
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
 
   // Exercise various member functions.
@@ -248,13 +244,4 @@ itkOnePlusOneEvolutionaryOptimizerTest(int, char *[])
 
   itkOptimizer->Print(std::cout);
   std::cout << "Stop description   = " << itkOptimizer->GetStopConditionDescription() << std::endl;
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
