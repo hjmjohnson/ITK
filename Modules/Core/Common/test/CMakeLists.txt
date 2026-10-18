@@ -9,7 +9,6 @@ set(
   itkImageDuplicatorTest2.cxx
   itkImageRandomIteratorTest2.cxx
   itkImageRegionTest.cxx
-  itkImageSliceIteratorTest.cxx
   itkImageTest.cxx
   itkIteratorTests.cxx
   itkLightObjectTest.cxx
@@ -378,12 +377,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkImageRandomIteratorTest2Output.mha
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkImageRandomIteratorTest2Output.mha
-)
-itk_add_test(
-  NAME itkImageSliceIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageSliceIteratorTest
 )
 itk_add_test(
   NAME itkImageTest
@@ -1347,6 +1340,7 @@ set(
   itkImageRegionRangeGTest.cxx
   itkImageReverseIteratorGTest.cxx
   itkImageScanlineIteratorGTest1.cxx
+  itkImageSliceIteratorGTest.cxx
   itkImageTransformGTest.cxx
   itkImageVectorOptimizerParametersHelperGTest.cxx
   itkImportContainerGTest.cxx
