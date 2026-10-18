@@ -19,10 +19,12 @@
 #include "itkMetaDataObject.h"
 #include "itkImage.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TMetaData>
-[[nodiscard]] int
+void
 testMetaData(const TMetaData & value)
 {
   using MetaDataType = TMetaData;
@@ -31,52 +33,45 @@ testMetaData(const TMetaData & value)
 
   auto metaDataObject = MetaDataObjectType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metaDataObject, MetaDataObject, MetaDataObjectBase);
+  // Not ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS: Print() of a default std::string value is empty.
+  metaDataObject->Print(std::cout);
+  EXPECT_STREQ(metaDataObject->GetNameOfClass(), "MetaDataObject");
+  EXPECT_STREQ(metaDataObject->Superclass::GetNameOfClass(), "MetaDataObjectBase");
 
 
   metaDataObject->SetMetaDataObjectValue(value);
-  if (itk::Math::NotExactlyEquals(metaDataObject->GetMetaDataObjectValue(), value))
-  {
-    std::cerr << "Set value does not equal original value!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(metaDataObject->GetMetaDataObjectValue(), value) << "Set value does not equal original value!";
 
   std::cout << "The metadata's type name is: " << metaDataObject->GetMetaDataObjectTypeName() << std::endl;
   std::cout << "The metadata object: " << std::endl;
   metaDataObject->Print(std::cout);
 
   std::cout << std::endl << std::endl;
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkMetaDataObjectTest(int, char *[])
+TEST(MetaDataObject, ConvertedLegacyTest)
 {
-
-  int result = EXIT_SUCCESS;
-  result += testMetaData<unsigned char>(24);
-  result += testMetaData<char>(-24);
-  result += testMetaData<unsigned short>(24);
-  result += testMetaData<short>(-24);
-  result += testMetaData<unsigned int>(24);
-  result += testMetaData<int>(-24);
-  result += testMetaData<unsigned long>(24);
-  result += testMetaData<long>(-24);
-  result += testMetaData<unsigned long long>(24);
-  result += testMetaData<long long>(-24);
-  result += testMetaData<float>(-24);
-  result += testMetaData<double>(-24);
-  result += testMetaData<std::string>("I T K");
-  result += testMetaData<std::vector<double>>({ 1.0, 2.0, 3.0 });
-  result += testMetaData<std::vector<std::vector<double>>>({ { 1.0, 2.0, 3.0 }, { 4.0, 5.0, 6.0 } });
-  result += testMetaData(itk::Array<char>(3, 'I'));
-  result += testMetaData<itk::Array<double>>(itk::Array<double>(3, 3.0));
-  result += testMetaData(itk::Matrix<float, 4, 4>());
-  result += testMetaData<itk::Matrix<double, 3, 3>>(itk::Matrix<double, 3, 3>::GetIdentity());
+  testMetaData<unsigned char>(24);
+  testMetaData<char>(-24);
+  testMetaData<unsigned short>(24);
+  testMetaData<short>(-24);
+  testMetaData<unsigned int>(24);
+  testMetaData<int>(-24);
+  testMetaData<unsigned long>(24);
+  testMetaData<long>(-24);
+  testMetaData<unsigned long long>(24);
+  testMetaData<long long>(-24);
+  testMetaData<float>(-24);
+  testMetaData<double>(-24);
+  testMetaData<std::string>("I T K");
+  testMetaData<std::vector<double>>({ 1.0, 2.0, 3.0 });
+  testMetaData<std::vector<std::vector<double>>>({ { 1.0, 2.0, 3.0 }, { 4.0, 5.0, 6.0 } });
+  testMetaData(itk::Array<char>(3, 'I'));
+  testMetaData<itk::Array<double>>(itk::Array<double>(3, 3.0));
+  testMetaData(itk::Matrix<float, 4, 4>());
+  testMetaData<itk::Matrix<double, 3, 3>>(itk::Matrix<double, 3, 3>::GetIdentity());
   using ImageType = itk::Image<unsigned short, 3>;
   const ImageType::Pointer image = nullptr;
-  result += testMetaData<ImageType::Pointer>(image);
-
-  return result;
+  testMetaData<ImageType::Pointer>(image);
 }
