@@ -18,7 +18,7 @@
 #include <set>
 #include "itkMersenneTwisterRandomVariateGenerator.h"
 #include "itkSPSAOptimizer.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 /**
@@ -37,6 +37,8 @@
  *   the solution is the vector | 2 -2 |
  *
  */
+namespace
+{
 class SPSACostFunction : public itk::SingleValuedCostFunction
 {
 public:
@@ -99,9 +101,9 @@ public:
     return SpaceDimension;
   }
 };
+} // namespace
 
-int
-itkSPSAOptimizerTest(int, char *[])
+TEST(SPSAOptimizer, ConvertedLegacyTest)
 {
   std::cout << "SPSAOptimizer Test ";
   std::cout << std::endl << std::endl;
@@ -120,7 +122,7 @@ itkSPSAOptimizerTest(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, SPSAOptimizer, SingleValuedNonLinearOptimizer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(itkOptimizer, SPSAOptimizer, SingleValuedNonLinearOptimizer);
 
 
   // Declaration of the CostFunction
@@ -136,49 +138,49 @@ itkSPSAOptimizerTest(int, char *[])
   itkOptimizer->SetScales(parametersScale);
 
   constexpr bool maximize{ false };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, maximize);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, maximize);
 
   constexpr bool minimize{ !maximize };
-  ITK_TEST_SET_GET_BOOLEAN(itkOptimizer, Minimize, minimize);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Minimize, minimize);
 
   constexpr double a{ 10.0 };
   itkOptimizer->SetA(a);
-  ITK_TEST_SET_GET_VALUE(a, itkOptimizer->GetA());
+  EXPECT_EQ(a, itkOptimizer->GetA());
 
   constexpr double alpha{ 0.602 };
   itkOptimizer->SetAlpha(alpha);
-  ITK_TEST_SET_GET_VALUE(alpha, itkOptimizer->GetAlpha());
+  EXPECT_EQ(alpha, itkOptimizer->GetAlpha());
 
   constexpr double c{ 0.0001 };
   itkOptimizer->Setc(c);
-  ITK_TEST_SET_GET_VALUE(c, itkOptimizer->Getc());
+  EXPECT_EQ(c, itkOptimizer->Getc());
 
   itkOptimizer->SetSc(c);
-  ITK_TEST_SET_GET_VALUE(c, itkOptimizer->GetSc());
+  EXPECT_EQ(c, itkOptimizer->GetSc());
 
   constexpr double gamma{ 0.101 };
   itkOptimizer->SetGamma(gamma);
-  ITK_TEST_SET_GET_VALUE(gamma, itkOptimizer->GetGamma());
+  EXPECT_EQ(gamma, itkOptimizer->GetGamma());
 
   constexpr double tolerance{ 1e-5 };
   itkOptimizer->SetTolerance(tolerance);
-  ITK_TEST_SET_GET_VALUE(tolerance, itkOptimizer->GetTolerance());
+  EXPECT_EQ(tolerance, itkOptimizer->GetTolerance());
 
   constexpr double stateOfConvergenceDecayRate{ 0.5 };
   itkOptimizer->SetStateOfConvergenceDecayRate(stateOfConvergenceDecayRate);
-  ITK_TEST_SET_GET_VALUE(stateOfConvergenceDecayRate, itkOptimizer->GetStateOfConvergenceDecayRate());
+  EXPECT_EQ(stateOfConvergenceDecayRate, itkOptimizer->GetStateOfConvergenceDecayRate());
 
   constexpr itk::SizeValueType minimumNumberOfIterations{ 10 };
   itkOptimizer->SetMinimumNumberOfIterations(10);
-  ITK_TEST_SET_GET_VALUE(minimumNumberOfIterations, itkOptimizer->GetMinimumNumberOfIterations());
+  EXPECT_EQ(minimumNumberOfIterations, itkOptimizer->GetMinimumNumberOfIterations());
 
   constexpr itk::SizeValueType maximumNumberOfIterations{ 100 };
   itkOptimizer->SetMaximumNumberOfIterations(maximumNumberOfIterations);
-  ITK_TEST_SET_GET_VALUE(maximumNumberOfIterations, itkOptimizer->GetMaximumNumberOfIterations());
+  EXPECT_EQ(maximumNumberOfIterations, itkOptimizer->GetMaximumNumberOfIterations());
 
   constexpr itk::SizeValueType numberOfPerturbations{ 1 };
   itkOptimizer->SetNumberOfPerturbations(numberOfPerturbations);
-  ITK_TEST_SET_GET_VALUE(numberOfPerturbations, itkOptimizer->GetNumberOfPerturbations());
+  EXPECT_EQ(numberOfPerturbations, itkOptimizer->GetNumberOfPerturbations());
 
   // We start not so far from  | 2 -2 |
   ParametersType initialPosition(spaceDimension);
@@ -196,7 +198,7 @@ itkSPSAOptimizerTest(int, char *[])
     std::cout << "An error occurred during Guessing Parameters" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
   std::cout << "\nEstimated parameter: a = " << itkOptimizer->Geta();
   std::cout << "\nEstimated parameter: A = " << itkOptimizer->GetA() << '\n' << std::endl;
@@ -211,7 +213,7 @@ itkSPSAOptimizerTest(int, char *[])
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
 
@@ -232,29 +234,14 @@ itkSPSAOptimizerTest(int, char *[])
   //
   // check results to see if it is within range
   //
-  bool             pass = true;
   constexpr double trueParameters[2]{ 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      pass = false;
-    }
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
-  if (itkOptimizer->GetStopCondition() == itk::SPSAOptimizer::StopConditionSPSAOptimizerEnum::Unknown)
-  {
-    pass = false;
-  }
-  if (itkOptimizer->GetStopCondition() == itk::SPSAOptimizer::StopConditionSPSAOptimizerEnum::MetricError)
-  {
-    pass = false;
-  }
+  EXPECT_NE(itkOptimizer->GetStopCondition(), itk::SPSAOptimizer::StopConditionSPSAOptimizerEnum::Unknown);
+  EXPECT_NE(itkOptimizer->GetStopCondition(), itk::SPSAOptimizer::StopConditionSPSAOptimizerEnum::MetricError);
 
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
 
   // Test streaming enumeration for SPSAOptimizerEnums::StopConditionSPSAOptimizer elements
   const std::set<itk::SPSAOptimizerEnums::StopConditionSPSAOptimizer> allStopConditionSPSAOptimizer{
@@ -267,7 +254,4 @@ itkSPSAOptimizerTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE SPSAOptimizerEnums::StopConditionSPSAOptimizer: " << ee << std::endl;
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
