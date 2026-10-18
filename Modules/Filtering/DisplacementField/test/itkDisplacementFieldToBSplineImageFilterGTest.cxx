@@ -17,10 +17,9 @@
  *=========================================================================*/
 
 #include "itkDisplacementFieldToBSplineImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkDisplacementFieldToBSplineImageFilterTest(int, char *[])
+TEST(DisplacementFieldToBSplineImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 2 };
 
@@ -82,54 +81,54 @@ itkDisplacementFieldToBSplineImageFilterTest(int, char *[])
 
   auto bspliner = BSplineFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(bspliner, DisplacementFieldToBSplineImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(bspliner, DisplacementFieldToBSplineImageFilter, ImageToImageFilter);
 
 
   bspliner->SetDisplacementField(field);
-  ITK_TEST_SET_GET_VALUE(field, bspliner->GetDisplacementField());
+  EXPECT_EQ(field, bspliner->GetDisplacementField());
 
   bspliner->SetConfidenceImage(confidenceImage);
-  ITK_TEST_SET_GET_VALUE(confidenceImage, bspliner->GetConfidenceImage());
+  EXPECT_EQ(confidenceImage, bspliner->GetConfidenceImage());
 
   bspliner->SetPointSet(pointSet);
-  ITK_TEST_SET_GET_VALUE(pointSet, bspliner->GetPointSet());
+  EXPECT_EQ(pointSet, bspliner->GetPointSet());
 
-  ITK_TEST_SET_GET_BOOLEAN(bspliner, UseInputFieldToDefineTheBSplineDomain, true);
+  ITK_GTEST_SET_GET_BOOLEAN(bspliner, UseInputFieldToDefineTheBSplineDomain, true);
 
   bspliner->SetNumberOfControlPoints(numberOfControlPoints);
-  ITK_TEST_SET_GET_VALUE(numberOfControlPoints, bspliner->GetNumberOfControlPoints());
+  EXPECT_EQ(numberOfControlPoints, bspliner->GetNumberOfControlPoints());
 
   constexpr unsigned int splineOrder{ 3 };
   bspliner->SetSplineOrder(splineOrder);
-  ITK_TEST_SET_GET_VALUE(splineOrder, bspliner->GetSplineOrder());
+  EXPECT_EQ(splineOrder, bspliner->GetSplineOrder());
 
   BSplineFilterType::ArrayType::ValueType numberOfFittingLevelsVal = 8;
   auto numberOfFittingLevels = itk::MakeFilled<BSplineFilterType::ArrayType>(numberOfFittingLevelsVal);
   bspliner->SetNumberOfFittingLevels(numberOfFittingLevelsVal);
-  ITK_TEST_SET_GET_VALUE(numberOfFittingLevels, bspliner->GetNumberOfFittingLevels());
+  EXPECT_EQ(numberOfFittingLevels, bspliner->GetNumberOfFittingLevels());
 
   bspliner->SetNumberOfFittingLevels(numberOfFittingLevels);
-  ITK_TEST_SET_GET_VALUE(numberOfFittingLevels, bspliner->GetNumberOfFittingLevels());
+  EXPECT_EQ(numberOfFittingLevels, bspliner->GetNumberOfFittingLevels());
 
-  ITK_TEST_SET_GET_BOOLEAN(bspliner, EnforceStationaryBoundary, false);
+  ITK_GTEST_SET_GET_BOOLEAN(bspliner, EnforceStationaryBoundary, false);
 
-  ITK_TEST_SET_GET_BOOLEAN(bspliner, EstimateInverse, false);
+  ITK_GTEST_SET_GET_BOOLEAN(bspliner, EstimateInverse, false);
 
   constexpr BSplineFilterType::OriginType::ValueType bSplineDomainOriginVal = 0.0;
   auto bSplineDomainOrigin = itk::MakeFilled<BSplineFilterType::OriginType>(bSplineDomainOriginVal);
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainOrigin, bspliner->GetBSplineDomainOrigin());
+  EXPECT_EQ(bSplineDomainOrigin, bspliner->GetBSplineDomainOrigin());
 
   constexpr BSplineFilterType::SpacingType::ValueType bSplineDomainSpacingVal = 1.0;
   auto bSplineDomainSpacing = itk::MakeFilled<BSplineFilterType::SpacingType>(bSplineDomainSpacingVal);
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainSpacing, bspliner->GetBSplineDomainSpacing());
+  EXPECT_EQ(bSplineDomainSpacing, bspliner->GetBSplineDomainSpacing());
 
   constexpr BSplineFilterType::SizeType::value_type bSplineDomainSizeVal = 0;
   auto bSplineDomainSize = BSplineFilterType::SizeType::Filled(bSplineDomainSizeVal);
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainSize, bspliner->GetBSplineDomainSize());
+  EXPECT_EQ(bSplineDomainSize, bspliner->GetBSplineDomainSize());
 
   BSplineFilterType::DirectionType bSplineDomainDirection;
   bSplineDomainDirection.SetIdentity();
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainDirection, bspliner->GetBSplineDomainDirection());
+  EXPECT_EQ(bSplineDomainDirection, bspliner->GetBSplineDomainDirection());
 
   try
   {
@@ -142,16 +141,16 @@ itkDisplacementFieldToBSplineImageFilterTest(int, char *[])
   }
 
   bSplineDomainOrigin = field->GetOrigin();
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainOrigin, bspliner->GetBSplineDomainOrigin());
+  EXPECT_EQ(bSplineDomainOrigin, bspliner->GetBSplineDomainOrigin());
 
   bSplineDomainSpacing = field->GetSpacing();
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainSpacing, bspliner->GetBSplineDomainSpacing());
+  EXPECT_EQ(bSplineDomainSpacing, bspliner->GetBSplineDomainSpacing());
 
   bSplineDomainSize = field->GetRequestedRegion().GetSize();
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainSize, bspliner->GetBSplineDomainSize());
+  EXPECT_EQ(bSplineDomainSize, bspliner->GetBSplineDomainSize());
 
   bSplineDomainDirection = field->GetDirection();
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainDirection, bspliner->GetBSplineDomainDirection());
+  EXPECT_EQ(bSplineDomainDirection, bspliner->GetBSplineDomainDirection());
 
   DisplacementFieldType::IndexType index;
   index[0] = 50;
@@ -159,11 +158,7 @@ itkDisplacementFieldToBSplineImageFilterTest(int, char *[])
 
   VectorType v = bspliner->GetOutput()->GetPixel(index);
 
-  if (itk::Math::Absolute(v.GetNorm() - 1.414214) >= 0.01)
-  {
-    std::cerr << "Failed to find the correct forward displacement vector." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(v.GetNorm(), 1.414214, 0.01);
 
   numberOfFittingLevelsVal = 5;
   bspliner->SetNumberOfFittingLevels(numberOfFittingLevelsVal);
@@ -173,11 +168,7 @@ itkDisplacementFieldToBSplineImageFilterTest(int, char *[])
 
   v = bspliner->GetOutput()->GetPixel(index);
 
-  if (itk::Math::Absolute(v.GetNorm() - 1.414214) >= 0.01)
-  {
-    std::cerr << "Failed to find the correct inverse displacement vector." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(v.GetNorm(), 1.414214, 0.01);
 
   /** do a second run using only the point set. */
 
@@ -188,10 +179,10 @@ itkDisplacementFieldToBSplineImageFilterTest(int, char *[])
 
   bspliner2->SetBSplineDomainFromImage(field);
 
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainOrigin, bspliner2->GetBSplineDomainOrigin());
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainSpacing, bspliner2->GetBSplineDomainSpacing());
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainSize, bspliner2->GetBSplineDomainSize());
-  ITK_TEST_EXPECT_EQUAL(bSplineDomainDirection, bspliner2->GetBSplineDomainDirection());
+  EXPECT_EQ(bSplineDomainOrigin, bspliner2->GetBSplineDomainOrigin());
+  EXPECT_EQ(bSplineDomainSpacing, bspliner2->GetBSplineDomainSpacing());
+  EXPECT_EQ(bSplineDomainSize, bspliner2->GetBSplineDomainSize());
+  EXPECT_EQ(bSplineDomainDirection, bspliner2->GetBSplineDomainDirection());
 
   bspliner2->SetNumberOfControlPoints(numberOfControlPoints);
   bspliner2->SetSplineOrder(splineOrder);
@@ -212,6 +203,4 @@ itkDisplacementFieldToBSplineImageFilterTest(int, char *[])
     std::cerr << "Exception thrown " << std::endl;
     std::cerr << excp << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
