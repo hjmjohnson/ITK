@@ -16,7 +16,7 @@
  *
  *=========================================================================*/
 #include "itkGradientDescentLineSearchOptimizerv4.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /* Cribbed from itkGradientDescentLineSearchOptimizerTest */
 
@@ -37,6 +37,8 @@
  *   the solution is the vector | 2 -2 |
  *
  */
+namespace
+{
 class GradientDescentLineSearchOptimizerv4TestMetric : public itk::ObjectToObjectMetricBase
 {
 public:
@@ -159,7 +161,7 @@ private:
 };
 
 ///////////////////////////////////////////////////////////
-[[nodiscard]] int
+void
 GradientDescentLineSearchOptimizerv4RunTest(itk::GradientDescentLineSearchOptimizerv4::Pointer & itkOptimizer)
 {
   try
@@ -174,7 +176,7 @@ GradientDescentLineSearchOptimizerv4RunTest(itk::GradientDescentLineSearchOptimi
     std::cout << "An error occurred during Optimization" << std::endl;
     std::cout << "Location    = " << e.GetLocation() << std::endl;
     std::cout << "Description = " << e.GetDescription() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   using ParametersType = GradientDescentLineSearchOptimizerv4TestMetric::ParametersType;
@@ -189,20 +191,12 @@ GradientDescentLineSearchOptimizerv4RunTest(itk::GradientDescentLineSearchOptimi
   double trueParameters[2] = { 2, -2 };
   for (unsigned int j = 0; j < 2; ++j)
   {
-    if (itk::Math::Absolute(finalPosition[j] - trueParameters[j]) > 0.01)
-    {
-      std::cerr << "Results do not match: " << std::endl
-                << "expected: " << trueParameters << std::endl
-                << "returned: " << finalPosition << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
   }
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 ///////////////////////////////////////////////////////////
-int
-itkGradientDescentLineSearchOptimizerv4Test(int, char *[])
+TEST(GradientDescentLineSearchOptimizerv4, ConvertedLegacyTest)
 {
   std::cout << "Gradient Descent Object Optimizer Test ";
   std::cout << std::endl << std::endl;
@@ -214,7 +208,7 @@ itkGradientDescentLineSearchOptimizerv4Test(int, char *[])
   // Declaration of an itkOptimizer
   auto itkOptimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     itkOptimizer, GradientDescentLineSearchOptimizerv4Template, GradientDescentOptimizerv4Template);
 
 
@@ -240,10 +234,7 @@ itkGradientDescentLineSearchOptimizerv4Test(int, char *[])
 
   // test the optimization
   std::cout << "Test optimization 1:" << std::endl;
-  if (GradientDescentLineSearchOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(GradientDescentLineSearchOptimizerv4RunTest(itkOptimizer));
 
   //
   // test with non-identity scales
@@ -254,25 +245,22 @@ itkGradientDescentLineSearchOptimizerv4Test(int, char *[])
 
   constexpr OptimizerType::InternalComputationValueType epsilon = 1.e-4;
   itkOptimizer->SetEpsilon(epsilon);
-  ITK_TEST_SET_GET_VALUE(epsilon, itkOptimizer->GetEpsilon());
+  EXPECT_EQ(epsilon, itkOptimizer->GetEpsilon());
 
   constexpr OptimizerType::InternalComputationValueType lowerLimit = -10;
   itkOptimizer->SetLowerLimit(lowerLimit);
-  ITK_TEST_SET_GET_VALUE(lowerLimit, itkOptimizer->GetLowerLimit());
+  EXPECT_EQ(lowerLimit, itkOptimizer->GetLowerLimit());
 
   constexpr OptimizerType::InternalComputationValueType upperLimit = 10;
   itkOptimizer->SetUpperLimit(upperLimit);
-  ITK_TEST_SET_GET_VALUE(upperLimit, itkOptimizer->GetUpperLimit());
+  EXPECT_EQ(upperLimit, itkOptimizer->GetUpperLimit());
 
   constexpr unsigned int maximumLineSearchIterations{ 100 };
   itkOptimizer->SetMaximumLineSearchIterations(maximumLineSearchIterations);
-  ITK_TEST_SET_GET_VALUE(maximumLineSearchIterations, itkOptimizer->GetMaximumLineSearchIterations());
+  EXPECT_EQ(maximumLineSearchIterations, itkOptimizer->GetMaximumLineSearchIterations());
 
   metric->SetParameters(initialPosition);
-  if (GradientDescentLineSearchOptimizerv4RunTest(itkOptimizer) == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_FATAL_FAILURE(GradientDescentLineSearchOptimizerv4RunTest(itkOptimizer));
 
   // Exercise various member functions.
   std::cout << "LearningRate: " << itkOptimizer->GetLearningRate();
@@ -283,9 +271,5 @@ itkGradientDescentLineSearchOptimizerv4Test(int, char *[])
 
   auto badOptimizer = OptimizerType::New();
 
-  ITK_TRY_EXPECT_EXCEPTION(badOptimizer->GetCurrentPosition());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_THROW(badOptimizer->GetCurrentPosition(), itk::ExceptionObject);
 }
