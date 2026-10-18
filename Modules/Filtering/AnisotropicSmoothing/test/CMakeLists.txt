@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKAnisotropicSmoothingTests
-  itkCurvatureAnisotropicDiffusionImageFilterTest.cxx
   itkGradientAnisotropicDiffusionImageFilterTest.cxx
   itkGradientAnisotropicDiffusionImageFilterTest2.cxx
   itkMinMaxCurvatureFlowImageFilterTest.cxx
@@ -15,12 +14,6 @@ itk_add_test(
   COMMAND
     ITKAnisotropicSmoothingTestDriver
     itkGradientAnisotropicDiffusionImageFilterTest
-)
-itk_add_test(
-  NAME itkCurvatureAnisotropicDiffusionImageFilterTest
-  COMMAND
-    ITKAnisotropicSmoothingTestDriver
-    itkCurvatureAnisotropicDiffusionImageFilterTest
 )
 itk_add_test(
   NAME itkMinMaxCurvatureFlowImageFilterTest
@@ -47,3 +40,9 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/GradientAnisotropicDiffusionImageFilterTest2.png
 )
+
+set(
+  ITKAnisotropicSmoothingGTests
+  itkCurvatureAnisotropicDiffusionImageFilterGTest.cxx
+)
+creategoogletestdriver(ITKAnisotropicSmoothing "${ITKAnisotropicSmoothing-Test_LIBRARIES}" "${ITKAnisotropicSmoothingGTests}")
