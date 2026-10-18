@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkBinaryMinMaxCurvatureFlowImageFilter.h"
+#include "itkGTest.h"
 #include "itkCommand.h"
 #include <random> // For mt19937.
 
@@ -36,7 +37,6 @@ public:
   }
   itk::ProcessObject::Pointer m_Process;
 };
-} // namespace
 
 
 constexpr unsigned int MAXRUNS{ 5 }; // maximum number of runs
@@ -49,6 +49,7 @@ testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,
                               int                          numberOfRuns,
                               unsigned int                 niter[],
                               unsigned long                radii[]);
+} // namespace
 
 /**
  * This file tests the functionality of the BinaryMinMaxCurvatureFlowImageFilter.
@@ -61,8 +62,7 @@ testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,
  * We then test the ability of BinaryMinMaxCurvatureFlowImageFilter to denoise
  * the binary image.
  */
-int
-itkBinaryMinMaxCurvatureFlowImageFilterTest(int, char *[])
+TEST(BinaryMinMaxCurvatureFlowImageFilter, ConvertedLegacyTest)
 {
   itk::Size<2> size2D;
   size2D[0] = 64;
@@ -74,14 +74,12 @@ itkBinaryMinMaxCurvatureFlowImageFilterTest(int, char *[])
 
   const int err2D = testBinaryMinMaxCurvatureFlow(size2D, 127.5, radius, numberOfRuns, niter, radii);
 
-  if (err2D)
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  EXPECT_EQ(err2D, EXIT_SUCCESS);
 }
 
 
+namespace
+{
 template <unsigned int VImageDimension>
 [[nodiscard]] int
 testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size, // ND image size
@@ -276,3 +274,4 @@ testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size, // ND image siz
   std::cout << "Test passed." << std::endl;
   return EXIT_SUCCESS;
 }
+} // namespace
