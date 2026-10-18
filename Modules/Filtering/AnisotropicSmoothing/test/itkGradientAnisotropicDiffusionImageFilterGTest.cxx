@@ -16,13 +16,11 @@
  *
  *=========================================================================*/
 
-#include <iostream>
 #include "itkGradientAnisotropicDiffusionImageFilter.h"
 #include "itkNullImageToImageFilterDriver.hxx"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkGradientAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(GradientAnisotropicDiffusionImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -34,32 +32,33 @@ itkGradientAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkN
   // Set up filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, GradientAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    filter, GradientAnisotropicDiffusionImageFilter, AnisotropicDiffusionImageFilter);
 
 
   constexpr itk::IdentifierType numberOfIterations{ 1 };
   filter->SetNumberOfIterations(numberOfIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, filter->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, filter->GetNumberOfIterations());
 
   constexpr FilterType::TimeStepType timeStep{ 0.125 };
   filter->SetTimeStep(timeStep);
-  ITK_TEST_SET_GET_VALUE(timeStep, filter->GetTimeStep());
+  EXPECT_EQ(timeStep, filter->GetTimeStep());
 
   auto conductanceParameter = 3.0;
   filter->SetConductanceParameter(conductanceParameter);
-  ITK_TEST_SET_GET_VALUE(conductanceParameter, filter->GetConductanceParameter());
+  EXPECT_EQ(conductanceParameter, filter->GetConductanceParameter());
 
   constexpr unsigned int conductanceScalingUpdateInterval{ 1 };
   filter->SetConductanceScalingUpdateInterval(conductanceScalingUpdateInterval);
-  ITK_TEST_SET_GET_VALUE(conductanceScalingUpdateInterval, filter->GetConductanceScalingUpdateInterval());
+  EXPECT_EQ(conductanceScalingUpdateInterval, filter->GetConductanceScalingUpdateInterval());
 
   auto conductanceScalingParameter = 1.0;
   filter->SetConductanceScalingParameter(conductanceScalingParameter);
-  ITK_TEST_SET_GET_VALUE(conductanceScalingParameter, filter->GetConductanceScalingParameter());
+  EXPECT_EQ(conductanceScalingParameter, filter->GetConductanceScalingParameter());
 
   auto fixedAverageGradientMagnitude = 1.0;
   filter->SetFixedAverageGradientMagnitude(fixedAverageGradientMagnitude);
-  ITK_TEST_SET_GET_VALUE(fixedAverageGradientMagnitude, filter->GetFixedAverageGradientMagnitude());
+  EXPECT_EQ(fixedAverageGradientMagnitude, filter->GetFixedAverageGradientMagnitude());
 
   // Run test
   itk::Size<Dimension> sz;
@@ -69,9 +68,5 @@ itkGradientAnisotropicDiffusionImageFilterTest(int itkNotUsed(argc), char * itkN
   test1.SetImageSize(sz);
   test1.SetFilter(filter);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(test1.Execute());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(test1.Execute());
 }
