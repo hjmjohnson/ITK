@@ -88,7 +88,6 @@ set(
   itkVNLRoundProfileTest1.cxx
   itkMemoryProbesCollecterBaseTest.cxx
   itkOptimizerParametersTest.cxx
-  itkImageRegionConstIteratorWithOnlyIndexTest.cxx
   itkImageToImageToleranceTest.cxx
   itkImageRegionSplitterSlowDimensionTest.cxx
   itkImageRegionSplitterDirectionTest.cxx
@@ -1225,12 +1224,6 @@ itk_add_test(
     itkCMakeConfigurationTest
     ${CMAKE_BINARY_DIR}
 )
-itk_add_test(
-  NAME itkImageRegionConstIteratorWithOnlyIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageRegionConstIteratorWithOnlyIndexTest
-)
 
 itk_add_test(
   NAME itkImageToImageToleranceTest
@@ -1435,6 +1428,7 @@ set(
   itkImageRandomConstIteratorWithOnlyIndexGTest.cxx
   itkImageRandomIteratorGTest.cxx
   itkImageRandomNonRepeatingIteratorWithIndexGTest.cxx
+  itkImageRegionConstIteratorWithOnlyIndexGTest.cxx
   itkImageRegionGTest.cxx
   itkImageRegionRangeGTest.cxx
   itkImageTransformGTest.cxx
