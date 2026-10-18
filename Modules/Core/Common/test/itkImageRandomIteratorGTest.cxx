@@ -16,14 +16,17 @@
  *
  *=========================================================================*/
 
+#include "itkImageRandomIteratorWithIndex.h"
 #include <iostream>
 
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkImageRandomIteratorWithIndex.h"
+#include "itkGTest.h"
+#include "vnl/vnl_sample.h"
 
-int
-itkImageRandomIteratorTest(int, char *[])
+TEST(ImageRandomIterator, ConvertedLegacyTest)
 {
+  // The legacy test driver reseeds vnl_sample before every test.
+  vnl_sample_reseed(8775070);
   std::cout << "Creating an image of indices" << std::endl;
 
   constexpr unsigned int ImageDimension{ 3 };
@@ -79,13 +82,7 @@ itkImageRandomIteratorTest(int, char *[])
   while (!ot.IsAtEnd())
   {
     index0 = ot.GetIndex();
-    if (ot.Get() != index0)
-    {
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << index0 << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_EQ(ot.Get(), index0) << "Values don't correspond to what was stored. Test failed at index " << index0;
     std::cout << index0 << std::endl;
     ++ot;
   }
@@ -104,13 +101,7 @@ itkImageRandomIteratorTest(int, char *[])
   while (!cot.IsAtEnd())
   {
     index0 = cot.GetIndex();
-    if (cot.Get() != index0)
-    {
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << index0 << " value is " << cot.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_EQ(cot.Get(), index0) << "Values don't correspond to what was stored. Test failed at index " << index0;
     std::cout << index0 << std::endl;
     ++cot;
   }
@@ -130,13 +121,7 @@ itkImageRandomIteratorTest(int, char *[])
   while (!ior.IsAtBegin())
   {
     index0 = ior.GetIndex();
-    if (ior.Get() != index0)
-    {
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << index0 << " value is " << ior.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_EQ(ior.Get(), index0) << "Values don't correspond to what was stored. Test failed at index " << index0;
     std::cout << index0 << std::endl;
     --ior;
   }
@@ -155,13 +140,7 @@ itkImageRandomIteratorTest(int, char *[])
   while (!cor.IsAtBegin())
   {
     index0 = cor.GetIndex();
-    if (cor.Get() != index0)
-    {
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << index0 << " value is " << cor.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_EQ(cor.Get(), index0) << "Values don't correspond to what was stored. Test failed at index " << index0;
     std::cout << index0 << std::endl;
     --cor;
   }
@@ -180,13 +159,7 @@ itkImageRandomIteratorTest(int, char *[])
   for (unsigned int counter = 0; !dor.IsAtEnd(); ++counter)
   {
     index0 = dor.GetIndex();
-    if (dor.Get() != index0)
-    {
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << index0 << " value is " << dor.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_EQ(dor.Get(), index0) << "Values don't correspond to what was stored. Test failed at index " << index0;
     std::cout << index0 << std::endl;
     if (counter < 6)
     {
@@ -224,19 +197,10 @@ itkImageRandomIteratorTest(int, char *[])
       const ImageType::IndexType index = cbot.GetIndex();
       const ImageType::PixelType pixel = cbot.Get();
 
-      if (index != pixel)
-      {
-        std::cerr << "Iterator in region test failed" << std::endl;
-        std::cerr << pixel << " should be" << index << std::endl;
-        return EXIT_FAILURE;
-      }
+      ASSERT_EQ(index, pixel) << "Iterator in region test failed";
 
-      if (!region.IsInside(index))
-      {
-        std::cerr << "Iterator in region test failed" << std::endl;
-        std::cerr << index << " is outside the region " << region << std::endl;
-        return EXIT_FAILURE;
-      }
+      ASSERT_TRUE(region.IsInside(index))
+        << "Iterator in region test failed" << index << " is outside the region " << region;
       std::cout << index << std::endl;
       ++cbot;
     }
@@ -267,18 +231,9 @@ itkImageRandomIteratorTest(int, char *[])
       const ImageType::IndexType index = cbot.GetIndex();
       const ImageType::PixelType pixel = cbot.Get();
 
-      if (index != pixel)
-      {
-        std::cerr << "Iterator in region test failed" << std::endl;
-        std::cerr << pixel << " should be" << index << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (!region.IsInside(index))
-      {
-        std::cerr << "Iterator in region test failed" << std::endl;
-        std::cerr << index << " is outside the region " << region << std::endl;
-        return EXIT_FAILURE;
-      }
+      ASSERT_EQ(index, pixel) << "Iterator in region test failed";
+      ASSERT_TRUE(region.IsInside(index))
+        << "Iterator in region test failed" << index << " is outside the region " << region;
       std::cout << index << std::endl;
 
       ++cbot;
@@ -289,6 +244,4 @@ itkImageRandomIteratorTest(int, char *[])
 
 
   std::cout << "Test passed" << std::endl;
-
-  return EXIT_SUCCESS;
 }
