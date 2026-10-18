@@ -3,7 +3,6 @@ set(
   ITKOptimizersTests
   itkInitializationBiasedParticleSwarmOptimizerTest.cxx
   itkLevenbergMarquardtOptimizerTest.cxx
-  itkParticleSwarmOptimizerTest.cxx
   itkPowellOptimizerTest.cxx
   itkRegularStepGradientDescentOptimizerTest.cxx
   itkSPSAOptimizerTest.cxx
@@ -58,12 +57,6 @@ itk_add_test(
     itkVersorRigid3DTransformOptimizerTest
 )
 itk_add_test(
-  NAME itkParticleSwarmOptimizerTest
-  COMMAND
-    ITKOptimizersTestDriver
-    itkParticleSwarmOptimizerTest
-)
-itk_add_test(
   NAME itkInitializationBiasedParticleSwarmOptimizerTest
   COMMAND
     ITKOptimizersTestDriver
@@ -87,5 +80,6 @@ set(
   itkLevenbergMarquardtOptimizerGTest.cxx
   itkOnePlusOneEvolutionaryOptimizerGTest.cxx
   itkOptimizersHierarchyGTest.cxx
+  itkParticleSwarmOptimizerGTest.cxx
 )
 creategoogletestdriver(ITKOptimizers "${ITKOptimizers-Test_LIBRARIES}" "${ITKOptimizersGTests}")
