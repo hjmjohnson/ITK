@@ -23,102 +23,83 @@
 #include "itkFloodFilledImageFunctionConditionalConstIterator.h"
 
 #include "itkShapedFloodFilledImageFunctionConditionalConstIterator.h"
+#include "itkGTest.h"
 
-int
-itkShapedFloodFilledImageFunctionConditionalConstIteratorTest3(int, char *[])
+TEST(ShapedFloodFilledImageFunctionConditionalConstIterator3, ConvertedLegacyTest)
 {
-  try
+  constexpr unsigned int ImageDimension{ 3 };
+  using PixelType = unsigned char;
+
+  using ImageType = itk::Image<PixelType, ImageDimension>;
+  using RegionType = ImageType::RegionType;
+  using IndexType = ImageType::IndexType;
+
+  using FunctionType = itk::BinaryThresholdImageFunction<ImageType>;
+  using FloodFilledIteratorType = itk::FloodFilledImageFunctionConditionalConstIterator<ImageType, FunctionType>;
+  using ShapedFloodFilledIteratorType =
+    itk::ShapedFloodFilledImageFunctionConditionalConstIterator<ImageType, FunctionType>;
+
+  std::vector<IndexType> seedList;
+
+  RegionType region;
+  region.SetSize(0, 128);
+  region.SetSize(1, 128);
+  region.SetSize(2, 128);
+  region.SetIndex(0, 0);
+  region.SetIndex(1, 0);
+  region.SetIndex(2, 0);
+
+  auto inputImage = ImageType::CreateInitialized(region);
+
+  itk::ImageLinearIteratorWithIndex<ImageType> it(inputImage, region);
+
+  // make sure that we create a 4-connected image!
+  for (unsigned int dir = 0; dir < ImageDimension; ++dir)
   {
-    constexpr unsigned int ImageDimension{ 3 };
-    using PixelType = unsigned char;
-
-    using ImageType = itk::Image<PixelType, ImageDimension>;
-    using RegionType = ImageType::RegionType;
-    using IndexType = ImageType::IndexType;
-
-    using FunctionType = itk::BinaryThresholdImageFunction<ImageType>;
-    using FloodFilledIteratorType = itk::FloodFilledImageFunctionConditionalConstIterator<ImageType, FunctionType>;
-    using ShapedFloodFilledIteratorType =
-      itk::ShapedFloodFilledImageFunctionConditionalConstIterator<ImageType, FunctionType>;
-
-    std::vector<IndexType> seedList;
-
-    RegionType region;
-    region.SetSize(0, 128);
-    region.SetSize(1, 128);
-    region.SetSize(2, 128);
-    region.SetIndex(0, 0);
-    region.SetIndex(1, 0);
-    region.SetIndex(2, 0);
-
-    auto inputImage = ImageType::CreateInitialized(region);
-
-    itk::ImageLinearIteratorWithIndex<ImageType> it(inputImage, region);
-
-    // make sure that we create a 4-connected image!
-    for (unsigned int dir = 0; dir < ImageDimension; ++dir)
+    it.SetDirection(dir);
+    it.GoToBegin();
+    while (!it.IsAtEnd())
     {
-      it.SetDirection(dir);
-      it.GoToBegin();
-      while (!it.IsAtEnd())
+      while (!it.IsAtEndOfLine())
       {
-        while (!it.IsAtEndOfLine())
+        // add a seed
+        if (seedList.empty())
         {
-          // add a seed
-          if (seedList.empty())
-          {
-            seedList.push_back(it.GetIndex());
-          }
-
-          it.Set(255);
-          ++it;
+          seedList.push_back(it.GetIndex());
         }
 
-        // and jump over every
+        it.Set(255);
+        ++it;
+      }
+
+      // and jump over every
+      it.NextLine();
+      if (!it.IsAtEnd())
+      {
         it.NextLine();
-        if (!it.IsAtEnd())
-        {
-          it.NextLine();
-        }
-        if (!it.IsAtEnd())
-        {
-          it.NextLine();
-        }
       }
-    }
-
-    auto function = FunctionType::New();
-
-    function->SetInputImage(inputImage);
-    function->ThresholdAbove(1); // >= 1
-
-    FloodFilledIteratorType       floodIt(inputImage, function, seedList);
-    ShapedFloodFilledIteratorType shapedFloodIt(inputImage, function, seedList);
-
-    shapedFloodIt.SetFullyConnected(false); // 4-connected, default
-
-    for (unsigned short i = 1; !floodIt.IsAtEnd(); ++floodIt, ++shapedFloodIt, ++i)
-    {
-      if (floodIt.GetIndex() != shapedFloodIt.GetIndex())
+      if (!it.IsAtEnd())
       {
-        return EXIT_FAILURE;
+        it.NextLine();
       }
     }
-
-    if (!floodIt.IsAtEnd() || !shapedFloodIt.IsAtEnd())
-    {
-      return EXIT_FAILURE;
-    }
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    e.Print(std::cerr);
-    return EXIT_FAILURE;
-  }
-  catch (...)
-  {
-    return EXIT_FAILURE;
   }
 
-  return EXIT_SUCCESS;
+  auto function = FunctionType::New();
+
+  function->SetInputImage(inputImage);
+  function->ThresholdAbove(1); // >= 1
+
+  FloodFilledIteratorType       floodIt(inputImage, function, seedList);
+  ShapedFloodFilledIteratorType shapedFloodIt(inputImage, function, seedList);
+
+  shapedFloodIt.SetFullyConnected(false); // 4-connected, default
+
+  for (unsigned short i = 1; !floodIt.IsAtEnd(); ++floodIt, ++shapedFloodIt, ++i)
+  {
+    ASSERT_EQ(floodIt.GetIndex(), shapedFloodIt.GetIndex());
+  }
+
+  EXPECT_TRUE(floodIt.IsAtEnd());
+  EXPECT_TRUE(shapedFloodIt.IsAtEnd());
 }
