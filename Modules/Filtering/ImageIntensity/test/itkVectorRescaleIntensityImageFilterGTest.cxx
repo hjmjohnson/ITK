@@ -19,12 +19,11 @@
 #include "itkMath.h"
 #include "itkNumericTraits.h"
 #include "itkVectorRescaleIntensityImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
-int
-itkVectorRescaleIntensityImageFilterTest(int, char *[])
+TEST(VectorRescaleIntensityImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int VectorDimension{ 3 };
 
@@ -50,22 +49,22 @@ itkVectorRescaleIntensityImageFilterTest(int, char *[])
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, VectorRescaleIntensityImageFilter, UnaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, VectorRescaleIntensityImageFilter, UnaryFunctorImageFilter);
 
   filter->SetInput(inputImage);
 
   // Test exceptions
   double desiredMaximum = -1.0;
   filter->SetOutputMaximumMagnitude(desiredMaximum);
-  ITK_TRY_EXPECT_EXCEPTION(filter->Update());
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
   desiredMaximum = 2.0;
   filter->SetOutputMaximumMagnitude(desiredMaximum);
-  ITK_TEST_SET_GET_VALUE(desiredMaximum, filter->GetOutputMaximumMagnitude());
+  EXPECT_EQ(desiredMaximum, filter->GetOutputMaximumMagnitude());
 
   filter->SetFunctor(filter->GetFunctor());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
   const FilterType::InputRealType scale = filter->GetScale();
   std::cout << "Input scale value: " << static_cast<itk::NumericTraits<FilterType::InputRealType>::PrintType>(scale)
@@ -99,20 +98,10 @@ itkVectorRescaleIntensityImageFilterTest(int, char *[])
     {
       if (itk::Math::NotAlmostEquals(outputValue[k], itk::NumericTraits<OutputPixelType>::ValueType{}))
       {
-        if (!itk::Math::FloatAlmostEqual(
-              static_cast<double>(outputValue[k]), static_cast<double>(pixelValue[k] * factor), 10, tolerance))
-        {
-          std::cerr << "Test FAILED !" << std::endl;
-          std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(tolerance))));
-          std::cerr << "Input  Pixel Value = " << pixelValue << std::endl;
-          std::cerr << "Output Pixel Value = " << outputValue << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(static_cast<double>(outputValue[k]), static_cast<double>(pixelValue[k] * factor), tolerance)
+          << "Input  Pixel Value = " << pixelValue << ", Output Pixel Value = " << outputValue;
       }
     }
     ++ot;
   }
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
 }
