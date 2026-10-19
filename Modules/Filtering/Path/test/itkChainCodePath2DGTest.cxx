@@ -18,23 +18,20 @@
 
 #include <iostream>
 #include "itkChainCodePath2D.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkChainCodePath2DTest(int, char *[])
+TEST(ChainCodePath2D, ConvertedLegacyTest)
 {
   using PathType = itk::ChainCodePath2D;
   using IndexType = PathType::IndexType;
   using OffsetType = PathType::OffsetType;
-
-  bool passed = true;
 
   IndexType  index;
   OffsetType offset;
 
   auto path = PathType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path, ChainCodePath2D, ChainCodePath);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path, ChainCodePath2D, ChainCodePath);
 
   index[0] = 3;
   index[1] = 5;
@@ -67,10 +64,7 @@ itkChainCodePath2DTest(int, char *[])
 
   std::cout << "Path is " << path->NumberOfSteps() << " steps: \"" << path->GetChainCodeAsString() << "\"."
             << std::endl;
-  if (path->NumberOfSteps() != 17)
-  {
-    passed = false;
-  }
+  EXPECT_EQ(path->NumberOfSteps(), 17u);
 
 
   index = path->GetStart();
@@ -90,17 +84,5 @@ itkChainCodePath2DTest(int, char *[])
       break;
     }
   }
-  if (index != path->GetStart())
-  {
-    passed = false;
-  }
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_EQ(index, path->GetStart());
 }

@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKPathTests
-  itkChainCodePath2DTest.cxx
   itkChainCodePathTest.cxx
   itkChainCodeToFourierSeriesPathFilterTest.cxx
   itkContourExtractor2DImageFilterTest.cxx
@@ -30,12 +29,6 @@ itk_add_test(
   COMMAND
     ITKPathTestDriver
     itkChainCodePathTest
-)
-itk_add_test(
-  NAME itkChainCodePath2DTest
-  COMMAND
-    ITKPathTestDriver
-    itkChainCodePath2DTest
 )
 itk_add_test(
   NAME itkHilbertPathTest
@@ -111,6 +104,10 @@ itk_add_test(
     DATA{Input/ContourExtractor2DTest.tif}
 )
 
-set(ITKPathGTests itkContourExtractor2DImageFilterGTest.cxx)
+set(
+  ITKPathGTests
+  itkChainCodePath2DGTest.cxx
+  itkContourExtractor2DImageFilterGTest.cxx
+)
 
 creategoogletestdriver(ITKPath "${ITKPath-Test_LIBRARIES}" "${ITKPathGTests}")
