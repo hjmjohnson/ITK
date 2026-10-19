@@ -27,6 +27,7 @@
 #include "itkTetrahedronCell.h"
 #include "itkQuadraticTriangleCell.h"
 #include "itkPolygonCell.h"
+#include "itkGTest.h"
 
 
 /**
@@ -48,6 +49,8 @@ using QEPolygonCellType = itk::QuadEdgeMeshPolygonCell<CellInterfaceType>;
 using CellType = MeshType::CellType;
 using CellAutoPointer = CellType::CellAutoPointer;
 
+namespace
+{
 class CustomQELineVisitor
 {
 public:
@@ -247,105 +250,66 @@ TestQECellInterface(const std::string_view name, TCell * aCell)
   }
   return EXIT_SUCCESS;
 }
+} // namespace
 
 
-int
-itkQuadEdgeMeshCellInterfaceTest(int, char *[])
+TEST(QuadEdgeMeshCellInterface, ConvertedLegacyTest)
 {
   /*
    * ITK NATIVE CELLS
    */
   using VertexCellType = itk::VertexCell<CellInterfaceType>;
   int status = TestCellInterface("Vertex", new VertexCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using LineCellType = itk::LineCell<CellInterfaceType>;
   status = TestCellInterface("Line", new LineCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using TriangleCellType = itk::TriangleCell<CellInterfaceType>;
   status = TestCellInterface("Triangle", new TriangleCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using HexahedronCellType = itk::HexahedronCell<CellInterfaceType>;
   status = TestCellInterface("HexahedronCell", new HexahedronCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using TetrahedronCellType = itk::TetrahedronCell<CellInterfaceType>;
   status = TestCellInterface("TetrahedronCell", new TetrahedronCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using QuadraticEdgeCellType = itk::QuadraticEdgeCell<CellInterfaceType>;
   status = TestCellInterface("QuadraticEdgeCell", new QuadraticEdgeCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using QuadraticTriangleCellType = itk::QuadraticTriangleCell<CellInterfaceType>;
   status = TestCellInterface("QuadraticTriangleCell", new QuadraticTriangleCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using QuadrilateralCellType = itk::QuadrilateralCell<CellInterfaceType>;
   status = TestCellInterface("QuadrilateralCell", new QuadrilateralCellType);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using PolygonCellType = itk::PolygonCell<CellInterfaceType>;
   status = TestCellInterface("PolygonCell with 0 vertices", new PolygonCellType());
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   using PolygonCellType = itk::PolygonCell<CellInterfaceType>;
   status = TestCellInterface("PolygonCell with 5 vertices", new PolygonCellType(5));
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   // ITK QuadEdgeMesh CELLS - Standard cell API test
 
   auto * tempQEPolygon = new QEPolygonCellType;
   status = TestCellInterface("QuadEdgePolygonCell with 0 vertices", tempQEPolygon);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   tempQEPolygon = new QEPolygonCellType(5);
   status = TestCellInterface("QuadEdgePolygonCell with 5 vertices", tempQEPolygon);
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   status = TestCellInterface("QuadEdgeLineCell", new QELineCellType());
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   // ITK QuadEdgeMesh CELLS - Specific QEcell API test
 
@@ -354,28 +318,19 @@ itkQuadEdgeMeshCellInterfaceTest(int, char *[])
   status = TestQECellInterface("QuadEdgePolygonCell with 0 vertices", tempQEPolygon);
   delete tempQEPolygon;
 
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   tempQEPolygon = new QEPolygonCellType(5);
   status = TestQECellInterface("QuadEdgePolygonCell with 5 vertices", tempQEPolygon);
   delete tempQEPolygon;
 
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   auto * tempQELine = new QELineCellType;
   status = TestQECellInterface("QuadEdgeLineCell", tempQELine);
   delete tempQELine;
 
-  if (status != 0)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(status, 0);
 
   // test the visitor API
   using QELineVisitorInterfaceType =
@@ -435,6 +390,4 @@ itkQuadEdgeMeshCellInterfaceTest(int, char *[])
     delete quadEdgeGeom->GetRot();
     quadEdgeGeom->SetRot(nullptr);
   }
-
-  return status;
 }
