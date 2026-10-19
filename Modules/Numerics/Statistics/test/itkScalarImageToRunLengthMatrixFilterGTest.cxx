@@ -22,9 +22,9 @@
 
 #include "itkScalarImageToRunLengthMatrixFilter.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-int
-itkScalarImageToRunLengthMatrixFilterTest(int, char *[])
+TEST(ScalarImageToRunLengthMatrixFilter, ConvertedLegacyTest)
 {
 
   // Data definitions
@@ -104,7 +104,6 @@ itkScalarImageToRunLengthMatrixFilterTest(int, char *[])
       }
     }
 
-  try
   {
 
     using FilterType = itk::Statistics::ScalarImageToRunLengthMatrixFilter<InputImageType>;
@@ -132,7 +131,6 @@ itkScalarImageToRunLengthMatrixFilterTest(int, char *[])
     //--------------------------------------------------------------------------
     // Test the histogram.
     //--------------------------------------------------------------------------
-    bool passed = true;
 
     const unsigned int frequencies[5][5] = {
       { 0, 3, 0, 0, 0 }, { 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 }
@@ -146,20 +144,11 @@ itkScalarImageToRunLengthMatrixFilterTest(int, char *[])
         IndexType index(hist->GetMeasurementVectorSize());
         index[0] = i;
         index[1] = j;
-        if (hist->GetFrequency(index) != frequencies[j][i])
-        {
-          std::cerr << "Expected frequency  (i,j)= " << '(' << i << ',' << j << ')' << frequencies[j][i]
-                    << ", calculated = " << hist->GetFrequency(index) << std::endl;
-          passed = false;
-        }
+        EXPECT_EQ(hist->GetFrequency(index), frequencies[j][i]) << "(i,j)= " << '(' << i << ',' << j << ')';
       }
     }
     const unsigned int totalF = hist->GetTotalFrequency();
-    if (totalF != 4)
-    {
-      std::cerr << "Expected total frequency = 4, calculated = " << totalF << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(totalF, 4u) << "Expected total frequency = 4";
 
     filter = FilterType::New();
 
@@ -172,57 +161,20 @@ itkScalarImageToRunLengthMatrixFilterTest(int, char *[])
     filter->SetDistanceValueMinMax(0, 8);
     filter->SetNumberOfBinsPerAxis(5);
 
-    if (filter->GetInsidePixelValue() != 0)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetInsidePixelValue() is not returning the expected value" << std::endl;
-      passed = false;
-    }
-    if (filter->GetMaskImage() == nullptr)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "Mask should not be null." << std::endl;
-      passed = false;
-    }
-    if (filter->GetMin() != 0)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetMin() is not returning the expected value" << std::endl;
-      passed = false;
-    }
-    if (filter->GetMax() != 3)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetMax() is not returning the expected value" << std::endl;
-      passed = false;
-    }
-    if (itk::Math::NotExactlyEquals(filter->GetMinDistance(), 0))
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetMinDistance() is not returning the expected value" << std::endl;
-      passed = false;
-    }
-    if (itk::Math::NotExactlyEquals(filter->GetMaxDistance(), 8))
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetMaxDistance() is not returning the expected value" << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter->GetInsidePixelValue(), 0) << "GetInsidePixelValue() is not returning the expected value";
+    EXPECT_NE(filter->GetMaskImage(), nullptr) << "Mask should not be null.";
+    EXPECT_EQ(filter->GetMin(), 0) << "GetMin() is not returning the expected value";
+    EXPECT_EQ(filter->GetMax(), 3) << "GetMax() is not returning the expected value";
+    EXPECT_EQ(filter->GetMinDistance(), 0.0) << "GetMinDistance() is not returning the expected value";
+    EXPECT_EQ(filter->GetMaxDistance(), 8.0) << "GetMaxDistance() is not returning the expected value";
 
     const FilterType::OffsetVector * offsetVector = filter->GetOffsets();
-    if (offsetVector->size() != 2 || (*offsetVector)[0][0] != 0 || (*offsetVector)[0][1] != -1 ||
-        (*offsetVector)[1][0] != -1 || (*offsetVector)[1][1] != 0)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetOffsets() is not returning the correct offsets" << std::endl;
-      passed = false;
-    }
-    if (filter->GetNumberOfBinsPerAxis() != 5)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetNumberOfBinsPerAxis() is not returning the expected value" << std::endl;
-      passed = false;
-    }
+    ASSERT_EQ(offsetVector->size(), 2u) << "GetOffsets() is not returning the correct offsets";
+    EXPECT_EQ((*offsetVector)[0][0], 0) << "GetOffsets() is not returning the correct offsets";
+    EXPECT_EQ((*offsetVector)[0][1], -1) << "GetOffsets() is not returning the correct offsets";
+    EXPECT_EQ((*offsetVector)[1][0], -1) << "GetOffsets() is not returning the correct offsets";
+    EXPECT_EQ((*offsetVector)[1][1], 0) << "GetOffsets() is not returning the correct offsets";
+    EXPECT_EQ(filter->GetNumberOfBinsPerAxis(), 5u) << "GetNumberOfBinsPerAxis() is not returning the expected value";
 
     filter->Update();
     hist = filter->GetOutput();
@@ -239,31 +191,10 @@ itkScalarImageToRunLengthMatrixFilterTest(int, char *[])
         IndexType index(hist->GetMeasurementVectorSize());
         index[0] = i;
         index[1] = j;
-        if (hist->GetFrequency(index) != frequencies2[j][i])
-        {
-          std::cerr << "Expected frequency2  (i,j)= " << '(' << i << ',' << j << ')' << frequencies2[j][i]
-                    << ", calculated = " << hist->GetFrequency(index) << std::endl;
-          passed = false;
-        }
+        EXPECT_EQ(hist->GetFrequency(index), frequencies2[j][i]) << "(i,j)= " << '(' << i << ',' << j << ')';
       }
     }
 
     filter->Print(std::cout, 3);
-
-    if (!passed)
-    {
-      std::cerr << "Test failed" << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    std::cerr << "Test succeeded" << std::endl;
-    return EXIT_SUCCESS;
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    std::cerr << "ExceptionObject caught !" << std::endl;
-    std::cerr << err << std::endl;
-    std::cerr << "Test failed" << std::endl;
-    return EXIT_FAILURE;
   }
 }
