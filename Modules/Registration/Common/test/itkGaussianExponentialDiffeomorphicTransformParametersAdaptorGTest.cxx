@@ -19,9 +19,9 @@
 #include "itkGaussianExponentialDiffeomorphicTransform.h"
 #include "itkGaussianExponentialDiffeomorphicTransformParametersAdaptor.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-int
-itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
+TEST(GaussianExponentialDiffeomorphicTransformParametersAdaptor, ConvertedLegacyTest)
 {
   constexpr unsigned int SpaceDimension{ 3 };
   using CoordinateRepType = double;
@@ -103,15 +103,7 @@ itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
 
   adaptor->SetGaussianSmoothingVarianceForTheUpdateField(updateSmoothingVariance);
   adaptor->SetGaussianSmoothingVarianceForTheConstantVelocityField(velocitySmoothingVariance);
-  try
-  {
-    adaptor->AdaptTransformParameters();
-  }
-  catch (...)
-  {
-    std::cerr << "Error in adapting transform." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NO_THROW(adaptor->AdaptTransformParameters()) << "Error in adapting transform.";
 
 
   const SpacingType spacingAfter = transform->GetConstantVelocityField()->GetSpacing();
@@ -124,50 +116,27 @@ itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest(int, char *[])
   std::cout << "Fixed parameters: " << fixedParameters << std::endl;
   adaptor->SetRequiredFixedParameters(fixedParameters);
 
-  if (adaptor->GetRequiredSize() != transform->GetDisplacementField()->GetLargestPossibleRegion().GetSize())
-  {
-    std::cerr << "required size conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredSpacing() != transform->GetDisplacementField()->GetSpacing())
-  {
-    std::cerr << "required spacing conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredOrigin() != transform->GetDisplacementField()->GetOrigin())
-  {
-    std::cerr << "required origin conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredDirection() != transform->GetDisplacementField()->GetDirection())
-  {
-    std::cerr << "required direction conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itk::Math::NotAlmostEquals(adaptor->GetGaussianSmoothingVarianceForTheUpdateField(),
-                                 transform->GetGaussianSmoothingVarianceForTheUpdateField()))
-  {
-    std::cerr << "update field mesh conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itk::Math::NotAlmostEquals(adaptor->GetGaussianSmoothingVarianceForTheConstantVelocityField(),
-                                 transform->GetGaussianSmoothingVarianceForTheConstantVelocityField()))
-  {
-    std::cerr << "total field mesh conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(adaptor->GetRequiredSize(), transform->GetDisplacementField()->GetLargestPossibleRegion().GetSize())
+    << "required size conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredSpacing(), transform->GetDisplacementField()->GetSpacing())
+    << "required spacing conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredOrigin(), transform->GetDisplacementField()->GetOrigin())
+    << "required origin conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredDirection(), transform->GetDisplacementField()->GetDirection())
+    << "required direction conversion is incorrect.";
+  EXPECT_DOUBLE_EQ(adaptor->GetGaussianSmoothingVarianceForTheUpdateField(),
+                   transform->GetGaussianSmoothingVarianceForTheUpdateField())
+    << "update field mesh conversion is incorrect.";
+  EXPECT_DOUBLE_EQ(adaptor->GetGaussianSmoothingVarianceForTheConstantVelocityField(),
+                   transform->GetGaussianSmoothingVarianceForTheConstantVelocityField())
+    << "total field mesh conversion is incorrect.";
 
   const TransformType::OutputPointType outputPointAfterAdapt = transform->TransformPoint(point);
   std::cout << point << " to (before) " << outputPointBeforeAdapt << std::endl;
   std::cout << point << " to (after) " << outputPointAfterAdapt << std::endl;
 
-  if (outputPointBeforeAdapt.EuclideanDistanceTo(outputPointAfterAdapt) > 1e-6)
-  {
-    std::cerr << "output points don't match up before and after adapt call." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(outputPointBeforeAdapt.EuclideanDistanceTo(outputPointAfterAdapt), 1e-6)
+    << "output points don't match up before and after adapt call.";
 
   adaptor->Print(std::cout, 5);
-
-  return EXIT_SUCCESS;
 }
