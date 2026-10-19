@@ -19,15 +19,18 @@
 #include "itkObjectStore.h"
 #include <iostream>
 #include <set>
+#include "itkGTest.h"
 
+namespace
+{
 struct TestObject
 {
   float vector[3];
   int   counter;
 };
+} // namespace
 
-int
-itkObjectStoreTest(int, char *[])
+TEST(ObjectStore, ConvertedLegacyTest)
 {
 
   const itk::ObjectStore<TestObject>::Pointer store = itk::ObjectStore<TestObject>::New();
@@ -82,5 +85,4 @@ itkObjectStoreTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE ObjectStoreEnums::GrowthStrategy: " << ee << std::endl;
   }
-  return EXIT_SUCCESS;
 }
