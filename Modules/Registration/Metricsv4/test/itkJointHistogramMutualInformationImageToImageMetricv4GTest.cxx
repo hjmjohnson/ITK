@@ -19,15 +19,14 @@
 #include "itkMath.h"
 #include "itkJointHistogramMutualInformationImageToImageMetricv4.h"
 #include "itkTranslationTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /* Checks value/derivative path consistency, agreement of the analytic
  * derivative with a central finite difference of the value, and the
  * non-overlap contract. See ImageToImageMetricv4Test for basic metric
  * functionality. */
 
-int
-itkJointHistogramMutualInformationImageToImageMetricv4Test(int, char *[])
+TEST(JointHistogramMutualInformationImageToImageMetricv4, ConvertedLegacyTest)
 {
   constexpr unsigned int imageSize{ 20 };
   constexpr unsigned int imageDimensionality{ 3 };
@@ -75,16 +74,17 @@ itkJointHistogramMutualInformationImageToImageMetricv4Test(int, char *[])
   using MetricType = itk::JointHistogramMutualInformationImageToImageMetricv4<ImageType, ImageType, ImageType>;
   auto metric = MetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, JointHistogramMutualInformationImageToImageMetricv4, ImageToImageMetricv4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    metric, JointHistogramMutualInformationImageToImageMetricv4, ImageToImageMetricv4);
 
   // Fewer than 7 bins degenerates the padded-PDF derivative stencils to zero.
   constexpr itk::SizeValueType numberOfHistogramBins{ 20 };
   metric->SetNumberOfHistogramBins(numberOfHistogramBins);
-  ITK_TEST_SET_GET_VALUE(numberOfHistogramBins, metric->GetNumberOfHistogramBins());
+  EXPECT_EQ(numberOfHistogramBins, metric->GetNumberOfHistogramBins());
 
   constexpr double varianceForJointPDFSmoothing{ 1.5 };
   metric->SetVarianceForJointPDFSmoothing(varianceForJointPDFSmoothing);
-  ITK_TEST_SET_GET_VALUE(varianceForJointPDFSmoothing, metric->GetVarianceForJointPDFSmoothing());
+  EXPECT_EQ(varianceForJointPDFSmoothing, metric->GetVarianceForJointPDFSmoothing());
 
   /* Assign images and transforms.
    * By not setting a virtual domain image or virtual domain settings,
@@ -94,21 +94,17 @@ itkJointHistogramMutualInformationImageToImageMetricv4Test(int, char *[])
   metric->SetFixedTransform(fixedTransform);
   metric->SetMovingTransform(movingTransform);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->Initialize());
+  ASSERT_NO_THROW(metric->Initialize());
 
   // Evaluate
   MetricType::MeasureType valueReturn1 = NAN;
-  ITK_TRY_EXPECT_NO_EXCEPTION(valueReturn1 = metric->GetValue());
+  ASSERT_NO_THROW(valueReturn1 = metric->GetValue());
 
   MetricType::MeasureType    valueReturn2 = NAN;
   MetricType::DerivativeType derivativeReturn;
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->GetValueAndDerivative(valueReturn2, derivativeReturn));
+  ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn2, derivativeReturn));
 
-  if (itk::Math::NotExactlyEquals(valueReturn1, valueReturn2))
-  {
-    std::cerr << "Value return results are not identical: " << valueReturn1 << ", " << valueReturn2 << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(valueReturn1, valueReturn2) << "Value return results are not identical";
 
   // Analytic derivative must point downhill and match a central finite difference.
   {
@@ -131,15 +127,13 @@ itkJointHistogramMutualInformationImageToImageMetricv4Test(int, char *[])
     const double analytic = detunedDerivative[0];
     // Band brackets the measured analytic/central-difference ratio (~1.08 at h=0.5)
     // tightly enough to trip on a lost 1/log2 or stray factor-of-2 scale regression.
-    if (itk::Math::Absolute(finiteDifference) < 1e-10 || analytic * finiteDifference >= 0.0 ||
-        itk::Math::Absolute(analytic) < 0.7 * itk::Math::Absolute(finiteDifference) ||
-        itk::Math::Absolute(analytic) > 1.4 * itk::Math::Absolute(finiteDifference))
-    {
-      std::cerr << "Analytic derivative disagrees with finite difference of the value:" << std::endl
-                << "  analytic[0]: " << analytic << std::endl
-                << "  central finite difference: " << finiteDifference << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_GE(itk::Math::Absolute(finiteDifference), 1e-10)
+      << "Analytic derivative disagrees with finite difference of the value";
+    EXPECT_LT(analytic * finiteDifference, 0.0) << "Analytic derivative disagrees with finite difference of the value";
+    EXPECT_GE(itk::Math::Absolute(analytic), 0.7 * itk::Math::Absolute(finiteDifference))
+      << "Analytic derivative disagrees with finite difference of the value";
+    EXPECT_LE(itk::Math::Absolute(analytic), 1.4 * itk::Math::Absolute(finiteDifference))
+      << "Analytic derivative disagrees with finite difference of the value";
   }
 
   std::cout << "JointPDF: " << metric->GetJointPDF() << std::endl;
@@ -152,16 +146,7 @@ itkJointHistogramMutualInformationImageToImageMetricv4Test(int, char *[])
   constexpr MetricType::MeasureType expectedMetricMax{ itk::NumericTraits<MetricType::MeasureType>::max() };
   std::cout << "Testing non-overlapping images. Expect a warning:" << std::endl;
   metric->GetValueAndDerivative(valueReturn2, derivativeReturn);
-  if (metric->GetNumberOfValidPoints() != 0 || itk::Math::NotAlmostEquals(valueReturn2, expectedMetricMax))
-  {
-    std::cerr << "Failed testing for non-overlapping images. " << std::endl
-              << "  Number of valid points: " << metric->GetNumberOfValidPoints() << std::endl
-              << "  Metric value: " << valueReturn2 << std::endl
-              << "  Expected metric max value: " << expectedMetricMax << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(metric->GetNumberOfValidPoints(), 0u) << "Failed testing for non-overlapping images.";
+  EXPECT_DOUBLE_EQ(valueReturn2, expectedMetricMax) << "Failed testing for non-overlapping images.";
   movingTransform->SetIdentity();
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
