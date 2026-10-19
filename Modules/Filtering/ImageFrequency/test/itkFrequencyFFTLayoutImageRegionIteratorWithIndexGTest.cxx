@@ -17,12 +17,14 @@
  *=========================================================================*/
 
 #include "itkFrequencyFFTLayoutImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include <complex>
 #include "itkMath.h"
 
+namespace
+{
 template <typename TImage>
 class itkFrequencyFFTLayoutImageRegionIteratorWithIndexTester
 {
@@ -246,12 +248,10 @@ private:
   FrequencyType                  m_LargestFrequency;
   bool                           m_ImageIsOdd;
 };
+} // namespace
 
-int
-itkFrequencyFFTLayoutImageRegionIteratorWithIndexTest(int, char *[])
+TEST(FrequencyFFTLayoutImageRegionIteratorWithIndex, ConvertedLegacyTest)
 {
-  bool testPassed = true; // let's be optimistic
-
   constexpr unsigned int Dimension{ 3 };
 
   using CharPixelType = int8_t;
@@ -263,10 +263,7 @@ itkFrequencyFFTLayoutImageRegionIteratorWithIndexTest(int, char *[])
     std::cout << "Testing with EVEN Image< std::complex<float>, 3 > with size: " << inputImageSize << std::endl;
     itkFrequencyFFTLayoutImageRegionIteratorWithIndexTester<itk::Image<std::complex<FloatPixelType>, Dimension>> Tester(
       inputImageSize);
-    if (Tester.TestIterator() == false)
-    {
-      testPassed = false;
-    }
+    EXPECT_TRUE(Tester.TestIterator());
   }
 
   // Even input image size test
@@ -275,10 +272,7 @@ itkFrequencyFFTLayoutImageRegionIteratorWithIndexTest(int, char *[])
     std::cout << "Testing with EVEN Image< char, 3 > with size: " << inputImageSize << std::endl;
     itkFrequencyFFTLayoutImageRegionIteratorWithIndexTester<itk::Image<CharPixelType, Dimension>> Tester(
       inputImageSize);
-    if (Tester.TestIterator() == false)
-    {
-      testPassed = false;
-    }
+    EXPECT_TRUE(Tester.TestIterator());
   }
 
   // Odd input image size test
@@ -287,17 +281,6 @@ itkFrequencyFFTLayoutImageRegionIteratorWithIndexTest(int, char *[])
     std::cout << "Testing with ODD Image< char, 3 > with size: " << inputImageSize << std::endl;
     itkFrequencyFFTLayoutImageRegionIteratorWithIndexTester<itk::Image<CharPixelType, Dimension>> Tester(
       inputImageSize);
-    if (Tester.TestIterator() == false)
-    {
-      testPassed = false;
-    }
+    EXPECT_TRUE(Tester.TestIterator());
   }
-
-  if (!testPassed)
-  {
-    std::cout << "Test failed!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
 }
