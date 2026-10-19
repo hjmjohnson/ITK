@@ -603,5 +603,6 @@ set(
   itkScalarChanAndVeseLevelSetFunctionGTest2.cxx
   itkScalarChanAndVeseSparseLevelSetImageFilterGTest1.cxx
   itkScalarRegionBasedLevelSetFunctionGTest.cxx
+  itkShapedFloodFilledImageFunctionConditionalConstIteratorGTest2.cxx
 )
 creategoogletestdriver(ITKReview "${ITKReview-Test_LIBRARIES}" "${ITKReviewGTests}")
