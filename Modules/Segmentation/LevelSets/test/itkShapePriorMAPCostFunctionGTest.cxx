@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkShapePriorMAPCostFunction.h"
+#include "itkGTest.h"
 #include "itkSphereSignedDistanceFunction.h"
 #include "itkAmoebaOptimizer.h"
 
@@ -36,8 +37,7 @@
  * of the original parameters.
  *
  */
-int
-itkShapePriorMAPCostFunctionTest(int, char *[])
+TEST(ShapePriorMAPCostFunction, ConvertedLegacyTest)
 {
 
   using PixelType = float;
@@ -160,7 +160,7 @@ itkShapePriorMAPCostFunctionTest(int, char *[])
   catch (const itk::ExceptionObject & err)
   {
     std::cout << err << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   // exercise Print method
@@ -202,7 +202,7 @@ itkShapePriorMAPCostFunctionTest(int, char *[])
   catch (const itk::ExceptionObject & err)
   {
     std::cout << err << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   std::cout << "Target parameters: " << parameters << std::endl;
@@ -210,11 +210,7 @@ itkShapePriorMAPCostFunctionTest(int, char *[])
 
   for (unsigned int j = 0; j < costFunction->GetNumberOfParameters(); ++j)
   {
-    if (itk::Math::Absolute(parameters[j] - optimizer->GetCurrentPosition()[j]) > 0.5)
-    {
-      std::cout << "Final parameters not within tolerance. " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(parameters[j] - optimizer->GetCurrentPosition()[j]), 0.5);
   }
 
   // exercise error testing
@@ -236,11 +232,7 @@ itkShapePriorMAPCostFunctionTest(int, char *[])
   }                                                                           \
   costFunction->Set##ComponentName(goodComponent);                            \
                                                                               \
-  if (!pass)                                                                  \
-  {                                                                           \
-    std::cout << "Test failed." << std::endl;                                 \
-    return EXIT_FAILURE;                                                      \
-  }                                                                           \
+  EXPECT_TRUE(pass);                                                          \
   ITK_MACROEND_NOOP_STATEMENT
 
   TEST_INITIALIZATION_ERROR(ShapeFunction, nullptr, shape);
@@ -253,5 +245,4 @@ itkShapePriorMAPCostFunctionTest(int, char *[])
   TEST_INITIALIZATION_ERROR(ShapeParameterStandardDeviations, badParameters, shapeStdDev);
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
