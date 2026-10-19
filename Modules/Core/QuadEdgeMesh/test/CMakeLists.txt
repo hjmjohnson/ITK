@@ -4,7 +4,6 @@ set(
   itkQuadEdgeMeshAddFaceTest1.cxx
   itkQuadEdgeMeshEulerOperatorJoinVertexTest.cxx
   itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1.cxx
-  itkQuadEdgeTest1.cxx
   itkVTKPolyDataIOQuadEdgeMeshTest.cxx
   itkVTKPolyDataReaderQuadEdgeMeshTest.cxx
 )
@@ -19,12 +18,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/sphere.vtk
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/sphere.vtk
-)
-itk_add_test(
-  NAME itkQuadEdgeTest1
-  COMMAND
-    ITKQuadEdgeMeshTestDriver
-    itkQuadEdgeTest1
 )
 itk_add_test(
   NAME itkQuadEdgeMeshAddFaceTest1_0
@@ -125,6 +118,7 @@ set(
   ITKQuadEdgeMeshGTests
   itkDynamicQuadEdgeMeshGTest.cxx
   itkGeometricalQuadEdgeGTest1.cxx
+  itkQuadEdgeGTest1.cxx
   itkQuadEdgeMeshAddFaceGTest2.cxx
   itkQuadEdgeMeshBasicLayerGTest.cxx
   itkQuadEdgeMeshCellInterfaceGTest.cxx
