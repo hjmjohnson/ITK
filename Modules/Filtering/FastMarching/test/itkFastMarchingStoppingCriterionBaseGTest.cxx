@@ -17,19 +17,20 @@
  *=========================================================================*/
 
 #include "itkFastMarchingStoppingCriterionBase.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 template <typename TInput, typename TOutput>
-class FastMarchingStoppingCriterionBaseHelperTest : public FastMarchingStoppingCriterionBase<TInput, TOutput>
+class FastMarchingStoppingCriterionBaseHelperTest : public itk::FastMarchingStoppingCriterionBase<TInput, TOutput>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(FastMarchingStoppingCriterionBaseHelperTest);
 
   using Self = FastMarchingStoppingCriterionBaseHelperTest;
-  using Superclass = FastMarchingStoppingCriterionBase<TInput, TOutput>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::FastMarchingStoppingCriterionBase<TInput, TOutput>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   using typename Superclass::NodeType;
 
@@ -64,33 +65,25 @@ protected:
   Reset() override
   {}
 };
-} // namespace itk
+} // namespace
 
-int
-itkFastMarchingStoppingCriterionBaseTest(int, char *[])
+TEST(FastMarchingStoppingCriterionBase, ConvertedLegacyTest)
 {
   using PixelType = float;
   constexpr unsigned int Dimension2D{ 2 };
 
   using ImageType = itk::Image<PixelType, Dimension2D>;
 
-  using ImageStoppingCriterionType = itk::FastMarchingStoppingCriterionBaseHelperTest<ImageType, ImageType>;
+  using ImageStoppingCriterionType = FastMarchingStoppingCriterionBaseHelperTest<ImageType, ImageType>;
 
   auto imageCriterion = ImageStoppingCriterionType::New();
-  if (imageCriterion.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(imageCriterion.IsNull());
 
   constexpr unsigned int Dimension3D{ 3 };
   using MeshType = itk::QuadEdgeMesh<PixelType, Dimension3D>;
 
-  using MeshStoppingCriterionType = itk::FastMarchingStoppingCriterionBaseHelperTest<MeshType, MeshType>;
+  using MeshStoppingCriterionType = FastMarchingStoppingCriterionBaseHelperTest<MeshType, MeshType>;
 
   auto meshCriterion = MeshStoppingCriterionType::New();
-  if (meshCriterion.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(meshCriterion.IsNull());
 }
