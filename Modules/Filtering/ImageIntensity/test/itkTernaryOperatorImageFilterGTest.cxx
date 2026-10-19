@@ -20,10 +20,9 @@
 #include "itkImage.h"
 #include "itkTernaryOperatorImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkTernaryOperatorImageFilterTest(int, char *[])
+TEST(TernaryOperatorImageFilter, ConvertedLegacyTest)
 {
 
   //
@@ -32,17 +31,9 @@ itkTernaryOperatorImageFilterTest(int, char *[])
 
   constexpr itk::Functor::TernaryOperator<bool, short, short, short> func;
 
-  if ((true ? 12 : 37) != func(true, 12, 37))
-  {
-    std::cerr << "Incorrect value returned: true ? 12 : 37." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ((true ? 12 : 37), func(true, 12, 37)) << "Incorrect value returned: true ? 12 : 37.";
 
-  if ((false ? 12 : 37) != func(false, 12, 37))
-  {
-    std::cerr << "Incorrect value returned: false ? 12 : 37." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ((false ? 12 : 37), func(false, 12, 37)) << "Incorrect value returned: false ? 12 : 37.";
 
   //
   // Check the image filter
@@ -101,7 +92,7 @@ itkTernaryOperatorImageFilterTest(int, char *[])
   using TernaryType = itk::TernaryOperatorImageFilter<MaskImageType, GrayImageType>;
   auto tern = TernaryType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(tern, TernaryOperatorImageFilter, TernaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(tern, TernaryOperatorImageFilter, TernaryGeneratorImageFilter);
 
   tern->SetInput1(mask);
   tern->SetInput2(image1);
@@ -117,15 +108,13 @@ itkTernaryOperatorImageFilterTest(int, char *[])
   GrayItType outIt(output, output->GetLargestPossibleRegion());
   for (outIt.GoToBegin(); !outIt.IsAtEnd(); ++outIt)
   {
-    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 0 && outIt.Get() != val1)
+    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 0)
     {
-      std::cerr << "Error: Value should be " << val1 << " but was " << outIt.Get() << std::endl;
-      return EXIT_FAILURE;
+      EXPECT_EQ(outIt.Get(), val1);
     }
-    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 1 && outIt.Get() != val2)
+    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 1)
     {
-      std::cerr << "Error: Value should be " << val2 << " but was " << outIt.Get() << std::endl;
-      return EXIT_FAILURE;
+      EXPECT_EQ(outIt.Get(), val2);
     }
   }
 
@@ -140,17 +129,13 @@ itkTernaryOperatorImageFilterTest(int, char *[])
   outIt = GrayItType(output, output->GetLargestPossibleRegion());
   for (outIt.GoToBegin(); !outIt.IsAtEnd(); ++outIt)
   {
-    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 0 && outIt.Get() != val1)
+    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 0)
     {
-      std::cerr << "Error: Value should be " << val1 << " but was " << outIt.Get() << std::endl;
-      return EXIT_FAILURE;
+      EXPECT_EQ(outIt.Get(), val1);
     }
-    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 1 && outIt.Get() != 99)
+    if (outIt.GetIndex()[0] + outIt.GetIndex()[1] % 2 == 1)
     {
-      std::cerr << "Error: Value should be " << 99 << " but was " << outIt.Get() << std::endl;
-      return EXIT_FAILURE;
+      EXPECT_EQ(outIt.Get(), 99);
     }
   }
-
-  return EXIT_SUCCESS;
 }
