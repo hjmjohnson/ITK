@@ -4,7 +4,6 @@ set(
   itkAddImageFilterTest2.cxx
   itkAndImageFilterTest.cxx
   itkBoundedReciprocalImageFilterTest.cxx
-  itkComplexToImaginaryFilterAndAdaptorTest.cxx
   itkComplexToModulusFilterAndAdaptorTest.cxx
   itkComplexToPhaseFilterAndAdaptorTest.cxx
   itkComplexToRealFilterAndAdaptorTest.cxx
@@ -530,12 +529,6 @@ itk_add_test(
     itkSubtractImageFilterTest
 )
 itk_add_test(
-  NAME itkComplexToImaginaryFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkComplexToImaginaryFilterAndAdaptorTest
-)
-itk_add_test(
   NAME itkVectorToRGBImageAdaptorTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -750,6 +743,7 @@ set(
   itkBinaryMagnitudeImageFilterGTest.cxx
   itkBitwiseOpsFunctorsTest.cxx
   itkClampImageFilterGTest.cxx
+  itkComplexToImaginaryFilterAndAdaptorGTest.cxx
   itkEqualGTest.cxx
   itkGreaterEqualGTest.cxx
   itkGreaterGTest.cxx
