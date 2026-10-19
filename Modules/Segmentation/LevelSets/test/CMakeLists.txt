@@ -3,7 +3,6 @@ set(
   ITKLevelSetsTests
   itkBinaryMaskToNarrowBandPointSetFilterTest.cxx
   itkCollidingFrontsImageFilterTest.cxx
-  itkExtensionVelocitiesImageFilterTest.cxx
   itkGeodesicActiveContourLevelSetImageFilterTest.cxx
   itkGeodesicActiveContourLevelSetImageFilterZeroSigmaTest.cxx
   itkGeodesicActiveContourShapePriorLevelSetImageFilterTest.cxx
@@ -33,6 +32,7 @@ set(
   itkCannySegmentationLevelSetImageFilterGTest.cxx
   itkCurvesLevelSetImageFilterGTest.cxx
   itkCurvesLevelSetImageFilterZeroSigmaGTest.cxx
+  itkExtensionVelocitiesImageFilterGTest.cxx
   itkImplicitManifoldNormalVectorFilterGTest.cxx
   itkLaplacianSegmentationLevelSetImageFilterGTest.cxx
   itkLevelSetNeighborhoodExtractorGTest.cxx
@@ -150,12 +150,6 @@ itk_add_test(
   COMMAND
     ITKLevelSetsTestDriver
     itkLevelSetFunctionTest
-)
-itk_add_test(
-  NAME itkExtensionVelocitiesImageFilterTest
-  COMMAND
-    ITKLevelSetsTestDriver
-    itkExtensionVelocitiesImageFilterTest
 )
 itk_add_test(
   NAME itkLevelSetNeighborhoodExtractorTest
