@@ -728,6 +728,7 @@ set(
   itkMixtureModelComponentBaseGTest.cxx
   itkNeighborhoodSamplerGTest1.cxx
   itkNormalVariateGeneratorGTest1.cxx
+  itkPointSetToListSampleAdaptorGTest.cxx
   itkRandomVariateGeneratorBaseGTest.cxx
   itkSampleToHistogramFilterExceptionsGTest.cxx
   itkStandardDeviationPerComponentSampleFilterGTest.cxx
