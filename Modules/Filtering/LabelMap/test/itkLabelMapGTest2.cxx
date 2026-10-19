@@ -19,10 +19,9 @@
 #include <iostream>
 #include "itkLabelMap.h"
 #include "itkLabelObject.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkLabelMapTest2(int, char *[])
+TEST(LabelMap, ConvertedLegacyTest2)
 {
   constexpr unsigned int dim{ 3 };
 
@@ -107,45 +106,45 @@ itkLabelMapTest2(int, char *[])
   map->PushLabelObject(lo2);
 
   map->SetPixel(idx, 255);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 255), "SetPixel( idx, 255 ) - Failed 1");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 2), "SetPixel( idx, 255 ) - Failed 1");
+  EXPECT_EQ(map->GetPixel(idx), 255u) << "SetPixel( idx, 255 ) - Failed 1";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 2u) << "SetPixel( idx, 255 ) - Failed 1";
 
   idx[0] = 11;
   idx[1] = 21;
   idx[2] = 30;
   map->SetPixel(idx, 255);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 255), "SetPixel( idx, 255 ) - Failed 2");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 2), "SetPixel( idx, 255 ) - Failed 2");
+  EXPECT_EQ(map->GetPixel(idx), 255u) << "SetPixel( idx, 255 ) - Failed 2";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 2u) << "SetPixel( idx, 255 ) - Failed 2";
 
   idx[0] = 10;
   idx[1] = 21;
   idx[2] = 30;
   map->SetPixel(idx, 255);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 255), "SetPixel( idx, 255 ) - Failed 3");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 2), "SetPixel( idx, 255 ) - Failed 3");
+  EXPECT_EQ(map->GetPixel(idx), 255u) << "SetPixel( idx, 255 ) - Failed 3";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 2u) << "SetPixel( idx, 255 ) - Failed 3";
 
   idx[0] = 5;
   idx[1] = 21;
   idx[2] = 30;
   map->SetPixel(idx, 1);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 1), "SetPixel( idx, 1 ) failed");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 2), "SetPixel( idx, 1 ) failed");
+  EXPECT_EQ(map->GetPixel(idx), 1u) << "SetPixel( idx, 1 ) failed";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 2u) << "SetPixel( idx, 1 ) failed";
 
   map->SetPixel(idx, 255);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 255), "SetPixel( idx, 255 ) - Failed 4");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 2), "SetPixel( idx, 1 ) - Failed 4");
+  EXPECT_EQ(map->GetPixel(idx), 255u) << "SetPixel( idx, 255 ) - Failed 4";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 2u) << "SetPixel( idx, 1 ) - Failed 4";
 
   map->SetPixel(idx, 255);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 255), "SetPixel( idx, 255 ) - Failed 5");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 2), "SetPixel( idx, 1 ) - Failed 5");
+  EXPECT_EQ(map->GetPixel(idx), 255u) << "SetPixel( idx, 255 ) - Failed 5";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 2u) << "SetPixel( idx, 1 ) - Failed 5";
 
   map->SetPixel(idx, 3);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 3), "SetPixel( idx, 3 ) failed");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 3), "SetPixel( idx, 1 ) failed");
+  EXPECT_EQ(map->GetPixel(idx), 3u) << "SetPixel( idx, 3 ) failed";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 3u) << "SetPixel( idx, 1 ) failed";
 
   map->SetPixel(idx, 2);
-  itkAssertOrThrowMacro((map->GetPixel(idx) == 2), "SetPixel( idx, 2 ) failed");
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 2), "SetPixel( idx, 2 ) failed");
+  EXPECT_EQ(map->GetPixel(idx), 2u) << "SetPixel( idx, 2 ) failed";
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 2u) << "SetPixel( idx, 2 ) failed";
 
   idx[0] = 0;
   idx[1] = 21;
@@ -156,11 +155,9 @@ itkLabelMapTest2(int, char *[])
     map->SetPixel(idx, 255);
   }
 
-  itkAssertOrThrowMacro((map->GetNumberOfLabelObjects() == 1), "Remove Label Object 2");
+  EXPECT_EQ(map->GetNumberOfLabelObjects(), 1u) << "Remove Label Object 2";
 
   map->Optimize();
 
   map->ClearLabels();
-
-  return EXIT_SUCCESS;
 }
