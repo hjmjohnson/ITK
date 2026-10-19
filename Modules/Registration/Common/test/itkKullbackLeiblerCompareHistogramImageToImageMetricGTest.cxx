@@ -20,6 +20,7 @@
 
 #include "itkLinearInterpolateImageFunction.h"
 #include "itkTimeProbesCollectorBase.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -32,8 +33,7 @@
  *
  */
 
-int
-itkKullbackLeiblerCompareHistogramImageToImageMetricTest(int, char *[])
+TEST(KullbackLeiblerCompareHistogramImageToImageMetric, ConvertedLegacyTest)
 {
 
   //------------------------------------------------------------
@@ -329,6 +329,4 @@ itkKullbackLeiblerCompareHistogramImageToImageMetricTest(int, char *[])
     std::cout << "Caught the exception." << std::endl;
     std::cout << err << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
