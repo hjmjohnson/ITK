@@ -20,22 +20,23 @@
 #include "itkSample.h"
 #include "itkObjectFactory.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-namespace itk::Statistics::SampleTest
+namespace
 {
 
 template <typename TMeasurementVector>
-class MySample : public Sample<TMeasurementVector>
+class MySample : public itk::Statistics::Sample<TMeasurementVector>
 {
 public:
   /** Standard class type alias. */
   using Self = MySample;
 
-  using Superclass = Sample<TMeasurementVector>;
+  using Superclass = itk::Statistics::Sample<TMeasurementVector>;
 
-  using Pointer = SmartPointer<Self>;
+  using Pointer = itk::SmartPointer<Self>;
 
-  using ConstPointer = SmartPointer<const Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(MySample);
@@ -97,7 +98,7 @@ public:
   }
 
   void
-  PrintSelf(std::ostream & os, Indent indent) const override
+  PrintSelf(std::ostream & os, itk::Indent indent) const override
   {
     Superclass::PrintSelf(os, indent);
     os << indent << m_Values.size() << std::endl;
@@ -117,18 +118,17 @@ private:
   std::vector<AbsoluteFrequencyType> m_Frequencies;
 };
 
-} // namespace itk::Statistics::SampleTest
+} // namespace
 
 
-int
-itkSampleTest3(int, char *[])
+TEST(Sample, ConvertedLegacyTest3)
 {
 
   constexpr unsigned int MeasurementVectorSize{ 17 };
 
   using MeasurementVectorType = itk::VariableLengthVector<float>;
 
-  using SampleType = itk::Statistics::SampleTest::MySample<MeasurementVectorType>;
+  using SampleType = MySample<MeasurementVectorType>;
 
   auto sample = SampleType::New();
 
@@ -139,11 +139,7 @@ itkSampleTest3(int, char *[])
 
   sample->SetMeasurementVectorSize(MeasurementVectorSize); // for code coverage
 
-  if (sample->GetMeasurementVectorSize() != MeasurementVectorSize)
-  {
-    std::cerr << "GetMeasurementVectorSize() Failed !" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(sample->GetMeasurementVectorSize(), MeasurementVectorSize) << "GetMeasurementVectorSize() Failed !";
 
   std::cout << sample->Size() << std::endl;
 
@@ -163,50 +159,23 @@ itkSampleTest3(int, char *[])
   MeasurementVectorType       measureBack = sample->GetMeasurementVector(0);
   const AbsoluteFrequencyType frequencyBack = sample->GetFrequency(0);
 
-  if (frequencyBack != frequency)
-  {
-    std::cerr << "Error in GetFrequency()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(frequencyBack, frequency) << "Error in GetFrequency()";
 
   for (unsigned int j = 0; j < MeasurementVectorSize; ++j)
   {
-    if (itk::Math::NotExactlyEquals(measureBack[j], measure[j]))
-    {
-      std::cerr << "Error in Set/Get MeasurementVector()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(measureBack[j], measure[j]) << "Error in Set/Get MeasurementVector()";
   }
 
   std::cout << sample->GetTotalFrequency() << std::endl;
 
 
-  try
-  {
-    sample->SetMeasurementVectorSize(MeasurementVectorSize + 5);
-    std::cerr << "Sample failed to throw an exception when calling SetMeasurementVectorSize()" << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cout << "Expected exception caught: " << excp << std::endl;
-  }
+  EXPECT_THROW(sample->SetMeasurementVectorSize(MeasurementVectorSize + 5), itk::ExceptionObject)
+    << "Sample failed to throw an exception when calling SetMeasurementVectorSize()";
 
 
   // If we call Clear(), now we should be able to change the
   // MeasurementVectorSize of the Sample:
   sample->Clear();
 
-  try
-  {
-    sample->SetMeasurementVectorSize(MeasurementVectorSize + 5);
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(sample->SetMeasurementVectorSize(MeasurementVectorSize + 5));
 }
