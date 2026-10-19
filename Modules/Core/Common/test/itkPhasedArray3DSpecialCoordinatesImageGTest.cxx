@@ -19,12 +19,10 @@
 #include <iostream>
 #include "itkPhasedArray3DSpecialCoordinatesImage.h"
 #include "itkWindowedSincInterpolateImageFunction.h"
+#include "itkGTest.h"
 
-int
-itkPhasedArray3DSpecialCoordinatesImageTest(int, char *[])
+TEST(PhasedArray3DSpecialCoordinatesImage, ConvertedLegacyTest)
 {
-  bool passed = true;
-
   using Image = itk::PhasedArray3DSpecialCoordinatesImage<float>;
   using RegionType = Image::RegionType;
   using SizeType = Image::SizeType;
@@ -69,10 +67,9 @@ itkPhasedArray3DSpecialCoordinatesImageTest(int, char *[])
   std::cout << "Point " << point << " -> Continuous Index " << continuousIndex
             << (isContinuousIndexInside ? " inside" : " outside") << std::endl;
 
-  if (index[0] != 2 || index[1] != 2 || index[2] != 1)
-  {
-    passed = false;
-  }
+  EXPECT_EQ(index[0], 2);
+  EXPECT_EQ(index[1], 2);
+  EXPECT_EQ(index[2], 1);
 
   index.Fill(1);
   image->TransformIndexToPhysicalPoint(index, point);
@@ -86,24 +83,16 @@ itkPhasedArray3DSpecialCoordinatesImageTest(int, char *[])
   image->TransformContinuousIndexToPhysicalPoint(continuousIndex, point);
   std::cout << "Continuous Index " << continuousIndex << " -> Point " << point << std::endl;
 
-  if (point[0] < -0.001 || point[0] > 0.001 || point[1] < -0.001 || point[1] > 0.001 || point[2] < -4.001 ||
-      point[2] > 4.001)
-  {
-    passed = false;
-  }
+  EXPECT_GE(point[0], -0.001);
+  EXPECT_LE(point[0], 0.001);
+  EXPECT_GE(point[1], -0.001);
+  EXPECT_LE(point[1], 0.001);
+  EXPECT_GE(point[2], -4.001);
+  EXPECT_LE(point[2], 4.001);
 
   using WindowedSincInterpolatorType = itk::WindowedSincInterpolateImageFunction<Image, 3>;
   auto interpolator = WindowedSincInterpolatorType::New();
   interpolator->SetInputImage(image);
 
   std::cout << std::endl;
-
-  if (passed)
-  {
-    std::cout << "PhasedArray3DSpecialCoordinatesImage tests passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "PhasedArray3DSpecialCoordinatesImage tests failed" << std::endl;
-  return EXIT_FAILURE;
 }
