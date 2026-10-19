@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkAnisotropicFourthOrderLevelSetImageFilter.h"
+#include "itkGTest.h"
 #include <iostream>
 
-int
-itkAnisotropicFourthOrderLevelSetImageFilterTest(int, char *[])
+TEST(AnisotropicFourthOrderLevelSetImageFilter, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<float, 2>;
   using IndexType = ImageType::IndexType;
@@ -61,5 +61,4 @@ itkAnisotropicFourthOrderLevelSetImageFilterTest(int, char *[])
   filter->Update();
   filter->Print(std::cout);
   std::cout << "Passed.\n";
-  return EXIT_SUCCESS;
 }
