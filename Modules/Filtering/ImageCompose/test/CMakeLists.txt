@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageComposeTests
-  itkCompose3DCovariantVectorImageFilterTest.cxx
   itkCompose3DVectorImageFilterTest.cxx
   itkComposeBigVectorImageFilterTest.cxx
   itkComposeRGBAImageFilterTest.cxx
@@ -20,12 +19,6 @@ itk_add_test(
   COMMAND
     ITKImageComposeTestDriver
     itkCompose3DVectorImageFilterTest
-)
-itk_add_test(
-  NAME itkCompose3DCovariantVectorImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkCompose3DCovariantVectorImageFilterTest
 )
 itk_add_test(
   NAME itkComposeRGBImageFilterTest
@@ -119,5 +112,6 @@ set(
   ITKImageComposeGTests
   itkCompose2DCovariantVectorImageFilterGTest.cxx
   itkCompose2DVectorImageFilterGTest.cxx
+  itkCompose3DCovariantVectorImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKImageCompose "${ITKImageCompose-Test_LIBRARIES}" "${ITKImageComposeGTests}")
