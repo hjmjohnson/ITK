@@ -15,6 +15,7 @@ itk_module(
     ITKImageGrid
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
     ITKSmoothing
     ITKMetaIO
   DESCRIPTION
