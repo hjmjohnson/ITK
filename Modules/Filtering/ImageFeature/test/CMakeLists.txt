@@ -6,7 +6,6 @@ set(
   itkCannyEdgeDetectionImageFilterTest.cxx
   itkCannyEdgeDetectionImageFilterTest2.cxx
   itkDerivativeImageFilterTest.cxx
-  itkDiscreteGaussianDerivativeImageFilterScaleSpaceTest.cxx
   itkDiscreteGaussianDerivativeImageFilterTest.cxx
   itkGradientVectorFlowImageFilterTest.cxx
   itkHessian3DToVesselnessMeasureImageFilterTest.cxx
@@ -444,12 +443,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkMaskFeaturePointSelectionFilterTestMask.mha
 )
 itk_add_test(
-  NAME itkDiscreteGaussianDerivativeImageFilterScaleSpaceTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkDiscreteGaussianDerivativeImageFilterScaleSpaceTest
-)
-itk_add_test(
   NAME itkDiscreteGaussianDerivativeImageFilterTest01
   COMMAND
     ITKImageFeatureTestDriver
@@ -619,6 +612,7 @@ itk_add_test(
 set(
   ITKImageFeatureGTests
   itkBilateralImageFilterGTest.cxx
+  itkDiscreteGaussianDerivativeImageFilterScaleSpaceGTest.cxx
   itkSobelEdgeDetectionImageFilterGTest.cxx
 )
 
