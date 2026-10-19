@@ -31,7 +31,6 @@ set(
   itkCropLabelMapFilterTest1.cxx
   itkLabelImageToShapeLabelMapFilterTest1.cxx
   itkLabelImageToStatisticsLabelMapFilterTest1.cxx
-  itkLabelMapFilterTest.cxx
   itkLabelMapMaskImageFilterTest.cxx
   itkLabelMapTest.cxx
   itkLabelMapTest2.cxx
@@ -753,12 +752,6 @@ itk_add_test(
     256
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/Spots-labelimage-to-statisticslabel.png
-)
-itk_add_test(
-  NAME itkLabelMapFilterTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelMapFilterTest
 )
 itk_add_test(
   NAME itkLabelMapMaskImageFilterTest-0-0-0
@@ -1789,6 +1782,7 @@ itk_add_test(
 set(
   ITKLabelMapGTests
   itkLabelImageToLabelMapFilterGTest.cxx
+  itkLabelMapFilterGTest.cxx
   itkShapeLabelMapFilterGTest.cxx
   itkLabelMapBugfixGTest.cxx
   itkStatisticsLabelMapFilterGTest.cxx
