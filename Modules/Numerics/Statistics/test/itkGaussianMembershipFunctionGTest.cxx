@@ -18,10 +18,9 @@
 
 #include <iostream>
 #include "itkGaussianMembershipFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkGaussianMembershipFunctionTest(int, char *[])
+TEST(GaussianMembershipFunction, ConvertedLegacyTest)
 {
   constexpr unsigned int MeasurementVectorSize{ 1 };
 
@@ -32,34 +31,34 @@ itkGaussianMembershipFunctionTest(int, char *[])
 
   auto function = MembershipFunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, GaussianMembershipFunction, MembershipFunctionBase);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, GaussianMembershipFunction, MembershipFunctionBase);
 
 
   // Test if an exception will be thrown if we try to resize the measurement vector
   // size
   constexpr MeasurementVectorSizeType measurementVector2{ MeasurementVectorSize + 1 };
-  ITK_TRY_EXPECT_EXCEPTION(function->SetMeasurementVectorSize(measurementVector2));
+  EXPECT_THROW(function->SetMeasurementVectorSize(measurementVector2), itk::ExceptionObject);
 
   // Test non-square covariance matrix exception
   MembershipFunctionType::CovarianceMatrixType covariance;
   covariance.SetSize(MeasurementVectorSize, MeasurementVectorSize + 1);
   covariance.SetIdentity();
-  ITK_TRY_EXPECT_EXCEPTION(function->SetCovariance(covariance));
+  EXPECT_THROW(function->SetCovariance(covariance), itk::ExceptionObject);
 
   // Test covariance matrix and measurement vector size mismatch exception
   covariance.SetSize(MeasurementVectorSize + 1, MeasurementVectorSize + 1);
   covariance.SetIdentity();
-  ITK_TRY_EXPECT_EXCEPTION(function->SetCovariance(covariance));
+  EXPECT_THROW(function->SetCovariance(covariance), itk::ExceptionObject);
 
   covariance.SetSize(MeasurementVectorSize, MeasurementVectorSize);
   covariance.SetIdentity();
   function->SetCovariance(covariance);
-  ITK_TEST_SET_GET_VALUE(covariance, function->GetCovariance());
+  EXPECT_EQ(covariance, function->GetCovariance());
 
-  ITK_TEST_SET_GET_VALUE(covariance.GetInverse(), function->GetInverseCovariance().GetVnlMatrix());
+  EXPECT_EQ(covariance.GetInverse(), function->GetInverseCovariance().GetVnlMatrix());
 
   function->SetMeasurementVectorSize(MeasurementVectorSize);
-  ITK_TEST_SET_GET_VALUE(MeasurementVectorSize, function->GetMeasurementVectorSize());
+  EXPECT_EQ(MeasurementVectorSize, function->GetMeasurementVectorSize());
 
   // Test if the membership function value computed is correct
   MembershipFunctionType::MeanVectorType mean;
@@ -69,11 +68,7 @@ itkGaussianMembershipFunctionTest(int, char *[])
 
   constexpr double tolerance{ 0.001 };
 
-  if (itk::Math::Absolute(function->GetMean()[0] - mean[0]) > tolerance)
-  {
-    std::cerr << "Error in GetMean() method" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(function->GetMean()[0], mean[0], tolerance) << "Error in GetMean() method";
 
   MeasurementVectorType measurement;
   itk::NumericTraits<MeasurementVectorType>::SetLength(measurement, MeasurementVectorSize);
@@ -82,12 +77,7 @@ itkGaussianMembershipFunctionTest(int, char *[])
   constexpr double trueValue{ 0.3989 };
   const double     distanceComputed = function->Evaluate(measurement);
 
-  if (itk::Math::Absolute(distanceComputed - trueValue) > tolerance)
-  {
-    std::cerr << "Distance computed not correct: "
-              << "truevalue= " << trueValue << ", ComputedValue=" << distanceComputed << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(distanceComputed, trueValue, tolerance) << "Distance computed not correct";
 
   // -----------------------------------------------------------------
   // Reject non-positive-definite covariance matrices.
@@ -110,7 +100,7 @@ itkGaussianMembershipFunctionTest(int, char *[])
   singular(0, 1) = 1.0;
   singular(1, 0) = 1.0;
   singular(1, 1) = 1.0;
-  ITK_TRY_EXPECT_EXCEPTION(npdFunction->SetCovariance(singular));
+  EXPECT_THROW(npdFunction->SetCovariance(singular), itk::ExceptionObject);
 
   // Indefinite (not symmetric positive-definite): det = -3
   NPDMembershipFunctionType::CovarianceMatrixType nonPosDef;
@@ -119,7 +109,7 @@ itkGaussianMembershipFunctionTest(int, char *[])
   nonPosDef(0, 1) = 2.0;
   nonPosDef(1, 0) = 2.0;
   nonPosDef(1, 1) = 1.0;
-  ITK_TRY_EXPECT_EXCEPTION(npdFunction->SetCovariance(nonPosDef));
+  EXPECT_THROW(npdFunction->SetCovariance(nonPosDef), itk::ExceptionObject);
 
   // Well-formed: det = 3.75 (positive definite)
   NPDMembershipFunctionType::CovarianceMatrixType posDef;
@@ -128,8 +118,5 @@ itkGaussianMembershipFunctionTest(int, char *[])
   posDef(0, 1) = 0.5;
   posDef(1, 0) = 0.5;
   posDef(1, 1) = 2.0;
-  ITK_TRY_EXPECT_NO_EXCEPTION(npdFunction->SetCovariance(posDef));
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(npdFunction->SetCovariance(posDef));
 }
