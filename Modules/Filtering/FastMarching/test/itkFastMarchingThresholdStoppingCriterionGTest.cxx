@@ -17,10 +17,9 @@
  *=========================================================================*/
 
 #include "itkFastMarchingThresholdStoppingCriterion.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkFastMarchingThresholdStoppingCriterionTest(int, char *[])
+TEST(FastMarchingThresholdStoppingCriterion, ConvertedLegacyTest)
 {
   using PixelType = float;
   constexpr unsigned int Dimension2D{ 2 };
@@ -31,7 +30,7 @@ itkFastMarchingThresholdStoppingCriterionTest(int, char *[])
 
   auto imageCriterion = ImageStoppingCriterionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     imageCriterion, FastMarchingThresholdStoppingCriterion, FastMarchingStoppingCriterionBase);
 
 
@@ -44,10 +43,5 @@ itkFastMarchingThresholdStoppingCriterionTest(int, char *[])
 
   auto meshCriterion = MeshStoppingCriterionType::New();
 
-  if (meshCriterion.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(meshCriterion.IsNull());
 }
