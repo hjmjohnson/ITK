@@ -22,10 +22,9 @@
 #include "itkFourierSeriesPath.h"
 #include "itkPathToChainCodePathFilter.h"
 #include "itkChainCodeToFourierSeriesPathFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkChainCodeToFourierSeriesPathFilterTest(int, char *[])
+TEST(ChainCodeToFourierSeriesPathFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using PolyLinePathType = itk::PolyLineParametricPath<Dimension>;
@@ -37,8 +36,6 @@ itkChainCodeToFourierSeriesPathFilterTest(int, char *[])
   using PathToChainCodePathFilterType = itk::PathToChainCodePathFilter<PolyLinePathType, ChainPathType>;
   using ChainCodeToFSPathFilterType = itk::ChainCodeToFourierSeriesPathFilter<ChainPathType, FSPathType>;
 
-  bool passed = true;
-
 
   // Setup the path
   std::cout << "Making a triangle Path with v0 at (30,30) -> (30,33) -> (33,33)" << std::endl;
@@ -46,7 +43,7 @@ itkChainCodeToFourierSeriesPathFilterTest(int, char *[])
 
   auto inputPath = PolyLinePathType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(inputPath, PolyLineParametricPath, ParametricPath);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(inputPath, PolyLineParametricPath, ParametricPath);
 
   inputPath->AddVertex(v);
   v[0] = 30;
@@ -66,7 +63,8 @@ itkChainCodeToFourierSeriesPathFilterTest(int, char *[])
   // Set up the second filter
   auto chainCodeToFSPathFilter = ChainCodeToFSPathFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(chainCodeToFSPathFilter, ChainCodeToFourierSeriesPathFilter, PathToPathFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    chainCodeToFSPathFilter, ChainCodeToFourierSeriesPathFilter, PathToPathFilter);
 
   chainCodeToFSPathFilter->SetInput(pathToChainCodePathFilter->GetOutput());
 
@@ -75,30 +73,15 @@ itkChainCodeToFourierSeriesPathFilterTest(int, char *[])
   chainCodeToFSPathFilter->Update();
 
   std::cout << "PathToChainCodePathFilter: open test path is " << chainPath->NumberOfSteps() << " steps" << std::endl;
-  if (chainPath->NumberOfSteps() != 9)
-  {
-    passed = false;
-  }
+  EXPECT_EQ(chainPath->NumberOfSteps(), 9u);
   std::cout << "ChainCodeToFourierSeriesPathFilter: smoothed path is from [" << outputPath->Evaluate(0.0) << "] to ["
             << outputPath->Evaluate(1.0) << "] with a center at [" << outputPath->Evaluate(0.5) << "]." << std::endl;
   // Floating point can be imprecise, so convert to rounded int for comparison:
-  if (static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(1.0))[0]) !=
-        static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(0.0))[0]) ||
-      static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(1.0))[1]) !=
-        static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(0.0))[1]) ||
-      static_cast<int>(0.5 + (outputPath->Evaluate(0.5))[0]) < 31 ||
-      static_cast<int>(0.5 + (outputPath->Evaluate(0.5))[0]) > 32 ||
-      static_cast<int>(0.5 + (outputPath->Evaluate(0.5))[1]) != 33)
-  {
-    passed = false;
-  }
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(1.0))[0]),
+            static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(0.0))[0]));
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(1.0))[1]),
+            static_cast<int>(0.5 + 1000 * (outputPath->Evaluate(0.0))[1]));
+  EXPECT_GE(static_cast<int>(0.5 + (outputPath->Evaluate(0.5))[0]), 31);
+  EXPECT_LE(static_cast<int>(0.5 + (outputPath->Evaluate(0.5))[0]), 32);
+  EXPECT_EQ(static_cast<int>(0.5 + (outputPath->Evaluate(0.5))[1]), 33);
 }
