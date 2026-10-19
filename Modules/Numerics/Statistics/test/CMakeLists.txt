@@ -732,6 +732,7 @@ set(
   itkSampleGTest3.cxx
   itkSampleGTest4.cxx
   itkSampleToHistogramFilterExceptionsGTest.cxx
+  itkSampleToHistogramFilterGTest.cxx
   itkStatisticsTypesGTest.cxx
   itkTDistributionGTest.cxx
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
