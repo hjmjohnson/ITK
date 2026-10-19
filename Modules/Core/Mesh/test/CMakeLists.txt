@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKMeshTests
   itkBinaryMask3DMeshSourceTest.cxx
-  itkConnectedRegionsMeshFilterTest1.cxx
   itkConnectedRegionsMeshFilterTest2.cxx
   itkDynamicMeshTest.cxx
   itkImageToParametricSpaceFilterTest.cxx
@@ -386,12 +385,6 @@ itk_add_test(
     itkDynamicMeshTest
 )
 itk_add_test(
-  NAME itkConnectedRegionsMeshFilterTest1
-  COMMAND
-    ITKMeshTestDriver
-    itkConnectedRegionsMeshFilterTest1
-)
-itk_add_test(
   NAME itkConnectedRegionsMeshFilterTest2
   COMMAND
     ITKMeshTestDriver
@@ -519,5 +512,6 @@ set(
   ITKMeshGTests
   itkAutomaticTopologyMeshSourceGTest.cxx
   itkCellInterfaceGTest.cxx
+  itkConnectedRegionsMeshFilterGTest1.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
