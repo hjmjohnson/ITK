@@ -19,7 +19,7 @@
 #include "itkCenteredVersorTransformInitializer.h"
 
 #include "itkImageRegionRange.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <algorithm> // For fill.
 
@@ -29,8 +29,7 @@
  *
  */
 
-int
-itkCenteredVersorTransformInitializerTest(int, char *[])
+TEST(CenteredVersorTransformInitializer, ConvertedLegacyTest)
 {
 
   bool pass = true;
@@ -114,7 +113,8 @@ itkCenteredVersorTransformInitializerTest(int, char *[])
 
   auto initializer = InitializerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(initializer, CenteredVersorTransformInitializer, CenteredTransformInitializer);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    initializer, CenteredVersorTransformInitializer, CenteredTransformInitializer);
 
 
   initializer->SetFixedImage(fixedImage);
@@ -162,7 +162,7 @@ itkCenteredVersorTransformInitializerTest(int, char *[])
     }
 
     auto computeRotation = true;
-    ITK_TEST_SET_GET_BOOLEAN(initializer, ComputeRotation, computeRotation);
+    ITK_GTEST_SET_GET_BOOLEAN(initializer, ComputeRotation, computeRotation);
 
     initializer->InitializeTransform();
 
@@ -189,12 +189,5 @@ itkCenteredVersorTransformInitializerTest(int, char *[])
     }
   }
 
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test FAILED.";
 }
