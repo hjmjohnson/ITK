@@ -22,8 +22,10 @@
 #include "itkCastImageFilter.h"
 #include "itkPipelineMonitorImageFilter.h"
 #include "itkStreamingImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 // class to produce a linear image pattern
 template <int VDimension>
 class ImagePattern
@@ -90,9 +92,9 @@ public:
 
   itk::ProcessObject::Pointer m_Process;
 };
+} // namespace
 
-int
-itkWarpVectorImageFilterTest(int, char *[])
+TEST(WarpVectorImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 2 };
 
@@ -166,15 +168,15 @@ itkWarpVectorImageFilterTest(int, char *[])
   using WarperType = itk::WarpVectorImageFilter<ImageType, ImageType, FieldType>;
   auto warper = WarperType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(warper, WarpVectorImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(warper, WarpVectorImageFilter, ImageToImageFilter);
 
 
   warper->SetInput(input);
   warper->SetDisplacementField(field);
-  ITK_TEST_SET_GET_VALUE(field, warper->GetDisplacementField());
+  EXPECT_EQ(field, warper->GetDisplacementField());
 
   warper->SetEdgePaddingValue(PixelType(padValue));
-  ITK_TEST_SET_GET_VALUE(PixelType(padValue), warper->GetEdgePaddingValue());
+  EXPECT_EQ(PixelType(padValue), warper->GetEdgePaddingValue());
 
   ShowProgressObject                                          progressWatch(warper);
   const itk::SimpleMemberCommand<ShowProgressObject>::Pointer command =
@@ -184,24 +186,24 @@ itkWarpVectorImageFilterTest(int, char *[])
 
   auto array = itk::MakeFilled<itk::FixedArray<double, ImageDimension>>(2.0);
   warper->SetOutputSpacing(array.GetDataPointer());
-  ITK_TEST_SET_GET_VALUE(array, warper->GetOutputSpacing());
+  EXPECT_EQ(array, warper->GetOutputSpacing());
 
   array.Fill(1.0);
   warper->SetOutputSpacing(array.GetDataPointer());
-  ITK_TEST_SET_GET_VALUE(array, warper->GetOutputSpacing());
+  EXPECT_EQ(array, warper->GetOutputSpacing());
 
   auto ptarray = itk::MakeFilled<WarperType::PointType>(-10.0);
   warper->SetOutputOrigin(ptarray.GetDataPointer());
-  ITK_TEST_SET_GET_VALUE(ptarray, warper->GetOutputOrigin());
+  EXPECT_EQ(ptarray, warper->GetOutputOrigin());
 
   ptarray.Fill(0.0);
   warper->SetOutputOrigin(ptarray.GetDataPointer());
-  ITK_TEST_SET_GET_VALUE(ptarray, warper->GetOutputOrigin());
+  EXPECT_EQ(ptarray, warper->GetOutputOrigin());
 
   WarperType::DirectionType outputDirection;
   outputDirection.SetIdentity();
   warper->SetOutputDirection(outputDirection);
-  ITK_TEST_SET_GET_VALUE(outputDirection, warper->GetOutputDirection());
+  EXPECT_EQ(outputDirection, warper->GetOutputDirection());
 
   // Update the filter
   warper->Update();
@@ -316,12 +318,8 @@ itkWarpVectorImageFilterTest(int, char *[])
   streamer->SetNumberOfStreamDivisions(numStreamDivisions);
   streamer->Update();
 
-  if (!vmonitor->VerifyInputFilterExecutedStreaming(numStreamDivisions))
-  {
-    std::cerr << "Displacement field did not stream as expected." << std::endl;
-    std::cerr << vmonitor;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(vmonitor->VerifyInputFilterExecutedStreaming(numStreamDivisions))
+    << "Displacement field did not stream as expected." << vmonitor;
 
   std::cout << "Compare standalone and streamed outputs" << std::endl;
 
@@ -345,11 +343,7 @@ itkWarpVectorImageFilterTest(int, char *[])
   }
 
 
-  if (!testPassed)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(testPassed);
 
   // Exercise error handling
 
@@ -359,14 +353,13 @@ itkWarpVectorImageFilterTest(int, char *[])
   std::cout << "Setting interpolator to nullptr" << std::endl;
   warper->SetInterpolator(nullptr);
 
-  ITK_TRY_EXPECT_EXCEPTION(warper->Update());
+  EXPECT_THROW(warper->Update(), itk::ExceptionObject);
 
   warper->ResetPipeline();
   warper->SetInterpolator(interp);
 
-  ITK_TEST_SET_GET_VALUE(interp, warper->GetInterpolator());
+  EXPECT_EQ(interp, warper->GetInterpolator());
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }

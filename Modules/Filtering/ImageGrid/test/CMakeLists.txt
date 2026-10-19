@@ -30,7 +30,6 @@ set(
   itkSliceBySliceImageFilterTest.cxx
   itkTileImageFilterTest.cxx
   itkWarpImageFilterTest.cxx
-  itkWarpVectorImageFilterTest.cxx
   itkWrapPadImageTest.cxx
   itkZeroFluxNeumannPadImageFilterTest.cxx
 )
@@ -338,12 +337,6 @@ itk_add_test(
     itkWarpImageFilterTest
 )
 itk_add_test(
-  NAME itkWarpVectorImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkWarpVectorImageFilterTest
-)
-itk_add_test(
   NAME itkWrapPadImageTest
   COMMAND
     ITKImageGridTestDriver
@@ -615,6 +608,7 @@ set(
   itkSliceImageFilterTest.cxx
   itkTileImageFilterGTest.cxx
   itkWarpImageFilterGTest2.cxx
+  itkWarpVectorImageFilterGTest.cxx
   itkWarpImageFilterGTest.cxx
 )
 
