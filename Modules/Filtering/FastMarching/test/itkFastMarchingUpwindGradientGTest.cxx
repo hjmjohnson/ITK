@@ -21,7 +21,7 @@
 #include "itkTextOutput.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 // namespace{
@@ -38,8 +38,7 @@
 //};
 //}
 
-int
-itkFastMarchingUpwindGradientTest(int, char *[])
+TEST(FastMarchingUpwindGradientImageFilter, ConvertedLegacyTest)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -51,7 +50,7 @@ itkFastMarchingUpwindGradientTest(int, char *[])
 
   auto marcher = FloatFMType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(marcher, FastMarchingUpwindGradientImageFilter, FastMarchingImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(marcher, FastMarchingUpwindGradientImageFilter, FastMarchingImageFilter);
 
 
   //   ShowProgressObject progressWatch(marcher);
@@ -138,38 +137,38 @@ itkFastMarchingUpwindGradientTest(int, char *[])
   marcher->SetInput(speedImage);
   constexpr double stoppingValue{ 100.0 };
   marcher->SetStoppingValue(stoppingValue);
-  ITK_TEST_SET_GET_VALUE(stoppingValue, marcher->GetStoppingValue());
+  EXPECT_EQ(stoppingValue, marcher->GetStoppingValue());
 
   constexpr bool generateGradientImage{ true };
-  ITK_TEST_SET_GET_BOOLEAN(marcher, GenerateGradientImage, generateGradientImage);
+  ITK_GTEST_SET_GET_BOOLEAN(marcher, GenerateGradientImage, generateGradientImage);
 
   // Exercise this member function.
   // It is also necessary that the TargetOffset be set to 0.0 for the TargetReached
   // tests to pass.
   constexpr double targetOffset{ 0.0 };
   marcher->SetTargetOffset(targetOffset);
-  ITK_TEST_SET_GET_VALUE(targetOffset, marcher->GetTargetOffset());
+  EXPECT_EQ(targetOffset, marcher->GetTargetOffset());
 
 
   // Test exceptions
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->SetTargetReachedModeToOneTarget());
-  ITK_TRY_EXPECT_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->SetTargetReachedModeToOneTarget());
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
 
   itk::SizeValueType numberOfTargets = 0;
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->SetTargetReachedModeToSomeTargets(numberOfTargets));
-  ITK_TEST_SET_GET_VALUE(numberOfTargets, marcher->GetNumberOfTargets());
-  ITK_TRY_EXPECT_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->SetTargetReachedModeToSomeTargets(numberOfTargets));
+  EXPECT_EQ(numberOfTargets, marcher->GetNumberOfTargets());
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->SetTargetReachedModeToAllTargets());
-  ITK_TRY_EXPECT_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->SetTargetReachedModeToAllTargets());
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->SetTargetReachedModeToNoTargets());
+  ASSERT_NO_THROW(marcher->SetTargetReachedModeToNoTargets());
 
   // turn on debugging
   // marcher->DebugOn();
 
   // update the marcher
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->Update());
 
   // check the results
   using FloatGradientImage = FloatFMType::GradientImageType;
@@ -238,32 +237,32 @@ itkFastMarchingUpwindGradientTest(int, char *[])
     targetPoints->InsertElement(i, node);
   }
   marcher->SetTargetPoints(targetPoints);
-  ITK_TEST_SET_GET_VALUE(targetPoints, marcher->GetTargetPoints());
+  EXPECT_EQ(targetPoints, marcher->GetTargetPoints());
 
   // The target reached mode is set to no targets by default
 #if !defined(ITK_LEGACY_REMOVE)
-  ITK_TEST_SET_GET_VALUE(FloatFMType::NoTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::NoTargets, marcher->GetTargetReachedMode());
 #endif
-  ITK_TEST_SET_GET_VALUE(FloatFMType::TargetConditionEnum::NoTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::TargetConditionEnum::NoTargets, marcher->GetTargetReachedMode());
 
   numberOfTargets = 0;
-  ITK_TEST_EXPECT_EQUAL(numberOfTargets, marcher->GetNumberOfTargets());
+  EXPECT_EQ(numberOfTargets, marcher->GetNumberOfTargets());
 
   // Stop the algorithm when ONE of the targets has been reached.
 #if !defined(ITK_LEGACY_REMOVE)
   marcher->SetTargetReachedModeToOneTarget();
-  ITK_TEST_SET_GET_VALUE(FloatFMType::OneTarget, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::OneTarget, marcher->GetTargetReachedMode());
 #endif
   marcher->SetTargetReachedModeToOneTarget();
-  ITK_TEST_SET_GET_VALUE(FloatFMType::TargetConditionEnum::OneTarget, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::TargetConditionEnum::OneTarget, marcher->GetTargetReachedMode());
 
   numberOfTargets = 1;
-  ITK_TEST_EXPECT_EQUAL(numberOfTargets, marcher->GetNumberOfTargets());
+  EXPECT_EQ(numberOfTargets, marcher->GetNumberOfTargets());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->Update());
 
 
-  ITK_TEST_EXPECT_EQUAL(numberOfTargets, marcher->GetReachedTargetPoints()->Size());
+  EXPECT_EQ(numberOfTargets, marcher->GetReachedTargetPoints()->Size());
 
   // Find the smallest reaching time of the TargetPoints.  This is the time of the closest
   // TargetPoint.
@@ -279,44 +278,41 @@ itkFastMarchingUpwindGradientTest(int, char *[])
   // Since the algorithm is in OneTarget mode and the
   // TargetOffset is set to 0, the TargetValue should be equal to
   // the reaching time of the closest TargetPoint.
-  if (itk::Math::NotAlmostEquals(smallestReachingTime, marcher->GetTargetValue()))
-  {
-    std::cerr << "ERROR: TargetValue does not equal reaching time of closest point!" << std::endl;
-    passed = false;
-  }
+  EXPECT_FLOAT_EQ(smallestReachingTime, marcher->GetTargetValue())
+    << "ERROR: TargetValue does not equal reaching time of closest point!";
 
   // Now stop the algorithm once SOME of the targets have been reached.
   numberOfTargets = targetPoints->Size() + 1;
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->SetTargetReachedModeToSomeTargets(numberOfTargets));
-  ITK_TRY_EXPECT_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->SetTargetReachedModeToSomeTargets(numberOfTargets));
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
 
   numberOfTargets = targetPoints->Size() - 1;
   marcher->SetTargetReachedModeToSomeTargets(numberOfTargets);
 #if !defined(ITK_LEGACY_REMOVE)
-  ITK_TEST_SET_GET_VALUE(FloatFMType::SomeTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::SomeTargets, marcher->GetTargetReachedMode());
 #endif
-  ITK_TEST_SET_GET_VALUE(FloatFMType::TargetConditionEnum::SomeTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::TargetConditionEnum::SomeTargets, marcher->GetTargetReachedMode());
 
-  ITK_TEST_EXPECT_EQUAL(numberOfTargets, marcher->GetNumberOfTargets());
+  EXPECT_EQ(numberOfTargets, marcher->GetNumberOfTargets());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->Update());
 
 
-  ITK_TEST_EXPECT_EQUAL(numberOfTargets, marcher->GetReachedTargetPoints()->Size());
+  EXPECT_EQ(numberOfTargets, marcher->GetReachedTargetPoints()->Size());
 
   // Now stop the algorithm once ALL of the targets have been reached.
   marcher->SetTargetReachedModeToAllTargets();
 #if !defined(ITK_LEGACY_REMOVE)
-  ITK_TEST_SET_GET_VALUE(FloatFMType::AllTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::AllTargets, marcher->GetTargetReachedMode());
 #endif
-  ITK_TEST_SET_GET_VALUE(FloatFMType::TargetConditionEnum::AllTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::TargetConditionEnum::AllTargets, marcher->GetTargetReachedMode());
 
   numberOfTargets = targetPoints->Size();
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->Update());
 
 
-  ITK_TEST_EXPECT_EQUAL(numberOfTargets, marcher->GetReachedTargetPoints()->Size());
+  EXPECT_EQ(numberOfTargets, marcher->GetReachedTargetPoints()->Size());
 
   // Find the largest reaching time of the TargetPoints.  This is the largest time of
   // all of the target points.
@@ -332,30 +328,24 @@ itkFastMarchingUpwindGradientTest(int, char *[])
   // Since the algorithm is now in AllTargets mode and the
   // TargetOffset is set to 0, the TargetValue should be equal to
   // the largest reaching time of the TargetPoints.
-  if (itk::Math::NotAlmostEquals(largestReachingTime, marcher->GetTargetValue()))
-  {
-    std::cerr << "ERROR: TargetValue does not equal reaching time of farthest point!" << std::endl;
-    passed = false;
-  }
+  EXPECT_FLOAT_EQ(largestReachingTime, marcher->GetTargetValue())
+    << "ERROR: TargetValue does not equal reaching time of farthest point!";
 
   // Now check to make sure that stoppingValue is reset correctly.
   marcher->SetTargetReachedModeToNoTargets();
 #if !defined(ITK_LEGACY_REMOVE)
-  ITK_TEST_SET_GET_VALUE(FloatFMType::NoTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::NoTargets, marcher->GetTargetReachedMode());
 #endif
-  ITK_TEST_SET_GET_VALUE(FloatFMType::TargetConditionEnum::NoTargets, marcher->GetTargetReachedMode());
+  EXPECT_EQ(FloatFMType::TargetConditionEnum::NoTargets, marcher->GetTargetReachedMode());
 
   constexpr double newStoppingValue{ 10.0 };
   marcher->SetStoppingValue(newStoppingValue);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->Update());
 
 
-  if (itk::Math::NotExactlyEquals(marcher->GetStoppingValue(), newStoppingValue))
-  {
-    std::cerr << "ERROR: Output stopping value does not equal new stopping value!" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(marcher->GetStoppingValue(), newStoppingValue)
+    << "ERROR: Output stopping value does not equal new stopping value!";
 
 
   // Exercise other member functions
@@ -380,15 +370,8 @@ itkFastMarchingUpwindGradientTest(int, char *[])
   {
     std::ostringstream ss;
     ss << ee;
-    ITK_TEST_EXPECT_TRUE(ss.str().find("INVALID") == std::string::npos);
+    EXPECT_EQ(ss.str().find("INVALID"), std::string::npos);
   }
 
-  if (passed)
-  {
-    std::cout << "Fast Marching Upwind Gradient test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Fast Marching Upwind Gradient test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(passed);
 }

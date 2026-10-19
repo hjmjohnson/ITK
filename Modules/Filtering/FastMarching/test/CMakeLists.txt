@@ -3,7 +3,6 @@ itk_module_test()
 set(
   ITKFastMarchingTests
   itkFastMarchingTest.cxx
-  itkFastMarchingUpwindGradientTest.cxx
   # New files
   itkFastMarchingBaseTest.cxx
   itkFastMarchingImageFilterBaseTest.cxx
@@ -25,12 +24,6 @@ itk_add_test(
     1.0
     0.0
     0
-)
-itk_add_test(
-  NAME itkFastMarchingUpwindGradientTest
-  COMMAND
-    ITKFastMarchingTestDriver
-    itkFastMarchingUpwindGradientTest
 )
 
 itk_add_test(
@@ -321,6 +314,7 @@ set(
   itkFastMarchingStoppingCriterionBaseGTest.cxx
   itkFastMarchingThresholdStoppingCriterionGTest.cxx
   itkFastMarchingUpwindGradientBaseGTest.cxx
+  itkFastMarchingUpwindGradientGTest.cxx
   itkFastMarchingUpwindGradientImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKFastMarching "${ITKFastMarching-Test_LIBRARIES}" "${ITKFastMarchingGTests}")
