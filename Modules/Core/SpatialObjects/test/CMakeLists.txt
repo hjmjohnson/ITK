@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKSpatialObjectsTests
-  itkArrowSpatialObjectTest.cxx
   itkBlobSpatialObjectTest.cxx
   itkBoxSpatialObjectTest.cxx
   itkCastSpatialObjectFilterTest.cxx
@@ -213,12 +212,6 @@ itk_add_test(
     itkMeshSpatialObjectTest
 )
 itk_add_test(
-  NAME itkArrowSpatialObjectTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkArrowSpatialObjectTest
-)
-itk_add_test(
   NAME itkLineSpatialObjectTest
   COMMAND
     ITKSpatialObjectsTestDriver
@@ -237,6 +230,7 @@ itk_add_test(
 set(
   ITKSpatialObjectsGTests
   itkImageMaskSpatialObjectGTest.cxx
+  itkArrowSpatialObjectGTest.cxx
   itkSpatialObjectPointGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")
