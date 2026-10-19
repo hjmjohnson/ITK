@@ -18,9 +18,9 @@
 
 #include "itkMultiphaseDenseFiniteDifferenceImageFilter.h"
 #include "itkScalarChanAndVeseLevelSetFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 
 template <typename TInputImage,
@@ -29,22 +29,22 @@ template <typename TInputImage,
           typename TFiniteDifferenceFunction,
           typename TIdCell>
 class MultiphaseDenseFiniteDifferenceImageFilterTestHelper
-  : public MultiphaseDenseFiniteDifferenceImageFilter<TInputImage,
-                                                      TFeatureImage,
-                                                      TOutputImage,
-                                                      TFiniteDifferenceFunction,
-                                                      TIdCell>
+  : public itk::MultiphaseDenseFiniteDifferenceImageFilter<TInputImage,
+                                                           TFeatureImage,
+                                                           TOutputImage,
+                                                           TFiniteDifferenceFunction,
+                                                           TIdCell>
 {
 public:
   /** Standard class type aliases. */
   using Self = MultiphaseDenseFiniteDifferenceImageFilterTestHelper;
-  using Superclass = MultiphaseDenseFiniteDifferenceImageFilter<TInputImage,
-                                                                TFeatureImage,
-                                                                TOutputImage,
-                                                                TFiniteDifferenceFunction,
-                                                                TIdCell>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::MultiphaseDenseFiniteDifferenceImageFilter<TInputImage,
+                                                                     TFeatureImage,
+                                                                     TOutputImage,
+                                                                     TFiniteDifferenceFunction,
+                                                                     TIdCell>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(MultiphaseDenseFiniteDifferenceImageFilterTestHelper);
@@ -72,10 +72,9 @@ public:
   {}
 };
 
-} // namespace itk
+} // namespace
 
-int
-itkMultiphaseDenseFiniteDifferenceImageFilterTest(int, char *[])
+TEST(MultiphaseDenseFiniteDifferenceImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -91,30 +90,26 @@ itkMultiphaseDenseFiniteDifferenceImageFilterTest(int, char *[])
     itk::ScalarChanAndVeseLevelSetFunction<LevelSetImageType, FeatureImageType, SharedDataHelperType>;
 
   auto function = RegionBasedLevelSetFunctionType::New();
-  if (function.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(function.IsNull());
 
   using IdCellType = unsigned long;
 
-  using FilterType = itk::MultiphaseDenseFiniteDifferenceImageFilterTestHelper<LevelSetImageType,
-                                                                               FeatureImageType,
-                                                                               OutputImageType,
-                                                                               RegionBasedLevelSetFunctionType,
-                                                                               IdCellType>;
+  using FilterType = MultiphaseDenseFiniteDifferenceImageFilterTestHelper<LevelSetImageType,
+                                                                          FeatureImageType,
+                                                                          OutputImageType,
+                                                                          RegionBasedLevelSetFunctionType,
+                                                                          IdCellType>;
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     filter, MultiphaseDenseFiniteDifferenceImageFilterTestHelper, MultiphaseDenseFiniteDifferenceImageFilter);
 
 
   unsigned int reinitializeCounter = 1;
   filter->SetReinitializeCounter(reinitializeCounter);
-  ITK_TEST_SET_GET_VALUE(reinitializeCounter, filter->GetReinitializeCounter());
+  EXPECT_EQ(reinitializeCounter, filter->GetReinitializeCounter());
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
