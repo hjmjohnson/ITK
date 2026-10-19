@@ -22,10 +22,9 @@
 #include "itkShiftScaleImageFilter.h"
 #include "itkRandomImageSource.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkShiftScaleImageFilterTest(int, char *[])
+TEST(ShiftScaleImageFilter, ConvertedLegacyTest)
 {
   std::cout << "itkShiftScaleImageFilterTest Start" << std::endl;
 
@@ -86,8 +85,5 @@ itkShiftScaleImageFilterTest(int, char *[])
   filter->SetInput(source->GetOutput());
   filter->SetScale(4.0);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->UpdateLargestPossibleRegion());
-
-
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(filter->UpdateLargestPossibleRegion());
 }
