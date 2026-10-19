@@ -17,9 +17,6 @@
  *=========================================================================*/
 
 #include "itkImageFileReader.h"
+#include "itkGTest.h"
 
-int
-itkSteerableFilterFreqImageSourceTest(int, char *[])
-{
-  return EXIT_SUCCESS;
-}
+TEST(SteerableFilterFreqImageSource, ConvertedLegacyTest) {}
