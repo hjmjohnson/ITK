@@ -17,7 +17,6 @@ set(
   itkNumberToStringTest.cxx
   itkNumericTraitsTest.cxx
   itkObjectFactoryTest.cxx
-  itkPointGeometryTest.cxx
   itkPointSetTest.cxx
   itkPointSetToImageFilterTest1.cxx
   itkPointSetToImageFilterTest2.cxx
@@ -461,12 +460,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkPointSetToImageFilterTest2.mha
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkPointSetToImageFilterTest2.mha
-)
-itk_add_test(
-  NAME itkPointGeometryTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkPointGeometryTest
 )
 
 itk_add_test(
@@ -1281,6 +1274,7 @@ set(
   itkPeriodicBoundaryConditionGTest.cxx
   itkPhasedArray3DSpecialCoordinatesImageGTest.cxx
   itkPixelAccessGTest.cxx
+  itkPointGeometryGTest.cxx
   itkPointGTest.cxx
   itkPointSetGTest.cxx
   itkPrintHelperGTest.cxx
