@@ -18,10 +18,9 @@
 
 #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"
 #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest(int, char *[])
+TEST(BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor, ConvertedLegacyTest)
 {
   constexpr unsigned int SpaceDimension{ 3 };
   using CoordinateRepType = double;
@@ -92,9 +91,9 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest(int, 
   using AdaptorType = itk::BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor<TransformType>;
   auto adaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(adaptor,
-                                    BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor,
-                                    DisplacementFieldTransformParametersAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(adaptor,
+                                          BSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptor,
+                                          DisplacementFieldTransformParametersAdaptor);
 
 
   adaptor->SetTransform(transform);
@@ -109,15 +108,7 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest(int, 
 
   adaptor->SetMeshSizeForTheUpdateField(updateMeshSize);
   adaptor->SetMeshSizeForTheTotalField(totalMeshSize);
-  try
-  {
-    adaptor->AdaptTransformParameters();
-  }
-  catch (...)
-  {
-    std::cerr << "Error in adapting transform." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NO_THROW(adaptor->AdaptTransformParameters()) << "Error in adapting transform.";
 
 
   const SpacingType spacingAfter = transform->GetDisplacementField()->GetSpacing();
@@ -130,46 +121,24 @@ itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest(int, 
   std::cout << "Fixed parameters: " << fixedParameters << std::endl;
   adaptor->SetRequiredFixedParameters(fixedParameters);
 
-  if (adaptor->GetRequiredSize() != transform->GetDisplacementField()->GetLargestPossibleRegion().GetSize())
-  {
-    std::cerr << "required size conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredSpacing() != transform->GetDisplacementField()->GetSpacing())
-  {
-    std::cerr << "required spacing conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredOrigin() != transform->GetDisplacementField()->GetOrigin())
-  {
-    std::cerr << "required origin conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredDirection() != transform->GetDisplacementField()->GetDirection())
-  {
-    std::cerr << "required direction conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetNumberOfControlPointsForTheUpdateField() != transform->GetNumberOfControlPointsForTheUpdateField())
-  {
-    std::cerr << "update field mesh conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetNumberOfControlPointsForTheTotalField() != transform->GetNumberOfControlPointsForTheTotalField())
-  {
-    std::cerr << "total field mesh conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(adaptor->GetRequiredSize(), transform->GetDisplacementField()->GetLargestPossibleRegion().GetSize())
+    << "required size conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredSpacing(), transform->GetDisplacementField()->GetSpacing())
+    << "required spacing conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredOrigin(), transform->GetDisplacementField()->GetOrigin())
+    << "required origin conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredDirection(), transform->GetDisplacementField()->GetDirection())
+    << "required direction conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetNumberOfControlPointsForTheUpdateField(),
+            transform->GetNumberOfControlPointsForTheUpdateField())
+    << "update field mesh conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetNumberOfControlPointsForTheTotalField(), transform->GetNumberOfControlPointsForTheTotalField())
+    << "total field mesh conversion is incorrect.";
 
   const TransformType::OutputPointType outputPointAfterAdapt = transform->TransformPoint(point);
   std::cout << point << " to (before) " << outputPointBeforeAdapt << std::endl;
   std::cout << point << " to (after) " << outputPointAfterAdapt << std::endl;
 
-  if (outputPointBeforeAdapt.EuclideanDistanceTo(outputPointAfterAdapt) > 1e-6)
-  {
-    std::cerr << "output points don't match up before and after adapt call." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_LE(outputPointBeforeAdapt.EuclideanDistanceTo(outputPointAfterAdapt), 1e-6)
+    << "output points don't match up before and after adapt call.";
 }
