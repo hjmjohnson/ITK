@@ -20,7 +20,7 @@
 
 #include "itkImageDuplicator.h"
 #include "itkImageRegionIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -108,8 +108,7 @@ RunFromScratch(const ImageType * image, const LabelType * seeds, double penalty)
 }
 } // namespace
 
-int
-itkFastGrowCutRegressionTest(int, char *[])
+TEST(FastGrowCutRegression, ConvertedLegacyTest)
 {
   LabelType::Pointer seeds = MakeSeeds();
 
@@ -124,7 +123,7 @@ itkFastGrowCutRegressionTest(int, char *[])
 
     // The phantom is designed so the two penalties disagree; otherwise the
     // test below cannot detect a missing recomputation.
-    ITK_TEST_EXPECT_TRUE(CountDifferingVoxels(refLowPenalty, refHighPenalty) > 0);
+    EXPECT_GT(CountDifferingVoxels(refLowPenalty, refHighPenalty), 0u);
 
     auto filter = FGCType::New();
     filter->SetInput(image);
@@ -136,14 +135,10 @@ itkFastGrowCutRegressionTest(int, char *[])
     filter->Update();
 
     const itk::SizeValueType staleVoxels = CountDifferingVoxels(filter->GetOutput(), refHighPenalty);
-    if (staleVoxels != 0)
-    {
-      std::cerr << "FAILED: after SetDistancePenalty()+Update() the result "
-                << "differs from a from-scratch high-penalty run in " << staleVoxels
-                << " voxels; the cached distance volume was not recomputed "
-                << "(ITKGrowCut#18)." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(staleVoxels, 0u) << "FAILED: after SetDistancePenalty()+Update() the result "
+                               << "differs from a from-scratch high-penalty run in " << staleVoxels
+                               << " voxels; the cached distance volume was not recomputed "
+                               << "(ITKGrowCut#18).";
   }
 
   // --- Changing the intensity image and calling Reset() before Update()
@@ -168,16 +163,9 @@ itkFastGrowCutRegressionTest(int, char *[])
 
     LabelType::Pointer       reference = RunFromScratch(image2, seeds, 0.0);
     const itk::SizeValueType staleVoxels = CountDifferingVoxels(filter->GetOutput(), reference);
-    if (staleVoxels != 0)
-    {
-      std::cerr << "FAILED: after SetInput()+Reset()+Update() the result "
-                << "differs from a from-scratch run in " << staleVoxels
-                << " voxels; Reset() did not force recomputation." << std::endl;
-      return EXIT_FAILURE;
-    }
-    ITK_TEST_EXPECT_TRUE(CountDifferingVoxels(out1, reference) > 0);
+    EXPECT_EQ(staleVoxels, 0u) << "FAILED: after SetInput()+Reset()+Update() the result "
+                               << "differs from a from-scratch run in " << staleVoxels
+                               << " voxels; Reset() did not force recomputation.";
+    EXPECT_GT(CountDifferingVoxels(out1, reference), 0u);
   }
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }

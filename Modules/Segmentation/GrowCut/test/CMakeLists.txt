@@ -1,19 +1,8 @@
 itk_module_test()
 
-set(
-  GrowCutTests
-  itkFastGrowCutTest.cxx
-  itkFastGrowCutRegressionTest.cxx
-)
+set(GrowCutTests itkFastGrowCutTest.cxx)
 
 createtestdriver(GrowCut "${GrowCut-Test_LIBRARIES}" "${GrowCutTests}")
-
-itk_add_test(
-  NAME itkFastGrowCutRegressionTest
-  COMMAND
-    GrowCutTestDriver
-    itkFastGrowCutRegressionTest
-)
 
 itk_add_test(
   NAME itkFastGrowCutTestDzZ_L1
@@ -60,3 +49,6 @@ itk_add_test(
 #     ${ITK_TEST_OUTPUT_DIR}/itkFastGrowCutTestNoisy-label.nrrd
 #     ${ITK_TEST_OUTPUT_DIR}/itkFastGrowCutTestMedian-label.nrrd
 #   )
+
+set(GrowCutGTests itkFastGrowCutRegressionGTest.cxx)
+creategoogletestdriver(GrowCut "${GrowCut-Test_LIBRARIES}" "${GrowCutGTests}")
