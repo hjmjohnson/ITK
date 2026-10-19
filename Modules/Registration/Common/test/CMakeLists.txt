@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
-  itkCompareHistogramImageToImageMetricTest.cxx
   itkCorrelationCoefficientHistogramImageToImageMetricTest.cxx
   itkDisplacementFieldTransformParametersAdaptorTest.cxx
   itkEuclideanDistancePointMetricTest.cxx
@@ -180,12 +179,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkMultiResolutionImageRegistrationMethodTest
-)
-itk_add_test(
-  NAME itkCompareHistogramImageToImageMetricTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkCompareHistogramImageToImageMetricTest
 )
 itk_add_test(
   NAME itkMeanSquaresHistogramImageToImageMetricTest
@@ -477,6 +470,7 @@ set(
   itkBSplineTransformParametersAdaptorGTest.cxx
   itkCenteredTransformInitializerGTest.cxx
   itkCenteredVersorTransformInitializerGTest.cxx
+  itkCompareHistogramImageToImageMetricGTest.cxx
   itkGradientDifferenceImageToImageMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
