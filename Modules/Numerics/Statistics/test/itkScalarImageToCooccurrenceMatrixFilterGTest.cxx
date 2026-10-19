@@ -21,9 +21,9 @@
 #include "itkMath.h"
 
 #include "itkScalarImageToCooccurrenceMatrixFilter.h"
+#include "itkGTest.h"
 
-int
-itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
+TEST(ScalarImageToCooccurrenceMatrixFilter, ConvertedLegacyTest)
 {
 
   // Data definitions
@@ -86,9 +86,6 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
   // with zeroes elsewhere.
   //--------------------------------------------------------------------------
 
-  bool passed = true;
-
-  try
   {
 
     using FilterType = itk::Statistics::ScalarImageToCooccurrenceMatrixFilter<InputImageType>;
@@ -97,54 +94,24 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
 
     // Invoke update before adding an input. An exception should be
     // thrown.
-    try
-    {
-      filter->Update();
-      passed = false;
-      std::cerr << "Failed to throw expected exception due to nullptr input: " << std::endl;
-      return EXIT_FAILURE;
-    }
-    catch (const itk::ExceptionObject & excp)
-    {
-      std::cout << "Expected exception caught: " << excp << std::endl;
-    }
+    EXPECT_THROW(filter->Update(), itk::ExceptionObject) << "Failed to throw expected exception due to nullptr input: ";
 
     filter->ResetPipeline();
 
-    if (filter->GetInput() != nullptr)
-    {
-      std::cerr << "GetInput() should return nullptr since the input is not set yet " << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter->GetInput(), nullptr) << "GetInput() should return nullptr since the input is not set yet ";
 
-    if (filter->GetMaskImage() != nullptr)
-    {
-      std::cerr << "GetMaskImage() should return nullptr since the mask image is not set yet " << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter->GetMaskImage(), nullptr)
+      << "GetMaskImage() should return nullptr since the mask image is not set yet ";
 
 
     // Invoke update with a nullptr input. An exception should be
     // thrown.
     filter->SetInput(nullptr);
-    try
-    {
-      filter->Update();
-      passed = false;
-      std::cerr << "Failed to throw expected exception due to nullptr input: " << std::endl;
-      return EXIT_FAILURE;
-    }
-    catch (const itk::ExceptionObject & excp)
-    {
-      std::cout << "Expected exception caught: " << excp << std::endl;
-    }
+    EXPECT_THROW(filter->Update(), itk::ExceptionObject) << "Failed to throw expected exception due to nullptr input: ";
 
     filter->ResetPipeline();
 
-    if (filter->GetInput() != nullptr)
-    {
-      passed = false;
-    }
+    EXPECT_EQ(filter->GetInput(), nullptr);
 
 
     filter->SetInput(image);
@@ -172,13 +139,8 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     const float max = hist->GetBinMax(0, 255);
     const float min = hist->GetBinMin(0, 255);
 
-    if (itk::Math::NotAlmostEquals(max, 256) || itk::Math::NotAlmostEquals(min, 255))
-    {
-      std::cerr << "Error" << std::endl;
-      std::cerr << "The calculated bin sizes are incorrect" << std::endl;
-      std::cerr << "Expected [255, 256), got [" << min << ", " << max << ')' << std::endl << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(max, 256) << "The calculated bin sizes are incorrect";
+    EXPECT_FLOAT_EQ(min, 255) << "The calculated bin sizes are incorrect";
 
     // Now make sure the contents of the bins are correct:
     using IndexType = FilterType::HistogramType::IndexType;
@@ -205,17 +167,11 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     float ttF = hist->GetFrequency(two_two);
     float totalF = hist->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(ooF, 24.0f) || itk::Math::NotAlmostEquals(ttF, 16.0f) ||
-        itk::Math::NotAlmostEquals(otF, 20.0f) || itk::Math::NotAlmostEquals(toF, 20.0f) ||
-        itk::Math::NotAlmostEquals(ooF + ttF + otF + toF, totalF))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 24, 16, 20, 20, 80 got " << ooF << ", " << ttF << ", " << otF << ", " << toF << ", "
-                << totalF << std::endl
-                << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(ooF, 24.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ttF, 16.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(otF, 20.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(toF, 20.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ooF + ttF + otF + toF, totalF) << "The histogram was calculated incorrectly";
 
     //--------------------------------------------------------------------------
     // Test the histogram with normalization
@@ -228,11 +184,7 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     filter0->SetOffsets(offsetV);
     filter0->NormalizeOn();
 
-    if (filter0->GetNormalize() != true)
-    {
-      std::cerr << "Normalize boolean is not set correctly";
-      passed = false;
-    }
+    EXPECT_TRUE(filter0->GetNormalize()) << "Normalize boolean is not set correctly";
 
     filter0->Update();
     const FilterType::HistogramType * hist0 = filter0->GetOutput();
@@ -242,15 +194,11 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     toF = hist0->GetFrequency(two_one);
     ttF = hist0->GetFrequency(two_two);
 
-    if ((ooF - 24 / 80.) > 0.001 || (ttF - 16 / 80.) > 0.001 || (otF - 20 / 80.) > 0.001 || (toF - 20 / 80.) > 0.001 ||
-        (ooF + ttF + otF + toF - 1) > 0.001)
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 0.3, 0.2, 0.25, 0.25 got " << ooF << ", " << ttF << ", " << otF << ", " << toF << std::endl
-                << std::endl;
-      passed = false;
-    }
+    EXPECT_LE(ooF - 24 / 80., 0.001) << "The histogram was calculated incorrectly";
+    EXPECT_LE(ttF - 16 / 80., 0.001) << "The histogram was calculated incorrectly";
+    EXPECT_LE(otF - 20 / 80., 0.001) << "The histogram was calculated incorrectly";
+    EXPECT_LE(toF - 20 / 80., 0.001) << "The histogram was calculated incorrectly";
+    EXPECT_LE(ooF + ttF + otF + toF - 1, 0.001) << "The histogram was calculated incorrectly";
 
 
     //--------------------------------------------------------------------------
@@ -266,11 +214,7 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     filter2->SetOffset(offset3);
     filter2->SetNumberOfBinsPerAxis(2);
 
-    if (filter2->GetNumberOfBinsPerAxis() != 2)
-    {
-      std::cerr << "GetNumberOfBinsPerAxis() is not returning the expected value" << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter2->GetNumberOfBinsPerAxis(), 2u) << "GetNumberOfBinsPerAxis() is not returning the expected value";
 
     filter2->Update();
     const FilterType::HistogramType * hist2 = filter2->GetOutput();
@@ -282,13 +226,8 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     float zzF = hist2->GetFrequency(zero_zero);
     totalF = hist2->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(zzF, 40.0f) || itk::Math::NotAlmostEquals(zzF, totalF))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The degenerate histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 40, 40 got " << zzF << ", " << totalF << std::endl << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(zzF, 40.0f) << "The degenerate histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(zzF, totalF) << "The degenerate histogram was calculated incorrectly";
 
 
     // Next a histogram with a smaller range.
@@ -301,19 +240,9 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
 
     filter3->SetPixelValueMinMax(1, 2);
 
-    if (filter3->GetMin() != 1)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetMin() is not returning the value that is expected: 1" << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter3->GetMin(), 1) << "GetMin() is not returning the value that is expected: 1";
 
-    if (filter3->GetMax() != 2)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetMin() is not returning the value that is expected: 2" << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter3->GetMax(), 2) << "GetMin() is not returning the value that is expected: 2";
 
 
     filter3->SetNumberOfBinsPerAxis(2);
@@ -336,17 +265,11 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     ooF = hist3->GetFrequency(one_one);
     totalF = hist3->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(zzF, 0.0f) || itk::Math::NotAlmostEquals(zoF, 16.0f) ||
-        itk::Math::NotAlmostEquals(ozF, 16.0f) || itk::Math::NotAlmostEquals(ooF, 0.0f) ||
-        itk::Math::NotAlmostEquals(zzF + zoF + ozF + ooF, totalF))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The small size histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 0, 16, 16, 0, 32 got " << zzF << ", " << zoF << ", " << ozF << ", " << ooF << ", "
-                << totalF << std::endl
-                << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(zzF, 0.0f) << "The small size histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(zoF, 16.0f) << "The small size histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ozF, 16.0f) << "The small size histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ooF, 0.0f) << "The small size histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(zzF + zoF + ozF + ooF, totalF) << "The small size histogram was calculated incorrectly";
 
     // Next a histogram with a truncated range.
     auto filter4 = FilterType::New();
@@ -354,12 +277,7 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     filter4->SetInput(image);
     filter4->SetOffsets(offsetV);
 
-    if (filter4->GetOffsets() != offsetV)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetOffsets() is not returning the expected offset vector: " << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter4->GetOffsets(), offsetV) << "GetOffsets() is not returning the expected offset vector: ";
 
     filter4->SetPixelValueMinMax(0, 1);
     filter4->SetNumberOfBinsPerAxis(2);
@@ -373,33 +291,10 @@ itkScalarImageToCooccurrenceMatrixFilterTest(int, char *[])
     ooF = hist4->GetFrequency(one_one);
     totalF = hist4->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(zzF, 0.0f) || itk::Math::NotAlmostEquals(zoF, 0.0f) ||
-        itk::Math::NotAlmostEquals(ozF, 0.0f) || itk::Math::NotAlmostEquals(ooF, 24.0f) ||
-        itk::Math::NotAlmostEquals(zzF + zoF + ozF + ooF, totalF))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The truncated range histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 0, 0, 0, 24, 24 got " << zzF << ", " << zoF << ", " << ozF << ", " << ooF << ", " << totalF
-                << std::endl
-                << std::endl;
-      passed = false;
-    }
-
-
-    if (!passed)
-    {
-      std::cerr << "Test failed" << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    std::cerr << "Test succeeded" << std::endl;
-    return EXIT_SUCCESS;
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    std::cerr << "ExceptionObject caught !" << std::endl;
-    std::cerr << err << std::endl;
-    std::cerr << "Test failed" << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_FLOAT_EQ(zzF, 0.0f) << "The truncated range histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(zoF, 0.0f) << "The truncated range histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ozF, 0.0f) << "The truncated range histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ooF, 24.0f) << "The truncated range histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(zzF + zoF + ozF + ooF, totalF) << "The truncated range histogram was calculated incorrectly";
   }
 }
