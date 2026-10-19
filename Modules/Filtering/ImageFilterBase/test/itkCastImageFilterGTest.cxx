@@ -27,6 +27,7 @@
 #include "itkFloatingPointExceptions.h"
 #include "itkRGBPixel.h"
 #include "itkRGBAPixel.h"
+#include "itkGTest.h"
 
 namespace itk
 {}
@@ -71,6 +72,8 @@ template class itk::CastImageFilter<itk::Image<itk::CovariantVector<short, 3>, 2
 template class itk::CastImageFilter<itk::VectorImage<unsigned char, 2>, itk::Image<itk::RGBPixel<short>, 2>>;
 template class itk::CastImageFilter<itk::Image<itk::RGBAPixel<unsigned short>, 2>, itk::VectorImage<int, 2>>;
 
+namespace
+{
 template <typename T>
 std::string
 GetCastTypeName()
@@ -442,10 +445,10 @@ TestVectorImageCast3()
 
   return success;
 }
+} // namespace
 
 
-int
-itkCastImageFilterTest(int, char *[])
+TEST(CastImageFilter, ConvertedLegacyTest)
 {
   std::cout << "itkCastImageFilterTest Start" << std::endl;
 
@@ -459,32 +462,20 @@ itkCastImageFilterTest(int, char *[])
     itk::FloatingPointExceptions::Disable();
   }
 
-  bool success = true;
-  success &= TestCastFrom<int8_t>();
-  success &= TestCastFrom<signed char>();
-  success &= TestCastFrom<unsigned char>();
-  success &= TestCastFrom<short>();
-  success &= TestCastFrom<unsigned short>();
-  success &= TestCastFrom<int>();
-  success &= TestCastFrom<unsigned int>();
-  success &= TestCastFrom<long>();
-  success &= TestCastFrom<unsigned long>();
-  success &= TestCastFrom<long long>();
-  success &= TestCastFrom<unsigned long long>();
-  success &= TestCastFrom<float>();
-  success &= TestCastFrom<double>();
-  success &= TestVectorImageCast1();
-  success &= TestVectorImageCast2();
-  success &= TestVectorImageCast3();
-
-  std::cout << std::endl;
-  if (!success)
-  {
-    std::cout << "An itkCastImageFilter test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "All itkCastImageFilter tests PASSED." << std::endl;
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(TestCastFrom<int8_t>());
+  EXPECT_TRUE(TestCastFrom<signed char>());
+  EXPECT_TRUE(TestCastFrom<unsigned char>());
+  EXPECT_TRUE(TestCastFrom<short>());
+  EXPECT_TRUE(TestCastFrom<unsigned short>());
+  EXPECT_TRUE(TestCastFrom<int>());
+  EXPECT_TRUE(TestCastFrom<unsigned int>());
+  EXPECT_TRUE(TestCastFrom<long>());
+  EXPECT_TRUE(TestCastFrom<unsigned long>());
+  EXPECT_TRUE(TestCastFrom<long long>());
+  EXPECT_TRUE(TestCastFrom<unsigned long long>());
+  EXPECT_TRUE(TestCastFrom<float>());
+  EXPECT_TRUE(TestCastFrom<double>());
+  EXPECT_TRUE(TestVectorImageCast1());
+  EXPECT_TRUE(TestVectorImageCast2());
+  EXPECT_TRUE(TestVectorImageCast3());
 }
