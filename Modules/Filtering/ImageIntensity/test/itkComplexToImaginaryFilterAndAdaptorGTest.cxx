@@ -21,12 +21,10 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
 #include "itkSubtractImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkComplexToImaginaryFilterAndAdaptorTest(int, char *[])
+TEST(ComplexToImaginaryFilterAndAdaptor, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -70,7 +68,7 @@ itkComplexToImaginaryFilterAndAdaptorTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, ComplexToImaginaryImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, ComplexToImaginaryImageFilter, UnaryGeneratorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -93,15 +91,7 @@ itkComplexToImaginaryFilterAndAdaptorTest(int, char *[])
     const InputImageType::PixelType  input = it.Get();
     const OutputImageType::PixelType output = ot.Get();
     const OutputImageType::PixelType imag = input.imag();
-    if (!itk::Math::FloatAlmostEqual(imag, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " imag( " << input << ") = " << imag << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(imag, output, epsilon) << " imag( " << input << ")";
     ++ot;
     ++it;
   }
@@ -114,7 +104,7 @@ itkComplexToImaginaryFilterAndAdaptorTest(int, char *[])
 
   auto imaginaryAdaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(imaginaryAdaptor, ComplexToImaginaryImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(imaginaryAdaptor, ComplexToImaginaryImageAdaptor, ImageAdaptor);
 
   imaginaryAdaptor->SetImage(inputImage);
 
@@ -140,17 +130,7 @@ itkComplexToImaginaryFilterAndAdaptorTest(int, char *[])
   while (!dt.IsAtEnd())
   {
     const OutputImageType::PixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Error comparing results with Adaptors";
     ++dt;
   }
-
-  return EXIT_SUCCESS;
 }
