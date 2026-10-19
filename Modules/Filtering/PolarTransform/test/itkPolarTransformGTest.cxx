@@ -18,10 +18,10 @@
 #include "itkPolarToCartesianTransform.h"
 #include "itkCartesianToPolarTransform.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 #include <cmath>
 
-int
-itkPolarTransformTest(int, char *[])
+TEST(PolarTransform, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension = 4;
   const double           epsilon = 1e-10;
@@ -59,43 +59,28 @@ itkPolarTransformTest(int, char *[])
   tmp = p2c->TransformPoint(p);
   for (unsigned int i = 0; i < Dimension; ++i)
   {
-    if (itk::Math::Absolute(tmp[i] - c[i]) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(tmp[i], c[i], epsilon);
   }
 
   /* Transform point from cartesian to polar space. */
   tmp = c2p->TransformPoint(c);
   for (unsigned int i = 0; i < Dimension; ++i)
   {
-    if (itk::Math::Absolute(tmp[i] - p[i]) > epsilon)
-    {
-      std::cout << "Invalid cartesian to polar computed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(tmp[i], p[i], epsilon) << "Invalid cartesian to polar computed.";
   }
 
   /* Transform point from polar to cartesian space and back. */
   tmp = c2p->TransformPoint(p2c->TransformPoint(p));
   for (unsigned int i = 0; i < Dimension; ++i)
   {
-    if (itk::Math::Absolute(tmp[i] - p[i]) > epsilon)
-    {
-      std::cout << "Invalid polar to cartesian and back computed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(tmp[i], p[i], epsilon) << "Invalid polar to cartesian and back computed.";
   }
 
   /* Transform point from cartesian to polar space and back. */
   tmp = p2c->TransformPoint(c2p->TransformPoint(c));
   for (unsigned int i = 0; i < Dimension; ++i)
   {
-    if (itk::Math::Absolute(tmp[i] - c[i]) > epsilon)
-    {
-      std::cout << "Invalid cartesian to polar and back computed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(tmp[i], c[i], epsilon) << "Invalid cartesian to polar and back computed.";
   }
 
   /* Regression: r=0 (input at center) must not produce NaN in CartesianToPolar. */
@@ -104,17 +89,9 @@ itkPolarTransformTest(int, char *[])
     tmp = c2p->TransformPoint(atCenter);
     for (unsigned int i = 0; i < Dimension; ++i)
     {
-      if (std::isnan(tmp[i]))
-      {
-        std::cout << "NaN produced when input equals center (CartesianToPolar)." << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FALSE(std::isnan(tmp[i])) << "NaN produced when input equals center (CartesianToPolar).";
     }
-    if (tmp[1] != 0.0)
-    {
-      std::cout << "r should be 0 when input equals center." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(tmp[1], 0.0) << "r should be 0 when input equals center.";
   }
 
   /* Regression: ConstArcIncr=true with r=0 must not divide by zero. */
@@ -126,11 +103,8 @@ itkPolarTransformTest(int, char *[])
     tmp = p2cArc->TransformPoint(rZero);
     for (unsigned int i = 0; i < Dimension; ++i)
     {
-      if (std::isnan(tmp[i]) || std::isinf(tmp[i]))
-      {
-        std::cout << "NaN/Inf produced for r=0 with ConstArcIncr (PolarToCartesian)." << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_FALSE(std::isnan(tmp[i]) || std::isinf(tmp[i]))
+        << "NaN/Inf produced for r=0 with ConstArcIncr (PolarToCartesian).";
     }
   }
 
@@ -147,13 +121,7 @@ itkPolarTransformTest(int, char *[])
     tmp = p2cOff->TransformPoint(c2pOff->TransformPoint(c));
     for (unsigned int i = 0; i < Dimension; ++i)
     {
-      if (itk::Math::Absolute(tmp[i] - c[i]) > epsilon)
-      {
-        std::cout << "Round-trip failed with non-zero center in pass-through dim." << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(tmp[i], c[i], epsilon) << "Round-trip failed with non-zero center in pass-through dim.";
     }
   }
-
-  return EXIT_SUCCESS;
 }
