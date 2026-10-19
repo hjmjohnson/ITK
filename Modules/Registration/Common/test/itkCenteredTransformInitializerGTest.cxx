@@ -21,6 +21,7 @@
 #include "itkImageRegionRange.h"
 
 #include <algorithm> // For fill.
+#include "itkGTest.h"
 
 
 namespace
@@ -207,8 +208,7 @@ PopulateImage(itk::SmartPointer<TImage> image)
  *
  */
 
-int
-itkCenteredTransformInitializerTest(int, char *[])
+TEST(CenteredTransformInitializer, ConvertedLegacyTest)
 {
 
   bool pass = true;
@@ -348,12 +348,5 @@ itkCenteredTransformInitializerTest(int, char *[])
     pass &= RunTest(fixedImage, movingImage);
   }
 
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test FAILED.";
 }
