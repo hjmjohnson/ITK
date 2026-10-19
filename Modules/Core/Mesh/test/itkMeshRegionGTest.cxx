@@ -17,29 +17,28 @@
  *=========================================================================*/
 
 #include "itkMeshRegion.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkMeshRegionTest(int, char *[])
+TEST(MeshRegion, ConvertedLegacyTest)
 {
 
   itk::MeshRegion meshRegion{};
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS((&meshRegion), MeshRegion, Region);
+  auto * const meshRegionPointer = &meshRegion;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(meshRegionPointer, MeshRegion, Region);
 
 
-  ITK_TEST_SET_GET_VALUE(itk::MeshRegion::Superclass::RegionEnum::ITK_UNSTRUCTURED_REGION, meshRegion.GetRegionType());
+  EXPECT_EQ(itk::MeshRegion::Superclass::RegionEnum::ITK_UNSTRUCTURED_REGION, meshRegion.GetRegionType());
 
   constexpr itk::SizeValueType numRegions{ 10 };
   meshRegion.SetNumberOfRegions(numRegions);
-  ITK_TEST_SET_GET_VALUE(numRegions, meshRegion.GetNumberOfRegions());
+  EXPECT_EQ(numRegions, meshRegion.GetNumberOfRegions());
 
   constexpr itk::SizeValueType idx{ 1 };
   meshRegion.SetRegion(idx);
-  ITK_TEST_SET_GET_VALUE(idx, meshRegion.GetRegion());
+  EXPECT_EQ(idx, meshRegion.GetRegion());
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
