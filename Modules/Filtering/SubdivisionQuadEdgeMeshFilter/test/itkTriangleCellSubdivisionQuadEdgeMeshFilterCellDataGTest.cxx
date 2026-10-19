@@ -25,7 +25,10 @@
 #include <itkSquareThreeTriangleCellSubdivisionQuadEdgeMeshFilter.h>
 #include <itkTriangleHelper.h>
 #include <itkIterativeTriangleCellSubdivisionQuadEdgeMeshFilter.h>
+#include "itkGTest.h"
 
+namespace
+{
 template <typename SubdivisionType>
 void
 SubdivisionTestHelper(const bool uniform)
@@ -122,9 +125,9 @@ SubdivisionTestHelper(const bool uniform)
   const auto o_data = o_mesh->GetCellData()->Size();
   itkAssertOrThrowMacro(o_cell == o_data, "Incorrect number of entries in output cell data array.");
 }
+} // namespace
 
-int
-itkTriangleCellSubdivisionQuadEdgeMeshFilterCellDataTest(int, char *[])
+TEST(TriangleCellSubdivisionQuadEdgeMeshFilterCellData, ConvertedLegacyTest)
 {
 
   const unsigned int Dimension = 3;
@@ -145,6 +148,4 @@ itkTriangleCellSubdivisionQuadEdgeMeshFilterCellDataTest(int, char *[])
   SubdivisionTestHelper<TLinear>(false);
   SubdivisionTestHelper<TLoop>(false);
   SubdivisionTestHelper<TSquare>(false);
-
-  return EXIT_SUCCESS;
 }
