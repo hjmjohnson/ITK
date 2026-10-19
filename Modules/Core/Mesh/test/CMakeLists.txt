@@ -7,7 +7,6 @@ set(
   itkMeshSpatialObjectIOTest.cxx
   itkParametricSpaceToImageSpaceMeshFilterTest.cxx
   itkSimplexMeshAdaptTopologyFilterTest.cxx
-  itkSimplexMeshToTriangleMeshFilterTest.cxx
   itkSimplexMeshVolumeCalculatorTest.cxx
   itkSphereMeshSourceTest.cxx
   itkTransformMeshFilterTest.cxx
@@ -50,12 +49,6 @@ itk_add_test(
     itkSimplexMeshAdaptTopologyFilterTest
     0.5
     0
-)
-itk_add_test(
-  NAME itkSimplexMeshToTriangleMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkSimplexMeshToTriangleMeshFilterTest
 )
 itk_add_test(
   NAME itkSimplexMeshVolumeCalculatorTest
@@ -441,5 +434,6 @@ set(
   itkRegularSphereMeshSourceGTest.cxx
   itkRegularSphereMeshSourceGTest2.cxx
   itkSimplexMeshGTest.cxx
+  itkSimplexMeshToTriangleMeshFilterGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
