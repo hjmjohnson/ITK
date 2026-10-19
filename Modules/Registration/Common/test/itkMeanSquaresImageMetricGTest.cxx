@@ -23,7 +23,7 @@
 #include "itkBSplineTransformInitializer.h"
 #include "itkBSplineTransform.h"
 #include "itkMersenneTwisterRandomVariateGenerator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include "itkStdStreamStateSave.h"
@@ -38,8 +38,7 @@
  *  This test checks the weights caching derivative optimisation.
  */
 
-int
-itkMeanSquaresImageMetricTest(int, char *[])
+TEST(MeanSquaresImageMetric, ConvertedLegacyTest)
 {
 
   // Save the format stream variables for std::cout
@@ -155,10 +154,7 @@ itkMeanSquaresImageMetricTest(int, char *[])
   }
   catch (const itk::ExceptionObject & e)
   {
-    std::cout << "Metric initialization failed" << std::endl;
-    std::cout << "Reason " << e.GetDescription() << std::endl;
-
-    return EXIT_FAILURE;
+    FAIL() << "Metric initialization failed" << std::endl << "Reason " << e.GetDescription();
   }
 
 
@@ -250,17 +246,12 @@ itkMeanSquaresImageMetricTest(int, char *[])
       }
     }
 
-    if (itk::Math::Absolute(measure - referenceMeasure) > 1e-5 || !sameDerivative)
-    {
-      std::cout << "Testing different number of threads... FAILED" << std::endl;
-      std::cout << "Metric value computed with " << currNumThreadsToTest << " threads is incorrect. Computed value is "
-                << measure << ", should be " << referenceMeasure << ", computed derivative is " << derivative
-                << ", should be " << referenceDerivative << std::endl;
-
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(measure, referenceMeasure, 1e-5)
+      << "Metric value computed with " << currNumThreadsToTest << " threads is incorrect.";
+    EXPECT_TRUE(sameDerivative) << "Metric derivative computed with " << currNumThreadsToTest
+                                << " threads is incorrect. Computed derivative is " << derivative << ", should be "
+                                << referenceDerivative;
   }
-  std::cout << "Testing different number of threads... PASSED." << std::endl;
 
   // Now check that the same metric value is computed when the number
   // of threads in the metric is set to 8 and the global max number of
@@ -284,15 +275,8 @@ itkMeanSquaresImageMetricTest(int, char *[])
   std::cout.precision(5);
   std::cout << derivative[1];
   std::cout << std::endl;
-  if (itk::Math::Absolute(measure - referenceMeasure) > 1e-5)
-  {
-    std::cout << "Test reducing global max number of threads... FAILED." << std::endl;
-    std::cout << "Metric value computed with " << numThreads << " threads is incorrect. Computed value is " << measure
-              << ", should be " << referenceMeasure << std::endl;
-
-    return EXIT_FAILURE;
-  }
-  std::cout << "Test reducing global max number of threads... PASSED." << std::endl;
+  EXPECT_NEAR(measure, referenceMeasure, 1e-5)
+    << "Metric value computed with " << numThreads << " threads is incorrect.";
 
   //-------------------------------------------------------
   // exercise Print() method
@@ -337,7 +321,7 @@ itkMeanSquaresImageMetricTest(int, char *[])
   metricCacheTest->SetFixedImageRegion(fixedImage->GetBufferedRegion());
   metricCacheTest->SetTransform(bSplineTransform);
   metricCacheTest->SetUseCachingOfBSplineWeights(true);
-  ITK_TRY_EXPECT_NO_EXCEPTION(metricCacheTest->Initialize());
+  EXPECT_NO_THROW(metricCacheTest->Initialize());
 
   // Compute derivatives with and without weights caching
   MetricType::DerivativeType derivativeWithCaching, derivativeNoCaching;
@@ -358,17 +342,9 @@ itkMeanSquaresImageMetricTest(int, char *[])
 
   // Set moving to original origin
   movingImage->SetOrigin(movingImageOrigin);
-  if (!sameDerivative)
-  {
-    std::cout << "\nTesting weights caching derivative calculation for BSpline Transform... FAILED" << std::endl;
-    std::cout << "Computed derivative using weights caching was:\n"
-              << derivativeWithCaching << "\n Derivative should be:\n"
-              << derivativeNoCaching << "\n"
-              << std::endl;
-
-    return EXIT_FAILURE;
-  }
-  std::cout << "\nTesting weights caching derivative calculation for BSpline Transform... PASSED\n" << std::endl;
+  EXPECT_TRUE(sameDerivative) << "Computed derivative using weights caching was:\n"
+                              << derivativeWithCaching << "\n Derivative should be:\n"
+                              << derivativeNoCaching;
 
   //-------------------------------------------------------
   // exercise misc member functions
@@ -382,67 +358,23 @@ itkMeanSquaresImageMetricTest(int, char *[])
 
   std::cout << "Check case when Target is nullptr" << std::endl;
   metric->SetFixedImage(nullptr);
-  try
-  {
-    std::cout << "Value = " << metric->GetValue(parameters);
-    std::cout << "If you are reading this message the Metric " << std::endl;
-    std::cout << "is NOT managing exceptions correctly    " << std::endl;
+  EXPECT_THROW(std::cout << "Value = " << metric->GetValue(parameters), itk::ExceptionObject)
+    << "If you are reading this message the Metric " << std::endl
+    << "is NOT managing exceptions correctly    ";
 
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    std::cout << "Exception received (as expected) " << std::endl;
-    std::cout << "Description : " << e.GetDescription() << std::endl;
-    std::cout << "Location    : " << e.GetLocation() << std::endl;
-    std::cout << "Test for exception throwing... PASSED ! " << std::endl;
-  }
+  EXPECT_THROW(metric->GetValueAndDerivative(parameters, measure, derivative), itk::ExceptionObject)
+    << "Value = " << measure << std::endl
+    << "If you are reading this message the Metric " << std::endl
+    << "is NOT managing exceptions correctly    ";
 
-  try
-  {
-    metric->GetValueAndDerivative(parameters, measure, derivative);
-    std::cout << "Value = " << measure << std::endl;
-    std::cout << "If you are reading this message the Metric " << std::endl;
-    std::cout << "is NOT managing exceptions correctly    " << std::endl;
-
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    std::cout << "Exception received (as expected) " << std::endl;
-    std::cout << "Description : " << e.GetDescription() << std::endl;
-    std::cout << "Location    : " << e.GetLocation() << std::endl;
-    std::cout << "Test for exception throwing... PASSED ! " << std::endl;
-  }
-
-  bool pass = false;
 #define TEST_INITIALIZATION_ERROR(ComponentName, badComponent, goodComponent) \
   metric->Set##ComponentName(badComponent);                                   \
-  try                                                                         \
-  {                                                                           \
-    pass = false;                                                             \
-    metric->Initialize();                                                     \
-  }                                                                           \
-  catch (const itk::ExceptionObject & err)                                    \
-  {                                                                           \
-    std::cout << "Caught expected ExceptionObject" << std::endl;              \
-    std::cout << err << std::endl;                                            \
-    pass = true;                                                              \
-  }                                                                           \
+  EXPECT_THROW(metric->Initialize(), itk::ExceptionObject);                   \
   metric->Set##ComponentName(goodComponent);                                  \
-                                                                              \
-  if (!pass)                                                                  \
-  {                                                                           \
-    std::cout << "Test failed." << std::endl;                                 \
-    return EXIT_FAILURE;                                                      \
-  }                                                                           \
   ITK_MACROEND_NOOP_STATEMENT
 
   TEST_INITIALIZATION_ERROR(Transform, nullptr, transform);
   TEST_INITIALIZATION_ERROR(FixedImage, nullptr, fixedImage);
   TEST_INITIALIZATION_ERROR(MovingImage, nullptr, movingImage);
   TEST_INITIALIZATION_ERROR(Interpolator, nullptr, interpolator);
-
-  std::cout << "Test passed. " << std::endl;
-  return EXIT_SUCCESS;
 }
