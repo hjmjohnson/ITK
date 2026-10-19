@@ -22,7 +22,6 @@ set(
   itkSymmetricEigenAnalysisImageFilterTest.cxx
   itkTernaryMagnitudeImageFilterTest.cxx
   itkVectorIndexSelectionCastImageFilterTest.cxx
-  itkVectorToRGBImageAdaptorTest.cxx
   itkWeightedAddImageFilterTest.cxx
   itkXorImageFilterTest.cxx
 )
@@ -282,12 +281,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkXorImageFilterTest.png
 )
 itk_add_test(
-  NAME itkVectorToRGBImageAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkVectorToRGBImageAdaptorTest
-)
-itk_add_test(
   NAME itkPolylineMask2DImageFilterTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -519,6 +512,7 @@ set(
   itkTernaryOperatorImageFilterGTest.cxx
   itkVectorMagnitudeImageFilterGTest.cxx
   itkVectorRescaleIntensityImageFilterGTest.cxx
+  itkVectorToRGBImageAdaptorGTest.cxx
 )
 
 if(MSVC)
