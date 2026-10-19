@@ -7,7 +7,6 @@ set(
   itkDOMTest4.cxx
   itkDOMTest5.cxx
   itkDOMTest8.cxx
-  itkFancyStringTest.cxx
   itkFileToolsTest.cxx
 )
 
@@ -305,13 +304,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkFancyStringTest
-  COMMAND
-    ITKIOXMLTestDriver
-    itkFancyStringTest
-)
-
-itk_add_test(
   NAME itkFileToolsTest
   COMMAND
     ITKIOXMLTestDriver
@@ -326,6 +318,7 @@ set(
   ITKIOXMLGTests
   itkDOMGTest1.cxx
   itkDOMGTest6.cxx
+  itkFancyStringGTest.cxx
 )
 
 creategoogletestdriver(ITKIOXML "${ITKIOXML-Test_LIBRARIES}" "${ITKIOXMLGTests}")
