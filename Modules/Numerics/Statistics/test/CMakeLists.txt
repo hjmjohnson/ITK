@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkSampleToHistogramFilterTest4.cxx
   itkSampleToHistogramFilterTest5.cxx
   itkSampleToHistogramFilterTest6.cxx
   itkSampleToHistogramFilterTest7.cxx
@@ -501,15 +500,6 @@ itk_add_test(
     itkListSampleTest
     100
 )
-# There is a bug in VS2008, Release build that causes this test to fail.
-if(NOT MSVC90)
-  itk_add_test(
-    NAME itkSampleToHistogramFilterTest4
-    COMMAND
-      ITKStatisticsTestDriver
-      itkSampleToHistogramFilterTest4
-  )
-endif()
 itk_add_test(
   NAME itkSampleToHistogramFilterTest5
   COMMAND
@@ -726,4 +716,8 @@ set(
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
   itkVectorContainerToListSampleAdaptorGTest.cxx
 )
+# There is a bug in VS2008, Release build that causes this test to fail.
+if(NOT MSVC90)
+  list(APPEND ITKStatisticsGTests itkSampleToHistogramFilterGTest4.cxx)
+endif()
 creategoogletestdriver(ITKStatistics "${ITKStatistics-Test_LIBRARIES}" "${ITKStatisticsGTests}")
