@@ -19,11 +19,10 @@
 #include "itkEdgePotentialImageFilter.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkImageRegionIterator.h"
+#include "itkGTest.h"
 
-int
-itkEdgePotentialImageFilterTest(int, char *[])
+TEST(EdgePotentialImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -101,17 +100,8 @@ itkEdgePotentialImageFilterTest(int, char *[])
     const OutputImageType::PixelType pot = std::exp(-1.0 * (it.Get().GetNorm()));
     std::cout << ot.Get() << " = ";
     std::cout << pot << std::endl;
-    if (itk::Math::Absolute(pot - output) > epsilon)
-    {
-      std::cerr << "Error in itkEdgePotentialImageFilterTest " << std::endl;
-      std::cerr << " potential( " << input << ") = " << pot << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(pot - output), epsilon) << " potential( " << input << ")";
     ++ot;
     ++it;
   }
-
-  return EXIT_SUCCESS;
 }
