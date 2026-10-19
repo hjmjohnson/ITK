@@ -4,7 +4,6 @@ set(
   itkExpectationMaximizationMixtureModelEstimatorTest.cxx
   itkGaussianMixtureModelComponentTest.cxx
   itkGaussianRandomSpatialNeighborSubsamplerTest.cxx
-  itkHistogramToTextureFeaturesFilterTest.cxx
   itkImageToHistogramFilterTest.cxx
   itkImageToHistogramFilterTest2.cxx
   itkImageToListSampleAdaptorTest2.cxx
@@ -405,12 +404,6 @@ itk_add_test(
   COMMAND
     ITKStatisticsTestDriver
     itkKdTreeTestSamplePoints
-)
-itk_add_test(
-  NAME itkHistogramToTextureFeaturesFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkHistogramToTextureFeaturesFilterTest
 )
 itk_add_test(
   NAME itkWeightedCentroidKdTreeGeneratorTest1
@@ -817,6 +810,7 @@ set(
   itkGaussianDistributionGTest.cxx
   itkGaussianMembershipFunctionGTest.cxx
   itkHistogramGTest.cxx
+  itkHistogramToTextureFeaturesFilterGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
   itkImageToListSampleAdaptorGTest.cxx
   itkJointDomainImageToListSampleAdaptorGTest.cxx
