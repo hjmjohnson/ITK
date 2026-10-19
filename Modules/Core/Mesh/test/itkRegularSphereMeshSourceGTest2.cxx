@@ -17,9 +17,9 @@
  *=========================================================================*/
 
 #include "itkRegularSphereMeshSource.h"
+#include "itkGTest.h"
 
-int
-itkRegularSphereMeshSourceTest2(int, char *[])
+TEST(RegularSphereMeshSource2, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using PixelType = float;
@@ -39,12 +39,9 @@ itkRegularSphereMeshSourceTest2(int, char *[])
 
   const MeshType::Pointer mesh1 = source1->GetOutput();
 
-  if (mesh1->GetCellsAllocationMethod() !=
-      itk::MeshEnums::MeshClassCellsAllocationMethod::CellsAllocatedDynamicallyCellByCell)
-  {
-    std::cerr << "mesh1->GetCellsAllocationMethod() != MeshType::CellsAllocatedDynamicallyCellByCell" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(mesh1->GetCellsAllocationMethod(),
+            itk::MeshEnums::MeshClassCellsAllocationMethod::CellsAllocatedDynamicallyCellByCell)
+    << "mesh1->GetCellsAllocationMethod() != MeshType::CellsAllocatedDynamicallyCellByCell";
 
 
   auto source2 = SphereMeshSourceType::New();
@@ -63,11 +60,7 @@ itkRegularSphereMeshSourceTest2(int, char *[])
   MeshType::PointType                    center = source2->GetCenter();
   const SphereMeshSourceType::VectorType scale2 = source2->GetScale();
 
-  if ((scale2 - scale).GetNorm() != 0.)
-  {
-    std::cerr << "scale2 != scale" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ((scale2 - scale).GetNorm(), 0.) << "scale2 != scale";
 
   while (it != end)
   {
@@ -78,14 +71,7 @@ itkRegularSphereMeshSourceTest2(int, char *[])
       d += (center[dim] - p[dim]) * (center[dim] - p[dim]) / (scale[dim] * scale[dim]);
     }
 
-    if (itk::Math::Absolute(d - 1.) > 1e-6)
-    {
-      std::cerr << "too much deviation for vertex " << it->Index() << std::endl;
-      std::cerr << "distance: " << d << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(d, 1., 1e-6) << "too much deviation for vertex " << it->Index();
     ++it;
   }
-
-  return EXIT_SUCCESS;
 }
