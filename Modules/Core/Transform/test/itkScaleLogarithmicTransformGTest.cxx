@@ -16,14 +16,13 @@
  *
  *=========================================================================*/
 
+#include "itkScaleLogarithmicTransform.h"
+#include "itkGTest.h"
+
 #include <cmath>
 #include <iostream>
 
-#include "itkScaleLogarithmicTransform.h"
-#include "itkTestingMacros.h"
-
-int
-itkScaleLogarithmicTransformTest(int, char *[])
+TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
 {
   using TransformType = itk::ScaleLogarithmicTransform<double>;
 
@@ -35,7 +34,7 @@ itkScaleLogarithmicTransformTest(int, char *[])
 
   auto scaleLogTransform = TransformType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(scaleLogTransform, ScaleLogarithmicTransform, ScaleTransform);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(scaleLogTransform, ScaleLogarithmicTransform, ScaleTransform);
 
 
   /* Create a 3D identity transformation and show its parameters */
@@ -56,11 +55,7 @@ itkScaleLogarithmicTransformTest(int, char *[])
         break;
       }
     }
-    if (!testStatus)
-    {
-      std::cerr << "Identity doesn't have a unit scale " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(testStatus) << "Identity doesn't have a unit scale ";
   }
 
   /* Create a Scale transform */
@@ -88,11 +83,7 @@ itkScaleLogarithmicTransformTest(int, char *[])
         break;
       }
     }
-    if (!testStatus)
-    {
-      std::cerr << "GetScale  differs from SetScale value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(testStatus) << "GetScale  differs from SetScale value ";
 
     {
       // scale an itk::Point
@@ -112,13 +103,9 @@ itkScaleLogarithmicTransformTest(int, char *[])
           break;
         }
       }
-      if (!testStatus)
-      {
-        std::cerr << "Error scaling point : " << p << std::endl;
-        std::cerr << "Result should be    : " << q << std::endl;
-        std::cerr << "Reported Result is  : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(testStatus) << "Error scaling point : " << p << std::endl
+                              << "Result should be    : " << q << std::endl
+                              << "Reported Result is  : " << r;
 
       std::cout << "Successful scaling an itk::Point " << std::endl;
     }
@@ -141,12 +128,7 @@ itkScaleLogarithmicTransformTest(int, char *[])
           break;
         }
       }
-      if (!testStatus)
-      {
-        std::cerr << "Error scaling vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(testStatus) << "Error scaling vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Successful scaling an itk::Vector " << std::endl;
     }
@@ -169,12 +151,8 @@ itkScaleLogarithmicTransformTest(int, char *[])
           break;
         }
       }
-      if (!testStatus)
-      {
-        std::cerr << "Error scaling covariant vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(testStatus) << "Error scaling covariant vector: " << p << std::endl
+                              << "Reported Result is      : " << q;
 
       std::cout << "Successful scaling an itk::CovariantVector " << std::endl;
     }
@@ -199,12 +177,7 @@ itkScaleLogarithmicTransformTest(int, char *[])
           break;
         }
       }
-      if (!testStatus)
-      {
-        std::cerr << "Error scaling vnl_vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(testStatus) << "Error scaling vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Successful scaling an vnl_Vector " << std::endl;
     }
@@ -221,13 +194,9 @@ itkScaleLogarithmicTransformTest(int, char *[])
       scaleTransform->SetCenter(center);
 
       const CenterType c2 = scaleTransform->GetCenter();
-      if (c2.EuclideanDistanceTo(center) > 1e-5)
-      {
-        std::cerr << "Error in Set/Get center." << std::endl;
-        std::cerr << "It was SetCenter() to    : " << center << std::endl;
-        std::cerr << "but GetCenter() returned : " << c2 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(c2.EuclideanDistanceTo(center), 1e-5) << "Error in Set/Get center." << std::endl
+                                                      << "It was SetCenter() to    : " << center << std::endl
+                                                      << "but GetCenter() returned : " << c2;
 
       std::cout << "Successful SetCenter() / GetCenter() " << std::endl;
     }
@@ -254,13 +223,9 @@ itkScaleLogarithmicTransformTest(int, char *[])
           break;
         }
       }
-      if (!testStatus)
-      {
-        std::cerr << "Error in Set/Get parameters." << std::endl;
-        std::cerr << "It was SetParameters() to    : " << parameters << std::endl;
-        std::cerr << "but GetParameters() returned : " << p2 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(testStatus) << "Error in Set/Get parameters." << std::endl
+                              << "It was SetParameters() to    : " << parameters << std::endl
+                              << "but GetParameters() returned : " << p2;
 
       std::cout << "Successful SetParameters() / GetParameters() " << std::endl;
     }
@@ -302,18 +267,13 @@ itkScaleLogarithmicTransformTest(int, char *[])
         break;
       }
     }
-    if (!testStatus)
-    {
-      std::cerr << "Error in ComputeJacobianWithRespectToParameters()." << std::endl;
-      std::cerr << "The center of the transformation was ignored." << std::endl;
-      std::cerr << "Jacobian: " << jacobian << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(testStatus) << "Error in ComputeJacobianWithRespectToParameters()." << std::endl
+                            << "The center of the transformation was ignored." << std::endl
+                            << "Jacobian: " << jacobian;
 
     std::cout << "Successful ComputeJacobianWithRespectToParameters() " << std::endl;
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
