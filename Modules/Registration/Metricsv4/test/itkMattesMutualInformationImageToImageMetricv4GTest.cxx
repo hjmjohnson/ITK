@@ -24,7 +24,7 @@
 #include "itkBSplineSmoothingOnUpdateDisplacementFieldTransform.h"
 #include "itkImageMaskSpatialObject.h"
 #include "itkTimeProbe.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -47,8 +47,10 @@
  *  delta = 0.001.
  *
  */
+namespace
+{
 template <typename TImage, typename TInterpolator>
-[[nodiscard]] int
+void
 TestMattesMetricWithAffineTransform(TInterpolator * const interpolator, const bool useSampling, const size_t imageSize)
 {
 
@@ -196,18 +198,12 @@ TestMattesMetricWithAffineTransform(TInterpolator * const interpolator, const bo
 
   auto metric = MetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, MattesMutualInformationImageToImageMetricv4, ImageToImageMetricv4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(metric, MattesMutualInformationImageToImageMetricv4, ImageToImageMetricv4);
 
 
   // Sanity check before metric is run, these should be nullptr;
-  if (metric->GetJointPDFDerivatives().IsNotNull())
-  {
-    return EXIT_FAILURE;
-  }
-  if (metric->GetJointPDF().IsNotNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(metric->GetJointPDFDerivatives().IsNull());
+  EXPECT_TRUE(metric->GetJointPDF().IsNull());
 
   // connect the interpolator
   metric->SetMovingInterpolator(interpolator);
@@ -222,7 +218,7 @@ TestMattesMetricWithAffineTransform(TInterpolator * const interpolator, const bo
   // set the number of histogram bins
   constexpr itk::SizeValueType numberOfHistogramBins{ 50 };
   metric->SetNumberOfHistogramBins(numberOfHistogramBins);
-  ITK_TEST_SET_GET_VALUE(numberOfHistogramBins, metric->GetNumberOfHistogramBins());
+  EXPECT_EQ(numberOfHistogramBins, metric->GetNumberOfHistogramBins());
 
   // this test doesn't pass when using gradient image filters,
   // presumably because of different derivative scaling created
@@ -426,18 +422,14 @@ TestMattesMetricWithAffineTransform(TInterpolator * const interpolator, const bo
     }
   }
 
-  if (testFailed)
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(testFailed);
 }
+} // namespace
 
 /**
  * Test entry point.
  */
-int
-itkMattesMutualInformationImageToImageMetricv4Test(int, char *[])
+TEST(MattesMutualInformationImageToImageMetricv4, ConvertedLegacyTest)
 {
 
   constexpr size_t imageSize{ 100 }; // NOTE 100 is very small
@@ -454,14 +446,7 @@ itkMattesMutualInformationImageToImageMetricv4Test(int, char *[])
 
   std::cout << "Test metric with a linear interpolator." << std::endl;
   bool useSampling = false;
-  int  failed = true;
-  failed =
-    TestMattesMetricWithAffineTransform<ImageType, LinearInterpolatorType>(linearInterpolator, useSampling, imageSize);
-  if (failed)
-  {
-    std::cout << "Test failed when using all the pixels instead of sampling" << std::endl;
-    return EXIT_FAILURE;
-  }
+  TestMattesMetricWithAffineTransform<ImageType, LinearInterpolatorType>(linearInterpolator, useSampling, imageSize);
   // Verify that a constant fixed image (and, symmetrically, a constant
   // moving image) is rejected with a descriptive exception during
   // Initialize(). Mattes mutual information is undefined when one of the
@@ -475,34 +460,33 @@ itkMattesMutualInformationImageToImageMetricv4Test(int, char *[])
   // catch the exception explicitly and assert that the message identifies
   // the offending image.
   auto runConstantImageCheck =
-    [&](auto * fixed, auto * moving, const std::string & expectedSubstring, const std::string & description) -> int {
-    std::cout << "Test metric Initialize() rejects " << description << '.' << std::endl;
-    using LocalImageType = std::remove_pointer_t<decltype(fixed)>;
-    using LocalMetricType = itk::MattesMutualInformationImageToImageMetricv4<LocalImageType, LocalImageType>;
-    auto metric = LocalMetricType::New();
-    metric->SetFixedImage(fixed);
-    metric->SetMovingImage(moving);
-    metric->SetMovingInterpolator(linearInterpolator);
-    using LocalTransformType = itk::AffineTransform<double, LocalImageType::ImageDimension>;
-    metric->SetMovingTransform(LocalTransformType::New());
-    try
-    {
-      metric->Initialize();
-    }
-    catch (const itk::ExceptionObject & e)
-    {
-      const std::string desc = e.GetDescription();
-      if (desc.find(expectedSubstring) == std::string::npos)
+    [&](auto * fixed, auto * moving, const std::string & expectedSubstring, const std::string & description) {
+      std::cout << "Test metric Initialize() rejects " << description << '.' << std::endl;
+      using LocalImageType = std::remove_pointer_t<decltype(fixed)>;
+      using LocalMetricType = itk::MattesMutualInformationImageToImageMetricv4<LocalImageType, LocalImageType>;
+      auto metric = LocalMetricType::New();
+      metric->SetFixedImage(fixed);
+      metric->SetMovingImage(moving);
+      metric->SetMovingInterpolator(linearInterpolator);
+      using LocalTransformType = itk::AffineTransform<double, LocalImageType::ImageDimension>;
+      metric->SetMovingTransform(LocalTransformType::New());
+      try
       {
-        std::cerr << "Initialize() threw the wrong exception for " << description << ":\n  " << desc << std::endl;
-        return EXIT_FAILURE;
+        metric->Initialize();
       }
-      std::cout << "  Caught expected exception: " << desc.substr(0, 80) << "..." << std::endl;
-      return EXIT_SUCCESS;
-    }
-    std::cerr << "Initialize() did not throw for " << description << '.' << std::endl;
-    return EXIT_FAILURE;
-  };
+      catch (const itk::ExceptionObject & e)
+      {
+        const std::string desc = e.GetDescription();
+        if (desc.find(expectedSubstring) == std::string::npos)
+        {
+          ADD_FAILURE() << "Initialize() threw the wrong exception for " << description << ":\n  " << desc;
+          return;
+        }
+        std::cout << "  Caught expected exception: " << desc.substr(0, 80) << "..." << std::endl;
+        return;
+      }
+      ADD_FAILURE() << "Initialize() did not throw for " << description << '.';
+    };
 
   using ConstantImageType = ImageType;
   const ConstantImageType::SizeType   constSize = { { static_cast<itk::SizeValueType>(imageSize),
@@ -527,30 +511,18 @@ itkMattesMutualInformationImageToImageMetricv4Test(int, char *[])
   };
 
   // Case (a): constant fixed image, varying moving image.
-  if (runConstantImageCheck(makeImage(true).GetPointer(),
-                            makeImage(false).GetPointer(),
-                            "All fixed-image samples in the analysis region have the same intensity value",
-                            "a constant fixed image") != EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  runConstantImageCheck(makeImage(true).GetPointer(),
+                        makeImage(false).GetPointer(),
+                        "All fixed-image samples in the analysis region have the same intensity value",
+                        "a constant fixed image");
   // Case (b): symmetric — varying fixed image, constant moving image.
-  if (runConstantImageCheck(makeImage(false).GetPointer(),
-                            makeImage(true).GetPointer(),
-                            "All moving-image samples in the analysis region have the same intensity value",
-                            "a constant moving image") != EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  runConstantImageCheck(makeImage(false).GetPointer(),
+                        makeImage(true).GetPointer(),
+                        "All moving-image samples in the analysis region have the same intensity value",
+                        "a constant moving image");
 
   useSampling = true;
-  failed =
-    TestMattesMetricWithAffineTransform<ImageType, LinearInterpolatorType>(linearInterpolator, useSampling, imageSize);
-  if (failed)
-  {
-    std::cout << "Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  TestMattesMetricWithAffineTransform<ImageType, LinearInterpolatorType>(linearInterpolator, useSampling, imageSize);
   // Test metric with a BSpline interpolator
   using BSplineInterpolatorType = itk::BSplineInterpolateImageFunction<ImageType, double>;
 
@@ -559,14 +531,5 @@ itkMattesMutualInformationImageToImageMetricv4Test(int, char *[])
   bSplineInterpolator->SetSplineOrder(3);
   useSampling = false;
   std::cout << "Test metric with a BSpline interpolator and no sampling." << std::endl;
-  failed = TestMattesMetricWithAffineTransform<ImageType, BSplineInterpolatorType>(
-    bSplineInterpolator, useSampling, imageSize);
-  if (failed)
-  {
-    std::cout << "Test failed when using all the pixels instead of sampling" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed" << std::endl;
-  return EXIT_SUCCESS;
+  TestMattesMetricWithAffineTransform<ImageType, BSplineInterpolatorType>(bSplineInterpolator, useSampling, imageSize);
 }

@@ -6,7 +6,6 @@ set(
   itkImageToImageMetricv4RegistrationTest.cxx
   itkJointHistogramMutualInformationImageToImageRegistrationTest.cxx
   itkMattesMutualInformationImageToImageMetricv4RegistrationTest.cxx
-  itkMattesMutualInformationImageToImageMetricv4Test.cxx
   itkMeanSquaresImageToImageMetricv4OnVectorTest.cxx
   itkMeanSquaresImageToImageMetricv4OnVectorTest2.cxx
   itkMeanSquaresImageToImageMetricv4RegistrationTest.cxx
@@ -89,13 +88,6 @@ itk_add_test(
     0.25
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkANTSNeighborhoodCorrelationImageToImageRegistrationTest.nii.gz
-)
-
-itk_add_test(
-  NAME itkMattesMutualInformationImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMattesMutualInformationImageToImageMetricv4Test
 )
 
 itk_add_test(
@@ -321,5 +313,6 @@ set(
   itkJointHistogramMutualInformationImageToImageMetricv4GTest.cxx
   itkLabeledPointSetMetricGTest.cxx
   itkLabeledPointSetMetricRegistrationGTest.cxx
+  itkMattesMutualInformationImageToImageMetricv4GTest.cxx
 )
 creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")
