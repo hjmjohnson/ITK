@@ -34,7 +34,7 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkImageRegionIterator.h"
 #include "itkNthElementPixelAccessor.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkVariableLengthVector.h"
 #include "itkVectorImage.h"
 
@@ -43,8 +43,7 @@
 //   Main code
 //
 //-------------------------
-int
-itkNthElementPixelAccessorTest2(int, char *[])
+TEST(NthElementPixelAccessor, ConvertedLegacyTest2)
 {
 
   // Typedefs for convenience
@@ -105,7 +104,7 @@ itkNthElementPixelAccessorTest2(int, char *[])
 
   ScalarImageType::Pointer scalarImage = adaptor->GetOutput();
 
-  ITK_TEST_EXPECT_EQUAL(adaptor->GetOutput()->GetPixel(index), referencePixel[0]);
+  EXPECT_EQ(adaptor->GetOutput()->GetPixel(index), referencePixel[0]);
 
   // Test operator
   AccessorType accessor1;
@@ -116,8 +115,6 @@ itkNthElementPixelAccessorTest2(int, char *[])
     adaptor->SetAccessor(accessor);
     adaptor->Update();
     scalarImage = adaptor->GetOutput();
-    ITK_TEST_EXPECT_EQUAL(adaptor->GetOutput()->GetPixel(index), referencePixel[1]);
+    EXPECT_EQ(adaptor->GetOutput()->GetPixel(index), referencePixel[1]);
   }
-
-  return EXIT_SUCCESS;
 }
