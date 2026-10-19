@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKStatisticsTests
-  itkDistanceMetricTest.cxx
   itkDistanceMetricTest2.cxx
   itkDistanceToCentroidMembershipFunctionTest.cxx
   itkEuclideanSquareDistanceMetricTest.cxx
@@ -519,12 +518,6 @@ itk_add_test(
     1
 )
 itk_add_test(
-  NAME itkDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkDistanceMetricTest
-)
-itk_add_test(
   NAME itkDistanceMetricTest2
   COMMAND
     ITKStatisticsTestDriver
@@ -858,6 +851,7 @@ set(
   itkCovarianceSampleFilterGTest3.cxx
   itkDecisionRuleGTest.cxx
   itkDenseFrequencyContainer2GTest.cxx
+  itkDistanceMetricGTest.cxx
   itkEuclideanDistanceMetricGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
   itkImageToListSampleAdaptorGTest.cxx
