@@ -5,7 +5,6 @@ set(
   itkConnectedRegionsMeshFilterTest2.cxx
   itkMeshFstreamTest.cxx
   itkMeshSpatialObjectIOTest.cxx
-  itkNewTest.cxx
   itkParametricSpaceToImageSpaceMeshFilterTest.cxx
   itkQuadrilateralCellTest.cxx
   itkRegularSphereMeshSourceTest.cxx
@@ -416,12 +415,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkNewTest
-  COMMAND
-    ITKMeshTestDriver
-    itkNewTest
-)
-itk_add_test(
   NAME itkTriangleCellTest
   COMMAND
     ITKMeshTestDriver
@@ -471,5 +464,6 @@ set(
   itkMeshGTest.cxx
   itkMeshRegionGTest.cxx
   itkMeshSourceGraftOutputGTest.cxx
+  itkNewGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")

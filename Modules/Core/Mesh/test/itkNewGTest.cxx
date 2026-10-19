@@ -18,7 +18,10 @@
 
 #include <iostream>
 #include "itkMesh.h"
+#include "itkGTest.h"
 
+namespace
+{
 class Bogus
 {
 public:
@@ -50,19 +53,16 @@ public:
   Bogus() = default;
   virtual ~Bogus() = default;
 };
+} // namespace
 
-int
-itkNewTest(int, char *[])
+TEST(CellInterfaceVisitorImplementation, ConvertedLegacyTest)
 {
   // Call New and Print on as many classes as possible
 
   // CellInterfaceVisitorImplementation
   const itk::CellInterfaceVisitorImplementation<float, itk::Mesh<float>::CellTraits, Bogus, Bogus>::Pointer CIVI =
     itk::CellInterfaceVisitorImplementation<float, itk::Mesh<float>::CellTraits, Bogus, Bogus>::New();
-  if (CIVI.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(CIVI.IsNull());
 
   // spell-check-disable
   // CreateObjectFunction
@@ -83,6 +83,4 @@ itkNewTest(int, char *[])
   // using iDHFO = itk::ForwardDifferenceOperator<double>;
   // auto dhfo = iDHFO::New();
   // spell-check-enable
-
-  return EXIT_SUCCESS;
 }
