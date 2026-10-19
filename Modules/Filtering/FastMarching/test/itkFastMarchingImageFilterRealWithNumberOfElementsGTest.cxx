@@ -22,11 +22,10 @@
 
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkImageRegionConstIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkFastMarchingImageFilterRealWithNumberOfElementsTest(int, char *[])
+TEST(FastMarchingImageFilterRealWithNumberOfElements, ConvertedLegacyTest)
 {
   // create a fastmarching object
   using PixelType = float;
@@ -117,7 +116,7 @@ itkFastMarchingImageFilterRealWithNumberOfElementsTest(int, char *[])
 
   marcher->SetInput(speedImage);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  EXPECT_NO_THROW(marcher->Update());
 
 
   using OutputPixelType = int8_t;
@@ -134,7 +133,7 @@ itkFastMarchingImageFilterRealWithNumberOfElementsTest(int, char *[])
   thresholder->SetInsideValue(1);
   thresholder->SetInput(marcher->GetOutput());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(thresholder->Update());
+  EXPECT_NO_THROW(thresholder->Update());
 
 
   const OutputImageType::Pointer output = thresholder->GetOutput();
@@ -155,10 +154,5 @@ itkFastMarchingImageFilterRealWithNumberOfElementsTest(int, char *[])
     ++it;
   }
 
-  if (counter >= 100)
-  {
-    return EXIT_SUCCESS;
-  }
-
-  return EXIT_FAILURE;
+  EXPECT_GE(counter, 100u);
 }
