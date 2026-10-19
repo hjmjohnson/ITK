@@ -18,6 +18,7 @@
 
 // Insight classes
 #include "itkMRFImageFilter.h"
+#include "itkGTest.h"
 
 #include "itkImageGaussianModelEstimator.h"
 #include "itkMahalanobisDistanceMembershipFunction.h"
@@ -35,8 +36,7 @@ constexpr uint8_t MAX_NUM_ITER{ 5 };
 constexpr uint8_t NEIGHBORHOOD_RAD{ 1 };
 
 
-int
-itkMRFImageFilterTest(int, char *[])
+TEST(MRFImageFilter, ConvertedLegacyTest)
 {
 
   //------------------------------------------------------
@@ -438,15 +438,7 @@ itkMRFImageFilterTest(int, char *[])
   }
   // Loop through the data set
 
-  if (sum == 22)
-  {
-    std::cout << "MRF labeller Test Passed" << std::endl;
-  }
-  else
-  {
-    std::cout << "MRF labeller Test failed. Label sum is " << sum << " and not 22." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(sum, 22);
 
   // Test streaming enumeration for MRFImageFilterEnums::MRFStop elements
   const std::set<itk::MRFImageFilterEnums::MRFStop> allMRFStop{
@@ -456,6 +448,4 @@ itkMRFImageFilterTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE MRFImageFilterEnums::MRFStop: " << ee << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
