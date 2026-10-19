@@ -5,7 +5,6 @@ set(
   itkDiffeomorphicDemonsRegistrationFilterTest2.cxx
   itkLevelSetMotionRegistrationFilterTest.cxx
   itkMultiResolutionPDEDeformableRegistrationTest.cxx
-  itkSymmetricForcesDemonsRegistrationFilterTest.cxx
 )
 # Define some convenient locations
 set(BASELINE ${ITK_DATA_ROOT}/Baseline/Algorithms)
@@ -28,12 +27,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkLevelSetMotionRegistrationFilterTestFixedImage.mha
     ${ITK_TEST_OUTPUT_DIR}/itkLevelSetMotionRegistrationFilterTestMovingImage.mha
     ${ITK_TEST_OUTPUT_DIR}/itkLevelSetMotionRegistrationFilterTestResampledImage.mha
-)
-itk_add_test(
-  NAME itkSymmetricForcesDemonsRegistrationFilterTest
-  COMMAND
-    ITKPDEDeformableRegistrationTestDriver
-    itkSymmetricForcesDemonsRegistrationFilterTest
 )
 itk_add_test(
   NAME itkMultiResolutionPDEDeformableRegistrationTestD
@@ -246,5 +239,6 @@ set(
   itkDemonsRegistrationFilterGTest.cxx
   itkESMDemonsRegistrationFunctionGTest.cxx
   itkFastSymmetricForcesDemonsRegistrationFilterGTest.cxx
+  itkSymmetricForcesDemonsRegistrationFilterGTest.cxx
 )
 creategoogletestdriver(ITKPDEDeformableRegistration "${ITKPDEDeformableRegistration-Test_LIBRARIES}" "${ITKPDEDeformableRegistrationGTests}")
