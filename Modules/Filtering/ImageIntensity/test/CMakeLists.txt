@@ -19,7 +19,6 @@ set(
   itkPromoteDimensionImageTest.cxx
   itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
   itkRGBToVectorAdaptImageFilterTest.cxx
-  itkSigmoidImageFilterTest.cxx
   itkSinImageFilterAndAdaptorTest.cxx
   itkSqrtImageFilterAndAdaptorTest.cxx
   itkSubtractImageFilterTest.cxx
@@ -293,12 +292,6 @@ itk_add_test(
   COMMAND
     ITKImageIntensityTestDriver
     itkTanImageFilterAndAdaptorTest
-)
-itk_add_test(
-  NAME itkSigmoidImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkSigmoidImageFilterTest
 )
 if(NOT ITK_LEGACY_REMOVE)
   itk_add_test(
@@ -584,6 +577,7 @@ set(
   itkRescaleIntensityImageFilterGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkShiftScaleImageFilterGTest.cxx
+  itkSigmoidImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
 )
 
