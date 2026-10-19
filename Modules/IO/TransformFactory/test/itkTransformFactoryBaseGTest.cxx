@@ -16,14 +16,14 @@
  *
  *=========================================================================*/
 
+#include "itkTransformFactoryBase.h"
 #include <iostream>
 #include <cstring>
 #include <algorithm>
 #include "itkVersion.h"
-#include "itkTransformFactoryBase.h"
+#include "itkGTest.h"
 
-int
-itkTransformFactoryBaseTest(int, char *[])
+TEST(TransformFactoryBase, ConvertedLegacyTest)
 {
   // Call register default transforms
   itk::TransformFactoryBase::RegisterDefaultTransforms();
@@ -238,7 +238,6 @@ itkTransformFactoryBaseTest(int, char *[])
   itkPushIfTransformDim("GaussianSmoothingOnUpdateDisplacementFieldTransform_double_3_3", 3);
   itkPushIfTransformDim("GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform_double_2_2", 2);
   itkPushIfTransformDim("GaussianSmoothingOnUpdateTimeVaryingVelocityFieldTransform_double_3_3", 3);
-  int testReturnStatus = EXIT_SUCCESS;
 
   // check to make sure that all default transforms have been registered
   defaultTransforms.sort();
@@ -248,15 +247,8 @@ itkTransformFactoryBaseTest(int, char *[])
   {
     for (auto & defaultTransform : defaultTransforms)
     {
-      if (std::find(names.begin(), names.end(), defaultTransform) == names.end())
-      {
-        std::cout << "[FAILED] " << defaultTransform << " not registered properly with defaults" << std::endl;
-        testReturnStatus = EXIT_FAILURE;
-      }
-      else
-      {
-        std::cout << "[SUCCESS] " << defaultTransform << " registered properly" << std::endl;
-      }
+      EXPECT_NE(std::find(names.begin(), names.end(), defaultTransform), names.end())
+        << "[FAILED] " << defaultTransform << " not registered properly with defaults";
     }
   }
 
@@ -265,34 +257,7 @@ itkTransformFactoryBaseTest(int, char *[])
   const char *                             itkVersion = base->GetITKSourceVersion();
   const char *                             description = base->GetDescription();
   const char *                             type = base->GetNameOfClass();
-  if (strcmp(itkVersion, ITK_SOURCE_VERSION) != 0)
-  {
-    std::cout << "[FAILED] Did not report version correctly" << std::endl;
-    testReturnStatus = EXIT_FAILURE;
-  }
-  else
-  {
-    std::cout << "[SUCCESS] Reported version correctly as " << itkVersion << std::endl;
-  }
-  if (strcmp(description, "Transform FactoryBase") != 0)
-  {
-    std::cout << "[FAILED] Did not report description correctly" << std::endl;
-    testReturnStatus = EXIT_FAILURE;
-  }
-  else
-  {
-    std::cout << "[SUCCESS] Reported description correctly as " << description << std::endl;
-  }
-  if (strcmp(type, "TransformFactoryBase") != 0)
-  {
-    std::cout << "[FAILED] Did not report type correctly" << std::endl;
-    testReturnStatus = EXIT_FAILURE;
-  }
-  else
-  {
-    std::cout << "[SUCCESS] Reported type correctly as " << type << std::endl;
-  }
-
-  // return successfully
-  return testReturnStatus;
+  EXPECT_STREQ(itkVersion, ITK_SOURCE_VERSION) << "[FAILED] Did not report version correctly";
+  EXPECT_STREQ(description, "Transform FactoryBase") << "[FAILED] Did not report description correctly";
+  EXPECT_STREQ(type, "TransformFactoryBase") << "[FAILED] Did not report type correctly";
 }
