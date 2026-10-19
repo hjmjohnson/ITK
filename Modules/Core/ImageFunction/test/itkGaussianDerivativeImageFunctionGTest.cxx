@@ -17,11 +17,13 @@
  *=========================================================================*/
 
 #include "itkGaussianDerivativeImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <type_traits> // For std::is_same.
 
+namespace
+{
 template <typename TPixel>
-[[nodiscard]] int
+void
 TestGaussianDerivativeImageFunction()
 {
   constexpr unsigned int Dimension{ 2 };
@@ -49,40 +51,28 @@ TestGaussianDerivativeImageFunction()
   auto DoG = DoGFunctionType::New();
 
   constexpr bool useImageSpacing{ true };
-  ITK_TEST_SET_GET_BOOLEAN(DoG, UseImageSpacing, useImageSpacing);
+  ITK_GTEST_SET_GET_BOOLEAN(DoG, UseImageSpacing, useImageSpacing);
 
   DoG->SetInputImage(image);
 
-  std::cout << "Testing Set/GetSigma(): ";
-
+  // Testing Set/GetSigma()
   DoG->SetSigma(2.0);
   const double * sigma = DoG->GetSigma();
   for (unsigned int i = 0; i < Dimension; ++i)
   {
-    if (sigma[i] != 2.0)
-    {
-      std::cerr << "[FAILED]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(sigma[i], 2.0);
   }
-  std::cout << "[PASSED] " << std::endl;
 
 
-  std::cout << "Testing Set/GetExtent(): ";
-
+  // Testing Set/GetExtent()
   DoG->SetExtent(4.0);
   const double * ext = DoG->GetExtent();
   for (unsigned int i = 0; i < Dimension; ++i)
   {
-    if (ext[i] != 4.0)
-    {
-      std::cerr << "[FAILED]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ext[i], 4.0);
   }
-  std::cout << "[PASSED] " << std::endl;
 
-  std::cout << "Testing consistency within Index/Point/ContinuousIndex: ";
+  // Testing consistency within Index/Point/ContinuousIndex
   auto                                 index = itk::Index<Dimension>::Filled(25);
   typename DoGFunctionType::OutputType gradientIndex;
   gradientIndex = DoG->EvaluateAtIndex(index);
@@ -97,24 +87,14 @@ TestGaussianDerivativeImageFunction()
   typename DoGFunctionType::OutputType gradientContinuousIndex;
   gradientContinuousIndex = DoG->EvaluateAtContinuousIndex(continuousIndex);
 
-  if (gradientIndex != gradientPoint || gradientIndex != gradientContinuousIndex)
-  {
-    std::cerr << "[FAILED] : " << gradientIndex << " : " << gradientPoint << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(gradientIndex, gradientPoint) << gradientIndex << " : " << gradientPoint;
+  EXPECT_EQ(gradientIndex, gradientContinuousIndex) << gradientIndex << " : " << gradientPoint;
 
-  std::cout << "[PASSED] " << std::endl;
   gradientPoint.Normalize(); // normalize the vector
 
-  std::cout << "Testing Evaluate() : ";
-
-  if ((gradientPoint[0] > 0.1) || (itk::Math::Absolute(gradientPoint[1] + 1.0) > 10e-4))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "[PASSED] " << std::endl;
+  // Testing Evaluate()
+  EXPECT_LE(gradientPoint[0], 0.1);
+  EXPECT_NEAR(gradientPoint[1], -1.0, 10e-4);
 
   pt[0] = 25.0;
   pt[1] = 26.0;
@@ -122,20 +102,13 @@ TestGaussianDerivativeImageFunction()
 
   gradientPoint.Normalize(); // normalize the vector;
 
-  std::cout << "Testing Evaluate() : ";
-
-  if ((gradientPoint[0] > 0.1) || (itk::Math::Absolute(gradientPoint[1] - 1.0) > 10e-4))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "[PASSED] " << std::endl;
-  return EXIT_SUCCESS;
+  // Testing Evaluate()
+  EXPECT_LE(gradientPoint[0], 0.1);
+  EXPECT_NEAR(gradientPoint[1], 1.0, 10e-4);
 }
+} // namespace
 
-int
-itkGaussianDerivativeImageFunctionTest(int, char *[])
+TEST(GaussianDerivativeImageFunction, ConvertedLegacyTest)
 {
 
   // Exercise basic object methods
@@ -160,76 +133,42 @@ itkGaussianDerivativeImageFunctionTest(int, char *[])
 
   auto DoG = DoGFunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(DoG, GaussianDerivativeImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(DoG, GaussianDerivativeImageFunction, ImageFunction);
 
 
-  std::cout << "\nTesting derivative of Gaussian image function for float" << std::endl;
-  if (TestGaussianDerivativeImageFunction<float>() == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
-  std::cout << "\nTesting derivative of Gaussian image function for unsigned short" << std::endl;
-  if (TestGaussianDerivativeImageFunction<unsigned short>() == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  // Testing derivative of Gaussian image function for float
+  TestGaussianDerivativeImageFunction<float>();
+  // Testing derivative of Gaussian image function for unsigned short
+  TestGaussianDerivativeImageFunction<unsigned short>();
 
-  std::cout << "\nTesting Gaussian Derivative Spatial Function:";
+  // Testing Gaussian Derivative Spatial Function
 
   using GaussianDerivativeFunctionType = itk::GaussianDerivativeSpatialFunction<double, 1>;
   auto f = GaussianDerivativeFunctionType::New();
 
   f->SetScale(1.0);
-  if (f->GetScale() != 1.0)
-  {
-    std::cerr << "Get Scale : [FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(f->GetScale(), 1.0) << "Get Scale : [FAILED]";
 
   f->SetNormalized(true);
-  if (!f->GetNormalized())
-  {
-    std::cerr << "GetNormalized : [FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(f->GetNormalized()) << "GetNormalized : [FAILED]";
 
   GaussianDerivativeFunctionType::ArrayType s;
   s[0] = 1.0;
   f->SetSigma(s);
-  if (f->GetSigma()[0] != 1.0)
-  {
-    std::cerr << "GetSigma : [FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(f->GetSigma()[0], 1.0) << "GetSigma : [FAILED]";
 
   GaussianDerivativeFunctionType::ArrayType m;
   m[0] = 0.0;
   f->SetMean(m);
-  if (f->GetMean()[0] != 0.0)
-  {
-    std::cerr << "GetMean : [FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(f->GetMean()[0], 0.0) << "GetMean : [FAILED]";
 
   f->SetDirection(0);
-  if (f->GetDirection() != 0)
-  {
-    std::cerr << "GetDirection : [FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(f->GetDirection(), 0u) << "GetDirection : [FAILED]";
 
   GaussianDerivativeFunctionType::InputType point;
   point[0] = 0.0;
 
-  if (f->Evaluate(point) != 0.0)
-  {
-    std::cerr << "Evaluate: [FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(f->Evaluate(point), 0.0) << "Evaluate: [FAILED]";
 
   std::cout << f << std::endl;
-  std::cout << "[PASSED] " << std::endl;
-
-  std::cout << "GaussianDerivativeImageFunctionTest: [DONE] " << std::endl;
-  return EXIT_SUCCESS;
 }
