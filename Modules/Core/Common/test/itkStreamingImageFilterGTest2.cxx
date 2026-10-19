@@ -22,10 +22,10 @@
 #include "itkImageRegionSplitterMultidimensional.h"
 #include "itkXMLFileOutputWindow.h"
 #include "itkPipelineMonitorImageFilter.h"
+#include "itkGTest.h"
 
 
-int
-itkStreamingImageFilterTest2(int, char *[])
+TEST(StreamingImageFilter2, ConvertedLegacyTest)
 {
 
   constexpr unsigned int                  numberOfStreamDivisions{ 25 };
@@ -84,13 +84,10 @@ itkStreamingImageFilterTest2(int, char *[])
 
 
   // check if the pipeline executed as expected
-  if (monitor->GetNumberOfUpdates() != numberOfStreamDivisions ||
-      monitor->GetOutputRequestedRegions().size() != numberOfStreamDivisions)
-  {
-    std::cout << monitor;
-    std::cout << "ImageStreaming Filter test failed because pipeline didn't execute as expected." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(monitor->GetNumberOfUpdates(), numberOfStreamDivisions)
+    << monitor << "ImageStreaming Filter test failed because pipeline didn't execute as expected.";
+  EXPECT_EQ(monitor->GetOutputRequestedRegions().size(), numberOfStreamDivisions)
+    << monitor << "ImageStreaming Filter test failed because pipeline didn't execute as expected.";
 
 
   //
@@ -116,7 +113,6 @@ itkStreamingImageFilterTest2(int, char *[])
                                                                 2.0 * shrink->GetShrinkFactors()[0]));
   }
 
-  bool passed = true;
   for (; !iterator2.IsAtEnd(); ++iterator2)
   {
     auto col = itk::Math::RoundHalfIntegerUp<short>(static_cast<float>(
@@ -128,30 +124,6 @@ itkStreamingImageFilterTest2(int, char *[])
     row += rowOffset;
     const short trueValue = col + region.GetSize()[0] * row;
 
-    if (iterator2.Get() != trueValue)
-    {
-      passed = false;
-      std::cout << "Pixel " << iterator2.ComputeIndex() << " expected " << trueValue << " but got " << iterator2.Get()
-                << std::endl;
-    }
-  }
-
-  if (passed)
-  {
-    std::cout << "ImageStreamingFilter test passed." << std::endl;
-    try
-    {
-      return EXIT_SUCCESS;
-    }
-    catch (...)
-    {
-      std::cout << "Caught an exception on exit" << std::endl;
-      return EXIT_FAILURE;
-    }
-  }
-  else
-  {
-    std::cout << "ImageStreaming Filter test failed." << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_EQ(iterator2.Get(), trueValue) << "Pixel " << iterator2.ComputeIndex();
   }
 }
