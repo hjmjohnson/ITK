@@ -22,18 +22,15 @@
 #include "itkIntTypes.h"
 #include "itkMacro.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkImageToHistogramFilterTest(int, char *[])
+TEST(ImageToHistogramFilter, ConvertedLegacyTest)
 {
   using PixelComponentType = unsigned char;
   using RGBPixelType = itk::RGBPixel<PixelComponentType>;
   constexpr unsigned int Dimension{ 3 };
   using RGBImageType = itk::Image<RGBPixelType, Dimension>;
   constexpr unsigned int MeasurementVectorSize{ 3 }; // RGB
-
-  int result = EXIT_SUCCESS;
 
   auto image = RGBImageType::New();
 
@@ -70,12 +67,12 @@ itkImageToHistogramFilterTest(int, char *[])
   auto                           filter = HistogramFilterType::New();
   const itk::SimpleFilterWatcher watcher(filter, "filter");
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, ImageToHistogramFilter, ImageSink);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, ImageToHistogramFilter, ImageSink);
 
 
   constexpr unsigned int numberOfStreamDivisions{ 1 };
   filter->SetNumberOfStreamDivisions(numberOfStreamDivisions);
-  ITK_TEST_SET_GET_VALUE(numberOfStreamDivisions, filter->GetNumberOfStreamDivisions());
+  EXPECT_EQ(numberOfStreamDivisions, filter->GetNumberOfStreamDivisions());
 
   // Testing the settings of the BinMaximum and BinMinimum methods.
   HistogramMeasurementVectorType histogramBinMinimum1(MeasurementVectorSize);
@@ -93,21 +90,14 @@ itkImageToHistogramFilterTest(int, char *[])
   const InputHistogramMeasurementVectorObjectType * returnedHistogramBinMinimumObject =
     filter->GetHistogramBinMinimumInput();
 
-  if (returnedHistogramBinMinimumObject == nullptr)
-  {
-    std::cerr << "SetHistogramSize() failed pointer consistency test" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  ASSERT_NE(returnedHistogramBinMinimumObject, nullptr) << "SetHistogramSize() failed pointer consistency test";
 
   HistogramMeasurementVectorType returnedHistogramBinMinimum = returnedHistogramBinMinimumObject->Get();
 
   for (unsigned int k1 = 0; k1 < MeasurementVectorSize; ++k1)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMinimum[k1], histogramBinMinimum1[k1]))
-    {
-      std::cerr << "Get/Set HistogramBinMinimum() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMinimum[k1], histogramBinMinimum1[k1])
+      << "Get/Set HistogramBinMinimum() failed value consistency test";
   }
 
 
@@ -118,11 +108,8 @@ itkImageToHistogramFilterTest(int, char *[])
 
   for (unsigned int k2 = 0; k2 < MeasurementVectorSize; ++k2)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMinimum[k2], histogramBinMinimum2[k2]))
-    {
-      std::cerr << "Get/Set HistogramSize() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMinimum[k2], histogramBinMinimum2[k2])
+      << "Get/Set HistogramSize() failed value consistency test";
   }
 
   const InputHistogramMeasurementVectorObjectType::Pointer histogramBinMinimumObject =
@@ -131,21 +118,15 @@ itkImageToHistogramFilterTest(int, char *[])
   filter->SetHistogramBinMinimumInput(histogramBinMinimumObject);
   returnedHistogramBinMinimumObject = filter->GetHistogramBinMinimumInput();
 
-  if (returnedHistogramBinMinimumObject != histogramBinMinimumObject)
-  {
-    std::cerr << "Get/Set HistogramBinMinimum() failed pointer consistency test" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_EQ(returnedHistogramBinMinimumObject, histogramBinMinimumObject)
+    << "Get/Set HistogramBinMinimum() failed pointer consistency test";
 
   returnedHistogramBinMinimum = returnedHistogramBinMinimumObject->Get();
 
   for (unsigned int k3 = 0; k3 < MeasurementVectorSize; ++k3)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMinimum[k3], histogramBinMinimum1[k3]))
-    {
-      std::cerr << "Get/Set HistogramBinMinimum() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMinimum[k3], histogramBinMinimum1[k3])
+      << "Get/Set HistogramBinMinimum() failed value consistency test";
   }
 
   histogramBinMinimumObject->Set(histogramBinMinimum2);
@@ -154,21 +135,15 @@ itkImageToHistogramFilterTest(int, char *[])
 
   returnedHistogramBinMinimumObject = filter->GetHistogramBinMinimumInput();
 
-  if (returnedHistogramBinMinimumObject != histogramBinMinimumObject)
-  {
-    std::cerr << "Get/Set HistogramBinMinimum() failed pointer consistency test" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_EQ(returnedHistogramBinMinimumObject, histogramBinMinimumObject)
+    << "Get/Set HistogramBinMinimum() failed pointer consistency test";
 
   returnedHistogramBinMinimum = returnedHistogramBinMinimumObject->Get();
 
   for (unsigned int k4 = 0; k4 < MeasurementVectorSize; ++k4)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMinimum[k4], histogramBinMinimum2[k4]))
-    {
-      std::cerr << "Get/Set HistogramBinMinimum() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMinimum[k4], histogramBinMinimum2[k4])
+      << "Get/Set HistogramBinMinimum() failed value consistency test";
   }
 
 
@@ -190,21 +165,14 @@ itkImageToHistogramFilterTest(int, char *[])
   const InputHistogramMeasurementVectorObjectType * returnedHistogramBinMaximumObject =
     filter->GetHistogramBinMaximumInput();
 
-  if (returnedHistogramBinMaximumObject == nullptr)
-  {
-    std::cerr << "SetHistogramSize() failed pointer consistency test" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  ASSERT_NE(returnedHistogramBinMaximumObject, nullptr) << "SetHistogramSize() failed pointer consistency test";
 
   HistogramMeasurementVectorType returnedHistogramBinMaximum = returnedHistogramBinMaximumObject->Get();
 
   for (unsigned int k1 = 0; k1 < MeasurementVectorSize; ++k1)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMaximum[k1], histogramBinMaximum1[k1]))
-    {
-      std::cerr << "Get/Set HistogramBinMaximum() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMaximum[k1], histogramBinMaximum1[k1])
+      << "Get/Set HistogramBinMaximum() failed value consistency test";
   }
 
 
@@ -214,11 +182,8 @@ itkImageToHistogramFilterTest(int, char *[])
 
   for (unsigned int k2 = 0; k2 < MeasurementVectorSize; ++k2)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMaximum[k2], histogramBinMaximum2[k2]))
-    {
-      std::cerr << "Get/Set HistogramSize() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMaximum[k2], histogramBinMaximum2[k2])
+      << "Get/Set HistogramSize() failed value consistency test";
   }
 
 
@@ -229,21 +194,15 @@ itkImageToHistogramFilterTest(int, char *[])
   filter->SetHistogramBinMaximumInput(histogramBinMaximumObject);
   returnedHistogramBinMaximumObject = filter->GetHistogramBinMaximumInput();
 
-  if (returnedHistogramBinMaximumObject != histogramBinMaximumObject)
-  {
-    std::cerr << "Get/Set HistogramBinMaximum() failed pointer consistency test" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_EQ(returnedHistogramBinMaximumObject, histogramBinMaximumObject)
+    << "Get/Set HistogramBinMaximum() failed pointer consistency test";
 
   returnedHistogramBinMaximum = returnedHistogramBinMaximumObject->Get();
 
   for (unsigned int k3 = 0; k3 < MeasurementVectorSize; ++k3)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMaximum[k3], histogramBinMaximum1[k3]))
-    {
-      std::cerr << "Get/Set HistogramBinMaximum() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMaximum[k3], histogramBinMaximum1[k3])
+      << "Get/Set HistogramBinMaximum() failed value consistency test";
   }
 
   histogramBinMaximumObject->Set(histogramBinMaximum2);
@@ -252,21 +211,15 @@ itkImageToHistogramFilterTest(int, char *[])
 
   returnedHistogramBinMaximumObject = filter->GetHistogramBinMinimumInput();
 
-  if (returnedHistogramBinMaximumObject != histogramBinMaximumObject)
-  {
-    std::cerr << "Get/Set HistogramBinMaximum() failed pointer consistency test" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_EQ(returnedHistogramBinMaximumObject, histogramBinMaximumObject)
+    << "Get/Set HistogramBinMaximum() failed pointer consistency test";
 
   returnedHistogramBinMaximum = returnedHistogramBinMaximumObject->Get();
 
   for (unsigned int k4 = 0; k4 < MeasurementVectorSize; ++k4)
   {
-    if (itk::Math::NotExactlyEquals(returnedHistogramBinMaximum[k4], histogramBinMaximum2[k4]))
-    {
-      std::cerr << "Get/Set HistogramBinMaximum() failed value consistency test" << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(returnedHistogramBinMaximum[k4], histogramBinMaximum2[k4])
+      << "Get/Set HistogramBinMaximum() failed value consistency test";
   }
 
 
@@ -278,19 +231,11 @@ itkImageToHistogramFilterTest(int, char *[])
   const itk::ModifiedTimeType modifiedTime = filter->GetMTime();
   filter->SetHistogramBinMaximum(histogramBinMaximum1);
 
-  if (filter->GetMTime() != modifiedTime)
-  {
-    std::cerr << "SetHistogramBinMaximum() failed modified Test 1" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetMTime(), modifiedTime) << "SetHistogramBinMaximum() failed modified Test 1";
 
   filter->SetHistogramBinMaximum(histogramBinMaximum2);
 
-  if (filter->GetMTime() == modifiedTime)
-  {
-    std::cerr << "SetHistogramBinMaximum() failed modified Test 2" << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_NE(filter->GetMTime(), modifiedTime) << "SetHistogramBinMaximum() failed modified Test 2";
 
 
   HistogramSizeType hsize(MeasurementVectorSize);
@@ -324,13 +269,8 @@ itkImageToHistogramFilterTest(int, char *[])
 
   for (unsigned int bin = 0; bin < histogramSize; ++bin)
   {
-    if (histogram->GetFrequency(bin, channel) != expectedFrequency)
-    {
-      std::cerr << "Error in bin= " << bin << " channel = " << channel << std::endl;
-      std::cerr << "Frequency was= " << histogram->GetFrequency(bin, channel) << " Instead of the expected "
-                << expectedFrequency << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_EQ(histogram->GetFrequency(bin, channel), expectedFrequency)
+      << "Error in bin= " << bin << " channel = " << channel;
   }
 
 
@@ -382,6 +322,4 @@ itkImageToHistogramFilterTest(int, char *[])
   filter->SetHistogramSize(hsize);
   filter->SetMarginalScale(10.0);
   filter->Update();
-
-  return result;
 }
