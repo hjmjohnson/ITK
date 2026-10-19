@@ -30,7 +30,6 @@ set(
   itkSliceBySliceImageFilterTest.cxx
   itkTileImageFilterTest.cxx
   itkWarpImageFilterTest.cxx
-  itkZeroFluxNeumannPadImageFilterTest.cxx
 )
 
 createtestdriver(ITKImageGrid "${ITKImageGrid-Test_LIBRARIES}" "${ITKImageGridTests}")
@@ -532,12 +531,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/PushPopTileImageFilterTest.png
 )
 itk_add_test(
-  NAME itkZeroFluxNeumannPadImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkZeroFluxNeumannPadImageFilterTest
-)
-itk_add_test(
   NAME itkSliceBySliceImageFilterDimension0Test
   COMMAND
     ITKImageGridTestDriver
@@ -602,6 +595,7 @@ set(
   itkWarpImageFilterGTest2.cxx
   itkWarpVectorImageFilterGTest.cxx
   itkWrapPadImageGTest.cxx
+  itkZeroFluxNeumannPadImageFilterGTest.cxx
 )
 
 if(NOT ITK_FUTURE_LEGACY_REMOVE)
