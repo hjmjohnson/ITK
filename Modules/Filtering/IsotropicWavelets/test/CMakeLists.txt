@@ -9,7 +9,6 @@ set(
   itkFrequencyShrinkTest.cxx
   itkFrequencyExpandAndShrinkTest.cxx
   # Frequency resize Helpers
-  itkInd2SubTest.cxx
   ###########################
   # Spatial domain resize without interpolation
   itkExpandWithZerosImageFilterTest.cxx
@@ -517,12 +516,6 @@ itk_add_test(
     itkVowIsotropicWaveletTest
 )
 ##Ind2Sub
-itk_add_test(
-  NAME itkInd2SubTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkInd2SubTest
-)
 ## ExpandWithZeros (in spatial domain)
 itk_add_test(
   NAME itkExpandWithZerosImageFilterTest2D
@@ -702,5 +695,9 @@ if(ITK_USE_FFTWF OR ITK_USE_FFTWD)
   )
 endif()
 
-set(IsotropicWaveletsGTests itkHeldIsotropicWaveletGTest.cxx)
+set(
+  IsotropicWaveletsGTests
+  itkHeldIsotropicWaveletGTest.cxx
+  itkInd2SubGTest.cxx
+)
 creategoogletestdriver(IsotropicWavelets "${Libraries}" "${IsotropicWaveletsGTests}")
