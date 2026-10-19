@@ -21,11 +21,10 @@
 #include "itkSqrtImageFilter.h"
 #include "itkSqrtImageAdaptor.h"
 #include "itkSubtractImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkSqrtImageFilterAndAdaptorTest(int, char *[])
+TEST(SqrtImageFilterAndAdaptor, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -72,7 +71,7 @@ itkSqrtImageFilterAndAdaptorTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, SqrtImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, SqrtImageFilter, UnaryGeneratorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -96,15 +95,7 @@ itkSqrtImageFilterAndAdaptorTest(int, char *[])
     const InputImageType::PixelType  input = it.Get();
     const OutputImageType::PixelType output = ot.Get();
     const OutputImageType::PixelType sqroot = std::sqrt(input);
-    if (!itk::Math::FloatAlmostEqual(sqroot, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " sqrt( " << input << ") = " << sqroot << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(sqroot, output, epsilon) << " sqrt( " << input << ")";
     ++ot;
     ++it;
   }
@@ -117,7 +108,7 @@ itkSqrtImageFilterAndAdaptorTest(int, char *[])
 
   auto sqrtAdaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(sqrtAdaptor, SqrtImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(sqrtAdaptor, SqrtImageAdaptor, ImageAdaptor);
 
   sqrtAdaptor->SetImage(inputImage);
 
@@ -143,16 +134,7 @@ itkSqrtImageFilterAndAdaptorTest(int, char *[])
   while (!dt.IsAtEnd())
   {
     const OutputImageType::PixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr << "Error comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Error comparing results with Adaptors";
     ++dt;
   }
-
-  return EXIT_SUCCESS;
 }
