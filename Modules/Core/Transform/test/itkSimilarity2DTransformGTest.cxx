@@ -16,9 +16,11 @@
  *
  *=========================================================================*/
 
+#include "itkCenteredSimilarity2DTransform.h"
+#include "itkGTest.h"
+#include <iomanip>
 #include <iostream>
 
-#include "itkCenteredSimilarity2DTransform.h"
 #include "itkMath.h"
 
 namespace
@@ -42,8 +44,7 @@ CheckEqual(const itk::Point<double, 2> & p1, const itk::Point<double, 2> & p2)
 
 } // namespace
 
-int
-itkSimilarity2DTransformTest(int, char *[])
+TEST(Similarity2DTransform, ConvertedLegacyTest)
 {
 
   std::cout << "==================================" << std::endl;
@@ -72,11 +73,7 @@ itkSimilarity2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error with Identity transform" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error with Identity transform";
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -90,13 +87,10 @@ itkSimilarity2DTransformTest(int, char *[])
   transform2->SetMatrix(transform1->GetMatrix());
   std::cout << "Testing SetAngle(" << angle1 << ")/GetAngle():";
   constexpr double epsilon2{ 1e-5 };
-  if (itk::Math::Absolute(transform2->GetAngle() - angle1) > epsilon2)
-  {
-    std::cerr << "Error with SetAngle/GetAngle:" << std::endl;
-    std::cerr << "transform1->SetAngle: " << angle1 << std::endl;
-    std::cerr << "transform2->GetAngle: " << transform2->GetAngle() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(transform2->GetAngle() - angle1), epsilon2)
+    << "Error with SetAngle/GetAngle:" << std::endl
+    << "transform1->SetAngle: " << angle1 << std::endl
+    << "transform2->GetAngle: " << transform2->GetAngle();
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -105,13 +99,10 @@ itkSimilarity2DTransformTest(int, char *[])
   transform1->SetAngle(-angle1);
   transform2->SetMatrix(transform1->GetMatrix());
   std::cout << "Testing SetAngle(" << -angle1 << ")/GetAngle():";
-  if (itk::Math::Absolute(transform2->GetAngle() - (-angle1)) > epsilon2)
-  {
-    std::cerr << "Error with SetAngle/GetAngle:" << std::endl;
-    std::cerr << "transform1->SetAngle: " << -angle1 << std::endl;
-    std::cerr << "transform2->GetAngle: " << transform2->GetAngle() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(transform2->GetAngle() - (-angle1)), epsilon2)
+    << "Error with SetAngle/GetAngle:" << std::endl
+    << "transform1->SetAngle: " << -angle1 << std::endl
+    << "transform2->GetAngle: " << transform2->GetAngle();
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -139,13 +130,9 @@ itkSimilarity2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error with Set/GetParameters:" << std::endl;
-    std::cerr << "Input:" << params << std::endl;
-    std::cerr << "Output:" << outputParams << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error with Set/GetParameters:" << std::endl
+                  << "Input:" << params << std::endl
+                  << "Output:" << outputParams;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -174,13 +161,9 @@ itkSimilarity2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error rotating point   : " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -205,13 +188,9 @@ itkSimilarity2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error translating point: " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -221,16 +200,18 @@ itkSimilarity2DTransformTest(int, char *[])
   SimilarityTransformType::JacobianType jacobian0;
   transform->ComputeJacobianWithRespectToParameters(p, jacobian0);
 
-  if (itk::Math::NotExactlyEquals(jacobian0[0][0], 10) || itk::Math::NotExactlyEquals(jacobian0[0][1], -10) ||
-      itk::Math::NotExactlyEquals(jacobian0[0][2], 0) || itk::Math::NotExactlyEquals(jacobian0[0][3], 0) ||
-      itk::Math::NotExactlyEquals(jacobian0[0][4], 1) || itk::Math::NotExactlyEquals(jacobian0[0][5], 0) ||
-      itk::Math::NotExactlyEquals(jacobian0[1][0], 10) || itk::Math::NotExactlyEquals(jacobian0[1][1], 10) ||
-      itk::Math::NotExactlyEquals(jacobian0[1][2], 0) || itk::Math::NotExactlyEquals(jacobian0[1][3], 0) ||
-      itk::Math::NotExactlyEquals(jacobian0[1][4], 0) || itk::Math::NotExactlyEquals(jacobian0[1][5], 1))
-  {
-    std::cerr << "Error with Jacobian: " << jacobian0 << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(jacobian0[0][0], 10) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[0][1], -10) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[0][2], 0) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[0][3], 0) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[0][4], 1) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[0][5], 0) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[1][0], 10) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[1][1], 10) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[1][2], 0) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[1][3], 0) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[1][4], 0) << "Error with Jacobian: " << jacobian0;
+  EXPECT_EQ(jacobian0[1][5], 1) << "Error with Jacobian: " << jacobian0;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -268,10 +249,7 @@ itkSimilarity2DTransformTest(int, char *[])
     const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
     std::cout << "Test CloneInverseTo(): ";
-    if (!CheckEqual(p1, p3))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
     t1->GetInverse(t2dash);
@@ -279,24 +257,14 @@ itkSimilarity2DTransformTest(int, char *[])
     p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverse(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
-    if (!t2dash)
-    {
-      std::cout << "Cannot compute inverse transformation" << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverseTransform(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
     TransformType::Pointer t3;
@@ -305,10 +273,7 @@ itkSimilarity2DTransformTest(int, char *[])
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
     std::cout << "Test Clone(): ";
-    if (!CheckEqual(p2, p4))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test singular matrix transform
     parameters[0] = 0.0; // scale
@@ -317,11 +282,7 @@ itkSimilarity2DTransformTest(int, char *[])
     parameters[3] = -8.9;
     t1->SetParameters(parameters);
     const bool computedInverse = t1->GetInverse(t2);
-    if (computedInverse)
-    {
-      std::cout << "Did not report singular matrix when computed inverse of singular matrix" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(computedInverse) << "Did not report singular matrix when computed inverse of singular matrix";
 
     // Test compose
     auto t4 = TransformType::New();
@@ -348,10 +309,7 @@ itkSimilarity2DTransformTest(int, char *[])
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,false): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
     t5->Compose(t4, true);
@@ -361,10 +319,7 @@ itkSimilarity2DTransformTest(int, char *[])
     p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,true): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
     std::cout << "Testing Jacobian: ";
@@ -395,14 +350,11 @@ itkSimilarity2DTransformTest(int, char *[])
         const double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
         const double computedDerivative = jacobian[j][k];
         approxJacobian[j][k] = approxDerivative;
-        if (itk::Math::Absolute(approxDerivative - computedDerivative) > 1e-4)
-        {
-          std::cerr << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl;
-          std::cerr << "Result should be: " << approxDerivative << std::endl;
-          std::cerr << "Reported result is: " << computedDerivative << std::endl;
-          std::cerr << " [ FAILED ] " << std::endl;
-          return EXIT_FAILURE;
-        } // if
+        EXPECT_LE(itk::Math::Absolute(approxDerivative - computedDerivative), 1e-4)
+          << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl
+          << "Result should be: " << approxDerivative << std::endl
+          << "Reported result is: " << computedDerivative << std::endl
+          << " [ FAILED ] ";
       } // for j
 
     } // for k
@@ -440,10 +392,7 @@ itkSimilarity2DTransformTest(int, char *[])
     const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
     std::cout << "Test CloneInverseTo(): ";
-    if (!CheckEqual(p1, p3))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
     t1->GetInverse(t2dash);
@@ -451,24 +400,14 @@ itkSimilarity2DTransformTest(int, char *[])
     p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverse(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
-    if (!t2dash)
-    {
-      std::cout << "Cannot compute inverse transformation" << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverseTransform(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
     TransformType::Pointer t3;
@@ -477,10 +416,7 @@ itkSimilarity2DTransformTest(int, char *[])
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
     std::cout << "Test Clone(): ";
-    if (!CheckEqual(p2, p4))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test compose
     auto t4 = TransformType::New();
@@ -503,10 +439,7 @@ itkSimilarity2DTransformTest(int, char *[])
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,false): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
     t5->Compose(t4, true);
@@ -516,10 +449,7 @@ itkSimilarity2DTransformTest(int, char *[])
     p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,true): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
     std::cout << "Testing Jacobian: ";
@@ -550,14 +480,11 @@ itkSimilarity2DTransformTest(int, char *[])
         const double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
         const double computedDerivative = jacobian[j][k];
         approxJacobian[j][k] = approxDerivative;
-        if (itk::Math::Absolute(approxDerivative - computedDerivative) > 1e-4)
-        {
-          std::cerr << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl;
-          std::cerr << "Result should be: " << approxDerivative << std::endl;
-          std::cerr << "Reported result is: " << computedDerivative << std::endl;
-          std::cerr << " [ FAILED ] " << std::endl;
-          return EXIT_FAILURE;
-        } // if
+        EXPECT_LE(itk::Math::Absolute(approxDerivative - computedDerivative), 1e-4)
+          << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl
+          << "Result should be: " << approxDerivative << std::endl
+          << "Reported result is: " << computedDerivative << std::endl
+          << " [ FAILED ] ";
       } // for j
 
     } // for k
@@ -599,10 +526,7 @@ itkSimilarity2DTransformTest(int, char *[])
 
     t1->Print(std::cout);
     std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
-    if (!CheckEqual(op1, op2))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(op1, op2));
 
     // check that parameters are the same
     TransformType::ParametersType pdash = t2->GetParameters();
@@ -610,19 +534,12 @@ itkSimilarity2DTransformTest(int, char *[])
     std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
     for (unsigned int j = 0; j < t1->GetNumberOfParameters(); ++j)
     {
-      if (itk::Math::Absolute(parameters[j] - pdash[j]) > epsilon)
-      {
-        std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-        std::cerr << "Test failed!" << std::endl;
-        std::cerr << "Error in parameters at index [" << j << "]" << std::endl;
-        std::cerr << "Expected value " << parameters << std::endl;
-        std::cerr << " differs from " << pdash;
-        std::cerr << " by more than " << epsilon << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters[j] - pdash[j]), epsilon)
+        << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << std::endl
+        << "Error in parameters at index [" << j << "]" << std::endl
+        << "Expected value " << parameters << std::endl
+        << " differs from " << pdash << " by more than " << epsilon;
     }
     std::cout << " [ PASSED ] " << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
