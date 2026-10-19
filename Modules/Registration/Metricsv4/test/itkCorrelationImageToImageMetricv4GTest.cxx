@@ -18,7 +18,7 @@
 #include "itkCorrelationImageToImageMetricv4.h"
 #include "itkTranslationTransform.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /* Simple test to verify that class builds and runs.
  * Results are not verified. See ImageToImageMetricv4Test
@@ -26,6 +26,8 @@
  *
  * TODO Numerical verification.
  */
+namespace
+{
 template <typename TIndexType, typename TPointType>
 double
 itkCorrelationImageToImageMetricv4Test_GetToyImagePixelValue(TIndexType         index,
@@ -46,7 +48,7 @@ itkCorrelationImageToImageMetricv4Test_GetToyImagePixelValue(TIndexType         
 }
 
 template <typename TMetricPointer, typename TValue, typename TDerivativeType>
-[[nodiscard]] int
+void
 itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(TMetricPointer &  metric,
                                                             TValue &          value,
                                                             TDerivativeType & derivative)
@@ -54,58 +56,27 @@ itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(TMetricPointer &  me
   using MetricType = typename TMetricPointer::ObjectType;
 
   /* Initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during Initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  ASSERT_NO_THROW(metric->Initialize()) << "Caught unexpected exception during Initialize";
 
   // Evaluate with GetValueAndDerivative
-  typename MetricType::MeasureType    valueReturn1;
+  typename MetricType::MeasureType    valueReturn1{};
   typename MetricType::DerivativeType derivativeReturn;
-  try
-  {
-    std::cout << "Calling GetValueAndDerivative..." << std::endl;
-    metric->GetValueAndDerivative(valueReturn1, derivativeReturn);
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValueAndDerivative: " << exc;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn))
+    << "Caught unexpected exception during GetValueAndDerivative";
 
 
   std::cout << "value:" << valueReturn1 << std::endl;
   std::cout << "derivativeReturn:" << derivativeReturn << std::endl;
 
   /* Re-initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during re-initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  ASSERT_NO_THROW(metric->Initialize()) << "Caught unexpected exception during re-initialize";
 
-  typename MetricType::MeasureType valueReturn2;
-  try
-  {
-    std::cout << "Calling GetValue..." << std::endl;
-    valueReturn2 = metric->GetValue();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValue: " << exc;
-    return EXIT_FAILURE;
-  }
+  typename MetricType::MeasureType valueReturn2{};
+  std::cout << "Calling GetValue..." << std::endl;
+  ASSERT_NO_THROW(valueReturn2 = metric->GetValue()) << "Caught unexpected exception during GetValue";
 
   // Test same value returned by different methods
   std::cout << "Check Value return values..." << std::endl;
@@ -116,12 +87,10 @@ itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(TMetricPointer &  me
 
   value = valueReturn1;
   derivative = derivativeReturn;
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkCorrelationImageToImageMetricv4Test(int, char ** const)
+TEST(CorrelationImageToImageMetricv4, ConvertedLegacyTest)
 {
 
   constexpr unsigned int imageSize{ 20 };
@@ -192,7 +161,7 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
 
   auto metric = MetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, CorrelationImageToImageMetricv4, ImageToImageMetricv4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(metric, CorrelationImageToImageMetricv4, ImageToImageMetricv4);
 
   /* Assign images and transforms.
    * By not setting a virtual domain image or virtual domain settings,
@@ -202,45 +171,26 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
   metric->SetFixedTransform(fixedTransform);
   metric->SetMovingTransform(movingTransform);
 
-  int result = EXIT_SUCCESS;
-
   metric->SetMaximumNumberOfWorkUnits(1);
   std::cerr << "Setting number of metric threads to " << metric->GetMaximumNumberOfWorkUnits() << std::endl;
   MetricType::MeasureType    value1 = NAN;
   MetricType::DerivativeType derivative1;
 
-  int ret = itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(metric, value1, derivative1);
-  if (ret == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-  }
+  itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(metric, value1, derivative1);
   MetricType::MeasureType    value2 = NAN;
   MetricType::DerivativeType derivative2;
   metric->SetMaximumNumberOfWorkUnits(8);
   std::cerr << "Setting number of metric threads to " << metric->GetMaximumNumberOfWorkUnits() << std::endl;
-  ret = itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(metric, value2, derivative2);
-  if (ret == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-  }
+  itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(metric, value2, derivative2);
 
   constexpr double myeps{ 1e-8 };
-  if (itk::Math::Absolute(value1 - value2) > 1e-8)
-  {
-    std::cerr << "value1: " << value1 << std::endl;
-    std::cerr << "value2: " << value2 << std::endl;
-    std::cerr << "Got different metric values when set threading number differently." << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(value1 - value2), 1e-8)
+    << "Got different metric values when set threading number differently.";
 
   const vnl_vector<double> ddiff = vnl_vector<double>(derivative1) - vnl_vector<double>(derivative2);
-  if (ddiff.two_norm() > myeps)
-  {
-    std::cerr << "derivative1: " << derivative1 << std::endl;
-    std::cerr << "derivative2: " << derivative2 << std::endl;
-    std::cerr << "Got different derivative values when set threading number differently." << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_LE(ddiff.two_norm(), myeps) << "derivative1: " << derivative1 << std::endl
+                                     << "derivative2: " << derivative2 << std::endl
+                                     << "Got different derivative values when set threading number differently.";
 
   // Test that non-overlapping images will generate a warning
   // and return max value for metric value.
@@ -259,6 +209,4 @@ itkCorrelationImageToImageMetricv4Test(int, char ** const)
               << "  Metric value: " << valueReturn << std::endl
               << "  Expected metric max value: " << expectedMetricMax << std::endl;
   }
-
-  return result;
 }
