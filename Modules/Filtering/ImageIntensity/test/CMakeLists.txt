@@ -19,7 +19,6 @@ set(
   itkPromoteDimensionImageTest.cxx
   itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
   itkRGBToVectorAdaptImageFilterTest.cxx
-  itkSubtractImageFilterTest.cxx
   itkSymmetricEigenAnalysisImageFilterTest.cxx
   itkTanImageFilterAndAdaptorTest.cxx
   itkTernaryMagnitudeImageFilterTest.cxx
@@ -324,12 +323,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkXorImageFilterTest.png
 )
 itk_add_test(
-  NAME itkSubtractImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkSubtractImageFilterTest
-)
-itk_add_test(
   NAME itkVectorToRGBImageAdaptorTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -567,6 +560,7 @@ set(
   itkSinImageFilterAndAdaptorGTest.cxx
   itkSqrtImageFilterAndAdaptorGTest.cxx
   itkSquareImageFilterGTest.cxx
+  itkSubtractImageFilterGTest.cxx
 )
 
 if(MSVC)

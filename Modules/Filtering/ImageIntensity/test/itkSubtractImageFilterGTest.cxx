@@ -19,11 +19,10 @@
 #include "itkSubtractImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkSubtractImageFilterTest(int, char *[])
+TEST(SubtractImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -77,7 +76,7 @@ itkSubtractImageFilterTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, SubtractImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, SubtractImageFilter, BinaryGeneratorImageFilter);
 
   // Set the input images
   filter->SetInput1(inputImageA);
@@ -85,7 +84,7 @@ itkSubtractImageFilterTest(int, char *[])
 
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
 
   // Get the filter output
@@ -100,18 +99,10 @@ itkSubtractImageFilterTest(int, char *[])
   constexpr auto expectedValue = static_cast<OutputImageType::PixelType>(valueA - valueB);
   while (!oIt.IsAtEnd())
   {
-    if (!itk::Math::ExactlyEquals(oIt.Get(), expectedValue))
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in pixel value at index [" << oIt.GetIndex() << ']' << std::endl;
-      std::cerr << "Expected: " << expectedValue << ", but got: " << oIt.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(oIt.Get(), expectedValue) << "Error in pixel value at index [" << oIt.GetIndex() << ']';
     ++oIt;
   }
 
 
   // All objects should be automatically destroyed at this point
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
