@@ -13,7 +13,6 @@ set(
   itkTriangleMeshToBinaryImageFilterTest2.cxx
   itkTriangleMeshToBinaryImageFilterTest3.cxx
   itkTriangleMeshToBinaryImageFilterTest4.cxx
-  itkTriangleMeshToSimplexMeshFilter2Test.cxx
   itkTriangleMeshToSimplexMeshFilterTest.cxx
   itkVTKPolyDataReaderTest.cxx
   itkVTKPolyDataWriterTest01.cxx
@@ -350,12 +349,6 @@ itk_add_test(
     DATA{${ITK_DATA_ROOT}/Input/cthead1Label.png}
 )
 itk_add_test(
-  NAME itkTriangleMeshToSimplexMeshFilter2Test
-  COMMAND
-    ITKMeshTestDriver
-    itkTriangleMeshToSimplexMeshFilter2Test
-)
-itk_add_test(
   NAME itkTriangleMeshCurvatureCalculatorTest
   COMMAND
     ITKMeshTestDriver
@@ -410,5 +403,6 @@ set(
   itkSphereMeshSourceGTest.cxx
   itkTransformMeshFilterGTest.cxx
   itkTriangleCellGTest.cxx
+  itkTriangleMeshToSimplexMeshFilter2GTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
