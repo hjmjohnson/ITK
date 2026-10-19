@@ -17,20 +17,18 @@
  *=========================================================================*/
 
 #include "itkPolygonSpatialObject.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <iostream>
 
-int
-itkPolygonSpatialObjectTest(int, char *[])
+TEST(PolygonSpatialObject, ConvertedLegacyTest)
 {
-  bool failed = false;
   using PolygonType = itk::PolygonSpatialObject<3>;
 
   //
   // create rectangle
   auto rectangle = PolygonType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(rectangle, PolygonSpatialObject, PointBasedSpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(rectangle, PolygonSpatialObject, PointBasedSpatialObject);
 
 
   constexpr double             d1[3]{ 0.0, 0.0, 0.0 };
@@ -57,11 +55,11 @@ itkPolygonSpatialObjectTest(int, char *[])
 
   constexpr double objectSpaceThickness{ 10 };
   rectangle->SetThicknessInObjectSpace(objectSpaceThickness);
-  ITK_TEST_SET_GET_VALUE(objectSpaceThickness, rectangle->GetThicknessInObjectSpace());
+  EXPECT_EQ(objectSpaceThickness, rectangle->GetThicknessInObjectSpace());
 
   constexpr bool isClosed{ true };
   rectangle->SetIsClosed(isClosed);
-  ITK_TEST_SET_GET_BOOLEAN(rectangle, IsClosed, isClosed);
+  ITK_GTEST_SET_GET_BOOLEAN(rectangle, IsClosed, isClosed);
 
 
   rectangle->Update();
@@ -74,59 +72,26 @@ itkPolygonSpatialObjectTest(int, char *[])
   //
   // test number of points
   std::cout << "Testing number of points for rectangle: ";
-  if (rectangle->GetNumberOfPoints() != 4)
-  {
-    std::cout << "[Failed]" << std::endl;
-    std::cout << rectangle->GetNumberOfPoints() << " != 4" << std::endl;
-    failed = true;
-  }
-  else
-  {
-    std::cout << "[Passed]" << std::endl;
-  }
+  EXPECT_EQ(rectangle->GetNumberOfPoints(), 4u) << "[Failed]" << '\n' << rectangle->GetNumberOfPoints() << " != 4";
 
   //
   // test area
   std::cout << "Testing area for rectangle: ";
-  if (rectangle->MeasureAreaInObjectSpace() != 2.0)
-  {
-    std::cout << "[Failed]" << std::endl;
-    std::cout << rectangle->MeasureAreaInObjectSpace() << " != 2.0" << std::endl;
-    failed = true;
-  }
-  else
-  {
-    std::cout << "[Passed]" << std::endl;
-  }
+  EXPECT_EQ(rectangle->MeasureAreaInObjectSpace(), 2.0) << "[Failed]" << '\n'
+                                                        << rectangle->MeasureAreaInObjectSpace() << " != 2.0";
 
   //
   // test volume
   std::cout << "Testing volume for rectangle: ";
-  if (rectangle->MeasureVolumeInObjectSpace() != 20.0)
-  {
-    std::cout << "[Failed]" << std::endl;
-    std::cout << rectangle->MeasureVolumeInObjectSpace() << " != 20.0" << std::endl;
-    failed = true;
-  }
-  else
-  {
-    std::cout << "[Passed]" << std::endl;
-  }
+  EXPECT_EQ(rectangle->MeasureVolumeInObjectSpace(), 20.0) << "[Failed]" << '\n'
+                                                           << rectangle->MeasureVolumeInObjectSpace() << " != 20.0";
 
   //
   // test perimeter
   std::cout << "Testing perimeter for rectangle: ";
-  if (rectangle->MeasurePerimeterInObjectSpace() != 6.0)
-  {
-    std::cout << "Wrong perimeter for rectangle" << std::endl;
-    std::cout << "[Failed]" << std::endl;
-    std::cout << rectangle->MeasurePerimeterInObjectSpace() << " != 6.0" << std::endl;
-    failed = true;
-  }
-  else
-  {
-    std::cout << "[Passed]" << std::endl;
-  }
+  EXPECT_EQ(rectangle->MeasurePerimeterInObjectSpace(), 6.0) << "Wrong perimeter for rectangle" << '\n'
+                                                             << "[Failed]" << '\n'
+                                                             << rectangle->MeasurePerimeterInObjectSpace() << " != 6.0";
 
   //
   // test number of points
@@ -134,16 +99,8 @@ itkPolygonSpatialObjectTest(int, char *[])
   constexpr double                    tp1[3]{ 0.25, 0.0, 0.0 };
   const PolygonType::PointType        testPoint1(tp1);
   const PolygonType::PolygonPointType closestPoint = rectangle->ClosestPointInWorldSpace(testPoint1);
-  if (closestPoint.GetPositionInObjectSpace() != p1)
-  {
-    std::cout << "[Failed]" << std::endl;
-    std::cout << closestPoint.GetPositionInObjectSpace() << " != " << p1 << std::endl;
-    failed = true;
-  }
-  else
-  {
-    std::cout << "[Passed]" << std::endl;
-  }
+  EXPECT_EQ(closestPoint.GetPositionInObjectSpace(), p1) << "[Failed]" << '\n'
+                                                         << closestPoint.GetPositionInObjectSpace() << " != " << p1;
 
   //
   // test number of points
@@ -151,18 +108,9 @@ itkPolygonSpatialObjectTest(int, char *[])
   constexpr double                    tp2[3]{ 0.25, 5.0, 5.0 };
   const PolygonType::PointType        testPoint2(tp2);
   const PolygonType::PolygonPointType closestPoint2 = rectangle->ClosestPointInWorldSpace(testPoint2);
-  if (closestPoint2.GetPositionInObjectSpace() != p4)
-  {
-    std::cout << "[Failed]" << std::endl;
-    std::cout << closestPoint2.GetPositionInObjectSpace() << " != " << p4 << std::endl;
-    failed = true;
-  }
-  else
-  {
-    std::cout << "[Passed]" << std::endl;
-  }
+  EXPECT_EQ(closestPoint2.GetPositionInObjectSpace(), p4) << "[Failed]" << '\n'
+                                                          << closestPoint2.GetPositionInObjectSpace() << " != " << p4;
 
 
   std::cout << "Test finished" << std::endl;
-  return failed ? EXIT_FAILURE : EXIT_SUCCESS;
 }
