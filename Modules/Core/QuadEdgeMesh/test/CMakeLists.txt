@@ -3,7 +3,6 @@ set(
   ITKQuadEdgeMeshTests
   itkQuadEdgeMeshAddFaceTest1.cxx
   itkQuadEdgeMeshEulerOperatorJoinVertexTest.cxx
-  itkQuadEdgeMeshPolygonCellTest.cxx
   itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1.cxx
   itkQuadEdgeMeshTest1.cxx
   itkQuadEdgeMeshTest2.cxx
@@ -32,12 +31,6 @@ itk_add_test(
   COMMAND
     ITKQuadEdgeMeshTestDriver
     itkQuadEdgeMeshTest3
-)
-itk_add_test(
-  NAME itkQuadEdgeMeshPolygonCellTest
-  COMMAND
-    ITKQuadEdgeMeshTestDriver
-    itkQuadEdgeMeshPolygonCellTest
 )
 itk_add_test(
   NAME itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1
@@ -170,6 +163,7 @@ set(
   itkQuadEdgeMeshIteratorGTest.cxx
   itkQuadEdgeMeshNoPointConstGTest.cxx
   itkQuadEdgeMeshPointGTest1.cxx
+  itkQuadEdgeMeshPolygonCellGTest.cxx
   itkQuadEdgeMeshTypeTraitsGTest.cxx
 )
 creategoogletestdriver(ITKQuadEdgeMesh "${ITKQuadEdgeMesh-Test_LIBRARIES}" "${ITKQuadEdgeMeshGTests}")
