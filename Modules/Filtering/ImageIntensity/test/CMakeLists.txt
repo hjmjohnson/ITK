@@ -22,7 +22,6 @@ set(
   itkSymmetricEigenAnalysisImageFilterTest.cxx
   itkTernaryMagnitudeImageFilterTest.cxx
   itkVectorIndexSelectionCastImageFilterTest.cxx
-  itkVectorMagnitudeImageFilterTest.cxx
   itkVectorRescaleIntensityImageFilterTest.cxx
   itkVectorToRGBImageAdaptorTest.cxx
   itkWeightedAddImageFilterTest.cxx
@@ -344,12 +343,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ModulusImageFilterTest.png
 )
 itk_add_test(
-  NAME itkVectorMagnitudeImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkVectorMagnitudeImageFilterTest
-)
-itk_add_test(
   NAME itkMagnitudeAndPhaseToComplexImageFilterTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -531,6 +524,7 @@ set(
   itkTanImageFilterAndAdaptorGTest.cxx
   itkTernaryMagnitudeSquaredImageFilterGTest.cxx
   itkTernaryOperatorImageFilterGTest.cxx
+  itkVectorMagnitudeImageFilterGTest.cxx
 )
 
 if(MSVC)
