@@ -24,8 +24,10 @@
 #include "itkVectorImage.h"
 #include "itkVariableLengthVector.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 using PixelType = double;
 using VectorImage1D = itk::VectorImage<PixelType, 1>;
 using VectorImage3D = itk::VectorImage<PixelType, 3>;
@@ -185,9 +187,9 @@ DoubleToStringArray(double * a, unsigned int size)
 
   return ans;
 }
+} // namespace
 
-int
-itkExpandImageFilterTest2(int, char *[])
+TEST(ExpandImageFilter, ConvertedLegacyTest2)
 {
   int statusValue = EXIT_SUCCESS;
 
@@ -217,7 +219,7 @@ itkExpandImageFilterTest2(int, char *[])
 
   auto s1 = output1D->GetLargestPossibleRegion().GetSize()[0];
 
-  ITK_TEST_EXPECT_EQUAL(s1, 10);
+  ASSERT_EQ(s1, 10u);
 
   double                   slice1[10] = { 6, 6, 7, 7, 8, 8, 9, 9, 10, 10 };
   double                   sliceOut1[10] = {};
@@ -305,5 +307,5 @@ itkExpandImageFilterTest2(int, char *[])
 
 
   std::cout << "Test finished." << std::endl;
-  return statusValue;
+  EXPECT_EQ(statusValue, EXIT_SUCCESS);
 }
