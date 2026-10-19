@@ -5,7 +5,6 @@ set(
   itkConnectedRegionsMeshFilterTest2.cxx
   itkMeshFstreamTest.cxx
   itkMeshSpatialObjectIOTest.cxx
-  itkMeshTest.cxx
   itkNewTest.cxx
   itkParametricSpaceToImageSpaceMeshFilterTest.cxx
   itkQuadrilateralCellTest.cxx
@@ -35,12 +34,6 @@ set(
 set(ITKMesh-Test_LIBRARIES ${ITKMesh-Test_LIBRARIES})
 createtestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshTests}")
 
-itk_add_test(
-  NAME itkMeshTest
-  COMMAND
-    ITKMeshTestDriver
-    itkMeshTest
-)
 itk_add_test(
   NAME itkSimplexMeshTest
   COMMAND
@@ -475,6 +468,7 @@ set(
   itkImageToParametricSpaceFilterGTest.cxx
   itkInteriorExteriorMeshFilterGTest.cxx
   itkMeshCellDataGTest.cxx
+  itkMeshGTest.cxx
   itkMeshRegionGTest.cxx
   itkMeshSourceGraftOutputGTest.cxx
 )
