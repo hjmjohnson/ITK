@@ -19,9 +19,9 @@
 #include <iostream>
 
 #include "itkRLEImage.h"
+#include "itkGTest.h"
 
-int
-itkRLEImageIteratorsForwardBackwardTest(int, char *[])
+TEST(RLEImageIteratorsForwardBackward, ConvertedLegacyTest)
 {
   std::cout << "Creating an image" << std::endl;
   using ImageType = itk::RLEImage<unsigned short>;
@@ -77,20 +77,11 @@ itkRLEImageIteratorsForwardBackwardTest(int, char *[])
   {
     value++;
 
-    if (ot.Get() != value)
-    {
-      std::cerr << "Error in forward pass" << std::endl;
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << ot.GetIndex() << std::endl;
-      std::cerr << "Value stored is = " << ot.Get() << std::endl;
-      std::cerr << "Value should be = " << value << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ot.Get(), value) << "Error in forward pass" << std::endl
+                               << "Values don't correspond to what was stored " << std::endl
+                               << "Test failed at index " << ot.GetIndex();
     ++ot;
   }
-
-  std::cout << "      PASSED !" << std::endl;
 
   // Verification
   std::cout << "Verifying the data backwards... ";
@@ -99,20 +90,11 @@ itkRLEImageIteratorsForwardBackwardTest(int, char *[])
   do
   {
     --ot;
-    if (ot.Get() != value)
-    {
-      std::cerr << "Error in backwards pass" << std::endl;
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << ot.GetIndex() << std::endl;
-      std::cerr << "Value stored is = " << ot.Get() << std::endl;
-      std::cerr << "Value should be = " << value << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ot.Get(), value) << "Error in backwards pass" << std::endl
+                               << "Values don't correspond to what was stored " << std::endl
+                               << "Test failed at index " << ot.GetIndex();
     value--;
   } while (!ot.IsAtBegin());
-
-  std::cout << "      PASSED !" << std::endl;
 
   // Verification
   ConstIteratorType cot(myImage, region);
@@ -124,20 +106,11 @@ itkRLEImageIteratorsForwardBackwardTest(int, char *[])
   {
     value++;
 
-    if (cot.Get() != value)
-    {
-      std::cerr << "Error in forward pass" << std::endl;
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << cot.GetIndex() << std::endl;
-      std::cerr << "Value stored is = " << cot.Get() << std::endl;
-      std::cerr << "Value should be = " << value << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(cot.Get(), value) << "Error in forward pass" << std::endl
+                                << "Values don't correspond to what was stored " << std::endl
+                                << "Test failed at index " << cot.GetIndex();
     ++cot;
   }
-
-  std::cout << "      PASSED !" << std::endl;
 
   // Verification
   std::cout << "Const Iterator : Verifying the data backwards... ";
@@ -146,22 +119,9 @@ itkRLEImageIteratorsForwardBackwardTest(int, char *[])
   do
   {
     --cot;
-    if (cot.Get() != value)
-    {
-      std::cerr << "Error in backwards pass" << std::endl;
-      std::cerr << "Values don't correspond to what was stored " << std::endl;
-      std::cerr << "Test failed at index ";
-      std::cerr << cot.GetIndex() << std::endl;
-      std::cerr << "Value stored is = " << cot.Get() << std::endl;
-      std::cerr << "Value should be = " << value << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(cot.Get(), value) << "Error in backwards pass" << std::endl
+                                << "Values don't correspond to what was stored " << std::endl
+                                << "Test failed at index " << cot.GetIndex();
     value--;
   } while (!cot.IsAtBegin());
-
-  std::cout << "      PASSED !" << std::endl;
-
-  std::cout << std::endl << "Test passed" << std::endl;
-
-  return EXIT_SUCCESS;
 }
