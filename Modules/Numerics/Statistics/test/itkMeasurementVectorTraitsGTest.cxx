@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkMeasurementVectorTraits.h"
+#include "itkGTest.h"
 
 #define itkSetGetLengthVerificationMacro(measure, type, len1, len2) \
   itk::NumericTraits<type>::SetLength((measure), len1);             \
@@ -26,51 +27,28 @@
   }                                                                 \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define itkSetLengthExceptionMacro(measure, type, len)                \
-  try                                                                 \
-  {                                                                   \
-    itk::NumericTraits<type>::SetLength((measure), len);              \
-    std::cerr << "Failed to get expected exception for SetLength() "; \
-    std::cerr << std::endl;                                           \
-    return EXIT_FAILURE;                                              \
-  }                                                                   \
-  catch (const itk::ExceptionObject &)                                \
-  {}                                                                  \
+#define itkSetLengthExceptionMacro(measure, type, len)                                    \
+  EXPECT_THROW(itk::NumericTraits<type>::SetLength((measure), len), itk::ExceptionObject) \
+    << "Failed to get expected exception for SetLength() ";                               \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define itkAssertLengthExceptionMacro(m1, m2)                      \
-  try                                                              \
-  {                                                                \
-    itk::Statistics::MeasurementVectorTraits::Assert((m1), (m2));  \
-    std::cerr << "Failed to get expected exception for Assert() "; \
-    std::cerr << std::endl;                                        \
-    return EXIT_FAILURE;                                           \
-  }                                                                \
-  catch (const itk::ExceptionObject &)                             \
-  {}                                                               \
+#define itkAssertLengthExceptionMacro(m1, m2)                                                      \
+  EXPECT_THROW(itk::Statistics::MeasurementVectorTraits::Assert((m1), (m2)), itk::ExceptionObject) \
+    << "Failed to get expected exception for Assert() ";                                           \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define itkAssertLengthSameValueReturn(m1, type1, m2)                                                             \
-  if (itk::Statistics::MeasurementVectorTraits::Assert((m1), (m2)) != itk::NumericTraits<type1>::GetLength((m1))) \
-  {                                                                                                               \
-    std::cerr << "Failed to get expected VLength for Assert() ";                                                  \
-    std::cerr << std::endl;                                                                                       \
-    return EXIT_FAILURE;                                                                                          \
-  }                                                                                                               \
+#define itkAssertLengthSameValueReturn(m1, type1, m2)                                                                 \
+  EXPECT_EQ(itk::Statistics::MeasurementVectorTraits::Assert((m1), (m2)), itk::NumericTraits<type1>::GetLength((m1))) \
+    << "Failed to get expected VLength for Assert() ";                                                                \
   ITK_MACROEND_NOOP_STATEMENT
 
-#define itkAssertSameLengthTest(m1, m2)                                  \
-  if (itk::Statistics::MeasurementVectorTraits::Assert((m1), (m2)) != 0) \
-  {                                                                      \
-    std::cerr << "Failed to recognize same length in Assert() ";         \
-    std::cerr << std::endl;                                              \
-    return EXIT_FAILURE;                                                 \
-  }                                                                      \
+#define itkAssertSameLengthTest(m1, m2)                                       \
+  EXPECT_EQ(itk::Statistics::MeasurementVectorTraits::Assert((m1), (m2)), 0u) \
+    << "Failed to recognize same length in Assert() ";                        \
   ITK_MACROEND_NOOP_STATEMENT
 
 
-int
-itkMeasurementVectorTraitsTest(int, char *[])
+TEST(MeasurementVectorTraits, ConvertedLegacyTest)
 {
   std::cout << "MeasurementVectorTraits Test" << std::endl;
 
@@ -182,7 +160,4 @@ itkMeasurementVectorTraitsTest(int, char *[])
   itkAssertLengthSameValueReturn(measure1b, MeasurementVectorType1b, measure2b);
   itkAssertLengthSameValueReturn(measure1b, MeasurementVectorType1b, measure3b);
   itkAssertLengthSameValueReturn(measure1b, MeasurementVectorType1b, measure4b);
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
