@@ -19,9 +19,9 @@
 #include <iostream>
 
 #include "itkInterpolateImageFilter.h"
+#include "itkGTest.h"
 
-int
-itkInterpolateImageFilterTest(int, char *[])
+TEST(InterpolateImageFilter, ConvertedLegacyTest)
 {
   enum
   {
@@ -70,8 +70,7 @@ itkInterpolateImageFilterTest(int, char *[])
   catch (const itk::ExceptionObject & err)
   {
     std::cout << "Caught unexpected exception: " << err << std::endl;
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   // walk the output and check the results
@@ -87,12 +86,7 @@ itkInterpolateImageFilterTest(int, char *[])
 
     std::cout << ' ' << inIter1.Get() << ' ' << inIter2.Get() << ' ' << outIter.Get() << std::endl;
 
-    if (outIter.Get() != temp)
-    {
-      std::cout << "Expected output " << temp << " got " << outIter.Get() << " instead. " << std::endl;
-      std::cout << "Test failed. " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outIter.Get(), temp);
 
     ++temp;
     ++inIter1;
@@ -121,12 +115,5 @@ itkInterpolateImageFilterTest(int, char *[])
     pass = true;
   }
 
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass);
 }
