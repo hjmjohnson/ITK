@@ -19,8 +19,10 @@
 #include "itkEllipseSpatialObject.h"
 #include "itkSpatialObjectToImageFilter.h"
 #include "itkCommand.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 class ShowProgressObject
 {
 public:
@@ -32,9 +34,9 @@ public:
   }
   itk::ProcessObject::Pointer m_Process;
 };
+} // namespace
 
-int
-itkSpatialObjectToImageFilterTest(int, char *[])
+TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
 {
   using EllipseType = itk::EllipseSpatialObject<2>;
 
@@ -52,31 +54,31 @@ itkSpatialObjectToImageFilterTest(int, char *[])
   using SpatialObjectToImageFilterType = itk::SpatialObjectToImageFilter<EllipseType, ImageType>;
   auto imageFilter = SpatialObjectToImageFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(imageFilter, SpatialObjectToImageFilter, ImageSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(imageFilter, SpatialObjectToImageFilter, ImageSource);
 
   imageFilter->SetInput(ellipse);
 
   constexpr SpatialObjectToImageFilterType::ValueType insideValue{ 2 };
   imageFilter->SetInsideValue(insideValue);
-  ITK_TEST_SET_GET_VALUE(insideValue, imageFilter->GetInsideValue());
+  EXPECT_EQ(insideValue, imageFilter->GetInsideValue());
 
   constexpr SpatialObjectToImageFilterType::ValueType outsideValue{ 0 };
   imageFilter->SetOutsideValue(0);
-  ITK_TEST_SET_GET_VALUE(outsideValue, imageFilter->GetOutsideValue());
+  EXPECT_EQ(outsideValue, imageFilter->GetOutsideValue());
 
   constexpr unsigned int childrenDepth{ 1 };
   imageFilter->SetChildrenDepth(childrenDepth);
-  ITK_TEST_SET_GET_VALUE(childrenDepth, imageFilter->GetChildrenDepth());
+  EXPECT_EQ(childrenDepth, imageFilter->GetChildrenDepth());
 
   ImageType::IndexType indx;
   indx[0] = 10;
   indx[1] = 10;
   imageFilter->SetIndex(indx);
-  ITK_TEST_SET_GET_VALUE(indx, imageFilter->GetIndex());
+  EXPECT_EQ(indx, imageFilter->GetIndex());
 
   auto size = ImageType::SizeType::Filled(50);
   imageFilter->SetSize(size);
-  ITK_TEST_SET_GET_VALUE(size, imageFilter->GetSize());
+  EXPECT_EQ(size, imageFilter->GetSize());
 
   // Testing spacing
   std::cout << "Testing Spacing: ";
@@ -90,11 +92,7 @@ itkSpatialObjectToImageFilterTest(int, char *[])
     const double * spacing_result = imageFilter->GetSpacing();
     for (unsigned int i = 0; i < 2; ++i)
     {
-      if (spacing_result[i] != floatCheckValue)
-      {
-        std::cout << "[FAILURE] floatCheckValue" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(spacing_result[i], floatCheckValue) << "[FAILURE] floatCheckValue";
     }
   }
   {
@@ -102,21 +100,13 @@ itkSpatialObjectToImageFilterTest(int, char *[])
     const double * spacing_result = imageFilter->GetSpacing();
     for (unsigned int i = 0; i < 2; ++i)
     {
-      if (spacing_result[i] != doubleCheckValue)
-      {
-        std::cout << "[FAILURE] doubleCheckValue" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(spacing_result[i], doubleCheckValue) << "[FAILURE] doubleCheckValue";
     }
   }
   const auto spacing_vector_result = imageFilter->GetSpacingVector();
   for (unsigned int i = 0; i < 2; ++i)
   {
-    if (spacing_vector_result[i] != doubleCheckValue)
-    {
-      std::cout << "[FAILURE] spacing_vector_result" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(spacing_vector_result[i], doubleCheckValue) << "[FAILURE] spacing_vector_result";
   }
 
 
@@ -125,31 +115,14 @@ itkSpatialObjectToImageFilterTest(int, char *[])
     constexpr double allzeros[2]{ 0.0, 0.0 };
     imageFilter->Update();
     auto preTimestamp = imageFilter->GetTimeStamp();
-    bool exceptionThrown = false;
-    try
-    {
-      imageFilter->SetSpacing(allzeros);
-    }
-    catch (const itk::ExceptionObject &)
-    {
-      exceptionThrown = true;
-    }
-
-    if (!exceptionThrown)
-    {
-      std::cout << "[FAILURE] : Attempting to set spacing values to zero should have thrown an exception." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(imageFilter->SetSpacing(allzeros), itk::ExceptionObject)
+      << "[FAILURE] : Attempting to set spacing values to zero should have thrown an exception.";
 
     auto postTimestamp = imageFilter->GetTimeStamp();
+    EXPECT_NE(preTimestamp, postTimestamp) << "Time Stamp not modified with passing all zero values to SetSpacing.";
     if (preTimestamp != postTimestamp)
     {
       std::cout << "Time Stamp modified." << std::endl;
-    }
-    else
-    {
-      std::cout << "Time Stamp not modified with passing all zero values to SetSpacing." << std::endl;
-      return EXIT_FAILURE;
     }
   }
 
@@ -167,11 +140,7 @@ itkSpatialObjectToImageFilterTest(int, char *[])
     const double * origin_result = imageFilter->GetOrigin();
     for (unsigned int i = 0; i < 2; ++i)
     {
-      if (origin_result[i] != floatCheckValue)
-      {
-        std::cout << "[FAILURE]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(origin_result[i], floatCheckValue) << "[FAILURE]";
     }
   }
   {
@@ -179,11 +148,7 @@ itkSpatialObjectToImageFilterTest(int, char *[])
     const double * origin_result = imageFilter->GetOrigin();
     for (unsigned int i = 0; i < 2; ++i)
     {
-      if (origin_result[i] != doubleCheckValue)
-      {
-        std::cout << "[FAILURE]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(origin_result[i], doubleCheckValue) << "[FAILURE]";
     }
   }
 
@@ -191,11 +156,7 @@ itkSpatialObjectToImageFilterTest(int, char *[])
 
   for (unsigned int i = 0; i < 2; ++i)
   {
-    if (origin_point_result[i] != doubleCheckValue)
-    {
-      std::cout << "[FAILURE]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(origin_point_result[i], doubleCheckValue) << "[FAILURE]";
   }
 
 
@@ -232,11 +193,7 @@ itkSpatialObjectToImageFilterTest(int, char *[])
       index[0] = 25 + i;
       index[1] = 25 + j;
 
-      if (image->GetPixel(index) != 2.0)
-      {
-        std::cout << "[FAILURE]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(image->GetPixel(index), 2.0) << "[FAILURE]";
     }
   }
 
@@ -245,7 +202,7 @@ itkSpatialObjectToImageFilterTest(int, char *[])
   // Test the UseObjectValue
   constexpr bool useObjectValue{ true };
   imageFilter->SetUseObjectValue(useObjectValue);
-  ITK_TEST_SET_GET_BOOLEAN(imageFilter, UseObjectValue, useObjectValue);
+  ITK_GTEST_SET_GET_BOOLEAN(imageFilter, UseObjectValue, useObjectValue);
 
   imageFilter->Update();
 
@@ -262,15 +219,10 @@ itkSpatialObjectToImageFilterTest(int, char *[])
       index[0] = 25 + i;
       index[1] = 25 + j;
 
-      if (image->GetPixel(index) != 1.0)
-      {
-        std::cout << "[FAILURE]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(image->GetPixel(index), 1.0) << "[FAILURE]";
     }
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
