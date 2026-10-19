@@ -10,7 +10,6 @@ set(
   itkDiscreteHessianGaussianImageFunctionTest.cxx
   itkInvertIntensityImageFilterTest.cxx
   itkMagnitudeAndPhaseToComplexImageFilterTest.cxx
-  itkMaskNegatedImageFilterTest.cxx
   itkMatrixIndexSelectionImageFilterTest.cxx
   itkMaximumImageFilterTest.cxx
   itkMinimumImageFilterTest.cxx
@@ -240,12 +239,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkConstrainedValueAdditionImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkConstrainedValueAdditionImageFilterTest.png
-)
-itk_add_test(
-  NAME itkMaskNegatedImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkMaskNegatedImageFilterTest
 )
 itk_add_test(
   NAME itkAddImageFilterTest2
@@ -654,6 +647,7 @@ set(
   itkLogImageFilterAndAdaptorGTest.cxx
   itkMaskedAssignImageFilterGTest.cxx
   itkMaskImageFilterGTest.cxx
+  itkMaskNegatedImageFilterGTest.cxx
   itkNotEqualGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx

@@ -20,13 +20,11 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMaskNegatedImageFilter.h"
 #include "itkVectorImage.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkMaskNegatedImageFilterTest(int, char *[])
+TEST(MaskNegatedImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int myDimension{ 3 };
 
@@ -143,11 +141,7 @@ itkMaskNegatedImageFilterTest(int, char *[])
   {
     filter->SetMaskImage(inputMask);
     const myFilterType::MaskImageType::ConstPointer retrievedMask = filter->GetMaskImage();
-    if (retrievedMask != inputMask)
-    {
-      std::cerr << "Mask not retrieved successfully!" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(retrievedMask, inputMask) << "Mask not retrieved successfully!";
   }
 
   // Vector image tests
@@ -165,23 +159,22 @@ itkMaskNegatedImageFilterTest(int, char *[])
   vectorFilter->SetMaskImage(inputMask);
 
   const myVectorImageType::PixelType outsideValue = vectorFilter->GetOutsideValue();
-  ITK_TEST_EXPECT_EQUAL(outsideValue.GetSize(), 0);
+  EXPECT_EQ(outsideValue.GetSize(), 0u);
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(vectorFilter->Update());
+  EXPECT_NO_THROW(vectorFilter->Update());
 
   // Check that the outside value consists of three zeros.
   const myVectorImageType::PixelType outsideValue3 = vectorFilter->GetOutsideValue();
   myVectorImageType::PixelType       threeZeros(3, 0.0f);
-  ITK_TEST_EXPECT_EQUAL(outsideValue3, threeZeros);
+  EXPECT_EQ(outsideValue3, threeZeros);
 
   // Reset the outside value to zero vector of length 23.
   myVectorImageType::PixelType zeros23(23, 1.0f);
   vectorFilter->SetOutsideValue(zeros23);
 
-  ITK_TRY_EXPECT_EXCEPTION(vectorFilter->Update());
+  EXPECT_THROW(vectorFilter->Update(), itk::ExceptionObject);
 
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
