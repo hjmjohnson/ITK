@@ -5,7 +5,6 @@ set(
   itkCollidingFrontsImageFilterTest.cxx
   itkLevelSetNeighborhoodExtractorTest.cxx
   itkNarrowBandCurvesLevelSetImageFilterTest.cxx
-  itkNarrowBandThresholdSegmentationLevelSetImageFilterTest.cxx
   itkParallelSparseFieldLevelSetImageFilterTest.cxx
   itkReinitializeLevelSetImageFilterTest.cxx
   itkShapeDetectionLevelSetImageFilterTest.cxx
@@ -36,6 +35,7 @@ set(
   itkLevelSetFunctionGTest.cxx
   itkLevelSetNeighborhoodExtractorGTest.cxx
   itkLevelSetVelocityNeighborhoodExtractorGTest.cxx
+  itkNarrowBandThresholdSegmentationLevelSetImageFilterGTest.cxx
   itkParallelSparseFieldLevelSetImageFilterRobustnessGTest.cxx
 )
 creategoogletestdriver(ITKLevelSets "${ITKLevelSets-Test_LIBRARIES}" "${ITKLevelSetsGTests}")
@@ -87,12 +87,6 @@ itk_add_test(
   COMMAND
     ITKLevelSetsTestDriver
     itkShapeDetectionLevelSetImageFilterTest
-)
-itk_add_test(
-  NAME itkNarrowBandThresholdSegmentationLevelSetImageFilterTest
-  COMMAND
-    ITKLevelSetsTestDriver
-    itkNarrowBandThresholdSegmentationLevelSetImageFilterTest
 )
 itk_add_test(
   NAME itkNarrowBandCurvesLevelSetImageFilterTest1
