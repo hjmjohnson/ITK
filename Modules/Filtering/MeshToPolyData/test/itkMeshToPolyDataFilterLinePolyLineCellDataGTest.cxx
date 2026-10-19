@@ -20,16 +20,14 @@
 #include "itkMesh.h"
 #include "itkLineCell.h"
 #include "itkPolyLineCell.h"
-#include "itkTestingMacros.h"
-#include "itkMath.h"
+#include "itkGTest.h"
 
 // Regression test for cell-data ordering when a mesh interleaves LineCell
 // and PolyLineCell cells.  Both map into the single output line container,
 // which is merged polyline-cells-first then line-cells; the cell-data copy
 // must follow that same order.  A shared, visit-order cell-id container made
 // the data land on the wrong output cells whenever both types were present.
-int
-itkMeshToPolyDataFilterLinePolyLineCellDataTest(int, char *[])
+TEST(MeshToPolyDataFilterLinePolyLineCellData, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension = 3;
   using PixelType = float;
@@ -78,19 +76,17 @@ itkMeshToPolyDataFilterLinePolyLineCellDataTest(int, char *[])
   using FilterType = itk::MeshToPolyDataFilter<MeshType>;
   auto filter = FilterType::New();
   filter->SetInput(mesh);
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
   using PolyDataType = FilterType::PolyDataType;
   const PolyDataType * polyData = filter->GetOutput();
 
   const auto * cellData = polyData->GetCellData();
-  ITK_TEST_EXPECT_TRUE(cellData != nullptr);
-  ITK_TEST_EXPECT_EQUAL(cellData->Size(), 3);
+  ASSERT_NE(cellData, nullptr);
+  ASSERT_EQ(cellData->Size(), 3u);
 
   // Output order: polyline (cell 1) first, then the two lines (cells 0, 2).
-  ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual<float>(cellData->GetElement(0), 20.0f, 10, 1e-4));
-  ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual<float>(cellData->GetElement(1), 10.0f, 10, 1e-4));
-  ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual<float>(cellData->GetElement(2), 30.0f, 10, 1e-4));
-
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(cellData->GetElement(0), 20.0f, 1e-4);
+  EXPECT_NEAR(cellData->GetElement(1), 10.0f, 1e-4);
+  EXPECT_NEAR(cellData->GetElement(2), 30.0f, 1e-4);
 }
