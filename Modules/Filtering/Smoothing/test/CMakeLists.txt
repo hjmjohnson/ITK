@@ -9,7 +9,6 @@ set(
   itkFFTDiscreteGaussianImageFilterTest.cxx
   itkMeanImageFilterTest.cxx
   itkMedianImageFilterTest.cxx
-  itkRecursiveGaussianImageFilterTest.cxx
   itkRecursiveGaussianScaleSpaceTest1.cxx
   itkSmoothingRecursiveGaussianImageFilterOnImageAdaptorTest.cxx
   itkSmoothingRecursiveGaussianImageFilterOnImageOfVectorTest.cxx
@@ -368,12 +367,6 @@ itk_add_test(
     itkMedianImageFilterTest
 )
 itk_add_test(
-  NAME itkRecursiveGaussianImageFilterTest
-  COMMAND
-    ITKSmoothingTestDriver
-    itkRecursiveGaussianImageFilterTest
-)
-itk_add_test(
   NAME itkRecursiveGaussianScaleSpaceTest1
   COMMAND
     ITKSmoothingTestDriver
@@ -385,6 +378,7 @@ set(
   itkBoxSigmaImageFilterGTest.cxx
   itkMeanImageFilterGTest.cxx
   itkMedianImageFilterGTest.cxx
+  itkRecursiveGaussianImageFilterGTest.cxx
   itkRecursiveGaussianImageFilterOnTensorsGTest.cxx
   itkRecursiveGaussianImageFilterOnVectorImageGTest.cxx
 )
