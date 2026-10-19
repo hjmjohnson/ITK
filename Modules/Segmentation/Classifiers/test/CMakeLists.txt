@@ -7,7 +7,6 @@ set(
   itkScalarImageKmeansImageFilter3DTest.cxx
   itkScalarImageKmeansImageFilterTest.cxx
   itkScalarImageKmeansImageFilterTest.cxx
-  itkSupervisedImageClassifierTest.cxx
 )
 
 createtestdriver(ITKClassifiers "${ITKClassifiers-Test_LIBRARIES}" "${ITKClassifiersTests}")
@@ -65,12 +64,6 @@ itk_add_test(
     DATA{${ITK_DATA_ROOT}/Input/Statistics/TwoDimensionTwoGaussianTesting.dat}
 )
 itk_add_test(
-  NAME itkSupervisedImageClassifierTest
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSupervisedImageClassifierTest
-)
-itk_add_test(
   NAME itkScalarImageKmeansImageFilterTest
   COMMAND
     ITKClassifiersTestDriver
@@ -115,6 +108,7 @@ set(
   itkSampleClassifierFilterGTest5.cxx
   itkSampleClassifierFilterGTest6.cxx
   itkScalarImageKmeansImageFilterGTest.cxx
+  itkSupervisedImageClassifierGTest.cxx
 )
 
 creategoogletestdriver(ITKClassifiers "${ITKClassifiers-Test_LIBRARIES}" "${ITKClassifiersGTests}")
