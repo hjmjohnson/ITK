@@ -16,12 +16,12 @@
  *
  *=========================================================================*/
 
+#include "itkCenteredEuler3DTransform.h"
+#include "itkGTest.h"
+
 #include <iostream>
 
-#include "itkCenteredEuler3DTransform.h"
-
-int
-itkCenteredEuler3DTransformTest(int, char *[])
+TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
 {
 
   std::cout << "==================================" << std::endl;
@@ -39,11 +39,9 @@ itkCenteredEuler3DTransformTest(int, char *[])
   eulerTransform->SetIdentity();
 
   EulerTransformType::OffsetType offset = eulerTransform->GetOffset();
-  if (offset[0] != 0.0 || offset[1] != 0.0 || offset[2] != 0.0)
-  {
-    std::cout << "[ FAILED ]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(offset[0], 0.0) << "[ FAILED ]";
+  EXPECT_EQ(offset[1], 0.0) << "[ FAILED ]";
+  EXPECT_EQ(offset[2], 0.0) << "[ FAILED ]";
 
   std::cout << "[ PASSED ]" << std::endl;
 
@@ -115,13 +113,9 @@ itkCenteredEuler3DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error rotating point   : " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -147,13 +141,9 @@ itkCenteredEuler3DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error translating point: " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -173,12 +163,12 @@ itkCenteredEuler3DTransformTest(int, char *[])
   eulerTransform->SetParameters(parameters);
   EulerTransformType::ParametersType parameters_result = eulerTransform->GetParameters();
 
-  if (parameters_result[0] != 0.0 || parameters_result[1] != 1.0 || parameters_result[2] != 2.0 ||
-      parameters_result[6] != 3.0 || parameters_result[7] != 4.0 || parameters_result[8] != 5.0)
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(parameters_result[0], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(parameters_result[1], 1.0) << " [ FAILED ] ";
+  EXPECT_EQ(parameters_result[2], 2.0) << " [ FAILED ] ";
+  EXPECT_EQ(parameters_result[6], 3.0) << " [ FAILED ] ";
+  EXPECT_EQ(parameters_result[7], 4.0) << " [ FAILED ] ";
+  EXPECT_EQ(parameters_result[8], 5.0) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
 
   // Testing Jacobian
@@ -191,15 +181,24 @@ itkCenteredEuler3DTransformTest(int, char *[])
   EulerTransformType::JacobianType jacobian;
   eulerTransform->ComputeJacobianWithRespectToParameters(pInit, jacobian);
 
-  if (jacobian[0][0] != 0.0 || jacobian[0][1] != 0.0 || jacobian[0][2] != 0.0 || jacobian[0][3] != 1.0 ||
-      jacobian[0][4] != 0.0 || jacobian[0][5] != 0.0 || jacobian[1][0] != 0.0 || jacobian[1][1] != 0.0 ||
-      jacobian[1][2] != 0.0 || jacobian[1][3] != 0.0 || jacobian[1][4] != 1.0 || jacobian[1][5] != 0.0 ||
-      jacobian[2][0] != 0.0 || jacobian[2][1] != 0.0 || jacobian[2][2] != 0.0 || jacobian[2][3] != 0.0 ||
-      jacobian[2][4] != 0.0 || jacobian[2][5] != 1.0)
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(jacobian[0][0], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[0][1], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[0][2], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[0][3], 1.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[0][4], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[0][5], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][0], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][1], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][2], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][3], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][4], 1.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][5], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[2][0], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[2][1], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[2][2], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[2][3], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[2][4], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[2][5], 1.0) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
 
   // Really test the Jacobian
@@ -271,14 +270,11 @@ itkCenteredEuler3DTransformTest(int, char *[])
           const double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
           const double computedDerivative = jacobian[j][k];
           approxJacobian[j][k] = approxDerivative;
-          if (itk::Math::Absolute(approxDerivative - computedDerivative) > 1e-5)
-          {
-            std::cerr << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl;
-            std::cerr << "Result should be: " << approxDerivative << std::endl;
-            std::cerr << "Reported result is: " << computedDerivative << std::endl;
-            std::cerr << " [ FAILED ] " << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_LE(itk::Math::Absolute(approxDerivative - computedDerivative), 1e-5)
+            << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl
+            << "Result should be: " << approxDerivative << std::endl
+            << "Reported result is: " << computedDerivative << std::endl
+            << " [ FAILED ] ";
         }
       }
     }
@@ -295,13 +291,9 @@ itkCenteredEuler3DTransformTest(int, char *[])
   auto t2 = EulerTransformType::New();
   t2->SetIdentity();
   t2->Compose(eulerTransform);
-  if ((itk::Math::Absolute(t2->GetParameters()[0] - 0.2) > 0.0001) ||
-      (itk::Math::Absolute(t2->GetParameters()[1] - 0.1) > 0.0001) ||
-      (itk::Math::Absolute(t2->GetParameters()[2] - 0.3) > 0.0001))
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[0] - 0.2), 0.0001) << " [ FAILED ] ";
+  EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[1] - 0.1), 0.0001) << " [ FAILED ] ";
+  EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[2] - 0.3), 0.0001) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
 
   std::cout << "Testing Angle from matrix (ZYX) : ";
@@ -313,24 +305,16 @@ itkCenteredEuler3DTransformTest(int, char *[])
   t2->SetComputeZYX(true);
   t2->Compose(eulerTransform);
 
-  if ((itk::Math::Absolute(t2->GetParameters()[0] - 0.2) > 0.0001) ||
-      (itk::Math::Absolute(t2->GetParameters()[1] - 0.1) > 0.0001) ||
-      (itk::Math::Absolute(t2->GetParameters()[2] - 0.3) > 0.0001))
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[0] - 0.2), 0.0001) << " [ FAILED ] ";
+  EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[1] - 0.1), 0.0001) << " [ FAILED ] ";
+  EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[2] - 0.3), 0.0001) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
 
   auto t3 = EulerTransformType::New();
   t2->GetInverse(t3);
 
   t3 = dynamic_cast<EulerTransformType *>(t2->GetInverseTransform().GetPointer());
-  if (!t3)
-  {
-    std::cout << "Cannot compute inverse transformation" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(t3, nullptr) << "Cannot compute inverse transformation";
 
   std::cout << "Testing offset updating after changing angle order (ZYX) : ";
   const double dtr = (std::atan(1.0) * 4.0) / 180.0; // cast angles from degrees to radians
@@ -374,12 +358,6 @@ itkCenteredEuler3DTransformTest(int, char *[])
   computeError = std::sqrt(computeError);
 
   constexpr double errorTolerance{ 0.001 };
-  if (computeError > errorTolerance)
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(computeError, errorTolerance) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
-
-  return EXIT_SUCCESS;
 }
