@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageGradientTests
-  itkDifferenceOfGaussiansGradientTest.cxx
   itkGradientImageFilterTest.cxx
   itkGradientImageFilterTest2.cxx
   itkGradientMagnitudeImageFilterTest.cxx
@@ -203,12 +202,9 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkGradientRecursiveGaussianFilterTest4.mha
 )
 
-itk_add_test(
-  NAME itkDifferenceOfGaussiansGradientTest
-  COMMAND
-    ITKImageGradientTestDriver
-    itkDifferenceOfGaussiansGradientTest
+set(
+  ITKImageGradientGTests
+  itkDifferenceOfGaussiansGradientGTest.cxx
+  itkGradientImageFilterGTest.cxx
 )
-
-set(ITKImageGradientGTests itkGradientImageFilterGTest.cxx)
 creategoogletestdriver(ITKImageGradient "${ITKImageGradient-Test_LIBRARIES}" "${ITKImageGradientGTests}")
