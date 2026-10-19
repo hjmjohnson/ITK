@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageGridTests
-  itkBasicArchitectureTest.cxx
   itkBinShrinkImageFilterTest1.cxx
   itkBinShrinkImageFilterTest2.cxx
   itkBSplineControlPointImageFilterTest.cxx
@@ -77,12 +76,6 @@ if(NOT ITK_FUTURE_LEGACY_REMOVE)
   )
 endif()
 
-itk_add_test(
-  NAME itkBasicArchitectureTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkBasicArchitectureTest
-)
 itk_add_test(
   NAME itkBinShrinkImageFilterTest1
   COMMAND
@@ -739,6 +732,7 @@ itk_add_test(
 
 set(
   ITKImageGridGTests
+  itkBasicArchitectureGTest.cxx
   itkBSplineControlPointImageFunctionGTest.cxx
   itkChangeInformationImageFilterGTest.cxx
   itkWarpImageFilterGTest.cxx
