@@ -22,7 +22,7 @@
 
 #include "itkImagePCADecompositionCalculator.h"
 #include "itkImageBufferRange.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <algorithm> // For copy.
 #include <iterator>
@@ -30,6 +30,8 @@
 // class to support progress feedback
 
 
+namespace
+{
 class ShowProgressObject
 {
 public:
@@ -41,10 +43,10 @@ public:
   }
   itk::LightProcessObject::Pointer m_Process;
 };
+} // namespace
 
 
-int
-itkImagePCADecompositionCalculatorTest(int, char *[])
+TEST(ImagePCADecompositionCalculator, ConvertedLegacyTest)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -266,7 +268,7 @@ itkImagePCADecompositionCalculatorTest(int, char *[])
 
   auto decomposer = ImagePCAShapeModelEstimatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(decomposer, ImagePCADecompositionCalculator, Object);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(decomposer, ImagePCADecompositionCalculator, Object);
 
 
   //----------------------------------------------------------------------
@@ -278,15 +280,15 @@ itkImagePCADecompositionCalculatorTest(int, char *[])
 
   ImagePCAShapeModelEstimatorType::BasisImagePointerVector basisObtained = decomposer->GetBasisImages();
 
-  ITK_TEST_EXPECT_EQUAL(basis.size(), basisObtained.size());
+  EXPECT_EQ(basis.size(), basisObtained.size());
   for (size_t i = 0; i < basis.size(); ++i)
   {
-    ITK_TEST_EXPECT_EQUAL(basis[i], basisObtained[i]);
+    EXPECT_EQ(basis[i], basisObtained[i]);
   }
 
   // compute some projections!
   decomposer->SetImage(image3);
-  ITK_TEST_SET_GET_VALUE(image3, decomposer->GetImage());
+  EXPECT_EQ(image3, decomposer->GetImage());
 
   decomposer->Compute();
   ImagePCAShapeModelEstimatorType::BasisVectorType proj3 = decomposer->GetProjection();
@@ -316,7 +318,7 @@ itkImagePCADecompositionCalculatorTest(int, char *[])
 
   // now test it with a mean image set
   decomposer->SetMeanImage(image8);
-  ITK_TEST_SET_GET_VALUE(image8, decomposer->GetMeanImage());
+  EXPECT_EQ(image8, decomposer->GetMeanImage());
 
   decomposer->SetImage(image3);
   decomposer->Compute();
@@ -381,13 +383,14 @@ itkImagePCADecompositionCalculatorTest(int, char *[])
 
   // Test for the eigen values for the test case precomputed using Matlab
   std::cout << "" << std::endl;
-  if (proj3[0] < -1.54 && proj3[0] > -1.55 && proj4[1] < -2.31 && proj4[1] > -2.32 && proj3_2[1] < -1.414 &&
-      proj3_2[1] > -1.415 && proj4_2[2] < 3.01 && proj4_2[2] > 2.99 && proj3_3 == proj3_2 && proj4_3 == proj4_2)
-  {
-    std::cerr << "Test Passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-  std::cerr << "Test failed" << std::endl;
-  std::cerr << "The project is out of the range of Matlab precomputed values" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_LT(proj3[0], -1.54);
+  EXPECT_GT(proj3[0], -1.55);
+  EXPECT_LT(proj4[1], -2.31);
+  EXPECT_GT(proj4[1], -2.32);
+  EXPECT_LT(proj3_2[1], -1.414);
+  EXPECT_GT(proj3_2[1], -1.415);
+  EXPECT_LT(proj4_2[2], 3.01);
+  EXPECT_GT(proj4_2[2], 2.99);
+  EXPECT_EQ(proj3_3, proj3_2);
+  EXPECT_EQ(proj4_3, proj4_2);
 }
