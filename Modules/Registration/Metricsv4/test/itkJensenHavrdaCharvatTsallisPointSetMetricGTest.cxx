@@ -18,12 +18,14 @@
 
 #include "itkJensenHavrdaCharvatTsallisPointSetToPointSetMetricv4.h"
 #include "itkTranslationTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkMakeFilled.h"
 #include <fstream>
 
+namespace
+{
 template <unsigned int Dimension>
-[[nodiscard]] int
+void
 itkJensenHavrdaCharvatTsallisPointSetMetricTestRun()
 {
   using PointSetType = itk::PointSet<unsigned char, Dimension>;
@@ -99,28 +101,28 @@ itkJensenHavrdaCharvatTsallisPointSetMetricTestRun()
     using PointSetMetricType = itk::JensenHavrdaCharvatTsallisPointSetToPointSetMetricv4<PointSetType>;
     auto metric = PointSetMetricType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
       metric, JensenHavrdaCharvatTsallisPointSetToPointSetMetricv4, PointSetToPointSetMetricv4);
 
 
     metric->SetAlpha(alphaValues[i]);
-    ITK_TEST_SET_GET_VALUE(alphaValues[i], metric->GetAlpha());
+    EXPECT_EQ(alphaValues[i], metric->GetAlpha());
 
     const typename PointSetMetricType::RealType pointSetSigma = 1.0;
     metric->SetPointSetSigma(pointSetSigma);
-    ITK_TEST_SET_GET_VALUE(pointSetSigma, metric->GetPointSetSigma());
+    EXPECT_EQ(pointSetSigma, metric->GetPointSetSigma());
 
     metric->SetEvaluationKNeighborhood(evaluationKNeighborhood);
-    ITK_TEST_SET_GET_VALUE(evaluationKNeighborhood, metric->GetEvaluationKNeighborhood());
+    EXPECT_EQ(evaluationKNeighborhood, metric->GetEvaluationKNeighborhood());
 
-    ITK_TEST_SET_GET_BOOLEAN(metric, UseAnisotropicCovariances, useAnisotropicCovariances);
+    ITK_GTEST_SET_GET_BOOLEAN(metric, UseAnisotropicCovariances, useAnisotropicCovariances);
 
     metric->SetCovarianceKNeighborhood(covarianceKNeighborhood);
-    ITK_TEST_SET_GET_VALUE(covarianceKNeighborhood, metric->GetCovarianceKNeighborhood());
+    EXPECT_EQ(covarianceKNeighborhood, metric->GetCovarianceKNeighborhood());
 
     const typename PointSetMetricType::RealType kernelSigma = 10.0;
     metric->SetKernelSigma(kernelSigma);
-    ITK_TEST_SET_GET_VALUE(kernelSigma, metric->GetKernelSigma());
+    EXPECT_EQ(kernelSigma, metric->GetKernelSigma());
 
     metric->SetFixedPointSet(fixedPoints);
     metric->SetMovingPointSet(movingPoints);
@@ -143,11 +145,8 @@ itkJensenHavrdaCharvatTsallisPointSetMetricTestRun()
 
     for (unsigned int d = 0; d < metric->GetNumberOfParameters(); ++d)
     {
-      if (itk::Math::Absolute(derivative[d] - normalizedOffset[d]) / normalizedOffset[d] > 0.01)
-      {
-        std::cerr << "derivative does not match expected normalized offset of " << offset << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(derivative[d] - normalizedOffset[d]) / normalizedOffset[d], 0.01)
+        << "derivative does not match expected normalized offset of " << offset;
     }
 
     if constexpr (Dimension == 2)
@@ -222,26 +221,12 @@ itkJensenHavrdaCharvatTsallisPointSetMetricTestRun()
     moving_str1 << "0 0 0 0" << std::endl;
     moving_str2 << "0 0 0 0" << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkJensenHavrdaCharvatTsallisPointSetMetricTest(int, char *[])
+TEST(JensenHavrdaCharvatTsallisPointSetMetric, ConvertedLegacyTest)
 {
-  int result = EXIT_SUCCESS;
+  itkJensenHavrdaCharvatTsallisPointSetMetricTestRun<2>();
 
-  if (itkJensenHavrdaCharvatTsallisPointSetMetricTestRun<2>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 2." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  if (itkJensenHavrdaCharvatTsallisPointSetMetricTestRun<3>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 3." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  return result;
+  itkJensenHavrdaCharvatTsallisPointSetMetricTestRun<3>();
 }
