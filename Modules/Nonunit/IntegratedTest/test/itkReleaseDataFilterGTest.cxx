@@ -24,9 +24,9 @@
 #include "itkStreamingImageFilter.h"
 
 #include "itkPipelineMonitorImageFilter.h"
+#include "itkGTest.h"
 
-int
-itkReleaseDataFilterTest(int, char *[])
+TEST(ReleaseDataFilter, ConvertedLegacyTest)
 {
   // Comment the following if you want to use the itk text output window
   itk::OutputWindow::SetInstance(itk::TextOutput::New());
@@ -110,15 +110,10 @@ itkReleaseDataFilterTest(int, char *[])
     std::cout << "Monitor1:\n" << monitor1 << std::endl;
     std::cout << "Monitor2a:\n" << monitor2a << std::endl;
     std::cout << "Monitor2b:\n" << monitor2b << std::endl;
-    std::cout << "Monitor's VerifyAllInputCanStream failed!" << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << "Monitor's VerifyAllInputCanStream failed!";
   }
-  if (random->GetOutput()->GetBufferedRegion().GetSize() != zeroSize ||
-      monitor1->GetOutput()->GetBufferedRegion().GetSize() != zeroSize)
-  {
-    std::cout << "Random's output was not release!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(random->GetOutput()->GetBufferedRegion().GetSize(), zeroSize) << "Random's output was not release!";
+  EXPECT_EQ(monitor1->GetOutput()->GetBufferedRegion().GetSize(), zeroSize) << "Random's output was not release!";
 
 
   // no updates should happen
@@ -129,14 +124,9 @@ itkReleaseDataFilterTest(int, char *[])
     std::cout << "monitor1:\n" << monitor1 << std::endl;
     std::cout << "monitor2a:\n" << monitor2a << std::endl;
     std::cout << "Monitor2b:\n" << monitor2b << std::endl;
-    std::cout << "Monitor's VerifyAllNoUpdate failed!" << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << "Monitor's VerifyAllNoUpdate failed!";
   }
-  if (random->GetOutput()->GetBufferedRegion().GetSize() != zeroSize)
-  {
-    std::cout << "Random's output was not release!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(random->GetOutput()->GetBufferedRegion().GetSize(), zeroSize) << "Random's output was not release!";
   monitor2a->ClearPipelineSavedInformation();
 
 
@@ -148,17 +138,12 @@ itkReleaseDataFilterTest(int, char *[])
     std::cout << "monitor1:\n" << monitor1 << std::endl;
     std::cout << "monitor2a:\n" << monitor2a << std::endl;
     std::cout << "Monitor2b:\n" << monitor2b << std::endl;
-    std::cout << "Monitor's VerifyAllNoUpdate failed!" << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << "Monitor's VerifyAllNoUpdate failed!";
   }
-  if (random->GetOutput()->GetBufferedRegion().GetSize() != zeroSize ||
-      shiftscale->GetOutput()->GetBufferedRegion().GetSize() != zeroSize ||
-      shrinker->GetOutput()->GetBufferedRegion().GetSize() != zeroSize)
-  {
-    std::cout << "random or shiftscale or shrink's output was not release!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(random->GetOutput()->GetBufferedRegion().GetSize(), zeroSize)
+    << "random or shiftscale or shrink's output was not release!";
+  EXPECT_EQ(shiftscale->GetOutput()->GetBufferedRegion().GetSize(), zeroSize)
+    << "random or shiftscale or shrink's output was not release!";
+  EXPECT_EQ(shrinker->GetOutput()->GetBufferedRegion().GetSize(), zeroSize)
+    << "random or shiftscale or shrink's output was not release!";
 }
