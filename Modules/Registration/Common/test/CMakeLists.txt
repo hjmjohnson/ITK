@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
-  itkBSplineExponentialDiffeomorphicTransformParametersAdaptorTest.cxx
   itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest.cxx
   itkBSplineTransformParametersAdaptorTest.cxx
   itkCenteredTransformInitializerTest.cxx
@@ -88,12 +87,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkGaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest
-)
-itk_add_test(
-  NAME itkBSplineExponentialDiffeomorphicTransformParametersAdaptorTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkBSplineExponentialDiffeomorphicTransformParametersAdaptorTest
 )
 itk_add_test(
   NAME itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest
@@ -508,6 +501,7 @@ itk_add_test(
 
 set(
   ITKRegistrationGTests
+  itkBSplineExponentialDiffeomorphicTransformParametersAdaptorGTest.cxx
   itkGradientDifferenceImageToImageMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
