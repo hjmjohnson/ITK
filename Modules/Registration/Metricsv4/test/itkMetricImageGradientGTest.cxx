@@ -18,7 +18,7 @@
 #include "itkImage.h"
 #include "itkMath.h"
 #include "itkIntTypes.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkCentralDifferenceImageFunction.h"
 #include "itkResampleImageFilter.h"
 #include "itkAffineTransform.h"
@@ -49,6 +49,8 @@
  *  TransformAndEvaluateMovingPoint
  *
  */
+namespace
+{
 template <unsigned int ImageDimensionality, typename TTransform>
 double
 itkMetricImageGradientTestRunTest(unsigned int                 imageSize,
@@ -57,8 +59,6 @@ itkMetricImageGradientTestRunTest(unsigned int                 imageSize,
                                   bool                         verbose,
                                   std::string &                outputPath);
 
-namespace itk
-{
 /*
  * \class VanillaImageToImageMetricv4GetValueAndDerivativeThreader
  * \brief A vanilla class of metric thread, required to implement the virtual base class
@@ -66,17 +66,17 @@ namespace itk
 
 template <typename TDomainPartitioner, typename TImageToImageMetric>
 class VanillaImageToImageMetricv4GetValueAndDerivativeThreader
-  : public ImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric>
+  : public itk::ImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(VanillaImageToImageMetricv4GetValueAndDerivativeThreader);
 
   /** Standard class type aliases. */
   using Self = VanillaImageToImageMetricv4GetValueAndDerivativeThreader;
-  using Superclass = ImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric>;
+  using Superclass = itk::ImageToImageMetricv4GetValueAndDerivativeThreader<TDomainPartitioner, TImageToImageMetric>;
 
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   itkOverrideGetNameOfClassMacro(VanillaImageToImageMetricv4GetValueAndDerivativeThreader);
 
@@ -115,7 +115,7 @@ protected:
                const MovingImageGradientType & itkNotUsed(mappedMovingImageGradient),
                MeasureType &                   itkNotUsed(metricValueReturn),
                DerivativeType &                itkNotUsed(localDerivativeReturn),
-               const ThreadIdType              itkNotUsed(threadId)) const override
+               const itk::ThreadIdType         itkNotUsed(threadId)) const override
   {
     return false;
   }
@@ -127,17 +127,17 @@ protected:
  * access the protected methods by adding friend class.
  */
 template <typename TFixedImage, typename TMovingImage, typename TVirtualImage = TFixedImage>
-class VanillaImageToImageMetricv4 : public ImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage>
+class VanillaImageToImageMetricv4 : public itk::ImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(VanillaImageToImageMetricv4);
 
   /** Standard class type aliases. */
   using Self = VanillaImageToImageMetricv4;
-  using Superclass = ImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage>;
+  using Superclass = itk::ImageToImageMetricv4<TFixedImage, TMovingImage, TVirtualImage>;
 
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** Method for creation through the object factory. */
   itkNewMacro(Self);
@@ -180,7 +180,8 @@ protected:
 
   // template <unsigned int VVirtualImageDimension, typename TMovingTransformType>
   // template <>
-  friend double ::itkMetricImageGradientTestRunTest<VirtualImageDimension, MovingTransformType>(
+  friend double
+  itkMetricImageGradientTestRunTest<VirtualImageDimension, MovingTransformType>(
     unsigned int                          imageSize,
     typename MovingTransformType::Pointer transform,
     double                                rotation,
@@ -188,14 +189,13 @@ protected:
     std::string &                         outputPath);
 
   using VanillaDenseGetValueAndDerivativeThreaderType = VanillaImageToImageMetricv4GetValueAndDerivativeThreader<
-    ThreadedImageRegionPartitioner<Superclass::VirtualImageDimension>,
+    itk::ThreadedImageRegionPartitioner<Superclass::VirtualImageDimension>,
     Superclass>;
 
   using VanillaSparseGetValueAndDerivativeThreaderType =
-    VanillaImageToImageMetricv4GetValueAndDerivativeThreader<ThreadedIndexedContainerPartitioner, Superclass>;
+    VanillaImageToImageMetricv4GetValueAndDerivativeThreader<itk::ThreadedIndexedContainerPartitioner, Superclass>;
 };
 
-} // namespace itk
 
 template <unsigned int ImageDimensionality, typename TTransform>
 double
@@ -286,7 +286,7 @@ itkMetricImageGradientTestRunTest(unsigned int                 imageSize,
   image->TransformIndexToPhysicalPoint(virtualIndex, virtualPoint);
   const typename ImageType::PointType mappedPoint = movingTransform->TransformPoint(virtualPoint);
 
-  using MetricType = itk::VanillaImageToImageMetricv4<ImageType, ImageType>;
+  using MetricType = VanillaImageToImageMetricv4<ImageType, ImageType>;
 
   // Dm: ground truth
   typename MetricType::MovingImageGradientType mappedMovingImageGradientGroundtruth;
@@ -361,10 +361,10 @@ itkMetricImageGradientTestRunTest(unsigned int                 imageSize,
   }
   return sumc / 2.0; // correlation;
 }
+} // namespace
 
 //////////////////////////////////////////////////////
-int
-itkMetricImageGradientTest(int argc, char * argv[])
+TEST(MetricImageGradient, ConvertedLegacyTest)
 {
   using DimensionSizeType = unsigned int;
   constexpr DimensionSizeType imageSize{ 60 };
@@ -375,13 +375,6 @@ itkMetricImageGradientTest(int argc, char * argv[])
   constexpr double            degreeStep{ 15.0 }; //(3.0);
 
   std::string outputPath("");
-  if (argc >= 2)
-  {
-    const std::string path(argv[1]);
-    outputPath = path;
-  }
-  const std::string commandName(argv[0]);
-  outputPath += commandName;
   std::cout << outputPath << std::endl;
 
   for (dimensionality = 2; dimensionality <= 3; ++dimensionality)
@@ -410,7 +403,7 @@ itkMetricImageGradientTest(int argc, char * argv[])
 
         using ImageType = itk::Image<double, 2>;
 
-        using MetricType = itk::VanillaImageToImageMetricv4<ImageType, ImageType>;
+        using MetricType = VanillaImageToImageMetricv4<ImageType, ImageType>;
 
         average = itkMetricImageGradientTestRunTest<2, MetricType::MovingTransformType>(
           imageSize, MetricType::MovingTransformType::Pointer(transform), rotationDegrees, false, outputPath);
@@ -440,7 +433,7 @@ itkMetricImageGradientTest(int argc, char * argv[])
 
         using ImageType = itk::Image<double, 3>;
 
-        using MetricType = itk::VanillaImageToImageMetricv4<ImageType, ImageType>;
+        using MetricType = VanillaImageToImageMetricv4<ImageType, ImageType>;
 
         average = itkMetricImageGradientTestRunTest<3, MetricType::MovingTransformType>(
           imageSize, MetricType::MovingTransformType::Pointer(transform), rotationDegrees, false, outputPath);
@@ -455,12 +448,6 @@ itkMetricImageGradientTest(int argc, char * argv[])
 
     std::cout << "minimumAverage: " << minimumAverage << std::endl;
     constexpr double threshold{ 0.96 };
-    if (minimumAverage < threshold)
-    {
-      std::cerr << "Minimum average of all runs is below threshold of " << threshold << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_GE(minimumAverage, threshold) << "Minimum average of all runs is below threshold of " << threshold;
   }
-
-  return EXIT_SUCCESS;
 }
