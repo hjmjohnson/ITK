@@ -19,7 +19,6 @@ set(
   itkPromoteDimensionImageTest.cxx
   itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
   itkRGBToVectorAdaptImageFilterTest.cxx
-  itkSinImageFilterAndAdaptorTest.cxx
   itkSqrtImageFilterAndAdaptorTest.cxx
   itkSubtractImageFilterTest.cxx
   itkSymmetricEigenAnalysisImageFilterTest.cxx
@@ -344,12 +343,6 @@ itk_add_test(
     itkVectorToRGBImageAdaptorTest
 )
 itk_add_test(
-  NAME itkSinImageFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkSinImageFilterAndAdaptorTest
-)
-itk_add_test(
   NAME itkPolylineMask2DImageFilterTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -578,6 +571,7 @@ set(
   itkRoundImageFilterGTest.cxx
   itkShiftScaleImageFilterGTest.cxx
   itkSigmoidImageFilterGTest.cxx
+  itkSinImageFilterAndAdaptorGTest.cxx
   itkSquareImageFilterGTest.cxx
 )
 
