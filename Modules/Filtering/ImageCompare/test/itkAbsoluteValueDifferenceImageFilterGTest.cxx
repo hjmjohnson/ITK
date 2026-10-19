@@ -18,11 +18,10 @@
 
 #include "itkAbsoluteValueDifferenceImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkAbsoluteValueDifferenceImageFilterTest(int, char *[])
+TEST(AbsoluteValueDifferenceImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -103,7 +102,7 @@ itkAbsoluteValueDifferenceImageFilterTest(int, char *[])
   // Create the filter
   auto filter = myFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, AbsoluteValueDifferenceImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, AbsoluteValueDifferenceImageFilter, BinaryGeneratorImageFilter);
 
 
   // Connect the input images
@@ -125,18 +124,11 @@ itkAbsoluteValueDifferenceImageFilterTest(int, char *[])
   while (!it4.IsAtEnd())
   {
     std::cout << it4.Get() << std::endl;
-    if (itk::Math::Absolute(it4.Get() - outputValue) > epsilon)
-    {
-      std::cerr << "Error in the output" << std::endl;
-      std::cerr << "Value should be  " << outputValue << std::endl;
-      std::cerr << "but is           " << it4.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(it4.Get(), outputValue, epsilon);
 
     ++it4;
   }
 
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }

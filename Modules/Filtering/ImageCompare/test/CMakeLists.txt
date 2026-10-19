@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageCompareTests
-  itkAbsoluteValueDifferenceImageFilterTest.cxx
   itkCheckerBoardImageFilterTest.cxx
   itkConstrainedValueDifferenceImageFilterTest.cxx
   itkImageFileReaderIOToRequestedRegionMismatchTest.cxx
@@ -13,15 +12,13 @@ set(
 
 createtestdriver(ITKImageCompare "${ITKImageCompare-Test_LIBRARIES}" "${ITKImageCompareTests}")
 
-set(ITKImageCompareGTests itkSTAPLEImageFilterGTest.cxx)
+set(
+  ITKImageCompareGTests
+  itkAbsoluteValueDifferenceImageFilterGTest.cxx
+  itkSTAPLEImageFilterGTest.cxx
+)
 creategoogletestdriver(ITKImageCompare "${ITKImageCompare-Test_LIBRARIES}" "${ITKImageCompareGTests}")
 
-itk_add_test(
-  NAME itkAbsoluteValueDifferenceImageFilterTest
-  COMMAND
-    ITKImageCompareTestDriver
-    itkAbsoluteValueDifferenceImageFilterTest
-)
 itk_add_test(
   NAME itkSquaredDifferenceImageFilterTest
   COMMAND
