@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkSampleTest4.cxx
   itkSampleToHistogramFilterTest.cxx
   itkSampleToHistogramFilterTest2.cxx
   itkSampleToHistogramFilterTest3.cxx
@@ -506,12 +505,6 @@ itk_add_test(
     100
 )
 itk_add_test(
-  NAME itkSampleTest4
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleTest4
-)
-itk_add_test(
   NAME itkSampleToHistogramFilterTest
   COMMAND
     ITKStatisticsTestDriver
@@ -744,6 +737,7 @@ set(
   itkSampleGTest.cxx
   itkSampleGTest2.cxx
   itkSampleGTest3.cxx
+  itkSampleGTest4.cxx
   itkSampleToHistogramFilterExceptionsGTest.cxx
   itkStatisticsTypesGTest.cxx
   itkTDistributionGTest.cxx
