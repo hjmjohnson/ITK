@@ -21,9 +21,9 @@
 #include "itkMeanSquaresHistogramImageToImageMetric.h"
 #include "itkTranslationTransform.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-int
-itkHistogramImageToImageMetricTest(int, char *[])
+TEST(HistogramImageToImageMetric, ConvertedLegacyTest)
 {
   // Create two simple images.
   constexpr unsigned int ImageDimension{ 2 };
@@ -134,32 +134,16 @@ itkHistogramImageToImageMetricTest(int, char *[])
     metric->SetPaddingValue(-1);
     metric->SetUsePaddingValue(true);
 
-    if (itk::Math::NotExactlyEquals(metric->GetPaddingValue(), -1))
-    {
-      std::cerr << "Incorrect padding value." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(metric->GetPaddingValue(), -1) << "Incorrect padding value.";
 
     // Check to make sure the returned histogram size is the same as histSize.
-    if (histSize != metric->GetHistogramSize())
-    {
-      std::cout << "Incorrect histogram size." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(histSize, metric->GetHistogramSize()) << "Incorrect histogram size.";
 
     // Check GetDerivativeStepLength().
-    if (itk::Math::NotExactlyEquals(metric->GetDerivativeStepLength(), STEP_LENGTH))
-    {
-      std::cout << "Incorrect derivative step length." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(metric->GetDerivativeStepLength(), STEP_LENGTH) << "Incorrect derivative step length.";
 
     // Check GetDerivativeStepLengthScales().
-    if (metric->GetDerivativeStepLengthScales() != scales)
-    {
-      std::cout << "Incorrect scales." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(metric->GetDerivativeStepLengthScales(), scales) << "Incorrect scales.";
 
     // Do some work
     DerivativeType          derivatives(numberOfParameters);
@@ -178,14 +162,10 @@ itkHistogramImageToImageMetricTest(int, char *[])
 
     // Exercise Print() method.
     metric->Print(std::cout);
-
-    std::cout << "Test passed." << std::endl;
   }
   catch (const itk::ExceptionObject & ex)
   {
-    std::cerr << "Exception caught!" << std::endl;
-    std::cerr << ex << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << "Exception caught!" << std::endl << ex;
   }
 
 
@@ -204,31 +184,21 @@ itkHistogramImageToImageMetricTest(int, char *[])
 
     // Exercise Print() method.
     metric->Print(std::cout);
-
-    std::cout << "Test passed." << std::endl;
   }
   catch (const itk::ExceptionObject & ex)
   {
-    std::cerr << "Exception caught!" << std::endl;
-    std::cerr << ex << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << "Exception caught!" << std::endl << ex;
   }
 
   // Force an exception
-  try
-  {
-    const ParametersType parameters2(2);
-    DerivativeType       derivatives2(2);
-    const ScalesType     badScales(1);
-    metric->SetDerivativeStepLengthScales(badScales);
-    metric->Initialize();
-    metric->GetDerivative(parameters2, derivatives2);
-  }
-  catch (const itk::ExceptionObject & ex)
-  {
-    std::cerr << "Expected exception caught!" << std::endl;
-    std::cerr << ex << std::endl;
-    return EXIT_SUCCESS;
-  }
-  return EXIT_FAILURE;
+  EXPECT_THROW(
+    {
+      const ParametersType parameters2(2);
+      DerivativeType       derivatives2(2);
+      const ScalesType     badScales(1);
+      metric->SetDerivativeStepLengthScales(badScales);
+      metric->Initialize();
+      metric->GetDerivative(parameters2, derivatives2);
+    },
+    itk::ExceptionObject);
 }
