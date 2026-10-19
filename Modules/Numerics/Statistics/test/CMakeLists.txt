@@ -14,7 +14,6 @@ set(
   itkListSampleTest.cxx
   itkSampleToHistogramFilterTest5.cxx
   itkScalarImageToHistogramGeneratorTest.cxx
-  itkSubsampleTest2.cxx
   itkSubsampleTest3.cxx
   itkUniformRandomSpatialNeighborSubsamplerTest.cxx
   itkWeightedCentroidKdTreeGeneratorTest1.cxx
@@ -493,12 +492,6 @@ itk_add_test(
     DATA{${ITK_DATA_ROOT}/Input/VisibleWomanEyeSlice.png}
 )
 itk_add_test(
-  NAME itkSubsampleTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSubsampleTest2
-)
-itk_add_test(
   NAME itkSubsampleTest3
   COMMAND
     ITKStatisticsTestDriver
@@ -622,6 +615,7 @@ set(
   itkStatisticsAlgorithmGTest2.cxx
   itkStatisticsTypesGTest.cxx
   itkSubsampleGTest.cxx
+  itkSubsampleGTest2.cxx
   itkTDistributionGTest.cxx
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
   itkVectorContainerToListSampleAdaptorGTest.cxx
