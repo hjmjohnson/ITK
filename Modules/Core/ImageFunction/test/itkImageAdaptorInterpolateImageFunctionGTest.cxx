@@ -23,7 +23,10 @@
 #include "itkRGBPixel.h"
 #include "itkLinearInterpolateImageFunction.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
+namespace
+{
 namespace ImageAdaptorInterpolate
 {
 
@@ -136,13 +139,10 @@ TestContinuousIndex(const InterpolatorType *    interp,
 }
 
 } // namespace ImageAdaptorInterpolate
+} // namespace
 
-int
-itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
+TEST(ImageAdaptorInterpolateImageFunction, ConvertedLegacyTest)
 {
-  int flag = 0;
-
-  std::cout << "Testing image adaptor interpolation: " << std::endl;
 
   using ImageType = ImageAdaptorInterpolate::ImageType;
   using IndexType = ImageAdaptorInterpolate::IndexType;
@@ -224,18 +224,12 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     passed = ImageAdaptorInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position at the image border
   {
@@ -246,18 +240,12 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     passed = ImageAdaptorInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position near image border
   {
@@ -269,18 +257,12 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     passed = ImageAdaptorInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position outside the image
   {
@@ -291,18 +273,12 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     passed = ImageAdaptorInterpolate::TestContinuousIndex(interp, cindex, false, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, false, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // at non-integer position
   {
@@ -313,29 +289,10 @@ itkImageAdaptorInterpolateImageFunctionTest(int, char *[])
     passed = ImageAdaptorInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   adaptor->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = ImageAdaptorInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
-
-
-  /* Return results of test */
-  if (flag != 0)
-  {
-    std::cout << "*** Some test failed" << std::endl;
-    return flag;
-  }
-
-  std::cout << "All tests successfully passed" << std::endl;
-
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed);
 }
