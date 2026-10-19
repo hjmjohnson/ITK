@@ -21,7 +21,7 @@
 #include "itkMeanReciprocalSquareDifferenceImageToImageMetric.h"
 #include "itkLinearInterpolateImageFunction.h"
 #include "itkGradientDescentOptimizer.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  *  This program test one instantiation of the itk::ImageRegistrationMethod class
@@ -29,8 +29,7 @@
  *  Only types are tested in this file.
  */
 
-int
-itkImageRegistrationMethodTest_11(int, char *[])
+TEST(ImageRegistrationMethod, ConvertedLegacyTest11)
 {
 
   constexpr unsigned int dimension{ 3 };
@@ -77,12 +76,12 @@ itkImageRegistrationMethodTest_11(int, char *[])
   //
   // Now verify that all the sets are consistent with the Gets
   //
-  ITK_TEST_SET_GET_VALUE(metric, registration->GetMetric());
-  ITK_TEST_SET_GET_VALUE(optimizer, registration->GetOptimizer());
-  ITK_TEST_SET_GET_VALUE(transform, registration->GetTransform());
-  ITK_TEST_SET_GET_VALUE(fixedImage, registration->GetFixedImage());
-  ITK_TEST_SET_GET_VALUE(movingImage, registration->GetMovingImage());
-  ITK_TEST_SET_GET_VALUE(interpolator, registration->GetInterpolator());
+  EXPECT_EQ(metric, registration->GetMetric());
+  EXPECT_EQ(optimizer, registration->GetOptimizer());
+  EXPECT_EQ(transform, registration->GetTransform());
+  EXPECT_EQ(fixedImage, registration->GetFixedImage());
+  EXPECT_EQ(movingImage, registration->GetMovingImage());
+  EXPECT_EQ(interpolator, registration->GetInterpolator());
 
   //
   // Now verify that they can be changed
@@ -106,12 +105,12 @@ itkImageRegistrationMethodTest_11(int, char *[])
   //
   // Now verify that all the sets are consistent with the Gets
   //
-  ITK_TEST_SET_GET_VALUE(metric2, registration->GetMetric());
-  ITK_TEST_SET_GET_VALUE(optimizer2, registration->GetOptimizer());
-  ITK_TEST_SET_GET_VALUE(transform2, registration->GetTransform());
-  ITK_TEST_SET_GET_VALUE(fixedImage2, registration->GetFixedImage());
-  ITK_TEST_SET_GET_VALUE(movingImage2, registration->GetMovingImage());
-  ITK_TEST_SET_GET_VALUE(interpolator2, registration->GetInterpolator());
+  EXPECT_EQ(metric2, registration->GetMetric());
+  EXPECT_EQ(optimizer2, registration->GetOptimizer());
+  EXPECT_EQ(transform2, registration->GetTransform());
+  EXPECT_EQ(fixedImage2, registration->GetFixedImage());
+  EXPECT_EQ(movingImage2, registration->GetMovingImage());
+  EXPECT_EQ(interpolator2, registration->GetInterpolator());
 
 
   //
@@ -136,14 +135,10 @@ itkImageRegistrationMethodTest_11(int, char *[])
   //
   // Now verify that all the sets are consistent with the Gets
   //
-  ITK_TEST_SET_GET_VALUE(metric3, registration->GetMetric());
-  ITK_TEST_SET_GET_VALUE(optimizer3, registration->GetOptimizer());
-  ITK_TEST_SET_GET_VALUE(transform3, registration->GetTransform());
-  ITK_TEST_SET_GET_VALUE(fixedImage3, registration->GetFixedImage());
-  ITK_TEST_SET_GET_VALUE(movingImage3, registration->GetMovingImage());
-  ITK_TEST_SET_GET_VALUE(interpolator3, registration->GetInterpolator());
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(metric3, registration->GetMetric());
+  EXPECT_EQ(optimizer3, registration->GetOptimizer());
+  EXPECT_EQ(transform3, registration->GetTransform());
+  EXPECT_EQ(fixedImage3, registration->GetFixedImage());
+  EXPECT_EQ(movingImage3, registration->GetMovingImage());
+  EXPECT_EQ(interpolator3, registration->GetInterpolator());
 }
