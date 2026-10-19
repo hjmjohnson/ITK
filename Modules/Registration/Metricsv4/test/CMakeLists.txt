@@ -5,7 +5,6 @@ set(
   itkDemonsImageToImageMetricv4RegistrationTest.cxx
   itkImageToImageMetricv4RegistrationTest.cxx
   itkJointHistogramMutualInformationImageToImageRegistrationTest.cxx
-  itkLabeledPointSetMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricv4RegistrationTest.cxx
   itkMattesMutualInformationImageToImageMetricv4Test.cxx
   itkMeanSquaresImageToImageMetricv4OnVectorTest.cxx
@@ -27,13 +26,6 @@ set(BASELINE_ROOT ${ITK_DATA_ROOT}/Baseline)
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
 createtestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4Tests}")
-
-itk_add_test(
-  NAME itkLabeledPointSetMetricTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkLabeledPointSetMetricTest
-)
 
 itk_add_test(
   NAME itkJointHistogramMutualInformationImageToImageRegistrationTest
@@ -327,6 +319,7 @@ set(
   itkJensenHavrdaCharvatTsallisPointSetMetricGTest.cxx
   itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationGTest.cxx
   itkJointHistogramMutualInformationImageToImageMetricv4GTest.cxx
+  itkLabeledPointSetMetricGTest.cxx
   itkLabeledPointSetMetricRegistrationGTest.cxx
 )
 creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")
