@@ -18,8 +18,10 @@
 
 #include <iostream>
 #include "itkLabelImageToLabelMapFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 void
 zeroSizeCase()
 {
@@ -36,9 +38,9 @@ zeroSizeCase()
   p_filter->SetInput(p_image);
   p_filter->Update();
 }
+} // namespace
 
-int
-itkLabelImageToLabelMapFilterTest(int, char *[])
+TEST(LabelImageToLabelMapFilter, ConvertedLegacyTest)
 {
   constexpr int Dimension{ 2 };
 
@@ -88,19 +90,19 @@ itkLabelImageToLabelMapFilterTest(int, char *[])
 
   auto conversion = LabelImageToLabelMapFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(conversion, LabelImageToLabelMapFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(conversion, LabelImageToLabelMapFilter, ImageToImageFilter);
 
 
   conversion->SetInput(image);
   conversion->SetBackgroundValue(255);
   conversion->Update();
 
-  itkAssertOrThrowMacro((conversion->GetBackgroundValue() == 255), "Error conversion background value.");
+  EXPECT_EQ(conversion->GetBackgroundValue(), 255u) << "Error conversion background value.";
 
   LabelMapType::Pointer map;
   map = conversion->GetOutput();
 
-  itkAssertOrThrowMacro((map->GetBackgroundValue() == 255), "Error in Label Image (background).");
+  EXPECT_EQ(map->GetBackgroundValue(), 255u) << "Error in Label Image (background).";
 
   map->Print(std::cout);
 
@@ -116,34 +118,30 @@ itkLabelImageToLabelMapFilterTest(int, char *[])
       std::cout << "Pixel[" << ctrI << ',' << ctrJ << "]: " << val << std::endl;
       if (((ctrI == 5) || (ctrJ == 5)) && (ctrI != 7) && (ctrJ != 7))
       {
-        itkAssertOrThrowMacro((val == 1), "Error in Label Image (foreground).");
+        EXPECT_EQ(val, 1u) << "Error in Label Image (foreground).";
       }
       else
       {
         if ((ctrI == 7) && (ctrJ == 7))
         {
-          itkAssertOrThrowMacro((val == 3), "Error in Label Image (foreground).");
+          EXPECT_EQ(val, 3u) << "Error in Label Image (foreground).";
           continue;
         }
         if (ctrJ == 7)
         {
-          itkAssertOrThrowMacro((val == 5), "Error in Label Image (foreground).");
+          EXPECT_EQ(val, 5u) << "Error in Label Image (foreground).";
         }
         else if (ctrI == 7)
         {
-          itkAssertOrThrowMacro((val == 2), "Error in Label Image (foreground).");
+          EXPECT_EQ(val, 2u) << "Error in Label Image (foreground).";
         }
         else
         {
-          itkAssertOrThrowMacro((val == 255), "Error in Label Image (background).");
+          EXPECT_EQ(val, 255u) << "Error in Label Image (background).";
         }
       }
     }
   }
 
   zeroSizeCase();
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
