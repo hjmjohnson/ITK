@@ -58,7 +58,6 @@ set(
   itkObjectFactoryOnlyNewTest.cxx
   itkSliceIteratorTest.cxx
   itkImageFillBufferTest.cxx
-  itkVectorGeometryTest.cxx
   itkOptimizerParametersTest.cxx
   itkImageToImageToleranceTest.cxx
   itkImageRegionSplitterSlowDimensionTest.cxx
@@ -936,12 +935,6 @@ itk_add_test(
     itkVariableLengthVectorTest
 )
 #itk_add_test(NAME itkQuaternionOrientationAdapterTest COMMAND ITKCommon2TestDriver itkQuaternionOrientationAdapterTest)
-itk_add_test(
-  NAME itkVectorGeometryTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkVectorGeometryTest
-)
 if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 4)
   itk_add_test(
     NAME itkImageFillBufferTest4.1
@@ -1319,6 +1312,7 @@ set(
   itkVariableLengthVectorGTest.cxx
   itkVariableSizeMatrixGTest.cxx
   itkVectorContainerGTest.cxx
+  itkVectorGeometryGTest.cxx
   itkVectorGTest.cxx
   itkVersionGTest.cxx
   itkVersorGTest.cxx
