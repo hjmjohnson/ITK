@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKStatisticsTests
-  itkDecisionRuleTest.cxx
   itkDenseFrequencyContainer2Test.cxx
   itkDistanceMetricTest.cxx
   itkDistanceMetricTest2.cxx
@@ -86,12 +85,6 @@ createtestdriver(ITKStatistics "${ITKStatistics-Test_LIBRARIES}" "${ITKStatistic
 
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
-itk_add_test(
-  NAME itkDecisionRuleTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkDecisionRuleTest
-)
 itk_add_test(
   NAME itkDenseFrequencyContainer2Test
   COMMAND
@@ -957,6 +950,7 @@ set(
   itkCovarianceSampleFilterGTest.cxx
   itkCovarianceSampleFilterGTest2.cxx
   itkCovarianceSampleFilterGTest3.cxx
+  itkDecisionRuleGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
   itkKdTreeGTest.cxx
   itkMaximumDecisionRuleGTest.cxx

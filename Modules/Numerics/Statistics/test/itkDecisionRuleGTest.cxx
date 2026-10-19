@@ -17,17 +17,18 @@
  *=========================================================================*/
 
 #include "itkDecisionRule.h"
+#include "itkGTest.h"
 
-namespace itk::Statistics::DecisionRuleTest
+namespace
 {
-class MyDecisionRule : public DecisionRule
+class MyDecisionRule : public itk::Statistics::DecisionRule
 {
 public:
   /** Standard class type alias. */
   using Self = MyDecisionRule;
-  using Superclass = DecisionRule;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::Statistics::DecisionRule;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(MyDecisionRule);
@@ -60,12 +61,11 @@ public:
     return maxIndex;
   }
 };
-} // namespace itk::Statistics::DecisionRuleTest
+} // namespace
 
-int
-itkDecisionRuleTest(int, char *[])
+TEST(DecisionRule, ConvertedLegacyTest)
 {
-  using DecisionRuleType = itk::Statistics::DecisionRuleTest::MyDecisionRule;
+  using DecisionRuleType = MyDecisionRule;
 
   using MembershipVectorType = DecisionRuleType::MembershipVectorType;
 
@@ -89,11 +89,5 @@ itkDecisionRuleTest(int, char *[])
 
   // the maximum score is the third component. The decision rule should
   // return index ( 2)
-  if (decisionRule->Evaluate(membershipScoreVector) != 2)
-  {
-    std::cerr << "Decision rule computation is incorrect!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(decisionRule->Evaluate(membershipScoreVector), 2u);
 }
