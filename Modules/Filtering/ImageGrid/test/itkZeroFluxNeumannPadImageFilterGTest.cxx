@@ -20,12 +20,14 @@
 #include "itkZeroFluxNeumannPadImageFilter.h"
 #include "itkImageBufferRange.h"
 #include "itkStreamingImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <fstream>
 #include <algorithm> // For clamp.
 #include <numeric>   // For iota.
 
+namespace
+{
 using ShortImage = itk::Image<short, 2>;
 using FloatImage = itk::Image<float, 2>;
 using SizeValueType = ShortImage::SizeValueType;
@@ -164,10 +166,10 @@ VerifyFilter(const ShortImage *    inputImage,
 
   return true;
 }
+} // namespace
 
 
-int
-itkZeroFluxNeumannPadImageFilterTest(int, char *[])
+TEST(ZeroFluxNeumannPadImageFilter, ConvertedLegacyTest)
 {
   // Test the creation of an image with native type
   auto inputImage = ShortImage::New();
@@ -185,7 +187,7 @@ itkZeroFluxNeumannPadImageFilterTest(int, char *[])
   // Create a filter
   auto padFilter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(padFilter, ZeroFluxNeumannPadImageFilter, PadImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(padFilter, ZeroFluxNeumannPadImageFilter, PadImageFilter);
 
 
   padFilter->SetInput(inputImage);
@@ -197,10 +199,7 @@ itkZeroFluxNeumannPadImageFilterTest(int, char *[])
   std::cout << "Case 0" << std::endl;
   SizeValueType lowerBound[2] = { 0, 0 };
   SizeValueType upperBound[2] = { 0, 0 };
-  if (!VerifyFilter(inputImage, padFilter, lowerBound, upperBound))
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(VerifyFilter(inputImage, padFilter, lowerBound, upperBound));
 
   // CASE 1
   std::cout << "Case 1" << std::endl;
@@ -208,28 +207,17 @@ itkZeroFluxNeumannPadImageFilterTest(int, char *[])
   lowerBound[1] = 7;
   upperBound[0] = 5;
   upperBound[1] = 9;
-  if (!VerifyFilter(inputImage, padFilter, lowerBound, upperBound))
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(VerifyFilter(inputImage, padFilter, lowerBound, upperBound));
 
   // CASE 2
   std::cout << "Case 2" << std::endl;
   lowerBound[0] = 10;
   upperBound[1] = 15;
-  if (!VerifyFilter(inputImage, padFilter, lowerBound, upperBound))
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(VerifyFilter(inputImage, padFilter, lowerBound, upperBound));
 
   // CASE 3
   std::cout << "Case 3" << std::endl;
   lowerBound[1] = 16;
   upperBound[0] = 9;
-  if (!VerifyFilter(inputImage, padFilter, lowerBound, upperBound))
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(VerifyFilter(inputImage, padFilter, lowerBound, upperBound));
 }
