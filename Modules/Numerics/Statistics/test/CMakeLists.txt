@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkSampleTest3.cxx
   itkSampleTest4.cxx
   itkSampleToHistogramFilterTest.cxx
   itkSampleToHistogramFilterTest2.cxx
@@ -507,12 +506,6 @@ itk_add_test(
     100
 )
 itk_add_test(
-  NAME itkSampleTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleTest3
-)
-itk_add_test(
   NAME itkSampleTest4
   COMMAND
     ITKStatisticsTestDriver
@@ -750,6 +743,7 @@ set(
   itkRandomVariateGeneratorBaseGTest.cxx
   itkSampleGTest.cxx
   itkSampleGTest2.cxx
+  itkSampleGTest3.cxx
   itkStatisticsTypesGTest.cxx
   itkTDistributionGTest.cxx
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
