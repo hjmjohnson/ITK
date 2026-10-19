@@ -31,6 +31,7 @@
 // against accidental removal.
 
 #include "itkRLEImage.h"
+#include "itkGTest.h"
 #include "itkRLEImageRegionIterator.h"
 #include "itkImageRegionIterator.h"
 
@@ -60,8 +61,7 @@ public:
   }
 };
 
-int
-itkRLEImageMultiLabelMeshPipelineFriendTest(int, char *[])
+TEST(RLEImageMultiLabelMeshPipelineFriend, ConvertedLegacyTest)
 {
   using PixelType = unsigned short;
   constexpr unsigned int Dimension = 3;
@@ -82,20 +82,12 @@ itkRLEImageMultiLabelMeshPipelineFriendTest(int, char *[])
   // Plain ImageConstIterator<RLEImage<...>> path
   ConstIteratorType cit(image, region);
   cit.GoToBegin();
-  if (!MultiLabelMeshPipeline::ExerciseProtectedAccess(cit))
-  {
-    std::cerr << "Friend access via ImageConstIterator returned false.\n";
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(MultiLabelMeshPipeline::ExerciseProtectedAccess(cit))
+    << "Friend access via ImageConstIterator returned false.\n";
 
   // ImageRegionConstIterator<RLEImage<...>> path (separate friend grant)
   RegionConstIteratorType rcit(image, region);
   rcit.GoToBegin();
-  if (!MultiLabelMeshPipeline::ExerciseProtectedAccess(rcit))
-  {
-    std::cerr << "Friend access via ImageRegionConstIterator returned false.\n";
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(MultiLabelMeshPipeline::ExerciseProtectedAccess(rcit))
+    << "Friend access via ImageRegionConstIterator returned false.\n";
 }
