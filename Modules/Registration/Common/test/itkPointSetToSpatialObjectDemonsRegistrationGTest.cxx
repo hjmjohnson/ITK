@@ -20,11 +20,10 @@
 #include "itkPointSetToSpatialObjectDemonsRegistration.h"
 
 #include "itkRegularSphereMeshSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkPointSetToSpatialObjectDemonsRegistrationTest(int, char *[])
+TEST(PointSetToSpatialObjectDemonsRegistration, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -57,18 +56,14 @@ itkPointSetToSpatialObjectDemonsRegistrationTest(int, char *[])
 
   auto demonsRegistration = DemonsRegistrationType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(demonsRegistration, PointSetToSpatialObjectDemonsRegistration, ProcessObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(demonsRegistration, PointSetToSpatialObjectDemonsRegistration, ProcessObject);
 
   auto fixedPointSet = sphereSource->GetOutput();
   demonsRegistration->SetFixedPointSet(fixedPointSet);
-  ITK_TEST_SET_GET_VALUE(fixedPointSet, demonsRegistration->GetFixedPointSet());
+  EXPECT_EQ(fixedPointSet, demonsRegistration->GetFixedPointSet());
 
   demonsRegistration->SetMovingSpatialObject(ellipse);
-  ITK_TEST_SET_GET_VALUE(ellipse, demonsRegistration->GetMovingSpatialObject());
+  EXPECT_EQ(ellipse, demonsRegistration->GetMovingSpatialObject());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(demonsRegistration->Update());
-
-
-  std::cout << "Test Succeed!" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(demonsRegistration->Update());
 }
