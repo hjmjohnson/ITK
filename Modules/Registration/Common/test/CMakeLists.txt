@@ -3,7 +3,6 @@ set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
   itkEuclideanDistancePointMetricTest.cxx
-  itkImageRegistrationMethodTest_10.cxx
   itkImageRegistrationMethodTest_11.cxx
   itkImageRegistrationMethodTest_12.cxx
   itkImageRegistrationMethodTest_13.cxx
@@ -61,12 +60,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkMultiResolutionImageRegistrationMethodTest_2
-)
-itk_add_test(
-  NAME itkImageRegistrationMethodTest_10
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkImageRegistrationMethodTest_10
 )
 itk_add_test(
   NAME itkImageRegistrationMethodTest_11
@@ -429,6 +422,7 @@ set(
   itkHistogramImageToImageMetricGTest.cxx
   itkImageRegistrationMethodGTest.cxx
   itkImageRegistrationMethodGTest_1.cxx
+  itkImageRegistrationMethodGTest_10.cxx
   itkTransformInitializersGTest.cxx
 )
 creategoogletestdriver(ITKRegistration "${ITKRegistrationCommon-Test_LIBRARIES}" "${ITKRegistrationGTests}")
