@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkExtensionVelocitiesImageFilter.h"
+#include "itkGTest.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkShiftScaleImageFilter.h"
 #include "itkTestingComparisonImageFilter.h"
@@ -111,8 +112,7 @@ SimpleVelocity(const TPoint & p)
 
 } // namespace
 
-int
-itkExtensionVelocitiesImageFilterTest(int, char *[])
+TEST(ExtensionVelocitiesImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int ImageDimension{ 2 };
@@ -237,12 +237,7 @@ itkExtensionVelocitiesImageFilterTest(int, char *[])
   std::cout << "Max. abs. difference = " << maxAbsDifference;
   std::cout << " at " << maxAbsDifferenceIndex << std::endl;
 
-  if (maxAbsDifference > 0.6)
-  {
-    std::cout << "Difference above threshold of 0.6" << std::endl;
-    std::cout << "Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(maxAbsDifference, 0.6);
 
   // Exercise other member functions
   reinitializer->Print(std::cout);
@@ -272,35 +267,17 @@ itkExtensionVelocitiesImageFilterTest(int, char *[])
     const ImageType::IndexType nodeIndex = nodeIter.Value().GetIndex();
     const double               absDiff =
       itk::Math::Absolute(aux2->GetPixel(nodeIndex) - reinitializer->GetOutputVelocityImage(1)->GetPixel(nodeIndex));
-    if (absDiff > 0.6)
-    {
-      std::cout << "Abs diff: " << absDiff;
-      std::cout << " at: " << nodeIndex << std::endl;
-      std::cout << "Difference above threshold of 0.6" << std::endl;
-      std::cout << "Test failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(absDiff, 0.6) << "at: " << nodeIndex;
     nodeIter++;
   }
 
   // Test setting/getting velocity beyond index
   reinitializer->SetInputVelocityImage(aux1, 2);
 
-  if (reinitializer->GetInputVelocityImage(2))
-  {
-    std::cout << "GetInputVelocityImage(2) should have returned nullptr" << std::endl;
-    std::cout << "Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(reinitializer->GetInputVelocityImage(2), nullptr);
 
-  if (reinitializer->GetOutputVelocityImage(2))
-  {
-    std::cout << "GetOutputVelocityImage(2) should have returned nullptr" << std::endl;
-    std::cout << "Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(reinitializer->GetOutputVelocityImage(2), nullptr);
 
 
   std::cout << "Test passed" << std::endl;
-  return EXIT_SUCCESS;
 }
