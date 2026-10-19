@@ -20,7 +20,7 @@
 #include "itkThresholdImageFilter.h"
 #include "itkGradientMagnitudeImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  * This program looks for straight lines within an image
@@ -103,7 +103,6 @@ Test_GetLines_should_return_empty_list_when_NumberOfLines_is_set_to_zero()
   }
   return true;
 }
-} // namespace
 
 
 /** Hough Point structure */
@@ -112,10 +111,10 @@ struct HoughPoint
   double radius;
   double angle;
 };
+} // namespace
 
 
-int
-itkHoughTransform2DLinesImageTest(int, char *[])
+TEST(HoughTransform2DLinesImageFilter, ConvertedLegacyTest)
 {
   bool success = true;
 
@@ -199,28 +198,28 @@ itkHoughTransform2DLinesImageTest(int, char *[])
 
   auto houghFilter = HoughTransformFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(houghFilter, HoughTransform2DLinesImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(houghFilter, HoughTransform2DLinesImageFilter, ImageToImageFilter);
 
 
   constexpr float threshold{ 2.3 };
   houghFilter->SetThreshold(threshold);
-  ITK_TEST_SET_GET_VALUE(threshold, houghFilter->GetThreshold());
+  EXPECT_EQ(threshold, houghFilter->GetThreshold());
 
   constexpr float angleResolution{ 200.0 };
   houghFilter->SetAngleResolution(angleResolution);
-  ITK_TEST_SET_GET_VALUE(angleResolution, houghFilter->GetAngleResolution());
+  EXPECT_EQ(angleResolution, houghFilter->GetAngleResolution());
 
   auto numberOfLines = static_cast<HoughTransformFilterType::LinesListSizeType>(lines);
   houghFilter->SetNumberOfLines(numberOfLines);
-  ITK_TEST_SET_GET_VALUE(numberOfLines, houghFilter->GetNumberOfLines());
+  EXPECT_EQ(numberOfLines, houghFilter->GetNumberOfLines());
 
   constexpr float discRadius{ 25.0 };
   houghFilter->SetDiscRadius(discRadius);
-  ITK_TEST_SET_GET_VALUE(discRadius, houghFilter->GetDiscRadius());
+  EXPECT_EQ(discRadius, houghFilter->GetDiscRadius());
 
   constexpr float variance{ 10 };
   houghFilter->SetVariance(variance);
-  ITK_TEST_SET_GET_VALUE(variance, houghFilter->GetVariance());
+  EXPECT_EQ(variance, houghFilter->GetVariance());
 
 
   houghFilter->SetInput(threshFilter->GetOutput());
@@ -337,15 +336,7 @@ itkHoughTransform2DLinesImageTest(int, char *[])
     ++it_list;
   }
 
-  success &= Test_GetLines_should_return_empty_list_when_input_image_is_entirely_black();
-  success &= Test_GetLines_should_return_empty_list_when_NumberOfLines_is_set_to_zero();
-
-  if (success)
-  {
-    std::cout << "Test succeeded!" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test FAILED!" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(success);
+  EXPECT_TRUE(Test_GetLines_should_return_empty_list_when_input_image_is_entirely_black());
+  EXPECT_TRUE(Test_GetLines_should_return_empty_list_when_NumberOfLines_is_set_to_zero());
 }
