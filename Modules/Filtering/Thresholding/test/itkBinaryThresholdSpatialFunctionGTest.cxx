@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkBinaryThresholdSpatialFunction.h"
+#include "itkGTest.h"
 #include "itkSphereSignedDistanceFunction.h"
 
 #include "itkFloodFilledSpatialFunctionConditionalConstIterator.h"
-#include "itkTestingMacros.h"
 
 /**
  * This module tests the sphereality of the
@@ -37,8 +37,7 @@
  *
  */
 
-int
-itkBinaryThresholdSpatialFunctionTest(int, char *[])
+TEST(BinaryThresholdSpatialFunction, ConvertedLegacyTest)
 {
   using CoordRep = double;
   constexpr unsigned int Dimension{ 2 };
@@ -63,7 +62,7 @@ itkBinaryThresholdSpatialFunctionTest(int, char *[])
   // Create a binary threshold function
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, BinaryThresholdSpatialFunction, SpatialFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, BinaryThresholdSpatialFunction, SpatialFunction);
 
 
   // Connect the sphere function
@@ -73,9 +72,9 @@ itkBinaryThresholdSpatialFunctionTest(int, char *[])
   constexpr double lowerThreshold{ -3.0 };
   constexpr double upperThreshold{ 4.0 };
   function->SetLowerThreshold(lowerThreshold);
-  ITK_TEST_SET_GET_VALUE(lowerThreshold, function->GetLowerThreshold());
+  EXPECT_EQ(lowerThreshold, function->GetLowerThreshold());
   function->SetUpperThreshold(upperThreshold);
-  ITK_TEST_SET_GET_VALUE(upperThreshold, function->GetUpperThreshold());
+  EXPECT_EQ(upperThreshold, function->GetUpperThreshold());
 
   PointType point;
 
@@ -90,13 +89,7 @@ itkBinaryThresholdSpatialFunctionTest(int, char *[])
     // Check results
     const CoordRep val = p * std::sqrt(2.0) - parameters[0];
     const bool     expected = (lowerThreshold <= val && upperThreshold >= val);
-    if (output != expected)
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error at point: " << point << std::endl;
-      std::cerr << "Expected function value is: " << expected << ", but got: " << output << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(output, expected) << "Error at point: " << point;
   }
 
   //
@@ -143,18 +136,9 @@ itkBinaryThresholdSpatialFunctionTest(int, char *[])
     const double value = sphere->Evaluate(point);
 
     // Check if value is within range
-    if (value < lowerThreshold || value > upperThreshold)
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error at index: " << index << std::endl;
-      std::cout << "Point value: " << value << " is not within thresholds [" << lowerThreshold << ", " << upperThreshold
-                << ']' << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_GE(value, lowerThreshold) << "Error at index: " << index;
+    EXPECT_LE(value, upperThreshold) << "Error at index: " << index;
 
     ++iterator;
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
