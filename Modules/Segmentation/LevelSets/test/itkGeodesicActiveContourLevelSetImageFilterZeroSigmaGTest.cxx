@@ -24,11 +24,10 @@
 #include "itkFastMarchingImageFilter.h"
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkSimilarityIndexImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkGeodesicActiveContourLevelSetImageFilterZeroSigmaTest(int, char *[])
+TEST(GeodesicActiveContourLevelSetImageFilterZeroSigma, ConvertedLegacyTest)
 {
 
   constexpr unsigned int ImageDimension{ 2 };
@@ -127,7 +126,7 @@ itkGeodesicActiveContourLevelSetImageFilterZeroSigmaTest(int, char *[])
 
   auto shapeDetection = ShapeDetectionFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     shapeDetection, GeodesicActiveContourLevelSetImageFilter, SegmentationLevelSetImageFilter);
 
   // set the initial level set
@@ -213,16 +212,7 @@ itkGeodesicActiveContourLevelSetImageFilterZeroSigmaTest(int, char *[])
   */
 
   // Check if overlap is above threshold
-  if (overlap->GetSimilarityIndex() > 0.90)
-  {
-    std::cout << "Overlap exceed threshold." << std::endl;
-  }
-  else
-  {
-    std::cout << "Overlap below threshold." << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GT(overlap->GetSimilarityIndex(), 0.90);
 
   // Test case when PropagationScaling is zero
   shapeDetection->SetPropagationScaling(0.0);
@@ -231,5 +221,4 @@ itkGeodesicActiveContourLevelSetImageFilterZeroSigmaTest(int, char *[])
   shapeDetection->Update();
 
   std::cout << "Test Passed." << std::endl;
-  return EXIT_SUCCESS;
 }
