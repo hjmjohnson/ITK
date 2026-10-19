@@ -22,7 +22,7 @@
 #include "itkPointSetToPointSetRegistrationMethod.h"
 #include "itkDanielssonDistanceMapImageFilter.h"
 #include "itkPointSetToImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -32,8 +32,7 @@
  *
  */
 
-int
-itkPointSetToPointSetRegistrationTest(int, char *[])
+TEST(PointSetToPointSetRegistration, ConvertedLegacyTest)
 {
   constexpr unsigned int PointSetDimension{ 2 };
 
@@ -111,7 +110,7 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
   using RegistrationType = itk::PointSetToPointSetRegistrationMethod<FixedPointSetType, MovingPointSetType>;
   auto registration = RegistrationType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(registration, PointSetToPointSetRegistrationMethod, ProcessObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(registration, PointSetToPointSetRegistrationMethod, ProcessObject);
 
   // Scale the translation components of the Transform in the Optimizer
   OptimizerType::ScalesType scales(transform->GetNumberOfParameters(), 1.0);
@@ -129,19 +128,19 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
 
   // Connect all the components required for the registration
   registration->SetMetric(metric);
-  ITK_TEST_SET_GET_VALUE(metric, registration->GetMetric());
+  EXPECT_EQ(metric, registration->GetMetric());
 
   registration->SetOptimizer(optimizer);
-  ITK_TEST_SET_GET_VALUE(optimizer, registration->GetOptimizer());
+  EXPECT_EQ(optimizer, registration->GetOptimizer());
 
   registration->SetTransform(transform);
-  ITK_TEST_SET_GET_VALUE(transform, registration->GetTransform());
+  EXPECT_EQ(transform, registration->GetTransform());
 
   registration->SetFixedPointSet(fixedPointSet);
-  ITK_TEST_SET_GET_VALUE(fixedPointSet, registration->GetFixedPointSet());
+  EXPECT_EQ(fixedPointSet, registration->GetFixedPointSet());
 
   registration->SetMovingPointSet(movingPointSet);
-  ITK_TEST_SET_GET_VALUE(movingPointSet, registration->GetMovingPointSet());
+  EXPECT_EQ(movingPointSet, registration->GetMovingPointSet());
 
   // Set up transform parameters
   ParametersType parameters(transform->GetNumberOfParameters());
@@ -153,10 +152,10 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
   }
   transform->SetParameters(parameters);
   registration->SetInitialTransformParameters(transform->GetParameters());
-  ITK_TEST_SET_GET_VALUE(transform->GetParameters(), registration->GetInitialTransformParameters());
+  EXPECT_EQ(transform->GetParameters(), registration->GetInitialTransformParameters());
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(registration->Update());
+  EXPECT_NO_THROW(registration->Update());
 
 
   // Print the last transform parameters to improve coverage
@@ -173,11 +172,8 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
 
   std::cout << "Solution = " << transform->GetParameters() << std::endl;
 
-  if ((itk::Math::Absolute(transform->GetParameters()[0]) > 1.0) ||
-      (itk::Math::Absolute(transform->GetParameters()[1]) > 1.0))
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(transform->GetParameters()[0]), 1.0);
+  EXPECT_LE(itk::Math::Absolute(transform->GetParameters()[1]), 1.0);
 
   //
   // Test with the Danielsson distance map.
@@ -191,7 +187,7 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
   using PSToImageFilterType = itk::PointSetToImageFilter<FixedPointSetType, BinaryImageType>;
   auto psToImageFilter = PSToImageFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(psToImageFilter, PointSetToImageFilter, ImageSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(psToImageFilter, PointSetToImageFilter, ImageSource);
 
   psToImageFilter->SetInput(fixedPointSet);
 
@@ -205,7 +201,7 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
             << ']' << std::endl;
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(psToImageFilter->Update());
+  EXPECT_NO_THROW(psToImageFilter->Update());
 
   const BinaryImageType::Pointer binaryImage = psToImageFilter->GetOutput();
 
@@ -214,12 +210,12 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
 
   ddFilter->SetInput(binaryImage);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(ddFilter->Update());
+  EXPECT_NO_THROW(ddFilter->Update());
 
 
   const typename DDFilterType::OutputImageType::Pointer distanceMap = ddFilter->GetOutput();
   metric->SetDistanceMap(distanceMap);
-  ITK_TEST_SET_GET_VALUE(distanceMap, metric->GetDistanceMap());
+  EXPECT_EQ(distanceMap, metric->GetDistanceMap());
 
   metric->ComputeSquaredDistanceOn();
 
@@ -232,17 +228,10 @@ itkPointSetToPointSetRegistrationTest(int, char *[])
   transform->SetParameters(parameters);
   registration->SetInitialTransformParameters(transform->GetParameters());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(registration->Update());
+  EXPECT_NO_THROW(registration->Update());
 
   std::cout << "Solution = " << transform->GetParameters() << std::endl;
 
-  if ((itk::Math::Absolute(transform->GetParameters()[0]) > 1.0) ||
-      (itk::Math::Absolute(transform->GetParameters()[1]) > 1.0))
-  {
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "TEST DONE" << std::endl;
-
-  return EXIT_SUCCESS;
+  EXPECT_LE(itk::Math::Absolute(transform->GetParameters()[0]), 1.0);
+  EXPECT_LE(itk::Math::Absolute(transform->GetParameters()[1]), 1.0);
 }
