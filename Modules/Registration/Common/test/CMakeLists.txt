@@ -9,7 +9,6 @@ set(
   itkKappaStatisticImageToImageMetricTest.cxx
   itkMatchCardinalityImageToImageMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricTest.cxx
-  itkMeanReciprocalSquareDifferenceImageMetricTest.cxx
   itkMeanReciprocalSquareDifferencePointSetToImageMetricTest.cxx
   itkMeanSquaresHistogramImageToImageMetricTest.cxx
   itkMeanSquaresImageMetricTest.cxx
@@ -234,12 +233,6 @@ itk_add_test(
     itkNormalizedCorrelationImageMetricTest
 )
 itk_add_test(
-  NAME itkMeanReciprocalSquareDifferenceImageMetricTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkMeanReciprocalSquareDifferenceImageMetricTest
-)
-itk_add_test(
   NAME itkMeanSquaresImageMetricTest
   COMMAND
     ITKRegistrationCommonTestDriver
@@ -332,6 +325,7 @@ set(
   itkImageRegistrationMethodGTest_9.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
   itkLandmarkBasedTransformInitializerGTest.cxx
+  itkMeanReciprocalSquareDifferenceImageMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
 creategoogletestdriver(ITKRegistration "${ITKRegistrationCommon-Test_LIBRARIES}" "${ITKRegistrationGTests}")
