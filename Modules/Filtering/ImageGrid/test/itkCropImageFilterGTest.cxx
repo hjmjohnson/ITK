@@ -19,13 +19,12 @@
 #include "itkCropImageFilter.h"
 #include "itkImageBufferRange.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include <numeric> // For iota.
 
-int
-itkCropImageFilterTest(int, char *[])
+TEST(CropImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -53,7 +52,7 @@ itkCropImageFilterTest(int, char *[])
   const itk::CropImageFilter<ImageType, ImageType>::Pointer cropFilter =
     itk::CropImageFilter<ImageType, ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(cropFilter, CropImageFilter, ExtractImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(cropFilter, CropImageFilter, ExtractImageFilter);
 
   const itk::SimpleFilterWatcher watcher(cropFilter);
 
@@ -66,10 +65,10 @@ itkCropImageFilterTest(int, char *[])
   cropFilter->SetBoundaryCropSize(extractSize);
 
   cropFilter->SetUpperBoundaryCropSize(extractSize);
-  ITK_TEST_SET_GET_VALUE(extractSize, cropFilter->GetUpperBoundaryCropSize());
+  EXPECT_EQ(extractSize, cropFilter->GetUpperBoundaryCropSize());
 
   cropFilter->SetLowerBoundaryCropSize(extractSize);
-  ITK_TEST_SET_GET_VALUE(extractSize, cropFilter->GetLowerBoundaryCropSize());
+  EXPECT_EQ(extractSize, cropFilter->GetLowerBoundaryCropSize());
 
   cropFilter->UpdateLargestPossibleRegion();
 
@@ -80,16 +79,10 @@ itkCropImageFilterTest(int, char *[])
 
   for (auto & currRegion : { requestedRegion, bufferedRegion, largestRegion })
   {
-    if (currRegion.GetSize()[0] != 6 || currRegion.GetSize()[1] != 10)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(currRegion.GetSize()[0], 6u);
+    EXPECT_EQ(currRegion.GetSize()[1], 10u);
 
-    if (currRegion.GetIndex()[0] != 1 || currRegion.GetIndex()[1] != 1)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(currRegion.GetIndex()[0], 1);
+    EXPECT_EQ(currRegion.GetIndex()[1], 1);
   }
-
-  return EXIT_SUCCESS;
 }
