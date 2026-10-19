@@ -18,9 +18,9 @@
 
 #include "itkQuadEdgeMesh.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshDeletePointAndReorderIDsTest(int, char *[])
+TEST(QuadEdgeMeshDeletePointAndReorderIDs, ConvertedLegacyTest)
 {
 
   using PixelType = double;
@@ -70,18 +70,14 @@ itkQuadEdgeMeshDeletePointAndReorderIDsTest(int, char *[])
   }
 
   // Point exists along with pointData
-  if (!mesh->GetPoints()->IndexExists(0) || !mesh->GetPointData()->IndexExists(0))
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(mesh->GetPoints()->IndexExists(0));
+  EXPECT_TRUE(mesh->GetPointData()->IndexExists(0));
 
   // delete point and check that point and pointdata have been removed
   // form corresponding containers
   mesh->DeletePoint(0);
-  if (mesh->GetPoints()->IndexExists(0) || mesh->GetPointData()->IndexExists(0))
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(mesh->GetPoints()->IndexExists(0));
+  EXPECT_FALSE(mesh->GetPointData()->IndexExists(0));
 
   // Squeeze point IDs. ID=0 should reappear but have a different value
   // actually it should have the value of the previously last point
@@ -92,11 +88,6 @@ itkQuadEdgeMeshDeletePointAndReorderIDsTest(int, char *[])
 
     // check data
     mesh->GetPointData(0, &ptData);
-    if (itk::Math::NotAlmostEquals(ptData, 4))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_DOUBLE_EQ(ptData, 4.0);
   }
-
-  return EXIT_SUCCESS;
 }
