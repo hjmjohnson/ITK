@@ -19,14 +19,13 @@
 #include <iostream>
 #include "itkVectorImageToImageAdaptor.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
 // This test tests the basic functionality of
 // VectorImageToImageAdaptor, especially the Set/GetPixel() methods.
 
-int
-itkVectorImageToImageAdaptorTest(int, char *[])
+TEST(VectorImageToImageAdaptor, ConvertedLegacyTest)
 {
 
   // image type alias
@@ -61,7 +60,7 @@ itkVectorImageToImageAdaptorTest(int, char *[])
   // run the adaptor
   auto vectorImageToImageAdaptor = VectorImageToImageAdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(vectorImageToImageAdaptor, VectorImageToImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(vectorImageToImageAdaptor, VectorImageToImageAdaptor, ImageAdaptor);
 
 
   vectorImageToImageAdaptor->SetExtractComponentIndex(componentToExtract);
@@ -75,22 +74,16 @@ itkVectorImageToImageAdaptorTest(int, char *[])
   while (!adaptIt.IsAtEnd())
   {
     const PixelType pixelV = adaptIt.Get();
-    if (itk::Math::NotAlmostEquals(pixelV, static_cast<PixelType>(componentToExtract)))
-    {
-      std::cout << "Wrong Pixel Value: adaptIt(" << adaptIt.GetIndex() << ") = " << adaptIt.Get() << std::endl;
-
-      return EXIT_FAILURE;
-    }
+    EXPECT_FLOAT_EQ(pixelV, static_cast<PixelType>(componentToExtract))
+      << "Wrong Pixel Value: adaptIt(" << adaptIt.GetIndex() << ") = " << adaptIt.Get();
     ++adaptIt;
   }
 
   // test Get/SetPixel() methods
   auto index = VectorImageToImageAdaptorType::IndexType::Filled(10);
-  ITK_TEST_EXPECT_EQUAL(PixelType(componentToExtract), vectorImageToImageAdaptor->GetPixel(index));
+  EXPECT_EQ(PixelType(componentToExtract), vectorImageToImageAdaptor->GetPixel(index));
 
   constexpr PixelType v{ 4.4f };
   vectorImageToImageAdaptor->SetPixel(index, v);
-  ITK_TEST_EXPECT_EQUAL(v, vectorImageToImageAdaptor->GetPixel(index));
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(v, vectorImageToImageAdaptor->GetPixel(index));
 }
