@@ -4,7 +4,6 @@ set(
   itkExpectationMaximizationMixtureModelEstimatorTest.cxx
   itkGaussianMixtureModelComponentTest.cxx
   itkGaussianRandomSpatialNeighborSubsamplerTest.cxx
-  itkHistogramTest.cxx
   itkHistogramToTextureFeaturesFilterTest.cxx
   itkImageToHistogramFilterTest.cxx
   itkImageToHistogramFilterTest2.cxx
@@ -435,12 +434,6 @@ itk_add_test(
   COMMAND
     ITKStatisticsTestDriver
     itkMeanSampleFilterTest3
-)
-itk_add_test(
-  NAME itkHistogramTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkHistogramTest
 )
 itk_add_test(
   NAME itkHistogramToTextureFeaturesFilterTest
@@ -903,6 +896,7 @@ set(
   itkEuclideanSquareDistanceMetricGTest.cxx
   itkGaussianDistributionGTest.cxx
   itkGaussianMembershipFunctionGTest.cxx
+  itkHistogramGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
   itkKdTreeGTest.cxx
   itkMaximumDecisionRuleGTest.cxx
