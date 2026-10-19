@@ -59,7 +59,6 @@ set(
   itkSliceIteratorTest.cxx
   itkImageFillBufferTest.cxx
   itkVectorGeometryTest.cxx
-  itkVNLRoundProfileTest1.cxx
   itkOptimizerParametersTest.cxx
   itkImageToImageToleranceTest.cxx
   itkImageRegionSplitterSlowDimensionTest.cxx
@@ -890,12 +889,6 @@ itk_add_test(
     ITKCommon2TestDriver
     itkVectorGeometryTest
 )
-itk_add_test(
-  NAME itkVNLRoundProfileTest1
-  COMMAND
-    ITKCommon2TestDriver
-    itkVNLRoundProfileTest1
-)
 if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 4)
   itk_add_test(
     NAME itkImageFillBufferTest4.1
@@ -1275,6 +1268,7 @@ set(
   itkVectorGTest.cxx
   itkVersionGTest.cxx
   itkVersorGTest.cxx
+  itkVNLRoundProfileGTest1.cxx
   itkWeakPointerGTest.cxx
   itkZeroFluxBoundaryConditionGTest.cxx
   VNLSparseLUSolverTraitsGTest.cxx
