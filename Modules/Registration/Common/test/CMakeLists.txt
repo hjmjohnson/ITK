@@ -5,7 +5,6 @@ set(
   itkEuclideanDistancePointMetricTest.cxx
   itkImageRegistrationMethodTest_14.cxx
   itkImageRegistrationMethodTest_16.cxx
-  itkImageRegistrationMethodTest_17.cxx
   itkImageRegistrationMethodTest_2.cxx
   itkImageRegistrationMethodTest_3.cxx
   itkImageRegistrationMethodTest_4.cxx
@@ -343,12 +342,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkImageRegistrationMethodTest_17
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkImageRegistrationMethodTest_17
-)
-itk_add_test(
   NAME itkEuclideanDistancePointMetricTestSquaredDistanceOff
   COMMAND
     ITKRegistrationCommonTestDriver
@@ -384,6 +377,7 @@ set(
   itkImageRegistrationMethodGTest_12.cxx
   itkImageRegistrationMethodGTest_13.cxx
   itkImageRegistrationMethodGTest_15.cxx
+  itkImageRegistrationMethodGTest_17.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
