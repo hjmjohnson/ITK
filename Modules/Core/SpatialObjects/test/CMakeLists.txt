@@ -7,7 +7,6 @@ set(
   itkMetaGaussianConverterTest.cxx
   itkNewMetaObjectTypeTest.cxx
   itkPolygonSpatialObjectIsInsideInObjectSpaceTest.cxx
-  itkSurfaceSpatialObjectTest.cxx
   itkTubeSpatialObjectTest.cxx
 )
 
@@ -18,12 +17,6 @@ itk_add_test(
   COMMAND
     ITKSpatialObjectsTestDriver
     itkImageMaskSpatialObjectTest
-)
-itk_add_test(
-  NAME itkSurfaceSpatialObjectTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkSurfaceSpatialObjectTest
 )
 itk_add_test(
   NAME itkMetaArrowConverterTest
@@ -112,5 +105,6 @@ set(
   itkSpatialObjectToImageFilterGTest.cxx
   itkSpatialObjectToImageStatisticsCalculatorGTest.cxx
   itkSpatialObjectToPointSetFilterGTest.cxx
+  itkSurfaceSpatialObjectGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")
