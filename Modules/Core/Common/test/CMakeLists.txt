@@ -35,7 +35,6 @@ set(
   ITKCommon2Tests
   itkThreadLoggerTest.cxx
   itkLoggerThreadWrapperTest.cxx
-  itkThreadDefsTest.cxx
   itkMultiThreaderBaseTest.cxx
   itkMultiThreaderTypeFromEnvironmentTest.cxx
   itkMultiThreadingEnvironmentTest.cxx
@@ -835,12 +834,6 @@ itk_add_test(
     ${TEMP}/test_threadLogger.txt
 )
 itk_add_test(
-  NAME itkThreadDefsTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkThreadDefsTest
-)
-itk_add_test(
   NAME itkTimeProbesTest
   COMMAND
     ITKCommon2TestDriver
@@ -1280,6 +1273,7 @@ set(
   itkSymmetricEigenAnalysisGTest.cxx
   itkSymmetricEllipsoidInteriorExteriorSpatialFunctionGTest.cxx
   itkSymmetricSecondRankTensorGTest.cxx
+  itkThreadDefsGTest.cxx
   itkThreadedImageRegionPartitionerGTest.cxx
   itkThreadedIndexedContainerPartitionerGTest.cxx
   itkThreadedIteratorRangePartitionerGTest.cxx
