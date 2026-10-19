@@ -44,7 +44,6 @@ set(
   itkTopHatImageFilterTest.cxx
   itkValuedRegionalMaximaImageFilterTest.cxx
   itkValuedRegionalMinimaImageFilterTest.cxx
-  itkVanHerkGilWermanErodeDilateImageFilterTest.cxx
 )
 
 createtestdriver(ITKMathematicalMorphology "${ITKMathematicalMorphology-Test_LIBRARIES}"
@@ -58,6 +57,7 @@ set(
   itkMathematicalMorphologyEnumsGTest.cxx
   itkMovingHistogramMorphologyImageFilterGTest.cxx
   itkShapedIteratorFromStructuringElementGTest.cxx
+  itkVanHerkGilWermanErodeDilateImageFilterGTest.cxx
 )
 creategoogletestdriver(
   ITKMathematicalMorphology
@@ -1304,10 +1304,4 @@ itk_add_test(
     10
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkRankImageFilter10.png
-)
-itk_add_test(
-  NAME itkVanHerkGilWermanErodeDilateImageFilterTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkVanHerkGilWermanErodeDilateImageFilterTest
 )
