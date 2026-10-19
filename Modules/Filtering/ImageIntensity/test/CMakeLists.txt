@@ -11,7 +11,6 @@ set(
   itkInvertIntensityImageFilterTest.cxx
   itkMagnitudeAndPhaseToComplexImageFilterTest.cxx
   itkMatrixIndexSelectionImageFilterTest.cxx
-  itkMinimumImageFilterTest.cxx
   itkModulusImageFilterTest.cxx
   itkMultiplyImageFilterTest.cxx
   itkNaryAddImageFilterTest.cxx
@@ -92,12 +91,6 @@ itk_add_test(
   COMMAND
     ITKImageIntensityTestDriver
     itkTernaryOperatorImageFilterTest
-)
-itk_add_test(
-  NAME itkMinimumImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkMinimumImageFilterTest
 )
 itk_add_test(
   NAME itkVectorIndexSelectionCastImageFilterTest1
@@ -642,6 +635,7 @@ set(
   itkMaskImageFilterGTest.cxx
   itkMaskNegatedImageFilterGTest.cxx
   itkMaximumImageFilterGTest.cxx
+  itkMinimumImageFilterGTest.cxx
   itkNotEqualGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx

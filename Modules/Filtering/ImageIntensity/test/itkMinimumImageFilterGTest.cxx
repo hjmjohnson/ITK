@@ -18,13 +18,11 @@
 
 #include "itkMinimumImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkMinimumImageFilterTest(int, char *[])
+TEST(MinimumImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int Dimension{ 3 };
 
@@ -71,7 +69,7 @@ itkMinimumImageFilterTest(int, char *[])
   // Create the filter
   auto minimumImageFilter = MinimumFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(minimumImageFilter, MinimumImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(minimumImageFilter, MinimumImageFilter, BinaryGeneratorImageFilter);
 
   // Connect the input images
   minimumImageFilter->SetInput1(inputImageA);
@@ -90,9 +88,8 @@ itkMinimumImageFilterTest(int, char *[])
 
   constexpr ImageType::IndexType pixelIndex{ 0, 1, 1 };
 
-  ITK_TEST_EXPECT_EQUAL(outputImage->GetPixel({}), smallPixelValue);
-  ITK_TEST_EXPECT_EQUAL(outputImage->GetPixel(pixelIndex), smallPixelValue);
+  EXPECT_EQ(outputImage->GetPixel({}), smallPixelValue);
+  EXPECT_EQ(outputImage->GetPixel(pixelIndex), smallPixelValue);
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
