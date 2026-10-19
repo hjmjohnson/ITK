@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkPointSetToListSampleAdaptorTest.cxx
   itkProbabilityDistributionTest.cxx
   itkSampleTest.cxx
   itkSampleTest2.cxx
@@ -509,12 +508,6 @@ itk_add_test(
     ITKStatisticsTestDriver
     itkListSampleTest
     100
-)
-itk_add_test(
-  NAME itkPointSetToListSampleAdaptorTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkPointSetToListSampleAdaptorTest
 )
 itk_add_test(
   NAME itkProbabilityDistributionTest
