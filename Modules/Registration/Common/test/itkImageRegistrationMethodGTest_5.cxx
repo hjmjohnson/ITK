@@ -22,6 +22,7 @@
 #include "itkGradientDescentOptimizer.h"
 
 #include "itkImageRegistrationMethodImageSource.h"
+#include "itkGTest.h"
 
 /**
  *  This program tests one instantiation of the itk::ImageRegistrationMethod class
@@ -29,8 +30,10 @@
  *
  */
 
-[[nodiscard]] int
-itkImageRegistrationMethodTest_5_Func(int argc, char * argv[], bool subtractMean)
+namespace
+{
+void
+itkImageRegistrationMethodTest_5_Func(bool subtractMean)
 {
 
   bool pass = true;
@@ -122,21 +125,6 @@ itkImageRegistrationMethodTest_5_Func(int argc, char * argv[], bool subtractMean
     learningRate *= 0.2;
   }
 
-  if (argc > 1)
-  {
-    numberOfIterations = atol(argv[1]);
-    std::cout << "numberOfIterations = " << numberOfIterations << std::endl;
-  }
-  if (argc > 2)
-  {
-    translationScale = std::stod(argv[2]);
-    std::cout << "translationScale = " << translationScale << std::endl;
-  }
-  if (argc > 3)
-  {
-    learningRate = std::stod(argv[3]);
-    std::cout << "learningRate = " << learningRate << std::endl;
-  }
   for (unsigned int i = 0; i < dimension; ++i)
   {
     scales[i + dimension * dimension] = translationScale;
@@ -187,29 +175,15 @@ itkImageRegistrationMethodTest_5_Func(int argc, char * argv[], bool subtractMean
   }
 
 
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test FAILED.";
 }
+} // namespace
 
-int
-itkImageRegistrationMethodTest_5(int argc, char * argv[])
+TEST(ImageRegistrationMethod, ConvertedLegacyTest5)
 {
   // test metric without factoring out the mean.
-  const int fail1 = itkImageRegistrationMethodTest_5_Func(argc, argv, false);
+  itkImageRegistrationMethodTest_5_Func(false);
 
   // test metric with factoring out the mean.
-  const int fail2 = itkImageRegistrationMethodTest_5_Func(argc, argv, true);
-
-  if (fail1 || fail2)
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  itkImageRegistrationMethodTest_5_Func(true);
 }
