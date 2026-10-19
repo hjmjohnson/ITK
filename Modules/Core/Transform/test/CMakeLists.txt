@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKTransformTests
   itkAzimuthElevationToCartesianTransformTest.cxx
-  itkBSplineDeformableTransformTest.cxx
   itkBSplineDeformableTransformTest2.cxx
   itkBSplineDeformableTransformTest3.cxx
   itkBSplineTransformInitializerTest1.cxx
@@ -183,12 +182,6 @@ itk_add_test(
 )
 
 ## Tests for ITKv3 version of BSplineDeformableTransforms
-itk_add_test(
-  NAME itkBSplineDeformableTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkBSplineDeformableTransformTest
-)
 itk_add_test(
   NAME itkBSplineDeformableTransformTest2
   COMMAND
@@ -513,6 +506,7 @@ itk_add_test(
 set(
   ITKTransformGTests
   itkAffineTransformGTest.cxx
+  itkBSplineDeformableTransformGTest.cxx
   itkBSplineTransformGTest.cxx
   itkEuler3DTransformGTest.cxx
   itkMatrixOffsetTransformBaseGTest.cxx
