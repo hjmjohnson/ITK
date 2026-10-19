@@ -10,7 +10,6 @@ set(
   itkMeanSquaresImageToImageMetricv4RegistrationTest.cxx
   itkMeanSquaresImageToImageMetricv4RegistrationTest2.cxx
   itkMeanSquaresImageToImageMetricv4SpeedTest.cxx
-  itkMeanSquaresImageToImageMetricv4Test.cxx
   itkMeanSquaresImageToImageMetricv4VectorRegistrationTest.cxx
   itkMetricImageGradientTest.cxx
   itkMultiGradientImageToImageMetricv4RegistrationTest.cxx
@@ -51,13 +50,6 @@ itk_add_test(
     1
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkJointHistogramMutualInformationImageToImageRegistrationTest2.nii.gz
-)
-
-itk_add_test(
-  NAME itkMeanSquaresImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMeanSquaresImageToImageMetricv4Test
 )
 
 itk_add_test(
@@ -307,6 +299,7 @@ set(
   itkLabeledPointSetMetricRegistrationGTest.cxx
   itkImageToImageMetricv4WorkUnitsGTest.cxx
   itkMattesMutualInformationImageToImageMetricv4GTest.cxx
+  itkMeanSquaresImageToImageMetricv4GTest.cxx
   itkMeanSquaresImageToImageMetricv4OnVectorGTest.cxx
   itkMeanSquaresImageToImageMetricv4OnVectorGTest2.cxx
 )
