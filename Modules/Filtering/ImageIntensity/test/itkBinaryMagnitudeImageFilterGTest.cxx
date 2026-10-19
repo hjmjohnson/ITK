@@ -19,13 +19,11 @@
 #include "itkBinaryMagnitudeImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkBinaryMagnitudeImageFilterTest(int, char *[])
+TEST(BinaryMagnitudeImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int Dimension{ 3 };
 
@@ -80,7 +78,7 @@ itkBinaryMagnitudeImageFilterTest(int, char *[])
   // Create the BinaryMagnitudeImageFilter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, BinaryMagnitudeImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, BinaryMagnitudeImageFilter, BinaryGeneratorImageFilter);
 
   // Set the input images
   filter->SetInput1(inputImageA);
@@ -100,17 +98,9 @@ itkBinaryMagnitudeImageFilterTest(int, char *[])
   constexpr float epsilon{ 1e-6 };
   while (!oIt.IsAtEnd())
   {
-    if (!itk::Math::FloatAlmostEqual(oIt.Get(), outputValue, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error in the output" << std::endl;
-      std::cerr << "Value should be  " << outputValue << std::endl;
-      std::cerr << "but is           " << oIt.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(oIt.Get(), outputValue, epsilon) << "Error in the output";
     ++oIt;
   }
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
