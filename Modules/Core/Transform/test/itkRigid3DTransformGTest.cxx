@@ -16,22 +16,22 @@
  *
  *=========================================================================*/
 
+#include "itkRigid3DTransform.h"
+#include "itkGTest.h"
+
 #include <iostream>
 
-#include "itkRigid3DTransform.h"
-#include "itkTestingMacros.h"
-
-namespace itk
+namespace
 {
 template <typename TScalar>
-class Rigid3DTransformSurrogate : public Rigid3DTransform<TScalar>
+class Rigid3DTransformSurrogate : public itk::Rigid3DTransform<TScalar>
 {
 public:
   /** Standard class type aliases. */
   using Self = Rigid3DTransformSurrogate;
-  using Superclass = Rigid3DTransform<TScalar>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::Rigid3DTransform<TScalar>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   itkNewMacro(Self);
 
@@ -51,8 +51,6 @@ private:
   ~Rigid3DTransformSurrogate() override = default;
 };
 
-} // namespace itk
-
 bool
 TestSettingTranslation()
 {
@@ -70,7 +68,7 @@ TestSettingTranslation()
   T[1] = 200;
   T[2] = 300;
 
-  using TransformType = itk::Rigid3DTransformSurrogate<double>;
+  using TransformType = Rigid3DTransformSurrogate<double>;
 
   auto r1 = TransformType::New();
   // r1->SetIdentity();
@@ -118,12 +116,12 @@ TestSettingTranslation()
 
   return false;
 }
+} // namespace
 
-int
-itkRigid3DTransformTest(int, char *[])
+TEST(Rigid3DTransform, ConvertedLegacyTest)
 {
 
-  using TransformType = itk::Rigid3DTransformSurrogate<double>;
+  using TransformType = Rigid3DTransformSurrogate<double>;
   using ParametersType = TransformType::ParametersType;
 
   constexpr double       epsilon{ 1e-10 };
@@ -146,11 +144,7 @@ itkRigid3DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Identity doesn't have a null offset" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Identity doesn't have a null offset";
   }
 
   /* Create a Rigid 3D transform with translation */
@@ -173,11 +167,7 @@ itkRigid3DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from SetOffset value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from SetOffset value ";
 
     {
       // Translate an itk::Point
@@ -193,13 +183,9 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating point: " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -217,12 +203,7 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an itk::Vector " << std::endl;
     }
@@ -240,12 +221,7 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating covariant vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating covariant vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
@@ -265,12 +241,7 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vnl_vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
@@ -313,11 +284,7 @@ itkRigid3DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from SetOffset value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from SetOffset value ";
 
     // Verify the Matrix content
     TransformType::MatrixType matrix0 = rotation->GetMatrix();
@@ -335,12 +302,7 @@ itkRigid3DTransformTest(int, char *[])
         }
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Rotation Matrix  differs " << std::endl;
-      std::cerr << "from SetMatrix value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Rotation Matrix  differs " << std::endl << "from SetMatrix value ";
 
     {
       // Rotate an itk::Point
@@ -361,13 +323,9 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating point   : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -391,13 +349,9 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vector  : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
@@ -422,13 +376,9 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error Rotating covariant vector: " << p << std::endl;
-        std::cerr << "Result should be               : " << q << std::endl;
-        std::cerr << "Reported Result is             : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
+                      << "Result should be               : " << q << std::endl
+                      << "Reported Result is             : " << r;
 
       std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
@@ -455,13 +405,9 @@ itkRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vnl_vector : " << p << std::endl;
-        std::cerr << "Result should be             : " << q << std::endl;
-        std::cerr << "Reported Result is           : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
+                      << "Result should be             : " << q << std::endl
+                      << "Reported Result is           : " << r;
 
       std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
@@ -480,26 +426,8 @@ itkRigid3DTransformTest(int, char *[])
         p[j] = itk::Math::sqr(p[j]);
       }
 
-      Ok = false;
-      try
-      {
-        t->SetParameters(p);
-      }
-      catch (const itk::ExceptionObject & itkNotUsed(err))
-      {
-        Ok = true;
-      }
-      catch (...)
-      {
-        std::cout << "Caught unknown exception" << std::endl;
-      }
-
-      if (!Ok)
-      {
-        std::cerr << "Error: expected to catch an exception when attempting";
-        std::cerr << " to set an non-orthogonal matrix." << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_THROW(t->SetParameters(p), itk::ExceptionObject) << "Error: expected to catch an exception when attempting"
+                                                              << " to set an non-orthogonal matrix.";
 
       // attempt to set an orthogonal matrix
       using MatrixType = TransformType::MatrixType;
@@ -523,27 +451,7 @@ itkRigid3DTransformTest(int, char *[])
         }
       }
 
-      Ok = true;
-      try
-      {
-        t->SetParameters(p);
-      }
-      catch (const itk::ExceptionObject & err)
-      {
-        std::cout << err << std::endl;
-        Ok = false;
-      }
-      catch (...)
-      {
-        std::cout << "Caught unknown exception" << std::endl;
-        Ok = false;
-      }
-
-      if (!Ok)
-      {
-        std::cerr << "Error: caught unexpected exception" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NO_THROW(t->SetParameters(p)) << "Error: caught unexpected exception";
 
       std::cout << "done." << std::endl;
     }
@@ -576,11 +484,7 @@ itkRigid3DTransformTest(int, char *[])
         }
       }
 
-      if (!Ok)
-      {
-        std::cerr << "Test failed." << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Test failed.";
 
       std::cout << "done. " << std::endl;
     }
@@ -606,49 +510,12 @@ itkRigid3DTransformTest(int, char *[])
         }
       }
 
-      Ok = false;
-      try
-      {
-        t->SetMatrix(matrix);
-      }
-      catch (const itk::ExceptionObject & itkNotUsed(err))
-      {
-        Ok = true;
-      }
-      catch (...)
-      {
-        std::cout << "Caught unknown exception" << std::endl;
-      }
-
-      if (!Ok)
-      {
-        std::cerr << "Error: expected to catch an exception when attempting";
-        std::cerr << " to set an non-orthogonal matrix." << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_THROW(t->SetMatrix(matrix), itk::ExceptionObject)
+        << "Error: expected to catch an exception when attempting"
+        << " to set an non-orthogonal matrix.";
 
       // attempt to set a non-orthogonal matrix but within tolerance
-      Ok = true;
-      try
-      {
-        t->SetMatrix(matrix, 1000);
-      }
-      catch (const itk::ExceptionObject & err)
-      {
-        std::cout << err << std::endl;
-        Ok = false;
-      }
-      catch (...)
-      {
-        std::cout << "Caught unknown exception" << std::endl;
-        Ok = false;
-      }
-
-      if (!Ok)
-      {
-        std::cerr << "Error: caught unexpected exception" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NO_THROW(t->SetMatrix(matrix, 1000)) << "Error: caught unexpected exception";
 
       // attempt to set an orthogonal matrix
       matrix.GetVnlMatrix().set_identity();
@@ -659,34 +526,10 @@ itkRigid3DTransformTest(int, char *[])
       matrix[1][0] = -1.0 * std::sin(a);
       matrix[1][1] = std::cos(a);
 
-      Ok = true;
-      try
-      {
-        t->SetMatrix(matrix);
-      }
-      catch (const itk::ExceptionObject & err)
-      {
-        std::cout << err << std::endl;
-        Ok = false;
-      }
-      catch (...)
-      {
-        std::cout << "Caught unknown exception" << std::endl;
-        Ok = false;
-      }
-
-      if (!Ok)
-      {
-        std::cerr << "Error: caught unexpected exception" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NO_THROW(t->SetMatrix(matrix)) << "Error: caught unexpected exception";
       const bool TranslationSettingOK = TestSettingTranslation();
-      if (!TranslationSettingOK)
-      {
-        std::cerr << "Error:  SetTranslation() did not result in consistent internal state for Rigid3DTransform."
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(TranslationSettingOK)
+        << "Error:  SetTranslation() did not result in consistent internal state for Rigid3DTransform.";
 
       std::cout << "done." << std::endl;
     }
@@ -700,16 +543,13 @@ itkRigid3DTransformTest(int, char *[])
     transform->SetIdentity();
     auto inverse = TransformType::New();
     auto hasInverse = transform->GetInverse(inverse);
-    if (!hasInverse)
-    {
-      std::cerr << "Transform does not have an inverse when expected:" << std::endl;
-      std::cerr << "Transform:" << std::endl << transform;
-      std::cerr << "Inverse:" << std::endl << inverse;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(hasInverse) << "Transform does not have an inverse when expected:" << std::endl
+                            << "Transform:" << std::endl
+                            << transform << "Inverse:" << std::endl
+                            << inverse;
     TransformType::MatrixType expectedInverse{};
     expectedInverse.SetIdentity();
-    ITK_TEST_EXPECT_TRUE(inverse->GetMatrix().GetVnlMatrix().is_equal(expectedInverse.GetVnlMatrix(), 1e-10));
+    EXPECT_TRUE(inverse->GetMatrix().GetVnlMatrix().is_equal(expectedInverse.GetVnlMatrix(), 1e-10));
 
     // An orthogonal transform should have an inverse: use a rotation matrix
     transform->SetIdentity();
@@ -731,23 +571,18 @@ itkRigid3DTransformTest(int, char *[])
     transform->SetOffset(ioffset);
 
     hasInverse = transform->GetInverse(inverse);
-    if (!hasInverse)
-    {
-      std::cerr << "Transform does not have an inverse when expected:" << std::endl;
-      std::cerr << "Transform:" << std::endl << transform;
-      std::cerr << "Inverse:" << std::endl << inverse;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(hasInverse) << "Transform does not have an inverse when expected:" << std::endl
+                            << "Transform:" << std::endl
+                            << transform << "Inverse:" << std::endl
+                            << inverse;
     expectedInverse.SetIdentity();
     expectedInverse[0][0] = costh;
     expectedInverse[0][1] = -sinth;
     expectedInverse[1][0] = sinth;
     expectedInverse[1][1] = costh;
-    ITK_TEST_EXPECT_TRUE(inverse->GetMatrix().GetVnlMatrix().is_equal(expectedInverse.GetVnlMatrix(), 1e-10));
+    EXPECT_TRUE(inverse->GetMatrix().GetVnlMatrix().is_equal(expectedInverse.GetVnlMatrix(), 1e-10));
 
     // Cannot test a singular matrix (i.e. not having an inverse) since ITK does not allow to set a
     // non-orthogonal rotation matrix to the transform
   }
-
-  return EXIT_SUCCESS;
 }
