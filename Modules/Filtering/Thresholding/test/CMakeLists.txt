@@ -17,7 +17,6 @@ set(
   itkOtsuThresholdImageFilterTest.cxx
   itkRenyiEntropyThresholdImageFilterTest.cxx
   itkShanbhagThresholdImageFilterTest.cxx
-  itkThresholdLabelerImageFilterTest.cxx
   itkTriangleThresholdImageFilterTest.cxx
   itkYenThresholdImageFilterTest.cxx
   itkHuangMaskedThresholdImageFilterTest.cxx
@@ -57,12 +56,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkOtsuMultipleThresholdsImageFilterTest.png
 )
 
-itk_add_test(
-  NAME itkThresholdLabelerImageFilterTest
-  COMMAND
-    ITKThresholdingTestDriver
-    itkThresholdLabelerImageFilterTest
-)
 itk_add_test(
   NAME itkOtsuMultipleThresholdsCalculatorTest1
   COMMAND
@@ -1132,6 +1125,7 @@ set(
   itkOtsuThresholdCalculatorGTest.cxx
   itkRenyiEntropyThresholdCalculatorGTest.cxx
   itkThresholdImageFilterGTest.cxx
+  itkThresholdLabelerImageFilterGTest.cxx
 )
 
 creategoogletestdriver(ITKThresholding "${ITKThresholding-Test_LIBRARIES}" "${ITKThresholdingGTests}")
