@@ -19,7 +19,7 @@
 #include "itkNaryMaximumImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 // Create a namespace in order to avoid conflicts with other tests.
 
@@ -87,10 +87,8 @@ PrintImage(InputImageType * image, const char *)
 } // end namespace NaryMaximumImageFilterTest
 
 
-int
-itkNaryMaximumImageFilterTest(int, char *[])
+TEST(NaryMaximumImageFilter, ConvertedLegacyTest)
 {
-
   // It is safe to open the namespace here because
   // the symbols will not be exposed outside this function
   using namespace NaryMaximumImageFilterTest;
@@ -110,7 +108,7 @@ itkNaryMaximumImageFilterTest(int, char *[])
   // Create the  itk::NaryMaximumImageFilter filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, NaryMaximumImageFilter, NaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, NaryMaximumImageFilter, NaryFunctorImageFilter);
 
   // Set the input images
   filter->SetInput(0, inputImageA);
@@ -130,11 +128,7 @@ itkNaryMaximumImageFilterTest(int, char *[])
   it.GoToBegin();
   while (!it.IsAtEnd())
   {
-    if (itk::Math::NotExactlyEquals(it.Get(), maxValue))
-    {
-      std::cerr << "Test Failed!" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(it.Get(), maxValue);
     ++it;
   }
 
@@ -156,16 +150,9 @@ itkNaryMaximumImageFilterTest(int, char *[])
   it2.GoToBegin();
   while (!it2.IsAtEnd())
   {
-    if (itk::Math::NotExactlyEquals(it2.Get(), maxValue))
-    {
-      std::cerr << "Test Failed!" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(it2.Get(), maxValue);
     ++it2;
   }
 
-  std::cerr << "Test Passed!" << std::endl;
-
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
