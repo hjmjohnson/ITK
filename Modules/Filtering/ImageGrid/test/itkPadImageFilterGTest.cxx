@@ -18,9 +18,9 @@
 
 #include "itkConstantBoundaryCondition.h"
 #include "itkPadImageFilter.h"
+#include "itkGTest.h"
 
-int
-itkPadImageFilterTest(int, char *[])
+TEST(PadImageFilter, ConvertedLegacyTest)
 {
   using ShortImage = itk::Image<short, 2>;
   using SizeType = ShortImage::SizeType;
@@ -35,67 +35,39 @@ itkPadImageFilterTest(int, char *[])
   SizeValueType      upperBoundArray[2] = { 3, 4 };
 
   padFilter->SetPadLowerBound(lowerBound);
-  if (padFilter->GetPadLowerBound() != lowerBound)
-  {
-    std::cerr << "Lower bound not recovered while testing SetLowerBound(SizeType). Got "
-              << padFilter->GetPadLowerBound() << ", expected " << lowerBound << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetPadLowerBound(), lowerBound)
+    << "Lower bound not recovered while testing SetLowerBound(SizeType). Got " << padFilter->GetPadLowerBound()
+    << ", expected " << lowerBound;
 
   padFilter->SetPadLowerBound(lowerBoundArray);
-  if (padFilter->GetPadLowerBound() != lowerBound)
-  {
-    std::cerr << "Lower bound not recovered while testing SetLowerBound(SizeValueType[]). Got "
-              << padFilter->GetPadLowerBound() << ", expected " << lowerBound << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetPadLowerBound(), lowerBound)
+    << "Lower bound not recovered while testing SetLowerBound(SizeValueType[]). Got " << padFilter->GetPadLowerBound()
+    << ", expected " << lowerBound;
 
   padFilter->SetPadUpperBound(upperBound);
-  if (padFilter->GetPadUpperBound() != upperBound)
-  {
-    std::cerr << "Upper bound not recovered while testing SetUpperBound(SizeType). Got "
-              << padFilter->GetPadUpperBound() << ", expected " << upperBound << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetPadUpperBound(), upperBound)
+    << "Upper bound not recovered while testing SetUpperBound(SizeType). Got " << padFilter->GetPadUpperBound()
+    << ", expected " << upperBound;
 
   padFilter->SetPadUpperBound(upperBoundArray);
-  if (padFilter->GetPadUpperBound() != upperBound)
-  {
-    std::cerr << "Upper bound not recovered while testing SetUpperBound(SizeValueType[]). Got "
-              << padFilter->GetPadUpperBound() << ", expected " << upperBound << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetPadUpperBound(), upperBound)
+    << "Upper bound not recovered while testing SetUpperBound(SizeValueType[]). Got " << padFilter->GetPadUpperBound()
+    << ", expected " << upperBound;
 
   padFilter->SetPadBound(lowerBound);
-  if (padFilter->GetPadLowerBound() != lowerBound)
-  {
-    std::cerr << "Lower bound not recovered while testing SetPadBound(). Got " << padFilter->GetPadLowerBound()
-              << ", expected " << lowerBound << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetPadLowerBound(), lowerBound) << "Lower bound not recovered while testing SetPadBound(). Got "
+                                                       << padFilter->GetPadLowerBound() << ", expected " << lowerBound;
 
-  if (padFilter->GetPadUpperBound() != lowerBound)
-  {
-    std::cerr << "Upper bound not recovered while testing SetPadBound(). Got " << padFilter->GetPadUpperBound()
-              << ", expected " << lowerBound << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetPadUpperBound(), lowerBound) << "Upper bound not recovered while testing SetPadBound(). Got "
+                                                       << padFilter->GetPadUpperBound() << ", expected " << lowerBound;
 
-  if (padFilter->GetBoundaryCondition() != nullptr)
-  {
-    std::cerr << "Default BoundaryCondition was not nullptr." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetBoundaryCondition(), nullptr) << "Default BoundaryCondition was not nullptr.";
 
   itk::ConstantBoundaryCondition<ShortImage> bc;
   bc.SetConstant(13);
 
   padFilter->SetBoundaryCondition(&bc);
-  if (padFilter->GetBoundaryCondition() != &bc)
-  {
-    std::cerr << "Set/GetBoundaryCondition test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(padFilter->GetBoundaryCondition(), &bc) << "Set/GetBoundaryCondition test failed.";
 
   // Fill in a test image
   auto                           inputImage = ShortImage::New();
@@ -125,20 +97,12 @@ itkPadImageFilterTest(int, char *[])
       std::cout << pixel << ' ';
       if (index[0] == 0 && index[1] == 0)
       {
-        if (pixel != 1)
-        {
-          std::cerr << "Center pixel has unexpected value " << pixel << ", expected " << 1 << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_EQ(pixel, 1) << "Center pixel has unexpected value " << pixel << ", expected " << 1;
       }
       else
       {
-        if (pixel != 13)
-        {
-          std::cerr << "Padded pixel at index " << index << " has unexpected value " << pixel << ", expected " << 13
-                    << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_EQ(pixel, 13) << "Padded pixel at index " << index << " has unexpected value " << pixel << ", expected "
+                             << 13;
       }
     }
     std::cout << std::endl;
@@ -152,7 +116,7 @@ itkPadImageFilterTest(int, char *[])
   {
     padFilter->Update();
     std::cerr << "Failed to catch expected exception when boundary condition is nullptr." << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
   catch (const itk::ExceptionObject & e)
   {
@@ -162,8 +126,6 @@ itkPadImageFilterTest(int, char *[])
   catch (...)
   {
     std::cerr << "Exception caught, but not the expected kind." << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
-
-  return EXIT_SUCCESS;
 }
