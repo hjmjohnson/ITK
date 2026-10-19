@@ -5,7 +5,6 @@ set(
   itkRLEImageTest.cxx
   itkRegionOfInterestRLEImageFilterTest.cxx
   itkRLEImageIteratorsForwardBackwardTest.cxx
-  itkRLEImageIteratorTest.cxx
   itkRLEImageIteratorWithIndexTest.cxx
   itkRLEImageRegionConstIteratorWithOnlyIndexTest.cxx
   itkRLEImageRegionIteratorTest.cxx
@@ -19,6 +18,7 @@ set(
   RLEImageGTests
   itkIteratorTestsForRLEImageGTest.cxx
   itkRLEImageAlgorithmCopyGTest.cxx
+  itkRLEImageIteratorGTest.cxx
 )
 
 creategoogletestdriver(RLEImage "${RLEImage-Test_LIBRARIES}" "${RLEImageGTests}")
@@ -44,12 +44,6 @@ itk_add_test(
   COMMAND
     RLEImageTestDriver
     itkRLEImageIteratorsForwardBackwardTest
-)
-itk_add_test(
-  NAME itkRLEImageIteratorTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageIteratorTest
 )
 itk_add_test(
   NAME itkRLEImageIteratorWithIndexTest
