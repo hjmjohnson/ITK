@@ -8,7 +8,6 @@ set(
   itkDiscreteGaussianDerivativeImageFunctionTest.cxx
   itkDiscreteGradientMagnitudeGaussianImageFunctionTest.cxx
   itkDiscreteHessianGaussianImageFunctionTest.cxx
-  itkExpImageFilterAndAdaptorTest.cxx
   itkExpNegativeImageFilterAndAdaptorTest.cxx
   itkHistogramMatchingImageFilterTest.cxx
   itkImageAdaptorNthElementTest.cxx
@@ -411,12 +410,6 @@ itk_add_test(
     itkExpNegativeImageFilterAndAdaptorTest
 )
 itk_add_test(
-  NAME itkExpImageFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkExpImageFilterAndAdaptorTest
-)
-itk_add_test(
   NAME itkTanImageFilterAndAdaptorTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -697,6 +690,7 @@ set(
   itkDivideOrZeroOutImageFilterGTest.cxx
   itkEdgePotentialImageFilterGTest.cxx
   itkEqualGTest.cxx
+  itkExpImageFilterAndAdaptorGTest.cxx
   itkGreaterEqualGTest.cxx
   itkGreaterGTest.cxx
   itkLessEqualGTest.cxx
