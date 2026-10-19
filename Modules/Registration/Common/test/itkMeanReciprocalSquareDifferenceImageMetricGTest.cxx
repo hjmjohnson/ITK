@@ -21,7 +21,7 @@
 #include "itkMeanReciprocalSquareDifferenceImageToImageMetric.h"
 #include "itkGaussianImageSource.h"
 #include "itkStdStreamStateSave.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -34,8 +34,7 @@
  *
  */
 
-int
-itkMeanReciprocalSquareDifferenceImageMetricTest(int, char *[])
+TEST(MeanReciprocalSquareDifferenceImageMetric, ConvertedLegacyTest)
 {
 
   // Save the format stream variables for std::cout
@@ -102,7 +101,7 @@ itkMeanReciprocalSquareDifferenceImageMetricTest(int, char *[])
 
   auto metric = MetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, MeanReciprocalSquareDifferenceImageToImageMetric, ImageToImageMetric);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(metric, MeanReciprocalSquareDifferenceImageToImageMetric, ImageToImageMetric);
 
 
   //-----------------------------------------------------------
@@ -148,11 +147,11 @@ itkMeanReciprocalSquareDifferenceImageMetricTest(int, char *[])
   //------------------------------------------------------------
   constexpr double lambda{ 10.0 };
   metric->SetLambda(lambda);
-  ITK_TEST_SET_GET_VALUE(lambda, metric->GetLambda());
+  EXPECT_EQ(lambda, metric->GetLambda());
 
   constexpr double delta{ 0.00011 };
   metric->SetDelta(delta);
-  ITK_TEST_SET_GET_VALUE(delta, metric->GetDelta());
+  EXPECT_EQ(delta, metric->GetDelta());
 
 
   //------------------------------------------------------------
@@ -166,10 +165,7 @@ itkMeanReciprocalSquareDifferenceImageMetricTest(int, char *[])
   }
   catch (const itk::ExceptionObject & e)
   {
-    std::cout << "Metric initialization failed" << std::endl;
-    std::cout << "Reason " << e.GetDescription() << std::endl;
-
-    return EXIT_FAILURE;
+    FAIL() << "Metric initialization failed" << std::endl << "Reason " << e.GetDescription();
   }
 
 
@@ -217,38 +213,12 @@ itkMeanReciprocalSquareDifferenceImageMetricTest(int, char *[])
   //-------------------------------------------------------
   std::cout << "Check case when Target is nullptr" << std::endl;
   metric->SetFixedImage(nullptr);
-  try
-  {
-    std::cout << "Value = " << metric->GetValue(parameters);
-    std::cout << "If you are reading this message the Metric " << std::endl;
-    std::cout << "is NOT managing exceptions correctly    " << std::endl;
+  EXPECT_THROW(std::cout << "Value = " << metric->GetValue(parameters), itk::ExceptionObject)
+    << "If you are reading this message the Metric " << std::endl
+    << "is NOT managing exceptions correctly    ";
 
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    std::cout << "Exception received (as expected) " << std::endl;
-    std::cout << "Description : " << e.GetDescription() << std::endl;
-    std::cout << "Location    : " << e.GetLocation() << std::endl;
-    std::cout << "Test for exception throwing... PASSED ! " << std::endl;
-  }
-
-  try
-  {
-    metric->GetValueAndDerivative(parameters, measure, derivative);
-    std::cout << "Value = " << measure << std::endl;
-    std::cout << "If you are reading this message the Metric " << std::endl;
-    std::cout << "is NOT managing exceptions correctly    " << std::endl;
-
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    std::cout << "Exception received (as expected) " << std::endl;
-    std::cout << "Description : " << e.GetDescription() << std::endl;
-    std::cout << "Location    : " << e.GetLocation() << std::endl;
-    std::cout << "Test for exception throwing... PASSED ! " << std::endl;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_THROW(metric->GetValueAndDerivative(parameters, measure, derivative), itk::ExceptionObject)
+    << "Value = " << measure << std::endl
+    << "If you are reading this message the Metric " << std::endl
+    << "is NOT managing exceptions correctly    ";
 }
