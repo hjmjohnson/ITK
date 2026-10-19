@@ -22,7 +22,10 @@
 #include "itkAffineTransform.h"
 #include "itkCommand.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TFilter>
 class itkEuclideanDistancePointSetMetricRegistrationTestCommandIterationUpdate : public itk::Command
 {
@@ -66,7 +69,7 @@ using itkEuclideanDistancePointSetMetricRegistrationTestTransformType = itk::Tra
 
 /////////////////////////////////////////////////////////
 template <typename TTransform, typename TMetric, typename TPointSet>
-[[nodiscard]] int
+void
 itkEuclideanDistancePointSetMetricRegistrationTestRun(unsigned int                   numberOfIterations,
                                                       double                         maximumPhysicalStepSize,
                                                       double                         pointMax,
@@ -187,33 +190,17 @@ itkEuclideanDistancePointSetMetricRegistrationTestRun(unsigned int              
       passed = false;
     }
   }
-  if (!passed)
-  {
-    std::cerr << "Results do not match truth within tolerance." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "Results do not match truth within tolerance.";
 }
+} // namespace
 
 ////////////////////////////////////////////////////////////////////////////////
-int
-itkEuclideanDistancePointSetMetricRegistrationTest(int argc, char * argv[])
+TEST(EuclideanDistancePointSetMetricRegistration, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
-  int finalResult = EXIT_SUCCESS;
-
-  unsigned int numberOfIterations = 100;
-  auto         maximumPhysicalStepSize = 2.0;
-  if (argc > 1)
-  {
-    numberOfIterations = std::stoi(argv[1]);
-  }
-  if (argc > 2)
-  {
-    maximumPhysicalStepSize = std::stod(argv[2]);
-  }
+  constexpr unsigned int numberOfIterations{ 100 };
+  constexpr auto         maximumPhysicalStepSize{ 2.0 };
 
   auto pointMax = 100.0;
 
@@ -231,14 +218,8 @@ itkEuclideanDistancePointSetMetricRegistrationTest(int argc, char * argv[])
   auto affineTransform = AffineTransformType::New();
   affineTransform->SetIdentity();
   std::cout << "XX Test with affine transform: " << std::endl;
-  int oneResult =
-    itkEuclideanDistancePointSetMetricRegistrationTestRun<AffineTransformType, PointSetMetricType, PointSetType>(
-      numberOfIterations, maximumPhysicalStepSize, pointMax, affineTransform, metric);
-  if (oneResult == EXIT_FAILURE)
-  {
-    finalResult = EXIT_FAILURE;
-    std::cerr << "Failed for affine transform." << std::endl;
-  }
+  itkEuclideanDistancePointSetMetricRegistrationTestRun<AffineTransformType, PointSetMetricType, PointSetType>(
+    numberOfIterations, maximumPhysicalStepSize, pointMax, affineTransform, metric);
 
   //
   // Displacement field transform
@@ -286,15 +267,8 @@ itkEuclideanDistancePointSetMetricRegistrationTest(int argc, char * argv[])
   // metric2->SetVirtualDomain( spacing, origin, direction, region );
 
   std::cout << "XX Testing with displacement field transform." << std::endl;
-  oneResult = itkEuclideanDistancePointSetMetricRegistrationTestRun<DisplacementFieldTransformType,
-                                                                    PointSetMetricType,
-                                                                    PointSetType>(
+  itkEuclideanDistancePointSetMetricRegistrationTestRun<DisplacementFieldTransformType,
+                                                        PointSetMetricType,
+                                                        PointSetType>(
     numberOfIterations, maximumPhysicalStepSize, pointMax, displacementTransform, metric2);
-  if (oneResult == EXIT_FAILURE)
-  {
-    finalResult = EXIT_FAILURE;
-    std::cerr << "Failed for displacement transform." << std::endl;
-  }
-
-  return finalResult;
 }
