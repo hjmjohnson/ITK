@@ -5,7 +5,6 @@ set(
   itkAutoScaledGradientDescentRegistrationTest.cxx
   itkMultiGradientOptimizerv4Test.cxx
   itkPowellOptimizerv4Test.cxx
-  itkRegistrationParameterScalesFromJacobianTest.cxx
   itkRegistrationParameterScalesFromPhysicalShiftPointSetTest.cxx
   itkRegistrationParameterScalesFromPhysicalShiftTest.cxx
   itkRegularStepGradientDescentOptimizerv4Test.cxx
@@ -39,6 +38,7 @@ set(
   itkQuasiNewtonOptimizerv4GTest.cxx
   itkRegistrationParameterScalesEstimatorGTest.cxx
   itkRegistrationParameterScalesFromIndexShiftGTest.cxx
+  itkRegistrationParameterScalesFromJacobianGTest.cxx
   itkWindowConvergenceMonitoringFunctionGTest.cxx
 )
 creategoogletestdriver(ITKOptimizersv4 "${ITKOptimizersv4-Test_LIBRARIES}" "${ITKOptimizersv4GTests}")
@@ -55,13 +55,6 @@ itk_add_test(
   COMMAND
     ITKOptimizersv4TestDriver
     itkRegistrationParameterScalesFromPhysicalShiftTest
-)
-
-itk_add_test(
-  NAME itkRegistrationParameterScalesFromJacobianTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkRegistrationParameterScalesFromJacobianTest
 )
 
 itk_add_test(
