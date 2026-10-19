@@ -18,9 +18,9 @@
 
 #include "itkMultiphaseFiniteDifferenceImageFilter.h"
 #include "itkScalarChanAndVeseLevelSetFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 
 template <typename TInputImage,
@@ -29,19 +29,19 @@ template <typename TInputImage,
           typename TFiniteDifferenceFunction,
           typename TIdCell>
 class MultiphaseFiniteDifferenceImageFilterTestHelper
-  : public MultiphaseFiniteDifferenceImageFilter<TInputImage,
-                                                 TFeatureImage,
-                                                 TOutputImage,
-                                                 TFiniteDifferenceFunction,
-                                                 TIdCell>
+  : public itk::MultiphaseFiniteDifferenceImageFilter<TInputImage,
+                                                      TFeatureImage,
+                                                      TOutputImage,
+                                                      TFiniteDifferenceFunction,
+                                                      TIdCell>
 {
 public:
   /** Standard class type aliases. */
   using Self = MultiphaseFiniteDifferenceImageFilterTestHelper;
-  using Superclass =
+  using Superclass = itk::
     MultiphaseFiniteDifferenceImageFilter<TInputImage, TFeatureImage, TOutputImage, TFiniteDifferenceFunction, TIdCell>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(MultiphaseFiniteDifferenceImageFilterTestHelper);
@@ -69,10 +69,9 @@ public:
   {}
 };
 
-} // namespace itk
+} // namespace
 
-int
-itkMultiphaseFiniteDifferenceImageFilterTest(int, char *[])
+TEST(MultiphaseFiniteDifferenceImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -88,51 +87,44 @@ itkMultiphaseFiniteDifferenceImageFilterTest(int, char *[])
     itk::ScalarChanAndVeseLevelSetFunction<LevelSetImageType, FeatureImageType, SharedDataHelperType>;
 
   auto function = RegionBasedLevelSetFunctionType::New();
-  if (function.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(function.IsNull());
 
   using IdCellType = unsigned long;
 
-  using FilterType = itk::MultiphaseFiniteDifferenceImageFilterTestHelper<LevelSetImageType,
-                                                                          FeatureImageType,
-                                                                          OutputImageType,
-                                                                          RegionBasedLevelSetFunctionType,
-                                                                          IdCellType>;
+  using FilterType = MultiphaseFiniteDifferenceImageFilterTestHelper<LevelSetImageType,
+                                                                     FeatureImageType,
+                                                                     OutputImageType,
+                                                                     RegionBasedLevelSetFunctionType,
+                                                                     IdCellType>;
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     filter, MultiphaseFiniteDifferenceImageFilterTestHelper, MultiphaseFiniteDifferenceImageFilter);
 
 
   unsigned int numberOfIterations = itk::NumericTraits<unsigned int>::max();
   filter->SetNumberOfIterations(numberOfIterations);
-  ITK_TEST_SET_GET_VALUE(numberOfIterations, filter->GetNumberOfIterations());
+  EXPECT_EQ(numberOfIterations, filter->GetNumberOfIterations());
 
   bool useImageSpacing = true;
-  ITK_TEST_SET_GET_BOOLEAN(filter, UseImageSpacing, useImageSpacing);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, UseImageSpacing, useImageSpacing);
 
   double maximumRMSError = itk::Math::eps;
   filter->SetMaximumRMSError(maximumRMSError);
-  ITK_TEST_SET_GET_VALUE(maximumRMSError, filter->GetMaximumRMSError());
+  EXPECT_EQ(maximumRMSError, filter->GetMaximumRMSError());
 
   double rmsChange = itk::NumericTraits<double>::max();
   filter->SetRMSChange(rmsChange);
-  ITK_TEST_SET_GET_VALUE(rmsChange, filter->GetRMSChange());
+  EXPECT_EQ(rmsChange, filter->GetRMSChange());
 
   bool initializedState = false;
-  ITK_TEST_SET_GET_BOOLEAN(filter, InitializedState, initializedState);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, InitializedState, initializedState);
 
   bool manualReinitialization = false;
-  ITK_TEST_SET_GET_BOOLEAN(filter, ManualReinitialization, manualReinitialization);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, ManualReinitialization, manualReinitialization);
 
   unsigned int elapsedIterations = 0;
   filter->SetElapsedIterations(elapsedIterations);
-  ITK_TEST_SET_GET_VALUE(elapsedIterations, filter->GetElapsedIterations());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(elapsedIterations, filter->GetElapsedIterations());
 }
