@@ -19,6 +19,7 @@
 #include "itkCovarianceSampleFilter.h"
 #include "itkHistogram.h"
 #include "itkMahalanobisDistanceMetric.h"
+#include "itkGTest.h"
 
 namespace itk::Statistics
 {
@@ -57,8 +58,7 @@ private:
 } // namespace itk::Statistics
 
 
-int
-itkCovarianceSampleFilterTest3(int, char *[])
+TEST(CovarianceSampleFilter, ConvertedLegacyTest3)
 {
   std::cout << "CovarianceSampleFilter test \n \n";
 
@@ -179,13 +179,7 @@ itkCovarianceSampleFilterTest3(int, char *[])
 
   for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
   {
-    if (itk::Math::Absolute(meanOutput[i] - mean[i]) > epsilon)
-    {
-      std::cerr << "The computed mean value is incorrect" << std::endl;
-      std::cerr << "computed mean = " << meanOutput << std::endl;
-      std::cerr << "expected mean = " << mean << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(meanOutput[i], mean[i], epsilon);
   }
 
   epsilon = 35;
@@ -194,15 +188,7 @@ itkCovarianceSampleFilterTest3(int, char *[])
   {
     for (unsigned int j = 0; j < MeasurementVectorSize; ++j)
     {
-      if (itk::Math::Absolute(covariance[i][j] - covarianceOutput[i][j]) > epsilon)
-      {
-        std::cerr << "Computed covariance matrix value is incorrect:" << i << ',' << j << '=' << covariance[i][j] << ','
-                  << covarianceOutput[i][j] << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(covariance[i][j], covarianceOutput[i][j], epsilon);
     }
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
