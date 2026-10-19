@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 #include <iostream>
 
-int
-itkQuadEdgeMeshNoPointConstTest(int, char *[])
+TEST(QuadEdgeMeshNoPointConst, ConvertedLegacyTest)
 {
   using MeshType = itk::QuadEdgeMesh<double, 3>;
   using QEType = MeshType::QEType;
@@ -34,31 +34,11 @@ itkQuadEdgeMeshNoPointConstTest(int, char *[])
   std::cout << "Geom QE limit: " << GQE_LIMIT << std::endl;
   std::cout << "QE mesh limit: " << QEM_LIMIT << std::endl;
 
-  if constexpr (NUM_LIMIT != GQE_LIMIT)
-  {
-    return EXIT_FAILURE;
-  }
-  if constexpr (NUM_LIMIT != QEM_LIMIT)
-  {
-    return EXIT_FAILURE;
-  }
-  if constexpr (QEM_LIMIT != GQE_LIMIT)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(NUM_LIMIT, GQE_LIMIT);
+  EXPECT_EQ(NUM_LIMIT, QEM_LIMIT);
+  EXPECT_EQ(QEM_LIMIT, GQE_LIMIT);
 
-  if constexpr (NUM_LIMIT == 0)
-  {
-    return EXIT_FAILURE;
-  }
-  if constexpr (GQE_LIMIT == 0)
-  {
-    return EXIT_FAILURE;
-  }
-  if constexpr (QEM_LIMIT == 0)
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_NE(NUM_LIMIT, 0u);
+  EXPECT_NE(GQE_LIMIT, 0u);
+  EXPECT_NE(QEM_LIMIT, 0u);
 }
