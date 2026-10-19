@@ -16,13 +16,15 @@
  *
  *=========================================================================*/
 
-#include "itkTestingMacros.h"
 #include "itkImage.h"
 #include "itkWindowedSincInterpolateImageFunction.h"
 #include "itkConstantBoundaryCondition.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkRGBPixel.h"
+#include "itkGTest.h"
 
+namespace
+{
 namespace SincInterpolate
 {
 
@@ -125,13 +127,10 @@ TestContinuousIndex(const InterpolatorType *    interp,
 using RGBInterpolatorType = itk::WindowedSincInterpolateImageFunction<itk::Image<itk::RGBPixel<short>>, 3>;
 
 } // namespace SincInterpolate
+} // namespace
 
-int
-itkWindowedSincInterpolateImageFunctionTest(int, char *[])
+TEST(WindowedSincInterpolateImageFunction, ConvertedLegacyTest)
 {
-  int flag = 0;
-
-  std::cout << "Testing vector image interpolation: " << std::endl;
 
   using ImageType = SincInterpolate::ImageType;
   using IndexType = SincInterpolate::IndexType;
@@ -186,7 +185,7 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
 
   for (unsigned int d = 0; d < ImageDimension; ++d)
   {
-    ITK_TEST_SET_GET_VALUE(2, interp->GetRadius()[d]);
+    EXPECT_EQ(2u, interp->GetRadius()[d]);
   }
 
   /* Test evaluation at continuous indices and corresponding
@@ -205,18 +204,12 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     passed = SincInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position at the image border
   {
@@ -226,18 +219,12 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     passed = SincInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position near image border
   {
@@ -248,18 +235,12 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     passed = SincInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position outside the image
   {
@@ -269,18 +250,12 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     passed = SincInterpolate::TestContinuousIndex(interp, cindex, false, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = SincInterpolate::TestGeometricPoint(interp, point, false, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // at non-integer position
   {
@@ -290,27 +265,10 @@ itkWindowedSincInterpolateImageFunctionTest(int, char *[])
     passed = SincInterpolate::TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = SincInterpolate::TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
-
-  /* Return results of test */
-  if (flag != 0)
-  {
-    std::cout << "*** Some test failed" << std::endl;
-    return flag;
-  }
-
-
-  std::cout << "All tests successfully passed" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed);
 }
