@@ -10,7 +10,6 @@ set(
   itkMatchCardinalityImageToImageMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricTest.cxx
   itkMultiResolutionPyramidImageFilterTest.cxx
-  itkNormalizedCorrelationPointSetToImageMetricTest.cxx
   itkNormalizedMutualInformationHistogramImageToImageMetricTest.cxx
   itkPointSetToImageRegistrationTest.cxx
   itkPointSetToPointSetRegistrationTest.cxx
@@ -53,12 +52,6 @@ set_tests_properties(
       ${TEMP}/itkImageRegistrationMethodTest_16.txt
 )
 
-itk_add_test(
-  NAME itkNormalizedCorrelationPointSetToImageMetricTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkNormalizedCorrelationPointSetToImageMetricTest
-)
 itk_add_test(
   NAME itkNormalizedMutualInformationHistogramImageToImageMetricTest
   COMMAND
@@ -265,6 +258,7 @@ set(
   itkMutualInformationHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkNormalizedCorrelationImageMetricGTest.cxx
+  itkNormalizedCorrelationPointSetToImageMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
 creategoogletestdriver(ITKRegistration "${ITKRegistrationCommon-Test_LIBRARIES}" "${ITKRegistrationGTests}")
