@@ -24,7 +24,7 @@
 #include "itkCleanQuadEdgeMeshFilter.h"
 #include "itkQuadEdgeMesh.h"
 #include "itkRegularSphereMeshSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -60,8 +60,7 @@ BuildSphereWithDataAttached()
 
 } // namespace
 
-int
-itkCleanQuadEdgeMeshFilterDataPreservationTest(int, char *[])
+TEST(CleanQuadEdgeMeshFilterDataPreservation, ConvertedLegacyTest)
 {
   using FilterType = itk::CleanQuadEdgeMeshFilter<MeshType, MeshType>;
 
@@ -77,40 +76,32 @@ itkCleanQuadEdgeMeshFilterDataPreservationTest(int, char *[])
   // SqueezePointsIds() remap paths.
   filter->SetRelativeTolerance(0.3);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
   const MeshType::Pointer output = filter->GetOutput();
   std::cout << "Output : " << output->GetNumberOfPoints() << " points, " << output->GetNumberOfCells() << " cells, "
             << (output->GetPointData() ? output->GetPointData()->Size() : 0) << " point-data entries, "
             << (output->GetCellData() ? output->GetCellData()->Size() : 0) << " cell-data entries" << std::endl;
 
-  bool ok = true;
-
   // Sanity: cleaner should have merged the duplicate points.
-  if (output->GetNumberOfPoints() >= input->GetNumberOfPoints())
-  {
-    std::cerr << "FAIL: filter did not reduce point count (input=" << input->GetNumberOfPoints()
-              << ", output=" << output->GetNumberOfPoints() << ')' << std::endl;
-    ok = false;
-  }
+  EXPECT_LT(output->GetNumberOfPoints(), input->GetNumberOfPoints())
+    << "FAIL: filter did not reduce point count (input=" << input->GetNumberOfPoints()
+    << ", output=" << output->GetNumberOfPoints() << ')';
 
   // Bug A1: per-point data must be preserved (one entry per output point).
   const MeshType::PointDataContainer * outPointData = output->GetPointData();
-  if (!outPointData || outPointData->Size() != output->GetNumberOfPoints())
+  ASSERT_NE(outPointData, nullptr) << "FAIL: point data not preserved";
+  if (outPointData)
   {
-    std::cerr << "FAIL: point data not preserved (have "
-              << (outPointData ? static_cast<long>(outPointData->Size()) : -1L) << " entries, expected "
-              << output->GetNumberOfPoints() << ')' << std::endl;
-    ok = false;
+    EXPECT_EQ(outPointData->Size(), output->GetNumberOfPoints()) << "FAIL: point data not preserved";
   }
 
   // Bug A2: per-cell data must be preserved (one entry per output cell).
   const MeshType::CellDataContainer * outCellData = output->GetCellData();
-  if (!outCellData || outCellData->Size() != output->GetNumberOfCells())
+  ASSERT_NE(outCellData, nullptr) << "FAIL: cell data not preserved";
+  if (outCellData)
   {
-    std::cerr << "FAIL: cell data not preserved (have " << (outCellData ? static_cast<long>(outCellData->Size()) : -1L)
-              << " entries, expected " << output->GetNumberOfCells() << ')' << std::endl;
-    ok = false;
+    EXPECT_EQ(outCellData->Size(), output->GetNumberOfCells()) << "FAIL: cell data not preserved";
   }
 
   // Bug B: every polygon cell's point IDs must reference an existing
@@ -125,14 +116,9 @@ itkCleanQuadEdgeMeshFilterDataPreservationTest(int, char *[])
       for (auto pIt = cell->PointIdsBegin(); pIt != cell->PointIdsEnd(); ++pIt)
       {
         const MeshType::PointIdentifier id = *pIt;
-        if (!output->GetPoints()->IndexExists(id))
-        {
-          std::cerr << "FAIL: cell " << cIt.Index() << " references nonexistent point " << id << std::endl;
-          ok = false;
-        }
+        EXPECT_TRUE(output->GetPoints()->IndexExists(id))
+          << "FAIL: cell " << cIt.Index() << " references nonexistent point " << id;
       }
     }
   }
-
-  return ok ? EXIT_SUCCESS : EXIT_FAILURE;
 }
