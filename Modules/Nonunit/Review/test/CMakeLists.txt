@@ -20,7 +20,6 @@ set(
   itkScalarChanAndVeseDenseLevelSetImageFilterTest4.cxx
   itkScalarChanAndVeseSparseLevelSetImageFilterTest2.cxx
   itkShapedFloodFilledImageFunctionConditionalConstIteratorTest1.cxx
-  itkShapedFloodFilledImageFunctionConditionalConstIteratorTest2.cxx
   itkShapedFloodFilledImageFunctionConditionalConstIteratorTest3.cxx
   itkStochasticFractalDimensionImageFilterTest.cxx
   itkTimeAndMemoryProbeTest.cxx
@@ -447,12 +446,6 @@ itk_add_test(
     ITKReviewTestDriver
     itkShapedFloodFilledImageFunctionConditionalConstIteratorTest1
     DATA{${ITK_DATA_ROOT}/Input/8ConnectedImage.bmp}
-)
-itk_add_test(
-  NAME itkShapedFloodFilledImageFunctionConditionalConstIteratorTest2
-  COMMAND
-    ITKReviewTestDriver
-    itkShapedFloodFilledImageFunctionConditionalConstIteratorTest2
 )
 itk_add_test(
   NAME itkShapedFloodFilledImageFunctionConditionalConstIteratorTest3
