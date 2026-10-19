@@ -14,7 +14,6 @@ set(
   itkOptImageToImageMetricsTest2.cxx
   itkOptMattesMutualInformationImageToImageMetricThreadsTest1.cxx
   itkRegionBasedLevelSetFunctionTest.cxx
-  itkReviewPrintTest.cxx
   itkRobustAutomaticThresholdCalculatorTest.cxx
   itkRobustAutomaticThresholdImageFilterTest.cxx
   itkScalarChanAndVeseDenseLevelSetImageFilterTest1.cxx
@@ -42,13 +41,6 @@ set(BASELINE_ROOT ${ITK_DATA_ROOT}/Baseline)
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
 createtestdriver(ITKReview "${ITKReview-Test_LIBRARIES}" "${ITKReviewTests}")
-
-itk_add_test(
-  NAME itkReviewPrintTest
-  COMMAND
-    ITKReviewTestDriver
-    itkReviewPrintTest
-)
 
 itk_add_test(
   NAME itkAreaClosingImageFilterTest0
@@ -652,5 +644,6 @@ set(
   itkMultiphaseFiniteDifferenceImageFilterGTest.cxx
   itkMultiphaseSparseFiniteDifferenceImageFilterGTest.cxx
   itkRegionBasedLevelSetFunctionGTest.cxx
+  itkReviewPrintGTest.cxx
 )
 creategoogletestdriver(ITKReview "${ITKReview-Test_LIBRARIES}" "${ITKReviewGTests}")
