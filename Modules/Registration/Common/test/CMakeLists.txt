@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
-  itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest.cxx
   itkBSplineTransformParametersAdaptorTest.cxx
   itkCenteredTransformInitializerTest.cxx
   itkCenteredVersorTransformInitializerTest.cxx
@@ -71,13 +70,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkDisplacementFieldTransformParametersAdaptorTest
-)
-itk_add_test(
-  NAME
-    itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest
 )
 itk_add_test(
   NAME
@@ -488,6 +480,7 @@ itk_add_test(
 set(
   ITKRegistrationGTests
   itkBSplineExponentialDiffeomorphicTransformParametersAdaptorGTest.cxx
+  itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorGTest.cxx
   itkGradientDifferenceImageToImageMetricGTest.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
