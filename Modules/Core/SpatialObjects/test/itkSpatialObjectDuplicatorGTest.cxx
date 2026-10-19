@@ -21,10 +21,9 @@
 #include "itkGroupSpatialObject.h"
 #include "itkDTITubeSpatialObject.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkSpatialObjectDuplicatorTest(int, char *[])
+TEST(SpatialObjectDuplicator, ConvertedLegacyTest)
 {
   using EllipseType = itk::EllipseSpatialObject<3>;
   auto ellipse = EllipseType::New();
@@ -34,12 +33,12 @@ itkSpatialObjectDuplicatorTest(int, char *[])
   using DuplicatorType = itk::SpatialObjectDuplicator<EllipseType>;
   auto duplicator = DuplicatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(duplicator, SpatialObjectDuplicator, Object);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(duplicator, SpatialObjectDuplicator, Object);
 
 
-  ITK_TEST_SET_GET_NULL_VALUE(duplicator->GetOutput());
+  EXPECT_EQ(duplicator->GetOutput(), nullptr);
 #if !defined(ITK_LEGACY_REMOVE)
-  ITK_TEST_SET_GET_NULL_VALUE(duplicator->GetModifiedOutput());
+  EXPECT_EQ(duplicator->GetModifiedOutput(), nullptr);
 #endif
 
   duplicator->SetInput(ellipse);
@@ -129,95 +128,45 @@ itkSpatialObjectDuplicatorTest(int, char *[])
     found = true;
     unsigned int value = 0;
 
-    if (dtiTube_copy->GetPoints().empty())
-    {
-      std::cout << " [FAILED] : Size of the point list is zero" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(dtiTube_copy->GetPoints().empty()) << " [FAILED] : Size of the point list is zero";
 
     for (auto jdti = dtiTube_copy->GetPoints().begin(); jdti != dtiTube_copy->GetPoints().end(); ++jdti)
     {
       for (unsigned int d = 0; d < 3; ++d)
       {
-        if (itk::Math::NotAlmostEquals(jdti->GetPositionInWorldSpace()[d], value * dtiTube_copy->GetId()))
-        {
-          std::cout << " [FAILED] (Position is: " << jdti->GetPositionInWorldSpace()[d]
-                    << " expected : " << value * dtiTube_copy->GetId() << " ) " << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_DOUBLE_EQ(jdti->GetPositionInWorldSpace()[d], value * dtiTube_copy->GetId())
+          << " [FAILED] (Position is: " << jdti->GetPositionInWorldSpace()[d]
+          << " expected : " << value * dtiTube_copy->GetId() << " ) ";
       }
       // Testing the color of the tube points
-      if (itk::Math::NotExactlyEquals(jdti->GetRed(), value))
-      {
-        std::cout << " [FAILED] : RGBColormapFilterEnum::Red : found " << jdti->GetRed() << " instead of " << value
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(jdti->GetRed(), value) << " [FAILED] : RGBColormapFilterEnum::Red : found " << jdti->GetRed()
+                                       << " instead of " << value;
 
-      if (itk::Math::NotExactlyEquals(jdti->GetGreen(), value + 1))
-      {
-        std::cout << " [FAILED] : RGBColormapFilterEnum::Green : found " << jdti->GetGreen() << " instead of "
-                  << value + 1 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(jdti->GetGreen(), value + 1)
+        << " [FAILED] : RGBColormapFilterEnum::Green : found " << jdti->GetGreen() << " instead of " << value + 1;
 
-      if (itk::Math::NotExactlyEquals(jdti->GetBlue(), value + 2))
-      {
-        std::cout << "[FAILED] : RGBColormapFilterEnum::Blue : found " << jdti->GetBlue() << " instead of " << value + 2
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(jdti->GetBlue(), value + 2)
+        << "[FAILED] : RGBColormapFilterEnum::Blue : found " << jdti->GetBlue() << " instead of " << value + 2;
 
-      if (itk::Math::NotExactlyEquals(jdti->GetAlpha(), value + 3))
-      {
-        std::cout << " [FAILED] : Alpha : found " << jdti->GetAlpha() << " instead of " << value + 3 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(jdti->GetAlpha(), value + 3)
+        << " [FAILED] : Alpha : found " << jdti->GetAlpha() << " instead of " << value + 3;
 
-      if (itk::Math::NotExactlyEquals(
-            jdti->GetField(itk::DTITubeSpatialObjectPointEnums::DTITubeSpatialObjectPointField::FA), value))
-      {
-        std::cout << " [FAILED] : FA : found " << jdti->GetField("FA") << " instead of " << value << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (itk::Math::NotExactlyEquals(
-            jdti->GetField(itk::DTITubeSpatialObjectPointEnums::DTITubeSpatialObjectPointField::ADC), value * 2))
-      {
-        std::cout << " [FAILED] : ADC : found " << jdti->GetField("ADC") << " instead of " << value * 2 << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (itk::Math::NotExactlyEquals(
-            jdti->GetField(itk::DTITubeSpatialObjectPointEnums::DTITubeSpatialObjectPointField::GA), value * 3))
-      {
-        std::cout << " [FAILED] : GA : found " << jdti->GetField("FA") << " instead of " << value * 3 << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (itk::Math::NotExactlyEquals(jdti->GetField("Lambda1"), value * 4))
-      {
-        std::cout << " [FAILED] : GetLambda1 : found " << jdti->GetField("Lambda1") << " instead of " << value * 4
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (itk::Math::NotExactlyEquals(jdti->GetField("Lambda2"), value * 5))
-      {
-        std::cout << " [FAILED] : GetLambda2 : found " << jdti->GetField("Lambda2") << " instead of " << value * 5
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (itk::Math::NotExactlyEquals(jdti->GetField("Lambda3"), value * 6))
-      {
-        std::cout << " [FAILED] : GetLambda3 : found " << jdti->GetField("Lambda3") << " instead of " << value * 6
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(jdti->GetField(itk::DTITubeSpatialObjectPointEnums::DTITubeSpatialObjectPointField::FA), value)
+        << " [FAILED] : FA : found " << jdti->GetField("FA") << " instead of " << value;
+      EXPECT_EQ(jdti->GetField(itk::DTITubeSpatialObjectPointEnums::DTITubeSpatialObjectPointField::ADC), value * 2)
+        << " [FAILED] : ADC : found " << jdti->GetField("ADC") << " instead of " << value * 2;
+      EXPECT_EQ(jdti->GetField(itk::DTITubeSpatialObjectPointEnums::DTITubeSpatialObjectPointField::GA), value * 3)
+        << " [FAILED] : GA : found " << jdti->GetField("FA") << " instead of " << value * 3;
+      EXPECT_EQ(jdti->GetField("Lambda1"), value * 4)
+        << " [FAILED] : GetLambda1 : found " << jdti->GetField("Lambda1") << " instead of " << value * 4;
+      EXPECT_EQ(jdti->GetField("Lambda2"), value * 5)
+        << " [FAILED] : GetLambda2 : found " << jdti->GetField("Lambda2") << " instead of " << value * 5;
+      EXPECT_EQ(jdti->GetField("Lambda3"), value * 6)
+        << " [FAILED] : GetLambda3 : found " << jdti->GetField("Lambda3") << " instead of " << value * 6;
       for (int ind = 0; ind < 6; ++ind)
       {
-        if (itk::Math::NotExactlyEquals(jdti->GetTensorMatrix()[ind], ind))
-        {
-          std::cout << " [FAILED] : GetTensorMatrix : found " << jdti->GetTensorMatrix()[ind] << " instead of " << ind
-                    << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_EQ(jdti->GetTensorMatrix()[ind], ind)
+          << " [FAILED] : GetTensorMatrix : found " << jdti->GetTensorMatrix()[ind] << " instead of " << ind;
       }
       value++;
     }
@@ -241,11 +190,9 @@ itkSpatialObjectDuplicatorTest(int, char *[])
   }
   else
   {
-    std::cout << " [FAILED] : Cannot found VesselSpatialObject" << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << " [FAILED] : Cannot found VesselSpatialObject";
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
