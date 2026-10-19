@@ -2,21 +2,18 @@ itk_module_test()
 set(
   ITKDeformableMeshTests
   itkDeformableSimplexMesh3DBalloonForceFilterTest.cxx
-  itkDeformableSimplexMesh3DFilterTest.cxx
   itkDeformableSimplexMesh3DGradientConstraintForceFilterTest.cxx
 )
 
 createtestdriver(ITKDeformableMesh "${ITKDeformableMesh-Test_LIBRARIES}" "${ITKDeformableMeshTests}")
 
-set(ITKDeformableMeshGTests itkSimplexMeshWithFloatCoordRepGTest.cxx)
+set(
+  ITKDeformableMeshGTests
+  itkDeformableSimplexMesh3DFilterGTest.cxx
+  itkSimplexMeshWithFloatCoordRepGTest.cxx
+)
 creategoogletestdriver(ITKDeformableMesh "${ITKDeformableMesh-Test_LIBRARIES}" "${ITKDeformableMeshGTests}")
 
-itk_add_test(
-  NAME itkDeformableSimplexMesh3DFilterTest
-  COMMAND
-    ITKDeformableMeshTestDriver
-    itkDeformableSimplexMesh3DFilterTest
-)
 itk_add_test(
   NAME itkDeformableSimplexMesh3DBalloonForceFilterTest
   COMMAND

@@ -27,10 +27,9 @@
 #include "itkSigmoidImageFilter.h"
 #include "itkTriangleMeshToSimplexMeshFilter.h"
 #include "itkSimplexMeshVolumeCalculator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkDeformableSimplexMesh3DFilterTest(int, char *[])
+TEST(DeformableSimplexMesh3DFilter, ConvertedLegacyTest)
 {
   // Declare the type of the input and output mesh
 
@@ -156,7 +155,7 @@ itkDeformableSimplexMesh3DFilterTest(int, char *[])
 
   auto deformFilter = DeformFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(deformFilter, DeformableSimplexMesh3DFilter, MeshToMeshFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(deformFilter, DeformableSimplexMesh3DFilter, MeshToMeshFilter);
 
 
   constexpr unsigned int numberOfCycles{ 100 };
@@ -173,25 +172,25 @@ itkDeformableSimplexMesh3DFilterTest(int, char *[])
     simplexMesh->DisconnectPipeline();
     deformFilter->SetInput(simplexMesh);
     deformFilter->SetGradient(gradientFilter->GetOutput());
-    ITK_TEST_SET_GET_VALUE(gradientFilter->GetOutput(), deformFilter->GetGradient());
+    EXPECT_EQ(gradientFilter->GetOutput(), deformFilter->GetGradient());
 
     deformFilter->SetAlpha(alpha);
-    ITK_TEST_SET_GET_VALUE(alpha, deformFilter->GetAlpha());
+    EXPECT_EQ(alpha, deformFilter->GetAlpha());
 
     deformFilter->SetBeta(beta);
-    ITK_TEST_SET_GET_VALUE(beta, deformFilter->GetBeta());
+    EXPECT_EQ(beta, deformFilter->GetBeta());
 
     deformFilter->SetGamma(gamma);
-    ITK_TEST_SET_GET_VALUE(gamma, deformFilter->GetGamma());
+    EXPECT_EQ(gamma, deformFilter->GetGamma());
 
     deformFilter->SetDamping(damping);
-    ITK_TEST_SET_GET_VALUE(damping, deformFilter->GetDamping());
+    EXPECT_EQ(damping, deformFilter->GetDamping());
 
     deformFilter->SetIterations(iterations);
-    ITK_TEST_SET_GET_VALUE(iterations, deformFilter->GetIterations());
+    EXPECT_EQ(iterations, deformFilter->GetIterations());
 
     deformFilter->SetRigidity(rigidity);
-    ITK_TEST_SET_GET_VALUE(rigidity, deformFilter->GetRigidity());
+    EXPECT_EQ(rigidity, deformFilter->GetRigidity());
 
     deformFilter->Update();
   }
@@ -209,8 +208,4 @@ itkDeformableSimplexMesh3DFilterTest(int, char *[])
   volumecalculator->Compute();
 
   std::cout << "whole volume is " << volumecalculator->GetVolume() << std::endl;
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
