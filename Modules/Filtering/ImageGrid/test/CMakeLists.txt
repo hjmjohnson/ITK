@@ -15,7 +15,6 @@ set(
   itkChangeInformationImageFilterTest.cxx
   itkCoxDeBoorBSplineKernelFunctionTest.cxx
   itkCoxDeBoorBSplineKernelFunctionTest2.cxx
-  itkCropImageFilter3DTest.cxx
   itkCropImageFilterTest.cxx
   itkCyclicReferences.cxx
   itkCyclicShiftImageFilterTest.cxx
@@ -272,12 +271,6 @@ itk_add_test(
   COMMAND
     ITKImageGridTestDriver
     itkCropImageFilterTest
-)
-itk_add_test(
-  NAME itkCropImageFilter3DTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkCropImageFilter3DTest
 )
 itk_add_test(
   NAME itkFlipImageFilterTest1
@@ -724,6 +717,7 @@ set(
   itkBSplineScatteredDataPointSetToImageFilterGTest.cxx
   itkChangeInformationImageFilterGTest.cxx
   itkConstantPadImageGTest.cxx
+  itkCropImageFilter3DGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
   itkShrinkImageGTest.cxx
