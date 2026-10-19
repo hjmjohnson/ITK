@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKPathTests
-  itkChainCodePathTest.cxx
   itkChainCodeToFourierSeriesPathFilterTest.cxx
   itkContourExtractor2DImageFilterTest.cxx
   itkExtractOrthogonalSwath2DImageFilterTest.cxx
@@ -23,12 +22,6 @@ itk_add_test(
   COMMAND
     ITKPathTestDriver
     itkPathIteratorTest
-)
-itk_add_test(
-  NAME itkChainCodePathTest
-  COMMAND
-    ITKPathTestDriver
-    itkChainCodePathTest
 )
 itk_add_test(
   NAME itkHilbertPathTest
@@ -107,6 +100,7 @@ itk_add_test(
 set(
   ITKPathGTests
   itkChainCodePath2DGTest.cxx
+  itkChainCodePathGTest.cxx
   itkContourExtractor2DImageFilterGTest.cxx
 )
 
