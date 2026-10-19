@@ -5,7 +5,6 @@ set(
   itkDemonsImageToImageMetricv4RegistrationTest.cxx
   itkImageToImageMetricv4RegistrationTest.cxx
   itkJointHistogramMutualInformationImageToImageRegistrationTest.cxx
-  itkLabeledPointSetMetricRegistrationTest.cxx
   itkLabeledPointSetMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricv4RegistrationTest.cxx
   itkMattesMutualInformationImageToImageMetricv4Test.cxx
@@ -34,13 +33,6 @@ itk_add_test(
   COMMAND
     ITKMetricsv4TestDriver
     itkLabeledPointSetMetricTest
-)
-
-itk_add_test(
-  NAME itkLabeledPointSetMetricRegistrationTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkLabeledPointSetMetricRegistrationTest
 )
 
 itk_add_test(
@@ -335,6 +327,7 @@ set(
   itkJensenHavrdaCharvatTsallisPointSetMetricGTest.cxx
   itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationGTest.cxx
   itkJointHistogramMutualInformationImageToImageMetricv4GTest.cxx
+  itkLabeledPointSetMetricRegistrationGTest.cxx
   itkImageToImageMetricv4WorkUnitsGTest.cxx
   itkMattesMutualInformationImageToImageMetricv4GTest.cxx
 )
