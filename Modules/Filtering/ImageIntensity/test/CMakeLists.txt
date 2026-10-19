@@ -29,10 +29,6 @@ set(
   itkXorImageFilterTest.cxx
 )
 
-if(NOT ITK_LEGACY_REMOVE)
-  list(APPEND ITKImageIntensityTests itkVectorExpandImageFilterTest.cxx)
-endif()
-
 # Disable optimization on the tests below to avoid possible
 # optimization bugs in some compilers. This option will appear on the
 # command line after any other optimization flag (including those from
@@ -263,14 +259,6 @@ itk_add_test(
     ITKImageIntensityTestDriver
     itkRGBToVectorAdaptImageFilterTest
 )
-if(NOT ITK_LEGACY_REMOVE)
-  itk_add_test(
-    NAME itkVectorExpandImageFilterTest
-    COMMAND
-      ITKImageIntensityTestDriver
-      itkVectorExpandImageFilterTest
-  )
-endif()
 itk_add_test(
   NAME itkOrImageFilterTest
   COMMAND
@@ -554,6 +542,10 @@ if(MSVC)
       COMPILE_FLAGS
         -wd4723
   )
+endif()
+
+if(NOT ITK_LEGACY_REMOVE)
+  list(APPEND ITKImageIntensityGTests itkVectorExpandImageFilterGTest.cxx)
 endif()
 
 creategoogletestdriver(ITKImageIntensity "${ITKImageIntensity-Test_LIBRARIES}" "${ITKImageIntensityGTests}")
