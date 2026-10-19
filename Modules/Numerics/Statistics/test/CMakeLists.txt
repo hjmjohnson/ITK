@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkMeanSampleFilterTest2.cxx
   itkMeanSampleFilterTest3.cxx
   itkMeasurementVectorTraitsTest.cxx
   itkMembershipFunctionBaseTest2.cxx
@@ -392,12 +391,6 @@ if(DOXYGEN_DOT_EXECUTABLE)
   )
 endif()
 
-itk_add_test(
-  NAME itkMeanSampleFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMeanSampleFilterTest2
-)
 itk_add_test(
   NAME itkMeanSampleFilterTest3
   COMMAND
@@ -823,6 +816,7 @@ set(
   itkMaximumDecisionRuleGTest.cxx
   itkMaximumRatioDecisionRuleGTest.cxx
   itkMeanSampleFilterGTest.cxx
+  itkMeanSampleFilterGTest2.cxx
   itkMembershipFunctionBaseGTest.cxx
   itkMinimumDecisionRuleGTest.cxx
   itkMixtureModelComponentBaseGTest.cxx
