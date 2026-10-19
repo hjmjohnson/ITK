@@ -19,11 +19,13 @@
 #include "itkNaryAddImageFilter.h"
 #include "itkImageRegionIterator.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
 
+namespace
+{
 // Function for image initialization
 template <typename ImageType>
 void
@@ -41,13 +43,11 @@ InitializeImage(ImageType * image, const typename ImageType::PixelType & value)
 
   inputImage->FillBuffer(value);
 }
+} // namespace
 
 
-int
-itkNaryAddImageFilterTest(int, char *[])
+TEST(NaryAddImageFilter, ConvertedLegacyTest)
 {
-  bool testStatus = true;
-
   // Define the dimension of the images
   constexpr unsigned int Dimension3D{ 3 };
 
@@ -78,7 +78,7 @@ itkNaryAddImageFilterTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, NaryAddImageFilter, NaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, NaryAddImageFilter, NaryFunctorImageFilter);
 
   // Set the input images
   filter->SetInput(0, inputImageA);
@@ -88,7 +88,7 @@ itkNaryAddImageFilterTest(int, char *[])
   filter->SetFunctor(filter->GetFunctor());
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
 
   // Get the filter output
@@ -118,18 +118,13 @@ itkNaryAddImageFilterTest(int, char *[])
     ++oIt;
   }
 
-  if (failures > 0)
-  {
-    std::cout << "Test failed!" << std::endl;
-    std::cout << "Got " << failures << " different pixels." << std::endl;
-    testStatus = false;
-  }
+  EXPECT_EQ(failures, 0u) << "Got " << failures << " different pixels.";
 
 
   // Execute the filter in place
   filter->InPlaceOn();
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
 
   // Test the validity of the output
@@ -147,12 +142,7 @@ itkNaryAddImageFilterTest(int, char *[])
     ++oIt2;
   }
 
-  if (failures > 0)
-  {
-    std::cout << "Test failed!" << std::endl;
-    std::cout << "Got " << failures << " different pixels." << std::endl;
-    testStatus = false;
-  }
+  EXPECT_EQ(failures, 0u) << "Got " << failures << " different pixels.";
 
 
   // Testing with vector Images
@@ -192,7 +182,7 @@ itkNaryAddImageFilterTest(int, char *[])
 
   auto vectorFilter = VectorAdderType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(vectorFilter, NaryAddImageFilter, NaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(vectorFilter, NaryAddImageFilter, NaryFunctorImageFilter);
 
 
   // Set the input images
@@ -205,7 +195,7 @@ itkNaryAddImageFilterTest(int, char *[])
 
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(vectorFilter->Update());
+  EXPECT_NO_THROW(vectorFilter->Update());
 
 
   // Test the validity of the output
@@ -234,19 +224,8 @@ itkNaryAddImageFilterTest(int, char *[])
     ++vOutIter;
   }
 
-  if (failures > 0)
-  {
-    std::cout << "Test failed!" << std::endl;
-    std::cout << "Got " << failures << " different pixels." << std::endl;
-    testStatus = false;
-  }
-
-  if (!testStatus)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(failures, 0u) << "Got " << failures << " different pixels.";
 
   // All objects should be automatically destroyed at this point
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
