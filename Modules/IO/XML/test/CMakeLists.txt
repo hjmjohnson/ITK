@@ -329,3 +329,7 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/mytestfile.txt
 )
+
+set(ITKIOXMLGTests itkDOMGTest1.cxx)
+
+creategoogletestdriver(ITKIOXML "${ITKIOXML-Test_LIBRARIES}" "${ITKIOXMLGTests}")
