@@ -18,10 +18,9 @@
 
 #include "itkLandmarkSpatialObject.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkLandmarkSpatialObjectTest(int, char *[])
+TEST(LandmarkSpatialObject, ConvertedLegacyTest)
 {
   using LandmarkType = itk::LandmarkSpatialObject<3>;
   using LandmarkPointer = LandmarkType::Pointer;
@@ -53,7 +52,7 @@ itkLandmarkSpatialObjectTest(int, char *[])
   // Create a Landmark Spatial Object
   const LandmarkPointer landmark = LandmarkType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(landmark, LandmarkSpatialObject, PointBasedSpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(landmark, LandmarkSpatialObject, PointBasedSpatialObject);
 
   landmark->GetProperty().SetName("Landmark 1");
   landmark->SetId(1);
@@ -66,11 +65,7 @@ itkLandmarkSpatialObjectTest(int, char *[])
 
   landmark->Print(std::cout);
 
-  if (landmark->GetPoints().size() != 10)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(landmark->GetPoints().size(), 10u) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -85,11 +80,7 @@ itkLandmarkSpatialObjectTest(int, char *[])
   {
     for (unsigned int d = 0; d < 3; ++d)
     {
-      if (itk::Math::NotExactlyEquals(it->GetPositionInObjectSpace()[d], i + d))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetPositionInObjectSpace()[d], i + d) << "[FAILED]";
     }
     it++;
     i++;
@@ -108,17 +99,9 @@ itkLandmarkSpatialObjectTest(int, char *[])
   out[1] = 0;
   out[2] = 0;
 
-  if (!landmark->IsInsideInWorldSpace(in, LandmarkType::MaximumDepth, ""))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(landmark->IsInsideInWorldSpace(in, LandmarkType::MaximumDepth, "")) << "[FAILED]";
 
-  if (landmark->IsInsideInWorldSpace(out, LandmarkType::MaximumDepth, ""))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(landmark->IsInsideInWorldSpace(out, LandmarkType::MaximumDepth, "")) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -131,28 +114,12 @@ itkLandmarkSpatialObjectTest(int, char *[])
   {
     for (unsigned int d = 0; d < 3; ++d)
     {
-      if (itk::Math::NotExactlyEquals(it->GetBlue(), i))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
-      if (itk::Math::NotExactlyEquals(it->GetGreen(), i + 1))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetBlue(), i) << "[FAILED]";
+      EXPECT_EQ(it->GetGreen(), i + 1) << "[FAILED]";
 
-      if (itk::Math::NotExactlyEquals(it->GetRed(), i + 2))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetRed(), i + 2) << "[FAILED]";
 
-      if (itk::Math::NotExactlyEquals(it->GetAlpha(), i + 3))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetAlpha(), i + 3) << "[FAILED]";
     }
     it++;
     i++;
@@ -161,29 +128,16 @@ itkLandmarkSpatialObjectTest(int, char *[])
 
   // Testing IsEvaluableAt()
   std::cout << "Testing IsEvaluableAt() : ";
-  if (!landmark->IsEvaluableAtInWorldSpace(in, LandmarkType::MaximumDepth, ""))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(landmark->IsEvaluableAtInWorldSpace(in, LandmarkType::MaximumDepth, "")) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   // Testing ValueAt()
   std::cout << "Testing ValueAt() : ";
   double val = 0;
-  if (!landmark->ValueAtInWorldSpace(in, val, LandmarkType::MaximumDepth, ""))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itk::Math::NotExactlyEquals(val, 1))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(landmark->ValueAtInWorldSpace(in, val, LandmarkType::MaximumDepth, "")) << "[FAILED]";
+  EXPECT_EQ(val, 1) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
