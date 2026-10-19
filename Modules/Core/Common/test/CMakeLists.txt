@@ -42,7 +42,6 @@ set(
   itkPromoteType.cxx
   itkMetaDataDictionaryTest.cxx
   itkStdStreamLogOutputTest.cxx
-  itkTimeProbesTest.cxx
   itkVariableLengthVectorTest.cxx
   itkSmartPointerTest.cxx
   itkConstNeighborhoodIteratorTest.cxx
@@ -906,12 +905,6 @@ itk_add_test(
     ${TEMP}/test_threadLogger.txt
 )
 itk_add_test(
-  NAME itkTimeProbesTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkTimeProbesTest
-)
-itk_add_test(
   NAME itkSymmetricSecondRankTensorImageReadTest
   COMMAND
     ITKCommon1TestDriver
@@ -1402,6 +1395,7 @@ set(
   itkThreadedIteratorRangePartitionerGTest2.cxx
   itkThreadedIteratorRangePartitionerGTest3.cxx
   itkTimeProbeGTest.cxx
+  itkTimeProbesGTest.cxx
   itkTimeStampGTest.cxx
   itkTorusInteriorExteriorSpatialFunctionGTest.cxx
   itkVariableLengthVectorGTest.cxx
