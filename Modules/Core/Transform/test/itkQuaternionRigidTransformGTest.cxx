@@ -16,12 +16,12 @@
  *
  *=========================================================================*/
 
+#include "itkQuaternionRigidTransform.h"
+#include "itkGTest.h"
+
 #include <iostream>
 
-#include "itkQuaternionRigidTransform.h"
-
-int
-itkQuaternionRigidTransformTest(int, char *[])
+TEST(QuaternionRigidTransform, ConvertedLegacyTest)
 {
 
   using CoordinateType = double;
@@ -46,11 +46,7 @@ itkQuaternionRigidTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Identity doesn't have a null offset" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Identity doesn't have a null offset";
   }
 
   /* Create a Rigid 3D transform with translation */
@@ -76,11 +72,7 @@ itkQuaternionRigidTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "GetTranslation differs from SetTranslation value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "GetTranslation differs from SetTranslation value ";
 
     {
       // Translate an itk::Point
@@ -96,13 +88,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating point: " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -120,12 +108,7 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an itk::Vector " << std::endl;
     }
@@ -143,12 +126,7 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating covariant vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating covariant vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
@@ -168,12 +146,7 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vnl_vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
@@ -219,11 +192,7 @@ itkQuaternionRigidTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from SetOffset value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from SetOffset value ";
 
     // VNL uses transposed matrices.
     vnl_matrix_fixed<double, 3, 3> mrotation = qrotation.rotation_matrix_transpose();
@@ -243,12 +212,7 @@ itkQuaternionRigidTransformTest(int, char *[])
         }
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Rotation Matrix  differs " << std::endl;
-      std::cerr << "from SetMatrix value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Rotation Matrix  differs " << std::endl << "from SetMatrix value ";
 
     {
       // Rotate an itk::Point
@@ -269,13 +233,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating point   : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -299,13 +259,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vector  : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
@@ -329,13 +285,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error Rotating covariant vector: " << p << std::endl;
-        std::cerr << "Result should be               : " << q << std::endl;
-        std::cerr << "Reported Result is             : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
+                      << "Result should be               : " << q << std::endl
+                      << "Reported Result is             : " << r;
 
       std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
@@ -362,13 +314,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vnl_vector : " << p << std::endl;
-        std::cerr << "Result should be             : " << q << std::endl;
-        std::cerr << "Reported Result is           : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
+                      << "Result should be             : " << q << std::endl
+                      << "Reported Result is           : " << r;
 
       std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
@@ -426,14 +374,11 @@ itkQuaternionRigidTransformTest(int, char *[])
         const double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
         const double computedDerivative = jacobian[j][k];
         approxJacobian[j][k] = approxDerivative;
-        if (itk::Math::Absolute(approxDerivative - computedDerivative) > 1e-5)
-        {
-          std::cerr << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl;
-          std::cerr << "Result should be: " << approxDerivative << std::endl;
-          std::cerr << "Reported result is: " << computedDerivative << std::endl;
-          std::cerr << " [ FAILED ] " << std::endl;
-          return EXIT_FAILURE;
-        } // if
+        EXPECT_LE(itk::Math::Absolute(approxDerivative - computedDerivative), 1e-5)
+          << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl
+          << "Result should be: " << approxDerivative << std::endl
+          << "Reported result is: " << computedDerivative << std::endl
+          << " [ FAILED ] ";
       } // for j
 
     } // for k
@@ -448,12 +393,7 @@ itkQuaternionRigidTransformTest(int, char *[])
     {
       auto       inverseQuaternionRigid = TransformType::New();
       const bool inverseIsValid = quaternionRigid->GetInverse(inverseQuaternionRigid);
-      if (!inverseIsValid)
-      {
-        std::cerr << "Error computing inverse transform" << std::endl;
-        std::cerr << " [ FAILED ] " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(inverseIsValid) << "Error computing inverse transform" << std::endl << " [ FAILED ] ";
 
       std::cout << " [ PASSED ] compute inverse transform" << std::endl;
 
@@ -462,14 +402,10 @@ itkQuaternionRigidTransformTest(int, char *[])
     // pOut should equate pInit
     for (unsigned int j = 0; j < 3; ++j)
     {
-      if (itk::Math::Absolute(pOut[j] - pInit[j]) > 1e-5)
-      {
-        std::cerr << "Error computing back transform" << std::endl;
-        std::cerr << "Result should be: " << pInit << std::endl;
-        std::cerr << "Reported result is: " << pOut << std::endl;
-        std::cerr << " [ FAILED ] " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(pOut[j] - pInit[j]), 1e-5) << "Error computing back transform" << std::endl
+                                                               << "Result should be: " << pInit << std::endl
+                                                               << "Reported result is: " << pOut << std::endl
+                                                               << " [ FAILED ] ";
     }
 
     std::cout << " [ PASSED ] " << std::endl;
@@ -539,11 +475,7 @@ itkQuaternionRigidTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from SetOffset value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from SetOffset value ";
 
     // VNL uses transposed matrices.
     vnl_matrix_fixed<double, 3, 3> mrotation = qrotation.rotation_matrix_transpose();
@@ -563,12 +495,7 @@ itkQuaternionRigidTransformTest(int, char *[])
         }
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Rotation Matrix  differs " << std::endl;
-      std::cerr << "from SetMatrix value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Rotation Matrix  differs " << std::endl << "from SetMatrix value ";
 
     {
       // Rotate an itk::Point
@@ -593,13 +520,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating point   : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -623,13 +546,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vector  : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
@@ -653,13 +572,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error Rotating covariant vector: " << p << std::endl;
-        std::cerr << "Result should be               : " << q << std::endl;
-        std::cerr << "Reported Result is             : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
+                      << "Result should be               : " << q << std::endl
+                      << "Reported Result is             : " << r;
 
       std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
@@ -686,13 +601,9 @@ itkQuaternionRigidTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vnl_vector : " << p << std::endl;
-        std::cerr << "Result should be             : " << q << std::endl;
-        std::cerr << "Reported Result is           : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
+                      << "Result should be             : " << q << std::endl
+                      << "Reported Result is           : " << r;
 
       std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
@@ -722,26 +633,8 @@ itkQuaternionRigidTransformTest(int, char *[])
       }
     }
 
-    Ok = false;
-    try
-    {
-      t->SetMatrix(matrix);
-    }
-    catch (const itk::ExceptionObject & itkNotUsed(err))
-    {
-      Ok = true;
-    }
-    catch (...)
-    {
-      std::cout << "Caught unknown exception" << std::endl;
-    }
-
-    if (!Ok)
-    {
-      std::cerr << "Error: expected to catch an exception when attempting";
-      std::cerr << " to set an non-orthogonal matrix." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(t->SetMatrix(matrix), itk::ExceptionObject) << "Error: expected to catch an exception when attempting"
+                                                             << " to set an non-orthogonal matrix.";
 
     t = TransformType::New();
 
@@ -754,27 +647,7 @@ itkQuaternionRigidTransformTest(int, char *[])
     matrix[1][0] = std::sin(a);
     matrix[1][1] = std::cos(a);
 
-    Ok = true;
-    try
-    {
-      t->SetMatrix(matrix);
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << err << std::endl;
-      Ok = false;
-    }
-    catch (...)
-    {
-      std::cout << "Caught unknown exception" << std::endl;
-      Ok = false;
-    }
-
-    if (!Ok)
-    {
-      std::cerr << "Error: caught unexpected exception" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NO_THROW(t->SetMatrix(matrix)) << "Error: caught unexpected exception";
 
     // Check the computed parameters
 
@@ -792,17 +665,11 @@ itkQuaternionRigidTransformTest(int, char *[])
     ParametersType p = t2->GetParameters();
     for (unsigned int k = 0; k < e.GetSize(); ++k)
     {
-      if (itk::Math::Absolute(e[k] - p[k]) > epsilon)
-      {
-        std::cout << " [ FAILED ] " << std::endl;
-        std::cout << "Expected parameters: " << e << std::endl;
-        std::cout << "but got: " << p << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(e[k] - p[k]), epsilon) << " [ FAILED ] " << std::endl
+                                                           << "Expected parameters: " << e << std::endl
+                                                           << "but got: " << p;
     }
 
     std::cout << "[ PASSED ]" << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
