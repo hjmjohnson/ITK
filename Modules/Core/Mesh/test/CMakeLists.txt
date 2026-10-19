@@ -4,7 +4,6 @@ set(
   itkBinaryMask3DMeshSourceTest.cxx
   itkConnectedRegionsMeshFilterTest2.cxx
   itkMeshFstreamTest.cxx
-  itkMeshSourceGraftOutputTest.cxx
   itkMeshSpatialObjectIOTest.cxx
   itkMeshTest.cxx
   itkNewTest.cxx
@@ -374,12 +373,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/testMeshFstream.txt
 )
 itk_add_test(
-  NAME itkMeshSourceGraftOutputTest
-  COMMAND
-    ITKMeshTestDriver
-    itkMeshSourceGraftOutputTest
-)
-itk_add_test(
   NAME itkMeshSpatialObjectIOTest
   COMMAND
     ITKMeshTestDriver
@@ -483,5 +476,6 @@ set(
   itkInteriorExteriorMeshFilterGTest.cxx
   itkMeshCellDataGTest.cxx
   itkMeshRegionGTest.cxx
+  itkMeshSourceGraftOutputGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
