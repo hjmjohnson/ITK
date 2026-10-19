@@ -13,7 +13,6 @@ set(
   itkMatrixIndexSelectionImageFilterTest.cxx
   itkModulusImageFilterTest.cxx
   itkNormalizeImageFilterTest.cxx
-  itkNotImageFilterTest.cxx
   itkNthElementPixelAccessorTest2.cxx
   itkOrImageFilterTest.cxx
   itkPolylineMask2DImageFilterTest.cxx
@@ -209,12 +208,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkAndImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkAndImageFilterTest.png
-)
-itk_add_test(
-  NAME itkNotImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkNotImageFilterTest
 )
 itk_add_test(
   NAME itkConstrainedValueAdditionImageFilterTest
@@ -613,6 +606,7 @@ set(
   itkNaryMaximumImageFilterGTest.cxx
   itkNormalizeToConstantImageFilterGTest.cxx
   itkNotEqualGTest.cxx
+  itkNotImageFilterGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
 )

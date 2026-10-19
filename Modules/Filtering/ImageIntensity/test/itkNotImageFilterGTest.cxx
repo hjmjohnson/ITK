@@ -18,11 +18,10 @@
 
 #include "itkNotImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkNotImageFilterTest(int, char *[])
+TEST(NotImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -68,14 +67,16 @@ itkNotImageFilterTest(int, char *[])
   // Create the filter
   auto filter = NotImageFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, NotImageFilter, UnaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, NotImageFilter, UnaryFunctorImageFilter);
 
-  filter->SetForegroundValue(2);
-  ITK_TEST_SET_GET_VALUE(2, filter->GetForegroundValue());
+  constexpr OutputImageType::PixelType foregroundValue{ 2 };
+  filter->SetForegroundValue(foregroundValue);
+  EXPECT_EQ(foregroundValue, filter->GetForegroundValue());
   filter->SetForegroundValue(1);
 
-  filter->SetBackgroundValue(10);
-  ITK_TEST_SET_GET_VALUE(10, filter->GetBackgroundValue());
+  constexpr OutputImageType::PixelType backgroundValue{ 10 };
+  filter->SetBackgroundValue(backgroundValue);
+  EXPECT_EQ(backgroundValue, filter->GetBackgroundValue());
   filter->SetBackgroundValue(0);
 
   // Set the input images
@@ -100,12 +101,11 @@ itkNotImageFilterTest(int, char *[])
   {
     const InputImageType::PixelType  input = it.Get();
     const OutputImageType::PixelType output = ot.Get();
-    ITK_TEST_EXPECT_EQUAL(input, !output);
+    EXPECT_EQ(input, !output);
     ++ot;
     ++it;
   }
 
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
