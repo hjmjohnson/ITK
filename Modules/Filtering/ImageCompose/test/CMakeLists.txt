@@ -3,7 +3,6 @@ set(
   ITKImageComposeTests
   itkComposeBigVectorImageFilterTest.cxx
   itkComposeRGBAImageFilterTest.cxx
-  itkComposeRGBImageFilterTest.cxx
   itkImageReadRealAndImaginaryWriteComplexTest.cxx
   itkImageToVectorImageFilterTest.cxx
   itkJoinImageFilterTest.cxx
@@ -12,13 +11,6 @@ set(
 )
 
 createtestdriver(ITKImageCompose "${ITKImageCompose-Test_LIBRARIES}" "${ITKImageComposeTests}")
-
-itk_add_test(
-  NAME itkComposeRGBImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkComposeRGBImageFilterTest
-)
 
 if(ITK_COMPUTER_MEMORY_SIZE GREATER 13)
   itk_add_test(
@@ -107,5 +99,6 @@ set(
   itkCompose2DVectorImageFilterGTest.cxx
   itkCompose3DCovariantVectorImageFilterGTest.cxx
   itkCompose3DVectorImageFilterGTest.cxx
+  itkComposeRGBImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKImageCompose "${ITKImageCompose-Test_LIBRARIES}" "${ITKImageComposeGTests}")
