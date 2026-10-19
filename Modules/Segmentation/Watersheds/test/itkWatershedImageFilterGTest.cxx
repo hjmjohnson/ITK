@@ -20,11 +20,10 @@
 #include "itkWatershedEquivalenceRelabeler.h"
 #include "itkWatershedBoundaryResolver.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkWatershedImageFilterTest(int, char *[])
+TEST(WatershedImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 2 };
@@ -60,33 +59,33 @@ itkWatershedImageFilterTest(int, char *[])
   const itk::watershed::EquivalenceRelabeler<LongImageType2D::PixelType, Dimension>::Pointer eq =
     itk::watershed::EquivalenceRelabeler<LongImageType2D::PixelType, Dimension>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(eq, EquivalenceRelabeler, ProcessObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(eq, EquivalenceRelabeler, ProcessObject);
 
 
   eq->SetInputImage(longimage2D);
 
   eq->SetEquivalencyTable(table);
-  ITK_TEST_SET_GET_VALUE(table, eq->GetEquivalencyTable());
+  EXPECT_EQ(table, eq->GetEquivalencyTable());
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(eq->Update());
+  EXPECT_NO_THROW(eq->Update());
 
   // Test WatershedMiniPipelineProgressCommand
   // Forcing the execution of the const Execute method which is not normally called.
   const itk::WatershedMiniPipelineProgressCommand::Pointer wmppc = itk::WatershedMiniPipelineProgressCommand::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(wmppc, WatershedMiniPipelineProgressCommand, Command);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(wmppc, WatershedMiniPipelineProgressCommand, Command);
 
   constexpr double count{ 2.0 };
   wmppc->SetCount(count);
-  ITK_TEST_SET_GET_VALUE(count, wmppc->GetCount());
+  EXPECT_EQ(count, wmppc->GetCount());
 
   constexpr unsigned int numberOfFilters{ 2 };
   wmppc->SetNumberOfFilters(numberOfFilters);
-  ITK_TEST_SET_GET_VALUE(numberOfFilters, wmppc->GetNumberOfFilters());
+  EXPECT_EQ(numberOfFilters, wmppc->GetNumberOfFilters());
 
   wmppc->SetFilter(eq);
-  ITK_TEST_SET_GET_VALUE(eq, wmppc->GetFilter());
+  EXPECT_EQ(eq, wmppc->GetFilter());
 
   const itk::ProcessObject * constp = eq.GetPointer();
   wmppc->Execute(constp, itk::ProgressEvent());
@@ -95,62 +94,46 @@ itkWatershedImageFilterTest(int, char *[])
   // Test watershed::BoundaryResolver
   const itk::watershed::BoundaryResolver<PixelType, Dimension>::Pointer br =
     itk::watershed::BoundaryResolver<PixelType, Dimension>::New();
-  if (br.IsNull())
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cout << "Null itk::watershed::BoundaryResolver." << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_FALSE(br.IsNull());
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(br, BoundaryResolver, ProcessObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(br, BoundaryResolver, ProcessObject);
 
   const itk::watershed::Boundary<PixelType, 1>::Pointer boundaryA = itk::watershed::Boundary<PixelType, 1>::New();
-  if (boundaryA.IsNull())
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cout << "Null itk::watershed::Boundary." << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_FALSE(boundaryA.IsNull());
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(boundaryA, Boundary, DataObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(boundaryA, Boundary, DataObject);
 
   const itk::watershed::Boundary<PixelType, 1>::Pointer boundaryB = itk::watershed::Boundary<PixelType, 1>::New();
-  if (boundaryB.IsNull())
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cout << "Null itk::watershed::Boundary." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(boundaryB.IsNull());
 
 
   const itk::WatershedImageFilter<ImageType2D>::Pointer watershedFilter = itk::WatershedImageFilter<ImageType2D>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(watershedFilter, WatershedImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(watershedFilter, WatershedImageFilter, ImageToImageFilter);
 
   const itk::SimpleFilterWatcher watchIt(watershedFilter, "WatershedImageFilter");
 
   constexpr double threshold{ .05 };
   watershedFilter->SetThreshold(threshold);
-  ITK_TEST_SET_GET_VALUE(threshold, watershedFilter->GetThreshold());
+  EXPECT_EQ(threshold, watershedFilter->GetThreshold());
 
   constexpr double level{ 1.0 };
   watershedFilter->SetLevel(level);
-  ITK_TEST_SET_GET_VALUE(level, watershedFilter->GetLevel());
+  EXPECT_EQ(level, watershedFilter->GetLevel());
 
   unsigned int inputId = 1;
-  ITK_TRY_EXPECT_EXCEPTION(watershedFilter->SetInput(inputId, image2D));
+  EXPECT_THROW(watershedFilter->SetInput(inputId, image2D), itk::ExceptionObject);
 
   watershedFilter->SetInput(image2D);
   const ImageType2D * input = watershedFilter->GetInput();
 
   inputId = 0;
   watershedFilter->SetInput(inputId, image2D);
-  ITK_TEST_SET_GET_VALUE(input, watershedFilter->GetInput());
+  EXPECT_EQ(input, watershedFilter->GetInput());
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(watershedFilter->Update());
+  EXPECT_NO_THROW(watershedFilter->Update());
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
