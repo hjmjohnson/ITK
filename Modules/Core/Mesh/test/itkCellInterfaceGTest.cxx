@@ -27,7 +27,10 @@
 #include "itkTetrahedronCell.h"
 #include "itkQuadraticTriangleCell.h"
 #include "itkPolygonCell.h"
+#include "itkGTest.h"
 
+namespace
+{
 /**
  * Define a mesh type that stores a PixelType of "int".  Use the defaults
  * for the other template parameters.
@@ -137,8 +140,9 @@ TestCellInterface(const std::string_view name, TCell * aCell)
 
   return EXIT_SUCCESS;
 }
-int
-itkCellInterfaceTest(int, char *[])
+} // namespace
+
+TEST(CellInterface, ConvertedLegacyTest)
 {
   int status = EXIT_SUCCESS;
 
@@ -180,5 +184,5 @@ itkCellInterfaceTest(int, char *[])
 
 
   std::cout << "Test finished." << std::endl;
-  return status;
+  EXPECT_EQ(status, EXIT_SUCCESS);
 }
