@@ -5,7 +5,6 @@ set(
   itkGaussianMixtureModelComponentTest.cxx
   itkGaussianRandomSpatialNeighborSubsamplerTest.cxx
   itkImageToHistogramFilterTest2.cxx
-  itkImageToListSampleFilterTest2.cxx
   itkImageToListSampleFilterTest3.cxx
   itkKalmanLinearEstimatorTest.cxx
   itkKdTreeBasedKmeansEstimatorTest.cxx
@@ -512,12 +511,6 @@ itk_add_test(
     100
 )
 itk_add_test(
-  NAME itkImageToListSampleFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToListSampleFilterTest2
-)
-itk_add_test(
   NAME itkImageToListSampleFilterTest3
   COMMAND
     ITKStatisticsTestDriver
@@ -795,6 +788,7 @@ set(
   itkImageToListSampleAdaptorGTest.cxx
   itkImageToListSampleAdaptorGTest2.cxx
   itkImageToListSampleFilterGTest.cxx
+  itkImageToListSampleFilterGTest2.cxx
   itkJointDomainImageToListSampleAdaptorGTest.cxx
   itkKdTreeGTest.cxx
   itkManhattanDistanceMetricGTest.cxx
