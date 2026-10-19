@@ -20,9 +20,9 @@
 #include <iostream>
 
 #include "itkAutomaticTopologyMeshSource.h"
+#include "itkGTest.h"
 
-int
-itkAutomaticTopologyMeshSourceTest(int, char *[])
+TEST(AutomaticTopologyMeshSource, ConvertedLegacyTest)
 {
 
   // Declare the type of the Mesh
@@ -188,16 +188,7 @@ itkAutomaticTopologyMeshSourceTest(int, char *[])
                             meshSource->AddPoint(3, 1, 1),
                             meshSource->AddPoint(4, 1, 1));
 
-  try
-  {
-    meshSource->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Exception thrown during Update() " << std::endl;
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(meshSource->Update());
 
   MeshType * mesh = meshSource->GetOutput();
 
@@ -279,32 +270,20 @@ itkAutomaticTopologyMeshSourceTest(int, char *[])
   // Check that the right number of points has been added.
 
   int numPoints = meshSource->GetOutput()->GetNumberOfPoints();
-  if (numPoints != 17)
-  {
-    std::cerr << "Mesh shows " << numPoints << " points, but 17 were added." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(numPoints, 17) << "Mesh shows " << numPoints << " points, but 17 were added.";
 
   // Check that the right number of cells has been added.
 
   int numCells = meshSource->GetOutput()->GetNumberOfCells();
-  if (numCells != 68)
-  {
-    std::cerr << "Mesh shows " << numCells << " cells, but 68 were added." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(numCells, 68) << "Mesh shows " << numCells << " cells, but 68 were added.";
 
   // Check that the output is not destroyed when calling Update()
   meshSource->Update();
 
   numPoints = meshSource->GetOutput()->GetNumberOfPoints();
   numCells = meshSource->GetOutput()->GetNumberOfCells();
-  if (numPoints != 17 || numCells != 68)
-  {
-    std::cerr << "Mesh is being changed when invoking Update()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(numPoints, 17) << "Mesh is being changed when invoking Update()";
+  EXPECT_EQ(numCells, 68) << "Mesh is being changed when invoking Update()";
 
   meshSource->Print(std::cout);
-  return EXIT_SUCCESS;
 }
