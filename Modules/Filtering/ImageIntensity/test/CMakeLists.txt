@@ -5,7 +5,6 @@ set(
   itkAndImageFilterTest.cxx
   itkBoundedReciprocalImageFilterTest.cxx
   itkConstrainedValueAdditionImageFilterTest.cxx
-  itkCosImageFilterAndAdaptorTest.cxx
   itkDiscreteGaussianDerivativeImageFunctionTest.cxx
   itkDiscreteGradientMagnitudeGaussianImageFunctionTest.cxx
   itkDiscreteHessianGaussianImageFunctionTest.cxx
@@ -89,12 +88,6 @@ itk_add_test(
     ITKImageIntensityTestDriver
     itkBoundedReciprocalImageFilterTest
     DATA{${ITK_DATA_ROOT}/Input/Gourds.png}
-)
-itk_add_test(
-  NAME itkCosImageFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkCosImageFilterAndAdaptorTest
 )
 itk_add_test(
   NAME itkVectorRescaleIntensityImageFilterTest
@@ -726,6 +719,7 @@ set(
   itkComplexToModulusFilterAndAdaptorGTest.cxx
   itkComplexToPhaseFilterAndAdaptorGTest.cxx
   itkComplexToRealFilterAndAdaptorGTest.cxx
+  itkCosImageFilterAndAdaptorGTest.cxx
   itkEqualGTest.cxx
   itkGreaterEqualGTest.cxx
   itkGreaterGTest.cxx
