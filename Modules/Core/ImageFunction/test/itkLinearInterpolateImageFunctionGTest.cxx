@@ -18,11 +18,13 @@
 
 #include <iostream>
 
-#include "itkTestingMacros.h"
 #include "itkImage.h"
 #include "itkVectorImage.h"
 #include "itkLinearInterpolateImageFunction.h"
+#include "itkGTest.h"
 
+namespace
+{
 /* Allows testing up to TDimension=4 */
 template <unsigned int TDimension>
 [[nodiscard]] int
@@ -149,7 +151,7 @@ RunLinearInterpolateTest()
   auto radius = ImageType::SizeType::Filled(1);
   for (unsigned int d = 0; d < Dimensions; ++d)
   {
-    ITK_TEST_SET_GET_VALUE(radius[d], interpolator->GetRadius()[d]);
+    EXPECT_EQ(radius[d], interpolator->GetRadius()[d]);
   }
 
   constexpr AccumulatorType incr{ 0.2 };
@@ -254,37 +256,15 @@ RunLinearInterpolateTest()
   return EXIT_SUCCESS;
 } // RunTest()
 
-int
-itkLinearInterpolateImageFunctionTest(int, char *[])
+} // namespace
+
+TEST(LinearInterpolateImageFunction, ConvertedLegacyTest)
 {
   /* Test separately for images of 1 through 4 dimensions because this function
    * has optimized implementations for dimensionality of 1-3, and unoptimized
    * implementation for 4 and greater. */
-  int result = EXIT_SUCCESS;
-
-  std::cout << "***** Testing dimensionality of 1 *****" << std::endl;
-  if (RunLinearInterpolateTest<1>() == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-    std::cout << "Failed for dimensionality 1." << std::endl;
-  }
-  std::cout << "***** Testing dimensionality of 2 *****" << std::endl;
-  if (RunLinearInterpolateTest<2>() == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-    std::cout << "Failed for dimensionality 2." << std::endl;
-  }
-  std::cout << "***** Testing dimensionality of 3 *****" << std::endl;
-  if (RunLinearInterpolateTest<3>() == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-    std::cout << "Failed for dimensionality 3." << std::endl;
-  }
-  std::cout << "***** Testing dimensionality of 4 *****" << std::endl;
-  if (RunLinearInterpolateTest<4>() == EXIT_FAILURE)
-  {
-    result = EXIT_FAILURE;
-    std::cout << "Failed for dimensionality 4." << std::endl;
-  }
-  return result;
+  EXPECT_EQ(RunLinearInterpolateTest<1>(), EXIT_SUCCESS) << "Failed for dimensionality 1.";
+  EXPECT_EQ(RunLinearInterpolateTest<2>(), EXIT_SUCCESS) << "Failed for dimensionality 2.";
+  EXPECT_EQ(RunLinearInterpolateTest<3>(), EXIT_SUCCESS) << "Failed for dimensionality 3.";
+  EXPECT_EQ(RunLinearInterpolateTest<4>(), EXIT_SUCCESS) << "Failed for dimensionality 4.";
 }
