@@ -9,7 +9,6 @@ set(
   itkDiscreteGradientMagnitudeGaussianImageFunctionTest.cxx
   itkDiscreteHessianGaussianImageFunctionTest.cxx
   itkInvertIntensityImageFilterTest.cxx
-  itkLog10ImageFilterAndAdaptorTest.cxx
   itkLogImageFilterAndAdaptorTest.cxx
   itkMagnitudeAndPhaseToComplexImageFilterTest.cxx
   itkMaskNegatedImageFilterTest.cxx
@@ -102,12 +101,6 @@ itk_add_test(
   COMMAND
     ITKImageIntensityTestDriver
     itkMinimumImageFilterTest
-)
-itk_add_test(
-  NAME itkLog10ImageFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkLog10ImageFilterAndAdaptorTest
 )
 itk_add_test(
   NAME itkVectorIndexSelectionCastImageFilterTest1
@@ -664,6 +657,7 @@ set(
   itkIntensityWindowingImageFilterGTest.cxx
   itkLessEqualGTest.cxx
   itkLessGTest.cxx
+  itkLog10ImageFilterAndAdaptorGTest.cxx
   itkMaskedAssignImageFilterGTest.cxx
   itkMaskImageFilterGTest.cxx
   itkNotEqualGTest.cxx
