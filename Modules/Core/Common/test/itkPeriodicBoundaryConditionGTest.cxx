@@ -20,8 +20,10 @@
 
 #include "itkPeriodicBoundaryCondition.h"
 #include "itkVectorImage.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 using ImageType = itk::Image<int, 2>;
 using RegionType = ImageType::RegionType;
 using IndexType = ImageType::IndexType;
@@ -32,7 +34,7 @@ using RadiusType = IteratorType::RadiusType;
 using VectorImageType = itk::VectorImage<int, 2>;
 using VectorIteratorType = itk::ConstNeighborhoodIterator<VectorImageType>;
 
-static bool
+bool
 TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
 {
   bool success = true;
@@ -97,29 +99,9 @@ TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
 
   return success;
 }
+} // namespace
 
-static bool
-CheckInputRequestedRegion(const RegionType & imageRegion,
-                          const RegionType & requestedRegion,
-                          const RegionType & expectedRegion)
-{
-  if (requestedRegion != expectedRegion)
-  {
-    std::cerr << "Unexpected input region for request region: " << std::endl;
-    std::cerr << imageRegion << std::endl;
-    std::cerr << "Got:" << std::endl;
-    std::cerr << requestedRegion << std::endl;
-    std::cerr << "Expected: " << std::endl;
-    std::cerr << expectedRegion << std::endl;
-
-    return false;
-  }
-
-  return true;
-}
-
-int
-itkPeriodicBoundaryConditionTest(int, char *[])
+TEST(PeriodicBoundaryCondition, ConvertedLegacyTest)
 {
   // Test an image to cover one operator() method.
   auto image = ImageType::New();
@@ -168,10 +150,7 @@ itkPeriodicBoundaryConditionTest(int, char *[])
   {
     std::cout << "Index: " << it.GetIndex() << std::endl;
     const bool success = TestPrintNeighborhood(it, vit);
-    if (!success)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(success);
   }
   RadiusType radiusTwo;
   radiusTwo[0] = radiusTwo[1] = 2;
@@ -189,10 +168,7 @@ itkPeriodicBoundaryConditionTest(int, char *[])
   {
     std::cout << "Index: " << it2.GetIndex() << std::endl;
     const bool success = TestPrintNeighborhood(it2, vit2);
-    if (!success)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(success);
   }
 
   // Now test the input region calculation
@@ -206,12 +182,7 @@ itkPeriodicBoundaryConditionTest(int, char *[])
   RegionType expectedRegion = requestRegion;
 
   RegionType inputRegion = bc.GetInputRequestedRegion(imageRegion, requestRegion);
-  if (!CheckInputRequestedRegion(imageRegion, inputRegion, expectedRegion))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "[PASSED]" << std::endl;
+  EXPECT_EQ(inputRegion, expectedRegion);
 
   // Test 2
   std::cout << "GetInputRequestedRegion() Test 2" << std::endl;
@@ -230,12 +201,7 @@ itkPeriodicBoundaryConditionTest(int, char *[])
   expectedRegion = { expectedIndex, expectedSize };
 
   inputRegion = bc.GetInputRequestedRegion(imageRegion, requestRegion);
-  if (!CheckInputRequestedRegion(imageRegion, inputRegion, expectedRegion))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "[PASSED]" << std::endl;
+  EXPECT_EQ(inputRegion, expectedRegion);
 
   // Test 3
   std::cout << "GetInputRequestedRegion() Test 3" << std::endl;
@@ -252,19 +218,11 @@ itkPeriodicBoundaryConditionTest(int, char *[])
   expectedRegion = { expectedIndex, expectedSize };
 
   inputRegion = bc.GetInputRequestedRegion(imageRegion, requestRegion);
-  if (!CheckInputRequestedRegion(imageRegion, inputRegion, expectedRegion))
-  {
-    std::cerr << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "[PASSED]" << std::endl;
+  EXPECT_EQ(inputRegion, expectedRegion);
 
   // Other boundary condition tests
-  if (bc.RequiresCompleteNeighborhood() != true)
-  {
-    std::cerr << "RequiresCompleteNeighborhood() expected to return true, got false instead." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(bc.RequiresCompleteNeighborhood())
+    << "RequiresCompleteNeighborhood() expected to return true, got false instead.";
 
   // Print boundary condition
   bc.Print(std::cout);
@@ -297,7 +255,5 @@ itkPeriodicBoundaryConditionTest(int, char *[])
     }
     ++testIter;
   }
-  ITK_TEST_EXPECT_EQUAL(sum, testSize[0] * testSize[1] * 3);
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(sum, testSize[0] * testSize[1] * 3);
 }

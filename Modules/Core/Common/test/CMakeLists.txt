@@ -52,7 +52,6 @@ set(
   itkStdStreamLogOutputTest.cxx
   itkTimeProbesTest.cxx
   itkVariableLengthVectorTest.cxx
-  itkPeriodicBoundaryConditionTest.cxx
   itkSmartPointerTest.cxx
   itkConstNeighborhoodIteratorTest.cxx
   itkShapedNeighborhoodIteratorTest.cxx
@@ -790,12 +789,6 @@ itk_add_test(
     itkObjectFactoryOnlyNewTest
 )
 itk_add_test(
-  NAME itkPeriodicBoundaryConditionTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkPeriodicBoundaryConditionTest
-)
-itk_add_test(
   NAME itkPhasedArray3DSpecialCoordinatesImageTest
   COMMAND
     ITKCommon1TestDriver
@@ -1292,6 +1285,7 @@ set(
   itkOctreeGTest.cxx
   itkOffsetGTest.cxx
   itkOptimizerParametersGTest.cxx
+  itkPeriodicBoundaryConditionGTest.cxx
   itkPixelAccessGTest.cxx
   itkPointGTest.cxx
   itkPointSetGTest.cxx
