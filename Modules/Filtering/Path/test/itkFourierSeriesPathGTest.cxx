@@ -18,10 +18,9 @@
 
 #include <iostream>
 #include "itkFourierSeriesPath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkFourierSeriesPathTest(int, char *[])
+TEST(FourierSeriesPath, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using PathType = itk::FourierSeriesPath<Dimension>;
@@ -29,10 +28,9 @@ itkFourierSeriesPathTest(int, char *[])
   using OffsetType = PathType::OffsetType;
   using VectorType = PathType::VectorType;
 
-  bool passed = true;
   auto path = PathType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path, FourierSeriesPath, ParametricPath);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path, FourierSeriesPath, ParametricPath);
 
   // Average value is (5,5)
   auto       cosV = itk::MakeFilled<VectorType>(5);
@@ -45,34 +43,27 @@ itkFourierSeriesPathTest(int, char *[])
   std::cout << "Evaluating at 0, 0.5, and 1.0: " << path->Evaluate(0) << ", " << path->Evaluate(0.5) << ", "
             << path->Evaluate(1.0) << std::endl;
   // Floating point can be imprecise, so convert to rounded int for comparison
-  if (static_cast<int>(0.5 + 1000 * (path->Evaluate(1.0))[0]) !=
-        static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[0]) ||
-      static_cast<int>(0.5 + 1000 * (path->Evaluate(1.0))[1]) !=
-        static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[1]))
-  {
-    std::cout << "Evaluate() Failed" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->Evaluate(1.0))[0]),
+            static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[0]))
+    << "Evaluate() Failed";
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->Evaluate(1.0))[1]),
+            static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[1]))
+    << "Evaluate() Failed";
 
   std::cout << "Evaluating to an index at 0, 0.5, and 1.0: " << path->EvaluateToIndex(0) << ", "
             << path->EvaluateToIndex(0.5) << ", " << path->EvaluateToIndex(1.0) << std::endl;
-  if (path->EvaluateToIndex(1.0) != path->EvaluateToIndex(0.0))
-  {
-    std::cout << "FourierSeriesPathTest: EvaluateToIndex() Failed" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(path->EvaluateToIndex(1.0), path->EvaluateToIndex(0.0))
+    << "FourierSeriesPathTest: EvaluateToIndex() Failed";
 
   std::cout << "Evaluating the derivative at 0, 0.5, and 1.0: " << path->EvaluateDerivative(0) << ", "
             << path->EvaluateDerivative(0.5) << ", " << path->EvaluateDerivative(1.0) << std::endl;
   // Floating point can be imprecise, so convert to rounded int for comparison
-  if (static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(1.0))[0]) !=
-        static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.0))[0]) ||
-      static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(1.0))[1]) !=
-        static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.0))[1]))
-  {
-    std::cout << "EvaluateDerivative() Failed" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(1.0))[0]),
+            static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.0))[0]))
+    << "EvaluateDerivative() Failed";
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(1.0))[1]),
+            static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.0))[1]))
+    << "EvaluateDerivative() Failed";
 
   InputType  input = 0;
   OffsetType offset = path->IncrementInput(input);
@@ -81,18 +72,6 @@ itkFourierSeriesPathTest(int, char *[])
   input = 0.5;
   offset = path->IncrementInput(input);
   std::cout << "Incrementing the input from 0.5 to " << input << ": " << offset << std::endl;
-  if (offset[0] != -1 || offset[1] != -1)
-  {
-    std::cout << "IncrementInput() Failed" << std::endl;
-    passed = false;
-  }
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_EQ(offset[0], -1) << "IncrementInput() Failed";
+  EXPECT_EQ(offset[1], -1) << "IncrementInput() Failed";
 }
