@@ -4,7 +4,6 @@ set(
   itkANTSNeighborhoodCorrelationImageToImageRegistrationTest.cxx
   itkDemonsImageToImageMetricv4RegistrationTest.cxx
   itkImageToImageMetricv4RegistrationTest.cxx
-  itkJointHistogramMutualInformationImageToImageMetricv4Test.cxx
   itkJointHistogramMutualInformationImageToImageRegistrationTest.cxx
   itkLabeledPointSetMetricRegistrationTest.cxx
   itkLabeledPointSetMetricTest.cxx
@@ -42,13 +41,6 @@ itk_add_test(
   COMMAND
     ITKMetricsv4TestDriver
     itkLabeledPointSetMetricRegistrationTest
-)
-
-itk_add_test(
-  NAME itkJointHistogramMutualInformationImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkJointHistogramMutualInformationImageToImageMetricv4Test
 )
 
 itk_add_test(
@@ -342,5 +334,6 @@ set(
   itkImageToImageMetricv4GTest.cxx
   itkJensenHavrdaCharvatTsallisPointSetMetricGTest.cxx
   itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationGTest.cxx
+  itkJointHistogramMutualInformationImageToImageMetricv4GTest.cxx
 )
 creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")
