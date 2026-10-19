@@ -83,5 +83,6 @@ itk_module(
     ITKVTK
     ITKWatersheds
     ITKTestKernel
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )
