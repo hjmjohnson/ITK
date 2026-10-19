@@ -7,7 +7,6 @@ set(
   itkMeshSpatialObjectIOTest.cxx
   itkParametricSpaceToImageSpaceMeshFilterTest.cxx
   itkSimplexMeshAdaptTopologyFilterTest.cxx
-  itkTriangleCellTest.cxx
   itkTriangleMeshCurvatureCalculatorTest.cxx
   itkTriangleMeshToBinaryImageFilterTest.cxx
   itkTriangleMeshToBinaryImageFilterTest1.cxx
@@ -364,13 +363,6 @@ itk_add_test(
     DATA{${ITK_DATA_ROOT}/Input/mushroom.vtk}
 )
 
-itk_add_test(
-  NAME itkTriangleCellTest
-  COMMAND
-    ITKMeshTestDriver
-    itkTriangleCellTest
-)
-
 set_tests_properties(
   itkVTKPolyDataReaderTest2
   itkVTKPolyDataReaderBadTest0
@@ -417,5 +409,6 @@ set(
   itkSimplexMeshVolumeCalculatorGTest.cxx
   itkSphereMeshSourceGTest.cxx
   itkTransformMeshFilterGTest.cxx
+  itkTriangleCellGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")

@@ -18,12 +18,12 @@
 
 #include "itkMesh.h"
 #include "itkTriangleCell.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
 
-int
-itkTriangleCellTest(int, char *[])
+TEST(TriangleCell, ConvertedLegacyTest)
 {
 
 
@@ -142,11 +142,7 @@ itkTriangleCellTest(int, char *[])
 
     testCell->MakeCopy(anotherCell);
 
-    if (anotherCell->GetNumberOfPoints() != testCell->GetNumberOfPoints())
-    {
-      std::cerr << "Make Copy failed !" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(anotherCell->GetNumberOfPoints(), testCell->GetNumberOfPoints()) << "Make Copy failed !";
   }
 
   //
@@ -172,42 +168,19 @@ itkTriangleCellTest(int, char *[])
   double distance = NAN;
   bool   isInside = testCell->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (!isInside)
-  {
-    std::cerr << "Error: point should be reported as being inside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(isInside) << "Error: point should be reported as being inside";
 
-  if ((itk::Math::Absolute(pcoords[0] - 0.3) > tolerance) || (itk::Math::Absolute(pcoords[1] - 0.5) > tolerance) ||
-      (itk::Math::Absolute(pcoords[2] - 0.2) > tolerance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    std::cerr << "pcoords[2] = " << pcoords[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], 0.3, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 0.5, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[2], 0.2, tolerance) << "Error: pcoords computed incorrectly";
 
-  if ((itk::Math::Absolute(weights[0] - 0.3) > tolerance) || (itk::Math::Absolute(weights[1] - 0.5) > tolerance) ||
-      (itk::Math::Absolute(weights[2] - 0.2) > tolerance))
-  {
-    std::cerr << "Error: weights computed incorrectly" << std::endl;
-    std::cerr << "weights[0] = " << weights[0] << std::endl;
-    std::cerr << "weights[1] = " << weights[1] << std::endl;
-    std::cerr << "weights[2] = " << weights[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(weights[0], 0.3, tolerance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[1], 0.5, tolerance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[2], 0.2, tolerance) << "Error: weights computed incorrectly";
 
-  if ((itk::Math::Absolute(closestPoint[0] - 5.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[1] - 3.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[2] - 0.0) > tolerance))
-  {
-    std::cerr << "Error: closestPoint computed incorrectly" << std::endl;
-    std::cerr << "closestPoint[0] = " << closestPoint[0] << std::endl;
-    std::cerr << "closestPoint[1] = " << closestPoint[1] << std::endl;
-    std::cerr << "closestPoint[2] = " << closestPoint[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(closestPoint[0], 5.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[1], 3.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[2], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
 
 
   // Test 2:
@@ -222,32 +195,15 @@ itkTriangleCellTest(int, char *[])
 
   isInside = testCell->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (isInside)
-  {
-    std::cerr << "Error: point should be reported as being outside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(isInside) << "Error: point should be reported as being outside";
 
-  if ((itk::Math::Absolute(pcoords[0] - 0.5) > tolerance) || (itk::Math::Absolute(pcoords[1] + 0.5) > tolerance) ||
-      (itk::Math::Absolute(pcoords[2] - 1.0) > tolerance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    std::cerr << "pcoords[2] = " << pcoords[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], 0.5, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], -0.5, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[2], 1.0, tolerance) << "Error: pcoords computed incorrectly";
 
-  if ((itk::Math::Absolute(closestPoint[0] - 10.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[1] - 5.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[2] - 0.0) > tolerance))
-  {
-    std::cerr << "Error: closestPoint computed incorrectly" << std::endl;
-    std::cerr << "closestPoint[0] = " << closestPoint[0] << std::endl;
-    std::cerr << "closestPoint[1] = " << closestPoint[1] << std::endl;
-    std::cerr << "closestPoint[2] = " << closestPoint[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(closestPoint[0], 10.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[1], 5.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[2], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
 
   //
   // NOTE: Outside points don't get their weights computed.
@@ -266,33 +222,16 @@ itkTriangleCellTest(int, char *[])
 
   isInside = testCell->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (isInside)
-  {
-    std::cerr << "Error: point should be reported as being outside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(isInside) << "Error: point should be reported as being outside";
 
-  if ((itk::Math::Absolute(pcoords[0] - 1.0) > tolerance) || (itk::Math::Absolute(pcoords[1] - 1.0) > tolerance) ||
-      (itk::Math::Absolute(pcoords[2] + 1.0) > tolerance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    std::cerr << "pcoords[2] = " << pcoords[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], 1.0, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 1.0, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[2], -1.0, tolerance) << "Error: pcoords computed incorrectly";
 
   // note should be half way up the line (0,0,0)  -> (10,10,0)
-  if ((itk::Math::Absolute(closestPoint[0] - 5.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[1] - 5.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[2] - 0.0) > tolerance))
-  {
-    std::cerr << "Error: closestPoint computed incorrectly" << std::endl;
-    std::cerr << "closestPoint[0] = " << closestPoint[0] << std::endl;
-    std::cerr << "closestPoint[1] = " << closestPoint[1] << std::endl;
-    std::cerr << "closestPoint[2] = " << closestPoint[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(closestPoint[0], 5.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[1], 5.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[2], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
 
   //
   // NOTE: Outside points don't get their weights computed.
@@ -311,32 +250,15 @@ itkTriangleCellTest(int, char *[])
 
   isInside = testCell->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (isInside)
-  {
-    std::cerr << "Error: point should be reported as being outside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(isInside) << "Error: point should be reported as being outside";
 
-  if ((itk::Math::Absolute(pcoords[0] + 0.5) > tolerance) || (itk::Math::Absolute(pcoords[1] - 0.5) > tolerance) ||
-      (itk::Math::Absolute(pcoords[2] - 1.0) > tolerance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    std::cerr << "pcoords[2] = " << pcoords[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], -0.5, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 0.5, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[2], 1.0, tolerance) << "Error: pcoords computed incorrectly";
 
-  if ((itk::Math::Absolute(closestPoint[0] - 5.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[1] - 0.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[2] - 0.0) > tolerance))
-  {
-    std::cerr << "Error: closestPoint computed incorrectly" << std::endl;
-    std::cerr << "closestPoint[0] = " << closestPoint[0] << std::endl;
-    std::cerr << "closestPoint[1] = " << closestPoint[1] << std::endl;
-    std::cerr << "closestPoint[2] = " << closestPoint[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(closestPoint[0], 5.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[1], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[2], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
 
   //
   // NOTE: Outside points don't get their weights computed.
@@ -355,36 +277,17 @@ itkTriangleCellTest(int, char *[])
 
   isInside = testCell->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (isInside)
-  {
-    std::cerr << "Error: point should be reported as being outside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(isInside) << "Error: point should be reported as being outside";
 
-  if ((itk::Math::Absolute(pcoords[0] + 0.3) > tolerance) || (itk::Math::Absolute(pcoords[1] - 1.5) > tolerance) ||
-      (itk::Math::Absolute(pcoords[2] + 0.2) > tolerance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    std::cerr << "pcoords[2] = " << pcoords[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], -0.3, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 1.5, tolerance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[2], -0.2, tolerance) << "Error: pcoords computed incorrectly";
 
-  if ((itk::Math::Absolute(closestPoint[0] - 0.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[1] - 0.0) > tolerance) ||
-      (itk::Math::Absolute(closestPoint[2] - 0.0) > tolerance))
-  {
-    std::cerr << "Error: closestPoint computed incorrectly" << std::endl;
-    std::cerr << "closestPoint[0] = " << closestPoint[0] << std::endl;
-    std::cerr << "closestPoint[1] = " << closestPoint[1] << std::endl;
-    std::cerr << "closestPoint[2] = " << closestPoint[2] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(closestPoint[0], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[1], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
+  EXPECT_NEAR(closestPoint[2], 0.0, tolerance) << "Error: closestPoint computed incorrectly";
 
   //
   // NOTE: Outside points don't get their weights computed.
   //
-
-  return EXIT_SUCCESS;
 }
