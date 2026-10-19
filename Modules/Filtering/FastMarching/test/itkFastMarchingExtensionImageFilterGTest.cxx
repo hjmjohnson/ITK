@@ -21,6 +21,7 @@
 #include "itkFastMarchingThresholdStoppingCriterion.h"
 #include "itkCommand.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
 
 namespace
@@ -40,8 +41,7 @@ public:
 };
 } // namespace
 
-int
-itkFastMarchingExtensionImageFilterTest(int, char *[])
+TEST(FastMarchingExtensionImageFilter, ConvertedLegacyTest)
 {
   // create a fastmarching object
   constexpr unsigned int Dimension{ 2 };
@@ -64,8 +64,6 @@ itkFastMarchingExtensionImageFilterTest(int, char *[])
   command->SetCallbackFunction(&progressWatch, &ShowProgressObject::ShowProgress);
   marcher->AddObserver(itk::ProgressEvent(), command);
 
-
-  bool passed = false;
 
   // setup trial points
   using NodePairType = MarcherType::NodePairType;
@@ -128,21 +126,8 @@ itkFastMarchingExtensionImageFilterTest(int, char *[])
   marcher->SetInput(speedImage);
 
   // deliberately cause an exception by not setting AuxAliveValues
-  passed = false;
-  try
-  {
-    marcher->Update();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    passed = true;
-    marcher->ResetPipeline();
-    std::cout << err << std::endl;
-  }
-  if (!passed)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
+  marcher->ResetPipeline();
 
   using VectorType = MarcherType::AuxValueVectorType;
   using AuxValueContainerType = MarcherType::AuxValueContainerType;
@@ -152,21 +137,8 @@ itkFastMarchingExtensionImageFilterTest(int, char *[])
   // deliberately cause an exception setting AuxAliveValues of the wrong size
   marcher->SetAuxiliaryAliveValues(auxAliveValues);
 
-  passed = false;
-  try
-  {
-    marcher->Update();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    passed = true;
-    marcher->ResetPipeline();
-    std::cout << err << std::endl;
-  }
-  if (!passed)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
+  marcher->ResetPipeline();
 
 
   VectorType vector;
@@ -178,42 +150,16 @@ itkFastMarchingExtensionImageFilterTest(int, char *[])
   marcher->SetAuxiliaryAliveValues(auxAliveValues);
 
   // deliberately cause an exception by not setting AuxTrialValues
-  passed = false;
-  try
-  {
-    marcher->Update();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    passed = true;
-    marcher->ResetPipeline();
-    std::cout << err << std::endl;
-  }
-  if (!passed)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
+  marcher->ResetPipeline();
 
   auto auxTrialValues = AuxValueContainerType::New();
 
   // deliberately cause an exception setting AuxTrialValues of the wrong size
   marcher->SetAuxiliaryTrialValues(auxTrialValues);
 
-  passed = false;
-  try
-  {
-    marcher->Update();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    passed = true;
-    marcher->ResetPipeline();
-    std::cout << err << std::endl;
-  }
-  if (!passed)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_THROW(marcher->Update(), itk::ExceptionObject);
+  marcher->ResetPipeline();
 
 
   auxTrialValues->push_back(vector);
@@ -225,25 +171,11 @@ itkFastMarchingExtensionImageFilterTest(int, char *[])
   marcher->SetAuxiliaryTrialValues(auxTrialValues);
 
   // run the algorithm
-  passed = true;
-  try
-  {
-    marcher->Update();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    passed = false;
-    marcher->ResetPipeline();
-    std::cout << err << std::endl;
-  }
-  if (!passed)
-  {
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(marcher->Update());
 
 
   // check the results
-  passed = true;
+  bool                                     passed = true;
   const FloatImageType::Pointer            output = marcher->GetOutput();
   itk::ImageRegionIterator<FloatImageType> iterator(output, output->GetBufferedRegion());
 
@@ -296,18 +228,7 @@ itkFastMarchingExtensionImageFilterTest(int, char *[])
 
   marcher->Print(std::cout);
 
-  if (marcher->GetAuxiliaryImage(2))
-  {
-    std::cout << "GetAuxiliaryImage(2) should have returned nullptr";
-    std::cout << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(marcher->GetAuxiliaryImage(2), nullptr);
 
-  if (passed)
-  {
-    std::cout << "Fast Marching test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-  std::cout << "Fast Marching test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(passed);
 }
