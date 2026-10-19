@@ -14,7 +14,6 @@ set(
   itkHistogramToProbabilityImageFilterTest1.cxx
   itkHistogramToProbabilityImageFilterTest2.cxx
   itkImageMomentsTest.cxx
-  itkImagePCAShapeModelEstimatorTest.cxx
   itkLabelOverlapMeasuresImageFilterTest.cxx
   itkLabelStatisticsImageFilterTest.cxx
   itkMaximumProjectionImageFilterTest.cxx
@@ -128,12 +127,6 @@ itk_add_test(
     ITKImageStatisticsTestDriver
     itkMinimumMaximumImageFilterTest
     1
-)
-itk_add_test(
-  NAME itkImagePCAShapeModelEstimatorTest
-  COMMAND
-    ITKImageStatisticsTestDriver
-    itkImagePCAShapeModelEstimatorTest
 )
 itk_add_test(
   NAME itkMaximumProjectionImageFilterTest2_1
@@ -462,6 +455,7 @@ set(
   ITKImageStatisticsGTests
   itkAdaptiveHistogramEqualizationImageFilterGTest.cxx
   itkImagePCADecompositionCalculatorGTest.cxx
+  itkImagePCAShapeModelEstimatorGTest.cxx
   itkLabelOverlapMeasuresImageFilterGTest.cxx
   itkMinimumMaximumImageFilterGTest.cxx
   itkProjectionImageFilterGTest.cxx

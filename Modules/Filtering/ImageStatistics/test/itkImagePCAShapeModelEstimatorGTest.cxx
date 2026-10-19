@@ -22,13 +22,15 @@
 
 #include "itkImagePCAShapeModelEstimator.h"
 #include "itkPrintHelper.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 using namespace itk::print_helper;
 
 // class to support progress feedback
 
 
+namespace
+{
 class ShowProgressObject
 {
 public:
@@ -40,10 +42,10 @@ public:
   }
   itk::LightProcessObject::Pointer m_Process;
 };
+} // namespace
 
 
-int
-itkImagePCAShapeModelEstimatorTest(int, char *[])
+TEST(ImagePCAShapeModelEstimator, ConvertedLegacyTest)
 {
   // Data definitions
   constexpr itk::Size<2u>::SizeValueType IMGWIDTH = 2;
@@ -133,7 +135,8 @@ itkImagePCAShapeModelEstimatorTest(int, char *[])
 
   auto applyPCAShapeEstimator = ImagePCAShapeModelEstimatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(applyPCAShapeEstimator, ImagePCAShapeModelEstimator, ImageShapeModelEstimatorBase);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    applyPCAShapeEstimator, ImagePCAShapeModelEstimator, ImageShapeModelEstimatorBase);
 
   // Set the parameters of the clusterer
   applyPCAShapeEstimator->SetNumberOfTrainingImages(NUMTRAINIMAGES);
@@ -201,17 +204,5 @@ itkImagePCAShapeModelEstimatorTest(int, char *[])
 
   // Test for the eigen values for the test case precomputed using Matlab/Splus
   std::cout << "" << std::endl;
-  if ((eigenValues[2] < 6 || eigenValues[2] > 6.1) || (eigenValues[1] > 0.1))
-  {
-    std::cout << "Test Passed" << std::endl;
-  }
-  else
-  {
-    std::cout << "Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE((eigenValues[2] < 6 || eigenValues[2] > 6.1) || (eigenValues[1] > 0.1));
 }
