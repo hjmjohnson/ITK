@@ -18,11 +18,10 @@
 
 #include "itkAnchorErodeDilateImageFilter.h"
 #include "itkFlatStructuringElement.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkAnchorErodeDilateImageFilterTest(int, char ** const)
+TEST(AnchorErodeDilateImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -35,14 +34,10 @@ itkAnchorErodeDilateImageFilterTest(int, char ** const)
   using FilterType = itk::AnchorErodeDilateImageFilter<ImageType, KernelType, FunctionType>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, AnchorErodeDilateImageFilter, KernelImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, AnchorErodeDilateImageFilter, KernelImageFilter);
 
 
   constexpr FilterType::InputImagePixelType boundary = 255;
   filter->SetBoundary(boundary);
-  ITK_TEST_SET_GET_VALUE(boundary, filter->GetBoundary());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(boundary, filter->GetBoundary());
 }
