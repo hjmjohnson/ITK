@@ -9,7 +9,6 @@ set(
   itkFastApproximateRankImageFilterTest.cxx
   itkGridForwardWarpImageFilterTest.cxx
   itkLabelGeometryImageFilterTest.cxx
-  itkMultiphaseFiniteDifferenceImageFilterTest.cxx
   itkMultiphaseSparseFiniteDifferenceImageFilterTest.cxx
   itkOptImageToImageMetricsTest.cxx
   itkOptImageToImageMetricsTest2.cxx
@@ -232,12 +231,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkLabelGeometryImageFilterTest3D.{mhd,raw}
     ${ITK_TEST_OUTPUT_DIR}/itkLabelGeometryImageFilterTest3D.csv
-)
-itk_add_test(
-  NAME itkMultiphaseFiniteDifferenceImageFilterTest
-  COMMAND
-    ITKReviewTestDriver
-    itkMultiphaseFiniteDifferenceImageFilterTest
 )
 itk_add_test(
   NAME itkMultiphaseSparseFiniteDifferenceImageFilterTest
@@ -656,6 +649,7 @@ set(
   itkFastApproximateRankImageFilterGTest.cxx
   itkImageFunctionGTest.cxx
   itkMultiphaseDenseFiniteDifferenceImageFilterGTest.cxx
+  itkMultiphaseFiniteDifferenceImageFilterGTest.cxx
   itkMultiphaseSparseFiniteDifferenceImageFilterGTest.cxx
   itkRegionBasedLevelSetFunctionGTest.cxx
 )
