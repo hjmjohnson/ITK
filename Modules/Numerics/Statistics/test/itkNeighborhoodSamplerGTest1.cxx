@@ -20,9 +20,9 @@
 #include "itkListSample.h"
 #include "itkNeighborhoodSampler.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-int
-itkNeighborhoodSamplerTest1(int, char *[])
+TEST(NeighborhoodSampler, ConvertedLegacyTest1)
 {
 
   constexpr unsigned int MeasurementVectorSize{ 17 };
@@ -41,26 +41,14 @@ itkNeighborhoodSamplerTest1(int, char *[])
   auto filter = FilterType::New();
 
   // Test GetInput() before setting the input
-  if (filter->GetInput() != nullptr)
-  {
-    std::cerr << "GetInput() should have returned nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), nullptr) << "GetInput() should have returned nullptr";
 
   // Test GetOutput() before creating the output
-  if (filter->GetOutput() == nullptr)
-  {
-    std::cerr << "GetOutput() should have returned NON-nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(filter->GetOutput(), nullptr) << "GetOutput() should have returned NON-nullptr";
 
   filter->SetInput(sample);
 
-  if (filter->GetInput() != sample.GetPointer())
-  {
-    std::cerr << "GetInput() didn't matched SetInput()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), sample.GetPointer()) << "GetInput() didn't matched SetInput()";
 
 
   // Testing the settings of the Radius.
@@ -71,33 +59,17 @@ itkNeighborhoodSamplerTest1(int, char *[])
 
   const InputRadiusObjectType * recoveredRadiusObject = filter->GetRadiusInput();
 
-  if (recoveredRadiusObject == nullptr)
-  {
-    std::cerr << "GetRadiusInput() returned nullptr object." << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(recoveredRadiusObject, nullptr) << "GetRadiusInput() returned nullptr object.";
 
-  if (itk::Math::NotExactlyEquals(recoveredRadiusObject->Get(), radius1))
-  {
-    std::cerr << "GetRadiusInput() test for value consistency 1 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(recoveredRadiusObject->Get(), radius1) << "GetRadiusInput() test for value consistency 1 failed.";
 
   filter->SetRadius(radius2);
 
   recoveredRadiusObject = filter->GetRadiusInput();
 
-  if (recoveredRadiusObject == nullptr)
-  {
-    std::cerr << "GetRadiusInput() returned nullptr object." << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(recoveredRadiusObject, nullptr) << "GetRadiusInput() returned nullptr object.";
 
-  if (itk::Math::NotExactlyEquals(recoveredRadiusObject->Get(), radius2))
-  {
-    std::cerr << "GetRadiusInput() test for value consistency 2 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(recoveredRadiusObject->Get(), radius2) << "GetRadiusInput() test for value consistency 2 failed.";
 
 
   auto radiusObject1 = InputRadiusObjectType::New();
@@ -108,17 +80,9 @@ itkNeighborhoodSamplerTest1(int, char *[])
 
   recoveredRadiusObject = filter->GetRadiusInput();
 
-  if (recoveredRadiusObject != radiusObject1)
-  {
-    std::cerr << "GetRadiusInput() test for pointer consistency 1 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(recoveredRadiusObject, radiusObject1) << "GetRadiusInput() test for pointer consistency 1 failed.";
 
-  if (itk::Math::NotExactlyEquals(recoveredRadiusObject->Get(), radius1))
-  {
-    std::cerr << "GetRadiusInput() test for value consistency 3 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(recoveredRadiusObject->Get(), radius1) << "GetRadiusInput() test for value consistency 3 failed.";
 
   auto radiusObject2 = InputRadiusObjectType::New();
 
@@ -128,17 +92,9 @@ itkNeighborhoodSamplerTest1(int, char *[])
 
   recoveredRadiusObject = filter->GetRadiusInput();
 
-  if (recoveredRadiusObject != radiusObject2)
-  {
-    std::cerr << "GetRadiusInput() test for pointer consistency 2 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(recoveredRadiusObject, radiusObject2) << "GetRadiusInput() test for pointer consistency 2 failed.";
 
-  if (itk::Math::NotExactlyEquals(recoveredRadiusObject->Get(), radius2))
-  {
-    std::cerr << "GetRadiusInput() test for value consistency 4 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(recoveredRadiusObject->Get(), radius2) << "GetRadiusInput() test for value consistency 4 failed.";
 
   //
   // Testing exception cases in the GenerateData() method.
@@ -147,17 +103,8 @@ itkNeighborhoodSamplerTest1(int, char *[])
 
   std::cout << "GetRadiusInput() =  " << filter->GetRadiusInput() << std::endl;
 
-  try
-  {
-    filter->Update();
-    std::cerr << "Failure to throw expected exception ";
-    std::cerr << " due to nullptr SetRadiusInput()";
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject &)
-  {
-    std::cout << "Expected exception received" << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject) << "Failure to throw expected exception "
+                                                       << " due to nullptr SetRadiusInput()";
 
   radiusObject1->Set(100);
   filter->SetRadiusInput(radiusObject1);
@@ -172,7 +119,4 @@ itkNeighborhoodSamplerTest1(int, char *[])
   filter->Update();
 
   std::cout << "Classname " << filter->GetNameOfClass() << std::endl;
-
-  std::cout << "Test Passed !" << std::endl;
-  return EXIT_SUCCESS;
 }
