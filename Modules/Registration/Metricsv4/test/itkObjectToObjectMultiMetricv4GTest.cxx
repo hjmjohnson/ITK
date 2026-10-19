@@ -26,7 +26,7 @@
 #include "itkImage.h"
 #include "itkGaussianImageSource.h"
 #include "itkShiftScaleImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkCompositeTransform.h"
 #include "itkEuclideanDistancePointSetToPointSetMetricv4.h"
 #include "itkExpectationBasedPointSetToPointSetMetricv4.h"
@@ -37,17 +37,18 @@
     takes N metrics and assigns a weight to each metric's result.
  */
 
+namespace
+{
 constexpr unsigned int ObjectToObjectMultiMetricv4TestDimension{ 2 };
 using ObjectToObjectMultiMetricv4TestMultiMetricType =
   itk::ObjectToObjectMultiMetricv4<ObjectToObjectMultiMetricv4TestDimension, ObjectToObjectMultiMetricv4TestDimension>;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-[[nodiscard]] int
+void
 itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiMetricType::Pointer & multiVariateMetric,
                                            bool useDisplacementTransform)
 {
-  int testStatus = EXIT_SUCCESS;
   using MultiMetricType = ObjectToObjectMultiMetricv4TestMultiMetricType;
 
   // Setup weights
@@ -59,7 +60,7 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
     weightSum += origMetricWeights[n];
   }
   multiVariateMetric->SetMetricWeights(origMetricWeights);
-  ITK_TEST_SET_GET_VALUE(origMetricWeights, multiVariateMetric->GetMetricWeights());
+  EXPECT_EQ(origMetricWeights, multiVariateMetric->GetMetricWeights());
 
   // Initialize. This initializes all the component metrics.
   std::cout << "Initialize" << std::endl;
@@ -70,16 +71,7 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
   MeasureType                     measure = 0;
   MultiMetricType::DerivativeType DerivResultOfGetValueAndDerivative;
   std::cout << "GetValueAndDerivative" << std::endl;
-  try
-  {
-    multiVariateMetric->GetValueAndDerivative(measure, DerivResultOfGetValueAndDerivative);
-  }
-  catch (const itk::ExceptionObject & exp)
-  {
-    std::cerr << "Exception caught during call to GetValueAndDerivative:" << std::endl;
-    std::cerr << exp << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(multiVariateMetric->GetValueAndDerivative(measure, DerivResultOfGetValueAndDerivative));
   std::cout << "Multivariate measure: " << measure << std::endl;
   if (!useDisplacementTransform)
   {
@@ -94,34 +86,19 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
     // When accumulation is done across multiple threads, the accumulations can be done
     // in different orders resulting in slightly different numerical results.
     // The FloatAlmostEqual is used to address the multi-threaded accumulation differences
-    if (!itk::Math::FloatAlmostEqual(ResultOfGetDerivative[p], DerivResultOfGetValueAndDerivative[p], 8, 1e-15))
-    {
-      std::cerr << "Results do not match between GetValueAndDerivative and GetDerivative." << std::endl;
-      std::cout << ResultOfGetDerivative << " != " << DerivResultOfGetValueAndDerivative << std::endl;
-      std::cout << "DIFF: " << ResultOfGetDerivative - DerivResultOfGetValueAndDerivative << std::endl;
-      testStatus = EXIT_FAILURE;
-    }
+    EXPECT_TRUE(itk::Math::FloatAlmostEqual(ResultOfGetDerivative[p], DerivResultOfGetValueAndDerivative[p], 8, 1e-15))
+      << "Results do not match between GetValueAndDerivative and GetDerivative." << std::endl
+      << ResultOfGetDerivative << " != " << DerivResultOfGetValueAndDerivative << std::endl
+      << "DIFF: " << ResultOfGetDerivative - DerivResultOfGetValueAndDerivative;
   }
 
   // Test GetValue method
   MeasureType measure2 = 0;
   std::cout << "GetValue" << std::endl;
-  try
-  {
-    measure2 = multiVariateMetric->GetValue();
-  }
-  catch (const itk::ExceptionObject & exp)
-  {
-    std::cerr << "Exception caught during call to GetValue:" << std::endl;
-    std::cerr << exp << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
-  if (!itk::Math::FloatAlmostEqual(measure2, measure))
-  {
-    std::cerr << "measure does not match between calls to GetValue and GetValueAndDerivative: "
-              << "measure: " << measure << " measure2: " << measure2 << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(measure2 = multiVariateMetric->GetValue());
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(measure2, measure))
+    << "measure does not match between calls to GetValue and GetValueAndDerivative: "
+    << "measure: " << measure << " measure2: " << measure2;
 
   // Evaluate individually
   MeasureType metricValue{};
@@ -141,13 +118,9 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
     {
       std::cout << " Metric " << i << " derivative : " << metricDerivative << std::endl << std::endl;
     }
-    if (!itk::Math::FloatAlmostEqual(metricValue, multiVariateMetric->GetValueArray()[i]))
-    {
-      std::cerr << "Individual metric value " << metricValue
-                << " does not match that returned from multi-variate metric: " << multiVariateMetric->GetValueArray()[i]
-                << std::endl;
-      testStatus = EXIT_FAILURE;
-    }
+    EXPECT_TRUE(itk::Math::FloatAlmostEqual(metricValue, multiVariateMetric->GetValueArray()[i]))
+      << "Individual metric value " << metricValue
+      << " does not match that returned from multi-variate metric: " << multiVariateMetric->GetValueArray()[i];
     weightedMetricValue += metricValue * origMetricWeights[i] / weightSum;
     for (MultiMetricType::NumberOfParametersType p = 0; p < multiVariateMetric->GetNumberOfParameters(); ++p)
     {
@@ -162,43 +135,19 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
     DerivResultOfGetValueAndDerivativeTruth[p] *= totalMagnitude;
   }
 
-  if (itk::Math::Absolute(weightedMetricValue - multiVariateMetric->GetWeightedValue()) > 1e-6)
-  {
-    std::cerr << "Computed weighted metric value " << weightedMetricValue << " does match returned value "
-              << multiVariateMetric->GetWeightedValue() << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
+  EXPECT_NEAR(weightedMetricValue, multiVariateMetric->GetWeightedValue(), 1e-6);
 
   for (MultiMetricType::NumberOfParametersType p = 0; p < multiVariateMetric->GetNumberOfParameters(); ++p)
   {
     auto tolerance = static_cast<MultiMetricType::DerivativeValueType>(1e-6);
-    if (itk::Math::Absolute(DerivResultOfGetValueAndDerivativeTruth[p] - DerivResultOfGetValueAndDerivative[p]) >
-        tolerance)
-    {
-      std::cerr << "Error: DerivResultOfGetValueAndDerivative does not match expected result." << std::endl;
-      if (useDisplacementTransform)
-      {
-        std::cerr << "  DerivResultOfGetValueAndDerivative[" << p << "]: " << DerivResultOfGetValueAndDerivative[p]
-                  << std::endl
-                  << "  DerivResultOfGetValueAndDerivativeTruth[" << p
-                  << "]: " << DerivResultOfGetValueAndDerivativeTruth[p] << std::endl;
-      }
-      else
-      {
-        std::cerr << "  DerivResultOfGetValueAndDerivative: " << DerivResultOfGetValueAndDerivative << std::endl
-                  << "  DerivResultOfGetValueAndDerivativeTruth: " << DerivResultOfGetValueAndDerivativeTruth
-                  << std::endl;
-      }
-      testStatus = EXIT_FAILURE;
-    }
+    EXPECT_NEAR(DerivResultOfGetValueAndDerivativeTruth[p], DerivResultOfGetValueAndDerivative[p], tolerance)
+      << "Error: DerivResultOfGetValueAndDerivative does not match expected result. p: " << p;
   }
-
-  return testStatus;
 }
 
 ////////////////////////////////////////////////////////////
 
-[[nodiscard]] int
+void
 itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
 {
   // Create two simple images
@@ -238,14 +187,14 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   using MultiMetricType = ObjectToObjectMultiMetricv4TestMultiMetricType;
   auto multiVariateMetric = MultiMetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(multiVariateMetric, ObjectToObjectMultiMetricv4, ObjectToObjectMetric);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(multiVariateMetric, ObjectToObjectMultiMetricv4, ObjectToObjectMetric);
 
 
   // Exercise exceptions
   auto object = MultiMetricType::ObjectType::New();
-  ITK_TRY_EXPECT_EXCEPTION(multiVariateMetric->SetFixedObject(object.GetPointer()));
+  EXPECT_THROW(multiVariateMetric->SetFixedObject(object.GetPointer()), itk::ExceptionObject);
 
-  ITK_TRY_EXPECT_EXCEPTION(multiVariateMetric->SetMovingObject(object.GetPointer()));
+  EXPECT_THROW(multiVariateMetric->SetMovingObject(object.GetPointer()), itk::ExceptionObject);
 
   // Instantiate and Add metrics to the queue
   using JointHistorgramMetrictype =
@@ -313,49 +262,29 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   multiVariateMetric->AddMetric(m3);
   multiVariateMetric->AddMetric(m4);
 
-  if (multiVariateMetric->GetMetricQueue()[0] != m1 || multiVariateMetric->GetMetricQueue()[3] != m4)
-  {
-    std::cerr << "AddMetric or GetMetricQueue failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(multiVariateMetric->GetMetricQueue()[0], m1) << "AddMetric or GetMetricQueue failed.";
+  EXPECT_EQ(multiVariateMetric->GetMetricQueue()[3], m4) << "AddMetric or GetMetricQueue failed.";
 
   // Expect return true because all image metrics
-  if (multiVariateMetric->SupportsArbitraryVirtualDomainSamples() == false)
-  {
-    std::cerr << "Expected SupportsArbitraryVirtualDomainSamples() to return false, but got true. " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(multiVariateMetric->SupportsArbitraryVirtualDomainSamples());
 
   // Test Set/Get Transform mechanics
   multiVariateMetric->Initialize();
-  if (multiVariateMetric->GetMovingTransform() != transform.GetPointer())
-  {
-    std::cerr << "Automatic transform assignment failed. transform: " << transform.GetPointer()
-              << " GetMovingTranform: " << multiVariateMetric->GetMovingTransform() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(multiVariateMetric->GetMovingTransform(), transform.GetPointer())
+    << "Automatic transform assignment failed.";
   multiVariateMetric->SetMovingTransform(nullptr);
   for (itk::SizeValueType n = 0; n < multiVariateMetric->GetNumberOfMetrics(); ++n)
   {
-    if (multiVariateMetric->GetMovingTransform() != nullptr ||
-        multiVariateMetric->GetMetricQueue()[n]->GetMovingTransform() != nullptr)
-    {
-      std::cerr << "Assignment of null transform failed. multiVariateMetric->GetMovingTransform(): "
-                << multiVariateMetric->GetMovingTransform() << " multiVariateMetric->GetMetricQueue()[" << n
-                << "]->GetMovingTransform(): " << multiVariateMetric->GetMetricQueue()[n]->GetMovingTransform()
-                << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(multiVariateMetric->GetMovingTransform(), nullptr) << "Assignment of null transform failed.";
+    EXPECT_EQ(multiVariateMetric->GetMetricQueue()[n]->GetMovingTransform(), nullptr)
+      << "Assignment of null transform failed.";
   }
   multiVariateMetric->SetMovingTransform(transform);
   for (itk::SizeValueType n = 0; n < multiVariateMetric->GetNumberOfMetrics(); ++n)
   {
-    if (multiVariateMetric->GetMovingTransform() != transform.GetPointer() ||
-        multiVariateMetric->GetMetricQueue()[0]->GetMovingTransform() != transform.GetPointer())
-    {
-      std::cerr << "Assignment of transform failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(multiVariateMetric->GetMovingTransform(), transform.GetPointer()) << "Assignment of transform failed.";
+    EXPECT_EQ(multiVariateMetric->GetMetricQueue()[0]->GetMovingTransform(), transform.GetPointer())
+      << "Assignment of transform failed.";
   }
   if (multiVariateMetric->GetMovingTransform() != transform.GetPointer())
   {
@@ -364,15 +293,12 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
 
   // Test with images
   std::cout << "*** Test image metrics *** " << std::endl;
-  if (itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform) != EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform);
 
   std::cout << "*** Test with mismatched transforms *** " << std::endl;
   auto transform2 = TranslationTransformType::New();
   m4->SetMovingTransform(transform2);
-  ITK_TRY_EXPECT_EXCEPTION(multiVariateMetric->Initialize());
+  EXPECT_THROW(multiVariateMetric->Initialize(), itk::ExceptionObject);
   m4->SetMovingTransform(transform);
 
   std::cout << "*** Test with proper CompositeTransform ***" << std::endl;
@@ -382,20 +308,16 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   compositeTransform->AddTransform(transform);
   compositeTransform->SetOnlyMostRecentTransformToOptimizeOn();
   m4->SetMovingTransform(compositeTransform);
-  if (itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform) != EXIT_SUCCESS)
-  {
-    std::cerr << "Failed with proper CompositeTransform." << std::endl;
-    return EXIT_FAILURE;
-  }
+  itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform);
 
   std::cout << "*** Test with CompositeTransform - too many active transforms ***" << std::endl;
   compositeTransform->SetAllTransformsToOptimizeOn();
-  ITK_TRY_EXPECT_EXCEPTION(multiVariateMetric->Initialize());
+  EXPECT_THROW(multiVariateMetric->Initialize(), itk::ExceptionObject);
 
   std::cout << "*** Test with CompositeTransform - one active transform, but wrong one ***" << std::endl;
   compositeTransform->SetAllTransformsToOptimizeOff();
   compositeTransform->SetNthTransformToOptimizeOn(0);
-  ITK_TRY_EXPECT_EXCEPTION(multiVariateMetric->Initialize());
+  EXPECT_THROW(multiVariateMetric->Initialize(), itk::ExceptionObject);
 
   // Reset transform
   m4->SetMovingTransform(transform);
@@ -437,18 +359,11 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
 
 
   // Expect return false because of point set metrics
-  if (multiVariateMetric->SupportsArbitraryVirtualDomainSamples())
-  {
-    std::cerr << "Expected SupportsArbitraryVirtualDomainSamples() to return true, but got false. " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(multiVariateMetric->SupportsArbitraryVirtualDomainSamples());
 
   // Test
   std::cout << "*** Test with PointSet metrics and Image metrics *** " << std::endl;
-  if (itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform) != EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform);
 
   //
   // Exercise basic operation with a scales estimator
@@ -524,10 +439,7 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
     std::cerr << "Scales do not match as expected between estimation on same metric." << std::endl;
     passedEstimation = false;
   }
-  if (!passedEstimation)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passedEstimation);
 
   if (!useDisplacementTransform)
   {
@@ -537,34 +449,17 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
 
     // Test ClearMetricQueue
     multiVariateMetric->ClearMetricQueue();
-    if (multiVariateMetric->GetNumberOfMetrics() != 0)
-    {
-      std::cerr << "ClearMetricQueue() failed. Number of metrics is not zero." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(multiVariateMetric->GetNumberOfMetrics(), 0u)
+      << "ClearMetricQueue() failed. Number of metrics is not zero.";
   }
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkObjectToObjectMultiMetricv4Test(int, char *[])
+TEST(ObjectToObjectMultiMetricv4, ConvertedLegacyTest)
 {
   std::cout << "XXX Test with TranslationTransform XXX" << std::endl << std::endl;
-  int result = itkObjectToObjectMultiMetricv4TestRun(false);
-  if (result == EXIT_FAILURE)
-  {
-    std::cerr << "Failed test with translation transform. See message above." << std::endl;
-    return EXIT_FAILURE;
-  }
+  itkObjectToObjectMultiMetricv4TestRun(false);
 
   std::cout << std::endl << std::endl << "XXX Test with DisplacementFieldTransform XXX" << std::endl << std::endl;
-  result = itkObjectToObjectMultiMetricv4TestRun(true);
-  if (result == EXIT_FAILURE)
-  {
-    std::cerr << "Failed test with displacement field transform. See message above." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  itkObjectToObjectMultiMetricv4TestRun(true);
 }
