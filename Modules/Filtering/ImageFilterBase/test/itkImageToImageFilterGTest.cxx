@@ -19,26 +19,26 @@
 #include <iostream>
 
 #include "itkImageToImageFilter.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 
 template <typename TInputImage, typename TOutputImage>
-class ImageToImageFilterTestHelper : public ImageToImageFilter<TInputImage, TOutputImage>
+class ImageToImageFilterTestHelper : public itk::ImageToImageFilter<TInputImage, TOutputImage>
 {
 public:
   using Self = ImageToImageFilterTestHelper;
-  using Superclass = ImageToImageFilter<TInputImage, TOutputImage>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::ImageToImageFilter<TInputImage, TOutputImage>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   itkNewMacro(Self);
 };
 
-} // namespace itk
+} // namespace
 
-int
-itkImageToImageFilterTest(int, char *[])
+TEST(ImageToImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int ImageDimension{ 3 };
@@ -48,7 +48,7 @@ itkImageToImageFilterTest(int, char *[])
   using InputImageType = itk::Image<InputPixelType, ImageDimension>;
   using OutputImageType = itk::Image<OutputPixelType, ImageDimension>;
 
-  using FilterType = itk::ImageToImageFilterTestHelper<InputImageType, OutputImageType>;
+  using FilterType = ImageToImageFilterTestHelper<InputImageType, OutputImageType>;
 
   auto inputImage1 = InputImageType::New();
   auto inputImage2 = InputImageType::New();
@@ -62,54 +62,24 @@ itkImageToImageFilterTest(int, char *[])
   std::cout << "Name of Superclass = " << filter->Superclass::GetNameOfClass() << std::endl;
 
   filter->SetInput(inputImage1);
-  if (filter->GetInput() != inputImage1)
-  {
-    std::cerr << "Error in Set/GetInput()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), inputImage1) << "Error in Set/GetInput()";
 
   filter->SetInput(inputImage2);
-  if (filter->GetInput() != inputImage2)
-  {
-    std::cerr << "Error in Set/GetInput()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), inputImage2) << "Error in Set/GetInput()";
 
   filter->SetInput(0, inputImage1);
-  if (filter->GetInput(0) != inputImage1)
-  {
-    std::cerr << "Error in Set/GetInput(n)" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(0), inputImage1) << "Error in Set/GetInput(n)";
 
 
   filter->PushBackInput(inputImage2);
   filter->PushBackInput(inputImage3);
   filter->PushFrontInput(inputImage4);
 
-  if (filter->GetInput(0) != inputImage4)
-  {
-    std::cerr << "Error in PushFrontInput" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(0), inputImage4) << "Error in PushFrontInput";
 
-  if (filter->GetInput(1) != inputImage1)
-  {
-    std::cerr << "Error in PushFrontInput" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(1), inputImage1) << "Error in PushFrontInput";
 
-  if (filter->GetInput(2) != inputImage2)
-  {
-    std::cerr << "Error in PushBackInput" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(2), inputImage2) << "Error in PushBackInput";
 
-  if (filter->GetInput(3) != inputImage3)
-  {
-    std::cerr << "Error in PushBackInput" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(filter->GetInput(3), inputImage3) << "Error in PushBackInput";
 }
