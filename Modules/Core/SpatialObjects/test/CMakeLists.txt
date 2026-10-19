@@ -3,7 +3,6 @@ set(
   ITKSpatialObjectsTests
   itkBoxSpatialObjectTest.cxx
   itkImageMaskSpatialObjectTest.cxx
-  itkMeshSpatialObjectTest.cxx
   itkMetaArrowConverterTest.cxx
   itkMetaGaussianConverterTest.cxx
   itkNewMetaObjectTypeTest.cxx
@@ -114,12 +113,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkPolygonSpatialObjectIsInsideInObjectSpaceTest.mha
 )
 itk_add_test(
-  NAME itkMeshSpatialObjectTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkMeshSpatialObjectTest
-)
-itk_add_test(
   NAME itkNewMetaObjectTypeTest
   COMMAND
     ITKSpatialObjectsTestDriver
@@ -147,6 +140,7 @@ set(
   itkImageSpatialObjectGTest.cxx
   itkLandmarkSpatialObjectGTest.cxx
   itkLineSpatialObjectGTest.cxx
+  itkMeshSpatialObjectGTest.cxx
   itkSpatialObjectPointGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")
