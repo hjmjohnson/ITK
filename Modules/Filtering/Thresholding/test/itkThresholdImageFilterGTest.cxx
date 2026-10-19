@@ -18,14 +18,13 @@
 
 #include "itkRandomImageSource.h"
 #include "itkThresholdImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkTextOutput.h"
 
 #include <sstream>
 
 
-int
-itkThresholdImageFilterTest(int, char *[])
+TEST(ThresholdImageFilter, ConvertedLegacyTest)
 {
   // Comment the following if you want to use the itk text output window
   itk::OutputWindow::SetInstance(itk::TextOutput::New());
@@ -53,7 +52,7 @@ itkThresholdImageFilterTest(int, char *[])
     itk::ThresholdImageFilter<FloatImage2DType>::Pointer threshold;
     threshold = itk::ThresholdImageFilter<FloatImage2DType>::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(threshold, ThresholdImageFilter, InPlaceImageFilter);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(threshold, ThresholdImageFilter, InPlaceImageFilter);
 
     threshold->SetInput(random->GetOutput());
 
@@ -161,42 +160,30 @@ itkThresholdImageFilterTest(int, char *[])
     threshold->SetInput(input);
     constexpr PixelType outsideValue{ 99 };
     threshold->SetOutsideValue(outsideValue);
-    ITK_TEST_SET_GET_VALUE(outsideValue, threshold->GetOutsideValue());
+    EXPECT_EQ(outsideValue, threshold->GetOutsideValue());
     constexpr IntImage1DType::IndexType index{};
 
     constexpr PixelType lower{ itk::NumericTraits<PixelType>::NonpositiveMin() };
     threshold->SetLower(lower);
-    ITK_TEST_SET_GET_VALUE(lower, threshold->GetLower());
+    EXPECT_EQ(lower, threshold->GetLower());
 
     constexpr PixelType upper{ itk::NumericTraits<PixelType>::max() };
     threshold->SetUpper(upper);
-    ITK_TEST_SET_GET_VALUE(upper, threshold->GetUpper());
+    EXPECT_EQ(upper, threshold->GetUpper());
 
     // Above inputValue-1
     threshold->ThresholdAbove(inputValue - 1);
     threshold->Update();
     PixelType outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != outsideValue)
-    {
-      std::ostringstream os;
-      os << "Filter above failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, outsideValue) << "Filter above failed:" << " lower: " << threshold->GetLower()
+                                         << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Above inputValue+1
     threshold->ThresholdAbove(inputValue + 1);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != inputValue)
-    {
-      std::ostringstream os;
-      os << "Filter above failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, inputValue) << "Filter above failed:" << " lower: " << threshold->GetLower()
+                                       << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Above inputValue
     // By definition, the values greater than the value are set to OutsideValue.
@@ -204,40 +191,22 @@ itkThresholdImageFilterTest(int, char *[])
     threshold->ThresholdAbove(inputValue);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != inputValue)
-    {
-      std::ostringstream os;
-      os << "Filter above failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, inputValue) << "Filter above failed:" << " lower: " << threshold->GetLower()
+                                       << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Below inputValue-1
     threshold->ThresholdBelow(inputValue - 1);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != inputValue)
-    {
-      std::ostringstream os;
-      os << "Filter below failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, inputValue) << "Filter below failed:" << " lower: " << threshold->GetLower()
+                                       << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Below inputValue+1
     threshold->ThresholdBelow(inputValue + 1);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != outsideValue)
-    {
-      std::ostringstream os;
-      os << "Filter below failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, outsideValue) << "Filter below failed:" << " lower: " << threshold->GetLower()
+                                         << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Below inputValue
     // By definition, the values less than the value are set to OutsideValue
@@ -245,27 +214,15 @@ itkThresholdImageFilterTest(int, char *[])
     threshold->ThresholdBelow(inputValue);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != inputValue)
-    {
-      std::ostringstream os;
-      os << "Filter below failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, inputValue) << "Filter below failed:" << " lower: " << threshold->GetLower()
+                                       << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Outside [inputValue-1 inputValue+1]
     threshold->ThresholdOutside(inputValue - 1, inputValue + 1);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != inputValue)
-    {
-      std::ostringstream os;
-      os << "Filter outside failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, inputValue) << "Filter outside failed:" << " lower: " << threshold->GetLower()
+                                       << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Outside [inputValue, inputValue+2]
     // By definition, the values outside the range (less than lower or greater than upper) are set to OutsideValue
@@ -273,29 +230,15 @@ itkThresholdImageFilterTest(int, char *[])
     threshold->ThresholdOutside(inputValue, inputValue + 2);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != inputValue)
-    {
-      std::ostringstream os;
-      os << "Filter outside failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, inputValue) << "Filter outside failed:" << " lower: " << threshold->GetLower()
+                                       << " upper: " << threshold->GetUpper() << " output: " << outputValue;
 
     // Outside [inputValue+1, inputValue+3]
     threshold->ThresholdOutside(inputValue + 1, inputValue + 3);
     threshold->Update();
     outputValue = threshold->GetOutput()->GetPixel(index);
-    if (outputValue != outsideValue)
-    {
-      std::ostringstream os;
-      os << "Filter above failed:"
-         << " lower: " << threshold->GetLower() << " upper: " << threshold->GetUpper() << " output: " << outputValue;
-      itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, os.str().c_str());
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(outputValue, outsideValue) << "Filter above failed:" << " lower: " << threshold->GetLower()
+                                         << " upper: " << threshold->GetUpper() << " output: " << outputValue;
   }
   itk::OutputWindowDisplayGenericOutputText(__FILE__, __LINE__, "End of Test #4 -----------------------------------");
-
-  return EXIT_SUCCESS;
 }
