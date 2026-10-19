@@ -19,13 +19,10 @@
 
 #include "itkMeanImageFunction.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkMeanImageFunctionTest(int, char *[])
+TEST(MeanImageFunction, ConvertedLegacyTest)
 {
-  int testStatus = EXIT_SUCCESS;
-
   constexpr unsigned int Dimension{ 3 };
   using PixelType = unsigned char;
 
@@ -47,13 +44,13 @@ itkMeanImageFunctionTest(int, char *[])
 
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, MeanImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, MeanImageFunction, ImageFunction);
 
   function->SetInputImage(image);
 
   constexpr unsigned int neighborhoodRadius{ 5 };
   function->SetNeighborhoodRadius(neighborhoodRadius);
-  ITK_TEST_SET_GET_VALUE(neighborhoodRadius, function->GetNeighborhoodRadius());
+  EXPECT_EQ(neighborhoodRadius, function->GetNeighborhoodRadius());
 
   ImageType::IndexType index;
 
@@ -64,12 +61,8 @@ itkMeanImageFunctionTest(int, char *[])
   const FunctionType::RealType mean = function->EvaluateAtIndex(index);
 
   constexpr double epsilon{ 1e-7 };
-  if (!itk::Math::FloatAlmostEqual(static_cast<FunctionType::RealType>(initialValue), mean, 10, epsilon))
-  {
-    std::cout.precision(static_cast<unsigned int>(itk::Math::Absolute(std::log10(epsilon))));
-    std::cout << "Mean value (" << mean << ") does not equal initialValue (" << initialValue << ')' << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(static_cast<FunctionType::RealType>(initialValue), mean, 10, epsilon))
+    << "Mean value (" << mean << ") does not equal initialValue (" << initialValue << ')';
 
   // Test Evaluate
   FunctionType::PointType point;
@@ -78,12 +71,8 @@ itkMeanImageFunctionTest(int, char *[])
   point[2] = 25;
   const FunctionType::RealType mean2 = function->Evaluate(point);
 
-  if (!itk::Math::FloatAlmostEqual(static_cast<FunctionType::RealType>(initialValue), mean2, 10, epsilon))
-  {
-    std::cout.precision(static_cast<unsigned int>(itk::Math::Absolute(std::log10(epsilon))));
-    std::cout << "Mean value (" << mean2 << ") does not equal initialValue (" << initialValue << ')' << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(static_cast<FunctionType::RealType>(initialValue), mean2, 10, epsilon))
+    << "Mean value (" << mean2 << ") does not equal initialValue (" << initialValue << ')';
 
   // Test EvaluateAtContinuousIndex
   FunctionType::ContinuousIndexType cindex;
@@ -92,12 +81,6 @@ itkMeanImageFunctionTest(int, char *[])
   cindex[2] = 25;
   const FunctionType::RealType mean3 = function->EvaluateAtContinuousIndex(cindex);
 
-  if (!itk::Math::FloatAlmostEqual(static_cast<FunctionType::RealType>(initialValue), mean3, 10, epsilon))
-  {
-    std::cout.precision(static_cast<unsigned int>(itk::Math::Absolute(std::log10(epsilon))));
-    std::cout << "Mean value (" << mean3 << ") does not equal initialValue (" << initialValue << ')' << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
-
-  return testStatus;
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(static_cast<FunctionType::RealType>(initialValue), mean3, 10, epsilon))
+    << "Mean value (" << mean3 << ") does not equal initialValue (" << initialValue << ')';
 }
