@@ -17,11 +17,11 @@
  *=========================================================================*/
 
 #include "itkRLEImage.h"
+#include "itkGTest.h"
 #include "itkSimpleFilterWatcher.h"
 #include <iostream>
 
-int
-itkRegionOfInterestRLEImageFilterTest(int, char *[])
+TEST(RegionOfInterestRLEImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension = 3;
   using PixelType = itk::Index<Dimension>;
@@ -109,28 +109,17 @@ itkRegionOfInterestRLEImageFilterTest(int, char *[])
   it.GoToBegin();
   ot.GoToBegin();
 
-  bool passed = true;
   while (!it.IsAtEnd())
   {
     IndexType inIndex = it.Get();
     IndexType outIndex = ot.Get();
     if (inIndex[0] != outIndex[0] || inIndex[1] != outIndex[1] || inIndex[2] != outIndex[2])
     {
-      std::cerr << "Test failed at pixel " << inIndex << std::endl;
-      std::cerr << "pixel value is       " << outIndex << std::endl;
-      passed = false;
+      ADD_FAILURE() << "Test failed at pixel " << inIndex << std::endl << "pixel value is       " << outIndex;
       break;
     }
 
     ++it;
     ++ot;
   }
-
-  if (!passed)
-  {
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED !" << std::endl;
-  return EXIT_SUCCESS;
 }
