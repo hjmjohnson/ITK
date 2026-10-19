@@ -17,15 +17,12 @@
  *=========================================================================*/
 
 #include "itkHeldIsotropicWavelet.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <string>
 
-int
-itkHeldIsotropicWaveletTest(int, char *[])
+TEST(HeldIsotropicWavelet, ConvertedLegacyTest)
 {
-  bool testPassed = true;
-
   using Double = double;
   using Float = float;
 
@@ -56,7 +53,7 @@ itkHeldIsotropicWaveletTest(int, char *[])
 
   auto wavelet2Dfloat = Wavelet2DFloat::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(wavelet2Dfloat, HeldIsotropicWavelet, IsotropicWaveletFrequencyFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(wavelet2Dfloat, HeldIsotropicWavelet, IsotropicWaveletFrequencyFunction);
 
   Point2D point2D;
   point2D[0] = 0.2;
@@ -65,17 +62,14 @@ itkHeldIsotropicWaveletTest(int, char *[])
   std::cout << "freq2D: " << freq2D << std::endl;
   // Check that inherits from IsotropicFrequencyFunction
   unsigned int defaultBands = wavelet2Dfloat->GetHighPassSubBands();
-  if (defaultBands != 1)
-  {
-    testPassed = false;
-  }
+  EXPECT_EQ(defaultBands, 1u);
 
   // Specific methods for this type:
   unsigned int maxPolynomialOrder = 5;
   for (unsigned int p = 0; p < maxPolynomialOrder + 1; ++p)
   {
     wavelet2Dfloat->SetPolynomialOrder(p);
-    ITK_TEST_SET_GET_VALUE(p, wavelet2Dfloat->GetPolynomialOrder());
+    EXPECT_EQ(p, wavelet2Dfloat->GetPolynomialOrder());
     Wavelet2DFloat::FunctionValueType value = wavelet2Dfloat->EvaluateMagnitude(freq2D);
     std::cout << "Order: " << p << "; Evaluate: " << value << std::endl;
   }
@@ -84,17 +78,7 @@ itkHeldIsotropicWaveletTest(int, char *[])
   // Test exception cases
   unsigned int polynomialOrder = 6;
   wavelet2Dfloat->SetPolynomialOrder(polynomialOrder);
-  ITK_TEST_SET_GET_VALUE(polynomialOrder, wavelet2Dfloat->GetPolynomialOrder());
+  EXPECT_EQ(polynomialOrder, wavelet2Dfloat->GetPolynomialOrder());
 
-  ITK_TRY_EXPECT_EXCEPTION(wavelet2Dfloat->EvaluateMagnitude(freq2D));
-
-
-  if (testPassed)
-  {
-    return EXIT_SUCCESS;
-  }
-  else
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_THROW(wavelet2Dfloat->EvaluateMagnitude(freq2D), itk::ExceptionObject);
 }

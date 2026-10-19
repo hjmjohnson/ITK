@@ -25,6 +25,7 @@ itk_module(
     ITKImageFrequency
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
     ${VTKGlueModule}
   EXCLUDE_FROM_DEFAULT
   ENABLE_SHARED
