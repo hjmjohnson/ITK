@@ -3,17 +3,10 @@ set(
   ITKPathTests
   itkContourExtractor2DImageFilterTest.cxx
   itkExtractOrthogonalSwath2DImageFilterTest.cxx
-  itkPolyLineParametricPathTest.cxx
 )
 
 createtestdriver(ITKPath "${ITKPath-Test_LIBRARIES}" "${ITKPathTests}")
 
-itk_add_test(
-  NAME itkPolyLineParametricPathTest
-  COMMAND
-    ITKPathTestDriver
-    itkPolyLineParametricPathTest
-)
 itk_add_test(
   NAME itkExtractOrthogonalSwath2DImageFilterTest
   COMMAND
@@ -48,6 +41,7 @@ set(
   itkPathIteratorGTest.cxx
   itkPathToChainCodePathFilterGTest.cxx
   itkPathToImageFilterGTest.cxx
+  itkPolyLineParametricPathGTest.cxx
 )
 
 creategoogletestdriver(ITKPath "${ITKPath-Test_LIBRARIES}" "${ITKPathGTests}")
