@@ -19,10 +19,9 @@
 #include <iostream>
 #include "itkRegionOfInterestImageFilter.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkRegionOfInterestImageFilterTest(int, char *[])
+TEST(RegionOfInterestImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 3 };
@@ -42,7 +41,7 @@ itkRegionOfInterestImageFilterTest(int, char *[])
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, RegionOfInterestImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, RegionOfInterestImageFilter, ImageToImageFilter);
 
   auto image = ImageType::New();
 
@@ -81,7 +80,7 @@ itkRegionOfInterestImageFilterTest(int, char *[])
   const itk::SimpleFilterWatcher watcher(filter);
 
   filter->SetRegionOfInterest(regionOfInterest);
-  ITK_TEST_SET_GET_VALUE(regionOfInterest, filter->GetRegionOfInterest());
+  EXPECT_EQ(regionOfInterest, filter->GetRegionOfInterest());
 
   filter->Update();
 
@@ -109,11 +108,5 @@ itkRegionOfInterestImageFilterTest(int, char *[])
     ++ot;
   }
 
-  if (!passed)
-  {
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED !" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed);
 }
