@@ -19,23 +19,23 @@
 #include <algorithm>
 
 #include "itkImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 using ThreaderEnum = itk::MultiThreaderBase::ThreaderEnum;
 
-namespace itk
+namespace
 {
 template <typename TOutputImage>
-class ITK_TEMPLATE_EXPORT DummyImageSource : public ImageSource<TOutputImage>
+class DummyImageSource : public itk::ImageSource<TOutputImage>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(DummyImageSource);
 
   /** Standard class type aliases. */
   using Self = DummyImageSource;
-  using Superclass = ImageSource<TOutputImage>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::ImageSource<TOutputImage>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** Convenient type alias. */
   using OutputImageRegionType = typename TOutputImage::RegionType;
@@ -47,7 +47,7 @@ public:
   itkOverrideGetNameOfClassMacro(DummyImageSource);
 
   /** Index for which exception is thrown. */
-  itkSetMacro(ExceptionIndex, IndexValueType);
+  itkSetMacro(ExceptionIndex, itk::IndexValueType);
 
 protected:
   DummyImageSource() = default;
@@ -73,12 +73,11 @@ protected:
   }
 
 private:
-  IndexValueType m_ExceptionIndex{ 0 };
+  itk::IndexValueType m_ExceptionIndex{ 0 };
 };
-} // end namespace itk
+} // namespace
 
-int
-itkMultiThreaderExceptionsTest(int, char *[])
+TEST(MultiThreaderExceptions, ConvertedLegacyTest)
 {
   using OutputPixelType = float;
   constexpr unsigned int Dimension{ 1 };
@@ -96,8 +95,7 @@ itkMultiThreaderExceptionsTest(int, char *[])
   for (auto thType : threadersToTest)
   {
     itk::MultiThreaderBase::SetGlobalDefaultThreader(thType);
-    const typename itk::DummyImageSource<OutputImageType>::Pointer dummySrc =
-      itk::DummyImageSource<OutputImageType>::New();
+    const typename DummyImageSource<OutputImageType>::Pointer dummySrc = DummyImageSource<OutputImageType>::New();
     dummySrc->SetNumberOfWorkUnits(4);
     // SingleMultiThreader always uses 1 work unit covering the full region (starting at index 0),
     // so only ExceptionIndex=0 is valid. Other threaders split into N sub-regions,
@@ -108,9 +106,8 @@ itkMultiThreaderExceptionsTest(int, char *[])
     for (itk::IndexValueType i = 0; i < loopBound; ++i)
     {
       dummySrc->SetExceptionIndex(i);
-      ITK_TRY_EXPECT_EXCEPTION(dummySrc->Update());
+      EXPECT_THROW(dummySrc->Update(), itk::ExceptionObject);
     }
   }
   std::cout << "Test PASSED!" << std::endl;
-  return EXIT_SUCCESS;
 }
