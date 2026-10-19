@@ -34,7 +34,6 @@ set(
   itkRieszFrequencyFilterBankGeneratorTest.cxx
   itkMonogenicSignalFrequencyImageFilterTest.cxx
   # StructureTensor
-  itkStructureTensorImageFilterTest.cxx
   # TODO Wavelet + Riesz + PhaseAnalysis. This is not an unit test. Convert to example or application.
   itkRieszWaveletPhaseAnalysisTest.cxx
   itkStructureTensorWithGeneralizedRieszTest.cxx
@@ -226,12 +225,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkPhaseAnalysisSoftThresholdImageFilterTest.tiff
 )
 # StructureTensor
-itk_add_test(
-  NAME itkStructureTensorImageFilterTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkStructureTensorImageFilterTest
-)
 # VectorInverseFFT
 itk_add_test(
   NAME itkVectorInverseFFTImageFilterTest
@@ -687,5 +680,23 @@ set(
   itkInd2SubGTest.cxx
   itkShannonIsotropicWaveletGTest.cxx
   itkSimoncelliIsotropicWaveletGTest.cxx
+  itkStructureTensorImageFilterGTest.cxx
 )
 creategoogletestdriver(IsotropicWavelets "${Libraries}" "${IsotropicWaveletsGTests}")
+
+if(ITKVtkGlue_ENABLED)
+  target_include_directories(
+    IsotropicWaveletsGTestDriver
+    SYSTEM
+    PRIVATE
+      ${VTK_INCLUDE_DIRS}
+  )
+endif()
+
+if(ITK_VISUALIZE_TESTS)
+  target_compile_definitions(
+    IsotropicWaveletsGTestDriver
+    PRIVATE
+      ITK_VISUALIZE_TESTS
+  )
+endif()

@@ -22,7 +22,7 @@
 #include "itkImageRegionIterator.h"
 #include "itkTestingComparisonImageFilter.h"
 #include "itkStructureTensorImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <string>
 #include <cmath>
@@ -33,8 +33,10 @@
 #  include "itkViewImage.h"
 #endif
 
+namespace
+{
 template <unsigned int VDimension>
-[[nodiscard]] int
+void
 runStructureTensorImageFilterTest()
 {
   const unsigned int Dimension = VDimension;
@@ -44,8 +46,6 @@ runStructureTensorImageFilterTest()
   using IndexType = itk::Index<Dimension>;
   using SizeType = itk::Size<Dimension>;
   using RegionType = itk::ImageRegion<Dimension>;
-
-  bool testFailed = false;
 
   unsigned int sizeValue = 12;
   SizeType     size;
@@ -110,13 +110,13 @@ runStructureTensorImageFilterTest()
   // WindowRadius
   unsigned int nonDefaultGaussianRadius = 3;
   tensor->SetGaussianWindowRadius(nonDefaultGaussianRadius);
-  ITK_TEST_SET_GET_VALUE(nonDefaultGaussianRadius, tensor->GetGaussianWindowRadius());
+  EXPECT_EQ(nonDefaultGaussianRadius, tensor->GetGaussianWindowRadius());
   tensor->SetGaussianWindowRadius(2); // Restore default.
 
   // WindowSigma
   typename StructureTensorImageFilterType::FloatType nonDefaultGaussianSigma = 2.0;
   tensor->SetGaussianWindowSigma(nonDefaultGaussianSigma);
-  ITK_TEST_SET_GET_VALUE(nonDefaultGaussianSigma, tensor->GetGaussianWindowSigma());
+  EXPECT_EQ(nonDefaultGaussianSigma, tensor->GetGaussianWindowSigma());
   tensor->SetGaussianWindowSigma(1.0); // Restore default.
   // Use a external, new GaussianSource:
   // The gaussian source is modified in BeforeThreadedGenerateData() only if
@@ -136,31 +136,17 @@ runStructureTensorImageFilterTest()
   auto     outMatrixAtStart = eigenImage->GetPixel(start);
   unsigned eigenMatrixRows = outMatrixAtStart.Rows();
   unsigned eigenMatrixCols = outMatrixAtStart.Cols();
-  if (eigenMatrixRows != nInputs || eigenMatrixCols != nInputs + 1)
-  {
-    testFailed = true;
-    std::cout << "The resulting eigenMatrix size is wrong. Rows: " << eigenMatrixRows
-              << " . Columns: " << eigenMatrixCols << std::endl;
-  }
+  EXPECT_EQ(eigenMatrixRows, nInputs) << "The resulting eigenMatrix size is wrong.";
+  EXPECT_EQ(eigenMatrixCols, nInputs + 1) << "The resulting eigenMatrix size is wrong.";
   auto rotationMatrix = tensor->GetRotationMatrixFromOutputMatrix(outMatrixAtStart);
   auto rotationMatrixReOrdered = tensor->GetRotationMatrixFromOutputMatrix(outMatrixAtStart, true);
   for (unsigned int r = 0; r < nInputs; ++r)
   {
     for (unsigned int c = 0; c < nInputs; ++c)
     {
-      if (rotationMatrix[r][c] != outMatrixAtStart[c][r])
-      {
-        testFailed = true;
-        std::cout << "GetRotationMatrixFromOutputMatrix fails. rotationMatrix[r][c] " << rotationMatrix[r][c]
-                  << " !=  outMatrixAtStart[c][r] " << outMatrixAtStart[c][r] << std::endl;
-      }
-      if (rotationMatrixReOrdered[r][c] != outMatrixAtStart[nInputs - 1 - c][r])
-      {
-        testFailed = true;
-        std::cout << "GetRotationMatrixFromOutputMatrix fails. rotationMatrixReOrdered[r][c] "
-                  << rotationMatrixReOrdered[r][c] << " !=  outMatrixAtStart[nInputs - 1 - c][r] "
-                  << outMatrixAtStart[nInputs - 1 - c][r] << std::endl;
-      }
+      EXPECT_EQ(rotationMatrix[r][c], outMatrixAtStart[c][r]) << "GetRotationMatrixFromOutputMatrix fails.";
+      EXPECT_EQ(rotationMatrixReOrdered[r][c], outMatrixAtStart[nInputs - 1 - c][r])
+        << "GetRotationMatrixFromOutputMatrix fails.";
     }
   }
 
@@ -224,32 +210,17 @@ runStructureTensorImageFilterTest()
     differenceFailed = false;
   }
 
-  if (differenceFailed)
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Expected 0 different pixels, but got " << numberOfPixelsWithDifferences << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (testFailed)
-  {
-    std::cerr << "Test failed!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(differenceFailed) << "Expected 0 different pixels, but got " << numberOfPixelsWithDifferences;
 }
+} // namespace
 
-int
-itkStructureTensorImageFilterTest(int, char *[])
+TEST(StructureTensorImageFilter, ConvertedLegacyTest)
 {
-  int result2D = runStructureTensorImageFilterTest<2>();
-  int result3D = runStructureTensorImageFilterTest<3>();
+  runStructureTensorImageFilterTest<2>();
+  runStructureTensorImageFilterTest<3>();
 
 #ifndef ITK_VISUALIZE_TESTS
   // cannot visualize 4D images with viewimage
-  int result4D = runStructureTensorImageFilterTest<4>();
-  return result2D && result3D && result4D;
-#else
-  return result2D && result3D;
+  runStructureTensorImageFilterTest<4>();
 #endif
 }
