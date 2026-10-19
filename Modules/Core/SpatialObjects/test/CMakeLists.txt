@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKSpatialObjectsTests
   itkBoxSpatialObjectTest.cxx
-  itkContourSpatialObjectPointTest.cxx
   itkContourSpatialObjectTest.cxx
   itkDTITubeSpatialObjectTest.cxx
   itkEllipseSpatialObjectTest.cxx
@@ -31,12 +30,6 @@ set(
 
 createtestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsTests}")
 
-itk_add_test(
-  NAME itkContourSpatialObjectPointTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkContourSpatialObjectPointTest
-)
 itk_add_test(
   NAME itkSpatialObjectToImageFilterTest
   COMMAND
@@ -219,6 +212,7 @@ set(
   itkArrowSpatialObjectGTest.cxx
   itkBlobSpatialObjectGTest.cxx
   itkCastSpatialObjectFilterGTest.cxx
+  itkContourSpatialObjectPointGTest.cxx
   itkSpatialObjectPointGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")
