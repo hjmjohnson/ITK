@@ -17,23 +17,24 @@
  *=========================================================================*/
 
 #include "itkProbabilityDistribution.h"
+#include "itkGTest.h"
 
-namespace itk::Statistics
+namespace
 {
 
-class ProbabilityDistributionTestingHelper : public ProbabilityDistribution
+class ProbabilityDistributionTestingHelper : public itk::Statistics::ProbabilityDistribution
 {
 public:
   using Self = ProbabilityDistributionTestingHelper;
-  using Superclass = ProbabilityDistribution;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::Statistics::ProbabilityDistribution;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   itkOverrideGetNameOfClassMacro(ProbabilityDistributionTestingHelper);
 
   itkNewMacro(Self);
 
-  SizeValueType
+  itk::SizeValueType
   GetNumberOfParameters() const override
   {
     return 42;
@@ -97,15 +98,14 @@ public:
   }
 };
 
-} // namespace itk::Statistics
+} // namespace
 
 
-int
-itkProbabilityDistributionTest(int, char *[])
+TEST(ProbabilityDistribution, ConvertedLegacyTest)
 {
   std::cout << "itkProbabilityDistributionTest Test \n \n";
 
-  using DistributionType = itk::Statistics::ProbabilityDistributionTestingHelper;
+  using DistributionType = ProbabilityDistributionTestingHelper;
 
   auto distributionFunction = DistributionType::New();
 
@@ -117,6 +117,4 @@ itkProbabilityDistributionTest(int, char *[])
   distributionFunction->Print(std::cout);
 
   distributionFunction->RunTests();
-
-  return EXIT_SUCCESS;
 }
