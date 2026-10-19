@@ -21,6 +21,7 @@
 #include "itkMahalanobisDistanceMembershipFunction.h"
 #include "itkMinimumDecisionRule.h"
 #include "itkImageClassifierBase.h"
+#include "itkGTest.h"
 
 
 // This tests the supervised image classifier methods. The test,
@@ -31,7 +32,7 @@
 
 // Data definitions
 
-namespace SupervisedImageClassifierTest
+namespace
 {
 
 // class to support progress feedback
@@ -47,11 +48,10 @@ public:
   itk::LightProcessObject::Pointer m_Process;
 };
 
-} // namespace SupervisedImageClassifierTest
+} // namespace
 
 
-int
-itkSupervisedImageClassifierTest(int, char *[])
+TEST(SupervisedImageClassifier, ConvertedLegacyTest)
 {
   constexpr unsigned int IMGWIDTH{ 2 };
   constexpr unsigned int IMGHEIGHT{ 2 };
@@ -317,7 +317,7 @@ itkSupervisedImageClassifierTest(int, char *[])
 
   auto applyClassifier = SupervisedClassifierType::New();
 
-  using ProgressType = SupervisedImageClassifierTest::ShowProgressObject;
+  using ProgressType = ShowProgressObject;
 
   ProgressType                                          progressWatch(applyClassifier);
   const itk::SimpleMemberCommand<ProgressType>::Pointer command = itk::SimpleMemberCommand<ProgressType>::New();
@@ -399,15 +399,5 @@ itkSupervisedImageClassifierTest(int, char *[])
 
   } // end while
 
-  if (passTest)
-  {
-    std::cout << "Supervised Classifier Test Passed" << std::endl;
-  }
-  else
-  {
-    std::cout << "Supervised Classifier Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passTest);
 }
