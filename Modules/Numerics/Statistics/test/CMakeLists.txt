@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkSampleTest.cxx
   itkSampleTest2.cxx
   itkSampleTest3.cxx
   itkSampleTest4.cxx
@@ -486,12 +485,6 @@ itk_add_test(
     100
 )
 itk_add_test(
-  NAME itkSampleTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleTest
-)
-itk_add_test(
   NAME itkSampleTest2
   COMMAND
     ITKStatisticsTestDriver
@@ -724,6 +717,7 @@ set(
   itkPointSetToListSampleAdaptorGTest.cxx
   itkProbabilityDistributionGTest.cxx
   itkRandomVariateGeneratorBaseGTest.cxx
+  itkSampleGTest.cxx
   itkSampleToHistogramFilterExceptionsGTest.cxx
   itkStandardDeviationPerComponentSampleFilterGTest.cxx
   itkStatisticsTypesGTest.cxx
