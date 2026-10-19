@@ -21,7 +21,10 @@
 #include "itkAffineTransform.h"
 #include "itkDisplacementFieldTransform.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
+namespace
+{
 /**
  *  \class RegistrationParameterScalesFromJacobianTestMetric for test.
  *  Create a simple metric to use for testing here.
@@ -107,11 +110,11 @@ private:
   RegistrationParameterScalesFromJacobianTestMetric() = default;
   ~RegistrationParameterScalesFromJacobianTestMetric() override = default;
 };
+} // namespace
 
 /**
  */
-int
-itkRegistrationParameterScalesFromJacobianTest(int, char *[])
+TEST(RegistrationParameterScalesFromJacobian, ConvertedLegacyTest)
 {
 
   // Image begins
@@ -334,12 +337,9 @@ itkRegistrationParameterScalesFromJacobianTest(int, char *[])
 
   // Check the correctness of all cases above
   std::cout << std::endl;
-  if (jacobianPass && nonUniformForJacobian && stepScalePass && displacementPass && localStepScalePass)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(jacobianPass);
+  EXPECT_TRUE(nonUniformForJacobian);
+  EXPECT_TRUE(stepScalePass);
+  EXPECT_TRUE(displacementPass);
+  EXPECT_TRUE(localStepScalePass);
 }
