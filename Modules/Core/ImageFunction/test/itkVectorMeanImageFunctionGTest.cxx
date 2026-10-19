@@ -18,10 +18,9 @@
 
 
 #include "itkVectorMeanImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkVectorMeanImageFunctionTest(int, char *[])
+TEST(VectorMeanImageFunction, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 3 };
@@ -46,7 +45,7 @@ itkVectorMeanImageFunctionTest(int, char *[])
 
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, VectorMeanImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, VectorMeanImageFunction, ImageFunction);
 
 
   function->SetInputImage(image);
@@ -76,13 +75,6 @@ itkVectorMeanImageFunctionTest(int, char *[])
   // the should be equal to the initial value
   for (unsigned int ii = 0; ii < VectorDimension; ++ii)
   {
-    if (itk::Math::Absolute(initialValue[ii] - mean[ii]) > 10e-7)
-    {
-      std::cerr << "Error in mean computation" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(initialValue[ii], mean[ii], 10e-7) << "Error in mean computation";
   }
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
 }
