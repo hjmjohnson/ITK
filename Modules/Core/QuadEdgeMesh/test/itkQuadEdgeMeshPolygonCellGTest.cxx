@@ -17,13 +17,12 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
 
-int
-itkQuadEdgeMeshPolygonCellTest(int, char *[])
+TEST(QuadEdgeMeshPolygonCell, ConvertedLegacyTest)
 {
 
 
@@ -93,13 +92,13 @@ itkQuadEdgeMeshPolygonCellTest(int, char *[])
 
   PolygonCellType::PointIdIterator pointId = quadEdgeMeshPolygonCell.PointIdsBegin();
   PolygonCellType::PointIdIterator endId = quadEdgeMeshPolygonCell.PointIdsEnd();
-  ITK_TEST_EXPECT_TRUE(pointId);
-  ITK_TEST_EXPECT_TRUE(endId);
+  ASSERT_NE(pointId, nullptr);
+  EXPECT_NE(endId, nullptr);
 
   PolygonCellType::PointIdConstIterator constPointId = quadEdgeMeshPolygonCell.PointIdsBegin();
   PolygonCellType::PointIdConstIterator constEndId = quadEdgeMeshPolygonCell.PointIdsEnd();
-  ITK_TEST_EXPECT_TRUE(constPointId);
-  ITK_TEST_EXPECT_TRUE(constEndId);
+  ASSERT_NE(constPointId, nullptr);
+  EXPECT_NE(constEndId, nullptr);
 
   /**
    * Create the test cell. Note that testCell is a generic auto
@@ -119,11 +118,7 @@ itkQuadEdgeMeshPolygonCellTest(int, char *[])
    * Assign the points to the tetrahedron through their identifiers.
    */
   testCell->SetPointIds(polygon1Points);
-  if (newcell->GetPointId(18) != static_cast<PointIdentifier>(-1))
-  {
-    std::cerr << "Get Point should have failed !" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(newcell->GetPointId(18), static_cast<PointIdentifier>(-1)) << "Get Point should have failed !";
 
   // Test iterators
   std::cout << "Iterator: ";
@@ -152,11 +147,7 @@ itkQuadEdgeMeshPolygonCellTest(int, char *[])
 
   testCell->MakeCopy(anotherCell);
 
-  if (anotherCell->GetNumberOfPoints() != testCell->GetNumberOfPoints())
-  {
-    std::cerr << "Make Copy failed !" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(anotherCell->GetNumberOfPoints(), testCell->GetNumberOfPoints()) << "Make Copy failed !";
 
   /**
    * Add the test cell to the mesh.
@@ -171,6 +162,4 @@ itkQuadEdgeMeshPolygonCellTest(int, char *[])
   std::cout << "PolygonCell pointer = ";
   std::cout << (const void *)testCell.GetPointer() << std::endl;
   std::cout << "PolygonCell Owner   = " << testCell.IsOwner() << std::endl;
-
-  return EXIT_SUCCESS;
 }
