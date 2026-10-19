@@ -22,7 +22,7 @@
 #include "itkRegularStepGradientDescentOptimizer.h"
 
 #include "itkTextOutput.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 /**
@@ -32,8 +32,7 @@
  *  This file tests initialization errors.
  */
 
-int
-itkMultiResolutionImageRegistrationMethodTest(int, char *[])
+TEST(MultiResolutionImageRegistrationMethod, ConvertedLegacyTest)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -81,7 +80,7 @@ itkMultiResolutionImageRegistrationMethodTest(int, char *[])
 
   auto registration = RegistrationType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(registration, MultiResolutionImageRegistrationMethod, ProcessObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(registration, MultiResolutionImageRegistrationMethod, ProcessObject);
 
 
   auto size = FixedImageType::SizeType::Filled(8);
@@ -96,46 +95,45 @@ itkMultiResolutionImageRegistrationMethodTest(int, char *[])
   movingImage->FillBuffer(4.0);
 
   registration->SetMetric(metric);
-  ITK_TEST_SET_GET_VALUE(metric, registration->GetMetric());
+  EXPECT_EQ(metric, registration->GetMetric());
 
   registration->SetOptimizer(optimizer);
-  ITK_TEST_SET_GET_VALUE(optimizer, registration->GetOptimizer());
+  EXPECT_EQ(optimizer, registration->GetOptimizer());
 
   registration->SetTransform(transform);
-  ITK_TEST_SET_GET_VALUE(transform, registration->GetTransform());
+  EXPECT_EQ(transform, registration->GetTransform());
 
   registration->SetFixedImage(fixedImage);
-  ITK_TEST_SET_GET_VALUE(fixedImage, registration->GetFixedImage());
+  EXPECT_EQ(fixedImage, registration->GetFixedImage());
 
   registration->SetMovingImage(movingImage);
-  ITK_TEST_SET_GET_VALUE(movingImage, registration->GetMovingImage());
+  EXPECT_EQ(movingImage, registration->GetMovingImage());
 
   registration->SetInterpolator(interpolator);
-  ITK_TEST_SET_GET_VALUE(interpolator, registration->GetInterpolator());
+  EXPECT_EQ(interpolator, registration->GetInterpolator());
 
   registration->SetFixedImagePyramid(fixedImagePyramid);
-  ITK_TEST_SET_GET_VALUE(fixedImagePyramid, registration->GetFixedImagePyramid());
+  EXPECT_EQ(fixedImagePyramid, registration->GetFixedImagePyramid());
 
   registration->SetMovingImagePyramid(movingImagePyramid);
-  ITK_TEST_SET_GET_VALUE(movingImagePyramid, registration->GetMovingImagePyramid());
+  EXPECT_EQ(movingImagePyramid, registration->GetMovingImagePyramid());
 
   registration->SetFixedImageRegion(fixedImage->GetBufferedRegion());
-  ITK_TEST_SET_GET_VALUE(fixedImage->GetBufferedRegion(), registration->GetFixedImageRegion());
+  EXPECT_EQ(fixedImage->GetBufferedRegion(), registration->GetFixedImageRegion());
 
   constexpr itk::SizeValueType numberOfLevels{ 2 };
   registration->SetNumberOfLevels(numberOfLevels);
-  ITK_TEST_SET_GET_VALUE(numberOfLevels, registration->GetNumberOfLevels());
+  EXPECT_EQ(numberOfLevels, registration->GetNumberOfLevels());
 
   using ParametersType = RegistrationType::ParametersType;
   ParametersType initialParameters(transform->GetNumberOfParameters(), 0);
   registration->SetInitialTransformParameters(initialParameters);
-  ITK_TEST_SET_GET_VALUE(initialParameters, registration->GetInitialTransformParameters());
+  EXPECT_EQ(initialParameters, registration->GetInitialTransformParameters());
 
   constexpr typename ParametersType::ValueType initialTransformParametersOfNextLevelVal(0.0);
   const ParametersType initialTransformParametersOfNextLevel(1, initialTransformParametersOfNextLevelVal);
   registration->SetInitialTransformParametersOfNextLevel(initialTransformParametersOfNextLevel);
-  ITK_TEST_SET_GET_VALUE(initialTransformParametersOfNextLevel,
-                         registration->GetInitialTransformParametersOfNextLevel());
+  EXPECT_EQ(initialTransformParametersOfNextLevel, registration->GetInitialTransformParametersOfNextLevel());
 
   // Exercise Get methods
   std::cout << "CurrentLevel: " << registration->GetCurrentLevel() << std::endl;
@@ -144,27 +142,10 @@ itkMultiResolutionImageRegistrationMethodTest(int, char *[])
   /****************************************************
    * Test out initialization errors
    ****************************************************/
-  bool pass = false;
 #define TEST_INITIALIZATION_ERROR(ComponentName, badComponent, goodComponent) \
   registration->Set##ComponentName(badComponent);                             \
-  try                                                                         \
-  {                                                                           \
-    pass = false;                                                             \
-    registration->Update();                                                   \
-  }                                                                           \
-  catch (const itk::ExceptionObject & err)                                    \
-  {                                                                           \
-    std::cout << "Caught expected ExceptionObject" << std::endl;              \
-    std::cout << err << std::endl;                                            \
-    pass = true;                                                              \
-  }                                                                           \
+  EXPECT_THROW(registration->Update(), itk::ExceptionObject);                 \
   registration->Set##ComponentName(goodComponent);                            \
-                                                                              \
-  if (!pass)                                                                  \
-  {                                                                           \
-    std::cout << "Test failed." << std::endl;                                 \
-    return EXIT_FAILURE;                                                      \
-  }                                                                           \
   ITK_MACROEND_NOOP_STATEMENT
 
   TEST_INITIALIZATION_ERROR(Metric, nullptr, metric);
@@ -176,8 +157,4 @@ itkMultiResolutionImageRegistrationMethodTest(int, char *[])
   TEST_INITIALIZATION_ERROR(FixedImagePyramid, nullptr, fixedImagePyramid);
   TEST_INITIALIZATION_ERROR(MovingImagePyramid, nullptr, movingImagePyramid);
   TEST_INITIALIZATION_ERROR(InitialTransformParameters, ParametersType(1), initialParameters);
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
