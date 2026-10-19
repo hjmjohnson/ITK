@@ -21,7 +21,10 @@
 #include "itkAffineTransform.h"
 #include "itkDisplacementFieldTransform.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
+namespace
+{
 /**
  *  \class RegistrationParameterScalesFromIndexShiftTestMetric for test.
  *  Create a simple metric to use for testing here.
@@ -107,11 +110,11 @@ private:
   RegistrationParameterScalesFromIndexShiftTestMetric() = default;
   ~RegistrationParameterScalesFromIndexShiftTestMetric() override = default;
 };
+} // namespace
 
 /**
  */
-int
-itkRegistrationParameterScalesFromIndexShiftTest(int, char *[])
+TEST(RegistrationParameterScalesFromIndexShift, ConvertedLegacyTest)
 {
 
   // Image begins
@@ -375,13 +378,11 @@ itkRegistrationParameterScalesFromIndexShiftTest(int, char *[])
 
   // Check the correctness of all cases above
   std::cout << std::endl;
-  if (translationPass && uniformForTranslation && affinePass && nonUniformForAffine && localStepScalePass &&
-      displacementPass && stepScalePass)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(translationPass);
+  EXPECT_TRUE(uniformForTranslation);
+  EXPECT_TRUE(affinePass);
+  EXPECT_TRUE(nonUniformForAffine);
+  EXPECT_TRUE(localStepScalePass);
+  EXPECT_TRUE(displacementPass);
+  EXPECT_TRUE(stepScalePass);
 }
