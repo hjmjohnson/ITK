@@ -19,10 +19,9 @@
 #include <iostream>
 #include "itkComposeImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkCompose3DCovariantVectorImageFilterTest(int, char *[])
+TEST(Compose3DCovariantVectorImageFilter, ConvertedLegacyTest)
 {
   using PixelType = unsigned char;
   using InputImageType = itk::Image<PixelType, 3>;
@@ -61,7 +60,7 @@ itkCompose3DCovariantVectorImageFilterTest(int, char *[])
   filter->SetInput2(oneImage);
   filter->SetInput3(twoImage);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
   using OutputImageType = FilterType::OutputImageType;
 
@@ -87,27 +86,12 @@ itkCompose3DCovariantVectorImageFilterTest(int, char *[])
   while (!ot.IsAtEnd())
   {
     OutputPixelType outp = ot.Get();
-    if (itk::Math::NotExactlyEquals(i0.Get(), outp[0]))
-    {
-      std::cerr << "Error in zeroth component" << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (itk::Math::NotExactlyEquals(i1.Get(), outp[1]))
-    {
-      std::cerr << "Error in first component" << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (itk::Math::NotExactlyEquals(i2.Get(), outp[2]))
-    {
-      std::cerr << "Error in second component" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(i0.Get(), outp[0]) << "Error in zeroth component";
+    EXPECT_EQ(i1.Get(), outp[1]) << "Error in first component";
+    EXPECT_EQ(i2.Get(), outp[2]) << "Error in second component";
     ++ot;
     ++i0;
     ++i1;
     ++i2;
   }
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
