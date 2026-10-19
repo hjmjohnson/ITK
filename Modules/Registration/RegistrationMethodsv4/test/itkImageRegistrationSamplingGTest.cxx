@@ -17,15 +17,14 @@
  *=========================================================================*/
 
 #include "itkImageRegistrationMethodv4.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /*
  * Test the SetMetricSamplingPercentage and SetMetricSamplingPercentagePerLevel.
  * We only need to explicitly run the SetMetricSamplingPercentage method because it
  * invokes the SetMetricSamplingPercentagePerLevel method.
  */
-int
-itkImageRegistrationSamplingTest(int, char *[])
+TEST(ImageRegistrationSampling, ConvertedLegacyTest)
 {
   using PixelType = double;
   using FixedImageType = itk::Image<PixelType, 2>;
@@ -34,17 +33,13 @@ itkImageRegistrationSamplingTest(int, char *[])
   using RegistrationType = itk::ImageRegistrationMethodv4<FixedImageType, MovingImageType>;
   auto registrationMethod = RegistrationType::New();
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(registrationMethod->SetMetricSamplingPercentage(0.1));
+  EXPECT_NO_THROW(registrationMethod->SetMetricSamplingPercentage(0.1));
 
 
   constexpr unsigned int               NUM_ERRORS{ 3 };
   constexpr RegistrationType::RealType errorValues[NUM_ERRORS] = { -0.1, 0.0, 1.1 };
   for (const double errorValue : errorValues)
   {
-    ITK_TRY_EXPECT_EXCEPTION(registrationMethod->SetMetricSamplingPercentage(errorValue));
+    EXPECT_THROW(registrationMethod->SetMetricSamplingPercentage(errorValue), itk::ExceptionObject);
   }
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
