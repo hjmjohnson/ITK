@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkShapePriorSegmentationLevelSetFunction.h"
+#include "itkGTest.h"
 #include "itkSphereSignedDistanceFunction.h"
 #include "itkDenseFiniteDifferenceImageFilter.h"
 
@@ -43,20 +44,20 @@
  *
  */
 
-namespace itk::SPSLSF
+namespace
 {
 
 template <typename TImage>
-class SimpleTestFilter : public DenseFiniteDifferenceImageFilter<TImage, TImage>
+class SimpleTestFilter : public itk::DenseFiniteDifferenceImageFilter<TImage, TImage>
 {
 public:
   using Self = SimpleTestFilter;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
   itkOverrideGetNameOfClassMacro(SimpleTestFilter);
   itkNewMacro(Self);
   void
-  SetNumberOfIterations(const IdentifierType numberOfIterations) override
+  SetNumberOfIterations(const itk::IdentifierType numberOfIterations) override
   {
     if (this->m_NumberOfIterations != numberOfIterations)
     {
@@ -65,7 +66,7 @@ public:
     }
   }
 
-  using ShapePriorFunctionType = ShapePriorSegmentationLevelSetFunction<TImage, TImage>;
+  using ShapePriorFunctionType = itk::ShapePriorSegmentationLevelSetFunction<TImage, TImage>;
   ShapePriorFunctionType *
   GetShapePriorFunction()
   {
@@ -105,11 +106,10 @@ private:
   }
 };
 
-} // namespace itk::SPSLSF
+} // namespace
 
 
-int
-itkShapePriorSegmentationLevelSetFunctionTest(int, char *[])
+TEST(ShapePriorSegmentationLevelSetFunction, ConvertedLegacyTest)
 {
 
   using PixelType = float;
@@ -150,7 +150,7 @@ itkShapePriorSegmentationLevelSetFunctionTest(int, char *[])
   /**
    * Set up the simple test filter using itk::ShapePriorSegmentationLevelSetFunction.
    */
-  using FilterType = itk::SPSLSF::SimpleTestFilter<ImageType>;
+  using FilterType = SimpleTestFilter<ImageType>;
   auto filter = FilterType::New();
 
   try
@@ -172,7 +172,7 @@ itkShapePriorSegmentationLevelSetFunctionTest(int, char *[])
   catch (const itk::ExceptionObject & err)
   {
     std::cout << err << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   /**
@@ -224,20 +224,10 @@ itkShapePriorSegmentationLevelSetFunctionTest(int, char *[])
   overlap->SetInput2(thresholder->GetOutput());
   overlap->Update();
 
-  if (overlap->GetSimilarityIndex() > 0.90)
-  {
-    std::cout << "Overlap of " << overlap->GetSimilarityIndex() << " exceed threshold." << std::endl;
-  }
-  else
-  {
-    std::cout << "Overlap of " << overlap->GetSimilarityIndex() << " is below threshold." << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GT(overlap->GetSimilarityIndex(), 0.90);
 
   // Exercise other methods for coverage
   filter->GetDifferenceFunction()->Print(std::cout);
 
   std::cout << "Test passed. " << std::endl;
-  return EXIT_SUCCESS;
 }
