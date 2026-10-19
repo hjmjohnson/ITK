@@ -21,13 +21,12 @@
  * like Add/RemoveChild(...), Get/SetChildren(...), etc...
  */
 
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkTubeSpatialObject.h"
 #include "itkGroupSpatialObject.h"
 
 
-int
-itkTubeSpatialObjectTest(int, char *[])
+TEST(TubeSpatialObject, ConvertedLegacyTest)
 {
   using ScalarType = double;
   using Vector = itk::Vector<ScalarType, 3>;
@@ -50,11 +49,11 @@ itkTubeSpatialObjectTest(int, char *[])
 
   const TubePointer tube1 = TubeType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(tube1, TubeSpatialObject, PointBasedSpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(tube1, TubeSpatialObject, PointBasedSpatialObject);
 
 
   auto root = false;
-  ITK_TEST_SET_GET_BOOLEAN(tube1, Root, root);
+  ITK_GTEST_SET_GET_BOOLEAN(tube1, Root, root);
 
   tube1->GetProperty().SetName("Tube 1");
   tube1->SetId(1);
@@ -79,11 +78,11 @@ itkTubeSpatialObjectTest(int, char *[])
   p.Print(std::cout);
 
   // Test TubeSpatialObjectPoint exceptions: no spatial object exists so far
-  ITK_TRY_EXPECT_EXCEPTION([[maybe_unused]] auto val = p.GetTangentInWorldSpace());
+  EXPECT_THROW([[maybe_unused]] auto val = p.GetTangentInWorldSpace(), itk::ExceptionObject);
 
-  ITK_TRY_EXPECT_EXCEPTION([[maybe_unused]] auto val = p.GetNormal1InWorldSpace());
+  EXPECT_THROW([[maybe_unused]] auto val = p.GetNormal1InWorldSpace(), itk::ExceptionObject);
 
-  ITK_TRY_EXPECT_EXCEPTION([[maybe_unused]] auto val = p.GetNormal2InWorldSpace());
+  EXPECT_THROW([[maybe_unused]] auto val = p.GetNormal2InWorldSpace(), itk::ExceptionObject);
 
 
   tube1->SetPoints(list);
@@ -92,11 +91,8 @@ itkTubeSpatialObjectTest(int, char *[])
   auto out = itk::MakeFilled<Point>(5);
 
   std::cout << "IsInside()...";
-  if (!tube1->IsInsideInWorldSpace(in) || tube1->IsInsideInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(tube1->IsInsideInWorldSpace(in)) << "[FAILED]";
+  EXPECT_FALSE(tube1->IsInsideInWorldSpace(out)) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -104,23 +100,11 @@ itkTubeSpatialObjectTest(int, char *[])
   TubeType::CovariantVectorType derivative;
 
   std::cout << "DerivativeAt()...";
-  try
-  {
-    tube1->DerivativeAtInWorldSpace(in, 1, derivative);
-  }
-  catch (...)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(tube1->DerivativeAtInWorldSpace(in, 1, derivative)) << "[FAILED]";
 
   constexpr TubeType::CovariantVectorType expectedDerivative{};
 
-  if (expectedDerivative != derivative)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(expectedDerivative, derivative) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -163,11 +147,7 @@ itkTubeSpatialObjectTest(int, char *[])
   unsigned int nbChildren = tubeNet1->GetNumberOfChildren();
 
   std::cout << "AddChild()...";
-  if (nbChildren != 3)
-  {
-    std::cout << "[FAILED] [" << nbChildren << "!= 3]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(nbChildren, 3u) << "[FAILED] [" << nbChildren << "!= 3]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -183,11 +163,7 @@ itkTubeSpatialObjectTest(int, char *[])
   nbChildren = tubeNet1->GetNumberOfChildren();
 
   std::cout << "RemoveChild()...";
-  if (nbChildren != 0)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(nbChildren, 0u) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -224,11 +200,7 @@ itkTubeSpatialObjectTest(int, char *[])
   }
 
   std::cout << "GetChildren()...";
-  if (!passed)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -268,11 +240,7 @@ itkTubeSpatialObjectTest(int, char *[])
 
   delete returnedList;
   std::cout << "SetChildren()...";
-  if (!passed)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -280,11 +248,7 @@ itkTubeSpatialObjectTest(int, char *[])
   tubeNet1->Update();
 
   std::cout << "HasParent()...";
-  if (!tube2->HasParent())
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(tube2->HasParent()) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -311,11 +275,8 @@ itkTubeSpatialObjectTest(int, char *[])
   p2[0] = 5;
 
   std::cout << "IsInside()...";
-  if (!tubeNet1->IsInsideInWorldSpace(in, 3) || tubeNet1->IsInsideInWorldSpace(out, 3))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(tubeNet1->IsInsideInWorldSpace(in, 3)) << "[FAILED]";
+  EXPECT_FALSE(tubeNet1->IsInsideInWorldSpace(out, 3)) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -330,14 +291,10 @@ itkTubeSpatialObjectTest(int, char *[])
     std::cout << "[FAILED]" << std::endl;
   }
 
+  EXPECT_EQ(derivative, expectedDerivative) << "[FAILED]";
   if (derivative == expectedDerivative)
   {
     std::cout << "[PASSED]" << std::endl;
-  }
-  else
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
   }
 
 
@@ -355,52 +312,26 @@ itkTubeSpatialObjectTest(int, char *[])
   unsigned int netCount = net->GetReferenceCount();
 
   std::cout << "References test...";
-  if (tubeCount != 1)
-  {
-    std::cout << "[FAILED]: Problem in Tube initialization of references count" << tubeCount << std::endl;
-    return EXIT_FAILURE;
-  }
-  else
+  EXPECT_EQ(tubeCount, 1u) << "[FAILED]: Problem in Tube initialization of references count" << tubeCount;
   {
     const TubePointer localTube = tube;
     tubeCount = tube->GetReferenceCount();
-    if (tubeCount != 2)
-    {
-      std::cout << "[FAILED]: Problem in Tube with incrementation of references count" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(tubeCount, 2u) << "[FAILED]: Problem in Tube with incrementation of references count";
   }
 
-  if (netCount != 1)
-  {
-    std::cout << "[FAILED]: Problem in TubeNetwork initialization of references count" << std::endl;
-    return EXIT_FAILURE;
-  }
-  else
+  EXPECT_EQ(netCount, 1u) << "[FAILED]: Problem in TubeNetwork initialization of references count";
   {
     const GroupPointer localNet = net;
     netCount = net->GetReferenceCount();
-    if (netCount != 2)
-    {
-      std::cout << "[FAILED]: Problem in TubeNetwork with incrementation of references count" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(netCount, 2u) << "[FAILED]: Problem in TubeNetwork with incrementation of references count";
   }
 
   tubeCount = tube->GetReferenceCount();
   netCount = net->GetReferenceCount();
 
-  if (tubeCount != 1)
-  {
-    std::cout << "[FAILED]: Problem in Tube with decrementation of references count" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(tubeCount, 1u) << "[FAILED]: Problem in Tube with decrementation of references count";
 
-  if (netCount != 1)
-  {
-    std::cout << "[FAILED]: Problem in TubeNetwork with decrementation of references count" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(netCount, 1u) << "[FAILED]: Problem in TubeNetwork with decrementation of references count";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -408,11 +339,7 @@ itkTubeSpatialObjectTest(int, char *[])
   std::cout << "Set/GetParentPoint: ";
 
   tube->SetParentPoint(1);
-  if (tube->GetParentPoint() != 1)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(tube->GetParentPoint(), 1) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
 
@@ -432,50 +359,39 @@ itkTubeSpatialObjectTest(int, char *[])
   const Point      n2_known(itk::MakePoint(0.408248, 0.408248, 0.816497));
   constexpr double tol{ 0.0001 };
 
-  if ((itk::Math::Absolute(t[0] - t_known[0]) > tol) || (itk::Math::Absolute(t[1] - t_known[1]) > tol) ||
-      (itk::Math::Absolute(t[2] - t_known[2]) > tol))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    std::cout << " t = " << t << " != " << t_known << " within " << tol << std::endl;
-    return EXIT_FAILURE;
-  }
-  if ((itk::Math::Absolute(n1[0] - n1_known[0]) > tol) || (itk::Math::Absolute(n1[1] + n1_known[1]) > tol) ||
-      (itk::Math::Absolute(n1[2] - n1_known[2]) > tol))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    std::cout << " n1 = " << n1 << " != " << n1_known << " within " << tol << std::endl;
-    return EXIT_FAILURE;
-  }
-  if ((itk::Math::Absolute(n2[0] - n2_known[0]) > tol) || (itk::Math::Absolute(n2[1] - n2_known[1]) > tol) ||
-      (itk::Math::Absolute(n2[2] + n2_known[2]) > tol))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    std::cout << " n2 = " << n2 << " != " << n2_known << " within " << tol << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(t[0] - t_known[0]), tol)
+    << "[FAILED]" << " t = " << t << " != " << t_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(t[1] - t_known[1]), tol)
+    << "[FAILED]" << " t = " << t << " != " << t_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(t[2] - t_known[2]), tol)
+    << "[FAILED]" << " t = " << t << " != " << t_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(n1[0] - n1_known[0]), tol)
+    << "[FAILED]" << " n1 = " << n1 << " != " << n1_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(n1[1] + n1_known[1]), tol)
+    << "[FAILED]" << " n1 = " << n1 << " != " << n1_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(n1[2] - n1_known[2]), tol)
+    << "[FAILED]" << " n1 = " << n1 << " != " << n1_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(n2[0] - n2_known[0]), tol)
+    << "[FAILED]" << " n2 = " << n2 << " != " << n2_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(n2[1] - n2_known[1]), tol)
+    << "[FAILED]" << " n2 = " << n2 << " != " << n2_known << " within " << tol;
+  EXPECT_LE(itk::Math::Absolute(n2[2] + n2_known[2]), tol)
+    << "[FAILED]" << " n2 = " << n2 << " != " << n2_known << " within " << tol;
 
   std::cout << "[PASSED]" << std::endl;
 
   // Testing IsInside() with different end types
   auto endRounded = false;
-  ITK_TEST_SET_GET_BOOLEAN(tube1, EndRounded, endRounded);
+  ITK_GTEST_SET_GET_BOOLEAN(tube1, EndRounded, endRounded);
 
   p1.Fill(19.5);
 
-  if (tube1->IsInsideInWorldSpace(p1))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(tube1->IsInsideInWorldSpace(p1)) << "[FAILED]";
 
   endRounded = true;
-  ITK_TEST_SET_GET_BOOLEAN(tube1, EndRounded, endRounded);
+  ITK_GTEST_SET_GET_BOOLEAN(tube1, EndRounded, endRounded);
 
-  if (!tube1->IsInsideInWorldSpace(p1))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(tube1->IsInsideInWorldSpace(p1)) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
 
@@ -493,20 +409,13 @@ itkTubeSpatialObjectTest(int, char *[])
   std::cout << "Testing PointBasedSO AddPoint: ";
   pnt.SetPositionInObjectSpace(1, 1, 1);
   pBSO->AddPoint(pnt);
-  if (pBSO->GetPoint(1)->GetPositionInObjectSpace()[0] != 1)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(pBSO->GetPoint(1)->GetPositionInObjectSpace()[0], 1) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   std::cout << "Testing PointBasedSO RemovePoint: ";
   pBSO->RemovePoint(0);
-  if (pBSO->GetPoints().size() != 1 || pBSO->GetPoint(0)->GetPositionInObjectSpace()[0] != 1)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(pBSO->GetPoints().size(), 1u) << "[FAILED]";
+  EXPECT_EQ(pBSO->GetPoint(0)->GetPositionInObjectSpace()[0], 1) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   // Test Copy and Assignment for TubePointType
@@ -547,42 +456,37 @@ itkTubeSpatialObjectTest(int, char *[])
     for (const auto & pv : pointVector)
     {
       // itk::SpatialObjectPoint
-      ITK_TEST_EXPECT_EQUAL(pOriginal.GetId(), pv.GetId());
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetRed(), pv.GetRed()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetGreen(), pv.GetGreen()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetBlue(), pv.GetBlue()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetAlpha(), pv.GetAlpha()));
+      EXPECT_EQ(pOriginal.GetId(), pv.GetId());
+      EXPECT_DOUBLE_EQ(pOriginal.GetRed(), pv.GetRed());
+      EXPECT_DOUBLE_EQ(pOriginal.GetGreen(), pv.GetGreen());
+      EXPECT_DOUBLE_EQ(pOriginal.GetBlue(), pv.GetBlue());
+      EXPECT_DOUBLE_EQ(pOriginal.GetAlpha(), pv.GetAlpha());
       for (size_t j = 0; j < 3; ++j)
       {
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetPositionInObjectSpace()[j], pv.GetPositionInObjectSpace()[j]));
+        EXPECT_DOUBLE_EQ(pOriginal.GetPositionInObjectSpace()[j], pv.GetPositionInObjectSpace()[j]);
       }
       // itk::TubeSpatialObjectPoint
       for (size_t j = 0; j < 3; ++j)
       {
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetTangentInObjectSpace()[j], pv.GetTangentInObjectSpace()[j]));
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetNormal1InObjectSpace()[j], pv.GetNormal1InObjectSpace()[j]));
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetNormal2InObjectSpace()[j], pv.GetNormal2InObjectSpace()[j]));
+        EXPECT_DOUBLE_EQ(pOriginal.GetTangentInObjectSpace()[j], pv.GetTangentInObjectSpace()[j]);
+        EXPECT_DOUBLE_EQ(pOriginal.GetNormal1InObjectSpace()[j], pv.GetNormal1InObjectSpace()[j]);
+        EXPECT_DOUBLE_EQ(pOriginal.GetNormal2InObjectSpace()[j], pv.GetNormal2InObjectSpace()[j]);
       }
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetRadiusInObjectSpace(), pv.GetRadiusInObjectSpace()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetMedialness(), pv.GetMedialness()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetRidgeness(), pv.GetRidgeness()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetBranchness(), pv.GetBranchness()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetCurvature(), pv.GetCurvature()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetLevelness(), pv.GetLevelness()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetRoundness(), pv.GetRoundness()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetIntensity(), pv.GetIntensity()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetAlpha1(), pv.GetAlpha1()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetAlpha2(), pv.GetAlpha2()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetAlpha3(), pv.GetAlpha3()));
+      EXPECT_DOUBLE_EQ(pOriginal.GetRadiusInObjectSpace(), pv.GetRadiusInObjectSpace());
+      EXPECT_DOUBLE_EQ(pOriginal.GetMedialness(), pv.GetMedialness());
+      EXPECT_DOUBLE_EQ(pOriginal.GetRidgeness(), pv.GetRidgeness());
+      EXPECT_DOUBLE_EQ(pOriginal.GetBranchness(), pv.GetBranchness());
+      EXPECT_DOUBLE_EQ(pOriginal.GetCurvature(), pv.GetCurvature());
+      EXPECT_DOUBLE_EQ(pOriginal.GetLevelness(), pv.GetLevelness());
+      EXPECT_DOUBLE_EQ(pOriginal.GetRoundness(), pv.GetRoundness());
+      EXPECT_DOUBLE_EQ(pOriginal.GetIntensity(), pv.GetIntensity());
+      EXPECT_DOUBLE_EQ(pOriginal.GetAlpha1(), pv.GetAlpha1());
+      EXPECT_DOUBLE_EQ(pOriginal.GetAlpha2(), pv.GetAlpha2());
+      EXPECT_DOUBLE_EQ(pOriginal.GetAlpha3(), pv.GetAlpha3());
     }
 
     std::cout << "[DONE]" << std::endl;
   }
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
