@@ -29,7 +29,7 @@
 
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkSimilarityIndexImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /** \class ShowIterationObject
  * This class is used to support callbacks
@@ -56,8 +56,7 @@ public:
 };
 } // namespace
 
-int
-itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
+TEST(GeodesicActiveContourShapePriorLevelSetImageFilter, ConvertedLegacyTest2)
 {
   // Typedefs of components
   constexpr unsigned int ImageDimension{ 2 };
@@ -83,7 +82,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
 
   auto sphere = SphereFunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     filter, GeodesicActiveContourShapePriorLevelSetImageFilter, ShapePriorSegmentationLevelSetImageFilter);
 
   ImageType::SizeType imageSize;
@@ -372,7 +371,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
     std::cout << err << std::endl;
     std::cout << "Caught unexpected exception." << std::endl;
     std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   // Print useful information from the shape detection filter
@@ -427,17 +426,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2(int, char *[])
   */
 
   // Check if overlap is above threshold
-  if (overlap->GetSimilarityIndex() > 0.93)
-  {
-    std::cout << "Overlap exceed threshold." << std::endl;
-  }
-  else
-  {
-    std::cout << "Overlap below threshold." << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GT(overlap->GetSimilarityIndex(), 0.93);
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
