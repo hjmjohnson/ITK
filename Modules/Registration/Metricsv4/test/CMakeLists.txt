@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKMetricsv4Tests
   itkANTSNeighborhoodCorrelationImageToImageRegistrationTest.cxx
-  itkCorrelationImageToImageMetricv4Test.cxx
   itkDemonsImageToImageMetricv4RegistrationTest.cxx
   itkDemonsImageToImageMetricv4Test.cxx
   itkEuclideanDistancePointSetMetricRegistrationTest.cxx
@@ -144,13 +143,6 @@ itk_add_test(
   COMMAND
     ITKMetricsv4TestDriver
     itkMeanSquaresImageToImageMetricv4Test
-)
-
-itk_add_test(
-  NAME itkCorrelationImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkCorrelationImageToImageMetricv4Test
 )
 
 itk_add_test(
@@ -419,6 +411,7 @@ itk_add_test(
 set(
   ITKMetricsv4GTests
   itkANTSNeighborhoodCorrelationImageToImageMetricv4GTest.cxx
+  itkCorrelationImageToImageMetricv4GTest.cxx
   itkImageToImageMetricv4WorkUnitsGTest.cxx
   itkMattesMutualInformationImageToImageMetricv4GTest.cxx
 )
