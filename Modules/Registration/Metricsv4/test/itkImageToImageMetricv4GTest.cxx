@@ -19,7 +19,7 @@
 #define ITK_LEGACY_TEST
 #include "itkImageToImageMetricv4.h"
 #include "itkTranslationTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkMath.h"
 
 /*
@@ -35,6 +35,8 @@
  * Exercise other methods
  */
 
+namespace
+{
 /** \class TestImageToImageGetValueAndDerivativeThreader
  * \brief Processes points for ImageToImageTest calculation. */
 template <typename TDomainPartitioner, typename TImageToImageMetricv4>
@@ -306,46 +308,35 @@ ImageToImageMetricv4TestComputeIdentityTruthValues(const ImageToImageMetricv4Tes
 // Useful for establishing a relative truth for multiple runs.
 // Otherwise, this will compare the results of calling the metric
 // with truthValue and truthDerivative.
-[[nodiscard]] int
+void
 ImageToImageMetricv4TestRunSingleTest(const ImageToImageMetricv4TestMetricPointer &        metric,
                                       ImageToImageMetricv4TestMetricType::MeasureType &    truthValue,
                                       ImageToImageMetricv4TestMetricType::DerivativeType & truthDerivative,
                                       itk::SizeValueType                                   expectedNumberOfPoints,
                                       bool                                                 setTruthValues)
 {
-  int result = EXIT_SUCCESS;
-
   // Initialize.
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->Initialize());
+  EXPECT_NO_THROW(metric->Initialize());
 
   // Evaluate using GetValue
   ImageToImageMetricv4TestMetricType::MeasureType valueReturn1 = NAN;
-  ITK_TRY_EXPECT_NO_EXCEPTION(valueReturn1 = metric->GetValue());
+  EXPECT_NO_THROW(valueReturn1 = metric->GetValue());
 
   // Re-initialize.
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->Initialize());
+  EXPECT_NO_THROW(metric->Initialize());
 
   // Evaluate using GetValueAndDerivative
   ImageToImageMetricv4TestMetricType::MeasureType    valueReturn2 = NAN;
   ImageToImageMetricv4TestMetricType::DerivativeType derivativeReturn;
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->GetValueAndDerivative(valueReturn2, derivativeReturn));
+  EXPECT_NO_THROW(metric->GetValueAndDerivative(valueReturn2, derivativeReturn));
 
   // Test same value returned by different methods
   std::cout << "Check Value return values..." << std::endl;
-  if (itk::Math::NotExactlyEquals(valueReturn1, valueReturn2))
-  {
-    std::cerr << "Results for Value don't match: " << valueReturn1 << ", " << valueReturn2 << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_EQ(valueReturn1, valueReturn2) << "Results for Value don't match";
 
   // Check number of threads and valid points
   std::cout << "--Number of work units used: " << metric->GetNumberOfWorkUnitsUsed() << std::endl;
-  if (metric->GetNumberOfValidPoints() != (expectedNumberOfPoints))
-  {
-    std::cerr << "Expected number of valid points to be " << expectedNumberOfPoints << " but instead got "
-              << metric->GetNumberOfValidPoints() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(metric->GetNumberOfValidPoints(), (expectedNumberOfPoints));
 
   // Return or verify results
   if (setTruthValues)
@@ -357,27 +348,17 @@ ImageToImageMetricv4TestRunSingleTest(const ImageToImageMetricv4TestMetricPointe
   {
     // Verify results
     constexpr double epsilon{ 1e-10 };
-    if (itk::Math::Absolute(truthValue - valueReturn2) > epsilon)
-    {
-      std::cerr << "-FAILED- truthValue does not equal value: " << std::endl
-                << "truthValue: " << truthValue << std::endl
-                << "value: " << valueReturn2 << std::endl;
-      result = EXIT_FAILURE;
-    }
-    if (!ImageToImageMetricv4TestTestArray(truthDerivative, derivativeReturn))
-    {
-      std::cerr << "-FAILED- truthDerivative does not equal derivatives:" << std::endl
-                << "truthDerivative: " << truthDerivative << std::endl
-                << "derivatives: " << derivativeReturn << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_NEAR(truthValue, valueReturn2, epsilon) << "-FAILED- truthValue does not equal value";
+    EXPECT_TRUE(ImageToImageMetricv4TestTestArray(truthDerivative, derivativeReturn))
+      << "-FAILED- truthDerivative does not equal derivatives:" << std::endl
+      << "truthDerivative: " << truthDerivative << std::endl
+      << "derivatives: " << derivativeReturn;
   }
-  return result;
 }
+} // namespace
 
 ////////////////////////////////////////////////////////////
-int
-itkImageToImageMetricv4Test(int, char ** const)
+TEST(ImageToImageMetricv4, ConvertedLegacyTest)
 {
   const bool origGlobalWarningValue = itk::Object::GetGlobalWarningDisplay();
   itk::Object::SetGlobalWarningDisplay(true);
@@ -429,22 +410,22 @@ itkImageToImageMetricv4Test(int, char ** const)
   // The simplistic test metric
   const ImageToImageMetricv4TestMetricPointer metric = ImageToImageMetricv4TestMetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, ImageToImageMetricv4TestMetric, ImageToImageMetricv4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(metric, ImageToImageMetricv4TestMetric, ImageToImageMetricv4);
 
 
   // Test exceptions
-  ITK_TRY_EXPECT_EXCEPTION(metric->SetFixedObject(nullptr));
+  EXPECT_THROW(metric->SetFixedObject(nullptr), itk::ExceptionObject);
 
-  ITK_TRY_EXPECT_EXCEPTION(metric->SetMovingObject(nullptr));
+  EXPECT_THROW(metric->SetMovingObject(nullptr), itk::ExceptionObject);
 
   // Assign images and transforms.
   // By not setting a virtual domain image or virtual domain settings,
   // the metric will use the fixed image for the virtual domain.
   metric->SetFixedImage(fixedImage);
-  ITK_TEST_SET_GET_VALUE(fixedImage, metric->GetFixedImage());
+  EXPECT_EQ(fixedImage, metric->GetFixedImage());
 
   metric->SetMovingImage(movingImage);
-  ITK_TEST_SET_GET_VALUE(movingImage, metric->GetMovingImage());
+  EXPECT_EQ(movingImage, metric->GetMovingImage());
 
   metric->SetFixedTransform(fixedTransform);
   metric->SetMovingTransform(movingTransform);
@@ -484,10 +465,10 @@ itkImageToImageMetricv4Test(int, char ** const)
         bool computeNewTruthValues = true;
 
         const bool useFixedImageGradientFilter = useFixedFilter == 1;
-        ITK_TEST_SET_GET_BOOLEAN(metric, UseFixedImageGradientFilter, useFixedImageGradientFilter);
+        ITK_GTEST_SET_GET_BOOLEAN(metric, UseFixedImageGradientFilter, useFixedImageGradientFilter);
 
         const bool useMovingImageGradientFilter = useMovingFilter == 1;
-        ITK_TEST_SET_GET_BOOLEAN(metric, UseMovingImageGradientFilter, useMovingImageGradientFilter);
+        ITK_GTEST_SET_GET_BOOLEAN(metric, UseMovingImageGradientFilter, useMovingImageGradientFilter);
 
         std::cout << "**********************************" << std::endl;
         if (computeNewTruthValues)
@@ -496,16 +477,7 @@ itkImageToImageMetricv4Test(int, char ** const)
             metric, fixedImage, movingImage, truthValue, truthDerivative);
         }
         std::cout << "* Testing with identity transforms..." << std::endl;
-        if (ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false) !=
-            EXIT_SUCCESS)
-        {
-          std::cerr << "----------------------------" << std::endl
-                    << "Failed for these settings: " << std::endl
-                    << "Use gradient filter for: fixed, moving: " << metric->GetUseFixedImageGradientFilter() << ", "
-                    << metric->GetUseMovingImageGradientFilter() << std::endl
-                    << "----------------------------" << std::endl;
-          return EXIT_FAILURE;
-        }
+        ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false);
         computeNewTruthValues = false;
       }
     } // loop through permutations
@@ -521,15 +493,9 @@ itkImageToImageMetricv4Test(int, char ** const)
   ImageToImageMetricv4TestMetricType::MeasureType expectedMetricMax = NAN;
   expectedMetricMax = itk::NumericTraits<ImageToImageMetricv4TestMetricType::MeasureType>::max();
   std::cout << "Testing non-overlapping images. Expect a warning:" << std::endl;
-  if (ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, 0, true) != EXIT_SUCCESS ||
-      itk::Math::NotAlmostEquals(metric->GetValue(), expectedMetricMax))
-  {
-    std::cerr << "Failed testing for non-overlapping images. " << std::endl
-              << "  Number of valid points: " << metric->GetNumberOfValidPoints() << std::endl
-              << "  Metric value: " << metric->GetValue() << std::endl
-              << "  Expected metric max value: " << expectedMetricMax << std::endl;
-    return EXIT_FAILURE;
-  }
+  ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, 0, true);
+  EXPECT_DOUBLE_EQ(metric->GetValue(), expectedMetricMax)
+    << "Failed testing for non-overlapping images. Number of valid points: " << metric->GetNumberOfValidPoints();
   movingTransform->SetIdentity();
 
   //
@@ -560,16 +526,16 @@ itkImageToImageMetricv4Test(int, char ** const)
   metric->SetFixedTransform(fixedTransform);
 
   bool useFixedImageGradientFilter = true;
-  ITK_TEST_SET_GET_BOOLEAN(metric, UseFixedImageGradientFilter, useFixedImageGradientFilter);
+  ITK_GTEST_SET_GET_BOOLEAN(metric, UseFixedImageGradientFilter, useFixedImageGradientFilter);
 
   bool useMovingImageGradientFilter = true;
-  ITK_TEST_SET_GET_BOOLEAN(metric, UseMovingImageGradientFilter, useMovingImageGradientFilter);
+  ITK_GTEST_SET_GET_BOOLEAN(metric, UseMovingImageGradientFilter, useMovingImageGradientFilter);
 
   constexpr bool useVirtualSampledPointSet{ false };
-  ITK_TEST_SET_GET_BOOLEAN(metric, UseVirtualSampledPointSet, useVirtualSampledPointSet);
+  ITK_GTEST_SET_GET_BOOLEAN(metric, UseVirtualSampledPointSet, useVirtualSampledPointSet);
 
   constexpr bool useFloatingPointCorrection{ false };
-  ITK_TEST_SET_GET_BOOLEAN(metric, UseFloatingPointCorrection, useFloatingPointCorrection);
+  ITK_GTEST_SET_GET_BOOLEAN(metric, UseFloatingPointCorrection, useFloatingPointCorrection);
 
   // Tell the metric to compute image gradients for both fixed and moving.
   metric->SetGradientSource(itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_BOTH);
@@ -577,18 +543,14 @@ itkImageToImageMetricv4Test(int, char ** const)
   // Evaluate the metric
   std::cout << "* Testing with identity DisplacementFieldTransform for moving image..." << std::endl;
   ImageToImageMetricv4TestComputeIdentityTruthValues(metric, fixedImage, movingImage, truthValue, truthDerivative);
-  if (ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false) !=
-      EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false);
 
   // Test that using a displacement field that does not match the virtual
   // domain space will throw an exception.
   field->SetSpacing(fixedImage->GetSpacing() * 2.0);
   std::cout << "Testing with displacement field in different space than "
             << "fixed image:" << std::endl;
-  ITK_TRY_EXPECT_EXCEPTION(metric->Initialize());
+  EXPECT_THROW(metric->Initialize(), itk::ExceptionObject);
 
   //
   // Test with sampled point-set
@@ -601,10 +563,10 @@ itkImageToImageMetricv4Test(int, char ** const)
   metric->SetGradientSource(itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_BOTH);
 
   useFixedImageGradientFilter = false;
-  ITK_TEST_SET_GET_BOOLEAN(metric, UseFixedImageGradientFilter, useFixedImageGradientFilter);
+  ITK_GTEST_SET_GET_BOOLEAN(metric, UseFixedImageGradientFilter, useFixedImageGradientFilter);
 
   useMovingImageGradientFilter = false;
-  ITK_TEST_SET_GET_BOOLEAN(metric, UseMovingImageGradientFilter, useMovingImageGradientFilter);
+  ITK_GTEST_SET_GET_BOOLEAN(metric, UseMovingImageGradientFilter, useMovingImageGradientFilter);
 
   // create a point set, size of image for basic testing
   using PointSetType = ImageToImageMetricv4TestMetricType::FixedSampledPointSetType;
@@ -628,31 +590,27 @@ itkImageToImageMetricv4Test(int, char ** const)
 
   std::cout << "Setting point set..." << std::endl;
   metric->SetFixedSampledPointSet(pset);
-  ITK_TEST_SET_GET_VALUE(pset, metric->GetFixedSampledPointSet());
+  EXPECT_EQ(pset, metric->GetFixedSampledPointSet());
 
   constexpr bool useSampledPointSet{ true };
-  ITK_TEST_SET_GET_BOOLEAN(metric, UseSampledPointSet, useSampledPointSet);
+  ITK_GTEST_SET_GET_BOOLEAN(metric, UseSampledPointSet, useSampledPointSet);
 
 #if !defined(ITK_LEGACY_REMOVE)
 
   metric->SetUseFixedSampledPointSet(useSampledPointSet);
-  ITK_TEST_SET_GET_VALUE(useSampledPointSet, metric->GetUseFixedSampledPointSet());
+  EXPECT_EQ(useSampledPointSet, metric->GetUseFixedSampledPointSet());
 
   metric->UseFixedSampledPointSetOff();
-  ITK_TEST_EXPECT_TRUE(!metric->GetUseFixedSampledPointSet());
+  EXPECT_FALSE(metric->GetUseFixedSampledPointSet());
 
   metric->UseFixedSampledPointSetOn();
-  ITK_TEST_EXPECT_TRUE(metric->GetUseFixedSampledPointSet());
+  EXPECT_TRUE(metric->GetUseFixedSampledPointSet());
 
 #endif
 
   std::cout << "Testing metric output..." << std::endl;
   ImageToImageMetricv4TestComputeIdentityTruthValues(metric, fixedImage, movingImage, truthValue, truthDerivative);
-  if (ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false) !=
-      EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false);
 
   std::cout << "NumberOfWorkUnitsUsed: " << metric->GetNumberOfWorkUnitsUsed() << std::endl;
 
@@ -674,7 +632,7 @@ itkImageToImageMetricv4Test(int, char ** const)
 
   constexpr typename ImageToImageMetricv4TestMetricType::DerivativeValueType floatingPointCorrectionResolution = 1.0;
   metric->SetFloatingPointCorrectionResolution(floatingPointCorrectionResolution);
-  ITK_TEST_SET_GET_VALUE(floatingPointCorrectionResolution, metric->GetFloatingPointCorrectionResolution());
+  EXPECT_EQ(floatingPointCorrectionResolution, metric->GetFloatingPointCorrectionResolution());
 
   // Empty method body by default; called for coverage purposes
   constexpr itk::ThreadIdType thread{ 0 };
@@ -682,8 +640,4 @@ itkImageToImageMetricv4Test(int, char ** const)
 
 
   itk::Object::SetGlobalWarningDisplay(origGlobalWarningValue);
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
