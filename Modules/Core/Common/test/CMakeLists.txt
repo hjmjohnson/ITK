@@ -26,7 +26,6 @@ set(
   itkStreamingImageFilterTest3.cxx
   itkSymmetricSecondRankTensorImageReadTest.cxx
   itkSymmetricSecondRankTensorImageWriteReadTest.cxx
-  itkTimeProbeTest.cxx
   itkTimeProbeTest2.cxx
   itkVectorContainerTest.cxx
   itkVectorTest.cxx
@@ -855,12 +854,6 @@ itk_add_test(
     itkObjectFactoryOnlyNewTest
 )
 itk_add_test(
-  NAME itkTimeProbeTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkTimeProbeTest
-)
-itk_add_test(
   NAME itkTimeProbeCommonTest2
   COMMAND
     ITKCommon1TestDriver
@@ -1408,6 +1401,7 @@ set(
   itkThreadedIteratorRangePartitionerGTest.cxx
   itkThreadedIteratorRangePartitionerGTest2.cxx
   itkThreadedIteratorRangePartitionerGTest3.cxx
+  itkTimeProbeGTest.cxx
   itkTimeStampGTest.cxx
   itkTorusInteriorExteriorSpatialFunctionGTest.cxx
   itkVariableLengthVectorGTest.cxx
