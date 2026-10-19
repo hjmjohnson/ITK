@@ -9,7 +9,6 @@ set(
   itkFFTDiscreteGaussianImageFilterTest.cxx
   itkMeanImageFilterTest.cxx
   itkMedianImageFilterTest.cxx
-  itkRecursiveGaussianScaleSpaceTest1.cxx
   itkSmoothingRecursiveGaussianImageFilterOnImageAdaptorTest.cxx
   itkSmoothingRecursiveGaussianImageFilterOnImageOfVectorTest.cxx
   itkSmoothingRecursiveGaussianImageFilterOnVectorImageTest.cxx
@@ -366,12 +365,6 @@ itk_add_test(
     ITKSmoothingTestDriver
     itkMedianImageFilterTest
 )
-itk_add_test(
-  NAME itkRecursiveGaussianScaleSpaceTest1
-  COMMAND
-    ITKSmoothingTestDriver
-    itkRecursiveGaussianScaleSpaceTest1
-)
 
 set(
   ITKSmoothingGTests
@@ -381,5 +374,6 @@ set(
   itkRecursiveGaussianImageFilterGTest.cxx
   itkRecursiveGaussianImageFilterOnTensorsGTest.cxx
   itkRecursiveGaussianImageFilterOnVectorImageGTest.cxx
+  itkRecursiveGaussianScaleSpaceGTest1.cxx
 )
 creategoogletestdriver(ITKSmoothing "${ITKSmoothing-Test_LIBRARIES}" "${ITKSmoothingGTests}")
