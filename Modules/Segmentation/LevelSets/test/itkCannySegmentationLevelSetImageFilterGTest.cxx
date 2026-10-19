@@ -17,9 +17,10 @@
  *=========================================================================*/
 
 #include "itkCannySegmentationLevelSetImageFilter.h"
+#include "itkGTest.h"
 
 
-namespace CSIFTN
+namespace
 {
 
 using ImageType = itk::Image<float, 3>;
@@ -105,18 +106,13 @@ evaluate_function(itk::Image<signed char, 3> * im, float (*f)(float, float, floa
   }
 }
 
-} // namespace CSIFTN
 
-
-namespace itk
-{
-
-class RMSCommand : public Command
+class RMSCommand : public itk::Command
 {
 public:
   /** Smart pointer declaration methods */
   using Self = RMSCommand;
-  using Superclass = Command;
+  using Superclass = itk::Command;
   using Pointer = itk::SmartPointer<Self>;
   using ConstPointer = itk::SmartPointer<const Self>;
   itkOverrideGetNameOfClassMacro(RMSCommand);
@@ -124,18 +120,17 @@ public:
 
   /** Standard Command virtual methods */
   void
-  Execute(Object * caller, const EventObject &) override
+  Execute(itk::Object * caller, const itk::EventObject &) override
   {
-    std::cout << (dynamic_cast<SparseFieldLevelSetImageFilter<::CSIFTN::SeedImageType, ::CSIFTN::ImageType> *>(caller))
-                   ->GetRMSChange()
+    std::cout << (dynamic_cast<itk::SparseFieldLevelSetImageFilter<SeedImageType, ImageType> *>(caller))->GetRMSChange()
               << std::endl;
-    std::cout << (dynamic_cast<SegmentationLevelSetImageFilter<::CSIFTN::SeedImageType, ::CSIFTN::ImageType> *>(caller))
+    std::cout << (dynamic_cast<itk::SegmentationLevelSetImageFilter<SeedImageType, ImageType> *>(caller))
                    ->GetSegmentationFunction()
                    ->GetPropagationWeight()
               << std::endl;
   }
   void
-  Execute(const Object *, const EventObject &) override
+  Execute(const itk::Object *, const itk::EventObject &) override
   {
     std::cout << "ack" << std::endl;
   }
@@ -145,32 +140,31 @@ protected:
   ~RMSCommand() override = default;
 };
 
-} // namespace itk
+} // namespace
 
 
-int
-itkCannySegmentationLevelSetImageFilterTest(int, char *[])
+TEST(CannySegmentationLevelSetImageFilter, ConvertedLegacyTest)
 {
   std::cout << "Last modified 11/08/02" << std::endl;
 
-  constexpr CSIFTN::ImageType::RegionType::SizeType sz{ 64, 64, 64 };
-  CSIFTN::ImageType::RegionType                     reg{ sz };
+  constexpr ImageType::RegionType::SizeType sz{ 64, 64, 64 };
+  ImageType::RegionType                     reg{ sz };
 
-  const CSIFTN::ImageType::Pointer     inputImage = CSIFTN::ImageType::New();
-  const CSIFTN::SeedImageType::Pointer seedImage = CSIFTN::SeedImageType::New();
+  const ImageType::Pointer     inputImage = ImageType::New();
+  const SeedImageType::Pointer seedImage = SeedImageType::New();
   inputImage->SetRegions(reg);
   seedImage->SetRegions(reg);
   inputImage->Allocate();
   seedImage->Allocate();
 
   // Starting surface is a sphere in the center of the image.
-  CSIFTN::evaluate_function(seedImage, CSIFTN::sphere);
+  evaluate_function(seedImage, sphere);
 
   // Target surface is a sphere VERY NEAR to the starting surface.
-  CSIFTN::evaluate_float_function(inputImage, CSIFTN::sphere2);
+  evaluate_float_function(inputImage, sphere2);
 
-  const itk::CannySegmentationLevelSetImageFilter<::CSIFTN::SeedImageType, ::CSIFTN::ImageType>::Pointer filter =
-    itk::CannySegmentationLevelSetImageFilter<::CSIFTN::SeedImageType, ::CSIFTN::ImageType>::New();
+  const itk::CannySegmentationLevelSetImageFilter<SeedImageType, ImageType>::Pointer filter =
+    itk::CannySegmentationLevelSetImageFilter<SeedImageType, ImageType>::New();
   filter->SetInput(seedImage);
   filter->SetFeatureImage(inputImage);
 
@@ -180,7 +174,7 @@ itkCannySegmentationLevelSetImageFilterTest(int, char *[])
   // function so that negative values result in
   // surface growth.
 
-  const itk::RMSCommand::Pointer c = itk::RMSCommand::New();
+  const RMSCommand::Pointer c = RMSCommand::New();
   filter->AddObserver(itk::IterationEvent(), c);
   filter->SetIsoSurfaceValue(0.5); //<--- IMPORTANT!  Default is zero.
   filter->SetPropagationScaling(0.5);
@@ -235,16 +229,12 @@ itkCannySegmentationLevelSetImageFilterTest(int, char *[])
   catch (const itk::ExceptionObject & e)
   {
     std::cerr << e << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
   //
   // simple test to see if itkCannySegmentationLevelSetFunction can
   // handle a different FeatureImageType
-  const itk::CannySegmentationLevelSetImageFilter<::CSIFTN::SeedImageType, ::CSIFTN::ImageType, double>::Pointer
-    filter2 = itk::CannySegmentationLevelSetImageFilter<::CSIFTN::SeedImageType, ::CSIFTN::ImageType, double>::New();
-  if (filter2.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  const itk::CannySegmentationLevelSetImageFilter<SeedImageType, ImageType, double>::Pointer filter2 =
+    itk::CannySegmentationLevelSetImageFilter<SeedImageType, ImageType, double>::New();
+  EXPECT_FALSE(filter2.IsNull());
 }
