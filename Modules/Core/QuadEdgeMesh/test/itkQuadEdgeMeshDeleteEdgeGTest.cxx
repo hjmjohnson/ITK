@@ -17,9 +17,9 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshDeleteEdgeTest(int, char *[])
+TEST(QuadEdgeMeshDeleteEdge, ConvertedLegacyTest)
 {
   using PixelType = double;
   using MeshType = itk::QuadEdgeMesh<PixelType, 3>;
@@ -90,14 +90,7 @@ itkQuadEdgeMeshDeleteEdgeTest(int, char *[])
   std::cout << indent << "Trying to remove only two edges...";
   constexpr itk::IdentifierType expectedEdgeCount{ 2 };
   const itk::IdentifierType     obtainedEdgeCount = edgesBefore - mesh->ComputeNumberOfEdges();
-  if (obtainedEdgeCount != expectedEdgeCount)
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Error in itk::QuadEdgeMesh::ComputeNumberOfEdges" << std::endl;
-    std::cerr << "Expected: " << expectedEdgeCount << ", but got: " << obtainedEdgeCount << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(obtainedEdgeCount, expectedEdgeCount) << "Error in itk::QuadEdgeMesh::ComputeNumberOfEdges";
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
