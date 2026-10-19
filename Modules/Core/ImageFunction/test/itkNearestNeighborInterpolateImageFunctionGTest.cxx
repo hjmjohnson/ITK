@@ -18,18 +18,15 @@
 
 #include <iostream>
 
-#include "itkTestingMacros.h"
 #include "itkMath.h"
 #include "itkImage.h"
 #include "itkVectorImage.h"
 #include "itkNearestNeighborInterpolateImageFunction.h"
+#include "itkGTest.h"
 
 
-int
-itkNearestNeighborInterpolateImageFunctionTest(int, char *[])
+TEST(NearestNeighborInterpolateImageFunction, ConvertedLegacyTest)
 {
-  int result = EXIT_SUCCESS;
-
   constexpr unsigned int Dimension{ 2 };
   using PixelType = float;
   constexpr unsigned int VectorDimension{ 4 };
@@ -119,7 +116,8 @@ itkNearestNeighborInterpolateImageFunctionTest(int, char *[])
 
   auto interpolator = InterpolatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(interpolator, NearestNeighborInterpolateImageFunction, InterpolateImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    interpolator, NearestNeighborInterpolateImageFunction, InterpolateImageFunction);
 
 
   interpolator->SetInputImage(image);
@@ -127,7 +125,7 @@ itkNearestNeighborInterpolateImageFunctionTest(int, char *[])
   ImageType::SizeType radius{};
   for (unsigned int d = 0; d < Dimension; ++d)
   {
-    ITK_TEST_SET_GET_VALUE(radius[d], interpolator->GetRadius()[d]);
+    EXPECT_EQ(radius[d], interpolator->GetRadius()[d]);
   }
 
   auto vectorinterpolator = VectorInterpolatorType::New();
@@ -159,28 +157,18 @@ itkNearestNeighborInterpolateImageFunctionTest(int, char *[])
             // test scalar image
             const double computedValue = interpolator->Evaluate(point);
 
-            if (itk::Math::NotAlmostEquals(expectedValue, computedValue))
-            {
-              std::cerr << "Error found while computing interpolation " << std::endl;
-              std::cerr << "Point = " << point << std::endl;
-              std::cerr << "Expected value = " << expectedValue << std::endl;
-              std::cerr << "Computed value = " << computedValue << std::endl;
-              result = EXIT_FAILURE;
-            }
+            EXPECT_DOUBLE_EQ(expectedValue, computedValue) << "Error found while computing interpolation " << std::endl
+                                                           << "Point = " << point;
 
             // test image of vectors
             const InterpolatedVectorType vectorpixel = vectorinterpolator->Evaluate(point);
             const auto                   expectedvector = itk::MakeFilled<InterpolatedVectorType>(expectedValue);
             const double                 errornorm = (expectedvector - vectorpixel).GetNorm();
 
-            if (errornorm > 0)
-            {
-              std::cerr << "Error found while computing vector interpolation " << std::endl;
-              std::cerr << "Point = " << point << std::endl;
-              std::cerr << "Expected vector = " << expectedvector << std::endl;
-              std::cerr << "Computed vector = " << vectorpixel << std::endl;
-              result = EXIT_FAILURE;
-            }
+            EXPECT_LE(errornorm, 0) << "Error found while computing vector interpolation " << std::endl
+                                    << "Point = " << point << std::endl
+                                    << "Expected vector = " << expectedvector << std::endl
+                                    << "Computed vector = " << vectorpixel;
 
             // test variable-length-vector image
             const InterpolatedVariableVectorType variablevectorpixel = variablevectorinterpolator->Evaluate(point);
@@ -191,19 +179,13 @@ itkNearestNeighborInterpolateImageFunctionTest(int, char *[])
 
             const double varerrornorm = (expectedvariablevector - variablevectorpixel).GetNorm();
 
-            if (varerrornorm > 0)
-            {
-              std::cerr << "Error found while computing variable vector interpolation " << std::endl;
-              std::cerr << "Point = " << point << std::endl;
-              std::cerr << "Expected variablevector = " << expectedvariablevector << std::endl;
-              std::cerr << "Computed variablevector = " << variablevectorpixel << std::endl;
-              result = EXIT_FAILURE;
-            }
+            EXPECT_LE(varerrornorm, 0) << "Error found while computing variable vector interpolation " << std::endl
+                                       << "Point = " << point << std::endl
+                                       << "Expected variablevector = " << expectedvariablevector << std::endl
+                                       << "Computed variablevector = " << variablevectorpixel;
           }
         }
       }
     }
   }
-
-  return result;
 }
