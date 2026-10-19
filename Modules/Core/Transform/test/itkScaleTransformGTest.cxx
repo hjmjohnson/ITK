@@ -19,11 +19,10 @@
 #include <iostream>
 
 #include "itkScaleTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkScaleTransformTest(int, char *[])
+TEST(ScaleTransform, ConvertedLegacyTest)
 {
 
 
@@ -59,18 +58,14 @@ itkScaleTransformTest(int, char *[])
     // Set a non-identity value to the transform and then set it to the identity
     scale = 2.0;
     identityTransform->SetScale(scale);
-    ITK_TEST_SET_GET_VALUE(scale, identityTransform->GetScale());
+    EXPECT_EQ(scale, identityTransform->GetScale());
 
     identityTransform->SetIdentity();
 
     TransformType::ScaleType identityScale{ 1.0 };
-    ITK_TEST_SET_GET_VALUE(identityScale, identityTransform->GetScale());
+    EXPECT_EQ(identityScale, identityTransform->GetScale());
 
-    if (!Ok)
-    {
-      std::cerr << "Identity doesn't have a unit scale " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Identity doesn't have a unit scale ";
   }
 
   /* Create a Scale transform */
@@ -81,12 +76,9 @@ itkScaleTransformTest(int, char *[])
     TransformType::ScaleType            iscale = iscaleInit;
 
     scaleTransform->SetScale(iscale);
-    if (scaleTransform->GetFixedParameters().Size() != 3)
-    {
-      std::cout << "ScaleTransform has 3 fixed parameters, yet GetFixedParameters.Size() reports: "
-                << scaleTransform->GetFixedParameters().Size() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(scaleTransform->GetFixedParameters().Size(), 3u)
+      << "ScaleTransform has 3 fixed parameters, yet GetFixedParameters.Size() reports: "
+      << scaleTransform->GetFixedParameters().Size();
     TransformType::ScaleType scale = scaleTransform->GetScale();
     std::cout << "scale initialization  test:  ";
     for (unsigned int j = 0; j < N; ++j)
@@ -103,11 +95,7 @@ itkScaleTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "GetScale  differs from SetScale value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "GetScale  differs from SetScale value ";
 
     {
       // scale an itk::Point
@@ -127,13 +115,9 @@ itkScaleTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error scaling point : " << p << std::endl;
-        std::cerr << "Result should be    : " << q << std::endl;
-        std::cerr << "Reported Result is  : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error scaling point : " << p << std::endl
+                      << "Result should be    : " << q << std::endl
+                      << "Reported Result is  : " << r;
 
       std::cout << "Ok scaling an itk::Point " << std::endl;
     }
@@ -156,12 +140,7 @@ itkScaleTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error scaling vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error scaling vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok scaling an itk::Vector " << std::endl;
     }
@@ -184,12 +163,7 @@ itkScaleTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error scaling covariant vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error scaling covariant vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok scaling an itk::CovariantVector " << std::endl;
     }
@@ -214,12 +188,7 @@ itkScaleTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error scaling vnl_vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error scaling vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok scaling an vnl_Vector " << std::endl;
     }
@@ -236,17 +205,11 @@ itkScaleTransformTest(int, char *[])
       scaleTransform->SetCenter(center);
 
       const CenterType c2 = scaleTransform->GetCenter();
-      if (c2.EuclideanDistanceTo(center) > 1e-5)
-      {
-        std::cerr << "Error in Set/Get center." << std::endl;
-        std::cerr << "It was SetCenter() to    : " << center << std::endl;
-        std::cerr << "but GetCenter() returned : " << c2 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(c2.EuclideanDistanceTo(center), 1e-5) << "Error in Set/Get center." << std::endl
+                                                      << "It was SetCenter() to    : " << center << std::endl
+                                                      << "but GetCenter() returned : " << c2;
 
       std::cout << "Ok SetCenter() / GetCenter() " << std::endl;
     }
   }
-
-  return EXIT_SUCCESS;
 }
