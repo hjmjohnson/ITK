@@ -18,7 +18,7 @@
 
 #include "itkEuclideanDistancePointSetToPointSetMetricv4.h"
 #include "itkTranslationTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <fstream>
 #include "itkMath.h"
@@ -27,8 +27,10 @@
  * Test with a translation transform
  */
 
+namespace
+{
 template <unsigned int Dimension>
-[[nodiscard]] int
+void
 itkEuclideanDistancePointSetMetricTest3Run(double distanceThreshold)
 {
   using PointSetType = itk::PointSet<float, Dimension>;
@@ -117,7 +119,7 @@ itkEuclideanDistancePointSetMetricTest3Run(double distanceThreshold)
   metric->SetMovingTransform(translationTransform);
   metric->SetDistanceThreshold(distanceThreshold);
 
-  ITK_TEST_SET_GET_VALUE(distanceThreshold, metric->GetDistanceThreshold());
+  EXPECT_EQ(distanceThreshold, metric->GetDistanceThreshold());
 
   metric->Initialize();
 
@@ -155,12 +157,7 @@ itkEuclideanDistancePointSetMetricTest3Run(double distanceThreshold)
   }
 
   const double valueTest = distanceSum / numberOfPoints;
-  if (itk::Math::NotExactlyEquals(valueTest, value2))
-  {
-    std::cerr << "Value calculation is wrong when used threshold : " << distanceThreshold << "valueTest: " << valueTest
-              << " value2: " << value2 << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(valueTest, value2) << "Value calculation is wrong when used threshold : " << distanceThreshold;
 
 
   // Check if the point outside threshold is skipped in derivative calculation
@@ -189,22 +186,14 @@ itkEuclideanDistancePointSetMetricTest3Run(double distanceThreshold)
 
   for (unsigned int i = 0; i << Dimension; ++i)
   {
-    if (itk::Math::NotExactlyEquals(derivativeTestMean[i], derivative2[i]))
-    {
-      std::cerr << "Derivative calculation is wrong when used threshold : " << distanceThreshold
-                << "derivativeTestMean: " << derivativeTestMean << " derivative2: " << derivative2 << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(derivativeTestMean[i], derivative2[i])
+      << "Derivative calculation is wrong when used threshold : " << distanceThreshold;
   }
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkEuclideanDistancePointSetMetricTest3(int, char *[])
+TEST(EuclideanDistancePointSetMetric, ConvertedLegacyTest3)
 {
-  int result = EXIT_SUCCESS;
-
   constexpr double distanceThresholdPositive{ 0.5 };
   constexpr double distanceThresholdZero{ 0.0 };
   constexpr double distanceThresholdNegative{ -8.0 };
@@ -213,52 +202,20 @@ itkEuclideanDistancePointSetMetricTest3(int, char *[])
   constexpr unsigned int dimension3D{ 3 };
 
   // Test for positive distance threshold
-  if (itkEuclideanDistancePointSetMetricTest3Run<dimension2D>(distanceThresholdPositive) == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension " << dimension2D << " for distanceThrehold = " << distanceThresholdPositive
-              << std::endl;
-    result = EXIT_FAILURE;
-  }
+  itkEuclideanDistancePointSetMetricTest3Run<dimension2D>(distanceThresholdPositive);
 
   // Test for zero distance threshold
-  if (itkEuclideanDistancePointSetMetricTest3Run<dimension2D>(distanceThresholdZero) == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension " << dimension2D << " for distanceThrehold = " << distanceThresholdZero
-              << std::endl;
-    result = EXIT_FAILURE;
-  }
+  itkEuclideanDistancePointSetMetricTest3Run<dimension2D>(distanceThresholdZero);
 
   // Test for negative distance threshold
-  if (itkEuclideanDistancePointSetMetricTest3Run<dimension2D>(distanceThresholdNegative) == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension " << dimension2D << " for distanceThrehold = " << distanceThresholdNegative
-              << std::endl;
-    result = EXIT_FAILURE;
-  }
+  itkEuclideanDistancePointSetMetricTest3Run<dimension2D>(distanceThresholdNegative);
 
   // Test for positive distance threshold
-  if (itkEuclideanDistancePointSetMetricTest3Run<dimension3D>(distanceThresholdPositive) == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension " << dimension3D << " for distanceThrehold = " << distanceThresholdPositive
-              << std::endl;
-    result = EXIT_FAILURE;
-  }
+  itkEuclideanDistancePointSetMetricTest3Run<dimension3D>(distanceThresholdPositive);
 
   // Test for zero distance threshold
-  if (itkEuclideanDistancePointSetMetricTest3Run<dimension3D>(distanceThresholdZero) == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension " << dimension3D << " for distanceThrehold = " << distanceThresholdZero
-              << std::endl;
-    result = EXIT_FAILURE;
-  }
+  itkEuclideanDistancePointSetMetricTest3Run<dimension3D>(distanceThresholdZero);
 
   // Test for negative distance threshold
-  if (itkEuclideanDistancePointSetMetricTest3Run<dimension3D>(distanceThresholdNegative) == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension " << dimension3D << " for distanceThrehold = " << distanceThresholdNegative
-              << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  return result;
+  itkEuclideanDistancePointSetMetricTest3Run<dimension3D>(distanceThresholdNegative);
 }
