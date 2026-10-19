@@ -25,14 +25,14 @@
 #include "itkPoint.h"
 #include "itkVectorContainer.h"
 #include <iostream>
+#include "itkGTest.h"
 
 //-------------------------
 //
 //   Main code
 //
 //-------------------------
-int
-itkPointGeometryTest(int, char *[])
+TEST(PointGeometry, ConvertedLegacyTest)
 {
 
   // Dimension & Type
@@ -136,15 +136,8 @@ itkPointGeometryTest(int, char *[])
     for (unsigned int i = 0; i < N; ++i)
     {
       auto val = static_cast<FloatPointType::ValueType>(dp[i]);
-      if (itk::Math::Absolute(val - fp[i]) > tolerance)
-      {
-        std::cout << "Failed at component " << i << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(val, fp[i], tolerance) << "Failed at component " << i;
     }
-
-
-    std::cout << " PASSED ! " << std::endl;
   }
 
   // Test the MeanPoint
@@ -161,13 +154,8 @@ itkPointGeometryTest(int, char *[])
     std::cout << "MidPoint = " << midpoint << std::endl;
     for (unsigned int i = 0; i < N; ++i)
     {
-      if (itk::Math::NotAlmostEquals(midpoint[i], (A[i] + B[i]) / 2.0))
-      {
-        std::cerr << "Failure to compute MidPoint " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_DOUBLE_EQ(midpoint[i], (A[i] + B[i]) / 2.0) << "Failure to compute MidPoint ";
     }
-    std::cout << "Test for MidPoint point PASSED" << std::endl;
   }
 
 
@@ -189,13 +177,8 @@ itkPointGeometryTest(int, char *[])
     for (unsigned int i = 0; i < N; ++i)
     {
       const double value = (alpha * A[i] + (1.0 - alpha) * B[i]);
-      if (itk::Math::Absolute(combination[i] - value) > tolerance)
-      {
-        std::cerr << "Failure to compute Barycentric combination" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(combination[i], value, tolerance) << "Failure to compute Barycentric combination";
     }
-    std::cout << "Test for Barycentric combination PASSED" << std::endl;
   }
 
   // Test the Barycentric combination
@@ -221,13 +204,8 @@ itkPointGeometryTest(int, char *[])
     for (unsigned int i = 0; i < N; ++i)
     {
       const double value = alpha * A[i] + beta * B[i] + (1.0 - alpha - beta) * C[i];
-      if (itk::Math::Absolute(combination[i] - value) > tolerance)
-      {
-        std::cerr << "Failure to compute Barycentric combination" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(combination[i], value, tolerance) << "Failure to compute Barycentric combination";
     }
-    std::cout << "Test for Barycentric combination PASSED" << std::endl;
   }
 
   // Test the Barycentric combination for an array
@@ -250,13 +228,8 @@ itkPointGeometryTest(int, char *[])
     std::cout << "Test for Barycentric combination of an array of Points" << std::endl;
     for (unsigned int i = 0; i < N; ++i)
     {
-      if (itk::Math::Absolute(combination[i] - (K / 3.0)) > tolerance)
-      {
-        std::cerr << "Failure to compute Barycentric combination" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(combination[i], K / 3.0, tolerance) << "Failure to compute Barycentric combination";
     }
-    std::cout << "Test for Barycentric combination of an array of Points PASSED" << std::endl;
   }
 
 
@@ -288,14 +261,7 @@ itkPointGeometryTest(int, char *[])
     std::cout << "Test for Barycentric combination of a VectorContainer of Points" << std::endl;
     for (unsigned int i = 0; i < N; ++i)
     {
-      if (itk::Math::Absolute(combination[i] - (K / 3.0)) > tolerance)
-      {
-        std::cerr << "Failure to compute Barycentric combination" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(combination[i], K / 3.0, tolerance) << "Failure to compute Barycentric combination";
     }
-    std::cout << "Test for Barycentric combination of a VectorContainer of Points PASSED" << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
