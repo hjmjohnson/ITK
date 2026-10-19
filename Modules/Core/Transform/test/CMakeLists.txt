@@ -12,7 +12,6 @@ set(
   itkEuler3DTransformTest.cxx
   itkTestTransformGetInverse.cxx
   itkTransformGeometryImageFilterTest.cxx
-  itkTransformsSetParametersTest.cxx
   itkTransformTest.cxx
   itkTranslationTransformTest.cxx
   itkVersorRigid3DTransformTest.cxx
@@ -49,12 +48,6 @@ itk_add_test(
     1.0
     1.0
     0.0
-)
-itk_add_test(
-  NAME itkTransformsSetParametersTest
-  COMMAND
-    ITKTransformTestDriver
-    itkTransformsSetParametersTest
 )
 
 ## Tests for ITKv3 version of BSplineDeformableTransforms
@@ -380,6 +373,7 @@ set(
   itkThinPlateSplineKernelTransformGTest.cxx
   itkTransformCloneGTest.cxx
   itkTransformGTest.cxx
+  itkTransformsSetParametersGTest.cxx
   itkTranslationTransformGTest.cxx
 )
 creategoogletestdriver(ITKTransform "${ITKTransform-Test_LIBRARIES}" "${ITKTransformGTests}")
