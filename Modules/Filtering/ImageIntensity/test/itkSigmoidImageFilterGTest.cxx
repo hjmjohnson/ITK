@@ -19,11 +19,10 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
 #include "itkSigmoidImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkSigmoidImageFilterTest(int, char *[])
+TEST(SigmoidImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -70,7 +69,7 @@ itkSigmoidImageFilterTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, SigmoidImageFilter, UnaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, SigmoidImageFilter, UnaryFunctorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -80,19 +79,19 @@ itkSigmoidImageFilterTest(int, char *[])
   constexpr double beta{ 3.0 };
 
   filter->SetAlpha(alpha);
-  ITK_TEST_SET_GET_VALUE(alpha, filter->GetAlpha());
+  EXPECT_EQ(alpha, filter->GetAlpha());
 
   filter->SetBeta(beta);
-  ITK_TEST_SET_GET_VALUE(beta, filter->GetBeta());
+  EXPECT_EQ(beta, filter->GetBeta());
 
   constexpr OutputPixelType maximum{ 1.0 };
   constexpr OutputPixelType minimum{ -1.0 };
 
   filter->SetOutputMinimum(minimum);
-  ITK_TEST_SET_GET_VALUE(minimum, filter->GetOutputMinimum());
+  EXPECT_EQ(minimum, filter->GetOutputMinimum());
 
   filter->SetOutputMaximum(maximum);
-  ITK_TEST_SET_GET_VALUE(maximum, filter->GetOutputMaximum());
+  EXPECT_EQ(maximum, filter->GetOutputMaximum());
 
   filter->SetFunctor(filter->GetFunctor());
 
@@ -116,18 +115,8 @@ itkSigmoidImageFilterTest(int, char *[])
     const double                     x1 = (input - beta) / alpha;
     const double                     x2 = (maximum - minimum) * (1.0 / (1.0 + std::exp(-x1))) + minimum;
     const auto                       sigmoid = static_cast<OutputImageType::PixelType>(x2);
-    if (!itk::Math::FloatAlmostEqual(sigmoid, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " simoid( " << input << ") = " << sigmoid << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(sigmoid, output, epsilon) << " sigmoid( " << input << ")";
     ++ot;
     ++it;
   }
-
-  return EXIT_SUCCESS;
 }
