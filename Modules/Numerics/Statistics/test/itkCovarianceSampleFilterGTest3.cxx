@@ -19,17 +19,18 @@
 #include "itkCovarianceSampleFilter.h"
 #include "itkHistogram.h"
 #include "itkMahalanobisDistanceMetric.h"
+#include "itkGTest.h"
 
-namespace itk::Statistics
+namespace
 {
 template <typename TSample>
-class MyCovarianceSampleFilter : public CovarianceSampleFilter<TSample>
+class MyCovarianceSampleFilter : public itk::Statistics::CovarianceSampleFilter<TSample>
 {
 public:
   using Self = MyCovarianceSampleFilter;
-  using Superclass = CovarianceSampleFilter<TSample>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::Statistics::CovarianceSampleFilter<TSample>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
   using SampleType = TSample;
 
   itkNewMacro(Self);
@@ -54,11 +55,10 @@ private:
   MyCovarianceSampleFilter() = default;
   ~MyCovarianceSampleFilter() override = default;
 };
-} // namespace itk::Statistics
+} // namespace
 
 
-int
-itkCovarianceSampleFilterTest3(int, char *[])
+TEST(CovarianceSampleFilter, ConvertedLegacyTest3)
 {
   std::cout << "CovarianceSampleFilter test \n \n";
 
@@ -136,7 +136,7 @@ itkCovarianceSampleFilterTest3(int, char *[])
   }
 
 
-  using FilterType = itk::Statistics::MyCovarianceSampleFilter<SampleType>;
+  using FilterType = MyCovarianceSampleFilter<SampleType>;
 
   auto filter = FilterType::New();
 
@@ -156,15 +156,7 @@ itkCovarianceSampleFilterTest3(int, char *[])
   filter->ResetPipeline();
   filter->SetInput(histogram);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Exception caught: " << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   const FilterType::MatrixDecoratedType * decorator = filter->GetCovarianceMatrixOutput();
   FilterType::MatrixType                  covarianceOutput = decorator->Get();
@@ -180,13 +172,7 @@ itkCovarianceSampleFilterTest3(int, char *[])
 
   for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
   {
-    if (itk::Math::Absolute(meanOutput[i] - mean[i]) > epsilon)
-    {
-      std::cerr << "The computed mean value is incorrect" << std::endl;
-      std::cerr << "computed mean = " << meanOutput << std::endl;
-      std::cerr << "expected mean = " << mean << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(meanOutput[i], mean[i], epsilon);
   }
 
   epsilon = 35;
@@ -195,15 +181,7 @@ itkCovarianceSampleFilterTest3(int, char *[])
   {
     for (unsigned int j = 0; j < MeasurementVectorSize; ++j)
     {
-      if (itk::Math::Absolute(covariance[i][j] - covarianceOutput[i][j]) > epsilon)
-      {
-        std::cerr << "Computed covariance matrix value is incorrect:" << i << ',' << j << '=' << covariance[i][j] << ','
-                  << covarianceOutput[i][j] << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(covariance[i][j], covarianceOutput[i][j], epsilon);
     }
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
