@@ -9,7 +9,6 @@ set(
   itkFastMarchingBaseTest.cxx
   itkFastMarchingImageFilterBaseTest.cxx
   itkFastMarchingImageTopologicalTest.cxx
-  itkFastMarchingQuadEdgeMeshFilterBaseTest2.cxx
   itkFastMarchingQuadEdgeMeshFilterBaseTest3.cxx
   itkFastMarchingQuadEdgeMeshFilterBaseTest4.cxx
   itkFastMarchingQuadEdgeMeshFilterWithNumberOfElementsTest.cxx
@@ -74,13 +73,6 @@ itk_add_test(
   COMMAND
     ITKFastMarchingTestDriver
     itkFastMarchingUpwindGradientBaseTest
-)
-
-itk_add_test(
-  NAME itkFastMarchingQuadEdgeMeshFilterBaseTest2
-  COMMAND
-    ITKFastMarchingTestDriver
-    itkFastMarchingQuadEdgeMeshFilterBaseTest2
 )
 
 itk_add_test(
@@ -376,6 +368,7 @@ set(
   itkFastMarchingImageFilterRealWithNumberOfElementsGTest.cxx
   itkFastMarchingNumberOfElementsStoppingCriterionGTest.cxx
   itkFastMarchingQuadEdgeMeshFilterBaseGTest.cxx
+  itkFastMarchingQuadEdgeMeshFilterBaseGTest2.cxx
   itkFastMarchingUpwindGradientImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKFastMarching "${ITKFastMarching-Test_LIBRARIES}" "${ITKFastMarchingGTests}")
