@@ -18,16 +18,15 @@
 
 #include "itkArrowSpatialObject.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkArrowSpatialObjectTest(int, char *[])
+TEST(ArrowSpatialObject, ConvertedLegacyTest)
 {
   using ArrowType = itk::ArrowSpatialObject<3>;
 
   auto myArrow = ArrowType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(myArrow, ArrowSpatialObject, SpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(myArrow, ArrowSpatialObject, SpatialObject);
 
 
   // Testing the position
@@ -39,13 +38,13 @@ itkArrowSpatialObjectTest(int, char *[])
   myArrow->SetPositionInObjectSpace(pnt);
   myArrow->Update();
 
-  ITK_TEST_SET_GET_VALUE(pnt, myArrow->GetPositionInObjectSpace());
+  EXPECT_EQ(pnt, myArrow->GetPositionInObjectSpace());
 
   // Testing the length
   std::cout << "Testing length : ";
   constexpr double length{ 2 };
   myArrow->SetLengthInObjectSpace(length);
-  ITK_TEST_SET_GET_VALUE(length, myArrow->GetLengthInObjectSpace());
+  EXPECT_EQ(length, myArrow->GetLengthInObjectSpace());
 
   // Testing the direction of the arrow
   std::cout << "Testing direction : ";
@@ -56,7 +55,7 @@ itkArrowSpatialObjectTest(int, char *[])
   myArrow->SetDirectionInObjectSpace(direction);
   myArrow->Update();
 
-  ITK_TEST_SET_GET_VALUE(direction, myArrow->GetDirectionInObjectSpace());
+  EXPECT_EQ(direction, myArrow->GetDirectionInObjectSpace());
 
   // Point consistency
   std::cout << "Is Inside (Inside): ";
@@ -64,11 +63,7 @@ itkArrowSpatialObjectTest(int, char *[])
   in[0] = 0;
   in[1] = 1;
   in[2] = 0;
-  if (!myArrow->IsInsideInWorldSpace(in))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(myArrow->IsInsideInWorldSpace(in)) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   std::cout << "Is Inside (Outside): ";
@@ -76,11 +71,7 @@ itkArrowSpatialObjectTest(int, char *[])
   out[0] = 0;
   out[1] = 2.1;
   out[2] = 0;
-  if (myArrow->IsInsideInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(myArrow->IsInsideInWorldSpace(out)) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
 
@@ -88,12 +79,8 @@ itkArrowSpatialObjectTest(int, char *[])
   const ArrowType::BoundingBoxType * boundingBox = myArrow->GetMyBoundingBoxInWorldSpace();
 
   std::cout << boundingBox->GetBounds() << std::endl;
-  if ((itk::Math::NotExactlyEquals(boundingBox->GetBounds()[2], 1)) ||
-      (itk::Math::NotExactlyEquals(boundingBox->GetBounds()[3], 1)))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(boundingBox->GetBounds()[2], 1.0) << "[FAILED]";
+  EXPECT_EQ(boundingBox->GetBounds()[3], 1.0) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -101,9 +88,8 @@ itkArrowSpatialObjectTest(int, char *[])
   using Arrow2DType = itk::ArrowSpatialObject<2>;
   auto myArrow2D = Arrow2DType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(myArrow2D, ArrowSpatialObject, SpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(myArrow2D, ArrowSpatialObject, SpatialObject);
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
