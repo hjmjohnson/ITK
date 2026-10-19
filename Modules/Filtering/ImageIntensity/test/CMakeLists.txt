@@ -3,7 +3,6 @@ set(
   ITKImageIntensityTests
   itkAddImageFilterTest2.cxx
   itkAndImageFilterTest.cxx
-  itkAsinImageFilterAndAdaptorTest.cxx
   itkAtan2ImageFilterTest.cxx
   itkAtanImageFilterAndAdaptorTest.cxx
   itkBinaryMagnitudeImageFilterTest.cxx
@@ -454,12 +453,6 @@ itk_add_test(
     itkSqrtImageFilterAndAdaptorTest
 )
 itk_add_test(
-  NAME itkAsinImageFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkAsinImageFilterAndAdaptorTest
-)
-itk_add_test(
   NAME itkHistogramMatchingImageFilterTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -772,6 +765,7 @@ set(
   itkAddImageFilterFrameGTest.cxx
   itkAddImageFilterGTest.cxx
   itkArithmeticOpsFunctorsTest.cxx
+  itkAsinImageFilterAndAdaptorGTest.cxx
   itkBitwiseOpsFunctorsTest.cxx
   itkEqualGTest.cxx
   itkGreaterEqualGTest.cxx
