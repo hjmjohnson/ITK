@@ -36,7 +36,6 @@ set(
 )
 set(
   ITKCommon2Tests
-  itkSTLThreadTest.cxx
   itkThreadLoggerTest.cxx
   itkLoggerThreadWrapperTest.cxx
   itkThreadDefsTest.cxx
@@ -881,12 +880,6 @@ itk_add_test(
     itkSymmetricEigenAnalysisTest
 )
 itk_add_test(
-  NAME itkSTLThreadTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkSTLThreadTest
-)
-itk_add_test(
   NAME itkStreamingImageFilterTest
   COMMAND
     ITKCommon1TestDriver
@@ -1301,6 +1294,7 @@ set(
   itkSpecialFunctionsGTest.cxx
   itkStdStreamStateSaveGTest.cxx
   itkSTLContainerAdaptorGTest.cxx
+  itkSTLThreadGTest.cxx
   itkStringConvertGTest.cxx
   itkSymmetricEllipsoidInteriorExteriorSpatialFunctionGTest.cxx
   itkSymmetricSecondRankTensorGTest.cxx
