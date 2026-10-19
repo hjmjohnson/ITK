@@ -19,10 +19,9 @@
 
 #include "itkCovarianceImageFunction.h"
 #include "itkImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkCovarianceImageFunctionTest(int, char *[])
+TEST(CovarianceImageFunction, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using PixelComponentType = unsigned char;
@@ -44,13 +43,13 @@ itkCovarianceImageFunctionTest(int, char *[])
   image->FillBuffer(initialValue);
 
   auto function = FunctionType::New();
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, CovarianceImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, CovarianceImageFunction, ImageFunction);
 
   function->SetInputImage(image);
 
   constexpr unsigned int neighborhoodRadius{ 5 };
   function->SetNeighborhoodRadius(neighborhoodRadius);
-  ITK_TEST_SET_GET_VALUE(neighborhoodRadius, function->GetNeighborhoodRadius());
+  EXPECT_EQ(neighborhoodRadius, function->GetNeighborhoodRadius());
 
   constexpr ImageType::IndexType index{ 10, 10, 10 };
 
@@ -75,17 +74,11 @@ itkCovarianceImageFunctionTest(int, char *[])
     for (unsigned int iy = 0; iy < VectorDimension; ++iy)
     {
       // Covariance must be zero in this image with constant values
-      if (!itk::Math::FloatAlmostEqual(itk::Math::Absolute(covariance[ix][iy]),
-                                       static_cast<FunctionType::OutputType::element_type>(imageValue),
-                                       10,
-                                       10e-7))
-      {
-        std::cerr << "Error in covariance computation" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(itk::Math::FloatAlmostEqual(itk::Math::Absolute(covariance[ix][iy]),
+                                              static_cast<FunctionType::OutputType::element_type>(imageValue),
+                                              10,
+                                              10e-7))
+        << "Error in covariance computation";
     }
   }
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
 }
