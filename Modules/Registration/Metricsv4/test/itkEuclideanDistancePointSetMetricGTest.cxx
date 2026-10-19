@@ -21,9 +21,12 @@
 
 #include <fstream>
 #include "itkMath.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <unsigned int Dimension>
-[[nodiscard]] int
+void
 itkEuclideanDistancePointSetMetricTestRun()
 {
   using PointSetType = itk::PointSet<unsigned char, Dimension>;
@@ -91,11 +94,8 @@ itkEuclideanDistancePointSetMetricTestRun()
   std::cout << "derivative: " << derivative << std::endl;
   for (unsigned int d = 0; d < metric->GetNumberOfParameters(); ++d)
   {
-    if (itk::Math::Absolute(derivative[d] - offset[d]) / offset[d] > 0.01)
-    {
-      std::cerr << "derivative does not match expected offset of " << offset << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(derivative[d] - offset[d]) / offset[d], 0.01)
+      << "derivative does not match expected offset of " << offset;
   }
 
   // Check for the same results from different methods
@@ -149,26 +149,12 @@ itkEuclideanDistancePointSetMetricTestRun()
 
   moving_str1 << "0 0 0 0" << std::endl;
   moving_str2 << "0 0 0 0" << std::endl;
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkEuclideanDistancePointSetMetricTest(int, char *[])
+TEST(EuclideanDistancePointSetMetric, ConvertedLegacyTest)
 {
-  int result = EXIT_SUCCESS;
+  itkEuclideanDistancePointSetMetricTestRun<2>();
 
-  if (itkEuclideanDistancePointSetMetricTestRun<2>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 2." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  if (itkEuclideanDistancePointSetMetricTestRun<3>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 3." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  return result;
+  itkEuclideanDistancePointSetMetricTestRun<3>();
 }
