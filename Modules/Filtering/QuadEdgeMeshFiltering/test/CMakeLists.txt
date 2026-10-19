@@ -4,7 +4,6 @@ set(
   itkBorderQuadEdgeMeshFilterTest.cxx
   itkBorderQuadEdgeMeshFilterTest2.cxx
   itkCleanQuadEdgeMeshFilterTest.cxx
-  itkCleanQuadEdgeMeshFilterDataPreservationTest.cxx
   itkDelaunayConformingQuadEdgeMeshFilterTest.cxx
   itkDiscreteGaussianCurvatureQuadEdgeMeshFilterTest.cxx
   itkDiscreteMaximumCurvatureQuadEdgeMeshFilterTest.cxx
@@ -173,12 +172,6 @@ itk_add_test(
     ${TEMP}/temp_CleanResult1.vtk
 )
 itk_add_test(
-  NAME itkCleanQuadEdgeMeshFilterDataPreservationTest
-  COMMAND
-    ITKQuadEdgeMeshFilteringTestDriver
-    itkCleanQuadEdgeMeshFilterDataPreservationTest
-)
-itk_add_test(
   NAME itkQuadricDecimationQuadEdgeMeshFilterTest
   COMMAND
     ITKQuadEdgeMeshFilteringTestDriver
@@ -287,6 +280,7 @@ set(
   ITKQuadEdgeMeshFilteringGTests
   itkAutomaticTopologyQuadEdgeMeshSourceGTest.cxx
   itkBinaryMask3DQuadEdgeMeshSourceGTest.cxx
+  itkCleanQuadEdgeMeshFilterDataPreservationGTest.cxx
 )
 creategoogletestdriver(
   ITKQuadEdgeMeshFiltering
