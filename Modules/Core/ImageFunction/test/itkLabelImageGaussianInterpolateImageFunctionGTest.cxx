@@ -20,12 +20,11 @@
 
 #include "itkImage.h"
 #include "itkLabelImageGaussianInterpolateImageFunction.h"
+#include "itkGTest.h"
 
 
-int
-itkLabelImageGaussianInterpolateImageFunctionTest(int, char *[])
+TEST(LabelImageGaussianInterpolateImageFunction, ConvertedLegacyTest)
 {
-  int                    test_status = EXIT_SUCCESS;
   constexpr unsigned int Dimension{ 2 };
   using PixelType = unsigned short; // Label images should be integer value types
   using ImageType = itk::Image<PixelType, Dimension>;
@@ -193,10 +192,7 @@ itkLabelImageGaussianInterpolateImageFunctionTest(int, char *[])
         {
           large_image->SetPixel(index, default_background_value);
         }
-        if (large_image->GetPixel(index) != known_value)
-        {
-          test_status = EXIT_FAILURE;
-        }
+        EXPECT_EQ(large_image->GetPixel(index), known_value) << "At: " << index;
         std::cout << "At: " << index << " computed value =  " << large_image->GetPixel(index)
                   << " known_value = " << known_value << std::endl;
       }
@@ -227,6 +223,4 @@ itkLabelImageGaussianInterpolateImageFunctionTest(int, char *[])
      }
    }
 #endif
-
-  return test_status;
 }
