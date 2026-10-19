@@ -21,10 +21,10 @@
 #include "itkQuadEdgeMesh.h"
 #include "itkBinaryMask3DMeshSource.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
 
-int
-itkBinaryMask3DQuadEdgeMeshSourceTest(int, char *[])
+TEST(BinaryMask3DQuadEdgeMeshSource, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -92,19 +92,8 @@ itkBinaryMask3DQuadEdgeMeshSourceTest(int, char *[])
   meshSource->SetInput(image);
   meshSource->SetObjectValue(internalValue);
 
-  try
-  {
-    meshSource->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Exception thrown during Update() " << std::endl;
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NO_THROW(meshSource->Update()) << "Exception thrown during Update() ";
 
   std::cout << meshSource->GetNumberOfNodes() << std::endl;
   std::cout << meshSource->GetNumberOfCells() << std::endl;
-
-  return EXIT_SUCCESS;
 }
