@@ -3,7 +3,6 @@ set(
   ITKIOJPEG2000Tests
   itkJPEG2000ImageIOFactoryTest01.cxx
   itkJPEG2000ImageIORegionOfInterest.cxx
-  itkJPEG2000ImageIOTest00.cxx
   itkJPEG2000ImageIOTest01.cxx
   itkJPEG2000ImageIOTest02.cxx
   itkJPEG2000ImageIOTest03.cxx
@@ -30,12 +29,6 @@ itk_add_test(
   COMMAND
     ITKIOJPEG2000TestDriver
     itkJPEG2000ImageIOFactoryTest01
-)
-itk_add_test(
-  NAME itkJPEG2000ImageIOTest00
-  COMMAND
-    ITKIOJPEG2000TestDriver
-    itkJPEG2000ImageIOTest00
 )
 itk_add_test(
   NAME itkJPEG2000Test01
@@ -98,3 +91,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkJPEG2000Test06_cthead1.tif
 )
+
+set(ITKIOJPEG2000GTests itkJPEG2000ImageIOGTest00.cxx)
+creategoogletestdriver(ITKIOJPEG2000 "${ITKIOJPEG2000-Test_LIBRARIES}" "${ITKIOJPEG2000GTests}")
