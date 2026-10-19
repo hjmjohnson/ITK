@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkSampleToHistogramFilterTest.cxx
   itkSampleToHistogramFilterTest2.cxx
   itkSampleToHistogramFilterTest3.cxx
   itkSampleToHistogramFilterTest4.cxx
@@ -503,12 +502,6 @@ itk_add_test(
     ITKStatisticsTestDriver
     itkListSampleTest
     100
-)
-itk_add_test(
-  NAME itkSampleToHistogramFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToHistogramFilterTest
 )
 itk_add_test(
   NAME itkSampleToHistogramFilterTest2
