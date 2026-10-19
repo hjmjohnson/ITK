@@ -4,12 +4,15 @@ set(
   itkVoronoiDiagram2DTest.cxx
   itkVoronoiPartitioningImageFilterTest.cxx
   itkVoronoiSegmentationImageFilterTest.cxx
-  itkVoronoiSegmentationRGBImageFilterTest.cxx
 )
 
 createtestdriver(ITKVoronoi "${ITKVoronoi-Test_LIBRARIES}" "${ITKVoronoiTests}")
 
-set(ITKVoronoiGTests itkVoronoiDiagram2DInfiniteLoopGTest.cxx)
+set(
+  ITKVoronoiGTests
+  itkVoronoiDiagram2DInfiniteLoopGTest.cxx
+  itkVoronoiSegmentationRGBImageFilterGTest.cxx
+)
 creategoogletestdriver(ITKVoronoi "${ITKVoronoi-Test_LIBRARIES}" "${ITKVoronoiGTests}")
 
 itk_add_test(
@@ -25,12 +28,6 @@ itk_add_test(
     5
     0.1
     1.5
-)
-itk_add_test(
-  NAME itkVoronoiSegmentationRGBImageFilterTest
-  COMMAND
-    ITKVoronoiTestDriver
-    itkVoronoiSegmentationRGBImageFilterTest
 )
 itk_add_test(
   NAME itkVoronoiDiagram2DTest
