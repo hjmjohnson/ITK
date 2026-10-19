@@ -3,7 +3,6 @@ set(
   ITKClassifiersTests
   itkBayesianClassifierImageFilterTest.cxx
   itkImageClassifierFilterTest.cxx
-  itkSampleClassifierFilterTest6.cxx
   itkSampleClassifierFilterTest7.cxx
   itkScalarImageKmeansImageFilter3DTest.cxx
   itkScalarImageKmeansImageFilterTest.cxx
@@ -56,12 +55,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ImageClassifierFilterTestClassifiedImage.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/ImageClassifierFilterTestClassifiedImage.png
-)
-itk_add_test(
-  NAME itkSampleClassifierFilterTest6
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSampleClassifierFilterTest6
 )
 itk_add_test(
   NAME itkSampleClassifierFilterTest7
@@ -120,6 +113,7 @@ set(
   itkSampleClassifierFilterGTest3.cxx
   itkSampleClassifierFilterGTest4.cxx
   itkSampleClassifierFilterGTest5.cxx
+  itkSampleClassifierFilterGTest6.cxx
   itkScalarImageKmeansImageFilterGTest.cxx
 )
 
