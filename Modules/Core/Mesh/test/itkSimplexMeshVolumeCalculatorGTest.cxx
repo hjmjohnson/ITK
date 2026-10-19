@@ -22,10 +22,9 @@
 #include "itkRegularSphereMeshSource.h"
 #include "itkDefaultDynamicMeshTraits.h"
 #include "itkTriangleMeshToSimplexMeshFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkSimplexMeshVolumeCalculatorTest(int, char *[])
+TEST(SimplexMeshVolumeCalculator, ConvertedLegacyTest)
 {
   // Declare the type of the input and output mesh
   using MeshTraits = itk::DefaultDynamicMeshTraits<double, 3, 3, double, double, double>;
@@ -58,7 +57,7 @@ itkSimplexMeshVolumeCalculatorTest(int, char *[])
 
   auto calculator = VolumeCalculatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(calculator, SimplexMeshVolumeCalculator, Object);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(calculator, SimplexMeshVolumeCalculator, Object);
 
 
   calculator->SetSimplexMesh(simplexFilter->GetOutput());
@@ -81,15 +80,8 @@ itkSimplexMeshVolumeCalculatorTest(int, char *[])
 
   std::cout << "knownVolume: " << knownVolume << " versus computedVolume: " << volume << std::endl;
 
-  if (itk::Math::Absolute(volume - knownVolume) > (1e-2 * knownVolume))
-  {
-    std::cerr << "Error in the Volume computation " << std::endl;
-    std::cerr << "We expected " << knownVolume << std::endl;
-    std::cerr << "But we got  " << volume << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(volume, knownVolume, (1e-2 * knownVolume)) << "Error in the Volume computation ";
 
 
   std::cout << "[TEST DONE]" << std::endl;
-  return EXIT_SUCCESS;
 }
