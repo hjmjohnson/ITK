@@ -3,7 +3,6 @@ set(
   ITKImageFunctionTests
   itkBinaryThresholdImageFunctionTest.cxx
   itkBSplineDecompositionImageFilterTest.cxx
-  itkBSplineResampleImageFunctionTest.cxx
   itkCentralDifferenceImageFunctionOnVectorSpeedTest.cxx
   itkCentralDifferenceImageFunctionOnVectorTest.cxx
   itkCentralDifferenceImageFunctionSpeedTest.cxx
@@ -64,12 +63,6 @@ itk_add_test(
     itkBSplineDecompositionImageFilterTest
     3
     -0.26794919243112281
-)
-itk_add_test(
-  NAME itkBSplineResampleImageFunctionTest
-  COMMAND
-    ITKImageFunctionTestDriver
-    itkBSplineResampleImageFunctionTest
 )
 itk_add_test(
   NAME itkScatterMatrixImageFunctionTest
@@ -197,6 +190,7 @@ itk_add_test(
 set(
   ITKImageFunctionGTests
   itkBSplineInterpolateImageFunctionGTest.cxx
+  itkBSplineResampleImageFunctionGTest.cxx
   itkSumOfSquaresImageFunctionGTest.cxx
   itkVarianceImageFunctionGTest.cxx
 )
