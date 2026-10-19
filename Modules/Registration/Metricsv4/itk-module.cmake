@@ -13,5 +13,6 @@ itk_module(
     ITKTestKernel
     ITKGoogleTest
     ITKOptimizersv4
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )

@@ -19,7 +19,7 @@
 #include "itkTranslationTransform.h"
 
 #include "itkANTSNeighborhoodCorrelationImageToImageMetricv4.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkMath.h"
 
 /**
@@ -28,6 +28,8 @@
  *
  */
 
+namespace
+{
 template <typename ImagePointerType, typename DerivativeType>
 void
 ANTSNeighborhoodCorrelationImageToImageMetricv4Test_PrintDerivativeAsVectorImage(ImagePointerType   image,
@@ -120,8 +122,9 @@ ANTSNeighborhoodCorrelationImageToImageMetricv4Test_PrintImage(const ImagePointe
   }
 }
 
-int
-itkANTSNeighborhoodCorrelationImageToImageMetricv4Test(int, char ** const)
+} // namespace
+
+TEST(ANTSNeighborhoodCorrelationImageToImageMetricv4, ConvertedLegacyTest)
 {
   constexpr itk::SizeValueType ImageDimension{ 2 };
 
@@ -137,11 +140,7 @@ itkANTSNeighborhoodCorrelationImageToImageMetricv4Test(int, char ** const)
   auto transformFId = IdentityTransformType::New();
 
   auto transformMId = IdentityTransformType::New();
-  if (transformMId.IsNull())
-  {
-    std::cerr << "transformMId == nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(transformMId.IsNull()) << "transformMId == nullptr";
   auto transformMdisplacement = DisplacementTransformType::New();
   auto transformMtranslation = TranslationTransformType::New();
   auto transformMtranslation2 = TranslationTransformType::New();
@@ -220,21 +219,22 @@ itkANTSNeighborhoodCorrelationImageToImageMetricv4Test(int, char ** const)
   using MetricTypePointer = MetricType::Pointer;
   const MetricTypePointer metric = MetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, ANTSNeighborhoodCorrelationImageToImageMetricv4, ImageToImageMetricv4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    metric, ANTSNeighborhoodCorrelationImageToImageMetricv4, ImageToImageMetricv4);
 
 
   constexpr itk::Size<ImageDimension> neighborhoodRadius0{ { 1 } };
 
   metric->SetRadius(neighborhoodRadius0);
-  ITK_TEST_SET_GET_VALUE(neighborhoodRadius0, metric->GetRadius());
+  EXPECT_EQ(neighborhoodRadius0, metric->GetRadius());
 
   const MetricType::RadiusType constRadius = metric->GetRadius();
-  ITK_TEST_EXPECT_EQUAL(neighborhoodRadius0, constRadius);
+  EXPECT_EQ(neighborhoodRadius0, constRadius);
 
   auto neighborhoodRadius = itk::Size<ImageDimension>::Filled(1);
 
   metric->SetRadius(neighborhoodRadius);
-  ITK_TEST_SET_GET_VALUE(neighborhoodRadius, metric->GetRadius());
+  EXPECT_EQ(neighborhoodRadius, metric->GetRadius());
 
   metric->SetFixedImage(fixedImage);
   metric->SetMovingImage(movingImage);
@@ -249,21 +249,21 @@ itkANTSNeighborhoodCorrelationImageToImageMetricv4Test(int, char ** const)
   ANTSNeighborhoodCorrelationImageToImageMetricv4Test_PrintImage(movingImage);
 
   // Initialize
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->Initialize());
+  ASSERT_NO_THROW(metric->Initialize());
 
 
   // Evaluate
   MetricType::MeasureType    valueReturn1 = NAN;
   MetricType::DerivativeType derivativeReturn;
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->GetValueAndDerivative(valueReturn1, derivativeReturn));
+  ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn));
 
   // Re-initialize
-  ITK_TRY_EXPECT_NO_EXCEPTION(metric->Initialize());
+  ASSERT_NO_THROW(metric->Initialize());
 
 
   // Evaluate with GetValue
   MetricType::MeasureType valueReturn2 = NAN;
-  ITK_TRY_EXPECT_NO_EXCEPTION(valueReturn2 = metric->GetValue());
+  ASSERT_NO_THROW(valueReturn2 = metric->GetValue());
 
 
   // Test same value returned by different methods
@@ -317,12 +317,12 @@ itkANTSNeighborhoodCorrelationImageToImageMetricv4Test(int, char ** const)
   metricSparse->SetFixedSampledPointSet(pset);
   metricSparse->SetUseSampledPointSet(true);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(metricSparse->Initialize());
+  ASSERT_NO_THROW(metricSparse->Initialize());
 
 
   MetricType::MeasureType    valueReturnSparse = NAN;
   MetricType::DerivativeType derivativeReturnSparse;
-  ITK_TRY_EXPECT_NO_EXCEPTION(metricSparse->GetValueAndDerivative(valueReturnSparse, derivativeReturnSparse));
+  ASSERT_NO_THROW(metricSparse->GetValueAndDerivative(valueReturnSparse, derivativeReturnSparse));
 
 
   std::cout << "Check Value return values between dense and sparse threader..." << std::endl;
@@ -366,7 +366,4 @@ itkANTSNeighborhoodCorrelationImageToImageMetricv4Test(int, char ** const)
               << "  Metric value: " << valueReturn << std::endl
               << "  Expected metric max value: " << expectedMetricMax << std::endl;
   }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
 }
