@@ -20,20 +20,21 @@
 #include "itkMesh.h"
 #include "itkAffineTransform.h"
 #include "itkStdStreamStateSave.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 template <typename TInputMesh, typename TOutputMesh, typename TTransform>
-class MeshSourceGraftOutputFilter : public MeshToMeshFilter<TInputMesh, TOutputMesh>
+class MeshSourceGraftOutputFilter : public itk::MeshToMeshFilter<TInputMesh, TOutputMesh>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(MeshSourceGraftOutputFilter);
 
   /** Standard class type aliases. */
   using Self = MeshSourceGraftOutputFilter;
-  using Superclass = MeshToMeshFilter<TInputMesh, TOutputMesh>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::MeshToMeshFilter<TInputMesh, TOutputMesh>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   using InputMeshType = TInputMesh;
   using OutputMeshType = TOutputMesh;
@@ -60,7 +61,7 @@ protected:
   MeshSourceGraftOutputFilter();
   ~MeshSourceGraftOutputFilter() override = default;
   void
-  PrintSelf(std::ostream & os, Indent indent) const override;
+  PrintSelf(std::ostream & os, itk::Indent indent) const override;
 
   /** Generate Requested Data */
   void
@@ -83,7 +84,7 @@ MeshSourceGraftOutputFilter<TInputMesh, TOutputMesh, TTransform>::MeshSourceGraf
  */
 template <typename TInputMesh, typename TOutputMesh, typename TTransform>
 void
-MeshSourceGraftOutputFilter<TInputMesh, TOutputMesh, TTransform>::PrintSelf(std::ostream & os, Indent indent) const
+MeshSourceGraftOutputFilter<TInputMesh, TOutputMesh, TTransform>::PrintSelf(std::ostream & os, itk::Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
   if (m_Transform)
@@ -173,10 +174,9 @@ MeshSourceGraftOutputFilter<TInputMesh, TOutputMesh, TTransform>::GenerateData()
   */
 }
 
-} // end namespace itk
+} // namespace
 
-int
-itkMeshSourceGraftOutputTest(int, char *[])
+TEST(MeshSourceGraftOutput, ConvertedLegacyTest)
 {
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
@@ -246,7 +246,7 @@ itkMeshSourceGraftOutputTest(int, char *[])
 
 
   // Declare the type for the filter
-  using FilterType = itk::MeshSourceGraftOutputFilter<MeshType, MeshType, TransformType>;
+  using FilterType = MeshSourceGraftOutputFilter<MeshType, MeshType, TransformType>;
 
 
   // Create a Filter
@@ -292,6 +292,4 @@ itkMeshSourceGraftOutputTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-
-  return EXIT_SUCCESS;
 }
