@@ -24,8 +24,10 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkStreamingImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 // class to produce a linear image pattern
 template <int VDimension>
 class ImagePattern
@@ -71,10 +73,10 @@ public:
   }
   itk::ProcessObject::Pointer m_Process;
 };
+} // namespace
 
 
-int
-itkExpandImageFilterTest(int, char *[])
+TEST(ExpandImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 2 };
 
@@ -234,7 +236,7 @@ itkExpandImageFilterTest(int, char *[])
   std::cout << "Setting Input to nullptr" << std::endl;
   expander->SetInput(nullptr);
 
-  ITK_TRY_EXPECT_EXCEPTION(expander->Update());
+  EXPECT_THROW(expander->Update(), itk::ExceptionObject);
 
 
   expander->ResetPipeline();
@@ -243,7 +245,7 @@ itkExpandImageFilterTest(int, char *[])
   std::cout << "Setting Interpolator to nullptr" << std::endl;
   expander->SetInterpolator(nullptr);
 
-  ITK_TRY_EXPECT_EXCEPTION(expander->Update());
+  EXPECT_THROW(expander->Update(), itk::ExceptionObject);
 
 
   expander->ResetPipeline();
@@ -251,5 +253,5 @@ itkExpandImageFilterTest(int, char *[])
 
 
   std::cout << "Test finished." << std::endl;
-  return testPassed;
+  EXPECT_EQ(testPassed, EXIT_SUCCESS);
 }
