@@ -18,11 +18,13 @@
 
 
 #include "itkThresholdLabelerImageFilter.h"
+#include "itkGTest.h"
 #include "itkImageRegionIterator.h"
 #include "itkUnaryFunctorImageFilter.h"
-#include "itkTestingMacros.h"
 
-[[nodiscard]] int
+namespace
+{
+void
 ThresholdLabelerImageFilterTestHelper(bool useRealTypeThresholds)
 {
   //
@@ -84,7 +86,7 @@ ThresholdLabelerImageFilterTestHelper(bool useRealTypeThresholds)
   using LabelerFilterType = itk::ThresholdLabelerImageFilter<InputImageType, LabeledImageType>;
   auto labelerFilter = LabelerFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(labelerFilter, ThresholdLabelerImageFilter, UnaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(labelerFilter, ThresholdLabelerImageFilter, UnaryFunctorImageFilter);
 
 
   labelerFilter->SetInput(inputImage);
@@ -94,7 +96,7 @@ ThresholdLabelerImageFilterTestHelper(bool useRealTypeThresholds)
 
   labelerFilter->SetRealThresholds(unsrtThresholds);
 
-  ITK_TRY_EXPECT_EXCEPTION(labelerFilter->Update());
+  EXPECT_THROW(labelerFilter->Update(), itk::ExceptionObject);
 
   if (!useRealTypeThresholds)
   {
@@ -114,13 +116,13 @@ ThresholdLabelerImageFilterTestHelper(bool useRealTypeThresholds)
   }
 
   labelerFilter->SetLabelOffset(offset);
-  ITK_TEST_SET_GET_VALUE(offset, labelerFilter->GetLabelOffset());
+  EXPECT_EQ(offset, labelerFilter->GetLabelOffset());
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(labelerFilter->SetFunctor(labelerFilter->GetFunctor()));
+  ASSERT_NO_THROW(labelerFilter->SetFunctor(labelerFilter->GetFunctor()));
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(labelerFilter->Update());
+  ASSERT_NO_THROW(labelerFilter->Update());
 
 
   // Check if labels coincide with expected labels
@@ -146,38 +148,15 @@ ThresholdLabelerImageFilterTestHelper(bool useRealTypeThresholds)
     }
   }
 
-  if (!passed)
-  {
-    std::cout << "Test failed!" << std::endl;
-    std::cout << labelerFilter << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << labelerFilter;
 }
+} // namespace
 
-int
-itkThresholdLabelerImageFilterTest(int, char *[])
+TEST(ThresholdLabelerImageFilter, ConvertedLegacyTest)
 {
-  bool testStatus = EXIT_SUCCESS;
-  bool testStatusRealTypeThresholds = EXIT_SUCCESS;
-  bool testStatusNotRealTypeThresholds = EXIT_SUCCESS;
-
   bool useRealTypeThresholds = true;
-  testStatusRealTypeThresholds = ThresholdLabelerImageFilterTestHelper(useRealTypeThresholds);
+  ThresholdLabelerImageFilterTestHelper(useRealTypeThresholds);
 
   useRealTypeThresholds = false;
-  testStatusNotRealTypeThresholds = ThresholdLabelerImageFilterTestHelper(useRealTypeThresholds);
-
-  if (testStatusRealTypeThresholds == EXIT_SUCCESS && testStatusNotRealTypeThresholds == EXIT_SUCCESS)
-  {
-    std::cout << "Test finished." << std::endl;
-  }
-  else
-  {
-    std::cerr << "Test failed!" << std::endl;
-    testStatus = EXIT_FAILURE;
-  }
-
-  return testStatus;
+  ThresholdLabelerImageFilterTestHelper(useRealTypeThresholds);
 }
