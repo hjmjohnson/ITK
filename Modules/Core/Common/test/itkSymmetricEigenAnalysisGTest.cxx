@@ -23,8 +23,8 @@
 #include <iomanip>
 #include <array>
 #include <set>
-#include "itkTestingMacros.h"
 #include "vnl/vnl_diag_matrix.h"
+#include "itkGTest.h"
 
 
 // Test template instantiations for various supported template arguments:
@@ -32,40 +32,11 @@ template class itk::SymmetricEigenAnalysis<vnl_matrix<double>, itk::FixedArray<d
 template class itk::SymmetricEigenAnalysis<itk::Array2D<double>, vnl_diag_matrix<double>>;
 
 
-int
-itkSymmetricEigenAnalysisTest(int argc, char * argv[])
+TEST(SymmetricEigenAnalysis, ConvertedLegacyTest)
 {
   // Test SymmetricEigenAnalysis class with symmetric matrices
   // Change to {1, 2} to only test legacy, {0, 1} to only test eigenlib.
   std::array<unsigned int, 2> testUseEigenLibraryIndices{ { 0, 2 } };
-  if (argc > 2)
-  {
-    std::cerr << "Usage: " << itkNameOfTestExecutableMacro(argv) << "[onlyEigen|onlyLegacy]\n";
-    return EXIT_FAILURE;
-  }
-
-  if (argc == 2)
-  {
-    const std::string inputSelectWhatToTest = argv[1];
-    const std::string optionEigen = "onlyEigen";
-    const std::string optionLegacy = "onlyLegacy";
-    if (inputSelectWhatToTest == optionEigen)
-    {
-      testUseEigenLibraryIndices[0] = 1;
-      testUseEigenLibraryIndices[1] = 2;
-    }
-    else if (inputSelectWhatToTest == optionLegacy)
-    {
-      testUseEigenLibraryIndices[0] = 0;
-      testUseEigenLibraryIndices[1] = 1;
-    }
-    else
-    {
-      std::cout << "Unknown option: " << inputSelectWhatToTest << ". If argument is provided it should be "
-                << optionEigen << " or " << optionLegacy << " or no argument for running both" << std::endl;
-      return EXIT_FAILURE;
-    }
-  }
 
   {
     // Test using vnl_matrix
@@ -106,17 +77,10 @@ itkSymmetricEigenAnalysisTest(int argc, char * argv[])
       constexpr double tolerance{ 0.01 };
       for (unsigned int i = 0; i < 6; ++i)
       {
-        if (itk::Math::Absolute(eigvals[i] - eigenvalues[i]) > tolerance)
-        {
-          std::cout << "Eigen value computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(eigenvalues[i], eigvals[i], tolerance) << "Eigen value computation failed";
 
-        if (itk::Math::Absolute(eigvec3[i] - itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i]) > tolerance)
-        {
-          std::cout << "Eigen vector computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i], eigvec3[i], tolerance)
+          << "Eigen vector computation failed";
       }
     }
   }
@@ -169,17 +133,10 @@ itkSymmetricEigenAnalysisTest(int argc, char * argv[])
       constexpr double tolerance{ 0.01 };
       for (unsigned int i = 0; i < 6; ++i)
       {
-        if (itk::Math::Absolute(eigvals[i] - eigenvalues[i]) > tolerance)
-        {
-          std::cout << "Eigen value computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(eigenvalues[i], eigvals[i], tolerance) << "Eigen value computation failed";
 
-        if (itk::Math::Absolute(eigvec3[i] - itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i]) > tolerance)
-        {
-          std::cout << "Eigen vector computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i], eigvec3[i], tolerance)
+          << "Eigen vector computation failed";
       }
     }
   }
@@ -226,17 +183,10 @@ itkSymmetricEigenAnalysisTest(int argc, char * argv[])
     constexpr double tolerance{ 0.01 };
     for (unsigned int i = 0; i < 6; ++i)
     {
-      if (itk::Math::Absolute(eigvals[i] - eigenvalues[i]) > tolerance)
-      {
-        std::cout << "Eigen value computation failed" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(eigenvalues[i], eigvals[i], tolerance) << "Eigen value computation failed";
 
-      if (itk::Math::Absolute(eigvec3[i] - itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i]) > tolerance)
-      {
-        std::cout << "Eigen vector computation failed" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i], eigvec3[i], tolerance)
+        << "Eigen vector computation failed";
     }
   }
 
@@ -289,17 +239,10 @@ itkSymmetricEigenAnalysisTest(int argc, char * argv[])
       constexpr double tolerance{ 0.01 };
       for (unsigned int i = 0; i < 6; ++i)
       {
-        if (itk::Math::Absolute(eigvals[i] - eigenvalues[i]) > tolerance)
-        {
-          std::cout << "Eigen value computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(eigenvalues[i], eigvals[i], tolerance) << "Eigen value computation failed";
 
-        if (itk::Math::Absolute(eigvec3[i] - itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i]) > tolerance)
-        {
-          std::cout << "Eigen vector computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i], eigvec3[i], tolerance)
+          << "Eigen vector computation failed";
       }
     }
   }
@@ -350,17 +293,10 @@ itkSymmetricEigenAnalysisTest(int argc, char * argv[])
       constexpr double tolerance{ 0.01 };
       for (unsigned int i = 0; i < 3; ++i)
       {
-        if (itk::Math::Absolute(eigvals[i] - eigenvalues[i]) > tolerance)
-        {
-          std::cout << "Eigen value computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(eigenvalues[i], eigvals[i], tolerance) << "Eigen value computation failed";
 
-        if (itk::Math::Absolute(eigvec3[i] - itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i]) > tolerance)
-        {
-          std::cout << "Eigen vector computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i], eigvec3[i], tolerance)
+          << "Eigen vector computation failed";
       }
     }
   }
@@ -411,18 +347,10 @@ itkSymmetricEigenAnalysisTest(int argc, char * argv[])
       constexpr float tolerance{ 0.01 };
       for (unsigned int i = 0; i < 3; ++i)
       {
-        if (itk::Math::Absolute(eigvals[i] - eigenvalues[i]) > tolerance)
-        {
-          std::cout << "Eigen value computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(eigenvalues[i], eigvals[i], tolerance) << "Eigen value computation failed";
 
-        if (itk::Math::Absolute(eigvec2[i] - itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i]) > tolerance)
-        {
-          std::cout << eigenvectors[2][i] << ' ' << eigvec2[i] << std::endl;
-          std::cout << "Eigen vector computation failed" << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_NEAR(itk::Math::sgn0(eigenvectors[2][0]) * eigenvectors[2][i], eigvec2[i], tolerance)
+          << eigenvectors[2][i] << ' ' << eigvec2[i] << " Eigen vector computation failed";
       }
     }
   }
@@ -437,8 +365,4 @@ itkSymmetricEigenAnalysisTest(int argc, char * argv[])
   {
     std::cout << "STREAMED ENUM VALUE SymmetricEigenAnalysisEnums::EigenValueOrder: " << ee << std::endl;
   }
-
-  std::cout << "[TEST PASSED]" << std::endl;
-
-  return EXIT_SUCCESS;
 }
