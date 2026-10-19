@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKIntegratedTestTests
   itkReleaseDataFilterTest.cxx
-  itkStatisticsPrintTest.cxx
   itkCommonPrintTest.cxx
   itkBasicFiltersPrintTest.cxx
   itkShrinkImagePreserveObjectPhysicalLocations.cxx
@@ -78,12 +77,6 @@ itk_add_test(NAME itkAlgorithmsPrintTest4 COMMAND itkAlgorithmsPrintTest)
 
 #-------------------------------------------------------------------------
 itk_add_test(
-  NAME itkStatisticsPrintTest
-  COMMAND
-    ITKIntegratedTestTestDriver
-    itkStatisticsPrintTest
-)
-itk_add_test(
   NAME itkCommonPrintTest
   COMMAND
     ITKIntegratedTestTestDriver
@@ -130,6 +123,7 @@ set(
   itkIOPrintGTest.cxx
   itkNumericsPrintGTest.cxx
   itkSpatialObjectPrintGTest.cxx
+  itkStatisticsPrintGTest.cxx
 )
 
 creategoogletestdriver(ITKIntegratedTest "${ITKIntegratedTest-Test_LIBRARIES}" "${ITKIntegratedTestGTests}")
