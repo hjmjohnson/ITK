@@ -5,7 +5,6 @@ set(
   itkEuclideanDistancePointMetricTest.cxx
   itkImageRegistrationMethodTest_14.cxx
   itkImageRegistrationMethodTest_16.cxx
-  itkImageRegistrationMethodTest_7.cxx
   itkImageRegistrationMethodTest_8.cxx
   itkImageRegistrationMethodTest_9.cxx
   itkImageToSpatialObjectRegistrationTest.cxx
@@ -217,12 +216,6 @@ itk_add_test(
     TestRecursive
 )
 itk_add_test(
-  NAME itkImageRegistrationMethodTest_7
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkImageRegistrationMethodTest_7
-)
-itk_add_test(
   NAME itkImageRegistrationMethodTest_8
   COMMAND
     ITKRegistrationCommonTestDriver
@@ -348,6 +341,7 @@ set(
   itkImageRegistrationMethodGTest_4.cxx
   itkImageRegistrationMethodGTest_5.cxx
   itkImageRegistrationMethodGTest_6.cxx
+  itkImageRegistrationMethodGTest_7.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
