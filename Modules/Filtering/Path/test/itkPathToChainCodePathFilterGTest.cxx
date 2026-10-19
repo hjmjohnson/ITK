@@ -20,10 +20,9 @@
 #include "itkPolyLineParametricPath.h"
 #include "itkChainCodePath2D.h"
 #include "itkPathToChainCodePathFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkPathToChainCodePathFilterTest(int, char *[])
+TEST(PathToChainCodePathFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using InPathType = itk::PolyLineParametricPath<Dimension>;
@@ -32,8 +31,6 @@ itkPathToChainCodePathFilterTest(int, char *[])
   using VertexType = InPathType::VertexType;
 
   using FilterType = itk::PathToChainCodePathFilter<InPathType, ChainPathType>;
-
-  bool passed = true;
 
   // Setup the path
   std::cout << "Making a triangle Path with v0 at (30,30) -> (30,33) -> (33,33)" << std::endl;
@@ -50,10 +47,10 @@ itkPathToChainCodePathFilterTest(int, char *[])
 
   // Set up the filter
   auto filter = FilterType::New();
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, PathToChainCodePathFilter, PathToPathFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, PathToChainCodePathFilter, PathToPathFilter);
 
   bool maximallyConnected = false;
-  ITK_TEST_SET_GET_BOOLEAN(filter, MaximallyConnected, maximallyConnected);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, MaximallyConnected, maximallyConnected);
 
   filter->SetInput(inPath);
 
@@ -63,10 +60,7 @@ itkPathToChainCodePathFilterTest(int, char *[])
 
   std::cout << "PathToChainCodePathFilter: open test path is " << chainPath->NumberOfSteps() << " steps:\n \""
             << chainPath->GetChainCodeAsString() << "\"." << std::endl;
-  if (chainPath->NumberOfSteps() != 6)
-  {
-    passed = false;
-  }
+  EXPECT_EQ(chainPath->NumberOfSteps(), 6u);
 
   // Close the triangle
   v.Fill(30);
@@ -75,29 +69,14 @@ itkPathToChainCodePathFilterTest(int, char *[])
 
   std::cout << "PathToChainCodePathFilter: closed test path is " << chainPath->NumberOfSteps() << " steps:\n \""
             << chainPath->GetChainCodeAsString() << "\"." << std::endl;
-  if (chainPath->NumberOfSteps() != 9)
-  {
-    passed = false;
-  }
+  EXPECT_EQ(chainPath->NumberOfSteps(), 9u);
 
   maximallyConnected = true;
-  ITK_TEST_SET_GET_BOOLEAN(filter, MaximallyConnected, maximallyConnected);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, MaximallyConnected, maximallyConnected);
 
   filter->Update();
 
   std::cout << "PathToChainCodePathFilter: maximally connected test path is " << chainPath->NumberOfSteps()
             << " steps:\n \"" << chainPath->GetChainCodeAsString() << "\"." << std::endl;
-  if (chainPath->NumberOfSteps() != 12)
-  {
-    passed = false;
-  }
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_EQ(chainPath->NumberOfSteps(), 12u);
 }
