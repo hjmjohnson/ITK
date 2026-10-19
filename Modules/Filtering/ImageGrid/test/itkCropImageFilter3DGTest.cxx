@@ -18,13 +18,12 @@
 
 #include "itkCropImageFilter.h"
 #include "itkImageBufferRange.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include <numeric> // For iota.
 
-int
-itkCropImageFilter3DTest(int, char *[])
+TEST(CropImageFilter, ConvertedLegacyTest3D)
 {
 
   // Define the dimension of the images
@@ -52,7 +51,7 @@ itkCropImageFilter3DTest(int, char *[])
   const itk::CropImageFilter<ImageType, ImageType>::Pointer cropFilter =
     itk::CropImageFilter<ImageType, ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(cropFilter, CropImageFilter, ExtractImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(cropFilter, CropImageFilter, ExtractImageFilter);
 
   cropFilter->SetInput(image);
 
@@ -62,12 +61,12 @@ itkCropImageFilter3DTest(int, char *[])
   cropFilter->SetBoundaryCropSize(extractSize);
 
   cropFilter->SetUpperBoundaryCropSize(extractSize);
-  ITK_TEST_SET_GET_VALUE(extractSize, cropFilter->GetUpperBoundaryCropSize());
+  EXPECT_EQ(extractSize, cropFilter->GetUpperBoundaryCropSize());
 
   cropFilter->SetLowerBoundaryCropSize(extractSize);
-  ITK_TEST_SET_GET_VALUE(extractSize, cropFilter->GetLowerBoundaryCropSize());
+  EXPECT_EQ(extractSize, cropFilter->GetLowerBoundaryCropSize());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(cropFilter->Update());
+  EXPECT_NO_THROW(cropFilter->Update());
 
   const ImageType::Pointer croppedImage = cropFilter->GetOutput();
 
@@ -75,12 +74,7 @@ itkCropImageFilter3DTest(int, char *[])
   ImageType::RegionType::SizeType croppedSize = croppedImage->GetLargestPossibleRegion().GetSize();
   for (unsigned int i = 0; i < ImageType::RegionType::SizeType::GetSizeDimension(); ++i)
   {
-    if (croppedSize[i] != dimSize - 2)
-    {
-      std::cerr << "Unexpected cropped Image size[" << i << "] = " << croppedSize[i] << ". Expected " << dimSize
-                << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(croppedSize[i], dimSize - 2) << "Unexpected cropped Image size[" << i << "]";
   }
   ImageType::RegionType                      subRegion;
   constexpr ImageType::RegionType::SizeType  subSize{ dimSize - 2, dimSize - 2, dimSize - 2 };
@@ -91,12 +85,6 @@ itkCropImageFilter3DTest(int, char *[])
   itk::ImageRegionIterator<ImageType> it2(croppedImage, croppedImage->GetLargestPossibleRegion());
   for (; !it1.IsAtEnd() && !it2.IsAtEnd(); ++it1, ++it2)
   {
-    if (it1.Get() != it2.Get())
-    {
-      std::cerr << "Expected Pixel " << it1.Get() << " saw " << it2.Get() << " instead." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(it1.Get(), it2.Get());
   }
-
-  return EXIT_SUCCESS;
 }
