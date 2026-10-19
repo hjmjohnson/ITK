@@ -18,7 +18,6 @@ set(
   itkZeroDCImageFilterTest.cxx
   # Output data for each wavelet to visualize with python.
   itkIsotropicWaveletFrequencyFunctionTest.cxx
-  itkSimoncelliIsotropicWaveletTest.cxx
   itkVowIsotropicWaveletTest.cxx
   #Isotropic Wavelet
   itkWaveletFrequencyFilterBankGeneratorTest.cxx
@@ -497,12 +496,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkSimoncelliIsotropicWaveletTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkSimoncelliIsotropicWaveletTest
-)
-itk_add_test(
   NAME itkVowIsotropicWaveletTest
   COMMAND
     IsotropicWaveletsTestDriver
@@ -693,5 +686,6 @@ set(
   itkHeldIsotropicWaveletGTest.cxx
   itkInd2SubGTest.cxx
   itkShannonIsotropicWaveletGTest.cxx
+  itkSimoncelliIsotropicWaveletGTest.cxx
 )
 creategoogletestdriver(IsotropicWavelets "${Libraries}" "${IsotropicWaveletsGTests}")
