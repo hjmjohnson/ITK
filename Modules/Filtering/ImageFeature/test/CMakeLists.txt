@@ -10,7 +10,6 @@ set(
   itkHessian3DToVesselnessMeasureImageFilterTest.cxx
   itkHessianRecursiveGaussianFilterTest.cxx
   itkHessianToObjectnessMeasureImageFilterTest.cxx
-  itkHoughTransform2DCirclesImageTest.cxx
   itkHoughTransform2DLinesImageTest.cxx
   itkLaplacianImageFilterTest.cxx
   itkLaplacianRecursiveGaussianImageFilterTest.cxx
@@ -200,12 +199,6 @@ set_tests_properties(
       ${TEMP}/itkHessianRecursiveGaussianFilterTest.txt
 )
 
-itk_add_test(
-  NAME itkHoughTransform2DCirclesImageTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkHoughTransform2DCirclesImageTest
-)
 itk_add_test(
   NAME itkHoughTransform2DLinesImageTest
   COMMAND
@@ -601,6 +594,7 @@ set(
   itkDiscreteGaussianDerivativeImageFilterScaleSpaceGTest.cxx
   itkGradientVectorFlowImageFilterGTest.cxx
   itkHessianRecursiveGaussianFilterScaleSpaceGTest.cxx
+  itkHoughTransform2DCirclesImageGTest.cxx
   itkSobelEdgeDetectionImageFilterGTest.cxx
 )
 
