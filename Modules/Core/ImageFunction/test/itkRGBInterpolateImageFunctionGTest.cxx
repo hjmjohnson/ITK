@@ -20,7 +20,10 @@
 #include "itkRGBPixel.h"
 #include "itkVectorLinearInterpolateImageFunction.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
+namespace
+{
 namespace RGBInterpolate
 {
 
@@ -160,11 +163,10 @@ TestContinuousIndex(const InterpolatorType *    interp,
 }
 
 } // namespace RGBInterpolate
+} // namespace
 
-int
-itkRGBInterpolateImageFunctionTest(int, char *[])
+TEST(RGBInterpolateImageFunction, ConvertedLegacyTest)
 {
-  std::cout << "Testing vector image interpolation: " << std::endl;
 
   using ImageType = RGBInterpolate::ImageType;
   using IndexType = RGBInterpolate::IndexType;
@@ -224,7 +226,6 @@ itkRGBInterpolateImageFunctionTest(int, char *[])
   /* Test evaluation at continuous indices and corresponding
      geometric points */
   std::cout << "Evaluate at: " << std::endl;
-  int flag = 0;
   // an integer position inside the image
   {
     itk::SpacePrecisionType darray[3] = { 10, 20, 40 };
@@ -233,18 +234,12 @@ itkRGBInterpolateImageFunctionTest(int, char *[])
     auto                    cindex = ContinuousIndexType(darray);
     bool                    passed = RGBInterpolate::TestContinuousIndex(interp, cindex, true, output);
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
     PointType point;
     image->TransformContinuousIndexToPhysicalPoint(cindex, point);
     passed = RGBInterpolate::TestGeometricPoint(interp, point, true, output);
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
   }
   // position at the image border
   {
@@ -255,18 +250,12 @@ itkRGBInterpolateImageFunctionTest(int, char *[])
     bool                    passed = RGBInterpolate::TestContinuousIndex(interp, cindex, true, output);
 
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
     PointType point;
     image->TransformContinuousIndexToPhysicalPoint(cindex, point);
     passed = RGBInterpolate::TestGeometricPoint(interp, point, true, output);
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
   }
   // position near image border
   {
@@ -278,18 +267,12 @@ itkRGBInterpolateImageFunctionTest(int, char *[])
     bool                              passed = RGBInterpolate::TestContinuousIndex(interp, cindex, true, output);
 
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
     PointType point;
     image->TransformContinuousIndexToPhysicalPoint(cindex, point);
     passed = RGBInterpolate::TestGeometricPoint(interp, point, true, output);
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
   }
   // position outside the image
   {
@@ -300,18 +283,12 @@ itkRGBInterpolateImageFunctionTest(int, char *[])
     bool                    passed = RGBInterpolate::TestContinuousIndex(interp, cindex, false, output);
 
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
     PointType point;
     image->TransformContinuousIndexToPhysicalPoint(cindex, point);
     passed = RGBInterpolate::TestGeometricPoint(interp, point, false, output);
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
   }
   // at non-integer position
   {
@@ -321,29 +298,11 @@ itkRGBInterpolateImageFunctionTest(int, char *[])
     auto                    cindex = ContinuousIndexType(darray);
     bool                    passed = RGBInterpolate::TestContinuousIndex(interp, cindex, true, output);
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
     PointType point;
     image->TransformContinuousIndexToPhysicalPoint(cindex, point);
     passed = RGBInterpolate::TestGeometricPoint(interp, point, true, output);
 
-    if (!passed)
-    {
-      flag = 1;
-    }
+    EXPECT_TRUE(passed);
   }
-
-  /* Return results of test */
-  if (flag != 0)
-  {
-    std::cout << "*** Some test failed" << std::endl;
-    return flag;
-  }
-
-  std::cout << "All tests successfully passed" << std::endl;
-
-
-  return EXIT_SUCCESS;
 }
