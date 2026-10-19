@@ -17,9 +17,9 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshTest1(int, char *[])
+TEST(QuadEdgeMesh1, ConvertedLegacyTest)
 {
   std::cout << "Testing points..." << std::endl;
 
@@ -39,10 +39,7 @@ itkQuadEdgeMeshTest1(int, char *[])
 
   // test ComputeNumberOfPoints( ) failsafe
   {
-    if (mesh->ComputeNumberOfPoints())
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(mesh->ComputeNumberOfPoints(), 0u);
   }
 
   MeshType::PointType pts[5];
@@ -69,11 +66,7 @@ itkQuadEdgeMeshTest1(int, char *[])
   mesh->SetPoint(3, pts[3]);
   mesh->SetPoint(4, pts[4]);
 
-  if (mesh->GetNumberOfPoints() != 5)
-  {
-    std::cout << "Not all points added." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(mesh->GetNumberOfPoints(), 5u) << "Not all points added.";
 
   using PointsIterator = MeshType::PointsContainer::Iterator;
   PointsIterator       pointIterator = mesh->GetPoints()->Begin();
@@ -84,36 +77,20 @@ itkQuadEdgeMeshTest1(int, char *[])
   {
     const MeshType::PointType p = pointIterator.Value();
 
-    if (p != pts[nPoints])
-    {
-      std::cout << "Point N. " << nPoints << " differs." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(p, pts[nPoints]) << "Point N. " << nPoints << " differs.";
 
     pointIterator++;
     nPoints++;
   }
 
-  if (nPoints != 5)
-  {
-    std::cout << "Iteration didn't visit all points." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(nPoints, 5) << "Iteration didn't visit all points.";
 
   // Test AddEdge failsafe
   {
-    if (mesh->AddEdge(1, 1))
-    {
-      std::cout << "Should not be able to define an edge"
-                << " with twice the same Point identifier." << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (mesh->AddEdge(1, 6))
-    {
-      std::cout << "Should not be able to define an edge"
-                << " with a non existing point Id." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(mesh->AddEdge(1, 1), nullptr)
+      << "Should not be able to define an edge" << " with twice the same Point identifier.";
+    EXPECT_EQ(mesh->AddEdge(1, 6), nullptr)
+      << "Should not be able to define an edge" << " with a non existing point Id.";
 
     // create a tetrahedra and one isolated point: id = 4
     const int specialCells[12] = { 0, 1, 2, 0, 2, 3, 3, 1, 0, 1, 3, 2 };
@@ -130,20 +107,11 @@ itkQuadEdgeMeshTest1(int, char *[])
     }
 
     // test origin internal
-    if (mesh->AddEdge(4, 1))
-    {
-      std::cout << "Should not be able to define an edge"
-                << " with an internal origin." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(mesh->AddEdge(4, 1), nullptr) << "Should not be able to define an edge" << " with an internal origin.";
 
     // test destination internal
-    if (mesh->AddEdge(1, 4))
-    {
-      std::cout << "Should not be able to define an edge"
-                << " with an internal destination." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(mesh->AddEdge(1, 4), nullptr)
+      << "Should not be able to define an edge" << " with an internal destination.";
   }
 
   // test DeletePoint failsafes
@@ -175,30 +143,16 @@ itkQuadEdgeMeshTest1(int, char *[])
 
   // Test GetEdge failsafe
   {
-    if (!mesh->GetEdge(0))
-    {
-      std::cout << "Should be able to get this edge" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NE(mesh->GetEdge(0), nullptr) << "Should be able to get this edge";
 
-    if (mesh->GetEdge(129987))
-    {
-      std::cout << "Should not be able to get an edge"
-                << " with a non existing ID." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(mesh->GetEdge(129987), nullptr) << "Should not be able to get an edge" << " with a non existing ID.";
   }
 
   // test AddFace failsafe
   {
-    if (mesh->AddFaceTriangle(0, 1, 129987))
-    {
-      std::cout << "Should not be able to add a face"
-                << " with a non existing ID." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(mesh->AddFaceTriangle(0, 1, 129987), nullptr)
+      << "Should not be able to add a face" << " with a non existing ID.";
   }
 
   std::cout << "Test passed" << std::endl;
-  return EXIT_SUCCESS;
 }
