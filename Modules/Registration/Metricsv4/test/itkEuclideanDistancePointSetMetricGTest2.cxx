@@ -19,7 +19,7 @@
 #include "itkEuclideanDistancePointSetToPointSetMetricv4.h"
 #include "itkTranslationTransform.h"
 #include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <fstream>
 #include "itkMath.h"
@@ -28,8 +28,10 @@
  * Test with a displacement field transform
  */
 
+namespace
+{
 template <unsigned int Dimension>
-[[nodiscard]] int
+void
 itkEuclideanDistancePointSetMetricTest2Run()
 {
   using PointSetType = itk::PointSet<unsigned char, Dimension>;
@@ -173,11 +175,7 @@ itkEuclideanDistancePointSetMetricTest2Run()
               << ' ' << movingPoint - transformedPoint << std::endl;
   }
 
-  if (!passed)
-  {
-    std::cerr << "Not all points match after transformation with result." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "Not all points match after transformation with result.";
 
   // Test the valid points are counted correctly.
   // We should get a warning printed.
@@ -186,12 +184,7 @@ itkEuclideanDistancePointSetMetricTest2Run()
   const unsigned int numberExpected = fixedPoints->GetNumberOfPoints() - 1;
   fixedPoints->SetPoint(fixedPoints->GetNumberOfPoints() - 1, fixedPoint);
   metric->GetValueAndDerivative(value2, derivative2);
-  if (metric->GetNumberOfValidPoints() != numberExpected)
-  {
-    std::cerr << "Expected " << numberExpected << " valid points, but got " << metric->GetNumberOfValidPoints()
-              << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(metric->GetNumberOfValidPoints(), numberExpected);
 
   // Test with no valid points.
   auto fixedPoints2 = PointSetType::New();
@@ -209,44 +202,27 @@ itkEuclideanDistancePointSetMetricTest2Run()
       derivative2IsZero = false;
     }
   }
-  if (itk::Math::NotExactlyEquals(value2, itk::NumericTraits<typename PointSetMetricType::MeasureType>::max()) ||
-      !derivative2IsZero)
-  {
-    std::cerr << "Failed testing with no valid points. Number of valid points: " << metric->GetNumberOfValidPoints()
-              << " value2: " << value2 << " derivative2IsZero: " << derivative2IsZero << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(value2, itk::NumericTraits<typename PointSetMetricType::MeasureType>::max())
+    << "Failed testing with no valid points. Number of valid points: " << metric->GetNumberOfValidPoints();
+  EXPECT_TRUE(derivative2IsZero) << "Failed testing with no valid points. Number of valid points: "
+                                 << metric->GetNumberOfValidPoints();
 
   // Test with invalid virtual domain, i.e.
   // one that doesn't match the displacement field.
   auto             badSize = RegionType::SizeType::Filled(static_cast<itk::SizeValueType>(pointMax / 2.0));
   const RegionType badRegion{ regionIndex, badSize };
   metric->SetVirtualDomain(spacing, origin, direction, badRegion);
-  ITK_TRY_EXPECT_EXCEPTION(metric->Initialize());
+  EXPECT_THROW(metric->Initialize(), itk::ExceptionObject);
 
   auto badSpacing = itk::MakeFilled<typename FieldType::SpacingType>(0.5);
   metric->SetVirtualDomain(badSpacing, origin, direction, region);
-  ITK_TRY_EXPECT_EXCEPTION(metric->Initialize());
-
-  return EXIT_SUCCESS;
+  EXPECT_THROW(metric->Initialize(), itk::ExceptionObject);
 }
+} // namespace
 
-int
-itkEuclideanDistancePointSetMetricTest2(int, char *[])
+TEST(EuclideanDistancePointSetMetric, ConvertedLegacyTest2)
 {
-  int result = EXIT_SUCCESS;
+  itkEuclideanDistancePointSetMetricTest2Run<2>();
 
-  if (itkEuclideanDistancePointSetMetricTest2Run<2>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 2." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  if (itkEuclideanDistancePointSetMetricTest2Run<3>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 3." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  return result;
+  itkEuclideanDistancePointSetMetricTest2Run<3>();
 }
