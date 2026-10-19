@@ -16,13 +16,13 @@
  *
  *=========================================================================*/
 
+#include "itkMetaProgrammingLibrary.h"
 #include <type_traits>
 
-#include "itkMetaProgrammingLibrary.h"
+#include "itkGTest.h"
 
 
-int
-itkMetaProgrammingLibraryTest(int, char *[])
+TEST(MetaProgrammingLibrary, ConvertedLegacyTest)
 {
   using namespace itk::mpl;
 
@@ -87,6 +87,4 @@ itkMetaProgrammingLibraryTest(int, char *[])
   // Not between types
   static_assert(std::is_same_v<Not<TrueType>::Type, FalseType>, "Unit test failed");
   static_assert(std::is_same_v<Not<FalseType>::Type, TrueType>, "Unit test failed");
-
-  return EXIT_SUCCESS;
 }

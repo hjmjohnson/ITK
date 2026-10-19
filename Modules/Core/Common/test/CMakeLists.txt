@@ -51,7 +51,6 @@ set(
   itkMultiThreaderParallelizeArrayTest.cxx
   itkMultithreadingTest.cxx
   itkMultiThreaderExceptionsTest.cxx
-  itkMetaProgrammingLibraryTest.cxx
   itkPromoteType.cxx
   itkMetaDataDictionaryTest.cxx
   itkStdStreamLogOutputTest.cxx
@@ -245,12 +244,6 @@ itk_add_test(
   COMMAND
     ITKCommon1TestDriver
     itkObjectStoreTest
-)
-itk_add_test(
-  NAME itkMetaProgrammingLibraryTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMetaProgrammingLibraryTest
 )
 itk_add_test(
   NAME itkPromoteType
@@ -1466,6 +1459,7 @@ set(
   itkMersenneTwisterRandomVariateGeneratorGTest.cxx
   itkMetaDataDictionaryGTest.cxx
   itkMetaDataObjectGTest.cxx
+  itkMetaProgrammingLibraryGTest.cxx
   itkMinimumMaximumImageCalculatorGTest.cxx
   itkModifiedTimeGTest.cxx
   itkNeighborhoodAllocatorGTest.cxx
