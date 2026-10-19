@@ -22,7 +22,10 @@
 
 #include "itkImageToListSampleFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
+namespace
+{
 using ImageType = itk::Image<unsigned int, 2>;
 using MaskImageType = itk::Image<unsigned char, 2>;
 
@@ -30,7 +33,7 @@ using MaskImageType = itk::Image<unsigned char, 2>;
 // Creates a 10 x 10 image of unsigned chars with pixel at location
 // (x,y) being yx. ie Pixel at (6,4) = 46.
 //
-static ImageType::Pointer
+ImageType::Pointer
 CreateImage()
 {
   auto image = ImageType::New();
@@ -59,7 +62,7 @@ CreateImage()
 //------------------------------------------------------------------------
 // Creates a 10 x 10 image of unsigned chars with pixel from (2,3) - (8,5) as
 // 255 and rest as 0
-static MaskImageType::Pointer
+MaskImageType::Pointer
 CreateMaskImage()
 {
   MaskImageType::IndexType start{};
@@ -92,7 +95,7 @@ CreateMaskImage()
 
 //------------------------------------------------------------------------
 // Creates a 13 x 17 image for testing verification of LargestPossibleRegion
-static MaskImageType::Pointer
+MaskImageType::Pointer
 CreateLargerMaskImage()
 {
   MaskImageType::IndexType start;
@@ -107,10 +110,10 @@ CreateLargerMaskImage()
   const MaskImageType::RegionType region(start, size);
   return MaskImageType::CreateInitialized(region);
 }
+} // namespace
 
 
-int
-itkImageToListSampleFilterTest(int, char *[])
+TEST(ImageToListSampleFilter, ConvertedLegacyTest)
 {
   const ImageType::Pointer     image = CreateImage();
   const MaskImageType::Pointer maskImage = CreateMaskImage();
@@ -121,31 +124,15 @@ itkImageToListSampleFilterTest(int, char *[])
 
   // Invoke update before adding an input. An exception should be
   // thrown.
-  try
-  {
-    filter->Update();
-    std::cerr << "[FAILED] Exception should have been thrown since Update() is invoked without setting an input"
-              << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Exception caught: " << excp << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject)
+    << "[FAILED] Exception should have been thrown since Update() is invoked without setting an input";
   // Restore the pipeline after the exception
   filter->ResetPipeline();
 
-  if (filter->GetInput() != nullptr)
-  {
-    std::cerr << "[FAILED] GetInput() should return nullptr if the input has not been set" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), nullptr) << "[FAILED] GetInput() should return nullptr if the input has not been set";
 
-  if (filter->GetMaskImage() != nullptr)
-  {
-    std::cerr << "[FAILED] GetMaskImage() should return nullptr if mask image has not been set" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetMaskImage(), nullptr)
+    << "[FAILED] GetMaskImage() should return nullptr if mask image has not been set";
 
 
   // generate list sample without a mask image
@@ -164,11 +151,7 @@ itkImageToListSampleFilterTest(int, char *[])
 
   const ImageToListSampleFilterType::MaskPixelType pixelType = filter->GetMaskValue();
 
-  if (pixelType != 255)
-  {
-    std::cerr << "Problem in SetMaskValue() GetMaskValue() " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(pixelType, 255) << "Problem in SetMaskValue() GetMaskValue()";
 
   using ListSampleType = ImageToListSampleFilterType::ListSampleType;
   const ListSampleType * list = filter->GetOutput();
@@ -183,28 +166,12 @@ itkImageToListSampleFilterTest(int, char *[])
     ++lit;
   }
 
-  if (sum != 945)
-  {
-    std::cerr << "[FAILED] Computed sum of pixels in the list sample (masked) is : " << sum << " but should be 945."
-              << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(sum, 945u) << "[FAILED] Computed sum of pixels in the list sample (masked)";
 
 
   // Set on purpose a mask of inconsistent LargestPossibleRegion
   filter->SetMaskImage(CreateLargerMaskImage());
 
-  try
-  {
-    filter->Update();
-    std::cerr << "Exception should have been thrown since the mask has a different LargestPossibleRegion." << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Expected Exception caught: " << excp << std::endl;
-  }
-
-  std::cerr << "[PASSED]" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject)
+    << "Exception should have been thrown since the mask has a different LargestPossibleRegion.";
 }
