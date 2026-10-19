@@ -17,12 +17,11 @@
  *=========================================================================*/
 
 #include "itkGaussianDistribution.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkStdStreamStateSave.h"
 #include "itkMath.h"
 
-int
-itkGaussianDistributionTest(int, char *[])
+TEST(GaussianDistribution, ConvertedLegacyTest)
 {
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
@@ -40,8 +39,6 @@ itkGaussianDistributionTest(int, char *[])
   std::cout << "Number of parameters = " << distributionFunction->GetNumberOfParameters() << std::endl;
 
   distributionFunction->Print(std::cout);
-
-  int status = EXIT_SUCCESS;
 
   // Tolerance for the values.
   constexpr double tol{ 1e-8 };
@@ -76,15 +73,8 @@ itkGaussianDistributionTest(int, char *[])
     std::cout << expected1[i + 5] << ", error = ";
     std::cout.width(22);
     std::cout << diff;
-    if (diff < tol)
-    {
-      std::cout << ", Passed." << std::endl;
-    }
-    else
-    {
-      std::cout << ", Failed." << std::endl;
-      status = EXIT_FAILURE;
-    }
+    std::cout << std::endl;
+    EXPECT_LT(diff, tol);
   }
   std::cout << std::endl;
 
@@ -105,15 +95,8 @@ itkGaussianDistributionTest(int, char *[])
     std::cout << static_cast<double>(i) << ", error = ";
     std::cout.width(22);
     std::cout << diff;
-    if (diff < tol)
-    {
-      std::cout << ", Passed." << std::endl;
-    }
-    else
-    {
-      std::cout << ", Failed." << std::endl;
-      status = EXIT_FAILURE;
-    }
+    std::cout << std::endl;
+    EXPECT_LT(diff, tol);
   }
   std::cout << std::endl;
 
@@ -147,15 +130,8 @@ itkGaussianDistributionTest(int, char *[])
     std::cout << expected2[i + 5] << ", error = ";
     std::cout.width(22);
     std::cout << diff;
-    if (diff < tol)
-    {
-      std::cout << ", Passed." << std::endl;
-    }
-    else
-    {
-      std::cout << ", Failed." << std::endl;
-      status = EXIT_FAILURE;
-    }
+    std::cout << std::endl;
+    EXPECT_LT(diff, tol);
   }
   std::cout << std::endl;
 
@@ -192,15 +168,8 @@ itkGaussianDistributionTest(int, char *[])
     std::cout << expected3[i + 5] << ", error = ";
     std::cout.width(22);
     std::cout << diff;
-    if (diff < tol)
-    {
-      std::cout << ", Passed." << std::endl;
-    }
-    else
-    {
-      std::cout << ", Failed." << std::endl;
-      status = EXIT_FAILURE;
-    }
+    std::cout << std::endl;
+    EXPECT_LT(diff, tol);
   }
   std::cout << std::endl;
 
@@ -230,15 +199,8 @@ itkGaussianDistributionTest(int, char *[])
     std::cout << expected4[i + 5] << ", error = ";
     std::cout.width(22);
     std::cout << diff;
-    if (diff < tol)
-    {
-      std::cout << ", Passed." << std::endl;
-    }
-    else
-    {
-      std::cout << ", Failed." << std::endl;
-      status = EXIT_FAILURE;
-    }
+    std::cout << std::endl;
+    EXPECT_LT(diff, tol);
   }
   std::cout << std::endl;
 
@@ -260,15 +222,8 @@ itkGaussianDistributionTest(int, char *[])
     std::cout << static_cast<double>(i) << ", error = ";
     std::cout.width(22);
     std::cout << diff;
-    if (diff < tol)
-    {
-      std::cout << ", Passed." << std::endl;
-    }
-    else
-    {
-      std::cout << ", Failed." << std::endl;
-      status = EXIT_FAILURE;
-    }
+    std::cout << std::endl;
+    EXPECT_LT(diff, tol);
   }
   std::cout << std::endl;
 
@@ -317,27 +272,27 @@ itkGaussianDistributionTest(int, char *[])
   DistributionType::ParametersType wrongParameters(wrongNumberOfParameters, 1.0);
   distributionFunction->SetParameters(wrongParameters);
 
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->GetVariance());
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->GetMean());
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->PDF(x, wrongParameters));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->EvaluatePDF(x));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->EvaluatePDF(x, wrongParameters));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->EvaluateCDF(x));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->EvaluateCDF(x, wrongParameters));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->EvaluateInverseCDF(x));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->EvaluateInverseCDF(x, wrongParameters));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->CDF(x, wrongParameters));
-  ITK_TRY_EXPECT_EXCEPTION(distributionFunction->InverseCDF(x, wrongParameters));
+  EXPECT_THROW(distributionFunction->GetVariance(), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->GetMean(), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->PDF(x, wrongParameters), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->EvaluatePDF(x), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->EvaluatePDF(x, wrongParameters), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->EvaluateCDF(x), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->EvaluateCDF(x, wrongParameters), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->EvaluateInverseCDF(x), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->EvaluateInverseCDF(x, wrongParameters), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->CDF(x, wrongParameters), itk::ExceptionObject);
+  EXPECT_THROW(distributionFunction->InverseCDF(x, wrongParameters), itk::ExceptionObject);
 
   distributionFunction->SetParameters(wrongParameters);
   constexpr double newMean{ 17.0 };
   distributionFunction->SetMean(newMean);
-  ITK_TEST_SET_GET_VALUE(newMean, distributionFunction->GetMean());
+  EXPECT_EQ(newMean, distributionFunction->GetMean());
 
   distributionFunction->SetParameters(wrongParameters);
   constexpr double newVariance{ 42.0 };
   distributionFunction->SetVariance(newVariance);
-  ITK_TEST_SET_GET_VALUE(newVariance, distributionFunction->GetVariance());
+  EXPECT_EQ(newVariance, distributionFunction->GetVariance());
 
   constexpr double mean2{ 0.0 };
   constexpr double variance2{ 1.0 };
@@ -368,6 +323,4 @@ itkGaussianDistributionTest(int, char *[])
   DistributionType::ParametersType parameters1(1, 1.0);
   distributionFunction->SetParameters(parameters1);
   distributionFunction->Print(std::cout);
-
-  return status;
 }
