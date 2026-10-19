@@ -19,13 +19,11 @@
 #include "itkVectorImage.h"
 #include "itkDivideImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkDivideImageFilterTest2(int, char *[])
+TEST(DivideImageFilter, ConvertedLegacyTest2)
 {
-
   // Define the dimension of the images
   constexpr unsigned int Dimension{ 3 };
 
@@ -80,7 +78,7 @@ itkDivideImageFilterTest2(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, DivideImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, DivideImageFilter, BinaryGeneratorImageFilter);
 
   // Set the input images
   filter->SetInput1(inputImageA);
@@ -88,7 +86,7 @@ itkDivideImageFilterTest2(int, char *[])
 
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
 
   // Get the filter output
@@ -106,16 +104,8 @@ itkDivideImageFilterTest2(int, char *[])
   {
     for (unsigned int i = 0; i < oIt.GetImageDimension(); ++i)
     {
-      if (!itk::Math::FloatAlmostEqual(oIt.Get()[i], expectedValue, 2, epsilon))
-      {
-        std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-        std::cerr << "Test failed!" << std::endl;
-        std::cerr << "Error in pixel value at index [" << oIt.GetIndex() << ':' << i << ']' << std::endl;
-        std::cerr << "Expected value " << expectedValue << std::endl;
-        std::cerr << " differs from " << oIt.Get()[i];
-        std::cerr << " by more than " << epsilon << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(oIt.Get()[i], expectedValue, epsilon)
+        << "Error in pixel value at index [" << oIt.GetIndex() << ':' << i << ']';
     }
     ++oIt;
   }
@@ -123,10 +113,9 @@ itkDivideImageFilterTest2(int, char *[])
 
   // Check for exception if constant is 0
   filter->SetInput2(0.0);
-  ITK_TRY_EXPECT_EXCEPTION(filter->Update());
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
 
   // All objects should be automatically destroyed at this point
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
