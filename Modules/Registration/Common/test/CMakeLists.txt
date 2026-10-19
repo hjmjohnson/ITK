@@ -5,7 +5,6 @@ set(
   itkEuclideanDistancePointMetricTest.cxx
   itkImageRegistrationMethodTest_14.cxx
   itkImageRegistrationMethodTest_16.cxx
-  itkImageRegistrationMethodTest_2.cxx
   itkImageRegistrationMethodTest_3.cxx
   itkImageRegistrationMethodTest_4.cxx
   itkImageRegistrationMethodTest_5.cxx
@@ -230,12 +229,6 @@ itk_add_test(
     TestRecursive
 )
 itk_add_test(
-  NAME itkImageRegistrationMethodTest_2
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkImageRegistrationMethodTest_2
-)
-itk_add_test(
   NAME itkImageRegistrationMethodTest_3
   COMMAND
     ITKRegistrationCommonTestDriver
@@ -392,6 +385,7 @@ set(
   itkImageRegistrationMethodGTest_13.cxx
   itkImageRegistrationMethodGTest_15.cxx
   itkImageRegistrationMethodGTest_17.cxx
+  itkImageRegistrationMethodGTest_2.cxx
   itkTransformInitializersGTest.cxx
 )
 creategoogletestdriver(ITKRegistration "${ITKRegistrationCommon-Test_LIBRARIES}" "${ITKRegistrationGTests}")
