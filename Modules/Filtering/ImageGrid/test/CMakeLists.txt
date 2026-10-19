@@ -25,7 +25,6 @@ set(
   itkResampleImageTest2.cxx
   itkResampleImageTest2Streaming.cxx
   itkResampleImageTest3.cxx
-  itkResampleImageTest4.cxx
   itkResampleImageTest5.cxx
   itkResampleImageTest6.cxx
   itkResampleImageTest7.cxx
@@ -517,12 +516,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ResampleImageTest3.png
 )
 itk_add_test(
-  NAME itkResampleImageTest4
-  COMMAND
-    ITKImageGridTestDriver
-    itkResampleImageTest4
-)
-itk_add_test(
   NAME itkResampleImageTest5
   COMMAND
     ITKImageGridTestDriver
@@ -651,6 +644,7 @@ set(
   itkPermuteAxesImageFilterGTest.cxx
   itkRegionOfInterestImageFilterGTest.cxx
   itkResampleImageGTest.cxx
+  itkResampleImageGTest4.cxx
   itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
