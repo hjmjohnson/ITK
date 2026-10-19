@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKSpatialObjectsTests
   itkBoxSpatialObjectTest.cxx
-  itkDTITubeSpatialObjectTest.cxx
   itkEllipseSpatialObjectTest.cxx
   itkGaussianSpatialObjectTest.cxx
   itkImageMaskSpatialObjectTest.cxx
@@ -114,12 +113,6 @@ itk_add_test(
     itkTubeSpatialObjectTest
 )
 itk_add_test(
-  NAME itkDTITubeSpatialObjectTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkDTITubeSpatialObjectTest
-)
-itk_add_test(
   NAME itkSpatialObjectToPointSetFilterTest
   COMMAND
     ITKSpatialObjectsTestDriver
@@ -207,6 +200,7 @@ set(
   itkCastSpatialObjectFilterGTest.cxx
   itkContourSpatialObjectGTest.cxx
   itkContourSpatialObjectPointGTest.cxx
+  itkDTITubeSpatialObjectGTest.cxx
   itkSpatialObjectPointGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")
