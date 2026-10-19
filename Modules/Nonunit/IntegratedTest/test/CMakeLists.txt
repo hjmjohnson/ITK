@@ -5,7 +5,6 @@ set(
   itkReleaseDataFilterTest.cxx
   itkStatisticsPrintTest.cxx
   itkCommonPrintTest.cxx
-  itkIOPrintTest.cxx
   itkBasicFiltersPrintTest.cxx
   itkSpatialObjectPrintTest.cxx
   itkShrinkImagePreserveObjectPhysicalLocations.cxx
@@ -93,13 +92,6 @@ itk_add_test(
     itkSpatialObjectPrintTest
 )
 itk_add_test(
-  NAME itkIOPrintTest
-  COMMAND
-    ITKIntegratedTestTestDriver
-    itkIOPrintTest
-)
-
-itk_add_test(
   NAME itkCommonPrintTest
   COMMAND
     ITKIntegratedTestTestDriver
@@ -147,6 +139,10 @@ itk_add_test(
     itkShrinkImagePreserveObjectPhysicalLocations
 )
 
-set(ITKIntegratedTestGTests itkFilterImageAddGTest.cxx)
+set(
+  ITKIntegratedTestGTests
+  itkFilterImageAddGTest.cxx
+  itkIOPrintGTest.cxx
+)
 
 creategoogletestdriver(ITKIntegratedTest "${ITKIntegratedTest-Test_LIBRARIES}" "${ITKIntegratedTestGTests}")
