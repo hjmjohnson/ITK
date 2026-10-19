@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageFilterBaseTests
-  itkCastImageFilterTest.cxx
   itkImageToImageFilterTest.cxx
   itkMaskNeighborhoodOperatorImageFilterTest.cxx
   itkNeighborhoodOperatorImageFilterTest.cxx
@@ -15,7 +14,7 @@ set(
 # compiler, it will override any other optimization flag.
 if(DEFINED ITK_CXX_DISABLE_OPTIMIZATION_FLAG)
   set_source_files_properties(
-    itkCastImageFilterTest.cxx
+    itkCastImageFilterGTest.cxx
     PROPERTIES
       COMPILE_FLAGS
         ${ITK_CXX_DISABLE_OPTIMIZATION_FLAG}
@@ -55,12 +54,10 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/MaskNeighborhoodOperatorImageFilterTest.png
 )
-itk_add_test(
-  NAME itkCastImageFilterTest
-  COMMAND
-    ITKImageFilterBaseTestDriver
-    itkCastImageFilterTest
-)
 
-set(ITKImageFilterBaseGTests itkGeneratorImageFilterGTest.cxx)
+set(
+  ITKImageFilterBaseGTests
+  itkCastImageFilterGTest.cxx
+  itkGeneratorImageFilterGTest.cxx
+)
 creategoogletestdriver(ITKImageFilterBase "${ITKImageFilterBase-Test_LIBRARIES}" "${ITKImageFilterBaseGTests}")
