@@ -19,7 +19,10 @@
 #include <iostream>
 
 #include "itkRLEImage.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TImage>
 class itkRLEImageRegionConstIteratorWithOnlyIndexTestIteratorTester
 {
@@ -183,48 +186,28 @@ public:
 private:
   typename ImageType::Pointer m_Image;
 };
+} // namespace
 
-int
-itkRLEImageRegionConstIteratorWithOnlyIndexTest(int, char *[])
+TEST(RLEImageRegionConstIteratorWithOnlyIndex, ConvertedLegacyTest)
 {
-  bool testPassed = true; // let's be optimistic
-
   // Instantiate image of various types and
   // test the iterators on them
 
   {
     std::cout << "Testing with Image< char, 3 >... " << std::endl;
     itkRLEImageRegionConstIteratorWithOnlyIndexTestIteratorTester<itk::RLEImage<char>> Tester;
-    if (Tester.TestConstIterator() == false)
-    {
-      testPassed = false;
-    }
+    EXPECT_TRUE(Tester.TestConstIterator());
   }
 
   {
     std::cout << "Testing with ImageBase< 2 >... " << std::endl;
     itkRLEImageRegionConstIteratorWithOnlyIndexTestIteratorTester<itk::ImageBase<2>> Tester;
-    if (Tester.TestConstIterator() == false)
-    {
-      testPassed = false;
-    }
+    EXPECT_TRUE(Tester.TestConstIterator());
   }
 
   {
     std::cout << "Testing with ImageBase< 3 >... " << std::endl;
     itkRLEImageRegionConstIteratorWithOnlyIndexTestIteratorTester<itk::ImageBase<3>> Tester;
-    if (Tester.TestConstIterator() == false)
-    {
-      testPassed = false;
-    }
+    EXPECT_TRUE(Tester.TestConstIterator());
   }
-
-  if (!testPassed)
-  {
-    std::cout << "Failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Success" << std::endl;
-  return EXIT_SUCCESS;
 }
