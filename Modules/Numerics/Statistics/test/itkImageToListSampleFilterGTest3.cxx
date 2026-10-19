@@ -23,9 +23,9 @@
 #include "itkImageToListSampleFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkVectorImage.h"
+#include "itkGTest.h"
 
-int
-itkImageToListSampleFilterTest3(int, char *[])
+TEST(ImageToListSampleFilter, ConvertedLegacyTest3)
 {
   constexpr unsigned int MeasurementVectorSize{ 8 };
   using MeasurementComponentType = float;
@@ -96,15 +96,7 @@ itkImageToListSampleFilterTest3(int, char *[])
   filter->SetMaskImage(maskImage);
   filter->SetMaskValue(255);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NO_THROW(filter->Update());
 
   using ListSampleType = ImageToListSampleFilterType::ListSampleType;
   const ListSampleType * list = filter->GetOutput();
@@ -122,12 +114,5 @@ itkImageToListSampleFilterTest3(int, char *[])
 
   constexpr double epsilon{ 1e-6 };
 
-  if (itk::Math::Absolute(sum - 420.0) > epsilon)
-  {
-    std::cerr << "Computed sum of pixels in the list sample (masked) is : " << sum << " but should be 420.0";
-    return EXIT_FAILURE;
-  }
-
-  std::cerr << "[PASSED]" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(sum, 420.0, epsilon) << "Computed sum of pixels in the list sample (masked)";
 }
