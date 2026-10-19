@@ -20,9 +20,9 @@
 #include "itkImageRegionConstIteratorWithIndex.h"
 #include "itkNumericTraits.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-int
-itkDivideOrZeroOutImageFilterTest(int, char *[])
+TEST(DivideOrZeroOutImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using PixelType = float;
@@ -59,38 +59,19 @@ itkDivideOrZeroOutImageFilterTest(int, char *[])
     const ImageType::IndexType index = iter.GetIndex();
     if (index != zeroIndex)
     {
-      if (iter.Get() != 1.0f)
-      {
-        std::cerr << "Incorrect value. Got " << iter.Get() << ", expected 1.0" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.Get(), 1.0f) << "Incorrect value.";
     }
     else
     {
-      if (iter.Get() != 0.0f)
-      {
-        std::cerr << "Incorrect value when denominator is below threshold. "
-                  << "Got " << iter.Get() << ", expected 0.0" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.Get(), 0.0f) << "Incorrect value when denominator is below threshold.";
     }
   }
 
   divider->Print(std::cout);
 
   divider->SetThreshold(2.0f);
-  if (divider->GetThreshold() != 2.0f)
-  {
-    std::cerr << "Threshold not set correctly. Got " << divider->GetThreshold() << ", expected 2.0." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(divider->GetThreshold(), 2.0f) << "Threshold not set correctly.";
 
   divider->SetConstant(-2.3f);
-  if (itk::Math::NotExactlyEquals(divider->GetConstant(), -2.3f))
-  {
-    std::cerr << "Constant not set correctly. Got " << divider->GetConstant() << ", expected -2.3 ." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(divider->GetConstant(), -2.3f) << "Constant not set correctly.";
 }
