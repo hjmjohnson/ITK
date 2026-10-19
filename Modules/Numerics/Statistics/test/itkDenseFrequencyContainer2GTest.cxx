@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkDenseFrequencyContainer2.h"
+#include "itkGTest.h"
 
 
-int
-itkDenseFrequencyContainer2Test(int, char *[])
+TEST(DenseFrequencyContainer2, ConvertedLegacyTest)
 {
   std::cout << "DenseFrequencyContainer2 Test \n \n";
 
@@ -53,35 +53,18 @@ itkDenseFrequencyContainer2Test(int, char *[])
       // Test if the values can be read back
       const auto                  frequency = static_cast<AbsoluteFrequencyType>(bin * bin);
       const AbsoluteFrequencyType stored = container->GetFrequency(bin);
-      if (stored != frequency)
-      {
-        std::cout << "Failed !" << std::endl;
-        std::cout << "Stored Frequency in bin " << bin << " doesn't match value" << std::endl;
-        std::cout << "Value is = " << stored << " value should be " << frequency << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(stored, frequency) << "Stored Frequency in bin " << bin << " doesn't match value";
     }
 
     // Test Set/Get frequency of an out of bound bin
     constexpr unsigned int binOutOfBound{ numberOfBins };
     constexpr auto         frequency = static_cast<AbsoluteFrequencyType>(binOutOfBound * binOutOfBound);
 
-    if (container->SetFrequency(binOutOfBound, frequency))
-    {
-      std::cerr << "SetFrequency() method should have returned false boolean since the bin index is out of bound \n"
-                << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(container->SetFrequency(binOutOfBound, frequency))
+      << "SetFrequency() method should have returned false boolean since the bin index is out of bound";
 
-    if (container->GetFrequency(binOutOfBound) != AbsoluteFrequencyType{})
-    {
-      std::cerr << "GetFrequency() method should have returned zero frequency since the bin index is out of bound \n"
-                << std::endl;
-      return EXIT_FAILURE;
-    }
-
-
-    std::cout << " PASSED !" << std::endl;
+    EXPECT_EQ(container->GetFrequency(binOutOfBound), AbsoluteFrequencyType{})
+      << "GetFrequency() method should have returned zero frequency since the bin index is out of bound";
   } // end of SetFrequency() / GetFrequency() test
 
 
@@ -110,28 +93,12 @@ itkDenseFrequencyContainer2Test(int, char *[])
     {
       const auto                  frequency = static_cast<AbsoluteFrequencyType>(bin * bin + bin);
       const AbsoluteFrequencyType stored = container->GetFrequency(bin);
-      if (stored != frequency)
-      {
-        std::cout << "Failed !" << std::endl;
-        std::cout << "Stored Frequency in bin " << bin << " doesn't match value" << std::endl;
-        std::cout << "Value is = " << stored << " value should be " << frequency << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(stored, frequency) << "Stored Frequency in bin " << bin << " doesn't match value";
     }
     constexpr unsigned int binOutOfBound{ numberOfBins };
     constexpr auto         frequency = static_cast<AbsoluteFrequencyType>(binOutOfBound);
 
-    if (container->IncreaseFrequency(binOutOfBound, frequency))
-    {
-      std::cerr
-        << "IncreaseFrequency() method should have returned a false boolean since the bin index is out of bound \n"
-        << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    std::cout << " PASSED !" << std::endl;
+    EXPECT_FALSE(container->IncreaseFrequency(binOutOfBound, frequency))
+      << "IncreaseFrequency() method should have returned a false boolean since the bin index is out of bound";
   } // end of SetFrequency() / GetFrequency() test
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
