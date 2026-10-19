@@ -21,11 +21,10 @@
 #include "itkSinImageFilter.h"
 #include "itkSinImageAdaptor.h"
 #include "itkSubtractImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkSinImageFilterAndAdaptorTest(int, char *[])
+TEST(SinImageFilterAndAdaptor, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -72,7 +71,7 @@ itkSinImageFilterAndAdaptorTest(int, char *[])
   // Create the Filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, SinImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, SinImageFilter, UnaryGeneratorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -96,15 +95,7 @@ itkSinImageFilterAndAdaptorTest(int, char *[])
     const InputImageType::PixelType  input = it.Get();
     const OutputImageType::PixelType output = ot.Get();
     const OutputImageType::PixelType sinus = std::sin(input);
-    if (!itk::Math::FloatAlmostEqual(sinus, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " std::sin( " << input << ") = " << sinus << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(sinus, output, epsilon) << " std::sin( " << input << ")";
     ++ot;
     ++it;
   }
@@ -118,7 +109,7 @@ itkSinImageFilterAndAdaptorTest(int, char *[])
 
   auto sinAdaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(sinAdaptor, SinImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(sinAdaptor, SinImageAdaptor, ImageAdaptor);
 
   sinAdaptor->SetImage(inputImage);
 
@@ -144,17 +135,7 @@ itkSinImageFilterAndAdaptorTest(int, char *[])
   while (!dt.IsAtEnd())
   {
     const OutputImageType::PixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Error comparing results with Adaptors";
     ++dt;
   }
-
-  return EXIT_SUCCESS;
 }
