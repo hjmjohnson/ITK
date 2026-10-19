@@ -17,19 +17,20 @@
  *=========================================================================*/
 
 #include "itkDistanceMetric.h"
+#include "itkGTest.h"
 
-namespace itk::Statistics::DistanceMetricTest
+namespace
 {
 
 template <typename TMeasurementVector>
-class MyDistanceMetric : public DistanceMetric<TMeasurementVector>
+class MyDistanceMetric : public itk::Statistics::DistanceMetric<TMeasurementVector>
 {
 public:
   /** Standard class type alias. */
   using Self = MyDistanceMetric;
-  using Superclass = DistanceMetric<TMeasurementVector>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::Statistics::DistanceMetric<TMeasurementVector>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(MyDistanceMetric);
@@ -53,18 +54,17 @@ public:
   }
 };
 
-} // namespace itk::Statistics::DistanceMetricTest
+} // namespace
 
 
 // test DistanceMetric using resizable measurement vector type
-int
-itkDistanceMetricTest2(int, char *[])
+TEST(DistanceMetric, ConvertedLegacyTest2)
 {
 
   using MeasurementVectorType = itk::Array<float>;
 
 
-  using DistanceMetricType = itk::Statistics::DistanceMetricTest::MyDistanceMetric<MeasurementVectorType>;
+  using DistanceMetricType = MyDistanceMetric<MeasurementVectorType>;
 
   using MeasurementVectorSizeType = DistanceMetricType::MeasurementVectorSizeType;
 
@@ -78,42 +78,23 @@ itkDistanceMetricTest2(int, char *[])
   constexpr MeasurementVectorSizeType measurementVectorSize{ 3 };
   distance->SetMeasurementVectorSize(measurementVectorSize);
 
-  if (distance->GetMeasurementVectorSize() != measurementVectorSize)
-  {
-    std::cerr << "Error in Set/GetMeasurementVectorSize()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(distance->GetMeasurementVectorSize(), measurementVectorSize) << "Error in Set/GetMeasurementVectorSize()";
 
   // try re-setting the measurement vector size to the same value, no exceptions should be
   // thrown
-  try
   {
     constexpr MeasurementVectorSizeType sameSize{ 3 };
-    distance->SetMeasurementVectorSize(sameSize);
-  }
-  catch (const itk::ExceptionObject & excpt)
-  {
-    std::cerr << "Exception thrown: " << excpt << std::endl;
-    return EXIT_FAILURE;
+    ASSERT_NO_THROW(distance->SetMeasurementVectorSize(sameSize));
   }
 
 
   // try setting an origin vector with a different size it should throw an exception
-  try
   {
     DistanceMetricType::OriginType      origin;
     constexpr MeasurementVectorSizeType newSize{ 4 };
     origin.SetSize(newSize);
-    distance->SetOrigin(origin);
-
-    std::cerr << "Attempting to set an origin vector with a different size,"
-              << "should result in an exception" << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_THROW(distance->SetOrigin(origin), itk::ExceptionObject)
+      << "Attempting to set an origin vector with a different size,"
+      << "should result in an exception";
   }
-  catch (const itk::ExceptionObject & excpt)
-  {
-    std::cerr << "Exception thrown: " << excpt << std::endl;
-  }
-
-  return EXIT_SUCCESS;
 }
