@@ -6,7 +6,6 @@ set(
   itkLevelSetNeighborhoodExtractorTest.cxx
   itkNarrowBandCurvesLevelSetImageFilterTest.cxx
   itkParallelSparseFieldLevelSetImageFilterTest.cxx
-  itkShapePriorMAPCostFunctionTest.cxx
   itkShapePriorSegmentationLevelSetFunctionTest.cxx
   itkSparseFieldFourthOrderLevelSetImageFilterTest.cxx
   itkThresholdSegmentationLevelSetImageFilterTest.cxx
@@ -37,6 +36,7 @@ set(
   itkParallelSparseFieldLevelSetImageFilterRobustnessGTest.cxx
   itkReinitializeLevelSetImageFilterGTest.cxx
   itkShapeDetectionLevelSetImageFilterGTest.cxx
+  itkShapePriorMAPCostFunctionGTest.cxx
 )
 creategoogletestdriver(ITKLevelSets "${ITKLevelSets-Test_LIBRARIES}" "${ITKLevelSetsGTests}")
 
@@ -102,12 +102,6 @@ itk_add_test(
   COMMAND
     ITKLevelSetsTestDriver
     itkLevelSetNeighborhoodExtractorTest
-)
-itk_add_test(
-  NAME itkShapePriorMAPCostFunctionTest
-  COMMAND
-    ITKLevelSetsTestDriver
-    itkShapePriorMAPCostFunctionTest
 )
 itk_add_test(
   NAME itkSparseFieldFourthOrderLevelSetImageFilterTest
