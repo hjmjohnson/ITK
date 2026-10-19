@@ -3,7 +3,6 @@ set(
   ITKThresholdingTests
   itkBinaryThresholdImageFilterTest2.cxx
   itkBinaryThresholdProjectionImageFilterTest.cxx
-  itkBinaryThresholdSpatialFunctionTest.cxx
   itkHuangThresholdImageFilterTest.cxx
   itkIntermodesThresholdImageFilterTest.cxx
   itkIsoDataThresholdImageFilterTest.cxx
@@ -124,12 +123,6 @@ itk_add_test(
     0
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/HeadMRVolumeBinaryThresholdProjection.png
-)
-itk_add_test(
-  NAME itkBinaryThresholdSpatialFunctionTest
-  COMMAND
-    ITKThresholdingTestDriver
-    itkBinaryThresholdSpatialFunctionTest
 )
 
 itk_add_test(
@@ -1149,6 +1142,7 @@ itk_add_test(
 set(
   ITKThresholdingGTests
   itkBinaryThresholdImageFilterGTest.cxx
+  itkBinaryThresholdSpatialFunctionGTest.cxx
   itkMaximumEntropyThresholdCalculatorGTest.cxx
   itkRenyiEntropyThresholdCalculatorGTest.cxx
 )
