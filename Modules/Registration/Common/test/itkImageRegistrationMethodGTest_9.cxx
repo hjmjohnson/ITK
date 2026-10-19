@@ -24,6 +24,7 @@
 #include "itkCommandVnlIterationUpdate.h"
 
 #include "itkImageRegistrationMethodImageSource.h"
+#include "itkGTest.h"
 
 /**
  *  This program tests one instantiation of the itk::ImageRegistrationMethod class
@@ -31,8 +32,7 @@
  *
  */
 
-int
-itkImageRegistrationMethodTest_9(int argc, char * argv[])
+TEST(ImageRegistrationMethod, ConvertedLegacyTest9)
 {
 
   bool pass = true;
@@ -111,11 +111,6 @@ itkImageRegistrationMethodTest_9(int argc, char * argv[])
 
   double translationScale = 1.0;
 
-  if (argc > 1)
-  {
-    translationScale = std::stod(argv[2]);
-    std::cout << "translationScale = " << translationScale << std::endl;
-  }
 
   for (unsigned int i = 0; i < dimension; ++i)
   {
@@ -138,8 +133,7 @@ itkImageRegistrationMethodTest_9(int argc, char * argv[])
   }
   catch (const itk::ExceptionObject & e)
   {
-    std::cerr << e << std::endl;
-    return EXIT_FAILURE;
+    FAIL() << e;
   }
 
   // Set the parameters of the vnl optimizer
@@ -169,8 +163,7 @@ itkImageRegistrationMethodTest_9(int argc, char * argv[])
   }
   catch (const itk::ExceptionObject & e)
   {
-    std::cerr << e << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << e;
   }
 
   ParametersType actualParameters = imageSource->GetActualParameters();
@@ -194,12 +187,5 @@ itkImageRegistrationMethodTest_9(int argc, char * argv[])
   }
 
 
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test FAILED.";
 }
