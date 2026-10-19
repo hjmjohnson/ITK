@@ -8,6 +8,7 @@ itk_module(
   TEST_DEPENDS
     ITKTestKernel
     ITKIOMeshVTK
+    ITKGoogleTest
   DESCRIPTION
     "Convert an ITK Mesh to a PolyData data structure compatible with vtkPolyData, and back, with supporting filters."
   EXCLUDE_FROM_DEFAULT
