@@ -4,7 +4,6 @@ set(
   itkQuadEdgeMeshAddFaceTest1.cxx
   itkQuadEdgeMeshEulerOperatorJoinVertexTest.cxx
   itkQuadEdgeMeshScalarDataVTKPolyDataWriterTest1.cxx
-  itkQuadEdgeMeshTest2.cxx
   itkQuadEdgeMeshTest3.cxx
   itkQuadEdgeTest1.cxx
   itkVTKPolyDataIOQuadEdgeMeshTest.cxx
@@ -13,12 +12,6 @@ set(
 
 createtestdriver(ITKQuadEdgeMesh "${ITKQuadEdgeMesh-Test_LIBRARIES}" "${ITKQuadEdgeMeshTests}")
 
-itk_add_test(
-  NAME itkQuadEdgeMeshTest2
-  COMMAND
-    ITKQuadEdgeMeshTestDriver
-    itkQuadEdgeMeshTest2
-)
 itk_add_test(
   NAME itkQuadEdgeMeshTest3
   COMMAND
@@ -154,6 +147,7 @@ set(
   itkQuadEdgeMeshEulerOperatorSplitVertexGTest.cxx
   itkQuadEdgeMeshFrontIteratorGTest.cxx
   itkQuadEdgeMeshGTest1.cxx
+  itkQuadEdgeMeshGTest2.cxx
   itkQuadEdgeMeshIteratorGTest.cxx
   itkQuadEdgeMeshNoPointConstGTest.cxx
   itkQuadEdgeMeshPointGTest1.cxx
