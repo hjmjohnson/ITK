@@ -19,10 +19,9 @@
 #include <iostream>
 #include "itkRGBPixel.h"
 #include "itkComposeImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkComposeRGBImageFilterTest(int, char *[])
+TEST(ComposeRGBImageFilter, ConvertedLegacyTest)
 {
   using PixelType = unsigned char;
   using InputImageType = itk::Image<PixelType, 3>;
@@ -61,7 +60,7 @@ itkComposeRGBImageFilterTest(int, char *[])
   filter->SetInput2(greenImage);
   filter->SetInput3(blueImage);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
   const OutputImageType::Pointer rgbImage = filter->GetOutput();
 
@@ -85,27 +84,12 @@ itkComposeRGBImageFilterTest(int, char *[])
   while (!ot.IsAtEnd())
   {
     const OutputPixelType outp = ot.Get();
-    if (ir.Get() != outp.GetRed())
-    {
-      std::cerr << "Error in red component" << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (ig.Get() != outp.GetGreen())
-    {
-      std::cerr << "Error in green component" << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (ib.Get() != outp.GetBlue())
-    {
-      std::cerr << "Error in blue component" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(ir.Get(), outp.GetRed()) << "Error in red component";
+    EXPECT_EQ(ig.Get(), outp.GetGreen()) << "Error in green component";
+    EXPECT_EQ(ib.Get(), outp.GetBlue()) << "Error in blue component";
     ++ot;
     ++ir;
     ++ig;
     ++ib;
   }
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
