@@ -18,7 +18,6 @@ set(
   itkRobustAutomaticThresholdImageFilterTest.cxx
   itkScalarChanAndVeseDenseLevelSetImageFilterTest2.cxx
   itkScalarChanAndVeseDenseLevelSetImageFilterTest4.cxx
-  itkScalarChanAndVeseLevelSetFunctionTest2.cxx
   itkScalarChanAndVeseSparseLevelSetImageFilterTest2.cxx
   itkScalarRegionBasedLevelSetFunctionTest.cxx
   itkShapedFloodFilledImageFunctionConditionalConstIteratorTest1.cxx
@@ -430,12 +429,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkScalarChanAndVeseDenseLevelSetImageFilterTest4.mha
 )
 itk_add_test(
-  NAME itkScalarChanAndVeseLevelSetFunctionTest2
-  COMMAND
-    ITKReviewTestDriver
-    itkScalarChanAndVeseLevelSetFunctionTest2
-)
-itk_add_test(
   NAME itkScalarChanAndVeseSparseLevelSetImageFilterTest2
   COMMAND
     ITKReviewTestDriver
@@ -620,6 +613,7 @@ set(
   itkScalarChanAndVeseDenseLevelSetImageFilterGTest1.cxx
   itkScalarChanAndVeseDenseLevelSetImageFilterGTest3.cxx
   itkScalarChanAndVeseLevelSetFunctionGTest1.cxx
+  itkScalarChanAndVeseLevelSetFunctionGTest2.cxx
   itkScalarChanAndVeseSparseLevelSetImageFilterGTest1.cxx
 )
 creategoogletestdriver(ITKReview "${ITKReview-Test_LIBRARIES}" "${ITKReviewGTests}")
