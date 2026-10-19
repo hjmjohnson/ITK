@@ -18,10 +18,10 @@
 
 #include "itkListSample.h"
 #include "itkKdTreeGenerator.h"
+#include "itkGTest.h"
 #include <fstream>
 
-int
-itkKdTreeTestSamplePoints(int, char *[])
+TEST(KdTree, ConvertedLegacyTestSamplePoints)
 {
   using MeasurementVectorType = itk::Array<double>;
   using SampleType = itk::Statistics::ListSample<MeasurementVectorType>;
@@ -185,6 +185,4 @@ itkKdTreeTestSamplePoints(int, char *[])
   plotFile.open("plot.dot");
   tree->PlotTree(plotFile);
   plotFile.close();
-
-  return EXIT_SUCCESS;
 }
