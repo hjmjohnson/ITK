@@ -68,7 +68,6 @@ set(
   itkObjectFactoryOnlyNewTest.cxx
   itkSliceIteratorTest.cxx
   itkImageFillBufferTest.cxx
-  itkMemoryLeakTest.cxx
   itkVectorGeometryTest.cxx
   itkVNLRoundProfileTest1.cxx
   itkOptimizerParametersTest.cxx
@@ -471,18 +470,6 @@ itk_add_test(
     ITKCommon1TestDriver
     itkPointGeometryTest
 )
-
-#
-# This test should be enabled if you suspect that the memory leak detector
-# is not working
-if(0)
-  itk_add_test(
-    NAME itkMemoryLeakTest
-    COMMAND
-      ITKCommon2TestDriver
-      itkMemoryLeakTest
-  )
-endif()
 
 itk_add_test(
   NAME itkMetaDataDictionaryTest
@@ -1354,6 +1341,12 @@ set(
   SparseLUSolverTraitsGTest.cxx
   VnlEigenSparseLUEquivalenceGTest.cxx
 )
+#
+# This test should be enabled if you suspect that the memory leak detector
+# is not working
+if(0)
+  list(APPEND ITKCommonGTests itkMemoryLeakGTest.cxx)
+endif()
 creategoogletestdriver(ITKCommon "${ITKCommon-Test_LIBRARIES}" "${ITKCommonGTests}")
 # If `-static` was passed to CMAKE_EXE_LINKER_FLAGS, compilation fails. No need to
 # test this case.
