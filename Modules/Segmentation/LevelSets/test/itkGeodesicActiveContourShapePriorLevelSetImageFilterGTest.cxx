@@ -28,7 +28,7 @@
 
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkSimilarityIndexImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /** \class ShowIterationObject
  * This class is used to support callbacks
@@ -55,8 +55,7 @@ public:
 };
 } // namespace
 
-int
-itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
+TEST(GeodesicActiveContourShapePriorLevelSetImageFilter, ConvertedLegacyTest)
 {
   // Typedefs of components
   constexpr unsigned int ImageDimension{ 2 };
@@ -80,7 +79,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   auto costFunction = CostFunctionType::New();
   auto optimizer = OptimizerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     filter, GeodesicActiveContourShapePriorLevelSetImageFilter, ShapePriorSegmentationLevelSetImageFilter);
 
   ImageType::SizeType imageSize;
@@ -302,7 +301,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
     std::cout << err << std::endl;
     std::cout << "Caught unexpected exception." << std::endl;
     std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   // Print useful information from the shape detection filter
@@ -348,16 +347,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   */
 
   // Check if overlap is above threshold
-  if (overlap->GetSimilarityIndex() > 0.93)
-  {
-    std::cout << "Overlap exceed threshold." << std::endl;
-  }
-  else
-  {
-    std::cout << "Overlap below threshold." << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GT(overlap->GetSimilarityIndex(), 0.93);
 
   // Exercise other methods for coverage
   filter->Print(std::cout);
@@ -404,11 +394,7 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   }                                                                           \
   filter->Set##ComponentName(goodComponent);                                  \
                                                                               \
-  if (!pass)                                                                  \
-  {                                                                           \
-    std::cout << "Test failed." << std::endl;                                 \
-    return EXIT_FAILURE;                                                      \
-  }                                                                           \
+  EXPECT_TRUE(pass);                                                          \
   ITK_MACROEND_NOOP_STATEMENT
 
   TEST_INITIALIZATION_ERROR(ShapeFunction, nullptr, shape);
@@ -420,5 +406,4 @@ itkGeodesicActiveContourShapePriorLevelSetImageFilterTest(int, char *[])
   TEST_INITIALIZATION_ERROR(InitialParameters, badParameters, parameters);
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
