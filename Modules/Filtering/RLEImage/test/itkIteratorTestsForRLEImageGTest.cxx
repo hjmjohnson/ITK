@@ -21,10 +21,10 @@
 #include "itkImage.h"
 #include "itkRLEImage.h"
 #include "itkVector.h"
+#include "itkGTest.h"
 #include <ctime>
 
-int
-itkIteratorTestsForRLEImage(int, char *[])
+TEST(IteratorTestsForRLEImage, ConvertedLegacyTest)
 {
   std::cout << "Creating an image" << std::endl;
   using ScalarImage = itk::RLEImage<unsigned short>;
@@ -63,7 +63,6 @@ itkIteratorTestsForRLEImage(int, char *[])
   clock_t       start, end;
   unsigned long num = regionSize3D[0] * regionSize3D[1] * regionSize3D[2];
   unsigned long i;
-  bool          passed = true;
 
   // ImageRegionIterator
   start = clock();
@@ -85,10 +84,7 @@ itkIteratorTestsForRLEImage(int, char *[])
   std::cout << "\tTime   = " << elapsedTime << std::endl;
   std::cout << "\tPixels = " << i << std::endl;
 
-  if (i != num)
-  {
-    passed = false;
-  }
+  EXPECT_EQ(i, num);
 
   // ImageRegionIteratorWithIndex
   start = clock();
@@ -107,19 +103,5 @@ itkIteratorTestsForRLEImage(int, char *[])
   std::cout << "\tTime   = " << elapsedTime << std::endl;
   std::cout << "\tPixels = " << i << std::endl;
 
-  if (i != num)
-  {
-    passed = false;
-  }
-
-  if (passed)
-  {
-    std::cout << "Iterator tests passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-  else
-  {
-    std::cout << "Iterator tests failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(i, num);
 }
