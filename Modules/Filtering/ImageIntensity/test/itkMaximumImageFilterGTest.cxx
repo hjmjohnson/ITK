@@ -18,13 +18,11 @@
 
 #include "itkMaximumImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkMaximumImageFilterTest(int, char *[])
+TEST(MaximumImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int Dimension{ 3 };
 
@@ -71,7 +69,7 @@ itkMaximumImageFilterTest(int, char *[])
   // Create the filter
   auto maximumImageFilter = MaximumImageFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(maximumImageFilter, MaximumImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(maximumImageFilter, MaximumImageFilter, BinaryGeneratorImageFilter);
 
   // Connect the input images
   maximumImageFilter->SetInput1(inputImageA);
@@ -90,9 +88,8 @@ itkMaximumImageFilterTest(int, char *[])
 
   constexpr ImageType::IndexType pixelIndex{ 0, 1, 1 };
 
-  ITK_TEST_EXPECT_EQUAL(outputImage->GetPixel({}), largePixelValue);
-  ITK_TEST_EXPECT_EQUAL(outputImage->GetPixel(pixelIndex), largePixelValue);
+  EXPECT_EQ(outputImage->GetPixel({}), largePixelValue);
+  EXPECT_EQ(outputImage->GetPixel(pixelIndex), largePixelValue);
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
