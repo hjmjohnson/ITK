@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKTestKernelTests
   itkRandomImageSourceValuesTest.cxx
-  itkTestingExtractSliceImageFilterTest.cxx
   itkTestingStretchIntensityImageFilterTest.cxx
 )
 
@@ -25,13 +24,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkTestingExtractSliceImageFilterTest
-  COMMAND
-    ITKTestKernelTestDriver
-    itkTestingExtractSliceImageFilterTest
-)
-
-itk_add_test(
   NAME itkTestingStretchIntensityImageFilterTest
   COMMAND
     ITKTestKernelTestDriver
@@ -44,6 +36,7 @@ set(
   itkGoogleTestFixture.cxx
   itkRandomImageSourceAttributesGTest.cxx
   itkTestingComparisonImageFilterGTest.cxx
+  itkTestingExtractSliceImageFilterGTest.cxx
   itkUtf8FilenameGTest.cxx
 )
 
