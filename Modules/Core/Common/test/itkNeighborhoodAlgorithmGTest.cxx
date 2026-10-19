@@ -19,7 +19,10 @@
 
 #include "itkNeighborhoodAlgorithm.h"
 #include "itkConstNeighborhoodIterator.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TImage>
 bool
 ImageBoundaryFaceCalculatorTest(TImage *                          image,
@@ -201,29 +204,15 @@ NeighborhoodAlgorithmTest()
 
   return true;
 }
+} // namespace
 
-int
-itkNeighborhoodAlgorithmTest(int, char *[])
+TEST(NeighborhoodAlgorithm, ConvertedLegacyTest)
 {
-  if (!NeighborhoodAlgorithmTest<int, 1>())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE((NeighborhoodAlgorithmTest<int, 1>()));
 
-  if (!NeighborhoodAlgorithmTest<int, 2>())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE((NeighborhoodAlgorithmTest<int, 2>()));
 
-  if (!NeighborhoodAlgorithmTest<int, 3>())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE((NeighborhoodAlgorithmTest<int, 3>()));
 
-  if (!NeighborhoodAlgorithmTest<int, 4>())
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE((NeighborhoodAlgorithmTest<int, 4>()));
 }
