@@ -19,14 +19,12 @@
 #include "itkAddImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <complex>
 
 
-int
-itkAddImageFilterTest(int, char *[])
+TEST(AddImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int Dimension{ 3 };
 
@@ -79,7 +77,7 @@ itkAddImageFilterTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, AddImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, AddImageFilter, BinaryGeneratorImageFilter);
 
   // Connect the input images
   filter->SetInput1(inputImageA);
@@ -87,7 +85,7 @@ itkAddImageFilterTest(int, char *[])
 
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
 
   // Get the filter output
@@ -102,13 +100,7 @@ itkAddImageFilterTest(int, char *[])
   constexpr auto expectedValue = static_cast<OutputImageType::PixelType>(valueA + valueB);
   while (!oIt.IsAtEnd())
   {
-    if (!itk::Math::ExactlyEquals(oIt.Get(), expectedValue))
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in pixel value at index [" << oIt.GetIndex() << ']' << std::endl;
-      std::cerr << "Expected: " << expectedValue << ", but got: " << oIt.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(oIt.Get(), expectedValue) << "Error in pixel value at index [" << oIt.GetIndex() << ']';
     ++oIt;
   }
 
@@ -123,7 +115,7 @@ itkAddImageFilterTest(int, char *[])
     using FilterType2 = itk::AddImageFilter<ImageType2, ImageType2, ImageType2>;
     auto filter2 = FilterType2::New();
 
-    ITK_TEST_EXPECT_TRUE(!filter2.IsNull());
+    EXPECT_FALSE(filter2.IsNull());
   }
 
   {
@@ -137,11 +129,10 @@ itkAddImageFilterTest(int, char *[])
 
     auto filter3 = FilterType3::New();
 
-    ITK_TEST_EXPECT_TRUE(!filter3.IsNull());
+    EXPECT_FALSE(filter3.IsNull());
   }
 
 
   // All objects should be automatically destroyed at this point
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
