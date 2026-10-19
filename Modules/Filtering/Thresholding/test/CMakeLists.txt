@@ -14,7 +14,6 @@ set(
   itkOtsuMultipleThresholdsCalculatorTest2.cxx
   itkOtsuMultipleThresholdsImageFilterTest.cxx
   #itkOtsuThresholdCalculatorVersusOtsuMultipleThresholdsCalculatorTest.cxx
-  itkOtsuThresholdCalculatorTest.cxx
   itkOtsuThresholdImageFilterTest.cxx
   itkRenyiEntropyThresholdImageFilterTest.cxx
   itkShanbhagThresholdImageFilterTest.cxx
@@ -39,13 +38,6 @@ set(
 )
 
 createtestdriver(ITKThresholding "${ITKThresholding-Test_LIBRARIES}" "${ITKThresholdingTests}")
-
-itk_add_test(
-  NAME itkOtsuThresholdCalculatorTest
-  COMMAND
-    ITKThresholdingTestDriver
-    itkOtsuThresholdCalculatorTest
-)
 
 itk_add_test(
   NAME itkOtsuMultipleThresholdsImageFilterTest
@@ -1144,6 +1136,7 @@ set(
   itkBinaryThresholdImageFilterGTest.cxx
   itkBinaryThresholdSpatialFunctionGTest.cxx
   itkMaximumEntropyThresholdCalculatorGTest.cxx
+  itkOtsuThresholdCalculatorGTest.cxx
   itkRenyiEntropyThresholdCalculatorGTest.cxx
 )
 
