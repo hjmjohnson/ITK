@@ -17,12 +17,11 @@
  *=========================================================================*/
 // Disable warning for long symbol names in this file only
 
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkSurfaceSpatialObject.h"
 #include "itkMath.h"
 
-int
-itkSurfaceSpatialObjectTest(int, char *[])
+TEST(SurfaceSpatialObject, ConvertedLegacyTest)
 {
   using SurfaceType = itk::SurfaceSpatialObject<3>;
   using SurfacePointer = SurfaceType::Pointer;
@@ -64,11 +63,7 @@ itkSurfaceSpatialObjectTest(int, char *[])
   std::cout << "Testing Consistency: " << std::endl;
   std::cout << "Number of Points: ";
 
-  if (Surface->GetPoints().size() != 10)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(Surface->GetPoints().size(), 10u) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -83,23 +78,11 @@ itkSurfaceSpatialObjectTest(int, char *[])
   {
     for (unsigned int d = 0; d < 3; ++d)
     {
-      if (itk::Math::NotExactlyEquals(it->GetPositionInWorldSpace()[d], i + d))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetPositionInWorldSpace()[d], i + d) << "[FAILED]";
 
-      if (itk::Math::NotExactlyEquals(it->GetNormalInObjectSpace()[d], d))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetNormalInObjectSpace()[d], d) << "[FAILED]";
 
-      if (itk::Math::NotExactlyEquals(it->GetNormalInWorldSpace()[d], d))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetNormalInWorldSpace()[d], d) << "[FAILED]";
     }
     it++;
     i++;
@@ -118,27 +101,16 @@ itkSurfaceSpatialObjectTest(int, char *[])
   out[1] = 0;
   out[2] = 0;
 
-  if (!Surface->IsInsideInWorldSpace(in))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Surface->IsInsideInWorldSpace(in)) << "[FAILED]";
 
-  if (Surface->IsInsideInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(Surface->IsInsideInWorldSpace(out)) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
   // Testing IsEvaluableAt()
   std::cout << "IsEvaluableAt: ";
-  if (!Surface->IsEvaluableAtInWorldSpace(in) || Surface->IsEvaluableAtInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Surface->IsEvaluableAtInWorldSpace(in)) << "[FAILED]";
+  EXPECT_FALSE(Surface->IsEvaluableAtInWorldSpace(out)) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
 
@@ -146,17 +118,9 @@ itkSurfaceSpatialObjectTest(int, char *[])
   std::cout << "ValueAt: ";
 
   double value = NAN;
-  if (!Surface->ValueAtInWorldSpace(in, value))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Surface->ValueAtInWorldSpace(in, value)) << "[FAILED]";
 
-  if (itk::Math::NotExactlyEquals(value, 1))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(value, 1) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   // Test Copy and Assignment for SurfacePointType
@@ -183,12 +147,12 @@ itkSurfaceSpatialObjectTest(int, char *[])
 
     for (size_t j = 0; j < 3; ++j)
     {
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetNormalInWorldSpace()[j], normal[j]));
+      EXPECT_DOUBLE_EQ(pOriginal.GetNormalInWorldSpace()[j], normal[j]);
     }
     pOriginal.SetNormalInWorldSpace(normal);
     for (size_t j = 0; j < 3; ++j)
     {
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetNormalInObjectSpace()[j], normal[j]));
+      EXPECT_DOUBLE_EQ(pOriginal.GetNormalInObjectSpace()[j], normal[j]);
     }
 
     // Copy
@@ -201,27 +165,23 @@ itkSurfaceSpatialObjectTest(int, char *[])
     for (const auto & pv : pointVector)
     {
       // itk::SpatialObjectPoint
-      ITK_TEST_EXPECT_EQUAL(pOriginal.GetId(), pv.GetId());
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetRed(), pv.GetRed()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetGreen(), pv.GetGreen()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetBlue(), pv.GetBlue()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetAlpha(), pv.GetAlpha()));
+      EXPECT_EQ(pOriginal.GetId(), pv.GetId());
+      EXPECT_DOUBLE_EQ(pOriginal.GetRed(), pv.GetRed());
+      EXPECT_DOUBLE_EQ(pOriginal.GetGreen(), pv.GetGreen());
+      EXPECT_DOUBLE_EQ(pOriginal.GetBlue(), pv.GetBlue());
+      EXPECT_DOUBLE_EQ(pOriginal.GetAlpha(), pv.GetAlpha());
       for (size_t j = 0; j < 3; ++j)
       {
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetPositionInObjectSpace()[j], pv.GetPositionInObjectSpace()[j]));
+        EXPECT_DOUBLE_EQ(pOriginal.GetPositionInObjectSpace()[j], pv.GetPositionInObjectSpace()[j]);
       }
       // itk::SurfaceSpatialObjectPoint
       for (size_t j = 0; j < 3; ++j)
       {
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetNormalInObjectSpace()[j], pv.GetNormalInObjectSpace()[j]));
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetNormalInWorldSpace()[j], pv.GetNormalInObjectSpace()[j]));
+        EXPECT_DOUBLE_EQ(pOriginal.GetNormalInObjectSpace()[j], pv.GetNormalInObjectSpace()[j]);
+        EXPECT_DOUBLE_EQ(pOriginal.GetNormalInWorldSpace()[j], pv.GetNormalInObjectSpace()[j]);
       }
     }
   }
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
