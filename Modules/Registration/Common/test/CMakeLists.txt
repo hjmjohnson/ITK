@@ -3,7 +3,6 @@ set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
   itkEuclideanDistancePointMetricTest.cxx
-  itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest.cxx
   itkGaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest.cxx
   itkHistogramImageToImageMetricTest.cxx
   itkImageRegistrationMethodTest.cxx
@@ -59,12 +58,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkGaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorTest
-)
-itk_add_test(
-  NAME itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest
 )
 itk_add_test(
   NAME itkMultiResolutionImageRegistrationMethodTest_1
@@ -445,6 +438,7 @@ set(
   itkCompareHistogramImageToImageMetricGTest.cxx
   itkCorrelationCoefficientHistogramImageToImageMetricGTest.cxx
   itkDisplacementFieldTransformParametersAdaptorGTest.cxx
+  itkGaussianExponentialDiffeomorphicTransformParametersAdaptorGTest.cxx
   itkGradientDifferenceImageToImageMetricGTest.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
