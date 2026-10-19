@@ -19,7 +19,10 @@
 #include <iostream>
 #include "itkVectorLinearInterpolateImageFunction.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
+namespace
+{
 enum
 {
   VectorDimension = 3
@@ -157,13 +160,10 @@ TestContinuousIndex(const InterpolatorType *    interp,
   std::cout << std::endl;
   return true;
 }
+} // namespace
 
-int
-itkVectorInterpolateImageFunctionTest(int, char *[])
+TEST(VectorInterpolateImageFunction, ConvertedLegacyTest)
 {
-  int flag = 0;
-
-  std::cout << "Testing vector image interpolation: " << std::endl;
 
   constexpr ImageType::SizeType size{ 20, 40, 80 };
   constexpr double              origin[3]{ 0.5, 0.5, 0.5 };
@@ -228,29 +228,17 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     passed = TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
   IndexType index;
   index[0] = 10;
   index[1] = 20;
   index[2] = 40;
-  if (interp->EvaluateAtIndex(index) != output)
-  {
-    std::cout << "Index: " << index;
-    std::cout << "Value: " << interp->EvaluateAtIndex(index) << std::endl;
-    std::cout << "Error: true value should be " << output << std::endl;
-    flag = 1;
-  }
+  EXPECT_EQ(interp->EvaluateAtIndex(index), output) << "Index: " << index;
 
 
   // position at the image border
@@ -262,18 +250,12 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     passed = TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position near image border
   {
@@ -285,18 +267,12 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     passed = TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // position outside the image
   {
@@ -307,18 +283,12 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     passed = TestContinuousIndex(interp, cindex, false, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = TestGeometricPoint(interp, point, false, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   // at non-integer position
   {
@@ -329,29 +299,10 @@ itkVectorInterpolateImageFunctionTest(int, char *[])
     passed = TestContinuousIndex(interp, cindex, true, output);
   }
 
-  if (!passed)
-  {
-    flag = 1;
-  }
+  EXPECT_TRUE(passed);
 
   image->TransformContinuousIndexToPhysicalPoint(cindex, point);
   passed = TestGeometricPoint(interp, point, true, output);
 
-  if (!passed)
-  {
-    flag = 1;
-  }
-
-
-  // Return results of test
-  if (flag != 0)
-  {
-    std::cout << "*** Some test failed" << std::endl;
-    return flag;
-  }
-
-  std::cout << "All tests successfully passed" << std::endl;
-
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed);
 }
