@@ -26,9 +26,9 @@
 #include "itkOnePlusOneEvolutionaryOptimizer.h"
 #include "itkQuaternionRigidTransformGradientDescentOptimizer.h"
 #include "itkVersorTransformOptimizer.h"
+#include "itkGTest.h"
 
-int
-itkNumericsPrintTest(int, char *[])
+TEST(NumericsPrint, ConvertedLegacyTest)
 {
   const itk::AmoebaOptimizer::Pointer AmoebaOptimizerObj = itk::AmoebaOptimizer::New();
   std::cout << "----------AmoebaOptimizer " << AmoebaOptimizerObj;
@@ -92,6 +92,4 @@ itkNumericsPrintTest(int, char *[])
 
   const itk::VersorTransformOptimizer::Pointer VersorTransformOptimizerObj = itk::VersorTransformOptimizer::New();
   std::cout << "----------VersorTransformOptimizer " << VersorTransformOptimizerObj;
-
-  return 0;
 }
