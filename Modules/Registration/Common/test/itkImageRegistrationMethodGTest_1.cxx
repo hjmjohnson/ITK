@@ -22,7 +22,7 @@
 #include "itkGradientDescentOptimizer.h"
 
 #include "itkImageRegistrationMethodImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  *  This program tests one instantiation of the itk::ImageRegistrationMethod class
@@ -30,8 +30,7 @@
  *
  */
 
-int
-itkImageRegistrationMethodTest_1(int argc, char * argv[])
+TEST(ImageRegistrationMethod, ConvertedLegacyTest1)
 {
 
   bool pass = true;
@@ -79,7 +78,7 @@ itkImageRegistrationMethodTest_1(int argc, char * argv[])
 
   auto imageSource = ImageSourceType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(imageSource, ImageRegistrationMethodImageSource, Object);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(imageSource, ImageRegistrationMethodImageSource, Object);
 
 
   auto size = SizeType::Filled(100);
@@ -116,21 +115,6 @@ itkImageRegistrationMethodTest_1(int argc, char * argv[])
   double        translationScale = 1e-6;
   double        learningRate = 1e-8;
 
-  if (argc > 1)
-  {
-    numberOfIterations = atol(argv[1]);
-    std::cout << "numberOfIterations = " << numberOfIterations << std::endl;
-  }
-  if (argc > 2)
-  {
-    translationScale = std::stod(argv[2]);
-    std::cout << "translationScale = " << translationScale << std::endl;
-  }
-  if (argc > 3)
-  {
-    learningRate = std::stod(argv[3]);
-    std::cout << "learningRate = " << learningRate << std::endl;
-  }
 
   for (unsigned int i = 0; i < Dimension; ++i)
   {
@@ -190,12 +174,5 @@ itkImageRegistrationMethodTest_1(int argc, char * argv[])
   const TransformType::ConstPointer finalTransform = static_cast<const TransformType *>(transformDecorator->Get());
 
 
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test FAILED.";
 }
