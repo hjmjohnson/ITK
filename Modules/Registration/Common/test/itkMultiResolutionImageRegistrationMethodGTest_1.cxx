@@ -21,7 +21,7 @@
 #include "itkMersenneTwisterRandomVariateGenerator.h"
 #include "itkTextOutput.h"
 #include "itkSimpleMultiResolutionImageRegistrationUI.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -72,8 +72,7 @@ F(itk::Vector<double, 3> & v);
  *
  */
 
-int
-itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
+TEST(MultiResolutionImageRegistrationMethod, ConvertedLegacyTest1)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -270,9 +269,7 @@ itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
     }
     catch (const itk::ExceptionObject & e)
     {
-      std::cout << "Registration failed" << std::endl;
-      std::cout << "Reason " << e.GetDescription() << std::endl;
-      return EXIT_FAILURE;
+      ADD_FAILURE() << "Registration failed" << std::endl << "Reason " << e.GetDescription();
     }
 
     /***********************************************************
@@ -308,11 +305,7 @@ itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
       }
     }
 
-    if (!pass)
-    {
-      std::cout << "Test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(pass) << "Test failed.";
 
     // store the schedules for fixed and moving images. These schedules will be
     // used by the second registration run.
@@ -326,24 +319,8 @@ itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
     const double oldValue = metric->GetMovingImageStandardDeviation();
     metric->SetMovingImageStandardDeviation(0.005);
 
-    try
-    {
-      pass = false;
-      registration->Update();
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << "Caught expected ExceptionObject" << std::endl;
-      std::cout << err << std::endl;
-      pass = true;
-    }
-
-    if (!pass)
-    {
-      std::cout << "Should have caught an exception" << std::endl;
-      std::cout << "Test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(registration->Update(), itk::ExceptionObject) << "Should have caught an exception" << std::endl
+                                                               << "Test failed.";
 
     metric->SetMovingImageStandardDeviation(oldValue);
 
@@ -354,47 +331,17 @@ itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
     solution[5] = 1000;
     registration->SetInitialTransformParameters(solution);
 
-    try
-    {
-      pass = false;
-      registration->Update();
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << "Caught expected ExceptionObject" << std::endl;
-      std::cout << err << std::endl;
-      pass = true;
-    }
-
-    if (!pass)
-    {
-      std::cout << "Should have caught an exception" << std::endl;
-      std::cout << "Test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(registration->Update(), itk::ExceptionObject) << "Should have caught an exception" << std::endl
+                                                               << "Test failed.";
 
 
     /* To avoid confusion, SetNumberOfLevels and SetSchedules are not allowed to be
      * used together. An exception is thrown if SetSchedules() is invoked after
      * invoking SetNumberOfLevels */
-    try
-    {
-      registration->SetNumberOfLevels(numberOfLevels);
-      registration->SetSchedules(fixedImageSchedule, movingImageSchedule);
-      pass = false;
-    }
-    catch (const itk::ExceptionObject & e)
-    {
-      std::cout << "Expected exception is thrown since we tried to set schedules after"
-                << " setting the number of levels" << std::endl;
-      std::cout << "Reason " << e.GetDescription() << std::endl;
-    }
-
-    if (!pass)
-    {
-      std::cout << "Test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    registration->SetNumberOfLevels(numberOfLevels);
+    EXPECT_THROW(registration->SetSchedules(fixedImageSchedule, movingImageSchedule), itk::ExceptionObject)
+      << "Expected exception is thrown since we tried to set schedules after"
+      << " setting the number of levels";
   }
 
   /* The second registration uses user defined schedules. For testing purpose, we
@@ -483,8 +430,8 @@ itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
     {
       metric->ReinitializeSeed(itk::Statistics::MersenneTwisterRandomVariateGenerator::DefaultSeed);
       registration->SetSchedules(fixedImageSchedule, movingImageSchedule);
-      ITK_TEST_SET_GET_VALUE(fixedImageSchedule, registration->GetFixedImagePyramidSchedule());
-      ITK_TEST_SET_GET_VALUE(movingImageSchedule, registration->GetMovingImagePyramidSchedule());
+      EXPECT_EQ(fixedImageSchedule, registration->GetFixedImagePyramidSchedule());
+      EXPECT_EQ(movingImageSchedule, registration->GetMovingImagePyramidSchedule());
 
       registration->SetInitialTransformParameters(initialParameters);
 
@@ -492,9 +439,7 @@ itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
     }
     catch (const itk::ExceptionObject & e)
     {
-      std::cout << "Registration failed" << std::endl;
-      std::cout << "Reason " << e.GetDescription() << std::endl;
-      return EXIT_FAILURE;
+      ADD_FAILURE() << "Registration failed" << std::endl << "Reason " << e.GetDescription();
     }
 
 
@@ -531,15 +476,8 @@ itkMultiResolutionImageRegistrationMethodTest_1(int, char *[])
       }
     }
 
-    if (!pass)
-    {
-      std::cout << "Test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(pass) << "Test failed.";
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
 
 namespace

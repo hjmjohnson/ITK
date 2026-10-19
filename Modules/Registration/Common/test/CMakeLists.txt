@@ -9,7 +9,6 @@ set(
   itkKappaStatisticImageToImageMetricTest.cxx
   itkMatchCardinalityImageToImageMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricTest.cxx
-  itkMultiResolutionImageRegistrationMethodTest_1.cxx
   itkMultiResolutionImageRegistrationMethodTest_2.cxx
   itkMultiResolutionPyramidImageFilterTest.cxx
   itkMutualInformationHistogramImageToImageMetricTest.cxx
@@ -27,12 +26,6 @@ createtestdriver(ITKRegistrationCommon "${ITKRegistrationCommon-Test_LIBRARIES}"
 
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
-itk_add_test(
-  NAME itkMultiResolutionImageRegistrationMethodTest_1
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkMultiResolutionImageRegistrationMethodTest_1
-)
 itk_add_test(
   NAME itkMultiResolutionImageRegistrationMethodTest_2
   COMMAND
@@ -289,6 +282,7 @@ set(
   itkMeanSquaresImageMetricGTest.cxx
   itkMeanSquaresPointSetToImageMetricGTest.cxx
   itkMultiResolutionImageRegistrationMethodGTest.cxx
+  itkMultiResolutionImageRegistrationMethodGTest_1.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
