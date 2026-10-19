@@ -20,10 +20,9 @@
 #include "itkQuadEdgeMeshExtendedTraits.h"
 #include "itkRegularSphereMeshSource.h"
 #include "itkFastMarchingNumberOfElementsStoppingCriterion.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkFastMarchingQuadEdgeMeshFilterWithNumberOfElementsTest(int, char *[])
+TEST(FastMarchingQuadEdgeMeshFilterWithNumberOfElements, ConvertedLegacyTest)
 {
   using PixelType = float;
   using CoordType = double;
@@ -83,7 +82,7 @@ itkFastMarchingQuadEdgeMeshFilterWithNumberOfElementsTest(int, char *[])
   fmm_filter->SetTrialPoints(trial);
   fmm_filter->SetStoppingCriterion(criterion);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(fmm_filter->Update());
+  ASSERT_NO_THROW(fmm_filter->Update());
 
 
   const MeshType::Pointer output = fmm_filter->GetOutput();
@@ -104,15 +103,5 @@ itkFastMarchingQuadEdgeMeshFilterWithNumberOfElementsTest(int, char *[])
   }
 
   constexpr unsigned int expectedMinPointCount{ 100 };
-  if (counter < expectedMinPointCount)
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Error in itk::FastMarchingQuadEdgeMeshFilterBase" << std::endl;
-    std::cerr << "Expected min point count: " << expectedMinPointCount << ", but got: " << counter << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_GE(counter, expectedMinPointCount) << "Error in itk::FastMarchingQuadEdgeMeshFilterBase";
 }
