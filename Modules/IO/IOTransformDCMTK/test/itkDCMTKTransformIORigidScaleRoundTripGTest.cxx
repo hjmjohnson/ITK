@@ -18,7 +18,7 @@
 
 #include "itkAffineTransform.h"
 #include "itkSimilarity3DTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 // Verifies the polar-decomposition path that DCMTKTransformIO uses for
 // DICOM RIGID_SCALE: a rotation*scale matrix built from a known versor,
@@ -26,11 +26,8 @@
 // Similarity3DTransform::SetMatrix(m, tol) + SetOffset(t) back to the
 // same parameters, and produce identical point mappings to the affine
 // the IO assembles from the DICOM Decimal-String entries.
-int
-itkDCMTKTransformIORigidScaleRoundTripTest(int, char *[])
+TEST(DCMTKTransformIORigidScaleRoundTrip, ConvertedLegacyTest)
 {
-  int testStatus = EXIT_SUCCESS;
-
   constexpr unsigned int Dimension = 3;
   using ScalarType = double;
   using SimilarityTransformType = itk::Similarity3DTransform<ScalarType>;
@@ -63,24 +60,19 @@ itkDCMTKTransformIORigidScaleRoundTripTest(int, char *[])
   similarity->SetMatrix(affine->GetMatrix(), 1e-5);
   similarity->SetOffset(affine->GetOffset());
 
-  ITK_TEST_EXPECT_TRUE_STATUS_VALUE(itk::Math::Absolute(similarity->GetScale() - expectedScale) < 1e-10, testStatus);
+  EXPECT_LT(itk::Math::Absolute(similarity->GetScale() - expectedScale), 1e-10);
 
   const auto recoveredVersor = similarity->GetVersor();
   const auto expectedVersor = expected->GetVersor();
-  ITK_TEST_EXPECT_TRUE_STATUS_VALUE(itk::Math::Absolute(recoveredVersor.GetX() - expectedVersor.GetX()) < 1e-10,
-                                    testStatus);
-  ITK_TEST_EXPECT_TRUE_STATUS_VALUE(itk::Math::Absolute(recoveredVersor.GetY() - expectedVersor.GetY()) < 1e-10,
-                                    testStatus);
-  ITK_TEST_EXPECT_TRUE_STATUS_VALUE(itk::Math::Absolute(recoveredVersor.GetZ() - expectedVersor.GetZ()) < 1e-10,
-                                    testStatus);
-  ITK_TEST_EXPECT_TRUE_STATUS_VALUE(itk::Math::Absolute(recoveredVersor.GetW() - expectedVersor.GetW()) < 1e-10,
-                                    testStatus);
+  EXPECT_LT(itk::Math::Absolute(recoveredVersor.GetX() - expectedVersor.GetX()), 1e-10);
+  EXPECT_LT(itk::Math::Absolute(recoveredVersor.GetY() - expectedVersor.GetY()), 1e-10);
+  EXPECT_LT(itk::Math::Absolute(recoveredVersor.GetZ() - expectedVersor.GetZ()), 1e-10);
+  EXPECT_LT(itk::Math::Absolute(recoveredVersor.GetW() - expectedVersor.GetW()), 1e-10);
 
   const auto recoveredTranslation = similarity->GetTranslation();
   for (unsigned int d = 0; d < Dimension; ++d)
   {
-    ITK_TEST_EXPECT_TRUE_STATUS_VALUE(itk::Math::Absolute(recoveredTranslation[d] - expectedTranslation[d]) < 1e-10,
-                                      testStatus);
+    EXPECT_LT(itk::Math::Absolute(recoveredTranslation[d] - expectedTranslation[d]), 1e-10);
   }
 
   AffineTransformType::InputPointType probes[3];
@@ -99,9 +91,7 @@ itkDCMTKTransformIORigidScaleRoundTripTest(int, char *[])
     const auto sOut = similarity->TransformPoint(p);
     for (unsigned int d = 0; d < Dimension; ++d)
     {
-      ITK_TEST_EXPECT_TRUE_STATUS_VALUE(itk::Math::Absolute(aOut[d] - sOut[d]) < 1e-10, testStatus);
+      EXPECT_LT(itk::Math::Absolute(aOut[d] - sOut[d]), 1e-10);
     }
   }
-
-  return testStatus;
 }
