@@ -23,6 +23,7 @@
 #include "itkRegularStepGradientDescentOptimizer.h"
 
 #include "itkImageRegistrationMethodImageSource.h"
+#include "itkGTest.h"
 
 /**
  *  This program tests one instantiation of the itk::ImageRegistrationMethod class
@@ -30,8 +31,7 @@
  *
  */
 
-int
-itkImageRegistrationMethodTest_4(int argc, char * argv[])
+TEST(ImageRegistrationMethod, ConvertedLegacyTest4)
 {
 
   bool pass = true;
@@ -114,31 +114,6 @@ itkImageRegistrationMethodTest_4(int argc, char * argv[])
   double        minimumStepLength = 0.1;  // convergence criterion
   double        gradientTolerance = 0.01; // convergence criterion
 
-  if (argc > 1)
-  {
-    numberOfIterations = atol(argv[1]);
-    std::cout << "numberOfIterations = " << numberOfIterations << std::endl;
-  }
-  if (argc > 2)
-  {
-    translationScale = std::stod(argv[2]);
-    std::cout << "translationScale = " << translationScale << std::endl;
-  }
-  if (argc > 3)
-  {
-    maximumStepLength = std::stod(argv[3]);
-    std::cout << "maximumStepLength = " << maximumStepLength << std::endl;
-  }
-  if (argc > 4)
-  {
-    minimumStepLength = std::stod(argv[4]);
-    std::cout << "minimumStepLength = " << minimumStepLength << std::endl;
-  }
-  if (argc > 5)
-  {
-    gradientTolerance = std::stod(argv[5]);
-    std::cout << "gradientTolerance = " << gradientTolerance << std::endl;
-  }
 
   for (unsigned int i = 0; i < dimension; ++i)
   {
@@ -190,12 +165,5 @@ itkImageRegistrationMethodTest_4(int argc, char * argv[])
   }
 
 
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test FAILED.";
 }
