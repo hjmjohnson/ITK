@@ -6,7 +6,6 @@ set(
   itkLevelSetNeighborhoodExtractorTest.cxx
   itkNarrowBandCurvesLevelSetImageFilterTest.cxx
   itkParallelSparseFieldLevelSetImageFilterTest.cxx
-  itkThresholdSegmentationLevelSetImageFilterTest.cxx
   itkUnsharpMaskLevelSetImageFilterTest.cxx
   itkVectorThresholdSegmentationLevelSetImageFilterTest.cxx
 )
@@ -37,15 +36,10 @@ set(
   itkShapePriorMAPCostFunctionGTest.cxx
   itkShapePriorSegmentationLevelSetFunctionGTest.cxx
   itkSparseFieldFourthOrderLevelSetImageFilterGTest.cxx
+  itkThresholdSegmentationLevelSetImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKLevelSets "${ITKLevelSets-Test_LIBRARIES}" "${ITKLevelSetsGTests}")
 
-itk_add_test(
-  NAME itkThresholdSegmentationLevelSetImageFilterTest
-  COMMAND
-    ITKLevelSetsTestDriver
-    itkThresholdSegmentationLevelSetImageFilterTest
-)
 itk_add_test(
   NAME itkVectorThresholdSegmentationLevelSetImageFilterTest
   COMMAND
