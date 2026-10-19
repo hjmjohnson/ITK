@@ -19,11 +19,10 @@
 #include "itkBinaryBallStructuringElement.h"
 #include "itkMorphologyHistogram.h"
 #include "itkMovingHistogramMorphologyImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkMovingHistogramMorphologyImageFilterTest(int, char ** const)
+TEST(MovingHistogramMorphologyImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -35,14 +34,10 @@ itkMovingHistogramMorphologyImageFilterTest(int, char ** const)
   using FilterType = itk::MovingHistogramMorphologyImageFilter<ImageType, ImageType, KernelType, HistogramType>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, MovingHistogramMorphologyImageFilter, MovingHistogramImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, MovingHistogramMorphologyImageFilter, MovingHistogramImageFilter);
 
 
   constexpr typename FilterType::InputImagePixelType boundary = 255;
   filter->SetBoundary(boundary);
-  ITK_TEST_SET_GET_VALUE(boundary, filter->GetBoundary());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(boundary, filter->GetBoundary());
 }
