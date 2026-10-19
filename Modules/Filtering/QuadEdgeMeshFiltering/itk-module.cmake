@@ -20,5 +20,6 @@ itk_module(
     ITKTestKernel
     ITKIOMesh
     ITKStatistics
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )
