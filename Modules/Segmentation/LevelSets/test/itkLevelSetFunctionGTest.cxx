@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkLevelSetFunction.h"
+#include "itkGTest.h"
 #include "itkDenseFiniteDifferenceImageFilter.h"
 
 
@@ -33,7 +34,7 @@
  *
  */
 
-namespace LSFT
+namespace
 { // local namespace for helper test functions
 
 constexpr unsigned int HEIGHT = (256);
@@ -205,10 +206,9 @@ private:
   }
 };
 
-} // end of namespace LSFT
+} // namespace
 
-int
-itkLevelSetFunctionTest(int, char *[])
+TEST(LevelSetFunction, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<float, 2>;
 
@@ -217,7 +217,7 @@ itkLevelSetFunctionTest(int, char *[])
   auto im_init = ImageType::New();
   auto im_target = ImageType::New();
 
-  constexpr ImageType::SizeType sz{ LSFT::HEIGHT, LSFT::WIDTH };
+  constexpr ImageType::SizeType sz{ HEIGHT, WIDTH };
   ImageType::RegionType         r{ sz };
 
   im_init->SetRegions(r);
@@ -227,8 +227,8 @@ itkLevelSetFunctionTest(int, char *[])
   im_init->Allocate();
   im_target->Allocate();
 
-  LSFT::evaluate_function(im_init, LSFT::circle);
-  LSFT::evaluate_function(im_target, LSFT::square);
+  evaluate_function(im_init, circle);
+  evaluate_function(im_target, square);
 
   itk::ImageRegionIterator<ImageType> itr(im_target, im_target->GetRequestedRegion());
 
@@ -238,12 +238,10 @@ itkLevelSetFunctionTest(int, char *[])
     itr.Value() = itr.Value() / std::sqrt((5.0f + itk::Math::sqr(itr.Value())));
   }
 
-  const LSFT::MorphFilter::Pointer mf = LSFT::MorphFilter::New();
+  const MorphFilter::Pointer mf = MorphFilter::New();
   mf->SetDistanceTransform(im_target);
   mf->SetIterations(n);
   mf->SetInput(im_init);
 
   mf->Update();
-
-  return EXIT_SUCCESS;
 }
