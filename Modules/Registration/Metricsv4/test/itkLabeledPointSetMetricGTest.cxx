@@ -19,13 +19,15 @@
 #include "itkLabeledPointSetToPointSetMetricv4.h"
 #include "itkEuclideanDistancePointSetToPointSetMetricv4.h"
 #include "itkTranslationTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <fstream>
 #include "itkMath.h"
 
+namespace
+{
 template <unsigned int Dimension>
-[[nodiscard]] int
+void
 itkLabeledPointSetMetricTestRun()
 {
   using LabelType = unsigned int;
@@ -88,14 +90,14 @@ itkLabeledPointSetMetricTestRun()
   using PointSetMetricType = itk::LabeledPointSetToPointSetMetricv4<PointSetType>;
   auto metric = PointSetMetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, LabeledPointSetToPointSetMetricv4, PointSetToPointSetMetricv4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(metric, LabeledPointSetToPointSetMetricv4, PointSetToPointSetMetricv4);
 
 
   using EuclideanDistanceMetricType =
     itk::EuclideanDistancePointSetToPointSetMetricv4<PointSetType, PointSetType, double>;
   auto pointSetMetric = EuclideanDistanceMetricType::New();
   metric->SetPointSetMetric(pointSetMetric);
-  ITK_TEST_SET_GET_VALUE(pointSetMetric, metric->GetPointSetMetric());
+  EXPECT_EQ(pointSetMetric, metric->GetPointSetMetric());
 
   metric->SetFixedPointSet(fixedPoints);
   metric->SetMovingPointSet(movingPoints);
@@ -113,11 +115,8 @@ itkLabeledPointSetMetricTestRun()
   std::cout << "derivative: " << derivative << std::endl;
   for (unsigned int d = 0; d < metric->GetNumberOfParameters(); ++d)
   {
-    if (itk::Math::Absolute(derivative[d] - offset[d]) / offset[d] > 0.01)
-    {
-      std::cerr << "derivative does not match expected offset of " << offset << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(derivative[d] - offset[d]) / offset[d], 0.01)
+      << "derivative does not match expected offset of " << offset;
   }
 
   // Check for the same results from different methods
@@ -171,26 +170,12 @@ itkLabeledPointSetMetricTestRun()
 
   moving_str1 << "0 0 0 0" << std::endl;
   moving_str2 << "0 0 0 0" << std::endl;
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkLabeledPointSetMetricTest(int, char *[])
+TEST(LabeledPointSetMetric, ConvertedLegacyTest)
 {
-  int result = EXIT_SUCCESS;
+  itkLabeledPointSetMetricTestRun<2>();
 
-  if (itkLabeledPointSetMetricTestRun<2>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 2." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  if (itkLabeledPointSetMetricTestRun<3>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 3." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  return result;
+  itkLabeledPointSetMetricTestRun<3>();
 }
