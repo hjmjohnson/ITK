@@ -32,6 +32,7 @@
 #include "itkSpatialObjectToImageFilter.h"
 #include "itkBoxSpatialObject.h"
 #include "itkImageMaskSpatialObject.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -285,19 +286,11 @@ Test2dImageMask()
 }
 
 } // namespace
-int
-itkImageMaskSpatialObjectTest4(int, char *[])
+TEST(ImageMaskSpatialObject4, ConvertedLegacyTest)
 {
-  if (Test3dImageMask() == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
-  if (Test2dImageMask() == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(Test3dImageMask(), EXIT_SUCCESS);
+  EXPECT_EQ(Test2dImageMask(), EXIT_SUCCESS);
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
