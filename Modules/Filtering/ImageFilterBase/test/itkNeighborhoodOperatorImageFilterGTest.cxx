@@ -20,10 +20,9 @@
 #include "itkNeighborhoodOperatorImageFilter.h"
 #include "itkDerivativeOperator.h"
 #include "itkNullImageToImageFilterDriver.hxx"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkNeighborhoodOperatorImageFilterTest(int, char *[])
+TEST(NeighborhoodOperatorImageFilter, ConvertedLegacyTest)
 {
   try
   {
@@ -38,7 +37,7 @@ itkNeighborhoodOperatorImageFilterTest(int, char *[])
     const itk::NeighborhoodOperatorImageFilter<ImageType, ImageType>::Pointer filter =
       itk::NeighborhoodOperatorImageFilter<ImageType, ImageType>::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, NeighborhoodOperatorImageFilter, ImageToImageFilter);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, NeighborhoodOperatorImageFilter, ImageToImageFilter);
 
 
     filter->SetOperator(oper);
@@ -56,7 +55,6 @@ itkNeighborhoodOperatorImageFilterTest(int, char *[])
   catch (const itk::ExceptionObject & err)
   {
     err.Print(std::cerr);
-    return EXIT_FAILURE;
+    FAIL();
   }
-  return EXIT_SUCCESS;
 }
