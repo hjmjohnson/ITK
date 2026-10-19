@@ -16,14 +16,13 @@
  *
  *=========================================================================*/
 
+#include "itkFixedCenterOfRotationAffineTransform.h"
+#include "itkGTest.h"
+
 #include <iostream>
 
-#include "itkFixedCenterOfRotationAffineTransform.h"
-#include "itkTestingMacros.h"
 
-
-int
-itkFixedCenterOfRotationAffineTransformTest(int, char *[])
+TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
 {
   using FCoRAffine2DType = itk::FixedCenterOfRotationAffineTransform<double, 2>;
 
@@ -54,11 +53,7 @@ itkFixedCenterOfRotationAffineTransformTest(int, char *[])
     }
   }
 
-  if (fail)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(fail) << "[FAILURE]";
 
   std::cout << "[SUCCESS]" << std::endl;
 
@@ -84,12 +79,14 @@ itkFixedCenterOfRotationAffineTransformTest(int, char *[])
   vector2 = aff2->GetOffsetComponent();
   point2 = aff2->GetCenterOfRotationComponent();
 
-  if (matrix2[0][0] != 1.0 || matrix2[0][1] != 2.0 || matrix2[1][0] != 3.0 || matrix2[1][1] != 4.0 ||
-      vector2[0] != 5.0 || vector2[1] != 6.0 || point2[0] != 1.0 || point2[1] != 1.0)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(matrix2[0][0], 1.0) << "[FAILURE]";
+  EXPECT_EQ(matrix2[0][1], 2.0) << "[FAILURE]";
+  EXPECT_EQ(matrix2[1][0], 3.0) << "[FAILURE]";
+  EXPECT_EQ(matrix2[1][1], 4.0) << "[FAILURE]";
+  EXPECT_EQ(vector2[0], 5.0) << "[FAILURE]";
+  EXPECT_EQ(vector2[1], 6.0) << "[FAILURE]";
+  EXPECT_EQ(point2[0], 1.0) << "[FAILURE]";
+  EXPECT_EQ(point2[1], 1.0) << "[FAILURE]";
 
   std::cout << "[SUCCESS]" << std::endl;
 
@@ -104,13 +101,13 @@ itkFixedCenterOfRotationAffineTransformTest(int, char *[])
   const double * scale3 = aff2->GetScale();
   for (unsigned int i = 0; i < 2; ++i)
   {
-    ITK_TEST_EXPECT_EQUAL(scale1[i], scale2[i]);
-    ITK_TEST_EXPECT_EQUAL(scale1[i], scale3[i]);
+    EXPECT_EQ(scale1[i], scale2[i]);
+    EXPECT_EQ(scale1[i], scale3[i]);
   }
 
   const FCoRAffine2DType::InputVectorType vScale = itk::MakeVector(2.0, 4.0);
   aff2->SetScaleComponent(vScale);
-  ITK_TEST_SET_GET_VALUE(vScale, aff2->GetScaleComponent());
+  EXPECT_EQ(vScale, aff2->GetScaleComponent());
 
   aff2->SetMatrix(matrix2);
 
@@ -120,13 +117,16 @@ itkFixedCenterOfRotationAffineTransformTest(int, char *[])
 
   std::cout << "Modify the affine matrix: ";
 
-  if (matrix2[0][0] != 1.0 || matrix2[0][1] != 2.0 || matrix2[1][0] != 3.0 || matrix2[1][1] != 4.0 ||
-      vector2[0] != 5.0 || vector2[1] != 6.0 || point2[0] != 1.0 || point2[1] != 1.0 || resultingScale[0] != 2.0 ||
-      resultingScale[1] != 4.0)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(matrix2[0][0], 1.0) << "[FAILURE]";
+  EXPECT_EQ(matrix2[0][1], 2.0) << "[FAILURE]";
+  EXPECT_EQ(matrix2[1][0], 3.0) << "[FAILURE]";
+  EXPECT_EQ(matrix2[1][1], 4.0) << "[FAILURE]";
+  EXPECT_EQ(vector2[0], 5.0) << "[FAILURE]";
+  EXPECT_EQ(vector2[1], 6.0) << "[FAILURE]";
+  EXPECT_EQ(point2[0], 1.0) << "[FAILURE]";
+  EXPECT_EQ(point2[1], 1.0) << "[FAILURE]";
+  EXPECT_EQ(resultingScale[0], 2.0) << "[FAILURE]";
+  EXPECT_EQ(resultingScale[1], 4.0) << "[FAILURE]";
 
   std::cout << "[SUCCESS]" << std::endl;
 
@@ -138,12 +138,10 @@ itkFixedCenterOfRotationAffineTransformTest(int, char *[])
 
   matrix2 = aff2->GetMatrix();
 
-  if (itk::Math::NotAlmostEquals(matrix2[0][0], 2.0) || itk::Math::NotAlmostEquals(matrix2[0][1], 0.0) ||
-      itk::Math::NotAlmostEquals(matrix2[1][0], 0.0) || itk::Math::NotAlmostEquals(matrix2[1][1], 4.0))
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_DOUBLE_EQ(matrix2[0][0], 2.0) << "[FAILURE]";
+  EXPECT_DOUBLE_EQ(matrix2[0][1], 0.0) << "[FAILURE]";
+  EXPECT_DOUBLE_EQ(matrix2[1][0], 0.0) << "[FAILURE]";
+  EXPECT_DOUBLE_EQ(matrix2[1][1], 4.0) << "[FAILURE]";
 
   std::cout << "[SUCCESS]" << std::endl;
 
@@ -171,12 +169,12 @@ itkFixedCenterOfRotationAffineTransformTest(int, char *[])
   aff2->SetParameters(parameters);
   FCoRAffine2DType::ParametersType parameters2 = aff2->GetParameters();
 
-  if (parameters2[0] != 1.0 || parameters2[1] != 2.0 || parameters2[2] != 3.0 || parameters2[3] != 4.0 ||
-      parameters2[4] != 3.0 || parameters2[5] != 4.0)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(parameters2[0], 1.0) << "[FAILURE]";
+  EXPECT_EQ(parameters2[1], 2.0) << "[FAILURE]";
+  EXPECT_EQ(parameters2[2], 3.0) << "[FAILURE]";
+  EXPECT_EQ(parameters2[3], 4.0) << "[FAILURE]";
+  EXPECT_EQ(parameters2[4], 3.0) << "[FAILURE]";
+  EXPECT_EQ(parameters2[5], 4.0) << "[FAILURE]";
 
   std::cout << "[SUCCESS]" << std::endl;
 
@@ -207,16 +205,10 @@ itkFixedCenterOfRotationAffineTransformTest(int, char *[])
     expectedPoint[i] = v[i] + point2[i] + offset[i];
   }
 
-  if (transformedPoint != expectedPoint)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(transformedPoint, expectedPoint) << "[FAILURE]";
 
   std::cout << "[SUCCESS]" << std::endl;
 
 
   std::cout << "Done!" << std::endl;
-
-  return EXIT_SUCCESS;
 }
