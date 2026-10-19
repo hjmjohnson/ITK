@@ -22,7 +22,7 @@
 #include "itkTextOutput.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 // namespace{
 //// The following class is used to support callbacks
@@ -38,8 +38,7 @@
 //};
 //}
 
-int
-itkFastMarchingUpwindGradientBaseTest(int, char *[])
+TEST(FastMarchingUpwindGradientImageFilterBase, ConvertedLegacyTest)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -54,7 +53,7 @@ itkFastMarchingUpwindGradientBaseTest(int, char *[])
 
   auto criterion = CriterionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     criterion, FastMarchingReachedTargetNodesStoppingCriterion, FastMarchingStoppingCriterionBase);
 
 
@@ -197,12 +196,12 @@ itkFastMarchingUpwindGradientBaseTest(int, char *[])
 
   constexpr CriterionType::OutputPixelType targetOffset{};
   criterion->SetTargetOffset(targetOffset);
-  ITK_TEST_SET_GET_VALUE(targetOffset, criterion->GetTargetOffset());
+  EXPECT_EQ(targetOffset, criterion->GetTargetOffset());
 
   // Stop the algorithm when ONE of the targets has been reached.
   auto targetCondition = CriterionType::TargetConditionEnum::OneTarget;
   criterion->SetTargetCondition(targetCondition);
-  ITK_TEST_SET_GET_VALUE(targetCondition, criterion->GetTargetCondition());
+  EXPECT_EQ(targetCondition, criterion->GetTargetCondition());
 
 
   std::cout << "Criterion description: " << criterion->GetDescription() << std::endl;
@@ -223,12 +222,5 @@ itkFastMarchingUpwindGradientBaseTest(int, char *[])
               << std::endl;
   }
 
-  if (passed)
-  {
-    std::cout << "Fast Marching Upwind Gradient test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Fast Marching Upwind Gradient test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(passed);
 }
