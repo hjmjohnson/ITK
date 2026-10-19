@@ -27,14 +27,14 @@
 
 #include "itkRGBToVectorImageAdaptor.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
 //-------------------------
 //
 //   Main code
 //
 //-------------------------
-int
-itkRGBToVectorImageAdaptorTest(int, char *[])
+TEST(RGBToVectorImageAdaptor, ConvertedLegacyTest)
 {
 
 
@@ -133,7 +133,4 @@ itkRGBToVectorImageAdaptorTest(int, char *[])
     std::cout << c.GetBlue() << std::endl;
     ++it1;
   }
-
-
-  return EXIT_SUCCESS;
 }
