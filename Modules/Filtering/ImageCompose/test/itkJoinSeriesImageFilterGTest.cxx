@@ -19,10 +19,12 @@
 
 #include "itkJoinSeriesImageFilter.h"
 #include "itkStreamingImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
+namespace
+{
 class ShowProgressObject
 {
 public:
@@ -34,9 +36,9 @@ public:
   }
   itk::ProcessObject::Pointer m_Process;
 };
+} // namespace
 
-int
-itkJoinSeriesImageFilterTest(int, char *[])
+TEST(JoinSeriesImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int streamDivisions{ 2 };
@@ -100,26 +102,18 @@ itkJoinSeriesImageFilterTest(int, char *[])
 
   auto joinSeriesImage = JoinSeriesImageType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(joinSeriesImage, JoinSeriesImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(joinSeriesImage, JoinSeriesImageFilter, ImageToImageFilter);
 
   // Check the default values
-  if (joinSeriesImage->GetSpacing() != 1.0)
-  {
-    std::cout << "Default spacing is not 1.0" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (joinSeriesImage->GetOrigin() != 0.0)
-  {
-    std::cout << "Default origin is not 0.0" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(joinSeriesImage->GetSpacing(), 1.0) << "Default spacing is not 1.0";
+  EXPECT_EQ(joinSeriesImage->GetOrigin(), 0.0) << "Default origin is not 0.0";
 
   // Setup the filter
   joinSeriesImage->SetSpacing(spacingValue);
-  ITK_TEST_SET_GET_VALUE(spacingValue, joinSeriesImage->GetSpacing());
+  EXPECT_EQ(spacingValue, joinSeriesImage->GetSpacing());
 
   joinSeriesImage->SetOrigin(originValue);
-  ITK_TEST_SET_GET_VALUE(originValue, joinSeriesImage->GetOrigin());
+  EXPECT_EQ(originValue, joinSeriesImage->GetOrigin());
 
   for (int i = 0; i < numInputs; ++i)
   {
@@ -139,40 +133,15 @@ itkJoinSeriesImageFilterTest(int, char *[])
   streamingImage->SetInput(joinSeriesImage->GetOutput());
   streamingImage->SetNumberOfStreamDivisions(streamDivisions);
 
-  try
-  {
-    streamingImage->Update();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    std::cout << err << std::endl;
-    const auto * const errp = dynamic_cast<const itk::DataObjectError * const>(&err);
-    if (errp)
-    {
-      errp->GetDataObject()->Print(std::cout);
-    }
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(streamingImage->Update());
 
   const OutputImageType::Pointer output = streamingImage->GetOutput();
 
 
   // Check the information
-  if (output->GetLargestPossibleRegion() != expectedRegion)
-  {
-    std::cout << "LargestPossibleRegion mismatch" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (output->GetSpacing() != expectedSpacing)
-  {
-    std::cout << "Spacing mismatch" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (output->GetOrigin() != expectedOrigin)
-  {
-    std::cout << "Origin mismatch" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(output->GetLargestPossibleRegion(), expectedRegion) << "LargestPossibleRegion mismatch";
+  EXPECT_EQ(output->GetSpacing(), expectedSpacing) << "Spacing mismatch";
+  EXPECT_EQ(output->GetOrigin(), expectedOrigin) << "Origin mismatch";
 
   // Check the contents
   bool passed = true;
@@ -190,40 +159,13 @@ itkJoinSeriesImageFilterTest(int, char *[])
     ++outputIter;
   }
 
-  if (!passed || counter1 != counter2)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed);
+  EXPECT_EQ(counter1, counter2);
 
 
   // An exception is raised when an input is missing.
-  passed = false;
 
   // Set the 2nd input null
   joinSeriesImage->SetInput(1, nullptr);
-  try
-  {
-    joinSeriesImage->Update();
-  }
-  catch (const itk::InvalidRequestedRegionError & err)
-  {
-    std::cout << err << std::endl;
-    passed = true;
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    std::cout << err << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  if (!passed)
-  {
-    std::cout << "Expected exception is missing" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_THROW(joinSeriesImage->Update(), itk::InvalidRequestedRegionError) << "Expected exception is missing";
 }
