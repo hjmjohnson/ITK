@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKStatisticsTests
   itkExpectationMaximizationMixtureModelEstimatorTest.cxx
-  itkGaussianDistributionTest.cxx
   itkGaussianMembershipFunctionTest.cxx
   itkGaussianMixtureModelComponentTest.cxx
   itkGaussianRandomSpatialNeighborSubsamplerTest.cxx
@@ -74,12 +73,6 @@ itk_add_test(
     ITKStatisticsTestDriver
     itkExpectationMaximizationMixtureModelEstimatorTest
     DATA{${ITK_DATA_ROOT}/Input/Statistics/TwoDimensionTwoGaussian.dat}
-)
-itk_add_test(
-  NAME itkGaussianDistributionTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkGaussianDistributionTest
 )
 itk_add_test(
   NAME itkGaussianMembershipFunctionTest
@@ -835,6 +828,7 @@ set(
   itkDistanceToCentroidMembershipFunctionGTest.cxx
   itkEuclideanDistanceMetricGTest.cxx
   itkEuclideanSquareDistanceMetricGTest.cxx
+  itkGaussianDistributionGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
   itkImageToListSampleAdaptorGTest.cxx
   itkJointDomainImageToListSampleAdaptorGTest.cxx
