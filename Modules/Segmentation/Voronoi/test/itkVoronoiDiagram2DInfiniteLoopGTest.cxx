@@ -17,7 +17,8 @@
  *=========================================================================*/
 
 #include "itkVoronoiDiagram2DGenerator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
+#include "vnl/vnl_sample.h"
 
 // Regression test for ITK issue #4386: near-collinear seed configurations
 // caused an infinite loop in VoronoiDiagram2DGenerator::ConstructDiagram().
@@ -33,15 +34,10 @@
 //      interior (not on the domain boundary).
 // The fix explicitly detects and drops these degenerate edges using the
 // existing differentPoint() tolerance check.
-int
-itkVoronoiDiagram2DInfiniteLoopTest(int argc, char * argv[])
+TEST(VoronoiDiagram2DGenerator, ConvertedLegacyTest)
 {
-  if (argc != 1)
-  {
-    std::cerr << "Usage: " << itkNameOfTestExecutableMacro(argv) << std::endl;
-    return EXIT_FAILURE;
-  }
-
+  // The legacy test driver reseeds vnl_sample before every test.
+  vnl_sample_reseed(8775070);
   using VoronoiDiagramType = itk::VoronoiDiagram2D<double>;
   using VoronoiGeneratorType = itk::VoronoiDiagram2DGenerator<double>;
   using PointType = VoronoiDiagramType::PointType;
@@ -62,7 +58,7 @@ itkVoronoiDiagram2DInfiniteLoopTest(int argc, char * argv[])
   // Without the fix, this call loops forever.  With the fix, the
   // degenerate near-zero-length edge is detected and dropped, and
   // the exception guard ensures no non-degenerate edges are lost.
-  ITK_TRY_EXPECT_NO_EXCEPTION(vg->Update());
+  EXPECT_NO_THROW(vg->Update());
 
   // Verify all 6 cells were constructed with valid boundaries
   auto vd = vg->GetOutput();
@@ -70,9 +66,8 @@ itkVoronoiDiagram2DInfiniteLoopTest(int argc, char * argv[])
   {
     VoronoiDiagramType::CellAutoPointer cellPtr;
     vd->GetCellId(i, cellPtr);
-    ITK_TEST_EXPECT_TRUE(cellPtr->GetNumberOfPoints() >= 2);
+    EXPECT_GE(cellPtr->GetNumberOfPoints(), 2u);
   }
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
