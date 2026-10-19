@@ -20,10 +20,9 @@
 #include "itkMeshSpatialObject.h"
 #include "itkTetrahedronCell.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkMeshSpatialObjectTest(int, char *[])
+TEST(MeshSpatialObject, ConvertedLegacyTest)
 {
   using MeshTrait = itk::DefaultDynamicMeshTraits<float, 3, 3>;
   using MeshType = itk::Mesh<float, 3, MeshTrait>;
@@ -57,31 +56,27 @@ itkMeshSpatialObjectTest(int, char *[])
 
   auto meshSO = MeshSpatialObjectType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(meshSO, MeshSpatialObject, SpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(meshSO, MeshSpatialObject, SpatialObject);
 
 
   constexpr double isInsidePrecisionInObjectSpace{ 1 };
   meshSO->SetIsInsidePrecisionInObjectSpace(isInsidePrecisionInObjectSpace);
-  ITK_TEST_SET_GET_VALUE(isInsidePrecisionInObjectSpace, meshSO->GetIsInsidePrecisionInObjectSpace());
+  EXPECT_EQ(isInsidePrecisionInObjectSpace, meshSO->GetIsInsidePrecisionInObjectSpace());
 
   meshSO->SetMesh(mesh);
-  ITK_TEST_SET_GET_VALUE(mesh, meshSO->GetMesh());
+  EXPECT_EQ(mesh, meshSO->GetMesh());
 
   meshSO->Update();
 
 
   std::cout << "Testing Bounding Box: ";
 
-  if ((itk::Math::NotExactlyEquals(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[0], 0)) ||
-      (itk::Math::NotExactlyEquals(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[1], 9)) ||
-      (itk::Math::NotExactlyEquals(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[2], 0)) ||
-      (itk::Math::NotExactlyEquals(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[3], 9)) ||
-      (itk::Math::NotExactlyEquals(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[4], 0)) ||
-      (itk::Math::NotExactlyEquals(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[5], 9)))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[0], 0) << "[FAILED]";
+  EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[1], 9) << "[FAILED]";
+  EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[2], 0) << "[FAILED]";
+  EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[3], 9) << "[FAILED]";
+  EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[4], 0) << "[FAILED]";
+  EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[5], 9) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -98,37 +93,18 @@ itkMeshSpatialObjectTest(int, char *[])
   outside[1] = 3;
   outside[2] = 0;
 
-  if (!meshSO->IsInsideInWorldSpace(inside) || meshSO->IsInsideInWorldSpace(outside))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    if (!meshSO->IsInsideInWorldSpace(inside))
-    {
-      std::cout << inside << " is not inside the mesh!" << std::endl;
-    }
-    if (meshSO->IsInsideInWorldSpace(outside))
-    {
-      std::cout << outside << " is inside the mesh!" << std::endl;
-    }
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(meshSO->IsInsideInWorldSpace(inside)) << "[FAILED]" << '\n' << inside << " is not inside the mesh!";
+  EXPECT_FALSE(meshSO->IsInsideInWorldSpace(outside)) << "[FAILED]" << '\n' << outside << " is inside the mesh!";
   std::cout << "[PASSED]" << std::endl;
 
   // Testing is valueAt
   std::cout << "Testing ValueAt: ";
   double value = NAN;
   meshSO->ValueAtInWorldSpace(inside, value);
-  if (!value)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(value, 0.0) << "[FAILED]";
 
   meshSO->ValueAtInWorldSpace(outside, value);
-  if (value)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(value, 0.0) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -178,15 +154,11 @@ itkMeshSpatialObjectTest(int, char *[])
   pOut[0] = 60;
   pOut[1] = 102;
   pOut[2] = 64;
-  if (!meshTriangleSO->IsInsideInWorldSpace(pIn) || meshTriangleSO->IsInsideInWorldSpace(pOut))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(meshTriangleSO->IsInsideInWorldSpace(pIn)) << "[FAILED]";
+  EXPECT_FALSE(meshTriangleSO->IsInsideInWorldSpace(pOut)) << "[FAILED]";
   meshSO->Print(std::cout);
   std::cout << "[PASSED]" << std::endl;
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
