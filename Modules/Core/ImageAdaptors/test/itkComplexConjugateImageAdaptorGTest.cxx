@@ -19,14 +19,14 @@
 #include "itkComplexConjugateImageAdaptor.h"
 #include "itkImageRegionIterator.h"
 #include <random>
+#include "itkGTest.h"
 
 
 using PixelType = std::complex<float>;
 using ImageType = itk::Image<PixelType, 2>;
 using AdaptorType = itk::ComplexConjugateImageAdaptor<ImageType>;
 
-int
-itkComplexConjugateImageAdaptorTest(int, char *[])
+TEST(ComplexConjugateImageAdaptor, ConvertedLegacyTest)
 {
   // Create a test image.
   auto                          image = ImageType::New();
@@ -59,26 +59,14 @@ itkComplexConjugateImageAdaptorTest(int, char *[])
     const PixelType adaptedValue = iterB.Get();
 
     // Check that the adapted value is as expected.
-    if (imageValue != std::conj(adaptedValue))
-    {
-      std::cerr << "Unexpected adapted pixel value." << std::endl;
-      std::cerr << "Got " << adaptedValue << ", expected " << imageValue << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(imageValue, std::conj(adaptedValue)) << "Unexpected adapted pixel value.";
 
     // Try setting the value and reading it again.
     iterB.Set(adaptedValue);
     const PixelType newValue = iterB.Get();
-    if (adaptedValue != newValue)
-    {
-      std::cerr << "Setting adapted pixel value failed." << std::endl;
-      std::cerr << "Got " << newValue << ", expected " << adaptedValue << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(adaptedValue, newValue) << "Setting adapted pixel value failed.";
   }
 
   // To improve code coverage
   adaptor->Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
