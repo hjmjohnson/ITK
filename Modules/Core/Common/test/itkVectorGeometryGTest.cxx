@@ -25,14 +25,14 @@
 
 #include "itkVector.h"
 #include <iostream>
+#include "itkGTest.h"
 
 //-------------------------
 //
 //   Main code
 //
 //-------------------------
-int
-itkVectorGeometryTest(int, char *[])
+TEST(VectorGeometry, ConvertedLegacyTest)
 {
 
   // Dimension & Type
@@ -44,11 +44,9 @@ itkVectorGeometryTest(int, char *[])
 
   const VectorType vv{ { 0, 2, 4 } };
 
-  if (vv[0] != 0 || vv[1] != 2 || vv[2] != 4)
-  {
-    std::cerr << "Error initializing the Vector " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(vv[0], 0) << "Error initializing the Vector ";
+  EXPECT_EQ(vv[1], 2) << "Error initializing the Vector ";
+  EXPECT_EQ(vv[2], 4) << "Error initializing the Vector ";
 
   VectorType va{ { 1.0, 2.0, 7.0 } };
 
@@ -144,37 +142,19 @@ itkVectorGeometryTest(int, char *[])
 
     constexpr VectorType vw{};
 
-    if (vv2 == vw)
-    {
-      std::cout << std::endl;
-      std::cout << "Problem with operator==() " << std::endl;
-      std::cout << "Vector " << vv2;
-      std::cout << " is reported as being equal to " << std::endl;
-      std::cout << "Vector " << vw << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(vv2 == vw) << "Problem with operator==() "
+                            << "Vector " << vv2 << " is reported as being equal to "
+                            << "Vector " << vw;
 
     const VectorType ww = vv2;
 
-    if (vv2 != ww)
-    {
-      std::cout << std::endl;
-      std::cout << "Problem with operator!=() " << std::endl;
-      std::cout << "Vector " << vv2;
-      std::cout << " is reported as being different from " << std::endl;
-      std::cout << "Vector " << ww << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(vv2 != ww) << "Problem with operator!=() "
+                            << "Vector " << vv2 << " is reported as being different from "
+                            << "Vector " << ww;
 
-    if (!(vv2 == ww))
-    {
-      std::cout << std::endl;
-      std::cout << "Problem with operator==() " << std::endl;
-      std::cout << "Vector " << vv2;
-      std::cout << " is reported as not being equal to " << std::endl;
-      std::cout << "Vector " << ww << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(vv2, ww) << "Problem with operator==() "
+                       << "Vector " << vv2 << " is reported as not being equal to "
+                       << "Vector " << ww;
   }
 
   // Test for CastFrom() method
@@ -204,15 +184,7 @@ itkVectorGeometryTest(int, char *[])
     for (unsigned int i = 0; i < N; ++i)
     {
       auto val = static_cast<FloatVectorType::ValueType>(dp[i]);
-      if (itk::Math::Absolute(val - fp[i]) > tolerance)
-      {
-        std::cout << "Test failed at component " << i << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(val, fp[i], tolerance) << "Test failed at component " << i;
     }
-
-
-    std::cout << " PASSED ! " << std::endl;
   }
-  return EXIT_SUCCESS;
 }
