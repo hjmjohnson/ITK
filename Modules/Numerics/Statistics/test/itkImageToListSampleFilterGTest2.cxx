@@ -22,9 +22,9 @@
 
 #include "itkImageToListSampleFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
-int
-itkImageToListSampleFilterTest2(int, char *[])
+TEST(ImageToListSampleFilter, ConvertedLegacyTest2)
 {
   constexpr unsigned int MeasurementVectorSize{ 8 };
   using MeasurementComponentType = unsigned long;
@@ -87,15 +87,7 @@ itkImageToListSampleFilterTest2(int, char *[])
   filter->SetMaskImage(maskImage);
   filter->SetMaskValue(255);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   using ListSampleType = ImageToListSampleFilterType::ListSampleType;
   const ListSampleType * list = filter->GetOutput();
@@ -111,12 +103,5 @@ itkImageToListSampleFilterTest2(int, char *[])
     ++lit;
   }
 
-  if (sum != 420)
-  {
-    std::cerr << "Computed sum of pixels in the list sample (masked) is : " << sum << " but should be 420.";
-    return EXIT_FAILURE;
-  }
-
-  std::cerr << "[PASSED]" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(sum, 420u) << "Computed sum of pixels in the list sample (masked)";
 }
