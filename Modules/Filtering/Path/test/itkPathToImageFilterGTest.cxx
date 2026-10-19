@@ -19,11 +19,10 @@
 #include "itkPolyLineParametricPath.h"
 #include "itkPathToImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkPathToImageFilterTest(int, char *[])
+TEST(PathToImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using PixelType = double;
@@ -37,7 +36,7 @@ itkPathToImageFilterTest(int, char *[])
   // Set up the path
   auto path = PolyLineParametricPathType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path, PolyLineParametricPath, ParametricPath);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path, PolyLineParametricPath, ParametricPath);
 
   std::cout << "Making a square Path with v0 at (30,30) and v2 at (33,33)" << std::endl;
   auto v = itk::MakeFilled<VertexType>(30);
@@ -56,21 +55,21 @@ itkPathToImageFilterTest(int, char *[])
 
   auto pathToImageFilter = PathToImageFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(pathToImageFilter, PathToImageFilter, ImageSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(pathToImageFilter, PathToImageFilter, ImageSource);
 
   pathToImageFilter->SetInput(path);
 
   constexpr PathToImageFilterType::ValueType pathValue{ 1 };
   pathToImageFilter->SetPathValue(pathValue);
-  ITK_TEST_SET_GET_VALUE(pathValue, pathToImageFilter->GetPathValue());
+  EXPECT_EQ(pathValue, pathToImageFilter->GetPathValue());
 
   constexpr PathToImageFilterType::ValueType backgroundValue{ 0 };
   pathToImageFilter->SetBackgroundValue(backgroundValue);
-  ITK_TEST_SET_GET_VALUE(backgroundValue, pathToImageFilter->GetBackgroundValue());
+  EXPECT_EQ(backgroundValue, pathToImageFilter->GetBackgroundValue());
 
   auto size = ImageType::SizeType::Filled(256);
   pathToImageFilter->SetSize(size);
-  ITK_TEST_SET_GET_VALUE(size, pathToImageFilter->GetSize());
+  EXPECT_EQ(size, pathToImageFilter->GetSize());
 
   // Test spacing
   //
@@ -84,11 +83,7 @@ itkPathToImageFilterTest(int, char *[])
 
   for (unsigned int i = 0; i < ImageType::ImageDimension; ++i)
   {
-    if (spacing_result[i] != 1.0)
-    {
-      std::cout << "[FAILURE]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(spacing_result[i], 1.0);
   }
 
   // Test origin
@@ -103,15 +98,11 @@ itkPathToImageFilterTest(int, char *[])
 
   for (unsigned int i = 0; i < ImageType::ImageDimension; ++i)
   {
-    if (origin_result[i] != 0.0)
-    {
-      std::cout << "[FAILURE]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(origin_result[i], 0.0);
   }
 
   // Update the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(pathToImageFilter->Update());
+  EXPECT_NO_THROW(pathToImageFilter->Update());
 
   const ImageType::Pointer image = pathToImageFilter->GetOutput();
 
@@ -130,15 +121,7 @@ itkPathToImageFilterTest(int, char *[])
 
       //           ? 0-Inside the closed path, but not on it : 1-On the path
       const double targetValue = (0 < i && i < 3 && 0 < j && j < 3) ? 0 : 1;
-      if (itk::Math::NotAlmostEquals(image->GetPixel(index), targetValue))
-      {
-        std::cout << "[FAILURE]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_DOUBLE_EQ(image->GetPixel(index), targetValue);
     }
   }
-
-  std::cout << "Test finished" << std::endl;
-
-  return EXIT_SUCCESS;
 }
