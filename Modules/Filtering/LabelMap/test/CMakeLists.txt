@@ -34,7 +34,6 @@ set(
   itkLabelMapMaskImageFilterTest.cxx
   itkLabelMapToAttributeImageFilterTest1.cxx
   itkLabelMapToBinaryImageFilterTest.cxx
-  itkLabelObjectLineTest.cxx
   itkLabelObjectTest.cxx
   itkLabelSelectionLabelMapFilterTest.cxx
   itkLabelShapeKeepNObjectsImageFilterTest1.cxx
@@ -1234,12 +1233,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/cthead1-label-binary.mha
 )
 itk_add_test(
-  NAME itkLabelObjectLineTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelObjectLineTest
-)
-itk_add_test(
   NAME itkLabelObjectTest
   COMMAND
     ITKLabelMapTestDriver
@@ -1759,6 +1752,7 @@ set(
   itkLabelMapGTest2.cxx
   itkLabelMapToLabelImageFilterGTest.cxx
   itkLabelObjectLineComparatorGTest.cxx
+  itkLabelObjectLineGTest.cxx
   itkShapeLabelMapFilterGTest.cxx
   itkLabelMapBugfixGTest.cxx
   itkStatisticsLabelMapFilterGTest.cxx

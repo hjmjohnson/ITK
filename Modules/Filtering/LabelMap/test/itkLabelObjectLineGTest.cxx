@@ -18,11 +18,10 @@
 
 #include <iostream>
 #include "itkLabelObjectLine.h"
+#include "itkGTest.h"
 
-int
-itkLabelObjectLineTest(int, char *[])
+TEST(LabelObjectLine, ConvertedLegacyTest)
 {
-
   using LabelObjectLineType = itk::LabelObjectLine<2>;
   using IndexType = itk::LabelObjectLine<2>::IndexType;
   IndexType currentIndex;
@@ -39,59 +38,27 @@ itkLabelObjectLineTest(int, char *[])
 
   IndexType indexBack = labelLine.GetIndex();
 
-  if ((indexBack[0] != 3) || (indexBack[1] != 7))
-  {
-    std::cerr << "Set/Get Index failed on null constructor. " << indexBack << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(indexBack[0], 3) << "Set/Get Index failed on null constructor. " << indexBack;
+  EXPECT_EQ(indexBack[1], 7) << "Set/Get Index failed on null constructor. " << indexBack;
 
   const LabelObjectLineType::LengthType length = labelLine.GetLength();
-  if (length != 11)
-  {
-    std::cerr << "Set/Get length failed on null constructor." << length << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(length, 11u) << "Set/Get length failed on null constructor." << length;
 
   labelLine = LabelObjectLineType(currentIndex, 11);
   indexBack = labelLine.GetIndex();
 
-  if ((indexBack[0] != 3) || (indexBack[1] != 7))
-  {
-    std::cerr << "Set/Get Index failed on arg constructor. " << indexBack << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(indexBack[0], 3) << "Set/Get Index failed on arg constructor. " << indexBack;
+  EXPECT_EQ(indexBack[1], 7) << "Set/Get Index failed on arg constructor. " << indexBack;
 
-  if (labelLine.GetLength() != 11)
-  {
-    std::cerr << "Set/Get length failed on arg constructor." << length << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(labelLine.GetLength(), 11u) << "Set/Get length failed on arg constructor." << length;
 
-  if (!labelLine.HasIndex(currentIndex))
-  {
-    std::cerr << "Has Index failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(labelLine.HasIndex(currentIndex)) << "Has Index failed.";
 
-  if (labelLine.HasIndex(nextIndex))
-  {
-    std::cerr << "Has Index failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(labelLine.HasIndex(nextIndex)) << "Has Index failed.";
 
-  if (labelLine.IsNextIndex(currentIndex))
-  {
-    std::cerr << "Is Next Index failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(labelLine.IsNextIndex(currentIndex)) << "Is Next Index failed.";
 
-  if (!labelLine.IsNextIndex(nextIndex))
-  {
-    std::cerr << "Is Next Index failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(labelLine.IsNextIndex(nextIndex)) << "Is Next Index failed.";
 
   labelLine.Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
