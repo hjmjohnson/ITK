@@ -18,10 +18,10 @@
 
 #include "itkNeighborhood.h"
 #include "itkVector.h"
+#include "itkGTest.h"
 
 
-int
-itkNeighborhoodTest(int, char *[])
+TEST(Neighborhood, ConvertedLegacyTest)
 {
   std::cout << "TESTING WITH VNL_VECTOR ALLOCATOR" << std::endl;
   itk::Neighborhood<float, 2, vnl_vector<float>> b;
@@ -109,6 +109,4 @@ itkNeighborhoodTest(int, char *[])
   itk::Neighborhood<float, 2> q2;
   q2.SetRadius(3);
   q2.Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
