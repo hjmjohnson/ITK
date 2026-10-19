@@ -18,9 +18,9 @@
 
 #include "itkListSample.h"
 #include "itkSubsample.h"
+#include "itkGTest.h"
 
-int
-itkSubsampleTest2(int, char *[])
+TEST(Subsample, ConvertedLegacyTest2)
 {
   std::cout << "Subsample Test \n \n";
 
@@ -60,21 +60,14 @@ itkSubsampleTest2(int, char *[])
     std::cout << "Adding instance: " << i << " to subSample" << std::endl;
   }
 
-  if (subSample->Size() != 5)
-  {
-    std::cerr << "Size of the subsample container should be 5" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(subSample->Size(), 5u) << "Size of the subsample container should be 5";
 
   for (unsigned int i = 0; i < subSample->Size(); ++i)
   {
     std::cout << "Measurement Vector: " << i << '\t' << subSample->GetMeasurementVector(i) << std::endl;
 
-    if (subSample->GetMeasurementVector(i) != sample->GetMeasurementVector(i * 2))
-    {
-      std::cerr << "Subsampling is not correctly done!" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(subSample->GetMeasurementVector(i), sample->GetMeasurementVector(i * 2))
+      << "Subsampling is not correctly done!";
   }
 
   using CascadedSubsampleType = itk::Statistics::Subsample<SubsampleType>;
@@ -88,11 +81,7 @@ itkSubsampleTest2(int, char *[])
     subSample2->AddInstance(i);
   }
 
-  if (subSample2->Size() != 3)
-  {
-    std::cerr << "Size of the subsample2 container should be 3" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(subSample2->Size(), 3u) << "Size of the subsample2 container should be 3";
 
   subSample2->Swap(0, 2);
 
@@ -103,11 +92,8 @@ itkSubsampleTest2(int, char *[])
   {
     std::cout << "Measurement Vector: " << i << '\t' << subSample2->GetMeasurementVector(i) << std::endl;
 
-    if (subSample2->GetMeasurementVector(i) != sample->GetMeasurementVector(i * 4))
-    {
-      std::cerr << "Subsampling of a subsample is not correctly done!" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(subSample2->GetMeasurementVector(i), sample->GetMeasurementVector(i * 4))
+      << "Subsampling of a subsample is not correctly done!";
   }
 
   std::cout << subSample2->GetSample() << std::endl;
@@ -139,32 +125,16 @@ itkSubsampleTest2(int, char *[])
 
   citer = iter1;
 
-  if (citer != iter1)
-  {
-    std::cerr << "Error in iterator != operator " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(citer, iter1) << "Error in iterator != operator ";
 
 
-  if (!(citer == iter1))
-  {
-    std::cerr << "Error in iterator == operator " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(citer, iter1) << "Error in iterator == operator ";
 
 
-  if (iter1 != iter2)
-  {
-    std::cerr << "Error in iterator != operator " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(iter1, iter2) << "Error in iterator != operator ";
 
 
-  if (!(iter1 == iter2))
-  {
-    std::cerr << "Error in iterator == operator " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(iter1, iter2) << "Error in iterator == operator ";
 
 
   //
@@ -177,18 +147,10 @@ itkSubsampleTest2(int, char *[])
     IteratorType       iter8 = subSample2->End();
 
     iter8 = iter7;
-    if (iter8 != iter7)
-    {
-      std::cerr << "Iterator operator=() failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter8, iter7) << "Iterator operator=() failed";
 
     IteratorType iter3 = subSample2->Begin();
-    if (iter3 != subSample2->Begin())
-    {
-      std::cerr << "Iterator constructor from sample failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter3, subSample2->Begin()) << "Iterator constructor from sample failed";
 
     unsigned int counter = 0;
     while (iter3 != subSample2->End())
@@ -197,25 +159,13 @@ itkSubsampleTest2(int, char *[])
       counter++;
     }
 
-    if (counter != subSample2->Size())
-    {
-      std::cerr << "Iterator walk failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(counter, subSample2->Size()) << "Iterator walk failed";
 
     const IteratorType iter4(iter8);
-    if (iter4 != iter8)
-    {
-      std::cerr << "Iterator copy constructor failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter4, iter8) << "Iterator copy constructor failed";
 
     const IteratorType iter5 = iter8;
-    if (iter5 != iter8)
-    {
-      std::cerr << "Iterator operator= failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter5, iter8) << "Iterator operator= failed";
 
     IteratorType           iter6(subSample2);
     constexpr unsigned int targetEntry{ 2 };
@@ -225,13 +175,7 @@ itkSubsampleTest2(int, char *[])
       ++iter6;
     }
 
-    if (iter6.GetInstanceIdentifier() != targetEntry)
-    {
-      std::cerr << "Iterator Constructor with instance identifier failed" << std::endl;
-      std::cerr << "Expected identifier = " << targetEntry << std::endl;
-      std::cerr << "identifier returned = " << iter6.GetInstanceIdentifier() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter6.GetInstanceIdentifier(), targetEntry) << "Iterator Constructor with instance identifier failed";
   }
 
   // Testing methods specific to ConstIterators
@@ -241,49 +185,25 @@ itkSubsampleTest2(int, char *[])
 
     iter12 = iter11;
 
-    if (iter12 != iter11)
-    {
-      std::cerr << "ConstIterator operator!=() or operator=() failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter12, iter11) << "ConstIterator operator!=() or operator=() failed";
 
-    if (!(iter12 == iter11))
-    {
-      std::cerr << "ConstIterator operator==() failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter12, iter11) << "ConstIterator operator==() failed";
 
     const ConstIteratorType iter3(iter12);
-    if (iter3 != iter12)
-    {
-      std::cerr << "ConstIterator copy constructor failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter3, iter12) << "ConstIterator copy constructor failed";
 
     const CascadedSubsampleType * constSample = subSample2.GetPointer();
 
     const ConstIteratorType iter4(constSample->Begin());
     const ConstIteratorType iter5(subSample2->Begin());
-    if (iter4 != iter5)
-    {
-      std::cerr << "Constructor from const container Begin() differs from non-const Begin() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter4, iter5) << "Constructor from const container Begin() differs from non-const Begin() ";
 
     const ConstIteratorType iter6(constSample);
     const ConstIteratorType iter7(subSample2);
-    if (iter6 != iter7)
-    {
-      std::cerr << "ConstIterator Constructor from const container differs from non-const container" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter6, iter7) << "ConstIterator Constructor from const container differs from non-const container";
 
     const ConstIteratorType iter8(subSample2);
-    if (iter8.GetInstanceIdentifier() != 0)
-    {
-      std::cerr << "Constructor with instance identifier 0 failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter8.GetInstanceIdentifier(), 0u) << "Constructor with instance identifier 0 failed";
 
 
     ConstIteratorType      iter9(subSample2);
@@ -299,22 +219,12 @@ itkSubsampleTest2(int, char *[])
     MeasurementVectorType vector9b = subSample2->GetMeasurementVector(targetEntry);
     for (unsigned int kitr = 0; kitr < measurementVectorSize; ++kitr)
     {
-      if (itk::Math::Absolute(vector9b[kitr] - vector9a[kitr]))
-      {
-        std::cerr << "Constructor with container followed by increments failed" << std::endl;
-        std::cerr << "Expected " << vector9b << std::endl;
-        std::cerr << "Received " << vector9a << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(vector9b[kitr], vector9a[kitr]) << "Constructor with container followed by increments failed";
     }
 
     unsigned int      counter = 0;
     ConstIteratorType iter10(constSample);
-    if (iter10 != constSample->Begin())
-    {
-      std::cerr << "ConstIterator constructor from sample failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(iter10, constSample->Begin()) << "ConstIterator constructor from sample failed";
 
 
     while (iter10 != constSample->End())
@@ -323,12 +233,6 @@ itkSubsampleTest2(int, char *[])
       counter++;
     }
 
-    if (counter != constSample->Size())
-    {
-      std::cerr << "Iterator walk failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(counter, constSample->Size()) << "Iterator walk failed";
   }
-
-  return EXIT_SUCCESS;
 }
