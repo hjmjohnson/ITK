@@ -19,8 +19,11 @@
 #include "itkImageToImageMetricv4.h"
 
 #include "itkAffineTransform.h"
+#include "itkGTest.h"
 #include <algorithm> // For max.
 
+namespace
+{
 /**
  *  \class RegistrationParameterScalesEstimatorTestMetric for test.
  *  Create a simple metric to use for testing here.
@@ -215,11 +218,11 @@ protected:
   RegistrationParameterScalesEstimatorTest() = default;
   ~RegistrationParameterScalesEstimatorTest() override = default;
 };
+} // namespace
 
 /**
  */
-int
-itkRegistrationParameterScalesEstimatorTest(int, char *[])
+TEST(RegistrationParameterScalesEstimator, ConvertedLegacyTest)
 {
 
   // Image begins
@@ -385,12 +388,8 @@ itkRegistrationParameterScalesEstimatorTest(int, char *[])
     std::cout << "STREAMED ENUM VALUE RegistrationParameterScalesEstimatorEnums::SamplingStrategy: " << ee << std::endl;
   }
 
-  if (jacobianPass && nonUniformForJacobian && randomPass && fullDomainPass)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(jacobianPass);
+  EXPECT_TRUE(nonUniformForJacobian);
+  EXPECT_TRUE(randomPass);
+  EXPECT_TRUE(fullDomainPass);
 }
