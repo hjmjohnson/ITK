@@ -5,7 +5,6 @@ set(
   itkBinShrinkImageFilterTest1.cxx
   itkBinShrinkImageFilterTest2.cxx
   itkBSplineControlPointImageFilterTest.cxx
-  itkBSplineControlPointImageFunctionTest.cxx
   itkBSplineDownsampleImageFilterTest.cxx
   itkBSplineResampleImageFilterTest.cxx
   itkBSplineScatteredDataPointSetToImageFilterTest.cxx
@@ -183,12 +182,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/N4ControlPoints_3D_output.nii.gz
     ${ITK_TEST_OUTPUT_DIR}/N4ControlPoints_3D_outputRefined.nii.gz
-)
-itk_add_test(
-  NAME itkBSplineControlPointImageFunctionTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkBSplineControlPointImageFunctionTest
 )
 itk_add_test(
   NAME itkChangeInformationImageFilterTest
@@ -746,6 +739,7 @@ itk_add_test(
 
 set(
   ITKImageGridGTests
+  itkBSplineControlPointImageFunctionGTest.cxx
   itkChangeInformationImageFilterGTest.cxx
   itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx

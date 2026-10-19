@@ -16,10 +16,9 @@
  *
  *=========================================================================*/
 #include "itkBSplineControlPointImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkBSplineControlPointImageFunctionTest(int, char *[])
+TEST(BSplineControlPointImageFunction, ConvertedLegacyTest)
 {
 
   // We construct a B-spline parametric curve equal to f(u) = 0.5 * u^2 - 0.5 * u
@@ -57,7 +56,7 @@ itkBSplineControlPointImageFunctionTest(int, char *[])
   using BSplinerType = itk::BSplineControlPointImageFunction<VectorImageType>;
   auto bspliner = BSplinerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(bspliner, BSplineControlPointImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(bspliner, BSplineControlPointImageFunction, ImageFunction);
 
   // Define the parametric domain [0, 1).
   origin.Fill(0);
@@ -65,39 +64,33 @@ itkBSplineControlPointImageFunctionTest(int, char *[])
   size.Fill(101);
 
   bspliner->SetOrigin(origin);
-  ITK_TEST_SET_GET_VALUE(origin, bspliner->GetOrigin());
+  EXPECT_EQ(origin, bspliner->GetOrigin());
 
   bspliner->SetSpacing(spacing);
-  ITK_TEST_SET_GET_VALUE(spacing, bspliner->GetSpacing());
+  EXPECT_EQ(spacing, bspliner->GetSpacing());
 
   bspliner->SetSize(size);
-  ITK_TEST_SET_GET_VALUE(size, bspliner->GetSize());
+  EXPECT_EQ(size, bspliner->GetSize());
 
   constexpr unsigned int bSplineOrderValue{ 3 };
   bspliner->SetSplineOrder(bSplineOrderValue);
   for (auto i : bspliner->GetSplineOrder())
   {
-    if (i != bSplineOrderValue)
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in itk::BSplineControlPointImageFunction::GetSplineOrder" << std::endl;
-      std::cerr << "Expected: " << bSplineOrderValue << ", but got: " << i << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(i, bSplineOrderValue) << "Error in itk::BSplineControlPointImageFunction::GetSplineOrder";
   }
 
   auto bSplineOrder = itk::MakeFilled<BSplinerType::ArrayType>(bSplineOrderValue);
   bspliner->SetSplineOrder(bSplineOrder);
-  ITK_TEST_SET_GET_VALUE(bSplineOrder, bspliner->GetSplineOrder());
+  EXPECT_EQ(bSplineOrder, bspliner->GetSplineOrder());
 
   constexpr BSplinerType::ArrayType::ValueType closeDimensionValue{ 0 };
   auto closeDimension = itk::MakeFilled<BSplinerType::ArrayType>(closeDimensionValue);
   bspliner->SetCloseDimension(closeDimension);
-  ITK_TEST_SET_GET_VALUE(closeDimension, bspliner->GetCloseDimension());
+  EXPECT_EQ(closeDimension, bspliner->GetCloseDimension());
 
   constexpr BSplinerType::RealType bSplineEpsilon{ 1e-3 };
   bspliner->SetBSplineEpsilon(bSplineEpsilon);
-  ITK_TEST_SET_GET_VALUE(bSplineEpsilon, bspliner->GetBSplineEpsilon());
+  EXPECT_EQ(bSplineEpsilon, bspliner->GetBSplineEpsilon());
 
 
   bspliner->SetInputImage(phiLattice);
@@ -115,31 +108,19 @@ itkBSplineControlPointImageFunctionTest(int, char *[])
     point[0] = 0.0;
 
     data = bspliner->EvaluateAtParametricPoint(point);
-    if (itk::Math::Absolute(data[0] - 0.166666666667) > 1e-5)
-    {
-      std::cerr << "Evaluate1: data is further away from the expected value." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(data[0], 0.166666666667, 1e-5) << "Evaluate1: data is further away from the expected value.";
 
     gradient = bspliner->EvaluateGradientAtParametricPoint(point);
-    if (itk::Math::Absolute(gradient(0, 0) + 0.5) > 1e-5)
-    {
-      std::cerr << "Evaluate1: gradient is further away from the expected value." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(gradient(0, 0), -0.5, 1e-5) << "Evaluate1: gradient is further away from the expected value.";
 
     hessianComponent = bspliner->EvaluateHessianAtParametricPoint(point, 0);
 
-    if (itk::Math::Absolute(hessianComponent(0, 0) - 1.0) > 1e-5)
-    {
-      std::cerr << "Evaluate1: hessian is further away from the expected value." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(hessianComponent(0, 0), 1.0, 1e-5) << "Evaluate1: hessian is further away from the expected value.";
   }
   catch (...)
   {
     std::cerr << "Error in evaluate functions" << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   // f(0.351) = 0.05276717;
@@ -149,33 +130,20 @@ itkBSplineControlPointImageFunctionTest(int, char *[])
     point[0] = 0.351;
 
     data = bspliner->EvaluateAtParametricPoint(point);
-    if (itk::Math::Absolute(data[0] - 0.05276717) > 1e-5)
-    {
-      std::cerr << "Evaluate2: data is further away from the expected value." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(data[0], 0.05276717, 1e-5) << "Evaluate2: data is further away from the expected value.";
 
     gradient = bspliner->EvaluateGradientAtParametricPoint(point);
-    if (itk::Math::Absolute(gradient(0, 0) + 0.149) > 1e-5)
-    {
-      std::cerr << "Evaluate2: gradient is further away from the expected value." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(gradient(0, 0), -0.149, 1e-5) << "Evaluate2: gradient is further away from the expected value.";
 
     hessianComponent = bspliner->EvaluateHessianAtParametricPoint(point, 0);
-    if (itk::Math::Absolute(hessianComponent(0, 0) - 1.0) > 1e-5)
-    {
-      std::cerr << "Evaluate2: hessian is further away from the expected value." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(hessianComponent(0, 0), 1.0, 1e-5) << "Evaluate2: hessian is further away from the expected value.";
   }
   catch (...)
   {
     std::cerr << "Error in evaluate functions" << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
