@@ -20,10 +20,9 @@
 #include "itkNeighborhoodOperatorImageFunction.h"
 
 #include "itkGaussianOperator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkNeighborhoodOperatorImageFunctionTest(int, char *[])
+TEST(NeighborhoodOperatorImageFunction, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using PixelType = float;
@@ -45,7 +44,7 @@ itkNeighborhoodOperatorImageFunctionTest(int, char *[])
 
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, NeighborhoodOperatorImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, NeighborhoodOperatorImageFunction, ImageFunction);
 
 
   function->SetInputImage(image);
@@ -57,27 +56,20 @@ itkNeighborhoodOperatorImageFunctionTest(int, char *[])
 
   auto index = itk::Index<3>::Filled(25);
 
-  std::cout << "EvaluateAtIndex: ";
+  // EvaluateAtIndex
   const FunctionType::OutputType Blur = function->EvaluateAtIndex(index);
 
   // since the input image is constant
   // the should be equal to the initial value
-  if (itk::Math::Absolute(initialValue - Blur) > 10e-7)
-  {
-    std::cerr << "[FAILED] : Error in Blur computation" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "[PASSED] " << std::endl;
+  EXPECT_NEAR(initialValue, Blur, 10e-7) << "Error in Blur computation";
 
-  std::cout << "EvaluateAtContinuousIndex: ";
+  // EvaluateAtContinuousIndex
 
   auto continuousIndex = itk::MakeFilled<FunctionType::ContinuousIndexType>(25);
 
   function->EvaluateAtContinuousIndex(continuousIndex);
 
-  std::cout << "[PASSED] " << std::endl;
-
-  std::cout << "EvaluateAtPoint: ";
+  // EvaluateAtPoint
 
   FunctionType::PointType point;
   point[0] = 25;
@@ -86,11 +78,6 @@ itkNeighborhoodOperatorImageFunctionTest(int, char *[])
 
   function->Evaluate(point);
 
-  std::cout << "[PASSED] " << std::endl;
-
 
   std::cout << function << std::endl;
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
