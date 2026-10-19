@@ -21,9 +21,9 @@
 
 #include "itkScalarImageToTextureFeaturesFilter.h"
 #include "itkDenseFrequencyContainer2.h"
+#include "itkGTest.h"
 
-int
-itkScalarImageToTextureFeaturesFilterTest(int, char *[])
+TEST(ScalarImageToTextureFeaturesFilter, ConvertedLegacyTest)
 {
 
   // Data definitions
@@ -94,7 +94,6 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
   //--------------------------------------------------------------------------
   // Test the texFilter
   //--------------------------------------------------------------------------
-  try
   {
 
     using TextureFilterType = itk::Statistics::
@@ -102,71 +101,34 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
 
     // First test: just use the defaults.
     auto texFilter = TextureFilterType::New();
-    bool passed = true;
     // Invoke update before adding an input. An exception should be
     // thrown.
-    try
-    {
-      texFilter->Update();
-      passed = false;
-      std::cerr << "Failed to throw expected exception due to nullptr input: " << std::endl;
-      return EXIT_FAILURE;
-    }
-    catch (const itk::ExceptionObject & excp)
-    {
-      std::cout << "Expected exception caught: " << excp << std::endl;
-    }
+    EXPECT_THROW(texFilter->Update(), itk::ExceptionObject)
+      << "Failed to throw expected exception due to nullptr input: ";
 
     texFilter->ResetPipeline();
 
-    if (texFilter->GetInput() != nullptr)
-    {
-      std::cerr << "GetInput() should return nullptr since the input is not set yet " << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(texFilter->GetInput(), nullptr) << "GetInput() should return nullptr since the input is not set yet ";
 
-    if (texFilter->GetMaskImage() != nullptr)
-    {
-      std::cerr << "GetMaskImage() should return nullptr since the mask image is not set yet " << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(texFilter->GetMaskImage(), nullptr)
+      << "GetMaskImage() should return nullptr since the mask image is not set yet ";
 
     // Invoke update with a nullptr input. An exception should be
     // thrown.
     texFilter->SetInput(nullptr);
-    try
-    {
-      texFilter->Update();
-      passed = false;
-      std::cerr << "Failed to throw expected exception due to nullptr input: " << std::endl;
-      return EXIT_FAILURE;
-    }
-    catch (const itk::ExceptionObject & excp)
-    {
-      std::cout << "Expected exception caught: " << excp << std::endl;
-    }
+    EXPECT_THROW(texFilter->Update(), itk::ExceptionObject)
+      << "Failed to throw expected exception due to nullptr input: ";
 
     texFilter->ResetPipeline();
 
-    if (texFilter->GetInput() != nullptr)
-    {
-      passed = false;
-    }
+    EXPECT_EQ(texFilter->GetInput(), nullptr);
 
     // Test the Use_PixelContainer boolean
     texFilter->SetFastCalculations(false);
-    if (texFilter->GetFastCalculations() != false)
-    {
-      std::cerr << "Error in Set/Get FastCalculations methods" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(texFilter->GetFastCalculations()) << "Error in Set/Get FastCalculations methods";
 
     texFilter->FastCalculationsOn();
-    if (texFilter->GetFastCalculations() != true)
-    {
-      std::cerr << "Error in Set/Get FastCalculationsOn method" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(texFilter->GetFastCalculations()) << "Error in Set/Get FastCalculationsOn method";
 
     texFilter->FastCalculationsOff();
     texFilter->SetInput(image);
@@ -176,18 +138,10 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
     texFilter->Print(std::cout);
 
     // Test GetInput
-    if (texFilter->GetInput() != image)
-    {
-      std::cerr << "Error in GetInput() method " << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(texFilter->GetInput(), image);
 
     // Test GetMaskImage
-    if (texFilter->GetMaskImage() != mask)
-    {
-      std::cerr << "Error in GetMaskImage() method " << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(texFilter->GetMaskImage(), mask);
 
     TextureFilterType::FeatureValueVectorPointer means = texFilter->GetFeatureMeans();
     TextureFilterType::FeatureValueVectorPointer stds = texFilter->GetFeatureStandardDeviations();
@@ -200,12 +154,7 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
       TextureFilterType::FeatureValueVector::ConstIterator mIt = means->Begin();
       for (int counter = 0; mIt != means->End(); ++mIt, counter++)
       {
-        if (itk::Math::Absolute(expectedMeans[counter] - mIt.Value()) > 0.0001)
-        {
-          std::cerr << "Error. Mean for feature " << counter << " is " << mIt.Value() << ", expected "
-                    << expectedMeans[counter] << '.' << std::endl;
-          passed = false;
-        }
+        EXPECT_NEAR(expectedMeans[counter], mIt.Value(), 0.0001) << "Mean for feature " << counter;
       }
     }
 
@@ -213,12 +162,7 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
       TextureFilterType::FeatureValueVector::ConstIterator sIt = stds->Begin();
       for (int counter = 0; sIt != stds->End(); ++sIt, counter++)
       {
-        if (itk::Math::Absolute(expectedDeviations[counter] - sIt.Value()) > 0.0001)
-        {
-          std::cerr << "Error. Deviation for feature " << counter << " is " << sIt.Value() << ", expected "
-                    << expectedDeviations[counter] << '.' << std::endl;
-          passed = false;
-        }
+        EXPECT_NEAR(expectedDeviations[counter], sIt.Value(), 0.0001) << "Deviation for feature " << counter;
       }
     }
 
@@ -235,12 +179,7 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
       TextureFilterType::FeatureValueVector::ConstIterator mIt = means->Begin();
       for (int counter = 0; mIt != means->End(); ++mIt, counter++)
       {
-        if (itk::Math::Absolute(expectedMeans2[counter] - mIt.Value()) > 0.0001)
-        {
-          std::cerr << "Error. Mean for feature " << counter << " is " << mIt.Value() << ", expected "
-                    << expectedMeans2[counter] << '.' << std::endl;
-          passed = false;
-        }
+        EXPECT_NEAR(expectedMeans2[counter], mIt.Value(), 0.0001) << "Mean for feature " << counter;
       }
     }
 
@@ -248,12 +187,7 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
       TextureFilterType::FeatureValueVector::ConstIterator sIt = stds->Begin();
       for (int counter = 0; sIt != stds->End(); ++sIt, counter++)
       {
-        if (itk::Math::Absolute(expectedDeviations2[counter] - sIt.Value()) > 0.0001)
-        {
-          std::cerr << "Error. Deviation for feature " << counter << " is " << sIt.Value() << ", expected "
-                    << expectedDeviations2[counter] << '.' << std::endl;
-          passed = false;
-        }
+        EXPECT_NEAR(expectedDeviations2[counter], sIt.Value(), 0.0001) << "Deviation for feature " << counter;
       }
     }
 
@@ -275,11 +209,7 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
          vIt != offsets->End();
          ++vIt, ++vIt2)
     {
-      if (vIt.Value() != vIt2.Value())
-      {
-        std::cerr << "Offsets not properly set" << std::endl;
-        passed = false;
-      }
+      EXPECT_EQ(vIt.Value(), vIt2.Value()) << "Offsets not properly set";
     }
 
     texFilter->Update();
@@ -294,12 +224,7 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
       TextureFilterType::FeatureValueVector::ConstIterator mIt = means->Begin();
       for (int counter = 0; mIt != means->End(); ++mIt, counter++)
       {
-        if (itk::Math::Absolute(expectedMeans3[counter] - mIt.Value()) > 0.0001)
-        {
-          std::cerr << "Error. Mean for feature " << counter << " is " << mIt.Value() << ", expected "
-                    << expectedMeans3[counter] << '.' << std::endl;
-          passed = false;
-        }
+        EXPECT_NEAR(expectedMeans3[counter], mIt.Value(), 0.0001) << "Mean for feature " << counter;
       }
     }
 
@@ -307,12 +232,7 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
       TextureFilterType::FeatureValueVector::ConstIterator sIt = stds->Begin();
       for (int counter = 0; sIt != stds->End(); ++sIt, counter++)
       {
-        if (itk::Math::Absolute(expectedDeviations3[counter] - sIt.Value()) > 0.0001)
-        {
-          std::cerr << "Error. Deviation for feature " << counter << " is " << sIt.Value() << ", expected "
-                    << expectedDeviations3[counter] << '.' << std::endl;
-          passed = false;
-        }
+        EXPECT_NEAR(expectedDeviations3[counter], sIt.Value(), 0.0001) << "Deviation for feature " << counter;
       }
     }
 
@@ -330,35 +250,14 @@ itkScalarImageToTextureFeaturesFilterTest(int, char *[])
     TextureFilterType::FeatureNameVector::ConstIterator fIt;
 
     fIt = requestedFeatures2->Begin();
-    if (fIt.Value() !=
-        static_cast<uint8_t>(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Inertia))
-    {
-      std::cerr << "Requested feature name not correctly set" << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(fIt.Value(),
+              static_cast<uint8_t>(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::Inertia))
+      << "Requested feature name not correctly set";
     ++fIt;
 
-    if (fIt.Value() !=
-        static_cast<uint8_t>(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::ClusterShade))
-    {
-      std::cerr << "Requested feature name not correctly set" << std::endl;
-      passed = false;
-    }
-
-    if (!passed)
-    {
-      std::cerr << "Test failed" << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    std::cerr << "Test succeeded" << std::endl;
-    return EXIT_SUCCESS;
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    std::cerr << "ExceptionObject caught !" << std::endl;
-    std::cerr << err << std::endl;
-    std::cerr << "Test failed" << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_EQ(
+      fIt.Value(),
+      static_cast<uint8_t>(itk::Statistics::HistogramToTextureFeaturesFilterEnums::TextureFeature::ClusterShade))
+      << "Requested feature name not correctly set";
   }
 }
