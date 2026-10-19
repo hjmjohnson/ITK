@@ -20,6 +20,7 @@
 #include "itkStreamingImageFilter.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkImageBufferRange.h"
+#include "itkGTest.h"
 
 #include <fstream>
 #include <numeric> // For iota.
@@ -81,8 +82,7 @@ VerifyPixel(int row, int col, int val)
 }
 } // namespace
 
-int
-itkMirrorPadImageTest(int, char *[])
+TEST(MirrorPadImageFilter, ConvertedLegacyTest)
 {
   // type alias to simplify the syntax
   using SimpleImage = itk::Image<short, 2>;
@@ -166,15 +166,7 @@ itkMirrorPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "mirrorPadImageFilter case 1 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "mirrorPadImageFilter case 1 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "mirrorPadImageFilter case 1 failed.";
 
 
   // CASE 2
@@ -220,15 +212,7 @@ itkMirrorPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "mirrorPadImageFilter case 2 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "mirrorPadImageFilter case 2 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "mirrorPadImageFilter case 2 failed.";
 
 
   // CASE 3
@@ -280,15 +264,5 @@ itkMirrorPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "mirrorPadImageFilter case 3 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "mirrorPadImageFilter case 3 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "mirrorPadImageFilter case 3 failed.";
 }
