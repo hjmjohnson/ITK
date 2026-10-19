@@ -18,9 +18,12 @@
 
 #include "itkMesh.h"
 #include "itkDefaultDynamicMeshTraits.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
+namespace
+{
 /**
  * Some type alias to make things easier.
  */
@@ -55,9 +58,9 @@ using PointDataContainer = MeshType::PointDataContainer;
 
 using PointsIterator = PointsContainer::Iterator;
 using CellsIterator = PointDataContainer::Iterator;
+} // namespace
 
-int
-itkDynamicMeshTest(int, char *[])
+TEST(DynamicMesh, ConvertedLegacyTest)
 {
 
   /**
@@ -93,7 +96,4 @@ itkDynamicMeshTest(int, char *[])
     std::cout << point.Index() << " = " << point.Value() << std::endl;
     point++;
   }
-
-
-  return EXIT_SUCCESS;
 }
