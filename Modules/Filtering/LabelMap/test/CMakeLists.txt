@@ -29,7 +29,6 @@ set(
   itkConvertLabelMapFilterTest1.cxx
   itkConvertLabelMapFilterTest2.cxx
   itkCropLabelMapFilterTest1.cxx
-  itkLabelImageToLabelMapFilterTest.cxx
   itkLabelImageToShapeLabelMapFilterTest1.cxx
   itkLabelImageToStatisticsLabelMapFilterTest1.cxx
   itkLabelMapFilterTest.cxx
@@ -719,12 +718,6 @@ itk_add_test(
     50
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/cthead1-label-crop.mha
-)
-itk_add_test(
-  NAME itkLabelImageToLabelMapFilterTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelImageToLabelMapFilterTest
 )
 itk_add_test(
   NAME itkLabelImageToShapeLabelMapFilterTest1
@@ -1795,6 +1788,7 @@ itk_add_test(
 
 set(
   ITKLabelMapGTests
+  itkLabelImageToLabelMapFilterGTest.cxx
   itkShapeLabelMapFilterGTest.cxx
   itkLabelMapBugfixGTest.cxx
   itkStatisticsLabelMapFilterGTest.cxx
