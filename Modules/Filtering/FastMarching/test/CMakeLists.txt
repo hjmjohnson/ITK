@@ -2,7 +2,6 @@ itk_module_test()
 
 set(
   ITKFastMarchingTests
-  itkFastMarchingExtensionImageFilterTest.cxx
   itkFastMarchingTest.cxx
   itkFastMarchingTest2.cxx
   itkFastMarchingUpwindGradientTest.cxx
@@ -26,12 +25,6 @@ set(
 
 createtestdriver(ITKFastMarching "${ITKFastMarching-Test_LIBRARIES}" "${ITKFastMarchingTests}")
 
-itk_add_test(
-  NAME itkFastMarchingExtensionImageFilterTest
-  COMMAND
-    ITKFastMarchingTestDriver
-    itkFastMarchingExtensionImageFilterTest
-)
 itk_add_test(
   NAME itkFastMarchingTest
   COMMAND
@@ -416,6 +409,7 @@ set_property(
 
 set(
   ITKFastMarchingGTests
+  itkFastMarchingExtensionImageFilterGTest.cxx
   itkFastMarchingImageFilterBaseGTest.cxx
   itkFastMarchingUpwindGradientImageFilterGTest.cxx
 )
