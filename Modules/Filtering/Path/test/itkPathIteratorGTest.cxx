@@ -20,10 +20,9 @@
 #include "itkImageRegionIterator.h"
 #include "itkPolyLineParametricPath.h"
 #include "itkPathIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkPathIteratorTest(int, char *[])
+TEST(PathIterator, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using PixelType = double;
@@ -34,8 +33,6 @@ itkPathIteratorTest(int, char *[])
 
   using IndexType = ImageType::IndexType;
   using VertexType = PathType::VertexType;
-
-  bool passed = true;
 
 
   // Setup the image
@@ -106,11 +103,7 @@ itkPathIteratorTest(int, char *[])
               << "; Now inverting." << std::endl;
     iter.Set(1.0 - iter.Get());
   }
-  if (static_cast<int>(0.5 + 1000 * iter.Get()) != 1000)
-  {
-    std::cout << "PathIteratorTest: Set() Failed" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * iter.Get()), 1000) << "PathIteratorTest: Set() Failed";
 
   for (iter.GoToBegin(); !iter.IsAtEnd(); ++iter)
   {
@@ -118,18 +111,6 @@ itkPathIteratorTest(int, char *[])
   }
   std::cout << "Should still be at end: ";
   std::cout << "Path(" << iter.GetPathPosition() << ") @ " << iter.GetIndex() << " = " << iter.Get() << std::endl;
-  if ((iter.GetIndex())[0] != 30 || (iter.GetIndex())[1] != 30)
-  {
-    std::cout << "PathIteratorTest:  Failed to iterate over a closed loop" << std::endl;
-    passed = false;
-  }
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_EQ((iter.GetIndex())[0], 30) << "PathIteratorTest:  Failed to iterate over a closed loop";
+  EXPECT_EQ((iter.GetIndex())[1], 30) << "PathIteratorTest:  Failed to iterate over a closed loop";
 }
