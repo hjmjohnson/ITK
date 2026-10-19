@@ -7,7 +7,6 @@ set(
   itkJointHistogramMutualInformationImageToImageRegistrationTest.cxx
   itkMattesMutualInformationImageToImageMetricv4RegistrationTest.cxx
   itkMattesMutualInformationImageToImageMetricv4Test.cxx
-  itkMeanSquaresImageToImageMetricv4OnVectorTest2.cxx
   itkMeanSquaresImageToImageMetricv4RegistrationTest.cxx
   itkMeanSquaresImageToImageMetricv4RegistrationTest2.cxx
   itkMeanSquaresImageToImageMetricv4SpeedTest.cxx
@@ -59,13 +58,6 @@ itk_add_test(
   COMMAND
     ITKMetricsv4TestDriver
     itkMeanSquaresImageToImageMetricv4Test
-)
-
-itk_add_test(
-  NAME itkMeanSquaresImageToImageMetricv4OnVectorTest2
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMeanSquaresImageToImageMetricv4OnVectorTest2
 )
 
 itk_add_test(
@@ -316,5 +308,6 @@ set(
   itkImageToImageMetricv4WorkUnitsGTest.cxx
   itkMattesMutualInformationImageToImageMetricv4GTest.cxx
   itkMeanSquaresImageToImageMetricv4OnVectorGTest.cxx
+  itkMeanSquaresImageToImageMetricv4OnVectorGTest2.cxx
 )
 creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")
