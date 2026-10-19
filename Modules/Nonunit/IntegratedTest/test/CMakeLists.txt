@@ -1,20 +1,12 @@
 itk_module_test()
 set(
   ITKIntegratedTestTests
-  itkReleaseDataFilterTest.cxx
   itkCommonPrintTest.cxx
   itkBasicFiltersPrintTest.cxx
   itkShrinkImagePreserveObjectPhysicalLocations.cxx
 )
 
 createtestdriver(ITKIntegratedTest "${ITKIntegratedTest-Test_LIBRARIES}" "${ITKIntegratedTestTests}")
-
-itk_add_test(
-  NAME itkReleaseDataFilterTest
-  COMMAND
-    ITKIntegratedTestTestDriver
-    itkReleaseDataFilterTest
-)
 
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
@@ -122,6 +114,7 @@ set(
   itkFilterImageAddGTest.cxx
   itkIOPrintGTest.cxx
   itkNumericsPrintGTest.cxx
+  itkReleaseDataFilterGTest.cxx
   itkSpatialObjectPrintGTest.cxx
   itkStatisticsPrintGTest.cxx
 )
