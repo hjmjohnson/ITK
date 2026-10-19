@@ -18,10 +18,9 @@
 
 #include "itkListSample.h"
 #include "itkStatisticsAlgorithm.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkStatisticsAlgorithmTest(int, char *[])
+TEST(StatisticsAlgorithm, ConvertedLegacyTest)
 {
   std::cout << "StatisticsAlgorithm Test \n \n";
 
@@ -40,8 +39,9 @@ itkStatisticsAlgorithmTest(int, char *[])
   // Testing the exception throwing for samples of measurement size = 0
   sample->SetMeasurementVectorSize(0);
 
-  ITK_TRY_EXPECT_EXCEPTION(
-    itk::Statistics::Algorithm::FindSampleBound(constSample, constSample->Begin(), constSample->End(), lower, upper));
+  EXPECT_THROW(
+    itk::Statistics::Algorithm::FindSampleBound(constSample, constSample->Begin(), constSample->End(), lower, upper),
+    itk::ExceptionObject);
 
   // Now set the correct measurement vector size
   sample->SetMeasurementVectorSize(measurementVectorSize);
@@ -49,8 +49,9 @@ itkStatisticsAlgorithmTest(int, char *[])
   // Testing the equivalent of an empty sample by passing
   // the Begin() iterator in lieu of the End() iterator.
 
-  ITK_TRY_EXPECT_EXCEPTION(
-    itk::Statistics::Algorithm::FindSampleBound(constSample, constSample->Begin(), constSample->Begin(), lower, upper));
+  EXPECT_THROW(
+    itk::Statistics::Algorithm::FindSampleBound(constSample, constSample->Begin(), constSample->Begin(), lower, upper),
+    itk::ExceptionObject);
 
   MeasurementVectorType measure(measurementVectorSize);
   MeasurementVectorType realUpper(measurementVectorSize);
@@ -88,29 +89,14 @@ itkStatisticsAlgorithmTest(int, char *[])
 
   constSample = sample;
   // Now testing the real algorithm
-  ITK_TRY_EXPECT_NO_EXCEPTION(
+  EXPECT_NO_THROW(
     itk::Statistics::Algorithm::FindSampleBound(constSample, constSample->Begin(), constSample->End(), lower, upper));
 
   constexpr float epsilon{ 1e-5 };
 
   for (unsigned int j = 0; j < measurementVectorSize; ++j)
   {
-    if (itk::Math::Absolute(lower[j] - realLower[j]) > epsilon)
-    {
-      std::cerr << "FindSampleBound() failed" << std::endl;
-      std::cerr << "Expected lower = " << realLower << std::endl;
-      std::cerr << "Computed lower = " << lower << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (itk::Math::Absolute(upper[j] - realUpper[j]) > epsilon)
-    {
-      std::cerr << "FindSampleBound() failed" << std::endl;
-      std::cerr << "Expected upper = " << realUpper << std::endl;
-      std::cerr << "Computed upper = " << upper << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(lower[j], realLower[j], epsilon) << "FindSampleBound() failed";
+    EXPECT_NEAR(upper[j], realUpper[j], epsilon) << "FindSampleBound() failed";
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
