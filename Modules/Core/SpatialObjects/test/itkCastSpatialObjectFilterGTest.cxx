@@ -20,10 +20,9 @@
 #include "itkGroupSpatialObject.h"
 #include "itkTubeSpatialObject.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkCastSpatialObjectFilterTest(int, char *[])
+TEST(CastSpatialObjectFilter, ConvertedLegacyTest)
 {
   // Ellipse
   using EllipseType = itk::EllipseSpatialObject<3>;
@@ -61,11 +60,11 @@ itkCastSpatialObjectFilterTest(int, char *[])
   using TubeListType = std::list<TubeType::Pointer>;
   auto caster = CastType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(caster, CastSpatialObjectFilter, Object);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(caster, CastSpatialObjectFilter, Object);
 
 
   caster->SetInput(group);
-  ITK_TEST_SET_GET_VALUE(group, caster->GetInput());
+  EXPECT_EQ(group, caster->GetInput());
 
   std::unique_ptr<TubeListType> tList(caster->GetTubes());
 
@@ -77,22 +76,15 @@ itkCastSpatialObjectFilterTest(int, char *[])
     found = true;
     unsigned int value = 0;
 
-    if (tListTube->GetPoints().empty())
-    {
-      std::cout << " [FAILED] : Size of the point list is zero" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(tListTube->GetPoints().empty()) << " [FAILED] : Size of the point list is zero";
 
     for (auto pnt = tListTube->GetPoints().begin(); pnt != tListTube->GetPoints().end(); ++pnt)
     {
       for (unsigned int d = 0; d < 3; ++d)
       {
-        if (itk::Math::NotAlmostEquals(pnt->GetPositionInWorldSpace()[d], value * tListTube->GetId()))
-        {
-          std::cout << " [FAILED] (Position is: " << pnt->GetPositionInWorldSpace()[d]
-                    << " expected : " << value * tListTube->GetId() << " ) " << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_DOUBLE_EQ(pnt->GetPositionInWorldSpace()[d], value * tListTube->GetId())
+          << " [FAILED] (Position is: " << pnt->GetPositionInWorldSpace()[d]
+          << " expected : " << value * tListTube->GetId() << " ) ";
       }
       value++;
     }
@@ -104,11 +96,9 @@ itkCastSpatialObjectFilterTest(int, char *[])
   }
   else
   {
-    std::cout << " [FAILED] : Cannot found TubeSpatialObject" << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << " [FAILED] : Cannot found TubeSpatialObject";
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
