@@ -20,11 +20,10 @@
 
 #include "itkRescaleIntensityImageFilter.h"
 #include "itkRandomImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkUnaryFunctorImageFilter.h"
 
-int
-itkRescaleIntensityImageFilterTest(int, char *[])
+TEST(RescaleIntensityImageFilter, ConvertedLegacyTest)
 {
   std::cout << "itkRescaleIntensityImageFilterTest Start" << std::endl;
 
@@ -46,7 +45,7 @@ itkRescaleIntensityImageFilterTest(int, char *[])
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, RescaleIntensityImageFilter, UnaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, RescaleIntensityImageFilter, UnaryFunctorImageFilter);
 
   // Now generate a real image
 
@@ -70,12 +69,12 @@ itkRescaleIntensityImageFilterTest(int, char *[])
   constexpr double desiredMaximum{ 1.0 };
 
   filter->SetOutputMinimum(desiredMinimum);
-  ITK_TEST_SET_GET_VALUE(desiredMinimum, filter->GetOutputMinimum());
+  EXPECT_EQ(desiredMinimum, filter->GetOutputMinimum());
 
   filter->SetOutputMaximum(desiredMaximum);
-  ITK_TEST_SET_GET_VALUE(desiredMaximum, filter->GetOutputMaximum());
+  EXPECT_EQ(desiredMaximum, filter->GetOutputMaximum());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->UpdateLargestPossibleRegion());
+  EXPECT_NO_THROW(filter->UpdateLargestPossibleRegion());
 
   using CalculatorType = itk::MinimumMaximumImageCalculator<TestOutputImage>;
   auto calculator = CalculatorType::New();
@@ -89,22 +88,7 @@ itkRescaleIntensityImageFilterTest(int, char *[])
   const double obtainedMinimum = calculator->GetMinimum();
   const double obtainedMaximum = calculator->GetMaximum();
 
-  if (!itk::Math::FloatAlmostEqual(obtainedMinimum, desiredMinimum, 10, tolerance))
-  {
-    std::cerr << "Error in minimum" << std::endl;
-    std::cerr << "Expected minimum = " << desiredMinimum << std::endl;
-    std::cerr << "Obtained minimum = " << obtainedMinimum << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(obtainedMinimum, desiredMinimum, tolerance) << "Error in minimum";
 
-  if (!itk::Math::FloatAlmostEqual(obtainedMaximum, desiredMaximum, 10, tolerance))
-  {
-    std::cerr << "Error in minimum" << std::endl;
-    std::cerr << "Expected minimum = " << desiredMaximum << std::endl;
-    std::cerr << "Obtained minimum = " << obtainedMaximum << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(obtainedMaximum, desiredMaximum, tolerance) << "Error in maximum";
 }

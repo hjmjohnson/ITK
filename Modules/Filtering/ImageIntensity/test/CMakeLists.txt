@@ -17,7 +17,6 @@ set(
   itkPolylineMask2DImageFilterTest.cxx
   itkPolylineMaskImageFilterTest.cxx
   itkPromoteDimensionImageTest.cxx
-  itkRescaleIntensityImageFilterTest.cxx
   itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
   itkRGBToVectorAdaptImageFilterTest.cxx
   itkShiftScaleImageFilterTest.cxx
@@ -235,12 +234,6 @@ itk_add_test(
     ITKImageIntensityTestDriver
     itkWeightedAddImageFilterTest
     0.4
-)
-itk_add_test(
-  NAME itkRescaleIntensityImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkRescaleIntensityImageFilterTest
 )
 
 itk_add_test(
@@ -595,6 +588,7 @@ set(
   itkNotImageFilterGTest.cxx
   itkNthElementPixelAccessorGTest2.cxx
   itkPowImageFilterGTest.cxx
+  itkRescaleIntensityImageFilterGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
 )
