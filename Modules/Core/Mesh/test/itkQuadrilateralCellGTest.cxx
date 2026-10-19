@@ -18,12 +18,12 @@
 
 #include "itkMesh.h"
 #include "itkQuadrilateralCell.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
 
-int
-itkQuadrilateralCellTest(int, char *[])
+TEST(QuadrilateralCell, ConvertedLegacyTest)
 {
   /**
    * Define a mesh type that stores a PixelType of "int".  Use the defaults for
@@ -138,11 +138,7 @@ itkQuadrilateralCellTest(int, char *[])
 
     CellAutoPointer anotherCell;
     testCell1->MakeCopy(anotherCell);
-    if (anotherCell->GetNumberOfPoints() != testCell1->GetNumberOfPoints())
-    {
-      std::cerr << "Make Copy failed !" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(anotherCell->GetNumberOfPoints(), testCell1->GetNumberOfPoints()) << "Make Copy failed !";
   }
 
   //
@@ -168,30 +164,15 @@ itkQuadrilateralCellTest(int, char *[])
   QuadrilateralCellType::CoordinateType          pcoords[2]; // Quadrilateral has 2 parametric coordinates
   bool isInside = testCell1->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (!isInside)
-  {
-    std::cerr << "Error: point should be reported as being inside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(isInside) << "Error: point should be reported as being inside";
 
-  if ((itk::Math::Absolute(pcoords[0] - 0.5) > toleance) || (itk::Math::Absolute(pcoords[1] - 0.6) > toleance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], 0.5, toleance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 0.6, toleance) << "Error: pcoords computed incorrectly";
 
-  if ((itk::Math::Absolute(weights[0] - 0.2) > toleance) || (itk::Math::Absolute(weights[1] - 0.2) > toleance) ||
-      (itk::Math::Absolute(weights[2] - 0.3) > toleance) || (itk::Math::Absolute(weights[3] - 0.3) > toleance))
-  {
-    std::cerr << "Error: weights computed incorrectly" << std::endl;
-    std::cerr << "weights[0] = " << weights[0] << std::endl;
-    std::cerr << "weights[1] = " << weights[1] << std::endl;
-    std::cerr << "weights[2] = " << weights[2] << std::endl;
-    std::cerr << "weights[3] = " << weights[3] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(weights[0], 0.2, toleance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[1], 0.2, toleance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[2], 0.3, toleance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[3], 0.3, toleance) << "Error: weights computed incorrectly";
 
 
   // Test 2: point outside quad2
@@ -202,19 +183,10 @@ itkQuadrilateralCellTest(int, char *[])
 
   isInside = testCell2->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (isInside)
-  {
-    std::cerr << "Error: point should be reported as being outside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(isInside) << "Error: point should be reported as being outside";
 
-  if ((itk::Math::Absolute(pcoords[0] + 0.5) > toleance) || (itk::Math::Absolute(pcoords[1] - 0.6) > toleance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], -0.5, toleance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 0.6, toleance) << "Error: pcoords computed incorrectly";
 
 
   // Test 3: point outside quad1
@@ -229,19 +201,10 @@ itkQuadrilateralCellTest(int, char *[])
 
   isInside = testCell1->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (isInside)
-  {
-    std::cerr << "Error: point should be reported as being outside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(isInside) << "Error: point should be reported as being outside";
 
-  if ((itk::Math::Absolute(pcoords[0] - 1.5) > toleance) || (itk::Math::Absolute(pcoords[1] - 0.6) > toleance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], 1.5, toleance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 0.6, toleance) << "Error: pcoords computed incorrectly";
   //
   // NOTE: Outside points don't get their weights computed.
   //
@@ -254,29 +217,14 @@ itkQuadrilateralCellTest(int, char *[])
 
   isInside = testCell2->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (!isInside)
-  {
-    std::cerr << "Error: point should be reported as being inside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(isInside) << "Error: point should be reported as being inside";
 
-  if ((itk::Math::Absolute(pcoords[0] - 0.5) > toleance) || (itk::Math::Absolute(pcoords[1] - 0.6) > toleance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    return EXIT_FAILURE;
-  }
-  if ((itk::Math::Absolute(weights[0] - 0.2) > toleance) || (itk::Math::Absolute(weights[1] - 0.2) > toleance) ||
-      (itk::Math::Absolute(weights[2] - 0.3) > toleance) || (itk::Math::Absolute(weights[3] - 0.3) > toleance))
-  {
-    std::cerr << "Error: weights computed incorrectly" << std::endl;
-    std::cerr << "weights[0] = " << weights[0] << std::endl;
-    std::cerr << "weights[1] = " << weights[1] << std::endl;
-    std::cerr << "weights[2] = " << weights[2] << std::endl;
-    std::cerr << "weights[3] = " << weights[3] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], 0.5, toleance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 0.6, toleance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(weights[0], 0.2, toleance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[1], 0.2, toleance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[2], 0.3, toleance) << "Error: weights computed incorrectly";
+  EXPECT_NEAR(weights[3], 0.3, toleance) << "Error: weights computed incorrectly";
 
   // Test 5: point off of quad1
   inputPoint[0] = 7.0;
@@ -290,23 +238,13 @@ itkQuadrilateralCellTest(int, char *[])
 
   isInside = testCell1->EvaluatePosition(inputPoint, points, closestPoint, pcoords, &distance, weights);
 
-  if (!isInside) // The projection of the point is inside
-  {
-    std::cerr << "Error: point should be reported as being inside" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(isInside) << "Error: point should be reported as being inside"; // The projection of the point is inside
 
   // With planar assumption, this off-plane point should give:   pcoords[0] = 0.625
   // With proper projection on quad, it should give:             pcoords[0] = 0.4
   // FIXME when projection is implemented in itkQuadrilateralCell::EvaluatePosition
-  if ((itk::Math::Absolute(pcoords[0] - 0.625) > toleance) || (itk::Math::Absolute(pcoords[1] - 0.3) > toleance))
-  {
-    std::cerr << "Error: pcoords computed incorrectly" << std::endl;
-    std::cerr << "pcoords[0] = " << pcoords[0] << std::endl;
-    std::cerr << "pcoords[1] = " << pcoords[1] << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(pcoords[0], 0.625, toleance) << "Error: pcoords computed incorrectly";
+  EXPECT_NEAR(pcoords[1], 0.3, toleance) << "Error: pcoords computed incorrectly";
 
   // TODO: test returned closestPoint and distance as well
-  return EXIT_SUCCESS;
 }

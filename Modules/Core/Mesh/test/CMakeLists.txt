@@ -6,7 +6,6 @@ set(
   itkMeshFstreamTest.cxx
   itkMeshSpatialObjectIOTest.cxx
   itkParametricSpaceToImageSpaceMeshFilterTest.cxx
-  itkQuadrilateralCellTest.cxx
   itkRegularSphereMeshSourceTest.cxx
   itkRegularSphereMeshSourceTest2.cxx
   itkSimplexMeshAdaptTopologyFilterTest.cxx
@@ -420,12 +419,6 @@ itk_add_test(
     ITKMeshTestDriver
     itkTriangleCellTest
 )
-itk_add_test(
-  NAME itkQuadrilateralCellTest
-  COMMAND
-    ITKMeshTestDriver
-    itkQuadrilateralCellTest
-)
 
 set_tests_properties(
   itkVTKPolyDataReaderTest2
@@ -465,5 +458,6 @@ set(
   itkMeshRegionGTest.cxx
   itkMeshSourceGraftOutputGTest.cxx
   itkNewGTest.cxx
+  itkQuadrilateralCellGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
