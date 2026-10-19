@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkSampleToHistogramFilterTest3.cxx
   itkSampleToHistogramFilterTest4.cxx
   itkSampleToHistogramFilterTest5.cxx
   itkSampleToHistogramFilterTest6.cxx
@@ -502,12 +501,6 @@ itk_add_test(
     itkListSampleTest
     100
 )
-itk_add_test(
-  NAME itkSampleToHistogramFilterTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToHistogramFilterTest3
-)
 # There is a bug in VS2008, Release build that causes this test to fail.
 if(NOT MSVC90)
   itk_add_test(
@@ -726,6 +719,7 @@ set(
   itkSampleGTest4.cxx
   itkSampleToHistogramFilterGTest.cxx
   itkSampleToHistogramFilterGTest2.cxx
+  itkSampleToHistogramFilterGTest3.cxx
   itkStatisticsTypesGTest.cxx
   itkTDistributionGTest.cxx
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
