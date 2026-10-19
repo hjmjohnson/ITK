@@ -19,5 +19,6 @@ itk_module(
     ITKFiniteDifference
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )
