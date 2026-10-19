@@ -20,7 +20,6 @@ set(
   itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
   itkRGBToVectorAdaptImageFilterTest.cxx
   itkSymmetricEigenAnalysisImageFilterTest.cxx
-  itkTanImageFilterAndAdaptorTest.cxx
   itkTernaryMagnitudeImageFilterTest.cxx
   itkTernaryMagnitudeSquaredImageFilterTest.cxx
   itkTernaryOperatorImageFilterTest.cxx
@@ -277,12 +276,6 @@ itk_add_test(
   COMMAND
     ITKImageIntensityTestDriver
     itkRGBToVectorAdaptImageFilterTest
-)
-itk_add_test(
-  NAME itkTanImageFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkTanImageFilterAndAdaptorTest
 )
 if(NOT ITK_LEGACY_REMOVE)
   itk_add_test(
@@ -561,6 +554,7 @@ set(
   itkSqrtImageFilterAndAdaptorGTest.cxx
   itkSquareImageFilterGTest.cxx
   itkSubtractImageFilterGTest.cxx
+  itkTanImageFilterAndAdaptorGTest.cxx
 )
 
 if(MSVC)
