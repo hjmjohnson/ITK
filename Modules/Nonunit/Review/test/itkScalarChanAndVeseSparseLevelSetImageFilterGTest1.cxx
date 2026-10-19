@@ -17,10 +17,9 @@
  *=========================================================================*/
 
 #include "itkScalarChanAndVeseSparseLevelSetImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkScalarChanAndVeseSparseLevelSetImageFilterTest1(int, char *[])
+TEST(ScalarChanAndVeseSparseLevelSetImageFilter1, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -38,10 +37,7 @@ itkScalarChanAndVeseSparseLevelSetImageFilterTest1(int, char *[])
     itk::ScalarChanAndVeseLevelSetFunction<ImageType, FeatureImageType, SharedDataHelperType>;
 
   auto function = RegionBasedLevelSetFunctionType::New();
-  if (function.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(function.IsNull());
 
   using FilterType = itk::ScalarChanAndVeseSparseLevelSetImageFilter<ImageType,
                                                                      FeatureImageType,
@@ -51,10 +47,9 @@ itkScalarChanAndVeseSparseLevelSetImageFilterTest1(int, char *[])
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     filter, ScalarChanAndVeseSparseLevelSetImageFilter, MultiphaseSparseFiniteDifferenceImageFilter);
 
 
   std::cout << "Test finished. " << std::endl;
-  return EXIT_SUCCESS;
 }
