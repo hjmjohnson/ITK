@@ -14,7 +14,6 @@ set(
   itkLineIteratorTest.cxx
   itkLoggerTest.cxx
   itkMultipleLogOutputTest.cxx
-  itkNeighborhoodAlgorithmTest.cxx
   itkNeighborhoodOperatorTest.cxx
   itkNumberToStringTest.cxx
   itkNumericTraitsTest.cxx
@@ -843,12 +842,6 @@ set_tests_properties(
 )
 
 itk_add_test(
-  NAME itkNeighborhoodAlgorithmTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkNeighborhoodAlgorithmTest
-)
-itk_add_test(
   NAME itkNeighborhoodTest
   COMMAND
     ITKCommon2TestDriver
@@ -1455,6 +1448,7 @@ set(
   itkMinimumMaximumImageCalculatorGTest.cxx
   itkModifiedTimeGTest.cxx
   itkMultiThreaderExceptionsGTest.cxx
+  itkNeighborhoodAlgorithmGTest.cxx
   itkNeighborhoodAllocatorGTest.cxx
   itkNeighborhoodIteratorsGTest.cxx
   itkNumberToStringGTest.cxx
