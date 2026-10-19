@@ -22,10 +22,9 @@
 #include "itkRandomImageSource.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkNormalizeToConstantImageFilterTest(int, char *[])
+TEST(NormalizeToConstantImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using IntPixelType = int;
@@ -50,11 +49,11 @@ itkNormalizeToConstantImageFilterTest(int, char *[])
   using NormalizeType = itk::NormalizeToConstantImageFilter<IntImage, DoubleImage>;
   auto normalize = NormalizeType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(normalize, NormalizeToConstantImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(normalize, NormalizeToConstantImageFilter, ImageToImageFilter);
 
   DoubleImage::PixelType constant = 1.0;
   normalize->SetConstant(constant);
-  ITK_TEST_SET_GET_VALUE(constant, normalize->GetConstant());
+  EXPECT_EQ(constant, normalize->GetConstant());
 
   const itk::SimpleFilterWatcher watch(normalize, "NormalizeToConstant");
 
@@ -71,16 +70,11 @@ itkNormalizeToConstantImageFilterTest(int, char *[])
   }
 
   double epsilon = 1e-5;
-  if (!itk::Math::FloatAlmostEqual(constant, sum, 10, epsilon))
-  {
-    std::cout.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-    std::cout << "First sum (" << sum << ") does not equal constant (" << constant << ')' << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(constant, sum, epsilon) << "First sum does not equal constant";
 
   constant = 134.2;
   normalize->SetConstant(constant);
-  ITK_TEST_SET_GET_VALUE(constant, normalize->GetConstant());
+  EXPECT_EQ(constant, normalize->GetConstant());
 
   normalize->Update();
 
@@ -91,12 +85,5 @@ itkNormalizeToConstantImageFilterTest(int, char *[])
   }
 
   epsilon = 1e-3;
-  if (!itk::Math::FloatAlmostEqual(constant, sum, 10, epsilon))
-  {
-    std::cout.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-    std::cout << "Second sum (" << sum << ") does not equal constant (" << constant << ')' << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(constant, sum, epsilon) << "Second sum does not equal constant";
 }
