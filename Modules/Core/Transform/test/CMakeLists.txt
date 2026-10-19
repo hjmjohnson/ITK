@@ -10,7 +10,6 @@ set(
   itkBSplineTransformTest2.cxx
   itkBSplineTransformTest3.cxx
   itkEuler3DTransformTest.cxx
-  itkScaleVersor3DTransformTest.cxx
   itkSimilarity2DTransformTest.cxx
   itkSimilarity3DTransformTest.cxx
   itkSplineKernelTransformTest.cxx
@@ -31,12 +30,6 @@ itk_add_test(
   COMMAND
     ITKTransformTestDriver
     itkEuler3DTransformTest
-)
-itk_add_test(
-  NAME itkScaleVersor3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkScaleVersor3DTransformTest
 )
 itk_add_test(
   NAME itkTransformTest
@@ -414,6 +407,7 @@ set(
   itkScaleLogarithmicTransformGTest.cxx
   itkScaleSkewVersor3DTransformGTest.cxx
   itkScaleTransformGTest.cxx
+  itkScaleVersor3DTransformGTest.cxx
   itkSimilarityTransformGTest.cxx
   itkTransformGTest.cxx
   itkTranslationTransformGTest.cxx
