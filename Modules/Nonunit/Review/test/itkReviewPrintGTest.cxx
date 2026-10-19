@@ -36,9 +36,9 @@
 
 #include "itkHessianToObjectnessMeasureImageFilter.h"
 #include "itkMultiScaleHessianBasedMeasureImageFilter.h"
+#include "itkGTest.h"
 
-int
-itkReviewPrintTest(int, char *[])
+TEST(ReviewPrint, ConvertedLegacyTest)
 {
   using Input2DImageType = itk::Image<float, 2>;
   using CharType = itk::Image<unsigned char, 2>;
@@ -116,6 +116,4 @@ itkReviewPrintTest(int, char *[])
   itk::MultiScaleHessianBasedMeasureImageFilter<Input3DImageType, HessianImageType, OutputImageType>::Pointer
     MultiScaleHessianFilter =
       itk::MultiScaleHessianBasedMeasureImageFilter<Input3DImageType, HessianImageType, OutputImageType>::New();
-
-  return EXIT_SUCCESS;
 }
