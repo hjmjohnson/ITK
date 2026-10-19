@@ -20,12 +20,11 @@
 #include "itkExpNegativeImageAdaptor.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkSubtractImageFilter.h"
+#include "itkGTest.h"
 
 
-int
-itkExpNegativeImageFilterAndAdaptorTest(int, char *[])
+TEST(ExpNegativeImageFilterAndAdaptor, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -101,14 +100,7 @@ itkExpNegativeImageFilterAndAdaptorTest(int, char *[])
     const OutputImageType::PixelType output = ot.Get();
     const OutputImageType::PixelType exponential = std::exp(-input);
     std::cout << exponential << std::endl;
-    if (itk::Math::Absolute(exponential - output) > epsilon)
-    {
-      std::cerr << "Error in itkExpNegativeImageFilterTest " << std::endl;
-      std::cerr << " std::exp( - " << input << ") = " << exponential << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(exponential - output), epsilon) << " std::exp( - " << input << ")";
     ++ot;
     ++it;
   }
@@ -148,18 +140,7 @@ itkExpNegativeImageFilterAndAdaptorTest(int, char *[])
   {
     std::cout << dt.Get() << std::endl;
     const OutputImageType::PixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr << "Error in itkExpNegativeImageFilterTest " << std::endl;
-      std::cerr << "Comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Comparing results with Adaptors";
     ++dt;
   }
-
-
-  return EXIT_SUCCESS;
 }
