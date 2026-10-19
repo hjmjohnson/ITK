@@ -18,11 +18,10 @@
 
 #include "itkTernaryMagnitudeSquaredImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkTernaryMagnitudeSquaredImageFilterTest(int, char *[])
+TEST(TernaryMagnitudeSquaredImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -100,7 +99,7 @@ itkTernaryMagnitudeSquaredImageFilterTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, TernaryMagnitudeSquaredImageFilter, TernaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, TernaryMagnitudeSquaredImageFilter, TernaryGeneratorImageFilter);
 
   // Set the input images
   filter->SetInput1(inputImageA);
@@ -126,14 +125,7 @@ itkTernaryMagnitudeSquaredImageFilterTest(int, char *[])
   {
     auto outputValue =
       static_cast<OutputImageType::PixelType>(it1.Get() * it1.Get() + it2.Get() * it2.Get() + it3.Get() * it3.Get());
-    if (!itk::Math::FloatAlmostEqual(oIt.Get(), outputValue, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << "Value should be  " << outputValue << std::endl;
-      std::cerr << "but is           " << oIt.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(oIt.Get(), outputValue, epsilon);
     ++oIt;
     ++it1;
     ++it2;
@@ -141,5 +133,4 @@ itkTernaryMagnitudeSquaredImageFilterTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }

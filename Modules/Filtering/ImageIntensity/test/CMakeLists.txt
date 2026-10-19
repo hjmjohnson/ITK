@@ -21,7 +21,6 @@ set(
   itkRGBToVectorAdaptImageFilterTest.cxx
   itkSymmetricEigenAnalysisImageFilterTest.cxx
   itkTernaryMagnitudeImageFilterTest.cxx
-  itkTernaryMagnitudeSquaredImageFilterTest.cxx
   itkTernaryOperatorImageFilterTest.cxx
   itkVectorIndexSelectionCastImageFilterTest.cxx
   itkVectorMagnitudeImageFilterTest.cxx
@@ -65,12 +64,6 @@ itk_add_test(
   COMMAND
     ITKImageIntensityTestDriver
     itkVectorRescaleIntensityImageFilterTest
-)
-itk_add_test(
-  NAME itkTernaryMagnitudeSquaredImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkTernaryMagnitudeSquaredImageFilterTest
 )
 itk_add_test(
   NAME itkTernaryOperatorImageFilterTest
@@ -555,6 +548,7 @@ set(
   itkSquareImageFilterGTest.cxx
   itkSubtractImageFilterGTest.cxx
   itkTanImageFilterAndAdaptorGTest.cxx
+  itkTernaryMagnitudeSquaredImageFilterGTest.cxx
 )
 
 if(MSVC)
