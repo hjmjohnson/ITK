@@ -14,7 +14,6 @@ set(
   itkTransformGeometryImageFilterTest.cxx
   itkTransformTest.cxx
   itkTranslationTransformTest.cxx
-  itkVersorRigid3DTransformTest.cxx
   itkVersorTransformTest.cxx
 )
 
@@ -297,12 +296,6 @@ itk_add_test(
     ${ITK_EXAMPLE_DATA_ROOT}/BrainProtonDensitySliceBorder20.png
 )
 itk_add_test(
-  NAME itkVersorRigid3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkVersorRigid3DTransformTest
-)
-itk_add_test(
   NAME itkVersorTransformTest
   COMMAND
     ITKTransformTestDriver
@@ -375,5 +368,6 @@ set(
   itkTransformGTest.cxx
   itkTransformsSetParametersGTest.cxx
   itkTranslationTransformGTest.cxx
+  itkVersorRigid3DTransformGTest.cxx
 )
 creategoogletestdriver(ITKTransform "${ITKTransform-Test_LIBRARIES}" "${ITKTransformGTests}")
