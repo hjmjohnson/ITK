@@ -17,13 +17,16 @@
  *=========================================================================*/
 
 #include "itkFastMarchingQuadEdgeMeshFilterBase.h"
+#include "itkGTest.h"
+#include "itkTestDriverIncludeRequiredFactories.h"
 #include "itkQuadEdgeMeshExtendedTraits.h"
 #include "itkFastMarchingThresholdStoppingCriterion.h"
 #include "itkMeshFileWriter.h"
 
-int
-itkFastMarchingQuadEdgeMeshFilterBaseTest3(int, char *[])
+TEST(FastMarchingQuadEdgeMeshFilterBase, ConvertedLegacyTest3)
 {
+  RegisterRequiredFactories();
+
   using PixelType = float;
   using CoordType = double;
   constexpr unsigned int Dimension{ 3 };
@@ -117,16 +120,7 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest3(int, char *[])
   fmm_filter->SetTrialPoints(trial);
   fmm_filter->SetStoppingCriterion(criterion);
 
-  try
-  {
-    fmm_filter->Update();
-  }
-  catch (const itk::ExceptionObject & excep)
-  {
-    std::cerr << "Exception caught !" << std::endl;
-    std::cerr << excep << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(fmm_filter->Update());
 
   const MeshType::Pointer output = fmm_filter->GetOutput();
 
@@ -155,17 +149,11 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest3(int, char *[])
     ++o_data_it;
   }
 
-  if (error)
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(error);
 
   using WriterType = itk::MeshFileWriter<MeshType>;
   auto writer = WriterType::New();
   writer->SetInput(fmm_filter->GetOutput());
   writer->SetFileName("itkFastMarchingQuadEdgeMeshFilterBaseTest3.vtk");
   writer->Update();
-
-
-  return EXIT_SUCCESS;
 }
