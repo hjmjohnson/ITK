@@ -19,17 +19,19 @@
 #include <iostream>
 #include "itkZeroCrossingImageFilter.h"
 #include "itkNullImageToImageFilterDriver.hxx"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-inline std::ostream &
+namespace
+{
+[[maybe_unused]] inline std::ostream &
 operator<<(std::ostream & o, const itk::Vector<float, 3> & v)
 {
   o << '[' << v[0] << ' ' << v[1] << ' ' << v[2] << ']';
   return o;
 }
+} // namespace
 
-int
-itkZeroCrossingImageFilterTest(int, char *[])
+TEST(ZeroCrossingImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 2 };
@@ -41,17 +43,17 @@ itkZeroCrossingImageFilterTest(int, char *[])
   // Set up filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, ZeroCrossingImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, ZeroCrossingImageFilter, ImageToImageFilter);
 
 
   constexpr FilterType::OutputImagePixelType foregroundValue =
     itk::NumericTraits<FilterType::OutputImagePixelType>::OneValue();
   filter->SetForegroundValue(foregroundValue);
-  ITK_TEST_SET_GET_VALUE(foregroundValue, filter->GetForegroundValue());
+  EXPECT_EQ(foregroundValue, filter->GetForegroundValue());
 
   constexpr FilterType::OutputImagePixelType backgroundValue{};
   filter->SetBackgroundValue(backgroundValue);
-  ITK_TEST_SET_GET_VALUE(backgroundValue, filter->GetBackgroundValue());
+  EXPECT_EQ(backgroundValue, filter->GetBackgroundValue());
 
   // Run Test
   itk::Size<2> sz;
@@ -62,9 +64,5 @@ itkZeroCrossingImageFilterTest(int, char *[])
   test1.SetImageSize(sz);
   test1.SetFilter(filter);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(test1.Execute());
-
-
-  std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(test1.Execute());
 }
