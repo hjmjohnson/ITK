@@ -35,12 +35,15 @@
 #include "itkThinPlateSplineKernelTransform.h"
 #include "itkVolumeSplineKernelTransform.h"
 #include "itkIntTypes.h"
+#include "itkGTest.h"
 
 #include <algorithm> // For generate.
 #include <iterator>  // For begin and end.
 #include <random>    // For mt19937.
 
 
+namespace
+{
 // Generic Kernel Transform Tester
 template <typename KernelType>
 int
@@ -92,10 +95,10 @@ TestKernelTransform(const char * name, KernelType *)
   std::cout << "FAIL" << std::endl;
   return 1;
 }
+} // namespace
 
 // Main Program
-int
-itkTransformsSetParametersTest(int, char *[])
+TEST(TransformsSetParameters, ConvertedLegacyTest)
 {
   std::cout << "Begin testing of SetParameters() method for all itkTransforms" << std::endl << std::endl;
 
@@ -491,6 +494,4 @@ itkTransformsSetParametersTest(int, char *[])
                       static_cast<itk::VolumeSplineKernelTransform<double, 3> *>(nullptr));
 
   std::cout << std::endl << "Done." << std::endl;
-
-  return EXIT_SUCCESS;
 }
