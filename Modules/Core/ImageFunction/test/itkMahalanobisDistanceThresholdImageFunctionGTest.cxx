@@ -21,10 +21,9 @@
 #include "itkImage.h"
 #include "itkImageFunction.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkMahalanobisDistanceThresholdImageFunctionTest(int, char *[])
+TEST(MahalanobisDistanceThresholdImageFunction, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 3 };
@@ -53,7 +52,7 @@ itkMahalanobisDistanceThresholdImageFunctionTest(int, char *[])
 
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, MahalanobisDistanceThresholdImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, MahalanobisDistanceThresholdImageFunction, ImageFunction);
 
   function->SetInputImage(image);
 
@@ -75,8 +74,8 @@ itkMahalanobisDistanceThresholdImageFunctionTest(int, char *[])
   function->SetCovariance(covariance);
   function->SetMean(mean);
 
-  ITK_TEST_SET_GET_VALUE(covariance, function->GetCovariance());
-  ITK_TEST_SET_GET_VALUE(mean, function->GetMean());
+  EXPECT_EQ(covariance, function->GetCovariance());
+  EXPECT_EQ(mean, function->GetMean());
 
   ImageType::IndexType index;
 
@@ -84,19 +83,16 @@ itkMahalanobisDistanceThresholdImageFunctionTest(int, char *[])
   index[1] = 25;
   index[2] = 25;
 
-  ITK_TEST_EXPECT_TRUE(function->EvaluateAtIndex(index));
+  EXPECT_TRUE(function->EvaluateAtIndex(index));
 
   const double distance = function->EvaluateDistanceAtIndex(index);
   std::cout << "function->EvaluateDistanceAtIndex( index ): " << distance << std::endl;
 
   constexpr double expectedDistance{ 0.244949 };
-  if (!itk::Math::FloatAlmostEqual(distance, expectedDistance, 10, 1e-5))
-  {
-    std::cerr << "Error in distance computation in EvaluateDistanceAtIndex() !!" << std::endl;
-    std::cerr << "Expected distance value = " << expectedDistance << std::endl;
-    std::cerr << "Distance obtained value = " << distance << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(distance, expectedDistance, 10, 1e-5))
+    << "Error in distance computation in EvaluateDistanceAtIndex() !!" << std::endl
+    << "Expected distance value = " << expectedDistance << std::endl
+    << "Distance obtained value = " << distance;
 
   // Test Evaluate
   FunctionType::PointType point;
@@ -104,18 +100,15 @@ itkMahalanobisDistanceThresholdImageFunctionTest(int, char *[])
   point[1] = 25;
   point[2] = 25;
 
-  ITK_TEST_EXPECT_TRUE(function->Evaluate(point));
+  EXPECT_TRUE(function->Evaluate(point));
 
   const double distance2 = function->EvaluateDistance(point);
   std::cout << "function->EvaluateDistance(point): " << distance2 << std::endl;
 
-  if (!itk::Math::FloatAlmostEqual(distance2, expectedDistance, 10, 1e-5))
-  {
-    std::cerr << "Error in distance computation in EvaluateDistance() !!" << std::endl;
-    std::cerr << "Expected distance value = " << expectedDistance << std::endl;
-    std::cerr << "Distance obtained value = " << distance2 << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(distance2, expectedDistance, 10, 1e-5))
+    << "Error in distance computation in EvaluateDistance() !!" << std::endl
+    << "Expected distance value = " << expectedDistance << std::endl
+    << "Distance obtained value = " << distance2;
 
   // Test EvaluateAtContinuousIndex
   FunctionType::ContinuousIndexType cindex;
@@ -123,17 +116,11 @@ itkMahalanobisDistanceThresholdImageFunctionTest(int, char *[])
   cindex[1] = 25;
   cindex[2] = 25;
 
-  ITK_TEST_EXPECT_TRUE(function->EvaluateAtContinuousIndex(cindex));
+  EXPECT_TRUE(function->EvaluateAtContinuousIndex(cindex));
 
   // Test GetConstReferenceMacro
   const double & getThreshold = function->GetThreshold();
   std::cout << "function->GetThreshold(): " << getThreshold << std::endl;
-  if (!itk::Math::FloatAlmostEqual(threshold, getThreshold, 10, 1e-9))
-  {
-    std::cerr << "Error: Set/Get Threshold do not match" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(threshold, getThreshold, 10, 1e-9))
+    << "Error: Set/Get Threshold do not match";
 }
