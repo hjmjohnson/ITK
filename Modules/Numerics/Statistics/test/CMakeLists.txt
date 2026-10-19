@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkMembershipSampleTest4.cxx
   itkNeighborhoodSamplerTest1.cxx
   itkPointSetToListSampleAdaptorTest.cxx
   itkProbabilityDistributionTest.cxx
@@ -502,12 +501,6 @@ itk_add_test(
     itkProbabilityDistributionTest
 )
 itk_add_test(
-  NAME itkMembershipSampleTest4
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMembershipSampleTest4
-)
-itk_add_test(
   NAME itkNeighborhoodSamplerTest1
   COMMAND
     ITKStatisticsTestDriver
@@ -744,6 +737,7 @@ set(
   itkMembershipSampleGTest1.cxx
   itkMembershipSampleGTest2.cxx
   itkMembershipSampleGTest3.cxx
+  itkMembershipSampleGTest4.cxx
   itkMinimumDecisionRuleGTest.cxx
   itkMixtureModelComponentBaseGTest.cxx
   itkNormalVariateGeneratorGTest1.cxx
