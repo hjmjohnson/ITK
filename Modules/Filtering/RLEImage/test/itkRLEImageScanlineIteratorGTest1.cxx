@@ -19,7 +19,10 @@
 #include <iostream>
 
 #include "itkRLEImage.h"
+#include "itkGTest.h"
 
+namespace
+{
 // This routine is used to make sure that we call the "const" version
 // of GetPixel() (via the operator[])
 template <typename TPixel, unsigned int VImageDimension, typename CounterType>
@@ -43,14 +46,12 @@ TestConstPixelAccess(const itk::RLEImage<TPixel, VImageDimension, CounterType> &
   // out[regionStartIndex3D] = vec;
   // out[regionEndIndex3D] = in[regionStartIndex3D];
 }
+} // namespace
 
 
-int
-itkRLEImageScanlineIteratorTest1(int, char *[])
+TEST(RLEImageScanlineIterator, ConvertedLegacyTest)
 {
   itk::RLEImage<itk::Vector<unsigned short, 5>>::Pointer o3 = itk::RLEImage<itk::Vector<unsigned short, 5>>::New();
-
-  int status = EXIT_SUCCESS;
 
   float origin3D[3] = { 5.f, 2.1f, 8.1f };
   float spacing3D[3] = { 1.5f, 2.1f, 1.f };
@@ -205,10 +206,7 @@ itkRLEImageScanlineIteratorTest1(int, char *[])
     {
       while (!imageIterator.IsAtEndOfLine())
       {
-        if (imageIterator.Get() != expectedValuesRegion1[counter])
-        {
-          status = EXIT_FAILURE; // Fail
-        }
+        EXPECT_EQ(imageIterator.Get(), expectedValuesRegion1[counter]);
         counter++;
         ++imageIterator;
       }
@@ -234,10 +232,7 @@ itkRLEImageScanlineIteratorTest1(int, char *[])
     {
       while (!imageIterator.IsAtEndOfLine())
       {
-        if (imageIterator.Get() != expectedValuesRegion2[counter])
-        {
-          status = EXIT_FAILURE; // Fail
-        }
+        EXPECT_EQ(imageIterator.Get(), expectedValuesRegion2[counter]);
         counter++;
         ++imageIterator;
       }
@@ -245,9 +240,4 @@ itkRLEImageScanlineIteratorTest1(int, char *[])
     }
 
   } // end "Change Region" test
-  if (status == EXIT_SUCCESS)
-    std::cout << "All scanline iterator tests successful!\n";
-  else
-    std::cout << "Some scanline iterator tests failed!\n";
-  return status;
 }
