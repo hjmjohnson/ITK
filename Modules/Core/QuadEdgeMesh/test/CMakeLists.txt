@@ -3,7 +3,6 @@ set(
   ITKQuadEdgeMeshTests
   itkQuadEdgeMeshAddFaceTest1.cxx
   itkQuadEdgeMeshEulerOperatorJoinVertexTest.cxx
-  itkQuadEdgeMeshEulerOperatorSplitFaceTest.cxx
   itkQuadEdgeMeshEulerOperatorSplitVertexTest.cxx
   itkQuadEdgeMeshFrontIteratorTest.cxx
   itkQuadEdgeMeshIteratorTest.cxx
@@ -150,12 +149,6 @@ itk_add_test(
     4
 )
 itk_add_test(
-  NAME itkQuadEdgeMeshEulerOperatorSplitFaceTest
-  COMMAND
-    ITKQuadEdgeMeshTestDriver
-    itkQuadEdgeMeshEulerOperatorSplitFaceTest
-)
-itk_add_test(
   NAME itkQuadEdgeMeshEulerOperatorSplitVertexTest
   COMMAND
     ITKQuadEdgeMeshTestDriver
@@ -206,6 +199,7 @@ set(
   itkQuadEdgeMeshEulerOperatorFlipGTest.cxx
   itkQuadEdgeMeshEulerOperatorJoinFacetGTest.cxx
   itkQuadEdgeMeshEulerOperatorSplitEdgeGTest.cxx
+  itkQuadEdgeMeshEulerOperatorSplitFaceGTest.cxx
   itkQuadEdgeMeshTypeTraitsGTest.cxx
 )
 creategoogletestdriver(ITKQuadEdgeMesh "${ITKQuadEdgeMesh-Test_LIBRARIES}" "${ITKQuadEdgeMeshGTests}")
