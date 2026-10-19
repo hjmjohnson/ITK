@@ -27,6 +27,7 @@
  *=========================================================================*/
 #include "itkSimpleFilterWatcher.h"
 #include "makeRandomImageBsplineInterpolator.h"
+#include "itkGTest.h"
 #include <random> // For mt19937.
 
 /** Note:  This is the same test used for the itkBSplineDecompositionFilter
@@ -34,8 +35,7 @@
  *        and demonstrates its use.
  */
 
-int
-itkBSplineResampleImageFunctionTest(int, char *[])
+TEST(BSplineResampleImageFunction, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 2 };
   using PixelType = float;
@@ -88,16 +88,9 @@ itkBSplineResampleImageFunctionTest(int, char *[])
     const double f = resample->Evaluate(point);
     const double g = interpolator->Evaluate(point);
 
-    if (itk::Math::Absolute(f - g) > 1e-5)
-    {
-      std::cout << "Resample and Interpolated point are different." << std::endl;
-      std::cout << " point: " << point << std::endl;
-      std::cout << " resample: " << resample->Evaluate(point) << std::endl;
-      std::cout << " interpolator: " << interpolator->Evaluate(point) << std::endl;
-      std::cout << " Test failed. " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(f, g, 1e-5) << "Resample and Interpolated point are different." << std::endl
+                            << " point: " << point << std::endl
+                            << " resample: " << resample->Evaluate(point) << std::endl
+                            << " interpolator: " << interpolator->Evaluate(point);
   }
-
-  return EXIT_SUCCESS;
 }
