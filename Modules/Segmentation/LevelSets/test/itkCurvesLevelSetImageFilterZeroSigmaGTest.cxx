@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkCurvesLevelSetImageFilter.h"
+#include "itkGTest.h"
 
 #include "itkCastImageFilter.h"
 #include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"
@@ -29,8 +30,7 @@
 /*
  */
 
-int
-itkCurvesLevelSetImageFilterZeroSigmaTest(int, char *[])
+TEST(CurvesLevelSetImageFilterZeroSigma, ConvertedLegacyTest)
 {
 
   constexpr unsigned int ImageDimension{ 2 };
@@ -214,16 +214,7 @@ itkCurvesLevelSetImageFilterZeroSigmaTest(int, char *[])
   */
 
   // Check if overlap is above threshold
-  if (overlap->GetSimilarityIndex() > 0.90)
-  {
-    std::cout << "Overlap exceed threshold." << std::endl;
-  }
-  else
-  {
-    std::cout << "Overlap below threshold." << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GT(overlap->GetSimilarityIndex(), 0.90);
 
   // Test case when PropagationScaling is zero
   curvesFilter->SetPropagationScaling(0.0);
@@ -232,5 +223,4 @@ itkCurvesLevelSetImageFilterZeroSigmaTest(int, char *[])
   curvesFilter->Update();
 
   std::cout << "Test Passed. " << std::endl;
-  return EXIT_SUCCESS;
 }
