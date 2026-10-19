@@ -18,10 +18,9 @@
 
 #include "itkQuadEdgeMeshEulerOperatorSplitEdgeFunction.h"
 #include "itkQuadEdgeMeshEulerOperatorsTestHelper.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshEulerOperatorSplitEdgeTest(int, char *[])
+TEST(QuadEdgeMeshEulerOperatorSplitEdge, ConvertedLegacyTest)
 {
 
   using MeshType = itk::QuadEdgeMesh<double, 3>;
@@ -42,42 +41,25 @@ itkQuadEdgeMeshEulerOperatorSplitEdgeTest(int, char *[])
   auto splitEdge = SplitEdge::New();
   std::cout << "     "
             << "Test No Mesh Input";
-  if (splitEdge->Evaluate((QEType *)nullptr))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(splitEdge->Evaluate((QEType *)nullptr), nullptr);
   std::cout << "OK" << std::endl;
 
-  ITK_TEST_EXPECT_EQUAL(std::string_view("QuadEdgeMeshEulerOperatorSplitEdgeFunction"),
-                        std::string_view(splitEdge->GetNameOfClass()));
+  EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorSplitEdgeFunction"),
+            std::string_view(splitEdge->GetNameOfClass()));
 
   splitEdge->SetInput(mesh);
   std::cout << "     "
             << "Test No QE Input";
-  if (splitEdge->Evaluate((QEType *)nullptr))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(splitEdge->Evaluate((QEType *)nullptr), nullptr);
   std::cout << "OK" << std::endl;
 
   std::cout << "     ";
   std::cout << "Split an internal edge (possible).";
-  if (!splitEdge->Evaluate(mesh->FindEdge(6, 12)))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!AssertTopologicalInvariants<MeshType>(mesh, 26, 57, 32, 1, 0))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(splitEdge->Evaluate(mesh->FindEdge(6, 12)), nullptr);
+  EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 26, 57, 32, 1, 0));
   std::cout << ".OK" << std::endl;
 
   std::cout << "Checking SplitEdge."
             << "OK" << std::endl
             << std::endl;
-  return EXIT_SUCCESS;
 }
