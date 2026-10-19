@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkLevelSetVelocityNeighborhoodExtractor.h"
+#include "itkGTest.h"
 #include "itkFastMarchingImageFilter.h"
 
-int
-itkLevelSetVelocityNeighborhoodExtractorTest(int, char *[])
+TEST(LevelSetVelocityNeighborhoodExtractor, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 2 };
   using PixelType = float;
@@ -112,12 +112,7 @@ itkLevelSetVelocityNeighborhoodExtractorTest(int, char *[])
   // exercise error handling
   extractor->SetAuxImage(aux0, 2);
 
-  if (extractor->GetAuxImage(2))
-  {
-    std::cout << "Out of range index should return nullptr pointer" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(extractor->GetAuxImage(2), nullptr);
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
