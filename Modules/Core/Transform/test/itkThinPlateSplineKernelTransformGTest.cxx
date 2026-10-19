@@ -24,7 +24,7 @@
  */
 #include "itkThinPlateSplineKernelTransform.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -38,7 +38,7 @@ namespace
 // - the inverse transform correctly maps every target back to its source,
 // - unsupported operations correctly throw exceptions.
 template <unsigned int VDimension>
-[[nodiscard]] int
+void
 TestThinPlateSplineKernelTransform()
 {
   constexpr double epsilon{ 1e-12 };
@@ -52,7 +52,7 @@ TestThinPlateSplineKernelTransform()
 
   auto tps = TPSTransformType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(tps, ThinPlateSplineKernelTransform, KernelTransform);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(tps, ThinPlateSplineKernelTransform, KernelTransform);
 
   // Number of corners of a VDimension-dimensional unit hypercube.
   const unsigned int numberOfLandmarks = 1u << VDimension;
@@ -94,14 +94,11 @@ TestThinPlateSplineKernelTransform()
     const typename TPSTransformType::ParametersType parameters1 = tps->GetParameters();
     const unsigned int                              numberOfParameters = parameters1.Size();
     const unsigned int                              expectedNumberOfParameters = numberOfLandmarks * VDimension;
-    if (numberOfParameters != expectedNumberOfParameters)
-    {
-      std::cerr << "Number of parameters was not updated after" << std::endl;
-      std::cerr << "invoking SetSourceLandmarks and SetTargetLandmarks" << std::endl;
-      std::cerr << "Number of parameters is = " << numberOfParameters << std::endl;
-      std::cerr << "While we were expecting = " << expectedNumberOfParameters << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(numberOfParameters, expectedNumberOfParameters)
+      << "Number of parameters was not updated after" << std::endl
+      << "invoking SetSourceLandmarks and SetTargetLandmarks" << std::endl
+      << "Number of parameters is = " << numberOfParameters << std::endl
+      << "While we were expecting = " << expectedNumberOfParameters;
   }
 
   const PointsIteratorType sourceEnd = sourceLandmarks->GetPoints()->End();
@@ -116,32 +113,22 @@ TestThinPlateSplineKernelTransform()
     const PointType mappedPoint = tps->TransformPoint(sourcePoint);
     std::cout << sourcePoint << " : " << targetPoint;
     std::cout << " warps to: " << mappedPoint << std::endl;
-    if (mappedPoint.EuclideanDistanceTo(targetPoint) > epsilon)
-    {
-      std::cerr << "Failed to warp point " << sourcePoint << " to " << targetPoint << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint.EuclideanDistanceTo(targetPoint), epsilon)
+      << "Failed to warp point " << sourcePoint << " to " << targetPoint;
     ++sourceIt;
     ++targetIt;
   }
   std::cout << std::endl;
 
-  if (tps->IsLinear()) // NOTE TPS is never linear!
-  {
-    std::cerr << "ERROR:  " << VDimension << "D TPS reports as being a linear transform." << std::endl;
-    return EXIT_FAILURE;
-  }
+  // NOTE TPS is never linear!
+  EXPECT_FALSE(tps->IsLinear()) << "ERROR:  " << VDimension << "D TPS reports as being a linear transform.";
 
   // NOTE: The following should set the default values explicitly
   {
     constexpr double TestValue{ 0.012345 };
     tps->SetStiffness(TestValue); // This value should not change the result at all.
 
-    if (itk::Math::NotExactlyEquals(tps->GetStiffness(), TestValue))
-    {
-      std::cerr << "ERROR:  Explicitly set stiffness value not retained." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(tps->GetStiffness(), TestValue) << "ERROR:  Explicitly set stiffness value not retained.";
     tps->SetStiffness(0.0);
   }
 
@@ -151,34 +138,31 @@ TestThinPlateSplineKernelTransform()
     {
       typename TPSTransformType::InputVectorType testVector{};
       testVector[VDimension - 1] = 1.0;
-      ITK_TRY_EXPECT_EXCEPTION(tps->TransformVector(testVector));
+      EXPECT_THROW(tps->TransformVector(testVector), itk::ExceptionObject);
     }
     {
       typename TPSTransformType::InputVnlVectorType testVector{};
       testVector[VDimension - 1] = 1.0;
-      ITK_TRY_EXPECT_EXCEPTION(tps->TransformVector(testVector));
+      EXPECT_THROW(tps->TransformVector(testVector), itk::ExceptionObject);
     }
     {
       typename TPSTransformType::InputCovariantVectorType testVector{};
       testVector[VDimension - 1] = 1.0;
-      ITK_TRY_EXPECT_EXCEPTION(tps->TransformCovariantVector(testVector));
+      EXPECT_THROW(tps->TransformCovariantVector(testVector), itk::ExceptionObject);
     }
     {
       typename TPSTransformType::JacobianPositionType testJacobian;
       typename TPSTransformType::InputPointType       testPoint{};
       testPoint[VDimension - 1] = 1.0;
-      ITK_TRY_EXPECT_EXCEPTION(tps->ComputeJacobianWithRespectToPosition(testPoint, testJacobian));
+      EXPECT_THROW(tps->ComputeJacobianWithRespectToPosition(testPoint, testJacobian), itk::ExceptionObject);
     }
   }
 
   // Exercise GetInverse()
   {
     auto tpsInverse = TPSTransformType::New();
-    if (!tps->GetInverse(tpsInverse))
-    {
-      std::cerr << "ERROR: Could not compute inverse transform for " << VDimension << "D TPS." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(tps->GetInverse(tpsInverse))
+      << "ERROR: Could not compute inverse transform for " << VDimension << "D TPS.";
 
     sourceIt = sourceLandmarks->GetPoints()->Begin();
     targetIt = targetLandmarks->GetPoints()->Begin();
@@ -187,35 +171,22 @@ TestThinPlateSplineKernelTransform()
       const PointType sourcePoint = sourceIt.Value();
       const PointType targetPoint = targetIt.Value();
       const PointType backMappedPoint = tpsInverse->TransformPoint(targetPoint);
-      if (backMappedPoint.EuclideanDistanceTo(sourcePoint) > epsilon)
-      {
-        std::cerr << "Failed to warp point " << targetPoint << " back to " << sourcePoint << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(backMappedPoint.EuclideanDistanceTo(sourcePoint), epsilon)
+        << "Failed to warp point " << targetPoint << " back to " << sourcePoint;
       ++sourceIt;
       ++targetIt;
     }
   }
-
-  return EXIT_SUCCESS;
 }
 
 } // namespace
 
 
-int
-itkThinPlateSplineKernelTransformTest(int, char *[])
+TEST(ThinPlateSplineKernelTransform, ConvertedLegacyTest)
 {
-  if (TestThinPlateSplineKernelTransform<2>() == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  TestThinPlateSplineKernelTransform<2>();
 
-  if (TestThinPlateSplineKernelTransform<3>() == EXIT_FAILURE)
-  {
-    return EXIT_FAILURE;
-  }
+  TestThinPlateSplineKernelTransform<3>();
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
