@@ -19,10 +19,9 @@
 #include <iostream>
 
 #include "itkIdentityTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkIdentityTransformTest(int, char *[])
+TEST(IdentityTransform, ConvertedLegacyTest)
 {
 
   std::cout << "==================================" << std::endl;
@@ -49,11 +48,7 @@ itkIdentityTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error Transforming Point" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error Transforming Point";
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -73,11 +68,7 @@ itkIdentityTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error with TransformVector itk::Vector" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error with TransformVector itk::Vector";
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -97,11 +88,7 @@ itkIdentityTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error with TransformVector vnlVector" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error with TransformVector vnlVector";
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -121,32 +108,25 @@ itkIdentityTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error with TransformVector CovariantVector" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error with TransformVector CovariantVector";
 
   std::cout << " [ PASSED ] " << std::endl;
 
 
   const IdentityTransformType::ParametersType params(0);
   transform->SetParameters(params);
-  ITK_TEST_SET_GET_VALUE(params, transform->GetParameters());
+  EXPECT_EQ(params, transform->GetParameters());
 
   // The number of parameters is 0 for the identity transformation
-  ITK_TEST_SET_GET_VALUE(0, transform->GetNumberOfParameters());
+  EXPECT_EQ(0u, transform->GetNumberOfParameters());
 
   // Testing the Jacobian
   std::cout << "Testing Jacobian: ";
   IdentityTransformType::JacobianType jacobian;
   transform->ComputeJacobianWithRespectToParameters(p, jacobian);
 
-  if (jacobian.rows() != 3 || jacobian.columns() != 0)
-  {
-    std::cerr << "Error with Jacobian: " << jacobian << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(jacobian.rows(), 3u) << "Error with Jacobian: " << jacobian;
+  EXPECT_EQ(jacobian.columns(), 0u) << "Error with Jacobian: " << jacobian;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -155,11 +135,9 @@ itkIdentityTransformTest(int, char *[])
   transform->ComputeJacobianWithRespectToPosition(p, jacobianWrtPos);
   IdentityTransformType::JacobianPositionType identity;
   identity.set_identity();
-  ITK_TEST_EXPECT_EQUAL(identity, jacobianWrtPos);
+  EXPECT_EQ(identity, jacobianWrtPos);
 
   auto inv = IdentityTransformType::New();
-  ITK_TEST_EXPECT_TRUE(transform->GetInverse(inv));
-  ITK_TEST_EXPECT_TRUE(!transform->GetInverse(nullptr));
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(transform->GetInverse(inv));
+  EXPECT_FALSE(transform->GetInverse(nullptr));
 }
