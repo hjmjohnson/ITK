@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageFeatureTests
-  itkBilateralImageFilterTest.cxx
   itkBilateralImageFilterTest2.cxx
   itkBilateralImageFilterTest3.cxx
   itkCannyEdgeDetectionImageFilterTest.cxx
@@ -234,12 +233,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkCannyEdgeDetectionImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkCannyEdgeDetectionImageFilterTest.png
-)
-itk_add_test(
-  NAME itkBilateralImageFilterTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkBilateralImageFilterTest
 )
 itk_add_test(
   NAME itkBilateralImageFilterTest2
@@ -623,6 +616,10 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkMultiScaleHessianBasedMeasureImageFilterTestEnhancedOutput2.mha
 )
 
-set(ITKImageFeatureGTests itkSobelEdgeDetectionImageFilterGTest.cxx)
+set(
+  ITKImageFeatureGTests
+  itkBilateralImageFilterGTest.cxx
+  itkSobelEdgeDetectionImageFilterGTest.cxx
+)
 
 creategoogletestdriver(ITKImageFeature "${ITKImageFeature-Test_LIBRARIES}" "${ITKImageFeatureGTests}")
