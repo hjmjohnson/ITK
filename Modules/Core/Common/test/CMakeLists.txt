@@ -50,7 +50,6 @@ set(
   itkPromoteType.cxx
   itkMetaDataDictionaryTest.cxx
   itkStdStreamLogOutputTest.cxx
-  itkOctreeTest.cxx
   itkTimeProbesTest.cxx
   itkVariableLengthVectorTest.cxx
   itkPeriodicBoundaryConditionTest.cxx
@@ -820,12 +819,6 @@ itk_add_test(
     itkNumericTraitsTest
 )
 itk_add_test(
-  NAME itkOctreeTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkOctreeTest
-)
-itk_add_test(
   NAME itkNumberToStringTest
   COMMAND
     ITKCommon1TestDriver
@@ -1363,6 +1356,7 @@ set(
   itkNumericsGTest.cxx
   itkObjectFactoryBaseGTest.cxx
   itkObjectStoreGTest.cxx
+  itkOctreeGTest.cxx
   itkOffsetGTest.cxx
   itkOptimizerParametersGTest.cxx
   itkPixelAccessGTest.cxx
