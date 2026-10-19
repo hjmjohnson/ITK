@@ -19,42 +19,24 @@
 #  define ITK_LEGACY_TEST // so deprecation warnings are not triggered by this test
 #endif
 #include "itkPlatformMultiThreader.h"
+#include "itkGTest.h"
 
-namespace itkSTLThreadTestImpl
+namespace
 {
-static int        done = 0;
-static int        numberOfIterations = 10;
-static std::mutex threadMutex;
+int        done = 0;
+int        numberOfIterations = 10;
+std::mutex threadMutex;
 
-static ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
+ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
 Runner(void *);
-static int
-Thread(int);
-} // namespace itkSTLThreadTestImpl
-
 int
-itkSTLThreadTest(int argc, char * argv[])
+Thread(int);
+} // namespace
+
+TEST(STLThread, ConvertedLegacyTest)
 {
   // Choose a number of threads.
   size_t numWorkUnits = 10;
-  if (argc > 1)
-  {
-    const int nt = std::stoi(argv[1]);
-    if (nt > 1)
-    {
-      numWorkUnits = nt;
-    }
-  }
-
-  // Choose a number of iterations (0 is infinite).
-  if (argc > 2)
-  {
-    const int ni = std::stoi(argv[2]);
-    if (ni >= 0)
-    {
-      itkSTLThreadTestImpl::numberOfIterations = ni;
-    }
-  }
 
   // Enforce limit on number of threads.
   if (numWorkUnits > itk::ITK_MAX_THREADS)
@@ -64,9 +46,9 @@ itkSTLThreadTest(int argc, char * argv[])
 
   // Report what we'll do.
   std::cout << "Using " << numWorkUnits << " work units.\n";
-  if (itkSTLThreadTestImpl::numberOfIterations)
+  if (numberOfIterations)
   {
-    std::cout << "Using " << itkSTLThreadTestImpl::numberOfIterations << " iterations.\n";
+    std::cout << "Using " << numberOfIterations << " iterations.\n";
   }
   else
   {
@@ -82,19 +64,14 @@ itkSTLThreadTest(int argc, char * argv[])
 
   // Create and execute the threads.
   const itk::PlatformMultiThreader::Pointer threader = itk::PlatformMultiThreader::New();
-  threader->SetSingleMethod(itkSTLThreadTestImpl::Runner, results);
+  threader->SetSingleMethod(Runner, results);
   threader->SetNumberOfWorkUnits(numWorkUnits);
   threader->SingleMethodExecute();
 
   // Report results.
-  int result = 0;
   for (size_t i = 0; i < numWorkUnits; ++i)
   {
-    if (!results[i])
-    {
-      std::cerr << "Work unit " << i << " failed." << std::endl;
-      result = 1;
-    }
+    EXPECT_NE(results[i], 0) << "Work unit " << i << " failed.";
   }
   delete[] results;
 
@@ -108,23 +85,21 @@ itkSTLThreadTest(int argc, char * argv[])
 
 #if !defined(ITK_LEGACY_REMOVE)
   // test deprecated methods too!
-  const itk::ThreadIdType threadId = threader->SpawnThread(itkSTLThreadTestImpl::Runner, nullptr);
-  itkSTLThreadTestImpl::threadMutex.lock();
-  std::cout << "SpawnThread(itkSTLThreadTestImpl::Runner, results): " << threadId << std::endl;
-  itkSTLThreadTestImpl::threadMutex.unlock();
+  const itk::ThreadIdType threadId = threader->SpawnThread(Runner, nullptr);
+  threadMutex.lock();
+  std::cout << "SpawnThread(Runner, results): " << threadId << std::endl;
+  threadMutex.unlock();
   threader->TerminateThread(threadId);
-  itkSTLThreadTestImpl::threadMutex.lock();
+  threadMutex.lock();
   std::cout << "Spawned thread terminated." << std::endl;
-  itkSTLThreadTestImpl::threadMutex.unlock();
+  threadMutex.unlock();
 #endif
-
-  return result;
 }
 
-namespace itkSTLThreadTestImpl
+namespace
 {
 
-static ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
+ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
 Runner(void * infoIn)
 {
   // Get the work unit id and result pointer and run the method for this work unit.
@@ -133,16 +108,16 @@ Runner(void * infoIn)
   auto *                  results = static_cast<int *>(info->UserData);
   if (results)
   {
-    results[tnum] = itkSTLThreadTestImpl::Thread(tnum);
+    results[tnum] = Thread(tnum);
   }
   else
   {
-    itkSTLThreadTestImpl::Thread(tnum);
+    Thread(tnum);
   }
   return ITK_THREAD_RETURN_DEFAULT_VALUE;
 }
 
-static int
+int
 Thread(int tnum)
 {
   // Implementation in individual thread.  We don't care about
@@ -201,4 +176,4 @@ Thread(int tnum)
   return EXIT_SUCCESS;
 }
 
-} // namespace itkSTLThreadTestImpl
+} // namespace
