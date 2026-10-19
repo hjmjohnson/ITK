@@ -20,10 +20,9 @@
 #include "itkLineSpatialObject.h"
 #include "itkSpatialObjectToPointSetFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkSpatialObjectToPointSetFilterTest(int, char *[])
+TEST(SpatialObjectToPointSetFilter, ConvertedLegacyTest)
 {
 
   // Typedefs
@@ -51,16 +50,16 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   using SpatialObjectToPointSetFilterType = itk::SpatialObjectToPointSetFilter<TubeType, PointSetType>;
   auto pointSetFilter = SpatialObjectToPointSetFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(pointSetFilter, SpatialObjectToPointSetFilter, MeshSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(pointSetFilter, SpatialObjectToPointSetFilter, MeshSource);
 
 
   unsigned int childrenDepth = 0;
   pointSetFilter->SetChildrenDepth(childrenDepth);
-  ITK_TEST_SET_GET_VALUE(childrenDepth, pointSetFilter->GetChildrenDepth());
+  EXPECT_EQ(childrenDepth, pointSetFilter->GetChildrenDepth());
 
   constexpr unsigned int samplingFactor{ 1 };
   pointSetFilter->SetSamplingFactor(samplingFactor);
-  ITK_TEST_SET_GET_VALUE(samplingFactor, pointSetFilter->GetSamplingFactor());
+  EXPECT_EQ(samplingFactor, pointSetFilter->GetSamplingFactor());
 
   std::cout << " tnop = " << tube1->GetNumberOfPoints() << std::endl;
   pointSetFilter->SetInput(tube1);
@@ -70,20 +69,12 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   const PointSetType::Pointer pointSet = pointSetFilter->GetOutput();
 
   std::cout << "Testing pointSet exists : ";
-  if (!pointSet.GetPointer())
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(pointSet.GetPointer(), nullptr) << "[FAILURE]";
   std::cout << "[PASSED]" << std::endl;
 
   std::cout << "Testing pointSet size : ";
-  if (pointSet->GetPoints()->Size() != 10)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    std::cout << "   " << pointSet->GetPoints()->Size() << " != 10 (ideal)" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(pointSet->GetPoints()->Size(), 10u) << "[FAILURE]" << '\n'
+                                                << "   " << pointSet->GetPoints()->Size() << " != 10 (ideal)";
   std::cout << "[PASSED]" << std::endl;
 
   std::cout << "Testing pointSet validity : ";
@@ -95,12 +86,8 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   unsigned int val = 0;
   while (pointItr != pointEnd)
   {
-    if ((itk::Math::NotExactlyEquals(pointItr.Value()[0], val)) ||
-        (itk::Math::NotExactlyEquals(pointItr.Value()[1], val)))
-    {
-      std::cout << "[FAILURE]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(pointItr.Value()[0], val) << "[FAILURE]";
+    EXPECT_EQ(pointItr.Value()[1], val) << "[FAILURE]";
     val++;
     pointItr++;
   }
@@ -147,11 +134,11 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   using SpatialObjectToPointSet3DFilterType = itk::SpatialObjectToPointSetFilter<Tube3DType, PointSet3DType>;
   auto pointSetFilter3D = SpatialObjectToPointSet3DFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(pointSetFilter3D, SpatialObjectToPointSetFilter, MeshSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(pointSetFilter3D, SpatialObjectToPointSetFilter, MeshSource);
 
   childrenDepth = 999999;
   pointSetFilter3D->SetChildrenDepth(childrenDepth);
-  ITK_TEST_SET_GET_VALUE(childrenDepth, pointSetFilter3D->GetChildrenDepth());
+  EXPECT_EQ(childrenDepth, pointSetFilter3D->GetChildrenDepth());
 
   pointSetFilter3D->SetInput(group3D);
 
@@ -160,19 +147,11 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   const PointSet3DType::Pointer pointSet3D = pointSetFilter3D->GetOutput();
 
   std::cout << "Testing pointSet3D exists : ";
-  if (!pointSet3D.GetPointer())
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(pointSet3D.GetPointer(), nullptr) << "[FAILURE]";
   std::cout << "[PASSED]" << std::endl;
 
   std::cout << "Testing pointSet3D size : ";
-  if (pointSet3D->GetPoints()->Size() != 20)
-  {
-    std::cout << "[FAILURE]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(pointSet3D->GetPoints()->Size(), 20u) << "[FAILURE]";
   std::cout << "[PASSED]" << std::endl;
 
   std::cout << "Testing pointSet3D validity : ";
@@ -184,15 +163,18 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
   val = 0;
   while (pointItr2 != pointEnd2)
   {
-    if ((itk::Math::NotExactlyEquals(pointItr2.Value()[0], val)) ||
-        (itk::Math::NotExactlyEquals(pointItr2.Value()[1], val + 1)) ||
-        (itk::Math::NotExactlyEquals(pointItr2.Value()[2], val + 2)))
-    {
-      std::cout << pointItr2.Value()[0] << " :" << pointItr2.Value()[1] << " : " << pointItr2.Value()[2] << std::endl;
-      std::cout << val << " :" << val + 1 << " : " << val + 2 << std::endl;
-      std::cout << "[FAILURE]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(pointItr2.Value()[0], val) << pointItr2.Value()[0] << " :" << pointItr2.Value()[1] << " : "
+                                         << pointItr2.Value()[2] << '\n'
+                                         << val << " :" << val + 1 << " : " << val + 2 << '\n'
+                                         << "[FAILURE]";
+    EXPECT_EQ(pointItr2.Value()[1], val + 1)
+      << pointItr2.Value()[0] << " :" << pointItr2.Value()[1] << " : " << pointItr2.Value()[2] << '\n'
+      << val << " :" << val + 1 << " : " << val + 2 << '\n'
+      << "[FAILURE]";
+    EXPECT_EQ(pointItr2.Value()[2], val + 2)
+      << pointItr2.Value()[0] << " :" << pointItr2.Value()[1] << " : " << pointItr2.Value()[2] << '\n'
+      << val << " :" << val + 1 << " : " << val + 2 << '\n'
+      << "[FAILURE]";
     val++;
     pointItr2++;
   }
@@ -200,5 +182,4 @@ itkSpatialObjectToPointSetFilterTest(int, char *[])
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
