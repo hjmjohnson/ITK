@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKQuadEdgeMeshTests
   itkQuadEdgeMeshAddFaceTest1.cxx
-  itkQuadEdgeMeshEulerOperatorCreateCenterVertexTest.cxx
   itkQuadEdgeMeshEulerOperatorDeleteCenterVertexTest.cxx
   itkQuadEdgeMeshEulerOperatorFlipTest.cxx
   itkQuadEdgeMeshEulerOperatorJoinFacetTest.cxx
@@ -120,12 +119,6 @@ itk_add_test(
     5
 )
 itk_add_test(
-  NAME itkQuadEdgeMeshEulerOperatorCreateCenterVertexTest
-  COMMAND
-    ITKQuadEdgeMeshTestDriver
-    itkQuadEdgeMeshEulerOperatorCreateCenterVertexTest
-)
-itk_add_test(
   NAME itkQuadEdgeMeshEulerOperatorDeleteCenterVertexTest
   COMMAND
     ITKQuadEdgeMeshTestDriver
@@ -236,6 +229,7 @@ set(
   itkQuadEdgeMeshCountingCellsGTest.cxx
   itkQuadEdgeMeshDeleteEdgeGTest.cxx
   itkQuadEdgeMeshDeletePointAndReorderIDsGTest.cxx
+  itkQuadEdgeMeshEulerOperatorCreateCenterVertexGTest.cxx
   itkQuadEdgeMeshTypeTraitsGTest.cxx
 )
 creategoogletestdriver(ITKQuadEdgeMesh "${ITKQuadEdgeMesh-Test_LIBRARIES}" "${ITKQuadEdgeMeshGTests}")
