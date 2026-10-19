@@ -20,18 +20,10 @@
 #include "itkLabelMap.h"
 #include "itkLabelObject.h"
 #include "itkLabelMapFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkLabelMapFilterTest(int argc, char * argv[])
+TEST(LabelMapFilter, ConvertedLegacyTest)
 {
-
-  if (argc != 1)
-  {
-    std::cerr << "usage: " << itkNameOfTestExecutableMacro(argv) << "" << std::endl;
-    return EXIT_FAILURE;
-  }
-
   constexpr int dim{ 2 };
 
   using LabelObjectType = itk::LabelObject<unsigned long, dim>;
@@ -79,9 +71,7 @@ itkLabelMapFilterTest(int argc, char * argv[])
   RegionType regionIn;
   regionIn.SetSize(sizeIn);
   region = conversion->GetOutput()->GetRequestedRegion();
-  itkAssertOrThrowMacro((regionIn == region), "LabelMapFilter error.");
+  EXPECT_EQ(regionIn, region) << "LabelMapFilter error.";
 
   conversion->Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
