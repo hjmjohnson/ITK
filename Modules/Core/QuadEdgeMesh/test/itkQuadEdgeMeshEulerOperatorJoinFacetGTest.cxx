@@ -18,10 +18,9 @@
 
 #include "itkQuadEdgeMeshEulerOperatorJoinFacetFunction.h"
 #include "itkQuadEdgeMeshEulerOperatorsTestHelper.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshEulerOperatorJoinFacetTest(int, char *[])
+TEST(QuadEdgeMeshEulerOperatorJoinFacet, ConvertedLegacyTest)
 {
 
   using MeshType = itk::QuadEdgeMesh<double, 3>;
@@ -69,22 +68,19 @@ itkQuadEdgeMeshEulerOperatorJoinFacetTest(int, char *[])
 
   auto joinFacet = JoinFacet::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(joinFacet, QuadEdgeMeshEulerOperatorJoinFacetFunction, QuadEdgeMeshFunctionBase);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    joinFacet, QuadEdgeMeshEulerOperatorJoinFacetFunction, QuadEdgeMeshFunctionBase);
 
 
 #ifndef NDEBUG
   std::cout << "     "
             << "Test No Mesh Input";
-  if (joinFacet->Evaluate((QEType *)1))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(joinFacet->Evaluate((QEType *)1), nullptr);
   std::cout << "OK" << std::endl;
 #endif
 
-  ITK_TEST_EXPECT_EQUAL(std::string_view("QuadEdgeMeshEulerOperatorJoinFacetFunction"),
-                        std::string_view(joinFacet->GetNameOfClass()));
+  EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorJoinFacetFunction"),
+            std::string_view(joinFacet->GetNameOfClass()));
 
   joinFacet->SetInput(mesh);
 
@@ -92,21 +88,13 @@ itkQuadEdgeMeshEulerOperatorJoinFacetTest(int, char *[])
   std::cout << "     "
             << "Test QE Input not internal";
   auto * dummy = new QEType;
-  if (joinFacet->Evaluate(dummy))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(joinFacet->Evaluate(dummy), nullptr);
   delete dummy;
   std::cout << "OK" << std::endl;
 
   std::cout << "     "
             << "Test No QE Input";
-  if (joinFacet->Evaluate((QEType *)nullptr))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(joinFacet->Evaluate((QEType *)nullptr), nullptr);
   std::cout << "OK" << std::endl;
 #endif
 
@@ -137,27 +125,13 @@ itkQuadEdgeMeshEulerOperatorJoinFacetTest(int, char *[])
   std::cout << "     "
             << "Test Edge deletion (possible)";
   // Find an internal edge and collapse it
-  if (!joinFacet->Evaluate(mesh->FindEdge(12, 7)))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(joinFacet->Evaluate(mesh->FindEdge(12, 7)), nullptr);
 
   // Since the edge was internal we lost an edge and an face:
-  if (!AssertTopologicalInvariants<MeshType>(mesh, 25, 55, 31, 1, 0))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (mesh->GetPoint(12).GetValence() != 5)
-  {
-    std::cout << "FAILED [wrong valence of " << mesh->GetPoint(12).GetValence() << " ]." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 55, 31, 1, 0));
+  EXPECT_EQ(mesh->GetPoint(12).GetValence(), 5) << "wrong valence";
   std::cout << "OK" << std::endl;
   std::cout << "Checking JointFacet."
             << "OK" << std::endl
             << std::endl;
-
-  return EXIT_SUCCESS;
 }
