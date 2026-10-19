@@ -34,7 +34,6 @@ set(
   itkMaskedRankImageFilterTest.cxx
   itkMorphologicalGradientImageFilterTest.cxx
   itkMorphologicalGradientImageFilterTest2.cxx
-  itkMovingHistogramMorphologyImageFilterTest.cxx
   itkOpeningByReconstructionImageFilterTest.cxx
   itkOpeningByReconstructionImageFilterTest2.cxx
   itkRankImageFilterTest.cxx
@@ -58,6 +57,7 @@ set(
   itkAnchorErodeDilateImageFilterGTest.cxx
   itkAnchorOpenCloseImageFilterGTest.cxx
   itkMathematicalMorphologyEnumsGTest.cxx
+  itkMovingHistogramMorphologyImageFilterGTest.cxx
 )
 creategoogletestdriver(
   ITKMathematicalMorphology
@@ -542,12 +542,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/MorphologicalGradientImageFilterTest2.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/MorphologicalGradientImageFilterTest2.png
-)
-itk_add_test(
-  NAME itkMovingHistogramMorphologyImageFilterTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkMovingHistogramMorphologyImageFilterTest
 )
 itk_add_test(
   NAME itkOpeningByReconstructionImageFilterTest
