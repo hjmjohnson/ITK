@@ -17,15 +17,12 @@
  *=========================================================================*/
 
 #include "itkShannonIsotropicWavelet.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <string>
 
-int
-itkShannonIsotropicWaveletTest(int, char *[])
+TEST(ShannonIsotropicWavelet, ConvertedLegacyTest)
 {
-  bool testPassed = true;
-
   using Double = double;
   using Float = float;
 
@@ -62,17 +59,5 @@ itkShannonIsotropicWaveletTest(int, char *[])
   std::cout << "freq2D: " << freq2D << std::endl;
   // Check that inherits from IsotropicFrequencyFunction
   unsigned int defaultBands = wavelet2Dfloat->GetHighPassSubBands();
-  if (defaultBands != 1)
-  {
-    testPassed = false;
-  }
-
-  if (testPassed)
-  {
-    return EXIT_SUCCESS;
-  }
-  else
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(defaultBands, 1u);
 }
