@@ -19,10 +19,12 @@
 #include "itkLandmarkBasedTransformInitializer.h"
 #include "itkImage.h"
 #include "itkObject.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
+namespace
+{
 template <unsigned int Dimension>
 typename itk::Image<unsigned char, Dimension>::Pointer
 CreateTestImage()
@@ -214,19 +216,19 @@ test1(int scaleFactor)
   Init3DPoints<TransformInitializerType>(fixedLandmarks, movingLandmarks, scaleFactor);
 
   // No landmarks are set, it should throw
-  ITK_TRY_EXPECT_EXCEPTION(initializer->InitializeTransform());
+  EXPECT_THROW(initializer->InitializeTransform(), itk::ExceptionObject);
   initializer->SetMovingLandmarks(movingLandmarks);
-  ITK_TRY_EXPECT_EXCEPTION(initializer->InitializeTransform()); // Fixed landmarks missing
+  EXPECT_THROW(initializer->InitializeTransform(), itk::ExceptionObject); // Fixed landmarks missing
   initializer->SetFixedLandmarks(fixedLandmarks);
 
   return ExecuteAndExamine<TransformInitializerType>(initializer, fixedLandmarks, movingLandmarks);
 }
+} // namespace
 
 // The test specifies a bunch of fixed and moving landmarks and tests if the
 // fixed landmarks after transform by the computed transform coincides
 // with the moving landmarks.
-int
-itkLandmarkBasedTransformInitializerTest(int, char *[])
+TEST(LandmarkBasedTransformInitializer, ConvertedLegacyTest)
 {
   bool success = true;
   // For VersorRigid3DTransform scaleFactor is 1
@@ -253,7 +255,7 @@ itkLandmarkBasedTransformInitializerTest(int, char *[])
       itk::LandmarkBasedTransformInitializer<TransformType, FixedImageType, MovingImageType>;
     auto initializer = TransformInitializerType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
 
     initializer->DebugOn();
 
@@ -317,9 +319,10 @@ itkLandmarkBasedTransformInitializerTest(int, char *[])
     movingLandmarks.push_back(point);
 
     // No landmarks are set, it should throw
-    ITK_TRY_EXPECT_EXCEPTION(initializer->InitializeTransform());
+    EXPECT_THROW(initializer->InitializeTransform(), itk::ExceptionObject);
     initializer->SetFixedLandmarks(fixedLandmarks);
-    ITK_TRY_EXPECT_EXCEPTION(initializer->InitializeTransform()); // Moving landmarks missing
+    EXPECT_THROW(initializer->InitializeTransform(),
+                 itk::ExceptionObject); // Moving landmarks missing
     initializer->SetMovingLandmarks(movingLandmarks);
 
     success &= ExecuteAndExamine<TransformInitializerType>(initializer, fixedLandmarks, movingLandmarks);
@@ -336,12 +339,12 @@ itkLandmarkBasedTransformInitializerTest(int, char *[])
     using TransformInitializerType = itk::LandmarkBasedTransformInitializer<TransformType, ImageType, ImageType>;
     auto initializer = TransformInitializerType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
 
     initializer->SetTransform(transform);
 
     // Test that an exception is thrown if there aren't enough points
-    ITK_TRY_EXPECT_EXCEPTION(initializer->InitializeTransform());
+    EXPECT_THROW(initializer->InitializeTransform(), itk::ExceptionObject);
 
     constexpr unsigned int numLandmarks{ 8 };
     constexpr double       fixedLandMarkInit[numLandmarks][3] = {
@@ -453,7 +456,7 @@ itkLandmarkBasedTransformInitializerTest(int, char *[])
       itk::LandmarkBasedTransformInitializer<TransformType, FixedImageType, MovingImageType>;
     auto initializer = TransformInitializerType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
 
     TransformInitializerType::LandmarkPointContainer fixedLandmarks;
     TransformInitializerType::LandmarkPointContainer movingLandmarks;
@@ -475,7 +478,7 @@ itkLandmarkBasedTransformInitializerTest(int, char *[])
     initializer->SetBSplineNumberOfControlPoints(8);
 
     // Test that an exception is thrown if the reference image isn't set
-    ITK_TRY_EXPECT_EXCEPTION(initializer->InitializeTransform());
+    EXPECT_THROW(initializer->InitializeTransform(), itk::ExceptionObject);
 
     // Now set the reference image and initialization should work
     initializer->SetReferenceImage(fixedImage);
@@ -490,13 +493,8 @@ itkLandmarkBasedTransformInitializerTest(int, char *[])
 
     auto initializer = TransformInitializerType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(initializer, LandmarkBasedTransformInitializer, Object);
   }
 
-  if (!success)
-  {
-    return EXIT_FAILURE;
-  }
-  std::cout << "Test PASSED!" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(success);
 }
