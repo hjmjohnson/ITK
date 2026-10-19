@@ -21,12 +21,10 @@
 #include "itkImageRegionIterator.h"
 
 #include "itkBinaryThresholdImageFunction.h"
+#include "itkGTest.h"
 
-int
-itkBinaryThresholdImageFunctionTest(int, char *[])
+TEST(BinaryThresholdImageFunction, ConvertedLegacyTest)
 {
-  std::cout << "itkBinaryThresholdImageFunctionTest Start" << std::endl;
-
   using FloatImage = itk::Image<float, 3>;
 
   auto                  size = FloatImage::SizeType::Filled(64);
@@ -64,44 +62,25 @@ itkBinaryThresholdImageFunctionTest(int, char *[])
   index[1] = 11;
   index[2] = 11;
 
-  int failed = 0;
-  if (!threshold->EvaluateAtIndex(index))
-  {
-    failed++;
-  }
+  EXPECT_TRUE(threshold->EvaluateAtIndex(index));
 
   threshold->ThresholdAbove(100.0);
-  if (!threshold->EvaluateAtIndex(index))
-  {
-    failed++;
-  }
+  EXPECT_TRUE(threshold->EvaluateAtIndex(index));
 
   threshold->ThresholdAbove(101.0);
-  if (threshold->EvaluateAtIndex(index))
-  {
-    failed++;
-  }
+  EXPECT_FALSE(threshold->EvaluateAtIndex(index));
 
   threshold->ThresholdBetween(100.0, 100.0);
-  if (!threshold->EvaluateAtIndex(index))
-  {
-    failed++;
-  }
+  EXPECT_TRUE(threshold->EvaluateAtIndex(index));
 
   threshold->ThresholdBetween(-100.0, 0.0);
-  if (threshold->EvaluateAtIndex(index))
-  {
-    failed++;
-  }
+  EXPECT_FALSE(threshold->EvaluateAtIndex(index));
 
   index[0] = 8;
   index[1] = 8;
   index[2] = 8;
   threshold->ThresholdBetween(100.0, 200.0);
-  if (threshold->EvaluateAtIndex(index))
-  {
-    failed++;
-  }
+  EXPECT_FALSE(threshold->EvaluateAtIndex(index));
 
   std::cout << threshold;
 
@@ -116,15 +95,4 @@ itkBinaryThresholdImageFunctionTest(int, char *[])
   continuousIndex[1] = 9;
   continuousIndex[2] = 9;
   threshold->EvaluateAtContinuousIndex(continuousIndex);
-
-
-  if (failed)
-  {
-    std::cout << "Failed!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Passed!" << std::endl;
-
-  return EXIT_SUCCESS;
 }
