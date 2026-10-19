@@ -1,9 +1,5 @@
 itk_module_test()
-set(
-  ITKImageFilterBaseTests
-  itkMaskNeighborhoodOperatorImageFilterTest.cxx
-  itkVectorNeighborhoodOperatorImageFilterTest.cxx
-)
+set(ITKImageFilterBaseTests itkMaskNeighborhoodOperatorImageFilterTest.cxx)
 
 # Disable optimization on the tests below to avoid possible
 # optimization bugs in some compilers. This option will appear on the
@@ -21,12 +17,6 @@ endif()
 
 createtestdriver(ITKImageFilterBase "${ITKImageFilterBase-Test_LIBRARIES}" "${ITKImageFilterBaseTests}")
 
-itk_add_test(
-  NAME itkVectorNeighborhoodOperatorImageFilterTest
-  COMMAND
-    ITKImageFilterBaseTestDriver
-    itkVectorNeighborhoodOperatorImageFilterTest
-)
 itk_add_test(
   NAME itkMaskNeighborhoodOperatorImageFilterTest
   COMMAND
@@ -47,5 +37,6 @@ set(
   itkGeneratorImageFilterGTest.cxx
   itkImageToImageFilterGTest.cxx
   itkNeighborhoodOperatorImageFilterGTest.cxx
+  itkVectorNeighborhoodOperatorImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKImageFilterBase "${ITKImageFilterBase-Test_LIBRARIES}" "${ITKImageFilterBaseGTests}")
