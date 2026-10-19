@@ -18,11 +18,10 @@
 
 #include "itkFlatStructuringElement.h"
 #include "itkVanHerkGilWermanErodeDilateImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkVanHerkGilWermanErodeDilateImageFilterTest(int, char ** const)
+TEST(VanHerkGilWermanErodeDilateImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -34,14 +33,10 @@ itkVanHerkGilWermanErodeDilateImageFilterTest(int, char ** const)
   using FilterType = itk::VanHerkGilWermanErodeDilateImageFilter<ImageType, KernelType, FunctionType>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, VanHerkGilWermanErodeDilateImageFilter, KernelImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, VanHerkGilWermanErodeDilateImageFilter, KernelImageFilter);
 
 
   constexpr typename FilterType::InputImagePixelType boundary = 255;
   filter->SetBoundary(boundary);
-  ITK_TEST_SET_GET_VALUE(boundary, filter->GetBoundary());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(boundary, filter->GetBoundary());
 }
