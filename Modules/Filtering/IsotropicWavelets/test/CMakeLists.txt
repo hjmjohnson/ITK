@@ -25,7 +25,6 @@ set(
   itkWaveletFrequencyInverseTest.cxx
   itkWaveletFrequencyForwardUndecimatedTest.cxx
   itkWaveletFrequencyInverseUndecimatedTest.cxx
-  itkWaveletUtilitiesTest.cxx
   # Phase Analysis
   itkPhaseAnalysisSoftThresholdImageFilterTest.cxx
   # Riesz / Monogenic
@@ -352,12 +351,6 @@ itk_add_test(
 #   "Held"
 #   2)
 # WaveletUtilities
-itk_add_test(
-  NAME itkWaveletUtilitiesTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkWaveletUtilitiesTest
-)
 #### TODO move StructureTensorGeneralizedRiesz and RieszWavelet to examples/applications.
 set(DefaultWavelet Held)
 # StructureTensor and Generalized Riesz.
@@ -674,6 +667,7 @@ set(
   itkShannonIsotropicWaveletGTest.cxx
   itkSimoncelliIsotropicWaveletGTest.cxx
   itkVowIsotropicWaveletGTest.cxx
+  itkWaveletUtilitiesGTest.cxx
   itkRieszStructureTensorImageFilterGTest.cxx
 )
 creategoogletestdriver(IsotropicWavelets "${Libraries}" "${IsotropicWaveletsGTests}")
