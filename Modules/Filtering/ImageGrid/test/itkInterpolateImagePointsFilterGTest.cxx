@@ -34,9 +34,11 @@
 #include "itkGaussianImageSource.h"
 #include "itkImageToImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 using InputPixelType = double;
 using CoordValueType = double;
 
@@ -144,7 +146,7 @@ test2DInterpolateImagePointsFilter()
   // Initialize InterpolateImagePointsFilter
   auto resamp = InterpolatorType2D::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(resamp, InterpolateImagePointsFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(resamp, InterpolateImagePointsFilter, ImageToImageFilter);
 
   constexpr unsigned int splineOrder{ 3 };
   resamp->GetInterpolator()->SetSplineOrder(splineOrder);
@@ -155,7 +157,7 @@ test2DInterpolateImagePointsFilter()
   constexpr InterpolatorType2D::PixelType defaultPixelValue{ DEFAULTPIXELVALUE };
   resamp->SetDefaultPixelValue(defaultPixelValue);
 
-  ITK_TEST_SET_GET_VALUE(defaultPixelValue, resamp->GetDefaultPixelValue());
+  EXPECT_EQ(defaultPixelValue, resamp->GetDefaultPixelValue());
 
   resamp->Update();
   resamp->Print(std::cout);
@@ -201,7 +203,7 @@ test3DInterpolateImagePointsFilter()
   // Initialize InterpolateImagePointsFilter and set input image
   auto resamp = InterpolatorType3D::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(resamp, InterpolateImagePointsFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(resamp, InterpolateImagePointsFilter, ImageToImageFilter);
 
   constexpr unsigned int splineOrder{ 3 };
   resamp->GetInterpolator()->SetSplineOrder(splineOrder);
@@ -279,9 +281,9 @@ test3DInterpolateImagePointsFilter()
 
   return testStatus;
 }
+} // namespace
 
-int
-itkInterpolateImagePointsFilterTest(int, char *[])
+TEST(InterpolateImagePointsFilter, ConvertedLegacyTest)
 {
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
@@ -296,16 +298,11 @@ itkInterpolateImagePointsFilterTest(int, char *[])
   testStatus += test3DInterpolateImagePointsFilter();
 
   // Return results of test
-  if (testStatus != 0)
-  {
-    std::cout << "\n*** " << testStatus << " tests failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "\nAll tests successfully passed\n" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(testStatus, 0);
 }
 
+namespace
+{
 void
 set2DInterpolateImagePointsFilterData(ImageType2D::Pointer imgPtr)
 {
@@ -373,3 +370,4 @@ set3DData()
 
   return pImage;
 }
+} // namespace

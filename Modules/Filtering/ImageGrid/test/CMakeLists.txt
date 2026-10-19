@@ -18,7 +18,6 @@ set(
   itkCyclicReferences.cxx
   itkCyclicShiftImageFilterTest.cxx
   itkFlipImageFilterTest.cxx
-  itkInterpolateImagePointsFilterTest.cxx
   itkMirrorPadImageFilterTest.cxx
   itkMirrorPadImageTest.cxx
   itkOrientImageFilterTest.cxx
@@ -255,12 +254,6 @@ itk_add_test(
     DATA{${ITK_DATA_ROOT}/Input/cthead1.png}
     -51
     40
-)
-itk_add_test(
-  NAME itkInterpolateImagePointsFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkInterpolateImagePointsFilterTest
 )
 itk_add_test(
   NAME itkFlipImageFilterTest1
@@ -694,6 +687,7 @@ set(
   itkExpandImageFilterGTest.cxx
   itkExpandImageFilterGTest2.cxx
   itkInterpolateImageFilterGTest.cxx
+  itkInterpolateImagePointsFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
   itkShrinkImageGTest.cxx
