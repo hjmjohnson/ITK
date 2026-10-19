@@ -22,7 +22,6 @@ set(
   itkSymmetricEigenAnalysisImageFilterTest.cxx
   itkTernaryMagnitudeImageFilterTest.cxx
   itkVectorIndexSelectionCastImageFilterTest.cxx
-  itkVectorRescaleIntensityImageFilterTest.cxx
   itkVectorToRGBImageAdaptorTest.cxx
   itkWeightedAddImageFilterTest.cxx
   itkXorImageFilterTest.cxx
@@ -52,12 +51,6 @@ itk_add_test(
     ITKImageIntensityTestDriver
     itkBoundedReciprocalImageFilterTest
     DATA{${ITK_DATA_ROOT}/Input/Gourds.png}
-)
-itk_add_test(
-  NAME itkVectorRescaleIntensityImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkVectorRescaleIntensityImageFilterTest
 )
 itk_add_test(
   NAME itkVectorIndexSelectionCastImageFilterTest1
@@ -525,6 +518,7 @@ set(
   itkTernaryMagnitudeSquaredImageFilterGTest.cxx
   itkTernaryOperatorImageFilterGTest.cxx
   itkVectorMagnitudeImageFilterGTest.cxx
+  itkVectorRescaleIntensityImageFilterGTest.cxx
 )
 
 if(MSVC)
