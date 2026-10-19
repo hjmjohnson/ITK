@@ -17,24 +17,25 @@
  *=========================================================================*/
 
 #include "itkScalarChanAndVeseLevelSetFunction.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 
 template <typename TInput,   // LevelSetImageType
           typename TFeature, // FeatureImageType
           typename TSharedData>
 class ScalarChanAndVeseLevelSetFunctionTest2Helper
-  : public ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>
+  : public itk::ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(ScalarChanAndVeseLevelSetFunctionTest2Helper);
 
   /** Standard class type aliases. */
   using Self = ScalarChanAndVeseLevelSetFunctionTest2Helper;
-  using Superclass = ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   static constexpr unsigned int ImageDimension = Superclass::ImageDimension;
 
@@ -73,10 +74,9 @@ protected:
   ~ScalarChanAndVeseLevelSetFunctionTest2Helper() override = default;
 };
 
-} // namespace itk
+} // namespace
 
-int
-itkScalarChanAndVeseLevelSetFunctionTest2(int, char *[])
+TEST(ScalarChanAndVeseLevelSetFunction2, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -91,12 +91,10 @@ itkScalarChanAndVeseLevelSetFunctionTest2(int, char *[])
 
 
   using ChanAndVeseLevelSetFunctionType =
-    itk::ScalarChanAndVeseLevelSetFunctionTest2Helper<ImageType, FeatureImageType, SharedDataHelperType>;
+    ScalarChanAndVeseLevelSetFunctionTest2Helper<ImageType, FeatureImageType, SharedDataHelperType>;
 
   auto function = ChanAndVeseLevelSetFunctionType::New();
 
   std::cout << "GetNameOfClass() = " << function->GetNameOfClass() << std::endl;
   function->Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
