@@ -18,9 +18,9 @@
 
 #include "itkScalarChanAndVeseDenseLevelSetImageFilter.h"
 #include "itkUnconstrainedRegionBasedLevelSetFunctionSharedData.h"
+#include "itkGTest.h"
 
-int
-itkScalarChanAndVeseDenseLevelSetImageFilterTest3(int, char *[])
+TEST(ScalarChanAndVeseDenseLevelSetImageFilter3, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -38,10 +38,7 @@ itkScalarChanAndVeseDenseLevelSetImageFilterTest3(int, char *[])
     itk::ScalarChanAndVeseLevelSetFunction<ImageType, FeatureImageType, SharedDataHelperType>;
 
   auto function = RegionBasedLevelSetFunctionType::New();
-  if (function.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(function.IsNull());
 
   using FilterType = itk::ScalarChanAndVeseDenseLevelSetImageFilter<ImageType,
                                                                     FeatureImageType,
@@ -53,6 +50,4 @@ itkScalarChanAndVeseDenseLevelSetImageFilterTest3(int, char *[])
 
   std::cout << "GetNameOfClass() = " << filter->GetNameOfClass() << std::endl;
   filter->Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
