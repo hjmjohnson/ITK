@@ -16,9 +16,9 @@
  *
  *=========================================================================*/
 #include "itkESMDemonsRegistrationFunction.h"
+#include "itkGTest.h"
 
-int
-itkESMDemonsRegistrationFunctionTest(int, char *[])
+TEST(ESMDemonsRegistrationFunction, ConvertedLegacyTest)
 {
   // Test streaming enumeration for ESMDemonsRegistrationFunctionEnums::Gradient elements
   const std::set<itk::ESMDemonsRegistrationFunctionEnums::Gradient> allGradient{
@@ -31,7 +31,4 @@ itkESMDemonsRegistrationFunctionTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE ESMDemonsRegistrationFunctionEnums::Gradient: " << ee << std::endl;
   }
-
-  std::cout << "Test passed" << std::endl;
-  return EXIT_SUCCESS;
 }

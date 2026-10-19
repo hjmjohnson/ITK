@@ -3,7 +3,6 @@ set(
   ITKPDEDeformableRegistrationTests
   itkDiffeomorphicDemonsRegistrationFilterTest.cxx
   itkDiffeomorphicDemonsRegistrationFilterTest2.cxx
-  itkESMDemonsRegistrationFunctionTest.cxx
   itkFastSymmetricForcesDemonsRegistrationFilterTest.cxx
   itkLevelSetMotionRegistrationFilterTest.cxx
   itkMultiResolutionPDEDeformableRegistrationTest.cxx
@@ -248,12 +247,10 @@ itk_add_test(
     ITKPDEDeformableRegistrationTestDriver
     itkFastSymmetricForcesDemonsRegistrationFilterTest
 )
-itk_add_test(
-  NAME itkESMDemonsRegistrationFunctionTest
-  COMMAND
-    ITKPDEDeformableRegistrationTestDriver
-    itkESMDemonsRegistrationFunctionTest
-)
 
-set(ITKPDEDeformableRegistrationGTests itkDemonsRegistrationFilterGTest.cxx)
+set(
+  ITKPDEDeformableRegistrationGTests
+  itkDemonsRegistrationFilterGTest.cxx
+  itkESMDemonsRegistrationFunctionGTest.cxx
+)
 creategoogletestdriver(ITKPDEDeformableRegistration "${ITKPDEDeformableRegistration-Test_LIBRARIES}" "${ITKPDEDeformableRegistrationGTests}")
