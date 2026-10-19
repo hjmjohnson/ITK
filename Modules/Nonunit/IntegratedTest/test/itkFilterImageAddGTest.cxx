@@ -18,9 +18,9 @@
 
 #include "itkAddImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
-int
-itkFilterImageAddTest(int, char *[])
+TEST(FilterImageAdd, ConvertedLegacyTest)
 {
   // Define the dimension of the images
   constexpr unsigned int myDimension{ 3 };
@@ -115,5 +115,4 @@ itkFilterImageAddTest(int, char *[])
 
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
