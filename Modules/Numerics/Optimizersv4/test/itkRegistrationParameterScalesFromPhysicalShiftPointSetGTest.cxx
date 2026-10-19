@@ -20,9 +20,11 @@
 
 #include "itkAffineTransform.h"
 #include "itkDisplacementFieldTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkMath.h"
 
+namespace
+{
 /**
  *  \class RegistrationParameterScalesFromPhysicalShiftPointSetTestMetric for test.
  *  Create a simple metric to use for testing here.
@@ -72,11 +74,11 @@ private:
   RegistrationParameterScalesFromPhysicalShiftPointSetTestMetric() = default;
   ~RegistrationParameterScalesFromPhysicalShiftPointSetTestMetric() override = default;
 };
+} // namespace
 
 /**
  */
-int
-itkRegistrationParameterScalesFromPhysicalShiftPointSetTest(int, char *[])
+TEST(RegistrationParameterScalesFromPhysicalShiftPointSet, ConvertedLegacyTest)
 {
   constexpr itk::SizeValueType Dimension{ 2 };
   using PixelType = double;
@@ -365,19 +367,17 @@ itkRegistrationParameterScalesFromPhysicalShiftPointSetTest(int, char *[])
   const RegistrationParameterScalesFromPhysicalShiftType::Pointer shiftScaleEstimator2 =
     RegistrationParameterScalesFromPhysicalShiftType::New();
   shiftScaleEstimator2->SetMetric(metric);
-  ITK_TRY_EXPECT_EXCEPTION(shiftScaleEstimator2->EstimateStepScale(displacementStep));
+  EXPECT_THROW(shiftScaleEstimator2->EstimateStepScale(displacementStep), itk::ExceptionObject);
 
   //
   // Check the correctness of all cases above
   //
   std::cout << std::endl;
-  if (affinePass && nonUniformForAffine && stepScalePass && translationPass && uniformForTranslation &&
-      displacementPass && localStepScalePass)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cerr << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(affinePass);
+  EXPECT_TRUE(nonUniformForAffine);
+  EXPECT_TRUE(stepScalePass);
+  EXPECT_TRUE(translationPass);
+  EXPECT_TRUE(uniformForTranslation);
+  EXPECT_TRUE(displacementPass);
+  EXPECT_TRUE(localStepScalePass);
 }
