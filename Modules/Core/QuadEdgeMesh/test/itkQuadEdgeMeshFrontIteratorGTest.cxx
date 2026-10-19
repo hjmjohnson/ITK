@@ -29,9 +29,9 @@
  */
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshFrontIteratorTest(int, char *[])
+TEST(QuadEdgeMeshFrontIterator, ConvertedLegacyTest)
 {
   using MeshType = itk::QuadEdgeMesh<double, 3>;
   using MeshPointer = MeshType::Pointer;
@@ -212,15 +212,5 @@ itkQuadEdgeMeshFrontIteratorTest(int, char *[])
   std::cout << "numberOfPoints " << numberOfPoints << std::endl;
   std::cout << "computedNumberOfPoints= " << computedNumberOfPoints << std::endl;
 
-  if (computedNumberOfPoints == itk::Math::CastWithRangeCheck<int>(numberOfPoints))
-  {
-    std::cout << "Passed" << std::endl;
-  }
-  else
-  {
-    std::cout << "Failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(computedNumberOfPoints, itk::Math::CastWithRangeCheck<int>(numberOfPoints));
 }
