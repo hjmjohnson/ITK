@@ -3,7 +3,6 @@ set(
   ITKSpatialObjectsTests
   itkBoxSpatialObjectTest.cxx
   itkImageMaskSpatialObjectTest.cxx
-  itkLineSpatialObjectTest.cxx
   itkMeshSpatialObjectTest.cxx
   itkMetaArrowConverterTest.cxx
   itkMetaGaussianConverterTest.cxx
@@ -121,12 +120,6 @@ itk_add_test(
     itkMeshSpatialObjectTest
 )
 itk_add_test(
-  NAME itkLineSpatialObjectTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkLineSpatialObjectTest
-)
-itk_add_test(
   NAME itkNewMetaObjectTypeTest
   COMMAND
     ITKSpatialObjectsTestDriver
@@ -153,6 +146,7 @@ set(
   itkImageMaskSpatialObjectGTest5.cxx
   itkImageSpatialObjectGTest.cxx
   itkLandmarkSpatialObjectGTest.cxx
+  itkLineSpatialObjectGTest.cxx
   itkSpatialObjectPointGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")

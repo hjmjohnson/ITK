@@ -16,12 +16,11 @@
  *
  *=========================================================================*/
 
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkLineSpatialObject.h"
 #include "itkMath.h"
 
-int
-itkLineSpatialObjectTest(int, char *[])
+TEST(LineSpatialObject, ConvertedLegacyTest)
 {
   using LineType = itk::LineSpatialObject<3>;
   using LinePointer = LineType::Pointer;
@@ -57,7 +56,7 @@ itkLineSpatialObjectTest(int, char *[])
   // Create a Line Spatial Object
   const LinePointer line = LineType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(line, LineSpatialObject, PointBasedSpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(line, LineSpatialObject, PointBasedSpatialObject);
 
 
   line->GetProperty().SetName("Line 1");
@@ -69,11 +68,7 @@ itkLineSpatialObjectTest(int, char *[])
   std::cout << "Testing Consistency: " << std::endl;
   std::cout << "Number of Points: ";
 
-  if (line->GetPoints().size() != 10)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(line->GetPoints().size(), 10u) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -88,23 +83,11 @@ itkLineSpatialObjectTest(int, char *[])
   {
     for (unsigned int d = 0; d < 3; ++d)
     {
-      if (itk::Math::NotExactlyEquals(it->GetPositionInWorldSpace()[d], i + d))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(it->GetPositionInWorldSpace()[d], i + d) << "[FAILED]";
 
-      if (itk::Math::NotExactlyEquals((it->GetNormalInObjectSpace(0))[d], d))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ((it->GetNormalInObjectSpace(0))[d], d) << "[FAILED]";
 
-      if (itk::Math::NotExactlyEquals((it->GetNormalInObjectSpace(1))[d], 2 * d))
-      {
-        std::cout << "[FAILED]" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ((it->GetNormalInObjectSpace(1))[d], 2 * d) << "[FAILED]";
     }
     it++;
     i++;
@@ -123,26 +106,15 @@ itkLineSpatialObjectTest(int, char *[])
   out[1] = 0;
   out[2] = 0;
 
-  if (!line->IsInsideInWorldSpace(in))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(line->IsInsideInWorldSpace(in)) << "[FAILED]";
 
-  if (line->IsInsideInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(line->IsInsideInWorldSpace(out)) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   // Testing IsEvaluableAt()
   std::cout << "IsEvaluableAt: ";
-  if (!line->IsEvaluableAtInWorldSpace(in) || line->IsEvaluableAtInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(line->IsEvaluableAtInWorldSpace(in)) << "[FAILED]";
+  EXPECT_FALSE(line->IsEvaluableAtInWorldSpace(out)) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
 
@@ -150,17 +122,9 @@ itkLineSpatialObjectTest(int, char *[])
   std::cout << "ValueAt: ";
 
   double value = NAN;
-  if (!line->ValueAtInWorldSpace(in, value))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(line->ValueAtInWorldSpace(in, value)) << "[FAILED]";
 
-  if (itk::Math::NotExactlyEquals(value, 1))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(value, 1) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   // Test Copy and Assignment for LinePointType
@@ -186,26 +150,23 @@ itkLineSpatialObjectTest(int, char *[])
     for (const auto & pv : pointVector)
     {
       // itk::SpatialObjectPoint
-      ITK_TEST_EXPECT_EQUAL(pOriginal.GetId(), pv.GetId());
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetRed(), pv.GetRed()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetGreen(), pv.GetGreen()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetBlue(), pv.GetBlue()));
-      ITK_TEST_EXPECT_TRUE(itk::Math::AlmostEquals(pOriginal.GetAlpha(), pv.GetAlpha()));
+      EXPECT_EQ(pOriginal.GetId(), pv.GetId());
+      EXPECT_DOUBLE_EQ(pOriginal.GetRed(), pv.GetRed());
+      EXPECT_DOUBLE_EQ(pOriginal.GetGreen(), pv.GetGreen());
+      EXPECT_DOUBLE_EQ(pOriginal.GetBlue(), pv.GetBlue());
+      EXPECT_DOUBLE_EQ(pOriginal.GetAlpha(), pv.GetAlpha());
       for (size_t j = 0; j < 3; ++j)
       {
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetPositionInObjectSpace()[j], pv.GetPositionInObjectSpace()[j]));
+        EXPECT_DOUBLE_EQ(pOriginal.GetPositionInObjectSpace()[j], pv.GetPositionInObjectSpace()[j]);
       }
       // itk::LineSpatialObjectPoint
       for (size_t j = 0; j < 3; ++j)
       {
-        ITK_TEST_EXPECT_TRUE(
-          itk::Math::AlmostEquals(pOriginal.GetNormalInObjectSpace(0)[j], pv.GetNormalInObjectSpace(0)[j]));
+        EXPECT_DOUBLE_EQ(pOriginal.GetNormalInObjectSpace(0)[j], pv.GetNormalInObjectSpace(0)[j]);
       }
     }
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
