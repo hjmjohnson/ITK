@@ -18,10 +18,9 @@
 
 
 #include "itkMedianImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkMedianImageFunctionTest(int, char *[])
+TEST(MedianImageFunction, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 3 };
@@ -47,7 +46,7 @@ itkMedianImageFunctionTest(int, char *[])
 
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, MedianImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, MedianImageFunction, ImageFunction);
 
 
   function->SetInputImage(image);
@@ -71,15 +70,9 @@ itkMedianImageFunctionTest(int, char *[])
 
   // since the input image is constant
   // the should be equal to the initial value
-  if (itk::Math::Absolute(initialValue - median) > 10e-7)
-  {
-    std::cerr << "Error in mean computation" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(initialValue, median, 10e-7) << "Error in mean computation";
 
-  std::cout << "Test PASSED ! " << std::endl;
-
-  std::cout << "Test setting the neighborhood radius" << std::endl;
+  // Test setting the neighborhood radius
 
   // first, put something in the neighborhood outside the current
   // neighborhood that will change the median result
@@ -111,16 +104,12 @@ itkMedianImageFunctionTest(int, char *[])
 
   // since the input image is constant
   // the should be equal to the initial value
-  if (itk::Math::Absolute(initialValue - median) > 10e-7)
-  {
-    std::cerr << "Error in mean computation" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(initialValue, median, 10e-7) << "Error in mean computation";
 
   // now set the radius
   constexpr unsigned int neighborhoodRadius{ 2 };
   function->SetNeighborhoodRadius(neighborhoodRadius);
-  ITK_TEST_SET_GET_VALUE(neighborhoodRadius, function->GetNeighborhoodRadius());
+  EXPECT_EQ(neighborhoodRadius, function->GetNeighborhoodRadius());
 
   median = function->EvaluateAtIndex(index);
   std::cout << "function->EvaluateAtIndex( index ), neighborhood radius " << neighborhoodRadius << ": "
@@ -128,13 +117,5 @@ itkMedianImageFunctionTest(int, char *[])
   // Since we've changed the image outside the default neighborhood
   // for the MedianImageFunction, it would be an error for the median
   // to be the same
-  if (itk::Math::Absolute(initialValue - median) < 10e-7)
-  {
-    std::cerr << "Error in mean computation" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_GE(itk::Math::Absolute(initialValue - median), 10e-7) << "Error in mean computation";
 }
