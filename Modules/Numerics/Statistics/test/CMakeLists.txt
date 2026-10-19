@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKStatisticsTests
-  itkEuclideanSquareDistanceMetricTest.cxx
   itkExpectationMaximizationMixtureModelEstimatorTest.cxx
   itkGaussianDistributionTest.cxx
   itkGaussianMembershipFunctionTest.cxx
@@ -516,12 +515,6 @@ itk_add_test(
     1
 )
 itk_add_test(
-  NAME itkEuclideanSquareDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkEuclideanSquareDistanceMetricTest
-)
-itk_add_test(
   NAME itkListSampleTest1
   COMMAND
     ITKStatisticsTestDriver
@@ -841,6 +834,7 @@ set(
   itkDistanceMetricGTest2.cxx
   itkDistanceToCentroidMembershipFunctionGTest.cxx
   itkEuclideanDistanceMetricGTest.cxx
+  itkEuclideanSquareDistanceMetricGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
   itkImageToListSampleAdaptorGTest.cxx
   itkJointDomainImageToListSampleAdaptorGTest.cxx
