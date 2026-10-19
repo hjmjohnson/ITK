@@ -21,13 +21,12 @@
 #include "itkPipelineMonitorImageFilter.h"
 #include "itkStreamingImageFilter.h"
 #include "itkImageBufferRange.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include <numeric> // For iota.
 
-int
-itkShrinkImageStreamingTest(int, char *[])
+TEST(ShrinkImageFilter, ConvertedLegacyStreamingTest)
 {
 
   constexpr unsigned int numberOfStreamDivisions{ 4 };
@@ -79,19 +78,12 @@ itkShrinkImageStreamingTest(int, char *[])
 
   // this verifies that the pipeline was executed as expected along
   // with correct region propagation and output information
-  if (!monitor2->VerifyAllInputCanStream(numberOfStreamDivisions))
-  {
-    std::cout << "Filter failed to execute as expected!" << std::endl;
-    std::cout << monitor2;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(monitor2->VerifyAllInputCanStream(numberOfStreamDivisions))
+    << "Filter failed to execute as expected!" << monitor2;
 
   // Verify that only the data needed is requested;
   for (const auto & j : monitor1->GetOutputRequestedRegions())
   {
-    ITK_TEST_EXPECT_TRUE(j.GetSize(1) % factors[1] == 1);
+    EXPECT_EQ(j.GetSize(1) % factors[1], 1u);
   }
-
-
-  return EXIT_SUCCESS;
 }
