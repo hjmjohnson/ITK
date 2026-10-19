@@ -25,9 +25,12 @@
 #include "itkAffineTransform.h"
 #include "itkRegistrationParameterScalesFromPhysicalShift.h"
 #include "itkCommand.h"
+#include "itkGTest.h"
 
 #include <fstream>
 
+namespace
+{
 template <typename TFilter>
 class itkLabeledPointSetMetricRegistrationTestCommandIterationUpdate : public itk::Command
 {
@@ -63,7 +66,7 @@ public:
 };
 
 template <class PointSetMetricType>
-[[nodiscard]] int
+void
 itkLabeledPointSetMetricRegistrationTestPerMetric(unsigned int numberOfIterations, PointSetMetricType * pointSetMetric)
 {
   using PointSetType = typename PointSetMetricType::FixedPointSetType;
@@ -174,36 +177,21 @@ itkLabeledPointSetMetricRegistrationTestPerMetric(unsigned int numberOfIteration
       passed = false;
     }
   }
-  if (!passed)
-  {
-    std::cerr << "Results do not match truth within tolerance." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "Results do not match truth within tolerance.";
 }
+} // namespace
 
-int
-itkLabeledPointSetMetricRegistrationTest(int argc, char * argv[])
+TEST(LabeledPointSetMetricRegistration, ConvertedLegacyTest)
 {
-  unsigned int numberOfIterations = 10;
-  if (argc > 1)
-  {
-    numberOfIterations = std::stoi(argv[1]);
-  }
+  constexpr unsigned int numberOfIterations{ 10 };
 
   constexpr unsigned int Dimension{ 2 };
   using PointSetType = itk::PointSet<unsigned int, Dimension>;
 
-  int allSuccess = EXIT_SUCCESS;
-
   {
     using PointSetMetricType = itk::EuclideanDistancePointSetToPointSetMetricv4<PointSetType>;
-    auto      metric = PointSetMetricType::New();
-    const int success =
-      itkLabeledPointSetMetricRegistrationTestPerMetric<PointSetMetricType>(numberOfIterations, metric.GetPointer());
-
-    allSuccess *= success;
+    auto metric = PointSetMetricType::New();
+    itkLabeledPointSetMetricRegistrationTestPerMetric<PointSetMetricType>(numberOfIterations, metric.GetPointer());
   }
 
   {
@@ -211,10 +199,7 @@ itkLabeledPointSetMetricRegistrationTest(int argc, char * argv[])
     auto metric = PointSetMetricType::New();
     metric->SetPointSetSigma(2.0);
     metric->SetEvaluationKNeighborhood(3);
-    const int success =
-      itkLabeledPointSetMetricRegistrationTestPerMetric<PointSetMetricType>(numberOfIterations, metric.GetPointer());
-
-    allSuccess *= success;
+    itkLabeledPointSetMetricRegistrationTestPerMetric<PointSetMetricType>(numberOfIterations, metric.GetPointer());
   }
 
   {
@@ -226,11 +211,6 @@ itkLabeledPointSetMetricRegistrationTest(int argc, char * argv[])
     metric->SetCovarianceKNeighborhood(5);
     metric->SetEvaluationKNeighborhood(10);
     metric->SetAlpha(1.1);
-    const int success =
-      itkLabeledPointSetMetricRegistrationTestPerMetric<PointSetMetricType>(numberOfIterations, metric.GetPointer());
-
-    allSuccess *= success;
+    itkLabeledPointSetMetricRegistrationTestPerMetric<PointSetMetricType>(numberOfIterations, metric.GetPointer());
   }
-
-  return allSuccess;
 }
