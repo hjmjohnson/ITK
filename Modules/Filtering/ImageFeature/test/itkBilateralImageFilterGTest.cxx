@@ -19,10 +19,9 @@
 #include <iostream>
 #include "itkBilateralImageFilter.h"
 #include "itkNullImageToImageFilterDriver.hxx"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkBilateralImageFilterTest(int, char *[])
+TEST(BilateralImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -34,41 +33,41 @@ itkBilateralImageFilterTest(int, char *[])
   // Set up filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, BilateralImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, BilateralImageFilter, ImageToImageFilter);
 
 
   double                domainSigmaVal = 2.0;
   FilterType::ArrayType domainSigma = FilterType::ArrayType::Filled(domainSigmaVal);
   filter->SetDomainSigma(domainSigmaVal);
-  ITK_TEST_SET_GET_VALUE(domainSigma, filter->GetDomainSigma());
+  EXPECT_EQ(domainSigma, filter->GetDomainSigma());
 
   domainSigmaVal = 2.5;
   domainSigma.Fill(domainSigmaVal);
   filter->SetDomainSigma(domainSigma);
-  ITK_TEST_SET_GET_VALUE(domainSigma, filter->GetDomainSigma());
+  EXPECT_EQ(domainSigma, filter->GetDomainSigma());
 
   constexpr double domainMu{ 2.5 };
   filter->SetDomainMu(domainMu);
-  ITK_TEST_SET_GET_VALUE(domainMu, filter->GetDomainMu());
+  EXPECT_EQ(domainMu, filter->GetDomainMu());
 
   constexpr double rangeSigma{ 35.0f };
   filter->SetRangeSigma(rangeSigma);
-  ITK_TEST_SET_GET_VALUE(rangeSigma, filter->GetRangeSigma());
+  EXPECT_EQ(rangeSigma, filter->GetRangeSigma());
 
   filter->SetFilterDimensionality(Dimension);
-  ITK_TEST_SET_GET_VALUE(Dimension, filter->GetFilterDimensionality());
+  EXPECT_EQ(Dimension, filter->GetFilterDimensionality());
 
   constexpr bool automaticKernelSize{ true };
-  ITK_TEST_SET_GET_BOOLEAN(filter, AutomaticKernelSize, automaticKernelSize);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, AutomaticKernelSize, automaticKernelSize);
 
   constexpr FilterType::SizeType::SizeValueType radiusVal = 2;
   constexpr FilterType::SizeType                radius = FilterType::SizeType::Filled(radiusVal);
   filter->SetRadius(radius);
-  ITK_TEST_SET_GET_VALUE(radius, filter->GetRadius());
+  EXPECT_EQ(radius, filter->GetRadius());
 
   constexpr unsigned long numberOfRangeGaussianSamples{ 150 };
   filter->SetNumberOfRangeGaussianSamples(numberOfRangeGaussianSamples);
-  ITK_TEST_SET_GET_VALUE(numberOfRangeGaussianSamples, filter->GetNumberOfRangeGaussianSamples());
+  EXPECT_EQ(numberOfRangeGaussianSamples, filter->GetNumberOfRangeGaussianSamples());
 
   // Run test
   itk::Size<Dimension> sz;
@@ -78,9 +77,5 @@ itkBilateralImageFilterTest(int, char *[])
   test1.SetImageSize(sz);
   test1.SetFilter(filter);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(test1.Execute());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(test1.Execute());
 }
