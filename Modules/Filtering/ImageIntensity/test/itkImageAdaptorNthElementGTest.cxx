@@ -29,11 +29,10 @@
 #include "itkNthElementImageAdaptor.h"
 #include "itkAddImageFilter.h"
 #include "itkStdStreamStateSave.h"
+#include "itkGTest.h"
 
-int
-itkImageAdaptorNthElementTest(int, char *[])
+TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
 {
-
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
   // scope.
@@ -279,6 +278,4 @@ itkImageAdaptorNthElementTest(int, char *[])
     std::cout << ito.Get() << std::endl;
     ++ito;
   }
-
-  return EXIT_SUCCESS;
 }
