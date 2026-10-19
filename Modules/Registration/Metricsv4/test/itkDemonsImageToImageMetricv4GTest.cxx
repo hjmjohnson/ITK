@@ -18,7 +18,7 @@
 #include "itkDemonsImageToImageMetricv4.h"
 #include "itkTranslationTransform.h"
 #include "itkGaussianSmoothingOnUpdateDisplacementFieldTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkMath.h"
 
 /* Simple test to verify that class builds and runs.
@@ -28,8 +28,7 @@
  * TODO Numerical verification.
  */
 
-int
-itkDemonsImageToImageMetricv4Test(int, char ** const)
+TEST(DemonsImageToImageMetricv4, ConvertedLegacyTest)
 {
 
   constexpr unsigned int imageSize{ 5 };
@@ -107,60 +106,26 @@ itkDemonsImageToImageMetricv4Test(int, char ** const)
 
   /* Test 1st with fixed image gradient source. This is the default */
   metric->SetGradientSource(itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_FIXED);
-  if (metric->GetGradientSource() != itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_FIXED)
-  {
-    std::cerr << "Failed setting fixed image gradient source." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(metric->GetGradientSource(),
+            itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_FIXED)
+    << "Failed setting fixed image gradient source.";
 
   /* Initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during Initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  EXPECT_NO_THROW(metric->Initialize());
 
   // Evaluate with GetValueAndDerivative
   MetricType::MeasureType    valueReturn1 = NAN;
   MetricType::DerivativeType derivativeReturn;
-  try
-  {
-    std::cout << "Calling GetValueAndDerivative..." << std::endl;
-    metric->GetValueAndDerivative(valueReturn1, derivativeReturn);
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValueAndDerivative: " << exc;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  EXPECT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn));
 
   /* Re-initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during re-initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  EXPECT_NO_THROW(metric->Initialize());
   MetricType::MeasureType valueReturn2 = NAN;
-  try
-  {
-    std::cout << "Calling GetValue..." << std::endl;
-    valueReturn2 = metric->GetValue();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValue: " << exc;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling GetValue..." << std::endl;
+  EXPECT_NO_THROW(valueReturn2 = metric->GetValue());
 
   // Test same value returned by different methods
   std::cout << "Check Value return values..." << std::endl;
@@ -174,58 +139,23 @@ itkDemonsImageToImageMetricv4Test(int, char ** const)
   metric->SetFixedTransform(translationTransform);
   metric->SetMovingTransform(displacementTransform);
   metric->SetGradientSource(itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_MOVING);
-  if (metric->GetGradientSource() != itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_MOVING)
-  {
-    std::cerr << "Failed setting moving image gradient source." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(metric->GetGradientSource(),
+            itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_MOVING)
+    << "Failed setting moving image gradient source.";
 
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during initialize with moving "
-              << "image gradient source: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  EXPECT_NO_THROW(metric->Initialize());
 
   // Evaluate with GetValueAndDerivative
-  try
-  {
-    std::cout << "Calling GetValueAndDerivative..." << std::endl;
-    metric->GetValueAndDerivative(valueReturn1, derivativeReturn);
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValueAndDerivative: " << exc;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  EXPECT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn));
 
   /* Re-initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during re-initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  EXPECT_NO_THROW(metric->Initialize());
 
-  try
-  {
-    std::cout << "Calling GetValue..." << std::endl;
-    valueReturn2 = metric->GetValue();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValue: " << exc;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling GetValue..." << std::endl;
+  EXPECT_NO_THROW(valueReturn2 = metric->GetValue());
 
   // Test same value returned by different methods
   std::cout << "Check Value return values..." << std::endl;
@@ -237,20 +167,13 @@ itkDemonsImageToImageMetricv4Test(int, char ** const)
 
   /* Test expected exceptions when transform is not right type */
   metric->SetMovingTransform(translationTransform);
-  ITK_TRY_EXPECT_EXCEPTION(metric->Initialize());
+  EXPECT_THROW(metric->Initialize(), itk::ExceptionObject);
 
   /* Exercise accessor method */
   constexpr auto testValue = static_cast<MetricType::InternalComputationValueType>(0.5);
   metric->SetIntensityDifferenceThreshold(testValue);
-  if (itk::Math::NotExactlyEquals(metric->GetIntensityDifferenceThreshold(), testValue))
-  {
-    std::cerr << "Set/GetIntensityDifferenceThreshold failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(metric->GetIntensityDifferenceThreshold(), testValue) << "Set/GetIntensityDifferenceThreshold failed.";
 
   /* Print self */
   metric->Print(std::cout);
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
