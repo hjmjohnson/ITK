@@ -19,10 +19,9 @@
 #include "itkWarpMeshFilter.h"
 #include "itkRegularSphereMeshSource.h"
 #include "itkImage.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkWarpMeshFilterTest(int, char *[])
+TEST(WarpMeshFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -98,21 +97,21 @@ itkWarpMeshFilterTest(int, char *[])
 
   auto warpFilter = WarpFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(warpFilter, WarpMeshFilter, MeshToMeshFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(warpFilter, WarpMeshFilter, MeshToMeshFilter);
 
 
   // Test exceptions
-  ITK_TRY_EXPECT_EXCEPTION(warpFilter->Update());
+  EXPECT_THROW(warpFilter->Update(), itk::ExceptionObject);
 
   warpFilter->SetInput(sphereMeshSource->GetOutput());
 
   // Test exceptions
-  ITK_TRY_EXPECT_EXCEPTION(warpFilter->Update());
+  EXPECT_THROW(warpFilter->Update(), itk::ExceptionObject);
 
 
   warpFilter->SetDisplacementField(deformationField);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(warpFilter->Update());
+  ASSERT_NO_THROW(warpFilter->Update());
 
 
   const MeshType::Pointer      outputMesh = warpFilter->GetOutput();
@@ -134,17 +133,9 @@ itkWarpMeshFilterTest(int, char *[])
     for (unsigned int i = 0; i < Dimension; ++i)
     {
       const double distance = outputPoint.Value()[i] - inputPoint.Value()[i];
-      if (itk::Math::Absolute(distance - simpleVector[i]) > tolerance)
-      {
-        std::cerr << "Filter failed" << std::endl;
-        std::cerr << "Expected displacement = " << simpleVector[i] << std::endl;
-        std::cerr << "but got  = " << distance << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(distance, simpleVector[i], tolerance) << "Filter failed";
     }
     ++inputPoint;
     ++outputPoint;
   }
-
-  return EXIT_SUCCESS;
 }
