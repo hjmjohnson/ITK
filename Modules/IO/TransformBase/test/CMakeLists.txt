@@ -1,18 +1,8 @@
 itk_module_test()
-set(
-  ITKIOTransformBaseTests
-  itkTransformFileReaderTest.cxx
-  itkTransformFileWriterTest.cxx
-)
+set(ITKIOTransformBaseTests itkTransformFileWriterTest.cxx)
 
 createtestdriver(ITKIOTransformBase "${ITKIOTransformBase-Test_LIBRARIES}" "${ITKIOTransformBaseTests}")
 
-itk_add_test(
-  NAME itkTransformFileReaderTest
-  COMMAND
-    ITKIOTransformBaseTestDriver
-    itkTransformFileReaderTest
-)
 itk_add_test(
   NAME itkTransformFileWriterTest
   COMMAND
@@ -20,6 +10,10 @@ itk_add_test(
     itkTransformFileWriterTest
 )
 
-set(ITKIOTransformBaseGTests itkTransformIOBaseGTest.cxx)
+set(
+  ITKIOTransformBaseGTests
+  itkTransformFileReaderGTest.cxx
+  itkTransformIOBaseGTest.cxx
+)
 
 creategoogletestdriver(ITKIOTransformBase "${ITKIOTransformBase-Test_LIBRARIES}" "${ITKIOTransformBaseGTests}")
