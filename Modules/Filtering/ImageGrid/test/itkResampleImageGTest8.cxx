@@ -21,9 +21,11 @@
 #include "itkResampleImageFilter.h"
 #include "itkImageFileWriter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkIdentityTransform.h"
 
+namespace
+{
 class ProjectTransform : public itk::Transform<double, 3, 2>
 {
 public:
@@ -111,10 +113,10 @@ protected:
   ~ProjectTransform() override = default;
 
 }; // class ProjectTransform
+} // namespace
 
 
-int
-itkResampleImageTest8(int, char *[])
+TEST(ResampleImageFilter, ConvertedLegacyTest8)
 {
 
   constexpr unsigned int InputImageDimensions{ 2 };
@@ -172,24 +174,24 @@ itkResampleImageTest8(int, char *[])
   const itk::ResampleImageFilter<InputImageType, OutputImageType>::Pointer resample =
     itk::ResampleImageFilter<InputImageType, OutputImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
 
   resample->SetInput(inputImage);
-  ITK_TEST_SET_GET_VALUE(inputImage, resample->GetInput());
+  EXPECT_EQ(inputImage, resample->GetInput());
 
 
   resample->SetTransform(tform);
-  ITK_TEST_SET_GET_VALUE(tform, resample->GetTransform());
+  EXPECT_EQ(tform, resample->GetTransform());
 
   resample->SetInterpolator(interp);
-  ITK_TEST_SET_GET_VALUE(interp, resample->GetInterpolator());
+  EXPECT_EQ(interp, resample->GetInterpolator());
 
   resample->SetSize(outputSize);
-  ITK_TEST_SET_GET_VALUE(outputSize, resample->GetSize());
+  EXPECT_EQ(outputSize, resample->GetSize());
 
   outputIndex.Fill(0);
   resample->SetOutputStartIndex(outputIndex);
-  ITK_TEST_SET_GET_VALUE(outputIndex, resample->GetOutputStartIndex());
+  EXPECT_EQ(outputIndex, resample->GetOutputStartIndex());
 
   // Run the resampling filter
   resample->Update();
@@ -217,19 +219,15 @@ itkResampleImageTest8(int, char *[])
   // Test non-default values
   constexpr auto origin = itk::MakeFilled<OutputImageType::PointType>(1234.0);
   resample->SetOutputOrigin(origin);
-  ITK_TEST_SET_GET_VALUE(origin, resample->GetOutputOrigin());
+  EXPECT_EQ(origin, resample->GetOutputOrigin());
 
   auto spacing = itk::MakeFilled<OutputImageType::SpacingType>(9876.0);
   resample->SetOutputSpacing(spacing);
-  ITK_TEST_SET_GET_VALUE(spacing, resample->GetOutputSpacing());
+  EXPECT_EQ(spacing, resample->GetOutputSpacing());
 
 
   // Report success or failure
-  if (!passed)
-  {
-    std::cout << "Resampling test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "Resampling test failed";
 
   // Exercise error handling
 
@@ -248,12 +246,5 @@ itkResampleImageTest8(int, char *[])
     resample->SetInterpolator(interp);
   }
 
-  if (!passed)
-  {
-    std::cout << "Resampling test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "Resampling test failed";
 }
