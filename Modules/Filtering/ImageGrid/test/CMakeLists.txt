@@ -19,7 +19,6 @@ set(
   itkCyclicShiftImageFilterTest.cxx
   itkFlipImageFilterTest.cxx
   itkMirrorPadImageFilterTest.cxx
-  itkMirrorPadImageTest.cxx
   itkOrientImageFilterTest.cxx
   itkPadImageFilterTest.cxx
   itkPasteImageFilterTest.cxx
@@ -391,12 +390,6 @@ itk_add_test(
     itkWrapPadImageTest
 )
 itk_add_test(
-  NAME itkMirrorPadImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkMirrorPadImageTest
-)
-itk_add_test(
   NAME itkMirrorPadImageFilterTest
   COMMAND
     ITKImageGridTestDriver
@@ -688,6 +681,7 @@ set(
   itkExpandImageFilterGTest2.cxx
   itkInterpolateImageFilterGTest.cxx
   itkInterpolateImagePointsFilterGTest.cxx
+  itkMirrorPadImageGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
   itkShrinkImageGTest.cxx
