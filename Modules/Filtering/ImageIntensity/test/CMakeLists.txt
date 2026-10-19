@@ -8,7 +8,6 @@ set(
   itkDiscreteGaussianDerivativeImageFunctionTest.cxx
   itkDiscreteGradientMagnitudeGaussianImageFunctionTest.cxx
   itkDiscreteHessianGaussianImageFunctionTest.cxx
-  itkEdgePotentialImageFilterTest.cxx
   itkExpImageFilterAndAdaptorTest.cxx
   itkExpNegativeImageFilterAndAdaptorTest.cxx
   itkHistogramMatchingImageFilterTest.cxx
@@ -225,12 +224,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkSymmetricEigenAnalysisImageFilterTestDoNotOrder.png
     ${ITK_TEST_OUTPUT_DIR}/itkSymmetricEigenAnalysisFixedDimensionImageFilterTestDoNotOrder.png
-)
-itk_add_test(
-  NAME itkEdgePotentialImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkEdgePotentialImageFilterTest
 )
 itk_add_test(
   NAME itkAndImageFilterTest
@@ -702,6 +695,7 @@ set(
   itkDivideImageFilterGTest.cxx
   itkDivideImageFilterGTest2.cxx
   itkDivideOrZeroOutImageFilterGTest.cxx
+  itkEdgePotentialImageFilterGTest.cxx
   itkEqualGTest.cxx
   itkGreaterEqualGTest.cxx
   itkGreaterGTest.cxx
