@@ -17,9 +17,9 @@
  *=========================================================================*/
 
 #include "itkThresholdSegmentationLevelSetImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-namespace TSIFTN
+namespace
 {
 
 using ImageType = itk::Image<float, 3>;
@@ -66,18 +66,18 @@ evaluate_function(itk::Image<signed char, 3> * im, float (*f)(float, float, floa
   }
 }
 
-} // namespace TSIFTN
+} // namespace
 
 
-namespace itk
+namespace
 {
 
-class RMSCommand : public Command
+class RMSCommand : public itk::Command
 {
 public:
   /** Smart pointer declaration methods */
   using Self = RMSCommand;
-  using Superclass = Command;
+  using Superclass = itk::Command;
   using Pointer = itk::SmartPointer<Self>;
   using ConstPointer = itk::SmartPointer<const Self>;
   itkOverrideGetNameOfClassMacro(RMSCommand);
@@ -85,18 +85,17 @@ public:
 
   /** Standard Command virtual methods */
   void
-  Execute(Object * caller, const EventObject &) override
+  Execute(itk::Object * caller, const itk::EventObject &) override
   {
-    std::cout << (dynamic_cast<SparseFieldLevelSetImageFilter<::TSIFTN::SeedImageType, ::TSIFTN::ImageType> *>(caller))
-                   ->GetRMSChange()
+    std::cout << (dynamic_cast<itk::SparseFieldLevelSetImageFilter<SeedImageType, ImageType> *>(caller))->GetRMSChange()
               << std::endl;
-    std::cout << (dynamic_cast<SegmentationLevelSetImageFilter<::TSIFTN::SeedImageType, ::TSIFTN::ImageType> *>(caller))
+    std::cout << (dynamic_cast<itk::SegmentationLevelSetImageFilter<SeedImageType, ImageType> *>(caller))
                    ->GetSegmentationFunction()
                    ->GetPropagationWeight()
               << std::endl;
   }
   void
-  Execute(const Object *, const EventObject &) override
+  Execute(const itk::Object *, const itk::EventObject &) override
   {
     std::cout << "ack" << std::endl;
   }
@@ -107,12 +106,12 @@ protected:
 };
 
 
-class TSIFTNProgressCommand : public Command
+class TSIFTNProgressCommand : public itk::Command
 {
 public:
   /** Smart pointer declaration methods */
   using Self = TSIFTNProgressCommand;
-  using Superclass = Command;
+  using Superclass = itk::Command;
   using Pointer = itk::SmartPointer<Self>;
   using ConstPointer = itk::SmartPointer<const Self>;
   itkOverrideGetNameOfClassMacro(TSIFTNProgressCommand);
@@ -120,13 +119,13 @@ public:
 
   /** Standard Command virtual methods */
   void
-  Execute(Object * caller, const EventObject &) override
+  Execute(itk::Object * caller, const itk::EventObject &) override
   {
-    const ProcessObject * process = dynamic_cast<ProcessObject *>(caller);
+    const itk::ProcessObject * process = dynamic_cast<itk::ProcessObject *>(caller);
     std::cout << "Progress = " << process->GetProgress() << std::endl;
   }
   void
-  Execute(const Object *, const EventObject &) override
+  Execute(const itk::Object *, const itk::EventObject &) override
   {
     std::cout << "ack" << std::endl;
   }
@@ -137,25 +136,24 @@ protected:
 };
 
 
-} // namespace itk
+} // namespace
 
 
-int
-itkThresholdSegmentationLevelSetImageFilterTest(int, char *[])
+TEST(ThresholdSegmentationLevelSetImageFilter, ConvertedLegacyTest)
 {
-  TSIFTN::ImageType::RegionType::SizeType  sz{ 64, 64, 64 };
-  TSIFTN::ImageType::RegionType::IndexType idx{};
-  TSIFTN::ImageType::RegionType            reg = { idx, sz };
+  ImageType::RegionType::SizeType  sz{ 64, 64, 64 };
+  ImageType::RegionType::IndexType idx{};
+  ImageType::RegionType            reg = { idx, sz };
 
-  const TSIFTN::ImageType::Pointer     inputImage = TSIFTN::ImageType::New();
-  const TSIFTN::SeedImageType::Pointer seedImage = TSIFTN::SeedImageType::New();
+  const ImageType::Pointer     inputImage = ImageType::New();
+  const SeedImageType::Pointer seedImage = SeedImageType::New();
   inputImage->SetRegions(reg);
   seedImage->SetRegions(reg);
   inputImage->Allocate();
   seedImage->Allocate();
 
   // Starting surface is a sphere in the center of the image.
-  TSIFTN::evaluate_function(seedImage, TSIFTN::sphere);
+  evaluate_function(seedImage, sphere);
 
   // Target surface is a diamond
   //  TSIFTN::ImageType::IndexType idx;
@@ -178,50 +176,51 @@ itkThresholdSegmentationLevelSetImageFilterTest(int, char *[])
         inputImage->SetPixel(idx, val);
       }
 
-  using FilterType = itk::ThresholdSegmentationLevelSetImageFilter<::TSIFTN::SeedImageType, ::TSIFTN::ImageType>;
+  using FilterType = itk::ThresholdSegmentationLevelSetImageFilter<SeedImageType, ImageType>;
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, ThresholdSegmentationLevelSetImageFilter, SegmentationLevelSetImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    filter, ThresholdSegmentationLevelSetImageFilter, SegmentationLevelSetImageFilter);
 
 
   filter->SetInput(seedImage);
-  ITK_TEST_SET_GET_VALUE(seedImage, filter->GetInitialImage());
+  EXPECT_EQ(seedImage, filter->GetInitialImage());
 
   filter->SetInitialImage(seedImage);
-  ITK_TEST_SET_GET_VALUE(seedImage, filter->GetInput());
-  ITK_TEST_SET_GET_VALUE(seedImage, filter->GetInitialImage());
+  EXPECT_EQ(seedImage, filter->GetInput());
+  EXPECT_EQ(seedImage, filter->GetInitialImage());
 
   filter->SetFeatureImage(inputImage);
-  ITK_TEST_SET_GET_VALUE(inputImage, filter->GetFeatureImage());
+  EXPECT_EQ(inputImage, filter->GetFeatureImage());
 
   auto advectionImage = FilterType::SegmentationFunctionType::VectorImageType::New();
   filter->SetAdvectionImage(advectionImage);
-  ITK_TEST_SET_GET_VALUE(advectionImage, filter->GetAdvectionImage());
+  EXPECT_EQ(advectionImage, filter->GetAdvectionImage());
 
   constexpr typename FilterType::ValueType upperThreshold = 63;
   filter->SetUpperThreshold(upperThreshold);
-  ITK_TEST_SET_GET_VALUE(upperThreshold, filter->GetUpperThreshold());
+  EXPECT_EQ(upperThreshold, filter->GetUpperThreshold());
 
   constexpr typename FilterType::ValueType lowerThreshold = 50;
   filter->SetLowerThreshold(lowerThreshold);
-  ITK_TEST_SET_GET_VALUE(lowerThreshold, filter->GetLowerThreshold());
+  EXPECT_EQ(lowerThreshold, filter->GetLowerThreshold());
 
   constexpr typename FilterType::ValueType edgeWeight = 0.0;
   filter->SetEdgeWeight(edgeWeight);
-  ITK_TEST_SET_GET_VALUE(edgeWeight, filter->GetEdgeWeight());
+  EXPECT_EQ(edgeWeight, filter->GetEdgeWeight());
 
   constexpr int smoothingIterations{ 5 };
   filter->SetSmoothingIterations(smoothingIterations);
-  ITK_TEST_SET_GET_VALUE(smoothingIterations, filter->GetSmoothingIterations());
+  EXPECT_EQ(smoothingIterations, filter->GetSmoothingIterations());
 
   constexpr typename FilterType::ValueType smoothingTimeStep = 0.1;
   filter->SetSmoothingTimeStep(smoothingTimeStep);
-  ITK_TEST_SET_GET_VALUE(smoothingTimeStep, filter->GetSmoothingTimeStep());
+  EXPECT_EQ(smoothingTimeStep, filter->GetSmoothingTimeStep());
 
   constexpr typename FilterType::ValueType smoothingConductance = 0.8;
   filter->SetSmoothingConductance(smoothingConductance);
-  ITK_TEST_SET_GET_VALUE(smoothingConductance, filter->GetSmoothingConductance());
+  EXPECT_EQ(smoothingConductance, filter->GetSmoothingConductance());
 
   filter->SetMaximumRMSError(0.04);
   filter->SetNumberOfIterations(10);
@@ -233,28 +232,28 @@ itkThresholdSegmentationLevelSetImageFilterTest(int, char *[])
                                       // function so that negative values result in
                                       // surface growth.
   filter->SetUseNegativeFeatures(reverseExpansionDirection);
-  ITK_TEST_SET_GET_VALUE(reverseExpansionDirection, filter->GetUseNegativeFeatures());
+  EXPECT_EQ(reverseExpansionDirection, filter->GetUseNegativeFeatures());
 
-  ITK_TEST_SET_GET_BOOLEAN(filter, ReverseExpansionDirection, reverseExpansionDirection);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, ReverseExpansionDirection, reverseExpansionDirection);
 
   auto autoGenerateSpeedAdvection = true;
-  ITK_TEST_SET_GET_BOOLEAN(filter, AutoGenerateSpeedAdvection, autoGenerateSpeedAdvection);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, AutoGenerateSpeedAdvection, autoGenerateSpeedAdvection);
 
-  const itk::RMSCommand::Pointer c = itk::RMSCommand::New();
+  const RMSCommand::Pointer c = RMSCommand::New();
   filter->AddObserver(itk::IterationEvent(), c);
 
-  const itk::TSIFTNProgressCommand::Pointer progress = itk::TSIFTNProgressCommand::New();
+  const TSIFTNProgressCommand::Pointer progress = TSIFTNProgressCommand::New();
   filter->AddObserver(itk::ProgressEvent(), progress);
 
   filter->SetIsoSurfaceValue(0.5); //<--- IMPORTANT!  Default is zero.
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
   std::cout << "Done first trial" << std::endl;
   // Repeat to make sure that the filter is reinitialized properly
   filter->SetNumberOfIterations(5);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
   std::cout << "Done second trial" << std::endl;
 
@@ -279,6 +278,4 @@ itkThresholdSegmentationLevelSetImageFilterTest(int, char *[])
   //        writer->SetInput(filter->GetOutput());
   //       writer->SetFileName("output.raw");
   //        writer->Write();
-
-  return EXIT_SUCCESS;
 }
