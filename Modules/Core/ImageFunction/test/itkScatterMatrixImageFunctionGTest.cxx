@@ -18,10 +18,9 @@
 
 
 #include "itkScatterMatrixImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkScatterMatrixImageFunctionTest(int, char *[])
+TEST(ScatterMatrixImageFunction, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 3 };
@@ -51,12 +50,12 @@ itkScatterMatrixImageFunctionTest(int, char *[])
 
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, ScatterMatrixImageFunction, ImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, ScatterMatrixImageFunction, ImageFunction);
 
 
   constexpr unsigned int neighborhoodRadius{ 5 };
   function->SetNeighborhoodRadius(neighborhoodRadius);
-  ITK_TEST_SET_GET_VALUE(neighborhoodRadius, function->GetNeighborhoodRadius());
+  EXPECT_EQ(neighborhoodRadius, function->GetNeighborhoodRadius());
 
   function->SetInputImage(image);
 
@@ -98,14 +97,8 @@ itkScatterMatrixImageFunctionTest(int, char *[])
   {
     for (unsigned int iy = 0; iy < VectorDimension; ++iy)
     {
-      if (itk::Math::Absolute(initialValue[ix] * initialValue[iy] - scatterMatrix[ix][iy]) > 10e-7)
-      {
-        std::cerr << "Error in scatterMatrix computation" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_NEAR(initialValue[ix] * initialValue[iy], scatterMatrix[ix][iy], 10e-7)
+        << "Error in scatterMatrix computation";
     }
   }
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
 }
