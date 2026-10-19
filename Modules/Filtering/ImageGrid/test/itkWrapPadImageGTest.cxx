@@ -21,7 +21,10 @@
 #include "itkWrapPadImageFilter.h"
 #include "itkVectorImage.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
+namespace
+{
 //
 // Check that val represents the correct pixel value.  This routine
 // allows the pad region to extend to twice the size of the input.
@@ -64,10 +67,10 @@ VerifyPixel(int row, int col, short val, float & expected)
   expected = 8 * col + row;
   return itk::Math::AlmostEquals(val, expected);
 }
+} // namespace
 
 
-int
-itkWrapPadImageTest(int, char *[])
+TEST(WrapPadImageFilter, ConvertedLegacyTest)
 {
   // type alias to simplify the syntax
   using ShortImage = itk::Image<short, 2>;
@@ -180,15 +183,7 @@ itkWrapPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "WrapPadImageFilter case 1 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "WrapPadImageFilter case 1 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "WrapPadImageFilter case 1 failed.";
 
 
   // CASE 2
@@ -246,15 +241,7 @@ itkWrapPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "WrapPadImageFilter case 2 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "WrapPadImageFilter case 2 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "WrapPadImageFilter case 2 failed.";
 
 
   // CASE 3
@@ -323,15 +310,5 @@ itkWrapPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "WrapPadImageFilter case 3 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "WrapPadImageFilter case 3 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "WrapPadImageFilter case 3 failed.";
 }
