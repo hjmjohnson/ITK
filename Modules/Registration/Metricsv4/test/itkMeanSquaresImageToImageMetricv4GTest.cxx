@@ -18,6 +18,7 @@
 #include "itkMeanSquaresImageToImageMetricv4.h"
 #include "itkTranslationTransform.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
 /* Simple test to verify that class builds and runs.
  * Results are not verified. See ImageToImageMetricv4Test
@@ -26,8 +27,7 @@
  * TODO Numerical verification.
  */
 
-int
-itkMeanSquaresImageToImageMetricv4Test(int, char ** const)
+TEST(MeanSquaresImageToImageMetricv4, ConvertedLegacyTest)
 {
 
   constexpr unsigned int imageSize{ 5 };
@@ -93,54 +93,22 @@ itkMeanSquaresImageToImageMetricv4Test(int, char ** const)
   metric->SetMovingTransform(movingTransform);
 
   /* Initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during Initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  ASSERT_NO_THROW(metric->Initialize());
 
   // Evaluate with GetValueAndDerivative
   MetricType::MeasureType    valueReturn1 = NAN;
   MetricType::DerivativeType derivativeReturn;
-  try
-  {
-    std::cout << "Calling GetValueAndDerivative..." << std::endl;
-    metric->GetValueAndDerivative(valueReturn1, derivativeReturn);
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValueAndDerivative: " << exc;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn));
 
   /* Re-initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during re-initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  ASSERT_NO_THROW(metric->Initialize());
 
   MetricType::MeasureType valueReturn2 = NAN;
-  try
-  {
-    std::cout << "Calling GetValue..." << std::endl;
-    valueReturn2 = metric->GetValue();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cout << "Caught unexpected exception during GetValue: " << exc;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling GetValue..." << std::endl;
+  ASSERT_NO_THROW(valueReturn2 = metric->GetValue());
 
   // Test same value returned by different methods
   std::cout << "Check Value return values..." << std::endl;
@@ -165,13 +133,6 @@ itkMeanSquaresImageToImageMetricv4Test(int, char ** const)
   metric->SetFloatingPointCorrectionResolution(1e1); // severe truncation
   MetricType::DerivativeType derivativeWithFPC;
   metric->GetValueAndDerivative(valueReturn1, derivativeWithFPC);
-  if (derivativeWithFPC == derivativeWithOutFPC)
-  {
-    std::cerr << "Expected different derivative result when using floating-point correction: "
-              << "With correction: " << derivativeWithFPC << ", without: " << derivativeWithOutFPC << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NE(derivativeWithFPC, derivativeWithOutFPC)
+    << "Expected different derivative result when using floating-point correction";
 }
