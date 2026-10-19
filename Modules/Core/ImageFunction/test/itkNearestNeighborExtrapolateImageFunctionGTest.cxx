@@ -19,15 +19,14 @@
 #include "itkMath.h"
 #include "itkNearestNeighborExtrapolateImageFunction.h"
 #include "itkImageRegionIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  * This module tests the functionality of the
  * NearestNeighborExtrapolateImageFunction class.
  *
  */
-int
-itkNearestNeighborExtrapolateImageFunctionTest(int, char *[])
+TEST(NearestNeighborExtrapolateImageFunction, ConvertedLegacyTest)
 {
   using CoordRep = double;
   constexpr unsigned int ImageDimension{ 2 };
@@ -77,7 +76,7 @@ itkNearestNeighborExtrapolateImageFunctionTest(int, char *[])
   using FunctionType = itk::NearestNeighborExtrapolateImageFunction<ImageType, CoordRep>;
   auto function = FunctionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(function, NearestNeighborExtrapolateImageFunction, ExtrapolateImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, NearestNeighborExtrapolateImageFunction, ExtrapolateImageFunction);
 
 
   using VectorFunctionType = itk::NearestNeighborExtrapolateImageFunction<VectorImageType, CoordRep>;
@@ -100,19 +99,9 @@ itkNearestNeighborExtrapolateImageFunctionTest(int, char *[])
   auto trueVectorValue = itk::MakeFilled<VectorFunctionType::OutputType>(trueValue);
 
   std::cout << "Point: " << point << " Value: " << value << " Vector Value: " << vectorvalue << std::endl;
-  if (itk::Math::NotAlmostEquals(value, trueValue))
-  {
-    std::cout << "Value not the same as trueValue: " << trueValue << std::endl;
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_DOUBLE_EQ(value, trueValue) << "Value not the same as trueValue: " << trueValue;
 
-  if (vectorvalue != trueVectorValue)
-  {
-    std::cout << "Vector Value not the same as trueVectorValue: " << trueVectorValue << std::endl;
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(vectorvalue, trueVectorValue) << "Vector Value not the same as trueVectorValue: " << trueVectorValue;
 
   // evaluate at point outside the image
   point[0] = 2.25;
@@ -122,12 +111,7 @@ itkNearestNeighborExtrapolateImageFunctionTest(int, char *[])
   trueValue = itk::Math::Round<int>(point[0]) + (6.0) * static_cast<double>(imageSize[0]);
 
   std::cout << "Point: " << point << " Value: " << value << std::endl;
-  if (itk::Math::NotAlmostEquals(value, trueValue))
-  {
-    std::cout << "Value not the same as trueValue: " << trueValue << std::endl;
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_DOUBLE_EQ(value, trueValue) << "Value not the same as trueValue: " << trueValue;
 
   // evaluate at index inside the image
   FunctionType::IndexType index;
@@ -138,12 +122,7 @@ itkNearestNeighborExtrapolateImageFunctionTest(int, char *[])
   trueValue = static_cast<double>(index[0]) + static_cast<double>(index[1]) * static_cast<double>(imageSize[0]);
 
   std::cout << "Index: " << index << " Value: " << value << std::endl;
-  if (itk::Math::NotAlmostEquals(value, trueValue))
-  {
-    std::cout << "Value not the same as trueValue: " << trueValue << std::endl;
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_DOUBLE_EQ(value, trueValue) << "Value not the same as trueValue: " << trueValue;
 
 
   // evaluate at index outside the image
@@ -154,12 +133,5 @@ itkNearestNeighborExtrapolateImageFunctionTest(int, char *[])
   trueValue = static_cast<double>(4) + static_cast<double>(0) * static_cast<double>(imageSize[0]);
 
   std::cout << "Index: " << index << " Value: " << value << std::endl;
-  if (itk::Math::NotAlmostEquals(value, trueValue))
-  {
-    std::cout << "Value not the same as trueValue: " << trueValue << std::endl;
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_DOUBLE_EQ(value, trueValue) << "Value not the same as trueValue: " << trueValue;
 }
