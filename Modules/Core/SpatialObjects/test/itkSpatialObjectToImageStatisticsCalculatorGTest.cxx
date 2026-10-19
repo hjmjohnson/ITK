@@ -21,10 +21,9 @@
 #include "itkSpatialObjectToImageFilter.h"
 #include "itkEllipseSpatialObject.h"
 #include "itkImageSliceIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkSpatialObjectToImageStatisticsCalculatorTest(int, char *[])
+TEST(SpatialObjectToImageStatisticsCalculator, ConvertedLegacyTest)
 {
   using PixelType = unsigned char;
   using ImageType = itk::Image<PixelType, 2>;
@@ -62,7 +61,7 @@ itkSpatialObjectToImageStatisticsCalculatorTest(int, char *[])
   using CalculatorType = itk::SpatialObjectToImageStatisticsCalculator<ImageType, EllipseType>;
   auto calculator = CalculatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(calculator, SpatialObjectToImageStatisticsCalculator, Object);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(calculator, SpatialObjectToImageStatisticsCalculator, Object);
 
 
   calculator->SetImage(image);
@@ -70,7 +69,7 @@ itkSpatialObjectToImageStatisticsCalculatorTest(int, char *[])
 
   constexpr unsigned int sampleDirection = CalculatorType::SampleDimension - 1;
   calculator->SetSampleDirection(sampleDirection);
-  ITK_TEST_SET_GET_VALUE(sampleDirection, calculator->GetSampleDirection());
+  EXPECT_EQ(sampleDirection, calculator->GetSampleDirection());
 
   calculator->Update();
 
@@ -78,12 +77,8 @@ itkSpatialObjectToImageStatisticsCalculatorTest(int, char *[])
   std::cout << "Sample mean = " << calculator->GetMean() << std::endl;
   std::cout << "Sample covariance = " << calculator->GetCovarianceMatrix();
 
-  if (calculator->GetMean() != itk::MakeFilled<CalculatorType::VectorType>(255) ||
-      itk::Math::NotAlmostEquals(calculator->GetCovarianceMatrix()[0][0], CalculatorType::MatrixType::ValueType{}))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(calculator->GetMean(), itk::MakeFilled<CalculatorType::VectorType>(255)) << "[FAILED]";
+  EXPECT_DOUBLE_EQ(calculator->GetCovarianceMatrix()[0][0], CalculatorType::MatrixType::ValueType{}) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -96,12 +91,8 @@ itkSpatialObjectToImageStatisticsCalculatorTest(int, char *[])
   std::cout << "Sample mean = " << calculator->GetMean() << std::endl;
   std::cout << "Sample covariance = " << calculator->GetCovarianceMatrix();
 
-  if ((itk::Math::Absolute(calculator->GetMean()[0] - 140.0) > 1.0) ||
-      (itk::Math::Absolute(calculator->GetCovarianceMatrix()[0][0] - 16141.0) > 1.0))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(calculator->GetMean()[0] - 140.0), 1.0) << "[FAILED]";
+  EXPECT_LE(itk::Math::Absolute(calculator->GetCovarianceMatrix()[0][0] - 16141.0), 1.0) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -116,12 +107,8 @@ itkSpatialObjectToImageStatisticsCalculatorTest(int, char *[])
   std::cout << "Sample mean = " << calculator->GetMean() << std::endl;
   std::cout << "Sample covariance = " << calculator->GetCovarianceMatrix();
 
-  if ((itk::Math::Absolute(calculator->GetMean()[0] - 140.0) > 1.0) ||
-      (itk::Math::Absolute(calculator->GetCovarianceMatrix()[0][0] - 16141.0) > 1.0))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(calculator->GetMean()[0] - 140.0), 1.0) << "[FAILED]";
+  EXPECT_LE(itk::Math::Absolute(calculator->GetCovarianceMatrix()[0][0] - 16141.0), 1.0) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -189,29 +176,16 @@ itkSpatialObjectToImageStatisticsCalculatorTest(int, char *[])
   std::cout << "Sample mean = " << calculator3D->GetMean() << std::endl;
   std::cout << "Sample covariance = " << calculator3D->GetCovarianceMatrix();
 
-  if ((itk::Math::Absolute(calculator3D->GetMean()[0] - 0.0) > 1.0) ||
-      (itk::Math::Absolute(calculator3D->GetMean()[1] - 1.0) > 1.0) ||
-      (itk::Math::Absolute(calculator3D->GetMean()[2] - 2.0) > 1.0))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(calculator3D->GetMean()[0] - 0.0), 1.0) << "[FAILED]";
+  EXPECT_LE(itk::Math::Absolute(calculator3D->GetMean()[1] - 1.0), 1.0) << "[FAILED]";
+  EXPECT_LE(itk::Math::Absolute(calculator3D->GetMean()[2] - 2.0), 1.0) << "[FAILED]";
 
   std::cout << "Number of pixels = " << calculator3D->GetNumberOfPixels() << std::endl;
-  if (calculator3D->GetNumberOfPixels() != 305)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(calculator3D->GetNumberOfPixels(), 305u) << "[FAILED]";
 
   std::cout << "Sum = " << calculator3D->GetSum() << std::endl;
-  if (calculator3D->GetSum() != 915)
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(calculator3D->GetSum(), 915) << "[FAILED]";
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
