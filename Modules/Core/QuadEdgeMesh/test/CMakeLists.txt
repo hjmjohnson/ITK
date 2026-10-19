@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKQuadEdgeMeshTests
-  itkDynamicQuadEdgeMeshTest.cxx
   itkGeometricalQuadEdgeTest1.cxx
   itkQuadEdgeMeshAddFaceTest1.cxx
   itkQuadEdgeMeshAddFaceTest2.cxx
@@ -275,12 +274,10 @@ itk_add_test(
     itkVTKPolyDataReaderQuadEdgeMeshTest
     DATA{${ITK_DATA_ROOT}/Input/genusZeroSurface01.vtk}
 )
-itk_add_test(
-  NAME itkDynamicQuadEdgeMeshTest
-  COMMAND
-    ITKQuadEdgeMeshTestDriver
-    itkDynamicQuadEdgeMeshTest
-)
 
-set(ITKQuadEdgeMeshGTests itkQuadEdgeMeshTypeTraitsGTest.cxx)
+set(
+  ITKQuadEdgeMeshGTests
+  itkDynamicQuadEdgeMeshGTest.cxx
+  itkQuadEdgeMeshTypeTraitsGTest.cxx
+)
 creategoogletestdriver(ITKQuadEdgeMesh "${ITKQuadEdgeMesh-Test_LIBRARIES}" "${ITKQuadEdgeMeshGTests}")
