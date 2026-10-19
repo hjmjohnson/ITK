@@ -19,21 +19,22 @@
 #include <iostream>
 #include "itkListSample.h"
 #include "itkSampleToSubsampleFilter.h"
+#include "itkGTest.h"
 
-namespace itk::Statistics::itkSampleToSubsampleFilter1Namespace
+namespace
 {
 
 template <typename TSample>
-class SubsamplerTester : public SampleToSubsampleFilter<TSample>
+class SubsamplerTester : public itk::Statistics::SampleToSubsampleFilter<TSample>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(SubsamplerTester);
 
   /** Standard class type aliases. */
   using Self = SubsamplerTester;
-  using Superclass = SampleToSubsampleFilter<TSample>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::Statistics::SampleToSubsampleFilter<TSample>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(SubsamplerTester);
@@ -43,7 +44,7 @@ protected:
   SubsamplerTester() = default;
   ~SubsamplerTester() override = default;
   void
-  PrintSelf(std::ostream & os, Indent indent) const override
+  PrintSelf(std::ostream & os, itk::Indent indent) const override
   {
     this->Superclass::PrintSelf(os, indent);
     os << "Superclass = " << this->Superclass::GetNameOfClass() << std::endl;
@@ -54,11 +55,10 @@ protected:
   {}
 };
 
-} // namespace itk::Statistics::itkSampleToSubsampleFilter1Namespace
+} // namespace
 
 
-int
-itkSampleToSubsampleFilterTest1(int, char *[])
+TEST(SampleToSubsampleFilter, ConvertedLegacyTest1)
 {
 
   constexpr unsigned int MeasurementVectorSize{ 17 };
@@ -67,7 +67,7 @@ itkSampleToSubsampleFilterTest1(int, char *[])
 
   using SampleType = itk::Statistics::ListSample<MeasurementVectorType>;
 
-  using FilterType = itk::Statistics::itkSampleToSubsampleFilter1Namespace::SubsamplerTester<SampleType>;
+  using FilterType = SubsamplerTester<SampleType>;
 
 
   auto sample = SampleType::New();
@@ -75,26 +75,14 @@ itkSampleToSubsampleFilterTest1(int, char *[])
   auto filter = FilterType::New();
 
   // Test GetInput() before setting the input
-  if (filter->GetInput() != nullptr)
-  {
-    std::cerr << "GetInput() should have returned nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), nullptr) << "GetInput() should have returned nullptr";
 
   // Test GetOutput() before creating the output
-  if (filter->GetOutput() == nullptr)
-  {
-    std::cerr << "GetOutput() should have returned NON-nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(filter->GetOutput(), nullptr) << "GetOutput() should have returned NON-nullptr";
 
   filter->SetInput(sample);
 
-  if (filter->GetInput() != sample.GetPointer())
-  {
-    std::cerr << "GetInput() didn't matched SetInput()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), sample.GetPointer()) << "GetInput() didn't matched SetInput()";
 
 
   //
@@ -110,7 +98,4 @@ itkSampleToSubsampleFilterTest1(int, char *[])
   // SampleToSubsampleFilter:
   std::cout << "Classname  " << filter->GetNameOfClass() << std::endl;
   std::cout << "Superclass " << filter->FilterType::Superclass::GetNameOfClass() << std::endl;
-
-  std::cout << "Test Passed !" << std::endl;
-  return EXIT_SUCCESS;
 }
