@@ -18,14 +18,17 @@
 #include "itkMeanSquaresImageToImageMetricv4.h"
 #include "itkTranslationTransform.h"
 #include "itkVectorImageToImageMetricTraitsv4.h"
+#include "itkGTest.h"
 
 /*
  * Compare metric evaluation of scalar image and vector image.
  * Serves as a numerical verification of vector image metric evaluation.
  */
 
+namespace
+{
 template <typename TMetric>
-[[nodiscard]] int
+void
 itkMeanSquaresImageToImageMetricv4OnVectorTest2Run(typename TMetric::MeasureType &    measureReturn,
                                                    typename TMetric::DerivativeType & derivativeReturn)
 {
@@ -94,37 +97,19 @@ itkMeanSquaresImageToImageMetricv4OnVectorTest2Run(typename TMetric::MeasureType
   metric->DebugOn();
 
   /* Initialize. */
-  try
-  {
-    std::cout << "Calling Initialize..." << std::endl;
-    metric->Initialize();
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during Initialize: " << exc << std::endl;
-    return EXIT_FAILURE;
-  }
+  std::cout << "Calling Initialize..." << std::endl;
+  EXPECT_NO_THROW(metric->Initialize());
   std::cout << "Initialized" << std::endl;
 
   /* Evaluate with GetValueAndDerivative */
-  try
-  {
-    std::cout << "Calling GetValueAndDerivative..." << std::endl;
-    metric->GetValueAndDerivative(measureReturn, derivativeReturn);
-  }
-  catch (const itk::ExceptionObject & exc)
-  {
-    std::cerr << "Caught unexpected exception during GetValueAndDerivative: " << exc;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  EXPECT_NO_THROW(metric->GetValueAndDerivative(measureReturn, derivativeReturn));
 }
+} // namespace
 
 ///////////////////////////////////////////////////////////////////////
 
-int
-itkMeanSquaresImageToImageMetricv4OnVectorTest2(int, char ** const)
+TEST(MeanSquaresImageToImageMetricv4OnVector, ConvertedLegacyTest2)
 {
   constexpr unsigned int imageDimensionality{ 3 };
   constexpr unsigned int vectorLength{ 3 };
@@ -138,12 +123,10 @@ itkMeanSquaresImageToImageMetricv4OnVectorTest2(int, char ** const)
   using VectorMetricType =
     itk::MeanSquaresImageToImageMetricv4<VectorImageType, VectorImageType, VectorImageType, double, MetricTraitsType>;
 
-  int testStatus = EXIT_SUCCESS;
-
   VectorMetricType::MeasureType    vectorMeasure = 0.0;
   VectorMetricType::DerivativeType vectorDerivative{};
 
-  testStatus |= itkMeanSquaresImageToImageMetricv4OnVectorTest2Run<VectorMetricType>(vectorMeasure, vectorDerivative);
+  itkMeanSquaresImageToImageMetricv4OnVectorTest2Run<VectorMetricType>(vectorMeasure, vectorDerivative);
   std::cout << "vectorMeasure: " << vectorMeasure << " vectorDerivative: " << vectorDerivative << std::endl;
 
   /* The scalar metric */
@@ -153,31 +136,22 @@ itkMeanSquaresImageToImageMetricv4OnVectorTest2(int, char ** const)
   ScalarMetricType::MeasureType    scalarMeasure = 0.0;
   ScalarMetricType::DerivativeType scalarDerivative{};
 
-  testStatus |= itkMeanSquaresImageToImageMetricv4OnVectorTest2Run<ScalarMetricType>(scalarMeasure, scalarDerivative);
+  itkMeanSquaresImageToImageMetricv4OnVectorTest2Run<ScalarMetricType>(scalarMeasure, scalarDerivative);
   std::cout << "scalarMeasure: " << scalarMeasure << " scalarDerivative: " << scalarDerivative << std::endl;
 
   /* Compare */
   constexpr double tolerance{ 1e-8 };
-  if (itk::Math::Absolute(scalarMeasure - (vectorMeasure / vectorLength)) > tolerance)
-  {
-    std::cerr << "Measures do not match within tolerance. scalarMeasure, vectorMeasure: " << scalarMeasure << ", "
-              << vectorMeasure << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(scalarMeasure, (vectorMeasure / vectorLength), tolerance)
+    << "Measures do not match within tolerance. scalarMeasure, vectorMeasure: " << scalarMeasure << ", "
+    << vectorMeasure;
   std::cout << "Measure values match." << std::endl;
 
   for (itk::SizeValueType n = 0; n < scalarDerivative.Size(); ++n)
   {
-    if (itk::Math::Absolute(scalarDerivative[n] - (vectorDerivative[n] / vectorLength)) > tolerance)
-    {
-      std::cerr << "Derivatives do not match within tolerance. scalarDerivative, vectorDerivative: " << scalarDerivative
-                << std::endl
-                << vectorDerivative << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(scalarDerivative[n], (vectorDerivative[n] / vectorLength), tolerance)
+      << "Derivatives do not match within tolerance. scalarDerivative, vectorDerivative: " << scalarDerivative
+      << std::endl
+      << vectorDerivative;
   }
   std::cout << "Derivative values match." << std::endl;
-
-  std::cout << "Test passed." << std::endl;
-  return testStatus;
 }
