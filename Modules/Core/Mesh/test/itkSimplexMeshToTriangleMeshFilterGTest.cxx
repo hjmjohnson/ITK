@@ -19,9 +19,9 @@
 #include "itkRegularSphereMeshSource.h"
 #include "itkTriangleMeshToSimplexMeshFilter.h"
 #include "itkSimplexMeshToTriangleMeshFilter.h"
+#include "itkGTest.h"
 
-int
-itkSimplexMeshToTriangleMeshFilterTest(int, char *[])
+TEST(SimplexMeshToTriangleMeshFilter, ConvertedLegacyTest)
 {
 
   // Declare the type of the input and output mesh
@@ -72,5 +72,4 @@ itkSimplexMeshToTriangleMeshFilterTest(int, char *[])
   std::cout << "[TEST DONE]" << std::endl;
   originalTriangleMesh = nullptr;
   simplexFilter = nullptr;
-  return EXIT_SUCCESS;
 }
