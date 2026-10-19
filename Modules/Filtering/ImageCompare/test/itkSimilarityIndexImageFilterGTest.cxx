@@ -18,10 +18,9 @@
 
 #include "itkSimilarityIndexImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkSimilarityIndexImageFilterTest(int, char *[])
+TEST(SimilarityIndexImageFilter, ConvertedLegacyTest)
 {
 
   using Pixel1Type = unsigned char;
@@ -89,13 +88,13 @@ itkSimilarityIndexImageFilterTest(int, char *[])
   using FilterType = itk::SimilarityIndexImageFilter<Image1Type, Image2Type>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, SimilarityIndexImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, SimilarityIndexImageFilter, ImageToImageFilter);
 
 
   filter->SetInput1(image1);
   filter->SetInput2(image2);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
 
   // check results
@@ -105,11 +104,7 @@ itkSimilarityIndexImageFilterTest(int, char *[])
   std::cout << " True index: " << trueOverlap << std::endl;
   std::cout << " Computed index: " << overlap << std::endl;
 
-  if (itk::Math::Absolute(trueOverlap - overlap) > 0.1)
-  {
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(trueOverlap, overlap, 0.1);
 
   // test case where both images are zero
   auto image3 = Image1Type::New();
@@ -125,14 +120,5 @@ itkSimilarityIndexImageFilterTest(int, char *[])
   filter->SetInput2(image4);
   filter->Update();
 
-  if (itk::Math::NotExactlyEquals(filter->GetSimilarityIndex(), 0))
-  {
-    std::cout << "Overlap: " << filter->GetSimilarityIndex() << std::endl;
-    std::cout << "Zero overlap expected." << std::endl;
-    std::cout << "Test failed. " << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed. " << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(filter->GetSimilarityIndex(), 0.0) << "Zero overlap expected.";
 }
