@@ -21,10 +21,9 @@
 #include "itkAffineTransform.h"
 #include "itkResampleImageFilter.h"
 #include "itkTimeProbe.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkResampleImageTest4(int argc, char * argv[])
+TEST(ResampleImageFilter, ConvertedLegacyTest4)
 {
 
   constexpr unsigned int VDimension{ 2 };
@@ -45,10 +44,6 @@ itkResampleImageTest4(int argc, char * argv[])
 
 
   float scaling = 10.0;
-  if (argc > 1)
-  {
-    scaling = std::stod(argv[1]);
-  }
 
   // Create and configure an image
   const ImagePointerType image = ImageType::New();
@@ -86,32 +81,32 @@ itkResampleImageTest4(int argc, char * argv[])
   const itk::ResampleImageFilter<ImageType, ImageType>::Pointer resample =
     itk::ResampleImageFilter<ImageType, ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
 
   resample->SetInterpolator(interp);
 
   resample->SetInput(image);
-  ITK_TEST_SET_GET_VALUE(image, resample->GetInput());
+  EXPECT_EQ(image, resample->GetInput());
 
   resample->SetSize(osize);
-  ITK_TEST_SET_GET_VALUE(osize, resample->GetSize());
+  EXPECT_EQ(osize, resample->GetSize());
 
   resample->SetTransform(aff);
-  ITK_TEST_SET_GET_VALUE(aff, resample->GetTransform());
+  EXPECT_EQ(aff, resample->GetTransform());
 
   resample->SetInterpolator(interp);
-  ITK_TEST_SET_GET_VALUE(interp, resample->GetInterpolator());
+  EXPECT_EQ(interp, resample->GetInterpolator());
 
   index.Fill(0);
   resample->SetOutputStartIndex(index);
-  ITK_TEST_SET_GET_VALUE(index, resample->GetOutputStartIndex());
+  EXPECT_EQ(index, resample->GetOutputStartIndex());
 
   constexpr ImageType::PointType origin{};
   resample->SetOutputOrigin(origin);
-  ITK_TEST_SET_GET_VALUE(origin, resample->GetOutputOrigin());
+  EXPECT_EQ(origin, resample->GetOutputOrigin());
 
   resample->SetOutputSpacing(spacing);
-  ITK_TEST_SET_GET_VALUE(spacing, resample->GetOutputSpacing());
+  EXPECT_EQ(spacing, resample->GetOutputSpacing());
 
   // Run the resampling filter
   itk::TimeProbe clock;
@@ -121,7 +116,4 @@ itkResampleImageTest4(int argc, char * argv[])
   clock.Stop();
 
   std::cout << "Resampling from " << size << " to " << osize << " took " << clock.GetMean() << " s" << std::endl;
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
