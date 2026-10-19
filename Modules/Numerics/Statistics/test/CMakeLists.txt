@@ -18,7 +18,6 @@ set(
   itkWeightedCentroidKdTreeGeneratorTest1.cxx
   itkWeightedCentroidKdTreeGeneratorTest8.cxx
   itkWeightedCentroidKdTreeGeneratorTest9.cxx
-  itkWeightedMeanSampleFilterTest.cxx
 )
 
 createtestdriver(ITKStatistics "${ITKStatistics-Test_LIBRARIES}" "${ITKStatisticsTests}")
@@ -436,12 +435,6 @@ itk_add_test(
     1
 )
 itk_add_test(
-  NAME itkWeightedMeanSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkWeightedMeanSampleFilterTest
-)
-itk_add_test(
   NAME itkListSampleTest1
   COMMAND
     ITKStatisticsTestDriver
@@ -600,6 +593,7 @@ set(
   itkVectorContainerToListSampleAdaptorGTest.cxx
   itkWeightedCovarianceSampleFilterGTest.cxx
   itkWeightedCovarianceSampleFilterGTest2.cxx
+  itkWeightedMeanSampleFilterGTest.cxx
 )
 # There is a bug in VS2008, Release build that causes this test to fail.
 if(NOT MSVC90)
