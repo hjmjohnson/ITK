@@ -7,7 +7,6 @@ set(
   itkCannyEdgeDetectionImageFilterTest2.cxx
   itkDerivativeImageFilterTest.cxx
   itkDiscreteGaussianDerivativeImageFilterTest.cxx
-  itkGradientVectorFlowImageFilterTest.cxx
   itkHessian3DToVesselnessMeasureImageFilterTest.cxx
   itkHessianRecursiveGaussianFilterScaleSpaceTest.cxx
   itkHessianRecursiveGaussianFilterTest.cxx
@@ -258,12 +257,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/BilateralImageFilterTest3.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/BilateralImageFilterTest3.png
-)
-itk_add_test(
-  NAME itkGradientVectorFlowImageFilterTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkGradientVectorFlowImageFilterTest
 )
 itk_add_test(
   NAME itkSimpleContourExtractorImageFilterTest
@@ -613,6 +606,7 @@ set(
   ITKImageFeatureGTests
   itkBilateralImageFilterGTest.cxx
   itkDiscreteGaussianDerivativeImageFilterScaleSpaceGTest.cxx
+  itkGradientVectorFlowImageFilterGTest.cxx
   itkSobelEdgeDetectionImageFilterGTest.cxx
 )
 
