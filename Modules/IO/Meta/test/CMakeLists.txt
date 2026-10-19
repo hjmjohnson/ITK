@@ -8,7 +8,6 @@ set(
   itkMetaImageIOTest2.cxx
   itkMetaImageStreamingIOTest.cxx
   itkMetaImageStreamingWriterIOTest.cxx
-  itkMetaTestLongFilename.cxx
   testMetaArray.cxx
   testMetaCommand.cxx
   testMetaGroup.cxx
@@ -466,13 +465,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/mri3DWriteStreamed.mha
 )
 
-itk_add_test(
-  NAME itkMetaTestLongFilename
-  COMMAND
-    ITKIOMetaTestDriver
-    itkMetaTestLongFilename
-)
-
 if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 5)
   # Image of 1.67 Gigabytes (pixels size is 16bits)
   itk_add_test(
@@ -585,3 +577,6 @@ if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 12)
         RUNS_LONG
   )
 endif()
+
+set(ITKIOMetaGTests itkMetaGTestLongFilename.cxx)
+creategoogletestdriver(ITKIOMeta "${ITKIOMeta-Test_LIBRARIES}" "${ITKIOMetaGTests}")
