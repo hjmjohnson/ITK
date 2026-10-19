@@ -9,7 +9,6 @@ set(
   itkKappaStatisticImageToImageMetricTest.cxx
   itkMatchCardinalityImageToImageMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricTest.cxx
-  itkMeanSquaresHistogramImageToImageMetricTest.cxx
   itkMeanSquaresImageMetricTest.cxx
   itkMeanSquaresPointSetToImageMetricTest.cxx
   itkMultiResolutionImageRegistrationMethodTest.cxx
@@ -91,12 +90,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkMultiResolutionImageRegistrationMethodTest
-)
-itk_add_test(
-  NAME itkMeanSquaresHistogramImageToImageMetricTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkMeanSquaresHistogramImageToImageMetricTest
 )
 itk_add_test(
   NAME itkNormalizedCorrelationPointSetToImageMetricTest
@@ -313,6 +306,7 @@ set(
   itkLandmarkBasedTransformInitializerGTest.cxx
   itkMeanReciprocalSquareDifferenceImageMetricGTest.cxx
   itkMeanReciprocalSquareDifferencePointSetToImageMetricGTest.cxx
+  itkMeanSquaresHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
