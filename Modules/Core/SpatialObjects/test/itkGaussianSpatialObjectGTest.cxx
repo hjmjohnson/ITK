@@ -18,32 +18,31 @@
 
 #include "itkGaussianSpatialObject.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkGaussianSpatialObjectTest(int, char *[])
+TEST(GaussianSpatialObject, ConvertedLegacyTest)
 {
   using GaussianType = itk::GaussianSpatialObject<4>;
 
   auto myGaussian = GaussianType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(myGaussian, GaussianSpatialObject, SpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(myGaussian, GaussianSpatialObject, SpatialObject);
 
   constexpr GaussianType::ScalarType maximum{ 2 };
   myGaussian->SetMaximum(maximum);
-  ITK_TEST_SET_GET_VALUE(maximum, myGaussian->GetMaximum());
+  EXPECT_EQ(maximum, myGaussian->GetMaximum());
 
   constexpr GaussianType::ScalarType radius{ 3 };
   myGaussian->SetRadiusInObjectSpace(radius);
-  ITK_TEST_SET_GET_VALUE(radius, myGaussian->GetRadiusInObjectSpace());
+  EXPECT_EQ(radius, myGaussian->GetRadiusInObjectSpace());
 
   constexpr GaussianType::ScalarType sigma{ 1.5 };
   myGaussian->SetSigmaInObjectSpace(sigma);
-  ITK_TEST_SET_GET_VALUE(sigma, myGaussian->GetSigmaInObjectSpace());
+  EXPECT_EQ(sigma, myGaussian->GetSigmaInObjectSpace());
 
   constexpr GaussianType::PointType center{};
   myGaussian->SetCenterInObjectSpace(center);
-  ITK_TEST_SET_GET_VALUE(center, myGaussian->GetCenterInObjectSpace());
+  EXPECT_EQ(center, myGaussian->GetCenterInObjectSpace());
 
   // Point consistency
 
@@ -67,17 +66,9 @@ itkGaussianSpatialObjectTest(int, char *[])
 
   std::cout << "Is Inside: ";
 
-  if (!myGaussian->IsInsideInWorldSpace(in))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(myGaussian->IsInsideInWorldSpace(in)) << "[FAILED]";
 
-  if (myGaussian->IsInsideInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(myGaussian->IsInsideInWorldSpace(out)) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -118,14 +109,10 @@ itkGaussianSpatialObjectTest(int, char *[])
 
   GaussianType::TransformType::OffsetType offset3 = myGaussian2->GetObjectToParentTransform()->GetOffset();
 
-  if (itk::Math::NotAlmostEquals(offset3[0], offset15 - offset10) ||
-      itk::Math::NotAlmostEquals(offset3[1], offset15 - offset10) ||
-      itk::Math::NotAlmostEquals(offset3[2], offset15 - offset10) ||
-      itk::Math::NotAlmostEquals(offset3[3], offset15 - offset10))
-  {
-    std::cout << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_DOUBLE_EQ(offset3[0], offset15 - offset10) << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]";
+  EXPECT_DOUBLE_EQ(offset3[1], offset15 - offset10) << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]";
+  EXPECT_DOUBLE_EQ(offset3[2], offset15 - offset10) << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]";
+  EXPECT_DOUBLE_EQ(offset3[3], offset15 - offset10) << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]";
   std::cout << "[PASSED]" << std::endl;
 
 
@@ -137,15 +124,10 @@ itkGaussianSpatialObjectTest(int, char *[])
   std::cout << "World Radius = " << myGaussian->GetRadiusInObjectSpace() << std::endl;
   for (unsigned int i = 0; i < 3; ++i)
   {
-    if (itk::Math::NotAlmostEquals(boundingBox->GetBounds()[2 * i], 7.0) ||
-        itk::Math::NotAlmostEquals(boundingBox->GetBounds()[2 * i + 1], 16.0))
-    {
-      std::cout << "[FAILED]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_DOUBLE_EQ(boundingBox->GetBounds()[2 * i], 7.0) << "[FAILED]";
+    EXPECT_DOUBLE_EQ(boundingBox->GetBounds()[2 * i + 1], 16.0) << "[FAILED]";
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
