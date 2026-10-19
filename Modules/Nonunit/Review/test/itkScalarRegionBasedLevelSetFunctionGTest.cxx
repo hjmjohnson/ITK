@@ -17,24 +17,25 @@
  *=========================================================================*/
 
 #include "itkScalarRegionBasedLevelSetFunction.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 
 template <typename TInput,   // LevelSetImageType
           typename TFeature, // FeatureImageType
           typename TSharedData>
 class ScalarRegionBasedLevelSetFunctionTestHelper
-  : public ScalarRegionBasedLevelSetFunction<TInput, TFeature, TSharedData>
+  : public itk::ScalarRegionBasedLevelSetFunction<TInput, TFeature, TSharedData>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(ScalarRegionBasedLevelSetFunctionTestHelper);
 
   /** Standard class type aliases. */
   using Self = ScalarRegionBasedLevelSetFunctionTestHelper;
-  using Superclass = ScalarRegionBasedLevelSetFunction<TInput, TFeature, TSharedData>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::ScalarRegionBasedLevelSetFunction<TInput, TFeature, TSharedData>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   static constexpr unsigned int ImageDimension = Superclass::ImageDimension;
 
@@ -87,14 +88,14 @@ protected:
 };
 
 template <unsigned int VDimension>
-class ScalarRegionBasedLevelSetFunctionSharedDataHelper : public DataObject
+class ScalarRegionBasedLevelSetFunctionSharedDataHelper : public itk::DataObject
 {
 public:
   /** Standard class type aliases. */
   using Self = ScalarRegionBasedLevelSetFunctionSharedDataHelper;
-  using Superclass = DataObject;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::DataObject;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   itkNewMacro(Self);
 
@@ -103,14 +104,14 @@ public:
 
   unsigned long m_FunctionCount;
 
-  using IndexType = Index<VDimension>;
+  using IndexType = itk::Index<VDimension>;
   using ListPixelType = std::list<unsigned int>;
 
-  using ImageType = Image<ListPixelType, VDimension>;
+  using ImageType = itk::Image<ListPixelType, VDimension>;
   typename ImageType::Pointer m_NearestNeighborListImage;
 
   using PixelType = double;
-  using InputImageType = Image<PixelType, VDimension>;
+  using InputImageType = itk::Image<PixelType, VDimension>;
 
   struct SingleData
   {
@@ -139,10 +140,9 @@ public:
   SingleData * m_LevelSetDataPointerVector[19];
 };
 
-} // namespace itk
+} // namespace
 
-int
-itkScalarRegionBasedLevelSetFunctionTest(int, char *[])
+TEST(ScalarRegionBasedLevelSetFunction, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -150,16 +150,11 @@ itkScalarRegionBasedLevelSetFunctionTest(int, char *[])
   using ImageType = itk::Image<PixelType, Dimension>;
   using FeatureImageType = itk::Image<float, Dimension>;
 
-  using DataHelperType = itk::ScalarRegionBasedLevelSetFunctionSharedDataHelper<Dimension>;
+  using DataHelperType = ScalarRegionBasedLevelSetFunctionSharedDataHelper<Dimension>;
 
   using RegionBasedLevelSetFunctionType =
-    itk::ScalarRegionBasedLevelSetFunctionTestHelper<ImageType, FeatureImageType, DataHelperType>;
+    ScalarRegionBasedLevelSetFunctionTestHelper<ImageType, FeatureImageType, DataHelperType>;
 
   auto function = RegionBasedLevelSetFunctionType::New();
-  if (function.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(function.IsNull());
 }
