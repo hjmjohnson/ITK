@@ -21,11 +21,14 @@ This program tests operations of itk::StringTools.
 */
 
 #include "itkStringTools.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include "itkMacro.h"
 #include "itkMath.h"
 
+namespace
+{
 void
 testStringToolsWithBasicType();
 
@@ -37,39 +40,21 @@ testStringToolsWithItkArray();
 
 void
 testStringToolsForStringOperations();
+} // namespace
 
-int
-itkDOMTest6(int, char *[])
+TEST(StringTools, ConvertedLegacyTest)
 {
-  try
-  {
-    testStringToolsWithBasicType();
+  testStringToolsWithBasicType();
 
-    testStringToolsWithStdVector();
+  testStringToolsWithStdVector();
 
-    testStringToolsWithItkArray();
+  testStringToolsWithItkArray();
 
-    testStringToolsForStringOperations();
-  }
-  catch (const itk::ExceptionObject & eo)
-  {
-    eo.Print(std::cerr);
-    return EXIT_FAILURE;
-  }
-  catch (const char * emsg)
-  {
-    std::cerr << emsg << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (...)
-  {
-    std::cerr << "Unknown exception caught!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  testStringToolsForStringOperations();
 }
 
+namespace
+{
 // test for basic data type
 void
 testStringToolsWithBasicType()
@@ -89,10 +74,7 @@ testStringToolsWithBasicType()
     itk::StringTools::ToData(s, dataOut);
 
     // check result
-    if (dataIn != dataOut)
-    {
-      throw "uchar: input and output data do not match";
-    }
+    EXPECT_EQ(dataIn, dataOut) << "uchar: input and output data do not match";
 
     std::cout << "testStringToolsWithBasicType: uchar OK!" << std::endl;
   }
@@ -112,10 +94,7 @@ testStringToolsWithBasicType()
     itk::StringTools::ToData(s, dataOut);
 
     // check result
-    if (dataIn != dataOut)
-    {
-      throw "short: input and output data do not match";
-    }
+    EXPECT_EQ(dataIn, dataOut) << "short: input and output data do not match";
 
     std::cout << "testStringToolsWithBasicType: short OK!" << std::endl;
   }
@@ -135,10 +114,7 @@ testStringToolsWithBasicType()
     itk::StringTools::ToData(s, dataOut);
 
     // check result
-    if (itk::Math::NotAlmostEquals(dataIn, dataOut))
-    {
-      throw "double: input and output data do not match";
-    }
+    EXPECT_DOUBLE_EQ(dataIn, dataOut) << "double: input and output data do not match";
 
     std::cout << "testStringToolsWithBasicType: double OK!" << std::endl;
   }
@@ -162,16 +138,12 @@ testStringToolsWithStdVector()
   std::string        s = svalue;
   itk::StringTools::ToData(s, dataOut1);
   // check successful or not
-  if (dataOut1.size() != (dataIn.size() + 1) || dataOut1.back() != 10.0f)
-  {
-    throw "testStringToolsWithStdVector: failed reading all elements in the string (1)";
-  }
+  EXPECT_FALSE(dataOut1.size() != (dataIn.size() + 1) || dataOut1.back() != 10.0f)
+    << "testStringToolsWithStdVector: failed reading all elements in the string (1)";
   for (size_t i = 0; i < dataIn.size(); ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut1[i]))
-    {
-      throw "testStringToolsWithStdVector: failed reading all elements in the string (2)";
-    }
+    EXPECT_FLOAT_EQ(dataIn[i], dataOut1[i])
+      << "testStringToolsWithStdVector: failed reading all elements in the string (2)";
   }
   std::cout << "testStringToolsWithStdVector: dataOut1 OK!" << std::endl;
 
@@ -180,16 +152,12 @@ testStringToolsWithStdVector()
   s = svalue;
   itk::StringTools::ToData(s, dataOut2, 0);
   // check successful or not
-  if (dataOut2.size() != 5)
-  {
-    throw "testStringToolsWithStdVector: failed reading all elements for the output vector (1)";
-  }
+  EXPECT_EQ(dataOut2.size(), 5u)
+    << "testStringToolsWithStdVector: failed reading all elements for the output vector (1)";
   for (size_t i = 0; i < dataOut2.size(); ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut2[i]))
-    {
-      throw "testStringToolsWithStdVector: failed reading all elements for the output vector (2)";
-    }
+    EXPECT_FLOAT_EQ(dataIn[i], dataOut2[i])
+      << "testStringToolsWithStdVector: failed reading all elements for the output vector (2)";
   }
   std::cout << "testStringToolsWithStdVector: dataOut2 OK!" << std::endl;
 
@@ -198,16 +166,12 @@ testStringToolsWithStdVector()
   s = svalue;
   itk::StringTools::ToData(s, dataOut3, 5);
   // check successful or not
-  if (dataOut3.size() != 10 || dataOut3[5] != 0.0f)
-  {
-    throw "testStringToolsWithStdVector: failed reading user-specified number of elements (1.1)";
-  }
+  EXPECT_FALSE(dataOut3.size() != 10 || dataOut3[5] != 0.0f)
+    << "testStringToolsWithStdVector: failed reading user-specified number of elements (1.1)";
   for (size_t i = 0; i < 5; ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut3[i]))
-    {
-      throw "testStringToolsWithStdVector: failed reading user-specified number of elements (1.2)";
-    }
+    EXPECT_FLOAT_EQ(dataIn[i], dataOut3[i])
+      << "testStringToolsWithStdVector: failed reading user-specified number of elements (1.2)";
   }
   std::cout << "testStringToolsWithStdVector: dataOut3 OK!" << std::endl;
 
@@ -216,16 +180,12 @@ testStringToolsWithStdVector()
   s = svalue;
   itk::StringTools::ToData(s, dataOut4, 5);
   // check successful or not
-  if (dataOut4.size() != 5)
-  {
-    throw "testStringToolsWithStdVector: failed reading user-specified number of elements (2.1)";
-  }
+  ASSERT_EQ(dataOut4.size(), 5u)
+    << "testStringToolsWithStdVector: failed reading user-specified number of elements (2.1)";
   for (size_t i = 0; i < 5; ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut4[i]))
-    {
-      throw "testStringToolsWithStdVector: failed reading user-specified number of elements (2.2)";
-    }
+    EXPECT_FLOAT_EQ(dataIn[i], dataOut4[i])
+      << "testStringToolsWithStdVector: failed reading user-specified number of elements (2.2)";
   }
   std::cout << "testStringToolsWithStdVector: dataOut4 OK!" << std::endl;
 
@@ -249,16 +209,12 @@ testStringToolsWithItkArray()
   DataType    dataOut1;
   itk::StringTools::ToData(s, dataOut1);
   // check successful or not
-  if (dataOut1.GetSize() != (dataIn.GetSize() + 1) || dataOut1[10] != 10.0)
-  {
-    throw "testStringToolsWithItkArray: failed reading all elements in the string (1)";
-  }
+  EXPECT_FALSE(dataOut1.GetSize() != (dataIn.GetSize() + 1) || dataOut1[10] != 10.0)
+    << "testStringToolsWithItkArray: failed reading all elements in the string (1)";
   for (unsigned int i = 0; i < dataIn.GetSize(); ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut1[i]))
-    {
-      throw "testStringToolsWithItkArray: failed reading all elements in the string (2)";
-    }
+    EXPECT_DOUBLE_EQ(dataIn[i], dataOut1[i])
+      << "testStringToolsWithItkArray: failed reading all elements in the string (2)";
   }
   std::cout << "testStringToolsWithItkArray: dataOut1 OK!" << std::endl;
 
@@ -267,16 +223,12 @@ testStringToolsWithItkArray()
   s = svalue;
   itk::StringTools::ToData(s, dataOut2, 0);
   // check successful or not
-  if (dataOut2.GetSize() != 5)
-  {
-    throw "testStringToolsWithItkArray: failed reading all elements for the output vector (1)";
-  }
+  EXPECT_EQ(dataOut2.GetSize(), 5u)
+    << "testStringToolsWithItkArray: failed reading all elements for the output vector (1)";
   for (unsigned int i = 0; i < dataOut2.GetSize(); ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut2[i]))
-    {
-      throw "testStringToolsWithItkArray: failed reading all elements for the output vector (2)";
-    }
+    EXPECT_DOUBLE_EQ(dataIn[i], dataOut2[i])
+      << "testStringToolsWithItkArray: failed reading all elements for the output vector (2)";
   }
   std::cout << "testStringToolsWithItkArray: dataOut2 OK!" << std::endl;
 
@@ -285,16 +237,12 @@ testStringToolsWithItkArray()
   s = svalue;
   itk::StringTools::ToData(s, dataOut3, 5);
   // check successful or not
-  if (dataOut3.GetSize() != 10 || dataOut3[5] != 0.0)
-  {
-    throw "testStringToolsWithItkArray: failed reading user-specified number of elements (1.1)";
-  }
+  EXPECT_FALSE(dataOut3.GetSize() != 10 || dataOut3[5] != 0.0)
+    << "testStringToolsWithItkArray: failed reading user-specified number of elements (1.1)";
   for (unsigned int i = 0; i < 5; ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut3[i]))
-    {
-      throw "testStringToolsWithItkArray: failed reading user-specified number of elements (1.2)";
-    }
+    EXPECT_DOUBLE_EQ(dataIn[i], dataOut3[i])
+      << "testStringToolsWithItkArray: failed reading user-specified number of elements (1.2)";
   }
   std::cout << "testStringToolsWithItkArray: dataOut3 OK!" << std::endl;
 
@@ -303,16 +251,12 @@ testStringToolsWithItkArray()
   s = svalue;
   itk::StringTools::ToData(s, dataOut4, 5);
   // check successful or not
-  if (dataOut4.GetSize() != 5)
-  {
-    throw "testStringToolsWithItkArray: failed reading user-specified number of elements (2.1)";
-  }
+  ASSERT_EQ(dataOut4.GetSize(), 5u)
+    << "testStringToolsWithItkArray: failed reading user-specified number of elements (2.1)";
   for (unsigned int i = 0; i < 5; ++i)
   {
-    if (itk::Math::NotAlmostEquals(dataIn[i], dataOut4[i]))
-    {
-      throw "testStringToolsWithItkArray: failed reading user-specified number of elements (2.2)";
-    }
+    EXPECT_DOUBLE_EQ(dataIn[i], dataOut4[i])
+      << "testStringToolsWithItkArray: failed reading user-specified number of elements (2.2)";
   }
   std::cout << "testStringToolsWithItkArray: dataOut4 OK!" << std::endl;
 
@@ -323,125 +267,94 @@ void
 testStringToolsForStringOperations()
 {
   std::string s = " Hello World! ";
-  if (itk::StringTools::TrimLeft(s) != "Hello World! ")
-  {
-    throw "testStringToolsForStringOperations: failed trimming left";
-  }
+  EXPECT_EQ(itk::StringTools::TrimLeft(s), "Hello World! ")
+    << "testStringToolsForStringOperations: failed trimming left";
   std::cout << "testStringToolsForStringOperations: TrimLeft(-) OK!" << std::endl;
 
   s = " Hello World! ";
-  if (itk::StringTools::TrimRight(s) != " Hello World!")
-  {
-    throw "testStringToolsForStringOperations: failed trimming right";
-  }
+  EXPECT_EQ(itk::StringTools::TrimRight(s), " Hello World!")
+    << "testStringToolsForStringOperations: failed trimming right";
   std::cout << "testStringToolsForStringOperations: TrimRight(-) OK!" << std::endl;
 
   s = " Hello World! ";
-  if (itk::StringTools::Trim(s) != "Hello World!")
-  {
-    throw "testStringToolsForStringOperations: failed trimming both sides";
-  }
+  EXPECT_EQ(itk::StringTools::Trim(s), "Hello World!")
+    << "testStringToolsForStringOperations: failed trimming both sides";
   s = "Hello World!";
-  if (itk::StringTools::Trim(s) != "Hello World!")
-  {
-    throw "testStringToolsForStringOperations: failed [not] trimming both sides";
-  }
+  EXPECT_EQ(itk::StringTools::Trim(s), "Hello World!")
+    << "testStringToolsForStringOperations: failed [not] trimming both sides";
   s = "    ";
-  if (!itk::StringTools::Trim(s).empty())
-  {
-    throw "testStringToolsForStringOperations: failed trimming entire string";
-  }
+  EXPECT_TRUE(itk::StringTools::Trim(s).empty()) << "testStringToolsForStringOperations: failed trimming entire string";
   std::cout << "testStringToolsForStringOperations: Trim(-) OK!" << std::endl;
 
   s = "Hello World!";
-  if (itk::StringTools::ToUpperCase(s) != "HELLO WORLD!")
-  {
-    throw "testStringToolsForStringOperations: failed converting to upper case";
-  }
+  EXPECT_EQ(itk::StringTools::ToUpperCase(s), "HELLO WORLD!")
+    << "testStringToolsForStringOperations: failed converting to upper case";
   std::cout << "testStringToolsForStringOperations: ToUpperCase(-) OK!" << std::endl;
 
   s = "Hello World!";
-  if (itk::StringTools::ToLowerCase(s) != "hello world!")
-  {
-    throw "testStringToolsForStringOperations: failed converting to lower case";
-  }
+  EXPECT_EQ(itk::StringTools::ToLowerCase(s), "hello world!")
+    << "testStringToolsForStringOperations: failed converting to lower case";
   std::cout << "testStringToolsForStringOperations: ToLowerCase(-) OK!" << std::endl;
 
   s = " origin = 0 0 0 ";
   std::string lpart;
   std::string rpart;
   itk::StringTools::Split(s, lpart, rpart);
-  if (lpart != "origin" || rpart != "0 0 0")
-  {
-    throw "testStringToolsForStringOperations: failed splitting into two parts";
-  }
+  EXPECT_EQ(lpart, "origin") << "testStringToolsForStringOperations: failed splitting into two parts";
+  EXPECT_EQ(rpart, "0 0 0") << "testStringToolsForStringOperations: failed splitting into two parts";
   std::cout << "testStringToolsForStringOperations: Split(-,-,-) OK!" << std::endl;
 
   s = " size = 256 256 100; spacing = 0.3 0.3 0.7; origin = * ";
   std::vector<std::string> parts;
   itk::StringTools::Split(s, parts);
-  if (parts[0] != "size = 256 256 100" || parts[1] != "spacing = 0.3 0.3 0.7" || parts[2] != "origin = *")
-  {
-    throw "testStringToolsForStringOperations: failed splitting into a sequence of strings";
-  }
+  EXPECT_EQ(parts[0], "size = 256 256 100")
+    << "testStringToolsForStringOperations: failed splitting into a sequence of strings";
+  EXPECT_EQ(parts[1], "spacing = 0.3 0.3 0.7")
+    << "testStringToolsForStringOperations: failed splitting into a sequence of strings";
+  EXPECT_EQ(parts[2], "origin = *")
+    << "testStringToolsForStringOperations: failed splitting into a sequence of strings";
   std::cout << "testStringToolsForStringOperations: Split(-,vector) OK!" << std::endl;
 
   s = " size = 256 256 100; spacing = 0.3 0.3 0.7; origin = * ";
   std::map<std::string, std::string> items;
   itk::StringTools::Split(s, items);
-  if (items["size"] != "256 256 100" || items["spacing"] != "0.3 0.3 0.7" || items["origin"] != "*")
-  {
-    throw "testStringToolsForStringOperations: failed splitting into a map or dictionary";
-  }
+  EXPECT_EQ(items["size"], "256 256 100")
+    << "testStringToolsForStringOperations: failed splitting into a map or dictionary";
+  EXPECT_EQ(items["spacing"], "0.3 0.3 0.7")
+    << "testStringToolsForStringOperations: failed splitting into a map or dictionary";
+  EXPECT_EQ(items["origin"], "*") << "testStringToolsForStringOperations: failed splitting into a map or dictionary";
   std::cout << "testStringToolsForStringOperations: Split(-,map) OK!" << std::endl;
 
   s = "Hello World!";
-  if (!itk::StringTools::MatchWith(s, "hello world!"))
-  {
-    throw "testStringToolsForStringOperations: failed MatchWith testing (1)";
-  }
-  if (itk::StringTools::MatchWith(s, "hello world!", false))
-  {
-    throw "testStringToolsForStringOperations: failed MatchWith testing (2)";
-  }
-  if (itk::StringTools::MatchWith(s, " hello world! "))
-  {
-    throw "testStringToolsForStringOperations: failed MatchWith testing (3)";
-  }
+  EXPECT_TRUE(itk::StringTools::MatchWith(s, "hello world!"))
+    << "testStringToolsForStringOperations: failed MatchWith testing (1)";
+  EXPECT_FALSE(itk::StringTools::MatchWith(s, "hello world!", false))
+    << "testStringToolsForStringOperations: failed MatchWith testing (2)";
+  EXPECT_FALSE(itk::StringTools::MatchWith(s, " hello world! "))
+    << "testStringToolsForStringOperations: failed MatchWith testing (3)";
   std::cout << "testStringToolsForStringOperations: MatchWith(-,-) OK!" << std::endl;
 
   s = "Hello World!";
-  if (!itk::StringTools::StartWith(s, "hello"))
-  {
-    throw "testStringToolsForStringOperations: failed StartWith testing (1)";
-  }
-  if (itk::StringTools::StartWith(s, "hello", false))
-  {
-    throw "testStringToolsForStringOperations: failed StartWith testing (2)";
-  }
+  EXPECT_TRUE(itk::StringTools::StartWith(s, "hello"))
+    << "testStringToolsForStringOperations: failed StartWith testing (1)";
+  EXPECT_FALSE(itk::StringTools::StartWith(s, "hello", false))
+    << "testStringToolsForStringOperations: failed StartWith testing (2)";
   std::cout << "testStringToolsForStringOperations: StartWith(-,-) OK!" << std::endl;
 
   s = "Hello World!";
-  if (!itk::StringTools::EndWith(s, "world!"))
-  {
-    throw "testStringToolsForStringOperations: failed EndWith testing (1)";
-  }
-  if (itk::StringTools::EndWith(s, "world!", false))
-  {
-    throw "testStringToolsForStringOperations: failed EndWith testing (2)";
-  }
+  EXPECT_TRUE(itk::StringTools::EndWith(s, "world!"))
+    << "testStringToolsForStringOperations: failed EndWith testing (1)";
+  EXPECT_FALSE(itk::StringTools::EndWith(s, "world!", false))
+    << "testStringToolsForStringOperations: failed EndWith testing (2)";
   std::cout << "testStringToolsForStringOperations: EndWith(-,-) OK!" << std::endl;
 
   s = "Hello World!";
-  if (!itk::StringTools::ContainSub(s, "Lo wo"))
-  {
-    throw "testStringToolsForStringOperations: failed ContainSub testing (1)";
-  }
-  if (itk::StringTools::ContainSub(s, "Lo wo", false))
-  {
-    throw "testStringToolsForStringOperations: failed ContainSub testing (2)";
-  }
+  EXPECT_TRUE(itk::StringTools::ContainSub(s, "Lo wo"))
+    << "testStringToolsForStringOperations: failed ContainSub testing (1)";
+  EXPECT_FALSE(itk::StringTools::ContainSub(s, "Lo wo", false))
+    << "testStringToolsForStringOperations: failed ContainSub testing (2)";
   std::cout << "testStringToolsForStringOperations: ContainSub(-,-) OK!" << std::endl;
 
   std::cout << "testStringToolsForStringOperations: Passed!" << std::endl;
 }
+} // namespace
