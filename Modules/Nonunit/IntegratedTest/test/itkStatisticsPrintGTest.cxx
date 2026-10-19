@@ -34,9 +34,9 @@
 #include "itkKdTreeBasedKmeansEstimator.h"
 #include "itkExpectationMaximizationMixtureModelEstimator.h"
 #include "itkWeightedCentroidKdTreeGenerator.h"
+#include "itkGTest.h"
 
-int
-itkStatisticsPrintTest(int, char *[])
+TEST(StatisticsPrint, ConvertedLegacyTest)
 {
   using TMeasurementType = float;
 
@@ -220,6 +220,4 @@ itkStatisticsPrintTest(int, char *[])
 
   auto kdTreeBasedEstimator = KdTreeBasedKMeansEstimatorType::New();
   std::cout << "----------KdTreeBasedKMeansEstimatorType " << kdTreeBasedEstimator;
-
-  return EXIT_SUCCESS;
 }
