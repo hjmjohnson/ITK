@@ -30,6 +30,7 @@
  */
 
 #include "itkScaleSkewVersor3DTransform.h"
+#include "itkGTest.h"
 #include <iostream>
 
 // -------------------------
@@ -37,8 +38,7 @@
 //   Main code
 //
 // -------------------------
-int
-itkScaleSkewVersor3DTransformTest(int, char *[])
+TEST(ScaleSkewVersor3DTransform, ConvertedLegacyTest)
 {
 
   using ValueType = double;
@@ -126,11 +126,7 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
       }
     }
 
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from null in rotation " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from null in rotation ";
 
     VersorType versor;
     versor.Set(axis, angle);
@@ -150,13 +146,9 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating point : " << p << std::endl;
-        std::cerr << "Result should be     : " << q << std::endl;
-        std::cerr << "Reported Result is   : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating point : " << p << std::endl
+                      << "Result should be     : " << q << std::endl
+                      << "Reported Result is   : " << r;
 
       std::cout << "Ok rotating an itk::Point " << std::endl;
     }
@@ -176,13 +168,9 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vector : " << p << std::endl;
-        std::cerr << "Result should be      : " << q << std::endl;
-        std::cerr << "Reported Result is    : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vector : " << p << std::endl
+                      << "Result should be      : " << q << std::endl
+                      << "Reported Result is    : " << r;
 
       std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
@@ -202,13 +190,9 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating covariant vector : " << p << std::endl;
-        std::cerr << "Result should be                : " << q << std::endl;
-        std::cerr << "Reported Result is              : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating covariant vector : " << p << std::endl
+                      << "Result should be                : " << q << std::endl
+                      << "Reported Result is              : " << r;
 
       std::cout << "Ok rotating an itk::CovariantVector " << std::endl;
     }
@@ -231,13 +215,9 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vnl_vector : " << p << std::endl;
-        std::cerr << "Result should be          : " << q << std::endl;
-        std::cerr << "Reported Result is        : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vnl_vector : " << p << std::endl
+                      << "Result should be          : " << q << std::endl
+                      << "Reported Result is        : " << r;
 
       std::cout << "Ok rotating an vnl_Vector " << std::endl;
     }
@@ -272,11 +252,7 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
       }
     }
 
-    if (!Ok)
-    {
-      std::cerr << "The center point was not invariant to rotation " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "The center point was not invariant to rotation ";
 
     std::cout << "Ok center is invariant to rotation." << std::endl;
 
@@ -307,11 +283,8 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
     constexpr double tolerance{ 1e-8 };
     for (unsigned int p = 0; p < np; ++p)
     {
-      if (itk::Math::Absolute(parameters[p] - parameters2[p]) > tolerance)
-      {
-        std::cerr << "Output parameter does not match input " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
+        << "Output parameter does not match input ";
     }
     std::cout << "Input/Output parameter check Passed !" << std::endl;
 
@@ -367,17 +340,17 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
     {
       for (unsigned int jj = 0; jj < 15; ++jj)
       {
-        if (itk::Math::Absolute(TheoreticalJacobian[ii][jj] - jacobian[ii][jj]) > 1e-5)
-        {
-          std::cerr << "Jacobian components differ from expected values ";
-          std::cerr << std::endl << std::endl;
-          std::cerr << "Expected Jacobian = " << std::endl;
-          std::cerr << TheoreticalJacobian << std::endl << std::endl;
-          std::cerr << "Computed Jacobian = " << std::endl;
-          std::cerr << jacobian << std::endl << std::endl;
-          std::cerr << std::endl << "Test FAILED ! " << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_LE(itk::Math::Absolute(TheoreticalJacobian[ii][jj] - jacobian[ii][jj]), 1e-5)
+          << "Jacobian components differ from expected values " << std::endl
+          << std::endl
+          << "Expected Jacobian = " << std::endl
+          << TheoreticalJacobian << std::endl
+          << std::endl
+          << "Computed Jacobian = " << std::endl
+          << jacobian << std::endl
+          << std::endl
+          << std::endl
+          << "Test FAILED ! ";
       }
     }
   }
@@ -428,11 +401,8 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
     constexpr double tolerance{ 1e-8 };
     for (unsigned int p = 0; p < np; ++p)
     {
-      if (itk::Math::Absolute(parameters[p] - parameters2[p]) > tolerance)
-      {
-        std::cerr << "Output parameter does not match input " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
+        << "Output parameter does not match input ";
     }
     std::cout << "Input/Output parameter check Passed !" << std::endl;
   }
@@ -470,13 +440,9 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
     constexpr double tolerance{ 1e-8 };
     for (unsigned int j = 0; j < 3; ++j)
     {
-      if (itk::Math::Absolute(rscale[j] - scale[j]) > tolerance)
-      {
-        std::cerr << "Error in Set/Get Scale() " << std::endl;
-        std::cerr << "Input scale: " << scale << std::endl;
-        std::cerr << "Output scale: " << rscale << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(rscale[j] - scale[j]), tolerance) << "Error in Set/Get Scale() " << std::endl
+                                                                      << "Input scale: " << scale << std::endl
+                                                                      << "Output scale: " << rscale;
     }
 
     const unsigned int np = transform->GetNumberOfParameters();
@@ -500,11 +466,8 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
     ParametersType parameters2 = transform->GetParameters();
     for (unsigned int p = 0; p < np; ++p)
     {
-      if (itk::Math::Absolute(parameters[p] - parameters2[p]) > tolerance)
-      {
-        std::cerr << "Output parameter does not match input " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
+        << "Output parameter does not match input ";
     }
     std::cout << "Input/Output parameter check Passed !" << std::endl;
 #if 0 // TODO: Need to instrument inverse of ScaleVersor3DTransform
@@ -521,6 +484,4 @@ itkScaleSkewVersor3DTransformTest(int, char *[])
 #endif
   }
   std::cout << std::endl << "Test PASSED ! " << std::endl;
-
-  return EXIT_SUCCESS;
 }
