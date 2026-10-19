@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkFastMarchingImageFilter.h"
+#include "itkGTest.h"
 #include "itkImageRegionIterator.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkTextOutput.h"
@@ -40,8 +41,7 @@ public:
 };
 } // namespace
 
-int
-itkFastMarchingTest2(int, char *[])
+TEST(FastMarchingImageFilter, ConvertedLegacyTest2)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -212,12 +212,5 @@ itkFastMarchingTest2(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "Fast Marching test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Fast Marching test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(passed);
 }
