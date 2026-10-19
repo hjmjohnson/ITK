@@ -3,7 +3,6 @@ set(
   ITKSpatialObjectsTests
   itkBoxSpatialObjectTest.cxx
   itkImageMaskSpatialObjectTest.cxx
-  itkImageMaskSpatialObjectTest2.cxx
   itkImageMaskSpatialObjectTest3.cxx
   itkImageMaskSpatialObjectTest4.cxx
   itkImageMaskSpatialObjectTest5.cxx
@@ -55,12 +54,6 @@ itk_add_test(
   COMMAND
     ITKSpatialObjectsTestDriver
     itkImageMaskSpatialObjectTest
-)
-itk_add_test(
-  NAME itkImageMaskSpatialObjectTest2
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkImageMaskSpatialObjectTest2
 )
 itk_add_test(
   NAME itkImageMaskSpatialObjectTest3
@@ -189,6 +182,7 @@ set(
   itkDTITubeSpatialObjectGTest.cxx
   itkEllipseSpatialObjectGTest.cxx
   itkGaussianSpatialObjectGTest.cxx
+  itkImageMaskSpatialObjectGTest2.cxx
   itkSpatialObjectPointGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")
