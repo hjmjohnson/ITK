@@ -4,7 +4,6 @@ set(
   itkAddImageFilterTest2.cxx
   itkAndImageFilterTest.cxx
   itkBoundedReciprocalImageFilterTest.cxx
-  itkClampImageFilterTest.cxx
   itkComplexToImaginaryFilterAndAdaptorTest.cxx
   itkComplexToModulusFilterAndAdaptorTest.cxx
   itkComplexToPhaseFilterAndAdaptorTest.cxx
@@ -77,7 +76,7 @@ endif()
 # compiler, it will override any other optimization flag.
 if(DEFINED ITK_CXX_DISABLE_OPTIMIZATION_FLAG)
   set_source_files_properties(
-    itkClampImageFilterTest.cxx
+    itkClampImageFilterGTest.cxx
     PROPERTIES
       COMPILE_FLAGS
         ${ITK_CXX_DISABLE_OPTIMIZATION_FLAG}
@@ -609,12 +608,6 @@ itk_add_test(
     itkNormalizeToConstantImageFilterTest
 )
 itk_add_test(
-  NAME itkClampImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkClampImageFilterTest
-)
-itk_add_test(
   NAME itkNthElementPixelAccessorTest2
   COMMAND
     ITKImageIntensityTestDriver
@@ -756,6 +749,7 @@ set(
   itkAtanImageFilterAndAdaptorGTest.cxx
   itkBinaryMagnitudeImageFilterGTest.cxx
   itkBitwiseOpsFunctorsTest.cxx
+  itkClampImageFilterGTest.cxx
   itkEqualGTest.cxx
   itkGreaterEqualGTest.cxx
   itkGreaterGTest.cxx
