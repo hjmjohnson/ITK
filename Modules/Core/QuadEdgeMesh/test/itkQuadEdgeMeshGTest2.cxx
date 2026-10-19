@@ -17,9 +17,9 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshTest2(int, char *[])
+TEST(QuadEdgeMesh2, ConvertedLegacyTest)
 {
   std::cout << "Testing points and simple edges... " << std::ends;
 
@@ -68,16 +68,11 @@ itkQuadEdgeMeshTest2(int, char *[])
   line2->SetPointId(1, 0);
   mesh->SetCell(2, line2);
 
-  if (mesh->GetNumberOfPoints() != 3)
-  {
-    std::cout << "Not all points added." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(mesh->GetNumberOfPoints(), 3u) << "Not all points added.";
 
-  if ((mesh->GetNumberOfCells() != 0) && (mesh->GetNumberOfEdges() != 3))
+  if (mesh->GetNumberOfCells() != 0)
   {
-    std::cout << "Not all cells added." << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_EQ(mesh->GetNumberOfEdges(), 3u) << "Not all cells added.";
   }
 
   using CellIterator = MeshType::CellsContainer::Iterator;
@@ -94,11 +89,7 @@ itkQuadEdgeMeshTest2(int, char *[])
     QuadEdgeType::IteratorGeom git = QEGeom->BeginGeomLnext();
     while (git != QEGeom->EndGeomLnext())
     {
-      if (ids[itIds] != *git)
-      {
-        std::cout << "Problem with splicing edges." << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(ids[itIds], *git) << "Problem with splicing edges.";
       itIds++;
       git++;
     }
@@ -106,5 +97,4 @@ itkQuadEdgeMeshTest2(int, char *[])
   }
 
   std::cout << "done!" << std::endl;
-  return EXIT_SUCCESS;
 }
