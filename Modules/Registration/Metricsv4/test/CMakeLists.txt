@@ -3,7 +3,6 @@ set(
   ITKMetricsv4Tests
   itkANTSNeighborhoodCorrelationImageToImageRegistrationTest.cxx
   itkDemonsImageToImageMetricv4RegistrationTest.cxx
-  itkEuclideanDistancePointSetMetricTest.cxx
   itkEuclideanDistancePointSetMetricTest2.cxx
   itkEuclideanDistancePointSetMetricTest3.cxx
   itkExpectationBasedPointSetMetricRegistrationTest.cxx
@@ -37,13 +36,6 @@ set(BASELINE_ROOT ${ITK_DATA_ROOT}/Baseline)
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
 createtestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4Tests}")
-
-itk_add_test(
-  NAME itkEuclideanDistancePointSetMetricTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkEuclideanDistancePointSetMetricTest
-)
 
 itk_add_test(
   NAME itkEuclideanDistancePointSetMetricTest2
@@ -397,6 +389,7 @@ set(
   itkANTSNeighborhoodCorrelationImageToImageMetricv4GTest.cxx
   itkCorrelationImageToImageMetricv4GTest.cxx
   itkDemonsImageToImageMetricv4GTest.cxx
+  itkEuclideanDistancePointSetMetricGTest.cxx
   itkEuclideanDistancePointSetMetricRegistrationGTest.cxx
 )
 creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")
