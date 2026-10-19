@@ -52,7 +52,6 @@ set(
   itkShapeRelabelImageFilterTest1.cxx
   itkShapeRelabelLabelMapFilterTest1.cxx
   itkShapeUniqueLabelMapFilterTest1.cxx
-  itkShiftLabelObjectTest.cxx
   itkShiftScaleLabelMapFilterTest1.cxx
   itkStatisticsKeepNObjectsLabelMapFilterTest1.cxx
   itkStatisticsOpeningLabelMapFilterTest1.cxx
@@ -64,12 +63,6 @@ set(
 
 createtestdriver(ITKLabelMap "${ITKLabelMap-Test_LIBRARIES}" "${ITKLabelMapTests}")
 
-itk_add_test(
-  NAME itkShiftLabelObjectTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkShiftLabelObjectTest
-)
 itk_add_test(
   NAME itkAggregateLabelMapFilterTest1
   COMMAND
@@ -1749,6 +1742,7 @@ set(
   itkLabelObjectLineGTest.cxx
   itkShapeLabelMapFilterGTest.cxx
   itkLabelMapBugfixGTest.cxx
+  itkShiftLabelObjectGTest.cxx
   itkStatisticsLabelMapFilterGTest.cxx
   itkUniqueLabelMapFiltersGTest.cxx
 )
