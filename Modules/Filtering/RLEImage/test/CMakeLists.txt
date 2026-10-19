@@ -4,7 +4,6 @@ set(
   RLEImageTests
   itkRLEImageTest.cxx
   itkRegionOfInterestRLEImageFilterTest.cxx
-  itkRLEImageIteratorsForwardBackwardTest.cxx
   itkRLEImageRegionConstIteratorWithOnlyIndexTest.cxx
   itkRLEImageRegionIteratorTest.cxx
   itkRLEImageScanlineIteratorTest1.cxx
@@ -18,6 +17,7 @@ set(
   itkIteratorTestsForRLEImageGTest.cxx
   itkRLEImageAlgorithmCopyGTest.cxx
   itkRLEImageIteratorGTest.cxx
+  itkRLEImageIteratorsForwardBackwardGTest.cxx
   itkRLEImageIteratorWithIndexGTest.cxx
 )
 
@@ -38,12 +38,6 @@ itk_add_test(
   COMMAND
     RLEImageTestDriver
     itkRegionOfInterestRLEImageFilterTest
-)
-itk_add_test(
-  NAME itkRLEImageIteratorsForwardBackwardTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageIteratorsForwardBackwardTest
 )
 itk_add_test(
   NAME itkRLEImageRegionConstIteratorWithOnlyIndexTest
