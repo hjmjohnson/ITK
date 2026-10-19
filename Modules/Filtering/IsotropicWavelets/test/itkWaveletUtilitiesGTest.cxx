@@ -17,9 +17,11 @@
  *=========================================================================*/
 
 #include "itkWaveletUtilities.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-bool
+namespace
+{
+void
 IndexToLevelBandTest(const unsigned int & linearIndex,
                      const unsigned int & levels,
                      const unsigned int & bands,
@@ -30,35 +32,13 @@ IndexToLevelBandTest(const unsigned int & linearIndex,
   IndexPairType pairLvBand = IndexToLevelBandSteerablePyramid(linearIndex, levels, bands);
   unsigned int  lv = pairLvBand.first;
   unsigned int  b = pairLvBand.second;
-  if (lv != expectedLevel || b != expectedBand)
-  {
-    std::cerr << "Error for linearIndex: " << linearIndex << "\n"
-              << "result: (lv:" << lv << ", b:" << b << ")\n"
-              << "should be: (" << expectedLevel << ", " << expectedBand << ")." << std::endl;
-    return false;
-  }
-  else
-  {
-    return true;
-  }
+  EXPECT_EQ(lv, expectedLevel) << "Error for linearIndex: " << linearIndex;
+  EXPECT_EQ(b, expectedBand) << "Error for linearIndex: " << linearIndex;
 }
 
 void
-printComputeMaxNumberOfLevelsError(itk::Size<3> inputSize,
-                                   unsigned int scaleFactor,
-                                   unsigned int expected,
-                                   unsigned int result)
-{
-  std::cerr << "Error in ComputeMaxNumberOfLevels with" << std::endl;
-  std::cerr << "scaleFactor = " << scaleFactor << std::endl;
-  std::cerr << "inputSize = " << inputSize << std::endl;
-  std::cerr << "Expected: " << expected << ", but got " << result << std::endl;
-}
-
-bool
 testComputeMaxNumberOfLevels()
 {
-  bool                   testPassed = true;
   constexpr unsigned int Dimension = 3;
 
   unsigned int scaleFactor = 2;
@@ -68,51 +48,36 @@ testComputeMaxNumberOfLevels()
   unsigned int expected = 3;
 
   unsigned int result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 
   inputSize.Fill(16);
   expected = 4;
   result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
 
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 
   inputSize.Fill(17);
   expected = 1;
   result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
 
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 
   inputSize.Fill(22);
   expected = 2;
   result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
 
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 
   inputSize.Fill(3);
   expected = 1;
   result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
 
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 
   // Change scaleFactor
   scaleFactor = 3;
@@ -120,22 +85,16 @@ testComputeMaxNumberOfLevels()
   expected = 3;
   result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
 
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 
   scaleFactor = 4;
   inputSize.Fill(16);
   expected = 2;
   result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
 
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 
   // With odd values
   scaleFactor = 2;
@@ -150,31 +109,22 @@ testComputeMaxNumberOfLevels()
   expected = 5;
   result = itk::utils::ComputeMaxNumberOfLevels(inputSize, scaleFactor);
 
-  if (result != expected)
-  {
-    printComputeMaxNumberOfLevelsError(inputSize, scaleFactor, expected, result);
-    testPassed = false;
-  }
-
-  return testPassed;
+  EXPECT_EQ(result, expected) << "Error in ComputeMaxNumberOfLevels with scaleFactor = " << scaleFactor
+                              << ", inputSize = " << inputSize;
 }
+} // namespace
 
 
-int
-itkWaveletUtilitiesTest(int, char *[])
+TEST(WaveletUtilities, ConvertedLegacyTest)
 {
-  bool testPassed = true;
-
   // Test IndexToLevelBand
-  bool testOutputIndexToLevelBandPassed = true;
   {
     unsigned int linearIndex = 0;
     unsigned int levels = 1;
     unsigned int bands = 1;
     unsigned int expectedLevel = 0;
     unsigned int expectedBand = 1;
-    testOutputIndexToLevelBandPassed =
-      testOutputIndexToLevelBandPassed && IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
+    IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
   }
   {
     unsigned int linearIndex = 1;
@@ -182,14 +132,13 @@ itkWaveletUtilitiesTest(int, char *[])
     unsigned int bands = 1;
     unsigned int expectedLevel = levels;
     unsigned int expectedBand = 0;
-    testOutputIndexToLevelBandPassed =
-      testOutputIndexToLevelBandPassed && IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
+    IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
   }
   {
     unsigned int linearIndex = 4;
     unsigned int levels = 1;
     unsigned int bands = 1;
-    ITK_TRY_EXPECT_EXCEPTION(itk::utils::IndexToLevelBandSteerablePyramid(linearIndex, levels, bands));
+    EXPECT_THROW(itk::utils::IndexToLevelBandSteerablePyramid(linearIndex, levels, bands), itk::ExceptionObject);
   }
   {
     unsigned int linearIndex = 0;
@@ -197,8 +146,7 @@ itkWaveletUtilitiesTest(int, char *[])
     unsigned int bands = 2;
     unsigned int expectedLevel = 0;
     unsigned int expectedBand = 1;
-    testOutputIndexToLevelBandPassed =
-      testOutputIndexToLevelBandPassed && IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
+    IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
   }
   {
     unsigned int linearIndex = 1;
@@ -206,8 +154,7 @@ itkWaveletUtilitiesTest(int, char *[])
     unsigned int bands = 2;
     unsigned int expectedLevel = 0;
     unsigned int expectedBand = 2;
-    testOutputIndexToLevelBandPassed =
-      testOutputIndexToLevelBandPassed && IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
+    IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
   }
   {
     unsigned int linearIndex = 2;
@@ -215,8 +162,7 @@ itkWaveletUtilitiesTest(int, char *[])
     unsigned int bands = 2;
     unsigned int expectedLevel = 1;
     unsigned int expectedBand = 1;
-    testOutputIndexToLevelBandPassed =
-      testOutputIndexToLevelBandPassed && IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
+    IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
   }
   {
     unsigned int linearIndex = 3;
@@ -224,8 +170,7 @@ itkWaveletUtilitiesTest(int, char *[])
     unsigned int bands = 2;
     unsigned int expectedLevel = 1;
     unsigned int expectedBand = 2;
-    testOutputIndexToLevelBandPassed =
-      testOutputIndexToLevelBandPassed && IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
+    IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
   }
   {
     unsigned int linearIndex = 4;
@@ -233,36 +178,15 @@ itkWaveletUtilitiesTest(int, char *[])
     unsigned int bands = 2;
     unsigned int expectedLevel = levels;
     unsigned int expectedBand = 0;
-    testOutputIndexToLevelBandPassed =
-      testOutputIndexToLevelBandPassed && IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
+    IndexToLevelBandTest(linearIndex, levels, bands, expectedLevel, expectedBand);
   }
   {
     unsigned int linearIndex = 5;
     unsigned int levels = 2;
     unsigned int bands = 2;
-    ITK_TRY_EXPECT_EXCEPTION(itk::utils::IndexToLevelBandSteerablePyramid(linearIndex, levels, bands));
-  }
-
-  if (!testOutputIndexToLevelBandPassed)
-  {
-    std::cerr << "Test failed in OutputIndexToLevelBand." << std::endl;
+    EXPECT_THROW(itk::utils::IndexToLevelBandSteerablePyramid(linearIndex, levels, bands), itk::ExceptionObject);
   }
 
   // Test ComputeMaxNumberOfLevels
-  bool testComputeMaxNumberOfLevelsPassed = testComputeMaxNumberOfLevels();
-  if (!testComputeMaxNumberOfLevelsPassed)
-  {
-    std::cerr << "Test failed in ComputerMaxNumberOfLevels." << std::endl;
-  }
-
-
-  testPassed = testOutputIndexToLevelBandPassed && testComputeMaxNumberOfLevelsPassed;
-  if (testPassed)
-  {
-    return EXIT_SUCCESS;
-  }
-  else
-  {
-    return EXIT_FAILURE;
-  }
+  testComputeMaxNumberOfLevels();
 }
