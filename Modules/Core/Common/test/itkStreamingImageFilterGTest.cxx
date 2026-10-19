@@ -20,10 +20,9 @@
 #include "itkShrinkImageFilter.h"
 #include "itkStreamingImageFilter.h"
 #include "itkPipelineMonitorImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkStreamingImageFilterTest(int, char *[])
+TEST(StreamingImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int numberOfStreamDivisions{ 4 };
 
@@ -64,7 +63,7 @@ itkStreamingImageFilterTest(int, char *[])
   const itk::StreamingImageFilter<ShortImage, ShortImage>::Pointer streamer =
     itk::StreamingImageFilter<ShortImage, ShortImage>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(streamer, StreamingImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(streamer, StreamingImageFilter, ImageToImageFilter);
 
 
   // test MakeOutput by name
@@ -86,12 +85,10 @@ itkStreamingImageFilterTest(int, char *[])
   // SplitterType * streamer->GetRegionSplitter();
 
   // check if the pipeline executed as expected
-  if (monitor->GetNumberOfUpdates() != value || monitor->GetOutputRequestedRegions().size() != value)
-  {
-    std::cout << monitor;
-    std::cout << "ImageStreaming Filter test failed because pipeline didn't execute as expected." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(monitor->GetNumberOfUpdates(), value)
+    << monitor << "ImageStreaming Filter test failed because pipeline didn't execute as expected.";
+  EXPECT_EQ(monitor->GetOutputRequestedRegions().size(), value)
+    << monitor << "ImageStreaming Filter test failed because pipeline didn't execute as expected.";
 
 
   //
@@ -118,7 +115,6 @@ itkStreamingImageFilterTest(int, char *[])
                                                                 2.0 * shrink->GetShrinkFactors()[0]));
   }
 
-  bool passed = true;
   for (; !iterator2.IsAtEnd(); ++iterator2)
   {
     short col = (shrink->GetShrinkFactors()[0] * iterator2.ComputeIndex()[0] + (shrink->GetShrinkFactors()[0] - 1) / 2);
@@ -128,20 +124,6 @@ itkStreamingImageFilterTest(int, char *[])
     row += rowOffset;
     const short trueValue = col + region.GetSize()[0] * row;
 
-    if (iterator2.Get() != trueValue)
-    {
-      passed = false;
-      std::cout << "Pixel " << iterator2.ComputeIndex() << " expected " << trueValue << " but got " << iterator2.Get()
-                << std::endl;
-    }
+    EXPECT_EQ(iterator2.Get(), trueValue) << "Pixel " << iterator2.ComputeIndex();
   }
-
-  if (passed)
-  {
-    std::cout << "ImageStreamingFilter test passed." << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "ImageStreaming Filter test failed." << std::endl;
-  return EXIT_FAILURE;
 }
