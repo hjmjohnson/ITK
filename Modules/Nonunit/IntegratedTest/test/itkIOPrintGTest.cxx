@@ -30,9 +30,9 @@
 #include "itkStimulateImageIO.h"
 #include "itkTIFFImageIO.h"
 #include "itkVTKImageIO.h"
+#include "itkGTest.h"
 
-int
-itkIOPrintTest(int, char *[])
+TEST(IOPrint, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<unsigned char, 2>;
   const itk::ImageFileReader<ImageType>::Pointer reader = itk::ImageFileReader<ImageType>::New();
@@ -88,6 +88,4 @@ itkIOPrintTest(int, char *[])
   const itk::VTKImageIO::Pointer VTKio = itk::VTKImageIO::New();
   reader->SetImageIO(VTKio);
   std::cout << "---------------VTK" << reader;
-
-  return EXIT_SUCCESS;
 }
