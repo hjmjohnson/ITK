@@ -19,7 +19,10 @@
 // Program test for the basic QE layer.
 #include <iostream>
 #include "itkGeometricalQuadEdge.h"
+#include "itkGTest.h"
 
+namespace
+{
 class itkQuadEdgeMeshBasicLayerTestHelper
 {
 public:
@@ -47,9 +50,9 @@ public:
     return e1;
   }
 };
+} // namespace
 
-int
-itkQuadEdgeMeshBasicLayerTest(int, char *[])
+TEST(QuadEdgeMeshBasicLayer, ConvertedLegacyTest)
 {
   using PrimalType = itkQuadEdgeMeshBasicLayerTestHelper::PrimalType;
 
@@ -75,11 +78,7 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
   std::cout << "Testing ring for Origin() unset values" << std::endl;
   for (int i = 0; i < 5; ++i)
   {
-    if (e[i]->IsOriginSet())
-    {
-      std::cout << "IsOriginSet() should not be set for edge number " << i << ". Failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(e[i]->IsOriginSet()) << "IsOriginSet() should not be set for edge number " << i << ".";
   }
 
   std::cout << "Passed" << std::endl;
@@ -100,11 +99,7 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
   std::cout << "Testing ring for Origin() set values... " << std::endl;
   for (int i = 0; i < 5; ++i)
   {
-    if (!e[i]->IsOriginSet())
-    {
-      std::cout << "IsOriginSet() nullptr value failed for edge number " << i << ". Failed" << std::endl;
-      return EXIT_FAILURE;
-    } // fi
+    EXPECT_TRUE(e[i]->IsOriginSet()) << "IsOriginSet() nullptr value failed for edge number " << i << ".";
   } // rof
   std::cout << "Passed" << std::endl;
 
@@ -122,20 +117,8 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
   std::cout << "Testing Origin() and Destination() adjacency... " << std::endl;
   for (int i = 0; i < 5; ++i)
   {
-    if (e[i]->GetOrigin() != org[i])
-    {
-      std::cout << std::endl
-                << "Erroneous GetOrigin() on edge number " << i << ". Was expecting " << org[i] << " but got "
-                << e[i]->GetOrigin() << ". Failed" << std::endl;
-      return EXIT_FAILURE;
-    } // fi
-    if (e[i]->GetDestination() != dest[i])
-    {
-      std::cout << std::endl
-                << "Erroneous GetDestination() on edge number " << i << ". Was expecting " << dest[i] << " but got "
-                << e[i]->GetDestination() << ". Failed" << std::endl;
-      return EXIT_FAILURE;
-    } // fi
+    EXPECT_EQ(e[i]->GetOrigin(), org[i]) << "Erroneous GetOrigin() on edge number " << i << ".";
+    EXPECT_EQ(e[i]->GetDestination(), dest[i]) << "Erroneous GetDestination() on edge number " << i << ".";
   } // rof
   std::cout << "Passed" << std::endl;
 
@@ -162,14 +145,8 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
     int test = 0;
     for (IteratorGeom itOnext = e[edge]->BeginGeomOnext(); itOnext != e[edge]->EndGeomOnext(); itOnext++, test++)
     {
-      if (itOnext.Value()->GetDestination() != onextDestination[edge][test])
-      {
-        std::cout << std::endl
-                  << "Erroneous GetDestination() on edge number " << edge << ". Was expecting "
-                  << onextDestination[edge][test] << " but got " << itOnext.Value()->GetDestination() << ". Failed"
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(itOnext.Value()->GetDestination(), onextDestination[edge][test])
+        << "Erroneous GetDestination() on edge number " << edge << ".";
     }
   }
   std::cout << "Passed" << std::endl;
@@ -182,13 +159,7 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
     int test = 0;
     for (IteratorGeom itLnext = e[edge]->BeginGeomLnext(); itLnext != e[edge]->EndGeomLnext(); itLnext++, test++)
     {
-      if (*itLnext != lnextDestination[edge][test])
-      {
-        std::cout << std::endl
-                  << "Erroneous GetDestination() on edge number " << edge << ". Was expecting "
-                  << lnextDestination[edge][test] << " but got " << *itLnext << ". Failed" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(*itLnext, lnextDestination[edge][test]) << "Erroneous GetDestination() on edge number " << edge << ".";
     }
   }
 
@@ -198,14 +169,7 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
   for (IteratorGeom itLnext = e[4]->GetSym()->BeginGeomLnext(); itLnext != e[4]->GetSym()->EndGeomLnext();
        itLnext++, test++)
   {
-    if (*itLnext != lnextDestinationOnSym[test])
-    {
-      std::cout << std::endl
-                << "Erroneous GetDestination() on edge number 4. "
-                << "Was expecting " << lnextDestinationOnSym[test] << " but got " << *itLnext << ". Failed"
-                << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(*itLnext, lnextDestinationOnSym[test]) << "Erroneous GetDestination() on edge number 4.";
   }
   std::cout << "Passed" << std::endl;
 
@@ -218,13 +182,7 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
     test = 0;
     for (IteratorGeom itSym = e[edge]->BeginGeomSym(); itSym != e[edge]->EndGeomSym(); itSym++, test++)
     {
-      if (*itSym != symDestination[edge][test])
-      {
-        std::cout << std::endl
-                  << "Erroneous GetDestination() on edge number " << edge << ". Was expecting "
-                  << symDestination[edge][test] << " but got " << *itSym << ". Failed" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(*itSym, symDestination[edge][test]) << "Erroneous GetDestination() on edge number " << edge << ".";
     }
   }
   std::cout << "Passed" << std::endl;
@@ -237,6 +195,4 @@ itkQuadEdgeMeshBasicLayerTest(int, char *[])
     delete i->GetRot();
     delete i;
   }
-
-  return EXIT_SUCCESS;
 }
