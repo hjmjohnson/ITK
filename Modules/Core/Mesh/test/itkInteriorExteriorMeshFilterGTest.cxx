@@ -19,10 +19,9 @@
 #include "itkInteriorExteriorMeshFilter.h"
 #include "itkMesh.h"
 #include "itkSphereSpatialFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkInteriorExteriorMeshFilterTest(int, char *[])
+TEST(InteriorExteriorMeshFilter, ConvertedLegacyTest)
 {
 
   // Declare the mesh pixel type.
@@ -82,11 +81,11 @@ itkInteriorExteriorMeshFilterTest(int, char *[])
   // Create a Filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, InteriorExteriorMeshFilter, MeshToMeshFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, InteriorExteriorMeshFilter, MeshToMeshFilter);
 
 
   // Test exceptions
-  ITK_TRY_EXPECT_EXCEPTION(filter->Update());
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
   // Create the Spatial Function
   auto spatialFunction = SpatialFunctionType::New();
@@ -102,7 +101,7 @@ itkInteriorExteriorMeshFilterTest(int, char *[])
   spatialFunction->SetRadius(radius);
 
   filter->SetSpatialFunction(spatialFunction);
-  ITK_TEST_SET_GET_VALUE(spatialFunction, filter->GetSpatialFunction());
+  EXPECT_EQ(spatialFunction, filter->GetSpatialFunction());
 
   // Connect the inputs
   filter->SetInput(inputMesh);
@@ -124,20 +123,12 @@ itkInteriorExteriorMeshFilterTest(int, char *[])
     const PointType p = it.Value();
 
     const double distance = p.EuclideanDistanceTo(center);
-    if (distance > radius)
-    {
-      std::cerr << "Point " << p << std::endl;
-      std::cerr << " is at distance  " << distance << std::endl;
-      std::cerr << " from the center " << center << std::endl;
-      std::cerr << " so it is outside the sphere of radius ";
-      std::cerr << radius << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(distance, radius) << "Point " << p << " is at distance " << distance << " from the center " << center
+                                << " so it is outside the sphere of radius " << radius;
     ++it;
   }
 
   // All objects shall be automatically destroyed at this point
 
   std::cout << "Test passed ! " << std::endl;
-  return EXIT_SUCCESS;
 }
