@@ -27,18 +27,17 @@
  *=========================================================================*/
 
 #include "itkBSplineDeformableTransform.h"
+#include "itkGTest.h"
 
 #include "itkVersorRigid3DTransform.h"
 
 #include "itkTextOutput.h"
-#include "itkTestingMacros.h"
 
 /**
  * This module test the functionality of the BSplineDeformableTransform class.
  *
  */
-[[nodiscard]] int
-itkBSplineDeformableTransformTest1()
+TEST(BSplineDeformableTransform, ConvertedLegacyTest1)
 {
 
   // Comment the following if you want to use the itk text output window
@@ -75,21 +74,21 @@ itkBSplineDeformableTransformTest1()
    */
   auto transform = TransformType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(transform, BSplineDeformableTransform, BSplineBaseTransform);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(transform, BSplineDeformableTransform, BSplineBaseTransform);
 
   transform->SetGridSpacing(spacing);
-  ITK_TEST_SET_GET_VALUE(spacing, transform->GetGridSpacing());
+  EXPECT_EQ(spacing, transform->GetGridSpacing());
 
   transform->SetGridOrigin(origin);
-  ITK_TEST_SET_GET_VALUE(origin, transform->GetGridOrigin());
+  EXPECT_EQ(origin, transform->GetGridOrigin());
 
   transform->SetGridRegion(region);
-  ITK_TEST_SET_GET_VALUE(region, transform->GetGridRegion());
+  EXPECT_EQ(region, transform->GetGridRegion());
 
   using DirectionType = TransformType::DirectionType;
   const DirectionType direction = transform->GetCoefficientImages()[0]->GetDirection();
   transform->SetGridDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, transform->GetGridDirection());
+  EXPECT_EQ(direction, transform->GetGridDirection());
 
   std::cout << transform->GetValidRegion() << std::endl;
 
@@ -145,7 +144,7 @@ itkBSplineDeformableTransformTest1()
   // optional: set bulk transform parameters
 
   transform->SetBulkTransform(bulkTransform);
-  ITK_TEST_SET_GET_VALUE(bulkTransform, transform->GetBulkTransform());
+  EXPECT_EQ(bulkTransform, transform->GetBulkTransform());
 
   /**
    * Transform some points
@@ -292,46 +291,18 @@ itkBSplineDeformableTransformTest1()
     using VectorType = TransformType::InputVectorType;
     auto vector = itk::MakeFilled<VectorType>(1.0);
 
-    bool pass = false;
-    try
-    {
-      transform->TransformVector(vector);
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << "Caught expected exception." << std::endl;
-      std::cout << err << std::endl;
-      pass = true;
-    }
-    if (!pass)
-    {
-      std::cout << "Did not catch expected exception." << std::endl;
-      std::cout << "Test failed. " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(transform->TransformVector(vector), itk::ExceptionObject)
+      << "Did not catch expected exception." << std::endl
+      << "Test failed. ";
   }
 
   {
     using VectorType = TransformType::InputCovariantVectorType;
     auto vector = itk::MakeFilled<VectorType>(1.0);
 
-    bool pass = false;
-    try
-    {
-      transform->TransformCovariantVector(vector);
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << "Caught expected exception." << std::endl;
-      std::cout << err << std::endl;
-      pass = true;
-    }
-    if (!pass)
-    {
-      std::cout << "Did not catch expected exception." << std::endl;
-      std::cout << "Test failed. " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(transform->TransformCovariantVector(vector), itk::ExceptionObject)
+      << "Did not catch expected exception." << std::endl
+      << "Test failed. ";
   }
 
   {
@@ -339,65 +310,30 @@ itkBSplineDeformableTransformTest1()
     VectorType vector;
     vector.fill(1.0);
 
-    bool pass = false;
-    try
-    {
-      transform->TransformVector(vector);
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << "Caught expected exception." << std::endl;
-      std::cout << err << std::endl;
-      pass = true;
-    }
-    if (!pass)
-    {
-      std::cout << "Did not catch expected exception." << std::endl;
-      std::cout << "Test failed. " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(transform->TransformVector(vector), itk::ExceptionObject)
+      << "Did not catch expected exception." << std::endl
+      << "Test failed. ";
   }
 
   {
-    bool pass = false;
-    try
-    {
-      ParametersType temp(transform->GetNumberOfParameters() - 1, 4.0);
-      transform->SetParameters(temp);
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << "Caught expected exception." << std::endl;
-      std::cout << err << std::endl;
-      pass = true;
-    }
-    if (!pass)
-    {
-      std::cout << "Did not catch expected exception." << std::endl;
-      std::cout << "Test failed. " << std::endl;
-      return EXIT_FAILURE;
-    }
+    ParametersType temp(transform->GetNumberOfParameters() - 1, 4.0);
+    EXPECT_THROW(transform->SetParameters(temp), itk::ExceptionObject)
+      << "Did not catch expected exception." << std::endl
+      << "Test failed. ";
   }
 
   using EvenOrderTransformType = itk::BSplineDeformableTransform<CoordinateRepType, SpaceDimension, 2>;
   auto evenOrderTransform = EvenOrderTransformType::New();
-  if (evenOrderTransform.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(evenOrderTransform.IsNull());
 
   /**
    * Parameters should remain even when the transform has been destroyed
    */
   transform = nullptr;
 
-  if (outParametersCopy != parameters)
-  {
-    std::cout << "parameters should remain intact after transform is destroyed";
-    std::cout << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(outParametersCopy, parameters)
+    << "parameters should remain intact after transform is destroyed" << std::endl
+    << "Test failed.";
 
   /**
    * Exercise the SetIdentity() Method
@@ -415,21 +351,15 @@ itkBSplineDeformableTransformTest1()
     std::cout << "numberOfParameters =  " << numberOfParameters2 << std::endl;
     for (unsigned int i = 0; i < numberOfParameters2; ++i)
     {
-      if (itk::Math::Absolute(parameters2[i]) > 1e-10)
-      {
-        std::cerr << "SetIdentity failed, parameters are not null "
-                  << "after invoking SetIdentity() " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters2[i]), 1e-10) << "SetIdentity failed, parameters are not null "
+                                                            << "after invoking SetIdentity() ";
     }
   } // end of SetIdentity() test
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
 
-[[nodiscard]] int
-itkBSplineDeformableTransformTest2()
+TEST(BSplineDeformableTransform, ConvertedLegacyTest2)
 {
   /**
    * This function tests the Set/GetCoefficientImages interface
@@ -487,22 +417,8 @@ itkBSplineDeformableTransformTest2()
   auto                           inputPoint = itk::MakeFilled<TransformType::InputPointType>(0.0);
   TransformType::OutputPointType outputPoint;
   {
-    bool exceptionCaught(false);
-    try
-    {
-      outputPoint = transform->TransformPoint(inputPoint);
-    }
-    catch (const itk::ExceptionObject & err)
-    {
-      std::cout << "Expected exception:" << std::endl;
-      std::cout << err << std::endl;
-      exceptionCaught = true;
-    }
-    if (!exceptionCaught)
-    {
-      std::cerr << "Expected exception not caught" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_THROW(outputPoint = transform->TransformPoint(inputPoint), itk::ExceptionObject)
+      << "Expected exception not caught";
   }
   // Set the coefficient images
   transform->SetCoefficientImages(field);
@@ -550,15 +466,13 @@ itkBSplineDeformableTransformTest2()
   catch (const itk::ExceptionObject & err)
   {
     std::cout << err << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE();
   }
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
 
-[[nodiscard]] int
-itkBSplineDeformableTransformTest3()
+TEST(BSplineDeformableTransform, ConvertedLegacyTest3)
 {
 
   // This function tests the SetParametersByValue interface
@@ -665,29 +579,4 @@ itkBSplineDeformableTransformTest3()
   std::cout << std::endl;
 
   std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
-}
-
-int
-itkBSplineDeformableTransformTest(int, char *[])
-{
-  bool failed = itkBSplineDeformableTransformTest1();
-  if (failed)
-  {
-    return EXIT_FAILURE;
-  }
-
-  failed = itkBSplineDeformableTransformTest2();
-  if (failed)
-  {
-    return EXIT_FAILURE;
-  }
-
-  failed = itkBSplineDeformableTransformTest3();
-  if (failed)
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
 }
