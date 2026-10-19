@@ -18,7 +18,7 @@
 
 #include "itkRigid2DTransform.h"
 #include "itkTextOutput.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -40,8 +40,7 @@ CheckEqual(const itk::Point<double, 2> & p1, const itk::Point<double, 2> & p2)
 } // namespace
 
 
-int
-itkRigid2DTransformTest(int, char *[])
+TEST(Rigid2DTransform, ConvertedLegacyTest)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -71,11 +70,7 @@ itkRigid2DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Identity doesn't have a null offset" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Identity doesn't have a null offset";
   }
 
   /* Create a Rigid 2D transform with translation */
@@ -87,20 +82,12 @@ itkRigid2DTransformTest(int, char *[])
     translation->SetOffset(ioffset);
 
     auto translationInverse = TransformType::New();
-    if (!translation->GetInverse(translationInverse))
-    {
-      std::cout << "Cannot create transform" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(translation->GetInverse(translationInverse)) << "Cannot create transform";
     std::cout << "translation: " << translation;
     std::cout << "translationInverse: " << translationInverse;
 
     translationInverse = dynamic_cast<TransformType *>(translation->GetInverseTransform().GetPointer());
-    if (!translationInverse)
-    {
-      std::cout << "Cannot compute inverse" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NE(translationInverse, nullptr) << "Cannot compute inverse";
     std::cout << "translation: " << translation;
     std::cout << "translationInverse: " << translationInverse;
 
@@ -116,11 +103,7 @@ itkRigid2DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from SetOffset value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from SetOffset value ";
 
     {
       // Translate an itk::Point
@@ -136,13 +119,9 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating point: " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -160,12 +139,7 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an itk::Vector " << std::endl;
     }
@@ -183,12 +157,7 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating covariant vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating covariant vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
@@ -208,12 +177,7 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vnl_vector: " << p << std::endl;
-        std::cerr << "Reported Result is      : " << q << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
 
       std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
@@ -239,42 +203,30 @@ itkRigid2DTransformTest(int, char *[])
 
     rotation->SetMatrix(mrotation);
 
-    ITK_TRY_EXPECT_NO_EXCEPTION(rotation->SetMatrix(mrotation, 1e-8));
+    ASSERT_NO_THROW(rotation->SetMatrix(mrotation, 1e-8));
     mrotation[0][0] += 1e-7;
-    ITK_TRY_EXPECT_EXCEPTION(rotation->SetMatrix(mrotation, 1e-8));
+    EXPECT_THROW(rotation->SetMatrix(mrotation, 1e-8), itk::ExceptionObject);
     mrotation[0][0] -= 1e-7;
 
     std::cout.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-    if (!itk::Math::FloatAlmostEqual(-angle, rotation->GetRotation(), 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in GetRotation" << std::endl;
-      std::cerr << "Expected value " << -angle << std::endl;
-      std::cerr << " differs from " << rotation->GetRotation();
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
+    EXPECT_TRUE(itk::Math::FloatAlmostEqual(-angle, rotation->GetRotation(), 10, epsilon))
+      << "Test failed!" << std::endl
+      << "Error in GetRotation" << std::endl
+      << "Expected value " << -angle << std::endl
+      << " differs from " << rotation->GetRotation() << " by more than " << epsilon;
 
     TransformType::OffsetType ioffset{};
 
     rotation->SetOffset(ioffset);
 
     auto rotationInverse = TransformType::New();
-    if (!rotation->GetInverse(rotationInverse))
-    {
-      std::cout << "Cannot create transform" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(rotation->GetInverse(rotationInverse)) << "Cannot create transform";
     std::cout << "rotation: " << rotation;
     std::cout << "rotationInverse: " << rotationInverse;
 
     rotationInverse = dynamic_cast<TransformType *>(rotation->GetInverseTransform().GetPointer());
-    if (!rotationInverse)
-    {
-      std::cout << "Cannot compute inverse" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NE(rotationInverse, nullptr) << "Cannot compute inverse";
     std::cout << "rotation: " << rotation;
     std::cout << "rotationInverse: " << rotationInverse;
 
@@ -292,11 +244,7 @@ itkRigid2DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from SetOffset value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from SetOffset value ";
 
     // Verify the Matrix content
     TransformType::MatrixType matrix = rotation->GetMatrix();
@@ -314,12 +262,7 @@ itkRigid2DTransformTest(int, char *[])
         }
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Rotation Matrix  differs " << std::endl;
-      std::cerr << "from SetMatrix value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Rotation Matrix  differs " << std::endl << "from SetMatrix value ";
 
     {
       // Rotate an itk::Point
@@ -339,13 +282,9 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating point   : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -368,13 +307,9 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vector  : " << p << std::endl;
-        std::cerr << "Result should be       : " << q << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
+                      << "Result should be       : " << q << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
@@ -398,13 +333,9 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error Rotating covariant vector: " << p << std::endl;
-        std::cerr << "Result should be               : " << q << std::endl;
-        std::cerr << "Reported Result is             : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
+                      << "Result should be               : " << q << std::endl
+                      << "Reported Result is             : " << r;
 
       std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
@@ -431,13 +362,9 @@ itkRigid2DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating vnl_vector : " << p << std::endl;
-        std::cerr << "Result should be             : " << q << std::endl;
-        std::cerr << "Reported Result is           : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
+                      << "Result should be             : " << q << std::endl
+                      << "Reported Result is           : " << r;
 
       std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
@@ -472,34 +399,21 @@ itkRigid2DTransformTest(int, char *[])
       const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
       std::cout << "Test CloneInverseTo(): ";
-      if (!CheckEqual(p1, p3))
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(CheckEqual(p1, p3));
 
       auto t2dash = TransformType::New();
       t1->GetInverse(t2dash);
       TransformType::InputPointType p3dash = t2dash->TransformPoint(p2);
 
       std::cout << "Test GetInverse(): ";
-      if (!CheckEqual(p1, p3dash))
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(CheckEqual(p1, p3dash));
 
       t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
-      if (!t2dash)
-      {
-        std::cout << "Cannot compute inverse transformation" << std::endl;
-        return EXIT_FAILURE;
-      }
+      ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
       p3dash = t2dash->TransformPoint(p2);
 
       std::cout << "Test GetInverseTransform(): ";
-      if (!CheckEqual(p1, p3dash))
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(CheckEqual(p1, p3dash));
 
 
       // Test clone
@@ -509,10 +423,7 @@ itkRigid2DTransformTest(int, char *[])
       const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
       std::cout << "Test Clone(): ";
-      if (!CheckEqual(p2, p4))
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(CheckEqual(p2, p4));
 
       // Test compose
       auto t4 = TransformType::New();
@@ -533,10 +444,7 @@ itkRigid2DTransformTest(int, char *[])
       TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
       std::cout << "Test Compose(.,false): ";
-      if (!CheckEqual(p6, p7))
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(CheckEqual(p6, p7));
 
       t1->CloneTo(t5);
       t5->Compose(t4, true);
@@ -546,13 +454,7 @@ itkRigid2DTransformTest(int, char *[])
       p7 = t5->TransformPoint(p1);
 
       std::cout << "Test Compose(.,true): ";
-      if (!CheckEqual(p6, p7))
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(CheckEqual(p6, p7));
     }
   }
-
-
-  return EXIT_SUCCESS;
 }
