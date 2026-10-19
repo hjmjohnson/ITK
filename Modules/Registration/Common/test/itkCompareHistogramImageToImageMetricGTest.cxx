@@ -20,13 +20,12 @@
 #include "itkLinearInterpolateImageFunction.h"
 #include "itkKullbackLeiblerCompareHistogramImageToImageMetric.h"
 #include "itkTranslationTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /** This test uses two 2D-Gaussians (standard deviation RegionSize/2).
     This test computes the mutual information between the two images.
 */
-int
-itkCompareHistogramImageToImageMetricTest(int, char *[])
+TEST(CompareHistogramImageToImageMetric, ConvertedLegacyTest)
 {
 
   // Create two simple images.
@@ -67,8 +66,8 @@ itkCompareHistogramImageToImageMetricTest(int, char *[])
   fixedImageSource->SetNormalized(false);
   fixedImageSource->SetScale(250.0f);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(movingImageSource->Update()); // Force the filter to run
-  ITK_TRY_EXPECT_NO_EXCEPTION(fixedImageSource->Update());  // Force the filter to run
+  ASSERT_NO_THROW(movingImageSource->Update()); // Force the filter to run
+  ASSERT_NO_THROW(fixedImageSource->Update());  // Force the filter to run
 
   const MovingImageType::Pointer movingImage = movingImageSource->GetOutput();
   const FixedImageType::Pointer  fixedImage = fixedImageSource->GetOutput();
@@ -81,13 +80,13 @@ itkCompareHistogramImageToImageMetricTest(int, char *[])
 
   auto metric = MetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     metric, KullbackLeiblerCompareHistogramImageToImageMetric, CompareHistogramImageToImageMetric);
 
 
   auto epsilon = 1e-12;
   metric->SetEpsilon(epsilon);
-  ITK_TEST_SET_GET_VALUE(epsilon, metric->GetEpsilon());
+  EXPECT_EQ(epsilon, metric->GetEpsilon());
 
   constexpr unsigned int              nBins{ 256 };
   MetricType::HistogramType::SizeType histSize;
@@ -138,21 +137,21 @@ itkCompareHistogramImageToImageMetricTest(int, char *[])
 
   // Now set up the Training Stuff
   metric->SetTrainingTransform(transform);
-  ITK_TEST_SET_GET_VALUE(transform, metric->GetTrainingTransform());
+  EXPECT_EQ(transform, metric->GetTrainingTransform());
 
   metric->SetTrainingFixedImage(fixedImage);
-  ITK_TEST_SET_GET_VALUE(fixedImage, metric->GetTrainingFixedImage());
+  EXPECT_EQ(fixedImage, metric->GetTrainingFixedImage());
 
   metric->SetTrainingFixedImageRegion(fixedImage->GetBufferedRegion());
-  ITK_TEST_SET_GET_VALUE(fixedImage->GetBufferedRegion(), metric->GetTrainingFixedImageRegion());
+  EXPECT_EQ(fixedImage->GetBufferedRegion(), metric->GetTrainingFixedImageRegion());
 
   metric->SetTrainingMovingImage(movingImage);
-  ITK_TEST_SET_GET_VALUE(movingImage, metric->GetTrainingMovingImage());
+  EXPECT_EQ(movingImage, metric->GetTrainingMovingImage());
 
   metric->SetTrainingInterpolator(interpolator);
-  ITK_TEST_SET_GET_VALUE(interpolator, metric->GetTrainingInterpolator());
+  EXPECT_EQ(interpolator, metric->GetTrainingInterpolator());
 
-  ITK_TEST_EXPECT_EQUAL(transform->GetNumberOfParameters(), metric->GetNumberOfParameters());
+  EXPECT_EQ(transform->GetNumberOfParameters(), metric->GetNumberOfParameters());
 
   // Initialize the metric.
   metric->Initialize();
@@ -163,8 +162,4 @@ itkCompareHistogramImageToImageMetricTest(int, char *[])
   metric->GetDerivative(parameters, derivative);
 
   std::cout << "Metric value = " << measure << std::endl << "Derivative = " << derivative << std::endl;
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
