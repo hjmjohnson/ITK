@@ -18,7 +18,6 @@ set(
   itkSimpleContourExtractorImageFilterTest.cxx
   itkSobelEdgeDetectionImageFilterTest.cxx
   itkUnsharpMaskImageFilterTest.cxx
-  itkUnsharpMaskImageFilterTestSimple.cxx
   itkZeroCrossingBasedEdgeDetectionImageFilterTest.cxx
   itkZeroCrossingImageFilterTest.cxx
 )
@@ -77,12 +76,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkSobelEdgeDetectionImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkSobelEdgeDetectionImageFilterTest.png
-)
-itk_add_test(
-  NAME itkUnsharpMaskImageFilterTestSimple
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkUnsharpMaskImageFilterTestSimple
 )
 itk_add_test(
   NAME itkUnsharpMaskImageFilterTest_DefaultsUChar
@@ -590,6 +583,7 @@ set(
   itkHoughTransform2DCirclesImageGTest.cxx
   itkHoughTransform2DLinesImageGTest.cxx
   itkSobelEdgeDetectionImageFilterGTest.cxx
+  itkUnsharpMaskImageFilterGTestSimple.cxx
 )
 
 creategoogletestdriver(ITKImageFeature "${ITKImageFeature-Test_LIBRARIES}" "${ITKImageFeatureGTests}")
