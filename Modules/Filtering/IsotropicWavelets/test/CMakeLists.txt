@@ -20,7 +20,6 @@ set(
   itkIsotropicWaveletFrequencyFunctionTest.cxx
   itkSimoncelliIsotropicWaveletTest.cxx
   itkVowIsotropicWaveletTest.cxx
-  itkShannonIsotropicWaveletTest.cxx
   #Isotropic Wavelet
   itkWaveletFrequencyFilterBankGeneratorTest.cxx
   itkWaveletFrequencyFilterBankGeneratorDownsampleTest.cxx
@@ -504,12 +503,6 @@ itk_add_test(
     itkSimoncelliIsotropicWaveletTest
 )
 itk_add_test(
-  NAME itkShannonIsotropicWaveletTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkShannonIsotropicWaveletTest
-)
-itk_add_test(
   NAME itkVowIsotropicWaveletTest
   COMMAND
     IsotropicWaveletsTestDriver
@@ -699,5 +692,6 @@ set(
   IsotropicWaveletsGTests
   itkHeldIsotropicWaveletGTest.cxx
   itkInd2SubGTest.cxx
+  itkShannonIsotropicWaveletGTest.cxx
 )
 creategoogletestdriver(IsotropicWavelets "${Libraries}" "${IsotropicWaveletsGTests}")
