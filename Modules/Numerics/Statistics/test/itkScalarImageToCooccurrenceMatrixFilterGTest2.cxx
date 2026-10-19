@@ -21,9 +21,9 @@
 
 
 #include "itkScalarImageToCooccurrenceMatrixFilter.h"
+#include "itkGTest.h"
 
-int
-itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
+TEST(ScalarImageToCooccurrenceMatrixFilter, ConvertedLegacyTest2)
 {
 
   // Data definitions
@@ -115,7 +115,6 @@ itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
   // with zeroes elsewhere.
   //--------------------------------------------------------------------------
 
-  try
   {
 
     using FilterType = itk::Statistics::ScalarImageToCooccurrenceMatrixFilter<InputImageType>;
@@ -138,8 +137,6 @@ itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
     //--------------------------------------------------------------------------
     // Test the histogram.
     //--------------------------------------------------------------------------
-    bool passed = true;
-
     using IndexType = FilterType::HistogramType::IndexType;
     IndexType one_one(hist->GetMeasurementVectorSize());
     IndexType one_two(hist->GetMeasurementVectorSize());
@@ -164,17 +161,11 @@ itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
     float ttF = hist->GetFrequency(two_two);
     float totalF = hist->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(ooF, 4.0f) || itk::Math::NotAlmostEquals(ttF, 0.0f) ||
-        itk::Math::NotAlmostEquals(otF, 0.0f) || itk::Math::NotAlmostEquals(toF, 0.0f) ||
-        itk::Math::NotAlmostEquals(ooF, totalF))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 4, 0, 0, 0, 4 got " << ooF << ", " << ttF << ", " << otF << ", " << toF << ", " << totalF
-                << std::endl
-                << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(ooF, 4.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ttF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(otF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(toF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ooF, totalF) << "The histogram was calculated incorrectly";
 
     //--------------------------------------------------------------------------
     // Test the histogram with "0" as the "inside" value instead of "1"
@@ -205,24 +196,13 @@ itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
     ttF = hist->GetFrequency(two_two);
     totalF = hist->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(ooF, 16.0f) || itk::Math::NotAlmostEquals(ttF, 16.0f) ||
-        itk::Math::NotAlmostEquals(otF, 14.0f) || itk::Math::NotAlmostEquals(toF, 14.0f) ||
-        itk::Math::NotAlmostEquals(ooF + ttF + otF + toF, totalF))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 16, 16, 14, 14, 64 got " << ooF << ", " << ttF << ", " << otF << ", " << toF << ", "
-                << totalF << std::endl
-                << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(ooF, 16.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ttF, 16.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(otF, 14.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(toF, 14.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ooF + ttF + otF + toF, totalF) << "The histogram was calculated incorrectly";
 
-    if (filter->GetInsidePixelValue() != 0)
-    {
-      std::cerr << "Error: " << std::endl;
-      std::cerr << "GetInsidePixelValue() is not returning the expected value" << std::endl;
-      passed = false;
-    }
+    EXPECT_EQ(filter->GetInsidePixelValue(), 0) << "GetInsidePixelValue() is not returning the expected value";
 
     //--------------------------------------------------------------------------
     // Generate the histogram with no mask. The un-normalized, un-masked histogram
@@ -253,17 +233,11 @@ itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
     totalF = hist->GetTotalFrequency();
 
 
-    if (itk::Math::NotAlmostEquals(ooF, 24.0f) || itk::Math::NotAlmostEquals(ttF, 16.0f) ||
-        itk::Math::NotAlmostEquals(otF, 20.0f) || itk::Math::NotAlmostEquals(toF, 20.0f) ||
-        itk::Math::NotAlmostEquals(ooF + ttF + otF + toF, totalF))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 24, 16, 20, 20, 80 got " << ooF << ", " << ttF << ", " << otF << ", " << toF << ", "
-                << totalF << std::endl
-                << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(ooF, 24.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ttF, 16.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(otF, 20.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(toF, 20.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ooF + ttF + otF + toF, totalF) << "The histogram was calculated incorrectly";
 
     auto filter2 = FilterType::New();
 
@@ -280,17 +254,11 @@ itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
     ttF = hist->GetFrequency(two_two);
     totalF = hist->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(ooF, 0.0f) || itk::Math::NotAlmostEquals(ttF, 0.0f) ||
-        itk::Math::NotAlmostEquals(otF, 0.0f) || itk::Math::NotAlmostEquals(toF, 0.0f) ||
-        itk::Math::NotAlmostEquals(totalF, 4.0f))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 0, 0, 0, 0, 4 got " << ooF << ", " << ttF << ", " << otF << ", " << toF << ", " << totalF
-                << std::endl
-                << std::endl;
-      passed = false;
-    }
+    EXPECT_FLOAT_EQ(ooF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ttF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(otF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(toF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(totalF, 4.0f) << "The histogram was calculated incorrectly";
 
     // fill the mask buffer to one
     mask->FillBuffer(1);
@@ -304,33 +272,10 @@ itkScalarImageToCooccurrenceMatrixFilterTest2(int, char *[])
     ttF = hist->GetFrequency(two_two);
     totalF = hist->GetTotalFrequency();
 
-    if (itk::Math::NotAlmostEquals(ooF, 0.0f) || itk::Math::NotAlmostEquals(ttF, 0.0f) ||
-        itk::Math::NotAlmostEquals(otF, 0.0f) || itk::Math::NotAlmostEquals(toF, 0.0f) ||
-        itk::Math::NotAlmostEquals(totalF, 24.0f))
-    {
-      std::cerr << "Error:" << std::endl;
-      std::cerr << "The histogram was calculated incorrectly" << std::endl;
-      std::cerr << "Expected 0, 0, 0, 0, 24 got " << ooF << ", " << ttF << ", " << otF << ", " << toF << ", " << totalF
-                << std::endl
-                << std::endl;
-      passed = false;
-    }
-
-
-    if (!passed)
-    {
-      std::cerr << "Test failed" << std::endl;
-      return EXIT_FAILURE;
-    }
-
-    std::cerr << "Test succeeded" << std::endl;
-    return EXIT_SUCCESS;
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    std::cerr << "ExceptionObject caught !" << std::endl;
-    std::cerr << err << std::endl;
-    std::cerr << "Test failed" << std::endl;
-    return EXIT_FAILURE;
+    EXPECT_FLOAT_EQ(ooF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(ttF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(otF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(toF, 0.0f) << "The histogram was calculated incorrectly";
+    EXPECT_FLOAT_EQ(totalF, 24.0f) << "The histogram was calculated incorrectly";
   }
 }
