@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
-  itkCenteredTransformInitializerTest.cxx
   itkCenteredVersorTransformInitializerTest.cxx
   itkCompareHistogramImageToImageMetricTest.cxx
   itkCorrelationCoefficientHistogramImageToImageMetricTest.cxx
@@ -78,12 +77,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkGaussianExponentialDiffeomorphicTransformParametersAdaptorTest
-)
-itk_add_test(
-  NAME itkCenteredTransformInitializerTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkCenteredTransformInitializerTest
 )
 itk_add_test(
   NAME itkCenteredVersorTransformInitializerTest
@@ -489,6 +482,7 @@ set(
   itkBSplineExponentialDiffeomorphicTransformParametersAdaptorGTest.cxx
   itkBSplineSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorGTest.cxx
   itkBSplineTransformParametersAdaptorGTest.cxx
+  itkCenteredTransformInitializerGTest.cxx
   itkGradientDifferenceImageToImageMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
