@@ -23,7 +23,7 @@
 #include "itkPointSet.h"
 #include "itkPointSetToImageRegistrationMethod.h"
 #include "itkImageRegistrationMethodImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -36,8 +36,7 @@
  *
  */
 
-int
-itkPointSetToImageRegistrationTest(int, char *[])
+TEST(PointSetToImageRegistration, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 2 };
 
@@ -130,7 +129,7 @@ itkPointSetToImageRegistrationTest(int, char *[])
 
   auto registration = RegistrationType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(registration, PointSetToImageRegistrationMethod, ProcessObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(registration, PointSetToImageRegistrationMethod, ProcessObject);
 
   using CommandIterationType = itk::CommandIterationUpdate<OptimizerType>;
 
@@ -155,22 +154,22 @@ itkPointSetToImageRegistrationTest(int, char *[])
 
   // Connect all the components required for the registration
   registration->SetMetric(metric);
-  ITK_TEST_SET_GET_VALUE(metric, registration->GetMetric());
+  EXPECT_EQ(metric, registration->GetMetric());
 
   registration->SetOptimizer(optimizer);
-  ITK_TEST_SET_GET_VALUE(optimizer, registration->GetOptimizer());
+  EXPECT_EQ(optimizer, registration->GetOptimizer());
 
   registration->SetTransform(transform);
-  ITK_TEST_SET_GET_VALUE(transform, registration->GetTransform());
+  EXPECT_EQ(transform, registration->GetTransform());
 
   registration->SetFixedPointSet(fixedPointSet);
-  ITK_TEST_SET_GET_VALUE(fixedPointSet, registration->GetFixedPointSet());
+  EXPECT_EQ(fixedPointSet, registration->GetFixedPointSet());
 
   registration->SetMovingImage(movingImage);
-  ITK_TEST_SET_GET_VALUE(movingImage, registration->GetMovingImage());
+  EXPECT_EQ(movingImage, registration->GetMovingImage());
 
   registration->SetInterpolator(interpolator);
-  ITK_TEST_SET_GET_VALUE(interpolator, registration->GetInterpolator());
+  EXPECT_EQ(interpolator, registration->GetInterpolator());
 
   // Set up transform parameters
   ParametersType parameters(transform->GetNumberOfParameters());
@@ -182,10 +181,10 @@ itkPointSetToImageRegistrationTest(int, char *[])
   }
   transform->SetParameters(parameters);
   registration->SetInitialTransformParameters(transform->GetParameters());
-  ITK_TEST_SET_GET_VALUE(transform->GetParameters(), registration->GetInitialTransformParameters());
+  EXPECT_EQ(transform->GetParameters(), registration->GetInitialTransformParameters());
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(registration->Update());
+  ASSERT_NO_THROW(registration->Update());
 
 
   // Print the last transform parameters to improve coverage
@@ -199,6 +198,4 @@ itkPointSetToImageRegistrationTest(int, char *[])
   {
     std::cout << finalParameters[i] << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
