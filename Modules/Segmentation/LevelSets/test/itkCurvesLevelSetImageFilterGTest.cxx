@@ -24,7 +24,7 @@
 #include "itkFastMarchingImageFilter.h"
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkSimilarityIndexImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /* Uncomment to write out image files */
 #ifdef WRITING_OUT_IMAGES
@@ -32,8 +32,7 @@
 #  include "itkImageFileWriter.h"
 #endif
 
-int
-itkCurvesLevelSetImageFilterTest(int, char *[])
+TEST(CurvesLevelSetImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int ImageDimension{ 2 };
@@ -133,7 +132,7 @@ itkCurvesLevelSetImageFilterTest(int, char *[])
 
   auto curvesFilter = CurvesFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(curvesFilter, CurvesLevelSetImageFilter, SegmentationLevelSetImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(curvesFilter, CurvesLevelSetImageFilter, SegmentationLevelSetImageFilter);
 
 
   // set the initial level set
@@ -216,16 +215,7 @@ itkCurvesLevelSetImageFilterTest(int, char *[])
 #endif
 
   // Check if overlap is above threshold
-  if (overlap->GetSimilarityIndex() > 0.90)
-  {
-    std::cout << "Overlap exceed threshold." << std::endl;
-  }
-  else
-  {
-    std::cout << "Overlap below threshold." << std::endl;
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GT(overlap->GetSimilarityIndex(), 0.90);
 
   // Test case when PropagationScaling is zero
   curvesFilter->SetPropagationScaling(0.0);
@@ -234,5 +224,4 @@ itkCurvesLevelSetImageFilterTest(int, char *[])
   curvesFilter->Update();
 
   std::cout << "Test Passed. " << std::endl;
-  return EXIT_SUCCESS;
 }
