@@ -4,7 +4,6 @@ set(
   itkBSplineDecompositionImageFilterTest.cxx
   itkCentralDifferenceImageFunctionOnVectorSpeedTest.cxx
   itkCentralDifferenceImageFunctionSpeedTest.cxx
-  itkImageAdaptorInterpolateImageFunctionTest.cxx
   itkInterpolateTest.cxx
   itkLabelImageGaussianInterpolateImageFunctionTest.cxx
   itkLinearInterpolateImageFunctionTest.cxx
@@ -56,12 +55,6 @@ itk_add_test(
   COMMAND
     ITKImageFunctionTestDriver
     itkMeanImageFunctionTest
-)
-itk_add_test(
-  NAME itkImageAdaptorInterpolateImageFunctionTest
-  COMMAND
-    ITKImageFunctionTestDriver
-    itkImageAdaptorInterpolateImageFunctionTest
 )
 itk_add_test(
   NAME itkRayCastInterpolateImageFunctionTest
@@ -149,6 +142,7 @@ set(
   itkGaussianBlurImageFunctionGTest.cxx
   itkGaussianDerivativeImageFunctionGTest.cxx
   itkGaussianInterpolateImageFunctionGTest.cxx
+  itkImageAdaptorInterpolateImageFunctionGTest.cxx
   itkSumOfSquaresImageFunctionGTest.cxx
   itkVarianceImageFunctionGTest.cxx
 )
