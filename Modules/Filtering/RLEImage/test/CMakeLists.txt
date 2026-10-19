@@ -4,7 +4,6 @@ set(
   RLEImageTests
   itkRLEImageTest.cxx
   itkRegionOfInterestRLEImageFilterTest.cxx
-  itkRLEImageScanlineIteratorTest1.cxx
 )
 
 createtestdriver( RLEImage "${RLEImage-Test_LIBRARIES}" "${RLEImageTests}" )
@@ -19,6 +18,7 @@ set(
   itkRLEImageMultiLabelMeshPipelineFriendGTest.cxx
   itkRLEImageRegionConstIteratorWithOnlyIndexGTest.cxx
   itkRLEImageRegionIteratorGTest.cxx
+  itkRLEImageScanlineIteratorGTest1.cxx
 )
 
 creategoogletestdriver(RLEImage "${RLEImage-Test_LIBRARIES}" "${RLEImageGTests}")
@@ -38,12 +38,6 @@ itk_add_test(
   COMMAND
     RLEImageTestDriver
     itkRegionOfInterestRLEImageFilterTest
-)
-itk_add_test(
-  NAME itkRLEImageScanlineIteratorTest1
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageScanlineIteratorTest1
 )
 
 function(ReadWriteTest ImageName Ext) # optional: big
