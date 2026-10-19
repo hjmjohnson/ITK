@@ -18,9 +18,9 @@
 
 #include <iostream>
 #include "itkDistanceToCentroidMembershipFunction.h"
+#include "itkGTest.h"
 
-int
-itkDistanceToCentroidMembershipFunctionTest(int, char *[])
+TEST(DistanceToCentroidMembershipFunction, ConvertedLegacyTest)
 {
 
   constexpr unsigned int MeasurementVectorSize{ 3 };
@@ -41,36 +41,20 @@ itkDistanceToCentroidMembershipFunctionTest(int, char *[])
   auto distanceMetric = DistanceMetricType::New();
   function->SetDistanceMetric(distanceMetric);
 
-  if (function->GetDistanceMetric() != distanceMetric)
-  {
-    std::cerr << "Error in GetDistanceMetric() " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(function->GetDistanceMetric(), distanceMetric) << "Error in GetDistanceMetric() ";
 
   function->Print(std::cout);
 
   function->SetMeasurementVectorSize(MeasurementVectorSize); // for code coverage
 
-  if (function->GetMeasurementVectorSize() != MeasurementVectorSize)
-  {
-    std::cerr << "GetMeasurementVectorSize() Failed !" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(function->GetMeasurementVectorSize(), MeasurementVectorSize) << "GetMeasurementVectorSize() Failed !";
 
   // Test if an exception will be thrown if we try to resize the measurement vector
   // size
-  try
   {
     constexpr MeasurementVectorSizeType measurementVector2{ MeasurementVectorSize + 1 };
-    function->SetMeasurementVectorSize(measurementVector2);
-    std::cerr
-      << "Exception should have been thrown since we are trying to resize non-resizeable measurement vector type "
-      << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Caughted expected exception: " << excp << std::endl;
+    EXPECT_THROW(function->SetMeasurementVectorSize(measurementVector2), itk::ExceptionObject)
+      << "Exception should have been thrown since we are trying to resize non-resizeable measurement vector type ";
   }
 
 
@@ -84,13 +68,9 @@ itkDistanceToCentroidMembershipFunctionTest(int, char *[])
 
   constexpr double tolerance{ 0.001 };
 
-  if (itk::Math::Absolute(function->GetCentroid()[0] - origin[0]) > tolerance ||
-      itk::Math::Absolute(function->GetCentroid()[1] - origin[1]) > tolerance ||
-      itk::Math::Absolute(function->GetCentroid()[2] - origin[2]) > tolerance)
-  {
-    std::cerr << "Error in GetCentroid() method" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(function->GetCentroid()[0], origin[0], tolerance) << "Error in GetCentroid() method";
+  EXPECT_NEAR(function->GetCentroid()[1], origin[1], tolerance) << "Error in GetCentroid() method";
+  EXPECT_NEAR(function->GetCentroid()[2], origin[2], tolerance) << "Error in GetCentroid() method";
 
   MeasurementVectorType measurement;
   itk::NumericTraits<MeasurementVectorType>::SetLength(measurement, 3);
@@ -101,18 +81,9 @@ itkDistanceToCentroidMembershipFunctionTest(int, char *[])
   constexpr double trueValue{ 3.31662 };
   const double     distanceComputed = function->Evaluate(measurement);
 
-  if (itk::Math::Absolute(distanceComputed - trueValue) > tolerance)
-  {
-    std::cerr << "Distance computed not correct: "
-              << "truevalue= " << trueValue << "ComputedValue=" << distanceComputed << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(distanceComputed, trueValue, tolerance) << "Distance computed not correct";
 
   // Exercise the Clone method.
   const MembershipFunctionType::Pointer clonedFunction = function->Clone();
-  if (clonedFunction.IsNull())
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(clonedFunction.IsNull());
 }
