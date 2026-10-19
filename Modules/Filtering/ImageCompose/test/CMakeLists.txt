@@ -6,7 +6,6 @@ set(
   itkImageReadRealAndImaginaryWriteComplexTest.cxx
   itkImageToVectorImageFilterTest.cxx
   itkJoinSeriesImageFilterStreamingTest.cxx
-  itkJoinSeriesImageFilterTest.cxx
 )
 
 createtestdriver(ITKImageCompose "${ITKImageCompose-Test_LIBRARIES}" "${ITKImageComposeTests}")
@@ -67,12 +66,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkComposeRGBAImageFilterTestOutput.png
 )
 itk_add_test(
-  NAME itkJoinSeriesImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkJoinSeriesImageFilterTest
-)
-itk_add_test(
   NAME itkJoinSeriesImageFilterStreamingTest
   COMMAND
     ITKImageComposeTestDriver
@@ -94,5 +87,6 @@ set(
   itkCompose3DVectorImageFilterGTest.cxx
   itkComposeRGBImageFilterGTest.cxx
   itkJoinImageFilterGTest.cxx
+  itkJoinSeriesImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKImageCompose "${ITKImageCompose-Test_LIBRARIES}" "${ITKImageComposeGTests}")
