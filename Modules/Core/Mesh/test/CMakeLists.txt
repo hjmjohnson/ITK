@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKMeshTests
-  itkAutomaticTopologyMeshSourceTest.cxx
   itkBinaryMask3DMeshSourceTest.cxx
   itkCellInterfaceTest.cxx
   itkConnectedRegionsMeshFilterTest1.cxx
@@ -55,12 +54,6 @@ itk_add_test(
   COMMAND
     ITKMeshTestDriver
     itkSimplexMeshTest
-)
-itk_add_test(
-  NAME itkAutomaticTopologyMeshSourceTest
-  COMMAND
-    ITKMeshTestDriver
-    itkAutomaticTopologyMeshSourceTest
 )
 itk_add_test(
   NAME itkBinaryMask3DMeshSourceTestRegionOff
@@ -528,3 +521,6 @@ set_tests_properties(
     WILL_FAIL
       true
 )
+
+set(ITKMeshGTests itkAutomaticTopologyMeshSourceGTest.cxx)
+creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
