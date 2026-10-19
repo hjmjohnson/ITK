@@ -27,6 +27,7 @@
  */
 
 #include "itkVersorRigid3DTransform.h"
+#include "itkGTest.h"
 #include <iostream>
 
 // -------------------------
@@ -34,8 +35,7 @@
 //   Main code
 //
 // -------------------------
-int
-itkVersorRigid3DTransformTest(int, char *[])
+TEST(VersorRigid3DTransform, ConvertedLegacyTest)
 {
 
   using ValueType = double;
@@ -120,11 +120,7 @@ itkVersorRigid3DTransformTest(int, char *[])
       }
     }
 
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from null in rotation " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from null in rotation ";
 
     VersorType versor;
     versor.Set(axis, angle);
@@ -144,13 +140,9 @@ itkVersorRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating point : " << p << std::endl;
-        std::cerr << "Result should be     : " << q << std::endl;
-        std::cerr << "Reported Result is   : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating point : " << p << std::endl
+                      << "Result should be     : " << q << std::endl
+                      << "Reported Result is   : " << r;
 
       std::cout << "Ok rotating an itk::Point " << std::endl;
     }
@@ -170,13 +162,9 @@ itkVersorRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vector : " << p << std::endl;
-        std::cerr << "Result should be      : " << q << std::endl;
-        std::cerr << "Reported Result is    : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vector : " << p << std::endl
+                      << "Result should be      : " << q << std::endl
+                      << "Reported Result is    : " << r;
 
       std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
@@ -196,13 +184,9 @@ itkVersorRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating covariant vector : " << p << std::endl;
-        std::cerr << "Result should be                : " << q << std::endl;
-        std::cerr << "Reported Result is              : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating covariant vector : " << p << std::endl
+                      << "Result should be                : " << q << std::endl
+                      << "Reported Result is              : " << r;
 
       std::cout << "Ok rotating an itk::CovariantVector " << std::endl;
     }
@@ -225,13 +209,9 @@ itkVersorRigid3DTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating vnl_vector : " << p << std::endl;
-        std::cerr << "Result should be          : " << q << std::endl;
-        std::cerr << "Reported Result is        : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating vnl_vector : " << p << std::endl
+                      << "Result should be          : " << q << std::endl
+                      << "Reported Result is        : " << r;
 
       std::cout << "Ok rotating an vnl_Vector " << std::endl;
     }
@@ -266,11 +246,7 @@ itkVersorRigid3DTransformTest(int, char *[])
       }
     }
 
-    if (!Ok)
-    {
-      std::cerr << "The center point was not invariant to rotation " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "The center point was not invariant to rotation ";
 
     std::cout << "Ok center is invariant to rotation." << std::endl;
 
@@ -295,11 +271,8 @@ itkVersorRigid3DTransformTest(int, char *[])
     constexpr double tolerance{ 1e-8 };
     for (unsigned int p = 0; p < np; ++p)
     {
-      if (itk::Math::Absolute(parameters[p] - parameters2[p]) > tolerance)
-      {
-        std::cerr << "Output parameter does not match input " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
+        << "Output parameter does not match input ";
     }
     std::cout << "Input/Output parameter check Passed !" << std::endl;
 
@@ -343,17 +316,17 @@ itkVersorRigid3DTransformTest(int, char *[])
     {
       for (unsigned int jj = 0; jj < 6; ++jj)
       {
-        if (itk::Math::Absolute(TheoreticalJacobian[ii][jj] - jacobian[ii][jj]) > 1e-5)
-        {
-          std::cerr << "Jacobian components differ from expected values ";
-          std::cerr << std::endl << std::endl;
-          std::cerr << "Expected Jacobian = " << std::endl;
-          std::cerr << TheoreticalJacobian << std::endl << std::endl;
-          std::cerr << "Computed Jacobian = " << std::endl;
-          std::cerr << jacobian << std::endl << std::endl;
-          std::cerr << std::endl << "Test FAILED ! " << std::endl;
-          return EXIT_FAILURE;
-        }
+        EXPECT_LE(itk::Math::Absolute(TheoreticalJacobian[ii][jj] - jacobian[ii][jj]), 1e-5)
+          << "Jacobian components differ from expected values " << std::endl
+          << std::endl
+          << "Expected Jacobian = " << std::endl
+          << TheoreticalJacobian << std::endl
+          << std::endl
+          << "Computed Jacobian = " << std::endl
+          << jacobian << std::endl
+          << std::endl
+          << std::endl
+          << "Test FAILED ! ";
       }
     }
   }
@@ -395,11 +368,8 @@ itkVersorRigid3DTransformTest(int, char *[])
     constexpr double tolerance{ 1e-8 };
     for (unsigned int p = 0; p < np; ++p)
     {
-      if (itk::Math::Absolute(parameters[p] - parameters2[p]) > tolerance)
-      {
-        std::cerr << "Output parameter does not match input " << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
+        << "Output parameter does not match input ";
     }
     std::cout << "Input/Output parameter check Passed !" << std::endl;
   }
@@ -436,12 +406,7 @@ itkVersorRigid3DTransformTest(int, char *[])
       std::cout << "Caught unknown exception" << std::endl;
     }
 
-    if (!Ok)
-    {
-      std::cerr << "Error: expected to catch an exception when attempting";
-      std::cerr << " to set an non-orthogonal matrix." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Error: expected to catch an exception when attempting" << " to set an non-orthogonal matrix.";
 
     t = TransformType::New();
 
@@ -470,11 +435,7 @@ itkVersorRigid3DTransformTest(int, char *[])
       Ok = false;
     }
 
-    if (!Ok)
-    {
-      std::cerr << "Error: caught unexpected exception" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Error: caught unexpected exception";
 
     // Check the computed parameters
 
@@ -490,21 +451,13 @@ itkVersorRigid3DTransformTest(int, char *[])
     ParametersType p = t2->GetParameters();
     for (unsigned int k = 0; k < e.GetSize(); ++k)
     {
-      if (itk::Math::Absolute(e[k] - p[k]) > epsilon)
-      {
-        std::cout << " [ FAILED ] " << std::endl;
-        std::cout << "Expected parameters: " << e << std::endl;
-        std::cout << "but got: " << p << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(e[k] - p[k]), epsilon) << " [ FAILED ] " << std::endl
+                                                           << "Expected parameters: " << e << std::endl
+                                                           << "but got: " << p;
     }
     {
       auto tInverse = TransformType::New();
-      if (!t->GetInverse(tInverse))
-      {
-        std::cout << "Cannot create inverse transform" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(t->GetInverse(tInverse)) << "Cannot create inverse transform";
       std::cout << "translation: " << t;
       std::cout << "translationInverse: " << tInverse;
     }
@@ -512,5 +465,4 @@ itkVersorRigid3DTransformTest(int, char *[])
   }
 
   std::cout << std::endl << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
 }
