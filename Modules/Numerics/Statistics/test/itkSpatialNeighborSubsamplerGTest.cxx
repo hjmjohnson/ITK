@@ -19,10 +19,9 @@
 #include "itkSpatialNeighborSubsampler.h"
 #include "itkImageToNeighborhoodSampleAdaptor.h"
 #include "itkImageRegionConstIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkSpatialNeighborSubsamplerTest(int, char *[])
+TEST(SpatialNeighborSubsampler, ConvertedLegacyTest)
 {
 
   // Given the following 25x25 image on the left
@@ -95,7 +94,7 @@ itkSpatialNeighborSubsamplerTest(int, char *[])
 
   auto sampler_orig = SamplerType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(sampler_orig, SpatialNeighborSubsampler, RegionConstrainedSubsampler);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(sampler_orig, SpatialNeighborSubsampler, RegionConstrainedSubsampler);
 
 
   sampler_orig->SetSample(sample);
@@ -107,31 +106,13 @@ itkSpatialNeighborSubsamplerTest(int, char *[])
 
   // test clone mechanism
   const SamplerType::Pointer sampler = sampler_orig->Clone().GetPointer();
-  if (sampler->GetSample() != sampler_orig->GetSample())
-  {
-    std::cerr << "Clone did not copy the sample correctly!" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (sampler->GetSampleRegion() != sampler_orig->GetSampleRegion())
-  {
-    std::cerr << "Clone did not copy the region correctly!" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (sampler->GetRegionConstraint() != sampler_orig->GetRegionConstraint())
-  {
-    std::cerr << "Clone did not copy the region constraint correctly!" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (sampler->GetRadius() != sampler_orig->GetRadius())
-  {
-    std::cerr << "Clone did not copy the radius correctly!" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (sampler->GetCanSelectQuery() != sampler_orig->GetCanSelectQuery())
-  {
-    std::cerr << "Clone did not copy CanSelectQuery correctly!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(sampler->GetSample(), sampler_orig->GetSample()) << "Clone did not copy the sample correctly!";
+  EXPECT_EQ(sampler->GetSampleRegion(), sampler_orig->GetSampleRegion()) << "Clone did not copy the region correctly!";
+  EXPECT_EQ(sampler->GetRegionConstraint(), sampler_orig->GetRegionConstraint())
+    << "Clone did not copy the region constraint correctly!";
+  EXPECT_EQ(sampler->GetRadius(), sampler_orig->GetRadius()) << "Clone did not copy the radius correctly!";
+  EXPECT_EQ(sampler->GetCanSelectQuery(), sampler_orig->GetCanSelectQuery())
+    << "Clone did not copy CanSelectQuery correctly!";
 
   SamplerType::SubsamplePointer subsample = SamplerType::SubsampleType::New();
   IndexType                     queryIdx;
@@ -167,25 +148,16 @@ itkSpatialNeighborSubsamplerTest(int, char *[])
     if (validRegion.IsInside(curIdx))
     {
       // inside the region, value must be 255
-      if (curValue != 255)
-      {
-        std::cout << "Error! Pixel at " << curIdx << " should be 255 but is " << curValue << " instead!" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(curValue, 255u) << "Pixel at " << curIdx << " should be 255";
     }
     else
     {
       // outside of the region, value must be 0
-      if (curValue != 0)
-      {
-        std::cout << "Error! Pixel at " << curIdx << " should be 0 but is " << curValue << " instead!" << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(curValue, 0u) << "Pixel at " << curIdx << " should be 0";
     }
     ++it;
   } // end for each point in the image
 
   std::cout << "All pixels and only pixels within intersection of"
             << " the image region and constraint region are equal to 255." << std::endl;
-  return EXIT_SUCCESS;
 }
