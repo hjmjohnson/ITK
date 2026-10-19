@@ -16,10 +16,9 @@
  *
  *=========================================================================*/
 
-#include <iostream>
-
 #include "itkCenteredRigid2DTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
+#include <iostream>
 
 
 namespace
@@ -43,8 +42,7 @@ CheckEqual(const itk::Point<double, 2> & p1, const itk::Point<double, 2> & p2)
 
 } // namespace
 
-int
-itkCenteredRigid2DTransformTest(int, char *[])
+TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
 {
   std::cout << "==================================" << std::endl;
   std::cout << "Testing CenteredRigid 2D Transform" << std::endl << std::endl;
@@ -81,13 +79,9 @@ itkCenteredRigid2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error rotating point   : " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -112,13 +106,9 @@ itkCenteredRigid2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error translating point: " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -164,13 +154,9 @@ itkCenteredRigid2DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Error in inverse computation" << std::endl;
-      std::cerr << "Result should be       : " << p1 << std::endl;
-      std::cerr << "Reported Result is     : " << p3 << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Error in inverse computation" << std::endl
+                    << "Result should be       : " << p1 << std::endl
+                    << "Reported Result is     : " << p3;
 
     std::cout << " [ PASSED ] " << std::endl;
 
@@ -179,11 +165,7 @@ itkCenteredRigid2DTransformTest(int, char *[])
     const CenteredRigidTransformType::Pointer inversebis =
       dynamic_cast<CenteredRigidTransformType *>(transform2->GetInverseTransform().GetPointer());
 
-    if (!inversebis)
-    {
-      std::cout << "Cannot compute inverse transformation" << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_NE(inversebis, nullptr) << "Cannot compute inverse transformation";
 
     p3 = inversebis->TransformPoint(p2);
 
@@ -197,13 +179,9 @@ itkCenteredRigid2DTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Error in inverse computation" << std::endl;
-      std::cerr << "Result should be       : " << p1 << std::endl;
-      std::cerr << "Reported Result is     : " << p3 << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Error in inverse computation" << std::endl
+                    << "Result should be       : " << p1 << std::endl
+                    << "Reported Result is     : " << p3;
 
     std::cout << " [ PASSED ] " << std::endl;
   }
@@ -237,34 +215,21 @@ itkCenteredRigid2DTransformTest(int, char *[])
     const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
     std::cout << "Test CloneInverseTo(): ";
-    if (!CheckEqual(p1, p3))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
     t1->GetInverse(t2dash);
     TransformType::InputPointType p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverseTransform(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
-    if (!t2dash)
-    {
-      std::cout << "Cannot compute inverse transformation" << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverseTransform(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
     TransformType::Pointer t3;
@@ -273,10 +238,7 @@ itkCenteredRigid2DTransformTest(int, char *[])
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
     std::cout << "Test Clone(): ";
-    if (!CheckEqual(p2, p4))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test compose
     auto t4 = TransformType::New();
@@ -298,10 +260,7 @@ itkCenteredRigid2DTransformTest(int, char *[])
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,false): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
     t5->Compose(t4, true);
@@ -311,10 +270,7 @@ itkCenteredRigid2DTransformTest(int, char *[])
     p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,true): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
     std::cout << "Testing Jacobian: ";
@@ -345,20 +301,15 @@ itkCenteredRigid2DTransformTest(int, char *[])
         const double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
         const double computedDerivative = jacobian[j][k];
         approxJacobian[j][k] = approxDerivative;
-        if (itk::Math::Absolute(approxDerivative - computedDerivative) > 1e-4)
-        {
-          std::cerr << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl;
-          std::cerr << "Result should be: " << approxDerivative << std::endl;
-          std::cerr << "Reported result is: " << computedDerivative << std::endl;
-          std::cerr << " [ FAILED ] " << std::endl;
-          return EXIT_FAILURE;
-        } // if
+        EXPECT_LE(itk::Math::Absolute(approxDerivative - computedDerivative), 1e-4)
+          << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl
+          << "Result should be: " << approxDerivative << std::endl
+          << "Reported result is: " << computedDerivative << std::endl
+          << " [ FAILED ] ";
       } // for j
 
     } // for k
 
     std::cout << " [ PASSED ] " << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
