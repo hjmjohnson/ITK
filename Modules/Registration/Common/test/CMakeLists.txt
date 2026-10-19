@@ -3,7 +3,6 @@ set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
   itkEuclideanDistancePointMetricTest.cxx
-  itkImageRegistrationMethodTest.cxx
   itkImageRegistrationMethodTest_1.cxx
   itkImageRegistrationMethodTest_10.cxx
   itkImageRegistrationMethodTest_11.cxx
@@ -153,12 +152,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkMeanSquaresHistogramImageToImageMetricTest
-)
-itk_add_test(
-  NAME itkImageRegistrationMethodTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkImageRegistrationMethodTest
 )
 itk_add_test(
   NAME itkNormalizedCorrelationPointSetToImageMetricTest
@@ -427,6 +420,7 @@ set(
   itkGaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorGTest.cxx
   itkGradientDifferenceImageToImageMetricGTest.cxx
   itkHistogramImageToImageMetricGTest.cxx
+  itkImageRegistrationMethodGTest.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
