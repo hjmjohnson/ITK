@@ -7,7 +7,6 @@ set(
   itkGradientMagnitudeRecursiveGaussianFilterTest.cxx
   itkGradientRecursiveGaussianFilterSpeedTest.cxx
   itkGradientRecursiveGaussianFilterTest.cxx
-  itkGradientRecursiveGaussianFilterTest2.cxx
   itkGradientRecursiveGaussianFilterTest3.cxx
   itkGradientRecursiveGaussianFilterTest4.cxx
   itkVectorGradientMagnitudeImageFilterTest1.cxx
@@ -144,12 +143,6 @@ itk_add_test(
     0
     1
 )
-itk_add_test(
-  NAME itkGradientRecursiveGaussianFilterTest2
-  COMMAND
-    ITKImageGradientTestDriver
-    itkGradientRecursiveGaussianFilterTest2
-)
 
 itk_add_test(
   NAME itkGradientRecursiveGaussianFilterTest3
@@ -206,5 +199,6 @@ set(
   ITKImageGradientGTests
   itkDifferenceOfGaussiansGradientGTest.cxx
   itkGradientImageFilterGTest.cxx
+  itkGradientRecursiveGaussianFilterGTest2.cxx
 )
 creategoogletestdriver(ITKImageGradient "${ITKImageGradient-Test_LIBRARIES}" "${ITKImageGradientGTests}")

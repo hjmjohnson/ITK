@@ -21,10 +21,10 @@
 
 #include "itkGradientRecursiveGaussianImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
 
-int
-itkGradientRecursiveGaussianFilterTest2(int, char *[])
+TEST(GradientRecursiveGaussianImageFilter, ConvertedLegacyTest2)
 {
 
   // Define the dimension of the images
@@ -109,5 +109,4 @@ itkGradientRecursiveGaussianFilterTest2(int, char *[])
   const myOutputIteratorType itg(outputImage, outputImage->GetRequestedRegion());
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
