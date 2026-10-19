@@ -21,7 +21,10 @@
 #include "itkAffineTransform.h"
 #include "itkDisplacementFieldTransform.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
+namespace
+{
 /**
  *  \class RegistrationParameterScalesFromPhysicalShiftTestMetric for test.
  *  Create a simple metric to use for testing here.
@@ -107,11 +110,11 @@ private:
   RegistrationParameterScalesFromPhysicalShiftTestMetric() = default;
   ~RegistrationParameterScalesFromPhysicalShiftTestMetric() override = default;
 };
+} // namespace
 
 /**
  */
-int
-itkRegistrationParameterScalesFromPhysicalShiftTest(int, char *[])
+TEST(RegistrationParameterScalesFromPhysicalShift, ConvertedLegacyTest)
 {
 
   // Image begins
@@ -377,13 +380,11 @@ itkRegistrationParameterScalesFromPhysicalShiftTest(int, char *[])
   // Check the correctness of all cases above
   //
   std::cout << std::endl;
-  if (affinePass && nonUniformForAffine && stepScalePass && displacementPass && localStepScalePass && translationPass &&
-      uniformForTranslation)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(affinePass);
+  EXPECT_TRUE(nonUniformForAffine);
+  EXPECT_TRUE(stepScalePass);
+  EXPECT_TRUE(displacementPass);
+  EXPECT_TRUE(localStepScalePass);
+  EXPECT_TRUE(translationPass);
+  EXPECT_TRUE(uniformForTranslation);
 }
