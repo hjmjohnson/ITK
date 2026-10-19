@@ -30,7 +30,6 @@ set(
   itkSliceBySliceImageFilterTest.cxx
   itkTileImageFilterTest.cxx
   itkWarpImageFilterTest.cxx
-  itkWarpImageFilterTest2.cxx
   itkWarpVectorImageFilterTest.cxx
   itkWrapPadImageTest.cxx
   itkZeroFluxNeumannPadImageFilterTest.cxx
@@ -276,12 +275,6 @@ set_tests_properties(
       ${ITK_TEST_OUTPUT_DIR}/itkBSplineResampleImageFilterTest.txt
 )
 
-itk_add_test(
-  NAME itkWarpImageFilterTest2
-  COMMAND
-    ITKImageGridTestDriver
-    itkWarpImageFilterTest2
-)
 itk_add_test(
   NAME itkBSplineDownsampleImageFilterTest
   COMMAND
@@ -621,6 +614,7 @@ set(
   itkShrinkImageGTest.cxx
   itkSliceImageFilterTest.cxx
   itkTileImageFilterGTest.cxx
+  itkWarpImageFilterGTest2.cxx
   itkWarpImageFilterGTest.cxx
 )
 
