@@ -19,9 +19,9 @@
 #include "itkMeanSampleFilter.h"
 #include "itkHistogram.h"
 #include "itkMahalanobisDistanceMetric.h"
+#include "itkGTest.h"
 
-int
-itkMeanSampleFilterTest3(int, char *[])
+TEST(MeanSampleFilter, ConvertedLegacyTest3)
 {
   std::cout << "CovarianceSampleFilter test \n \n";
 
@@ -124,15 +124,6 @@ itkMeanSampleFilterTest3(int, char *[])
 
   for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
   {
-    if (itk::Math::Absolute(meanOutput[i] - mean[i]) > epsilon)
-    {
-      std::cerr << "The computed mean value is incorrect" << std::endl;
-      std::cerr << "computed mean = " << meanOutput << std::endl;
-      std::cerr << "expected mean = " << mean << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(meanOutput[i], mean[i], epsilon) << "The computed mean value is incorrect";
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
