@@ -18,15 +18,15 @@
 
 #include "itkHilbertPath.h"
 #include "itkNumericTraits.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 template <typename PathType>
-[[nodiscard]] int
+void
 HilbertPathTestHelper(unsigned int maxHilbertPathOder)
 {
-  int testStatus = EXIT_SUCCESS;
-
   using IndexType = typename PathType::IndexType;
 
   auto path = PathType::New();
@@ -34,12 +34,12 @@ HilbertPathTestHelper(unsigned int maxHilbertPathOder)
   for (unsigned int order = 1; order < maxHilbertPathOder; ++order)
   {
     path->SetHilbertOrder(order);
-    ITK_TEST_SET_GET_VALUE(order, path->GetHilbertOrder());
+    EXPECT_EQ(order, path->GetHilbertOrder());
 
     path->Initialize();
 
     typename PathType::InputType input = 0;
-    ITK_TRY_EXPECT_EXCEPTION(path->IncrementInput(input));
+    EXPECT_THROW(path->IncrementInput(input), itk::ExceptionObject);
 
     const typename PathType::InputType endOfInput = path->EndOfInput();
     std::cout << "End of input: " << typename itk::NumericTraits<typename PathType::InputType>::PrintType(endOfInput)
@@ -49,13 +49,8 @@ HilbertPathTestHelper(unsigned int maxHilbertPathOder)
     {
       const IndexType index = path->Evaluate(d);
 
-      if (d != path->EvaluateInverse(index))
-      {
-        std::cerr << "Test failed!" << std::endl;
-        std::cerr << "Incorrect match-up for path index (" << d << ") and multi-dimensional index (" << index << ')'
-                  << std::endl;
-        testStatus = EXIT_FAILURE;
-      }
+      EXPECT_EQ(d, path->EvaluateInverse(index))
+        << "Incorrect match-up for path index (" << d << ") and multi-dimensional index (" << index << ')';
     }
 
     // path->EvaluateToIndex( 6 )
@@ -64,26 +59,17 @@ HilbertPathTestHelper(unsigned int maxHilbertPathOder)
     {
       const IndexType index = path->TransformPathIndexToMultiDimensionalIndex(d);
 
-      if (d != path->EvaluateInverse(index))
-      {
-        std::cerr << "Test failed!" << std::endl;
-        std::cerr << "Incorrect match-up for path index (" << d << ") and multi-dimensional index (" << index << ')'
-                  << std::endl;
-        testStatus = EXIT_FAILURE;
-      }
+      EXPECT_EQ(d, path->EvaluateInverse(index))
+        << "Incorrect match-up for path index (" << d << ") and multi-dimensional index (" << index << ')';
     }
   }
-
-  return testStatus;
 }
+} // namespace
 
 
-int
-itkHilbertPathTest(int, char *[])
+TEST(HilbertPath, ConvertedLegacyTest)
 {
   using IndexValueType = unsigned int;
-
-  int testStatus = EXIT_SUCCESS;
 
   // Set a maximum Hilbert path order
   constexpr unsigned int maxHilbertPathOder{ 5 };
@@ -95,13 +81,9 @@ itkHilbertPathTest(int, char *[])
   // Exercise basic object methods
   // Done outside the helper function in the test because GCC is limited
   // when calling overloaded base class functions.
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path2D, HilbertPath, Path);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path2D, HilbertPath, Path);
 
-  testStatus = HilbertPathTestHelper<HilbertPathType2D>(maxHilbertPathOder);
-  if (testStatus != EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  HilbertPathTestHelper<HilbertPathType2D>(maxHilbertPathOder);
 
   // Test dimension = 3
   using HilbertPathType3D = itk::HilbertPath<IndexValueType, 3>;
@@ -110,13 +92,9 @@ itkHilbertPathTest(int, char *[])
   // Exercise basic object methods
   // Done outside the helper function in the test because GCC is limited
   // when calling overloaded base class functions.
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path3D, HilbertPath, Path);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path3D, HilbertPath, Path);
 
-  testStatus = HilbertPathTestHelper<HilbertPathType3D>(maxHilbertPathOder);
-  if (testStatus != EXIT_SUCCESS)
-  {
-    return EXIT_FAILURE;
-  }
+  HilbertPathTestHelper<HilbertPathType3D>(maxHilbertPathOder);
 
   // Test dimension = 4
   using HilbertPathType4D = itk::HilbertPath<IndexValueType, 4>;
@@ -125,12 +103,7 @@ itkHilbertPathTest(int, char *[])
   // Exercise basic object methods
   // Done outside the helper function in the test because GCC is limited
   // when calling overloaded base class functions.
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path4D, HilbertPath, Path);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path4D, HilbertPath, Path);
 
-  testStatus = HilbertPathTestHelper<HilbertPathType4D>(maxHilbertPathOder);
-
-
-  std::cerr << "Test finished " << std::endl;
-
-  return testStatus;
+  HilbertPathTestHelper<HilbertPathType4D>(maxHilbertPathOder);
 }
