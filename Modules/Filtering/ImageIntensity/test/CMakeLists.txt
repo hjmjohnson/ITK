@@ -4,7 +4,6 @@ set(
   itkAddImageFilterTest2.cxx
   itkAndImageFilterTest.cxx
   itkBoundedReciprocalImageFilterTest.cxx
-  itkComplexToRealFilterAndAdaptorTest.cxx
   itkConstrainedValueAdditionImageFilterTest.cxx
   itkCosImageFilterAndAdaptorTest.cxx
   itkDiscreteGaussianDerivativeImageFunctionTest.cxx
@@ -399,12 +398,6 @@ itk_add_test(
     itkRGBToVectorAdaptImageFilterTest
 )
 itk_add_test(
-  NAME itkComplexToRealFilterAndAdaptorTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkComplexToRealFilterAndAdaptorTest
-)
-itk_add_test(
   NAME itkNaryMaximumImageFilterTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -732,6 +725,7 @@ set(
   itkComplexToImaginaryFilterAndAdaptorGTest.cxx
   itkComplexToModulusFilterAndAdaptorGTest.cxx
   itkComplexToPhaseFilterAndAdaptorGTest.cxx
+  itkComplexToRealFilterAndAdaptorGTest.cxx
   itkEqualGTest.cxx
   itkGreaterEqualGTest.cxx
   itkGreaterGTest.cxx
