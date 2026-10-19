@@ -34,9 +34,9 @@
 #include "itkImageMaskSpatialObject.h"
 #include "itkMath.h"
 #include "itkEuler3DTransform.h"
+#include "itkGTest.h"
 
-int
-itkImageMaskSpatialObjectTest2(int, char *[])
+TEST(ImageMaskSpatialObject2, ConvertedLegacyTest)
 {
   constexpr unsigned int VDimension{ 3 };
   int                    retval = EXIT_SUCCESS;
@@ -220,5 +220,5 @@ itkImageMaskSpatialObjectTest2(int, char *[])
 
 
   std::cout << "Test finished" << std::endl;
-  return retval;
+  EXPECT_EQ(retval, EXIT_SUCCESS);
 }
