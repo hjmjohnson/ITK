@@ -18,10 +18,9 @@
 
 #include "itkGaussianSpatialFunction.h"
 #include "itkSpatialFunctionImageEvaluatorFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkSpatialFunctionImageEvaluatorFilterTest(int, char *[])
+TEST(SpatialFunctionImageEvaluatorFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int dim{ 3 };
 
@@ -61,7 +60,7 @@ itkSpatialFunctionImageEvaluatorFilterTest(int, char *[])
   using TFilter = itk::SpatialFunctionImageEvaluatorFilter<FunctionType, ImageType, ImageType>;
   auto filter = TFilter::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, SpatialFunctionImageEvaluatorFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, SpatialFunctionImageEvaluatorFilter, ImageToImageFilter);
 
 
   filter->SetInput(sourceImage);
@@ -69,7 +68,4 @@ itkSpatialFunctionImageEvaluatorFilterTest(int, char *[])
   const ImageType::Pointer outputImage = filter->GetOutput();
 
   filter->Update();
-
-  std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
