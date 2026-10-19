@@ -21,9 +21,9 @@
 
 #include "itkQuadEdgeMesh.h"
 #include "itkAutomaticTopologyMeshSource.h"
+#include "itkGTest.h"
 
-int
-itkAutomaticTopologyQuadEdgeMeshSourceTest(int, char *[])
+TEST(AutomaticTopologyQuadEdgeMeshSource, ConvertedLegacyTest)
 {
 
   // Declare the type of the Mesh
@@ -189,16 +189,7 @@ itkAutomaticTopologyQuadEdgeMeshSourceTest(int, char *[])
                             meshSource->AddPoint(3, 1, 1),
                             meshSource->AddPoint(4, 1, 1));
 
-  try
-  {
-    meshSource->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Exception thrown during Update() " << std::endl;
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(meshSource->Update()) << "Exception thrown during Update() ";
 
   MeshType * mesh = meshSource->GetOutput();
 
@@ -282,21 +273,13 @@ itkAutomaticTopologyQuadEdgeMeshSourceTest(int, char *[])
   // Check that the right number of points has been added.
 
   auto numPoints = mesh->GetNumberOfPoints();
-  if (numPoints != 17)
-  {
-    std::cerr << "Mesh shows " << numPoints << " points, but 17 were added." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(numPoints, 17u) << "Mesh shows " << numPoints << " points, but 17 were added.";
 
   // Check that the right number of cells has been added.
 
   auto numCells = mesh->GetNumberOfCells();
   numCells += mesh->GetNumberOfEdges();
-  if (numCells != 53)
-  {
-    std::cerr << "Mesh shows " << numCells << " cells, but 53 were added." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(numCells, 53u) << "Mesh shows " << numCells << " cells, but 53 were added.";
 
   // Check that the output is not destroyed when calling Update()
   meshSource->Update();
@@ -304,11 +287,6 @@ itkAutomaticTopologyQuadEdgeMeshSourceTest(int, char *[])
   numPoints = meshSource->GetOutput()->GetNumberOfPoints();
   numCells = meshSource->GetOutput()->GetNumberOfCells();
   numCells += meshSource->GetOutput()->GetNumberOfEdges();
-  if (numPoints != 17 || numCells != 53)
-  {
-    std::cerr << "Mesh is being changed when invoking Update()" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(numPoints, 17u) << "Mesh is being changed when invoking Update()";
+  EXPECT_EQ(numCells, 53u) << "Mesh is being changed when invoking Update()";
 }
