@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageIntensityTests
-  itkAddImageFilterTest.cxx
   itkAddImageFilterTest2.cxx
   itkAndImageFilterTest.cxx
   itkAsinImageFilterAndAdaptorTest.cxx
@@ -311,12 +310,6 @@ itk_add_test(
   COMMAND
     ITKImageIntensityTestDriver
     itkMaskNegatedImageFilterTest
-)
-itk_add_test(
-  NAME itkAddImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkAddImageFilterTest
 )
 itk_add_test(
   NAME itkAddImageFilterTest2
@@ -784,6 +777,7 @@ set(
   itkAdaptImageFilterGTest2.cxx
   itkAddImageAdaptorGTest.cxx
   itkAddImageFilterFrameGTest.cxx
+  itkAddImageFilterGTest.cxx
   itkArithmeticOpsFunctorsTest.cxx
   itkBitwiseOpsFunctorsTest.cxx
   itkEqualGTest.cxx
