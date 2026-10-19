@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKQuadEdgeMeshFilteringTests
-  itkBinaryMask3DQuadEdgeMeshSourceTest.cxx
   itkBorderQuadEdgeMeshFilterTest.cxx
   itkBorderQuadEdgeMeshFilterTest2.cxx
   itkCleanQuadEdgeMeshFilterTest.cxx
@@ -202,12 +201,6 @@ itk_add_test(
     ${TEMP}/temp_QuadricDecimationTetrahedron.vtk
 )
 itk_add_test(
-  NAME itkBinaryMask3DQuadEdgeMeshSourceTest
-  COMMAND
-    ITKQuadEdgeMeshFilteringTestDriver
-    itkBinaryMask3DQuadEdgeMeshSourceTest
-)
-itk_add_test(
   NAME itkRegularSphereQuadEdgeMeshSourceTest
   COMMAND
     ITKQuadEdgeMeshFilteringTestDriver
@@ -293,6 +286,7 @@ endforeach()
 set(
   ITKQuadEdgeMeshFilteringGTests
   itkAutomaticTopologyQuadEdgeMeshSourceGTest.cxx
+  itkBinaryMask3DQuadEdgeMeshSourceGTest.cxx
 )
 creategoogletestdriver(
   ITKQuadEdgeMeshFiltering
