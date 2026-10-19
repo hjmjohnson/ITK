@@ -50,7 +50,6 @@ set(
   itkMultiThreadingEnvironmentTest.cxx
   itkMultiThreaderParallelizeArrayTest.cxx
   itkMultithreadingTest.cxx
-  itkMultiThreaderExceptionsTest.cxx
   itkPromoteType.cxx
   itkMetaDataDictionaryTest.cxx
   itkStdStreamLogOutputTest.cxx
@@ -1260,13 +1259,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkMultiThreaderExceptionsTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMultiThreaderExceptionsTest
-)
-
-itk_add_test(
   NAME itkXMLFileOutputWindowTestFilename
   COMMAND
     ITKCommon2TestDriver
@@ -1462,6 +1454,7 @@ set(
   itkMetaProgrammingLibraryGTest.cxx
   itkMinimumMaximumImageCalculatorGTest.cxx
   itkModifiedTimeGTest.cxx
+  itkMultiThreaderExceptionsGTest.cxx
   itkNeighborhoodAllocatorGTest.cxx
   itkNeighborhoodIteratorsGTest.cxx
   itkNumberToStringGTest.cxx
