@@ -18,10 +18,9 @@
 
 
 #include "itkTransformFileReader.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkTransformFileReaderTest(int, char *[])
+TEST(TransformFileReader, ConvertedLegacyTest)
 {
   using TransformReaderType = itk::TransformFileReader;
 
@@ -31,28 +30,11 @@ itkTransformFileReaderTest(int, char *[])
             << dynamic_cast<TransformReaderType::Superclass *>(transformReader.GetPointer())->GetNameOfClass()
             << std::endl;
 
-  try
-  {
-    // trigger empty read exception
-    transformReader->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Expected exception (no filename)" << std::endl << excp << std::endl;
-  }
+  // trigger empty read exception
+  EXPECT_THROW(transformReader->Update(), itk::ExceptionObject);
   transformReader->SetFileName("transform.garbage");
-  try
-  {
-    // trigger exception for transformIO not found
-    transformReader->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Expected exception (no transformIO that can read garbage and no transformIO should be registered)"
-              << excp << std::endl;
-  }
+  // trigger exception for transformIO not found
+  EXPECT_THROW(transformReader->Update(), itk::ExceptionObject);
 
   std::cout << "Test PASSED!" << std::endl;
-
-  return EXIT_SUCCESS;
 }
