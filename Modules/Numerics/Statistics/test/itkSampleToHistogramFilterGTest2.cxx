@@ -19,9 +19,9 @@
 #include "itkListSample.h"
 #include "itkHistogram.h"
 #include "itkSampleToHistogramFilter.h"
+#include "itkGTest.h"
 
-int
-itkSampleToHistogramFilterTest2(int, char *[])
+TEST(SampleToHistogramFilter, ConvertedLegacyTest2)
 {
 
   constexpr unsigned int numberOfComponents{ 3 };
@@ -82,49 +82,22 @@ itkSampleToHistogramFilterTest2(int, char *[])
 
   // Test exception when calling Update() without having
   // defined the size of the histogram in the filter.
-  try
-  {
-    filter->Update();
-    std::cerr << "Failure to throw expected exception due to lack";
-    std::cerr << " of calling SetHistogramSize() in the filter ";
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject &)
-  {
-    std::cout << "Expected exception received" << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject)
+    << "Failure to throw expected exception due to lack" << " of calling SetHistogramSize() in the filter ";
 
 
   const HistogramType * histogram = filter->GetOutput();
 
-  if (histogram->Size() != 0)
-  {
-    std::cerr << "Histogram Size should have been zero" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(histogram->Size(), 0u) << "Histogram Size should have been zero";
 
 
   filter->SetHistogramSize(histogramSize);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   const unsigned int expectedHistogramSize1 = histogramSize[0] * histogramSize[1] * histogramSize[2];
 
-  if (histogram->Size() != expectedHistogramSize1)
-  {
-    std::cerr << "Histogram Size error" << std::endl;
-    std::cerr << "We expected " << expectedHistogramSize1 << std::endl;
-    std::cerr << "We received " << histogram->Size() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(histogram->Size(), expectedHistogramSize1) << "Histogram Size error";
 
 
   HistogramType::ConstIterator histogramItr = histogram->Begin();
@@ -133,14 +106,8 @@ itkSampleToHistogramFilterTest2(int, char *[])
   constexpr unsigned int expectedFrequency1{ 1 };
   while (histogramItr != histogramEnd)
   {
-    if (histogramItr.GetFrequency() != expectedFrequency1)
-    {
-      std::cerr << "Histogram bin error for measure " << std::endl;
-      std::cerr << histogramItr.GetMeasurementVector() << std::endl;
-      std::cerr << "Expected frequency = " << expectedFrequency1 << std::endl;
-      std::cerr << "Computed frequency = " << histogramItr.GetFrequency() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(histogramItr.GetFrequency(), expectedFrequency1)
+      << "Histogram bin error for measure " << histogramItr.GetMeasurementVector();
     ++histogramItr;
   }
 
@@ -154,25 +121,11 @@ itkSampleToHistogramFilterTest2(int, char *[])
 
   filter->SetHistogramSize(histogramSize);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   const unsigned int expectedHistogramSize2 = histogramSize[0] * histogramSize[1] * histogramSize[2];
 
-  if (histogram->Size() != expectedHistogramSize2)
-  {
-    std::cerr << "Histogram Size error" << std::endl;
-    std::cerr << "We expected " << expectedHistogramSize2 << std::endl;
-    std::cerr << "We received " << histogram->Size() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(histogram->Size(), expectedHistogramSize2) << "Histogram Size error";
 
 
   histogramItr = histogram->Begin();
@@ -181,14 +134,8 @@ itkSampleToHistogramFilterTest2(int, char *[])
   constexpr unsigned int expectedFrequency2{ 5 };
   while (histogramItr != histogramEnd)
   {
-    if (histogramItr.GetFrequency() != expectedFrequency2)
-    {
-      std::cerr << "Histogram bin error for measure " << std::endl;
-      std::cerr << histogramItr.GetMeasurementVector() << std::endl;
-      std::cerr << "Expected frequency = " << expectedFrequency2 << std::endl;
-      std::cerr << "Computed frequency = " << histogramItr.GetFrequency() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(histogramItr.GetFrequency(), expectedFrequency2)
+      << "Histogram bin error for measure " << histogramItr.GetMeasurementVector();
     ++histogramItr;
   }
 
@@ -202,25 +149,11 @@ itkSampleToHistogramFilterTest2(int, char *[])
 
   filter->SetHistogramSize(histogramSize);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   const unsigned int expectedHistogramSize3 = histogramSize[0] * histogramSize[1] * histogramSize[2];
 
-  if (histogram->Size() != expectedHistogramSize3)
-  {
-    std::cerr << "Histogram Size error" << std::endl;
-    std::cerr << "We expected " << expectedHistogramSize3 << std::endl;
-    std::cerr << "We received " << histogram->Size() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(histogram->Size(), expectedHistogramSize3) << "Histogram Size error";
 
 
   histogramItr = histogram->Begin();
@@ -229,14 +162,8 @@ itkSampleToHistogramFilterTest2(int, char *[])
   constexpr unsigned int expectedFrequency3{ 15 };
   while (histogramItr != histogramEnd)
   {
-    if (histogramItr.GetFrequency() != expectedFrequency3)
-    {
-      std::cerr << "Histogram bin error for measure " << std::endl;
-      std::cerr << histogramItr.GetMeasurementVector() << std::endl;
-      std::cerr << "Expected frequency = " << expectedFrequency3 << std::endl;
-      std::cerr << "Computed frequency = " << histogramItr.GetFrequency() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(histogramItr.GetFrequency(), expectedFrequency3)
+      << "Histogram bin error for measure " << histogramItr.GetMeasurementVector();
     ++histogramItr;
   }
 
@@ -250,25 +177,11 @@ itkSampleToHistogramFilterTest2(int, char *[])
 
   filter->SetHistogramSize(histogramSize);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   const unsigned int expectedHistogramSize4 = histogramSize[0] * histogramSize[1] * histogramSize[2];
 
-  if (histogram->Size() != expectedHistogramSize4)
-  {
-    std::cerr << "Histogram Size error" << std::endl;
-    std::cerr << "We expected " << expectedHistogramSize4 << std::endl;
-    std::cerr << "We received " << histogram->Size() << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(histogram->Size(), expectedHistogramSize4) << "Histogram Size error";
 
 
   histogramItr = histogram->Begin();
@@ -277,17 +190,8 @@ itkSampleToHistogramFilterTest2(int, char *[])
   constexpr unsigned int expectedFrequency4{ 105 };
   while (histogramItr != histogramEnd)
   {
-    if (histogramItr.GetFrequency() != expectedFrequency4)
-    {
-      std::cerr << "Histogram bin error for measure " << std::endl;
-      std::cerr << histogramItr.GetMeasurementVector() << std::endl;
-      std::cerr << "Expected frequency = " << expectedFrequency4 << std::endl;
-      std::cerr << "Computed frequency = " << histogramItr.GetFrequency() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(histogramItr.GetFrequency(), expectedFrequency4)
+      << "Histogram bin error for measure " << histogramItr.GetMeasurementVector();
     ++histogramItr;
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
