@@ -22,10 +22,9 @@
 #include "itkMath.h"
 #include "itkNumericTraits.h"
 #include "itkRandomImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkIntensityWindowingImageFilterTest(int, char *[])
+TEST(IntensityWindowingImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using PixelType = float;
@@ -40,7 +39,7 @@ itkIntensityWindowingImageFilterTest(int, char *[])
   using FilterType = itk::IntensityWindowingImageFilter<TestInputImage, TestOutputImage>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, IntensityWindowingImageFilter, UnaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, IntensityWindowingImageFilter, UnaryFunctorImageFilter);
 
   // Generate a real image
   using SourceType = itk::RandomImageSource<TestInputImage>;
@@ -65,16 +64,16 @@ itkIntensityWindowingImageFilterTest(int, char *[])
   constexpr float windowMaximum{ 50.0f };
 
   filter->SetOutputMinimum(desiredMinimum);
-  ITK_TEST_SET_GET_VALUE(desiredMinimum, filter->GetOutputMinimum());
+  EXPECT_EQ(desiredMinimum, filter->GetOutputMinimum());
 
   filter->SetOutputMaximum(desiredMaximum);
-  ITK_TEST_SET_GET_VALUE(desiredMaximum, filter->GetOutputMaximum());
+  EXPECT_EQ(desiredMaximum, filter->GetOutputMaximum());
 
   filter->SetWindowMinimum(windowMinimum);
-  ITK_TEST_SET_GET_VALUE(windowMinimum, filter->GetWindowMinimum());
+  EXPECT_EQ(windowMinimum, filter->GetWindowMinimum());
 
   filter->SetWindowMaximum(windowMaximum);
-  ITK_TEST_SET_GET_VALUE(windowMaximum, filter->GetWindowMaximum());
+  EXPECT_EQ(windowMaximum, filter->GetWindowMaximum());
 
   std::cout << "Window minimum:maximum = " << windowMinimum << ':' << windowMaximum << ", equivalent window:level = "
             << static_cast<itk::NumericTraits<FilterType::InputPixelType>::PrintType>(filter->GetWindow()) << ':'
@@ -85,9 +84,9 @@ itkIntensityWindowingImageFilterTest(int, char *[])
             << ", shift = " << static_cast<itk::NumericTraits<FilterType::RealType>::PrintType>(filter->GetShift())
             << std::endl;
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->UpdateLargestPossibleRegion());
+  EXPECT_NO_THROW(filter->UpdateLargestPossibleRegion());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->SetFunctor(filter->GetFunctor()));
+  EXPECT_NO_THROW(filter->SetFunctor(filter->GetFunctor()));
 
   using CalculatorType = itk::MinimumMaximumImageCalculator<TestOutputImage>;
   auto calculator = CalculatorType::New();
@@ -101,23 +100,9 @@ itkIntensityWindowingImageFilterTest(int, char *[])
   const double obtainedMinimum = calculator->GetMinimum();
   const double obtainedMaximum = calculator->GetMaximum();
 
-  if (!itk::Math::FloatAlmostEqual(obtainedMinimum, desiredMinimum, 10, tolerance))
-  {
-    std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(tolerance))));
-    std::cerr << "Error in minimum" << std::endl;
-    std::cerr << "Expected minimum = " << desiredMinimum << std::endl;
-    std::cerr << "Obtained minimum = " << obtainedMinimum << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(obtainedMinimum, desiredMinimum, tolerance) << "Error in minimum";
 
-  if (!itk::Math::FloatAlmostEqual(obtainedMaximum, desiredMaximum, 10, tolerance))
-  {
-    std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(tolerance))));
-    std::cerr << "Error in maximum" << std::endl;
-    std::cerr << "Expected maximum = " << desiredMaximum << std::endl;
-    std::cerr << "Obtained maximum = " << obtainedMaximum << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(obtainedMaximum, desiredMaximum, tolerance) << "Error in maximum";
 
   constexpr float window{ 50.0f };
   constexpr float level{ 50.0f };
@@ -132,31 +117,14 @@ itkIntensityWindowingImageFilterTest(int, char *[])
             << static_cast<itk::NumericTraits<FilterType::InputPixelType>::PrintType>(filter->GetWindowMaximum())
             << std::endl;
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->UpdateLargestPossibleRegion());
+  EXPECT_NO_THROW(filter->UpdateLargestPossibleRegion());
 
   calculator->Compute();
 
   const double obtainedMinimum2 = calculator->GetMinimum();
   const double obtainedMaximum2 = calculator->GetMaximum();
 
-  if (!itk::Math::FloatAlmostEqual(obtainedMinimum2, desiredMinimum, 10, tolerance))
-  {
-    std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(tolerance))));
-    std::cerr << "Error in minimum" << std::endl;
-    std::cerr << "Expected minimum = " << desiredMinimum << std::endl;
-    std::cerr << "Obtained minimum = " << obtainedMinimum2 << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(obtainedMinimum2, desiredMinimum, tolerance) << "Error in minimum";
 
-  if (!itk::Math::FloatAlmostEqual(obtainedMaximum2, desiredMaximum, 10, tolerance))
-  {
-    std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(tolerance))));
-    std::cerr << "Error in maximum" << std::endl;
-    std::cerr << "Expected maximum = " << desiredMaximum << std::endl;
-    std::cerr << "Obtained maximum = " << obtainedMaximum2 << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(obtainedMaximum2, desiredMaximum, tolerance) << "Error in maximum";
 }
