@@ -17,9 +17,9 @@
  *=========================================================================*/
 
 #include "itkNarrowBandThresholdSegmentationLevelSetImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-namespace NBTS
+namespace
 {
 
 using ImageType = itk::Image<float, 3>;
@@ -66,18 +66,18 @@ evaluate_function(itk::Image<signed char, 3> * im, float (*f)(float, float, floa
   }
 }
 
-} // namespace NBTS
+} // namespace
 
 
-namespace itk
+namespace
 {
 
-class NBRMSCommand : public Command
+class NBRMSCommand : public itk::Command
 {
 public:
   /** Smart pointer declaration methods */
   using Self = NBRMSCommand;
-  using Superclass = Command;
+  using Superclass = itk::Command;
   using Pointer = itk::SmartPointer<Self>;
   using ConstPointer = itk::SmartPointer<const Self>;
   itkOverrideGetNameOfClassMacro(NBRMSCommand);
@@ -85,15 +85,15 @@ public:
 
   /** Standard Command virtual methods */
   void
-  Execute(Object * caller, const EventObject &) override
+  Execute(itk::Object * caller, const itk::EventObject &) override
   {
-    std::cout << (dynamic_cast<NarrowBandLevelSetImageFilter<::NBTS::SeedImageType, ::NBTS::ImageType> *>(caller))
+    std::cout << (dynamic_cast<itk::NarrowBandLevelSetImageFilter<SeedImageType, ImageType> *>(caller))
                    ->GetSegmentationFunction()
                    ->GetPropagationWeight()
               << std::endl;
   }
   void
-  Execute(const Object *, const EventObject &) override
+  Execute(const itk::Object *, const itk::EventObject &) override
   {
     std::cout << "ack" << std::endl;
   }
@@ -103,25 +103,24 @@ protected:
   ~NBRMSCommand() override = default;
 };
 
-} // namespace itk
+} // namespace
 
 
-int
-itkNarrowBandThresholdSegmentationLevelSetImageFilterTest(int, char *[])
+TEST(NarrowBandThresholdSegmentationLevelSetImageFilter, ConvertedLegacyTest)
 {
-  constexpr NBTS::ImageType::RegionType::SizeType sz{ 64, 64, 64 };
-  NBTS::ImageType::RegionType::IndexType          idx{};
-  NBTS::ImageType::RegionType                     reg = { idx, sz };
+  constexpr ImageType::RegionType::SizeType sz{ 64, 64, 64 };
+  ImageType::RegionType::IndexType          idx{};
+  ImageType::RegionType                     reg = { idx, sz };
 
-  const NBTS::ImageType::Pointer     inputImage = NBTS::ImageType::New();
-  const NBTS::SeedImageType::Pointer seedImage = NBTS::SeedImageType::New();
+  const ImageType::Pointer     inputImage = ImageType::New();
+  const SeedImageType::Pointer seedImage = SeedImageType::New();
   inputImage->SetRegions(reg);
   seedImage->SetRegions(reg);
   inputImage->Allocate();
   seedImage->Allocate();
 
   // Starting surface is a sphere in the center of the image.
-  NBTS::evaluate_function(seedImage, NBTS::sphere);
+  evaluate_function(seedImage, sphere);
 
   // Target surface is a diamond
 
@@ -145,43 +144,43 @@ itkNarrowBandThresholdSegmentationLevelSetImageFilterTest(int, char *[])
         inputImage->SetPixel(idx, val);
       }
 
-  using FilterType = itk::NarrowBandThresholdSegmentationLevelSetImageFilter<::NBTS::SeedImageType, ::NBTS::ImageType>;
+  using FilterType = itk::NarrowBandThresholdSegmentationLevelSetImageFilter<SeedImageType, ImageType>;
 
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     filter, NarrowBandThresholdSegmentationLevelSetImageFilter, NarrowBandLevelSetImageFilter);
 
 
   filter->SetInput(seedImage);
   filter->SetFeatureImage(inputImage);
-  ITK_TEST_SET_GET_VALUE(inputImage, filter->GetFeatureImage());
+  EXPECT_EQ(inputImage, filter->GetFeatureImage());
 
   filter->SetNumberOfWorkUnits(2);
 
   constexpr typename FilterType::ValueType upperThreshold = 63;
   filter->SetUpperThreshold(upperThreshold);
-  ITK_TEST_SET_GET_VALUE(upperThreshold, filter->GetUpperThreshold());
+  EXPECT_EQ(upperThreshold, filter->GetUpperThreshold());
 
   constexpr typename FilterType::ValueType lowerThredhold = 50;
   filter->SetLowerThreshold(lowerThredhold);
-  ITK_TEST_SET_GET_VALUE(lowerThredhold, filter->GetLowerThreshold());
+  EXPECT_EQ(lowerThredhold, filter->GetLowerThreshold());
 
   constexpr typename FilterType::ValueType edgeWeight = 0.0;
   filter->SetEdgeWeight(edgeWeight);
-  ITK_TEST_SET_GET_VALUE(edgeWeight, filter->GetEdgeWeight());
+  EXPECT_EQ(edgeWeight, filter->GetEdgeWeight());
 
   constexpr int smoothingIterations{ 5 };
   filter->SetSmoothingIterations(smoothingIterations);
-  ITK_TEST_SET_GET_VALUE(smoothingIterations, filter->GetSmoothingIterations());
+  EXPECT_EQ(smoothingIterations, filter->GetSmoothingIterations());
 
   constexpr typename FilterType::ValueType smoothingTimeStep = 0.1;
   filter->SetSmoothingTimeStep(smoothingTimeStep);
-  ITK_TEST_SET_GET_VALUE(smoothingTimeStep, filter->GetSmoothingTimeStep());
+  EXPECT_EQ(smoothingTimeStep, filter->GetSmoothingTimeStep());
 
   constexpr typename FilterType::ValueType smoothingConductance = 0.8;
   filter->SetSmoothingConductance(smoothingConductance);
-  ITK_TEST_SET_GET_VALUE(smoothingConductance, filter->GetSmoothingConductance());
+  EXPECT_EQ(smoothingConductance, filter->GetSmoothingConductance());
 
   filter->SetMaximumRMSError(0.04); // Does not have any effect
   filter->SetNumberOfIterations(10);
@@ -189,7 +188,7 @@ itkNarrowBandThresholdSegmentationLevelSetImageFilterTest(int, char *[])
                                          // function so that negative values result in
                                          // surface growth.
 
-  const itk::NBRMSCommand::Pointer c = itk::NBRMSCommand::New();
+  const NBRMSCommand::Pointer c = NBRMSCommand::New();
   filter->AddObserver(itk::IterationEvent(), c);
   filter->SetIsoSurfaceValue(0.5); //<--- IMPORTANT!  Default is zero.
 
@@ -245,7 +244,6 @@ itkNarrowBandThresholdSegmentationLevelSetImageFilterTest(int, char *[])
   catch (const itk::ExceptionObject & e)
   {
     std::cerr << e << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
-  return EXIT_SUCCESS;
 }
