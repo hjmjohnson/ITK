@@ -22,11 +22,11 @@
 #include "itkNormalVariateGenerator.h"
 #include "itkKdTreeBasedKmeansEstimator.h"
 #include "itkWeightedCentroidKdTreeGenerator.h"
+#include "itkGTest.h"
 
 
 // run sample classifier using std::vector type measurement vector
-int
-itkSampleClassifierFilterTest6(int, char *[])
+TEST(SampleClassifierFilter, ConvertedLegacyTest6)
 {
 
   constexpr unsigned int numberOfComponents{ 1 };
@@ -161,15 +161,7 @@ itkSampleClassifierFilterTest6(int, char *[])
   filter->SetDecisionRule(decisionRule);
   filter->SetMembershipFunctions(membershipFunctionsObject);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   // Check if the measurement vectors are correctly labelled.
   const FilterType::MembershipSampleType *        membershipSample = filter->GetOutput();
@@ -180,26 +172,15 @@ itkSampleClassifierFilterTest6(int, char *[])
   {
     if (sampleCounter < numberOfSampleEachClass)
     {
-      if (iter.GetClassLabel() != class1)
-      {
-        std::cerr << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass1=" << class1
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.GetClassLabel(), class1)
+        << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass1=" << class1;
     }
     else
     {
-      if (iter.GetClassLabel() != class2)
-      {
-        std::cerr << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass2=" << class2
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.GetClassLabel(), class2)
+        << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass2=" << class2;
     }
     ++iter;
     ++sampleCounter;
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
