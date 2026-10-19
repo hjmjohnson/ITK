@@ -6,7 +6,6 @@ set(
   itkBSplineSyNImageRegistrationTest.cxx
   itkBSplineSyNPointSetRegistrationTest.cxx
   itkExponentialImageRegistrationTest.cxx
-  itkImageRegistrationSamplingTest.cxx
   itkQuasiNewtonOptimizerv4RegistrationTest.cxx
   itkSimpleImageRegistrationTest.cxx
   itkSimpleImageRegistrationTest2.cxx
@@ -27,13 +26,6 @@ set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
 createtestdriver(ITKRegistrationMethodsv4 "${ITKRegistrationMethodsv4-Test_LIBRARIES}"
                  "${ITKRegistrationMethodsv4Tests}"
-)
-
-itk_add_test(
-  NAME itkImageRegistrationSamplingTest
-  COMMAND
-    ITKRegistrationMethodsv4TestDriver
-    itkImageRegistrationSamplingTest
 )
 
 set(simple_registration_pixels_tolerance 8)
@@ -540,11 +532,11 @@ set_tests_properties(
     COST
       30
 )
-
 set(
   ITKRegistrationMethodsv4GTests
   itkSyNImageRegistrationMethodGTest.cxx
   itkImageRegistrationMethodv4VirtualDomainGTest.cxx
   itkSyNImageRegistrationMethodReleaseDataGTest.cxx
+  itkImageRegistrationSamplingGTest.cxx
 )
 creategoogletestdriver(ITKRegistrationMethodsv4 "${ITKRegistrationMethodsv4-Test_LIBRARIES}" "${ITKRegistrationMethodsv4GTests}")
