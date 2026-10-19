@@ -27,7 +27,6 @@ set(
   itkResampleImageTest3.cxx
   itkResampleImageTest5.cxx
   itkResampleImageTest6.cxx
-  itkResampleImageTest7.cxx
   itkResampleImageTest8.cxx
   itkResamplePhasedArray3DSpecialCoordinatesImageTest.cxx
   itkShrinkImageStreamingTest.cxx
@@ -541,12 +540,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ResampleImageTest6.png
 )
 itk_add_test(
-  NAME itkResampleImageTest7
-  COMMAND
-    ITKImageGridTestDriver
-    itkResampleImageTest7
-)
-itk_add_test(
   NAME itkResampleImageTest8
   COMMAND
     ITKImageGridTestDriver
@@ -640,6 +633,7 @@ set(
   itkRegionOfInterestImageFilterGTest.cxx
   itkResampleImageGTest.cxx
   itkResampleImageGTest4.cxx
+  itkResampleImageGTest7.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
   itkShrinkImageGTest.cxx
