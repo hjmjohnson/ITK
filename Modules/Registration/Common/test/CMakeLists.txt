@@ -7,7 +7,6 @@ set(
   itkImageRegistrationMethodTest_16.cxx
   itkImageToSpatialObjectRegistrationTest.cxx
   itkKappaStatisticImageToImageMetricTest.cxx
-  itkLandmarkBasedTransformInitializerTest.cxx
   itkMatchCardinalityImageToImageMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricTest.cxx
   itkMeanReciprocalSquareDifferenceImageMetricTest.cxx
@@ -266,12 +265,6 @@ set_tests_properties(
       ${ITK_TEST_OUTPUT_DIR}/itkImageToSpatialObjectRegistrationTest.txt
 )
 itk_add_test(
-  NAME itkLandmarkBasedTransformInitializerTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkLandmarkBasedTransformInitializerTest
-)
-itk_add_test(
   NAME itkBlockMatchingImageFilterTest
   COMMAND
     ITKRegistrationCommonTestDriver
@@ -331,6 +324,7 @@ set(
   itkImageRegistrationMethodGTest_8.cxx
   itkImageRegistrationMethodGTest_9.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
+  itkLandmarkBasedTransformInitializerGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
