@@ -8,7 +8,6 @@ set(
   itkDerivativeImageFilterTest.cxx
   itkDiscreteGaussianDerivativeImageFilterTest.cxx
   itkHessian3DToVesselnessMeasureImageFilterTest.cxx
-  itkHessianRecursiveGaussianFilterScaleSpaceTest.cxx
   itkHessianRecursiveGaussianFilterTest.cxx
   itkHessianToObjectnessMeasureImageFilterTest.cxx
   itkHoughTransform2DCirclesImageTest.cxx
@@ -180,12 +179,6 @@ itk_add_test(
     0
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkHessianToObjectnessMeasureImageFilterTestOutput2.mha
-)
-itk_add_test(
-  NAME itkHessianRecursiveGaussianFilterScaleSpaceTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkHessianRecursiveGaussianFilterScaleSpaceTest
 )
 
 itk_add_test(
@@ -607,6 +600,7 @@ set(
   itkBilateralImageFilterGTest.cxx
   itkDiscreteGaussianDerivativeImageFilterScaleSpaceGTest.cxx
   itkGradientVectorFlowImageFilterGTest.cxx
+  itkHessianRecursiveGaussianFilterScaleSpaceGTest.cxx
   itkSobelEdgeDetectionImageFilterGTest.cxx
 )
 
