@@ -14,6 +14,7 @@ itk_module(
   TEST_DEPENDS
     ITKTestKernel
     ITKIOMesh
+    ITKGoogleTest
   DESCRIPTION "Module ingested from upstream."
   EXCLUDE_FROM_DEFAULT
   # Not used for header only libraries ENABLE_SHARED
