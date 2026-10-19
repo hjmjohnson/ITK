@@ -20,6 +20,7 @@
 #include "itkSampleClassifierFilter.h"
 #include "itkMaximumDecisionRule.h"
 #include "itkDistanceToCentroidMembershipFunction.h"
+#include "itkGTest.h"
 
 
 // ADD DistanceToCentroidMembershipFunction (with the added SetDistanceMetric() method
@@ -28,8 +29,7 @@
 // ADD MinimumDecisionRule
 // Run that classification.
 
-int
-itkSampleClassifierFilterTest1(int, char *[])
+TEST(SampleClassifierFilter, ConvertedLegacyTest1)
 {
 
   constexpr unsigned int numberOfComponents{ 3 };
@@ -48,18 +48,10 @@ itkSampleClassifierFilterTest1(int, char *[])
   sample->SetMeasurementVectorSize(numberOfComponents);
 
   // Test GetInput() before setting the input
-  if (filter->GetInput() != nullptr)
-  {
-    std::cerr << "GetInput() should have returned nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), nullptr) << "GetInput() should have returned nullptr";
 
   // Test GetOutput() before creating the output
-  if (filter->GetOutput() == nullptr)
-  {
-    std::cerr << "GetOutput() should have returned NON-nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(filter->GetOutput(), nullptr) << "GetOutput() should have returned NON-nullptr";
 
   // Add measurement vectors
   MeasurementVectorType v1(numberOfComponents);
@@ -83,19 +75,12 @@ itkSampleClassifierFilterTest1(int, char *[])
 
   filter->SetInput(sample);
 
-  if (filter->GetInput() != sample.GetPointer())
-  {
-    std::cerr << "GetInput() didn't matched SetInput()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), sample.GetPointer()) << "GetInput() didn't matched SetInput()";
 
   filter->SetNumberOfClasses(numberOfClasses);
 
-  if (filter->GetNumberOfClasses() != numberOfClasses)
-  {
-    std::cerr << "GetNumberOfClasses() didn't matched SetNumberOfClasses()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetNumberOfClasses(), numberOfClasses)
+    << "GetNumberOfClasses() didn't matched SetNumberOfClasses()";
 
   using ClassLabelVectorObjectType = FilterType::ClassLabelVectorObjectType;
   using ClassLabelVectorType = FilterType::ClassLabelVectorType;
@@ -115,18 +100,7 @@ itkSampleClassifierFilterTest1(int, char *[])
   // Run the filter without specifying any membership functions. An exception
   // should be thrown since there will be a mismatch between the number of classes
   // and membership functions
-  try
-  {
-    filter->Update();
-    std::cerr << "Attempting to run a classification with unequal"
-              << " number of membership functions and number of classes,"
-              << " should throw an exception" << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
 
   // Add three membership functions and rerun the filter
@@ -153,18 +127,7 @@ itkSampleClassifierFilterTest1(int, char *[])
   membershipFunction3->SetCentroid(centroid3);
   membershipFunctionsVector.emplace_back(membershipFunction3);
 
-  try
-  {
-    filter->Update();
-    std::cerr << "Attempting to run a classification with unequal"
-              << " number of class labels and number of classes,"
-              << " should throw an exception" << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
 
   // Add three class labels and rerun the filter
@@ -184,17 +147,7 @@ itkSampleClassifierFilterTest1(int, char *[])
 
   // Run the filter without setting a decision rule. An exception should be
   // thrown
-  try
-  {
-    filter->Update();
-    std::cerr << "Attempting to run a classification without setting decision rule, should throw an exception"
-              << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
   // Set a decision rule type
   using DecisionRuleType = itk::Statistics::MaximumDecisionRule;
@@ -202,30 +155,11 @@ itkSampleClassifierFilterTest1(int, char *[])
   auto decisionRule = DecisionRuleType::New();
   filter->SetDecisionRule(decisionRule);
 
-  if (filter->GetDecisionRule() != decisionRule)
-  {
-    std::cerr << "Get/Set Decision rule error! " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetDecisionRule(), decisionRule) << "Get/Set Decision rule error! ";
 
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NO_THROW(filter->Update());
 
   // Test GetOutput() after creating the output
-  if (filter->GetOutput() == nullptr)
-  {
-    std::cerr << "GetOutput() should have returned NON-nullptr" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NE(filter->GetOutput(), nullptr) << "GetOutput() should have returned NON-nullptr";
 }
