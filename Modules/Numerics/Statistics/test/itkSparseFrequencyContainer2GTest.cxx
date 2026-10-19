@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkSparseFrequencyContainer2.h"
+#include "itkGTest.h"
 
 
-int
-itkSparseFrequencyContainer2Test(int, char *[])
+TEST(SparseFrequencyContainer2, ConvertedLegacyTest)
 {
   std::cout << "SparseFrequencyContainer2 Test \n \n";
 
@@ -51,13 +51,7 @@ itkSparseFrequencyContainer2Test(int, char *[])
       // Test if the values can be read back
       const auto                  frequency = static_cast<AbsoluteFrequencyType>(bin * bin);
       const AbsoluteFrequencyType stored = container->GetFrequency(bin);
-      if (stored != frequency)
-      {
-        std::cout << "Failed !" << std::endl;
-        std::cout << "Stored Frequency in bin " << bin << " doesn't match value" << std::endl;
-        std::cout << "Value is = " << stored << " value should be " << frequency << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(stored, frequency) << "Stored Frequency in bin " << bin << " doesn't match value";
     }
     std::cout << " PASSED !" << std::endl;
 
@@ -67,12 +61,8 @@ itkSparseFrequencyContainer2Test(int, char *[])
   container->SetToZero();
   for (unsigned int bin = 0; bin < numberOfBins; ++bin)
   {
-    if (container->GetFrequency(bin) != AbsoluteFrequencyType{})
-    {
-      std::cout << "Failed !" << std::endl;
-      std::cout << "Stored Frequency in bin is not zero after SetToZero() method invocation" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(container->GetFrequency(bin), AbsoluteFrequencyType{})
+      << "Stored Frequency in bin is not zero after SetToZero() method invocation";
   }
 
   // Test the IncreaseFrequency() method
@@ -100,17 +90,8 @@ itkSparseFrequencyContainer2Test(int, char *[])
     {
       const auto                  frequency = static_cast<AbsoluteFrequencyType>(bin * bin + bin);
       const AbsoluteFrequencyType stored = container->GetFrequency(bin);
-      if (stored != frequency)
-      {
-        std::cout << "Failed !" << std::endl;
-        std::cout << "Stored Frequency in bin " << bin << " doesn't match value" << std::endl;
-        std::cout << "Value is = " << stored << " value should be " << frequency << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(stored, frequency) << "Stored Frequency in bin " << bin << " doesn't match value";
     }
     std::cout << " PASSED !" << std::endl;
   } // end of SetFrequency() / GetFrequency() test
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
