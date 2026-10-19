@@ -13,7 +13,6 @@ set(
   itkTriangleMeshToBinaryImageFilterTest2.cxx
   itkTriangleMeshToBinaryImageFilterTest3.cxx
   itkTriangleMeshToBinaryImageFilterTest4.cxx
-  itkTriangleMeshToSimplexMeshFilterTest.cxx
   itkVTKPolyDataReaderTest.cxx
   itkVTKPolyDataWriterTest01.cxx
   itkVTKPolyDataWriterTest02.cxx
@@ -123,12 +122,6 @@ itk_add_test(
     0.01
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkTriangleMeshToBinaryImageFilterTest4.mha
-)
-itk_add_test(
-  NAME itkTriangleMeshToSimplexMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkTriangleMeshToSimplexMeshFilterTest
 )
 itk_add_test(
   NAME itkVTKPolyDataReaderTest
@@ -404,5 +397,6 @@ set(
   itkTransformMeshFilterGTest.cxx
   itkTriangleCellGTest.cxx
   itkTriangleMeshToSimplexMeshFilter2GTest.cxx
+  itkTriangleMeshToSimplexMeshFilterGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
