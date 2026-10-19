@@ -16,9 +16,9 @@
  *
  *=========================================================================*/
 #include "itkQuadEdgeMeshEulerOperatorsTestHelper.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshCountingCellsTest(int, char *[])
+TEST(QuadEdgeMeshCountingCells, ConvertedLegacyTest)
 {
 
   using MeshType = itk::QuadEdgeMesh<double, 3>;
@@ -77,6 +77,4 @@ itkQuadEdgeMeshCountingCellsTest(int, char *[])
   std::cout << "ComputeNumberOfPoints: " << mesh->ComputeNumberOfPoints() << std::endl;
   std::cout << "GetNumberOfFaces: " << mesh->GetNumberOfFaces() << std::endl;
   std::cout << "GetNumberOfEdges: " << mesh->GetNumberOfEdges() << std::endl;
-
-  return EXIT_SUCCESS;
 }
