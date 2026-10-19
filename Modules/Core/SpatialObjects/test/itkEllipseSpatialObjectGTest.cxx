@@ -18,16 +18,15 @@
 
 #include "itkEllipseSpatialObject.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkEllipseSpatialObjectTest(int, char *[])
+TEST(EllipseSpatialObject, ConvertedLegacyTest)
 {
   using EllipseType = itk::EllipseSpatialObject<4>;
 
   auto myEllipse = EllipseType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(myEllipse, EllipseSpatialObject, SpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(myEllipse, EllipseSpatialObject, SpatialObject);
 
 
   EllipseType::ArrayType radii;
@@ -42,13 +41,13 @@ itkEllipseSpatialObjectTest(int, char *[])
   myEllipse->SetRadiusInObjectSpace(radii);
   myEllipse->Update();
 
-  ITK_TEST_SET_GET_VALUE(radii, myEllipse->GetRadiusInObjectSpace());
+  EXPECT_EQ(radii, myEllipse->GetRadiusInObjectSpace());
 
   const EllipseType::ArrayType objectSpaceRadius(3);
   myEllipse->SetRadiusInObjectSpace(objectSpaceRadius);
   myEllipse->Update();
 
-  ITK_TEST_SET_GET_VALUE(objectSpaceRadius, myEllipse->GetRadiusInObjectSpace());
+  EXPECT_EQ(objectSpaceRadius, myEllipse->GetRadiusInObjectSpace());
 
   // Point consistency
   std::cout << "Is Inside: ";
@@ -63,17 +62,9 @@ itkEllipseSpatialObjectTest(int, char *[])
   out[2] = 0;
   out[3] = 0;
 
-  if (!myEllipse->IsInsideInWorldSpace(in))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(myEllipse->IsInsideInWorldSpace(in)) << "[FAILED]";
 
-  if (myEllipse->IsInsideInWorldSpace(out))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(myEllipse->IsInsideInWorldSpace(out)) << "[FAILED]";
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -95,12 +86,10 @@ itkEllipseSpatialObjectTest(int, char *[])
 
   EllipseType::TransformType::OffsetType offset3 = myEllipse2->GetModifiableObjectToParentTransform()->GetOffset();
 
-  if ((itk::Math::NotExactlyEquals(offset3[0], 5)) || (itk::Math::NotExactlyEquals(offset3[1], 5)) ||
-      (itk::Math::NotExactlyEquals(offset3[2], 5)) || (itk::Math::NotExactlyEquals(offset3[3], 5)))
-  {
-    std::cout << "[FAILED]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(offset3[0], 5) << "[FAILED]";
+  EXPECT_EQ(offset3[1], 5) << "[FAILED]";
+  EXPECT_EQ(offset3[2], 5) << "[FAILED]";
+  EXPECT_EQ(offset3[3], 5) << "[FAILED]";
   std::cout << "[PASSED]" << std::endl;
 
   // NOTE: ORDER OF Update() and ComputeFamilyBoundingBox() is important.
@@ -113,17 +102,12 @@ itkEllipseSpatialObjectTest(int, char *[])
   for (unsigned int i = 0; i < 3; ++i)
   {
     const EllipseType::BoundingBoxType::BoundsArrayType bounds = boundingBox->GetBounds();
-    if (itk::Math::NotAlmostEquals(bounds[2 * i], 7) ||
-        itk::Math::NotAlmostEquals(bounds[2 * i + 1],
-                                   16) // this is 13 if Update() and ComputeFamilyBoundingBox are reversed order.
-    )
-    {
-      std::cout << "[FAILED]" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_DOUBLE_EQ(bounds[2 * i], 7) << "[FAILED]";
+    EXPECT_DOUBLE_EQ(bounds[2 * i + 1],
+                     16) // this is 13 if Update() and ComputeFamilyBoundingBox are reversed order.
+      << "[FAILED]";
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
