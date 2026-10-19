@@ -18,9 +18,9 @@
 
 #include "itkConnectedComponentImageFilter.h"
 #include "itkSimpleFilterWatcher.h"
+#include "itkGTest.h"
 
-int
-itkConnectedComponentImageFilterTooManyObjectsTest(int itkNotUsed(argc), char *[] itkNotUsed(argv))
+TEST(ConnectedComponentImageFilterTooManyObjects, ConvertedLegacyTest)
 {
 
   using PixelType = unsigned char;
@@ -49,17 +49,6 @@ itkConnectedComponentImageFilterTooManyObjectsTest(int itkNotUsed(argc), char *[
   filter->SetInput(img);
   const itk::SimpleFilterWatcher watcher(filter);
 
-  try
-  {
-    filter->Update();
-    // no exception - that's not normal
-  }
-  catch (const itk::ExceptionObject & excep)
-  {
-    std::cerr << "exception caught:" << std::endl;
-    std::cerr << excep << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  return EXIT_FAILURE;
+  // no exception - that's not normal
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 }
