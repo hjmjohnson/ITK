@@ -13,7 +13,6 @@ set(
   itkMatrixIndexSelectionImageFilterTest.cxx
   itkModulusImageFilterTest.cxx
   itkNormalizeImageFilterTest.cxx
-  itkNthElementPixelAccessorTest2.cxx
   itkOrImageFilterTest.cxx
   itkPolylineMask2DImageFilterTest.cxx
   itkPolylineMaskImageFilterTest.cxx
@@ -433,12 +432,6 @@ itk_add_test(
     itkVectorMagnitudeImageFilterTest
 )
 itk_add_test(
-  NAME itkNthElementPixelAccessorTest2
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkNthElementPixelAccessorTest2
-)
-itk_add_test(
   NAME itkMagnitudeAndPhaseToComplexImageFilterTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -607,6 +600,7 @@ set(
   itkNormalizeToConstantImageFilterGTest.cxx
   itkNotEqualGTest.cxx
   itkNotImageFilterGTest.cxx
+  itkNthElementPixelAccessorGTest2.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
 )
