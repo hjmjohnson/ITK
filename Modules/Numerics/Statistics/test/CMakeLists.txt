@@ -10,7 +10,6 @@ set(
   itkKdTreeTest1.cxx
   itkKdTreeTest2.cxx
   itkKdTreeTest3.cxx
-  itkKdTreeTestSamplePoints.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
   itkMahalanobisDistanceMetricTest.cxx
@@ -396,12 +395,6 @@ if(DOXYGEN_DOT_EXECUTABLE)
   )
 endif()
 
-itk_add_test(
-  NAME itkKdTreeTestSamplePoints
-  COMMAND
-    ITKStatisticsTestDriver
-    itkKdTreeTestSamplePoints
-)
 itk_add_test(
   NAME itkMeanSampleFilterTest
   COMMAND
@@ -845,6 +838,7 @@ set(
   itkJointDomainImageToListSampleAdaptorGTest.cxx
   itkKalmanLinearEstimatorGTest.cxx
   itkKdTreeGTest.cxx
+  itkKdTreeGTestSamplePoints.cxx
   itkMaximumDecisionRuleGTest.cxx
   itkMaximumRatioDecisionRuleGTest.cxx
   itkMembershipFunctionBaseGTest.cxx
