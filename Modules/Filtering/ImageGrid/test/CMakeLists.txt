@@ -17,7 +17,6 @@ set(
   itkCoxDeBoorBSplineKernelFunctionTest2.cxx
   itkCyclicReferences.cxx
   itkCyclicShiftImageFilterTest.cxx
-  itkExpandImageFilterTest.cxx
   itkExpandImageFilterTest2.cxx
   itkFlipImageFilterTest.cxx
   itkInterpolateImageFilterTest.cxx
@@ -279,12 +278,6 @@ itk_add_test(
     ITKImageGridTestDriver
     itkFlipImageFilterTest
     1
-)
-itk_add_test(
-  NAME itkExpandImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkExpandImageFilterTest
 )
 itk_add_test(
   NAME itkExpandImageFilterTest2
@@ -717,6 +710,7 @@ set(
   itkConstantPadImageGTest.cxx
   itkCropImageFilter3DGTest.cxx
   itkCropImageFilterGTest.cxx
+  itkExpandImageFilterGTest.cxx
   itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
