@@ -21,7 +21,7 @@
 #include "itkWarpImageFilter.h"
 #include "itkNearestNeighborInterpolateImageFunction.h"
 #include "itkCommand.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 namespace
@@ -39,7 +39,6 @@ public:
   }
   itk::ProcessObject::Pointer m_Process;
 };
-} // namespace
 
 // Template function to fill in an image with a circle.
 template <typename TImage>
@@ -90,9 +89,9 @@ CopyImageBuffer(TImage * input, TImage * output)
     outIt.Set(inIt.Get());
   }
 }
+} // namespace
 
-int
-itkSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
+TEST(SymmetricForcesDemonsRegistrationFilter, ConvertedLegacyTest)
 {
 
   using PixelType = unsigned char;
@@ -157,7 +156,7 @@ itkSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   using RegistrationType = itk::SymmetricForcesDemonsRegistrationFilter<ImageType, ImageType, FieldType>;
   auto registrator = RegistrationType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     registrator, SymmetricForcesDemonsRegistrationFilter, PDEDeformableRegistrationFilter);
 
   registrator->SetInitialDisplacementField(initField);
@@ -169,7 +168,7 @@ itkSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
 
   constexpr double intensityDifferenceThreshold{ 0.001 };
   registrator->SetIntensityDifferenceThreshold(intensityDifferenceThreshold);
-  ITK_TEST_SET_GET_VALUE(intensityDifferenceThreshold, registrator->GetIntensityDifferenceThreshold());
+  EXPECT_EQ(intensityDifferenceThreshold, registrator->GetIntensityDifferenceThreshold());
 
 
   std::cout << "Printing function" << std::endl;
@@ -239,14 +238,14 @@ itkSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
 
   std::cout << "Number of pixels different: " << numPixelsDifferent << std::endl;
 
-  ITK_TEST_EXPECT_TRUE(numPixelsDifferent <= 10);
+  EXPECT_LE(numPixelsDifferent, 10u);
 
   std::cout << "Test running registrator without initial deformation field." << std::endl;
 
   registrator->SetInput(nullptr);
   registrator->SetNumberOfIterations(2);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(registrator->Update());
+  EXPECT_NO_THROW(registrator->Update());
 
 
   std::cout << "Test exception handling." << std::endl;
@@ -256,7 +255,7 @@ itkSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   registrator->SetInput(initField);
   registrator->SetMovingImage(nullptr);
 
-  ITK_TRY_EXPECT_EXCEPTION(registrator->Update());
+  EXPECT_THROW(registrator->Update(), itk::ExceptionObject);
 
 
   registrator->SetMovingImage(moving);
@@ -265,14 +264,10 @@ itkSymmetricForcesDemonsRegistrationFilterTest(int, char *[])
   std::cout << "Test nullptr moving image interpolator. " << std::endl;
 
   fptr = dynamic_cast<FunctionType *>(registrator->GetDifferenceFunction().GetPointer());
-  ITK_TEST_EXPECT_TRUE(fptr);
+  ASSERT_NE(fptr, nullptr);
 
   fptr->SetMovingImageInterpolator(nullptr);
   registrator->SetInput(initField);
 
-  ITK_TRY_EXPECT_EXCEPTION(registrator->Update());
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_THROW(registrator->Update(), itk::ExceptionObject);
 }
