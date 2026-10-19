@@ -4,7 +4,6 @@ set(
   itkBSplineDecompositionImageFilterTest.cxx
   itkCentralDifferenceImageFunctionOnVectorSpeedTest.cxx
   itkCentralDifferenceImageFunctionSpeedTest.cxx
-  itkVectorMeanImageFunctionTest.cxx
   itkWindowedSincInterpolateImageFunctionTest.cxx
 )
 
@@ -17,12 +16,6 @@ itk_add_test(
     itkBSplineDecompositionImageFilterTest
     3
     -0.26794919243112281
-)
-itk_add_test(
-  NAME itkVectorMeanImageFunctionTest
-  COMMAND
-    ITKImageFunctionTestDriver
-    itkVectorMeanImageFunctionTest
 )
 
 itk_add_test(
@@ -60,5 +53,6 @@ set(
   itkVarianceImageFunctionGTest.cxx
   itkVectorInterpolateImageFunctionGTest.cxx
   itkVectorLinearInterpolateNearestNeighborExtrapolateImageFunctionGTest.cxx
+  itkVectorMeanImageFunctionGTest.cxx
 )
 creategoogletestdriver(ITKImageFunction "${ITKImageFunction-Test_LIBRARIES}" "${ITKImageFunctionGTests}")
