@@ -20,7 +20,7 @@
 
 #include "itkClampImageFilter.h"
 #include "itkRandomImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkUnaryFunctorImageFilter.h"
 #include "itkImageAlgorithm.h"
 #include <type_traits>
@@ -36,6 +36,8 @@
 #  include "itkMath.h"
 #endif
 
+namespace
+{
 template <typename T>
 std::string
 GetClampTypeName()
@@ -278,17 +280,17 @@ TestClampFromWithCustomBounds()
 
   return success;
 }
+} // namespace
 
 
-int
-itkClampImageFilterTest(int, char *[])
+TEST(ClampImageFilter, ConvertedLegacyTest)
 {
   std::cout << "itkClampImageFilterTest Start" << std::endl;
 
   using ImageType = itk::Image<unsigned char, 3>;
   using FilterType = itk::ClampImageFilter<ImageType, ImageType>;
   auto filter = FilterType::New();
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, ClampImageFilter, UnaryFunctorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, ClampImageFilter, UnaryFunctorImageFilter);
 
   const bool success = TestClampFrom<int8_t>() && TestClampFrom<unsigned char>() && TestClampFrom<short>() &&
                        TestClampFrom<unsigned short>() && TestClampFrom<int>() && TestClampFrom<unsigned int>() &&
@@ -304,13 +306,5 @@ itkClampImageFilterTest(int, char *[])
                        TestClampFromWithCustomBounds<double>();
 
   std::cout << std::endl;
-  if (!success)
-  {
-    std::cout << "An itkClampImageFilter test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "All itkClampImageFilter tests PASSED." << std::endl;
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(success) << "An itkClampImageFilter test FAILED.";
 }
