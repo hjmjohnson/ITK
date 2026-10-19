@@ -19,12 +19,11 @@
 #include "itkJoinImageFilter.h"
 #include "itkRGBAPixel.h"
 #include "itkImageRegionIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <algorithm> // For generate.
 #include <random>    // For mt19937.
 
-int
-itkJoinImageFilterTest(int, char *[])
+TEST(JoinImageFilter, ConvertedLegacyTest)
 {
   // Define the dimension of the images
   constexpr unsigned int myDimension{ 2 };
@@ -143,7 +142,7 @@ itkJoinImageFilterTest(int, char *[])
   // Setup a JoinImageFilter
   auto filter = myFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, JoinImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, JoinImageFilter, BinaryGeneratorImageFilter);
 
 
   filter->SetInput1(inputImageA);
@@ -251,8 +250,4 @@ itkJoinImageFilterTest(int, char *[])
     std::cout << it6.Get() << std::endl;
     ++it6;
   }
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
