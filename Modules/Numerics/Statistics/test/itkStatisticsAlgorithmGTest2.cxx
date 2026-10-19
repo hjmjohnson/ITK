@@ -22,7 +22,10 @@
 
 #include <vector>
 #include <algorithm>
+#include "itkGTest.h"
 
+namespace
+{
 using PixelType = itk::FixedArray<int, 3>;
 using ImageType = itk::Image<PixelType, 3>;
 
@@ -93,13 +96,12 @@ isSortedOrderCorrect(std::vector<int> & ref, itk::Statistics::Subsample<SampleTy
   return ret;
 }
 
+} // namespace
 
-int
-itkStatisticsAlgorithmTest2(int, char *[])
+
+TEST(StatisticsAlgorithm, ConvertedLegacyTest2)
 {
   std::cout << "Statistics Algorithm Test \n \n";
-  bool        pass = true;
-  std::string whereFail = "";
 
   // creates an image and allocate memory
   auto image = ImageType::New();
@@ -134,47 +136,21 @@ itkStatisticsAlgorithmTest2(int, char *[])
   resetData(image, refVector);
 
   itk::Statistics::Algorithm::InsertSort<SubsampleType>(subsample, testDimension, 0, subsample->Size());
-  if (!isSortedOrderCorrect(refVector, subsample))
-  {
-    pass = false;
-    whereFail = "InsertSort";
-  }
+  EXPECT_TRUE(isSortedOrderCorrect(refVector, subsample)) << "Test failed in InsertSort.";
 
   // HeapSort algorithm test
   resetData(image, refVector);
   itk::Statistics::Algorithm::HeapSort<SubsampleType>(subsample, testDimension, 0, subsample->Size());
-  if (!isSortedOrderCorrect(refVector, subsample))
-  {
-    pass = false;
-    whereFail = "HeapSort";
-  }
+  EXPECT_TRUE(isSortedOrderCorrect(refVector, subsample)) << "Test failed in HeapSort.";
 
   // IntrospectiveSort algorithm test
   resetData(image, refVector);
   itk::Statistics::Algorithm::IntrospectiveSort<SubsampleType>(subsample, testDimension, 0, subsample->Size(), 16);
-  if (!isSortedOrderCorrect(refVector, subsample))
-  {
-    pass = false;
-    whereFail = "IntrospectiveSort";
-  }
+  EXPECT_TRUE(isSortedOrderCorrect(refVector, subsample)) << "Test failed in IntrospectiveSort.";
 
   // QuickSelect algorithm test
   resetData(image, refVector);
   const SubsampleType::MeasurementType median = itk::Statistics::Algorithm::QuickSelect<SubsampleType>(
     subsample, testDimension, 0, subsample->Size(), subsample->Size() / 2);
-  if (refVector[subsample->Size() / 2] != median)
-  {
-    pass = false;
-    whereFail = "QuickSelect";
-  }
-
-  if (!pass)
-  {
-    std::cerr << "Test failed in " << whereFail << '.' << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(refVector[subsample->Size() / 2], median) << "Test failed in QuickSelect.";
 }
