@@ -19,10 +19,10 @@
 #include <iostream>
 #include "itkTimeProbe.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
 
-int
-itkTimeProbeTest(int, char *[])
+TEST(TimeProbe, ConvertedLegacyTest)
 {
   // Create an ITK time probe
   itk::TimeProbe localTimer;
@@ -59,26 +59,10 @@ itkTimeProbeTest(int, char *[])
   // invoke reset
   localTimer.Reset();
 
-  if (localTimer.GetNumberOfStarts() != 0)
-  {
-    std::cerr << "Reset() failure" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (localTimer.GetNumberOfStops() != itk::TimeProbe::CountType{})
-  {
-    std::cerr << "Reset() failure" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itk::Math::NotExactlyEquals(localTimer.GetTotal(), itk::TimeProbe::TimeStampType{}))
-  {
-    std::cerr << "Reset() failure" << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itk::Math::NotExactlyEquals(localTimer.GetMean(), itk::TimeProbe::TimeStampType{}))
-  {
-    std::cerr << "Reset() failure" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(localTimer.GetNumberOfStarts(), 0u) << "Reset() failure";
+  EXPECT_EQ(localTimer.GetNumberOfStops(), itk::TimeProbe::CountType{}) << "Reset() failure";
+  EXPECT_EQ(localTimer.GetTotal(), itk::TimeProbe::TimeStampType{}) << "Reset() failure";
+  EXPECT_EQ(localTimer.GetMean(), itk::TimeProbe::TimeStampType{}) << "Reset() failure";
 
   /** Invoke GetRealTimeClock. */
   const itk::RealTimeStamp timeStamp = localTimer.GetRealTimeClock()->GetRealTimeStamp();
@@ -92,8 +76,4 @@ itkTimeProbeTest(int, char *[])
   // Exercise the Print method
   const itk::Indent indent{};
   localTimer.Print(std::cout, indent);
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
