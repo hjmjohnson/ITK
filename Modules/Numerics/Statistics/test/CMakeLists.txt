@@ -694,6 +694,7 @@ set(
   itkSampleGTest3.cxx
   itkSampleGTest4.cxx
   itkSampleToHistogramFilterExceptionsGTest.cxx
+  itkSampleToHistogramFilterGTest.cxx
   itkStandardDeviationPerComponentSampleFilterGTest.cxx
   itkStatisticsTypesGTest.cxx
   itkSubsampleGTest3.cxx
