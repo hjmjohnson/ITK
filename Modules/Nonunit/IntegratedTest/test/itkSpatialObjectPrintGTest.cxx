@@ -33,9 +33,9 @@
 #include "itkSurfaceSpatialObject.h"
 #include "itkTubeSpatialObject.h"
 #include "itkTubeSpatialObjectPoint.h"
+#include "itkGTest.h"
 
-int
-itkSpatialObjectPrintTest(int, char *[])
+TEST(SpatialObjectPrint, ConvertedLegacyTest)
 {
   const itk::ArrowSpatialObject<3>::Pointer ArrowSpatialObjectObj = itk::ArrowSpatialObject<3>::New();
   std::cout << "----------ArrowSpatialObject " << ArrowSpatialObjectObj;
@@ -109,6 +109,4 @@ itkSpatialObjectPrintTest(int, char *[])
   const itk::TubeSpatialObjectPoint<3> TubeSpatialObjectPointObj;
   std::cout << "----------TubeSpatialObjectPoint ";
   TubeSpatialObjectPointObj.Print(std::cout);
-
-  return 0;
 }
