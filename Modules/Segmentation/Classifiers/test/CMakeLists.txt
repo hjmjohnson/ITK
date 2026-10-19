@@ -3,7 +3,6 @@ set(
   ITKClassifiersTests
   itkBayesianClassifierImageFilterTest.cxx
   itkImageClassifierFilterTest.cxx
-  itkKmeansModelEstimatorTest.cxx
   itkSampleClassifierFilterTest1.cxx
   itkSampleClassifierFilterTest2.cxx
   itkSampleClassifierFilterTest3.cxx
@@ -50,12 +49,6 @@ itk_add_test(
     1
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkBayesianClassifierImageFilterTestLabelMapPriors.png
-)
-itk_add_test(
-  NAME itkKmeansModelEstimatorTest
-  COMMAND
-    ITKClassifiersTestDriver
-    itkKmeansModelEstimatorTest
 )
 itk_add_test(
   NAME itkImageClassifierFilterTest
@@ -154,6 +147,10 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/KmeansTest_T1KmeansPrelimSegmentation.nii.gz
 )
 
-set(ITKClassifiersGTests itkScalarImageKmeansImageFilterGTest.cxx)
+set(
+  ITKClassifiersGTests
+  itkKmeansModelEstimatorGTest.cxx
+  itkScalarImageKmeansImageFilterGTest.cxx
+)
 
 creategoogletestdriver(ITKClassifiers "${ITKClassifiers-Test_LIBRARIES}" "${ITKClassifiersGTests}")
