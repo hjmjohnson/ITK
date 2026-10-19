@@ -19,9 +19,9 @@
 #include <iostream>
 #include "itkLabelObjectLine.h"
 #include "itkLabelObjectLineComparator.h"
+#include "itkGTest.h"
 
-int
-itkLabelObjectLineComparatorTest(int, char *[])
+TEST(LabelObjectLineComparator, ConvertedLegacyTest)
 {
   using LabelObjectLineType = itk::LabelObjectLine<2>;
   using IndexType = itk::LabelObjectLine<2>::IndexType;
@@ -41,29 +41,11 @@ itkLabelObjectLineComparatorTest(int, char *[])
   const LabelObjectLineType high(highIndex, 11);
   const LabelObjectLineType lowlong(lowIndex, 15);
 
-  if (lessThan(high, low))
-  {
-    std::cerr << "Failed, high<low returned true." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(lessThan(high, low)) << "Failed, high<low returned true.";
 
-  if (!lessThan(low, high))
-  {
-    std::cerr << "Failed, low<high returned false." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(lessThan(low, high)) << "Failed, low<high returned false.";
 
-  if (lessThan(low, low))
-  {
-    std::cerr << "Failed, low<low returned true." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(lessThan(low, low)) << "Failed, low<low returned true.";
 
-  if (!lessThan(low, lowlong))
-  {
-    std::cerr << "Failed, low<lowlong returned false." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(lessThan(low, lowlong)) << "Failed, low<lowlong returned false.";
 }
