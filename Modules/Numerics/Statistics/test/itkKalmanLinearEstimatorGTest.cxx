@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkKalmanLinearEstimator.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -29,8 +30,7 @@
  *
  */
 
-int
-itkKalmanLinearEstimatorTest(int, char *[])
+TEST(KalmanLinearEstimator, ConvertedLegacyTest)
 {
 
 
@@ -103,21 +103,7 @@ itkKalmanLinearEstimatorTest(int, char *[])
 
   std::cout << std::endl << std::endl;
 
-  bool pass = true;
-
   constexpr float tolerance{ 1e-4 };
 
-  if (errorMagnitude > tolerance)
-  {
-    pass = false;
-  }
-
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_LE(errorMagnitude, tolerance);
 }
