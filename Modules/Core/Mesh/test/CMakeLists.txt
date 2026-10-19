@@ -16,7 +16,6 @@ set(
   itkVTKPolyDataReaderTest.cxx
   itkVTKPolyDataWriterTest01.cxx
   itkVTKPolyDataWriterTest02.cxx
-  itkWarpMeshFilterTest.cxx
 )
 
 set(ITKMesh-Test_LIBRARIES ${ITKMesh-Test_LIBRARIES})
@@ -282,12 +281,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/VTKPolyDataWriterTest02.vtk
 )
 itk_add_test(
-  NAME itkWarpMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkWarpMeshFilterTest
-)
-itk_add_test(
   NAME itkConnectedRegionsMeshFilterTest2
   COMMAND
     ITKMeshTestDriver
@@ -398,5 +391,6 @@ set(
   itkTriangleCellGTest.cxx
   itkTriangleMeshToSimplexMeshFilter2GTest.cxx
   itkTriangleMeshToSimplexMeshFilterGTest.cxx
+  itkWarpMeshFilterGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
