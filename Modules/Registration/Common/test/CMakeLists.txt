@@ -9,7 +9,6 @@ set(
   itkKappaStatisticImageToImageMetricTest.cxx
   itkMatchCardinalityImageToImageMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricTest.cxx
-  itkMultiResolutionImageRegistrationMethodTest_2.cxx
   itkMultiResolutionPyramidImageFilterTest.cxx
   itkMutualInformationHistogramImageToImageMetricTest.cxx
   itkMutualInformationMetricTest.cxx
@@ -26,13 +25,6 @@ set(
 createtestdriver(ITKRegistrationCommon "${ITKRegistrationCommon-Test_LIBRARIES}" "${ITKRegistrationCommonTests}")
 
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
-
-itk_add_test(
-  NAME itkMultiResolutionImageRegistrationMethodTest_2
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkMultiResolutionImageRegistrationMethodTest_2
-)
 
 #Temporarily output full results for debugging of experimental builds
 #itk_add_test(NAME itkImageRegistrationMethodTest_14
@@ -290,6 +282,7 @@ set(
   itkMeanSquaresPointSetToImageMetricGTest.cxx
   itkMultiResolutionImageRegistrationMethodGTest.cxx
   itkMultiResolutionImageRegistrationMethodGTest_1.cxx
+  itkMultiResolutionImageRegistrationMethodGTest_2.cxx
   itkTransformInitializersGTest.cxx
 )
 creategoogletestdriver(ITKRegistration "${ITKRegistrationCommon-Test_LIBRARIES}" "${ITKRegistrationGTests}")
