@@ -12,7 +12,6 @@ set(
   itkKdTreeTest3.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkManhattanDistanceMetricTest.cxx
   itkMeanSampleFilterTest.cxx
   itkMeanSampleFilterTest2.cxx
   itkMeanSampleFilterTest3.cxx
@@ -552,12 +551,6 @@ itk_add_test(
     itkProbabilityDistributionTest
 )
 itk_add_test(
-  NAME itkManhattanDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkManhattanDistanceMetricTest
-)
-itk_add_test(
   NAME itkMembershipFunctionBaseTest2
   COMMAND
     ITKStatisticsTestDriver
@@ -833,6 +826,7 @@ set(
   itkKdTreeGTest.cxx
   itkKdTreeGTestSamplePoints.cxx
   itkMahalanobisDistanceMetricGTest.cxx
+  itkManhattanDistanceMetricGTest.cxx
   itkMaximumDecisionRuleGTest.cxx
   itkMaximumRatioDecisionRuleGTest.cxx
   itkMembershipFunctionBaseGTest.cxx
