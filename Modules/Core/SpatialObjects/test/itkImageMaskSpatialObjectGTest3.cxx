@@ -32,9 +32,9 @@
 
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkImageMaskSpatialObject.h"
+#include "itkGTest.h"
 
-int
-itkImageMaskSpatialObjectTest3(int, char *[])
+TEST(ImageMaskSpatialObject3, ConvertedLegacyTest)
 {
   constexpr unsigned int VDimension{ 3 };
 
@@ -79,16 +79,8 @@ itkImageMaskSpatialObjectTest3(int, char *[])
 
   for (unsigned int i = 0; i < 3; ++i)
   {
-    if (regionSize[i] != 0)
-    {
-      std::cout << "Invalid Region Size " << regionSize << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (regionIndex[i] != 0)
-    {
-      std::cout << "Invalid Region Index " << regionIndex << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(regionSize[i], 0u) << "Invalid Region Size " << regionSize;
+    EXPECT_EQ(regionIndex[i], 0) << "Invalid Region Index " << regionIndex;
   }
 
   using ImageRegionIteratorType = itk::ImageRegionIteratorWithIndex<ImageType>;
@@ -97,14 +89,10 @@ itkImageMaskSpatialObjectTest3(int, char *[])
   {
     ImageType::PointType point;
     image->TransformIndexToPhysicalPoint(it.GetIndex(), point);
-    if (imageMaskSpatialObject->IsInsideInWorldSpace(point))
-    {
-      std::cout << "Pixel Reported Inside mask, even though mask image is all zeros" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(imageMaskSpatialObject->IsInsideInWorldSpace(point))
+      << "Pixel Reported Inside mask, even though mask image is all zeros";
   }
 
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
