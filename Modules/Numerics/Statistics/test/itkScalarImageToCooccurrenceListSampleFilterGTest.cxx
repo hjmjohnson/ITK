@@ -18,9 +18,9 @@
 
 
 #include "itkScalarImageToCooccurrenceListSampleFilter.h"
+#include "itkGTest.h"
 
-int
-itkScalarImageToCooccurrenceListSampleFilterTest(int, char *[])
+TEST(ScalarImageToCooccurrenceListSampleFilter, ConvertedLegacyTest)
 {
   // Data definitions
   constexpr unsigned int IMGWIDTH{ 5 };
@@ -82,24 +82,11 @@ itkScalarImageToCooccurrenceListSampleFilterTest(int, char *[])
 
   // Invoke update before adding an input. An exception should be
   // thrown.
-  try
-  {
-    filter->Update();
-    std::cerr << "Failed to throw expected exception due to nullptr input: " << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cout << "Expected exception caught: " << excp << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject) << "Failed to throw expected exception due to nullptr input: ";
 
   filter->ResetPipeline();
 
-  if (filter->GetInput() != nullptr)
-  {
-    std::cerr << "GetInput() should return nullptr since the input is not set yet " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetInput(), nullptr) << "GetInput() should return nullptr since the input is not set yet ";
 
   filter->SetInput(image);
 
@@ -210,14 +197,8 @@ itkScalarImageToCooccurrenceListSampleFilterTest(int, char *[])
     const MeasurementVectorType v = s_iter.GetMeasurementVector();
     const MeasurementVectorType vbase = *it;
 
-    if (vbase != v)
-    {
-      std::cerr << "Cooccurrence list sample content is not correct " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(vbase, v) << "Cooccurrence list sample content is not correct ";
     ++s_iter;
     ++it;
   }
-
-  return EXIT_SUCCESS;
 }
