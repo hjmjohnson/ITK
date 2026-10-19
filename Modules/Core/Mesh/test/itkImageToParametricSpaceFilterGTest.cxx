@@ -20,10 +20,9 @@
 #include "itkImageToParametricSpaceFilter.h"
 #include "itkMesh.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkImageToParametricSpaceFilterTest(int, char *[])
+TEST(ImageToParametricSpaceFilter, ConvertedLegacyTest)
 {
 
   using ImagePixelType = float;
@@ -105,11 +104,11 @@ itkImageToParametricSpaceFilterTest(int, char *[])
 
   const FilterPointer filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, ImageToParametricSpaceFilter, ImageToMeshFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, ImageToParametricSpaceFilter, ImageToMeshFilter);
 
 
   constexpr bool computeIndices{ true };
-  ITK_TEST_SET_GET_BOOLEAN(filter, ComputeIndices, computeIndices);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, ComputeIndices, computeIndices);
 
   // Connect the inputs
   filter->SetInput(0, imageX);
@@ -162,9 +161,5 @@ itkImageToParametricSpaceFilterTest(int, char *[])
 
   // All objects should be automatically destroyed at this point
 
-  if (!ok)
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(ok);
 }
