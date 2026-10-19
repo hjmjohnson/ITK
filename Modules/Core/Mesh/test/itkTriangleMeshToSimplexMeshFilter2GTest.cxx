@@ -22,9 +22,9 @@
 #include "itkTriangleMeshToSimplexMeshFilter.h"
 #include "itkDefaultDynamicMeshTraits.h"
 #include "itkTimeProbe.h"
+#include "itkGTest.h"
 
-int
-itkTriangleMeshToSimplexMeshFilter2Test(int, char *[])
+TEST(TriangleMeshToSimplexMeshFilter2, ConvertedLegacyTest)
 {
 
   // Declare the type of the input and output mesh
@@ -89,5 +89,4 @@ itkTriangleMeshToSimplexMeshFilter2Test(int, char *[])
   }
 
   std::cout << "[TEST DONE]" << std::endl;
-  return EXIT_SUCCESS;
 }
