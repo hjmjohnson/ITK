@@ -14,7 +14,6 @@ set(
   itkListSampleTest.cxx
   itkSampleToHistogramFilterTest5.cxx
   itkScalarImageToHistogramGeneratorTest.cxx
-  itkStatisticsAlgorithmTest2.cxx
   itkSubsampleTest.cxx
   itkSubsampleTest2.cxx
   itkSubsampleTest3.cxx
@@ -513,12 +512,6 @@ itk_add_test(
     itkSubsampleTest3
 )
 itk_add_test(
-  NAME itkStatisticsAlgorithmTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkStatisticsAlgorithmTest2
-)
-itk_add_test(
   NAME itkUniformRandomSpatialNeighborSubsamplerTest
   COMMAND
     ITKStatisticsTestDriver
@@ -633,6 +626,7 @@ set(
   itkSpatialNeighborSubsamplerGTest.cxx
   itkStandardDeviationPerComponentSampleFilterGTest.cxx
   itkStatisticsAlgorithmGTest.cxx
+  itkStatisticsAlgorithmGTest2.cxx
   itkStatisticsTypesGTest.cxx
   itkTDistributionGTest.cxx
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
