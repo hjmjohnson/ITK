@@ -13,7 +13,6 @@ set(
   itkBSplineScatteredDataPointSetToImageFilterTest5.cxx
   itkBSplineUpsampleImageFilterTest.cxx
   itkChangeInformationImageFilterTest.cxx
-  itkConstantPadImageTest.cxx
   itkCoxDeBoorBSplineKernelFunctionTest.cxx
   itkCoxDeBoorBSplineKernelFunctionTest2.cxx
   itkCropImageFilter3DTest.cxx
@@ -180,12 +179,6 @@ itk_add_test(
   COMMAND
     ITKImageGridTestDriver
     itkChangeInformationImageFilterTest
-)
-itk_add_test(
-  NAME itkConstantPadImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkConstantPadImageTest
 )
 itk_add_test(
   NAME itkCoxDeBoorBSplineKernelFunctionTest01
@@ -730,6 +723,7 @@ set(
   itkBSplineControlPointImageFilterGTest.cxx
   itkBSplineScatteredDataPointSetToImageFilterGTest.cxx
   itkChangeInformationImageFilterGTest.cxx
+  itkConstantPadImageGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
   itkShrinkImageGTest.cxx
