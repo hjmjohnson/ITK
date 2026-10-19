@@ -5,7 +5,6 @@ set(
   itkMultiLabelSTAPLEImageFilterTest.cxx
   itkVotingBinaryHoleFillingImageFilterTest.cxx
   itkVotingBinaryImageFilterTest.cxx
-  itkVotingBinaryIterativeHoleFillingImageFilterTest.cxx
 )
 
 createtestdriver(ITKLabelVoting "${ITKLabelVoting-Test_LIBRARIES}" "${ITKLabelVotingTests}")
@@ -49,12 +48,6 @@ itk_add_test(
     itkLabelVotingImageFilterTest
 )
 itk_add_test(
-  NAME itkVotingBinaryIterativeHoleFillingImageFilterTest
-  COMMAND
-    ITKLabelVotingTestDriver
-    itkVotingBinaryIterativeHoleFillingImageFilterTest
-)
-itk_add_test(
   NAME itkVotingBinaryHoleFillingImageFilterTest
   COMMAND
     ITKLabelVotingTestDriver
@@ -78,6 +71,7 @@ set(
   itkBinaryMedianImageFilterGTest.cxx
   itkLabelVotingImageFilterGTest.cxx
   itkMultiLabelSTAPLEImageFilterGTest.cxx
+  itkVotingBinaryIterativeHoleFillingImageFilterGTest.cxx
 )
 
 creategoogletestdriver(ITKLabelVoting "${ITKLabelVoting-Test_LIBRARIES}" "${ITKLabelVotingGTests}")

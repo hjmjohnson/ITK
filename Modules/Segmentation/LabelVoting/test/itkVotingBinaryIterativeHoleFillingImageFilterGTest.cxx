@@ -20,11 +20,10 @@
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkVotingBinaryIterativeHoleFillingImageFilter.h"
 #include "itkTextOutput.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkVotingBinaryIterativeHoleFillingImageFilterTest(int, char *[])
+TEST(VotingBinaryIterativeHoleFillingImageFilter, ConvertedLegacyTest)
 {
   // Comment the following if you want to use the itk text output window
   itk::OutputWindow::SetInstance(itk::TextOutput::New());
@@ -62,37 +61,37 @@ itkVotingBinaryIterativeHoleFillingImageFilterTest(int, char *[])
   itk::VotingBinaryIterativeHoleFillingImageFilter<ImageType>::Pointer voting;
   voting = itk::VotingBinaryIterativeHoleFillingImageFilter<ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(voting, VotingBinaryIterativeHoleFillingImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(voting, VotingBinaryIterativeHoleFillingImageFilter, ImageToImageFilter);
 
 
   voting->SetForegroundValue(foreground);
-  ITK_TEST_SET_GET_VALUE(foreground, voting->GetForegroundValue());
+  EXPECT_EQ(foreground, voting->GetForegroundValue());
 
   voting->SetBackgroundValue(background);
-  ITK_TEST_SET_GET_VALUE(background, voting->GetBackgroundValue());
+  EXPECT_EQ(background, voting->GetBackgroundValue());
 
   // define the neighborhood size used for the voting filter (5x5)
   ImageType::SizeType neighRadius;
   neighRadius[0] = 1;
   neighRadius[1] = 1;
   voting->SetRadius(neighRadius);
-  ITK_TEST_SET_GET_VALUE(neighRadius, voting->GetRadius());
+  EXPECT_EQ(neighRadius, voting->GetRadius());
 
   // Set the maximum number of times the filter should perform passes filling
   // the border of holes and cavities.
   constexpr unsigned int maximumNumberOfIterations{ 10 };
   voting->SetMaximumNumberOfIterations(maximumNumberOfIterations);
-  ITK_TEST_SET_GET_VALUE(maximumNumberOfIterations, voting->GetMaximumNumberOfIterations());
+  EXPECT_EQ(maximumNumberOfIterations, voting->GetMaximumNumberOfIterations());
 
   constexpr unsigned int currentNumberOfIterations{ 0 };
   voting->SetCurrentNumberOfIterations(currentNumberOfIterations);
-  ITK_TEST_SET_GET_VALUE(currentNumberOfIterations, voting->GetCurrentNumberOfIterations());
+  EXPECT_EQ(currentNumberOfIterations, voting->GetCurrentNumberOfIterations());
 
   // Set the number of pixels over 50% that will tip the decision about
   // switching a pixel.
   constexpr unsigned int majorityThreshold{ 1 };
   voting->SetMajorityThreshold(majorityThreshold);
-  ITK_TEST_SET_GET_VALUE(majorityThreshold, voting->GetMajorityThreshold());
+  EXPECT_EQ(majorityThreshold, voting->GetMajorityThreshold());
 
 
   voting->SetInput(thresholder->GetOutput());
@@ -139,5 +138,4 @@ itkVotingBinaryIterativeHoleFillingImageFilterTest(int, char *[])
   std::cout << "Number Of Pixels Changed = " << voting->GetNumberOfPixelsChanged() << std::endl;
 
   voting->Print(std::cout);
-  return EXIT_SUCCESS;
 }
