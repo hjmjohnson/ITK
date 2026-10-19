@@ -18,10 +18,9 @@
 
 #include "itkVectorMagnitudeImageFilter.h"
 #include "itkImageRegionIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkVectorMagnitudeImageFilterTest(int, char *[])
+TEST(VectorMagnitudeImageFilter, ConvertedLegacyTest)
 {
   // Declare the type of the pixels
   using VectorPixelType = itk::CovariantVector<float, 3>;
@@ -59,21 +58,13 @@ itkVectorMagnitudeImageFilterTest(int, char *[])
   // Create the filter
   auto magnitude = myMagnitudeFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(magnitude, VectorMagnitudeImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(magnitude, VectorMagnitudeImageFilter, UnaryGeneratorImageFilter);
 
 
   magnitude->SetInput(image);
 
   // Now compute the magnitude of the gradient
-  try
-  {
-    magnitude->Update();
-  }
-  catch (...)
-  {
-    std::cerr << "Exception thrown during Update() " << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(magnitude->Update()) << "Exception thrown during Update() ";
 
   // Get the filter output
   const FloatImageType::Pointer outputImage = magnitude->GetOutput();
@@ -91,17 +82,10 @@ itkVectorMagnitudeImageFilterTest(int, char *[])
   while (!outputIterator.IsAtEnd())
   {
     // Check if the magnitude of each pixel is 6.0 (to a small tolerance)
-    if (itk::Math::Absolute(outputIterator.Get() - 6.0) > 1e-5)
-    {
-      std::cerr << "Every pixel magnitude should be 6! This pixel is " << imageIterator.Get() << " and has magnitude "
-                << outputIterator.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(outputIterator.Get() - 6.0), 1e-5)
+      << "Every pixel magnitude should be 6! This pixel is " << imageIterator.Get() << " and has magnitude "
+      << outputIterator.Get();
     ++outputIterator;
     ++imageIterator;
   }
-
-  std::cout << std::endl << "Test PASSED !! " << std::endl;
-
-  return EXIT_SUCCESS;
 }
