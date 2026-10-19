@@ -19,8 +19,11 @@
 #include "itkPermuteAxesImageFilter.h"
 #include "itkTextOutput.h"
 #include "itkCommand.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 // The following class is used to support callbacks
 // on the filter in the pipeline that follows later
 class ShowProgressObject
@@ -34,9 +37,9 @@ public:
   }
   itk::ProcessObject::Pointer m_Process;
 };
+} // namespace
 
-int
-itkPermuteAxesImageFilterTest(int, char *[])
+TEST(PermuteAxesImageFilter, ConvertedLegacyTest)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New());
@@ -131,55 +134,17 @@ itkPermuteAxesImageFilterTest(int, char *[])
     ++inputIter;
   }
 
-  if (!passed)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed);
 
   // exercise Get methods
   std::cout << "Order: " << permuter->GetOrder() << std::endl;
   std::cout << "InverseOrder: " << permuter->GetInverseOrder() << std::endl;
 
   // test SetOrder logic - repeating indices
-  passed = false;
   order[0] = order[1];
-  try
-  {
-    permuter->SetOrder(order);
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    passed = true;
-    std::cout << err << std::endl;
-  }
-
-  if (!passed)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_THROW(permuter->SetOrder(order), itk::ExceptionObject);
 
   // test SetOrder logic - indices out of range
-  passed = false;
   order[0] = ImageDimension + 2;
-  try
-  {
-    permuter->SetOrder(order);
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    passed = true;
-    std::cout << err << std::endl;
-  }
-
-  if (!passed)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_THROW(permuter->SetOrder(order), itk::ExceptionObject);
 }

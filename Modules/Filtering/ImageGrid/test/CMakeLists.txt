@@ -21,7 +21,6 @@ set(
   itkMirrorPadImageFilterTest.cxx
   itkOrientImageFilterTest.cxx
   itkPasteImageFilterTest.cxx
-  itkPermuteAxesImageFilterTest.cxx
   itkPushPopTileImageFilterTest.cxx
   itkRegionOfInterestImageFilterTest.cxx
   itkResampleImageTest.cxx
@@ -353,12 +352,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/PasteImageFilterTest.png
 )
 itk_add_test(
-  NAME itkPermuteAxesImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkPermuteAxesImageFilterTest
-)
-itk_add_test(
   NAME itkWarpImageFilterTest
   COMMAND
     ITKImageGridTestDriver
@@ -664,6 +657,7 @@ set(
   itkInterpolateImagePointsFilterGTest.cxx
   itkMirrorPadImageGTest.cxx
   itkPadImageFilterGTest.cxx
+  itkPermuteAxesImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
   itkShrinkImageGTest.cxx
