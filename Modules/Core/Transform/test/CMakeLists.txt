@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKTransformTests
-  itkAffineTransformTest.cxx
   itkAzimuthElevationToCartesianTransformTest.cxx
   itkBSplineDeformableTransformTest.cxx
   itkBSplineDeformableTransformTest2.cxx
@@ -49,12 +48,6 @@ itk_add_test(
   COMMAND
     ITKTransformTestDriver
     itkFixedCenterOfRotationAffineTransformTest
-)
-itk_add_test(
-  NAME itkAffineTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkAffineTransformTest
 )
 itk_add_test(
   NAME itkScaleSkewVersor3DTransformTest
@@ -519,6 +512,7 @@ itk_add_test(
 
 set(
   ITKTransformGTests
+  itkAffineTransformGTest.cxx
   itkBSplineTransformGTest.cxx
   itkEuler3DTransformGTest.cxx
   itkMatrixOffsetTransformBaseGTest.cxx
