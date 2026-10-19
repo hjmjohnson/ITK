@@ -17,13 +17,12 @@
  *=========================================================================*/
 
 #include "itkOtsuThresholdCalculator.h"
+#include "itkGTest.h"
 #include "itkImageRegionIterator.h"
 #include "itkImageToHistogramFilter.h"
-#include "itkTestingMacros.h"
 
 
-int
-itkOtsuThresholdCalculatorTest(int, char *[])
+TEST(OtsuThresholdCalculator, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -86,9 +85,9 @@ itkOtsuThresholdCalculatorTest(int, char *[])
   // Create and initialize the calculator
   auto calculator = CalculatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(calculator, OtsuThresholdCalculator, HistogramThresholdCalculator);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(calculator, OtsuThresholdCalculator, HistogramThresholdCalculator);
   constexpr bool returnBinMidpoint{ false };
-  ITK_TEST_SET_GET_BOOLEAN(calculator, ReturnBinMidpoint, returnBinMidpoint);
+  ITK_GTEST_SET_GET_BOOLEAN(calculator, ReturnBinMidpoint, returnBinMidpoint);
 
   calculator->SetInput(histGenerator->GetOutput());
 
@@ -98,15 +97,6 @@ itkOtsuThresholdCalculatorTest(int, char *[])
   const double thresholdResult = calculator->GetThreshold();
   std::cout << "The threshold intensity value is : " << thresholdResult << std::endl;
 
-  if (thresholdResult < static_cast<double>(value1) || thresholdResult > static_cast<double>(value2))
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Error in GetThreshold()" << std::endl;
-    std::cerr << "Expected value to be between: " << value1 << " and " << value2 << ", but got: " << thresholdResult
-              << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_GE(thresholdResult, static_cast<double>(value1)) << "Error in GetThreshold()";
+  EXPECT_LE(thresholdResult, static_cast<double>(value2)) << "Error in GetThreshold()";
 }
