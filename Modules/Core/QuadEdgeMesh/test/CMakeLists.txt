@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKQuadEdgeMeshTests
-  itkGeometricalQuadEdgeTest1.cxx
   itkQuadEdgeMeshAddFaceTest1.cxx
   itkQuadEdgeMeshAddFaceTest2.cxx
   itkQuadEdgeMeshBasicLayerTest.cxx
@@ -89,12 +88,6 @@ itk_add_test(
   COMMAND
     ITKQuadEdgeMeshTestDriver
     itkQuadEdgeTest1
-)
-itk_add_test(
-  NAME itkGeometricalQuadEdgeTest1
-  COMMAND
-    ITKQuadEdgeMeshTestDriver
-    itkGeometricalQuadEdgeTest1
 )
 itk_add_test(
   NAME itkQuadEdgeMeshAddFaceTest1_0
@@ -278,6 +271,7 @@ itk_add_test(
 set(
   ITKQuadEdgeMeshGTests
   itkDynamicQuadEdgeMeshGTest.cxx
+  itkGeometricalQuadEdgeGTest1.cxx
   itkQuadEdgeMeshTypeTraitsGTest.cxx
 )
 creategoogletestdriver(ITKQuadEdgeMesh "${ITKQuadEdgeMesh-Test_LIBRARIES}" "${ITKQuadEdgeMeshGTests}")
