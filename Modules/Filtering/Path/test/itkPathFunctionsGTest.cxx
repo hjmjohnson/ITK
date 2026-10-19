@@ -21,10 +21,9 @@
 #include "itkPolyLineParametricPath.h"
 #include "itkPathFunctions.h"
 #include "itkPathIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkPathFunctionsTest(int, char *[])
+TEST(PathFunctions, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension{ 2 };
@@ -38,8 +37,6 @@ itkPathFunctionsTest(int, char *[])
 
   using IndexType = ImageType::IndexType;
   using VertexType = PolyLineParametricPathType::VertexType;
-
-  bool passed = true;
 
 
   // Set up the image
@@ -125,18 +122,6 @@ itkPathFunctionsTest(int, char *[])
   std::cout << "Should still be at end: ";
   std::cout << "Path(" << iter.GetPathPosition() << ") @ " << iter.GetIndex() << " = " << iter.Get() << std::endl;
 
-  if ((iter.GetIndex())[0] != 30 || (iter.GetIndex())[1] != 30)
-  {
-    std::cout << "PathFunctionsTest: Failed to maintain a closed path" << std::endl;
-    passed = false;
-  }
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_EQ((iter.GetIndex())[0], 30) << "PathFunctionsTest: Failed to maintain a closed path";
+  EXPECT_EQ((iter.GetIndex())[1], 30) << "PathFunctionsTest: Failed to maintain a closed path";
 }
