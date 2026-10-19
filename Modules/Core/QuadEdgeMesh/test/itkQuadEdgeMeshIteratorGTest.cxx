@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 #include <iostream>
 
-int
-itkQuadEdgeMeshIteratorTest(int, char *[])
+TEST(QuadEdgeMeshIterator, ConvertedLegacyTest)
 {
   using MeshType = itk::QuadEdgeMesh<double, 3>;
   using IteratorGeom = MeshType::QEPrimal::IteratorGeom;
@@ -71,22 +71,14 @@ itkQuadEdgeMeshIteratorTest(int, char *[])
   for (int i = 0; i < NumPoints; ++i)
   {
     foundEdges[i] = mesh->FindEdge(pids[i], pids[(i + 1) % NumEdges]);
-    if (!foundEdges[i])
-    {
-      std::cerr << "Unfound edge [" << pids[i] << ", " << pids[(i + 1) % NumEdges] << "]. Failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_NE(foundEdges[i], nullptr) << "Unfound edge [" << pids[i] << ", " << pids[(i + 1) % NumEdges] << "].";
   }
 
   // Create the face:
   mesh->AddFace(foundEdges[0]);
 
   // Coarse checking with the cyclicity
-  if (foundEdges[0]->IsLnextGivenSizeCyclic(6) == false)
-  {
-    std::cerr << "Lnext cyclicity is not 6 as expected." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(foundEdges[0]->IsLnextGivenSizeCyclic(6)) << "Lnext cyclicity is not 6 as expected.";
 
   //////////////////////////////////////////////////////////
   int edgeNumber = 0;
@@ -96,14 +88,9 @@ itkQuadEdgeMeshIteratorTest(int, char *[])
   {
     MeshType::QEPrimal * expectedEdge = foundEdges[edgeNumber];
     MeshType::QEPrimal * currentEdge = itLnext.Value();
-    if (currentEdge != expectedEdge)
-    {
-      std::cout << std::endl
-                << "Erroneous edge: was expecting [" << expectedEdge->GetOrigin() << ", "
-                << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin() << ", "
-                << currentEdge->GetDestination() << "]. Failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(currentEdge, expectedEdge) << "Erroneous edge: was expecting [" << expectedEdge->GetOrigin() << ", "
+                                         << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin()
+                                         << ", " << currentEdge->GetDestination() << "].";
   }
   std::cout << "OK" << std::endl;
 
@@ -116,14 +103,9 @@ itkQuadEdgeMeshIteratorTest(int, char *[])
     // We stat with [0,1] and should get [0,5], [5,4], [4,3]...
     MeshType::QEPrimal * expectedEdge = foundEdges[(NumEdges - edgeNumber) % NumEdges];
     MeshType::QEPrimal * currentEdge = itRnext.Value();
-    if (currentEdge != expectedEdge)
-    {
-      std::cout << std::endl
-                << "Erroneous edge: was expecting [" << expectedEdge->GetOrigin() << ", "
-                << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin() << ", "
-                << currentEdge->GetDestination() << "]. Failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(currentEdge, expectedEdge) << "Erroneous edge: was expecting [" << expectedEdge->GetOrigin() << ", "
+                                         << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin()
+                                         << ", " << currentEdge->GetDestination() << "].";
   }
   std::cout << "OK" << std::endl;
 
@@ -142,18 +124,11 @@ itkQuadEdgeMeshIteratorTest(int, char *[])
     }
 
     MeshType::QEPrimal * currentEdge = itDnext.Value();
-    if (currentEdge != expectedEdge)
-    {
-      std::cout << std::endl
-                << "Erroneous edge: was expecting [" << expectedEdge->GetOrigin() << ", "
-                << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin() << ", "
-                << currentEdge->GetDestination() << "]. Failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(currentEdge, expectedEdge) << "Erroneous edge: was expecting [" << expectedEdge->GetOrigin() << ", "
+                                         << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin()
+                                         << ", " << currentEdge->GetDestination() << "].";
   }
   std::cout << "OK" << std::endl;
 
   std::cout << "QuadEdgeMeshIteratorTest Passed !" << std::endl;
-
-  return EXIT_SUCCESS;
 }
