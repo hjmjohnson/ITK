@@ -4,7 +4,6 @@ set(
   itkExpectationMaximizationMixtureModelEstimatorTest.cxx
   itkGaussianMixtureModelComponentTest.cxx
   itkGaussianRandomSpatialNeighborSubsamplerTest.cxx
-  itkImageToHistogramFilterTest.cxx
   itkImageToHistogramFilterTest2.cxx
   itkImageToListSampleAdaptorTest.cxx
   itkImageToListSampleAdaptorTest2.cxx
@@ -837,12 +836,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkUniformRandomSubsamplingTest.mha
 )
 itk_add_test(
-  NAME itkImageToHistogramFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToHistogramFilterTest
-)
-itk_add_test(
   NAME itkImageToHistogramFilterTest2
   COMMAND
     ITKStatisticsTestDriver
@@ -892,6 +885,7 @@ set(
   itkHistogramGTest.cxx
   itkHistogramToTextureFeaturesFilterGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
+  itkImageToHistogramFilterGTest.cxx
   itkKdTreeGTest.cxx
   itkMaximumDecisionRuleGTest.cxx
   itkMaximumRatioDecisionRuleGTest.cxx
