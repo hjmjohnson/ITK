@@ -46,10 +46,6 @@ set(
   itkZeroFluxNeumannPadImageFilterTest.cxx
 )
 
-if(NOT ITK_FUTURE_LEGACY_REMOVE)
-  list(APPEND ITKImageGridTests itkOrientImageFilterTest2.cxx)
-endif()
-
 createtestdriver(ITKImageGrid "${ITKImageGrid-Test_LIBRARIES}" "${ITKImageGridTests}")
 
 itk_add_test(
@@ -59,14 +55,6 @@ itk_add_test(
     itkOrientImageFilterTest
     0
 )
-if(NOT ITK_FUTURE_LEGACY_REMOVE)
-  itk_add_test(
-    NAME itkOrientImageFilterTest2
-    COMMAND
-      ITKImageGridTestDriver
-      itkOrientImageFilterTest2
-  )
-endif()
 
 itk_add_test(
   NAME itkBinShrinkImageFilterTest1
@@ -693,5 +681,9 @@ set(
   itkSliceImageFilterTest.cxx
   itkTileImageFilterGTest.cxx
 )
+
+if(NOT ITK_FUTURE_LEGACY_REMOVE)
+  list(APPEND ITKImageGridGTests itkOrientImageFilterGTest2.cxx)
+endif()
 
 creategoogletestdriver(ITKImageGrid "${ITKImageGrid-Test_LIBRARIES}" "${ITKImageGridGTests}")
