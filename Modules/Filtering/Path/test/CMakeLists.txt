@@ -4,7 +4,6 @@ set(
   itkContourExtractor2DImageFilterTest.cxx
   itkExtractOrthogonalSwath2DImageFilterTest.cxx
   itkOrthogonallyCorrected2DParametricPathTest.cxx
-  itkOrthogonalSwath2DPathFilterTest.cxx
   itkPathFunctionsTest.cxx
   itkPathIteratorTest.cxx
   itkPathToChainCodePathFilterTest.cxx
@@ -63,12 +62,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ExtractOrthogonalSwath2DImageFilterTest.png
 )
 itk_add_test(
-  NAME itkOrthogonalSwath2DPathFilterTest
-  COMMAND
-    ITKPathTestDriver
-    itkOrthogonalSwath2DPathFilterTest
-)
-itk_add_test(
   NAME itkContourExtractor2DImageFilterTest
   COMMAND
     ITKPathTestDriver
@@ -84,6 +77,7 @@ set(
   itkContourExtractor2DImageFilterGTest.cxx
   itkFourierSeriesPathGTest.cxx
   itkHilbertPathGTest.cxx
+  itkOrthogonalSwath2DPathFilterGTest.cxx
 )
 
 creategoogletestdriver(ITKPath "${ITKPath-Test_LIBRARIES}" "${ITKPathGTests}")
