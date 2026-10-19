@@ -26,9 +26,9 @@
 #include "itkLaplacianOperator.h"
 #include "itkNeighborhoodOperator.h"
 #include "itkSobelOperator.h"
-#include "itkTestingMacros.h"
 
 #include <type_traits> // For is_default_constructible, is_copy_constructible, etc.
+#include "itkGTest.h"
 
 namespace
 {
@@ -69,8 +69,7 @@ static_assert(IsDefaultConstructibleCopyableNoThrowMovableAndDestructible<itk::S
               "SobelOperator should be default-constructible, copyable, noexcept movable, and destructible.");
 } // namespace
 
-int
-itkNeighborhoodOperatorTest(int, char *[])
+TEST(NeighborhoodOperator, ConvertedLegacyTest)
 {
   using PixelType = float;
   constexpr unsigned int Dimension1D{ 1 };
@@ -81,16 +80,17 @@ itkNeighborhoodOperatorTest(int, char *[])
   std::cout << "Testing derivative operator" << std::endl;
   itk::DerivativeOperator<PixelType, Dimension3D, vnl_vector<PixelType>> d;
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS((&d), DerivativeOperator, NeighborhoodOperator);
+  auto * dPointer = &d;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(dPointer, DerivativeOperator, NeighborhoodOperator);
 
 
   constexpr unsigned int order{ 2 };
   d.SetOrder(order);
-  ITK_TEST_SET_GET_VALUE(order, d.GetOrder());
+  EXPECT_EQ(order, d.GetOrder());
 
   unsigned long direction = 1;
   d.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, d.GetDirection());
+  EXPECT_EQ(direction, d.GetDirection());
 
   d.CreateDirectional();
 
@@ -98,16 +98,17 @@ itkNeighborhoodOperatorTest(int, char *[])
   std::cout << "Testing Gaussian operator" << std::endl;
   itk::GaussianOperator<PixelType, Dimension2D, vnl_vector<PixelType>> g;
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS((&g), GaussianOperator, NeighborhoodOperator);
+  auto * gPointer = &g;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(gPointer, GaussianOperator, NeighborhoodOperator);
 
 
   constexpr double variance{ 2.3 };
   g.SetVariance(variance);
-  ITK_TEST_SET_GET_VALUE(variance, g.GetVariance());
+  EXPECT_EQ(variance, g.GetVariance());
 
   constexpr double maximumError{ .01 };
   g.SetMaximumError(maximumError);
-  ITK_TEST_SET_GET_VALUE(maximumError, g.GetMaximumError());
+  EXPECT_EQ(maximumError, g.GetMaximumError());
 
   g.CreateDirectional();
 
@@ -115,11 +116,12 @@ itkNeighborhoodOperatorTest(int, char *[])
   std::cout << "Testing ForwardDifferenceOperator" << std::endl;
   itk::ForwardDifferenceOperator<PixelType, Dimension4D, vnl_vector<PixelType>> f;
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS((&f), ForwardDifferenceOperator, NeighborhoodOperator);
+  auto * fPointer = &f;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(fPointer, ForwardDifferenceOperator, NeighborhoodOperator);
 
   direction = 2;
   f.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, f.GetDirection());
+  EXPECT_EQ(direction, f.GetDirection());
 
   itk::Size<4> sz;
   sz[0] = sz[1] = sz[2] = sz[3] = 2;
@@ -129,12 +131,13 @@ itkNeighborhoodOperatorTest(int, char *[])
   std::cout << "Testing BackwardDifferenceOperator" << std::endl;
   itk::BackwardDifferenceOperator<PixelType, Dimension2D, vnl_vector<PixelType>> b;
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS((&b), BackwardDifferenceOperator, NeighborhoodOperator);
+  auto * bPointer = &b;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(bPointer, BackwardDifferenceOperator, NeighborhoodOperator);
 
 
   direction = 0;
   b.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, b.GetDirection());
+  EXPECT_EQ(direction, b.GetDirection());
 
   b.CreateDirectional();
 
@@ -142,12 +145,13 @@ itkNeighborhoodOperatorTest(int, char *[])
   std::cout << "Testing 1D LaplacianOperator" << std::endl;
   itk::LaplacianOperator<PixelType, Dimension1D, vnl_vector<PixelType>> a1;
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS((&a1), LaplacianOperator, NeighborhoodOperator);
+  auto * a1Pointer = &a1;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(a1Pointer, LaplacianOperator, NeighborhoodOperator);
 
 
   constexpr double scales_1d[]{ 1.0 / 2.0 };
   a1.SetDerivativeScalings(scales_1d);
-  ITK_TEST_SET_GET_VALUE(*scales_1d, *(a1.GetDerivativeScalings()));
+  EXPECT_EQ(*scales_1d, *(a1.GetDerivativeScalings()));
 
   a1.CreateOperator();
 
@@ -167,7 +171,7 @@ itkNeighborhoodOperatorTest(int, char *[])
 
   constexpr double scales_2d[]{ 1.0 / 2.0, 1.0 / 4.0 };
   a2.SetDerivativeScalings(scales_2d);
-  ITK_TEST_SET_GET_VALUE(*scales_2d, *(a2.GetDerivativeScalings()));
+  EXPECT_EQ(*scales_2d, *(a2.GetDerivativeScalings()));
 
   a2.CreateOperator();
 
@@ -187,7 +191,7 @@ itkNeighborhoodOperatorTest(int, char *[])
 
   constexpr double scales_3d[]{ 1.0 / 2.0, 1.0 / 4.0, 1.0 / 5.0 };
   a3.SetDerivativeScalings(scales_3d);
-  ITK_TEST_SET_GET_VALUE(*scales_3d, *(a3.GetDerivativeScalings()));
+  EXPECT_EQ(*scales_3d, *(a3.GetDerivativeScalings()));
 
   a3.CreateOperator();
 
@@ -205,11 +209,12 @@ itkNeighborhoodOperatorTest(int, char *[])
   std::cout << "Testing SobelOperator2D" << std::endl;
   itk::SobelOperator<PixelType, Dimension2D, vnl_vector<PixelType>> c;
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS((&c), SobelOperator, NeighborhoodOperator);
+  auto * cPointer = &c;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(cPointer, SobelOperator, NeighborhoodOperator);
 
   direction = 0;
   c.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, c.GetDirection());
+  EXPECT_EQ(direction, c.GetDirection());
 
   c.CreateDirectional();
 
@@ -226,7 +231,7 @@ itkNeighborhoodOperatorTest(int, char *[])
 
   direction = 1;
   c.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, c.GetDirection());
+  EXPECT_EQ(direction, c.GetDirection());
 
   c.CreateDirectional();
 
@@ -246,7 +251,7 @@ itkNeighborhoodOperatorTest(int, char *[])
 
   direction = 0;
   c2.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, c2.GetDirection());
+  EXPECT_EQ(direction, c2.GetDirection());
 
   c2.CreateDirectional();
 
@@ -263,7 +268,7 @@ itkNeighborhoodOperatorTest(int, char *[])
 
   direction = 1;
   c2.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, c2.GetDirection());
+  EXPECT_EQ(direction, c2.GetDirection());
 
   c2.CreateDirectional();
 
@@ -280,7 +285,7 @@ itkNeighborhoodOperatorTest(int, char *[])
 
   direction = 2;
   c2.SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, c2.GetDirection());
+  EXPECT_EQ(direction, c2.GetDirection());
 
   c2.CreateDirectional();
 
@@ -297,5 +302,4 @@ itkNeighborhoodOperatorTest(int, char *[])
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
