@@ -23,6 +23,7 @@
 #include "itkGradientDescentOptimizer.h"
 
 #include "itkImageRegistrationMethodImageSource.h"
+#include "itkGTest.h"
 
 /**
  *  This program tests one instantiation of the itk::ImageRegistrationMethod class
@@ -30,8 +31,7 @@
  *
  */
 
-int
-itkImageRegistrationMethodTest_7(int argc, char * argv[])
+TEST(ImageRegistrationMethod, ConvertedLegacyTest7)
 {
 
   bool pass = true;
@@ -112,21 +112,6 @@ itkImageRegistrationMethodTest_7(int argc, char * argv[])
   double        translationScale = 1e-7;
   double        learningRate = 1e-4;
 
-  if (argc > 1)
-  {
-    numberOfIterations = atol(argv[1]);
-    std::cout << "numberOfIterations = " << numberOfIterations << std::endl;
-  }
-  if (argc > 2)
-  {
-    translationScale = std::stod(argv[2]);
-    std::cout << "translationScale = " << translationScale << std::endl;
-  }
-  if (argc > 3)
-  {
-    learningRate = std::stod(argv[3]);
-    std::cout << "learningRate = " << learningRate << std::endl;
-  }
   for (unsigned int i = 0; i < dimension; ++i)
   {
     scales[i] = translationScale;
@@ -175,12 +160,5 @@ itkImageRegistrationMethodTest_7(int argc, char * argv[])
   }
 
 
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test FAILED.";
 }
