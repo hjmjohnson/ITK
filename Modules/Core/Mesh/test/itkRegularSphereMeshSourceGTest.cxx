@@ -17,12 +17,11 @@
  *=========================================================================*/
 
 #include "itkRegularSphereMeshSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
-int
-itkRegularSphereMeshSourceTest(int, char *[])
+TEST(RegularSphereMeshSource, ConvertedLegacyTest)
 {
 
   using MeshType = itk::Mesh<float, 3>;
@@ -31,7 +30,7 @@ itkRegularSphereMeshSourceTest(int, char *[])
 
   auto mySphereMeshSource = SphereMeshSourceType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(mySphereMeshSource, RegularSphereMeshSource, MeshSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(mySphereMeshSource, RegularSphereMeshSource, MeshSource);
 
 
   using PointType = SphereMeshSourceType::PointType;
@@ -45,18 +44,18 @@ itkRegularSphereMeshSourceTest(int, char *[])
   auto scale = itk::MakeFilled<VectorType>(radius);
 
   mySphereMeshSource->SetCenter(center);
-  ITK_TEST_SET_GET_VALUE(center, mySphereMeshSource->GetCenter());
+  EXPECT_EQ(center, mySphereMeshSource->GetCenter());
 
   constexpr unsigned int resolution{ 1 };
   mySphereMeshSource->SetResolution(resolution);
-  ITK_TEST_SET_GET_VALUE(resolution, mySphereMeshSource->GetResolution());
+  EXPECT_EQ(resolution, mySphereMeshSource->GetResolution());
 
   mySphereMeshSource->SetScale(scale);
-  ITK_TEST_SET_GET_VALUE(scale, mySphereMeshSource->GetScale());
+  EXPECT_EQ(scale, mySphereMeshSource->GetScale());
 
   mySphereMeshSource->Modified();
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(mySphereMeshSource->Update());
+  EXPECT_NO_THROW(mySphereMeshSource->Update());
 
 
   const MeshType::Pointer myMesh = mySphereMeshSource->GetOutput();
@@ -111,13 +110,7 @@ itkRegularSphereMeshSourceTest(int, char *[])
     ++faceId;
   }
 
-  if (!testPassed)
-  {
-    std::cout << "Test FAILED! " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(testPassed) << "Test FAILED! ";
 
   std::cout << "Test PASSED! " << std::endl;
-
-  return EXIT_SUCCESS;
 }
