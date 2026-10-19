@@ -18,10 +18,12 @@
 
 #include "itkPointsLocator.h"
 #include "itkMapContainer.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TPointsContainer>
-[[nodiscard]] int
+void
 testPointsLocatorTest()
 {
   /**
@@ -51,7 +53,7 @@ testPointsLocatorTest()
   }
 
   pointsLocator->SetPoints(points);
-  ITK_TEST_SET_GET_VALUE(points, pointsLocator->GetPoints());
+  EXPECT_EQ(points, pointsLocator->GetPoints());
 
   pointsLocator->Initialize();
 
@@ -66,53 +68,43 @@ testPointsLocatorTest()
   coords[2] = 50;
 
   const typename PointsLocatorType::PointIdentifier pointId = pointsLocator->FindClosestPoint(coords);
-  if (pointId != 49)
-  {
-    std::cerr << "Error with FindClosestPoint(), poindId does not match" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(pointId, 49u) << "Error with FindClosestPoint(), poindId does not match";
 
   typename PointsLocatorType::NeighborsIdentifierType neighborhood;
 
   std::cout << "Test:  FindClosestNPoints()" << std::endl;
 
   pointsLocator->FindClosestNPoints(coords, 10u, neighborhood);
-  if (neighborhood.size() != 10)
-  {
-    std::cerr << "Error with FindClosestNPoints(), size of returned points does not match" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(neighborhood.size(), 10u) << "Error with FindClosestNPoints(), size of returned points does not match";
 
   std::cout << "Test:  FindClosestNPoints() with distances  (1)" << std::endl;
   std::vector<double> distances;
   pointsLocator->FindClosestNPoints(coords, 10u, neighborhood, distances);
-  if (neighborhood.size() != 10 || distances.size() != 10)
-  {
-    std::cerr << "Error with FindClosestNPoints(), size of returned points or distances does not match" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_EQ(neighborhood.size(), 10u)
+    << "Error with FindClosestNPoints(), size of returned points or distances does not match";
+  ASSERT_EQ(distances.size(), 10u)
+    << "Error with FindClosestNPoints(), size of returned points or distances does not match";
 
   // Check if returned distances are correct
   for (unsigned int i = 0; i < neighborhood.size(); ++i)
   {
     auto dist = coords.EuclideanDistanceTo(points->GetElement(neighborhood[i]));
-    ITK_TEST_EXPECT_EQUAL(dist, distances[i]);
+    EXPECT_EQ(dist, distances[i]);
     std::cout << dist << " + " << distances[i] << std::endl;
   }
 
   std::cout << "Test:  FindClosestNPoints() with distances  (2)" << std::endl;
   pointsLocator->FindClosestNPoints(coords, 200u, neighborhood, distances);
-  if (neighborhood.size() != 100 || distances.size() != 100)
-  {
-    std::cerr << "Error with FindClosestNPoints(), size of returned points or distances is incorrect" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_EQ(neighborhood.size(), 100u)
+    << "Error with FindClosestNPoints(), size of returned points or distances is incorrect";
+  ASSERT_EQ(distances.size(), 100u)
+    << "Error with FindClosestNPoints(), size of returned points or distances is incorrect";
 
   // Check if returned distances are correct
   for (unsigned int i = 0; i < neighborhood.size(); ++i)
   {
     auto dist = coords.EuclideanDistanceTo(points->GetElement(neighborhood[i]));
-    ITK_TEST_EXPECT_EQUAL(dist, distances[i]);
+    EXPECT_EQ(dist, distances[i]);
     std::cout << dist << " * " << distances[i] << std::endl;
   }
 
@@ -121,18 +113,12 @@ testPointsLocatorTest()
   std::cout << "Test:  FindPointsWithinRadius()" << std::endl;
 
   pointsLocator->FindPointsWithinRadius(coords, radius, neighborhood);
-  if (neighborhood.size() != 11)
-  {
-    std::cerr << "Error with FindPointsWithinRadius(), size of returned points within radius does not match"
-              << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(neighborhood.size(), 11u)
+    << "Error with FindPointsWithinRadius(), size of returned points within radius does not match";
 }
+} // namespace
 
-int
-itkPointsLocatorTest(int, char *[])
+TEST(PointsLocator, ConvertedLegacyTest)
 {
   constexpr unsigned int PointDimension{ 3 };
   using PointType = itk::Point<float, PointDimension>;
@@ -141,21 +127,9 @@ itkPointsLocatorTest(int, char *[])
   using MapContainerType = itk::MapContainer<unsigned int, PointType>;
 
   std::cout << "VectorContainerType" << std::endl;
-  if (testPointsLocatorTest<VectorContainerType>() == EXIT_FAILURE)
-  {
-    std::cerr << "### FAILURE" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "--- SUCCESS" << std::endl;
+  testPointsLocatorTest<VectorContainerType>();
   std::cout << std::endl;
 
   std::cout << "MapContainerType" << std::endl;
-  if (testPointsLocatorTest<MapContainerType>() == EXIT_FAILURE)
-  {
-    std::cerr << "### FAILURE" << std::endl;
-    return EXIT_FAILURE;
-  }
-  std::cout << "--- SUCCESS" << std::endl;
-
-  return EXIT_SUCCESS;
+  testPointsLocatorTest<MapContainerType>();
 }
