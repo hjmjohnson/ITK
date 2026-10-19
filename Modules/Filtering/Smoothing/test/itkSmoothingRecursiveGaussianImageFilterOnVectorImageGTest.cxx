@@ -17,12 +17,12 @@
  *=========================================================================*/
 
 #include "itkSmoothingRecursiveGaussianImageFilter.h"
+#include "itkGTest.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkVectorImage.h"
 
-int
-itkSmoothingRecursiveGaussianImageFilterOnVectorImageTest(int, char *[])
+TEST(SmoothingRecursiveGaussianImageFilterOnVectorImage, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -98,15 +98,7 @@ itkSmoothingRecursiveGaussianImageFilterOnVectorImageTest(int, char *[])
 
 
   // Execute the filter
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & err)
-  {
-    err.Print(std::cerr);
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
 
   // Get the Smart Pointer to the Filter Output
@@ -131,6 +123,4 @@ itkSmoothingRecursiveGaussianImageFilterOnVectorImageTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-  std::cout << std::endl << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
 }
