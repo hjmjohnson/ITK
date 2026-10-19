@@ -6,10 +6,12 @@ set(
   itkMorphologicalWatershedImageFilterTest.cxx
   itkTobogganImageFilterTest.cxx
   itkWatershedImageFilterBadValuesTest.cxx
-  itkWatershedImageFilterTest.cxx
 )
 
 createtestdriver(ITKWatersheds "${ITKWatersheds-Test_LIBRARIES}" "${ITKWatershedsTests}")
+
+set(ITKWatershedsGTests itkWatershedImageFilterGTest.cxx)
+creategoogletestdriver(ITKWatersheds "${ITKWatersheds-Test_LIBRARIES}" "${ITKWatershedsGTests}")
 
 itk_add_test(
   NAME itkWatershedImageFilterBadValuesTest
@@ -69,13 +71,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkIsolatedWatershedImageFilterTestCloseThresholds.png
 )
-itk_add_test(
-  NAME itkWatershedImageFilterTest
-  COMMAND
-    ITKWatershedsTestDriver
-    itkWatershedImageFilterTest
-)
-
 itk_add_test(
   NAME itkMorphologicalWatershedFromMarkersImageFilterTestM0F0
   COMMAND
