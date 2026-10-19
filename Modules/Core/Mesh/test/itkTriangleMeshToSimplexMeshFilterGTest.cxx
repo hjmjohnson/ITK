@@ -21,10 +21,9 @@
 #include "itkRegularSphereMeshSource.h"
 #include "itkTriangleMeshToSimplexMeshFilter.h"
 #include "itkDefaultDynamicMeshTraits.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkTriangleMeshToSimplexMeshFilterTest(int, char *[])
+TEST(TriangleMeshToSimplexMeshFilter, ConvertedLegacyTest)
 {
   // Declare the type of the input and output mesh
   using TriangleMeshTraits = itk::DefaultDynamicMeshTraits<double, 3, 3>;
@@ -53,7 +52,7 @@ itkTriangleMeshToSimplexMeshFilterTest(int, char *[])
 
   auto simplexFilter = SimplexFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(simplexFilter, TriangleMeshToSimplexMeshFilter, MeshToMeshFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(simplexFilter, TriangleMeshToSimplexMeshFilter, MeshToMeshFilter);
 
 
   simplexFilter->SetInput(mySphereMeshSource->GetOutput());
@@ -64,5 +63,4 @@ itkTriangleMeshToSimplexMeshFilterTest(int, char *[])
   std::cout << "Simplex Mesh: " << simplexMesh << std::endl;
 
   std::cout << "[TEST DONE]" << std::endl;
-  return EXIT_SUCCESS;
 }
