@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKPDEDeformableRegistrationTests
-  itkDemonsRegistrationFilterTest.cxx
   itkDiffeomorphicDemonsRegistrationFilterTest.cxx
   itkDiffeomorphicDemonsRegistrationFilterTest2.cxx
   itkESMDemonsRegistrationFunctionTest.cxx
@@ -19,12 +18,6 @@ createtestdriver(ITKPDEDeformableRegistration "${ITKPDEDeformableRegistration-Te
                  "${ITKPDEDeformableRegistrationTests}"
 )
 
-itk_add_test(
-  NAME itkDemonsRegistrationFilterTest
-  COMMAND
-    ITKPDEDeformableRegistrationTestDriver
-    itkDemonsRegistrationFilterTest
-)
 itk_add_test(
   NAME itkLevelSetMotionRegistrationFilterTest
   COMMAND
@@ -261,3 +254,6 @@ itk_add_test(
     ITKPDEDeformableRegistrationTestDriver
     itkESMDemonsRegistrationFunctionTest
 )
+
+set(ITKPDEDeformableRegistrationGTests itkDemonsRegistrationFilterGTest.cxx)
+creategoogletestdriver(ITKPDEDeformableRegistration "${ITKPDEDeformableRegistration-Test_LIBRARIES}" "${ITKPDEDeformableRegistrationGTests}")
