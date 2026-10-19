@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKSpatialObjectsTests
   itkBoxSpatialObjectTest.cxx
-  itkContourSpatialObjectTest.cxx
   itkDTITubeSpatialObjectTest.cxx
   itkEllipseSpatialObjectTest.cxx
   itkGaussianSpatialObjectTest.cxx
@@ -83,12 +82,6 @@ itk_add_test(
   COMMAND
     ITKSpatialObjectsTestDriver
     itkImageMaskSpatialObjectTest5
-)
-itk_add_test(
-  NAME itkContourSpatialObjectTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkContourSpatialObjectTest
 )
 itk_add_test(
   NAME itkSurfaceSpatialObjectTest
@@ -212,6 +205,7 @@ set(
   itkArrowSpatialObjectGTest.cxx
   itkBlobSpatialObjectGTest.cxx
   itkCastSpatialObjectFilterGTest.cxx
+  itkContourSpatialObjectGTest.cxx
   itkContourSpatialObjectPointGTest.cxx
   itkSpatialObjectPointGTest.cxx
 )
