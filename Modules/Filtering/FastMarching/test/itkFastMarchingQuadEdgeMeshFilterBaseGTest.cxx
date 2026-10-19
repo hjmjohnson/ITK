@@ -21,11 +21,13 @@
 #include "itkRegularSphereMeshSource.h"
 #include "itkFastMarchingThresholdStoppingCriterion.h"
 #include "itkMeshFileWriter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
+#include "itkTestDriverIncludeRequiredFactories.h"
 
-int
-itkFastMarchingQuadEdgeMeshFilterBaseTest(int, char *[])
+TEST(FastMarchingQuadEdgeMeshFilterBase, ConvertedLegacyTest)
 {
+  RegisterRequiredFactories();
+
   using PixelType = float;
   using CoordType = double;
 
@@ -84,7 +86,7 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest(int, char *[])
   fmm_filter->SetTrialPoints(trial);
   fmm_filter->SetStoppingCriterion(criterion);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(fmm_filter->Update());
+  ASSERT_NO_THROW(fmm_filter->Update());
 
 
   using WriterType = itk::MeshFileWriter<MeshType>;
@@ -92,7 +94,4 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest(int, char *[])
   writer->SetInput(fmm_filter->GetOutput());
   writer->SetFileName("itkFastMarchingQuadEdgeMeshFilterBase.vtk");
   writer->Update();
-
-
-  return EXIT_SUCCESS;
 }
