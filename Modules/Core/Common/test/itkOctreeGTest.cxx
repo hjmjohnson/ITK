@@ -19,11 +19,13 @@
 #include "itkOctree.h"
 #include "itkNumericTraits.h"
 #include "itkImageRegionIterator.h"
-#include "itkTestingMacros.h"
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TPixel, unsigned int TableSize>
 class IdentityMap
 {
@@ -35,9 +37,9 @@ public:
     return pixval < TableSize ? pixval : TableSize - 1;
   }
 };
+} // namespace
 
-int
-itkOctreeTest(int, char *[])
+TEST(Octree, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<unsigned int, 3>;
   constexpr ImageType::SizeType imageSize{ 4, 4, 4 };
@@ -69,7 +71,7 @@ itkOctreeTest(int, char *[])
   catch (const itk::ExceptionObject & ex)
   {
     ex.Print(std::cerr);
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   using OctreeType = itk::Octree<unsigned int, 16384, IdentityMap<unsigned int, 16384>>;
@@ -91,24 +93,17 @@ itkOctreeTest(int, char *[])
       const unsigned int y = ri2.Get();
       const unsigned int mapped = id.Evaluate(&x);
       std::cerr << "x = " << x << " mapped(x) " << mapped << " y = " << y << std::endl;
-      if (mapped != y)
-      {
-        std::cerr << "Error comparing Input and Output of Octree" << std::endl;
-        return EXIT_FAILURE;
-      }
+      ASSERT_EQ(mapped, y) << "Error comparing Input and Output of Octree";
       ++ri;
       ++ri2;
     }
-    if (!ri.IsAtEnd() || !ri2.IsAtEnd())
-    {
-      std::cerr << "Error, inconsistent image sizes in Octree" << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_TRUE(ri.IsAtEnd()) << "Error, inconsistent image sizes in Octree";
+    ASSERT_TRUE(ri2.IsAtEnd()) << "Error, inconsistent image sizes in Octree";
   }
   catch (const itk::ExceptionObject & ex)
   {
     ex.Print(std::cerr);
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   // Test streaming enumeration for OctreeEnums::Octree elements
@@ -132,6 +127,4 @@ itkOctreeTest(int, char *[])
   {
     std::cout << "STREAMED ENUM VALUE Octree: " << ee << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
