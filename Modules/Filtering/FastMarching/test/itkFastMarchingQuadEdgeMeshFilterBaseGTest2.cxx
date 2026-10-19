@@ -17,13 +17,16 @@
  *=========================================================================*/
 
 #include "itkFastMarchingQuadEdgeMeshFilterBase.h"
+#include "itkGTest.h"
+#include "itkTestDriverIncludeRequiredFactories.h"
 #include "itkQuadEdgeMeshExtendedTraits.h"
 #include "itkFastMarchingThresholdStoppingCriterion.h"
 #include "itkMeshFileWriter.h"
 
-int
-itkFastMarchingQuadEdgeMeshFilterBaseTest2(int, char *[])
+TEST(FastMarchingQuadEdgeMeshFilterBase, ConvertedLegacyTest2)
 {
+  RegisterRequiredFactories();
+
   using PixelType = float;
   using CoordType = double;
 
@@ -112,16 +115,7 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest2(int, char *[])
   fmm_filter->SetTrialPoints(trial);
   fmm_filter->SetStoppingCriterion(criterion);
 
-  try
-  {
-    fmm_filter->Update();
-  }
-  catch (const itk::ExceptionObject & excep)
-  {
-    std::cerr << "Exception caught !" << std::endl;
-    std::cerr << excep << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(fmm_filter->Update());
 
   const MeshType::Pointer output = fmm_filter->GetOutput();
 
@@ -156,10 +150,5 @@ itkFastMarchingQuadEdgeMeshFilterBaseTest2(int, char *[])
   writer->SetFileName("itkFastMarchingQuadEdgeMeshFilterBaseTest2.vtk");
   writer->Update();
 
-  if (error)
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(error);
 }
