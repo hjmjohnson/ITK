@@ -17,6 +17,10 @@
  *=========================================================================*/
 
 
+// First include the header file to be tested:
+#include "itkDifferenceOfGaussiansGradientImageFilter.h"
+#include "itkGTest.h"
+
 // Native ITK stuff
 #include "itkSimpleFilterWatcher.h"
 
@@ -26,7 +30,6 @@
 
 // DOG gradient related stuff
 #include "itkBinomialBlurImageFilter.h"
-#include "itkDifferenceOfGaussiansGradientImageFilter.h"
 #include "itkVectorMagnitudeImageFilter.h"
 
 /*
@@ -34,8 +37,7 @@ This file tests:
   itkDifferenceOfGaussiansGradientImageFilter
 */
 
-int
-itkDifferenceOfGaussiansGradientTest(int, char *[])
+TEST(DifferenceOfGaussiansGradientImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int dim{ 3 };
 
@@ -164,6 +166,4 @@ itkDifferenceOfGaussiansGradientTest(int, char *[])
 
   vectorMagFilter->SetInput(gradientImage);
   vectorMagFilter->Update();
-
-  return EXIT_SUCCESS;
 }
