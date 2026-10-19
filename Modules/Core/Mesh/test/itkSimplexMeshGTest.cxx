@@ -21,9 +21,9 @@
 #include "itkSimplexMesh.h"
 #include "itkDefaultDynamicMeshTraits.h"
 #include "itkTimeProbe.h"
+#include "itkGTest.h"
 
-int
-itkSimplexMeshTest(int, char *[])
+TEST(SimplexMesh, ConvertedLegacyTest)
 {
 
   // Declare the type of the input and output mesh
@@ -138,5 +138,4 @@ itkSimplexMeshTest(int, char *[])
   }
 
   std::cout << "[TEST DONE]" << std::endl;
-  return EXIT_SUCCESS;
 }
