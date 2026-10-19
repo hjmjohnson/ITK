@@ -18,18 +18,10 @@
 
 #include <iostream>
 #include "itkLabelObject.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkLabelObjectTest(int argc, char * argv[])
+TEST(LabelObject, ConvertedLegacyTest)
 {
-
-  if (argc != 1)
-  {
-    std::cerr << "usage: " << itkNameOfTestExecutableMacro(argv) << "" << std::endl;
-    return EXIT_FAILURE;
-  }
-
   constexpr int dim{ 3 };
 
   using LabelObjectType = itk::LabelObject<unsigned long, dim>;
@@ -105,11 +97,7 @@ itkLabelObjectTest(int argc, char * argv[])
   ref->AddLine(idx, 14);
 
   // compare the result
-  if (lo->GetNumberOfLines() != ref->GetNumberOfLines())
-  {
-    std::cerr << "number of lines is different!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_EQ(lo->GetNumberOfLines(), ref->GetNumberOfLines()) << "number of lines is different!";
 
   using IteratorType = LabelObjectType::ConstLineIterator;
 
@@ -123,21 +111,14 @@ itkLabelObjectTest(int argc, char * argv[])
     std::cout << it1.GetLine().GetIndex() << '-' << it1.GetLine().GetLength() << "    ";
     std::cout << it2.GetLine().GetIndex() << '-' << it2.GetLine().GetLength();
     std::cout << std::endl;
-    if (it1.GetLine().GetIndex() != it2.GetLine().GetIndex() || it1.GetLine().GetLength() != it2.GetLine().GetLength())
-    {
-      std::cerr << "Line mismatch." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(it1.GetLine().GetIndex(), it2.GetLine().GetIndex()) << "Line mismatch.";
+    EXPECT_EQ(it1.GetLine().GetLength(), it2.GetLine().GetLength()) << "Line mismatch.";
     // test both versions of the iterator
     it1++;
     ++it2;
   }
 
-  if (!it2.IsAtEnd())
-  {
-    std::cerr << "it2 not at end" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(it2.IsAtEnd()) << "it2 not at end";
 
   // testing AddIndex(), GetIndex() and HasIndex()
 
@@ -165,44 +146,20 @@ itkLabelObjectTest(int argc, char * argv[])
   idxs.push_back(idx);
 
   // should produce 2 lines
-  if (lo->GetNumberOfLines() != 2)
-  {
-    std::cerr << "number of lines should be 2!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(lo->GetNumberOfLines(), 2u) << "number of lines should be 2!";
 
   // should produce 3 pixels
-  if (lo->Size() != 3)
-  {
-    std::cerr << "size should be 3!" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_EQ(lo->Size(), 3u) << "size should be 3!";
 
   for (unsigned int i = 0; i < lo->Size(); ++i)
   {
-    if (lo->GetIndex(i) != idxs[i])
-    {
-      std::cerr << "Wrong index returned by GetIndex(" << i << "): " << lo->GetIndex(i) << ". " << idxs[i]
-                << " was expected." << std::endl;
-      return EXIT_FAILURE;
-    }
-    if (!lo->HasIndex(idxs[i]))
-    {
-      std::cerr << "label object should have the index " << idxs[i] << '!' << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(lo->GetIndex(i), idxs[i]) << "Wrong index returned by GetIndex(" << i << ')';
+    EXPECT_TRUE(lo->HasIndex(idxs[i])) << "label object should have the index " << idxs[i] << '!';
   }
 
   // test with an index not there
   idx[0] = 10;
   idx[1] = 10;
   idx[2] = 10;
-  if (lo->HasIndex(idx))
-  {
-    std::cerr << "label object shouldn't have the index " << idx << '!' << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(lo->HasIndex(idx)) << "label object shouldn't have the index " << idx << '!';
 }
