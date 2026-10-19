@@ -3,7 +3,6 @@ set(
   IOTransformDCMTKTests
   itkDCMTKTransformIOTest.cxx
   itkDCMTKTransformIOResampleTest.cxx
-  itkDCMTKTransformIORigidScaleRoundTripTest.cxx
 )
 
 createtestdriver(IOTransformDCMTK "${IOTransformDCMTK-Test_LIBRARIES}" "${IOTransformDCMTKTests}")
@@ -14,6 +13,7 @@ set(
   IOTransformDCMTKGTests
   itkDCMTKSeriesFileNamesOrderingGTest.cxx
   itkDCMTKSeriesFileNamesParityGTest.cxx
+  itkDCMTKTransformIORigidScaleRoundTripGTest.cxx
 )
 creategoogletestdriver(IOTransformDCMTK "${IOTransformDCMTK-Test_LIBRARIES}" "${IOTransformDCMTKGTests}")
 
@@ -49,13 +49,6 @@ itk_add_test(
     IOTransformDCMTKTestDriver
     itkDCMTKTransformIOTest
     DATA{Input/rect-offset-sro-rigid/transform.dcm}
-)
-
-itk_add_test(
-  NAME itkDCMTKTransformIORigidScaleRoundTripTest
-  COMMAND
-    IOTransformDCMTKTestDriver
-    itkDCMTKTransformIORigidScaleRoundTripTest
 )
 
 itk_add_test(
