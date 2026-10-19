@@ -1,16 +1,13 @@
 itk_module_test()
 
-set(
-  RLEImageTests
-  itkRLEImageTest.cxx
-  itkRegionOfInterestRLEImageFilterTest.cxx
-)
+set(RLEImageTests itkRLEImageTest.cxx)
 
 createtestdriver( RLEImage "${RLEImage-Test_LIBRARIES}" "${RLEImageTests}" )
 
 set(
   RLEImageGTests
   itkIteratorTestsForRLEImageGTest.cxx
+  itkRegionOfInterestRLEImageFilterGTest.cxx
   itkRLEImageAlgorithmCopyGTest.cxx
   itkRLEImageIteratorGTest.cxx
   itkRLEImageIteratorsForwardBackwardGTest.cxx
@@ -32,13 +29,6 @@ target_link_libraries(runFromIDE ${RLEImage-Test_LIBRARIES})
 
 add_executable(rleStats rleStats.cxx)
 target_link_libraries(rleStats ${RLEImage-Test_LIBRARIES})
-
-itk_add_test(
-  NAME itkRegionOfInterestRLEImageFilterTest
-  COMMAND
-    RLEImageTestDriver
-    itkRegionOfInterestRLEImageFilterTest
-)
 
 function(ReadWriteTest ImageName Ext) # optional: big
   set(outImage "${ITK_TEST_OUTPUT_DIR}/${ImageName}.${Ext}")
