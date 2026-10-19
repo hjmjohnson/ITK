@@ -20,13 +20,13 @@
 #include "itkImageBufferRange.h"
 #include "itkShrinkImageFilter.h"
 #include "itkFileOutputWindow.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include <numeric> // For iota.
 
 
-int
-itkShrinkImageTest(int, char *[])
+TEST(ShrinkImageFilter, ConvertedLegacyTest)
 {
   const itk::FileOutputWindow::Pointer fow = itk::FileOutputWindow::New();
   fow->SetInstance(fow);
@@ -157,7 +157,7 @@ itkShrinkImageTest(int, char *[])
   catch (...)
   {
     std::cout << "Exception missed." << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   std::cout << std::endl << std::endl;
@@ -207,15 +207,5 @@ itkShrinkImageTest(int, char *[])
 
   std::cout << std::endl;
   std::cout << std::flush;
-  if (passed)
-  {
-    std::cout << "Recovered from the exception." << std::endl;
-    std::cout << "ShrinkImageFilter test passed." << std::endl;
-    std::cout << std::flush;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "ShrinkImageFilter test failed." << std::endl;
-  std::cout << std::flush;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(passed) << "ShrinkImageFilter test failed.";
 }
