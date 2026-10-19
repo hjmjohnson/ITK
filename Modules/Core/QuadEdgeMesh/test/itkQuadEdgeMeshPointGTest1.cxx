@@ -18,9 +18,9 @@
 
 #include "itkQuadEdgeMeshPoint.h"
 #include "itkMesh.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshPointTest1(int, char *[])
+TEST(QuadEdgeMeshPoint, ConvertedLegacyTest)
 {
   std::cout << "Testing points..." << std::endl;
 
@@ -51,11 +51,7 @@ itkQuadEdgeMeshPointTest1(int, char *[])
 
   const PointType p2(p1); // Test copy constructor
 
-  if (p1.EuclideanDistanceTo(p2) > 1e-6)
-  {
-    std::cerr << "Error in the copy constructor" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p1.EuclideanDistanceTo(p2), 1e-6) << "Error in the copy constructor";
 
   //
   // Test assignment from an itk::Point
@@ -68,20 +64,12 @@ itkQuadEdgeMeshPointTest1(int, char *[])
 
   const PointType pp = ps;
 
-  if (pp.EuclideanDistanceTo(ps) > 1e-6)
-  {
-    std::cerr << "Error in the array constructor" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(pp.EuclideanDistanceTo(ps), 1e-6) << "Error in the array constructor";
 
   PointType pp2;
   pp2.SetPoint(ps);
 
-  if (pp2.EuclideanDistanceTo(ps) > 1e-6)
-  {
-    std::cerr << "Error in the array constructor" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(pp2.EuclideanDistanceTo(ps), 1e-6) << "Error in the array constructor";
 
   PointType::ValueArrayType cc;
   cc[0] = 17.7;
@@ -90,26 +78,14 @@ itkQuadEdgeMeshPointTest1(int, char *[])
 
   const PointType p3(cc); // Test Array based constructor
 
-  if (p2.EuclideanDistanceTo(p1) > 1e-6)
-  {
-    std::cerr << "Error in the array constructor" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p2.EuclideanDistanceTo(p1), 1e-6) << "Error in the array constructor";
 
   const PointType p4 = p1;
   const PointType p4b = p1; // Test assignment operator to Self
 
-  if (p4.EuclideanDistanceTo(p1) > 1e-6)
-  {
-    std::cerr << "Error in the assignment operator to Self" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p4.EuclideanDistanceTo(p1), 1e-6) << "Error in the assignment operator to Self";
 
-  if (p4b.EuclideanDistanceTo(p4) > 1e-6)
-  {
-    std::cerr << "Error in the assignment operator to Self" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p4b.EuclideanDistanceTo(p4), 1e-6) << "Error in the assignment operator to Self";
 
   PointType::Superclass pp1;
   pp1[0] = 17.7;
@@ -119,88 +95,45 @@ itkQuadEdgeMeshPointTest1(int, char *[])
   const PointType p5 = pp1;
   const PointType p5b = pp1; // Test assignment operator from Superclass
 
-  if (p5.EuclideanDistanceTo(pp1) > 1e-6)
-  {
-    std::cerr << "Error assignment operator from Superclass" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p5.EuclideanDistanceTo(pp1), 1e-6) << "Error assignment operator from Superclass";
 
-  if (p5b.EuclideanDistanceTo(p5) > 1e-6)
-  {
-    std::cerr << "Error assignment operator from Superclass" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p5b.EuclideanDistanceTo(p5), 1e-6) << "Error assignment operator from Superclass";
 
   PointType       p6 = cc;
   const PointType p6b = cc; // Test assignment operator from array
 
-  if (p6.EuclideanDistanceTo(p3) > 1e-6)
-  {
-    std::cerr << "Error in the assignment operator from Array " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p6.EuclideanDistanceTo(p3), 1e-6) << "Error in the assignment operator from Array ";
 
-  if (p6b.EuclideanDistanceTo(p6) > 1e-6)
-  {
-    std::cerr << "Error in the assignment operator from Array " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(p6b.EuclideanDistanceTo(p6), 1e-6) << "Error in the assignment operator from Array ";
 
   auto * edge1 = new QuadEdgeType;
 
   p6.SetEdge(edge1);
 
-  if (p6.GetEdge() != edge1)
-  {
-    std::cerr << "Error in SetEdge()/GetEdge() " << std::endl;
-    delete edge1;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(p6.GetEdge(), edge1) << "Error in SetEdge()/GetEdge() ";
 
   auto * edge2 = new QuadEdgeType;
 
   p6.SetEdge(edge2);
 
-  if (p6.GetEdge() != edge2)
-  {
-    std::cerr << "Error in SetEdge()/GetEdge() " << std::endl;
-    delete edge1;
-    delete edge2;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(p6.GetEdge(), edge2) << "Error in SetEdge()/GetEdge() ";
 
   // The following tests are commented out
   // because the point code is not safe yet.
 #if defined(POINTMAKESAFE)
   bool internal = p6.IsInternal();
 
-  if (internal != true) // FIXME: verify with a realistic case
-  {
-    std::cerr << "Error in IsInternal() " << std::endl;
-    delete edge1;
-    delete edge2;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(internal) << "Error in IsInternal() "; // FIXME: verify with a realistic case
 
   PointType p7;
-  if (p7.IsInternal())
-  {
-    std::cerr << "Error in IsInternal() " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(p7.IsInternal()) << "Error in IsInternal() ";
 
   int valence = p6.GetValence();
-  if (valence != 1)
-  {
-    std::cerr << "Error in GetValence() " << std::endl;
-    std::cerr << "valence = " << valence << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(valence, 1) << "Error in GetValence() ";
 #endif
 
   delete edge1;
   delete edge2;
 
   std::cout << "Test passed" << std::endl;
-  return EXIT_SUCCESS;
 }
