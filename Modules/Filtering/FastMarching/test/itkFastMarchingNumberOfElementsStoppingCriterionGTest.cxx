@@ -17,10 +17,9 @@
  *=========================================================================*/
 
 #include "itkFastMarchingNumberOfElementsStoppingCriterion.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkFastMarchingNumberOfElementsStoppingCriterionTest(int, char *[])
+TEST(FastMarchingNumberOfElementsStoppingCriterion, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<float, 2>;
 
@@ -28,13 +27,13 @@ itkFastMarchingNumberOfElementsStoppingCriterionTest(int, char *[])
 
   auto imageCriterion = ImageStoppingCriterionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     imageCriterion, FastMarchingNumberOfElementsStoppingCriterion, FastMarchingStoppingCriterionBase);
 
 
   itk::IdentifierType targetNumberOfElements = 10;
   imageCriterion->SetTargetNumberOfElements(targetNumberOfElements);
-  ITK_TEST_SET_GET_VALUE(targetNumberOfElements, imageCriterion->GetTargetNumberOfElements());
+  EXPECT_EQ(targetNumberOfElements, imageCriterion->GetTargetNumberOfElements());
 
   std::cout << "Description: " << imageCriterion->GetDescription() << std::endl;
 
@@ -44,17 +43,13 @@ itkFastMarchingNumberOfElementsStoppingCriterionTest(int, char *[])
 
   auto meshCriterion = MeshStoppingCriterionType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     meshCriterion, FastMarchingNumberOfElementsStoppingCriterion, FastMarchingStoppingCriterionBase);
 
 
   targetNumberOfElements = 8;
   meshCriterion->SetTargetNumberOfElements(targetNumberOfElements);
-  ITK_TEST_SET_GET_VALUE(targetNumberOfElements, meshCriterion->GetTargetNumberOfElements());
+  EXPECT_EQ(targetNumberOfElements, meshCriterion->GetTargetNumberOfElements());
 
   std::cout << "Description: " << meshCriterion->GetDescription() << std::endl;
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
