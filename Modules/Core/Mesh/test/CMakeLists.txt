@@ -4,7 +4,6 @@ set(
   itkBinaryMask3DMeshSourceTest.cxx
   itkConnectedRegionsMeshFilterTest2.cxx
   itkMeshFstreamTest.cxx
-  itkMeshRegionTest.cxx
   itkMeshSourceGraftOutputTest.cxx
   itkMeshSpatialObjectIOTest.cxx
   itkMeshTest.cxx
@@ -62,12 +61,6 @@ itk_add_test(
     ITKMeshTestDriver
     itkBinaryMask3DMeshSourceTest
     1
-)
-itk_add_test(
-  NAME itkMeshRegionTest
-  COMMAND
-    ITKMeshTestDriver
-    itkMeshRegionTest
 )
 itk_add_test(
   NAME itkRegularSphereMeshSourceTest
@@ -489,5 +482,6 @@ set(
   itkImageToParametricSpaceFilterGTest.cxx
   itkInteriorExteriorMeshFilterGTest.cxx
   itkMeshCellDataGTest.cxx
+  itkMeshRegionGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
