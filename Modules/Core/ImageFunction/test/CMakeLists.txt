@@ -4,7 +4,6 @@ set(
   itkBSplineDecompositionImageFilterTest.cxx
   itkCentralDifferenceImageFunctionOnVectorSpeedTest.cxx
   itkCentralDifferenceImageFunctionSpeedTest.cxx
-  itkScatterMatrixImageFunctionTest.cxx
   itkVectorInterpolateImageFunctionTest.cxx
   itkVectorLinearInterpolateNearestNeighborExtrapolateImageFunctionTest.cxx
   itkVectorMeanImageFunctionTest.cxx
@@ -26,12 +25,6 @@ itk_add_test(
     itkBSplineDecompositionImageFilterTest
     3
     -0.26794919243112281
-)
-itk_add_test(
-  NAME itkScatterMatrixImageFunctionTest
-  COMMAND
-    ITKImageFunctionTestDriver
-    itkScatterMatrixImageFunctionTest
 )
 itk_add_test(
   NAME itkVectorMeanImageFunctionTest
@@ -77,6 +70,7 @@ set(
   itkNeighborhoodOperatorImageFunctionGTest.cxx
   itkRayCastInterpolateImageFunctionGTest.cxx
   itkRGBInterpolateImageFunctionGTest.cxx
+  itkScatterMatrixImageFunctionGTest.cxx
   itkSumOfSquaresImageFunctionGTest.cxx
   itkVarianceImageFunctionGTest.cxx
 )
