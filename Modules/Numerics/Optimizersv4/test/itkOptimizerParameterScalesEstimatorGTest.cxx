@@ -16,7 +16,10 @@
  *
  *=========================================================================*/
 #include "itkOptimizerParameterScalesEstimator.h"
+#include "itkGTest.h"
 
+namespace
+{
 /**
  *  \class OptimizerParameterScalesEstimatorTest for test.
  *  Create a simple scales estimator class to use for testing here.
@@ -69,12 +72,12 @@ protected:
   OptimizerParameterScalesEstimatorTest() = default;
   ~OptimizerParameterScalesEstimatorTest() override = default;
 };
+} // namespace
 
 /**
  * The test program for OptimizerParameterScalesEstimator.
  */
-int
-itkOptimizerParameterScalesEstimatorTest(int, char *[])
+TEST(OptimizerParameterScalesEstimator, ConvertedLegacyTest)
 {
   auto scalesEstimator = OptimizerParameterScalesEstimatorTest::New();
 
@@ -84,7 +87,4 @@ itkOptimizerParameterScalesEstimatorTest(int, char *[])
   scalesEstimator->EstimateScales(scales);
 
   std::cout << "Scales estimated: " << scales << std::endl;
-  std::cout << "Test passed" << std::endl;
-
-  return EXIT_SUCCESS;
 }
