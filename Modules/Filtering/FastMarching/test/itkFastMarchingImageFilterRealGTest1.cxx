@@ -20,7 +20,7 @@
 #include "itkFastMarchingImageFilterBase.h"
 #include "itkFastMarchingThresholdStoppingCriterion.h"
 #include "itkTextOutput.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkCommand.h"
 
 
@@ -41,10 +41,8 @@ public:
 };
 } // namespace
 
-int
-itkFastMarchingImageFilterRealTest1(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(FastMarchingImageFilterReal, ConvertedLegacyTest1)
 {
-
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
 
   // Create a Fast Marching image filter object
@@ -61,15 +59,15 @@ itkFastMarchingImageFilterRealTest1(int itkNotUsed(argc), char * itkNotUsed(argv
 
   constexpr FloatImageType::PixelType threshold = 100.0;
   criterion->SetThreshold(threshold);
-  ITK_TEST_SET_GET_VALUE(threshold, criterion->GetThreshold());
+  EXPECT_EQ(threshold, criterion->GetThreshold());
 
   auto marcher = FastMarchingType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(marcher, FastMarchingImageFilterBase, FastMarchingBase);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(marcher, FastMarchingImageFilterBase, FastMarchingBase);
 
 
   marcher->SetStoppingCriterion(criterion);
-  ITK_TEST_SET_GET_VALUE(criterion, marcher->GetStoppingCriterion());
+  EXPECT_EQ(criterion, marcher->GetStoppingCriterion());
 
   ShowProgressObject                                          progressWatch(marcher);
   const itk::SimpleMemberCommand<ShowProgressObject>::Pointer command =
@@ -100,7 +98,7 @@ itkFastMarchingImageFilterRealTest1(int itkNotUsed(argc), char * itkNotUsed(argv
   alive->push_back(node_pair);
 
   marcher->SetAlivePoints(alive);
-  ITK_TEST_SET_GET_VALUE(alive, marcher->GetAlivePoints());
+  EXPECT_EQ(alive, marcher->GetAlivePoints());
 
   // Set up trial points
   auto trial = NodePairContainerType::New();
@@ -134,7 +132,7 @@ itkFastMarchingImageFilterRealTest1(int itkNotUsed(argc), char * itkNotUsed(argv
   trial->push_back(node_pair);
 
   marcher->SetTrialPoints(trial);
-  ITK_TEST_SET_GET_VALUE(trial, marcher->GetTrialPoints());
+  EXPECT_EQ(trial, marcher->GetTrialPoints());
 
   // Specify the size of the output image
   constexpr FloatImageType::SizeType size{ 64, 64 };
@@ -155,7 +153,7 @@ itkFastMarchingImageFilterRealTest1(int itkNotUsed(argc), char * itkNotUsed(argv
   marcher->DebugOn();
 
   // Update the Fast Marching filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->Update());
 
 
   std::cout << "TargetReachedValue: " << marcher->GetTargetReachedValue() << std::endl;
@@ -198,13 +196,5 @@ itkFastMarchingImageFilterRealTest1(int itkNotUsed(argc), char * itkNotUsed(argv
     ++iterator;
   }
 
-
-  if (passed)
-  {
-    std::cout << "Test passed!" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed!" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(passed);
 }
