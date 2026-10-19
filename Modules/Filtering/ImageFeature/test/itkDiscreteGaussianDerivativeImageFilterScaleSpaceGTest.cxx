@@ -18,6 +18,7 @@
 // Disable warning for long symbol names in this file only
 
 #include "itkDiscreteGaussianDerivativeImageFilter.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -143,31 +144,19 @@ NormalizeSineWave(double frequencyPerImage, unsigned int order, double pixelSpac
 
 } // namespace
 
-int
-itkDiscreteGaussianDerivativeImageFilterScaleSpaceTest(int, char *[])
+TEST(DiscreteGaussianDerivativeImageFilter, ConvertedLegacyScaleSpaceTest)
 {
-  bool pass = true;
-
   // Testing first order Gaussian
-  pass &= NormalizeSineWave(16, 1);
-  pass &= NormalizeSineWave(32, 1);
-  pass &= NormalizeSineWave(64, 1);
+  EXPECT_TRUE(NormalizeSineWave(16, 1));
+  EXPECT_TRUE(NormalizeSineWave(32, 1));
+  EXPECT_TRUE(NormalizeSineWave(64, 1));
 
   // Testing second order Gaussian
-  pass &= NormalizeSineWave(16, 2);
-  pass &= NormalizeSineWave(32, 2);
-  pass &= NormalizeSineWave(64, 2);
+  EXPECT_TRUE(NormalizeSineWave(16, 2));
+  EXPECT_TRUE(NormalizeSineWave(32, 2));
+  EXPECT_TRUE(NormalizeSineWave(64, 2));
 
   // Testing spacing invariance
-  pass &= NormalizeSineWave(16, 2, 0.01);
-  pass &= NormalizeSineWave(16, 2, 100);
-
-  if (!pass)
-  {
-    std::cout << "Test failed!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(NormalizeSineWave(16, 2, 0.01));
+  EXPECT_TRUE(NormalizeSineWave(16, 2, 100));
 }
