@@ -17,7 +17,10 @@
  *=========================================================================*/
 #include "itkShapedNeighborhoodIterator.h"
 #include "itkBinaryBallStructuringElement.h"
+#include "itkGTest.h"
 
+namespace
+{
 using LocalImageType = itk::Image<int, 2>;
 void
 CreateImagex(LocalImageType::Pointer & image)
@@ -29,9 +32,9 @@ CreateImagex(LocalImageType::Pointer & image)
   image->SetRegions(region);
   image->AllocateInitialized();
 }
+} // namespace
 
-int
-itkShapedIteratorFromStructuringElementTest(int, char *[])
+TEST(ShapedIteratorFromStructuringElement, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<int, 2>;
   using PixelType = ImageType::PixelType;
@@ -84,21 +87,5 @@ itkShapedIteratorFromStructuringElementTest(int, char *[])
   elementRadius.Fill(3);
   structuringElement.SetRadius(elementRadius);
 
-  bool caught = false;
-  try
-  {
-    biterator.CreateActiveListFromNeighborhood(structuringElement);
-  }
-  catch (const itk::ExceptionObject & e)
-  {
-    caught = true;
-    std::cout << "Caught expected exception." << e << std::endl;
-  }
-  if (!caught)
-  {
-    std::cout << "Failed to catch expected exception." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_THROW(biterator.CreateActiveListFromNeighborhood(structuringElement), itk::ExceptionObject);
 }

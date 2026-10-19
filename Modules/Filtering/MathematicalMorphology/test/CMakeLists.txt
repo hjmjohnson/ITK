@@ -41,7 +41,6 @@ set(
   itkRegionalMinimaImageFilterTest.cxx
   itkRemoveBoundaryObjectsTest.cxx
   itkRemoveBoundaryObjectsTest2.cxx
-  itkShapedIteratorFromStructuringElementTest.cxx
   itkTopHatImageFilterTest.cxx
   itkValuedRegionalMaximaImageFilterTest.cxx
   itkValuedRegionalMinimaImageFilterTest.cxx
@@ -58,6 +57,7 @@ set(
   itkAnchorOpenCloseImageFilterGTest.cxx
   itkMathematicalMorphologyEnumsGTest.cxx
   itkMovingHistogramMorphologyImageFilterGTest.cxx
+  itkShapedIteratorFromStructuringElementGTest.cxx
 )
 creategoogletestdriver(
   ITKMathematicalMorphology
@@ -700,12 +700,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/RemoveBoundaryObjectsTest2.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/RemoveBoundaryObjectsTest2.png
-)
-itk_add_test(
-  NAME itkShapedIteratorFromStructuringElementTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkShapedIteratorFromStructuringElementTest
 )
 itk_add_test(
   NAME itkBlackTopHatImageFilterTest
