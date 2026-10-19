@@ -17,13 +17,12 @@
  *=========================================================================*/
 
 #include "itkInd2Sub.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <vector>
 #include <iostream>
 
-int
-itkInd2SubTest(int, char *[])
+TEST(Ind2Sub, ConvertedLegacyTest)
 {
   // Used for  initializing FixedArray.
   constexpr unsigned int D3 = 3;
@@ -81,12 +80,7 @@ itkInd2SubTest(int, char *[])
   ass3D[1] = 1;
   ass3D[2] = 1; // {1,1,1};
   expectedResult3D.push_back(ass3D);
-  if (storeOutput3D != expectedResult3D)
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "3D Failure " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(storeOutput3D, expectedResult3D) << "3D Failure ";
 
   constexpr unsigned int D2 = 2;
   using Array2DType = itk::FixedArray<unsigned int, D2>;
@@ -151,12 +145,7 @@ itkInd2SubTest(int, char *[])
   ass2D[1] = 3;
   expectedResult2D.push_back(ass2D);
 
-  if (storeOutput2D != expectedResult2D)
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "2D Failure " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(storeOutput2D, expectedResult2D) << "2D Failure ";
 
   // ITK index/size interface
   using Index2DType = itk::Index<D2>;
@@ -178,10 +167,5 @@ itkInd2SubTest(int, char *[])
     std::cout << std::endl;
   }
 
-  if (storeOutputIndex2D != expectedResult2D)
-  {
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(storeOutputIndex2D, expectedResult2D);
 }
