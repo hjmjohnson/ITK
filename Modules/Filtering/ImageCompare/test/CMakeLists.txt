@@ -4,7 +4,6 @@ set(
   itkCheckerBoardImageFilterTest.cxx
   itkConstrainedValueDifferenceImageFilterTest.cxx
   itkImageFileReaderIOToRequestedRegionMismatchTest.cxx
-  itkSquaredDifferenceImageFilterTest.cxx
   itkSTAPLEImageFilterTest.cxx
   itkTestingComparisonImageFilterTest.cxx
 )
@@ -16,15 +15,10 @@ set(
   itkAbsoluteValueDifferenceImageFilterGTest.cxx
   itkSTAPLEImageFilterGTest.cxx
   itkSimilarityIndexImageFilterGTest.cxx
+  itkSquaredDifferenceImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKImageCompare "${ITKImageCompare-Test_LIBRARIES}" "${ITKImageCompareGTests}")
 
-itk_add_test(
-  NAME itkSquaredDifferenceImageFilterTest
-  COMMAND
-    ITKImageCompareTestDriver
-    itkSquaredDifferenceImageFilterTest
-)
 itk_add_test(
   NAME itkCheckerBoardImageFilterTest
   COMMAND
