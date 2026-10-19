@@ -21,14 +21,13 @@
 #include "itkRecursiveGaussianImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkImageRegionConstIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <algorithm>
 #include <numeric>
 
 
-int
-itkRecursiveGaussianImageFilterTest(int, char *[])
+TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 {
 
   { // 3D test
@@ -92,23 +91,23 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
     // Create a  Filter
     auto filter = myGaussianFilterType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, RecursiveGaussianImageFilter, RecursiveSeparableImageFilter);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, RecursiveGaussianImageFilter, RecursiveSeparableImageFilter);
 
 
     constexpr unsigned int direction{ 2 }; // apply along Z
     filter->SetDirection(direction);
-    ITK_TEST_SET_GET_VALUE(direction, filter->GetDirection());
+    EXPECT_EQ(direction, filter->GetDirection());
 
     auto order = itk::GaussianOrderEnum::ZeroOrder;
     filter->SetOrder(order);
-    ITK_TEST_SET_GET_VALUE(order, filter->GetOrder());
+    EXPECT_EQ(order, filter->GetOrder());
 
     filter->SetZeroOrder();
-    ITK_TEST_SET_GET_VALUE(order, filter->GetOrder());
+    EXPECT_EQ(order, filter->GetOrder());
 
     // Connect the input images
     filter->SetInput(inputImage);
-    ITK_TEST_SET_GET_VALUE(inputImage, filter->GetInput());
+    EXPECT_EQ(inputImage, filter->GetInput());
 
 
     // Execute the filter
@@ -124,10 +123,10 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
 
     order = itk::GaussianOrderEnum::FirstOrder;
     filter1->SetOrder(order);
-    ITK_TEST_SET_GET_VALUE(order, filter1->GetOrder());
+    EXPECT_EQ(order, filter1->GetOrder());
 
     filter1->SetFirstOrder();
-    ITK_TEST_SET_GET_VALUE(order, filter1->GetOrder());
+    EXPECT_EQ(order, filter1->GetOrder());
 
     // Connect the input images
     filter1->SetInput(inputImage);
@@ -144,10 +143,10 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
 
     order = itk::GaussianOrderEnum::SecondOrder;
     filter2->SetOrder(order);
-    ITK_TEST_SET_GET_VALUE(order, filter2->GetOrder());
+    EXPECT_EQ(order, filter2->GetOrder());
 
     filter2->SetSecondOrder();
-    ITK_TEST_SET_GET_VALUE(order, filter2->GetOrder());
+    EXPECT_EQ(order, filter2->GetOrder());
 
     // Connect the input images
     filter2->SetInput(inputImage);
@@ -202,11 +201,11 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
     { // begin of test for normalization across scales
 
       auto normalizeAcrossScale = true;
-      ITK_TEST_SET_GET_BOOLEAN(filter, NormalizeAcrossScale, normalizeAcrossScale);
+      ITK_GTEST_SET_GET_BOOLEAN(filter, NormalizeAcrossScale, normalizeAcrossScale);
 
       constexpr double sigmaA{ 2.0 };
       filter->SetSigma(sigmaA);
-      ITK_TEST_SET_GET_VALUE(sigmaA, filter->GetSigma());
+      EXPECT_EQ(sigmaA, filter->GetSigma());
 
       filter->Update();
 
@@ -224,16 +223,9 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
       // note: for scale space normalization, no scaling should occur
       // The additional scale-space testing is performed in a separate
       // test.
-      if (itk::Math::Absolute(valueB - valueA) > 1e-4)
-      {
-        std::cout << "FAILED !" << std::endl;
-        std::cerr << "Error, Normalization across scales is failing" << std::endl;
-        std::cerr << "Central pixel at sigma = " << sigmaA << " = " << valueA << std::endl;
-        std::cerr << "Central pixel at sigma = " << sigmaB << " = " << valueB << std::endl;
-        return EXIT_FAILURE;
-      }
-
-      std::cout << "PASSED !" << std::endl;
+      EXPECT_NEAR(valueB, valueA, 1e-4) << "Error, Normalization across scales is failing" << std::endl
+                                        << "Central pixel at sigma = " << sigmaA << " = " << valueA << std::endl
+                                        << "Central pixel at sigma = " << sigmaB << " = " << valueB;
 
 
     } // end of test for normalization across scales
@@ -271,17 +263,9 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
       // 1000.0 is the value of the impulse
       // compute absolute normalized error
       const double error = itk::Math::Absolute(total - 1000.0) / 1000.0;
-      if (error > 1e-3)
-      {
-        std::cout << "FAILED !" << std::endl;
-        std::cerr << "Error, Normalization  is failing" << std::endl;
-        std::cerr << "Value of impulse is 1000.0" << std::endl;
-        std::cerr << "Total value after convolution is " << total << std::endl;
-        std::cout << "error: " << error << std::endl;
-        return EXIT_FAILURE;
-      }
-
-      std::cout << "PASSED !" << std::endl;
+      EXPECT_LE(error, 1e-3) << "Error, Normalization  is failing" << std::endl
+                             << "Value of impulse is 1000.0" << std::endl
+                             << "Total value after convolution is " << total;
 
 
     } // end of test for normalization
@@ -328,17 +312,8 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
       const PixelRealType derivativeValue = filter->GetOutput()->GetPixel(index);
 
       std::cout << "   first derivative normalization...  ";
-      if ((derivativeLowerBound > derivativeValue) || (derivativeUpperBound < derivativeValue))
-      {
-        std::cout << "FAILED !" << std::endl;
-        std::cerr << "The value of the first derivative at index " << index[0] << std::endl;
-        std::cerr << "is = " << derivativeValue << std::endl;
-        std::cerr << "which is outside the bounds = [ " << derivativeLowerBound;
-        std::cerr << " : " << derivativeUpperBound << " ] " << std::endl;
-        return EXIT_FAILURE;
-      }
-
-      std::cout << "PASSED !" << std::endl;
+      EXPECT_LE(derivativeLowerBound, derivativeValue) << "The value of the first derivative at index " << index[0];
+      EXPECT_GE(derivativeUpperBound, derivativeValue) << "The value of the first derivative at index " << index[0];
 
 
       // Now do the similar testing between First Derivative and Second
@@ -369,17 +344,10 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
       const PixelRealType secondDerivativeValue = filter->GetOutput()->GetPixel(index);
 
       std::cout << "   second derivative normalization...  ";
-      if ((secondDerivativeLowerBound > secondDerivativeValue) || (secondDerivativeUpperBound < secondDerivativeValue))
-      {
-        std::cout << "FAILED !" << std::endl;
-        std::cerr << "The value of the second derivative at index " << index[0] << std::endl;
-        std::cerr << "is = " << secondDerivativeValue << std::endl;
-        std::cerr << "which is outside the bounds = [ " << secondDerivativeLowerBound;
-        std::cerr << " : " << secondDerivativeUpperBound << " ] " << std::endl;
-        return EXIT_FAILURE;
-      }
-
-      std::cout << "PASSED !" << std::endl;
+      EXPECT_LE(secondDerivativeLowerBound, secondDerivativeValue)
+        << "The value of the second derivative at index " << index[0];
+      EXPECT_GE(secondDerivativeUpperBound, secondDerivativeValue)
+        << "The value of the second derivative at index " << index[0];
 
 
     } // end of test for normalization among derivatives
@@ -429,7 +397,7 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
     }
 
     filter->SetSigma(0.0);
-    ITK_TRY_EXPECT_EXCEPTION(filter->Update());
+    EXPECT_THROW(filter->Update(), itk::ExceptionObject);
   }
 
   {
@@ -471,11 +439,7 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
 
     // coverage for set/get methods
     filter->SetOrder(itk::GaussianOrderEnum::ZeroOrder);
-    if (itk::GaussianOrderEnum::ZeroOrder != filter->GetOrder())
-    {
-      std::cerr << "SetOrder/GetOrder failure!" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(itk::GaussianOrderEnum::ZeroOrder, filter->GetOrder()) << "SetOrder/GetOrder failure!";
 
 
     // Check behavior of InPlace
@@ -496,14 +460,10 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
     std::cout << "input buffer region: " << inputImage->GetBufferedRegion() << std::endl;
     std::cout << "output buffer region: " << outputImage->GetBufferedRegion() << std::endl;
 
-    if (inputImage->GetBufferedRegion().GetNumberOfPixels() != 0)
-    {
-      std::cerr << "Failure for filter to run in-place!" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(inputImage->GetBufferedRegion().GetNumberOfPixels(), 0u) << "Failure for filter to run in-place!";
 
     filter->SetSigma(0.0);
-    ITK_TRY_EXPECT_EXCEPTION(filter->Update());
+    EXPECT_THROW(filter->Update(), itk::ExceptionObject);
   }
 
   // Test streaming enumeration for RecursiveGaussianImageFilterEnums::GaussianOrder elements
@@ -518,5 +478,4 @@ itkRecursiveGaussianImageFilterTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
