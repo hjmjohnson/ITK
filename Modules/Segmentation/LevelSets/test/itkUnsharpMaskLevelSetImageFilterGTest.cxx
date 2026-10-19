@@ -17,8 +17,11 @@
  *=========================================================================*/
 
 #include "itkUnsharpMaskLevelSetImageFilter.h"
+#include "itkGTest.h"
 #include <iostream>
 
+namespace
+{
 constexpr unsigned int HEIGHT = (128);
 constexpr unsigned int WIDTH = (128);
 
@@ -53,9 +56,9 @@ evaluate_function(itk::Image<float, 2> * im, float (*f)(unsigned int, unsigned i
     }
   }
 }
+} // namespace
 
-int
-itkUnsharpMaskLevelSetImageFilterTest(int, char *[])
+TEST(UnsharpMaskLevelSetImageFilter, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<float, 2>;
 
@@ -79,5 +82,4 @@ itkUnsharpMaskLevelSetImageFilterTest(int, char *[])
   filter->Update();
   filter->Print(std::cout);
   std::cout << "Passed.\n";
-  return EXIT_SUCCESS;
 }
