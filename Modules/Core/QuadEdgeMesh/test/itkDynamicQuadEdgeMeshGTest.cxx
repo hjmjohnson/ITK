@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -50,8 +51,7 @@ using PointDataContainer = MeshType::PointDataContainer;
 using PointsIterator = PointsContainer::Iterator;
 using CellsIterator = PointDataContainer::Iterator;
 
-int
-itkDynamicQuadEdgeMeshTest(int, char *[])
+TEST(DynamicQuadEdgeMesh, ConvertedLegacyTest)
 {
 
   /**
@@ -87,6 +87,4 @@ itkDynamicQuadEdgeMeshTest(int, char *[])
     std::cout << point.Index() << " = " << point.Value() << std::endl;
     point++;
   }
-
-  return EXIT_SUCCESS;
 }
