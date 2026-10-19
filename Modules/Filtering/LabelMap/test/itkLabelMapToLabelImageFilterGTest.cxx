@@ -20,18 +20,10 @@
 #include "itkLabelMap.h"
 #include "itkLabelObject.h"
 #include "itkLabelMapToLabelImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkLabelMapToLabelImageFilterTest(int argc, char * argv[])
+TEST(LabelMapToLabelImageFilter, ConvertedLegacyTest)
 {
-
-  if (argc != 1)
-  {
-    std::cerr << "usage: " << itkNameOfTestExecutableMacro(argv) << "" << std::endl;
-    return EXIT_FAILURE;
-  }
-
   constexpr int dim{ 2 };
 
   using LabelObjectType = itk::LabelObject<unsigned long, dim>;
@@ -85,16 +77,14 @@ itkLabelMapToLabelImageFilterTest(int argc, char * argv[])
       const unsigned char val = image->GetPixel(index);
       if ((ctrI == 5) || (ctrJ == 5))
       {
-        itkAssertOrThrowMacro((val == 1), "Error in Label Image.");
+        EXPECT_EQ(val, 1) << "Error in Label Image.";
       }
       else
       {
-        itkAssertOrThrowMacro((val == 0), "Error in Label Image.");
+        EXPECT_EQ(val, 0) << "Error in Label Image.";
       }
     }
   }
 
   conversion->Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
