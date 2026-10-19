@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKSpatialObjectsTests
   itkBoxSpatialObjectTest.cxx
-  itkEllipseSpatialObjectTest.cxx
   itkGaussianSpatialObjectTest.cxx
   itkImageMaskSpatialObjectTest.cxx
   itkImageMaskSpatialObjectTest2.cxx
@@ -165,12 +164,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkPolygonSpatialObjectIsInsideInObjectSpaceTest.mha
 )
 itk_add_test(
-  NAME itkEllipseSpatialObjectTest
-  COMMAND
-    ITKSpatialObjectsTestDriver
-    itkEllipseSpatialObjectTest
-)
-itk_add_test(
   NAME itkMeshSpatialObjectTest
   COMMAND
     ITKSpatialObjectsTestDriver
@@ -201,6 +194,7 @@ set(
   itkContourSpatialObjectGTest.cxx
   itkContourSpatialObjectPointGTest.cxx
   itkDTITubeSpatialObjectGTest.cxx
+  itkEllipseSpatialObjectGTest.cxx
   itkSpatialObjectPointGTest.cxx
 )
 creategoogletestdriver(ITKSpatialObjects "${ITKSpatialObjects-Test_LIBRARIES}" "${ITKSpatialObjectsGTests}")
