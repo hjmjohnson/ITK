@@ -22,6 +22,7 @@ itk_module(
     ITKMetaIO
     ITKTransform
     ITKThresholding
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )
 
