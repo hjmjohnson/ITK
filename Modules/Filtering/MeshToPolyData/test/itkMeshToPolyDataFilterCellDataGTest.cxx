@@ -19,8 +19,7 @@
 #include "itkMeshToPolyDataFilter.h"
 #include "itkMesh.h"
 #include "itkTriangleCell.h"
-#include "itkTestingMacros.h"
-#include "itkMath.h"
+#include "itkGTest.h"
 
 // Regression test for cell-data preservation: an input mesh carrying
 // per-cell data must round-trip through MeshToPolyDataFilter with the
@@ -30,8 +29,7 @@
 // producing spurious leading entries that corrupted the cell-data copy.
 // The fixture-based test uses cow.vtk, which carries no cell data, so
 // this in-memory test is the only coverage of that path.
-int
-itkMeshToPolyDataFilterCellDataTest(int, char *[])
+TEST(MeshToPolyDataFilterCellData, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension = 3;
   using PixelType = float;
@@ -75,19 +73,17 @@ itkMeshToPolyDataFilterCellDataTest(int, char *[])
   using FilterType = itk::MeshToPolyDataFilter<MeshType>;
   auto filter = FilterType::New();
   filter->SetInput(mesh);
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
   using PolyDataType = FilterType::PolyDataType;
   const PolyDataType * polyData = filter->GetOutput();
 
   // Both cells are triangles, so they land in the polygons container.
-  ITK_TEST_EXPECT_EQUAL(polyData->GetPolygons()->GetElement(0), 3);
+  EXPECT_EQ(polyData->GetPolygons()->GetElement(0), 3u);
 
   const auto * cellData = polyData->GetCellData();
-  ITK_TEST_EXPECT_TRUE(cellData != nullptr);
-  ITK_TEST_EXPECT_EQUAL(cellData->Size(), 2);
-  ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual<float>(cellData->GetElement(0), 10.0f, 10, 1e-4));
-  ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual<float>(cellData->GetElement(1), 20.0f, 10, 1e-4));
-
-  return EXIT_SUCCESS;
+  ASSERT_NE(cellData, nullptr);
+  ASSERT_EQ(cellData->Size(), 2u);
+  EXPECT_NEAR(cellData->GetElement(0), 10.0f, 1e-4);
+  EXPECT_NEAR(cellData->GetElement(1), 20.0f, 1e-4);
 }
