@@ -33,9 +33,11 @@
 #include "itkBSplineInterpolateImageFunction.h"
 
 #include "makeRandomImageBsplineInterpolator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 using InputPixelType = double;
 using CoordinateType = itk::SpacePrecisionType;
 constexpr double valueTolerance{ std::max(1e-9, 1e3 * std::numeric_limits<CoordinateType>::epsilon()) };
@@ -268,15 +270,15 @@ test1DCubicSpline()
   // Create and initialize the interpolator
   auto interp = InterpolatorType1D::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(interp, BSplineInterpolateImageFunction, InterpolateImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(interp, BSplineInterpolateImageFunction, InterpolateImageFunction);
 
 
   constexpr itk::ThreadIdType numberOfWorkUnits{ 1 };
   interp->SetNumberOfWorkUnits(numberOfWorkUnits);
-  ITK_TEST_SET_GET_VALUE(numberOfWorkUnits, interp->GetNumberOfWorkUnits());
+  EXPECT_EQ(numberOfWorkUnits, interp->GetNumberOfWorkUnits());
 
   constexpr bool useImageDirection{ true };
-  ITK_TEST_SET_GET_BOOLEAN(interp, UseImageDirection, useImageDirection);
+  ITK_GTEST_SET_GET_BOOLEAN(interp, UseImageDirection, useImageDirection);
 
   interp->SetInputImage(image);
   interp->Print(std::cout);
@@ -344,7 +346,7 @@ test2DSpline()
   {
     auto interp = InterpolatorType2D::New();
     interp->SetSplineOrder(splineOrder);
-    ITK_TEST_SET_GET_VALUE(splineOrder, interp->GetSplineOrder());
+    EXPECT_EQ(splineOrder, interp->GetSplineOrder());
 
     std::cout << "SplineOrder: " << interp->GetSplineOrder() << std::endl;
 
@@ -653,9 +655,9 @@ testEvaluateValueAndDerivative()
   }
   return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkBSplineInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(BSplineInterpolateImageFunction, ConvertedLegacyTest)
 {
   int flag = 0; /* Did this test program work? */
 
@@ -674,17 +676,11 @@ itkBSplineInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(a
   flag += testEvaluateValueAndDerivative();
 
   /* Return results of test */
-  if (flag != 0)
-  {
-    std::cout << "*** " << flag << " tests failed" << std::endl;
-
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "All tests successfully passed" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(flag, 0) << "*** " << flag << " tests failed";
 }
 
+namespace
+{
 void
 set1DInterpData(ImageType1D::Pointer imgPtr)
 {
@@ -791,3 +787,4 @@ set3DDerivativeData(ImageType3D::Pointer imgPtr)
     }
   }
 }
+} // namespace
