@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKMathematicalMorphologyTests
-  itkAnchorErodeDilateImageFilterTest.cxx
   itkAnchorOpenCloseImageFilterTest.cxx
   itkClosingByReconstructionImageFilterTest.cxx
   itkDoubleThresholdImageFilterTest.cxx
@@ -55,19 +54,17 @@ createtestdriver(ITKMathematicalMorphology "${ITKMathematicalMorphology-Test_LIB
                  "${ITKMathematicalMorphologyTests}"
 )
 
-set(ITKMathematicalMorphologyGTests itkMathematicalMorphologyEnumsGTest.cxx)
+set(
+  ITKMathematicalMorphologyGTests
+  itkAnchorErodeDilateImageFilterGTest.cxx
+  itkMathematicalMorphologyEnumsGTest.cxx
+)
 creategoogletestdriver(
   ITKMathematicalMorphology
   "${ITKMathematicalMorphology-Test_LIBRARIES}"
   "${ITKMathematicalMorphologyGTests}"
 )
 
-itk_add_test(
-  NAME itkAnchorErodeDilateImageFilterTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkAnchorErodeDilateImageFilterTest
-)
 itk_add_test(
   NAME itkAnchorOpenCloseImageFilterTest
   COMMAND
