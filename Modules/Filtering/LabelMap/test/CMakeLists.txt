@@ -32,7 +32,6 @@ set(
   itkLabelImageToShapeLabelMapFilterTest1.cxx
   itkLabelImageToStatisticsLabelMapFilterTest1.cxx
   itkLabelMapMaskImageFilterTest.cxx
-  itkLabelMapTest.cxx
   itkLabelMapTest2.cxx
   itkLabelMapToAttributeImageFilterTest1.cxx
   itkLabelMapToBinaryImageFilterTest.cxx
@@ -1210,12 +1209,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkLabelMapMaskImageFilterTestCrop-100-1-1-10.png
 )
 itk_add_test(
-  NAME itkLabelMapTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelMapTest
-)
-itk_add_test(
   NAME itkLabelMapTest2
   COMMAND
     ITKLabelMapTestDriver
@@ -1783,6 +1776,7 @@ set(
   ITKLabelMapGTests
   itkLabelImageToLabelMapFilterGTest.cxx
   itkLabelMapFilterGTest.cxx
+  itkLabelMapGTest.cxx
   itkShapeLabelMapFilterGTest.cxx
   itkLabelMapBugfixGTest.cxx
   itkStatisticsLabelMapFilterGTest.cxx
