@@ -19,10 +19,9 @@
 #include "itkDefaultDynamicMeshTraits.h"
 #include "itkMesh.h"
 #include "itkTriangleCell.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkMeshCellDataTest(int, char *[])
+TEST(MeshCellData, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using TPixel = float;
@@ -45,7 +44,7 @@ itkMeshCellDataTest(int, char *[])
   mesh->SetPoint(4, TPoint{ { { 4.0, 0.0 } } });
   mesh->SetPoint(5, TPoint{ { { 5.0, 1.0 } } });
 
-  ITK_TEST_EXPECT_TRUE(mesh->GetCellData() != nullptr);
+  EXPECT_NE(mesh->GetCellData(), nullptr);
 
   {
     TCell::CellAutoPointer cellpointer;
@@ -72,8 +71,8 @@ itkMeshCellDataTest(int, char *[])
     mesh->SetCell(2, cellpointer);
   }
 
-  itkAssertOrThrowMacro(6 == mesh->GetNumberOfPoints(), "Wrong number of points.");
-  itkAssertOrThrowMacro(3 == mesh->GetNumberOfCells(), "Wrong number of cells.");
+  EXPECT_EQ(6u, mesh->GetNumberOfPoints()) << "Wrong number of points.";
+  EXPECT_EQ(3u, mesh->GetNumberOfCells()) << "Wrong number of cells.";
 
   // Add one extra entry in the cell data array
   mesh->SetCellData(0, 0);
@@ -81,11 +80,9 @@ itkMeshCellDataTest(int, char *[])
   mesh->SetCellData(2, 2);
   mesh->SetCellData(3, 3); // Extra entry
 
-  itkAssertOrThrowMacro(4 == mesh->GetCellData()->Size(), "Wrong number of entries in the cell data array.");
+  EXPECT_EQ(4u, mesh->GetCellData()->Size()) << "Wrong number of entries in the cell data array.";
 
   mesh->DeleteUnusedCellData();
 
-  itkAssertOrThrowMacro(3 == mesh->GetCellData()->Size(), "Wrong number of entries in the cell data array.");
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(3u, mesh->GetCellData()->Size()) << "Wrong number of entries in the cell data array.";
 }
