@@ -19,13 +19,11 @@
 #include "itkAtan2ImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkAtan2ImageFilterTest(int, char *[])
+TEST(Atan2ImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -83,7 +81,7 @@ itkAtan2ImageFilterTest(int, char *[])
   // Create the Filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, Atan2ImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, Atan2ImageFilter, BinaryGeneratorImageFilter);
 
   // Set the input images
   filter->SetInput1(sinImage);
@@ -111,18 +109,8 @@ itkAtan2ImageFilterTest(int, char *[])
     const InputImageType::PixelType  input2 = it2.Get();
     const OutputImageType::PixelType output = ot.Get();
     const OutputImageType::PixelType atan2 = std::atan2(input1, input2);
-    if (!itk::Math::FloatAlmostEqual(atan2, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " std::atan2( " << input1 << ", " << input2 << ") = " << atan2 << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(atan2, output, epsilon) << " std::atan2( " << input1 << ", " << input2 << ")";
     ++ot;
     ++it1;
   }
-
-  return EXIT_SUCCESS;
 }
