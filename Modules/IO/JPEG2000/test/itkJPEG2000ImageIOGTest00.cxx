@@ -16,12 +16,12 @@
  *
  *=========================================================================*/
 
-#include <set>
 #include "itkJPEG2000ImageIO.h"
+#include "itkGTest.h"
+#include <set>
 
 
-int
-itkJPEG2000ImageIOTest00(int /*argc */, char * /*argv*/[])
+TEST(JPEG2000ImageIO00, ConvertedLegacyTest)
 {
   const itk::JPEG2000ImageIO::Pointer imageIO = itk::JPEG2000ImageIO::New();
 
@@ -52,6 +52,4 @@ itkJPEG2000ImageIOTest00(int /*argc */, char * /*argv*/[])
   {
     std::cout << "STREAMED ENUM VALUE JPEG2000ImageIOInternalEnums::DFMFormat: " << ee << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
