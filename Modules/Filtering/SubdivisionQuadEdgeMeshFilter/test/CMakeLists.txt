@@ -6,7 +6,6 @@ set(
   itkCriterionTriangleEdgeCellSubdivisionQuadEdgeMeshFilterTest.cxx
   itkSubdivisionQuadEdgeMeshFilterRegressionTest.cxx
   itkTriangleCellSubdivisionQuadEdgeMeshFilterTest.cxx
-  itkTriangleCellSubdivisionQuadEdgeMeshFilterCellDataTest.cxx
   itkTriangleEdgeCellSubdivisionQuadEdgeMeshFilterTest.cxx
 )
 
@@ -87,13 +86,6 @@ endforeach()
 
 # Test whether CellData is properly passed
 
-itk_add_test(
-  NAME itkTriangleCellSubdivisionQuadEdgeMeshFilterCellDataTest
-  COMMAND
-    SubdivisionQuadEdgeMeshFilterTestDriver
-    itkTriangleCellSubdivisionQuadEdgeMeshFilterCellDataTest
-)
-
 # Regressions for the smoothedPointSet cell-id-vs-point-id bug and the
 # infinite-loop on non-triangle cells. TIMEOUT guards against a future
 # regression that re-introduces the hang.
@@ -108,4 +100,14 @@ set_tests_properties(
   PROPERTIES
     TIMEOUT
       30
+)
+
+set(
+  SubdivisionQuadEdgeMeshFilterGTests
+  itkTriangleCellSubdivisionQuadEdgeMeshFilterCellDataGTest.cxx
+)
+creategoogletestdriver(
+  SubdivisionQuadEdgeMeshFilter
+  "${SubdivisionQuadEdgeMeshFilter-Test_LIBRARIES}"
+  "${SubdivisionQuadEdgeMeshFilterGTests}"
 )
