@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKImageFilterBaseTests
-  itkImageToImageFilterTest.cxx
   itkMaskNeighborhoodOperatorImageFilterTest.cxx
   itkNeighborhoodOperatorImageFilterTest.cxx
   itkVectorNeighborhoodOperatorImageFilterTest.cxx
@@ -30,12 +29,6 @@ itk_add_test(
     itkNeighborhoodOperatorImageFilterTest
 )
 itk_add_test(
-  NAME itkImageToImageFilterTest
-  COMMAND
-    ITKImageFilterBaseTestDriver
-    itkImageToImageFilterTest
-)
-itk_add_test(
   NAME itkVectorNeighborhoodOperatorImageFilterTest
   COMMAND
     ITKImageFilterBaseTestDriver
@@ -59,5 +52,6 @@ set(
   ITKImageFilterBaseGTests
   itkCastImageFilterGTest.cxx
   itkGeneratorImageFilterGTest.cxx
+  itkImageToImageFilterGTest.cxx
 )
 creategoogletestdriver(ITKImageFilterBase "${ITKImageFilterBase-Test_LIBRARIES}" "${ITKImageFilterBaseGTests}")
