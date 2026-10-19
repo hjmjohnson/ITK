@@ -17,10 +17,10 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMeshTopologyChecker.h"
+#include "itkGTest.h"
 
 
-int
-itkQuadEdgeMeshAddFaceTest2(int, char *[])
+TEST(QuadEdgeMeshAddFace2, ConvertedLegacyTest)
 {
   using MeshType = itk::QuadEdgeMesh<double, 3>;
   using MeshPointer = MeshType::Pointer;
@@ -116,15 +116,5 @@ itkQuadEdgeMeshAddFaceTest2(int, char *[])
   std::cout << checker << std::endl;
   std::cout << "[SUCCESS]" << std::endl;
 
-  if (checker->ValidateEulerCharacteristic())
-  {
-    std::cout << "Passed" << std::endl;
-  }
-  else
-  {
-    std::cout << "Failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(checker->ValidateEulerCharacteristic());
 }
