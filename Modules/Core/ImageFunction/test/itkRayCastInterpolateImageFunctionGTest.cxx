@@ -22,11 +22,10 @@
 #include "itkRayCastInterpolateImageFunction.h"
 #include "itkTranslationTransform.h"
 #include "itkLinearInterpolateImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(RayCastInterpolateImageFunction, ConvertedLegacyTest)
 {
 
   using PixelType = unsigned char;
@@ -68,11 +67,11 @@ itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(a
   /* Create and initialize the interpolator */
   auto interp = RayCastInterpolatorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(interp, RayCastInterpolateImageFunction, InterpolateImageFunction);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(interp, RayCastInterpolateImageFunction, InterpolateImageFunction);
 
 
   // Test exceptions
-  ITK_TRY_EXPECT_EXCEPTION(interp->GetRadius());
+  EXPECT_THROW(interp->GetRadius(), itk::ExceptionObject);
 
   interp->SetInputImage(image);
 
@@ -82,7 +81,7 @@ itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(a
   focus[2] = 100.0;
 
   interp->SetFocalPoint(focus);
-  ITK_TEST_SET_GET_VALUE(focus, interp->GetFocalPoint());
+  EXPECT_EQ(focus, interp->GetFocalPoint());
 
 
   /* Create the transform */
@@ -91,7 +90,7 @@ itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(a
   auto transform = TransformType::New();
 
   interp->SetTransform(transform);
-  ITK_TEST_SET_GET_VALUE(transform, interp->GetTransform());
+  EXPECT_EQ(transform, interp->GetTransform());
 
   /* Create the auxiliary interpolator */
   using InterpolatorType = itk::LinearInterpolateImageFunction<ImageType, double>;
@@ -99,12 +98,12 @@ itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(a
   auto auxInterpolator = InterpolatorType::New();
 
   interp->SetInterpolator(auxInterpolator);
-  ITK_TEST_SET_GET_VALUE(auxInterpolator, interp->GetInterpolator());
+  EXPECT_EQ(auxInterpolator, interp->GetInterpolator());
 
   /* Exercise the SetThreshold() method */
   constexpr double threshold{ 1.0 };
   interp->SetThreshold(threshold);
-  ITK_TEST_SET_GET_VALUE(threshold, interp->GetThreshold());
+  EXPECT_EQ(threshold, interp->GetThreshold());
 
   /* Evaluate the function */
 
@@ -115,7 +114,7 @@ itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(a
   //   - Sets the traversal direction to TraversalDirectionEnum::UNDEFINED_DIRECTION
   //   - The integral should equal to 0.
   double integral = interp->Evaluate(focus);
-  ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual(integral, 0.0));
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(integral, 0.0));
 
   PointType query;
   query[0] = 15.;
@@ -128,15 +127,11 @@ itkRayCastInterpolateImageFunctionTest(int itkNotUsed(argc), char * itkNotUsed(a
 
   for (unsigned int d = 0; d < ImageDimension; ++d)
   {
-    ITK_TEST_SET_GET_VALUE(size[d], interp->GetRadius()[d]);
+    EXPECT_EQ(size[d], interp->GetRadius()[d]);
   }
 
-  ITK_TEST_EXPECT_TRUE(itk::Math::FloatAlmostEqual(integral, 1276.));
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(integral, 1276.));
 
-  ITK_TEST_EXPECT_TRUE(interp->IsInsideBuffer(query));
-  ITK_TEST_EXPECT_TRUE(interp->IsInsideBuffer(index));
-
-
-  std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(interp->IsInsideBuffer(query));
+  EXPECT_TRUE(interp->IsInsideBuffer(index));
 }
