@@ -24,7 +24,6 @@ set(
   itkSobelOperatorImageConvolutionTest.cxx
   itkSobelOperatorImageFilterTest.cxx
   itkStreamingImageFilterTest3.cxx
-  itkSymmetricEigenAnalysisTest.cxx
   itkSymmetricSecondRankTensorImageReadTest.cxx
   itkSymmetricSecondRankTensorImageWriteReadTest.cxx
   itkTimeProbeTest.cxx
@@ -872,12 +871,6 @@ itk_add_test(
     itkSymmetricSecondRankTensorTest
 )
 itk_add_test(
-  NAME itkSymmetricEigenAnalysisTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkSymmetricEigenAnalysisTest
-)
-itk_add_test(
   NAME itkStreamingImageFilterTest3_1
   COMMAND
     ITKCommon1TestDriver
@@ -1284,6 +1277,7 @@ set(
   itkStreamingImageFilterGTest.cxx
   itkStreamingImageFilterGTest2.cxx
   itkStringConvertGTest.cxx
+  itkSymmetricEigenAnalysisGTest.cxx
   itkSymmetricEllipsoidInteriorExteriorSpatialFunctionGTest.cxx
   itkSymmetricSecondRankTensorGTest.cxx
   itkThreadedImageRegionPartitionerGTest.cxx
