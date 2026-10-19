@@ -18,7 +18,10 @@
 
 #include "itkMath.h"
 #include "itkTimeProbesCollectorBase.h"
+#include "itkGTest.h"
 
+namespace
+{
 double
 itkVNLRoundTestHelperFunction(double x)
 {
@@ -29,6 +32,7 @@ itkVNLRoundTestHelperFunction(double x)
 
   return static_cast<int>(x - 0.5f);
 }
+} // namespace
 
 #define itkRoundMacro(x, y)         \
   if (x >= 0.0)                     \
@@ -42,8 +46,7 @@ itkVNLRoundTestHelperFunction(double x)
   ITK_MACROEND_NOOP_STATEMENT
 
 
-int
-itkVNLRoundProfileTest1(int, char *[])
+TEST(VNLRoundProfile, ConvertedLegacyTest1)
 {
   itk::TimeProbesCollectorBase chronometer;
 
@@ -252,9 +255,5 @@ itkVNLRoundProfileTest1(int, char *[])
     std::cout << "******* On this platform, itk::Math::rnd() neither rounds up nor rounds to even consistently ********"
               << std::endl;
   }
-  if (roundMismatch)
-  {
-    return EXIT_FAILURE;
-  }
-  return EXIT_SUCCESS;
+  EXPECT_FALSE(roundMismatch);
 }
