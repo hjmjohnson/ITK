@@ -13,5 +13,6 @@ itk_module(
     ITKDisplacementField
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )
