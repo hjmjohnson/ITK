@@ -22,11 +22,11 @@
 #include "itkNormalVariateGenerator.h"
 #include "itkKdTreeBasedKmeansEstimator.h"
 #include "itkWeightedCentroidKdTreeGenerator.h"
+#include "itkGTest.h"
 
 
 // run sample classifier using itk::Array type measurement vector
-int
-itkSampleClassifierFilterTest3(int, char *[])
+TEST(SampleClassifierFilter, ConvertedLegacyTest3)
 {
 
   constexpr unsigned int numberOfComponents{ 1 };
@@ -174,17 +174,7 @@ itkSampleClassifierFilterTest3(int, char *[])
   filter->SetMembershipFunctions(membershipFunctionsObject);
   filter->SetMembershipFunctionsWeightsArray(weightArrayObjects);
 
-  try
-  {
-    filter->Update();
-    std::cerr << "Exception should be thrown since weight array has size different from the number of classes set"
-              << std::endl;
-    return EXIT_FAILURE;
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-  }
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
   filter->ResetPipeline();
 
@@ -195,15 +185,7 @@ itkSampleClassifierFilterTest3(int, char *[])
   weightsArray2.Fill(1.0);
   weightArrayObjects->Set(weightsArray2);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NO_THROW(filter->Update());
 
 
   // Check if the measurement vectors are correctly labelled.
@@ -215,26 +197,17 @@ itkSampleClassifierFilterTest3(int, char *[])
   {
     if (sampleCounter < numberOfSampleEachClass)
     {
-      if (iter.GetClassLabel() != class1)
-      {
-        std::cerr << "Classification error: " << sampleCounter << '\t' << iter.GetMeasurementVector()
-                  << iter.GetClassLabel() << "\tclass1=" << class1 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.GetClassLabel(), class1)
+        << "Classification error: " << sampleCounter << '\t' << iter.GetMeasurementVector() << iter.GetClassLabel()
+        << "\tclass1=" << class1;
     }
     else
     {
-      if (iter.GetClassLabel() != class2)
-      {
-        std::cerr << "Classification error: " << sampleCounter << '\t' << iter.GetMeasurementVector()
-                  << iter.GetClassLabel() << "\tclass2=" << class2 << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.GetClassLabel(), class2)
+        << "Classification error: " << sampleCounter << '\t' << iter.GetMeasurementVector() << iter.GetClassLabel()
+        << "\tclass2=" << class2;
     }
     ++iter;
     ++sampleCounter;
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
