@@ -17,24 +17,25 @@
  *=========================================================================*/
 
 #include "itkScalarChanAndVeseLevelSetFunction.h"
+#include "itkGTest.h"
 
-namespace itk
+namespace
 {
 
 template <typename TInput,   // LevelSetImageType
           typename TFeature, // FeatureImageType
           typename TSharedData>
 class ScalarChanAndVeseLevelSetFunctionTestHelper
-  : public ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>
+  : public itk::ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>
 {
 public:
   ITK_DISALLOW_COPY_AND_MOVE(ScalarChanAndVeseLevelSetFunctionTestHelper);
 
   /** Standard class type aliases. */
   using Self = ScalarChanAndVeseLevelSetFunctionTestHelper;
-  using Superclass = ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::ScalarChanAndVeseLevelSetFunction<TInput, TFeature, TSharedData>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   static constexpr unsigned int ImageDimension = Superclass::ImageDimension;
 
@@ -74,14 +75,14 @@ protected:
 };
 
 template <unsigned int VDimension>
-class ScalarChanAndVeseLevelSetFunctionSharedDataHelper : public DataObject
+class ScalarChanAndVeseLevelSetFunctionSharedDataHelper : public itk::DataObject
 {
 public:
   /** Standard class type aliases. */
   using Self = ScalarChanAndVeseLevelSetFunctionSharedDataHelper;
-  using Superclass = DataObject;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::DataObject;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   itkNewMacro(Self);
 
@@ -90,14 +91,14 @@ public:
 
   unsigned long m_FunctionCount;
 
-  using IndexType = Index<VDimension>;
+  using IndexType = itk::Index<VDimension>;
   using ListPixelType = std::list<unsigned int>;
-  using ImageType = Image<ListPixelType, VDimension>;
+  using ImageType = itk::Image<ListPixelType, VDimension>;
 
   typename ImageType::Pointer m_NearestNeighborListImage;
 
   using PixelType = double;
-  using InputImageType = Image<PixelType, VDimension>;
+  using InputImageType = itk::Image<PixelType, VDimension>;
 
   struct SingleData
   {
@@ -127,10 +128,9 @@ public:
   SingleData * m_LevelSetDataPointerVector[19];
 };
 
-} // namespace itk
+} // namespace
 
-int
-itkScalarChanAndVeseLevelSetFunctionTest1(int, char *[])
+TEST(ScalarChanAndVeseLevelSetFunction1, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 3 };
 
@@ -138,16 +138,14 @@ itkScalarChanAndVeseLevelSetFunctionTest1(int, char *[])
   using ImageType = itk::Image<PixelType, Dimension>;
   using FeatureImageType = itk::Image<float, Dimension>;
 
-  using DataHelperType = itk::ScalarChanAndVeseLevelSetFunctionSharedDataHelper<Dimension>;
+  using DataHelperType = ScalarChanAndVeseLevelSetFunctionSharedDataHelper<Dimension>;
 
 
   using ChanAndVeseLevelSetFunctionType =
-    itk::ScalarChanAndVeseLevelSetFunctionTestHelper<ImageType, FeatureImageType, DataHelperType>;
+    ScalarChanAndVeseLevelSetFunctionTestHelper<ImageType, FeatureImageType, DataHelperType>;
 
   auto function = ChanAndVeseLevelSetFunctionType::New();
 
   std::cout << "GetNameOfClass() = " << function->GetNameOfClass() << std::endl;
   function->Print(std::cout);
-
-  return EXIT_SUCCESS;
 }
