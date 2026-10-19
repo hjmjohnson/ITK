@@ -17,10 +17,9 @@
  *=========================================================================*/
 #include "itkRecursiveGaussianImageFilter.h"
 #include "itkSymmetricSecondRankTensor.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkRecursiveGaussianImageFilterOnTensorsTest(int, char *[])
+TEST(RecursiveGaussianImageFilterOnTensors, ConvertedLegacyTest)
 {
   // In this test, we will create a 9x9 image of tensors with pixels (4,4)
   // and (1,6) set to 'tensor1'. We will filter it using
@@ -87,7 +86,7 @@ itkRecursiveGaussianImageFilterOnTensorsTest(int, char *[])
   filterX->SetSigma(sigma);
   filterY->SetSigma(sigma);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filterY->Update());
+  EXPECT_NO_THROW(filterY->Update());
 
 
   // Test a few pixels of the filtered image
@@ -112,21 +111,12 @@ itkRecursiveGaussianImageFilterOnTensorsTest(int, char *[])
   index[0] = 4;
   index[1] = 4;
   cit.SetIndex(index);
-  if (itk::Math::Absolute(cit.Get()(0, 0) - 0.160313) > tolerance)
-  {
-    std::cout << "[FAILED] Tensor(0,0) at index (4,4) must be 0.1603 but is " << cit.Get()(0, 0) << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(cit.Get()(0, 0), 0.160313, tolerance)
+    << "[FAILED] Tensor(0,0) at index (4,4) must be 0.1603 but is " << cit.Get()(0, 0);
 
   index[0] = 6;
   index[1] = 6;
   cit.SetIndex(index);
-  if (itk::Math::Absolute(cit.Get()(3, 3) - 0.0026944) > tolerance)
-  {
-    std::cout << "[FAILED] Tensor(3,3) at index (6,6) must be 0.0026944 but is " << cit.Get()(3, 3) << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "[PASSED]" << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_NEAR(cit.Get()(3, 3), 0.0026944, tolerance)
+    << "[FAILED] Tensor(3,3) at index (6,6) must be 0.0026944 but is " << cit.Get()(3, 3);
 }
