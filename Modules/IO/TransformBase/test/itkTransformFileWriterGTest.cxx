@@ -18,10 +18,9 @@
 
 
 #include "itkTransformFileWriter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkTransformFileWriterTest(int, char *[])
+TEST(TransformFileWriter, ConvertedLegacyTest)
 {
   using TransformWriterType = itk::TransformFileWriter;
 
@@ -32,30 +31,9 @@ itkTransformFileWriterTest(int, char *[])
             << dynamic_cast<TransformWriterType::Superclass *>(transformWriter.GetPointer())->GetNameOfClass()
             << std::endl;
 
-  try
-  {
-    // trigger empty write exception
-    transformWriter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Expected exception (no filename)" << std::endl << excp << std::endl;
-  }
+  // trigger empty write exception
+  EXPECT_THROW(transformWriter->Update(), itk::ExceptionObject);
   transformWriter->SetFileName("transform.garbage");
-  try
-  {
-    // trigger exception for transformIO not found
-    transformWriter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-
-    std::cerr << "Expected exception (no transformIO that can write garbage and no transformIO should be registered)"
-              << excp << std::endl;
-  }
-
-
-  std::cout << "Test PASSED!" << std::endl;
-
-  return EXIT_SUCCESS;
+  // trigger exception for transformIO not found
+  EXPECT_THROW(transformWriter->Update(), itk::ExceptionObject);
 }
