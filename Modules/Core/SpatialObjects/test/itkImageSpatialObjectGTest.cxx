@@ -29,11 +29,11 @@
 
 #include "itkImageSpatialObject.h"
 #include "itkLinearInterpolateImageFunction.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
+#include <iomanip>
 
 
-int
-itkImageSpatialObjectTest(int, char *[])
+TEST(ImageSpatialObject, ConvertedLegacyTest)
 {
 #define VDimension 3
 
@@ -64,12 +64,12 @@ itkImageSpatialObjectTest(int, char *[])
 
   auto imageSO = ImageSpatialObject::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(imageSO, ImageSpatialObject, SpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(imageSO, ImageSpatialObject, SpatialObject);
 
 
   constexpr ImageSpatialObject::IndexType sliceNumber{};
   imageSO->SetSliceNumber(sliceNumber);
-  ITK_TEST_SET_GET_VALUE(sliceNumber, imageSO->GetSliceNumber());
+  EXPECT_EQ(sliceNumber, imageSO->GetSliceNumber());
 
   imageSO->SetImage(image);
   imageSO->Update();
@@ -85,25 +85,21 @@ itkImageSpatialObjectTest(int, char *[])
 
   std::cout << "Bounding Box = " << imageSO->GetMyBoundingBoxInWorldSpace()->GetBounds() << std::endl;
 
-  ITK_TEST_EXPECT_TRUE(!imageSO->IsInsideInWorldSpace(r));
-  ITK_TEST_EXPECT_TRUE(imageSO->IsInsideInWorldSpace(q));
+  EXPECT_FALSE(imageSO->IsInsideInWorldSpace(r));
+  EXPECT_TRUE(imageSO->IsInsideInWorldSpace(q));
 
   q.Fill(15.1);
   double expectedValue = 555;
 
   double returnedValue = NAN;
-  ITK_TRY_EXPECT_NO_EXCEPTION(imageSO->ValueAtInWorldSpace(q, returnedValue));
+  EXPECT_NO_THROW(imageSO->ValueAtInWorldSpace(q, returnedValue));
 
 
   std::cout << "ValueAt()...";
-  if (itk::Math::NotAlmostEquals(returnedValue, expectedValue))
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Error in ValueAt at point " << q << std::endl;
-    std::cerr << "Expected value " << expectedValue << std::endl;
-    std::cerr << " differs from " << returnedValue << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_DOUBLE_EQ(returnedValue, expectedValue) << "Test failed!" << '\n'
+                                                 << "Error in ValueAt at point " << q << '\n'
+                                                 << "Expected value " << expectedValue << '\n'
+                                                 << " differs from " << returnedValue;
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -118,32 +114,27 @@ itkImageSpatialObjectTest(int, char *[])
   expectedPixel = 100;
   expectedDerivative[2] = expectedPixel;
 
-  ITK_TEST_EXPECT_EQUAL(derivative, expectedDerivative);
+  EXPECT_EQ(derivative, expectedDerivative);
 
 
   // Now testing the ValueAt() with an interpolator
   using InterpolatorType = itk::LinearInterpolateImageFunction<ImageType>;
   auto interpolator = InterpolatorType::New();
   imageSO->SetInterpolator(interpolator);
-  ITK_TEST_SET_GET_VALUE(interpolator, imageSO->GetInterpolator());
+  EXPECT_EQ(interpolator, imageSO->GetInterpolator());
 
   expectedValue = 566.1;
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(imageSO->ValueAtInWorldSpace(q, returnedValue));
+  EXPECT_NO_THROW(imageSO->ValueAtInWorldSpace(q, returnedValue));
 
 
   std::cout << "ValueAt() with interpolator...";
   double epsilon = 0.001;
-  if (itk::Math::Absolute(returnedValue - expectedValue) > epsilon)
-  {
-    std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Error in ValueAt at point " << q << std::endl;
-    std::cerr << "Expected value " << expectedValue << std::endl;
-    std::cerr << " differs from " << returnedValue;
-    std::cerr << " by more than " << epsilon << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(returnedValue - expectedValue), epsilon)
+    << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
+    << "Error in ValueAt at point " << q << '\n'
+    << "Expected value " << expectedValue << '\n'
+    << " differs from " << returnedValue << " by more than " << epsilon;
 
   std::cout << "[PASSED]" << std::endl;
 
@@ -154,22 +145,24 @@ itkImageSpatialObjectTest(int, char *[])
   expectedDerivative[2] = 100;
   std::cout << "DerivativeAt() with interpolator ...";
   epsilon = 0.00001;
-  if (itk::Math::Absolute(derivative[0] - expectedDerivative[0]) > epsilon ||
-      itk::Math::Absolute(derivative[1] - expectedDerivative[1]) > epsilon ||
-      itk::Math::Absolute(derivative[2] - expectedDerivative[2]) > epsilon)
-  {
-    std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Error in ValueAt at point " << q << std::endl;
-    std::cerr << "Expected value " << expectedDerivative << std::endl;
-    std::cerr << " differs from " << derivative;
-    std::cerr << " by more than " << epsilon << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(derivative[0] - expectedDerivative[0]), epsilon)
+    << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
+    << "Error in ValueAt at point " << q << '\n'
+    << "Expected value " << expectedDerivative << '\n'
+    << " differs from " << derivative << " by more than " << epsilon;
+  EXPECT_LE(itk::Math::Absolute(derivative[1] - expectedDerivative[1]), epsilon)
+    << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
+    << "Error in ValueAt at point " << q << '\n'
+    << "Expected value " << expectedDerivative << '\n'
+    << " differs from " << derivative << " by more than " << epsilon;
+  EXPECT_LE(itk::Math::Absolute(derivative[2] - expectedDerivative[2]), epsilon)
+    << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
+    << "Error in ValueAt at point " << q << '\n'
+    << "Expected value " << expectedDerivative << '\n'
+    << " differs from " << derivative << " by more than " << epsilon;
 
   std::cout << "[PASSED]" << std::endl;
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
