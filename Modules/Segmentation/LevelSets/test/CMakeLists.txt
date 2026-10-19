@@ -3,7 +3,6 @@ set(
   ITKLevelSetsTests
   itkBinaryMaskToNarrowBandPointSetFilterTest.cxx
   itkCollidingFrontsImageFilterTest.cxx
-  itkGeodesicActiveContourLevelSetImageFilterTest.cxx
   itkGeodesicActiveContourLevelSetImageFilterZeroSigmaTest.cxx
   itkGeodesicActiveContourShapePriorLevelSetImageFilterTest.cxx
   itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2.cxx
@@ -35,6 +34,7 @@ set(
   itkCurvesLevelSetImageFilterGTest.cxx
   itkCurvesLevelSetImageFilterZeroSigmaGTest.cxx
   itkExtensionVelocitiesImageFilterGTest.cxx
+  itkGeodesicActiveContourLevelSetImageFilterGTest.cxx
   itkLevelSetNeighborhoodExtractorGTest.cxx
   itkParallelSparseFieldLevelSetImageFilterRobustnessGTest.cxx
 )
@@ -81,12 +81,6 @@ itk_add_test(
   COMMAND
     ITKLevelSetsTestDriver
     itkIsotropicFourthOrderLevelSetImageFilterTest
-)
-itk_add_test(
-  NAME itkGeodesicActiveContourLevelSetImageFilterTest
-  COMMAND
-    ITKLevelSetsTestDriver
-    itkGeodesicActiveContourLevelSetImageFilterTest
 )
 itk_add_test(
   NAME itkGeodesicActiveContourShapePriorLevelSetImageFilterTest_2
