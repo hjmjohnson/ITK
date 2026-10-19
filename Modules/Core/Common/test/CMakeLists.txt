@@ -65,7 +65,6 @@ set(
   itkConstShapedNeighborhoodIteratorTest.cxx
   itkConstShapedNeighborhoodIteratorTest2.cxx
   itkLoggerOutputTest.cxx
-  itkNeighborhoodTest.cxx
   itkObjectFactoryTest2.cxx
   itkObjectFactoryTest3.cxx
   itkObjectFactoryOnlyNewTest.cxx
@@ -815,12 +814,6 @@ set_tests_properties(
 )
 
 itk_add_test(
-  NAME itkNeighborhoodTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkNeighborhoodTest
-)
-itk_add_test(
   NAME itkNeighborhoodIteratorTest
   COMMAND
     ITKCommon2TestDriver
@@ -1370,6 +1363,7 @@ set(
   itkMultiThreaderExceptionsGTest.cxx
   itkNeighborhoodAlgorithmGTest.cxx
   itkNeighborhoodAllocatorGTest.cxx
+  itkNeighborhoodGTest.cxx
   itkNeighborhoodIteratorsGTest.cxx
   itkNeighborhoodOperatorGTest.cxx
   itkNumberToStringGTest.cxx
