@@ -22,9 +22,12 @@
 #include "itkAffineTransform.h"
 #include "itkRegistrationParameterScalesFromPhysicalShift.h"
 #include "itkCommand.h"
+#include "itkGTest.h"
 
 #include <fstream>
 
+namespace
+{
 template <typename TFilter>
 class itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationTestCommandIterationUpdate : public itk::Command
 {
@@ -62,17 +65,13 @@ public:
     std::cout << std::endl;
   }
 };
+} // namespace
 
-int
-itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationTest(int argc, char * argv[])
+TEST(JensenHavrdaCharvatTsallisPointSetMetricRegistration, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
-  unsigned int numberOfIterations = 10;
-  if (argc > 1)
-  {
-    numberOfIterations = std::stoi(argv[1]);
-  }
+  constexpr unsigned int numberOfIterations{ 10 };
 
   using PointSetType = itk::PointSet<unsigned char, Dimension>;
 
@@ -207,12 +206,5 @@ itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationTest(int argc, char * arg
       passed = false;
     }
   }
-  if (!passed)
-  {
-    std::cerr << "Results do not match truth within tolerance." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "Results do not match truth within tolerance.";
 }
