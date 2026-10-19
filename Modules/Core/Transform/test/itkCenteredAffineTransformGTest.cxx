@@ -16,9 +16,11 @@
  *
  *=========================================================================*/
 
+#include "itkCenteredAffineTransform.h"
+#include "itkGTest.h"
+
 #include <iostream>
 
-#include "itkCenteredAffineTransform.h"
 #include "itkImage.h"
 
 using MatrixType = itk::Matrix<double, 2, 2>;
@@ -39,8 +41,7 @@ PrintVector(const VectorType & v)
 
 } // namespace
 
-int
-itkCenteredAffineTransformTest(int, char *[])
+TEST(CenteredAffineTransform, ConvertedLegacyTest)
 {
   /* FIXME: This code exercises most of the methods but doesn't
      actually check that the results are correct. */
@@ -211,11 +212,7 @@ itkCenteredAffineTransformTest(int, char *[])
   inv3->Print(std::cout);
 
   const Affine3DType::Pointer inv4 = dynamic_cast<Affine3DType *>(aff3->GetInverseTransform().GetPointer());
-  if (!inv4)
-  {
-    std::cout << "Cannot compute inverse transformation" << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(inv4, nullptr) << "Cannot compute inverse transformation";
   std::cout << "Create an inverse transformation:" << std::endl;
   inv4->Print(std::cout);
 
@@ -257,7 +254,4 @@ itkCenteredAffineTransformTest(int, char *[])
 
   std::cout << "A transform after SetParameters:" << std::endl;
   jaff->Print(std::cout);
-
-  constexpr int any{ 0 }; // Any errors detected in testing?
-  return any;
 }
