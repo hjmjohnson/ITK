@@ -10,7 +10,6 @@ set(
   itkBSplineTransformTest2.cxx
   itkBSplineTransformTest3.cxx
   itkEuler3DTransformTest.cxx
-  itkFixedCenterOfRotationAffineTransformTest.cxx
   itkIdentityTransformTest.cxx
   itkMultiTransformTest.cxx
   itkQuaternionRigidTransformTest.cxx
@@ -36,12 +35,6 @@ set(
 )
 
 createtestdriver(ITKTransform "${ITKTransform-Test_LIBRARIES}" "${ITKTransformTests}")
-itk_add_test(
-  NAME itkFixedCenterOfRotationAffineTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkFixedCenterOfRotationAffineTransformTest
-)
 itk_add_test(
   NAME itkScaleSkewVersor3DTransformTest
   COMMAND
@@ -473,6 +466,7 @@ set(
   itkCompositeTransformGTest.cxx
   itkEuler2DTransformGTest.cxx
   itkEuler3DTransformGTest.cxx
+  itkFixedCenterOfRotationAffineTransformGTest.cxx
   itkMatrixOffsetTransformBaseGTest.cxx
   itkSimilarityTransformGTest.cxx
   itkTransformGTest.cxx
