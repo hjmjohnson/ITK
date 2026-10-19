@@ -22,8 +22,11 @@
 #include "itkMath.h"
 #include "itkPhasedArray3DSpecialCoordinatesImage.h"
 #include "itkResampleImageFilter.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 enum
 {
   VDimension = 3
@@ -38,10 +41,10 @@ using ImageRegionType = ImageType::RegionType;
 using ImageSizeType = ImageType::SizeType;
 using ImageIndexType = ImageType::IndexType;
 using CoordinateType = double;
+} // namespace
 
 
-int
-itkResamplePhasedArray3DSpecialCoordinatesImageTest(int, char *[])
+TEST(ResamplePhasedArray3DSpecialCoordinatesImage, ConvertedLegacyTest)
 {
   // Create and configure an image
   const InputImagePointerType image = InputImageType::New();
@@ -190,12 +193,5 @@ itkResamplePhasedArray3DSpecialCoordinatesImageTest(int, char *[])
     std::cout << "Resampling back to Phased Array coordinates Passed\n" << std::endl;
   }
 
-  if (!passed)
-  {
-    std::cout << "Resampling PhasedArray3DSpecialCoordinatesImage test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "Resampling PhasedArray3DSpecialCoordinatesImage test failed";
 }
