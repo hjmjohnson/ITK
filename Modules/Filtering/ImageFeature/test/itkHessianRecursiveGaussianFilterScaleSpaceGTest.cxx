@@ -18,6 +18,7 @@
 
 #include "itkHessianRecursiveGaussianImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
+#include "itkGTest.h"
 
 // This test creates an image varying as a 1D Gaussian in the X direction
 // for different values of sigma, and checks the scale-space response of
@@ -25,8 +26,7 @@
 // If NormalizeAcrossScale works correctly, the filter should yield the
 // same Hxx across different scales.
 
-int
-itkHessianRecursiveGaussianFilterScaleSpaceTest(int, char *[])
+TEST(HessianRecursiveGaussianImageFilter, ConvertedLegacyScaleSpaceTest)
 {
   constexpr unsigned int Dimension{ 3 };
   using PixelType = double;
@@ -103,11 +103,8 @@ itkHessianRecursiveGaussianFilterScaleSpaceTest(int, char *[])
     // Irrespective of the scale, the Hxx component should be the same
     const double centerHxx = outputImage->GetPixel(centerIndex)[0];
 
-    if (centerHxx > -0.3546 || centerHxx < -0.3547)
-    {
-      std::cout << "center Hessian: " << outputImage->GetPixel(centerIndex) << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(centerHxx, -0.3546) << "center Hessian: " << outputImage->GetPixel(centerIndex);
+    EXPECT_GE(centerHxx, -0.3547) << "center Hessian: " << outputImage->GetPixel(centerIndex);
   }
 
 
@@ -157,13 +154,7 @@ itkHessianRecursiveGaussianFilterScaleSpaceTest(int, char *[])
     // Irrespective of the scale, the Hxx component should be the same
     const double centerHxx = outputImage->GetPixel(centerIndex)[0];
 
-    if (centerHxx > -0.354 || centerHxx < -0.355)
-    {
-      std::cout << "center Hessian: " << outputImage->GetPixel(centerIndex) << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(centerHxx, -0.354) << "center Hessian: " << outputImage->GetPixel(centerIndex);
+    EXPECT_GE(centerHxx, -0.355) << "center Hessian: " << outputImage->GetPixel(centerIndex);
   }
-
-
-  return EXIT_SUCCESS;
 }
