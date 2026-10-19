@@ -5,7 +5,6 @@ set(
   itkGaussianMixtureModelComponentTest.cxx
   itkGaussianRandomSpatialNeighborSubsamplerTest.cxx
   itkImageToHistogramFilterTest2.cxx
-  itkKalmanLinearEstimatorTest.cxx
   itkKdTreeBasedKmeansEstimatorTest.cxx
   itkKdTreeGeneratorTest.cxx
   itkKdTreeTest1.cxx
@@ -93,12 +92,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkGaussianRandomSubsamplingTest.mha
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkGaussianRandomSubsamplingTest.mha
-)
-itk_add_test(
-  NAME itkKalmanLinearEstimatorTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkKalmanLinearEstimatorTest
 )
 itk_add_test(
   NAME itkKdTreeBasedKmeansEstimatorTest
@@ -850,6 +843,7 @@ set(
   itkImageToListSampleFilterGTest2.cxx
   itkImageToListSampleFilterGTest3.cxx
   itkJointDomainImageToListSampleAdaptorGTest.cxx
+  itkKalmanLinearEstimatorGTest.cxx
   itkKdTreeGTest.cxx
   itkMaximumDecisionRuleGTest.cxx
   itkMaximumRatioDecisionRuleGTest.cxx
