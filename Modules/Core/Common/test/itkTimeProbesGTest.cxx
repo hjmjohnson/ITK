@@ -22,7 +22,10 @@
 
 #include <iostream>
 #include <fstream>
+#include "itkGTest.h"
 
+namespace
+{
 template <typename T>
 void
 TestTransformIndexToPhysicalPoint(T * image)
@@ -73,13 +76,13 @@ TestTransformPhysicalPointToIndex(T * image)
     }
   }
 }
+} // namespace
 //-------------------------
 //
 //   This file test the interface to the TimeProbe classes
 //
 //-------------------------
-int
-itkTimeProbesTest(int, char *[])
+TEST(TimeProbes, ConvertedLegacyTest)
 {
 
   itk::TimeProbesCollectorBase collector;
@@ -196,6 +199,4 @@ itkTimeProbesTest(int, char *[])
   // Use tabs on the output
   collector.Report(std::cout, true, true, true);
   collector.ExpandedReport(std::cout, true, true, true);
-
-  return EXIT_SUCCESS;
 }
