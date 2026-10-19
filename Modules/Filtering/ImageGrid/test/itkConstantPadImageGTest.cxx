@@ -21,12 +21,12 @@
 #include "itkStreamingImageFilter.h"
 #include "itkSimpleFilterWatcher.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
 #include <iostream>
 #include <numeric> // For iota.
 
-int
-itkConstantPadImageTest(int, char *[])
+TEST(ConstantPadImageFilter, ConvertedLegacyTest)
 {
   // type alias to simplify the syntax
   using ShortImage = itk::Image<short, 2>;
@@ -120,15 +120,7 @@ itkConstantPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "constantPadImageFilter case 1 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "constantPadImageFilter case 1 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "constantPadImageFilter case 1 failed.";
 
 
   // CASE 2
@@ -194,15 +186,5 @@ itkConstantPadImageTest(int, char *[])
     }
   }
 
-  if (passed)
-  {
-    std::cout << "constantPadImageFilter case 2 passed." << std::endl;
-  }
-  else
-  {
-    std::cout << "constantPadImageFilter case 2 failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "constantPadImageFilter case 2 failed.";
 }
