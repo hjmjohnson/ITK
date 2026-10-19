@@ -21,10 +21,9 @@
 #include "itkTanImageFilter.h"
 #include "itkTanImageAdaptor.h"
 #include "itkSubtractImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkTanImageFilterAndAdaptorTest(int, char *[])
+TEST(TanImageFilterAndAdaptor, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -71,7 +70,7 @@ itkTanImageFilterAndAdaptorTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, TanImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, TanImageFilter, UnaryGeneratorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -95,15 +94,7 @@ itkTanImageFilterAndAdaptorTest(int, char *[])
     const InputImageType::PixelType  input = it.Get();
     const OutputImageType::PixelType output = ot.Get();
     const OutputImageType::PixelType tangent = std::tan(input);
-    if (!itk::Math::FloatAlmostEqual(tangent, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " std::tan( " << input << ") = " << tangent << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(tangent, output, epsilon) << " std::tan( " << input << ")";
     ++ot;
     ++it;
   }
@@ -115,7 +106,7 @@ itkTanImageFilterAndAdaptorTest(int, char *[])
 
   auto tanAdaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(tanAdaptor, TanImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(tanAdaptor, TanImageAdaptor, ImageAdaptor);
 
   tanAdaptor->SetImage(inputImage);
 
@@ -141,16 +132,7 @@ itkTanImageFilterAndAdaptorTest(int, char *[])
   while (!dt.IsAtEnd())
   {
     const OutputImageType::PixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr << "Error comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Error comparing results with Adaptors";
     ++dt;
   }
-
-  return EXIT_SUCCESS;
 }
