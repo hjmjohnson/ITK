@@ -28,11 +28,10 @@
 #include "itkImageRegionIterator.h"
 
 #include "itkImageMaskSpatialObject.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkImageMaskSpatialObjectTest5(int, char *[])
+TEST(ImageMaskSpatialObject5, ConvertedLegacyTest)
 {
   constexpr unsigned int VDimension{ 3 };
 
@@ -64,7 +63,7 @@ itkImageMaskSpatialObjectTest5(int, char *[])
 
   auto maskSO = ImageMaskSpatialObject::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(maskSO, ImageMaskSpatialObject, ImageSpatialObject);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(maskSO, ImageMaskSpatialObject, ImageSpatialObject);
 
 
   maskSO->SetImage(image);
@@ -79,13 +78,9 @@ itkImageMaskSpatialObjectTest5(int, char *[])
     ImageType::PointType       point;
     image->TransformIndexToPhysicalPoint(constIndex, point);
     const bool test = maskSO->IsInsideInWorldSpace(point);
-    if (test != reference)
-    {
-      std::cerr << "Error in the evaluation of IsInside() - Part 1 " << std::endl;
-      std::cerr << "Index failed = " << constIndex << std::endl;
-      std::cerr << "   Mask " << test << " != " << reference << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(test, reference) << "Error in the evaluation of IsInside() - Part 1 " << '\n'
+                               << "Index failed = " << constIndex << '\n'
+                               << "   Mask " << test << " != " << reference;
     ++itr;
   }
 
@@ -100,13 +95,9 @@ itkImageMaskSpatialObjectTest5(int, char *[])
     ImageType::PointType       point;
     image->TransformIndexToPhysicalPoint(constIndex, point);
     const bool test = maskSO->IsInsideInWorldSpace(point);
-    if (test != reference)
-    {
-      std::cerr << "Error in the evaluation of IsInside() - Part 2" << std::endl;
-      std::cerr << "Index failed = " << constIndex << std::endl;
-      std::cerr << "   Mask " << test << " != " << reference << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(test, reference) << "Error in the evaluation of IsInside() - Part 2" << '\n'
+                               << "Index failed = " << constIndex << '\n'
+                               << "   Mask " << test << " != " << reference;
     ++itr;
   }
 
@@ -122,16 +113,11 @@ itkImageMaskSpatialObjectTest5(int, char *[])
     ImageType::PointType       point;
     image->TransformIndexToPhysicalPoint(constIndex, point);
     const bool test = maskSO->IsInsideInWorldSpace(point);
-    if (test == true)
-    {
-      std::cerr << "Error in the evaluation of IsInside() - Part 3" << std::endl;
-      std::cerr << "Index failed = " << constIndex << std::endl;
-      std::cerr << "   Mask " << test << " != " << reference << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(test) << "Error in the evaluation of IsInside() - Part 3" << '\n'
+                       << "Index failed = " << constIndex << '\n'
+                       << "   Mask " << test << " != " << reference;
     ++itr;
   }
 
   std::cout << "Test finished" << std::endl;
-  return EXIT_SUCCESS;
 }
