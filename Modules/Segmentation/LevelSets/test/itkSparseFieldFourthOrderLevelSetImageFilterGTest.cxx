@@ -17,7 +17,7 @@
  *=========================================================================*/
 
 #include "itkSparseFieldFourthOrderLevelSetImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <iostream>
 
 /*
@@ -38,7 +38,7 @@
  *
  */
 
-namespace SFFOLSIFT
+namespace
 { // local namespace for helper functions
 
 constexpr unsigned int HEIGHT = (128);
@@ -76,24 +76,25 @@ evaluate_function(itk::Image<float, 2> * im, float (*f)(unsigned int, unsigned i
   }
 }
 
-} // namespace SFFOLSIFT
+} // namespace
 
-namespace itk
+namespace
 {
 template <typename TInputImage, typename TOutputImage>
-class IsotropicDiffusionLevelSetFilter : public SparseFieldFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>
+class IsotropicDiffusionLevelSetFilter
+  : public itk::SparseFieldFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>
 {
 public:
   using Self = IsotropicDiffusionLevelSetFilter;
-  using Superclass = SparseFieldFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>;
-  using Pointer = SmartPointer<Self>;
-  using ConstPointer = SmartPointer<const Self>;
+  using Superclass = itk::SparseFieldFourthOrderLevelSetImageFilter<TInputImage, TOutputImage>;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
 
   itkOverrideGetNameOfClassMacro(IsotropicDiffusionLevelSetFilter);
   itkNewMacro(Self);
 
   using typename Superclass::SparseImageType;
-  using FunctionType = LevelSetFunctionWithRefitTerm<TOutputImage, SparseImageType>;
+  using FunctionType = itk::LevelSetFunctionWithRefitTerm<TOutputImage, SparseImageType>;
   using RadiusType = typename FunctionType::RadiusType;
 
 protected:
@@ -130,66 +131,64 @@ protected:
   }
 };
 
-} // end namespace itk
+} // namespace
 
-int
-itkSparseFieldFourthOrderLevelSetImageFilterTest(int, char *[])
+TEST(SparseFieldFourthOrderLevelSetImageFilter, ConvertedLegacyTest)
 {
   using ImageType = itk::Image<float, 2>;
 
   auto image = ImageType::New();
 
-  constexpr ImageType::SizeType sz{ SFFOLSIFT::HEIGHT, SFFOLSIFT::WIDTH };
+  constexpr ImageType::SizeType sz{ HEIGHT, WIDTH };
   ImageType::RegionType         r{ sz };
 
   image->SetRegions(r);
   image->Allocate();
 
-  SFFOLSIFT::evaluate_function(image, SFFOLSIFT::square);
-  using FilterType = itk::IsotropicDiffusionLevelSetFilter<ImageType, ImageType>;
+  evaluate_function(image, square);
+  using FilterType = IsotropicDiffusionLevelSetFilter<ImageType, ImageType>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
     filter, IsotropicDiffusionLevelSetFilter, SparseFieldFourthOrderLevelSetImageFilter);
 
 
   constexpr unsigned int maxRefitIteration{ 0 };
   filter->SetMaxRefitIteration(maxRefitIteration);
-  ITK_TEST_SET_GET_VALUE(maxRefitIteration, filter->GetMaxRefitIteration());
+  EXPECT_EQ(maxRefitIteration, filter->GetMaxRefitIteration());
 
   constexpr unsigned int maxNormalIteration{ 100 };
   filter->SetMaxNormalIteration(maxNormalIteration);
-  ITK_TEST_SET_GET_VALUE(maxNormalIteration, filter->GetMaxNormalIteration());
+  EXPECT_EQ(maxNormalIteration, filter->GetMaxNormalIteration());
 
   constexpr typename FilterType::ValueType curvatureBandWidth = 4;
   filter->SetCurvatureBandWidth(curvatureBandWidth);
-  ITK_TEST_SET_GET_VALUE(curvatureBandWidth, filter->GetCurvatureBandWidth());
+  EXPECT_EQ(curvatureBandWidth, filter->GetCurvatureBandWidth());
 
   constexpr typename FilterType::ValueType rmsChangeNormalProcessTrigger = 0.001;
   filter->SetRMSChangeNormalProcessTrigger(rmsChangeNormalProcessTrigger);
-  ITK_TEST_SET_GET_VALUE(rmsChangeNormalProcessTrigger, filter->GetRMSChangeNormalProcessTrigger());
+  EXPECT_EQ(rmsChangeNormalProcessTrigger, filter->GetRMSChangeNormalProcessTrigger());
 
   constexpr int normalProcessType{ 0 };
   filter->SetNormalProcessType(normalProcessType);
-  ITK_TEST_SET_GET_VALUE(normalProcessType, filter->GetNormalProcessType());
+  EXPECT_EQ(normalProcessType, filter->GetNormalProcessType());
 
   constexpr typename FilterType::ValueType normalProcessConductance{};
   filter->SetNormalProcessConductance(normalProcessConductance);
-  ITK_TEST_SET_GET_VALUE(normalProcessConductance, filter->GetNormalProcessConductance());
+  EXPECT_EQ(normalProcessConductance, filter->GetNormalProcessConductance());
 
   constexpr bool normalProcessUnsharpFlag{ false };
   filter->SetNormalProcessUnsharpFlag(normalProcessUnsharpFlag);
-  ITK_TEST_SET_GET_BOOLEAN(filter, NormalProcessUnsharpFlag, normalProcessUnsharpFlag);
+  ITK_GTEST_SET_GET_BOOLEAN(filter, NormalProcessUnsharpFlag, normalProcessUnsharpFlag);
 
   constexpr typename FilterType::ValueType normalProcessUnsharpWeight{};
   filter->SetNormalProcessUnsharpWeight(normalProcessUnsharpWeight);
-  ITK_TEST_SET_GET_VALUE(normalProcessUnsharpWeight, filter->GetNormalProcessUnsharpWeight());
+  EXPECT_EQ(normalProcessUnsharpWeight, filter->GetNormalProcessUnsharpWeight());
 
   filter->SetInput(image);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
