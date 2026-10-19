@@ -18,6 +18,7 @@
 // Disable warning for long symbol names in this file only
 
 #include "itkRecursiveGaussianImageFilter.h"
+#include "itkGTest.h"
 #include "itkImageRegionIterator.h"
 
 namespace
@@ -152,34 +153,23 @@ NormalizeSineWave(double frequencyPerImage, unsigned int order, double pixelSpac
 
 } // namespace
 
-int
-itkRecursiveGaussianScaleSpaceTest1(int, char *[])
+TEST(RecursiveGaussianScaleSpace, ConvertedLegacyTest)
 {
-  bool pass = true;
-
   std::cout << " Testing First Order Gaussian" << std::endl;
-  pass &= NormalizeSineWave(1.5, 1);
-  pass &= NormalizeSineWave(2.5, 1);
-  pass &= NormalizeSineWave(5, 1);
-  pass &= NormalizeSineWave(10, 1);
-  pass &= NormalizeSineWave(25, 1);
+  EXPECT_TRUE(NormalizeSineWave(1.5, 1));
+  EXPECT_TRUE(NormalizeSineWave(2.5, 1));
+  EXPECT_TRUE(NormalizeSineWave(5, 1));
+  EXPECT_TRUE(NormalizeSineWave(10, 1));
+  EXPECT_TRUE(NormalizeSineWave(25, 1));
 
   std::cout << " Testing Second Order Gaussian" << std::endl;
-  pass &= NormalizeSineWave(1.5, 2);
-  pass &= NormalizeSineWave(2.5, 2);
-  pass &= NormalizeSineWave(5, 2);
-  pass &= NormalizeSineWave(10, 2);
-  pass &= NormalizeSineWave(25, 2);
+  EXPECT_TRUE(NormalizeSineWave(1.5, 2));
+  EXPECT_TRUE(NormalizeSineWave(2.5, 2));
+  EXPECT_TRUE(NormalizeSineWave(5, 2));
+  EXPECT_TRUE(NormalizeSineWave(10, 2));
+  EXPECT_TRUE(NormalizeSineWave(25, 2));
 
   std::cout << " Testing Spacing Invariance" << std::endl;
-  pass &= NormalizeSineWave(5, 2, 0.01);
-  pass &= NormalizeSineWave(5, 2, 100);
-
-  if (!pass)
-  {
-    std::cout << "Test Failed!" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(NormalizeSineWave(5, 2, 0.01));
+  EXPECT_TRUE(NormalizeSineWave(5, 2, 100));
 }
