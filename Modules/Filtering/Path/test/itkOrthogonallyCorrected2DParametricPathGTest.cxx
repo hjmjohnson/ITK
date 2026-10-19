@@ -19,10 +19,9 @@
 #include <iostream>
 #include "itkOrthogonallyCorrected2DParametricPath.h"
 #include "itkPolyLineParametricPath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkOrthogonallyCorrected2DParametricPathTest(int, char *[])
+TEST(OrthogonallyCorrected2DParametricPath, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -33,8 +32,6 @@ itkOrthogonallyCorrected2DParametricPathTest(int, char *[])
   using VertexType = OriginalPathType::VertexType;
   using OrthogonalCorrectionTableType = PathType::OrthogonalCorrectionTableType;
   using OrthogonalCorrectionTablePointer = PathType::OrthogonalCorrectionTablePointer;
-
-  bool passed = true;
 
   auto v = itk::MakeFilled<VertexType>(2);
 
@@ -63,7 +60,7 @@ itkOrthogonallyCorrected2DParametricPathTest(int, char *[])
   // Create the corrected path
   auto path = PathType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path, OrthogonallyCorrected2DParametricPath, ParametricPath);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path, OrthogonallyCorrected2DParametricPath, ParametricPath);
 
   path->SetOriginalPath(originalPath);
   path->SetOrthogonalCorrectionTable(correctionTable);
@@ -75,12 +72,10 @@ itkOrthogonallyCorrected2DParametricPathTest(int, char *[])
 
   std::cout << "Evaluating to an index at 0, 0.5, and 1.0: " << path->EvaluateToIndex(0) << ", "
             << path->EvaluateToIndex(0.5) << ", " << path->EvaluateToIndex(0.0) << std::endl;
-  if (static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[0]) != 1016 ||
-      static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[1]) != 2179)
-  {
-    std::cout << "OrthogonallyCorrected2DParametricPathTest:  EvaluateToIndex() Failed" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[0]), 1016)
+    << "OrthogonallyCorrected2DParametricPathTest:  EvaluateToIndex() Failed";
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->Evaluate(0.0))[1]), 2179)
+    << "OrthogonallyCorrected2DParametricPathTest:  EvaluateToIndex() Failed";
 
   InputType  input = 0;
   OffsetType offset = path->IncrementInput(input);
@@ -89,13 +84,4 @@ itkOrthogonallyCorrected2DParametricPathTest(int, char *[])
   input = 0.5;
   offset = path->IncrementInput(input);
   std::cout << "Incrementing the input from 0.5 to " << input << ": " << offset << std::endl;
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
 }

@@ -3,7 +3,6 @@ set(
   ITKPathTests
   itkContourExtractor2DImageFilterTest.cxx
   itkExtractOrthogonalSwath2DImageFilterTest.cxx
-  itkOrthogonallyCorrected2DParametricPathTest.cxx
   itkPathFunctionsTest.cxx
   itkPathIteratorTest.cxx
   itkPathToChainCodePathFilterTest.cxx
@@ -18,12 +17,6 @@ itk_add_test(
   COMMAND
     ITKPathTestDriver
     itkPathIteratorTest
-)
-itk_add_test(
-  NAME itkOrthogonallyCorrected2DParametricPathTest
-  COMMAND
-    ITKPathTestDriver
-    itkOrthogonallyCorrected2DParametricPathTest
 )
 itk_add_test(
   NAME itkPathToImageFilterTest
@@ -77,6 +70,7 @@ set(
   itkContourExtractor2DImageFilterGTest.cxx
   itkFourierSeriesPathGTest.cxx
   itkHilbertPathGTest.cxx
+  itkOrthogonallyCorrected2DParametricPathGTest.cxx
   itkOrthogonalSwath2DPathFilterGTest.cxx
 )
 
