@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include "itkReinitializeLevelSetImageFilter.h"
+#include "itkGTest.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkShiftScaleImageFilter.h"
 #include "itkTestingComparisonImageFilter.h"
@@ -63,8 +64,7 @@ SimpleSignedDistance(const TPoint & p)
 } // namespace
 
 
-int
-itkReinitializeLevelSetImageFilterTest(int, char *[])
+TEST(ReinitializeLevelSetImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int ImageDimension{ 2 };
@@ -148,12 +148,7 @@ itkReinitializeLevelSetImageFilterTest(int, char *[])
   std::cout << "Max. abs. difference = " << maxAbsDifference;
   std::cout << " at " << maxAbsDifferenceIndex << std::endl;
 
-  if (maxAbsDifference > 1.0)
-  {
-    std::cout << "Difference above threshold of 1.0" << std::endl;
-    std::cout << "Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(maxAbsDifference, 1.0);
 
   // Check if inside/outside points remain the same after reinitialization
   using CheckerType = itk::MultiplyImageFilter<ImageType, ImageType, ImageType>;
@@ -170,13 +165,7 @@ itkReinitializeLevelSetImageFilterTest(int, char *[])
   std::cout << "Min. product = " << minValue << std::endl;
   std::cout << "Max. product = " << maxValue << std::endl;
 
-  if (minValue < 0.0)
-  {
-    std::cout << "Inside/Outside mismatch at ";
-    std::cout << calculator->GetIndexOfMinimum() << std::endl;
-    std::cout << "Test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_GE(minValue, 0.0) << "Inside/Outside mismatch at " << calculator->GetIndexOfMinimum();
 
   // Exercise other member functions
   reinitializer->Print(std::cout);
@@ -213,17 +202,9 @@ itkReinitializeLevelSetImageFilterTest(int, char *[])
   {
     const ImageType::IndexType nodeIndex = nodeIter.Value().GetIndex();
     const double               product = image->GetPixel(nodeIndex) * reinitializer->GetOutput()->GetPixel(nodeIndex);
-    if (product < 0.0)
-    {
-      std::cout << "Product: " << product;
-      std::cout << " at: " << nodeIndex << std::endl;
-      std::cout << "Inside/outside mismatch" << std::endl;
-      std::cout << "Test failed" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_GE(product, 0.0) << "at: " << nodeIndex;
     nodeIter++;
   }
 
   std::cout << "Test passed" << std::endl;
-  return EXIT_SUCCESS;
 }
