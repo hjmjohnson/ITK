@@ -26,7 +26,7 @@
 #include "itkIdentityTransform.h"
 #include "itkAffineTransform.h"
 #include "itkTranslationTransform.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /**
  *  This is a test using GradientDescentOptimizerv4 and parameter scales
@@ -35,8 +35,10 @@
  *  at each iteration according to the shift of each step.
  */
 
+namespace
+{
 template <typename TMovingTransform>
-[[nodiscard]] int
+void
 itkQuasiNewtonOptimizerv4TestTemplated(int                 numberOfIterations,
                                        double              shiftOfStep,
                                        const std::string & scalesOption,
@@ -165,7 +167,7 @@ itkQuasiNewtonOptimizerv4TestTemplated(int                 numberOfIterations,
     std::cout << e.GetLocation() << std::endl;
     std::cout << e.GetDescription() << std::endl;
     std::cout << e.what() << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 
   std::cout << "...finished. " << std::endl
@@ -180,7 +182,6 @@ itkQuasiNewtonOptimizerv4TestTemplated(int                 numberOfIterations,
   std::cout << "Estimated scales = " << optimizer->GetScales() << std::endl;
   std::cout << "finalParameters = " << finalParameters << std::endl;
   std::cout << "fixedParameters = " << fixedParameters << std::endl;
-  bool pass = true;
 
   ParametersType actualParameters = imageSource->GetActualParameters();
   std::cout << "actualParameters = " << actualParameters << std::endl;
@@ -197,64 +198,24 @@ itkQuasiNewtonOptimizerv4TestTemplated(int                 numberOfIterations,
     // the parameters are negated in order to get the inverse transformation.
     // this only works for comparing translation parameters....
     std::cout << finalParameters[i + offsetOrder] << " == " << -actualParameters[i] << std::endl;
-    if (itk::Math::Absolute(finalParameters[i + offsetOrder] - (-actualParameters[i])) > tolerance)
-    {
-      std::cout << "Tolerance exceeded at component " << i << std::endl;
-      pass = false;
-    }
+    EXPECT_NEAR(finalParameters[i + offsetOrder], -actualParameters[i], tolerance)
+      << "Tolerance exceeded at component " << i;
   }
-
-  if (!pass)
-  {
-    std::cout << "Test FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test PASSED." << std::endl;
-  return EXIT_SUCCESS;
 }
+} // namespace
 
-int
-itkQuasiNewtonOptimizerv4Test(int argc, char ** const argv)
+TEST(QuasiNewtonOptimizerv4, ConvertedLegacyTest)
 {
-  if (argc > 3)
-  {
-    std::cerr << "Missing Parameters " << std::endl;
-    std::cerr << "Usage: " << itkNameOfTestExecutableMacro(argv);
-    std::cerr << " [numberOfIterations=50 shiftOfStep=1] ";
-    std::cerr << std::endl;
-    return EXIT_FAILURE;
-  }
-  unsigned int numberOfIterations = 50;
-  double       shiftOfStep = 1.0;
-
-  if (argc >= 2)
-  {
-    numberOfIterations = std::stoi(argv[1]);
-  }
-  if (argc >= 3)
-  {
-    shiftOfStep = std::stod(argv[2]);
-  }
+  constexpr unsigned int numberOfIterations{ 50 };
+  constexpr double       shiftOfStep{ 1.0 };
 
   constexpr unsigned int Dimension{ 2 };
 
   std::cout << std::endl << "Optimizing translation transform with shift scales" << std::endl;
   using TranslationTransformType = itk::TranslationTransform<double, Dimension>;
-  const int ret1 =
-    itkQuasiNewtonOptimizerv4TestTemplated<TranslationTransformType>(numberOfIterations, shiftOfStep, "shift");
+  itkQuasiNewtonOptimizerv4TestTemplated<TranslationTransformType>(numberOfIterations, shiftOfStep, "shift");
 
   std::cout << std::endl << "Optimizing translation transform with Jacobian scales" << std::endl;
   using TranslationTransformType = itk::TranslationTransform<double, Dimension>;
-  const int ret2 =
-    itkQuasiNewtonOptimizerv4TestTemplated<TranslationTransformType>(numberOfIterations, shiftOfStep, "jacobian");
-
-  if (ret1 == EXIT_SUCCESS && ret2 == EXIT_SUCCESS)
-  {
-    std::cout << std::endl << "Tests PASSED." << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << std::endl << "Tests FAILED." << std::endl;
-  return EXIT_FAILURE;
+  itkQuasiNewtonOptimizerv4TestTemplated<TranslationTransformType>(numberOfIterations, shiftOfStep, "jacobian");
 }
