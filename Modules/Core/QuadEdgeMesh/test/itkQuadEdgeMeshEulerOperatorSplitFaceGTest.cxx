@@ -19,10 +19,9 @@
 #include "itkQuadEdgeMeshEulerOperatorSplitFacetFunction.h"
 #include "itkQuadEdgeMeshEulerOperatorJoinFacetFunction.h"
 #include "itkQuadEdgeMeshEulerOperatorsTestHelper.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshEulerOperatorSplitFaceTest(int, char *[])
+TEST(QuadEdgeMeshEulerOperatorSplitFace, ConvertedLegacyTest)
 {
 
   using MeshType = itk::QuadEdgeMesh<double, 3>;
@@ -43,16 +42,13 @@ itkQuadEdgeMeshEulerOperatorSplitFaceTest(int, char *[])
 
   auto splitFacet = SplitFacet::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(splitFacet, QuadEdgeMeshEulerOperatorSplitFacetFunction, QuadEdgeMeshFunctionBase);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    splitFacet, QuadEdgeMeshEulerOperatorSplitFacetFunction, QuadEdgeMeshFunctionBase);
 
 
   std::cout << "     "
             << "Test No Mesh Input";
-  if (splitFacet->Evaluate((QEType *)1, (QEType *)2))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(splitFacet->Evaluate((QEType *)1, (QEType *)2), nullptr);
   std::cout << "OK" << std::endl;
 
   const MeshPointer mesh = MeshType::New();
@@ -62,38 +58,22 @@ itkQuadEdgeMeshEulerOperatorSplitFaceTest(int, char *[])
 
   std::cout << "     "
             << "Test No QE Input";
-  if (splitFacet->Evaluate((QEType *)nullptr, (QEType *)nullptr))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(splitFacet->Evaluate((QEType *)nullptr, (QEType *)nullptr), nullptr);
   std::cout << "OK" << std::endl;
 
   std::cout << "     "
             << "Test two QE Input not sharing the same left";
-  if (splitFacet->Evaluate(mesh->FindEdge(10, 16), mesh->FindEdge(13, 19)))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(splitFacet->Evaluate(mesh->FindEdge(10, 16), mesh->FindEdge(13, 19)), nullptr);
   std::cout << "OK" << std::endl;
 
   std::cout << "     "
             << "Test twice same non-null QE Input";
-  if (splitFacet->Evaluate((QEType *)1, (QEType *)1))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(splitFacet->Evaluate((QEType *)1, (QEType *)1), nullptr);
   std::cout << "OK" << std::endl;
 
   std::cout << "     "
             << "Test two consecutive QE Input";
-  if (splitFacet->Evaluate(mesh->FindEdge(10, 16), mesh->FindEdge(10, 16)->GetLnext()))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(splitFacet->Evaluate(mesh->FindEdge(10, 16), mesh->FindEdge(10, 16)->GetLnext()), nullptr);
   std::cout << "OK" << std::endl;
 
   auto joinFacet = JoinFacet::New();
@@ -102,53 +82,23 @@ itkQuadEdgeMeshEulerOperatorSplitFaceTest(int, char *[])
   QEType * G = DeletedEdge->GetSym()->GetLprev();
   QEType * H = joinFacet->Evaluate(DeletedEdge);
 
-  if (!splitFacet->Evaluate(H, G))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NE(splitFacet->Evaluate(H, G), nullptr);
 
   std::cout << "     "
             << "Split a face (possible)";
   // The number of edges and faces must be respectively identical to
   // the original number edges and faces:
-  if (!AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (mesh->GetPoint(12).GetValence() != 6)
-  {
-    std::cout << "FAILED [wrong valence of " << mesh->GetPoint(12).GetValence() << " ]." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0));
+  EXPECT_EQ(mesh->GetPoint(12).GetValence(), 6) << "wrong valence for vertex " << 12;
   std::cout << "OK" << std::endl;
   std::cout << "Checking SplitFacet. OK" << std::endl << std::endl;
 
   std::cout << "Checking JoinFacet( SplitFacet( edge ) ) invariance.";
   G = mesh->FindEdge(12, 7)->GetSym()->GetLprev();
   H = joinFacet->Evaluate(mesh->FindEdge(12, 7));
-  if (!H)
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!joinFacet->Evaluate(splitFacet->Evaluate(H, G)))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!AssertTopologicalInvariants<MeshType>(mesh, 25, 55, 31, 1, 0))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (mesh->GetPoint(12).GetValence() != 5)
-  {
-    std::cout << "FAILED [wrong valence of " << mesh->GetPoint(12).GetValence() << " ]." << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(H, nullptr);
+  EXPECT_NE(joinFacet->Evaluate(splitFacet->Evaluate(H, G)), nullptr);
+  EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 55, 31, 1, 0));
+  EXPECT_EQ(mesh->GetPoint(12).GetValence(), 5) << "wrong valence for vertex " << 12;
   std::cout << ".OK" << std::endl << std::endl;
-
-  return EXIT_SUCCESS;
 }
