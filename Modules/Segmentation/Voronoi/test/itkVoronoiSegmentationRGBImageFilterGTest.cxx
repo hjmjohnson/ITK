@@ -20,6 +20,8 @@
 #include "itkVoronoiSegmentationRGBImageFilter.h"
 #include "itkImageRegionIterator.h"
 #include "itkMath.h"
+#include "itkGTest.h"
+#include "vnl/vnl_sample.h"
 
 #include <algorithm> // For generate.
 #include <iostream>
@@ -34,7 +36,7 @@ using ReaderType = itk::ImageFileReader<ImageType>;
 using FilterType = itk::VoronoiSegmentationRGBImageFilter<ImageType, SegmentationType>;
 using BinaryObjectImage = FilterType::BinaryObjectImage;
 
-namespace VoronoiSegRGBTest
+namespace
 {
 
 //
@@ -199,7 +201,7 @@ CheckResults(SegmentationType::Pointer outputImage)
 //
 // Test with no prior
 //
-[[nodiscard]] int
+void
 TestNoPrior(ImageType::Pointer inputImage)
 {
 
@@ -234,11 +236,7 @@ TestNoPrior(ImageType::Pointer inputImage)
 
   // test GetMaxValueOfRGB
   std::cout << "Checking GetMaxValueOfRGB" << std::endl;
-  if (itk::Math::NotExactlyEquals(filter->GetMaxValueOfRGB(), 255))
-  {
-    std::cout << "[FAILED] Didn't set max RGB correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetMaxValueOfRGB(), 255) << "[FAILED] Didn't set max RGB correctly";
 
   // run the filter
   std::cout << "Running the filter" << std::endl;
@@ -247,21 +245,15 @@ TestNoPrior(ImageType::Pointer inputImage)
   // check the results
   std::cout << "Checking the filter results" << std::endl;
   const double percentCorrect = CheckResults(filter->GetOutput());
-  if (percentCorrect <= minCorrectRate)
-  {
-    std::cout << "[FAILED] Did not segment over " << minCorrectRate * 100 << "% correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  // return successfully
-  return EXIT_SUCCESS;
+  EXPECT_GT(percentCorrect, minCorrectRate)
+    << "[FAILED] Did not segment over " << minCorrectRate * 100 << "% correctly";
 }
 
 
 //
 // Test with a prior
 //
-[[nodiscard]] int
+void
 TestWithPrior(ImageType::Pointer inputImage)
 {
   // set up the filter
@@ -322,101 +314,72 @@ TestWithPrior(ImageType::Pointer inputImage)
   // check the results
   std::cout << "Checking the results of the filter" << std::endl;
   const double percentCorrect = CheckResults(filter->GetOutput());
-  if (percentCorrect <= minCorrectRate)
-  {
-    std::cout << "[FAILED] Did not segment over " << minCorrectRate * 100 << "% correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  // return successfully
-  return EXIT_SUCCESS;
+  EXPECT_GT(percentCorrect, minCorrectRate)
+    << "[FAILED] Did not segment over " << minCorrectRate * 100 << "% correctly";
 }
 
-} // end namespace VoronoiSegRGBTest
+} // namespace
 
 
 //
 // Main test function
 //
-int
-itkVoronoiSegmentationRGBImageFilterTest(int, char *[])
+TEST(VoronoiSegmentationRGBImageFilter, ConvertedLegacyTest)
 {
+  // The legacy test driver reseeds vnl_sample before every test.
+  vnl_sample_reseed(8775070);
   // set up the input image
-  const ImageType::Pointer inputImage = VoronoiSegRGBTest::SetUpInputImage();
+  const ImageType::Pointer inputImage = SetUpInputImage();
 
   // test without prior
   std::cout << "[Running test without prior]" << std::endl;
-  const int noPriorTestResult = VoronoiSegRGBTest::TestNoPrior(inputImage);
-  if (noPriorTestResult == EXIT_FAILURE)
-  {
-    std::cout << "Failed on test without prior" << std::endl;
-    return EXIT_FAILURE;
-  }
+  TestNoPrior(inputImage);
   std::cout << std::endl;
 
   // test with prior
   std::cout << "[Running test with prior]" << std::endl;
-  const int priorTestResult = VoronoiSegRGBTest::TestWithPrior(inputImage);
-  if (priorTestResult == EXIT_FAILURE)
-  {
-    std::cout << "Failed on test with prior" << std::endl;
-    return EXIT_FAILURE;
-  }
+  TestWithPrior(inputImage);
 
   // test set/get TestMean
   auto filter = FilterType::New();
-  filter->SetTestMean(VoronoiSegRGBTest::fgMean, VoronoiSegRGBTest::fgMean, VoronoiSegRGBTest::fgMean);
+  filter->SetTestMean(fgMean, fgMean, fgMean);
   unsigned int testMean[3];
   filter->GetTestMean(testMean);
-  if (testMean[0] != VoronoiSegRGBTest::fgMean || testMean[1] != VoronoiSegRGBTest::fgMean ||
-      testMean[2] != VoronoiSegRGBTest::fgMean)
-  {
-    std::cout << "[FAILED] Didn't set/get TestMean correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(testMean[0], fgMean);
+  EXPECT_EQ(testMean[1], fgMean);
+  EXPECT_EQ(testMean[2], fgMean);
 
   // test set/get TestSTD
-  filter->SetTestSTD(VoronoiSegRGBTest::fgStd, VoronoiSegRGBTest::fgStd, VoronoiSegRGBTest::fgStd);
+  filter->SetTestSTD(fgStd, fgStd, fgStd);
   unsigned int testStd[3];
   filter->GetTestSTD(testStd);
-  if (testStd[0] != VoronoiSegRGBTest::fgStd || testStd[1] != VoronoiSegRGBTest::fgStd ||
-      testStd[2] != VoronoiSegRGBTest::fgStd)
-  {
-    std::cout << "[FAILED] Didn't set/get TestSTD correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(testStd[0], fgStd);
+  EXPECT_EQ(testStd[1], fgStd);
+  EXPECT_EQ(testStd[2], fgStd);
 
   // test set/get MeanPercentError
   double meanPercentErrorIn[6] = { 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 };
   filter->SetMeanPercentError(meanPercentErrorIn);
   double meanPercentErrorOut[6];
   filter->GetMeanPercentError(meanPercentErrorOut);
-  if (itk::Math::NotExactlyEquals(meanPercentErrorOut[0], 0.1) ||
-      itk::Math::NotExactlyEquals(meanPercentErrorOut[1], 0.1) ||
-      itk::Math::NotExactlyEquals(meanPercentErrorOut[2], 0.1) ||
-      itk::Math::NotExactlyEquals(meanPercentErrorOut[3], 0.1) ||
-      itk::Math::NotExactlyEquals(meanPercentErrorOut[4], 0.1) ||
-      itk::Math::NotExactlyEquals(meanPercentErrorOut[5], 0.1))
-  {
-    std::cout << "[FAILED] Didn't set/get MeanPercentError correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(meanPercentErrorOut[0], 0.1);
+  EXPECT_EQ(meanPercentErrorOut[1], 0.1);
+  EXPECT_EQ(meanPercentErrorOut[2], 0.1);
+  EXPECT_EQ(meanPercentErrorOut[3], 0.1);
+  EXPECT_EQ(meanPercentErrorOut[4], 0.1);
+  EXPECT_EQ(meanPercentErrorOut[5], 0.1);
 
   // test set/get STDPercentError
   double stdPercentErrorIn[6] = { 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 };
   filter->SetSTDPercentError(stdPercentErrorIn);
   double stdPercentErrorOut[6];
   filter->GetSTDPercentError(stdPercentErrorOut);
-  if (itk::Math::NotExactlyEquals(stdPercentErrorOut[0], 0.1) ||
-      itk::Math::NotExactlyEquals(stdPercentErrorOut[1], 0.1) ||
-      itk::Math::NotExactlyEquals(stdPercentErrorOut[2], 0.1) ||
-      itk::Math::NotExactlyEquals(stdPercentErrorOut[3], 0.1) ||
-      itk::Math::NotExactlyEquals(stdPercentErrorOut[4], 0.1) ||
-      itk::Math::NotExactlyEquals(stdPercentErrorOut[5], 0.1))
-  {
-    std::cout << "[FAILED] Didn't set/get STDPercentError correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(stdPercentErrorOut[0], 0.1);
+  EXPECT_EQ(stdPercentErrorOut[1], 0.1);
+  EXPECT_EQ(stdPercentErrorOut[2], 0.1);
+  EXPECT_EQ(stdPercentErrorOut[3], 0.1);
+  EXPECT_EQ(stdPercentErrorOut[4], 0.1);
+  EXPECT_EQ(stdPercentErrorOut[5], 0.1);
 
   // test get mean/std tolerance
   double meanTolerance[6];
@@ -429,15 +392,8 @@ itkVoronoiSegmentationRGBImageFilterTest(int, char *[])
             << stdTolerance[3] << ',' << stdTolerance[4] << ',' << stdTolerance[5] << ')' << std::endl;
 
   // test type information
-  if (strcmp(filter->GetNameOfClass(), "VoronoiSegmentationRGBImageFilter") != 0)
-  {
-    std::cout << "[FAILED] Didn't report class name correctly" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_STREQ(filter->GetNameOfClass(), "VoronoiSegmentationRGBImageFilter");
 
   // test printing
   std::cout << filter << std::endl;
-
-  // return successfully
-  return EXIT_SUCCESS;
 }
