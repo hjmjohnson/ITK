@@ -17,9 +17,9 @@
  *=========================================================================*/
 
 #include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshTest3(int, char *[])
+TEST(QuadEdgeMesh3, ConvertedLegacyTest)
 {
   using PixelType = double;
   using MeshType = itk::QuadEdgeMesh<PixelType, 3>;
@@ -189,5 +189,4 @@ itkQuadEdgeMeshTest3(int, char *[])
   mesh->Clear();
 
   std::cout << "Mesh3Test passed" << std::endl;
-  return EXIT_SUCCESS;
 }
