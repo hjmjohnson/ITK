@@ -13,7 +13,6 @@ set(
   itkListSampleTest.cxx
   itkListSampleTest.cxx
   itkSampleToHistogramFilterTest5.cxx
-  itkScalarImageToCooccurrenceListSampleFilterTest.cxx
   itkScalarImageToCooccurrenceMatrixFilterTest.cxx
   itkScalarImageToCooccurrenceMatrixFilterTest2.cxx
   itkScalarImageToHistogramGeneratorTest.cxx
@@ -505,12 +504,6 @@ itk_add_test(
     DATA{${ITK_DATA_ROOT}/Input/VisibleWomanEyeSlice.png}
 )
 itk_add_test(
-  NAME itkScalarImageToCooccurrenceListSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToCooccurrenceListSampleFilterTest
-)
-itk_add_test(
   NAME itkScalarImageToCooccurrenceMatrixFilterTest
   COMMAND
     ITKStatisticsTestDriver
@@ -692,6 +685,7 @@ set(
   itkSampleToHistogramFilterGTest6.cxx
   itkSampleToHistogramFilterGTest7.cxx
   itkSampleToSubsampleFilterGTest1.cxx
+  itkScalarImageToCooccurrenceListSampleFilterGTest.cxx
   itkStatisticsTypesGTest.cxx
   itkTDistributionGTest.cxx
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
