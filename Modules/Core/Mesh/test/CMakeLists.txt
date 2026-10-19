@@ -7,7 +7,6 @@ set(
   itkMeshSpatialObjectIOTest.cxx
   itkParametricSpaceToImageSpaceMeshFilterTest.cxx
   itkSimplexMeshAdaptTopologyFilterTest.cxx
-  itkSimplexMeshTest.cxx
   itkSimplexMeshToTriangleMeshFilterTest.cxx
   itkSimplexMeshVolumeCalculatorTest.cxx
   itkSphereMeshSourceTest.cxx
@@ -30,12 +29,6 @@ set(
 set(ITKMesh-Test_LIBRARIES ${ITKMesh-Test_LIBRARIES})
 createtestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshTests}")
 
-itk_add_test(
-  NAME itkSimplexMeshTest
-  COMMAND
-    ITKMeshTestDriver
-    itkSimplexMeshTest
-)
 itk_add_test(
   NAME itkBinaryMask3DMeshSourceTestRegionOff
   COMMAND
@@ -447,5 +440,6 @@ set(
   itkQuadrilateralCellGTest.cxx
   itkRegularSphereMeshSourceGTest.cxx
   itkRegularSphereMeshSourceGTest2.cxx
+  itkSimplexMeshGTest.cxx
 )
 creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
