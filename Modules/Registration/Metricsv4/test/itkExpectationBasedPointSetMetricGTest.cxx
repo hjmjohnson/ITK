@@ -21,10 +21,12 @@
 
 #include <fstream>
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <unsigned int Dimension>
-[[nodiscard]] int
+void
 itkExpectationBasedPointSetMetricTestRun()
 {
   using PointSetType = itk::PointSet<unsigned char, Dimension>;
@@ -75,15 +77,16 @@ itkExpectationBasedPointSetMetricTestRun()
   using PointSetMetricType = itk::ExpectationBasedPointSetToPointSetMetricv4<PointSetType>;
   auto metric = PointSetMetricType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(metric, ExpectationBasedPointSetToPointSetMetricv4, PointSetToPointSetMetricv4);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    metric, ExpectationBasedPointSetToPointSetMetricv4, PointSetToPointSetMetricv4);
 
   const typename PointSetMetricType::CoordinateType pointSetSigma = 1.0;
   metric->SetPointSetSigma(pointSetSigma);
-  ITK_TEST_SET_GET_VALUE(pointSetSigma, metric->GetPointSetSigma());
+  EXPECT_EQ(pointSetSigma, metric->GetPointSetSigma());
 
   constexpr unsigned int evaluationKNeighborhood{ 50 };
   metric->SetEvaluationKNeighborhood(evaluationKNeighborhood);
-  ITK_TEST_SET_GET_VALUE(evaluationKNeighborhood, metric->GetEvaluationKNeighborhood());
+  EXPECT_EQ(evaluationKNeighborhood, metric->GetEvaluationKNeighborhood());
 
   metric->SetFixedPointSet(fixedPoints);
   metric->SetMovingPointSet(movingPoints);
@@ -98,31 +101,17 @@ itkExpectationBasedPointSetMetricTestRun()
   typename PointSetMetricType::DerivativeType derivative2;
   metric->GetValueAndDerivative(value2, derivative2);
 
-  int result = EXIT_SUCCESS;
   std::cout << "value: " << value << std::endl;
   std::cout << "derivative: " << derivative << std::endl;
   for (unsigned int d = 0; d < metric->GetNumberOfParameters(); ++d)
   {
-    if (itk::Math::Absolute(derivative[d] - offset[d]) / offset[d] > 0.01)
-    {
-      std::cerr << "derivative does not match expected offset of " << offset << std::endl;
-      result = EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(derivative[d] - offset[d]) / offset[d], 0.01)
+      << "derivative does not match expected offset of " << offset;
   }
 
   // Check for the same results from different methods
-  if (itk::Math::NotExactlyEquals(value, value2))
-  {
-    std::cerr << "value does not match between calls to different methods: "
-              << "value: " << value << " value2: " << value2 << std::endl;
-    result = EXIT_FAILURE;
-  }
-  if (derivative != derivative2)
-  {
-    std::cerr << "derivative does not match between calls to different methods: "
-              << "derivative: " << derivative << " derivative2: " << derivative2 << std::endl;
-    result = EXIT_FAILURE;
-  }
+  EXPECT_EQ(value, value2) << "value does not match between calls to different methods";
+  EXPECT_EQ(derivative, derivative2) << "derivative does not match between calls to different methods";
 
   std::ofstream moving_str1("sourceMoving.txt");
   std::ofstream moving_str2("targetMoving.txt");
@@ -162,26 +151,12 @@ itkExpectationBasedPointSetMetricTestRun()
 
   moving_str1 << "0 0 0 0" << std::endl;
   moving_str2 << "0 0 0 0" << std::endl;
-
-  return result;
 }
+} // namespace
 
-int
-itkExpectationBasedPointSetMetricTest(int, char *[])
+TEST(ExpectationBasedPointSetMetric, ConvertedLegacyTest)
 {
-  int result = EXIT_SUCCESS;
+  itkExpectationBasedPointSetMetricTestRun<2>();
 
-  if (itkExpectationBasedPointSetMetricTestRun<2>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 2." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  if (itkExpectationBasedPointSetMetricTestRun<3>() == EXIT_FAILURE)
-  {
-    std::cerr << "Failed for Dimension 3." << std::endl;
-    result = EXIT_FAILURE;
-  }
-
-  return result;
+  itkExpectationBasedPointSetMetricTestRun<3>();
 }
