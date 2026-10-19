@@ -20,6 +20,10 @@
 
 #include "itkImageKmeansModelEstimator.h"
 #include "itkDistanceToCentroidMembershipFunction.h"
+#include "itkGTest.h"
+
+namespace
+{
 
 // Data definitions
 constexpr uint8_t IMGWIDTH{ 16 };
@@ -49,9 +53,9 @@ public:
   }
   itk::LightProcessObject::Pointer m_Process;
 };
+} // namespace
 
-int
-itkKmeansModelEstimatorTest(int, char *[])
+TEST(KmeansModelEstimator, ConvertedLegacyTest)
 {
   //------------------------------------------------------
   // Create a simple test vector with 16 entries and 2 bands
@@ -329,15 +333,6 @@ itkKmeansModelEstimatorTest(int, char *[])
 
   // Check if the mean codebook is within error limits and the first pixel
   // is labeled to belong to class 2
-  if ((error < 0.1 * meanCDBKvalue) && (minidx == 2))
-  {
-    std::cout << "Kmeans algorithm passed (with initial input)" << std::endl;
-  }
-  else
-  {
-    std::cout << "Kmeans algorithm failed (with initial input)" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_LT(error, 0.1 * meanCDBKvalue);
+  EXPECT_EQ(minidx, 2u);
 }
