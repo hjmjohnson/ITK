@@ -17,7 +17,6 @@ set(
   itkNumberToStringTest.cxx
   itkNumericTraitsTest.cxx
   itkObjectFactoryTest.cxx
-  itkObjectStoreTest.cxx
   itkPhasedArray3DSpecialCoordinatesImageTest.cxx
   itkPointGeometryTest.cxx
   itkPointSetTest.cxx
@@ -180,12 +179,6 @@ itk_add_test(
     ${TEMP}/test_multi.txt
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/test_multi.txt
-)
-itk_add_test(
-  NAME itkObjectStoreTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkObjectStoreTest
 )
 itk_add_test(
   NAME itkPromoteType
@@ -1315,6 +1308,7 @@ set(
   itkNumberToStringGTest.cxx
   itkNumericsGTest.cxx
   itkObjectFactoryBaseGTest.cxx
+  itkObjectStoreGTest.cxx
   itkOffsetGTest.cxx
   itkOptimizerParametersGTest.cxx
   itkPixelAccessGTest.cxx
