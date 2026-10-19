@@ -19,7 +19,7 @@
 #include <algorithm>
 
 #include "itkImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 using ThreaderEnum = itk::MultiThreaderBase::ThreaderEnum;
 
@@ -77,8 +77,7 @@ private:
 };
 } // end namespace itk
 
-int
-itkMultiThreaderExceptionsTest(int, char *[])
+TEST(MultiThreaderExceptions, ConvertedLegacyTest)
 {
   using OutputPixelType = float;
   constexpr unsigned int Dimension{ 1 };
@@ -108,9 +107,8 @@ itkMultiThreaderExceptionsTest(int, char *[])
     for (itk::IndexValueType i = 0; i < loopBound; ++i)
     {
       dummySrc->SetExceptionIndex(i);
-      ITK_TRY_EXPECT_EXCEPTION(dummySrc->Update());
+      EXPECT_THROW(dummySrc->Update(), itk::ExceptionObject);
     }
   }
   std::cout << "Test PASSED!" << std::endl;
-  return EXIT_SUCCESS;
 }
