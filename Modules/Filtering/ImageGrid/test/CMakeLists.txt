@@ -22,7 +22,6 @@ set(
   itkOrientImageFilterTest.cxx
   itkPasteImageFilterTest.cxx
   itkPushPopTileImageFilterTest.cxx
-  itkRegionOfInterestImageFilterTest.cxx
   itkResampleImageTest.cxx
   itkResampleImageTest2.cxx
   itkResampleImageTest2Streaming.cxx
@@ -254,12 +253,6 @@ itk_add_test(
     ITKImageGridTestDriver
     itkFlipImageFilterTest
     1
-)
-itk_add_test(
-  NAME itkRegionOfInterestImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkRegionOfInterestImageFilterTest
 )
 itk_add_test(
   NAME itkBSplineUpsampleImageFilterTest
@@ -663,6 +656,7 @@ set(
   itkMirrorPadImageGTest.cxx
   itkPadImageFilterGTest.cxx
   itkPermuteAxesImageFilterGTest.cxx
+  itkRegionOfInterestImageFilterGTest.cxx
   itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
