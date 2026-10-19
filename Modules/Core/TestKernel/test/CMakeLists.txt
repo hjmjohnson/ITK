@@ -1,9 +1,5 @@
 itk_module_test()
-set(
-  ITKTestKernelTests
-  itkRandomImageSourceValuesTest.cxx
-  itkTestingStretchIntensityImageFilterTest.cxx
-)
+set(ITKTestKernelTests itkRandomImageSourceValuesTest.cxx)
 
 createtestdriver(ITKTestKernel "${ITKTestKernel-Test_LIBRARIES}" "${ITKTestKernelTests}")
 
@@ -23,13 +19,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkRandomImageSourceValuesTest.mha
 )
 
-itk_add_test(
-  NAME itkTestingStretchIntensityImageFilterTest
-  COMMAND
-    ITKTestKernelTestDriver
-    itkTestingStretchIntensityImageFilterTest
-)
-
 set(
   ITKTestKernelGTests
   itkGoogleTest.cxx
@@ -37,6 +26,7 @@ set(
   itkRandomImageSourceAttributesGTest.cxx
   itkTestingComparisonImageFilterGTest.cxx
   itkTestingExtractSliceImageFilterGTest.cxx
+  itkTestingStretchIntensityImageFilterGTest.cxx
   itkUtf8FilenameGTest.cxx
 )
 

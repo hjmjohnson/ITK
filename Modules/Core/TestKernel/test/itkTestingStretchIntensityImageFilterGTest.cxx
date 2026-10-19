@@ -16,13 +16,12 @@
  *
  *=========================================================================*/
 
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkTestingStretchIntensityImageFilter.h"
 #include "itkStatisticsImageFilter.h"
 #include "itkImageRegionIterator.h"
 
-int
-itkTestingStretchIntensityImageFilterTest(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(TestingStretchIntensityImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using PixelType = short;
@@ -42,7 +41,7 @@ itkTestingStretchIntensityImageFilterTest(int itkNotUsed(argc), char * itkNotUse
 
   auto stretchFilter = StretchFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(stretchFilter, StretchIntensityImageFilter, ImageSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(stretchFilter, StretchIntensityImageFilter, ImageSource);
 
   stretchFilter->SetInput(image);
 
@@ -53,7 +52,7 @@ itkTestingStretchIntensityImageFilterTest(int itkNotUsed(argc), char * itkNotUse
   stretchFilter->SetOutputMinimum(outputMinPix);
   stretchFilter->SetOutputMaximum(outputMaxPix);
 
-  ITK_TRY_EXPECT_EXCEPTION(stretchFilter->Update());
+  EXPECT_THROW(stretchFilter->Update(), itk::ExceptionObject);
 
   outputMinimumPixelValue = -5000;
   outputMaximumPixelValue = 16384;
@@ -62,31 +61,29 @@ itkTestingStretchIntensityImageFilterTest(int itkNotUsed(argc), char * itkNotUse
   stretchFilter->SetOutputMinimum(outputMinPix);
   stretchFilter->SetOutputMaximum(outputMaxPix);
 
-  ITK_TEST_SET_GET_VALUE(outputMinimumPixelValue, stretchFilter->GetOutputMinimum());
-  ITK_TEST_SET_GET_VALUE(outputMaximumPixelValue, stretchFilter->GetOutputMaximum());
+  EXPECT_EQ(outputMinimumPixelValue, stretchFilter->GetOutputMinimum());
+  EXPECT_EQ(outputMaximumPixelValue, stretchFilter->GetOutputMaximum());
 
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(stretchFilter->Update());
+  ASSERT_NO_THROW(stretchFilter->Update());
 
   std::cout << "Scale: " << stretchFilter->GetScale() << std::endl;
   std::cout << "Shift: " << stretchFilter->GetShift() << std::endl;
 
-  ITK_TEST_EXPECT_EQUAL(stretchFilter->GetInputMinimum(), -511);
-  ITK_TEST_EXPECT_EQUAL(stretchFilter->GetInputMaximum(), 512);
+  EXPECT_EQ(stretchFilter->GetInputMinimum(), -511);
+  EXPECT_EQ(stretchFilter->GetInputMaximum(), 512);
 
   auto statsFilter = StatsFilterType::New();
   statsFilter->SetInput(stretchFilter->GetOutput());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(statsFilter->Update());
+  ASSERT_NO_THROW(statsFilter->Update());
 
-  ITK_TEST_EXPECT_EQUAL(outputMinimumPixelValue, statsFilter->GetMinimum());
-  ITK_TEST_EXPECT_EQUAL(outputMaximumPixelValue, statsFilter->GetMaximum());
+  EXPECT_EQ(outputMinimumPixelValue, statsFilter->GetMinimum());
+  EXPECT_EQ(outputMaximumPixelValue, statsFilter->GetMaximum());
 
   std::cout << "Output Minimum: " << statsFilter->GetMinimum() << std::endl
             << "Output Maximum: " << statsFilter->GetMaximum() << std::endl
             << "Output Mean: " << statsFilter->GetMean() << std::endl
             << "Output Variance: " << statsFilter->GetVariance() << std::endl
             << "Output Sigma: " << statsFilter->GetSigma() << std::endl;
-
-  return EXIT_SUCCESS;
 }
