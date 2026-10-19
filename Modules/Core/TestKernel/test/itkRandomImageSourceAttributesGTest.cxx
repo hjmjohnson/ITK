@@ -17,11 +17,13 @@
  *=========================================================================*/
 
 #include "itkRandomImageSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
+namespace
+{
 template <typename TImage>
-[[nodiscard]] int
+void
 itkRandomImageSourceAttributesTestHelper(const typename TImage::SizeType      size,
                                          const typename TImage::SpacingType   spacing,
                                          const typename TImage::PointType     origin,
@@ -33,42 +35,37 @@ itkRandomImageSourceAttributesTestHelper(const typename TImage::SizeType      si
   using ImageSourceType = itk::RandomImageSource<TImage>;
   auto randomImageSource = ImageSourceType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(randomImageSource, RandomImageSource, ImageSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(randomImageSource, RandomImageSource, ImageSource);
 
 
   randomImageSource->SetSize(size);
-  ITK_TEST_SET_GET_VALUE(*size.GetSize(), *randomImageSource->GetSize());
+  EXPECT_EQ(*size.GetSize(), *randomImageSource->GetSize());
 
   randomImageSource->SetSpacing(spacing);
-  ITK_TEST_SET_GET_VALUE(spacing, randomImageSource->GetSpacing());
+  EXPECT_EQ(spacing, randomImageSource->GetSpacing());
 
   randomImageSource->SetOrigin(origin);
-  ITK_TEST_SET_GET_VALUE(origin, randomImageSource->GetOrigin());
+  EXPECT_EQ(origin, randomImageSource->GetOrigin());
 
   randomImageSource->SetDirection(direction);
-  ITK_TEST_SET_GET_VALUE(direction, randomImageSource->GetDirection());
+  EXPECT_EQ(direction, randomImageSource->GetDirection());
 
   randomImageSource->SetMin(min);
-  ITK_TEST_SET_GET_VALUE(min, randomImageSource->GetMin());
+  EXPECT_EQ(min, randomImageSource->GetMin());
 
   randomImageSource->SetMax(max);
-  ITK_TEST_SET_GET_VALUE(max, randomImageSource->GetMax());
-
-
-  return EXIT_SUCCESS;
+  EXPECT_EQ(max, randomImageSource->GetMax());
 }
+} // namespace
 
 
-int
-itkRandomImageSourceAttributesTest(int, char *[])
+TEST(RandomImageSourceAttributes, ConvertedLegacyTest)
 {
 
   constexpr unsigned int Dimension2D{ 2 };
   constexpr unsigned int Dimension3D{ 3 };
 
   using PixelType = float;
-
-  int testStatus = EXIT_SUCCESS;
 
   {
     using ImageType2D = itk::Image<PixelType, Dimension2D>;
@@ -81,11 +78,7 @@ itkRandomImageSourceAttributesTest(int, char *[])
     constexpr ImageType2D::ValueType  min{ 0.0 };
     constexpr ImageType2D::ValueType  max{ 1000.0 };
 
-    testStatus = itkRandomImageSourceAttributesTestHelper<ImageType2D>(size, spacing, origin, direction, min, max);
-    if (testStatus != EXIT_SUCCESS)
-    {
-      return EXIT_FAILURE;
-    }
+    itkRandomImageSourceAttributesTestHelper<ImageType2D>(size, spacing, origin, direction, min, max);
   }
 
   {
@@ -99,10 +92,9 @@ itkRandomImageSourceAttributesTest(int, char *[])
     constexpr ImageType3D::ValueType  min{ 0.0 };
     constexpr ImageType3D::ValueType  max{ 10.0 };
 
-    testStatus = itkRandomImageSourceAttributesTestHelper<ImageType3D>(size, spacing, origin, direction, min, max);
+    itkRandomImageSourceAttributesTestHelper<ImageType3D>(size, spacing, origin, direction, min, max);
   }
 
 
   std::cout << "Test finished." << std::endl;
-  return testStatus;
 }
