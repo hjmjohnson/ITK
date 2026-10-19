@@ -4,7 +4,6 @@ set(
   MeshToPolyDataTests
   itkImageToPointSetFilterTest.cxx
   itkMeshToPolyDataFilterTest.cxx
-  itkPolyDataTest.cxx
   itkPolyDataToMeshFilterTest.cxx
 )
 
@@ -19,13 +18,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkMeshToPolyDataFilterTest.vtk
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkMeshToPolyDataFilterTest.vtk
-)
-
-itk_add_test(
-  NAME itkPolyDataTest
-  COMMAND
-    MeshToPolyDataTestDriver
-    itkPolyDataTest
 )
 
 itk_add_test(
@@ -50,5 +42,6 @@ set(
   MeshToPolyDataGTests
   itkMeshToPolyDataFilterCellDataGTest.cxx
   itkMeshToPolyDataFilterLinePolyLineCellDataGTest.cxx
+  itkPolyDataGTest.cxx
 )
 creategoogletestdriver(MeshToPolyData "${MeshToPolyData-Test_LIBRARIES}" "${MeshToPolyDataGTests}")
