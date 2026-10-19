@@ -10,7 +10,6 @@ set(
   itkBSplineTransformTest2.cxx
   itkBSplineTransformTest3.cxx
   itkEuler3DTransformTest.cxx
-  itkQuaternionRigidTransformTest.cxx
   itkRigid2DTransformTest.cxx
   itkRigid3DPerspectiveTransformTest.cxx
   itkRigid3DTransformTest.cxx
@@ -92,12 +91,6 @@ itk_add_test(
   COMMAND
     ITKTransformTestDriver
     itkScaleLogarithmicTransformTest
-)
-itk_add_test(
-  NAME itkQuaternionRigidTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkQuaternionRigidTransformTest
 )
 itk_add_test(
   NAME itkScaleTransformTest
@@ -456,6 +449,7 @@ set(
   itkIdentityTransformGTest.cxx
   itkMatrixOffsetTransformBaseGTest.cxx
   itkMultiTransformGTest.cxx
+  itkQuaternionRigidTransformGTest.cxx
   itkSimilarityTransformGTest.cxx
   itkTransformGTest.cxx
   itkTranslationTransformGTest.cxx
