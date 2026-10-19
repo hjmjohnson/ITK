@@ -16,8 +16,11 @@
  *
  *=========================================================================*/
 #include "itkGeometricalQuadEdge.h"
+#include "itkGTest.h"
 #include <iostream>
 
+namespace
+{
 class itkGeometricalQuadEdgeTest1Helper
 {
 public:
@@ -53,10 +56,10 @@ public:
     return e1;
   }
 };
+} // namespace
 
 
-int
-itkGeometricalQuadEdgeTest1(int, char *[])
+TEST(GeometricalQuadEdge, ConvertedLegacyTest)
 {
 
   using HelperType = itkGeometricalQuadEdgeTest1Helper;
@@ -92,6 +95,4 @@ itkGeometricalQuadEdgeTest1(int, char *[])
   delete qe->GetRot()->GetRot();
   delete qe->GetRot();
   delete qe;
-
-  return EXIT_SUCCESS;
 }
