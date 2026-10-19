@@ -19,13 +19,11 @@
 #include "itkMultiplyImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkMultiplyImageFilterTest(int, char *[])
+TEST(MultiplyImageFilter, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int Dimension{ 3 };
 
@@ -77,7 +75,7 @@ itkMultiplyImageFilterTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, MultiplyImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, MultiplyImageFilter, BinaryGeneratorImageFilter);
 
   // Connect the input images
   filter->SetInput1(inputImageA);
@@ -85,7 +83,7 @@ itkMultiplyImageFilterTest(int, char *[])
 
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
 
   // Get the filter output
@@ -101,21 +99,11 @@ itkMultiplyImageFilterTest(int, char *[])
   constexpr OutputImageType::PixelType epsilon{ 1e-6 };
   while (!oIt.IsAtEnd())
   {
-    if (!itk::Math::FloatAlmostEqual(oIt.Get(), expectedValue, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in pixel value at index [" << oIt.GetIndex() << ']' << std::endl;
-      std::cerr << "Expected value " << expectedValue << std::endl;
-      std::cerr << " differs from " << oIt.Get();
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(oIt.Get(), expectedValue, epsilon) << "Error in pixel value at index [" << oIt.GetIndex() << ']';
     ++oIt;
   }
 
 
   // All objects should be automatically destroyed at this point
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
