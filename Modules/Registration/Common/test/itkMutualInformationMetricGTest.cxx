@@ -20,6 +20,7 @@
 
 #include "itkLinearInterpolateImageFunction.h"
 #include "itkTimeProbesCollectorBase.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
@@ -32,8 +33,7 @@
  *
  */
 
-int
-itkMutualInformationMetricTest(int, char *[])
+TEST(MutualInformationMetric, ConvertedLegacyTest)
 {
 
   //------------------------------------------------------------
@@ -254,7 +254,4 @@ itkMutualInformationMetricTest(int, char *[])
     std::cout << "Caught the exception." << std::endl;
     std::cout << err << std::endl;
   }
-
-
-  return EXIT_SUCCESS;
 }
