@@ -19,7 +19,6 @@ set(
   itkPromoteDimensionImageTest.cxx
   itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
   itkRGBToVectorAdaptImageFilterTest.cxx
-  itkShiftScaleImageFilterTest.cxx
   itkSigmoidImageFilterTest.cxx
   itkSinImageFilterAndAdaptorTest.cxx
   itkSqrtImageFilterAndAdaptorTest.cxx
@@ -253,12 +252,6 @@ set_tests_properties(
       ${TEMP}/itkNormalizeImageFilterTest.txt
 )
 
-itk_add_test(
-  NAME itkShiftScaleImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkShiftScaleImageFilterTest
-)
 itk_add_test(
   NAME itkTernaryMagnitudeImageFilterTest
   COMMAND
@@ -590,6 +583,7 @@ set(
   itkPowImageFilterGTest.cxx
   itkRescaleIntensityImageFilterGTest.cxx
   itkRoundImageFilterGTest.cxx
+  itkShiftScaleImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
 )
 
