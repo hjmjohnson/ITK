@@ -27,7 +27,6 @@ set(
   itkResampleImageTest3.cxx
   itkResampleImageTest5.cxx
   itkResampleImageTest6.cxx
-  itkShrinkImageTest.cxx
   itkSliceBySliceImageFilterTest.cxx
   itkTileImageFilterTest.cxx
   itkWarpImageFilterTest.cxx
@@ -554,12 +553,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/PushPopTileImageFilterTest.png
 )
 itk_add_test(
-  NAME itkShrinkImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkShrinkImageTest
-)
-itk_add_test(
   NAME itkZeroFluxNeumannPadImageFilterTest
   COMMAND
     ITKImageGridTestDriver
@@ -620,6 +613,7 @@ set(
   itkResampleImageGTest7.cxx
   itkResampleImageGTest8.cxx
   itkResamplePhasedArray3DSpecialCoordinatesImageGTest.cxx
+  itkShrinkImageGTest.cxx
   itkShrinkImageStreamingGTest.cxx
   itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
