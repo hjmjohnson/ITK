@@ -17,15 +17,12 @@
  *=========================================================================*/
 
 #include "itkVowIsotropicWavelet.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <string>
 
-int
-itkVowIsotropicWaveletTest(int, char *[])
+TEST(VowIsotropicWavelet, ConvertedLegacyTest)
 {
-  bool testPassed = true;
-
   using Double = double;
   using Float = float;
 
@@ -62,22 +59,10 @@ itkVowIsotropicWaveletTest(int, char *[])
   std::cout << "freq2D: " << freq2D << std::endl;
   // Check that inherits from IsotropicFrequencyFunction
   unsigned int defaultBands = wavelet2Dfloat->GetHighPassSubBands();
-  if (defaultBands != 1)
-  {
-    testPassed = false;
-  }
+  EXPECT_EQ(defaultBands, 1u);
 
   // Specific methods for this type:
   Wavelet2DFloat::FunctionValueType differentKappa = 0.750001;
   wavelet2Dfloat->SetKappa(differentKappa);
-  ITK_TEST_SET_GET_VALUE(differentKappa, wavelet2Dfloat->GetKappa());
-
-  if (testPassed)
-  {
-    return EXIT_SUCCESS;
-  }
-  else
-  {
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(differentKappa, wavelet2Dfloat->GetKappa());
 }
