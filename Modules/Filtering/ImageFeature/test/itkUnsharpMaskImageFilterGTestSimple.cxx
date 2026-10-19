@@ -19,10 +19,9 @@
 #include "itkUnsharpMaskImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkSimpleFilterWatcher.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkUnsharpMaskImageFilterTestSimple(int, char *[])
+TEST(UnsharpMaskImageFilter, ConvertedLegacyTestSimple)
 {
   // Define the dimension of the images
   constexpr unsigned int Dimension{ 2 };
@@ -83,7 +82,7 @@ itkUnsharpMaskImageFilterTestSimple(int, char *[])
   // Create the filter
   auto filter = UnsharpMaskImageFilterFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, UnsharpMaskImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, UnsharpMaskImageFilter, ImageToImageFilter);
 
   const itk::SimpleFilterWatcher watchit(filter);
 
@@ -94,7 +93,7 @@ itkUnsharpMaskImageFilterTestSimple(int, char *[])
   UnsharpMaskImageFilterFilterType::InternalPrecisionType threshold = -0.1;
   filter->SetThreshold(threshold);
 
-  ITK_TRY_EXPECT_EXCEPTION(filter->Update());
+  EXPECT_THROW(filter->Update(), itk::ExceptionObject);
 
 
   // Set the filter properties
@@ -107,42 +106,34 @@ itkUnsharpMaskImageFilterTestSimple(int, char *[])
   for (unsigned int i = 0; i < sigmas.Size(); ++i)
   {
     const UnsharpMaskImageFilterFilterType::SigmaArrayType::ValueType sigma2 = sigmas[i];
-    if (!itk::Math::FloatAlmostEqual(sigma, sigma2, 10, tolerance))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(tolerance))));
-      std::cerr << "Test FAILED! ";
-      std::cerr << "Error in the Sigma values" << std::endl;
-      std::cerr << "Expected " << sigma << " but got " << sigma2;
-      std::cerr << " along the [" << i << "]-th dimension." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(sigma, sigma2, tolerance) << "Error in the Sigma values along the [" << i << "]-th dimension.";
   }
 
   constexpr UnsharpMaskImageFilterFilterType::InternalPrecisionType amount{ 0.8 };
   filter->SetAmount(amount);
-  ITK_TEST_SET_GET_VALUE(amount, filter->GetAmount());
+  EXPECT_EQ(amount, filter->GetAmount());
 
   threshold = 0.01;
   filter->SetThreshold(threshold);
-  ITK_TEST_SET_GET_VALUE(threshold, filter->GetThreshold());
+  EXPECT_EQ(threshold, filter->GetThreshold());
 
   constexpr bool clamp{ std::is_integral_v<UnsharpMaskImageFilterFilterType::OutputPixelType> };
   filter->SetClamp(clamp);
-  ITK_TEST_SET_GET_VALUE(clamp, filter->GetClamp());
+  EXPECT_EQ(clamp, filter->GetClamp());
 
   if (clamp)
   {
     filter->ClampOn();
-    ITK_TEST_SET_GET_VALUE(true, filter->GetClamp());
+    EXPECT_EQ(true, filter->GetClamp());
   }
   else
   {
     filter->ClampOff();
-    ITK_TEST_SET_GET_VALUE(false, filter->GetClamp());
+    EXPECT_EQ(false, filter->GetClamp());
   }
 
   // Execute the filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  ASSERT_NO_THROW(filter->Update());
 
   // Get the Smart Pointer to the Filter Output
   // It is important to do it AFTER the filter is Updated
@@ -156,18 +147,10 @@ itkUnsharpMaskImageFilterTestSimple(int, char *[])
   constexpr float maxs[4]{ -0.20f, -0.32f, 1.33f, 1.21f };
   for (unsigned int i = 0; i < 4; ++i)
   {
-    if (outputImage->GetPixel(start) < mins[i] || outputImage->GetPixel(start) > maxs[i])
-    {
-      std::cerr << "Test FAILED! Unexpected value: ";
-      std::cerr << outputImage->GetPixel(start) << std::endl;
-      std::cerr << "Expected value between " << mins[i];
-      std::cerr << " and " << maxs[i] << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_GE(outputImage->GetPixel(start), mins[i]);
+    EXPECT_LE(outputImage->GetPixel(start), maxs[i]);
     ++start[0];
   }
 
   // All objects should be automatically destroyed at this point
-  std::cout << std::endl << "Test PASSED ! " << std::endl;
-  return EXIT_SUCCESS;
 }
