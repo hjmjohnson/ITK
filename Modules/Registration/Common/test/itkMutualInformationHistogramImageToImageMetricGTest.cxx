@@ -20,12 +20,12 @@
 #include "itkLinearInterpolateImageFunction.h"
 #include "itkMutualInformationHistogramImageToImageMetric.h"
 #include "itkTranslationTransform.h"
+#include "itkGTest.h"
 
 /** This test uses two 2D-Gaussians (standard deviation RegionSize/2).
     This test computes the mutual information between the two images.
 */
-int
-itkMutualInformationHistogramImageToImageMetricTest(int, char *[])
+TEST(MutualInformationHistogramImageToImageMetric, ConvertedLegacyTest)
 {
   try
   {
@@ -140,15 +140,9 @@ itkMutualInformationHistogramImageToImageMetricTest(int, char *[])
 
     // Exercise Print() method.
     metric->Print(std::cout);
-
-    std::cout << "Test passed." << std::endl;
   }
   catch (const itk::ExceptionObject & ex)
   {
-    std::cerr << "Exception caught!" << std::endl;
-    std::cerr << ex << std::endl;
-    return EXIT_FAILURE;
+    ADD_FAILURE() << "Exception caught!" << std::endl << ex;
   }
-
-  return EXIT_SUCCESS;
 }
