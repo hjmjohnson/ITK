@@ -18,10 +18,10 @@
 
 #include "itkAutoPointer.h"
 #include "itkQuadEdge.h"
+#include "itkGTest.h"
 #include <iostream>
 
-int
-itkQuadEdgeTest1(int, char *[])
+TEST(QuadEdge, ConvertedLegacyTest)
 {
   using QuadEdgeType = itk::QuadEdge;
 
@@ -46,31 +46,15 @@ itkQuadEdgeTest1(int, char *[])
 
     // Verify that it can be set.
     quadEdge1->SetRot(quadEdge2);
-    if (quadEdge1->GetRot() != quadEdge2)
-    {
-      std::cerr << "Error in SetRot() / GetRot() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRot(), quadEdge2) << "Error in SetRot() / GetRot() ";
     // Test the const version
-    if (quadEdge1c->GetRot() != quadEdge2)
-    {
-      std::cerr << "Error in const GetRot() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetRot(), quadEdge2) << "Error in const GetRot() ";
 
     // Verify that it can be changed.
     quadEdge1->SetRot(quadEdge3);
-    if (quadEdge1->GetRot() != quadEdge3)
-    {
-      std::cerr << "Error in changing SetRot() / GetRot() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRot(), quadEdge3) << "Error in changing SetRot() / GetRot() ";
     // Test the const version
-    if (quadEdge1c->GetRot() != quadEdge3)
-    {
-      std::cerr << "Error in changed const GetRot() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetRot(), quadEdge3) << "Error in changed const GetRot() ";
 
     std::cout << "GetRot()/SetRot() Test passed ! " << std::endl;
   } // end of local scope for tests
@@ -89,18 +73,10 @@ itkQuadEdgeTest1(int, char *[])
 
     // Verify that it can be set.
     quadEdge1->SetOnext(quadEdge2);
-    if (quadEdge1->GetOnext() != quadEdge2)
-    {
-      std::cerr << "Error in SetOnext() / GetOnext() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetOnext(), quadEdge2) << "Error in SetOnext() / GetOnext() ";
 
     // Test the const version
-    if (quadEdge1c->GetOnext() != quadEdge2)
-    {
-      std::cerr << "Error in const GetOnext() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetOnext(), quadEdge2) << "Error in const GetOnext() ";
 
     // Verify that it can be changed.
     auto *                    quadEdge3 = new QuadEdgeType;
@@ -108,18 +84,10 @@ itkQuadEdgeTest1(int, char *[])
 
     quadEdge1->SetOnext(quadEdge3);
 
-    if (quadEdge1->GetOnext() != quadEdge3)
-    {
-      std::cerr << "Error in changing SetOnext() / GetOnext() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetOnext(), quadEdge3) << "Error in changing SetOnext() / GetOnext() ";
 
     // Test the const version
-    if (quadEdge1c->GetOnext() != quadEdge3)
-    {
-      std::cerr << "Error changed const GetOnext() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetOnext(), quadEdge3) << "Error changed const GetOnext() ";
 
     std::cout << "GetOnext()/SetOnext() Test passed ! " << std::endl;
   } // end of local scope for tests
@@ -142,71 +110,33 @@ itkQuadEdgeTest1(int, char *[])
     const QuadEdgeType * quadEdge4c = quadEdge4;
 
     // testing first GetSym()'s fail case
-    if (quadEdge1->GetSym() || quadEdge1c->GetSym())
-    {
-      std::cerr << "Error GetSym( ) should fail here " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetSym(), nullptr) << "Error GetSym( ) should fail here ";
+    EXPECT_EQ(quadEdge1c->GetSym(), nullptr) << "Error GetSym( ) should fail here ";
 
     // testing the second GetSym()'s fail case
     quadEdge1->SetRot(quadEdge2);
-    if (quadEdge1->GetSym() || quadEdge1c->GetSym())
-    {
-      std::cerr << "Error GetSym( ) should fail here " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetSym(), nullptr) << "Error GetSym( ) should fail here ";
+    EXPECT_EQ(quadEdge1c->GetSym(), nullptr) << "Error GetSym( ) should fail here ";
 
     quadEdge2->SetRot(quadEdge3);
     quadEdge3->SetRot(quadEdge4);
     quadEdge4->SetRot(quadEdge1);
 
-    if (quadEdge1->GetSym() != quadEdge3)
-    {
-      std::cerr << "Error in GetSym() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetSym(), quadEdge3) << "Error in GetSym() ";
 
-    if (quadEdge1c->GetSym() != quadEdge3)
-    {
-      std::cerr << "Error in const GetSym() " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetSym(), quadEdge3) << "Error in const GetSym() ";
 
-    if (quadEdge2->GetSym() != quadEdge4)
-    {
-      std::cerr << "Error in GetSym() B " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge2->GetSym(), quadEdge4) << "Error in GetSym() B ";
 
-    if (quadEdge2c->GetSym() != quadEdge4)
-    {
-      std::cerr << "Error in const GetSym() B" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge2c->GetSym(), quadEdge4) << "Error in const GetSym() B";
 
-    if (quadEdge3->GetSym() != quadEdge1)
-    {
-      std::cerr << "Error in GetSym() C " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge3->GetSym(), quadEdge1) << "Error in GetSym() C ";
 
-    if (quadEdge3c->GetSym() != quadEdge1)
-    {
-      std::cerr << "Error in const GetSym() C" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge3c->GetSym(), quadEdge1) << "Error in const GetSym() C";
 
-    if (quadEdge4->GetSym() != quadEdge2)
-    {
-      std::cerr << "Error in GetSym() D " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge4->GetSym(), quadEdge2) << "Error in GetSym() D ";
 
-    if (quadEdge4c->GetSym() != quadEdge2)
-    {
-      std::cerr << "Error in const GetSym() D" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge4c->GetSym(), quadEdge2) << "Error in const GetSym() D";
 
     std::cout << "GetSym()   Test passed ! " << std::endl;
   }
@@ -233,11 +163,8 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     // testing first fail case
-    if (quadEdge1->GetLnext() || quadEdge1c->GetLnext())
-    {
-      std::cerr << "Error in GetLNext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetLnext(), nullptr) << "Error in GetLNext()";
+    EXPECT_EQ(quadEdge1c->GetLnext(), nullptr) << "Error in GetLNext()";
 #endif
 
     //                        /
@@ -257,36 +184,22 @@ itkQuadEdgeTest1(int, char *[])
 #ifndef NDEBUG
     // testing second fail case
     quadEdge4->SetOnext(nullptr);
-    if (quadEdge1->GetLnext() || quadEdge1c->GetLnext())
-    {
-      std::cerr << "Error in GetLnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetLnext(), nullptr) << "Error in GetLnext()";
+    EXPECT_EQ(quadEdge1c->GetLnext(), nullptr) << "Error in GetLnext()";
 #endif
 
     // testing third fail case
     quadEdge4->SetOnext(quadEdgeB);
 #ifndef NDEBUG
-    if (quadEdge1->GetLnext() || quadEdge1c->GetLnext())
-    {
-      std::cerr << "Error in GetLnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetLnext(), nullptr) << "Error in GetLnext()";
+    EXPECT_EQ(quadEdge1c->GetLnext(), nullptr) << "Error in GetLnext()";
 #endif
 
     quadEdgeB->SetRot(quadEdgeA);
 
-    if (quadEdge1->GetLnext() != quadEdgeA)
-    {
-      std::cerr << "Error in GetLnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetLnext(), quadEdgeA) << "Error in GetLnext()";
 
-    if (quadEdge1c->GetLnext() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetLnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetLnext(), quadEdgeA) << "Error in const GetLnext()";
 
     std::cout << "GetLnext() Test passed ! " << std::endl;
   }
@@ -314,11 +227,8 @@ itkQuadEdgeTest1(int, char *[])
     const QuadEdgeType * quadEdge1c = quadEdge1;
 
     // testing first fail case
-    if (quadEdge1->GetRnext() || quadEdge1c->GetRnext())
-    {
-      std::cerr << "Error in GetRnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRnext(), nullptr) << "Error in GetRnext()";
+    EXPECT_EQ(quadEdge1c->GetRnext(), nullptr) << "Error in GetRnext()";
 #endif
 
     //
@@ -339,36 +249,22 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     quadEdge2->SetOnext(nullptr);
-    if (quadEdge1->GetRnext() || quadEdge1c->GetRnext())
-    {
-      std::cerr << "Error in GetRnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRnext(), nullptr) << "Error in GetRnext()";
+    EXPECT_EQ(quadEdge1c->GetRnext(), nullptr) << "Error in GetRnext()";
 #endif
 
     quadEdge2->SetOnext(quadEdgeB);
     quadEdgeB->SetOnext(quadEdge2);
 #ifndef NDEBUG
-    if (quadEdge1->GetRnext() || quadEdge1c->GetRnext())
-    {
-      std::cerr << "Error in GetRnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRnext(), nullptr) << "Error in GetRnext()";
+    EXPECT_EQ(quadEdge1c->GetRnext(), nullptr) << "Error in GetRnext()";
 #endif
 
     quadEdgeA->SetRot(quadEdgeB);
 
-    if (quadEdgeA->GetRnext() != quadEdge1)
-    {
-      std::cerr << "Error in GetRnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdgeA->GetRnext(), quadEdge1) << "Error in GetRnext()";
 
-    if (quadEdgeAc->GetRnext() != quadEdge1)
-    {
-      std::cerr << "Error in const GetRnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdgeAc->GetRnext(), quadEdge1) << "Error in const GetRnext()";
 
     std::cout << "GetRnext() Test passed ! " << std::endl;
   }
@@ -400,11 +296,8 @@ itkQuadEdgeTest1(int, char *[])
     const QuadEdgeType * quadEdge1c = quadEdge1;
 
 #ifndef NDEBUG
-    if (quadEdge1->GetDnext() || quadEdge1c->GetDnext())
-    {
-      std::cerr << "Error 1 in GetDnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDnext(), nullptr) << "Error 1 in GetDnext()";
+    EXPECT_EQ(quadEdge1c->GetDnext(), nullptr) << "Error 1 in GetDnext()";
 #endif
 
     //
@@ -424,20 +317,14 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     quadEdge3->SetOnext(nullptr);
-    if (quadEdge1->GetDnext() || quadEdge1c->GetDnext())
-    {
-      std::cerr << "Error 2 in GetDnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDnext(), nullptr) << "Error 2 in GetDnext()";
+    EXPECT_EQ(quadEdge1c->GetDnext(), nullptr) << "Error 2 in GetDnext()";
 #endif
 
     quadEdge3->SetOnext(quadEdgeA);
 #ifndef NDEBUG
-    if (quadEdge1->GetDnext() || quadEdge1c->GetDnext())
-    {
-      std::cerr << "Error 3 in GetDnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDnext(), nullptr) << "Error 3 in GetDnext()";
+    EXPECT_EQ(quadEdge1c->GetDnext(), nullptr) << "Error 3 in GetDnext()";
 #endif
 
     quadEdgeA->SetRot(quadEdgeB);
@@ -445,17 +332,9 @@ itkQuadEdgeTest1(int, char *[])
     quadEdgeC->SetRot(quadEdgeD);
     quadEdgeD->SetRot(quadEdgeA);
 
-    if (quadEdge1->GetDnext() != quadEdgeC)
-    {
-      std::cerr << "Error 4 in GetDnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDnext(), quadEdgeC) << "Error 4 in GetDnext()";
 
-    if (quadEdge1c->GetDnext() != quadEdgeC)
-    {
-      std::cerr << "Error 5 in const GetDnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetDnext(), quadEdgeC) << "Error 5 in const GetDnext()";
 
     std::cout << "GetDnext() Test passed ! " << std::endl;
   }
@@ -488,11 +367,8 @@ itkQuadEdgeTest1(int, char *[])
     const QuadEdgeType * quadEdge1c = quadEdge1;
 
 #ifndef NDEBUG
-    if (quadEdge1->GetOprev() || quadEdge1c->GetOprev())
-    {
-      std::cerr << "Error in GetOprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetOprev(), nullptr) << "Error in GetOprev()";
+    EXPECT_EQ(quadEdge1c->GetOprev(), nullptr) << "Error in GetOprev()";
 #endif
 
     //
@@ -513,20 +389,14 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     quadEdge2->SetOnext(nullptr);
-    if (quadEdge1->GetOprev() || quadEdge1c->GetOprev())
-    {
-      std::cerr << "Error in GetOprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetOprev(), nullptr) << "Error in GetOprev()";
+    EXPECT_EQ(quadEdge1c->GetOprev(), nullptr) << "Error in GetOprev()";
 #endif
 
     quadEdge2->SetOnext(quadEdgeD);
 #ifndef NDEBUG
-    if (quadEdge1->GetOprev() || quadEdge1c->GetOprev())
-    {
-      std::cerr << "Error in GetOprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetOprev(), nullptr) << "Error in GetOprev()";
+    EXPECT_EQ(quadEdge1c->GetOprev(), nullptr) << "Error in GetOprev()";
 #endif
 
     quadEdgeA->SetRot(quadEdgeB);
@@ -534,17 +404,9 @@ itkQuadEdgeTest1(int, char *[])
     quadEdgeC->SetRot(quadEdgeD);
     quadEdgeD->SetRot(quadEdgeA);
 
-    if (quadEdge1->GetOprev() != quadEdgeA)
-    {
-      std::cerr << "Error in GetOprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetOprev(), quadEdgeA) << "Error in GetOprev()";
 
-    if (quadEdge1c->GetOprev() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetOprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetOprev(), quadEdgeA) << "Error in const GetOprev()";
 
     std::cout << "GetOprev() Test passed ! " << std::endl;
   }
@@ -577,11 +439,8 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     quadEdge1->SetOnext(nullptr);
-    if (quadEdge1->GetLprev() || quadEdge1c->GetLprev())
-    {
-      std::cerr << "Error in GetLprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetLprev(), nullptr) << "Error in GetLprev()";
+    EXPECT_EQ(quadEdge1c->GetLprev(), nullptr) << "Error in GetLprev()";
 #endif
 
     //
@@ -597,11 +456,8 @@ itkQuadEdgeTest1(int, char *[])
 
     quadEdge1->SetOnext(quadEdgeC);
 #ifndef NDEBUG
-    if (quadEdge1->GetLprev() || quadEdge1c->GetLprev())
-    {
-      std::cerr << "Error in GetLprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetLprev(), nullptr) << "Error in GetLprev()";
+    EXPECT_EQ(quadEdge1c->GetLprev(), nullptr) << "Error in GetLprev()";
 #endif
 
     quadEdgeA->SetRot(quadEdgeB);
@@ -614,17 +470,9 @@ itkQuadEdgeTest1(int, char *[])
     quadEdge3->SetRot(quadEdge4);
     quadEdge4->SetRot(quadEdge1);
 
-    if (quadEdge1->GetLprev() != quadEdgeA)
-    {
-      std::cerr << "Error in GetLprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetLprev(), quadEdgeA) << "Error in GetLprev()";
 
-    if (quadEdge1c->GetLprev() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetLprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetLprev(), quadEdgeA) << "Error in const GetLprev()";
 
     std::cout << "GetLprev() Test passed ! " << std::endl;
   }
@@ -656,11 +504,8 @@ itkQuadEdgeTest1(int, char *[])
     const QuadEdgeType * quadEdge1c = quadEdge1;
 
 #ifndef NDEBUG
-    if (quadEdge1->GetRprev() || quadEdge1c->GetRprev())
-    {
-      std::cerr << "Error in GetRprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRprev(), nullptr) << "Error in GetRprev()";
+    EXPECT_EQ(quadEdge1c->GetRprev(), nullptr) << "Error in GetRprev()";
 #endif
 
     //
@@ -681,11 +526,8 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     quadEdge3->SetOnext(nullptr);
-    if (quadEdge1->GetRprev() || quadEdge1c->GetRprev())
-    {
-      std::cerr << "Error in GetRprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRprev(), nullptr) << "Error in GetRprev()";
+    EXPECT_EQ(quadEdge1c->GetRprev(), nullptr) << "Error in GetRprev()";
 #endif
 
     quadEdgeA->SetRot(quadEdgeB);
@@ -695,17 +537,9 @@ itkQuadEdgeTest1(int, char *[])
 
     quadEdge3->SetOnext(quadEdgeA);
 
-    if (quadEdge1->GetRprev() != quadEdgeA)
-    {
-      std::cerr << "Error in GetRprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetRprev(), quadEdgeA) << "Error in GetRprev()";
 
-    if (quadEdge1c->GetRprev() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetRprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetRprev(), quadEdgeA) << "Error in const GetRprev()";
 
     std::cout << "GetRprev() Test passed ! " << std::endl;
   }
@@ -738,11 +572,8 @@ itkQuadEdgeTest1(int, char *[])
     const QuadEdgeType * quadEdge1c = quadEdge1;
 
 #ifndef NDEBUG
-    if (quadEdge1->GetDprev() || quadEdge1c->GetDprev())
-    {
-      std::cerr << "Error in GetDprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDprev(), nullptr) << "Error in GetDprev()";
+    EXPECT_EQ(quadEdge1c->GetDprev(), nullptr) << "Error in GetDprev()";
 #endif
 
     //                       |
@@ -763,20 +594,14 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     quadEdge4->SetOnext(nullptr);
-    if (quadEdge1->GetDprev() || quadEdge1c->GetDprev())
-    {
-      std::cerr << "Error in GetDprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDprev(), nullptr) << "Error in GetDprev()";
+    EXPECT_EQ(quadEdge1c->GetDprev(), nullptr) << "Error in GetDprev()";
 #endif
 
     quadEdge4->SetOnext(quadEdgeB);
 #ifndef NDEBUG
-    if (quadEdge1->GetDprev() || quadEdge1c->GetDprev())
-    {
-      std::cerr << "Error in GetDprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDprev(), nullptr) << "Error in GetDprev()";
+    EXPECT_EQ(quadEdge1c->GetDprev(), nullptr) << "Error in GetDprev()";
 #endif
 
     quadEdgeA->SetRot(quadEdgeB);
@@ -784,17 +609,9 @@ itkQuadEdgeTest1(int, char *[])
     quadEdgeC->SetRot(quadEdgeD);
     quadEdgeD->SetRot(quadEdgeA);
 
-    if (quadEdge1->GetDprev() != quadEdgeA)
-    {
-      std::cerr << "Error in GetDprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetDprev(), quadEdgeA) << "Error in GetDprev()";
 
-    if (quadEdge1c->GetDprev() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetDprev()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetDprev(), quadEdgeA) << "Error in const GetDprev()";
 
     std::cout << "GetDprev() Test passed ! " << std::endl;
   }
@@ -815,29 +632,20 @@ itkQuadEdgeTest1(int, char *[])
 
 #ifndef NDEBUG
     // Testing incomplete connections.
-    if (quadEdge1->GetInvRot() || quadEdge1c->GetInvRot())
-    {
-      std::cerr << "Error in GetInvRot()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvRot(), nullptr) << "Error in GetInvRot()";
+    EXPECT_EQ(quadEdge1c->GetInvRot(), nullptr) << "Error in GetInvRot()";
 #endif
 
     quadEdge1->SetRot(quadEdge2);
 #ifndef NDEBUG
-    if (quadEdge1->GetInvRot() || quadEdge1c->GetInvRot())
-    {
-      std::cerr << "Error in GetInvRot()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvRot(), nullptr) << "Error in GetInvRot()";
+    EXPECT_EQ(quadEdge1c->GetInvRot(), nullptr) << "Error in GetInvRot()";
 #endif
 
     quadEdge2->SetRot(quadEdge3);
 #ifndef NDEBUG
-    if (quadEdge1->GetInvRot() || quadEdge1c->GetInvRot())
-    {
-      std::cerr << "Error in GetInvRot()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvRot(), nullptr) << "Error in GetInvRot()";
+    EXPECT_EQ(quadEdge1c->GetInvRot(), nullptr) << "Error in GetInvRot()";
 #endif
 
     quadEdge3->SetRot(quadEdge4);
@@ -848,17 +656,9 @@ itkQuadEdgeTest1(int, char *[])
     quadEdge3->SetRot(quadEdge4);
     quadEdge4->SetRot(quadEdge1);
 
-    if (quadEdge1->GetInvRot() != quadEdge4)
-    {
-      std::cerr << "Error in GetInvRot()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvRot(), quadEdge4) << "Error in GetInvRot()";
 
-    if (quadEdge1c->GetInvRot() != quadEdge4)
-    {
-      std::cerr << "Error in const GetInvRot()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetInvRot(), quadEdge4) << "Error in const GetInvRot()";
 
     std::cout << "GetInvRot() Test passed ! " << std::endl;
   }
@@ -917,17 +717,9 @@ itkQuadEdgeTest1(int, char *[])
     quadEdge2->SetOnext(quadEdgeD); // rely on this one
     quadEdgeA->SetOnext(quadEdge1);
 
-    if (quadEdge1->GetInvOnext() != quadEdgeA)
-    {
-      std::cerr << "Error in GetInvOnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvOnext(), quadEdgeA) << "Error in GetInvOnext()";
 
-    if (quadEdge1c->GetInvOnext() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetInvOnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetInvOnext(), quadEdgeA) << "Error in const GetInvOnext()";
 
     std::cout << "GetInvOnext() Test passed ! " << std::endl;
   }
@@ -984,17 +776,9 @@ itkQuadEdgeTest1(int, char *[])
 
     quadEdge1->SetOnext(quadEdgeC);
 
-    if (quadEdge1->GetInvLnext() != quadEdgeA)
-    {
-      std::cerr << "Error in GetInvLnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvLnext(), quadEdgeA) << "Error in GetInvLnext()";
 
-    if (quadEdge1c->GetInvLnext() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetInvLnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetInvLnext(), quadEdgeA) << "Error in const GetInvLnext()";
 
     std::cout << "GetInvLnext() Test passed ! " << std::endl;
   }
@@ -1051,17 +835,9 @@ itkQuadEdgeTest1(int, char *[])
 
     quadEdge3->SetOnext(quadEdgeA);
 
-    if (quadEdge1->GetInvRnext() != quadEdgeA)
-    {
-      std::cerr << "Error in GetInvRnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvRnext(), quadEdgeA) << "Error in GetInvRnext()";
 
-    if (quadEdge1c->GetInvRnext() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetInvRnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetInvRnext(), quadEdgeA) << "Error in const GetInvRnext()";
 
     std::cout << "GetInvRnext() Test passed ! " << std::endl;
   }
@@ -1119,17 +895,9 @@ itkQuadEdgeTest1(int, char *[])
 
     quadEdge4->SetOnext(quadEdgeB);
 
-    if (quadEdge1->GetInvDnext() != quadEdgeA)
-    {
-      std::cerr << "Error in GetInvDnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1->GetInvDnext(), quadEdgeA) << "Error in GetInvDnext()";
 
-    if (quadEdge1c->GetInvDnext() != quadEdgeA)
-    {
-      std::cerr << "Error in const GetInvDnext()" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdge1c->GetInvDnext(), quadEdgeA) << "Error in const GetInvDnext()";
 
     std::cout << "GetInvDnext() Test passed ! " << std::endl;
   }
@@ -1147,35 +915,19 @@ itkQuadEdgeTest1(int, char *[])
 
     const QuadEdgeType * quadEdge1c = quadEdge1;
 
-    if (quadEdge1c->IsHalfEdge() != true)
-    {
-      std::cerr << "Error in IsHalfEdge() A" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(quadEdge1c->IsHalfEdge()) << "Error in IsHalfEdge() A";
 
     quadEdge1->SetRot(quadEdge2);
 
-    if (quadEdge1c->IsHalfEdge() != true)
-    {
-      std::cerr << "Error in IsHalfEdge() B" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(quadEdge1c->IsHalfEdge()) << "Error in IsHalfEdge() B";
 
     quadEdge1->SetOnext(quadEdgeA);
 
-    if (quadEdge1c->IsHalfEdge() != false)
-    {
-      std::cerr << "Error in IsHalfEdge() C" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(quadEdge1c->IsHalfEdge()) << "Error in IsHalfEdge() C";
 
     quadEdge1->SetRot(nullptr);
 
-    if (quadEdge1c->IsHalfEdge() != true)
-    {
-      std::cerr << "Error in IsHalfEdge() D" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(quadEdge1c->IsHalfEdge()) << "Error in IsHalfEdge() D";
 
     std::cout << "IsHalfEdge() Test passed ! " << std::endl;
   }
@@ -1186,31 +938,18 @@ itkQuadEdgeTest1(int, char *[])
     const QuadEdgeTypePointer quadEdge1p(quadEdge1, true);
     const QuadEdgeType *      quadEdge1c = quadEdge1;
 
-    if (quadEdge1c->IsIsolated() != true)
-    {
-      std::cerr << "Error in IsIsolated() A" << std::endl;
-      delete quadEdge1;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(quadEdge1c->IsIsolated()) << "Error in IsIsolated() A";
 
     auto *                    quadEdge2 = new QuadEdgeType;
     const QuadEdgeTypePointer quadEdge2p(quadEdge2, true);
 
     quadEdge1->SetOnext(quadEdge2);
 
-    if (quadEdge1c->IsIsolated() != false)
-    {
-      std::cerr << "Error in IsIsolated() B" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(quadEdge1c->IsIsolated()) << "Error in IsIsolated() B";
 
     quadEdge1->SetOnext(quadEdge1);
 
-    if (quadEdge1c->IsIsolated() != true)
-    {
-      std::cerr << "Error in IsIsolated() C" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(quadEdge1c->IsIsolated()) << "Error in IsIsolated() C";
 
     std::cout << "IsIsolated() Test passed ! " << std::endl;
   }
@@ -1236,11 +975,7 @@ itkQuadEdgeTest1(int, char *[])
     quadEdge1->SetOnext(nullptr);
     quadEdge1c->IsEdgeInOnextRing(nullptr);
 
-    if (quadEdge1c->IsEdgeInOnextRing(quadEdge6))
-    {
-      std::cerr << "Error in IsEdgeInOnextRing() A" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(quadEdge1c->IsEdgeInOnextRing(quadEdge6)) << "Error in IsEdgeInOnextRing() A";
 
     // Create a ring
     quadEdge1->SetOnext(quadEdge2);
@@ -1249,21 +984,13 @@ itkQuadEdgeTest1(int, char *[])
     quadEdge4->SetOnext(quadEdge5);
     quadEdge5->SetOnext(quadEdge1);
 
-    if (quadEdge1c->IsEdgeInOnextRing(quadEdge6))
-    {
-      std::cerr << "Error in IsEdgeInOnextRing() B" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(quadEdge1c->IsEdgeInOnextRing(quadEdge6)) << "Error in IsEdgeInOnextRing() B";
 
     // Close the ring by adding
     quadEdge5->SetOnext(quadEdge6);
     quadEdge6->SetOnext(quadEdge1);
 
-    if (quadEdge1c->IsEdgeInOnextRing(quadEdge6) == false)
-    {
-      std::cerr << "Error in IsEdgeInOnextRing() C" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(quadEdge1c->IsEdgeInOnextRing(quadEdge6)) << "Error in IsEdgeInOnextRing() C";
 
     std::cout << "IsEdgeInOnextRing() Test passed ! " << std::endl;
   } // end of local scope for tests
@@ -1327,11 +1054,7 @@ itkQuadEdgeTest1(int, char *[])
 #ifndef NDEBUG
     [[maybe_unused]] auto val = quadEdgeA1c->IsLnextGivenSizeCyclic(3); // testing null case
 
-    if (quadEdgeA1c->IsLnextGivenSizeCyclic(3))
-    {
-      std::cerr << "Error in IsLnextGivenSizeCyclic() A" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(quadEdgeA1c->IsLnextGivenSizeCyclic(3)) << "Error in IsLnextGivenSizeCyclic() A";
 #endif
 
 
@@ -1379,62 +1102,28 @@ itkQuadEdgeTest1(int, char *[])
 
     const unsigned int     quadEdgeA1Order = quadEdgeA1c->GetOrder();
     constexpr unsigned int quadEdgeA1ExpectedOrder{ 2 };
-    if (quadEdgeA1Order != quadEdgeA1ExpectedOrder)
-    {
-      std::cerr << "Error in GetOrder() A" << std::endl;
-      std::cerr << "Expected " << quadEdgeA1ExpectedOrder;
-      std::cerr << ", but got " << quadEdgeA1Order << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdgeA1Order, quadEdgeA1ExpectedOrder) << "Error in GetOrder() A";
 
     const unsigned int     quadEdgeB1Order = quadEdgeB1c->GetOrder();
     constexpr unsigned int quadEdgeB1ExpectedOrder{ 2 };
-    if (quadEdgeB1Order != quadEdgeB1ExpectedOrder)
-    {
-      std::cerr << "Error in GetOrder() B" << std::endl;
-      std::cerr << "Expected " << quadEdgeB1ExpectedOrder;
-      std::cerr << ", but got " << quadEdgeB1Order << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdgeB1Order, quadEdgeB1ExpectedOrder) << "Error in GetOrder() B";
 
     const unsigned int     quadEdgeC1Order = quadEdgeC1c->GetOrder();
     constexpr unsigned int quadEdgeC1ExpectedOrder{ 2 };
-    if (quadEdgeC1Order != quadEdgeC1ExpectedOrder)
-    {
-      std::cerr << "Error in GetOrder() C" << std::endl;
-      std::cerr << "Expected " << quadEdgeC1ExpectedOrder;
-      std::cerr << ", but got " << quadEdgeC1Order << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdgeC1Order, quadEdgeC1ExpectedOrder) << "Error in GetOrder() C";
 
     const unsigned int     quadEdgeA4Order = quadEdgeA4c->GetOrder();
     constexpr unsigned int quadEdgeA4ExpectedOrder{ 3 };
-    if (quadEdgeA4Order != quadEdgeA4ExpectedOrder)
-    {
-      std::cerr << "Error in GetOrder() D" << std::endl;
-      std::cerr << "Expected " << quadEdgeA4ExpectedOrder;
-      std::cerr << ", but got " << quadEdgeA4Order << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(quadEdgeA4Order, quadEdgeA4ExpectedOrder) << "Error in GetOrder() D";
 
     // Check with the right period
-    if (quadEdgeA1c->IsLnextGivenSizeCyclic(3) == false)
-    {
-      std::cerr << "Error in IsLnextGivenSizeCyclic() B" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(quadEdgeA1c->IsLnextGivenSizeCyclic(3)) << "Error in IsLnextGivenSizeCyclic() B";
 
     // Check a wrong period on purpose
-    if (quadEdgeA1c->IsLnextGivenSizeCyclic(4))
-    {
-      std::cerr << "Error in IsLnextGivenSizeCyclic() C" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_FALSE(quadEdgeA1c->IsLnextGivenSizeCyclic(4)) << "Error in IsLnextGivenSizeCyclic() C";
 
     std::cout << "IsLnextGivenSizeCyclic() Test passed ! " << std::endl;
   } // end of local scope for tests
 
   std::cout << "QuadEdge Test Passed !" << std::endl;
-
-  return EXIT_SUCCESS;
 }
