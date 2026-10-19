@@ -1,7 +1,6 @@
 itk_module_test()
 set(
   ITKLevelSetsTests
-  itkAnisotropicFourthOrderLevelSetImageFilterTest.cxx
   itkBinaryMaskToNarrowBandPointSetFilterTest.cxx
   itkCannySegmentationLevelSetImageFilterTest.cxx
   itkCollidingFrontsImageFilterTest.cxx
@@ -35,6 +34,7 @@ createtestdriver(ITKLevelSets "${ITKLevelSets-Test_LIBRARIES}" "${ITKLevelSetsTe
 
 set(
   ITKLevelSetsGTests
+  itkAnisotropicFourthOrderLevelSetImageFilterGTest.cxx
   itkLevelSetNeighborhoodExtractorGTest.cxx
   itkParallelSparseFieldLevelSetImageFilterRobustnessGTest.cxx
 )
@@ -63,12 +63,6 @@ itk_add_test(
     50
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/VectorThresholdSegmentationLevelSetImageFilterTest.png
-)
-itk_add_test(
-  NAME itkAnisotropicFourthOrderLevelSetImageFilterTest
-  COMMAND
-    ITKLevelSetsTestDriver
-    itkAnisotropicFourthOrderLevelSetImageFilterTest
 )
 itk_add_test(
   NAME itkReinitializeLevelSetImageFilterTest
