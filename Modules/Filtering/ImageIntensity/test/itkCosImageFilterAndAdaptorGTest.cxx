@@ -21,13 +21,11 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
 #include "itkSubtractImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkCosImageFilterAndAdaptorTest(int, char *[])
+TEST(CosImageFilterAndAdaptor, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -72,7 +70,7 @@ itkCosImageFilterAndAdaptorTest(int, char *[])
   // Create the Filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, CosImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, CosImageFilter, UnaryGeneratorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -96,15 +94,7 @@ itkCosImageFilterAndAdaptorTest(int, char *[])
     const InputImageType::PixelType  input = it.Get();
     const OutputImageType::PixelType output = ot.Get();
     const OutputImageType::PixelType cosinus = std::cos(input);
-    if (!itk::Math::FloatAlmostEqual(cosinus, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " cos( " << input << ") = " << cosinus << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(cosinus, output, epsilon) << " cos( " << input << ")";
     ++ot;
     ++it;
   }
@@ -118,7 +108,7 @@ itkCosImageFilterAndAdaptorTest(int, char *[])
 
   auto cosAdaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(cosAdaptor, CosImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(cosAdaptor, CosImageAdaptor, ImageAdaptor);
 
   cosAdaptor->SetImage(inputImage);
 
@@ -144,17 +134,7 @@ itkCosImageFilterAndAdaptorTest(int, char *[])
   while (!dt.IsAtEnd())
   {
     const OutputImageType::PixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Error comparing results with Adaptors";
     ++dt;
   }
-
-  return EXIT_SUCCESS;
 }
