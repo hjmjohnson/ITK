@@ -22,7 +22,6 @@ set(
   itkOrientImageFilterTest.cxx
   itkPasteImageFilterTest.cxx
   itkPushPopTileImageFilterTest.cxx
-  itkResampleImageTest.cxx
   itkResampleImageTest2.cxx
   itkResampleImageTest2Streaming.cxx
   itkResampleImageTest3.cxx
@@ -415,12 +414,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/SwirledMirroredUChar_0.75-11-7.nrrd
 )
 itk_add_test(
-  NAME itkResampleImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkResampleImageTest
-)
-itk_add_test(
   NAME itkResampleImageTest2UseRefImageOff
   COMMAND
     ITKImageGridTestDriver
@@ -657,6 +650,7 @@ set(
   itkPadImageFilterGTest.cxx
   itkPermuteAxesImageFilterGTest.cxx
   itkRegionOfInterestImageFilterGTest.cxx
+  itkResampleImageGTest.cxx
   itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx

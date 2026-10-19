@@ -22,10 +22,9 @@
 #include "itkResampleImageFilter.h"
 #include "itkImageFileWriter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkResampleImageTest(int, char *[])
+TEST(ResampleImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int VDimension{ 2 };
@@ -71,23 +70,23 @@ itkResampleImageTest(int, char *[])
   const itk::ResampleImageFilter<ImageType, ImageType>::Pointer resample =
     itk::ResampleImageFilter<ImageType, ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
 
   resample->SetInput(image);
-  ITK_TEST_SET_GET_VALUE(image, resample->GetInput());
+  EXPECT_EQ(image, resample->GetInput());
 
   resample->SetSize(size);
-  ITK_TEST_SET_GET_VALUE(size, resample->GetSize());
+  EXPECT_EQ(size, resample->GetSize());
 
   resample->SetTransform(aff);
-  ITK_TEST_SET_GET_VALUE(aff, resample->GetTransform());
+  EXPECT_EQ(aff, resample->GetTransform());
 
   resample->SetInterpolator(interp);
-  ITK_TEST_SET_GET_VALUE(interp, resample->GetInterpolator());
+  EXPECT_EQ(interp, resample->GetInterpolator());
 
   index.Fill(0);
   resample->SetOutputStartIndex(index);
-  ITK_TEST_SET_GET_VALUE(index, resample->GetOutputStartIndex());
+  EXPECT_EQ(index, resample->GetOutputStartIndex());
 
   // Run the resampling filter
   resample->Update();
@@ -114,18 +113,14 @@ itkResampleImageTest(int, char *[])
   // Test non-default values
   constexpr auto origin = itk::MakeFilled<ImageType::PointType>(1234.0);
   resample->SetOutputOrigin(origin);
-  ITK_TEST_SET_GET_VALUE(origin, resample->GetOutputOrigin());
+  EXPECT_EQ(origin, resample->GetOutputOrigin());
 
   auto spacing = itk::MakeFilled<ImageType::SpacingType>(9876.0);
   resample->SetOutputSpacing(spacing);
-  ITK_TEST_SET_GET_VALUE(spacing, resample->GetOutputSpacing());
+  EXPECT_EQ(spacing, resample->GetOutputSpacing());
 
   // Report success or failure
-  if (!passed)
-  {
-    std::cout << "Resampling test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(passed) << "Resampling test failed";
 
   // Exercise error handling
 
@@ -144,12 +139,5 @@ itkResampleImageTest(int, char *[])
     resample->SetInterpolator(interp);
   }
 
-  if (!passed)
-  {
-    std::cout << "Resampling test failed" << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(passed) << "Resampling test failed";
 }
