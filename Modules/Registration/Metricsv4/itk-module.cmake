@@ -12,5 +12,6 @@ itk_module(
   TEST_DEPENDS
     ITKTestKernel
     ITKOptimizersv4
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )
