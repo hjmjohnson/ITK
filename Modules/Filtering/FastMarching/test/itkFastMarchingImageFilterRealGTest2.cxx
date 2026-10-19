@@ -22,7 +22,7 @@
 #include "itkFastMarchingThresholdStoppingCriterion.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkTextOutput.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkCommand.h"
 
 
@@ -43,8 +43,7 @@ public:
 };
 } // namespace
 
-int
-itkFastMarchingImageFilterRealTest2(int itkNotUsed(argc), char * itkNotUsed(argv)[])
+TEST(FastMarchingImageFilterReal, ConvertedLegacyTest2)
 {
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
 
@@ -63,7 +62,7 @@ itkFastMarchingImageFilterRealTest2(int itkNotUsed(argc), char * itkNotUsed(argv
 
   auto marcher = FastMarchingType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(marcher, FastMarchingImageFilterBase, FastMarchingBase);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(marcher, FastMarchingImageFilterBase, FastMarchingBase);
 
 
   marcher->SetStoppingCriterion(criterion);
@@ -150,34 +149,34 @@ itkFastMarchingImageFilterRealTest2(int itkNotUsed(argc), char * itkNotUsed(argv
 
   auto adaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(adaptor, FastMarchingImageToNodePairContainerAdaptor, Object);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(adaptor, FastMarchingImageToNodePairContainerAdaptor, Object);
 
 
   constexpr bool isForbiddenImageBinaryMask{ true };
-  ITK_TEST_SET_GET_BOOLEAN(adaptor, IsForbiddenImageBinaryMask, isForbiddenImageBinaryMask);
+  ITK_GTEST_SET_GET_BOOLEAN(adaptor, IsForbiddenImageBinaryMask, isForbiddenImageBinaryMask);
 
   adaptor->SetAliveImage(aliveImage.GetPointer());
-  ITK_TEST_SET_GET_VALUE(aliveImage.GetPointer(), adaptor->GetAliveImage());
+  EXPECT_EQ(aliveImage.GetPointer(), adaptor->GetAliveImage());
 
   constexpr AdaptorType::OutputPixelType aliveValue = 0.0;
   adaptor->SetAliveValue(aliveValue);
-  ITK_TEST_SET_GET_VALUE(aliveValue, adaptor->GetAliveValue());
+  EXPECT_EQ(aliveValue, adaptor->GetAliveValue());
 
   adaptor->SetTrialImage(trialImage.GetPointer());
-  ITK_TEST_SET_GET_VALUE(trialImage.GetPointer(), adaptor->GetTrialImage());
+  EXPECT_EQ(trialImage.GetPointer(), adaptor->GetTrialImage());
 
   constexpr AdaptorType::OutputPixelType trialValue = 1.0;
   adaptor->SetTrialValue(trialValue);
-  ITK_TEST_SET_GET_VALUE(trialValue, adaptor->GetTrialValue());
+  EXPECT_EQ(trialValue, adaptor->GetTrialValue());
 
   adaptor->SetForbiddenImage(maskImage.GetPointer());
-  ITK_TEST_SET_GET_VALUE(maskImage.GetPointer(), adaptor->GetForbiddenImage());
+  EXPECT_EQ(maskImage.GetPointer(), adaptor->GetForbiddenImage());
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(adaptor->Update());
+  ASSERT_NO_THROW(adaptor->Update());
 
 
   marcher->SetForbiddenPoints(adaptor->GetForbiddenPoints());
-  ITK_TEST_SET_GET_VALUE(adaptor->GetForbiddenPoints(), marcher->GetForbiddenPoints());
+  EXPECT_EQ(adaptor->GetForbiddenPoints(), marcher->GetForbiddenPoints());
 
   marcher->SetAlivePoints(adaptor->GetAlivePoints());
   marcher->SetTrialPoints(adaptor->GetTrialPoints());
@@ -186,7 +185,7 @@ itkFastMarchingImageFilterRealTest2(int itkNotUsed(argc), char * itkNotUsed(argv
   marcher->DebugOn();
 
   // Update the Fast Marching filter
-  ITK_TRY_EXPECT_NO_EXCEPTION(marcher->Update());
+  ASSERT_NO_THROW(marcher->Update());
 
 
   // Check the results
@@ -238,13 +237,5 @@ itkFastMarchingImageFilterRealTest2(int itkNotUsed(argc), char * itkNotUsed(argv
     ++iterator;
   }
 
-
-  if (passed)
-  {
-    std::cout << "Test passed!" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed!" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(passed);
 }
