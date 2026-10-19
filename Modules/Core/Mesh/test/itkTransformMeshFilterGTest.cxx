@@ -20,10 +20,9 @@
 #include "itkMesh.h"
 #include "itkAffineTransform.h"
 #include "itkStdStreamStateSave.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkTransformMeshFilterTest(int, char *[])
+TEST(TransformMeshFilter, ConvertedLegacyTest)
 {
   // Save the format stream variables for std::cout
   // They will be restored when coutState goes out of scope
@@ -101,7 +100,7 @@ itkTransformMeshFilterTest(int, char *[])
   // Create a Filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, TransformMeshFilter, MeshToMeshFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, TransformMeshFilter, MeshToMeshFilter);
 
 
   auto filterwithbasetrfs = FilterWithBaseTransformType::New();
@@ -116,7 +115,7 @@ itkTransformMeshFilterTest(int, char *[])
   // Connect the inputs
   filter->SetInput(inputMesh);
   filter->SetTransform(affineTransform);
-  ITK_TEST_SET_GET_VALUE(affineTransform, filter->GetTransform());
+  EXPECT_EQ(affineTransform, filter->GetTransform());
 
   filterwithbasetrfs->SetInput(inputMesh);
   filterwithbasetrfs->SetTransform(affineTransform);
@@ -167,6 +166,4 @@ itkTransformMeshFilterTest(int, char *[])
   }
 
   // All objects should be automatically destroyed at this point
-
-  return EXIT_SUCCESS;
 }
