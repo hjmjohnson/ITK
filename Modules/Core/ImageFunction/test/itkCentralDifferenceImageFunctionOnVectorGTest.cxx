@@ -19,8 +19,10 @@
 #include "itkMath.h"
 #include "itkCentralDifferenceImageFunction.h"
 #include "itkImageRegionIterator.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename T>
 bool
 IsEqual(T & m1, T & m2)
@@ -352,48 +354,20 @@ itkCentralDifferenceImageFunctionOnVectorTestRun()
   using BadFunctionType = itk::CentralDifferenceImageFunction<ImageType, CoordinateType, BadDerivativeType>;
 
   auto badFunction = BadFunctionType::New();
-  ITK_TRY_EXPECT_EXCEPTION(badFunction->SetInputImage(image));
+  EXPECT_THROW(badFunction->SetInputImage(image), itk::ExceptionObject);
 
   return result;
 }
 
 /////////////////////////////////////////////////////////////////
+} // namespace
 
-int
-itkCentralDifferenceImageFunctionOnVectorTest(int, char *[])
+TEST(CentralDifferenceImageFunctionOnVector, ConvertedLegacyTest)
 {
-
-  if (itkCentralDifferenceImageFunctionOnVectorTestRun<1>() == EXIT_FAILURE)
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itkCentralDifferenceImageFunctionOnVectorTestRun<2>() == EXIT_FAILURE)
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itkCentralDifferenceImageFunctionOnVectorTestRun<3>() == EXIT_FAILURE)
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itkCentralDifferenceImageFunctionOnVectorTestRun<4>() == EXIT_FAILURE)
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itkCentralDifferenceImageFunctionOnVectorTestRun<5>() == EXIT_FAILURE)
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itkCentralDifferenceImageFunctionOnVectorTestRun<6>() == EXIT_FAILURE)
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  std::cout << std::endl << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(itkCentralDifferenceImageFunctionOnVectorTestRun<1>(), EXIT_SUCCESS);
+  EXPECT_EQ(itkCentralDifferenceImageFunctionOnVectorTestRun<2>(), EXIT_SUCCESS);
+  EXPECT_EQ(itkCentralDifferenceImageFunctionOnVectorTestRun<3>(), EXIT_SUCCESS);
+  EXPECT_EQ(itkCentralDifferenceImageFunctionOnVectorTestRun<4>(), EXIT_SUCCESS);
+  EXPECT_EQ(itkCentralDifferenceImageFunctionOnVectorTestRun<5>(), EXIT_SUCCESS);
+  EXPECT_EQ(itkCentralDifferenceImageFunctionOnVectorTestRun<6>(), EXIT_SUCCESS);
 }
