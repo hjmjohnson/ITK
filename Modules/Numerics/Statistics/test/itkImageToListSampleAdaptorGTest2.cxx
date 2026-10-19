@@ -21,9 +21,9 @@
 #include "itkImageToListSampleAdaptor.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
-int
-itkImageToListSampleAdaptorTest2(int, char *[])
+TEST(ImageToListSampleAdaptor, ConvertedLegacyTest2)
 {
   constexpr unsigned int MeasurementVectorSize{ 8 };
   using MeasurementComponentType = unsigned long;
@@ -77,11 +77,8 @@ itkImageToListSampleAdaptorTest2(int, char *[])
         ImageToListSampleAdaptorType::InstanceIdentifier id = image->ComputeOffset(index);
         for (unsigned int m = 0; m < adaptor->GetMeasurementVectorSize(); ++m)
         {
-          if (adaptor->GetMeasurementVector(id)[m] != pixel[m])
-          {
-            std::cerr << "Error in pixel value accessed using the adaptor" << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(adaptor->GetMeasurementVector(id)[m], pixel[m])
+            << "Error in pixel value accessed using the adaptor";
         }
       }
     }
@@ -172,11 +169,8 @@ itkImageToListSampleAdaptorTest2(int, char *[])
         vId = vImage->ComputeOffset(vIndex);
         for (unsigned int m = 0; m < vAdaptor->GetMeasurementVectorSize(); ++m)
         {
-          if (itk::Math::NotExactlyEquals(vAdaptor->GetMeasurementVector(vId)[m], vPixel[m]))
-          {
-            std::cerr << "Error in vPixel value accessed using the vAdaptor" << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(vAdaptor->GetMeasurementVector(vId)[m], vPixel[m])
+            << "Error in vPixel value accessed using the vAdaptor";
         }
       }
     }
@@ -246,16 +240,10 @@ itkImageToListSampleAdaptorTest2(int, char *[])
         rgbId = rgbImage->ComputeOffset(rgbIndex);
         for (unsigned int m = 0; m < rgbAdaptor->GetMeasurementVectorSize(); ++m)
         {
-          if (rgbAdaptor->GetMeasurementVector(rgbId)[m] != rgbPixel[m])
-          {
-            std::cerr << "Error in rgbPixel value accessed using the rgbAdaptor" << std::endl;
-            return EXIT_FAILURE;
-          }
+          EXPECT_EQ(rgbAdaptor->GetMeasurementVector(rgbId)[m], rgbPixel[m])
+            << "Error in rgbPixel value accessed using the rgbAdaptor";
         }
       }
     }
   }
-
-  std::cerr << "[PASSED]" << std::endl;
-  return EXIT_SUCCESS;
 }
