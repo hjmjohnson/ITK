@@ -22,9 +22,11 @@
 #include "itkHexahedronCell.h"
 #include "itkQuadraticTriangleCell.h"
 #include "itkFileOutputWindow.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <iostream>
 
+namespace
+{
 namespace itkMeshTestTypes
 {
 // this namespace helps to isolate the types defined blow
@@ -128,10 +130,10 @@ using QuadraticTriangleCellVisitor =
   itk::CellInterfaceVisitorImplementation<int, MeshType::CellTraits, QuadraticTriangleCellType, VisitCells>;
 
 } // namespace itkMeshTestTypes
+} // namespace
 
 
-int
-itkMeshTest(int, char *[])
+TEST(Mesh, ConvertedLegacyTest)
 {
 
   using namespace itkMeshTestTypes; // open the namespace here.
@@ -162,7 +164,7 @@ itkMeshTest(int, char *[])
      */
     auto mesh0 = MeshType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(mesh0, Mesh, PointSet);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(mesh0, Mesh, PointSet);
 
     mesh0->DebugOn();
 
@@ -220,8 +222,8 @@ itkMeshTest(int, char *[])
       }
     }
 
-    ITK_TRY_EXPECT_NO_EXCEPTION(mesh0->SetCellsArray(cellVectorContainer));
-    ITK_TRY_EXPECT_NO_EXCEPTION(mesh0->GetCellsArray());
+    EXPECT_NO_THROW(mesh0->SetCellsArray(cellVectorContainer));
+    EXPECT_NO_THROW(mesh0->GetCellsArray());
 
     // Check if right cells are recovered
     index = 0;
@@ -235,7 +237,7 @@ itkMeshTest(int, char *[])
         std::cout << "Cell recovered " << std::endl;
         std::cout << "GetNameOfClass()    = " << temp_cell->GetNameOfClass() << std::endl;
         std::cout << "GetNumberOfPoints() = " << temp_cell->GetNumberOfPoints() << std::endl;
-        ITK_TEST_EXPECT_TRUE(temp_cell->GetNumberOfPoints() == numOfPoints);
+        EXPECT_EQ(temp_cell->GetNumberOfPoints(), numOfPoints);
       }
     }
 
@@ -254,14 +256,13 @@ itkMeshTest(int, char *[])
     }
 
     // Test with wrong cell type
-    ITK_TRY_EXPECT_EXCEPTION(
-      mesh0->SetCellsArray(cellVectorContainer, static_cast<int>(itk::CellGeometryEnum::LAST_ITK_CELL)));
+    EXPECT_THROW(mesh0->SetCellsArray(cellVectorContainer, static_cast<int>(itk::CellGeometryEnum::LAST_ITK_CELL)),
+                 itk::ExceptionObject);
     // Test with right cell type
-    ITK_TRY_EXPECT_NO_EXCEPTION(
-      mesh0->SetCellsArray(cellVectorContainer, static_cast<int>(itk::CellGeometryEnum::TRIANGLE_CELL)));
+    EXPECT_NO_THROW(mesh0->SetCellsArray(cellVectorContainer, static_cast<int>(itk::CellGeometryEnum::TRIANGLE_CELL)));
 
-    ITK_TRY_EXPECT_NO_EXCEPTION(mesh0->GetCellsArray());
-    ITK_TEST_EXPECT_TRUE(mesh0->GetNumberOfCells() == numOfCells);
+    EXPECT_NO_THROW(mesh0->GetCellsArray());
+    EXPECT_EQ(mesh0->GetNumberOfCells(), numOfCells);
   }
 
   {
@@ -324,8 +325,7 @@ itkMeshTest(int, char *[])
     }
     else
     {
-      std::cout << "Failure: hexahedron cell was not recovered" << std::endl;
-      return EXIT_FAILURE;
+      ADD_FAILURE() << "Failure: hexahedron cell was not recovered";
     }
 
     CellAutoPointer cellPointer0;
@@ -508,8 +508,7 @@ itkMeshTest(int, char *[])
       }
       else
       {
-        std::cout << "Failure: QuadraticEdge cell was not recovered" << std::endl;
-        return EXIT_FAILURE;
+        ADD_FAILURE() << "Failure: QuadraticEdge cell was not recovered";
       }
 
       CellAutoPointer vertexPointer;
@@ -583,8 +582,7 @@ itkMeshTest(int, char *[])
       }
       else
       {
-        std::cout << "Failure: QuadraticTriangle cell was not recovered" << std::endl;
-        return EXIT_FAILURE;
+        ADD_FAILURE() << "Failure: QuadraticTriangle cell was not recovered";
       }
 
       CellAutoPointer vertexPointer;
@@ -724,20 +722,10 @@ itkMeshTest(int, char *[])
     auto newMesh = MeshType::New();
     newMesh->Graft(mesh);
 
-    if (newMesh->GetNumberOfPoints() != mesh->GetNumberOfPoints())
-    {
-      std::cerr << "Graft failed !, different number of points" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(newMesh->GetNumberOfPoints(), mesh->GetNumberOfPoints()) << "Graft failed !, different number of points";
 
-    if (newMesh->GetNumberOfCells() != mesh->GetNumberOfCells())
-    {
-      std::cerr << "Graft failed !, different number of cells" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(newMesh->GetNumberOfCells(), mesh->GetNumberOfCells()) << "Graft failed !, different number of cells";
 
     std::cout << newMesh << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
