@@ -2,7 +2,6 @@ itk_module_test()
 set(
   ITKLevelSetsTests
   itkBinaryMaskToNarrowBandPointSetFilterTest.cxx
-  itkCannySegmentationLevelSetImageFilterTest.cxx
   itkCollidingFrontsImageFilterTest.cxx
   itkCurvesLevelSetImageFilterTest.cxx
   itkCurvesLevelSetImageFilterZeroSigmaTest.cxx
@@ -35,6 +34,7 @@ createtestdriver(ITKLevelSets "${ITKLevelSets-Test_LIBRARIES}" "${ITKLevelSetsTe
 set(
   ITKLevelSetsGTests
   itkAnisotropicFourthOrderLevelSetImageFilterGTest.cxx
+  itkCannySegmentationLevelSetImageFilterGTest.cxx
   itkLevelSetNeighborhoodExtractorGTest.cxx
   itkParallelSparseFieldLevelSetImageFilterRobustnessGTest.cxx
 )
@@ -156,12 +156,6 @@ itk_add_test(
   COMMAND
     ITKLevelSetsTestDriver
     itkExtensionVelocitiesImageFilterTest
-)
-itk_add_test(
-  NAME itkCannySegmentationLevelSetImageFilterTest
-  COMMAND
-    ITKLevelSetsTestDriver
-    itkCannySegmentationLevelSetImageFilterTest
 )
 itk_add_test(
   NAME itkLevelSetNeighborhoodExtractorTest
