@@ -21,10 +21,9 @@
 #include "itkVectorMagnitudeImageFilter.h"
 #include "itkGradientVectorFlowImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkGradientVectorFlowImageFilterTest(int, char *[])
+TEST(GradientVectorFlowImageFilter, ConvertedLegacyTest)
 {
   // Define the dimension of the images
   constexpr unsigned int myDimension{ 2 };
@@ -121,25 +120,25 @@ itkGradientVectorFlowImageFilterTest(int, char *[])
   auto m_LFilter = myLaplacianFilterType::New();
   auto m_GVFFilter = myGVFFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(m_GVFFilter, GradientVectorFlowImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(m_GVFFilter, GradientVectorFlowImageFilter, ImageToImageFilter);
 
 
   m_GVFFilter->SetInput(gfilter->GetOutput());
 
   m_GVFFilter->SetLaplacianFilter(m_LFilter);
-  ITK_TEST_SET_GET_VALUE(m_LFilter, m_GVFFilter->GetLaplacianFilter());
+  EXPECT_EQ(m_LFilter, m_GVFFilter->GetLaplacianFilter());
 
   constexpr double noiseLevel{ 500 };
   m_GVFFilter->SetNoiseLevel(noiseLevel);
-  ITK_TEST_SET_GET_VALUE(noiseLevel, m_GVFFilter->GetNoiseLevel());
+  EXPECT_EQ(noiseLevel, m_GVFFilter->GetNoiseLevel());
 
   constexpr double timeStep{ 0.001 };
   m_GVFFilter->SetTimeStep(timeStep);
-  ITK_TEST_SET_GET_VALUE(timeStep, m_GVFFilter->GetTimeStep());
+  EXPECT_EQ(timeStep, m_GVFFilter->GetTimeStep());
 
   constexpr int iterationNum{ 2 };
   m_GVFFilter->SetIterationNum(iterationNum);
-  ITK_TEST_SET_GET_VALUE(iterationNum, m_GVFFilter->GetIterationNum());
+  EXPECT_EQ(iterationNum, m_GVFFilter->GetIterationNum());
 
 
   // Get the Smart Pointer to the Filter Output
@@ -172,5 +171,4 @@ itkGradientVectorFlowImageFilterTest(int, char *[])
 
   std::cout << "Completed" << std::endl;
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
