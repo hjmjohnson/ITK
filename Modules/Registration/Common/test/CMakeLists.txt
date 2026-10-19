@@ -10,7 +10,6 @@ set(
   itkMatchCardinalityImageToImageMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricTest.cxx
   itkMultiResolutionPyramidImageFilterTest.cxx
-  itkMutualInformationHistogramImageToImageMetricTest.cxx
   itkNormalizedCorrelationImageMetricTest.cxx
   itkNormalizedCorrelationPointSetToImageMetricTest.cxx
   itkNormalizedMutualInformationHistogramImageToImageMetricTest.cxx
@@ -55,12 +54,6 @@ set_tests_properties(
       ${TEMP}/itkImageRegistrationMethodTest_16.txt
 )
 
-itk_add_test(
-  NAME itkMutualInformationHistogramImageToImageMetricTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkMutualInformationHistogramImageToImageMetricTest
-)
 itk_add_test(
   NAME itkNormalizedCorrelationPointSetToImageMetricTest
   COMMAND
@@ -276,6 +269,7 @@ set(
   itkMultiResolutionImageRegistrationMethodGTest.cxx
   itkMultiResolutionImageRegistrationMethodGTest_1.cxx
   itkMultiResolutionImageRegistrationMethodGTest_2.cxx
+  itkMutualInformationHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
