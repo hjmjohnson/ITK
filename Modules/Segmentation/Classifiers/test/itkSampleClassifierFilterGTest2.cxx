@@ -21,11 +21,11 @@
 #include "itkMaximumDecisionRule.h"
 #include "itkGaussianMembershipFunction.h"
 #include "itkNormalVariateGenerator.h"
+#include "itkGTest.h"
 
 
 // Test if the SampleClassifier filter labels observations correctly
-int
-itkSampleClassifierFilterTest2(int, char *[])
+TEST(SampleClassifierFilter, ConvertedLegacyTest2)
 {
 
   constexpr unsigned int numberOfComponents{ 1 };
@@ -44,11 +44,8 @@ itkSampleClassifierFilterTest2(int, char *[])
 
   filter->SetNumberOfClasses(numberOfClasses);
 
-  if (filter->GetNumberOfClasses() != numberOfClasses)
-  {
-    std::cerr << "GetNumberOfClasses() didn't matched SetNumberOfClasses()" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(filter->GetNumberOfClasses(), numberOfClasses)
+    << "GetNumberOfClasses() didn't matched SetNumberOfClasses()";
 
   using ClassLabelVectorObjectType = FilterType::ClassLabelVectorObjectType;
   using ClassLabelVectorType = FilterType::ClassLabelVectorType;
@@ -147,15 +144,7 @@ itkSampleClassifierFilterTest2(int, char *[])
 
   filter->SetInput(sample);
 
-  try
-  {
-    filter->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NO_THROW(filter->Update());
 
   // Check if the measurement vectors are correctly labelled.
   const FilterType::MembershipSampleType *        membershipSample = filter->GetOutput();
@@ -166,26 +155,15 @@ itkSampleClassifierFilterTest2(int, char *[])
   {
     if (sampleCounter < numberOfSampleEachClass)
     {
-      if (iter.GetClassLabel() != class1)
-      {
-        std::cerr << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass1=" << class1
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.GetClassLabel(), class1)
+        << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass1=" << class1;
     }
     else
     {
-      if (iter.GetClassLabel() != class2)
-      {
-        std::cerr << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass2=" << class2
-                  << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_EQ(iter.GetClassLabel(), class2)
+        << "Classification error: " << sampleCounter << '\t' << iter.GetClassLabel() << "\tclass2=" << class2;
     }
     ++iter;
     ++sampleCounter;
   }
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
 }
