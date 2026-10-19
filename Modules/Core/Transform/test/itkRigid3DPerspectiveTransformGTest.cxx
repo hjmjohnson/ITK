@@ -16,13 +16,12 @@
  *
  *=========================================================================*/
 
+#include "itkRigid3DPerspectiveTransform.h"
+#include "itkGTest.h"
+
 #include <iostream>
 
-#include "itkRigid3DPerspectiveTransform.h"
-#include "itkTestingMacros.h"
-
-int
-itkRigid3DPerspectiveTransformTest(int, char *[])
+TEST(Rigid3DPerspectiveTransform, ConvertedLegacyTest)
 {
 
 
@@ -40,35 +39,35 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
     auto transform = TransformType::New();
 
     const typename TransformType::InputVectorType vector = itk::MakeVector(1.0, 4.0, 9.0);
-    ITK_TRY_EXPECT_EXCEPTION(transform->TransformVector(vector));
+    EXPECT_THROW(transform->TransformVector(vector), itk::ExceptionObject);
 
     TransformType::InputVnlVectorType vnlVector;
     vnlVector.fill(1.0);
-    ITK_TRY_EXPECT_EXCEPTION(transform->TransformVector(vnlVector));
+    EXPECT_THROW(transform->TransformVector(vnlVector), itk::ExceptionObject);
 
     auto covVector = itk::MakeFilled<TransformType::InputCovariantVectorType>(1.0);
-    ITK_TRY_EXPECT_EXCEPTION(transform->TransformCovariantVector(covVector));
+    EXPECT_THROW(transform->TransformCovariantVector(covVector), itk::ExceptionObject);
 
     auto                                point = itk::MakeFilled<TransformType::InputPointType>(1.0);
     TransformType::JacobianPositionType jacobianPosition;
-    ITK_TRY_EXPECT_EXCEPTION(transform->ComputeJacobianWithRespectToPosition(point, jacobianPosition));
+    EXPECT_THROW(transform->ComputeJacobianWithRespectToPosition(point, jacobianPosition), itk::ExceptionObject);
   }
 
   // Exercise basic object methods and test Set/Get macros
   {
     auto transform = TransformType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(transform, Rigid3DPerspectiveTransform, Transform);
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(transform, Rigid3DPerspectiveTransform, Transform);
 
 
     constexpr typename TransformType::OffsetType fixedOffset{};
 
     transform->SetFixedOffset(fixedOffset);
-    ITK_TEST_SET_GET_VALUE(fixedOffset, transform->GetFixedOffset());
+    EXPECT_EQ(fixedOffset, transform->GetFixedOffset());
 
     constexpr typename TransformType::InputPointType centerOfRotation{};
     transform->SetCenterOfRotation(centerOfRotation);
-    ITK_TEST_SET_GET_VALUE(centerOfRotation, transform->GetCenterOfRotation());
+    EXPECT_EQ(centerOfRotation, transform->GetCenterOfRotation());
 
     // This transform has no fixed parameters; empty method body; called for coverage purposes
     const typename TransformType::FixedParametersType fixedParameters{};
@@ -92,11 +91,7 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Identity doesn't have a null offset" << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Identity doesn't have a null offset";
   }
 
   /* Create a Rigid 3D transform with translation */
@@ -107,7 +102,7 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
     TransformType::OffsetType ioffset{};
 
     translation->SetOffset(ioffset);
-    ITK_TEST_SET_GET_VALUE(ioffset, translation->GetOffset());
+    EXPECT_EQ(ioffset, translation->GetOffset());
 
     TransformType::OffsetType offset = translation->GetOffset();
     std::cout << "pure Translation test:  ";
@@ -121,11 +116,7 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
         break;
       }
     }
-    if (!Ok)
-    {
-      std::cerr << "Get Offset  differs from SetOffset value " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(Ok) << "Get Offset  differs from SetOffset value ";
 
     {
       // Projecting  an itk::Point
@@ -144,13 +135,9 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error translating point: " << p << std::endl;
-        std::cerr << "Result should be       : " << s << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                      << "Result should be       : " << s << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok translating an itk::Point " << std::endl;
     }
@@ -179,7 +166,7 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
 
     rotation.Set(axis, angle);
     rigid->SetRotation(rotation);
-    ITK_TEST_SET_GET_VALUE(rotation, rigid->GetRotation());
+    EXPECT_EQ(rotation, rigid->GetRotation());
 
     {
       // Project an itk::Point
@@ -198,13 +185,9 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
           break;
         }
       }
-      if (!Ok)
-      {
-        std::cerr << "Error rotating point: " << p << std::endl;
-        std::cerr << "Result should be       : " << s << std::endl;
-        std::cerr << "Reported Result is     : " << r << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_TRUE(Ok) << "Error rotating point: " << p << std::endl
+                      << "Result should be       : " << s << std::endl
+                      << "Reported Result is     : " << r;
 
       std::cout << "Ok rotating an itk::Point " << std::endl;
     }
@@ -212,5 +195,4 @@ itkRigid3DPerspectiveTransformTest(int, char *[])
 
 
   std::cout << "Test successful" << std::endl;
-  return EXIT_SUCCESS;
 }
