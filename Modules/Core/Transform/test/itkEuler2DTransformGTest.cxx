@@ -16,11 +16,13 @@
  *
  *=========================================================================*/
 
+#include "itkEuler2DTransform.h"
+#include "itkGTest.h"
+
+#include <iomanip>
 #include <iostream>
 
-#include "itkEuler2DTransform.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
 
 
 namespace
@@ -44,8 +46,7 @@ CheckEqual(const itk::Point<double, 2> & p1, const itk::Point<double, 2> & p2)
 
 } // namespace
 
-int
-itkEuler2DTransformTest(int, char *[])
+TEST(Euler2DTransform, ConvertedLegacyTest)
 {
   std::cout << "==================================" << std::endl;
   std::cout << "Testing Euler Angles 2D Transform" << std::endl << std::endl;
@@ -62,11 +63,8 @@ itkEuler2DTransformTest(int, char *[])
   eulerTransform->SetIdentity();
 
   EulerTransformType::OffsetType offset = eulerTransform->GetOffset();
-  if (offset[0] != 0.0 || offset[1] != 0.0)
-  {
-    std::cout << "[ FAILED ]" << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(offset[0], 0.0) << "[ FAILED ]";
+  EXPECT_EQ(offset[1], 0.0) << "[ FAILED ]";
 
   std::cout << "[ PASSED ]" << std::endl;
 
@@ -95,13 +93,9 @@ itkEuler2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error rotating point   : " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -126,13 +120,9 @@ itkEuler2DTransformTest(int, char *[])
       break;
     }
   }
-  if (!Ok)
-  {
-    std::cerr << "Error translating point: " << p << std::endl;
-    std::cerr << "Result should be       : " << q << std::endl;
-    std::cerr << "Reported Result is     : " << r << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
+                  << "Result should be       : " << q << std::endl
+                  << "Reported Result is     : " << r;
 
   std::cout << " [ PASSED ] " << std::endl;
 
@@ -141,11 +131,9 @@ itkEuler2DTransformTest(int, char *[])
   std::cout << "Testing Parameters: ";
   EulerTransformType::ParametersType parameters = eulerTransform->GetParameters();
 
-  if (parameters[0] != 0.0 || parameters[1] != 1.0 || parameters[2] != 4.0)
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(parameters[0], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(parameters[1], 1.0) << " [ FAILED ] ";
+  EXPECT_EQ(parameters[2], 4.0) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
 
   // Testing Jacobian
@@ -153,12 +141,12 @@ itkEuler2DTransformTest(int, char *[])
   EulerTransformType::JacobianType jacobian;
   eulerTransform->ComputeJacobianWithRespectToParameters(pInit, jacobian);
 
-  if (itk::Math::NotExactlyEquals(jacobian[0][0], -10.0) || jacobian[0][1] != 1.0 || jacobian[0][2] != 0.0 ||
-      jacobian[1][0] != 10.0 || jacobian[1][1] != 0.0 || jacobian[1][2] != 1.0)
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(jacobian[0][0], -10.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[0][1], 1.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[0][2], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][0], 10.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][1], 0.0) << " [ FAILED ] ";
+  EXPECT_EQ(jacobian[1][2], 1.0) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
 
   std::cout << "Testing Angle from matrix : ";
@@ -168,11 +156,7 @@ itkEuler2DTransformTest(int, char *[])
   auto t2 = EulerTransformType::New();
   t2->SetIdentity();
   t2->Compose(eulerTransform);
-  if (itk::Math::Absolute(t2->GetParameters()[0] - 0.2) > 0.0001)
-  {
-    std::cout << " [ FAILED ] " << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[0] - 0.2), 0.0001) << " [ FAILED ] ";
   std::cout << " [ PASSED ] " << std::endl;
 
   {
@@ -207,10 +191,7 @@ itkEuler2DTransformTest(int, char *[])
     const TransformType::InputPointType p3 = t22->TransformPoint(p2);
 
     std::cout << "Test CloneInverseTo(): ";
-    if (!CheckEqual(p1, p3))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
     t1->GetInverse(t2dash);
@@ -218,24 +199,14 @@ itkEuler2DTransformTest(int, char *[])
     p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverse(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
-    if (!t2dash)
-    {
-      std::cout << "Cannot compute inverse transformation" << std::endl;
-      return EXIT_FAILURE;
-    }
+    ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
     std::cout << "Test GetInverseTransform(): ";
-    if (!CheckEqual(p1, p3dash))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
     TransformType::Pointer t3;
@@ -244,10 +215,7 @@ itkEuler2DTransformTest(int, char *[])
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
     std::cout << "Test Clone(): ";
-    if (!CheckEqual(p2, p4))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test compose
     auto t4 = TransformType::New();
@@ -270,10 +238,7 @@ itkEuler2DTransformTest(int, char *[])
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,false): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
     t5->Compose(t4, true);
@@ -283,10 +248,7 @@ itkEuler2DTransformTest(int, char *[])
     p7 = t5->TransformPoint(p1);
 
     std::cout << "Test Compose(.,true): ";
-    if (!CheckEqual(p6, p7))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
     std::cout << "Testing Jacobian: ";
@@ -317,14 +279,11 @@ itkEuler2DTransformTest(int, char *[])
         const double approxDerivative = (plusPoint[j] - minusPoint[j]) / (2.0 * delta);
         const double computedDerivative = jacobian2[j][k];
         approxJacobian[j][k] = approxDerivative;
-        if (itk::Math::Absolute(approxDerivative - computedDerivative) > 1e-4)
-        {
-          std::cerr << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl;
-          std::cerr << "Result should be: " << approxDerivative << std::endl;
-          std::cerr << "Reported result is: " << computedDerivative << std::endl;
-          std::cerr << " [ FAILED ] " << std::endl;
-          return EXIT_FAILURE;
-        } // if
+        EXPECT_LE(itk::Math::Absolute(approxDerivative - computedDerivative), 1e-4)
+          << "Error computing Jacobian [" << j << "][" << k << ']' << std::endl
+          << "Result should be: " << approxDerivative << std::endl
+          << "Reported result is: " << computedDerivative << std::endl
+          << " [ FAILED ] ";
       } // for j
 
     } // for k
@@ -365,10 +324,7 @@ itkEuler2DTransformTest(int, char *[])
     const TransformType::OutputPointType op2 = t23->TransformPoint(ip);
 
     std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
-    if (!CheckEqual(op1, op2))
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(CheckEqual(op1, op2));
 
     // check that parameters are the same
     TransformType::ParametersType pdash = t23->GetParameters();
@@ -376,19 +332,12 @@ itkEuler2DTransformTest(int, char *[])
     std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
     for (unsigned int j = 0; j < t1->GetNumberOfParameters(); ++j)
     {
-      if (itk::Math::Absolute(parameters3[j] - pdash[j]) > epsilon)
-      {
-        std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-        std::cerr << "Test failed!" << std::endl;
-        std::cerr << "Error in parameters at index [" << j << "]" << std::endl;
-        std::cerr << "Expected value " << parameters3 << std::endl;
-        std::cerr << " differs from " << pdash;
-        std::cerr << " by more than " << epsilon << std::endl;
-        return EXIT_FAILURE;
-      }
+      EXPECT_LE(itk::Math::Absolute(parameters3[j] - pdash[j]), epsilon)
+        << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << std::endl
+        << "Error in parameters at index [" << j << "]" << std::endl
+        << "Expected value " << parameters3 << std::endl
+        << " differs from " << pdash << " by more than " << epsilon;
     }
     std::cout << " [ PASSED ] " << std::endl;
   }
-
-  return EXIT_SUCCESS;
 }
