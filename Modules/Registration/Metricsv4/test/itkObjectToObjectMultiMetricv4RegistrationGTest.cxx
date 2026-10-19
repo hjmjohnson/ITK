@@ -27,6 +27,7 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkObjectToObjectMultiMetricv4.h"
 #include "itkMeanSquaresImageToImageMetricv4.h"
+#include "itkGTest.h"
 
 /* This test performs a simple registration test using
  * a single metric and a multivariate metric containing
@@ -34,6 +35,8 @@
  * that the results are the same.
  */
 
+namespace
+{
 template <typename TFilter>
 class itkObjectToObjectMultiMetricv4RegistrationTestCommandIterationUpdate : public itk::Command
 {
@@ -135,7 +138,7 @@ ObjectToObjectMultiMetricv4RegistrationTestCreateImages(typename TImage::Pointer
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename TMetric>
-[[nodiscard]] int
+void
 ObjectToObjectMultiMetricv4RegistrationTestRun(typename TMetric::Pointer &                    metric,
                                                int                                            numberOfIterations,
                                                typename TMetric::MeasureType &                valueResult,
@@ -187,22 +190,16 @@ ObjectToObjectMultiMetricv4RegistrationTestRun(typename TMetric::Pointer &      
   // scales
   std::cout << "scales: " << optimizer->GetScales() << std::endl;
   std::cout << "optimizer learning rate at end: " << optimizer->GetLearningRate() << std::endl;
-
-  return EXIT_SUCCESS;
 }
+} // namespace
 
 //////////////////////////////////////////////////////////////
-int
-itkObjectToObjectMultiMetricv4RegistrationTest(int argc, char * argv[])
+TEST(ObjectToObjectMultiMetricv4Registration, ConvertedLegacyTest)
 {
   constexpr int Dimension{ 2 };
   using ImageType = itk::Image<double, Dimension>;
 
-  int numberOfIterations = 30;
-  if (argc > 1)
-  {
-    numberOfIterations = std::stoi(argv[1]);
-  }
+  constexpr int numberOfIterations{ 30 };
 
   // create an affine transform
   using TranslationTransformType = itk::TranslationTransform<double, Dimension>;
@@ -224,12 +221,10 @@ itkObjectToObjectMultiMetricv4RegistrationTest(int argc, char * argv[])
 
   translationTransform->SetIdentity();
 
-  int testStatus = EXIT_SUCCESS;
-
   std::cout << std::endl << "*** Single image metric: " << std::endl;
   CorrelationMetricType::MeasureType    singleValueResult = 0.0;
   CorrelationMetricType::DerivativeType singleDerivativeResult{};
-  testStatus |= ObjectToObjectMultiMetricv4RegistrationTestRun<CorrelationMetricType>(
+  ObjectToObjectMultiMetricv4RegistrationTestRun<CorrelationMetricType>(
     correlationMetric, numberOfIterations, singleValueResult, singleDerivativeResult, 1.0, true);
 
   std::cout << "*** multi-variate metric: " << std::endl;
@@ -249,34 +244,25 @@ itkObjectToObjectMultiMetricv4RegistrationTest(int argc, char * argv[])
 
   CorrelationMetricType::MeasureType    multiValueResult = 0.0;
   CorrelationMetricType::DerivativeType multiDerivativeResult{};
-  testStatus |= ObjectToObjectMultiMetricv4RegistrationTestRun<MultiMetricType>(
+  ObjectToObjectMultiMetricv4RegistrationTestRun<MultiMetricType>(
     multiMetric, numberOfIterations, multiValueResult, multiDerivativeResult, 1.0, true);
 
   // Comparison between single-metric and multi-variate metric registrations
   auto tolerance = static_cast<CorrelationMetricType::DerivativeValueType>(1e-6);
-  if (itk::Math::Absolute(multiDerivativeResult[0] - singleDerivativeResult[0]) > tolerance ||
-      itk::Math::Absolute(multiDerivativeResult[1] - singleDerivativeResult[1]) > tolerance)
-  {
-    std::cerr << "multi-variate registration derivative: " << multiDerivativeResult
-              << " are different from single-variate derivative: " << singleDerivativeResult << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itk::Math::Absolute(multiValueResult - singleValueResult) > tolerance)
-  {
-    std::cerr << "multi-variate registration value: " << multiValueResult
-              << " is different from single-variate value: " << singleValueResult << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(multiDerivativeResult[0], singleDerivativeResult[0], tolerance)
+    << "multi-variate registration derivative: " << multiDerivativeResult
+    << " are different from single-variate derivative: " << singleDerivativeResult;
+  EXPECT_NEAR(multiDerivativeResult[1], singleDerivativeResult[1], tolerance)
+    << "multi-variate registration derivative: " << multiDerivativeResult
+    << " are different from single-variate derivative: " << singleDerivativeResult;
+  EXPECT_NEAR(multiValueResult, singleValueResult, tolerance);
 
   // compare results with truth
   tolerance = static_cast<CorrelationMetricType::DerivativeValueType>(0.05);
-  if (itk::Math::Absolute(multiDerivativeResult[0] - imageShift[0]) / imageShift[0] > tolerance ||
-      itk::Math::Absolute(multiDerivativeResult[1] - imageShift[1]) / imageShift[1] > tolerance)
-  {
-    std::cerr << "multi-variate registration results: " << multiDerivativeResult
-              << " are not as expected: " << imageShift << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(multiDerivativeResult[0] - imageShift[0]) / imageShift[0], tolerance)
+    << "multi-variate registration results: " << multiDerivativeResult << " are not as expected: " << imageShift;
+  EXPECT_LE(itk::Math::Absolute(multiDerivativeResult[1] - imageShift[1]) / imageShift[1], tolerance)
+    << "multi-variate registration results: " << multiDerivativeResult << " are not as expected: " << imageShift;
 
 
   //
@@ -285,37 +271,28 @@ itkObjectToObjectMultiMetricv4RegistrationTest(int argc, char * argv[])
   //
   std::cout << std::endl << "*** Single image metric 2: " << std::endl;
   translationTransform->SetIdentity();
-  testStatus |= ObjectToObjectMultiMetricv4RegistrationTestRun<CorrelationMetricType>(
+  ObjectToObjectMultiMetricv4RegistrationTestRun<CorrelationMetricType>(
     correlationMetric, numberOfIterations, singleValueResult, singleDerivativeResult, 0.25, false);
 
   std::cout << std::endl << "*** Multi-variate image metric 2: " << std::endl;
   translationTransform->SetIdentity();
-  testStatus |= ObjectToObjectMultiMetricv4RegistrationTestRun<MultiMetricType>(
+  ObjectToObjectMultiMetricv4RegistrationTestRun<MultiMetricType>(
     multiMetric, numberOfIterations, multiValueResult, multiDerivativeResult, 0.25, false);
 
-  if (itk::Math::Absolute(multiDerivativeResult[0] - singleDerivativeResult[0]) > tolerance ||
-      itk::Math::Absolute(multiDerivativeResult[1] - singleDerivativeResult[1]) > tolerance)
-  {
-    std::cerr << "multi-variate registration derivative: " << multiDerivativeResult
-              << " are different from single-variate derivative: " << singleDerivativeResult << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (itk::Math::Absolute(multiValueResult - singleValueResult) > tolerance)
-  {
-    std::cerr << "multi-variate registration value: " << multiValueResult
-              << " is different from single-variate value: " << singleValueResult << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NEAR(multiDerivativeResult[0], singleDerivativeResult[0], tolerance)
+    << "multi-variate registration derivative: " << multiDerivativeResult
+    << " are different from single-variate derivative: " << singleDerivativeResult;
+  EXPECT_NEAR(multiDerivativeResult[1], singleDerivativeResult[1], tolerance)
+    << "multi-variate registration derivative: " << multiDerivativeResult
+    << " are different from single-variate derivative: " << singleDerivativeResult;
+  EXPECT_NEAR(multiValueResult, singleValueResult, tolerance);
 
   // compare results with truth
   tolerance = static_cast<CorrelationMetricType::DerivativeValueType>(0.05);
-  if (itk::Math::Absolute(multiDerivativeResult[0] - imageShift[0]) / imageShift[0] > tolerance ||
-      itk::Math::Absolute(multiDerivativeResult[1] - imageShift[1]) / imageShift[1] > tolerance)
-  {
-    std::cerr << "multi-variate registration results: " << multiDerivativeResult
-              << " are not as expected: " << imageShift << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(itk::Math::Absolute(multiDerivativeResult[0] - imageShift[0]) / imageShift[0], tolerance)
+    << "multi-variate registration results: " << multiDerivativeResult << " are not as expected: " << imageShift;
+  EXPECT_LE(itk::Math::Absolute(multiDerivativeResult[1] - imageShift[1]) / imageShift[1], tolerance)
+    << "multi-variate registration results: " << multiDerivativeResult << " are not as expected: " << imageShift;
 
   //
   // Test with two different metric types
@@ -333,18 +310,13 @@ itkObjectToObjectMultiMetricv4RegistrationTest(int argc, char * argv[])
 
   translationTransform->SetIdentity();
   std::cout << "*** Multi-metric with different metric types: " << std::endl;
-  testStatus |= ObjectToObjectMultiMetricv4RegistrationTestRun<MultiMetricType>(
+  ObjectToObjectMultiMetricv4RegistrationTestRun<MultiMetricType>(
     multiMetric2, numberOfIterations, multiValueResult, multiDerivativeResult, 1.0, true);
 
   // compare results with truth
   tolerance = static_cast<MeanSquaresMetricType::DerivativeValueType>(0.05);
-  if (itk::Math::Absolute(multiDerivativeResult[0] - imageShift[0]) / imageShift[0] > tolerance ||
-      itk::Math::Absolute(multiDerivativeResult[1] - imageShift[1]) / imageShift[1] > tolerance)
-  {
-    std::cerr << "multi-variate registration results: " << multiDerivativeResult
-              << " are not as expected: " << imageShift << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return testStatus;
+  EXPECT_LE(itk::Math::Absolute(multiDerivativeResult[0] - imageShift[0]) / imageShift[0], tolerance)
+    << "multi-variate registration results: " << multiDerivativeResult << " are not as expected: " << imageShift;
+  EXPECT_LE(itk::Math::Absolute(multiDerivativeResult[1] - imageShift[1]) / imageShift[1], tolerance)
+    << "multi-variate registration results: " << multiDerivativeResult << " are not as expected: " << imageShift;
 }

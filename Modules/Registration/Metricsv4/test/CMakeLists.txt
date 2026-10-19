@@ -12,7 +12,6 @@ set(
   itkMeanSquaresImageToImageMetricv4VectorRegistrationTest.cxx
   itkMultiGradientImageToImageMetricv4RegistrationTest.cxx
   itkMultiStartImageToImageMetricv4RegistrationTest.cxx
-  itkObjectToObjectMultiMetricv4RegistrationTest.cxx
   itkObjectToObjectMultiMetricv4Test.cxx
 )
 
@@ -239,13 +238,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkObjectToObjectMultiMetricv4RegistrationTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkObjectToObjectMultiMetricv4RegistrationTest
-)
-
-itk_add_test(
   NAME itkMeanSquaresImageToImageMetricv4VectorRegistrationTest
   COMMAND
     ITKMetricsv4TestDriver
@@ -286,5 +278,6 @@ set(
   itkMeanSquaresImageToImageMetricv4OnVectorGTest.cxx
   itkMeanSquaresImageToImageMetricv4OnVectorGTest2.cxx
   itkMetricImageGradientGTest.cxx
+  itkObjectToObjectMultiMetricv4RegistrationGTest.cxx
 )
 creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")
