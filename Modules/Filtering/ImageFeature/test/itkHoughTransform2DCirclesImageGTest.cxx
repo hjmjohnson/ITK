@@ -21,13 +21,15 @@
 #include "itkGradientMagnitudeImageFilter.h"
 #include "itkCastImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
 // Define the dimension of the images
 static constexpr unsigned int Dimension = 2;
 
 
+namespace
+{
 template <typename ImageType, typename CenterCoordinateType>
 void
 CreateCircle(typename ImageType::Pointer image, const CenterCoordinateType center[Dimension], double radius)
@@ -45,8 +47,6 @@ CreateCircle(typename ImageType::Pointer image, const CenterCoordinateType cente
   }
 }
 
-namespace
-{
 bool
 Test_GetCircles_should_return_empty_list_when_NumberOfCircles_is_set_to_zero()
 {
@@ -294,8 +294,7 @@ Test_Center_IsInside_SpatialObject_from_GetCircles()
 
 } // namespace
 
-int
-itkHoughTransform2DCirclesImageTest(int, char *[])
+TEST(HoughTransform2DCirclesImageFilter, ConvertedLegacyTest)
 {
   bool success = true;
 
@@ -352,57 +351,57 @@ itkHoughTransform2DCirclesImageTest(int, char *[])
 
   auto houghFilter = HoughTransformFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(houghFilter, HoughTransform2DCirclesImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(houghFilter, HoughTransform2DCirclesImageFilter, ImageToImageFilter);
 
 
   constexpr double threshold{ 2.3 };
   houghFilter->SetThreshold(threshold);
-  ITK_TEST_SET_GET_VALUE(threshold, houghFilter->GetThreshold());
+  EXPECT_EQ(threshold, houghFilter->GetThreshold());
 
   constexpr double minMaxRadius{ 16.2 };
   houghFilter->SetRadius(minMaxRadius);
-  ITK_TEST_SET_GET_VALUE(minMaxRadius, houghFilter->GetMinimumRadius());
-  ITK_TEST_SET_GET_VALUE(minMaxRadius, houghFilter->GetMaximumRadius());
+  EXPECT_EQ(minMaxRadius, houghFilter->GetMinimumRadius());
+  EXPECT_EQ(minMaxRadius, houghFilter->GetMaximumRadius());
 
   constexpr double minimumRadius{ 2.1 };
   houghFilter->SetMinimumRadius(minimumRadius);
-  ITK_TEST_SET_GET_VALUE(minimumRadius, houghFilter->GetMinimumRadius());
+  EXPECT_EQ(minimumRadius, houghFilter->GetMinimumRadius());
 
   constexpr double maximumRadius{ 20.4 };
   houghFilter->SetMaximumRadius(maximumRadius);
-  ITK_TEST_SET_GET_VALUE(maximumRadius, houghFilter->GetMaximumRadius());
+  EXPECT_EQ(maximumRadius, houghFilter->GetMaximumRadius());
 
   constexpr double gradientNormThreshold{ 1.1 };
   houghFilter->SetGradientNormThreshold(gradientNormThreshold);
-  ITK_TEST_SET_GET_VALUE(gradientNormThreshold, houghFilter->GetGradientNormThreshold());
+  EXPECT_EQ(gradientNormThreshold, houghFilter->GetGradientNormThreshold());
 
   constexpr double sigmaGradient{ 1.2 };
   houghFilter->SetSigmaGradient(sigmaGradient);
-  ITK_TEST_SET_GET_VALUE(sigmaGradient, houghFilter->GetSigmaGradient());
+  EXPECT_EQ(sigmaGradient, houghFilter->GetSigmaGradient());
 
   constexpr float discRadiusRatio{ 1.1 };
   houghFilter->SetDiscRadiusRatio(discRadiusRatio);
-  ITK_TEST_SET_GET_VALUE(discRadiusRatio, houghFilter->GetDiscRadiusRatio());
+  EXPECT_EQ(discRadiusRatio, houghFilter->GetDiscRadiusRatio());
 
   constexpr float variance{ 10 };
   houghFilter->SetVariance(variance);
-  ITK_TEST_SET_GET_VALUE(variance, houghFilter->GetVariance());
+  EXPECT_EQ(variance, houghFilter->GetVariance());
 
   constexpr float sweepAngle{ 0.2 };
   houghFilter->SetSweepAngle(sweepAngle);
-  ITK_TEST_SET_GET_VALUE(sweepAngle, houghFilter->GetSweepAngle());
+  EXPECT_EQ(sweepAngle, houghFilter->GetSweepAngle());
 
   auto numberOfCircles = static_cast<HoughTransformFilterType::CirclesListSizeType>(circles);
   houghFilter->SetNumberOfCircles(numberOfCircles);
-  ITK_TEST_SET_GET_VALUE(numberOfCircles, houghFilter->GetNumberOfCircles());
+  EXPECT_EQ(numberOfCircles, houghFilter->GetNumberOfCircles());
 
   constexpr bool useImageSpacing{ false };
   houghFilter->SetUseImageSpacing(useImageSpacing);
-  ITK_TEST_SET_GET_VALUE(useImageSpacing, houghFilter->GetUseImageSpacing());
+  EXPECT_EQ(useImageSpacing, houghFilter->GetUseImageSpacing());
 
   houghFilter->SetInput(caster->GetOutput());
 
-  ITK_TRY_EXPECT_EXCEPTION(houghFilter->GetCircles());
+  EXPECT_THROW(houghFilter->GetCircles(), itk::ExceptionObject);
 
   houghFilter->Update();
 
@@ -542,17 +541,9 @@ itkHoughTransform2DCirclesImageTest(int, char *[])
     }
   }
 
-  success &= Test_GetCircles_should_return_empty_list_when_NumberOfCircles_is_set_to_zero();
-  success &= Test_GetCircles_should_return_empty_list_when_input_image_is_uniform();
-  success &= Test_RadiusImage_and_OutputImage_may_have_different_types();
-  success &= Test_Center_IsInside_SpatialObject_from_GetCircles();
-
-  if (success)
-  {
-    std::cout << "Test succeeded!" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test FAILED!" << std::endl;
-  return EXIT_FAILURE;
+  EXPECT_TRUE(success);
+  EXPECT_TRUE(Test_GetCircles_should_return_empty_list_when_NumberOfCircles_is_set_to_zero());
+  EXPECT_TRUE(Test_GetCircles_should_return_empty_list_when_input_image_is_uniform());
+  EXPECT_TRUE(Test_RadiusImage_and_OutputImage_may_have_different_types());
+  EXPECT_TRUE(Test_Center_IsInside_SpatialObject_from_GetCircles());
 }
