@@ -12,7 +12,6 @@ set(
   itkMagnitudeAndPhaseToComplexImageFilterTest.cxx
   itkMatrixIndexSelectionImageFilterTest.cxx
   itkModulusImageFilterTest.cxx
-  itkNaryAddImageFilterTest.cxx
   itkNaryMaximumImageFilterTest.cxx
   itkNormalizeImageFilterTest.cxx
   itkNormalizeToConstantImageFilterTest.cxx
@@ -278,12 +277,6 @@ set_tests_properties(
       ${TEMP}/itkNormalizeImageFilterTest.txt
 )
 
-itk_add_test(
-  NAME itkNaryAddImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkNaryAddImageFilterTest
-)
 itk_add_test(
   NAME itkShiftScaleImageFilterTest
   COMMAND
@@ -630,6 +623,7 @@ set(
   itkMaximumImageFilterGTest.cxx
   itkMinimumImageFilterGTest.cxx
   itkMultiplyImageFilterGTest.cxx
+  itkNaryAddImageFilterGTest.cxx
   itkNotEqualGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
