@@ -19,14 +19,16 @@
 #include "itkPolyData.h"
 #include "itkPolyDataToMeshFilter.h"
 
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 template <typename TPixelType>
 void
 MakePolyDataSample(itk::PolyData<TPixelType> *);
+} // namespace
 
-int
-itkPolyDataToMeshFilterTest(int, char *[])
+TEST(PolyDataToMeshFilter, ConvertedLegacyTest)
 {
 
   using PixelType = double;
@@ -41,67 +43,67 @@ itkPolyDataToMeshFilterTest(int, char *[])
 
   filter->SetInput(polyData);
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(filter->Update());
+  EXPECT_NO_THROW(filter->Update());
 
   using MeshType = FilterType::OutputMeshType;
   MeshType::Pointer meshResult = filter->GetOutput();
 
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetNumberOfPoints(), polyData->GetNumberOfPoints());
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(0)[0], 1);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(0)[1], 3);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(0)[2], 5);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(1)[0], 4);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(1)[1], 6);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(1)[2], 8);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(2)[0], 3);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(2)[1], 5);
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetPoint(2)[2], 7);
+  EXPECT_EQ(meshResult->GetNumberOfPoints(), polyData->GetNumberOfPoints());
+  EXPECT_EQ(meshResult->GetPoint(0)[0], 1);
+  EXPECT_EQ(meshResult->GetPoint(0)[1], 3);
+  EXPECT_EQ(meshResult->GetPoint(0)[2], 5);
+  EXPECT_EQ(meshResult->GetPoint(1)[0], 4);
+  EXPECT_EQ(meshResult->GetPoint(1)[1], 6);
+  EXPECT_EQ(meshResult->GetPoint(1)[2], 8);
+  EXPECT_EQ(meshResult->GetPoint(2)[0], 3);
+  EXPECT_EQ(meshResult->GetPoint(2)[1], 5);
+  EXPECT_EQ(meshResult->GetPoint(2)[2], 7);
 
-  ITK_TEST_EXPECT_EQUAL(meshResult->GetNumberOfCells(), 7);
+  ASSERT_EQ(meshResult->GetNumberOfCells(), 7u);
 
   // Verify vertex cells
   typename MeshType::CellAutoPointer cellPtr;
   meshResult->GetCell(0, cellPtr);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetNumberOfPoints(), 1);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[0], 4);
+  ASSERT_EQ(cellPtr->GetNumberOfPoints(), 1u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[0], 4u);
   meshResult->GetCell(1, cellPtr);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetNumberOfPoints(), 1);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[0], 7);
+  ASSERT_EQ(cellPtr->GetNumberOfPoints(), 1u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[0], 7u);
 
   // Verify line cells
   meshResult->GetCell(2, cellPtr);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetNumberOfPoints(), 3);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[0], 3);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[1], 4);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[2], 5);
+  ASSERT_EQ(cellPtr->GetNumberOfPoints(), 3u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[0], 3u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[1], 4u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[2], 5u);
   meshResult->GetCell(3, cellPtr);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetNumberOfPoints(), 2);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[0], 7);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[1], 8);
+  ASSERT_EQ(cellPtr->GetNumberOfPoints(), 2u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[0], 7u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[1], 8u);
 
   // Verify triangle strips (now cells
   meshResult->GetCell(4, cellPtr);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetNumberOfPoints(), 3);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[0], 0);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[1], 2);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[2], 1);
+  ASSERT_EQ(cellPtr->GetNumberOfPoints(), 3u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[0], 0u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[1], 2u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[2], 1u);
   meshResult->GetCell(5, cellPtr);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetNumberOfPoints(), 3);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[0], 2);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[1], 1);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[2], 3);
+  ASSERT_EQ(cellPtr->GetNumberOfPoints(), 3u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[0], 2u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[1], 1u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[2], 3u);
 
 
   // Verify triangle cells
   meshResult->GetCell(6, cellPtr);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetNumberOfPoints(), 3);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[0], 0);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[1], 1);
-  ITK_TEST_EXPECT_EQUAL(cellPtr->GetPointIdsContainer()[2], 2);
-
-  return EXIT_SUCCESS;
+  ASSERT_EQ(cellPtr->GetNumberOfPoints(), 3u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[0], 0u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[1], 1u);
+  EXPECT_EQ(cellPtr->GetPointIdsContainer()[2], 2u);
 }
 
+namespace
+{
 // From itkPolyDataTest.cxx
 template <typename TPixelType>
 void
@@ -170,3 +172,4 @@ MakePolyDataSample(itk::PolyData<TPixelType> * polyData)
 
   return;
 }
+} // namespace
