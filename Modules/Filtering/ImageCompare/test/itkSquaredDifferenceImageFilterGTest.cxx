@@ -18,11 +18,10 @@
 
 #include "itkSquaredDifferenceImageFilter.h"
 #include "itkImageRegionIteratorWithIndex.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkSquaredDifferenceImageFilterTest(int, char *[])
+TEST(SquaredDifferenceImageFilter, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -103,7 +102,7 @@ itkSquaredDifferenceImageFilterTest(int, char *[])
   // Create a MagnitudeImageFilter
   auto filter = myFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, SquaredDifferenceImageFilter, BinaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, SquaredDifferenceImageFilter, BinaryGeneratorImageFilter);
 
 
   // Connect the input images
@@ -125,18 +124,11 @@ itkSquaredDifferenceImageFilterTest(int, char *[])
   while (!it4.IsAtEnd())
   {
     std::cout << it4.Get() << std::endl;
-    if (itk::Math::Absolute(it4.Get() - outputValue) > epsilon)
-    {
-      std::cerr << "Error in the output" << std::endl;
-      std::cerr << "Value should be  " << outputValue << std::endl;
-      std::cerr << "but is           " << it4.Get() << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(it4.Get(), outputValue, epsilon);
 
     ++it4;
   }
 
 
   // All objects should be automatically destroyed at this point
-  return EXIT_SUCCESS;
 }
