@@ -18,10 +18,9 @@
 
 #include <iostream>
 #include "itkPolyLineParametricPath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkPolyLineParametricPathTest(int, char *[])
+TEST(PolyLineParametricPath, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -30,11 +29,9 @@ itkPolyLineParametricPathTest(int, char *[])
   using OffsetType = PathType::OffsetType;
   using VertexType = PathType::VertexType;
 
-  bool passed = true;
-
   auto path = PathType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(path, PolyLineParametricPath, ParametricPath);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path, PolyLineParametricPath, ParametricPath);
 
   auto v = itk::MakeFilled<VertexType>(1);
   path->AddVertex(v);
@@ -55,20 +52,12 @@ itkPolyLineParametricPathTest(int, char *[])
 
   std::cout << "Evaluating to an index at 0, 0.5, and 1.0: " << path->EvaluateToIndex(0) << ", "
             << path->EvaluateToIndex(0.5) << ", " << path->EvaluateToIndex(1.0) << std::endl;
-  if (path->EvaluateToIndex(4.0) != path->EvaluateToIndex(0))
-  {
-    std::cout << "EvaluateToIndex() Failed" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(path->EvaluateToIndex(4.0), path->EvaluateToIndex(0)) << "EvaluateToIndex() Failed";
 
   std::cout << "Evaluating the derivative at 0, 0.5, and 1.0: " << path->EvaluateDerivative(0) << ", "
             << path->EvaluateDerivative(0.5) << ", " << path->EvaluateDerivative(1.0) << std::endl;
-  if (static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.5))[0]) != 1000 ||
-      static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.5))[1]) != 2000)
-  {
-    std::cout << "EvaluateDerivative() Failed" << std::endl;
-    passed = false;
-  }
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.5))[0]), 1000) << "EvaluateDerivative() Failed";
+  EXPECT_EQ(static_cast<int>(0.5 + 1000 * (path->EvaluateDerivative(0.5))[1]), 2000) << "EvaluateDerivative() Failed";
 
   InputType  input = 0;
   OffsetType offset = path->IncrementInput(input);
@@ -105,13 +94,4 @@ itkPolyLineParametricPathTest(int, char *[])
       break;
     }
   }
-
-  if (passed)
-  {
-    std::cout << "Test passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "Test failed" << std::endl;
-  return EXIT_FAILURE;
 }
