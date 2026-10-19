@@ -14,7 +14,6 @@ set(
   itkListSampleTest.cxx
   itkSampleToHistogramFilterTest5.cxx
   itkScalarImageToHistogramGeneratorTest.cxx
-  itkScalarImageToRunLengthMatrixFilterTest.cxx
   itkScalarImageToTextureFeaturesFilterTest.cxx
   itkSparseFrequencyContainer2Test.cxx
   itkSpatialNeighborSubsamplerTest.cxx
@@ -484,12 +483,6 @@ itk_add_test(
     itkScalarImageToTextureFeaturesFilterTest
 )
 itk_add_test(
-  NAME itkScalarImageToRunLengthMatrixFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToRunLengthMatrixFilterTest
-)
-itk_add_test(
   NAME itkSparseFrequencyContainer2Test
   COMMAND
     ITKStatisticsTestDriver
@@ -634,6 +627,7 @@ set(
   itkScalarImageToCooccurrenceMatrixFilterGTest.cxx
   itkScalarImageToCooccurrenceMatrixFilterGTest2.cxx
   itkScalarImageToRunLengthFeaturesFilterGTest.cxx
+  itkScalarImageToRunLengthMatrixFilterGTest.cxx
   itkSampleToHistogramFilterGTest4.cxx
   itkStandardDeviationPerComponentSampleFilterGTest.cxx
   itkStatisticsTypesGTest.cxx
