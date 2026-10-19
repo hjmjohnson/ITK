@@ -20,10 +20,9 @@
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkBinaryMedianImageFilter.h"
 #include "itkTextOutput.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkBinaryMedianImageFilterTest(int, char *[])
+TEST(BinaryMedianImageFilter, ConvertedLegacyTest)
 {
   // Comment the following if you want to use the itk text output window
   itk::OutputWindow::SetInstance(itk::TextOutput::New());
@@ -61,15 +60,15 @@ itkBinaryMedianImageFilterTest(int, char *[])
   itk::BinaryMedianImageFilter<ImageType, ImageType>::Pointer median;
   median = itk::BinaryMedianImageFilter<ImageType, ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(median, BinaryMedianImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(median, BinaryMedianImageFilter, ImageToImageFilter);
 
 
   median->SetInput(thresholder->GetOutput());
   median->SetForegroundValue(foreground);
-  ITK_TEST_SET_GET_VALUE(foreground, median->GetForegroundValue());
+  EXPECT_EQ(foreground, median->GetForegroundValue());
 
   median->SetBackgroundValue(background);
-  ITK_TEST_SET_GET_VALUE(background, median->GetBackgroundValue());
+  EXPECT_EQ(background, median->GetBackgroundValue());
 
 
   // define the neighborhood size used for the median filter (5x5)
@@ -77,7 +76,7 @@ itkBinaryMedianImageFilterTest(int, char *[])
   neighRadius[0] = 1;
   neighRadius[1] = 1;
   median->SetRadius(neighRadius);
-  ITK_TEST_SET_GET_VALUE(neighRadius, median->GetRadius());
+  EXPECT_EQ(neighRadius, median->GetRadius());
 
   // run the algorithm
   median->Update();
@@ -117,6 +116,4 @@ itkBinaryMedianImageFilterTest(int, char *[])
       std::cout << std::endl;
     }
   }
-
-  return EXIT_SUCCESS;
 }
