@@ -18,15 +18,14 @@
 
 #include "itkConnectedRegionsMeshFilter.h"
 #include "itkSphereMeshSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 #include <iostream>
 
 /*
  * Test the mesh connectivity class.
  */
-int
-itkConnectedRegionsMeshFilterTest1(int, char *[])
+TEST(ConnectedRegionsMeshFilter, ConvertedLegacyTest)
 {
 
   /**
@@ -48,7 +47,7 @@ itkConnectedRegionsMeshFilterTest1(int, char *[])
   PointType                      p = pInit;
   auto                           connect = ConnectFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(connect, ConnectedRegionsMeshFilter, MeshToMeshFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(connect, ConnectedRegionsMeshFilter, MeshToMeshFilter);
 
 
   connect->SetInput(inMesh);
@@ -63,32 +62,32 @@ itkConnectedRegionsMeshFilterTest1(int, char *[])
   // Test with each of the extraction modes
   connect->SetExtractionModeToAllRegions();
   auto extractionMode = 4;
-  ITK_TEST_SET_GET_VALUE(extractionMode, connect->GetExtractionMode());
+  EXPECT_EQ(extractionMode, connect->GetExtractionMode());
   connect->Update();
 
   extractionMode = 1;
   connect->SetExtractionModeToCellSeededRegions();
-  ITK_TEST_SET_GET_VALUE(extractionMode, connect->GetExtractionMode());
+  EXPECT_EQ(extractionMode, connect->GetExtractionMode());
   connect->Update();
 
   extractionMode = 5;
   connect->SetExtractionModeToClosestPointRegion();
-  ITK_TEST_SET_GET_VALUE(extractionMode, connect->GetExtractionMode());
+  EXPECT_EQ(extractionMode, connect->GetExtractionMode());
   connect->Update();
 
   extractionMode = 3;
   connect->SetExtractionModeToLargestRegion();
-  ITK_TEST_SET_GET_VALUE(extractionMode, connect->GetExtractionMode());
+  EXPECT_EQ(extractionMode, connect->GetExtractionMode());
   connect->Update();
 
   extractionMode = 0;
   connect->SetExtractionModeToPointSeededRegions();
-  ITK_TEST_SET_GET_VALUE(extractionMode, connect->GetExtractionMode());
+  EXPECT_EQ(extractionMode, connect->GetExtractionMode());
   connect->Update();
 
   extractionMode = 2;
   connect->SetExtractionModeToSpecifiedRegions();
-  ITK_TEST_SET_GET_VALUE(extractionMode, connect->GetExtractionMode());
+  EXPECT_EQ(extractionMode, connect->GetExtractionMode());
   connect->Update();
 
   // Create a Sphere for running the filter on real input data.
@@ -109,16 +108,5 @@ itkConnectedRegionsMeshFilterTest1(int, char *[])
 
   connect->SetInput(meshSource->GetOutput());
 
-  try
-  {
-    connect->Update();
-  }
-  catch (const itk::ExceptionObject & excp)
-  {
-    std::cerr << "Exception caught " << std::endl;
-    std::cerr << excp << std::endl;
-    return EXIT_FAILURE;
-  }
-
-  return EXIT_SUCCESS;
+  EXPECT_NO_THROW(connect->Update());
 }
