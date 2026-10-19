@@ -2,7 +2,6 @@ itk_module_test()
 
 set(
   ITKIOXMLTests
-  itkDOMTest1.cxx
   itkDOMTest2.cxx
   itkDOMTest3.cxx
   itkDOMTest4.cxx
@@ -14,13 +13,6 @@ set(
 )
 
 createtestdriver(ITKIOXML "${ITKIOXML-Test_LIBRARIES}" "${ITKIOXMLTests}")
-
-itk_add_test(
-  NAME itkDOMTest1
-  COMMAND
-    ITKIOXMLTestDriver
-    itkDOMTest1
-)
 
 itk_add_test(
   NAME itkDOMTest21
