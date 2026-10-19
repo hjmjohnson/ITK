@@ -21,13 +21,17 @@
 
 #include "itkPipelineMonitorImageFilter.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 using ImageType = itk::Image<float, 3>;
 using DisplacementFieldType = itk::Image<itk::Vector<double, 3>, 3>;
 using WarpFilterType = itk::WarpImageFilter<ImageType, ImageType, DisplacementFieldType>;
 
 using MonitorFilter = itk::PipelineMonitorImageFilter<ImageType>;
+} // namespace
+
 #define AllocateImageFromRegionAndSpacing(ImageType, rval, region, spacing) \
   {                                                                         \
     rval = ImageType::New();                                                \
@@ -93,8 +97,7 @@ MakeDisplacementField()
 
 } // namespace
 
-int
-itkWarpImageFilterTest2(int, char *[])
+TEST(WarpImageFilter, ConvertedLegacyTest2)
 {
   // itk::MultiThreaderBase::SetGlobalDefaultNumberOfThreads(1);
   // Make test image
@@ -127,17 +130,10 @@ itkWarpImageFilterTest2(int, char *[])
   itk::ImageRegionIterator<ImageType> it2(result2, result1->GetLargestPossibleRegion());
   for (it1.GoToBegin(), it2.GoToBegin(); !it1.IsAtEnd() && !it2.IsAtEnd(); ++it1, ++it2)
   {
-    if (itk::Math::NotAlmostEquals(it1.Value(), it2.Value()))
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in pixel value at index [" << it1.ComputeIndex() << "]" << std::endl;
-      std::cerr << "Expected value " << it1.Value() << std::endl;
-      std::cerr << " differs from " << it2.Value();
-      return EXIT_FAILURE;
-    }
+    EXPECT_FLOAT_EQ(it1.Value(), it2.Value()) << "Error in pixel value at index [" << it1.ComputeIndex() << "]";
   }
 
-  ITK_TEST_EXPECT_EQUAL(it1.IsAtEnd(), it2.IsAtEnd());
+  EXPECT_EQ(it1.IsAtEnd(), it2.IsAtEnd());
 
   // Try streaming
   auto monitor1 = MonitorFilter::New();
@@ -155,27 +151,21 @@ itkWarpImageFilterTest2(int, char *[])
   using StreamerType = itk::StreamingImageFilter<ImageType, ImageType>;
   auto streamer = StreamerType::New();
   streamer->SetInput(monitor2->GetOutput());
-  streamer->SetNumberOfStreamDivisions(4);
+  constexpr unsigned int numberOfStreamDivisions{ 4 };
+  streamer->SetNumberOfStreamDivisions(numberOfStreamDivisions);
   streamer->Update();
   itk::ImageRegionIterator<ImageType> streamIt(streamer->GetOutput(), streamer->GetOutput()->GetBufferedRegion());
   for (streamIt.GoToBegin(), it2.GoToBegin(); !streamIt.IsAtEnd() && !it2.IsAtEnd(); ++streamIt, ++it2)
   {
-    if (itk::Math::NotAlmostEquals(streamIt.Value(), it2.Value()))
-    {
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in pixel value at index [" << streamIt.ComputeIndex() << "]" << std::endl;
-      std::cerr << "Expected value " << it2.Value() << std::endl;
-      std::cerr << " differs from " << streamIt.Value();
-      return EXIT_FAILURE;
-    }
+    EXPECT_FLOAT_EQ(streamIt.Value(), it2.Value())
+      << "Error in pixel value at index [" << streamIt.ComputeIndex() << "]";
   }
 
-  ITK_TEST_EXPECT_EQUAL(streamIt.IsAtEnd(), it2.IsAtEnd());
+  EXPECT_EQ(streamIt.IsAtEnd(), it2.IsAtEnd());
 
   // Verify that the pipeline was executed as expected along with correct region propagation and output information
-  ITK_TEST_EXPECT_TRUE(monitor2->VerifyAllInputCanStream(4));
+  EXPECT_TRUE(monitor2->VerifyAllInputCanStream(numberOfStreamDivisions));
 
 
   std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
 }
