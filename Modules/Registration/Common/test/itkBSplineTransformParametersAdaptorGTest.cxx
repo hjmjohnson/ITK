@@ -18,9 +18,9 @@
 
 #include "itkBSplineTransform.h"
 #include "itkBSplineTransformParametersAdaptor.h"
+#include "itkGTest.h"
 
-int
-itkBSplineTransformParametersAdaptorTest(int, char *[])
+TEST(BSplineTransformParametersAdaptor, ConvertedLegacyTest)
 {
   constexpr unsigned int SpaceDimension{ 3 };
   constexpr unsigned int SplineOrder{ 3 };
@@ -96,40 +96,20 @@ itkBSplineTransformParametersAdaptorTest(int, char *[])
   adaptor->SetRequiredTransformDomainOrigin(transform->GetTransformDomainOrigin());
   adaptor->SetRequiredTransformDomainDirection(transform->GetTransformDomainDirection());
   adaptor->SetRequiredTransformDomainPhysicalDimensions(transform->GetTransformDomainPhysicalDimensions());
-  try
-  {
-    adaptor->AdaptTransformParameters();
-  }
-  catch (...)
-  {
-    std::cerr << "Error in adapting transform." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_NO_THROW(adaptor->AdaptTransformParameters()) << "Error in adapting transform.";
 
   const ParametersType fixedParameters = adaptor->GetRequiredFixedParameters();
   std::cout << "Fixed parameters: " << fixedParameters << std::endl;
   adaptor->SetRequiredFixedParameters(fixedParameters);
 
-  if (adaptor->GetRequiredTransformDomainMeshSize() != transform->GetTransformDomainMeshSize())
-  {
-    std::cerr << "required transform domain mesh size conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredTransformDomainOrigin() != transform->GetTransformDomainOrigin())
-  {
-    std::cerr << "required transform domain origin conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredTransformDomainDirection() != transform->GetTransformDomainDirection())
-  {
-    std::cerr << "required transform domain direction conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (adaptor->GetRequiredTransformDomainPhysicalDimensions() != transform->GetTransformDomainPhysicalDimensions())
-  {
-    std::cerr << "required transform domain physical dimensions conversion is incorrect." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(adaptor->GetRequiredTransformDomainMeshSize(), transform->GetTransformDomainMeshSize())
+    << "required transform domain mesh size conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredTransformDomainOrigin(), transform->GetTransformDomainOrigin())
+    << "required transform domain origin conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredTransformDomainDirection(), transform->GetTransformDomainDirection())
+    << "required transform domain direction conversion is incorrect.";
+  EXPECT_EQ(adaptor->GetRequiredTransformDomainPhysicalDimensions(), transform->GetTransformDomainPhysicalDimensions())
+    << "required transform domain physical dimensions conversion is incorrect.";
 
   const TransformType::SizeType gridSizeAfter =
     transform->GetCoefficientImages()[0]->GetLargestPossibleRegion().GetSize();
@@ -141,13 +121,8 @@ itkBSplineTransformParametersAdaptorTest(int, char *[])
   std::cout << point << " to (before) " << outputPointBeforeAdapt << std::endl;
   std::cout << point << " to (after) " << outputPointAfterAdapt << std::endl;
 
-  if (outputPointBeforeAdapt.EuclideanDistanceTo(outputPointAfterAdapt) > 1e-6)
-  {
-    std::cerr << "output points don't match up before and after adapt call." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_LE(outputPointBeforeAdapt.EuclideanDistanceTo(outputPointAfterAdapt), 1e-6)
+    << "output points don't match up before and after adapt call.";
 
   adaptor->Print(std::cout, 5);
-
-  return EXIT_SUCCESS;
 }
