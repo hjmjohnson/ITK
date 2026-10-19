@@ -17,7 +17,6 @@ set(
   itkNumberToStringTest.cxx
   itkNumericTraitsTest.cxx
   itkObjectFactoryTest.cxx
-  itkPhasedArray3DSpecialCoordinatesImageTest.cxx
   itkPointGeometryTest.cxx
   itkPointSetTest.cxx
   itkPointSetToImageFilterTest1.cxx
@@ -842,12 +841,6 @@ itk_add_test(
     itkObjectFactoryOnlyNewTest
 )
 itk_add_test(
-  NAME itkPhasedArray3DSpecialCoordinatesImageTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkPhasedArray3DSpecialCoordinatesImageTest
-)
-itk_add_test(
   NAME itkTimeProbeTest
   COMMAND
     ITKCommon1TestDriver
@@ -1340,6 +1333,7 @@ set(
   itkOffsetGTest.cxx
   itkOptimizerParametersGTest.cxx
   itkPeriodicBoundaryConditionGTest.cxx
+  itkPhasedArray3DSpecialCoordinatesImageGTest.cxx
   itkPixelAccessGTest.cxx
   itkPointGTest.cxx
   itkPointSetGTest.cxx
