@@ -30,11 +30,10 @@
 #include "itkOrthogonalSwath2DPathFilter.h"
 
 #include "itkPathToImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkOrthogonalSwath2DPathFilterTest(int, char *[])
+TEST(OrthogonalSwath2DPathFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
   using UCharPixelType = unsigned char;
@@ -167,7 +166,8 @@ itkOrthogonalSwath2DPathFilterTest(int, char *[])
   // Set up the test OrthogonalSwath2DPathFilter
   auto orthogonalSwath2DPathFilter = OrthogonalSwath2DPathFilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(orthogonalSwath2DPathFilter, OrthogonalSwath2DPathFilter, PathAndImageToPathFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    orthogonalSwath2DPathFilter, OrthogonalSwath2DPathFilter, PathAndImageToPathFilter);
 
   orthogonalSwath2DPathFilter->SetPathInput(chainCodeToFourierSeriesPathFilter->GetOutput());
   orthogonalSwath2DPathFilter->SetImageInput(meritFilter->GetOutput());
@@ -201,7 +201,7 @@ itkOrthogonalSwath2DPathFilterTest(int, char *[])
 
   // Update the pipeline
 
-  ITK_TRY_EXPECT_NO_EXCEPTION(outputImage->Update());
+  EXPECT_NO_THROW(outputImage->Update());
 
   /*
     // Save the output images
@@ -217,8 +217,4 @@ itkOrthogonalSwath2DPathFilterTest(int, char *[])
     writer->SetFileName( "OrthSwathFilterSwathMerit.png" );
     writer->Write();
   */
-
-  std::cerr << "Test finished" << std::endl;
-
-  return EXIT_SUCCESS;
 }
