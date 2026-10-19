@@ -18,10 +18,9 @@
 
 #include "itkQuadEdgeMeshEulerOperatorCreateCenterVertexFunction.h"
 #include "itkQuadEdgeMeshEulerOperatorsTestHelper.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkQuadEdgeMeshEulerOperatorCreateCenterVertexTest(int, char *[])
+TEST(QuadEdgeMeshEulerOperatorCreateCenterVertex, ConvertedLegacyTest)
 {
 
   using MeshType = itk::QuadEdgeMesh<double, 3>;
@@ -67,57 +66,33 @@ itkQuadEdgeMeshEulerOperatorCreateCenterVertexTest(int, char *[])
 #ifndef NDEBUG
   std::cout << "     "
             << "Test No Mesh Input";
-  if (createCenterVertex->Evaluate((QEType *)1))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(createCenterVertex->Evaluate((QEType *)1), nullptr);
   std::cout << "OK" << std::endl;
 #endif
-  ITK_TEST_EXPECT_EQUAL(std::string_view("QuadEdgeMeshEulerOperatorCreateCenterVertexFunction"),
-                        std::string_view(createCenterVertex->GetNameOfClass()));
+  EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorCreateCenterVertexFunction"),
+            std::string_view(createCenterVertex->GetNameOfClass()));
 
   createCenterVertex->SetInput(mesh);
 #ifndef NDEBUG
   std::cout << "     "
             << "Test QE Input with no left face";
   auto * dummy = new QEType;
-  if (createCenterVertex->Evaluate(dummy))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(createCenterVertex->Evaluate(dummy), nullptr);
   delete dummy;
   std::cout << "OK" << std::endl;
 
   std::cout << "     "
             << "Test No QE Input";
-  if (createCenterVertex->Evaluate((QEType *)nullptr))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(createCenterVertex->Evaluate((QEType *)nullptr), nullptr);
   std::cout << "OK" << std::endl;
 #endif
 
   std::cout << "     ";
   std::cout << "Create a center vertex of a triangle (possible).";
-  if (!createCenterVertex->Evaluate(mesh->FindEdge(8, 2)))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!AssertTopologicalInvariants<MeshType>(mesh, 26, 59, 34, 1, 0))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence() != 3)
-  {
-    std::cout << "FAILED, wrong valence of " << mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence()
-              << " for vertex " << createCenterVertex->GetNewPointID() << '.' << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(createCenterVertex->Evaluate(mesh->FindEdge(8, 2)), nullptr);
+  EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 26, 59, 34, 1, 0));
+  EXPECT_EQ(mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence(), 3)
+    << "wrong valence for vertex " << createCenterVertex->GetNewPointID() << '.';
   std::cout << ".OK" << std::endl;
   // test with a bigger polygon
   //
@@ -159,25 +134,12 @@ itkQuadEdgeMeshEulerOperatorCreateCenterVertexTest(int, char *[])
   mesh->LightWeightDeleteEdge(mesh->FindEdge(11, 17));
   mesh->DeletePoint(12);
   mesh->AddFace(mesh->FindEdge(6, 7));
-  if (!createCenterVertex->Evaluate(mesh->FindEdge(6, 7)))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (!AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0))
-  {
-    std::cout << "FAILED." << std::endl;
-    return EXIT_FAILURE;
-  }
-  if (mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence() != 8)
-  {
-    std::cout << "FAILED, wrong valence of " << mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence()
-              << " for vertex " << createCenterVertex->GetNewPointID() << '.' << std::endl;
-    return EXIT_FAILURE;
-  }
+  ASSERT_NE(createCenterVertex->Evaluate(mesh->FindEdge(6, 7)), nullptr);
+  EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0));
+  EXPECT_EQ(mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence(), 8)
+    << "wrong valence for vertex " << createCenterVertex->GetNewPointID() << '.';
   std::cout << ".OK" << std::endl;
   std::cout << "Checking CreateCenterVertex."
             << "OK" << std::endl
             << std::endl;
-  return EXIT_SUCCESS;
 }
