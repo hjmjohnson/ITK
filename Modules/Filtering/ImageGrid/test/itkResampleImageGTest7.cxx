@@ -23,14 +23,13 @@
 #include "itkPipelineMonitorImageFilter.h"
 #include "itkResampleImageFilter.h"
 #include "itkStreamingImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include "itkMath.h"
 
 /* itkResampleImageFilter output compared to streamed output
  */
 
-int
-itkResampleImageTest7(int, char *[])
+TEST(ResampleImageFilter, ConvertedLegacyTest7)
 {
 
   constexpr unsigned int VDimension{ 2 };
@@ -78,7 +77,7 @@ itkResampleImageTest7(int, char *[])
   const itk::ResampleImageFilter<ImageType, ImageType>::Pointer resample =
     itk::ResampleImageFilter<ImageType, ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
   resample->SetInterpolator(interp);
 
   const auto upstream = itk::CastImageFilter<ImageType, ImageType>::New();
@@ -87,20 +86,20 @@ itkResampleImageTest7(int, char *[])
   const auto monitor = MonitorType::New();
   monitor->SetInput(upstream->GetOutput());
   resample->SetInput(monitor->GetOutput());
-  ITK_TEST_SET_GET_VALUE(monitor->GetOutput(), resample->GetInput());
+  EXPECT_EQ(monitor->GetOutput(), resample->GetInput());
 
   resample->SetSize(size);
-  ITK_TEST_SET_GET_VALUE(size, resample->GetSize());
+  EXPECT_EQ(size, resample->GetSize());
 
   resample->SetTransform(aff);
-  ITK_TEST_SET_GET_VALUE(aff, resample->GetTransform());
+  EXPECT_EQ(aff, resample->GetTransform());
 
   resample->SetInterpolator(interp);
-  ITK_TEST_SET_GET_VALUE(interp, resample->GetInterpolator());
+  EXPECT_EQ(interp, resample->GetInterpolator());
 
   index.Fill(0);
   resample->SetOutputStartIndex(index);
-  ITK_TEST_SET_GET_VALUE(index, resample->GetOutputStartIndex());
+  EXPECT_EQ(index, resample->GetOutputStartIndex());
 
   using StreamerType = itk::StreamingImageFilter<ImageType, ImageType>;
   auto streamer = StreamerType::New();
@@ -111,7 +110,7 @@ itkResampleImageTest7(int, char *[])
   // Run the resampling filter without streaming, i.e. 1 StreamDivisions
   unsigned char numStreamDiv = 1; // do not split, i.e. do not stream
   streamer->SetNumberOfStreamDivisions(numStreamDiv);
-  ITK_TRY_EXPECT_NO_EXCEPTION(streamer->UpdateLargestPossibleRegion());
+  EXPECT_NO_THROW(streamer->UpdateLargestPossibleRegion());
 
   const ImagePointerType outputNoSDI = streamer->GetOutput(); // save output for later comparison
   outputNoSDI->DisconnectPipeline();                          // disconnect to create new output
@@ -121,21 +120,17 @@ itkResampleImageTest7(int, char *[])
   image->Modified();
   numStreamDiv = 8;
   streamer->SetNumberOfStreamDivisions(numStreamDiv);
-  ITK_TRY_EXPECT_NO_EXCEPTION(streamer->UpdateLargestPossibleRegion());
+  EXPECT_NO_THROW(streamer->UpdateLargestPossibleRegion());
 
-  if (!monitor->VerifyInputFilterExecutedStreaming(static_cast<int>(numStreamDiv)))
-  {
-    std::cerr << "Streaming did not chunk the input as expected." << std::endl;
-    std::cerr << monitor;
-    return EXIT_FAILURE;
-  }
+  EXPECT_TRUE(monitor->VerifyInputFilterExecutedStreaming(static_cast<int>(numStreamDiv)))
+    << "Streaming did not chunk the input as expected." << monitor;
 
   // Verify that we only requested a smaller chunk when streaming
   const ImageRegionType finalRequestedRegion(image->GetRequestedRegion());
-  ITK_TEST_SET_GET_VALUE(0, finalRequestedRegion.GetIndex(0));
-  ITK_TEST_SET_GET_VALUE(48, finalRequestedRegion.GetIndex(1));
-  ITK_TEST_SET_GET_VALUE(60, finalRequestedRegion.GetSize(0));
-  ITK_TEST_SET_GET_VALUE(12, finalRequestedRegion.GetSize(1));
+  EXPECT_EQ(0, finalRequestedRegion.GetIndex(0));
+  EXPECT_EQ(48, finalRequestedRegion.GetIndex(1));
+  EXPECT_EQ(60u, finalRequestedRegion.GetSize(0));
+  EXPECT_EQ(12u, finalRequestedRegion.GetSize(1));
 
   const ImagePointerType outputSDI = streamer->GetOutput();
   outputSDI->DisconnectPipeline();
@@ -144,34 +139,18 @@ itkResampleImageTest7(int, char *[])
   itk::ImageRegionIterator<ImageType> itSDI(outputSDI, outputSDI->GetLargestPossibleRegion());
   for (itNoSDI.GoToBegin(), itSDI.GoToBegin(); !itNoSDI.IsAtEnd() && !itSDI.IsAtEnd(); ++itNoSDI, ++itSDI)
   {
-    if (itk::Math::NotAlmostEquals(itNoSDI.Value(), itSDI.Value()))
-    {
-      std::cout << "Pixels differ " << itNoSDI.Value() << ' ' << itSDI.Value() << std::endl;
-      std::cerr << "Test failed!" << std::endl;
-      std::cerr << "Error in pixel value at index [" << itNoSDI.ComputeIndex() << ']' << std::endl;
-      std::cerr << "Expected difference " << itNoSDI.Get() - itSDI.Get() << std::endl;
-      std::cerr << " differs from 0 ";
-      return EXIT_FAILURE;
-    }
+    EXPECT_FLOAT_EQ(itNoSDI.Value(), itSDI.Value())
+      << "Error in pixel value at index [" << itNoSDI.ComputeIndex() << ']';
   }
-  if (itNoSDI.IsAtEnd() != itSDI.IsAtEnd())
-  {
-    std::cerr << "Test failed!" << std::endl;
-    std::cerr << "Iterators don't agree on end of image" << std::endl;
-    std::cerr << "at index [" << itNoSDI.ComputeIndex() << ']' << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_EQ(itNoSDI.IsAtEnd(), itSDI.IsAtEnd())
+    << "Iterators don't agree on end of image at index [" << itNoSDI.ComputeIndex() << ']';
 
   // Test non default values
   constexpr auto origin = itk::MakeFilled<ImageType::PointType>(1234.0);
   resample->SetOutputOrigin(origin);
-  ITK_TEST_SET_GET_VALUE(origin, resample->GetOutputOrigin());
+  EXPECT_EQ(origin, resample->GetOutputOrigin());
 
   auto spacing = itk::MakeFilled<ImageType::SpacingType>(9876.0);
   resample->SetOutputSpacing(spacing);
-  ITK_TEST_SET_GET_VALUE(spacing, resample->GetOutputSpacing());
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_EQ(spacing, resample->GetOutputSpacing());
 }
