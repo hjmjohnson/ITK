@@ -19,8 +19,10 @@
 #define ITK_LEGACY_SILENT
 #include "itkOrientImageFilter.h"
 #include "itkImageToImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
+namespace
+{
 using ImageType = itk::Image<std::string, 3>;
 
 using OrientImageFilterType = itk::OrientImageFilter<ImageType, ImageType>;
@@ -99,7 +101,7 @@ CreateAxialImage()
   return img;
 }
 
-ImageType::Pointer
+[[maybe_unused]] ImageType::Pointer
 CreateCoronalImage()
 {
   constexpr ImageType::SizeType imageSize{ 4, 4, 4 };
@@ -163,9 +165,9 @@ CreateCoronalImage()
 
   return img;
 }
+} // namespace
 
-int
-itkOrientImageFilterTest2(int, char *[])
+TEST(OrientImageFilter, ConvertedLegacyTest2)
 {
   const ImageType::Pointer axialImage = CreateAxialImage();
   std::cerr << "Original" << std::endl;
@@ -177,7 +179,7 @@ itkOrientImageFilterTest2(int, char *[])
 
   itk::OrientImageFilter<ImageType, ImageType>::Pointer orienter = itk::OrientImageFilter<ImageType, ImageType>::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(orienter, OrientImageFilter, ImageToImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(orienter, OrientImageFilter, ImageToImageFilter);
 
   orienter->UseImageDirectionOn();
   orienter->SetInput(axialImage);
@@ -512,6 +514,4 @@ itkOrientImageFilterTest2(int, char *[])
     itk::SpatialOrientationEnums::ValidCoordinateOrientations::ITK_COORDINATE_ORIENTATION_ASL);
   orienter->Update();
   std::cout << orienter->GetOutput()->GetDirection() << std::endl;
-
-  return EXIT_SUCCESS;
 }
