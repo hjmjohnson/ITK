@@ -17,18 +17,17 @@
  *=========================================================================*/
 
 #include "itkSphereMeshSource.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 #include <iostream>
 
-int
-itkSphereMeshSourceTest(int, char *[])
+TEST(SphereMeshSource, ConvertedLegacyTest)
 {
 
   using fPointType = itk::Point<float, 3>;
   using fSphereMeshSourceType = itk::SphereMeshSource<itk::Mesh<float>>;
   auto mySphereMeshSource = fSphereMeshSourceType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(mySphereMeshSource, SphereMeshSource, MeshSource);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(mySphereMeshSource, SphereMeshSource, MeshSource);
 
 
   constexpr fPointType            center{};
@@ -62,5 +61,4 @@ itkSphereMeshSourceTest(int, char *[])
     std::cout << "Point1: " << pt[0] << ", " << pt[1] << ", " << pt[2] << std::endl;
   }
   std::cout << "Test End " << std::endl;
-  return EXIT_SUCCESS;
 }
