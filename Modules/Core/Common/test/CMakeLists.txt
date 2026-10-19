@@ -14,7 +14,6 @@ set(
   itkLineIteratorTest.cxx
   itkLoggerTest.cxx
   itkMultipleLogOutputTest.cxx
-  itkNeighborhoodOperatorTest.cxx
   itkNumberToStringTest.cxx
   itkNumericTraitsTest.cxx
   itkObjectFactoryTest.cxx
@@ -854,12 +853,6 @@ itk_add_test(
     itkNeighborhoodIteratorTest
 )
 itk_add_test(
-  NAME itkNeighborhoodOperatorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkNeighborhoodOperatorTest
-)
-itk_add_test(
   NAME itkNumericTraitsTest
   COMMAND
     ITKCommon1TestDriver
@@ -1451,6 +1444,7 @@ set(
   itkNeighborhoodAlgorithmGTest.cxx
   itkNeighborhoodAllocatorGTest.cxx
   itkNeighborhoodIteratorsGTest.cxx
+  itkNeighborhoodOperatorGTest.cxx
   itkNumberToStringGTest.cxx
   itkNumericsGTest.cxx
   itkObjectFactoryBaseGTest.cxx
