@@ -21,12 +21,10 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkMath.h"
 #include "itkSubtractImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
-int
-itkComplexToModulusFilterAndAdaptorTest(int, char *[])
+TEST(ComplexToModulusFilterAndAdaptor, ConvertedLegacyTest)
 {
-
   // Define the dimension of the images
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -74,7 +72,7 @@ itkComplexToModulusFilterAndAdaptorTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, ComplexToModulusImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, ComplexToModulusImageFilter, UnaryGeneratorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -101,15 +99,7 @@ itkComplexToModulusFilterAndAdaptorTest(int, char *[])
 
     const auto norm = static_cast<OutputImageType::PixelType>(normd);
 
-    if (!itk::Math::FloatAlmostEqual(norm, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error in itkComplexToModulusImageFilterTest " << std::endl;
-      std::cerr << " norm( " << input << ") = " << norm << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_NEAR(norm, output, epsilon) << " norm( " << input << ")";
     ++ot;
     ++it;
   }
@@ -122,7 +112,7 @@ itkComplexToModulusFilterAndAdaptorTest(int, char *[])
 
   auto imaginaryAdaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(imaginaryAdaptor, ComplexToModulusImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(imaginaryAdaptor, ComplexToModulusImageAdaptor, ImageAdaptor);
 
   imaginaryAdaptor->SetImage(inputImage);
 
@@ -146,18 +136,7 @@ itkComplexToModulusFilterAndAdaptorTest(int, char *[])
   while (!dt.IsAtEnd())
   {
     const OutputImageType::PixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error in itkComplexToModulusImageFilterTest " << std::endl;
-      std::cerr << "Comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Comparing results with Adaptors";
     ++dt;
   }
-
-  return EXIT_SUCCESS;
 }
