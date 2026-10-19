@@ -28,11 +28,10 @@
 #include "itkThinPlateR2LogRSplineKernelTransform.h"
 #include "itkVolumeSplineKernelTransform.h"
 #include "itkMath.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkSplineKernelTransformTest(int, char *[])
+TEST(SplineKernelTransform, ConvertedLegacyTest)
 {
 
   constexpr double epsilon{ 1e-12 };
@@ -97,7 +96,7 @@ itkSplineKernelTransformTest(int, char *[])
 
   ParametersValueType alpha = 12.0 * (1 - 0.25) - 1.0;
   ebs2D->SetAlpha(alpha);
-  ITK_TEST_SET_GET_VALUE(alpha, ebs2D->GetAlpha());
+  EXPECT_EQ(alpha, ebs2D->GetAlpha());
 
 
   ebs2D->ComputeWMatrix();
@@ -105,14 +104,10 @@ itkSplineKernelTransformTest(int, char *[])
   { // Testing the number of parameters
     const EBSTransform2DType::ParametersType parameters1 = ebs2D->GetParameters();
     const unsigned int                       numberOfParameters = parameters1.Size();
-    if (numberOfParameters != 4 * 2)
-    {
-      std::cerr << "Number of parameters was not updated after" << std::endl;
-      std::cerr << "invoking SetSourceLandmarks and SetTargetLandmarks" << std::endl;
-      std::cerr << "Number of parameters is = " << numberOfParameters << std::endl;
-      std::cerr << "While we were expecting = " << 4 * 2 << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(numberOfParameters, 4u * 2) << "Number of parameters was not updated after" << std::endl
+                                          << "invoking SetSourceLandmarks and SetTargetLandmarks" << std::endl
+                                          << "Number of parameters is = " << numberOfParameters << std::endl
+                                          << "While we were expecting = " << 4 * 2;
   }
 
   source2Dit = sourceLandmarks2D->GetPoints()->Begin();
@@ -126,10 +121,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint2D = ebs2D->TransformPoint(sourcePoint2D);
     std::cout << sourcePoint2D << " : " << targetPoint2D;
     std::cout << " warps to: " << mappedPoint2D << std::endl;
-    if (mappedPoint2D.EuclideanDistanceTo(targetPoint2D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint2D.EuclideanDistanceTo(targetPoint2D), epsilon);
     source2Dit++;
     target2Dit++;
   }
@@ -142,7 +134,7 @@ itkSplineKernelTransformTest(int, char *[])
 
   alpha = 12.0 * (1 - 0.25) - 1.0;
   ebrs2D->SetAlpha(alpha);
-  ITK_TEST_SET_GET_VALUE(alpha, ebrs2D->GetAlpha());
+  EXPECT_EQ(alpha, ebrs2D->GetAlpha());
 
 
   ebrs2D->ComputeWMatrix();
@@ -158,10 +150,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint2D = ebrs2D->TransformPoint(sourcePoint2D);
     std::cout << sourcePoint2D << " : " << targetPoint2D;
     std::cout << " warps to: " << mappedPoint2D << std::endl;
-    if (mappedPoint2D.EuclideanDistanceTo(targetPoint2D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint2D.EuclideanDistanceTo(targetPoint2D), epsilon);
     source2Dit++;
     target2Dit++;
   }
@@ -184,18 +173,12 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint2D = tps2D->TransformPoint(sourcePoint2D);
     std::cout << sourcePoint2D << " : " << targetPoint2D;
     std::cout << " warps to: " << mappedPoint2D << std::endl;
-    if (mappedPoint2D.EuclideanDistanceTo(targetPoint2D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint2D.EuclideanDistanceTo(targetPoint2D), epsilon);
     source2Dit++;
     target2Dit++;
   }
-  if (tps2D->IsLinear()) // NOTE TPS is never linear!
-  {
-    std::cout << "ERROR:  2D TPS reports as being a linear transform." << std::endl;
-    return EXIT_FAILURE;
-  }
+  EXPECT_FALSE(tps2D->IsLinear()) // NOTE TPS is never linear!
+    << "ERROR:  2D TPS reports as being a linear transform.";
 
 
   // NOTE: The following should set the default values explicitly
@@ -203,11 +186,7 @@ itkSplineKernelTransformTest(int, char *[])
     constexpr double TestValue{ 0.012345 };
     tps2D->SetStiffness(TestValue); // This value should not change the result at all.
 
-    if (itk::Math::NotExactlyEquals(tps2D->GetStiffness(), TestValue))
-    {
-      std::cout << "ERROR:  Explicitly set stiffness value not retained." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_EQ(tps2D->GetStiffness(), TestValue) << "ERROR:  Explicitly set stiffness value not retained.";
   }
   { // Just for code coverage
     const TPSTransform2DType::VectorSetType::ConstPointer tempDisplacements = tps2D->GetDisplacements();
@@ -216,74 +195,26 @@ itkSplineKernelTransformTest(int, char *[])
       TPSTransform2DType::InputVectorType testVector;
       testVector[0] = 0.0;
       testVector[1] = 1.0;
-      bool exceptionCaught = false;
-      try
-      {
-        tps2D->TransformVector(testVector);
-      }
-      catch (...)
-      {
-        exceptionCaught = true;
-      }
-      if (exceptionCaught != true)
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_ANY_THROW(tps2D->TransformVector(testVector));
     }
     {
       TPSTransform2DType::InputVnlVectorType testVector;
       testVector[0] = 0.0;
       testVector[1] = 1.0;
-      bool exceptionCaught = false;
-      try
-      {
-        tps2D->TransformVector(testVector);
-      }
-      catch (...)
-      {
-        exceptionCaught = true;
-      }
-      if (exceptionCaught != true)
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_ANY_THROW(tps2D->TransformVector(testVector));
     }
     {
       TPSTransform2DType::InputCovariantVectorType testVector;
       testVector[0] = 0.0;
       testVector[1] = 1.0;
-      bool exceptionCaught = false;
-      try
-      {
-        tps2D->TransformCovariantVector(testVector);
-      }
-      catch (...)
-      {
-        exceptionCaught = true;
-      }
-      if (exceptionCaught != true)
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_ANY_THROW(tps2D->TransformCovariantVector(testVector));
     }
     {
       TPSTransform2DType::JacobianPositionType testJacobian;
       TPSTransform2DType::InputPointType       testVector;
       testVector[0] = 0.0;
       testVector[1] = 1.0;
-      bool exceptionCaught = false;
-      try
-      {
-        tps2D->ComputeJacobianWithRespectToPosition(testVector, testJacobian);
-      }
-      catch (...)
-      {
-        exceptionCaught = true;
-      }
-      if (exceptionCaught != true)
-      {
-        return EXIT_FAILURE;
-      }
+      EXPECT_ANY_THROW(tps2D->ComputeJacobianWithRespectToPosition(testVector, testJacobian));
     }
   }
 
@@ -306,10 +237,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint2D = tpr2lrs2D->TransformPoint(sourcePoint2D);
     std::cout << sourcePoint2D << " : " << targetPoint2D;
     std::cout << " warps to: " << mappedPoint2D << std::endl;
-    if (mappedPoint2D.EuclideanDistanceTo(targetPoint2D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint2D.EuclideanDistanceTo(targetPoint2D), epsilon);
     source2Dit++;
     target2Dit++;
   }
@@ -333,10 +261,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint2D = vs2D->TransformPoint(sourcePoint2D);
     std::cout << sourcePoint2D << " : " << targetPoint2D;
     std::cout << " warps to: " << mappedPoint2D << std::endl;
-    if (mappedPoint2D.EuclideanDistanceTo(targetPoint2D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint2D.EuclideanDistanceTo(targetPoint2D), epsilon);
     source2Dit++;
     target2Dit++;
   }
@@ -402,7 +327,7 @@ itkSplineKernelTransformTest(int, char *[])
 
   alpha = 12.0 * (1 - 0.25) - 1.0;
   ebs3D->SetAlpha(alpha);
-  ITK_TEST_SET_GET_VALUE(alpha, ebs3D->GetAlpha());
+  EXPECT_EQ(alpha, ebs3D->GetAlpha());
 
 
   ebs3D->ComputeWMatrix();
@@ -418,10 +343,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint3D = ebs3D->TransformPoint(sourcePoint3D);
     std::cout << sourcePoint3D << " : " << targetPoint3D;
     std::cout << " warps to: " << mappedPoint3D << std::endl;
-    if (mappedPoint3D.EuclideanDistanceTo(targetPoint3D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint3D.EuclideanDistanceTo(targetPoint3D), epsilon);
     ebs3Ds++;
     ebs3Dt++;
   }
@@ -442,10 +364,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint3D = tps3D->TransformPoint(sourcePoint3D);
     std::cout << sourcePoint3D << " : " << targetPoint3D;
     std::cout << " warps to: " << mappedPoint3D << std::endl;
-    if (mappedPoint3D.EuclideanDistanceTo(targetPoint3D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint3D.EuclideanDistanceTo(targetPoint3D), epsilon);
     tps3Ds++;
     tps3Dt++;
   }
@@ -459,11 +378,8 @@ itkSplineKernelTransformTest(int, char *[])
   constexpr double                   tolerance{ 1e-7 };
   for (unsigned int pr = 0; pr < numberOfParameters; ++pr)
   {
-    if (itk::Math::Absolute(parameters1[pr] - parameters2[pr]) > tolerance)
-    {
-      std::cout << "Parameters were not correctly recovered " << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(parameters1[pr] - parameters2[pr]), tolerance)
+      << "Parameters were not correctly recovered ";
   }
   std::cout << "Get/Set Parameters Passed" << std::endl << std::endl;
 
@@ -531,7 +447,7 @@ itkSplineKernelTransformTest(int, char *[])
 
   alpha = 12.0 * (1 - 0.25) - 1.0;
   ebs4D->SetAlpha(alpha);
-  ITK_TEST_SET_GET_VALUE(alpha, ebs4D->GetAlpha());
+  EXPECT_EQ(alpha, ebs4D->GetAlpha());
 
 
   ebs4D->ComputeWMatrix();
@@ -547,10 +463,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint4D = ebs4D->TransformPoint(sourcePoint4D);
     std::cout << sourcePoint4D << " : " << targetPoint4D;
     std::cout << " warps to: " << mappedPoint4D << std::endl;
-    if (mappedPoint4D.EuclideanDistanceTo(targetPoint4D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint4D.EuclideanDistanceTo(targetPoint4D), epsilon);
     ebs4Ds++;
     ebs4Dt++;
   }
@@ -569,10 +482,7 @@ itkSplineKernelTransformTest(int, char *[])
     mappedPoint4D = tps4D->TransformPoint(sourcePoint4D);
     std::cout << sourcePoint4D << " : " << targetPoint4D;
     std::cout << " warps to: " << mappedPoint4D << std::endl;
-    if (mappedPoint4D.EuclideanDistanceTo(targetPoint4D) > epsilon)
-    {
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(mappedPoint4D.EuclideanDistanceTo(targetPoint4D), epsilon);
     tps4Ds++;
     tps4Dt++;
   }
@@ -581,6 +491,4 @@ itkSplineKernelTransformTest(int, char *[])
   std::cout << ebs2D << std::endl;
 
   std::cout << "TEST DONE" << std::endl;
-
-  return EXIT_SUCCESS;
 }
