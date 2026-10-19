@@ -3,7 +3,6 @@ set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
   itkEuclideanDistancePointMetricTest.cxx
-  itkHistogramImageToImageMetricTest.cxx
   itkImageRegistrationMethodTest.cxx
   itkImageRegistrationMethodTest_1.cxx
   itkImageRegistrationMethodTest_10.cxx
@@ -132,12 +131,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkMeanSquaresPointSetToImageMetricTest
-)
-itk_add_test(
-  NAME itkHistogramImageToImageMetricTest
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkHistogramImageToImageMetricTest
 )
 itk_add_test(
   NAME itkMutualInformationHistogramImageToImageMetricTest
@@ -447,6 +440,7 @@ set(
   itkGaussianExponentialDiffeomorphicTransformParametersAdaptorGTest.cxx
   itkGaussianSmoothingOnUpdateDisplacementFieldTransformParametersAdaptorGTest.cxx
   itkGradientDifferenceImageToImageMetricGTest.cxx
+  itkHistogramImageToImageMetricGTest.cxx
   itkTransformInitializersGTest.cxx
 )
 creategoogletestdriver(ITKRegistration "${ITKRegistrationCommon-Test_LIBRARIES}" "${ITKRegistrationGTests}")
