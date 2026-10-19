@@ -3,7 +3,6 @@ set(
   ITKRegistrationCommonTests
   itkBlockMatchingImageFilterTest.cxx
   itkEuclideanDistancePointMetricTest.cxx
-  itkImageRegistrationMethodTest_12.cxx
   itkImageRegistrationMethodTest_13.cxx
   itkImageRegistrationMethodTest_14.cxx
   itkImageRegistrationMethodTest_15.cxx
@@ -57,12 +56,6 @@ itk_add_test(
   COMMAND
     ITKRegistrationCommonTestDriver
     itkMultiResolutionImageRegistrationMethodTest_2
-)
-itk_add_test(
-  NAME itkImageRegistrationMethodTest_12
-  COMMAND
-    ITKRegistrationCommonTestDriver
-    itkImageRegistrationMethodTest_12
 )
 itk_add_test(
   NAME itkImageRegistrationMethodTest_13
@@ -403,6 +396,7 @@ set(
   itkImageRegistrationMethodGTest_1.cxx
   itkImageRegistrationMethodGTest_10.cxx
   itkImageRegistrationMethodGTest_11.cxx
+  itkImageRegistrationMethodGTest_12.cxx
   itkKullbackLeiblerCompareHistogramImageToImageMetricGTest.cxx
   itkMutualInformationMetricGTest.cxx
   itkTransformInitializersGTest.cxx
