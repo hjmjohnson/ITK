@@ -23,6 +23,7 @@
 
 #include "itkTextOutput.h"
 #include "itkCommandIterationUpdate.h"
+#include "itkGTest.h"
 
 namespace
 {
@@ -80,8 +81,7 @@ F(itk::Vector<double, 3> & v);
  * setting the image origin to center of mass of the image.
  *
  */
-int
-itkImageRegistrationMethodTest_17(int, char *[])
+TEST(ImageRegistrationMethod, ConvertedLegacyTest17)
 {
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
@@ -272,9 +272,7 @@ itkImageRegistrationMethodTest_17(int, char *[])
     }
     catch (const itk::ExceptionObject & e)
     {
-      std::cout << "Registration failed" << std::endl;
-      std::cout << "Reason " << e.GetDescription() << std::endl;
-      return EXIT_FAILURE;
+      ADD_FAILURE() << "Registration failed" << std::endl << "Reason " << e.GetDescription();
     }
   }
 
@@ -312,15 +310,7 @@ itkImageRegistrationMethodTest_17(int, char *[])
     }
   }
 
-  if (!pass)
-  {
-    std::cout << "Test failed." << std::endl;
-    return EXIT_FAILURE;
-  }
-
-
-  std::cout << "Test passed." << std::endl;
-  return EXIT_SUCCESS;
+  EXPECT_TRUE(pass) << "Test failed.";
 }
 namespace
 {
