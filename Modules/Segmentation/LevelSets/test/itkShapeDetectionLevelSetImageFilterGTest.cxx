@@ -24,14 +24,13 @@
 #include "itkFastMarchingImageFilter.h"
 #include "itkBinaryThresholdImageFilter.h"
 #include "itkSimilarityIndexImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 /* Uncomment to write out image files */
 /*
  */
 
-int
-itkShapeDetectionLevelSetImageFilterTest(int, char *[])
+TEST(ShapeDetectionLevelSetImageFilter, ConvertedLegacyTest)
 {
 
   constexpr unsigned int ImageDimension{ 2 };
@@ -133,7 +132,7 @@ itkShapeDetectionLevelSetImageFilterTest(int, char *[])
 
     auto shapeDetection = ShapeDetectionFilterType::New();
 
-    ITK_EXERCISE_BASIC_OBJECT_METHODS(
+    ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
       shapeDetection, ShapeDetectionLevelSetImageFilter, SegmentationLevelSetImageFilter);
 
 
@@ -217,16 +216,7 @@ itkShapeDetectionLevelSetImageFilterTest(int, char *[])
       writer->Update();
   */
     // Check of overlap is above threshold
-    if (overlap->GetSimilarityIndex() > 0.90)
-    {
-      std::cout << "Overlap exceed threshold." << std::endl;
-    }
-    else
-    {
-      std::cout << "Overlap below threshold." << std::endl;
-      std::cout << "Test failed." << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_GT(overlap->GetSimilarityIndex(), 0.90);
 
     // Test case when PropagationScaling is zero
     shapeDetection->SetPropagationScaling(0.0);
@@ -234,16 +224,15 @@ itkShapeDetectionLevelSetImageFilterTest(int, char *[])
     shapeDetection->Update();
 
     std::cout << "Test Passed. " << std::endl;
-    return EXIT_SUCCESS;
   }
   catch (const itk::ExceptionObject & err)
   {
     std::cout << err << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
   catch (...)
   {
     std::cout << "Caught unknown exception" << std::endl;
-    return EXIT_FAILURE;
+    FAIL();
   }
 }
