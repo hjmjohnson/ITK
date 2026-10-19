@@ -10,7 +10,6 @@ set(
   itkBSplineTransformTest2.cxx
   itkBSplineTransformTest3.cxx
   itkEuler3DTransformTest.cxx
-  itkSplineKernelTransformTest.cxx
   itkTestTransformGetInverse.cxx
   itkThinPlateSplineKernelTransformTest.cxx
   itkTransformCloneTest.cxx
@@ -319,12 +318,6 @@ itk_add_test(
     itkVersorTransformTest
 )
 itk_add_test(
-  NAME itkSplineKernelTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkSplineKernelTransformTest
-)
-itk_add_test(
   NAME itkThinPlateSplineKernelTransformTest
   COMMAND
     ITKTransformTestDriver
@@ -397,6 +390,7 @@ set(
   itkSimilarity2DTransformGTest.cxx
   itkSimilarity3DTransformGTest.cxx
   itkSimilarityTransformGTest.cxx
+  itkSplineKernelTransformGTest.cxx
   itkTransformGTest.cxx
   itkTranslationTransformGTest.cxx
 )
