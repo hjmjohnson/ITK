@@ -18,11 +18,10 @@
 
 #include "itkAnchorOpenCloseImageFilter.h"
 #include "itkFlatStructuringElement.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkAnchorOpenCloseImageFilterTest(int, char ** const)
+TEST(AnchorOpenCloseImageFilter, ConvertedLegacyTest)
 {
   constexpr unsigned int Dimension{ 2 };
 
@@ -36,9 +35,5 @@ itkAnchorOpenCloseImageFilterTest(int, char ** const)
   using FilterType = itk::AnchorOpenCloseImageFilter<ImageType, KernelType, CompateType1, CompateType2>;
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, AnchorOpenCloseImageFilter, KernelImageFilter);
-
-
-  std::cout << "Test finished." << std::endl;
-  return EXIT_SUCCESS;
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, AnchorOpenCloseImageFilter, KernelImageFilter);
 }
