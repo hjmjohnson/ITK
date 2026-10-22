@@ -89,8 +89,18 @@ public:
   static std::list<LightObject::Pointer>
   CreateAllInstance(const char * itkclassname);
 
-  /** Re-check the ITK_AUTOLOAD_PATH for new factory libraries.
-   * This calls UnRegisterAll before re-loading. */
+  /** Set/Get the path list searched for dynamically loadable factories.
+   * The value is initialized from the ITK_AUTOLOAD_PATH environment variable
+   * when the global state is created. Set it before the factories are first
+   * used (or call ReHash() afterwards) for the new value to take effect.
+   * Paths are separated by a colon (semi-colon on win32). */
+  static void
+  SetAutoloadPath(const std::string & path);
+  static std::string
+  GetAutoloadPath();
+
+  /** Re-check the autoload path (see SetAutoloadPath()) for new factory
+   * libraries. This calls UnRegisterAll before re-loading. */
   static void
   ReHash();
 
