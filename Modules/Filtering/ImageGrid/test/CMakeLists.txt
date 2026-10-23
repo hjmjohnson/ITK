@@ -1,11 +1,9 @@
 itk_module_test()
 set(
   ITKImageGridTests
-  itkBasicArchitectureTest.cxx
   itkBinShrinkImageFilterTest1.cxx
   itkBinShrinkImageFilterTest2.cxx
   itkBSplineControlPointImageFilterTest.cxx
-  itkBSplineControlPointImageFunctionTest.cxx
   itkBSplineDownsampleImageFilterTest.cxx
   itkBSplineResampleImageFilterTest.cxx
   itkBSplineScatteredDataPointSetToImageFilterTest.cxx
@@ -15,50 +13,24 @@ set(
   itkBSplineScatteredDataPointSetToImageFilterTest5.cxx
   itkBSplineUpsampleImageFilterTest.cxx
   itkChangeInformationImageFilterTest.cxx
-  itkConstantPadImageTest.cxx
   itkCoxDeBoorBSplineKernelFunctionTest.cxx
   itkCoxDeBoorBSplineKernelFunctionTest2.cxx
-  itkCropImageFilter3DTest.cxx
-  itkCropImageFilterTest.cxx
   itkCyclicReferences.cxx
   itkCyclicShiftImageFilterTest.cxx
-  itkExpandImageFilterTest.cxx
-  itkExpandImageFilterTest2.cxx
   itkFlipImageFilterTest.cxx
-  itkInterpolateImageFilterTest.cxx
-  itkInterpolateImagePointsFilterTest.cxx
   itkMirrorPadImageFilterTest.cxx
-  itkMirrorPadImageTest.cxx
   itkOrientImageFilterTest.cxx
-  itkPadImageFilterTest.cxx
   itkPasteImageFilterTest.cxx
-  itkPermuteAxesImageFilterTest.cxx
   itkPushPopTileImageFilterTest.cxx
-  itkRegionOfInterestImageFilterTest.cxx
-  itkResampleImageTest.cxx
   itkResampleImageTest2.cxx
   itkResampleImageTest2Streaming.cxx
   itkResampleImageTest3.cxx
-  itkResampleImageTest4.cxx
   itkResampleImageTest5.cxx
   itkResampleImageTest6.cxx
-  itkResampleImageTest7.cxx
-  itkResampleImageTest8.cxx
-  itkResamplePhasedArray3DSpecialCoordinatesImageTest.cxx
-  itkShrinkImageStreamingTest.cxx
-  itkShrinkImageTest.cxx
   itkSliceBySliceImageFilterTest.cxx
   itkTileImageFilterTest.cxx
   itkWarpImageFilterTest.cxx
-  itkWarpImageFilterTest2.cxx
-  itkWarpVectorImageFilterTest.cxx
-  itkWrapPadImageTest.cxx
-  itkZeroFluxNeumannPadImageFilterTest.cxx
 )
-
-if(NOT ITK_FUTURE_LEGACY_REMOVE)
-  list(APPEND ITKImageGridTests itkOrientImageFilterTest2.cxx)
-endif()
 
 createtestdriver(ITKImageGrid "${ITKImageGrid-Test_LIBRARIES}" "${ITKImageGridTests}")
 
@@ -69,21 +41,7 @@ itk_add_test(
     itkOrientImageFilterTest
     0
 )
-if(NOT ITK_FUTURE_LEGACY_REMOVE)
-  itk_add_test(
-    NAME itkOrientImageFilterTest2
-    COMMAND
-      ITKImageGridTestDriver
-      itkOrientImageFilterTest2
-  )
-endif()
 
-itk_add_test(
-  NAME itkBasicArchitectureTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkBasicArchitectureTest
-)
 itk_add_test(
   NAME itkBinShrinkImageFilterTest1
   COMMAND
@@ -185,22 +143,10 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/N4ControlPoints_3D_outputRefined.nii.gz
 )
 itk_add_test(
-  NAME itkBSplineControlPointImageFunctionTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkBSplineControlPointImageFunctionTest
-)
-itk_add_test(
   NAME itkChangeInformationImageFilterTest
   COMMAND
     ITKImageGridTestDriver
     itkChangeInformationImageFilterTest
-)
-itk_add_test(
-  NAME itkConstantPadImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkConstantPadImageTest
 )
 itk_add_test(
   NAME itkCoxDeBoorBSplineKernelFunctionTest01
@@ -284,24 +230,6 @@ itk_add_test(
     40
 )
 itk_add_test(
-  NAME itkInterpolateImagePointsFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkInterpolateImagePointsFilterTest
-)
-itk_add_test(
-  NAME itkCropImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkCropImageFilterTest
-)
-itk_add_test(
-  NAME itkCropImageFilter3DTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkCropImageFilter3DTest
-)
-itk_add_test(
   NAME itkFlipImageFilterTest1
   COMMAND
     ITKImageGridTestDriver
@@ -314,24 +242,6 @@ itk_add_test(
     ITKImageGridTestDriver
     itkFlipImageFilterTest
     1
-)
-itk_add_test(
-  NAME itkExpandImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkExpandImageFilterTest
-)
-itk_add_test(
-  NAME itkExpandImageFilterTest2
-  COMMAND
-    ITKImageGridTestDriver
-    itkExpandImageFilterTest2
-)
-itk_add_test(
-  NAME itkRegionOfInterestImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkRegionOfInterestImageFilterTest
 )
 itk_add_test(
   NAME itkBSplineUpsampleImageFilterTest
@@ -362,12 +272,6 @@ set_tests_properties(
       ${ITK_TEST_OUTPUT_DIR}/itkBSplineResampleImageFilterTest.txt
 )
 
-itk_add_test(
-  NAME itkWarpImageFilterTest2
-  COMMAND
-    ITKImageGridTestDriver
-    itkWarpImageFilterTest2
-)
 itk_add_test(
   NAME itkBSplineDownsampleImageFilterTest
   COMMAND
@@ -411,12 +315,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/TileImageFilterTest%d.png
 )
 itk_add_test(
-  NAME itkInterpolateImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkInterpolateImageFilterTest
-)
-itk_add_test(
   NAME itkPasteImageFilterTest
   COMMAND
     ITKImageGridTestDriver
@@ -431,34 +329,10 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/PasteImageFilterTest.png
 )
 itk_add_test(
-  NAME itkPermuteAxesImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkPermuteAxesImageFilterTest
-)
-itk_add_test(
   NAME itkWarpImageFilterTest
   COMMAND
     ITKImageGridTestDriver
     itkWarpImageFilterTest
-)
-itk_add_test(
-  NAME itkWarpVectorImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkWarpVectorImageFilterTest
-)
-itk_add_test(
-  NAME itkWrapPadImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkWrapPadImageTest
-)
-itk_add_test(
-  NAME itkMirrorPadImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkMirrorPadImageTest
 )
 itk_add_test(
   NAME itkMirrorPadImageFilterTest
@@ -510,12 +384,6 @@ itk_add_test(
     7
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/SwirledMirroredUChar_0.75-11-7.nrrd
-)
-itk_add_test(
-  NAME itkResampleImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkResampleImageTest
 )
 itk_add_test(
   NAME itkResampleImageTest2UseRefImageOff
@@ -621,12 +489,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ResampleImageTest3.png
 )
 itk_add_test(
-  NAME itkResampleImageTest4
-  COMMAND
-    ITKImageGridTestDriver
-    itkResampleImageTest4
-)
-itk_add_test(
   NAME itkResampleImageTest5
   COMMAND
     ITKImageGridTestDriver
@@ -653,24 +515,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ResampleImageTest6.png
 )
 itk_add_test(
-  NAME itkResampleImageTest7
-  COMMAND
-    ITKImageGridTestDriver
-    itkResampleImageTest7
-)
-itk_add_test(
-  NAME itkResampleImageTest8
-  COMMAND
-    ITKImageGridTestDriver
-    itkResampleImageTest8
-)
-itk_add_test(
-  NAME itkResamplePhasedArray3DSpecialCoordinatesImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkResamplePhasedArray3DSpecialCoordinatesImageTest
-)
-itk_add_test(
   NAME itkPushPopTileImageFilterTest
   COMMAND
     ITKImageGridTestDriver
@@ -685,24 +529,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/PushPopTileImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/PushPopTileImageFilterTest.png
-)
-itk_add_test(
-  NAME itkShrinkImageStreamingTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkShrinkImageStreamingTest
-)
-itk_add_test(
-  NAME itkShrinkImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkShrinkImageTest
-)
-itk_add_test(
-  NAME itkZeroFluxNeumannPadImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkZeroFluxNeumannPadImageFilterTest
 )
 itk_add_test(
   NAME itkSliceBySliceImageFilterDimension0Test
@@ -737,21 +563,43 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkSliceBySliceImageFilterDimension2Test.mha
 )
-itk_add_test(
-  NAME itkPadImageFilterTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkPadImageFilterTest
-)
 
 set(
   ITKImageGridGTests
+  itkBasicArchitectureGTest.cxx
+  itkBSplineControlPointImageFunctionGTest.cxx
   itkChangeInformationImageFilterGTest.cxx
+  itkConstantPadImageGTest.cxx
+  itkCropImageFilter3DGTest.cxx
+  itkCropImageFilterGTest.cxx
+  itkExpandImageFilterGTest.cxx
+  itkExpandImageFilterGTest2.cxx
+  itkInterpolateImageFilterGTest.cxx
+  itkInterpolateImagePointsFilterGTest.cxx
+  itkMirrorPadImageGTest.cxx
+  itkPadImageFilterGTest.cxx
+  itkPermuteAxesImageFilterGTest.cxx
+  itkRegionOfInterestImageFilterGTest.cxx
+  itkResampleImageGTest.cxx
+  itkResampleImageGTest4.cxx
+  itkResampleImageGTest7.cxx
+  itkResampleImageGTest8.cxx
+  itkResamplePhasedArray3DSpecialCoordinatesImageGTest.cxx
+  itkShrinkImageGTest.cxx
+  itkShrinkImageStreamingGTest.cxx
   itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
   itkSliceImageFilterTest.cxx
   itkTileImageFilterGTest.cxx
+  itkWarpImageFilterGTest2.cxx
+  itkWarpVectorImageFilterGTest.cxx
+  itkWrapPadImageGTest.cxx
+  itkZeroFluxNeumannPadImageFilterGTest.cxx
 )
+
+if(NOT ITK_FUTURE_LEGACY_REMOVE)
+  list(APPEND ITKImageGridGTests itkOrientImageFilterGTest2.cxx)
+endif()
 
 creategoogletestdriver(ITKImageGrid "${ITKImageGrid-Test_LIBRARIES}" "${ITKImageGridGTests}")

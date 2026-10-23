@@ -9,7 +9,6 @@ set(
   itkFrequencyShrinkTest.cxx
   itkFrequencyExpandAndShrinkTest.cxx
   # Frequency resize Helpers
-  itkInd2SubTest.cxx
   ###########################
   # Spatial domain resize without interpolation
   itkExpandWithZerosImageFilterTest.cxx
@@ -19,10 +18,6 @@ set(
   itkZeroDCImageFilterTest.cxx
   # Output data for each wavelet to visualize with python.
   itkIsotropicWaveletFrequencyFunctionTest.cxx
-  itkHeldIsotropicWaveletTest.cxx
-  itkSimoncelliIsotropicWaveletTest.cxx
-  itkVowIsotropicWaveletTest.cxx
-  itkShannonIsotropicWaveletTest.cxx
   #Isotropic Wavelet
   itkWaveletFrequencyFilterBankGeneratorTest.cxx
   itkWaveletFrequencyFilterBankGeneratorDownsampleTest.cxx
@@ -30,7 +25,6 @@ set(
   itkWaveletFrequencyInverseTest.cxx
   itkWaveletFrequencyForwardUndecimatedTest.cxx
   itkWaveletFrequencyInverseUndecimatedTest.cxx
-  itkWaveletUtilitiesTest.cxx
   # Phase Analysis
   itkPhaseAnalysisSoftThresholdImageFilterTest.cxx
   # Riesz / Monogenic
@@ -38,7 +32,6 @@ set(
   itkRieszFrequencyFilterBankGeneratorTest.cxx
   itkMonogenicSignalFrequencyImageFilterTest.cxx
   # StructureTensor
-  itkStructureTensorImageFilterTest.cxx
   # TODO Wavelet + Riesz + PhaseAnalysis. This is not an unit test. Convert to example or application.
   itkRieszWaveletPhaseAnalysisTest.cxx
   itkStructureTensorWithGeneralizedRieszTest.cxx
@@ -230,12 +223,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkPhaseAnalysisSoftThresholdImageFilterTest.tiff
 )
 # StructureTensor
-itk_add_test(
-  NAME itkStructureTensorImageFilterTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkStructureTensorImageFilterTest
-)
 # VectorInverseFFT
 itk_add_test(
   NAME itkVectorInverseFFTImageFilterTest
@@ -364,12 +351,6 @@ itk_add_test(
 #   "Held"
 #   2)
 # WaveletUtilities
-itk_add_test(
-  NAME itkWaveletUtilitiesTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkWaveletUtilitiesTest
-)
 #### TODO move StructureTensorGeneralizedRiesz and RieszWavelet to examples/applications.
 set(DefaultWavelet Held)
 # StructureTensor and Generalized Riesz.
@@ -499,37 +480,7 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/profileMotherWaveletVow_*
 )
 
-itk_add_test(
-  NAME itkHeldIsotropicWaveletTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkHeldIsotropicWaveletTest
-)
-itk_add_test(
-  NAME itkSimoncelliIsotropicWaveletTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkSimoncelliIsotropicWaveletTest
-)
-itk_add_test(
-  NAME itkShannonIsotropicWaveletTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkShannonIsotropicWaveletTest
-)
-itk_add_test(
-  NAME itkVowIsotropicWaveletTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkVowIsotropicWaveletTest
-)
 ##Ind2Sub
-itk_add_test(
-  NAME itkInd2SubTest
-  COMMAND
-    IsotropicWaveletsTestDriver
-    itkInd2SubTest
-)
 ## ExpandWithZeros (in spatial domain)
 itk_add_test(
   NAME itkExpandWithZerosImageFilterTest2D
@@ -706,5 +657,34 @@ if(ITK_USE_FFTWF OR ITK_USE_FFTWD)
     TEST_LIST
     itkFrequencyExpandOddTest
     itkFrequencyShrinkOddTest
+  )
+endif()
+
+set(
+  IsotropicWaveletsGTests
+  itkHeldIsotropicWaveletGTest.cxx
+  itkInd2SubGTest.cxx
+  itkShannonIsotropicWaveletGTest.cxx
+  itkSimoncelliIsotropicWaveletGTest.cxx
+  itkStructureTensorImageFilterGTest.cxx
+  itkVowIsotropicWaveletGTest.cxx
+  itkWaveletUtilitiesGTest.cxx
+)
+creategoogletestdriver(IsotropicWavelets "${Libraries}" "${IsotropicWaveletsGTests}")
+
+if(ITKVtkGlue_ENABLED)
+  target_include_directories(
+    IsotropicWaveletsGTestDriver
+    SYSTEM
+    PRIVATE
+      ${VTK_INCLUDE_DIRS}
+  )
+endif()
+
+if(ITK_VISUALIZE_TESTS)
+  target_compile_definitions(
+    IsotropicWaveletsGTestDriver
+    PRIVATE
+      ITK_VISUALIZE_TESTS
   )
 endif()

@@ -1,22 +1,22 @@
 itk_module_test()
 
-set(
-  RLEImageTests
-  itkRLEImageTest.cxx
-  itkRegionOfInterestRLEImageFilterTest.cxx
-  itkIteratorTestsForRLEImage.cxx
-  itkRLEImageIteratorsForwardBackwardTest.cxx
-  itkRLEImageIteratorTest.cxx
-  itkRLEImageIteratorWithIndexTest.cxx
-  itkRLEImageRegionConstIteratorWithOnlyIndexTest.cxx
-  itkRLEImageRegionIteratorTest.cxx
-  itkRLEImageScanlineIteratorTest1.cxx
-  itkRLEImageMultiLabelMeshPipelineFriendTest.cxx
-)
+set(RLEImageTests itkRLEImageTest.cxx)
 
 createtestdriver( RLEImage "${RLEImage-Test_LIBRARIES}" "${RLEImageTests}" )
 
-set(RLEImageGTests itkRLEImageAlgorithmCopyGTest.cxx)
+set(
+  RLEImageGTests
+  itkIteratorTestsForRLEImageGTest.cxx
+  itkRegionOfInterestRLEImageFilterGTest.cxx
+  itkRLEImageAlgorithmCopyGTest.cxx
+  itkRLEImageIteratorGTest.cxx
+  itkRLEImageIteratorsForwardBackwardGTest.cxx
+  itkRLEImageIteratorWithIndexGTest.cxx
+  itkRLEImageMultiLabelMeshPipelineFriendGTest.cxx
+  itkRLEImageRegionConstIteratorWithOnlyIndexGTest.cxx
+  itkRLEImageRegionIteratorGTest.cxx
+  itkRLEImageScanlineIteratorGTest1.cxx
+)
 
 creategoogletestdriver(RLEImage "${RLEImage-Test_LIBRARIES}" "${RLEImageGTests}")
 
@@ -29,61 +29,6 @@ target_link_libraries(runFromIDE ${RLEImage-Test_LIBRARIES})
 
 add_executable(rleStats rleStats.cxx)
 target_link_libraries(rleStats ${RLEImage-Test_LIBRARIES})
-
-itk_add_test(
-  NAME itkIteratorTestsForRLEImage
-  COMMAND
-    RLEImageTestDriver
-    itkIteratorTestsForRLEImage
-)
-itk_add_test(
-  NAME itkRegionOfInterestRLEImageFilterTest
-  COMMAND
-    RLEImageTestDriver
-    itkRegionOfInterestRLEImageFilterTest
-)
-itk_add_test(
-  NAME itkRLEImageIteratorsForwardBackwardTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageIteratorsForwardBackwardTest
-)
-itk_add_test(
-  NAME itkRLEImageIteratorTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageIteratorTest
-)
-itk_add_test(
-  NAME itkRLEImageIteratorWithIndexTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageIteratorWithIndexTest
-)
-itk_add_test(
-  NAME itkRLEImageRegionConstIteratorWithOnlyIndexTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageRegionConstIteratorWithOnlyIndexTest
-)
-itk_add_test(
-  NAME itkRLEImageRegionIteratorTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageRegionIteratorTest
-)
-itk_add_test(
-  NAME itkRLEImageScanlineIteratorTest1
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageScanlineIteratorTest1
-)
-itk_add_test(
-  NAME itkRLEImageMultiLabelMeshPipelineFriendTest
-  COMMAND
-    RLEImageTestDriver
-    itkRLEImageMultiLabelMeshPipelineFriendTest
-)
 
 function(ReadWriteTest ImageName Ext) # optional: big
   set(outImage "${ITK_TEST_OUTPUT_DIR}/${ImageName}.${Ext}")

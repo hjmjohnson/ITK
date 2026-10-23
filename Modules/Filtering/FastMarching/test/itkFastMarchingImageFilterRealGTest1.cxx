@@ -1,0 +1,200 @@
+/*=========================================================================
+ *
+ *  Copyright NumFOCUS
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *=========================================================================*/
+
+
+#include "itkFastMarchingImageFilterBase.h"
+#include "itkFastMarchingThresholdStoppingCriterion.h"
+#include "itkTextOutput.h"
+#include "itkGTest.h"
+#include "itkCommand.h"
+
+
+namespace
+{
+// The following class is used to support callbacks
+// on the filter in the pipeline that follows later
+class ShowProgressObject
+{
+public:
+  ShowProgressObject(itk::ProcessObject * o) { m_Process = o; }
+  void
+  ShowProgress()
+  {
+    std::cout << "Progress " << m_Process->GetProgress() << std::endl;
+  }
+  itk::ProcessObject::Pointer m_Process;
+};
+} // namespace
+
+TEST(FastMarchingImageFilterReal, ConvertedLegacyTest1)
+{
+  itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
+
+  // Create a Fast Marching image filter object
+  using PixelType = float;
+  constexpr unsigned int Dimension{ 2 };
+
+  using FloatImageType = itk::Image<PixelType, Dimension>;
+
+  using CriterionType = itk::FastMarchingThresholdStoppingCriterion<FloatImageType, FloatImageType>;
+
+  using FastMarchingType = itk::FastMarchingImageFilterBase<FloatImageType, FloatImageType>;
+
+  auto criterion = CriterionType::New();
+
+  constexpr FloatImageType::PixelType threshold = 100.0;
+  criterion->SetThreshold(threshold);
+  EXPECT_EQ(threshold, criterion->GetThreshold());
+
+  auto marcher = FastMarchingType::New();
+
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(marcher, FastMarchingImageFilterBase, FastMarchingBase);
+
+
+  marcher->SetStoppingCriterion(criterion);
+  EXPECT_EQ(criterion, marcher->GetStoppingCriterion());
+
+  ShowProgressObject                                          progressWatch(marcher);
+  const itk::SimpleMemberCommand<ShowProgressObject>::Pointer command =
+    itk::SimpleMemberCommand<ShowProgressObject>::New();
+  command->SetCallbackFunction(&progressWatch, &ShowProgressObject::ShowProgress);
+  marcher->AddObserver(itk::ProgressEvent(), command);
+
+  using NodePairType = FastMarchingType::NodePairType;
+  using NodePairContainerType = FastMarchingType::NodePairContainerType;
+
+  // Set up alive points
+  auto alive = NodePairContainerType::New();
+
+  NodePairType node_pair;
+
+  constexpr FloatImageType::OffsetType offset0{ 28, 35 };
+
+  itk::Index<Dimension> index{};
+
+  node_pair.SetValue(0.0);
+  node_pair.SetNode(index + offset0);
+  alive->push_back(node_pair);
+
+  node_pair.SetValue(42.0);
+  index.Fill(200);
+  node_pair.SetNode(index); // this node is out of range
+
+  alive->push_back(node_pair);
+
+  marcher->SetAlivePoints(alive);
+  EXPECT_EQ(alive, marcher->GetAlivePoints());
+
+  // Set up trial points
+  auto trial = NodePairContainerType::New();
+  node_pair.SetValue(1.0);
+
+  index.Fill(0);
+  index += offset0;
+
+  index[0] += 1;
+  node_pair.SetNode(index);
+  trial->push_back(node_pair);
+
+  index[0] -= 1;
+  index[1] += 1;
+  node_pair.SetNode(index);
+  trial->push_back(node_pair);
+
+  index[0] -= 1;
+  index[1] -= 1;
+  node_pair.SetNode(index);
+  trial->push_back(node_pair);
+
+  index[0] += 1;
+  index[1] -= 1;
+  node_pair.SetNode(index);
+  trial->push_back(node_pair);
+
+  node_pair.SetValue(42.0);
+  index.Fill(300); // this node is out of range
+  node_pair.SetNode(index);
+  trial->push_back(node_pair);
+
+  marcher->SetTrialPoints(trial);
+  EXPECT_EQ(trial, marcher->GetTrialPoints());
+
+  // Specify the size of the output image
+  constexpr FloatImageType::SizeType size{ 64, 64 };
+  marcher->SetOutputSize(size);
+
+  // Set up a speed image of ones
+  auto                       speedImage = FloatImageType::New();
+  FloatImageType::RegionType region;
+  region.SetSize(size);
+  speedImage->SetLargestPossibleRegion(region);
+  speedImage->SetBufferedRegion(region);
+  speedImage->Allocate();
+  speedImage->FillBuffer(1.0);
+
+  marcher->SetInput(speedImage);
+
+  // Turn on debugging
+  marcher->DebugOn();
+
+  // Update the Fast Marching filter
+  EXPECT_NO_THROW(marcher->Update());
+
+
+  std::cout << "TargetReachedValue: " << marcher->GetTargetReachedValue() << std::endl;
+  std::cout << "ProcessedPoints: " << marcher->GetProcessedPoints() << std::endl;
+
+  // Check the results
+  const FloatImageType::Pointer output = marcher->GetOutput();
+
+  itk::ImageRegionIterator<FloatImageType> iterator(output, output->GetBufferedRegion());
+
+  bool passed = true;
+
+  constexpr double outputValueThreshold{ 1.42 };
+  while (!iterator.IsAtEnd())
+  {
+    FloatImageType::IndexType tempIndex = iterator.ComputeIndex();
+    tempIndex -= offset0;
+
+    double distance = 0.0;
+    for (unsigned int j = 0; j < Dimension; ++j)
+    {
+      distance += tempIndex[j] * tempIndex[j];
+    }
+    distance = std::sqrt(distance);
+
+    auto outputValue = static_cast<double>(iterator.Get());
+
+    if (distance > itk::NumericTraits<double>::epsilon())
+    {
+      if (itk::Math::Absolute(outputValue) / distance > outputValueThreshold)
+      {
+        std::cout << "Error at index [" << iterator.ComputeIndex() << ']' << std::endl;
+        std::cout << "Expected scaled output value be less than: " << outputValueThreshold
+                  << ", but got: " << itk::Math::Absolute(outputValue) / distance
+                  << ", where output: " << itk::Math::Absolute(outputValue) << "; scale factor: " << distance
+                  << std::endl;
+        passed = false;
+      }
+    }
+    ++iterator;
+  }
+
+  EXPECT_TRUE(passed);
+}

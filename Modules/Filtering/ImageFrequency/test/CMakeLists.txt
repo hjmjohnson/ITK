@@ -2,21 +2,12 @@ itk_module_test()
 set(
   ITKImageFrequencyTests
   #### Frequency Manipulation ###
-  # Iterator with Index.
-  itkFrequencyFFTLayoutImageRegionIteratorWithIndexTest.cxx
   # BandPass Filter
   itkFrequencyBandImageFilterTest.cxx
 )
 
 createtestdriver(ITKImageFrequency "${ITKImageFrequency-Test_LIBRARIES}" "${ITKImageFrequencyTests}")
 
-# FrequencyIterator
-itk_add_test(
-  NAME itkFrequencyFFTLayoutImageRegionIteratorWithIndexTest
-  COMMAND
-    ITKImageFrequencyTestDriver
-    itkFrequencyFFTLayoutImageRegionIteratorWithIndexTest
-)
 ## BandPass
 itk_add_test(
   NAME itkFrequencyBandImageFilterEvenTest
@@ -33,6 +24,10 @@ itk_add_test(
     "Odd"
 )
 
-set(${itk-module}GTests itkFrequencyIteratorsGTest.cxx)
+set(
+  ${itk-module}GTests
+  itkFrequencyFFTLayoutImageRegionIteratorWithIndexGTest.cxx
+  itkFrequencyIteratorsGTest.cxx
+)
 
 creategoogletestdriver(${itk-module} "${${itk-module}-Test_LIBRARIES}" "${${itk-module}GTests}")
