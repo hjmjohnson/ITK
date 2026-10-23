@@ -1,39 +1,17 @@
 itk_module_test()
 set(
   ITKMetricsv4Tests
-  itkANTSNeighborhoodCorrelationImageToImageMetricv4Test.cxx
   itkANTSNeighborhoodCorrelationImageToImageRegistrationTest.cxx
-  itkCorrelationImageToImageMetricv4Test.cxx
   itkDemonsImageToImageMetricv4RegistrationTest.cxx
-  itkDemonsImageToImageMetricv4Test.cxx
-  itkEuclideanDistancePointSetMetricRegistrationTest.cxx
-  itkEuclideanDistancePointSetMetricTest.cxx
-  itkEuclideanDistancePointSetMetricTest2.cxx
-  itkEuclideanDistancePointSetMetricTest3.cxx
-  itkExpectationBasedPointSetMetricRegistrationTest.cxx
-  itkExpectationBasedPointSetMetricTest.cxx
   itkImageToImageMetricv4RegistrationTest.cxx
-  itkImageToImageMetricv4Test.cxx
-  itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationTest.cxx
-  itkJensenHavrdaCharvatTsallisPointSetMetricTest.cxx
-  itkJointHistogramMutualInformationImageToImageMetricv4Test.cxx
   itkJointHistogramMutualInformationImageToImageRegistrationTest.cxx
-  itkLabeledPointSetMetricRegistrationTest.cxx
-  itkLabeledPointSetMetricTest.cxx
   itkMattesMutualInformationImageToImageMetricv4RegistrationTest.cxx
-  itkMattesMutualInformationImageToImageMetricv4Test.cxx
-  itkMeanSquaresImageToImageMetricv4OnVectorTest.cxx
-  itkMeanSquaresImageToImageMetricv4OnVectorTest2.cxx
   itkMeanSquaresImageToImageMetricv4RegistrationTest.cxx
   itkMeanSquaresImageToImageMetricv4RegistrationTest2.cxx
   itkMeanSquaresImageToImageMetricv4SpeedTest.cxx
-  itkMeanSquaresImageToImageMetricv4Test.cxx
   itkMeanSquaresImageToImageMetricv4VectorRegistrationTest.cxx
-  itkMetricImageGradientTest.cxx
   itkMultiGradientImageToImageMetricv4RegistrationTest.cxx
   itkMultiStartImageToImageMetricv4RegistrationTest.cxx
-  itkObjectToObjectMultiMetricv4RegistrationTest.cxx
-  itkObjectToObjectMultiMetricv4Test.cxx
 )
 
 set(INPUTDATA ${ITK_DATA_ROOT}/Input)
@@ -41,76 +19,6 @@ set(BASELINE_ROOT ${ITK_DATA_ROOT}/Baseline)
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
 createtestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4Tests}")
-
-itk_add_test(
-  NAME itkEuclideanDistancePointSetMetricTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkEuclideanDistancePointSetMetricTest
-)
-
-itk_add_test(
-  NAME itkEuclideanDistancePointSetMetricTest2
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkEuclideanDistancePointSetMetricTest2
-)
-
-itk_add_test(
-  NAME itkEuclideanDistancePointSetMetricTest3
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkEuclideanDistancePointSetMetricTest3
-)
-
-itk_add_test(
-  NAME itkExpectationBasedPointSetMetricTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkExpectationBasedPointSetMetricTest
-)
-
-itk_add_test(
-  NAME itkJensenHavrdaCharvatTsallisPointSetMetricTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkJensenHavrdaCharvatTsallisPointSetMetricTest
-)
-
-itk_add_test(
-  NAME itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationTest
-)
-
-itk_add_test(
-  NAME itkLabeledPointSetMetricTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkLabeledPointSetMetricTest
-)
-
-itk_add_test(
-  NAME itkLabeledPointSetMetricRegistrationTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkLabeledPointSetMetricRegistrationTest
-)
-
-itk_add_test(
-  NAME itkImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkImageToImageMetricv4Test
-)
-
-itk_add_test(
-  NAME itkJointHistogramMutualInformationImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkJointHistogramMutualInformationImageToImageMetricv4Test
-)
 
 itk_add_test(
   NAME itkJointHistogramMutualInformationImageToImageRegistrationTest
@@ -141,41 +49,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkMeanSquaresImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMeanSquaresImageToImageMetricv4Test
-)
-
-itk_add_test(
-  NAME itkCorrelationImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkCorrelationImageToImageMetricv4Test
-)
-
-itk_add_test(
-  NAME itkMeanSquaresImageToImageMetricv4OnVectorTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMeanSquaresImageToImageMetricv4OnVectorTest
-)
-
-itk_add_test(
-  NAME itkMeanSquaresImageToImageMetricv4OnVectorTest2
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMeanSquaresImageToImageMetricv4OnVectorTest2
-)
-
-itk_add_test(
-  NAME itkANTSNeighborhoodCorrelationImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkANTSNeighborhoodCorrelationImageToImageMetricv4Test
-)
-
-itk_add_test(
   NAME itkANTSNeighborhoodCorrelationImageToImageRegistrationTest
   COMMAND
     ITKMetricsv4TestDriver
@@ -188,13 +61,6 @@ itk_add_test(
     0.25
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkANTSNeighborhoodCorrelationImageToImageRegistrationTest.nii.gz
-)
-
-itk_add_test(
-  NAME itkMattesMutualInformationImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMattesMutualInformationImageToImageMetricv4Test
 )
 
 itk_add_test(
@@ -236,13 +102,6 @@ itk_add_test(
     5
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkMultiGradientImageToImageMetricv4RegistrationTest.nii.gz
-)
-
-itk_add_test(
-  NAME itkMetricImageGradientTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkMetricImageGradientTest
 )
 
 itk_add_test(
@@ -311,13 +170,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkDemonsImageToImageMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkDemonsImageToImageMetricv4Test
-)
-
-itk_add_test(
   NAME itkDemonsImageToImageMetricv4RegistrationTest
   COMMAND
     ITKMetricsv4TestDriver
@@ -378,34 +230,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkEuclideanDistancePointSetMetricRegistrationTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkEuclideanDistancePointSetMetricRegistrationTest
-)
-
-itk_add_test(
-  NAME itkExpectationBasedPointSetMetricRegistrationTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkExpectationBasedPointSetMetricRegistrationTest
-)
-
-itk_add_test(
-  NAME itkObjectToObjectMultiMetricv4Test
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkObjectToObjectMultiMetricv4Test
-)
-
-itk_add_test(
-  NAME itkObjectToObjectMultiMetricv4RegistrationTest
-  COMMAND
-    ITKMetricsv4TestDriver
-    itkObjectToObjectMultiMetricv4RegistrationTest
-)
-
-itk_add_test(
   NAME itkMeanSquaresImageToImageMetricv4VectorRegistrationTest
   COMMAND
     ITKMetricsv4TestDriver
@@ -423,3 +247,30 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkMeanSquaresImageToImageMetricv4VectorRegistrationTest.nii.gz
 )
+
+set(
+  ITKMetricsv4GTests
+  itkANTSNeighborhoodCorrelationImageToImageMetricv4GTest.cxx
+  itkCorrelationImageToImageMetricv4GTest.cxx
+  itkDemonsImageToImageMetricv4GTest.cxx
+  itkEuclideanDistancePointSetMetricGTest.cxx
+  itkEuclideanDistancePointSetMetricGTest2.cxx
+  itkEuclideanDistancePointSetMetricGTest3.cxx
+  itkEuclideanDistancePointSetMetricRegistrationGTest.cxx
+  itkExpectationBasedPointSetMetricGTest.cxx
+  itkExpectationBasedPointSetMetricRegistrationGTest.cxx
+  itkImageToImageMetricv4GTest.cxx
+  itkJensenHavrdaCharvatTsallisPointSetMetricGTest.cxx
+  itkJensenHavrdaCharvatTsallisPointSetMetricRegistrationGTest.cxx
+  itkJointHistogramMutualInformationImageToImageMetricv4GTest.cxx
+  itkLabeledPointSetMetricGTest.cxx
+  itkLabeledPointSetMetricRegistrationGTest.cxx
+  itkMattesMutualInformationImageToImageMetricv4GTest.cxx
+  itkMeanSquaresImageToImageMetricv4GTest.cxx
+  itkMeanSquaresImageToImageMetricv4OnVectorGTest.cxx
+  itkMeanSquaresImageToImageMetricv4OnVectorGTest2.cxx
+  itkMetricImageGradientGTest.cxx
+  itkObjectToObjectMultiMetricv4GTest.cxx
+  itkObjectToObjectMultiMetricv4RegistrationGTest.cxx
+)
+creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")

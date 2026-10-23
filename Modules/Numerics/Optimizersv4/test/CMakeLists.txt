@@ -1,31 +1,10 @@
 itk_module_test()
 set(
   ITKOptimizersv4Tests
-  itkAmoebaOptimizerv4Test.cxx
   itkAutoScaledGradientDescentRegistrationOnVectorTest.cxx
   itkAutoScaledGradientDescentRegistrationTest.cxx
-  itkConjugateGradientLineSearchOptimizerv4Test.cxx
-  itkExhaustiveOptimizerv4Test.cxx
-  itkGradientDescentLineSearchOptimizerv4Test.cxx
-  itkGradientDescentOptimizerBasev4Test.cxx
-  itkGradientDescentOptimizerv4Test.cxx
-  itkGradientDescentOptimizerv4Test2.cxx
-  itkLBFGS2Optimizerv4Test.cxx
-  itkLBFGSBOptimizerv4Test.cxx
-  itkLBFGSOptimizerv4Test.cxx
   itkMultiGradientOptimizerv4Test.cxx
-  itkMultiStartOptimizerv4Test.cxx
-  itkObjectToObjectMetricBaseTest.cxx
-  itkObjectToObjectOptimizerBaseTest.cxx
-  itkOnePlusOneEvolutionaryOptimizerv4Test.cxx
-  itkOptimizerParameterScalesEstimatorTest.cxx
   itkPowellOptimizerv4Test.cxx
-  itkQuasiNewtonOptimizerv4Test.cxx
-  itkRegistrationParameterScalesEstimatorTest.cxx
-  itkRegistrationParameterScalesFromIndexShiftTest.cxx
-  itkRegistrationParameterScalesFromJacobianTest.cxx
-  itkRegistrationParameterScalesFromPhysicalShiftPointSetTest.cxx
-  itkRegistrationParameterScalesFromPhysicalShiftTest.cxx
   itkRegularStepGradientDescentOptimizerv4Test.cxx
 )
 
@@ -37,94 +16,38 @@ createtestdriver(ITKOptimizersv4 "${ITKOptimizersv4-Test_LIBRARIES}" "${ITKOptim
 
 set(
   ITKOptimizersv4GTests
+  itkAmoebaOptimizerv4GTest.cxx
+  itkConjugateGradientLineSearchOptimizerv4GTest.cxx
+  itkExhaustiveOptimizerv4GTest.cxx
+  itkGradientDescentLineSearchOptimizerv4GTest.cxx
+  itkGradientDescentOptimizerBasev4GTest.cxx
+  itkGradientDescentOptimizerv4GTest.cxx
+  itkGradientDescentOptimizerv4GTest2.cxx
   itkGradientDescentOptimizerv4ObserverGTest.cxx
+  itkLBFGS2Optimizerv4GTest.cxx
+  itkLBFGSBOptimizerv4GTest.cxx
+  itkLBFGSOptimizerv4GTest.cxx
   itkMultiGradientOptimizerv4GTest.cxx
+  itkMultiStartOptimizerv4GTest.cxx
+  itkObjectToObjectMetricBaseGTest.cxx
+  itkObjectToObjectOptimizerBaseGTest.cxx
+  itkOnePlusOneEvolutionaryOptimizerv4GTest.cxx
+  itkOptimizerParameterScalesEstimatorGTest.cxx
+  itkQuasiNewtonOptimizerv4GTest.cxx
+  itkRegistrationParameterScalesEstimatorGTest.cxx
+  itkRegistrationParameterScalesFromIndexShiftGTest.cxx
+  itkRegistrationParameterScalesFromJacobianGTest.cxx
+  itkRegistrationParameterScalesFromPhysicalShiftGTest.cxx
+  itkRegistrationParameterScalesFromPhysicalShiftPointSetGTest.cxx
   itkWindowConvergenceMonitoringFunctionGTest.cxx
 )
 creategoogletestdriver(ITKOptimizersv4 "${ITKOptimizersv4-Test_LIBRARIES}" "${ITKOptimizersv4GTests}")
-
-itk_add_test(
-  NAME itkObjectToObjectOptimizerBaseTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkObjectToObjectOptimizerBaseTest
-)
-
-itk_add_test(
-  NAME itkGradientDescentOptimizerBasev4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkGradientDescentOptimizerBasev4Test
-)
-
-itk_add_test(
-  NAME itkGradientDescentOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkGradientDescentOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkGradientDescentLineSearchOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkGradientDescentLineSearchOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkConjugateGradientLineSearchOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkConjugateGradientLineSearchOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkMultiStartOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkMultiStartOptimizerv4Test
-)
 
 itk_add_test(
   NAME itkMultiGradientOptimizerv4Test
   COMMAND
     ITKOptimizersv4TestDriver
     itkMultiGradientOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkOptimizerParameterScalesEstimatorTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkOptimizerParameterScalesEstimatorTest
-)
-
-itk_add_test(
-  NAME itkRegistrationParameterScalesEstimatorTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkRegistrationParameterScalesEstimatorTest
-)
-
-itk_add_test(
-  NAME itkRegistrationParameterScalesFromPhysicalShiftTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkRegistrationParameterScalesFromPhysicalShiftTest
-)
-
-itk_add_test(
-  NAME itkRegistrationParameterScalesFromJacobianTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkRegistrationParameterScalesFromJacobianTest
-)
-
-itk_add_test(
-  NAME itkGradientDescentOptimizerv4Test2
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkGradientDescentOptimizerv4Test2
 )
 
 itk_add_test(
@@ -185,69 +108,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkQuasiNewtonOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkQuasiNewtonOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkRegistrationParameterScalesFromIndexShiftTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkRegistrationParameterScalesFromIndexShiftTest
-)
-
-itk_add_test(
-  NAME itkRegistrationParameterScalesFromPhysicalShiftPointSetTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkRegistrationParameterScalesFromPhysicalShiftPointSetTest
-)
-
-itk_add_test(
-  NAME itkObjectToObjectMetricBaseTest
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkObjectToObjectMetricBaseTest
-)
-
-itk_add_test(
-  NAME itkLBFGSOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkLBFGSOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkLBFGS2Optimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkLBFGS2Optimizerv4Test
-)
-
-itk_add_test(
-  NAME itkLBFGSBOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkLBFGSBOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkAmoebaOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkAmoebaOptimizerv4Test
-)
-
-itk_add_test(
-  NAME itkExhaustiveOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkExhaustiveOptimizerv4Test
-)
-
-itk_add_test(
   NAME itkPowellOptimizerv4Test
   COMMAND
     ITKOptimizersv4TestDriver
@@ -259,13 +119,6 @@ itk_add_test(
     100
     0
     0.0
-)
-
-itk_add_test(
-  NAME itkOnePlusOneEvolutionaryOptimizerv4Test
-  COMMAND
-    ITKOptimizersv4TestDriver
-    itkOnePlusOneEvolutionaryOptimizerv4Test
 )
 
 itk_add_test(

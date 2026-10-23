@@ -1,88 +1,23 @@
 itk_module_test()
 set(
   ITKStatisticsTests
-  itkCovarianceSampleFilterTest.cxx
-  itkCovarianceSampleFilterTest2.cxx
-  itkCovarianceSampleFilterTest3.cxx
-  itkDecisionRuleTest.cxx
-  itkDenseFrequencyContainer2Test.cxx
-  itkDistanceMetricTest.cxx
-  itkDistanceMetricTest2.cxx
-  itkDistanceToCentroidMembershipFunctionTest.cxx
-  itkEuclideanDistanceMetricTest.cxx
-  itkEuclideanSquareDistanceMetricTest.cxx
   itkExpectationMaximizationMixtureModelEstimatorTest.cxx
-  itkGaussianDistributionTest.cxx
-  itkGaussianMembershipFunctionTest.cxx
   itkGaussianMixtureModelComponentTest.cxx
   itkGaussianRandomSpatialNeighborSubsamplerTest.cxx
-  itkHistogramTest.cxx
-  itkHistogramToTextureFeaturesFilterTest.cxx
-  itkImageToHistogramFilterTest.cxx
   itkImageToHistogramFilterTest2.cxx
-  itkImageToListSampleAdaptorTest.cxx
-  itkImageToListSampleAdaptorTest2.cxx
-  itkImageToListSampleFilterTest.cxx
-  itkImageToListSampleFilterTest2.cxx
-  itkImageToListSampleFilterTest3.cxx
-  itkJointDomainImageToListSampleAdaptorTest.cxx
-  itkKalmanLinearEstimatorTest.cxx
   itkKdTreeBasedKmeansEstimatorTest.cxx
   itkKdTreeGeneratorTest.cxx
   itkKdTreeTest1.cxx
   itkKdTreeTest2.cxx
   itkKdTreeTest3.cxx
-  itkKdTreeTestSamplePoints.cxx
   itkListSampleTest.cxx
   itkListSampleTest.cxx
-  itkMahalanobisDistanceMetricTest.cxx
-  itkManhattanDistanceMetricTest.cxx
-  itkMeanSampleFilterTest.cxx
-  itkMeanSampleFilterTest2.cxx
-  itkMeanSampleFilterTest3.cxx
-  itkMeasurementVectorTraitsTest.cxx
-  itkMembershipFunctionBaseTest2.cxx
-  itkMembershipSampleTest1.cxx
-  itkMembershipSampleTest2.cxx
-  itkMembershipSampleTest3.cxx
-  itkMembershipSampleTest4.cxx
-  itkNeighborhoodSamplerTest1.cxx
-  itkPointSetToListSampleAdaptorTest.cxx
-  itkProbabilityDistributionTest.cxx
-  itkSampleTest.cxx
-  itkSampleTest2.cxx
-  itkSampleTest3.cxx
-  itkSampleTest4.cxx
-  itkSampleToHistogramFilterTest.cxx
-  itkSampleToHistogramFilterTest2.cxx
-  itkSampleToHistogramFilterTest3.cxx
-  itkSampleToHistogramFilterTest4.cxx
   itkSampleToHistogramFilterTest5.cxx
-  itkSampleToHistogramFilterTest6.cxx
-  itkSampleToHistogramFilterTest7.cxx
-  itkSampleToSubsampleFilterTest1.cxx
-  itkScalarImageToCooccurrenceListSampleFilterTest.cxx
-  itkScalarImageToCooccurrenceMatrixFilterTest.cxx
-  itkScalarImageToCooccurrenceMatrixFilterTest2.cxx
   itkScalarImageToHistogramGeneratorTest.cxx
-  itkScalarImageToRunLengthFeaturesFilterTest.cxx
-  itkScalarImageToRunLengthMatrixFilterTest.cxx
-  itkScalarImageToTextureFeaturesFilterTest.cxx
-  itkSparseFrequencyContainer2Test.cxx
-  itkSpatialNeighborSubsamplerTest.cxx
-  itkStandardDeviationPerComponentSampleFilterTest.cxx
-  itkStatisticsAlgorithmTest.cxx
-  itkStatisticsAlgorithmTest2.cxx
-  itkSubsampleTest.cxx
-  itkSubsampleTest2.cxx
-  itkSubsampleTest3.cxx
   itkUniformRandomSpatialNeighborSubsamplerTest.cxx
   itkWeightedCentroidKdTreeGeneratorTest1.cxx
   itkWeightedCentroidKdTreeGeneratorTest8.cxx
   itkWeightedCentroidKdTreeGeneratorTest9.cxx
-  itkWeightedCovarianceSampleFilterTest.cxx
-  itkWeightedCovarianceSampleFilterTest2.cxx
-  itkWeightedMeanSampleFilterTest.cxx
 )
 
 createtestdriver(ITKStatistics "${ITKStatistics-Test_LIBRARIES}" "${ITKStatisticsTests}")
@@ -90,35 +25,11 @@ createtestdriver(ITKStatistics "${ITKStatistics-Test_LIBRARIES}" "${ITKStatistic
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
 itk_add_test(
-  NAME itkDecisionRuleTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkDecisionRuleTest
-)
-itk_add_test(
-  NAME itkDenseFrequencyContainer2Test
-  COMMAND
-    ITKStatisticsTestDriver
-    itkDenseFrequencyContainer2Test
-)
-itk_add_test(
   NAME itkExpectationMaximizationMixtureModelEstimatorTest
   COMMAND
     ITKStatisticsTestDriver
     itkExpectationMaximizationMixtureModelEstimatorTest
     DATA{${ITK_DATA_ROOT}/Input/Statistics/TwoDimensionTwoGaussian.dat}
-)
-itk_add_test(
-  NAME itkGaussianDistributionTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkGaussianDistributionTest
-)
-itk_add_test(
-  NAME itkGaussianMembershipFunctionTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkGaussianMembershipFunctionTest
 )
 itk_add_test(
   NAME itkGaussianMixtureModelComponentTest
@@ -138,12 +49,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkGaussianRandomSubsamplingTest.mha
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkGaussianRandomSubsamplingTest.mha
-)
-itk_add_test(
-  NAME itkKalmanLinearEstimatorTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkKalmanLinearEstimatorTest
 )
 itk_add_test(
   NAME itkKdTreeBasedKmeansEstimatorTest
@@ -449,60 +354,6 @@ if(DOXYGEN_DOT_EXECUTABLE)
 endif()
 
 itk_add_test(
-  NAME itkKdTreeTestSamplePoints
-  COMMAND
-    ITKStatisticsTestDriver
-    itkKdTreeTestSamplePoints
-)
-itk_add_test(
-  NAME itkMeanSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMeanSampleFilterTest
-)
-itk_add_test(
-  NAME itkMeanSampleFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMeanSampleFilterTest2
-)
-itk_add_test(
-  NAME itkMeanSampleFilterTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMeanSampleFilterTest3
-)
-itk_add_test(
-  NAME itkHistogramTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkHistogramTest
-)
-itk_add_test(
-  NAME itkHistogramToTextureFeaturesFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkHistogramToTextureFeaturesFilterTest
-)
-itk_add_test(
-  NAME itkCovarianceSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkCovarianceSampleFilterTest
-)
-itk_add_test(
-  NAME itkCovarianceSampleFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkCovarianceSampleFilterTest2
-)
-itk_add_test(
-  NAME itkCovarianceSampleFilterTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkCovarianceSampleFilterTest3
-)
-itk_add_test(
   NAME itkWeightedCentroidKdTreeGeneratorTest1
   COMMAND
     ITKStatisticsTestDriver
@@ -584,54 +435,6 @@ itk_add_test(
     1
 )
 itk_add_test(
-  NAME itkWeightedCovarianceSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkWeightedCovarianceSampleFilterTest
-)
-itk_add_test(
-  NAME itkWeightedCovarianceSampleFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkWeightedCovarianceSampleFilterTest2
-)
-itk_add_test(
-  NAME itkWeightedMeanSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkWeightedMeanSampleFilterTest
-)
-itk_add_test(
-  NAME itkDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkDistanceMetricTest
-)
-itk_add_test(
-  NAME itkDistanceMetricTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkDistanceMetricTest2
-)
-itk_add_test(
-  NAME itkDistanceToCentroidMembershipFunctionTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkDistanceToCentroidMembershipFunctionTest
-)
-itk_add_test(
-  NAME itkEuclideanDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkEuclideanDistanceMetricTest
-)
-itk_add_test(
-  NAME itkEuclideanSquareDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkEuclideanSquareDistanceMetricTest
-)
-itk_add_test(
   NAME itkListSampleTest1
   COMMAND
     ITKStatisticsTestDriver
@@ -660,266 +463,11 @@ itk_add_test(
     100
 )
 itk_add_test(
-  NAME itkImageToListSampleAdaptorTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToListSampleAdaptorTest
-)
-itk_add_test(
-  NAME itkImageToListSampleAdaptorTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToListSampleAdaptorTest2
-)
-itk_add_test(
-  NAME itkImageToListSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToListSampleFilterTest
-)
-itk_add_test(
-  NAME itkImageToListSampleFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToListSampleFilterTest2
-)
-itk_add_test(
-  NAME itkImageToListSampleFilterTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToListSampleFilterTest3
-)
-itk_add_test(
-  NAME itkJointDomainImageToListSampleAdaptorTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkJointDomainImageToListSampleAdaptorTest
-)
-itk_add_test(
-  NAME itkPointSetToListSampleAdaptorTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkPointSetToListSampleAdaptorTest
-)
-itk_add_test(
-  NAME itkProbabilityDistributionTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkProbabilityDistributionTest
-)
-itk_add_test(
-  NAME itkMahalanobisDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMahalanobisDistanceMetricTest
-)
-itk_add_test(
-  NAME itkManhattanDistanceMetricTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkManhattanDistanceMetricTest
-)
-itk_add_test(
-  NAME itkMembershipFunctionBaseTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMembershipFunctionBaseTest2
-)
-itk_add_test(
-  NAME itkMembershipSampleTest1
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMembershipSampleTest1
-)
-itk_add_test(
-  NAME itkMembershipSampleTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMembershipSampleTest2
-)
-itk_add_test(
-  NAME itkMembershipSampleTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMembershipSampleTest3
-)
-itk_add_test(
-  NAME itkMembershipSampleTest4
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMembershipSampleTest4
-)
-itk_add_test(
-  NAME itkMeasurementVectorTraitsTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkMeasurementVectorTraitsTest
-)
-itk_add_test(
-  NAME itkNeighborhoodSamplerTest1
-  COMMAND
-    ITKStatisticsTestDriver
-    itkNeighborhoodSamplerTest1
-)
-itk_add_test(
-  NAME itkSampleTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleTest
-)
-itk_add_test(
-  NAME itkSampleTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleTest2
-)
-itk_add_test(
-  NAME itkSampleTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleTest3
-)
-itk_add_test(
-  NAME itkSampleTest4
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleTest4
-)
-itk_add_test(
-  NAME itkSampleToHistogramFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToHistogramFilterTest
-)
-itk_add_test(
-  NAME itkSampleToHistogramFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToHistogramFilterTest2
-)
-itk_add_test(
-  NAME itkSampleToHistogramFilterTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToHistogramFilterTest3
-)
-# There is a bug in VS2008, Release build that causes this test to fail.
-if(NOT MSVC90)
-  itk_add_test(
-    NAME itkSampleToHistogramFilterTest4
-    COMMAND
-      ITKStatisticsTestDriver
-      itkSampleToHistogramFilterTest4
-  )
-endif()
-itk_add_test(
   NAME itkSampleToHistogramFilterTest5
   COMMAND
     ITKStatisticsTestDriver
     itkSampleToHistogramFilterTest5
     DATA{${ITK_DATA_ROOT}/Input/VisibleWomanEyeSlice.png}
-)
-itk_add_test(
-  NAME itkSampleToHistogramFilterTest6
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToHistogramFilterTest6
-)
-itk_add_test(
-  NAME itkSampleToHistogramFilterTest7
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToHistogramFilterTest7
-)
-itk_add_test(
-  NAME itkSampleToSubsampleFilterTest1
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSampleToSubsampleFilterTest1
-)
-itk_add_test(
-  NAME itkScalarImageToCooccurrenceListSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToCooccurrenceListSampleFilterTest
-)
-itk_add_test(
-  NAME itkScalarImageToCooccurrenceMatrixFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToCooccurrenceMatrixFilterTest
-)
-itk_add_test(
-  NAME itkScalarImageToCooccurrenceMatrixFilterTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToCooccurrenceMatrixFilterTest2
-)
-itk_add_test(
-  NAME itkScalarImageToTextureFeaturesFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToTextureFeaturesFilterTest
-)
-itk_add_test(
-  NAME itkScalarImageToRunLengthMatrixFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToRunLengthMatrixFilterTest
-)
-itk_add_test(
-  NAME itkScalarImageToRunLengthFeaturesFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkScalarImageToRunLengthFeaturesFilterTest
-)
-itk_add_test(
-  NAME itkSparseFrequencyContainer2Test
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSparseFrequencyContainer2Test
-)
-itk_add_test(
-  NAME itkSpatialNeighborSubsamplerTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSpatialNeighborSubsamplerTest
-)
-itk_add_test(
-  NAME itkStandardDeviationPerComponentSampleFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkStandardDeviationPerComponentSampleFilterTest
-)
-itk_add_test(
-  NAME itkSubsampleTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSubsampleTest
-)
-itk_add_test(
-  NAME itkSubsampleTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSubsampleTest2
-)
-itk_add_test(
-  NAME itkSubsampleTest3
-  COMMAND
-    ITKStatisticsTestDriver
-    itkSubsampleTest3
-)
-itk_add_test(
-  NAME itkStatisticsAlgorithmTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkStatisticsAlgorithmTest
-)
-itk_add_test(
-  NAME itkStatisticsAlgorithmTest2
-  COMMAND
-    ITKStatisticsTestDriver
-    itkStatisticsAlgorithmTest2
 )
 itk_add_test(
   NAME itkUniformRandomSpatialNeighborSubsamplerTest
@@ -933,12 +481,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkUniformRandomSubsamplingTest.mha
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkUniformRandomSubsamplingTest.mha
-)
-itk_add_test(
-  NAME itkImageToHistogramFilterTest
-  COMMAND
-    ITKStatisticsTestDriver
-    itkImageToHistogramFilterTest
 )
 itk_add_test(
   NAME itkImageToHistogramFilterTest2
@@ -975,18 +517,86 @@ itk_add_test(
 set(
   ITKStatisticsGTests
   itkChiSquareDistributionGTest.cxx
+  itkCovarianceSampleFilterGTest.cxx
+  itkCovarianceSampleFilterGTest2.cxx
+  itkCovarianceSampleFilterGTest3.cxx
+  itkDecisionRuleGTest.cxx
+  itkDenseFrequencyContainer2GTest.cxx
+  itkDistanceMetricGTest.cxx
+  itkDistanceMetricGTest2.cxx
+  itkDistanceToCentroidMembershipFunctionGTest.cxx
+  itkEuclideanDistanceMetricGTest.cxx
+  itkEuclideanSquareDistanceMetricGTest.cxx
+  itkGaussianDistributionGTest.cxx
+  itkGaussianMembershipFunctionGTest.cxx
+  itkHistogramGTest.cxx
+  itkHistogramToTextureFeaturesFilterGTest.cxx
   itkHistogramToTextureFeaturesFilterNaNGTest.cxx
+  itkImageToHistogramFilterGTest.cxx
+  itkImageToListSampleAdaptorGTest.cxx
+  itkImageToListSampleAdaptorGTest2.cxx
+  itkImageToListSampleFilterGTest.cxx
+  itkImageToListSampleFilterGTest2.cxx
+  itkImageToListSampleFilterGTest3.cxx
+  itkJointDomainImageToListSampleAdaptorGTest.cxx
+  itkKalmanLinearEstimatorGTest.cxx
   itkKdTreeGTest.cxx
+  itkKdTreeGTestSamplePoints.cxx
+  itkMahalanobisDistanceMetricGTest.cxx
+  itkManhattanDistanceMetricGTest.cxx
   itkMaximumDecisionRuleGTest.cxx
   itkMaximumRatioDecisionRuleGTest.cxx
+  itkMeanSampleFilterGTest.cxx
+  itkMeanSampleFilterGTest2.cxx
+  itkMeanSampleFilterGTest3.cxx
+  itkMeasurementVectorTraitsGTest.cxx
   itkMembershipFunctionBaseGTest.cxx
+  itkMembershipFunctionBaseGTest2.cxx
+  itkMembershipSampleGTest1.cxx
+  itkMembershipSampleGTest2.cxx
+  itkMembershipSampleGTest3.cxx
+  itkMembershipSampleGTest4.cxx
   itkMinimumDecisionRuleGTest.cxx
   itkMixtureModelComponentBaseGTest.cxx
+  itkNeighborhoodSamplerGTest1.cxx
   itkNormalVariateGeneratorGTest1.cxx
+  itkPointSetToListSampleAdaptorGTest.cxx
+  itkProbabilityDistributionGTest.cxx
   itkRandomVariateGeneratorBaseGTest.cxx
+  itkSampleGTest.cxx
+  itkSampleGTest2.cxx
+  itkSampleGTest3.cxx
+  itkSampleGTest4.cxx
+  itkSampleToHistogramFilterGTest.cxx
+  itkSampleToHistogramFilterGTest2.cxx
+  itkSampleToHistogramFilterGTest3.cxx
+  itkSampleToHistogramFilterGTest6.cxx
+  itkSampleToHistogramFilterGTest7.cxx
+  itkSampleToSubsampleFilterGTest1.cxx
+  itkScalarImageToCooccurrenceListSampleFilterGTest.cxx
+  itkScalarImageToCooccurrenceMatrixFilterGTest.cxx
+  itkScalarImageToCooccurrenceMatrixFilterGTest2.cxx
+  itkScalarImageToRunLengthFeaturesFilterGTest.cxx
+  itkScalarImageToRunLengthMatrixFilterGTest.cxx
+  itkScalarImageToTextureFeaturesFilterGTest.cxx
+  itkSparseFrequencyContainer2GTest.cxx
+  itkSpatialNeighborSubsamplerGTest.cxx
+  itkStandardDeviationPerComponentSampleFilterGTest.cxx
+  itkStatisticsAlgorithmGTest.cxx
+  itkStatisticsAlgorithmGTest2.cxx
   itkStatisticsTypesGTest.cxx
+  itkSubsampleGTest.cxx
+  itkSubsampleGTest2.cxx
+  itkSubsampleGTest3.cxx
   itkTDistributionGTest.cxx
   itkUniformRandomSpatialNeighborSubsamplerGTest.cxx
   itkVectorContainerToListSampleAdaptorGTest.cxx
+  itkWeightedCovarianceSampleFilterGTest.cxx
+  itkWeightedCovarianceSampleFilterGTest2.cxx
+  itkWeightedMeanSampleFilterGTest.cxx
 )
+# There is a bug in VS2008, Release build that causes this test to fail.
+if(NOT MSVC90)
+  list(APPEND ITKStatisticsGTests itkSampleToHistogramFilterGTest4.cxx)
+endif()
 creategoogletestdriver(ITKStatistics "${ITKStatistics-Test_LIBRARIES}" "${ITKStatisticsGTests}")
