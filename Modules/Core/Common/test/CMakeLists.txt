@@ -2,79 +2,47 @@ itk_module_test()
 set(
   ITKCommon1Tests
   itkColorTableTest.cxx
-  itkDataObjectTest.cxx
   itkDirectoryTest.cxx
   itkExceptionObjectTest.cxx
-  itkFixedArrayTest2.cxx
   itkFloatingPointExceptionsTest.cxx
   itkGaussianSpatialFunctionTest.cxx
-  itkImageComputeOffsetAndIndexTest.cxx
-  itkImageDuplicatorTest.cxx
   itkImageDuplicatorTest2.cxx
-  itkImageIteratorsForwardBackwardTest.cxx
-  itkImageIteratorTest.cxx
-  itkImageIteratorWithIndexTest.cxx
-  itkImageLinearIteratorTest.cxx
-  itkImageRandomIteratorTest.cxx
   itkImageRandomIteratorTest2.cxx
-  itkImageRegionExplicitTest.cxx
-  itkImageRegionIteratorTest.cxx
   itkImageRegionTest.cxx
-  itkImageReverseIteratorTest.cxx
-  itkImageScanlineIteratorTest1.cxx
-  itkImageSliceIteratorTest.cxx
   itkImageTest.cxx
-  itkIteratorTests.cxx
   itkLightObjectTest.cxx
   itkLineIteratorTest.cxx
   itkLoggerTest.cxx
-  itkMapContainerTest.cxx
   itkMultipleLogOutputTest.cxx
-  itkNeighborhoodAlgorithmTest.cxx
-  itkNeighborhoodOperatorTest.cxx
   itkNumberToStringTest.cxx
   itkNumericTraitsTest.cxx
   itkObjectFactoryTest.cxx
-  itkObjectStoreTest.cxx
-  itkPhasedArray3DSpecialCoordinatesImageTest.cxx
-  itkPointGeometryTest.cxx
   itkPointSetTest.cxx
   itkPointSetToImageFilterTest1.cxx
   itkPointSetToImageFilterTest2.cxx
   itkRGBPixelTest.cxx
   itkSobelOperatorImageConvolutionTest.cxx
   itkSobelOperatorImageFilterTest.cxx
-  itkStreamingImageFilterTest.cxx
-  itkStreamingImageFilterTest2.cxx
   itkStreamingImageFilterTest3.cxx
-  itkSymmetricEigenAnalysisTest.cxx
   itkSymmetricSecondRankTensorImageReadTest.cxx
   itkSymmetricSecondRankTensorImageWriteReadTest.cxx
-  itkTimeProbeTest.cxx
   itkTimeProbeTest2.cxx
   itkVectorContainerTest.cxx
   itkVectorTest.cxx
 )
 set(
   ITKCommon2Tests
-  itkSTLThreadTest.cxx
   itkThreadLoggerTest.cxx
   itkLoggerThreadWrapperTest.cxx
-  itkThreadDefsTest.cxx
   itkMultiThreaderBaseTest.cxx
   itkMultiThreaderTypeFromEnvironmentTest.cxx
   itkMultiThreadingEnvironmentTest.cxx
   itkMultiThreaderParallelizeArrayTest.cxx
   itkMultithreadingTest.cxx
-  itkMultiThreaderExceptionsTest.cxx
-  itkMetaProgrammingLibraryTest.cxx
   itkPromoteType.cxx
   itkMetaDataDictionaryTest.cxx
   itkStdStreamLogOutputTest.cxx
-  itkOctreeTest.cxx
-  itkTimeProbesTest.cxx
   itkVariableLengthVectorTest.cxx
-  itkPeriodicBoundaryConditionTest.cxx
   itkSmartPointerTest.cxx
   itkConstNeighborhoodIteratorTest.cxx
   itkShapedNeighborhoodIteratorTest.cxx
@@ -85,29 +53,16 @@ set(
   itkConstShapedNeighborhoodIteratorTest.cxx
   itkConstShapedNeighborhoodIteratorTest2.cxx
   itkLoggerOutputTest.cxx
-  itkNeighborhoodTest.cxx
   itkObjectFactoryTest2.cxx
   itkObjectFactoryTest3.cxx
   itkObjectFactoryOnlyNewTest.cxx
   itkSliceIteratorTest.cxx
-  itkImageRegionExclusionIteratorWithIndexTest.cxx
   itkImageFillBufferTest.cxx
-  itkMemoryLeakTest.cxx
-  itkVectorGeometryTest.cxx
-  itkVNLRoundProfileTest1.cxx
-  itkMemoryProbesCollecterBaseTest.cxx
-  itkImageAlgorithmCopyTest.cxx
-  itkConstantBoundaryConditionTest.cxx
-  itkDataObjectAndProcessObjectTest.cxx
   itkOptimizerParametersTest.cxx
-  itkImageRegionConstIteratorWithOnlyIndexTest.cxx
-  itkImageRandomConstIteratorWithOnlyIndexTest.cxx
-  itkConstNeighborhoodIteratorWithOnlyIndexTest.cxx
   itkImageToImageToleranceTest.cxx
   itkImageRegionSplitterSlowDimensionTest.cxx
   itkImageRegionSplitterDirectionTest.cxx
   itkImageRegionSplitterMultidimensionalTest.cxx
-  itkMetaDataObjectTest.cxx
   # itkVectorMultiplyTest.cxx
   itkXMLFileOutputWindowTest.cxx
   itkXMLFilterWatcherTest.cxx
@@ -210,36 +165,6 @@ itk_add_test(
     ${TEMP}/test_multi.txt
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/test_multi.txt
-)
-itk_add_test(
-  NAME itkFixedArrayTest2
-  COMMAND
-    ITKCommon1TestDriver
-    itkFixedArrayTest2
-)
-itk_add_test(
-  NAME itkObjectStoreTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkObjectStoreTest
-)
-itk_add_test(
-  NAME itkImageComputeOffsetAndIndexTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageComputeOffsetAndIndexTest
-)
-itk_add_test(
-  NAME itkImageRegionExplicitTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageRegionExplicitTest
-)
-itk_add_test(
-  NAME itkMetaProgrammingLibraryTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMetaProgrammingLibraryTest
 )
 itk_add_test(
   NAME itkPromoteType
@@ -390,52 +315,10 @@ itk_add_test(
     1
 )
 itk_add_test(
-  NAME itkImageIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageIteratorTest
-)
-itk_add_test(
-  NAME itkImageIteratorWithIndexTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageIteratorWithIndexTest
-)
-itk_add_test(
-  NAME itkImageRegionIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageRegionIteratorTest
-)
-itk_add_test(
-  NAME itkImageScanlineIteratorTest1
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageScanlineIteratorTest1
-)
-itk_add_test(
   NAME itkImageRegionTest
   COMMAND
     ITKCommon1TestDriver
     itkImageRegionTest
-)
-itk_add_test(
-  NAME itkImageRegionExclusionIteratorWithIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageRegionExclusionIteratorWithIndexTest
-)
-itk_add_test(
-  NAME itkImageReverseIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageReverseIteratorTest
-)
-itk_add_test(
-  NAME itkImageDuplicatorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageDuplicatorTest
 )
 itk_add_test(
   NAME itkImageDuplicatorTest2
@@ -451,24 +334,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/vol-raw-big-dup2.nrrd
 )
 itk_add_test(
-  NAME itkImageIteratorsForwardBackwardTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageIteratorsForwardBackwardTest
-)
-itk_add_test(
-  NAME itkImageLinearIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageLinearIteratorTest
-)
-itk_add_test(
-  NAME itkImageRandomIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageRandomIteratorTest
-)
-itk_add_test(
   NAME itkImageRandomIteratorTest2
   COMMAND
     ITKCommon1TestDriver
@@ -476,12 +341,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkImageRandomIteratorTest2Output.mha
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkImageRandomIteratorTest2Output.mha
-)
-itk_add_test(
-  NAME itkImageSliceIteratorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkImageSliceIteratorTest
 )
 itk_add_test(
   NAME itkImageTest
@@ -545,22 +404,10 @@ itk_add_test(
     itkMatrixTest
 )
 itk_add_test(
-  NAME itkMapContainerTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkMapContainerTest
-)
-itk_add_test(
   NAME itkVectorContainerTest
   COMMAND
     ITKCommon1TestDriver
     itkVectorContainerTest
-)
-itk_add_test(
-  NAME itkIteratorTests
-  COMMAND
-    ITKCommon1TestDriver
-    itkIteratorTests
 )
 itk_add_test(
   NAME itkObjectFactoryTest
@@ -605,30 +452,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkPointSetToImageFilterTest2.mha
 )
-itk_add_test(
-  NAME itkDataObjectTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkDataObjectTest
-)
-itk_add_test(
-  NAME itkPointGeometryTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkPointGeometryTest
-)
-
-#
-# This test should be enabled if you suspect that the memory leak detector
-# is not working
-if(0)
-  itk_add_test(
-    NAME itkMemoryLeakTest
-    COMMAND
-      ITKCommon2TestDriver
-      itkMemoryLeakTest
-  )
-endif()
 
 itk_add_test(
   NAME itkMetaDataDictionaryTest
@@ -899,28 +722,10 @@ set_tests_properties(
 )
 
 itk_add_test(
-  NAME itkNeighborhoodAlgorithmTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkNeighborhoodAlgorithmTest
-)
-itk_add_test(
-  NAME itkNeighborhoodTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkNeighborhoodTest
-)
-itk_add_test(
   NAME itkNeighborhoodIteratorTest
   COMMAND
     ITKCommon2TestDriver
     itkNeighborhoodIteratorTest
-)
-itk_add_test(
-  NAME itkNeighborhoodOperatorTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkNeighborhoodOperatorTest
 )
 itk_add_test(
   NAME itkNumericTraitsTest
@@ -928,12 +733,6 @@ itk_add_test(
     ITKCommon1TestDriver
     --full-output
     itkNumericTraitsTest
-)
-itk_add_test(
-  NAME itkOctreeTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkOctreeTest
 )
 itk_add_test(
   NAME itkNumberToStringTest
@@ -971,24 +770,6 @@ itk_add_test(
   COMMAND
     ITKCommon2TestDriver
     itkObjectFactoryOnlyNewTest
-)
-itk_add_test(
-  NAME itkPeriodicBoundaryConditionTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkPeriodicBoundaryConditionTest
-)
-itk_add_test(
-  NAME itkPhasedArray3DSpecialCoordinatesImageTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkPhasedArray3DSpecialCoordinatesImageTest
-)
-itk_add_test(
-  NAME itkTimeProbeTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkTimeProbeTest
 )
 itk_add_test(
   NAME itkTimeProbeCommonTest2
@@ -1043,18 +824,6 @@ itk_add_test(
     ${TEMP}/test_threadLogger.txt
 )
 itk_add_test(
-  NAME itkThreadDefsTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkThreadDefsTest
-)
-itk_add_test(
-  NAME itkTimeProbesTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkTimeProbesTest
-)
-itk_add_test(
   NAME itkSymmetricSecondRankTensorImageReadTest
   COMMAND
     ITKCommon1TestDriver
@@ -1077,30 +846,6 @@ itk_add_test(
   COMMAND
     ITKCommon2TestDriver
     itkSymmetricSecondRankTensorTest
-)
-itk_add_test(
-  NAME itkSymmetricEigenAnalysisTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkSymmetricEigenAnalysisTest
-)
-itk_add_test(
-  NAME itkSTLThreadTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkSTLThreadTest
-)
-itk_add_test(
-  NAME itkStreamingImageFilterTest
-  COMMAND
-    ITKCommon1TestDriver
-    itkStreamingImageFilterTest
-)
-itk_add_test(
-  NAME itkStreamingImageFilterTest2
-  COMMAND
-    ITKCommon1TestDriver
-    itkStreamingImageFilterTest2
 )
 itk_add_test(
   NAME itkStreamingImageFilterTest3_1
@@ -1137,30 +882,6 @@ itk_add_test(
     itkVariableLengthVectorTest
 )
 #itk_add_test(NAME itkQuaternionOrientationAdapterTest COMMAND ITKCommon2TestDriver itkQuaternionOrientationAdapterTest)
-itk_add_test(
-  NAME itkVectorGeometryTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkVectorGeometryTest
-)
-itk_add_test(
-  NAME itkConstantBoundaryConditionTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkConstantBoundaryConditionTest
-)
-itk_add_test(
-  NAME itkVNLRoundProfileTest1
-  COMMAND
-    ITKCommon2TestDriver
-    itkVNLRoundProfileTest1
-)
-itk_add_test(
-  NAME itkMemoryProbesCollecterBaseTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMemoryProbesCollecterBaseTest
-)
 if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 4)
   itk_add_test(
     NAME itkImageFillBufferTest4.1
@@ -1185,12 +906,6 @@ if("${ITK_COMPUTER_MEMORY_SIZE}" GREATER 4)
   )
 endif()
 
-itk_add_test(
-  NAME itkImageAlgorithmCopyTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageAlgorithmCopyTest
-)
 itk_add_test(
   NAME itkOptimizerParametersTest
   COMMAND
@@ -1252,30 +967,6 @@ itk_add_test(
     itkCMakeConfigurationTest
     ${CMAKE_BINARY_DIR}
 )
-itk_add_test(
-  NAME itkDataObjectAndProcessObjectTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkDataObjectAndProcessObjectTest
-)
-itk_add_test(
-  NAME itkImageRegionConstIteratorWithOnlyIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageRegionConstIteratorWithOnlyIndexTest
-)
-itk_add_test(
-  NAME itkImageRandomConstIteratorWithOnlyIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkImageRandomConstIteratorWithOnlyIndexTest
-)
-itk_add_test(
-  NAME itkConstNeighborhoodIteratorWithOnlyIndexTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkConstNeighborhoodIteratorWithOnlyIndexTest
-)
 
 itk_add_test(
   NAME itkImageToImageToleranceTest
@@ -1304,25 +995,11 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkMetaDataObjectTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMetaDataObjectTest
-)
-
-itk_add_test(
   NAME itkMultithreadingTest
   COMMAND
     ITKCommon2TestDriver
     itkMultithreadingTest
     100
-)
-
-itk_add_test(
-  NAME itkMultiThreaderExceptionsTest
-  COMMAND
-    ITKCommon2TestDriver
-    itkMultiThreaderExceptionsTest
 )
 
 itk_add_test(
@@ -1431,10 +1108,14 @@ set(
   itkCompensatedSummationGTest.cxx
   itkConicShellInteriorExteriorSpatialFunctionGTest.cxx
   itkConnectedImageNeighborhoodShapeGTest.cxx
+  itkConstantBoundaryConditionGTest.cxx
   itkConstantBoundaryImageNeighborhoodPixelAccessPolicyGTest.cxx
+  itkConstNeighborhoodIteratorWithOnlyIndexGTest.cxx
   itkCopyGTest.cxx
   itkCovariantVectorGTest.cxx
   itkCrossHelperGTest.cxx
+  itkDataObjectAndProcessObjectGTest.cxx
+  itkDataObjectGTest.cxx
   itkDataTypeGTest.cxx
   itkDecoratorGTest.cxx
   itkDerefGTest.cxx
@@ -1449,6 +1130,7 @@ set(
   itkFilterDispatchGTest.cxx
   itkFiniteCylinderSpatialFunctionGTest.cxx
   itkFixedArrayGTest.cxx
+  itkFixedArrayGTest2.cxx
   itkFloodFilledSpatialFunctionGTest.cxx
   itkFloodFillIteratorGTest.cxx
   itkFrustumSpatialFunctionGTest.cxx
@@ -1456,17 +1138,33 @@ set(
   itkHashTableGTest.cxx
   itkHeavisideStepFunctionGTest.cxx
   itkImageAdaptorPipeLineGTest.cxx
+  itkImageAlgorithmCopyGTest.cxx
   itkImageAlgorithmCopyGTest2.cxx
   itkImageBaseGTest.cxx
   itkImageBufferRangeGTest.cxx
+  itkImageComputeOffsetAndIndexGTest.cxx
+  itkImageDuplicatorGTest.cxx
   itkImageGTest.cxx
   itkImageIORegionGTest.cxx
+  itkImageIteratorGTest.cxx
+  itkImageIteratorsForwardBackwardGTest.cxx
   itkImageIteratorsGTest.cxx
+  itkImageIteratorWithIndexGTest.cxx
+  itkImageLinearIteratorGTest.cxx
   itkImageNeighborhoodOffsetsGTest.cxx
   itkImageRandomConstIteratorWithIndexGTest.cxx
+  itkImageRandomConstIteratorWithOnlyIndexGTest.cxx
+  itkImageRandomIteratorGTest.cxx
   itkImageRandomNonRepeatingIteratorWithIndexGTest.cxx
+  itkImageRegionConstIteratorWithOnlyIndexGTest.cxx
+  itkImageRegionExclusionIteratorWithIndexGTest.cxx
+  itkImageRegionExplicitGTest.cxx
   itkImageRegionGTest.cxx
+  itkImageRegionIteratorGTest.cxx
   itkImageRegionRangeGTest.cxx
+  itkImageReverseIteratorGTest.cxx
+  itkImageScanlineIteratorGTest1.cxx
+  itkImageSliceIteratorGTest.cxx
   itkImageTransformGTest.cxx
   itkImageVectorOptimizerParametersHelperGTest.cxx
   itkImportContainerGTest.cxx
@@ -1474,12 +1172,15 @@ set(
   itkIndexGTest.cxx
   itkIndexRangeGTest.cxx
   itkIntTypesGTest.cxx
+  itkIteratorsGTest.cxx
   itkLightObjectGTest.cxx
   itkMakeUniqueForOverwriteGTest.cxx
+  itkMapContainerGTest.cxx
   itkMathCastWithRangeCheckGTest.cxx
   itkMathGTest.cxx
   itkMathRoundGTest.cxx
   itkMathVnlParityGTest.cxx
+  itkMemoryProbesCollecterBaseGTest.cxx
   itkBridgeMathSVDGTest.cxx
   itkBridgeMathLDLTGTest.cxx
   itkVnlCholeskyEngineGTest.cxx
@@ -1490,16 +1191,27 @@ set(
   itkMatrixGTest.cxx
   itkMersenneTwisterRandomVariateGeneratorGTest.cxx
   itkMetaDataDictionaryGTest.cxx
+  itkMetaDataObjectGTest.cxx
+  itkMetaProgrammingLibraryGTest.cxx
   itkMinimumMaximumImageCalculatorGTest.cxx
   itkModifiedTimeGTest.cxx
+  itkMultiThreaderExceptionsGTest.cxx
+  itkNeighborhoodAlgorithmGTest.cxx
   itkNeighborhoodAllocatorGTest.cxx
+  itkNeighborhoodGTest.cxx
   itkNeighborhoodIteratorsGTest.cxx
+  itkNeighborhoodOperatorGTest.cxx
   itkNumberToStringGTest.cxx
   itkNumericsGTest.cxx
   itkObjectFactoryBaseGTest.cxx
+  itkObjectStoreGTest.cxx
+  itkOctreeGTest.cxx
   itkOffsetGTest.cxx
   itkOptimizerParametersGTest.cxx
+  itkPeriodicBoundaryConditionGTest.cxx
+  itkPhasedArray3DSpecialCoordinatesImageGTest.cxx
   itkPixelAccessGTest.cxx
+  itkPointGeometryGTest.cxx
   itkPointGTest.cxx
   itkPointSetGTest.cxx
   itkPrintHelperGTest.cxx
@@ -1526,28 +1238,43 @@ set(
   itkSpecialFunctionsGTest.cxx
   itkStdStreamStateSaveGTest.cxx
   itkSTLContainerAdaptorGTest.cxx
+  itkSTLThreadGTest.cxx
+  itkStreamingImageFilterGTest.cxx
+  itkStreamingImageFilterGTest2.cxx
   itkStringConvertGTest.cxx
+  itkSymmetricEigenAnalysisGTest.cxx
   itkSymmetricEllipsoidInteriorExteriorSpatialFunctionGTest.cxx
   itkSymmetricSecondRankTensorGTest.cxx
+  itkThreadDefsGTest.cxx
   itkThreadedImageRegionPartitionerGTest.cxx
   itkThreadedIndexedContainerPartitionerGTest.cxx
   itkThreadedIteratorRangePartitionerGTest.cxx
   itkThreadedIteratorRangePartitionerGTest2.cxx
   itkThreadedIteratorRangePartitionerGTest3.cxx
+  itkTimeProbeGTest.cxx
+  itkTimeProbesGTest.cxx
   itkTimeStampGTest.cxx
   itkTorusInteriorExteriorSpatialFunctionGTest.cxx
   itkVariableLengthVectorGTest.cxx
   itkVariableSizeMatrixGTest.cxx
   itkVectorContainerGTest.cxx
+  itkVectorGeometryGTest.cxx
   itkVectorGTest.cxx
   itkVersionGTest.cxx
   itkVersorGTest.cxx
+  itkVNLRoundProfileGTest1.cxx
   itkWeakPointerGTest.cxx
   itkZeroFluxBoundaryConditionGTest.cxx
   VNLSparseLUSolverTraitsGTest.cxx
   SparseLUSolverTraitsGTest.cxx
   VnlEigenSparseLUEquivalenceGTest.cxx
 )
+#
+# This test should be enabled if you suspect that the memory leak detector
+# is not working
+if(0)
+  list(APPEND ITKCommonGTests itkMemoryLeakGTest.cxx)
+endif()
 creategoogletestdriver(ITKCommon "${ITKCommon-Test_LIBRARIES}" "${ITKCommonGTests}")
 # If `-static` was passed to CMAKE_EXE_LINKER_FLAGS, compilation fails. No need to
 # test this case.

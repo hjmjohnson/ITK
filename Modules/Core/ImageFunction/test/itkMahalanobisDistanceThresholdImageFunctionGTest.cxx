@@ -1,0 +1,126 @@
+/*=========================================================================
+ *
+ *  Copyright NumFOCUS
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *=========================================================================*/
+
+
+#include "itkMahalanobisDistanceThresholdImageFunction.h"
+#include "itkImage.h"
+#include "itkImageFunction.h"
+#include "itkMath.h"
+#include "itkGTest.h"
+
+TEST(MahalanobisDistanceThresholdImageFunction, ConvertedLegacyTest)
+{
+
+  constexpr unsigned int Dimension{ 3 };
+  using PixelComponentType = unsigned char;
+  using PixelType = itk::RGBPixel<PixelComponentType>;
+
+  using ImageType = itk::Image<PixelType, Dimension>;
+  using FunctionType = itk::MahalanobisDistanceThresholdImageFunction<ImageType>;
+
+  // Create and allocate the image
+  auto                  image = ImageType::New();
+  ImageType::SizeType   size{ 50, 50, 50 };
+  ImageType::IndexType  start{};
+  ImageType::RegionType region = { start, size };
+
+  image->SetRegions(region);
+  image->Allocate();
+
+  ImageType::PixelType initialValue;
+
+  initialValue[0] = 11;
+  initialValue[1] = 22;
+  initialValue[2] = 33;
+
+  image->FillBuffer(initialValue);
+
+  auto function = FunctionType::New();
+
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(function, MahalanobisDistanceThresholdImageFunction, ImageFunction);
+
+  function->SetInputImage(image);
+
+  constexpr double threshold{ 5.0 };
+  function->SetThreshold(threshold);
+
+  FunctionType::CovarianceMatrixType covariance(Dimension, Dimension);
+  FunctionType::MeanVectorType       mean(Dimension);
+
+  mean[0] = 10.0;
+  mean[1] = 20.0;
+  mean[2] = 30.0;
+
+  covariance.fill(0.0);
+  covariance[0][0] = 100.0;
+  covariance[1][1] = 200.0;
+  covariance[2][2] = 300.0;
+
+  function->SetCovariance(covariance);
+  function->SetMean(mean);
+
+  EXPECT_EQ(covariance, function->GetCovariance());
+  EXPECT_EQ(mean, function->GetMean());
+
+  ImageType::IndexType index;
+
+  index[0] = 25;
+  index[1] = 25;
+  index[2] = 25;
+
+  EXPECT_TRUE(function->EvaluateAtIndex(index));
+
+  const double distance = function->EvaluateDistanceAtIndex(index);
+  std::cout << "function->EvaluateDistanceAtIndex( index ): " << distance << std::endl;
+
+  constexpr double expectedDistance{ 0.244949 };
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(distance, expectedDistance, 10, 1e-5))
+    << "Error in distance computation in EvaluateDistanceAtIndex() !!" << std::endl
+    << "Expected distance value = " << expectedDistance << std::endl
+    << "Distance obtained value = " << distance;
+
+  // Test Evaluate
+  FunctionType::PointType point;
+  point[0] = 25;
+  point[1] = 25;
+  point[2] = 25;
+
+  EXPECT_TRUE(function->Evaluate(point));
+
+  const double distance2 = function->EvaluateDistance(point);
+  std::cout << "function->EvaluateDistance(point): " << distance2 << std::endl;
+
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(distance2, expectedDistance, 10, 1e-5))
+    << "Error in distance computation in EvaluateDistance() !!" << std::endl
+    << "Expected distance value = " << expectedDistance << std::endl
+    << "Distance obtained value = " << distance2;
+
+  // Test EvaluateAtContinuousIndex
+  FunctionType::ContinuousIndexType cindex;
+  cindex[0] = 25;
+  cindex[1] = 25;
+  cindex[2] = 25;
+
+  EXPECT_TRUE(function->EvaluateAtContinuousIndex(cindex));
+
+  // Test GetConstReferenceMacro
+  const double & getThreshold = function->GetThreshold();
+  std::cout << "function->GetThreshold(): " << getThreshold << std::endl;
+  EXPECT_TRUE(itk::Math::FloatAlmostEqual(threshold, getThreshold, 10, 1e-9))
+    << "Error: Set/Get Threshold do not match";
+}
