@@ -8,8 +8,7 @@ ITK's tests are defined with CTest, and the tests can be executed via `ctest`.
 
 Enable `ITK_USE_FFTWF` for single precision or `ITK_USE_FFTWD` for double
 precision. Either option adds the `ITKFFTW` third-party module to `ITKFFT`.
-If `Module_ITKFFTW` is enabled with neither option, it provides double
-precision.
+Enabling `Module_ITKFFTW` with neither option is a configuration error.
 FFTW is GPL licensed; linking it changes the licensing requirements of
 the resulting binaries.
 

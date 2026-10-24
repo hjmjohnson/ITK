@@ -2,12 +2,8 @@ project(ITKFFTW)
 set(ITKFFTW_THIRD_PARTY 1)
 set(ITKFFTW_LIBRARIES "")
 
-# Enabled without ITK_USE_FFTWD/ITK_USE_FFTWF (e.g. Module_ITKFFTW=ON): double.
 set(_fftw_double ${ITK_USE_FFTWD})
 set(_fftw_float ${ITK_USE_FFTWF})
-if(NOT _fftw_double AND NOT _fftw_float)
-  set(_fftw_double ON)
-endif()
 set(_fftw_precisions "")
 if(_fftw_double)
   list(APPEND _fftw_precisions double)
@@ -21,6 +17,13 @@ set_property(
     ITKFFTW_PRECISIONS
       "${_fftw_precisions}"
 )
+
+if(NOT _fftw_precisions)
+  message(
+    FATAL_ERROR
+    "Module_ITKFFTW requires ITK_USE_FFTWD or ITK_USE_FFTWF to be ON."
+  )
+endif()
 
 if(NOT ITK_USE_MKL AND NOT ITK_USE_CUFFTW)
   message(
