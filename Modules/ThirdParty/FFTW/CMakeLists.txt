@@ -2,14 +2,18 @@ project(ITKFFTW)
 set(ITKFFTW_THIRD_PARTY 1)
 set(ITKFFTW_LIBRARIES "")
 
-set(_fftw_double ${ITK_USE_FFTWD})
-set(_fftw_float ${ITK_USE_FFTWF})
 set(_fftw_precisions "")
-if(_fftw_double)
+set(_fftw_components "")
+set(_fftw_library_names "")
+if(ITK_USE_FFTWD)
   list(APPEND _fftw_precisions double)
+  list(APPEND _fftw_components Double)
+  list(APPEND _fftw_library_names fftw3)
 endif()
-if(_fftw_float)
+if(ITK_USE_FFTWF)
   list(APPEND _fftw_precisions float)
+  list(APPEND _fftw_components Float)
+  list(APPEND _fftw_library_names fftw3f)
 endif()
 set_property(
   GLOBAL
@@ -33,15 +37,12 @@ if(NOT ITK_USE_MKL AND NOT ITK_USE_CUFFTW)
 endif()
 
 if(ITK_USE_SYSTEM_FFTW)
-  set(_fftw_components "")
-  if(_fftw_double)
-    list(APPEND _fftw_components Double)
-    list(APPEND ITKFFTW_LIBRARIES FFTW::Double)
-  endif()
-  if(_fftw_float)
-    list(APPEND _fftw_components Float)
-    list(APPEND ITKFFTW_LIBRARIES FFTW::Float)
-  endif()
+  list(
+    TRANSFORM _fftw_components
+    PREPEND
+      "FFTW::"
+    OUTPUT_VARIABLE ITKFFTW_LIBRARIES
+  )
   find_package(FFTW REQUIRED COMPONENTS ${_fftw_components})
   set(ITKFFTW_NO_SRC 1)
 
@@ -83,6 +84,7 @@ if(NOT ITK_BINARY_DIR)${_fftw_find_code}endif()
 else()
   include(FetchContent)
   include(itkFFTWOptions.cmake)
+  set(_fftw_version 3.3.10)
   set(
     _fftw_url_hash
     "2d34b5ccac7b08740dbdacc6ebe451d8a34cf9d9bfec85a5e776e87adf94abfd803c222412d8e10fbaa4ed46f504aa87180396af1b108666cde4314a55610b40"
@@ -93,7 +95,7 @@ else()
     URL
       "https://data.kitware.com/api/v1/file/hashsum/sha512/${_fftw_url_hash}/download"
     URL_HASH SHA512=${_fftw_url_hash}
-    DOWNLOAD_NAME fftw-3.3.10.tar.gz
+    DOWNLOAD_NAME fftw-${_fftw_version}.tar.gz
     SOURCE_SUBDIR
     itk-fetch-only
   )
@@ -104,22 +106,14 @@ else()
   set(ITKFFTW_INCLUDE_DIRS "${fftw_SOURCE_DIR}/api")
   # Namespaced names keep ITK from exporting bare fftw3* compatibility targets.
   set(_fftw_ns "${ITK_MODULE_ITKFFTW_TARGETS_NAMESPACE}")
-  if(_fftw_double)
+  foreach(_fftw_library IN LISTS _fftw_library_names)
     list(
       APPEND
       ITKFFTW_LIBRARIES
-      ${_fftw_ns}fftw3_threads
-      ${_fftw_ns}fftw3
+      ${_fftw_ns}${_fftw_library}_threads
+      ${_fftw_ns}${_fftw_library}
     )
-  endif()
-  if(_fftw_float)
-    list(
-      APPEND
-      ITKFFTW_LIBRARIES
-      ${_fftw_ns}fftw3f_threads
-      ${_fftw_ns}fftw3f
-    )
-  endif()
+  endforeach()
 endif()
 
 itk_module_impl()
