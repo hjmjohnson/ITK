@@ -34,6 +34,15 @@ function(itk_fftw_add_precision precision)
     set(HAVE_${isa} 0)
   endforeach()
 
+  # FFTW is always built optimized, whatever the ITK build type.
+  foreach(_config IN ITEMS DEBUG RELWITHDEBINFO MINSIZEREL)
+    set(CMAKE_C_FLAGS_${_config} "${CMAKE_C_FLAGS_RELEASE}")
+  endforeach()
+  get_property(_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+  if(NOT _multi_config AND NOT CMAKE_BUILD_TYPE)
+    string(APPEND CMAKE_C_FLAGS " ${CMAKE_C_FLAGS_RELEASE}")
+  endif()
+
   add_subdirectory("${fftw_SOURCE_DIR}" "${precision}" EXCLUDE_FROM_ALL)
 
   foreach(_target IN ITEMS ${_fftw_library} ${_fftw_library}_threads)
