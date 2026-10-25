@@ -1218,3 +1218,51 @@ afterwards raises `RuntimeError` rather than crashing.
 
 Calls to `OverrideBoundaryCondition` on any *other* class are unaffected — those
 never took ownership and keep their current behavior.
+
+## FFTW is built by the `ITKFFTW` module; FFTW variables removed from `ITKConfig.cmake`
+
+ITK now builds FFTW as the `ITKFFTW` third-party module and exposes it only
+through ITK's module targets. `ITKConfig.cmake` no longer defines
+`ITK_FFTW_INCLUDE_PATH` or `ITK_FFTW_LIBDIR`, and no longer appends FFTW
+directories to `ITK_INCLUDE_DIRS` and `ITK_LIBRARY_DIRS`. The bundled FFTW
+libraries are installed as `libitkfftw3*` instead of `libfftw3*`.
+
+### What you need to do
+
+Most projects need no change. If your project links `${ITK_LIBRARIES}` (from
+`find_package(ITK COMPONENTS ITKFFT ...)`) or `ITK::ITKFFTModule`, the FFTW
+include directories and libraries come with it, including for code that calls
+`fftw3.h` directly.
+
+If your `CMakeLists.txt` uses the removed variables, delete those lines:
+
+```cmake
+# Before
+find_package(ITK REQUIRED COMPONENTS ITKFFT)
+include(${ITK_USE_FILE})
+include_directories(${ITK_FFTW_INCLUDE_PATH})
+link_directories(${ITK_FFTW_LIBDIR})
+target_link_libraries(app ${ITK_LIBRARIES} fftw3)
+
+# After
+find_package(ITK REQUIRED COMPONENTS ITKFFT)
+target_link_libraries(app ${ITK_LIBRARIES})
+```
+
+Without the change, the link fails with `library not found for -lfftw3`.
+
+Projects that configure ITK against a system FFTW keep the same options:
+`ITK_USE_SYSTEM_FFTW`, `FFTW_INCLUDE_PATH`, `FFTWD_BASE_LIB`, `FFTWF_BASE_LIB`,
+`FFTWD_THREADS_LIB`, and `FFTWF_THREADS_LIB` are still honored. `FFTWD_LIB` and
+`FFTWF_LIB` never selected the base library; set `FFTWD_BASE_LIB` and
+`FFTWF_BASE_LIB` instead.
+
+`FindFFTW.cmake` is now installed with ITK. Its `FFTWD_BASE_LIB`,
+`FFTWF_BASE_LIB`, `FFTWD_THREADS_LIB`, and `FFTWF_THREADS_LIB` results are full
+library paths rather than library names.
+
+### Why this changed
+
+The variables only described the old ExternalProject layout. They were empty
+in an ITK build tree, a Windows path in them could break `ITKConfig.cmake`
+parsing, and no project outside ITK was found that reads them.
