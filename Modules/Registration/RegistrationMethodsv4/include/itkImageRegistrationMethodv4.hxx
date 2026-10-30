@@ -21,8 +21,7 @@
 
 #include "itkSmoothingRecursiveGaussianImageFilter.h"
 #include "itkGradientDescentOptimizerv4.h"
-#include "itkImageRandomConstIteratorWithIndex.h"
-#include "itkImageRegionConstIteratorWithIndex.h"
+#include "itkIndexRange.h"
 #include "itkImageToImageMetricv4.h"
 #include "itkIterationReporter.h"
 #include "itkMattesMutualInformationImageToImageMetricv4.h"
@@ -944,13 +943,15 @@ ImageRegistrationMethodv4<TFixedImage, TMovingImage, TTransform, TVirtualImage, 
           static_cast<unsigned long>(std::ceil(1.0 / this->m_MetricSamplingPercentagePerLevel[this->m_CurrentLevel]));
         unsigned long count =
           sampleCount; // Start at sampleCount to keep behavior backwards identical, using first element.
-        for (ImageRegionConstIteratorWithIndex It(virtualImage, virtualDomainRegion); !It.IsAtEnd(); ++It)
+        // The virtual image is never allocated, so iterate its indices rather than its pixels.
+        for (const auto & virtualIndex :
+             ImageRegionIndexRange<VirtualDomainImageType::ImageDimension>(virtualDomainRegion))
         {
           if (count == sampleCount)
           {
             count = 0; // Reset counter
             SamplePointType point;
-            virtualImage->TransformIndexToPhysicalPoint(It.GetIndex(), point);
+            virtualImage->TransformIndexToPhysicalPoint(virtualIndex, point);
 
             // randomly perturb the point within a voxel (approximately)
             for (SizeValueType d = 0; d < ImageDimension; ++d)
@@ -973,20 +974,32 @@ ImageRegistrationMethodv4<TFixedImage, TMovingImage, TTransform, TVirtualImage, 
         const auto          sampleCount =
           static_cast<unsigned long>(static_cast<float>(totalVirtualDomainVoxels) *
                                      this->m_MetricSamplingPercentagePerLevel[this->m_CurrentLevel]);
-        ImageRandomConstIteratorWithIndex ItR(virtualImage, virtualDomainRegion);
+        // Draws the same indices as ImageRandomConstIteratorWithIndex, without iterating the unallocated image.
+        auto indexGenerator = RandomizerType::New();
         if (m_ReseedIterator)
         {
-          ItR.ReinitializeSeed();
+          indexGenerator->SetSeed();
         }
         else
         {
-          ItR.ReinitializeSeed(m_CurrentRandomSeed++);
+          indexGenerator->SetSeed(m_CurrentRandomSeed++);
         }
-        ItR.SetNumberOfSamples(sampleCount);
-        for (ItR.GoToBegin(); !ItR.IsAtEnd(); ++ItR)
+        using VirtualIndexValueType = typename VirtualDomainImageType::IndexValueType;
+        const auto & regionSize = virtualDomainRegion.GetSize();
+        const auto & regionStart = virtualDomainRegion.GetIndex();
+        for (unsigned long sample = 0; sample < sampleCount; ++sample)
         {
+          auto position = static_cast<VirtualIndexValueType>(
+            indexGenerator->GetVariateWithOpenRange(static_cast<double>(totalVirtualDomainVoxels) - 0.5));
+          typename VirtualDomainImageType::IndexType virtualIndex;
+          for (unsigned int d = 0; d < VirtualDomainImageType::ImageDimension; ++d)
+          {
+            const VirtualIndexValueType residual = position % static_cast<VirtualIndexValueType>(regionSize[d]);
+            virtualIndex[d] = residual + regionStart[d];
+            position = (position - residual) / static_cast<VirtualIndexValueType>(regionSize[d]);
+          }
           SamplePointType point;
-          virtualImage->TransformIndexToPhysicalPoint(ItR.GetIndex(), point);
+          virtualImage->TransformIndexToPhysicalPoint(virtualIndex, point);
 
           // randomly perturb the point within a voxel (approximately)
           for (unsigned int d = 0; d < ImageDimension; ++d)
