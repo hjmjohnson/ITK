@@ -380,16 +380,12 @@ protected:
   void
   SetupLineOffsets(bool wholeNeighborhood)
   {
-    // Create a neighborhood so that we can generate a table of offsets
-    // to "previous" line indexes
-    // We are going to misuse the neighborhood iterators to compute the
-    // offset for us. All this messing around produces an array of
-    // offsets that will be used to index the map
+    // Offsets to neighboring lines; the line image is never allocated, only its offset table is used.
     const typename TOutputImage::Pointer output = m_EnclosingFilter->GetOutput();
     using PretendImageType = Image<OffsetValueType, TOutputImage::ImageDimension - 1>;
     using PretendSizeType = typename PretendImageType::RegionType::SizeType;
     using PretendIndexType = typename PretendImageType::RegionType::IndexType;
-    using LineNeighborhoodType = ConstShapedNeighborhoodIterator<PretendImageType>;
+    using LineNeighborhoodType = Neighborhood<char, PretendImageType::ImageDimension>;
 
     auto fakeImage = PretendImageType::New();
 
@@ -406,26 +402,31 @@ protected:
 
     LineRegion.SetSize(PretendSize);
     fakeImage->SetRegions(LineRegion);
-    auto                 kernelRadius = PretendSizeType::Filled(1);
-    LineNeighborhoodType lnit(kernelRadius, fakeImage, LineRegion);
-
-    if (wholeNeighborhood)
-    {
-      setConnectivity(&lnit, m_FullyConnected);
-    }
-    else
-    {
-      setConnectivityPrevious(&lnit, m_FullyConnected);
-    }
-
-    typename LineNeighborhoodType::IndexListType ActiveIndexes = lnit.GetActiveIndexList();
+    LineNeighborhoodType lineNeighborhood;
+    lineNeighborhood.SetRadius(PretendSizeType::Filled(1));
+    const unsigned int centerIndex = lineNeighborhood.GetCenterNeighborhoodIndex();
 
     const PretendIndexType idx = LineRegion.GetIndex();
     const OffsetValueType  offset = fakeImage->ComputeOffset(idx);
 
-    for (auto LI = ActiveIndexes.begin(); LI != ActiveIndexes.end(); ++LI)
+    // Same neighbors, in the same order, as setConnectivity() and setConnectivityPrevious().
+    for (unsigned int n = 0; n < lineNeighborhood.Size(); ++n)
     {
-      m_LineOffsets.push_back(fakeImage->ComputeOffset(idx + lnit.GetOffset(*LI)) - offset);
+      if (!wholeNeighborhood && n >= centerIndex)
+      {
+        break;
+      }
+      const typename LineNeighborhoodType::OffsetType neighborOffset = lineNeighborhood.GetOffset(n);
+      unsigned int                                    nonZero = 0;
+      for (unsigned int d = 0; d < PretendImageType::ImageDimension; ++d)
+      {
+        nonZero += (neighborOffset[d] != 0);
+      }
+      if (nonZero == 0 || (!m_FullyConnected && nonZero != 1))
+      {
+        continue;
+      }
+      m_LineOffsets.push_back(fakeImage->ComputeOffset(idx + neighborOffset) - offset);
     }
 
     if (wholeNeighborhood)
