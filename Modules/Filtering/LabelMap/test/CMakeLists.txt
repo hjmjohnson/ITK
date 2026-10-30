@@ -29,19 +29,11 @@ set(
   itkConvertLabelMapFilterTest1.cxx
   itkConvertLabelMapFilterTest2.cxx
   itkCropLabelMapFilterTest1.cxx
-  itkLabelImageToLabelMapFilterTest.cxx
   itkLabelImageToShapeLabelMapFilterTest1.cxx
   itkLabelImageToStatisticsLabelMapFilterTest1.cxx
-  itkLabelMapFilterTest.cxx
   itkLabelMapMaskImageFilterTest.cxx
-  itkLabelMapTest.cxx
-  itkLabelMapTest2.cxx
   itkLabelMapToAttributeImageFilterTest1.cxx
   itkLabelMapToBinaryImageFilterTest.cxx
-  itkLabelMapToLabelImageFilterTest.cxx
-  itkLabelObjectLineComparatorTest.cxx
-  itkLabelObjectLineTest.cxx
-  itkLabelObjectTest.cxx
   itkLabelSelectionLabelMapFilterTest.cxx
   itkLabelShapeKeepNObjectsImageFilterTest1.cxx
   itkLabelShapeOpeningImageFilterTest1.cxx
@@ -60,7 +52,6 @@ set(
   itkShapeRelabelImageFilterTest1.cxx
   itkShapeRelabelLabelMapFilterTest1.cxx
   itkShapeUniqueLabelMapFilterTest1.cxx
-  itkShiftLabelObjectTest.cxx
   itkShiftScaleLabelMapFilterTest1.cxx
   itkStatisticsKeepNObjectsLabelMapFilterTest1.cxx
   itkStatisticsOpeningLabelMapFilterTest1.cxx
@@ -72,12 +63,6 @@ set(
 
 createtestdriver(ITKLabelMap "${ITKLabelMap-Test_LIBRARIES}" "${ITKLabelMapTests}")
 
-itk_add_test(
-  NAME itkShiftLabelObjectTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkShiftLabelObjectTest
-)
 itk_add_test(
   NAME itkAggregateLabelMapFilterTest1
   COMMAND
@@ -721,12 +706,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/cthead1-label-crop.mha
 )
 itk_add_test(
-  NAME itkLabelImageToLabelMapFilterTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelImageToLabelMapFilterTest
-)
-itk_add_test(
   NAME itkLabelImageToShapeLabelMapFilterTest1
   COMMAND
     ITKLabelMapTestDriver
@@ -760,12 +739,6 @@ itk_add_test(
     256
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/Spots-labelimage-to-statisticslabel.png
-)
-itk_add_test(
-  NAME itkLabelMapFilterTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelMapFilterTest
 )
 itk_add_test(
   NAME itkLabelMapMaskImageFilterTest-0-0-0
@@ -1224,18 +1197,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkLabelMapMaskImageFilterTestCrop-100-1-1-10.png
 )
 itk_add_test(
-  NAME itkLabelMapTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelMapTest
-)
-itk_add_test(
-  NAME itkLabelMapTest2
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelMapTest2
-)
-itk_add_test(
   NAME itkLabelMapToAttributeImageFilterTest1
   COMMAND
     ITKLabelMapTestDriver
@@ -1262,30 +1223,6 @@ itk_add_test(
     0
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/cthead1-label-binary.mha
-)
-itk_add_test(
-  NAME itkLabelMapToLabelImageFilterTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelMapToLabelImageFilterTest
-)
-itk_add_test(
-  NAME itkLabelObjectLineComparatorTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelObjectLineComparatorTest
-)
-itk_add_test(
-  NAME itkLabelObjectLineTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelObjectLineTest
-)
-itk_add_test(
-  NAME itkLabelObjectTest
-  COMMAND
-    ITKLabelMapTestDriver
-    itkLabelObjectTest
 )
 itk_add_test(
   NAME itkLabelSelectionLabelMapFilterTest0
@@ -1795,8 +1732,17 @@ itk_add_test(
 
 set(
   ITKLabelMapGTests
+  itkLabelImageToLabelMapFilterGTest.cxx
+  itkLabelMapFilterGTest.cxx
+  itkLabelMapGTest.cxx
+  itkLabelMapGTest2.cxx
+  itkLabelMapToLabelImageFilterGTest.cxx
+  itkLabelObjectGTest.cxx
+  itkLabelObjectLineComparatorGTest.cxx
+  itkLabelObjectLineGTest.cxx
   itkShapeLabelMapFilterGTest.cxx
   itkLabelMapBugfixGTest.cxx
+  itkShiftLabelObjectGTest.cxx
   itkStatisticsLabelMapFilterGTest.cxx
   itkUniqueLabelMapFiltersGTest.cxx
 )

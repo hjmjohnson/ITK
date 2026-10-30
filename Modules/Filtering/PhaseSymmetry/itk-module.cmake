@@ -16,6 +16,7 @@ itk_module(
     ITKImageCompose
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
   EXCLUDE_FROM_DEFAULT
   DESCRIPTION
     "Multi-scale steerable filters for computing a contrast-invariant phase-symmetry edge/ridge measure based on local phase congruency."

@@ -5,7 +5,6 @@ set(
   itkPhaseSymmetryImageFilterTest.cxx
   itkButterworthFilterFreqImageSourceTest.cxx
   itkLogGaborFreqImageSourceTest.cxx
-  itkSteerableFilterFreqImageSourceTest.cxx
   itkSinusoidImageSourceTest.cxx
 )
 
@@ -66,13 +65,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkSteerableFilterFreqImageSourceTest
-  COMMAND
-    PhaseSymmetryTestDriver
-    itkSteerableFilterFreqImageSourceTest
-)
-
-itk_add_test(
   NAME itkSinusoidImageSourceTest
   COMMAND
     PhaseSymmetryTestDriver
@@ -88,3 +80,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkSinusoidImageSourceTest.mha
 )
+
+set(PhaseSymmetryGTests itkSteerableFilterFreqImageSourceGTest.cxx)
+creategoogletestdriver(PhaseSymmetry "${PhaseSymmetry-Test_LIBRARIES}" "${PhaseSymmetryGTests}")
