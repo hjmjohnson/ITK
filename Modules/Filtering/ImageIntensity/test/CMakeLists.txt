@@ -17,7 +17,6 @@ set(
   itkPolylineMask2DImageFilterTest.cxx
   itkPolylineMaskImageFilterTest.cxx
   itkPromoteDimensionImageTest.cxx
-  itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
   itkSymmetricEigenAnalysisImageFilterTest.cxx
   itkTernaryMagnitudeImageFilterTest.cxx
   itkVectorIndexSelectionCastImageFilterTest.cxx
@@ -256,12 +255,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkOrImageFilterTest.png
 )
 itk_add_test(
-  NAME itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkRGBToLuminanceImageFilterAndAdaptorTest
-)
-itk_add_test(
   NAME itkXorImageFilterTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -489,6 +482,7 @@ set(
   itkNaryMaximumImageFilterGTest.cxx
   itkNormalizeToConstantImageFilterGTest.cxx
   itkNotEqualGTest.cxx
+  itkRGBToLuminanceImageFilterAndAdaptorGTest.cxx
   itkRGBToVectorAdaptImageFilterGTest.cxx
   itkNotImageFilterGTest.cxx
   itkNthElementPixelAccessorGTest2.cxx
