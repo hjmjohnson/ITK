@@ -52,7 +52,6 @@ set(
   itkPromoteDimensionImageTest.cxx
   itkRescaleIntensityImageFilterTest.cxx
   itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
-  itkRGBToVectorAdaptImageFilterTest.cxx
   itkShiftScaleImageFilterTest.cxx
   itkSigmoidImageFilterTest.cxx
   itkSinImageFilterAndAdaptorTest.cxx
@@ -432,12 +431,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/MatrixIndexSelectionImageFilterTest.png
 )
 itk_add_test(
-  NAME itkRGBToVectorAdaptImageFilterTest.cxx
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkRGBToVectorAdaptImageFilterTest
-)
-itk_add_test(
   NAME itkComplexToRealFilterAndAdaptorTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -793,6 +786,7 @@ set(
   itkLessGTest.cxx
   itkMaskedAssignImageFilterGTest.cxx
   itkNotEqualGTest.cxx
+  itkRGBToVectorAdaptImageFilterGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
 )
