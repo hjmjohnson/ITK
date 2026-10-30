@@ -8,30 +8,18 @@ set(
   itkDirectFourierReconstructionImageToImageFilterTest.cxx
   itkFastApproximateRankImageFilterTest.cxx
   itkGridForwardWarpImageFilterTest.cxx
-  itkImageFunctionTest.cxx
   itkLabelGeometryImageFilterTest.cxx
-  itkMultiphaseDenseFiniteDifferenceImageFilterTest.cxx
-  itkMultiphaseFiniteDifferenceImageFilterTest.cxx
   itkMultiphaseSparseFiniteDifferenceImageFilterTest.cxx
   itkOptImageToImageMetricsTest.cxx
   itkOptImageToImageMetricsTest2.cxx
   itkOptMattesMutualInformationImageToImageMetricThreadsTest1.cxx
   itkRegionBasedLevelSetFunctionTest.cxx
-  itkReviewPrintTest.cxx
   itkRobustAutomaticThresholdCalculatorTest.cxx
   itkRobustAutomaticThresholdImageFilterTest.cxx
-  itkScalarChanAndVeseDenseLevelSetImageFilterTest1.cxx
   itkScalarChanAndVeseDenseLevelSetImageFilterTest2.cxx
-  itkScalarChanAndVeseDenseLevelSetImageFilterTest3.cxx
   itkScalarChanAndVeseDenseLevelSetImageFilterTest4.cxx
-  itkScalarChanAndVeseLevelSetFunctionTest1.cxx
-  itkScalarChanAndVeseLevelSetFunctionTest2.cxx
-  itkScalarChanAndVeseSparseLevelSetImageFilterTest1.cxx
   itkScalarChanAndVeseSparseLevelSetImageFilterTest2.cxx
-  itkScalarRegionBasedLevelSetFunctionTest.cxx
   itkShapedFloodFilledImageFunctionConditionalConstIteratorTest1.cxx
-  itkShapedFloodFilledImageFunctionConditionalConstIteratorTest2.cxx
-  itkShapedFloodFilledImageFunctionConditionalConstIteratorTest3.cxx
   itkStochasticFractalDimensionImageFilterTest.cxx
   itkTimeAndMemoryProbeTest.cxx
   itkVoxBoCUBImageIOTest.cxx
@@ -45,13 +33,6 @@ set(BASELINE_ROOT ${ITK_DATA_ROOT}/Baseline)
 set(TEMP ${ITK_TEST_OUTPUT_DIR})
 
 createtestdriver(ITKReview "${ITKReview-Test_LIBRARIES}" "${ITKReviewTests}")
-
-itk_add_test(
-  NAME itkReviewPrintTest
-  COMMAND
-    ITKReviewTestDriver
-    itkReviewPrintTest
-)
 
 itk_add_test(
   NAME itkAreaClosingImageFilterTest0
@@ -202,12 +183,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkGridForwardWarpImageFilterTest.mha
 )
 itk_add_test(
-  NAME itkImageFunctionTest
-  COMMAND
-    ITKReviewTestDriver
-    itkImageFunctionTest
-)
-itk_add_test(
   NAME itkLabelGeometryImageFilterTest
   COMMAND
     ITKReviewTestDriver
@@ -240,18 +215,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkLabelGeometryImageFilterTest3D.{mhd,raw}
     ${ITK_TEST_OUTPUT_DIR}/itkLabelGeometryImageFilterTest3D.csv
-)
-itk_add_test(
-  NAME itkMultiphaseDenseFiniteDifferenceImageFilterTest
-  COMMAND
-    ITKReviewTestDriver
-    itkMultiphaseDenseFiniteDifferenceImageFilterTest
-)
-itk_add_test(
-  NAME itkMultiphaseFiniteDifferenceImageFilterTest
-  COMMAND
-    ITKReviewTestDriver
-    itkMultiphaseFiniteDifferenceImageFilterTest
 )
 itk_add_test(
   NAME itkMultiphaseSparseFiniteDifferenceImageFilterTest
@@ -371,12 +334,6 @@ itk_add_test(
     94
 )
 itk_add_test(
-  NAME itkScalarChanAndVeseDenseLevelSetImageFilterTest1
-  COMMAND
-    ITKReviewTestDriver
-    itkScalarChanAndVeseDenseLevelSetImageFilterTest1
-)
-itk_add_test(
   NAME itkScalarChanAndVeseDenseLevelSetImageFilterTest2_0
   COMMAND
     ITKReviewTestDriver
@@ -450,12 +407,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkScalarChanAndVeseDenseLevelSetImageFilterTest2_3.mha
 )
 itk_add_test(
-  NAME itkScalarChanAndVeseDenseLevelSetImageFilterTest3
-  COMMAND
-    ITKReviewTestDriver
-    itkScalarChanAndVeseDenseLevelSetImageFilterTest3
-)
-itk_add_test(
   NAME itkScalarChanAndVeseDenseLevelSetImageFilterTest4
   COMMAND
     ITKReviewTestDriver
@@ -475,24 +426,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkScalarChanAndVeseDenseLevelSetImageFilterTest4.mha
 )
 itk_add_test(
-  NAME itkScalarChanAndVeseLevelSetFunctionTest1
-  COMMAND
-    ITKReviewTestDriver
-    itkScalarChanAndVeseLevelSetFunctionTest1
-)
-itk_add_test(
-  NAME itkScalarChanAndVeseLevelSetFunctionTest2
-  COMMAND
-    ITKReviewTestDriver
-    itkScalarChanAndVeseLevelSetFunctionTest2
-)
-itk_add_test(
-  NAME itkScalarChanAndVeseSparseLevelSetImageFilterTest1
-  COMMAND
-    ITKReviewTestDriver
-    itkScalarChanAndVeseSparseLevelSetImageFilterTest1
-)
-itk_add_test(
   NAME itkScalarChanAndVeseSparseLevelSetImageFilterTest2
   COMMAND
     ITKReviewTestDriver
@@ -507,29 +440,11 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkScalarChanAndVeseSparseLevelSetImageFilterTest2.mha
 )
 itk_add_test(
-  NAME itkScalarRegionBasedLevelSetFunctionTest
-  COMMAND
-    ITKReviewTestDriver
-    itkScalarRegionBasedLevelSetFunctionTest
-)
-itk_add_test(
   NAME itkShapedFloodFilledImageFunctionConditionalConstIteratorTest1
   COMMAND
     ITKReviewTestDriver
     itkShapedFloodFilledImageFunctionConditionalConstIteratorTest1
     DATA{${ITK_DATA_ROOT}/Input/8ConnectedImage.bmp}
-)
-itk_add_test(
-  NAME itkShapedFloodFilledImageFunctionConditionalConstIteratorTest2
-  COMMAND
-    ITKReviewTestDriver
-    itkShapedFloodFilledImageFunctionConditionalConstIteratorTest2
-)
-itk_add_test(
-  NAME itkShapedFloodFilledImageFunctionConditionalConstIteratorTest3
-  COMMAND
-    ITKReviewTestDriver
-    itkShapedFloodFilledImageFunctionConditionalConstIteratorTest3
 )
 itk_add_test(
   NAME itkStochasticFractalDimensionImageFilterTest1
@@ -668,7 +583,19 @@ set(
   ITKReviewGTests
   itkAreaOpeningImageFilterGTest.cxx
   itkFastApproximateRankImageFilterGTest.cxx
+  itkImageFunctionGTest.cxx
+  itkMultiphaseDenseFiniteDifferenceImageFilterGTest.cxx
+  itkMultiphaseFiniteDifferenceImageFilterGTest.cxx
   itkMultiphaseSparseFiniteDifferenceImageFilterGTest.cxx
   itkRegionBasedLevelSetFunctionGTest.cxx
+  itkReviewPrintGTest.cxx
+  itkScalarChanAndVeseDenseLevelSetImageFilterGTest1.cxx
+  itkScalarChanAndVeseDenseLevelSetImageFilterGTest3.cxx
+  itkScalarChanAndVeseLevelSetFunctionGTest1.cxx
+  itkScalarChanAndVeseLevelSetFunctionGTest2.cxx
+  itkScalarChanAndVeseSparseLevelSetImageFilterGTest1.cxx
+  itkScalarRegionBasedLevelSetFunctionGTest.cxx
+  itkShapedFloodFilledImageFunctionConditionalConstIteratorGTest2.cxx
+  itkShapedFloodFilledImageFunctionConditionalConstIteratorGTest3.cxx
 )
 creategoogletestdriver(ITKReview "${ITKReview-Test_LIBRARIES}" "${ITKReviewGTests}")

@@ -13,5 +13,6 @@ itk_module(
     ITKExpat
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
   DESCRIPTION "${DOCUMENTATION}"
 )

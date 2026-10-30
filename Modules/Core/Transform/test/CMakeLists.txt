@@ -1,9 +1,7 @@
 itk_module_test()
 set(
   ITKTransformTests
-  itkAffineTransformTest.cxx
   itkAzimuthElevationToCartesianTransformTest.cxx
-  itkBSplineDeformableTransformTest.cxx
   itkBSplineDeformableTransformTest2.cxx
   itkBSplineDeformableTransformTest3.cxx
   itkBSplineTransformInitializerTest1.cxx
@@ -11,92 +9,19 @@ set(
   itkBSplineTransformTest.cxx
   itkBSplineTransformTest2.cxx
   itkBSplineTransformTest3.cxx
-  itkCenteredAffineTransformTest.cxx
-  itkCenteredEuler3DTransformTest.cxx
-  itkCenteredRigid2DTransformTest.cxx
-  itkComposeScaleSkewVersor3DTransformTest.cxx
-  itkCompositeTransformTest.cxx
-  itkEuler2DTransformTest.cxx
   itkEuler3DTransformTest.cxx
-  itkFixedCenterOfRotationAffineTransformTest.cxx
-  itkIdentityTransformTest.cxx
-  itkMultiTransformTest.cxx
-  itkQuaternionRigidTransformTest.cxx
-  itkRigid2DTransformTest.cxx
-  itkRigid3DPerspectiveTransformTest.cxx
-  itkRigid3DTransformTest.cxx
-  itkScaleLogarithmicTransformTest.cxx
-  itkScaleSkewVersor3DTransformTest.cxx
-  itkScaleTransformTest.cxx
-  itkScaleVersor3DTransformTest.cxx
-  itkSimilarity2DTransformTest.cxx
-  itkSimilarity3DTransformTest.cxx
-  itkSplineKernelTransformTest.cxx
   itkTestTransformGetInverse.cxx
-  itkThinPlateSplineKernelTransformTest.cxx
-  itkTransformCloneTest.cxx
   itkTransformGeometryImageFilterTest.cxx
-  itkTransformsSetParametersTest.cxx
   itkTransformTest.cxx
   itkTranslationTransformTest.cxx
-  itkVersorRigid3DTransformTest.cxx
-  itkVersorTransformTest.cxx
 )
 
 createtestdriver(ITKTransform "${ITKTransform-Test_LIBRARIES}" "${ITKTransformTests}")
-itk_add_test(
-  NAME itkFixedCenterOfRotationAffineTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkFixedCenterOfRotationAffineTransformTest
-)
-itk_add_test(
-  NAME itkAffineTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkAffineTransformTest
-)
-itk_add_test(
-  NAME itkScaleSkewVersor3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkScaleSkewVersor3DTransformTest
-)
-itk_add_test(
-  NAME itkComposeScaleSkewVersor3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkComposeScaleSkewVersor3DTransformTest
-)
 itk_add_test(
   NAME itkEuler3DTransformTest
   COMMAND
     ITKTransformTestDriver
     itkEuler3DTransformTest
-)
-itk_add_test(
-  NAME itkCenteredRigid2DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkCenteredRigid2DTransformTest
-)
-itk_add_test(
-  NAME itkEuler2DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkEuler2DTransformTest
-)
-itk_add_test(
-  NAME itkRigid3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkRigid3DTransformTest
-)
-itk_add_test(
-  NAME itkScaleVersor3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkScaleVersor3DTransformTest
 )
 itk_add_test(
   NAME itkTransformTest
@@ -105,64 +30,10 @@ itk_add_test(
     itkTransformTest
 )
 itk_add_test(
-  NAME itkRigid3DPerspectiveTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkRigid3DPerspectiveTransformTest
-)
-itk_add_test(
-  NAME itkSimilarity2DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkSimilarity2DTransformTest
-)
-itk_add_test(
   NAME itkTranslationTransformTest
   COMMAND
     ITKTransformTestDriver
     itkTranslationTransformTest
-)
-itk_add_test(
-  NAME itkIdentityTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkIdentityTransformTest
-)
-itk_add_test(
-  NAME itkCenteredAffineTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkCenteredAffineTransformTest
-)
-itk_add_test(
-  NAME itkRigid2DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkRigid2DTransformTest
-)
-itk_add_test(
-  NAME itkScaleLogarithmicTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkScaleLogarithmicTransformTest
-)
-itk_add_test(
-  NAME itkQuaternionRigidTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkQuaternionRigidTransformTest
-)
-itk_add_test(
-  NAME itkScaleTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkScaleTransformTest
-)
-itk_add_test(
-  NAME itkSimilarity3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkSimilarity3DTransformTest
 )
 itk_add_test(
   NAME itkAzimuthElevationToCartesianTransformTest
@@ -176,26 +47,8 @@ itk_add_test(
     1.0
     0.0
 )
-itk_add_test(
-  NAME itkCenteredEuler3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkCenteredEuler3DTransformTest
-)
-itk_add_test(
-  NAME itkTransformsSetParametersTest
-  COMMAND
-    ITKTransformTestDriver
-    itkTransformsSetParametersTest
-)
 
 ## Tests for ITKv3 version of BSplineDeformableTransforms
-itk_add_test(
-  NAME itkBSplineDeformableTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkBSplineDeformableTransformTest
-)
 itk_add_test(
   NAME itkBSplineDeformableTransformTest2
   COMMAND
@@ -442,48 +295,6 @@ itk_add_test(
     ${ITK_EXAMPLE_DATA_ROOT}/BrainProtonDensitySliceBorder20.png
 )
 itk_add_test(
-  NAME itkVersorRigid3DTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkVersorRigid3DTransformTest
-)
-itk_add_test(
-  NAME itkVersorTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkVersorTransformTest
-)
-itk_add_test(
-  NAME itkSplineKernelTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkSplineKernelTransformTest
-)
-itk_add_test(
-  NAME itkThinPlateSplineKernelTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkThinPlateSplineKernelTransformTest
-)
-itk_add_test(
-  NAME itkCompositeTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkCompositeTransformTest
-)
-itk_add_test(
-  NAME itkTransformCloneTest
-  COMMAND
-    ITKTransformTestDriver
-    itkTransformCloneTest
-)
-itk_add_test(
-  NAME itkMultiTransformTest
-  COMMAND
-    ITKTransformTestDriver
-    itkMultiTransformTest
-)
-itk_add_test(
   NAME itkTestTransformGetInverse
   COMMAND
     ITKTransformTestDriver
@@ -519,11 +330,38 @@ itk_add_test(
 
 set(
   ITKTransformGTests
+  itkAffineTransformGTest.cxx
+  itkBSplineDeformableTransformGTest.cxx
   itkBSplineTransformGTest.cxx
+  itkCenteredAffineTransformGTest.cxx
+  itkCenteredEuler3DTransformGTest.cxx
+  itkCenteredRigid2DTransformGTest.cxx
+  itkComposeScaleSkewVersor3DTransformGTest.cxx
+  itkCompositeTransformGTest.cxx
+  itkEuler2DTransformGTest.cxx
   itkEuler3DTransformGTest.cxx
+  itkFixedCenterOfRotationAffineTransformGTest.cxx
+  itkIdentityTransformGTest.cxx
   itkMatrixOffsetTransformBaseGTest.cxx
+  itkMultiTransformGTest.cxx
+  itkQuaternionRigidTransformGTest.cxx
+  itkRigid2DTransformGTest.cxx
+  itkRigid3DPerspectiveTransformGTest.cxx
+  itkRigid3DTransformGTest.cxx
+  itkScaleLogarithmicTransformGTest.cxx
+  itkScaleSkewVersor3DTransformGTest.cxx
+  itkScaleTransformGTest.cxx
+  itkScaleVersor3DTransformGTest.cxx
+  itkSimilarity2DTransformGTest.cxx
+  itkSimilarity3DTransformGTest.cxx
   itkSimilarityTransformGTest.cxx
+  itkSplineKernelTransformGTest.cxx
+  itkThinPlateSplineKernelTransformGTest.cxx
+  itkTransformCloneGTest.cxx
   itkTransformGTest.cxx
+  itkTransformsSetParametersGTest.cxx
   itkTranslationTransformGTest.cxx
+  itkVersorRigid3DTransformGTest.cxx
+  itkVersorTransformGTest.cxx
 )
 creategoogletestdriver(ITKTransform "${ITKTransform-Test_LIBRARIES}" "${ITKTransformGTests}")
