@@ -22,11 +22,10 @@
 #include "itkRGBToLuminanceImageFilter.h"
 #include "itkRGBToLuminanceImageAdaptor.h"
 #include "itkSubtractImageFilter.h"
-#include "itkTestingMacros.h"
+#include "itkGTest.h"
 
 
-int
-itkRGBToLuminanceImageFilterAndAdaptorTest(int, char *[])
+TEST(RGBToLuminanceImageFilterAndAdaptor, ConvertedLegacyTest)
 {
 
   // Define the dimension of the images
@@ -79,7 +78,7 @@ itkRGBToLuminanceImageFilterAndAdaptorTest(int, char *[])
   // Create the filter
   auto filter = FilterType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(filter, RGBToLuminanceImageFilter, UnaryGeneratorImageFilter);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(filter, RGBToLuminanceImageFilter, UnaryGeneratorImageFilter);
 
   // Set the input image
   filter->SetInput(inputImage);
@@ -104,15 +103,8 @@ itkRGBToLuminanceImageFilterAndAdaptorTest(int, char *[])
     const InputPixelType  input = it.Get();
     const OutputPixelType output = ot.Get();
     const auto            value = static_cast<OutputPixelType>(input.GetLuminance());
-    if (!itk::Math::FloatAlmostEqual(value, output, 10, epsilon))
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error " << std::endl;
-      std::cerr << " Luminance( " << input << ") = " << value << std::endl;
-      std::cerr << " differs from " << output;
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_TRUE(itk::Math::FloatAlmostEqual(value, output, 10, epsilon))
+      << " Luminance( " << input << ") = " << value << " differs from " << output << " by more than " << epsilon;
     ++ot;
     ++it;
   }
@@ -126,7 +118,7 @@ itkRGBToLuminanceImageFilterAndAdaptorTest(int, char *[])
 
   auto luminanceAdaptor = AdaptorType::New();
 
-  ITK_EXERCISE_BASIC_OBJECT_METHODS(luminanceAdaptor, RGBToLuminanceImageAdaptor, ImageAdaptor);
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(luminanceAdaptor, RGBToLuminanceImageAdaptor, ImageAdaptor);
 
   luminanceAdaptor->SetImage(inputImage);
 
@@ -152,17 +144,7 @@ itkRGBToLuminanceImageFilterAndAdaptorTest(int, char *[])
   while (!dt.IsAtEnd())
   {
     const OutputPixelType diff = dt.Get();
-    if (itk::Math::Absolute(diff) > epsilon)
-    {
-      std::cerr.precision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon))));
-      std::cerr << "Error comparing results with Adaptors" << std::endl;
-      std::cerr << " difference = " << diff << std::endl;
-      std::cerr << " differs from 0 ";
-      std::cerr << " by more than " << epsilon << std::endl;
-      return EXIT_FAILURE;
-    }
+    EXPECT_LE(itk::Math::Absolute(diff), epsilon) << "Error comparing results with Adaptors";
     ++dt;
   }
-
-  return EXIT_SUCCESS;
 }
