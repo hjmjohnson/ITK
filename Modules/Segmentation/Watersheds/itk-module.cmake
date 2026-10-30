@@ -30,6 +30,7 @@ itk_module(
     ITKMathematicalMorphology
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
     ITKImageFusion
   DESCRIPTION "${DOCUMENTATION}"
 )

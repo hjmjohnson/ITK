@@ -1,0 +1,241 @@
+/*=========================================================================
+ *
+ *  Copyright NumFOCUS
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *=========================================================================*/
+
+#include <set>
+#include "itkRegularStepGradientDescentOptimizer.h"
+#include "itkMath.h"
+#include "itkGTest.h"
+
+/**
+ *  The objectif function is the quadratic form:
+ *
+ *  1/2 x^T A x - b^T x
+ *
+ *  Where A is a matrix and b is a vector
+ *  The system in this example is:
+ *
+ *     | 3  2 ||x|   | 2|   |0|
+ *     | 2  6 ||y| + |-8| = |0|
+ *
+ *
+ *   the solution is the vector | 2 -2 |
+ *
+ * \class RSGCostFunction
+ */
+namespace
+{
+class RSGCostFunction : public itk::SingleValuedCostFunction
+{
+public:
+  using Self = RSGCostFunction;
+  using Superclass = itk::SingleValuedCostFunction;
+  using Pointer = itk::SmartPointer<Self>;
+  using ConstPointer = itk::SmartPointer<const Self>;
+  itkNewMacro(Self);
+
+  enum
+  {
+    SpaceDimension = 2
+  };
+
+  using ParametersType = Superclass::ParametersType;
+  using DerivativeType = Superclass::DerivativeType;
+  using MeasureType = Superclass::MeasureType;
+
+
+  RSGCostFunction() = default;
+
+
+  MeasureType
+  GetValue(const ParametersType & parameters) const override
+  {
+
+    const double x = parameters[0];
+    const double y = parameters[1];
+
+    std::cout << "GetValue( ";
+    std::cout << x << ' ';
+    std::cout << y << ") = ";
+
+    const MeasureType measure = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - 2 * x + 8 * y;
+
+    std::cout << measure << std::endl;
+    return measure;
+  }
+
+  void
+  GetDerivative(const ParametersType & parameters, DerivativeType & derivative) const override
+  {
+
+    const double x = parameters[0];
+    const double y = parameters[1];
+
+    std::cout << "GetDerivative( ";
+    std::cout << x << ' ';
+    std::cout << y << ") = ";
+
+    derivative = DerivativeType(SpaceDimension);
+    derivative[0] = 3 * x + 2 * y - 2;
+    derivative[1] = 2 * x + 6 * y + 8;
+  }
+
+
+  unsigned int
+  GetNumberOfParameters() const override
+  {
+    return SpaceDimension;
+  }
+};
+} // namespace
+
+TEST(RegularStepGradientDescentOptimizer, ConvertedLegacyTest)
+{
+  using OptimizerType = itk::RegularStepGradientDescentOptimizer;
+
+  using ScalesType = OptimizerType::ScalesType;
+
+
+  // Declaration of an itkOptimizer
+  auto itkOptimizer = OptimizerType::New();
+
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(
+    itkOptimizer, RegularStepGradientDescentOptimizer, RegularStepGradientDescentBaseOptimizer);
+
+
+  // Declaration of the CostFunction
+  auto costFunction = RSGCostFunction::New();
+
+
+  itkOptimizer->SetCostFunction(costFunction);
+
+
+  using ParametersType = RSGCostFunction::ParametersType;
+
+
+  const unsigned int spaceDimension = costFunction->GetNumberOfParameters();
+
+  // We start not so far from  | 2 -2 |
+  ParametersType initialPosition(spaceDimension);
+  initialPosition[0] = 100;
+  initialPosition[1] = -100;
+
+  ScalesType parametersScale(spaceDimension);
+  parametersScale[0] = 1.0;
+  parametersScale[1] = 1.0;
+
+  auto minimize = true;
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Minimize, minimize);
+  ITK_GTEST_SET_GET_BOOLEAN(itkOptimizer, Maximize, !minimize);
+
+  itkOptimizer->SetScales(parametersScale);
+  EXPECT_EQ(parametersScale, itkOptimizer->GetScales());
+
+  auto gradientMagnitudeTolerance = 1e-6;
+  itkOptimizer->SetGradientMagnitudeTolerance(gradientMagnitudeTolerance);
+  EXPECT_EQ(gradientMagnitudeTolerance, itkOptimizer->GetGradientMagnitudeTolerance());
+
+  auto maximumStepLength = 30.0;
+  itkOptimizer->SetMaximumStepLength(maximumStepLength);
+  EXPECT_EQ(maximumStepLength, itkOptimizer->GetMaximumStepLength());
+
+  auto minimumStepLength = 1e-6;
+  itkOptimizer->SetMinimumStepLength(minimumStepLength);
+  EXPECT_EQ(minimumStepLength, itkOptimizer->GetMinimumStepLength());
+
+  constexpr auto numberOfIterations = static_cast<itk::SizeValueType>(900);
+  itkOptimizer->SetNumberOfIterations(numberOfIterations);
+  EXPECT_EQ(numberOfIterations, itkOptimizer->GetNumberOfIterations());
+
+  itkOptimizer->SetInitialPosition(initialPosition);
+  EXPECT_EQ(initialPosition, itkOptimizer->GetInitialPosition());
+
+  ASSERT_NO_THROW(itkOptimizer->StartOptimization());
+
+
+  ParametersType finalPosition = itkOptimizer->GetCurrentPosition();
+  std::cout << "Solution        = (";
+  std::cout << finalPosition[0] << ',';
+  std::cout << finalPosition[1] << ')' << std::endl;
+
+  // Check results to see if it is within range
+  constexpr double trueParameters[2]{ 2, -2 };
+  for (unsigned int j = 0; j < 2; ++j)
+  {
+    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
+  }
+
+
+  // Run now with a different relaxation factor
+  {
+    itkOptimizer->SetInitialPosition(initialPosition);
+
+    auto relaxationFactor = 0.8;
+    itkOptimizer->SetRelaxationFactor(relaxationFactor);
+    EXPECT_EQ(relaxationFactor, itkOptimizer->GetRelaxationFactor());
+
+    ASSERT_NO_THROW(itkOptimizer->StartOptimization());
+
+
+    finalPosition = itkOptimizer->GetCurrentPosition();
+    std::cout << "Solution        = (";
+    std::cout << finalPosition[0] << ',';
+    std::cout << finalPosition[1] << ')' << std::endl;
+
+    // Check results to see if it is within range
+    for (unsigned int j = 0; j < 2; ++j)
+    {
+      EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
+    }
+  }
+
+  // Verify that the optimizer doesn't run if the
+  // number of iterations is set to zero.
+  {
+    itkOptimizer->SetNumberOfIterations(0);
+    itkOptimizer->SetInitialPosition(initialPosition);
+
+    ASSERT_NO_THROW(itkOptimizer->StartOptimization());
+
+
+    EXPECT_EQ(itkOptimizer->GetCurrentIteration(), 0u) << "The optimizer is running iterations despite of "
+                                                       << "having a maximum number of iterations set to zero";
+  }
+
+  //
+  // Test the Exception if the GradientMagnitudeTolerance is set to a negative value
+  //
+  itkOptimizer->SetGradientMagnitudeTolerance(-1.0);
+
+  EXPECT_THROW(itkOptimizer->StartOptimization(), itk::ExceptionObject);
+
+
+  // Test streaming enumeration for
+  // RegularStepGradientDescentBaseOptimizerEnums::StopCondition elements
+  const std::set<itk::RegularStepGradientDescentBaseOptimizerEnums::StopCondition> allStopCondition{
+    itk::RegularStepGradientDescentBaseOptimizerEnums::StopCondition::GradientMagnitudeTolerance,
+    itk::RegularStepGradientDescentBaseOptimizerEnums::StopCondition::StepTooSmall,
+    itk::RegularStepGradientDescentBaseOptimizerEnums::StopCondition::ImageNotAvailable,
+    itk::RegularStepGradientDescentBaseOptimizerEnums::StopCondition::CostFunctionError,
+    itk::RegularStepGradientDescentBaseOptimizerEnums::StopCondition::MaximumNumberOfIterations,
+    itk::RegularStepGradientDescentBaseOptimizerEnums::StopCondition::Unknown
+  };
+  for (const auto & ee : allStopCondition)
+  {
+    std::cout << "STREAMED ENUM VALUE RegularStepGradientDescentBaseOptimizerEnums::StopCondition: " << ee << std::endl;
+  }
+}
