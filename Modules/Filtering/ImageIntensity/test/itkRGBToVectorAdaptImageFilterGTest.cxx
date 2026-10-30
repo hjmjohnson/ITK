@@ -33,6 +33,7 @@
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkRGBToVectorPixelAccessor.h"
 #include "itkMath.h"
+#include "itkGTest.h"
 
 #include <algorithm> // For generate.
 #include <random>    // For mt19937.
@@ -43,8 +44,7 @@
 //   Main code
 //
 //-------------------------
-int
-itkRGBToVectorAdaptImageFilterTest(int, char *[])
+TEST(RGBToVectorAdaptImageFilter, ConvertedLegacyTest)
 {
 
 
@@ -97,8 +97,6 @@ itkRGBToVectorAdaptImageFilterTest(int, char *[])
     ++it1;
   }
 
-  bool passed = true;
-
   // Convert to a Vector image
   using AdaptFilterType = itk::AdaptImageFilter<RGBImageType, myImageType, AccessorType>;
 
@@ -109,8 +107,6 @@ itkRGBToVectorAdaptImageFilterTest(int, char *[])
 
   myVectorIteratorType it(adaptImageToVector->GetOutput(), adaptImageToVector->GetOutput()->GetRequestedRegion());
 
-  std::cout << "--- Read Vector values --- " << std::endl;
-
   it.GoToBegin();
   it1.GoToBegin();
   while (!it.IsAtEnd())
@@ -118,30 +114,11 @@ itkRGBToVectorAdaptImageFilterTest(int, char *[])
     VectorPixelType    v = it.Get();
     const RGBPixelType c = it1.Get();
 
-    if (itk::Math::NotExactlyEquals(v[0], c.GetRed()) || itk::Math::NotExactlyEquals(v[1], c.GetGreen()) ||
-        itk::Math::NotExactlyEquals(v[2], c.GetBlue()))
-    {
-      std::cerr << "Vector pixel = " << v << std::endl;
-      std::cerr << "does not match " << std::endl;
-      std::cerr << "RGB    pixel = " << c << std::endl;
-      std::cerr << "myImage->GetRequestedRegion()" << myImage->GetRequestedRegion() << std::endl;
-      std::cerr << "adaptImageToVector->GetRequestedRegion()" << adaptImageToVector->GetOutput()->GetRequestedRegion()
-                << std::endl;
-      passed = false;
-      break;
-    }
+    EXPECT_EQ(v[0], c.GetRed()) << "at index " << it.GetIndex();
+    EXPECT_EQ(v[1], c.GetGreen()) << "at index " << it.GetIndex();
+    EXPECT_EQ(v[2], c.GetBlue()) << "at index " << it.GetIndex();
 
     ++it;
     ++it1;
   }
-
-  std::cout << std::endl;
-  if (passed)
-  {
-    std::cout << "AdaptImageFilterTest passed" << std::endl;
-    return EXIT_SUCCESS;
-  }
-
-  std::cout << "AdaptImageFilterTest passed" << std::endl;
-  return EXIT_FAILURE;
 }
