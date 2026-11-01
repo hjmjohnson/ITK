@@ -370,7 +370,15 @@ TEST(ImageIterators, NoWriteAccessToConstImage)
                                                  itk::ImageRegionIterator,
                                                  itk::ImageScanlineIterator,
                                                  itk::ImageReverseIterator,
-                                                 itk::ImageRegionReverseIterator>());
+                                                 itk::ImageRegionReverseIterator,
+                                                 itk::ImageIteratorWithIndex,
+                                                 itk::ImageRegionIteratorWithIndex,
+                                                 itk::ImageLinearIteratorWithIndex,
+                                                 itk::ImageSliceIteratorWithIndex,
+                                                 itk::ImageRandomIteratorWithIndex,
+                                                 itk::ImageRandomNonRepeatingIteratorWithIndex,
+                                                 itk::ImageRegionExclusionIteratorWithIndex>());
   static_assert(!HasSet<itk::ImageRegionConstIterator<itk::Image<int>>>::value);
   static_assert(!HasSet<itk::ImageConstIterator<itk::Image<int>>>::value);
+  static_assert(!HasSet<itk::ImageRegionConstIteratorWithIndex<itk::Image<int>>>::value);
 }
