@@ -44,6 +44,7 @@
 #include "itkImageScanlineIterator.h"
 #include "itkImageSliceConstIteratorWithIndex.h"
 #include "itkImageSliceIteratorWithIndex.h"
+#include "itkLineIterator.h"
 #include "itkNeighborhoodIterator.h"
 #include "itkShapedNeighborhoodIterator.h"
 
@@ -172,6 +173,51 @@ CheckIteratorsCallNonConstGetBufferPointer()
      TIteratorTemplate<itk::Testing::GetBufferPointerCountingImage<int>>>(),
    ...);
 }
+
+template <typename T, typename U, typename = void>
+struct is_comparable : std::false_type
+{};
+
+template <typename T, typename U>
+struct is_comparable<T,
+                     U,
+                     std::void_t<decltype(std::declval<const T &>() == std::declval<const U &>()),
+                                 decltype(std::declval<const T &>() != std::declval<const U &>()),
+                                 decltype(std::declval<const T &>() < std::declval<const U &>()),
+                                 decltype(std::declval<const T &>() <= std::declval<const U &>()),
+                                 decltype(std::declval<const T &>() > std::declval<const U &>()),
+                                 decltype(std::declval<const T &>() >= std::declval<const U &>()),
+                                 decltype(std::declval<const U &>() == std::declval<const T &>()),
+                                 decltype(std::declval<const U &>() != std::declval<const T &>()),
+                                 decltype(std::declval<const U &>() < std::declval<const T &>()),
+                                 decltype(std::declval<const U &>() <= std::declval<const T &>()),
+                                 decltype(std::declval<const U &>() > std::declval<const T &>()),
+                                 decltype(std::declval<const U &>() >= std::declval<const T &>())>> : std::true_type
+{};
+
+template <typename T, typename U>
+inline constexpr bool is_comparable_v = is_comparable<T, U>::value;
+
+// HasSet tells whether `Set(pixel)` can be called on the specified iterator type.
+template <typename TIterator, typename = void>
+struct HasSet : std::false_type
+{};
+
+template <typename TIterator>
+struct HasSet<TIterator,
+              std::void_t<decltype(std::declval<TIterator &>().Set(std::declval<typename TIterator::PixelType>()))>>
+  : std::true_type
+{};
+
+// Checks that the writable iterator template provides Set() for a non-const image, and not for a const image.
+template <template <typename> typename... TIteratorTemplate>
+constexpr bool
+AreWritableOnlyForNonConstImages()
+{
+  using ImageType = itk::Image<int>;
+  return ((HasSet<TIteratorTemplate<ImageType>>::value && !HasSet<TIteratorTemplate<const ImageType>>::value) && ...);
+}
+
 } // namespace
 
 
@@ -285,9 +331,59 @@ TEST(ImageIterators, ReverseIteratorConversionCallsNonConstGetBufferPointer)
   const auto image = ImageType::New();
   image->SetRegions(ImageType::SizeType::Filled(4));
   image->Allocate();
-  const itk::ImageRegionConstIterator<ImageType> constIterator(image, image->GetBufferedRegion());
+  const itk::ImageRegionIterator<ImageType> iterator(image, image->GetBufferedRegion());
 
   const size_t numberOfCallsBefore = image->GetNumberOfNonConstGetBufferPointerCalls();
-  [[maybe_unused]] const itk::ImageRegionReverseIterator<ImageType> reverseIterator(constIterator);
+  [[maybe_unused]] const itk::ImageRegionReverseIterator<ImageType> reverseIterator(iterator);
   EXPECT_GT(image->GetNumberOfNonConstGetBufferPointerCalls(), numberOfCallsBefore);
+}
+
+// Checks conversion and comparison between const and non-const iterators
+TEST(ImageIterators, ConstNonConstConversionAndComparison)
+{
+  using ImageType = itk::Image<int>;
+
+  using MutableIt = itk::ImageIterator<ImageType>;
+  using ConstIt = itk::ImageIterator<const ImageType>;
+  using LegacyConstIt = itk::ImageConstIterator<ImageType>;
+
+  static_assert(std::is_convertible_v<MutableIt, ConstIt>);
+  static_assert(!std::is_convertible_v<ConstIt, MutableIt>);
+  static_assert(std::is_convertible_v<LegacyConstIt, ConstIt>);
+  static_assert(std::is_convertible_v<ConstIt, LegacyConstIt>);
+  static_assert(std::is_convertible_v<MutableIt, LegacyConstIt>);
+  static_assert(!std::is_constructible_v<MutableIt, ConstIt>);
+  static_assert(!std::is_constructible_v<MutableIt, LegacyConstIt>);
+  static_assert(!std::is_base_of_v<LegacyConstIt, MutableIt>);
+
+  static_assert(!is_comparable_v<MutableIt, itk::ImageIterator<itk::Image<int, 3>>>);
+
+  static_assert(is_comparable_v<MutableIt, ConstIt>);
+  static_assert(is_comparable_v<MutableIt, LegacyConstIt>);
+  static_assert(is_comparable_v<ConstIt, LegacyConstIt>);
+}
+
+
+// Checks that iterators over a const image provide no write access (issue #7003).
+TEST(ImageIterators, NoWriteAccessToConstImage)
+{
+  static_assert(AreWritableOnlyForNonConstImages<itk::ImageIterator,
+                                                 itk::ImageRegionIterator,
+                                                 itk::ImageScanlineIterator,
+                                                 itk::ImageReverseIterator,
+                                                 itk::ImageRegionReverseIterator,
+                                                 itk::ImageIteratorWithIndex,
+                                                 itk::ImageRegionIteratorWithIndex,
+                                                 itk::ImageLinearIteratorWithIndex,
+                                                 itk::ImageSliceIteratorWithIndex,
+                                                 itk::ImageRandomIteratorWithIndex,
+                                                 itk::ImageRandomNonRepeatingIteratorWithIndex,
+                                                 itk::ImageRegionExclusionIteratorWithIndex>());
+  static_assert(!HasSet<itk::ImageRegionConstIterator<itk::Image<int>>>::value);
+  static_assert(!HasSet<itk::ImageConstIterator<itk::Image<int>>>::value);
+  static_assert(!HasSet<itk::ImageRegionConstIteratorWithIndex<itk::Image<int>>>::value);
+
+  using ImageType = itk::Image<int>;
+  static_assert(HasSet<itk::LineIterator<ImageType>>::value && !HasSet<itk::LineIterator<const ImageType>>::value);
+  static_assert(!HasSet<itk::LineConstIterator<ImageType>>::value);
 }
