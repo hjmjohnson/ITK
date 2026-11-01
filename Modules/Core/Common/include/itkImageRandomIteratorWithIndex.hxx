@@ -21,30 +21,49 @@
 
 namespace itk
 {
+
 template <typename TImage>
 ImageRandomIteratorWithIndex<TImage>::ImageRandomIteratorWithIndex(TImage * ptr, const RegionType & region)
-  : ImageRandomConstIteratorWithIndex<TImage>(ptr, region)
+  : ImageIteratorWithIndex<TImage>(ptr, region)
+  , m_NumberOfPixelsInRegion{ region.GetNumberOfPixels() }
+{}
+
+template <typename TImage>
+void
+ImageRandomIteratorWithIndex<TImage>::ReinitializeSeed()
 {
-  // Base class calls the const GetBufferPointer(); call the non-const one for its side effects (e.g. CudaImage).
-  static_cast<void>(ptr->GetBufferPointer());
+  m_Generator->SetSeed();
 }
 
 template <typename TImage>
-ImageRandomIteratorWithIndex<TImage>::ImageRandomIteratorWithIndex(const ImageIteratorWithIndex<TImage> & it)
-  : ImageRandomConstIteratorWithIndex<TImage>(it)
-{}
-
-template <typename TImage>
-ImageRandomIteratorWithIndex<TImage>::ImageRandomIteratorWithIndex(const ImageRandomConstIteratorWithIndex<TImage> & it)
-  : ImageRandomConstIteratorWithIndex<TImage>(it)
-{}
-
-template <typename TImage>
-ImageRandomIteratorWithIndex<TImage> &
-ImageRandomIteratorWithIndex<TImage>::operator=(const ImageRandomConstIteratorWithIndex<TImage> & it)
+void
+ImageRandomIteratorWithIndex<TImage>::ReinitializeSeed(int seed)
 {
-  this->ImageRandomConstIteratorWithIndex<TImage>::operator=(it);
-  return *this;
+  m_Generator->SetSeed(seed);
+  // vnl_sample_reseed(seed);
+}
+
+template <typename TImage>
+void
+ImageRandomIteratorWithIndex<TImage>::RandomJump()
+{
+  using PositionValueType = IndexValueType;
+
+  auto position = static_cast<PositionValueType>(
+    m_Generator->GetVariateWithOpenRange(static_cast<double>(m_NumberOfPixelsInRegion) - 0.5));
+
+  const SizeType regionSize = this->m_Region.GetSize();
+
+  for (unsigned int dim = 0; dim < TImage::ImageDimension; ++dim)
+  {
+    const SizeValueType     sizeInThisDimension = regionSize[dim];
+    const PositionValueType residual = position % sizeInThisDimension;
+    this->m_PositionIndex[dim] = residual + this->m_BeginIndex[dim];
+    position -= residual;
+    position /= sizeInThisDimension;
+  }
+
+  this->m_Position = this->m_Image->GetBufferPointer() + this->m_Image->ComputeOffset(this->m_PositionIndex);
 }
 } // end namespace itk
 
