@@ -44,6 +44,7 @@
 #include "itkImageScanlineIterator.h"
 #include "itkImageSliceConstIteratorWithIndex.h"
 #include "itkImageSliceIteratorWithIndex.h"
+#include "itkLineIterator.h"
 #include "itkNeighborhoodIterator.h"
 #include "itkShapedNeighborhoodIterator.h"
 
@@ -381,4 +382,8 @@ TEST(ImageIterators, NoWriteAccessToConstImage)
   static_assert(!HasSet<itk::ImageRegionConstIterator<itk::Image<int>>>::value);
   static_assert(!HasSet<itk::ImageConstIterator<itk::Image<int>>>::value);
   static_assert(!HasSet<itk::ImageRegionConstIteratorWithIndex<itk::Image<int>>>::value);
+
+  using ImageType = itk::Image<int>;
+  static_assert(HasSet<itk::LineIterator<ImageType>>::value && !HasSet<itk::LineIterator<const ImageType>>::value);
+  static_assert(!HasSet<itk::LineConstIterator<ImageType>>::value);
 }
