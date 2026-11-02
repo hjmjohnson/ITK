@@ -267,12 +267,9 @@ TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
   //
   // check results to see if it is within range
   //
-  constexpr double trueParameters[2]{ 2, -2 };
+  const auto       trueParameters = itk::MakeVector(2.0, -2.0);
   constexpr double tolerance{ 1e-2 };
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], trueParameters[j], tolerance);
-  }
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, tolerance);
 
   // Get the final value of the optimizer
   SCOPED_TRACE("Testing GetValue() :");
@@ -335,10 +332,7 @@ TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
   std::cout << "Solution        = (" << finalPosition[0] << ',' << finalPosition[1] << ')' << std::endl;
 
   // check results to see if it is within range
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], trueParameters[j], tolerance);
-  }
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, tolerance);
 
   // Test with local-support transform. Should FAIL.
   // Such transforms are not yet supported.

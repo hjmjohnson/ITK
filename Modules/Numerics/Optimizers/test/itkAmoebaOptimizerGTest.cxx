@@ -330,15 +330,12 @@ TEST(AmoebaOptimizer, AmoebaTest1)
 
   OptimizerType::ParametersType finalPosition = itkOptimizer->GetCurrentPosition();
 
-  constexpr double trueParameters[2]{ 2, -2 };
+  const auto trueParameters = itk::MakeVector(2.0, -2.0);
 
   std::cout << "Right answer   = " << trueParameters[0] << " , " << trueParameters[1] << std::endl;
   std::cout << "Final position = " << finalPosition << std::endl;
 
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], trueParameters[j], xTolerance);
-  }
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, xTolerance);
 
   // Get the final value of the optimizer
   SCOPED_TRACE("Testing optimizers GetValue() :");
@@ -391,10 +388,7 @@ TEST(AmoebaOptimizer, AmoebaTest1)
     std::cout << "Right answer   = " << trueParameters[0] << " , " << trueParameters[1] << std::endl;
     std::cout << "Final position = " << finalPosition << std::endl;
 
-    for (unsigned int j = 0; j < 2; ++j)
-    {
-      EXPECT_NEAR(finalPosition[j], trueParameters[j], xTolerance);
-    }
+    ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, xTolerance);
 
     // Get the final value of the optimizer
     SCOPED_TRACE("Testing optimizer's GetValue() [invokes additional function evaluation]:");

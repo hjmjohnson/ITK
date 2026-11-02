@@ -190,10 +190,7 @@ MultiStartOptimizerv4RunTest(itk::MultiStartOptimizerv4::Pointer & itkOptimizer)
   ParametersType trueParameters(2);
   trueParameters[0] = 2.0;
   trueParameters[1] = -2.0;
-  for (itk::SizeValueType j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(bestPosition[j], trueParameters[j], 0.01);
-  }
+  ITK_EXPECT_VECTOR_NEAR(bestPosition, trueParameters, 0.01);
 }
 } // namespace
 ///////////////////////////////////////////////////////////

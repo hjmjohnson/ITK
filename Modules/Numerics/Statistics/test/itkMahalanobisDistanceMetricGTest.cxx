@@ -47,9 +47,7 @@ TEST(MahalanobisDistanceMetric, ConvertedLegacyTest)
 
   // double value comparison tolerance
   constexpr double tolerance{ 0.001 };
-  EXPECT_NEAR(distance->GetMean()[0], origin[0], tolerance) << "Set/Get Origin error";
-  EXPECT_NEAR(distance->GetMean()[1], origin[1], tolerance) << "Set/Get Origin error";
-  EXPECT_NEAR(distance->GetMean()[2], origin[2], tolerance) << "Set/Get Origin error";
+  ITK_EXPECT_VECTOR_NEAR(distance->GetMean(), origin, tolerance) << "Set/Get Origin error";
 
   MeasurementVectorType measurement;
   itk::NumericTraits<MeasurementVectorType>::SetLength(measurement, 3);

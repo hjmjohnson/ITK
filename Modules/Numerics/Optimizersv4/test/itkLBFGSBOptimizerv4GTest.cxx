@@ -338,7 +338,7 @@ TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
   // check results to see if it is within range
   //
   // true parameters considering bounding constrains -1 <= x <= 10
-  double trueParameters[2] = { 4.0 / 3.0, -1.0 };
+  auto trueParameters = itk::MakeVector(4.0 / 3.0, -1.0);
 
   for (unsigned int j = 0; j < 2; ++j)
   {
@@ -418,10 +418,7 @@ TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
   trueParameters[0] = 2.0;
   trueParameters[1] = -2.0;
 
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition2[j], trueParameters[j], 0.01) << "Error in solution.";
-  }
+  ITK_EXPECT_VECTOR_NEAR(finalPosition2, trueParameters, 0.01) << "Error in solution.";
 
   EXPECT_NEAR(itkOptimizer2->GetValue(), -10.0, 0.01) << "Error in final function value.";
 }

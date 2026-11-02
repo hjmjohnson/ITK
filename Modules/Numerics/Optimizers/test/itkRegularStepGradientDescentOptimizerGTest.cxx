@@ -173,11 +173,8 @@ TEST(RegularStepGradientDescentOptimizer, ConvertedLegacyTest)
   std::cout << finalPosition[1] << ')' << std::endl;
 
   // Check results to see if it is within range
-  constexpr double trueParameters[2]{ 2, -2 };
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
-  }
+  const auto trueParameters = itk::MakeVector(2.0, -2.0);
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, 0.01);
 
 
   // Run now with a different relaxation factor
@@ -197,10 +194,7 @@ TEST(RegularStepGradientDescentOptimizer, ConvertedLegacyTest)
     std::cout << finalPosition[1] << ')' << std::endl;
 
     // Check results to see if it is within range
-    for (unsigned int j = 0; j < 2; ++j)
-    {
-      EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
-    }
+    ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, 0.01);
   }
 
   // Verify that the optimizer doesn't run if the

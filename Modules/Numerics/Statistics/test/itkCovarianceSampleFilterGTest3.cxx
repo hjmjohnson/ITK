@@ -170,10 +170,7 @@ TEST(CovarianceSampleFilter, ConvertedLegacyTest3)
 
   double epsilon = 1;
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanOutput[i], mean[i], epsilon);
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanOutput, mean, epsilon);
 
   epsilon = 35;
 

@@ -87,10 +87,7 @@ TEST(CovarianceSampleFilter, ConvertedLegacyTest2)
 
   constexpr double epsilon{ 1e-4 };
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanExpected[i], mean[i], epsilon);
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanExpected, mean, epsilon);
 
   CovarianceMatrixType matrixExpected(MeasurementVectorSize, MeasurementVectorSize);
 
@@ -166,10 +163,7 @@ TEST(CovarianceSampleFilter, ConvertedLegacyTest2)
 
   meanExpected2.Fill(0.333333);
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanExpected2[i], mean[i], epsilon);
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanExpected2, mean, epsilon);
 
   CovarianceMatrixType matrixExpected2(MeasurementVectorSize, MeasurementVectorSize);
 
@@ -253,10 +247,7 @@ TEST(CovarianceSampleFilter, ConvertedLegacyTest2)
   meanExpected3[1] = 2.08;
   meanExpected3[2] = 0.604;
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanExpected3[i], mean[i], epsilon);
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanExpected3, mean, epsilon);
 
   CovarianceMatrixType matrixExpected3(MeasurementVectorSize, MeasurementVectorSize);
 

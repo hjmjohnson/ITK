@@ -205,8 +205,5 @@ TEST(GradientDescentOptimizerv4, ConvertedLegacyTest2)
   //
   // check results to see if it is within range
   //
-  for (NumberOfParametersType j = 0; j < metric->GetNumberOfParameters(); ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], truth[j], 0.000001);
-  }
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, truth, 0.000001);
 }

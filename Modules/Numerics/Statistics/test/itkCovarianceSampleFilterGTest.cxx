@@ -96,9 +96,7 @@ TEST(CovarianceSampleFilter, ConvertedLegacyTest)
   std::cout << "Mean:   " << mean << std::endl;
   CovarianceSampleFilterType::MeasurementVectorRealType mean2 = covarianceFilter->GetMean();
 
-  EXPECT_NEAR(mean[0], mean2[0], epsilon);
-  EXPECT_NEAR(mean[1], mean2[1], epsilon);
-  EXPECT_NEAR(mean[2], mean2[2], epsilon);
+  ITK_EXPECT_VECTOR_NEAR(mean, mean2, epsilon);
 
 
   const CovarianceSampleFilterType::MatrixDecoratedType * decorator = covarianceFilter->GetCovarianceMatrixOutput();
@@ -122,7 +120,5 @@ TEST(CovarianceSampleFilter, ConvertedLegacyTest)
 
   MeanSampleFilterType::MeasurementVectorRealType meanCalculatedUsingMeanSampleFilter = meanFilter->GetMean();
 
-  EXPECT_NEAR(meanCalculatedUsingMeanSampleFilter[0], mean[0], epsilon);
-  EXPECT_NEAR(meanCalculatedUsingMeanSampleFilter[1], mean[1], epsilon);
-  EXPECT_NEAR(meanCalculatedUsingMeanSampleFilter[2], mean[2], epsilon);
+  ITK_EXPECT_VECTOR_NEAR(meanCalculatedUsingMeanSampleFilter, mean, epsilon);
 }

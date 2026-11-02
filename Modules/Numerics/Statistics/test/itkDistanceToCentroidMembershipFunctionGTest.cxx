@@ -68,9 +68,7 @@ TEST(DistanceToCentroidMembershipFunction, ConvertedLegacyTest)
 
   constexpr double tolerance{ 0.001 };
 
-  EXPECT_NEAR(function->GetCentroid()[0], origin[0], tolerance) << "Error in GetCentroid() method";
-  EXPECT_NEAR(function->GetCentroid()[1], origin[1], tolerance) << "Error in GetCentroid() method";
-  EXPECT_NEAR(function->GetCentroid()[2], origin[2], tolerance) << "Error in GetCentroid() method";
+  ITK_EXPECT_VECTOR_NEAR(function->GetCentroid(), origin, tolerance) << "Error in GetCentroid() method";
 
   MeasurementVectorType measurement;
   itk::NumericTraits<MeasurementVectorType>::SetLength(measurement, 3);

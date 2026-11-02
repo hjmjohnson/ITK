@@ -57,31 +57,19 @@ TEST(PolarTransform, ConvertedLegacyTest)
 
   /* Transform point from polar to cartesian space. */
   tmp = p2c->TransformPoint(p);
-  for (unsigned int i = 0; i < Dimension; ++i)
-  {
-    EXPECT_NEAR(tmp[i], c[i], epsilon);
-  }
+  ITK_EXPECT_VECTOR_NEAR(tmp, c, epsilon);
 
   /* Transform point from cartesian to polar space. */
   tmp = c2p->TransformPoint(c);
-  for (unsigned int i = 0; i < Dimension; ++i)
-  {
-    EXPECT_NEAR(tmp[i], p[i], epsilon) << "Invalid cartesian to polar computed.";
-  }
+  ITK_EXPECT_VECTOR_NEAR(tmp, p, epsilon) << "Invalid cartesian to polar computed.";
 
   /* Transform point from polar to cartesian space and back. */
   tmp = c2p->TransformPoint(p2c->TransformPoint(p));
-  for (unsigned int i = 0; i < Dimension; ++i)
-  {
-    EXPECT_NEAR(tmp[i], p[i], epsilon) << "Invalid polar to cartesian and back computed.";
-  }
+  ITK_EXPECT_VECTOR_NEAR(tmp, p, epsilon) << "Invalid polar to cartesian and back computed.";
 
   /* Transform point from cartesian to polar space and back. */
   tmp = p2c->TransformPoint(c2p->TransformPoint(c));
-  for (unsigned int i = 0; i < Dimension; ++i)
-  {
-    EXPECT_NEAR(tmp[i], c[i], epsilon) << "Invalid cartesian to polar and back computed.";
-  }
+  ITK_EXPECT_VECTOR_NEAR(tmp, c, epsilon) << "Invalid cartesian to polar and back computed.";
 
   /* Regression: r=0 (input at center) must not produce NaN in CartesianToPolar. */
   {
@@ -119,9 +107,6 @@ TEST(PolarTransform, ConvertedLegacyTest)
     c2pOff->SetCenter(offsetCenter);
 
     tmp = p2cOff->TransformPoint(c2pOff->TransformPoint(c));
-    for (unsigned int i = 0; i < Dimension; ++i)
-    {
-      EXPECT_NEAR(tmp[i], c[i], epsilon) << "Round-trip failed with non-zero center in pass-through dim.";
-    }
+    ITK_EXPECT_VECTOR_NEAR(tmp, c, epsilon) << "Round-trip failed with non-zero center in pass-through dim.";
   }
 }

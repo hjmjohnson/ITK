@@ -249,10 +249,7 @@ TEST(ObjectToObjectMultiMetricv4Registration, ConvertedLegacyTest)
 
   // Comparison between single-metric and multi-variate metric registrations
   auto tolerance = static_cast<CorrelationMetricType::DerivativeValueType>(1e-6);
-  EXPECT_NEAR(multiDerivativeResult[0], singleDerivativeResult[0], tolerance)
-    << "multi-variate registration derivative: " << multiDerivativeResult
-    << " are different from single-variate derivative: " << singleDerivativeResult;
-  EXPECT_NEAR(multiDerivativeResult[1], singleDerivativeResult[1], tolerance)
+  ITK_EXPECT_VECTOR_NEAR(multiDerivativeResult, singleDerivativeResult, tolerance)
     << "multi-variate registration derivative: " << multiDerivativeResult
     << " are different from single-variate derivative: " << singleDerivativeResult;
   EXPECT_NEAR(multiValueResult, singleValueResult, tolerance);
@@ -279,10 +276,7 @@ TEST(ObjectToObjectMultiMetricv4Registration, ConvertedLegacyTest)
   ObjectToObjectMultiMetricv4RegistrationTestRun<MultiMetricType>(
     multiMetric, numberOfIterations, multiValueResult, multiDerivativeResult, 0.25, false);
 
-  EXPECT_NEAR(multiDerivativeResult[0], singleDerivativeResult[0], tolerance)
-    << "multi-variate registration derivative: " << multiDerivativeResult
-    << " are different from single-variate derivative: " << singleDerivativeResult;
-  EXPECT_NEAR(multiDerivativeResult[1], singleDerivativeResult[1], tolerance)
+  ITK_EXPECT_VECTOR_NEAR(multiDerivativeResult, singleDerivativeResult, tolerance)
     << "multi-variate registration derivative: " << multiDerivativeResult
     << " are different from single-variate derivative: " << singleDerivativeResult;
   EXPECT_NEAR(multiValueResult, singleValueResult, tolerance);

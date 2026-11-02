@@ -141,10 +141,7 @@ TEST(WeightedCovarianceSampleFilter, ConvertedLegacyTest)
   meanExpected33[1] = 2.08;
   meanExpected33[2] = 0.604;
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanExpected33[i], mean[i], epsilon) << "The computed mean value is incorrect";
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanExpected33, mean, epsilon) << "The computed mean value is incorrect";
 
   CovarianceMatrixType matrixExpected33(MeasurementVectorSize, MeasurementVectorSize);
 
@@ -189,10 +186,7 @@ TEST(WeightedCovarianceSampleFilter, ConvertedLegacyTest)
   meanExpected3[1] = 2.08;
   meanExpected3[2] = 0.604;
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanExpected3[i], mean[i], epsilon) << "The computed mean value is incorrect";
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanExpected3, mean, epsilon) << "The computed mean value is incorrect";
 
   CovarianceMatrixType matrixExpected(MeasurementVectorSize, MeasurementVectorSize);
 
@@ -226,10 +220,7 @@ TEST(WeightedCovarianceSampleFilter, ConvertedLegacyTest)
   std::cout << "Mean: " << mean << std::endl;
   std::cout << "Covariance Matrix: " << matrix << std::endl;
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanExpected3[i], mean[i], epsilon) << "The computed mean value is incorrect";
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanExpected3, mean, epsilon) << "The computed mean value is incorrect";
 
   for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
   {
@@ -284,10 +275,7 @@ TEST(WeightedCovarianceSampleFilter, ConvertedLegacyTest)
   std::cout << "Mean: " << mean << std::endl;
   std::cout << "Covariance Matrix: " << matrix << std::endl;
 
-  for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
-  {
-    EXPECT_NEAR(meanExpected3[i], mean[i], epsilon) << "The computed mean value is incorrect";
-  }
+  ITK_EXPECT_VECTOR_NEAR(meanExpected3, mean, epsilon) << "The computed mean value is incorrect";
 
   for (unsigned int i = 0; i < MeasurementVectorSize; ++i)
   {

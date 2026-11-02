@@ -80,6 +80,5 @@ TEST(MeanSampleFilter, ConvertedLegacyTest2)
   // FilterType::MeasurementVectorType::ValueType is an int in this case
   constexpr FilterType::MeasurementVectorType::ValueType epsilon{ 0 };
 
-  EXPECT_NEAR(meanOutput[0], expectedMean[0], epsilon) << "The result is not what is expected";
-  EXPECT_NEAR(meanOutput[1], expectedMean[1], epsilon) << "The result is not what is expected";
+  ITK_EXPECT_VECTOR_NEAR(meanOutput, expectedMean, epsilon) << "The result is not what is expected";
 }

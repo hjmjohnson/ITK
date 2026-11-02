@@ -58,23 +58,17 @@ TEST(OptimizersHierarchy, ConvertedLegacyTest)
 
   constexpr double tolerance{ 1e-10 };
 
-  for (unsigned int i = 0; i < spaceDimension; ++i)
-  {
-    EXPECT_NEAR(parameterScaleGot[i], parameterScale[i], tolerance)
-      << "Scale parameters are damaged after being set." << std::endl
-      << "Scale was set to: " << parameterScale << std::endl
-      << "Scale was got as: " << parameterScaleGot;
-  }
+  ITK_EXPECT_VECTOR_NEAR(parameterScaleGot, parameterScale, tolerance)
+    << "Scale parameters are damaged after being set." << std::endl
+    << "Scale was set to: " << parameterScale << std::endl
+    << "Scale was got as: " << parameterScaleGot;
 
   OptimizerType::ParametersType initialPositionGot = genericOptimizer->GetInitialPosition();
 
-  for (unsigned int i = 0; i < spaceDimension; ++i)
-  {
-    EXPECT_NEAR(initialPositionGot[i], initialPosition[i], tolerance)
-      << "InitialPosition parameters are damaged after being set." << std::endl
-      << "InitialPosition was set to: " << initialPosition << std::endl
-      << "InitialPosition was got as: " << initialPositionGot;
-  }
+  ITK_EXPECT_VECTOR_NEAR(initialPositionGot, initialPosition, tolerance)
+    << "InitialPosition parameters are damaged after being set." << std::endl
+    << "InitialPosition was set to: " << initialPosition << std::endl
+    << "InitialPosition was got as: " << initialPositionGot;
 
   using NonLinearOptimizerType = itk::NonLinearOptimizer;
   auto nonLinearOptimizer = NonLinearOptimizerType::New();

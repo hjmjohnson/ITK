@@ -324,9 +324,7 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   const Point      n2_known(itk::MakePoint(0.408248, 0.408248, 0.816497));
   constexpr double tol{ 0.0001 };
 
-  EXPECT_NEAR(t[0], t_known[0], tol) << "[FAILED]" << " t = " << t << " != " << t_known << " within " << tol;
-  EXPECT_NEAR(t[1], t_known[1], tol) << "[FAILED]" << " t = " << t << " != " << t_known << " within " << tol;
-  EXPECT_NEAR(t[2], t_known[2], tol) << "[FAILED]" << " t = " << t << " != " << t_known << " within " << tol;
+  ITK_EXPECT_VECTOR_NEAR(t, t_known, tol) << "[FAILED]" << " t = " << t << " != " << t_known << " within " << tol;
   EXPECT_NEAR(n1[0], n1_known[0], tol) << "[FAILED]" << " n1 = " << n1 << " != " << n1_known << " within " << tol;
   EXPECT_NEAR(n1[1], -n1_known[1], tol) << "[FAILED]" << " n1 = " << n1 << " != " << n1_known << " within " << tol;
   EXPECT_NEAR(n1[2], n1_known[2], tol) << "[FAILED]" << " n1 = " << n1 << " != " << n1_known << " within " << tol;

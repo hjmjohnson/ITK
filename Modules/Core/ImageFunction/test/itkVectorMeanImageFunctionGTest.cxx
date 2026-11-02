@@ -73,8 +73,5 @@ TEST(VectorMeanImageFunction, ConvertedLegacyTest)
 
   // since the input image is constant
   // the should be equal to the initial value
-  for (unsigned int ii = 0; ii < VectorDimension; ++ii)
-  {
-    EXPECT_NEAR(initialValue[ii], mean[ii], 10e-7) << "Error in mean computation";
-  }
+  ITK_EXPECT_VECTOR_NEAR(initialValue, mean, 10e-7) << "Error in mean computation";
 }

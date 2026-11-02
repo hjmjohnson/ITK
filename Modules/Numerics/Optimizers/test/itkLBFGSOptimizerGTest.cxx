@@ -218,11 +218,8 @@ TEST(LBFGSOptimizer, ConvertedLegacyTest)
   //
   // check results to see if it is within range
   //
-  constexpr double trueParameters[2]{ 2, -2 };
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01);
-  }
+  const auto trueParameters = itk::MakeVector(2.0, -2.0);
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, 0.01);
 
 
   // Get the final value of the optimizer

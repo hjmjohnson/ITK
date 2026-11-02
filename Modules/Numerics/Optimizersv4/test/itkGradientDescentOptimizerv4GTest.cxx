@@ -183,10 +183,7 @@ GradientDescentOptimizerv4RunTest(itk::GradientDescentOptimizerv4::Pointer &    
 
   // check results to see if it is within range
   constexpr ParametersType::ValueType eps{ 0.03 };
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], trueParameters[j], eps);
-  }
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, eps);
 }
 } // namespace
 ///////////////////////////////////////////////////////////

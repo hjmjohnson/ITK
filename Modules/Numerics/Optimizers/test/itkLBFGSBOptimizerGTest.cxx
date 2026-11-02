@@ -286,11 +286,8 @@ TEST(LBFGSBOptimizer, ConvertedLegacyTest)
   //
   // check results to see if it is within range
   //
-  constexpr double trueParameters[2]{ 4.0 / 3.0, -1.0 };
-  for (unsigned int j = 0; j < 2; ++j)
-  {
-    EXPECT_NEAR(finalPosition[j], trueParameters[j], 0.01) << "Error in solution.";
-  }
+  const auto trueParameters = itk::MakeVector(4.0 / 3.0, -1.0);
+  ITK_EXPECT_VECTOR_NEAR(finalPosition, trueParameters, 0.01) << "Error in solution.";
 
   EXPECT_NEAR(itkOptimizer->GetValue(), -7.66667, 0.01) << "Error in final function value.";
 

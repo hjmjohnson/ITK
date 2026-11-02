@@ -79,10 +79,7 @@ TEST(GaussianBlurImageFunction, ConvertedLegacyTest)
 
     const GFunctionType::ErrorArrayType & readError = gaussianFunction->GetMaximumError();
 
-    for (unsigned int i = 0; i < Dimension; ++i)
-    {
-      EXPECT_NEAR(setError[i], readError[i], 1e-6);
-    }
+    ITK_EXPECT_VECTOR_NEAR(setError, readError, 1e-6);
   }
 
   // Testing Set/GetMaximumKernelWidth()

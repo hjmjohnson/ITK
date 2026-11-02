@@ -221,10 +221,7 @@ TEST(DiffusionTensor3D, ConvertedLegacyTest)
       expectedValues[1] = v[1];
       expectedValues[2] = v[2];
 
-      for (unsigned int i = 0; i < 3; ++i)
-      {
-        EXPECT_NEAR(expectedValues[i], eigenValues[i], tolerance);
-      }
+      ITK_EXPECT_VECTOR_NEAR(expectedValues, eigenValues, tolerance);
     }
 
     // Now let's do something more involved...
@@ -255,10 +252,7 @@ TEST(DiffusionTensor3D, ConvertedLegacyTest)
       expectedValues[1] = 4.0;
       expectedValues[2] = 10.0;
 
-      for (unsigned int i = 0; i < 3; ++i)
-      {
-        EXPECT_NEAR(expectedValues[i], eigenValues[i], tolerance);
-      }
+      ITK_EXPECT_VECTOR_NEAR(expectedValues, eigenValues, tolerance);
     }
 
     // Now let's do one where we know the rotation...
@@ -289,10 +283,7 @@ TEST(DiffusionTensor3D, ConvertedLegacyTest)
       expectedValues[1] = 0.00000;
       expectedValues[2] = 13.61580;
 
-      for (unsigned int i = 0; i < 3; ++i)
-      {
-        EXPECT_NEAR(expectedValues[i], eigenValues[i], tolerance);
-      }
+      ITK_EXPECT_VECTOR_NEAR(expectedValues, eigenValues, tolerance);
     }
   }
 

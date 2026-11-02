@@ -141,17 +141,7 @@ TEST(ImageSpatialObject, ConvertedLegacyTest)
   expectedDerivative[2] = 100;
   SCOPED_TRACE("DerivativeAt() with interpolator ...");
   epsilon = 0.00001;
-  EXPECT_NEAR(derivative[0], expectedDerivative[0], epsilon)
-    << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
-    << "Error in ValueAt at point " << q << '\n'
-    << "Expected value " << expectedDerivative << '\n'
-    << " differs from " << derivative << " by more than " << epsilon;
-  EXPECT_NEAR(derivative[1], expectedDerivative[1], epsilon)
-    << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
-    << "Error in ValueAt at point " << q << '\n'
-    << "Expected value " << expectedDerivative << '\n'
-    << " differs from " << derivative << " by more than " << epsilon;
-  EXPECT_NEAR(derivative[2], expectedDerivative[2], epsilon)
+  ITK_EXPECT_VECTOR_NEAR(derivative, expectedDerivative, epsilon)
     << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
     << "Error in ValueAt at point " << q << '\n'
     << "Expected value " << expectedDerivative << '\n'

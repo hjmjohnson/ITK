@@ -133,8 +133,7 @@ TEST(WeightedMeanSampleFilter, ConvertedLegacyTest)
 
   constexpr FilterType::MeasurementVectorType::ValueType epsilon{ 1e-6 };
 
-  EXPECT_NEAR(meanOutput[0], mean[0], epsilon) << "The result is not what is expected";
-  EXPECT_NEAR(meanOutput[1], mean[1], epsilon) << "The result is not what is expected";
+  ITK_EXPECT_VECTOR_NEAR(meanOutput, mean, epsilon) << "The result is not what is expected";
 
   using WeightArrayType = FilterType::WeightArrayType;
   WeightArrayType weightArray(sample->Size(), 1.0);
@@ -156,8 +155,7 @@ TEST(WeightedMeanSampleFilter, ConvertedLegacyTest)
   mean[0] = 2.0;
   mean[1] = 2.0;
 
-  EXPECT_NEAR(meanOutput[0], mean[0], epsilon) << "The result is not what is expected";
-  EXPECT_NEAR(meanOutput[1], mean[1], epsilon) << "The result is not what is expected";
+  ITK_EXPECT_VECTOR_NEAR(meanOutput, mean, epsilon) << "The result is not what is expected";
 
   // change the weight of the last element to 0.5 and recompute
   weightArray[numberOfMeasurementVectors - 1] = 0.5;
@@ -178,8 +176,7 @@ TEST(WeightedMeanSampleFilter, ConvertedLegacyTest)
   mean[0] = 1.7777778;
   mean[1] = 1.7777778;
 
-  EXPECT_NEAR(meanOutput[0], mean[0], epsilon) << "The result is not what is expected";
-  EXPECT_NEAR(meanOutput[1], mean[1], epsilon) << "The result is not what is expected";
+  ITK_EXPECT_VECTOR_NEAR(meanOutput, mean, epsilon) << "The result is not what is expected";
 
   // set the weight using a function
   auto weightFunction = WeightedMeanTestFunction::New();
@@ -200,6 +197,5 @@ TEST(WeightedMeanSampleFilter, ConvertedLegacyTest)
   mean[0] = 2.0;
   mean[1] = 2.0;
 
-  EXPECT_NEAR(meanOutput[0], mean[0], epsilon) << "The result is not what is expected";
-  EXPECT_NEAR(meanOutput[1], mean[1], epsilon) << "The result is not what is expected";
+  ITK_EXPECT_VECTOR_NEAR(meanOutput, mean, epsilon) << "The result is not what is expected";
 }
