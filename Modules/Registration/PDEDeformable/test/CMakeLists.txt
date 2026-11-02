@@ -1,14 +1,10 @@
 itk_module_test()
 set(
   ITKPDEDeformableRegistrationTests
-  itkDemonsRegistrationFilterTest.cxx
   itkDiffeomorphicDemonsRegistrationFilterTest.cxx
   itkDiffeomorphicDemonsRegistrationFilterTest2.cxx
-  itkESMDemonsRegistrationFunctionTest.cxx
-  itkFastSymmetricForcesDemonsRegistrationFilterTest.cxx
   itkLevelSetMotionRegistrationFilterTest.cxx
   itkMultiResolutionPDEDeformableRegistrationTest.cxx
-  itkSymmetricForcesDemonsRegistrationFilterTest.cxx
 )
 # Define some convenient locations
 set(BASELINE ${ITK_DATA_ROOT}/Baseline/Algorithms)
@@ -19,12 +15,6 @@ createtestdriver(ITKPDEDeformableRegistration "${ITKPDEDeformableRegistration-Te
                  "${ITKPDEDeformableRegistrationTests}"
 )
 
-itk_add_test(
-  NAME itkDemonsRegistrationFilterTest
-  COMMAND
-    ITKPDEDeformableRegistrationTestDriver
-    itkDemonsRegistrationFilterTest
-)
 itk_add_test(
   NAME itkLevelSetMotionRegistrationFilterTest
   COMMAND
@@ -37,12 +27,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkLevelSetMotionRegistrationFilterTestFixedImage.mha
     ${ITK_TEST_OUTPUT_DIR}/itkLevelSetMotionRegistrationFilterTestMovingImage.mha
     ${ITK_TEST_OUTPUT_DIR}/itkLevelSetMotionRegistrationFilterTestResampledImage.mha
-)
-itk_add_test(
-  NAME itkSymmetricForcesDemonsRegistrationFilterTest
-  COMMAND
-    ITKPDEDeformableRegistrationTestDriver
-    itkSymmetricForcesDemonsRegistrationFilterTest
 )
 itk_add_test(
   NAME itkMultiResolutionPDEDeformableRegistrationTestD
@@ -249,15 +233,12 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkDiffeomorphicDemonsRegistrationFilterTest11.mha
 )
-itk_add_test(
-  NAME itkFastSymmetricForcesDemonsRegistrationFilterTest
-  COMMAND
-    ITKPDEDeformableRegistrationTestDriver
-    itkFastSymmetricForcesDemonsRegistrationFilterTest
+
+set(
+  ITKPDEDeformableRegistrationGTests
+  itkDemonsRegistrationFilterGTest.cxx
+  itkESMDemonsRegistrationFunctionGTest.cxx
+  itkFastSymmetricForcesDemonsRegistrationFilterGTest.cxx
+  itkSymmetricForcesDemonsRegistrationFilterGTest.cxx
 )
-itk_add_test(
-  NAME itkESMDemonsRegistrationFunctionTest
-  COMMAND
-    ITKPDEDeformableRegistrationTestDriver
-    itkESMDemonsRegistrationFunctionTest
-)
+creategoogletestdriver(ITKPDEDeformableRegistration "${ITKPDEDeformableRegistration-Test_LIBRARIES}" "${ITKPDEDeformableRegistrationGTests}")

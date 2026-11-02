@@ -4,7 +4,6 @@ set(
   itkConnectedComponentImageFilterBackgroundTest.cxx
   itkConnectedComponentImageFilterTest.cxx
   itkConnectedComponentImageFilterTestRGB.cxx
-  itkConnectedComponentImageFilterTooManyObjectsTest.cxx
   itkHardConnectedComponentImageFilterTest.cxx
   itkMaskConnectedComponentImageFilterTest.cxx
   itkRelabelComponentImageFilterTest.cxx
@@ -179,12 +178,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/VectorConnectedComponentImageFilterTest.png
 )
 itk_add_test(
-  NAME itkConnectedComponentImageFilterTooManyObjectsTest
-  COMMAND
-    ITKConnectedComponentsTestDriver
-    itkConnectedComponentImageFilterTooManyObjectsTest
-)
-itk_add_test(
   NAME itkMaskConnectedComponentImageFilterTest
   COMMAND
     ITKConnectedComponentsTestDriver
@@ -203,6 +196,7 @@ itk_add_test(
 set(
   ITKConnectedComponentsGTests
   itkConnectedComponentImageFilterGTest.cxx
+  itkConnectedComponentImageFilterTooManyObjectsGTest.cxx
   itkRelabelComponentImageFilterGTest.cxx
   itkThresholdMaximumConnectedComponentsImageFilterGTest.cxx
 )
