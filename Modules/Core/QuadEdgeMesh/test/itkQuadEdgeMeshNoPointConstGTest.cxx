@@ -1,0 +1,44 @@
+/*=========================================================================
+ *
+ *  Copyright NumFOCUS
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *=========================================================================*/
+
+#include "itkQuadEdgeMesh.h"
+#include "itkGTest.h"
+#include <iostream>
+
+TEST(QuadEdgeMeshNoPointConst, ConvertedLegacyTest)
+{
+  using MeshType = itk::QuadEdgeMesh<double, 3>;
+  using QEType = MeshType::QEType;
+  using OriginRefType = QEType::OriginRefType;
+
+  constexpr OriginRefType NUM_LIMIT{ std::numeric_limits<OriginRefType>::max() };
+  constexpr OriginRefType GQE_LIMIT{ QEType::m_NoPoint };
+  constexpr OriginRefType QEM_LIMIT{ MeshType::m_NoPoint };
+
+  std::cout << "VCL limit:     " << NUM_LIMIT << std::endl;
+  std::cout << "Geom QE limit: " << GQE_LIMIT << std::endl;
+  std::cout << "QE mesh limit: " << QEM_LIMIT << std::endl;
+
+  EXPECT_EQ(NUM_LIMIT, GQE_LIMIT);
+  EXPECT_EQ(NUM_LIMIT, QEM_LIMIT);
+  EXPECT_EQ(QEM_LIMIT, GQE_LIMIT);
+
+  EXPECT_NE(NUM_LIMIT, 0u);
+  EXPECT_NE(GQE_LIMIT, 0u);
+  EXPECT_NE(QEM_LIMIT, 0u);
+}

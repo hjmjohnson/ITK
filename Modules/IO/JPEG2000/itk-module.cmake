@@ -13,6 +13,7 @@ itk_module(
     ITKOpenJPEG
   TEST_DEPENDS
     ITKTestKernel
+    ITKGoogleTest
     ITKImageGrid
   FACTORY_NAMES
     ImageIO::JPEG2000

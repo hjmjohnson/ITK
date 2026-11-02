@@ -1,67 +1,26 @@
 itk_module_test()
 set(
   ITKMeshTests
-  itkAutomaticTopologyMeshSourceTest.cxx
   itkBinaryMask3DMeshSourceTest.cxx
-  itkCellInterfaceTest.cxx
-  itkConnectedRegionsMeshFilterTest1.cxx
   itkConnectedRegionsMeshFilterTest2.cxx
-  itkDynamicMeshTest.cxx
-  itkImageToParametricSpaceFilterTest.cxx
-  itkInteriorExteriorMeshFilterTest.cxx
-  itkMeshCellDataTest.cxx
   itkMeshFstreamTest.cxx
-  itkMeshRegionTest.cxx
-  itkMeshSourceGraftOutputTest.cxx
   itkMeshSpatialObjectIOTest.cxx
-  itkMeshTest.cxx
-  itkNewTest.cxx
   itkParametricSpaceToImageSpaceMeshFilterTest.cxx
-  itkQuadrilateralCellTest.cxx
-  itkRegularSphereMeshSourceTest.cxx
-  itkRegularSphereMeshSourceTest2.cxx
   itkSimplexMeshAdaptTopologyFilterTest.cxx
-  itkSimplexMeshTest.cxx
-  itkSimplexMeshToTriangleMeshFilterTest.cxx
-  itkSimplexMeshVolumeCalculatorTest.cxx
-  itkSphereMeshSourceTest.cxx
-  itkTransformMeshFilterTest.cxx
-  itkTriangleCellTest.cxx
   itkTriangleMeshCurvatureCalculatorTest.cxx
   itkTriangleMeshToBinaryImageFilterTest.cxx
   itkTriangleMeshToBinaryImageFilterTest1.cxx
   itkTriangleMeshToBinaryImageFilterTest2.cxx
   itkTriangleMeshToBinaryImageFilterTest3.cxx
   itkTriangleMeshToBinaryImageFilterTest4.cxx
-  itkTriangleMeshToSimplexMeshFilter2Test.cxx
-  itkTriangleMeshToSimplexMeshFilterTest.cxx
   itkVTKPolyDataReaderTest.cxx
   itkVTKPolyDataWriterTest01.cxx
   itkVTKPolyDataWriterTest02.cxx
-  itkWarpMeshFilterTest.cxx
 )
 
 set(ITKMesh-Test_LIBRARIES ${ITKMesh-Test_LIBRARIES})
 createtestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshTests}")
 
-itk_add_test(
-  NAME itkMeshTest
-  COMMAND
-    ITKMeshTestDriver
-    itkMeshTest
-)
-itk_add_test(
-  NAME itkSimplexMeshTest
-  COMMAND
-    ITKMeshTestDriver
-    itkSimplexMeshTest
-)
-itk_add_test(
-  NAME itkAutomaticTopologyMeshSourceTest
-  COMMAND
-    ITKMeshTestDriver
-    itkAutomaticTopologyMeshSourceTest
-)
 itk_add_test(
   NAME itkBinaryMask3DMeshSourceTestRegionOff
   COMMAND
@@ -77,66 +36,12 @@ itk_add_test(
     1
 )
 itk_add_test(
-  NAME itkImageToParametricSpaceFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkImageToParametricSpaceFilterTest
-)
-itk_add_test(
-  NAME itkInteriorExteriorMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkInteriorExteriorMeshFilterTest
-)
-itk_add_test(
-  NAME itkMeshRegionTest
-  COMMAND
-    ITKMeshTestDriver
-    itkMeshRegionTest
-)
-itk_add_test(
-  NAME itkRegularSphereMeshSourceTest
-  COMMAND
-    ITKMeshTestDriver
-    itkRegularSphereMeshSourceTest
-)
-itk_add_test(
-  NAME itkRegularSphereMeshSourceTest2
-  COMMAND
-    ITKMeshTestDriver
-    itkRegularSphereMeshSourceTest2
-)
-itk_add_test(
   NAME itkSimplexMeshAdaptTopologyFilterTest
   COMMAND
     ITKMeshTestDriver
     itkSimplexMeshAdaptTopologyFilterTest
     0.5
     0
-)
-itk_add_test(
-  NAME itkSimplexMeshToTriangleMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkSimplexMeshToTriangleMeshFilterTest
-)
-itk_add_test(
-  NAME itkSimplexMeshVolumeCalculatorTest
-  COMMAND
-    ITKMeshTestDriver
-    itkSimplexMeshVolumeCalculatorTest
-)
-itk_add_test(
-  NAME itkSphereMeshSourceTest
-  COMMAND
-    ITKMeshTestDriver
-    itkSphereMeshSourceTest
-)
-itk_add_test(
-  NAME itkTransformMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkTransformMeshFilterTest
 )
 itk_add_test(
   NAME itkTriangleMeshToBinaryImageFilterTest
@@ -216,12 +121,6 @@ itk_add_test(
     0.01
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkTriangleMeshToBinaryImageFilterTest4.mha
-)
-itk_add_test(
-  NAME itkTriangleMeshToSimplexMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkTriangleMeshToSimplexMeshFilterTest
 )
 itk_add_test(
   NAME itkVTKPolyDataReaderTest
@@ -382,24 +281,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/VTKPolyDataWriterTest02.vtk
 )
 itk_add_test(
-  NAME itkWarpMeshFilterTest
-  COMMAND
-    ITKMeshTestDriver
-    itkWarpMeshFilterTest
-)
-itk_add_test(
-  NAME itkDynamicMeshTest
-  COMMAND
-    ITKMeshTestDriver
-    itkDynamicMeshTest
-)
-itk_add_test(
-  NAME itkConnectedRegionsMeshFilterTest1
-  COMMAND
-    ITKMeshTestDriver
-    itkConnectedRegionsMeshFilterTest1
-)
-itk_add_test(
   NAME itkConnectedRegionsMeshFilterTest2
   COMMAND
     ITKMeshTestDriver
@@ -416,12 +297,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/testMeshFstream.txt
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/testMeshFstream.txt
-)
-itk_add_test(
-  NAME itkMeshSourceGraftOutputTest
-  COMMAND
-    ITKMeshTestDriver
-    itkMeshSourceGraftOutputTest
 )
 itk_add_test(
   NAME itkMeshSpatialObjectIOTest
@@ -460,48 +335,11 @@ itk_add_test(
     DATA{${ITK_DATA_ROOT}/Input/cthead1Label.png}
 )
 itk_add_test(
-  NAME itkTriangleMeshToSimplexMeshFilter2Test
-  COMMAND
-    ITKMeshTestDriver
-    itkTriangleMeshToSimplexMeshFilter2Test
-)
-itk_add_test(
   NAME itkTriangleMeshCurvatureCalculatorTest
   COMMAND
     ITKMeshTestDriver
     itkTriangleMeshCurvatureCalculatorTest
     DATA{${ITK_DATA_ROOT}/Input/mushroom.vtk}
-)
-
-itk_add_test(
-  NAME itkNewTest
-  COMMAND
-    ITKMeshTestDriver
-    itkNewTest
-)
-itk_add_test(
-  NAME itkCellInterfaceTest
-  COMMAND
-    ITKMeshTestDriver
-    itkCellInterfaceTest
-)
-itk_add_test(
-  NAME itkTriangleCellTest
-  COMMAND
-    ITKMeshTestDriver
-    itkTriangleCellTest
-)
-itk_add_test(
-  NAME itkQuadrilateralCellTest
-  COMMAND
-    ITKMeshTestDriver
-    itkQuadrilateralCellTest
-)
-itk_add_test(
-  NAME itkMeshCellDataTest
-  COMMAND
-    ITKMeshTestDriver
-    itkMeshCellDataTest
 )
 
 set_tests_properties(
@@ -528,3 +366,31 @@ set_tests_properties(
     WILL_FAIL
       true
 )
+
+set(
+  ITKMeshGTests
+  itkAutomaticTopologyMeshSourceGTest.cxx
+  itkCellInterfaceGTest.cxx
+  itkConnectedRegionsMeshFilterGTest1.cxx
+  itkDynamicMeshGTest.cxx
+  itkImageToParametricSpaceFilterGTest.cxx
+  itkInteriorExteriorMeshFilterGTest.cxx
+  itkMeshCellDataGTest.cxx
+  itkMeshGTest.cxx
+  itkMeshRegionGTest.cxx
+  itkMeshSourceGraftOutputGTest.cxx
+  itkNewGTest.cxx
+  itkQuadrilateralCellGTest.cxx
+  itkRegularSphereMeshSourceGTest.cxx
+  itkRegularSphereMeshSourceGTest2.cxx
+  itkSimplexMeshGTest.cxx
+  itkSimplexMeshToTriangleMeshFilterGTest.cxx
+  itkSimplexMeshVolumeCalculatorGTest.cxx
+  itkSphereMeshSourceGTest.cxx
+  itkTransformMeshFilterGTest.cxx
+  itkTriangleCellGTest.cxx
+  itkTriangleMeshToSimplexMeshFilter2GTest.cxx
+  itkTriangleMeshToSimplexMeshFilterGTest.cxx
+  itkWarpMeshFilterGTest.cxx
+)
+creategoogletestdriver(ITKMesh "${ITKMesh-Test_LIBRARIES}" "${ITKMeshGTests}")
