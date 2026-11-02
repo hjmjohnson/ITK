@@ -3,7 +3,6 @@ set(
   ITKThresholdingTests
   itkBinaryThresholdImageFilterTest2.cxx
   itkBinaryThresholdProjectionImageFilterTest.cxx
-  itkBinaryThresholdSpatialFunctionTest.cxx
   itkHuangThresholdImageFilterTest.cxx
   itkIntermodesThresholdImageFilterTest.cxx
   itkIsoDataThresholdImageFilterTest.cxx
@@ -15,12 +14,9 @@ set(
   itkOtsuMultipleThresholdsCalculatorTest2.cxx
   itkOtsuMultipleThresholdsImageFilterTest.cxx
   #itkOtsuThresholdCalculatorVersusOtsuMultipleThresholdsCalculatorTest.cxx
-  itkOtsuThresholdCalculatorTest.cxx
   itkOtsuThresholdImageFilterTest.cxx
   itkRenyiEntropyThresholdImageFilterTest.cxx
   itkShanbhagThresholdImageFilterTest.cxx
-  itkThresholdImageFilterTest.cxx
-  itkThresholdLabelerImageFilterTest.cxx
   itkTriangleThresholdImageFilterTest.cxx
   itkYenThresholdImageFilterTest.cxx
   itkHuangMaskedThresholdImageFilterTest.cxx
@@ -42,13 +38,6 @@ set(
 createtestdriver(ITKThresholding "${ITKThresholding-Test_LIBRARIES}" "${ITKThresholdingTests}")
 
 itk_add_test(
-  NAME itkOtsuThresholdCalculatorTest
-  COMMAND
-    ITKThresholdingTestDriver
-    itkOtsuThresholdCalculatorTest
-)
-
-itk_add_test(
   NAME itkOtsuMultipleThresholdsImageFilterTest
   COMMAND
     ITKThresholdingTestDriver
@@ -67,18 +56,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkOtsuMultipleThresholdsImageFilterTest.png
 )
 
-itk_add_test(
-  NAME itkThresholdLabelerImageFilterTest
-  COMMAND
-    ITKThresholdingTestDriver
-    itkThresholdLabelerImageFilterTest
-)
-itk_add_test(
-  NAME itkThresholdImageFilterTest
-  COMMAND
-    ITKThresholdingTestDriver
-    itkThresholdImageFilterTest
-)
 itk_add_test(
   NAME itkOtsuMultipleThresholdsCalculatorTest1
   COMMAND
@@ -124,12 +101,6 @@ itk_add_test(
     0
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/HeadMRVolumeBinaryThresholdProjection.png
-)
-itk_add_test(
-  NAME itkBinaryThresholdSpatialFunctionTest
-  COMMAND
-    ITKThresholdingTestDriver
-    itkBinaryThresholdSpatialFunctionTest
 )
 
 itk_add_test(
@@ -1149,8 +1120,12 @@ itk_add_test(
 set(
   ITKThresholdingGTests
   itkBinaryThresholdImageFilterGTest.cxx
+  itkBinaryThresholdSpatialFunctionGTest.cxx
   itkMaximumEntropyThresholdCalculatorGTest.cxx
+  itkOtsuThresholdCalculatorGTest.cxx
   itkRenyiEntropyThresholdCalculatorGTest.cxx
+  itkThresholdImageFilterGTest.cxx
+  itkThresholdLabelerImageFilterGTest.cxx
 )
 
 creategoogletestdriver(ITKThresholding "${ITKThresholding-Test_LIBRARIES}" "${ITKThresholdingGTests}")

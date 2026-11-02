@@ -1,52 +1,14 @@
 itk_module_test()
 set(
   ITKImageComposeTests
-  itkCompose2DCovariantVectorImageFilterTest.cxx
-  itkCompose2DVectorImageFilterTest.cxx
-  itkCompose3DCovariantVectorImageFilterTest.cxx
-  itkCompose3DVectorImageFilterTest.cxx
   itkComposeBigVectorImageFilterTest.cxx
   itkComposeRGBAImageFilterTest.cxx
-  itkComposeRGBImageFilterTest.cxx
   itkImageReadRealAndImaginaryWriteComplexTest.cxx
   itkImageToVectorImageFilterTest.cxx
-  itkJoinImageFilterTest.cxx
   itkJoinSeriesImageFilterStreamingTest.cxx
-  itkJoinSeriesImageFilterTest.cxx
 )
 
 createtestdriver(ITKImageCompose "${ITKImageCompose-Test_LIBRARIES}" "${ITKImageComposeTests}")
-
-itk_add_test(
-  NAME itkCompose2DCovariantVectorImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkCompose2DCovariantVectorImageFilterTest
-)
-itk_add_test(
-  NAME itkCompose3DVectorImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkCompose3DVectorImageFilterTest
-)
-itk_add_test(
-  NAME itkCompose3DCovariantVectorImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkCompose3DCovariantVectorImageFilterTest
-)
-itk_add_test(
-  NAME itkCompose2DVectorImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkCompose2DVectorImageFilterTest
-)
-itk_add_test(
-  NAME itkComposeRGBImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkComposeRGBImageFilterTest
-)
 
 if(ITK_COMPUTER_MEMORY_SIZE GREATER 13)
   itk_add_test(
@@ -104,12 +66,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkComposeRGBAImageFilterTestOutput.png
 )
 itk_add_test(
-  NAME itkJoinSeriesImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkJoinSeriesImageFilterTest
-)
-itk_add_test(
   NAME itkJoinSeriesImageFilterStreamingTest
   COMMAND
     ITKImageComposeTestDriver
@@ -122,9 +78,15 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkJoinSeriesImageFilterStreamingTest.mha
 )
-itk_add_test(
-  NAME itkJoinImageFilterTest
-  COMMAND
-    ITKImageComposeTestDriver
-    itkJoinImageFilterTest
+
+set(
+  ITKImageComposeGTests
+  itkCompose2DCovariantVectorImageFilterGTest.cxx
+  itkCompose2DVectorImageFilterGTest.cxx
+  itkCompose3DCovariantVectorImageFilterGTest.cxx
+  itkCompose3DVectorImageFilterGTest.cxx
+  itkComposeRGBImageFilterGTest.cxx
+  itkJoinImageFilterGTest.cxx
+  itkJoinSeriesImageFilterGTest.cxx
 )
+creategoogletestdriver(ITKImageCompose "${ITKImageCompose-Test_LIBRARIES}" "${ITKImageComposeGTests}")

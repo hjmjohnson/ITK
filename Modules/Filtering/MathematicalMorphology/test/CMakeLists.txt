@@ -1,8 +1,6 @@
 itk_module_test()
 set(
   ITKMathematicalMorphologyTests
-  itkAnchorErodeDilateImageFilterTest.cxx
-  itkAnchorOpenCloseImageFilterTest.cxx
   itkClosingByReconstructionImageFilterTest.cxx
   itkDoubleThresholdImageFilterTest.cxx
   itkFlatStructuringElementTest.cxx
@@ -36,7 +34,6 @@ set(
   itkMaskedRankImageFilterTest.cxx
   itkMorphologicalGradientImageFilterTest.cxx
   itkMorphologicalGradientImageFilterTest2.cxx
-  itkMovingHistogramMorphologyImageFilterTest.cxx
   itkOpeningByReconstructionImageFilterTest.cxx
   itkOpeningByReconstructionImageFilterTest2.cxx
   itkRankImageFilterTest.cxx
@@ -44,36 +41,30 @@ set(
   itkRegionalMinimaImageFilterTest.cxx
   itkRemoveBoundaryObjectsTest.cxx
   itkRemoveBoundaryObjectsTest2.cxx
-  itkShapedIteratorFromStructuringElementTest.cxx
   itkTopHatImageFilterTest.cxx
   itkValuedRegionalMaximaImageFilterTest.cxx
   itkValuedRegionalMinimaImageFilterTest.cxx
-  itkVanHerkGilWermanErodeDilateImageFilterTest.cxx
 )
 
 createtestdriver(ITKMathematicalMorphology "${ITKMathematicalMorphology-Test_LIBRARIES}"
                  "${ITKMathematicalMorphologyTests}"
 )
 
-set(ITKMathematicalMorphologyGTests itkMathematicalMorphologyEnumsGTest.cxx)
+set(
+  ITKMathematicalMorphologyGTests
+  itkAnchorErodeDilateImageFilterGTest.cxx
+  itkAnchorOpenCloseImageFilterGTest.cxx
+  itkMathematicalMorphologyEnumsGTest.cxx
+  itkMovingHistogramMorphologyImageFilterGTest.cxx
+  itkShapedIteratorFromStructuringElementGTest.cxx
+  itkVanHerkGilWermanErodeDilateImageFilterGTest.cxx
+)
 creategoogletestdriver(
   ITKMathematicalMorphology
   "${ITKMathematicalMorphology-Test_LIBRARIES}"
   "${ITKMathematicalMorphologyGTests}"
 )
 
-itk_add_test(
-  NAME itkAnchorErodeDilateImageFilterTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkAnchorErodeDilateImageFilterTest
-)
-itk_add_test(
-  NAME itkAnchorOpenCloseImageFilterTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkAnchorOpenCloseImageFilterTest
-)
 itk_add_test(
   NAME itkClosingByReconstructionImageFilterTest
   COMMAND
@@ -553,12 +544,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/MorphologicalGradientImageFilterTest2.png
 )
 itk_add_test(
-  NAME itkMovingHistogramMorphologyImageFilterTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkMovingHistogramMorphologyImageFilterTest
-)
-itk_add_test(
   NAME itkOpeningByReconstructionImageFilterTest
   COMMAND
     ITKMathematicalMorphologyTestDriver
@@ -715,12 +700,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/RemoveBoundaryObjectsTest2.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/RemoveBoundaryObjectsTest2.png
-)
-itk_add_test(
-  NAME itkShapedIteratorFromStructuringElementTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkShapedIteratorFromStructuringElementTest
 )
 itk_add_test(
   NAME itkBlackTopHatImageFilterTest
@@ -1325,10 +1304,4 @@ itk_add_test(
     10
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkRankImageFilter10.png
-)
-itk_add_test(
-  NAME itkVanHerkGilWermanErodeDilateImageFilterTest
-  COMMAND
-    ITKMathematicalMorphologyTestDriver
-    itkVanHerkGilWermanErodeDilateImageFilterTest
 )

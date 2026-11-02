@@ -1,0 +1,119 @@
+/*=========================================================================
+ *
+ *  Copyright NumFOCUS
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *=========================================================================*/
+
+#include <iostream>
+
+#include "itkAffineTransform.h"
+#include "itkResampleImageFilter.h"
+#include "itkTimeProbe.h"
+#include "itkGTest.h"
+
+TEST(ResampleImageFilter, ConvertedLegacyTest4)
+{
+
+  constexpr unsigned int VDimension{ 2 };
+
+  using PixelType = float;
+
+  using ImageType = itk::Image<PixelType, VDimension>;
+  using ImageIndexType = ImageType::IndexType;
+  using ImagePointerType = ImageType::Pointer;
+  using ImageRegionType = ImageType::RegionType;
+  using ImageSizeType = ImageType::SizeType;
+
+  using CoordinateType = double;
+
+  using AffineTransformType = itk::AffineTransform<CoordinateType, VDimension>;
+
+  using InterpolatorType = itk::LinearInterpolateImageFunction<ImageType, CoordinateType>;
+
+
+  float scaling = 10.0;
+
+  // Create and configure an image
+  const ImagePointerType image = ImageType::New();
+  ImageIndexType         index = { { 0, 0 } };
+  ImageSizeType          size = { { 64, 64 } };
+  const ImageRegionType  region{ index, size };
+  image->SetRegions(region);
+  image->Allocate();
+
+  auto          newDims = static_cast<unsigned int>(64 * scaling);
+  ImageSizeType osize = { { newDims, newDims } };
+
+  ImageType::SpacingType spacing;
+  spacing[0] = size[0] / static_cast<double>(osize[0]);
+  spacing[1] = size[1] / static_cast<double>(osize[1]);
+
+  // Fill image with a ramp
+  itk::ImageRegionIteratorWithIndex<ImageType> iter(image, region);
+  for (iter.GoToBegin(); !iter.IsAtEnd(); ++iter)
+  {
+    index = iter.GetIndex();
+    const PixelType value = index[0] + index[1];
+    iter.Set(value);
+  }
+
+  // Create an affine transformation
+  auto aff = AffineTransformType::New();
+  aff->Scale(0.9);
+
+  // Create a linear interpolation image function
+  auto interp = InterpolatorType::New();
+  interp->SetInputImage(image);
+
+  // Create and configure a resampling filter
+  const itk::ResampleImageFilter<ImageType, ImageType>::Pointer resample =
+    itk::ResampleImageFilter<ImageType, ImageType>::New();
+
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(resample, ResampleImageFilter, ImageToImageFilter);
+
+  resample->SetInterpolator(interp);
+
+  resample->SetInput(image);
+  EXPECT_EQ(image, resample->GetInput());
+
+  resample->SetSize(osize);
+  EXPECT_EQ(osize, resample->GetSize());
+
+  resample->SetTransform(aff);
+  EXPECT_EQ(aff, resample->GetTransform());
+
+  resample->SetInterpolator(interp);
+  EXPECT_EQ(interp, resample->GetInterpolator());
+
+  index.Fill(0);
+  resample->SetOutputStartIndex(index);
+  EXPECT_EQ(index, resample->GetOutputStartIndex());
+
+  constexpr ImageType::PointType origin{};
+  resample->SetOutputOrigin(origin);
+  EXPECT_EQ(origin, resample->GetOutputOrigin());
+
+  resample->SetOutputSpacing(spacing);
+  EXPECT_EQ(spacing, resample->GetOutputSpacing());
+
+  // Run the resampling filter
+  itk::TimeProbe clock;
+  clock.Start();
+  std::cout << "Input: " << image << std::endl;
+  resample->UpdateLargestPossibleRegion();
+  clock.Stop();
+
+  std::cout << "Resampling from " << size << " to " << osize << " took " << clock.GetMean() << " s" << std::endl;
+}
