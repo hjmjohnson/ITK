@@ -67,7 +67,7 @@ TEST(ParticleSwarmOptimizer, ConvertedLegacyTest)
   unsigned int           success2{};
   unsigned int           success3{};
 
-  std::cout << "Particle Swarm Optimizer Test \n \n";
+  SCOPED_TRACE("Particle Swarm Optimizer Test");
 
   for (unsigned int i = 0; i < allIterations; ++i)
   {
@@ -85,7 +85,7 @@ TEST(ParticleSwarmOptimizer, ConvertedLegacyTest)
     }
   }
 
-  std::cout << "All Tests Completed." << std::endl;
+  SCOPED_TRACE("All Tests Completed.");
 
   EXPECT_GT(static_cast<double>(success1) / static_cast<double>(allIterations), threshold);
   EXPECT_GT(static_cast<double>(success2) / static_cast<double>(allIterations), threshold);
@@ -98,8 +98,7 @@ namespace
 [[nodiscard]] bool
 PSOTest1()
 {
-  std::cout << "Particle Swarm Optimizer Test 1 [f(x) = if(x<0) x^2+4x; else 2x^2-8x]\n";
-  std::cout << "-------------------------------\n";
+  SCOPED_TRACE("Particle Swarm Optimizer Test 1 [f(x) = if(x<0) x^2+4x; else 2x^2-8x]");
 
   constexpr double knownParameters{ 2.0 };
 
@@ -187,7 +186,7 @@ PSOTest1()
     std::cout << "Description = " << e.GetDescription() << std::endl;
     return false;
   }
-  std::cout << "[Test 1 SUCCESS]" << std::endl;
+  SCOPED_TRACE("[Test 1 SUCCESS]");
   return true;
 }
 
@@ -195,8 +194,7 @@ PSOTest1()
 [[nodiscard]] bool
 PSOTest2()
 {
-  std::cout << "Particle Swarm Optimizer Test 2 [f(x) = 1/2 x^T A x - b^T x]\n";
-  std::cout << "----------------------------------\n";
+  SCOPED_TRACE("Particle Swarm Optimizer Test 2 [f(x) = 1/2 x^T A x - b^T x]");
 
   itk::Array<double> knownParameters(2);
   knownParameters[0] = 2.0;
@@ -263,7 +261,7 @@ PSOTest2()
     std::cout << "Description = " << e.GetDescription() << std::endl;
     return false;
   }
-  std::cout << "[Test 2 SUCCESS]" << std::endl;
+  SCOPED_TRACE("[Test 2 SUCCESS]");
   return true;
 }
 
@@ -271,8 +269,7 @@ PSOTest2()
 [[nodiscard]] bool
 PSOTest3()
 {
-  std::cout << "Particle Swarm Optimizer Test 3 [f(x,y) = (1-x)^2 + 100(y-x^2)^2]\n";
-  std::cout << "----------------------------------\n";
+  SCOPED_TRACE("Particle Swarm Optimizer Test 3 [f(x,y) = (1-x)^2 + 100(y-x^2)^2]");
 
 
   constexpr double tolerance{ 1e-16 };
@@ -473,7 +470,7 @@ PSOTest3()
     std::cout << "Description = " << e.GetDescription() << std::endl;
     return false;
   }
-  std::cout << "[Test 3 SUCCESS]" << std::endl;
+  SCOPED_TRACE("[Test 3 SUCCESS]");
   return true;
 }
 } // namespace

@@ -60,7 +60,7 @@ TEST(ErodeObjectMorphologyImageFilter, ConvertedLegacyTest)
   myIteratorType it(inputImage, inputImage->GetBufferedRegion());
 
   // Initialize the content of Image
-  std::cout << "Input image " << std::endl;
+  SCOPED_TRACE("Input image");
   inputImage->FillBuffer(bgValue);
 
   myImageType::IndexType ind;
@@ -149,7 +149,7 @@ TEST(ErodeObjectMorphologyImageFilter, ConvertedLegacyTest)
   myIteratorType it2(outputImage, outputImage->GetBufferedRegion());
 
   // Print the content of the result image
-  std::cout << "Result " << std::endl;
+  SCOPED_TRACE("Result");
   i = 0;
   while (!it2.IsAtEnd())
   {

@@ -91,6 +91,4 @@ TEST(QuadEdgeMeshDeleteEdge, ConvertedLegacyTest)
   constexpr itk::IdentifierType expectedEdgeCount{ 2 };
   const itk::IdentifierType     obtainedEdgeCount = edgesBefore - mesh->ComputeNumberOfEdges();
   EXPECT_EQ(obtainedEdgeCount, expectedEdgeCount) << "Error in itk::QuadEdgeMesh::ComputeNumberOfEdges";
-
-  std::cout << "Test finished." << std::endl;
 }

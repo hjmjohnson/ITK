@@ -61,7 +61,7 @@ TEST(EdgePotentialImageFilter, ConvertedLegacyTest)
   {
     vec[j] = 10.0;
   }
-  std::cout << "Content of the Input " << std::endl;
+  SCOPED_TRACE("Content of the Input");
   it.GoToBegin();
   while (!it.IsAtEnd())
   {
@@ -89,7 +89,7 @@ TEST(EdgePotentialImageFilter, ConvertedLegacyTest)
   OutputIteratorType ot(outputImage, outputImage->GetRequestedRegion());
 
   //  Check the content of the result image
-  std::cout << "Verification of the output " << std::endl;
+  SCOPED_TRACE("Verification of the output");
   constexpr OutputImageType::PixelType epsilon{ 1e-6 };
   ot.GoToBegin();
   it.GoToBegin();

@@ -81,7 +81,4 @@ TEST(SimplexMeshVolumeCalculator, ConvertedLegacyTest)
   std::cout << "knownVolume: " << knownVolume << " versus computedVolume: " << volume << std::endl;
 
   EXPECT_NEAR(volume, knownVolume, (1e-2 * knownVolume)) << "Error in the Volume computation ";
-
-
-  std::cout << "[TEST DONE]" << std::endl;
 }

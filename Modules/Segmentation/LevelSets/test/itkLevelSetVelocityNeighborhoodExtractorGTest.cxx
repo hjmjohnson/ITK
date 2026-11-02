@@ -81,7 +81,7 @@ TEST(LevelSetVelocityNeighborhoodExtractor, ConvertedLegacyTest)
   using AuxValueContainer = ExtractorType::AuxValueContainer;
   using AuxIterator = AuxValueContainer::ConstIterator;
 
-  std::cout << "Inside Points" << std::endl;
+  SCOPED_TRACE("Inside Points");
 
   Iterator    iterEnd = extractor->GetInsidePoints()->End();
   AuxIterator aIter = extractor->GetAuxInsideValues()->Begin();
@@ -92,7 +92,7 @@ TEST(LevelSetVelocityNeighborhoodExtractor, ConvertedLegacyTest)
     std::cout << aIter.Value() << std::endl;
   }
 
-  std::cout << "Outside Points" << std::endl;
+  SCOPED_TRACE("Outside Points");
 
   iterEnd = extractor->GetOutsidePoints()->End();
   aIter = extractor->GetAuxOutsideValues()->Begin();
@@ -113,6 +113,4 @@ TEST(LevelSetVelocityNeighborhoodExtractor, ConvertedLegacyTest)
   extractor->SetAuxImage(aux0, 2);
 
   EXPECT_EQ(extractor->GetAuxImage(2), nullptr);
-
-  std::cout << "Test passed." << std::endl;
 }

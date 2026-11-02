@@ -242,10 +242,10 @@ TEST(ANTSNeighborhoodCorrelationImageToImageMetricv4, ConvertedLegacyTest)
   metric->SetFixedTransform(transformFId);
   metric->SetMovingTransform(transformMdisplacement);
 
-  std::cout << "fixedImage:" << std::endl;
+  SCOPED_TRACE("fixedImage:");
   ANTSNeighborhoodCorrelationImageToImageMetricv4Test_PrintImage(fixedImage);
 
-  std::cout << "movingImage:" << std::endl;
+  SCOPED_TRACE("movingImage:");
   ANTSNeighborhoodCorrelationImageToImageMetricv4Test_PrintImage(movingImage);
 
   // Initialize
@@ -267,14 +267,13 @@ TEST(ANTSNeighborhoodCorrelationImageToImageMetricv4, ConvertedLegacyTest)
 
 
   // Test same value returned by different methods
-  std::cout << "Check Value return values..." << std::endl;
+  SCOPED_TRACE("Check Value return values...");
   if (itk::Math::NotExactlyEquals(valueReturn1, valueReturn2))
   {
     std::cerr << "Results for Value don't match: " << valueReturn1 << ", " << valueReturn2 << std::endl;
   }
 
-  std::cout << "Test passed." << std::endl;
-  std::cout << "transformMdisplacement parameters" << std::endl;
+  SCOPED_TRACE("transformMdisplacement parameters");
   std::cout << transformMdisplacement->GetParameters() << std::endl;
   ANTSNeighborhoodCorrelationImageToImageMetricv4Test_PrintImage(transformMdisplacement->GetDisplacementField());
 
@@ -289,7 +288,7 @@ TEST(ANTSNeighborhoodCorrelationImageToImageMetricv4, ConvertedLegacyTest)
   using PointSetType = MetricType::FixedSampledPointSetType;
   using PointType = PointSetType::PointType;
 
-  std::cout << "Creating point set..." << std::endl;
+  SCOPED_TRACE("Creating point set...");
 
   const PointSetType::Pointer pset(PointSetType::New());
 
@@ -305,7 +304,7 @@ TEST(ANTSNeighborhoodCorrelationImageToImageMetricv4, ConvertedLegacyTest)
   }
   std::cout << "Setting point set with " << ind << " points of "
             << fixedImage->GetLargestPossibleRegion().GetNumberOfPixels() << " total " << std::endl;
-  std::cout << "Testing metric with point set..." << std::endl;
+  SCOPED_TRACE("Testing metric with point set...");
 
   /* run the metric with the sparse threader */
   const MetricTypePointer metricSparse = MetricType::New();
@@ -325,16 +324,15 @@ TEST(ANTSNeighborhoodCorrelationImageToImageMetricv4, ConvertedLegacyTest)
   ASSERT_NO_THROW(metricSparse->GetValueAndDerivative(valueReturnSparse, derivativeReturnSparse));
 
 
-  std::cout << "Check Value return values between dense and sparse threader..." << std::endl;
+  SCOPED_TRACE("Check Value return values between dense and sparse threader...");
   std::cout << "dense: " << valueReturn1 << ", sparse: " << valueReturnSparse << std::endl;
   if (itk::Math::NotExactlyEquals(valueReturn1, valueReturnSparse))
   {
     std::cerr << "Results for Value don't match using dense and sparse threaders: " << valueReturn1 << ", (sparse) "
               << valueReturnSparse << std::endl;
   }
-  std::cout << "Test passed." << std::endl;
 
-  std::cout << "Check Derivative return values between dense and sparse threader..." << std::endl;
+  SCOPED_TRACE("Check Derivative return values between dense and sparse threader...");
   std::cout << "derivative of moving transform (sparse threader):" << std::endl;
   std::cout << derivativeReturnSparse << std::endl;
   std::cout << std::endl << "derivative of moving transform as a field  (sparse threader):" << std::endl;
@@ -356,7 +354,7 @@ TEST(ANTSNeighborhoodCorrelationImageToImageMetricv4, ConvertedLegacyTest)
     static_cast<DisplacementTransformType::ParametersValueType>(1000.0));
   transformMdisplacement->SetParameters(parameters);
   constexpr MetricType::MeasureType expectedMetricMax{ itk::NumericTraits<MetricType::MeasureType>::max() };
-  std::cout << "Testing non-overlapping images. Expect a warning:" << std::endl;
+  SCOPED_TRACE("Testing non-overlapping images. Expect a warning:");
   MetricType::MeasureType valueReturn = NAN;
   metric->GetValueAndDerivative(valueReturn, derivativeReturn);
   if (metric->GetNumberOfValidPoints() != 0 || itk::Math::NotExactlyEquals(valueReturn, expectedMetricMax))

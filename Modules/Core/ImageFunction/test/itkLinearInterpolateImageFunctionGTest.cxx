@@ -107,7 +107,7 @@ RunLinearInterpolateTest()
   //
   IndexType    index;
   unsigned int dimIt[4];
-  std::cout << "Image Data: " << std::endl;
+  SCOPED_TRACE("Image Data:");
   for (dimIt[3] = 0; dimIt[3] < dimLengths[3]; dimIt[3]++)
   {
     for (dimIt[2] = 0; dimIt[2] < dimLengths[2]; dimIt[2]++)

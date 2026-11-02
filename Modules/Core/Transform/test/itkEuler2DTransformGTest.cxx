@@ -48,7 +48,6 @@ CheckEqual(const itk::Point<double, 2> & p1, const itk::Point<double, 2> & p2)
 
 TEST(Euler2DTransform, ConvertedLegacyTest)
 {
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing Euler Angles 2D Transform" << std::endl << std::endl;
 
   constexpr double       epsilon{ 1e-10 };
@@ -59,21 +58,19 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
   auto eulerTransform = EulerTransformType::New();
 
   // Testing Identity
-  std::cout << "Testing identity transform: ";
+  SCOPED_TRACE("Testing identity transform:");
   eulerTransform->SetIdentity();
 
   EulerTransformType::OffsetType offset = eulerTransform->GetOffset();
   EXPECT_EQ(offset[0], 0.0) << "[ FAILED ]";
   EXPECT_EQ(offset[1], 0.0) << "[ FAILED ]";
 
-  std::cout << "[ PASSED ]" << std::endl;
-
   // 15 degrees in radians
   const double angle = 15.0 * std::atan(1.0f) / 45.0;
   const double sinth = std::sin(angle);
   const double costh = std::cos(angle);
 
-  std::cout << "Testing Rotation:";
+  SCOPED_TRACE("Testing Rotation:");
   eulerTransform->SetRotation(angle);
 
   // Rotate an itk::Point
@@ -97,10 +94,8 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
 
-
-  std::cout << "Testing Translation:";
+  SCOPED_TRACE("Testing Translation:");
 
   eulerTransform->SetRotation(0);
 
@@ -124,20 +119,17 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // Testing Parameters
-  std::cout << "Testing Parameters: ";
+  SCOPED_TRACE("Testing Parameters:");
   EulerTransformType::ParametersType parameters = eulerTransform->GetParameters();
 
   EXPECT_EQ(parameters[0], 0.0) << " [ FAILED ] ";
   EXPECT_EQ(parameters[1], 1.0) << " [ FAILED ] ";
   EXPECT_EQ(parameters[2], 4.0) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 
   // Testing Jacobian
-  std::cout << "Testing Jacobian: ";
+  SCOPED_TRACE("Testing Jacobian:");
   EulerTransformType::JacobianType jacobian;
   eulerTransform->ComputeJacobianWithRespectToParameters(pInit, jacobian);
 
@@ -147,9 +139,8 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
   EXPECT_EQ(jacobian[1][0], 10.0) << " [ FAILED ] ";
   EXPECT_EQ(jacobian[1][1], 0.0) << " [ FAILED ] ";
   EXPECT_EQ(jacobian[1][2], 1.0) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 
-  std::cout << "Testing Angle from matrix : ";
+  SCOPED_TRACE("Testing Angle from matrix :");
   eulerTransform->SetIdentity();
   eulerTransform->SetRotation(0.2);
 
@@ -157,7 +148,6 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
   t2->SetIdentity();
   t2->Compose(eulerTransform);
   EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[0] - 0.2), 0.0001) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 
   {
     // Test instantiation, inverse computation, back transform etc.
@@ -190,7 +180,7 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p3 = t22->TransformPoint(p2);
 
-    std::cout << "Test CloneInverseTo(): ";
+    SCOPED_TRACE("Test CloneInverseTo():");
     EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
@@ -198,14 +188,14 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
     TransformType::InputPointType p3dash;
     p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverse(): ";
+    SCOPED_TRACE("Test GetInverse():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
     ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverseTransform(): ";
+    SCOPED_TRACE("Test GetInverseTransform():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
@@ -214,7 +204,7 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
-    std::cout << "Test Clone(): ";
+    SCOPED_TRACE("Test Clone():");
     EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test compose
@@ -237,7 +227,7 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
     TransformType::InputPointType p6 = t4->TransformPoint(p5);
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,false): ";
+    SCOPED_TRACE("Test Compose(.,false):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
@@ -247,11 +237,11 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
     p6 = t1->TransformPoint(p5);
     p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,true): ";
+    SCOPED_TRACE("Test Compose(.,true):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
-    std::cout << "Testing Jacobian: ";
+    SCOPED_TRACE("Testing Jacobian:");
     TransformType::JacobianType jacobian2;
     t4->ComputeJacobianWithRespectToParameters(p1, jacobian2);
 
@@ -287,8 +277,6 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
       } // for j
 
     } // for k
-
-    std::cout << " [ PASSED ] " << std::endl;
   }
 
   {
@@ -323,13 +311,13 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
     const TransformType::OutputPointType op1 = t1->TransformPoint(ip);
     const TransformType::OutputPointType op2 = t23->TransformPoint(ip);
 
-    std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
+    SCOPED_TRACE("Test Set/GetMatrix() and Set/GetOffset():");
     EXPECT_TRUE(CheckEqual(op1, op2));
 
     // check that parameters are the same
     TransformType::ParametersType pdash = t23->GetParameters();
 
-    std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
+    SCOPED_TRACE("Test Set/GetMatrix() and Set/GetOffset():");
     for (unsigned int j = 0; j < t1->GetNumberOfParameters(); ++j)
     {
       EXPECT_LE(itk::Math::Absolute(parameters3[j] - pdash[j]), epsilon)
@@ -338,6 +326,5 @@ TEST(Euler2DTransform, ConvertedLegacyTest)
         << "Expected value " << parameters3 << std::endl
         << " differs from " << pdash << " by more than " << epsilon;
     }
-    std::cout << " [ PASSED ] " << std::endl;
   }
 }

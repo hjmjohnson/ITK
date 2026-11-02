@@ -121,7 +121,7 @@ TEST(QuadEdgeMeshPolygonCell, ConvertedLegacyTest)
   EXPECT_EQ(newcell->GetPointId(18), static_cast<PointIdentifier>(-1)) << "Get Point should have failed !";
 
   // Test iterators
-  std::cout << "Iterator: ";
+  SCOPED_TRACE("Iterator:");
   pointId = newcell->PointIdsBegin();
   endId = newcell->PointIdsEnd();
   while (pointId != endId)
@@ -131,7 +131,7 @@ TEST(QuadEdgeMeshPolygonCell, ConvertedLegacyTest)
   }
   std::cout << std::endl;
 
-  std::cout << "Iterator const: ";
+  SCOPED_TRACE("Iterator const:");
   constPointId = newcell->PointIdsBegin();
   constEndId = newcell->PointIdsEnd();
   while (constPointId != constEndId)
@@ -141,7 +141,7 @@ TEST(QuadEdgeMeshPolygonCell, ConvertedLegacyTest)
   }
   std::cout << std::endl;
 
-  std::cout << "Test MakeCopy" << std::endl;
+  SCOPED_TRACE("Test MakeCopy");
 
   CellAutoPointer anotherCell;
 

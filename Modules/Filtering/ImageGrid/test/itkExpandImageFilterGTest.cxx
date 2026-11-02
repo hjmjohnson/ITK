@@ -85,7 +85,7 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
 
   int testPassed = EXIT_SUCCESS;
 
-  std::cout << "Create the input image pattern." << std::endl;
+  SCOPED_TRACE("Create the input image pattern.");
   ImageType::RegionType         region;
   constexpr ImageType::SizeType size{ 64, 64 };
   region.SetSize(size);
@@ -111,7 +111,7 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
     ++inIter;
   }
 
-  std::cout << "Run ExpandImageFilter in standalone mode with progress." << std::endl;
+  SCOPED_TRACE("Run ExpandImageFilter in standalone mode with progress.");
   using ExpanderType = itk::ExpandImageFilter<ImageType, ImageType>;
   auto expander = ExpanderType::New();
 
@@ -139,7 +139,7 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
   expander->Print(std::cout);
   expander->Update();
 
-  std::cout << "Checking the output against expected." << std::endl;
+  SCOPED_TRACE("Checking the output against expected.");
   Iterator outIter(expander->GetOutput(), expander->GetOutput()->GetBufferedRegion());
 
   // compute non-padded output region
@@ -189,7 +189,7 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
     ++outIter;
   }
 
-  std::cout << "Run ExpandImageFilter with streamer" << std::endl;
+  SCOPED_TRACE("Run ExpandImageFilter with streamer");
 
   using CasterType = itk::CastImageFilter<ImageType, ImageType>;
   auto caster = CasterType::New();
@@ -210,7 +210,7 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
   streamer->SetNumberOfStreamDivisions(3);
   streamer->Update();
 
-  std::cout << "Compare standalone and streamed outputs" << std::endl;
+  SCOPED_TRACE("Compare standalone and streamed outputs");
 
   Iterator streamIter(streamer->GetOutput(), streamer->GetOutput()->GetBufferedRegion());
 
@@ -233,7 +233,7 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
 
   // Test error handling
 
-  std::cout << "Setting Input to nullptr" << std::endl;
+  SCOPED_TRACE("Setting Input to nullptr");
   expander->SetInput(nullptr);
 
   EXPECT_THROW(expander->Update(), itk::ExceptionObject);
@@ -242,7 +242,7 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
   expander->ResetPipeline();
   expander->SetInput(input);
 
-  std::cout << "Setting Interpolator to nullptr" << std::endl;
+  SCOPED_TRACE("Setting Interpolator to nullptr");
   expander->SetInterpolator(nullptr);
 
   EXPECT_THROW(expander->Update(), itk::ExceptionObject);
@@ -252,6 +252,5 @@ TEST(ExpandImageFilter, ConvertedLegacyTest)
   expander->SetInterpolator(interpolator);
 
 
-  std::cout << "Test finished." << std::endl;
   EXPECT_EQ(testPassed, EXIT_SUCCESS);
 }

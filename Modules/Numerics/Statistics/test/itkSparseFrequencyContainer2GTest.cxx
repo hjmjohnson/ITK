@@ -22,7 +22,7 @@
 
 TEST(SparseFrequencyContainer2, ConvertedLegacyTest)
 {
-  std::cout << "SparseFrequencyContainer2 Test \n \n";
+  SCOPED_TRACE("SparseFrequencyContainer2 Test");
 
   using SparseFrequencyContainer2Type = itk::Statistics::SparseFrequencyContainer2;
 
@@ -38,7 +38,7 @@ TEST(SparseFrequencyContainer2, ConvertedLegacyTest)
 
   // Test the SetFrequency() / GetFrequency() methods
   {
-    std::cout << "Testing Set/Get Frequency methods...";
+    SCOPED_TRACE("Testing Set/Get Frequency methods...");
     for (unsigned int bin = 0; bin < numberOfBins; ++bin)
     {
       // Compute any value as frequency just to test the SetFrequency() method
@@ -53,7 +53,6 @@ TEST(SparseFrequencyContainer2, ConvertedLegacyTest)
       const AbsoluteFrequencyType stored = container->GetFrequency(bin);
       EXPECT_EQ(stored, frequency) << "Stored Frequency in bin " << bin << " doesn't match value";
     }
-    std::cout << " PASSED !" << std::endl;
 
   } // end of SetFrequency() / GetFrequency() test
 
@@ -67,7 +66,7 @@ TEST(SparseFrequencyContainer2, ConvertedLegacyTest)
 
   // Test the IncreaseFrequency() method
   {
-    std::cout << "Testing IncreaseFrequency method...";
+    SCOPED_TRACE("Testing IncreaseFrequency method...");
     // Try not to depend on previous tests....So, we initialize the histogram again.
     for (unsigned int bin = 0; bin < numberOfBins; ++bin)
     {
@@ -92,6 +91,5 @@ TEST(SparseFrequencyContainer2, ConvertedLegacyTest)
       const AbsoluteFrequencyType stored = container->GetFrequency(bin);
       EXPECT_EQ(stored, frequency) << "Stored Frequency in bin " << bin << " doesn't match value";
     }
-    std::cout << " PASSED !" << std::endl;
   } // end of SetFrequency() / GetFrequency() test
 }

@@ -88,25 +88,25 @@ TEST(SpatialObjectPrint, ConvertedLegacyTest)
   std::cout << "----------SpatialObject " << SpatialObjectObj;
 
   auto * SpatialObjectPointObj = new itk::SpatialObjectPoint<3>;
-  std::cout << "----------SpatialObjectPoint ";
+  SCOPED_TRACE("----------SpatialObjectPoint");
   SpatialObjectPointObj->Print(std::cout);
   delete SpatialObjectPointObj;
 
   const itk::SpatialObjectProperty SpatialObjectPropertyObj;
-  std::cout << "----------SpatialObjectProperty ";
+  SCOPED_TRACE("----------SpatialObjectProperty");
   SpatialObjectPropertyObj.Print(std::cout);
 
   const itk::SurfaceSpatialObject<3>::Pointer SurfaceSpatialObjectObj = itk::SurfaceSpatialObject<3>::New();
   std::cout << "----------SurfaceSpatialObject " << SurfaceSpatialObjectObj;
 
   const itk::SurfaceSpatialObjectPoint<3> SurfaceSpatialObjectPointObj;
-  std::cout << "----------SurfaceSpatialObjectPoint ";
+  SCOPED_TRACE("----------SurfaceSpatialObjectPoint");
   SurfaceSpatialObjectPointObj.Print(std::cout);
 
   const itk::TubeSpatialObject<3>::Pointer TubeSpatialObjectObj = itk::TubeSpatialObject<3>::New();
   std::cout << "----------TubeSpatialObject " << TubeSpatialObjectObj;
 
   const itk::TubeSpatialObjectPoint<3> TubeSpatialObjectPointObj;
-  std::cout << "----------TubeSpatialObjectPoint ";
+  SCOPED_TRACE("----------TubeSpatialObjectPoint");
   TubeSpatialObjectPointObj.Print(std::cout);
 }

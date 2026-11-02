@@ -69,7 +69,7 @@ TEST(MeshSpatialObject, ConvertedLegacyTest)
   meshSO->Update();
 
 
-  std::cout << "Testing Bounding Box: ";
+  SCOPED_TRACE("Testing Bounding Box:");
 
   EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[0], 0) << "[FAILED]";
   EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[1], 9) << "[FAILED]";
@@ -78,11 +78,9 @@ TEST(MeshSpatialObject, ConvertedLegacyTest)
   EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[4], 0) << "[FAILED]";
   EXPECT_EQ(meshSO->GetMyBoundingBoxInWorldSpace()->GetBounds()[5], 9) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
 
   // Testing is inside
-  std::cout << "Testing IsInside: ";
+  SCOPED_TRACE("Testing IsInside:");
 
   MeshSpatialObjectType::PointType inside;
   inside[0] = 1;
@@ -95,10 +93,9 @@ TEST(MeshSpatialObject, ConvertedLegacyTest)
 
   EXPECT_TRUE(meshSO->IsInsideInWorldSpace(inside)) << "[FAILED]" << '\n' << inside << " is not inside the mesh!";
   EXPECT_FALSE(meshSO->IsInsideInWorldSpace(outside)) << "[FAILED]" << '\n' << outside << " is inside the mesh!";
-  std::cout << "[PASSED]" << std::endl;
 
   // Testing is valueAt
-  std::cout << "Testing ValueAt: ";
+  SCOPED_TRACE("Testing ValueAt:");
   double value = NAN;
   meshSO->ValueAtInWorldSpace(inside, value);
   EXPECT_NE(value, 0.0) << "[FAILED]";
@@ -106,11 +103,9 @@ TEST(MeshSpatialObject, ConvertedLegacyTest)
   meshSO->ValueAtInWorldSpace(outside, value);
   EXPECT_EQ(value, 0.0) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
 
   // Testing IsInside() for triangle mesh
-  std::cout << "Testing IsInside() Triangle: ";
+  SCOPED_TRACE("Testing IsInside() Triangle:");
   using TriangleCellType = itk::TriangleCell<CellInterfaceType>;
 
   // Create an itkMesh
@@ -157,8 +152,4 @@ TEST(MeshSpatialObject, ConvertedLegacyTest)
   EXPECT_TRUE(meshTriangleSO->IsInsideInWorldSpace(pIn)) << "[FAILED]";
   EXPECT_FALSE(meshTriangleSO->IsInsideInWorldSpace(pOut)) << "[FAILED]";
   meshSO->Print(std::cout);
-  std::cout << "[PASSED]" << std::endl;
-
-
-  std::cout << "Test finished" << std::endl;
 }

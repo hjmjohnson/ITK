@@ -82,7 +82,7 @@ TEST(VectorToRGBImageAdaptor, ConvertedLegacyTest)
   image->FillBuffer(vector);
 
   // Reading the values to verify the image content
-  std::cout << "--- Before --- " << std::endl;
+  SCOPED_TRACE("--- Before ---");
   it1.GoToBegin();
   while (!it1.IsAtEnd())
   {
@@ -117,7 +117,7 @@ TEST(VectorToRGBImageAdaptor, ConvertedLegacyTest)
   }
 
 
-  std::cout << "--- After --- " << std::endl;
+  SCOPED_TRACE("--- After ---");
 
   it1.GoToBegin();
   while (!it1.IsAtEnd())

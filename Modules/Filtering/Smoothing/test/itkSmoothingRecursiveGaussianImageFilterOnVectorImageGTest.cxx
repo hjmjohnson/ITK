@@ -114,7 +114,7 @@ TEST(SmoothingRecursiveGaussianImageFilterOnVectorImage, ConvertedLegacyTest)
   myOutputIteratorType itg(outputImage, outputImage->GetRequestedRegion());
 
   // Print the content of the result image
-  std::cout << " Result " << std::endl;
+  SCOPED_TRACE("Result");
   itg.GoToBegin();
   while (!itg.IsAtEnd())
   {

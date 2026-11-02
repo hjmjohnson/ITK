@@ -238,7 +238,7 @@ private:
 TEST(AmoebaOptimizer, AmoebaTest1)
 {
 
-  std::cout << "Amoeba Optimizer Test 1\n \n";
+  SCOPED_TRACE("Amoeba Optimizer Test 1");
 
   using OptimizerType = itk::AmoebaOptimizer;
 
@@ -301,14 +301,14 @@ TEST(AmoebaOptimizer, AmoebaTest1)
   {
 
     std::cout << "Run for " << itkOptimizer->GetMaximumNumberOfIterations();
-    std::cout << " iterations or less." << std::endl;
+    SCOPED_TRACE("iterations or less.");
 
     itkOptimizer->StartOptimization();
 
 
     itkOptimizer->SetMaximumNumberOfIterations(100);
     std::cout << "Continue for " << itkOptimizer->GetMaximumNumberOfIterations();
-    std::cout << " iterations or less." << std::endl;
+    SCOPED_TRACE("iterations or less.");
     itkOptimizer->SetInitialPosition(itkOptimizer->GetCurrentPosition());
     itkOptimizer->StartOptimization();
   }
@@ -341,7 +341,7 @@ TEST(AmoebaOptimizer, AmoebaTest1)
   }
 
   // Get the final value of the optimizer
-  std::cout << "Testing optimizers GetValue() : ";
+  SCOPED_TRACE("Testing optimizers GetValue() :");
   OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
   EXPECT_NEAR(finalValue, -9.99998, 0.01);
 
@@ -349,7 +349,7 @@ TEST(AmoebaOptimizer, AmoebaTest1)
   //
   { // add a block-scope to have local variables
 
-    std::cout << "Testing Maximization " << std::endl;
+    SCOPED_TRACE("Testing Maximization");
 
     currentValue = initialValue;
 
@@ -366,7 +366,7 @@ TEST(AmoebaOptimizer, AmoebaTest1)
       itkOptimizer->MaximizeOn();
 
       std::cout << "Run for " << itkOptimizer->GetMaximumNumberOfIterations();
-      std::cout << " iterations or less." << std::endl;
+      SCOPED_TRACE("iterations or less.");
 
       itkOptimizer->StartOptimization();
 
@@ -397,7 +397,7 @@ TEST(AmoebaOptimizer, AmoebaTest1)
     }
 
     // Get the final value of the optimizer
-    std::cout << "Testing optimizer's GetValue() [invokes additional function evaluation]: ";
+    SCOPED_TRACE("Testing optimizer's GetValue() [invokes additional function evaluation]:");
     finalValue = itkOptimizer->GetValue();
     EXPECT_NEAR(finalValue, -9.99998, 0.01);
   }
@@ -408,7 +408,7 @@ TEST(AmoebaOptimizer, AmoebaTest1)
  */
 TEST(AmoebaOptimizer, AmoebaTest2)
 {
-  std::cout << "Amoeba Optimizer Test 2\n \n";
+  SCOPED_TRACE("Amoeba Optimizer Test 2");
 
   using OptimizerType = itk::AmoebaOptimizer;
   auto itkOptimizer = OptimizerType::New();
@@ -467,7 +467,7 @@ TEST(AmoebaOptimizer, AmoebaTest2)
     std::cout << "Standard Amoeba:\n";
     std::cout << "Known parameters   = " << knownParameters << "   ";
     std::cout << "Estimated parameters = " << finalParameters << std::endl;
-    std::cout << "Converged to local minimum." << std::endl;
+    SCOPED_TRACE("Converged to local minimum.");
     EXPECT_NEAR(finalParameters[0], knownParameters, xTolerance);
 
     // run again using multiple restarts
@@ -495,7 +495,7 @@ TEST(AmoebaOptimizer, AmoebaTest2)
     std::cout << "Amoeba with restarts:\n";
     std::cout << "Known parameters   = " << knownParameters << "   ";
     std::cout << "Estimated parameters = " << finalParameters << std::endl;
-    std::cout << "Converged to global minimum." << std::endl;
+    SCOPED_TRACE("Converged to global minimum.");
 
     EXPECT_NEAR(finalParameters[0], knownParameters, xTolerance);
   }

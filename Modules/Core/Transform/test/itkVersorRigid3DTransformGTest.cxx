@@ -61,7 +61,7 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
   using MatrixType = TransformType::MatrixType;
 
   {
-    std::cout << "Test default constructor... ";
+    SCOPED_TRACE("Test default constructor...");
 
     auto transform = TransformType::New();
 
@@ -82,12 +82,10 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
     parameters[5] = 0.0;
 
     transform->SetParameters(parameters);
-
-    std::cout << " PASSED !" << std::endl;
   }
 
   {
-    std::cout << "Test initial rotation matrix " << std::endl;
+    SCOPED_TRACE("Test initial rotation matrix");
     auto             transform = TransformType::New();
     const MatrixType matrix = transform->GetMatrix();
     std::cout << "Matrix = " << std::endl;
@@ -143,8 +141,6 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating point : " << p << std::endl
                       << "Result should be     : " << q << std::endl
                       << "Reported Result is   : " << r;
-
-      std::cout << "Ok rotating an itk::Point " << std::endl;
     }
 
     {
@@ -165,8 +161,6 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vector : " << p << std::endl
                       << "Result should be      : " << q << std::endl
                       << "Reported Result is    : " << r;
-
-      std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
 
     {
@@ -187,8 +181,6 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating covariant vector : " << p << std::endl
                       << "Result should be                : " << q << std::endl
                       << "Reported Result is              : " << r;
-
-      std::cout << "Ok rotating an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -212,8 +204,6 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vnl_vector : " << p << std::endl
                       << "Result should be          : " << q << std::endl
                       << "Reported Result is        : " << r;
-
-      std::cout << "Ok rotating an vnl_Vector " << std::endl;
     }
   }
 
@@ -248,8 +238,6 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
 
     EXPECT_TRUE(Ok) << "The center point was not invariant to rotation ";
 
-    std::cout << "Ok center is invariant to rotation." << std::endl;
-
 
     const unsigned int np = transform->GetNumberOfParameters();
 
@@ -274,7 +262,6 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
       EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
         << "Output parameter does not match input ";
     }
-    std::cout << "Input/Output parameter check Passed !" << std::endl;
 
     // Try the ComputeJacobianWithRespectToParameters method
     TransformType::InputPointType aPoint;
@@ -332,7 +319,7 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
   }
 
   {
-    std::cout << " Exercise the SetIdentity() method " << std::endl;
+    SCOPED_TRACE("Exercise the SetIdentity() method");
     auto transform = TransformType::New();
 
     auto axis = itk::MakeFilled<itk::Vector<double, 3>>(1);
@@ -371,12 +358,11 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
       EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
         << "Output parameter does not match input ";
     }
-    std::cout << "Input/Output parameter check Passed !" << std::endl;
   }
 
   {
     // Testing SetMatrix()
-    std::cout << "Testing SetMatrix() ... ";
+    SCOPED_TRACE("Testing SetMatrix() ...");
     MatrixType matrix;
 
     auto t = TransformType::New();
@@ -461,7 +447,6 @@ TEST(VersorRigid3DTransform, ConvertedLegacyTest)
       std::cout << "translation: " << t;
       std::cout << "translationInverse: " << tInverse;
     }
-    std::cout << "[ PASSED ]" << std::endl;
   }
 
   std::cout << std::endl << "Test PASSED ! " << std::endl;

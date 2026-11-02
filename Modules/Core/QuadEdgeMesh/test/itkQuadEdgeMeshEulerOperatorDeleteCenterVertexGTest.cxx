@@ -64,7 +64,7 @@ TEST(QuadEdgeMeshEulerOperatorDeleteCenterVertex, ConvertedLegacyTest)
   //    |  __/       |  __/       |  __/       |  __/       |
   //    | /          | /          | /          | /          |
   //    0 ---------- 1 ---------- 2  --------- 3 ---------  4
-  std::cout << "Checking DeleteCenterVertex." << std::endl;
+  SCOPED_TRACE("Checking DeleteCenterVertex.");
 
   const MeshPointer mesh = MeshType::New();
   CreateSquareTriangularMesh<MeshType>(mesh);
@@ -73,7 +73,6 @@ TEST(QuadEdgeMeshEulerOperatorDeleteCenterVertex, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No Mesh Input";
   EXPECT_EQ(deleteCenterVertex->Evaluate((QEType *)1), nullptr);
-  std::cout << "OK" << std::endl;
 
   EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorDeleteCenterVertexFunction"),
             std::string_view(deleteCenterVertex->GetNameOfClass()));
@@ -82,13 +81,11 @@ TEST(QuadEdgeMeshEulerOperatorDeleteCenterVertex, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No QE Input";
   EXPECT_EQ(deleteCenterVertex->Evaluate((QEType *)nullptr), nullptr);
-  std::cout << "OK" << std::endl;
 
   deleteCenterVertex->SetInput(mesh);
   std::cout << "     "
             << "Test one-ring not full (impossible)";
   EXPECT_EQ(deleteCenterVertex->Evaluate(mesh->FindEdge(15, 21)), nullptr);
-  std::cout << "OK" << std::endl;
 
   {
     const MeshPointer specialmesh = MeshType::New();
@@ -123,18 +120,15 @@ TEST(QuadEdgeMeshEulerOperatorDeleteCenterVertex, ConvertedLegacyTest)
       specialmesh->SetCell(i, cellpointer);
     }
     deleteCenterVertex->SetInput(specialmesh);
-    std::cout << "     ";
-    std::cout << "Delete a vertex of a non-collapsable mesh (impossible).";
+    SCOPED_TRACE("Delete a vertex of a non-collapsable mesh (impossible).");
     EXPECT_EQ(deleteCenterVertex->Evaluate(specialmesh->FindEdge(0, 1)), nullptr);
   }
 
   deleteCenterVertex->SetInput(mesh);
-  std::cout << "     ";
-  std::cout << "Delete center vertex with internal 1-ring (possible).";
+  SCOPED_TRACE("Delete center vertex with internal 1-ring (possible).");
   ASSERT_NE(deleteCenterVertex->Evaluate(mesh->FindEdge(6, 12)), nullptr);
   mesh->DeletePoint(deleteCenterVertex->GetOldPointID());
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 24, 50, 27, 1, 0));
-  std::cout << ".OK" << std::endl;
   // The initial configuration and numbering of simpleSquare.vtk:
   //    Vertices: 25 , Edges: 56, Faces: 32, Boundary = 1, Chi = 1
   //
@@ -161,39 +155,33 @@ TEST(QuadEdgeMeshEulerOperatorDeleteCenterVertex, ConvertedLegacyTest)
   //    0 ---------- 1 ---------- 2  --------- 3 ---------  4
   //
   CreateSquareTriangularMesh<MeshType>(mesh);
-  std::cout << "     ";
-  std::cout << "Delete center vertex with border 1-ring (possible).";
+  SCOPED_TRACE("Delete center vertex with border 1-ring (possible).");
   deleteCenterVertex->SetInput(mesh);
   ASSERT_NE(deleteCenterVertex->Evaluate(mesh->FindEdge(17, 18)), nullptr);
   mesh->DeletePoint(deleteCenterVertex->GetOldPointID());
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 24, 50, 27, 1, 0));
-  std::cout << ".OK" << std::endl;
   // test that border points can not be deleted.
   CreateSquareTriangularMesh<MeshType>(mesh);
-  std::cout << "     ";
-  std::cout << "Check deleting a border vertex (impossible).";
+  SCOPED_TRACE("Check deleting a border vertex (impossible).");
 
   deleteCenterVertex->SetInput(mesh);
   EXPECT_EQ(deleteCenterVertex->Evaluate(mesh->FindEdge(23, 24)), nullptr);
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0));
-  std::cout << ".OK" << std::endl;
 
   // test that points including an hole in the 1-ring
   // can not be deleted.
   CreateSquareTriangularMesh<MeshType>(mesh);
-  std::cout << "     ";
-  std::cout << "Check deleting a vertex around an hole (impossible).";
+  SCOPED_TRACE("Check deleting a vertex around an hole (impossible).");
   mesh->LightWeightDeleteEdge(mesh->FindEdge(6, 12));
   deleteCenterVertex->SetInput(mesh);
   EXPECT_EQ(deleteCenterVertex->Evaluate(mesh->FindEdge(6, 7)), nullptr);
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 55, 30, 2, 0));
-  std::cout << ".OK" << std::endl;
 
   std::cout << "Checking DeleteCenterVertex."
             << "OK" << std::endl
             << std::endl;
 
-  std::cout << "Checking DeleteCenterVertex( CreateCenterVertex()) Invariance.";
+  SCOPED_TRACE("Checking DeleteCenterVertex( CreateCenterVertex()) Invariance.");
 
   auto createCenterVertex = CreateCenterVertex::New();
   createCenterVertex->SetInput(mesh);
@@ -202,5 +190,4 @@ TEST(QuadEdgeMeshEulerOperatorDeleteCenterVertex, ConvertedLegacyTest)
   ASSERT_NE(deleteCenterVertex->Evaluate(createCenterVertex->Evaluate(mesh->FindEdge(0, 1))), nullptr);
   mesh->DeletePoint(deleteCenterVertex->GetOldPointID());
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0));
-  std::cout << ".OK" << std::endl;
 }

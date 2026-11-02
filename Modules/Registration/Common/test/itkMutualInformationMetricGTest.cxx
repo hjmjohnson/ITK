@@ -192,7 +192,7 @@ TEST(MutualInformationMetric, ConvertedLegacyTest)
   itk::TimeProbesCollectorBase collector;
   collector.Start("Loop");
 
-  std::cout << "param[4]\tMI\tdMI/dparam[4]" << std::endl;
+  SCOPED_TRACE("param[4]\tMI\tdMI/dparam[4]");
 
   for (double trans = -10; trans <= 5; trans += 0.5)
   {

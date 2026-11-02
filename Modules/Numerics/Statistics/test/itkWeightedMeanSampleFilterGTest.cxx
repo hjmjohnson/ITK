@@ -71,7 +71,7 @@ protected:
 
 TEST(WeightedMeanSampleFilter, ConvertedLegacyTest)
 {
-  std::cout << "WeightedMeanSampleFilter test \n \n";
+  SCOPED_TRACE("WeightedMeanSampleFilter test");
 
   constexpr unsigned int numberOfMeasurementVectors{ 5 };
 

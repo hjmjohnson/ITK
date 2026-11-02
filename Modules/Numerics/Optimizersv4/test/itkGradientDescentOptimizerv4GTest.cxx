@@ -249,11 +249,11 @@ TEST(GradientDescentOptimizerv4, ConvertedLegacyTest)
   trueParameters[1] = -2;
 
   // test the optimization
-  std::cout << "Test optimization 1:" << std::endl;
+  SCOPED_TRACE("Test optimization 1:");
   GradientDescentOptimizerv4RunTest(itkOptimizer, trueParameters);
 
   // test with non-identity scales
-  std::cout << "Test optimization with non-identity scales:" << std::endl;
+  SCOPED_TRACE("Test optimization with non-identity scales:");
   ScalesType scales(metric->GetNumberOfLocalParameters(), 0.5);
   itkOptimizer->SetScales(scales);
   metric->SetParameters(initialPosition);
@@ -304,7 +304,7 @@ TEST(GradientDescentOptimizerv4, ConvertedLegacyTest)
 
   // Verify that the optimizer doesn't run if the
   // number of iterations is set to zero.
-  std::cout << "\nCheck the optimizer when number of iterations is set to zero:" << std::endl;
+  SCOPED_TRACE("Check the optimizer when number of iterations is set to zero:");
   {
     itkOptimizer->SetNumberOfIterations(0);
     metric->SetParameters(initialPosition);
@@ -318,6 +318,6 @@ TEST(GradientDescentOptimizerv4, ConvertedLegacyTest)
   std::cout << "\nTest the Exception if the optimizer is not set properly:" << std::endl;
   auto badOptimizer = OptimizerType::New();
   EXPECT_THROW(badOptimizer->GetCurrentPosition(), itk::ExceptionObject);
-  std::cout << "Printing self.. " << std::endl;
+  SCOPED_TRACE("Printing self..");
   std::cout << itkOptimizer << std::endl;
 }

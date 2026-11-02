@@ -48,7 +48,7 @@ TEST(TriangleMeshToSimplexMeshFilter, ConvertedLegacyTest)
   mySphereMeshSource->SetResolution(0);
   mySphereMeshSource->SetScale(scale);
 
-  std::cout << "Triangle mesh created. " << std::endl;
+  SCOPED_TRACE("Triangle mesh created.");
 
   auto simplexFilter = SimplexFilterType::New();
 
@@ -61,6 +61,4 @@ TEST(TriangleMeshToSimplexMeshFilter, ConvertedLegacyTest)
   const SimplexMeshType::Pointer simplexMesh = simplexFilter->GetOutput();
 
   std::cout << "Simplex Mesh: " << simplexMesh << std::endl;
-
-  std::cout << "[TEST DONE]" << std::endl;
 }

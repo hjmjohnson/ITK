@@ -25,7 +25,7 @@
 
 TEST(Subsample, ConvertedLegacyTest)
 {
-  std::cout << "Subsample Test \n \n";
+  SCOPED_TRACE("Subsample Test");
 
   using FloatImage = itk::Image<float, 3>;
 

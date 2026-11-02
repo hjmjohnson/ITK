@@ -138,8 +138,6 @@ TEST(Rigid3DPerspectiveTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
                       << "Result should be       : " << s << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
   }
 
@@ -188,11 +186,6 @@ TEST(Rigid3DPerspectiveTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating point: " << p << std::endl
                       << "Result should be       : " << s << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok rotating an itk::Point " << std::endl;
     }
   }
-
-
-  std::cout << "Test successful" << std::endl;
 }

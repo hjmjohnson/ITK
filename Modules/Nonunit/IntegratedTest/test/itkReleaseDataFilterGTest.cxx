@@ -102,7 +102,7 @@ TEST(ReleaseDataFilter, ConvertedLegacyTest)
   constexpr ImageType::SizeType zeroSize{};
 
 
-  std::cout << "---- Updating \"a\" Pipeline ---" << std::endl;
+  SCOPED_TRACE("---- Updating \"a\" Pipeline ---");
   monitor2a->Update();
   if (!monitor1->VerifyAllInputCanStream(1) || !monitor2a->VerifyAllInputCanStream(1) ||
       !monitor2b->VerifyAllNoUpdate())
@@ -117,7 +117,7 @@ TEST(ReleaseDataFilter, ConvertedLegacyTest)
 
 
   // no updates should happen
-  std::cout << "---- Reupdating \"a\" Pipeline ---" << std::endl;
+  SCOPED_TRACE("---- Reupdating \"a\" Pipeline ---");
   monitor2a->Update();
   if (!monitor1->VerifyAllNoUpdate() || !monitor2a->VerifyAllNoUpdate() || !monitor2b->VerifyAllNoUpdate())
   {
@@ -130,7 +130,7 @@ TEST(ReleaseDataFilter, ConvertedLegacyTest)
   monitor2a->ClearPipelineSavedInformation();
 
 
-  std::cout << "---- Streaming \"b\" Pipeline ---" << std::endl;
+  SCOPED_TRACE("---- Streaming \"b\" Pipeline ---");
   streamer->Update();
   if (!monitor1->VerifyAllInputCanStream(4) || !monitor2a->VerifyAllNoUpdate() ||
       !monitor2b->VerifyAllInputCanStream(4))

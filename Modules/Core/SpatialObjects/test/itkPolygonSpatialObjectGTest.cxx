@@ -71,31 +71,31 @@ TEST(PolygonSpatialObject, ConvertedLegacyTest)
   }
   //
   // test number of points
-  std::cout << "Testing number of points for rectangle: ";
+  SCOPED_TRACE("Testing number of points for rectangle:");
   EXPECT_EQ(rectangle->GetNumberOfPoints(), 4u) << "[Failed]" << '\n' << rectangle->GetNumberOfPoints() << " != 4";
 
   //
   // test area
-  std::cout << "Testing area for rectangle: ";
+  SCOPED_TRACE("Testing area for rectangle:");
   EXPECT_EQ(rectangle->MeasureAreaInObjectSpace(), 2.0) << "[Failed]" << '\n'
                                                         << rectangle->MeasureAreaInObjectSpace() << " != 2.0";
 
   //
   // test volume
-  std::cout << "Testing volume for rectangle: ";
+  SCOPED_TRACE("Testing volume for rectangle:");
   EXPECT_EQ(rectangle->MeasureVolumeInObjectSpace(), 20.0) << "[Failed]" << '\n'
                                                            << rectangle->MeasureVolumeInObjectSpace() << " != 20.0";
 
   //
   // test perimeter
-  std::cout << "Testing perimeter for rectangle: ";
+  SCOPED_TRACE("Testing perimeter for rectangle:");
   EXPECT_EQ(rectangle->MeasurePerimeterInObjectSpace(), 6.0) << "Wrong perimeter for rectangle" << '\n'
                                                              << "[Failed]" << '\n'
                                                              << rectangle->MeasurePerimeterInObjectSpace() << " != 6.0";
 
   //
   // test number of points
-  std::cout << "Testing closest point for rectangle: ";
+  SCOPED_TRACE("Testing closest point for rectangle:");
   constexpr double                    tp1[3]{ 0.25, 0.0, 0.0 };
   const PolygonType::PointType        testPoint1(tp1);
   const PolygonType::PolygonPointType closestPoint = rectangle->ClosestPointInWorldSpace(testPoint1);
@@ -104,13 +104,10 @@ TEST(PolygonSpatialObject, ConvertedLegacyTest)
 
   //
   // test number of points
-  std::cout << "Testing closest point for rectangle (2): ";
+  SCOPED_TRACE("Testing closest point for rectangle (2):");
   constexpr double                    tp2[3]{ 0.25, 5.0, 5.0 };
   const PolygonType::PointType        testPoint2(tp2);
   const PolygonType::PolygonPointType closestPoint2 = rectangle->ClosestPointInWorldSpace(testPoint2);
   EXPECT_EQ(closestPoint2.GetPositionInObjectSpace(), p4) << "[Failed]" << '\n'
                                                           << closestPoint2.GetPositionInObjectSpace() << " != " << p4;
-
-
-  std::cout << "Test finished" << std::endl;
 }

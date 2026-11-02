@@ -120,7 +120,7 @@ TEST(SpatialObjectDuplicator, ConvertedLegacyTest)
   const DTITubeType::Pointer dtiTube_copy = duplicatorDti->GetOutput();
 
   // Testing DTITubeSO
-  std::cout << "Testing DTITubeSpatialObject: ";
+  SCOPED_TRACE("Testing DTITubeSpatialObject:");
 
   bool found = false;
   if (!strcmp(dtiTube_copy->GetTypeName().c_str(), "DTITubeSpatialObject"))
@@ -192,7 +192,4 @@ TEST(SpatialObjectDuplicator, ConvertedLegacyTest)
   {
     ADD_FAILURE() << " [FAILED] : Cannot found VesselSpatialObject";
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

@@ -28,7 +28,7 @@ TEST(TimeProbe, ConvertedLegacyTest)
   itk::TimeProbe localTimer;
 
   // Print the initial values
-  std::cout << "Testing itk::TimeProbe" << std::endl;
+  SCOPED_TRACE("Testing itk::TimeProbe");
   std::cout << "Type: " << localTimer.GetType() << std::endl;
   std::cout << "Unit: " << localTimer.GetUnit() << std::endl;
 

@@ -74,7 +74,7 @@ TEST(SquaredDifferenceImageFilter, ConvertedLegacyTest)
   myIteratorType1 it1(inputImageA, inputImageA->GetBufferedRegion());
 
   // Initialize the content of Image A
-  std::cout << "First operand " << std::endl;
+  SCOPED_TRACE("First operand");
   while (!it1.IsAtEnd())
   {
     it1.Set(input1Value);
@@ -86,7 +86,7 @@ TEST(SquaredDifferenceImageFilter, ConvertedLegacyTest)
   myIteratorType2 it2(inputImageB, inputImageB->GetBufferedRegion());
 
   // Initialize the content of Image B
-  std::cout << "Second operand " << std::endl;
+  SCOPED_TRACE("Second operand");
   while (!it2.IsAtEnd())
   {
     it2.Set(input2Value);
@@ -120,7 +120,7 @@ TEST(SquaredDifferenceImageFilter, ConvertedLegacyTest)
   myIteratorType4 it4(outputImage, outputImage->GetBufferedRegion());
 
   // Print the content of the result image
-  std::cout << " Result " << std::endl;
+  SCOPED_TRACE("Result");
   while (!it4.IsAtEnd())
   {
     std::cout << it4.Get() << std::endl;

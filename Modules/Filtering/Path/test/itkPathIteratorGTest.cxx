@@ -36,7 +36,7 @@ TEST(PathIterator, ConvertedLegacyTest)
 
 
   // Setup the image
-  std::cout << "Making a 64x64 white square centered in a 128x128 black image" << std::endl;
+  SCOPED_TRACE("Making a 64x64 white square centered in a 128x128 black image");
   auto image = ImageType::New();
 
   IndexType start;
@@ -79,7 +79,7 @@ TEST(PathIterator, ConvertedLegacyTest)
             << std::endl;
 
   // Set up the path
-  std::cout << "Making a square Path with v0 at (30,30) and v2 at (33,33)" << std::endl;
+  SCOPED_TRACE("Making a square Path with v0 at (30,30) and v2 at (33,33)");
   auto v = itk::MakeFilled<VertexType>(30);
   auto path = PathType::New();
   path->AddVertex(v);
@@ -95,7 +95,7 @@ TEST(PathIterator, ConvertedLegacyTest)
   path->AddVertex(v);
 
   // Test the iterator
-  std::cout << "Creating an iterator to trace the PolyLineParametricPath" << std::endl;
+  SCOPED_TRACE("Creating an iterator to trace the PolyLineParametricPath");
   PathIteratorType iter(image, path);
   for (iter.GoToBegin(); !iter.IsAtEnd(); ++iter)
   {

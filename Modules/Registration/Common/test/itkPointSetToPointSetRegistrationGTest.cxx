@@ -164,7 +164,7 @@ TEST(PointSetToPointSetRegistration, ConvertedLegacyTest)
 
   const unsigned int numberOfParameters = parameters.Size();
 
-  std::cout << "Last Transform Parameters: " << std::endl;
+  SCOPED_TRACE("Last Transform Parameters:");
   for (unsigned int i = 0; i < numberOfParameters; ++i)
   {
     std::cout << finalParameters[i] << std::endl;

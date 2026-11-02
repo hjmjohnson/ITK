@@ -205,6 +205,4 @@ TEST(ReinitializeLevelSetImageFilter, ConvertedLegacyTest)
     EXPECT_GE(product, 0.0) << "at: " << nodeIndex;
     nodeIter++;
   }
-
-  std::cout << "Test passed" << std::endl;
 }

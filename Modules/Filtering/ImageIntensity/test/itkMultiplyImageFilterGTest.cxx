@@ -105,5 +105,4 @@ TEST(MultiplyImageFilter, ConvertedLegacyTest)
 
 
   // All objects should be automatically destroyed at this point
-  std::cout << "Test finished." << std::endl;
 }

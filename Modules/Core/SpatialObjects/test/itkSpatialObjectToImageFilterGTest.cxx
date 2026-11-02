@@ -81,7 +81,7 @@ TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
   EXPECT_EQ(size, imageFilter->GetSize());
 
   // Testing spacing
-  std::cout << "Testing Spacing: ";
+  SCOPED_TRACE("Testing Spacing:");
 
   constexpr float  floatCheckValue{ 1.5 };
   constexpr double doubleCheckValue{ 1.25 };
@@ -126,10 +126,8 @@ TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
     }
   }
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Testing Origin
-  std::cout << "Testing Origin: ";
+  SCOPED_TRACE("Testing Origin:");
 
   constexpr float  voriginFloat[2]{ floatCheckValue, floatCheckValue };
   constexpr double voriginDouble[2]{ doubleCheckValue, doubleCheckValue };
@@ -160,8 +158,6 @@ TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
   }
 
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Now test with common values
   constexpr double spacingDouble[2]{ 1.0, 1.0 };
   constexpr double originDouble[2]{ 0.0, 0.0 };
@@ -182,7 +178,7 @@ TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
 
   const ImageType::Pointer image = imageFilter->GetOutput();
 
-  std::cout << "Testing Output Image: ";
+  SCOPED_TRACE("Testing Output Image:");
 
   ImageType::IndexType index;
   // Test only centered pixels
@@ -197,8 +193,6 @@ TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
     }
   }
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Test the UseObjectValue
   constexpr bool useObjectValue{ true };
   imageFilter->SetUseObjectValue(useObjectValue);
@@ -209,7 +203,7 @@ TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
   std::cout << "Print filter info:" << std::endl;
   std::cout << imageFilter << std::endl;
 
-  std::cout << "Testing SetUseObjectValue: ";
+  SCOPED_TRACE("Testing SetUseObjectValue:");
 
   // Test only centered pixels
   for (int i = -5; i < 5; ++i)
@@ -222,7 +216,4 @@ TEST(SpatialObjectToImageFilter, ConvertedLegacyTest)
       EXPECT_EQ(image->GetPixel(index), 1.0) << "[FAILURE]";
     }
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

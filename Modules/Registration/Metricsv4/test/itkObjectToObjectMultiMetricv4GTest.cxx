@@ -63,14 +63,14 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
   EXPECT_EQ(origMetricWeights, multiVariateMetric->GetMetricWeights());
 
   // Initialize. This initializes all the component metrics.
-  std::cout << "Initialize" << std::endl;
+  SCOPED_TRACE("Initialize");
   multiVariateMetric->Initialize();
 
   // Print out metric value and derivative.
   using MeasureType = MultiMetricType::MeasureType;
   MeasureType                     measure = 0;
   MultiMetricType::DerivativeType DerivResultOfGetValueAndDerivative;
-  std::cout << "GetValueAndDerivative" << std::endl;
+  SCOPED_TRACE("GetValueAndDerivative");
   ASSERT_NO_THROW(multiVariateMetric->GetValueAndDerivative(measure, DerivResultOfGetValueAndDerivative));
   std::cout << "Multivariate measure: " << measure << std::endl;
   if (!useDisplacementTransform)
@@ -94,7 +94,7 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
 
   // Test GetValue method
   MeasureType measure2 = 0;
-  std::cout << "GetValue" << std::endl;
+  SCOPED_TRACE("GetValue");
   ASSERT_NO_THROW(measure2 = multiVariateMetric->GetValue());
   EXPECT_TRUE(itk::Math::FloatAlmostEqual(measure2, measure))
     << "measure does not match between calls to GetValue and GetValueAndDerivative: "
@@ -110,7 +110,7 @@ itkObjectToObjectMultiMetricv4TestEvaluate(ObjectToObjectMultiMetricv4TestMultiM
 
   for (itk::SizeValueType i = 0; i < multiVariateMetric->GetNumberOfMetrics(); ++i)
   {
-    std::cout << "GetValueAndDerivative on component metrics" << std::endl;
+    SCOPED_TRACE("GetValueAndDerivative on component metrics");
     MultiMetricType::DerivativeType metricDerivative;
     multiVariateMetric->GetMetricQueue()[i]->GetValueAndDerivative(metricValue, metricDerivative);
     std::cout << " Metric " << i << " value : " << metricValue << std::endl;
@@ -241,7 +241,7 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   }
 
   // Plug the images and transform into the metrics
-  std::cout << "Setup metrics" << std::endl;
+  SCOPED_TRACE("Setup metrics");
   m1->SetFixedImage(fixedImage);
   m1->SetMovingImage(movingImage);
   m1->SetMovingTransform(transform);
@@ -256,7 +256,7 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   m4->SetMovingTransform(transform);
 
   // Add the component metrics
-  std::cout << "Add component metrics" << std::endl;
+  SCOPED_TRACE("Add component metrics");
   multiVariateMetric->AddMetric(m1);
   multiVariateMetric->AddMetric(m2);
   multiVariateMetric->AddMetric(m3);
@@ -292,16 +292,16 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   }
 
   // Test with images
-  std::cout << "*** Test image metrics *** " << std::endl;
+  SCOPED_TRACE("*** Test image metrics ***");
   itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform);
 
-  std::cout << "*** Test with mismatched transforms *** " << std::endl;
+  SCOPED_TRACE("*** Test with mismatched transforms ***");
   auto transform2 = TranslationTransformType::New();
   m4->SetMovingTransform(transform2);
   EXPECT_THROW(multiVariateMetric->Initialize(), itk::ExceptionObject);
   m4->SetMovingTransform(transform);
 
-  std::cout << "*** Test with proper CompositeTransform ***" << std::endl;
+  SCOPED_TRACE("*** Test with proper CompositeTransform ***");
   using CompositeTransformType = itk::CompositeTransform<CoordinateRepresentationType, Dimension>;
   auto compositeTransform = CompositeTransformType::New();
   compositeTransform->AddTransform(transform2);
@@ -310,7 +310,7 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   m4->SetMovingTransform(compositeTransform);
   itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform);
 
-  std::cout << "*** Test with CompositeTransform - too many active transforms ***" << std::endl;
+  SCOPED_TRACE("*** Test with CompositeTransform - too many active transforms ***");
   compositeTransform->SetAllTransformsToOptimizeOn();
   EXPECT_THROW(multiVariateMetric->Initialize(), itk::ExceptionObject);
 
@@ -362,7 +362,7 @@ itkObjectToObjectMultiMetricv4TestRun(bool useDisplacementTransform)
   EXPECT_FALSE(multiVariateMetric->SupportsArbitraryVirtualDomainSamples());
 
   // Test
-  std::cout << "*** Test with PointSet metrics and Image metrics *** " << std::endl;
+  SCOPED_TRACE("*** Test with PointSet metrics and Image metrics ***");
   itkObjectToObjectMultiMetricv4TestEvaluate(multiVariateMetric, useDisplacementTransform);
 
   //

@@ -229,7 +229,7 @@ TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
 
   itk::OutputWindow::SetInstance(itk::TextOutput::New().GetPointer());
 
-  std::cout << "L-BFGS-B Optimizerv4 Test \n \n";
+  SCOPED_TRACE("L-BFGS-B Optimizerv4 Test");
 
   using OptimizerType = itk::LBFGSBOptimizerv4;
 
@@ -276,7 +276,7 @@ TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
   initialValue[1] = 10;
 
   // Set the initial position by setting the metric parameters.
-  std::cout << "Set metric parameters." << std::endl;
+  SCOPED_TRACE("Set metric parameters.");
   metric->SetParameters(initialValue);
 
   OptimizerType::ParametersType currentValue(2);
@@ -353,7 +353,6 @@ TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
   //
   // Test stopping when number of iterations reached
   //
-  std::cout << "-------------------------------" << std::endl;
 
   // Testing number of iterations for stopping
   metric->SetParameters(initialValue);
@@ -372,7 +371,6 @@ TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
   // Test with local-support transform. Should FAIL.
   // Such transforms are not yet supported.
   //
-  std::cout << "-------------------------------" << std::endl;
   metric->SetHasLocalSupport(true);
   EXPECT_THROW(itkOptimizer->StartOptimization(), itk::ExceptionObject);
 
@@ -387,7 +385,7 @@ TEST(LBFGSBOptimizerv4, ConvertedLegacyTest)
   select.Fill(0);
   itkOptimizer2->SetBoundSelection(select);
 
-  std::cout << "Set metric parameters." << std::endl;
+  SCOPED_TRACE("Set metric parameters.");
   metric->SetParameters(initialValue);
   metric->SetHasLocalSupport(false);
 

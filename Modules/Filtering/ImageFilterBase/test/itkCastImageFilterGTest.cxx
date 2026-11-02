@@ -278,7 +278,7 @@ TestVectorImageCast1()
 {
   // This function casts a VectorImage<float, 2>
   // to a VectorImage<unsigned char, 2>
-  std::cout << "Casting from a VectorImage<float, 2> to VectorImage<unsigned char, 2> ... ";
+  SCOPED_TRACE("Casting from a VectorImage<float, 2> to VectorImage<unsigned char, 2> ...");
 
   using UnsignedCharVectorImageType = itk::VectorImage<unsigned char, 2>;
   using FloatVectorImageType = itk::VectorImage<float, 2>;
@@ -343,7 +343,7 @@ TestVectorImageCast2()
 {
   // This function casts a VectorImage<float, 2>
   // to an Image<Vector<unsigned char, 2>, 2>
-  std::cout << "Casting from a VectorImage<float, 2> to Image<Vector<unsigned char, 2>, 2> ... ";
+  SCOPED_TRACE("Casting from a VectorImage<float, 2> to Image<Vector<unsigned char, 2>, 2> ...");
 
   using UnsignedCharVectorImageType = itk::Image<itk::Vector<unsigned char, 2>, 2>;
   using FloatVectorImageType = itk::VectorImage<float, 2>;
@@ -408,7 +408,7 @@ TestVectorImageCast3()
 {
   // This function casts an Image<Vector<float, 3>, 3>
   // to a VectorImage<float, 3>
-  std::cout << "Casting from an Image<Vector<float,3>, 3> to VectorImage<float, 3> ... ";
+  SCOPED_TRACE("Casting from an Image<Vector<float,3>, 3> to VectorImage<float, 3> ...");
 
   using VectorFloatImageType = itk::Image<itk::Vector<float, 3>, 3>;
   using FloatVectorImageType = itk::VectorImage<float, 3>;
@@ -450,7 +450,7 @@ TestVectorImageCast3()
 
 TEST(CastImageFilter, ConvertedLegacyTest)
 {
-  std::cout << "itkCastImageFilterTest Start" << std::endl;
+  SCOPED_TRACE("itkCastImageFilterTest Start");
 
   // This test casts floats to char, generating float point exceptions.
   // We disable float point exceptions only for this tests

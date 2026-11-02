@@ -101,7 +101,7 @@ TEST(VotingBinaryIterativeHoleFillingImageFilter, ConvertedLegacyTest)
 
   itk::ImageRegionIterator<ImageType> it;
   it = itk::ImageRegionIterator<ImageType>(random->GetOutput(), random->GetOutput()->GetBufferedRegion());
-  std::cout << "Input image" << std::endl;
+  SCOPED_TRACE("Input image");
   for (unsigned int i = 1; !it.IsAtEnd(); ++i, ++it)
   {
     std::cout << '\t' << it.Get();
@@ -112,7 +112,7 @@ TEST(VotingBinaryIterativeHoleFillingImageFilter, ConvertedLegacyTest)
   }
 
   it = itk::ImageRegionIterator<ImageType>(thresholder->GetOutput(), thresholder->GetOutput()->GetBufferedRegion());
-  std::cout << "Binary image" << std::endl;
+  SCOPED_TRACE("Binary image");
 
   for (unsigned int i = 1; !it.IsAtEnd(); ++i, ++it)
   {
@@ -124,7 +124,7 @@ TEST(VotingBinaryIterativeHoleFillingImageFilter, ConvertedLegacyTest)
   }
 
 
-  std::cout << "Output image" << std::endl;
+  SCOPED_TRACE("Output image");
   it = itk::ImageRegionIterator<ImageType>(voting->GetOutput(), voting->GetOutput()->GetBufferedRegion());
   for (unsigned int i = 1; !it.IsAtEnd(); ++i, ++it)
   {

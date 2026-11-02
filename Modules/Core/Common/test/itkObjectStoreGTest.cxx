@@ -46,7 +46,6 @@ TEST(ObjectStore, ConvertedLegacyTest)
 
   for (unsigned int j = 0; j < 2; ++j)
   {
-    std::cout << "_______________________" << std::endl;
     store->Print(std::cout);
 
 

@@ -95,13 +95,11 @@ TEST(ImageSpatialObject, ConvertedLegacyTest)
   ASSERT_NO_THROW(imageSO->ValueAtInWorldSpace(q, returnedValue));
 
 
-  std::cout << "ValueAt()...";
+  SCOPED_TRACE("ValueAt()...");
   EXPECT_DOUBLE_EQ(returnedValue, expectedValue) << "Test failed!" << '\n'
                                                  << "Error in ValueAt at point " << q << '\n'
                                                  << "Expected value " << expectedValue << '\n'
                                                  << " differs from " << returnedValue;
-
-  std::cout << "[PASSED]" << std::endl;
 
 
   ImageSpatialObject::DerivativeVectorType derivative;
@@ -128,7 +126,7 @@ TEST(ImageSpatialObject, ConvertedLegacyTest)
   ASSERT_NO_THROW(imageSO->ValueAtInWorldSpace(q, returnedValue));
 
 
-  std::cout << "ValueAt() with interpolator...";
+  SCOPED_TRACE("ValueAt() with interpolator...");
   double epsilon = 0.001;
   EXPECT_NEAR(returnedValue, expectedValue, epsilon)
     << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
@@ -136,14 +134,12 @@ TEST(ImageSpatialObject, ConvertedLegacyTest)
     << "Expected value " << expectedValue << '\n'
     << " differs from " << returnedValue << " by more than " << epsilon;
 
-  std::cout << "[PASSED]" << std::endl;
-
 
   imageSO->DerivativeAtInWorldSpace(q, 1, derivative);
   expectedDerivative[0] = 1;
   expectedDerivative[1] = 10;
   expectedDerivative[2] = 100;
-  std::cout << "DerivativeAt() with interpolator ...";
+  SCOPED_TRACE("DerivativeAt() with interpolator ...");
   epsilon = 0.00001;
   EXPECT_NEAR(derivative[0], expectedDerivative[0], epsilon)
     << std::setprecision(static_cast<int>(itk::Math::Absolute(std::log10(epsilon)))) << "Test failed!" << '\n'
@@ -160,9 +156,4 @@ TEST(ImageSpatialObject, ConvertedLegacyTest)
     << "Error in ValueAt at point " << q << '\n'
     << "Expected value " << expectedDerivative << '\n'
     << " differs from " << derivative << " by more than " << epsilon;
-
-  std::cout << "[PASSED]" << std::endl;
-
-
-  std::cout << "Test finished." << std::endl;
 }

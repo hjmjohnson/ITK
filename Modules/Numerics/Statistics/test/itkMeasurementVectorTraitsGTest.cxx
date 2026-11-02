@@ -50,7 +50,7 @@
 
 TEST(MeasurementVectorTraits, ConvertedLegacyTest)
 {
-  std::cout << "MeasurementVectorTraits Test" << std::endl;
+  SCOPED_TRACE("MeasurementVectorTraits Test");
 
   constexpr unsigned int length1{ 7 };
 

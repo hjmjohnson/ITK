@@ -60,7 +60,7 @@ testPointsLocatorTest()
   /**
    * Perform some geometric operations to see if they are working.
    */
-  std::cout << "Test:  FindClosestPoint()" << std::endl;
+  SCOPED_TRACE("Test:  FindClosestPoint()");
 
   PointType coords;
   coords[0] = 50;
@@ -72,12 +72,12 @@ testPointsLocatorTest()
 
   typename PointsLocatorType::NeighborsIdentifierType neighborhood;
 
-  std::cout << "Test:  FindClosestNPoints()" << std::endl;
+  SCOPED_TRACE("Test:  FindClosestNPoints()");
 
   pointsLocator->FindClosestNPoints(coords, 10u, neighborhood);
   EXPECT_EQ(neighborhood.size(), 10u) << "Error with FindClosestNPoints(), size of returned points does not match";
 
-  std::cout << "Test:  FindClosestNPoints() with distances  (1)" << std::endl;
+  SCOPED_TRACE("Test:  FindClosestNPoints() with distances  (1)");
   std::vector<double> distances;
   pointsLocator->FindClosestNPoints(coords, 10u, neighborhood, distances);
   ASSERT_EQ(neighborhood.size(), 10u)
@@ -93,7 +93,7 @@ testPointsLocatorTest()
     std::cout << dist << " + " << distances[i] << std::endl;
   }
 
-  std::cout << "Test:  FindClosestNPoints() with distances  (2)" << std::endl;
+  SCOPED_TRACE("Test:  FindClosestNPoints() with distances  (2)");
   pointsLocator->FindClosestNPoints(coords, 200u, neighborhood, distances);
   ASSERT_EQ(neighborhood.size(), 100u)
     << "Error with FindClosestNPoints(), size of returned points or distances is incorrect";
@@ -110,7 +110,7 @@ testPointsLocatorTest()
 
   const double radius = std::sqrt(3 * itk::Math::sqr(5.1));
 
-  std::cout << "Test:  FindPointsWithinRadius()" << std::endl;
+  SCOPED_TRACE("Test:  FindPointsWithinRadius()");
 
   pointsLocator->FindPointsWithinRadius(coords, radius, neighborhood);
   EXPECT_EQ(neighborhood.size(), 11u)
@@ -126,10 +126,10 @@ TEST(PointsLocator, ConvertedLegacyTest)
   using VectorContainerType = itk::VectorContainer<PointType>;
   using MapContainerType = itk::MapContainer<unsigned int, PointType>;
 
-  std::cout << "VectorContainerType" << std::endl;
+  SCOPED_TRACE("VectorContainerType");
   testPointsLocatorTest<VectorContainerType>();
   std::cout << std::endl;
 
-  std::cout << "MapContainerType" << std::endl;
+  SCOPED_TRACE("MapContainerType");
   testPointsLocatorTest<MapContainerType>();
 }

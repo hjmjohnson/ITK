@@ -44,7 +44,6 @@ CheckEqual(const itk::Point<double, 2> & p1, const itk::Point<double, 2> & p2)
 
 TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
 {
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing CenteredRigid 2D Transform" << std::endl << std::endl;
 
   constexpr double       epsilon{ 1e-10 };
@@ -59,7 +58,7 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
   const double sinth = std::sin(angle);
   const double costh = std::cos(angle);
 
-  std::cout << "Testing Rotation:";
+  SCOPED_TRACE("Testing Rotation:");
   transform->SetAngle(angle);
 
   // Rotate an itk::Point
@@ -83,10 +82,8 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
 
-
-  std::cout << "Testing Translation:";
+  SCOPED_TRACE("Testing Translation:");
 
   transform->SetAngle(0);
 
@@ -110,11 +107,9 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   {
-    std::cout << "Testing Inverse:";
+    SCOPED_TRACE("Testing Inverse:");
 
     // Populate the transform with some parameters
     auto             transform2 = CenteredRigidTransformType::New();
@@ -158,8 +153,6 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
                     << "Result should be       : " << p1 << std::endl
                     << "Reported Result is     : " << p3;
 
-    std::cout << " [ PASSED ] " << std::endl;
-
 
     // Get inverse transform and transform point p2 to obtain point p3
     const CenteredRigidTransformType::Pointer inversebis =
@@ -182,8 +175,6 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
     EXPECT_TRUE(Ok) << "Error in inverse computation" << std::endl
                     << "Result should be       : " << p1 << std::endl
                     << "Reported Result is     : " << p3;
-
-    std::cout << " [ PASSED ] " << std::endl;
   }
 
   {
@@ -214,21 +205,21 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
-    std::cout << "Test CloneInverseTo(): ";
+    SCOPED_TRACE("Test CloneInverseTo():");
     EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
     t1->GetInverse(t2dash);
     TransformType::InputPointType p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverseTransform(): ";
+    SCOPED_TRACE("Test GetInverseTransform():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
     ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverseTransform(): ";
+    SCOPED_TRACE("Test GetInverseTransform():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
@@ -237,7 +228,7 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
-    std::cout << "Test Clone(): ";
+    SCOPED_TRACE("Test Clone():");
     EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test compose
@@ -259,7 +250,7 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
     TransformType::InputPointType p6 = t4->TransformPoint(p5);
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,false): ";
+    SCOPED_TRACE("Test Compose(.,false):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
@@ -269,11 +260,11 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
     p6 = t1->TransformPoint(p5);
     p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,true): ";
+    SCOPED_TRACE("Test Compose(.,true):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
-    std::cout << "Testing Jacobian: ";
+    SCOPED_TRACE("Testing Jacobian:");
     TransformType::JacobianType jacobian;
     t4->ComputeJacobianWithRespectToParameters(p1, jacobian);
 
@@ -309,7 +300,5 @@ TEST(CenteredRigid2DTransform, ConvertedLegacyTest)
       } // for j
 
     } // for k
-
-    std::cout << " [ PASSED ] " << std::endl;
   }
 }

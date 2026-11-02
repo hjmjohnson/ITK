@@ -123,68 +123,68 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   // Instantiate image of various types and
   // test the iterators on them
 
-  std::cout << "Testing with Image< char, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< char, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<char> TesterC(10);
   EXPECT_TRUE(TesterC.TestIterator());
   EXPECT_TRUE(TesterC.TestConstIterator());
   EXPECT_TRUE(TesterC.TestReverseIteration());
 
 
-  std::cout << "Testing with Image< unsigned char, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< unsigned char, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<unsigned char> TesterUC(10);
   EXPECT_TRUE(TesterUC.TestIterator());
   EXPECT_TRUE(TesterUC.TestConstIterator());
   EXPECT_TRUE(TesterUC.TestReverseIteration());
 
-  std::cout << "Testing with Image< short, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< short, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<short> TesterS(10);
   EXPECT_TRUE(TesterS.TestIterator());
   EXPECT_TRUE(TesterS.TestConstIterator());
   EXPECT_TRUE(TesterS.TestReverseIteration());
 
-  std::cout << "Testing with Image< unsigned short, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< unsigned short, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<unsigned short> TesterUS(10);
   EXPECT_TRUE(TesterUS.TestIterator());
   EXPECT_TRUE(TesterUS.TestConstIterator());
   EXPECT_TRUE(TesterUS.TestReverseIteration());
 
-  std::cout << "Testing with Image< int, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< int, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<int> TesterI(10);
   EXPECT_TRUE(TesterI.TestIterator());
   EXPECT_TRUE(TesterI.TestConstIterator());
   EXPECT_TRUE(TesterI.TestReverseIteration());
 
-  std::cout << "Testing with Image< unsigned int, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< unsigned int, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<unsigned int> TesterUI(10);
   EXPECT_TRUE(TesterUI.TestIterator());
   EXPECT_TRUE(TesterUI.TestConstIterator());
   EXPECT_TRUE(TesterUI.TestReverseIteration());
 
-  std::cout << "Testing with Image< long long, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< long long, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<long long> TesterLL(10);
   EXPECT_TRUE(TesterLL.TestIterator());
   EXPECT_TRUE(TesterLL.TestConstIterator());
   EXPECT_TRUE(TesterLL.TestReverseIteration());
 
-  std::cout << "Testing with Image< unsigned long long, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< unsigned long long, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<unsigned long long> TesterULL(10);
   EXPECT_TRUE(TesterULL.TestIterator());
   EXPECT_TRUE(TesterULL.TestConstIterator());
   EXPECT_TRUE(TesterULL.TestReverseIteration());
 
-  std::cout << "Testing with Image< float, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< float, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<float> TesterF(10.0);
   EXPECT_TRUE(TesterF.TestIterator());
   EXPECT_TRUE(TesterF.TestConstIterator());
   EXPECT_TRUE(TesterF.TestReverseIteration());
 
-  std::cout << "Testing with Image< double, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< double, 3 >");
   itkRLEImageIteratorWithIndexTestIteratorTester<double> TesterD(10.0);
   EXPECT_TRUE(TesterD.TestIterator());
   EXPECT_TRUE(TesterD.TestConstIterator());
   EXPECT_TRUE(TesterD.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<char,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<char,4>, 3 >");
   using VC = itk::Vector<char, 4>;
   VC vc;
   vc.Fill(127);
@@ -193,7 +193,7 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   EXPECT_TRUE(TesterVC.TestConstIterator());
   EXPECT_TRUE(TesterVC.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<unsigned char,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<unsigned char,4>, 3 >");
   using VUC = itk::Vector<unsigned char, 4>;
   VUC vuc;
   vuc.Fill(10);
@@ -202,7 +202,7 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   EXPECT_TRUE(TesterVUC.TestConstIterator());
   EXPECT_TRUE(TesterVUC.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<short,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<short,4>, 3 >");
   using VS = itk::Vector<short, 4>;
   VS vs;
   vs.Fill(10);
@@ -211,7 +211,7 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   EXPECT_TRUE(TesterVS.TestConstIterator());
   EXPECT_TRUE(TesterVS.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<unsigned short,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<unsigned short,4>, 3 >");
   using VUS = itk::Vector<unsigned short, 4>;
   VUS vus;
   vus.Fill(10);
@@ -220,7 +220,7 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   EXPECT_TRUE(TesterVUS.TestConstIterator());
   EXPECT_TRUE(TesterVUS.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<int,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<int,4>, 3 >");
   using VI = itk::Vector<int, 4>;
   VI vi;
   vi.Fill(10);
@@ -229,7 +229,7 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   EXPECT_TRUE(TesterVI.TestConstIterator());
   EXPECT_TRUE(TesterVI.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<unsigned int,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<unsigned int,4>, 3 >");
   using VUI = itk::Vector<unsigned int, 4>;
   VUI vui;
   vui.Fill(10);
@@ -238,7 +238,7 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   EXPECT_TRUE(TesterVUI.TestConstIterator());
   EXPECT_TRUE(TesterVUI.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<float,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<float,4>, 3 >");
   using VF = itk::Vector<float, 4>;
   VF vf;
   vf.Fill(10);
@@ -247,7 +247,7 @@ TEST(RLEImageIteratorWithIndex, ConvertedLegacyTest)
   EXPECT_TRUE(TesterVF.TestConstIterator());
   EXPECT_TRUE(TesterVF.TestReverseIteration());
 
-  std::cout << "Testing with Image< itk::Vector<double,4>, 3 > " << std::endl;
+  SCOPED_TRACE("Testing with Image< itk::Vector<double,4>, 3 >");
   using VD = itk::Vector<double, 4>;
   VD vd;
   vd.Fill(10);

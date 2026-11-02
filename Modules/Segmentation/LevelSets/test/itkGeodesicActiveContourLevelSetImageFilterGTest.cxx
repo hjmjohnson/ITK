@@ -215,6 +215,4 @@ TEST(GeodesicActiveContourLevelSetImageFilter, ConvertedLegacyTest)
   geodesicActiveContour->SetCurvatureScaling(1.0);
   geodesicActiveContour->SetAdvectionScaling(0.0);
   geodesicActiveContour->Update();
-
-  std::cout << "Test Passed." << std::endl;
 }

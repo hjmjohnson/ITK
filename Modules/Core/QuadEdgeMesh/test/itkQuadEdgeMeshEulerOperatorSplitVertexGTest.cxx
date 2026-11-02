@@ -37,7 +37,7 @@ TEST(QuadEdgeMeshEulerOperatorSplitVertex, ConvertedLegacyTest)
   //          Split Vertex
   //
   /////////////////////////////////////////
-  std::cout << "Checking SplitVertex." << std::endl;
+  SCOPED_TRACE("Checking SplitVertex.");
   const MeshPointer mesh = MeshType::New();
   CreateSquareTriangularMesh<MeshType>(mesh);
 
@@ -45,7 +45,6 @@ TEST(QuadEdgeMeshEulerOperatorSplitVertex, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No Mesh Input";
   EXPECT_EQ(splitVertex->Evaluate((QEType *)1, (QEType *)1), nullptr);
-  std::cout << "OK" << std::endl;
 
   EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorSplitVertexFunction"),
             std::string_view(splitVertex->GetNameOfClass()));
@@ -54,10 +53,8 @@ TEST(QuadEdgeMeshEulerOperatorSplitVertex, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No QE Input";
   EXPECT_EQ(splitVertex->Evaluate((QEType *)nullptr, (QEType *)nullptr), nullptr);
-  std::cout << "OK" << std::endl;
 
-  std::cout << "     ";
-  std::cout << "Split Vertex (Possible).";
+  SCOPED_TRACE("Split Vertex (Possible).");
   ASSERT_NE(splitVertex->Evaluate(mesh->FindEdge(5, 11), mesh->FindEdge(17, 11)), nullptr);
   // move the new point, for example along z axis for special effect :-D
   PointType PtTmp = mesh->GetPoint(splitVertex->GetNewPointID());
@@ -68,28 +65,23 @@ TEST(QuadEdgeMeshEulerOperatorSplitVertex, ConvertedLegacyTest)
   EXPECT_EQ(mesh->GetPoint(splitVertex->GetNewPointID()).GetValence(), 4)
     << "wrong valence for vertex " << splitVertex->GetNewPointID() << '.';
   EXPECT_EQ(mesh->GetPoint(11).GetValence(), 4) << "wrong valence for vertex 11";
-  std::cout << ".OK" << std::endl;
   // test antenna
   CreateSquareTriangularMesh<MeshType>(mesh);
-  std::cout << "     ";
-  std::cout << "Try to split antenna (impossible).";
+  SCOPED_TRACE("Try to split antenna (impossible).");
 
   splitVertex->SetInput(mesh);
   EXPECT_EQ(splitVertex->Evaluate(mesh->FindEdge(12, 17), mesh->FindEdge(12, 17)), nullptr);
-  std::cout << ".OK" << std::endl;
   // test different dest( )
   CreateSquareTriangularMesh<MeshType>(mesh);
-  std::cout << "     ";
   std::cout << "Test with args with different Dest( ) (Impossible).";
 
   splitVertex->SetInput(mesh);
   EXPECT_EQ(splitVertex->Evaluate(mesh->FindEdge(5, 11), mesh->FindEdge(5, 6)), nullptr);
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0));
   EXPECT_EQ(mesh->GetPoint(5).GetValence(), 4) << "wrong valence for vertex 5.";
-  std::cout << ".OK" << std::endl;
   std::cout << "Checking SplitVertex." << std::endl << std::endl;
 
-  std::cout << "Checking JoinVertex( SplitVertex()) Invariance.";
+  SCOPED_TRACE("Checking JoinVertex( SplitVertex()) Invariance.");
 
   CreateSquareTriangularMesh<MeshType>(mesh);
 

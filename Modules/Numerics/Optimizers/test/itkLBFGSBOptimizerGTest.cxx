@@ -77,7 +77,7 @@ public:
 
     std::cout << "GetValue ( ";
     std::cout << x << " , " << y;
-    std::cout << ") = ";
+    SCOPED_TRACE(") =");
 
     const double val = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - 2 * x + 8 * y;
 
@@ -95,7 +95,7 @@ public:
 
     std::cout << "GetDerivative ( ";
     std::cout << x << " , " << y;
-    std::cout << ") = ";
+    SCOPED_TRACE(") =");
 
     derivative = DerivativeType(SpaceDimension);
     derivative[0] = 3 * x + 2 * y - 2;

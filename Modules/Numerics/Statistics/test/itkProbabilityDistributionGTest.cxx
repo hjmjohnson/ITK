@@ -103,7 +103,7 @@ public:
 
 TEST(ProbabilityDistribution, ConvertedLegacyTest)
 {
-  std::cout << "itkProbabilityDistributionTest Test \n \n";
+  SCOPED_TRACE("itkProbabilityDistributionTest Test");
 
   using DistributionType = ProbabilityDistributionTestingHelper;
 

@@ -143,7 +143,4 @@ TEST(BSplineControlPointImageFunction, ConvertedLegacyTest)
     std::cerr << "Error in evaluate functions" << std::endl;
     FAIL();
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

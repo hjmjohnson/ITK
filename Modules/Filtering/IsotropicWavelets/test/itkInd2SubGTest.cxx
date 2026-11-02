@@ -34,7 +34,7 @@ TEST(Ind2Sub, ConvertedLegacyTest)
   ass3D[2] = 2;
   itk::FixedArray<unsigned int, D3> sizes3(ass3D);
   std::vector<Array3DType>          storeOutput3D;
-  std::cout << "sizes: (2,2,2) " << std::endl;
+  SCOPED_TRACE("sizes: (2,2,2)");
   for (unsigned int n = 0; n < sizes3[0] * sizes3[1] * sizes3[2]; ++n)
   {
     std::cout << "index " << n << " -> ";

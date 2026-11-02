@@ -84,7 +84,7 @@ TEST(BinaryThresholdSpatialFunction, ConvertedLegacyTest)
     const FunctionType::OutputType output = function->Evaluate(point);
     std::cout << "f(" << point << ") = " << output;
     std::cerr << " [" << function->GetFunction()->Evaluate(point);
-    std::cout << "] " << std::endl;
+    SCOPED_TRACE("]");
 
     // Check results
     const CoordRep val = p * std::sqrt(2.0) - parameters[0];
@@ -120,7 +120,7 @@ TEST(BinaryThresholdSpatialFunction, ConvertedLegacyTest)
   iterator.AddSeed(index);
 
   // Get the seeds and display them
-  std::cout << "Iterator seeds";
+  SCOPED_TRACE("Iterator seeds");
   for (auto seed : iterator.GetSeeds())
   {
     std::cout << ' ' << seed;

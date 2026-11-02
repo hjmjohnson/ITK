@@ -228,6 +228,4 @@ TEST(ShapePriorSegmentationLevelSetFunction, ConvertedLegacyTest)
 
   // Exercise other methods for coverage
   filter->GetDifferenceFunction()->Print(std::cout);
-
-  std::cout << "Test passed. " << std::endl;
 }

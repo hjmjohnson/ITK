@@ -195,11 +195,10 @@ TEST(NarrowBandThresholdSegmentationLevelSetImageFilter, ConvertedLegacyTest)
   try
   {
     filter->Update();
-    std::cout << "Done first trial" << std::endl;
+    SCOPED_TRACE("Done first trial");
     // Repeat to make sure that the filter is reinitialized properly
     filter->SetNumberOfIterations(8);
     filter->Update();
-    std::cout << "Done second trial" << std::endl;
 
     // For Debugging
     // using WriterType = itk::ImageFileWriter< ::NBTS::ImageType>;

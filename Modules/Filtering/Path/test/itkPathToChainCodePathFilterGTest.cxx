@@ -33,7 +33,7 @@ TEST(PathToChainCodePathFilter, ConvertedLegacyTest)
   using FilterType = itk::PathToChainCodePathFilter<InPathType, ChainPathType>;
 
   // Setup the path
-  std::cout << "Making a triangle Path with v0 at (30,30) -> (30,33) -> (33,33)" << std::endl;
+  SCOPED_TRACE("Making a triangle Path with v0 at (30,30) -> (30,33) -> (33,33)");
 
   auto inPath = InPathType::New();
 

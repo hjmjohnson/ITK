@@ -145,7 +145,7 @@ protected:
 
 TEST(CannySegmentationLevelSetImageFilter, ConvertedLegacyTest)
 {
-  std::cout << "Last modified 11/08/02" << std::endl;
+  SCOPED_TRACE("Last modified 11/08/02");
 
   constexpr ImageType::RegionType::SizeType sz{ 64, 64, 64 };
   ImageType::RegionType                     reg{ sz };
@@ -186,11 +186,10 @@ TEST(CannySegmentationLevelSetImageFilter, ConvertedLegacyTest)
   try
   {
     filter->Update();
-    std::cout << "Done first trial" << std::endl;
+    SCOPED_TRACE("Done first trial");
     // Repeat to make sure that the filter is reinitialized properly
     filter->SetNumberOfIterations(5);
     filter->Update();
-    std::cout << "Done second trial" << std::endl;
 
     // Write the output for debugging purposes
     //        itk::ImageFileWriter<CSIFTN::ImageType>::Pointer writer

@@ -109,5 +109,4 @@ TEST(MultiThreaderExceptions, ConvertedLegacyTest)
       EXPECT_THROW(dummySrc->Update(), itk::ExceptionObject);
     }
   }
-  std::cout << "Test PASSED!" << std::endl;
 }

@@ -128,7 +128,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
   Matrix2Type matrix2 = id2->GetMatrix();
   Vector2Type vector2 = id2->GetOffset();
   std::cout << "Matrix from instantiating an identity transform:" << std::endl << matrix2;
-  std::cout << "Vector from instantiating an identity transform:" << std::endl;
+  SCOPED_TRACE("Vector from instantiating an identity transform:");
   PrintVector(vector2);
 
   Matrix2Type matrix2Truth;
@@ -158,7 +158,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
     }
     vector2[i] = 0.0;
   }
-  std::cout << "Instantiation of a given 2D transform:" << std::endl;
+  SCOPED_TRACE("Instantiation of a given 2D transform:");
   aff2->Print(std::cout);
 
   /* Get and test inverse of whole transform */
@@ -196,12 +196,12 @@ TEST(AffineTransform, ConvertedLegacyTest)
   matrix2 = aff2->GetMatrix();
   vector2 = aff2->GetOffset();
   std::cout << "Setting the matrix in an existing transform:" << std::endl << matrix2;
-  std::cout << "Setting the offset in an existing  transform:" << std::endl;
+  SCOPED_TRACE("Setting the offset in an existing  transform:");
   PrintVector(vector2);
 
   /* Try composition of two transformations */
   aff2->Compose(aff2);
-  std::cout << "Result of a composition:" << std::endl;
+  SCOPED_TRACE("Result of a composition:");
   aff2->Print(std::cout);
 
   matrix2Truth[0][0] = 56;
@@ -219,7 +219,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
   trans[0] = 1;
   trans[1] = 2;
   aff2->Translate(trans);
-  std::cout << "Result of a translation:" << std::endl;
+  SCOPED_TRACE("Result of a translation:");
   aff2->Print(std::cout);
 
   matrix2Truth[0][0] = 56;
@@ -234,7 +234,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
 
   /* Compose with an isotropic scaling */
   aff2->Scale(.3, true);
-  std::cout << "Result of isotropic scaling:" << std::endl;
+  SCOPED_TRACE("Result of isotropic scaling:");
   aff2->Print(std::cout);
 
   matrix2Truth[0][0] = 16.8;
@@ -252,7 +252,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
   scale[0] = .3;
   scale[1] = .2;
   aff2->Scale(scale);
-  std::cout << "Result of anisotropic scaling:" << std::endl;
+  SCOPED_TRACE("Result of anisotropic scaling:");
   aff2->Print(std::cout);
 
   matrix2Truth[0][0] = 5.04;
@@ -267,7 +267,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
 
   /* Compose with a general N-D rotation */
   aff2->Rotate(0, 1, 0.57, true);
-  std::cout << "Result of general rotation:" << std::endl;
+  SCOPED_TRACE("Result of general rotation:");
   aff2->Print(std::cout);
 
   matrix2Truth[0][0] = 2.0576711174453;
@@ -283,7 +283,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
 
   /* Compose with a 2-D rotation */
   aff2->Rotate(0, 1, -0.57, true);
-  std::cout << "Result of 2-D rotation:" << std::endl;
+  SCOPED_TRACE("Result of 2-D rotation:");
   aff2->Print(std::cout);
 
   matrix2Truth[0][0] = 5.04;
@@ -298,7 +298,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
 
   /* Compose with a shear */
   aff2->Shear(1, 0, .2);
-  std::cout << "Result of shear:" << std::endl;
+  SCOPED_TRACE("Result of shear:");
   aff2->Print(std::cout);
 
   matrix2Truth[0][0] = 5.04;
@@ -415,7 +415,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
   const itk::Vector<double, 3> axis({ .707, .707, .707 });
   auto                         aff3 = Affine3DType::New();
   aff3->Rotate3D(axis, 1.0, true);
-  std::cout << "Create and rotate a 3D transform:" << std::endl;
+  SCOPED_TRACE("Create and rotate a 3D transform:");
   aff3->Print(std::cout);
 
   matrix3Truth[0][0] = 0.69353487057876;
@@ -433,7 +433,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
   /* Generate inverse transform */
   auto inv3 = Affine3DType::New();
   EXPECT_TRUE(aff3->GetInverse(inv3)) << "Cannot compute inverse transformation";
-  std::cout << "Create an inverse transformation:" << std::endl;
+  SCOPED_TRACE("Create an inverse transformation:");
   inv3->Print(std::cout);
 
   matrix3Truth[0][0] = 0.69353487057876;
@@ -450,7 +450,7 @@ TEST(AffineTransform, ConvertedLegacyTest)
 
   const Affine3DType::Pointer inv4 = dynamic_cast<Affine3DType *>(aff3->GetInverseTransform().GetPointer());
   ASSERT_FALSE(inv4.IsNull()) << "Cannot compute inverse transformation inv4";
-  std::cout << "Create an inverse transformation:" << std::endl;
+  SCOPED_TRACE("Create an inverse transformation:");
   inv4->Print(std::cout);
 
   EXPECT_TRUE(testMatrix(inv4->GetMatrix(), matrix3Truth, 35)) << "Compute inverse test failed - inv4.";
@@ -567,9 +567,9 @@ TEST(AffineTransform, ConvertedLegacyTest)
   auto paff_inv_inv = Affine3DType::New();
   paff_inv->GetInverse(paff_inv_inv);
 
-  std::cout << "TEST INVERSE" << std::endl;
+  SCOPED_TRACE("TEST INVERSE");
   paff_inv->Print(std::cout);
-  std::cout << "TEST INVERSE OF INVERSE" << std::endl;
+  SCOPED_TRACE("TEST INVERSE OF INVERSE");
   paff_inv_inv->Print(std::cout);
 
   bool found_inv_inv_descrepancies = false;

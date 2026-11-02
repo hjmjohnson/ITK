@@ -176,7 +176,7 @@ TEST(ExpectationBasedPointSetMetricRegistration, ConvertedLegacyTest)
   std::cout << "Optimizer learning rate: " << optimizer->GetLearningRate() << std::endl;
 
   // applying the resultant transform to moving points and verify result
-  std::cout << "Fixed\tMoving\tMovingTransformed\tFixedTransformed\tDiff" << std::endl;
+  SCOPED_TRACE("Fixed\tMoving\tMovingTransformed\tFixedTransformed\tDiff");
   bool                                                   passed = true;
   constexpr PointType::ValueType                         tolerance{ 1e-4 };
   const AffineTransformType::InverseTransformBasePointer movingInverse =

@@ -83,7 +83,7 @@ TEST(BinaryMedianImageFilter, ConvertedLegacyTest)
 
   itk::ImageRegionIterator<ImageType> it;
   it = itk::ImageRegionIterator<ImageType>(random->GetOutput(), random->GetOutput()->GetBufferedRegion());
-  std::cout << "Input image" << std::endl;
+  SCOPED_TRACE("Input image");
   for (unsigned int i = 1; !it.IsAtEnd(); ++i, ++it)
   {
     std::cout << '\t' << it.Get();
@@ -94,7 +94,7 @@ TEST(BinaryMedianImageFilter, ConvertedLegacyTest)
   }
 
   it = itk::ImageRegionIterator<ImageType>(thresholder->GetOutput(), thresholder->GetOutput()->GetBufferedRegion());
-  std::cout << "Binary image" << std::endl;
+  SCOPED_TRACE("Binary image");
 
   for (unsigned int i = 1; !it.IsAtEnd(); ++i, ++it)
   {
@@ -106,7 +106,7 @@ TEST(BinaryMedianImageFilter, ConvertedLegacyTest)
   }
 
 
-  std::cout << "Output image" << std::endl;
+  SCOPED_TRACE("Output image");
   it = itk::ImageRegionIterator<ImageType>(median->GetOutput(), median->GetOutput()->GetBufferedRegion());
   for (unsigned int i = 1; !it.IsAtEnd(); ++i, ++it)
   {

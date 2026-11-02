@@ -84,7 +84,7 @@ TEST(TransformMeshFilter, ConvertedLegacyTest)
   }
 
   std::cout << "Input Mesh has " << inputMesh->GetNumberOfPoints();
-  std::cout << "   points " << std::endl;
+  SCOPED_TRACE("points");
 
 
   // Declare the transform type

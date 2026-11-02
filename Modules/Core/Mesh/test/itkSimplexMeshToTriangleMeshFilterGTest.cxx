@@ -69,7 +69,6 @@ TEST(SimplexMeshToTriangleMeshFilter, ConvertedLegacyTest)
 
   std::cout << "Back filtered Triangle Mesh: " << triangleMesh << std::endl;
 
-  std::cout << "[TEST DONE]" << std::endl;
   originalTriangleMesh = nullptr;
   simplexFilter = nullptr;
 }

@@ -22,7 +22,7 @@
 
 TEST(DenseFrequencyContainer2, ConvertedLegacyTest)
 {
-  std::cout << "DenseFrequencyContainer2 Test \n \n";
+  SCOPED_TRACE("DenseFrequencyContainer2 Test");
 
 
   using DenseFrequencyContainer2Type = itk::Statistics::DenseFrequencyContainer2;
@@ -39,7 +39,7 @@ TEST(DenseFrequencyContainer2, ConvertedLegacyTest)
 
   // Test the SetFrequency() / GetFrequency() methods
   {
-    std::cout << "Testing Set/Get Frequency methods...";
+    SCOPED_TRACE("Testing Set/Get Frequency methods...");
     for (unsigned int bin = 0; bin < numberOfBins; ++bin)
     {
       // Compute any value as frequency just to test the SetFrequency() method
@@ -70,7 +70,7 @@ TEST(DenseFrequencyContainer2, ConvertedLegacyTest)
 
   // Test the IncreaseFrequency() method
   {
-    std::cout << "Testing IncreaseFrequency method...";
+    SCOPED_TRACE("Testing IncreaseFrequency method...");
     // Try not to depend on previous tests....So, we initialize the histogram again.
     for (unsigned int bin = 0; bin < numberOfBins; ++bin)
     {

@@ -57,7 +57,7 @@ TEST(ExpImageFilterAndAdaptor, ConvertedLegacyTest)
 
   // Initialize the content of Image A
   constexpr double value{ itk::Math::pi / 6.0 };
-  std::cout << "Content of the Input " << std::endl;
+  SCOPED_TRACE("Content of the Input");
   it.GoToBegin();
   while (!it.IsAtEnd())
   {
@@ -89,7 +89,7 @@ TEST(ExpImageFilterAndAdaptor, ConvertedLegacyTest)
   OutputIteratorType ot(outputImage, outputImage->GetRequestedRegion());
 
   //  Check the content of the result image
-  std::cout << "Verification of the output " << std::endl;
+  SCOPED_TRACE("Verification of the output");
   constexpr OutputImageType::PixelType epsilon{ 1e-6 };
   ot.GoToBegin();
   it.GoToBegin();
@@ -129,8 +129,8 @@ TEST(ExpImageFilterAndAdaptor, ConvertedLegacyTest)
   const OutputImageType::Pointer diffImage = diffFilter->GetOutput();
 
   //  Check the content of the diff image
-  std::cout << "Comparing the results with those of an Adaptor" << std::endl;
-  std::cout << "Verification of the output " << std::endl;
+  SCOPED_TRACE("Comparing the results with those of an Adaptor");
+  SCOPED_TRACE("Verification of the output");
 
   // Create an iterator for going through the image output
   OutputIteratorType dt(diffImage, diffImage->GetRequestedRegion());

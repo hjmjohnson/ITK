@@ -168,7 +168,7 @@ itkEuclideanDistancePointSetMetricRegistrationTestRun(unsigned int              
   }
 
   // applying the resultant transform and verify result
-  std::cout << "Fixed\tMoving\tMovingTransformed\tFixedTransformed\tDiff" << std::endl;
+  SCOPED_TRACE("Fixed\tMoving\tMovingTransformed\tFixedTransformed\tDiff");
   bool                                                   passed = true;
   auto                                                   tolerance = static_cast<typename PointType::ValueType>(1e-4);
   const typename TTransform::InverseTransformBasePointer fixedInverse =
@@ -217,7 +217,7 @@ TEST(EuclideanDistancePointSetMetricRegistration, ConvertedLegacyTest)
   using AffineTransformType = itk::AffineTransform<double, Dimension>;
   auto affineTransform = AffineTransformType::New();
   affineTransform->SetIdentity();
-  std::cout << "XX Test with affine transform: " << std::endl;
+  SCOPED_TRACE("XX Test with affine transform:");
   itkEuclideanDistancePointSetMetricRegistrationTestRun<AffineTransformType, PointSetMetricType, PointSetType>(
     numberOfIterations, maximumPhysicalStepSize, pointMax, affineTransform, metric);
 
@@ -266,7 +266,7 @@ TEST(EuclideanDistancePointSetMetricRegistration, ConvertedLegacyTest)
   // metric takes it from the transform during initialization.
   // metric2->SetVirtualDomain( spacing, origin, direction, region );
 
-  std::cout << "XX Testing with displacement field transform." << std::endl;
+  SCOPED_TRACE("XX Testing with displacement field transform.");
   itkEuclideanDistancePointSetMetricRegistrationTestRun<DisplacementFieldTransformType,
                                                         PointSetMetricType,
                                                         PointSetType>(

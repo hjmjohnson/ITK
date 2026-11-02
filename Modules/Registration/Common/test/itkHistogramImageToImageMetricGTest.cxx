@@ -169,7 +169,7 @@ TEST(HistogramImageToImageMetric, ConvertedLegacyTest)
   }
 
 
-  std::cout << "Exercise the SetLowerBound() and SetUpperBound() methods " << std::endl;
+  SCOPED_TRACE("Exercise the SetLowerBound() and SetUpperBound() methods");
 
   const MetricType::MeasurementVectorType lowerBound{};
   const MetricType::MeasurementVectorType upperBound{};

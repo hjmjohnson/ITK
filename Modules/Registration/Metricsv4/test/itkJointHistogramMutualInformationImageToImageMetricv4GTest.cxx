@@ -144,7 +144,7 @@ TEST(JointHistogramMutualInformationImageToImageMetricv4, ConvertedLegacyTest)
                                                  static_cast<MovingTransformType::ParametersValueType>(1000));
   movingTransform->SetParameters(parameters);
   constexpr MetricType::MeasureType expectedMetricMax{ itk::NumericTraits<MetricType::MeasureType>::max() };
-  std::cout << "Testing non-overlapping images. Expect a warning:" << std::endl;
+  SCOPED_TRACE("Testing non-overlapping images. Expect a warning:");
   metric->GetValueAndDerivative(valueReturn2, derivativeReturn);
   EXPECT_EQ(metric->GetNumberOfValidPoints(), 0u) << "Failed testing for non-overlapping images.";
   EXPECT_DOUBLE_EQ(valueReturn2, expectedMetricMax) << "Failed testing for non-overlapping images.";

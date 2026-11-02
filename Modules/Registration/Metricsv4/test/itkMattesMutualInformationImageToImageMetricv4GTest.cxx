@@ -296,7 +296,7 @@ TestMattesMetricWithAffineTransform(TInterpolator * const interpolator, const bo
   itk::TimeProbe timerGetValueAndDerivative;
   itk::TimeProbe timerGetValue;
 
-  std::cout << "param[4]\tMI\tMI2\tdMI/dparam[4]" << std::endl;
+  SCOPED_TRACE("param[4]\tMI\tMI2\tdMI/dparam[4]");
   for (double trans = -10; trans <= 10; trans += 0.5)
   {
     parameters[4] = trans;
@@ -444,7 +444,7 @@ TEST(MattesMutualInformationImageToImageMetricv4, ConvertedLegacyTest)
 
   auto linearInterpolator = LinearInterpolatorType::New();
 
-  std::cout << "Test metric with a linear interpolator." << std::endl;
+  SCOPED_TRACE("Test metric with a linear interpolator.");
   bool useSampling = false;
   TestMattesMetricWithAffineTransform<ImageType, LinearInterpolatorType>(linearInterpolator, useSampling, imageSize);
   // Verify that a constant fixed image (and, symmetrically, a constant
@@ -530,6 +530,6 @@ TEST(MattesMutualInformationImageToImageMetricv4, ConvertedLegacyTest)
 
   bSplineInterpolator->SetSplineOrder(3);
   useSampling = false;
-  std::cout << "Test metric with a BSpline interpolator and no sampling." << std::endl;
+  SCOPED_TRACE("Test metric with a BSpline interpolator and no sampling.");
   TestMattesMetricWithAffineTransform<ImageType, BSplineInterpolatorType>(bSplineInterpolator, useSampling, imageSize);
 }

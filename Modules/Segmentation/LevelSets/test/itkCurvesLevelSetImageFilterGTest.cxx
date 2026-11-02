@@ -222,6 +222,4 @@ TEST(CurvesLevelSetImageFilter, ConvertedLegacyTest)
   curvesFilter->SetCurvatureScaling(1.0);
   curvesFilter->SetAdvectionScaling(0.0);
   curvesFilter->Update();
-
-  std::cout << "Test Passed. " << std::endl;
 }

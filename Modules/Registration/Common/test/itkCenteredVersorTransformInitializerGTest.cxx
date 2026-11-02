@@ -166,7 +166,7 @@ TEST(CenteredVersorTransformInitializer, ConvertedLegacyTest)
 
     initializer->InitializeTransform();
 
-    std::cout << "Initialized Transform is" << std::endl;
+    SCOPED_TRACE("Initialized Transform is");
 
     transform->Print(std::cout);
 

@@ -225,7 +225,7 @@ TEST(RGBInterpolateImageFunction, ConvertedLegacyTest)
 
   /* Test evaluation at continuous indices and corresponding
      geometric points */
-  std::cout << "Evaluate at: " << std::endl;
+  SCOPED_TRACE("Evaluate at:");
   // an integer position inside the image
   {
     itk::SpacePrecisionType darray[3] = { 10, 20, 40 };

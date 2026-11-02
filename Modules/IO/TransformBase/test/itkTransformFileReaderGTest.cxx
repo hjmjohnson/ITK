@@ -35,6 +35,4 @@ TEST(TransformFileReader, ConvertedLegacyTest)
   transformReader->SetFileName("transform.garbage");
   // trigger exception for transformIO not found
   EXPECT_THROW(transformReader->Update(), itk::ExceptionObject);
-
-  std::cout << "Test PASSED!" << std::endl;
 }

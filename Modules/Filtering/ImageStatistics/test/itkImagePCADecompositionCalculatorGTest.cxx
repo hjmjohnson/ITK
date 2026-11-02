@@ -337,7 +337,7 @@ TEST(ImagePCADecompositionCalculator, ConvertedLegacyTest)
   decomposer->Print(std::cout);
 
   // Print the basis and projections: first the PCA basis
-  std::cout << "The basis of projection is: " << std::endl;
+  SCOPED_TRACE("The basis of projection is:");
   for (const auto & basis_it : basis_check)
   {
     std::cout << '[';
@@ -350,14 +350,14 @@ TEST(ImagePCADecompositionCalculator, ConvertedLegacyTest)
 
   // Print the projections
   std::cout << "The projection of [0 2 2 0] is [" << proj3 << ']' << std::endl;
-  std::cout << "this should be approx [-1.5412 -2.3716]" << std::endl;
+  SCOPED_TRACE("this should be approx [-1.5412 -2.3716]");
 
   std::cout << "The projection of [0 3 3 0] is [" << proj4 << ']' << std::endl;
-  std::cout << "this should be approx [3.5574 -2.3119]" << std::endl;
+  SCOPED_TRACE("this should be approx [3.5574 -2.3119]");
 
   // Print the basis and projections: now the new basis
   std::cout << std::endl;
-  std::cout << "Now the basis of projection is: " << std::endl;
+  SCOPED_TRACE("Now the basis of projection is:");
   for (const auto & basis_it : basis_check_2)
   {
     std::cout << '[';
@@ -370,19 +370,18 @@ TEST(ImagePCADecompositionCalculator, ConvertedLegacyTest)
 
   // Print the projections
   std::cout << "The projection of [0 2 2 0] is [" << proj3_2 << ']' << std::endl;
-  std::cout << "this should be approx [1.4142 -1.4142 0]" << std::endl;
+  SCOPED_TRACE("this should be approx [1.4142 -1.4142 0]");
 
   std::cout << "The projection of [0 3 3 0] is [" << proj4_2 << ']' << std::endl;
-  std::cout << "this should be approx [2.1213 2.1213 3.000]" << std::endl;
+  SCOPED_TRACE("this should be approx [2.1213 2.1213 3.000]");
 
   std::cout << "The projection of [0 2 2 0] is (mean of zero set) [" << proj3_3 << ']' << std::endl;
-  std::cout << "this should be approx [1.4142 -1.4142 0]" << std::endl;
+  SCOPED_TRACE("this should be approx [1.4142 -1.4142 0]");
 
   std::cout << "The projection of [0 3 3 0] is (mean of zero set) [" << proj4_3 << ']' << std::endl;
-  std::cout << "this should be approx [2.1213 2.1213 3.000]" << std::endl;
+  SCOPED_TRACE("this should be approx [2.1213 2.1213 3.000]");
 
   // Test for the eigen values for the test case precomputed using Matlab
-  std::cout << "" << std::endl;
   EXPECT_LT(proj3[0], -1.54);
   EXPECT_GT(proj3[0], -1.55);
   EXPECT_LT(proj4[1], -2.31);

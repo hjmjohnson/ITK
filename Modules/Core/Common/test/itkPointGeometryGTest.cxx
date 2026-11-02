@@ -99,7 +99,7 @@ TEST(PointGeometry, ConvertedLegacyTest)
   std::cout << distance2 << std::endl;
 
   auto vnlVector = pa.GetVnlVector();
-  std::cout << "vnl_vector = ";
+  SCOPED_TRACE("vnl_vector =");
   {
     for (unsigned int i = 0; i < N; ++i)
     {
@@ -111,7 +111,7 @@ TEST(PointGeometry, ConvertedLegacyTest)
 
   // Test for CastFrom() method
   {
-    std::cout << "Test for CastFrom() method... ";
+    SCOPED_TRACE("Test for CastFrom() method...");
 
     constexpr float tolerance{ 1e-7 };
 
@@ -148,7 +148,7 @@ TEST(PointGeometry, ConvertedLegacyTest)
     PointType                      A = aInit;
     PointType                      B = bInit;
     midpoint.SetToMidPoint(A, B);
-    std::cout << "Test for MidPoint " << std::endl;
+    SCOPED_TRACE("Test for MidPoint");
     std::cout << "PA = " << A << std::endl;
     std::cout << "PB = " << B << std::endl;
     std::cout << "MidPoint = " << midpoint << std::endl;
@@ -169,7 +169,7 @@ TEST(PointGeometry, ConvertedLegacyTest)
     PointType                      B = bInit;
     constexpr double               alpha{ 0.5 };
     combination.SetToBarycentricCombination(A, B, alpha);
-    std::cout << "Test for Barycentric combination" << std::endl;
+    SCOPED_TRACE("Test for Barycentric combination");
     std::cout << "PA = " << A << std::endl;
     std::cout << "PB = " << B << std::endl;
     std::cout << "Alpha = " << alpha << std::endl;
@@ -194,7 +194,7 @@ TEST(PointGeometry, ConvertedLegacyTest)
     constexpr double               alpha{ 1.0 / 3.0 };
     constexpr double               beta{ 1.0 / 3.0 };
     combination.SetToBarycentricCombination(A, B, C, alpha, beta);
-    std::cout << "Test for Barycentric combination" << std::endl;
+    SCOPED_TRACE("Test for Barycentric combination");
     std::cout << "PA = " << A << std::endl;
     std::cout << "PB = " << B << std::endl;
     std::cout << "PC = " << C << std::endl;
@@ -225,7 +225,7 @@ TEST(PointGeometry, ConvertedLegacyTest)
     w[0] = 1 / 3.0;
     w[1] = 1 / 3.0;
     combination.SetToBarycentricCombination(A, w, N);
-    std::cout << "Test for Barycentric combination of an array of Points" << std::endl;
+    SCOPED_TRACE("Test for Barycentric combination of an array of Points");
     for (unsigned int i = 0; i < N; ++i)
     {
       EXPECT_NEAR(combination[i], K / 3.0, tolerance) << "Failure to compute Barycentric combination";
@@ -258,7 +258,7 @@ TEST(PointGeometry, ConvertedLegacyTest)
 
     using BarycentricCalculatorType = itk::BarycentricCombination<VectorOfPoints, double *>;
     PointType combination = BarycentricCalculatorType::Evaluate(points, w);
-    std::cout << "Test for Barycentric combination of a VectorContainer of Points" << std::endl;
+    SCOPED_TRACE("Test for Barycentric combination of a VectorContainer of Points");
     for (unsigned int i = 0; i < N; ++i)
     {
       EXPECT_NEAR(combination[i], K / 3.0, tolerance) << "Failure to compute Barycentric combination";

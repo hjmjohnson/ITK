@@ -64,30 +64,28 @@ TEST(GaussianSpatialObject, ConvertedLegacyTest)
   myGaussian->ValueAtInWorldSpace(in, value);
   std::cout << "ValueAt(" << in << ") = " << value << std::endl;
 
-  std::cout << "Is Inside: ";
+  SCOPED_TRACE("Is Inside:");
 
   EXPECT_TRUE(myGaussian->IsInsideInWorldSpace(in)) << "[FAILED]";
 
   EXPECT_FALSE(myGaussian->IsInsideInWorldSpace(out)) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
   std::cout << "GetEllipsoid:" << std::endl;
   std::cout << myGaussian->GetEllipsoid() << std::endl;
 
-  std::cout << "ObjectToWorldTransform" << std::endl;
+  SCOPED_TRACE("ObjectToWorldTransform");
 
   // Create myGaussian2 as a child of myGaussian
   auto myGaussian2 = GaussianType::New();
-  std::cout << "AddChild" << std::endl;
+  SCOPED_TRACE("AddChild");
   myGaussian->AddChild(myGaussian2);
 
   // Once you add children, update their objectToWorldTransform individually
   //   or by calling it at the top level object
-  std::cout << "ComputeObjectToWorld" << std::endl;
+  SCOPED_TRACE("ComputeObjectToWorld");
   myGaussian->Update();
 
-  std::cout << "SetOffset" << std::endl;
+  SCOPED_TRACE("SetOffset");
   constexpr GaussianType::TransformType::OffsetType::ValueType offset10{ 10.0 };
   auto offset = itk::MakeFilled<GaussianType::TransformType::OffsetType>(offset10);
   myGaussian->GetModifiableObjectToWorldTransform()->SetOffset(offset);
@@ -97,7 +95,7 @@ TEST(GaussianSpatialObject, ConvertedLegacyTest)
   //   for it and its children to update their cached transforms
   myGaussian->Update();
 
-  std::cout << "SetOffset2" << std::endl;
+  SCOPED_TRACE("SetOffset2");
   constexpr GaussianType::TransformType::OffsetType::ValueType offset15{ 15.0 };
   auto offset2 = itk::MakeFilled<GaussianType::TransformType::OffsetType>(offset15);
   myGaussian2->GetModifiableObjectToWorldTransform()->SetOffset(offset2);
@@ -113,10 +111,9 @@ TEST(GaussianSpatialObject, ConvertedLegacyTest)
   EXPECT_DOUBLE_EQ(offset3[1], offset15 - offset10) << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]";
   EXPECT_DOUBLE_EQ(offset3[2], offset15 - offset10) << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]";
   EXPECT_DOUBLE_EQ(offset3[3], offset15 - offset10) << "[FAILED] : " << offset3 << " != [5.0,5.0,5.0,5.0]";
-  std::cout << "[PASSED]" << std::endl;
 
 
-  std::cout << "ComputeFamilyBoundingBox: ";
+  SCOPED_TRACE("ComputeFamilyBoundingBox:");
   myGaussian->ComputeFamilyBoundingBox(GaussianType::MaximumDepth);
   const GaussianType::BoundingBoxType * boundingBox = myGaussian->GetFamilyBoundingBoxInWorldSpace();
   std::cout << "World bounds = " << boundingBox->GetBounds() << std::endl;
@@ -127,7 +124,4 @@ TEST(GaussianSpatialObject, ConvertedLegacyTest)
     EXPECT_DOUBLE_EQ(boundingBox->GetBounds()[2 * i], 7.0) << "[FAILED]";
     EXPECT_DOUBLE_EQ(boundingBox->GetBounds()[2 * i + 1], 16.0) << "[FAILED]";
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

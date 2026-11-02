@@ -78,7 +78,7 @@ TEST(GradientVectorFlowImageFilter, ConvertedLegacyTest)
   using myOutputIteratorType = itk::ImageRegionIteratorWithIndex<myGradientImageType>;
 
   // Initialize the content of Image A
-  std::cout << "Input Image initialization " << std::endl;
+  SCOPED_TRACE("Input Image initialization");
 
   size[0] = 100;
   size[1] = 100;
@@ -151,7 +151,7 @@ TEST(GradientVectorFlowImageFilter, ConvertedLegacyTest)
   const myOutputIteratorType itg(outputImage, outputImage->GetRequestedRegion());
 
   // Print the content of the result image
-  std::cout << " Result " << std::endl;
+  SCOPED_TRACE("Result");
 
   gtomfilter->SetInput(filter->GetOutput());
   gtomfilter->Update();
@@ -169,6 +169,5 @@ TEST(GradientVectorFlowImageFilter, ConvertedLegacyTest)
 
   const myOutputIteratorType itgvf(m_GVFFilter->GetOutput(), m_GVFFilter->GetOutput()->GetRequestedRegion());
 
-  std::cout << "Completed" << std::endl;
   // All objects should be automatically destroyed at this point
 }

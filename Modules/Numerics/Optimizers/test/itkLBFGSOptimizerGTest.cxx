@@ -74,7 +74,7 @@ public:
 
     std::cout << "GetValue ( ";
     std::cout << x << " , " << y;
-    std::cout << ") = ";
+    SCOPED_TRACE(") =");
 
     const double val = 0.5 * (3 * x * x + 4 * x * y + 6 * y * y) - 2 * x + 8 * y;
 
@@ -91,7 +91,7 @@ public:
 
     std::cout << "GetDerivative ( ";
     std::cout << x << " , " << y;
-    std::cout << ") = ";
+    SCOPED_TRACE(") =");
 
     derivative = DerivativeType(SpaceDimension);
     derivative[0] = 3 * x + 2 * y - 2;
@@ -113,7 +113,7 @@ public:
 
 TEST(LBFGSOptimizer, ConvertedLegacyTest)
 {
-  std::cout << "LBFGS Optimizer Test \n \n";
+  SCOPED_TRACE("LBFGS Optimizer Test");
 
   using OptimizerType = itk::LBFGSOptimizer;
   using vnlOptimizerType = OptimizerType::InternalOptimizerType;
@@ -226,7 +226,7 @@ TEST(LBFGSOptimizer, ConvertedLegacyTest)
 
 
   // Get the final value of the optimizer
-  std::cout << "Testing GetValue() : ";
+  SCOPED_TRACE("Testing GetValue() :");
   const OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
   EXPECT_NEAR(finalValue, -10.0, 0.01);
 }

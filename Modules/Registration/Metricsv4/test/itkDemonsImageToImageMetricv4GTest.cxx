@@ -111,24 +111,24 @@ TEST(DemonsImageToImageMetricv4, ConvertedLegacyTest)
     << "Failed setting fixed image gradient source.";
 
   /* Initialize. */
-  std::cout << "Calling Initialize..." << std::endl;
+  SCOPED_TRACE("Calling Initialize...");
   ASSERT_NO_THROW(metric->Initialize());
 
   // Evaluate with GetValueAndDerivative
   MetricType::MeasureType    valueReturn1 = NAN;
   MetricType::DerivativeType derivativeReturn;
-  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  SCOPED_TRACE("Calling GetValueAndDerivative...");
   ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn));
 
   /* Re-initialize. */
-  std::cout << "Calling Initialize..." << std::endl;
+  SCOPED_TRACE("Calling Initialize...");
   ASSERT_NO_THROW(metric->Initialize());
   MetricType::MeasureType valueReturn2 = NAN;
-  std::cout << "Calling GetValue..." << std::endl;
+  SCOPED_TRACE("Calling GetValue...");
   ASSERT_NO_THROW(valueReturn2 = metric->GetValue());
 
   // Test same value returned by different methods
-  std::cout << "Check Value return values..." << std::endl;
+  SCOPED_TRACE("Check Value return values...");
   if (itk::Math::NotExactlyEquals(valueReturn1, valueReturn2))
   {
     std::cerr << "Results for Value don't match: " << valueReturn1 << ", " << valueReturn2 << std::endl;
@@ -143,22 +143,22 @@ TEST(DemonsImageToImageMetricv4, ConvertedLegacyTest)
             itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_MOVING)
     << "Failed setting moving image gradient source.";
 
-  std::cout << "Calling Initialize..." << std::endl;
+  SCOPED_TRACE("Calling Initialize...");
   ASSERT_NO_THROW(metric->Initialize());
 
   // Evaluate with GetValueAndDerivative
-  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  SCOPED_TRACE("Calling GetValueAndDerivative...");
   ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn));
 
   /* Re-initialize. */
-  std::cout << "Calling Initialize..." << std::endl;
+  SCOPED_TRACE("Calling Initialize...");
   ASSERT_NO_THROW(metric->Initialize());
 
-  std::cout << "Calling GetValue..." << std::endl;
+  SCOPED_TRACE("Calling GetValue...");
   ASSERT_NO_THROW(valueReturn2 = metric->GetValue());
 
   // Test same value returned by different methods
-  std::cout << "Check Value return values..." << std::endl;
+  SCOPED_TRACE("Check Value return values...");
   if (itk::Math::NotExactlyEquals(valueReturn1, valueReturn2))
   {
     std::cerr << "Moving image gradient source: results for Value don't match: " << valueReturn1 << ", " << valueReturn2

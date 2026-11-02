@@ -43,7 +43,7 @@ TEST(DiffusionTensor3D, ConvertedLegacyTest)
   std::cout << "sizeof(pixel) = " << sizeof(pixel) << std::endl;
   EXPECT_EQ(sizeof(pixel), 6 * sizeof(Float3DTensorType::ComponentType));
   std::cout << "pixel.GetNumberOfComponents = " << pixel.GetNumberOfComponents() << std::endl;
-  std::cout << "pixel.GetNthComponent()" << std::endl;
+  SCOPED_TRACE("pixel.GetNthComponent()");
   bool passed = true;
   for (unsigned int i = 0; i < pixel.GetNumberOfComponents(); ++i)
   {
@@ -70,14 +70,14 @@ TEST(DiffusionTensor3D, ConvertedLegacyTest)
   pixel(2, 1) = 41.0;
   pixel(2, 2) = 14.0;
 
-  std::cout << "testing the pixel(i,j) API" << std::endl;
+  SCOPED_TRACE("testing the pixel(i,j) API");
   for (unsigned int i = 0; i < pixel.GetNumberOfComponents(); ++i)
   {
     std::cout << "\tpixel[" << i << "] = " << pixel.GetNthComponent(i) << std::endl;
   }
 
-  std::cout << "pixel[0] = 111; pixel[1] = 222; pixel[2] = 333;" << std::endl;
-  std::cout << "pixel[3] = 444; pixel[4] = 555; pixel[5] = 666;" << std::endl;
+  SCOPED_TRACE("pixel[0] = 111; pixel[1] = 222; pixel[2] = 333;");
+  SCOPED_TRACE("pixel[3] = 444; pixel[4] = 555; pixel[5] = 666;");
 
   pixel[0] = 111;
   pixel[1] = 222;
@@ -91,7 +91,7 @@ TEST(DiffusionTensor3D, ConvertedLegacyTest)
     std::cout << "\tpixel[" << i << "] = " << pixel.GetNthComponent(i) << std::endl;
   }
 
-  std::cout << "std::cout << pixel << std::endl;" << std::endl;
+  SCOPED_TRACE("std::cout << pixel << std::endl;");
   std::cout << '\t' << pixel << std::endl;
 
   for (unsigned int j = 0; j < 2; ++j)
@@ -106,7 +106,7 @@ TEST(DiffusionTensor3D, ConvertedLegacyTest)
     }
   }
 
-  std::cout << "Testing arithmetic methods" << std::endl;
+  SCOPED_TRACE("Testing arithmetic methods");
   Float3DTensorType pa;
   Float3DTensorType pb;
 

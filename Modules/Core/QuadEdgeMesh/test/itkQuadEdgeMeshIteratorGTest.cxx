@@ -82,7 +82,7 @@ TEST(QuadEdgeMeshIterator, ConvertedLegacyTest)
 
   //////////////////////////////////////////////////////////
   int edgeNumber = 0;
-  std::cout << "Testing Lnext iterator... ";
+  SCOPED_TRACE("Testing Lnext iterator...");
   for (IteratorGeom itLnext = foundEdges[0]->BeginGeomLnext(); itLnext != foundEdges[0]->EndGeomLnext();
        itLnext++, edgeNumber++)
   {
@@ -92,11 +92,10 @@ TEST(QuadEdgeMeshIterator, ConvertedLegacyTest)
                                          << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin()
                                          << ", " << currentEdge->GetDestination() << "].";
   }
-  std::cout << "OK" << std::endl;
 
   //////////////////////////////////////////////////////////
   edgeNumber = 0;
-  std::cout << "Testing Rnext iterator... ";
+  SCOPED_TRACE("Testing Rnext iterator...");
   for (IteratorGeom itRnext = foundEdges[0]->BeginGeomRnext(); itRnext != foundEdges[0]->EndGeomRnext();
        itRnext++, edgeNumber++)
   {
@@ -107,13 +106,12 @@ TEST(QuadEdgeMeshIterator, ConvertedLegacyTest)
                                          << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin()
                                          << ", " << currentEdge->GetDestination() << "].";
   }
-  std::cout << "OK" << std::endl;
 
   //////////////////////////////////////////////////////////
   // Rotating around destination, there is only one other edge
   // BeginGeomDnext( ) returns the edge itself to begin with
   edgeNumber = 0;
-  std::cout << "Testing Dnext iterator... ";
+  SCOPED_TRACE("Testing Dnext iterator...");
   for (IteratorGeom itDnext = foundEdges[0]->BeginGeomDnext(); itDnext != foundEdges[0]->EndGeomDnext();
        itDnext++, edgeNumber++)
   {
@@ -128,7 +126,4 @@ TEST(QuadEdgeMeshIterator, ConvertedLegacyTest)
                                          << expectedEdge->GetDestination() << "], but got [" << currentEdge->GetOrigin()
                                          << ", " << currentEdge->GetDestination() << "].";
   }
-  std::cout << "OK" << std::endl;
-
-  std::cout << "QuadEdgeMeshIteratorTest Passed !" << std::endl;
 }

@@ -262,7 +262,7 @@ TEST(ImageToHistogramFilter, ConvertedLegacyTest)
 
   unsigned int channel = 0; // red channel
 
-  std::cout << "Histogram of the red component" << std::endl;
+  SCOPED_TRACE("Histogram of the red component");
 
   // We expect to have 127 bins, each with a frequency of 127x127 = 16129.
   constexpr unsigned int expectedFrequency = 127 * 127;
@@ -285,7 +285,7 @@ TEST(ImageToHistogramFilter, ConvertedLegacyTest)
 
   channel = 1; // green channel
 
-  std::cout << "Histogram of the green component" << std::endl;
+  SCOPED_TRACE("Histogram of the green component");
 
   for (unsigned int bin = 0; bin < histogramSize; ++bin)
   {
@@ -305,7 +305,7 @@ TEST(ImageToHistogramFilter, ConvertedLegacyTest)
 
   channel = 2; // blue channel
 
-  std::cout << "Histogram of the blue component" << std::endl;
+  SCOPED_TRACE("Histogram of the blue component");
 
   for (unsigned int bin = 0; bin < histogramSize; ++bin)
   {

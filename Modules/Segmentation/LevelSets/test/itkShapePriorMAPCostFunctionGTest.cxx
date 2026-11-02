@@ -243,6 +243,4 @@ TEST(ShapePriorMAPCostFunction, ConvertedLegacyTest)
 
   TEST_INITIALIZATION_ERROR(ShapeParameterMeans, badParameters, shapeMean);
   TEST_INITIALIZATION_ERROR(ShapeParameterStandardDeviations, badParameters, shapeStdDev);
-
-  std::cout << "Test passed." << std::endl;
 }

@@ -227,13 +227,13 @@ TEST(ConjugateGradientLineSearchOptimizerv4, ConvertedLegacyTest)
   itkOptimizer->SetNumberOfIterations(50);
 
   // test the optimization
-  std::cout << "Test optimization 1:" << std::endl;
+  SCOPED_TRACE("Test optimization 1:");
   ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   //
   // test with non-identity scales
   //
-  std::cout << "Test optimization with non-identity scales:" << std::endl;
+  SCOPED_TRACE("Test optimization with non-identity scales:");
   metric->SetParameters(initialPosition);
   ScalesType scales(metric->GetNumberOfLocalParameters(), 0.5);
   itkOptimizer->SetScales(scales);
@@ -244,7 +244,7 @@ TEST(ConjugateGradientLineSearchOptimizerv4, ConvertedLegacyTest)
   metric->SetParameters(initialPosition);
   ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
-  std::cout << "Test optimization with few linear search iterations:" << std::endl;
+  SCOPED_TRACE("Test optimization with few linear search iterations:");
   scales.Fill(0.5);
   itkOptimizer->SetMaximumLineSearchIterations(2);
   itkOptimizer->SetScales(scales);
@@ -274,7 +274,7 @@ TEST(ConjugateGradientLineSearchOptimizerv4, ConvertedLegacyTest)
 
   itkOptimizer->SetNumberOfIterations(50);
 
-  std::cout << "Test optimization retest 1 (initial):" << std::endl;
+  SCOPED_TRACE("Test optimization retest 1 (initial):");
   ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   // Store the first result
@@ -283,7 +283,7 @@ TEST(ConjugateGradientLineSearchOptimizerv4, ConvertedLegacyTest)
   metric->SetParameters(initialPosition);
 
   // Run the optimizer a second time
-  std::cout << "Test optimization 2 (restart with same parameters):" << std::endl;
+  SCOPED_TRACE("Test optimization 2 (restart with same parameters):");
   ASSERT_NO_FATAL_FAILURE(ConjugateGradientLineSearchOptimizerv4RunTest(itkOptimizer));
 
   // Store the second result
@@ -309,6 +309,6 @@ TEST(ConjugateGradientLineSearchOptimizerv4, ConvertedLegacyTest)
 
   auto badOptimizer = OptimizerType::New();
   EXPECT_THROW(badOptimizer->GetCurrentPosition(), itk::ExceptionObject);
-  std::cout << "Printing self.. " << std::endl;
+  SCOPED_TRACE("Printing self..");
   std::cout << itkOptimizer << std::endl;
 }

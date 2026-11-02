@@ -59,7 +59,7 @@ TEST(FastIncrementalBinaryDilateImageFilter, ConvertedLegacyTest)
   myIteratorType it(inputImage, inputImage->GetBufferedRegion());
 
   // Initialize the content of Image
-  std::cout << "Input image " << std::endl;
+  SCOPED_TRACE("Input image");
   inputImage->FillBuffer(bgValue);
 
   myImageType::IndexType ind;
@@ -142,7 +142,7 @@ TEST(FastIncrementalBinaryDilateImageFilter, ConvertedLegacyTest)
   myIteratorType it2(outputImage, outputImage->GetBufferedRegion());
 
   // Print the content of the result image
-  std::cout << "Result with cross radius 1 (default)" << std::endl;
+  SCOPED_TRACE("Result with cross radius 1 (default)");
   i = 0;
   it2.GoToBegin();
   while (!it2.IsAtEnd())
@@ -171,7 +171,7 @@ TEST(FastIncrementalBinaryDilateImageFilter, ConvertedLegacyTest)
   it2.SetRegion(outputImage->GetBufferedRegion());
 
   // Print the content of the result image
-  std::cout << "Result with cross radius 2" << std::endl;
+  SCOPED_TRACE("Result with cross radius 2");
   i = 0;
   it2.GoToBegin();
   while (!it2.IsAtEnd())

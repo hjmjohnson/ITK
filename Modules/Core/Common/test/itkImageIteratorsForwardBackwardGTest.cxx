@@ -24,7 +24,7 @@
 TEST(ImageIteratorsForwardBackward, ConvertedLegacyTest)
 {
 
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   using ImageType = itk::Image<unsigned short, 3>;
 
   auto myImage = ImageType::New();
@@ -45,7 +45,7 @@ TEST(ImageIteratorsForwardBackward, ConvertedLegacyTest)
   auto value = ImageType::PixelType{};
 
   // Store information on the Image
-  std::cout << "Storing data on the image ... " << std::endl;
+  SCOPED_TRACE("Storing data on the image ...");
 
   while (!it.IsAtEnd())
   {
@@ -57,7 +57,7 @@ TEST(ImageIteratorsForwardBackward, ConvertedLegacyTest)
 
   // Verification
   IteratorType ot(myImage, region);
-  std::cout << "Verifying the data forwards... ";
+  SCOPED_TRACE("Verifying the data forwards...");
 
   value = ImageType::PixelType{};
 
@@ -69,10 +69,8 @@ TEST(ImageIteratorsForwardBackward, ConvertedLegacyTest)
     ++ot;
   }
 
-  std::cout << "      PASSED !" << std::endl;
-
   // Verification
-  std::cout << "Verifying the data backwards... ";
+  SCOPED_TRACE("Verifying the data backwards...");
 
   ot.GoToReverseBegin();
   --ot;
@@ -85,11 +83,9 @@ TEST(ImageIteratorsForwardBackward, ConvertedLegacyTest)
     --ot;
   }
 
-  std::cout << "      PASSED !" << std::endl;
-
   // Verification
   ConstIteratorType cot(myImage, region);
-  std::cout << "Const Iterator: Verifying the data forwards... ";
+  SCOPED_TRACE("Const Iterator: Verifying the data forwards...");
 
   value = ImageType::PixelType{};
 
@@ -101,10 +97,8 @@ TEST(ImageIteratorsForwardBackward, ConvertedLegacyTest)
     ++cot;
   }
 
-  std::cout << "      PASSED !" << std::endl;
-
   // Verification
-  std::cout << "Const Iterator : Verifying the data backwards... ";
+  SCOPED_TRACE("Const Iterator : Verifying the data backwards...");
 
   cot.GoToReverseBegin();
   --cot;
@@ -116,8 +110,6 @@ TEST(ImageIteratorsForwardBackward, ConvertedLegacyTest)
     value--;
     --cot;
   }
-
-  std::cout << "      PASSED !" << std::endl;
 
   std::cout << std::endl << "Test passed" << std::endl;
 }

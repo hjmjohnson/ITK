@@ -55,7 +55,7 @@ TEST(DifferenceOfGaussiansGradientImageFilter, ConvertedLegacyTest)
   sourceImage->SetOrigin(sourceImageOrigin);
   sourceImage->SetSpacing(sourceImageSpacing);
 
-  printf("New sourceImage created\n");
+  SCOPED_TRACE("New sourceImage created");
 
   //-----The following block allocates the sourceImage-----
 
@@ -73,7 +73,7 @@ TEST(DifferenceOfGaussiansGradientImageFilter, ConvertedLegacyTest)
   // Now allocate memory for the sourceImage
   sourceImage->AllocateInitialized();
 
-  printf("New sourceImage allocated\n");
+  SCOPED_TRACE("New sourceImage allocated");
 
   //---------Create and initialize a spatial function-----------
 
@@ -91,7 +91,7 @@ TEST(DifferenceOfGaussiansGradientImageFilter, ConvertedLegacyTest)
   center[2] = 10;
   spatialFunc->SetCenter(center);
 
-  printf("Sphere spatial function created\n");
+  SCOPED_TRACE("Sphere spatial function created");
 
   //---------Create and initialize a spatial function iterator-----------
   TImageType::IndexType                seedPos;
@@ -103,7 +103,7 @@ TEST(DifferenceOfGaussiansGradientImageFilter, ConvertedLegacyTest)
 
   //
   // show seed indices
-  std::cout << "Seeds for FloodFilledSpatialFunctionConditionalIterator" << std::endl;
+  SCOPED_TRACE("Seeds for FloodFilledSpatialFunctionConditionalIterator");
   for (const auto & seed : sfi.GetSeeds())
   {
     std::cout << seed << ' ';
@@ -116,7 +116,7 @@ TEST(DifferenceOfGaussiansGradientImageFilter, ConvertedLegacyTest)
     sfi.Set(255);
   }
 
-  std::cout << "Spatial function iterator created, sphere drawn" << std::endl;
+  SCOPED_TRACE("Spatial function iterator created, sphere drawn");
 
   //--------------------Do blurring----------------
   using TOutputType = TImageType;
@@ -136,7 +136,7 @@ TEST(DifferenceOfGaussiansGradientImageFilter, ConvertedLegacyTest)
 
   // Execute the filter
   binfilter->Update();
-  std::cout << "Binomial blur filter updated" << std::endl;
+  SCOPED_TRACE("Binomial blur filter updated");
 
   //------------Finally we can test the DOG filter------------
 

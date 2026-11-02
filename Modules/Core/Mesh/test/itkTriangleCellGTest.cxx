@@ -136,7 +136,7 @@ TEST(TriangleCell, ConvertedLegacyTest)
   std::cout << "TriangleCell Owner   = " << testCell.IsOwner() << std::endl;
 
   {
-    std::cout << "Test MakeCopy" << std::endl;
+    SCOPED_TRACE("Test MakeCopy");
 
     CellAutoPointer anotherCell;
 

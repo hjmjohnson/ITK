@@ -44,7 +44,6 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   // testing of a single SpatialObject...
   //======================================
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing SpatialObject:" << std::endl << std::endl;
 
   const TubePointer tube1 = TubeType::New();
@@ -79,23 +78,19 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   auto in = itk::MakeFilled<Point>(15);
   auto out = itk::MakeFilled<Point>(5);
 
-  std::cout << "IsInside()...";
+  SCOPED_TRACE("IsInside()...");
   EXPECT_TRUE(tube1->IsInsideInWorldSpace(in)) << "[FAILED]";
   EXPECT_FALSE(tube1->IsInsideInWorldSpace(out)) << "[FAILED]";
-
-  std::cout << "[PASSED]" << std::endl;
 
 
   TubeType::CovariantVectorType derivative;
 
-  std::cout << "DerivativeAt()...";
+  SCOPED_TRACE("DerivativeAt()...");
   ASSERT_NO_THROW(tube1->DerivativeAtInWorldSpace(in, 1, derivative)) << "[FAILED]";
 
   constexpr TubeType::CovariantVectorType expectedDerivative{};
 
   EXPECT_EQ(expectedDerivative, derivative) << "[FAILED]";
-
-  std::cout << "[PASSED]" << std::endl;
 
   std::cout << "itkTubeSpatialObjectTest ";
 
@@ -103,7 +98,6 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   // testing of a single CompositeSpatialObject...
   //==============================================
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing GroupSpatialObject:" << std::endl << std::endl;
 
   const TubePointer tube2 = TubeType::New();
@@ -130,26 +124,22 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   // testing the AddChild() function...
   unsigned int nbChildren = tubeNet1->GetNumberOfChildren();
 
-  std::cout << "AddChild()...";
+  SCOPED_TRACE("AddChild()...");
   EXPECT_EQ(nbChildren, 3u) << "[FAILED] [" << nbChildren << "!= 3]";
-
-  std::cout << "[PASSED]" << std::endl;
 
 
   // testing the RemoveChild() function...
-  std::cout << "Removing 1" << std::endl;
+  SCOPED_TRACE("Removing 1");
   tubeNet1->RemoveChild(tube1);
-  std::cout << "Removing 2" << std::endl;
+  SCOPED_TRACE("Removing 2");
   tubeNet1->RemoveChild(tube2);
-  std::cout << "Removing 3" << std::endl;
+  SCOPED_TRACE("Removing 3");
   tubeNet1->RemoveChild(tube3);
 
   nbChildren = tubeNet1->GetNumberOfChildren();
 
-  std::cout << "RemoveChild()...";
+  SCOPED_TRACE("RemoveChild()...");
   EXPECT_EQ(nbChildren, 0u) << "[FAILED]";
-
-  std::cout << "[PASSED]" << std::endl;
 
 
   tubeNet1->AddChild(tube1);
@@ -184,10 +174,8 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
     passed = false;
   }
 
-  std::cout << "GetChildren()...";
+  SCOPED_TRACE("GetChildren()...");
   EXPECT_TRUE(passed) << "[FAILED]";
-
-  std::cout << "[PASSED]" << std::endl;
 
 
   tubeNet1->RemoveChild(tube1);
@@ -197,7 +185,7 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   delete returnedList;
 
   // testing the SetChildren() function...
-  std::cout << "Set children ..." << std::endl;
+  SCOPED_TRACE("Set children ...");
   tubeNet1->SetChildren(childrenList);
   returnedList = tubeNet1->GetChildren();
 
@@ -224,18 +212,14 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   }
 
   delete returnedList;
-  std::cout << "SetChildren()...";
+  SCOPED_TRACE("SetChildren()...");
   EXPECT_TRUE(passed) << "[FAILED]";
-
-  std::cout << "[PASSED]" << std::endl;
 
 
   tubeNet1->Update();
 
-  std::cout << "HasParent()...";
+  SCOPED_TRACE("HasParent()...");
   EXPECT_TRUE(tube2->HasParent()) << "[FAILED]";
-
-  std::cout << "[PASSED]" << std::endl;
 
 
   auto translation = itk::MakeFilled<Vector>(10);
@@ -260,14 +244,12 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   auto p2 = itk::MakeFilled<Point>(15);
   p2[0] = 5;
 
-  std::cout << "IsInside()...";
+  SCOPED_TRACE("IsInside()...");
   EXPECT_TRUE(tubeNet1->IsInsideInWorldSpace(in, 3)) << "[FAILED]";
   EXPECT_FALSE(tubeNet1->IsInsideInWorldSpace(out, 3)) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
 
-
-  std::cout << "DerivativeAt()...";
+  SCOPED_TRACE("DerivativeAt()...");
   try
   {
     tubeNet1->DerivativeAtInWorldSpace(in, static_cast<unsigned short>(1), derivative, true);
@@ -288,7 +270,6 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   // testing of references behavior for SpatialObject...
   //====================================================
 
-  std::cout << "==============================================" << std::endl;
   std::cout << "Testing references behavior for SpatialObject:" << std::endl << std::endl;
 
   const TubePointer  tube = TubeType::New();
@@ -298,7 +279,7 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   unsigned int tubeCount = tube->GetReferenceCount();
   unsigned int netCount = net->GetReferenceCount();
 
-  std::cout << "References test...";
+  SCOPED_TRACE("References test...");
   EXPECT_EQ(tubeCount, 1u) << "[FAILED]: Problem in Tube initialization of references count" << tubeCount;
   {
     const TubePointer localTube = tube;
@@ -320,18 +301,15 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
 
   EXPECT_EQ(netCount, 1u) << "[FAILED]: Problem in TubeNetwork with decrementation of references count";
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Testing Set/GetParentPoint
-  std::cout << "Set/GetParentPoint: ";
+  SCOPED_TRACE("Set/GetParentPoint:");
 
   tube->SetParentPoint(1);
   EXPECT_EQ(tube->GetParentPoint(), 1) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
 
   // Testing ComputeTangentAndNormals();
-  std::cout << "ComputeTangentAndNormals: ";
+  SCOPED_TRACE("ComputeTangentAndNormals:");
   tube1->ComputeTangentsAndNormals();
 
   TubePointType::VectorType t = static_cast<const TubePointType *>(tube1->GetPoint(1))->GetTangentInWorldSpace();
@@ -356,10 +334,8 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   EXPECT_NEAR(n2[1], n2_known[1], tol) << "[FAILED]" << " n2 = " << n2 << " != " << n2_known << " within " << tol;
   EXPECT_NEAR(n2[2], -n2_known[2], tol) << "[FAILED]" << " n2 = " << n2 << " != " << n2_known << " within " << tol;
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Testing IsInside() with m_EndType set to rounded end-type;
-  std::cout << "IsInside() with m_RoundedEnd=True: ";
+  SCOPED_TRACE("IsInside() with m_RoundedEnd=True:");
   p1.Fill(19.5);
   tube1->SetEndRounded(false);
 
@@ -368,11 +344,10 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   tube1->SetEndRounded(true);
 
   EXPECT_TRUE(tube1->IsInsideInWorldSpace(p1)) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
 
   // For coverage only
-  std::cout << "Testing PointBasedSO: ";
+  SCOPED_TRACE("Testing PointBasedSO:");
   using PointBasedType = itk::PointBasedSpatialObject<3>;
   auto                                       pBSO = PointBasedType::New();
   PointBasedType::SpatialObjectPointType     pnt;
@@ -380,19 +355,16 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
   pBSO->SetPoints(ll);
   pBSO->GetPoint(0);
   pBSO->Update();
-  std::cout << "[PASSED]" << std::endl;
 
-  std::cout << "Testing PointBasedSO AddPoint: ";
+  SCOPED_TRACE("Testing PointBasedSO AddPoint:");
   pnt.SetPositionInObjectSpace(1, 1, 1);
   pBSO->AddPoint(pnt);
   EXPECT_EQ(pBSO->GetPoint(1)->GetPositionInObjectSpace()[0], 1) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
-  std::cout << "Testing PointBasedSO RemovePoint: ";
+  SCOPED_TRACE("Testing PointBasedSO RemovePoint:");
   pBSO->RemovePoint(0);
   EXPECT_EQ(pBSO->GetPoints().size(), 1u) << "[FAILED]";
   EXPECT_EQ(pBSO->GetPoint(0)->GetPositionInObjectSpace()[0], 1) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
   // Test Copy and Assignment for TubePointType
   {
@@ -472,10 +444,5 @@ TEST(DTITubeSpatialObject, ConvertedLegacyTest)
         EXPECT_FLOAT_EQ(pOriginal_tensor[j], pv_tensor[j]);
       }
     }
-
-    std::cout << "[DONE]" << std::endl;
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

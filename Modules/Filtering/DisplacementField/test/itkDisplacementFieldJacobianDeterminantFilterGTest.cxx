@@ -39,7 +39,7 @@ TestDisplacementJacobianDeterminantValue()
   using VectorImageType = FieldType;
 
 
-  std::cout << "Create the displacementField image pattern." << std::endl;
+  SCOPED_TRACE("Create the displacementField image pattern.");
   VectorImageType::RegionType region;
   // NOTE:  Making the image size much larger than necessary in order to get
   //       some meaningful time measurements.  Simulate a 256x256x256 image.

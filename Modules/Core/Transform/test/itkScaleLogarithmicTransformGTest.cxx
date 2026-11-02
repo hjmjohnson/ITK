@@ -41,7 +41,7 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
   {
     auto                     identityTransform = TransformType::New();
     TransformType::ScaleType scale = identityTransform->GetScale();
-    std::cout << "Scale from instantiating an identity transform:  ";
+    SCOPED_TRACE("Scale from instantiating an identity transform:");
     for (unsigned int j = 0; j < N; ++j)
     {
       std::cout << scale[j] << ' ';
@@ -68,7 +68,7 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
     scaleTransform->SetScale(iscale);
 
     TransformType::ScaleType scale = scaleTransform->GetScale();
-    std::cout << "scale initialization  test:  ";
+    SCOPED_TRACE("scale initialization  test:");
     for (unsigned int j = 0; j < N; ++j)
     {
       std::cout << scale[j] << ' ';
@@ -106,8 +106,6 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
       EXPECT_TRUE(testStatus) << "Error scaling point : " << p << std::endl
                               << "Result should be    : " << q << std::endl
                               << "Reported Result is  : " << r;
-
-      std::cout << "Successful scaling an itk::Point " << std::endl;
     }
 
     {
@@ -129,8 +127,6 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(testStatus) << "Error scaling vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Successful scaling an itk::Vector " << std::endl;
     }
 
     {
@@ -153,8 +149,6 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
       }
       EXPECT_TRUE(testStatus) << "Error scaling covariant vector: " << p << std::endl
                               << "Reported Result is      : " << q;
-
-      std::cout << "Successful scaling an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -178,8 +172,6 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(testStatus) << "Error scaling vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Successful scaling an vnl_Vector " << std::endl;
     }
 
 
@@ -197,8 +189,6 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
       EXPECT_LE(c2.EuclideanDistanceTo(center), 1e-5) << "Error in Set/Get center." << std::endl
                                                       << "It was SetCenter() to    : " << center << std::endl
                                                       << "but GetCenter() returned : " << c2;
-
-      std::cout << "Successful SetCenter() / GetCenter() " << std::endl;
     }
 
 
@@ -226,8 +216,6 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
       EXPECT_TRUE(testStatus) << "Error in Set/Get parameters." << std::endl
                               << "It was SetParameters() to    : " << parameters << std::endl
                               << "but GetParameters() returned : " << p2;
-
-      std::cout << "Successful SetParameters() / GetParameters() " << std::endl;
     }
   }
 
@@ -270,10 +258,5 @@ TEST(ScaleLogarithmicTransform, ConvertedLegacyTest)
     EXPECT_TRUE(testStatus) << "Error in ComputeJacobianWithRespectToParameters()." << std::endl
                             << "The center of the transformation was ignored." << std::endl
                             << "Jacobian: " << jacobian;
-
-    std::cout << "Successful ComputeJacobianWithRespectToParameters() " << std::endl;
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

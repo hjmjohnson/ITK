@@ -25,7 +25,7 @@
 
 TEST(RescaleIntensityImageFilter, ConvertedLegacyTest)
 {
-  std::cout << "itkRescaleIntensityImageFilterTest Start" << std::endl;
+  SCOPED_TRACE("itkRescaleIntensityImageFilterTest Start");
 
   // Define the dimension of the images
   constexpr unsigned int ImageDimension{ 3 };

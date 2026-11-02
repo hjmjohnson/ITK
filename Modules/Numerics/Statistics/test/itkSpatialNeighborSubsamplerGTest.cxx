@@ -64,7 +64,7 @@ TEST(SpatialNeighborSubsampler, ConvertedLegacyTest)
   // ooooooooooooooooooooooooo          |        ooooooooooooooooooooooooo
 
   // spell-check-enable
-  std::cout << "SpatialNeighborSubsampler Test \n \n";
+  SCOPED_TRACE("SpatialNeighborSubsampler Test");
 
   using PixelType = unsigned int;
   using ImageType = itk::Image<PixelType, 2>;

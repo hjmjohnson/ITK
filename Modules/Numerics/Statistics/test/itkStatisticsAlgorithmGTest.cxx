@@ -22,7 +22,7 @@
 
 TEST(StatisticsAlgorithm, ConvertedLegacyTest)
 {
-  std::cout << "StatisticsAlgorithm Test \n \n";
+  SCOPED_TRACE("StatisticsAlgorithm Test");
 
   constexpr unsigned int measurementVectorSize{ 2 };
 

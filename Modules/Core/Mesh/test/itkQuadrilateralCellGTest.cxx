@@ -134,7 +134,7 @@ TEST(QuadrilateralCell, ConvertedLegacyTest)
   std::cout << "QuadrilateralCell Owner   = " << testCell1.IsOwner() << std::endl;
 
   {
-    std::cout << "Test MakeCopy" << std::endl;
+    SCOPED_TRACE("Test MakeCopy");
 
     CellAutoPointer anotherCell;
     testCell1->MakeCopy(anotherCell);

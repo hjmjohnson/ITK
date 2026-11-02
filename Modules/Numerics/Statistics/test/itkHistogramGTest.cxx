@@ -267,7 +267,7 @@ TEST(Histogram, ConvertedLegacyTest)
   IndexType index1(numberOfComponents);
   bool      getindex1 = histogram->GetIndex(outOfLowerRange, index1);
 
-  std::cout << "GetIndex() with SetClipBinsAtEnds() = false " << std::endl;
+  SCOPED_TRACE("GetIndex() with SetClipBinsAtEnds() = false");
   std::cout << "Boolean " << getindex1 << " Index " << index1 << std::endl;
 
   EXPECT_TRUE(getindex1);
@@ -282,7 +282,7 @@ TEST(Histogram, ConvertedLegacyTest)
 
   getindex1 = histogram->GetIndex(outOfLowerRange, index1);
 
-  std::cout << "GetIndex() with SetClipBinsAtEnds() = true " << std::endl;
+  SCOPED_TRACE("GetIndex() with SetClipBinsAtEnds() = true");
   std::cout << "Boolean " << getindex1 << " Index " << index1 << std::endl;
 
   EXPECT_FALSE(getindex1);
@@ -292,7 +292,7 @@ TEST(Histogram, ConvertedLegacyTest)
   IndexType index2(numberOfComponents);
   bool      getindex2 = histogram->GetIndex(outOfUpperRange, index2);
 
-  std::cout << "GetIndex() with SetClipBinsAtEnds() = false " << std::endl;
+  SCOPED_TRACE("GetIndex() with SetClipBinsAtEnds() = false");
   std::cout << "Boolean " << getindex2 << " Index " << index2 << std::endl;
 
   EXPECT_TRUE(getindex2);
@@ -307,7 +307,7 @@ TEST(Histogram, ConvertedLegacyTest)
 
   getindex2 = histogram->GetIndex(outOfUpperRange, index2);
 
-  std::cout << "GetIndex() with SetClipBinsAtEnds() = true " << std::endl;
+  SCOPED_TRACE("GetIndex() with SetClipBinsAtEnds() = true");
   std::cout << "Boolean " << getindex2 << " Index " << index2 << std::endl;
 
   EXPECT_FALSE(getindex2);
@@ -392,7 +392,7 @@ TEST(Histogram, ConvertedLegacyTest)
   EXPECT_EQ(newTotalFrequency, histogramSize + totalFrequency);
 
   // Exercise GetIndex() method in the iterator.
-  std::cout << "TEST GetIndex() and GetFrequency() in the iterator" << std::endl;
+  SCOPED_TRACE("TEST GetIndex() and GetFrequency() in the iterator");
   itr = histogram->Begin();
   end = histogram->End();
 

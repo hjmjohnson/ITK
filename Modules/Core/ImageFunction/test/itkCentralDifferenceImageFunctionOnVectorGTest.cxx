@@ -257,7 +257,7 @@ itkCentralDifferenceImageFunctionOnVectorTestRun()
   // to be in bounds.
 
   // test results at non-integer positions
-  std::cout << "Test non-integer position for EvaluateAtContinuousIndex. " << std::endl;
+  SCOPED_TRACE("Test non-integer position for EvaluateAtContinuousIndex.");
   cindex.Fill(8.0);
   cindex[0] = 8.0;
   OutputType center = function->EvaluateAtContinuousIndex(cindex);
@@ -287,7 +287,7 @@ itkCentralDifferenceImageFunctionOnVectorTestRun()
     result = EXIT_FAILURE;
   }
 
-  std::cout << "Test non-integer position for Evaluate. " << std::endl;
+  SCOPED_TRACE("Test non-integer position for Evaluate.");
   point.Fill(8.0);
   point[0] = 8.0;
   center = function->Evaluate(point);

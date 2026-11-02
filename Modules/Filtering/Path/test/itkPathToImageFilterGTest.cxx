@@ -37,7 +37,7 @@ TEST(PathToImageFilter, ConvertedLegacyTest)
 
   ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(path, PolyLineParametricPath, ParametricPath);
 
-  std::cout << "Making a square Path with v0 at (30,30) and v2 at (33,33)" << std::endl;
+  SCOPED_TRACE("Making a square Path with v0 at (30,30) and v2 at (33,33)");
   auto v = itk::MakeFilled<VertexType>(30);
   path->AddVertex(v);
   v[0] = 33;

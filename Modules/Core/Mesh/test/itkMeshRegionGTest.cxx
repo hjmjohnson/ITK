@@ -38,7 +38,4 @@ TEST(MeshRegion, ConvertedLegacyTest)
   constexpr itk::SizeValueType idx{ 1 };
   meshRegion.SetRegion(idx);
   EXPECT_EQ(idx, meshRegion.GetRegion());
-
-
-  std::cout << "Test finished." << std::endl;
 }

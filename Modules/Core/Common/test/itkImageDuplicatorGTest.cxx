@@ -32,7 +32,7 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
 
   {
     /** Create an image */
-    std::cout << "Creating simulated image: ";
+    SCOPED_TRACE("Creating simulated image:");
     auto m_Image = ImageType::CreateInitialized(region);
 
     itk::ImageRegionIterator<ImageType> it(m_Image, region);
@@ -53,10 +53,8 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
     shift->SetScale(1.0);
     shift->Update(); // need to update before duplicator can run
 
-    std::cout << "[DONE]" << std::endl;
-
     // Test the duplicator
-    std::cout << "Testing duplicator with float images: ";
+    SCOPED_TRACE("Testing duplicator with float images:");
     using DuplicatorType = itk::ImageDuplicator<ImageType>;
     auto duplicator = DuplicatorType::New();
 
@@ -79,10 +77,8 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
       ++it2;
     }
 
-    std::cout << "[DONE]" << std::endl;
-
     /** Test duplicator after modifying the bulk data of the input */
-    std::cout << "Modifying input, testing duplicator again: ";
+    SCOPED_TRACE("Modifying input, testing duplicator again:");
     shift->SetShift(1);
     shift->Update(); // need to update before duplicator
     duplicator->Update();
@@ -98,10 +94,8 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
       ++it2b;
     }
 
-    std::cout << "[DONE]" << std::endl;
-
     /** Test duplicator after modifying the bulk data of the input */
-    std::cout << "Rerunning duplicator with no changes: ";
+    SCOPED_TRACE("Rerunning duplicator with no changes:");
     shift->Update(); // need to update before duplicator
     duplicator->Update();
     ImageCopy = duplicator->GetOutput();
@@ -115,14 +109,12 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
       i++;
       ++it2c;
     }
-
-    std::cout << "[DONE]" << std::endl;
   }
 
   {
     /** Create an RGB image */
     using RGBImageType = itk::Image<itk::RGBPixel<unsigned char>, 3>;
-    std::cout << "Creating simulated image: ";
+    SCOPED_TRACE("Creating simulated image:");
     auto m_RGBImage = RGBImageType::New();
     m_RGBImage->SetRegions(region);
     m_RGBImage->Allocate();
@@ -159,12 +151,10 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
       ++it3;
     }
 
-    std::cout << "[DONE]" << std::endl;
-
     // Test the duplicator
 
 
-    std::cout << "Testing duplicator with RGB images: ";
+    SCOPED_TRACE("Testing duplicator with RGB images:");
     using RGBDuplicatorType = itk::ImageDuplicator<RGBImageType>;
     auto RGBduplicator = RGBDuplicatorType::New();
 
@@ -204,8 +194,6 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
       }
       ++it4;
     }
-
-    std::cout << "[DONE]" << std::endl;
   }
 
 
@@ -227,7 +215,7 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
     vectorImage->FillBuffer(f);
 
     // Test the duplicator
-    std::cout << "Testing duplicator with Vector images: ";
+    SCOPED_TRACE("Testing duplicator with Vector images:");
     using VectorDuplicatorType = itk::ImageDuplicator<VectorImageType>;
     auto Vectorduplicator = VectorDuplicatorType::New();
 
@@ -248,10 +236,5 @@ TEST(ImageDuplicator, ConvertedLegacyTest)
       ++it4;
       ++it3;
     }
-
-    std::cout << "[DONE]" << std::endl;
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

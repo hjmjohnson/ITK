@@ -78,8 +78,7 @@ TEST(UnsharpMaskLevelSetImageFilter, ConvertedLegacyTest)
 
   filter->SetInput(im_init);
   std::cout << "max iteration = " << (filter->GetMaxFilterIteration()) << '\n';
-  std::cout << "Starting processing.\n";
+  SCOPED_TRACE("Starting processing.");
   filter->Update();
   filter->Print(std::cout);
-  std::cout << "Passed.\n";
 }

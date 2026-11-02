@@ -75,7 +75,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
   myIteratorType1 it1(inputImageA, region);
 
   // Initialize the content of Image A
-  std::cout << "Image #1 " << std::endl;
+  SCOPED_TRACE("Image #1");
   while (!it1.IsAtEnd())
   {
     it1.Set(static_cast<myImageType1::PixelType>(randomNumberDistribution1(randomNumberEngine)));
@@ -90,7 +90,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
 
   // Initialize the content of Image B
   std::cout << std::endl;
-  std::cout << "Image #2 " << std::endl;
+  SCOPED_TRACE("Image #2");
   itk::Vector<unsigned short, 2> vec;
   while (!it2.IsAtEnd())
   {
@@ -109,7 +109,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
 
   // Initialize the content of Image C
   std::cout << std::endl;
-  std::cout << "Image #3 " << std::endl;
+  SCOPED_TRACE("Image #3");
   itk::RGBAPixel<short> rgbaVec;
   while (!itRGBA.IsAtEnd())
   {
@@ -164,7 +164,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
 
   // Print the content of the result image
   std::cout << std::endl;
-  std::cout << "Joining #1 and #2 image " << std::endl;
+  SCOPED_TRACE("Joining #1 and #2 image");
   while (!it3.IsAtEnd())
   {
     std::cout << it3.Get() << std::endl;
@@ -177,7 +177,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
 
   // Print the content of the result image
   std::cout << std::endl;
-  std::cout << "Joining #1#2 and #3 image " << std::endl;
+  SCOPED_TRACE("Joining #1#2 and #3 image");
   while (!it123.IsAtEnd())
   {
     std::cout << it123.Get() << std::endl;
@@ -200,7 +200,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
 
   // Print the content of the result image
   std::cout << std::endl;
-  std::cout << "Joining #2 and #1 image " << std::endl;
+  SCOPED_TRACE("Joining #2 and #1 image");
   while (!it4.IsAtEnd())
   {
     std::cout << it4.Get() << std::endl;
@@ -222,7 +222,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
   myOutputIteratorType2                         it5(outputImage2, outputImage2->GetRequestedRegion());
 
   // Print the content of the result image
-  std::cout << "Joining #1 and #1 image " << std::endl;
+  SCOPED_TRACE("Joining #1 and #1 image");
   while (!it5.IsAtEnd())
   {
     std::cout << static_cast<int>(it5.Get()[0]) << "  " << static_cast<int>(it5.Get()[1]) << std::endl;
@@ -244,7 +244,7 @@ TEST(JoinImageFilter, ConvertedLegacyTest)
   myOutputIteratorType4                         it6(outputImage4, outputImage4->GetRequestedRegion());
 
   // Print the content of the result image
-  std::cout << "Joining #2 and #2 image " << std::endl;
+  SCOPED_TRACE("Joining #2 and #2 image");
   while (!it6.IsAtEnd())
   {
     std::cout << it6.Get() << std::endl;

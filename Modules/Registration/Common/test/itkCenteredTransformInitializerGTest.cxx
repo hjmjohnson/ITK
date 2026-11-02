@@ -88,7 +88,7 @@ RunTest(itk::SmartPointer<TFixedImage> fixedImage, itk::SmartPointer<TMovingImag
   initializer->InitializeTransform();
 
   std::cout << std::endl << std::endl;
-  std::cout << "Testing Geometric Mode " << std::endl;
+  SCOPED_TRACE("Testing Geometric Mode");
   // transform->Print( std::cout );
 
   const TransformType::InputPointType &   center1 = transform->GetCenter();
@@ -130,7 +130,7 @@ RunTest(itk::SmartPointer<TFixedImage> fixedImage, itk::SmartPointer<TMovingImag
   initializer->InitializeTransform();
 
   std::cout << std::endl << std::endl;
-  std::cout << "Testing Moments Mode " << std::endl;
+  SCOPED_TRACE("Testing Moments Mode");
   // transform->Print( std::cout );
 
   const TransformType::InputPointType &   center2 = transform->GetCenter();
@@ -214,7 +214,7 @@ TEST(CenteredTransformInitializer, ConvertedLegacyTest)
   bool pass = true;
 
   std::cout << std::endl << std::endl;
-  std::cout << "Running tests with itk::Image" << std::endl;
+  SCOPED_TRACE("Running tests with itk::Image");
   {
     // Create Images
 
@@ -271,7 +271,7 @@ TEST(CenteredTransformInitializer, ConvertedLegacyTest)
   }
 
   std::cout << std::endl << std::endl;
-  std::cout << "Running tests with itk::Image" << std::endl;
+  SCOPED_TRACE("Running tests with itk::Image");
   {
     // Create Images
 

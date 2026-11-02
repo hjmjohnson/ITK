@@ -238,7 +238,7 @@ TEST(MeshSourceGraftOutput, ConvertedLegacyTest)
   }
 
   std::cout << "Input Mesh has " << inputMesh->GetNumberOfPoints();
-  std::cout << "   points " << std::endl;
+  SCOPED_TRACE("points");
 
 
   // Declare the transform type
@@ -272,7 +272,7 @@ TEST(MeshSourceGraftOutput, ConvertedLegacyTest)
   const MeshType::Pointer outputMesh = filter->GetOutput();
 
   std::cout << "Output Mesh has " << outputMesh->GetNumberOfPoints();
-  std::cout << "   points " << std::endl;
+  SCOPED_TRACE("points");
 
   // Get the point container
   const MeshType::PointsContainerPointer transformedPoints = outputMesh->GetPoints();

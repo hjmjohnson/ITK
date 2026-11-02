@@ -40,7 +40,7 @@ TEST(ScaleTransform, ConvertedLegacyTest)
   {
     auto                     identityTransform = TransformType::New();
     TransformType::ScaleType scale = identityTransform->GetScale();
-    std::cout << "Scale from instantiating an identity transform:  ";
+    SCOPED_TRACE("Scale from instantiating an identity transform:");
     for (unsigned int j = 0; j < N; ++j)
     {
       std::cout << scale[j] << ' ';
@@ -80,7 +80,7 @@ TEST(ScaleTransform, ConvertedLegacyTest)
       << "ScaleTransform has 3 fixed parameters, yet GetFixedParameters.Size() reports: "
       << scaleTransform->GetFixedParameters().Size();
     TransformType::ScaleType scale = scaleTransform->GetScale();
-    std::cout << "scale initialization  test:  ";
+    SCOPED_TRACE("scale initialization  test:");
     for (unsigned int j = 0; j < N; ++j)
     {
       std::cout << scale[j] << ' ';
@@ -118,8 +118,6 @@ TEST(ScaleTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error scaling point : " << p << std::endl
                       << "Result should be    : " << q << std::endl
                       << "Reported Result is  : " << r;
-
-      std::cout << "Ok scaling an itk::Point " << std::endl;
     }
 
     {
@@ -141,8 +139,6 @@ TEST(ScaleTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error scaling vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok scaling an itk::Vector " << std::endl;
     }
 
     {
@@ -164,8 +160,6 @@ TEST(ScaleTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error scaling covariant vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok scaling an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -189,8 +183,6 @@ TEST(ScaleTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error scaling vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok scaling an vnl_Vector " << std::endl;
     }
 
 
@@ -208,8 +200,6 @@ TEST(ScaleTransform, ConvertedLegacyTest)
       EXPECT_LE(c2.EuclideanDistanceTo(center), 1e-5) << "Error in Set/Get center." << std::endl
                                                       << "It was SetCenter() to    : " << center << std::endl
                                                       << "but GetCenter() returned : " << c2;
-
-      std::cout << "Ok SetCenter() / GetCenter() " << std::endl;
     }
   }
 }

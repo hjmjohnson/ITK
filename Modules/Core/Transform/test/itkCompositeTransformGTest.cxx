@@ -173,12 +173,12 @@ TEST(CompositeTransform, ConvertedLegacyTest)
   // std::cout << "Composite Transform:" << std::endl << compositeTransform;
 
   /* Retrieve the transform and check that it's the same */
-  std::cout << "Retrieve 1st transform." << std::endl;
+  SCOPED_TRACE("Retrieve 1st transform.");
   const AffineType::ConstPointer affineGet =
     dynamic_cast<const AffineType *>(compositeTransform->GetNthTransformConstPointer(0));
   ASSERT_FALSE(affineGet.IsNull()) << "Failed retrieving transform from queue.";
 
-  std::cout << "Retrieve matrix and offset. " << std::endl;
+  SCOPED_TRACE("Retrieve matrix and offset.");
   const Matrix2Type matrix2Get = affineGet->GetMatrix();
   const Vector2Type vector2Get = affineGet->GetOffset();
   EXPECT_TRUE(testMatrix(matrix2, matrix2Get)) << "Failed retrieving correct transform data.";
@@ -186,7 +186,7 @@ TEST(CompositeTransform, ConvertedLegacyTest)
 
   /* Get parameters with single transform.
    * Should be same as GetParameters from affine transform. */
-  std::cout << "Get Parameters: " << std::endl;
+  SCOPED_TRACE("Get Parameters:");
   CompositeType::ParametersType parametersTest = compositeTransform->GetParameters();
   CompositeType::ParametersType parametersTruth = affine->GetParameters();
   std::cout << "affine parametersTruth: " << std::endl
@@ -204,9 +204,9 @@ TEST(CompositeTransform, ConvertedLegacyTest)
   parametersNew[3] = 30;
   parametersNew[4] = 40;
   parametersNew[5] = 50;
-  std::cout << "Set Parameters: " << std::endl;
+  SCOPED_TRACE("Set Parameters:");
   compositeTransform->SetParameters(parametersNew);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   CompositeType::ParametersType parametersReturned = compositeTransform->GetParameters();
   std::cout << "parametersNew: " << std::endl
             << parametersNew << std::endl
@@ -229,9 +229,9 @@ TEST(CompositeTransform, ConvertedLegacyTest)
   parametersNew.Fill(1);
   parametersNew[0] = 42;
 
-  std::cout << "Set Fixed Parameters: " << std::endl;
+  SCOPED_TRACE("Set Fixed Parameters:");
   compositeTransform->SetFixedParameters(parametersNew);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   parametersReturned = compositeTransform->GetFixedParameters();
   std::cout << "parametersNew: " << std::endl
             << parametersNew << std::endl
@@ -403,17 +403,17 @@ TEST(CompositeTransform, ConvertedLegacyTest)
 
   /* Get inverse transform again, but using other accessor. */
 
-  std::cout << "Call GetInverseTransform():" << std::endl;
+  SCOPED_TRACE("Call GetInverseTransform():");
   const CompositeType::ConstPointer inverseTransform2 =
     dynamic_cast<const CompositeType *>(compositeTransform->GetInverseTransform().GetPointer());
   ASSERT_FALSE(inverseTransform2.IsNull()) << "Failed calling GetInverseTransform().";
-  std::cout << "Transform point: " << std::endl;
+  SCOPED_TRACE("Transform point:");
   inverseOutput = inverseTransform2->TransformPoint(compositeTruth);
   EXPECT_TRUE(testPoint(inverseOutput, inverseTruth))
     << "Failed transform point with two-component inverse composite transform (2).";
 
   /* Test IsLinear() by calling on each sub transform */
-  std::cout << "Test IsLinear" << std::endl;
+  SCOPED_TRACE("Test IsLinear");
   bool allAreLinear = true;
   for (unsigned int n = 0; n < compositeTransform->GetNumberOfTransforms(); ++n)
   {
@@ -426,7 +426,7 @@ TEST(CompositeTransform, ConvertedLegacyTest)
     << "compositeTransform returned unexpected value for IsLinear(). Expected " << allAreLinear;
 
   /* Test GetNumberOfParameters */
-  std::cout << "GetNumberOfParameters: " << std::endl;
+  SCOPED_TRACE("GetNumberOfParameters:");
   unsigned int       affineParamsN = affine->GetNumberOfParameters();
   unsigned int       affine2ParamsN = affine2->GetNumberOfParameters();
   const unsigned int nParameters = compositeTransform->GetNumberOfParameters();
@@ -464,9 +464,9 @@ TEST(CompositeTransform, ConvertedLegacyTest)
   parametersNew.Fill(3.14);
   parametersNew[0] = 19;
   parametersNew[parametersTruth.Size() - 1] = 71;
-  std::cout << "Set Multi-transform Parameters: " << std::endl;
+  SCOPED_TRACE("Set Multi-transform Parameters:");
   compositeTransform->SetParameters(parametersNew);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   parametersReturned = compositeTransform->GetParameters();
   std::cout << "parametersNew: " << std::endl
             << parametersNew << std::endl
@@ -497,9 +497,9 @@ TEST(CompositeTransform, ConvertedLegacyTest)
   EXPECT_TRUE(testVectorArray(parametersTest, parametersTruth)) << "Failed GetFixedParameters() for multi transform.";
 
   /* Test set fixed parameters with multi-transform */
-  std::cout << "Set Multi-transform Fixed Parameters: " << std::endl;
+  SCOPED_TRACE("Set Multi-transform Fixed Parameters:");
   compositeTransform->SetFixedParameters(parametersTruth);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   parametersReturned = compositeTransform->GetFixedParameters();
   std::cout << "parametersTruth: " << std::endl
             << parametersTruth << std::endl
@@ -555,7 +555,7 @@ TEST(CompositeTransform, ConvertedLegacyTest)
   /* Test accessors */
   const CompositeType::TransformQueueType transformQueue = compositeTransform->GetTransformQueue();
   EXPECT_EQ(transformQueue.size(), 3u) << "Failed getting transform queue.";
-  std::cout << "Got TransformQueue." << std::endl;
+  SCOPED_TRACE("Got TransformQueue.");
 
   const CompositeType::TransformsToOptimizeFlagsType flagsQueue = compositeTransform->GetTransformsToOptimizeFlags();
   EXPECT_EQ(flagsQueue.size(), 3u) << "Failed getting optimize flags queue.";
@@ -610,7 +610,7 @@ TEST(CompositeTransform, ConvertedLegacyTest)
   /* Test ComputeJacobianWithRespectToParameters with three transforms, two of which (1st and 3rd) are active.
    * Remember that the point gets transformed by preceding transforms
    * before its used for individual Jacobian. */
-  std::cout << "Test ComputeJacobianWithRespectToParameters with three transforms: " << std::endl;
+  SCOPED_TRACE("Test ComputeJacobianWithRespectToParameters with three transforms:");
   CompositeType::InputPointType jacPoint2;
   jacPoint2[0] = 1;
   jacPoint2[1] = 2;
@@ -645,7 +645,7 @@ TEST(CompositeTransform, ConvertedLegacyTest)
     truth += update;
     compositeTransform->UpdateTransformParameters(update);
     CompositeType::ParametersType updateResult = compositeTransform->GetParameters();
-    std::cout << "Testing UpdateTransformParameters 1. " << std::endl;
+    SCOPED_TRACE("Testing UpdateTransformParameters 1.");
     EXPECT_TRUE(testVectorArray(truth, updateResult)) << "UpdateTransformParameters 1 failed. " << std::endl
                                                       << " truth:  " << truth << std::endl
                                                       << " result: " << updateResult;
@@ -663,7 +663,7 @@ TEST(CompositeTransform, ConvertedLegacyTest)
     }
     compositeTransform->UpdateTransformParameters(update, factor);
     updateResult = compositeTransform->GetParameters();
-    std::cout << "Testing UpdateTransformParameters 3. " << std::endl;
+    SCOPED_TRACE("Testing UpdateTransformParameters 3.");
     EXPECT_TRUE(testVectorArray(truth, updateResult)) << "UpdateTransformParameters 3 failed. " << std::endl
                                                       << " truth:  " << truth << std::endl
                                                       << " result: " << updateResult;
@@ -766,6 +766,4 @@ TEST(CompositeTransform, ConvertedLegacyTest)
 
   /* Test printing */
   compositeTransform->Print(std::cout);
-
-  std::cout << "Passed test!" << std::endl;
 }

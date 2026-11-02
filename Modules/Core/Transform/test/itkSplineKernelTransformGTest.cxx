@@ -89,7 +89,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   }
 
 
-  std::cout << "EBS 2D Test:" << std::endl;
+  SCOPED_TRACE("EBS 2D Test:");
   // Poisson's ration = 0.25, Alpha = 12.0 * ( 1 - \nu ) - 1
   ebs2D->SetSourceLandmarks(sourceLandmarks2D);
   ebs2D->SetTargetLandmarks(targetLandmarks2D);
@@ -128,7 +128,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   std::cout << std::endl;
 
 
-  std::cout << "EBRS 2D Test:" << std::endl;
+  SCOPED_TRACE("EBRS 2D Test:");
   ebrs2D->SetSourceLandmarks(sourceLandmarks2D);
   ebrs2D->SetTargetLandmarks(targetLandmarks2D);
 
@@ -156,7 +156,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   }
   std::cout << std::endl;
 
-  std::cout << "TPS 2D Test:" << std::endl;
+  SCOPED_TRACE("TPS 2D Test:");
   tps2D->SetSourceLandmarks(sourceLandmarks2D);
   tps2D->SetTargetLandmarks(targetLandmarks2D);
 
@@ -220,7 +220,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
 
   std::cout << std::endl;
 
-  std::cout << "TPR2LR 2D Test:" << std::endl;
+  SCOPED_TRACE("TPR2LR 2D Test:");
   tpr2lrs2D->SetSourceLandmarks(sourceLandmarks2D);
   tpr2lrs2D->SetTargetLandmarks(targetLandmarks2D);
 
@@ -244,7 +244,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   std::cout << std::endl;
 
   // volume spline transform
-  std::cout << "VS 2D Test:" << std::endl;
+  SCOPED_TRACE("VS 2D Test:");
   vs2D->SetSourceLandmarks(sourceLandmarks2D);
   vs2D->SetTargetLandmarks(targetLandmarks2D);
 
@@ -322,7 +322,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
     }
   }
 
-  std::cout << "EBS 3D Test:" << std::endl;
+  SCOPED_TRACE("EBS 3D Test:");
   // Poisson's ration = 0.25, Alpha = 12.0 * ( 1 - \nu ) - 1
 
   alpha = 12.0 * (1 - 0.25) - 1.0;
@@ -349,7 +349,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   }
   std::cout << std::endl;
 
-  std::cout << "TPS 3D Test:" << std::endl;
+  SCOPED_TRACE("TPS 3D Test:");
 
   tps3D->ComputeWMatrix();
 
@@ -370,7 +370,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   }
   std::cout << std::endl;
 
-  std::cout << "Get/Set Parameters test " << std::endl;
+  SCOPED_TRACE("Get/Set Parameters test");
   TPSTransform3DType::ParametersType parameters1 = tps3D->GetParameters();
   tps3D->SetParameters(parameters1);
   TPSTransform3DType::ParametersType parameters2 = tps3D->GetParameters();
@@ -442,7 +442,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
       }
     }
   }
-  std::cout << "EBS 4D Test:" << std::endl;
+  SCOPED_TRACE("EBS 4D Test:");
   // Poisson's ration = 0.25, Alpha = 12.0 * ( 1 - \nu ) - 1
 
   alpha = 12.0 * (1 - 0.25) - 1.0;
@@ -469,7 +469,7 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   }
   std::cout << std::endl;
 
-  std::cout << "TPS 4D Test:" << std::endl;
+  SCOPED_TRACE("TPS 4D Test:");
   tps4D->ComputeWMatrix();
 
   tps4Ds = tps4D->GetModifiableSourceLandmarks()->GetPoints()->Begin();
@@ -489,6 +489,4 @@ TEST(SplineKernelTransform, ConvertedLegacyTest)
   std::cout << std::endl;
 
   std::cout << ebs2D << std::endl;
-
-  std::cout << "TEST DONE" << std::endl;
 }

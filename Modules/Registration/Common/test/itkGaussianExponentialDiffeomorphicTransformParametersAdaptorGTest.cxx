@@ -63,7 +63,7 @@ TEST(GaussianExponentialDiffeomorphicTransformParametersAdaptor, ConvertedLegacy
   /**
    * Instantiate a transform
    */
-  std::cout << "Initialize transform." << std::endl;
+  SCOPED_TRACE("Initialize transform.");
 
   auto transform = TransformType::New();
   transform->SetConstantVelocityField(displacementField);
@@ -81,7 +81,7 @@ TEST(GaussianExponentialDiffeomorphicTransformParametersAdaptor, ConvertedLegacy
    *   the size and decrease the spacing.
    */
 
-  std::cout << "Instantiate adaptor." << std::endl;
+  SCOPED_TRACE("Instantiate adaptor.");
 
   auto     requiredSpacing = itk::MakeFilled<SpacingType>(0.6);
   SizeType requiredSize;

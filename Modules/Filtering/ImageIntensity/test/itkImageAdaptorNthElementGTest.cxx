@@ -99,7 +99,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
 
   myContainerPixelImage->FillBuffer(initialPixelValue);
 
-  std::cout << "Initial Container Image Values : " << std::endl;
+  SCOPED_TRACE("Initial Container Image Values :");
   it.GoToBegin();
   while (!it.IsAtEnd())
   {
@@ -121,7 +121,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
   }
 
 
-  std::cout << "Container Image Initialized" << std::endl;
+  SCOPED_TRACE("Container Image Initialized");
 
   //-------------------------------------------------------------
   //                 Create and Initialize the Float image
@@ -139,7 +139,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
 
   myFloatImage->FillBuffer(initialFloatValue);
 
-  std::cout << "Initial Float Image Values : " << std::endl;
+  SCOPED_TRACE("Initial Float Image Values :");
   itf.GoToBegin();
   while (!itf.IsAtEnd())
   {
@@ -156,7 +156,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
     ++itf;
   }
 
-  std::cout << "Float Image Initialized" << std::endl;
+  SCOPED_TRACE("Float Image Initialized");
 
 
   //-------------------------------------------------------------
@@ -183,13 +183,13 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
   myFloatImageType::Pointer myFloatOutputImage = filter->GetOutput();
   myFloatOutputImage->SetSpacing(spacing);
 
-  std::cout << "Float Output Image Initialized" << std::endl;
+  SCOPED_TRACE("Float Output Image Initialized");
 
   //-------------------------------------------------------------
   //         Force the execution of the filter
   //-------------------------------------------------------------
 
-  std::cout << "Calling filter Update" << std::endl;
+  SCOPED_TRACE("Calling filter Update");
 
 
   // Multiplex !!
@@ -197,7 +197,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
 
   filter->Update();
 
-  std::cout << "Filter Updated" << std::endl;
+  SCOPED_TRACE("Filter Updated");
 
   //-------------------------------------------------------------
   //         Force the execution of the filter
@@ -209,7 +209,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
 
 
   std::cout << std::endl;
-  std::cout << "Filter Output :" << std::endl;
+  SCOPED_TRACE("Filter Output :");
   while (!ito.IsAtEnd())
   {
     myIndexType index = ito.GetIndex();
@@ -235,7 +235,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
   filter->Update();
 
   std::cout << std::endl;
-  std::cout << "Second Filter Output :" << std::endl;
+  SCOPED_TRACE("Second Filter Output :");
   ito = myFloatIteratorType(myFloatOutputImage, myFloatOutputImage->GetRequestedRegion());
   while (!ito.IsAtEnd())
   {
@@ -262,7 +262,7 @@ TEST(ImageAdaptorNthElement, ConvertedLegacyTest)
   filter->Update();
 
   std::cout << std::endl;
-  std::cout << "Second Filter Output :" << std::endl;
+  SCOPED_TRACE("Second Filter Output :");
   ito = myFloatIteratorType(myFloatOutputImage, myFloatOutputImage->GetRequestedRegion());
   while (!ito.IsAtEnd())
   {

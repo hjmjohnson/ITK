@@ -205,15 +205,15 @@ void
 TestNoPrior(ImageType::Pointer inputImage)
 {
 
-  std::cout << "Beginning no-prior test" << std::endl;
+  SCOPED_TRACE("Beginning no-prior test");
 
   // set up the filter
   auto filter = FilterType::New();
-  std::cout << "Setting filter input" << std::endl;
+  SCOPED_TRACE("Setting filter input");
   filter->SetInput(inputImage);
 
   // explicitly set mean and standard deviation
-  std::cout << "Setting up mean and standard deviation for filter" << std::endl;
+  SCOPED_TRACE("Setting up mean and standard deviation for filter");
   double mean[6];
   mean[0] = fgMean;
   mean[1] = fgMean;
@@ -235,15 +235,15 @@ TestNoPrior(ImageType::Pointer inputImage)
   filter->SetMaxValueOfRGB(255);
 
   // test GetMaxValueOfRGB
-  std::cout << "Checking GetMaxValueOfRGB" << std::endl;
+  SCOPED_TRACE("Checking GetMaxValueOfRGB");
   EXPECT_EQ(filter->GetMaxValueOfRGB(), 255) << "[FAILED] Didn't set max RGB correctly";
 
   // run the filter
-  std::cout << "Running the filter" << std::endl;
+  SCOPED_TRACE("Running the filter");
   filter->Update();
 
   // check the results
-  std::cout << "Checking the filter results" << std::endl;
+  SCOPED_TRACE("Checking the filter results");
   const double percentCorrect = CheckResults(filter->GetOutput());
   EXPECT_GT(percentCorrect, minCorrectRate)
     << "[FAILED] Did not segment over " << minCorrectRate * 100 << "% correctly";
@@ -257,12 +257,12 @@ void
 TestWithPrior(ImageType::Pointer inputImage)
 {
   // set up the filter
-  std::cout << "Setting up the filter and image" << std::endl;
+  SCOPED_TRACE("Setting up the filter and image");
   auto filter = FilterType::New();
   filter->SetInput(inputImage);
 
   // set up the prior
-  std::cout << "Setting up the prior image" << std::endl;
+  SCOPED_TRACE("Setting up the prior image");
   auto                                  prior = BinaryObjectImage::New();
   constexpr BinaryObjectImage::SizeType size{ width, height };
   BinaryObjectImage::RegionType         region;
@@ -308,11 +308,11 @@ TestWithPrior(ImageType::Pointer inputImage)
   filter->TakeAPrior(prior);
 
   // run the filter
-  std::cout << "Running the filter" << std::endl;
+  SCOPED_TRACE("Running the filter");
   filter->Update();
 
   // check the results
-  std::cout << "Checking the results of the filter" << std::endl;
+  SCOPED_TRACE("Checking the results of the filter");
   const double percentCorrect = CheckResults(filter->GetOutput());
   EXPECT_GT(percentCorrect, minCorrectRate)
     << "[FAILED] Did not segment over " << minCorrectRate * 100 << "% correctly";
@@ -332,12 +332,12 @@ TEST(VoronoiSegmentationRGBImageFilter, ConvertedLegacyTest)
   const ImageType::Pointer inputImage = SetUpInputImage();
 
   // test without prior
-  std::cout << "[Running test without prior]" << std::endl;
+  SCOPED_TRACE("[Running test without prior]");
   TestNoPrior(inputImage);
   std::cout << std::endl;
 
   // test with prior
-  std::cout << "[Running test with prior]" << std::endl;
+  SCOPED_TRACE("[Running test with prior]");
   TestWithPrior(inputImage);
 
   // test set/get TestMean

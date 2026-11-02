@@ -64,7 +64,7 @@ TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
     std::cout << std::endl;
   }
 
-  std::cout << "Output from GetPixel( const IndexType & index, const TImage * image ) const" << std::endl;
+  SCOPED_TRACE("Output from GetPixel( const IndexType & index, const TImage * image ) const");
 
   for (unsigned int y = 0, i = 0; y < p.GetSize()[1]; ++y)
   {
@@ -91,7 +91,6 @@ TestPrintNeighborhood(IteratorType & p, VectorIteratorType & v)
     std::cout << std::endl;
   }
 
-  std::cout << "----" << std::endl;
   if (!success)
   {
     std::cerr << "Unexpected neighborhood value encountered in neighborhoods printed above." << std::endl;
@@ -185,7 +184,7 @@ TEST(ConstantBoundaryCondition, ConvertedLegacyTest)
   // Now test the input region calculation
 
   // Test 1
-  std::cout << "GetInputRequestedRegion() Test 1" << std::endl;
+  SCOPED_TRACE("GetInputRequestedRegion() Test 1");
   IndexType  requestIndex{};
   auto       requestSize = SizeType::Filled(2);
   RegionType requestRegion{ requestIndex, requestSize };
@@ -196,7 +195,7 @@ TEST(ConstantBoundaryCondition, ConvertedLegacyTest)
   EXPECT_EQ(inputRegion, expectedRegion) << "Unexpected input region for request region: " << imageRegion;
 
   // Test 2
-  std::cout << "GetInputRequestedRegion() Test 2" << std::endl;
+  SCOPED_TRACE("GetInputRequestedRegion() Test 2");
   requestIndex[0] = -2;
   requestIndex[1] = 0;
   requestSize[0] = 3;
@@ -214,7 +213,7 @@ TEST(ConstantBoundaryCondition, ConvertedLegacyTest)
   EXPECT_EQ(inputRegion, expectedRegion) << "Unexpected input region for request region: " << imageRegion;
 
   // Test 3
-  std::cout << "GetInputRequestedRegion() Test 3" << std::endl;
+  SCOPED_TRACE("GetInputRequestedRegion() Test 3");
   requestIndex[0] = -2;
   requestIndex[1] = 8;
   requestSize[0] = 3;

@@ -227,7 +227,7 @@ TEST(ObjectToObjectMultiMetricv4Registration, ConvertedLegacyTest)
   ObjectToObjectMultiMetricv4RegistrationTestRun<CorrelationMetricType>(
     correlationMetric, numberOfIterations, singleValueResult, singleDerivativeResult, 1.0, true);
 
-  std::cout << "*** multi-variate metric: " << std::endl;
+  SCOPED_TRACE("*** multi-variate metric:");
   auto metric2 = CorrelationMetricType::New();
   metric2->SetFixedImage(fixedImage);
   metric2->SetMovingImage(movingImage);

@@ -187,6 +187,6 @@ TEST(GradientDescentOptimizerBasev4, ConvertedLegacyTest)
 
   ASSERT_NO_THROW(optimizer->StartOptimization());
 
-  std::cout << "Printing self.." << std::endl;
+  SCOPED_TRACE("Printing self..");
   std::cout << optimizer << std::endl;
 }

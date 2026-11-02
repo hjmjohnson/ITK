@@ -84,7 +84,6 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
 
   // check number of points
   EXPECT_EQ(contour->GetNumberOfControlPoints(), 4u) << "[FAILED] Did not add the right number of control points";
-  std::cout << "[PASSED] GetNumberOfControlPoints" << std::endl;
 
   // check values of points
   EXPECT_DOUBLE_EQ(contour->GetControlPoints()[0].GetPickedPointInObjectSpace()[0],
@@ -111,14 +110,12 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
   EXPECT_DOUBLE_EQ(contour->GetControlPoints()[3].GetPickedPointInObjectSpace()[1],
                    pt4.GetPickedPointInObjectSpace()[1])
     << "[FAILED] Did not add/retrieve control point list correctly";
-  std::cout << "[PASSED] Set/GetControlPoints" << std::endl;
 
   // check retrieval of a single point
   EXPECT_DOUBLE_EQ(contour->GetControlPoint(0)->GetPickedPointInObjectSpace()[0], pt1.GetPickedPointInObjectSpace()[0])
     << "[FAILED] Did not retrieve single control point correctly";
   EXPECT_DOUBLE_EQ(contour->GetControlPoint(0)->GetPickedPointInObjectSpace()[1], pt1.GetPickedPointInObjectSpace()[1])
     << "[FAILED] Did not retrieve single control point correctly";
-  std::cout << "[PASSED] GetControlPoint" << std::endl;
 
 
   //
@@ -146,7 +143,6 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
   // then test when attached to a slice
   contour->SetAttachedToSlice(1);
   EXPECT_EQ(contour->GetAttachedToSlice(), 1) << "[FAILED] Did not set/retrieve proper slice";
-  std::cout << "[PASSED] Set/GetAttachedToSlice" << std::endl;
 
 
   //
@@ -155,7 +151,6 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
   contour->SetInterpolationMethod(SpatialObjectType::InterpolationMethodEnum::LINEAR_INTERPOLATION);
   EXPECT_EQ(contour->GetInterpolationMethod(), SpatialObjectType::InterpolationMethodEnum::LINEAR_INTERPOLATION)
     << "[FAILED] Did not set/retrieve interpolation type correctly";
-  std::cout << "[PASSED] Set/GetInterpolationType" << std::endl;
 
 
   //
@@ -179,7 +174,6 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
 
   // check number of points
   EXPECT_EQ(contour->GetNumberOfControlPoints(), 2u) << "[FAILED] Did not add the right number of interpolated points";
-  std::cout << "[PASSED] GetNumberOfInterpolatedPoints" << std::endl;
 
   // check values of points
   EXPECT_DOUBLE_EQ(contour->GetPoints()[0].GetPositionInObjectSpace()[0], intPt1.GetPositionInObjectSpace()[0])
@@ -190,21 +184,18 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
     << "[FAILED] Did not add/retrieve interpolated point list correctly";
   EXPECT_DOUBLE_EQ(contour->GetPoints()[1].GetPositionInObjectSpace()[1], intPt2.GetPositionInObjectSpace()[1])
     << "[FAILED] Did not add/retrieve interpolated point list correctly";
-  std::cout << "[PASSED] Set/GetInterpolatedPoints" << std::endl;
 
   // check retrieval of a single point
   EXPECT_DOUBLE_EQ(contour->GetPoint(0)->GetPositionInObjectSpace()[0], intPt1.GetPositionInObjectSpace()[0])
     << "[FAILED] Did not retrieve single interpolated point correctly";
   EXPECT_DOUBLE_EQ(contour->GetPoint(0)->GetPositionInObjectSpace()[1], intPt1.GetPositionInObjectSpace()[1])
     << "[FAILED] Did not retrieve single interpolated point correctly";
-  std::cout << "[PASSED] GetInterpolatedPoint" << std::endl;
 
 
   //
   // Test Update()
   //
   ASSERT_NO_THROW(contour->Update()) << "[FAILED] failed Update()";
-  std::cout << "[PASSED] Update()" << std::endl;
 
 
   //
@@ -214,7 +205,6 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
   testPoint[0] = 0;
   testPoint[1] = 0;
   EXPECT_FALSE(contour->IsInsideInWorldSpace(testPoint)) << "[FAILED] Somehow returned true for IsInside";
-  std::cout << "[PASSED] IsInside" << std::endl;
 
 
   //
@@ -222,7 +212,6 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
   // always returns false)
   //
   EXPECT_FALSE(contour->IsEvaluableAtInWorldSpace(testPoint)) << "[FAILED] Somehow returned true for IsEvaluableAt";
-  std::cout << "[PASSED] IsEvaluableAt" << std::endl;
 
 
   //
@@ -233,7 +222,6 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
   double * valPtr = &val;
   EXPECT_FALSE(contour->ValueAtInWorldSpace(testPoint, *valPtr)) << "[FAILED] Somehow returned true for ValueAt";
   EXPECT_EQ(val, contour->GetDefaultOutsideValue()) << "[FAILED] Somehow returned true for ValueAt";
-  std::cout << "[PASSED] ValueAt" << std::endl;
 
 
   //
@@ -254,7 +242,4 @@ TEST(ContourSpatialObject, ConvertedLegacyTest)
   {
     std::cout << "STREAMED ENUM VALUE ContourSpatialObjectEnums::InterpolationMethod: " << ee << std::endl;
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

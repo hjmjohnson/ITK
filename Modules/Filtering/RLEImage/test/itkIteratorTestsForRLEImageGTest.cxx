@@ -26,7 +26,7 @@
 
 TEST(IteratorTestsForRLEImage, ConvertedLegacyTest)
 {
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   using ScalarImage = itk::RLEImage<unsigned short>;
   ScalarImage::Pointer o3 = ScalarImage::New();
 
@@ -80,7 +80,7 @@ TEST(IteratorTestsForRLEImage, ConvertedLegacyTest)
   end = clock();
   elapsedTime = (end - start) / (double)CLOCKS_PER_SEC;
 
-  std::cout << "ImageRegionIterator" << std::endl;
+  SCOPED_TRACE("ImageRegionIterator");
   std::cout << "\tTime   = " << elapsedTime << std::endl;
   std::cout << "\tPixels = " << i << std::endl;
 
@@ -99,7 +99,7 @@ TEST(IteratorTestsForRLEImage, ConvertedLegacyTest)
   end = clock();
   elapsedTime = (end - start) / (double)CLOCKS_PER_SEC;
 
-  std::cout << "ImageRegionIteratorWithIndex" << std::endl;
+  SCOPED_TRACE("ImageRegionIteratorWithIndex");
   std::cout << "\tTime   = " << elapsedTime << std::endl;
   std::cout << "\tPixels = " << i << std::endl;
 

@@ -294,7 +294,6 @@ TEST(KmeansModelEstimator, ConvertedLegacyTest)
             << std::endl;
   std::cout << "The maximum number of attempted splits in codebook: " << applyKmeansEstimator->GetMaxSplitAttempts()
             << std::endl;
-  std::cout << "  " << std::endl;
 
   // Testing the distance of the first pixel to the centroids; identify the class
   // closest to the fist pixel.

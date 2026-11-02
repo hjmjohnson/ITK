@@ -94,7 +94,4 @@ TEST(RandomImageSourceAttributes, ConvertedLegacyTest)
 
     itkRandomImageSourceAttributesTestHelper<ImageType3D>(size, spacing, origin, direction, min, max);
   }
-
-
-  std::cout << "Test finished." << std::endl;
 }

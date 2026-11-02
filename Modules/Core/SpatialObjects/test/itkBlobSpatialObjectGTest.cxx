@@ -27,7 +27,6 @@ TEST(BlobSpatialObject, ConvertedLegacyTest)
   using BlobPointType = BlobType::BlobPointType;
   using PointType = BlobType::PointType;
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing BlobSpatialObject:" << std::endl << std::endl;
 
   BlobType::BlobPointListType list;
@@ -69,15 +68,13 @@ TEST(BlobSpatialObject, ConvertedLegacyTest)
 
   // Number of points
   std::cout << "Testing Consistency: " << std::endl;
-  std::cout << "Number of Points: ";
+  SCOPED_TRACE("Number of Points:");
 
   EXPECT_EQ(blob->GetPoints().size(), 10u) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
 
   // Point consistency
-  std::cout << "Point consistency: ";
+  SCOPED_TRACE("Point consistency:");
 
   auto it = blob->GetPoints().begin();
 
@@ -92,10 +89,8 @@ TEST(BlobSpatialObject, ConvertedLegacyTest)
     i++;
   }
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Point consistency
-  std::cout << "Is Inside: ";
+  SCOPED_TRACE("Is Inside:");
   itk::Point<double, 3> in;
   in[0] = 1;
   in[1] = 2;
@@ -109,9 +104,7 @@ TEST(BlobSpatialObject, ConvertedLegacyTest)
 
   EXPECT_FALSE(blob->IsInsideInWorldSpace(out)) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
-  std::cout << "Color: ";
+  SCOPED_TRACE("Color:");
 
   it = blob->GetPoints().begin();
 
@@ -130,24 +123,18 @@ TEST(BlobSpatialObject, ConvertedLegacyTest)
     it++;
     i++;
   }
-  std::cout << "[PASSED]" << std::endl;
 
   // Testing IsEvaluableAt()
-  std::cout << "IsEvaluableAt: ";
+  SCOPED_TRACE("IsEvaluableAt:");
   EXPECT_TRUE(blob->IsEvaluableAtInWorldSpace(in)) << "[FAILED]";
   EXPECT_FALSE(blob->IsEvaluableAtInWorldSpace(out)) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
 
   // Testing IsEvaluableAt()
-  std::cout << "ValueAt: ";
+  SCOPED_TRACE("ValueAt:");
 
   double value = NAN;
   EXPECT_TRUE(blob->ValueAtInWorldSpace(in, value)) << "[FAILED]";
 
   EXPECT_EQ(value, 1.0) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
-
-
-  std::cout << "Test finished" << std::endl;
 }

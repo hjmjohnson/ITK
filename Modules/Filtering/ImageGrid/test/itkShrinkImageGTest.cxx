@@ -31,7 +31,7 @@ TEST(ShrinkImageFilter, ConvertedLegacyTest)
   const itk::FileOutputWindow::Pointer fow = itk::FileOutputWindow::New();
   fow->SetInstance(fow);
 
-  std::cout << "Shrink an image by (2,3)" << std::endl;
+  SCOPED_TRACE("Shrink an image by (2,3)");
 
   // type alias to simplify the syntax
   using SimpleImage = itk::Image<short, 2>;
@@ -124,7 +124,7 @@ TEST(ShrinkImageFilter, ConvertedLegacyTest)
   }
 
   // Now test shrinking by 2x2
-  std::cout << "Shrink the image by (2,2) instead." << std::endl;
+  SCOPED_TRACE("Shrink the image by (2,2) instead.");
   std::cout << std::flush;
 
   factors[1] = 2;
@@ -184,7 +184,7 @@ TEST(ShrinkImageFilter, ConvertedLegacyTest)
   requestedRegion = shrink->GetOutput()->GetRequestedRegion();
   iterator2 = itk::ImageRegionIterator<ShortImage>(shrink->GetOutput(), requestedRegion);
 
-  std::cout << "Output image" << std::endl;
+  SCOPED_TRACE("Output image");
   std::cout << std::flush;
   for (; !iterator2.IsAtEnd(); ++iterator2)
   {

@@ -206,7 +206,7 @@ TEST(ImageAdaptorInterpolateImageFunction, ConvertedLegacyTest)
 
   /* Test evaluation at continuous indices and corresponding
      geometric points */
-  std::cout << "Evaluate at: " << std::endl;
+  SCOPED_TRACE("Evaluate at:");
   OutputType          output = NAN;
   ContinuousIndexType cindex;
   PointType           point;

@@ -68,7 +68,7 @@ TEST(PolyLineParametricPath, ConvertedLegacyTest)
   std::cout << "Incrementing the input from 0.5 to " << input << ": " << offset << std::endl;
 
   // Test a degenerate path
-  std::cout << "Generating degenerate path" << std::endl;
+  SCOPED_TRACE("Generating degenerate path");
   auto path2 = PathType::New();
 
   // Add a bunch of points closely spaced together
@@ -85,7 +85,7 @@ TEST(PolyLineParametricPath, ConvertedLegacyTest)
 
   constexpr PathType::OffsetType zeroOffset{};
 
-  std::cout << "Starting degenerate path test" << std::endl;
+  SCOPED_TRACE("Starting degenerate path test");
   while (true)
   {
     offset = path2->IncrementInput(path2Input);

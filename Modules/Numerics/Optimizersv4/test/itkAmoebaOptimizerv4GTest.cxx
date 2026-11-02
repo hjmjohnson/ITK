@@ -302,7 +302,7 @@ private:
 TEST(AmoebaOptimizerv4, AmoebaTest1)
 {
 
-  std::cout << "Amoeba Optimizer Test 1\n \n";
+  SCOPED_TRACE("Amoeba Optimizer Test 1");
 
   using OptimizerType = itk::AmoebaOptimizerv4;
 
@@ -353,7 +353,7 @@ TEST(AmoebaOptimizerv4, AmoebaTest1)
 
   // Set the initial position by setting the metric
   // parameters.
-  std::cout << "Set metric parameters." << std::endl;
+  SCOPED_TRACE("Set metric parameters.");
   metric->SetParameters(initialValue);
 
   // Test exceptions
@@ -372,13 +372,13 @@ TEST(AmoebaOptimizerv4, AmoebaTest1)
   try
   {
     std::cout << "Run for " << itkOptimizer->GetNumberOfIterations();
-    std::cout << " iterations or less." << std::endl;
+    SCOPED_TRACE("iterations or less.");
 
     itkOptimizer->StartOptimization();
 
     itkOptimizer->SetNumberOfIterations(100);
     std::cout << "Continue for " << itkOptimizer->GetNumberOfIterations();
-    std::cout << " iterations or less." << std::endl;
+    SCOPED_TRACE("iterations or less.");
 
     OptimizerType::ParametersType currentPosition = itkOptimizer->GetCurrentPosition();
     metric->SetParameters(currentPosition);
@@ -412,7 +412,7 @@ TEST(AmoebaOptimizerv4, AmoebaTest1)
   }
 
   // Get the final value of the optimizer
-  std::cout << "Testing optimizers GetValue() : ";
+  SCOPED_TRACE("Testing optimizers GetValue() :");
   const OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
   EXPECT_NEAR(finalValue, -9.99998, 0.01);
 }
@@ -422,7 +422,7 @@ TEST(AmoebaOptimizerv4, AmoebaTest1)
  */
 TEST(AmoebaOptimizerv4, AmoebaTest2)
 {
-  std::cout << "Amoeba Optimizer Test 2\n \n";
+  SCOPED_TRACE("Amoeba Optimizer Test 2");
 
   using OptimizerType = itk::AmoebaOptimizerv4;
   auto itkOptimizer = OptimizerType::New();
@@ -482,7 +482,7 @@ TEST(AmoebaOptimizerv4, AmoebaTest2)
     std::cout << "Standard Amoeba:\n";
     std::cout << "Known parameters   = " << knownParameters << "   ";
     std::cout << "Estimated parameters = " << finalParameters << std::endl;
-    std::cout << "Converged to local minimum." << std::endl;
+    SCOPED_TRACE("Converged to local minimum.");
     EXPECT_NEAR(finalParameters[0], knownParameters, xTolerance);
 
     // run again using multiple restarts
@@ -510,7 +510,7 @@ TEST(AmoebaOptimizerv4, AmoebaTest2)
     std::cout << "Amoeba with restarts:\n";
     std::cout << "Known parameters   = " << knownParameters << "   ";
     std::cout << "Estimated parameters = " << finalParameters << std::endl;
-    std::cout << "Converged to global minimum." << std::endl;
+    SCOPED_TRACE("Converged to global minimum.");
 
     EXPECT_NEAR(finalParameters[0], knownParameters, xTolerance);
   }

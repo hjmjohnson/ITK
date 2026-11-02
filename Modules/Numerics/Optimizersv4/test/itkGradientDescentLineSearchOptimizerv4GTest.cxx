@@ -233,13 +233,13 @@ TEST(GradientDescentLineSearchOptimizerv4, ConvertedLegacyTest)
   itkOptimizer->SetNumberOfIterations(50);
 
   // test the optimization
-  std::cout << "Test optimization 1:" << std::endl;
+  SCOPED_TRACE("Test optimization 1:");
   ASSERT_NO_FATAL_FAILURE(GradientDescentLineSearchOptimizerv4RunTest(itkOptimizer));
 
   //
   // test with non-identity scales
   //
-  std::cout << "Test optimization with non-identity scales:" << std::endl;
+  SCOPED_TRACE("Test optimization with non-identity scales:");
   ScalesType scales(metric->GetNumberOfLocalParameters(), 0.5);
   itkOptimizer->SetScales(scales);
 

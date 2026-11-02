@@ -59,32 +59,28 @@ TEST(QuadEdgeMeshBasicLayer, ConvertedLegacyTest)
   PrimalType * e[5];
 
   //////////////////////////////////////////////////////////
-  std::cout << "Creating edges" << std::endl;
+  SCOPED_TRACE("Creating edges");
   {
     PrimalType defaultConstructed; // default-ctor smoke test; real edges built below
     (void)defaultConstructed;
   }
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
-  std::cout << "Testing MakeEdge" << std::endl;
+  SCOPED_TRACE("Testing MakeEdge");
   for (auto & i : e)
   {
     i = itkQuadEdgeMeshBasicLayerTestHelper::MakeQuadEdges();
   }
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
-  std::cout << "Testing ring for Origin() unset values" << std::endl;
+  SCOPED_TRACE("Testing ring for Origin() unset values");
   for (int i = 0; i < 5; ++i)
   {
     EXPECT_FALSE(e[i]->IsOriginSet()) << "IsOriginSet() should not be set for edge number " << i << ".";
   }
 
-  std::cout << "Passed" << std::endl;
-
   //////////////////////////////////////////////////////////
-  std::cout << "Setting Origin() and Destination() values... " << std::endl;
+  SCOPED_TRACE("Setting Origin() and Destination() values...");
   const int org[5] = { 0, 1, 2, 3, 0 };
   const int dest[5] = { 1, 2, 3, 0, 2 };
 
@@ -93,48 +89,43 @@ TEST(QuadEdgeMeshBasicLayer, ConvertedLegacyTest)
     e[i]->SetOrigin(org[i]);
     e[i]->SetDestination(dest[i]);
   }
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
-  std::cout << "Testing ring for Origin() set values... " << std::endl;
+  SCOPED_TRACE("Testing ring for Origin() set values...");
   for (int i = 0; i < 5; ++i)
   {
     EXPECT_TRUE(e[i]->IsOriginSet()) << "IsOriginSet() nullptr value failed for edge number " << i << ".";
   } // rof
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
-  std::cout << "Splicing... " << std::endl;
+  SCOPED_TRACE("Splicing...");
   e[0]->Splice(e[4]);
   e[4]->Splice(e[3]->GetSym());
   e[1]->Splice(e[0]->GetSym());
   e[2]->Splice(e[4]->GetSym());
   e[4]->GetSym()->Splice(e[1]->GetSym());
   e[3]->Splice(e[2]->GetSym());
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
-  std::cout << "Testing Origin() and Destination() adjacency... " << std::endl;
+  SCOPED_TRACE("Testing Origin() and Destination() adjacency...");
   for (int i = 0; i < 5; ++i)
   {
     EXPECT_EQ(e[i]->GetOrigin(), org[i]) << "Erroneous GetOrigin() on edge number " << i << ".";
     EXPECT_EQ(e[i]->GetDestination(), dest[i]) << "Erroneous GetDestination() on edge number " << i << ".";
   } // rof
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
-  std::cout << "Setting faces... " << std::endl;
+  SCOPED_TRACE("Setting faces...");
   e[0]->SetLeft(0);
   e[1]->SetLeft(0);
   e[4]->SetRight(0);
   e[2]->SetLeft(1);
   e[3]->SetLeft(1);
   e[4]->SetLeft(1);
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
   using IteratorGeom = PrimalType::IteratorGeom;
-  std::cout << "Testing Onext iterators... " << std::endl;
+  SCOPED_TRACE("Testing Onext iterators...");
   const int onextDestination[5][3] = { { 1, 2, 3 },
                                        { 2, 0, 0 }, // Last 0 is a dummy
                                        { 3, 0, 1 },
@@ -149,10 +140,9 @@ TEST(QuadEdgeMeshBasicLayer, ConvertedLegacyTest)
         << "Erroneous GetDestination() on edge number " << edge << ".";
     }
   }
-  std::cout << "Passed" << std::endl;
 
   //////////////////////////////////////////////////////////
-  std::cout << "Testing Lnext iterators... " << std::endl;
+  SCOPED_TRACE("Testing Lnext iterators...");
   const int lnextDestination[5][3] = { { 0, 1, 2 }, { 1, 2, 0 }, { 2, 3, 0 }, { 3, 0, 2 }, { 0, 2, 3 } };
   for (int edge = 0; edge < 5; ++edge)
   {
@@ -163,7 +153,7 @@ TEST(QuadEdgeMeshBasicLayer, ConvertedLegacyTest)
     }
   }
 
-  std::cout << "on Sym()... " << std::endl;
+  SCOPED_TRACE("on Sym()...");
   constexpr int lnextDestinationOnSym[3]{ 2, 0, 1 };
   int           test = 0;
   for (IteratorGeom itLnext = e[4]->GetSym()->BeginGeomLnext(); itLnext != e[4]->GetSym()->EndGeomLnext();
@@ -171,11 +161,10 @@ TEST(QuadEdgeMeshBasicLayer, ConvertedLegacyTest)
   {
     EXPECT_EQ(*itLnext, lnextDestinationOnSym[test]) << "Erroneous GetDestination() on edge number 4.";
   }
-  std::cout << "Passed" << std::endl;
 
 
   //////////////////////////////////////////////////////////
-  std::cout << "Testing Sym iterators... " << std::endl;
+  SCOPED_TRACE("Testing Sym iterators...");
   const int symDestination[5][3] = { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 0 }, { 0, 2 } };
   for (int edge = 0; edge < 5; ++edge)
   {
@@ -185,7 +174,6 @@ TEST(QuadEdgeMeshBasicLayer, ConvertedLegacyTest)
       EXPECT_EQ(*itSym, symDestination[edge][test]) << "Erroneous GetDestination() on edge number " << edge << ".";
     }
   }
-  std::cout << "Passed" << std::endl;
 
   // Free the five quad-edges; each owns a four-element Rot ring.
   for (auto & i : e)

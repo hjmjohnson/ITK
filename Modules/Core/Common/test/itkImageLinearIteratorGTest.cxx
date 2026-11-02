@@ -23,7 +23,7 @@
 
 TEST(ImageLinearIterator, ConvertedLegacyTest)
 {
-  std::cout << "Creating an image of indices" << std::endl;
+  SCOPED_TRACE("Creating an image of indices");
 
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -73,7 +73,7 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
   ot.GoToBegin();
   ot.SetDirection(0); // 0=x, 1=y, 2=z
 
-  std::cout << "Verifying iterator... ";
+  SCOPED_TRACE("Verifying iterator...");
 
   while (!ot.IsAtEnd())
   {
@@ -85,7 +85,6 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
     }
     ot.NextLine();
   }
-  std::cout << "   Done ! " << std::endl;
 
   // Verification
   ConstIteratorType cot(myConstImage, region0);
@@ -97,7 +96,7 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
   cot.GoToBegin();
   cot.SetDirection(0); // 0=x, 1=y, 2=z
 
-  std::cout << "Verifying const iterator... ";
+  SCOPED_TRACE("Verifying const iterator...");
 
   while (!cot.IsAtEnd())
   {
@@ -109,7 +108,6 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
     }
     cot.NextLine();
   }
-  std::cout << "   Done ! " << std::endl;
 
   // Test GoToReverseBeginOfLine()
   cot.GoToBegin();
@@ -120,7 +118,7 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
 
   // Verification
   {
-    std::cout << "Verifying iterator in reverse direction... ";
+    SCOPED_TRACE("Verifying iterator in reverse direction...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -131,38 +129,37 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
 
     const ImageType::RegionType region{ start, size };
 
-    std::cout << "  IteratorType ior( myImage, region );" << std::endl;
+    SCOPED_TRACE("IteratorType ior( myImage, region );");
     IteratorType ior(myImage, region);
 
     std::cout << "    GetIndex(): " << ior.GetIndex() << std::endl;
-    std::cout << "  ior.GoToReverseBegin();" << std::endl;
+    SCOPED_TRACE("ior.GoToReverseBegin();");
     ior.GoToReverseBegin();
     std::cout << "    GetIndex(): " << ior.GetIndex() << std::endl;
-    std::cout << "  ior.SetDirection( 0 ); // 0=x, 1=y, 2=z" << std::endl;
+    SCOPED_TRACE("ior.SetDirection( 0 ); // 0=x, 1=y, 2=z");
     ior.SetDirection(0); // 0=x, 1=y, 2=z
     std::cout << " ior.GetDirection(): " << ior.GetDirection() << std::endl;
-    std::cout << "  while( !ior.IsAtReverseEnd() )" << std::endl;
+    SCOPED_TRACE("while( !ior.IsAtReverseEnd() )");
     while (!ior.IsAtReverseEnd())
     {
-      std::cout << "    while( !ior.IsAtReverseEndOfLine() )" << std::endl;
+      SCOPED_TRACE("while( !ior.IsAtReverseEndOfLine() )");
       std::cout << "    GetIndex(): " << ior.GetIndex() << std::endl;
       while (!ior.IsAtReverseEndOfLine())
       {
         index0 = ior.GetIndex();
         EXPECT_EQ(ior.Get(), index0) << "Values don't correspond to what was stored. Test failed at index " << index0;
-        std::cout << "      --ior;" << std::endl;
+        SCOPED_TRACE("--ior;");
         --ior;
         std::cout << "    GetIndex(): " << ior.GetIndex() << std::endl;
       }
-      std::cout << "    ior.PreviousLine();" << std::endl;
+      SCOPED_TRACE("ior.PreviousLine();");
       ior.PreviousLine();
       std::cout << "    GetIndex(): " << ior.GetIndex() << std::endl;
     }
-    std::cout << "   Done ! " << std::endl;
   }
 
   // Verification
-  std::cout << "Verifying const iterator in reverse direction... ";
+  SCOPED_TRACE("Verifying const iterator in reverse direction...");
 
   ConstIteratorType cor(myImage, region0);
 
@@ -179,12 +176,11 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
     }
     cor.PreviousLine();
   }
-  std::cout << "   Done ! " << std::endl;
 
 
   // Verification of GotoBeginOfLine() in the iterator
   {
-    std::cout << "Verifying  iterator GoToBeginOfLine()... ";
+    SCOPED_TRACE("Verifying  iterator GoToBeginOfLine()...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -214,14 +210,12 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
     bot.GoToBeginOfLine(); // go back to the begin of the line
 
     EXPECT_EQ(bot.GetIndex(), testIndex) << "GoToBeginOfLine() test failed";
-
-    std::cout << "   Done ! " << std::endl;
   }
 
 
   // Verification of GotoBeginOfLine() in the const iterator
   {
-    std::cout << "Verifying const iterator GoToBeginOfLine()... ";
+    SCOPED_TRACE("Verifying const iterator GoToBeginOfLine()...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -251,14 +245,12 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
     cbot.GoToBeginOfLine(); // go back to the begin of the line
 
     EXPECT_EQ(cbot.GetIndex(), testIndex) << "GoToBeginOfLine() test failed";
-
-    std::cout << "   Done ! " << std::endl;
   }
 
 
   // Verification of the Iterator in a subregion of the image
   {
-    std::cout << "Verifying Iterator in a Region smaller than the whole image... ";
+    SCOPED_TRACE("Verifying Iterator in a Region smaller than the whole image...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -287,14 +279,12 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
       }
       cbot.NextLine();
     }
-
-    std::cout << "   Done ! " << std::endl;
   }
 
 
   // Verification of the Const Iterator in a subregion of the image
   {
-    std::cout << "Verifying Const Iterator in a Region smaller than the whole image... ";
+    SCOPED_TRACE("Verifying Const Iterator in a Region smaller than the whole image...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -323,14 +313,12 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
       }
       cbot.NextLine();
     }
-
-    std::cout << "   Done ! " << std::endl;
   }
 
 
   // Verification of the Iterator NextLine() in the middle of a line
   {
-    std::cout << "Verifying Iterator NextLine() in the middle of a line";
+    SCOPED_TRACE("Verifying Iterator NextLine() in the middle of a line");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -341,39 +329,37 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
 
     const ImageType::RegionType region{ start, size };
 
-    std::cout << "    IteratorType cbot( myImage, region );" << std::endl;
+    SCOPED_TRACE("IteratorType cbot( myImage, region );");
     IteratorType cbot(myImage, region);
 
-    std::cout << "    cbot.SetDirection( 0 ); // 0=x, 1=y, 2=z" << std::endl;
+    SCOPED_TRACE("cbot.SetDirection( 0 ); // 0=x, 1=y, 2=z");
     cbot.SetDirection(0); // 0=x, 1=y, 2=z
-    std::cout << "    cbot.GoToBegin();" << std::endl;
+    SCOPED_TRACE("cbot.GoToBegin();");
     cbot.GoToBegin();
     std::cout << "    GetIndex(): " << cbot.GetIndex() << std::endl;
     // go to the middle of the first line
-    std::cout << "    for(unsigned int i=0; ..." << std::endl;
+    SCOPED_TRACE("for(unsigned int i=0; ...");
     for (unsigned int i = 0; i < size[0] / 2; ++i)
     {
-      std::cout << "      ++cbot;" << std::endl;
+      SCOPED_TRACE("++cbot;");
       ++cbot;
       std::cout << "      GetIndex(): " << cbot.GetIndex() << std::endl;
     }
 
     // go to next line
-    std::cout << "    cbot.NextLine();" << std::endl;
+    SCOPED_TRACE("cbot.NextLine();");
     cbot.NextLine();
     std::cout << "    GetIndex(): " << cbot.GetIndex() << std::endl;
 
-    std::cout << "    const ImageType::IndexType testIndex = cbot.Get();" << std::endl;
+    SCOPED_TRACE("const ImageType::IndexType testIndex = cbot.Get();");
     const ImageType::IndexType testIndex = cbot.Get();
-    std::cout << "    if( cbot.GetIndex() != testIndex )" << std::endl;
+    SCOPED_TRACE("if( cbot.GetIndex() != testIndex )");
     EXPECT_EQ(cbot.GetIndex(), testIndex) << "NextLine() test failed";
-
-    std::cout << "   Done ! " << std::endl;
   }
 
   // Verification of the Iterator PreviousLine() in the middle of a line
   {
-    std::cout << "Verifying Iterator PreviousLine() in the middle of a line";
+    SCOPED_TRACE("Verifying Iterator PreviousLine() in the middle of a line");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -384,21 +370,21 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
 
     const ImageType::RegionType region{ start, size };
 
-    std::cout << "    IteratorType cbot( myImage, region );" << std::endl;
+    SCOPED_TRACE("IteratorType cbot( myImage, region );");
     IteratorType cbot(myImage, region);
 
-    std::cout << "    cbot.SetDirection( 0 ); // 0=x, 1=y, 2=z" << std::endl;
+    SCOPED_TRACE("cbot.SetDirection( 0 ); // 0=x, 1=y, 2=z");
     cbot.SetDirection(0); // 0=x, 1=y, 2=z
-    std::cout << "    cbot.GoToBegin();" << std::endl;
+    SCOPED_TRACE("cbot.GoToBegin();");
     cbot.GoToBegin();
     std::cout << "    GetIndex(): " << cbot.GetIndex() << std::endl;
     // go to the middle of the second line
-    std::cout << "    for(unsigned int i=0; ..." << std::endl;
+    SCOPED_TRACE("for(unsigned int i=0; ...");
     for (unsigned int i = 0; i < size[0] + size[0] / 2; ++i)
     {
-      std::cout << "      ++cbot;" << std::endl;
+      SCOPED_TRACE("++cbot;");
       ++cbot;
-      std::cout << "      if(cbot.IsAtEndOfLine())" << std::endl;
+      SCOPED_TRACE("if(cbot.IsAtEndOfLine())");
       if (cbot.IsAtEndOfLine())
       {
         std::cout << "        cbot.NextLine();" << std::endl;
@@ -408,21 +394,19 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
     }
 
     // go to previous line
-    std::cout << "    cbot.PreviousLine();" << std::endl;
+    SCOPED_TRACE("cbot.PreviousLine();");
     cbot.PreviousLine();
     std::cout << "    GetIndex(): " << cbot.GetIndex() << std::endl;
 
-    std::cout << "    const ImageType::IndexType testIndex = cbot.Get();" << std::endl;
+    SCOPED_TRACE("const ImageType::IndexType testIndex = cbot.Get();");
     const ImageType::IndexType testIndex = cbot.Get();
-    std::cout << "    if( cbot.GetIndex() != testIndex )" << std::endl;
+    SCOPED_TRACE("if( cbot.GetIndex() != testIndex )");
     EXPECT_EQ(cbot.GetIndex(), testIndex) << "PreviousLine() test failed";
-
-    std::cout << "   Done ! " << std::endl;
   }
 
   // Verification of the ConstIterator NextLine() in the middle of a line
   {
-    std::cout << "Verifying ConstIterator NextLine() in the middle of a line";
+    SCOPED_TRACE("Verifying ConstIterator NextLine() in the middle of a line");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -449,13 +433,11 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
 
     const ImageType::IndexType testIndex = cbot.Get();
     EXPECT_EQ(cbot.GetIndex(), testIndex) << "NextLine() test failed";
-
-    std::cout << "   Done ! " << std::endl;
   }
 
   // Verification of the ConstIterator PreviousLine() in the middle of a line
   {
-    std::cout << "Verifying ConstIterator PreviousLine() in the middle of a line";
+    SCOPED_TRACE("Verifying ConstIterator PreviousLine() in the middle of a line");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -486,9 +468,5 @@ TEST(ImageLinearIterator, ConvertedLegacyTest)
 
     const ImageType::IndexType testIndex = cbot.Get();
     EXPECT_EQ(cbot.GetIndex(), testIndex) << "PreviousLine() test failed";
-
-    std::cout << "   Done ! " << std::endl;
   }
-
-  std::cout << "Test passed" << std::endl;
 }

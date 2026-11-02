@@ -36,7 +36,6 @@ TEST(QuadEdgeMeshEulerOperatorFlip, ConvertedLegacyTest)
 
 #ifndef NDEBUG
   EXPECT_EQ(flipEdge->Evaluate((QEType *)1), nullptr);
-  std::cout << "OK" << std::endl;
 #endif
 
   std::cout << flipEdge->GetNameOfClass() << std::endl;
@@ -49,11 +48,9 @@ TEST(QuadEdgeMeshEulerOperatorFlip, ConvertedLegacyTest)
   auto * dummy = new QEType;
   EXPECT_EQ(flipEdge->Evaluate(dummy), nullptr);
   delete dummy;
-  std::cout << "OK" << std::endl;
   std::cout << "     "
             << "Test No QE Input";
   EXPECT_EQ(flipEdge->Evaluate((QEType *)nullptr), nullptr);
-  std::cout << "OK" << std::endl;
 #endif
 
   mesh->LightWeightDeleteEdge(mesh->FindEdge(12, 18));
@@ -74,7 +71,6 @@ TEST(QuadEdgeMeshEulerOperatorFlip, ConvertedLegacyTest)
   EXPECT_EQ(mesh->GetPoint(6).GetValence(), 5) << "wrong valence for vertex 6";
   EXPECT_EQ(mesh->GetPoint(11).GetValence(), 7) << "wrong valence for vertex 11";
   EXPECT_EQ(mesh->GetPoint(7).GetValence(), 7) << "wrong valence for vertex 7";
-  std::cout << ".OK" << std::endl;
   // Checking invariance (i.e. FlipEdge is its own inverse):
   std::cout << "     "
             << "Check FlipEdge(FlipEdge()) invariance (possible for triangles).";
@@ -85,7 +81,6 @@ TEST(QuadEdgeMeshEulerOperatorFlip, ConvertedLegacyTest)
   EXPECT_EQ(mesh->GetPoint(6).GetValence(), 6) << "wrong valence for vertex 6";
   EXPECT_EQ(mesh->GetPoint(11).GetValence(), 6) << "wrong valence for vertex 11";
   EXPECT_EQ(mesh->GetPoint(7).GetValence(), 6) << "wrong valence for vertex 7";
-  std::cout << "OK" << std::endl;
   std::cout << "Checking FlipEdge."
             << "OK" << std::endl
             << std::endl;

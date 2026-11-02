@@ -34,7 +34,7 @@ TEST(QuadEdgeMeshEulerOperatorSplitEdge, ConvertedLegacyTest)
   //          Split Edge
   //
   /////////////////////////////////////////
-  std::cout << "Checking SplitEdge." << std::endl;
+  SCOPED_TRACE("Checking SplitEdge.");
   const MeshPointer mesh = MeshType::New();
   CreateSquareTriangularMesh<MeshType>(mesh);
 
@@ -42,7 +42,6 @@ TEST(QuadEdgeMeshEulerOperatorSplitEdge, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No Mesh Input";
   EXPECT_EQ(splitEdge->Evaluate((QEType *)nullptr), nullptr);
-  std::cout << "OK" << std::endl;
 
   EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorSplitEdgeFunction"),
             std::string_view(splitEdge->GetNameOfClass()));
@@ -51,13 +50,10 @@ TEST(QuadEdgeMeshEulerOperatorSplitEdge, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No QE Input";
   EXPECT_EQ(splitEdge->Evaluate((QEType *)nullptr), nullptr);
-  std::cout << "OK" << std::endl;
 
-  std::cout << "     ";
-  std::cout << "Split an internal edge (possible).";
+  SCOPED_TRACE("Split an internal edge (possible).");
   EXPECT_NE(splitEdge->Evaluate(mesh->FindEdge(6, 12)), nullptr);
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 26, 57, 32, 1, 0));
-  std::cout << ".OK" << std::endl;
 
   std::cout << "Checking SplitEdge."
             << "OK" << std::endl

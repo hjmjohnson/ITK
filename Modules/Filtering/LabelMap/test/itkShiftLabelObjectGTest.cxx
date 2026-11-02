@@ -69,7 +69,7 @@ TEST(ShiftLabelObject, ConvertedLegacyTest)
 
   map->Print(std::cout);
 
-  std::cout << "Printing out map." << std::endl;
+  SCOPED_TRACE("Printing out map.");
   for (int ctrI = 0; ctrI < 11; ++ctrI)
   {
     for (int ctrJ = 0; ctrJ < 11; ++ctrJ)

@@ -27,7 +27,6 @@ TEST(LineSpatialObject, ConvertedLegacyTest)
   using LinePointType = LineType::LinePointType;
   using VectorType = itk::CovariantVector<double, 3>;
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing LineSpatialObject:" << std::endl << std::endl;
 
   LineType::LinePointListType list;
@@ -66,15 +65,13 @@ TEST(LineSpatialObject, ConvertedLegacyTest)
 
   // Number of points
   std::cout << "Testing Consistency: " << std::endl;
-  std::cout << "Number of Points: ";
+  SCOPED_TRACE("Number of Points:");
 
   EXPECT_EQ(line->GetPoints().size(), 10u) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
 
   // Point consistency
-  std::cout << "Point consistency: ";
+  SCOPED_TRACE("Point consistency:");
 
   auto it = line->GetPoints().begin();
 
@@ -93,10 +90,8 @@ TEST(LineSpatialObject, ConvertedLegacyTest)
     i++;
   }
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Point consistency
-  std::cout << "Is Inside: ";
+  SCOPED_TRACE("Is Inside:");
   itk::Point<double, 3> in;
   in[0] = 1;
   in[1] = 2;
@@ -109,23 +104,20 @@ TEST(LineSpatialObject, ConvertedLegacyTest)
   EXPECT_TRUE(line->IsInsideInWorldSpace(in)) << "[FAILED]";
 
   EXPECT_FALSE(line->IsInsideInWorldSpace(out)) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
   // Testing IsEvaluableAt()
-  std::cout << "IsEvaluableAt: ";
+  SCOPED_TRACE("IsEvaluableAt:");
   EXPECT_TRUE(line->IsEvaluableAtInWorldSpace(in)) << "[FAILED]";
   EXPECT_FALSE(line->IsEvaluableAtInWorldSpace(out)) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
 
   // Testing IsEvaluableAt()
-  std::cout << "ValueAt: ";
+  SCOPED_TRACE("ValueAt:");
 
   double value = NAN;
   EXPECT_TRUE(line->ValueAtInWorldSpace(in, value)) << "[FAILED]";
 
   EXPECT_EQ(value, 1) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
   // Test Copy and Assignment for LinePointType
   {
@@ -166,7 +158,4 @@ TEST(LineSpatialObject, ConvertedLegacyTest)
       }
     }
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

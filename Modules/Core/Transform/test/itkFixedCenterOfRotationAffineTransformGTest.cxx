@@ -31,7 +31,7 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   FCoRAffine2DType::InputVectorType vector2 = id2->GetOffsetComponent();
   FCoRAffine2DType::InputPointType  point2 = id2->GetCenterOfRotationComponent();
 
-  std::cout << "Instantiation of an identity Transform: ";
+  SCOPED_TRACE("Instantiation of an identity Transform:");
 
   bool fail = false;
   for (unsigned int i = 0; i < 2; ++i)
@@ -55,8 +55,6 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
 
   EXPECT_FALSE(fail) << "[FAILURE]";
 
-  std::cout << "[SUCCESS]" << std::endl;
-
 
   /* Create and show a simple 2D transform from given parameters */
   matrix2[0][0] = 1.0;
@@ -73,7 +71,7 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   aff2->SetMatrixComponent(matrix2);
   aff2->SetOffsetComponent(vector2);
 
-  std::cout << "Instantiation of a given 2D transform: ";
+  SCOPED_TRACE("Instantiation of a given 2D transform:");
 
   matrix2 = aff2->GetMatrixComponent();
   vector2 = aff2->GetOffsetComponent();
@@ -87,8 +85,6 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   EXPECT_EQ(vector2[1], 6.0) << "[FAILURE]";
   EXPECT_EQ(point2[0], 1.0) << "[FAILURE]";
   EXPECT_EQ(point2[1], 1.0) << "[FAILURE]";
-
-  std::cout << "[SUCCESS]" << std::endl;
 
 
   /** Test set matrix after setting components */
@@ -115,7 +111,7 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   vector2 = aff2->GetOffsetComponent();
   const double * resultingScale = aff2->GetScaleComponent();
 
-  std::cout << "Modify the affine matrix: ";
+  SCOPED_TRACE("Modify the affine matrix:");
 
   EXPECT_EQ(matrix2[0][0], 1.0) << "[FAILURE]";
   EXPECT_EQ(matrix2[0][1], 2.0) << "[FAILURE]";
@@ -128,11 +124,9 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   EXPECT_EQ(resultingScale[0], 2.0) << "[FAILURE]";
   EXPECT_EQ(resultingScale[1], 4.0) << "[FAILURE]";
 
-  std::cout << "[SUCCESS]" << std::endl;
-
 
   /** Try scaling */
-  std::cout << "Testing scaling: ";
+  SCOPED_TRACE("Testing scaling:");
   aff2->SetIdentity();
   aff2->SetScaleComponent(scale1);
 
@@ -143,11 +137,9 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   EXPECT_DOUBLE_EQ(matrix2[1][0], 0.0) << "[FAILURE]";
   EXPECT_DOUBLE_EQ(matrix2[1][1], 4.0) << "[FAILURE]";
 
-  std::cout << "[SUCCESS]" << std::endl;
-
 
   /** Test the parameters */
-  std::cout << "Setting/Getting parameters: ";
+  SCOPED_TRACE("Setting/Getting parameters:");
 
   FCoRAffine2DType::ParametersType parameters(6, 0);
 
@@ -176,11 +168,9 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   EXPECT_EQ(parameters2[4], 3.0) << "[FAILURE]";
   EXPECT_EQ(parameters2[5], 4.0) << "[FAILURE]";
 
-  std::cout << "[SUCCESS]" << std::endl;
-
 
   /** Testing point transformation */
-  std::cout << "Transforming Point: ";
+  SCOPED_TRACE("Transforming Point:");
 
   FCoRAffine2DType::InputPointType point;
   point[0] = 1;
@@ -206,9 +196,4 @@ TEST(FixedCenterOfRotationAffineTransform, ConvertedLegacyTest)
   }
 
   EXPECT_EQ(transformedPoint, expectedPoint) << "[FAILURE]";
-
-  std::cout << "[SUCCESS]" << std::endl;
-
-
-  std::cout << "Done!" << std::endl;
 }

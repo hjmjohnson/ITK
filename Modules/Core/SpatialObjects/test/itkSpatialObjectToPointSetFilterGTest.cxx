@@ -68,16 +68,14 @@ TEST(SpatialObjectToPointSetFilter, ConvertedLegacyTest)
 
   const PointSetType::Pointer pointSet = pointSetFilter->GetOutput();
 
-  std::cout << "Testing pointSet exists : ";
+  SCOPED_TRACE("Testing pointSet exists :");
   ASSERT_NE(pointSet.GetPointer(), nullptr) << "[FAILURE]";
-  std::cout << "[PASSED]" << std::endl;
 
-  std::cout << "Testing pointSet size : ";
+  SCOPED_TRACE("Testing pointSet size :");
   EXPECT_EQ(pointSet->GetPoints()->Size(), 10u) << "[FAILURE]" << '\n'
                                                 << "   " << pointSet->GetPoints()->Size() << " != 10 (ideal)";
-  std::cout << "[PASSED]" << std::endl;
 
-  std::cout << "Testing pointSet validity : ";
+  SCOPED_TRACE("Testing pointSet validity :");
 
   using PointIterator = PointSetType::PointsContainer::ConstIterator;
   PointIterator       pointItr = pointSet->GetPoints()->Begin();
@@ -91,7 +89,6 @@ TEST(SpatialObjectToPointSetFilter, ConvertedLegacyTest)
     val++;
     pointItr++;
   }
-  std::cout << "[PASSED]" << std::endl;
 
   // Create a group spatial object
   using Group3DType = itk::PointBasedSpatialObject<3>;
@@ -146,15 +143,13 @@ TEST(SpatialObjectToPointSetFilter, ConvertedLegacyTest)
 
   const PointSet3DType::Pointer pointSet3D = pointSetFilter3D->GetOutput();
 
-  std::cout << "Testing pointSet3D exists : ";
+  SCOPED_TRACE("Testing pointSet3D exists :");
   ASSERT_NE(pointSet3D.GetPointer(), nullptr) << "[FAILURE]";
-  std::cout << "[PASSED]" << std::endl;
 
-  std::cout << "Testing pointSet3D size : ";
+  SCOPED_TRACE("Testing pointSet3D size :");
   EXPECT_EQ(pointSet3D->GetPoints()->Size(), 20u) << "[FAILURE]";
-  std::cout << "[PASSED]" << std::endl;
 
-  std::cout << "Testing pointSet3D validity : ";
+  SCOPED_TRACE("Testing pointSet3D validity :");
 
   using PointIterator3D = PointSet3DType::PointsContainer::ConstIterator;
   PointIterator3D       pointItr2 = pointSet3D->GetPoints()->Begin();
@@ -178,8 +173,4 @@ TEST(SpatialObjectToPointSetFilter, ConvertedLegacyTest)
     val++;
     pointItr2++;
   }
-  std::cout << "[PASSED]" << std::endl;
-
-
-  std::cout << "Test finished" << std::endl;
 }

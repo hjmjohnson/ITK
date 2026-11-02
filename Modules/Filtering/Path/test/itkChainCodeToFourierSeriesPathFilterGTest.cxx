@@ -38,7 +38,7 @@ TEST(ChainCodeToFourierSeriesPathFilter, ConvertedLegacyTest)
 
 
   // Setup the path
-  std::cout << "Making a triangle Path with v0 at (30,30) -> (30,33) -> (33,33)" << std::endl;
+  SCOPED_TRACE("Making a triangle Path with v0 at (30,30) -> (30,33) -> (33,33)");
   auto v = itk::MakeFilled<VertexType>(30);
 
   auto inputPath = PolyLinePathType::New();

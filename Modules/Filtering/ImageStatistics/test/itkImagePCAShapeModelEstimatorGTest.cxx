@@ -168,8 +168,6 @@ TEST(ImagePCAShapeModelEstimator, ConvertedLegacyTest)
   {
     std::cout << eigenValues[i] << std::endl;
   }
-  std::cout << "" << std::endl;
-  std::cout << "" << std::endl;
 
 
   // Print the MeanImage
@@ -177,13 +175,12 @@ TEST(ImagePCAShapeModelEstimator, ConvertedLegacyTest)
   OutputImageIterator            outImageIt(outImage, outImage->GetBufferedRegion());
   outImageIt.GoToBegin();
 
-  std::cout << "The mean image is:" << std::endl;
+  SCOPED_TRACE("The mean image is:");
   while (!outImageIt.IsAtEnd())
   {
     std::cout << static_cast<double>(outImageIt.Get()) << ';' << std::endl;
     ++outImageIt;
   }
-  std::cout << "  " << std::endl;
 
   // Print the largest two eigen vectors
   for (unsigned int j = 1; j < NUMLARGESTPC + 1; ++j)
@@ -192,17 +189,14 @@ TEST(ImagePCAShapeModelEstimator, ConvertedLegacyTest)
     OutputImageIterator            outImage2It(outImage2, outImage2->GetBufferedRegion());
     outImage2It.GoToBegin();
 
-    std::cout << "" << std::endl;
     std::cout << "The eigen vector number: " << j << " is:" << std::endl;
     while (!outImage2It.IsAtEnd())
     {
       std::cout << static_cast<double>(outImage2It.Get()) << ';' << std::endl;
       ++outImage2It;
     }
-    std::cout << "  " << std::endl;
   }
 
   // Test for the eigen values for the test case precomputed using Matlab/Splus
-  std::cout << "" << std::endl;
   EXPECT_TRUE((eigenValues[2] < 6 || eigenValues[2] > 6.1) || (eigenValues[1] > 0.1));
 }

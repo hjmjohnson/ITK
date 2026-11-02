@@ -187,19 +187,19 @@ TEST(ImageRegionConstIteratorWithOnlyIndex, ConvertedLegacyTest)
   // test the iterators on them
 
   {
-    std::cout << "Testing with Image< char, 3 >... " << std::endl;
+    SCOPED_TRACE("Testing with Image< char, 3 >...");
     itkImageRegionConstIteratorWithOnlyIndexTestIteratorTester<itk::Image<signed char, 3>> Tester;
     EXPECT_TRUE(Tester.TestConstIterator());
   }
 
   {
-    std::cout << "Testing with ImageBase< 2 >... " << std::endl;
+    SCOPED_TRACE("Testing with ImageBase< 2 >...");
     itkImageRegionConstIteratorWithOnlyIndexTestIteratorTester<itk::ImageBase<2>> Tester;
     EXPECT_TRUE(Tester.TestConstIterator());
   }
 
   {
-    std::cout << "Testing with ImageBase< 3 >... " << std::endl;
+    SCOPED_TRACE("Testing with ImageBase< 3 >...");
     itkImageRegionConstIteratorWithOnlyIndexTestIteratorTester<itk::ImageBase<3>> Tester;
     EXPECT_TRUE(Tester.TestConstIterator());
   }

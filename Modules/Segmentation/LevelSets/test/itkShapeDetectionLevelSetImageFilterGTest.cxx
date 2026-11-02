@@ -222,8 +222,6 @@ TEST(ShapeDetectionLevelSetImageFilter, ConvertedLegacyTest)
     shapeDetection->SetPropagationScaling(0.0);
     shapeDetection->SetCurvatureScaling(1.0);
     shapeDetection->Update();
-
-    std::cout << "Test Passed. " << std::endl;
   }
   catch (const itk::ExceptionObject & err)
   {

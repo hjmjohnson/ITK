@@ -57,8 +57,7 @@ TEST(AnisotropicFourthOrderLevelSetImageFilter, ConvertedLegacyTest)
   filter->SetInput(im_init);
   filter->SetRMSChangeNormalProcessTrigger(0.1);
   std::cout << "max iteration = " << (filter->GetMaxFilterIteration()) << '\n';
-  std::cout << "Starting processing.\n";
+  SCOPED_TRACE("Starting processing.");
   filter->Update();
   filter->Print(std::cout);
-  std::cout << "Passed.\n";
 }

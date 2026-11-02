@@ -144,7 +144,7 @@ TEST(FRPROptimizer, ConvertedLegacyTest)
 
   {
     // Exercise the methods that set the optimization mode
-    std::cout << "Testing Fletch Reeves Mode" << std::endl;
+    SCOPED_TRACE("Testing Fletch Reeves Mode");
     itkOptimizer->SetToFletchReeves();
 
     itkOptimizer->SetInitialPosition(initialPosition);
@@ -187,7 +187,7 @@ TEST(FRPROptimizer, ConvertedLegacyTest)
 
   {
     // Exercise the methods that set the optimization mode
-    std::cout << "Testing Polak Ribiere Mode" << std::endl;
+    SCOPED_TRACE("Testing Polak Ribiere Mode");
     itkOptimizer->SetToPolakRibiere();
 
     itkOptimizer->SetInitialPosition(initialPosition);

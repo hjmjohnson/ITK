@@ -27,7 +27,7 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
 {
   // The legacy test driver reseeds vnl_sample before every test.
   vnl_sample_reseed(8775070);
-  std::cout << "Creating an image of indices" << std::endl;
+  SCOPED_TRACE("Creating an image of indices");
 
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -78,7 +78,7 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
 
 
   std::cout << "Verifying non-const iterator... ";
-  std::cout << "Random walk of the Iterator over the image " << std::endl;
+  SCOPED_TRACE("Random walk of the Iterator over the image");
   while (!ot.IsAtEnd())
   {
     index0 = ot.GetIndex();
@@ -86,7 +86,6 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
     std::cout << index0 << std::endl;
     ++ot;
   }
-  std::cout << "   Done ! " << std::endl;
 
 
   // Verification
@@ -96,7 +95,7 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
 
 
   std::cout << "Verifying const iterator... ";
-  std::cout << "Random walk of the Iterator over the image " << std::endl;
+  SCOPED_TRACE("Random walk of the Iterator over the image");
 
   while (!cot.IsAtEnd())
   {
@@ -105,10 +104,9 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
     std::cout << index0 << std::endl;
     ++cot;
   }
-  std::cout << "   Done ! " << std::endl;
 
   // Verification
-  std::cout << "Verifying iterator in reverse direction... " << std::endl;
+  SCOPED_TRACE("Verifying iterator in reverse direction...");
   std::cout << "Should be a random walk too (a different one)" << std::endl;
 
   RandomIteratorType ior(myImage, region0);
@@ -126,10 +124,9 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
     --ior;
   }
   std::cout << index0 << std::endl; // print the value at the beginning index
-  std::cout << "   Done ! " << std::endl;
 
   // Verification
-  std::cout << "Verifying const iterator in reverse direction... ";
+  SCOPED_TRACE("Verifying const iterator in reverse direction...");
 
   RandomConstIteratorType cor(myImage, region0);
   cor.SetNumberOfSamples(numberOfSamples); // 0=x, 1=y, 2=z
@@ -145,10 +142,9 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
     --cor;
   }
   std::cout << index0 << std::endl; // print the value at the beginning index
-  std::cout << "   Done ! " << std::endl;
 
   // Verification
-  std::cout << "Verifying const iterator in both directions... ";
+  SCOPED_TRACE("Verifying const iterator in both directions...");
 
   RandomConstIteratorType dor(myImage, region0);
   dor.SetNumberOfSamples(numberOfSamples); // 0=x, 1=y, 2=z
@@ -171,12 +167,11 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
     }
   }
   std::cout << index0 << std::endl; // print the value at the beginning index
-  std::cout << "   Done ! " << std::endl;
 
 
   // Verification of the Iterator in a subregion of the image
   {
-    std::cout << "Verifying Iterator in a Region smaller than the whole image... " << std::endl;
+    SCOPED_TRACE("Verifying Iterator in a Region smaller than the whole image...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -204,13 +199,11 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
       std::cout << index << std::endl;
       ++cbot;
     }
-
-    std::cout << "   Done ! " << std::endl;
   }
 
   // Verification of the Const Iterator in a subregion of the image
   {
-    std::cout << "Verifying Const Iterator in a Region smaller than the whole image... " << std::endl;
+    SCOPED_TRACE("Verifying Const Iterator in a Region smaller than the whole image...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -238,10 +231,5 @@ TEST(ImageRandomIterator, ConvertedLegacyTest)
 
       ++cbot;
     }
-
-    std::cout << "   Done ! " << std::endl;
   }
-
-
-  std::cout << "Test passed" << std::endl;
 }

@@ -109,7 +109,4 @@ TEST(MultiphaseDenseFiniteDifferenceImageFilter, ConvertedLegacyTest)
   unsigned int reinitializeCounter = 1;
   filter->SetReinitializeCounter(reinitializeCounter);
   EXPECT_EQ(reinitializeCounter, filter->GetReinitializeCounter());
-
-
-  std::cout << "Test finished." << std::endl;
 }

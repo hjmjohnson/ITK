@@ -219,6 +219,4 @@ TEST(GeodesicActiveContourLevelSetImageFilterZeroSigma, ConvertedLegacyTest)
   shapeDetection->SetCurvatureScaling(1.0);
   shapeDetection->SetAdvectionScaling(0.0);
   shapeDetection->Update();
-
-  std::cout << "Test Passed." << std::endl;
 }

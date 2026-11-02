@@ -76,7 +76,7 @@ TEST(STLThread, ConvertedLegacyTest)
   delete[] results;
 
   // Test other methods for coverage.
-  std::cout << "Done with primary test.  Testing more methods..." << std::endl;
+  SCOPED_TRACE("Done with primary test.  Testing more methods...");
   itk::MultiThreaderBase::SetGlobalMaximumNumberOfThreads(1);
   itk::MultiThreaderBase::SetGlobalDefaultNumberOfThreads(1);
 
@@ -91,7 +91,7 @@ TEST(STLThread, ConvertedLegacyTest)
   threadMutex.unlock();
   threader->TerminateThread(threadId);
   threadMutex.lock();
-  std::cout << "Spawned thread terminated." << std::endl;
+  SCOPED_TRACE("Spawned thread terminated.");
   threadMutex.unlock();
 #endif
 }

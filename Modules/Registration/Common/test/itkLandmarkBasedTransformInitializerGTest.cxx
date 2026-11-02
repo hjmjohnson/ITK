@@ -241,7 +241,7 @@ TEST(LandmarkBasedTransformInitializer, ConvertedLegacyTest)
 
   {
     // Test landmark alignment using Rigid 2D transform in 2 dimensions
-    std::cout << "Testing Landmark alignment with Rigid2DTransform" << std::endl;
+    SCOPED_TRACE("Testing Landmark alignment with Rigid2DTransform");
     constexpr unsigned int Dimension{ 2 };
     using FixedImageType = itk::Image<PixelType, Dimension>;
     using MovingImageType = itk::Image<PixelType, Dimension>;
@@ -436,7 +436,7 @@ TEST(LandmarkBasedTransformInitializer, ConvertedLegacyTest)
   }
 
   {
-    std::cout << "\nTesting Landmark alignment with BSplineTransform..." << std::endl;
+    SCOPED_TRACE("Testing Landmark alignment with BSplineTransform...");
     constexpr unsigned int Dimension{ 3 };
     using FixedImageType = itk::Image<PixelType, Dimension>;
     using MovingImageType = itk::Image<PixelType, Dimension>;

@@ -28,7 +28,6 @@ TEST(LandmarkSpatialObject, ConvertedLegacyTest)
   using PointType = LandmarkType::PointType;
 
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing LandmarkSpatialObject:" << std::endl << std::endl;
 
   LandmarkType::LandmarkPointListType list;
@@ -61,17 +60,15 @@ TEST(LandmarkSpatialObject, ConvertedLegacyTest)
 
   // Number of points
   std::cout << "Testing Consistency: " << std::endl;
-  std::cout << "Number of Points: ";
+  SCOPED_TRACE("Number of Points:");
 
   landmark->Print(std::cout);
 
   EXPECT_EQ(landmark->GetPoints().size(), 10u) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
 
   // Point consistency
-  std::cout << "Point consistency: ";
+  SCOPED_TRACE("Point consistency:");
 
   auto it = landmark->GetPoints().begin();
 
@@ -86,10 +83,8 @@ TEST(LandmarkSpatialObject, ConvertedLegacyTest)
     i++;
   }
 
-  std::cout << "[PASSED]" << std::endl;
-
   // Point consistency
-  std::cout << "Is Inside: ";
+  SCOPED_TRACE("Is Inside:");
   itk::Point<double, 3> in;
   in[0] = 1;
   in[1] = 2;
@@ -103,9 +98,7 @@ TEST(LandmarkSpatialObject, ConvertedLegacyTest)
 
   EXPECT_FALSE(landmark->IsInsideInWorldSpace(out, LandmarkType::MaximumDepth, "")) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
-  std::cout << "Color: ";
+  SCOPED_TRACE("Color:");
 
   it = landmark->GetPoints().begin();
 
@@ -124,20 +117,14 @@ TEST(LandmarkSpatialObject, ConvertedLegacyTest)
     it++;
     i++;
   }
-  std::cout << "[PASSED]" << std::endl;
 
   // Testing IsEvaluableAt()
-  std::cout << "Testing IsEvaluableAt() : ";
+  SCOPED_TRACE("Testing IsEvaluableAt() :");
   EXPECT_TRUE(landmark->IsEvaluableAtInWorldSpace(in, LandmarkType::MaximumDepth, "")) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
   // Testing ValueAt()
-  std::cout << "Testing ValueAt() : ";
+  SCOPED_TRACE("Testing ValueAt() :");
   double val = 0;
   EXPECT_TRUE(landmark->ValueAtInWorldSpace(in, val, LandmarkType::MaximumDepth, "")) << "[FAILED]";
   EXPECT_EQ(val, 1) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
-
-
-  std::cout << "Test finished" << std::endl;
 }

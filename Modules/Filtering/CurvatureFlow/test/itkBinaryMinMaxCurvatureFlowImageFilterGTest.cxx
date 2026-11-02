@@ -111,7 +111,7 @@ testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size, // ND image siz
   constexpr PixelType foreground{ 0.0 };                  // intensity value of the foreground
   constexpr PixelType background{ 255.0 };                // intensity value of the background
 
-  std::cout << "Create an image of circle/sphere with noise" << std::endl;
+  SCOPED_TRACE("Create an image of circle/sphere with noise");
   auto circleImage = ImageType::New();
 
 
@@ -155,7 +155,7 @@ testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size, // ND image siz
    * output as the input in the next run.
    */
 
-  std::cout << "Run BinaryMinMaxCurvatureFlowImageFiler.." << std::endl;
+  SCOPED_TRACE("Run BinaryMinMaxCurvatureFlowImageFiler..");
 
   // set other denoiser parameters here
   denoiser->SetTimeStep(0.05);
@@ -201,7 +201,7 @@ testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size, // ND image siz
    * This test is considered as passed if the fraction of wrong
    * pixels is less than the original noise fraction.
    */
-  std::cout << "Checking the output..." << std::endl;
+  SCOPED_TRACE("Checking the output...");
   const PixelType tolerance = itk::Math::Absolute(foreground - background) * 0.1;
 
   unsigned long numPixelsWrong = 0;
@@ -271,7 +271,6 @@ testBinaryMinMaxCurvatureFlow(itk::Size<VImageDimension> & size, // ND image siz
     return EXIT_FAILURE;
   }
 
-  std::cout << "Test passed." << std::endl;
   return EXIT_SUCCESS;
 }
 } // namespace

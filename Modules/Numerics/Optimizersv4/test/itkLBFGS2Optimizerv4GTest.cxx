@@ -157,7 +157,7 @@ private:
 
 TEST(LBFGS2Optimizerv4, ConvertedLegacyTest)
 {
-  std::cout << "LBFGS2 Optimizerv4 Test \n \n";
+  SCOPED_TRACE("LBFGS2 Optimizerv4 Test");
 
   using OptimizerType = itk::LBFGS2Optimizerv4;
 
@@ -245,7 +245,7 @@ TEST(LBFGS2Optimizerv4, ConvertedLegacyTest)
 
   std::cout << "GetValue() before optimizer starts: ";
   std::cout << itkOptimizer->GetValue() << std::endl;
-  std::cout << "SetMetric." << std::endl;
+  SCOPED_TRACE("SetMetric.");
   itkOptimizer->SetMetric(metric);
 
 
@@ -258,12 +258,12 @@ TEST(LBFGS2Optimizerv4, ConvertedLegacyTest)
 
   // Set the initial position by setting the metric
   // parameters.
-  std::cout << "Set metric parameters." << std::endl;
+  SCOPED_TRACE("Set metric parameters.");
   metric->SetParameters(initialValue);
 
   std::cout << "Stop description   = " << itkOptimizer->GetStopConditionDescription() << std::endl;
 
-  std::cout << "Start optimization." << std::endl;
+  SCOPED_TRACE("Start optimization.");
   try
   {
     itkOptimizer->StartOptimization();
@@ -301,7 +301,7 @@ TEST(LBFGS2Optimizerv4, ConvertedLegacyTest)
   }
 
   // Get the final value of the optimizer
-  std::cout << "Testing GetValue() : ";
+  SCOPED_TRACE("Testing GetValue() :");
   const OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
   EXPECT_NEAR(finalValue, -10.0, 0.01);
 

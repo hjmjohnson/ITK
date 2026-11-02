@@ -111,6 +111,4 @@ TEST(RegularSphereMeshSource, ConvertedLegacyTest)
   }
 
   EXPECT_TRUE(testPassed) << "Test FAILED! ";
-
-  std::cout << "Test PASSED! " << std::endl;
 }

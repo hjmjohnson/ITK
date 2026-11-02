@@ -339,7 +339,7 @@ TEST(BSplineDeformableTransform, ConvertedLegacyTest1)
    * Exercise the SetIdentity() Method
    */
   {
-    std::cout << "Exercising SetIdentity() " << std::endl;
+    SCOPED_TRACE("Exercising SetIdentity()");
     auto transform2 = TransformType::New();
     transform2->SetGridSpacing(spacing);
     transform2->SetGridOrigin(origin);
@@ -355,8 +355,6 @@ TEST(BSplineDeformableTransform, ConvertedLegacyTest1)
                                                             << "after invoking SetIdentity() ";
     }
   } // end of SetIdentity() test
-
-  std::cout << "Test passed." << std::endl;
 }
 
 TEST(BSplineDeformableTransform, ConvertedLegacyTest2)
@@ -468,8 +466,6 @@ TEST(BSplineDeformableTransform, ConvertedLegacyTest2)
     std::cout << err << std::endl;
     ADD_FAILURE();
   }
-
-  std::cout << "Test passed." << std::endl;
 }
 
 TEST(BSplineDeformableTransform, ConvertedLegacyTest3)
@@ -577,6 +573,4 @@ TEST(BSplineDeformableTransform, ConvertedLegacyTest3)
   std::cout << "Input Point: " << inputPoint << std::endl;
   std::cout << "Output Point: " << outputPoint << std::endl;
   std::cout << std::endl;
-
-  std::cout << "Test passed." << std::endl;
 }

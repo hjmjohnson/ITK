@@ -151,7 +151,7 @@ TEST(SymmetricForcesDemonsRegistrationFilter, ConvertedLegacyTest)
   constexpr VectorType zeroVec{};
   initField->FillBuffer(zeroVec);
 
-  std::cout << "Run registration and warp moving" << std::endl;
+  SCOPED_TRACE("Run registration and warp moving");
 
   using RegistrationType = itk::SymmetricForcesDemonsRegistrationFilter<ImageType, ImageType, FieldType>;
   auto registrator = RegistrationType::New();
@@ -171,7 +171,7 @@ TEST(SymmetricForcesDemonsRegistrationFilter, ConvertedLegacyTest)
   EXPECT_EQ(intensityDifferenceThreshold, registrator->GetIntensityDifferenceThreshold());
 
 
-  std::cout << "Printing function" << std::endl;
+  SCOPED_TRACE("Printing function");
   using FunctionType = RegistrationType::DemonsRegistrationFunctionType;
   auto * fptr = dynamic_cast<FunctionType *>(registrator->GetDifferenceFunction().GetPointer());
   if (fptr != nullptr)
@@ -219,7 +219,7 @@ TEST(SymmetricForcesDemonsRegistrationFilter, ConvertedLegacyTest)
 
   std::cout << "Registration RMS change: " << registrator->GetRMSChange() << std::endl;
 
-  std::cout << "Compare warped moving and fixed." << std::endl;
+  SCOPED_TRACE("Compare warped moving and fixed.");
 
   // compare the warp and fixed images
   itk::ImageRegionIterator<ImageType> fixedIter(fixed, fixed->GetBufferedRegion());
@@ -240,7 +240,7 @@ TEST(SymmetricForcesDemonsRegistrationFilter, ConvertedLegacyTest)
 
   EXPECT_LE(numPixelsDifferent, 10u);
 
-  std::cout << "Test running registrator without initial deformation field." << std::endl;
+  SCOPED_TRACE("Test running registrator without initial deformation field.");
 
   registrator->SetInput(nullptr);
   registrator->SetNumberOfIterations(2);
@@ -250,7 +250,7 @@ TEST(SymmetricForcesDemonsRegistrationFilter, ConvertedLegacyTest)
 
   std::cout << "Test exception handling." << std::endl;
 
-  std::cout << "Test nullptr moving image. " << std::endl;
+  SCOPED_TRACE("Test nullptr moving image.");
 
   registrator->SetInput(initField);
   registrator->SetMovingImage(nullptr);
@@ -261,7 +261,7 @@ TEST(SymmetricForcesDemonsRegistrationFilter, ConvertedLegacyTest)
   registrator->SetMovingImage(moving);
   registrator->ResetPipeline();
 
-  std::cout << "Test nullptr moving image interpolator. " << std::endl;
+  SCOPED_TRACE("Test nullptr moving image interpolator.");
 
   fptr = dynamic_cast<FunctionType *>(registrator->GetDifferenceFunction().GetPointer());
   ASSERT_NE(fptr, nullptr);

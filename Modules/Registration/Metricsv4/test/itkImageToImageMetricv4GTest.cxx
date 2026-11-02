@@ -203,7 +203,7 @@ ImageToImageMetricv4TestComputeIdentityTruthValues(const ImageToImageMetricv4Tes
                                                    ImageToImageMetricv4TestMetricType::DerivativeType & truthDerivative)
 {
   // Make sure the metric is initialized
-  std::cout << "truth values: Initialize" << std::endl;
+  SCOPED_TRACE("truth values: Initialize");
   metric->Initialize();
   // Call once to setup gradient images if applicable
   ImageToImageMetricv4TestMetricType::MeasureType    tempValue = NAN;
@@ -212,7 +212,7 @@ ImageToImageMetricv4TestComputeIdentityTruthValues(const ImageToImageMetricv4Tes
   metric->GetValueAndDerivative(tempValue, tempDerivative);
 
   // Determine truth values
-  std::cout << "truth values: GetValueAndDerivative" << std::endl;
+  SCOPED_TRACE("truth values: GetValueAndDerivative");
   truthValue = 0;
   truthDerivative.SetSize(metric->GetNumberOfParameters());
   truthDerivative.Fill(0);
@@ -224,7 +224,7 @@ ImageToImageMetricv4TestComputeIdentityTruthValues(const ImageToImageMetricv4Tes
   itFixed.GoToBegin();
   itMoving.GoToBegin();
   unsigned int count = 0;
-  std::cout << "truth values: Iterate over region" << std::endl;
+  SCOPED_TRACE("truth values: Iterate over region");
   while (!itFixed.IsAtEnd() && !itMoving.IsAtEnd())
   {
     truthValue += itFixed.Get() + itMoving.Get();
@@ -331,7 +331,7 @@ ImageToImageMetricv4TestRunSingleTest(const ImageToImageMetricv4TestMetricPointe
   ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn2, derivativeReturn));
 
   // Test same value returned by different methods
-  std::cout << "Check Value return values..." << std::endl;
+  SCOPED_TRACE("Check Value return values...");
   EXPECT_EQ(valueReturn1, valueReturn2) << "Results for Value don't match";
 
   // Check number of threads and valid points
@@ -470,13 +470,12 @@ TEST(ImageToImageMetricv4, ConvertedLegacyTest)
         const bool useMovingImageGradientFilter = useMovingFilter == 1;
         ITK_GTEST_SET_GET_BOOLEAN(metric, UseMovingImageGradientFilter, useMovingImageGradientFilter);
 
-        std::cout << "**********************************" << std::endl;
         if (computeNewTruthValues)
         {
           ImageToImageMetricv4TestComputeIdentityTruthValues(
             metric, fixedImage, movingImage, truthValue, truthDerivative);
         }
-        std::cout << "* Testing with identity transforms..." << std::endl;
+        SCOPED_TRACE("* Testing with identity transforms...");
         ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false);
         computeNewTruthValues = false;
       }
@@ -492,7 +491,7 @@ TEST(ImageToImageMetricv4, ConvertedLegacyTest)
   movingTransform->SetParameters(parameters);
   ImageToImageMetricv4TestMetricType::MeasureType expectedMetricMax = NAN;
   expectedMetricMax = itk::NumericTraits<ImageToImageMetricv4TestMetricType::MeasureType>::max();
-  std::cout << "Testing non-overlapping images. Expect a warning:" << std::endl;
+  SCOPED_TRACE("Testing non-overlapping images. Expect a warning:");
   ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, 0, true);
   EXPECT_DOUBLE_EQ(metric->GetValue(), expectedMetricMax)
     << "Failed testing for non-overlapping images. Number of valid points: " << metric->GetNumberOfValidPoints();
@@ -541,7 +540,7 @@ TEST(ImageToImageMetricv4, ConvertedLegacyTest)
   metric->SetGradientSource(itk::ObjectToObjectMetricBaseTemplateEnums::GradientSource::GRADIENT_SOURCE_BOTH);
 
   // Evaluate the metric
-  std::cout << "* Testing with identity DisplacementFieldTransform for moving image..." << std::endl;
+  SCOPED_TRACE("* Testing with identity DisplacementFieldTransform for moving image...");
   ImageToImageMetricv4TestComputeIdentityTruthValues(metric, fixedImage, movingImage, truthValue, truthDerivative);
   ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false);
 
@@ -555,7 +554,7 @@ TEST(ImageToImageMetricv4, ConvertedLegacyTest)
   //
   // Test with sampled point-set
   //
-  std::cout << "Testing with sampled point-set:" << std::endl;
+  SCOPED_TRACE("Testing with sampled point-set:");
   fixedTransform->SetIdentity();
   movingTransform->SetIdentity();
   metric->SetMovingTransform(movingTransform);
@@ -575,7 +574,7 @@ TEST(ImageToImageMetricv4, ConvertedLegacyTest)
   PointSetType::CoordinateType testPointCoords[2];
   const PointSetType::Pointer  pset(PointSetType::New());
 
-  std::cout << "Creating point set..." << std::endl;
+  SCOPED_TRACE("Creating point set...");
   DimensionSizeType ind = 0;
   for (DimensionSizeType i = 0; i < imageSize; ++i)
   {
@@ -588,7 +587,7 @@ TEST(ImageToImageMetricv4, ConvertedLegacyTest)
     }
   }
 
-  std::cout << "Setting point set..." << std::endl;
+  SCOPED_TRACE("Setting point set...");
   metric->SetFixedSampledPointSet(pset);
   EXPECT_EQ(pset, metric->GetFixedSampledPointSet());
 
@@ -608,7 +607,7 @@ TEST(ImageToImageMetricv4, ConvertedLegacyTest)
 
 #endif
 
-  std::cout << "Testing metric output..." << std::endl;
+  SCOPED_TRACE("Testing metric output...");
   ImageToImageMetricv4TestComputeIdentityTruthValues(metric, fixedImage, movingImage, truthValue, truthDerivative);
   ImageToImageMetricv4TestRunSingleTest(metric, truthValue, truthDerivative, imageSize * imageSize, false);
 

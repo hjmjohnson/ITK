@@ -53,7 +53,7 @@ TEST(GaussianSmoothingOnUpdateDisplacementFieldTransform, ConvertedLegacyTest)
   displacementTransform->SetDisplacementField(field);
 
   /* Test SmoothDisplacementFieldGauss */
-  std::cout << "Test SmoothDisplacementFieldGauss" << std::endl;
+  SCOPED_TRACE("Test SmoothDisplacementFieldGauss");
   using ParametersValueType = DisplacementTransformType::ParametersValueType;
   constexpr ParametersValueType                            paramsZero{};
   DisplacementTransformType::ParametersType                paramsFill(displacementTransform->GetNumberOfParameters());
@@ -105,7 +105,7 @@ TEST(GaussianSmoothingOnUpdateDisplacementFieldTransform, ConvertedLegacyTest)
   }
 
   /* Test UpdateTransformParameters */
-  std::cout << "Testing UpdateTransformParameters..." << std::endl;
+  SCOPED_TRACE("Testing UpdateTransformParameters...");
   /* fill with 0 */
   field->FillBuffer(zeroVector);
   DisplacementTransformType::DerivativeType update(displacementTransform->GetNumberOfParameters(), 1.2);

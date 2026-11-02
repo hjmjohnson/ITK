@@ -51,7 +51,7 @@ TestConstPixelAccess(const itk::RLEImage<T> & in, itk::RLEImage<T> & out)
 
 TEST(RLEImageRegionIterator, ConvertedLegacyTest)
 {
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   itk::RLEImage<itk::Vector<unsigned short, 5>>::Pointer o3 = itk::RLEImage<itk::Vector<unsigned short, 5>>::New();
 
   float origin3D[3] = { 5.f, 2.1f, 8.1f };
@@ -83,7 +83,7 @@ TEST(RLEImageRegionIterator, ConvertedLegacyTest)
 
   o3->Allocate();
 
-  std::cout << "Setting/Getting a pixel" << std::endl;
+  SCOPED_TRACE("Setting/Getting a pixel");
   itk::Vector<unsigned short, 5> vec;
 
   vec[0] = 5;
@@ -102,7 +102,7 @@ TEST(RLEImageRegionIterator, ConvertedLegacyTest)
   // Iterate over a region using a simple for loop
   itk::ImageRegionIterator<itk::RLEImage<itk::Vector<unsigned short, 5>>> it(o3, region);
 
-  std::cout << "Simple iterator loop: ";
+  SCOPED_TRACE("Simple iterator loop:");
   for (; !it.IsAtEnd(); ++it)
   {
     itk::RLEImage<itk::Vector<unsigned short, 5>>::IndexType index = it.GetIndex();
@@ -114,7 +114,7 @@ TEST(RLEImageRegionIterator, ConvertedLegacyTest)
   // Iterate over a region using a simple for loop and a const iterator
   itk::ImageRegionConstIterator<itk::RLEImage<itk::Vector<unsigned short, 5>>> cit(o3, region);
 
-  std::cout << "Simple const iterator loop: ";
+  SCOPED_TRACE("Simple const iterator loop:");
   for (; !cit.IsAtEnd(); ++cit)
   {
     itk::RLEImage<itk::Vector<unsigned short, 5>>::IndexType index = cit.GetIndex();
@@ -131,7 +131,7 @@ TEST(RLEImageRegionIterator, ConvertedLegacyTest)
     --backIt;
 
     itk::RLEImage<itk::Vector<unsigned short, 5>>::IndexType index = backIt.GetIndex();
-    std::cout << "Simple iterator backwards loop: ";
+    SCOPED_TRACE("Simple iterator backwards loop:");
     for (unsigned int i = 0; i < index.GetIndexDimension(); i++)
     {
       std::cout << index[i] << " ";

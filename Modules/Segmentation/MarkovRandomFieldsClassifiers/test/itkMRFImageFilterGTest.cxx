@@ -387,7 +387,7 @@ TEST(MRFImageFilter, ConvertedLegacyTest)
             << std::endl;
   std::cout << "The error tolerace threshold was: " << applyMRFImageFilter->GetErrorTolerance() << std::endl;
   std::cout << "The smoothing MRF parameter used was: " << applyMRFImageFilter->GetSmoothingFactor() << std::endl;
-  std::cout << "The MRF neighborhood weights are: " << std::endl;
+  SCOPED_TRACE("The MRF neighborhood weights are:");
 
   // Test other optional access functions to test coverage
   const std::vector<double> MRFNeighborhoodWeight = applyMRFImageFilter->GetMRFNeighborhoodWeight();

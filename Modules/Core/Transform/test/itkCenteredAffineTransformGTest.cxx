@@ -53,7 +53,7 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
   MatrixType matrix2 = id2->GetMatrix();
   VectorType vector2 = id2->GetOffset();
   std::cout << "Matrix from instantiating an identity transform:" << std::endl << matrix2;
-  std::cout << "Vector from instantiating an identity transform:" << std::endl;
+  SCOPED_TRACE("Vector from instantiating an identity transform:");
   PrintVector(vector2);
 
   /* Create and show a simple 2D transform from given parameters */
@@ -76,7 +76,7 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
     }
     vector2[i] = 0.0;
   }
-  std::cout << "Instantiation of a given 2D transform:" << std::endl;
+  SCOPED_TRACE("Instantiation of a given 2D transform:");
   aff2->Print(std::cout);
 
   aff2->GetInverse(inverse2);
@@ -102,12 +102,12 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
   matrix2 = aff2->GetMatrix();
   vector2 = aff2->GetOffset();
   std::cout << "Setting the matrix in an existing transform:" << std::endl << matrix2;
-  std::cout << "Setting the offset in an existing  transform:" << std::endl;
+  SCOPED_TRACE("Setting the offset in an existing  transform:");
   PrintVector(vector2);
 
   /* Try composition of two transformations */
   aff2->Compose(aff2);
-  std::cout << "Result of a composition:" << std::endl;
+  SCOPED_TRACE("Result of a composition:");
   aff2->Print(std::cout);
 
   /* Compose with a translation */
@@ -115,12 +115,12 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
   trans[0] = 1;
   trans[1] = 2;
   aff2->Translate(trans);
-  std::cout << "Result of a translation:" << std::endl;
+  SCOPED_TRACE("Result of a translation:");
   aff2->Print(std::cout);
 
   /* Compose with an isotropic scaling */
   aff2->Scale(.3, true);
-  std::cout << "Result of isotropic scaling:" << std::endl;
+  SCOPED_TRACE("Result of isotropic scaling:");
   aff2->Print(std::cout);
 
   /* Compose with an anisotropic scaling */
@@ -128,22 +128,22 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
   scale[0] = .3;
   scale[1] = .2;
   aff2->Scale(scale);
-  std::cout << "Result of anisotropic scaling:" << std::endl;
+  SCOPED_TRACE("Result of anisotropic scaling:");
   aff2->Print(std::cout);
 
   /* Compose with a general N-D rotation */
   aff2->Rotate(0, 1, 0.57, true);
-  std::cout << "Result of general rotation:" << std::endl;
+  SCOPED_TRACE("Result of general rotation:");
   aff2->Print(std::cout);
 
   /* Compose with a 2-D rotation */
   aff2->Rotate(0, 1, -0.57, true);
-  std::cout << "Result of 2-D rotation:" << std::endl;
+  SCOPED_TRACE("Result of 2-D rotation:");
   aff2->Print(std::cout);
 
   /* Compose with a shear */
   aff2->Shear(1, 0, .2);
-  std::cout << "Result of shear:" << std::endl;
+  SCOPED_TRACE("Result of shear:");
   aff2->Print(std::cout);
 
   /* Transform a point */
@@ -199,7 +199,7 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
   auto aff3 = Affine3DType::New();
   auto axis = itk::MakeFilled<itk::Vector<double, 3>>(0.707);
   aff3->Rotate3D(axis, 1.0, true);
-  std::cout << "Create and rotate a 3D transform:" << std::endl;
+  SCOPED_TRACE("Create and rotate a 3D transform:");
   aff3->Print(std::cout);
 
   /* Generate inverse transform */
@@ -208,16 +208,16 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
   {
     std::cout << "Cannot create inverse transformation" << std::endl;
   }
-  std::cout << "Create an inverse transformation:" << std::endl;
+  SCOPED_TRACE("Create an inverse transformation:");
   inv3->Print(std::cout);
 
   const Affine3DType::Pointer inv4 = dynamic_cast<Affine3DType *>(aff3->GetInverseTransform().GetPointer());
   ASSERT_NE(inv4, nullptr) << "Cannot compute inverse transformation";
-  std::cout << "Create an inverse transformation:" << std::endl;
+  SCOPED_TRACE("Create an inverse transformation:");
   inv4->Print(std::cout);
 
   /* Create an image for testing index<->physical transforms */
-  std::cout << "Creating image for testing index<->physical transforms" << std::endl;
+  SCOPED_TRACE("Creating image for testing index<->physical transforms");
   double                                      spacing[3] = { 1.0, 2.0, 3.0 };
   double                                      origin[3] = { 4.0, 5.0, 6.0 };
   const itk::Image<unsigned char, 3>::Pointer image = itk::Image<unsigned char, 3>::New();
@@ -252,6 +252,6 @@ TEST(CenteredAffineTransform, ConvertedLegacyTest)
   /* Now set the parameters of another matrix */
   jaff->SetParameters(parameters3D);
 
-  std::cout << "A transform after SetParameters:" << std::endl;
+  SCOPED_TRACE("A transform after SetParameters:");
   jaff->Print(std::cout);
 }

@@ -129,6 +129,4 @@ TEST(InteriorExteriorMeshFilter, ConvertedLegacyTest)
   }
 
   // All objects shall be automatically destroyed at this point
-
-  std::cout << "Test passed ! " << std::endl;
 }

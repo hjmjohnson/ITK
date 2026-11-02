@@ -404,6 +404,4 @@ TEST(GeodesicActiveContourShapePriorLevelSetImageFilter, ConvertedLegacyTest)
   CostFunctionType::ArrayType badParameters(shape->GetNumberOfShapeParameters() - 1, 2.0);
 
   TEST_INITIALIZATION_ERROR(InitialParameters, badParameters, parameters);
-
-  std::cout << "Test passed." << std::endl;
 }

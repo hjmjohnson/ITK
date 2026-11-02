@@ -194,11 +194,10 @@ TEST(LaplacianSegmentationLevelSetImageFilter, ConvertedLegacyTest)
   try
   {
     filter->Update();
-    std::cout << "Done first trial" << std::endl;
+    SCOPED_TRACE("Done first trial");
     // Repeat to make sure that the filter is reinitialized properly
     filter->SetNumberOfIterations(5);
     filter->Update();
-    std::cout << "Done second trial" << std::endl;
 
     // Write the output for debugging purposes
     //        itk::ImageFileWriter<LSIFTN::ImageType>::Pointer writer

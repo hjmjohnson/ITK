@@ -127,7 +127,4 @@ TEST(MultiphaseFiniteDifferenceImageFilter, ConvertedLegacyTest)
   unsigned int elapsedIterations = 0;
   filter->SetElapsedIterations(elapsedIterations);
   EXPECT_EQ(elapsedIterations, filter->GetElapsedIterations());
-
-
-  std::cout << "Test finished." << std::endl;
 }

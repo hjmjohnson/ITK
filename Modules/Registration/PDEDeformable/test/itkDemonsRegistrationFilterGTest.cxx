@@ -117,7 +117,7 @@ TEST(DemonsRegistrationFilter, ConvertedLegacyTest)
   using SizeType = ImageType::SizeType;
   using RegionType = ImageType::RegionType;
 
-  std::cout << "Generate input images and initial deformation field" << std::endl;
+  SCOPED_TRACE("Generate input images and initial deformation field");
 
   ImageType::SizeValueType sizeArray[ImageDimension] = { 128, 128 };
   SizeType                 size;
@@ -166,7 +166,7 @@ TEST(DemonsRegistrationFilter, ConvertedLegacyTest)
   caster->SetInput(initField);
   caster->InPlaceOff();
 
-  std::cout << "Run registration and warp moving" << std::endl;
+  SCOPED_TRACE("Run registration and warp moving");
 
   using RegistrationType = itk::DemonsRegistrationFilter<ImageType, ImageType, FieldType>;
   auto registrator = RegistrationType::New();
@@ -264,7 +264,7 @@ TEST(DemonsRegistrationFilter, ConvertedLegacyTest)
   warper->Update();
 
 
-  std::cout << "Compare warped moving and fixed." << std::endl;
+  SCOPED_TRACE("Compare warped moving and fixed.");
 
   // compare the warp and fixed images
   itk::ImageRegionIterator<ImageType> fixedIter(fixed, fixed->GetBufferedRegion());
@@ -289,7 +289,7 @@ TEST(DemonsRegistrationFilter, ConvertedLegacyTest)
 
   registrator->Print(std::cout);
 
-  std::cout << "Test running registrator without initial deformation field." << std::endl;
+  SCOPED_TRACE("Test running registrator without initial deformation field.");
 
   registrator->SetInput(nullptr);
   registrator->SetNumberOfIterations(2);
@@ -300,7 +300,7 @@ TEST(DemonsRegistrationFilter, ConvertedLegacyTest)
   // Test exceptions
   std::cout << "Test exception handling." << std::endl;
 
-  std::cout << "Test nullptr moving image. " << std::endl;
+  SCOPED_TRACE("Test nullptr moving image.");
 
   registrator->SetInput(caster->GetOutput());
   registrator->SetMovingImage(nullptr);
@@ -311,7 +311,7 @@ TEST(DemonsRegistrationFilter, ConvertedLegacyTest)
   registrator->SetMovingImage(moving);
   registrator->ResetPipeline();
 
-  std::cout << "Test nullptr moving image interpolator. " << std::endl;
+  SCOPED_TRACE("Test nullptr moving image interpolator.");
   fptr = dynamic_cast<FunctionType *>(registrator->GetDifferenceFunction().GetPointer());
   ASSERT_NE(fptr, nullptr) << "dynamic_cast failed";
   fptr->SetMovingImageInterpolator(nullptr);

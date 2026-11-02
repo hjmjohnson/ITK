@@ -27,7 +27,7 @@ TEST(ImageRandomConstIteratorWithOnlyIndex, ConvertedLegacyTest)
 {
   // The legacy test driver reseeds vnl_sample before every test.
   vnl_sample_reseed(8775070);
-  std::cout << "Creating an image of indices" << std::endl;
+  SCOPED_TRACE("Creating an image of indices");
 
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -73,7 +73,7 @@ TEST(ImageRandomConstIteratorWithOnlyIndex, ConvertedLegacyTest)
   cot.GoToBegin();
 
   std::cout << "Verifying const iterator... ";
-  std::cout << "Random walk of the Iterator over the image " << std::endl;
+  SCOPED_TRACE("Random walk of the Iterator over the image");
 
   while (!cot.IsAtEnd())
   {
@@ -83,10 +83,9 @@ TEST(ImageRandomConstIteratorWithOnlyIndex, ConvertedLegacyTest)
     std::cout << index0 << std::endl;
     ++cot;
   }
-  std::cout << "   Done ! " << std::endl;
 
   // Verification of reverse iteration
-  std::cout << "Verifying const iterator in reverse direction... ";
+  SCOPED_TRACE("Verifying const iterator in reverse direction...");
 
   RandomConstIteratorType cor(myImage, region0);
   cor.SetNumberOfSamples(numberOfSamples); // 0=x, 1=y, 2=z
@@ -103,10 +102,9 @@ TEST(ImageRandomConstIteratorWithOnlyIndex, ConvertedLegacyTest)
     --cor;
   }
   std::cout << index0 << std::endl; // print the value at the beginning index
-  std::cout << "   Done ! " << std::endl;
 
   // Verification with ImageBase type and both directions of iteration
-  std::cout << "Verifying const iterator with ImageBase type and in both directions... ";
+  SCOPED_TRACE("Verifying const iterator with ImageBase type and in both directions...");
 
   using ImageBaseType = itk::ImageBase<ImageDimension>;
   using ImageBaseRandomConstIteratorType = itk::ImageRandomConstIteratorWithOnlyIndex<ImageBaseType>;
@@ -135,11 +133,10 @@ TEST(ImageRandomConstIteratorWithOnlyIndex, ConvertedLegacyTest)
     }
   }
   std::cout << index0 << std::endl; // print the value at the beginning index
-  std::cout << "   Done ! " << std::endl;
 
   // Verification of the Const Iterator in a subregion of the image
   {
-    std::cout << "Verifying Const Iterator in a Region smaller than the whole image... " << std::endl;
+    SCOPED_TRACE("Verifying Const Iterator in a Region smaller than the whole image...");
 
     ImageType::IndexType start;
     start[0] = 10;
@@ -168,9 +165,5 @@ TEST(ImageRandomConstIteratorWithOnlyIndex, ConvertedLegacyTest)
 
       ++cbot;
     }
-
-    std::cout << "   Done ! " << std::endl;
   }
-
-  std::cout << "Test passed" << std::endl;
 }

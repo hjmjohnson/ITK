@@ -219,7 +219,7 @@ TEST(ObjectToObjectOptimizerBase, ConvertedLegacyTest)
   ASSERT_NO_THROW(optimizer->StartOptimization());
   EXPECT_TRUE(optimizer->GetWeightsAreIdentity()) << "Expected GetWeightsAreIdentity to return true.";
 
-  std::cout << "Printing self.." << std::endl;
+  SCOPED_TRACE("Printing self..");
   std::cout << optimizer << std::endl;
 
   // Test streaming enumeration for ObjectToObjectOptimizerBaseTemplateEnums::StopConditionObjectToObjectOptimizer

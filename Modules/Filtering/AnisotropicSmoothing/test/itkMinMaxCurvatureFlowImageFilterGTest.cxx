@@ -143,7 +143,7 @@ testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,         // ND image s
   constexpr PixelType foreground{ 0.0 };                  // intensity value of the foreground
   constexpr PixelType background{ 255.0 };                // intensity value of the background
 
-  std::cout << "Create an image of circle/sphere with noise" << std::endl;
+  SCOPED_TRACE("Create an image of circle/sphere with noise");
   auto circleImage = ImageType::New();
 
 
@@ -186,7 +186,7 @@ testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,         // ND image s
    * output as the input in the next run.
    */
 
-  std::cout << "Run MinMaxCurvatureFlowImageFiler.." << std::endl;
+  SCOPED_TRACE("Run MinMaxCurvatureFlowImageFiler..");
 
   // set other denoiser parameters here
   denoiser->SetTimeStep(0.05);
@@ -231,7 +231,7 @@ testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,         // ND image s
    * This test is considered as passed if the fraction of wrong
    * pixels is less than the original noise fraction.
    */
-  std::cout << "Checking the output..." << std::endl;
+  SCOPED_TRACE("Checking the output...");
 
   IteratorType outIter(swapPointer, swapPointer->GetBufferedRegion());
 
@@ -311,7 +311,6 @@ testMinMaxCurvatureFlow(itk::Size<VImageDimension> & size,         // ND image s
   }
 
 
-  std::cout << "Test passed." << std::endl;
   return EXIT_SUCCESS;
 }
 } // namespace

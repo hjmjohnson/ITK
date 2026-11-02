@@ -30,7 +30,7 @@ TEST(ArrowSpatialObject, ConvertedLegacyTest)
 
 
   // Testing the position
-  std::cout << "Testing position : ";
+  SCOPED_TRACE("Testing position :");
   ArrowType::PointType pnt;
   pnt[0] = 0;
   pnt[1] = 1;
@@ -41,13 +41,13 @@ TEST(ArrowSpatialObject, ConvertedLegacyTest)
   EXPECT_EQ(pnt, myArrow->GetPositionInObjectSpace());
 
   // Testing the length
-  std::cout << "Testing length : ";
+  SCOPED_TRACE("Testing length :");
   constexpr double length{ 2 };
   myArrow->SetLengthInObjectSpace(length);
   EXPECT_EQ(length, myArrow->GetLengthInObjectSpace());
 
   // Testing the direction of the arrow
-  std::cout << "Testing direction : ";
+  SCOPED_TRACE("Testing direction :");
 
   ArrowType::VectorType direction{};
   direction[1] = 1.0;
@@ -58,38 +58,31 @@ TEST(ArrowSpatialObject, ConvertedLegacyTest)
   EXPECT_EQ(direction, myArrow->GetDirectionInObjectSpace());
 
   // Point consistency
-  std::cout << "Is Inside (Inside): ";
+  SCOPED_TRACE("Is Inside (Inside):");
   itk::Point<double, 3> in;
   in[0] = 0;
   in[1] = 1;
   in[2] = 0;
   EXPECT_TRUE(myArrow->IsInsideInWorldSpace(in)) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
-  std::cout << "Is Inside (Outside): ";
+  SCOPED_TRACE("Is Inside (Outside):");
   itk::Point<double, 3> out;
   out[0] = 0;
   out[1] = 2.1;
   out[2] = 0;
   EXPECT_FALSE(myArrow->IsInsideInWorldSpace(out)) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
 
-  std::cout << "Update(): ";
+  SCOPED_TRACE("Update():");
   const ArrowType::BoundingBoxType * boundingBox = myArrow->GetMyBoundingBoxInWorldSpace();
 
   std::cout << boundingBox->GetBounds() << std::endl;
   EXPECT_EQ(boundingBox->GetBounds()[2], 1.0) << "[FAILED]";
   EXPECT_EQ(boundingBox->GetBounds()[3], 1.0) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
-  std::cout << "Testing 2D Arrow:";
+  SCOPED_TRACE("Testing 2D Arrow:");
   using Arrow2DType = itk::ArrowSpatialObject<2>;
   auto myArrow2D = Arrow2DType::New();
 
   ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(myArrow2D, ArrowSpatialObject, SpatialObject);
-
-
-  std::cout << "Test finished" << std::endl;
 }

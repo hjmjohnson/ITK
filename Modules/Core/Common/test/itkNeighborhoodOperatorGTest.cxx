@@ -77,7 +77,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   constexpr unsigned int Dimension3D{ 3 };
   constexpr unsigned int Dimension4D{ 4 };
 
-  std::cout << "Testing derivative operator" << std::endl;
+  SCOPED_TRACE("Testing derivative operator");
   itk::DerivativeOperator<PixelType, Dimension3D, vnl_vector<PixelType>> d;
 
   auto * dPointer = &d;
@@ -95,7 +95,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   d.CreateDirectional();
 
 
-  std::cout << "Testing Gaussian operator" << std::endl;
+  SCOPED_TRACE("Testing Gaussian operator");
   itk::GaussianOperator<PixelType, Dimension2D, vnl_vector<PixelType>> g;
 
   auto * gPointer = &g;
@@ -113,7 +113,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   g.CreateDirectional();
 
 
-  std::cout << "Testing ForwardDifferenceOperator" << std::endl;
+  SCOPED_TRACE("Testing ForwardDifferenceOperator");
   itk::ForwardDifferenceOperator<PixelType, Dimension4D, vnl_vector<PixelType>> f;
 
   auto * fPointer = &f;
@@ -128,7 +128,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   f.CreateToRadius(sz);
 
 
-  std::cout << "Testing BackwardDifferenceOperator" << std::endl;
+  SCOPED_TRACE("Testing BackwardDifferenceOperator");
   itk::BackwardDifferenceOperator<PixelType, Dimension2D, vnl_vector<PixelType>> b;
 
   auto * bPointer = &b;
@@ -142,7 +142,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   b.CreateDirectional();
 
 
-  std::cout << "Testing 1D LaplacianOperator" << std::endl;
+  SCOPED_TRACE("Testing 1D LaplacianOperator");
   itk::LaplacianOperator<PixelType, Dimension1D, vnl_vector<PixelType>> a1;
 
   auto * a1Pointer = &a1;
@@ -155,7 +155,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   a1.CreateOperator();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < a1.Size(); ++i)
   {
     std::cout << a1[i];
@@ -166,7 +166,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   }
   std::cout << ']' << std::endl << std::endl;
 
-  std::cout << "Testing 2D LaplacianOperator" << std::endl;
+  SCOPED_TRACE("Testing 2D LaplacianOperator");
   itk::LaplacianOperator<PixelType, Dimension2D, vnl_vector<PixelType>> a2;
 
   constexpr double scales_2d[]{ 1.0 / 2.0, 1.0 / 4.0 };
@@ -175,7 +175,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   a2.CreateOperator();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < a2.Size(); ++i)
   {
     std::cout << a2[i];
@@ -186,7 +186,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   }
   std::cout << ']' << std::endl << std::endl;
 
-  std::cout << "Testing 3D LaplacianOperator" << std::endl;
+  SCOPED_TRACE("Testing 3D LaplacianOperator");
   itk::LaplacianOperator<PixelType, Dimension3D, vnl_vector<PixelType>> a3;
 
   constexpr double scales_3d[]{ 1.0 / 2.0, 1.0 / 4.0, 1.0 / 5.0 };
@@ -195,7 +195,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   a3.CreateOperator();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < a3.Size(); ++i)
   {
     std::cout << a3[i];
@@ -206,7 +206,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   }
   std::cout << ']' << std::endl << std::endl;
 
-  std::cout << "Testing SobelOperator2D" << std::endl;
+  SCOPED_TRACE("Testing SobelOperator2D");
   itk::SobelOperator<PixelType, Dimension2D, vnl_vector<PixelType>> c;
 
   auto * cPointer = &c;
@@ -218,7 +218,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   c.CreateDirectional();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < c.Size(); ++i)
   {
     std::cout << c[i];
@@ -235,7 +235,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   c.CreateDirectional();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < c.Size(); ++i)
   {
     std::cout << c[i];
@@ -246,7 +246,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
   }
   std::cout << ']' << std::endl << std::endl;
 
-  std::cout << "Testing SobelOperator3D" << std::endl;
+  SCOPED_TRACE("Testing SobelOperator3D");
   itk::SobelOperator<PixelType, Dimension3D, vnl_vector<PixelType>> c2;
 
   direction = 0;
@@ -255,7 +255,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   c2.CreateDirectional();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < c2.Size(); ++i)
   {
     std::cout << c2[i];
@@ -272,7 +272,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   c2.CreateDirectional();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < c2.Size(); ++i)
   {
     std::cout << c2[i];
@@ -289,7 +289,7 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
 
   c2.CreateDirectional();
 
-  std::cout << "    Operator = [ ";
+  SCOPED_TRACE("Operator = [");
   for (unsigned int i = 0; i < c2.Size(); ++i)
   {
     std::cout << c2[i];
@@ -299,7 +299,4 @@ TEST(NeighborhoodOperator, ConvertedLegacyTest)
     }
   }
   std::cout << ']' << std::endl << std::endl;
-
-
-  std::cout << "Test finished." << std::endl;
 }

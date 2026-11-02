@@ -82,7 +82,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   std::cout << "    Type: " << static_cast<int>(cell->GetType()) << std::endl;
   std::cout << "    Dimension: " << cell->GetDimension() << std::endl;
   std::cout << "    NumberOfPoints: " << cell->GetNumberOfPoints() << std::endl;
-  std::cout << "    NumberOfBoundaryFeatures:" << std::endl;
+  SCOPED_TRACE("NumberOfBoundaryFeatures:");
   // Note the <= is here to test the default case
   for (unsigned int i = 0; i <= cell->GetDimension(); ++i)
   {
@@ -94,7 +94,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
     }
   }
 
-  std::cout << "    Iterator test: PointIds for empty cell: ";
+  SCOPED_TRACE("Iterator test: PointIds for empty cell:");
   typename TCell::PointIdIterator pointId = cell->PointIdsBegin();
   typename TCell::PointIdIterator endId = cell->PointIdsEnd();
   while (pointId != endId)
@@ -104,7 +104,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   }
   std::cout << std::endl;
 
-  std::cout << "    ConstIterator test: PointIds for empty cell: ";
+  SCOPED_TRACE("ConstIterator test: PointIds for empty cell:");
   typename TCell::PointIdConstIterator cpointId = cell2->PointIdsBegin();
   typename TCell::PointIdConstIterator cendId = cell2->PointIdsEnd();
   while (cpointId != cendId)
@@ -115,7 +115,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   std::cout << std::endl;
 
   // Add point ids
-  std::cout << "    SetPointIds" << std::endl;
+  SCOPED_TRACE("SetPointIds");
 
   using PointIdentifier = MeshType::PointIdentifier;
 
@@ -138,7 +138,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
     cell->SetPointId(0, 100);
   }
 
-  std::cout << "    ConstIterator test: PointIds for populated cell: ";
+  SCOPED_TRACE("ConstIterator test: PointIds for populated cell:");
   typename TCell::PointIdConstIterator ppointId = cell2->PointIdsBegin();
   typename TCell::PointIdConstIterator pendId = cell2->PointIdsEnd();
   while (ppointId != pendId)
@@ -152,7 +152,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   {
     cell->SetPointIds(pointIds.data() + numberOfPoints, pointIds.data() + numberOfPoints * 2);
   }
-  std::cout << "    Iterator test: PointIds for populated cell: ";
+  SCOPED_TRACE("Iterator test: PointIds for populated cell:");
   typename TCell::PointIdIterator pxpointId = cell->PointIdsBegin();
   typename TCell::PointIdIterator pxendId = cell->PointIdsEnd();
   while (pxpointId != pxendId)
@@ -165,7 +165,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   // Make a copy
   CellAutoPointer copyOfCell;
   cell->MakeCopy(copyOfCell);
-  std::cout << "    PointIds for copied cell: ";
+  SCOPED_TRACE("PointIds for copied cell:");
   typename TCell::PointIdConstIterator xpointId = copyOfCell->PointIdsBegin();
   typename TCell::PointIdConstIterator xendId = copyOfCell->PointIdsEnd();
   while (xpointId != xendId)
@@ -188,7 +188,7 @@ TestQECellInterface(const std::string_view name, TCell * aCell)
   TCell *       cell = aCell;
   const TCell * cell2 = aCell;
 
-  std::cout << "    QE Iterator test: PointIds for empty cell: ";
+  SCOPED_TRACE("QE Iterator test: PointIds for empty cell:");
   typename TCell::PointIdInternalIterator       pointId = cell->InternalPointIdsBegin();
   const typename TCell::PointIdInternalIterator endId = cell->InternalPointIdsEnd();
   while (pointId != endId)
@@ -198,7 +198,7 @@ TestQECellInterface(const std::string_view name, TCell * aCell)
   }
   std::cout << std::endl;
 
-  std::cout << "    ConstIterator test: PointIds for empty cell: ";
+  SCOPED_TRACE("ConstIterator test: PointIds for empty cell:");
   typename TCell::PointIdInternalConstIterator       cpointId = cell2->InternalPointIdsBegin();
   const typename TCell::PointIdInternalConstIterator cendId = cell2->InternalPointIdsEnd();
 
@@ -210,7 +210,7 @@ TestQECellInterface(const std::string_view name, TCell * aCell)
   std::cout << std::endl;
 
   // Add point ids
-  std::cout << "    SetPointIds" << std::endl;
+  SCOPED_TRACE("SetPointIds");
 
   using PointIdentifier = typename TCell::PointIdentifier;
 

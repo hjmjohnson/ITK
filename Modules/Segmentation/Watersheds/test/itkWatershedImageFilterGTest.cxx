@@ -133,7 +133,4 @@ TEST(WatershedImageFilter, ConvertedLegacyTest)
 
 
   ASSERT_NO_THROW(watershedFilter->Update());
-
-
-  std::cout << "Test finished." << std::endl;
 }

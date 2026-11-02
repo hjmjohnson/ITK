@@ -285,7 +285,7 @@ TestClampFromWithCustomBounds()
 
 TEST(ClampImageFilter, ConvertedLegacyTest)
 {
-  std::cout << "itkClampImageFilterTest Start" << std::endl;
+  SCOPED_TRACE("itkClampImageFilterTest Start");
 
   using ImageType = itk::Image<unsigned char, 3>;
   using FilterType = itk::ClampImageFilter<ImageType, ImageType>;

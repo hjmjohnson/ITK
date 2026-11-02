@@ -62,9 +62,6 @@ TEST(FancyString, ConvertedLegacyTest)
   ASSERT_NO_THROW(testFancyStringUnequalOperator());
 
   ASSERT_NO_THROW(testFancyStringEqualOperator());
-
-
-  std::cout << "Test finished." << std::endl;
 }
 
 namespace
@@ -89,8 +86,6 @@ testFancyStringWithBasicType()
 
     // check result
     EXPECT_EQ(dataIn, dataOut) << "uchar: input and output data do not match";
-
-    std::cout << "testFancyStringWithBasicType: uchar OK!" << std::endl;
   }
 
   // for short
@@ -109,8 +104,6 @@ testFancyStringWithBasicType()
 
     // check result
     EXPECT_EQ(dataIn, dataOut) << "short: input and output data do not match";
-
-    std::cout << "testFancyStringWithBasicType: short OK!" << std::endl;
   }
 
   // for double
@@ -129,8 +122,6 @@ testFancyStringWithBasicType()
 
     // check result
     EXPECT_EQ(dataIn, dataOut) << "double: input and output data do not match";
-
-    std::cout << "testFancyStringWithBasicType: double OK!" << std::endl;
   }
 
   // all testings were successful if reached here
@@ -158,7 +149,6 @@ testFancyStringWithStdVector()
   {
     EXPECT_EQ(dataIn[i], dataOut1[i]) << "testFancyStringWithStdVector: failed reading all elements in the string (2)";
   }
-  std::cout << "testFancyStringWithStdVector: dataOut1 OK!" << std::endl;
 
   // read all data elements for the output vector
   std::vector<float> dataOut2(5, 0.0f);
@@ -172,7 +162,6 @@ testFancyStringWithStdVector()
     EXPECT_EQ(dataIn[i], dataOut2[i])
       << "testFancyStringWithStdVector: failed reading all elements for the output vector (2)";
   }
-  std::cout << "testFancyStringWithStdVector: dataOut2 OK!" << std::endl;
 
   // read user-specified number of data elements (output data exist)
   std::vector<float> dataOut3(10, 0.0f);
@@ -186,7 +175,6 @@ testFancyStringWithStdVector()
     EXPECT_EQ(dataIn[i], dataOut3[i])
       << "testFancyStringWithStdVector: failed reading user-specified number of elements (1.2)";
   }
-  std::cout << "testFancyStringWithStdVector: dataOut3 OK!" << std::endl;
 
   // read user-specified number of data elements (output data do not exist)
   std::vector<float> dataOut4;
@@ -200,7 +188,6 @@ testFancyStringWithStdVector()
     EXPECT_EQ(dataIn[i], dataOut4[i])
       << "testFancyStringWithStdVector: failed reading user-specified number of elements (2.2)";
   }
-  std::cout << "testFancyStringWithStdVector: dataOut4 OK!" << std::endl;
 
   // all testings were successful if reached here
 }
@@ -229,7 +216,6 @@ testFancyStringWithItkArray()
   {
     EXPECT_EQ(dataIn[i], dataOut1[i]) << "testFancyStringWithItkArray: failed reading all elements in the string (2)";
   }
-  std::cout << "testFancyStringWithItkArray: dataOut1 OK!" << std::endl;
 
   // read all data elements for the output vector
   DataType dataOut2(5, 0.0);
@@ -243,7 +229,6 @@ testFancyStringWithItkArray()
     EXPECT_EQ(dataIn[i], dataOut2[i])
       << "testFancyStringWithItkArray: failed reading all elements for the output vector (2)";
   }
-  std::cout << "testFancyStringWithItkArray: dataOut2 OK!" << std::endl;
 
   // read user-specified number of data elements (output data exist)
   DataType dataOut3(10, 0.0);
@@ -257,7 +242,6 @@ testFancyStringWithItkArray()
     EXPECT_EQ(dataIn[i], dataOut3[i])
       << "testFancyStringWithItkArray: failed reading user-specified number of elements (1.2)";
   }
-  std::cout << "testFancyStringWithItkArray: dataOut3 OK!" << std::endl;
 
   // read user-specified number of data elements (output data do not exist)
   DataType dataOut4;
@@ -271,7 +255,6 @@ testFancyStringWithItkArray()
     EXPECT_EQ(dataIn[i], dataOut4[i])
       << "testFancyStringWithItkArray: failed reading user-specified number of elements (2.2)";
   }
-  std::cout << "testFancyStringWithItkArray: dataOut4 OK!" << std::endl;
 
   // all testings were successful if reached here
 }
@@ -283,25 +266,20 @@ testFancyStringForStringOperations()
 
   s = " Hello World! ";
   EXPECT_FALSE(s.TrimLeft() != "Hello World! ") << "testFancyStringForStringOperations: failed trimming left";
-  std::cout << "testFancyStringForStringOperations: TrimLeft() OK!" << std::endl;
 
   s = " Hello World! ";
   EXPECT_FALSE(s.TrimRight() != " Hello World!") << "testFancyStringForStringOperations: failed trimming right";
-  std::cout << "testFancyStringForStringOperations: TrimRight() OK!" << std::endl;
 
   s = " Hello World! ";
   EXPECT_FALSE(s.Trim() != "Hello World!") << "testFancyStringForStringOperations: failed trimming both sides";
-  std::cout << "testFancyStringForStringOperations: Trim() OK!" << std::endl;
 
   s = "Hello World!";
   EXPECT_FALSE(s.ToUpperCase() != "HELLO WORLD!")
     << "testFancyStringForStringOperations: failed converting to upper case";
-  std::cout << "testFancyStringForStringOperations: ToUpperCase() OK!" << std::endl;
 
   s = "Hello World!";
   EXPECT_FALSE(s.ToLowerCase() != "hello world!")
     << "testFancyStringForStringOperations: failed converting to lower case";
-  std::cout << "testFancyStringForStringOperations: ToLowerCase() OK!" << std::endl;
 
   s = " origin = 0 0 0 ";
   std::string lpart;
@@ -309,7 +287,6 @@ testFancyStringForStringOperations()
   s.Split(lpart, rpart);
   EXPECT_EQ(lpart, "origin") << "testFancyStringForStringOperations: failed splitting into two parts";
   EXPECT_EQ(rpart, "0 0 0") << "testFancyStringForStringOperations: failed splitting into two parts";
-  std::cout << "testFancyStringForStringOperations: Split(-,-) OK!" << std::endl;
 
   s = " size = 256 256 100; spacing = 0.3 0.3 0.7; origin = * ";
   std::vector<std::string> parts;
@@ -320,7 +297,6 @@ testFancyStringForStringOperations()
     << "testFancyStringForStringOperations: failed splitting into a sequence of strings";
   EXPECT_EQ(parts[2], "origin = *")
     << "testFancyStringForStringOperations: failed splitting into a sequence of strings";
-  std::cout << "testFancyStringForStringOperations: Split(vector) OK!" << std::endl;
 
   s = " size = 256 256 100; spacing = 0.3 0.3 0.7; origin = * ";
   std::map<std::string, std::string> items;
@@ -330,29 +306,24 @@ testFancyStringForStringOperations()
   EXPECT_EQ(items["spacing"], "0.3 0.3 0.7")
     << "testFancyStringForStringOperations: failed splitting into a map or dictionary";
   EXPECT_EQ(items["origin"], "*") << "testFancyStringForStringOperations: failed splitting into a map or dictionary";
-  std::cout << "testFancyStringForStringOperations: Split(map) OK!" << std::endl;
 
   s = "Hello World!";
   EXPECT_TRUE(s.MatchWith("hello world!")) << "testFancyStringForStringOperations: failed MatchWith testing (1)";
   EXPECT_FALSE(s.MatchWith("hello world!", false))
     << "testFancyStringForStringOperations: failed MatchWith testing (2)";
   EXPECT_FALSE(s.MatchWith(" hello world! ")) << "testFancyStringForStringOperations: failed MatchWith testing (3)";
-  std::cout << "testFancyStringForStringOperations: MatchWith(-) OK!" << std::endl;
 
   s = "Hello World!";
   EXPECT_TRUE(s.StartWith("hello")) << "testFancyStringForStringOperations: failed StartWith testing (1)";
   EXPECT_FALSE(s.StartWith("hello", false)) << "testFancyStringForStringOperations: failed StartWith testing (2)";
-  std::cout << "testFancyStringForStringOperations: StartWith(-) OK!" << std::endl;
 
   s = "Hello World!";
   EXPECT_TRUE(s.EndWith("world!")) << "testFancyStringForStringOperations: failed EndWith testing (1)";
   EXPECT_FALSE(s.EndWith("world!", false)) << "testFancyStringForStringOperations: failed EndWith testing (2)";
-  std::cout << "testFancyStringForStringOperations: EndWith(-) OK!" << std::endl;
 
   s = "Hello World!";
   EXPECT_TRUE(s.ContainSub("Lo wo")) << "testFancyStringForStringOperations: failed ContainSub testing (1)";
   EXPECT_FALSE(s.ContainSub("Lo wo", false)) << "testFancyStringForStringOperations: failed ContainSub testing (2)";
-  std::cout << "testFancyStringForStringOperations: ContainSub(-) OK!" << std::endl;
 
   // all testings were successful if reached here
 }

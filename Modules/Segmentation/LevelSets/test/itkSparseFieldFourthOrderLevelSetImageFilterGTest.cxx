@@ -188,7 +188,4 @@ TEST(SparseFieldFourthOrderLevelSetImageFilter, ConvertedLegacyTest)
   filter->SetInput(image);
 
   ASSERT_NO_THROW(filter->Update());
-
-
-  std::cout << "Test finished." << std::endl;
 }

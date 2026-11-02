@@ -79,7 +79,7 @@ TEST(DeformableSimplexMesh3DFilter, ConvertedLegacyTest)
   mySphereMeshSource->SetScale(scale);
   mySphereMeshSource->Update();
 
-  std::cout << "Triangle mesh created. " << std::endl;
+  SCOPED_TRACE("Triangle mesh created.");
 
   // send the sphere mesh ( triangle cells) to create a simplex mesh
   auto simplexFilter = SimplexFilterType::New();
@@ -91,7 +91,7 @@ TEST(DeformableSimplexMesh3DFilter, ConvertedLegacyTest)
 
   std::cout << "Simplex Mesh: " << simplexMesh << std::endl;
 
-  std::cout << "Creating dummy image...";
+  SCOPED_TRACE("Creating dummy image...");
   auto originalImage = OriginalImageType::New();
 
   auto imageSize = ImageSizeType::Filled(20);
@@ -121,22 +121,19 @@ TEST(DeformableSimplexMesh3DFilter, ConvertedLegacyTest)
       }
     }
   }
-  std::cout << "Creating dummy image done" << std::endl;
 
-  std::cout << " starting to Filter Image" << std::endl;
+  SCOPED_TRACE("starting to Filter Image");
   auto gradientanisotropicfilter = GradientAnisotropicImageType::New();
   gradientanisotropicfilter->SetInput(originalImage);
   gradientanisotropicfilter->SetNumberOfIterations(5);
   gradientanisotropicfilter->SetTimeStep(0.0625);
   gradientanisotropicfilter->SetConductanceParameter(3);
   gradientanisotropicfilter->Update();
-  std::cout << "GradientAnisotropicDiffusion is DONE!" << std::endl;
 
   auto gradientmagnitudefilter = GradientMagnitudeType::New();
   gradientmagnitudefilter->SetInput(gradientanisotropicfilter->GetOutput());
   gradientmagnitudefilter->SetSigma(1.0);
   gradientmagnitudefilter->Update();
-  std::cout << "GradientMagnitude is DONE!" << std::endl;
 
   auto sigmoidimagefilter = SigmoidImageType::New();
   sigmoidimagefilter->SetInput(gradientmagnitudefilter->GetOutput());
@@ -145,13 +142,11 @@ TEST(DeformableSimplexMesh3DFilter, ConvertedLegacyTest)
   sigmoidimagefilter->SetAlpha(10);
   sigmoidimagefilter->SetBeta(100);
   sigmoidimagefilter->Update();
-  std::cout << "Sigmoid is DONE!" << std::endl;
 
   auto gradientFilter = GradientFilterType::New();
   gradientFilter->SetInput(sigmoidimagefilter->GetOutput());
   gradientFilter->SetSigma(1.0);
   gradientFilter->Update();
-  std::cout << "GradientMagnitude is DONE!" << std::endl;
 
   auto deformFilter = DeformFilterType::New();
 

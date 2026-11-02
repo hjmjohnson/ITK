@@ -23,7 +23,7 @@
 
 TEST(RLEImageIteratorsForwardBackward, ConvertedLegacyTest)
 {
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   using ImageType = itk::RLEImage<unsigned short>;
 
   ImageType::Pointer myImage = ImageType::New();
@@ -57,7 +57,7 @@ TEST(RLEImageIteratorsForwardBackward, ConvertedLegacyTest)
   value = itk::NumericTraits<ImageType::PixelType>::ZeroValue();
 
   // Store information on the Image
-  std::cout << "Storing data on the image ... " << std::endl;
+  SCOPED_TRACE("Storing data on the image ...");
 
   while (!it.IsAtEnd())
   {
@@ -69,7 +69,7 @@ TEST(RLEImageIteratorsForwardBackward, ConvertedLegacyTest)
 
   // Verification
   IteratorType ot(myImage, region);
-  std::cout << "Verifying the data forwards... ";
+  SCOPED_TRACE("Verifying the data forwards...");
 
   value = itk::NumericTraits<ImageType::PixelType>::ZeroValue();
 
@@ -84,7 +84,7 @@ TEST(RLEImageIteratorsForwardBackward, ConvertedLegacyTest)
   }
 
   // Verification
-  std::cout << "Verifying the data backwards... ";
+  SCOPED_TRACE("Verifying the data backwards...");
 
   ot.GoToEnd();
   do
@@ -98,7 +98,7 @@ TEST(RLEImageIteratorsForwardBackward, ConvertedLegacyTest)
 
   // Verification
   ConstIteratorType cot(myImage, region);
-  std::cout << "Const Iterator: Verifying the data forwards... ";
+  SCOPED_TRACE("Const Iterator: Verifying the data forwards...");
 
   value = itk::NumericTraits<ImageType::PixelType>::ZeroValue();
 
@@ -113,7 +113,7 @@ TEST(RLEImageIteratorsForwardBackward, ConvertedLegacyTest)
   }
 
   // Verification
-  std::cout << "Const Iterator : Verifying the data backwards... ";
+  SCOPED_TRACE("Const Iterator : Verifying the data backwards...");
 
   cot.GoToEnd();
   do

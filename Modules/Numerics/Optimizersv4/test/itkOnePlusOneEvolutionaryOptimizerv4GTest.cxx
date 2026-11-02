@@ -253,7 +253,7 @@ TEST(OnePlusOneEvolutionaryOptimizerv4, ConvertedLegacyTest)
 
   // Set the initial position by setting the metric
   // parameters.
-  std::cout << "Set metric parameters." << std::endl;
+  SCOPED_TRACE("Set metric parameters.");
   metric->SetParameters(initialPosition);
 
   ASSERT_NO_THROW(itkOptimizer->StartOptimization());

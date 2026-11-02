@@ -58,7 +58,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   constexpr IndexType                                        idx{ 0, 0, 0, 1 };
   typename ConstNeighborhoodIteratorType::RegionType         reg = { idx, sz };
 
-  std::cout << "Creating ConstNeighborhoodIterator" << std::endl;
+  SCOPED_TRACE("Creating ConstNeighborhoodIterator");
   ConstNeighborhoodIteratorType it(radius, img, reg);
 
   std::cout << "Moving iterator using SetLocation() to loc: " << loc << std::endl;
@@ -66,7 +66,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   it.Print(std::cout);
   EXPECT_EQ(it.GetIndex(), loc) << "Error with SetLocation.";
 
-  std::cout << "Test GetIndex( NeighborhoodIndex )" << std::endl;
+  SCOPED_TRACE("Test GetIndex( NeighborhoodIndex )");
   EXPECT_EQ(it.GetIndex(it.GetCenterNeighborhoodIndex()), loc) << "Error getting index from center nhood index.";
   IndexType truthIndex;
   for (unsigned int i = 0; i < 4; ++i)
@@ -78,24 +78,24 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
     std::cerr << "Error getting index from nhood index 0. Returned " << it.GetIndex(0) << std::endl;
   }
 
-  std::cout << "Testing GoToBegin()" << std::endl;
+  SCOPED_TRACE("Testing GoToBegin()");
   it.GoToBegin();
   it.Print(std::cout);
   EXPECT_EQ(it.GetIndex(), idx) << "Error with GoToBegin.";
 
-  std::cout << "Testing IsAtBegin()" << std::endl;
+  SCOPED_TRACE("Testing IsAtBegin()");
   std::cout << it.IsAtBegin() << std::endl;
   EXPECT_TRUE(it.IsAtBegin()) << "Error with IsAtBegin.";
 
-  std::cout << "Testing GoToEnd()" << std::endl;
+  SCOPED_TRACE("Testing GoToEnd()");
   it.GoToEnd();
   it.Print(std::cout);
 
-  std::cout << "Testing IsAtEnd()" << std::endl;
+  SCOPED_TRACE("Testing IsAtEnd()");
   std::cout << it.IsAtEnd() << std::endl;
   EXPECT_TRUE(it.IsAtEnd()) << "Error with either IsAtEnd or GoToEnd.";
 
-  std::cout << "Testing forward iteration" << std::endl;
+  SCOPED_TRACE("Testing forward iteration");
   it.GoToBegin();
   IndexType index = it.GetIndex();
   ++it;
@@ -125,7 +125,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   EXPECT_EQ(it.GetIndex()[1], index[1]) << "Error with fwd iteration by one slice.";
   EXPECT_EQ(it.GetIndex()[2], index[2] + 1) << "Error with fwd iteration by one slice.";
 
-  std::cout << "Testing reverse iteration" << std::endl;
+  SCOPED_TRACE("Testing reverse iteration");
   it.GoToEnd();
   index = it.GetIndex();
   --it;
@@ -148,19 +148,19 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   EXPECT_EQ(it.GetIndex()[1], index[1]) << "Error with reverse iteration by one slice.";
   EXPECT_EQ(it.GetIndex()[2], index[2] - 1) << "Error with reverse iteration by one slice.";
 
-  std::cout << "Moving iterator using SetLocation()" << std::endl;
+  SCOPED_TRACE("Moving iterator using SetLocation()");
   it.SetLocation(loc);
   it.Print(std::cout);
 
-  std::cout << "Testing GetIndex()" << std::endl;
+  SCOPED_TRACE("Testing GetIndex()");
   std::cout << it.GetIndex() << std::endl;
 
-  std::cout << "Testing GetBoundingBoxAsImageRegion" << std::endl;
+  SCOPED_TRACE("Testing GetBoundingBoxAsImageRegion");
   std::cout << it.GetBoundingBoxAsImageRegion() << std::endl;
 
   ////
 
-  std::cout << "Testing random access iteration" << std::endl;
+  SCOPED_TRACE("Testing random access iteration");
 
   const typename ImageType::Pointer ra_img =
     itkConstNeighborhoodIteratorWithOnlyIndexTestGetTestImage<TImage>(10, 10, 5, 3);
@@ -171,20 +171,20 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
 
   radius[0] = radius[1] = radius[2] = radius[3] = 1;
 
-  std::cout << "Creating ConstNeighborhoodIterator" << std::endl;
+  SCOPED_TRACE("Creating ConstNeighborhoodIterator");
   ConstNeighborhoodIteratorType ra_it(radius, ra_img, ra_img->GetRequestedRegion());
   ConstNeighborhoodIteratorType copy_it = ra_it;
 
-  std::cout << "Test copying." << std::endl;
+  SCOPED_TRACE("Test copying.");
   EXPECT_FALSE(copy_it != ra_it) << "Failure with copying or equality comparison.";
   EXPECT_EQ(copy_it, ra_it) << "Failure with copying or equality comparison.";
   EXPECT_GE(copy_it, ra_it) << "Failure with copying or >= or <= comparison.";
   EXPECT_LE(copy_it, ra_it) << "Failure with copying or >= or <= comparison.";
 
-  std::cout << "Testing random access" << std::endl;
+  SCOPED_TRACE("Testing random access");
   ra_it.SetLocation(loc);
 
-  std::cout << "Adding [1, 1, 1, 1]" << std::endl;
+  SCOPED_TRACE("Adding [1, 1, 1, 1]");
   auto a_off = itk::MakeFilled<OffsetType>(1);
   ra_it += a_off;
   for (unsigned int i = 0; i < 4; ++i)
@@ -193,13 +193,13 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
     EXPECT_EQ(ind[i], loc[i] + 1) << "Error with adding offset " << a_off;
   }
 
-  std::cout << "Test iterator comparisons" << std::endl;
+  SCOPED_TRACE("Test iterator comparisons");
   EXPECT_LT(copy_it, ra_it) << "Error with < or <=.";
   EXPECT_LE(copy_it, ra_it) << "Error with < or <=.";
   EXPECT_LT(copy_it, ra_it) << "Error with < or <=.";
   EXPECT_LE(copy_it, ra_it) << "Error with < or <=.";
 
-  std::cout << "Subtracting [1, 1, 1, 1]" << std::endl;
+  SCOPED_TRACE("Subtracting [1, 1, 1, 1]");
   ra_it -= a_off;
   for (unsigned int i = 0; i < 4; ++i)
   {
@@ -209,7 +209,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
 
   copy_it = ra_it;
 
-  std::cout << "Adding [0 0 0 2]" << std::endl;
+  SCOPED_TRACE("Adding [0 0 0 2]");
   a_off.Fill(0);
   a_off[3] = 2;
   ra_it += a_off;
@@ -228,7 +228,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
 
   copy_it = ra_it;
 
-  std::cout << "Adding [0 8 0 0]" << std::endl;
+  SCOPED_TRACE("Adding [0 8 0 0]");
   a_off.Fill(0);
   a_off[1] = 8;
   ra_it += a_off;
@@ -246,7 +246,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
 
   copy_it = ra_it;
 
-  std::cout << "Adding [5 -3 2 -1]" << std::endl;
+  SCOPED_TRACE("Adding [5 -3 2 -1]");
   a_off[0] = 5;
   a_off[1] = -3;
   a_off[2] = 2;
@@ -267,7 +267,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   //
   // Test IndexInBounds
   //
-  std::cout << "Testing IndexInBounds" << std::endl;
+  SCOPED_TRACE("Testing IndexInBounds");
   constexpr int                     dims[4]{ 13, 11, 9, 7 };
   const typename ImageType::Pointer iib_img =
     itkConstNeighborhoodIteratorWithOnlyIndexTestGetTestImage<TImage>(dims[0], dims[1], dims[2], dims[3]);
@@ -276,7 +276,7 @@ itkConstNeighborhoodIteratorWithOnlyIndexTestRun()
   radius[2] = 2;
   radius[3] = 1;
 
-  std::cout << "Creating ConstNeighborhoodIterator" << std::endl;
+  SCOPED_TRACE("Creating ConstNeighborhoodIterator");
   using IteratorType = ConstNeighborhoodIteratorType;
   IteratorType                      iib_it(radius, iib_img, iib_img->GetRequestedRegion());
   typename IteratorType::OffsetType resultOffset;

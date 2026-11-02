@@ -57,7 +57,7 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
   using MatrixType = TransformType::MatrixType;
 
   {
-    std::cout << "Test default constructor... ";
+    SCOPED_TRACE("Test default constructor...");
 
     auto transform = TransformType::New();
 
@@ -84,12 +84,10 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
     parameters[11] = 0.0;
 
     transform->SetParameters(parameters);
-
-    std::cout << " PASSED !" << std::endl;
   }
 
   {
-    std::cout << "Test initial rotation matrix " << std::endl;
+    SCOPED_TRACE("Test initial rotation matrix");
     auto             transform = TransformType::New();
     const MatrixType matrix = transform->GetMatrix();
     std::cout << "Matrix = " << std::endl;
@@ -145,8 +143,6 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating point : " << p << std::endl
                       << "Result should be     : " << q << std::endl
                       << "Reported Result is   : " << r;
-
-      std::cout << "Ok rotating an itk::Point " << std::endl;
     }
 
     {
@@ -167,8 +163,6 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vector : " << p << std::endl
                       << "Result should be      : " << q << std::endl
                       << "Reported Result is    : " << r;
-
-      std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
 
     {
@@ -189,8 +183,6 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating covariant vector : " << p << std::endl
                       << "Result should be                : " << q << std::endl
                       << "Reported Result is              : " << r;
-
-      std::cout << "Ok rotating an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -214,8 +206,6 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vnl_vector : " << p << std::endl
                       << "Result should be          : " << q << std::endl
                       << "Reported Result is        : " << r;
-
-      std::cout << "Ok rotating an vnl_Vector " << std::endl;
     }
   }
 
@@ -250,8 +240,6 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
 
     EXPECT_TRUE(Ok) << "The center point was not invariant to rotation ";
 
-    std::cout << "Ok center is invariant to rotation." << std::endl;
-
 
     const unsigned int np = transform->GetNumberOfParameters();
 
@@ -285,11 +273,10 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
         << "Get/Set parameters: parameters do not match ";
     }
-    std::cout << "Get/Set parameter check Passed !" << std::endl;
   }
 
   {
-    std::cout << " Exercise the SetIdentity() method " << std::endl;
+    SCOPED_TRACE("Exercise the SetIdentity() method");
     auto transform = TransformType::New();
 
     auto axis = itk::MakeFilled<itk::Vector<double, 3>>(1);
@@ -334,11 +321,10 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       std::cout << parameters[p] << " = " << parameters2[p] << std::endl;
       EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance) << "Identity parameters do not match";
     }
-    std::cout << "Identity parameters check Passed !" << std::endl;
   }
 
   {
-    std::cout << " Exercise the Scaling methods " << std::endl;
+    SCOPED_TRACE("Exercise the Scaling methods");
     auto transform = TransformType::New();
 
     auto         axis = itk::MakeFilled<itk::Vector<double, 3>>(1);
@@ -403,9 +389,8 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters2[p]), tolerance)
         << "Scale parameters do not match input ";
     }
-    std::cout << "Scale parameters check Passed !" << std::endl;
 
-    std::cout << " Exercise the SetMatrix() method" << std::endl;
+    SCOPED_TRACE("Exercise the SetMatrix() method");
     auto transform2 = TransformType::New();
     transform2->SetFixedParameters(transform->GetFixedParameters());
     transform2->SetMatrix(transform->GetMatrix());
@@ -422,7 +407,7 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
       EXPECT_LE(itk::Math::Absolute(parameters[p] - parameters3[p]), tolerance)
         << "SetMatrix parameters do not match input ";
     }
-    std::cout << "SetMatrix parameters do match!" << std::endl;
+    SCOPED_TRACE("SetMatrix parameters do match!");
 
     int diff = 0;
 
@@ -463,14 +448,13 @@ TEST(ComposeScaleSkewVersor3DTransform, ConvertedLegacyTest)
                          << "Transform2 = " << transform2 << std::endl
                          << "**************************************";
     }
-    std::cout << "SetMatrix() points check Passed !" << std::endl;
 
     auto tInverse = TransformType::New();
     EXPECT_TRUE(transform->GetInverse(tInverse)) << "Cannot create inverse transform";
     std::cout << "translation: " << transform;
     std::cout << "translationInverse: " << tInverse;
 
-    std::cout << "Testing jacobian" << std::endl;
+    SCOPED_TRACE("Testing jacobian");
     TransformType::InputPointType pnt;
     pnt[0] = 10;
     pnt[1] = 20;

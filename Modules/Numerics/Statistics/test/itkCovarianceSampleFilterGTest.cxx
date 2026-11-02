@@ -23,7 +23,7 @@
 
 TEST(CovarianceSampleFilter, ConvertedLegacyTest)
 {
-  std::cout << "CovarianceSampleFilter Test \n \n";
+  SCOPED_TRACE("CovarianceSampleFilter Test");
 
   // Now generate an image
   enum

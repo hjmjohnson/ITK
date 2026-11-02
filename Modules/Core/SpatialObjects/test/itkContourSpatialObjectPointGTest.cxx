@@ -227,7 +227,4 @@ TEST(ContourSpatialObjectPoint, ConvertedLegacyTest)
 
   EXPECT_EQ(pickedPoint4D, contourSpatialObjectPoint4DAlt.GetPickedPointInObjectSpace());
   EXPECT_EQ(normal4D, contourSpatialObjectPoint4DAlt.GetNormalInObjectSpace());
-
-
-  std::cout << "Test finished" << std::endl;
 }

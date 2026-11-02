@@ -108,7 +108,7 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
 
   bool testPassed = true;
 
-  std::cout << "Create the input image pattern." << std::endl;
+  SCOPED_TRACE("Create the input image pattern.");
   ImageType::RegionType region;
   ImageType::SizeType   size = { { 64, 64 } };
   region.SetSize(size);
@@ -134,7 +134,7 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
     inIter.Set(PixelType(pattern.Evaluate(inIter.GetIndex(), size, size, padValue)));
   }
 
-  std::cout << "Create the input displacement field." << std::endl;
+  SCOPED_TRACE("Create the input displacement field.");
 
   constexpr unsigned int factors[ImageDimension]{ 2, 3 };
 
@@ -164,7 +164,7 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
     fieldIter.Set(displacement);
   }
 
-  std::cout << "Run WarpVectorImageFilter in standalone mode with progress." << std::endl;
+  SCOPED_TRACE("Run WarpVectorImageFilter in standalone mode with progress.");
   using WarperType = itk::WarpVectorImageFilter<ImageType, ImageType, FieldType>;
   auto warper = WarperType::New();
 
@@ -208,7 +208,7 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
   // Update the filter
   warper->Update();
 
-  std::cout << "Checking the output against expected." << std::endl;
+  SCOPED_TRACE("Checking the output against expected.");
 
   // compute non-padded output region
   ImageType::RegionType validRegion;
@@ -293,7 +293,7 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
     ++outIter;
   }
 
-  std::cout << "Run ExpandImageFilter with streamer" << std::endl;
+  SCOPED_TRACE("Run ExpandImageFilter with streamer");
 
   using VectorCasterType = itk::CastImageFilter<FieldType, FieldType>;
   auto vcaster = VectorCasterType::New();
@@ -321,7 +321,7 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
   EXPECT_TRUE(vmonitor->VerifyInputFilterExecutedStreaming(numStreamDivisions))
     << "Displacement field did not stream as expected." << vmonitor;
 
-  std::cout << "Compare standalone and streamed outputs" << std::endl;
+  SCOPED_TRACE("Compare standalone and streamed outputs");
 
   Iterator streamIter(streamer->GetOutput(), streamer->GetOutput()->GetBufferedRegion());
 
@@ -350,7 +350,7 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
   using InterpolatorType = WarperType::InterpolatorType;
   const InterpolatorType::Pointer interp = warper->GetModifiableInterpolator();
 
-  std::cout << "Setting interpolator to nullptr" << std::endl;
+  SCOPED_TRACE("Setting interpolator to nullptr");
   warper->SetInterpolator(nullptr);
 
   EXPECT_THROW(warper->Update(), itk::ExceptionObject);
@@ -359,7 +359,4 @@ TEST(WarpVectorImageFilter, ConvertedLegacyTest)
   warper->SetInterpolator(interp);
 
   EXPECT_EQ(interp, warper->GetInterpolator());
-
-
-  std::cout << "Test finished." << std::endl;
 }

@@ -121,9 +121,8 @@ void
 PrintHistogramInfo(HistogramConstPointerType refHistogram)
 {
   std::cout << std::endl;
-  std::cout << "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << std::endl;
+  SCOPED_TRACE("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
   std::cout << refHistogram << std::endl;
-  std::cout << "--------------------------------------------------------------------" << std::endl;
 
   // If the reference histogram is provided, then extract summary statistics
   // directly from the histogram.
@@ -146,7 +145,7 @@ PrintHistogramInfo(HistogramConstPointerType refHistogram)
               << histit.GetFrequency() << std::left << std::setw(colWidth) << binmin << std::left << std::setw(colWidth)
               << binmax << std::left << std::setw(colWidth) << binmax - binmin << std::endl;
   }
-  std::cout << "\n\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" << std::endl;
+  SCOPED_TRACE("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
   std::cout.flags(initial_cout_state);
 }
 
@@ -244,7 +243,7 @@ itkHistogramMatchingImageFilterTest()
     }
     {
       // Exercise auxiliary functions
-      std::cout << "Exercise auxiliary functions" << std::endl;
+      SCOPED_TRACE("Exercise auxiliary functions");
 
       std::cout << "Source Histogram: " << filterWithReferenceImage->GetSourceHistogram() << std::endl;
       std::cout << "Output Histogram: " << filterWithReferenceImage->GetOutputHistogram() << std::endl;
@@ -258,9 +257,8 @@ itkHistogramMatchingImageFilterTest()
 
       // Walk the output and compare with reference
       Iterator outIter(filterWithReferenceImage->GetOutput(), region);
-      std::cout << "filterWithReferenceImage - Image Test -- START" << std::endl;
+      SCOPED_TRACE("filterWithReferenceImage - Image Test -- START");
       passed &= CompareImages(refIter, outIter);
-      std::cout << "filterWithReferenceImage - Image Test -- FINISHED" << std::endl;
     }
     {
       // Get referenceHistogram for other tests
@@ -268,7 +266,6 @@ itkHistogramMatchingImageFilterTest()
       PrintHistogramInfo(refHistogram);
     }
   }
-  std::cout << "===================================================================================" << std::endl;
   {
     // Test SourceHistogram same size (50) as ReferenceHistogram
     auto filterWithSameSizeHistogram = FilterType::New();
@@ -293,9 +290,8 @@ itkHistogramMatchingImageFilterTest()
 
     // Walk the output and compare with reference
     Iterator outIter(filterWithSameSizeHistogram->GetOutput(), region);
-    std::cout << "filterWithSameSizeHistogram - Image Test -- START" << std::endl;
+    SCOPED_TRACE("filterWithSameSizeHistogram - Image Test -- START");
     passed &= CompareImages(refIter, outIter);
-    std::cout << "filterWithSameSizeHistogram - Image Test -- FINISHED" << std::endl;
   }
   // Test SourceHistogram smaller than (31) ReferenceHistogram
   {
@@ -319,9 +315,8 @@ itkHistogramMatchingImageFilterTest()
 
     // Walk the output and compare with reference
     Iterator outIter(filterWithSmallerHistogram->GetOutput(), region);
-    std::cout << "filterWithSmallerHistogram - Image Test -- START" << std::endl;
+    SCOPED_TRACE("filterWithSmallerHistogram - Image Test -- START");
     passed &= CompareImages(refIter, outIter);
-    std::cout << "filterWithSmallerHistogram - Image Test -- FINISHED" << std::endl;
   }
 
   // Test SourceHistogram larger than (93) ReferenceHistogram
@@ -346,9 +341,8 @@ itkHistogramMatchingImageFilterTest()
 
     // Walk the output and compare with reference
     Iterator outIter(filterWithLargerHistogram->GetOutput(), region);
-    std::cout << "filterWithLargerHistogram - Image Test -- START" << std::endl;
+    SCOPED_TRACE("filterWithLargerHistogram - Image Test -- START");
     passed &= CompareImages(refIter, outIter);
-    std::cout << "filterWithLargerHistogram - Image Test -- FINISHED" << std::endl;
   }
 
   // Incorrect input setting failures for ReferenceHistogram

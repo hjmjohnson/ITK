@@ -51,7 +51,7 @@ TEST(ImageIterator, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension{ 3 };
 
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   const itk::Image<itk::Vector<unsigned short, 5>, ImageDimension>::Pointer o3 =
     itk::Image<itk::Vector<unsigned short, 5>, ImageDimension>::New();
 
@@ -74,7 +74,7 @@ TEST(ImageIterator, ConvertedLegacyTest)
   auto fillValue = itk::MakeFilled<itk::Vector<unsigned short, 5>>(itk::NumericTraits<unsigned short>::max());
   o3->FillBuffer(fillValue);
 
-  std::cout << "Setting/Getting a pixel" << std::endl;
+  SCOPED_TRACE("Setting/Getting a pixel");
   itk::Vector<unsigned short, 5> vec;
 
   vec[0] = 5;

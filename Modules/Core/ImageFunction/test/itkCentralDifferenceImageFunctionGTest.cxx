@@ -164,7 +164,7 @@ TEST(CentralDifferenceImageFunction, ConvertedLegacyTest)
   // to be in bounds.
 
   // test results at non-integer positions
-  std::cout << "Test non-integer position for EvaluateAtContinuousIndex. " << std::endl;
+  SCOPED_TRACE("Test non-integer position for EvaluateAtContinuousIndex.");
   cindex.Fill(8.0);
   cindex[0] = 8.0;
   OutputType center = function->EvaluateAtContinuousIndex(cindex);
@@ -188,7 +188,7 @@ TEST(CentralDifferenceImageFunction, ConvertedLegacyTest)
     << "ERROR: Failed for EvaluateAtContinuousIndex at non-integer incecies. "
     << "Center index result is not average of left and right.";
 
-  std::cout << "Test non-integer position for Evaluate. " << std::endl;
+  SCOPED_TRACE("Test non-integer position for Evaluate.");
   point.Fill(8.0);
   point[0] = 8.0;
   center = function->Evaluate(point);

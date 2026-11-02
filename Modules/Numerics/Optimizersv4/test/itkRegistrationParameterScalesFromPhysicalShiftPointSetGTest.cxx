@@ -363,7 +363,7 @@ TEST(RegistrationParameterScalesFromPhysicalShiftPointSet, ConvertedLegacyTest)
   //
   // Test that not setting a virtual domain point set for sampling fill fail
   //
-  std::cout << "Test without setting virtual domain point set." << std::endl;
+  SCOPED_TRACE("Test without setting virtual domain point set.");
   const RegistrationParameterScalesFromPhysicalShiftType::Pointer shiftScaleEstimator2 =
     RegistrationParameterScalesFromPhysicalShiftType::New();
   shiftScaleEstimator2->SetMetric(metric);

@@ -68,6 +68,4 @@ TEST(VoronoiDiagram2DGenerator, ConvertedLegacyTest)
     vd->GetCellId(i, cellPtr);
     EXPECT_GE(cellPtr->GetNumberOfPoints(), 2u);
   }
-
-  std::cout << "Test passed." << std::endl;
 }

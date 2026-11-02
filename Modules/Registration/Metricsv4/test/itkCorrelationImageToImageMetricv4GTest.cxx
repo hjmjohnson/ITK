@@ -56,13 +56,13 @@ itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(TMetricPointer &  me
   using MetricType = typename TMetricPointer::ObjectType;
 
   /* Initialize. */
-  std::cout << "Calling Initialize..." << std::endl;
+  SCOPED_TRACE("Calling Initialize...");
   ASSERT_NO_THROW(metric->Initialize()) << "Caught unexpected exception during Initialize";
 
   // Evaluate with GetValueAndDerivative
   typename MetricType::MeasureType    valueReturn1{};
   typename MetricType::DerivativeType derivativeReturn;
-  std::cout << "Calling GetValueAndDerivative..." << std::endl;
+  SCOPED_TRACE("Calling GetValueAndDerivative...");
   ASSERT_NO_THROW(metric->GetValueAndDerivative(valueReturn1, derivativeReturn))
     << "Caught unexpected exception during GetValueAndDerivative";
 
@@ -71,15 +71,15 @@ itkCorrelationImageToImageMetricv4Test_WithSpecifiedThreads(TMetricPointer &  me
   std::cout << "derivativeReturn:" << derivativeReturn << std::endl;
 
   /* Re-initialize. */
-  std::cout << "Calling Initialize..." << std::endl;
+  SCOPED_TRACE("Calling Initialize...");
   ASSERT_NO_THROW(metric->Initialize()) << "Caught unexpected exception during re-initialize";
 
   typename MetricType::MeasureType valueReturn2{};
-  std::cout << "Calling GetValue..." << std::endl;
+  SCOPED_TRACE("Calling GetValue...");
   ASSERT_NO_THROW(valueReturn2 = metric->GetValue()) << "Caught unexpected exception during GetValue";
 
   // Test same value returned by different methods
-  std::cout << "Check Value return values..." << std::endl;
+  SCOPED_TRACE("Check Value return values...");
   if (itk::Math::NotExactlyEquals(valueReturn1, valueReturn2))
   {
     std::cerr << "Results for Value don't match: " << valueReturn1 << ", " << valueReturn2 << std::endl;
@@ -198,7 +198,7 @@ TEST(CorrelationImageToImageMetricv4, ConvertedLegacyTest)
                                                  static_cast<MovingTransformType::ParametersValueType>(1000));
   movingTransform->SetParameters(parameters);
   constexpr MetricType::MeasureType expectedMetricMax{ itk::NumericTraits<MetricType::MeasureType>::max() };
-  std::cout << "Testing non-overlapping images. Expect a warning:" << std::endl;
+  SCOPED_TRACE("Testing non-overlapping images. Expect a warning:");
   MetricType::MeasureType    valueReturn = NAN;
   MetricType::DerivativeType derivativeReturn;
   metric->GetValueAndDerivative(valueReturn, derivativeReturn);

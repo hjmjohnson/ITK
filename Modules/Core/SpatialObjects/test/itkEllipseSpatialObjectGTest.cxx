@@ -36,7 +36,7 @@ TEST(EllipseSpatialObject, ConvertedLegacyTest)
     radii[i] = i;
   }
 
-  std::cout << "Testing radii : ";
+  SCOPED_TRACE("Testing radii :");
 
   myEllipse->SetRadiusInObjectSpace(radii);
   myEllipse->Update();
@@ -50,7 +50,7 @@ TEST(EllipseSpatialObject, ConvertedLegacyTest)
   EXPECT_EQ(objectSpaceRadius, myEllipse->GetRadiusInObjectSpace());
 
   // Point consistency
-  std::cout << "Is Inside: ";
+  SCOPED_TRACE("Is Inside:");
   itk::Point<double, 4> in;
   in[0] = 1;
   in[1] = 2;
@@ -66,10 +66,8 @@ TEST(EllipseSpatialObject, ConvertedLegacyTest)
 
   EXPECT_FALSE(myEllipse->IsInsideInWorldSpace(out)) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
 
-
-  std::cout << "ObjectToWorldTransform : ";
+  SCOPED_TRACE("ObjectToWorldTransform :");
 
   // Create myEllipse2 as a child of myEllipse
   auto myEllipse2 = EllipseType::New();
@@ -90,7 +88,6 @@ TEST(EllipseSpatialObject, ConvertedLegacyTest)
   EXPECT_EQ(offset3[1], 5) << "[FAILED]";
   EXPECT_EQ(offset3[2], 5) << "[FAILED]";
   EXPECT_EQ(offset3[3], 5) << "[FAILED]";
-  std::cout << "[PASSED]" << std::endl;
 
   // NOTE: ORDER OF Update() and ComputeFamilyBoundingBox() is important.
   myEllipse->Update();
@@ -98,7 +95,7 @@ TEST(EllipseSpatialObject, ConvertedLegacyTest)
   const EllipseType::BoundingBoxType * boundingBox = myEllipse->GetFamilyBoundingBoxInWorldSpace();
   std::cout << "Bounds = " << boundingBox->GetBounds() << std::endl;
 
-  std::cout << "Update(): ";
+  SCOPED_TRACE("Update():");
   for (unsigned int i = 0; i < 3; ++i)
   {
     const EllipseType::BoundingBoxType::BoundsArrayType bounds = boundingBox->GetBounds();
@@ -107,7 +104,4 @@ TEST(EllipseSpatialObject, ConvertedLegacyTest)
                      16) // this is 13 if Update() and ComputeFamilyBoundingBox are reversed order.
       << "[FAILED]";
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

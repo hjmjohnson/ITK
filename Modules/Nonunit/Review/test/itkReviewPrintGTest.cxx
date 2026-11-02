@@ -105,7 +105,7 @@ TEST(ReviewPrint, ConvertedLegacyTest)
   std::cout << "--------------VTKPolyDataWriterObj " << VTKPolyDataWriterObj;
 
   itk::ImageKernelOperator<float> kernelOperator;
-  std::cout << "--------------ImageKernelOperatorObj ";
+  SCOPED_TRACE("--------------ImageKernelOperatorObj");
   kernelOperator.Print(std::cout);
 
   itk::HessianToObjectnessMeasureImageFilter<HessianImageType, OutputImageType>::Pointer ObjectnessFilterObject =

@@ -55,7 +55,7 @@ public:
 
 TEST(WeightedCovarianceSampleFilter, ConvertedLegacyTest)
 {
-  std::cout << "WeightedCovarianceSampleFilter test \n \n";
+  SCOPED_TRACE("WeightedCovarianceSampleFilter test");
 
   using SampleType = itk::Statistics::ListSample<MeasurementVectorType>;
 

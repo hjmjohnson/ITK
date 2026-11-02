@@ -69,7 +69,7 @@ TEST(OrthogonalSwath2DPathFilter, ConvertedLegacyTest)
   using RescaleIntensityImageFilterType = itk::RescaleIntensityImageFilter<DoubleImageType, UCharImageType>;
 
   // Set up the path
-  std::cout << "Making a square Path with v0 at (24,24) -> (24,104) -> (104,104) -> (104,24)" << std::endl;
+  SCOPED_TRACE("Making a square Path with v0 at (24,24) -> (24,104) -> (104,104) -> (104,24)");
   auto inputPath = PolyLineParametricPathType::New();
 
   auto v = itk::MakeFilled<VertexType>(24);
@@ -96,7 +96,7 @@ TEST(OrthogonalSwath2DPathFilter, ConvertedLegacyTest)
   chainCodeToFourierSeriesPathFilter->SetNumberOfHarmonics(7); // make a nice, round, path for the swath
 
   // Set up the image
-  std::cout << "Making a 64x64 black square centered in a 128x128 white image" << std::endl;
+  SCOPED_TRACE("Making a 64x64 black square centered in a 128x128 white image");
   auto      inputImage = UCharImageType::New();
   IndexType start;
   start[0] = 0;

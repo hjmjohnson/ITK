@@ -64,7 +64,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
     using myIteratorType = itk::ImageRegionIteratorWithIndex<myImageType>;
 
     // Initialize the content of Image A
-    std::cout << "Input Image initialization " << std::endl;
+    SCOPED_TRACE("Input Image initialization");
 
     size[0] = 60;
     size[1] = 60;
@@ -111,9 +111,8 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
 
     // Execute the filter
-    std::cout << "Executing Smoothing filter...";
+    SCOPED_TRACE("Executing Smoothing filter...");
     filter->Update();
-    std::cout << " Done !" << std::endl;
 
 
     // Create a  Filter
@@ -132,9 +131,8 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
     filter1->SetInput(inputImage);
 
     // Execute the filter1
-    std::cout << "Executing First Derivative filter...";
+    SCOPED_TRACE("Executing First Derivative filter...");
     filter1->Update();
-    std::cout << " Done !" << std::endl;
 
     // Create a  Filter
     auto filter2 = myGaussianFilterType::New();
@@ -152,13 +150,12 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
     filter2->SetInput(inputImage);
 
     // Execute the filter2
-    std::cout << "Executing Second Derivative filter...";
+    SCOPED_TRACE("Executing Second Derivative filter...");
     filter2->Update();
-    std::cout << " Done !" << std::endl;
   }
 
   { // Test normalizations factors using a 1D image
-    std::cout << "Test normalizations factors using a 1-D image" << std::endl;
+    SCOPED_TRACE("Test normalizations factors using a 1-D image");
 
     using PixelType = float;
     using ImageType = itk::Image<PixelType, 1>;
@@ -197,7 +194,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
     filter->SetInput(inputImage);
 
-    std::cout << "Testing normalization across scales...  ";
+    SCOPED_TRACE("Testing normalization across scales...");
     { // begin of test for normalization across scales
 
       auto normalizeAcrossScale = true;
@@ -230,7 +227,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
     } // end of test for normalization across scales
 
-    std::cout << "Testing normalization...  ";
+    SCOPED_TRACE("Testing normalization...");
     { // begin of test for normalization
 
       filter->SetNormalizeAcrossScale(true);
@@ -270,7 +267,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
     } // end of test for normalization
 
-    std::cout << "Testing derivatives normalization " << std::endl;
+    SCOPED_TRACE("Testing derivatives normalization");
 
     { // begin of test for normalization among derivatives
       filter->SetNormalizeAcrossScale(false);
@@ -311,7 +308,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
       const PixelRealType derivativeValue = filter->GetOutput()->GetPixel(index);
 
-      std::cout << "   first derivative normalization...  ";
+      SCOPED_TRACE("first derivative normalization...");
       EXPECT_LE(derivativeLowerBound, derivativeValue) << "The value of the first derivative at index " << index[0];
       EXPECT_GE(derivativeUpperBound, derivativeValue) << "The value of the first derivative at index " << index[0];
 
@@ -343,7 +340,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
       const PixelRealType secondDerivativeValue = filter->GetOutput()->GetPixel(index);
 
-      std::cout << "   second derivative normalization...  ";
+      SCOPED_TRACE("second derivative normalization...");
       EXPECT_LE(secondDerivativeLowerBound, secondDerivativeValue)
         << "The value of the second derivative at index " << index[0];
       EXPECT_GE(secondDerivativeUpperBound, secondDerivativeValue)
@@ -361,7 +358,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
     IteratorType it(outputImage, outputImage->GetBufferedRegion());
 
     std::cout << std::endl << std::endl;
-    std::cout << "Smoothed image " << std::endl;
+    SCOPED_TRACE("Smoothed image");
     filter->SetZeroOrder();
     filter->Update();
     it.GoToBegin();
@@ -373,7 +370,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
     // Now compute the first derivative
     std::cout << std::endl << std::endl;
-    std::cout << "First Derivative " << std::endl;
+    SCOPED_TRACE("First Derivative");
     filter->SetFirstOrder();
     filter->Update();
     it.GoToBegin();
@@ -386,7 +383,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
 
     // Now compute the first derivative
     std::cout << std::endl << std::endl;
-    std::cout << "Second Derivative " << std::endl;
+    SCOPED_TRACE("Second Derivative");
     filter->SetSecondOrder();
     filter->Update();
     it.GoToBegin();
@@ -401,7 +398,7 @@ TEST(RecursiveGaussianImageFilter, ConvertedLegacyTest)
   }
 
   {
-    std::cout << "Test InPlace filtering using a 1-D image" << std::endl;
+    SCOPED_TRACE("Test InPlace filtering using a 1-D image");
 
     using PixelType = float;
     using ImageType = itk::Image<PixelType, 1>;

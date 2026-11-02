@@ -24,7 +24,6 @@
 TEST(IdentityTransform, ConvertedLegacyTest)
 {
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing Identity Transform " << std::endl << std::endl;
 
   constexpr double       epsilon{ 1e-10 };
@@ -36,7 +35,7 @@ TEST(IdentityTransform, ConvertedLegacyTest)
 
   std::cout << "FixedParameters: " << transform->GetFixedParameters() << std::endl;
 
-  std::cout << "Testing TransformPoint: ";
+  SCOPED_TRACE("Testing TransformPoint:");
   IdentityTransformType::InputPointType p(10);
 
   IdentityTransformType::OutputPointType r = transform->TransformPoint(p);
@@ -50,11 +49,9 @@ TEST(IdentityTransform, ConvertedLegacyTest)
   }
   EXPECT_TRUE(Ok) << "Error Transforming Point";
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // Test TransformVector
-  std::cout << "Testing TransformVector: ";
+  SCOPED_TRACE("Testing TransformVector:");
   IdentityTransformType::InputVectorType vin;
   vin[0] = 1;
   vin[1] = 2;
@@ -70,11 +67,9 @@ TEST(IdentityTransform, ConvertedLegacyTest)
   }
   EXPECT_TRUE(Ok) << "Error with TransformVector itk::Vector";
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // Test TransformVector vnl_vector
-  std::cout << "Testing TransformVector (vnl): ";
+  SCOPED_TRACE("Testing TransformVector (vnl):");
   IdentityTransformType::InputVnlVectorType vnlin;
   vnlin[0] = 1;
   vnlin[1] = 2;
@@ -90,11 +85,9 @@ TEST(IdentityTransform, ConvertedLegacyTest)
   }
   EXPECT_TRUE(Ok) << "Error with TransformVector vnlVector";
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // Test TransformCovariantVector
-  std::cout << "Testing TransformCovariantVector: ";
+  SCOPED_TRACE("Testing TransformCovariantVector:");
   IdentityTransformType::InputCovariantVectorType vcin;
   vcin[0] = 1;
   vcin[1] = 2;
@@ -110,8 +103,6 @@ TEST(IdentityTransform, ConvertedLegacyTest)
   }
   EXPECT_TRUE(Ok) << "Error with TransformVector CovariantVector";
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   const IdentityTransformType::ParametersType params(0);
   transform->SetParameters(params);
@@ -121,14 +112,12 @@ TEST(IdentityTransform, ConvertedLegacyTest)
   EXPECT_EQ(0u, transform->GetNumberOfParameters());
 
   // Testing the Jacobian
-  std::cout << "Testing Jacobian: ";
+  SCOPED_TRACE("Testing Jacobian:");
   IdentityTransformType::JacobianType jacobian;
   transform->ComputeJacobianWithRespectToParameters(p, jacobian);
 
   EXPECT_EQ(jacobian.rows(), 3u) << "Error with Jacobian: " << jacobian;
   EXPECT_EQ(jacobian.columns(), 0u) << "Error with Jacobian: " << jacobian;
-
-  std::cout << " [ PASSED ] " << std::endl;
 
 
   IdentityTransformType::JacobianPositionType jacobianWrtPos;

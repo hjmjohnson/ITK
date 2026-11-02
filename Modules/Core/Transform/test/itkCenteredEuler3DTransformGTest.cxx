@@ -24,7 +24,6 @@
 TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
 {
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing Centered Euler Angles 3D Transform" << std::endl << std::endl;
 
   constexpr double       epsilon{ 1e-10 };
@@ -35,15 +34,13 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   auto eulerTransform = EulerTransformType::New();
 
   // Testing Identity
-  std::cout << "Testing identity transform: ";
+  SCOPED_TRACE("Testing identity transform:");
   eulerTransform->SetIdentity();
 
   EulerTransformType::OffsetType offset = eulerTransform->GetOffset();
   EXPECT_EQ(offset[0], 0.0) << "[ FAILED ]";
   EXPECT_EQ(offset[1], 0.0) << "[ FAILED ]";
   EXPECT_EQ(offset[2], 0.0) << "[ FAILED ]";
-
-  std::cout << "[ PASSED ]" << std::endl;
 
   // 15 degrees in radians
   const double angleX = 15.0 * std::atan(1.0f) / 45.0;
@@ -60,7 +57,7 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   const double cz = std::cos(angleZ);
   const double sz = std::sin(angleZ);
 
-  std::cout << "Testing Rotation:";
+  SCOPED_TRACE("Testing Rotation:");
   eulerTransform->SetRotation(angleX, angleY, angleZ);
 
   // Rotate an itk::Point
@@ -117,10 +114,8 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
 
-
-  std::cout << "Testing Translation:";
+  SCOPED_TRACE("Testing Translation:");
 
   eulerTransform->SetRotation(0, 0, 0);
 
@@ -145,11 +140,9 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // Testing Parameters
-  std::cout << "Testing Set/Get Parameters: ";
+  SCOPED_TRACE("Testing Set/Get Parameters:");
   EulerTransformType::ParametersType parameters(9, 0);
   for (unsigned int i = 0; i < 3; ++i)
   {
@@ -169,10 +162,9 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   EXPECT_EQ(parameters_result[6], 3.0) << " [ FAILED ] ";
   EXPECT_EQ(parameters_result[7], 4.0) << " [ FAILED ] ";
   EXPECT_EQ(parameters_result[8], 5.0) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 
   // Testing Jacobian
-  std::cout << "Testing Jacobian: ";
+  SCOPED_TRACE("Testing Jacobian:");
   for (double & i : pInit)
   {
     i = 0;
@@ -199,7 +191,6 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   EXPECT_EQ(jacobian[2][3], 0.0) << " [ FAILED ] ";
   EXPECT_EQ(jacobian[2][4], 0.0) << " [ FAILED ] ";
   EXPECT_EQ(jacobian[2][5], 1.0) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 
   // Really test the Jacobian
   EulerTransformType::InputPointType center;
@@ -211,7 +202,7 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   eulerTransform->Print(std::cout);
   for (unsigned int pp = 0; pp < 2; ++pp)
   {
-    std::cout << "Testing Jacobian when ComputeZYX is ";
+    SCOPED_TRACE("Testing Jacobian when ComputeZYX is");
     if (pp == 0)
     {
       std::cout << "true" << std::endl;
@@ -280,10 +271,9 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
     }
 
     std::cout << approxJacobian << std::endl;
-    std::cout << " [ PASSED ] " << std::endl;
   }
 
-  std::cout << "Testing Angle from matrix : ";
+  SCOPED_TRACE("Testing Angle from matrix :");
   eulerTransform->SetIdentity();
 
   eulerTransform->SetRotation(0.2, 0.1, 0.3);
@@ -294,9 +284,8 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[0] - 0.2), 0.0001) << " [ FAILED ] ";
   EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[1] - 0.1), 0.0001) << " [ FAILED ] ";
   EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[2] - 0.3), 0.0001) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 
-  std::cout << "Testing Angle from matrix (ZYX) : ";
+  SCOPED_TRACE("Testing Angle from matrix (ZYX) :");
   eulerTransform->SetIdentity();
   eulerTransform->SetComputeZYX(true);
   eulerTransform->SetRotation(0.2, 0.1, 0.3);
@@ -308,7 +297,6 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[0] - 0.2), 0.0001) << " [ FAILED ] ";
   EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[1] - 0.1), 0.0001) << " [ FAILED ] ";
   EXPECT_LE(itk::Math::Absolute(t2->GetParameters()[2] - 0.3), 0.0001) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 
   auto t3 = EulerTransformType::New();
   t2->GetInverse(t3);
@@ -316,7 +304,7 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
   t3 = dynamic_cast<EulerTransformType *>(t2->GetInverseTransform().GetPointer());
   EXPECT_NE(t3, nullptr) << "Cannot compute inverse transformation";
 
-  std::cout << "Testing offset updating after changing angle order (ZYX) : ";
+  SCOPED_TRACE("Testing offset updating after changing angle order (ZYX) :");
   const double dtr = (std::atan(1.0) * 4.0) / 180.0; // cast angles from degrees to radians
 
   auto                               centeredtransform = EulerTransformType::New();
@@ -359,5 +347,4 @@ TEST(CenteredEuler3DTransform, ConvertedLegacyTest)
 
   constexpr double errorTolerance{ 0.001 };
   EXPECT_LE(computeError, errorTolerance) << " [ FAILED ] ";
-  std::cout << " [ PASSED ] " << std::endl;
 }

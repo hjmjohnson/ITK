@@ -73,30 +73,26 @@ TEST(SpatialObjectToImageStatisticsCalculator, ConvertedLegacyTest)
 
   calculator->Update();
 
-  std::cout << " --- Ellipse and Image perfectly aligned --- " << std::endl;
+  SCOPED_TRACE("--- Ellipse and Image perfectly aligned ---");
   std::cout << "Sample mean = " << calculator->GetMean() << std::endl;
   std::cout << "Sample covariance = " << calculator->GetCovarianceMatrix();
 
   EXPECT_EQ(calculator->GetMean(), itk::MakeFilled<CalculatorType::VectorType>(255)) << "[FAILED]";
   EXPECT_DOUBLE_EQ(calculator->GetCovarianceMatrix()[0][0], CalculatorType::MatrixType::ValueType{}) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
   offset.Fill(20);
   ellipse->GetModifiableObjectToParentTransform()->SetOffset(offset);
   ellipse->Update();
   calculator->Update();
 
-  std::cout << " --- Ellipse and Image mismatched left --- " << std::endl;
+  SCOPED_TRACE("--- Ellipse and Image mismatched left ---");
   std::cout << "Sample mean = " << calculator->GetMean() << std::endl;
   std::cout << "Sample covariance = " << calculator->GetCovarianceMatrix();
 
   EXPECT_LE(itk::Math::Absolute(calculator->GetMean()[0] - 140.0), 1.0) << "[FAILED]";
   EXPECT_LE(itk::Math::Absolute(calculator->GetCovarianceMatrix()[0][0] - 16141.0), 1.0) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
-  std::cout << " --- Ellipse and Image mismatched right --- " << std::endl;
+  SCOPED_TRACE("--- Ellipse and Image mismatched right ---");
 
   offset.Fill(30);
   ellipse->GetModifiableObjectToParentTransform()->SetOffset(offset);
@@ -110,9 +106,7 @@ TEST(SpatialObjectToImageStatisticsCalculator, ConvertedLegacyTest)
   EXPECT_LE(itk::Math::Absolute(calculator->GetMean()[0] - 140.0), 1.0) << "[FAILED]";
   EXPECT_LE(itk::Math::Absolute(calculator->GetCovarianceMatrix()[0][0] - 16141.0), 1.0) << "[FAILED]";
 
-  std::cout << "[PASSED]" << std::endl;
-
-  std::cout << " --- Testing higher dimensionality --- " << std::endl;
+  SCOPED_TRACE("--- Testing higher dimensionality ---");
 
   // Create a new 3D image
   using Image3DType = itk::Image<PixelType, 3>;
@@ -128,7 +122,7 @@ TEST(SpatialObjectToImageStatisticsCalculator, ConvertedLegacyTest)
   image3D->FillBuffer(255);
 
   // Fill the image
-  std::cout << "Allocating image." << std::endl;
+  SCOPED_TRACE("Allocating image.");
   using SliceIteratorType = itk::ImageSliceIteratorWithIndex<Image3DType>;
   SliceIteratorType it(image3D, region3D);
 
@@ -151,7 +145,7 @@ TEST(SpatialObjectToImageStatisticsCalculator, ConvertedLegacyTest)
     value++;
   }
 
-  std::cout << "Allocating spatial object." << std::endl;
+  SCOPED_TRACE("Allocating spatial object.");
   using Ellipse3DType = itk::EllipseSpatialObject<3>;
   auto   ellipse3D = Ellipse3DType::New();
   double radii[3];
@@ -166,7 +160,7 @@ TEST(SpatialObjectToImageStatisticsCalculator, ConvertedLegacyTest)
   ellipse3D->Update();
 
   // Create a new calculator with a sample size of 3
-  std::cout << "Updating calculator." << std::endl;
+  SCOPED_TRACE("Updating calculator.");
   using Calculator3DType = itk::SpatialObjectToImageStatisticsCalculator<Image3DType, Ellipse3DType, 3>;
   auto calculator3D = Calculator3DType::New();
   calculator3D->SetImage(image3D);
@@ -185,7 +179,4 @@ TEST(SpatialObjectToImageStatisticsCalculator, ConvertedLegacyTest)
 
   std::cout << "Sum = " << calculator3D->GetSum() << std::endl;
   EXPECT_EQ(calculator3D->GetSum(), 915) << "[FAILED]";
-
-
-  std::cout << "Test finished" << std::endl;
 }

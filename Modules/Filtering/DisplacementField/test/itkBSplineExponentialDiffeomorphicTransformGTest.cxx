@@ -59,7 +59,7 @@ TEST(BSplineExponentialDiffeomorphicTransform, ConvertedLegacyTest)
   displacementTransform->IntegrateVelocityField();
 
   /* Test SmoothDisplacementFieldBSpline */
-  std::cout << "Test SmoothDisplacementFieldBSpline" << std::endl;
+  SCOPED_TRACE("Test SmoothDisplacementFieldBSpline");
   DisplacementTransformType::ParametersType                paramsFill(displacementTransform->GetNumberOfParameters());
   constexpr DisplacementTransformType::ParametersValueType paramsFillValue{ 0.0 };
   paramsFill.Fill(paramsFillValue);
@@ -123,7 +123,7 @@ TEST(BSplineExponentialDiffeomorphicTransform, ConvertedLegacyTest)
   }
 
   /* Test UpdateTransformParameters */
-  std::cout << "Testing UpdateTransformParameters..." << std::endl;
+  SCOPED_TRACE("Testing UpdateTransformParameters...");
 
   /* fill with 0 */
   field->FillBuffer(zeroVector);

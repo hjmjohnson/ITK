@@ -159,12 +159,12 @@ TEST(MultiTransform, ConvertedLegacyTest)
   EXPECT_EQ(multiTransform->GetNumberOfTransforms(), 1u) << "Failed adding transform to queue.";
 
   /* Retrieve the transform and check that it's the same */
-  std::cout << "Retrieve 1st transform." << std::endl;
+  SCOPED_TRACE("Retrieve 1st transform.");
   const AffineType::ConstPointer affineGet =
     dynamic_cast<const AffineType *>(multiTransform->GetNthTransformConstPointer(0));
   ASSERT_FALSE(affineGet.IsNull()) << "Failed retrieving transform from queue.";
 
-  std::cout << "Retrieve matrix and offset. " << std::endl;
+  SCOPED_TRACE("Retrieve matrix and offset.");
   const Matrix2Type matrix2Get = affineGet->GetMatrix();
   const Vector2Type vector2Get = affineGet->GetOffset();
   EXPECT_TRUE(testMatrix(matrix2, matrix2Get)) << "Failed retrieving correct transform data.";
@@ -172,7 +172,7 @@ TEST(MultiTransform, ConvertedLegacyTest)
 
   /* Get parameters with single transform.
    * Should be same as GetParameters from affine transform. */
-  std::cout << "Get Parameters: " << std::endl;
+  SCOPED_TRACE("Get Parameters:");
   Superclass::ParametersType parametersTest = multiTransform->GetParameters();
   Superclass::ParametersType parametersTruth = affine->GetParameters();
   std::cout << "affine parametersTruth: " << std::endl
@@ -190,9 +190,9 @@ TEST(MultiTransform, ConvertedLegacyTest)
   parametersNew[3] = 30;
   parametersNew[4] = 40;
   parametersNew[5] = 50;
-  std::cout << "Set Parameters: " << std::endl;
+  SCOPED_TRACE("Set Parameters:");
   multiTransform->SetParameters(parametersNew);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   Superclass::ParametersType parametersReturned = multiTransform->GetParameters();
   std::cout << "parametersNew: " << std::endl
             << parametersNew << std::endl
@@ -215,9 +215,9 @@ TEST(MultiTransform, ConvertedLegacyTest)
   parametersNew.Fill(1);
   parametersNew[0] = 42;
 
-  std::cout << "Set Fixed Parameters: " << std::endl;
+  SCOPED_TRACE("Set Fixed Parameters:");
   multiTransform->SetFixedParameters(parametersNew);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   parametersReturned = multiTransform->GetFixedParameters();
   std::cout << "parametersNew: " << std::endl
             << parametersNew << std::endl
@@ -246,7 +246,7 @@ TEST(MultiTransform, ConvertedLegacyTest)
     << "ERROR: Wrong parameters for single-transform inverse.";
 
   /* Test IsLinear() */
-  std::cout << "Test IsLinear" << std::endl;
+  SCOPED_TRACE("Test IsLinear");
   EXPECT_TRUE(multiTransform->IsLinear()) << "ERROR: expected true for IsLinear but got false.";
 
   /* GetTransformCategory */
@@ -324,11 +324,11 @@ TEST(MultiTransform, ConvertedLegacyTest)
     << "ERROR: Wrong parameters for displacementTransform in two-transform inverse.";
 
   /* Test IsLinear() */
-  std::cout << "Test IsLinear" << std::endl;
+  SCOPED_TRACE("Test IsLinear");
   EXPECT_FALSE(multiTransform->IsLinear()) << "ERROR: expected false for IsLinear but got true.";
 
   /* Test GetNumberOfParameters */
-  std::cout << "GetNumberOfParameters: " << std::endl;
+  SCOPED_TRACE("GetNumberOfParameters:");
   unsigned int       affineParamsN = affine->GetNumberOfParameters();
   unsigned int       displacementParamsN = displacementTransform->GetNumberOfParameters();
   const unsigned int nParameters = multiTransform->GetNumberOfParameters();
@@ -340,7 +340,7 @@ TEST(MultiTransform, ConvertedLegacyTest)
   }
 
   /* Test GetNumberOfLocalParameters */
-  std::cout << "GetNumberOfLocalParameters: " << std::endl;
+  SCOPED_TRACE("GetNumberOfLocalParameters:");
   const unsigned int affineLocalParamsN = affine->GetNumberOfLocalParameters();
   const unsigned int displacementLocalParamsN = displacementTransform->GetNumberOfLocalParameters();
   const unsigned int nLocalParameters = multiTransform->GetNumberOfLocalParameters();
@@ -376,9 +376,9 @@ TEST(MultiTransform, ConvertedLegacyTest)
   parametersNew.Fill(3.14);
   parametersNew[0] = 19;
   parametersNew[parametersTruth.Size() - 1] = 71;
-  std::cout << "Set Multi-transform Parameters: " << std::endl;
+  SCOPED_TRACE("Set Multi-transform Parameters:");
   multiTransform->SetParameters(parametersNew);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   parametersReturned = multiTransform->GetParameters();
   // std::cout << "parametersNew: " << std::endl << parametersNew << std::endl << "parametersReturned: " << std::endl <<
   // parametersReturned << std::endl;
@@ -388,7 +388,7 @@ TEST(MultiTransform, ConvertedLegacyTest)
   multiTransform->SetParameters(parametersTruth);
 
   /* Test get fixed parameters with multi-transform */
-  std::cout << "Get Multi-transform Fixed Parameters: " << std::endl;
+  SCOPED_TRACE("Get Multi-transform Fixed Parameters:");
   parametersTest = multiTransform->GetFixedParameters();
   affineParamsN = affine->GetFixedParameters().Size();
   displacementParamsN = displacementTransform->GetFixedParameters().Size();
@@ -411,9 +411,9 @@ TEST(MultiTransform, ConvertedLegacyTest)
   EXPECT_TRUE(testVectorArray(parametersTest, parametersTruth)) << "Failed GetFixedParameters() for multi transform.";
 
   /* Test set fixed parameters with multi-transform */
-  std::cout << "Set Multi-transform Fixed Parameters: " << std::endl;
+  SCOPED_TRACE("Set Multi-transform Fixed Parameters:");
   multiTransform->SetFixedParameters(parametersTruth);
-  std::cout << "retrieving... " << std::endl;
+  SCOPED_TRACE("retrieving...");
   parametersReturned = multiTransform->GetFixedParameters();
   std::cout << "parametersTruth: " << std::endl
             << parametersTruth << std::endl
@@ -427,7 +427,7 @@ TEST(MultiTransform, ConvertedLegacyTest)
   displacementTransform->SetInverseDisplacementField(inverseField);
 
   /* Test GetNumberOfFixedParameters */
-  std::cout << "GetNumberOfFixedParameters: " << std::endl;
+  SCOPED_TRACE("GetNumberOfFixedParameters:");
   const unsigned int affineFixedParamsN = affine->GetFixedParameters().size();
   const unsigned int displacementFixedParamsN = displacementTransform->GetFixedParameters().size();
   const unsigned int nFixedParameters = multiTransform->GetNumberOfFixedParameters();
@@ -460,7 +460,7 @@ TEST(MultiTransform, ConvertedLegacyTest)
   /* Test accessors */
   const Superclass::TransformQueueType transformQueue = multiTransform->GetTransformQueue();
   EXPECT_EQ(transformQueue.size(), 3u) << "Failed getting transform queue.";
-  std::cout << "Got TransformQueue." << std::endl;
+  SCOPED_TRACE("Got TransformQueue.");
 
   std::cout << "MultiTransform with 3 transforms: " << std::endl << multiTransform << std::endl;
 
@@ -473,7 +473,7 @@ TEST(MultiTransform, ConvertedLegacyTest)
    * addition in TransformUpdateParameters, this should be updated here.
    */
   {
-    std::cout << "Testing UpdateTransformParameters 1. " << std::endl;
+    SCOPED_TRACE("Testing UpdateTransformParameters 1.");
     Superclass::ParametersType       truth = multiTransform->GetParameters();
     Superclass::DerivativeType       update(multiTransform->GetNumberOfParameters(), 10.0);
     constexpr AffineType::ScalarType factor{ 0.5 };
@@ -519,6 +519,4 @@ TEST(MultiTransform, ConvertedLegacyTest)
 
   /* Test printing */
   multiTransform->Print(std::cout);
-
-  std::cout << "Passed test!" << std::endl;
 }

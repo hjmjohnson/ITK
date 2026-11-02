@@ -173,7 +173,7 @@ TEST(MRIBiasFieldCorrectionFilter, ConvertedLegacyTest)
             << std::endl;
   const double origSumError = sumOfError;
 
-  std::cout << "Computing bias correction without mask, 2 classes 10,10 - 200,20" << std::endl;
+  SCOPED_TRACE("Computing bias correction without mask, 2 classes 10,10 - 200,20");
 
   filter->SetInput(imageWithBias);
 
@@ -268,7 +268,7 @@ TEST(MRIBiasFieldCorrectionFilter, ConvertedLegacyTest)
             << sumOfError / (imageSize[0] * imageSize[1] * imageSize[2]) << std::endl;
   EXPECT_GE(origSumError, sumOfError);
 
-  std::cout << "Computing bias correction with mask" << std::endl;
+  SCOPED_TRACE("Computing bias correction with mask");
   filter->SetInput(imageWithBias);
 
   filter->SetInputMask(image);
@@ -312,7 +312,7 @@ TEST(MRIBiasFieldCorrectionFilter, ConvertedLegacyTest)
   EXPECT_GE(origSumError, sumOfError);
 
   // default schedule is 2 2 2 - 1 1 1, let's change this
-  std::cout << "Computing bias correction only with 2,2,2 resolution & no interSlice/Slab" << std::endl;
+  SCOPED_TRACE("Computing bias correction only with 2,2,2 resolution & no interSlice/Slab");
 
 
   usingInterSliceIntensityCorrection = false;
@@ -367,7 +367,7 @@ TEST(MRIBiasFieldCorrectionFilter, ConvertedLegacyTest)
             << sumOfError / (imageSize[0] * imageSize[1] * imageSize[2]) << std::endl;
   EXPECT_GE(origSumError, sumOfError);
 
-  std::cout << "Computing bias correction only with 4,4,4 resolution & no interSlice/Slab" << std::endl;
+  SCOPED_TRACE("Computing bias correction only with 4,4,4 resolution & no interSlice/Slab");
 
   schedule.Fill(4);
 

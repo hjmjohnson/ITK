@@ -122,8 +122,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
 
     {
@@ -140,8 +138,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an itk::Vector " << std::endl;
     }
 
     {
@@ -158,8 +154,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating covariant vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
 
 
@@ -178,8 +172,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
   }
 
@@ -285,8 +277,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
 
     {
@@ -310,8 +300,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
 
     {
@@ -336,8 +324,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
                       << "Result should be               : " << q << std::endl
                       << "Reported Result is             : " << r;
-
-      std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
 
 
@@ -365,8 +351,6 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
                       << "Result should be             : " << q << std::endl
                       << "Reported Result is           : " << r;
-
-      std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
 
     {
@@ -398,21 +382,21 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
 
       const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
-      std::cout << "Test CloneInverseTo(): ";
+      SCOPED_TRACE("Test CloneInverseTo():");
       EXPECT_TRUE(CheckEqual(p1, p3));
 
       auto t2dash = TransformType::New();
       t1->GetInverse(t2dash);
       TransformType::InputPointType p3dash = t2dash->TransformPoint(p2);
 
-      std::cout << "Test GetInverse(): ";
+      SCOPED_TRACE("Test GetInverse():");
       EXPECT_TRUE(CheckEqual(p1, p3dash));
 
       t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
       ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
       p3dash = t2dash->TransformPoint(p2);
 
-      std::cout << "Test GetInverseTransform(): ";
+      SCOPED_TRACE("Test GetInverseTransform():");
       EXPECT_TRUE(CheckEqual(p1, p3dash));
 
 
@@ -422,7 +406,7 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
 
       const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
-      std::cout << "Test Clone(): ";
+      SCOPED_TRACE("Test Clone():");
       EXPECT_TRUE(CheckEqual(p2, p4));
 
       // Test compose
@@ -443,7 +427,7 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
       TransformType::InputPointType p6 = t4->TransformPoint(p5);
       TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
-      std::cout << "Test Compose(.,false): ";
+      SCOPED_TRACE("Test Compose(.,false):");
       EXPECT_TRUE(CheckEqual(p6, p7));
 
       t1->CloneTo(t5);
@@ -453,7 +437,7 @@ TEST(Rigid2DTransform, ConvertedLegacyTest)
       p6 = t1->TransformPoint(p5);
       p7 = t5->TransformPoint(p1);
 
-      std::cout << "Test Compose(.,true): ";
+      SCOPED_TRACE("Test Compose(.,true):");
       EXPECT_TRUE(CheckEqual(p6, p7));
     }
   }

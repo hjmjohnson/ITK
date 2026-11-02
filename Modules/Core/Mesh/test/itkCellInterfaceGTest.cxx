@@ -58,7 +58,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   std::cout << "    Type: " << static_cast<int>(cell->GetType()) << std::endl;
   std::cout << "    Dimension: " << cell->GetDimension() << std::endl;
   std::cout << "    NumberOfPoints: " << cell->GetNumberOfPoints() << std::endl;
-  std::cout << "    NumberOfBoundaryFeatures:" << std::endl;
+  SCOPED_TRACE("NumberOfBoundaryFeatures:");
   for (unsigned int i = 0; i < cell->GetDimension(); ++i)
   {
     std::cout << "      " << i << ": " << cell->GetNumberOfBoundaryFeatures(i) << std::endl;
@@ -69,7 +69,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
     }
   }
 
-  std::cout << "    Iterator test: PointIds for empty cell: ";
+  SCOPED_TRACE("Iterator test: PointIds for empty cell:");
   typename TCell::PointIdIterator pointId = cell->PointIdsBegin();
   typename TCell::PointIdIterator endId = cell->PointIdsEnd();
   while (pointId != endId)
@@ -79,7 +79,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   }
   std::cout << std::endl;
 
-  std::cout << "    ConstIterator test: PointIds for empty cell: ";
+  SCOPED_TRACE("ConstIterator test: PointIds for empty cell:");
   typename TCell::PointIdConstIterator cpointId = cell->PointIdsBegin();
   typename TCell::PointIdConstIterator cendId = cell->PointIdsEnd();
   while (cpointId != cendId)
@@ -90,7 +90,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   std::cout << std::endl;
 
   // Add point ids
-  std::cout << "    SetPointIds" << std::endl;
+  SCOPED_TRACE("SetPointIds");
 
   using PointIdentifier = typename TCell::PointIdentifier;
   const unsigned int numberOfPointIds = cell->GetNumberOfPoints() * 2;
@@ -104,7 +104,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
     cell->SetPointId(0, 100);
   }
 
-  std::cout << "    ConstIterator test: PointIds for populated cell: ";
+  SCOPED_TRACE("ConstIterator test: PointIds for populated cell:");
   typename TCell::PointIdConstIterator ppointId = cell->PointIdsBegin();
   typename TCell::PointIdConstIterator pendId = cell->PointIdsEnd();
   while (ppointId != pendId)
@@ -115,7 +115,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   std::cout << std::endl;
 
   cell->SetPointIds(pointIds.data() + cell->GetNumberOfPoints(), pointIds.data() + numberOfPointIds);
-  std::cout << "    Iterator test: PointIds for populated cell: ";
+  SCOPED_TRACE("Iterator test: PointIds for populated cell:");
   typename TCell::PointIdIterator pxpointId = cell->PointIdsBegin();
   typename TCell::PointIdIterator pxendId = cell->PointIdsEnd();
   while (pxpointId != pxendId)
@@ -128,7 +128,7 @@ TestCellInterface(const std::string_view name, TCell * aCell)
   // Make a copy
   CellAutoPointer copyOfCell;
   cell->MakeCopy(copyOfCell);
-  std::cout << "    PointIds for copied cell: ";
+  SCOPED_TRACE("PointIds for copied cell:");
   typename TCell::PointIdConstIterator xpointId = copyOfCell->PointIdsBegin();
   typename TCell::PointIdConstIterator xendId = copyOfCell->PointIdsEnd();
   while (xpointId != xendId)
@@ -183,6 +183,5 @@ TEST(CellInterface, ConvertedLegacyTest)
   status |= TestCellInterface("PolygonCell with 5 vertices", new PolygonCellType(5));
 
 
-  std::cout << "Test finished." << std::endl;
   EXPECT_EQ(status, EXIT_SUCCESS);
 }

@@ -47,7 +47,6 @@ CheckEqual(const itk::Point<double, 2> & p1, const itk::Point<double, 2> & p2)
 TEST(Similarity2DTransform, ConvertedLegacyTest)
 {
 
-  std::cout << "==================================" << std::endl;
   std::cout << "Testing Similarity 2D Transform" << std::endl << std::endl;
 
   constexpr double       epsilon{ 1e-10 };
@@ -58,7 +57,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
   auto transform = SimilarityTransformType::New();
 
   // Test the identity transform
-  std::cout << "Testing Identity:";
+  SCOPED_TRACE("Testing Identity:");
   transform->SetIdentity();
 
   SimilarityTransformType::InputPointType::ValueType pInit[2] = { 10, 10 };
@@ -75,8 +74,6 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
   }
   EXPECT_TRUE(Ok) << "Error with Identity transform";
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // Test SetAngle/GetAngle
   auto transform1 = SimilarityTransformType::New();
@@ -92,8 +89,6 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     << "transform1->SetAngle: " << angle1 << std::endl
     << "transform2->GetAngle: " << transform2->GetAngle();
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   transform1->SetIdentity();
   transform1->SetAngle(-angle1);
@@ -104,10 +99,8 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     << "transform1->SetAngle: " << -angle1 << std::endl
     << "transform2->GetAngle: " << transform2->GetAngle();
 
-  std::cout << " [ PASSED ] " << std::endl;
-
   // Test the Set/Get Parameters
-  std::cout << "Testing Set/GetParameters():" << std::endl;
+  SCOPED_TRACE("Testing Set/GetParameters():");
   SimilarityTransformType::ParametersType params(6);
   for (unsigned int i = 0; i < 6; ++i)
   {
@@ -134,8 +127,6 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
                   << "Input:" << params << std::endl
                   << "Output:" << outputParams;
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // 15 degrees in radians
   transform->SetCenter({}); // Explicitly reset center to default values
@@ -144,7 +135,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
   const double sinth = std::sin(angle);
   const double costh = std::cos(angle);
 
-  std::cout << "Testing Rotation:";
+  SCOPED_TRACE("Testing Rotation:");
   transform->SetAngle(angle);
 
   // Rotate an itk::Point
@@ -165,10 +156,8 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
 
-
-  std::cout << "Testing Translation:";
+  SCOPED_TRACE("Testing Translation:");
 
   transform->SetAngle(0);
 
@@ -192,11 +181,9 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
                   << "Result should be       : " << q << std::endl
                   << "Reported Result is     : " << r;
 
-  std::cout << " [ PASSED ] " << std::endl;
-
 
   // Testing the Jacobian
-  std::cout << "Testing Jacobian:";
+  SCOPED_TRACE("Testing Jacobian:");
   SimilarityTransformType::JacobianType jacobian0;
   transform->ComputeJacobianWithRespectToParameters(p, jacobian0);
 
@@ -212,8 +199,6 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
   EXPECT_EQ(jacobian0[1][3], 0) << "Error with Jacobian: " << jacobian0;
   EXPECT_EQ(jacobian0[1][4], 0) << "Error with Jacobian: " << jacobian0;
   EXPECT_EQ(jacobian0[1][5], 1) << "Error with Jacobian: " << jacobian0;
-
-  std::cout << " [ PASSED ] " << std::endl;
 
 
   {
@@ -248,7 +233,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
-    std::cout << "Test CloneInverseTo(): ";
+    SCOPED_TRACE("Test CloneInverseTo():");
     EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
@@ -256,14 +241,14 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     TransformType::InputPointType p3dash;
     p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverse(): ";
+    SCOPED_TRACE("Test GetInverse():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
     ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverseTransform(): ";
+    SCOPED_TRACE("Test GetInverseTransform():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
@@ -272,7 +257,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
-    std::cout << "Test Clone(): ";
+    SCOPED_TRACE("Test Clone():");
     EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test singular matrix transform
@@ -308,7 +293,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     TransformType::InputPointType p6 = t4->TransformPoint(p5);
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,false): ";
+    SCOPED_TRACE("Test Compose(.,false):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
@@ -318,11 +303,11 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     p6 = t1->TransformPoint(p5);
     p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,true): ";
+    SCOPED_TRACE("Test Compose(.,true):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
-    std::cout << "Testing Jacobian: ";
+    SCOPED_TRACE("Testing Jacobian:");
     TransformType::JacobianType jacobian;
     t4->ComputeJacobianWithRespectToParameters(p1, jacobian);
 
@@ -358,8 +343,6 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
       } // for j
 
     } // for k
-
-    std::cout << " [ PASSED ] " << std::endl;
   }
 
   {
@@ -391,7 +374,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p3 = t2->TransformPoint(p2);
 
-    std::cout << "Test CloneInverseTo(): ";
+    SCOPED_TRACE("Test CloneInverseTo():");
     EXPECT_TRUE(CheckEqual(p1, p3));
 
     auto t2dash = TransformType::New();
@@ -399,14 +382,14 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     TransformType::InputPointType p3dash;
     p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverse(): ";
+    SCOPED_TRACE("Test GetInverse():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     t2dash = dynamic_cast<TransformType *>(t1->GetInverseTransform().GetPointer());
     ASSERT_NE(t2dash, nullptr) << "Cannot compute inverse transformation";
     p3dash = t2dash->TransformPoint(p2);
 
-    std::cout << "Test GetInverseTransform(): ";
+    SCOPED_TRACE("Test GetInverseTransform():");
     EXPECT_TRUE(CheckEqual(p1, p3dash));
 
     // Test clone
@@ -415,7 +398,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
 
     const TransformType::InputPointType p4 = t3->TransformPoint(p1);
 
-    std::cout << "Test Clone(): ";
+    SCOPED_TRACE("Test Clone():");
     EXPECT_TRUE(CheckEqual(p2, p4));
 
     // Test compose
@@ -438,7 +421,7 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     TransformType::InputPointType p6 = t4->TransformPoint(p5);
     TransformType::InputPointType p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,false): ";
+    SCOPED_TRACE("Test Compose(.,false):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     t1->CloneTo(t5);
@@ -448,11 +431,11 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     p6 = t1->TransformPoint(p5);
     p7 = t5->TransformPoint(p1);
 
-    std::cout << "Test Compose(.,true): ";
+    SCOPED_TRACE("Test Compose(.,true):");
     EXPECT_TRUE(CheckEqual(p6, p7));
 
     // Really test the jacobian
-    std::cout << "Testing Jacobian: ";
+    SCOPED_TRACE("Testing Jacobian:");
     TransformType::JacobianType jacobian;
     t4->ComputeJacobianWithRespectToParameters(p1, jacobian);
 
@@ -488,8 +471,6 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
       } // for j
 
     } // for k
-
-    std::cout << " [ PASSED ] " << std::endl;
   }
 
   {
@@ -525,13 +506,13 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
     const TransformType::OutputPointType op2 = t2->TransformPoint(ip);
 
     t1->Print(std::cout);
-    std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
+    SCOPED_TRACE("Test Set/GetMatrix() and Set/GetOffset():");
     EXPECT_TRUE(CheckEqual(op1, op2));
 
     // check that parameters are the same
     TransformType::ParametersType pdash = t2->GetParameters();
 
-    std::cout << "Test Set/GetMatrix() and Set/GetOffset(): ";
+    SCOPED_TRACE("Test Set/GetMatrix() and Set/GetOffset():");
     for (unsigned int j = 0; j < t1->GetNumberOfParameters(); ++j)
     {
       EXPECT_LE(itk::Math::Absolute(parameters[j] - pdash[j]), epsilon)
@@ -540,6 +521,5 @@ TEST(Similarity2DTransform, ConvertedLegacyTest)
         << "Expected value " << parameters << std::endl
         << " differs from " << pdash << " by more than " << epsilon;
     }
-    std::cout << " [ PASSED ] " << std::endl;
   }
 }

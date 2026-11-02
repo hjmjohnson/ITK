@@ -345,7 +345,7 @@ TEST(Mesh, ConvertedLegacyTest)
     try
     {
       quad = dynamic_cast<HexaCellType::FaceType *>(cellPointer0.GetPointer());
-      std::cout << "Quad face recovered " << std::endl;
+      SCOPED_TRACE("Quad face recovered");
       std::cout << quad->GetNameOfClass() << std::endl;
     }
     catch (...)
@@ -403,7 +403,7 @@ TEST(Mesh, ConvertedLegacyTest)
                                           0,             // CellFeatureIdentifier
                                           &neighborSet); // Where to put result.
 
-    std::cout << "Neighbors (hex edge 0):" << std::endl;
+    SCOPED_TRACE("Neighbors (hex edge 0):");
     for (const auto cell : neighborSet)
     {
       std::cout << "Id " << cell << ": ";
@@ -443,7 +443,7 @@ TEST(Mesh, ConvertedLegacyTest)
                                           1,             // CellFeatureIdentifier
                                           &neighborSet); // Where to put result.
 
-    std::cout << "Neighbors (hex edge 1):" << std::endl;
+    SCOPED_TRACE("Neighbors (hex edge 1):");
     for (const auto cell : neighborSet)
     {
       std::cout << "Id " << cell << ": ";
@@ -467,7 +467,7 @@ TEST(Mesh, ConvertedLegacyTest)
                                           3,             // CellFeatureIdentifier
                                           &neighborSet); // Where to put result.
 
-    std::cout << "Neighbors (tet edge 3):" << std::endl;
+    SCOPED_TRACE("Neighbors (tet edge 3):");
     for (const auto cell : neighborSet)
     {
       std::cout << "Id " << cell << ": ";
@@ -528,7 +528,7 @@ TEST(Mesh, ConvertedLegacyTest)
       try
       {
         vertex = dynamic_cast<QuadraticEdgeCellType::VertexType *>(vertexPointer.GetPointer());
-        std::cout << "Vertex from the QuadraticEdge recovered " << std::endl;
+        SCOPED_TRACE("Vertex from the QuadraticEdge recovered");
         std::cout << vertex->GetNameOfClass() << std::endl;
       }
       catch (...)
@@ -603,7 +603,7 @@ TEST(Mesh, ConvertedLegacyTest)
       try
       {
         vertex = dynamic_cast<QuadraticTriangleCellType::VertexType *>(vertexPointer.GetPointer());
-        std::cout << "Vertex from the QuadraticTriangle recovered " << std::endl;
+        SCOPED_TRACE("Vertex from the QuadraticTriangle recovered");
         std::cout << vertex->GetNameOfClass() << std::endl;
       }
       catch (...)
@@ -642,7 +642,7 @@ TEST(Mesh, ConvertedLegacyTest)
       try
       {
         edge = dynamic_cast<QuadraticTriangleCellType::EdgeType *>(edgePointer.GetPointer());
-        std::cout << "Vertex from the QuadraticTriangle recovered " << std::endl;
+        SCOPED_TRACE("Vertex from the QuadraticTriangle recovered");
         std::cout << edge->GetNameOfClass() << std::endl;
       }
       catch (...)

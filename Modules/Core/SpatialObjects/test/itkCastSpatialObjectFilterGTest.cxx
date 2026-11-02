@@ -98,7 +98,4 @@ TEST(CastSpatialObjectFilter, ConvertedLegacyTest)
   {
     ADD_FAILURE() << " [FAILED] : Cannot found TubeSpatialObject";
   }
-
-
-  std::cout << "Test finished" << std::endl;
 }

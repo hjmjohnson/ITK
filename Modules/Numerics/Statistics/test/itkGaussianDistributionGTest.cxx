@@ -27,7 +27,7 @@ TEST(GaussianDistribution, ConvertedLegacyTest)
   // They will be restored when coutState goes out of scope
   const itk::StdStreamStateSave coutState(std::cout);
 
-  std::cout << "itkGaussianDistribution Test \n \n";
+  SCOPED_TRACE("itkGaussianDistribution Test");
 
   using DistributionType = itk::Statistics::GaussianDistribution;
 
@@ -55,7 +55,7 @@ TEST(GaussianDistribution, ConvertedLegacyTest)
                                 8.413447460685429e-001, 9.772498680518208e-001, 9.986501019683699e-001,
                                 9.999683287581669e-001, 9.999997133484281e-001 };
 
-  std::cout << "Gaussian CDF" << std::endl;
+  SCOPED_TRACE("Gaussian CDF");
   for (int i = -5; i <= 5; ++i)
   {
     auto x = static_cast<double>(i);
@@ -79,7 +79,7 @@ TEST(GaussianDistribution, ConvertedLegacyTest)
   std::cout << std::endl;
 
 
-  std::cout << "Inverse Gaussian CDF" << std::endl;
+  SCOPED_TRACE("Inverse Gaussian CDF");
   for (int i = -5; i <= 5; ++i)
   {
     double value = distributionFunction->EvaluateInverseCDF(expected1[i + 5]);
@@ -112,7 +112,7 @@ TEST(GaussianDistribution, ConvertedLegacyTest)
                                 2.338867490523635e-003, 1.694742676234465e-002, 7.864960352514258e-002,
                                 2.397500610934768e-001, 5.000000000000000e-001 };
 
-  std::cout << "Gaussian CDF" << std::endl;
+  SCOPED_TRACE("Gaussian CDF");
   for (int i = -5; i <= 5; ++i)
   {
     auto x = static_cast<double>(i);
@@ -150,7 +150,7 @@ TEST(GaussianDistribution, ConvertedLegacyTest)
                                 2.338867490523635e-003, 1.694742676234465e-002, 7.864960352514258e-002,
                                 2.397500610934768e-001, 5.000000000000000e-001 };
 
-  std::cout << "Gaussian CDF (parameter vector API)" << std::endl;
+  SCOPED_TRACE("Gaussian CDF (parameter vector API)");
   for (int i = -5; i <= 5; ++i)
   {
     auto x = static_cast<double>(i);
@@ -181,7 +181,7 @@ TEST(GaussianDistribution, ConvertedLegacyTest)
                                 2.338867490523635e-003, 1.694742676234465e-002, 7.864960352514258e-002,
                                 2.397500610934768e-001, 5.000000000000000e-001 };
 
-  std::cout << "Gaussian CDF (separate parameter API)" << std::endl;
+  SCOPED_TRACE("Gaussian CDF (separate parameter API)");
   for (int i = -5; i <= 5; ++i)
   {
     auto x = static_cast<double>(i);
@@ -204,7 +204,7 @@ TEST(GaussianDistribution, ConvertedLegacyTest)
   }
   std::cout << std::endl;
 
-  std::cout << "Inverse Gaussian CDF" << std::endl;
+  SCOPED_TRACE("Inverse Gaussian CDF");
   // put the parameters back
   distributionFunction->SetParameters(params);
   for (int i = -5; i <= 5; ++i)

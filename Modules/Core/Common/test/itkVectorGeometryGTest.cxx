@@ -102,7 +102,7 @@ TEST(VectorGeometry, ConvertedLegacyTest)
   // Test the no const version that returns an vnl_vector_ref
   vnl_vector_ref<ValueType> vnlVector = va.GetVnlVector();
   {
-    std::cout << "vnl_vector_ref = va ";
+    SCOPED_TRACE("vnl_vector_ref = va");
     for (unsigned int i = 0; i < N; ++i)
     {
       std::cout << vnlVector[i] << ", ";
@@ -119,7 +119,7 @@ TEST(VectorGeometry, ConvertedLegacyTest)
   const VectorType      vf(va);
   vnl_vector<ValueType> vnlVector2 = vf.GetVnlVector();
   {
-    std::cout << "vnl_vector = va ";
+    SCOPED_TRACE("vnl_vector = va");
     for (unsigned int i = 0; i < N; ++i)
     {
       std::cout << vnlVector2[i] << ", ";
@@ -159,7 +159,7 @@ TEST(VectorGeometry, ConvertedLegacyTest)
 
   // Test for CastFrom() method
   {
-    std::cout << "Test for CastFrom() method... ";
+    SCOPED_TRACE("Test for CastFrom() method...");
 
     constexpr float tolerance{ 1e-7 };
 

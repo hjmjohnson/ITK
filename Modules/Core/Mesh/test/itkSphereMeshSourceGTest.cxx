@@ -60,5 +60,4 @@ TEST(SphereMeshSource, ConvertedLegacyTest)
     mySphereMeshSource->GetOutput()->GetPoint(i, pt_ptr);
     std::cout << "Point1: " << pt[0] << ", " << pt[1] << ", " << pt[2] << std::endl;
   }
-  std::cout << "Test End " << std::endl;
 }

@@ -242,14 +242,13 @@ TEST(MultiStartOptimizerv4, ConvertedLegacyTest)
   metric->SetParameters(parametersList[0]);
   itkOptimizer->SetParametersList(parametersList);
   // test the optimization
-  std::cout << "Test optimization 1 without local optimizer:" << std::endl;
+  SCOPED_TRACE("Test optimization 1 without local optimizer:");
   ASSERT_NO_FATAL_FAILURE(MultiStartOptimizerv4RunTest(itkOptimizer));
-  std::cout << "Test 1 passed." << std::endl;
 
   /*
    * Test 2
    */
-  std::cout << "Test optimization 2: with local optimizer" << std::endl;
+  SCOPED_TRACE("Test optimization 2: with local optimizer");
   itkOptimizer->InstantiateLocalOptimizer();
   parametersList.clear();
   for (int i = -99; i < 103; i += 100)
@@ -265,12 +264,11 @@ TEST(MultiStartOptimizerv4, ConvertedLegacyTest)
   metric->SetParameters(parametersList[0]);
   itkOptimizer->SetParametersList(parametersList);
   ASSERT_NO_FATAL_FAILURE(MultiStartOptimizerv4RunTest(itkOptimizer));
-  std::cout << "Test 2 passed." << std::endl;
 
   /*
    * Test 3
    */
-  std::cout << "Test optimization 3: with local optimizer passed by user" << std::endl;
+  SCOPED_TRACE("Test optimization 3: with local optimizer passed by user");
   parametersList.clear();
   for (int i = 1; i < 2; ++i)
   {
@@ -290,5 +288,4 @@ TEST(MultiStartOptimizerv4, ConvertedLegacyTest)
   itkOptimizer->SetLocalOptimizer(optimizer);
   EXPECT_EQ(optimizer, itkOptimizer->GetLocalOptimizer());
   ASSERT_NO_FATAL_FAILURE(MultiStartOptimizerv4RunTest(itkOptimizer));
-  std::cout << "Test 3 passed." << std::endl;
 }

@@ -43,7 +43,7 @@ testMetaData(const TMetaData & value)
   EXPECT_EQ(metaDataObject->GetMetaDataObjectValue(), value) << "Set value does not equal original value!";
 
   std::cout << "The metadata's type name is: " << metaDataObject->GetMetaDataObjectTypeName() << std::endl;
-  std::cout << "The metadata object: " << std::endl;
+  SCOPED_TRACE("The metadata object:");
   metaDataObject->Print(std::cout);
 
   std::cout << std::endl << std::endl;

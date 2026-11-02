@@ -157,7 +157,7 @@ private:
 
 TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
 {
-  std::cout << "LBFGS Optimizerv4 Test \n \n";
+  SCOPED_TRACE("LBFGS Optimizerv4 Test");
 
   using OptimizerType = itk::LBFGSOptimizerv4;
   using vnlOptimizerType = vnl_lbfgs;
@@ -199,10 +199,10 @@ TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
   EXPECT_EQ(cachedCurrentPos, itkOptimizer->GetCachedCurrentPosition());
 
   std::cout << "GetValue() before optimizer starts: " << itkOptimizer->GetValue() << std::endl;
-  std::cout << "SetMetric." << std::endl;
+  SCOPED_TRACE("SetMetric.");
   itkOptimizer->SetMetric(metric);
 
-  std::cout << "Get vnl optimizer." << std::endl;
+  SCOPED_TRACE("Get vnl optimizer.");
   vnlOptimizerType * vnlOptimizer = itkOptimizer->GetOptimizer();
 
   vnlOptimizer->set_check_derivatives(0);
@@ -216,7 +216,7 @@ TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
 
   // Set the initial position by setting the metric
   // parameters.
-  std::cout << "Set metric parameters." << std::endl;
+  SCOPED_TRACE("Set metric parameters.");
   metric->SetParameters(initialValue);
 
   // Set some optimizer parameters
@@ -236,7 +236,7 @@ TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
   itkOptimizer->SetDefaultStepLength(defaultStepLength);
   EXPECT_EQ(defaultStepLength, itkOptimizer->GetDefaultStepLength());
 
-  std::cout << "Start optimization." << std::endl;
+  SCOPED_TRACE("Start optimization.");
   try
   {
     itkOptimizer->StartOptimization();
@@ -275,7 +275,7 @@ TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
   }
 
   // Get the final value of the optimizer
-  std::cout << "Testing GetValue() : ";
+  SCOPED_TRACE("Testing GetValue() :");
   const OptimizerType::MeasureType finalValue = itkOptimizer->GetValue();
   EXPECT_NEAR(finalValue, -10.0, 0.01);
 
@@ -314,7 +314,7 @@ TEST(LBFGSOptimizerv4, ConvertedLegacyTest)
   scales[1] = 0.75;
   itkOptimizer->SetScales(scales);
 
-  std::cout << "Set metric parameters." << std::endl;
+  SCOPED_TRACE("Set metric parameters.");
   metric->SetParameters(initialValue);
 
   try

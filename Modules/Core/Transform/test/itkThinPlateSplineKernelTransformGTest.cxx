@@ -187,6 +187,4 @@ TEST(ThinPlateSplineKernelTransform, ConvertedLegacyTest)
   TestThinPlateSplineKernelTransform<2>();
 
   TestThinPlateSplineKernelTransform<3>();
-
-  std::cout << "Test passed." << std::endl;
 }

@@ -22,7 +22,7 @@
 
 TEST(MeanSampleFilter, ConvertedLegacyTest)
 {
-  std::cout << "MeanSampleFilter test \n \n";
+  SCOPED_TRACE("MeanSampleFilter test");
 
   constexpr unsigned int MeasurementVectorSize{ 2 };
   constexpr unsigned int numberOfMeasurementVectors{ 5 };

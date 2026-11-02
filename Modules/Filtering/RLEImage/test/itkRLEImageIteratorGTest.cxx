@@ -50,7 +50,7 @@ TEST(RLEImageIterator, ConvertedLegacyTest)
 {
   constexpr unsigned int ImageDimension = 3;
 
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   itk::RLEImage<itk::Vector<unsigned short, 5>>::Pointer o3 = itk::RLEImage<itk::Vector<unsigned short, 5>>::New();
 
   float origin3D[ImageDimension] = { 5.f, 2.1f, 8.1f };
@@ -75,7 +75,7 @@ TEST(RLEImageIterator, ConvertedLegacyTest)
   fillValue.Fill(itk::NumericTraits<unsigned short>::max());
   o3->FillBuffer(fillValue);
 
-  std::cout << "Setting/Getting a pixel" << std::endl;
+  SCOPED_TRACE("Setting/Getting a pixel");
   itk::Vector<unsigned short, 5> vec;
 
   vec[0] = 5;

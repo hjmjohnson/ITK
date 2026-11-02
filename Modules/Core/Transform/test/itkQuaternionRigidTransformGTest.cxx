@@ -91,8 +91,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
 
     {
@@ -109,8 +107,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an itk::Vector " << std::endl;
     }
 
     {
@@ -127,8 +123,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating covariant vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -147,8 +141,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
   }
 
@@ -236,8 +228,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
 
     {
@@ -262,8 +252,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
 
     {
@@ -288,8 +276,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
                       << "Result should be               : " << q << std::endl
                       << "Reported Result is             : " << r;
-
-      std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -317,14 +303,12 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
                       << "Result should be             : " << q << std::endl
                       << "Reported Result is           : " << r;
-
-      std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
   }
 
   {
     // Test the Jacobian
-    std::cout << "Testing ComputeJacobianWithRespectToParameters()" << std::endl;
+    SCOPED_TRACE("Testing ComputeJacobianWithRespectToParameters()");
 
     auto                          quaternionRigid = TransformType::New();
     TransformType::ParametersType parameters(quaternionRigid->GetNumberOfParameters(), 0.0);
@@ -384,18 +368,15 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
     } // for k
 
     std::cout << approxJacobian << std::endl;
-    std::cout << " [ PASSED ] " << std::endl;
 
     // Testing inverse transform
-    std::cout << "Testing BackTransform()" << std::endl;
+    SCOPED_TRACE("Testing BackTransform()");
     TransformType::OutputPointType pOut;
     quaternionRigid->SetParameters(parameters);
     {
       auto       inverseQuaternionRigid = TransformType::New();
       const bool inverseIsValid = quaternionRigid->GetInverse(inverseQuaternionRigid);
       EXPECT_TRUE(inverseIsValid) << "Error computing inverse transform" << std::endl << " [ FAILED ] ";
-
-      std::cout << " [ PASSED ] compute inverse transform" << std::endl;
 
       pOut = inverseQuaternionRigid->TransformPoint(quaternionRigid->TransformPoint(pInit));
     }
@@ -407,8 +388,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
                                                                << "Reported result is: " << pOut << std::endl
                                                                << " [ FAILED ] ";
     }
-
-    std::cout << " [ PASSED ] " << std::endl;
   }
 
   /* Create a Rigid 3D transform with a defined center and a rotation given by a Matrix */
@@ -523,8 +502,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
 
     {
@@ -549,8 +526,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
 
     {
@@ -575,8 +550,6 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
                       << "Result should be               : " << q << std::endl
                       << "Reported Result is             : " << r;
-
-      std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -604,18 +577,15 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
                       << "Result should be             : " << q << std::endl
                       << "Reported Result is           : " << r;
-
-      std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
   }
 
   std::cout << std::endl;
-  std::cout << "Test PASSED !" << std::endl;
   std::cout << std::endl;
 
   {
     // Testing SetMatrix()
-    std::cout << "Testing SetMatrix() ... ";
+    SCOPED_TRACE("Testing SetMatrix() ...");
 
     using MatrixType = TransformType::MatrixType;
     MatrixType matrix;
@@ -669,7 +639,5 @@ TEST(QuaternionRigidTransform, ConvertedLegacyTest)
                                                            << "Expected parameters: " << e << std::endl
                                                            << "but got: " << p;
     }
-
-    std::cout << "[ PASSED ]" << std::endl;
   }
 }

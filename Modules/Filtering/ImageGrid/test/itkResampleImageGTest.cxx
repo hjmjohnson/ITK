@@ -124,7 +124,7 @@ TEST(ResampleImageFilter, ConvertedLegacyTest)
 
   // Exercise error handling
 
-  std::cout << "Setting interpolator to nullptr" << std::endl;
+  SCOPED_TRACE("Setting interpolator to nullptr");
   resample->SetInterpolator(nullptr);
   EXPECT_THROW(resample->Update(), itk::ExceptionObject);
   resample->ResetPipeline();

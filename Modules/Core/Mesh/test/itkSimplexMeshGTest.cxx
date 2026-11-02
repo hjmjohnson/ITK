@@ -136,6 +136,4 @@ TEST(SimplexMesh, ConvertedLegacyTest)
 
     std::cout << ", Elapsed time (for getting neighbors): " << timeProbe.GetMean() << std::endl;
   }
-
-  std::cout << "[TEST DONE]" << std::endl;
 }

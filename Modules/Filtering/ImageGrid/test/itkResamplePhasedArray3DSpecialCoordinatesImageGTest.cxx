@@ -60,7 +60,7 @@ TEST(ResamplePhasedArray3DSpecialCoordinatesImage, ConvertedLegacyTest)
   image->Allocate();
 
   // Fill image with isoshells
-  std::cout << "\nOriginal 3D Phased Array Data" << std::endl;
+  SCOPED_TRACE("Original 3D Phased Array Data");
   for (itk::ImageRegionIteratorWithIndex<InputImageType> iter(image, region); !iter.IsAtEnd(); ++iter)
   {
     index = iter.GetIndex();
@@ -104,7 +104,7 @@ TEST(ResamplePhasedArray3DSpecialCoordinatesImage, ConvertedLegacyTest)
 
   // Check if desired results were obtained
   bool passed = true;
-  std::cout << "\nData resampled onto a translated Cartesian image grid." << std::endl;
+  SCOPED_TRACE("Data resampled onto a translated Cartesian image grid.");
   ImageType::RegionType region2;
   region2 = resample->GetOutput()->GetRequestedRegion();
   for (itk::ImageRegionIteratorWithIndex<ImageType> iter2(resample->GetOutput(), region2); !iter2.IsAtEnd(); ++iter2)
@@ -158,7 +158,7 @@ TEST(ResamplePhasedArray3DSpecialCoordinatesImage, ConvertedLegacyTest)
   // Run the back-resampling filter
   backResample->Update();
   // Check how close we were to the original image
-  std::cout << "\nResampled recovery of 3D Phased Array Data from Cartesian space" << std::endl;
+  SCOPED_TRACE("Resampled recovery of 3D Phased Array Data from Cartesian space");
   for (itk::ImageRegionIteratorWithIndex<InputImageType> iter3(backResample->GetOutput(), region); !iter3.IsAtEnd();
        ++iter3)
   {

@@ -26,7 +26,7 @@
 
 TEST(ShiftScaleImageFilter, ConvertedLegacyTest)
 {
-  std::cout << "itkShiftScaleImageFilterTest Start" << std::endl;
+  SCOPED_TRACE("itkShiftScaleImageFilterTest Start");
 
   using TestInputImage = itk::Image<signed char, 3>;
   using TestOutputImage = itk::Image<unsigned char, 3>;

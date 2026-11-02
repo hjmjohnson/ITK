@@ -24,7 +24,7 @@
 
 TEST(StandardDeviationPerComponentSampleFilter, ConvertedLegacyTest)
 {
-  std::cout << "StandardDeviationPerComponentSampleFilter Test \n \n";
+  SCOPED_TRACE("StandardDeviationPerComponentSampleFilter Test");
 
   // Now generate an image
   enum

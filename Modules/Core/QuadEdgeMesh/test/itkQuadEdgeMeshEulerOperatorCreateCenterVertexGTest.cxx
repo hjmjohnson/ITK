@@ -57,7 +57,7 @@ TEST(QuadEdgeMeshEulerOperatorCreateCenterVertex, ConvertedLegacyTest)
   //    | /          | /          | /___/   \_ | /          |
   //    0 ---------- 1 ---------- 2  --------- 3 ---------  4
 
-  std::cout << "Checking CreateCenterVertex." << std::endl;
+  SCOPED_TRACE("Checking CreateCenterVertex.");
 
   const MeshPointer mesh = MeshType::New();
   CreateSquareTriangularMesh<MeshType>(mesh);
@@ -67,7 +67,6 @@ TEST(QuadEdgeMeshEulerOperatorCreateCenterVertex, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No Mesh Input";
   EXPECT_EQ(createCenterVertex->Evaluate((QEType *)1), nullptr);
-  std::cout << "OK" << std::endl;
 #endif
   EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorCreateCenterVertexFunction"),
             std::string_view(createCenterVertex->GetNameOfClass()));
@@ -79,21 +78,17 @@ TEST(QuadEdgeMeshEulerOperatorCreateCenterVertex, ConvertedLegacyTest)
   auto * dummy = new QEType;
   EXPECT_EQ(createCenterVertex->Evaluate(dummy), nullptr);
   delete dummy;
-  std::cout << "OK" << std::endl;
 
   std::cout << "     "
             << "Test No QE Input";
   EXPECT_EQ(createCenterVertex->Evaluate((QEType *)nullptr), nullptr);
-  std::cout << "OK" << std::endl;
 #endif
 
-  std::cout << "     ";
-  std::cout << "Create a center vertex of a triangle (possible).";
+  SCOPED_TRACE("Create a center vertex of a triangle (possible).");
   ASSERT_NE(createCenterVertex->Evaluate(mesh->FindEdge(8, 2)), nullptr);
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 26, 59, 34, 1, 0));
   EXPECT_EQ(mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence(), 3)
     << "wrong valence for vertex " << createCenterVertex->GetNewPointID() << '.';
-  std::cout << ".OK" << std::endl;
   // test with a bigger polygon
   //
   //   20 --------- 21 --------- 22 --------- 23 --------- 24
@@ -120,8 +115,7 @@ TEST(QuadEdgeMeshEulerOperatorCreateCenterVertex, ConvertedLegacyTest)
 
   CreateSquareTriangularMesh<MeshType>(mesh);
 
-  std::cout << "     ";
-  std::cout << "Create a center vertex of a Polygon (possible).";
+  SCOPED_TRACE("Create a center vertex of a Polygon (possible).");
 
   // this create the 16-17-18-13-8-7-6-11 polygon.
   mesh->LightWeightDeleteEdge(mesh->FindEdge(11, 12));
@@ -138,7 +132,6 @@ TEST(QuadEdgeMeshEulerOperatorCreateCenterVertex, ConvertedLegacyTest)
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 56, 32, 1, 0));
   EXPECT_EQ(mesh->GetPoint(createCenterVertex->GetNewPointID()).GetValence(), 8)
     << "wrong valence for vertex " << createCenterVertex->GetNewPointID() << '.';
-  std::cout << ".OK" << std::endl;
   std::cout << "Checking CreateCenterVertex."
             << "OK" << std::endl
             << std::endl;

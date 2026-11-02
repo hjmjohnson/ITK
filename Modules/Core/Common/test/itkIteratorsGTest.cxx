@@ -27,7 +27,7 @@
 
 TEST(Iterators, ConvertedLegacyTest)
 {
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   using ScalarImage = itk::Image<unsigned short, 3>;
   auto o3 = ScalarImage::New();
 
@@ -63,7 +63,7 @@ TEST(Iterators, ConvertedLegacyTest)
   clock_t end = clock();
   double  elapsedTime = (end - start) / double{ CLOCKS_PER_SEC };
 
-  std::cout << "Raw pointer using memset" << std::endl;
+  SCOPED_TRACE("Raw pointer using memset");
   std::cout << "\tTime   = " << elapsedTime << std::endl;
   std::cout << "\tPixels = " << num << std::endl;
 
@@ -80,7 +80,7 @@ TEST(Iterators, ConvertedLegacyTest)
     *ptr = 0;
     elapsedTime = (end - start) / double{ CLOCKS_PER_SEC };
 
-    std::cout << "Raw pointer as a 1D array" << std::endl;
+    SCOPED_TRACE("Raw pointer as a 1D array");
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 
@@ -103,7 +103,7 @@ TEST(Iterators, ConvertedLegacyTest)
     end = clock();
     elapsedTime = (end - start) / double{ CLOCKS_PER_SEC };
 
-    std::cout << "Raw pointer in 3 nested loops" << std::endl;
+    SCOPED_TRACE("Raw pointer in 3 nested loops");
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 
@@ -125,7 +125,7 @@ TEST(Iterators, ConvertedLegacyTest)
     end = clock();
     elapsedTime = (end - start) / double{ CLOCKS_PER_SEC };
 
-    std::cout << "ImageRegionIterator" << std::endl;
+    SCOPED_TRACE("ImageRegionIterator");
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 
@@ -144,7 +144,7 @@ TEST(Iterators, ConvertedLegacyTest)
     end = clock();
     elapsedTime = (end - start) / double{ CLOCKS_PER_SEC };
 
-    std::cout << "ImageRegionIteratorWithIndex" << std::endl;
+    SCOPED_TRACE("ImageRegionIteratorWithIndex");
     std::cout << "\tTime   = " << elapsedTime << std::endl;
     std::cout << "\tPixels = " << i << std::endl;
 

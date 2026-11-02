@@ -106,12 +106,12 @@ TestSettingTranslation()
     return true;
   }
 
-  std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+  SCOPED_TRACE("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   std::cout << "r1\n" << r1 << std::endl;
   std::cout << "r2\n" << r2 << std::endl;
   std::cout << "r3\n" << r3 << std::endl;
   std::cout << p1 << '\n' << p2 << '\n' << p3 << std::endl;
-  std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+  SCOPED_TRACE("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
   return false;
@@ -186,8 +186,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating point: " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
 
     {
@@ -204,8 +202,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an itk::Vector " << std::endl;
     }
 
     {
@@ -222,8 +218,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating covariant vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -242,8 +236,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
         }
       }
       EXPECT_TRUE(Ok) << "Error translating vnl_vector: " << p << std::endl << "Reported Result is      : " << q;
-
-      std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
   }
 
@@ -326,8 +318,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating point   : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok translating an itk::Point " << std::endl;
     }
 
     {
@@ -352,8 +342,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error rotating vector  : " << p << std::endl
                       << "Result should be       : " << q << std::endl
                       << "Reported Result is     : " << r;
-
-      std::cout << "Ok rotating an itk::Vector " << std::endl;
     }
 
     {
@@ -379,8 +367,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error Rotating covariant vector: " << p << std::endl
                       << "Result should be               : " << q << std::endl
                       << "Reported Result is             : " << r;
-
-      std::cout << "Ok translating an itk::CovariantVector " << std::endl;
     }
 
     {
@@ -408,13 +394,11 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       EXPECT_TRUE(Ok) << "Error translating vnl_vector : " << p << std::endl
                       << "Result should be             : " << q << std::endl
                       << "Reported Result is           : " << r;
-
-      std::cout << "Ok translating an vnl_Vector " << std::endl;
     }
 
     {
       // Testing SetParameters()
-      std::cout << "Testing SetParameters() ... ";
+      SCOPED_TRACE("Testing SetParameters() ...");
 
       auto           t = TransformType::New();
       ParametersType p(t->GetNumberOfParameters());
@@ -452,13 +436,11 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       }
 
       ASSERT_NO_THROW(t->SetParameters(p)) << "Error: caught unexpected exception";
-
-      std::cout << "done." << std::endl;
     }
 
     {
       // Testing SetIdentity()
-      std::cout << "Testing SetIdentity() ... ";
+      SCOPED_TRACE("Testing SetIdentity() ...");
 
       auto           t = TransformType::New();
       ParametersType p(t->GetNumberOfParameters());
@@ -485,13 +467,11 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       }
 
       EXPECT_TRUE(Ok) << "Test failed.";
-
-      std::cout << "done. " << std::endl;
     }
 
     {
       // Testing SetMatrix()
-      std::cout << "Testing SetMatrix() ... ";
+      SCOPED_TRACE("Testing SetMatrix() ...");
 
 
       using MatrixType = TransformType::MatrixType;
@@ -530,8 +510,6 @@ TEST(Rigid3DTransform, ConvertedLegacyTest)
       const bool TranslationSettingOK = TestSettingTranslation();
       EXPECT_TRUE(TranslationSettingOK)
         << "Error:  SetTranslation() did not result in consistent internal state for Rigid3DTransform.";
-
-      std::cout << "done." << std::endl;
     }
   }
 

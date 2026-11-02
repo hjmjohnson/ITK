@@ -64,7 +64,7 @@ TEST(QuadEdgeMeshEulerOperatorJoinFacet, ConvertedLegacyTest)
   //
   /////////////////////////////////////////
 
-  std::cout << "Checking JointFacet." << std::endl;
+  SCOPED_TRACE("Checking JointFacet.");
 
   auto joinFacet = JoinFacet::New();
 
@@ -76,7 +76,6 @@ TEST(QuadEdgeMeshEulerOperatorJoinFacet, ConvertedLegacyTest)
   std::cout << "     "
             << "Test No Mesh Input";
   EXPECT_EQ(joinFacet->Evaluate((QEType *)1), nullptr);
-  std::cout << "OK" << std::endl;
 #endif
 
   EXPECT_EQ(std::string_view("QuadEdgeMeshEulerOperatorJoinFacetFunction"),
@@ -90,12 +89,10 @@ TEST(QuadEdgeMeshEulerOperatorJoinFacet, ConvertedLegacyTest)
   auto * dummy = new QEType;
   EXPECT_EQ(joinFacet->Evaluate(dummy), nullptr);
   delete dummy;
-  std::cout << "OK" << std::endl;
 
   std::cout << "     "
             << "Test No QE Input";
   EXPECT_EQ(joinFacet->Evaluate((QEType *)nullptr), nullptr);
-  std::cout << "OK" << std::endl;
 #endif
 
   //
@@ -130,7 +127,6 @@ TEST(QuadEdgeMeshEulerOperatorJoinFacet, ConvertedLegacyTest)
   // Since the edge was internal we lost an edge and an face:
   EXPECT_TRUE(AssertTopologicalInvariants<MeshType>(mesh, 25, 55, 31, 1, 0));
   EXPECT_EQ(mesh->GetPoint(12).GetValence(), 5) << "wrong valence";
-  std::cout << "OK" << std::endl;
   std::cout << "Checking JointFacet."
             << "OK" << std::endl
             << std::endl;

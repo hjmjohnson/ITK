@@ -221,7 +221,7 @@ TEST(MeanSquaresPointSetToImageMetric, ConvertedLegacyTest)
   MetricType::MeasureType    measure = NAN;
   MetricType::DerivativeType derivative;
 
-  std::cout << "param[1]   Metric    d(Metric)/d(param[1] " << std::endl;
+  SCOPED_TRACE("param[1]   Metric    d(Metric)/d(param[1]");
 
   for (double trans = -10; trans <= 5; trans += 0.2)
   {
@@ -247,7 +247,7 @@ TEST(MeanSquaresPointSetToImageMetric, ConvertedLegacyTest)
   //-------------------------------------------------------
   // exercise misc member functions
   //-------------------------------------------------------
-  std::cout << "Check case when Target is nullptr" << std::endl;
+  SCOPED_TRACE("Check case when Target is nullptr");
   metric->SetFixedPointSet(nullptr);
   EXPECT_THROW(std::cout << "Value = " << metric->GetValue(parameters), itk::ExceptionObject)
     << "If you are reading this message the Metric " << std::endl

@@ -23,7 +23,7 @@
 
 TEST(ImageSliceIterator, ConvertedLegacyTest)
 {
-  std::cout << "Creating an image of indices" << std::endl;
+  SCOPED_TRACE("Creating an image of indices");
 
   constexpr unsigned int ImageDimension{ 3 };
 
@@ -72,7 +72,7 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
 
   {
     // Verification
-    std::cout << "Verifying for iterator...";
+    SCOPED_TRACE("Verifying for iterator...");
     IteratorType ot(myImage, region);
 
     ot.GoToBegin();
@@ -93,11 +93,10 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       }
       ot.NextSlice();
     }
-    std::cout << "  Done !" << std::endl;
 
 
     // Verification
-    std::cout << "Verifying for const iterator...";
+    SCOPED_TRACE("Verifying for const iterator...");
     ConstIteratorType cot(myImage, region);
 
     cot.GoToBegin();
@@ -118,10 +117,9 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       }
       cot.NextSlice();
     }
-    std::cout << "  Done !" << std::endl;
 
     // Verification
-    std::cout << "Verifying iterator in reverse direction... ";
+    SCOPED_TRACE("Verifying iterator in reverse direction...");
 
     IteratorType ior(myImage, region);
 
@@ -144,10 +142,8 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       ior.PreviousSlice();
     }
 
-    std::cout << "   Done ! " << std::endl;
-
     // Verification
-    std::cout << "Verifying const iterator in reverse direction... ";
+    SCOPED_TRACE("Verifying const iterator in reverse direction...");
 
     ConstIteratorType cor(myImage, region);
 
@@ -169,13 +165,12 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       }
       cor.PreviousSlice();
     }
-    std::cout << "   Done ! " << std::endl;
   }
 
   {
     // Verification
-    std::cout << "Test in a region < LargestPossibleRegion" << std::endl;
-    std::cout << "Verifying for iterator...";
+    SCOPED_TRACE("Test in a region < LargestPossibleRegion");
+    SCOPED_TRACE("Verifying for iterator...");
 
     size[0] = 50;
     size[1] = 50;
@@ -207,11 +202,10 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       }
       ot.NextSlice();
     }
-    std::cout << "  Done !" << std::endl;
 
 
     // Verification
-    std::cout << "Verifying for const iterator...";
+    SCOPED_TRACE("Verifying for const iterator...");
     ConstIteratorType cot(myImage, region);
 
     cot.GoToBegin();
@@ -232,10 +226,9 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       }
       cot.NextSlice();
     }
-    std::cout << "  Done !" << std::endl;
 
     // Verification
-    std::cout << "Verifying iterator in reverse direction... ";
+    SCOPED_TRACE("Verifying iterator in reverse direction...");
 
     IteratorType ior(myImage, region);
 
@@ -258,10 +251,8 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       ior.PreviousSlice();
     }
 
-    std::cout << "   Done ! " << std::endl;
-
     // Verification
-    std::cout << "Verifying const iterator in reverse direction... ";
+    SCOPED_TRACE("Verifying const iterator in reverse direction...");
 
     ConstIteratorType cor(myImage, region);
 
@@ -283,8 +274,5 @@ TEST(ImageSliceIterator, ConvertedLegacyTest)
       }
       cor.PreviousSlice();
     }
-    std::cout << "   Done ! " << std::endl;
   }
-
-  std::cout << "Test passed" << std::endl;
 }

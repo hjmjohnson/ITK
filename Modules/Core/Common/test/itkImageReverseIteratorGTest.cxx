@@ -56,7 +56,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
 
   using ImageType = itk::Image<PixelType, Dimension>;
 
-  std::cout << "Creating an image" << std::endl;
+  SCOPED_TRACE("Creating an image");
   auto o3 = ImageType::New();
 
   float origin3D[3] = { 5.0f, 2.1f, 8.1f };
@@ -84,7 +84,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
 
   o3->Allocate();
 
-  std::cout << "Setting/Getting a pixel" << std::endl;
+  SCOPED_TRACE("Setting/Getting a pixel");
   PixelType vec;
 
   vec[0] = 5;
@@ -103,7 +103,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
   for (; !it.IsAtEnd(); ++it)
   {
     ImageType::IndexType index = it.ComputeIndex();
-    std::cout << "Simple iterator loop: ";
+    SCOPED_TRACE("Simple iterator loop:");
     for (unsigned int i = 0; i < index.GetIndexDimension(); ++i)
     {
       std::cout << index[i] << ' ';
@@ -119,7 +119,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
     --backIt;
 
     ImageType::IndexType index = backIt.ComputeIndex();
-    std::cout << "Simple iterator backwards loop: ";
+    SCOPED_TRACE("Simple iterator backwards loop:");
     for (unsigned int i = 0; i < index.GetIndexDimension(); ++i)
     {
       std::cout << index[i] << ' ';
@@ -134,7 +134,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
   for (; !reverseIt.IsAtEnd(); ++reverseIt)
   {
     ImageType::IndexType index = reverseIt.GetIndex();
-    std::cout << "Reverse iterator: ";
+    SCOPED_TRACE("Reverse iterator:");
     for (unsigned int i = 0; i < index.GetIndexDimension(); ++i)
     {
       std::cout << index[i] << ' ';
@@ -156,7 +156,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
     pixelValue = backReverseIt.Value();
 
     ImageType::IndexType index = backReverseIt.GetIndex();
-    std::cout << "Reverse iterator backwards loop: ";
+    SCOPED_TRACE("Reverse iterator backwards loop:");
     for (unsigned int i = 0; i < index.GetIndexDimension(); ++i)
     {
       std::cout << index[i] << ' ';
@@ -169,7 +169,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
   for (reverseConstIt.GoToBegin(); !reverseConstIt.IsAtEnd(); ++reverseConstIt)
   {
     ImageType::IndexType index = reverseConstIt.GetIndex();
-    std::cout << "Reverse const iterator: ";
+    SCOPED_TRACE("Reverse const iterator:");
     for (unsigned int i = 0; i < index.GetIndexDimension(); ++i)
     {
       std::cout << index[i] << ' ';
@@ -181,7 +181,7 @@ TEST(ImageReverseIterator, ConvertedLegacyTest)
   it.GoToBegin();
   itk::ImageRegionReverseIterator<ImageType> castBackReverseIt(it);
   castBackReverseIt.GoToEnd();
-  std::cout << "It and Reverse check: ";
+  SCOPED_TRACE("It and Reverse check:");
   for (; !it.IsAtEnd(); ++it)
   {
     --castBackReverseIt;

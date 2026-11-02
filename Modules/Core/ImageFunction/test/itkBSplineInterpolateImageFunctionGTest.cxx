@@ -282,7 +282,7 @@ test1DCubicSpline()
   // Test evaluation at continuous indices and corresponding
   // geometric points
   std::cout << "Testing 1D Cubic B-Spline:\n";
-  std::cout << "Evaluate at: " << std::endl;
+  SCOPED_TRACE("Evaluate at:");
 
 
   // These values test 1) near border,
@@ -352,7 +352,7 @@ test2DSpline()
     /* Test evaluation at continuous indices and corresponding
     geometric points */
     std::cout << "Testing 2D B-Spline of Order " << splineOrder << ":\n";
-    std::cout << "Evaluate at: " << std::endl;
+    SCOPED_TRACE("Evaluate at:");
 
     // These values test 1) near border,
     //    2) inside
@@ -424,7 +424,7 @@ test3DSpline()
     /* Test evaluation at continuous indices and corresponding
     geometric points */
     std::cout << "Testing 3D B-Spline of Order " << splineOrder << ":\n";
-    std::cout << "Evaluate at: " << std::endl;
+    SCOPED_TRACE("Evaluate at:");
 
     // These values test
     //    1) near border,
@@ -499,7 +499,7 @@ test3DSplineDerivative()
     /* Test evaluation at continuous indices and corresponding
     geometric points */
     std::cout << "Testing Derivatives of 3D B-Spline of Order " << splineOrder << ":\n";
-    std::cout << "Evaluate at: " << std::endl;
+    SCOPED_TRACE("Evaluate at:");
 
     // These values test
     //    1) near border,
@@ -566,7 +566,7 @@ testInteger3DSpline()
     /* Test evaluation at continuous indices and corresponding
     geometric points */
     std::cout << "Testing 3D Integer B-Spline of Order " << splineOrder << ":\n";
-    std::cout << "Evaluate at: " << std::endl;
+    SCOPED_TRACE("Evaluate at:");
 
     // These values test
     //    1) near border,
@@ -657,7 +657,7 @@ TEST(BSplineInterpolateImageFunction, ConvertedLegacyTest)
 {
   int flag = 0; /* Did this test program work? */
 
-  std::cout << "Testing B Spline interpolation methods:\n";
+  SCOPED_TRACE("Testing B Spline interpolation methods:");
 
   flag += test1DCubicSpline();
 

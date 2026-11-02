@@ -89,7 +89,7 @@ test2DInterpolateImagePointsFilter()
 {
   int testStatus = EXIT_SUCCESS;
 
-  std::cout << "Testing 2D InterpolateImagePointsFilter at sample index locations.\n ";
+  SCOPED_TRACE("Testing 2D InterpolateImagePointsFilter at sample index locations.");
 
   // Initialize input image
   const ImageType2DPointer image = ImageType2D::New();
@@ -195,7 +195,7 @@ test3DInterpolateImagePointsFilter()
 {
   int testStatus = EXIT_SUCCESS;
 
-  std::cout << "Testing 3D InterpolateImagePointsFilter.\n ";
+  SCOPED_TRACE("Testing 3D InterpolateImagePointsFilter.");
 
   // Initialize input image
   const ImageTypePtr3D image = set3DData();
@@ -292,7 +292,7 @@ TEST(InterpolateImagePointsFilter, ConvertedLegacyTest)
 
   int testStatus = EXIT_SUCCESS;
 
-  std::cout << "Testing InterpolateImagePointsFilter class:\n";
+  SCOPED_TRACE("Testing InterpolateImagePointsFilter class:");
 
   testStatus += test2DInterpolateImagePointsFilter();
   testStatus += test3DInterpolateImagePointsFilter();

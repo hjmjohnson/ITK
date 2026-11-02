@@ -66,7 +66,7 @@ TEST(MaskNegatedImageFilter, ConvertedLegacyTest)
   InputIteratorType inputIterator(inputImage, inputImage->GetBufferedRegion());
 
   // Initialize the content of Image A
-  std::cout << "First operand " << std::endl;
+  SCOPED_TRACE("First operand");
   while (!inputIterator.IsAtEnd())
   {
     inputIterator.Set(255.0);
@@ -79,7 +79,7 @@ TEST(MaskNegatedImageFilter, ConvertedLegacyTest)
 
   // Initialize the content of Image B
   // Set to mask first 2 pixels and last 2 pixels and leave the rest as is
-  std::cout << "Second operand " << std::endl;
+  SCOPED_TRACE("Second operand");
   for (unsigned int i = 0; i < 2; ++i, ++maskIterator)
   {
     maskIterator.Set(0);
@@ -127,7 +127,7 @@ TEST(MaskNegatedImageFilter, ConvertedLegacyTest)
   OutputIteratorType outputIterator(outputImage, outputImage->GetBufferedRegion());
 
   // Print the content of the result image
-  std::cout << " Result " << std::endl;
+  SCOPED_TRACE("Result");
   while (!outputIterator.IsAtEnd())
   {
     std::cout << outputIterator.Get() << std::endl;

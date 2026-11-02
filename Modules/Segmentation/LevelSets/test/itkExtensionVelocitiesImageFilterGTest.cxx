@@ -277,7 +277,4 @@ TEST(ExtensionVelocitiesImageFilter, ConvertedLegacyTest)
   EXPECT_EQ(reinitializer->GetInputVelocityImage(2), nullptr);
 
   EXPECT_EQ(reinitializer->GetOutputVelocityImage(2), nullptr);
-
-
-  std::cout << "Test passed" << std::endl;
 }

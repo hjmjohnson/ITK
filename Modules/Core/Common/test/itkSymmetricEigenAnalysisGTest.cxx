@@ -170,7 +170,7 @@ TEST(SymmetricEigenAnalysis, ConvertedLegacyTest)
     EigenValuesArrayType                 eigenvalues;
     EigenVectorMatrixType                eigenvectors;
     constexpr SymmetricEigenAnalysisType symmetricEigenSystem;
-    std::cout << "UseEigenLibrary with FixedDimension " << std::endl;
+    SCOPED_TRACE("UseEigenLibrary with FixedDimension");
     symmetricEigenSystem.ComputeEigenValuesAndVectors(S, eigenvalues, eigenvectors);
 
     std::cout << "EigenValues: " << eigenvalues << std::endl;

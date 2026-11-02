@@ -264,7 +264,7 @@ TEST(KullbackLeiblerCompareHistogramImageToImageMetric, ConvertedLegacyTest)
   itk::TimeProbesCollectorBase collector;
   collector.Start("Loop");
 
-  std::cout << "param[4]\tKullbackLeibler\tdKullbackLeibler/dparam[4]" << std::endl;
+  SCOPED_TRACE("param[4]\tKullbackLeibler\tdKullbackLeibler/dparam[4]");
 
   for (double trans = -10; trans <= 4; trans += 0.5)
   {
