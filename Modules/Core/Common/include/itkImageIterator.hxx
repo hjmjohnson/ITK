@@ -18,40 +18,6 @@
 #ifndef itkImageIterator_hxx
 #define itkImageIterator_hxx
 
-
-namespace itk
-{
-
-//----------------------------------------------------------------------
-//  Constructor
-//----------------------------------------------------------------------
-template <typename TImage>
-ImageIterator<TImage>::ImageIterator(TImage * ptr, const RegionType & region)
-  : ImageConstIterator<TImage>(ptr, region)
-{
-  // Base class calls the const GetBufferPointer(); call the non-const one for its side effects (e.g. CudaImage).
-  static_cast<void>(ptr->GetBufferPointer());
-}
-
-//----------------------------------------------------------------------
-//  Constructor
-//----------------------------------------------------------------------
-template <typename TImage>
-ImageIterator<TImage>::ImageIterator(const ImageConstIterator<TImage> & it)
-  : ImageConstIterator<TImage>(it)
-{}
-
-//----------------------------------------------------------------------
-//    Assignment Operator
-//----------------------------------------------------------------------
-template <typename TImage>
-ImageIterator<TImage> &
-ImageIterator<TImage>::operator=(const ImageConstIterator<TImage> & it)
-{
-  this->ImageConstIterator<TImage>::operator=(it);
-  return *this;
-}
-
-} // end namespace itk
+#include "itkImageIterator.h"
 
 #endif

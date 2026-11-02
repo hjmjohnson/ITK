@@ -18,39 +18,6 @@
 #ifndef itkImageRandomConstIteratorWithIndex_hxx
 #define itkImageRandomConstIteratorWithIndex_hxx
 
-
-namespace itk
-{
-
-template <typename TImage>
-ImageRandomConstIteratorWithIndex<TImage>::ImageRandomConstIteratorWithIndex(const TImage *     ptr,
-                                                                             const RegionType & region)
-  : ImageConstIteratorWithIndex<TImage>(ptr, region)
-  , m_NumberOfPixelsInRegion{ region.GetNumberOfPixels() }
-{}
-
-template <typename TImage>
-void
-ImageRandomConstIteratorWithIndex<TImage>::ReinitializeSeed()
-{
-  m_Generator->SetSeed();
-}
-
-template <typename TImage>
-void
-ImageRandomConstIteratorWithIndex<TImage>::ReinitializeSeed(int seed)
-{
-  m_Generator->SetSeed(seed);
-  // vnl_sample_reseed(seed);
-}
-
-template <typename TImage>
-void
-ImageRandomConstIteratorWithIndex<TImage>::RandomJump()
-{
-  this->m_PositionIndex = detail::RandomIndexInRegion(*m_Generator, this->m_Region);
-  this->m_Position = this->m_Image->GetBufferPointer() + this->m_Image->ComputeOffset(this->m_PositionIndex);
-}
-} // end namespace itk
+#include "itkImageRandomIteratorWithIndex.hxx"
 
 #endif
