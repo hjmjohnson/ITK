@@ -17,6 +17,7 @@
  *=========================================================================*/
 
 #include <iostream>
+#include <type_traits>
 #include "itkReflectiveImageRegionIterator.h"
 #include "itkImageRegionIteratorWithIndex.h"
 #include "itkGTest.h"
@@ -134,4 +135,16 @@ TEST(ReflectiveImageRegionIterator, ConstructorCallsNonConstGetBufferPointer)
   using ImageType = itk::Testing::GetBufferPointerCountingImage<int>;
   EXPECT_TRUE(
     itk::Testing::IteratorConstructorCallsNonConstGetBufferPointer<itk::ReflectiveImageRegionIterator<ImageType>>());
+}
+
+// Checks that the read-only iterator deduces its image type from a raw image pointer, as it does in ITK 5.
+TEST(ReflectiveImageRegionIterator, DeduceImageTypeFromRawPointer)
+{
+  using ImageType = itk::Image<int, 3>;
+  ImageType * const       image = nullptr;
+  const ImageType * const constImage = nullptr;
+  static_assert(std::is_same_v<decltype(itk::ReflectiveImageRegionConstIterator(image, ImageType::RegionType{})),
+                               itk::ReflectiveImageRegionConstIterator<ImageType>>);
+  static_assert(std::is_same_v<decltype(itk::ReflectiveImageRegionConstIterator(constImage, ImageType::RegionType{})),
+                               itk::ReflectiveImageRegionConstIterator<ImageType>>);
 }
