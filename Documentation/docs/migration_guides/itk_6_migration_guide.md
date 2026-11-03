@@ -1525,3 +1525,29 @@ Platform keeps one work unit per thread without increasing
 its thread count; Single always uses one work unit. The ratio is not retained:
 later thread-count changes, explicit work-unit settings, and multi-threader
 replacement do not reapply it.
+
+## Mattes mutual information derivatives repeat for a fixed number of work units
+
+`MattesMutualInformationImageToImageMetricv4` now accumulates the joint PDF
+derivatives of transforms without local support (for example affine and
+`BSplineTransform`) in one array per work unit, and adds the arrays in
+work-unit order. Repeated runs with the same number of work units give
+bit-identical derivatives. A different number of work units groups the sum
+differently, so the derivative can still change at the level of floating-point
+rounding. The protected nested class `DerivativeBufferManager`, the
+`m_ThreaderDerivativeManager` member, `m_JointPDFDerivativesLock` and the
+`FinalizeThread()` override are removed. During the threaded pass,
+`m_JointPDFDerivatives` is the array of work unit 0, to which the other work
+units' arrays are then added.
+
+### What you need to do
+
+Nothing, unless a subclass used `DerivativeBufferManager`, `FinalizeThread()`
+or the members above. Such a subclass should accumulate into
+`m_ThreaderJointPDFDerivatives[threadId]` instead.
+
+The derivative arrays take work units x bins^2 x parameters doubles. For
+example, a 3-D `BSplineTransform` on a 10 x 10 x 10 mesh (6591 parameters)
+with 32 bins needs about 54 MB per work unit. With the default of 4 work units
+per thread, that is about 3.5 GB at 16 threads. To cap it, call
+`SetMaximumNumberOfWorkUnits()` on the metric.
