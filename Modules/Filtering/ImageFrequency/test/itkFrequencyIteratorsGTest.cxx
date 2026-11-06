@@ -456,3 +456,27 @@ TEST(FrequencyIteratorConversions, SetRequiresNonConstImage)
   static_assert(
     !HasAssignableValue<itk::FrequencyShiftedFFTLayoutImageRegionIteratorWithIndex<const ImageType>>::value);
 }
+
+
+// Checks that each read-only frequency iterator deduces its image type from raw and smart pointers.
+TEST(FrequencyIteratorConversions, DeduceImageType)
+{
+  using ImageType = itk::Image<float, 2>;
+  using RegionType = ImageType::RegionType;
+  const ImageType * const       constImage = nullptr;
+  const ImageType::Pointer      imagePointer{};
+  const ImageType::ConstPointer constImagePointer{};
+  static_assert(std::is_same_v<decltype(itk::FrequencyImageRegionConstIteratorWithIndex(constImage, RegionType{})),
+                               itk::FrequencyImageRegionConstIteratorWithIndex<ImageType>>);
+  static_assert(std::is_same_v<decltype(itk::FrequencyImageRegionConstIteratorWithIndex(imagePointer, RegionType{})),
+                               itk::FrequencyImageRegionConstIteratorWithIndex<ImageType>>);
+  static_assert(
+    std::is_same_v<decltype(itk::FrequencyFFTLayoutImageRegionConstIteratorWithIndex(constImagePointer, RegionType{})),
+                   itk::FrequencyFFTLayoutImageRegionConstIteratorWithIndex<ImageType>>);
+  static_assert(std::is_same_v<decltype(itk::FrequencyHalfHermitianFFTLayoutImageRegionConstIteratorWithIndex(
+                                 constImagePointer, RegionType{})),
+                               itk::FrequencyHalfHermitianFFTLayoutImageRegionConstIteratorWithIndex<ImageType>>);
+  static_assert(std::is_same_v<decltype(itk::FrequencyShiftedFFTLayoutImageRegionConstIteratorWithIndex(
+                                 constImagePointer, RegionType{})),
+                               itk::FrequencyShiftedFFTLayoutImageRegionConstIteratorWithIndex<ImageType>>);
+}
