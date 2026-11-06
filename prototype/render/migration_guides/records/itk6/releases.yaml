@@ -1,0 +1,3 @@
+# Written only by Utilities/Maintenance/MigrationRecordsRelease.py at release time.
+"6.0a01": [RemoveItkV5Support]
+"6.0b01": [RemoveItkVnlInstantiation]

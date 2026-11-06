@@ -1,0 +1,14 @@
+title: The ITKVNLInstantiation library is removed
+summary: |
+  `ITKVNLInstantiation` was an empty compatibility library. Link `ITKVNL` instead.
+categories: [ApiRemoved]
+environment: [cmake]
+impact: low
+pr: 5286
+commit: db104239cf8
+examples:
+  - language: cmake
+    before: |
+      target_link_libraries(myApp PRIVATE ITKVNLInstantiation)
+    after: |
+      target_link_libraries(myApp PRIVATE ITKVNL)

@@ -1,0 +1,11 @@
+title: "`itk::Math::sqrteps` changed by 1 ULP"
+summary: |
+  `itk::Math::sqrteps` is now `0x1p-26`, the exact `sqrt(eps)`.
+categories: [ResultsChange]
+environment: [cxx]
+impact: low
+pr: 6427
+commit: 589d68004ab
+details: |
+  Rated low despite `ResultsChange`: the value moves by one unit in the last
+  place, which affects only tolerance comparisons at the edge of precision.

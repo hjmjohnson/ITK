@@ -1,0 +1,15 @@
+title: "`GetIndex()` is replaced by `ComputeIndex()` for iterators without an index"
+summary: |
+  Iterators that do not store an index compute it on request, so the method is
+  renamed to show that it costs time.
+categories: [ApiDeprecated, ApiRenamed]
+environment: [cxx]
+impact: medium
+pr: 5803
+commit: 2b7c0770f96
+legacy_guard: ITK_FUTURE_LEGACY_REMOVE
+renames:
+  - old: itk::ImageRegionConstIterator::GetIndex()
+    new: itk::ImageRegionConstIterator::ComputeIndex()
+  - old: itk::ImageScanlineConstIterator::GetIndex()
+    new: itk::ImageScanlineConstIterator::ComputeIndex()

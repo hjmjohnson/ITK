@@ -1,0 +1,19 @@
+title: Modern CMake interface libraries
+summary: |
+  ITK modules are now imported targets with usage requirements; `ITK_LIBRARIES`
+  and `include(${ITK_USE_FILE})` are deprecated.
+categories: [ApiDeprecated]
+environment: [cmake]
+impact: high
+pr: 5721
+commit: 93df383cb9b
+deprecated_in: "6.0"
+examples:
+  - language: cmake
+    before: |
+      find_package(ITK REQUIRED COMPONENTS ITKCommon ITKIOImageBase)
+      include(${ITK_USE_FILE})
+      target_link_libraries(myApp ${ITK_LIBRARIES})
+    after: |
+      find_package(ITK REQUIRED COMPONENTS ITKCommon ITKIOImageBase)
+      target_link_libraries(myApp PRIVATE ITK::ITKCommon ITK::ITKIOImageBase)

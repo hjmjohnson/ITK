@@ -1,0 +1,17 @@
+title: Remove support for ITKv5 interfaces
+summary: |
+  The Deprecated module and every `ITKV5_COMPATIBILITY` interface are removed.
+categories: [ApiRemoved]
+environment: [cxx]
+impact: high
+pr: 4729
+commit: 91251de596f
+details: |
+  This includes `TreeContainer` and related classes, the atomic primitives and
+  mutexes now provided by the C++ standard library, and the specialized vector
+  filters, since the regular filters work with vector images.
+actions:
+  - Replace `itk::TreeContainer` uses with a standard container.
+  - Replace `itk::Atomic` and `itk::SimpleFastMutexLock` with `std::atomic` and `std::mutex`.
+links:
+  - https://github.com/InsightSoftwareConsortium/ITK/blob/main/Documentation/docs/migration_guides/itk_5_migration_guide.md

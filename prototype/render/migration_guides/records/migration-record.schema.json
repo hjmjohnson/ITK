@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.itk.org/migration-record.schema.json",
+  "title": "ITK migration record",
+  "description": "One downstream-visible change. Every field is optional; {} is a valid record.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"description": "Schema version this record follows.", "const": 1},
+    "title": {"description": "One-line title. Defaults to the file-name descriptor split into words.", "type": "string", "examples": ["Remove support for ITKv5 interfaces"]},
+    "summary": {"description": "One to three sentences, always visible in the guide.", "type": "string"},
+    "details": {"description": "Longer explanation in GitHub-compatible Markdown (CommonMark and pipe tables, explicit links).", "type": "string"},
+    "actions": {"description": "Steps downstream code must take.", "type": "array", "items": {"type": "string"}},
+    "categories": {"description": "What kind of change this is.", "type": "array", "uniqueItems": true, "items": {"enum": ["ApiRemoved", "ApiDeprecated", "ApiRenamed", "ResultsChange", "DefaultChanged", "FileFormat", "Performance", "CompilerEnvironment", "Dependency", "Policy"]}},
+    "environment": {"description": "Where downstream code must act.", "type": "array", "uniqueItems": true, "items": {"enum": ["cxx", "python", "cmake", "wrapping", "data"]}},
+    "impact": {"description": "Approximate downstream impact; see the rubric in the template.", "enum": ["high", "medium", "low"]},
+    "pr": {"description": "PR that introduced the change. 0 is a drafting placeholder that CI rejects; -1 means no PR.", "type": "integer", "minimum": -1, "examples": [7125, -1]},
+    "commit": {"description": "Commit that introduced the change.", "type": "string", "pattern": "^[0-9a-f]{7,40}$"},
+    "links": {"description": "Related issues, PRs, and discussions.", "type": "array", "items": {"type": "string", "format": "uri"}},
+    "deprecated_in": {"description": "Release that deprecated the old form, quoted.", "type": "string", "examples": ["6.0"]},
+    "removed_in": {"description": "Release that removed (or will remove) the old form, quoted.", "type": "string", "examples": ["7.0"]},
+    "legacy_guard": {"description": "Macro that hides the old form.", "enum": ["ITK_LEGACY_REMOVE", "ITK_FUTURE_LEGACY_REMOVE"]},
+    "withdrawn": {"description": "Retire a shipped record from the guide; explain why in details.", "type": "boolean"},
+    "renames": {"description": "Old-to-new names, rendered as a table.", "type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["old", "new"], "properties": {"old": {"type": "string"}, "new": {"type": "string"}}}},
+    "examples": {"description": "Before/after code. Either side may be omitted.", "type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"language": {"enum": ["cpp", "python", "cmake", "shell", "text"]}, "before": {"type": "string"}, "after": {"type": "string"}, "note": {"type": "string"}}}}
+  }
+}

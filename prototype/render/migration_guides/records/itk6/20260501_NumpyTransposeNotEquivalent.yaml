@@ -1,0 +1,19 @@
+title: "NumPy bridge: `image_from_array(arr.T)` is no longer equivalent to `image_from_array(arr)`"
+summary: |
+  Non-C-contiguous arrays are now copied, and the image size always equals
+  `array.shape[::-1]`, so a transposed array gives a transposed image.
+categories: [ResultsChange]
+environment: [python]
+impact: high
+pr: 5775
+commit: fdee9cb6d89
+details: |
+  Earlier versions special-cased F-contiguous inputs, so the transpose was a
+  silent no-op and round trips could transpose data. The result for `arr.T`
+  changes without any error, which is why this is rated high.
+examples:
+  - language: python
+    before: |
+      image = itk.image_from_array(arr.T)   # same image as arr
+    after: |
+      image = itk.image_from_array(arr)     # pass the array you mean
