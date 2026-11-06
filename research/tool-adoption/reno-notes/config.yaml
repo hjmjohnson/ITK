@@ -1,0 +1,6 @@
+sections:
+  - [ApiRemoved, API removed]
+  - [ApiRenamed, API renamed]
+  - [ResultsChange, Results change]
+  - [BuildSystem, Build system]
+unreleased_version_title: Unreleased

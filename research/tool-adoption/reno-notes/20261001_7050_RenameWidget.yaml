@@ -1,0 +1,3 @@
+categories: [ApiRenamed]
+ApiRenamed:
+  - "``Widget`` is now ``Gadget``."

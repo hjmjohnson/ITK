@@ -1,0 +1,15 @@
+# ITK custom keys alongside reno sections
+schema_version: 1
+categories: [ApiRemoved]
+impact: 3
+pr: 7001
+release: v6.0.0
+ApiRemoved:
+  - |
+    ``itk::Foo::Bar()`` was removed. Use ``Baz()``.
+examples:
+  - language: cpp
+    before: |
+      foo->Bar();
+    after: |
+      foo->Baz();

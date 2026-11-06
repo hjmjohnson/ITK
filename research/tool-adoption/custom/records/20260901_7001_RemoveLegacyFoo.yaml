@@ -1,0 +1,15 @@
+# Template comments are allowed in YAML records.
+schema_version: 1
+title: Remove itk::Foo::Bar()
+categories: [ApiRemoved]
+impact: 3
+pr: 7001
+release: "6.0"
+summary: |
+  `itk::Foo::Bar()` was removed. Use `Baz()`.
+examples:
+  - language: cpp
+    before: |
+      foo->Bar();
+    after: |
+      foo->Baz();

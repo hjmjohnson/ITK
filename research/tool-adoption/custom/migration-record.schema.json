@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ITK migration record",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "title": {"type": "string"},
+    "summary": {"type": "string"},
+    "categories": {"type": "array", "uniqueItems": true, "items": {"enum": [
+      "ApiRemoved", "ResultsChange", "ApiDeprecated", "ApiRenamed",
+      "BuildSystem", "PythonWrapping", "FileFormat", "CompilerEnvironment",
+      "Dependency", "Performance", "DefaultChanged"]}},
+    "impact": {"type": "integer", "minimum": 0, "maximum": 5},
+    "environment": {"type": "array", "items": {"type": "string"}},
+    "pr": {"type": "integer"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{7,40}$"},
+    "release": {"type": "string"},
+    "deprecated_in": {"type": "string"},
+    "removed_in": {"type": "string"},
+    "links": {"type": "array", "items": {"type": "string"}},
+    "examples": {"type": "array", "items": {
+      "type": "object", "additionalProperties": false,
+      "properties": {"language": {"type": "string"},
+        "before": {"type": "string"}, "after": {"type": "string"}}}}
+  }
+}
