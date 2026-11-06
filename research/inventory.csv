@@ -1,0 +1,58 @@
+guide,heading,pr,commit,date,environment,has_before_after,impact,categories,notes
+itk_6_migration_guide.md,Require modern C++ language feature use,4715,da532bcbfff,2024-05-31,C++,mapping,low,CompilerEnvironment;ApiRemoved,one macro (ITKv5_CONST); one-sentence stub
+itk_6_migration_guide.md,Minimum supported VTK version: 9.1,6144,73e469fc432,2026-04-26,build/toolchain;CMake,code-only,medium,Dependency;BuildSystem,ITKVtkGlue users only; numbered steps; distro list; downstream-pin note
+itk_6_migration_guide.md,Remove support for ITKv4 interfaces,4715,da532bcbfff,2024-05-31,CMake,no,low,BuildSystem;ApiRemoved,ITKV4_COMPATIBILITY option was off by default
+itk_6_migration_guide.md,Remove support for ITKv5,4729,91251de596f,2024-06-20,C++,no,high,ApiRemoved,whole Deprecated module removed; points to ITK 5 guide
+itk_6_migration_guide.md,Prefer standard CXX language features rather than ITK macros,4737,f65606905b7,2024-06-20,C++,mapping,medium,ApiDeprecated;ApiRenamed,19 macro->keyword pairs in a txt block; mechanical
+itk_6_migration_guide.md,Removed ITKv5 migration/maintenance scripts,4744,d31666271a0,2024-06-21,build/toolchain,no,low,ApiRemoved,file list only
+itk_6_migration_guide.md,Accessing outdated ITKv5 migration scripts,4744,d31666271a0,2024-06-21,build/toolchain,code-only,low,ApiRemoved,two-line shell note; really part of the entry above
+itk_6_migration_guide.md,Class changes,4925,148bc328766,2024-11-06,C++,mapping,medium,ResultsChange;ApiDeprecated;ApiRenamed,bucket of 4 unrelated changes from 7 commits; PR is the first item only; ambiguous
+itk_6_migration_guide.md,ITKFEM and ITKFEMRegistration modules removed,6524,caf908a1a5a,2026-06-25,CMake;C++,no,low,ApiRemoved;BuildSystem,opt-in modules; removal in ITK 7 timeline; issue #6511; replaced an earlier FEM entry from PR #5995
+itk_6_migration_guide.md,ITKVNLInstantiation library is removed,5286,db104239cf8,2025-03-20,CMake,mapping,low,BuildSystem;ApiRemoved,link ITKVNL instead
+itk_6_migration_guide.md,itk::Math::sqrteps changed by 1 ULP for accuracy,6427,589d68004ab,2026-06-10,C++,no,low,ResultsChange,1 ULP constant change; two sentences
+itk_6_migration_guide.md,Prefer itk::AnatomicalOrientation over itk::SpatialOrientation,5382,3c934669de9,2025-06-05,C++;wrapping,code-only,medium,ApiDeprecated;PythonWrapping,cpp+python+error text; possible future deprecation; duplicated in ITK 5 guide
+itk_6_migration_guide.md,GetIndex() replaced with ComputeIndex() for iterators without index,5803,2b7c0770f96,2026-02-14,C++,mapping,medium,ApiDeprecated,common iterator API; deprecation
+itk_6_migration_guide.md,Remove support for Python wrapped long double types,5752,61ea2c7bfd3,2026-01-30,wrapping,no,low,PythonWrapping;ApiRemoved,prose only
+itk_6_migration_guide.md,IO modules write floating-point metadata with lossless precision,6003,cd9ec887ed0,2026-04-03,IO/data,no,medium,FileFormat;ResultsChange,text baselines change across 6 IO modules
+itk_6_migration_guide.md,Legacy GoogleTest Target Names Removed,5791,1648e8e25d7,2026-02-11,CMake,yes,low,BuildSystem;ApiRenamed,test targets only; Rationale subsection
+itk_6_migration_guide.md,Python Global Interpreter Lock (GIL) Release,5776,f8b120f5205,2026-02-06,Python;CMake,code-only,low,PythonWrapping;BuildSystem;Performance,additive; new ITK_PYTHON_RELEASE_GIL option; doc commit by copilot-swe-agent
+itk_6_migration_guide.md,Python lazy loading is always on,6183,94491a6ce41,2026-05-01,Python,code-only,low,PythonWrapping;ApiRemoved,remove-these snippets; Removed/What/Why subsections
+itk_6_migration_guide.md,Modern CMake Interface Libraries,5721,93df383cb9b,2026-01-27,CMake,yes,high,BuildSystem;ApiDeprecated,every downstream CMakeLists; 5 before/after pairs; FFTW subsection added later; 3 commits
+itk_6_migration_guide.md,Minimum wrapped Python raised to 3.11,6677,3c7145d69f5,2026-07-21,Python;build/toolchain,no,medium,Dependency;PythonWrapping,toolchain floor
+itk_6_migration_guide.md,NumPy bridge: image_from_array(arr.T) is no longer transpose-equivalent,5775,fdee9cb6d89,2026-05-01,Python,code-only,medium,PythonWrapping;ResultsChange,silent semantic change; invariant shown as code
+itk_6_migration_guide.md,Vnl FFT backend replaced by PocketFFT,6441,d355ad35b57,2026-06-11,C++;CMake,mapping,medium,ApiRemoved;ApiRenamed;ResultsChange;Performance,class and factory-key renames; Concerns subsection
+itk_6_migration_guide.md,"The itk::bridge namespace: a migration aid, not supported ITK API",6768,a2c58cc9bc4,2026-08-19,C++,no,low,,policy statement rather than a change
+itk_6_migration_guide.md,Eigen-backed eigendecompositions replace netlib EISPACK vnl_*_eigensystem,6475,073cf3e999b,2026-06-18,C++,mapping,medium,ApiDeprecated;ResultsChange,deprecation under ITK_FUTURE_LEGACY_REMOVE; baselines change sign
+itk_6_migration_guide.md,Optional Eigen-backed itk::bridge::Math::SVD,6487,5c4ebebf1a1,2026-06-21,C++,no,low,Performance;ResultsChange,opt-in; performance table; heading renamed in PR #6768
+itk_6_migration_guide.md,FixedPointInverseDisplacementFieldImageFilter::OutputIterator is now ImageRegionIteratorWithIndex,6504,60640e009a3,2026-06-24,C++,mapping,low,ApiRenamed,type alias change
+itk_6_migration_guide.md,itkDCMTKFileReader.h is now a private header of ITKIODCMTK,6553,5c9987a5844,2026-07-05,C++;IO/data,code-only,medium,ApiRemoved;FileFormat,downstream must vendor; names Slicer and BRAINSTools; commit pin
+itk_6_migration_guide.md,GDCMSeriesFileNames reimplemented on gdcm::Scanner/IPPSorter,6469,50dfb136658,2026-06-17,IO/data,no,medium,FileFormat;ResultsChange;DefaultChanged,DICOM ordering edge cases; Concerns; issue #6468; 4 commits
+itk_6_migration_guide.md,RenyiEntropyThresholdCalculator/MaximumEntropyThresholdCalculator: max-entropy seed corrected,6635,3095cceb444,2026-07-15,C++,no,low,ResultsChange,bug fix; narrow configuration
+itk_6_migration_guide.md,JointHistogramMutualInformationImageToImageMetricv4 corrected,6569,bef284f41cd,2026-07-09,C++,no,medium,ResultsChange,stub linking to topic file
+itk_6_migration_guide.md,Projection and accumulate filters: collapsed-axis output origin centered,6594,993f3108622,2026-07-13,C++,no,medium,ResultsChange,origin baselines shift; this commit also broke the H1 underline
+itk_6_migration_guide.md,HDF5ImageIO no longer compresses by default,6649,fb2117cb6c8,2026-07-15,IO/data,mapping,low,FileFormat;DefaultChanged,one call restores old output
+itk_6_migration_guide.md,GradientStructureTensorImageFilter: feature-scale smoothing is now isotropic,6602,0b55b82aef0,2026-07-13,C++,no,medium,ResultsChange;ApiRenamed,output changes for CED/LBR; rewritten and class renamed in PR #7061
+itk_6_migration_guide.md,IsotropicWavelets StructureTensorImageFilter is now RieszStructureTensorImageFilter,7061,3e464776516,2026-10-31,C++;Python,mapping,low,ApiRenamed;PythonWrapping,remote-module class; issue #7057; no alias
+itk_6_migration_guide.md,NiftiImageIO preserves NaN and infinite pixel values,6683,0d8c7039216,2026-07-21,IO/data,code-only,medium,FileFormat;DefaultChanged,two alternative remedies
+itk_6_migration_guide.md,GetInverseTransform() returns the concrete transform type for more 3D transforms,6689,13ebafff53f,2026-07-23,C++;IO/data,no,low,ResultsChange;FileFormat,serialized transform names change
+itk_6_migration_guide.md,GradientImageFilter::OverrideBoundaryCondition deprecated in favor of SetBoundaryCondition,6714,62033711d5f,2026-07-26,C++;Python,yes,low,ApiDeprecated;PythonWrapping,deprecation under ITK_FUTURE_LEGACY_REMOVE
+itk_6_migration_guide.md,ITK_AUTOLOAD_PATH is read once; use ObjectFactoryBase::SetAutoloadPaths,6985,32419f36356,2026-10-23,C++,mapping,low,ApiRenamed,heading/API renamed in PR #7043
+itk_6_migration_guide.md,MINCImageIO reads a MINC time dimension as a fourth image axis,6910,de4abe61cc9,2026-09-25,IO/data,code-only,medium,FileFormat;ResultsChange,MINC time series change dimension
+itk_6_migration_guide.md,Byte-order macros are deprecated in itkConfigure.h,7112,174c2062d31,2026-11-04,C++;CMake,yes,low,ApiDeprecated;CompilerEnvironment,two before/after pairs
+itk_6_migration_guide.md,ITK headers present one form in every C++ standard,7119,7397293bdd0,2026-11-05,C++;build/toolchain,no,low,CompilerEnvironment;BuildSystem,new ITK_ALPHA_FEATURE_CXX* options
+itk_6_migration_guide.md,ITK_HAS_CPP11_TYPETRAITS is removed,7121,a2a4375ff27,2026-11-05,C++,mapping,low,ApiRemoved,delete the #ifdef
+itk_5_migration_guide.md,Legacy code removed,gerrit,bf1bf57bc6b,2018-04-09,CMake;C++,no,high,ApiRemoved;BuildSystem,pre-GitHub (Change-Id); 5 commits; staged procedure
+itk_5_migration_guide.md,C++11,gerrit,bf1bf57bc6b,2018-04-09,C++;build/toolchain,mapping,high,CompilerEnvironment;ApiDeprecated,11 commits; replace-X-with-Y list; links to commits
+itk_5_migration_guide.md,Modern CMake requirement,gerrit,bf1bf57bc6b,2018-04-09,build/toolchain,no,medium,Dependency;BuildSystem,CMake 3.10.2 floor
+itk_5_migration_guide.md,Updated style,gerrit,bf1bf57bc6b,2018-04-09,C++,no,low,,style only
+itk_5_migration_guide.md,Multithreading refactored,gerrit,bf1bf57bc6b,2018-04-09,C++,yes,high,ApiRenamed;ApiDeprecated,16 commits; ITK_VERSION_MAJOR guards; several pairs
+itk_5_migration_guide.md,Spatial Objects Refactoring,630,0505bf75148,2019-03-25,C++,mapping,medium,ApiRenamed;ApiRemoved,long rename list; 14 commits
+itk_5_migration_guide.md,Class changes,gerrit,04b132cf88a,2018-05-14,C++,mapping,high,ApiRemoved;ApiRenamed;ResultsChange,bucket of ~23 paragraphs from 35 commits; ambiguous
+itk_5_migration_guide.md,Consolidated Vector Filter,1311,ad8f0bbd6f5,2019-10-10,C++,mapping,medium,ApiDeprecated,class -> class list
+itk_5_migration_guide.md,Python changes,403,443955f9644,2019-01-11,Python;wrapping,no,low,PythonWrapping;ApiRenamed,two sentences
+itk_5_migration_guide.md,Strongly Typed Enumerations,1471,0dd31a62f85,2020-02-12,C++;wrapping;CMake,yes,high,ApiRenamed;BuildSystem;PythonWrapping,pattern before/after; link-error text; itk-module.cmake fix
+itk_5_migration_guide.md,Update scripts,gerrit,bf1bf57bc6b,2018-04-09,build/toolchain,no,low,ApiRemoved,permalink to removed scripts; 7 commits
+itk_5_migration_guide.md,ITKv6 will prefer itk::AnatomicalOrientation over itk::SpatialOrientation,5460,294937f135e,2025-07-10,C++,code-only,medium,ApiDeprecated,backport under empty heading Backported ITKv6 features; v5.4.5+
+python_spatial_key_migration.md,Python spatial key migration (whole file),6710,8acbdb51228,2026-07-26,Python,yes,medium,PythonWrapping;ApiDeprecated,3 subsections; key table; warning behavior; issue #6706
+joint_histogram_mutual_information_metric_correction.md,JointHistogramMutualInformation Metric Correction (whole file),6569,bef284f41cd,2026-07-09,C++,no,medium,ResultsChange;ApiRemoved,impact report; per-consumer subsections; checklist
+index.md,Fine-grained versioning between release tags,6676,2e2c3bd0ada,2026-07-21,CMake,code-only,low,BuildSystem,additive; ITK_VERSION_FULL gating; 7 commits
