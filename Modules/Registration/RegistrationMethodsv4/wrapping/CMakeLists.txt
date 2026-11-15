@@ -4,9 +4,6 @@ set(
   WRAPPER_SUBMODULE_ORDER
   itkImageRegistrationMethodv4
   itkSyNImageRegistrationMethod
-  itkBSplineSyNImageRegistrationMethod
-  itkTimeVaryingVelocityFieldImageRegistrationMethodv4
-  itkTimeVaryingBSplineVelocityFieldImageRegistrationMethod
 )
 
 # was getting custom rule already exists errors if below was included

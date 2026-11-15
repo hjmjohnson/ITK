@@ -4,7 +4,6 @@ if(ITK_WRAP_PYTHON)
   set(
     WRAPPER_SUBMODULE_ORDER
     itkPyBuffer
-    itkPyVectorContainer
   )
   set(
     WRAPPER_SWIG_LIBRARY_FILES
