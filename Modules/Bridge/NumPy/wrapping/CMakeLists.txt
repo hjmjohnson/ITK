@@ -1,11 +1,7 @@
 if(ITK_WRAP_PYTHON)
   itk_wrap_module(ITKBridgeNumPy)
   list(APPEND WRAPPER_LIBRARY_INCLUDE_DIRECTORIES ${Python3_INCLUDE_DIRS})
-  set(
-    WRAPPER_SUBMODULE_ORDER
-    itkPyBuffer
-    itkPyVectorContainer
-  )
+  set(WRAPPER_SUBMODULE_ORDER itkPyBuffer)
   set(
     WRAPPER_SWIG_LIBRARY_FILES
     ${WRAPPER_SWIG_LIBRARY_FILES}

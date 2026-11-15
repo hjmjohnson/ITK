@@ -5,17 +5,9 @@ set(
   itkCompositeTransform
   itkTransformBase
   itkMatrixOffsetTransformBase
-  itkEuler2DTransform
-  itkEuler3DTransform
   itkMultiTransform
   itkVersorTransform
   itkVersorRigid3DTransform
-  itkSimilarity2DTransform
-  itkSimilarity3DTransform
   itkAffineTransform
-  itkScalableAffineTransform
-  itkScaleTransform
-  itkKernelTransform
-  itkTransformGeometryImageFilter
 )
 itk_auto_load_and_end_wrap_submodules()
