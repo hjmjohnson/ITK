@@ -13,6 +13,10 @@ foreach(d ${ITK_WRAP_DIMS})
   itk_wrap_template("CT${ITKM_D}${d}" "itk::CompositeTransform< ${ITKT_D}, ${d} >")
   itk_wrap_template("CT${ITKM_F}${d}" "itk::CompositeTransform< ${ITKT_F}, ${d} >")
   itk_wrap_template("DFT${ITKM_D}${d}" "itk::DisplacementFieldTransform< ${ITKT_D}, ${d} >")
+  if(ITK_WRAP_float AND ITK_WRAP_vector_float)
+    # necessary for SyNImageRegistrationMethod with a float transform
+    itk_wrap_template("DFT${ITKM_F}${d}" "itk::DisplacementFieldTransform< ${ITKT_F}, ${d} >")
+  endif()
   itk_wrap_template("BSOUDFT${ITKM_D}${d}" "itk::BSplineSmoothingOnUpdateDisplacementFieldTransform< ${ITKT_D}, ${d} >")
   # necessary for TimeVaryingVelocityFieldImageRegistrationMethodv4
   itk_wrap_template("GSOUTVVFT${ITKM_D}${d}"

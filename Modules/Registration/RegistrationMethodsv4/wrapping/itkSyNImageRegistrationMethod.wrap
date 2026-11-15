@@ -15,5 +15,11 @@ foreach(d ${ITK_WRAP_DIMS})
       "itk::Image< ${ITKT_${t}}, ${d} >, itk::Image< ${ITKT_${t}}, ${d} >, itk::DisplacementFieldTransform< ${ITKT_D}, ${d} >, itk::Image< ${ITKT_${t}}, ${d} >, itk::Mesh< ${ITKT_D}, ${d} >"
     )
   endforeach()
+  if(ITK_WRAP_float AND ITK_WRAP_vector_float)
+    itk_wrap_template(
+      "${ITKM_F}${d}${ITKM_F}${d}DFT${ITKM_F}${d}"
+      "itk::Image< ${ITKT_F}, ${d} >, itk::Image< ${ITKT_F}, ${d} >, itk::DisplacementFieldTransform< ${ITKT_F}, ${d} >"
+    )
+  endif()
 endforeach()
 itk_end_wrap_class()
