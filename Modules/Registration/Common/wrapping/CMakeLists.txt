@@ -6,6 +6,13 @@ foreach(d ${ITK_WRAP_IMAGE_DIMS})
     displacement_field_adaptor_templates
     "${ITKM_DFTD${d}} # ${ITKT_DFTD${d}}"
   )
+  if(ITK_WRAP_float AND ITK_WRAP_vector_float)
+    list(
+      APPEND
+      displacement_field_adaptor_templates
+      "${ITKM_DFTF${d}} # ${ITKT_DFTF${d}}"
+    )
+  endif()
 endforeach()
 set(gaussian_displacement_field_adaptor_templates)
 foreach(d ${ITK_WRAP_IMAGE_DIMS})

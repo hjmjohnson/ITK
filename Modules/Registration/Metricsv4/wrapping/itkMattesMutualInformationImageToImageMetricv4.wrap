@@ -14,5 +14,12 @@ foreach(d ${ITK_WRAP_IMAGE_DIMS})
         "itk::Image< ${ITKT_${t}}, ${d} >, itk::Image< ${ITKT_${t}}, ${d} >"
     )
   endforeach()
+  if(ITK_WRAP_float AND ITK_WRAP_vector_float)
+    # Single-precision internal computation, used by registrations with float transforms.
+    itk_wrap_template(
+        "${ITKM_F}${d}${ITKM_F}${d}I${ITKM_F}${d}${ITKM_F}"
+        "itk::Image< ${ITKT_F}, ${d} >, itk::Image< ${ITKT_F}, ${d} >, itk::Image< ${ITKT_F}, ${d} >, ${ITKT_F}"
+    )
+  endif()
 endforeach()
 itk_end_wrap_class()

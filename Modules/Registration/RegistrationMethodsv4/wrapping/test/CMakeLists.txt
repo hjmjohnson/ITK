@@ -22,6 +22,14 @@ if(ITK_WRAP_PYTHON)
           ${CMAKE_CURRENT_SOURCE_DIR}/itkGaussianSmoothingDisplacementFieldRegistrationTest.py
           ${d}
       )
+      if(ITK_WRAP_vector_float)
+        itk_python_add_test(
+          NAME itkSyNImageRegistrationMethodFloat${d}DPythonTest
+          COMMAND
+            ${CMAKE_CURRENT_SOURCE_DIR}/itkSyNImageRegistrationMethodFloatTest.py
+            ${d}
+        )
+      endif()
     endif()
   endforeach()
 
