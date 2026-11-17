@@ -17,7 +17,6 @@
  *=========================================================================*/
 
 #include "itkTBBMultiThreader.h"
-#include "itkNumericTraits.h"
 #include "itkProcessObject.h"
 #include "itkTotalProgressReporter.h"
 #include <iostream>
@@ -26,10 +25,13 @@
 #include "tbb/parallel_for.h"
 
 #include "tbb/global_control.h"
+
+namespace
+{
 // From tbb/examples/common/utility/get_default_num_threads.h
 namespace tbb_utility
 {
-inline int
+int
 get_default_num_threads()
 {
 #if __TBB_MIC_OFFLOAD
@@ -41,6 +43,14 @@ get_default_num_threads()
 }
 } // namespace tbb_utility
 
+// Target chunk size: about one chunk per work unit.
+itk::SizeValueType
+ChunkGrain(itk::SizeValueType count, itk::ThreadIdType numberOfWorkUnits)
+{
+  return std::max<itk::SizeValueType>(1, count / std::max(1u, numberOfWorkUnits));
+}
+} // namespace
+
 namespace itk
 {
 
@@ -49,7 +59,8 @@ TBBMultiThreader::TBBMultiThreader()
   ThreadIdType defaultThreads = std::max(1u, GetGlobalDefaultNumberOfThreads());
   if (defaultThreads > 1) // one work unit for only one thread
   {
-    m_NumberOfWorkUnits = 16 * defaultThreads;
+    m_NumberOfWorkUnits =
+      defaultThreads * ScaleByWorkUnitPerThreadRatio(GetGlobalDefaultWorkUnitPerThreadRatio(), defaultThreads);
   }
 }
 
@@ -108,6 +119,13 @@ TBBMultiThreader::SetNumberOfWorkUnits(ThreadIdType numberOfWorkUnits)
 }
 
 void
+TBBMultiThreader::SetNumberOfWorkUnitsFromThreadRatio(ThreadIdType ratio)
+{
+  const ThreadIdType threadCount = this->GetMaximumNumberOfThreads();
+  this->SetNumberOfWorkUnits(threadCount * ScaleByWorkUnitPerThreadRatio(ratio, threadCount));
+}
+
+void
 TBBMultiThreader::PrintSelf(std::ostream & os, Indent indent) const
 {
   Superclass::PrintSelf(os, indent);
@@ -127,24 +145,21 @@ TBBMultiThreader::ParallelizeArray(SizeValueType             firstIndex,
 
   if (firstIndex + 1 < lastIndexPlus1)
   {
-    const unsigned int  count = lastIndexPlus1 - firstIndex;
+    const SizeValueType count = lastIndexPlus1 - firstIndex;
     tbb::global_control l_ParallelizeArray_tbb_global_context(
       tbb::global_control::max_allowed_parallelism,
       std::min<int>(tbb_utility::get_default_num_threads(), m_MaximumNumberOfThreads));
 
-    // we request grain size of 1 and simple_partitioner to ensure there is no chunking
     tbb::parallel_for(
-      tbb::blocked_range<SizeValueType>(firstIndex, lastIndexPlus1, 1),
-      [&](tbb::blocked_range<SizeValueType> r) {
-        // Make sure that TBB did not call us with a block of "threads"
-        // but rather with only one "thread" to handle
-        itkAssertInDebugAndIgnoreInReleaseMacro(r.begin() + 1 == r.end());
+      tbb::blocked_range<SizeValueType>(firstIndex, lastIndexPlus1, ChunkGrain(count, m_NumberOfWorkUnits)),
+      [&](const tbb::blocked_range<SizeValueType> & r) {
         TotalProgressReporter progress(filter, count, 100);
         progress.CheckAbortGenerateData();
-
-        aFunc(r.begin()); // invoke the function
-
-        progress.CompletedPixel();
+        for (SizeValueType i = r.begin(); i < r.end(); ++i)
+        {
+          aFunc(i);
+          progress.CompletedPixel();
+        }
       },
       tbb::simple_partitioner());
   }
@@ -169,9 +184,15 @@ struct TBBImageRegionSplitter : public itk::ImageIORegion
   TBBImageRegionSplitter(const TBBImageRegionSplitter &) = default;
   TBBImageRegionSplitter &
   operator=(const TBBImageRegionSplitter &) = default;
-  TBBImageRegionSplitter(const itk::ImageIORegion & region)
+  TBBImageRegionSplitter(const itk::ImageIORegion & region, itk::SizeValueType grain)
     : itk::ImageIORegion(region) // use itk::ImageIORegion's copy constructor
-  {}
+    , m_Grain(grain)
+  {
+    for (unsigned int d = 1; d < this->GetImageDimension(); ++d)
+    {
+      m_KeepRowsWhole = m_KeepRowsWhole || this->GetSize(d) > 1;
+    }
+  }
   TBBImageRegionSplitter(TBBImageRegionSplitter & region, tbb::split)
     : TBBImageRegionSplitter(region, tbb::proportional_split(1, 1)) // delegate to proportional split
   {}
@@ -223,7 +244,11 @@ struct TBBImageRegionSplitter : public itk::ImageIORegion
   [[nodiscard]] bool
   is_divisible() const
   {
-    for (unsigned int d = 0; d < this->GetImageDimension(); ++d)
+    if (this->GetNumberOfPixels() < 2 * m_Grain)
+    {
+      return false;
+    }
+    for (unsigned int d = m_KeepRowsWhole ? 1 : 0; d < this->GetImageDimension(); ++d)
     {
       if (this->GetSize(d) > 1)
       {
@@ -233,6 +258,8 @@ struct TBBImageRegionSplitter : public itk::ImageIORegion
     return false;
   }
 
+  itk::SizeValueType m_Grain{ 1 };
+  bool               m_KeepRowsWhole{ false };
 }; // TBBImageRegionSplitter struct definition
 } // anonymous namespace
 
@@ -263,9 +290,9 @@ TBBMultiThreader::ParallelizeImageRegion(unsigned int         dimension,
       region.SetIndex(d, index[d]);
       region.SetSize(d, size[d]);
     }
-    TBBImageRegionSplitter regionSplitter = region;
+    const SizeValueType    totalCount = region.GetNumberOfPixels();
+    TBBImageRegionSplitter regionSplitter(region, ChunkGrain(totalCount, m_NumberOfWorkUnits));
 
-    const SizeValueType totalCount = region.GetNumberOfPixels();
     tbb::global_control l_ParallelizeImageRegion_tbb_global_context(
       tbb::global_control::max_allowed_parallelism,
       std::min<int>(tbb_utility::get_default_num_threads(), m_MaximumNumberOfThreads));

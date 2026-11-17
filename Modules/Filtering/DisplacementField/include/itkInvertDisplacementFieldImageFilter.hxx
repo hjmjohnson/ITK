@@ -102,7 +102,7 @@ InvertDisplacementFieldImageFilter<TInputImage, TOutputImage>::GenerateData()
 
   this->m_ScaledNormImage->CopyInformation(displacementField);
   this->m_ScaledNormImage->SetRegions(displacementField->GetRequestedRegion());
-  this->m_ScaledNormImage->AllocateInitialized();
+  this->m_ScaledNormImage->Allocate();
 
   const SizeValueType numberOfPixelsInRegion = (displacementField->GetRequestedRegion()).GetNumberOfPixels();
   this->m_MaxErrorNorm = NumericTraits<RealType>::max();
@@ -120,8 +120,13 @@ InvertDisplacementFieldImageFilter<TInputImage, TOutputImage>::GenerateData()
 
     using ComposerType = ComposeDisplacementFieldsImageFilter<DisplacementFieldType>;
     auto composer = ComposerType::New();
-    composer->SetDisplacementField(displacementField);
-    composer->SetWarpingField(inverseDisplacementField);
+    // Grafts, so that releasing the composer's inputs leaves this filter's input and output buffered.
+    auto displacementFieldGraft = DisplacementFieldType::New();
+    displacementFieldGraft->Graft(displacementField);
+    auto inverseDisplacementFieldGraft = InverseDisplacementFieldType::New();
+    inverseDisplacementFieldGraft->Graft(inverseDisplacementField);
+    composer->SetDisplacementField(displacementFieldGraft);
+    composer->SetWarpingField(inverseDisplacementFieldGraft);
 
     this->m_ComposedField = composer->GetOutput();
     this->m_ComposedField->Update();
@@ -134,7 +139,6 @@ InvertDisplacementFieldImageFilter<TInputImage, TOutputImage>::GenerateData()
     float               newProgress = static_cast<float>(2 * iteration - 1) / (2 * m_MaximumNumberOfIterations);
     ProgressTransformer pt(oldProgress, newProgress, this);
     this->m_DoThreadedEstimateInverse = false;
-    this->GetMultiThreader()->SetNumberOfWorkUnits(this->GetNumberOfWorkUnits());
     this->GetMultiThreader()->template ParallelizeImageRegion<TOutputImage::ImageDimension>(
       this->GetOutput()->GetRequestedRegion(),
       [this](const OutputImageRegionType & outputRegionForThread) {

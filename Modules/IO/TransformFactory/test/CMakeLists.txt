@@ -1,16 +1,9 @@
 itk_module_test()
-set(ITKTransformFactoryTests itkTransformFactoryBaseTest.cxx)
+set(ITKTransformFactoryGTests itkTransformFactoryBaseGTest.cxx)
 
-createtestdriver(ITKTransformFactory "${ITKTransformFactory-Test_LIBRARIES}" "${ITKTransformFactoryTests}")
+creategoogletestdriver(ITKTransformFactory "${ITKTransformFactory-Test_LIBRARIES}" "${ITKTransformFactoryGTests}")
 target_compile_definitions(
-  ITKTransformFactoryTestDriver
+  ITKTransformFactoryGTestDriver
   PRIVATE
     "ITK_TRANSFORM_FACTORY_MAX_DIM=${ITK_TRANSFORM_FACTORY_MAX_DIM}"
-)
-
-itk_add_test(
-  NAME itkTransformFactoryBaseTest
-  COMMAND
-    ITKTransformFactoryTestDriver
-    itkTransformFactoryBaseTest
 )

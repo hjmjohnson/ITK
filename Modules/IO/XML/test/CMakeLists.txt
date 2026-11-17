@@ -2,25 +2,15 @@ itk_module_test()
 
 set(
   ITKIOXMLTests
-  itkDOMTest1.cxx
   itkDOMTest2.cxx
   itkDOMTest3.cxx
   itkDOMTest4.cxx
   itkDOMTest5.cxx
-  itkDOMTest6.cxx
   itkDOMTest8.cxx
-  itkFancyStringTest.cxx
   itkFileToolsTest.cxx
 )
 
 createtestdriver(ITKIOXML "${ITKIOXML-Test_LIBRARIES}" "${ITKIOXMLTests}")
-
-itk_add_test(
-  NAME itkDOMTest1
-  COMMAND
-    ITKIOXMLTestDriver
-    itkDOMTest1
-)
 
 itk_add_test(
   NAME itkDOMTest21
@@ -303,13 +293,6 @@ itk_add_test(
 )
 
 itk_add_test(
-  NAME itkDOMTest6
-  COMMAND
-    ITKIOXMLTestDriver
-    itkDOMTest6
-)
-
-itk_add_test(
   NAME itkDOMTest8
   COMMAND
     ITKIOXMLTestDriver
@@ -318,13 +301,6 @@ itk_add_test(
     output/test_file
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/xmldom-test8/output/test_file
-)
-
-itk_add_test(
-  NAME itkFancyStringTest
-  COMMAND
-    ITKIOXMLTestDriver
-    itkFancyStringTest
 )
 
 itk_add_test(
@@ -337,3 +313,12 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/mytestfile.txt
 )
+
+set(
+  ITKIOXMLGTests
+  itkDOMGTest1.cxx
+  itkDOMGTest6.cxx
+  itkFancyStringGTest.cxx
+)
+
+creategoogletestdriver(ITKIOXML "${ITKIOXML-Test_LIBRARIES}" "${ITKIOXMLGTests}")

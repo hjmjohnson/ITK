@@ -1,0 +1,143 @@
+/*=========================================================================
+ *
+ *  Copyright NumFOCUS
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *=========================================================================*/
+
+#include <iostream>
+
+#include "itkIdentityTransform.h"
+#include "itkGTest.h"
+
+TEST(IdentityTransform, ConvertedLegacyTest)
+{
+
+  std::cout << "==================================" << std::endl;
+  std::cout << "Testing Identity Transform " << std::endl << std::endl;
+
+  constexpr double       epsilon{ 1e-10 };
+  constexpr unsigned int N{ 2 };
+  bool                   Ok = true;
+
+  using IdentityTransformType = itk::IdentityTransform<double>;
+  auto transform = IdentityTransformType::New();
+
+  std::cout << "FixedParameters: " << transform->GetFixedParameters() << std::endl;
+
+  std::cout << "Testing TransformPoint: ";
+  IdentityTransformType::InputPointType p(10);
+
+  IdentityTransformType::OutputPointType r = transform->TransformPoint(p);
+  for (unsigned int i = 0; i < N; ++i)
+  {
+    if (itk::Math::Absolute(p[i] - r[i]) > epsilon)
+    {
+      Ok = false;
+      break;
+    }
+  }
+  EXPECT_TRUE(Ok) << "Error Transforming Point";
+
+  std::cout << " [ PASSED ] " << std::endl;
+
+
+  // Test TransformVector
+  std::cout << "Testing TransformVector: ";
+  IdentityTransformType::InputVectorType vin;
+  vin[0] = 1;
+  vin[1] = 2;
+
+  IdentityTransformType::OutputVectorType vout = transform->TransformVector(vin);
+  for (unsigned int i = 0; i < N; ++i)
+  {
+    if (itk::Math::Absolute(vout[i] - vin[i]) > epsilon)
+    {
+      Ok = false;
+      break;
+    }
+  }
+  EXPECT_TRUE(Ok) << "Error with TransformVector itk::Vector";
+
+  std::cout << " [ PASSED ] " << std::endl;
+
+
+  // Test TransformVector vnl_vector
+  std::cout << "Testing TransformVector (vnl): ";
+  IdentityTransformType::InputVnlVectorType vnlin;
+  vnlin[0] = 1;
+  vnlin[1] = 2;
+
+  IdentityTransformType::OutputVnlVectorType vnlout = transform->TransformVector(vnlin);
+  for (unsigned int i = 0; i < N; ++i)
+  {
+    if (itk::Math::Absolute(vnlout[i] - vnlin[i]) > epsilon)
+    {
+      Ok = false;
+      break;
+    }
+  }
+  EXPECT_TRUE(Ok) << "Error with TransformVector vnlVector";
+
+  std::cout << " [ PASSED ] " << std::endl;
+
+
+  // Test TransformCovariantVector
+  std::cout << "Testing TransformCovariantVector: ";
+  IdentityTransformType::InputCovariantVectorType vcin;
+  vcin[0] = 1;
+  vcin[1] = 2;
+
+  IdentityTransformType::OutputCovariantVectorType vcout = transform->TransformCovariantVector(vcin);
+  for (unsigned int i = 0; i < N; ++i)
+  {
+    if (itk::Math::Absolute(vcout[i] - vcin[i]) > epsilon)
+    {
+      Ok = false;
+      break;
+    }
+  }
+  EXPECT_TRUE(Ok) << "Error with TransformVector CovariantVector";
+
+  std::cout << " [ PASSED ] " << std::endl;
+
+
+  const IdentityTransformType::ParametersType params(0);
+  transform->SetParameters(params);
+  EXPECT_EQ(params, transform->GetParameters());
+
+  // The number of parameters is 0 for the identity transformation
+  EXPECT_EQ(0u, transform->GetNumberOfParameters());
+
+  // Testing the Jacobian
+  std::cout << "Testing Jacobian: ";
+  IdentityTransformType::JacobianType jacobian;
+  transform->ComputeJacobianWithRespectToParameters(p, jacobian);
+
+  EXPECT_EQ(jacobian.rows(), 3u) << "Error with Jacobian: " << jacobian;
+  EXPECT_EQ(jacobian.columns(), 0u) << "Error with Jacobian: " << jacobian;
+
+  std::cout << " [ PASSED ] " << std::endl;
+
+
+  IdentityTransformType::JacobianPositionType jacobianWrtPos;
+  transform->ComputeJacobianWithRespectToPosition(p, jacobianWrtPos);
+  IdentityTransformType::JacobianPositionType identity;
+  identity.set_identity();
+  EXPECT_EQ(identity, jacobianWrtPos);
+
+  auto inv = IdentityTransformType::New();
+  EXPECT_TRUE(transform->GetInverse(inv));
+  EXPECT_FALSE(transform->GetInverse(nullptr));
+}

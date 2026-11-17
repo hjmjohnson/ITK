@@ -28,7 +28,17 @@ DomainThreader<TDomainPartitioner, TAssociate>::DomainThreader()
   , m_DomainPartitioner(DomainPartitionerType::New())
 {
   this->m_MultiThreader = MultiThreaderBase::New();
-  this->m_NumberOfWorkUnits = this->m_MultiThreader->GetNumberOfWorkUnits();
+}
+
+template <typename TDomainPartitioner, typename TAssociate>
+void
+DomainThreader<TDomainPartitioner, TAssociate>::SetNumberOfWorkUnits(const ThreadIdType numberOfWorkUnits)
+{
+  if (numberOfWorkUnits != this->GetNumberOfWorkUnits())
+  {
+    this->m_MultiThreader->SetNumberOfWorkUnits(numberOfWorkUnits);
+    this->Modified();
+  }
 }
 
 template <typename TDomainPartitioner, typename TAssociate>
@@ -76,8 +86,6 @@ DomainThreader<TDomainPartitioner, TAssociate>::DetermineNumberOfWorkUnitsUsed()
   DomainType subdomain;
   this->m_NumberOfWorkUnitsUsed =
     this->m_DomainPartitioner->PartitionDomain(0, numberOfWorkUnits, this->m_CompleteDomain, subdomain);
-
-  this->GetMultiThreader()->SetNumberOfWorkUnits(this->m_NumberOfWorkUnitsUsed);
 
   if (this->m_NumberOfWorkUnitsUsed > numberOfWorkUnits)
   {

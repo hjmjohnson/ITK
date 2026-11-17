@@ -29,7 +29,7 @@ namespace itk
  *
  * StatisticsLabelObject stores  the common attributes related to the statistics of the object
  *
- * \author Gaetan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
+ * \author Gaëtan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
  *
  * This implementation was taken from the Insight Journal paper:
  * https://doi.org/10.54294/q6auw4
@@ -46,7 +46,7 @@ public:
   /** Standard class type aliases */
   using Self = StatisticsLabelObject;
   using Superclass = ShapeLabelObject<TLabel, VImageDimension>;
-  using LabelObjectType = typename Superclass::LabelObjectType;
+  using typename Superclass::LabelObjectType;
   using Pointer = SmartPointer<Self>;
   using ConstPointer = SmartPointer<const Self>;
   using ConstWeakPointer = WeakPointer<const Self>;

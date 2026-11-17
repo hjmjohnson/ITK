@@ -124,7 +124,7 @@ public:
 
   using typename Superclass::MovingTransformType;
   using typename Superclass::JacobianType;
-  using VirtualImageType = typename Superclass::VirtualImageType;
+  using typename Superclass::VirtualImageType;
   using typename Superclass::VirtualIndexType;
   using typename Superclass::VirtualPointType;
   using typename Superclass::VirtualPointSetType;
@@ -251,9 +251,8 @@ protected:
 
   mutable PRatioArrayType m_PRatioArray{};
 
-  /** Helper array for storing per-parameter linearized index to
-   * retrieve the pRatio during evaluation with local-support transform. */
-  mutable std::vector<OffsetValueType> m_JointPdfIndex1DArray{};
+  /** Linearized joint PDF index of each virtual point, to retrieve the pRatio with a local-support transform. */
+  mutable std::vector<OffsetValueType> m_JointPdfIndex1DPerPoint{};
 
   /** The moving image marginal PDF. */
   mutable std::vector<PDFValueType>              m_MovingImageMarginalPDF{};
@@ -333,6 +332,9 @@ protected:
     ReduceBuffer();
 
   private:
+    static constexpr size_t MaximumMemoryBlockBytes = size_t{ 32 } << 20;
+    static constexpr size_t MaximumBufferLength = 5000;
+
     // How many AccumulatorElements used
     size_t m_CurrentFillSize{ 0 };
     // Contiguous chunk of memory for efficiency

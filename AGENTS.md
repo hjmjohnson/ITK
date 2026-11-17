@@ -9,16 +9,24 @@ Apache 2.0 licensed. Build tool: **Pixi** (wraps CMake + Ninja).
 Load only what your task requires. Files are small and focused — load
 the minimum set for the task at hand.
 
+Rules come in two tiers ([rule-tiers.md](./Documentation/AI/rule-tiers.md)):
+project standards bind every contributor and are what reviewers cite;
+rows labeled **Agent default** bind AI agents only. Agents set
+`ITK_AI_AGENT=1` when running `git commit`.
+
 | Task | Read |
 |------|------|
 | Writing ANY committed text (in-source comment, commit message, PR body) | [prose-budget.md](./Documentation/AI/prose-budget.md) |
+| Reviewing a PR (human or AI reviewer), or deciding whether a rule binds human contributors | [rule-tiers.md](./Documentation/AI/rule-tiers.md) |
 | Understanding the codebase layout | [architecture.md](./Documentation/AI/architecture.md) |
 | Building or configuring ITK | [building.md](./Documentation/AI/building.md) |
 | Writing or running tests | [testing.md](./Documentation/AI/testing.md) |
 | Code style, formatting, naming | [enforced-code-style.md](./Documentation/AI/enforced-code-style.md) |
 | Writing or reviewing C++ code | [code-review-lessons.md](./Documentation/AI/code-review-lessons.md) |
-| Writing ITK C++ classes, CMake, Python wrapping | [conventions.md](./Documentation/AI/conventions.md) |
+| Writing ITK C++ classes, CMake, Python wrapping | [conventions.md](./Documentation/AI/conventions.md), [compiler-flags.md](./Documentation/AI/compiler-flags.md) |
+| Citing a publication in documentation | [conventions.md](./Documentation/AI/conventions.md) (Citing Publications) |
 | Avoiding compiler pitfalls and refactoring hazards | [compiler-cautions.md](./Documentation/AI/compiler-cautions.md) |
+| Adding, moving, or removing a compiler or linker flag | [compiler-flags.md](./Documentation/AI/compiler-flags.md) |
 | Creating a **DOC:** commit | [git-commits.md](./Documentation/AI/git-commits.md) |
 | Creating a **STYLE:** commit | [git-commits.md](./Documentation/AI/git-commits.md), [enforced-code-style.md](./Documentation/AI/enforced-code-style.md) |
 | Creating a **BUG:** or **ENH:** commit | [git-commits.md](./Documentation/AI/git-commits.md), [compiler-cautions.md](./Documentation/AI/compiler-cautions.md), [testing.md](./Documentation/AI/testing.md) |
@@ -35,7 +43,8 @@ the minimum set for the task at hand.
 4. **`Update()` is required** — filters don't execute until called; parameter changes after `Update()` need another call.
 5. **Link errors → check `itk-module.cmake`** — missing `DEPENDS` or `PRIVATE_DEPENDS` is the usual cause.
 6. **Licensing** — verify AI output does not reproduce third-party code in conflict with Apache 2.0.
-7. **Verbose committed text is a review-blocking defect** — not a stylistic preference. Reviewers reject PRs whose commit messages, in-source comments, or PR bodies exceed the budgets in [prose-budget.md](./Documentation/AI/prose-budget.md). Cut prose, not code.
+7. **Committed text must be load-bearing** — reviewers reject commit messages, in-source comments, and PR bodies that restate the diff or cite transient URLs, and in-source comments that narrate history ([prose-budget.md](./Documentation/AI/prose-budget.md)). Agents also follow its numeric caps. Cut prose, not code.
+8. **Headers use their C++17 form in every standard** — never select header code by `__cplusplus` value, `_MSVC_LANG`, or a `__cpp_*` macro (`#ifdef __cplusplus` is fine). Clients may use a newer C++ standard or another compiler than ITK, which breaks the One Definition Rule ([compiler-cautions.md](./Documentation/AI/compiler-cautions.md) section 16).
 
 ## Resources
 

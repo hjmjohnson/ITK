@@ -122,22 +122,30 @@ public:
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(MultiThreaderBase);
 
-  /** Get/Set the number of threads to use. It will be clamped to the range
-   * [ 1, m_GlobalMaximumNumberOfThreads ], so the caller of this method should
-   * check that the requested number of threads was accepted. */
+  /** Get/Set the number of threads to use. See the derived class documentation
+   * for limits and interaction with the number of work units. Check the getter
+   * for the accepted value. */
   /** @ITKStartGrouping */
   virtual void
   SetMaximumNumberOfThreads(ThreadIdType numberOfThreads);
   itkGetConstMacro(MaximumNumberOfThreads, ThreadIdType);
   /** @ITKEndGrouping */
-  /** Get/Set the number of work units to create. It might be clamped to the range
-   * [ 1, SomeMaximumNumber ], so the caller of this method should
-   * check that the requested number of work units was accepted. */
+  /** Get/Set the number of work units to create. See the derived class
+   * documentation for limits and interaction with the number of threads.
+   * Check the getter for the accepted value. */
   /** @ITKStartGrouping */
   virtual void
   SetNumberOfWorkUnits(ThreadIdType numberOfWorkUnits);
   itkGetConstMacro(NumberOfWorkUnits, ThreadIdType);
   /** @ITKEndGrouping */
+
+  /** Immediately set the number of work units from the current maximum number
+   * of threads and a work-unit-per-thread ratio. See the derived class
+   * documentation for the calculation and limits.
+   * The ratio is not stored or reapplied when the thread count changes. */
+  virtual void
+  SetNumberOfWorkUnitsFromThreadRatio(ThreadIdType ratio) = 0;
+
   virtual void
   SetUpdateProgress(bool updates);
   itkGetConstMacro(UpdateProgress, bool);
@@ -224,6 +232,20 @@ public:
   SetGlobalDefaultNumberOfThreads(ThreadIdType val);
   static ThreadIdType
   GetGlobalDefaultNumberOfThreads();
+  /** @ITKEndGrouping */
+
+  /** Set/Get the ratio of work units to threads used to initialize the
+   * number of work units in multi-threaders that oversubscribe work units for
+   * load balancing (PoolMultiThreader and TBBMultiThreader). The default is 4,
+   * or the value of the ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO
+   * environment variable when it is set to a positive integer.
+   * It is clamped to [1, max(ThreadIdType) / ITK_MAX_THREADS], and only affects multi-threaders
+   * constructed after the value is set. */
+  /** @ITKStartGrouping */
+  static void
+  SetGlobalDefaultWorkUnitPerThreadRatio(ThreadIdType val);
+  static ThreadIdType
+  GetGlobalDefaultWorkUnitPerThreadRatio();
   /** @ITKEndGrouping */
 #if !defined(ITK_LEGACY_REMOVE)
   /** Get/Set the number of threads to use.
@@ -458,6 +480,13 @@ protected:
 
   static ITK_THREAD_RETURN_FUNCTION_CALL_CONVENTION
   ParallelizeImageRegionHelper(void * arg);
+
+  /** Return \c ratio clamped to [1, max(ThreadIdType) / threadCount], so that
+   * ratio * threadCount cannot overflow ThreadIdType. The default \c threadCount
+   * bounds the ratio for any thread count up to ITK_MAX_THREADS; a shared pool
+   * can be larger, so multi-threaders pass their actual thread count. */
+  static ThreadIdType
+  ScaleByWorkUnitPerThreadRatio(long long ratio, ThreadIdType threadCount = static_cast<ThreadIdType>(ITK_MAX_THREADS));
 
   /** The number of work units to create. */
   ThreadIdType m_NumberOfWorkUnits{};

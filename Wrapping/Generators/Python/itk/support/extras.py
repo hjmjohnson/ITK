@@ -709,6 +709,12 @@ def vtk_image_from_image(l_image: itkt.ImageOrImageSource) -> vtk.vtkImageData:
     dims = [1] * 3
     dims[:dim] = itk.size(l_image)
     vtk_image.SetDimensions(dims)
+    # Record the original dimension: a padded 2D->3D image and a genuine
+    # single-slice 3D image both have dims[-1] == 1, so this disambiguates
+    # them for image_from_vtk_image.
+    dim_array = numpy_to_vtk(np.array([dim], dtype=np.int32))
+    dim_array.SetName("ITKOriginalDimension")
+    vtk_image.GetFieldData().AddArray(dim_array)
     # Copy direction matrix for VTK>=9
     import vtk
 
@@ -753,8 +759,15 @@ def image_from_vtk_image(vtk_image: vtk.vtkImageData) -> itkt.ImageBase:
     number_of_components = point_data.GetScalars().GetNumberOfComponents()
     is_vector = number_of_components != 1
     dims = list(vtk_image.GetDimensions())
-    if is_vector and dims[-1] == 1:
-        dims = dims[:-1]  # 2D, not 3D
+    original_dimension_array = vtk_image.GetFieldData().GetArray("ITKOriginalDimension")
+    if original_dimension_array is not None:
+        # From vtk_image_from_image: authoritative.
+        original_dimension = int(vtk_to_numpy(original_dimension_array)[0])
+        if original_dimension == 2 and dims[-1] == 1:
+            dims = dims[:-1]
+    elif is_vector and dims[-1] == 1:
+        # No metadata: same best-effort guess as before.
+        dims = dims[:-1]
     dims.reverse()
     if is_vector:
         dims.append(number_of_components)
@@ -1182,6 +1195,9 @@ def dict_from_transform(
         )
         transform_type["inputDimension"] = int(current_transform_type_split[2])
         transform_type["outputDimension"] = int(current_transform_type_split[3])
+        # BSplineTransform type strings end in the spline order unless it is 3
+        if len(current_transform_type_split) > 4:
+            transform_type["splineOrder"] = int(current_transform_type_split[4])
 
         transform_dict = dict()
         transform_dict["transformType"] = transform_type
@@ -1298,15 +1314,12 @@ def transform_from_dict(
         if special_transform_check(transform_parameterization):
             transform_template = getattr(itk, transform_parameterization)
             transform = transform_template[data_type].New()
-        # Currently only BSpline Transform has 3 template parameters
-        # For future extensions the information will have to be encoded in
-        # the transformType variable. The transform object once added in a
-        # composite transform lose the information for other template parameters ex. BSpline.
-        # The Spline order is fixed as 3 here.
         elif transform_parameterization == "BSplineTransform":
             transform_template = getattr(itk, transform_parameterization)
             transform = transform_template[
-                data_type, transform_type["inputDimension"], 3
+                data_type,
+                transform_type["inputDimension"],
+                transform_type.get("splineOrder", 3),
             ].New()
         else:
             transform_template = getattr(itk, transform_parameterization)
@@ -2529,11 +2542,18 @@ def python_type(object_ref) -> str:
 
 class TemplateTypeError(TypeError):
     def __init__(self, template_type, input_type):
+        def parameter_to_string(p):
+            # Template parameters can be values (e.g. a dimension), which
+            # python_type() would otherwise report as their type (`int`).
+            if isinstance(p, (bool, int, float, str)):
+                return str(p)
+            return python_type(p)
+
         def tuple_to_string_type(t):
-            if type(t) == tuple:
-                return ", ".join(python_type(x) for x in t)
+            if isinstance(t, tuple):
+                return ", ".join(parameter_to_string(x) for x in t)
             else:
-                python_type(t)
+                return parameter_to_string(t)
 
         import itk
 
@@ -2553,8 +2573,15 @@ or
 
         python_template_type = python_type(template_type)
         python_input_type = tuple_to_string_type(input_type)
-        type_list = "\n".join([python_type(x[0]) for x in template_type.keys()])
-        eg_type = ", ".join([python_type(x) for x in list(template_type.keys())[0]])
+        # List every wrapped combination of template parameters
+        supported_types = list(
+            dict.fromkeys(
+                f"{python_template_type}[{tuple_to_string_type(k)}]"
+                for k in template_type.keys()
+            )
+        )
+        type_list = "\n".join(supported_types)
+        eg_type = tuple_to_string_type(next(iter(template_type.keys())))
         msg: str = (
             """{template_type} is not wrapped for input type `{input_type}`.
 

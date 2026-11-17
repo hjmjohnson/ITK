@@ -13,11 +13,12 @@ not just that a tool made the change.
 ```
 
 **The 78-character subject-line limit is a hard constraint, not a guideline.**
-The `kw-commit-msg.py` hook rejects commits that exceed it, and CI will
-reject PRs containing such commits. Count characters before committing.
-The prefix (e.g., `DOC: `) counts toward the 78. When a descriptive
-subject would exceed the limit, move detail to the commit body — the
-subject should be scannable in `git log --oneline`.
+The `kw-commit-msg.py` hook rejects commits that exceed it, and CI will reject
+PRs containing such commits. The hook exempts `fixup!`, `squash!`, and `amend!`
+subjects (see [Prefixes](#prefixes)).
+Count characters before committing. The prefix (e.g., `DOC: `) counts toward
+the 78. When a descriptive subject would exceed the limit, move detail to the
+commit body — the subject should be scannable in `git log --oneline`.
 
 ## Body budget
 
@@ -36,6 +37,7 @@ authoring any commit body.
 | `STYLE:` | Formatting, naming, no logic change |
 | `PERF:` | Performance improvement |
 | `WIP:` | Transient commits for development testing only |
+| `fixup!`<br>`squash!`<br>`amend!` | Transient commits to be squashed before a PR is pushed |
 
 > **`WIP:` on commit subjects is a two-layer opt-in — use it deliberately.**
 > The local `kw-commit-msg.py` hook **intentionally** accepts `WIP:` so
@@ -51,13 +53,22 @@ authoring any commit body.
 > work-in-progress, add `[WIP]` to the **PR title** — the GitHub "WIP" app
 > gates merging on that string; remove it when the PR is ready.
 
+> **`fixup!`, `squash!`, and `amend!` on commit subjects are interpreted by
+> `git rebase --autosquash`**, which is why the local `kw-commit-msg.py` hook
+> **intentionally** accepts `fixup!`, `squash!`, and `amend!`, and exempts them
+> from the length limit. Squash these transient commits with
+> `git rebase -i --autosquash <base>` before pushing a PR.
+
 ## Commit Message Length
 
 Keep commit messages concise. A 1-line subject plus a short body
-(≤ ~10 lines) describing *what* and *why* is the norm. Long, essay-style
-commit messages have been explicitly objected to in code review — put
-expanded rationale in the PR description, not the commit body. The
-commit should be readable in `git log --oneline` + a quick `git show`.
+describing *what* and *why* is the norm. Long, essay-style commit
+messages have been explicitly objected to in code review — put expanded
+rationale in the PR description, not the commit body. The commit should
+be readable in `git log --oneline` + a quick `git show`.
+
+**Agent default:** ≤ 12 non-blank body lines, per
+[prose-budget.md](./prose-budget.md).
 
 ## Hook Behavior
 
@@ -108,7 +119,9 @@ context, PR body format) are in
 
 ### Pre-Commit Checklist for C++ Changes
 
-Before committing any C++ code, an AI agent must complete all three steps:
+**Agent default.** Before committing any C++ code, an AI agent must
+complete all three steps (human contributors may commit work in
+progress locally, but CI must pass before merge):
 
 1. **Review compiler cautions** — Read
    [compiler-cautions.md](./compiler-cautions.md) and verify the changed code

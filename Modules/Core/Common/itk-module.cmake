@@ -30,11 +30,13 @@ itk_module(
     ITKTestKernel
     ITKMesh
     ITKImageIntensity
+    ITKImageFunction
     ITKMathematicalMorphology
     ITKIOImageBase
   DESCRIPTION "${DOCUMENTATION}"
 )
 
 # Extra test dependency on ITKMesh is introduced by itkCellInterfaceTest.
-# Extra test dependency on ITKImageIntensity is introduced by itkImageDuplicatorTest.
+# Extra test dependency on ITKImageIntensity is introduced by itkImageDuplicatorGTest.
+# Extra test dependency on ITKImageFunction is introduced by itkFloodFillIteratorGTest.
 # Extra test dependency on ITKIOImageBase is introduced by itkImageRandomIteratorTest22.
