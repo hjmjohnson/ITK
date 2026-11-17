@@ -32,7 +32,6 @@ set(
   itkLog10ImageFilterAndAdaptorTest.cxx
   itkLogImageFilterAndAdaptorTest.cxx
   itkMagnitudeAndPhaseToComplexImageFilterTest.cxx
-  itkMaskImageFilterTest.cxx
   itkMaskNegatedImageFilterTest.cxx
   itkMatrixIndexSelectionImageFilterTest.cxx
   itkMaximumImageFilterTest.cxx
@@ -51,8 +50,6 @@ set(
   itkPowImageFilterTest.cxx
   itkPromoteDimensionImageTest.cxx
   itkRescaleIntensityImageFilterTest.cxx
-  itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
-  itkRGBToVectorAdaptImageFilterTest.cxx
   itkShiftScaleImageFilterTest.cxx
   itkSigmoidImageFilterTest.cxx
   itkSinImageFilterAndAdaptorTest.cxx
@@ -432,12 +429,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/MatrixIndexSelectionImageFilterTest.png
 )
 itk_add_test(
-  NAME itkRGBToVectorAdaptImageFilterTest.cxx
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkRGBToVectorAdaptImageFilterTest
-)
-itk_add_test(
   NAME itkComplexToRealFilterAndAdaptorTest
   COMMAND
     ITKImageIntensityTestDriver
@@ -466,12 +457,6 @@ itk_add_test(
   COMMAND
     ITKImageIntensityTestDriver
     itkAsinImageFilterAndAdaptorTest
-)
-itk_add_test(
-  NAME itkMaskImageFilterTest
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkMaskImageFilterTest
 )
 itk_add_test(
   NAME itkHistogramMatchingImageFilterTest
@@ -540,12 +525,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkOrImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkOrImageFilterTest.png
-)
-itk_add_test(
-  NAME itkRGBToLuminanceImageFilterAndAdaptorTest.cxx
-  COMMAND
-    ITKImageIntensityTestDriver
-    itkRGBToLuminanceImageFilterAndAdaptorTest
 )
 itk_add_test(
   NAME itkXorImageFilterTest
@@ -792,7 +771,10 @@ set(
   itkLessEqualGTest.cxx
   itkLessGTest.cxx
   itkMaskedAssignImageFilterGTest.cxx
+  itkMaskImageFilterGTest.cxx
   itkNotEqualGTest.cxx
+  itkRGBToLuminanceImageFilterAndAdaptorGTest.cxx
+  itkRGBToVectorAdaptImageFilterGTest.cxx
   itkRoundImageFilterGTest.cxx
   itkSquareImageFilterGTest.cxx
 )

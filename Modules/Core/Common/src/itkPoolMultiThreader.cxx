@@ -26,7 +26,6 @@
  *
  *=========================================================================*/
 #include "itkPoolMultiThreader.h"
-#include "itkNumericTraits.h"
 #include "itkProcessObject.h"
 #include "itkImageSourceCommon.h"
 #include <algorithm>
@@ -80,17 +79,13 @@ private:
 PoolMultiThreader::PoolMultiThreader()
   : m_ThreadPool(ThreadPool::GetInstance())
 {
-  for (ThreadIdType i = 0; i < ITK_MAX_THREADS; ++i)
-  {
-    m_ThreadInfoArray[i].WorkUnitID = i;
-  }
-
   ThreadIdType defaultThreads = std::max(1u, GetGlobalDefaultNumberOfThreads());
   if (defaultThreads > 1) // one work unit for only one thread
   {
-    defaultThreads *= 4;
+    defaultThreads *= ScaleByWorkUnitPerThreadRatio(GetGlobalDefaultWorkUnitPerThreadRatio(), defaultThreads);
   }
-  m_NumberOfWorkUnits = std::min<ThreadIdType>(ITK_MAX_THREADS, defaultThreads);
+
+  m_NumberOfWorkUnits = defaultThreads;
   m_MaximumNumberOfThreads = m_ThreadPool->GetMaximumNumberOfThreads();
 }
 
@@ -116,37 +111,66 @@ PoolMultiThreader::SetMaximumNumberOfThreads(ThreadIdType numberOfThreads)
 }
 
 void
+PoolMultiThreader::SetNumberOfWorkUnits(ThreadIdType numberOfWorkUnits)
+{
+  m_NumberOfWorkUnits = std::max<ThreadIdType>(1, numberOfWorkUnits);
+}
+
+void
+PoolMultiThreader::SetNumberOfWorkUnitsFromThreadRatio(ThreadIdType ratio)
+{
+  const ThreadIdType threadCount = this->GetMaximumNumberOfThreads();
+  this->SetNumberOfWorkUnits(threadCount * ScaleByWorkUnitPerThreadRatio(ratio, threadCount));
+}
+
+void
+PoolMultiThreader::EnsureWorkUnitInfoArraySize(std::size_t size)
+{
+  const std::size_t currentSize = m_WorkUnitInfoArray.size();
+  if (size > currentSize)
+  {
+    m_WorkUnitInfoArray.resize(size);
+    for (std::size_t i = currentSize; i < size; ++i)
+    {
+      m_WorkUnitInfoArray[i].WorkUnitID = static_cast<ThreadIdType>(i);
+    }
+  }
+}
+
+void
 PoolMultiThreader::SingleMethodExecute()
 {
-  ThreadIdType threadLoop = 0;
-
   if (!m_SingleMethod)
   {
     itkExceptionStringMacro("No single method set!");
   }
 
-  // obey the global maximum number of threads limit
-  m_NumberOfWorkUnits = std::min(this->GetGlobalMaximumNumberOfThreads(), m_NumberOfWorkUnits);
+  this->EnsureWorkUnitInfoArraySize(m_NumberOfWorkUnits);
 
-  for (threadLoop = 1; threadLoop < m_NumberOfWorkUnits; ++threadLoop)
+  for (ThreadIdType threadLoop = 1; threadLoop < m_NumberOfWorkUnits; ++threadLoop)
   {
-    m_ThreadInfoArray[threadLoop].UserData = m_SingleData;
-    m_ThreadInfoArray[threadLoop].NumberOfWorkUnits = m_NumberOfWorkUnits;
-    m_ThreadInfoArray[threadLoop].Future = m_ThreadPool->AddWork(
-      [method = m_SingleMethod, threadInfo = &m_ThreadInfoArray[threadLoop]] { method(threadInfo); });
+    m_WorkUnitInfoArray[threadLoop].UserData = m_SingleData;
+    m_WorkUnitInfoArray[threadLoop].NumberOfWorkUnits = m_NumberOfWorkUnits;
+  }
+  auto futures = m_ThreadPool->AddWorkBatch(
+    m_NumberOfWorkUnits - 1,
+    [method = m_SingleMethod, workUnits = m_WorkUnitInfoArray.data()](SizeValueType i) { method(&workUnits[i + 1]); });
+  for (ThreadIdType threadLoop = 1; threadLoop < m_NumberOfWorkUnits; ++threadLoop)
+  {
+    m_WorkUnitInfoArray[threadLoop].Future = std::move(futures[threadLoop - 1]);
   }
 
   // Now, the parent thread calls this->SingleMethod() itself
-  m_ThreadInfoArray[0].UserData = m_SingleData;
-  m_ThreadInfoArray[0].NumberOfWorkUnits = m_NumberOfWorkUnits;
+  m_WorkUnitInfoArray[0].UserData = m_SingleData;
+  m_WorkUnitInfoArray[0].NumberOfWorkUnits = m_NumberOfWorkUnits;
   ExceptionHandler exceptionHandler;
-  exceptionHandler.TryAndCatch([this] { m_SingleMethod(&m_ThreadInfoArray[0]); });
+  exceptionHandler.TryAndCatch([this] { m_SingleMethod(&m_WorkUnitInfoArray[0]); });
 
   // The parent thread has finished SingleMethod()
   // so now it waits for each of the other work units to finish
-  for (threadLoop = 1; threadLoop < m_NumberOfWorkUnits; ++threadLoop)
+  for (ThreadIdType threadLoop = 1; threadLoop < m_NumberOfWorkUnits; ++threadLoop)
   {
-    exceptionHandler.TryAndCatch([this, threadLoop] { m_ThreadInfoArray[threadLoop].Future.get(); });
+    exceptionHandler.TryAndCatch([this, threadLoop] { m_WorkUnitInfoArray[threadLoop].Future.get(); });
   }
 
   exceptionHandler.RethrowFirstCaughtException();
@@ -165,11 +189,16 @@ PoolMultiThreader::ParallelizeArray(SizeValueType             firstIndex,
 
   if (firstIndex + 1 < lastIndexPlus1)
   {
-    SizeValueType chunkSize = (lastIndexPlus1 - firstIndex) / m_NumberOfWorkUnits;
-    if ((lastIndexPlus1 - firstIndex) % m_NumberOfWorkUnits > 0)
+    const SizeValueType numberOfItems = lastIndexPlus1 - firstIndex;
+    SizeValueType       chunkSize = numberOfItems / m_NumberOfWorkUnits;
+    if (numberOfItems % m_NumberOfWorkUnits > 0)
     {
       ++chunkSize; // we want slightly bigger chunks to be processed first
     }
+    const SizeValueType roundingLeftover = numberOfItems % chunkSize > 0 ? 1 : 0;
+    const SizeValueType workUnit = numberOfItems / chunkSize + roundingLeftover;
+    itkAssertOrThrowMacro(workUnit <= m_NumberOfWorkUnits, "Number of work units was somehow miscounted!");
+    this->EnsureWorkUnitInfoArraySize(workUnit);
 
     auto lambda = [aFunc](SizeValueType start, SizeValueType end) {
       for (SizeValueType ii = start; ii < end; ++ii)
@@ -178,13 +207,15 @@ PoolMultiThreader::ParallelizeArray(SizeValueType             firstIndex,
       }
     };
 
-    SizeValueType workUnit = 1;
-    for (SizeValueType i = firstIndex + chunkSize; i < lastIndexPlus1; i += chunkSize)
+    auto futures =
+      m_ThreadPool->AddWorkBatch(workUnit - 1, [lambda, firstIndex, chunkSize, lastIndexPlus1](SizeValueType i) {
+        const SizeValueType start = firstIndex + (i + 1) * chunkSize;
+        lambda(start, std::min(start + chunkSize, lastIndexPlus1));
+      });
+    for (SizeValueType i = 1; i < workUnit; ++i)
     {
-      m_ThreadInfoArray[workUnit++].Future = m_ThreadPool->AddWork(lambda, i, std::min(i + chunkSize, lastIndexPlus1));
+      m_WorkUnitInfoArray[i].Future = std::move(futures[i - 1]);
     }
-    itkAssertOrThrowMacro(workUnit <= m_NumberOfWorkUnits, "Number of work units was somehow miscounted!");
-
     ProgressReporter reporter(filter, 0, workUnit);
 
     // execute this thread's share
@@ -201,7 +232,7 @@ PoolMultiThreader::ParallelizeArray(SizeValueType             firstIndex,
         std::future_status status;
         do
         {
-          status = m_ThreadInfoArray[i].Future.wait_for(threadCompletionPollingInterval);
+          status = m_WorkUnitInfoArray[i].Future.wait_for(threadCompletionPollingInterval);
           if (filter && status == std::future_status::timeout)
           {
             filter->IncrementProgress(0);
@@ -254,26 +285,28 @@ PoolMultiThreader::ParallelizeImageRegion(unsigned int         dimension,
     {
       const ImageRegionSplitterBase * splitter = ImageSourceCommon::GetGlobalDefaultSplitter();
       const ThreadIdType              splitCount = splitter->GetNumberOfSplits(region, m_NumberOfWorkUnits);
-      ProgressReporter                reporter(filter, 0, splitCount);
+      this->EnsureWorkUnitInfoArraySize(splitCount);
+      ProgressReporter reporter(filter, 0, splitCount);
       itkAssertOrThrowMacro(splitCount <= m_NumberOfWorkUnits, "Split count is greater than number of work units!");
-      ImageIORegion iRegion;
-      ThreadIdType  total = 0;
+
+      // Each work unit computes its own sub-region, so no per-unit region is built or copied here.
+      auto futures =
+        m_ThreadPool->AddWorkBatch(splitCount - 1, [funcP, region, splitter, splitCount](SizeValueType unit) {
+          ImageIORegion      iRegion = region;
+          const ThreadIdType i = static_cast<ThreadIdType>(unit) + 1;
+          const ThreadIdType total = splitter->GetSplit(i, splitCount, iRegion);
+          if (i >= total)
+          {
+            itkGenericExceptionMacro("Could not get work unit "
+                                     << i << " even though we checked possible number of splits beforehand!");
+          }
+          funcP(&iRegion.GetIndex()[0], &iRegion.GetSize()[0]);
+        });
       for (ThreadIdType i = 1; i < splitCount; ++i)
       {
-        iRegion = region;
-        total = splitter->GetSplit(i, splitCount, iRegion);
-        if (i < total)
-        {
-          m_ThreadInfoArray[i].Future =
-            m_ThreadPool->AddWork([funcP, iRegion]() { funcP(&iRegion.GetIndex()[0], &iRegion.GetSize()[0]); });
-        }
-        else
-        {
-          itkExceptionMacro("Could not get work unit "
-                            << i << " even though we checked possible number of splits beforehand!");
-        }
+        m_WorkUnitInfoArray[i].Future = std::move(futures[i - 1]);
       }
-      iRegion = region;
+      ImageIORegion iRegion = region;
       splitter->GetSplit(0, splitCount, iRegion);
 
       // execute this thread's share
@@ -290,13 +323,13 @@ PoolMultiThreader::ParallelizeImageRegion(unsigned int         dimension,
           std::future_status status;
           do
           {
-            status = m_ThreadInfoArray[i].Future.wait_for(threadCompletionPollingInterval);
+            status = m_WorkUnitInfoArray[i].Future.wait_for(threadCompletionPollingInterval);
             if (filter && status == std::future_status::timeout)
             {
               filter->IncrementProgress(0);
             }
           } while (status != std::future_status::ready);
-          m_ThreadInfoArray[i].Future.get();
+          m_WorkUnitInfoArray[i].Future.get();
           reporter.CompletedPixel();
         });
       }

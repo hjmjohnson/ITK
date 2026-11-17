@@ -423,3 +423,10 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkMeanSquaresImageToImageMetricv4VectorRegistrationTest.nii.gz
 )
+
+set(
+  ITKMetricsv4GTests
+  itkImageToImageMetricv4WorkUnitsGTest.cxx
+  itkMattesMutualInformationImageToImageMetricv4GTest.cxx
+)
+creategoogletestdriver(ITKMetricsv4 "${ITKMetricsv4-Test_LIBRARIES}" "${ITKMetricsv4GTests}")

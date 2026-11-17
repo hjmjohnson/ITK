@@ -40,7 +40,9 @@ namespace itk
  * of ShapeLabelMapFilter use the pipeline design to specify truly
  * required inputs.
  *
- * \author Gaetan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
+ * The perimeter is estimated as described in \cite Lehmann_2012.
+ *
+ * \author Gaëtan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
  *
  * This implementation was taken from the Insight Journal paper:
  * https://doi.org/10.54294/q6auw4
@@ -161,8 +163,8 @@ private:
 
   using Offset2Type = itk::Offset<2>;
   using Offset3Type = itk::Offset<3>;
-  using Spacing2Type = itk::Vector<double, 2>;
-  using Spacing3Type = itk::Vector<double, 3>;
+  using Spacing2Type = itk::Vector<SpacePrecisionType, 2>;
+  using Spacing3Type = itk::Vector<SpacePrecisionType, 3>;
   using MapIntercept2Type = std::map<Offset2Type, SizeValueType, Functor::LexicographicCompare>;
   using MapIntercept3Type = std::map<Offset3Type, SizeValueType, Functor::LexicographicCompare>;
 

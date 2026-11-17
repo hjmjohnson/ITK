@@ -28,7 +28,7 @@ namespace itk
  *
  * LabelMapToBinaryImageFilter to a label image.
  *
- * \author Gaetan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
+ * \author Gaëtan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
  *
  * This implementation was taken from the Insight Journal paper:
  * https://doi.org/10.54294/q6auw4
@@ -59,7 +59,7 @@ public:
   using typename Superclass::InputImageConstPointer;
   using typename Superclass::InputImageRegionType;
   using typename Superclass::InputImagePixelType;
-  using LabelObjectType = typename Superclass::LabelObjectType;
+  using typename Superclass::LabelObjectType;
 
   using typename Superclass::OutputImageType;
   using typename Superclass::OutputImagePointer;
@@ -78,7 +78,7 @@ public:
   /** \see LightObject::GetNameOfClass() */
   itkOverrideGetNameOfClassMacro(LabelMapToLabelImageFilter);
 
-  itkConceptMacro(SameDimensionCheck, (Concept::SameDimension<InputImageDimension, OutputImageDimension>));
+  static_assert(InputImageDimension == OutputImageDimension);
 
 protected:
   LabelMapToLabelImageFilter() = default;

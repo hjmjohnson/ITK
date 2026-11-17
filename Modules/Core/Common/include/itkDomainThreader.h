@@ -104,12 +104,16 @@ public:
   GetMultiThreader() const;
 
   /** Convenience methods to set/get the desired number of work units to use.
-   * \warning When setting the desired number of work units, it might be clamped by
-   * itk::MultiThreaderBase::GetGlobalMaximumNumberOfThreads().
+   * \warning The selected multithreader may clamp the number of work units.
    * */
   /** @ITKStartGrouping */
-  itkSetClampMacro(NumberOfWorkUnits, ThreadIdType, 1, ITK_MAX_THREADS);
-  itkGetConstMacro(NumberOfWorkUnits, ThreadIdType);
+  virtual ThreadIdType
+  GetNumberOfWorkUnits() const
+  {
+    return this->m_MultiThreader->GetNumberOfWorkUnits();
+  }
+  virtual void
+  SetNumberOfWorkUnits(ThreadIdType numberOfWorkUnits);
   /** @ITKEndGrouping */
   /** Convenience methods to set/get the maximum number of threads to use.
    * \warning When setting the maximum number of threads, it will be clamped by
@@ -183,7 +187,6 @@ private:
    * well into that number.
    * This value is determined at the beginning of \c Execute(). */
   ThreadIdType                            m_NumberOfWorkUnitsUsed{ 0 };
-  ThreadIdType                            m_NumberOfWorkUnits{};
   typename DomainPartitionerType::Pointer m_DomainPartitioner{};
   DomainType                              m_CompleteDomain{};
   MultiThreaderBase::Pointer              m_MultiThreader{};

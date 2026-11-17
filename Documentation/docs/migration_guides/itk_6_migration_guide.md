@@ -367,16 +367,15 @@ These names were deprecated in CMake 3.20 and removed in CMake 4.1.0. Additional
 Python Global Interpreter Lock (GIL) Release
 ---------------------------------------------
 
-ITK now releases the Python Global Interpreter Lock (GIL) during C++ operations by default,
-allowing for true multi-threaded execution of ITK operations from Python. This enables
-parallel filter invocation when using ITK in parallel computing frameworks like Dask, Ray, or
-Python's standard `threading` module.
+ITK releases the Python Global Interpreter Lock (GIL) during `Update()` and
+`UpdateLargestPossibleRegion()` by default. Other wrapped methods retain the GIL.
+This allows independent pipelines to execute concurrently from Python threads.
 
 ### Key Changes
 
 **New CMake Option:**
-- `ITK_PYTHON_RELEASE_GIL` (default: `ON`) - Controls whether the GIL is released during ITK operations
-- When enabled, the `-threads` flag is passed to SWIG to generate thread-safe wrappers
+- `ITK_PYTHON_RELEASE_GIL` (default: `ON`) - Controls GIL release during pipeline execution
+- When enabled, SWIG's `-threads` flag supports GIL release in the update wrappers
 
 **Benefits:**
 - Multiple Python threads can execute ITK operations concurrently
@@ -392,7 +391,7 @@ import threading
 image_paths = ["image1.mha", "image2.mha"]
 
 def process_image(image_path):
-    # GIL is released during ITK operations
+    # Pipeline updates release the GIL.
     image = itk.imread(image_path)
     smoothed = itk.median_image_filter(image, radius=5)
     return smoothed
@@ -408,9 +407,9 @@ for thread in threads:
     thread.join()
 ```
 
-**Note:** ITK callbacks and event monitoring may be affected by GIL release. If you encounter
-issues with callbacks, you can disable GIL release by setting `-DITK_PYTHON_RELEASE_GIL=OFF`
-when building ITK.
+**Note:** Python callbacks reacquire the GIL. Concurrent threads must use independent
+pipelines; GIL release does not make shared filters or images thread-safe.
+Build with `-DITK_PYTHON_RELEASE_GIL=OFF` to retain the GIL during updates.
 
 Python lazy loading is always on
 --------------------------------
@@ -625,6 +624,20 @@ for a different installation instead. The ITK build options `FFTW_INCLUDE_PATH`,
 `FFTWD_THREADS_LIB`, and `FFTWF_THREADS_LIB` are still honored; the library results are now full paths rather than
 file names. A separate FFTW threads library is optional.
 
+The `FindFFTW` result variables `FFTW_INCLUDE`, `FFTWD_LIBRARIES`, `FFTWF_LIBRARIES`, `FFTWD_FOUND`, and `FFTWF_FOUND`
+are no longer set in projects that call `find_package(ITK)`; only the `FFTW::Double` and `FFTW::Float` targets are
+created. This is unlikely to affect existing code. Link `ITK::ITKFFTWModule`, or a module that depends on it such as
+`ITK::ITKFFTModule`, to get FFTW's include directories and libraries.
+
+With `ITK_USE_MKL=ON`, ITK now finds oneMKL through its CMake package (`find_package(MKL CONFIG)`) and links
+`MKL::MKL`, which requires oneMKL 2021.3 or newer. Set `MKL_DIR`, or add the installation to `CMAKE_PREFIX_PATH`, to
+select it. `MKLROOT` is no longer read. `MKL_LINK`, `MKL_INTERFACE`, and `MKL_THREADING` default to `static`, `lp64`, and
+`sequential`; the FFTW3 interface is the same under `lp64` and `ilp64`. The `MKL_INTEL_ILP64_LIB`, `MKL_CORE_LIB`, and
+`MKL_SEQUENTIAL_LIB` cache entries and `FFTW_INCLUDE_PATH` are no longer used with oneMKL.
+
+The FFTW3 interfaces of oneMKL and cuFFTW do not create real-to-real plans. With `ITK_USE_MKL` or `ITK_USE_CUFFTW`,
+`VariationalRegistrationCurvatureRegularizer` uses PocketFFT, and `CurvatureRegistrationFilter` is not available.
+
 
 ### Migration for ITK Modules
 
@@ -681,6 +694,24 @@ target_link_libraries(MyExample ITK::MyModuleModule)
 #### Backward Compatibility
 
 For backward compatibility, non-namespaced aliases are created with deprecation warnings. However, new code should use the namespaced `ITK::` targets exclusively.
+
+## 32-bit x86 requires SSE2 floating-point math
+
+ITK 6 compiles one floating-point rounding path on x86. On 32-bit x86, `itkConfigure.h` stops with `#error` unless the compiler uses SSE2 floating-point math, and the x87 inline assembly is removed. ITK's targets and `UseITK.cmake` pass `-msse2 -mfpmath=sse` to GCC and Clang, and MSVC has defaulted to SSE2 since Visual Studio 2012, so most builds need no change. 64-bit x86 and ARM are not affected.
+
+The CMake variable `ITK_SSE2_CFLAGS_IF_AVAILABLE` and the `check_sse2_flags()` function are removed. `ITK_COMPILER_SUPPORTS_SSE2_32` (any x86) and `ITK_COMPILER_SUPPORTS_SSE2_64` (x86_64) are still defined, but ITK no longer reads them.
+
+### What you need to do
+
+A 32-bit x86 project that compiles ITK headers without ITK's imported targets or `UseITK.cmake` adds `-msse2 -mfpmath=sse` (GCC, Clang) or `/arch:SSE2` (MSVC). Remove any use of `ITK_SSE2_CFLAGS_IF_AVAILABLE`.
+
+## Minimum Visual Studio raised to 2019 16.2
+
+ITK 6 requires MSVC 19.22 (Visual Studio 2019 16.2) or newer; the previous floor was 19.20 (16.0). Releases 16.0 and 16.1 reject `using typename Superclass::X;` declarations with errors C2653 and C2886, which 16.2 fixed. Configuring with an older compiler now fails early.
+
+### What you need to do
+
+Update Visual Studio 2019 to 16.11, its final servicing baseline, with the Visual Studio Installer, or use Visual Studio 2022. ITK's own Windows CI already builds with Visual Studio 2022.
 
 ## Minimum wrapped Python raised to 3.11
 
@@ -1000,6 +1031,11 @@ unchanged; consumers compile without modification.
   determinism and backward compatibility; do not trust its output.
   First-class support is tracked in
   [#6468](https://github.com/InsightSoftwareConsortium/ITK/issues/6468).
+- Slices whose ImageOrientationPatient strings differ only by rounding (unit
+  row and column cosines within `1 - cos <= 1e-6`, about 0.08 degrees) are
+  still ordered geometrically, as `SerieHelper` did; `gdcm::IPPSorter` alone
+  requires identical strings. Orientations that differ by more are rejected,
+  which `SerieHelper` did not check.
 - Tags passed to `AddSeriesRestriction` now refine the series identifier
   (sub-dividing a `SeriesInstanceUID`, the documented intent, e.g.
   `"0008|0021"`) instead of `SerieHelper`'s largely-inert file-restriction
@@ -1097,9 +1133,9 @@ written through the standard writer pipeline are **uncompressed by default**.
 Call `writer->UseCompressionOn()` to restore compressed output. To control the
 deflate level (1–9, default 5), also call `writer->SetCompressionLevel(N)`.
 
-## `StructureTensorImageFilter`: feature-scale smoothing is now isotropic
+## `GradientStructureTensorImageFilter`: feature-scale smoothing is now isotropic
 
-`StructureTensorImageFilter` computes the structure tensor
+`GradientStructureTensorImageFilter` computes the structure tensor
 `J_rho = K_rho * (grad(u_sigma) (x) grad(u_sigma))`, where `K_rho` is a Gaussian
 of standard deviation `rho` (the *feature scale*). The defining property of that
 smoothing step is that it is **isotropic**: the outer-product tensor field is
@@ -1125,10 +1161,15 @@ confined to the two feature/noise-scale smoothers.)
 
 ### What you need to do
 
-- **Nothing in your code changes.** The public API of
-  `StructureTensorImageFilter` is unchanged and consumers compile unmodified.
-- **Expect different output** from `StructureTensorImageFilter` and from the two
-  public filters built on it —
+- **Only code that names the tensor class changes.** The AnisotropicDiffusionLBR
+  class `StructureTensorImageFilter` is now `GradientStructureTensorImageFilter`
+  (header `itkGradientStructureTensorImageFilter.h`), because the
+  IsotropicWavelets module defined a different class with the same name. The
+  class was never wrapped for Python. Its interface is otherwise unchanged, and
+  `AnisotropicDiffusionLBRImageFilter` and
+  `CoherenceEnhancingDiffusionImageFilter` users need no edits.
+- **Expect different output** from `GradientStructureTensorImageFilter` and from
+  the two public filters built on it —
   `CoherenceEnhancingDiffusionImageFilter` (CED/EED) and
   `AnisotropicDiffusionLBRImageFilter`. The new tensors are isotropic, so
   coherence-enhancing and edge-enhancing diffusion now steer along genuinely
@@ -1144,6 +1185,27 @@ confined to the two feature/noise-scale smoothers.)
   tensor field along one axis only), it was never expressible through the public
   API — there is no setter for the smoothing direction — so no supported code
   path is removed.
+
+## IsotropicWavelets `StructureTensorImageFilter` is now `RieszStructureTensorImageFilter`
+
+The IsotropicWavelets module and the AnisotropicDiffusionLBR module both defined
+`itk::StructureTensorImageFilter` with the same include guard, so a build that
+enabled both modules could not use either class, and Python wrapping failed to
+compile (issue #7057). The two classes are different algorithms. The
+IsotropicWavelets class takes two or more component images (for example Riesz
+components) and outputs per-pixel eigenvectors and eigenvalues; the
+AnisotropicDiffusionLBR class takes one image and outputs the tensor.
+
+### What you need to do
+
+- Replace `itk::StructureTensorImageFilter` with
+  `itk::RieszStructureTensorImageFilter` and include
+  `itkRieszStructureTensorImageFilter.h`. Template parameters, setters, and
+  output are unchanged.
+- In Python, replace `itk.StructureTensorImageFilter` with
+  `itk.RieszStructureTensorImageFilter`; the wrapped instantiations are the same.
+- The old name is not kept as an alias, because an alias would reintroduce the
+  name clash.
 
 ## `NiftiImageIO` preserves NaN and infinite pixel values
 
@@ -1257,7 +1319,7 @@ afterwards raises `RuntimeError` rather than crashing.
 Calls to `OverrideBoundaryCondition` on any *other* class are unaffected — those
 never took ownership and keep their current behavior.
 
-## `ITK_AUTOLOAD_PATH` is read once; use `ObjectFactoryBase::SetAutoloadPath`
+## `ITK_AUTOLOAD_PATH` is read once; use `ObjectFactoryBase::SetAutoloadPaths`
 
 The `ITK_AUTOLOAD_PATH` environment variable lists the directories ITK scans for
 shared libraries that register dynamically loaded object factories (IO plugins,
@@ -1265,17 +1327,17 @@ for example). Entries are separated by `:` (`;` on Windows). The scan happens
 lazily, the first time a factory is used, and only when ITK is built with
 `ITK_USE_AUTOLOAD_PATH` (dynamic loading enabled, not a Python-wrapped build).
 
-The autoload path is now stored in `ObjectFactoryBase` global state as a
+The autoload paths are now stored in `ObjectFactoryBase` global state as a
 `std::list<std::string>`, initialized by splitting the `ITK_AUTOLOAD_PATH`
 environment variable when that state is created.
-`ObjectFactoryBase::SetAutoloadPath()` and `GetAutoloadPath()` set and query
+`ObjectFactoryBase::SetAutoloadPaths()` and `GetAutoloadPaths()` set and query
 the list at runtime. `ReHash()` no longer re-reads the environment.
 
 ### What you need to do
 
 Code that calls `putenv("ITK_AUTOLOAD_PATH=...")` after startup and then
 `ObjectFactoryBase::ReHash()` must build a `std::list<std::string>` of
-directories and call `ObjectFactoryBase::SetAutoloadPath(...)` instead. When
+directories and call `ObjectFactoryBase::SetAutoloadPaths(...)` instead. When
 factories were already initialized, follow it with `ReHash()`.
 
 ## `MINCImageIO` reads a MINC time dimension as a fourth image axis
@@ -1313,3 +1375,153 @@ its geometry, read the 4D image and use `ExtractImageFilter` with
 To write a time series, write a 4D image instead of a `VectorImage` with one
 component per frame, and set the time start and step through the image origin
 and spacing rather than `tstart` and `tstep`.
+
+## `ITK_HAVE_FENV_H` is removed
+
+`itkConfigure.h` no longer defines `ITK_HAVE_FENV_H`. `<cfenv>` is part of
+C++11, so the macro was defined on every toolchain that can build ITK, and ITK
+itself never tested it.
+
+### What you need to do
+
+Delete any `#ifdef ITK_HAVE_FENV_H` test and include `<cfenv>` unconditionally.
+
+## Byte-order macros are deprecated in `itkConfigure.h`
+
+`itkConfigure.h` no longer takes the byte order from CMake; `CMAKE_WORDS_BIGENDIAN`
+and `ITK_WORDS_BIGENDIAN` are defined only when ITK is built without
+`ITK_LEGACY_REMOVE`. `itk::ByteSwapper<T>::SystemIsBigEndian()` is `constexpr`
+and determines the byte order of the architecture being compiled for from the
+compiler (`std::endian` in C++20, otherwise the compiler's own macros), so it is
+correct for each architecture of a universal binary or a cross-compile, which a
+value detected at configure time is not.
+
+### What you need to do
+
+Replace each preprocessor test of either macro with the `constexpr` query; its
+result does not depend on the type argument. A test that selects a value:
+
+```cpp
+// Before
+#ifdef ITK_WORDS_BIGENDIAN
+  m_UseMSBForHashing = true;
+#else
+  m_UseMSBForHashing = false;
+#endif
+
+// After
+#include "itkByteSwapper.h"
+m_UseMSBForHashing = itk::ByteSwapper<TScalar>::SystemIsBigEndian();
+```
+
+A test that guards a statement:
+
+```cpp
+// Before
+#ifndef ITK_WORDS_BIGENDIAN
+  png_set_swap(png_ptr);
+#endif
+
+// After
+#include "itkByteSwapper.h"
+if constexpr (!itk::ByteSwapper<unsigned short>::SystemIsBigEndian())
+{
+  png_set_swap(png_ptr);
+}
+```
+
+The same replacements apply to `CMAKE_WORDS_BIGENDIAN`. The query is usable in
+`static_assert` and template arguments as well, since it is `constexpr`.
+
+## ITK headers present one form in every C++ standard
+
+ITK headers no longer select declarations or inline code from `__cplusplus` or
+feature-test macros. A project built as C++20 or newer now sees the same
+definitions as ITK's own libraries, which are the C++17 forms. For example,
+classes that use `ITK_UNEQUAL_OPERATOR_MEMBER_FUNCTION` keep their member
+`operator!=` in a C++20 build.
+
+The advanced CMake options `ITK_ALPHA_FEATURE_CXX20`,
+`ITK_ALPHA_FEATURE_CXX23`, and `ITK_ALPHA_FEATURE_CXX26` select the newer
+forms. They are off by default, unsupported, and for testing only.
+
+### What you need to do
+
+Nothing, in most projects. If your code tests
+`ITK_EXPERIMENTAL_CXX20_REWRITTEN_UNEQUAL_OPERATOR`, note that the macro is no
+longer defined in a C++20 build.
+
+## `ITK_HAS_CPP11_TYPETRAITS` is removed
+
+`itkConfigure.h` no longer defines `ITK_HAS_CPP11_TYPETRAITS`. It was always
+defined in builds without `ITK_LEGACY_REMOVE`, and ITK itself never tested it.
+
+### What you need to do
+
+Delete any `#ifdef ITK_HAS_CPP11_TYPETRAITS` test and keep the branch that uses
+`<type_traits>`.
+
+## `MultiThreaderBase` global default work-unit-per-thread ratio
+
+`PoolMultiThreader` and `TBBMultiThreader` now initialize their number of work
+units as `GetGlobalDefaultNumberOfThreads()` times the new
+`MultiThreaderBase::GetGlobalDefaultWorkUnitPerThreadRatio()`, instead of a
+hard-coded factor. The default ratio is 4, which matches the previous
+`PoolMultiThreader` behavior but reduces the `TBBMultiThreader` default from 16
+to 4 work units per thread. Fewer, larger work units lower scheduling overhead
+for most filters.
+
+### What you need to do
+
+To restore the previous `TBBMultiThreader` granularity, or to tune either
+threader, set the ratio before the multi-threaders are constructed:
+
+```cpp
+itk::MultiThreaderBase::SetGlobalDefaultWorkUnitPerThreadRatio(16);
+```
+
+or set the `ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO` environment variable
+(for example `ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO=16`). An explicit
+call to the setter takes precedence over the environment variable.
+
+The value is clamped to at least 1 and does not affect instances that already
+exist. A single-threaded configuration still uses one work unit.
+
+## `ProcessObject` number of work units is held by the multi-threader
+
+`ProcessObject::SetNumberOfWorkUnits()` and `GetNumberOfWorkUnits()` now forward
+to the filter's `MultiThreaderBase` instead of keeping a separate copy.
+`GetNumberOfWorkUnits()` returns the value by copy and reports the count the
+multi-threader accepted, so it reflects the multi-threader's limits (for
+example, `SingleMultiThreader` always reports 1).
+
+`ProcessObject::SetMultiThreader()` no longer carries a work unit count over to
+the new multi-threader; the filter uses the count of the multi-threader it is
+given.
+
+### What you need to do
+
+Call `SetNumberOfWorkUnits()` after `SetMultiThreader()` when a specific count is
+wanted. Filters that share one multi-threader instance also share its number of
+work units.
+
+## Set work units from the current thread count
+
+`MultiThreaderBase::SetNumberOfWorkUnitsFromThreadRatio(ThreadIdType)` is a new
+pure virtual method. Custom multi-threaders must implement it.
+
+`ProcessObject` exposes the same setter. It immediately sets the multi-threader's
+work-unit count and forwards the accepted count through the virtual
+`SetNumberOfWorkUnits()`, including for composite filters:
+
+```cpp
+filter->SetNumberOfWorkUnitsFromThreadRatio(2);
+```
+
+Pool and TBB set the count to their current maximum number of threads times the
+ratio, clamped to `[1, NumericTraits<ThreadIdType>::max() / threadCount]` so the
+product cannot overflow, even for a shared pool larger than `ITK_MAX_THREADS`.
+Platform keeps one work unit per thread without increasing
+its thread count; Single always uses one work unit. The ratio is not retained:
+later thread-count changes, explicit work-unit settings, and multi-threader
+replacement do not reapply it.
