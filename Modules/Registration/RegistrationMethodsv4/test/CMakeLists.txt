@@ -6,7 +6,6 @@ set(
   itkBSplineSyNImageRegistrationTest.cxx
   itkBSplineSyNPointSetRegistrationTest.cxx
   itkExponentialImageRegistrationTest.cxx
-  itkImageRegistrationSamplingTest.cxx
   itkQuasiNewtonOptimizerv4RegistrationTest.cxx
   itkSimpleImageRegistrationTest.cxx
   itkSimpleImageRegistrationTest2.cxx
@@ -29,12 +28,11 @@ createtestdriver(ITKRegistrationMethodsv4 "${ITKRegistrationMethodsv4-Test_LIBRA
                  "${ITKRegistrationMethodsv4Tests}"
 )
 
-itk_add_test(
-  NAME itkImageRegistrationSamplingTest
-  COMMAND
-    ITKRegistrationMethodsv4TestDriver
-    itkImageRegistrationSamplingTest
-)
+set(simple_registration_pixels_tolerance 8)
+if(ITK_USE_FLOAT_SPACE_PRECISION)
+  # Single-precision geometry changes the optimizer trajectory.
+  set(simple_registration_pixels_tolerance 4000)
+endif()
 
 itk_add_test(
   NAME itkSimpleImageRegistrationTestDouble
@@ -45,7 +43,7 @@ itk_add_test(
     --compareIntensityTolerance
     3.0
     --compareNumberOfPixelsTolerance
-    8
+    ${simple_registration_pixels_tolerance}
     --compare
     DATA{Baseline/itkSimpleImageRegistrationTest.nii,:}
     ${TEMP}/itkSimpleImageRegistrationTestDouble.nii
@@ -84,7 +82,7 @@ itk_add_test(
     --compareIntensityTolerance
     3.0
     --compareNumberOfPixelsTolerance
-    8
+    ${simple_registration_pixels_tolerance}
     --compare
     DATA{Baseline/itkSimpleImageRegistrationTest.nii,:}
     ${TEMP}/itkSimpleImageRegistrationTestFloat.nii
@@ -534,3 +532,11 @@ set_tests_properties(
     COST
       30
 )
+set(
+  ITKRegistrationMethodsv4GTests
+  itkSyNImageRegistrationMethodGTest.cxx
+  itkImageRegistrationMethodv4VirtualDomainGTest.cxx
+  itkSyNImageRegistrationMethodReleaseDataGTest.cxx
+  itkImageRegistrationSamplingGTest.cxx
+)
+creategoogletestdriver(ITKRegistrationMethodsv4 "${ITKRegistrationMethodsv4-Test_LIBRARIES}" "${ITKRegistrationMethodsv4GTests}")

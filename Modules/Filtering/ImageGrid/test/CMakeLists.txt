@@ -46,7 +46,6 @@ set(
   itkResampleImageTest8.cxx
   itkResamplePhasedArray3DSpecialCoordinatesImageTest.cxx
   itkShrinkImageStreamingTest.cxx
-  itkShrinkImageTest.cxx
   itkSliceBySliceImageFilterTest.cxx
   itkTileImageFilterTest.cxx
   itkWarpImageFilterTest.cxx
@@ -693,12 +692,6 @@ itk_add_test(
     itkShrinkImageStreamingTest
 )
 itk_add_test(
-  NAME itkShrinkImageTest
-  COMMAND
-    ITKImageGridTestDriver
-    itkShrinkImageTest
-)
-itk_add_test(
   NAME itkZeroFluxNeumannPadImageFilterTest
   COMMAND
     ITKImageGridTestDriver
@@ -746,12 +739,15 @@ itk_add_test(
 
 set(
   ITKImageGridGTests
+  itkBSplineControlPointImageFilterGTest.cxx
+  itkBSplineScatteredDataPointSetToImageFilterGTest.cxx
   itkChangeInformationImageFilterGTest.cxx
-  itkWarpImageFilterGTest.cxx
   itkPasteImageFilterGTest.cxx
   itkResampleImageFilterGTest.cxx
+  itkShrinkImageGTest.cxx
   itkSliceImageFilterTest.cxx
   itkTileImageFilterGTest.cxx
+  itkWarpImageFilterGTest.cxx
 )
 
 creategoogletestdriver(ITKImageGrid "${ITKImageGrid-Test_LIBRARIES}" "${ITKImageGridGTests}")

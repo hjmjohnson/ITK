@@ -83,7 +83,7 @@ namespace itk
  * to its center.
  *
  * This code was contributed by Jerome Schmid from the University of
- * Strasbourg who provided a fast dilation implementation. Gaetan
+ * Strasbourg who provided a fast dilation implementation. Gaëtan
  * Lehmann from INRA de Jouy-en-Josas then provided a fast erosion
  * implementation based on Jerome's implementation.  The common
  * portions of these two implementations were then placed in this
@@ -141,7 +141,7 @@ public:
   using InputSizeValueType = typename InputImageType::SizeValueType;
 
   /** Input and output images must be the same dimension. */
-  itkConceptMacro(ImageDimensionCheck, (Concept::SameDimension<Self::InputImageDimension, Self::OutputImageDimension>));
+  static_assert(InputImageDimension == OutputImageDimension);
 
   /** Set the value in the image to consider as "foreground". Defaults to
    * maximum value of PixelType. Subclasses may alias this to

@@ -194,7 +194,8 @@ if(ITK_BUILD_SHARED_LIBS AND ITK_USE_AUTOLOAD_PATH)
   )
 
   if(WIN32)
-    set(ITKObjectFactoryAutoloadPathSeparator ";")
+    # Escaped so the ENVIRONMENT property list does not split on it.
+    set(ITKObjectFactoryAutoloadPathSeparator "\\;")
   else()
     set(ITKObjectFactoryAutoloadPathSeparator ":")
   endif()
@@ -694,6 +695,8 @@ itk_add_test(
   NAME itkMultiThreaderBaseTestPlatform
   COMMAND
     ITKCommon2TestDriver
+    --remove-env
+    "ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO"
     itkMultiThreaderBaseTest
 )
 set_tests_properties(
@@ -706,6 +709,8 @@ itk_add_test(
   NAME itkMultiThreaderBaseTestPool
   COMMAND
     ITKCommon2TestDriver
+    --remove-env
+    "ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO"
     itkMultiThreaderBaseTest
 )
 set_tests_properties(
@@ -718,6 +723,8 @@ itk_add_test(
   NAME itkMultiThreaderBaseTestSingle
   COMMAND
     ITKCommon2TestDriver
+    --remove-env
+    "ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO"
     itkMultiThreaderBaseTest
 )
 set_tests_properties(
@@ -730,6 +737,8 @@ itk_add_test(
   NAME itkMultiThreaderBaseTest3
   COMMAND
     ITKCommon2TestDriver
+    --remove-env
+    "ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO"
     itkMultiThreaderBaseTest
     3
 ) # test with 3 threads
@@ -781,6 +790,8 @@ if(Module_ITKTBB) # ITK_USE_TBB is not yet defined here
     NAME itkMultiThreaderBaseTestTBB
     COMMAND
       ITKCommon2TestDriver
+      --remove-env
+      "ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO"
       itkMultiThreaderBaseTest
   )
   set_tests_properties(
@@ -949,6 +960,21 @@ set_tests_properties(
   PROPERTIES
     ENVIRONMENT
       "NSLOTS=9;FIRST_IGNORED=13;LAST_RESPECTED=123;ITK_NUMBER_OF_THREADS_ENV_LIST=FIRST_IGNORED:LAST_RESPECTED"
+)
+
+itk_add_test(
+  NAME itkMultiThreadingEnvWorkUnitRatio7
+  COMMAND
+    ITKCommon2TestDriver
+    itkMultiThreadingEnvironmentTest
+    43
+    7
+)
+set_tests_properties(
+  itkMultiThreadingEnvWorkUnitRatio7
+  PROPERTIES
+    ENVIRONMENT
+      "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=43;ITK_GLOBAL_DEFAULT_WORK_UNIT_PER_THREAD_RATIO=7"
 )
 
 itk_add_test(
@@ -1296,6 +1322,51 @@ if("${CMAKE_SYSTEM_NAME}" MATCHES "Darwin|Linux")
   )
 endif()
 
+# A client on a newer C++ standard must compile against the definitions ITK was built with.
+set(_itk_newer_client_standard "")
+foreach(_itk_client_standard 20 23 26)
+  if(
+    NOT
+      _itk_newer_client_standard
+    AND
+      _itk_client_standard
+        GREATER
+        CMAKE_CXX_STANDARD
+    AND
+      "cxx_std_${_itk_client_standard}"
+        IN_LIST
+        CMAKE_CXX_COMPILE_FEATURES
+  )
+    set(_itk_newer_client_standard ${_itk_client_standard})
+  endif()
+endforeach()
+if(_itk_newer_client_standard)
+  add_executable(itkNewerStandardClientTest itkNewerStandardClientTest.cxx)
+  set_target_properties(
+    itkNewerStandardClientTest
+    PROPERTIES
+      CXX_STANDARD
+        ${_itk_newer_client_standard}
+      CXX_STANDARD_REQUIRED
+        ON
+      CXX_SCAN_FOR_MODULES
+        OFF
+  )
+  target_link_libraries(
+    itkNewerStandardClientTest
+    PUBLIC
+      ${ITKCommon-Test_LIBRARIES}
+  )
+  itk_module_target_label(itkNewerStandardClientTest)
+  itk_add_test(
+    NAME itkNewerStandardClientTest
+    COMMAND
+      itkNewerStandardClientTest
+  )
+endif()
+unset(_itk_newer_client_standard)
+unset(_itk_client_standard)
+
 add_executable(itkCMakeConfigurationTest itkCMakeConfigurationTest.cxx)
 target_link_libraries(itkCMakeConfigurationTest ${ITKCommon-Test_LIBRARIES})
 itk_module_target_label(itkCMakeConfigurationTest)
@@ -1483,6 +1554,7 @@ set(
   itkCommonExceptionsGTest.cxx
   itkCommonTypeTraitsGTest.cxx
   itkCompensatedSummationGTest.cxx
+  itkConceptCheckingGTest.cxx
   itkConicShellInteriorExteriorSpatialFunctionGTest.cxx
   itkConnectedImageNeighborhoodShapeGTest.cxx
   itkConstantBoundaryImageNeighborhoodPixelAccessPolicyGTest.cxx
@@ -1494,6 +1566,7 @@ set(
   itkDerefGTest.cxx
   itkDerivativeOperatorGTest.cxx
   itkDiffusionTensor3DGTest.cxx
+  itkDirectionAlgorithmGTest.cxx
   itkEllipsoidInteriorExteriorSpatialFunctionGTest.cxx
   itkEventObjectGTest.cxx
   itkExceptionObjectGTest.cxx
@@ -1583,6 +1656,8 @@ set(
   itkStringConvertGTest.cxx
   itkSymmetricEllipsoidInteriorExteriorSpatialFunctionGTest.cxx
   itkSymmetricSecondRankTensorGTest.cxx
+  itkTBBMultiThreaderGTest.cxx
+  itkThreadPoolGTest.cxx
   itkThreadedImageRegionPartitionerGTest.cxx
   itkThreadedIndexedContainerPartitionerGTest.cxx
   itkThreadedIteratorRangePartitionerGTest.cxx

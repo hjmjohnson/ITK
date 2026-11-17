@@ -3,18 +3,10 @@ set(
   ITKClassifiersTests
   itkBayesianClassifierImageFilterTest.cxx
   itkImageClassifierFilterTest.cxx
-  itkKmeansModelEstimatorTest.cxx
-  itkSampleClassifierFilterTest1.cxx
-  itkSampleClassifierFilterTest2.cxx
-  itkSampleClassifierFilterTest3.cxx
-  itkSampleClassifierFilterTest4.cxx
-  itkSampleClassifierFilterTest5.cxx
-  itkSampleClassifierFilterTest6.cxx
   itkSampleClassifierFilterTest7.cxx
   itkScalarImageKmeansImageFilter3DTest.cxx
   itkScalarImageKmeansImageFilterTest.cxx
   itkScalarImageKmeansImageFilterTest.cxx
-  itkSupervisedImageClassifierTest.cxx
 )
 
 createtestdriver(ITKClassifiers "${ITKClassifiers-Test_LIBRARIES}" "${ITKClassifiersTests}")
@@ -52,12 +44,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkBayesianClassifierImageFilterTestLabelMapPriors.png
 )
 itk_add_test(
-  NAME itkKmeansModelEstimatorTest
-  COMMAND
-    ITKClassifiersTestDriver
-    itkKmeansModelEstimatorTest
-)
-itk_add_test(
   NAME itkImageClassifierFilterTest
   COMMAND
     ITKClassifiersTestDriver
@@ -70,54 +56,12 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/ImageClassifierFilterTestClassifiedImage.png
 )
 itk_add_test(
-  NAME itkSampleClassifierFilterTest1
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSampleClassifierFilterTest1
-)
-itk_add_test(
-  NAME itkSampleClassifierFilterTest2
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSampleClassifierFilterTest2
-)
-itk_add_test(
-  NAME itkSampleClassifierFilterTest3
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSampleClassifierFilterTest3
-)
-itk_add_test(
-  NAME itkSampleClassifierFilterTest4
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSampleClassifierFilterTest4
-)
-itk_add_test(
-  NAME itkSampleClassifierFilterTest5
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSampleClassifierFilterTest5
-)
-itk_add_test(
-  NAME itkSampleClassifierFilterTest6
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSampleClassifierFilterTest6
-)
-itk_add_test(
   NAME itkSampleClassifierFilterTest7
   COMMAND
     ITKClassifiersTestDriver
     itkSampleClassifierFilterTest7
     DATA{${ITK_DATA_ROOT}/Input/Statistics/TwoDimensionTwoGaussian.dat}
     DATA{${ITK_DATA_ROOT}/Input/Statistics/TwoDimensionTwoGaussianTesting.dat}
-)
-itk_add_test(
-  NAME itkSupervisedImageClassifierTest
-  COMMAND
-    ITKClassifiersTestDriver
-    itkSupervisedImageClassifierTest
 )
 itk_add_test(
   NAME itkScalarImageKmeansImageFilterTest
@@ -154,6 +98,17 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/KmeansTest_T1KmeansPrelimSegmentation.nii.gz
 )
 
-set(ITKClassifiersGTests itkScalarImageKmeansImageFilterGTest.cxx)
+set(
+  ITKClassifiersGTests
+  itkKmeansModelEstimatorGTest.cxx
+  itkSampleClassifierFilterGTest1.cxx
+  itkSampleClassifierFilterGTest2.cxx
+  itkSampleClassifierFilterGTest3.cxx
+  itkSampleClassifierFilterGTest4.cxx
+  itkSampleClassifierFilterGTest5.cxx
+  itkSampleClassifierFilterGTest6.cxx
+  itkScalarImageKmeansImageFilterGTest.cxx
+  itkSupervisedImageClassifierGTest.cxx
+)
 
 creategoogletestdriver(ITKClassifiers "${ITKClassifiers-Test_LIBRARIES}" "${ITKClassifiersGTests}")

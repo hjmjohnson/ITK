@@ -1,3 +1,5 @@
+# Where each flag belongs (ITK only, every client, or one target): Documentation/AI/compiler-flags.md
+
 # trict-null-sentinel Check the set of common warning flags supported by C and C++ compilers
 # check_compiler_warning_flags(<c_flags_var> <cxx_flags_var>)
 #  <c_flags_var> - variable to store valid C warning flags
@@ -108,51 +110,6 @@ function(check_compiler_warning_flags c_warning_flags_var cxx_warning_flags_var)
   set(${cxx_warning_flags_var} "${CMAKE_CXX_WARNING_FLAGS}" PARENT_SCOPE)
 endfunction()
 
-# Check for the presence of SSE2.
-# Adapted from the AVX check and https://github.com/InsightSoftwareConsortium/ITK/blob/4cbe24cb4a45d689cadd56d554b8ccf3584a5ca6/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx#L164-L178
-function(check_sse2_flags sse2_flags_var)
-  # set flags to be used in check_cxx_source_runs below
-  set(_safe_cmake_required_flags "${CMAKE_REQUIRED_FLAGS}")
-  set(CMAKE_REQUIRED_FLAGS)
-  if(MSVC)
-    set(CMAKE_REQUIRED_FLAGS "/arch:SSE2")
-  elseif(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_REQUIRED_FLAGS "-msse2")
-  endif()
-
-  # perform test
-  include(CheckCXXSourceRuns)
-  check_cxx_source_runs(
-    "
-      #include <emmintrin.h>
-      int main()
-      {
-        //try to do some sse2 calculations
-        double d_a[]  = { 6.75, 3.42 };
-        double d_b[]  = { 2.3, 9.2 };
-        double res[2] = {0.0};
-
-        __m128d z;
-        z = _mm_mul_pd(_mm_loadu_pd(d_a),_mm_loadu_pd(d_b));
-
-        _mm_storeu_pd(res,z);
-
-        return 0;
-      }"
-    have_sse2_extensions_var
-  )
-  set(CMAKE_REQUIRED_FLAGS "${_safe_cmake_required_flags}")
-
-  # Set SSE2 Flags
-  set(${sse2_flags_var})
-  if(have_sse2_extensions_var AND MSVC)
-    set(${sse2_flags_var} "/arch:SSE2")
-  elseif(have_sse2_extensions_var AND CMAKE_COMPILER_IS_GNUCXX)
-    set(${sse2_flags_var} "-msse2")
-  endif()
-  set(${sse2_flags_var} "${${sse2_flags_var}}" PARENT_SCOPE)
-endfunction()
-
 function(
   check_compiler_optimization_flags
   c_optimization_flags_var
@@ -202,7 +159,7 @@ macro(check_compiler_platform_flags)
       # format.
       # see https://msdn.microsoft.com/en-us/library/ms173499.aspx
       if(MSVC)
-        set(ITK_REQUIRED_CXX_FLAGS "${ITK_REQUIRED_CXX_FLAGS} /bigobj")
+        string(APPEND CMAKE_CXX_FLAGS " /bigobj")
       endif()
     endif()
   endif()
@@ -287,30 +244,37 @@ macro(check_compiler_platform_flags)
         endif()
       endforeach()
     endif()
+  endif()
 
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "12")
-      set(
-        ITK_REQUIRED_CXX_FLAGS
-        "${ITK_REQUIRED_CXX_FLAGS} -fno-sized-deallocation"
+  # itkConfigure.h requires SSE2 math on 32-bit x86, where GCC and Clang default to x87.
+  # Ask the compiler: CMAKE_SYSTEM_PROCESSOR names the host (x86_64) in a -m32 build.
+  # Nothing is added when the packager's own flags already select SSE2 math.
+  if(CMAKE_SIZEOF_VOID_P EQUAL 4 AND NOT MSVC)
+    include(CheckCXXSourceCompiles)
+    check_cxx_source_compiles(
+      [=[
+#if defined(__i386__) && !defined(__SSE2_MATH__)
+#  error "x87 floating-point math"
+#endif
+int main() { return 0; }
+]=]
+      ITK_COMPILER_AVOIDS_X87_MATH
+    )
+    if(NOT ITK_COMPILER_AVOIDS_X87_MATH)
+      list(
+        APPEND
+        ITK_PUBLIC_CXX_COMPILE_OPTIONS
+        -msse2
+        -mfpmath=sse
       )
     endif()
-
-    if(CMAKE_SIZEOF_VOID_P EQUAL 4)
-      # Setting sse2 flags only make sense on 32 bit architectures
-      # on 64bit systems, sse2 support is required, and compiler support is defaulted
-      check_sse2_flags(ITK_SSE2_CFLAGS_IF_AVAILABLE)
-    endif()
-    set(
-      ITK_REQUIRED_CXX_FLAGS
-      "${ITK_REQUIRED_CXX_FLAGS} ${ITK_SSE2_CFLAGS_IF_AVAILABLE}"
-    )
   endif()
 
   # mingw thread support
   if(MINGW)
-    set(ITK_REQUIRED_CXX_FLAGS "${ITK_REQUIRED_CXX_FLAGS} -mthreads")
-    set(ITK_REQUIRED_C_FLAGS "${ITK_REQUIRED_C_FLAGS} -mthreads")
-    set(ITK_REQUIRED_LINK_FLAGS "${ITK_REQUIRED_LINK_FLAGS} -mthreads")
+    list(APPEND ITK_PUBLIC_CXX_COMPILE_OPTIONS -mthreads)
+    list(APPEND ITK_PUBLIC_LINK_OPTIONS -mthreads)
+    string(APPEND CMAKE_C_FLAGS " -mthreads")
   endif()
 
   #-----------------------------------------------------------------------------
@@ -319,12 +283,6 @@ macro(check_compiler_platform_flags)
     set(ITK_CXX_DISABLE_OPTIMIZATION_FLAG "/Od")
   elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "^(GNU|Intel)$" AND NOT MINGW)
     set(ITK_CXX_DISABLE_OPTIMIZATION_FLAG "-O0")
-  endif()
-  if(DEFINED ITK_CXX_DISABLE_OPTIMIZATION_FLAG)
-    check_cxx_source_compiles(
-      ${ITK_CXX_DISABLE_OPTIMIZATION_FLAG}
-      CXX_HAS_DISABLE_OPTIMIZATION_FLAG
-    )
   endif()
 endmacro() #End the platform check function
 
@@ -401,7 +359,23 @@ unset(CXX_OPTIMIZATION_FLAGS)
 
 #-----------------------------------------------------------------------------
 #Check the set of platform flags the compiler supports
+set(ITK_PUBLIC_CXX_COMPILE_OPTIONS "")
+set(ITK_PUBLIC_LINK_OPTIONS "")
 check_compiler_platform_flags()
+
+# itk_module_add_library() gives these to clients; ITK's own build gets them here.
+list(JOIN ITK_PUBLIC_CXX_COMPILE_OPTIONS " " _itk_public_cxx_flags)
+string(APPEND CMAKE_CXX_FLAGS " ${_itk_public_cxx_flags}")
+list(JOIN ITK_PUBLIC_LINK_OPTIONS " " _itk_public_link_flags)
+foreach(_itk_linker_flags_var EXE SHARED MODULE)
+  string(
+    APPEND
+    CMAKE_${_itk_linker_flags_var}_LINKER_FLAGS
+    " ${_itk_public_link_flags}"
+  )
+endforeach()
+unset(_itk_public_cxx_flags)
+unset(_itk_public_link_flags)
 
 # Append ITK warnings to the CMake flags.
 # We do not set them in ITK_REQUIRED FLAGS because all project which
@@ -416,6 +390,11 @@ string(
 )
 list(REMOVE_DUPLICATES CMAKE_C_FLAGS)
 string(REPLACE ";" " " CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+
+# MSVC reports __cplusplus as 199711L unless asked to match /std:.
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  string(APPEND CMAKE_CXX_FLAGS " /Zc:__cplusplus")
+endif()
 
 string(
   REPLACE

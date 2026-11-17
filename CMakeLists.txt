@@ -376,6 +376,22 @@ endif()
 include(ITKSetStandardCompilerFlags)
 #---------------------------------------------------------------
 
+foreach(_itk_required_flags_var C CXX LINK)
+  string(
+    STRIP
+    "${ITK_REQUIRED_${_itk_required_flags_var}_FLAGS}"
+    _itk_required_flags
+  )
+  if(NOT _itk_required_flags STREQUAL "")
+    message(
+      AUTHOR_WARNING
+      "ITK_REQUIRED_${_itk_required_flags_var}_FLAGS is not empty (\"${_itk_required_flags}\"); "
+      "it is exported to every client through UseITK.cmake."
+    )
+  endif()
+endforeach()
+unset(_itk_required_flags)
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ITK_REQUIRED_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ITK_REQUIRED_CXX_FLAGS}")
 set(
@@ -623,7 +639,7 @@ endif()
 #
 option(
   ITK_USE_MKL
-  "Use system Intel Math Kernel Library (MKL) for FFT computation."
+  "Use the FFTW interface of the system Intel oneAPI Math Kernel Library (oneMKL) for FFT computation."
   OFF
 )
 mark_as_advanced(ITK_USE_MKL)
@@ -772,6 +788,10 @@ set(
 unset(EIGHTY_PERCENT_AVAILABLE_MEMORY_IN_GB)
 unset(ITK_COMPUTER_MEMORY_AVAILABLE_MB)
 mark_as_advanced(ITK_COMPUTER_MEMORY_SIZE)
+# A 32-bit process cannot allocate 4 GiB or more, whatever the host's RAM.
+if(CMAKE_SIZEOF_VOID_P EQUAL 4 AND ITK_COMPUTER_MEMORY_SIZE GREATER 3)
+  set(ITK_COMPUTER_MEMORY_SIZE 3)
+endif()
 
 #This flag sets the floating point type used in itk::ImageBase for
 # spacing/direction/origin to single precision
@@ -835,6 +855,8 @@ set(
 set(ITK_MODULES_DIR \"${ITK_MODULES_DIR}\")"
 )
 
+# Backslashes in a user-supplied Python3_EXECUTABLE are invalid escapes in the generated file.
+file(TO_CMAKE_PATH "${Python3_EXECUTABLE}" ITK_CONFIG_PYTHON3_EXECUTABLE)
 set(ITK_CONFIG_TARGETS_CONDITION " AND NOT ITK_BINARY_DIR")
 set(ITK_CONFIG_TARGETS_FILE "${ITK_BINARY_DIR}/ITKTargets.cmake")
 set(ITK_CONFIG_MODULE_API_FILE "${ITK_SOURCE_DIR}/CMake/ITKModuleAPI.cmake")

@@ -43,7 +43,7 @@ public:
 
   /** Standard class type alias. */
   using Self = RieszFrequencyFunction;
-  using Superclass = SpatialFunction<TFunctionValue, VImageDimension, TInput>;
+  using Superclass = FrequencyFunction<TFunctionValue, VImageDimension, TInput>;
   using Pointer = SmartPointer<Self>;
   using ConstPointer = SmartPointer<const Self>;
 
@@ -197,9 +197,7 @@ public:
    * Calculated when SetOrder */
   itkGetConstReferenceMacro(Indices, SetType);
 
-#ifdef ITK_USE_CONCEPT_CHECKING
   itkConceptMacro(OutputTypeIsComplexCheck, (Concept::IsFloatingPoint<typename TFunctionValue::value_type>));
-#endif
 
 protected:
   RieszFrequencyFunction();

@@ -9,9 +9,6 @@ set(
 # enough to distinguish available features of the toolkit.
 set(ITK_VERSION_STRING "${ITK_VERSION_MAJOR}.${ITK_VERSION_MINOR}")
 
-include(TestBigEndian)
-test_big_endian(CMAKE_WORDS_BIGENDIAN)
-
 include(FindThreads)
 set(ITK_USE_WIN32_THREADS 0)
 set(ITK_USE_PTHREADS 0)
@@ -55,38 +52,37 @@ check_cpp_directive_exists(__FUNCTION__ ITK_CPP_FUNCTION)
 
 include(CheckIncludeFiles)
 
-# check if the platform has the header file "fenv.h" which has been added as part of the C99 standard
-check_include_files(
-  fenv.h
-  HAVE_FENV_H
-)
 # check if the platform has some widely used header files
 check_include_files(
   "unistd.h"
   HAVE_UNISTD_H
 )
 
-if(CMAKE_CXX_STANDARD)
-  set(TRY_COMP_CXX_STANDARD -DCMAKE_CXX_STANDARD:STRING=${CMAKE_CXX_STANDARD})
-endif()
-# Identify the version of CXX compiler used when ITK was built. This needs to be
-# identified so that external applications can identify how ITK was built.
-set(ITK_COMPILED_CXX_STANDARD_VERSION 1)
-foreach(CXX_TEST_VERSION 201103L 201402L 201703L)
-  try_compile(
-    ITK_MIN_CXX_LEVEL_TEST
-    ${CMAKE_CURRENT_BINARY_DIR}/CMakeTmp
-    ${CMAKE_CURRENT_LIST_DIR}/CMake/itkGetCXXCompilerVersion.cxx
-    CMAKE_FLAGS
-      ${TRY_COMP_CXX_STANDARD}
-    COMPILE_DEFINITIONS
-      -DITK_CXX_TEST_VERSION=${CXX_TEST_VERSION}
-    OUTPUT_VARIABLE ITK_COMPILED_CXX_STANDARD_VERSION_LOG
+# ITK's minimum standard, and the oldest one a project using ITK may compile with.
+set(ITK_COMPILED_CXX_STANDARD_VERSION 201703L)
+
+# Unsupported, testing-only opt-ins to header code kept for a future minimum C++ standard.
+foreach(_itk_alpha_standard 20 23 26)
+  option(
+    ITK_ALPHA_FEATURE_CXX${_itk_alpha_standard}
+    "Unsupported: use the C++${_itk_alpha_standard} forms kept in ITK headers."
+    OFF
   )
-  if(ITK_MIN_CXX_LEVEL_TEST)
-    set(ITK_COMPILED_CXX_STANDARD_VERSION ${CXX_TEST_VERSION})
+  mark_as_advanced(ITK_ALPHA_FEATURE_CXX${_itk_alpha_standard})
+  if(
+    ITK_ALPHA_FEATURE_CXX${_itk_alpha_standard}
+    AND
+      CMAKE_CXX_STANDARD
+        LESS
+        _itk_alpha_standard
+  )
+    message(
+      FATAL_ERROR
+      "ITK_ALPHA_FEATURE_CXX${_itk_alpha_standard} requires CMAKE_CXX_STANDARD ${_itk_alpha_standard} or newer."
+    )
   endif()
 endforeach()
+unset(_itk_alpha_standard)
 
 try_compile(
   ITK_HAS_GNU_ATTRIBUTE_ALIGNED
@@ -114,18 +110,6 @@ try_compile(
   ITK_HAS_FEENABLEEXCEPT
   ${ITK_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/CMake/itkCheckHasFeenableexcept.cxx
-)
-
-try_compile(
-  ITK_HAS_FEGETENV
-  ${ITK_BINARY_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/CMake/itkCheckHasFegetenv.cxx
-)
-
-try_compile(
-  ITK_HAS_FESETENV
-  ${ITK_BINARY_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/CMake/itkCheckHasFesetenv.cxx
 )
 
 try_compile(

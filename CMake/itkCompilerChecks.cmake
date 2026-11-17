@@ -24,7 +24,7 @@ if(
   message(FATAL_ERROR "LLVM Clang 5 or later is required.")
 endif()
 
-# Minimum compiler version check: Apple Clang >= 10.0.0 (Xcode 10.0)
+# Minimum compiler version check: Apple Clang >= 12.0.0 (Xcode 12.4)
 if(
   CMAKE_CXX_COMPILER_ID
     STREQUAL
@@ -32,9 +32,9 @@ if(
   AND
     CMAKE_CXX_COMPILER_VERSION
       VERSION_LESS
-      10.0.0
+      12.0.0.12000032
 )
-  message(FATAL_ERROR "Apple Clang 10.0.0 or later is required.")
+  message(FATAL_ERROR "Apple Clang 12.0.0 (Xcode 12.4) or later is required.")
 endif()
 
 # Minimum compiler version check: Microsoft C/C++
@@ -45,11 +45,11 @@ if(
   AND
     CMAKE_CXX_COMPILER_VERSION
       VERSION_LESS
-      19.20
+      19.22
 )
   message(
     FATAL_ERROR
-    "Microsoft Visual Studio 2019 16.0 (MSVC 19.20) or later is required."
+    "Microsoft Visual Studio 2019 16.2 (MSVC 19.22) or later is required."
   )
 endif()
 
