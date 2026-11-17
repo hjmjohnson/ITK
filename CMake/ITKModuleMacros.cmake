@@ -477,13 +477,16 @@ endif()
   itk_module_target_export(${itk-module}Module)
   itk_module_target_install(${itk-module}Module)
   # Source-less modules still export their interface library to ITKTargets.
-  set_property(
-    GLOBAL
-    APPEND
-    PROPERTY
-      ITKTargets_MODULES
-        ${itk-module}
-  )
+  get_property(_itk_targets_modules GLOBAL PROPERTY ITKTargets_MODULES)
+  if(NOT "${itk-module}" IN_LIST _itk_targets_modules)
+    set_property(
+      GLOBAL
+      APPEND
+      PROPERTY
+        ITKTargets_MODULES
+          ${itk-module}
+    )
+  endif()
   ####
   # End ITK Modules interface library creation
   ####
@@ -685,8 +688,6 @@ macro(itk_module_warnings_disable)
         "${CMAKE_${lang}_FLAGS}"
       )
       set(CMAKE_${lang}_FLAGS "${CMAKE_${lang}_FLAGS} /W0")
-    elseif(BORLAND)
-      set(CMAKE_${lang}_FLAGS "${CMAKE_${lang}_FLAGS} -w-")
     else()
       set(CMAKE_${lang}_FLAGS "${CMAKE_${lang}_FLAGS} -w")
     endif()
@@ -918,6 +919,14 @@ macro(itk_module_add_library _name)
     ${ARGN}
   )
   target_compile_features(${_name} PUBLIC cxx_std_${CMAKE_CXX_STANDARD})
+  if(ITK_PUBLIC_CXX_COMPILE_OPTIONS)
+    target_compile_options(
+      ${_name}
+      PUBLIC
+        "$<$<COMPILE_LANGUAGE:C,CXX>:${ITK_PUBLIC_CXX_COMPILE_OPTIONS}>"
+    )
+  endif()
+  target_link_options(${_name} PUBLIC ${ITK_PUBLIC_LINK_OPTIONS})
 
   # Add module include directories to target
   target_include_directories(

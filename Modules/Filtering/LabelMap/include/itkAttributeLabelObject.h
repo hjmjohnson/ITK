@@ -59,7 +59,7 @@ public:
  * The attribute is then accessible with the GetAttribute() and SetAttribute
  * methods or through the accessor itk::Functor::AttributeLabelObjectAccessor.
  *
- * \author Gaetan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
+ * \author Gaëtan Lehmann. Biologie du Developpement et de la Reproduction, INRA de Jouy-en-Josas, France.
  *
  * This implementation was taken from the Insight Journal paper:
  * https://doi.org/10.54294/q6auw4
@@ -79,7 +79,7 @@ public:
   using Self = AttributeLabelObject;
   using Superclass = LabelObject<TLabel, VImageDimension>;
   using Pointer = SmartPointer<Self>;
-  using LabelObjectType = typename Superclass::LabelObjectType;
+  using typename Superclass::LabelObjectType;
   using ConstPointer = SmartPointer<const Self>;
   using ConstWeakPointer = WeakPointer<const Self>;
 

@@ -232,9 +232,27 @@ if(ITK_WRAP_unsigned_char AND WRAP_2)
           "xarray not imported"
     )
     itk_python_add_test(
+      NAME PythonOptionalImportFailureTest
+      COMMAND
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_optional_import_failure.py
+    )
+    itk_python_add_test(
       NAME PythonImreadSingleFileListTest
       COMMAND
         ${CMAKE_CURRENT_SOURCE_DIR}/test_imread_single_file_list.py
+    )
+    # test_imread_unknown_component_type.py builds itk.Image[itk.F, 2]
+    if(ITK_WRAP_float)
+      itk_python_add_test(
+        NAME PythonImreadUnknownComponentTypeTest
+        COMMAND
+          ${CMAKE_CURRENT_SOURCE_DIR}/test_imread_unknown_component_type.py
+      )
+    endif()
+    itk_python_add_test(
+      NAME PythonTemplateTypeErrorTest
+      COMMAND
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_template_type_error.py
     )
   endif()
 endif()
@@ -287,20 +305,21 @@ itk_python_add_test(
     5
 )
 
-# Test GIL release during ITK operations
-itk_python_add_test(
-  NAME PythonGILReleaseTest
-  COMMAND
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_gil_release.py
-)
+if(ITK_WRAP_float)
+  if(ITK_PYTHON_RELEASE_GIL)
+    itk_python_add_test(
+      NAME PythonGILReleaseTest
+      COMMAND
+        ${CMAKE_CURRENT_SOURCE_DIR}/test_gil_release.py
+    )
+  endif()
 
-# Comprehensive GIL release safety tests: callbacks, exceptions,
-# concurrency, deadlock, signals, stress
-itk_python_add_test(
-  NAME PythonGILReleaseSafetyTest
-  COMMAND
-    ${CMAKE_CURRENT_SOURCE_DIR}/test_gil_release_safety.py
-)
+  itk_python_add_test(
+    NAME PythonGILReleaseSafetyTest
+    COMMAND
+      ${CMAKE_CURRENT_SOURCE_DIR}/test_gil_release_safety.py
+  )
+endif()
 
 itk_python_add_test(
   NAME CTypeTest

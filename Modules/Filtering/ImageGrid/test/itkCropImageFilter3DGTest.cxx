@@ -1,0 +1,90 @@
+/*=========================================================================
+ *
+ *  Copyright NumFOCUS
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ *=========================================================================*/
+
+#include "itkCropImageFilter.h"
+#include "itkImageBufferRange.h"
+#include "itkGTest.h"
+
+#include <iostream>
+#include <numeric> // For iota.
+
+TEST(CropImageFilter, ConvertedLegacyTest3D)
+{
+
+  // Define the dimension of the images
+  constexpr unsigned int ImageDimension{ 3 };
+
+  // Declare the pixel types of the images
+  using PixelType = unsigned short;
+
+  // Declare the types of the images
+  using ImageType = itk::Image<PixelType, ImageDimension>;
+
+  ImageType::RegionType                     region;
+  constexpr unsigned int                    dimSize(8);
+  constexpr ImageType::RegionType::SizeType size{ dimSize, dimSize, dimSize };
+  region = { size };
+
+  auto image = ImageType::New();
+
+  image->SetRegions(region);
+  image->Allocate();
+
+  const itk::ImageBufferRange<ImageType> imageBufferRange(*image);
+  std::iota(imageBufferRange.begin(), imageBufferRange.end(), PixelType{});
+
+  const itk::CropImageFilter<ImageType, ImageType>::Pointer cropFilter =
+    itk::CropImageFilter<ImageType, ImageType>::New();
+
+  ITK_GTEST_EXERCISE_BASIC_OBJECT_METHODS(cropFilter, CropImageFilter, ExtractImageFilter);
+
+  cropFilter->SetInput(image);
+
+  // Set the filter properties
+  constexpr ImageType::SizeType extractSize{ 1, 1, 1 };
+
+  cropFilter->SetBoundaryCropSize(extractSize);
+
+  cropFilter->SetUpperBoundaryCropSize(extractSize);
+  EXPECT_EQ(extractSize, cropFilter->GetUpperBoundaryCropSize());
+
+  cropFilter->SetLowerBoundaryCropSize(extractSize);
+  EXPECT_EQ(extractSize, cropFilter->GetLowerBoundaryCropSize());
+
+  ASSERT_NO_THROW(cropFilter->Update());
+
+  const ImageType::Pointer croppedImage = cropFilter->GetOutput();
+
+  // check size of cropped image
+  ImageType::RegionType::SizeType croppedSize = croppedImage->GetLargestPossibleRegion().GetSize();
+  for (unsigned int i = 0; i < ImageType::RegionType::SizeType::GetSizeDimension(); ++i)
+  {
+    EXPECT_EQ(croppedSize[i], dimSize - 2) << "Unexpected cropped Image size[" << i << "]";
+  }
+  ImageType::RegionType                      subRegion;
+  constexpr ImageType::RegionType::SizeType  subSize{ dimSize - 2, dimSize - 2, dimSize - 2 };
+  constexpr ImageType::RegionType::IndexType subIndex{ 1, 1, 1 };
+  subRegion = { subIndex, subSize };
+
+  itk::ImageRegionIterator<ImageType> it1(image, subRegion);
+  itk::ImageRegionIterator<ImageType> it2(croppedImage, croppedImage->GetLargestPossibleRegion());
+  for (; !it1.IsAtEnd() && !it2.IsAtEnd(); ++it1, ++it2)
+  {
+    EXPECT_EQ(it1.Get(), it2.Get());
+  }
+}

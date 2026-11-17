@@ -99,6 +99,7 @@ BSplineSyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, T
 
   while (this->m_CurrentIteration++ < this->m_NumberOfIterationsPerLevel[this->m_CurrentLevel] && !this->m_IsConverged)
   {
+    this->ClearResampleCache();
     auto fixedComposite = CompositeTransformType::New();
     if (fixedInitialTransform != nullptr)
     {
@@ -141,6 +142,8 @@ BSplineSyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, T
                                this->m_FixedImageMasks,
                                fixedMetricValue);
 
+    this->ClearResampleCache();
+
     if (this->m_AverageMidPointGradients)
     {
       for (ImageRegionIteratorWithIndex ItF(fixedToMiddleSmoothUpdateField,
@@ -158,8 +161,8 @@ BSplineSyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, T
     using ComposerType = ComposeDisplacementFieldsImageFilter<DisplacementFieldType>;
 
     auto fixedComposer = ComposerType::New();
-    fixedComposer->SetDisplacementField(fixedToMiddleSmoothUpdateField);
-    fixedComposer->SetWarpingField(this->m_FixedToMiddleTransform->GetDisplacementField());
+    fixedComposer->SetDisplacementField(this->MakeGraft(fixedToMiddleSmoothUpdateField));
+    fixedComposer->SetWarpingField(this->MakeGraft(this->m_FixedToMiddleTransform->GetDisplacementField()));
     fixedComposer->Update();
 
     const DisplacementFieldPointer fixedToMiddleSmoothTotalFieldTmp =
@@ -169,8 +172,8 @@ BSplineSyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTransform, T
                                            nullptr);
 
     auto movingComposer = ComposerType::New();
-    movingComposer->SetDisplacementField(movingToMiddleSmoothUpdateField);
-    movingComposer->SetWarpingField(this->m_MovingToMiddleTransform->GetDisplacementField());
+    movingComposer->SetDisplacementField(this->MakeGraft(movingToMiddleSmoothUpdateField));
+    movingComposer->SetWarpingField(this->MakeGraft(this->m_MovingToMiddleTransform->GetDisplacementField()));
     movingComposer->Update();
 
     const DisplacementFieldPointer movingToMiddleSmoothTotalFieldTmp =
@@ -333,11 +336,10 @@ typename BSplineSyNImageRegistrationMethod<TFixedImage, TMovingImage, TOutputTra
         ResampleImageFilter<MaskImageType, WeightedMaskImageType, typename TOutputTransform::ScalarType>;
       auto fixedMaskResampler = MaskResamplerType::New();
       fixedMaskResampler->SetTransform(fixedTransform);
-      fixedMaskResampler->SetInput(
+      fixedMaskResampler->SetInput(this->MakeGraft(
         dynamic_cast<ImageMaskSpatialObjectType *>(const_cast<FixedImageMaskType *>(fixedImageMasks[0].GetPointer()))
-          ->GetImage());
-      fixedMaskResampler->UseReferenceImageOn();
-      fixedMaskResampler->SetReferenceImage(virtualDomainImage);
+          ->GetImage()));
+      fixedMaskResampler->SetOutputParametersFromImage(virtualDomainImage);
       fixedMaskResampler->SetSize(virtualDomainImage->GetBufferedRegion().GetSize());
       fixedMaskResampler->SetDefaultPixelValue(0);
       weightedMask = fixedMaskResampler->GetOutput();

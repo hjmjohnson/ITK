@@ -32,7 +32,7 @@ namespace itk
  * by Beare R., Lehmann G
  * https://doi.org/10.54294/igq8fn
  *
- * \author Gaetan Lehmann
+ * \author Gaëtan Lehmann
  * \ingroup ITKSmoothing
  */
 
@@ -69,7 +69,7 @@ public:
   static constexpr unsigned int OutputImageDimension = TOutputImage::ImageDimension;
   static constexpr unsigned int InputImageDimension = TInputImage::ImageDimension;
 
-  itkConceptMacro(SameDimension, (Concept::SameDimension<Self::InputImageDimension, Self::OutputImageDimension>));
+  static_assert(InputImageDimension == OutputImageDimension);
 
 protected:
   BoxSigmaImageFilter();

@@ -38,6 +38,7 @@
 #include <cstring>
 #include <algorithm>
 #include <atomic>
+#include <string_view>
 
 namespace
 {
@@ -116,7 +117,7 @@ SplitPathList(const std::string & paths, char separator)
 }
 
 std::list<std::string>
-GetAutoloadPathFromEnvironment()
+GetAutoloadPathsFromEnvironment()
 {
   std::string path;
   if (!itksys::SystemTools::GetEnv("ITK_AUTOLOAD_PATH", path))
@@ -166,7 +167,7 @@ public:
   FactoryListType        m_InternalFactories{};
   std::atomic<bool>      m_Initialized{ false };
   bool                   m_StrictVersionChecking{ false };
-  std::list<std::string> m_AutoloadPath{ GetAutoloadPathFromEnvironment() };
+  std::list<std::string> m_AutoloadPaths{ GetAutoloadPathsFromEnvironment() };
 };
 
 auto
@@ -227,17 +228,17 @@ ObjectFactoryBase::GetStrictVersionChecking()
 }
 
 void
-ObjectFactoryBase::SetAutoloadPath(const std::list<std::string> & paths)
+ObjectFactoryBase::SetAutoloadPaths(const std::list<std::string> & paths)
 {
   itkInitGlobalsMacro(PimplGlobals);
-  m_PimplGlobals->m_AutoloadPath = paths;
+  m_PimplGlobals->m_AutoloadPaths = paths;
 }
 
 std::list<std::string>
-ObjectFactoryBase::GetAutoloadPath()
+ObjectFactoryBase::GetAutoloadPaths()
 {
   itkInitGlobalsMacro(PimplGlobals);
-  return m_PimplGlobals->m_AutoloadPath;
+  return m_PimplGlobals->m_AutoloadPaths;
 }
 
 /**
@@ -299,14 +300,14 @@ ObjectFactoryBase::Initialize()
 }
 
 /**
- * Load all libraries in the autoload path (see SetAutoloadPath())
+ * Load all libraries in the autoload paths (see SetAutoloadPaths())
  */
 void
 ObjectFactoryBase::LoadDynamicFactories()
 {
 #ifdef ITK_DYNAMIC_LOADING
   itkInitGlobalsMacro(PimplGlobals);
-  for (const std::string & path : m_PimplGlobals->m_AutoloadPath)
+  for (const std::string & path : m_PimplGlobals->m_AutoloadPaths)
   {
     ObjectFactoryBase::LoadLibrariesInPath(path.c_str());
   }
@@ -349,38 +350,6 @@ CreateFullPath(const char * path, const char * file)
 using AutoloadFunctionType = ObjectFactoryBase * (*)();
 
 /**
- * A file scoped function to determine if a file has
- * the shared library extension in its name, this converts name to lower
- * case before the compare, DynamicLoader always uses
- * lower case for LibExtension values.
- */
-inline bool
-NameIsSharedLibrary([[maybe_unused]] const char * name)
-{
-#ifdef ITK_DYNAMIC_LOADING
-  std::string extension = itksys::DynamicLoader::LibExtension();
-
-  const std::string sname = name;
-  if (sname.rfind(extension) == sname.size() - extension.size())
-  {
-    return true;
-  }
-#  ifdef __APPLE__
-  // Need to also check libraries with a .dylib extension.
-  extension = ".dylib";
-#  endif
-  const size_t extensionpos = sname.rfind(extension);
-  if ((extensionpos != std::string::npos) && (extensionpos == (sname.size() - extension.size())))
-  {
-    return true;
-  }
-#else // ITK_DYNAMIC_LOADING
-  itkGenericExceptionMacro("ITK was not built with support for dynamic loading.");
-#endif
-  return false;
-}
-
-/**
  *
  */
 void
@@ -394,6 +363,27 @@ ObjectFactoryBase::LoadLibrariesInPath(const char * path)
   }
 #ifdef ITK_DYNAMIC_LOADING
 
+  // Equivalent to C++20 `std::string_view::ends_with` (while remaining compatible with C++17).
+  static constexpr auto endsWith = [](const std::string_view fileName, const std::string_view extension) {
+    return fileName.size() >= extension.size() && fileName.substr(fileName.size() - extension.size()) == extension;
+  };
+
+  // Determines if a file has the shared library extension in its name.
+  constexpr auto hasSharedLibraryFileNameExtension = [](const std::string_view fileName) {
+    if (endsWith(fileName, itksys::DynamicLoader::LibExtension()))
+    {
+      return true;
+    }
+#  ifdef __APPLE__
+    // Need to also check libraries with a .dylib extension.
+    if (endsWith(fileName, ".dylib"))
+    {
+      return true;
+    }
+#  endif
+    return false;
+  };
+
   /**
    * Attempt to load each file in the directory as a shared library
    */
@@ -404,7 +394,7 @@ ObjectFactoryBase::LoadLibrariesInPath(const char * path)
      * try to make sure the file has at least the extension
      * for a shared library in it.
      */
-    if (NameIsSharedLibrary(file))
+    if (hasSharedLibraryFileNameExtension(file))
     {
       const std::string fullpath = CreateFullPath(path, file);
       LibHandle         lib = DynamicLoader::OpenLibrary(fullpath.c_str());

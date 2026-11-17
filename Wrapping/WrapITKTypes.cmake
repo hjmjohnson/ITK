@@ -82,6 +82,16 @@ endforeach()
 end_wrap_type()
 set(itk_Wrap_Vector ${WRAPPER_TEMPLATES})
 
+wrap_type("itk::DisplacementFieldTransform" "DFT")
+foreach(d ${ITK_WRAP_IMAGE_DIMS})
+  add_template("${ITKM_D}${d}" "${ITKT_D},${d}")
+  if(ITK_WRAP_vector_float)
+    add_template("${ITKM_F}${d}" "${ITKT_F},${d}")
+  endif()
+endforeach()
+end_wrap_type()
+set(itk_Wrap_DisplacementFieldTransform ${WRAPPER_TEMPLATES})
+
 wrap_type("itk::CovariantVector" "CV" "itkCovariantVector.h")
 foreach(vector_dim ${ITK_WRAP_VECTOR_COMPONENTS_INCREMENTED})
   add_template("${ITKM_F}${vector_dim}" "${ITKT_F},${vector_dim}")
@@ -154,13 +164,19 @@ foreach(d ${array_sizes})
 endforeach()
 
 # Wrap FixedArray for BSplineInterpolationWeightFunction:
+# components = (SplineOrder + 1)^SpaceDimension
+set(bspline_weight_sizes)
 foreach(d ${ITK_WRAP_IMAGE_DIMS})
-  # Wrapping for spline order 3, components = (SplineOrder + 1)^SpaceDimension
-  set(comp 1)
-  foreach(i RANGE 1 ${d})
-    math(EXPR comp "${comp}*4")
+  foreach(order RANGE 1 3)
+    set(comp 1)
+    foreach(i RANGE 1 ${d})
+      math(EXPR comp "${comp}*(${order}+1)")
+    endforeach()
+    list(APPEND bspline_weight_sizes ${comp})
   endforeach()
-
+endforeach()
+list(REMOVE_DUPLICATES bspline_weight_sizes)
+foreach(comp ${bspline_weight_sizes})
   # Check if computed comp dimension has already wrapped above
   list(FIND array_sizes ${comp} array_sizes_index)
 

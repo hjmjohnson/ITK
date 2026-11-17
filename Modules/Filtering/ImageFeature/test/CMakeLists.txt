@@ -1,21 +1,15 @@
 itk_module_test()
 set(
   ITKImageFeatureTests
-  itkBilateralImageFilterTest.cxx
   itkBilateralImageFilterTest2.cxx
   itkBilateralImageFilterTest3.cxx
   itkCannyEdgeDetectionImageFilterTest.cxx
   itkCannyEdgeDetectionImageFilterTest2.cxx
   itkDerivativeImageFilterTest.cxx
-  itkDiscreteGaussianDerivativeImageFilterScaleSpaceTest.cxx
   itkDiscreteGaussianDerivativeImageFilterTest.cxx
-  itkGradientVectorFlowImageFilterTest.cxx
   itkHessian3DToVesselnessMeasureImageFilterTest.cxx
-  itkHessianRecursiveGaussianFilterScaleSpaceTest.cxx
   itkHessianRecursiveGaussianFilterTest.cxx
   itkHessianToObjectnessMeasureImageFilterTest.cxx
-  itkHoughTransform2DCirclesImageTest.cxx
-  itkHoughTransform2DLinesImageTest.cxx
   itkLaplacianImageFilterTest.cxx
   itkLaplacianRecursiveGaussianImageFilterTest.cxx
   itkLaplacianSharpeningImageFilterTest.cxx
@@ -24,9 +18,7 @@ set(
   itkSimpleContourExtractorImageFilterTest.cxx
   itkSobelEdgeDetectionImageFilterTest.cxx
   itkUnsharpMaskImageFilterTest.cxx
-  itkUnsharpMaskImageFilterTestSimple.cxx
   itkZeroCrossingBasedEdgeDetectionImageFilterTest.cxx
-  itkZeroCrossingImageFilterTest.cxx
 )
 
 createtestdriver(ITKImageFeature "${ITKImageFeature-Test_LIBRARIES}" "${ITKImageFeatureTests}")
@@ -83,12 +75,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkSobelEdgeDetectionImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkSobelEdgeDetectionImageFilterTest.png
-)
-itk_add_test(
-  NAME itkUnsharpMaskImageFilterTestSimple
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkUnsharpMaskImageFilterTestSimple
 )
 itk_add_test(
   NAME itkUnsharpMaskImageFilterTest_DefaultsUChar
@@ -184,12 +170,6 @@ itk_add_test(
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${TEMP}/itkHessianToObjectnessMeasureImageFilterTestOutput2.mha
 )
-itk_add_test(
-  NAME itkHessianRecursiveGaussianFilterScaleSpaceTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkHessianRecursiveGaussianFilterScaleSpaceTest
-)
 
 itk_add_test(
   NAME itkHessianRecursiveGaussianFilterTest
@@ -211,18 +191,6 @@ set_tests_properties(
 )
 
 itk_add_test(
-  NAME itkHoughTransform2DCirclesImageTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkHoughTransform2DCirclesImageTest
-)
-itk_add_test(
-  NAME itkHoughTransform2DLinesImageTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkHoughTransform2DLinesImageTest
-)
-itk_add_test(
   NAME itkCannyEdgeDetectionImageFilterTest
   COMMAND
     ITKImageFeatureTestDriver
@@ -234,12 +202,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkCannyEdgeDetectionImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkCannyEdgeDetectionImageFilterTest.png
-)
-itk_add_test(
-  NAME itkBilateralImageFilterTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkBilateralImageFilterTest
 )
 itk_add_test(
   NAME itkBilateralImageFilterTest2
@@ -268,12 +230,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/BilateralImageFilterTest3.png
 )
 itk_add_test(
-  NAME itkGradientVectorFlowImageFilterTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkGradientVectorFlowImageFilterTest
-)
-itk_add_test(
   NAME itkSimpleContourExtractorImageFilterTest
   COMMAND
     ITKImageFeatureTestDriver
@@ -285,12 +241,6 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/SimpleContourExtractorImageFilterTest.png
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/SimpleContourExtractorImageFilterTest.png
-)
-itk_add_test(
-  NAME itkZeroCrossingImageFilterTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkZeroCrossingImageFilterTest
 )
 itk_add_test(
   NAME itkCannyEdgeDetectionImageFilterTest2
@@ -449,12 +399,6 @@ itk_add_test(
     DATA{Input/HeadMRVolumeMaskImage.mha}
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkMaskFeaturePointSelectionFilterTestMask.mha
-)
-itk_add_test(
-  NAME itkDiscreteGaussianDerivativeImageFilterScaleSpaceTest
-  COMMAND
-    ITKImageFeatureTestDriver
-    itkDiscreteGaussianDerivativeImageFilterScaleSpaceTest
 )
 itk_add_test(
   NAME itkDiscreteGaussianDerivativeImageFilterTest01
@@ -623,6 +567,17 @@ itk_add_test(
     ${ITK_TEST_OUTPUT_DIR}/itkMultiScaleHessianBasedMeasureImageFilterTestEnhancedOutput2.mha
 )
 
-set(ITKImageFeatureGTests itkSobelEdgeDetectionImageFilterGTest.cxx)
+set(
+  ITKImageFeatureGTests
+  itkBilateralImageFilterGTest.cxx
+  itkDiscreteGaussianDerivativeImageFilterScaleSpaceGTest.cxx
+  itkGradientVectorFlowImageFilterGTest.cxx
+  itkHessianRecursiveGaussianFilterScaleSpaceGTest.cxx
+  itkHoughTransform2DCirclesImageGTest.cxx
+  itkHoughTransform2DLinesImageGTest.cxx
+  itkSobelEdgeDetectionImageFilterGTest.cxx
+  itkUnsharpMaskImageFilterGTestSimple.cxx
+  itkZeroCrossingImageFilterGTest.cxx
+)
 
 creategoogletestdriver(ITKImageFeature "${ITKImageFeature-Test_LIBRARIES}" "${ITKImageFeatureGTests}")

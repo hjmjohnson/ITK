@@ -9,13 +9,8 @@ set(
   itkFFTDiscreteGaussianImageFilterTest.cxx
   itkMeanImageFilterTest.cxx
   itkMedianImageFilterTest.cxx
-  itkRecursiveGaussianImageFilterOnTensorsTest.cxx
-  itkRecursiveGaussianImageFilterOnVectorImageTest.cxx
-  itkRecursiveGaussianImageFilterTest.cxx
-  itkRecursiveGaussianScaleSpaceTest1.cxx
   itkSmoothingRecursiveGaussianImageFilterOnImageAdaptorTest.cxx
   itkSmoothingRecursiveGaussianImageFilterOnImageOfVectorTest.cxx
-  itkSmoothingRecursiveGaussianImageFilterOnVectorImageTest.cxx
   itkSmoothingRecursiveGaussianImageFilterTest.cxx
 )
 
@@ -106,12 +101,6 @@ itk_add_test(
     2.5
   ITK_REMOVE_TEMPORARY_TEST_FILES
     ${ITK_TEST_OUTPUT_DIR}/itkSmoothingRecursiveGaussianImageFilterTestNormalizeScalesOn.png
-)
-itk_add_test(
-  NAME itkSmoothingRecursiveGaussianImageFilterOnVectorImageTest
-  COMMAND
-    ITKSmoothingTestDriver
-    itkSmoothingRecursiveGaussianImageFilterOnVectorImageTest
 )
 itk_add_test(
   NAME itkSmoothingRecursiveGaussianImageFilterOnImageOfVectorTest
@@ -369,35 +358,16 @@ itk_add_test(
     ITKSmoothingTestDriver
     itkMedianImageFilterTest
 )
-itk_add_test(
-  NAME itkRecursiveGaussianImageFilterOnTensorsTest
-  COMMAND
-    ITKSmoothingTestDriver
-    itkRecursiveGaussianImageFilterOnTensorsTest
-)
-itk_add_test(
-  NAME itkRecursiveGaussianImageFilterOnVectorImageTest
-  COMMAND
-    ITKSmoothingTestDriver
-    itkRecursiveGaussianImageFilterOnVectorImageTest
-)
-itk_add_test(
-  NAME itkRecursiveGaussianImageFilterTest
-  COMMAND
-    ITKSmoothingTestDriver
-    itkRecursiveGaussianImageFilterTest
-)
-itk_add_test(
-  NAME itkRecursiveGaussianScaleSpaceTest1
-  COMMAND
-    ITKSmoothingTestDriver
-    itkRecursiveGaussianScaleSpaceTest1
-)
 
 set(
   ITKSmoothingGTests
   itkBoxSigmaImageFilterGTest.cxx
   itkMeanImageFilterGTest.cxx
   itkMedianImageFilterGTest.cxx
+  itkRecursiveGaussianImageFilterGTest.cxx
+  itkRecursiveGaussianImageFilterOnTensorsGTest.cxx
+  itkRecursiveGaussianImageFilterOnVectorImageGTest.cxx
+  itkRecursiveGaussianScaleSpaceGTest1.cxx
+  itkSmoothingRecursiveGaussianImageFilterOnVectorImageGTest.cxx
 )
 creategoogletestdriver(ITKSmoothing "${ITKSmoothing-Test_LIBRARIES}" "${ITKSmoothingGTests}")

@@ -64,7 +64,7 @@ namespace itk
  * Techreport: Cornell Computing and Information Science, 2004.
  *
  * This filter is threaded. Threading mechanism derived from
- * SignedMaurerDistanceMap extensions by Gaetan Lehman
+ * SignedMaurerDistanceMap extensions by Gaëtan Lehmann
  *
  * Core methods described in the InsightJournal article:
  * "Morphology with parabolic structuring elements"
@@ -161,14 +161,10 @@ public:
   itkBooleanMacro(UseImageSpacing);
   /** Image related type alias. */
 
-#ifdef ITK_USE_CONCEPT_CHECKING
-  /** Begin concept checking */
-  itkConceptMacro(SameDimension, (Concept::SameDimension<Self::InputImageDimension, Self::OutputImageDimension>));
+  static_assert(InputImageDimension == OutputImageDimension);
 
   itkConceptMacro(Comparable, (Concept::Comparable<PixelType>));
 
-  /** End concept checking */
-#endif
 protected:
   ParabolicErodeDilateImageFilter();
   ~ParabolicErodeDilateImageFilter() override = default;

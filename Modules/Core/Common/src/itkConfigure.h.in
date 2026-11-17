@@ -23,26 +23,9 @@
  * change when the target compile platform changes
  */
 
-/* what byte order */
-/* All compilers that support Mac OS X define either __BIG_ENDIAN__ or
-   __LITTLE_ENDIAN__ to match the endianness of the architecture being
-   compiled for. This is not necessarily the same as the architecture of
-   the machine doing the building. In order to support Universal Binaries on
-   Mac OS X, we prefer those defines to decide the endianness.
-   Elsewhere use the platform check result.  */
-#if !defined(__APPLE__)
-  #cmakedefine CMAKE_WORDS_BIGENDIAN
-  #ifdef CMAKE_WORDS_BIGENDIAN
-    #define ITK_WORDS_BIGENDIAN
-  #endif
-#elif defined(__BIG_ENDIAN__)
-  #define CMAKE_WORDS_BIGENDIAN
-  #define ITK_WORDS_BIGENDIAN
-#endif
-
 #define ITK_SIZEOF_VOID_P @CMAKE_SIZEOF_VOID_P@
 
-/* The CXX standard version used when ITK was built */
+/* The oldest C++ standard a project using ITK may compile with */
 #define ITK_COMPILED_CXX_STANDARD_VERSION @ITK_COMPILED_CXX_STANDARD_VERSION@
 
 /* Test external applications to ensure that compatible compiler C++ standard API are used
@@ -52,8 +35,13 @@
  * The warning is disabled for NVCC (NVidia CUDA) for use of ITK macros with CUDA versions
  * prior to v7. */
 #if !defined(__CUDACC__)
-  #if ITK_COMPILED_CXX_STANDARD_VERSION > __cplusplus
-    #warning "WARNING:  The current project is configured to use a C++ standard version older than the C++ standard used for this build of ITK"
+  #if (defined(_MSVC_LANG) && ITK_COMPILED_CXX_STANDARD_VERSION > _MSVC_LANG) || \
+    (!defined(_MSVC_LANG) && ITK_COMPILED_CXX_STANDARD_VERSION > __cplusplus)
+    #if defined(_MSC_VER) && !defined(__clang__)
+      #pragma message("warning: The current project is configured to use a C++ standard older than this build of ITK requires")
+    #else
+      #warning "WARNING:  The current project is configured to use a C++ standard older than this build of ITK requires"
+    #endif
   #endif
 #endif
 
@@ -73,9 +61,13 @@
 #cmakedefine ITK_LEGACY_REMOVE
 #cmakedefine ITK_LEGACY_SILENT
 #cmakedefine ITK_FUTURE_LEGACY_REMOVE
+#cmakedefine ITK_ALPHA_FEATURE_CXX20
+#cmakedefine ITK_ALPHA_FEATURE_CXX23
+#cmakedefine ITK_ALPHA_FEATURE_CXX26
 #cmakedefine ITK_USE_FFTWF
 #cmakedefine ITK_USE_FFTWD
 #cmakedefine ITK_USE_CUFFTW
+#cmakedefine ITK_USE_MKL
 #cmakedefine ITK_USE_64BITS_IDS
 #cmakedefine ITK_USE_GPU
 #cmakedefine ITK_TEMPLATE_VISIBILITY_DEFAULT
@@ -90,11 +82,13 @@
 // definition in the top-level CMakeLists.txt for the two conditions.
 #cmakedefine ITK_USE_AUTOLOAD_PATH
 
-// C++11 should be assumed now, defines always true for C++11 will be
-// removed in the future.
-#ifndef ITK_LEGACY_REMOVE
-// defined if std type traits are with C++11
-# define ITK_HAS_CPP11_TYPETRAITS
+#if !defined(ITK_LEGACY_REMOVE)
+/* Deprecated since ITK 6.0: use itk::ByteSwapper<T>::SystemIsBigEndian(). */
+  #if (defined(__BYTE_ORDER__) && defined(__ORDER_BIG_ENDIAN__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || \
+    defined(__BIG_ENDIAN__)
+    #define CMAKE_WORDS_BIGENDIAN
+    #define ITK_WORDS_BIGENDIAN
+  #endif
 #endif
 
 // defined if the compiler support GNU's __attribute__(( aligned(x) )) extension
@@ -140,9 +134,6 @@
  * conditionally defined them here with an ITK_ prefix to prevent
  * collisions and re defined warnings.
  */
-#if ITK_CMAKEDEFINE_VAR_@HAVE_FENV_H@
-# define ITK_HAVE_FENV_H
-#endif /* HAVE_FENV_H */
 #if ITK_CMAKEDEFINE_VAR_@HAVE_UNISTD_H@
 # define ITK_HAVE_UNISTD_H
 #endif /* HAVE_UNISTD_H */
@@ -179,16 +170,15 @@
 
 #define ITK_DEFAULT_THREADER_@ITK_DEFAULT_THREADER@
 
-// Most compilers define __SSEn__ macros, but not MSVC.
-// For 32 bit Intel with MSVC, check _M_IX86_FP.
-// 64 bit Intel x86 always supports both 32 and 64 bit SSE2.
-
+// ITK requires SSE2 floating-point math on x86, so ITK and its clients compile one code path.
 #if defined(__x86_64__) || defined(__amd64__) || (defined(_M_AMD64) && !defined(_M_ARM64EC))
 #  define ITK_COMPILER_SUPPORTS_SSE2_32
 #  define ITK_COMPILER_SUPPORTS_SSE2_64
-#else
-#  if defined(__SSE2__) || (defined(_M_IX86_FP) && (_M_IX86_FP >= 2))
+#elif defined(__i386__) || defined(_M_IX86)
+#  if defined(__SSE2_MATH__) || (defined(_M_IX86_FP) && (_M_IX86_FP >= 2)) || defined(ITK_WRAPPING_PARSER)
 #    define ITK_COMPILER_SUPPORTS_SSE2_32
+#  else
+#    error "ITK requires SSE2 floating-point math on 32-bit x86: use -msse2 -mfpmath=sse (GCC, Clang) or /arch:SSE2 (MSVC)"
 #  endif
 #endif
 

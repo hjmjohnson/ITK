@@ -33,7 +33,7 @@ namespace itk
  * that multiple image copies aren't necessary.
  *
  * This filter is threaded. Threading mechanism derived from
- * SignedMaurerDistanceMap extensions by Gaetan Lehman
+ * SignedMaurerDistanceMap extensions by Gaëtan Lehmann
  *
  * Core methods described in the InsightJournal article:
  * "Morphology with parabolic structuring elements"
@@ -129,14 +129,10 @@ public:
   itkSetMacro(ParabolicAlgorithm, int);
   itkGetConstReferenceMacro(ParabolicAlgorithm, int);
 
-#ifdef ITK_USE_CONCEPT_CHECKING
-  /** Begin concept checking */
-  itkConceptMacro(SameDimension, (Concept::SameDimension<Self::InputImageDimension, Self::OutputImageDimension>));
+  static_assert(InputImageDimension == OutputImageDimension);
 
   itkConceptMacro(Comparable, (Concept::Comparable<PixelType>));
 
-  /** End concept checking */
-#endif
 protected:
   ParabolicOpenCloseImageFilter();
   ~ParabolicOpenCloseImageFilter() override = default;

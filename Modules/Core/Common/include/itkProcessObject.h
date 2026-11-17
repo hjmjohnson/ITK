@@ -498,11 +498,22 @@ public:
   itkBooleanMacro(ReleaseDataBeforeUpdateFlag);
   /** @ITKEndGrouping */
 
-  /** Get/Set the number of work units to create when executing. */
+  /** Get/Set the number of work units to create when executing.
+   * The value is stored in the multithreader, which may clamp it. */
   /** @ITKStartGrouping */
-  itkVirtualSetClampMacro(NumberOfWorkUnits, ThreadIdType, 1, ITK_MAX_THREADS);
-  itkGetConstReferenceMacro(NumberOfWorkUnits, ThreadIdType);
+  virtual void
+  SetNumberOfWorkUnits(ThreadIdType numberOfWorkUnits);
+  virtual ThreadIdType
+  GetNumberOfWorkUnits() const;
   /** @ITKEndGrouping */
+
+  /** Immediately set the multithreader's work-unit count from its current
+   * maximum thread count and the ratio, then forward the accepted count through
+   * SetNumberOfWorkUnits(). The ratio is not stored; replacing the multithreader
+   * or changing its thread count does not reapply it.
+   * \sa MultiThreaderBase::SetNumberOfWorkUnitsFromThreadRatio */
+  virtual void
+  SetNumberOfWorkUnitsFromThreadRatio(ThreadIdType ratio);
 
   /** Return the multithreader used by this class. */
   MultiThreaderBase *
@@ -511,7 +522,8 @@ public:
     return m_MultiThreader;
   }
 
-  /** Set the multithreader used by this class. */
+  /** Set the multithreader used by this class. The number of work units
+   * is that of \c threader; set it again if a different count is wanted. */
   void
   SetMultiThreader(MultiThreaderBase * threader);
 
@@ -1007,7 +1019,6 @@ private:
   /** Support processing data in multiple threads. Used by subclasses
    * (e.g., ImageSource). */
   itk::SmartPointer<MultiThreaderBase> m_MultiThreader;
-  ThreadIdType                         m_NumberOfWorkUnits{};
 
   bool m_ThreaderUpdateProgress{ true };
 

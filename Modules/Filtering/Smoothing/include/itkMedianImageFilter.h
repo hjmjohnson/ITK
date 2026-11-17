@@ -65,7 +65,7 @@ public:
 
   /** Standard class type aliases. */
   using Self = MedianImageFilter;
-  using Superclass = ImageToImageFilter<InputImageType, OutputImageType>;
+  using Superclass = BoxImageFilter<InputImageType, OutputImageType>;
   using Pointer = SmartPointer<Self>;
   using ConstPointer = SmartPointer<const Self>;
 
@@ -84,7 +84,7 @@ public:
 
   using InputSizeType = typename InputImageType::SizeType;
 
-  itkConceptMacro(SameDimensionCheck, (Concept::SameDimension<InputImageDimension, OutputImageDimension>));
+  static_assert(InputImageDimension == OutputImageDimension);
   itkConceptMacro(InputConvertibleToOutputCheck, (Concept::Convertible<InputPixelType, OutputPixelType>));
   itkConceptMacro(InputLessThanComparableCheck, (Concept::LessThanComparable<InputPixelType>));
 
