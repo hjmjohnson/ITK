@@ -2,16 +2,17 @@
 # re-used it for documentation here
 itk_module(
   RANSAC
-  ENABLE_SHARED
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
     ITKMesh
-    ITKIOMeshBase
     ITKRegistrationCommon
+  PRIVATE_DEPENDS
+    ITKIOMeshBase
     ITKMetricsv4
     ITKRegistrationMethodsv4
     ITKOptimizersv4
     ITKOptimizers
+  ENABLE_SHARED
   TEST_DEPENDS
     ITKTestKernel
     ITKMetaIO
