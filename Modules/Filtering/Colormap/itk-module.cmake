@@ -6,9 +6,9 @@ grayscale images to colormapped RGB images."
 
 itk_module(
   ITKColormap
-  ENABLE_SHARED
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
+  ENABLE_SHARED
   TEST_DEPENDS
     ITKTestKernel
     ITKGoogleTest
