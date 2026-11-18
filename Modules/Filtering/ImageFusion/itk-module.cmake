@@ -6,7 +6,7 @@ enhance the images, mostly by adding them artificial colors"
 
 itk_module(
   ITKImageFusion
-  COMPILE_DEPENDS
+  DEPENDS
     ITKBinaryMathematicalMorphology
     ITKImageLabel
   TEST_DEPENDS
