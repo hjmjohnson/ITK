@@ -12,7 +12,7 @@ itk_module(
   ITKAnisotropicSmoothing
   DEPENDS
     ITKFiniteDifference
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageGrid
     ITKCurvatureFlow
   TEST_DEPENDS
