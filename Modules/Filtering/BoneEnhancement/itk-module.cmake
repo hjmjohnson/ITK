@@ -16,7 +16,7 @@ itk_module(
     ITKImageFilterBase
     ITKImageFeature
     ITKSpatialObjects
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageSources
   TEST_DEPENDS
     ITKTestKernel
