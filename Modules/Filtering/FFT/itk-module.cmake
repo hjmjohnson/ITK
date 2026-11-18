@@ -23,7 +23,6 @@ itk_module(
     ITKCommon
     ITKPocketFFT
     ${_fft_dependencies}
-  COMPILE_DEPENDS
     ITKImageGrid
   TEST_DEPENDS
     ITKGoogleTest
