@@ -10,7 +10,7 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKVTK
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageIntensity
   TEST_DEPENDS
     ITKTestKernel
