@@ -14,9 +14,9 @@ itk_module(
   ENABLE_SHARED
   DEPENDS
     ITKCommon
-  COMPILE_DEPENDS
-    ITKStatistics
     ITKImageFilterBase
+  PRIVATE_DEPENDS
+    ITKStatistics
   TEST_DEPENDS
     ITKTestKernel
     ITKGoogleTest
