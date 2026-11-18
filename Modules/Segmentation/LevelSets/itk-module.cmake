@@ -21,7 +21,7 @@ itk_module(
     ITKImageCompare
     ITKFastMarching
     ITKNarrowBand
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKIOImageBase
   TEST_DEPENDS
     ITKGoogleTest
