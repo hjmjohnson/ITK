@@ -14,5 +14,6 @@ itk_module(
   TEST_DEPENDS
     ITKGoogleTest
     ITKTestKernel
+    ITKConnectedComponents
   DESCRIPTION "${DOCUMENTATION}"
 )
