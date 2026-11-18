@@ -13,6 +13,7 @@ itk_module(
     ITKHDF5
   TEST_DEPENDS
     ITKTestKernel
+    ITKDisplacementField
   FACTORY_NAMES
     TransformIO::HDF5
   DESCRIPTION "${DOCUMENTATION}"
