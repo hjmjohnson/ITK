@@ -30,6 +30,7 @@ itk_module(
     ITKTestKernel
     ITKImageCompare
     ITKImageIntensity
+    ITKImageCompose
   FACTORY_NAMES
     ${_fft_backends}
   DESCRIPTION "${DOCUMENTATION}"
