@@ -10,7 +10,7 @@ filters."
 
 itk_module(
   ITKImageFilterBase
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
   TEST_DEPENDS
     ITKGoogleTest
