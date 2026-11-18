@@ -96,6 +96,7 @@ itk_module(
     ITKIOLSM
     ITKRegistrationCommon
     ITKGoogleTest
+    ITKImageFusion
   DESCRIPTION "${DOCUMENTATION}"
   EXCLUDE_FROM_DEFAULT
 )
