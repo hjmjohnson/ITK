@@ -13,7 +13,6 @@ itk_module(
   DEPENDS
     ITKSmoothing
     ITKImageIntensity
-  COMPILE_DEPENDS
     ITKImageGrid
   TEST_DEPENDS
     ITKTestKernel
