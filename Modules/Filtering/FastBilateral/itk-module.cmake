@@ -18,7 +18,7 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKSmoothing
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageSources
   TEST_DEPENDS
     ITKTestKernel
