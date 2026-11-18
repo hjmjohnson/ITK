@@ -12,7 +12,6 @@ itk_module(
   Fpfh
   DEPENDS
     ITKCommon
-  COMPILE_DEPENDS
     ITKRegistrationCommon
   TEST_DEPENDS
     ITKTestKernel
