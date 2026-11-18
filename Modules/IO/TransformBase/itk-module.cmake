@@ -11,7 +11,7 @@ itk_module(
     ITKCommon
     ITKTransform
     ITKTransformFactory
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKDisplacementField
   TEST_DEPENDS
     ITKGoogleTest
