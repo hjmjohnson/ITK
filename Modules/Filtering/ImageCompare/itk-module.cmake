@@ -11,7 +11,6 @@ itk_module(
   ITKImageCompare
   DEPENDS
     ITKImageIntensity
-  COMPILE_DEPENDS
     ITKImageFilterBase
   TEST_DEPENDS
     ITKTestKernel
