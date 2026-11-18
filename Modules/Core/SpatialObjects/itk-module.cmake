@@ -12,13 +12,12 @@ itk_module(
   ITKSpatialObjects
   DEPENDS
     ITKTransform
-  PRIVATE_DEPENDS
-    ITKCommon
-    ITKZLIB
-  COMPILE_DEPENDS
     ITKImageFunction
     ITKMetaIO
     ITKMesh
+  PRIVATE_DEPENDS
+    ITKCommon
+    ITKZLIB
   TEST_DEPENDS
     ITKGoogleTest
     ITKTestKernel
