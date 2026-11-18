@@ -16,9 +16,9 @@ itk_module(
     ITKImageGrid
     ITKMathematicalMorphology
     ITKImageCompose
-  COMPILE_DEPENDS
-    ITKImageSources
     ITKIOImageBase
+  PRIVATE_DEPENDS
+    ITKImageSources
   TEST_DEPENDS
     ITKTestKernel
     ITKMetaIO
