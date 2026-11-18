@@ -21,10 +21,9 @@ itk_module(
     ITKEigen3
     ITKVNL
     ${ITKCOMMON_TBB_DEPENDS}
+    ITKKWSys
   PRIVATE_DEPENDS
     ITKDoubleConversion
-  COMPILE_DEPENDS
-    ITKKWSys
   TEST_DEPENDS
     ITKGoogleTest
     ITKTestKernel
