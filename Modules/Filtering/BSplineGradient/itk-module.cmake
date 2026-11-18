@@ -9,7 +9,6 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKMesh
-  COMPILE_DEPENDS
     ITKImageGrid
     MeshToPolyData
   TEST_DEPENDS
