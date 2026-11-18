@@ -10,32 +10,38 @@ itk_module(
   ITKReview
   DEPENDS
     ITKIOImageBase
+    ITKCommon
+    ITKDistanceMap
+    ITKFFT
+    ITKFiniteDifference
+    ITKImageFeature
+    ITKImageFilterBase
+    ITKImageFunction
+    ITKImageGrid
+    ITKImageIntensity
+    ITKLevelSets
+    ITKMathematicalMorphology
+    ITKMesh
+    ITKPDEDeformableRegistration
+    ITKSmoothing
+    ITKStatistics
+    ITKThresholding
   PRIVATE_DEPENDS
     ITKZLIB
-  COMPILE_DEPENDS
     ITKAnisotropicSmoothing
     ITKAntiAlias
     ITKBiasCorrection
     ITKClassifiers
-    ITKCommon
     ITKConnectedComponents
     ITKCurvatureFlow
     ITKDeformableMesh
     ITKDisplacementField
     ITKDiffusionTensorImage
-    ITKDistanceMap
     ITKEigen
-    ITKFFT
-    ITKFiniteDifference
     ITKImageAdaptors
     ITKImageCompare
     ITKImageCompose
-    ITKImageFeature
-    ITKImageFilterBase
-    ITKImageFunction
     ITKImageGradient
-    ITKImageGrid
-    ITKImageIntensity
     ITKImageLabel
     ITKImageStatistics
     ITKIOBioRad
@@ -61,25 +67,18 @@ itk_module(
     ITKIOXML
     ITKKLMRegionGrowing
     ITKLabelVoting
-    ITKLevelSets
     ITKMarkovRandomFieldsClassifiers
-    ITKMathematicalMorphology
-    ITKMesh
     ITKNarrowBand
     ITKOptimizers
     ITKPath
-    ITKPDEDeformableRegistration
     ITKPolynomials
     ITKQuadEdgeMesh
     ITKQuadEdgeMeshFiltering
     ITKRegionGrowing
     ITKRegistrationCommon
     ITKSignedDistanceFunction
-    ITKSmoothing
     ITKSpatialFunction
     ITKSpatialObjects
-    ITKStatistics
-    ITKThresholding
     ITKVoronoi
     ITKVTK
     ITKWatersheds
