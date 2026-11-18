@@ -9,7 +9,7 @@ operations on the fly."
 
 itk_module(
   ITKImageAdaptors
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
   TEST_DEPENDS
     ITKGoogleTest
