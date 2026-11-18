@@ -325,6 +325,7 @@ target_link_libraries(
   RGBCurvatureAnisotropicDiffusionImageFilter
   PRIVATE
     ITK::ITKAnisotropicSmoothingModule
+    ITK::ITKImageFilterBaseModule
     ITK::ITKImageIO
 )
 add_executable(
@@ -335,6 +336,7 @@ target_link_libraries(
   RGBGradientAnisotropicDiffusionImageFilter
   PRIVATE
     ITK::ITKAnisotropicSmoothingModule
+    ITK::ITKImageFilterBaseModule
     ITK::ITKImageIO
 )
 add_executable(
