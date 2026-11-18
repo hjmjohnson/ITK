@@ -9,7 +9,7 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKTransform
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKDisplacementField
   TEST_DEPENDS
     ITKTestKernel
