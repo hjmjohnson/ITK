@@ -14,7 +14,6 @@ itk_module(
     ITKCommon
     ITKGPUCommon
     ITKGPUFiniteDifference
-  COMPILE_DEPENDS
     ITKAnisotropicSmoothing
   TEST_DEPENDS
     ITKTestKernel
