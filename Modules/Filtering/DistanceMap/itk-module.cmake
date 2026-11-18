@@ -7,7 +7,7 @@ well as other distance concepts such as Hausdorff and Chamfer distances."
 
 itk_module(
   ITKDistanceMap
-  COMPILE_DEPENDS
+  DEPENDS
     ITKBinaryMathematicalMorphology
     ITKImageLabel
     ITKNarrowBand
