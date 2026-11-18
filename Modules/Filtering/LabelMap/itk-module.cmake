@@ -13,10 +13,9 @@ itk_module(
   ENABLE_SHARED
   DEPENDS
     ITKImageLabel
+    ITKTransform
   PRIVATE_DEPENDS
     ITKStatistics
-  COMPILE_DEPENDS
-    ITKTransform
   TEST_DEPENDS
     ITKTestKernel
     ITKBinaryMathematicalMorphology
