@@ -10,7 +10,6 @@ itk_module(
   DEPENDS
     ITKSmoothing
     ITKImageIntensity
-  COMPILE_DEPENDS
     ITKImageAdaptors
   TEST_DEPENDS
     ITKGoogleTest
