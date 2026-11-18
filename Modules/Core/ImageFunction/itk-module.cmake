@@ -11,10 +11,11 @@ filters."
 
 itk_module(
   ITKImageFunction
-  COMPILE_DEPENDS
-    ITKImageAdaptors
+  DEPENDS
     ITKTransform
     ITKStatistics
+  PRIVATE_DEPENDS
+    ITKImageAdaptors
   TEST_DEPENDS
     ITKGoogleTest
     ITKTestKernel
