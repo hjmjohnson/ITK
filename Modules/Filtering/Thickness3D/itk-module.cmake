@@ -15,7 +15,7 @@ itk_module(
     ITKDistanceMap
     ITKImageIntensity
     ITKImageFilterBase
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageSources
   TEST_DEPENDS
     ITKTestKernel
