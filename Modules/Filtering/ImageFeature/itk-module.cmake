@@ -12,7 +12,6 @@ itk_module(
   DEPENDS
     ITKSmoothing
     ITKSpatialObjects
-  COMPILE_DEPENDS
     ITKImageGradient
     ITKImageSources
     ITKMesh
