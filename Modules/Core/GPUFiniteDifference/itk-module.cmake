@@ -11,7 +11,6 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKGPUCommon
-  COMPILE_DEPENDS
     ITKFiniteDifference
   TEST_DEPENDS
     ITKTestKernel
