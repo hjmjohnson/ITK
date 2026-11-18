@@ -8,10 +8,10 @@ concept of iterators, polylines, and smooth approximations to paths."
 
 itk_module(
   ITKPath
+  DEPENDS
+    ITKImageFunction
   PRIVATE_DEPENDS
     ITKCommon
-  COMPILE_DEPENDS
-    ITKImageFunction
   TEST_DEPENDS
     ITKGoogleTest
     ITKTestKernel
