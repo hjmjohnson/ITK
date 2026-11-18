@@ -15,6 +15,7 @@ itk_module(
     ITKStatistics
     ITKImageGrid
     ITKMathematicalMorphology
+    ITKImageCompose
   COMPILE_DEPENDS
     ITKImageSources
     ITKIOImageBase
