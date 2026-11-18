@@ -12,7 +12,6 @@ itk_module(
   DEPENDS
     ITKSpatialObjects
     ITKIOXML
-  COMPILE_DEPENDS
     ITKCommon
   TEST_DEPENDS
     ITKTestKernel
