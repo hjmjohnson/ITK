@@ -28,6 +28,7 @@ itk_module(
     ITKImageGradient
     ITKSmoothing
     ITKMathematicalMorphology
+    ITKConnectedComponents
   TEST_DEPENDS
     ITKTestKernel
     ITKImageFusion
