@@ -12,7 +12,7 @@ itk_module(
     ITKImageFilterBase
     ITKEigen3
     ITKproxTV
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageSources
   TEST_DEPENDS
     ITKTestKernel
