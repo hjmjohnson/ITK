@@ -10,8 +10,9 @@ as well."
 
 itk_module(
   ITKCurvatureFlow
-  COMPILE_DEPENDS
+  DEPENDS
     ITKFiniteDifference
+  PRIVATE_DEPENDS
     ITKImageFilterBase
   TEST_DEPENDS
     ITKTestKernel
