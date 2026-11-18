@@ -8,7 +8,7 @@ take a spatial function, and rasterize it into the grid of an image."
 
 itk_module(
   ITKSpatialFunction
-  COMPILE_DEPENDS
+  DEPENDS
     ITKImageFunction
   TEST_DEPENDS
     ITKTestKernel
