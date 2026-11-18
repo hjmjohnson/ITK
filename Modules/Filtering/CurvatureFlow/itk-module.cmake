@@ -17,5 +17,6 @@ itk_module(
     ITKTestKernel
     ITKIOVTK
     ITKGoogleTest
+    ITKImageFilterBase
   DESCRIPTION "${DOCUMENTATION}"
 )
