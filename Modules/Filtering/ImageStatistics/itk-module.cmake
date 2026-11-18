@@ -9,10 +9,11 @@ computation of label statistics and image accumulation."
 
 itk_module(
   ITKImageStatistics
-  COMPILE_DEPENDS
+  DEPENDS
     ITKImageFilterBase
     ITKTransform
     ITKSpatialObjects
+  PRIVATE_DEPENDS
     ITKImageCompose
   TEST_DEPENDS
     ITKGoogleTest
