@@ -14,6 +14,7 @@ itk_module(
     ITKIOImageBase
   PRIVATE_DEPENDS
     ITKIOMINC
+    ITKDisplacementField
   TEST_DEPENDS
     ITKTestKernel
     ITKDisplacementField
