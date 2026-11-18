@@ -12,7 +12,6 @@ itk_module(
   DEPENDS
     ITKOptimizers
     ITKLIBLBFGS
-  COMPILE_DEPENDS
     ITKCommon
     ITKTransform
     ITKImageGrid
