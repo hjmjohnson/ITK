@@ -7,11 +7,12 @@ Marching in both itk::Image and itk::QuadEdgeMesh objects."
 
 itk_module(
   ITKFastMarching
-  ENABLE_SHARED
-  COMPILE_DEPENDS
-    ITKMesh
+  DEPENDS
     ITKQuadEdgeMesh
     ITKConnectedComponents
+  PRIVATE_DEPENDS
+    ITKMesh
+  ENABLE_SHARED
   TEST_DEPENDS
     ITKTestKernel
     ITKImageLabel
