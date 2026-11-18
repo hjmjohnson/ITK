@@ -16,6 +16,7 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKIOImageBase
+    ITKKWSys
   PRIVATE_DEPENDS
     ITKIOBMP
     ITKIOGDCM
@@ -35,8 +36,6 @@ itk_module(
     ITKIOMeshOFF
     ITKFFT
     ${_itk_test_kernel_python_depends}
-  COMPILE_DEPENDS
-    ITKKWSys
     ITKDoubleConversion
   TEST_DEPENDS
     ITKImageStatistics
