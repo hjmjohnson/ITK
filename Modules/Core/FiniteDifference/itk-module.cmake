@@ -8,7 +8,7 @@ not intended to be instantiated by themselves."
 
 itk_module(
   ITKFiniteDifference
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
   TEST_DEPENDS
     ITKTestKernel
