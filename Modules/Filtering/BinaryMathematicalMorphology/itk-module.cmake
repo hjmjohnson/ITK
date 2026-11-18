@@ -8,7 +8,7 @@ maxima and minima filters, and reconstruction filters."
 
 itk_module(
   ITKBinaryMathematicalMorphology
-  COMPILE_DEPENDS
+  DEPENDS
     ITKLabelMap
     ITKMathematicalMorphology
   TEST_DEPENDS
