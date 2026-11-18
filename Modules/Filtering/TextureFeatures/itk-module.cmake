@@ -5,7 +5,6 @@ itk_module(
     ITKStatistics
     ITKImageGrid
     ITKMathematicalMorphology
-  COMPILE_DEPENDS
     ITKIOImageBase
   TEST_DEPENDS
     ITKTestKernel
