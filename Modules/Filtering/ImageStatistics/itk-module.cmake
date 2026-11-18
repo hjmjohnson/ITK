@@ -22,6 +22,7 @@ itk_module(
     ITKImageIntensity
     ITKThresholding
     ITKImageLabel
+    ITKImageCompose
   DESCRIPTION "${DOCUMENTATION}"
 )
 
