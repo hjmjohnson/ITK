@@ -11,10 +11,10 @@ itk_module(
   ENABLE_SHARED
   DEPENDS
     ITKImageIntensity
-  COMPILE_DEPENDS
     ITKImageFilterBase
     ITKImageGrid
     ITKThresholding
+  PRIVATE_DEPENDS
     ITKConnectedComponents
   TEST_DEPENDS
     ITKGoogleTest
