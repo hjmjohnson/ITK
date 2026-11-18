@@ -2,7 +2,7 @@ set(DOCUMENTATION "This module groups image sources which generate an image")
 
 itk_module(
   ITKImageSources
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
   TEST_DEPENDS
     ITKGoogleTest
