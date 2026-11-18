@@ -10,11 +10,10 @@ itk_module(
   DEPENDS
     ITKIOTransformBase
     ITKMINC
-  COMPILE_DEPENDS
-    ITKIOImageBase
   PRIVATE_DEPENDS
     ITKIOMINC
     ITKDisplacementField
+    ITKIOImageBase
   TEST_DEPENDS
     ITKTestKernel
     ITKDisplacementField
