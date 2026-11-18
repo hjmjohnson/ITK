@@ -12,13 +12,12 @@ itk_module(
   ENABLE_SHARED
   DEPENDS
     ITKImageIntensity
-  PRIVATE_DEPENDS
-    ITKCommon
-  COMPILE_DEPENDS
     ITKFFT
     ITKOptimizers
     ITKImageGrid
     ITKPolynomials
+  PRIVATE_DEPENDS
+    ITKCommon
   TEST_DEPENDS
     ITKGoogleTest
     ITKTestKernel
