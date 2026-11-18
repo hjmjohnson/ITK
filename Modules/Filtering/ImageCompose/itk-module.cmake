@@ -7,7 +7,7 @@ package them into an output image of multiple components."
 
 itk_module(
   ITKImageCompose
-  COMPILE_DEPENDS
+  DEPENDS
     ITKImageFilterBase
   TEST_DEPENDS
     ITKTestKernel
