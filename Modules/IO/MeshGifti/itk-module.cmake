@@ -9,10 +9,9 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKIOMeshBase
-  COMPILE_DEPENDS
-    ITKMesh
   PRIVATE_DEPENDS
     ITKGIFTI
+    ITKMesh
   TEST_DEPENDS
     ITKTestKernel
     ITKQuadEdgeMesh
