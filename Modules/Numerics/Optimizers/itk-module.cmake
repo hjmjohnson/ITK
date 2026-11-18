@@ -11,7 +11,7 @@ itk_module(
   ENABLE_SHARED
   DEPENDS
     ITKStatistics
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKEigen3
   TEST_DEPENDS
     ITKTransform
