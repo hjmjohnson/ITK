@@ -74,10 +74,10 @@ With those criteria in mind the following choices were made:
 
 itk_module(
   ITKQuadEdgeMesh
-  ENABLE_SHARED
-  COMPILE_DEPENDS
+  DEPENDS
     ITKCommon
     ITKMesh
+  ENABLE_SHARED
   TEST_DEPENDS
     ITKGoogleTest
     ITKTestKernel
