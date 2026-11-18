@@ -11,7 +11,7 @@ itk_module(
     ITKCommon
     ITKStatistics
     ITKImageGrid
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageSources
   TEST_DEPENDS
     ITKTestKernel
