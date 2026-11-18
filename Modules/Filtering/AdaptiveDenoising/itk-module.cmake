@@ -15,7 +15,7 @@ itk_module(
     ITKSmoothing
     ITKStatistics
     ITKImageStatistics
-  COMPILE_DEPENDS
+  PRIVATE_DEPENDS
     ITKImageSources
   TEST_DEPENDS
     ITKGoogleTest
