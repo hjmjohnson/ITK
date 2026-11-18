@@ -9,7 +9,6 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKGPUCommon
-  COMPILE_DEPENDS
     ITKThresholding
   TEST_DEPENDS
     ITKTestKernel
