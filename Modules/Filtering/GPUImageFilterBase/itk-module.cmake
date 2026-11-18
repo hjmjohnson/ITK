@@ -12,7 +12,6 @@ itk_module(
   DEPENDS
     ITKCommon
     ITKGPUCommon
-  COMPILE_DEPENDS
     ITKImageFilterBase
   TEST_DEPENDS
     ITKTestKernel
