@@ -7,12 +7,13 @@ interesting to look at the @ref ITKAnisotropicSmoothing group of filters."
 
 itk_module(
   ITKSmoothing
-  ENABLE_SHARED
-  COMPILE_DEPENDS
+  DEPENDS
     ITKConvolution
-    ITKFFT
     ITKImageFunction
     ITKImageSources
+  PRIVATE_DEPENDS
+    ITKFFT
+  ENABLE_SHARED
   TEST_DEPENDS
     ITKGoogleTest
     ITKConvolution
