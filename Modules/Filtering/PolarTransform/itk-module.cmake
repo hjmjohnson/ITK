@@ -1,6 +1,6 @@
 itk_module(
   PolarTransform
-  COMPILE_DEPENDS
+  DEPENDS
     ITKTransform
   TEST_DEPENDS
     ITKTestKernel
