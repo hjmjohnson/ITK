@@ -10,7 +10,6 @@ itk_module(
   ITKThresholding
   DEPENDS
     ITKImageIntensity
-  COMPILE_DEPENDS
     ITKImageStatistics
   TEST_DEPENDS
     ITKGoogleTest
