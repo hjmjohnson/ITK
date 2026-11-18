@@ -11,7 +11,6 @@ itk_module(
     ITKIOMeshBase
   PRIVATE_DEPENDS
     ITKDoubleConversion
-  COMPILE_DEPENDS
     ITKMesh
   TEST_DEPENDS
     ITKGoogleTest
