@@ -8,7 +8,7 @@ shrinking, and changing its origin or spacing or orientation."
 
 itk_module(
   ITKImageGrid
-  COMPILE_DEPENDS
+  DEPENDS
     ITKImageFunction
   TEST_DEPENDS
     ITKGoogleTest
