@@ -7,7 +7,7 @@ Insight Journal (https://doi.org/10.54294/vh6vbw)."
 
 itk_module(
   ITKImageNoise
-  COMPILE_DEPENDS
+  DEPENDS
     ITKStatistics
   TEST_DEPENDS
     ITKTestKernel
