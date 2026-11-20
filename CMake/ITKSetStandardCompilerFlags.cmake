@@ -106,6 +106,15 @@ function(check_compiler_warning_flags c_warning_flags_var cxx_warning_flags_var)
   check_c_compiler_flags(CMAKE_C_WARNING_FLAGS ${c_flags} ${c_and_cxx_flags})
   check_cxx_compiler_flags(CMAKE_CXX_WARNING_FLAGS ${c_and_cxx_flags} ${cxx_flags})
 
+  # AppleClang's -Wallocator-wrappers flags intentional helpers such as ImportImageContainer::AllocateElements.
+  check_cxx_compiler_flag(
+    -Wallocator-wrappers
+    CXX_HAS_WARNING-Wallocator-wrappers
+  )
+  if(CXX_HAS_WARNING-Wallocator-wrappers)
+    string(APPEND CMAKE_CXX_WARNING_FLAGS " -Wno-allocator-wrappers")
+  endif()
+
   set(${c_warning_flags_var} "${CMAKE_C_WARNING_FLAGS}" PARENT_SCOPE)
   set(${cxx_warning_flags_var} "${CMAKE_CXX_WARNING_FLAGS}" PARENT_SCOPE)
 endfunction()
